@@ -31,7 +31,7 @@ jobs:
       - name: Upload libraries and executables for MacOS
         uses: actions/upload-artifact@v2
         with:
-          name: macos-distrib
+          name: musicformats-macos-distrib
           path: |
             MusicFormatsVersionNumber.txt
             build/bin
