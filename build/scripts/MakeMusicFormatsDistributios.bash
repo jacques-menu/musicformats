@@ -15,7 +15,7 @@ echo
 
 MUSIC_FORMATS_DEV=${HOME}/musicformats-git-dev
 
-DISTRIB_DIR=${MUSIC_FORMATS_DEV}/distrib
+DISTRIB_DIR=${MUSIC_FORMATS_DEV}/build/distrib
 
 MACOS_DISTRIB="musicformats-macos-distrib"
 UBUNTU_DISTRIB="musicformats-ubuntu-distrib"
