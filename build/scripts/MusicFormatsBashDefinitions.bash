@@ -54,7 +54,7 @@ LXML_SAMPLES_DIR=${LXML_DIR}/samples
 FILES_DIR=${MUSIC_FORMATS_DEV}/files
 MXML_FILES_DIR=${FILES_DIR}/musicxmlfiles
 
-DISTRIB_DIR=${MUSIC_FORMATS_DEV}/build/distrib
+DISTRIB_DIR=${MUSIC_FORMATS_DEV}/distrib
 
 export PATH=${MUSIC_FORMATS_DEV}/build/bin:$PATH
 
@@ -190,10 +190,11 @@ alias rmcache="rm ${BUILD_DIR}/libdir/CMakeCache.txt"
 function bit ()
 {
 #  set -x
-  SCRIPT=${SCRIPTS_DIR}/BuildMusicFormats.bash
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT}.log
+  SCRIPT_NAME=BuildMusicFormats.bash
+  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
+  echo LOGFILE = ${LOGFILE}
 
-  ${SCRIPT} $@
+  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
 
   egrep \
     --colour=always \
@@ -225,8 +226,9 @@ function cit () ###JMI
 #  set -x
   SCRIPT=${SCRIPTS_DIR}/Clean_libmusicformats.bash
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT}.log
+  echo LOGFILE = ${LOGFILE}
 
-  ${SCRIPT} $@
+  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
 
   echo
 
@@ -240,10 +242,11 @@ function cit () ###JMI
 function mmd ()
 {
 #  set -x
-  SCRIPT=${SCRIPTS_DIR}/MakeMusicFormatsDistributios.bash
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT}.log
+  SCRIPT_NAME=MakeMusicFormatsDistributions.bash
+  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
+  echo LOGFILE = ${LOGFILE}
 
-  ${SCRIPT} $@
+  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
 
   echo
 

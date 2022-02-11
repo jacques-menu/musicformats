@@ -31,7 +31,7 @@ jobs:
       - name: Upload libraries and executables for Ubuntu
         uses: actions/upload-artifact@v2
         with:
-          name: ubuntu-distrib
+          name: musicformats-ubuntu-distrib
           path: |
             MusicFormatsVersionNumber.txt
             build/bin
