@@ -1,0 +1,71 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{LilyPond code generation}
+% -------------------------------------------------------------------------
+
+
+\lily\ code is produced on the standard output stream, unless options \optionBoth{output-file-name}{o} or \\
+\optionBoth{auto-output-file-name}{aofn} are used.
+
+
+% -------------------------------------------------------------------------
+\section{Basic principle}
+% -------------------------------------------------------------------------
+
+Lilypond generation is done in \lpsrToLilypondBoth{lpsr2lilypondTranslator}.
+
+\Class{lpsr2lilypondTranslator} provides:
+\begin{lstlisting}[language=CPlusPlus]
+  public:
+
+                          lpsr2lilypondTranslator (
+                            S_msrOahGroup&  msrOpts,
+                            S_lpsrOahGroup& lpsrOpts,
+                            ostream&        lilypondCodeStream);
+
+    virtual               ~lpsr2lilypondTranslator ();
+
+    void                  translateLpsrToLilypondCode (
+                            S_lpsrScore lpsrScore);
+\end{lstlisting}
+
+It contains these fields among others:
+\begin{lstlisting}[language=CPlusPlus]
+  private:
+
+    // options
+    // ------------------------------------------------------
+
+    S_msrOahGroup         fMsrOahGroup;
+    S_lpsrOahGroup        fLpsrOahGroup;
+
+    // the LPSR score we're visiting
+    // ------------------------------------------------------
+    S_lpsrScore           fVisitedLpsrScore;
+
+    // the output stream
+    // ------------------------------------------------------
+
+    ostream&              fLilypondCodeStream;
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Generating Scheme functions\index{functions} in the LilyPond output}
+% -------------------------------------------------------------------------
+
+\xmlToLy\ can generate Scheme code that is used by the \lily\ code it generates. This is described in \class{lpsrScore} by a number of \starFieldName{IsNeeded} fields, such as:
+\begin{lstlisting}[language=CPlusPlus]
+    // files includes
+    Bool                  fJianpuFileIncludeIsNeeded;
+
+    // Scheme modules
+    Bool                  fScmAndAccregSchemeModulesAreNeeded;
+
+    // Scheme functions
+    Bool                  fTongueSchemeFunctionIsNeeded;
+\end{lstlisting}
+
+
+

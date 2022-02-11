@@ -1,0 +1,187 @@
+% !TEX root = MusicFormatsCLIUserGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Shell basics}
+% -------------------------------------------------------------------------
+
+Since this document is about using \mf\ from the \CLI, let's start by a short presentation of shell usage.
+
+
+% -------------------------------------------------------------------------
+\section{Basic shell builtins}
+% -------------------------------------------------------------------------
+
+Many builtins have very short names, dating back at a time where they were typed at a physical terminal. Many vowels were left out to minimize typing. For example, there are:
+\begin{itemize}
+\item \code{pwd} to show the current working directory;
+\item \code{cd} to change directory;
+\item \code{echo} to produce output in the terminal window.
+\end{itemize}
+
+The shell used for the examples in this documents displays the current working directory as the prompt.
+
+The files on a computer are organized as a tree of so-called \MainIt{directories}. When a shell is launched, a directory is chosen as the current \MainIt{working directory}, usually the user's \MainIt{home directory}.
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1: ~ > pwd
+/Users/jacquesmenu
+
+jacquesmenu@macmini-1: ~ > cd musicformats-git-dev
+
+jacquesmenu@macmini-1: ~/musicformats-git-dev > pwd
+/Users/jacquesmenu/musicformats-git-dev
+jacquesmenu@macmini-1: ~/musicformats-git-dev >
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Commands}
+% -------------------------------------------------------------------------
+
+A command name is either provided by the shell itself, a so-called \MainIt{builtin}, or the name of a piece of software that can be executed.
+
+In this example, the command name is xml2lyy:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1 > xml2lyy +sdf 45
+-bash: xml2lyy: command not found
+\end{lstlisting}
+
+The shell can be queried about a command name:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1 > type cd
+cd is a shell builtin
+
+jacquesmenu@macmini-1 > type xml2lyy
+-bash: type: xml2lyy: not found
+
+jacquesmenu@macmini-1 > type xml2ly
+xml2ly is hashed (/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2ly)
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Quoting, variables and aliases}\label{Quoting, variables and aliases}
+% -------------------------------------------------------------------------
+
+Shell commands are submitted as a sequence of words separated by spaces. If a word, such a file name, contains \MainIt{space}s, it has to be surrounded by \quotes\ or \doubleQuotes\ in order to be seen by the shell as a single word:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly Nice file.xml
+Several input file names supplied, only one can be used
+The arguments vector contains 2 elements:
+   0: "Nice"
+   1: "file.xml"
+
+jacquesmenu@macmini-1 > xml2ly 'Nice file.xml'
+can't open file Nice file.xml
+### Conversion from MusicXML to LilyPond failed ###
+
+jacquesmenu@macmini-1 > xml2ly "Nice file.xml"
+can't open file Nice file.xml
+### Conversion from MusicXML to LilyPond failed ###
+\end{lstlisting}
+
+Note that if a quote or double quote is part of word, the word should be inclosed by the other such:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -find "tuplet's"
+0 occurrence of string "tuplet's" has been found
+
+jacquesmenu@macmini-1: ~/musicformats-git-dev/files/musicxmlfiles > 
+jacquesmenu@macmini-1: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -find 'tuplet"s'
+0 occurrence of string "tuplet"s" has been found
+\end{lstlisting}
+
+A shell \MainIt{variable} is a name for a piece of text, called its \MainIt{value}, that can be used instead of that text in commands. The value of the variable can be seen in the terminal with the \code{echo} command:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1: ~/musicformats-git-dev > DOC_DIR=documentation
+
+jacquesmenu@macmini-1: ~/musicformats-git-dev > echo $DOC_DIR
+documentation
+\end{lstlisting}
+
+Variables can be used surrounded by curly brackets, too:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1: ~/musicformats-git-dev/documentation > echo ${DOC_DIR}
+documentation
+\end{lstlisting}
+This notation provides further possibilities such as string replacement, which are out of the scope of this document.
+
+Using variables is interesting when there are several uses of its value: changing the value at one place causing the new value to be used at every such use:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1: ~/musicformats-git-dev > ls $DOC_DIR
+CommonLaTeXFiles		MusicFormatsCLIUserGuide	presentation
+IntroductionToMusicXML		MusicFormatsMaintainanceGuide
+MusicFormatsAPIUserGuide	graphics
+
+jacquesmenu@macmini-1: ~/musicformats-git-dev > cd $DOC_DIR
+
+jacquesmenu@macmini-1: ~/musicformats-git-dev/documentation > pwd
+/Users/jacquesmenu/musicformats-git-dev/documentation
+\end{lstlisting}
+
+The difference between \quotes\ and \doubleQuotes\ is how variables are handled:
+\begin{itemize}
+\item the characters between quotes are used literally;
+\item variables occurring between \doubleQuotes\ are replaced by their value.
+\end{itemize}
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1: ~/musicformats-git-dev > DOC_DIR=documentation
+
+jacquesmenu@macmini-1: ~/musicformats-git-dev > cd '$DOC_DIR'
+-bash: cd: $DOC_DIR: No such file or directory
+
+jacquesmenu@macmini-1: ~/musicformats-git-dev > cd "$DOC_DIR"
+
+jacquesmenu@macmini-1: ~/musicformats-git-dev/documentation > pwd
+/Users/jacquesmenu/musicformats-git-dev/documentation
+\end{lstlisting}
+
+Here is an example combining quotes and \doubleQuotes:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1: ~/musicformats-git-dev/files/musicxmlfiles > DOC_DIR=documentation
+jacquesmenu@macmini-1: ~/musicformats-git-dev/files/musicxmlfiles > echo "DOC_DIR's value is: ${DOC_DIR}"
+DOC_DIR's value is: documentation
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Functions}
+% -------------------------------------------------------------------------
+
+The shells allow the creation of \MainIt{functions}, that contain several commands under a single name. An example is \function{checkVersions}, which displays the versions of the main \mf\ \service s:
+\begin{lstlisting}[language=Terminal]
+function checkVersions ()
+{
+#  set -x
+
+  xml2ly -v
+  xml2brl -v
+  xml2xml -v
+  xml2gmn -v
+
+  Mikrokosmos3Wandering -v
+
+  msdlconverter -v
+#  set +x
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{MusicFormatsBashDefinitions.bash}
+% -------------------------------------------------------------------------
+
+\fileName{MusicFormatsBashDefinitions.bash} contains a set of variables, aliases and function definitions used by this author. One of them is \function{checkVersions} above.
+
+Feel free to use them, adapt them or ignore them depending on your taste.
+
+Some settings we use in this document are:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > type ll
+ll is a function
+ll () 
+{ 
+    ls -salGTF $*
+}
+\end{lstlisting}
+The options to \code{ls} may vary depending the on the \OS.
+

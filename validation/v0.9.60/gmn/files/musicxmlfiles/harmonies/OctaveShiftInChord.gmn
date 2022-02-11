@@ -1,0 +1,21 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/harmonies/OctaveShiftInChord.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"unknown"> \auto<autoInstrPos="on"> \instr<"Piano"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \oct<1> \beamsOff \arpeggio( {\tieBegin:1 b2/1, \tieBegin:2 e3/1, \tieBegin:3 b/1  })
+ \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff {b2/2 \tieEnd:1, e3/2 \tieEnd:2, b/2 \tieEnd:3  } \stemsDown \beamsOff {f/2, c4/2  } \bar 
+   (* meas. 3 *)  \stemsAuto \beamsOff \arpeggio( {\tieBegin:1 b2/1, \tieBegin:2 e3/1, \tieBegin:3 b/1  })
+ \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff {b2/2 \tieEnd:1, e3/2 \tieEnd:2, b/2 \tieEnd:3  } \stemsDown \beamsOff \arpeggio( {f2/2, \acc( b&/2)
+, f3/2  })
+ \oct<0> ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff \tieBegin:1 a/1 \bar 
+   (* meas. 2 *)  \beamsOff a/1 \tieEnd:1 \bar 
+   (* meas. 3 *)  \beamsOff \tieBegin:1 a/1 \bar 
+   (* meas. 4 *)  \beamsOff a/1 \tieEnd:1 ]
+  }

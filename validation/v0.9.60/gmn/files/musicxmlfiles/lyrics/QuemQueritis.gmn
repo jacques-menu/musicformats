@@ -1,0 +1,22 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/lyrics/QuemQueritis.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Quem queritis"> \auto<autoInstrPos="on"> \instr<"Voice"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \text<"Angelus dicit:", dx=-1hs, dy=12hs>( \stemsUp \slurBegin:1 \beamsOff \lyrics<"Quem", autopos="on">( g/4)
+)
+ \stemsUp \beamsOff f/4 \slurEnd:1 \stemsUp \slurBegin:1 \beamsOff \lyrics<"que-", autopos="on">( d/4)
+ \stemsUp \beamsOff f/4 \stemsUp \beamsOff e/4 \slurEnd:1 \stemsUp \slurBegin:1 \beamsOff \lyrics<"ri-", autopos="on">( f/4)
+ \stemsUp \beamsOff g/4 \stemsUp \beamsOff f/4 \slurEnd:1 \stemsUp \beamsOff \lyrics<"tis", autopos="on">( g/4)
+ \stemsUp \beamsOff \lyrics<"in", autopos="on">( f/4)
+ \stemsUp \beamsOff \lyrics<"se-", autopos="on">( a/4)
+ \stemsUp \slurBegin:1 \beamsOff \lyrics<"pul-", autopos="on">( a/4)
+ \stemsDown \beamsOff c2/4 \stemsDown \beamsOff b1/4 \stemsUp \beamsOff a/4 \slurEnd:1 \stemsDown \slurBegin:1 \beamsOff \lyrics<"chro,", autopos="on">( c2/4)
+ \stemsUp \beamsOff g1/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \slurEnd:1 \stemsUp \slurBegin:1 \beamsOff \lyrics<"o", autopos="on">( g/4)
+ \stemsUp \beamsOff a/4 \slurEnd:1 \stemsUp \slurBegin:1 \beamsOff \lyrics<"Chri-", autopos="on">( g/4)
+ \stemsUp \beamsOff f/4 \slurEnd:1 \stemsUp \slurBegin:1 \beamsOff \lyrics<"sti-", autopos="on">( a/4)
+ \stemsDown \beamsOff c2/4 \slurEnd:1 \stemsUp \beamsOff \lyrics<"co-", autopos="on">( a1/4)
+ \stemsUp \beamsOff \lyrics<"lae?", autopos="on">( g/4)
+ ]
+  }

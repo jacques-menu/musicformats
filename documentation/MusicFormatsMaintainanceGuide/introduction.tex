@@ -1,0 +1,88 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Introduction}
+% -------------------------------------------------------------------------
+
+This document presents the design principles and architecture of \mf, as well as information needed to maintain it. It is part of the \mf\ documentation, to be found at \url{https://github.com/jacques-menu/musicformats/tree/master/doc}.
+
+All the \mxml\ examples mentioned can be downloaded from \url{https://github.com/jacques-menu/musicformats/tree/master/files/musicxml}.\\
+They are grouped by subject in subdirectories, such as \mxmlfile{basic/HelloWorld.xml}.
+
+The MSDL examples can be found at \url{https://github.com/jacques-menu/musicformats/tree/master/files/msdl}.
+
+
+% -------------------------------------------------------------------------
+\section{Acknowledgements}
+% -------------------------------------------------------------------------
+
+Many thanks to Dominique \fober, the designer and maintainer of the \libmusicxml\ library!
+
+
+% -------------------------------------------------------------------------
+\section{Prerequisites}
+% -------------------------------------------------------------------------
+
+In order to maintain \mf, one needs to do the following:
+\begin{itemize}
+\item obtain a working knowledge of C++ programming. The code base of \mf\ uses classes, simple inheritance, and templates;
+
+%%%%%%%%\item study \mxml, starting maybe from \docpdf{introductionToMusicXML}{IntroductionToMusicXML.tex}. A deep knowledge of that matter comes with experience;
+
+\item study the architecture of \mf, which can be seen in \figureRef{Architecture}, and is presented in more detail at:\\
+\url{https://github.com/jacques-menu/musicformats/blob/master/doc/musicformatsArchitecture/musicformatsArchitecture.pdf}
+\end{itemize}
+
+\subimport{../CommonLaTeXFiles}{MusicFormatsArchitecturePicture}
+
+In this document, all paths to files are relative to the \mf\ source coude directory.
+
+
+% -------------------------------------------------------------------------
+\section{Chronology}
+% -------------------------------------------------------------------------
+
+\fober\ created \libmusicxml\ long before this author had the need for a library to read \mxml\ data, in order to convert it to LilyPond.
+In the picture showing the architecture of \mf\ in \figureRef{Architecture}, Dom's work is essentially represented by the \mxml, \mxsrRepr and Guido boxes at the top. He did more than this, of course, to provide \libmusicxml\ to users!
+
+This author's work started with {\tt xml2ly}, initially named {\tt xml2lilypond}, whose goal was to:
+\begin{itemize}
+\item perform as least as well as {\tt musicxml2ly}, provided by \lily;
+\item provide as many options as needed to meet the user's needs.
+\end{itemize}
+
+
+The {\tt *.cpp} files in {\tt samples} were examples of the use of the library. Among them, {\tt xml2guido} has been used since in various contexts.
+The diagram in \figureRef{Architecture}, was created afterwards, and it would then have consisted of only \mxml, \mxsrRepr\ and \guido, with passes 1, 2 and 3.
+
+When tackling the conversion of \mxml\ to LilyPond, this author created MSR as the central internal representation for music score. It is meant to capture the musical contents of score in fine-grain detail, to meet the needs of creating \lily\ code first, and Braille later.
+The only change made to the existing \mxsrRepr\ format has been to add an input line number to {\tt xmlElement}.
+
+The conversion from MSR to BSR music was two-pass from the beginning, first creating a \bsrRepr format with unlimited line and page lenghs, and then constraining that in a second BSR would take the numbers of cell per line and lines per page into account.
+This was frozen in autumn 1999 due to the lack of interest from the numerous persons and bodies that this author contacted about {\tt xml2brl}.
+The current status is the braille output is that the cells per line and lines per page values are ignored.
+
+The creation of \mxml\ code from MSR data was then added to close a loop with \mxml2xml, with the idea that it would make \mf\ a kind of swiss knife for textual formats of music scores.
+
+Having implemented a number of computer languages in the past, this author was then tempted to design MSDL, which stands for Music Scores Description Language. The word \MainIt{description} has been prefered to \MainIt{programming}, because not all musicians have programming skills.
+The basic aim of MSDL is to provide a musician-oriented way to describe a score that can be converted to various target textual forms.
+
+\clisamples{Mikrokosmos3Wandering.cpp} has been written to check that the MSR \API\ was rich enough to go this way. The \API\ was enriched along the way.
+
+Having MSR, LPSR and BSR available, as well as the capability to generate \mxml, \lily\, \guido and \braille, made writing a first draft of the MSDL converter, with version number 1.001, rather easy. The initial output target languages were \mxml, \lily, \mxml\ and \braille.
+
+This document contains technical information about the internal working of the code added to \mf\ by this author as their contribution to this great piece of software.
+
+
+% -------------------------------------------------------------------------
+\section{The GitHub repository}
+% -------------------------------------------------------------------------
+
+The GitHub repository, hosted at \url{https://github.com/jacques-menu/musicformats}, contains three branches types:
+\begin{itemize}
+\item \code{dev} : the most recent version of \mf\ files, which may evolve without notice;
+\item \code{test-v*} : such a version is a freezed version of the {\tt dev} state for users to test, allowing for the maintainers to modify the {\tt dev} files at will;
+\item \code{stable-v*} : a stable version of the library, copied from the \code{test-v*} branch from the same version number.
+\end{itemize}
+%The default branch is {\tt master}. JMI
+%%%JMI \Web\ site

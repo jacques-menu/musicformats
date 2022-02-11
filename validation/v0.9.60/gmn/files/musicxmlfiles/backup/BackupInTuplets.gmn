@@ -1,0 +1,13 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/backup/BackupInTuplets.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Music"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \intens<"fff", dy=-1hs> empty*205/3072 \stemsUp g3/15 \stemsUp \beamBegin:1 \beamBegin:2 g/15 \stemsUp g/15 \stemsUp g/15 \beamEnd:2 \beamBegin:2 \stemsUp g/15 \stemsUp g/15 \stemsUp g/15 \stemsUp g/15 \beamEnd:2 \beamBegin:2 \stemsUp g/15 \stemsUp g/15 \beamEnd:2 \beamBegin:2 \stemsUp g/15 \stemsUp g/15 \text<"]", dx=0.4hs, dy=7.4hs>( \stemsUp g/15)
+ \stemsUp g/15 \beamEnd:1 \beamEnd:2 ]
+ , 
+[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \stemsDown \beamBegin:1 \beamBegin:2 \tuplet<"", dispNote="/16">( e3/15 \stemsDown e/15 \stemsDown e/15 \stemsDown e/15 \beamEnd:2 \beamBegin:2 \stemsDown e/15 \stemsDown e/15 \beamEnd:2 \beamBegin:2 \stemsDown e/15 \stemsDown e/15 \stemsDown e/15 \beamEnd:2 \beamBegin:2 \stemsDown e/15 \stemsDown e/15 \stemsDown e/15 \stemsDown e/15 \beamEnd:1 \beamEnd:2 _/15 _/15)
+ ]
+  }

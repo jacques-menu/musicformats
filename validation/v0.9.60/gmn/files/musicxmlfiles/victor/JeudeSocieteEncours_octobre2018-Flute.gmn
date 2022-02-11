@@ -1,0 +1,457 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/victor/JeudeSocieteEncours_octobre2018-Flute.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"Edouard Joguet ", dy=4hs> \auto<autoInstrPos="on"> \instr<"Flûte"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-5> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \bar 
+   (* meas. 7 *)  \mark<"A2", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  \intens<"p", dy=-3hs> \stemsDown \slurBegin:1 \beamsOff b&/2 \stemsDown \beamsOff c2/2 \bar 
+   (* meas. 12 *)  \stemsDown \beamsOff d&/2 \stemsDown \beamsOff e&/2 \slurEnd:1 \bar 
+   (* meas. 13 *)  \stemsAuto \beamsOff f/1 \bar 
+   (* meas. 14 *)  \beamsOff a&1/1 \bar 
+   (* meas. 15 *)  \mark<"A3", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 16 *)  _/1 \bar 
+   (* meas. 17 *)  \beamsOff \fermata( f3/1)
+ \bar 
+   (* meas. 18 *)  \meter<"12/8", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[3/8] = 150", dy=0.536hs> \mark<"B", enclosure="square", fsize=14pt, dy=-0.598hs> _*3/2 \bar 
+   (* meas. 19 *)  _*3/2 \bar 
+   (* meas. 20 *)  _*3/2 \bar 
+   (* meas. 21 *)  _*3/2 \bar 
+   (* meas. 22 *)  _*3/2 \bar 
+   (* meas. 23 *)  _*3/2 \bar 
+   (* meas. 24 *)  _*3/2 \bar 
+   (* meas. 25 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 76", dy=0.536hs> \mark<"C1", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 26 *)  _/1 \bar 
+   (* meas. 27 *)  \intens<"p", dy=-3hs> \beamsOff b&1/1 \bar 
+   (* meas. 28 *)  _/4 \stemsDown \slurBegin:1 \beamBegin:1 b&/8 \stemsDown c2/8 \beamEnd:1 \stemsDown \beamsOff d&/4 \stemsDown \beamsOff \acc( g/4)
+ \bar 
+   (* meas. 29 *)  \stemsAuto \beamsOff f/1 \slurEnd:1 \bar 
+   (* meas. 30 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 31 *)  \mark<"C2", enclosure="square", fsize=14pt, dy=2hs> \intens<"p", dy=-3hs> \stemsDown \beamsOff \tieBegin:1 e&/2. \bar 
+   (* meas. 32 *)  \stemsDown \beamsOff e&/4 \tieEnd:1 _/2 \bar 
+   (* meas. 33 *)  _*3/4 \bar 
+   (* meas. 34 *)  \tempo<"rit.",fsize=12pt,fattrib="b", dy=0.536hs> _*3/4 \bar 
+   (* meas. 35 *)  _*3/4 \bar 
+   (* meas. 36 *)  \mark<"C3", enclosure="square", fsize=14pt, dy=2hs> \fermata( _*3/4)
+ \bar 
+   (* meas. 37 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 70", dy=0.536hs> \mark<"D1", enclosure="square", fsize=14pt, dy=-0.598hs> _/2 \bar 
+   (* meas. 38 *)  _/2 \bar 
+   (* meas. 39 *)  _/2 \bar 
+   (* meas. 40 *)  _/2 \bar 
+   (* meas. 41 *)  _/2 \bar 
+   (* meas. 42 *)  _/8 \intens<"p", dy=-3hs> \stemsDown \slurBegin:1 \beamBegin:1 b&/16 \stemsDown c3/16 \beamEnd:1 \stemsDown \beamBegin:1 b&2/16 \stemsDown c3/16 \stemsDown b&2/16 \stemsDown c3/16 \beamEnd:1 \bar 
+   (* meas. 43 *)  \stemsDown \beamBegin:1 b&2/16 \stemsDown c3/16 \stemsDown b&2/16 \stemsDown c3/16 \beamEnd:1 \stemsDown \beamBegin:1 b&2/16 \stemsDown c3/16 \stemsDown b&2/16 \stemsDown c3/16 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 44 *)  \restFormat<dy=-2>( _/2)
+ \bar 
+   (* meas. 45 *)  _/2 \bar 
+   (* meas. 46 *)  _/2 \bar 
+   (* meas. 47 *)  _/2 \bar 
+   (* meas. 48 *)  _/2 \bar 
+   (* meas. 49 *)  _/2 \bar 
+   (* meas. 50 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \mark<"E", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 51 *)  _/1 \bar 
+   (* meas. 52 *)  _/1 \bar 
+   (* meas. 53 *)  _/1 \bar 
+   (* meas. 54 *)  \tempo<"[1/4] = 70", dy=0.536hs> \mark<"F", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 55 *)  _/1 \bar 
+   (* meas. 56 *)  _/1 \bar 
+   (* meas. 57 *)  _/1 \bar 
+   (* meas. 58 *)  _/1 \bar 
+   (* meas. 59 *)  _/1 \bar 
+   (* meas. 60 *)  _/1 \bar 
+   (* meas. 61 *)  \mark<"G", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 62 *)  _/1 \bar 
+   (* meas. 63 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 60", dy=4hs> \mark<"H", enclosure="square", fsize=14pt, dy=2hs> \intens<"p", dy=-3hs> \stemsDown \beamBegin:1 b&2/8 \stemsDown c3/8 \beamEnd:1 \stemsDown \beamsOff d&/4 \stemsDown \beamsOff \acc( g/4)
+ \stemsDown \beamsOff \tieBegin:1 f/4 \bar 
+   (* meas. 64 *)  \stemsDown \beamsOff f/2 \tieEnd:1 _/2 \bar 
+   (* meas. 65 *)  _/1 \bar 
+   (* meas. 66 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 70", dy=0.536hs> \mark<"I1", enclosure="square", fsize=14pt, dy=-0.598hs> _/2 \bar 
+   (* meas. 67 *)  _/2 \bar 
+   (* meas. 68 *)  _/2 \bar 
+   (* meas. 69 *)  _/2 \bar 
+   (* meas. 70 *)  _/2 \bar 
+   (* meas. 71 *)  _/2 \bar 
+   (* meas. 72 *)  _/2 \bar 
+   (* meas. 73 *)  _/2 \bar 
+   (* meas. 74 *)  \mark<"I2", enclosure="square", fsize=14pt, dy=-0.598hs> _/2 \bar 
+   (* meas. 75 *)  _/2 \bar 
+   (* meas. 76 *)  _/2 \bar 
+   (* meas. 77 *)  _/2 \bar 
+   (* meas. 78 *)  _/2 \bar 
+   (* meas. 79 *)  _/4 \intens<"mp", dy=-3hs> \stemsUp \beamsOff f1/4 \bar 
+   (* meas. 80 *)  \stemsUp \slurBegin:1 \beamsOff \acc( d/2)
+ \bar 
+   (* meas. 81 *)  \stemsUp \beamsOff \acc( d/4)
+ \stemsUp \beamsOff e&/4 \bar 
+   (* meas. 82 *)  \stemsUp \beamsOff \tieBegin:1 f/2 \slurEnd:1 \bar 
+   (* meas. 83 *)  \dimBegin<dy=-2hs> \stemsUp \beamsOff \tieBegin:2 f/2 \tieEnd:1 \bar 
+   (* meas. 84 *)  \stemsUp \beamsOff f/2 \tieEnd:2 \dimEnd<dy=13hs> \bar 
+   (* meas. 85 *)  \fermata( _/2)
+ \bar 
+   (* meas. 86 *)  \key<-2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \mark<"gong", enclosure="square", fsize=14pt, dy=2hs> _/1 \bar 
+   (* meas. 87 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 66", dy=0.536hs> \mark<"J", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 88 *)  _/1 \bar 
+   (* meas. 89 *)  _/1 \bar 
+   (* meas. 90 *)  \fermata( _/1)
+ \bar 
+   (* meas. 91 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \mark<"I1 bis", enclosure="square", fsize=14pt, dy=-0.598hs> _/2 \bar 
+   (* meas. 92 *)  _/2 \bar 
+   (* meas. 93 *)  _/2 \bar 
+   (* meas. 94 *)  _/2 \bar 
+   (* meas. 95 *)  _/2 \bar 
+   (* meas. 96 *)  _/2 \bar 
+   (* meas. 97 *)  _/2 \bar 
+   (* meas. 98 *)  _/2 \bar 
+   (* meas. 99 *)  _/2 \bar 
+   (* meas. 100 *)  _/2 \bar 
+   (* meas. 101 *)  _/2 \bar 
+   (* meas. 102 *)  _/2 \bar 
+   (* meas. 103 *)  _/2 \bar 
+   (* meas. 104 *)  _/2 \bar 
+   (* meas. 105 *)  \key<1> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 60", dy=4hs> \mark<"K", enclosure="square", fsize=14pt, dy=2hs> _*3/4 \bar 
+   (* meas. 106 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 107 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 108 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 109 *)  \meter<"5/4", autoBarlines="off", autoMeasuresNum="system"> _*5/4 \bar 
+   (* meas. 110 *)  \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \mark<"L", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 111 *)  _/1 \bar 
+   (* meas. 112 *)  _/1 \bar 
+   (* meas. 113 *)  _/1 \bar 
+   (* meas. 114 *)  \key<-5> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 80", dy=4hs> \mark<"M", enclosure="square", fsize=14pt, dy=2hs> \intens<"p", dy=-3hs> \stemsAuto \beamsOff \tieBegin:1 e&/1 \bar 
+   (* meas. 115 *)  \beamsOff e&/1 \tieEnd:1 \bar 
+   (* meas. 116 *)  \dimBegin<dy=-2hs> \beamsOff \tieBegin:1 \acc( d/1)
+ \bar 
+   (* meas. 117 *)  \stemsUp \beamsOff d/2 \tieEnd:1 \dimEnd<dy=13hs> \intens<"mp", dy=-3hs> \stemsUp \beamsOff \tieBegin:1 \acc( d&/2)
+ \bar 
+   (* meas. 118 *)  \stemsAuto \beamsOff d&/1 \tieEnd:1 \bar 
+   (* meas. 119 *)  \beamsOff \tieBegin:1 f/1 \bar 
+   (* meas. 120 *)  \beamsOff f/1 \tieEnd:1 \breathMark<dy=-3hs> \bar 
+   (* meas. 121 *)  \beamsOff a&/1 \bar 
+   (* meas. 122 *)  \beamsOff g&/1 \bar 
+   (* meas. 123 *)  \beamsOff \acc( f&/1)
+ \breathMark<dy=-3hs> \bar 
+   (* meas. 124 *)  \intens<"pp", dy=-3hs> \beamsOff \tieBegin:1 e&/1 \bar 
+   (* meas. 125 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \dimBegin<dy=-2hs> \dimBegin<dy=-2hs> \stemsUp \beamsOff e&/2 \tieEnd:1 \dimEnd<dy=13hs> \dimEnd<dy=13hs> \bar 
+   (* meas. 126 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 50", dy=4hs> \mark<"N", enclosure="square", fsize=14pt, dy=2hs> _/1 \bar 
+   (* meas. 127 *)  \stemsAuto \beamsOff \acc( a2/1)
+ \bar 
+   (* meas. 128 *)  \beamsOff c/1 \bar 
+   (* meas. 129 *)  \intens<"mp", dy=-3hs> _/4 \dimBegin<dy=-2hs> \stemsDown \beamsOff e&/2. \dimEnd<dy=13hs> \bar 
+   (* meas. 130 *)  _/1 \bar 
+   (* meas. 131 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 75", dy=4hs> \intens<"pp", dy=-3hs> \mark<"O1", enclosure="square", fsize=14pt, dy=2hs> \stemsDown \beamsOff \tieBegin:1 b&1/2. \bar 
+   (* meas. 132 *)  \stemsDown \beamsOff \tieBegin:2 b&/2. \tieEnd:1 \bar 
+   (* meas. 133 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsAuto \beamsOff \tieBegin:3 b&/1 \tieEnd:2 \bar 
+   (* meas. 134 *)  \beamsOff \tieBegin:4 b&/1 \tieEnd:3 \bar 
+   (* meas. 135 *)  \mark<"O2", enclosure="square", fsize=14pt, dy=2hs> \beamsOff \tieBegin:5 b&/1 \tieEnd:4 \bar 
+   (* meas. 136 *)  \beamsOff \tieBegin:6 b&/1 \tieEnd:5 \bar 
+   (* meas. 137 *)  \beamsOff \tieBegin:7 b&/1 \tieEnd:6 \bar 
+   (* meas. 138 *)  \beamsOff \tieBegin:8 b&/1 \tieEnd:7 \bar 
+   (* meas. 139 *)  \beamsOff b&/1 \tieEnd:8 \bar 
+   (* meas. 140 *)  \intens<"mp", dy=-3hs> \mark<"O3", enclosure="square", fsize=14pt, dy=2hs> \text<"rit...", dx=0hs, dy=19hs>( \crescBegin<dy=-2hs> \stemsDown \beamsOff b&2/4)
+ \stemsDown \beamsOff c3/4 \stemsDown \beamsOff d&/2 \crescEnd<dy=13hs> \bar 
+   (* meas. 141 *)  _/1 \bar 
+   (* meas. 142 *)  \fermata( _/1)
+ \bar 
+   (* meas. 143 *)  \mark<"P1", enclosure="square", fsize=14pt, dy=-0.598hs> \tempo<"[1/4] = 80", dy=0.536hs> _/1 \bar 
+   (* meas. 144 *)  _/1 \bar 
+   (* meas. 145 *)  _/1 \bar 
+   (* meas. 146 *)  _/1 \bar 
+   (* meas. 147 *)  _/1 \bar 
+   (* meas. 148 *)  _/1 \bar 
+   (* meas. 149 *)  \tempo<"rit.",fsize=12pt,fattrib="b", dy=4hs> _/2 \intens<"mp", dy=-3hs> \stemsUp \beamsOff \tieBegin:1 g&1/2 \bar 
+   (* meas. 150 *)  \stemsUp \beamsOff g&/4 \tieEnd:1 \stemsUp \beamsOff f/2. \bar 
+   (* meas. 151 *)  \mark<"P2", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 152 *)  _/1 \bar 
+   (* meas. 153 *)  _/1 \bar 
+   (* meas. 154 *)  _/1 \bar 
+   (* meas. 155 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 50", dy=4hs> \mark<"Q1", enclosure="square", fsize=14pt, dy=2hs> \fermata( _/1)
+ \bar 
+   (* meas. 156 *)  _/1 \bar 
+   (* meas. 157 *)  _/1 \bar 
+   (* meas. 158 *)  _/1 \bar 
+   (* meas. 159 *)  _/1 \bar 
+   (* meas. 160 *)  _/1 \bar 
+   (* meas. 161 *)  _/1 \bar 
+   (* meas. 162 *)  \fermata( _/1)
+ \bar 
+   (* meas. 163 *)  \mark<"Q2", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 164 *)  _/1 \bar 
+   (* meas. 165 *)  _/1 \bar 
+   (* meas. 166 *)  _/1 \bar 
+   (* meas. 167 *)  _/1 \bar 
+   (* meas. 168 *)  _/1 \bar 
+   (* meas. 169 *)  _/1 \bar 
+   (* meas. 170 *)  _/1 \bar 
+   (* meas. 171 *)  \meter<"12/8", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[3/8] = 100", dy=4hs> \mark<"R1", enclosure="square", fsize=14pt, dy=2hs> _/2. \text<"flutter tongue", dx=0hs, dy=19hs>( \stemsDown \beamsOff \trem<style="///">( b&/4)
+)
+ \stemsDown \beamsOff \trem<style="///">( \tieBegin:1 c2/8)
+ \stemsDown \beamsOff \trem<style="///">( \tieBegin:2 c/4. \tieEnd:1)
+ \bar 
+   (* meas. 172 *)  \stemsAuto \beamsOff \trem<style="///">( \tieBegin:3 c/1. \tieEnd:2)
+ \bar 
+   (* meas. 173 *)  \tempo<"accel.",fsize=12pt,fattrib="b", dy=4hs> \beamsOff \trem<style="///">( \tieBegin:4 c/1. \tieEnd:3)
+ \bar 
+   (* meas. 174 *)  \dimBegin<dy=-2hs> \dimBegin<dy=-2hs> \stemsDown \beamsOff \trem<style="///">( c/2. \tieEnd:4)
+ _/4 _/2 \dimEnd<dy=13hs> \dimEnd<dy=13hs> \bar 
+   (* meas. 175 *)  \mark<"R2", enclosure="square", fsize=14pt, dy=-0.598hs> \tempo<"[3/8] = 126", dy=0.536hs> _*3/2 \bar 
+   (* meas. 176 *)  _*3/2 \bar 
+   (* meas. 177 *)  _*3/2 \bar 
+   (* meas. 178 *)  _*3/2 \bar 
+   (* meas. 179 *)  _*3/2 \bar 
+   (* meas. 180 *)  _*3/2 \bar 
+   (* meas. 181 *)  _*3/2 \bar 
+   (* meas. 182 *)  _*3/2 \bar 
+   (* meas. 183 *)  _*3/2 \bar 
+   (* meas. 184 *)  _*3/2 \bar 
+   (* meas. 185 *)  _*3/2 \bar 
+   (* meas. 186 *)  _*3/2 \bar 
+   (* meas. 187 *)  _*3/2 \bar 
+   (* meas. 188 *)  _*3/2 \bar 
+   (* meas. 189 *)  \fermata( _*3/2)
+ \bar 
+   (* meas. 190 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 60", dy=4hs> \mark<"S1", enclosure="square", fsize=14pt, dy=2hs> \intens<"p", dy=-3hs> \stemsAuto \beamsOff \tieBegin:1 f/1 \bar 
+   (* meas. 191 *)  \beamsOff f/1 \tieEnd:1 \bar 
+   (* meas. 192 *)  \beamsOff \tieBegin:1 e&/1 \bar 
+   (* meas. 193 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff e&/4. \tieEnd:1 \stemsDown \beamsOff \tieBegin:1 d&/8 \bar 
+   (* meas. 194 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \dimBegin<dy=-2hs> \stemsDown \beamsOff d&/2 \tieEnd:1 \stemsDown \beamsOff c/2 \dimEnd<dy=13hs> \bar 
+   (* meas. 195 *)  \mark<"S2", enclosure="square", fsize=14pt, dy=2hs> _/2 \text<"Solo", dx=0hs, dy=19hs>( \stemsDown \slurBegin:1 \beamsOff d&/4)
+ \stemsDown \beamsOff e&/4 \bar 
+   (* meas. 196 *)  \stemsDown \beamsOff g&/4 \dimBegin<dy=-2hs> \stemsDown \beamsOff e&3/4. \slurEnd:1 _/8 _/4 \dimEnd<dy=13hs> \bar 
+   (* meas. 197 *)  \tempo<"rit.",fsize=12pt,fattrib="b", dy=4hs> _/1 \bar 
+   (* meas. 198 *)  \stemsAuto \beamsOff \tieBegin:1 e&2/1 \bar 
+   (* meas. 199 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \dimBegin<dy=-2hs> \stemsDown \beamsOff e&/2 \tieEnd:1 \dimEnd<dy=13hs> \bar 
+   (* meas. 200 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \mark<"S3", enclosure="square", fsize=14pt, dy=2hs> \stemsDown \beamsOff c/2 \stemsDown \beamsOff \tieBegin:1 e&/2 \bar 
+   (* meas. 201 *)  \dimBegin<dy=-2hs> \stemsDown \beamsOff e&/4 \tieEnd:1 \stemsDown \beamsOff d&/2. \dimEnd<dy=13hs> \bar 
+   (* meas. 202 *)  \dimBegin<dy=-2hs> \stemsAuto \beamsOff e&/1 \dimEnd<dy=13hs> \bar 
+   (* meas. 203 *)  _/2 \fermata( _/2)
+ \bar 
+   (* meas. 204 *)  \tempo<"[1/4] = 106", dy=0.536hs> \mark<"T1", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 205 *)  _/1 \bar 
+   (* meas. 206 *)  _/1 \bar 
+   (* meas. 207 *)  _/1 \bar 
+   (* meas. 208 *)  \mark<"T2", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 209 *)  _/1 \bar 
+   (* meas. 210 *)  _/1 \bar 
+   (* meas. 211 *)  _/1 \bar 
+   (* meas. 212 *)  \mark<"T3", enclosure="square", fsize=14pt, dy=2hs> _/2 \text<"Solo", dx=0hs, dy=19hs>( \stemsDown \slurBegin:1 \beamsOff b&1/4)
+ \stemsDown \beamsOff c2/4 \bar 
+   (* meas. 213 *)  \stemsDown \beamsOff d&/2 \stemsDown \beamsOff \acc( g/2)
+ \bar 
+   (* meas. 214 *)  \stemsDown \beamsOff f/2 \slurEnd:1 _/2 \bar 
+   (* meas. 215 *)  _/1 \bar 
+   (* meas. 216 *)  \meter<"12/8", autoBarlines="off", autoMeasuresNum="system"> \mark<"U1", enclosure="square", fsize=14pt, dy=-0.598hs> \tempo<"[3/8] = 150", dy=0.536hs> _*3/2 \bar 
+   (* meas. 217 *)  _*3/2 \bar 
+   (* meas. 218 *)  _*3/2 \bar 
+   (* meas. 219 *)  _*3/2 \bar 
+   (* meas. 220 *)  _*3/2 \bar 
+   (* meas. 221 *)  _*3/2 \bar 
+   (* meas. 222 *)  _*3/2 \bar 
+   (* meas. 223 *)  _*3/2 \bar 
+   (* meas. 224 *)  _*3/2 \bar 
+   (* meas. 225 *)  \mark<"U2", enclosure="square", fsize=14pt, dy=-0.598hs> _*3/2 \bar 
+   (* meas. 226 *)  _*3/2 \bar 
+   (* meas. 227 *)  _*3/2 \bar 
+   (* meas. 228 *)  _*3/2 \bar 
+   (* meas. 229 *)  _*3/2 \bar 
+   (* meas. 230 *)  _*3/2 \bar 
+   (* meas. 231 *)  _*3/2 \bar 
+   (* meas. 232 *)  \crescBegin<dy=-2hs> \stemsAuto \beamsOff \tieBegin:1 d&/1. \crescEnd<dy=13hs> \bar 
+   (* meas. 233 *)  \mark<"U3", enclosure="square", fsize=14pt, dy=2hs> \dimBegin<dy=-2hs> \beamsOff d&/1. \tieEnd:1 \dimEnd<dy=13hs> \bar 
+   (* meas. 234 *)  _*3/2 \bar 
+   (* meas. 235 *)  _*3/2 \bar 
+   (* meas. 236 *)  _*3/2 \bar 
+   (* meas. 237 *)  _*3/2 \bar 
+   (* meas. 238 *)  _*3/2 \bar 
+   (* meas. 239 *)  _*3/2 \bar 
+   (* meas. 240 *)  _*3/2 \bar 
+   (* meas. 241 *)  _*3/2 \bar 
+   (* meas. 242 *)  _*3/2 \bar 
+   (* meas. 243 *)  \fermata( _*3/2)
+ \bar 
+   (* meas. 244 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 60", dy=4hs> \mark<"V", enclosure="square", fsize=14pt, dy=2hs> _/4 \crescBegin<dy=-2hs> \stemsDown \beamsOff \tieBegin:1 e&/2. \crescEnd<dy=13hs> \bar 
+   (* meas. 245 *)  \dimBegin<dy=-2hs> \stemsAuto \beamsOff e&/1 \tieEnd:1 \dimEnd<dy=13hs> \bar 
+   (* meas. 246 *)  \beamsOff \trem<style="///">( {\tieBegin:1 c/1, \tieBegin:2 e&/1  })
+ \bar 
+   (* meas. 247 *)  \beamsOff \trem<style="///">( {c/1 \tieEnd:1, e&/1 \tieEnd:2  })
+ \bar 
+   (* meas. 248 *)  \slurBegin:1 \beamsOff e&/1 \bar 
+   (* meas. 249 *)  \beamsOff e&/1 \slurEnd:1 \breathMark<dy=-3hs> \bar 
+   (* meas. 250 *)  \crescBegin<dy=-2hs> \beamsOff \trill( \tieBegin:1 g&/1)
+ \crescEnd<dy=13hs> \bar 
+   (* meas. 251 *)  \dimBegin<dy=-2hs> \stemsDown \beamsOff g&/2 \tieEnd:1 \dimEnd<dy=13hs> _/2 \bar 
+   (* meas. 252 *)  _/1 \bar 
+   (* meas. 253 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 254 *)  \meter<"12/8", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[3/8] = 150", dy=0.536hs> \mark<"W", enclosure="square", fsize=14pt, dy=-0.598hs> _*3/2 \bar 
+   (* meas. 255 *)  _*3/2 \bar 
+   (* meas. 256 *)  _*3/2 \bar 
+   (* meas. 257 *)  _*3/2 \bar 
+   (* meas. 258 *)  _*3/2 \bar 
+   (* meas. 259 *)  _*3/2 \bar 
+   (* meas. 260 *)  _*3/2 \bar 
+   (* meas. 261 *)  _*3/2 \bar 
+   (* meas. 262 *)  \fermata( _*3/2)
+ \bar 
+   (* meas. 263 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 70", dy=4hs> \intens<"mf", dy=-3hs> \mark<"X1", enclosure="square", fsize=14pt, dy=2hs> \stemsDown \beamsOff \tieBegin:1 f/2 \bar 
+   (* meas. 264 *)  \stemsDown \beamsOff \tieBegin:2 f/2 \tieEnd:1 \bar 
+   (* meas. 265 *)  \stemsDown \beamsOff \tieBegin:3 f/2 \tieEnd:2 \bar 
+   (* meas. 266 *)  \stemsDown \beamsOff f/2 \tieEnd:3 \bar 
+   (* meas. 267 *)  \stemsDown \beamsOff \tieBegin:1 d&3/2 \bar 
+   (* meas. 268 *)  \stemsDown \beamsOff d&/2 \tieEnd:1 \bar 
+   (* meas. 269 *)  \mark<"X2", enclosure="square", fsize=14pt, dy=2hs> \stemsDown \beamsOff \tieBegin:1 b&1/2 \bar 
+   (* meas. 270 *)  \stemsDown \beamsOff \tieBegin:2 b&/2 \tieEnd:1 \bar 
+   (* meas. 271 *)  \stemsDown \beamsOff \tieBegin:3 b&/2 \tieEnd:2 \bar 
+   (* meas. 272 *)  \stemsDown \beamsOff b&/2 \tieEnd:3 \bar 
+   (* meas. 273 *)  \stemsDown \beamsOff \tieBegin:1 c2/2 \bar 
+   (* meas. 274 *)  \stemsDown \beamsOff \tieBegin:2 c/2 \tieEnd:1 \bar 
+   (* meas. 275 *)  \stemsDown \beamsOff \tieBegin:3 c/2 \tieEnd:2 \bar 
+   (* meas. 276 *)  \stemsDown \beamsOff c/4 \tieEnd:3 \stemsDown \beamsOff \tieBegin:1 b&1/4 \bar 
+   (* meas. 277 *)  \stemsDown \beamsOff \tieBegin:2 b&/2 \tieEnd:1 \bar 
+   (* meas. 278 *)  \tempo<"rit.",fsize=12pt,fattrib="b", dy=4hs> \stemsDown \beamsOff b&/2 \tieEnd:2 \breathMark<dy=-3hs> \bar 
+   (* meas. 279 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \intens<"p", dy=-3hs> \mark<"Y", enclosure="square", fsize=14pt, dy=2hs> \stemsDown \slurBegin:1 \beamsOff d&2/4 \stemsDown \beamsOff c/4 \stemsDown \beamsOff d&/2 \slurEnd:1 \bar 
+   (* meas. 280 *)  \stemsDown \slurBegin:1 \beamsOff d&/4 \stemsDown \beamsOff e&/4 \stemsDown \beamsOff d&/2 \slurEnd:1 \bar 
+   (* meas. 281 *)  \stemsDown \slurBegin:1 \beamsOff d&/4 \stemsDown \beamsOff c/4 \stemsDown \beamsOff d&/4 \stemsDown \beamsOff b&1/4 \slurEnd:1 \bar 
+   (* meas. 282 *)  \stemsAuto \beamsOff c2/1 \bar 
+   (* meas. 283 *)  \beamsOff b&1/1 \doubleBar 
+   (* meas. 284 *)  \mark<"Z", enclosure="square", fsize=14pt, dy=2hs> _/1 \bar 
+   (* meas. 285 *)  \intens<"f", dy=-3hs> \stemsDown \beamsOff \marcato( \acc( d3/8)
+)
+ _/8 _/4 \stemsDown \beamsOff \marcato( c/8)
+ _/8 _/4 \doubleBar 
+   (* meas. 286 *)  \tempo<"[1/4] = 144", dy=4hs> _/4 \intens<"pp", dy=-3hs> \stemsDown \slurBegin:1 \beamBegin:1 \acc( e2/16)
+ \stemsDown \acc( e&/16)
+ \stemsDown \acc( d/16)
+ \stemsDown \acc( d&/16)
+ \beamEnd:1 \stemsDown \beamBegin:1 c/16 \stemsDown d&/16 \stemsDown \acc( d/16)
+ \stemsDown e&/16 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 \acc( e/16)
+ \stemsDown \acc( e&/16)
+ \stemsDown d/16 \stemsDown \acc( d&/16)
+ \beamEnd:1 \bar 
+   (* meas. 287 *)  \stemsDown \beamBegin:1 c/16 \stemsDown d&/16 \stemsDown \acc( d/16)
+ \stemsDown e&/16 \beamEnd:1 \stemsDown \beamBegin:1 \acc( e/16)
+ \stemsDown \acc( e&/16)
+ \stemsDown d/16 \stemsDown \acc( d&/16)
+ \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 c/16 \stemsDown d&/16 \stemsDown \acc( d/16)
+ \stemsDown e&/16 \beamEnd:1 \stemsDown \beamBegin:1 \acc( e/16)
+ \stemsDown \acc( e&/16)
+ \stemsDown d/16 \stemsDown \acc( d&/16)
+ \beamEnd:1 \bar 
+   (* meas. 288 *)  \stemsDown \beamBegin:1 c/16 \stemsDown d&/16 \stemsDown \acc( d/16)
+ \stemsDown e&/16 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 \acc( e/16)
+ \stemsDown \acc( e&/16)
+ \stemsDown d/16 \stemsDown \acc( d&/16)
+ \beamEnd:1 \stemsDown \beamBegin:1 c/16 \stemsDown d&/16 \stemsDown \acc( d/16)
+ \stemsDown e&/16 \beamEnd:1 \stemsDown \beamBegin:1 \acc( e/16)
+ \stemsDown \acc( e&/16)
+ \stemsDown d/16 \stemsDown \acc( d&/16)
+ \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 289 *)  \stemsDown \slurBegin:1 \beamBegin:1 c/16 \stemsDown d&/16 \stemsDown \acc( d/16)
+ \stemsDown e&/16 \beamEnd:1 \stemsDown \beamBegin:1 \acc( e/16)
+ \stemsDown \acc( e&/16)
+ \stemsDown d/16 \stemsDown \acc( d&/16)
+ \beamEnd:1 \stemsDown \beamBegin:1 c/16 \stemsDown d&/16 \stemsDown \acc( d/16)
+ \stemsDown e&/16 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 \acc( e/16)
+ \stemsDown \acc( e&/16)
+ \stemsDown d/16 \stemsDown \acc( d&/16)
+ \beamEnd:1 \bar 
+   (* meas. 290 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamBegin:1 c/16 \stemsDown d&/16 \stemsDown \acc( d/16)
+ \stemsDown e&/16 \slurEnd:1 \beamEnd:1 _/4 \fermata( _/4)
+ \doubleBar 
+   (* meas. 291 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \mark<"AA", enclosure="square", fsize=14pt, dy=-0.598hs> _/1 \bar 
+   (* meas. 292 *)  _/1 \bar 
+   (* meas. 293 *)  _/1 \bar 
+   (* meas. 294 *)  _/1 \bar 
+   (* meas. 295 *)  _/1 \bar 
+   (* meas. 296 *)  _/1 \bar 
+   (* meas. 297 *)  _/1 \bar 
+   (* meas. 298 *)  _/1 \bar 
+   (* meas. 299 *)  _/1 \bar 
+   (* meas. 300 *)  _/1 \bar 
+   (* meas. 301 *)  _/1 \bar 
+   (* meas. 302 *)  _/1 \bar 
+   (* meas. 303 *)  _/1 \bar 
+   (* meas. 304 *)  _/1 \bar 
+   (* meas. 305 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \mark<"BB", enclosure="square", fsize=14pt, dy=2hs> \tempo<"[1/4] = 70", dy=4hs> _/2 \intens<"f", dy=-3hs> \stemsDown \beamsOff \trem<style="///">( \tieBegin:1 f3/2)
+ \bar 
+   (* meas. 306 *)  \stemsAuto \beamsOff \trem<style="///">( \tieBegin:2 f/1 \tieEnd:1)
+ \bar 
+   (* meas. 307 *)  \beamsOff \trem<style="///">( \tieBegin:3 f/1 \tieEnd:2)
+ \bar 
+   (* meas. 308 *)  \beamsOff \trem<style="///">( \tieBegin:4 f/1 \tieEnd:3)
+ \bar 
+   (* meas. 309 *)  \beamsOff \trem<style="///">( f/1 \tieEnd:4)
+ \bar 
+   (* meas. 310 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \mark<"CC", enclosure="square", fsize=14pt, dy=2hs> _*3/4 \bar 
+   (* meas. 311 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 60", dy=4hs> \intens<"pp", dy=-3hs> \beamsOff \tieBegin:1 f2/1 \bar 
+   (* meas. 312 *)  \stemsDown \beamsOff f/2 \tieEnd:1 \stemsDown \beamsOff \acc( e/2)
+ \bar 
+   (* meas. 313 *)  \stemsAuto \beamsOff \tieBegin:1 f/1 \bar 
+   (* meas. 314 *)  \beamsOff \tieBegin:2 f/1 \tieEnd:1 \bar 
+   (* meas. 315 *)  \beamsOff \tieBegin:3 f/1 \tieEnd:2 \bar 
+   (* meas. 316 *)  \beamsOff f/1 \tieEnd:3 \bar 
+   (* meas. 317 *)  \meter<"12/8", autoBarlines="off", autoMeasuresNum="system"> \mark<"DD1", enclosure="square", fsize=14pt, dy=-0.598hs> \tempo<"[3/8] = 150", dy=0.536hs> _*3/2 \bar 
+   (* meas. 318 *)  _*3/2 \bar 
+   (* meas. 319 *)  _*3/2 \bar 
+   (* meas. 320 *)  _*3/2 \bar 
+   (* meas. 321 *)  _*3/2 \bar 
+   (* meas. 322 *)  _*3/2 \bar 
+   (* meas. 323 *)  _*3/2 \bar 
+   (* meas. 324 *)  _*3/2 \bar 
+   (* meas. 325 *)  \mark<"DD2", enclosure="square", fsize=14pt, dy=-0.598hs> _*3/2 \bar 
+   (* meas. 326 *)  _*3/2 \bar 
+   (* meas. 327 *)  _*3/2 \bar 
+   (* meas. 328 *)  _*3/2 \bar 
+   (* meas. 329 *)  _*3/2 \bar 
+   (* meas. 330 *)  \intens<"mf", dy=-3hs> \crescBegin<dy=-2hs> \beamsOff \tieBegin:1 c3/1. \crescEnd<dy=13hs> \bar 
+   (* meas. 331 *)  \dimBegin<dy=-2hs> \beamsOff c/1. \tieEnd:1 \dimEnd<dy=13hs> \bar 
+   (* meas. 332 *)  _*3/2 \bar 
+   (* meas. 333 *)  _*3/2 \bar 
+   (* meas. 334 *)  _*3/2 \bar 
+   (* meas. 335 *)  _/2. \stemsDown \beamsOff c2/4. \stemsDown \beamsOff d&/4. \bar 
+   (* meas. 336 *)  \stemsAuto \beamsOff c3/1. \bar 
+   (* meas. 337 *)  _*3/2 \bar 
+   (* meas. 338 *)  _*3/2 \bar 
+   (* meas. 339 *)  \mark<"DD3", enclosure="square", fsize=14pt, dy=-0.598hs> _*3/2 \bar 
+   (* meas. 340 *)  _*3/2 \bar 
+   (* meas. 341 *)  _*3/2 \bar 
+   (* meas. 342 *)  _*3/2 \bar 
+   (* meas. 343 *)  \mark<"DD4", enclosure="square", fsize=14pt, dy=2hs> \intens<"mf", dy=-3hs> \stemsDown \beamBegin:1 b&1/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \bar 
+   (* meas. 344 *)  \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 \acc( g2/8)
+ \stemsDown g/8 \beamEnd:1 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff g/8 \bar 
+   (* meas. 345 *)  \stemsDown \beamBegin:1 b&1/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \bar 
+   (* meas. 346 *)  \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown d&2/8 \stemsDown b&1/8 \beamEnd:1 \stemsDown \beamBegin:1 \acc( g2/8)
+ \stemsDown g/8 \beamEnd:1 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff g/8 \bar 
+   (* meas. 347 *)  \dimBegin<dy=-2hs> \stemsDown \beamsOff b&1/4. \dimEnd<dy=13hs> _/8 _/1 \bar 
+   (* meas. 348 *)  _*3/2 \bar 
+   (* meas. 349 *)  _*3/2 \bar 
+   (* meas. 350 *)  _*3/2 \bar 
+   (* meas. 351 *)  \intens<"mp", dy=-3hs> \mark<"DD5", enclosure="square", fsize=14pt, dy=2hs> \stemsDown \beamsOff d&2/2. \stemsDown \beamsOff c/2. \bar 
+   (* meas. 352 *)  \stemsAuto \beamsOff d&/1. \bar 
+   (* meas. 353 *)  \stemsDown \beamsOff d&/2. \stemsDown \beamsOff e&/2. \bar 
+   (* meas. 354 *)  \stemsAuto \beamsOff d&/1. \bar 
+   (* meas. 355 *)  _*3/2 \bar 
+   (* meas. 356 *)  _*3/2 \bar 
+   (* meas. 357 *)  _*3/2 \bar 
+   (* meas. 358 *)  _*3/2 \bar 
+   (* meas. 359 *)  \intens<"f", dy=-3hs> \mark<"DD6", enclosure="square", fsize=14pt, dy=2hs> \stemsDown \beamsOff f/2. \stemsDown \beamsOff e&/2. \bar 
+   (* meas. 360 *)  \stemsAuto \beamsOff f/1. \bar 
+   (* meas. 361 *)  \stemsDown \beamsOff f/2. \stemsDown \beamsOff a&/2. \bar 
+   (* meas. 362 *)  \stemsAuto \beamsOff f/1. \bar 
+   (* meas. 363 *)  \stemsDown \beamsOff b&/2. \stemsDown \beamsOff a&/2. \bar 
+   (* meas. 364 *)  \stemsDown \beamsOff d&/2. \stemsDown \beamsOff e&/2. \bar 
+   (* meas. 365 *)  \crescBegin<dy=-2hs> \stemsAuto \beamsOff \tieBegin:1 f/1. \bar 
+   (* meas. 366 *)  \beamsOff f/1. \tieEnd:1 \crescEnd<dy=13hs> \bar 
+   (* meas. 367 *)  \tempo<"molto rit.",fsize=12pt,fattrib="b", dy=4hs> _/2. \intens<"ff", dy=-3hs> \stemsDown \beamsOff b&/4. \stemsDown \beamsOff c3/4. \bar 
+   (* meas. 368 *)  \stemsDown \beamsOff d&/2. \stemsDown \beamsOff \acc( g/2.)
+ \bar 
+   (* meas. 369 *)  \stemsAuto \beamsOff \fermata( f/1.)
+ ]
+  }

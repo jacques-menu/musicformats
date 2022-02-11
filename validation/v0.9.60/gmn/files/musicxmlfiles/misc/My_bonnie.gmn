@@ -1,0 +1,24 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/misc/My_bonnie.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"My Bonnie"> \auto<autoInstrPos="on"> \instr<"Flauto dritto soprano"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"6/8", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff g/8 \bar 
+   (* meas. 2 *)  \stemsDown \beamBegin:1 e2/8 \stemsDown d/8 \stemsDown c/8 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown c/8 \stemsDown a1/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff g/8 \stemsUp \beamsOff \tieBegin:1 e/4 \stemsUp \beamsOff e/4 \tieEnd:1 \stemsUp \beamsOff g/8 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 e2/8 \stemsDown d/8 \stemsDown c/8 \beamEnd:1 \stemsDown \beamBegin:1 c/8 \stemsDown b1/8 \stemsDown c2/8 \beamEnd:1 \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff \tieBegin:1 d/4. \stemsDown \beamsOff d/4 \tieEnd:1 \stemsUp \beamsOff g1/8 \bar 
+   (* meas. 6 *)  \stemsDown \beamBegin:1 e2/8 \stemsDown d/8 \stemsDown c/8 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown c/8 \stemsDown a1/8 \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff g/8 \stemsUp \beamsOff \tieBegin:1 e/4 \stemsUp \beamsOff e/4 \tieEnd:1 \stemsUp \beamsOff g/8 \bar 
+   (* meas. 8 *)  \stemsDown \beamBegin:1 a/8 \stemsDown d2/8 \stemsDown c/8 \beamEnd:1 \stemsUp \beamBegin:1 b1/8 \stemsUp a/8 \stemsUp b/8 \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff c2/2. \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff g1/4. \stemsDown \beamsOff c2/4. \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff a1/4. \stemsDown \beamsOff d2/4 \stemsDown \beamsOff c/8 \bar 
+   (* meas. 12 *)  \stemsDown \beamBegin:1 b1/8 \stemsDown b/8 \stemsDown b/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \stemsUp a/8 \stemsUp b/8 \beamEnd:1 \bar 
+   (* meas. 13 *)  \stemsDown \beamsOff c2/4 \stemsDown \beamsOff d/8 \stemsDown \beamsOff e/4. \bar 
+   (* meas. 14 *)  \stemsUp \beamsOff g1/4. \stemsDown \beamsOff c2/4. \bar 
+   (* meas. 15 *)  \stemsUp \beamsOff a1/4. \stemsDown \beamsOff d2/4 \stemsDown \beamsOff c/8 \bar 
+   (* meas. 16 *)  \stemsDown \beamBegin:1 b1/8 \stemsDown b/8 \stemsDown b/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \stemsUp a/8 \stemsUp b/8 \beamEnd:1 \bar 
+   (* meas. 17 *)  \meter<"5/8", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff c2/4. _/4 \repeatEnd ]
+  }

@@ -1,0 +1,26 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/multistaff/OverfullMeasuresMultiStaves.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Excerpt from Magnificat secundi toni"> \composer<"Gilles Binchois", dy=4hs> \auto<autoInstrPos="on"> \instr<"Cantus"> \barFormat<style= "system",  range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> \text<"Chorus", dx=-9.2hs, dy=18.4hs>( \stemsOff \beamsOff \lyrics<"Ma-", autopos="on">( c/4)
+)
+ \stemsOff \beamsOff \lyrics<"gni-", autopos="on">( d/4)
+ \stemsOff \slurBegin:1<curve="up"> \beamsOff \lyrics<"fi-", autopos="on">( c/4)
+ \stemsOff \beamsOff f/4 \slurEnd:1 \stemsOff \beamsOff \lyrics<"cat", autopos="on">( f/4)
+ \bar 
+   (* meas. 2 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \text<"(C.)", dx=-16.8hs, dy=15.4hs>( _/4)
+ _/4 \stemsDown \beamsOff \lyrics<"A-", autopos="on">( f/4)
+ ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Cantus 2 and Tenor"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> _*5/4 \bar 
+   (* meas. 2 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \text<"(CT.)", dx=-17hs, dy=14.8hs>( _/4)
+ _/4 \stemsDown \beamsOff \lyrics<"A-", autopos="on">( f0/4)
+ ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \bar<hidden="true"> 
+   (* meas. 1 *)  empty*5/4 \bar 
+   (* meas. 2 *)  _/4 _/4 \stemsDown \beamsOff f0/4 ]
+  }

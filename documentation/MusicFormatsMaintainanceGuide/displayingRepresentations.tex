@@ -1,0 +1,43 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Displaying formats}
+% -------------------------------------------------------------------------
+
+\mf\ is equipped with \option{display*} options as a help to the maintainer.
+
+
+% -------------------------------------------------------------------------
+\section{Display categories}
+% -------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------
+\section{Displaying in practise}
+% -------------------------------------------------------------------------
+
+%In \lpsrToLilypond{lpsr2lilypondTranslator.cpp}, the trace for the generation of LilyPond code for a regular note in a measure is produced by:
+%\begin{lstlisting}[language=CPlusPlus]
+%void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
+%  S_msrNote note)
+%{
+%  int inputLineNumber =
+%    note->getInputLineNumber ();
+%
+%#ifdef TRACING_IS_ENABLED
+%  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+%    stringstream s;
+%
+%    s <<
+%      endl <<
+%      "% --> generating code for noteRegularInMeasure " <<
+%      note->asString () <<
+%      ", line " << inputLineNumber <<
+%      endl;
+%
+%    gLogStream          << s.str ();
+%    fLilypondCodeStream << s.str ();
+%  }
+%#endif
+%
+%\end{lstlisting}
+

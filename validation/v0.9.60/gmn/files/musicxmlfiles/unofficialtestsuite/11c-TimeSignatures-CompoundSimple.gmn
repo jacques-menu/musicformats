@@ -1,0 +1,9 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/11c-TimeSignatures-CompoundSimple.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3+2/8", autoBarlines="off", autoMeasuresNum="system"> \beamBegin:1 b/8 b/8 b/8 \beamEnd:1 \beamBegin:1 b/8 b/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \meter<"5+3+1/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff a/1 \beamsOff a/4 \beamsOff a/2. \beamsOff a/4 ]
+  }

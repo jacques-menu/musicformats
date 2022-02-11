@@ -1,0 +1,273 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/cubase/zzz.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Piccolo"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"Allegretto   MM 1/4=105",fsize=18pt,fattrib="b", dy=2.2hs> \tempo<"Nr. IV      Allesamt durchs Labyrinth",fsize=18pt,fattrib="b", dy=8.2hs> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 6 *)  \bar 
+   (* meas. 7 *)  \bar 
+   (* meas. 8 *)  \bar 
+   (* meas. 9 *)  \bar 
+   (* meas. 10 *)  \bar 
+   (* meas. 11 *)  \bar 
+   (* meas. 12 *)  \bar 
+   (* meas. 13 *)  \bar 
+   (* meas. 14 *)  \bar 
+   (* meas. 15 *)  \bar 
+   (* meas. 16 *)  \bar 
+   (* meas. 17 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 18 *)  \bar 
+   (* meas. 19 *)  \bar 
+   (* meas. 20 *)  \bar 
+   (* meas. 21 *)  \bar 
+   (* meas. 22 *)  \bar 
+   (* meas. 23 *)  \bar 
+   (* meas. 24 *)  \bar 
+   (* meas. 25 *)  \bar 
+   (* meas. 26 *)  \bar 
+   (* meas. 27 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 28 *)  \bar 
+   (* meas. 29 *)  \bar 
+   (* meas. 30 *)  \bar 
+   (* meas. 31 *)  \bar 
+   (* meas. 32 *)  \bar 
+   (* meas. 33 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 34 *)  \bar 
+   (* meas. 35 *)  \bar 
+   (* meas. 36 *)  \bar 
+   (* meas. 37 *)  \bar 
+   (* meas. 38 *)  \bar 
+   (* meas. 39 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 40 *)  \bar 
+   (* meas. 41 *)  \bar 
+   (* meas. 42 *)  \bar 
+   (* meas. 43 *)  \bar 
+   (* meas. 44 *)  \bar 
+   (* meas. 45 *)  \bar 
+   (* meas. 46 *)  \bar 
+   (* meas. 47 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 48 *)  \bar 
+   (* meas. 49 *)  \bar 
+   (* meas. 50 *)  \bar 
+   (* meas. 51 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 52 *)  \bar 
+   (* meas. 53 *)  \bar 
+   (* meas. 54 *)  \bar 
+   (* meas. 55 *)  \clef<"g2"> \key<0> _/1 \bar 
+   (* meas. 56 *)  _/1 \bar 
+   (* meas. 57 *)  \mark<"A", enclosure="square", fsize=10pt, dy=5hs> \intens<"f", dy=-0.2hs> \stemsDown \beamBegin:1 e3/16 \stemsDown d/16 \stemsDown c/16 \stemsDown \tieBegin:1 d/16 \beamEnd:1 \stemsDown \beamBegin:1 d/16 \tieEnd:1 \stemsDown e/16 \stemsDown f/16 \stemsDown d/16 \beamEnd:1 \stemsDown \beamsOff c/4 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 58 *)  \clef<"g2"> \key<0> \stemsDown \beamBegin:1 c/16 \stemsDown b2/16 \stemsDown a/16 \stemsDown b/16 \beamEnd:1 \stemsDown \beamBegin:1 d3/16 \stemsDown c/16 \stemsDown b2/16 \stemsDown d3/16 \beamEnd:1 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \bar 
+   (* meas. 59 *)  \stemsDown \beamBegin:1 g/8 \stemsDown a/8 \beamEnd:1 \stemsDown \beamBegin:1 g/16 \stemsDown f/16 \stemsDown c/16 \stemsDown d/16 \beamEnd:1 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \bar 
+   (* meas. 60 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff c/4 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 61 *)  \stemsDown \beamBegin:1 e/16 \stemsDown d/16 \stemsDown c/16 \stemsDown d/16 \beamEnd:1 \stemsDown \beamsOff d/4 \stemsDown \beamBegin:1 a/16 \stemsDown g/16 \stemsDown f/16 \stemsDown \acc( f#/16)
+ \beamEnd:1 \stemsDown \beamBegin:1 \acc( f/16)
+ \stemsDown e/16 \stemsDown \acc( d#/16)
+ \stemsDown \acc( d/16)
+ \beamEnd:1 \bar 
+   (* meas. 62 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff c/4 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 63 *)  \stemsDown \beamsOff c/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \bar 
+   (* meas. 64 *)  \clef<"g2"> \key<0> \stemsDown \beamsOff g/4 \stemsDown \beamsOff a/4 \stemsDown \beamsOff b/4 \stemsDown \beamsOff c4/4 \bar 
+   (* meas. 65 *)  _/1 \mark<"B", enclosure="square", fsize=10pt, dy=0.2hs> \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 68 *)  \bar 
+   (* meas. 69 *)  \bar 
+   (* meas. 70 *)  \bar 
+   (* meas. 71 *)  \bar 
+   (* meas. 72 *)  \bar 
+   (* meas. 73 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 74 *)  \bar 
+   (* meas. 75 *)  \bar 
+   (* meas. 76 *)  \bar 
+   (* meas. 77 *)  \bar 
+   (* meas. 78 *)  \bar 
+   (* meas. 79 *)  \bar 
+   (* meas. 80 *)  \bar 
+   (* meas. 81 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 82 *)  \bar 
+   (* meas. 83 *)  \bar 
+   (* meas. 84 *)  \bar 
+   (* meas. 85 *)  \bar 
+   (* meas. 86 *)  \bar 
+   (* meas. 87 *)  \clef<"g2"> \key<0> _/1 \bar 
+   (* meas. 88 *)  _/1 \bar 
+   (* meas. 89 *)  \mark<"C", enclosure="square", fsize=10pt, dy=3.4hs> \stemsDown \beamBegin:1 e3/16 \intens<"f", dy=-0.2hs> \stemsDown d/16 \stemsDown c/16 \stemsDown \tieBegin:1 d/16 \beamEnd:1 \stemsDown \beamBegin:1 d/16 \tieEnd:1 \stemsDown e/16 \stemsDown f/16 \stemsDown d/16 \beamEnd:1 \stemsDown \beamsOff c/4 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 90 *)  \clef<"g2"> \key<0> \stemsDown \beamBegin:1 c/16 \stemsDown b2/16 \stemsDown a/16 \stemsDown b/16 \beamEnd:1 \stemsDown \beamBegin:1 d3/16 \stemsDown c/16 \stemsDown b2/16 \stemsDown d3/16 \beamEnd:1 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \bar 
+   (* meas. 91 *)  \stemsDown \beamBegin:1 g/8 \stemsDown a/8 \beamEnd:1 \stemsDown \beamBegin:1 g/16 \stemsDown f/16 \stemsDown c/16 \stemsDown d/16 \beamEnd:1 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \bar 
+   (* meas. 92 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff c/4 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 93 *)  \stemsDown \beamBegin:1 e/16 \stemsDown d/16 \stemsDown c/16 \stemsDown d/16 \beamEnd:1 \stemsDown \beamsOff d/4 \stemsDown \beamBegin:1 a/16 \stemsDown g/16 \stemsDown f/16 \stemsDown \acc( f#/16)
+ \beamEnd:1 \stemsDown \beamBegin:1 \acc( f/16)
+ \stemsDown e/16 \stemsDown \acc( d#/16)
+ \stemsDown \acc( d/16)
+ \beamEnd:1 \bar 
+   (* meas. 94 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff c/4 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 95 *)  \stemsDown \beamsOff c/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \bar 
+   (* meas. 96 *)  \clef<"g2"> \key<0> \stemsDown \beamsOff g/4 \stemsDown \beamsOff a/4 \stemsDown \beamsOff b/4 \stemsDown \beamsOff c4/4 \bar 
+   (* meas. 97 *)  _/1 \mark<"D", enclosure="square", fsize=10pt, dy=0.6hs> \bar 
+   (* meas. 98 *)  _/1 \bar 
+   (* meas. 99 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 100 *)  \bar 
+   (* meas. 101 *)  \bar 
+   (* meas. 102 *)  \bar 
+   (* meas. 103 *)  \bar 
+   (* meas. 104 *)  \bar 
+   (* meas. 105 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 106 *)  \bar 
+   (* meas. 107 *)  \bar 
+   (* meas. 108 *)  \bar 
+   (* meas. 109 *)  \bar 
+   (* meas. 110 *)  \bar 
+   (* meas. 111 *)  \bar 
+   (* meas. 112 *)  \bar 
+   (* meas. 113 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 114 *)  \bar 
+   (* meas. 115 *)  \bar 
+   (* meas. 116 *)  \bar 
+   (* meas. 117 *)  \bar 
+   (* meas. 118 *)  \bar 
+   (* meas. 119 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 120 *)  \bar 
+   (* meas. 121 *)  \bar 
+   (* meas. 122 *)  \clef<"g2"> \key<0> \bar 
+   (* meas. 123 *)  \bar 
+   (* meas. 124 *)  \bar 
+   (* meas. 125 *)  \bar 
+   (* meas. 126 *)  \bar 
+   (* meas. 127 *)  \bar 
+   (* meas. 128 *)  ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Kontrafagott"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \intens<"ff", dy=-0.2hs> \stemsUp \beamsOff d-1/1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff f/1 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff a/1 \bar 
+   (* meas. 4 *)  \stemsUp \beamsOff g/1 \bar 
+   (* meas. 5 *)  \clef<"f4"> \key<0> \stemsUp \beamsOff e/1 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff a/1 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff b/1 \bar 
+   (* meas. 8 *)  \stemsUp \beamsOff e/1 \bar 
+   (* meas. 9 *)  \stemsUp \beamsOff d/1 \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff f/1 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff a/1 \bar 
+   (* meas. 12 *)  \stemsUp \beamsOff g/1 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff e/1 \bar 
+   (* meas. 14 *)  \stemsUp \beamsOff a/1 \bar 
+   (* meas. 15 *)  \stemsUp \beamsOff b/1 \bar 
+   (* meas. 16 *)  \stemsUp \beamsOff e/1 \bar 
+   (* meas. 17 *)  \clef<"f4"> \key<0> \stemsUp \beamsOff d/1 \bar 
+   (* meas. 18 *)  \stemsUp \beamsOff f/1 \bar 
+   (* meas. 19 *)  \stemsUp \beamsOff a/1 \bar 
+   (* meas. 20 *)  \stemsUp \beamsOff g/1 \bar 
+   (* meas. 21 *)  \stemsUp \beamsOff e/1 \bar 
+   (* meas. 22 *)  \stemsUp \beamsOff a/1 \bar 
+   (* meas. 23 *)  \stemsUp \beamsOff b/1 \bar 
+   (* meas. 24 *)  \stemsUp \beamsOff e/1 \bar 
+   (* meas. 25 *)  \bar 
+   (* meas. 26 *)  \bar 
+   (* meas. 27 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 28 *)  \bar 
+   (* meas. 29 *)  \bar 
+   (* meas. 30 *)  \bar 
+   (* meas. 31 *)  \bar 
+   (* meas. 32 *)  \bar 
+   (* meas. 33 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 34 *)  \bar 
+   (* meas. 35 *)  \bar 
+   (* meas. 36 *)  \bar 
+   (* meas. 37 *)  \bar 
+   (* meas. 38 *)  \bar 
+   (* meas. 39 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 40 *)  \bar 
+   (* meas. 41 *)  \bar 
+   (* meas. 42 *)  \bar 
+   (* meas. 43 *)  \bar 
+   (* meas. 44 *)  \bar 
+   (* meas. 45 *)  \bar 
+   (* meas. 46 *)  \bar 
+   (* meas. 47 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 48 *)  \bar 
+   (* meas. 49 *)  \bar 
+   (* meas. 50 *)  \bar 
+   (* meas. 51 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 52 *)  \bar 
+   (* meas. 53 *)  \bar 
+   (* meas. 54 *)  \bar 
+   (* meas. 55 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 56 *)  \bar 
+   (* meas. 57 *)  \bar 
+   (* meas. 58 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 59 *)  \bar 
+   (* meas. 60 *)  \bar 
+   (* meas. 61 *)  \bar 
+   (* meas. 62 *)  \bar 
+   (* meas. 63 *)  \bar 
+   (* meas. 64 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 65 *)  \bar 
+   (* meas. 66 *)  \bar 
+   (* meas. 67 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 68 *)  \bar 
+   (* meas. 69 *)  \bar 
+   (* meas. 70 *)  \bar 
+   (* meas. 71 *)  \bar 
+   (* meas. 72 *)  \bar 
+   (* meas. 73 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 74 *)  \bar 
+   (* meas. 75 *)  \bar 
+   (* meas. 76 *)  \bar 
+   (* meas. 77 *)  \bar 
+   (* meas. 78 *)  \bar 
+   (* meas. 79 *)  \bar 
+   (* meas. 80 *)  \bar 
+   (* meas. 81 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 82 *)  \bar 
+   (* meas. 83 *)  \bar 
+   (* meas. 84 *)  \bar 
+   (* meas. 85 *)  \bar 
+   (* meas. 86 *)  \bar 
+   (* meas. 87 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 88 *)  \bar 
+   (* meas. 89 *)  \bar 
+   (* meas. 90 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 91 *)  \bar 
+   (* meas. 92 *)  \bar 
+   (* meas. 93 *)  \bar 
+   (* meas. 94 *)  \bar 
+   (* meas. 95 *)  \bar 
+   (* meas. 96 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 97 *)  \bar 
+   (* meas. 98 *)  \bar 
+   (* meas. 99 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 100 *)  \bar 
+   (* meas. 101 *)  \bar 
+   (* meas. 102 *)  \bar 
+   (* meas. 103 *)  \bar 
+   (* meas. 104 *)  \bar 
+   (* meas. 105 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 106 *)  \bar 
+   (* meas. 107 *)  \bar 
+   (* meas. 108 *)  \bar 
+   (* meas. 109 *)  \bar 
+   (* meas. 110 *)  \bar 
+   (* meas. 111 *)  \bar 
+   (* meas. 112 *)  \bar 
+   (* meas. 113 *)  \clef<"f4"> \key<0> \bar 
+   (* meas. 114 *)  \bar 
+   (* meas. 115 *)  \bar 
+   (* meas. 116 *)  \bar 
+   (* meas. 117 *)  \bar 
+   (* meas. 118 *)  \bar 
+   (* meas. 119 *)  \clef<"f4"> \key<0> _/1 \bar 
+   (* meas. 120 *)  _/1 \bar 
+   (* meas. 121 *)  \mark<"A", enclosure="square", fsize=10pt, dy=1hs> \intens<"ff", dy=-7.8hs> \stemsUp \beamsOff d/1 \bar 
+   (* meas. 122 *)  \clef<"f4"> \key<0> \stemsUp \beamsOff f/1 \bar 
+   (* meas. 123 *)  \stemsUp \beamsOff a/1 \bar 
+   (* meas. 124 *)  \stemsUp \beamsOff g/1 \bar 
+   (* meas. 125 *)  \stemsUp \beamsOff e/1 \bar 
+   (* meas. 126 *)  \stemsUp \beamsOff a/1 \bar 
+   (* meas. 127 *)  \stemsUp \beamsOff b/1 \bar 
+   (* meas. 128 *)  \stemsUp \beamsOff e/1 ]
+  }

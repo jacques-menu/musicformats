@@ -1,0 +1,23 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/multistaff/NonContiguousVoiceNumbers.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Organ"> \accol<id=0, range="1-3"> \barFormat<style= "system", range="1-3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<5> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff g#/2. \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff g#/4 \stemsUp \beamsOff g#/4 \stemsUp \beamsOff a#/4 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff b/4 \stemsUp \beamsOff a#/4 \stemsUp \beamsOff a#/4 \stemsUp \beamsOff g#/4 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=13> \clef<"f4"> \key<5> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff b-1/2. \bar 
+   (* meas. 2 *)  \stemsUp \beamBegin:1 b/8 \stemsUp b/8 \stemsUp b/8 \beamEnd:1 \stemsUp \beamsOff c#0/4. _/4 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 d#/8 \stemsDown d#/8 \stemsDown d#/8 \beamEnd:1 \stemsDown \beamsOff e/4. _/4 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=13> \clef<"f4"> \key<5> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \noteFormat<dx=-24>( _/2.)
+ \bar 
+   (* meas. 2 *)  \noteFormat<dx=-2>( _/1)
+ \bar 
+   (* meas. 3 *)  \noteFormat<dx=-2>( _/1)
+ ]
+  }

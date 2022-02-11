@@ -1,0 +1,8 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/basic/UTFEncodedInput.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Flöte"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"Moderato mistico   MM 1/4=90",fsize=18pt,fattrib="b", dy=4.2hs> \tempo<"Nr. II      Ein Pilz im Wald, Flöte",fsize=18pt,fattrib="b", dy=10.6hs> _/1 ]
+  }

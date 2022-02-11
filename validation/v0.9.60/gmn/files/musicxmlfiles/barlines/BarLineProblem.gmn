@@ -1,0 +1,132 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/barlines/BarLineProblem.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"accel.", dy=4hs> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \key<-1> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 96", dy=2.4hs> \intens<"mf", dy=-0.2hs> \stemsDown \beamBegin:1 d2/8 \stemsDown d/8 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown d/16 \stemsDown \tieBegin:1 d/16 \beamEnd:1 \stemsDown \beamsOff d/4 \tieEnd:1 \stemsDown \beamBegin:1 e/8 \stemsDown f/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \slurBegin:1 \beamBegin:1 e/8 \stemsDown d/8 \slurEnd:1 \beamEnd:1 \stemsDown \beamsOff d/4. _/8 \stemsDown \beamBegin:1 d/8 \stemsDown d/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 d/8 \stemsDown c/8 \beamEnd:1 \stemsDown \beamBegin:1 c/8 \stemsDown c/16 \stemsDown \tieBegin:1 d/16 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \tieEnd:1 \stemsDown c/8 \stemsDown c/8 \stemsDown b&1/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \beamBegin:1 b&/8 \stemsUp a/16 \stemsUp \tieBegin:1 a/16 \beamEnd:1 \stemsUp \beamsOff a/4. \tieEnd:1 _/8 \stemsUp \beamBegin:1 a/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 5 *)  \stemsUp \beamBegin:1 b&/8 \stemsUp a/8 \beamEnd:1 \stemsUp \beamBegin:1 a/8 \stemsUp a/16 \stemsUp \tieBegin:1 a/16 \beamEnd:1 \stemsUp \beamsOff a/4 \tieEnd:1 \stemsUp \beamBegin:1 a/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsUp \slurBegin:1 \beamBegin:1 a/8 \stemsUp g/8 \slurEnd:1 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp g/16 \stemsUp \tieBegin:1 g/16 \beamEnd:1 \stemsUp \beamsOff g/4 \tieEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown b&/8 \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff a/2 _/8 \crescBegin<deltaY=2.2hs, dy=-0.2hs> \stemsUp \beamsOff \ten( a/8)
+ \crescEnd<dy=-0.2hs> \stemsUp \beamBegin:1 \ten( a/8)
+ \stemsUp \stacc( a/8)
+ \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamBegin:1 \acc( c#2/8)
+ \stemsDown c#/8 \stemsDown d/8 \stemsDown \tieBegin:1 e/8 \beamEnd:1 \stemsDown \beamBegin:1 \stacc( e/8 \tieEnd:1)
+ \intens<"f", dy=-2.4hs> \stemsDown \ten( c#/8)
+ \stemsDown \ten( c#/8)
+ \stemsDown \ten( c#/8)
+ \beamEnd:1 
+   (* meas. 9 *)  \repeatBegin \tempo<"[1/4] = 124", dy=2.4hs> \stemsDown \beamsOff d/2 _/8 \stemsDown \beamsOff d/8 \stemsDown \beamBegin:1 \stacc( d/8)
+ \stemsDown \ten( d/16)
+ \stemsDown \tieBegin:1 d/16 \beamEnd:1 \bar 
+   (* meas. 10 *)  \stemsDown \beamsOff d/2 \tieEnd:1 _/8 \stemsDown \beamsOff \ten( d/8)
+ \stemsDown \beamBegin:1 \ten( d/8)
+ \stemsDown \ten( d/8)
+ \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsDown \slurBegin:1 \beamBegin:1 d/8 \stemsDown \stacc( c/8)
+ \slurEnd:1 \beamEnd:1 \stemsDown \beamBegin:1 \stacc( c/8)
+ \stemsDown \ten( c/16)
+ \stemsDown \tieBegin:1 d/16 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \tieEnd:1 \stemsDown c/8 \stemsDown c/8 \stemsDown c/8 \beamEnd:1 \bar 
+   (* meas. 12 *)  \stemsDown \slurBegin:1 \beamBegin:1 d/8 \stemsDown \stacc( c/8)
+ \slurEnd:1 \beamEnd:1 \stemsDown \beamBegin:1 \stacc( c/8)
+ \stemsDown \ten( c/16)
+ \stemsDown \tieBegin:1 c/16 \beamEnd:1 \stemsDown \beamsOff c/8 \tieEnd:1 _/8 \stemsUp \beamBegin:1 \ten( a1/8)
+ \stemsUp \ten( a/8)
+ \beamEnd:1 \bar 
+   (* meas. 13 *)  \stemsUp \beamBegin:1 b&/8 \stemsUp \slurBegin:1 \stacc( a/8)
+ \beamEnd:1 \stemsUp \beamBegin:1 \stacc( a/8)
+ \slurEnd:1 \stemsUp \ten( a/16)
+ \stemsUp \tieBegin:1 a/16 \beamEnd:1 \stemsUp \beamsOff a/4 \tieEnd:1 \stemsUp \beamBegin:1 \ten( a/8)
+ \stemsUp \ten( a/8)
+ \beamEnd:1 \bar 
+   (* meas. 14 *)  \stemsUp \beamBegin:1 a/8 \stemsUp \slurBegin:1 \stacc( g/8)
+ \beamEnd:1 \stemsUp \beamBegin:1 \stacc( g/8)
+ \slurEnd:1 \stemsUp \ten( g/16)
+ \stemsUp \tieBegin:1 g/16 \beamEnd:1 \stemsUp \beamsOff g/4 \tieEnd:1 \stemsDown \beamBegin:1 \ten( b&/8)
+ \stemsDown \ten( b&/8)
+ \beamEnd:1 \bar 
+   (* meas. 15 *)  \stemsUp \beamsOff a/2 _/8 \stemsUp \beamsOff \ten( a/8)
+ \stemsUp \beamBegin:1 \ten( a/8)
+ \stemsUp \ten( a/8)
+ \beamEnd:1 \bar 
+   (* meas. 16 *)  \stemsDown \beamBegin:1 \acc( c#2/8)
+ \stemsDown \ten( c#/8)
+ \stemsDown \ten( d/8)
+ \stemsDown \tieBegin:1 e/8 \beamEnd:1 \stemsDown \beamsOff e/8 \tieEnd:1 _/8 \stemsDown \beamBegin:1 \ten( c#/8)
+ \stemsDown \ten( c#/8)
+ \beamEnd:1 \repeatEnd \bar<hidden="true"> 
+   (* meas. 17 *)  \stemsDown \beamsOff d/2 _/8 \stemsDown \beamsOff \ten( d/8)
+ \stemsDown \beamBegin:1 \stacc( e/8)
+ \stemsDown \slurBegin:1 f/16 \stemsDown \tieBegin:1 e/16 \beamEnd:1 \bar 
+   (* meas. 18 *)  \stemsDown \beamBegin:1 e/8 \tieEnd:1 \stemsDown \tieBegin:1 d/8 \beamEnd:1 \stemsDown \beamsOff d/4. \tieEnd:1 \slurEnd:1 _/8 \stemsDown \beamBegin:1 \ten( d/8)
+ \stemsDown \ten( d/8)
+ \beamEnd:1 \bar 
+   (* meas. 19 *)  \stemsDown \slurBegin:1 \beamBegin:1 d/8 \stemsDown \stacc( c/8)
+ \slurEnd:1 \beamEnd:1 \stemsDown \beamBegin:1 \stacc( c/8)
+ \stemsDown \slurBegin:1 \ten( c/16)
+ \stemsDown \tieBegin:1 d/16 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \tieEnd:1 \stemsDown c/8 \slurEnd:1 \beamEnd:1 \stemsDown \beamBegin:1 c/8 \stemsDown c/16 \stemsDown \slurBegin:1 \tieBegin:1 d/16 \beamEnd:1 \bar 
+   (* meas. 20 *)  \stemsDown \beamBegin:1 d/8 \tieEnd:1 \stemsDown \stacc( c/8)
+ \slurEnd:1 \beamEnd:1 \stemsDown \beamBegin:1 \stacc( c/8)
+ \stemsDown c/16 \stemsDown \tieBegin:1 d/16 \beamEnd:1 \stemsDown \beamsOff d/8 \tieEnd:1 _/8 \stemsUp \beamBegin:1 \ten( a1/8)
+ \stemsUp \ten( a/8)
+ \beamEnd:1 \bar 
+   (* meas. 21 *)  \stemsUp \beamBegin:1 \ten( a/8)
+ \stemsUp \stacc( a/8)
+ \beamEnd:1 \stemsUp \beamBegin:1 \stacc( a/8)
+ \stemsUp a/16 \stemsUp \tieBegin:1 a/16 \beamEnd:1 \stemsUp \beamsOff a/4 \tieEnd:1 \stemsUp \beamBegin:1 \ten( a/8)
+ \stemsUp \ten( a/8)
+ \beamEnd:1 \bar 
+   (* meas. 22 *)  \stemsUp \beamBegin:1 \ten( a/8)
+ \stemsUp \stacc( a/8)
+ \beamEnd:1 \stemsUp \beamBegin:1 b&/8 \stemsUp a/16 \stemsUp \tieBegin:1 a/16 \beamEnd:1 \stemsUp \beamsOff a/8 \tieEnd:1 _/8 \stemsUp \beamBegin:1 \stacc( a/8)
+ \stemsUp a/16 \stemsUp \tieBegin:1 a/16 \beamEnd:1 \bar 
+   (* meas. 23 *)  \stemsUp \beamsOff a/2 \tieEnd:1 _/8 \stemsDown \beamsOff \stacc( d2/8)
+ \stemsDown \beamBegin:1 \stacc( d/8)
+ \stemsDown \slurBegin:1 d/16 \stemsDown \tieBegin:1 \acc( c#/16)
+ \beamEnd:1 \bar 
+   (* meas. 24 *)  \stemsDown \beamsOff c#/2. \tieEnd:1 \slurEnd:1 \stemsDown \slurBegin:1 \beamsOff \acc( c#/4)
+ \doubleBar 
+   (* meas. 25 *)  \stemsUp \beamsOff d/1 \slurEnd:1 \bar 
+   (* meas. 26 *)  _/1 \bar 
+   (* meas. 27 *)  \crescBegin<deltaY=2.2hs, dy=-3.6hs> \intens<"p", dy=-6hs> \stemsUp \slurBegin:1 \beamBegin:1 \stacc( a/8)
+ \crescEnd<dy=-3.6hs> \stemsUp \slurBegin:2 g/16 \stemsUp a/16 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \slurEnd:2 \stemsUp \slurBegin:2 f/16 \stemsUp g/16 \beamEnd:1 \stemsUp \beamBegin:1 f/8 \slurEnd:2 \stemsUp \slurBegin:2 e/16 \stemsUp f/16 \beamEnd:1 \stemsUp \beamBegin:1 e/8 \slurEnd:2 \stemsUp \slurBegin:2 d/16 \stemsUp e/16 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 28 *)  \intens<"f", dy=-6hs> \stemsUp \beamsOff d/2 \slurEnd:2 \stemsUp \beamsOff \ten( a/4)
+ \stemsDown \beamsOff \ten( b&/4)
+ \bar 
+   (* meas. 29 *)  \crescBegin<deltaY=2.2hs, dy=-4.8hs> \stemsUp \slurBegin:1 \beamBegin:1 b&/8 \crescEnd<dy=-4.8hs> \stemsUp a/8 \stemsUp g/8 \stemsUp f/8 \beamEnd:1 \stemsUp \beamBegin:1 e/8 \stemsUp d/8 \stemsUp c/8 \stemsUp b&1/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 30 *)  \stemsUp \beamsOff a/2. \stemsUp \beamBegin:1 a2/16 \stemsUp \slurBegin:1 b&/16 \stemsUp a/16 \stemsUp g/16 \beamEnd:1 \bar 
+   (* meas. 31 *)  \stemsUp \beamsOff a/1 \slurEnd:1 
+   (* meas. 32 *)  \repeatBegin \intens<"ff", dy=-2.4hs> \stemsUp \beamsOff \ten( a/4.)
+ \stemsUp \beamsOff \ten( g/8)
+ \stemsUp \beamsOff \ten( f/4)
+ \stemsDown \beamsOff \ten( d3/4)
+ \bar 
+   (* meas. 33 *)  \stemsDown \beamsOff \ten( b&2/4.)
+ \stemsUp \slurBegin:1 \beamsOff a/8 \stemsUp \beamBegin:1 b&/8 \stemsUp a/8 \stemsUp g/8 \stemsUp f/8 \beamEnd:1 \bar 
+   (* meas. 34 *)  \stemsUp \beamsOff \ten( e/4.)
+ \slurEnd:1 \stemsUp \beamsOff \ten( d/8)
+ \stemsUp \beamsOff \ten( c/4)
+ \stemsDown \beamsOff \ten( c3/4)
+ \bar 
+   (* meas. 35 *)  \stemsUp \beamsOff \ten( a2/4.)
+ \stemsUp \slurBegin:1 \beamsOff g/8 \stemsUp \beamBegin:1 a/8 \stemsUp g/8 \stemsUp f/8 \stemsUp e/8 \beamEnd:1 \bar 
+   (* meas. 36 *)  \stemsUp \beamsOff d/2 \slurEnd:1 \stemsUp \slurBegin:1 \beamsOff a/4 \stemsDown \beamsOff b&/4 \slurEnd:1 \bar 
+   (* meas. 37 *)  \stemsUp \slurBegin:1 \beamBegin:1 b&/8 \stemsUp a/8 \stemsUp g/8 \stemsUp f/8 \beamEnd:1 \stemsUp \beamBegin:1 e/8 \stemsUp d/8 \stemsUp c/8 \stemsUp b&1/8 \beamEnd:1 \bar 
+   (* meas. 38 *)  \volta<"1", "1.">( \stemsUp \beamsOff a/2. \slurEnd:1 \stemsUp \beamBegin:1 a2/16 \stemsUp \slurBegin:1 b&/16 \stemsUp a/16 \stemsUp g/16 \beamEnd:1 \bar 
+   (* meas. 39 *)  \stemsUp \beamsOff a/1 \slurEnd:1)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 40 *)  \volta<"2", "2.">( \stemsUp \beamsOff a1/2 \stemsUp \beamsOff \accent( a2/2)
+ \bar 
+   (* meas. 41 *)  \stemsDown \beamsOff \accent( d3/4)
+ _/8 \stemsDown \beamsOff \accent( d/8)
+ _/8 \stemsDown \beamsOff \accent( d/8)
+ _/8 \stemsDown \slurBegin:1 \beamsOff \accent( c/8)
+ \bar 
+   (* meas. 42 *)  \stemsDown \beamsOff \accent( d/8)
+ \slurEnd:1 _/8 _/4 _/2)
+ ]
+  }

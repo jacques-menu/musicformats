@@ -1,0 +1,156 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Documentation}
+% -------------------------------------------------------------------------
+
+The \mf\ documentation is written in \LaTeX\ and contains:
+\begin{itemize}
+\item \doc{MusicFormatsLaTeXSettings.tex}: a set of commands and settings used by all the documentation \LaTeX\ files;
+\item \doc{introductionToMusicxml/}: a presentation done by this author at the 'MUSIC ENGRAVING IN THE 21ST CENTURY -- DEVELOPMENTS AND PERSPECTIVES' conference at Mozarteum in Salzburg in January 2020 (https://www.uni-mozarteum.at/en/kunst/music-engraving-conference.php);
+\item \doc{presentation/}: Dom Fober's original documentation describing \libmusicxml;
+\item \doc{MusicFormatsArchitecture.tex}: the image describing the architecture of \mf, used in other documents;
+\item \doc{MusicFormatsCLIUserGuide/}: the user's guide;
+\item \doc{maintainersGuideToMusicFormats/}: this maintiainer's guide.
+\end{itemize}
+
+The pictures are created with the \tikzpgf\ package, see \url{https://www.bu.edu/math/files/2013/08/tikzpgfmanual.pdf}.
+
+\LaTeX\ may need to be run three times when the chapter/section/subsection hierarchy is modified. Check that the last page number, at the bottom of any page, is not less than the one before.
+
+The file \common{MusicFormatsVersionNumber.txt} is used by the \LaTeX\ source files to show the version number. It should be updated when a new version of \mf\ is created.
+
+
+% -------------------------------------------------------------------------
+\section{\LaTeX\ macros}
+% -------------------------------------------------------------------------
+
+The \mf\ documentation uses a number of macros both to simplify formatting of frequent texts and to feed the many indexes at the end. All of them are grouped in \doc{MusicFormatsLaTeXSettings.tex}.
+
+For example:
+\begin{lstlisting}[language=Latex]
+\newcommand{\CLI}{command line\index[Main]{command line}}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Latex]
+\newcommand{\musicXmlMarkup}[1]{%
+{\tt <#1/>}\index[Main]{{\tt $<$#1 /$>$}}\index[MusicXML]{{\tt #1 $<$/$>$}}%
+}
+\newcommand{\musicXmlAttribute}[1]{%
+{\tt "#1"}\index[Main]{{\tt $<$#1 /$>$}}\index[MusicXML]{{\tt #1 ""}}%
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Latex]
+\newcommand{\Main}[1]{%
+#1\index[Main]{#1}%
+}
+\newcommand{\MainName}[1]{%
+\index[Main]{#1}%
+}
+
+\newcommand{\code}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}%
+}
+\end{lstlisting}
+
+Some command exist in two forms, differing in the capitalization of the first character:
+\begin{lstlisting}[language=Latex]
+\newcommand{\enumType}{enumeration type\index[Main]{enumeration type}}
+\newcommand{\EnumType}{Enumeration type\index[Main]{enumeration type}}
+\end{lstlisting}
+
+Some command names are of the form \code{*Both*}:
+\begin{lstlisting}[language=Latex]
+\newcommand{\fileName}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+\newcommand{\fileNameBoth}[1]{%
+{\textcolor{brown}{\tt *#1.h/.cpp}}\index[Main]{#1.h/.cpp@{{tt *#1.h/.cpp}}}\index[Files]{#1.h/.cpp@{{tt *#1.h/.cpp}}}%
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Latex]
+\newcommand{\msrToMsr}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2msr/#1}}%
+}
+\newcommand{\msrToMsrBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2msr/#1.h/.cpp}}%
+}
+\end{lstlisting}
+
+Some command names are of the form \code{star*}:
+\begin{lstlisting}[language=Latex]
+\newcommand{\methodName}[1]{%
+{\tt #1~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+\newcommand{\starMethodName}[1]{%
+{\tt *#1~()}\index[Main]{#1~()@{\tt *#1}}\index[MethodsAndFields]{*#1~()@{\tt *#1~()}}%
+}
+\end{lstlisting}
+
+Some commands have a variant of the form \code{*Name*} to produce only their arguments, with no additional text:\begin{lstlisting}[language=Latex]
+\newcommand{\file}[1]{%
+file {\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+\newcommand{\File}[1]{%
+File {\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+
+\newcommand{\fileName}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+\newcommand{\fileNameBoth}[1]{%
+{\textcolor{brown}{\tt *#1.h/.cpp}}\index[Main]{#1.h/.cpp@{{tt *#1.h/.cpp}}}\index[Files]{#1.h/.cpp@{{tt *#1.h/.cpp}}}%
+}
+\end{lstlisting}
+
+Some commands are in the form \code{*Repr} : the designate the name of a representation, such as:
+\begin{lstlisting}[language=Latex]
+\newcommand{\msrRepr}{MSR\index[Main]{MSR}}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{About this document}
+% -------------------------------------------------------------------------
+
+This document provides cross views of the information needed for \mf\ maintainance. It is organized in a number of parts:
+\begin{itemize}
+\item the first part provides an overview of the library, together with the concepts is uses;
+\item then the two-phase visitors pattern, which is central to \mf, is presented;
+\item the third part is dedicated to the programming style and conventions used throughout the code base;
+\item the OAH (Options and help), a pervasive feature in \mf, is detailed;
+\item the fifth part details the formats provided by the library;
+\item the following parts are dedicated to passes, generators and converters, respectively;
+\item the ninth part presents the interfaces to the formats, passes and converters;
+\item the tenth part provides a longitudinal view of the handling of selected music score contents elements, grouped by such elements such as staves, tuplets and harmonies;
+\item and finally, the last part is dedicated to the implementation of the MSDL language.
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{The MusicFormats architecture}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Command line user's guide}
+% -------------------------------------------------------------------------
+
+\doc{MusicFormatsCLIUserGuide/MusicFormatsCLIUserGuide.pdf} is the usual user guide. It presents the \CLI\ use of \mf.
+
+
+% -------------------------------------------------------------------------
+\section{API user's guide}
+% -------------------------------------------------------------------------
+
+\doc{MusicFormatsAPIUserGuide/MusicFormatsAPIUserGuide.pdf} presents the use of \mf\ through the \API s. The latter are used internally by the \CLI\ tools, and can be used from applications at will, such as in a \Web\ site.
+
+
+% -------------------------------------------------------------------------
+\section{Maintainance guide}
+% -------------------------------------------------------------------------
+
+\doc{MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf} describes the internals of \mf\ from a maintainer's point of view. It contains a detailed presentation of the various types used, and a part dedicated to selected topics: this is to have a longitudinal view of how various music elements are handled in the various passes.
+

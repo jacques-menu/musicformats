@@ -1,0 +1,11 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/gracenotes/GraceNotesInTuplet.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"Franz Schubert", dy=4hs> \auto<autoInstrPos="on"> \instr<"Voice"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-2> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \slurBegin:1<curve="up"> \beamsOff \tieBegin:1 c2/4 \stemsUp \beamBegin:1 \tuplet<"6", position="above">( c/24 \tieEnd:1 \stemsUp g1/24 \stemsUp a/24 \stemsUp \acc( b&/24)
+ \stemsDown \grace( \beamBegin:2 c2/16 \stemsDown b&1/16 \beamEnd:2)
+ \stemsUp a/24 \stemsUp g/24)
+ \slurEnd:1 \beamEnd:1 \stemsUp \beamsOff f/4 _/8 \stemsUp \beamsOff f/8 ]
+  }

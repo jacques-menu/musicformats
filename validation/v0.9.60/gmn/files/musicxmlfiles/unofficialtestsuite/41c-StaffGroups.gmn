@@ -1,0 +1,95 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/41c-StaffGroups.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Piccolo"> \accol<id=1,  range="1-12"> \barFormat<style= "system",  range="1-12"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff b/4 _/4 _/2 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Flute 1"> \accol<id=1,  range="2-3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff f/4 _/4 _/2 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Flute 2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff a/4 _/4 _/2 ]
+ , 
+[ \staff<4> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Oboe"> \accol<id=1,  range="4-6"> \barFormat<style= "system",  range="4-6"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff e2/4 _/4 _/2 ]
+ , 
+[ \staff<5> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"English Horn"> \barFormat<style= "system",  range="5-6"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<1> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c2/4 _/4 _/2 ]
+ , 
+[ \staff<6> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Clarinet in Eb"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<3> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff b/4 _/4 _/2 ]
+ , 
+[ \staff<7> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Clarinet in Bb 1"> \accol<id=1,  range="7-8"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff f#/4 _/4 _/2 ]
+ , 
+[ \staff<8> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Clarinet in Bb 2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c#2/4 _/4 _/2 ]
+ , 
+[ \staff<9> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Bass Clarinet"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff b/4 _/4 _/2 ]
+ , 
+[ \staff<10> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Bassoon 1"> \accol<id=1,  range="10-11"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff d0/4 _/4 _/2 ]
+ , 
+[ \staff<11> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Bassoon 2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff e0/4 _/4 _/2 ]
+ , 
+[ \staff<12> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Contrabassoon"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff b-1/4 _/4 _/2 ]
+ , 
+[ \staff<13> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Horn in F 1"> \accol<id=1,  range="13-14"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<1> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff e2/4 _/4 _/2 ]
+ , 
+[ \staff<14> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Horn in F 2"> \accol<id=1,  range="14-20"> \barFormat<style= "system",  range="14-20"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<1> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff g/4 _/4 _/2 ]
+ , 
+[ \staff<15> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Trumpet in C 1"> \accol<id=1,  range="15-16"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff f/4 _/4 _/2 ]
+ , 
+[ \staff<16> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Trumpet in C 2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff a/4 _/4 _/2 ]
+ , 
+[ \staff<17> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Trombone 1"> \accol<id=1,  range="17-18"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff b-1/4 _/4 _/2 ]
+ , 
+[ \staff<18> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Trombone 2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff e0/4 _/4 _/2 ]
+ , 
+[ \staff<19> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Tuba"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff e0/4 _/4 _/2 ]
+ , 
+[ \staff<20> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Timpani"> \barFormat<style= "system", range="20"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff f0/4 _/4 _/2 ]
+ , 
+[ \staff<21> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Percussion"> \barFormat<style= "system", range="21"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"perc"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff e2/4 _/4 _/2 ]
+ , 
+[ \staff<22> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Harp"> \accol<id=0, range="22-23"> \barFormat<style= "system", range="22-23"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff d2/4 _/4 _/2 ]
+ , 
+[ \staff<23> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="23"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff a-1/4 _/4 _/2 ]
+ , 
+[ \staff<24> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Piano"> \accol<id=23, range="24-25"> \barFormat<style= "system", range="24-25"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff g/4 _/4 _/2 ]
+ , 
+[ \staff<25> \set<autoHideTiedAccidentals="on"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff e0/4 _/4 _/2 ]
+ , 
+[ \staff<26> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Violin I"> \accol<id=1,  range="26-30"> \barFormat<style= "system",  range="26-30"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff e2/4 _/4 _/2 ]
+ , 
+[ \staff<27> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Violin II"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff f/4 _/4 _/2 ]
+ , 
+[ \staff<28> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Viola"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"c3"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/4 _/4 _/2 ]
+ , 
+[ \staff<29> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Cello"> \barFormat<style= "system", range="29"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c0/4 _/4 _/2 ]
+ , 
+[ \staff<30> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Contrabass"> \barFormat<style= "system", range="30"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c0/4 _/4 _/2 ]
+  }

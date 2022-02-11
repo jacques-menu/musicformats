@@ -1,0 +1,20 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/voices/VoicesNotInIncreasingNumber.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Part 1"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \key<-3> \meter<"6/8", autoBarlines="off", autoMeasuresNum="system"> _/8.. \stemsUp \beamBegin:1 \beamBegin:2 c2/16 \stemsUp c/16 \beamEnd:2 \beamBegin:2 \stemsUp c/16 \stemsUp c/16 \stemsUp c/16 \beamEnd:1 \beamEnd:2 ]
+ , 
+[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \stemsUp \beamBegin:1 c2/8 \stemsUp c/8 \stemsUp g1/8 \beamEnd:1 _/4. ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Part 2"> \accol<id=0, range="2-3"> \barFormat<style= "system", range="2-3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \intens<"mf", dy=0hs> \clef<"g2"> \key<-3> \meter<"6/8", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamBegin:1 c2/8 \stemsUp {e&1/8, g/8, c2/8  } \stemsUp {e&1/8, g/8  } \beamEnd:1 \stemsUp \beamsOff {e&2/4., g/4., c3/4.  } ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  _/4. \stemsDown \beamsOff c2/8 \stemsDown \beamsOff c/4 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-3> \meter<"6/8", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff c0/4 \stemsUp \beamsOff \tieBegin:1<curve="down"> c/8 \stemsUp \beamsOff c/4 \tieEnd:1 \stemsDown \beamsOff g/8 ]
+  }

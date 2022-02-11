@@ -1,0 +1,887 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Figured bass elements handling}\label{Figured bass elements handling}
+% -------------------------------------------------------------------------
+
+Figured bass elements are presented at \sectionRef{Figured bass elements}.
+
+The useful options here are:
+\begin{itemize}
+\item \optionBoth{trace-figured-bass}{tfigbass}
+\item \optionBoth{display-msr-skeleton}{dmsrskel}
+\item \optionBoth{display-msr-1}{dmsr1}
+\item \optionBoth{display-msr-1-short}{dmsr1s} and \optionBoth{display-msr-1-details}{dmsr1d}
+\item \optionBoth{display-msr-2}{dmsr2}
+\item \optionBoth{display-msr-2-short}{dmsr2s} and \optionBoth{display-msr-2-details}{dmsr2d}
+\end{itemize}
+
+Figured bass elements need special treatment since we need to determine their position in a figured bass voice. This is different than \mxml, where they are simply \drawn\ at the current music position, so to say.
+
+They are handled this way:
+\begin{itemize}
+\item figured bass elements are stored in \class{msrNote}:
+\item they are also stored in \class{msrPart} and \class{msrChord} and \class{msrTuplet} (\denorm);
+\end{itemize}
+
+In \class{msrNote}, there is:
+\begin{lstlisting}[language=CPlusPlus]
+    // figured bass
+    void                  appendFiguredBassToNoteFiguredBassElementsList (
+                            S_msrFiguredBassElement figuredBass);
+
+    const list<S_msrFiguredBassElement>&
+                          getNoteFiguredBassElementsList () const
+                              { return fNoteFiguredBassElementsList; }
+
+		// ... ... ...
+
+    // figured bass
+    // ------------------------------------------------------
+
+    list<S_msrFiguredBassElement>
+                          fNoteFiguredBassElementsList;
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Figured bass staves and voices}
+% -------------------------------------------------------------------------
+
+Every \class{msrVoice} instance in \mf\ belongs to an \class{msrStaff} instance. Staves are created specifically to hold figured bass voices, using specific numbers defined in \msr{msrParts.h}:
+\begin{lstlisting}[language=CPlusPlus]
+  public:
+
+    // constants
+    // ------------------------------------------------------
+
+		// ... ... ...
+
+    #define msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER  20
+    #define msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER  21
+\end{lstlisting}
+
+In \class{msrStaff}, there is:
+\begin{lstlisting}[language=CPlusPlus]
+     void                  registerFiguredBassVoiceByItsNumber (
+                            int        inputLineNumber,
+                            S_msrVoice voice);
+\end{lstlisting}
+
+\Class{msrPart} also contains:
+\begin{lstlisting}[language=CPlusPlus]
+    // figured bass
+
+    S_msrVoice            createPartFiguredBassVoice (
+                            int    inputLineNumber,
+                            string currentMeasureNumber);
+
+    void                  appendFiguredBassToPart (
+                            S_msrVoice             figuredBassSupplierVoice,
+                           S_msrFiguredBassElement figuredBass);
+
+    void                  appendFiguredBassToPartClone (
+                            S_msrVoice              figuredBassSupplierVoice,
+                            S_msrFiguredBassElement figuredBass);
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+    // figured bass
+
+    S_msrStaff            fPartFiguredBassStaff;
+    S_msrVoice            fPartFiguredBassVoice;
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Figured bass staves creation}
+% -------------------------------------------------------------------------
+
+This is done in \mxsrToMsrBoth{mxsr2msrSkeletonBuilder.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
+  int        inputLineNumber,
+  S_msrPart  part)
+{
+  // is the figured bass voice already present in part?
+  S_msrVoice
+    partFiguredBassVoice =
+      part->
+        getPartFiguredBassVoice ();
+
+  if (! partFiguredBassVoice) {
+    // create the figured bass voice and append it to the part
+    partFiguredBassVoice =
+      part->
+        createPartFiguredBassVoice (
+          inputLineNumber,
+          fCurrentMeasureNumber);
+  }
+
+  return partFiguredBassVoice;
+}
+\end{lstlisting}
+
+\Method{msrPart}{createPartFiguredBassVoice} creates the part figured bass staff and the part figured bass voice, and then registers the latter in the former:
+\begin{lstlisting}[language=CPlusPlus]
+S_msrVoice msrPart::createPartFiguredBassVoice (
+  int    inputLineNumber,
+  string currentMeasureNumber)
+{
+	// ... ... ...
+
+  // create the part figured bass staff
+  int partFiguredBassStaffNumber =
+    msrPart::K_PART_FIGURED_BASS_STAFF_NUMBER;
+
+	// ... ... ...
+
+  fPartFiguredBassStaff =
+    addHFiguredBassStaffToPart (
+      inputLineNumber);
+
+	// ... ... ...
+
+  // create the figured bass voice
+  int partFiguredBassVoiceNumber =
+    msrPart::K_PART_FIGURED_BASS_VOICE_NUMBER;
+
+	// ... ... ...
+
+  fPartFiguredBassVoice =
+    msrVoice::create (
+      inputLineNumber,
+      msrVoiceKind::kVoiceKindFiguredBass,
+      partFiguredBassVoiceNumber,
+      msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
+      fPartFiguredBassStaff);
+
+  // register the figured bass voice in the part figured bass staff
+  fPartFiguredBassStaff->
+    registerVoiceInStaff (
+      inputLineNumber,
+      fPartFiguredBassVoice);
+
+	// ... ... ...
+
+  return fPartFiguredBassVoice;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Figured bass elements creation}
+% -------------------------------------------------------------------------
+
+There several methods for Figured bass elements creation:%%%JMI
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > grep create formats/msr/msrFiguredBassElements.h
+    static SMARTP<msrBassFigure> create (
+    SMARTP<msrBassFigure> createFigureNewbornClone (
+//     SMARTP<msrBassFigure> createFigureDeepClone ( // JMI ???
+    static SMARTP<msrFiguredBassElement> create (
+    static SMARTP<msrFiguredBassElement> create (
+    SMARTP<msrFiguredBassElement> createFiguredBassElementNewbornClone (
+//     SMARTP<msrFiguredBassElement> createFiguredBassElementDeepClone ();
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Translating figured bass elements from MXSR to MSR}
+% -------------------------------------------------------------------------
+
+This is done in \mxsrToMsr{}, and this is where the \class{msrFiguredBassElement} instances are created.
+
+The MSR score skeleton created in \mxsrToMsrBoth{mxsr2msrSkeletonBuilder} contains the part groups, parts, staves and voices, as well as the number of measures. The voices do not contain any music elements yet.
+
+A figured bass element belongs to \musicXmlMarkup{part} in \mxml, but we sometimes need to have it attached to a note.\\
+Field{mxsr2msrSkeletonBuilder}{fThereAreFiguredBassToBeAttachedToCurrentNote} it used when visiting an \smartPointerType{S_FiguredBassElement} element to account for that:%%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_figured_bass" <<
+      ", figuredBassVoicesCounter = " << fFiguredBassVoicesCounter <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  /* JMI
+    several figured bass elements can be attached to a given note,
+    leading to as many figured bass voices in the current part JMI TRUE???
+  */
+
+  // take figured bass voice into account
+  ++fFiguredBassVoicesCounter;
+
+  fThereAreFiguredBassToBeAttachedToCurrentNote = true;
+}
+\end{lstlisting}
+
+Upon the second visit of \class{msrNote}, the part figured bass voice is created if figured bass elements are not to be ignored due to option \optionBoth{ignore-figured-bass}{ofigbass} and it has not been created yet:
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
+{
+	// ... ... ...
+
+  // are there figured bass attached to the current note?
+  if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
+    if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBassElements ()) {
+#ifdef TRACING_IS_ENABLED
+      if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+        gLogStream <<
+          "Ignoring the figured bass elements" <<
+          ", line " <<
+          inputLineNumber <<
+          endl;
+      }
+#endif
+    }
+    else {
+      // create the part figured bass voice if not yet done
+      S_msrVoice
+        partFiguredBassVoice =
+          createPartFiguredBassVoiceIfNotYetDone (
+            inputLineNumber,
+            fCurrentPart);
+    }
+
+    fThereAreFiguredBassToBeAttachedToCurrentNote = false;
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+Creating the part figured bass voice is delegated to the part:
+\begin{lstlisting}[language=CPlusPlus]
+S_msrVoice mxsr2msrSkeletonBuilder::createPartFiguredBassVoiceIfNotYetDone (
+  int        inputLineNumber,
+  S_msrPart  part)
+{
+  // is the figured bass voice already present in part?
+  S_msrVoice
+    partFiguredBassVoice =
+      part->
+        getPartFiguredBassVoice ();
+
+  if (! partFiguredBassVoice) {
+    // create the figured bass voice and append it to the part
+    partFiguredBassVoice =
+      part->
+        createPartFiguredBassVoice (
+          inputLineNumber,
+          fCurrentMeasureNumber);
+  }
+
+  return partFiguredBassVoice;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{First {\tt S_figured_bass} visit}\smartPointerTypeIndex{S_figured_bass}
+% -------------------------------------------------------------------------
+
+The first visit of \smartPointerType{S_figured_bass} initializes the fields storing values to be gathered visiting subelements:
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
+{
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_figured_bass" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+  ++fFiguredBassVoicesCounter;
+
+  string parentheses = elt->getAttributeValue ("parentheses");
+
+  fCurrentFiguredBassParenthesesKind =
+    msrFiguredBassElement::kFiguredBassElementParenthesesNo; // default value
+
+  if (parentheses.size ()) {
+    if (parentheses == "yes")
+      fCurrentFiguredBassParenthesesKind =
+        msrFiguredBassElement::kFiguredBassElementParenthesesYes;
+
+    else if (parentheses == "no")
+     fCurrentFiguredBassParenthesesKind =
+        msrFiguredBassElement::kFiguredBassElementParenthesesNo;
+
+    else {
+      stringstream s;
+
+      s <<
+        "parentheses value " << parentheses <<
+        " should be 'yes' or 'no'";
+
+      musicxmlError (
+        gGlobalServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        s.str ());
+    }
+  }
+
+  fCurrentFiguredBassInputLineNumber   = -1;
+
+  fCurrentFigureNumber = -1;
+
+  fCurrentFigurePrefixKind = msrBassFigure::k_NoFigurePrefix;
+  fCurrentFigureSuffixKind = msrBassFigure::k_NoFigureSuffix;
+
+  fCurrentFiguredBassSoundingWholeNotes = rational (0, 1);
+  fCurrentFiguredBassDisplayWholeNotes  = rational (0, 1);
+
+  fOnGoingFiguredBass = true;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Second {\tt S_figured_bass} visit}\smartPointerTypeIndex{S_figured_bass}
+% -------------------------------------------------------------------------
+
+Upon the second visit of \smartPointerType{S_figured_bass}, the \class{msrFiguredBassElement} instance is created, populated and appended to \fieldName{mxsr2msrTranslator}{fPendingFiguredBassElementsList}:
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
+{
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> End visiting S_figured_bass" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+  // create the figured bass element
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+    gLogStream <<
+      "Creating a figured bass" <<
+      ", line " << inputLineNumber << ":" <<
+      endl;
+  }
+#endif
+
+  // create the figured bass element
+  // if the sounding whole notes is 0/1 (no <duration /> was found), JMI ???
+  // it will be set to the next note's sounding whole notes later
+  S_msrFiguredBassElement
+    figuredBassElement =
+      msrFiguredBassElement::create (
+        inputLineNumber,
+  // JMI      fCurrentPart,
+        fCurrentFiguredBassSoundingWholeNotes,
+        fCurrentFiguredBassDisplayWholeNotes,
+        fCurrentFiguredBassParenthesesKind,
+        msrTupletFactor (1, 1));    // will be set upon next note handling
+
+  // attach pending figures to the figured bass element
+  if (! fPendingFiguredBassFiguresList.size ()) {
+    musicxmlWarning (
+      gGlobalServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      "figured-bass has no figures contents, ignoring it");
+  }
+  else {
+    // append the pending figures to the figured bass element
+    for (S_msrBassFigure bassFigure : fPendingFiguredBassFiguresList) {
+      figuredBassElement->
+        appendFigureToFiguredBass (bassFigure);
+    } // for
+
+    // forget about those pending figures
+    fPendingFiguredBassFiguresList.clear ();
+
+    // append the figured bass element to the pending figured bass elements list
+    fPendingFiguredBassElementsList.push_back (figuredBassElement);
+  }
+
+  fOnGoingFiguredBass = false;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Attaching {\tt msrFiguredBassElement} instances to notes}\className{msrFiguredBassElement}
+% -------------------------------------------------------------------------
+
+The contents of \fieldName{mxsr2msrTranslator}{fPendingFiguredBassElementsList} is attached to the \class{msrNote} instance in method\\
+\method{mxsr2msrTranslator}{populateNote}:
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrTranslator::populateNote (
+  int       inputLineNumber,
+  S_msrNote newNote)
+{
+	// ... ... ...
+
+  // handle the pending figured bass elements if any
+  if (fPendingFiguredBassElementsList.size ()) {
+    // get voice to insert figured bass elements into
+    S_msrVoice
+      voiceToInsertFiguredBassElementsInto =
+        fCurrentPart->
+          getPartFiguredBassVoice ();
+
+		// ... ... ...
+
+    handlePendingFiguredBassElements (
+      newNote,
+      voiceToInsertFiguredBassElementsInto);
+
+    // reset figured bass counter
+    fFiguredBassVoicesCounter = 0;
+  }
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Populating {\tt msrFiguredBassElement} instances}\className{msrFiguredBassElement}
+% -------------------------------------------------------------------------
+
+In \msr{mxsr2msrTranslator.cpp}, the \class{msrFiguredBassElement} instances are populated further and attached to the note by \method{mxsr2msrTranslator}{handlePendingFiguredBassElements}:
+\begin{lstlisting}[language=CPlusPlus]
+void mxsr2msrTranslator::handlePendingFiguredBassElements (
+  S_msrNote  newNote,
+  S_msrVoice voiceToInsertInto)
+{
+	// ... ... ...
+
+  rational
+    newNoteSoundingWholeNotes =
+      newNote->
+        getNoteSoundingWholeNotes (),
+    newNoteDisplayWholeNotes =
+      newNote->
+        getNoteDisplayWholeNotes ();
+
+  while (fPendingFiguredBassElementsList.size ()) { // recompute at each iteration
+    S_msrFiguredBassElement
+      figuredBassElement =
+        fPendingFiguredBassElementsList.front ();
+
+    /*
+      Figured bass elements take their position from the first
+      regular note (not a grace note or chord note) that follows
+      in score order. The optional duration element is used to
+      indicate changes of figures under a note.
+    */
+
+    // set the figured bass element's sounding whole notes
+    figuredBassElement->
+      setMeasureElementSoundingWholeNotes (
+        newNoteSoundingWholeNotes,
+        "handlePendingFiguredBassElements()");
+
+    // set the figured bass element's display whole notes JMI useless???
+    figuredBassElement->
+      setFiguredBassDisplayWholeNotes (
+        newNoteDisplayWholeNotes);
+
+    // set the figured bass element's tuplet factor
+    figuredBassElement->
+      setFiguredBassTupletFactor (
+        msrTupletFactor (
+          fCurrentNoteActualNotes,
+          fCurrentNoteNormalNotes));
+
+    // append the figured bass to newNote
+    newNote->
+      appendFiguredBassElementToNoteFiguredBassElementsList (
+        figuredBassElement);
+
+/* JMI
+    // get the figured bass voice for the current voice
+    S_msrVoice
+      voiceFiguredBassVoice =
+        voiceToInsertInto->
+          getRegularVoiceFiguredBassVoiceForwardLink ();
+
+    // sanity check
+    mfAssert (
+      __FILE__, __LINE__,
+      voiceFiguredBassVoice != nullptr,
+      "voiceFiguredBassVoice is null");
+
+    // set the figuredBassElement's voice upLink
+    // only now that we know which figured bass voice will contain it
+    figuredBassElement->
+      setFiguredBassVoiceUpLink (
+        voiceFiguredBassVoice);
+
+    // append the figured bass to the figured bass voice for the current voice
+    voiceFiguredBassVoice->
+      appendFiguredBassElementToVoice (
+        figuredBassElement);
+*/
+
+    // don't append the figured bass to the part figured bass voice
+    // before the note itself has been appended to the voice
+
+    // remove the figured bass from the list
+    fPendingFiguredBassElementsList.pop_front ();
+  } // while
+}
+\end{lstlisting}
+
+%%% JMI should be done for figured bass??? %%%JMI
+%When a figured bass element is attached to a note that is a chord member, we have to attach it to the chord too, to facilitate setting its \pim\ when setting the chord's one.
+%\begin{lstlisting}[language=CPlusPlus]
+%void mxsr2msrTranslator::copyNoteHarmoniesToChord (
+%  S_msrNote note, S_msrChord chord)
+%{
+%  // copy note's harmony if any from the first note to chord
+%
+%  const list<S_msrHarmony>&
+%    noteHarmoniesList =
+%      note->getNoteHarmoniesList ();
+%
+%  if (noteHarmoniesList.size ()) {
+%    list<S_msrHarmony>::const_iterator i;
+%    for (i=noteHarmoniesList.begin (); i!=noteHarmoniesList.end (); ++i) {
+%      S_msrHarmony harmony = (*i);
+%
+%#ifdef TRACING_IS_ENABLED
+%      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+%        gLogStream <<
+%          "Copying harmony '" <<
+%          harmony->asString () <<
+%          "' from note " << note->asString () <<
+%          " to chord '" << chord->asString () <<
+%          "'" <<
+%          endl;
+%      }
+%#endif
+%
+%      chord->
+%        appendHarmonyToChord (harmony);
+%
+%    } // for
+%  }
+%}
+%\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Inserting {\tt S_msrFiguredBassElement} instances in the part figured bass voice}\smartPointerTypeIndex{S_msrFiguredBassElement}
+% -------------------------------------------------------------------------
+
+\Method{msrVoice}{appendNoteToVoice} in \msr{msrNotes.cpp} inserts the figured bass elements in the part figured bass voice:
+\begin{lstlisting}[language=CPlusPlus]
+void msrVoice::appendNoteToVoice (S_msrNote note)
+{
+	// ... ... ...
+
+  // are there figured bass elements attached to this note?
+  const list<S_msrFiguredBassElement>&
+    noteFiguredBassElementsList =
+      note->
+        getNoteFiguredBassElementsList ();
+
+  if (noteFiguredBassElementsList.size ()) {
+    // get the current part's figured bass voice
+    S_msrVoice
+      partFiguredBassVoice =
+        part->
+          getPartFiguredBassVoice ();
+
+    for (S_msrFiguredBassElement figuredBassElement : noteFiguredBassElementsList) {
+      // append the figured bass element to the part figured bass voice
+      partFiguredBassVoice->
+        appendFiguredBassElementToVoice (
+          figuredBassElement);
+    } // for
+  }
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Translating figured bass elements from MSR to MSR}
+% -------------------------------------------------------------------------
+
+This is done in \msrToMsr{}.
+
+In \msrToMsr{msr2msrTranslator.cpp}, a newborn clone of the figured bass element is created upon the first visit, stored in \fieldName{msr2msrTranslator}{fCurrentFiguredBassElementClone}, and appended to the current non grace note clone, the current chord clone or to the current voice clone, if the latter is a figured bass voice: %%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+void msr2msrTranslator::visitStart (S_msrFiguredBassElement& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrFiguredBassElement '" <<
+      elt->asString () <<
+      "'" <<
+      ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  // create a figured bass element new born clone
+  fCurrentFiguredBassElementClone =
+    elt->
+      createFiguredBassElementNewbornClone (
+        fCurrentVoiceClone);
+
+  if (fOnGoingNonGraceNote) {
+    // append the figured bass to the current non-grace note clone
+    fCurrentNonGraceNoteClone->
+      appendFiguredBassElementToNoteFiguredBassElementsList (
+      	fCurrentFiguredBassElementClone);
+
+    // don't append the figured bass to the part figured bass,  JMI ???
+    // this will be done below
+  }
+
+  /* JMI
+  else if (fOnGoingChord) {
+    // register the figured bass in the current chord clone
+    fCurrentChordClone->
+      setChordFiguredBass (fCurrentFiguredBassElementClone); // JMI
+  }
+  */
+
+  else if (fOnGoingFiguredBassVoice) { // JMI
+    /*
+    // register the figured bass in the part clone figured bass
+    fCurrentPartClone->
+      appendFiguredBassElementToPartClone (
+        fCurrentVoiceClone,
+        fCurrentFiguredBassElementClone);
+        */
+    // append the figured bass to the current voice clone
+    fCurrentVoiceClone->
+      appendFiguredBassElementToVoiceClone (
+        fCurrentFiguredBassElementClone);
+  }
+
+  else {
+    stringstream s;
+
+    s <<
+      "figured bass is out of context, cannot be handled:'" <<
+      elt->asShortString () <<
+      "'";
+
+    msrInternalError (
+      gGlobalServiceRunData->getInputSourceName (),
+      elt->getInputLineNumber (),
+      __FILE__, __LINE__,
+      s.str ());
+  }
+}
+\end{lstlisting}
+
+There are only fields updates upon the second visit:
+\begin{lstlisting}[language=CPlusPlus]
+void msr2msrTranslator::visitEnd (S_msrFiguredBassElement& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> End visiting msrFiguredBassElement '" <<
+      elt->asString () <<
+      "'" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  fCurrentFiguredBassElementClone = nullptr;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Translating figured bass elements from MSR to LPSR}
+% -------------------------------------------------------------------------
+
+This is done in \msrToLpsr{}.
+
+The same occurs in \msrToLpsr{msr2lpsrTranslator.cpp}: a newborn clone of the figured bass element is created and appended to the current non grace note clone, the current chord clone or to the current voice clone, if the latter is a figured bass voice: %%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+void msr2lpsrTranslator::visitStart (S_msrFiguredBassElement& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrFiguredBassElement '" <<
+      elt->asString () <<
+      "'" <<
+      ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  // create a figured bass new born clone
+  fCurrentFiguredBassElementClone =
+    elt->
+      createFiguredBassElementNewbornClone (
+        fCurrentVoiceClone);
+
+  if (fOnGoingNonGraceNote) {
+    // append the figured bass to the current non-grace note clone
+    fCurrentNonGraceNoteClone->
+      appendFiguredBassElementToNoteFiguredBassElementsList (
+      	fCurrentFiguredBassElementClone);
+
+    // don't append the figured bass to the part figured bass,  JMI ???
+    // this will be done below
+  }
+
+  /* JMI
+  else if (fOnGoingChord) {
+    // register the figured bass in the current chord clone
+    fCurrentChordClone->
+      setChordFiguredBass (fCurrentFiguredBassElementClone); // JMI
+  }
+  */
+
+  else if (fOnGoingFiguredBassVoice) { // JMI
+    /*
+    // register the figured bass in the part clone figured bass
+    fCurrentPartClone->
+      appendFiguredBassElementToPartClone (
+        fCurrentVoiceClone,
+        fCurrentFiguredBassElementClone);
+        */
+    // append the figured bass to the current voice clone
+    fCurrentVoiceClone->
+      appendFiguredBassElementToVoiceClone (
+        fCurrentFiguredBassElementClone);
+  }
+
+  else {
+    stringstream s;
+
+    s <<
+      "figured bass is out of context, cannot be handled:'" <<
+      elt->asShortString () <<
+      "'";
+
+    msrInternalError (
+      gGlobalServiceRunData->getInputSourceName (),
+      elt->getInputLineNumber (),
+      __FILE__, __LINE__,
+      s.str ());
+  }
+}
+\end{lstlisting}
+
+Here too, there are only fields updates upon the second visit of \smartPointerType{S_msrFiguredBassElement} instances:
+\begin{lstlisting}[language=CPlusPlus]
+void msr2lpsrTranslator::visitEnd (S_msrFiguredBassElement& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> End visiting msrFiguredBassElement '" <<
+      elt->asString () <<
+      "'" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  fCurrentFiguredBassElementClone = nullptr;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Translating figured bass elements from LPSR to LilyPond}
+% -------------------------------------------------------------------------
+
+This is done in \lpsrToLilypond{}.
+
+There is only one visit of \class{msrFiguredBassElement} instances in\\
+\lpsrToLilypond{lpsr2lilypondTranslator.cpp}.
+
+The \lily\ code is generated only if the figured bass element belongs to a figured bass voice: this is where \denorm\ ends in the workflow:%%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+void msr2lpsrTranslator::visitStart (S_msrFiguredBassElement& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrFiguredBassElement '" <<
+      elt->asString () <<
+      "'" <<
+      ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  // create a figured bass new born clone
+  fCurrentFiguredBassElementClone =
+    elt->
+      createFiguredBassElementNewbornClone (
+        fCurrentVoiceClone);
+
+  if (fOnGoingNonGraceNote) {
+    // append the figured bass to the current non-grace note clone
+    fCurrentNonGraceNoteClone->
+      appendFiguredBassElementToNoteFiguredBassElementsList (
+      	fCurrentFiguredBassElementClone);
+
+    // don't append the figured bass to the part figured bass,  JMI ???
+    // this will be done below
+  }
+
+  /* JMI
+  else if (fOnGoingChord) {
+    // register the figured bass in the current chord clone
+    fCurrentChordClone->
+      setChordFiguredBass (fCurrentFiguredBassElementClone); // JMI
+  }
+  */
+
+  else if (fOnGoingFiguredBassVoice) { // JMI
+    /*
+    // register the figured bass in the part clone figured bass
+    fCurrentPartClone->
+      appendFiguredBassElementToPartClone (
+        fCurrentVoiceClone,
+        fCurrentFiguredBassElementClone);
+        */
+    // append the figured bass to the current voice clone
+    fCurrentVoiceClone->
+      appendFiguredBassElementToVoiceClone (
+        fCurrentFiguredBassElementClone);
+  }
+
+  else {
+    stringstream s;
+
+    s <<
+      "figured bass is out of context, cannot be handled:'" <<
+      elt->asShortString () <<
+      "'";
+
+    msrInternalError (
+      gGlobalServiceRunData->getInputSourceName (),
+      elt->getInputLineNumber (),
+      __FILE__, __LINE__,
+      s.str ());
+  }
+}
+\end{lstlisting}
+

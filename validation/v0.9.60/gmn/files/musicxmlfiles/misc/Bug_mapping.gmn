@@ -1,0 +1,33 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/misc/Bug_mapping.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Il cielo in una stanza"> \composer<"Gino Paoli", dy=4hs> \auto<autoInstrPos="on"> \instr<"Flauto dritto soprano"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<1> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff g/4 \stemsUp \beamBegin:1 f#/8 \stemsUp e/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamBegin:1 f#/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff e/4 \bar 
+   (* meas. 3 *)  \stemsUp \beamBegin:1 c/8 \stemsUp e/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 b/8 \stemsDown c2/8 \beamEnd:1 \stemsUp \beamBegin:1 b1/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff g/4 \stemsUp \beamBegin:1 f#/8 \stemsUp e/8 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsUp \beamBegin:1 f#/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff e/4 \bar 
+   (* meas. 7 *)  \stemsUp \beamBegin:1 c/8 \stemsUp e/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamBegin:1 b/8 \stemsDown c2/8 \beamEnd:1 \stemsUp \beamBegin:1 b1/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff b/4 \stemsDown \beamBegin:1 c2/8 \stemsDown b1/8 \beamEnd:1 \bar 
+   (* meas. 10 *)  \stemsDown \beamBegin:1 d2/8 \stemsDown c/8 \beamEnd:1 \stemsDown \beamsOff b1/4 \bar 
+   (* meas. 11 *)  _/8 \stemsDown \beamsOff c2/8 \stemsDown \beamBegin:1 d/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 12 *)  \stemsDown \beamBegin:1 d/8 \stemsDown c/8 \beamEnd:1 \stemsUp \beamBegin:1 b1/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 13 *)  \stemsDown \beamsOff b/4 \stemsDown \beamBegin:1 c2/8 \stemsDown b1/8 \beamEnd:1 \bar 
+   (* meas. 14 *)  \stemsDown \beamBegin:1 d2/8 \stemsDown c/8 \beamEnd:1 \stemsDown \beamsOff b1/4 \bar 
+   (* meas. 15 *)  _/8 \stemsDown \beamsOff c2/8 \stemsDown \beamBegin:1 d/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 16 *)  \volta<"1", "1.">( \stemsDown \beamBegin:1 d/8 \stemsDown c/8 \beamEnd:1 \stemsUp \beamBegin:1 b1/8 \stemsUp a/8 \beamEnd:1)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 17 *)  \volta<"2", "2.", format="|-">( \stemsDown \beamBegin:1 d2/8 \stemsDown c/8 \beamEnd:1 \stemsUp \beamBegin:1 b1/8 \stemsUp a/8 \beamEnd:1)
+ \bar 
+   (* meas. 18 *)  \stemsUp \beamsOff \tieBegin:1 g/4 \stemsUp \beamBegin:1 \tuplet<"3", dispNote="/8", position="above">( g/12 \tieEnd:1 \stemsUp f#/12 \stemsUp g/12)
+ \beamEnd:1 \bar 
+   (* meas. 19 *)  \stemsUp \beamsOff \tieBegin:1 g/4 \stemsUp \beamBegin:1 \tuplet<"3", dispNote="/8", position="above">( g/12 \tieEnd:1 \stemsUp f#/12 \stemsUp g/12)
+ \beamEnd:1 \bar 
+   (* meas. 20 *)  \stemsUp \beamsOff g/2 \bar 
+   (* meas. 21 *)  \stemsUp \beamsOff f#/2 \bar 
+   (* meas. 22 *)  \stemsUp \beamsOff g/2 ]
+  }

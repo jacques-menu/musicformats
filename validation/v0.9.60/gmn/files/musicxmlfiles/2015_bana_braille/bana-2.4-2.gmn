@@ -1,0 +1,12 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/2015_bana_braille/bana-2.4-2.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"", dy=4hs> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \key<-4> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamBegin:1 e&3/16 \stemsDown a&2/16 \beamEnd:1 _/8 _/4 _/128 \stemsUp \beamBegin:1 a&-1/128 \stemsUp g/128 \stemsUp a&/128 \stemsUp b&/128 \stemsUp c0/128 \stemsUp \acc( d/128)
+ \stemsDown e&/128 \stemsDown f/128 \stemsDown g/128 \stemsDown a&/128 \stemsDown b&/128 \stemsDown c1/128 \stemsDown \acc( d/128)
+ \stemsDown e&/128 \beamEnd:1 \stemsDown \beamBegin:1 \tuplet<"11", dispNote="/64">( g/88 \stemsDown a&/88 \stemsDown b&/88 \stemsDown c2/88 \stemsDown \acc( d/88)
+ \stemsDown e&/88 \stemsDown f/88 \stemsDown g/88 \stemsDown a&/88 \stemsDown g/88)
+ \beamEnd:1 ]
+  }

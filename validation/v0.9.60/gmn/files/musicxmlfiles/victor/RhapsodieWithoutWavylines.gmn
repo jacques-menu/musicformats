@@ -1,0 +1,468 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/victor/RhapsodieWithoutWavylines.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"J. Brahms", dy=4hs> \auto<autoInstrPos="on"> \instr<"Piccolo"> \accol<id=1,  range="1-6"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"Allegro risoluto",fsize=12pt,fattrib="b", dy=4hs> \stemsDown \beamsOff \accent( g2/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( g/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff \accent( a&/4)
+ \stemsDown \beamBegin:1 \stacc( g/8)
+ \stemsDown \stacc( f/8)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( g/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( e&/8)
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( b&1/8)
+ \beamEnd:1 \stemsDown \slurBegin:1 \beamsOff e&2/4 \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff d/4 \stemsDown \beamsOff c/4 \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff b&1/4 \slurEnd:1 _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Flûte"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \accent( e&3/4)
+ \stemsDown \beamBegin:1 \stacc( d/8)
+ \stemsDown \stacc( e&/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff \accent( c/4)
+ \stemsDown \beamBegin:1 \stacc( e&/8)
+ \stemsDown \stacc( c/8)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( b&2/4)
+ \stemsDown \beamBegin:1 \stacc( a&/8)
+ \stemsDown \stacc( g/8)
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( b&/8)
+ \beamEnd:1 \stemsDown \slurBegin:1 \beamsOff c3/4 \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff b&2/4 \stemsDown \beamsOff a&/4 \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff g/4 \slurEnd:1 _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"2 Hautbois"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \accent( {e&2/4, g/4  })
+ \stemsDown \beamBegin:1 \stacc( {d/8, f/8  })
+ \stemsDown \stacc( {e&/8, g/8  })
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff \accent( {c/4, a&/4  })
+ \stemsDown \beamBegin:1 \stacc( {e&/8, g/8  })
+ \stemsDown \stacc( {c/8, f/8  })
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( {e&/4, g/4  })
+ \stemsDown \beamBegin:1 \stacc( {d/8, f/8  })
+ \stemsDown \stacc( {e&/8, e&/8  })
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 \stacc( {d/8, f/8  })
+ \stemsDown \stacc( {b&1/8, d2/8  })
+ \beamEnd:1 \stemsDown \slurBegin:1 \beamsOff {c/4, e&/4  } \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff {b&1/4, d2/4  } \stemsDown \beamsOff {a&1/4, c2/4  } \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff {g1/4, b&/4  } \slurEnd:1 _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<4> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"2 Clarinettes
+en Si♭"> \barFormat<style= "system", range="4"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-1> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff a2/4 \stemsDown \beamBegin:1 \stacc( g/8)
+ \stemsDown \stacc( a/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff b&/4 \stemsDown \beamBegin:1 \stacc( {f/8, a/8  })
+ \stemsDown \stacc( {d/8, g/8  })
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( {f/4, a/4  })
+ \stemsDown \beamBegin:1 \stacc( {c/8, g/8  })
+ \stemsDown \stacc( {f1/8, f2/8  })
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \beamBegin:1 \stacc( {g1/8, g2/8  })
+ \stemsUp \stacc( {c1/8, c2/8  })
+ \beamEnd:1 \stemsUp \slurBegin:1 \beamsOff {d1/4, f/4  } \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff {c/4, e/4  } \stemsUp \beamsOff {b&0/4, d1/4  } \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff {a0/4, c1/4  } \slurEnd:1 _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<5> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"2 Bassons"> \barFormat<style= "system", range="5"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \text<"à 2", dx=0hs, dy=19hs>( \stemsDown \beamsOff \accent( e&0/4)
+)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff \accent( a&-1/4)
+ \stemsUp \beamBegin:1 \stacc( e&0/8)
+ \stemsUp \stacc( a&-1/8)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( e&0/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( b&/8)
+ \beamEnd:1 \stemsDown \beamsOff \accent( e&0/4)
+ \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff \accent( e&/4)
+ \stemsDown \beamsOff \accent( e&/4)
+ \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff \accent( e&/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff \accent( c/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( c/8)
+ \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff \accent( g/4)
+ \stemsUp \beamBegin:1 \stacc( c/8)
+ \stemsUp \stacc( g-1/8)
+ \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsUp \beamBegin:1 \stacc( d/8)
+ \stemsUp \stacc( d0/8)
+ \beamEnd:1 \stemsUp \beamsOff \accent( g-1/4)
+ \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<6> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Contrebasson"> \barFormat<style= "system", range="6"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \accent( e&0/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff \accent( a&-1/4)
+ \stemsUp \beamBegin:1 \stacc( e&0/8)
+ \stemsUp \stacc( a&-1/8)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( e&0/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 \stacc( b&-1/8)
+ \stemsDown \stacc( b&0/8)
+ \beamEnd:1 \stemsDown \beamsOff \accent( e&/4)
+ \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff \accent( e&/4)
+ \stemsDown \beamsOff \accent( e&/4)
+ \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff \accent( e&/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff \accent( c/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( c/8)
+ \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff \accent( g/4)
+ \stemsUp \beamBegin:1 \stacc( c/8)
+ \stemsUp \stacc( g-1/8)
+ \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsUp \beamBegin:1 \stacc( d/8)
+ \stemsUp \stacc( d0/8)
+ \beamEnd:1 \stemsUp \beamsOff \accent( g-1/4)
+ \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<7> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"2 Cors
+en Fa"> \accol<id=1,  range="7-11"> \barFormat<style= "system", range="7"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-2> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff \accent( {f/4, d2/4  })
+ \stemsUp \beamBegin:1 \stacc( {f1/8, c2/8  })
+ \stemsUp \stacc( {f1/8, d2/8  })
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff \accent( {g1/4, e&2/4  })
+ \stemsUp \beamBegin:1 \stacc( {f1/8, d2/8  })
+ \stemsUp \stacc( {e&1/8, c2/8  })
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff \accent( {f1/4, d2/4  })
+ \stemsUp \beamBegin:1 \stacc( {f1/8, c2/8  })
+ \stemsUp \stacc( {f1/8, b&/8  })
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \beamBegin:1 \stacc( {f/8, a/8  })
+ \stemsUp \stacc( f/8)
+ \beamEnd:1 \stemsUp \beamsOff \accent( {\tieBegin:1 b&0/4, \tieBegin:2 b&1/4  })
+ \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff {\tieBegin:3 b&0/2 \tieEnd:1, \tieBegin:4 b&1/2 \tieEnd:2  } \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff {b&0/4 \tieEnd:3, b&1/4 \tieEnd:4  } _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<8> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"2 Cors
+en Fa"> \barFormat<style= "system", range="8"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-2> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff \accent( {b&0/4, b&1/4  })
+ \stemsUp \beamBegin:1 \stacc( {f/8, f/8  })
+ \stemsUp \stacc( {b&0/8, b&1/8  })
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff \accent( {b&0/4, b&1/4  })
+ \stemsUp \beamBegin:1 \stacc( {b&0/8, b&1/8  })
+ \stemsUp \stacc( {b&0/8, b&1/8  })
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff \accent( {b&0/4, b&1/4  })
+ \stemsUp \beamBegin:1 \stacc( {f/8, f/8  })
+ \stemsUp \stacc( {b&0/8, d1/8  })
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \beamBegin:1 \stacc( f/8)
+ \stemsUp \stacc( f/8)
+ \beamEnd:1 \stemsUp \beamsOff \accent( {\tieBegin:1 b&0/4, \tieBegin:2 b&1/4  })
+ \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff {\tieBegin:3 b&0/2 \tieEnd:1, \tieBegin:4 b&1/2 \tieEnd:2  } \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff {b&0/4 \tieEnd:3, b&1/4 \tieEnd:4  } _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<9> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"2 Trompettes
+en Si♭"> \barFormat<style= "system", range="9"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-1> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 2 *)  _/2 \bar 
+   (* meas. 3 *)  _/2 \bar 
+   (* meas. 4 *)  _/2 \bar 
+   (* meas. 5 *)  _/2 \bar 
+   (* meas. 6 *)  _/2 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<10> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"2 Trombones"> \barFormat<style= "system", range="10"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 2 *)  _/2 \bar 
+   (* meas. 3 *)  _/2 \bar 
+   (* meas. 4 *)  _/2 \bar 
+   (* meas. 5 *)  _/2 \bar 
+   (* meas. 6 *)  _/2 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<11> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Trombone basse"> \barFormat<style= "system", range="11"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 2 *)  _/2 \bar 
+   (* meas. 3 *)  _/2 \bar 
+   (* meas. 4 *)  _/2 \bar 
+   (* meas. 5 *)  _/2 \bar 
+   (* meas. 6 *)  _/2 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<12> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Timbales"> \accol<id=1,  range="12-14"> \barFormat<style= "system", range="12"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff e&0/4 \stemsDown \beamBegin:1 e&/8 \stemsDown e&/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff a&-1/4 \stemsUp \beamBegin:1 e&0/8 \stemsUp a&-1/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff e&0/4 \stemsUp \beamBegin:1 b&-1/8 \stemsUp e&0/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \beamBegin:1 b&-1/8 \stemsUp b&/8 \beamEnd:1 \stemsDown \beamsOff \tieBegin:1 e&0/4 \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff e&/2 \tieEnd:1 \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff e&/4 _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<13> \set<autoHideTiedAccidentals="on"> \staffFormat<style="1-line"> \auto<autoInstrPos="on"> \instr<"Cymbale"> \barFormat<style= "system", range="13"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"perc2"> \key<0> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff e/4 _/4 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff e/4 _/4 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff e/4 _/4 \bar 
+   (* meas. 4 *)  _/4 \stemsUp \beamsOff \tieBegin:1 e/4 \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff \tieBegin:2 e/2 \tieEnd:1 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff e/4 \tieEnd:2 _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<14> \set<autoHideTiedAccidentals="on"> \staffFormat<style="1-line"> \auto<autoInstrPos="on"> \instr<"Grosse caisse"> \barFormat<style= "system", range="14"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"perc2"> \key<0> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff e/4 _/4 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff e/4 _/4 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff e/4 _/4 \bar 
+   (* meas. 4 *)  _/2 \bar 
+   (* meas. 5 *)  _/2 \bar 
+   (* meas. 6 *)  _/4 _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<15> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Violons I"> \accol<id=1,  range="15-19"> \barFormat<style= "system", range="15"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \accent( g2/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( g/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff \accent( a&/4)
+ \stemsDown \beamBegin:1 \stacc( g/8)
+ \stemsDown \stacc( f/8)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( g/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( e&/8)
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( b&1/8)
+ \beamEnd:1 \stemsDown \beamsOff \accent( e&2/4)
+ \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff \accent( d/4)
+ \stemsDown \beamsOff \accent( c/4)
+ \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff \accent( b&1/4)
+ \stemsDown \beamBegin:1 \stacc( d2/8)
+ \stemsDown \stacc( e&/8)
+ \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsDown \beamsOff \accent( g/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( e&/8)
+ \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff \accent( d/4)
+ \stemsDown \beamBegin:1 \stacc( c/8)
+ \stemsDown \stacc( b&1/8)
+ \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsUp \beamBegin:1 \stacc( \acc( a/8)
+)
+ \stemsUp \stacc( d/8)
+ \beamEnd:1 \stemsUp \beamsOff \accent( g/4)
+ \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff \accent( g/4)
+ \stemsUp \beamsOff \accent( g/4)
+ ]
+ , 
+[ \staff<16> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Violons II"> \barFormat<style= "system", range="16"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \accent( e&2/4)
+ \stemsDown \beamBegin:1 \stacc( d/8)
+ \stemsDown \stacc( e&/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff \accent( c/4)
+ \stemsDown \beamBegin:1 \stacc( e&/8)
+ \stemsDown \stacc( c/8)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( e&/4)
+ \stemsDown \beamBegin:1 \stacc( d/8)
+ \stemsDown \stacc( e&/8)
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( b&1/8)
+ \beamEnd:1 \stemsDown \beamsOff \accent( c2/4)
+ \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff \accent( b&1/4)
+ \stemsUp \beamsOff \accent( a&/4)
+ \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff \accent( g/4)
+ _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<17> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Altos"> \barFormat<style= "system", range="17"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"c3"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \accent( g/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( g/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff \accent( a&/4)
+ \stemsDown \beamBegin:1 \stacc( g/8)
+ \stemsDown \stacc( f/8)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( g/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( e&/8)
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \text<"div.", dx=0hs, dy=19hs>( \stemsDown \beamBegin:1 \stacc( {d/8, f/8  })
+)
+ \stemsDown \stacc( {b&0/8, d1/8  })
+ \beamEnd:1 \stemsDown \beamsOff \accent( {c/4, e&/4  })
+ \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff \accent( {b&0/4, d1/4  })
+ \stemsUp \beamsOff \accent( {a&0/4, c1/4  })
+ \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff \accent( {g0/4, b&/4  })
+ _/4 \bar 
+   (* meas. 7 *)  _/2 \bar 
+   (* meas. 8 *)  _/2 \bar 
+   (* meas. 9 *)  _/2 \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<18> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Violoncelles"> \barFormat<style= "system", range="18"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \accent( e&0/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff \accent( a&-1/4)
+ \stemsUp \beamBegin:1 \stacc( e&0/8)
+ \stemsUp \stacc( a&-1/8)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( e&0/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&/8)
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 \stacc( b&/8)
+ \stemsDown \stacc( b&0/8)
+ \beamEnd:1 \stemsDown \beamsOff \accent( e&/4)
+ \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff \accent( e&/4)
+ \stemsDown \beamsOff \accent( e&/4)
+ \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff \accent( e&/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff \accent( c/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( c/8)
+ \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff \accent( g/4)
+ \stemsUp \beamBegin:1 \stacc( c/8)
+ \stemsUp \stacc( g-1/8)
+ \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsUp \beamBegin:1 \stacc( d/8)
+ \stemsUp \stacc( d0/8)
+ \beamEnd:1 \stemsUp \beamsOff \accent( g-1/4)
+ \bar 
+   (* meas. 10 *)  _/2 ]
+ , 
+[ \staff<19> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Contrebasses"> \barFormat<style= "system", range="19"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \accent( e&0/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff \accent( a&-1/4)
+ \stemsUp \beamBegin:1 \stacc( e&0/8)
+ \stemsUp \stacc( a&-1/8)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff \accent( e&0/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 \stacc( b&-1/8)
+ \stemsDown \stacc( b&0/8)
+ \beamEnd:1 \stemsDown \beamsOff \accent( e&/4)
+ \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff \accent( e&/4)
+ \stemsDown \beamsOff \accent( e&/4)
+ \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff \accent( e&/4)
+ \stemsUp \beamBegin:1 \stacc( b&-1/8)
+ \stemsUp \stacc( e&0/8)
+ \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff \accent( c/4)
+ \stemsDown \beamBegin:1 \stacc( f/8)
+ \stemsDown \stacc( c/8)
+ \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff \accent( g/4)
+ \stemsUp \beamBegin:1 \stacc( c/8)
+ \stemsUp \stacc( g-1/8)
+ \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsUp \beamBegin:1 \stacc( d0/8)
+ \stemsUp \stacc( d/8)
+ \beamEnd:1 \stemsUp \beamsOff \accent( g-1/4)
+ \bar 
+   (* meas. 10 *)  _/2 ]
+  }

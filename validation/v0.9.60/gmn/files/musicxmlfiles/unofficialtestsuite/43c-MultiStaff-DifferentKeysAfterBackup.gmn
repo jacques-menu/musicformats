@@ -1,0 +1,11 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/43c-MultiStaff-DifferentKeysAfterBackup.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff f/1 \key<2> ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \clef<"f4"> \key<2> \beamsOff b-1/1 ]
+  }

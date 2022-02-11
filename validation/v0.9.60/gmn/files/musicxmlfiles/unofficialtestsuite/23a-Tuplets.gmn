@@ -1,0 +1,15 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/23a-Tuplets.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"14/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff \tuplet<"3", dispNote="/4">( c/6 \beamsOff d/6 \beamsOff e/6)
+ \beamsOff \tuplet<"3", dispNote="/4">( f/6 \beamsOff g/6 \beamsOff a/6)
+ \beamsOff \tuplet<"3", dispNote="/4">( b/6 \beamsOff c2/6 \beamsOff d/6)
+ \beamsOff \tuplet<"4", dispNote="/4">( e/8 \beamsOff f/8 \beamsOff g/8 \beamsOff a/8)
+ \beamsOff \tuplet<"4", dispNote="/4">( b/16 \beamsOff c3/16 \beamsOff c/16 \beamsOff b2/16)
+ \beamsOff \tuplet<"7", dispNote="/4">( a*3/28 \beamsOff g*3/28 \beamsOff f*3/28 \beamsOff e*3/28 \beamsOff d*3/28 \beamsOff c*3/28 \beamsOff b1*3/28)
+ \beamsOff \tuplet<"6", dispNote="/4">( a/12 \beamsOff g/12 \beamsOff f/12 \beamsOff e/12 \beamsOff d/12 \beamsOff c/12)
+ ]
+  }

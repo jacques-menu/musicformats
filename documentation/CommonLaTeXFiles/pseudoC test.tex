@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{listings}
+
+% modified ANSI C definition; copied from lstdrvrs.dtx
+\lstdefinelanguage{pseudoC}%
+  {morekeywords={auto,break,case,char,const,continue,default,do,double,%
+      else,enum,extern,float,for,goto,if,int,long,register,return,%
+      short,signed,sizeof,static,struct,switch,typedef,union,unsigned,%
+      void,volatile,while},%
+  sensitive,%
+  morecomment=[s]{/*}{*/},%
+  morecomment=[l]//,% nonstandard
+  morestring=[b]",%
+  morestring=[m]',% changed from `b' to `m'
+  moredelim=*[directive]\#,%
+  moredirectives={define,elif,else,endif,error,if,ifdef,ifndef,line,%
+  include,pragma,undef,warning}%
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{pseudoc}{
+language=pseudoC,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{ccode}{
+\lstset{style=pseudoc}}{}
+
+\begin{document}
+
+\begin{ccode}
+  int x';
+  // use x
+  x = 3;
+  y = 'a string'; // aside: this would be a compiler error :-)
+\end{ccode}
+
+\end{document} 
+
+

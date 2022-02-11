@@ -1,0 +1,17 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/72a-TransposingInstruments.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Trumpet in Bb"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff d/4 \beamsOff e/4 \beamsOff f#/4 \beamsOff g/4 \bar 
+   (* meas. 2 *)  \beamsOff a/4 \beamsOff b/4 \beamsOff c#2/4 \beamsOff d/4 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Horn in Eb"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<3> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff a/4 \beamsOff b/4 \beamsOff c#2/4 \beamsOff d/4 \bar 
+   (* meas. 2 *)  \beamsOff e/4 \beamsOff f#/4 \beamsOff g#/4 \beamsOff a/4 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Piano"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/4 \beamsOff d/4 \beamsOff e/4 \beamsOff f/4 \bar 
+   (* meas. 2 *)  \beamsOff g/4 \beamsOff a/4 \beamsOff b/4 \beamsOff c2/4 ]
+  }

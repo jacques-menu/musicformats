@@ -1,0 +1,13 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/02e-Rests-NoType.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c2/4 \bar 
+   (* meas. 2 *)  \beamsOff a1/1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \staff<4> _/4 \staff<2> \bar 
+   (* meas. 2 *)  \beamsOff e0/1 ]
+  }

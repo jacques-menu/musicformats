@@ -1,0 +1,17 @@
+headings_flag 1
+
+heading_prefix "\n\\large%
+\\noindent\\textbf{"heading_suffix "}\\par\\nopagebreak\n"
+
+heading_suffix "\\hfill}\\nopagebreak\n"
+
+
+#delim_0 " \\dotfill "
+delim_0 " \\dotfill "
+delim_1 " \\dotfill "
+delim_2 " \\dotfill "
+
+
+item_0 "\n \\item \\small "
+item_1 "\n \\subsubitem "
+item_2 "\n \\subsubsubitem "

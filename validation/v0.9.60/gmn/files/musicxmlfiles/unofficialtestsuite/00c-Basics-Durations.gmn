@@ -1,0 +1,13 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/00c-Basics-Durations.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Note durations"> \composer<"Reinhold Kainhofer", dy=4hs> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"16/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c2*4/1 \bar 
+   (* meas. 2 *)  \beamsOff c*2/1 \beamsOff c/1 \stemsDown \beamsOff c/2 \stemsDown \beamsOff c/4 \stemsDown \beamBegin:1 c/8 \stemsDown c/16 \stemsDown c/32 \stemsDown c/64 \stemsDown c/128 \stemsDown c/128 \beamEnd:1 \bar 
+   (* meas. 3 *)  \meter<"24/4", autoBarlines="off", autoMeasuresNum="system"> \stemsAuto \beamsOff c*6/1. \bar 
+   (* meas. 4 *)  \beamsOff c*3/1. \beamsOff c/1. \beamsOff c/2. \stemsDown \beamsOff c/4. \stemsDown \beamBegin:1 c/8. \stemsDown c/16. \stemsDown c/32. \stemsAuto c/64. c/128. c/128. \beamEnd:1 \bar 
+   (* meas. 5 *)  \meter<"28/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c*7/1.. \bar 
+   (* meas. 6 *)  \beamsOff c*7/2.. \beamsOff c/1.. \beamsOff c/2.. \beamsOff c/4.. \beamBegin:1 c/8.. c/16.. c/32.. c/64.. c/64.. \beamEnd:1 ]
+  }

@@ -1,0 +1,300 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Code base structure}
+% -------------------------------------------------------------------------
+
+
+The code base of the \mf\ library contains:
+\begin{itemize}
+\item \fileName{build} : a set of files to build the library in various environments with \fileName{make}
+\item \fileName{doc} : the documentation in \LaTeX\ source and PDF formats
+\item \fileName{files} : a set of sample files for \mxml\ and \msdlLang
+\item \fileName{javascript} : a set of files for the generation of Java Script, to allow the use of \mf\ in \Web\ sites
+\item \fileName{libmusicxml} : an embedded copy of the \libmusicxml\ code base
+\item \fileName{packages} : a set of files to create installable versions of the library, not yet operational %%%JMI
+\item \fileName{samples} : the main programs for examples supplide with \mf, such as generators and converters
+\item \fileName{schemas} : a set of files defining the input languages, currently \mxml, BMML and MEI, together with scripts to generated the set of classes definitions for analyzing them
+\item \fileName{src} the library code base, detailed below
+\item \fileName{validation} : a set of files including a \fileName{Makefile} for the validation of the library using the contents of \fileName{files}
+\item \fileName{win32} : Windows related support
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{The {\tt libmusicxml} folder}
+% -------------------------------------------------------------------------
+
+This folder contains a version of Grame's \libmusicxml\ library, used by \mf, to avoid the need for installing it separately. The only possible annoyance when installing both libraries is that the executables in \fileName{libmusicxml/build/bin} such as \fileName{countnotes} and \fileName{xml2guido} are installed twice: choosing which one to use can be handled in the {\tt \$\textbraceleft PATH\textbraceright} environment variable or its equivalent.
+
+
+% -------------------------------------------------------------------------
+\section{The {\tt doc} folder}
+% -------------------------------------------------------------------------
+
+This folder contains \fileName{MusicFormatsLaTeXSettings.tex}, included by the various \LaTeX\ documents whose code is in the respective folders, together with the PDF files:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/documentation > ll
+total 56
+ 0 drwxr-xr-x    9 jacquesmenu  staff    288 Jan  4 17:23:41 2022 ./
+ 0 drwxr-xr-x   37 jacquesmenu  staff   1184 Dec 29 08:09:43 2021 ../
+48 -rw-r--r--@   1 jacquesmenu  staff  22532 Jan  4 17:23:00 2022 .DS_Store
+ 8 -rw-r--r--    1 jacquesmenu  staff     42 Apr 22 15:48:42 2021 .gitignore
+ 0 drwxr-xr-x   38 jacquesmenu  staff   1216 Dec 26 08:49:24 2021 IntroductionToMusicXML/
+ 0 drwxr-xr-x  119 jacquesmenu  staff   3808 Jan  4 17:19:38 2022 MusicFormatsMaintainanceGuide/
+ 0 drwxr-xr-x   49 jacquesmenu  staff   1568 Jan  4 17:04:10 2022 MusicFormatsCLIUserGuide/
+ 0 drwxr-xr-x    9 jacquesmenu  staff    288 Jan  4 17:23:41 2022 CommonLaTeXFiles/
+ 0 drwxr-xr-x    6 jacquesmenu  staff    192 Apr 22 15:48:43 2021 presentation/
+\end{lstlisting}
+
+\fileName{common} contains a set of files used by the various documents and various stuff:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/documentation/common > ll
+total 776
+  0 drwxr-xr-x   9 jacquesmenu  staff     288 Jan  4 17:23:41 2022 ./
+  0 drwxr-xr-x   9 jacquesmenu  staff     288 Jan  4 17:23:41 2022 ../
+624 -rw-r--r--   1 jacquesmenu  staff  318497 Apr 22 15:48:40 2021 INSIDE.pdf
+  8 -rw-r--r--@  1 jacquesmenu  staff     321 Sep  8 18:15:51 2021 MusicFormats.ist
+ 48 -rw-r--r--@  1 jacquesmenu  staff   21751 Dec 28 18:45:25 2021 MusicFormatsArchitecturePicture.tex
+ 80 -rw-r--r--@  1 jacquesmenu  staff   39133 Jan  4 17:18:28 2022 MusicFormatsLaTeXSettings.tex
+  8 -rwxr-xr-x@  1 jacquesmenu  staff     157 Jan  4 09:43:30 2022 createCurrentVersionNumberString.bash*
+  0 drwxr-xr-x  12 jacquesmenu  staff     384 Apr 22 15:48:41 2021 images_KEEP/
+  8 -rw-r--r--@  1 jacquesmenu  staff       7 Jan  4 09:25:02 2022  MusicFormatsVersionNumber.txt
+\end{lstlisting}
+
+The \fileName{presentation} sub-folder contains the documentation of the \libmusicxml\ library, written by \fober:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/documentation/presentation > ll
+total 504
+  0 drwxr-xr-x  6 jacquesmenu  staff     192 Apr 22 15:48:43 2021 ./
+  0 drwxr-xr-x  9 jacquesmenu  staff     288 Jan  4 17:23:41 2022 ../
+  0 drwxr-xr-x  6 jacquesmenu  staff     192 Apr 22 15:48:43 2021 imgs/
+ 88 -rw-r--r--  1 jacquesmenu  staff   41534 Apr 22 15:48:43 2021 libmusicxml2.odg
+392 -rw-r--r--  1 jacquesmenu  staff  200524 Apr 22 15:48:43 2021 libmusicxml2.pdf
+ 24 -rw-r--r--@ 1 jacquesmenu  staff   11003 Oct 15 18:48:11 2021 libmusicxml2.tex
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{The {\tt schemas} folder}
+% -------------------------------------------------------------------------
+
+This folder contains the definitions used to create the classes definitions to analyze textual data in the \mxml, \mei and \bmml forat, and \fileName{elements.bash} scripts that compile the definitions into the C++ code files containing the classes:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/schemas > ll
+total 2576
+   0 drwxr-xr-x   9 jacquesmenu  staff      288 May 21 18:30:08 2021 ./
+   0 drwxr-xr-x  22 jacquesmenu  staff      704 May 25 17:19:16 2021 ../
+  16 -rw-r--r--   1 jacquesmenu  staff     6148 May 21 18:30:08 2021 .DS_Store
+   0 drwxr-xr-x   4 jacquesmenu  staff      128 Apr 22 15:49:14 2021 BMML/
+   0 drwxr-xr-x   5 jacquesmenu  staff      160 May 21 18:30:08 2021 MEI/
+   8 -rw-r--r--   1 jacquesmenu  staff     2502 Apr 22 15:49:15 2021 Makefile
+   0 drwxr-xr-x   6 jacquesmenu  staff      192 May 21 18:30:08 2021 MusicXML/
+2552 -rw-r--r--   1 jacquesmenu  staff  1305905 Apr 22 15:49:13 2021 mei-CMN.rng
+   0 drwxr-xr-x   3 jacquesmenu  staff       96 Apr 22 15:49:08 2021 scripts/
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{The {\tt src} folder}
+% -------------------------------------------------------------------------
+
+The \fileName{src} folder has the following structure:%%%JMI ll !!!
+
+\begin{itemize}
+
+\item \fileName{clisamples} : the \mainFunction\ \functions\ of the various \CLI\ executables provided by \mf: %%%JMI
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > ll clisamples/
+total 320
+ 0 drwxr-xr-x  16 jacquesmenu  staff    512 May 24 10:58:19 2021 ./
+ 0 drwxr-xr-x  22 jacquesmenu  staff    704 May 25 17:19:16 2021 ../
+16 -rw-r--r--   1 jacquesmenu  staff   6148 May 21 18:30:07 2021 .DS_Store
+ 8 -rw-r--r--   1 jacquesmenu  staff    116 Apr 22 15:49:06 2021 .gitignore
+40 -rw-r--r--@  1 jacquesmenu  staff  20239 May 24 11:17:46 2021 LilyPondIssue34.cpp
+ 8 -rw-r--r--   1 jacquesmenu  staff   1615 Apr 22 15:49:15 2021 Makefile
+40 -rw-r--r--@  1 jacquesmenu  staff  20239 May 24 11:07:21 2021 Mikrokosmos3Wandering.cpp
+24 -rw-r--r--   1 jacquesmenu  staff   9941 May 21 18:30:07 2021 MusicAndHarmonies.cpp
+ 8 -rw-r--r--   1 jacquesmenu  staff   3114 Apr 22 15:49:15 2021 libMultipleInitsTest.cpp
+48 -rw-r--r--   1 jacquesmenu  staff  23061 May 21 18:30:07 2021 msdl.cpp
+ 8 -rw-r--r--   1 jacquesmenu  staff    895 May 21 18:30:07 2021 musicformatsversion.cpp
+24 -rw-r--r--   1 jacquesmenu  staff  10492 Apr 22 15:49:14 2021 xml2Any.cpp
+24 -rw-r--r--   1 jacquesmenu  staff  10076 May 21 18:30:07 2021 xml2brl.cpp
+24 -rw-r--r--   1 jacquesmenu  staff  10515 May 21 18:30:07 2021 xml2gmn.cpp
+24 -rw-r--r--   1 jacquesmenu  staff  10309 May 21 18:30:07 2021 xml2ly.cpp
+24 -rw-r--r--   1 jacquesmenu  staff  10463 May 21 18:30:08 2021 xml2xml.cpp
+\end{lstlisting}
+
+\item \fileName{converters} : the multi-pass converter combining those in \fileName{passes}
+  \begin{itemize}
+  \item \fileName{msdl2braille}
+  \item \fileName{msdl2guido}
+  \item \fileName{msdl2lilypond}
+  \item \fileName{msdl2musicxml}
+  \item \fileName{msdlconverter}\\[-0.5ex]
+
+  \item \fileName{msr2braille}
+  \item \fileName{msr2guido}
+  \item \fileName{msr2lilypond}
+  \item \fileName{msr2musicxml}\\[-0.5ex]
+
+  \item \fileName{musicxml2braille}
+  \item \fileName{musicxml2guido}
+  \item \fileName{musicxml2lilypond}
+  \item \fileName{musicxml2musicxml}\\[-0.5ex]
+  \end{itemize}
+
+\item \fileName{generators} :
+  \begin{itemize}
+  \item \fileName{LilyPondIssue34}
+  \item \fileName{Mikrokosmos3Wandering}
+  \end{itemize}
+
+\item \fileName{components} : the \mf\ components formats, including versions numbering and history:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll components
+total 168
+ 0 drwxr-xr-x   7 jacquesmenu  staff    224 Oct 22 08:53:06 2021 ./
+ 0 drwxr-xr-x  19 jacquesmenu  staff    608 Oct 22 05:29:29 2021 ../
+ 8 -rw-r--r--@  1 jacquesmenu  staff   1106 Oct 22 09:16:21 2021 mfcComponents.h
+96 -rw-r--r--@  1 jacquesmenu  staff  46691 Nov  8 12:59:57 2021 mfcBasicTypes.cpp
+40 -rw-r--r--@  1 jacquesmenu  staff  20121 Nov  8 12:59:43 2021 mfcBasicTypes.h
+16 -rw-r--r--@  1 jacquesmenu  staff   4950 Nov  8 12:59:08 2021 mfcLibraryComponent.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff    605 Oct 22 10:36:30 2021 mfcLibraryComponent.h
+\end{lstlisting}
+
+\item \fileName{mfutilities} : various utilities, including indented output streams, and version history support:%%%JMI
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll mfutilities/
+total 200
+ 0 drwxr-xr-x  15 jacquesmenu  staff    480 Oct 22 06:25:57 2021 ./
+ 0 drwxr-xr-x  19 jacquesmenu  staff    608 Oct 22 05:29:29 2021 ../
+ 8 -rw-r--r--@  1 jacquesmenu  staff   3255 Oct 18 20:22:16 2021 mfBool.cpp
+16 -rw-r--r--@  1 jacquesmenu  staff   4917 Oct 18 19:56:51 2021 mfBool.h
+ 8 -rw-r--r--@  1 jacquesmenu  staff   1336 Oct 15 18:48:10 2021 mfEnumAll.h
+16 -rw-r--r--@  1 jacquesmenu  staff   7182 Nov  8 13:08:51 2021 mfIndentedTextOutput.cpp
+16 -rw-r--r--@  1 jacquesmenu  staff   7715 Nov  8 13:08:40 2021 mfIndentedTextOutput.h
+ 8 -rw-r--r--@  1 jacquesmenu  staff    889 Oct 15 20:34:47 2021 mfMusicformatsError.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff    629 Oct 15 20:34:47 2021 mfMusicformatsError.h
+ 8 -rw-r--r--@  1 jacquesmenu  staff   2541 Nov  5 11:29:25 2021 oahOptionsVector.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff    972 Oct 15 20:16:51 2021 oahBasicTypes.h
+64 -rw-r--r--@  1 jacquesmenu  staff  29773 Oct 15 18:48:10 2021 mfStringsHandling.cpp
+16 -rw-r--r--@  1 jacquesmenu  staff   6269 Oct 15 18:55:46 2021 mfStringsHandling.h
+16 -rw-r--r--@  1 jacquesmenu  staff   5028 Oct  7 20:03:27 2021 mfTiming.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff   3726 Oct  8 08:21:09 2021 mfTiming.h
+\end{lstlisting}
+
+\item \fileName{oah} : object-oriented Options And Help support
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll oah
+total 1456
+  0 drwxr-xr-x  34 jacquesmenu  staff    1088 Nov 16 08:12:11 2021 ./
+  0 drwxr-xr-x  20 jacquesmenu  staff     640 Nov 16 08:12:03 2021 ../
+ 48 -rw-r--r--@  1 jacquesmenu  staff   23743 Nov 16 08:16:55 2021 basicOah2manPage.cpp
+ 16 -rw-r--r--@  1 jacquesmenu  staff    5202 Nov 15 12:56:16 2021 basicOah2manPage.h
+  8 -rw-r--r--@  1 jacquesmenu  staff     539 Jun  6 06:38:55 2021 enableHarmoniesExtraOahIfDesired.h
+  8 -rw-r--r--@  1 jacquesmenu  staff     526 Oct 11 11:56:29 2021 enableTracingIfDesired.h
+ 72 -rw-r--r--@  1 jacquesmenu  staff   34280 Nov 16 08:16:55 2021 harmoniesExtraOah.cpp
+ 24 -rw-r--r--@  1 jacquesmenu  staff   11848 Nov 15 12:56:16 2021 harmoniesExtraOah.h
+ 16 -rw-r--r--@  1 jacquesmenu  staff    5154 Nov 16 08:16:55 2021 harmoniesExtraOah2manPage.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff    1689 Nov 15 12:56:16 2021 harmoniesExtraOah2manPage.h
+  8 -rw-r--r--@  1 jacquesmenu  staff     918 Nov 16 08:16:55 2021 oah2manPage.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff     912 Nov 15 12:56:16 2021 oah2manPage.h
+344 -rw-r--r--@  1 jacquesmenu  staff  175094 Nov 16 08:16:55 2021 oahAtomsCollection.cpp
+176 -rw-r--r--@  1 jacquesmenu  staff   87460 Nov 15 12:56:16 2021 oahAtomsCollection.h
+336 -rw-r--r--@  1 jacquesmenu  staff  168969 Nov 16 08:16:55 2021 oahBasicTypes.cpp
+ 96 -rw-r--r--@  1 jacquesmenu  staff   47228 Nov 15 12:56:16 2021 oahBasicTypes.h
+  8 -rw-r--r--@  1 jacquesmenu  staff    3258 Nov 16 08:16:55 2021 oahBrowsers.h
+ 32 -rw-r--r--@  1 jacquesmenu  staff   14030 Nov 16 08:16:55 2021 oahElements.cpp
+ 24 -rw-r--r--@  1 jacquesmenu  staff   10381 Nov 15 12:56:16 2021 oahElements.h
+  8 -rw-r--r--@  1 jacquesmenu  staff    2577 Nov 16 08:16:55 2021 oahInsiderHandlers.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff    2982 Nov 15 12:56:16 2021 oahInsiderHandlers.h
+ 56 -rw-r--r--@  1 jacquesmenu  staff   25901 Nov 16 08:16:55 2021 oahOah.cpp
+ 32 -rw-r--r--@  1 jacquesmenu  staff   13849 Nov 16 08:16:55 2021 oahOah.h
+  8 -rw-r--r--@  1 jacquesmenu  staff    1966 Nov 16 08:16:55 2021 oahOah2manPage.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff    1021 Nov 15 12:56:16 2021 oahOah2manPage.h
+ 24 -rw-r--r--@  1 jacquesmenu  staff    8831 Nov 16 08:16:55 2021 oahRegularHandlers.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff    3855 Nov 15 12:56:16 2021 oahRegularHandlers.h
+  8 -rw-r--r--@  1 jacquesmenu  staff     568 Nov 15 12:56:16 2021 oahVisitor.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff     894 Nov 15 12:56:16 2021 oahVisitor.h
+ 16 -rw-r--r--@  1 jacquesmenu  staff    5978 Nov 16 08:16:55 2021 outputFileOah.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff    3593 Nov 15 12:56:16 2021 outputFileOah.h
+  8 -rwxr--r--@  1 jacquesmenu  staff     236 Oct 23 12:02:12 2021 zsh_test.zsh*
+\end{lstlisting}
+
+\item \fileName{formatsgeneration} : support for various output kinds
+  \begin{itemize}
+  \item \fileName{brailleGeneration}
+  \item \fileName{guidoGeneration}
+  \item \fileName{lilypondGeneration}
+  \item \fileName{msrGeneration}
+  \item \fileName{multiGeneration}
+  \item \fileName{mxsrGeneration}
+  \end{itemize}
+
+\item \fileName{passes} : code for the individual passes
+  \begin{itemize}
+  \item \fileName{bsr2braille}
+  \item \fileName{bsr2bsr}\\[-0.5ex]
+
+  \item \fileName{lpsr2lilypond}\\[-0.5ex]
+
+  \item \fileName{msr2bsr}
+  \item \fileName{msr2lpsr}
+  \item \fileName{msr2msr}
+  \item \fileName{msr2mxsr}\\[-0.5ex]
+
+  \item \fileName{mxsr2guido}
+  \item \fileName{mxsr2msr}
+  \item \fileName{mxsr2musicxml}\\[-0.5ex]
+  \end{itemize}
+
+\item \fileName{formats} : the various internal representations used by \mf\
+  \begin{itemize}
+  \item \fileName{bsr}
+  \item \fileName{lpsr}
+  \item \fileName{msdl}
+  \item \fileName{msdr}
+  \item \fileName{msr}
+  \item \fileName{msrapi}
+  \item \fileName{mxsr}
+  \end{itemize}
+
+\item \fileName{wae} : multilingual Warnings And Errors support, including exceptions handling
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll wae/
+total 104
+ 0 drwxr-xr-x   9 jacquesmenu  staff    288 Oct 15 20:23:46 2021 ./
+ 0 drwxr-xr-x  20 jacquesmenu  staff    640 Nov 16 08:12:03 2021 ../
+ 8 -rw-r--r--@  1 jacquesmenu  staff    680 Jun  6 06:35:19 2021 enableAbortToDebugErrors.h
+ 8 -rw-r--r--@  1 jacquesmenu  staff    602 Nov 15 12:56:18 2021 waeExceptions.cpp
+24 -rw-r--r--@  1 jacquesmenu  staff  11514 Nov 15 12:56:18 2021 waeExceptions.h
+ 8 -rw-r--r--@  1 jacquesmenu  staff   1393 Nov 16 08:16:55 2021 waeHandlers.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff   1550 Nov 15 12:56:18 2021 waeHandlers.h
+32 -rw-r--r--@  1 jacquesmenu  staff  16317 Nov 15 12:56:18 2021 wae.cpp
+16 -rw-r--r--@  1 jacquesmenu  staff   5794 Nov 15 12:56:18 2021 wae.h
+\end{lstlisting}
+
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{The {\tt validation} folder}
+% -------------------------------------------------------------------------
+
+This folder contains a \fileName{Makefile} to compile all the files in the \fileName{files} folder.
+\fileName{musicformatsversion.txt} contains a validation version number, without a priori relation to the actual version number of the library, for example:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/validation > cat musicformatsversion.txt
+1.0.0
+\end{lstlisting}
+
+In this example, \fileName{make} will create a folder named \fileName{1.0.0} containing the converted files, including PDF files produced by \fileName{lilypond}.
+
+This validation version number allows for comparisions between version to ease regression tests.
+
+There is no \fileName{clean} target in the \fileName{Makefile}. Removing the \fileName{1.0.0} folder in this case does the equivalent, then we can run \fileName{make} again.
+
+
+
+

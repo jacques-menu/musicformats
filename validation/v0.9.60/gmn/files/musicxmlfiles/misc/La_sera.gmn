@@ -1,0 +1,15 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/misc/La_sera.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"La sera"> \auto<autoInstrPos="on"> \instr<"Flauto dritto discanto"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff g/2 \stemsUp \beamsOff g/2 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff b/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff a/2 \stemsUp \beamsOff a/2 \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff c2/4 \stemsDown \beamsOff b1/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff g/2 \stemsUp \beamsOff g/2 \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff b/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff a/4 \stemsDown \beamsOff c2/4 \stemsDown \beamsOff b1/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 8 *)  \stemsUp \beamsOff g/4 \stemsUp \beamsOff g/4 \stemsUp \beamsOff g/2 \repeatEnd ]
+  }

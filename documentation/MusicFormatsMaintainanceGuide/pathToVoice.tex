@@ -1,0 +1,44 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Path to voice}\label{Path to voice}
+% -------------------------------------------------------------------------
+
+\msrBoth{msrPathToVoice.h} defines \class{msrPathToVoice}, used to create partial clones of \class{msrBook} retaining only certain staves and/or voices, or to create new \class{msrScore} instances containing each of them only:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrPathToVoice : public smartable
+{
+	// ... ... ...
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  appendPartGroup (S_msrPartGroup partGroup)
+                              {
+                                fPartGroupsList.push_back (partGroup);
+                              }
+
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    S_msrBook             fBook;
+
+    S_msrScore            fScore;
+
+    // part groups can be nested
+    list<S_msrPartGroup>  fPartGroupsList;
+
+    S_msrPart             fPart;
+
+    S_msrStaff            fStaff;
+
+    S_msrVoice            fVoice;
+};
+\end{lstlisting}
+

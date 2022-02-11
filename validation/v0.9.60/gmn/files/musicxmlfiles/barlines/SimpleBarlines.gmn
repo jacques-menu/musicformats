@@ -1,0 +1,20 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/barlines/SimpleBarlines.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \doubleBar 
+   (* meas. 7 *)  _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  _/1 \bar 
+   (* meas. 12 *)  _/1 \bar<hidden="true"> 
+   (* meas. 13 *)  _/1 ]
+  }

@@ -1,0 +1,15 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/repeats/RepeatsWithoutMusic.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Tromba 1 in D"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"Air",font="Arial",fsize=12pt,fattrib="b", dy=0.2hs> _/1 \bar 
+   (* meas. 2 *)  \volta<"1", "1.">( _/1)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 3 *)  \volta<"2", "2.", format="|-">( _/1)
+ 
+   (* meas. 4 *)  \repeatBegin _/1 \bar 
+   (* meas. 5 *)  \fermata( _/1)
+ \repeatEnd ]
+  }

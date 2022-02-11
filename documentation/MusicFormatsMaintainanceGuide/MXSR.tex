@@ -1,0 +1,396 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{MusicXML Scores Representation (MXSR)}
+% -------------------------------------------------------------------------
+
+This format is provided by \libmusicxml, even though \fober\ didn't give it that name. It is a tree of \class{mxmlelement} nodes, mapped one to one to the \mxml\ markups.
+
+The files in \fileName{libmusicxml/src}.
+
+A set of interface functions\index{functions} is contained in \mxsrBoth{mxsr}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src > ll formats/mxsr/
+total 48
+ 0 drwxr-xr-x   6 jacquesmenu  staff   192 May 26 08:20:55 2021 ./
+ 0 drwxr-xr-x  10 jacquesmenu  staff   320 Jun 25 05:39:49 2021 ../
+ 8 -rw-r--r--@  1 jacquesmenu  staff  3292 Jun  6 06:35:19 2021 mxsr.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff  1555 Jun  6 06:35:19 2021 mxsrGeneration.h
+16 -rw-r--r--@  1 jacquesmenu  staff  7781 Jun  6 06:35:19 2021 mxsrOah.cpp
+16 -rw-r--r--@  1 jacquesmenu  staff  4829 Jun  6 06:35:19 2021 mxsrOah.h
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{MusicXML elements and attributes}
+% -------------------------------------------------------------------------
+
+\mxml\ data contains so-called elements, written as {\tt <...~/>} markups, that can be nested:
+\begin{lstlisting}[language=MusicXML]
+			<system-margins>
+				<left-margin>15</left-margin>
+				<right-margin>0</right-margin>
+			</system-margins>
+\end{lstlisting}
+In the example above, the values of the two margins are {\tt 15} and {\tt 0}, respectively.
+
+\mxml\ elements can have attributes, such as {\tt version} below:
+\begin{lstlisting}[language=MusicXML]
+<score-partwise version="3.1">
+\end{lstlisting}
+
+The values of the elements and attributes are strings.
+
+There are two special elements at the beginning of \mxml\ data:
+\begin{itemize}
+\item a \musicXmlMarkup{?xml} element indicating the characters encoding used;
+\item a \musicXmlMarkup{$"!"$DOCTYPE} element telling that the contents is in ’score-partwise’ mode and containing the URL of the DTD.
+\end{itemize}
+
+An exemple is:
+\begin{lstlisting}[language=MusicXML]
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN"
+                                "http://www.musicxml.org/dtds/partwise.dtd">
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{The {\tt xmlelement} and {\tt xmlattribute} types}\className{xmlelement}\className{xmlattribute}
+% -------------------------------------------------------------------------
+
+These two classes are defined in \elementsBoth{xml}:
+\begin{lstlisting}[language=CPlusPlus]
+class xmlelement;
+class xmlattribute;
+
+typedef SMARTP<xmlattribute> 	Sxmlattribute;
+typedef SMARTP<xmlelement> 		Sxmlelement;
+\end{lstlisting}
+
+Class {\tt xmlattribute} contains:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+class EXP xmlattribute : public smartable {
+	//! the attribute name
+	std::string	fName;
+	//! the attribute value
+	std::string 	fValue;
+
+	// ... ... ...
+
+		//! returns the attribute value as a int
+		operator int () const;
+		//! returns the attribute value as a long
+		operator long () const;
+		//! returns the attribute value as a float
+		operator float () const;
+\end{lstlisting}
+
+Class {\tt xmlelement} contains:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP xmlelement : public ctree<xmlelement>, public visitable
+{
+	private:
+		//! the element name
+		std::string fName;
+		//! the element value
+		std::string fValue;
+		//! list of the element attributes
+		std::vector<Sxmlattribute> fAttributes;
+
+	protected:
+		// the element type
+		int fType;
+		// the input line number for messages to the user
+		int fInputLineNumber;
+
+	// ... ... ...
+
+		//! returns the element value as a long
+		operator long () const;
+		//! returns the element value as a int
+		operator int () const;
+		//! returns the element value as a float
+		operator float () const;
+		//! elements comparison
+		Bool operator ==(const xmlelement& elt) const;
+		Bool operator !=(const xmlelement& elt) const { return !(*this == elt); }
+
+		//! adds an attribute to the element
+		long add (const Sxmlattribute& attr);
+
+	// ... ... ...
+};
+\end{lstlisting}
+
+Type {\tt Sxmlelement} is a \smart\ to an {\tt xmlelement}, so it is an {\tt xmlelement} tree, since {\tt xmlelement} is a recursive type.
+
+{\tt fInputLineNumber} is used for example in warning and error messages, to help the user locate the problem.
+
+{\tt fType} typically contains a value of some \enumType, more on this below.
+
+
+% -------------------------------------------------------------------------
+\section{Enumeration types for {\tt xmlelement}'s {\tt fType}}\className{xmlelement}\fieldIndex{xmlelement}{fType}
+% -------------------------------------------------------------------------
+
+\libmusicxml\ uses {\tt elements/templates/elements.bash}, a Bash script, to generate the \enumType\ constants and classes source code from the \mxml\ DTD. This is not done in the {\tt Makefile}, since it is to be run by hand only once.
+
+The DTD files we use as reference are in {\tt libmusicxml/dtds/3.1/schema};
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/libmusicxml/dtds/3.1/schema > ls -sal *.mod
+ 40 -rwxr-xr-x@ 1 jacquesmenu  staff  20238 Apr 22 15:49 attributes.mod
+ 16 -rwxr-xr-x  1 jacquesmenu  staff   4943 Apr 22 15:49 barLine.mod
+ 80 -rwxr-xr-x@ 1 jacquesmenu  staff  37932 Apr 22 15:49 common.mod
+ 88 -rwxr-xr-x@ 1 jacquesmenu  staff  41960 Apr 22 15:49 direction.mod
+ 16 -rwxr-xr-x@ 1 jacquesmenu  staff   4097 Apr 22 15:49 identity.mod
+ 24 -rwxr-xr-x@ 1 jacquesmenu  staff  10266 Apr 22 15:49 layout.mod
+  8 -rwxr-xr-x@ 1 jacquesmenu  staff   2833 Apr 22 15:49 link.mod
+104 -rwxr-xr-x@ 1 jacquesmenu  staff  51384 Apr 22 15:49 note.mod
+ 32 -rwxr-xr-x@ 1 jacquesmenu  staff  15476 Apr 22 15:49 score.mod
+\end{lstlisting}
+
+The first result of running \templates{elements.bash} is an anonymous \enumType\ defined in \elements{elements.h}:
+\begin{lstlisting}[language=CPlusPlus]
+enum {
+	kNoElement,
+	kComment,
+	kProcessingInstruction,
+	k_accent,
+	k_accidental,
+	k_accidental_mark,
+	k_accidental_text,
+
+	// ... ... ...
+
+	k_work,
+	k_work_number,
+	k_work_title,
+	kEndElement
+};
+\end{lstlisting}
+
+The constants {\tt kNoElement}, {\tt kComment} and {\tt kProcessingInstruction} are added by {\tt elements.bash}.
+
+
+% -------------------------------------------------------------------------
+\section{Classes for the {\tt xmlelement}s}
+% -------------------------------------------------------------------------
+
+All the \mxml\ classes are instantiated from the {\tt musicxml} template class, defined in \elements{types.h}. This is where {\tt fType} gets its value:
+\begin{lstlisting}[language=CPlusPlus]
+template <int elt> class musicxml : public xmlelement
+{
+  protected:
+    musicxml (int inputLineNumber) : xmlelement (inputLineNumber)	{ fType = elt; }
+};
+\end{lstlisting}
+
+The \smart\ s to the various elements are defined in \elements{typedef.h}, using an anonymous \enumType:
+\begin{lstlisting}[language=CPlusPlus]
+typedef SMARTP<musicxml<kComment> >					S_comment;
+typedef SMARTP<musicxml<kProcessingInstruction> >	S_processing_instruction;
+
+typedef SMARTP<musicxml<k_accent> >		S_accent;
+typedef SMARTP<musicxml<k_accidental> >		S_accidental;
+typedef SMARTP<musicxml<k_accidental_mark> >		S_accidental_mark;
+typedef SMARTP<musicxml<k_accidental_text> >		S_accidental_text;
+
+// ... ... ...
+
+typedef SMARTP<musicxml<k_work> >		S_work;
+typedef SMARTP<musicxml<k_work_number> >		S_work_number;
+typedef SMARTP<musicxml<k_work_title> >		S_work_title;
+\end{lstlisting}
+
+The two-way correspondance of \mxml\ elements names to type {\tt Sxmlelement} is stored {\tt fMap} and {\tt fType2Name}, defined in \elements{factory.h}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP factory : public singleton<factory>{
+
+	std::map<std::string, functor<Sxmlelement>*> fMap;
+	std::map<int, const char*>	fType2Name;
+
+	// ... ... ...
+};
+\end{lstlisting}
+
+Those two maps are initialized in \libmusicxmlsamples{elements/factory.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+factory::factory()
+{
+	fMap["comment"] 		= new newElementFunctor<kComment>;
+	fMap["pi"] 				= new newElementFunctor<kProcessingInstruction>;
+	fType2Name[kComment] 	= "comment";
+	fType2Name[kProcessingInstruction]  = "pi";
+
+	fMap["accent"] 	= new newElementFunctor<k_accent>;
+	fMap["accidental"] 	= new newElementFunctor<k_accidental>;
+	fMap["accidental-mark"] 	= new newElementFunctor<k_accidental_mark>;
+	fMap["accidental-text"] 	= new newElementFunctor<k_accidental_text>;
+
+	// ... ... ...
+
+	fMap["work"] 	= new newElementFunctor<k_work>;
+	fMap["work-number"] 	= new newElementFunctor<k_work_number>;
+	fMap["work-title"] 	= new newElementFunctor<k_work_title>;
+
+	fType2Name[k_accent] 	= "accent";
+	fType2Name[k_accidental] 	= "accidental";
+	fType2Name[k_accidental_mark] 	= "accidental-mark";
+	fType2Name[k_accidental_text] 	= "accidental-text";
+
+	// ... ... ...
+
+	fType2Name[k_work] 	= "work";
+	fType2Name[k_work_number] 	= "work-number";
+	fType2Name[k_work_title] 	= "work-title";
+}
+\end{lstlisting}
+
+Class {\tt newElementFunctor} is defined in {\tt } to provide call operator as:
+\begin{lstlisting}[language=CPlusPlus]
+template<int elt>
+class newElementFunctor : public functor<Sxmlelement>
+{
+  public:
+
+    Sxmlelement operator ()()
+        { return musicxml<elt>::new_musicxml (libmxmllineno); }
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{{\tt xmlelement} trees}
+% -------------------------------------------------------------------------
+
+This section describes features supplied by \libmusicxml.
+
+An {\tt xmlelement} is the basic brick to represent a \mxml\ element.
+
+Smart pointer type {\tt SXMLFile} is defined in \libFiles{xmlfile.h}:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+class EXP TXMLFile : public smartable
+{
+  private:
+    TXMLDecl*             fXMLDecl;
+    TDocType*             fDocType;
+    Sxmlelement           fXMLTree;
+
+  protected:
+			 TXMLFile () : fXMLDecl(0), fDocType(0) {}
+    virtual ~TXMLFile () { delete fXMLDecl; delete fDocType; }
+
+  public:
+    static SMARTP<TXMLFile> create();
+
+  public:
+    TXMLDecl* 		getXMLDecl ()			{ return fXMLDecl; }
+    TDocType* 		getDocType ()			{ return fDocType; }
+    Sxmlelement		elements () 			{ return fXMLTree; }
+
+    void 			set (Sxmlelement root)	{ fXMLTree = root; }
+    void 			set (TXMLDecl * dec)	{ fXMLDecl = dec; }
+    void 			set (TDocType * dt)		{ fDocType = dt; }
+
+    void 			print (std::ostream& s);
+};
+typedef SMARTP<TXMLFile> SXMLFile;
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+	\subsection{Creating {\tt xmlelement} trees from textual data}
+% -------------------------------------------------------------------------
+
+Reading \mxml\ data creates instances of {\tt xmlelement}. This is done by and instance of {\tt xmlreader}, defined in \libFilesBoth{xmlreader}, which provides methods:
+\begin{lstlisting}[language=CPlusPlus]
+		SXMLFile readbuff(const char* file);
+		SXMLFile read(const char* file);
+		SXMLFile read(FILE* file);
+\end{lstlisting}
+
+These three functions\index{functions} are defined this way:
+\begin{lstlisting}[language=CPlusPlus]
+//_______________________________________________________________________________
+SXMLFile xmlreader::readbuff(const char* buffer)
+{
+	fFile = TXMLFile::create();
+	debug("read buffer", '-');
+	return readbuffer (buffer, this) ? fFile : 0;
+}
+
+//_______________________________________________________________________________
+SXMLFile xmlreader::read(const char* file)
+{
+	fFile = TXMLFile::create();
+	debug("read", file);
+	return readfile (file, this) ? fFile : 0;
+}
+
+//_______________________________________________________________________________
+SXMLFile xmlreader::read(FILE* file)
+{
+	fFile = TXMLFile::create();
+	return readstream (file, this) ? fFile : 0;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+	\subsection{Printing {\tt xmlelement} trees}
+% -------------------------------------------------------------------------
+
+An {\tt xmlelement} can be printed by \function{printMxsr}, defined in \mxsrBoth{mxsr}:
+\begin{lstlisting}[language=CPlusPlus]
+void printMxsr (const Sxmlelement theMxsr, ostream& os)
+{
+  xmlvisitor v (os);
+  tree_browser<xmlelement> browser (&v);
+  browser.browse (*theMxsr);
+}
+\end{lstlisting}
+
+ This how \mxml\ and Guido output are generated.
+
+
+% -------------------------------------------------------------------------
+\section{The {\tt SXMLFile} type}\index[Alphabetica]{SXMLFile}\index[Types]{SXMLFile}
+% -------------------------------------------------------------------------
+
+\smartPointerType{SXMLFile} is defined in \factory{musicxmlfactory.h} as a \smart\ to \class{TXMLFile}:
+\begin{lstlisting}[language=CPlusPlus]
+//______________________________________________________________________________
+class EXP TXMLFile : public smartable
+{
+  private:
+    TXMLDecl*             fXMLDecl;
+    TDocType*             fDocType;
+    Sxmlelement           fXMLTree;
+
+  protected:
+			 TXMLFile () : fXMLDecl(0), fDocType(0) {}
+    virtual ~TXMLFile () { delete fXMLDecl; delete fDocType; }
+
+  public:
+    static SMARTP<TXMLFile> create();
+
+  public:
+    TXMLDecl* 		getXMLDecl ()			{ return fXMLDecl; }
+    TDocType* 		getDocType ()			{ return fDocType; }
+    Sxmlelement		elements () 			{ return fXMLTree; }
+
+    void 			set (Sxmlelement root)	{ fXMLTree = root; }
+    void 			set (TXMLDecl * dec)	{ fXMLDecl = dec; }
+    void 			set (TDocType * dt)		{ fDocType = dt; }
+
+    void 			print (std::ostream& s);
+};
+typedef SMARTP<TXMLFile> SXMLFile;
+\end{lstlisting}
+
+{\tt fXMLDecl} describes the \musicXmlMarkup{?xml} element and {\tt fDocType} contains the \musicXmlMarkup{$"!"$DOCTYPE} element.
+
+

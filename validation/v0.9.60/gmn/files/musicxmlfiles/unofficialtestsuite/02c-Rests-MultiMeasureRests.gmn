@@ -1,0 +1,37 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/02c-Rests-MultiMeasureRests.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \bar 
+   (* meas. 7 *)  _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  _/1 \bar 
+   (* meas. 12 *)  _/1 \bar 
+   (* meas. 13 *)  _/1 \bar 
+   (* meas. 14 *)  _/1 \bar 
+   (* meas. 15 *)  _/1 \bar 
+   (* meas. 16 *)  _/1 \bar 
+   (* meas. 17 *)  _/1 \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  _/1 \bar 
+   (* meas. 20 *)  _/1 \bar 
+   (* meas. 21 *)  _/1 \bar 
+   (* meas. 22 *)  _/1 \bar 
+   (* meas. 23 *)  _/1 \bar 
+   (* meas. 24 *)  _/1 \bar 
+   (* meas. 25 *)  _/1 \bar 
+   (* meas. 26 *)  _/1 \bar 
+   (* meas. 27 *)  _/1 \bar 
+   (* meas. 28 *)  _/1 \bar 
+   (* meas. 29 *)  _/1 \bar 
+   (* meas. 30 *)  _/1 ]
+  }

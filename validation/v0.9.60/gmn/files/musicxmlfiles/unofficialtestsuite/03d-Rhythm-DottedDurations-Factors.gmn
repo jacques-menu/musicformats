@@ -1,0 +1,24 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/03d-Rhythm-DottedDurations-Factors.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \meter<"1/8", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c2/8 \bar 
+   (* meas. 2 *)  _/8 \bar 
+   (* meas. 3 *)  \meter<"2/8", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/4 \bar 
+   (* meas. 4 *)  _/4 \bar 
+   (* meas. 5 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/2. \bar 
+   (* meas. 6 *)  _*3/4 \bar 
+   (* meas. 7 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  \meter<"5/16", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/4 \beamsOff c/16 \bar 
+   (* meas. 10 *)  _*5/16 \bar 
+   (* meas. 11 *)  \meter<"7/8", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/2.. \bar 
+   (* meas. 12 *)  _*7/8 \bar 
+   (* meas. 13 *)  \meter<"9/8", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/1 \beamsOff c/8 \bar 
+   (* meas. 14 *)  _*9/8 \bar 
+   (* meas. 15 *)  \meter<"31/8", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/16 \bar 
+   (* meas. 16 *)  _*31/8 \bar 
+   (* meas. 17 *)  \meter<"2/2", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/1 ]
+  }

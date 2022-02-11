@@ -1,0 +1,13 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/gracenotes/StemDirectionFollowingGraceNote.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"test"> \auto<autoInstrPos="on"> \instr<"Piano"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 105"> \stemsDown \beamBegin:1 a/8 \stemsDown d2/8 \stemsDown d/8 \stemsDown d/8 \beamEnd:1 \stemsDown \beamsOff d/8 _/8 \stemsUp \grace( \slurBegin:1 \beamsOff d/8)
+ \stemsDown \beamsOff \stacc( d3/8)
+ \slurEnd:1 _/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff d-1/4 _/4 _/4 _/4 ]
+  }

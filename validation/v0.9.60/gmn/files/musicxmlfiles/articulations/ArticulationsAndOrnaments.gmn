@@ -1,0 +1,14 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/articulations/ArticulationsAndOrnaments.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Soprano saxophone"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \intens<"f", dy=-3hs> \tempo<"Moderato  [1/4] = 80",fsize=12pt,fattrib="b", dy=4hs, dy=4hs> \stemsUp \beamsOff c/4 \stemsUp \beamsOff \stacc( e/4)
+ \stemsUp \beamsOff g/4 \stemsDown \beamsOff \marcato( c2/4)
+ \bar 
+   (* meas. 2 *)  \mark<"A", enclosure="square", fsize=14pt, dy=2hs> \text<"sempre forte",fattrib="i", dx=-0.368hs, dy=-1.088hs>( \stemsDown \beamsOff e/4)
+ \stemsDown \beamsOff c/4 \text<"rit.",fattrib="i", dx=0hs, dy=19hs>( \stemsUp \beamsOff g1/2)
+ \breathMark<dy=-3hs> \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff c/4 _/4 _/2 ]
+  }

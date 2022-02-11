@@ -1,0 +1,14 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/basic/NotePrintObjectNoExample.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Bingo"> \auto<autoInstrPos="on"> \instr<"Piano"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-1> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff f2/4 \stemsDown \beamsOff f/4 \stemsDown \beamBegin:1 g/8 \stemsDown g/8 \stemsDown g/8 \stemsDown f/8 \beamEnd:1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-1> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamBegin:1 d0/8 \stemsDown {a/8, d1/8, f/8  } \stemsDown d0/8 \stemsDown {a/8, d1/8, f/8  } \beamEnd:1 \stemsDown \beamBegin:1 g0/8 \stemsDown {b&/8, d1/8  } \stemsDown g0/8 \stemsDown {b&/8, d1/8  } \beamEnd:1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \stemsDown \beamsOff d0/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff g/4 \stemsDown \beamsOff g/4 ]
+  }

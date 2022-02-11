@@ -1,0 +1,32 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/41e-StaffGroups-InstrumentNames-Linebroken.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Long&#xd;
+Staff&#xd;
+Name"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff b/1 \bar 
+   (* meas. 2 *)  \beamsOff b/1 \bar 
+   (* meas. 3 *)  \beamsOff b/1 \bar 
+   (* meas. 4 *)  \beamsOff b/1 \bar 
+   (* meas. 5 *)  \beamsOff b/1 \bar 
+   (* meas. 6 *)  \beamsOff b/1 \bar 
+   (* meas. 7 *)  \beamsOff b/1 \bar 
+   (* meas. 8 *)  \beamsOff b/1 \bar 
+   (* meas. 9 *)  \beamsOff b/1 \bar 
+   (* meas. 10 *)  \beamsOff b/1 \bar 
+   (* meas. 11 *)  \beamsOff b/1 \bar 
+   (* meas. 12 *)  \beamsOff b/1 \bar 
+   (* meas. 13 *)  \beamsOff b/1 \bar 
+   (* meas. 14 *)  \beamsOff b/1 \bar 
+   (* meas. 15 *)  \beamsOff b/1 \bar 
+   (* meas. 16 *)  \beamsOff b/1 \bar 
+   (* meas. 17 *)  \beamsOff b/1 \bar 
+   (* meas. 18 *)  \beamsOff b/1 \bar 
+   (* meas. 19 *)  \beamsOff b/1 \bar 
+   (* meas. 20 *)  \beamsOff b/1 \bar 
+   (* meas. 21 *)  \beamsOff b/1 \bar 
+   (* meas. 22 *)  \beamsOff b/1 \bar 
+   (* meas. 23 *)  _/1 ]
+  }

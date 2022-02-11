@@ -1,0 +1,66 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/lyrics/ShortEchigo-Jishi.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"越後獅子"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"Allegro",fsize=12pt,fattrib="b", dy=0.6hs> \stemsUp \beamBegin:1 a/8 \stemsUp a/8 \stemsUp b/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamBegin:1 b/8 \stemsDown a/8 \stemsDown b/8 \stemsDown c2/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 e/8 \stemsDown c/8 \stemsDown b1/8 \stemsDown a/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \beamsOff f/4. _/8 \bar 
+   (* meas. 5 *)  \stemsUp \beamBegin:1 f/8 \stemsUp a/8 \stemsUp b/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff f/4. \stemsUp \beamsOff e/8 \bar 
+   (* meas. 7 *)  \stemsUp \beamBegin:1 f/8 \stemsUp a/8 \stemsUp f/8 \stemsUp e/8 \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsUp \beamBegin:1 d/8 \stemsUp d/8 \stemsUp d/8 \stemsUp e/8 \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsUp \beamBegin:1 f/8 \stemsUp e/8 \stemsUp b0/8 \stemsUp d1/8 \beamEnd:1 \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff e/4. _/8 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff d/8 \stemsUp \beamsOff \lyrics<"オノ", autopos="on">( d/4)
+ \stemsUp \beamsOff \lyrics<"ガ", autopos="on">( e/8)
+ \bar 
+   (* meas. 12 *)  \stemsUp \beamsOff \lyrics<"ス", autopos="on">( f/8)
+ \stemsUp \beamsOff \lyrics<"ガタ", autopos="on">( f/4)
+ \stemsUp \beamsOff \lyrics<"ヲ", autopos="on">( e/8)
+ \bar 
+   (* meas. 13 *)  \stemsUp \beamBegin:1 \lyrics<"ハ", autopos="on">( a/8)
+ \stemsUp \lyrics<"ナ", autopos="on">( a/8)
+ \stemsUp \lyrics<"ト", autopos="on">( b/8)
+ \stemsUp \lyrics<"ミ", autopos="on">( a/8)
+ \beamEnd:1 \bar 
+   (* meas. 14 *)  \stemsDown \beamsOff \lyrics<"テ", autopos="on">( b/4)
+ \stemsDown \beamBegin:1 c2/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 15 *)  \stemsDown \beamsOff \lyrics<"　", autopos="on">( \acc( f#/8)
+)
+ \stemsDown \beamsOff \lyrics<"ニ", autopos="on">( f#/4)
+ \stemsDown \beamsOff e/8 \bar 
+   (* meas. 16 *)  \stemsDown \beamBegin:1 \lyrics<"ワ", autopos="on">( c/8)
+ \stemsDown c/8 \stemsDown \lyrics<"ニ", autopos="on">( c/8)
+ \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 17 *)  \stemsDown \beamsOff \lyrics<"　", autopos="on">( \acc( f#/8)
+)
+ \stemsDown \beamsOff \lyrics<"サイ", autopos="on">( f#/4)
+ \stemsDown \beamsOff e/8 \bar 
+   (* meas. 18 *)  \stemsDown \beamBegin:1 \lyrics<"タ", autopos="on">( c/8)
+ \stemsDown e/16 \stemsDown c/16 \beamEnd:1 \stemsUp \beamBegin:1 \lyrics<"リ", autopos="on">( b1/8)
+ \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 19 *)  \stemsDown \beamBegin:1 \lyrics<"　", autopos="on">( b/8)
+ \stemsDown \lyrics<"サ", autopos="on">( c2/8)
+ \stemsDown \lyrics<"カ", autopos="on">( e/8)
+ \stemsDown a1/8 \beamEnd:1 \bar 
+   (* meas. 20 *)  \stemsUp \beamBegin:1 \lyrics<"セ", autopos="on">( c2/8)
+ \stemsUp b1/8 \stemsUp \lyrics<"タ", autopos="on">( a/8)
+ \stemsUp f/8 \beamEnd:1 \bar 
+   (* meas. 21 *)  \stemsUp \beamsOff \lyrics<"リ", autopos="on">( e/4.)
+ \stemsUp \beamsOff \lyrics<"ソ", autopos="on">( f/8)
+ \bar 
+   (* meas. 22 *)  \stemsUp \beamBegin:1 \lyrics<"コ", autopos="on">( a/8)
+ \stemsUp \lyrics<"ナ", autopos="on">( b/8)
+ \beamEnd:1 \stemsDown \beamsOff \lyrics<"オ", autopos="on">( c2/4)
+ \bar 
+   (* meas. 23 *)  \stemsDown \beamsOff \lyrics<"ケ", autopos="on">( e/4)
+ \stemsDown \beamBegin:1 \lyrics<"サ", autopos="on">( c/8)
+ \stemsDown b1/8 \beamEnd:1 \bar 
+   (* meas. 24 *)  \stemsUp \beamsOff \lyrics<"ニ", autopos="on">( a/4)
+ \stemsUp \beamBegin:1 \lyrics<"イ", autopos="on">( a/8)
+ \stemsUp \lyrics<"ナ", autopos="on">( f/8)
+ \beamEnd:1 ]
+  }

@@ -1,0 +1,117 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Parts handling}\label{Parts handling}
+% -------------------------------------------------------------------------
+
+Parts are presented at \sectionRef{Parts}.
+
+
+% -------------------------------------------------------------------------
+\section{Parts browsing}\label{Parts browsing}
+% -------------------------------------------------------------------------
+
+\Method{msrPart}{browseData} defined in \msrBoth{msrParts}\index{Parts!browsing} is pecular in that it imposes a \MainIt{partial order}\index{partial!order}\index{order!partial|see{partial order}} on the part staves browsing: %%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+void msrPart::browseData (basevisitor* v)
+{
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrPart::browseData ()" <<
+      endl;
+  }
+
+#ifdef TRACING_IS_ENABLED // JMI
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) { // JMI TEMP
+    gLogStream <<
+      "++++++++ fPartAllStavesList.size(): " <<
+      fPartAllStavesList.size () <<
+      endl;
+
+    if (fPartAllStavesList.size ()) {
+      for (S_msrStaff staff : fPartAllStavesList) {
+        gLogStream <<
+          endl <<
+          "+++++++++ staff: ++++++++" <<
+          " \"" << staff->getStaffName () << "\"" <<
+          endl;
+      } // for
+    }
+
+    gLogStream <<
+      "++++++++ fPartNonHarmoniesNorFiguredBassStavesList.size(): " <<
+      fPartNonHarmoniesNorFiguredBassStavesList.size () <<
+      endl;
+
+    if (fPartNonHarmoniesNorFiguredBassStavesList.size ()) {
+      for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
+        gLogStream <<
+          endl <<
+          "+++++++++ staff: ++++++++" <<
+          " \"" << staff->getStaffName () << "\"" <<
+          endl;
+      } // for
+    }
+  }
+#endif
+
+  /* don't enforce any order here, leave it to the client thru sorting JMI */
+
+  // browse the part harmonies staff if any right now, JMI
+  // to place it before the corresponding part
+  if (fPartHarmoniesStaff) {
+    msrBrowser<msrStaff> browser (v);
+    browser.browse (*fPartHarmoniesStaff);
+  }
+
+  // browse all non harmonies and non figured bass staves
+  for (S_msrStaff staff : fPartNonHarmoniesNorFiguredBassStavesList) {
+    // browse the staff
+    msrBrowser<msrStaff> browser (v);
+    browser.browse (*staff);
+  } // for
+
+  // browse the part figured bass staff if any only now, JMI
+  // to place it after the corresponding part
+  if (fPartFiguredBassStaff) {
+    msrBrowser<msrStaff> browser (v);
+    browser.browse (*fPartFiguredBassStaff);
+  }
+
+//   // browse all the part staves JMI
+//   for (S_msrStaff staff : fPartAllStavesList) {
+//     if (staff != fPartHarmoniesStaff && staff != fPartFiguredBassStaff) {
+//       // browse the staff
+//       msrBrowser<msrStaff> browser (v);
+//       browser.browse (*staff);
+//     }
+//   } // for
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Translating from MXSR to MSR\ (\mxsrToMsr{})}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Translating from MXSR to MSR\ (\mxsrToMsr{})}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Translating from MSR to MSR\ (\msrToMsr{})}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Translating from MSR to LPSR\ (\msrToLpsr{})}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Translating from LPSR to LilyPond\ (\lpsrToLilypond{})}
+% -------------------------------------------------------------------------
+
+

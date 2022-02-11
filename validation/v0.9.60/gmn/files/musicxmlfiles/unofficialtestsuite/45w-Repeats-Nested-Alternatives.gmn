@@ -1,0 +1,26 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/45w-Repeats-Nested-Alternatives.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/1 \bar 
+   (* meas. 2 *)  \volta<"1", "1.">( \beamsOff d/1)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 3 *)  \volta<"2", "2.">( \beamsOff e/1 \bar 
+   (* meas. 4 *)  \beamsOff f/1 \bar 
+   (* meas. 5 *)  \beamsOff g/1)
+ \bar 
+   (* meas. 6 *)  \volta<"3", "3.", format="|-">( \beamsOff a/1)
+ \bar 
+   (* meas. 7 *)  \beamsOff b/1 \bar 
+   (* meas. 8 *)  \beamsOff c2/1 \bar 
+   (* meas. 9 *)  \beamsOff d/1 \bar 
+   (* meas. 10 *)  \volta<"1", "1.">( \beamsOff e/1)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 11 *)  \volta<"5", "5.">( \beamsOff f/1)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 12 *)  \volta<"8", "8.", format="|-">( \beamsOff g/1)
+ \bar 
+   (* meas. 13 *)  \beamsOff a/1 ]
+  }

@@ -1,0 +1,10 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/tempos/31c-MetronomeMarks.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[3/8] = 100"> \beamsOff c2/4 \beamsOff c/4 \tempo<"Adagio [0/1] = 100", dy=-4hs> \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 2 *)  \tempo<""> \beamsOff c/4 \beamsOff c/4 \tempo<""> \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 3 *)  \tempo<""> \beamsOff c/4 \beamsOff c/4 \tempo<"[3/8] = 77"> \beamsOff c/4 \beamsOff c/4 ]
+  }

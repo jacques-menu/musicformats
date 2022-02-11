@@ -1,0 +1,67 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/virginie/Lully_CA.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"", dy=4hs> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \key<2> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \stemsUp \beamBegin:1 a/8 \stemsUp b/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff c#2/2 \stemsDown \beamsOff c#/4 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff d/4 \stemsDown \beamsOff b1/4. \stemsDown \beamsOff b/8 \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff e2/2 \stemsUp \beamsOff a1/4 \bar 
+   (* meas. 5 *)  \stemsUp \beamBegin:1 b/8 \stemsUp a/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 \stemsUp \beamsOff e/4 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff f#/4 \stemsDown \beamsOff d2/2 \bar 
+   (* meas. 7 *)  \stemsDown \beamsOff d/2 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff d/4 \stemsDown \beamsOff e/2 \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff e/2 \stemsDown \beamsOff \tieBegin:1 d/4 \bar 
+   (* meas. 10 *)  \stemsDown \beamsOff d/4 \tieEnd:1 \stemsDown \beamsOff c#/4. \stemsDown \beamBegin:1 b1/16 \stemsDown c#2/16 \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsDown \beamsOff d/4 \stemsUp \beamBegin:1 f#1/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 12 *)  \stemsUp \beamsOff a/2 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4. \stemsUp \beamsOff g/8 \bar 
+   (* meas. 14 *)  \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 \stemsUp \beamsOff e/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 15 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 16 *)  _/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 17 *)  _/4 \stemsUp \beamsOff f#/4 \stemsDown \beamsOff \tieBegin:1 b/4 \bar 
+   (* meas. 18 *)  \stemsDown \beamsOff b/4 \tieEnd:1 \stemsUp \beamsOff a/4. \stemsUp \beamsOff a/8 \bar 
+   (* meas. 19 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 20 *)  \stemsUp \beamsOff a/2 \stemsUp \beamBegin:1 a/8 \stemsUp g/8 \beamEnd:1 \bar 
+   (* meas. 21 *)  \stemsUp \beamsOff f#/2 \stemsDown \beamsOff \tieBegin:1 b/4 \bar 
+   (* meas. 22 *)  \stemsDown \beamsOff b/4 \tieEnd:1 \stemsUp \beamsOff a/4. \stemsUp \beamsOff g/8 \bar 
+   (* meas. 23 *)  \stemsUp \beamsOff \lyrics<"FINE", autopos="on">( f#/2)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 24 *)  \stemsDown \beamBegin:1 d2/8 \stemsDown c#/8 \beamEnd:1 \bar 
+   (* meas. 25 *)  \stemsDown \beamsOff b1/4 \stemsDown \beamsOff c#2/4. \stemsDown \beamsOff c#/8 \bar 
+   (* meas. 26 *)  \stemsDown \beamsOff c#/2 \stemsDown \beamsOff \tieBegin:1 b1/4 \bar 
+   (* meas. 27 *)  \stemsDown \beamsOff b/4 \tieEnd:1 \stemsUp \beamsOff \acc( a#/4.)
+ \stemsDown \beamsOff b/8 \bar 
+   (* meas. 28 *)  \stemsDown \beamsOff b/2. \bar 
+   (* meas. 29 *)  \stemsDown \beamsOff b/4 \stemsUp \beamsOff a/2 \bar 
+   (* meas. 30 *)  \stemsUp \beamsOff a/2 \stemsDown \beamsOff b/4 \bar 
+   (* meas. 31 *)  \stemsDown \beamsOff b/2 \stemsDown \beamsOff c#2/4 \bar 
+   (* meas. 32 *)  \stemsDown \beamsOff b1/4 \stemsDown \beamsOff b/4. \stemsUp \beamsOff a/8 \bar 
+   (* meas. 33 *)  \stemsUp \beamsOff a/2 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 34 *)  \stemsUp \beamsOff f#/4 \stemsDown \beamsOff b/4. \stemsDown \beamsOff b/8 \bar 
+   (* meas. 35 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/2 \bar 
+   (* meas. 36 *)  \stemsUp \beamBegin:1 g/8 \stemsUp a/8 \beamEnd:1 \stemsDown \beamsOff b/2 \bar 
+   (* meas. 37 *)  \stemsUp \beamsOff a/2. \bar 
+   (* meas. 38 *)  _/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 39 *)  \stemsDown \beamsOff b/4 \stemsDown \beamsOff b/4 \stemsDown \beamsOff b/4 \bar 
+   (* meas. 40 *)  \stemsUp \beamBegin:1 a/8 \stemsUp b/8 \beamEnd:1 \stemsDown \beamsOff c#2/4. \stemsDown \beamsOff c#/8 \bar 
+   (* meas. 41 *)  \stemsDown \beamsOff d/2 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 42 *)  \stemsDown \beamsOff d/4 \stemsDown \beamsOff e/2 \bar 
+   (* meas. 43 *)  \stemsUp \beamsOff a1/2. \bar 
+   (* meas. 44 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4. \stemsUp \beamsOff g/8 \bar 
+   (* meas. 45 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamBegin:1 f#/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 46 *)  \stemsUp \beamsOff a/2 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 47 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4. \stemsUp \beamsOff g/8 \bar 
+   (* meas. 48 *)  \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 \stemsUp \beamsOff e/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 49 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 50 *)  _/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 51 *)  _/4 \stemsUp \beamsOff f#/4 \stemsDown \beamsOff \tieBegin:1 b/4 \bar 
+   (* meas. 52 *)  \stemsDown \beamsOff b/4 \tieEnd:1 \stemsUp \beamsOff a/4. \stemsUp \beamsOff a/8 \bar 
+   (* meas. 53 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 54 *)  \stemsUp \beamsOff a/2 \stemsUp \beamBegin:1 a/8 \stemsUp g/8 \beamEnd:1 \bar 
+   (* meas. 55 *)  \stemsUp \beamsOff f#/2 \stemsDown \beamsOff \tieBegin:1 b/4 \bar 
+   (* meas. 56 *)  \stemsDown \beamsOff b/4 \tieEnd:1 \stemsUp \beamsOff a/4. \stemsUp \beamsOff g/8 \bar 
+   (* meas. 57 *)  \stemsUp \beamsOff \lyrics<"D.C.", autopos="on">( f#/2.)
+ ]
+  }

@@ -1,0 +1,458 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/xmlsamples3.1/Telemann.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Excerpt from 'Liebe! Liebe! Was ist schöner als die Liebe?'"> \composer<"Georg Philipp Telemann", dy=4hs> \auto<autoInstrPos="on"> \instr<"Voice"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"3/8", autoBarlines="off", autoMeasuresNum="system"> _*3/8 \bar 
+   (* meas. 2 *)  _*3/8 \bar 
+   (* meas. 3 *)  _*3/8 \bar 
+   (* meas. 4 *)  _*3/8 \bar 
+   (* meas. 5 *)  _*3/8 \bar 
+   (* meas. 6 *)  _*3/8 \bar 
+   (* meas. 7 *)  _*3/8 \bar 
+   (* meas. 8 *)  _*3/8 \bar 
+   (* meas. 9 *)  _*3/8 \bar 
+   (* meas. 10 *)  _*3/8 \bar 
+   (* meas. 11 *)  _*3/8 \bar 
+   (* meas. 12 *)  \stemsDown \beamsOff \lyrics<"Lie-", autopos="on">( e2/4)
+ \stemsUp \beamsOff \lyrics<"be!", autopos="on">( a1/8)
+ \bar 
+   (* meas. 13 *)  _*3/8 \bar 
+   (* meas. 14 *)  _*3/8 \bar 
+   (* meas. 15 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 \lyrics<"Lie-", autopos="on">( c#2/16.)
+ \stemsDown d/32 \stemsDown e/8 \slurEnd:1 \beamEnd:1 \stemsUp \beamsOff \lyrics<"be!", autopos="on">( a1/8)
+ \bar 
+   (* meas. 16 *)  _*3/8 \bar 
+   (* meas. 17 *)  _*3/8 \bar 
+   (* meas. 18 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 \lyrics<"Was", autopos="on">( d2/8)
+ \stemsDown a1/8 \slurEnd:1 \beamEnd:1 \stemsDown \beamsOff \lyrics<"ist", autopos="on">( b/8)
+ \bar 
+   (* meas. 19 *)  \stemsUp \slurBegin:1<curve="down"> \beamBegin:1 \lyrics<"schö-", autopos="on">( f#/16.)
+ \stemsUp g/32 \stemsUp a/8 \slurEnd:1 \beamEnd:1 \stemsUp \beamsOff \lyrics<"ner", autopos="on">( d/8)
+ \bar 
+   (* meas. 20 *)  \stemsDown \beamsOff \lyrics<"als", autopos="on">( f#2/8)
+ \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 \lyrics<"die", autopos="on">( g/16)
+ \stemsDown f#/16 \stemsDown e/16 \stemsDown d/16 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 21 *)  \stemsDown \beamsOff \lyrics<"Lie-", autopos="on">( c#/8.)
+ \stemsUp \beamBegin:1 b1/16 \stemsUp \lyrics<"be,", autopos="on">( a/8)
+ \beamEnd:1 \bar 
+   (* meas. 22 *)  _/8 \stemsDown \beamsOff \lyrics<"was", autopos="on">( d2/8)
+ \stemsDown \beamsOff \lyrics<"schmeckt", autopos="on">( d/8)
+ \bar 
+   (* meas. 23 *)  \stemsDown \beamsOff \lyrics<"sü-", autopos="on">( d/4)
+ \stemsDown \beamsOff \lyrics<"ßer,", autopos="on">( d/8)
+ \bar 
+   (* meas. 24 *)  _/8 \stemsDown \beamsOff \lyrics<"was", autopos="on">( b1/8)
+ \stemsDown \beamsOff \lyrics<"schmeckt", autopos="on">( e2/8)
+ \bar 
+   (* meas. 25 *)  \stemsDown \beamsOff \lyrics<"sü-", autopos="on">( \tieBegin:1 e/4.)
+ \bar 
+   (* meas. 26 *)  \stemsDown \beamsOff \tieBegin:2 e/4. \tieEnd:1 \bar 
+   (* meas. 27 *)  \stemsDown \beamsOff \tieBegin:3 e/4. \tieEnd:2 \bar 
+   (* meas. 28 *)  \stemsDown \beamsOff e/8 \tieEnd:3 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 \lyrics<"ßer", autopos="on">( d/16)
+ \stemsDown c#/16 \stemsDown b1/16 \stemsDown a/16 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 29 *)  _/8 \stemsUp \beamsOff \lyrics<"als", autopos="on">( \acc( g#/8)
+)
+ \stemsDown \beamsOff \lyrics<"ein", autopos="on">( d2/8)
+ \bar 
+   (* meas. 30 *)  \stemsDown \beamsOff \lyrics<"Kuß?", autopos="on">( c#/4.)
+ \bar 
+   (* meas. 31 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 \lyrics<"Was", autopos="on">( d/8)
+ \stemsDown a1/8 \slurEnd:1 \beamEnd:1 \stemsDown \beamsOff \lyrics<"ist", autopos="on">( b/8)
+ \bar 
+   (* meas. 32 *)  \stemsUp \slurBegin:1<curve="down"> \beamBegin:1 \lyrics<"schö-", autopos="on">( f#/16.)
+ \stemsUp g/32 \stemsUp a/8 \slurEnd:1 \beamEnd:1 \stemsUp \beamsOff \lyrics<"ner,", autopos="on">( d/8)
+ \bar 
+   (* meas. 33 *)  _*3/8 \bar 
+   (* meas. 34 *)  _*3/8 \bar 
+   (* meas. 35 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 \lyrics<"was", autopos="on">( d2/8)
+ \stemsDown a1/8 \slurEnd:1 \beamEnd:1 \stemsDown \beamsOff \lyrics<"schmeckt", autopos="on">( b/8)
+ ]
+ , 
+[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  empty*3/8 \bar 
+   (* meas. 2 *)  empty*3/8 \bar 
+   (* meas. 3 *)  empty*3/8 \bar 
+   (* meas. 4 *)  empty*3/8 \bar 
+   (* meas. 5 *)  empty*3/8 \bar 
+   (* meas. 6 *)  empty*3/8 \bar 
+   (* meas. 7 *)  empty*3/8 \bar 
+   (* meas. 8 *)  empty*3/8 \bar 
+   (* meas. 9 *)  empty*3/8 \bar 
+   (* meas. 10 *)  empty*3/8 \bar 
+   (* meas. 11 *)  empty*3/8 \bar 
+   (* meas. 12 *)  empty*3/8 \bar 
+   (* meas. 13 *)  empty*3/8 \bar 
+   (* meas. 14 *)  empty*3/8 \bar 
+   (* meas. 15 *)  empty*3/8 \bar 
+   (* meas. 16 *)  empty*3/8 \bar 
+   (* meas. 17 *)  empty*3/8 \bar 
+   (* meas. 18 *)  empty*3/8 \bar 
+   (* meas. 19 *)  empty*3/8 \bar 
+   (* meas. 20 *)  empty*3/8 \bar 
+   (* meas. 21 *)  empty*3/8 \bar 
+   (* meas. 22 *)  empty*3/8 \bar 
+   (* meas. 23 *)  empty*3/8 \bar 
+   (* meas. 24 *)  empty*3/8 \bar 
+   (* meas. 25 *)  empty*3/8 \bar 
+   (* meas. 26 *)  empty*3/8 \bar 
+   (* meas. 27 *)  empty*3/8 \bar 
+   (* meas. 28 *)  empty*3/8 \bar 
+   (* meas. 29 *)  empty*3/8 \bar 
+   (* meas. 30 *)  \cue( \stemsUp \beamsOff d2/8 \stemsUp \beamsOff c#/4)
+ empty*3/8 \bar 
+   (* meas. 31 *)  empty*3/8 \bar 
+   (* meas. 32 *)  empty*3/8 \bar 
+   (* meas. 33 *)  empty*3/8 \bar 
+   (* meas. 34 *)  empty*3/8 \bar 
+   (* meas. 35 *)  empty*3/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Ensemble"> \accol<id=0, range="2-3"> \barFormat<style= "system", range="2-3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=20.4> \clef<"g2"> \key<2> \meter<"3/8", autoBarlines="off", autoMeasuresNum="system"> \text<"Ob. Viol.", dx=-20.8hs, dy=16.4hs>( \text<"Viola", dx=-20.6hs, dy=-4.2hs>( \text<"Ob.", dx=0hs, dy=19hs>( \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 d2/8)
+)
+)
+ \stemsUp a1/8 \slurEnd:1 \stemsUp b/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamBegin:1 f#/16. \stemsUp g/32 \stemsUp a/8 \stemsUp d/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \text<"Viol.", dx=-2.8hs, dy=19.4hs> empty*3/8 \bar 
+   (* meas. 4 *)  empty*3/8 \bar 
+   (* meas. 5 *)  \text<"Ob.", dx=-2.2hs, dy=18.8hs>( \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 d2/8)
+ \stemsUp a1/8 \slurEnd:1 \stemsUp b/8 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 f#/16. \stemsUp g/32 \stemsUp a/8 \slurEnd:1 \stemsUp d/8 \beamEnd:1 \bar 
+   (* meas. 7 *)  \text<"Viol. u. Ob.", dx=-2hs, dy=18.6hs>( \stemsUp \beamBegin:1 e2/8.)
+ \stemsUp c#/16 \stemsUp d/8 \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsUp \beamsOff d/4 \restFormat<dy=-4>( _/8)
+ \bar 
+   (* meas. 9 *)  \restFormat<dy=-4>( _/4)
+ _/8 \text<"(a 2)", dx=0hs, dy=14.8hs> \bar 
+   (* meas. 10 *)  \stemsUp \beamBegin:1 b1/8 \stemsUp \trill( \acc( g#/8.)
+)
+ \stemsUp a/16 \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff a/4. \bar 
+   (* meas. 12 *)  _*3/8 \bar 
+   (* meas. 13 *)  \staffFormat<distance=20.4> \text<"Ob.", dx=-6.4hs, dy=15.8hs>( \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 a2/8)
+ \stemsUp e/8 \slurEnd:1 \stemsUp f#/8 \beamEnd:1 \bar 
+   (* meas. 14 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 c#/16. \stemsUp d/32 \stemsUp e/8 \slurEnd:1 \stemsUp a1/8 \beamEnd:1 \bar 
+   (* meas. 15 *)  _*3/8 \text<"Ob.", dx=-3.4hs, dy=15.6hs> \bar 
+   (* meas. 16 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 a2/8 \stemsUp e/8 \slurEnd:1 \stemsUp f#/8 \beamEnd:1 \bar 
+   (* meas. 17 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 c#/16. \stemsUp d/32 \stemsUp e/8 \slurEnd:1 \stemsUp a1/8 \beamEnd:1 \bar 
+   (* meas. 18 *)  _*3/8 \bar 
+   (* meas. 19 *)  _*3/8 \bar 
+   (* meas. 20 *)  \stemsUp \beamBegin:1 f#2/8 \stemsUp \slurBegin:1<curve="up"> g/16 \stemsUp f#/16 \slurEnd:1 \stemsUp \slurBegin:1<curve="up"> e/16 \stemsUp d/16 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 21 *)  \stemsUp \beamBegin:1 c#/8. \stemsUp b1/16 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 22 *)  \restFormat<dy=-4>( _/4)
+ \restFormat<dy=-4>( _/8)
+ \bar 
+   (* meas. 23 *)  _/8 \stemsUp \beamBegin:1 b/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 24 *)  \stemsUp \beamsOff b/4 _/8 \bar 
+   (* meas. 25 *)  \staffFormat<distance=20.4> _/8 \stemsUp \beamBegin:1 c#2/8 \stemsUp b1/8 \beamEnd:1 \bar 
+   (* meas. 26 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 c#2/16. \stemsUp d/32 \stemsUp e/8 \slurEnd:1 \stemsUp b1/8 \beamEnd:1 \bar 
+   (* meas. 27 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 c#2/16. \stemsUp d/32 \stemsUp e/8 \slurEnd:1 \stemsUp b1/8 \beamEnd:1 \bar 
+   (* meas. 28 *)  \stemsUp \beamsOff c#2/4 \restFormat<dy=-4>( _/8)
+ \bar 
+   (* meas. 29 *)  \restFormat<dy=-4>( _/4)
+ _/8 \bar 
+   (* meas. 30 *)  \stemsUp \beamsOff e/4. \bar 
+   (* meas. 31 *)  _*3/8 \bar 
+   (* meas. 32 *)  _*3/8 \text<"Ob.", dx=-3.2hs, dy=14.4hs> \bar 
+   (* meas. 33 *)  \text<"Viol.", dx=0hs, dy=-2.2hs>( \stemsUp \beamBegin:1 f#/8)
+ \stemsUp \slurBegin:1<curve="up"> g/16 \stemsUp f#/16 \slurEnd:1 \stemsUp \slurBegin:1<curve="up"> e/16 \stemsUp d/16 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 34 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 c#/16. \stemsUp d/32 \stemsUp e/8 \slurEnd:1 \stemsUp a1/8 \beamEnd:1 \bar 
+   (* meas. 35 *)  _*3/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=20.4> \stemsDown \slurBegin:1<curve="down"> \beamBegin:1 d/8 \stemsDown f#/8 \stemsDown g/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff d/4 \restFormat<dy=7>( _/8)
+ \bar 
+   (* meas. 3 *)  \cue( \stemsDown \beamBegin:1 a/8 \stemsDown a/8 \stemsDown \beamBegin:1 g/16 \stemsDown f#/16)
+ empty*3/8 \bar 
+   (* meas. 4 *)  \cue( \stemsDown \beamsOff e/4 \stemsDown \beamsOff c#/8)
+ empty*3/8 \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff f#/4 \stemsDown \beamsOff g/8 \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff d/4 \restFormat<dy=8>( \noteFormat<dx=0>( _/8)
+)
+ \bar 
+   (* meas. 7 *)  \cue( \stemsDown \beamsOff {e/8, b/8  } \stemsDown \beamsOff e/4)
+ empty*3/8 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff f#/4 \stemsDown \beamsOff \noteFormat<dx=12>( g/8)
+ \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff d/4 empty/8 \bar 
+   (* meas. 10 *)  \cue( \stemsDown \beamsOff {b0/8, f#1/8  } \stemsDown \beamsOff b0/4)
+ empty*3/8 \bar 
+   (* meas. 11 *)  \cue( \stemsDown \beamsOff {a/4., c#1/4.  })
+ empty*3/8 \bar 
+   (* meas. 12 *)  empty*3/8 \bar 
+   (* meas. 13 *)  \staffFormat<distance=20.4> \cue( \stemsDown \beamBegin:1 c#2/8 \stemsDown a1/8 \stemsDown a/8)
+ empty*3/8 \bar 
+   (* meas. 14 *)  \cue( \stemsDown \beamsOff {e/4, a/4  } \stemsDown \beamsOff c#/8)
+ empty*3/8 \bar 
+   (* meas. 15 *)  empty*3/8 \bar 
+   (* meas. 16 *)  \cue( \stemsDown \beamsOff {e/4, c#2/4  } \restFormat<dy=2>( \noteFormat<dx=0>( _/8)
+)
+)
+ empty*3/8 \bar 
+   (* meas. 17 *)  \stemsDown \beamsOff a1/4. \bar 
+   (* meas. 18 *)  \cue( \stemsDown \beamsOff {d/4, a/4  } \stemsDown \beamsOff {d/8, g/8, b/8  })
+ empty*3/8 \bar 
+   (* meas. 19 *)  \cue( \stemsDown \beamsOff {d/4., f#/4., a/4.  })
+ empty*3/8 \bar 
+   (* meas. 20 *)  \cue( \stemsDown \beamBegin:1 a/8 \stemsDown a/8 \stemsDown \acc( g#/8)
+)
+ empty*3/8 \bar 
+   (* meas. 21 *)  \cue( \stemsDown \beamsOff a/4.)
+ empty*3/8 \bar 
+   (* meas. 22 *)  \cue( \stemsDown \beamsOff {d/4, a/4  })
+ empty/4 empty/8 \bar 
+   (* meas. 23 *)  _/8 \cue( \stemsDown \beamBegin:1 d/8 \stemsDown d/8)
+ empty/4 \bar 
+   (* meas. 24 *)  \cue( \stemsDown \beamsOff d/4)
+ empty/4 _/8 \bar 
+   (* meas. 25 *)  \staffFormat<distance=20.4> _/8 \cue( \stemsDown \beamBegin:1 e/8 \stemsDown e/8)
+ empty/4 \bar 
+   (* meas. 26 *)  \cue( \stemsDown \beamsOff e/4 \stemsDown \beamsOff e/8)
+ empty*3/8 \bar 
+   (* meas. 27 *)  \cue( \stemsDown \beamsOff a0/4 \stemsDown \beamsOff e1/8)
+ empty*3/8 \bar 
+   (* meas. 28 *)  \cue( \stemsDown \beamsOff e/4 \stemsDown \beamsOff {f#/8, b/8  })
+ empty*3/8 \bar 
+   (* meas. 29 *)  \cue( \stemsDown \beamsOff {d/4., \acc( g#/4.)
+  })
+ empty*3/8 \bar 
+   (* meas. 30 *)  \cue( \stemsDown \beamsOff {c#/4., a/4.  })
+ empty*3/8 \bar 
+   (* meas. 31 *)  \stemsDown \beamsOff f#/4 \stemsDown \beamsOff g/8 \bar 
+   (* meas. 32 *)  \stemsDown \beamsOff d/4. \bar 
+   (* meas. 33 *)  empty*3/8 \bar 
+   (* meas. 34 *)  \stemsDown \beamsOff e/4. \bar 
+   (* meas. 35 *)  \stemsDown \beamsOff f#/4 \stemsDown \beamsOff g/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 2 *)  empty*3/8 \bar 
+   (* meas. 3 *)  \stemsUp \beamBegin:1 f#2/8 \stemsUp \slurBegin:1<curve="up"> g/16 \stemsUp f#/16 \slurEnd:1 \stemsUp \slurBegin:1<curve="up"> e/16 \stemsUp d/16 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 c#/16. \stemsUp d/32 \stemsUp e/8 \slurEnd:1 \stemsUp a1/8 \beamEnd:1 \bar 
+   (* meas. 5 *)  empty*3/8 \bar 
+   (* meas. 6 *)  empty*3/8 \bar 
+   (* meas. 7 *)  \stemsUp \beamBegin:1 e2/8. \stemsUp c#/16 \stemsUp d/8 \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsUp \beamsOff d/4 \restFormat<dy=-4>( \noteFormat<dx=12>( _/8)
+)
+ \bar 
+   (* meas. 9 *)  empty*3/8 \bar 
+   (* meas. 10 *)  \stemsUp \beamBegin:1 b1/8 \stemsUp \acc( \noteFormat<dx=2>( g#/8.)
+)
+ \stemsUp a/16 \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff a/4. \bar 
+   (* meas. 12 *)  empty*3/8 \bar 
+   (* meas. 13 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 14 *)  empty*3/8 \bar 
+   (* meas. 15 *)  empty*3/8 \bar 
+   (* meas. 16 *)  empty*3/8 \bar 
+   (* meas. 17 *)  empty*3/8 \bar 
+   (* meas. 18 *)  empty*3/8 \bar 
+   (* meas. 19 *)  empty*3/8 \bar 
+   (* meas. 20 *)  empty*3/8 \bar 
+   (* meas. 21 *)  empty*3/8 \bar 
+   (* meas. 22 *)  empty*3/8 \bar 
+   (* meas. 23 *)  _/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 \bar 
+   (* meas. 24 *)  \stemsUp \beamsOff g/4 _/8 \bar 
+   (* meas. 25 *)  \staffFormat<distance=20.4> _/8 \stemsUp \beamBegin:1 a/8 \stemsUp \acc( g#/8)
+ \beamEnd:1 \bar 
+   (* meas. 26 *)  \stemsUp \beamBegin:1 a/16. \stemsUp b/32 \stemsUp c#2/8 \stemsUp g#1/8 \beamEnd:1 \bar 
+   (* meas. 27 *)  \stemsUp \beamBegin:1 a/16. \stemsUp b/32 \stemsUp c#2/8 \stemsUp \acc( g#1/8)
+ \beamEnd:1 \bar 
+   (* meas. 28 *)  \stemsUp \beamsOff a/4 \restFormat<dy=-4>( _/8)
+ \bar 
+   (* meas. 29 *)  empty*3/8 \bar 
+   (* meas. 30 *)  \stemsUp \beamsOff a/4. \bar 
+   (* meas. 31 *)  empty*3/8 \bar 
+   (* meas. 32 *)  empty*3/8 \bar 
+   (* meas. 33 *)  \stemsUp \beamBegin:1 a/8 \stemsUp b/16 \stemsUp a/16 \stemsUp g/16 \stemsUp f#/16 \beamEnd:1 \bar 
+   (* meas. 34 *)  \stemsUp \beamBegin:1 c#2/16. \stemsUp d/32 \stemsUp e/8 \stemsUp a1/8 \beamEnd:1 \bar 
+   (* meas. 35 *)  empty*3/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 2 *)  empty*3/8 \bar 
+   (* meas. 3 *)  empty*3/8 \bar 
+   (* meas. 4 *)  empty*3/8 \bar 
+   (* meas. 5 *)  empty*3/8 \bar 
+   (* meas. 6 *)  empty*3/8 \bar 
+   (* meas. 7 *)  empty*3/8 \bar 
+   (* meas. 8 *)  \cue( \stemsDown \beamsOff \noteFormat<dx=0>( d/4)
+)
+ empty/4 empty/8 \bar 
+   (* meas. 9 *)  empty*3/8 \bar 
+   (* meas. 10 *)  empty*3/8 \bar 
+   (* meas. 11 *)  empty*3/8 \bar 
+   (* meas. 12 *)  empty*3/8 \bar 
+   (* meas. 13 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 14 *)  empty*3/8 \bar 
+   (* meas. 15 *)  empty*3/8 \bar 
+   (* meas. 16 *)  empty*3/8 \bar 
+   (* meas. 17 *)  empty*3/8 \bar 
+   (* meas. 18 *)  empty*3/8 \bar 
+   (* meas. 19 *)  empty*3/8 \bar 
+   (* meas. 20 *)  empty*3/8 \bar 
+   (* meas. 21 *)  empty*3/8 \bar 
+   (* meas. 22 *)  empty*3/8 \bar 
+   (* meas. 23 *)  empty*3/8 \bar 
+   (* meas. 24 *)  empty*3/8 \bar 
+   (* meas. 25 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 26 *)  empty*3/8 \bar 
+   (* meas. 27 *)  empty*3/8 \bar 
+   (* meas. 28 *)  empty*3/8 \bar 
+   (* meas. 29 *)  empty*3/8 \bar 
+   (* meas. 30 *)  empty*3/8 \bar 
+   (* meas. 31 *)  empty*3/8 \bar 
+   (* meas. 32 *)  empty*3/8 \bar 
+   (* meas. 33 *)  empty*3/8 \bar 
+   (* meas. 34 *)  empty*3/8 \bar 
+   (* meas. 35 *)  empty*3/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 2 *)  empty*3/8 \bar 
+   (* meas. 3 *)  empty*3/8 \bar 
+   (* meas. 4 *)  empty*3/8 \bar 
+   (* meas. 5 *)  empty*3/8 \bar 
+   (* meas. 6 *)  empty*3/8 \bar 
+   (* meas. 7 *)  empty/8 \cue( \stemsDown \beamBegin:1 \noteFormat<dx=6>( a/8)
+ \stemsDown g/8)
+ empty/4 \bar 
+   (* meas. 8 *)  \stemsDown \beamBegin:1 \noteFormat<dx=2>( d2/8)
+ \stemsDown a1/8 \stemsDown \noteFormat<dx=10>( b/8)
+ \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsDown \beamBegin:1 \noteFormat<dx=2>( f#/16.)
+ \stemsDown g/32 \stemsDown a/8 \stemsDown \noteFormat<dx=16>( d/8)
+ \beamEnd:1 \bar 
+   (* meas. 10 *)  empty/8 \cue( \stemsDown \beamBegin:1 \noteFormat<dx=6>( e/8)
+ \stemsDown d/8)
+ empty/4 \bar 
+   (* meas. 11 *)  empty*3/8 \bar 
+   (* meas. 12 *)  empty*3/8 \bar 
+   (* meas. 13 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 14 *)  empty*3/8 \bar 
+   (* meas. 15 *)  empty*3/8 \bar 
+   (* meas. 16 *)  empty*3/8 \bar 
+   (* meas. 17 *)  empty*3/8 \bar 
+   (* meas. 18 *)  empty*3/8 \bar 
+   (* meas. 19 *)  empty*3/8 \bar 
+   (* meas. 20 *)  empty*3/8 \bar 
+   (* meas. 21 *)  empty*3/8 \bar 
+   (* meas. 22 *)  empty*3/8 \bar 
+   (* meas. 23 *)  empty*3/8 \bar 
+   (* meas. 24 *)  empty*3/8 \bar 
+   (* meas. 25 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 26 *)  empty*3/8 \bar 
+   (* meas. 27 *)  empty*3/8 \bar 
+   (* meas. 28 *)  empty*3/8 \bar 
+   (* meas. 29 *)  empty*3/8 \bar 
+   (* meas. 30 *)  empty*3/8 \bar 
+   (* meas. 31 *)  empty*3/8 \bar 
+   (* meas. 32 *)  empty*3/8 \bar 
+   (* meas. 33 *)  empty*3/8 \bar 
+   (* meas. 34 *)  empty*3/8 \bar 
+   (* meas. 35 *)  empty*3/8 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=20.4> \clef<"f4"> \key<2> \meter<"3/8", autoBarlines="off", autoMeasuresNum="system"> \text<"Bc. (u. Cemb.)", dx=-20.8hs, dy=-1.4hs>( \noteFormat<dx=-22>( _*3/8)
+)
+ \bar 
+   (* meas. 2 *)  \noteFormat<dx=-2>( _*3/8)
+ \bar 
+   (* meas. 3 *)  \cue( \stemsUp \beamBegin:1 d/8 \stemsUp e/8 \stemsUp d/8)
+ empty*3/8 \bar 
+   (* meas. 4 *)  \cue( \stemsUp \beamsOff a0/4)
+ empty/4 _/8 \bar 
+   (* meas. 5 *)  \noteFormat<dx=-2>( _*3/8)
+ \bar 
+   (* meas. 6 *)  \noteFormat<dx=-2>( _*3/8)
+ \bar 
+   (* meas. 7 *)  empty*3/8 \bar 
+   (* meas. 8 *)  empty*3/8 \bar 
+   (* meas. 9 *)  \noteFormat<dx=0>( _*3/8)
+ \bar 
+   (* meas. 10 *)  empty*3/8 \bar 
+   (* meas. 11 *)  empty*3/8 \bar 
+   (* meas. 12 *)  _*3/8 \bar 
+   (* meas. 13 *)  \staffFormat<distance=20.4> \stemsUp \beamBegin:1 a/8 \stemsUp c#1/8 \stemsUp d/8 \beamEnd:1 \bar 
+   (* meas. 14 *)  \stemsUp \beamsOff a0/4 \restFormat<dy=-4>( _/8)
+ \bar 
+   (* meas. 15 *)  _*3/8 \bar 
+   (* meas. 16 *)  \stemsUp \beamsOff a/4 \restFormat<dy=-4>( _/8)
+ \bar 
+   (* meas. 17 *)  \noteFormat<dx=-2>( _*3/8)
+ \bar 
+   (* meas. 18 *)  empty*3/8 \bar 
+   (* meas. 19 *)  empty*3/8 \bar 
+   (* meas. 20 *)  \cue( \stemsUp \beamsOff d1/8 \stemsUp \beamsOff e/4)
+ empty*3/8 \bar 
+   (* meas. 21 *)  \cue( \stemsUp \beamsOff e/4 \stemsUp \beamsOff c#/8)
+ empty*3/8 \bar 
+   (* meas. 22 *)  empty*3/8 \bar 
+   (* meas. 23 *)  empty*3/8 \bar 
+   (* meas. 24 *)  empty*3/8 \bar 
+   (* meas. 25 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 26 *)  empty*3/8 \bar 
+   (* meas. 27 *)  empty*3/8 \bar 
+   (* meas. 28 *)  empty*3/8 \bar 
+   (* meas. 29 *)  empty*3/8 \bar 
+   (* meas. 30 *)  empty*3/8 \bar 
+   (* meas. 31 *)  \noteFormat<dx=-4>( _*3/8)
+ \bar 
+   (* meas. 32 *)  \noteFormat<dx=-2>( _*3/8)
+ \bar 
+   (* meas. 33 *)  \cue( \stemsUp \beamsOff d/8 \stemsUp \beamsOff b0/4)
+ empty*3/8 \bar 
+   (* meas. 34 *)  \cue( \stemsUp \beamsOff e1/4 \stemsUp \beamsOff c#/8)
+ empty*3/8 \bar 
+   (* meas. 35 *)  \noteFormat<dx=-2>( _*3/8)
+ ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=20.4> empty*3/8 \bar 
+   (* meas. 2 *)  empty*3/8 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 d0/8 \stemsDown c#/8 \stemsDown d/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff a-1/4 \noteFormat<dx=0>( _/8)
+ \bar 
+   (* meas. 5 *)  empty*3/8 \bar 
+   (* meas. 6 *)  empty*3/8 \bar 
+   (* meas. 7 *)  \stemsDown \beamBegin:1 g0/8 \stemsDown a/8 \stemsDown a-1/8 \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff \noteFormat<dx=0>( d0/4)
+ _/8 \bar 
+   (* meas. 9 *)  empty*3/8 \bar 
+   (* meas. 10 *)  \stemsUp \beamBegin:1 d/8 \stemsUp e/8 \stemsUp e-1/8 \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff a/4. \bar 
+   (* meas. 12 *)  empty*3/8 \bar 
+   (* meas. 13 *)  \staffFormat<distance=20.4> \restFormat<dy=4>( \noteFormat<dx=4>( _*3/8)
+)
+ \bar 
+   (* meas. 14 *)  \restFormat<dy=4>( \noteFormat<dx=6>( _*3/8)
+)
+ \bar 
+   (* meas. 15 *)  empty*3/8 \bar 
+   (* meas. 16 *)  \restFormat<dy=4>( \noteFormat<dx=2>( _*3/8)
+)
+ \bar 
+   (* meas. 17 *)  empty*3/8 \bar 
+   (* meas. 18 *)  \stemsDown \beamsOff f#0/4 \stemsDown \beamsOff g/8 \bar 
+   (* meas. 19 *)  \stemsDown \beamsOff d/4. \bar 
+   (* meas. 20 *)  \stemsDown \beamBegin:1 d1/8 \stemsDown c#/8 \stemsDown b0/8 \beamEnd:1 \bar 
+   (* meas. 21 *)  \stemsDown \beamsOff a/4 _/8 \bar 
+   (* meas. 22 *)  \stemsDown \beamsOff \noteFormat<dx=0>( f#/4)
+ _/8 \bar 
+   (* meas. 23 *)  _/8 \stemsDown \beamBegin:1 g/8 \stemsDown d/8 \beamEnd:1 \bar 
+   (* meas. 24 *)  \stemsUp \beamsOff g-1/4 _/8 \bar 
+   (* meas. 25 *)  \staffFormat<distance=20.4> _/8 \stemsDown \beamBegin:1 a0/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 26 *)  \stemsUp \beamsOff a-1/4 _/8 \bar 
+   (* meas. 27 *)  \noteFormat<dx=0>( _/4)
+ _/8 \bar 
+   (* meas. 28 *)  \stemsUp \beamsOff a/4 \stemsDown \beamsOff d0/8 \bar 
+   (* meas. 29 *)  \stemsUp \beamsOff b-1/4. \bar 
+   (* meas. 30 *)  \stemsUp \beamsOff a/4. \bar 
+   (* meas. 31 *)  empty*3/8 \bar 
+   (* meas. 32 *)  empty*3/8 \bar 
+   (* meas. 33 *)  \stemsDown \beamsOff d0/8 \stemsUp \beamsOff g-1/4 \bar 
+   (* meas. 34 *)  \stemsDown \beamsOff a/4. \bar 
+   (* meas. 35 *)  empty*3/8 ]
+  }

@@ -1,0 +1,13 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/45h-Repeats-ExplicitStart.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \meter<"C/", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/1 
+   (* meas. 2 *)  \repeatBegin \stemsUp \beamsOff g/1 \bar 
+   (* meas. 3 *)  \volta<"1", "1.">( \stemsAuto \beamsOff c2/1)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 4 *)  \volta<"2", "2.", format="|-">( \beamsOff g/1)
+ ]
+  }

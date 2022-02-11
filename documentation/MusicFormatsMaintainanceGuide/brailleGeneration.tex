@@ -1,0 +1,203 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Braille generation}
+% -------------------------------------------------------------------------
+
+
+Braille is written to standard output or to files as binary data. Our reference is \url{http://www.brailleauthority.org/music/Music_Braille_Code_2015.pdf}.
+
+
+% -------------------------------------------------------------------------
+\section{Basic principle}
+% -------------------------------------------------------------------------
+
+Lilypond generation is done in \bsrToBrailleBoth{bsr2brailleTranslator}.
+
+\Class{bsr2brailleTranslator} provides:
+\begin{lstlisting}[language=CPlusPlus]
+  public:
+
+                          bsr2brailleTranslator (
+                            S_bsrScore     bsrScore,
+                            const S_bsrOahGroup& bsrOpts,
+                            ostream&       brailleOutputStream);
+
+    virtual               ~bsr2brailleTranslator ();
+
+    void                  translateBsrToBraille ();
+\end{lstlisting}
+
+It contains these fields among others:
+\begin{lstlisting}[language=CPlusPlus]
+  private:
+
+    // options
+    // ------------------------------------------------------
+
+    S_bsrOahGroup         fBsrOahGroup;
+
+    // the BSR score we're visiting
+    // ------------------------------------------------------
+
+    S_bsrScore            fVisitedBsrScore;
+
+    // the braille generator used
+    // ------------------------------------------------------
+
+    S_bsrBrailleGenerator fBrailleGenerator;
+
+    // the output stream
+    // ------------------------------------------------------
+
+    ostream&              fBrailleOutputStream;
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Output files name and contents options}
+% -------------------------------------------------------------------------
+
+he contents options use the following enumeration types:
+\begin{lstlisting}[language=CPlusPlus]
+enum class bsrUTFKind {
+  kUTF8, kUTF16
+};
+
+enum class bsrByteOrderingKind {
+  kByteOrderingNone,
+  kByteOrderingBigEndian, kByteOrderingSmallEndian
+};
+\end{lstlisting}
+
+\xmlToBrl\ supplies a \option{files} options subgroup:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2brl -query files
+--- Help for subgroup "files" in group "Files group" ---
+  Files group (-files-group):
+  --------------------------
+    Files (-files):
+      -o, -output-file-name FILENAME
+            Write Braille to file FILENAME instead of standard output.
+      -aofn, -auto-output-file-name
+            This option can only be used when reading from a file.
+            Write MusicXML code to a file in the current working directory.
+            The file name is derived from that of the input file,
+            replacing any suffix after the '.' by 'xml'
+            or adding '.xml' if none is present.
+      -bok, -braille-output-kind OUTPUT_KIND
+            Use OUTPUT_KIND to write the generated Braille to the output.
+            The 4 output kinds available are:
+            ascii, utf16, utf8 and utf8d.
+            'utf8d' leads to every line in the braille score to be generated
+            as a line of cells followed by a line of text showing the contents
+            for debug purposes.
+            The default is 'ascii'.
+      -ueifn, -use-encoding-in-file-name
+            Append a description of the encoding used
+            and the presence of a BOM if any to the file name before the '.'.
+      -bom, -byte-ordering-mark BOM_ENDIAN
+            Generate an initial BOM_ENDIAN byte ordering mark (BOM)
+            ahead of the Braille nusic code,
+            which can be one of 'big' or 'small'.
+            By default, a big endian BOM is generated.
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Braille generators}
+% -------------------------------------------------------------------------
+
+The following classes are defined in \brailleGenerationBoth{brailleGeneration}
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/formatsgeneration/brailleGeneration > grep class brailleGeneration.h
+enum class bsrUTFKind {
+enum class bsrByteOrderingKind {
+class EXP bsrBrailleGenerator : public smartable
+/* this class is purely virtual
+class EXP bsrAsciiBrailleGenerator : public bsrBrailleGenerator
+class EXP bsrUTF8BrailleGenerator : public bsrBrailleGenerator
+class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
+class EXP bsrUTF16BigEndianBrailleGenerator : public bsrBrailleGenerator
+class EXP bsrUTF16SmallEndianBrailleGenerator : public bsrBrailleGenerator
+\end{lstlisting}
+
+The base \class{bsrBrailleGenerator} contains:
+\begin{lstlisting}[language=CPlusPlus]
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    virtual void          generateCodeForBrailleCell (
+                            bsrCellKind cellKind) = 0;
+
+    void                  generateCodeForCellsList (
+                            S_bsrCellsList cellsList);
+
+    virtual void          generateCodeForMusicHeading (
+                            S_bsrMusicHeading musicHeading);
+
+    virtual void          generateCodeForLineContents (
+                            S_bsrLineContents lineContents);
+
+		// ... ... ...
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    ostream&              fBrailleOutputStream;
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Writing braille cells}
+% -------------------------------------------------------------------------
+
+Braille cells are output to an \fileName{ostream} as hexadecimal strings by \virtualMethod{generateCodeForBrailleCell} methods in \bsrToBraille{brailleGeneration.h}, depending on the kind of output chosen.
+
+For example, ASCII braille generation is done by:
+\begin{lstlisting}[language=CPlusPlus]
+void bsrAsciiBrailleGenerator::generateCodeForBrailleCell (
+  bsrCellKind cellKind)
+{
+  string stringForCell;
+
+  switch (cellKind) {
+    case bsrCellKind::kCellUnknown:
+      {
+        stringstream s;
+
+        s <<
+          "cannot generate code for braille cell '" <<
+          bsrCellKindAsString (cellKind) <<
+          "'";
+        msrInternalError (
+          gGlobalServiceRunData->getInputSourceName (),
+          -999, // inputLineNumber, TICINO JMI
+          __FILE__, __LINE__,
+          s.str ());
+      }
+      break;
+
+    case bsrCellKind::kCellEOL:    stringForCell = "\x0a"; break;
+    case bsrCellKind::kCellEOP:    stringForCell = "\x0c"; break;
+
+    case bsrCellKind::kDotsNone:   stringForCell = "\x20"; break;
+
+    case bsrCellKind::kDots1:      stringForCell = "\x41"; break;
+    case bsrCellKind::kDots2:      stringForCell = "\x31"; break;
+
+		// ... ... ...
+
+    case bsrCellKind::kDots23456:  stringForCell = "\x29"; break;
+    case bsrCellKind::kDots123456: stringForCell = "\x3d"; break;
+  } // switch
+
+  fBrailleOutputStream <<
+    stringForCell;
+}
+\end{lstlisting}
+

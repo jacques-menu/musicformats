@@ -1,0 +1,103 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/01a-Pitches-Pitches.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Pitches and accidentals"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff g-1/4 \beamsOff a/4 \beamsOff b/4 \beamsOff c0/4 \bar 
+   (* meas. 2 *)  \beamsOff d/4 \beamsOff e/4 \beamsOff f/4 \beamsOff g/4 \bar 
+   (* meas. 3 *)  \beamsOff a/4 \beamsOff b/4 \beamsOff c1/4 \beamsOff d/4 \bar 
+   (* meas. 4 *)  \beamsOff e/4 \beamsOff f/4 \beamsOff g/4 \beamsOff a/4 \bar 
+   (* meas. 5 *)  \beamsOff b/4 \beamsOff c2/4 \beamsOff d/4 \beamsOff e/4 \bar 
+   (* meas. 6 *)  \beamsOff f/4 \beamsOff g/4 \beamsOff a/4 \beamsOff b/4 \bar 
+   (* meas. 7 *)  \beamsOff c3/4 \beamsOff d/4 \beamsOff e/4 \beamsOff f/4 \bar 
+   (* meas. 8 *)  \beamsOff g/4 \beamsOff a/4 \beamsOff b/4 \beamsOff c4/4 \bar 
+   (* meas. 9 *)  \beamsOff \acc( g#-1/4)
+ \beamsOff \acc( a#/4)
+ \beamsOff \acc( b#/4)
+ \beamsOff \acc( c#0/4)
+ \bar 
+   (* meas. 10 *)  \beamsOff \acc( d#/4)
+ \beamsOff \acc( e#/4)
+ \beamsOff \acc( f#/4)
+ \beamsOff \acc( g#/4)
+ \bar 
+   (* meas. 11 *)  \beamsOff \acc( a#/4)
+ \beamsOff \acc( b#/4)
+ \beamsOff \acc( c#1/4)
+ \beamsOff \acc( d#/4)
+ \bar 
+   (* meas. 12 *)  \beamsOff \acc( e#/4)
+ \beamsOff \acc( f#/4)
+ \beamsOff \acc( g#/4)
+ \beamsOff \acc( a#/4)
+ \bar 
+   (* meas. 13 *)  \beamsOff \acc( b#/4)
+ \beamsOff \acc( c#2/4)
+ \beamsOff \acc( d#/4)
+ \beamsOff \acc( e#/4)
+ \bar 
+   (* meas. 14 *)  \beamsOff \acc( f#/4)
+ \beamsOff \acc( g#/4)
+ \beamsOff \acc( a#/4)
+ \beamsOff \acc( b#/4)
+ \bar 
+   (* meas. 15 *)  \beamsOff \acc( c#3/4)
+ \beamsOff \acc( d#/4)
+ \beamsOff \acc( e#/4)
+ \beamsOff \acc( f#/4)
+ \bar 
+   (* meas. 16 *)  \beamsOff \acc( g#/4)
+ \beamsOff \acc( a#/4)
+ \beamsOff \acc( b#/4)
+ \beamsOff \acc( c#4/4)
+ \bar 
+   (* meas. 17 *)  \beamsOff \acc( g&-1/4)
+ \beamsOff \acc( a&/4)
+ \beamsOff \acc( b&/4)
+ \beamsOff \acc( c&0/4)
+ \bar 
+   (* meas. 18 *)  \beamsOff \acc( d&/4)
+ \beamsOff \acc( e&/4)
+ \beamsOff \acc( f&/4)
+ \beamsOff \acc( g&/4)
+ \bar 
+   (* meas. 19 *)  \beamsOff \acc( a&/4)
+ \beamsOff \acc( b&/4)
+ \beamsOff \acc( c&1/4)
+ \beamsOff \acc( d&/4)
+ \bar 
+   (* meas. 20 *)  \beamsOff \acc( e&/4)
+ \beamsOff \acc( f&/4)
+ \beamsOff \acc( g&/4)
+ \beamsOff \acc( a&/4)
+ \bar 
+   (* meas. 21 *)  \beamsOff \acc( b&/4)
+ \beamsOff \acc( c&2/4)
+ \beamsOff \acc( d&/4)
+ \beamsOff \acc( e&/4)
+ \bar 
+   (* meas. 22 *)  \beamsOff \acc( f&/4)
+ \beamsOff \acc( g&/4)
+ \beamsOff \acc( a&/4)
+ \beamsOff \acc( b&/4)
+ \bar 
+   (* meas. 23 *)  \beamsOff \acc( c&3/4)
+ \beamsOff \acc( d&/4)
+ \beamsOff \acc( e&/4)
+ \beamsOff \acc( f&/4)
+ \bar 
+   (* meas. 24 *)  \beamsOff \acc( g&/4)
+ \beamsOff \acc( a&/4)
+ \beamsOff \acc( b&/4)
+ \beamsOff \acc( c&4/4)
+ \bar 
+   (* meas. 25 *)  \beamsOff \acc( c##2/4)
+ \beamsOff \acc( c&&/4)
+ \beamsOff \acc( c#/4)
+ \beamsOff \acc( c#/4)
+ \bar 
+   (* meas. 26 *)  \beamsOff \acc( c#/4)
+ \beamsOff \acc( c#/4)
+ ]
+  }

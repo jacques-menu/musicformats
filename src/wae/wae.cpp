@@ -1,0 +1,294 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
+#include "mfExceptions.h"
+
+#include "wae.h"
+
+#include "mfIndentedTextOutput.h"
+#include "mfStringsHandling.h"
+
+#include "oahEarlyOptions.h"
+
+#include "oahOah.h"
+#include "waeOah.h"
+
+
+using namespace std;
+
+namespace MusicFormats
+{
+
+//______________________________________________________________________________
+void waeWarning (
+  const string& context,
+  const string& inputSourceName,
+  int           inputLineNumber,
+  const string& message)
+{
+  if (! gGlobalWaeOahGroup->getQuiet ()) {
+    int saveIndent = gIndenter.getIndent ();
+
+    gIndenter.resetToZero ();
+
+    gLogStream <<
+      "*** " << context << " warning *** " <<
+      inputSourceName << ":" << inputLineNumber << ": " <<message <<
+      endl;
+
+    gGlobalWarningsInputLineNumbers.insert (inputLineNumber);
+
+    gIndenter.setIndent (saveIndent);
+  }
+}
+
+void waeInternalWarning (
+  const string& context,
+  const string& inputSourceName,
+  int           inputLineNumber,
+  const string& message)
+{
+  if (! gGlobalWaeOahGroup->getQuiet ()) {
+    int saveIndent = gIndenter.getIndent ();
+
+    gIndenter.resetToZero ();
+
+    gLogStream <<
+      "*** " << context << " INTERNAL warning *** " <<
+      inputSourceName << ":" << inputLineNumber << ": " <<message <<
+      endl;
+
+    gGlobalWarningsInputLineNumbers.insert (inputLineNumber);
+
+    gIndenter.setIndent (saveIndent);
+  }
+}
+
+//______________________________________________________________________________
+void waeErrorWithoutException (
+  const string& context,
+  const string& inputSourceName,
+  int           inputLineNumber,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message)
+{
+  if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+      gLogStream <<
+        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        " ";
+    }
+
+    if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
+      int saveIndent = gIndenter.getIndent ();
+
+      gIndenter.resetToZero ();
+
+      gLogStream <<
+        "### " << context << " ERROR ### " <<
+        inputSourceName << ":" << inputLineNumber << ": " << message <<
+        endl;
+
+      gIndenter.setIndent (saveIndent);
+
+      gGlobalErrorsInputLineNumbers.insert (inputLineNumber);
+    }
+  }
+}
+
+void waeError (
+  const string& context,
+  const string& inputSourceName,
+  int           inputLineNumber,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message)
+{
+  waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+  throw mfException (message);
+}
+
+void waeErrorWithException (
+  const string& context,
+  const string& inputSourceName,
+  int           inputLineNumber,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message,
+  S_mfException exception)
+{
+  waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+  throw *exception;
+}
+
+//______________________________________________________________________________
+void waeInternalError (
+  const string& context,
+  const string& inputSourceName,
+  int           inputLineNumber,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message)
+{
+  waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+  throw mfException (message);
+}
+
+void waeInternalErrorWithException (
+  const string& context,
+  const string& inputSourceName,
+  int           inputLineNumber,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message,
+  S_mfException exception)
+{
+  waeErrorWithoutException (
+    context,
+    inputSourceName,
+    inputLineNumber,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+  throw *exception;
+}
+
+//______________________________________________________________________________
+std::set<int> gGlobalWarningsInputLineNumbers;
+std::set<int> gGlobalErrorsInputLineNumbers;
+
+void displayWarningsAndErrorsInputLineNumbers ()
+{
+  unsigned int warningsInputLineNumbersSize =
+    gGlobalWarningsInputLineNumbers.size ();
+
+  if (
+    warningsInputLineNumbersSize
+      &&
+    ! gGlobalWaeOahGroup->getQuiet ()
+  ) {
+    gLogStream <<
+      "Warning message(s) were issued for input " <<
+      mfSingularOrPluralWithoutNumber (
+        warningsInputLineNumbersSize, "line", "lines") <<
+      " ";
+
+    set<int>::const_iterator
+      iBegin = gGlobalWarningsInputLineNumbers.begin (),
+      iEnd   = gGlobalWarningsInputLineNumbers.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      gLogStream << (*i);
+      if (++i == iEnd) break;
+      gLogStream << ", ";
+    } // for
+
+    gLogStream << endl;
+  }
+
+  unsigned int errorsInputLineNumbersSize =
+    gGlobalErrorsInputLineNumbers.size ();
+
+  if (errorsInputLineNumbersSize) {
+    gLogStream <<
+      endl <<
+      "Error message(s) were issued for input " <<
+      mfSingularOrPluralWithoutNumber (
+        errorsInputLineNumbersSize, "line", "lines") <<
+      " ";
+
+    set<int>::const_iterator
+      iBegin = gGlobalErrorsInputLineNumbers.begin (),
+      iEnd   = gGlobalErrorsInputLineNumbers.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      gLogStream << (*i);
+      if (++i == iEnd) break;
+      gLogStream << ", ";
+    } // for
+
+    gLogStream << endl;
+  }
+}
+
+
+}
+
+
+//______________________________________________________________________________
+/*
+void msrStreamsWarning (
+  int    inputLineNumber,
+  const string& sourceCodeFileName,
+  int    sourceCodeLineNumber,
+  string  message)
+{
+  if (! (gGlobalWaeOahGroup->getQuiet () && gGlobalWaeOahGroup->getDontShowErrors ())) {
+    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+      gLogStream <<
+        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        " ";
+    }
+
+    gLogStream <<
+      "*** " << "MSR STREAMS" << " warning *** " <<
+      " ### " << "MSR STREAMS" << " ERROR ### " <<
+      "fake line number" << ":" << inputLineNumber << ": " << message <<
+      endl;
+  }
+}
+
+void msrStreamsError (
+  int    inputLineNumber,
+  const string& sourceCodeFileName,
+  int    sourceCodeLineNumber,
+  string  message)
+{
+  if (! (gGlobalWaeOahGroup->getQuiet () && gGlobalWaeOahGroup->getDontShowErrors ())) {
+    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+      gLogStream <<
+        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        " ";
+    }
+
+    gLogStream <<
+      "### " << "MSR STREAMS" << " ERROR ### " <<
+      "fake line number" << ":" << inputLineNumber << ": " << message <<
+      endl;
+  }
+
+  throw mfStreamsException (message);
+}
+*/
+

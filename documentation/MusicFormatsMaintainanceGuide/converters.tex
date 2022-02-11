@@ -1,0 +1,66 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{The converters}
+% -------------------------------------------------------------------------
+
+A multi-pass converter performs a sequence of passes, i.e. a sequence of steps. For example, \xmlToLy\ performs the following passes:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxml > xml2ly -about
+What xml2ly does:
+
+    This multi-pass converter basically performs 5 passes:
+        Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
+                 and converts it to a MusicXML tree;
+        Pass 2a: converts that MusicXML tree into
+                 a first Music Score Representation (MSR) skeleton;
+        Pass 2b: populates the first MSR skeleton from the MusicXML tree
+                 to get a full MSR;
+        Pass 3:  converts the first MSR into a second MSR to apply options
+        Pass 4:  converts the second MSR into a
+                 LilyPond Score Representation (LPSR);
+        Pass 5:  converts the LPSR to LilyPond code
+                 and writes it to standard output.
+
+    Other passes are performed according to the options, such as
+    displaying views of the internal data or printing a summary of the score.
+
+    The activity log and warning/error messages go to standard error.
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{\xmlToLy}
+% -------------------------------------------------------------------------
+
+\mxml\ (\MainIt{Music eXtended Markup Language}) is a specification language meant to represent music scores by texts, readable both by humans and computers. It has been designed by the W3C Music Notation Community Group (\url{https://www.w3.org/community/music-notation/}) to help sharing music score files between applications, through export and import mechanisms.
+
+The homepage to \mxml\ is \url{https://www.musicxml.com}.
+
+\mxml\ data contains very detailed information about the music score, and it is quite verbose by nature. This makes creating such data by hand quite difficult, and this is done by applications actually.
+
+The \mxml\ data is not systematically checked for correctness. Checks are done, however, to ensure it won't crash due to missing values.
+
+
+% -------------------------------------------------------------------------
+\section{\xmlToBrl\ }
+% -------------------------------------------------------------------------
+
+\xmlToBrl\ is mentioned here, but not described in detail.
+
+
+% -------------------------------------------------------------------------
+\section{\xmlToXml\ }
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{\xmlToGmn\ }
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{\msdlconverter}%%%JMI
+% -------------------------------------------------------------------------
+
+

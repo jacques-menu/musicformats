@@ -1,0 +1,11 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/gracenotes/GraceNotesWithTrill.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff c2/4 _/8 \stemsUp \grace( \beamBegin:1 g1/16 \stemsUp a/16 \beamEnd:1)
+ \stemsDown \beamsOff \trill( b/8)
+ \stemsUp \grace( \beamBegin:1 a/16. \stemsUp b/16. \beamEnd:1)
+ \stemsDown \beamsOff c2/4 _/4 ]
+  }

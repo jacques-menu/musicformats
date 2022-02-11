@@ -1,0 +1,104 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/lyrics/FOO.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"Early American Melody", dy=4hs> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \key<-4> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 100", dy=1.8hs> \stemsUp \slurBegin:1 \beamBegin:1 \lyrics<"When", autopos="on">( {c/8, e&/8  })
+ \stemsUp {d&/8, f/8  } \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff \lyrics<"we've", autopos="on">( {c/2, a&/2  })
+ \stemsUp \slurBegin:1 \beamBegin:1 \lyrics<"been~there~ten~thou-sand~years,", autopos="on">( {e&/8, c2/8  })
+ \stemsUp \lyrics<"grace!", autopos="on">( {c1/8, a&/8  })
+ \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff \lyrics<"dan-~gers,~toils", autopos="on">( {e&/2, c2/2  })
+ \stemsUp \beamsOff \lyrics<"my", autopos="on">( {d&1/4, b&/4  })
+ \bar 
+   (* meas. 4 *)  \stemsUp \beamsOff \lyrics<"heart", autopos="on">( {c/2, a&/2  })
+ \stemsUp \beamsOff \lyrics<"to", autopos="on">( {d&/4, f/4  })
+ \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff \lyrics<"snares", autopos="on">( {c/2, e&/2  })
+ \stemsUp \slurBegin:1 \beamBegin:1 \lyrics<"Bright~shin-~ing", autopos="on">( {c/8, e&/8  })
+ \stemsUp {d&/8, f/8  } \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff \lyrics<"have", autopos="on">( {c/2, a&/2  })
+ \stemsUp \slurBegin:1 \beamBegin:1 \lyrics<"al-~read-~y", autopos="on">( {e&/8, c2/8  })
+ \stemsUp \lyrics<"wreteh", autopos="on">( {d&1/8, a&/8  })
+ \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff \lyrics<"as", autopos="on">( {e&/2, c2/2  })
+ \stemsUp \slurBegin:1 \beamBegin:1 \lyrics<"the", autopos="on">( b&1/8)
+ \stemsUp c2/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 8 *)  empty/2 \stemsUp \slurBegin:1 \beamBegin:1 b&1/8 \stemsUp c2/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff \lyrics<"once", autopos="on">( {a&1/2, e&2/2  })
+ \stemsUp \slurBegin:1 \beamBegin:1 \lyrics<"Iess", autopos="on">( {a&1/8, e&2/8  })
+ \stemsUp {e&1/8, c2/8  } \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff \lyrics<"days", autopos="on">( {e&1/2, a&/2  })
+ \stemsUp \slurBegin:1 \beamBegin:1 \lyrics<"to", autopos="on">( {d&/8, f/8  })
+ \stemsUp {c/8, e&/8  } \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff \lyrics<"sing~God's~praise~Than~when~we've~first~be-~gun.", autopos="on">( {f/2, a&/2  })
+ \stemsUp \beamsOff \lyrics<"am", autopos="on">( {d&/4, f/4  })
+ \bar 
+   (* meas. 12 *)  \stemsUp \beamsOff \lyrics<"far,~And~grace~will~lead~me~home.", autopos="on">( {c/2, e&/2  })
+ \stemsUp \slurBegin:1 \beamBegin:1 \lyrics<"The", autopos="on">( {c/8, e&/8  })
+ \stemsUp {d&/8, f/8  } \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff \lyrics<"honr", autopos="on">( {c/2, a&/2  })
+ \stemsUp \slurBegin:1 \beamBegin:1 c2/8 \stemsUp a&1/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 14 *)  \stemsUp \beamsOff \lyrics<"first~be-lieved!", autopos="on">( {g/2, c2/2  })
+ \stemsUp \beamsOff \lyrics<"I", autopos="on">( {g1/4, b&/4  })
+ \bar 
+   (* meas. 15 *)  \stemsUp \beamsOff \lyrics<"see.", autopos="on">( {e&/2, a&/2  })
+ ]
+ , 
+[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  empty/4 \bar 
+   (* meas. 2 *)  empty*3/4 \bar 
+   (* meas. 3 *)  empty*3/4 \bar 
+   (* meas. 4 *)  empty*3/4 \bar 
+   (* meas. 5 *)  empty*3/4 \bar 
+   (* meas. 6 *)  empty*3/4 \bar 
+   (* meas. 7 *)  empty/2 \stemsDown \beamsOff a&/4 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff \lyrics<"sun,", autopos="on">( {g/2, e&2/2  })
+ \stemsDown \beamsOff \lyrics<"We'veno", autopos="on">( g1/4)
+ \bar 
+   (* meas. 9 *)  empty*3/4 \bar 
+   (* meas. 10 *)  empty*3/4 \bar 
+   (* meas. 11 *)  empty*3/4 \bar 
+   (* meas. 12 *)  empty*3/4 \bar 
+   (* meas. 13 *)  empty/2 \stemsDown \slurBegin:1 \beamBegin:1 \lyrics<"but", autopos="on">( e&/8)
+ \stemsDown a&/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 14 *)  empty*3/4 \bar 
+   (* meas. 15 *)  empty/2 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \key<-4> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff {a&-1/4, a&0/4  } \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff {a&-1/2, e&0/2  } \stemsDown \beamsOff {a&-1/4, a&0/4  } \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff {a&-1/2, a&0/2  } \stemsDown \beamsOff {e&/4, g/4  } \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff {f/2, a&/2  } \stemsDown \beamsOff {d&/4, a&/4  } \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff {a&-1/2, a&0/2  } \stemsDown \beamsOff {a&-1/4, a&0/4  } \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff {a&-1/2, e&0/2  } \stemsDown \beamsOff {a&-1/4, a&0/4  } \bar 
+   (* meas. 7 *)  \stemsDown \beamsOff a&/2 \stemsDown \beamsOff {f/4, a&/4  } \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff {e&/2, b&/2  } \stemsDown \beamsOff {e&/4, e&1/4  } \bar 
+   (* meas. 9 *)  empty/2 \stemsUp \slurBegin:1 \beamBegin:1 c/8 \stemsUp a&0/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 10 *)  empty/2 \stemsUp \beamsOff a&/4 \bar 
+   (* meas. 11 *)  \stemsDown \beamsOff {d&/2, a&/2  } \stemsDown \beamsOff {d&/4, a&/4  } \bar 
+   (* meas. 12 *)  empty/2 \stemsUp \beamsOff a&/4 \bar 
+   (* meas. 13 *)  empty/2 \stemsUp \beamBegin:1 a&/8 \stemsUp \slurBegin:1 c1/8 \beamEnd:1 \bar 
+   (* meas. 14 *)  \stemsDown \beamsOff {e&0/2, e&1/2  } \slurEnd:1 \stemsDown \beamsOff {e&0/4, d&1/4  } \bar 
+   (* meas. 15 *)  \stemsDown \beamsOff {a&-1/2, c1/2  } ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  empty/4 \bar 
+   (* meas. 2 *)  empty*3/4 \bar 
+   (* meas. 3 *)  empty*3/4 \bar 
+   (* meas. 4 *)  empty*3/4 \bar 
+   (* meas. 5 *)  empty*3/4 \bar 
+   (* meas. 6 *)  empty*3/4 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff a&0/2 empty/4 \bar 
+   (* meas. 8 *)  empty*3/4 \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff \lyrics<"Music~engraving~by~LilyPond~2.19.47-www.lilypond.org", autopos="on">( {a&/2, c1/2  })
+ \stemsDown \beamsOff a&0/4 \bar 
+   (* meas. 10 *)  \stemsDown \beamsOff {a&/2, c1/2  } \stemsDown \beamsOff a&0/4 \bar 
+   (* meas. 11 *)  empty*3/4 \bar 
+   (* meas. 12 *)  \stemsDown \beamsOff {a&-1/2, a&0/2  } \stemsDown \beamsOff a&/4 \bar 
+   (* meas. 13 *)  \stemsDown \beamsOff {f/2, a&/2  } \stemsDown \beamsOff e&/4 \bar 
+   (* meas. 14 *)  empty*3/4 \bar 
+   (* meas. 15 *)  empty/2 ]
+  }

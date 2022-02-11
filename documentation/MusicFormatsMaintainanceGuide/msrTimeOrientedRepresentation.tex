@@ -1,0 +1,268 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{MSR time-oriented represention}\label{MSR time-oriented represention}
+% -------------------------------------------------------------------------
+
+In order to represent the music according to simultaneous sounding time, MSR builds:
+\begin{itemize}
+\item a flat list of measures at the voice and staff levels;
+\item from this, a vector of measures slices at the voice, staff, part, part group and score levels.
+\end{itemize}
+
+The source files are in \msrBoth{msrMeasuresSlices}.
+
+
+% -------------------------------------------------------------------------
+\section{Note events}
+% -------------------------------------------------------------------------
+
+Notes start and stop are represented by \enumType{msrNoteEventKind}:
+\begin{lstlisting}[language=CPlusPlus]
+enum class msrNoteEventKind {
+  kNoteEventStart,
+  kNoteEventStop
+};
+\end{lstlisting}
+
+A note event is described in class {\tt }:
+\begin{lstlisting}[language=CPlusPlus]
+class msrNoteEvent : public smartable
+{
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    rational              fNoteEventPositionInMeasure;
+    S_msrNote             fNoteEventNote;
+    msrNoteEventKind      fNoteEventKind;
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Simultaneous notes chunks}
+% -------------------------------------------------------------------------
+
+Such a chunk is a set of notes or rests played simultaneously, i.e. that start and stop at the same time. The set is stored as a list actually:
+\begin{lstlisting}[language=CPlusPlus]
+class msrSimultaneousNotesChunk : public smartable
+{
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    rational              fChunkPositionInMeasure;
+    list<S_msrNote>       fChunkNotesList;
+    rational              fChunkWholeNotes;
+};
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Measures slices}
+% -------------------------------------------------------------------------
+
+A measures slice, described by \class{msrMeasuresSlice}, is a 'vertical'\index{vertical!vertical cut} cut in the score across voices: is contains all the measures starting at the same time, one per voice:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrMeasuresSlice : public smartable
+{
+	// ... ... ...
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    int                   fSlicePuristMeasureNumber;
+    string                fSliceMeasureNumber;
+
+    // the measures in the slice
+    vector<S_msrMeasure>  fSliceMeasuresVector;
+
+    // notes flat list
+    list<S_msrNote>       fSliceNotesFlatList;
+
+    // note events list
+    list<S_msrNoteEvent>  fSliceNoteEventsList;
+
+    // simultaneous notes chunks list
+    list<S_msrSimultaneousNotesChunk>
+                          fSliceSimultaneousNotesChunksList;
+};
+
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Measures slices sequences}
+% -------------------------------------------------------------------------
+
+A \class{msrMeasuresSlicesSequence} contains a vector of {\tt S_msrMeasuresSlice} instances:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrMeasuresSlicesSequence : public smartable
+{
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    string                fMeasuresOrigin;
+
+    vector<S_msrMeasuresSlice>
+                          fMeasuresSlicesVector;
+};
+\end{lstlisting}
+
+A \smart\ to am {\tt msrMeasuresSlicesSequence} instance is stored in {\tt msrVoice}, {\tt msrStaff}, {\tt msrPart}, {\tt msrPartGroup} and {\tt msrScore}.
+
+
+% -------------------------------------------------------------------------
+\section{Building the measures slices}
+% -------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------
+\subsection{Part measures slices}
+% -------------------------------------------------------------------------
+
+At the part level, this is done in \method{msrPart}{collectPartMeasuresSlices}:
+\begin{lstlisting}[language=CPlusPlus]
+void msrPart::collectPartMeasuresSlices (
+  int inputLineNumber)
+{
+	// ... ... ...
+
+  // create the part measures slices sequence
+  fPartMeasuresSlicesSequence =
+    msrMeasuresSlicesSequence::create (
+      fPartName); // origin
+
+  // populate it
+  for (S_msrStaff staff : fPartAllStavesList) {
+		// ... ... ...
+
+    ++gIndenter;
+
+    S_msrMeasuresSlicesSequence
+      staffMeasuresSlicesSequence =
+        staff->
+          getStaffMeasuresSlicesSequence ();
+
+    if (! staffMeasuresSlicesSequence) {
+      stringstream s;
+
+      s <<
+        "The staffMeasuresSlicesSequence of staff \"" <<
+        staff->getStaffName () <<
+        "\" is null";
+
+      musicxmlWarning (
+        gGlobalServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        s.str ());
+    }
+    else {
+      fPartMeasuresSlicesSequence->
+        mergeWithMeasuresSlicesSequence (
+          inputLineNumber,
+          getPartCombinedName (),
+          staffMeasuresSlicesSequence);
+    }
+
+    --gIndenter;
+  } // for
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Staff measures slices}
+% -------------------------------------------------------------------------
+
+\Method{msrStaff}{collectStaffMeasuresSlices} builds them:
+\begin{lstlisting}[language=CPlusPlus]
+void msrStaff::collectStaffMeasuresSlices (
+  int inputLineNumber)
+{
+	// ... ... ...
+
+  // create the staff measures slices sequence
+  fStaffMeasuresSlicesSequence =
+    msrMeasuresSlicesSequence::create (
+      fStaffName); // origin
+
+  // populate it
+  for (S_msrVoice voice : fStaffAllVoicesList) {
+		// ... ... ...
+
+    // get the voice measures slices sequence
+    S_msrMeasuresSlicesSequence
+      voiceMeasuresSlicesSequence =
+        voice->
+          getVoiceMeasuresSlicesSequence ();
+
+    // merge it with the voice measures slices sequence
+    if (voiceMeasuresSlicesSequence) { // JMI
+      fStaffMeasuresSlicesSequence =
+        fStaffMeasuresSlicesSequence->
+          mergeWithMeasuresSlicesSequence (
+            inputLineNumber,
+            fStaffName,
+            voiceMeasuresSlicesSequence);
+    }
+
+    // identify the solo notes and rests in the staff
+    fStaffMeasuresSlicesSequence->
+      identifySoloNotesAndRests ();
+
+    --gIndenter;
+  } // for
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Solo notes and rests}
+% -------------------------------------------------------------------------
+
+A solo note or rest is one that occurs alone at some point in time for its whole duration, without any other note being played at the same time.
+
+Identifying such solo notes or rests is done in \method{msrMeasuresSlicesSequence}{identifySoloNotesAndRests} using the measures slices of the staff they occur in, called \method{msrStaff}{collectStaffMeasuresSlices} as shown above:
+\begin{lstlisting}[language=CPlusPlus]
+void msrMeasuresSlicesSequence::identifySoloNotesAndRests ()
+{
+	// ... ... ...
+
+  // collect the notes from the sequence's measures slices
+  for (
+    vector<S_msrMeasuresSlice>::const_iterator i =
+      fMeasuresSlicesVector.begin ();
+    i != fMeasuresSlicesVector.end ();
+    ++i
+  ) {
+    S_msrMeasuresSlice measuresSlice = (*i);
+
+    measuresSlice->
+      collectNonSkipNotesFromMeasuresSliceMeasures ();
+  } // for
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{A measures slices example}
+% -------------------------------------------------------------------------
+
+

@@ -1,0 +1,17 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/71f-AllChordTypes.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"All MusicXML chord names/types with &lt;root&gt;"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 2 *)  \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 3 *)  \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 4 *)  \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 5 *)  \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 6 *)  \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 7 *)  \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 8 *)  \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 9 *)  \beamsOff c/2 \beamsOff c/8 \beamsOff c/8 _/4 \bar 
+   (* meas. 10 *)  \beamsOff c/4 \beamsOff c/4 ]
+  }

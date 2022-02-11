@@ -1,0 +1,16 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/misc/Ojos_agules.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<1> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 120", dy=-19hs> 
+   (* meas. 2 *)  \repeatBegin \stemsDown \beamBegin:1 b/8 \stemsDown b/8 \beamEnd:1 \stemsDown \beamBegin:1 b/8 \stemsDown d2/8 \beamEnd:1 \stemsDown \beamsOff b1/4 \stemsUp \beamBegin:1 g/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff b/4 \stemsUp \beamBegin:1 g/8 \stemsUp a/8 \beamEnd:1 \stemsDown \beamBegin:1 b/8 \stemsDown b/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff a/4 \stemsUp \beamBegin:1 f#/8 \stemsUp g/8 \beamEnd:1 \bar 
+   (* meas. 5 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsAuto \beamsOff e/1 \repeatEnd \bar<hidden="true"> 
+   (* meas. 6 *)  \repeatBegin \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 \stemsUp \beamBegin:1 e/8 \stemsUp d/8 \beamEnd:1 \stemsUp \beamsOff g/4 \stemsUp \beamBegin:1 g/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 7 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff b/4 \stemsUp \beamBegin:1 g/8 \stemsUp a/8 \beamEnd:1 \stemsDown \beamBegin:1 b/8 \stemsDown b/8 \beamEnd:1 \bar 
+   (* meas. 8 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff a/4 \stemsUp \beamBegin:1 f#/8 \stemsUp g/8 \beamEnd:1 \bar 
+   (* meas. 9 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsAuto \beamsOff e/1 \repeatEnd ]
+  }

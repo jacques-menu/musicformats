@@ -1,0 +1,77 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/partgroups/PartGroups.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Prelude to a Tragedy"> \composer<"Lee Actor", dy=4hs> \auto<autoInstrPos="on"> \instr<"Piccolo"> \accol<id=1,  range="1-7"> \barFormat<style= "system",  range="1-7"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"  [1/4] = 85",fsize=6.6pt, dy=-4hs> _*3/4 \bar 
+   (* meas. 2 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 5 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 6 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 7 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \tieBegin:1 b2/2. \bar 
+   (* meas. 8 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff \tieBegin:2 b/2 \tieEnd:1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Flutes"> \barFormat<style= "system",  range="2-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 2 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 5 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 6 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 7 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff {\tieBegin:1 b2/2., \tieBegin:2 \acc( f#3/2.)
+  } \bar 
+   (* meas. 8 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff {b2/2 \tieEnd:1, f#3/2 \tieEnd:2  } ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Oboes"> \barFormat<style= "system",  range="3-3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 2 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 5 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 6 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 7 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff {\tieBegin:1 b2/2., \tieBegin:2 d3/2.  } \bar 
+   (* meas. 8 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff {b2/2 \tieEnd:1, d3/2 \tieEnd:2  } ]
+ , 
+[ \staff<4> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"English Horn"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 2 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 5 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 6 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 7 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 8 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 ]
+ , 
+[ \staff<5> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Clarinets in Bb"> \barFormat<style= "system",  range="5-5"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 2 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 5 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 6 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 7 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff {\tieBegin:1 \acc( c#3/2.)
+, \tieBegin:2 e/2.  } \bar 
+   (* meas. 8 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff {c#/2 \tieEnd:1, e/2 \tieEnd:2  } ]
+ , 
+[ \staff<6> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Bass Clarinet in Bb"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 2 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 5 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 6 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 7 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 8 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 ]
+ , 
+[ \staff<7> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Bassoons"> \barFormat<style= "system",  range="7-7"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 2 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 5 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \bar 
+   (* meas. 6 *)  \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 7 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _*3/4 \bar 
+   (* meas. 8 *)  \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> _/2 ]
+  }

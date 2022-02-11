@@ -1,0 +1,16 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/ligatures/TwoLigatures.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Two ligatures"> \composer<"Gilles Binchois", dy=4hs> \auto<autoInstrPos="on"> \instr<"Cantus"> \barFormat<style= "system",  range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> \text<"Chorus", dx=-9.2hs, dy=18.4hs>( \stemsDown \beamBegin:1 c/8)
+ \stemsDown b&0/16 \stemsDown c1/16 \beamEnd:1 \stemsDown \beamsOff \lyrics<"tus", autopos="on">( d/4.)
+ \stemsDown \beamsOff c/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Cantus 2 and Tenor"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> \stemsUp \beamsOff a-1/4 \stemsUp \beamsOff a0/4. \stemsUp \beamsOff f/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \bar<hidden="true"> 
+   (* meas. 1 *)  \stemsDown \beamsOff e0/4 \stemsDown \beamsOff d/2 ]
+  }

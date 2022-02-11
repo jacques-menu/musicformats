@@ -1,0 +1,68 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/lyrics/SingOutAllYourPraiseToGod.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Violins 1"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-3> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamBegin:1 \lyrics<"6.~Je-", autopos="on">( {e&/8, g/8  })
+ \stemsUp \lyrics<"sus", autopos="on">( {d/8, b&/8  })
+ \stemsUp \lyrics<"Christ", autopos="on">( {e&/8, b&/8  })
+ \stemsUp \lyrics<"is", autopos="on">( {e&/8, g/8  })
+ \beamEnd:1 \stemsUp \beamsOff \lyrics<"ris-", autopos="on">( {f/4, a&/4  })
+ \stemsUp \beamsOff \lyrics<"en!", autopos="on">( {e&/4, g/4  })
+ \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff \lyrics<"We", autopos="on">( {d/4, f/4  })
+ \stemsUp \beamsOff \lyrics<"are", autopos="on">( {c/4, g/4  })
+ \stemsUp \beamsOff \lyrics<"free!", autopos="on">( {c/2, e&/2  })
+ \bar 
+   (* meas. 3 *)  \stemsUp \beamBegin:1 \lyrics<"Sing", autopos="on">( {c/8, g/8  })
+ \stemsUp \lyrics<"out", autopos="on">( {d/8, b&/8  })
+ \stemsUp \lyrics<"all", autopos="on">( {e&/8, b&/8  })
+ \stemsUp \lyrics<"your", autopos="on">( {e&/8, g/8  })
+ \beamEnd:1 \stemsUp \beamsOff \lyrics<"praise", autopos="on">( {f/4, a&/4  })
+ \stemsUp \beamsOff \lyrics<"to", autopos="on">( {e&/4, g/4  })
+ \bar 
+   (* meas. 4 *)  \stemsAuto \beamsOff \lyrics<"God!", autopos="on">( {d/1, f/1  })
+ \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff \lyrics<"Guilt", autopos="on">( {c/4, c2/4  })
+ \stemsUp \beamBegin:1 \lyrics<"is", autopos="on">( {d1/8, d2/8  })
+ \stemsUp \lyrics<"for-", autopos="on">( {e&1/8, e&2/8  })
+ \beamEnd:1 \stemsUp \beamsOff \lyrics<"giv-", autopos="on">( {f1/4, b&/4  })
+ \stemsUp \beamsOff \lyrics<"en,", autopos="on">( {d/4, g/4  })
+ \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff \lyrics<"sin", autopos="on">( {e&/4, a&/4  })
+ \stemsUp \beamBegin:1 \lyrics<"is", autopos="on">( {f/8, b&/8  })
+ \stemsUp \lyrics<"washed", autopos="on">( {g/8, c2/8  })
+ \beamEnd:1 \stemsUp \beamsOff \lyrics<"clean!", autopos="on">( {c1/2, f/2  })
+ \bar 
+   (* meas. 7 *)  \stemsUp \beamBegin:1 \lyrics<"Sing", autopos="on">( {a&0/8, f1/8  })
+ \stemsUp \lyrics<"out", autopos="on">( {b&0/8, a&1/8  })
+ \stemsUp \lyrics<"all", autopos="on">( {c/8, g/8  })
+ \stemsUp \lyrics<"your", autopos="on">( {d/8, f/8  })
+ \beamEnd:1 \stemsUp \beamsOff \lyrics<"praise", autopos="on">( {e&/4, g/4  })
+ \stemsUp \beamsOff \lyrics<"to", autopos="on">( {d/4, f/4  })
+ \bar 
+   (* meas. 8 *)  \stemsAuto \beamsOff \lyrics<"God!", autopos="on">( e&/1)
+ ]
+ , 
+[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  empty/1 \bar 
+   (* meas. 2 *)  empty/1 \bar 
+   (* meas. 3 *)  empty/1 \bar 
+   (* meas. 4 *)  empty/1 \bar 
+   (* meas. 5 *)  empty/1 \bar 
+   (* meas. 6 *)  empty/1 \bar 
+   (* meas. 7 *)  empty/1 \bar 
+   (* meas. 8 *)  \beamsOff \noteFormat<dx=4>( e&/1)
+ ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Violoncellos"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-3> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamBegin:1 {c0/8, g/8  } \stemsDown {b&-1/8, g0/8  } \stemsDown {c/8, g/8  } \stemsDown {c/8, g/8  } \beamEnd:1 \stemsDown \beamsOff {d/4, a&/4  } \stemsDown \beamsOff {e&/4, b&/4  } \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff {d/4, a&/4  } \stemsDown \beamsOff {e&/4, g/4  } \stemsDown \beamsOff {e&/2, a&/2  } \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 {e&/8, g/8  } \stemsDown {f/8, b&/8  } \stemsDown {g/8, b&/8  } \stemsDown {g/8, c1/8  } \beamEnd:1 \stemsDown \beamsOff {a&0/4, d1/4  } \stemsDown \beamsOff {g0/4, c1/4  } \bar 
+   (* meas. 4 *)  \stemsAuto \beamsOff {f0/1, b&/1  } \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff {a&-1/4, f0/4  } \stemsDown \beamBegin:1 {a&-1/8, f0/8  } \stemsDown {b&-1/8, g0/8  } \beamEnd:1 \stemsDown \beamsOff {d/4, b&/4  } \stemsDown \beamsOff {g/4, b&/4  } \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff {a&/4, c1/4  } \stemsDown \beamBegin:1 {d0/8, b&/8  } \stemsDown {e&/8, c1/8  } \beamEnd:1 \stemsDown \beamsOff {f0/2, a&/2  } \bar 
+   (* meas. 7 *)  \stemsDown \beamBegin:1 {c/8, f/8  } \stemsDown {d/8, f/8  } \stemsDown {e&/8, g/8  } \stemsDown {f/8, a&/8  } \beamEnd:1 \stemsDown \beamsOff {g/4, b&/4  } \stemsDown \beamsOff {f/4, b&/4  } \bar 
+   (* meas. 8 *)  \stemsAuto \beamsOff {g/1, b&/1  } ]
+  }

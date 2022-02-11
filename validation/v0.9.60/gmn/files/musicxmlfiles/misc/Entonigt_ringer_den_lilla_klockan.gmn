@@ -1,0 +1,30 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/misc/Entonigt_ringer_den_lilla_klockan.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 92", dy=-19hs> \stemsUp \beamBegin:1 e/8 \stemsUp f/8 \beamEnd:1 
+   (* meas. 2 *)  \repeatBegin \stemsUp \beamsOff g/4. \stemsUp \beamsOff g/8 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff g/4 \stemsDown \beamsOff c2/4 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff \tieBegin:1 e/2. \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff e/4 \tieEnd:1 _/4 \stemsDown \beamBegin:1 e/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff g/4. \stemsDown \beamsOff f/8 \stemsDown \beamsOff e/4 \bar 
+   (* meas. 7 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff c/4 \bar 
+   (* meas. 8 *)  \stemsUp \beamsOff a1/4 \stemsDown \beamsOff \tieBegin:1 c2/2 \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff c/4 \tieEnd:1 _/4 \stemsDown \beamBegin:1 c/8 \stemsDown c/8 \beamEnd:1 \bar 
+   (* meas. 10 *)  \stemsDown \beamsOff c/2 \stemsDown \beamBegin:1 c/8 \stemsDown c/8 \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsDown \beamsOff d/4 \stemsDown \beamsOff c/4 \stemsUp \beamsOff a1/4 \bar 
+   (* meas. 12 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff g/4 \tieEnd:1 _/4 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \bar 
+   (* meas. 14 *)  \volta<"1", "1.">( \stemsDown \beamsOff b/4. \stemsDown \beamsOff b/8 \stemsDown \beamsOff b/4 \bar 
+   (* meas. 15 *)  \stemsDown \beamsOff b/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 16 *)  \stemsUp \beamsOff \tieBegin:1 g/2. \bar 
+   (* meas. 17 *)  \stemsUp \beamsOff g/4 \tieEnd:1 _/4 \stemsUp \beamBegin:1 e/8 \stemsUp f/8 \beamEnd:1)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 18 *)  \volta<"2", "2.", format="|-">( \stemsDown \beamsOff c2/4. \stemsUp \beamsOff a1/8 \stemsUp \beamsOff g/4)
+ \bar 
+   (* meas. 19 *)  \stemsDown \beamsOff f2/2 \stemsDown \beamsOff b1/4 \bar 
+   (* meas. 20 *)  \stemsDown \beamsOff \tieBegin:1 c2/2. \bar 
+   (* meas. 21 *)  \stemsDown \beamsOff c/2 \tieEnd:1 ]
+  }

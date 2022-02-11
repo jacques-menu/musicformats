@@ -1,0 +1,18 @@
+# some options
+
+  # output file
+  -auto-output-file-name
+
+  # contents
+  -title "Anacrusis created with '-include' option"
+  -subtitle "Just for the fun"
+
+  # layout
+  -global-staff-size 30
+
+  # non-musical
+  -cpu
+
+# the MusicXML file
+
+  basic/Anacrusis.xml

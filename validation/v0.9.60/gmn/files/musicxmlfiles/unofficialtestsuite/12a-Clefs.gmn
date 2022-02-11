@@ -1,0 +1,25 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/12a-Clefs.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c/1 \bar 
+   (* meas. 2 *)  \clef<"c3"> \beamsOff c/1 \bar 
+   (* meas. 3 *)  \clef<"c4"> \beamsOff c/1 \bar 
+   (* meas. 4 *)  \clef<"f4"> \beamsOff c/1 \bar 
+   (* meas. 5 *)  \clef<"perc"> \beamsOff c/1 \bar 
+   (* meas. 6 *)  \clef<"g2-8"> \beamsOff c/1 \bar 
+   (* meas. 7 *)  \clef<"f4-8"> \beamsOff c/1 \bar 
+   (* meas. 8 *)  \clef<"f3"> \beamsOff c/1 \bar 
+   (* meas. 9 *)  \clef<"g1"> \beamsOff c/1 \bar 
+   (* meas. 10 *)  \clef<"c5"> \beamsOff c/1 \bar 
+   (* meas. 11 *)  \clef<"c2"> \beamsOff c/1 \bar 
+   (* meas. 12 *)  \clef<"c1"> \beamsOff c/1 \bar 
+   (* meas. 13 *)  \clef<"perc"> \beamsOff c/1 \bar 
+   (* meas. 14 *)  \clef<"g2+8"> \beamsOff c/1 \bar 
+   (* meas. 15 *)  \clef<"f4+8"> \beamsOff c/1 \bar 
+   (* meas. 16 *)  \clef<"TAB5"> \beamsOff c/1 \bar 
+   (* meas. 17 *)  \clef<"none"> \beamsOff c/1 \bar 
+   (* meas. 18 *)  \clef<"g2"> \beamsOff c/1 ]
+  }

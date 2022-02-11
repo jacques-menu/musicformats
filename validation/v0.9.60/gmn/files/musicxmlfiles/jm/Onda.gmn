@@ -1,0 +1,11 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/jm/Onda.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Piano"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamBegin:1 b/8 \stemsDown c2/8 \stemsDown a1/8 \stemsDown d2/8 \beamEnd:1 \stemsDown \beamBegin:1 g1/8 \stemsDown e2/8 \stemsDown f1/8 \stemsDown f2/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamBegin:1 e1/8 \stemsDown g2/8 \stemsDown d1/8 \stemsDown a2/8 \beamEnd:1 \stemsDown \beamBegin:1 c1/8 \stemsDown b2/8 \stemsDown b0/8 \stemsDown c3/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 c/8 \stemsDown b0/8 \stemsDown b2/8 \stemsDown c1/8 \beamEnd:1 \stemsDown \beamBegin:1 a2/8 \stemsDown d1/8 \stemsDown g2/8 \stemsDown e1/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 f2/8 \stemsDown f1/8 \stemsDown e2/8 \stemsDown g1/8 \beamEnd:1 \stemsDown \beamBegin:1 d2/8 \stemsDown a1/8 \stemsDown c2/8 \stemsDown b1/8 \beamEnd:1 ]
+  }

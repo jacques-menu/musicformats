@@ -1,0 +1,13 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/03a-Rhythm-Durations.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"16/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c2*4/1 \bar 
+   (* meas. 2 *)  \beamsOff c*2/1 \beamsOff c/1 \beamsOff c/2 \beamsOff c/4 \beamsOff c/8 \beamsOff c/16 \beamsOff c/32 \beamsOff c/64 \beamsOff c/128 \beamsOff c/128 \bar 
+   (* meas. 3 *)  \meter<"24/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c*6/1. \bar 
+   (* meas. 4 *)  \beamsOff c*3/1. \beamsOff c/1. \beamsOff c/2. \beamsOff c/4. \beamsOff c/8. \beamsOff c/16. \beamsOff c/32. \beamsOff c/64. \beamsOff c/128. \beamsOff c/128. \bar 
+   (* meas. 5 *)  \meter<"28/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c*7/1.. \bar 
+   (* meas. 6 *)  \beamsOff c*7/2.. \beamsOff c/1.. \beamsOff c/2.. \beamsOff c/4.. \beamsOff c/8.. \beamsOff c/16.. \beamsOff c/32.. \beamsOff c/64.. \beamsOff c/64.. ]
+  }

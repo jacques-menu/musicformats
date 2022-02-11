@@ -1,0 +1,48 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/multistaff/OrganExample1.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Organ"> \accol<id=0, range="1-3"> \barFormat<style= "system", range="1-3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<5> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff g#/2. \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff g#/4 \stemsUp \beamsOff g#/4 \stemsUp \beamsOff a#/4 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff b/4 \stemsUp \beamsOff a#/4 \stemsUp \beamsOff a#/4 \stemsUp \beamsOff g#/4 \bar 
+   (* meas. 4 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff d#/4 \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff e/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff g#/4 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff a#/4 \stemsDown \beamsOff b/4 \stemsDown \beamsOff b/4 \stemsDown \beamsOff c#2/4 \bar 
+   (* meas. 7 *)  \stemsDown \beamsOff b1/4 \stemsUp \beamsOff a#/4 \stemsUp \beamsOff g#/4 \stemsUp \beamsOff g#/4 \bar 
+   (* meas. 8 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff d#/4 \bar 
+   (* meas. 9 *)  \stemsUp \beamsOff e/2 \stemsUp \beamsOff e/2 \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff e/2 \stemsUp \beamsOff e/2 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff d#/2 \stemsUp \beamsOff c#/2 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=13> \clef<"f4"> \key<5> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff b-1/2. \bar 
+   (* meas. 2 *)  \stemsUp \beamBegin:1 b/8 \stemsUp b/8 \stemsUp b/8 \beamEnd:1 \stemsUp \beamsOff c#0/4. _/4 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 d#/8 \stemsDown d#/8 \stemsDown d#/8 \beamEnd:1 \stemsDown \beamsOff e/4. _/4 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 d#/8 \stemsDown d#/8 \stemsDown d#/8 \beamEnd:1 \stemsUp \beamsOff c#/2 _/8 \bar 
+   (* meas. 5 *)  \stemsUp \beamBegin:1 b-1/8 \stemsUp b/8 \stemsUp b/8 \beamEnd:1 \stemsUp \beamsOff a#/2 _/8 \bar 
+   (* meas. 6 *)  \stemsUp \beamBegin:1 a#/8 \stemsUp a#/8 \stemsUp a#/8 \stemsUp a#/8 \beamEnd:1 \stemsUp \beamsOff b/2 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff c#0/4 \stemsUp \beamsOff c#/4 \stemsUp \beamsOff c#/4 \stemsDown \beamsOff e/4 \bar 
+   (* meas. 8 *)  \staffFormat<distance=13> \stemsDown \beamsOff d#/2 \stemsDown \beamsOff e/2 \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff e/2 \stemsDown \beamsOff d#/2 \bar 
+   (* meas. 10 *)  \stemsDown \beamsOff d#/2 \stemsUp \beamsOff c#/2 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff c#/2 \stemsUp \beamsOff a#-1/2 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=13> \clef<"f4"> \key<5> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \noteFormat<dx=-24>( _*3/4.)
+ \bar 
+   (* meas. 2 *)  \noteFormat<dx=-2>( _/1)
+ \bar 
+   (* meas. 3 *)  \noteFormat<dx=-2>( _/1)
+ \bar 
+   (* meas. 4 *)  \noteFormat<dx=-2>( _/1)
+ \bar 
+   (* meas. 5 *)  \stemsDown \beamBegin:1 d#0/8 \stemsDown d#/8 \stemsDown d#/8 \beamEnd:1 \stemsUp \beamsOff c#/4. \stemsUp \beamsOff a#-1/4 \bar 
+   (* meas. 6 *)  \stemsAuto \beamsOff \tieBegin:1 a#/1 \bar 
+   (* meas. 7 *)  \beamsOff \tieBegin:2 a#/1 \tieEnd:1 \bar 
+   (* meas. 8 *)  \staffFormat<distance=13> \beamsOff \tieBegin:3 a#/1 \tieEnd:2 \bar 
+   (* meas. 9 *)  \beamsOff a#/1 \tieEnd:3 \bar 
+   (* meas. 10 *)  \stemsUp \beamBegin:1 b/8 \stemsUp c#0/8 \stemsUp d#/8 \stemsUp c#/8 \beamEnd:1 \stemsDown \beamBegin:1 d#/8 \stemsDown e/8 \stemsDown f#/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsDown \beamBegin:1 f#/8 \stemsDown g#/8 \stemsDown a#/8 \stemsDown g#/8 \beamEnd:1 \stemsDown \beamsOff a#/8 \stemsDown \beamsOff c#1/4. ]
+  }

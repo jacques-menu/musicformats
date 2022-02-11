@@ -1,0 +1,34 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/harmonies/HarmoniesSharingANote.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"unknown"> \auto<autoInstrPos="on"> \instr<"Voice"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=0> \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 130"> _/1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff \lyrics<"I", autopos="on">( e/2)
+ \stemsDown \beamsOff \lyrics<"don&apos;t", autopos="on">( b/2)
+ \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff \lyrics<"ra-", autopos="on">( a/2)
+ \stemsUp \beamsOff \lyrics<"di-", autopos="on">( g/2)
+ \bar 
+   (* meas. 4 *)  \stemsUp \beamBegin:1 \lyrics<"a", autopos="on">( e/8)
+ \stemsUp d/8 \beamEnd:1 \stemsUp \beamsOff \lyrics<"te", autopos="on">( c/4)
+ _/2 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Piano"> \accol<id=0, range="2-3"> \barFormat<style= "system", range="2-3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \oct<1> \beamsOff \arpeggio( {b2/1, e3/1, b/1  })
+ \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff {a0/2, c1/2, e/2, g/2  } \stemsUp \beamsOff {e/4., g/4., \acc( b/4.)
+, d2/4.  } \stemsUp \beamsOff {\tieBegin:1 d1/8, \tieBegin:2 f/8, \tieBegin:3 a/8, \tieBegin:4 c2/8  } \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff {d1/8 \tieEnd:1, f/8 \tieEnd:2, a/8 \tieEnd:3, c2/8 \tieEnd:4  } \stemsDown \beamsOff {\tieBegin:1 g1/4., \tieBegin:2 b/4., \tieBegin:3 d2/4.  } \stemsDown \beamsOff {g1/8 \tieEnd:1, b/8 \tieEnd:2, d2/8 \tieEnd:3  } \stemsDown \beamsOff {g1/4., \acc( b&/4.)
+, d2/4.  } \bar 
+   (* meas. 4 *)  \stemsUp \beamsOff {e1/2, g/2, \acc( b/2)
+, c2/2  } _/2 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \beamsOff a/1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff {a-1/2, e0/2  } \stemsDown \beamsOff {c/4., e/4., g/4.  } \stemsDown \beamsOff {\tieBegin:1 d/8, \tieBegin:2 f/8, \tieBegin:3 a/8  } \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff {d/8 \tieEnd:1, f/8 \tieEnd:2, a/8 \tieEnd:3  } \stemsDown \beamsOff {\tieBegin:1 g/4., \tieBegin:2 b/4., \tieBegin:3 d1/4.  } \stemsDown \beamsOff {g0/8 \tieEnd:1, b/8 \tieEnd:2, d1/8 \tieEnd:3  } \stemsDown \beamsOff {g0/4., \acc( b&/4.)
+, d1/4.  } \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff c/2 _/4 \stemsUp \beamsOff {\tieBegin:1 a-3/4, \tieBegin:2 a-2/4  } ]
+  }

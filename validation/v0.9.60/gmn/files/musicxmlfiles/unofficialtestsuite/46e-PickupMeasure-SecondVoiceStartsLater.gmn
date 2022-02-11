@@ -1,0 +1,13 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/46e-PickupMeasure-SecondVoiceStartsLater.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \beamsOff c2/4 \bar 
+   (* meas. 2 *)  \beamsOff c/4 \beamsOff a1/4 \beamsOff f/4 \beamsOff c2/4 ]
+ , 
+[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  empty/4 \bar 
+   (* meas. 2 *)  empty/4 \beamsOff c/4 empty/2 ]
+  }

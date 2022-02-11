@@ -1,0 +1,291 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Segments handling}\label{Segments handling}
+% -------------------------------------------------------------------------
+
+Segments are presented at \sectionRef{Segments}.
+
+The segments concept used by \mf\ to describe music scores is not apparent to the users of GUI applications, in which music elements are \drawn\ on the page.
+Their need is inherent to the representation of repeats, which contain music elements sequences (the segments) and even other repeats.
+
+\MakeUppercase{All segments handling} in \mf\ \MakeUppercase{is done internally}: the \class{msrSegment} instances are created in voices and repeats \MakeUppercase{behind the curtains}.
+
+
+% -------------------------------------------------------------------------
+\section{Segments creation}\label{Segments creation}
+% -------------------------------------------------------------------------
+
+Instances of \class{msrSegment} are created at four places in \msr{msrVoices.cpp}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep 'msrSegment::create (' *.cpp
+msrSegments.cpp:S_msrSegment msrSegment::create (
+msrSegments.cpp:      msrSegment::create (
+msrSegments.cpp:      msrSegment::create (
+msrVoices.cpp:        msrSegment::create (
+msrVoices.cpp:    msrSegment::create (
+msrVoices.cpp:    msrSegment::create (
+msrVoices.cpp:      msrSegment::create (
+\end{lstlisting}
+
+Calls to \method{msrSegment}{createSegmentNewbornClone} occurs only when visiting \class{msrSegment} instances in passes:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/passes > grep createSegmentNewbornClone */*
+msr2bsr/msr2bsrTranslator.cpp:      elt->createSegmentNewbornClone (
+msr2lpsr/msr2lpsrTranslator.cpp:    elt->createSegmentNewbornClone (
+msr2msr/msr2msrTranslator.cpp:    elt->createSegmentNewbornClone (
+\end{lstlisting}
+
+\Method{msrSegment}{createSegmentDeepClone} is not used at the time of this writing.
+
+Explicit segments creation is thus entirely done in methods inside \msr{msrVoices.cpp}: the passes are not aware of this happening.
+
+The first occurrence of \method{msrSegment}{create} is in \method{msrVoice}{initializeVoice}: when a voice is created, a segment is created and stored in its {\tt fVoiceLastSegment} if requested :
+\begin{lstlisting}[language=CPlusPlus]
+void msrVoice::initializeVoice (
+  msrVoiceCreateInitialLastSegmentKind
+    voiceCreateInitialLastSegmentKind)
+{
+	// ... ... ...
+
+	  // create the initial last segment if requested
+  switch (voiceCreateInitialLastSegmentKind) {
+    case msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes:
+      // sanity check // JMI LAST
+      mfAssert (
+        __FILE__, __LINE__,
+        fVoiceLastSegment == nullptr,
+        "fVoiceLastSegment is null");
+
+      // create the last segment
+      fVoiceLastSegment =
+        msrSegment::create (
+          fInputLineNumber,
+          this);
+
+      if (! fVoiceFirstSegment) {
+        fVoiceFirstSegment = fVoiceLastSegment;
+      }
+      break;
+    case msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentNo:
+      break;
+  } // switch
+
+	// ... ... ...
+};
+\end{lstlisting}
+
+\Method{msrVoice}{createMeasureRepeatFromItsFirstMeasures} is presented in \sectionRef{Measure repeats handling}, and the remaining two are presented in the next sections.
+
+
+% -------------------------------------------------------------------------
+\subsection{Creating a new last segment for a voice}
+% -------------------------------------------------------------------------
+
+There is \method{msrVoice}{createNewLastSegmentForVoice}, called at many places in \\
+\msr{msrVoices.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+void msrVoice::createNewLastSegmentForVoice (
+  int    inputLineNumber,
+  const string& context)
+{
+	// ... ... ...
+
+  // create the last segment
+  fVoiceLastSegment =
+    msrSegment::create (
+      inputLineNumber,
+      this);
+
+  if (! fVoiceFirstSegment) {
+    fVoiceFirstSegment = fVoiceLastSegment;
+  }
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+The calls to \method{msrVoice}{createNewLastSegmentForVoice} are in:
+\begin{itemize}
+\item \method{msrVoice}{createAMeasureAndAppendItToVoice}\\[-0.5ex]
+
+\item \method{msrVoice}{appendStaffDetailsToVoice}\\[-0.5ex]
+
+\item \method{msrVoice}{addGraceNotesGroupBeforeAheadOfVoiceIfNeeded}\\[-0.5ex]
+
+\item \method{msrVoice}{handleVoiceLevelRepeatStart}
+\item \method{msrVoice}{handleVoiceLevelRepeatEndWithoutStart}
+\item \method{msrVoice}{handleVoiceLevelContainingRepeatEndWithoutStart}
+\item \method{msrVoice}{handleVoiceLevelRepeatEndWithStart}%%%JMI commented
+\item \method{msrVoice}{handleVoiceLevelRepeatEndingStartWithoutExplicitStart}
+\item \method{msrVoice}{handleVoiceLevelRepeatEndingStartWithExplicitStart}\\[-0.5ex]
+
+\item \method{msrVoice}{handleFullMeasureRestsStartInVoiceClone}\\[-0.5ex]
+
+\item \method{msrVoice}{handleHooklessRepeatEndingEndInVoice}\\[-0.5ex]
+
+\item \method{msrVoice}{appendBarLineToVoice}
+\item \method{msrVoice}{appendSegnoToVoice}
+\item \method{msrVoice}{appendCodaToVoice}
+\item \method{msrVoice}{appendEyeGlassesToVoice}
+\item \method{msrVoice}{appendPedalToVoice}
+\item \method{msrVoice}{appendDampToVoice}
+\item \method{msrVoice}{appendDampAllToVoice}
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\subsection{Creating a new last segment for a voice from its first measure}
+% -------------------------------------------------------------------------
+
+\Method{msrVoice}{createNewLastSegmentFromItsFirstMeasureForVoice} is used at several places in \msr{msrVoices.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
+  int          inputLineNumber,
+  S_msrMeasure firstMeasure,
+  string       context)
+{
+  // create the last segment
+  fVoiceLastSegment =
+    msrSegment::create (
+      inputLineNumber,
+      this);
+
+  if (! fVoiceFirstSegment) {
+    fVoiceFirstSegment = fVoiceLastSegment;
+  }
+
+	// ... ... ...
+
+  // append firstMeasure to fVoiceLastSegment
+  fVoiceLastSegment->
+    appendMeasureToSegment (firstMeasure);
+
+  // firstMeasure is the new voice last appended measure
+  fVoiceLastAppendedMeasure = firstMeasure;
+
+  // is firstMeasure the first one it the voice?
+  if (! fVoiceFirstMeasure) {
+    // yes, register it as such
+    setVoiceFirstMeasure (
+      firstMeasure);
+
+    firstMeasure->
+      setMeasureFirstInVoice ();
+  }
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+All the uses of this method concern repeats (\sectionRef{Repeats handling}), measure repeats (\sectionRef{Measure repeats handling}) and full measure rests(\sectionRef{Full measure rests handling}).
+
+
+% -------------------------------------------------------------------------
+\section{Appending measures to a segment}
+% -------------------------------------------------------------------------
+
+\Method{msrSegment}{assertSegmentMeasuresListIsNotEmpty} is called as a sanity check by many methods in \msr{msrSegments.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+void msrSegment::assertSegmentMeasuresListIsNotEmpty (
+  int inputLineNumber) const
+{
+  if (! fSegmentMeasuresList.size ()) {
+#ifdef TRACING_IS_ENABLED
+  if (
+    gGlobalTracingOahGroup->getTraceMeasuresDetails ()
+      ||
+    gGlobalTracingOahGroup->getTraceSegmentsDetails ()
+      ||
+    gGlobalTracingOahGroup->getTraceRepeatsDetails ()
+  ) {
+    fSegmentVoiceUpLink->
+      displayVoiceRepeatsStackFullMeasureRestsMeasureRepeatAndVoice (
+        inputLineNumber,
+        "assertSegmentMeasuresListIsNotEmpty()");
+  }
+#endif
+
+    gLogStream <<
+      "assertSegmentMeasuresListIsNotEmpty()" <<
+      ", fSegmentMeasuresList is empty" <<
+      ", segment: " <<
+      this->asString () <<
+      ", in voice \"" <<
+      fSegmentVoiceUpLink->getVoiceName () <<
+      "\"" <<
+      "', line " << inputLineNumber <<
+      endl;
+
+    mfAssert (
+      __FILE__, __LINE__,
+      false,
+      ", fSegmentMeasuresList is empty");
+  }
+}
+\end{lstlisting}
+
+One such call is:
+\begin{lstlisting}[language=CPlusPlus]
+void msrSegment::appendKeyToSegment (S_msrKey key)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceKeys ()) {
+    gLogStream <<
+      "Appending key " << key->asString () <<
+      " to segment " << asString () <<
+    ", in voice \"" <<
+    fSegmentVoiceUpLink->getVoiceName () <<
+    "\"" <<
+      endl;
+  }
+#endif
+
+  // sanity check
+  assertSegmentMeasuresListIsNotEmpty (
+    key->getInputLineNumber ());
+
+  ++gIndenter;
+
+  // register key in segments's current measure
+  fSegmentMeasuresList.back ()->
+    appendKeyToMeasure (key);
+
+  --gIndenter;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Translating from MXSR to MSR}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Translating from MXSR to MSR}
+% -------------------------------------------------------------------------
+
+This is done in \mxsrToMsr{}.
+
+
+% -------------------------------------------------------------------------
+\section{Translating from MSR to MSR}
+% -------------------------------------------------------------------------
+
+This is done in \msrToMsr{}.
+
+
+% -------------------------------------------------------------------------
+\section{Translating from MSR to LPSR}
+% -------------------------------------------------------------------------
+
+This is done in \msrToLpsr{}.
+
+
+% -------------------------------------------------------------------------
+\section{Translating from LPSR to LilyPond}
+% -------------------------------------------------------------------------
+
+This is done in \lpsrToLilypond{}.
+
+

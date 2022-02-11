@@ -1,0 +1,11 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/times/CadenzaFullMeasure.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Excerpt from Magnificat secundi toni"> \composer<"Gilles Binchois", dy=4hs> \auto<autoInstrPos="on"> \instr<"Cantus"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> \beamsOff c/4 _/1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Cantus 2 and Tenor"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> \tempo<"[1/4] = 60"> _*5/4 ]
+  }

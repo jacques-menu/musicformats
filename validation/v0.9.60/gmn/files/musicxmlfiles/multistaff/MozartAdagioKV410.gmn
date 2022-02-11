@@ -1,0 +1,134 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/multistaff/MozartAdagioKV410.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"ADAGIO en Fa  KV 410"> \composer<"W.A. Mozart", dy=4hs> \auto<autoInstrPos="on"> \instr<"Cor anglais 1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"2/2", autoBarlines="off", autoMeasuresNum="system"> \intens<"p", dy=-3hs> \stemsDown \slurBegin:1<curve="up"> \beamsOff c2/4 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff b1/4 \stemsDown \beamsOff c2/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff e/4 \slurEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff f/4. \stemsDown \beamsOff f/8 \stemsDown \beamsOff e/4 \stemsDown \slurBegin:1<curve="up"> \beamsOff e/4 \bar 
+   (* meas. 4 *)  \text<"cresc.",fattrib="i", dx=1hs, dy=-3.6hs>( \text<"cresc.",fattrib="i", dx=1hs, dy=-7.2hs>( \stemsDown \beamsOff f/4)
+)
+ \stemsDown \beamsOff e/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff c/4 \slurEnd:1 \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff b1/4. \stemsDown \beamsOff b/8 \stemsDown \slurBegin:1<curve="up"> \beamsOff c2/2 \bar 
+   (* meas. 6 *)  \stemsAuto \slurBegin:2<curve="up"> \beamsOff c/1 \slurEnd:1 \bar 
+   (* meas. 7 *)  \stemsDown \beamsOff c/2. \slurEnd:2 \stemsDown \slurBegin:1<curve="up"> \beamsOff g/4 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff \acc( f#/4)
+ \text<"cresc.",fattrib="i", dx=0hs, dy=-1.8hs>( \stemsDown \beamsOff \acc( f/4)
+)
+ \stemsDown \beamsOff e/4 \stemsDown \beamsOff \acc( e&/4)
+ \slurEnd:1 \bar 
+   (* meas. 9 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff d/4. \stemsDown \beamsOff \acc( e&/8)
+ \slurEnd:1 \stemsDown \beamsOff d/4 _/4 \bar 
+   (* meas. 10 *)  _/4 \stemsDown \beamsOff c/4 \stemsDown \beamsOff \tieBegin:1 c3/2 \bar 
+   (* meas. 11 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff c/2. \tieEnd:1 \stemsDown \beamsOff a2/4 \slurEnd:1 \bar 
+   (* meas. 12 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff g/4 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \stemsDown \beamsOff d/4 \slurEnd:1 \bar 
+   (* meas. 13 *)  \text<"cresc.",fattrib="i", dx=1.2hs, dy=-3.6hs>( \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 e/8)
+ \stemsDown d/8 \stemsDown c/8 \stemsDown d/8 \slurEnd:1 \beamEnd:1 \stemsUp \slurBegin:1<curve="down"> \beamBegin:1 b1/8 \stemsUp a/8 \slurEnd:1 \beamEnd:1 \stemsUp \beamsOff \tieBegin:1<curve="down"> g/4 \bar 
+   (* meas. 14 *)  \stemsUp \beamsOff g/4 \tieEnd:1 \intens<"p", dy=-3hs> \stemsDown \slurBegin:1<curve="up"> \beamsOff c2/2 \stemsDown \beamsOff b1/4 \slurEnd:1 \bar 
+   (* meas. 15 *)  \stemsDown \beamsOff c2/2. \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 f/8. \stemsDown g/32 \stemsDown a/32 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 16 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 g/8 \stemsDown f/8 \stemsDown e/8 \stemsDown d/8 \beamEnd:1 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \slurEnd:1 \bar 
+   (* meas. 17 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff b1/4 \stemsDown \beamsOff c2/4 \slurEnd:1 \stemsDown \beamsOff f/2 \bar 
+   (* meas. 18 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 e/8 \stemsDown f/8 \stemsDown g/8 \stemsDown a/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamsOff c/4 \stemsDown \beamsOff b1/4 \slurEnd:1 \bar 
+   (* meas. 19 *)  \intens<"fp", dy=-1.6hs> \stemsDown \slurBegin:1<curve="up"> \beamsOff f2/4 \stemsDown \beamsOff e/4 \slurEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamsOff a/4. \stemsDown \beamBegin:1 b/16 \stemsDown c3/16 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 20 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 c/8 \stemsDown b2/8 \stemsDown a/8 \stemsDown g/8 \beamEnd:1 \stemsDown \beamBegin:1 f/8 \stemsDown e/8 \stemsDown d/8 \stemsDown c/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 21 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff b1/4 \stemsDown \beamsOff c2/4 \slurEnd:1 \stemsDown \beamsOff d/4 _/4 \bar 
+   (* meas. 22 *)  _/4 \text<"cresc.",fattrib="i", dx=1.4hs, dy=-3.6hs>( \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 g1/8)
+ \stemsUp a/8 \beamEnd:1 \stemsDown \beamBegin:1 b/8 \stemsDown c2/8 \stemsDown d/8 \stemsDown e/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 23 *)  \intens<"p", dy=-3hs> \stemsDown \beamBegin:1 f/8 \stemsDown \slurBegin:1<curve="up"> c/8 \stemsDown d/8 \stemsDown e/8 \beamEnd:1 \stemsDown \beamBegin:1 f/8 \stemsDown g/8 \stemsDown a/8 \stemsDown b/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 24 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 c3/8 \stemsDown b2/8 \text<"cresc.",fattrib="i", dx=1hs, dy=-3.6hs>( \stemsDown a/8)
+ \stemsDown g/8 \beamEnd:1 \stemsDown \beamBegin:1 f/8 \stemsDown e/8 \beamEnd:1 \stemsDown \slurBegin:2<curve="up"> \beamsOff d/4 \slurEnd:1 \bar 
+   (* meas. 25 *)  \stemsDown \beamsOff d/4 \slurEnd:2 \intens<"p", dy=-1.6hs> \stemsDown \beamsOff e/4 \stemsDown \beamsOff \trill( f/2)
+ \stemsUp \grace( \beamBegin:1 e/32 \stemsUp f/32 \beamEnd:1)
+ \bar 
+   (* meas. 26 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff g/4. \stemsDown \beamsOff a/8 \stemsDown \beamBegin:1 f/8 \stemsDown e/8 \stemsDown d/8 \stemsDown c/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 27 *)  \stemsDown \beamsOff b1/4 \intens<"p", dy=-3hs> \stemsDown \beamsOff c2/2 \stemsDown \beamsOff b1/4 \bar 
+   (* meas. 28 *)  \stemsDown \beamsOff c2/2 _/4 \fermata( _/4)
+ ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Cor anglais 2"> \accol<id=1,  range="2-4"> \barFormat<style= "system",  range="2-4"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"2/2", autoBarlines="off", autoMeasuresNum="system"> _/4 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/2 _/4 \intens<"p", dy=-1.6hs> \stemsDown \slurBegin:1<curve="up"> \beamsOff g2/4 \bar 
+   (* meas. 4 *)  \text<"cresc.",fattrib="i", dx=1hs, dy=-3.6hs>( \stemsDown \beamsOff a/4)
+ \stemsDown \beamsOff g/4 \stemsDown \beamsOff f/4 \stemsDown \beamsOff e/4 \slurEnd:1 \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff d/4. \stemsDown \beamsOff d/8 \stemsDown \beamsOff e/4 \stemsDown \slurBegin:1<curve="up"> \beamsOff e/4 \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff d/4 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \stemsDown \beamsOff g/4 \slurEnd:1 \bar 
+   (* meas. 7 *)  \stemsDown \beamsOff a/4. \stemsDown \beamsOff a/8 \stemsDown \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 8 *)  \stemsAuto \beamsOff \tieBegin:2 g/1 \tieEnd:1 \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff g/2. \tieEnd:2 \stemsDown \slurBegin:1<curve="up"> \beamsOff c/4 \bar 
+   (* meas. 10 *)  \stemsDown \beamsOff \acc( d&/4)
+ \text<"cresc.",fattrib="i", dx=0.8hs, dy=-3.6hs>( \stemsDown \beamsOff \acc( d/4)
+)
+ \stemsDown \beamsOff \acc( e&/4)
+ \stemsDown \beamsOff \acc( e/4)
+ \slurEnd:1 \bar 
+   (* meas. 11 *)  \intens<"p", dy=-1.6hs> \stemsDown \slurBegin:1<curve="up"> \beamsOff f/4. \stemsDown \beamsOff e/8 \slurEnd:1 \stemsDown \beamsOff f/4 _/4 \bar 
+   (* meas. 12 *)  _/4 \stemsDown \beamsOff g/4 \stemsUp \beamsOff \tieBegin:1<curve="down"> g1/2 \bar 
+   (* meas. 13 *)  \stemsUp \slurBegin:1<curve="up"> \beamsOff g/2. \tieEnd:1 \stemsDown \beamsOff b/4 \slurEnd:1 \bar 
+   (* meas. 14 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff c2/4 \stemsDown \beamsOff e/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff f/4 \slurEnd:1 \bar 
+   (* meas. 15 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 e/8 \stemsDown f/8 \stemsDown g/8 \stemsDown f/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 a/8 \stemsDown b/8 \slurEnd:1 \beamEnd:1 \stemsDown \beamsOff \tieBegin:1 c3/4 \bar 
+   (* meas. 16 *)  \stemsDown \beamsOff c/4 \tieEnd:1 \intens<"p", dy=1.8hs> \stemsDown \slurBegin:1<curve="up"> \beamsOff g2/2 \stemsDown \beamsOff a/4 \slurEnd:1 \bar 
+   (* meas. 17 *)  \stemsDown \beamsOff g/2. \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 d/8. \stemsDown c/32 \stemsDown b1/32 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 18 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 c2/8 \stemsDown d/8 \stemsDown e/8 \stemsDown f/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamsOff e/4 \stemsDown \beamsOff d/4 \slurEnd:1 \bar 
+   (* meas. 19 *)  \intens<"fp", dy=-1.6hs> \stemsDown \slurBegin:1<curve="up"> \beamsOff a/4 \stemsDown \beamsOff g/4 \slurEnd:1 \stemsDown \beamsOff d/2 \bar 
+   (* meas. 20 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 e/8 \stemsDown d/8 \stemsDown c/8 \stemsDown b1/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamsOff g2/4 \stemsDown \beamsOff a/4 \slurEnd:1 \bar 
+   (* meas. 21 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff d/4 \stemsDown \beamsOff e/4 \slurEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamsOff b1/4. \stemsUp \beamBegin:1 a/16 \stemsUp g/16 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 22 *)  \stemsDown \slurBegin:1<curve="down"> \beamBegin:1 g/8 \stemsDown a/8 \text<"cresc.",fattrib="i", dx=1.4hs, dy=-4.4hs>( \stemsDown b/8)
+ \stemsDown c2/8 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown e/8 \stemsDown f/8 \stemsDown g/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 23 *)  \intens<"p", dy=-1.6hs> \stemsDown \slurBegin:1<curve="up"> \beamsOff a/4 \stemsDown \beamsOff g/4 \slurEnd:1 \stemsDown \beamsOff f/4 _/4 \bar 
+   (* meas. 24 *)  _/4 \text<"cresc.",fattrib="i", dx=1hs, dy=-3.6hs>( \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 c3/8)
+ \stemsDown b2/8 \beamEnd:1 \stemsDown \beamBegin:1 a/8 \stemsDown g/8 \stemsDown f/8 \stemsDown e/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 25 *)  \stemsDown \beamBegin:1 d/8 \intens<"p", dy=-1.8hs> \stemsDown \slurBegin:1<curve="up"> g/8 \stemsDown f/8 \stemsDown e/8 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown c/8 \stemsDown b1/8 \stemsDown a/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 26 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 g/8 \stemsUp a/8 \stemsUp b/8 \stemsUp c2/8 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown e/8 \slurEnd:1 \beamEnd:1 \stemsDown \beamsOff \tieBegin:1 f/4 \bar 
+   (* meas. 27 *)  \stemsDown \beamsOff f/4 \tieEnd:1 \intens<"p", dy=-1.6hs> \stemsDown \beamsOff e/4 \stemsDown \beamsOff \trill( d/2)
+ \stemsUp \grace( \beamBegin:1 c/32 \stemsUp d/32 \beamEnd:1)
+ \bar 
+   (* meas. 28 *)  \stemsDown \beamsOff c/2 _/4 \fermata( _/4)
+ ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Basson"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> \meter<"2/2", autoBarlines="off", autoMeasuresNum="system"> \intens<"p", dy=-4hs> \stemsDown \beamBegin:1 a0/8 \stemsDown c/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamBegin:1 b&/8 \stemsDown c/8 \stemsDown a/8 \stemsDown c/8 \beamEnd:1 \stemsDown \beamBegin:1 e/8 \stemsDown c/8 \stemsDown f/8 \stemsDown c/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 g/8 \stemsDown d/8 \stemsDown e/8 \stemsDown c/8 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 f/8 \stemsDown e/8 \stemsDown d/8 \stemsDown c/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \slurBegin:1<curve="up"> \beamBegin:1 b&-1/8 \stemsUp a/8 \text<"cresc.",fattrib="i", dx=0.6hs, dy=-3.6hs>( \stemsUp b&/8)
+ \stemsUp c0/8 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown e/8 \stemsDown f/8 \stemsDown b&-1/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 5 *)  \intens<"f", dy=-1.6hs> \stemsUp \slurBegin:1<curve="down"> \beamBegin:1 c0/8 \stemsUp b&-1/8 \stemsUp a/8 \stemsUp g/8 \slurEnd:1 \beamEnd:1 \intens<"p", dy=-3hs> \stemsUp \beamBegin:1 f/8 \stemsUp \slurBegin:1<curve="down"> f0/8 \stemsUp e/8 \stemsUp f/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsUp \beamBegin:1 b&-1/8 \stemsUp f0/8 \stemsUp c/8 \stemsUp f/8 \beamEnd:1 \stemsUp \beamBegin:1 d/8 \stemsUp f/8 \stemsUp a-1/8 \stemsUp f0/8 \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 b&-1/8 \stemsDown d0/8 \stemsDown f/8 \stemsDown b&/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 a/8 \stemsDown c/8 \slurEnd:1 \stemsDown \slurBegin:1<curve="up"> \acc( a&/8)
+ \stemsDown c/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 g/8 \stemsDown c/8 \slurEnd:1 \text<"cresc.",fattrib="i", dx=1hs, dy=-4hs>( \stemsDown \slurBegin:1<curve="up"> e/8)
+ \stemsDown c/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 f/8 \stemsDown c/8 \slurEnd:1 \stemsDown \slurBegin:1<curve="up"> \acc( b/8)
+ \stemsDown c/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsDown \beamBegin:1 c1/8 \intens<"p", dy=-4hs> \stemsDown \slurBegin:1<curve="up"> c0/8 \stemsDown e/8 \stemsDown f/8 \slurEnd:1 \beamEnd:1 \stemsUp \slurBegin:1<curve="down"> \beamBegin:1 e/8 \stemsUp c/8 \slurEnd:1 \stemsUp \slurBegin:1<curve="down"> a-1/8 \stemsUp f/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 10 *)  \stemsUp \slurBegin:1<curve="down"> \beamBegin:1 b&/8 \stemsUp a/8 \stemsUp b&/8 \stemsUp \acc( d&0/8)
+ \beamEnd:1 \stemsUp \beamBegin:1 c/8 \stemsUp \acc( b-1/8)
+ \stemsUp c0/8 \stemsUp \acc( e&/8)
+ \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 d/8 \stemsDown b&-1/8 \stemsDown f0/8 \stemsDown \acc( e&/8)
+ \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown f/8 \slurEnd:1 \stemsDown b&-1/8 \stemsDown b&0/8 \beamEnd:1 \bar 
+   (* meas. 12 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 a/8 \stemsDown g/8 \stemsDown \acc( f#/8)
+ \stemsDown d/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 g/8 \stemsDown \acc( f/8)
+ \stemsDown e/8 \stemsDown c/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 13 *)  \text<"cresc.",fattrib="i", dx=1.2hs, dy=-3.6hs>( \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 f/8)
+ \stemsDown g/8 \stemsDown a/8 \stemsDown b&/8 \beamEnd:1 \stemsDown \beamsOff c1/4. \intens<"p", dy=-1.6hs> \stemsDown \beamsOff b&0/8 \slurEnd:1 \bar 
+   (* meas. 14 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 a/8 \stemsDown c/8 \slurEnd:1 \stemsDown \slurBegin:1<curve="up"> f/8 \stemsDown c/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 b&/8 \stemsDown c/8 \slurEnd:1 \stemsDown \slurBegin:1<curve="up"> g/8 \stemsDown c/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 15 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 f/8 \stemsDown g/8 \stemsDown a/8 \stemsDown g/8 \beamEnd:1 \stemsDown \beamBegin:1 b&/8 \stemsDown c1/8 \stemsDown d/8 \stemsDown b&0/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 16 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 a/8 \stemsDown g/8 \intens<"p", dy=-2.6hs> \stemsDown f/8 \stemsDown e/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 f/8 \stemsDown e/8 \stemsDown d/8 \stemsDown b&-1/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 17 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 b&0/8 \stemsDown g/8 \slurEnd:1 \stemsDown \slurBegin:1<curve="up"> a/8 \stemsDown f/8 \slurEnd:1 \beamEnd:1 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 g/8 \stemsDown d/8 \slurEnd:1 \stemsDown \slurBegin:1<curve="up"> e/8 \stemsDown c/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 18 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff f/4 \stemsUp \beamsOff b&-1/4 \slurEnd:1 \stemsDown \beamBegin:1 c0/8 \stemsDown \slurBegin:1<curve="up"> a/8 \stemsDown b&/8 \stemsDown g/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 19 *)  \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 f/8 \stemsDown e/8 \slurEnd:1 \stemsDown \slurBegin:1<curve="up"> f/8 \stemsDown d/8 \slurEnd:1 \beamEnd:1 \stemsDown \beamBegin:1 \acc( b-1/8)
+ \stemsDown \slurBegin:1<curve="up"> \acc( b#0/8)
+ \stemsDown a/8 \stemsDown g/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 20 *)  \stemsDown \beamsOff c1/4 \stemsUp \beamsOff c0/4 \stemsDown \beamsOff f/4 \stemsUp \beamsOff b&-1/4 \bar 
+   (* meas. 21 *)  \stemsUp \slurBegin:1<curve="down"> \beamBegin:1 c0/8 \stemsUp b&-1/8 \stemsUp a/8 \stemsUp f/8 \slurEnd:1 \beamEnd:1 \stemsDown \beamBegin:1 c0/8 \stemsDown \slurBegin:1<curve="up"> g/8 \stemsDown c1/8 \stemsDown b&0/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 22 *)  \stemsDown \slurBegin:1<curve="up"> \beamsOff a/2 \text<"cresc.",fattrib="i", dx=-6.8hs, dy=-2.4hs>( \stemsDown \beamsOff g/4)
+ \stemsDown \beamsOff f/4 \slurEnd:1 \bar 
+   (* meas. 23 *)  \intens<"p", dy=-1.6hs> \stemsDown \slurBegin:1<curve="up"> \slurBegin:2<curve="up"> \beamsOff b&/4 \slurEnd:1 \stemsDown \beamsOff a/4 \slurEnd:2 \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 g/8 \stemsDown a/8 \stemsDown b&/8 \stemsDown c1/8 \beamEnd:1 \bar 
+   (* meas. 24 *)  \stemsDown \beamsOff d/2 \slurEnd:1 _/4 \intens<"f", dy=-1.6hs> \stemsDown \slurBegin:1<curve="up"> \beamBegin:1 g0/8 \stemsDown f/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 25 *)  \intens<"p", dy=-3hs> \stemsDown \slurBegin:1<curve="up"> \beamsOff e/4 \stemsDown \beamsOff f/4 \slurEnd:1 \stemsDown \beamsOff g/4 \stemsUp \beamsOff g-1/4 \bar 
+   (* meas. 26 *)  \stemsUp \slurBegin:1<curve="down"> \beamsOff a/2 \stemsUp \beamsOff b&/2 \slurEnd:1 \bar 
+   (* meas. 27 *)  \stemsUp \beamsOff c0/4 \intens<"p", dy=-4hs> \stemsDown \beamsOff d/4 \stemsUp \beamsOff b&-1/4 \stemsUp \beamsOff c0/4 \bar 
+   (* meas. 28 *)  \stemsUp \beamsOff f-1/2 _/4 \fermata( _/4)
+ ]
+  }

@@ -1,0 +1,20 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/ligatures/ComplexLigature.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Complex ligature"> \composer<"Gilles Binchois", dy=4hs> \auto<autoInstrPos="on"> \instr<"Cantus"> \barFormat<style= "system",  range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> \beamsOff c/4 \beamsOff c/1 \bar 
+   (* meas. 2 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _/4 _/4 \beamsOff f/4 \bar 
+   (* meas. 3 *)  \beamsOff e/4 \beamsOff f/4. \beamsOff d/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Cantus 2 and Tenor"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> _*5/4 \bar 
+   (* meas. 2 *)  \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _/4 _/4 \beamsOff f0/4 \bar 
+   (* meas. 3 *)  \beamsOff a-1/4 \beamsOff a0/4. \beamsOff f/8 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \bar<hidden="true"> 
+   (* meas. 1 *)  empty*5/4 \bar 
+   (* meas. 2 *)  _/4 _/4 \beamsOff f0/4 \bar 
+   (* meas. 3 *)  \beamsOff c/4 \beamsOff d/2 ]
+  }

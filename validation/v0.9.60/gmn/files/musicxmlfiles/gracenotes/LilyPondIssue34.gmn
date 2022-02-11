@@ -1,0 +1,17 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/gracenotes/LilyPondIssue34.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"Wolfgang Amadeus Mozart", dy=4hs> \auto<autoInstrPos="on"> \instr<"Piano"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff \arpeggio( c#3/2)
+ ]
+ , 
+[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \stemsDown \beamsOff \arpeggio( {c#2/4, e/4, a/4  })
+ empty/4 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \grace( \slurBegin:1<curve="up"> \beamBegin:1 a-1/16 \stemsUp c#0/16 \stemsUp e/16 \beamEnd:1)
+ \stemsDown \beamBegin:1 a/8 \slurEnd:1 \stemsDown g/8 \stemsDown f/8 \stemsDown e/8 \beamEnd:1 ]
+  }

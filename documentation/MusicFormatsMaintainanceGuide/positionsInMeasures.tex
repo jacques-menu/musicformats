@@ -1,0 +1,39 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+
+% -------------------------------------------------------------------------
+\chapter{Positions in measures}
+% -------------------------------------------------------------------------
+
+Positions in measures is stored in \field{msrMeasureElement}{fMeasureElementPositionInMeasure} in \class{msrMeasureElement}, defined in \msrBoth{msrMeasureElement}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrMeasureElement : public msrElement
+{
+	// ... ... ...
+	
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    /*
+      The measure uplink is declared in the sub-classes,
+      to allow for separate *.h files, C++ constraint
+    */
+
+    rational              fMeasureElementSoundingWholeNotes;
+
+    string                fMeasureElementMeasureNumber;
+
+    rational              fMeasureElementPositionInMeasure;
+    rational              fMeasureElementPositionInVoice;
+
+    msrMoment             fMeasureElementMomentInMeasure;
+    msrMoment             fMeasureElementMomentInVoice;
+};
+\end{lstlisting}
+
+% -------------------------------------------------------------------------
+\section{Determining positions in measures}
+% -------------------------------------------------------------------------
+

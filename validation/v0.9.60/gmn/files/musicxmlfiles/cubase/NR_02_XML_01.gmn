@@ -1,0 +1,797 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/cubase/NR_02_XML_01.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Flöte"> \accol<id=1,  range="1-4"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"Moderato mistico   MM 1/4=90",fsize=18pt,fattrib="b", dy=4.2hs> \tempo<"Nr. II      Ein Pilz im Wald",fsize=18pt,fattrib="b", dy=10.6hs> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \bar 
+   (* meas. 7 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \mark<"A", enclosure="square", fsize=10pt, dy=-0.8hs> \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  _/1 \bar 
+   (* meas. 12 *)  _/1 \bar 
+   (* meas. 13 *)  _/1 \bar 
+   (* meas. 14 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 15 *)  _/1 \bar 
+   (* meas. 16 *)  _/1 \bar 
+   (* meas. 17 *)  \mark<"B", enclosure="square", fsize=10pt, dy=0.4hs> _/1 \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 20 *)  _/2 _/4 _/8 _/16 \intens<"mf", dy=-4.4hs> \stemsUp \beamsOff \tieBegin:1 c#/16 \bar 
+   (* meas. 21 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \mark<"C", enclosure="square", fsize=10pt, dy=-0.4hs> \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 22 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 23 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 24 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 25 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 26 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 27 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 28 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 29 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \mark<"D", enclosure="square", fsize=10pt, dy=-0.4hs> \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 30 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 31 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 32 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 33 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 34 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 35 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 36 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 37 *)  \stemsUp \beamBegin:1 c#/16. \tieEnd:1 \stemsUp \tieBegin:1 c#/32 \stemsUp c#/16 \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 38 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 39 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 40 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 41 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 42 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 43 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 44 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 45 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 46 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 47 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 48 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 49 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 50 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 51 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 52 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 53 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 54 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 55 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 56 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 57 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 58 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 59 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 60 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 61 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \mark<"E", enclosure="square", fsize=10pt, dy=-1.2hs> \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 62 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 63 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/4 _/8 _/16 \stemsUp \beamsOff \tieBegin:1 c#1/16 \bar 
+   (* meas. 64 *)  \stemsUp \beamBegin:1 c#/8. \tieEnd:1 \stemsUp \tieBegin:1 b0/16 \beamEnd:1 \stemsUp \beamsOff b/8. \tieEnd:1 _/16 _/2 \bar 
+   (* meas. 65 *)  _/1 \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 68 *)  _/1 \bar 
+   (* meas. 69 *)  _/1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Bassklarinette"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \intens<"mp", dy=0.6hs> \stemsUp \beamsOff c#0/4 \stemsUp \beamsOff b-1/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff g/2. \tieEnd:1 _/4 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff c#0/4 \stemsUp \beamsOff b-1/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 4 *)  \stemsUp \beamBegin:1 g/16 \tieEnd:1 \stemsUp \tieBegin:1 f#/8. \beamEnd:1 \stemsUp \beamsOff \tieBegin:2 f#/4 \tieEnd:1 \stemsUp \beamsOff f#/2 \tieEnd:2 \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff c#0/4 \stemsUp \beamsOff b-1/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff g/2. \tieEnd:1 _/4 \bar 
+   (* meas. 7 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff c#0/4 \stemsUp \beamsOff b-1/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 8 *)  \stemsUp \beamBegin:1 g/16 \tieEnd:1 \stemsUp \tieBegin:1 f#/8. \beamEnd:1 \stemsUp \beamsOff \tieBegin:2 f#/4 \tieEnd:1 \stemsUp \beamsOff f#/2 \tieEnd:2 \bar 
+   (* meas. 9 *)  \stemsUp \beamsOff c#0/4 \stemsUp \beamsOff b-1/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff g/2. \tieEnd:1 _/4 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff c#0/4 \stemsUp \beamsOff b-1/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 12 *)  \stemsUp \beamBegin:1 g/16 \tieEnd:1 \stemsUp \tieBegin:1 f#/8. \beamEnd:1 \stemsUp \beamsOff \tieBegin:2 f#/4 \tieEnd:1 \stemsUp \beamsOff f#/2 \tieEnd:2 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff c#0/4 \stemsUp \beamsOff b-1/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 14 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/2. \tieEnd:1 _/4 \bar 
+   (* meas. 15 *)  \stemsUp \beamsOff c#0/4 \stemsUp \beamsOff b-1/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 16 *)  \stemsUp \beamBegin:1 g/16 \tieEnd:1 \stemsUp \tieBegin:1 f#/8. \beamEnd:1 \stemsUp \beamsOff \tieBegin:2 f#/4 \tieEnd:1 \stemsUp \beamsOff f#/2 \tieEnd:2 \bar 
+   (* meas. 17 *)  _/1 \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 20 *)  _/1 \bar 
+   (* meas. 21 *)  _/1 \bar 
+   (* meas. 22 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 23 *)  _/1 \bar 
+   (* meas. 24 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 25 *)  _/1 \bar 
+   (* meas. 26 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 27 *)  _/1 \bar 
+   (* meas. 28 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 29 *)  _/1 \bar 
+   (* meas. 30 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 31 *)  _/1 \bar 
+   (* meas. 32 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 33 *)  _/1 \bar 
+   (* meas. 34 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 35 *)  _/1 \bar 
+   (* meas. 36 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 37 *)  _/1 \bar 
+   (* meas. 38 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 39 *)  _/1 \bar 
+   (* meas. 40 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 41 *)  _/1 \bar 
+   (* meas. 42 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 43 *)  _/1 \bar 
+   (* meas. 44 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 45 *)  _/1 \bar 
+   (* meas. 46 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 47 *)  _/1 \bar 
+   (* meas. 48 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 49 *)  _/1 \bar 
+   (* meas. 50 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 51 *)  _/1 \bar 
+   (* meas. 52 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 53 *)  _/1 \bar 
+   (* meas. 54 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 55 *)  _/1 \bar 
+   (* meas. 56 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 57 *)  _/1 \bar 
+   (* meas. 58 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 59 *)  _/1 \bar 
+   (* meas. 60 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 61 *)  _/1 \bar 
+   (* meas. 62 *)  _/1 \bar 
+   (* meas. 63 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 64 *)  _/1 \bar 
+   (* meas. 65 *)  \intens<"mp", dy=-2.2hs> \stemsUp \beamsOff f#/1 \bar 
+   (* meas. 66 *)  \stemsUp \beamsOff e/4 \stemsUp \beamsOff d/4 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 67 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/2 \tieEnd:1 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#0/4 \bar 
+   (* meas. 68 *)  \stemsUp \beamsOff g-1/1 \bar 
+   (* meas. 69 *)  \intens<"mf", dy=-4.2hs> \stemsUp \beamsOff \tieBegin:1 c#/2 \stemsUp \beamsOff c#/4. \tieEnd:1 _/16 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Fagott"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/2 _/4 \intens<"mf", dy=-2.2hs> \stemsUp \beamsOff g-1/4 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff f#/4. _/8 \bar 
+   (* meas. 3 *)  _/2 _/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 4 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff c#/4. _/8 \bar 
+   (* meas. 5 *)  _/2 _/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff f#/4. _/8 \bar 
+   (* meas. 7 *)  \clef<"f4"> \key<2> _/2 _/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 8 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff c#/4. _/8 \bar 
+   (* meas. 9 *)  _/2 _/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff f#/4. _/8 \bar 
+   (* meas. 11 *)  _/2 _/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 12 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff c#/4. _/8 \bar 
+   (* meas. 13 *)  _/2 _/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 14 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff f#/4. _/8 \bar 
+   (* meas. 15 *)  _/2 _/4 \stemsUp \beamsOff g/4 \bar 
+   (* meas. 16 *)  \stemsUp \beamsOff f#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff c#/4. _/8 \bar 
+   (* meas. 17 *)  _/1 \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 20 *)  _/1 \bar 
+   (* meas. 21 *)  _/1 \bar 
+   (* meas. 22 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 23 *)  _/1 \bar 
+   (* meas. 24 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 25 *)  _/1 \bar 
+   (* meas. 26 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 27 *)  _/1 \bar 
+   (* meas. 28 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 29 *)  _/1 \bar 
+   (* meas. 30 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 31 *)  _/1 \bar 
+   (* meas. 32 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 33 *)  _/1 \bar 
+   (* meas. 34 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 35 *)  _/1 \bar 
+   (* meas. 36 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 37 *)  _/1 \bar 
+   (* meas. 38 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 39 *)  _/1 \bar 
+   (* meas. 40 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 41 *)  _/1 \bar 
+   (* meas. 42 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 43 *)  _/1 \bar 
+   (* meas. 44 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 45 *)  _/1 \bar 
+   (* meas. 46 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 47 *)  _/1 \bar 
+   (* meas. 48 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 49 *)  _/1 \bar 
+   (* meas. 50 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 51 *)  _/1 \bar 
+   (* meas. 52 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 53 *)  _/1 \bar 
+   (* meas. 54 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 55 *)  _/1 \bar 
+   (* meas. 56 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 57 *)  _/1 \bar 
+   (* meas. 58 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 59 *)  _/1 \bar 
+   (* meas. 60 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 61 *)  _/1 \bar 
+   (* meas. 62 *)  _/1 \bar 
+   (* meas. 63 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 64 *)  _/1 \bar 
+   (* meas. 65 *)  _/1 \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 68 *)  _/1 \bar 
+   (* meas. 69 *)  _/1 ]
+ , 
+[ \staff<4> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Kontrafagott"> \barFormat<style= "system", range="4"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/2 \intens<"mp", dy=-1.2hs> \stemsUp \beamsOff \tieBegin:1 g-1/2 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff g/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 f#/2 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff f#/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 4 *)  \stemsUp \beamsOff g/2 \tieEnd:1 \stemsUp \beamsOff c#0/2 \bar 
+   (* meas. 5 *)  _/2 \stemsUp \beamsOff \tieBegin:1 g-1/2 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff g/2 \tieEnd:1 \stemsUp \beamsOff f#/4. _/8 \bar 
+   (* meas. 7 *)  \clef<"f4"> \key<2> _/2 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 8 *)  \stemsUp \beamsOff g/2 \tieEnd:1 \stemsUp \beamsOff c#0/2 \bar 
+   (* meas. 9 *)  _/2 \stemsUp \beamsOff \tieBegin:1 g-1/2 \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff g/2 \tieEnd:1 \stemsUp \beamsOff f#/4. _/8 \bar 
+   (* meas. 11 *)  _/2 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 12 *)  \stemsUp \beamsOff g/2 \tieEnd:1 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 13 *)  _/2 \stemsUp \beamsOff \tieBegin:1 g-1/2 \bar 
+   (* meas. 14 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/2 \tieEnd:1 \stemsUp \beamsOff f#/4. _/8 \bar 
+   (* meas. 15 *)  _/2 \stemsUp \beamsOff \tieBegin:1 g/2 \bar 
+   (* meas. 16 *)  \stemsUp \beamsOff g/2 \tieEnd:1 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 17 *)  _/1 \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 20 *)  _/1 \bar 
+   (* meas. 21 *)  _/1 \bar 
+   (* meas. 22 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 23 *)  _/1 \bar 
+   (* meas. 24 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 25 *)  _/1 \bar 
+   (* meas. 26 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 27 *)  _/1 \bar 
+   (* meas. 28 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 29 *)  _/1 \bar 
+   (* meas. 30 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 31 *)  _/1 \bar 
+   (* meas. 32 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 33 *)  _/1 \bar 
+   (* meas. 34 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 35 *)  _/1 \bar 
+   (* meas. 36 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 37 *)  _/1 \bar 
+   (* meas. 38 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 39 *)  _/1 \bar 
+   (* meas. 40 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 41 *)  _/1 \bar 
+   (* meas. 42 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 43 *)  _/1 \bar 
+   (* meas. 44 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 45 *)  _/1 \bar 
+   (* meas. 46 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 47 *)  _/1 \bar 
+   (* meas. 48 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 49 *)  _/1 \bar 
+   (* meas. 50 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 51 *)  _/1 \bar 
+   (* meas. 52 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 53 *)  _/1 \bar 
+   (* meas. 54 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 55 *)  _/1 \bar 
+   (* meas. 56 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 57 *)  _/1 \bar 
+   (* meas. 58 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 59 *)  _/1 \bar 
+   (* meas. 60 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 61 *)  _/1 \bar 
+   (* meas. 62 *)  _/1 \bar 
+   (* meas. 63 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 64 *)  _/1 \bar 
+   (* meas. 65 *)  _/1 \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 68 *)  _/1 \bar 
+   (* meas. 69 *)  \intens<"mf", dy=-7.8hs> \stemsUp \beamsOff \tieBegin:1 c#-1/2 \stemsUp \beamsOff c#/4. \tieEnd:1 _/16 ]
+ , 
+[ \staff<5> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Horn 1"> \accol<id=1,  range="5-6"> \barFormat<style= "system", range="5"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \bar 
+   (* meas. 7 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/2 \stemsUp \beamsOff \tieBegin:1 c#/2 \bar 
+   (* meas. 10 *)  \stemsUp \beamsOff c#/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 \acc( a#0/2)
+ \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff a#/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 c#1/2 \bar 
+   (* meas. 12 *)  \stemsUp \beamsOff c#/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 f#/2 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff f#/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 c#/2 \bar 
+   (* meas. 14 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff c#/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 \acc( a#0/2)
+ \bar 
+   (* meas. 15 *)  \stemsUp \beamsOff a#/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 c#1/2 \bar 
+   (* meas. 16 *)  \stemsUp \beamsOff c#/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 f#/2 \bar 
+   (* meas. 17 *)  \stemsUp \beamsOff f#/1 \tieEnd:1 \dimBegin<dy=1.4hs> \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 20 *)  _/1 \bar 
+   (* meas. 21 *)  _/1 \bar 
+   (* meas. 22 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 23 *)  _/1 \bar 
+   (* meas. 24 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 25 *)  _/1 \bar 
+   (* meas. 26 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 27 *)  _/1 \bar 
+   (* meas. 28 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 29 *)  _/1 \bar 
+   (* meas. 30 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 31 *)  _/1 \bar 
+   (* meas. 32 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 33 *)  _/1 \bar 
+   (* meas. 34 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 35 *)  _/1 \bar 
+   (* meas. 36 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 37 *)  _/1 \bar 
+   (* meas. 38 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 39 *)  _/1 \bar 
+   (* meas. 40 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 41 *)  _/1 \bar 
+   (* meas. 42 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 43 *)  _/1 \bar 
+   (* meas. 44 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 45 *)  _/1 \bar 
+   (* meas. 46 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 47 *)  _/1 \bar 
+   (* meas. 48 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 49 *)  _/1 \bar 
+   (* meas. 50 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 51 *)  _/1 \bar 
+   (* meas. 52 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 53 *)  _/1 \bar 
+   (* meas. 54 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 55 *)  _/1 \bar 
+   (* meas. 56 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 57 *)  _/1 \bar 
+   (* meas. 58 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 59 *)  _/1 \bar 
+   (* meas. 60 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 61 *)  _/2 \stemsUp \beamsOff \tieBegin:1 c#/2 \bar 
+   (* meas. 62 *)  \stemsUp \beamsOff c#/2 \tieEnd:1 \stemsUp \beamsOff \tieBegin:1 \acc( a#0/2)
+ \bar 
+   (* meas. 63 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff \acc( a#/4. \tieEnd:1)
+ \stemsUp \beamsOff \tieBegin:1 c#1/16 \stemsUp \beamsOff \tieBegin:2 c#/2 \tieEnd:1 \bar 
+   (* meas. 64 *)  \stemsUp \beamsOff c#/4. \tieEnd:2 _/16 \stemsUp \beamsOff \tieBegin:1 f#/2 \bar 
+   (* meas. 65 *)  \stemsUp \beamsOff f#/1 \tieEnd:1 \bar 
+   (* meas. 66 *)  \stemsUp \beamsOff c#/1 \bar 
+   (* meas. 67 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff \acc( a#0/1)
+ \bar 
+   (* meas. 68 *)  \stemsUp \beamsOff c#1/1 \bar 
+   (* meas. 69 *)  \intens<"mf", dy=-4.4hs> \stemsUp \beamsOff f#/1 ]
+ , 
+[ \staff<6> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Horn 2"> \barFormat<style= "system", range="6"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/2 \intens<"mp", dy=-5.6hs> \stemsUp \beamsOff \tieBegin:1 c#-1/2 \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff c#/2 \tieEnd:1 _/2 \bar 
+   (* meas. 6 *)  _/2 \stemsUp \beamsOff \tieBegin:1 f#/2 \bar 
+   (* meas. 7 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff f#/2 \tieEnd:1 _/2 \bar 
+   (* meas. 8 *)  _/2 \stemsUp \beamsOff \tieBegin:1 c#/2 \bar 
+   (* meas. 9 *)  \stemsUp \beamsOff c#/2 \tieEnd:1 \intens<"mp", dy=25.6hs> _/2 \bar 
+   (* meas. 10 *)  _/2 \stemsUp \beamsOff \tieBegin:1 f#/2 \bar 
+   (* meas. 11 *)  \stemsUp \beamsOff f#/2 \tieEnd:1 _/2 \bar 
+   (* meas. 12 *)  _/2 \stemsUp \beamsOff \tieBegin:1 c#/2 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff c#/2 \tieEnd:1 _/2 \bar 
+   (* meas. 14 *)  \clef<"f4"> \key<2> _/2 \stemsUp \beamsOff \tieBegin:1 f#/2 \bar 
+   (* meas. 15 *)  \stemsUp \beamsOff f#/2 \tieEnd:1 _/2 \bar 
+   (* meas. 16 *)  _/2 \stemsUp \beamsOff \tieBegin:1 c#/2 \bar 
+   (* meas. 17 *)  \stemsUp \beamsOff c#/1 \tieEnd:1 \dimBegin<dy=-1.2hs> \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 20 *)  _/1 \bar 
+   (* meas. 21 *)  _/1 \bar 
+   (* meas. 22 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 23 *)  _/1 \bar 
+   (* meas. 24 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 25 *)  _/1 \bar 
+   (* meas. 26 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 27 *)  _/1 \bar 
+   (* meas. 28 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 29 *)  _/1 \bar 
+   (* meas. 30 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 31 *)  _/1 \bar 
+   (* meas. 32 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 33 *)  _/1 \bar 
+   (* meas. 34 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 35 *)  _/1 \bar 
+   (* meas. 36 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 37 *)  _/1 \bar 
+   (* meas. 38 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 39 *)  _/1 \bar 
+   (* meas. 40 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 41 *)  _/1 \bar 
+   (* meas. 42 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 43 *)  _/1 \bar 
+   (* meas. 44 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 45 *)  _/1 \bar 
+   (* meas. 46 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 47 *)  _/1 \bar 
+   (* meas. 48 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 49 *)  _/1 \bar 
+   (* meas. 50 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 51 *)  _/1 \bar 
+   (* meas. 52 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 53 *)  _/1 \bar 
+   (* meas. 54 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 55 *)  _/1 \bar 
+   (* meas. 56 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 57 *)  _/1 \bar 
+   (* meas. 58 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 59 *)  _/1 \bar 
+   (* meas. 60 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 61 *)  _/1 \intens<"mp", dy=23.2hs> \bar 
+   (* meas. 62 *)  _/1 \bar 
+   (* meas. 63 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 64 *)  _/1 \bar 
+   (* meas. 65 *)  \intens<"mp", dy=-5.4hs> \stemsUp \beamsOff c#/1 \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff f#/1 \bar 
+   (* meas. 68 *)  _/1 \bar 
+   (* meas. 69 *)  \intens<"mf", dy=-7.8hs> \stemsUp \beamsOff c#/1 ]
+ , 
+[ \staff<7> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Die Schwammerlhexe"> \barFormat<style= "system", range="7"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \bar 
+   (* meas. 7 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  _/1 \bar 
+   (* meas. 12 *)  _/1 \bar 
+   (* meas. 13 *)  _/1 \bar 
+   (* meas. 14 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 15 *)  _/1 \bar 
+   (* meas. 16 *)  _/1 \bar 
+   (* meas. 17 *)  _/1 \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 20 *)  _/1 \bar 
+   (* meas. 21 *)  _/1 \bar 
+   (* meas. 22 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 23 *)  _/1 \bar 
+   (* meas. 24 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 25 *)  _/1 \bar 
+   (* meas. 26 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 27 *)  _/1 \bar 
+   (* meas. 28 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 29 *)  \stemsUp \beamsOff c#/4 \text<"dolce",fsize=10pt, dx=0hs, dy=-9hs>( \stemsUp \beamsOff e/4)
+ \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 30 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 _/4 \bar 
+   (* meas. 31 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamBegin:1 f#/8 \stemsUp f#/8 \beamEnd:1 \bar 
+   (* meas. 32 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 _/4 \bar 
+   (* meas. 33 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamBegin:1 e/8 \stemsUp e/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 34 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamBegin:1 c#/8 \stemsUp c#/8 \beamEnd:1 _/8 \stemsUp \beamsOff c#/8 \bar 
+   (* meas. 35 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff g/4 \stemsUp \beamBegin:1 f#/8 \stemsUp f#/8 \beamEnd:1 \bar 
+   (* meas. 36 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamBegin:1 c#/8 \stemsUp c#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 37 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp c#/8 \beamEnd:1 \stemsUp \beamsOff e/4 \stemsUp \beamsOff g/4 \stemsUp \beamBegin:1 f#/8 \stemsUp f#/8 \beamEnd:1 \bar 
+   (* meas. 38 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 _/4 \bar 
+   (* meas. 39 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 40 *)  \clef<"g2"> \key<2> _/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 _/4 \bar 
+   (* meas. 41 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 42 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 _/4 \bar 
+   (* meas. 43 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 44 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 _/4 \bar 
+   (* meas. 45 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 46 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 \stemsUp \beamsOff c#/8. _/16 \bar 
+   (* meas. 47 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamBegin:1 f#/8 \stemsUp f#/8 \beamEnd:1 \bar 
+   (* meas. 48 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 49 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 50 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 51 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 52 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 \stemsUp \beamBegin:1 c#/8 _/16 \stemsUp c#/16 \beamEnd:1 \bar 
+   (* meas. 53 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 54 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 \stemsUp \beamsOff c#/16 _/16 _/8 \bar 
+   (* meas. 55 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamBegin:1 f#/8 \stemsUp f#/8 \beamEnd:1 \bar 
+   (* meas. 56 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 \stemsUp \beamsOff c#/16 _/16 _/8 \bar 
+   (* meas. 57 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamBegin:1 e/8 \stemsUp e/8 \beamEnd:1 \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 58 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 _/4 \bar 
+   (* meas. 59 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff e/4 \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 60 *)  \clef<"g2"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff c#/4 _/4 \bar 
+   (* meas. 61 *)  _/1 \bar 
+   (* meas. 62 *)  _/1 \bar 
+   (* meas. 63 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 64 *)  _/1 \bar 
+   (* meas. 65 *)  _/1 \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 68 *)  _/1 \bar 
+   (* meas. 69 *)  _/1 ]
+ , 
+[ \staff<8> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Der braune Bär"> \barFormat<style= "system", range="8"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \bar 
+   (* meas. 7 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  _/1 \bar 
+   (* meas. 12 *)  _/1 \bar 
+   (* meas. 13 *)  _/1 \bar 
+   (* meas. 14 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 15 *)  _/1 \bar 
+   (* meas. 16 *)  _/1 \bar 
+   (* meas. 17 *)  _/1 \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 20 *)  _/1 \bar 
+   (* meas. 21 *)  \stemsUp \beamBegin:1 c#0/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 22 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 23 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 24 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 25 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 26 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 27 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 28 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 29 *)  \intens<"mf", dy=21hs> \stemsUp \beamBegin:1 c#/8 \stemsUp \tieBegin:1 b-1/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \tieEnd:1 \stemsUp b/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 30 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 31 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp \tieBegin:1 b-1/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \tieEnd:1 \stemsUp b/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 32 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 33 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp \tieBegin:1 b-1/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \tieEnd:1 \stemsUp b/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 34 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 35 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp \tieBegin:1 b-1/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \tieEnd:1 \stemsUp b/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 36 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 37 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 38 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 39 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 40 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 41 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 42 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 43 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 44 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 45 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp \tieBegin:1 b-1/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \tieEnd:1 \stemsUp b/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 46 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 47 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp \tieBegin:1 b-1/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \tieEnd:1 \stemsUp b/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 48 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 49 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp \tieBegin:1 b-1/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \tieEnd:1 \stemsUp b/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 50 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8. \stemsUp \tieBegin:1 f#/16 \beamEnd:1 \stemsUp \beamBegin:1 f#/8 \tieEnd:1 \stemsUp b/8 \beamEnd:1 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 51 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp \tieBegin:1 b-1/8 \beamEnd:1 \stemsUp \beamBegin:1 b/8 \tieEnd:1 \stemsUp b/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 52 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 53 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 54 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 55 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 56 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 57 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 58 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 59 *)  \stemsUp \beamBegin:1 c#/8 \stemsUp b-1/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/4 \bar 
+   (* meas. 60 *)  \clef<"f4"> \key<2> \stemsUp \beamBegin:1 g/8 \stemsUp f#/8 \beamEnd:1 _/8 \stemsUp \beamsOff b/8 \stemsUp \beamsOff c#0/4 _/4 \bar 
+   (* meas. 61 *)  _/1 \bar 
+   (* meas. 62 *)  _/1 \bar 
+   (* meas. 63 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 64 *)  _/1 \bar 
+   (* meas. 65 *)  _/1 \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 68 *)  _/1 \bar 
+   (* meas. 69 *)  _/1 ]
+ , 
+[ \staff<9> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Violine 2"> \accol<id=1,  range="9-11"> \barFormat<style= "system", range="9"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \bar 
+   (* meas. 7 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  _/1 \bar 
+   (* meas. 12 *)  _/1 \bar 
+   (* meas. 13 *)  _/1 \bar 
+   (* meas. 14 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 15 *)  _/1 \bar 
+   (* meas. 16 *)  _/1 \bar 
+   (* meas. 17 *)  _/1 \bar 
+   (* meas. 18 *)  _/1 \bar 
+   (* meas. 19 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 20 *)  _/1 \bar 
+   (* meas. 21 *)  \intens<"mp", dy=23hs> _/1 \bar 
+   (* meas. 22 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 23 *)  _/1 \bar 
+   (* meas. 24 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 25 *)  _/1 \bar 
+   (* meas. 26 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 27 *)  _/1 \bar 
+   (* meas. 28 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 29 *)  \intens<"mp", dy=-1.4hs> \stemsUp \beamsOff c#/4 \text<"sempre pizz.",fsize=10pt, dx=0hs, dy=-4.4hs>( \stemsUp \beamsOff b0/4)
+ \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 30 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#1/4 _/4 \bar 
+   (* meas. 31 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 32 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff f#1/4 _/4 \bar 
+   (* meas. 33 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 34 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#1/4 _/4 \bar 
+   (* meas. 35 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 36 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff f#1/4 _/4 \bar 
+   (* meas. 37 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 38 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#1/4 _/4 \bar 
+   (* meas. 39 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 40 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff f#1/4 _/4 \bar 
+   (* meas. 41 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 42 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#1/4 _/4 \bar 
+   (* meas. 43 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 44 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff f#1/4 _/4 \bar 
+   (* meas. 45 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 46 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#1/4 _/4 \bar 
+   (* meas. 47 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 48 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff f#1/4 _/4 \bar 
+   (* meas. 49 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 50 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#1/4 _/4 \bar 
+   (* meas. 51 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 52 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff f#1/4 _/4 \bar 
+   (* meas. 53 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 54 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#1/4 _/4 \bar 
+   (* meas. 55 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 56 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff f#1/4 _/4 \bar 
+   (* meas. 57 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 58 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#1/4 _/4 \bar 
+   (* meas. 59 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 60 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff f#1/4 _/4 \bar 
+   (* meas. 61 *)  \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 62 *)  \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff c#1/4 _/4 \bar 
+   (* meas. 63 *)  \clef<"g2"> \key<2> \stemsUp \beamsOff c#/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff g/4 _/4 \bar 
+   (* meas. 64 *)  \stemsUp \beamsOff g/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff f#1/4 _/4 \bar 
+   (* meas. 65 *)  _/1 \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"g2"> \key<2> _/1 \bar 
+   (* meas. 68 *)  _/1 \bar 
+   (* meas. 69 *)  _/1 ]
+ , 
+[ \staff<10> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Violoncello"> \barFormat<style= "system", range="10"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \bar 
+   (* meas. 7 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  _/1 \bar 
+   (* meas. 12 *)  _/1 \bar 
+   (* meas. 13 *)  _/1 \bar 
+   (* meas. 14 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 15 *)  _/1 \bar 
+   (* meas. 16 *)  _/1 \bar 
+   (* meas. 17 *)  \intens<"mp", dy=0.2hs> \stemsDown \beamsOff c#/8 _/8 \text<"abgedämpft",fsize=10pt, dx=0hs, dy=-6.8hs>( \text<"sempre pizz.",fsize=10pt, dx=0hs, dy=-2.6hs>( \stemsDown \beamsOff b0/8)
+)
+ _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 18 *)  \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 19 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 20 *)  \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 21 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 22 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 23 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 24 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 25 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 26 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 27 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 28 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 29 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 30 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 31 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 32 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 33 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 34 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 35 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 36 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 37 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 38 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 39 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 40 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 41 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 42 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 43 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 44 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 45 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 46 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 47 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 48 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 49 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 50 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 51 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 52 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 53 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 54 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 55 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 56 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 57 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 58 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 59 *)  \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 60 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 61 *)  \stemsDown \beamsOff c#/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 62 *)  \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \bar 
+   (* meas. 63 *)  \clef<"f4"> \key<2> \stemsDown \beamsOff c#1/8 _/8 \stemsDown \beamsOff b0/8 _/8 \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff f#/8 _/8 \bar 
+   (* meas. 64 *)  \stemsDown \beamsOff g/8 _/8 \stemsDown \beamsOff b/8 _/8 \stemsDown \beamsOff f#1/8 _/8 \stemsDown \beamsOff c#/8 _/8 \bar 
+   (* meas. 65 *)  _/1 \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 68 *)  _/1 \bar 
+   (* meas. 69 *)  _/1 ]
+ , 
+[ \staff<11> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Kontrabass"> \barFormat<style= "system", range="11"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<2> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 \bar 
+   (* meas. 2 *)  _/1 \bar 
+   (* meas. 3 *)  _/1 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  _/1 \bar 
+   (* meas. 6 *)  _/1 \bar 
+   (* meas. 7 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  _/1 \bar 
+   (* meas. 12 *)  _/1 \bar 
+   (* meas. 13 *)  _/1 \bar 
+   (* meas. 14 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 15 *)  _/1 \bar 
+   (* meas. 16 *)  _/1 \intens<"mp", dy=-1.2hs> \bar 
+   (* meas. 17 *)  \stemsUp \beamsOff c#0/8 \text<"sempre pizz.",fsize=10pt, dx=0hs, dy=-1.2hs>( \text<"abgedämpft",fsize=10pt, dx=0hs, dy=-6hs>( _/8)
+)
+ \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 18 *)  \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 19 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 20 *)  \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 21 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 22 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 23 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 24 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 25 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 26 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 27 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 28 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 29 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 30 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 31 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 32 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 33 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 34 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 35 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 36 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 37 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 38 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 39 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 40 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 41 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 42 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 43 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 44 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 45 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 46 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 47 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 48 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 49 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 50 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 51 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 52 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 53 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 54 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 55 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 56 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 57 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 58 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 59 *)  \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 60 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 61 *)  \stemsUp \beamsOff c#/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 62 *)  \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \bar 
+   (* meas. 63 *)  \clef<"f4"> \key<2> \stemsUp \beamsOff c#0/8 _/8 \stemsUp \beamsOff b-1/8 _/8 \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff f#/8 _/8 \bar 
+   (* meas. 64 *)  \stemsUp \beamsOff g/8 _/8 \stemsUp \beamsOff b/8 _/8 \stemsDown \beamsOff f#0/8 _/8 \stemsUp \beamsOff c#/8 _/8 \bar 
+   (* meas. 65 *)  _/1 \bar 
+   (* meas. 66 *)  _/1 \bar 
+   (* meas. 67 *)  \clef<"f4"> \key<2> _/1 \bar 
+   (* meas. 68 *)  _/1 \bar 
+   (* meas. 69 *)  _/1 ]
+  }

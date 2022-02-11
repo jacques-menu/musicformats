@@ -1,0 +1,65 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/41b-MultiParts-MoreThan10.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P0"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P1"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P2"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<4> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P3"> \barFormat<style= "system", range="4"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<5> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P4"> \barFormat<style= "system", range="5"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<6> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P5"> \barFormat<style= "system", range="6"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<7> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P6"> \barFormat<style= "system", range="7"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<8> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P7"> \barFormat<style= "system", range="8"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<9> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P8"> \barFormat<style= "system", range="9"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<10> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P9"> \barFormat<style= "system", range="10"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<11> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P10"> \barFormat<style= "system", range="11"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<12> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P11"> \barFormat<style= "system", range="12"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<13> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P12"> \barFormat<style= "system", range="13"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<14> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P13"> \barFormat<style= "system", range="14"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<15> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P14"> \barFormat<style= "system", range="15"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<16> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P15"> \barFormat<style= "system", range="16"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<17> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P16"> \barFormat<style= "system", range="17"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<18> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P17"> \barFormat<style= "system", range="18"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<19> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P18"> \barFormat<style= "system", range="19"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+ , 
+[ \staff<20> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"P19"> \barFormat<style= "system", range="20"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> _/1 ]
+  }

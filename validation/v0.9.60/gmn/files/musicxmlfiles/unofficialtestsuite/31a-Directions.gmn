@@ -1,0 +1,35 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/31a-Directions.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"MusicXML directions (attached to staff)"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \mark<"A", enclosure="square", dy=-4hs> \beamsOff c/4 \mark<"B", enclosure="none", dy=-4hs> \beamsOff c/4 \mark<"Test", enclosure="square", dy=-4hs> \beamsOff c/4 \mark<"Crc", enclosure="circle", dy=-4hs> \beamsOff c/4 \bar 
+   (* meas. 2 *)  \segno \beamsOff c/4 \coda \beamsOff c/4 \text<"words", dx=0hs>( \beamsOff c/4)
+ \beamsOff c/4 \bar 
+   (* meas. 3 *)  \intens<"p", dy=0hs> \beamsOff c/4 \intens<"pp", dy=0hs> \beamsOff c/4 \intens<"ppp", dy=0hs> \beamsOff c/4 \intens<"pppp", dy=0hs> \beamsOff c/4 \bar 
+   (* meas. 4 *)  \intens<"ppppp", dy=0hs> \beamsOff c/4 \intens<"pppppp", dy=0hs> \beamsOff c/4 \intens<"f", dy=0hs> \beamsOff c/4 \intens<"ff", dy=0hs> \beamsOff c/4 \bar 
+   (* meas. 5 *)  \intens<"fff", dy=0hs> \beamsOff c/4 \intens<"ffff", dy=0hs> \beamsOff c/4 \intens<"fffff", dy=0hs> \beamsOff c/4 \intens<"ffffff", dy=0hs> \beamsOff c/4 \bar 
+   (* meas. 6 *)  \intens<"mp", dy=0hs> \beamsOff c/4 \intens<"mf", dy=0hs> \beamsOff c/4 \intens<"sf", dy=0hs> \beamsOff c/4 \intens<"sfp", dy=0hs> \beamsOff c/4 \bar 
+   (* meas. 7 *)  \intens<"sfpp", dy=0hs> \beamsOff c/4 \intens<"fp", dy=0hs> \beamsOff c/4 \intens<"rf", dy=0hs> \beamsOff c/4 \intens<"rfz", dy=0hs> \beamsOff c/4 \bar 
+   (* meas. 8 *)  \intens<"sfz", dy=0hs> \beamsOff c/4 \intens<"sffz", dy=0hs> \beamsOff c/4 \intens<"fz", dy=0hs> \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 9 *)  \crescBegin<dy=13hs> \beamsOff \lyrics<"hairpin-", autopos="on">( c/4)
+ \crescEnd<dy=13hs> \beamsOff \lyrics<"cresc", autopos="on">( c/4)
+ \beamsOff \lyrics<"dash-", autopos="on">( c/4)
+ \beamsOff \lyrics<"es", autopos="on">( c/4)
+ \bar 
+   (* meas. 10 *)  \beamsOff \lyrics<"bra-", autopos="on">( c/4)
+ \beamsOff \lyrics<"cket", autopos="on">( c/4)
+ \beamsOff \lyrics<"oct.-", autopos="on">( c/4)
+ \beamsOff \lyrics<"shift", autopos="on">( c/4)
+ \bar 
+   (* meas. 11 *)  \beamsOff \lyrics<"pedal-", autopos="on">( c/4)
+ \beamsOff \lyrics<"change-", autopos="on">( c/4)
+ \beamsOff c/4 \beamsOff \lyrics<"mark", autopos="on">( c/4)
+ \bar 
+   (* meas. 12 *)  \tempo<"[1/4] = 60"> \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \beamsOff c/4 \bar 
+   (* meas. 13 *)  \beamsOff c/4 \beamsOff c/4 _/2 \doubleBar 
+   (* meas. 14 *)  \intens<"p", before=" ",font="Times New Roman",fsize=10.25pt, dy=-3hs> \beamsOff c/4 \intens<"ppp", dy=0hs> \beamsOff \lyrics<"ppp~cresc-", autopos="on">( c/4)
+ \intens<"fff", dy=0hs> \beamsOff \lyrics<"to~fff", autopos="on">( c/4)
+ _/4 ]
+  }

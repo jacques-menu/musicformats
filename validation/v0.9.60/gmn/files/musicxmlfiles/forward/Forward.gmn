@@ -1,0 +1,11 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/forward/Forward.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Wie Melodien zieht es mir (Page 1)"> \composer<"Johannes Brahms", dy=4hs> \auto<autoInstrPos="on"> \instr<"Piano"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=20> \clef<"f4"> \key<3> \meter<"C/", autoBarlines="off", autoMeasuresNum="system"> empty/2 \clef<"g2"> _/8 \stemsUp \beamsOff {c#/8, e/8  } _/8 \stemsUp \beamsOff {e/8, a/8  } ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \staffFormat<distance=12> \clef<"f4"> \key<3> \meter<"C/", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \slurBegin:1<curve="down"> \beamBegin:1 a-2/8 \stemsUp a-1/8 \stemsUp e0/8 \slurEnd:1 \staff<1> \stemsDown {a/8, c#1/8  } \beamEnd:1 \staff<2> \stemsDown \beamsOff a0/8 _/8 \stemsUp \beamsOff c#/8 _/8 ]
+  }

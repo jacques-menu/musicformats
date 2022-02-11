@@ -1,0 +1,22 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Guido code generation}
+% -------------------------------------------------------------------------
+
+
+Guido code is produced on the standard output stream, unless options \optionBoth{output-file-name}{o} or \optionBoth{auto-output-file-name}{aofn} are used.
+
+
+% -------------------------------------------------------------------------
+\section{Basic principle}
+% -------------------------------------------------------------------------
+
+As is done for \mxml\ generation, Guido generation is done in two passes:
+\begin{itemize}
+\item first create and \fileName{mxsr} containing the data;
+\item then simply write this tree.
+\end{itemize}
+
+The creation of the tree is done in \msrToMxsrBoth{msr2mxsrTranslator}.
+See \subSectionRef{musicxmlGeneration}, for more details.

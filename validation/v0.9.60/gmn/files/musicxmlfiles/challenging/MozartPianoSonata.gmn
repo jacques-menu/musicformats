@@ -1,0 +1,41 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/challenging/MozartPianoSonata.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"Wolfgang Amadeus Mozart", dy=4hs> \auto<autoInstrPos="on"> \instr<"Piano"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff \arpeggio( c#3/2)
+ \bar 
+   (* meas. 2 *)  \stemsDown \slurBegin:1 \beamBegin:1 d/16 \stemsDown c#/16 \slurEnd:1 \stemsDown \stacc<position="above">( b2/16)
+ \stemsDown \stacc<position="above">( c#3/16)
+ \beamEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 d/16 \stemsDown c#/16 \slurEnd:1 \stemsDown \stacc<position="above">( b2/16)
+ \stemsDown \stacc<position="above">( c#3/16)
+ \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff {f#2/2, a/2, d3/2  } \bar 
+   (* meas. 4 *)  \stemsUp \grace( \slurBegin:1<curve="down"> \beamsOff d/16)
+ \stemsDown \beamBegin:1 {e2/8, a/8, c#3/8  } \slurEnd:1 \stemsUp \grace( \slurBegin:1<curve="down"> \beamsOff d/16)
+ \stemsDown {e2/8, a/8, c#3/8  } \slurEnd:1 \stemsUp \grace( \slurBegin:1<curve="down"> \beamsOff d/16)
+ \stemsDown {e2/8, a/8, c#3/8  } \slurEnd:1 \stemsUp \grace( \slurBegin:1<curve="down"> \beamsOff d/16)
+ \stemsDown {e2/8, a/8, c#3/8  } \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 5 *)  \stemsUp \slurBegin:1 \beamsOff b2/4. \stemsUp \beamsOff e3/8 \slurEnd:1 ]
+ , 
+[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \stemsDown \beamsOff \arpeggio( {c#2/4, e/4, a/4  })
+ empty/4 \bar 
+   (* meas. 2 *)  empty/2 \bar 
+   (* meas. 3 *)  empty/2 \bar 
+   (* meas. 4 *)  empty/2 \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff {e/2, g#/2  } ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<3> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \grace( \slurBegin:1<curve="up"> \beamBegin:1 a-1/16 \stemsUp c#0/16 \stemsUp e/16 \beamEnd:1)
+ \stemsDown \beamBegin:1 a/8 \slurEnd:1 \stemsDown a/8 \stemsDown a/8 \stemsDown a/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \grace( \slurBegin:1<curve="up"> \beamBegin:1 a-1/16 \stemsUp c#0/16 \stemsUp e/16 \beamEnd:1)
+ \stemsDown \beamBegin:1 a/8 \slurEnd:1 \stemsDown a/8 \stemsDown a/8 \stemsDown a/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsUp \grace( \slurBegin:1<curve="up"> \beamBegin:1 d-1/16 \stemsUp f#/16 \stemsUp a/16 \beamEnd:1)
+ \stemsDown \beamBegin:1 d0/8 \slurEnd:1 \stemsDown d/8 \stemsDown d/8 \stemsDown d/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsUp \grace( \slurBegin:1<curve="up"> \beamBegin:1 a-1/16 \stemsUp c#0/16 \stemsUp e/16 \beamEnd:1)
+ \stemsDown \beamBegin:1 a/8 \slurEnd:1 \stemsDown a/8 \stemsDown a/8 \stemsDown a/8 \beamEnd:1 \bar 
+   (* meas. 5 *)  \stemsUp \grace( \slurBegin:1<curve="up"> \beamBegin:1 e-1/16 \stemsUp g#/16 \stemsUp b/16 \beamEnd:1)
+ \stemsDown \beamBegin:1 e0/8 \slurEnd:1 \stemsDown e/8 \stemsDown e/8 \stemsDown e/8 \beamEnd:1 ]
+  }

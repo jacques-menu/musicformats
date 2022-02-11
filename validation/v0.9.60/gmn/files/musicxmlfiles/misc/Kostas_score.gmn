@@ -1,0 +1,15 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/misc/Kostas_score.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Clarinet in Bb"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \repeatBegin \clef<"g2"> \key<0> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamBegin:1 e2/8 \stemsDown f/8 \beamEnd:1 \stemsDown \beamBegin:1 g/8 \stemsDown a/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff g/4. \stemsDown \beamsOff e/8 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 a/8 \stemsDown g/8 \beamEnd:1 \stemsDown \beamBegin:1 f/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff g/4 \stemsDown \beamsOff e/4 \repeatEnd \bar<hidden="true"> 
+   (* meas. 5 *)  \repeatBegin \stemsDown \beamBegin:1 g/8 \stemsDown f/16 \stemsDown e/16 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown d/8 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsDown \beamBegin:1 c/8 \stemsDown d/8 \beamEnd:1 \stemsDown \beamsOff e/4 \bar 
+   (* meas. 7 *)  \stemsDown \beamBegin:1 g/8 \stemsDown f/16 \stemsDown e/16 \beamEnd:1 \stemsDown \beamBegin:1 d/8 \stemsDown d/8 \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamBegin:1 c/8 \stemsDown d/8 \beamEnd:1 \stemsDown \beamsOff c/4 \repeatEnd ]
+  }

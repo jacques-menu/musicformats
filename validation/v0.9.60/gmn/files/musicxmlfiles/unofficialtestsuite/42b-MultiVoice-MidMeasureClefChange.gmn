@@ -1,0 +1,23 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/42b-MultiVoice-MidMeasureClefChange.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"6/8", autoBarlines="off", autoMeasuresNum="system"> \beamBegin:1 \stacc<position="below">( f/8)
+ \stacc<position="below">( d/8)
+ \stacc<position="below">( b0/8)
+ \beamEnd:1 \clef<"f4"> \slurBegin:1<curve="up"> \beamsOff g/8 \beamsOff f/4 \slurEnd:1 \doubleBar 
+   (* meas. 2 *)  \clef<"g2"> \beamBegin:1 \stacc<position="below">( e2/8)
+ \stacc<position="below">( c/8)
+ \stacc<position="below">( g1/8)
+ \beamEnd:1 \slurBegin:1<curve="up"> \beamsOff g/8 \beamsOff f/4 \slurEnd:1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<0> \meter<"6/8", autoBarlines="off", autoMeasuresNum="system"> _/8 \beamBegin:1 \stacc<position="below">( g-1/8)
+ \stacc<position="below">( g/8)
+ \beamEnd:1 \slurBegin:1<curve="down"> \beamBegin:1 g/8 a/16 g/16 \acc( f#/16)
+ g/16 \slurEnd:1 \beamEnd:1 \doubleBar 
+   (* meas. 2 *)  \beamsOff {c0/4, e/4, g/4, c1/4  } _/8 _/4 \beamsOff \stacc<position="below">( g0/8)
+ ]
+  }

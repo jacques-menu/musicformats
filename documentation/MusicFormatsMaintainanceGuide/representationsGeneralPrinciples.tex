@@ -1,0 +1,428 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Representations general principles}\label{Representations general principles}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Trees vs graphs}
+% -------------------------------------------------------------------------
+%%%JMI
+
+% -------------------------------------------------------------------------
+\section{Denormalization}
+% -------------------------------------------------------------------------
+
+In databases, \denorm\ means that some data is present in several places. This is usually done for speed, at the cost of making updates more complex, since no such place should be ignored in an update.
+
+MSR uses \denorm\ explicitly, with smart pointers to class instances being stored in other instances.
+
+In particular, \class{msrChord} contains elements that are actually detained by the notes it is composed of:
+\begin{lstlisting}[language=CPlusPlus]
+    // articulations
+    list<S_msrArticulation>
+                          fChordArticulations;
+
+    // spanners
+    list<S_msrSpanner>    fChordSpanners;
+
+    // single tremolo
+    S_msrSingleTremolo    fChordSingleTremolo;
+\end{lstlisting}
+
+This is to avoid having to browse the chord's components to obtain the corresponding information each time it is needed.
+
+All such \denorm\ is done in MSR internally: the code using MSR does not have to denormalize itself.
+It can use whichever occurrence of any given denormalized data safely, though.
+
+
+% -------------------------------------------------------------------------
+\section{Newborn clones}
+% -------------------------------------------------------------------------
+
+The multi-pass structure of the converters build with {\tt musicformat} leads to a question: should an existing description, such as that of a barLine or a note, be used as is, or should it be built again?
+
+Depending of the kind of description, both possibilities are used:
+\begin{itemize}
+\item the description is used as is if it is shallow, i.e. t doesn't contains smart-pointers to data;
+\item otherwise, a new description is built, sharing some some non smart-pointers fieds with the existing one. This newborn clone is then populated with whatever is needed.
+\end{itemize}
+
+For example, in \msrToLpsr{}, the \smartPointerType{S_msrBarLine} values found in the MSR data are used also in the LPSR data:
+\begin{lstlisting}[language=CPlusPlus]
+void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+#endif
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrBarLine" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+	// ... ... ...
+
+  // append the barLine to the current voice clone
+  fCurrentVoiceClone->
+    appendBarLineToVoice (elt);
+}
+\end{lstlisting}
+
+On the opposite, a new \smartPointerType{S_msrVoice} description is built for use by LPSR: this is how the LilyPond \#34 issue is circumvented, adding skip notes where needed in the voices that don't have grace notes at their beginning.
+
+Such new descriptions are created by \starMethodName{NewbornClone} methods, such as:
+\begin{lstlisting}[language=CPlusPlus]
+S_msrTuplet msrTuplet::createTupletNewbornClone ()
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+    gLogStream <<
+      "Creating a newborn clone of tuplet " <<
+      asString () <<
+      endl;
+  }
+#endif
+
+  S_msrTuplet
+    newbornClone =
+      msrTuplet::create (
+        fInputLineNumber,
+        fMeasureElementMeasureNumber,
+        fTupletNumber,
+        fTupletBracketKind,
+        fTupletLineShapeKind,
+        fTupletShowNumberKind,
+        fTupletShowTypeKind,
+        fTupletFactor,
+        fMemberNotesSoundingWholeNotes,
+        fMemberNotesDisplayWholeNotes);
+
+  return newbornClone;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Deep clones}
+% -------------------------------------------------------------------------
+
+Some classes in \mf, such as \class{msrVoice} in \msrBoth{msrVoices}, have a \starMethodName{DeepClone} method:
+\begin{lstlisting}[language=CPlusPlus]
+     SMARTP<msrVoice> createVoiceDeepClone (
+                             int          inputLineNumber,
+                             msrVoiceKind voiceKind,
+                             int          voiceNumber,
+                             S_msrStaff   containingStaff);
+\end{lstlisting}
+
+Deep copies of the \msrRepr\ data is not used currently. This can be changed should the need arise in the future.
+
+
+% -------------------------------------------------------------------------
+\section{Inheritance}
+% -------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------
+\subsection{Single inheritance}
+% -------------------------------------------------------------------------
+
+Many classes in \mf\ use single inheritance. For example, in \msr{msrTimeSignature.h}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msrTimeSignature : public msrMeasureElement
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static SMARTP<msrTimeSignature> create (
+                            int                        inputLineNumber,
+                            msrTimeSignatureSymbolKind timeSignatureSymbolKind);
+
+    // creation from the applications
+    // ------------------------------------------------------
+
+    static SMARTP<msrTimeSignature> createTwoEightsTime (
+                            int inputLineNumber);
+
+    // ... ... ...
+
+    // creation from the applications
+    // ------------------------------------------------------
+
+    static SMARTP<msrTimeSignature> createTimeFromString (
+                            int    inputLineNumber,
+                            string timeString);
+
+    // ... ... ...
+\end{lstlisting}
+
+The definitions in in \msr{msrTimeSignature.cpp} are:
+\begin{lstlisting}[language=CPlusPlus]
+S_msrTimeSignature msrTimeSignature::create (
+  int                        inputLineNumber,
+  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
+{
+  msrTimeSignature* o =
+    new msrTimeSignature (
+      inputLineNumber, timeSignatureSymbolKind);
+  assert (o != nullptr);
+  return o;
+}
+
+msrTimeSignature::msrTimeSignature (
+  int                        inputLineNumber,
+  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
+    : msrMeasureElement (inputLineNumber)
+{
+  fTimeSignatureSymbolKind = timeSignatureSymbolKind;
+
+  fTimeIsCompound = false;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Single inheritance for smart pointers}
+% -------------------------------------------------------------------------
+
+All classes for which smart pointers are needed should inherit from class {\tt smartable}, such as in \msdl{msdlScanner.h}:
+\begin{lstlisting}[language=CPlusPlus]
+class msdlScanner : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<msdlScanner> create (istream& inputStream);
+
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          msdlScanner (istream& inputStream);
+
+	// ... ... ...
+};
+\end{lstlisting}
+
+This leads to the following in in \msdl{msdlScanner.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+S_msdlScanner msdlScanner::create (istream& inputStream)
+{
+  msdlScanner* o =
+    new msdlScanner (inputStream);
+  assert (o != nullptr);
+  return o;
+}
+
+msdlScanner::msdlScanner (istream& inputStream)
+    : fInputStream (
+        inputStream),
+      fCurrentToken (
+        ),
+      fCurrentTokenKind (
+        fCurrentToken.getTokenKindToModify ()),
+      fCurrentTokenDescription (
+        fCurrentToken.getTokenDescriptionToModify ())
+{
+  // trace
+#ifdef TRACING_IS_ENABLED
+  fTraceTokens        = gGlobalMsdl2msrOahGroup->getTraceTokens ();
+  fTraceTokensDetails = gGlobalMsdl2msrOahGroup->getTraceTokensDetails ();
+#endif
+
+	// ... ... ...
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Multiple inheritance for visitors}
+% -------------------------------------------------------------------------
+
+Multiple inheritance is used extensively in visitors, which is the way to specify what elements are {it seen} by the visitor. For example, in \msr{msr2msrTranslator.h}, there is:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP msr2msrTranslator :
+
+  public visitor<S_msrScore>,
+
+  // rights
+
+  public visitor<S_msrIdentification>,
+
+  public visitor<S_msrCredit>,
+  public visitor<S_msrCreditWords>,
+
+    // ... ... ...
+};
+\end{lstlisting}
+
+Then there are \methodName{visitStart} and/or \methodName{visitEnd} methods to handle the corresponding elements:
+\begin{lstlisting}[language=CPlusPlus]
+void msr2msrTranslator::visitStart (S_msrIdentification& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrIdentification" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  ++gIndenter;
+
+  // set the current identification
+  fCurrentIdentification = elt;
+
+  // store it in the resulting MSR score
+  fResultingNewMsrScore->
+    setIdentification (
+      fCurrentIdentification);
+
+  fOnGoingIdentification = true;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
+{
+  fOnGoingIdentification = false;
+
+  --gIndenter;
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> End visiting msrIdentification" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+}
+\end{lstlisting}
+
+Forgetting to define those \methodName{visit*} methods causes \MainIt{no error message whatsoever}: the corresponding elements are just not handled by the visitor.\\
+The visitors trace options are useful to detect such cases:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxml > xml2ly -find visitors
+3 occurrences of string "visitors" have been found:
+   1:
+    -tmxmltvis, -trace-mxsr-visitors
+    Write a trace of the MusicXML tree visiting activity to standard error.
+   2:
+    -tmsrvis, -trace-msr-visitors
+    Write a trace of the MSR graphs visiting activity to standard error.
+   3:
+    -tlpsrvis, -trace-lpsr-visitors
+    Write a trace of the LPSR graphs visiting activity to standard error.
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Multiple inheritance in other classes}
+% -------------------------------------------------------------------------
+
+The only such case is class {\tt mfIndentedOstream} in \mfutilitiesBoth{mfIndentedTextOutput.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP mfIndentedOstream: public ostream, public smartable
+{
+/*
+Reference for this class:
+  https://stackoverflow.com/questions/2212776/overload-handling-of-stdendl
+
+Usage:
+  mfIndentedOstream myStream (cout);
+
+  myStream <<
+    1 << 2 << 3 << endl <<
+    5 << 6 << endl <<
+    7 << 8 << endl;
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mfIndentedOstream> create (
+      ostream&        theOStream,
+      mfOutputIndenter& theIndenter)
+    {
+      mfIndentedOstream* o = new mfIndentedOstream (
+        theOStream,
+        theIndenter);
+      assert (o != nullptr);
+
+      return o;
+    }
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfIndentedOstream (
+                            ostream&        theOStream,
+                            mfOutputIndenter& theIndenter)
+                            : ostream (
+                                & fIndentedStreamBuf),
+                              fIndentedStreamBuf (
+                                theOStream,
+                                theIndenter)
+                              {}
+
+    virtual               ~mfIndentedOstream () {};
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    // flush
+    void                  flush ()
+                              { fIndentedStreamBuf.flush (); }
+
+    // indentation
+    mfOutputIndenter&       getIndenter () const
+                              { return fIndentedStreamBuf.getOutputIndenter (); }
+
+    void                  incrIdentation ()
+                              { ++ (fIndentedStreamBuf.getOutputIndenter ()); }
+
+    void                  decrIdentation ()
+                              { -- (fIndentedStreamBuf.getOutputIndenter ()); }
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    // mfIndentedOstream just uses an mfIndentedStreamBuf
+    mfIndentedStreamBuf     fIndentedStreamBuf;
+
+};
+typedef SMARTP<mfIndentedOstream> S_indentedOstream;
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Reversibility}\label{Reversibility}
+% -------------------------------------------------------------------------
+
+All formats in \mf\ that can be obtained by a conversion from another one should be convertible back in the latter, without information loss.\\
+Thus:
+\begin{itemize}
+\item \mxsrRepr\ contains nearly everything that can be described in \mxml\ data. The main exception at the time of this writing is the MIDI information, see \subSectionRef{MusicXML coverage};
+\item \msrRepr\ contains \mxml-related informations, so as to convert it back to MXSR;
+\item \lpsrRepr\ and \bsrRepr\ contain an \msrRepr\ component. This is why converting those formats back to MSR\ is merely getting the corresponding field.
+\end{itemize}
+

@@ -1,0 +1,150 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Braille Scores Representation (BSR)}
+% -------------------------------------------------------------------------
+
+BSR represents braille scores as composed of lines of 6-dot cells.
+
+
+% -------------------------------------------------------------------------
+\section{BSR basic types}\label{BSR basic types}
+% -------------------------------------------------------------------------
+
+Some types used thoughout \bsrRepr\ are defined in \bsrBoth{bsrBasicTypes}:%%%JMI
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/bsr >  egrep -rIn  '^// ' bsrBasicTypes.h
+bsrBasicTypes.h:23:// cell kinds
+bsrBasicTypes.h:107:// lower case letters
+bsrBasicTypes.h:139:// capitals
+bsrBasicTypes.h:143://  kCellCapitalsSequenceSign, // { kCellCapitalsSign, kCellCapitalsSign };
+bsrBasicTypes.h:145:// decimal digits
+bsrBasicTypes.h:160:// lower decimal digits
+bsrBasicTypes.h:174:// alterations
+bsrBasicTypes.h:181:// augmentation dots
+bsrBasicTypes.h:186:// arithmetic operators
+bsrBasicTypes.h:195:// words
+bsrBasicTypes.h:205:// braille cells
+bsrBasicTypes.h:212:// braille output kinds
+bsrBasicTypes.h:231:// chords languages
+bsrBasicTypes.h:251:// brailling numbers
+bsrBasicTypes.h:255:// brailling characters and strings
+bsrBasicTypes.h:261:// writing UTF-16 to ostreams
+bsrBasicTypes.h:273:// initialization
+bsrBasicTypes.h:971:// constants
+bsrBasicTypes.h:975:// computations
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Representing cells}
+% -------------------------------------------------------------------------
+
+This is done basically with enumeration type \enumType{bsrCellKind}, defined in \bsr{bsrBasicTypes.h}:
+\begin{lstlisting}[language=CPlusPlus]
+// cell kinds
+//______________________________________________________________________________
+enum class bsrCellKind {
+  kCellUnknown,
+
+  // non 6dots values
+  kCellEOL     , // L'\u000a'
+  kCellEOP     , // L'\u000c'
+
+  // 6dots values for Braille
+  kDotsNone    , // L'\u2800'
+  kDots1       , // L'\u2801'
+  kDots2       , // L'\u2802'
+
+	// ... ... ...
+
+  kDots23456   , // L'\u283e'
+  kDots123456    // L'\u283f'
+};
+
+\end{lstlisting}
+
+\EnumType{bsrCellKind} constants are not used throughout the code base: instead, there are \enumType{bsrCellKind} constants to provide context-specific names for the cells kinds.
+
+Lower-case letters:
+\begin{lstlisting}[language=CPlusPlus]
+// lower case letters
+//______________________________________________________________________________
+const bsrCellKind
+  kCellA = bsrCellKind::kDots1,
+  kCellB = bsrCellKind::kDots12,
+
+
+  kCellY = bsrCellKind::kDots13456,
+  kCellZ = bsrCellKind::kDots1356;
+\end{lstlisting}
+
+Capital sign:
+\begin{lstlisting}[language=CPlusPlus]
+// capitals
+//______________________________________________________________________________
+const bsrCellKind
+  kCellCapitalsSign = bsrCellKind::kDots46;
+\end{lstlisting}
+
+Decimal digits:
+\begin{lstlisting}[language=CPlusPlus]
+// decimal digits
+//______________________________________________________________________________
+const bsrCellKind
+  kCellNumberSign = bsrCellKind::kDots3456,
+  kCell1 = kCellA,
+  kCell2 = kCellB,
+  kCell3 = kCellC,
+  kCell4 = kCellD,
+  kCell5 = kCellE,
+  kCell6 = kCellF,
+  kCell7 = kCellG,
+  kCell8 = kCellH,
+  kCell9 = kCellI,
+  kCell0 = kCellJ;
+\end{lstlisting}
+
+Alterations:
+\begin{lstlisting}[language=CPlusPlus]
+// alterations
+//______________________________________________________________________________
+const bsrCellKind
+  kCellFlat    = bsrCellKind::kDots126,
+  kCellNatural = bsrCellKind::kDots16,
+  kCellSharp   = bsrCellKind::kDots146;
+\end{lstlisting}
+
+Augmentation dots:
+\begin{lstlisting}[language=CPlusPlus]
+// augmentation dots
+//______________________________________________________________________________
+const bsrCellKind
+  kCellAugmentationDot = bsrCellKind::kDots3;
+\end{lstlisting}
+
+Arithmetic operators:
+\begin{lstlisting}[language=CPlusPlus]
+// arithmetic operators
+//______________________________________________________________________________
+const bsrCellKind
+  kCell_ac_plus      = bsrCellKind::kDots235,
+  kCell_ac_minus     = bsrCellKind::kDots36,
+  kCell_ac_times     = bsrCellKind::kDots35,
+  kCell_ac_dividedBy = bsrCellKind::kDots25,
+  kCell_ac_equals    = bsrCellKind::kDots2356;
+\end{lstlisting}
+
+Words:
+\begin{lstlisting}[language=CPlusPlus]
+// words
+//______________________________________________________________________________
+const bsrCellKind
+  kCellWordSign        = bsrCellKind::kDots345,
+
+  kCellWordApostrophe  = bsrCellKind::kDots6,
+
+  kCellParenthesis     = bsrCellKind::kDots2356,
+  kCellQuestionMark    = bsrCellKind::kDots26;
+\end{lstlisting}
+

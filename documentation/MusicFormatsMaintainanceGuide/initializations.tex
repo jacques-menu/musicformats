@@ -1,0 +1,262 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Initializations}
+% -------------------------------------------------------------------------
+
+Some \initialization\ activities in \mf\ use the \oahRepr\ facility. \oahRepr\ should thus be initialized first.
+
+
+% -------------------------------------------------------------------------
+\section{Options and help initializations}
+% -------------------------------------------------------------------------
+
+There is no \initialization\  of the \oahRepr\ architecture as such, but there are \functionName{create*OahGroup} functions to create the various \oahRepr\ groups.
+
+For example, \globalVariable{gGlobalServiceRunData} is supplied by \mflibraryBoth{mfServiceRunData}: %%%JMI
+\begin{lstlisting}[language=CPlusPlus]
+EXP extern S_generalOahGroup gGlobalServiceRunData;
+
+//______________________________________________________________________________
+EXP S_generalOahGroup createGlobalGeneralOahGroup ();
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+S_generalOahGroup createGlobalGeneralOahGroup ()
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Creating global general OAH group" <<
+      endl;
+  }
+#endif
+
+  // protect library against multiple initializations
+  if (! gGlobalServiceRunData) {
+    // create the global general options group
+    gGlobalServiceRunData =
+      generalOahGroup::create ();
+    assert (gGlobalServiceRunData != 0);
+  }
+
+  // return the global OAH group
+  return gGlobalServiceRunData;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Representations initializations}
+% -------------------------------------------------------------------------
+
+There are \functionName{initialize*} functions such as \functionName{initializeLPSR} and \functionName{initializeBSR}. They essentially build global data structures, such as the tables of supported languages and their correspondance with an internal \enumType\ both ways.
+
+For example, \functionName{initializeMSR} is defined in \msrBoth{msr}:
+\begin{lstlisting}[language=CPlusPlus]
+void EXP initializeMSR ();
+\end{lstlisting}
+
+\begin{lstlisting}[language=CPlusPlus]
+static S_mfcVersions pMsrRepresentationComponent;
+
+static void initializeMsrRepresentationComponent ()
+{
+  // create the component
+  pMsrRepresentationComponent =
+    mfcVersions::create ("MSR");
+
+  // populate it
+  pMsrRepresentationComponent->
+    appendVersionDescrToComponent (
+      mfcVersionDescr::create (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.5"),
+          "October 6, 2021",
+          list<string> {
+            "Start of sequential versions numbering"
+          }
+      )));
+}
+
+void initializeMSR ()
+{
+  // protect library against multiple initializations
+  static Bool pPrivateThisMethodHasBeenRun (false);
+
+  if (! pPrivateThisMethodHasBeenRun) {
+    // initialize the history
+    initializeMsrRepresentationComponent ();
+
+    // initialize
+    initializeMSRBasicTypes ();
+
+    pPrivateThisMethodHasBeenRun = true;
+  }
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{MSR initialization}
+% -------------------------------------------------------------------------
+
+\msrBoth{msrBasicTypes} defines \function{initializeMSRBasicTypes} for this \initialization:
+\begin{lstlisting}[language=CPlusPlus]
+void initializeMSRBasicTypes ()
+{
+  // protect library against multiple initializations
+  static Bool pPrivateThisMethodHasBeenRun (false);
+
+  if (! pPrivateThisMethodHasBeenRun) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalWaeOahGroup->getQuiet ()) {
+      gLogStream <<
+        "Initializing MSR basic types handling" <<
+        endl;
+  }
+#endif
+
+    // languages handling
+    // ------------------------------------------------------
+
+    initializeQuarterTonesPitchesLanguageKinds ();
+
+    // clefs handling
+    // ------------------------------------------------------
+
+    initializeClefKinds ();
+
+    // harmonies handling
+    // ------------------------------------------------------
+
+    initializeHarmonyKinds ();
+
+    // harmony structures handling
+    // ------------------------------------------------------
+
+    initializeHarmonyStructuresMap ();
+
+    // MSR lengths handling
+    // ------------------------------------------------------
+
+    initializeMsrLengthUnitKindsMap ();
+
+    // MSR margins types handling
+    // ------------------------------------------------------
+
+    initializeMsrMarginTypeKindsMap ();
+
+    pPrivateThisMethodHasBeenRun = true;
+  }
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{LPSR initialization}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\subsection{BSR initialization}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Passes initializations}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Converters initializations}
+% -------------------------------------------------------------------------
+
+The converters create only the global \oahRepr\ groups they need. Since the order of \initialization s is critical, \initialization\ of the formats is done when the latter's \insider\ handler is created.
+
+This is how \class{xml2lyInsiderHandler} initializes the \msrRepr\ and \lpsrRepr\ formats \\
+in \method{xml2lyInsiderHandler}{createTheXml2lyOptionGroups} in \\
+\musicxmlToLilypond{musicxml2lilypondInsiderHandler.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+void xml2lyInsiderHandler::createTheXml2lyOptionGroups (
+  string serviceName)
+{
+	// ... ... ...
+
+  // initialize options handling, phase 1
+  // ------------------------------------------------------
+
+  // create the OAH OAH group first
+  appendGroupToHandler (
+    createGlobalOahOahGroup (
+      serviceName));
+
+  // create the WAE OAH group
+  appendGroupToHandler (
+    createGlobalWaeOahGroup ());
+
+#ifdef TRACING_IS_ENABLED
+  // create the tracing OAH group
+  appendGroupToHandler (
+    createGlobalTracingOahGroup (
+      this));
+#endif
+
+  // create the output file OAH group
+  appendGroupToHandler (
+    createGlobalOutputFileOahGroup ());
+
+  // initialize the library
+  // ------------------------------------------------------
+
+  initializeMSR ();
+  initializeLPSR ();
+
+  // initialize options handling, phase 2
+  // ------------------------------------------------------
+
+  // create the MXSR OAH group
+  appendGroupToHandler (
+    createGlobalMxsrOahGroup ());
+
+  // create the mxsr2msr OAH group
+  appendGroupToHandler (
+    createGlobalMxsr2msrOahGroup (
+      this));
+
+  // create the MSR OAH group
+  appendGroupToHandler (
+    createGlobalMsrOahGroup ());
+
+  // create the msr2msr OAH group
+  appendGroupToHandler (
+    createGlobalMsr2msrOahGroup ());
+
+  // create the msr2lpsr OAH group
+  appendGroupToHandler (
+    createGlobalMsr2lpsrOahGroup ());
+
+  // create the LPSR OAH group
+  appendGroupToHandler (
+    createGlobalLpsrOahGroup ());
+
+  // create the LilyPond generation OAH group
+  appendGroupToHandler (
+    createGlobalLpsr2lilypondOahGroup ());
+
+#ifdef EXTRA_OAH_IS_ENABLED
+  // create the extra OAH group
+  appendGroupToHandler (
+    createGlobalHarmoniesExtraOahGroup ());
+#endif
+
+  // create the global xml2ly OAH group only now,
+  // after the groups whose options it may use
+  // have been created
+  appendGroupToHandler (
+    createGlobalXml2lyInsiderOahGroup ());
+
+	// ... ... ...
+}
+\end{lstlisting}
+

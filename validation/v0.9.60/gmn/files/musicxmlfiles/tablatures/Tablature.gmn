@@ -1,0 +1,16 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/tablatures/Tablature.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"West Point"> \composer<"Jonatha Brooke", dy=4hs> \auto<autoInstrPos="on"> \instr<"Voice"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<6> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \beamsOff c2/1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \staffFormat<style="6-line"> \auto<autoInstrPos="on"> \instr<"Guitar"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"TAB5"> \key<6> \text<"Tuning D-A-D-G-B-D, Capo 4th fret", dx=-4.4hs, dy=25.4hs>( \stemsOff \beamsOff c#0/16)
+ \stemsOff \beamsOff d#/8 \stemsOff \beamsOff b/8 \stemsOff \beamsOff a#/16 \stemsOff \beamsOff d#/8. \stemsOff \beamsOff b/8 \stemsOff \beamsOff a#/16 \stemsOff \beamsOff d#/16 \stemsOff \beamsOff c#/8. ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Guitar"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<6> \text<"Tuning D-A-D-G-B-D, Capo 4th fret", dx=-4.4hs, dy=25.4hs>( \stemsOff \beamsOff c#0/16)
+ \stemsOff \beamsOff d#/8 \stemsOff \beamsOff b/8 \stemsOff \beamsOff a#/16 \stemsOff \beamsOff d#/8. \stemsOff \beamsOff b/8 \stemsOff \beamsOff a#/16 \stemsOff \beamsOff d#/16 \stemsOff \beamsOff c#/8. ]
+  }

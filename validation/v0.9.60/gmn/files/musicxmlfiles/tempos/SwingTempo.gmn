@@ -1,0 +1,9 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/tempos/SwingTempo.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \tempo<"Swing ", dy=-4hs, dy=2hs> \beamBegin:1 c2/8 b1/8 \beamEnd:1 \beamBegin:1 a/8 g/8 \beamEnd:1 \beamBegin:1 f/8 e/8 \beamEnd:1 \beamBegin:1 d/8 c/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \beamsOff g/1 ]
+  }

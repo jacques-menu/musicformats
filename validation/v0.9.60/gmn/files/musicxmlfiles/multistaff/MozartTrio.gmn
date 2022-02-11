@@ -1,0 +1,124 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/multistaff/MozartTrio.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"Menuetto (Excerpt from Second Trio)"> \composer<"Wolfgang Amadeus Mozart", dy=4hs> \auto<autoInstrPos="on"> \instr<"clarinet in A"> \accol<id=1,  range="1-5"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \intens<"p", dy=14.2hs> \stemsDown \slurBegin:1 \beamBegin:1 c2/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamBegin:1 g/8 \stemsDown e/8 \beamEnd:1 \stemsDown \beamsOff c3/4 \slurEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 g2/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 d/8 \stemsDown f/8 \beamEnd:1 \stemsDown \beamsOff a/4 \slurEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 f/8 \stemsDown d/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 c/8 \stemsDown b1/8 \stemsDown e2/8 \stemsDown d/8 \stemsDown g/8 \stemsDown f/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 5 *)  \stemsDown \slurBegin:1 \beamsOff \acc( d#/4)
+ \stemsDown \beamsOff e/4 \slurEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 c/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsDown \beamBegin:1 g/8 \stemsDown e/8 \beamEnd:1 \stemsDown \beamsOff c3/4 \slurEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 g2/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 7 *)  \stemsDown \beamBegin:1 \acc( d/8)
+ \stemsDown f/8 \beamEnd:1 \stemsDown \beamsOff a/4 \slurEnd:1 _/4 \bar 
+   (* meas. 8 *)  _*3/4 \bar 
+   (* meas. 9 *)  _/4 _/4 \stemsUp \slurBegin:1 \beamBegin:1 \tuplet<"3", dispNote="/8", position="below">( d1/12 \stemsUp a0/12 \stemsUp f/12)
+ \beamEnd:1 \bar 
+   (* meas. 10 *)  \stemsUp \beamBegin:1 a/8 \slurEnd:1 \stemsUp \stacc<position="below">( d1/8)
+ \stemsUp \stacc<position="below">( f/8)
+ \stemsUp \stacc<position="below">( a/8)
+ \stemsUp \stacc<position="below">( d2/8)
+ \stemsUp \stacc<position="below">( f/8)
+ \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsDown \slurBegin:1 \beamBegin:1 a/8 \stemsDown g/8 \stemsDown f/8 \stemsDown e/8 \stemsDown f/8 \stemsDown d/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 12 *)  \stemsDown \slurBegin:1 \beamsOff c/2 \stemsDown \beamBegin:1 e/8 \stemsDown d/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 13 *)  \stemsDown \beamsOff c/4 _/4 \repeatEnd \bar<hidden="true"> 
+   (* meas. 14 *)  \repeatBegin _/4 \bar 
+   (* meas. 15 *)  _*3/4 \bar 
+   (* meas. 16 *)  _*3/4 \bar 
+   (* meas. 17 *)  _*3/4 \bar 
+   (* meas. 18 *)  _/4 _/4 \stemsDown \beamsOff g/4 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"violino I"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<3> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _/4 \bar 
+   (* meas. 2 *)  \intens<"p", dy=0hs> _/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 3 *)  _/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 4 *)  _/4 \stemsUp \beamsOff g#/4 \stemsUp \beamsOff g#/4 \bar 
+   (* meas. 5 *)  _/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 6 *)  _/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff f#/4 _/4 \stemsDown \slurBegin:1 \beamBegin:1 c#2/8 \stemsDown \acc( a#1/8)
+ \beamEnd:1 \bar 
+   (* meas. 8 *)  \stemsDown \beamBegin:1 b/8 \stemsDown d2/8 \beamEnd:1 \stemsDown \beamsOff f#/4 \slurEnd:1 \stemsDown \slurBegin:1 \beamBegin:1 c#/8 \stemsDown \acc( a#1/8)
+ \beamEnd:1 \bar 
+   (* meas. 9 *)  \stemsDown \beamBegin:1 b/8 \stemsDown d2/8 \beamEnd:1 \stemsDown \beamsOff f#/4 \slurEnd:1 _/4 \bar 
+   (* meas. 10 *)  _*3/4 \bar 
+   (* meas. 11 *)  _*3/4 \bar 
+   (* meas. 12 *)  \stemsUp \slurBegin:1 \beamBegin:1 c#1/8 \stemsUp e/8 \stemsUp c#/8 \stemsUp e/8 \stemsUp d/8 \stemsUp e/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff c#/4 _/4 \repeatEnd \bar<hidden="true"> 
+   (* meas. 14 *)  \repeatBegin \stemsUp \slurBegin:1 \beamBegin:1 e/8 \stemsUp g#/8 \beamEnd:1 \bar 
+   (* meas. 15 *)  \stemsUp \beamBegin:1 b/8 \stemsUp g#/8 \beamEnd:1 \stemsDown \beamsOff e2/4 \slurEnd:1 \stemsUp \slurBegin:1 \beamBegin:1 e1/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 16 *)  \stemsDown \beamBegin:1 c#2/8 \stemsDown a1/8 \beamEnd:1 \stemsDown \beamsOff e2/4 \slurEnd:1 \stemsUp \slurBegin:1 \beamBegin:1 e1/8 \stemsUp b/8 \beamEnd:1 \bar 
+   (* meas. 17 *)  \stemsDown \beamBegin:1 d2/8 \stemsDown b1/8 \stemsDown e2/8 \stemsDown d/8 \stemsDown c#/8 \stemsDown a1/8 \slurEnd:1 \beamEnd:1 \bar 
+   (* meas. 18 *)  \stemsUp \slurBegin:1 \beamBegin:1 g#/8 \stemsUp b/8 \beamEnd:1 \stemsDown \beamsOff e2/4 \slurEnd:1 \stemsUp \beamBegin:1 e1/8 \stemsUp g#/8 \beamEnd:1 ]
+ , 
+[ \staff<3> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"violino II"> \barFormat<style= "system", range="3"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<3> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _/4 \bar 
+   (* meas. 2 *)  \intens<"p", dy=0hs> _/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff e/4 \bar 
+   (* meas. 3 *)  _/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff f#/4 \bar 
+   (* meas. 4 *)  _/4 \stemsUp \beamsOff d/4 \stemsUp \beamsOff d/4 \bar 
+   (* meas. 5 *)  _/4 \stemsUp \beamsOff c#/4 \stemsUp \beamsOff c#/4 \bar 
+   (* meas. 6 *)  _/4 \stemsUp \beamsOff e/4 \stemsUp \beamsOff e/4 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff d/4 _/4 \stemsUp \slurBegin:1 \beamsOff \acc( g/4)
+ \bar 
+   (* meas. 8 *)  \stemsUp \beamsOff f#/2 \stemsUp \beamsOff \acc( g/4)
+ \bar 
+   (* meas. 9 *)  \stemsUp \beamsOff f#/2 \slurEnd:1 _/4 \bar 
+   (* meas. 10 *)  _*3/4 \bar 
+   (* meas. 11 *)  _*3/4 \bar 
+   (* meas. 12 *)  \stemsUp \slurBegin:1 \beamsOff a0/2 \stemsUp \beamsOff \acc( g#/4)
+ \slurEnd:1 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff a/4 _/4 \repeatEnd \bar<hidden="true"> 
+   (* meas. 14 *)  \repeatBegin _/4 \bar 
+   (* meas. 15 *)  \intens<"p", dy=0hs> \text<"pizz.", dx=0hs>( \stemsUp \beamsOff {b/4, g#1/4  })
+ \stemsUp \beamsOff {b0/4, g#1/4  } _/4 \bar 
+   (* meas. 16 *)  \stemsUp \beamsOff {a0/4, a1/4  } \stemsUp \beamsOff {a0/4, a1/4  } _/4 \bar 
+   (* meas. 17 *)  \stemsUp \beamsOff {g#/4, b/4  } \stemsUp \beamsOff {g#/4, b/4  } \stemsDown \beamsOff {a/4, c#2/4  } \bar 
+   (* meas. 18 *)  \stemsUp \beamsOff {g#1/4, b/4  } \stemsUp \beamsOff {g#/4, b/4  } _/4 ]
+ , 
+[ \staff<4> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"viola"> \barFormat<style= "system", range="4"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"c3"> \key<3> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _/4 \bar 
+   (* meas. 2 *)  \intens<"p", dy=0hs> _/4 \stemsDown \beamsOff c#/4 \stemsDown \beamsOff c#/4 \bar 
+   (* meas. 3 *)  _/4 \stemsUp \beamsOff b0/4 \stemsUp \beamsOff b/4 \bar 
+   (* meas. 4 *)  _/4 \stemsUp \beamsOff b/4 \stemsUp \beamsOff b/4 \bar 
+   (* meas. 5 *)  _/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 6 *)  _/4 \stemsDown \beamsOff c#1/4 \stemsDown \beamsOff c#/4 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff b0/4 _/4 \stemsDown \slurBegin:1 \beamsOff e1/4 \bar 
+   (* meas. 8 *)  \stemsDown \beamsOff d/2 \stemsDown \beamsOff e/4 \bar 
+   (* meas. 9 *)  \stemsDown \beamsOff d/2 \slurEnd:1 _/4 \bar 
+   (* meas. 10 *)  _*3/4 \bar 
+   (* meas. 11 *)  _*3/4 \bar 
+   (* meas. 12 *)  \stemsUp \beamsOff \tieBegin:1 e0/2. \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff e/4 \tieEnd:1 _/4 \repeatEnd \bar<hidden="true"> 
+   (* meas. 14 *)  \repeatBegin _/4 \bar 
+   (* meas. 15 *)  \text<"pizz.", dx=0hs>( \intens<"p", dy=0hs> \stemsDown \beamsOff {d1/4, e/4  })
+ \stemsDown \beamsOff {d/4, e/4  } _/4 \bar 
+   (* meas. 16 *)  \stemsDown \beamsOff {c#/4, e/4  } \stemsDown \beamsOff {c#/4, e/4  } _/4 \bar 
+   (* meas. 17 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff e/4 \stemsDown \beamsOff e/4 \bar 
+   (* meas. 18 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff e/4 _/4 ]
+ , 
+[ \staff<5> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"violoncello"> \barFormat<style= "system", range="5"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<3> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> _/4 \bar 
+   (* meas. 2 *)  \intens<"p", dy=14.6hs> \stemsDown \beamsOff a0/4 _/4 _/4 \bar 
+   (* meas. 3 *)  \stemsDown \beamsOff d/4 _/4 _/4 \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff e/4 _/4 _/4 \bar 
+   (* meas. 5 *)  \stemsDown \beamsOff f#/4 _/4 _/4 \bar 
+   (* meas. 6 *)  \stemsUp \beamsOff c#/4 _/4 _/4 \bar 
+   (* meas. 7 *)  \stemsDown \beamsOff d/4 _/4 _/4 \bar 
+   (* meas. 8 *)  _*3/4 \bar 
+   (* meas. 9 *)  _*3/4 \bar 
+   (* meas. 10 *)  _*3/4 \bar 
+   (* meas. 11 *)  _*3/4 \bar 
+   (* meas. 12 *)  \stemsUp \slurBegin:1 \beamsOff \stacc<position="below">( e-1/4)
+ \stemsUp \beamsOff \stacc<position="below">( e/4)
+ \stemsUp \beamsOff \stacc<position="below">( e/4)
+ \slurEnd:1 \bar 
+   (* meas. 13 *)  \stemsUp \beamsOff a/4 _/4 \repeatEnd \bar<hidden="true"> 
+   (* meas. 14 *)  \repeatBegin _/4 \bar 
+   (* meas. 15 *)  \intens<"p", dy=0hs> \text<"pizz.", dx=0hs>( \stemsDown \beamsOff e0/4)
+ \stemsDown \beamsOff e/4 _/4 \bar 
+   (* meas. 16 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff e/4 _/4 \bar 
+   (* meas. 17 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff e/4 \stemsDown \beamsOff e/4 \bar 
+   (* meas. 18 *)  \stemsDown \beamsOff e/4 \stemsUp \beamsOff e-1/4 _/4 ]
+  }

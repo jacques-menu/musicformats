@@ -1,0 +1,56 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+
+% -------------------------------------------------------------------------
+\chapter{Debugging}
+% -------------------------------------------------------------------------
+
+Debugging \mf\ can be quite time-consuming. The trace options available have designed to provide fine-grained tracing information to help locate issues.
+
+\function{catchSignals} in \functionName {main} functions
+
+File \wae{enableAbortToDebugErrors.h} contains:
+\begin{lstlisting}[language=CPlusPlus]
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
+#ifndef ___enableAbortToDebugErrorsIfDesired___
+#define ___enableAbortToDebugErrorsIfDesired___
+
+
+// comment the following definition if abort on internal errors is desired
+// CAUTION: DON'T USE THIS IN PRODUCTION CODE,
+// since that could kill a session on a \Web\ server, for example
+
+#ifndef ABORT_TO_DEBUG_ERRORS
+  #define ABORT_TO_DEBUG_ERRORS
+#endif
+
+
+#endif
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Useful options}
+% -------------------------------------------------------------------------
+
+Here are the most basing options used when debugging:
+\begin{itemize}
+\item \optionBoth{trace-passes}{tpasses}
+	this is the first option to use, to locate in which pass the problem arises
+
+\item \optionBoth{input-line-numbers}{iln}
+	this option produces the music elements input-line numbers in the output files
+
+\item the \optionName{display*} options
+
+\end{itemize}

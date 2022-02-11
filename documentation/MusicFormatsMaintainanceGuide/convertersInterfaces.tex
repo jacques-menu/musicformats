@@ -1,0 +1,74 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Converters interfaces}
+% -------------------------------------------------------------------------
+
+These interfaces are a set of functions\index{functions} to run the various converters. They are placed in the corresponding subdirectories of \converters, such as \musicxmlToMusicxmlBoth{musicxml2musicxmlInterface}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/converters/musicxml2musicxml > cat musicxml2musicxmlInterface.h
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
+#ifndef ___musicxml2musicxmlInterface___
+#define ___musicxml2musicxmlInterface___
+
+#include "mfMusicformatsError.h" // for mfMusicformatsError
+
+
+using namespace std;
+
+namespace MusicFormats
+{
+/*
+  The API functions with an options and arguments and no handler
+  are declared in libmusicxml.h
+*/
+
+//_______________________________________________________________________________
+EXP mfMusicformatsError convertMusicxmlFile2musicxmlWithHandler (
+  const char*  fileName,
+  ostream&     out,
+  ostream&     err,
+  S_oahHandler handler);
+
+//_______________________________________________________________________________
+EXP mfMusicformatsError convertMusicxmlFd2musicxmlWithHandler (
+  FILE*        fd,
+  ostream&     out,
+  ostream&     err,
+  S_oahHandler handler);
+
+//_______________________________________________________________________________
+EXP mfMusicformatsError convertMusicxmlString2musicxmlWithHandler (
+  const char*  buffer,
+  ostream&     out,
+  ostream&     err,
+  S_oahHandler handler);
+
+
+}
+
+
+#endif
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+%\section{\fileName{msrapi}}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+%\section{\fileName{lpsrapi}}
+% -------------------------------------------------------------------------
+
+

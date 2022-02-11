@@ -1,0 +1,9 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/basic/MissingBeamEnds.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \composer<"Johann Christoph Pepusch", dy=4hs> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \key<-1> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \text<"Allegro", dx=-9.8hs, dy=22hs>( _/16)
+ \stemsUp \beamBegin:1 c0/16 \stemsDown e/16 \stemsDown c/16 \stemsDown \beamsOff f/4 _/16 \stemsDown g/16 \stemsDown b&/16 \stemsDown d1/16 \beamEnd:1 \stemsDown \beamsOff e0/4 ]
+  }

@@ -1,0 +1,14 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/misc/Repeat1.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Flute"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamsOff c2/4 \stemsUp \beamsOff g1/4 \stemsDown \beamsOff c2/4 \stemsDown \beamsOff d/4 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff c/4 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \bar 
+   (* meas. 3 *)  \volta<"1", "1.">( \stemsDown \beamsOff e/2 \stemsDown \beamsOff d/2)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 4 *)  \volta<"2", "2.">( \stemsDown \beamsOff g/2 _/2)
+ \bar 
+   (* meas. 5 *)  _/1 ]
+  }

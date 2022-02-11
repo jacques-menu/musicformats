@@ -1,0 +1,37 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Command line samples}
+% -------------------------------------------------------------------------
+
+The \src{clisamples} folder contains example of the use of \mf\ in CLI tools. They are out of the library proper, and built with a specific {\tt Makefile}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > ll samples/
+total 320
+ 0 drwxr-xr-x  16 jacquesmenu  staff    512 Jun 29 09:59:07 2021 ./
+ 0 drwxr-xr-x  28 jacquesmenu  staff    896 Jul  1 05:37:35 2021 ../
+16 -rw-r--r--   1 jacquesmenu  staff   6148 May 26 08:20:55 2021 .DS_Store
+ 8 -rw-r--r--   1 jacquesmenu  staff    116 Apr 22 15:49:06 2021 .gitignore
+40 -rw-r--r--@  1 jacquesmenu  staff  18344 Jun 29 11:05:18 2021 LilyPondIssue34.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff   2101 Jun 29 10:00:56 2021 Makefile
+40 -rw-r--r--@  1 jacquesmenu  staff  18362 Jun 29 11:05:10 2021 Mikrokosmos3Wandering.cpp
+24 -rw-r--r--@  1 jacquesmenu  staff  10017 May 31 11:12:12 2021 MusicAndHarmonies.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff   3117 May 31 11:17:27 2021 libMultipleInitsTest.cpp
+48 -rw-r--r--@  1 jacquesmenu  staff  21459 Jun 29 11:05:02 2021 msdlconverter.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff    898 May 31 11:15:59 2021 musicformatsversion.cpp
+24 -rw-r--r--@  1 jacquesmenu  staff   8642 Jun 28 07:42:57 2021 xml2Any.cpp
+24 -rw-r--r--@  1 jacquesmenu  staff  10085 Jul  1 06:22:13 2021 xml2brl.cpp
+24 -rw-r--r--@  1 jacquesmenu  staff  10519 Jul  1 06:22:50 2021 xml2gmn.cpp
+24 -rw-r--r--@  1 jacquesmenu  staff  10320 Jul  1 00:09:51 2021 xml2ly.cpp
+24 -rw-r--r--@  1 jacquesmenu  staff  10473 Jul  1 06:21:10 2021 xml2xml.cpp
+\end{lstlisting}
+
+All the \fileName{*.cpp} files contain a \mainFunction\ function\index{functions} using the interfaces for their purpose. Among them:
+\begin{itemize}
+\item {\tt libMultipleInitsTest.cpp} is a maintainance tool to check that the \mf\ library is not initialized more that once;
+\item {\tt MusicAndHarmonies.cpp} creates a score at random with harmonies in it;
+\item {\tt Mikrokosmos3Wandering.cpp} and {\tt LilyPondIssue34.cpp} are generators;
+\item {\tt xml2Any.cpp} uses the {\tt oahOptionsVector} way to supply arguments instead of {\tt arg/argv};
+\item {\tt xml2ly}, {\tt xml2brl}, {\tt xml2xml} and {\tt xml2gmn} are converters from \mxml\ to other formats;
+\item {\tt msdlconverter.cpp} it the MSDL converter.
+\end{itemize}

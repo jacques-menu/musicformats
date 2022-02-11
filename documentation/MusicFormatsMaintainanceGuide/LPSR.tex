@@ -1,0 +1,65 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{LilyPond Scores Representation (LPSR)}
+% -------------------------------------------------------------------------
+
+
+An LPSR description contains two components:
+\begin{itemize}
+\item the first one is an MSR, thus the whole music score description;
+\item the second one is a description of the structure of the score mirroring \lily's specific blocks such as \lilycmd {book} and \lilycmd {layout}.
+\end{itemize}
+
+\Class{lpsrScore} thus contains:
+\begin{lstlisting}[language=CPlusPlus]
+    // MSR data
+    S_msrScore            fMsrScore;
+
+		// ... ... ...
+
+    // LilyPond stuff
+    S_lpsrHeader          fScoreHeader;
+    S_lpsrPaper           fScorePaper;
+    S_lpsrLayout          fScoreLayout;
+
+    // variables, voices and stanzas
+    list<S_msrElement>    fScoreElementsList;
+
+    // score LPSR book blocks list
+    list<S_lpsrBookBlock> fScoreBookBlocksList;
+    S_lpsrScoreBlock      fScoreScoreBlock; // JMI ???
+\end{lstlisting}
+
+% -------------------------------------------------------------------------
+\section{LPSR basic types}\label{LPSR basic types}
+% -------------------------------------------------------------------------
+
+Some types used thoughout \lpsrRepr\ are defined in \lpsrBoth{lpsrBasicTypes}:%%%JMI
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/lpsr >  egrep -rIn  '^// ' lpsrBasicTypes.h
+lpsrBasicTypes.h:28:// score output kinds
+lpsrBasicTypes.h:50:// accidental styles
+lpsrBasicTypes.h:53:// JMI there are new ones in LilyPond 2.22
+lpsrBasicTypes.h:87:// chords languages
+lpsrBasicTypes.h:107:// whole notes
+lpsrBasicTypes.h:118:// dotted durations
+lpsrBasicTypes.h:129:// rests measures
+lpsrBasicTypes.h:135:// texts lists
+lpsrBasicTypes.h:141:// pitches and octaves
+lpsrBasicTypes.h:151:// lyrics durations
+lpsrBasicTypes.h:168:// initialization
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Adapting LilyPond code generation to the target version number}
+% -------------------------------------------------------------------------
+
+%%%JMI
+As of version 2.22, {\tt compressFullBarRests} has been replaced by {\tt compressEmptyMeasures} for clarity.
+
+Such is done specific methods:
+\begin{lstlisting}[language=CPlusPlus]
+
+\end{lstlisting}

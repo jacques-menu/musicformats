@@ -1,0 +1,21 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/gracenotes/GraceNotesBeforeBackup.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Piano"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<-1> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsUp \beamsOff f/2 \stemsUp \beamsOff \trill( g/4)
+ \stemsUp \grace( \beamsOff f/16 \stemsUp \beamsOff g/16)
+ \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff a/4 \stemsUp \beamBegin:1 \tuplet<"", dispNote="/8">( f/12 \stemsUp a/12 \stemsUp c2/12)
+ \beamEnd:1 \stemsDown \beamBegin:1 \tuplet<"", dispNote="/8">( f/12 \stemsDown f/12 \stemsDown f/12)
+ \beamEnd:1 ]
+ , 
+[ \staff<2> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"f4"> \key<-1> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \stemsDown \beamBegin:1 \tuplet<"", dispNote="/8">( c0/12 \stemsDown f/12 \stemsDown a/12)
+ \beamEnd:1 \stemsDown \beamBegin:1 \tuplet<"", dispNote="/8">( c/12 \stemsDown f/12 \stemsDown a/12)
+ \beamEnd:1 \stemsDown \beamBegin:1 \tuplet<"", dispNote="/8">( c/12 \stemsDown e/12 \stemsDown g/12)
+ \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamBegin:1 \tuplet<"", dispNote="/8">( f/12 \stemsDown a/12 \stemsDown c1/12)
+ \beamEnd:1 _/4 _/4 ]
+  }

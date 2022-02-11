@@ -1,0 +1,13 @@
+# contents
+  -title This year's title
+  -subtitle 'Last year's quoted multi-word subtitle'
+  -subsubtitle "Double quoted multi-word subsubtitle"
+
+# display
+  -display-options-values
+
+# LilyPond
+  -lilypond-generation-infos
+
+# output
+  -auto-output-file-name

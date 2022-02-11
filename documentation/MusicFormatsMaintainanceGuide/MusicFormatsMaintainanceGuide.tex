@@ -1,0 +1,392 @@
+% MusicFormats maintainance guide
+% Jacques Menu, 2021-2022
+
+\documentclass[11pt,a4paper]{report}
+
+
+% -------------------------------------------------------------------------
+% import common LaTeX settings
+% -------------------------------------------------------------------------
+
+\usepackage{import}
+
+\subimport{../CommonLaTeXFiles}{MusicFormatsLaTeXSettings}
+
+
+% -------------------------------------------------------------------------
+% indexing (specific to this document)
+% -------------------------------------------------------------------------
+
+\makeindex[name=Main, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Main index, intoc]
+%\makeindex[columns=2, title=Index, intoc]
+% typically, \printindex is placed at the end of the document
+% https://mirror.foobar.to/CTAN/macros/latex/contrib/imakeidx/imakeidx.pdf
+% https://fr.overleaf.com/learn/latex/Indices
+% https://fr.overleaf.com/learn/latex/Indices#Reference_guide
+
+% JMI don't create too many indexes, this causes idxlayout not to produce any indexes at all!
+
+\makeindex[name=Files, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Files index, intoc]
+
+\makeindex[name=Types, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Types index, intoc]
+
+\makeindex[name=MethodsAndFields, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Methods and fields index, intoc]
+
+\makeindex[name=ConstantsFunctionsAndVariables, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title={Constants, functions and variables index}, intoc]
+
+\makeindex[name=Options, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=Options, intoc]
+
+\makeindex[name=MusicXML, options= -s ../CommonLaTeXFiles/MusicFormats.ist, columns=2, title=MusicXML index, intoc]
+
+\indexsetup{level=\section}
+
+
+%\usepackage{cleveref}
+	% http://tug.ctan.org/tex-archive/macros/latex/contrib/cleveref/cleveref.pdf
+
+
+% -------------------------------------------------------------------------
+\begin{document}
+% -------------------------------------------------------------------------
+
+\begin{titlepage}
+  \begin{center}
+    \vspace*{2cm}
+
+    \textbf{
+      \LARGE{\mf\ maintainance guide} \\[10pt]
+			\Large{\url{https://github.com/jacques-menu/musicformats}}
+			}
+
+    \vspace{0.25cm}
+
+    \large{v\input{../MusicFormatsVersionNumber.txt} (\today)}
+
+    \vspace{0.75cm}
+
+    \large{\textbf{Jacques Menu}}
+
+    \vspace{2.5cm}
+
+\begin{turn}{1}
+\maxsizebox{0.9\linewidth}{5cm}{
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Terminal]
+void msrSegment::browseData (basevisitor* v)
+{
+	// ... ... ...
+
+  for (
+    list<S_msrMeasure>::const_iterator i = fSegmentMeasuresList.begin ();
+    i != fSegmentMeasuresList.end ();
+    ++i
+  ) {
+    // browse the element
+    msrBrowser<msrMeasure> browser (v);
+    browser.browse (*(*i));
+  } // for
+
+	// ... ... ...
+}\end{lstlisting} % no line break here
+\end{minipage}
+}
+\end{turn}
+
+    \vspace{1.5cm}
+
+\begin{turn}{-1}
+\maxsizebox{0.9\linewidth}{5cm}{
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Terminal]
+void msr2msrTranslator::visitStart (S_msrClef& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrClef" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  fCurrentVoiceClone->
+    appendClefToVoice (elt);
+}\end{lstlisting} % no line break here
+\end{minipage}
+}
+\end{turn}
+
+  \vfill
+
+  \end{center}
+\end{titlepage}
+
+\abstract {
+This document presents the internal working of \mf. It is part of the \mf\ documentation, to be found at \url{https://github.com/jacques-menu/musicformats/tree/dev/documentation}.
+}
+
+{
+	% reduce font size for tables and lists
+	\small
+
+	% reduce vertical size of tables and lists
+  \setlength {\parskip} {0.3ex plus \baselineskip minus 2pt}
+
+  \tableofcontents
+
+  \listoffigures
+
+  \lstlistoflistings
+}
+
+
+% -------------------------------------------------------------------------
+\part{Overview of MusicFormats}
+% -------------------------------------------------------------------------
+
+% now we can set the regular fancyhead
+\fancyhead[L]{\nouppercase\leftmark}
+\fancyhead[C]{}
+\fancyhead[R]{\nouppercase\rightmark}
+
+
+\subimport{./}{introduction}
+
+\subimport{./}{documentation}
+
+\subimport{./}{buildingMusicFormats}
+
+\subimport{./}{codeBaseStructure}
+
+\subimport{./}{components}
+
+\subimport{./}{clisamples}
+
+\subimport{./}{WAE}
+
+\subimport{./}{traceFacility}
+
+\subimport{./}{multiLingualSupport}
+
+\subimport{./}{textualInputAndOutput}
+
+\subimport{./}{binaryDataOutput}
+
+\subimport{./}{CPUMeasurements}
+
+
+% -------------------------------------------------------------------------
+\part{The two-phase visitors pattern}
+% -------------------------------------------------------------------------
+
+\subimport{./}{twoPhaseVisitorsPattern}
+
+
+% -------------------------------------------------------------------------
+\part{Programming style and conventions}
+% -------------------------------------------------------------------------
+
+\subimport{./}{programmingStyleAndConventions}
+
+
+% -------------------------------------------------------------------------
+\part{MusicFormats components}
+% -------------------------------------------------------------------------
+
+\subimport{./}{MFC}
+
+
+% -------------------------------------------------------------------------
+\part{Options and help}
+% -------------------------------------------------------------------------
+
+\subimport{./}{OAH}
+
+
+% -------------------------------------------------------------------------
+\part{Representations}
+% -------------------------------------------------------------------------
+
+\subimport{./}{representationsGeneralPrinciples.tex}
+
+\subimport{./}{displayingRepresentations}
+
+\subimport{./}{MSR}
+
+\subimport{./}{msrTimeOrientedRepresentation}
+
+\subimport{./}{pathToVoice}
+
+\subimport{./}{LPSR}
+
+\subimport{./}{BSR}
+
+\subimport{./}{MXSR}
+
+
+% -------------------------------------------------------------------------
+\part{Passes}
+% -------------------------------------------------------------------------
+
+\subimport{./}{passes}
+
+\subimport{./}{lilypondGeneration}
+
+\subimport{./}{brailleGeneration}
+
+\subimport{./}{musicxmlGeneration}
+
+\subimport{./}{guidoGeneration}
+
+
+% -------------------------------------------------------------------------
+\part{Generators}
+% -------------------------------------------------------------------------
+
+\subimport{./}{generators}
+
+
+% -------------------------------------------------------------------------
+\part{Converters}
+% -------------------------------------------------------------------------
+
+\subimport{./}{converters}
+
+
+% -------------------------------------------------------------------------
+\part{Interfaces}
+% -------------------------------------------------------------------------
+
+\subimport{./}{libraryInterfaces}
+
+\subimport{./}{representationsInterfaces}
+
+\subimport{./}{passesInterfaces}
+
+\subimport{./}{convertersInterfaces}
+
+
+% -------------------------------------------------------------------------
+\part{Selected topics}
+% -------------------------------------------------------------------------
+
+% initializations
+% -------------------------------------------------------------------------
+
+\subimport{./}{initializations}
+
+
+% the OAH atoms collection
+% -------------------------------------------------------------------------
+
+\subimport{./}{theOAHAtomsCollection.tex}
+
+
+% MSR
+% -------------------------------------------------------------------------
+
+\subimport{./}{measuresHandling}
+
+\subimport{./}{positionsInMeasures}
+
+\subimport{./}{finalizations}
+
+\subimport{./}{temposHandling}
+
+\subimport{./}{positionsInMeasures}
+
+\subimport{./}{notesHandling}
+
+\subimport{./}{segmentsHandling}
+
+\subimport{./}{beatRepeatsHandling}
+
+\subimport{./}{measureRepeatsHandling}
+
+\subimport{./}{fullMeasureRestsHandling}
+
+\subimport{./}{repeatsHandling}
+
+\subimport{./}{voicesHandling}
+
+\subimport{./}{stavesHandling}
+
+\subimport{./}{partsHandling}
+
+\subimport{./}{scoresHandling}
+
+\subimport{./}{booksHandling}
+
+\subimport{./}{ornamentsHandling}
+
+\subimport{./}{tiesHandling}
+
+\subimport{./}{dynamicsHandling}
+
+\subimport{./}{beamsHandling}
+
+\subimport{./}{slursHandling}
+
+\subimport{./}{graceNotesGroupsHandling}
+
+\subimport{./}{chordsHandling}
+
+\subimport{./}{tupletsHandling}
+
+\subimport{./}{harmoniesHandling}
+
+\subimport{./}{figuredBassElementsHandling}
+
+\subimport{./}{lyricsHandling}
+
+\subimport{./}{fullMeasureRestsHandling}
+
+\subimport{./}{MIDIHandling}
+
+
+% -------------------------------------------------------------------------
+\part{Music Scores Description Language (MSDL)}
+% -------------------------------------------------------------------------
+
+\subimport{./}{MSDL}
+
+
+% -------------------------------------------------------------------------
+\part{Debugging}
+% -------------------------------------------------------------------------
+
+\subimport{./}{debugging}
+
+
+% -------------------------------------------------------------------------
+% postamble
+% -------------------------------------------------------------------------
+
+% -------------------------------------------------------------------------
+\part{Indexes}
+% -------------------------------------------------------------------------
+
+%%%JMI There are several thematic indexes apart from the main, alphabetical one, to provide rich cross-indexing in this document.
+
+% back to the lists fancyhead settings:
+\fancyhead[L]{}
+\fancyhead[C]{\nouppercase\leftmark}
+\fancyhead[R]{}
+
+\printindex[Files]
+
+\printindex[Types]
+\printindex[MethodsAndFields]
+
+\printindex[ConstantsFunctionsAndVariables]
+
+\printindex[Options]
+
+\printindex[MusicXML]
+
+\printindex[Main]
+
+
+% -------------------------------------------------------------------------
+\end{document}
+% -------------------------------------------------------------------------

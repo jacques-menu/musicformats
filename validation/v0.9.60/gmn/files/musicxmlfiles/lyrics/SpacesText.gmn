@@ -1,0 +1,20 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/lyrics/SpacesText.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<"越後獅子"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"2/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"Allegro",fsize=12pt,fattrib="b", dy=0.6hs> \stemsUp \beamBegin:1 a/8 \stemsUp a/8 \stemsUp b/8 \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff \lyrics<"　", autopos="on">( \acc( f#2/8)
+)
+ \stemsDown \beamsOff \lyrics<"サイ@", autopos="on">( f#/4)
+ \stemsDown \beamsOff e/8 \bar 
+   (* meas. 3 *)  \stemsDown \beamBegin:1 \lyrics<"タ", autopos="on">( c/8)
+ \stemsDown e/16 \stemsDown c/16 \beamEnd:1 \stemsUp \beamBegin:1 \lyrics<"リ", autopos="on">( b1/8)
+ \stemsUp a/8 \beamEnd:1 \bar 
+   (* meas. 4 *)  \stemsDown \beamBegin:1 \lyrics<"　", autopos="on">( b/8)
+ \stemsDown \lyrics<"サ", autopos="on">( c2/8)
+ \stemsDown \lyrics<"カ", autopos="on">( e/8)
+ \stemsDown a1/8 \beamEnd:1 \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff e/4 _/4 ]
+  }

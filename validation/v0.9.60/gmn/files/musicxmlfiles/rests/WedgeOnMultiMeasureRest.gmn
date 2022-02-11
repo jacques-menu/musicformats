@@ -1,0 +1,32 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/rests/WedgeOnMultiMeasureRest.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"Piano"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<1> \meter<"4/4", autoBarlines="off", autoMeasuresNum="system"> \intens<"p", dy=-3.214hs> \crescBegin<dy=-2hs> \stemsUp \beamsOff e/4 \stemsUp \beamsOff f#/4 \stemsUp \beamsOff g/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 2 *)  \stemsDown \beamsOff b/4 \stemsDown \beamsOff c2/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff \acc( d#/4)
+ \crescEnd<dy=13hs> \bar 
+   (* meas. 3 *)  \intens<"f", dy=-3hs> \stemsDown \beamsOff e/4 _/4 _/2 \bar 
+   (* meas. 4 *)  _/1 \bar 
+   (* meas. 5 *)  \intens<"mf", dy=-3.36hs> \dimBegin<dy=-2hs> \stemsDown \beamsOff e/4 \stemsDown \beamsOff \acc( d#/4)
+ \stemsDown \beamsOff \acc( d/4)
+ \stemsDown \beamsOff c/4 \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff b1/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \dimEnd<dy=13hs> \bar 
+   (* meas. 7 *)  _/1 \bar 
+   (* meas. 8 *)  _/1 \bar 
+   (* meas. 9 *)  _/1 \bar 
+   (* meas. 10 *)  _/1 \bar 
+   (* meas. 11 *)  _/1 \bar 
+   (* meas. 12 *)  _/1 \bar 
+   (* meas. 13 *)  \intens<"p", dy=-2.536hs> \crescBegin<dy=-2hs> \stemsDown \beamsOff e2/4 \stemsDown \beamsOff \acc( d#/4)
+ \stemsDown \beamsOff \acc( d/4)
+ \stemsDown \beamsOff c/4 \bar 
+   (* meas. 14 *)  \stemsDown \beamsOff b1/4 \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \stemsUp \beamsOff f#/4 \crescEnd<dy=13hs> \bar 
+   (* meas. 15 *)  _/1 \bar 
+   (* meas. 16 *)  \crescBegin<dy=-2hs> \stemsAuto \beamsOff \tieBegin:1 g/1 \bar 
+   (* meas. 17 *)  \beamsOff g/1 \tieEnd:1 \crescEnd<dy=13hs> \bar 
+   (* meas. 18 *)  _/2 \crescBegin<dy=-2hs> \stemsDown \beamsOff c2/4 \stemsDown \beamsOff d/4 \crescEnd<dy=13hs> \bar 
+   (* meas. 19 *)  \crescBegin<dy=-2hs> \stemsDown \beamsOff e/2 \stemsDown \beamsOff g/2 \crescEnd<dy=13hs> \bar 
+   (* meas. 20 *)  \stemsAuto \beamsOff c/1 ]
+  }

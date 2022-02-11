@@ -1,0 +1,91 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Part groups}
+% -------------------------------------------------------------------------
+
+In \mxml, part groups can overlap, even though no one seems ever to have needed that. That seems to be more a feature in the Finale handling of \mxml export that a true musical need.
+
+\msrRepr\ does not support overlapping part group. Handling part groups is done in \mxsrToMsrBoth{mxsr2msrTranslator.h}, where overlapping groups are identified and rejected:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly partgroups/OverlappingPartGroups.xml
+### MusicXML ERROR ### partgroups/OverlappingPartGroups.xml:169:
+There are overlapping part groups, namely:
+  '2' -=> PartGroup_6 ('2', partGroupName "1
+2"), lines 164..169
+and
+  '1' -=> PartGroup_2 ('1', partGroupName ""), lines 76..170
+
+Please contact the maintainers of MusicFormats (see option '-c, -contact'):
+  either you found a bug in the xml2ly converter,
+  or this MusicXML data is the first-ever real-world case
+  of a score exhibiting overlapping part groups.
+  Exception caught: mfException:
+There are overlapping part groups, namely:
+  '2' -=> PartGroup_6 ('2', partGroupName "1
+2"), lines 164..169
+and
+  '1' -=> PartGroup_2 ('1', partGroupName ""), lines 76..170
+
+Please contact the maintainers of MusicFormats (see option '-c, -contact'):
+  either you found a bug in the xml2ly converter,
+  or this MusicXML data is the first-ever real-world case
+  of a score exhibiting overlapping part groups.
+
+  Error message(s) were issued for input line 169
+  ### xml2ly gIndenter final value: 1 ###
+### Conversion from MusicXML to LilyPond failed ###
+\end{lstlisting}
+
+Class {\tt mxmlPartGroupDescr} contains:
+\begin{lstlisting}[language=CPlusPlus]
+struct mxmlPartGroupDescr : public smartable
+{
+/*
+  positions represent the order in which the parts appear in <part-list />
+*/
+
+	// ... ... ...
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    int                   fStartInputLineNumber;
+    int                   fStopInputLineNumber;
+
+    int                   fPartGroupNumber; // may be reused later
+
+    S_msrPartGroup        fPartGroup;
+
+    int                   fStartPosition;
+    int                   fStopPosition;
+};
+\end{lstlisting}
+
+Part groups numbers number re-used and they can be nested, so there is an implicit part group at the top of their hierachy, attached to the \class{msrScore}:
+\begin{lstlisting}[language=CPlusPlus]
+class EXP mxsr2msrSkeletonBuilder :
+	// ... ... ...
+
+    // an implicit part group has to be created to contain everything,
+    // since there can be parts out of any explicit part group
+    S_mxmlPartGroupDescr      fImplicitPartGroupDescr;
+    S_msrPartGroup            fImplicitPartGroup;
+
+    void                      createImplicitPartGroup ();
+
+    // part groups numbers can be re-used, they're no identifier
+    // we use a map to access them by part group number
+    int                       fPartGroupsCounter;
+    vector<S_mxmlPartGroupDescr>
+                              fPartGroupDescsVector;
+    map<int, S_mxmlPartGroupDescr>
+                              fAllPartGroupDescrsMap;
+    map<int, S_mxmlPartGroupDescr>
+                              fStartedPartGroupDescrsMap;
+
+	// ... ... ...
+\end{lstlisting}
+

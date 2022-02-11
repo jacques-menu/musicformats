@@ -1,0 +1,12 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/slurs/ChordWithSlurs.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"C", autoBarlines="off", autoMeasuresNum="system"> \intens<"p", dy=0hs> \stemsDown \beamsOff \stacc<type="heavy">( {c2/8, e/8, g/8, \acc( b&/8)
+  })
+ _/8 \stemsDown \slurBegin:1 \beamsOff d/2. \bar 
+   (* meas. 2 *)  \intens<"f", dy=0hs> \stemsDown \slurBegin:2 \beamsOff {a1/2, c2/2, e/2, a/2  } \slurEnd:1 \stemsDown \beamsOff \stacc( {b1/2, d2/2, f/2  })
+ \slurEnd:2 ]
+  }

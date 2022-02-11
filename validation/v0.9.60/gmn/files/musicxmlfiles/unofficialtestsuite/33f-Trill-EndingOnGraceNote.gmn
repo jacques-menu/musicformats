@@ -1,0 +1,12 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/33f-Trill-EndingOnGraceNote.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \accol<id=0, range="1-2"> \barFormat<style= "system", range="1-2"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"6/8", autoBarlines="off", autoMeasuresNum="system"> \slurBegin:1<curve="up"> \beamsOff e2/4 \beamBegin:1 \acc( f#/16)
+ \trill( g/16)
+ \slurEnd:1 \beamEnd:1 \grace( \beamsOff b/16)
+ \beamsOff a/4. \grace( \beamBegin:1 g/16 a/16 \beamEnd:1)
+ ]
+  }

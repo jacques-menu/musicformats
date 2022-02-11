@@ -1,0 +1,44 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/misc/Sjosala_vals.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \auto<autoInstrPos="on"> \instr<"MusicXML Part"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \meter<"3/4", autoBarlines="off", autoMeasuresNum="system"> \tempo<"[1/4] = 120", dy=-19hs> \stemsUp \beamsOff e/4. \stemsUp \beamsOff f/8 \stemsUp \beamBegin:1 \acc( f#/8)
+ \stemsUp g/8 \beamEnd:1 \bar 
+   (* meas. 2 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \stemsUp \beamBegin:1 \acc( f#/8)
+ \stemsUp g/8 \beamEnd:1 \bar 
+   (* meas. 3 *)  \stemsUp \beamsOff a/4 \stemsUp \beamsOff \stacc<position="below">( g/4)
+ \stemsDown \beamsOff \stacc<position="above">( c2/4)
+ \bar 
+   (* meas. 4 *)  \stemsDown \beamsOff b1/2. \breathMark<dy=-3hs> \bar 
+   (* meas. 5 *)  \stemsUp \beamsOff g/4. \stemsUp \beamsOff a/8 \stemsDown \beamBegin:1 b/8 \stemsDown c2/8 \beamEnd:1 \bar 
+   (* meas. 6 *)  \stemsDown \beamsOff d/4 \stemsDown \beamsOff e/4 \stemsDown \beamsOff f/4 \bar 
+   (* meas. 7 *)  \stemsUp \beamsOff g1/4 \stemsUp \beamsOff a/4 \stemsDown \beamsOff b/4 \bar 
+   (* meas. 8 *)  \volta<"1", "1.">( \stemsDown \beamsOff c2/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff e/4 \breathMark<dy=-3hs>)
+ \repeatEnd \bar<hidden="true"> 
+   (* meas. 9 *)  \volta<"2", "2.", format="|-">( \stemsDown \beamsOff c/2.)
+ \bar 
+   (* meas. 10 *)  \stemsDown \beamsOff e/4. \stemsDown \beamsOff \acc( d#/8)
+ \stemsDown \beamBegin:1 e/8 \stemsDown f/8 \beamEnd:1 \bar 
+   (* meas. 11 *)  \stemsDown \beamsOff g/4 \stemsDown \beamsOff f/4 \stemsDown \beamsOff e/4 \bar 
+   (* meas. 12 *)  \stemsDown \beamsOff d/4. \stemsDown \beamsOff \acc( c#/8)
+ \stemsDown \beamBegin:1 d/8 \stemsDown e/8 \beamEnd:1 \bar 
+   (* meas. 13 *)  \stemsDown \beamsOff f/2 \breathMark<dy=-3hs> \stemsDown \beamsOff d/4 \bar 
+   (* meas. 14 *)  \stemsDown \beamsOff c/4. \stemsDown \beamsOff b1/8 \stemsDown \beamBegin:1 c2/8 \stemsDown d/8 \beamEnd:1 \bar 
+   (* meas. 15 *)  \stemsDown \beamsOff e/4 \stemsDown \beamsOff d/4 \stemsDown \beamsOff c/4 \bar 
+   (* meas. 16 *)  \stemsDown \beamsOff b1/4. \stemsUp \beamsOff \acc( a#/8)
+ \stemsDown \beamBegin:1 b/8 \stemsDown c2/8 \beamEnd:1 \bar 
+   (* meas. 17 *)  \stemsDown \beamsOff d/2 \breathMark<dy=-3hs> \stemsDown \beamsOff b1/4 \bar 
+   (* meas. 18 *)  \stemsUp \beamsOff a/4. \stemsUp \beamsOff \acc( g#/8)
+ \stemsUp \beamBegin:1 a/8 \stemsUp b/8 \beamEnd:1 \bar 
+   (* meas. 19 *)  \stemsDown \beamsOff c2/4 \stemsDown \beamsOff b1/4 \stemsUp \beamsOff a/4 \bar 
+   (* meas. 20 *)  \stemsUp \beamBegin:1 g/8 \stemsUp a/8 \beamEnd:1 \stemsUp \beamBegin:1 g/8 \stemsUp f/8 \beamEnd:1 \stemsUp \beamBegin:1 e/8 \stemsUp f/8 \beamEnd:1 \bar 
+   (* meas. 21 *)  \stemsUp \beamsOff g/2 \stemsUp \beamsOff g/4 \breathMark<dy=-3hs> \bar 
+   (* meas. 22 *)  \stemsUp \beamsOff a/4 \stemsDown \beamsOff \stacc<position="above">( f2/4)
+ \stemsDown \beamsOff \stacc<position="above">( f/4)
+ \bar 
+   (* meas. 23 *)  \stemsUp \beamsOff g1/4 \stemsDown \beamsOff b/4 \stemsDown \beamsOff d2/4 \bar 
+   (* meas. 24 *)  \stemsDown \beamsOff c/4 \stemsDown \beamBegin:1 c/8 \stemsDown b1/8 \beamEnd:1 \stemsDown \beamBegin:1 c2/8 \stemsDown d/8 \beamEnd:1 \bar 
+   (* meas. 25 *)  \stemsDown \beamsOff c/2 _/4 ]
+  }

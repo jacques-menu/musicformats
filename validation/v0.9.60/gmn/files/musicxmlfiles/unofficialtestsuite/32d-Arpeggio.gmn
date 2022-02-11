@@ -1,0 +1,14 @@
+(*
+  gmn code converted from '../files/musicxmlfiles/unofficialtestsuite/32d-Arpeggio.xml'
+  using libmusicxml v.3.20
+  and the embedded xml2guido converter v.3.1
+*)
+{[ \staff<1> \set<autoHideTiedAccidentals="on"> \barFormat<style= "system", range="1"> \bar<hidden="true"> 
+   (* meas. 1 *)  \clef<"g2"> \key<0> \beamsOff \arpeggio( {c/4, e2/4, g/4  })
+ \beamsOff \arpeggio<direction="up">( {c1/4, e2/4, g/4  })
+ \beamsOff \arpeggio( {c1/4, e2/4, g/4  })
+ \beamsOff \arpeggio<direction="down">( {c1/4, e2/4, g/4  })
+ \beamsOff \arpeggio( {c1/4, e2/4, g/4  })
+ \beamsOff {c1/4, e2/4, g/4  } \beamsOff \arpeggio( {c1/4, e2/4, g/4  })
+ ]
+  }
