@@ -533,19 +533,19 @@ ostream& operator<< (ostream& os, const S_bsrUTF8BrailleGenerator& elt)
 }
 
 //______________________________________________________________________________
-S_bsrUTF8DebugBrailleGenerator bsrUTF8DebugBrailleGenerator::create (
+S_bsrUtf8DebugBrailleGenerator bsrUtf8DebugBrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
   ostream&            brailleOutputStream)
 {
-  bsrUTF8DebugBrailleGenerator* o =
-    new bsrUTF8DebugBrailleGenerator (
+  bsrUtf8DebugBrailleGenerator* o =
+    new bsrUtf8DebugBrailleGenerator (
       byteOrderingKind,
       brailleOutputStream);
   assert (o != nullptr);
   return o;
 }
 
-bsrUTF8DebugBrailleGenerator::bsrUTF8DebugBrailleGenerator (
+bsrUtf8DebugBrailleGenerator::bsrUtf8DebugBrailleGenerator (
   bsrByteOrderingKind byteOrderingKind,
   ostream&            brailleOutputStream)
     : bsrUTF8BrailleGenerator (
@@ -570,15 +570,15 @@ bsrUTF8DebugBrailleGenerator::bsrUTF8DebugBrailleGenerator (
 //  writeTestData (brailleOutputStream);
 }
 
-bsrUTF8DebugBrailleGenerator::~bsrUTF8DebugBrailleGenerator ()
+bsrUtf8DebugBrailleGenerator::~bsrUtf8DebugBrailleGenerator ()
 {}
 
-string bsrUTF8DebugBrailleGenerator::asString () const
+string bsrUtf8DebugBrailleGenerator::asString () const
 {
   stringstream s;
 
   s <<
-    "UTF8DebugBrailleGenerator" <<
+    "Utf8DebugBrailleGenerator" <<
     ", byteOrderingKind: " <<
     bsrByteOrderingKindAsString (
       fByteOrderingKind);
@@ -586,7 +586,7 @@ string bsrUTF8DebugBrailleGenerator::asString () const
   return s.str ();
 }
 
-void bsrUTF8DebugBrailleGenerator::generateCodeForMusicHeading (
+void bsrUtf8DebugBrailleGenerator::generateCodeForMusicHeading (
   S_bsrMusicHeading musicHeading)
 {
   this->
@@ -607,7 +607,7 @@ void bsrUTF8DebugBrailleGenerator::generateCodeForMusicHeading (
       bsrCellKind::kCellEOL);
 }
 
-void bsrUTF8DebugBrailleGenerator::generateCodeForLineContents (
+void bsrUtf8DebugBrailleGenerator::generateCodeForLineContents (
   S_bsrLineContents lineContents)
 {
   this->
@@ -638,12 +638,12 @@ if (true) // JMI TESTS
       bsrCellKind::kCellEOL);
 }
 
-void bsrUTF8DebugBrailleGenerator::print (ostream& os) const
+void bsrUtf8DebugBrailleGenerator::print (ostream& os) const
 {
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt)
+ostream& operator<< (ostream& os, const S_bsrUtf8DebugBrailleGenerator& elt)
 {
   elt->print (os);
   return os;

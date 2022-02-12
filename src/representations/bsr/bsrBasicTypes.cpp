@@ -208,9 +208,9 @@ map<string, bsrBrailleOutputKind>
 void initializeBsrBrailleOutputKindsMap ()
 {
   gGlobalBsrBrailleOutputKindsMap ["ascii"] = bsrBrailleOutputKind::kBrailleOutputAscii; // default
-  gGlobalBsrBrailleOutputKindsMap ["utf8"]  = bsrBrailleOutputKind::kBrailleOutputUTF8;
-  gGlobalBsrBrailleOutputKindsMap ["utf8d"] = bsrBrailleOutputKind::kBrailleOutputUTF8Debug;
-  gGlobalBsrBrailleOutputKindsMap ["utf16"] = bsrBrailleOutputKind::kBrailleOutputUTF16;
+  gGlobalBsrBrailleOutputKindsMap ["utf8"]  = bsrBrailleOutputKind::kBrailleOutputUtf8;
+  gGlobalBsrBrailleOutputKindsMap ["utf8d"] = bsrBrailleOutputKind::kBrailleOutputUtf8Debug;
+  gGlobalBsrBrailleOutputKindsMap ["utf16"] = bsrBrailleOutputKind::kBrailleOutputUtf16;
 }
 
 string bsrBrailleOutputKindAsString (
@@ -223,13 +223,13 @@ string bsrBrailleOutputKindAsString (
     case bsrBrailleOutputKind::kBrailleOutputAscii:
       result = "ascii";
       break;
-    case bsrBrailleOutputKind::kBrailleOutputUTF8:
+    case bsrBrailleOutputKind::kBrailleOutputUtf8:
       result = "utf8";
       break;
-    case bsrBrailleOutputKind::kBrailleOutputUTF8Debug:
+    case bsrBrailleOutputKind::kBrailleOutputUtf8Debug:
       result = "utf8d";
       break;
-    case bsrBrailleOutputKind::kBrailleOutputUTF16:
+    case bsrBrailleOutputKind::kBrailleOutputUtf16:
       result = "utf16";
       break;
   } // switch

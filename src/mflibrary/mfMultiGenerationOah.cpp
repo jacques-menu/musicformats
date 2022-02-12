@@ -260,7 +260,9 @@ S_mfMultiGenerationOutputKindAtom mfMultiGenerationOutputKindAtom::create (
   const string&   description,
   const string&   variableName,
   mfMultiGenerationOutputKind&
-                  mfMultiGenerationOutputKindVariable)
+                  multiGenerationOutputKindVariable,
+  mfMultiGenerationOutputKind
+                  multiGenerationOutputKindValue)
 {
   mfMultiGenerationOutputKindAtom* o = new
     mfMultiGenerationOutputKindAtom (
@@ -268,7 +270,8 @@ S_mfMultiGenerationOutputKindAtom mfMultiGenerationOutputKindAtom::create (
       shortName,
       description,
       variableName,
-      mfMultiGenerationOutputKindVariable);
+      multiGenerationOutputKindVariable,
+      multiGenerationOutputKindValue);
   assert (o != nullptr);
   return o;
 }
@@ -279,15 +282,22 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
   const string&   description,
   const string&   variableName,
   mfMultiGenerationOutputKind&
-                  mfMultiGenerationOutputKindVariable)
+                  multiGenerationOutputKindVariable,
+  mfMultiGenerationOutputKind
+                  multiGenerationOutputKindValue)
   : oahAtomImplicitlyStoringAValue (
       longName,
       shortName,
       description,
       variableName),
-    fMultiGenerationOutputKindVariable ( // this is where the value is supplied
-      mfMultiGenerationOutputKindVariable)
-{}
+    fMultiGenerationOutputKindVariable (
+      multiGenerationOutputKindVariable),
+    fMultiGenerationOutputKindValue ( // this is where the value is supplied
+      multiGenerationOutputKindValue)
+{
+  fMultiGenerationOutputKindVariable =
+    mfMultiGenerationOutputKind::k_NoGeneration;
+}
 
 mfMultiGenerationOutputKindAtom::~mfMultiGenerationOutputKindAtom ()
 {}
@@ -315,6 +325,7 @@ void mfMultiGenerationOutputKindAtom::applyElement (ostream& os)
     oahError (s.str ());
   }
   else {
+    fMultiGenerationOutputKindVariable = fMultiGenerationOutputKindValue;
     fVariableHasBeenSet = true;
   }
 }
@@ -428,6 +439,11 @@ void mfMultiGenerationOutputKindAtom::print (ostream& os) const
     "fMultiGenerationOutputKindVariable" << " : " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindVariable) <<
+    endl <<
+    setw (fieldWidth) <<
+    "fMultiGenerationOutputKindValue" << " : " <<
+    mfMultiGenerationOutputKindAsString (
+      fMultiGenerationOutputKindValue) <<
     endl;
 
   --gIndenter;
@@ -505,21 +521,16 @@ R"()",
 
   // lilypond output
 
-  fMultiGenerationOutputKind =
-    mfMultiGenerationOutputKind::kGenerationLilypond;
-
   subGroup->
     appendAtomToSubGroup (
       mfMultiGenerationOutputKindAtom::create (
         K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME, "",
-R"(Generate LilyPond code as output.)",
+R"(Generate LilyPond code as output (default value).)",
         "fMultiGenerationOutputKind",
-        fMultiGenerationOutputKind));
+        fMultiGenerationOutputKind,
+        mfMultiGenerationOutputKind::kGenerationLilypond));
 
   // braille output
-
-  fMultiGenerationOutputKind =
-    mfMultiGenerationOutputKind::kGenerationBraille;
 
   subGroup->
     appendAtomToSubGroup (
@@ -527,12 +538,10 @@ R"(Generate LilyPond code as output.)",
         K_GENERATED_OUTPUT_KIND_BRAILLE_NAME, "",
 R"(Generate braille code as output.)",
         "fMultiGenerationOutputKind",
-        fMultiGenerationOutputKind));
+        fMultiGenerationOutputKind,
+        mfMultiGenerationOutputKind::kGenerationBraille));
 
   // musicxml output
-
-  fMultiGenerationOutputKind =
-    mfMultiGenerationOutputKind::kGenerationMusicXML;
 
   subGroup->
     appendAtomToSubGroup (
@@ -540,12 +549,10 @@ R"(Generate braille code as output.)",
         K_GENERATED_OUTPUT_KIND_MUSICXML_NAME, "",
 R"(Generate MusicXML code as output.)",
         "fMultiGenerationOutputKind",
-        fMultiGenerationOutputKind));
+        fMultiGenerationOutputKind,
+        mfMultiGenerationOutputKind::kGenerationMusicXML));
 
   // guido output
-
-  fMultiGenerationOutputKind =
-    mfMultiGenerationOutputKind::kGenerationGuido;
 
   subGroup->
     appendAtomToSubGroup (
@@ -553,20 +560,19 @@ R"(Generate MusicXML code as output.)",
         K_GENERATED_OUTPUT_KIND_GUIDO_NAME, "",
 R"(Generate Guido code as output.)",
         "fMultiGenerationOutputKind",
-        fMultiGenerationOutputKind));
+        fMultiGenerationOutputKind,
+        mfMultiGenerationOutputKind::kGenerationGuido));
 
   // MIDI output
 
-//   fMultiGenerationOutputKind =
-//     mfMultiGenerationOutputKind::kGenerationMidi;
-//
 //   subGroup->
 //     appendAtomToSubGroup (
 //       mfMultiGenerationOutputKindAtom::create (
 //         K_GENERATED_OUTPUT_KIND_MIDI_NAME, "",
 // R"(Generate MIDI code as output.)",
 //         "fMultiGenerationOutputKind",
-//         fMultiGenerationOutputKind));
+//         fMultiGenerationOutputKind,
+//         mfMultiGenerationOutputKind::kGenerationMidi));
 }
 
 //______________________________________________________________________________

@@ -213,9 +213,9 @@ void brailleCellKind (bsrCellKind cellKind, ostream& os);
 //______________________________________________________________________________
 enum class bsrBrailleOutputKind {
   kBrailleOutputAscii,     // default value
-  kBrailleOutputUTF8,
-  kBrailleOutputUTF8Debug, // for... debugging!
-  kBrailleOutputUTF16
+  kBrailleOutputUtf8,
+  kBrailleOutputUtf8Debug, // for... debugging!
+  kBrailleOutputUtf16
 };
 
 string bsrBrailleOutputKindAsString (

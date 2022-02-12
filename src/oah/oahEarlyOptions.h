@@ -16,6 +16,8 @@
 
 #include "oahBasicTypes.h"
 
+#include "mfMultiGenerationOah.h"
+
 
 namespace MusicFormats
 {
@@ -72,6 +74,12 @@ class EXP oahEarlyOptions
     Bool                  getEarlyInsiderOption () const
                               { return fEarlyInsiderOption; }
 //     void                  setEarlyRegularOption ();
+
+    void                  setEarlyMultiGenerationOutputKind (
+                            mfMultiGenerationOutputKind value);
+    mfMultiGenerationOutputKind
+                          getEarlyMultiGenerationOutputKind () const
+                              { return fEarlyMultiGenerationOutputKind; }
 
     const list<string>&   getEarlyIncludeFileNamesList () const
                               { return fEarlyIncludeFileNamesList; }
@@ -142,12 +150,18 @@ class EXP oahEarlyOptions
     // fields
     // ------------------------------------------------------
 
+    Bool                  fEarlyInsiderOption;
+//     Bool                  fEarlyRegularOption;
+
+    mfMultiGenerationOutputKind
+                          fEarlyMultiGenerationOutputKind;
+
+    list<string>          fEarlyIncludeFileNamesList;
+
+#ifdef TRACING_IS_ENABLED
     Bool                  fTraceEarlyOptions;
 
     Bool                  fEarlyOahVerboseMode;
-
-    Bool                  fEarlyInsiderOption;
-//     Bool                  fEarlyRegularOption;
 
     Bool                  fEarlyTracingOah;
     Bool                  fEarlyTracingOahDetails;
@@ -155,8 +169,7 @@ class EXP oahEarlyOptions
     Bool                  fEarlyTraceComponents;
 
     Bool                  fEarlyTracePasses;
-
-    list<string>          fEarlyIncludeFileNamesList;
+#endif
 };
 typedef SMARTP<oahEarlyOptions> S_oahEarlyOptions;
 EXP ostream& operator<< (ostream& os, const oahEarlyOptions& elt);

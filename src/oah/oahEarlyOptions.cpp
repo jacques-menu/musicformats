@@ -86,6 +86,19 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 // }
 
 //______________________________________________________________________________
+void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
+  mfMultiGenerationOutputKind value)
+{
+  if (fTraceEarlyOptions) {
+    gLogStream <<
+      "Setting fEarlyInsiderOption" <<
+      endl;
+  }
+
+  fEarlyMultiGenerationOutputKind = value;
+}
+
+//______________________________________________________________________________
 const string K_INCLUDE_OPTION_LONG_NAME  = "include";
 const string K_INCLUDE_OPTION_SHORT_NAME = "inc";
 
@@ -249,22 +262,38 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
 
   if (
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME)
-      ||
-    isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME)
   ) {
-    setTraceEarlyOptions ();
+    setEarlyMultiGenerationOutputKind (
+      mfMultiGenerationOutputKind::kGenerationLilypond);
   }
-
-  else if (
+  if (
     isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_OAH_VERBOSE_MODE_LONG_OPTION_NAME)
-      ||
-    isEarlyOptionRecognized (
-      argumentWithoutDashToBeUsed, K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME)
+      argumentWithoutDashToBeUsed, K_GENERATED_OUTPUT_KIND_BRAILLE_NAME)
   ) {
-    setEarlyOahVerboseMode ();
+    setEarlyMultiGenerationOutputKind (
+      mfMultiGenerationOutputKind::kGenerationBraille);
+  }
+  if (
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_GENERATED_OUTPUT_KIND_MUSICXML_NAME)
+  ) {
+    setEarlyMultiGenerationOutputKind (
+      mfMultiGenerationOutputKind::kGenerationMusicXML);
+  }
+  if (
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_GENERATED_OUTPUT_KIND_GUIDO_NAME)
+  ) {
+    setEarlyMultiGenerationOutputKind (
+      mfMultiGenerationOutputKind::kGenerationGuido);
+  }
+  if (
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_GENERATED_OUTPUT_KIND_MIDI_NAME)
+  ) {
+    setEarlyMultiGenerationOutputKind (
+      mfMultiGenerationOutputKind::kGenerationMidi);
   }
 
   if (
@@ -277,8 +306,29 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
     appendEarlyIncludeFileName (optionValue);
   }
 
-  // the trace options are available only if tracing is enabled
 #ifdef TRACING_IS_ENABLED
+
+  // the trace options are available only if tracing is enabled
+  if (
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME)
+      ||
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME)
+  ) {
+    setTraceEarlyOptions ();
+  }
+
+  if (
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_OAH_VERBOSE_MODE_LONG_OPTION_NAME)
+      ||
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME)
+  ) {
+    setEarlyOahVerboseMode ();
+  }
+
   if (
     isEarlyOptionRecognized (
       argumentWithoutDashToBeUsed, K_TRACE_OAH_LONG_OPTION_NAME)
@@ -318,6 +368,7 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
   ) {
     setEarlyTracePasses ();
   }
+
 #endif
 }
 

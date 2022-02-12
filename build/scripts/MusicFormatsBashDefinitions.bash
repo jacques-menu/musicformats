@@ -192,7 +192,7 @@ function bit ()
 #  set -x
   SCRIPT_NAME=BuildMusicFormats.bash
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
-  echo LOGFILE = ${LOGFILE}
+#  echo LOGFILE = ${LOGFILE}
 
   ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
 
@@ -226,13 +226,30 @@ function cit () ###JMI
 #  set -x
   SCRIPT=${SCRIPTS_DIR}/Clean_libmusicformats.bash
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT}.log
-  echo LOGFILE = ${LOGFILE}
+#  echo LOGFILE = ${LOGFILE}
 
   ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
 
   echo
 
   ls -saltr ${BUILD_DIR}
+#  set +x
+}
+
+# version number
+#----------------------------------------------
+
+function smvn ()
+{
+#  set -x
+  SCRIPT_NAME=SetMusicFormatsVersionNumber.bash
+  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
+  echo LOGFILE = ${LOGFILE}
+
+  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+
+  echo
+
 #  set +x
 }
 
@@ -683,7 +700,7 @@ function addDocAll ()
 {
   git add docs  # libmusicxml2
 
-  git add ${DOC_DIR}MusicFormatsVersionNumber.txt
+  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
 
   git add ${DOC_DIR}/*/*.tex
   git add ${DOC_DIR}/*/*.ist

@@ -266,6 +266,7 @@ S_mfcLibraryComponent createLibraryComponent ()
             "Finalized the handling of option '-include'",
             "Finalized the options values display options",
             "Added distributions for MacOS, Ubuntu and Windows",
+            "Finalized multi-generation output handling",
             "Complements to the CLI user's guide"
           }
       ));

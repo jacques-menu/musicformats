@@ -228,14 +228,14 @@ typedef SMARTP<bsrUTF8BrailleGenerator> S_bsrUTF8BrailleGenerator;
 EXP ostream& operator<< (ostream& os, const S_bsrUTF8BrailleGenerator& elt);
 
 //______________________________________________________________________________
-class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
+class EXP bsrUtf8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<bsrUTF8DebugBrailleGenerator> create (
+    static SMARTP<bsrUtf8DebugBrailleGenerator> create (
                             bsrByteOrderingKind byteOrderingKind,
                             ostream&            brailleOutputStream);
 
@@ -244,11 +244,11 @@ class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
     // constructors/destructor
     // ------------------------------------------------------
 
-                          bsrUTF8DebugBrailleGenerator (
+                          bsrUtf8DebugBrailleGenerator (
                             bsrByteOrderingKind byteOrderingKind,
                             ostream&            brailleOutputStream);
 
-    virtual               ~bsrUTF8DebugBrailleGenerator ();
+    virtual               ~bsrUtf8DebugBrailleGenerator ();
 
   public:
 
@@ -280,8 +280,8 @@ class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
     // private fields
     // ------------------------------------------------------
 };
-typedef SMARTP<bsrUTF8DebugBrailleGenerator> S_bsrUTF8DebugBrailleGenerator;
-EXP ostream& operator<< (ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt);
+typedef SMARTP<bsrUtf8DebugBrailleGenerator> S_bsrUtf8DebugBrailleGenerator;
+EXP ostream& operator<< (ostream& os, const S_bsrUtf8DebugBrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrUTF16BigEndianBrailleGenerator : public bsrBrailleGenerator

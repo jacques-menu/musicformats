@@ -66,21 +66,21 @@ bsr2brailleTranslator::bsr2brailleTranslator (
           fBrailleOutputStream);
       break;
 
-    case bsrBrailleOutputKind::kBrailleOutputUTF8:
+    case bsrBrailleOutputKind::kBrailleOutputUtf8:
       fBrailleGenerator =
         bsrUTF8BrailleGenerator::create (
           gGlobalBrailleGenerationOahGroup->getByteOrderingKind (),
           fBrailleOutputStream);
       break;
 
-    case bsrBrailleOutputKind::kBrailleOutputUTF8Debug:
+    case bsrBrailleOutputKind::kBrailleOutputUtf8Debug:
       fBrailleGenerator =
-        bsrUTF8DebugBrailleGenerator::create (
+        bsrUtf8DebugBrailleGenerator::create (
           gGlobalBrailleGenerationOahGroup->getByteOrderingKind (),
           fBrailleOutputStream);
       break;
 
-    case bsrBrailleOutputKind::kBrailleOutputUTF16:
+    case bsrBrailleOutputKind::kBrailleOutputUtf16:
       switch (gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) {
         case bsrByteOrderingKind::kByteOrderingNone:
           {
