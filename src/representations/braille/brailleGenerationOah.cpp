@@ -57,7 +57,8 @@ S_brailleOutputKindAtom brailleOutputKindAtom::create (
   const string&         shortName,
   const string&         description,
   const string&         variableName,
-  bsrBrailleOutputKind& brailleOutputKindVariable)
+  bsrBrailleOutputKind& brailleOutputKindVariable,
+  bsrBrailleOutputKind  brailleOutputKindValue)
 {
   brailleOutputKindAtom* o = new
     brailleOutputKindAtom (
@@ -65,7 +66,8 @@ S_brailleOutputKindAtom brailleOutputKindAtom::create (
       shortName,
       description,
       variableName,
-      brailleOutputKindVariable);
+      brailleOutputKindVariable,
+      brailleOutputKindValue);
   assert (o != nullptr);
   return o;
 }
@@ -75,15 +77,21 @@ brailleOutputKindAtom::brailleOutputKindAtom (
   const string&         shortName,
   const string&         description,
   const string&         variableName,
-  bsrBrailleOutputKind& brailleOutputKindVariable)
+  bsrBrailleOutputKind& brailleOutputKindVariable,
+  bsrBrailleOutputKind  brailleOutputKindValue)
   : oahAtomImplicitlyStoringAValue (
       longName,
       shortName,
       description,
       variableName),
-    fBrailleOutputKindVariable ( // this is where the value is supplied
-      brailleOutputKindVariable)
-{}
+    fBrailleOutputKindVariable (
+      brailleOutputKindVariable),
+    fBrailleOutputKindValue ( // this is where the value is supplied
+      brailleOutputKindValue)
+{
+  fBrailleOutputKindVariable =
+    bsrBrailleOutputKind::kBrailleOutputUtf8Debug; // default value
+}
 
 brailleOutputKindAtom::~brailleOutputKindAtom ()
 {}
@@ -111,6 +119,7 @@ void brailleOutputKindAtom::applyElement (ostream& os)
     oahError (s.str ());
   }
   else {
+    fBrailleOutputKindVariable = fBrailleOutputKindValue;
     fVariableHasBeenSet = true;
   }
 }
@@ -222,6 +231,12 @@ void brailleOutputKindAtom::print (ostream& os) const
     "fBrailleOutputKindVariable" << " : \"" <<
     bsrBrailleOutputKindAsString (
       fBrailleOutputKindVariable) <<
+      "\"" <<
+    endl <<
+    setw (fieldWidth) <<
+    "fBrailleOutputKindValue" << " : \"" <<
+    bsrBrailleOutputKindAsString (
+      fBrailleOutputKindValue) <<
       "\"" <<
     endl;
 
@@ -768,21 +783,16 @@ R"()",
 
   // ascii output
 
-  fBrailleOutputKind =
-    bsrBrailleOutputKind::kBrailleOutputAscii;
-
   subGroup->
     appendAtomToSubGroup (
       brailleOutputKindAtom::create (
         "ascii", "",
 R"(Generate ASCII braille as output.)",
         "fBrailleOutputKind",
-        fBrailleOutputKind));
+        fBrailleOutputKind,
+        bsrBrailleOutputKind::kBrailleOutputAscii));
 
   // UTF-8 output
-
-  fBrailleOutputKind =
-    bsrBrailleOutputKind::kBrailleOutputUTF8;
 
   subGroup->
     appendAtomToSubGroup (
@@ -790,12 +800,10 @@ R"(Generate ASCII braille as output.)",
         "utf8", "",
 R"(Generate UTF-8 braille as output.)",
         "fBrailleOutputKind",
-        fBrailleOutputKind));
+        fBrailleOutputKind,
+        bsrBrailleOutputKind::kBrailleOutputUtf8));
 
   // UTF-8 debug output
-
-  fBrailleOutputKind =
-    bsrBrailleOutputKind::kBrailleOutputUTF8Debug;
 
   subGroup->
     appendAtomToSubGroup (
@@ -803,12 +811,10 @@ R"(Generate UTF-8 braille as output.)",
         "utf8d", "",
 R"(Generate UTF-8 debug braille as output.)",
         "fBrailleOutputKind",
-        fBrailleOutputKind));
+        fBrailleOutputKind,
+        bsrBrailleOutputKind::kBrailleOutputUtf8Debug));
 
   // UTF-16 output
-
-  fBrailleOutputKind =
-    bsrBrailleOutputKind::kBrailleOutputUTF16;
 
   subGroup->
     appendAtomToSubGroup (
@@ -816,7 +822,8 @@ R"(Generate UTF-8 debug braille as output.)",
         "utf16", "",
 R"(Generate UTF-16 braille as output.)",
         "fBrailleOutputKind",
-        fBrailleOutputKind));
+        fBrailleOutputKind,
+        bsrBrailleOutputKind::kBrailleOutputUtf16));
 
   // byte ordering
 
@@ -966,7 +973,8 @@ R"()",
         "utf8d", "",
 R"(Generate UTF-8 debug braille as output.)",
         "fBrailleOutputKind",
-        fBrailleOutputKind));
+        fBrailleOutputKind,
+        bsrBrailleOutputKind::kBrailleOutputUtf8Debug));
 
   autoUtfd8MacroAtom->
     appendAtomToMacro (

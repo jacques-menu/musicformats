@@ -329,7 +329,6 @@ S_Mikrokosmos3WanderingOahGroup createGlobalMikrokosmos3WanderingOahGroup ()
 
     initializeMsrGenerationAPI ();
 
-
     // initialize the generated output kinds map
     // ------------------------------------------------------
 

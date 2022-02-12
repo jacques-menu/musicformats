@@ -51,7 +51,8 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
                             const string&         shortName,
                             const string&         description,
                             const string&         variableName,
-                            bsrBrailleOutputKind& brailleOutputKindVariable);
+                            bsrBrailleOutputKind& brailleOutputKindVariable,
+                            bsrBrailleOutputKind  brailleOutputKindValue);
 
   protected:
 
@@ -63,7 +64,8 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
                             const string&         shortName,
                             const string&         description,
                             const string&         variableName,
-                            bsrBrailleOutputKind& brailleOutputKindVariable);
+                            bsrBrailleOutputKind& brailleOutputKindVariable,
+                            bsrBrailleOutputKind  brailleOutputKindValue);
 
     virtual               ~brailleOutputKindAtom ();
 
@@ -109,6 +111,7 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // ------------------------------------------------------
 
     bsrBrailleOutputKind& fBrailleOutputKindVariable;
+    bsrBrailleOutputKind  fBrailleOutputKindValue;
 };
 typedef SMARTP<brailleOutputKindAtom> S_brailleOutputKindAtom;
 EXP ostream& operator<< (ostream& os, const S_brailleOutputKindAtom& elt);

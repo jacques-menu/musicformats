@@ -67,12 +67,14 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
     // ------------------------------------------------------
 
     static SMARTP<mfMultiGenerationOutputKindAtom> create (
-                            const string&   longName,
-                            const string&   shortName,
-                            const string&   description,
-                            const string&   variableName,
-                            mfMultiGenerationOutputKind&
-                                            mfMultiGenerationOutputKindVariable);
+                          const string&   longName,
+                          const string&   shortName,
+                          const string&   description,
+                          const string&   variableName,
+                          mfMultiGenerationOutputKind&
+                                          multiGenerationOutputKindVariable,
+                          mfMultiGenerationOutputKind
+                                          multiGenerationOutputKindValue);
 
   protected:
 
@@ -80,12 +82,14 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
     // ------------------------------------------------------
 
                           mfMultiGenerationOutputKindAtom (
-                            const string&   longName,
-                            const string&   shortName,
-                            const string&   description,
-                            const string&   variableName,
-                            mfMultiGenerationOutputKind&
-                                            mfMultiGenerationOutputKindVariable);
+                          const string&   longName,
+                          const string&   shortName,
+                          const string&   description,
+                          const string&   variableName,
+                          mfMultiGenerationOutputKind&
+                                          multiGenerationOutputKindVariable,
+                          mfMultiGenerationOutputKind
+                                          multiGenerationOutputKindValue);
 
     virtual               ~mfMultiGenerationOutputKindAtom ();
 
@@ -93,6 +97,13 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
 
     // set and get
     // ------------------------------------------------------
+
+    mfMultiGenerationOutputKind&
+                          getMultiGenerationOutputKindVariable () const
+                              { return fMultiGenerationOutputKindVariable; }
+    mfMultiGenerationOutputKind
+                          getMultiGenerationOutputKindValue () const
+                              { return fMultiGenerationOutputKindValue; }
 
   public:
 
@@ -132,6 +143,8 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
 
     mfMultiGenerationOutputKind&
                           fMultiGenerationOutputKindVariable;
+    mfMultiGenerationOutputKind
+                          fMultiGenerationOutputKindValue;
 };
 typedef SMARTP<mfMultiGenerationOutputKindAtom> S_mfMultiGenerationOutputKindAtom;
 EXP ostream& operator<< (ostream& os, const S_mfMultiGenerationOutputKindAtom& elt);

@@ -6692,15 +6692,25 @@ void oahHandler::registerOahElementUseInLaunchCommand (
       ' ' + valueUsed;
   }
 
+  string longName = elementUsed->getLongName ();
+
   fLaunchCommandWithLongOptionsNames +=
-    " -" + elementUsed->getLongName ();
+    " -" + longName;
   if (valueUsedSize) {
     fLaunchCommandWithLongOptionsNames +=
       ' ' + valueUsed;
   }
 
-  fLaunchCommandWithShortOptionsNames +=
-    " -" + elementUsed->getShortName ();
+  string shortName = elementUsed->getShortName ();
+
+  if (shortName.size ()) {
+    fLaunchCommandWithShortOptionsNames +=
+      " -" + shortName;
+  }
+  else {
+    fLaunchCommandWithShortOptionsNames +=
+      " -" + longName;
+  }
   if (valueUsedSize) {
     fLaunchCommandWithShortOptionsNames +=
       ' ' + valueUsed;

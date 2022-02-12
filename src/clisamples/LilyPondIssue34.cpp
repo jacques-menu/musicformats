@@ -158,7 +158,7 @@ void enforceSomeOptions (
 
 /*
       gGlobalBrailleGenerationOahGroup->
-        setBrailleOutputKind (bsrBrailleOutputKind::kBrailleOutputUTF8Debug);
+        setBrailleOutputKind (bsrBrailleOutputKind::kBrailleOutputUtf8Debug);
 */
       break;
 
@@ -235,9 +235,8 @@ int main (int argc, char*  argv[])
 
   mfMultiGenerationOutputKind
     multiGenerationOutputKind =
-      mfMultiGenerationOutputKind::kGenerationLilypond; // TEMP JMIJMIJMI
-//       gGlobalServiceRunData->
-//         getOptionsAndArguments ().getArgumentsVector ();
+      gGlobalOahEarlyOptions.
+        getEarlyMultiGenerationOutputKind ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

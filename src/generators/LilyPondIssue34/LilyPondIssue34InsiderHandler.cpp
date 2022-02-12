@@ -600,7 +600,7 @@ string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
                 outputFileName += "_ASCII";
                 break;
 
-              case bsrBrailleOutputKind::kBrailleOutputUTF8:
+              case bsrBrailleOutputKind::kBrailleOutputUtf8:
                 outputFileName += "_UTF8";
                   /* JMI
                 switch (gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) {
@@ -616,11 +616,11 @@ string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
                 */
                 break;
 
-              case bsrBrailleOutputKind::kBrailleOutputUTF8Debug:
-                outputFileName += "_UTF8Debug";
+              case bsrBrailleOutputKind::kBrailleOutputUtf8Debug:
+                outputFileName += "_Utf8Debug";
                 break;
 
-              case bsrBrailleOutputKind::kBrailleOutputUTF16:
+              case bsrBrailleOutputKind::kBrailleOutputUtf16:
                 outputFileName += "_UTF16";
                 switch (gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) {
                   case bsrByteOrderingKind::kByteOrderingNone:
