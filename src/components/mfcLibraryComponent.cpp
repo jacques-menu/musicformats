@@ -261,7 +261,7 @@ S_mfcLibraryComponent createLibraryComponent ()
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.60"),
-          "February 10, 2022",
+          "February 14, 2022",
           list<string> {
             "Finalized the handling of option '-include'",
             "Finalized the options values display options",

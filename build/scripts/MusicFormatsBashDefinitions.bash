@@ -688,17 +688,24 @@ function addSrcAll ()
   git add ${SRC_DIR}/*.ts ${SRC_DIR}/*.js ${SRC_DIR}/*.json
 }
 
-function addBuild ()
+function addBuildAll ()
 {
-  git add build/Building.md
-  git add -f build/CMakeLists.txt
-  git add build/MakePkg.bat
-  git add -f build/Makefile
+  git add    ${BUILD_DIR}/Building.md
+  git add -f ${BUILD_DIR}/CMakeLists.txt
+  git add    ${BUILD_DIR}/MakePkg.bat
+  git add -f ${BUILD_DIR}/Makefile
+
+  git add    ${BUILD_DIR}/scripts
+}
+
+function addDistribAll ()
+{
+  git add ${MUSIC_FORMATS_DEV}/distrib/MusicFormatFor*.*
 }
 
 function addDocAll ()
 {
-  git add docs  # libmusicxml2
+  git add ${MUSIC_FORMATS_DEV}/docs  # libmusicxml2
 
   git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
 
@@ -712,8 +719,8 @@ function addDocAll ()
 
 function addFxmlAll ()
 {
-  git add files/musicxmlfiles/*/*.xml
-  git add -f files/musicxmlfiles/*/*.txt
+  git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.xml
+  git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.txt
 }
 
 function mergeTestFromDev ()
