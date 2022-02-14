@@ -110,10 +110,10 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
 
 If case there is a null pointer in a case such as:
 \begin{lstlisting}[language=CPlusPlus]
-    gGlobalMxsr2msrOahGroup->getUseFilenameAsWorkTitle ()
+    gGlobalMsrOahGroup->getUseFilenameAsWorkTitle ()
 \end{lstlisting}
 
-the way to go is to:
+the way to go is to:%%%JMI
 \begin{itemize}
 \item locate {\tt gGlobalMxsr2msrOahGroup} in the {\tt *.h} it is declared in;
 \item check that the creation method in the same, such as \methodName{createGlobalMxsr2msrOahGroup}, is called in the {\tt *InsiderHandler.cpp} file for the tool that crashed, which may require including that \starFileName{.h} header in \starFileName{InsiderHandler.cpp}.

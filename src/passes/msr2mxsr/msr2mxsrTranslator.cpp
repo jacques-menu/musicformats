@@ -34,7 +34,7 @@
 #include "oahOah.h"
 #include "mxsrOah.h"
 #include "msrOah.h"
-#include "mxsrGenerationOah.h"
+#include "msr2mxsrOah.h"
 
 #include "msr2mxsrComponent.h"
 
@@ -458,7 +458,7 @@ void msr2mxsrTranslator::createMxmlAttributesElementAndAppendItToMeasure ()
     }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create an attributes comment
     stringstream s;
     s <<
@@ -557,7 +557,7 @@ void msr2mxsrTranslator::appendToMeasureDirection (
   Sxmlelement      elem,
   msrPlacementKind placementKind)
 {
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a direction comment
     stringstream s;
     s <<
@@ -876,7 +876,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
 
   // append the score identification element if any to the score part wise element
   if (fScoreIdentificationElement) {
-    if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create an identification comment
       stringstream s;
       s <<
@@ -926,7 +926,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
 
   // append the score defaults element if any to the score part wise element
   if (fScoreDefaultsElement) {
-    if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create an defaults comment
       stringstream s;
       s <<
@@ -947,7 +947,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
     fPendingScoreCreditElementsList.size ();
 
   if (pendingScoreCreditElementsListSize) {
-    if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       stringstream s;
       s <<
         " ===== " <<
@@ -972,7 +972,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
     } // for
   }
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create an part-list comment
     stringstream s;
     s <<
@@ -997,7 +997,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
   ) {
     Sxmlelement partElement = (*i);
 
-    if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create a part comment
       stringstream s;
       s <<
@@ -1032,7 +1032,13 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
   // work number
   string
     workNumber =
-      elt->getIdentificationWorkNumber ();
+      elt->getIdentificationWorkNumber (),
+    optionsWorkNumber =
+      gGlobalMsr2mxsrOahGroup->getWorkNumber ();
+
+  if (optionsWorkNumber.size ()) {
+    workNumber = optionsWorkNumber;
+  }
 
   // create the work number element
   Sxmlelement
@@ -1047,7 +1053,13 @@ void msr2mxsrTranslator::visitStart (S_msrIdentification& elt)
   // work title
   string
     workTitle =
-      elt->getIdentificationWorkTitle ();
+      elt->getIdentificationWorkTitle (),
+    optionsWorkTitle =
+      gGlobalMsr2mxsrOahGroup->getWorkTitle ();
+
+  if (optionsWorkTitle.size ()) {
+    workTitle = optionsWorkTitle;
+  }
 
   // create the work title element
   Sxmlelement
@@ -1102,7 +1114,14 @@ I don't know if any distributed software is currently supporting the opus. Howev
 
   // movement number
   string
-    movementNumber = elt->getIdentificationMovementNumber ();
+    movementNumber =
+      elt->getIdentificationMovementNumber (),
+    optionsMovementNumber =
+      gGlobalMsr2mxsrOahGroup->getMovementNumber ();
+
+  if (optionsMovementNumber.size ()) {
+    movementNumber = optionsMovementNumber;
+  };
 
   // create the movement number element
   fScoreMovementNumberElement =
@@ -1114,7 +1133,14 @@ I don't know if any distributed software is currently supporting the opus. Howev
 
   // movement title
   string
-    movementTitle = elt->getIdentificationMovementTitle ();
+    movementTitle =
+      elt->getIdentificationMovementTitle (),
+    optionsMovementTitle =
+      gGlobalMsr2mxsrOahGroup->getMovementTitle ();
+
+  if (optionsMovementTitle.size ()) {
+    movementTitle = optionsMovementTitle;
+  };
 
   // create the movement title element
   fScoreMovementTitleElement =
@@ -2391,7 +2417,7 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
 
     case msrPartGroup::kPartGroupImplicitNo:
       {
-        if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+        if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create a start comment
           stringstream s;
           s <<
@@ -2528,7 +2554,7 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
 
     case msrPartGroup::kPartGroupImplicitNo:
       {
-        if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+        if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create an end comment
           stringstream s;
           s <<
@@ -3069,7 +3095,7 @@ void msr2mxsrTranslator::visitStart (S_msrSegment& elt)
   }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a start comment
     stringstream s;
     s <<
@@ -3110,7 +3136,7 @@ void msr2mxsrTranslator::visitEnd (S_msrSegment& elt)
   }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create an end comment
     stringstream s;
     s <<
@@ -3188,7 +3214,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
   else {
     // no
 
-    if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create a comment
       stringstream s;
       s <<
@@ -3221,7 +3247,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
       elt->getMeasurePrintLayout ();
 
   if (measurePrintLayout) {
-    if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+    if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
       // create a print comment
       stringstream s;
       s <<
@@ -3493,11 +3519,11 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
           clefElement->push (
             createMxmlelement (
               k_sign,
-              "G"));
+              "C"));
           clefElement->push (
             createMxmlIntegerElement (
               k_line,
-              2));
+              1));
         }
         break;
       case msrClefKind::kClefMezzoSoprano:
@@ -3505,7 +3531,7 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
           clefElement->push (
             createMxmlelement (
               k_sign,
-              "G"));
+              "C"));
           clefElement->push (
             createMxmlIntegerElement (
               k_line,
@@ -3517,11 +3543,11 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
           clefElement->push (
             createMxmlelement (
               k_sign,
-              "G"));
+              "C"));
           clefElement->push (
             createMxmlIntegerElement (
               k_line,
-              2));
+              3));
         }
         break;
       case msrClefKind::kClefTenor:
@@ -3529,11 +3555,11 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
           clefElement->push (
             createMxmlelement (
               k_sign,
-              "G"));
+              "C"));
           clefElement->push (
             createMxmlIntegerElement (
               k_line,
-              2));
+              4));
         }
         break;
       case msrClefKind::kClefBaritone:
@@ -3541,11 +3567,11 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
           clefElement->push (
             createMxmlelement (
               k_sign,
-              "G"));
+              "C"));
           clefElement->push (
             createMxmlIntegerElement (
               k_line,
-              2));
+              5));
         }
         break;
       case msrClefKind::kClefBass:
@@ -3960,10 +3986,19 @@ void msr2mxsrTranslator::visitStart (S_msrKey& elt)
                 k_fifths,
                 fifthsNumber));
 
-            fKeyElement->push (
-              createMxmlelement (
-                k_mode,
-                msrModeKindAsMusicXMLString (elt->getModeKind ())));
+            msrModeKind
+              modeKind =
+                elt->getModeKind (); // JMI should be major by default???
+
+            switch (modeKind) {
+              case msrModeKind::k_NoMode:
+                break;
+              default:
+                fKeyElement->push (
+                  createMxmlelement (
+                    k_mode,
+                    msrModeKindAsMusicXMLString (modeKind)));
+            } // switch
           }
 
           else {
@@ -4555,7 +4590,7 @@ void msr2mxsrTranslator::visitStart (S_msrChord& elt)
   }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a chord start comment
     stringstream s;
     s <<
@@ -4591,7 +4626,7 @@ void msr2mxsrTranslator::visitEnd (S_msrChord& elt)
   }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a chord end comment
     stringstream s;
     s <<
@@ -4631,7 +4666,7 @@ void msr2mxsrTranslator::visitStart (S_msrTuplet& elt)
   }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a tuplet start comment
     stringstream s;
     s <<
@@ -4664,7 +4699,7 @@ void msr2mxsrTranslator::visitEnd (S_msrTuplet& elt)
   }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a tuplet end comment
     stringstream s;
     s <<
@@ -4927,7 +4962,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     S_msrVoice
       noteVoice =
         theMsrNote->fetchNoteVoiceUpLink ();
@@ -5029,7 +5064,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
         fetchNoteVoiceUpLink ()->
           getVoiceNumber ();
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     int
       previousMSRNoteStaffNumber =
         fPreviousMSRNoteStaff->
@@ -7316,7 +7351,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
           getNoteGraceNotesGroupAfter ();
 
     if (! (noteGraceNotesGroupBefore || noteGraceNotesGroupAfter)) {
-      if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+      if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
         // create a note comment
         S_msrVoice
           noteVoice =
@@ -7373,7 +7408,7 @@ void msr2mxsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create a start comment
     stringstream s;
     s <<
@@ -7404,7 +7439,7 @@ void msr2mxsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
   }
 #endif
 
-  if (gGlobalMxsrGenerationOahGroup->getMusicXMLComments ()) {
+  if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     // create an end comment
     stringstream s;
     s <<

@@ -510,21 +510,19 @@ showstringspaces=false,
 {%
  	keywords={%
 		% XML
+		score,partwise,%
+    identification,attributes,%
+    work,identification,%
+    part,measure%
+    %
 		,CDATA,DOCTYPE,ATTLIST,termdef,ELEMENT,EMPTY,ANY,ID,%
 	  IDREF,IDREFS,ENTITY,ENTITIES,NMTOKEN,NMTOKENS,NOTATION,%
     INCLUDE,IGNORE,SYSTEM,PUBLIC,NDATA,PUBLIC,%
     PCDATA,REQUIRED,IMPLIED,FIXED,%%% preceded by #
     xml,xml:space,xml:lang,version,standalone,default,preserve,%
-    % our own
-    identification,attributes,%
-    part,measure%
     %
-		cd,ls,ll,cat,more,%
-		make,%
-		RandomChords,RandomMusic,countnotes,%
-		xml2guido,%
+    % our own
 		xml2gmn,xml2ly,xml2brl,xml2xml,msdlcompiler%
-		Mikrokosmos3Wandering,LilyPondIssue34,%
    },%
  alsoother=$,%
  alsoletter=:,%
@@ -949,6 +947,9 @@ listing~\ref{#1}, [#1], page~\pageref{#1}%
 
 \newcommand{\pass}{pass\index[Main]{pass}}
 \newcommand{\Pass}{Pass\index[Main]{Pass}}
+
+\newcommand{\multiPass}{multi-pass\index[Main]{multi-pass}}
+\newcommand{\MultiPass}{Multi-pass\index[Main]{Multi-pass}}
 
 \newcommand{\converter}{converter\index[Main]{converter}}
 \newcommand{\Converter}{Converter\index[Main]{Converter}}

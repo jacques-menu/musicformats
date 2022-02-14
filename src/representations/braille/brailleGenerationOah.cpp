@@ -90,7 +90,7 @@ brailleOutputKindAtom::brailleOutputKindAtom (
       brailleOutputKindValue)
 {
   fBrailleOutputKindVariable =
-    bsrBrailleOutputKind::kBrailleOutputUtf8Debug; // default value
+    bsrBrailleOutputKind::kBrailleOutputUTF8Debug; // default value
 }
 
 brailleOutputKindAtom::~brailleOutputKindAtom ()
@@ -801,7 +801,7 @@ R"(Generate ASCII braille as output.)",
 R"(Generate UTF-8 braille as output.)",
         "fBrailleOutputKind",
         fBrailleOutputKind,
-        bsrBrailleOutputKind::kBrailleOutputUtf8));
+        bsrBrailleOutputKind::kBrailleOutputUTF8));
 
   // UTF-8 debug output
 
@@ -812,7 +812,7 @@ R"(Generate UTF-8 braille as output.)",
 R"(Generate UTF-8 debug braille as output.)",
         "fBrailleOutputKind",
         fBrailleOutputKind,
-        bsrBrailleOutputKind::kBrailleOutputUtf8Debug));
+        bsrBrailleOutputKind::kBrailleOutputUTF8Debug));
 
   // UTF-16 output
 
@@ -823,7 +823,7 @@ R"(Generate UTF-8 debug braille as output.)",
 R"(Generate UTF-16 braille as output.)",
         "fBrailleOutputKind",
         fBrailleOutputKind,
-        bsrBrailleOutputKind::kBrailleOutputUtf16));
+        bsrBrailleOutputKind::kBrailleOutputUTF16));
 
   // byte ordering
 
@@ -952,31 +952,31 @@ R"()",
   // create the auto utfd8 macro
 
   S_oahMacroAtom
-    autoUtfd8MacroAtom =
+    autoUTFd8MacroAtom =
       oahMacroAtom::create (
         "auto-utf8d", "au8d",
         "To ease the production of braille files.");
 
   subGroup->
     appendAtomToSubGroup (
-      autoUtfd8MacroAtom);
+      autoUTFd8MacroAtom);
 
   // populate it
-  autoUtfd8MacroAtom->
+  autoUTFd8MacroAtom->
     appendAtomToMacro (
       gGlobalOutputFileOahGroup->
         getAutoOutputFileNameAtom ());
 
-  autoUtfd8MacroAtom->
+  autoUTFd8MacroAtom->
     appendAtomToMacro (
       brailleOutputKindAtom::create (
         "utf8d", "",
 R"(Generate UTF-8 debug braille as output.)",
         "fBrailleOutputKind",
         fBrailleOutputKind,
-        bsrBrailleOutputKind::kBrailleOutputUtf8Debug));
+        bsrBrailleOutputKind::kBrailleOutputUTF8Debug));
 
-  autoUtfd8MacroAtom->
+  autoUTFd8MacroAtom->
     appendAtomToMacro (
       fUseEncodingInFileNameAtom);
 }

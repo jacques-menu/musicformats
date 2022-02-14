@@ -160,17 +160,17 @@ R"()",
   // create the auto utfd8 macro
 
   S_oahMacroAtom
-    autoUtfd8MacroAtom =
+    autoUTFd8MacroAtom =
       oahMacroAtom::create (
         "auto-utf8d", "au8d",
         "Combines -auto-output-file-name, -utf8d and -use-encoding-in-file-name");
 
   subGroup->
     appendAtomToSubGroup (
-      autoUtfd8MacroAtom);
+      autoUTFd8MacroAtom);
 
   // populate it
-  autoUtfd8MacroAtom->
+  autoUTFd8MacroAtom->
     appendAtomToMacro (
       gGlobalOutputFileOahGroup->getAutoOutputFileNameAtom ());
 
@@ -178,11 +178,11 @@ R"()",
     applyAtomWithValue (
       "utf8d",
       gLogStream);
-  autoUtfd8MacroAtom->
+  autoUTFd8MacroAtom->
     appendAtomToMacro (
       fBrailleOutputKindAtom);
 
-  autoUtfd8MacroAtom->
+  autoUTFd8MacroAtom->
     appendAtomToMacro (
       fUseEncodingInFileNameAtom);
 }

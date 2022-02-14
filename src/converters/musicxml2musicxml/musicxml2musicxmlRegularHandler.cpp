@@ -26,7 +26,6 @@
 
 #include "msrOah.h"
 #include "msr2msrOah.h"
-#include "mxsrGenerationOah.h"
 
 #include "musicxml2musicxmlRegularHandler.h"
 
@@ -1216,6 +1215,11 @@ void xml2xmlRegularHandler::createOutputRegularGroup ()
 
   registerAtomInRegularSubgroup ("musicxml-generation-infos", subGroup);
   registerAtomInRegularSubgroup ("musicxml-comments", subGroup);
+
+  registerAtomInRegularSubgroup ("work-title", subGroup);
+  registerAtomInRegularSubgroup ("work-number", subGroup);
+  registerAtomInRegularSubgroup ("movement-title", subGroup);
+  registerAtomInRegularSubgroup ("movement-number", subGroup);
 }
 
 //______________________________________________________________________________

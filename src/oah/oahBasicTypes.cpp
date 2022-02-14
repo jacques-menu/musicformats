@@ -4220,14 +4220,19 @@ void oahHandler::registerElementNamesInHandler (
     i != fHandlerNamesToElementsMap.end ();
     ++i
   ) {
+    string       name    = (*i).first;
+    S_oahElement element = (*i).second;
+
     // is elementLongName already in the elements names map?
-    if ((*i).first == elementLongName) {
+    if (name == elementLongName) {
       stringstream s;
 
       s <<
         "element long name \"" << elementLongName << "\"" <<
           " for element short name \"" << elementShortName << "\"" <<
-          " is defined more than once in handler \"" <<
+          " is already defined for " <<
+           element->fetchNamesBetweenQuotes () <<
+          " in handler \"" <<
           fHandlerHeader <<
           "\"";
 
@@ -4235,14 +4240,16 @@ void oahHandler::registerElementNamesInHandler (
     }
 
     // is elementShortName already in the elements names map?
-    if ((*i).first == elementShortName) {
+    if (name == elementShortName) {
       if (elementShortName.size ()) {
         stringstream s;
 
         s <<
           "element short name \"" << elementShortName << "\"" <<
           " for element long name \"" << elementLongName << "\"" <<
-          " is defined more than once in handler \"" <<
+          " is already defined for " <<
+           element->fetchNamesBetweenQuotes () <<
+          " in handler \"" <<
           fHandlerHeader <<
           "\"";
 

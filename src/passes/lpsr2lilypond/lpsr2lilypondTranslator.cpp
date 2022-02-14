@@ -6330,16 +6330,14 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
   }
 
   // title
-  /* JMI
-  if (gGlobalLpsrOahGroup->getUseFilenameAsWorkTitle ()) {
+  // JMI
+  if (gGlobalMsrOahGroup->getUseFilenameAsWorkTitle ()) {
     nameValuePairsList.push_back (
       make_pair (
         "title",
         gGlobalServiceRunData->getInputSourceName ()));
   }
-  else
-  */
-  {
+  else {
     string
       titleFromOption =
         gGlobalLpsr2lilypondOahGroup->getTitle ();

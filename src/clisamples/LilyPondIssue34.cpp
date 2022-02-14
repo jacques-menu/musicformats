@@ -158,7 +158,7 @@ void enforceSomeOptions (
 
 /*
       gGlobalBrailleGenerationOahGroup->
-        setBrailleOutputKind (bsrBrailleOutputKind::kBrailleOutputUtf8Debug);
+        setBrailleOutputKind (bsrBrailleOutputKind::kBrailleOutputUTF8Debug);
 */
       break;
 
@@ -167,7 +167,7 @@ void enforceSomeOptions (
       // ------------------------------------------------------
 
 /*
-      gGlobalMxsrGenerationOahGroup->setTraceDivisions ();
+      gGlobalMsr2mxsrOahGroup->setTraceDivisions ();
 
       gGlobalMxsrOahGroup->setTraceMxsrVisitors ();
 */
@@ -175,7 +175,7 @@ void enforceSomeOptions (
 
     case mfMultiGenerationOutputKind::kGenerationGuido:
 /*
-     gGlobalMxsrGenerationOahGroup->setTraceDivisions ();
+     gGlobalMsr2mxsrOahGroup->setTraceDivisions ();
 */
      break;
 

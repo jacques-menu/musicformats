@@ -32,10 +32,9 @@
 #include "displayOah.h"
 
 #include "mxsrOah.h"
-#include "mxsrGenerationOah.h"
+#include "msr2mxsrOah.h"
 #include "msrOah.h"
 #include "msr2msrOah.h"
-#include "mxsrGenerationOah.h"
 #include "mxsr2msrOah.h"
 
 #include "oahEarlyOptions.h"
@@ -223,7 +222,7 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
 
   // create the msr2mxsr OAH group
   appendGroupToHandler (
-    createGlobalMxsrGenerationOahGroup ());
+    createGlobalMsr2mxsrOahGroup ());
 
 #ifdef EXTRA_OAH_IS_ENABLED
   // create the extra OAH group
@@ -388,9 +387,6 @@ void msr2musicxmlInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsr2musicxmlInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMxsrGenerationOahGroup->
-    enforceGroupQuietness ();
-
   gGlobalMxsrOahGroup->
     enforceGroupQuietness ();
 
@@ -400,7 +396,7 @@ void msr2musicxmlInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMxsrGenerationOahGroup->
+  gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
 #ifdef EXTRA_OAH_IS_ENABLED

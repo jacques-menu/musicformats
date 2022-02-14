@@ -54,8 +54,9 @@
 
 // MXSR
 #include "mxsrOah.h"
-#include "mxsrGenerationOah.h"
+#include "msr2mxsrOah.h"
 #include "mxsr2msrOah.h"
+#include "msr2mxsrOah.h"
 
 #include "msdl2musicxmlInsiderHandler.h"
 
@@ -417,10 +418,6 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
     createGlobalMsdlInputOahGroup (
       serviceName));
 
-  // create the multi generator OAH group
-  appendGroupToHandler (
-    createGlobalMultiGenerationOahGroup ());
-
   // create the msdlConverter OAH group
   appendGroupToHandler (
     createGlobalMsdlConverterOahGroup ());
@@ -440,6 +437,10 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
   // create the msr2msr OAH group
   appendGroupToHandler (
     createGlobalMsr2msrOahGroup ());
+
+  // create the multi generator OAH group JMI
+  appendGroupToHandler (
+    createGlobalMultiGenerationOahGroup ());
 
   // create the groups needed according to the generated output kind
   /*
@@ -502,7 +503,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
     case mfMultiGenerationOutputKind::kGenerationMusicXML:
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMxsrGenerationOahGroup ());
+        createGlobalMsr2mxsrOahGroup ());
 
       // create the MXSR OAH group
       appendGroupToHandler (
@@ -516,7 +517,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
     case mfMultiGenerationOutputKind::kGenerationGuido:
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMxsrGenerationOahGroup ());
+        createGlobalMsr2mxsrOahGroup ());
 
       // create the MXSR OAH group
       appendGroupToHandler (
@@ -736,7 +737,7 @@ string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
                 outputFileName += "_ASCII";
                 break;
 
-              case bsrBrailleOutputKind::kBrailleOutputUtf8:
+              case bsrBrailleOutputKind::kBrailleOutputUTF8:
                 outputFileName += "_UTF8";
                   /* JMI
                 switch (gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) {
@@ -752,11 +753,11 @@ string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
                 */
                 break;
 
-              case bsrBrailleOutputKind::kBrailleOutputUtf8Debug:
-                outputFileName += "_Utf8Debug";
+              case bsrBrailleOutputKind::kBrailleOutputUTF8Debug:
+                outputFileName += "_UTF8Debug";
                 break;
 
-              case bsrBrailleOutputKind::kBrailleOutputUtf16:
+              case bsrBrailleOutputKind::kBrailleOutputUTF16:
                 outputFileName += "_UTF16";
                 switch (gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) {
                   case bsrByteOrderingKind::kByteOrderingNone:
@@ -819,9 +820,6 @@ void msdlConverterInsiderHandler::enforceHandlerQuietness ()
   gGlobalmsdlConverterInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMxsrGenerationOahGroup->
-    enforceGroupQuietness ();
-
   gGlobalMxsrOahGroup->
     enforceGroupQuietness ();
 
@@ -831,7 +829,7 @@ void msdlConverterInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMxsrGenerationOahGroup->
+  gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
 #ifdef EXTRA_OAH_IS_ENABLED
