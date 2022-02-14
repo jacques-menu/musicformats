@@ -1,21 +1,28 @@
 % !TEX root = MusicFormatsCLIUserGuide.tex
 
 % -------------------------------------------------------------------------
-\chapter{Choosing an installation mode}
+\chapter{MusicFormats installation modes}
 % -------------------------------------------------------------------------
 
-No user-friendly installer is available yet, so you will have to install the library at a lower level, sorry for the delay\dots.
+There is no GUI installer available yet, so users have to install the library at a lower level, sorry for that\dots.
 
 How to install \mf\ depends on the \OS. \Linux\ users often build the software they use themselves, while those of \Windows\ and \MacOS\ are accustomed to install in much simpler ways.
 
-Depending on the needs, users may wish to install the \MainIt{whole} \mf\ with source code and examples, or to do a \MainIt{basic installation}, that contains only the \MainIt{libraries}, \CLI\ executables and documentation \pdf\ files.
+Depending on the needs, users may wish to install the \MainIt{whole} \mf\ with source code and examples, or to use a \MainIt{distribution}, that contains only the \MainIt{libraries} if relevant, \CLI\ executables and documentation \pdf\ files.
 
 The following chapters show the details.
 
 
 % -------------------------------------------------------------------------
-\chapter{Basic installation}
+\chapter{Using a distribution}
 % -------------------------------------------------------------------------
+
+Supplied by \mf\ are tree distrubutions:
+\begin{itemize}
+\item \MacOS;
+\item \Ubuntu;
+\item \Windows.
+\end{itemize}
 
 The necessary files are found in \file{distrib}:
 \begin{lstlisting}[language=Terminal]
@@ -28,8 +35,9 @@ total 0
 0 drwx------@  4 jacquesmenu  staff  128 Feb  9 13:51 windows-distrib
 \end{lstlisting}
 
+
 % -------------------------------------------------------------------------
-\section{MacOS\texttrademark\ basic installation}
+\section{MacOS\texttrademark\ distribution}
 % -------------------------------------------------------------------------
 
 %%%JMI\mf\ is  installable directly from the repository, since this is the environment is is developed on. Just clone the \repo\ and you will find the executables in \build{bin} and the libraries in \build{lib}.
@@ -194,7 +202,7 @@ Having to perform the preceding task for each executable is the price to pay for
 
 
 % -------------------------------------------------------------------------
-\section{Linux basic installation}
+\section{Ubuntu distribution}
 % -------------------------------------------------------------------------
 
 After downloading, we get:
@@ -250,7 +258,7 @@ total 1616
 
 
 % -------------------------------------------------------------------------
-\section{Windows\texttrademark\ basic installation}
+\section{Windows\texttrademark\ distribution}
 % -------------------------------------------------------------------------
 
 After downloading, we get:
