@@ -2820,7 +2820,7 @@ R"()",
         "jianpu", "",
 R"(Generate the score using the Jianpu (numbered) notation
 instead of the default western notation.
-That option needs lilypond-Jianpu to be accessible to LilyPond
+This option needs lilypond-Jianpu to be accessible to LilyPond
 (https://github.com/nybbs2003/lilypond-Jianpu/jianpu10a.ly).)",
         "fJianpu",
         fJianpu));

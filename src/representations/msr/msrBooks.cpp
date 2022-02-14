@@ -213,7 +213,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
   if (
     fIdentification->getIdentificationWorkTitle ().size ()
       &&
-    gGlobalLpsrOahGroup->getUseFilenameAsWorkTitle ()
+    gGlobalMsrOahGroup->getUseFilenameAsWorkTitle ()
   ) {
     string
       inputSourceName =

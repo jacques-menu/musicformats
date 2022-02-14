@@ -2536,7 +2536,8 @@ void mxsr2msrTranslator::visitEnd ( S_clef& elt )
 #endif
 
   // convert clef to upper case for analysis
-  string currentClefSignToUpperCase = mfStringToUpperCase (fCurrentClefSign);
+  string currentClefSignToUpperCase =
+    mfStringToUpperCase (fCurrentClefSign);
 
   msrClefKind clefKind = msrClefKind::k_NoClef;
 
@@ -2747,13 +2748,33 @@ void mxsr2msrTranslator::visitEnd ( S_clef& elt )
   }
 
   // is this clef sign in the replace clef map?
+  const map<msrClefKind, msrClefKind>&
+    replaceClefKindToClefKindMapVariable =
+      gGlobalMxsr2msrOahGroup->
+        getReplaceClefKindToClefKindMapVariable ();
+
   map<msrClefKind, msrClefKind>::const_iterator
     it =
-      gGlobalMxsr2msrOahGroup->getReplaceClefKindToClefKindMapVariable ().find (clefKind);
+      replaceClefKindToClefKindMapVariable.find (clefKind);
 
-  if (it != gGlobalMxsr2msrOahGroup->getReplaceClefKindToClefKindMapVariable ().end ()) {
+  if (it != replaceClefKindToClefKindMapVariable.end ()) {
     // yes, replace the clef accordinglingly
-    clefKind = (*it).second;
+    msrClefKind
+      newClefKind = (*it).second;
+
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceClefs ()) {
+      gLogStream <<
+        "Replace clef " <<
+        msrClefKindAsString (clefKind) <<
+        " by " <<
+        msrClefKindAsString (newClefKind) <<
+        ", line " << inputLineNumber <<
+        endl;
+    }
+#endif
+
+    clefKind = newClefKind;
   }
 
   // create clef

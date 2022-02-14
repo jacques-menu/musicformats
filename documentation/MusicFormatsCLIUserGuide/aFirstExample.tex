@@ -227,7 +227,7 @@ The passes involved in a conversion can be seen with suitable %%%JMI
 %}{cpu}
 options:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini-1: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -auto-output-file-name -trace-passes -display-cpu-usage basic/Anacrusis.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -auto-output-file-name -trace-passes -display-cpu-usage basic/Anacrusis.xml
 
 %--------------------------------------------------------------
   Handle the options and arguments from argc/argv
@@ -294,25 +294,3 @@ The optional passes are those that display \mf\ internal data. They are triggere
 
 The resulting \fileName{Anacrusis.ly} file leads to this score where submitted to \lily:\\
 \includegraphics[scale=1]{../graphics/Anacrusis.png}
-
-
-% -------------------------------------------------------------------------
-\section{More converters and options}
-% -------------------------------------------------------------------------
-
-\xmlToLy\ can be used to produce scores in the \jianpu\ format, in which the notes piches are numbers relative to the scale instead of graphic elements:
-\begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/MinimalScore.xml -output-file-name MinimalScore_Jianpu.ly -jianpu -title "Minimal score in Jianpu format"
-\end{lstlisting}
-
-The key in this example is E major. The resulting \fileName{MinimalScore_Jianpu.ly} leads to:\\
-\includegraphics[scale=1]{../graphics/MinimalScore_Jianpu.png}
-
-to be compared with:\\
-\includegraphics[scale=1]{../graphics/MinimalScore.png}
-
-%The same score can also be produced in braille by \xmlToBrl:
-%\begin{lstlisting}[language=Terminal]
-%jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2brl basic/MinimalScore.xml -auto-output-file-name -utf8d --use-encoding-in-file-name
-%\end{lstlisting}
-

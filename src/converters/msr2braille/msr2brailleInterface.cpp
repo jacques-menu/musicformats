@@ -67,6 +67,15 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Translating an MSR score to braille in \"" <<
+      handler->getHandlerHeader () <<
+      "\"" <<
+      endl;
+  }
+#endif
   // has quiet mode been requested?
   // ------------------------------------------------------
 

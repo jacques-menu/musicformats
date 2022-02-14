@@ -80,7 +80,7 @@ EXP S_mfcConverterComponent createMusicxml2brailleConverterComponent ()
     pConverterComponent->
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
-          mfcVersionNumber::createFromString ("0.9.5"),
+          mfcVersionNumber::createFromString ("0.9.50"),
           "October 6, 2021",
           list<string> {
             "Start of sequential versions numbering"

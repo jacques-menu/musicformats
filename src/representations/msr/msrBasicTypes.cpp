@@ -104,21 +104,22 @@ string msrXMLLangKindAsString (
 
   switch (XMLLangKind) {
     case msrXMLLangKind::kXMLLangIt:
-      result = "kXMLLangIt";
+      result = "it";
       break;
     case msrXMLLangKind::kXMLLangEn:
-      result = "kXMLLangEn";
+      result = "en";
       break;
     case msrXMLLangKind::kXMLLangDe:
-      result = "kXMLLangDe";
+      result = "de";
       break;
     case msrXMLLangKind::kXMLLangFr:
-      result = "kXMLLangFr";
+      result = "fr";
+      break;
     case msrXMLLangKind::kXMLLangJa:
-      result = "kXMLLangJa";
+      result = "ja";
       break;
     case msrXMLLangKind::kXMLLangLa:
-      result = "kXMLLangLa";
+      result = "la";
       break;
   } // switch
 
@@ -17076,13 +17077,13 @@ string msrMarginTypeKindAsString (
 
   switch (marginTypeKind) {
     case msrMarginTypeKind::kMarginOdd:
-      result = "kMarginOdd";
+      result = "odd";
       break;
     case msrMarginTypeKind::kMarginEven:
-      result = "kMarginEven";
+      result = "even";
       break;
     case msrMarginTypeKind::kMarginBoth: // default value
-      result = "kMarginBoth";
+      result = "both";
       break;
   } // switch
 

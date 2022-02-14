@@ -37,7 +37,7 @@
 // MXSR
 #include "mxsrOah.h"
 #include "mxsr2msrOah.h"
-#include "mxsrGenerationOah.h"
+#include "msr2mxsrOah.h"
 
 // MSR
 #include "msrOah.h"
@@ -450,7 +450,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
 
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMxsrGenerationOahGroup ());
+        createGlobalMsr2mxsrOahGroup ());
 
       // create the MXSR OAH group
       appendGroupToHandler (
@@ -464,7 +464,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
 
       // create the msr2mxsr OAH group
       appendGroupToHandler (
-        createGlobalMxsrGenerationOahGroup ());
+        createGlobalMsr2mxsrOahGroup ());
 
       // create the MXSR OAH group
       appendGroupToHandler (
@@ -596,7 +596,7 @@ string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions ()
                 outputFileName += "_ASCII";
                 break;
 
-              case bsrBrailleOutputKind::kBrailleOutputUtf8:
+              case bsrBrailleOutputKind::kBrailleOutputUTF8:
                 outputFileName += "_UTF8";
                   /* JMI
                 switch (gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) {
@@ -612,11 +612,11 @@ string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions ()
                 */
                 break;
 
-              case bsrBrailleOutputKind::kBrailleOutputUtf8Debug:
-                outputFileName += "_Utf8Debug";
+              case bsrBrailleOutputKind::kBrailleOutputUTF8Debug:
+                outputFileName += "_UTF8Debug";
                 break;
 
-              case bsrBrailleOutputKind::kBrailleOutputUtf16:
+              case bsrBrailleOutputKind::kBrailleOutputUTF16:
                 outputFileName += "_UTF16";
                 switch (gGlobalBrailleGenerationOahGroup->getByteOrderingKind ()) {
                   case bsrByteOrderingKind::kByteOrderingNone:
@@ -685,9 +685,6 @@ void Mikrokosmos3WanderingInsiderHandler::enforceHandlerQuietness ()
   gGlobalMikrokosmos3WanderingInsiderOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMxsrGenerationOahGroup->
-    enforceGroupQuietness ();
-
   gGlobalMxsrOahGroup->
     enforceGroupQuietness ();
 
@@ -697,7 +694,7 @@ void Mikrokosmos3WanderingInsiderHandler::enforceHandlerQuietness ()
   gGlobalMsrOahGroup->
     enforceGroupQuietness ();
 
-  gGlobalMxsrGenerationOahGroup->
+  gGlobalMsr2mxsrOahGroup->
     enforceGroupQuietness ();
 
 #ifdef EXTRA_OAH_IS_ENABLED
