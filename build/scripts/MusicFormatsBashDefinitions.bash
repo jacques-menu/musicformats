@@ -702,9 +702,9 @@ function addDistribAll ()
 {
   git add -f MusicFormatsVersionNumber.txt
 
-  git add    ${DISTRIB_DIR}/MusicFormatFor*.dmg
+  git add    ${DISTRIB_DIR}/MusicFormatsFor*.dmg
 
-  git add    ${DISTRIB_DIR}/MusicFormatFor*.zip
+  git add    ${DISTRIB_DIR}/MusicFormatsFor*.zip
 }
 
 function addDocAll ()
