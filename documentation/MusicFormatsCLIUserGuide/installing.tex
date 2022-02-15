@@ -8,7 +8,7 @@ There is no GUI installer available yet, so users have to install the library at
 
 How to install \mf\ depends on the \OS. \Linux\ users often build the software they use themselves, while those of \Windows\ and \MacOS\ are accustomed to install in much simpler ways.
 
-Depending on the needs, users may wish to install the \MainIt{whole} \mf\ with source code and examples, or to use a \MainIt{distribution}, that contains only the \MainIt{libraries} if relevant, \CLI\ executables and documentation \pdf\ files.
+Depending on the needs, users may wish to install the \MainIt{whole} \mf\ with source code and examples, or to use a \MainIt{distribution}, that contains only the \MainIt{libraries} if relevant, the \CLI\ executables and the documentation \pdf\ files.
 
 The following chapters show the details.
 
@@ -17,14 +17,17 @@ The following chapters show the details.
 \chapter{Using a distribution}
 % -------------------------------------------------------------------------
 
-Supplied by \mf\ are tree distrubutions:
-\begin{itemize}
-\item \MacOS;
-\item \Ubuntu;
-\item \Windows.
-\end{itemize}
+The \mf\ \repo\ is hosted by \github\ and use so-called \MainIt{actions} to build the library on \MacOS, \Ubuntu\ and \Windows. The resulting files are then uploaded to the \repo, where they are available to create the distributions for these there \OS s. 
 
-The necessary files are found in \file{distrib}:
+Those are available in \file{distrib} 
+%Supplied by \mf\ are tree distrubutions:
+%\begin{itemize}
+%\item \MacOS;
+%\item \Ubuntu;
+%\item \Windows.
+%\end{itemize}
+%
+%The necessary files are found in \file{distrib}:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev > ls -sal distrib
 total 0

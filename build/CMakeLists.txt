@@ -254,8 +254,8 @@ else()
   set(LIBCONTENT ${CORESRC} ${COREH})
 endif()
 
-set(target musicxml2)
-set(staticlib musicxml2static)
+set(target musicformats)
+set(staticlib musicformatsstatic)
 
 if (NOT IOS)
 add_library(${target} SHARED ${LIBCONTENT})
@@ -284,7 +284,7 @@ set_target_properties (${staticlib} PROPERTIES
 			PUBLIC_HEADER "${COREH}"
 			DEFINE_SYMBOL LIBMUSICXML_EXPORTS
 			XCODE_ATTRIBUTE_ENABLE_BITCODE "NO"
-			OUTPUT_NAME musicxml2
+			OUTPUT_NAME musicformats
 )
 endif()
 
