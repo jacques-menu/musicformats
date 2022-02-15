@@ -66,14 +66,14 @@ function MakeMacOSDistribution ()
   echo "--> MAC_OS_DMG   = ${MAC_OS_DMG}"
   echo
 
-  MAC_OS_ZIP="${DISTRIB_DIR}/MusicFormatForMacOS.zip"
+  MAC_OS_ZIP="${DISTRIB_DIR}/MusicFormatsForMacOS.zip"
   echo "--> MAC_OS_DMG   = ${MAC_OS_DMG}"
   echo
 
   echo -n "--> current directory: "; pwd
   echo
 
-  MACOS_DISTRIB_WORK="${DISTRIB_DIR}/MusicFormatForMacOS"
+  MACOS_DISTRIB_WORK="${DISTRIB_DIR}/MusicFormatsForMacOS"
   echo "--> MACOS_DISTRIB_WORK   = ${MACOS_DISTRIB_WORK}"
   echo
 
@@ -126,13 +126,13 @@ function MakeMacOSDistribution ()
   echo
 
   echo "Mac OS distribution DMG:"
-  ls -sal ${MAC_OS_ZIP}
+  ls -sal ${MAC_OS_DMG}
 
   # create the Mac OS zip archive
-  zip MAC_OS_ZIP -r ${MAC_OS_DMG}
+#  zip MAC_OS_ZIP -r ${MAC_OS_DMG}
 
-  echo "Mac OS distribution:"
-  ls -sal ${MAC_OS_ZIP}
+#  echo "Mac OS distribution zip:"
+#  ls -sal ${MAC_OS_ZIP}
 }
 
 
@@ -146,14 +146,14 @@ function MakeUbuntuDistribution ()
   echo "--> UBUNTU_DISTRIB_ORG   = ${UBUNTU_DISTRIB_ORG}"
   echo
 
-  UBUNTU_ZIP="${DISTRIB_DIR}/MusicFormatForUbuntu.zip"
+  UBUNTU_ZIP="${DISTRIB_DIR}/MusicFormatsForUbuntu.zip"
   echo "--> UBUNTU_ZIP   = ${UBUNTU_ZIP}"
   echo
 
   echo -n "--> current directory: "; pwd
   echo
 
-  UBUNTU_DISTRIB_WORK="${DISTRIB_DIR}/MusicFormatForUbuntu"
+  UBUNTU_DISTRIB_WORK="${DISTRIB_DIR}/MusicFormatsForUbuntu"
   echo "--> UBUNTU_DISTRIB_WORK   = ${UBUNTU_DISTRIB_WORK}"
   echo
 
@@ -188,7 +188,7 @@ function MakeUbuntuDistribution ()
   echo -n "--> current directory: "; pwd
   echo
 
-  zip ${UBUNTU_DISTRIB_WORK} -r ${UBUNTU_ZIP}
+  zip ${UBUNTU_ZIP} -r ${UBUNTU_DISTRIB_WORK}
 
   echo "Ubuntu distribution:"
   ls -sal ${UBUNTU_ZIP}
@@ -205,14 +205,14 @@ function MakeWindowsDistribution ()
   echo "--> WINDOWS_DISTRIB_ORG   = ${WINDOWS_DISTRIB_ORG}"
   echo
 
-  WINDOWS_ZIP="${DISTRIB_DIR}/MusicFormatForWindows.zip"
+  WINDOWS_ZIP="${DISTRIB_DIR}/MusicFormatsForWindows.zip"
   echo "--> WINDOWS_ZIP   = ${WINDOWS_ZIP}"
   echo
 
   echo -n "--> current directory: "; pwd
   echo
 
-  WINDOWS_DISTRIB_WORK="${DISTRIB_DIR}/MusicFormatForWindows"
+  WINDOWS_DISTRIB_WORK="${DISTRIB_DIR}/MusicFormatsForWindows"
   echo "--> WINDOWS_DISTRIB_WORK   = ${WINDOWS_DISTRIB_WORK}"
   echo
 
@@ -247,7 +247,7 @@ function MakeWindowsDistribution ()
   echo -n "--> current directory: "; pwd
   echo
 
-  zip ${WINDOWS_DISTRIB_WORK} -r ${WINDOWS_ZIP}
+  zip ${WINDOWS_ZIP} -r ${WINDOWS_DISTRIB_WORK}
 
   echo "Windows distribution:"
   ls -sal ${WINDOWS_ZIP}
@@ -313,8 +313,7 @@ echo "distrib contents:"
 echo "----------------------------------------------"
 echo
 
-ls -salt ${DISTRIB_DIR}/*.txt ${DISTRIB_DIR}/*.pdf ${DISTRIB_DIR}/MusicFormatFor*
-echo
+ls -salt ${DISTRIB_DIR}/*.txt ${DISTRIB_DIR}/*.pdf ${DISTRIB_DIR}/MusicFormatsFor*
 
 
 #set +x
