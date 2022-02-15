@@ -700,7 +700,11 @@ function addBuildAll ()
 
 function addDistribAll ()
 {
-  git add ${MUSIC_FORMATS_DEV}/distrib/MusicFormatFor*.*
+  git add -f MusicFormatsVersionNumber.txt
+
+  git add    ${DISTRIB_DIR}/MusicFormatFor*.dmg
+
+  git add    ${DISTRIB_DIR}/MusicFormatFor*.zip
 }
 
 function addDocAll ()
