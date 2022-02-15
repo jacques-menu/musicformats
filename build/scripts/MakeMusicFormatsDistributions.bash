@@ -28,6 +28,28 @@ WINDOWS_DISTRIB_ORG="${DISTRIB_DIR}/musicformats-windows-distrib"
 DOWNLOADED_DISTRIBUTIONS="${HOME}/Downloads/${DOWNLOADED_MACOS_DISTRIB_NAME} ${HOME}/Downloads/${DOWNLOADED_UBUNTU_DISTRIB_NAME}   ${HOME}/Downloads/${DOWNLOADED_WINDOWS_DISTRIB_NAME}"
 
 
+function MakeDocumentationDistribution ()
+{
+  echo "----------------------------------------------"
+  echo "Making documentation distribution"
+  echo "----------------------------------------------"
+  echo
+
+  echo -n "--> current directory: "; pwd
+  echo
+
+   # copy documentation files from MACOS_DISTRIB_ORG to DISTRIB_DIR
+  cp -p ${MACOS_DISTRIB_ORG}/MusicFormatsVersionNumber.txt ${DISTRIB_DIR}
+
+  cp -p ${MACOS_DISTRIB_ORG}/documentation/*/*.pdf ${DISTRIB_DIR}
+
+  # create the Mac OS documentation zip archive
+#  zip MAC_OS_ZIP -r ${MAC_OS_DMG}
+
+  echo "Mac OS documentation distribution:"
+  ls -sal ${DISTRIB_DIR}
+}
+
 function MakeMacOSDistribution ()
 {
   echo "----------------------------------------------"
@@ -38,7 +60,13 @@ function MakeMacOSDistribution ()
   echo "--> MACOS_DISTRIB_ORG   = ${MACOS_DISTRIB_ORG}"
   echo
 
-  MAC_OS_DMG="${DISTRIB_DIR}/MusicFormatForMacOS.dmg"
+  MAC_OS_DMG_NAME="MusicFormatsForMacOS"
+
+  MAC_OS_DMG="${DISTRIB_DIR}/${MAC_OS_DMG_NAME}.dmg"
+  echo "--> MAC_OS_DMG   = ${MAC_OS_DMG}"
+  echo
+
+  MAC_OS_ZIP="${DISTRIB_DIR}/MusicFormatForMacOS.zip"
   echo "--> MAC_OS_DMG   = ${MAC_OS_DMG}"
   echo
 
@@ -66,8 +94,8 @@ function MakeMacOSDistribution ()
 
   cp -pr ${MACOS_DISTRIB_ORG}/build/bin ${MACOS_DISTRIB_WORK}
 
-  mkdir ${MACOS_DISTRIB_WORK}/documentation
-  cp -p ${MACOS_DISTRIB_ORG}/documentation/*/*.pdf ${MACOS_DISTRIB_WORK}/documentation
+#  mkdir ${MACOS_DISTRIB_WORK}/documentation
+#  cp -p ${MACOS_DISTRIB_ORG}/documentation/*/*.pdf ${MACOS_DISTRIB_WORK}/documentation
 
   echo "--> after files copy:"
   echo
@@ -94,11 +122,17 @@ function MakeMacOSDistribution ()
 
   [ -e ${MAC_OS_DMG} ]; rm -r ${MAC_OS_DMG}
 
-  hdiutil create ${MAC_OS_DMG} -ov -volname "MusicFormatsForMacOS" -fs APFS -srcfolder ${MACOS_DISTRIB_WORK}
+  hdiutil create ${MAC_OS_DMG} -ov -volname ${MAC_OS_DMG_NAME} -fs APFS -srcfolder ${MACOS_DISTRIB_WORK}
   echo
 
+  echo "Mac OS distribution DMG:"
+  ls -sal ${MAC_OS_ZIP}
+
+  # create the Mac OS zip archive
+  zip MAC_OS_ZIP -r ${MAC_OS_DMG}
+
   echo "Mac OS distribution:"
-  ls -sal ${MAC_OS_DMG}
+  ls -sal ${MAC_OS_ZIP}
 }
 
 
@@ -141,8 +175,8 @@ function MakeUbuntuDistribution ()
   cp -pr ${UBUNTU_DISTRIB_ORG}/build/bin ${UBUNTU_DISTRIB_WORK}
   cp -pr ${UBUNTU_DISTRIB_ORG}/build/lib ${UBUNTU_DISTRIB_WORK}
 
-  mkdir ${UBUNTU_DISTRIB_WORK}/documentation
-  cp -p ${UBUNTU_DISTRIB_ORG}/documentation/*/*.pdf ${UBUNTU_DISTRIB_WORK}/documentation
+#  mkdir ${UBUNTU_DISTRIB_WORK}/documentation
+#  cp -p ${UBUNTU_DISTRIB_ORG}/documentation/*/*.pdf ${UBUNTU_DISTRIB_WORK}/documentation
 
   echo "--> after files copy:"
   echo
@@ -200,8 +234,8 @@ function MakeWindowsDistribution ()
   cp -pr ${WINDOWS_DISTRIB_ORG}/build/bin ${WINDOWS_DISTRIB_WORK}
   cp -pr ${WINDOWS_DISTRIB_ORG}/build/lib ${WINDOWS_DISTRIB_WORK}
 
-  mkdir ${WINDOWS_DISTRIB_WORK}/documentation
-  cp -p ${WINDOWS_DISTRIB_ORG}/documentation/*/*.pdf ${WINDOWS_DISTRIB_WORK}/documentation
+#  mkdir ${WINDOWS_DISTRIB_WORK}/documentation
+#  cp -p ${WINDOWS_DISTRIB_ORG}/documentation/*/*.pdf ${WINDOWS_DISTRIB_WORK}/documentation
 
   echo "--> after files copy:"
   echo
@@ -263,6 +297,9 @@ echo "make the distributions:"
 echo "----------------------------------------------"
 echo
 
+MakeDocumentationDistribution
+echo
+
 MakeMacOSDistribution
 echo
 
@@ -276,7 +313,7 @@ echo "distrib contents:"
 echo "----------------------------------------------"
 echo
 
-ls -salt ${DISTRIB_DIR}/MusicFormatFor*
+ls -salt ${DISTRIB_DIR}/*.txt ${DISTRIB_DIR}/*.pdf ${DISTRIB_DIR}/MusicFormatFor*
 echo
 
 
