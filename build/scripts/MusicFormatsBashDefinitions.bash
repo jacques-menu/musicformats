@@ -271,6 +271,24 @@ function mmd ()
 #  set +x
 }
 
+# clean distributions
+#----------------------------------------------
+
+function cmd ()
+{
+#  set -x
+  SCRIPT_NAME=CleanMusicFormatsDistributions.bash
+  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
+  echo LOGFILE = ${LOGFILE}
+
+  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+
+  echo
+
+#  ls -saltr ${BUILD_DIR}
+#  set +x
+}
+
 # check versions
 #----------------------------------------------
 
@@ -688,7 +706,7 @@ function addSrcAll ()
   git add ${SRC_DIR}/*.ts ${SRC_DIR}/*.js ${SRC_DIR}/*.json
 }
 
-function addBuildAll ()
+function addBuild ()
 {
   git add    ${BUILD_DIR}/Building.md
   git add -f ${BUILD_DIR}/CMakeLists.txt
@@ -698,11 +716,11 @@ function addBuildAll ()
   git add    ${BUILD_DIR}/scripts
 }
 
-function addDistribAll ()
+function addDistrib ()
 {
   git add -f ${DISTRIB_DIR}/MusicFormatsVersionNumber.txt
 
-  git add    ${DISTRIB_DIR}/MusicFormatsFor*.dmg
+  git add    ${DISTRIB_DIR}/*.pdf
 
   git add    ${DISTRIB_DIR}/MusicFormatsFor*.zip
 }

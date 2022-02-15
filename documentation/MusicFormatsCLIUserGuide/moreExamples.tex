@@ -77,7 +77,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Anac
 
 We can obtain another \mxml\ file with this command, changing the work title, adding a work number and using an alto clef instead of a treble clef:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles >  xml2xml basic/Anacrusis.xml -output-file-name Anacrusis_From_xml2xml.xml -msr-replace-clef treble=alto -work-title "Anacrusis from xml2ml" -work-number 317
+jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2xml basic/Anacrusis.xml -output-file-name Anacrusis_From_xml2xml.xml -msr-replace-clef treble=alto -work-title "Anacrusis from xml2ml with alto clef" -work-number 317
 \end{lstlisting}
 
 The resulting file \fileName{Anacrusis_From_xml2xml.xml} contains:
@@ -98,6 +98,25 @@ from "basic/Anacrusis.xml"
         <work-number>317</work-number>
         <work-title>Anacrusis from xml2ml with alto clef</work-title>
     </work>
+
+	<!-- ... ... ... />
+	
+    <part id="P1">
+        <measure number="0">
+            <attributes>
+                <divisions>2</divisions>
+                <key>
+                    <fifths>0</fifths>
+                </key>
+                <time>
+                    <beats>3</beats>
+                    <beat-type>4</beat-type>
+                </time>
+                <clef>
+                    <sign>C</sign>
+                    <line>3</line>
+                </clef>
+            </attributes>
 
 	<!-- ... ... ... />
 	
