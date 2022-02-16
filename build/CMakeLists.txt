@@ -104,7 +104,7 @@ endif()
 get_filename_component(ROOT ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 set (DOCDIR ${ROOT}/doc)
 set (DOC    ${DOCDIR}/presentation/libmusicxml2.pdf ${DOCDIR}/IntroductionToMusicXML/IntroductionToMusicXML.pdf ${DOCDIR}/MusicFormatsCLIUserGuide/MusicFormatsCLIUserGuide.pdf ${DOCDIR}/MusicFormatsAPIUserGuide/MusicFormatsAPIUserGuide.pdf ${DOCDIR}/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf)
-set (SCHEMA   ${ROOT}/schemas/MusicXML/dtds/${XMLVERSION})
+set (SCHEMA   ${ROOT}/schemas/MusicXML/musicxml-${XMLVERSION})
 
 set (BINDIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 set (LIBDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)

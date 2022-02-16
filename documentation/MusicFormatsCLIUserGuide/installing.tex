@@ -19,154 +19,86 @@ The following chapters show the details.
 
 The \mf\ \repo\ is hosted by \github\ and use so-called \MainIt{actions} to build the library on \MacOS, \Ubuntu\ and \Windows. The resulting files are then uploaded to the \repo, where they are available to create the distributions for these there \OS s. 
 
-Those are available in \file{distrib} 
-%Supplied by \mf\ are tree distrubutions:
-%\begin{itemize}
-%\item \MacOS;
-%\item \Ubuntu;
-%\item \Windows.
-%\end{itemize}
-%
-%The necessary files are found in \file{distrib}:
+These distributions are in the form of \zip\ files. They are are available from \url{https://github.com/jacques-menu/musicformats/tree/master/distrib}, as well as the documentation PDF files:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > ls -sal distrib
-total 0
-0 drwxr-xr-x   5 jacquesmenu  staff  160 Feb  9 12:05 .
-0 drwxr-xr-x  31 jacquesmenu  staff  992 Feb  9 10:12 ..
-0 drwx------@  4 jacquesmenu  staff  128 Feb  9 13:51 macos-distrib
-0 drwx------@  4 jacquesmenu  staff  128 Feb  9 16:45 ubuntu-distrib
-0 drwx------@  4 jacquesmenu  staff  128 Feb  9 13:51 windows-distrib
+jacquesmenu@macmini: ~/musicformats_local_clone/distrib > ls -sal
+total 150088
+     0 drwxr-xr-x   8 jacquesmenu  staff       256 Feb 16 07:47 .
+     0 drwxr-xr-x  22 jacquesmenu  staff       704 Feb 16 07:47 ..
+  1672 -rw-r--r--   1 jacquesmenu  staff    854294 Feb 16 07:47 IntroductionToMusicXML.pdf
+  1976 -rw-r--r--   1 jacquesmenu  staff   1008702 Feb 16 07:47 MusicFormatsCLIUserGuide.pdf
+108168 -rw-r--r--   1 jacquesmenu  staff  55378423 Feb 16 07:47 MusicFormatsForMacOS.zip
+ 34080 -rw-r--r--   1 jacquesmenu  staff  17445663 Feb 16 07:47 MusicFormatsForUbuntu.zip
+  4184 -rw-r--r--   1 jacquesmenu  staff   2139537 Feb 16 07:47 MusicFormatsForWindows.zip
+     8 -rw-r--r--   1 jacquesmenu  staff         6 Feb 16 07:47 MusicFormatsVersionNumber.txt
 \end{lstlisting}
+
+These distribution \zip\ archive are the ones for the current, most recent version of \mf. To use earlier versions, the library has to be cloned locally, see \Ref{}.
 
 
 % -------------------------------------------------------------------------
 \section{MacOS\texttrademark\ distribution}
 % -------------------------------------------------------------------------
 
+\MacOS\ software is usually distributed as \Main{DMG} files. Due to file size limitations on \github, the \MacOS\ distribution has to be compacted. This is done with \zip, and placing that in a DMG archive would not add any value. Only the \zip\ archive is thus provided.
+
 %%%JMI\mf\ is  installable directly from the repository, since this is the environment is is developed on. Just clone the \repo\ and you will find the executables in \build{bin} and the libraries in \build{lib}.
 
-After downloading, we get:
+After downloading and uncompressing \fileName{MusicFormatsForMacOS.zip}, we get:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/distrib/macos-distrib > ls -sal */*
-build/bin:
-total 685056
-    0 drwxr-xr-x@ 25 jacquesmenu  staff       800 Feb  9 11:25 .
-    0 drwxr-xr-x@  3 jacquesmenu  staff        96 Feb  9 13:51 ..
-76800 -rwxr-xr-x   1 jacquesmenu  staff  38306592 Feb  9 11:25 LilyPondIssue34
-76800 -rwxr-xr-x   1 jacquesmenu  staff  38309680 Feb  9 11:25 Mikrokosmos3Wandering
- 9216 -rwxr-xr-x   1 jacquesmenu  staff   4314896 Feb  9 11:25 MusicAndHarmonies
- 9216 -rwxr-xr-x   1 jacquesmenu  staff   4314880 Feb  9 11:25 RandomChords
- 9216 -rwxr-xr-x   1 jacquesmenu  staff   4314880 Feb  9 11:25 RandomMusic
- 9216 -rwxr-xr-x   1 jacquesmenu  staff   4414944 Feb  9 11:25 countnotes
-17408 -rwxr-xr-x   1 jacquesmenu  staff   8313952 Feb  9 11:25 displayMusicformatsHistory
-17408 -rwxr-xr-x   1 jacquesmenu  staff   8313952 Feb  9 11:25 displayMusicformatsVersion
-80896 -rwxr-xr-x   1 jacquesmenu  staff  40526208 Feb  9 11:25 msdlconverter
-13312 -rwxr-xr-x   1 jacquesmenu  staff   6387232 Feb  9 11:25 partsummary
- 9216 -rwxr-xr-x   1 jacquesmenu  staff   4528736 Feb  9 11:25 readunrolled
-64512 -rwxr-xr-x   1 jacquesmenu  staff  32618592 Feb  9 11:25 xml2brl
-68608 -rwxr-xr-x   1 jacquesmenu  staff  34088624 Feb  9 11:25 xml2gmn
-17408 -rwxr-xr-x   1 jacquesmenu  staff   8781984 Feb  9 11:25 xml2guido
-68608 -rwxr-xr-x   1 jacquesmenu  staff  34436992 Feb  9 11:25 xml2ly
-13312 -rwxr-xr-x   1 jacquesmenu  staff   6342528 Feb  9 11:25 xml2midi
-60416 -rwxr-xr-x   1 jacquesmenu  staff  30426688 Feb  9 11:25 xml2xml
- 9216 -rwxr-xr-x   1 jacquesmenu  staff   4657200 Feb  9 11:25 xmlclone
-11264 -rwxr-xr-x   1 jacquesmenu  staff   4735296 Feb  9 11:25 xmlfactory
- 9216 -rwxr-xr-x   1 jacquesmenu  staff   4504976 Feb  9 11:25 xmliter
- 9216 -rwxr-xr-x   1 jacquesmenu  staff   4442496 Feb  9 11:25 xmlread
-13312 -rwxr-xr-x   1 jacquesmenu  staff   6129744 Feb  9 11:25 xmltranspose
-11264 -rwxr-xr-x   1 jacquesmenu  staff   4734368 Feb  9 11:25 xmlversion
+jacquesmenu@macmini: ~/Downloads/MusicFormatsForMacOS > ls -sal *
+8 -rw-r--r--@ 1 jacquesmenu  staff  6 Feb 14 14:20 MusicFormatsVersionNumber.txt
 
-documentation/IntroductionToMusicXML:
-total 1672
-   0 drwxr-xr-x@ 3 jacquesmenu  staff      96 Feb  9 13:51 .
-   0 drwxr-xr-x@ 4 jacquesmenu  staff     128 Feb  9 13:51 ..
-1672 -rw-r--r--@ 1 jacquesmenu  staff  854295 Feb  9 11:25 IntroductionToMusicXML.pdf
-
-documentation/MusicFormatsCLIUserGuide:
-total 1616
-   0 drwxr-xr-x@ 3 jacquesmenu  staff      96 Feb  9 13:51 .
-   0 drwxr-xr-x@ 4 jacquesmenu  staff     128 Feb  9 13:51 ..
-1616 -rw-r--r--@ 1 jacquesmenu  staff  826403 Feb  9 11:25 MusicFormatsCLIUserGuide.pdf
+bin:
+total 661992
+    0 drwxr-xr-x@ 25 jacquesmenu  staff       800 Feb 14 14:20 .
+    0 drwxr-xr-x@  4 jacquesmenu  staff       128 Feb 15 17:23 ..
+74864 -rwxr-xr-x@  1 jacquesmenu  staff  38326752 Feb 14 14:20 LilyPondIssue34
+74864 -rwxr-xr-x@  1 jacquesmenu  staff  38329824 Feb 14 14:20 Mikrokosmos3Wandering
+ 8432 -rwxr-xr-x@  1 jacquesmenu  staff   4314896 Feb 14 14:20 MusicAndHarmonies
+ 8432 -rwxr-xr-x@  1 jacquesmenu  staff   4314880 Feb 14 14:20 RandomChords
+ 8432 -rwxr-xr-x@  1 jacquesmenu  staff   4314880 Feb 14 14:20 RandomMusic
+ 8624 -rwxr-xr-x@  1 jacquesmenu  staff   4414944 Feb 14 14:20 countnotes
+16528 -rwxr-xr-x@  1 jacquesmenu  staff   8459424 Feb 14 14:20 displayMusicformatsHistory
+16528 -rwxr-xr-x@  1 jacquesmenu  staff   8459424 Feb 14 14:20 displayMusicformatsVersion
+79200 -rwxr-xr-x@  1 jacquesmenu  staff  40546384 Feb 14 14:20 msdlconverter
+12480 -rwxr-xr-x@  1 jacquesmenu  staff   6387232 Feb 14 14:20 partsummary
+ 8848 -rwxr-xr-x@  1 jacquesmenu  staff   4528736 Feb 14 14:20 readunrolled
+64000 -rwxr-xr-x@  1 jacquesmenu  staff  32764496 Feb 14 14:20 xml2brl
+66872 -rwxr-xr-x@  1 jacquesmenu  staff  34236240 Feb 14 14:20 xml2gmn
+17160 -rwxr-xr-x@  1 jacquesmenu  staff   8781984 Feb 14 14:20 xml2guido
+67552 -rwxr-xr-x@  1 jacquesmenu  staff  34583840 Feb 14 14:20 xml2ly
+12392 -rwxr-xr-x@  1 jacquesmenu  staff   6342528 Feb 14 14:20 xml2midi
+59720 -rwxr-xr-x@  1 jacquesmenu  staff  30574528 Feb 14 14:20 xml2xml
+ 9104 -rwxr-xr-x@  1 jacquesmenu  staff   4657200 Feb 14 14:20 xmlclone
+ 9256 -rwxr-xr-x@  1 jacquesmenu  staff   4735296 Feb 14 14:20 xmlfactory
+ 8800 -rwxr-xr-x@  1 jacquesmenu  staff   4504976 Feb 14 14:20 xmliter
+ 8680 -rwxr-xr-x@  1 jacquesmenu  staff   4442496 Feb 14 14:20 xmlread
+11976 -rwxr-xr-x@  1 jacquesmenu  staff   6129744 Feb 14 14:20 xmltranspose
+ 9248 -rwxr-xr-x@  1 jacquesmenu  staff   4734368 Feb 14 14:20 xmlversion
 \end{lstlisting}
+
+\MacOS\ executables are self-sufficient and can be placed anywhere on a disk except the trash. Usually, there are placed in the \code{/Applications} directory.
+
+
+% -------------------------------------------------------------------------
+\subsection{Security issue in recent MacOS\texttrademark\ versions}
+% -------------------------------------------------------------------------
 
 \MacOS\ gets more and more stringent over time regarding security. The \OS\ part in charge of this is named \Gatekeeper. 
 
-When installing \mf\ from the \repo\ on versions up to 10 (\Main{High Sierra}), the executables in \build{bin} are available alright.
+When installing \mf\ from the \repo\ on versions up to 10 (\Main{High Sierra}), the executables in \code{bin} are usable alright.
 
 From version 11 (\Main{Catalina}) on, though, the executables you get are not executable actually, because their developer is unknown to the \OS, and actions have to be taken for them to be usable.
 
 The screenshot below has been made with \MacOS\ \Main{Monterey} 12.0.1 with english as the user interface language. The texts vary of course depending on the language used.
 
-After downloading, we get:
+When launching one of these executables for the first time, such as:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/Downloads/MusicFormats-for-macos/build/bin > ll
-total 659992
-    0 drwxr-xr-x@ 25 jacquesmenu  staff       800 Feb  5 10:17:27 2022 ./
-    0 drwxr-xr-x@  4 jacquesmenu  staff       128 Feb  5 10:17:26 2022 ../
-74808 -rw-r--r--@  1 jacquesmenu  staff  38301488 Feb  5 08:40:16 2022 LilyPondIssue34
-74816 -rw-r--r--@  1 jacquesmenu  staff  38304608 Feb  5 08:40:16 2022 Mikrokosmos3Wandering
- 8432 -rw-r--r--@  1 jacquesmenu  staff   4314896 Feb  5 08:40:16 2022 MusicAndHarmonies
- 8432 -rw-r--r--@  1 jacquesmenu  staff   4314880 Feb  5 08:40:16 2022 RandomChords
- 8432 -rw-r--r--@  1 jacquesmenu  staff   4314880 Feb  5 08:40:16 2022 RandomMusic
- 8624 -rw-r--r--@  1 jacquesmenu  staff   4414944 Feb  5 08:40:16 2022 countnotes
-16232 -rw-r--r--@  1 jacquesmenu  staff   8308416 Feb  5 08:40:18 2022 displayMusicformatsHistory
-16232 -rw-r--r--@  1 jacquesmenu  staff   8308416 Feb  5 08:40:18 2022 displayMusicformatsVersion
-79144 -rw-r--r--@  1 jacquesmenu  staff  40521056 Feb  5 08:40:18 2022 msdlconverter
-12480 -rw-r--r--@  1 jacquesmenu  staff   6387232 Feb  5 08:40:18 2022 partsummary
- 8848 -rw-r--r--@  1 jacquesmenu  staff   4528736 Feb  5 08:40:18 2022 readunrolled
-63672 -rw-r--r--@  1 jacquesmenu  staff  32597328 Feb  5 08:40:20 2022 xml2brl
-66544 -rw-r--r--@  1 jacquesmenu  staff  34067328 Feb  5 08:40:20 2022 xml2gmn
-17160 -rw-r--r--@  1 jacquesmenu  staff   8781984 Feb  5 08:40:20 2022 xml2guido
-67256 -rw-r--r--@  1 jacquesmenu  staff  34431984 Feb  5 08:40:22 2022 xml2ly
-12392 -rw-r--r--@  1 jacquesmenu  staff   6342528 Feb  5 08:40:22 2022 xml2midi
-59424 -rw-r--r--@  1 jacquesmenu  staff  30422064 Feb  5 08:40:22 2022 xml2xml
- 9104 -rw-r--r--@  1 jacquesmenu  staff   4657200 Feb  5 08:40:22 2022 xmlclone
- 9256 -rw-r--r--@  1 jacquesmenu  staff   4735296 Feb  5 08:40:22 2022 xmlfactory
- 8800 -rw-r--r--@  1 jacquesmenu  staff   4504976 Feb  5 08:40:22 2022 xmliter
- 8680 -rw-r--r--@  1 jacquesmenu  staff   4442496 Feb  5 08:40:24 2022 xmlread
-11976 -rw-r--r--@  1 jacquesmenu  staff   6129744 Feb  5 08:40:24 2022 xmltranspose
- 9248 -rw-r--r--@  1 jacquesmenu  staff   4734368 Feb  5 08:40:24 2022 xmlversion
-\end{lstlisting}
-
-These files should first made executables:
-\begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/Downloads/MusicFormats-for-macos/build/bin > chmod +x *
-
-jacquesmenu@macmini: ~/Downloads/MusicFormats-for-macos/build/bin > ll
-total 659992
-    0 drwxr-xr-x@ 25 jacquesmenu  staff       800 Feb  5 10:17:27 2022 ./
-    0 drwxr-xr-x@  4 jacquesmenu  staff       128 Feb  5 10:17:26 2022 ../
-74808 -rwxr-xr-x@  1 jacquesmenu  staff  38301488 Feb  5 08:40:16 2022 LilyPondIssue34*
-74816 -rwxr-xr-x@  1 jacquesmenu  staff  38304608 Feb  5 08:40:16 2022 Mikrokosmos3Wandering*
- 8432 -rwxr-xr-x@  1 jacquesmenu  staff   4314896 Feb  5 08:40:16 2022 MusicAndHarmonies*
- 8432 -rwxr-xr-x@  1 jacquesmenu  staff   4314880 Feb  5 08:40:16 2022 RandomChords*
- 8432 -rwxr-xr-x@  1 jacquesmenu  staff   4314880 Feb  5 08:40:16 2022 RandomMusic*
- 8624 -rwxr-xr-x@  1 jacquesmenu  staff   4414944 Feb  5 08:40:16 2022 countnotes*
-16232 -rwxr-xr-x@  1 jacquesmenu  staff   8308416 Feb  5 08:40:18 2022 displayMusicformatsHistory*
-16232 -rwxr-xr-x@  1 jacquesmenu  staff   8308416 Feb  5 08:40:18 2022 displayMusicformatsVersion*
-79144 -rwxr-xr-x@  1 jacquesmenu  staff  40521056 Feb  5 08:40:18 2022 msdlconverter*
-12480 -rwxr-xr-x@  1 jacquesmenu  staff   6387232 Feb  5 08:40:18 2022 partsummary*
- 8848 -rwxr-xr-x@  1 jacquesmenu  staff   4528736 Feb  5 08:40:18 2022 readunrolled*
-63672 -rwxr-xr-x@  1 jacquesmenu  staff  32597328 Feb  5 08:40:20 2022 xml2brl*
-66544 -rwxr-xr-x@  1 jacquesmenu  staff  34067328 Feb  5 08:40:20 2022 xml2gmn*
-17160 -rwxr-xr-x@  1 jacquesmenu  staff   8781984 Feb  5 08:40:20 2022 xml2guido*
-67256 -rwxr-xr-x@  1 jacquesmenu  staff  34431984 Feb  5 08:40:22 2022 xml2ly*
-12392 -rwxr-xr-x@  1 jacquesmenu  staff   6342528 Feb  5 08:40:22 2022 xml2midi*
-59424 -rwxr-xr-x@  1 jacquesmenu  staff  30422064 Feb  5 08:40:22 2022 xml2xml*
- 9104 -rwxr-xr-x@  1 jacquesmenu  staff   4657200 Feb  5 08:40:22 2022 xmlclone*
- 9256 -rwxr-xr-x@  1 jacquesmenu  staff   4735296 Feb  5 08:40:22 2022 xmlfactory*
- 8800 -rwxr-xr-x@  1 jacquesmenu  staff   4504976 Feb  5 08:40:22 2022 xmliter*
- 8680 -rwxr-xr-x@  1 jacquesmenu  staff   4442496 Feb  5 08:40:24 2022 xmlread*
-11976 -rwxr-xr-x@  1 jacquesmenu  staff   6129744 Feb  5 08:40:24 2022 xmltranspose*
- 9248 -rwxr-xr-x@  1 jacquesmenu  staff   4734368 Feb  5 08:40:24 2022 xmlversion*
-\end{lstlisting}
-
-Then, when launching one of these executables such as:
-\begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > ./xml2ly 
+jacquesmenu@macmini: ~/Downloads/MusicFormatsForMacOS/bin > ./xml2ly
 \end{lstlisting}
 we get a alert telling that it cannot be opened, because the developper is not known to the \OS:\\
-\includegraphics[scale=0.5]{../graphics/MacOSMaliciousSoftwareAlert.png}
+\includegraphics[scale=0.35]{../graphics/MacOSMaliciousSoftwareAlert.png}
 
 Clicking in either buttons in this dialog kill the process:
 \begin{lstlisting}[language=Terminal]
@@ -175,7 +107,7 @@ Killed: 9
 
 The trouble is that these executables are in {\it \quarantine} by default. To make them usable, they have to quit quarantine, which is done by removing one of their attributes:
 \begin{lstlisting}[language=Terminal]
-xattr -d com.apple.quarantine *
+jacquesmenu@macmini: ~/Downloads/MusicFormatsForMacOS/bin > xattr -d com.apple.quarantine *
 \end{lstlisting}
 %codesign --sign - --force --deep %%%JMI not necessary
 
@@ -184,24 +116,24 @@ From then on, the \mf\ executables can be used seamlessly on the given machine.
 Having to perform the preceding task for each executable is the price to pay for security. And it has to be perfomed again when installing new versions\dots
 
 
-%The way to go ahead is, right after you got that message, is to:
-%\begin{itemize}
-%\item  open \MainIt{System Preferences}, choose the \MainIt{Security \& Privacy} tab, and there click on the \MainIt{General button};
-%
-%\item click on the lock at the bottom left of the dialog to make changes:\\
-%\includegraphics[scale=0.5]{../graphics/MacOSAllowAnyway.png}
-%
-%\item click on the \MainIt{Allow Anyway} button.
-%%%%JMI sudo spctl --master-disable to create a Anywhere radio button
-%%jacquesmenu@macmini > spctl --status
-%%assessments enabled
-%
-%\end{itemize}
-%
-%Re-execute the executable from the command line. This pops-up a dialog to confirm you actually want to use this software:\\
-%\includegraphics[scale=0.5]{../graphics/MacOSConfirmOpening.png}
-%
-%Click on the \MainIt{Open} button to register the executable in \Gatekeeper\ and go ahead.
+The above can be done in the \GUI\ file by file too. Right after you got the message above:
+\begin{itemize}
+\item  open \MainIt{System Preferences}, choose the \MainIt{Security \& Privacy} tab, and there click on the \MainIt{General button};
+
+\item click on the lock at the bottom left of the dialog to make changes:\\
+\includegraphics[scale=0.35]{../graphics/MacOSAllowAnyway.png}
+
+\item click on the \MainIt{Allow Anyway} button.
+%%%JMI sudo spctl --master-disable to create a Anywhere radio button
+%jacquesmenu@macmini > spctl --status
+%assessments enabled
+
+\end{itemize}
+
+Re-execute the executable from the command line. This pops-up a dialog to confirm you actually want to use this software:\\
+\includegraphics[scale=0.35]{../graphics/MacOSConfirmOpening.png}
+
+Click on the \MainIt{Open} button to register the executable in \Gatekeeper\ and go ahead.
 
 
 % -------------------------------------------------------------------------
@@ -210,54 +142,46 @@ Having to perform the preceding task for each executable is the price to pay for
 
 After downloading, we get:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/distrib/ubuntu-distrib > ls -sal */*
-build/bin:
-total 2264
-  0 drwxr-xr-x@ 25 jacquesmenu  staff     800 Feb  9 16:45 .
-  0 drwxr-xr-x@  4 jacquesmenu  staff     128 Feb  9 16:45 ..
- 80 -rw-r--r--@  1 jacquesmenu  staff   39256 Feb  9 13:40 LilyPondIssue34
- 80 -rw-r--r--@  1 jacquesmenu  staff   39288 Feb  9 13:40 Mikrokosmos3Wandering
- 96 -rw-r--r--@  1 jacquesmenu  staff   47224 Feb  9 13:40 MusicAndHarmonies
- 96 -rw-r--r--@  1 jacquesmenu  staff   47216 Feb  9 13:40 RandomChords
- 96 -rw-r--r--@  1 jacquesmenu  staff   47216 Feb  9 13:40 RandomMusic
- 72 -rw-r--r--@  1 jacquesmenu  staff   33800 Feb  9 13:40 countnotes
- 40 -rw-r--r--@  1 jacquesmenu  staff   17648 Feb  9 13:40 displayMusicformatsHistory
- 40 -rw-r--r--@  1 jacquesmenu  staff   17648 Feb  9 13:40 displayMusicformatsVersion
-104 -rw-r--r--@  1 jacquesmenu  staff   49760 Feb  9 13:40 msdlconverter
-544 -rw-r--r--@  1 jacquesmenu  staff  275976 Feb  9 13:40 partsummary
- 88 -rw-r--r--@  1 jacquesmenu  staff   43720 Feb  9 13:40 readunrolled
- 80 -rw-r--r--@  1 jacquesmenu  staff   39200 Feb  9 13:40 xml2brl
- 88 -rw-r--r--@  1 jacquesmenu  staff   43336 Feb  9 13:40 xml2gmn
- 48 -rw-r--r--@  1 jacquesmenu  staff   23112 Feb  9 13:40 xml2guido
- 80 -rw-r--r--@  1 jacquesmenu  staff   39056 Feb  9 13:40 xml2ly
- 88 -rw-r--r--@  1 jacquesmenu  staff   42880 Feb  9 13:40 xml2midi
- 88 -rw-r--r--@  1 jacquesmenu  staff   43344 Feb  9 13:40 xml2xml
- 88 -rw-r--r--@  1 jacquesmenu  staff   43368 Feb  9 13:40 xmlclone
- 48 -rw-r--r--@  1 jacquesmenu  staff   22616 Feb  9 13:40 xmlfactory
-168 -rw-r--r--@  1 jacquesmenu  staff   83488 Feb  9 13:40 xmliter
- 56 -rw-r--r--@  1 jacquesmenu  staff   28424 Feb  9 13:40 xmlread
- 56 -rw-r--r--@  1 jacquesmenu  staff   28656 Feb  9 13:40 xmltranspose
- 40 -rw-r--r--@  1 jacquesmenu  staff   17360 Feb  9 13:40 xmlversion
+jacquesmenu@macmini: ~/Downloads/MusicFormatsForUbuntu > ls -sal *
+8 -rw-r--r--@ 1 jacquesmenu  staff  6 Feb 14 14:33 MusicFormatsVersionNumber.txt
 
-build/lib:
-total 159744
-     0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Feb  9 16:45 .
-     0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Feb  9 16:45 ..
-113664 -rw-r--r--@ 1 jacquesmenu  staff  57941702 Feb  9 13:40 libmusicxml2.a
- 46080 -rw-r--r--@ 1 jacquesmenu  staff  22806336 Feb  9 13:40 libmusicxml2.so
+bin:
+total 2296
+  0 drwxr-xr-x@ 25 jacquesmenu  staff     800 Feb 14 18:22 .
+  0 drwxr-xr-x@  6 jacquesmenu  staff     192 Feb 16 08:45 ..
+ 96 -rw-r--r--@  1 jacquesmenu  staff   49000 Feb 14 14:33 LilyPondIssue34
+ 96 -rw-r--r--@  1 jacquesmenu  staff   49040 Feb 14 14:33 Mikrokosmos3Wandering
+ 96 -rw-r--r--@  1 jacquesmenu  staff   47224 Feb 14 14:33 MusicAndHarmonies
+ 96 -rw-r--r--@  1 jacquesmenu  staff   47216 Feb 14 14:33 RandomChords
+ 96 -rw-r--r--@  1 jacquesmenu  staff   47216 Feb 14 14:33 RandomMusic
+ 72 -rw-r--r--@  1 jacquesmenu  staff   33800 Feb 14 14:33 countnotes
+ 40 -rw-r--r--@  1 jacquesmenu  staff   17648 Feb 14 14:33 displayMusicformatsHistory
+ 40 -rw-r--r--@  1 jacquesmenu  staff   17648 Feb 14 14:33 displayMusicformatsVersion
+104 -rw-r--r--@  1 jacquesmenu  staff   50616 Feb 14 14:33 msdlconverter
+544 -rw-r--r--@  1 jacquesmenu  staff  275976 Feb 14 14:33 partsummary
+ 88 -rw-r--r--@  1 jacquesmenu  staff   43720 Feb 14 14:33 readunrolled
+ 80 -rw-r--r--@  1 jacquesmenu  staff   39200 Feb 14 14:33 xml2brl
+ 88 -rw-r--r--@  1 jacquesmenu  staff   43336 Feb 14 14:33 xml2gmn
+ 48 -rw-r--r--@  1 jacquesmenu  staff   23112 Feb 14 14:33 xml2guido
+ 80 -rw-r--r--@  1 jacquesmenu  staff   39056 Feb 14 14:33 xml2ly
+ 88 -rw-r--r--@  1 jacquesmenu  staff   42880 Feb 14 14:33 xml2midi
+ 88 -rw-r--r--@  1 jacquesmenu  staff   43344 Feb 14 14:33 xml2xml
+ 88 -rw-r--r--@  1 jacquesmenu  staff   43368 Feb 14 14:33 xmlclone
+ 48 -rw-r--r--@  1 jacquesmenu  staff   22616 Feb 14 14:33 xmlfactory
+168 -rw-r--r--@  1 jacquesmenu  staff   83488 Feb 14 14:33 xmliter
+ 56 -rw-r--r--@  1 jacquesmenu  staff   28424 Feb 14 14:33 xmlread
+ 56 -rw-r--r--@  1 jacquesmenu  staff   28656 Feb 14 14:33 xmltranspose
+ 40 -rw-r--r--@  1 jacquesmenu  staff   17360 Feb 14 14:33 xmlversion
 
-documentation/IntroductionToMusicXML:
-total 1672
-   0 drwxr-xr-x@ 3 jacquesmenu  staff      96 Feb  9 16:45 .
-   0 drwxr-xr-x@ 4 jacquesmenu  staff     128 Feb  9 16:45 ..
-1672 -rw-r--r--@ 1 jacquesmenu  staff  854295 Feb  9 13:40 IntroductionToMusicXML.pdf
-
-documentation/MusicFormatsCLIUserGuide:
-total 1616
-   0 drwxr-xr-x@ 3 jacquesmenu  staff      96 Feb  9 16:45 .
-   0 drwxr-xr-x@ 4 jacquesmenu  staff     128 Feb  9 16:45 ..
-1616 -rw-r--r--@ 1 jacquesmenu  staff  826403 Feb  9 13:40 MusicFormatsCLIUserGuide.pdf
+lib:
+total 157792
+     0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Feb 14 18:22 .
+     0 drwxr-xr-x@ 6 jacquesmenu  staff       192 Feb 16 08:45 ..
+113224 -rw-r--r--@ 1 jacquesmenu  staff  57968176 Feb 14 14:33 libmusicxml2.a
+ 44568 -rw-r--r--@ 1 jacquesmenu  staff  22818696 Feb 14 14:33 libmusicxml2.so
 \end{lstlisting}
+
+Move the \fileName{MusicFormatsForUbuntu} directory to a suitable place and set your \code{PATH} and \code{LIBRARY_PATH} \environmentVariable s accordingly.
 
 
 % -------------------------------------------------------------------------
@@ -266,54 +190,46 @@ total 1616
 
 After downloading, we get:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/distrib/windows-distrib > ls -sal */*
-build/bin:
-total 1192
-  0 drwxr-xr-x@ 25 jacquesmenu  staff    800 Feb  9 13:51 .
-  0 drwxr-xr-x@  4 jacquesmenu  staff    128 Feb  9 13:51 ..
- 64 -rw-r--r--@  1 jacquesmenu  staff  30208 Feb  9 12:03 LilyPondIssue34.exe
- 64 -rw-r--r--@  1 jacquesmenu  staff  30720 Feb  9 12:03 Mikrokosmos3Wandering.exe
- 56 -rw-r--r--@  1 jacquesmenu  staff  26112 Feb  9 12:03 MusicAndHarmonies.exe
- 56 -rw-r--r--@  1 jacquesmenu  staff  25088 Feb  9 12:03 RandomChords.exe
- 56 -rw-r--r--@  1 jacquesmenu  staff  25088 Feb  9 12:03 RandomMusic.exe
- 32 -rw-r--r--@  1 jacquesmenu  staff  14848 Feb  9 12:03 countnotes.exe
- 24 -rw-r--r--@  1 jacquesmenu  staff  10752 Feb  9 12:03 displayMusicformatsHistory.exe
- 24 -rw-r--r--@  1 jacquesmenu  staff  10752 Feb  9 12:03 displayMusicformatsVersion.exe
- 72 -rw-r--r--@  1 jacquesmenu  staff  35328 Feb  9 12:03 msdlconverter.exe
-112 -rw-r--r--@  1 jacquesmenu  staff  56832 Feb  9 12:03 partsummary.exe
- 40 -rw-r--r--@  1 jacquesmenu  staff  18432 Feb  9 12:03 readunrolled.exe
- 64 -rw-r--r--@  1 jacquesmenu  staff  32768 Feb  9 12:03 xml2brl.exe
- 72 -rw-r--r--@  1 jacquesmenu  staff  33280 Feb  9 12:03 xml2gmn.exe
- 64 -rw-r--r--@  1 jacquesmenu  staff  29184 Feb  9 12:03 xml2guido.exe
- 64 -rw-r--r--@  1 jacquesmenu  staff  32768 Feb  9 12:03 xml2ly.exe
- 40 -rw-r--r--@  1 jacquesmenu  staff  17920 Feb  9 12:03 xml2midi.exe
- 72 -rw-r--r--@  1 jacquesmenu  staff  33280 Feb  9 12:03 xml2xml.exe
- 32 -rw-r--r--@  1 jacquesmenu  staff  14848 Feb  9 12:03 xmlclone.exe
- 32 -rw-r--r--@  1 jacquesmenu  staff  15360 Feb  9 12:03 xmlfactory.exe
- 40 -rw-r--r--@  1 jacquesmenu  staff  19456 Feb  9 12:03 xmliter.exe
- 56 -rw-r--r--@  1 jacquesmenu  staff  27136 Feb  9 12:03 xmlread.exe
- 32 -rw-r--r--@  1 jacquesmenu  staff  14848 Feb  9 12:03 xmltranspose.exe
- 24 -rw-r--r--@  1 jacquesmenu  staff  12288 Feb  9 12:03 xmlversion.exe
+jacquesmenu@macmini: ~/Downloads/MusicFormatsForWindows > ls -sal *
+8 -rw-r--r--@ 1 jacquesmenu  staff  6 Feb 14 14:53 MusicFormatsVersionNumber.txt
 
-build/lib:
-total 38912
-    0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Feb  9 13:51 .
-    0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Feb  9 13:51 ..
-15360 -rw-r--r--@ 1 jacquesmenu  staff   7517760 Feb  9 12:03 musicxml2.exp
-23552 -rw-r--r--@ 1 jacquesmenu  staff  11598816 Feb  9 12:03 musicxml2.lib
+bin:
+total 1232
+  0 drwxr-xr-x@ 25 jacquesmenu  staff    800 Feb 14 18:22 .
+  0 drwxr-xr-x@  6 jacquesmenu  staff    192 Feb 16 08:49 ..
+ 80 -rw-r--r--@  1 jacquesmenu  staff  38400 Feb 14 14:53 LilyPondIssue34.exe
+ 80 -rw-r--r--@  1 jacquesmenu  staff  38400 Feb 14 14:53 Mikrokosmos3Wandering.exe
+ 56 -rw-r--r--@  1 jacquesmenu  staff  26112 Feb 14 14:53 MusicAndHarmonies.exe
+ 56 -rw-r--r--@  1 jacquesmenu  staff  25088 Feb 14 14:53 RandomChords.exe
+ 56 -rw-r--r--@  1 jacquesmenu  staff  25088 Feb 14 14:53 RandomMusic.exe
+ 32 -rw-r--r--@  1 jacquesmenu  staff  14848 Feb 14 14:53 countnotes.exe
+ 24 -rw-r--r--@  1 jacquesmenu  staff  10752 Feb 14 14:53 displayMusicformatsHistory.exe
+ 24 -rw-r--r--@  1 jacquesmenu  staff  10752 Feb 14 14:53 displayMusicformatsVersion.exe
+ 80 -rw-r--r--@  1 jacquesmenu  staff  39936 Feb 14 14:53 msdlconverter.exe
+112 -rw-r--r--@  1 jacquesmenu  staff  56832 Feb 14 14:53 partsummary.exe
+ 40 -rw-r--r--@  1 jacquesmenu  staff  18432 Feb 14 14:53 readunrolled.exe
+ 64 -rw-r--r--@  1 jacquesmenu  staff  32768 Feb 14 14:53 xml2brl.exe
+ 72 -rw-r--r--@  1 jacquesmenu  staff  33280 Feb 14 14:53 xml2gmn.exe
+ 64 -rw-r--r--@  1 jacquesmenu  staff  29184 Feb 14 14:53 xml2guido.exe
+ 64 -rw-r--r--@  1 jacquesmenu  staff  32768 Feb 14 14:53 xml2ly.exe
+ 40 -rw-r--r--@  1 jacquesmenu  staff  17920 Feb 14 14:53 xml2midi.exe
+ 72 -rw-r--r--@  1 jacquesmenu  staff  33280 Feb 14 14:53 xml2xml.exe
+ 32 -rw-r--r--@  1 jacquesmenu  staff  14848 Feb 14 14:53 xmlclone.exe
+ 32 -rw-r--r--@  1 jacquesmenu  staff  15360 Feb 14 14:53 xmlfactory.exe
+ 40 -rw-r--r--@  1 jacquesmenu  staff  19456 Feb 14 14:53 xmliter.exe
+ 56 -rw-r--r--@  1 jacquesmenu  staff  27136 Feb 14 14:53 xmlread.exe
+ 32 -rw-r--r--@  1 jacquesmenu  staff  14848 Feb 14 14:53 xmltranspose.exe
+ 24 -rw-r--r--@  1 jacquesmenu  staff  12288 Feb 14 14:53 xmlversion.exe
 
-documentation/IntroductionToMusicXML:
-total 1672
-   0 drwxr-xr-x@ 3 jacquesmenu  staff      96 Feb  9 13:51 .
-   0 drwxr-xr-x@ 4 jacquesmenu  staff     128 Feb  9 13:51 ..
-1672 -rw-r--r--@ 1 jacquesmenu  staff  854295 Feb  9 12:03 IntroductionToMusicXML.pdf
-
-documentation/MusicFormatsCLIUserGuide:
-total 1616
-   0 drwxr-xr-x@ 3 jacquesmenu  staff      96 Feb  9 13:51 .
-   0 drwxr-xr-x@ 4 jacquesmenu  staff     128 Feb  9 13:51 ..
-1616 -rw-r--r--@ 1 jacquesmenu  staff  826403 Feb  9 12:03 MusicFormatsCLIUserGuide.pdf
+lib:
+total 37368
+    0 drwxr-xr-x@ 4 jacquesmenu  staff       128 Feb 14 18:22 .
+    0 drwxr-xr-x@ 6 jacquesmenu  staff       192 Feb 16 08:49 ..
+14696 -rw-r--r--@ 1 jacquesmenu  staff   7521356 Feb 14 14:53 musicxml2.exp
+22672 -rw-r--r--@ 1 jacquesmenu  staff  11604836 Feb 14 14:53 musicxml2.lib
 \end{lstlisting}
+
+Move the \fileName{MusicFormatsForUbuntu} directory to a suitable place such as \code{C:\textbackslash\ Program Files} and set your \code{PATH} \environmentVariable\ accordingly.
 
 
 % -------------------------------------------------------------------------
@@ -367,104 +283,162 @@ jacquesmenu@macmini: ~/musicformats_local_clone > git branch
 * stable-v0.9.59
 \end{lstlisting}
 
-%Commands such as the following can be used to clone the \Main{dev}, \Main{test} and \Main{stable} branches, respectively:
 
-%\begin{lstlisting}[language=Terminal]
-%DEV_BRANCH=dev
-%MUSIC_FORMATS_DEV=${HOME}/musicformats-git-dev
-%git clone -b ${DEV_BRANCH} https://github.com/jacques-menu/musicformats.git ${MUSIC_FORMATS_DEV}
-%cd ${MUSIC_FORMATS_DEV}
-%\end{lstlisting}
-%
-%\begin{lstlisting}[language=Terminal]
-%TEST_BRANCH=test-v0.9.58
-%MUSIC_FORMATS_TEST=${HOME}/musicformats-git-${TEST_BRANCH}
-%git clone -b ${TEST_BRANCH} https://github.com/jacques-menu/musicformats.git ${MUSIC_FORMATS_TEST}
-%cd ${MUSIC_FORMATS_TEST}
-%\end{lstlisting}
-%
-%\begin{lstlisting}[language=Terminal]
-%STABLE_BRANCH=stable-v0.9.58
-%MUSIC_FORMATS_STABLE=${HOME}/musicformats-git-${STABLE_BRANCH}
-%git clone -b ${STABLE_BRANCH} https://github.com/jacques-menu/musicformats.git ${MUSIC_FORMATS_STABLE}
-%cd ${MUSIC_FORMATS_STABLE}
-%\end{lstlisting}
+% -------------------------------------------------------------------------
+\section{Selecting a library version}
+% -------------------------------------------------------------------------
+
+The \mf\ \repo\ uses tags to refer to successive versions. The existing tags can be displayed with \code{git tag}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git branch
+* master
+
+jacquesmenu@macmini: ~/musicformats-git-dev > git tag
+v0.9.60
+\end{lstlisting}
+
+To stop using an older version and come back to the most recent one:
+\begin{lstlisting}[language=Terminal]
+git switch -
+git branch
+\end{lstlisting}
 
 
 % -------------------------------------------------------------------------
-\section{Building the library on Mac OS\texttrademark\ and Linux}
+\section{{\tt cmake} and {\tt make} definitions}
+% -------------------------------------------------------------------------
+
+\code{cmake} is used to implement the portability of \mf\ to multiple \OS s and environments. \code{make} is used to build the library. Thanks to \fober\ for providing this in \libmusicxml\ in the first place.
+The respective settings are in \build{CMakeLists.txt} and \build{Makefile}.
+
+The \code{make} file as a number of possibilities>
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats_local_clone/build > make help
+MusicFormats makefile - Targets are :
+   all (default): build the MusicFormats library for the current platform,
+                  build the MusicFormats tools,
+
+Platform targets to build the MusicFormats library are:
+   macos     build the library for macos
+   windows   build 32 and 64 bits library for windows
+   linux     build the library for linux
+   android   build a static library for Android
+   ios       build a static library for iOS
+   msys      build on Windows using MSys
+   js        build a javascript library
+the platform targets is automatically evaluated by the default target.
+
+Misc:
+   cmake     re-generates the cmake project
+   format    source code formatting using clang-format
+   install   install library, tools and headers
+   localinstall   install the tools to ~/bin
+   package   create the musicformats-v0.9.60 package
+
+Options:
+   CMAKEOPT  cmake options passed to cmake by the 'cmake' target
+   GENERATOR the cmake generator. Currently '-G Xcode'
+   PDIR      the generation folder. Currently 'libdir'
+   PREFIX    the install location prefix. Currently /usr/local'
+
+CMake options:
+   FMWK 		[MacOS only] Generates a framework on MacOS. Default is on
+   GDB 		Activates ggdb3 option. Default is off
+   LILY 		Include lilypond part. Default is on
+NOTE:  CMake options can be passed using CMAKEOPT, e.g.
+      'make cmake CMAKEOPT=-DLILY=off'
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Building the library on Mac OS\texttrademark\ and Linux-like systems}
 % -------------------------------------------------------------------------
 
 \MacOS\ and \Linux\ have the same kind of tools behind the scenes for software development.
 
 In order to build \mf\ from source on your machine, you need:
 \begin{itemize}
-\item a C++11 compiler;
-\item the \fileName{cmake} tool.
+\item a C++11 compiler. Use \xcode\ on \MacOS\ ang GNU compilers on \Unix -like machines;
+\item the \fileName{cmake} tool. It is available ready to install on \MacOS\ via \macports\ (\url{https://www.macports.org}).
 \end{itemize}
 
 The supported \OS s to build the library and run the \CLI\ tools are Linux, Windows and MacOS. Other systems may be fine but have not been tested.
 
-\mf\ requires C++11 at least. More recent versions are fine.
+\mf\ requires C++11 at least. More recent versions are fine too.
 
-Once in the local repository clone, just execute:
+Once in the local repository clone, just execute, here on \MacOS:
 \begin{lstlisting}[language=Terminal]
-cd build
-make
+jacquesmenu@macmini: ~/musicformats_local_clone > cd build
+jacquesmenu@macmini: ~/musicformats_local_clone/build > make
+
+... ... ...
+
+** BUILD SUCCEEDED **
+
+cd lib &&  [ -d musicformats.framework ] && tar czf musicformats.tgz musicformats.framework || echo "no framework"
+no framework
 \end{lstlisting}
 
 The resulting executables are in \fileName{build/bin}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > ll build/bin
-total 754368
-    0 drwxr-xr-x@ 26 jacquesmenu  staff       832 Sep 27 00:05:02 2021 ./
-    0 drwxr-xr-x  11 jacquesmenu  staff       352 Aug  1 18:32:54 2021 ../
-72072 -rwxr-xr-x   1 jacquesmenu  staff  36899440 Sep 27 00:04:52 2021 LilyPondIssue34*
-72080 -rwxr-xr-x   1 jacquesmenu  staff  36902528 Sep 27 00:04:54 2021 Mikrokosmos3Wandering*
- 8504 -rwxr-xr-x   1 jacquesmenu  staff   4350480 Sep 27 00:04:49 2021 MusicAndHarmonies*
- 8504 -rwxr-xr-x   1 jacquesmenu  staff   4350464 Sep 27 00:05:00 2021 RandomChords*
- 8504 -rwxr-xr-x   1 jacquesmenu  staff   4350448 Sep 27 00:05:01 2021 RandomMusic*
- 8696 -rwxr-xr-x   1 jacquesmenu  staff   4450928 Sep 27 00:04:56 2021 countnotes*
-63904 -rwxr-xr-x   1 jacquesmenu  staff  32717248 Sep 27 00:04:57 2021 libMultipleInitsTest*
-76696 -rwxr-xr-x   1 jacquesmenu  staff  39266928 Sep 27 00:05:01 2021 msdlconverter*
-  144 -rwxr-xr-x   1 jacquesmenu  staff     70480 Sep 27 00:04:55 2021 musicformatsversion*
-12616 -rwxr-xr-x   1 jacquesmenu  staff   6455376 Sep 27 00:04:59 2021 partsummary*
- 8920 -rwxr-xr-x   1 jacquesmenu  staff   4564864 Sep 27 00:04:59 2021 readunrolled*
-81048 -rwxr-xr-x   1 jacquesmenu  staff  41496208 Sep 27 00:04:49 2021 xml2Any*
-61232 -rwxr-xr-x   1 jacquesmenu  staff  31347456 Sep 27 00:04:53 2021 xml2brl*
-63704 -rwxr-xr-x   1 jacquesmenu  staff  32615072 Sep 27 00:04:47 2021 xml2gmn*
-17368 -rwxr-xr-x   1 jacquesmenu  staff   8891744 Sep 27 00:04:56 2021 xml2guido*
-63896 -rwxr-xr-x   1 jacquesmenu  staff  32713936 Sep 27 00:04:50 2021 xml2ly*
-12512 -rwxr-xr-x   1 jacquesmenu  staff   6403968 Sep 27 00:04:55 2021 xml2midi*
-56384 -rwxr-xr-x   1 jacquesmenu  staff  28865024 Sep 27 00:04:59 2021 xml2xml*
- 9176 -rwxr-xr-x   1 jacquesmenu  staff   4695472 Sep 27 00:04:55 2021 xmlclone*
- 9320 -rwxr-xr-x   1 jacquesmenu  staff   4771024 Sep 27 00:05:00 2021 xmlfactory*
- 8912 -rwxr-xr-x   1 jacquesmenu  staff   4559072 Sep 27 00:04:57 2021 xmliter*
- 8752 -rwxr-xr-x   1 jacquesmenu  staff   4478336 Sep 27 00:04:55 2021 xmlread*
-12104 -rwxr-xr-x   1 jacquesmenu  staff   6193216 Sep 27 00:04:54 2021 xmltranspose*
- 9320 -rwxr-xr-x   1 jacquesmenu  staff   4770128 Sep 27 00:05:02 2021 xmlversion*
+jacquesmenu@macmini: ~/musicformats_local_clone/build > ls -sal bin
+total 661992
+    0 drwxr-xr-x@ 25 jacquesmenu  staff       800 Feb 16 09:17 .
+    0 drwxr-xr-x  10 jacquesmenu  staff       320 Feb 16 09:15 ..
+74864 -rwxr-xr-x   1 jacquesmenu  staff  38327184 Feb 16 09:17 LilyPondIssue34
+74864 -rwxr-xr-x   1 jacquesmenu  staff  38330272 Feb 16 09:17 Mikrokosmos3Wandering
+ 8432 -rwxr-xr-x   1 jacquesmenu  staff   4314896 Feb 16 09:17 MusicAndHarmonies
+ 8432 -rwxr-xr-x   1 jacquesmenu  staff   4314880 Feb 16 09:17 RandomChords
+ 8432 -rwxr-xr-x   1 jacquesmenu  staff   4314880 Feb 16 09:17 RandomMusic
+ 8624 -rwxr-xr-x   1 jacquesmenu  staff   4414944 Feb 16 09:17 countnotes
+16528 -rwxr-xr-x   1 jacquesmenu  staff   8459488 Feb 16 09:17 displayMusicformatsHistory
+16528 -rwxr-xr-x   1 jacquesmenu  staff   8459488 Feb 16 09:17 displayMusicformatsVersion
+79200 -rwxr-xr-x   1 jacquesmenu  staff  40546848 Feb 16 09:17 msdlconverter
+12480 -rwxr-xr-x   1 jacquesmenu  staff   6387248 Feb 16 09:17 partsummary
+ 8848 -rwxr-xr-x   1 jacquesmenu  staff   4528752 Feb 16 09:17 readunrolled
+64000 -rwxr-xr-x   1 jacquesmenu  staff  32764864 Feb 16 09:17 xml2brl
+66872 -rwxr-xr-x   1 jacquesmenu  staff  34236560 Feb 16 09:17 xml2gmn
+17160 -rwxr-xr-x   1 jacquesmenu  staff   8782048 Feb 16 09:17 xml2guido
+67552 -rwxr-xr-x   1 jacquesmenu  staff  34584160 Feb 16 09:17 xml2ly
+12392 -rwxr-xr-x   1 jacquesmenu  staff   6342560 Feb 16 09:17 xml2midi
+59720 -rwxr-xr-x   1 jacquesmenu  staff  30574816 Feb 16 09:17 xml2xml
+ 9104 -rwxr-xr-x   1 jacquesmenu  staff   4657232 Feb 16 09:17 xmlclone
+ 9256 -rwxr-xr-x   1 jacquesmenu  staff   4735296 Feb 16 09:17 xmlfactory
+ 8800 -rwxr-xr-x   1 jacquesmenu  staff   4505008 Feb 16 09:17 xmliter
+ 8680 -rwxr-xr-x   1 jacquesmenu  staff   4442528 Feb 16 09:17 xmlread
+11976 -rwxr-xr-x   1 jacquesmenu  staff   6129760 Feb 16 09:17 xmltranspose
+ 9248 -rwxr-xr-x   1 jacquesmenu  staff   4734384 Feb 16 09:17 xmlversion
 \end{lstlisting}
 
 The resulting librairies are in \fileName{build/bin}, here on MacOS:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > ll build/lib
-total 1888712
-      0 drwxr-xr-x  10 jacquesmenu  staff        320 Sep 27 00:04:46 2021 ./
-      0 drwxr-xr-x  11 jacquesmenu  staff        352 Aug  1 18:32:54 2021 ../
- 104904 -rwxr-xr-x   1 jacquesmenu  staff   53707712 Sep 27 00:04:46 2021 libmusicxml2.3.2.0.dylib*
-      0 lrwxr-xr-x   1 jacquesmenu  staff         24 Sep 27 00:04:45 2021 libmusicxml2.3.dylib@ -> libmusicxml2.3.2.0.dylib
-1055040 -rw-r--r--   1 jacquesmenu  staff  532838416 Sep 27 00:04:41 2021 libmusicxml2.a
- 591776 -rw-r--r--   1 jacquesmenu  staff  302989312 Sep 21 09:05:55 2021 libmusicxml2.a.A93i4n
-  57056 -rw-r--r--   1 jacquesmenu  staff   29212672 Sep 21 09:01:27 2021 libmusicxml2.a.KHrJT0
-  39968 -rw-r--r--   1 jacquesmenu  staff   20463616 Sep 21 09:11:20 2021 libmusicxml2.a.gZfmqe
-  39968 -rw-r--r--   1 jacquesmenu  staff   20463616 Sep 21 09:09:22 2021 libmusicxml2.a.tndUAV
-      0 lrwxr-xr-x   1 jacquesmenu  staff         20 Sep 27 00:04:45 2021 libmusicxml2.dylib@ -> libmusicxml2.3.dylib
+jacquesmenu@macmini: ~/musicformats_local_clone/build > ls -sal lib
+total 1283720
+      0 drwxr-xr-x@  6 jacquesmenu  staff        192 Feb 16 09:17 .
+      0 drwxr-xr-x  10 jacquesmenu  staff        320 Feb 16 09:15 ..
+ 107368 -rwxr-xr-x   1 jacquesmenu  staff   54970432 Feb 16 09:17 libmusicformats.0.9.60.dylib
+      0 lrwxr-xr-x   1 jacquesmenu  staff         28 Feb 16 09:17 libmusicformats.0.dylib -> libmusicformats.0.9.60.dylib
+1176352 -rw-r--r--   1 jacquesmenu  staff  592564120 Feb 16 09:16 libmusicformats.a
+      0 lrwxr-xr-x   1 jacquesmenu  staff         23 Feb 16 09:17 libmusicformats.dylib -> libmusicformats.0.dylib
 \end{lstlisting}
 
-Make sure this \code{bin} directory is in your bash \code{PATH}, and there you are.
+Then install \mf\ either globally on you machine or in the user's home directory:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats_local_clone/build > make install
+\end{lstlisting}
+or:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats_local_clone/build > make localinstall
+cd bin && cp xml2midi xmlread xml2guido xml2ly xmlversion xml2brl /Users/jacquesmenu/bin
+\end{lstlisting}
+
+Make sure this \code{bin} directory is in your shell \code{PATH}, and there you are.
 
 
 % -------------------------------------------------------------------------
 \section{Building the library on Windows\texttrademark}
 % -------------------------------------------------------------------------
+
+Please contribute to this section, this author does not have any access to a \Windows\ machine.
+
 

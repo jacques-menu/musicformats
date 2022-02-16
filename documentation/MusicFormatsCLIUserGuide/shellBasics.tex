@@ -4,23 +4,44 @@
 \chapter{Shell basics}
 % -------------------------------------------------------------------------
 
-Since this document is about using \mf\ from the \CLI, let's start by a short presentation of shell usage.
+Since this document is about using \mf\ from the \CLI\ by musicians, let's start by a short presentation of shell usage. This chapter can be skipped of course by shell-savvy users.
+
+A \shell\ is an application that reads commands and executes them. In the early ages of physical \MainIt{terminal}s, they were typically typed on a keyboard. With \GUI\ nowadays, they can be typed in a so-called terminal window.
+A 
+
+The syntax of shell commands is meant to be simple, without complex structuring features such as those found in programming languages.
+
+A number of shell have been used over the years. Most of the ones used at the time of this writing belong to the \code{sh} family, among then \bash\ and \zsh\ (\code{zsh}. The commands we use in this document can be run on any shell in this family.
+
+%%%JMI Shells can also read commands from text files named \MainIt{script}s through input redirection.
 
 
 % -------------------------------------------------------------------------
 \section{Basic shell builtins}
 % -------------------------------------------------------------------------
 
-Many builtins have very short names, dating back at a time where they were typed at a physical terminal. Many vowels were left out to minimize typing. For example, there are:
+Many builtins have very short names for ease of interactive use. Many vowels were left out to minimize typing. For example, there are:
 \begin{itemize}
 \item \code{pwd} to show the current working directory;
 \item \code{cd} to change directory;
 \item \code{echo} to produce output in the terminal window.
 \end{itemize}
 
-The shell used for the examples in this documents displays the current working directory as the prompt.
+A so-called \MainIt{prompt} is displayed by a shell when is it ready to read a command and execute it. This document uses two kinds of prompts:
+\begin{itemize}
+\item one contains only the user name and machine name, such as:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~ > 
+\end{lstlisting}
 
-The files on a computer are organized as a tree of so-called \MainIt{directories}. When a shell is launched, a directory is chosen as the current \MainIt{working directory}, usually the user's \MainIt{home directory}.
+\item the other one displays the current working directory: it is used when the latter has to be set at a specific value for the command:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > 
+\end{lstlisting}
+
+\end{itemize}
+
+When a shell is launched, a directory is chosen as the current \MainIt{working directory}, usually the user's \MainIt{home directory}.
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~ > pwd
 /Users/jacquesmenu
@@ -56,6 +77,19 @@ jacquesmenu@macmini > type xml2lyy
 jacquesmenu@macmini > type xml2ly
 xml2ly is hashed (/Users/jacquesmenu/musicformats-git-dev/build/bin/xml2ly)
 \end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Paths}
+% -------------------------------------------------------------------------
+
+The files on a computer are organized as file-systems. A \fspath\ is a way to access a file on a file system:
+\begin{itemize}
+\item on \Unix\-like system, there is a single tree of so-called \MainIt{directories}, the root being named \code{/}. A sub-directory is preceded by \code{/} in the paths;
+\item on \Windows\ systems, there is a set of trees, their roots being the physical or virtual drives, such as \code{C:}. A \code{\textbackslash} is used to indicate a sub-directory.
+\end{itemize}
+
+This document uses \Unix\-like pathes.
 
 
 % -------------------------------------------------------------------------
