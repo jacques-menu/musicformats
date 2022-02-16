@@ -422,17 +422,35 @@ total 1283720
       0 lrwxr-xr-x   1 jacquesmenu  staff         23 Feb 16 09:17 libmusicformats.dylib -> libmusicformats.0.dylib
 \end{lstlisting}
 
-Then install \mf\ either globally on you machine or in the user's home directory:
-\begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats_local_clone/build > make install
-\end{lstlisting}
-or:
+
+% -------------------------------------------------------------------------
+\section{Installing the library on Mac OS\texttrademark\ and Linux-like systems}
+% -------------------------------------------------------------------------
+
+After building, \mf\ can be installed either in the user's home directory or globally on the machine.
+
+
+% -------------------------------------------------------------------------
+\subsection{User specific installation on Mac OS\texttrademark}
+% -------------------------------------------------------------------------
+
+This is done with \code{make localinstall}:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats_local_clone/build > make localinstall
 cd bin && cp xml2midi xmlread xml2guido xml2ly xmlversion xml2brl /Users/jacquesmenu/bin
 \end{lstlisting}
 
 Make sure this \code{bin} directory is in your shell \code{PATH}, and there you are.
+
+
+% -------------------------------------------------------------------------
+\subsection{Global installation on Mac OS\texttrademark}
+% -------------------------------------------------------------------------
+
+This installation requires administration privileges:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats_local_clone/build > sudo make install
+\end{lstlisting}
 
 
 % -------------------------------------------------------------------------

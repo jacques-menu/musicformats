@@ -34,7 +34,8 @@ endif
 IOS  := iosdir
 
 CMAKEOPT ?=
-TOOLS := xml2midi xmlread xml2guido xml2ly xmlversion xml2brl
+
+TOOLS := LilyPondIssue34 Mikrokosmos3Wandering MusicAndHarmonies RandomChords RandomMusic countnotes displayMusicformatsHistory displayMusicformatsVersion msdlconverter partsummary readunrolled xml2brl xml2gmn xml2guido xml2ly xml2midi xml2xml xmlclone xmlfactory xmliter xmlread xmltranspose xmlversion
 
 #	make submodule
 all :

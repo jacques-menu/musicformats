@@ -187,6 +187,9 @@ function m2lf ()
 
 alias rmcache="rm ${BUILD_DIR}/libdir/CMakeCache.txt"
 
+#alias rmmakefiles="sudo rm -rf ./libdir/CMakeFiles"
+alias rmmakefiles="rm -rf ./libdir/CMakeFiles"
+
 function bit ()
 {
 #  set -x
@@ -691,7 +694,7 @@ alias dimsdlm='lldb -- msdl -insider -generate midi'
 alias gitb='git branch'
 alias gitc='git checkout'
 
-function addSrcAll ()
+function addSrc ()
 {
   git add ${SRC_DIR}/clisamples/*
   git add ${SRC_DIR}/components/*
@@ -725,9 +728,9 @@ function addDistrib ()
   git add    ${DISTRIB_DIR}/MusicFormatsFor*.zip
 }
 
-function addDocAll ()
+function addDoc ()
 {
-  git add ${MUSIC_FORMATS_DEV}/docs  # libmusicxml2
+  git add ${DOC_DIR}/presentation/*.pdf  # libmusicxml2
 
   git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
 
@@ -739,7 +742,7 @@ function addDocAll ()
 #  git add ${DOC_DIR}/*/*.odg
 }
 
-function addFxmlAll ()
+function addFxml ()
 {
   git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.xml
   git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.txt
