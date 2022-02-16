@@ -102,7 +102,7 @@ endif()
 
 #######################################
 get_filename_component(ROOT ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
-set (DOCDIR ${ROOT}/doc)
+set (DOCDIR ${ROOT}/documentation)
 set (DOC    ${DOCDIR}/presentation/libmusicxml2.pdf ${DOCDIR}/IntroductionToMusicXML/IntroductionToMusicXML.pdf ${DOCDIR}/MusicFormatsCLIUserGuide/MusicFormatsCLIUserGuide.pdf ${DOCDIR}/MusicFormatsAPIUserGuide/MusicFormatsAPIUserGuide.pdf ${DOCDIR}/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf)
 set (SCHEMA   ${ROOT}/schemas/MusicXML/musicxml-${XMLVERSION})
 
@@ -417,7 +417,7 @@ install (
 )
 
 install (
-    FILES ${DOC} DESTINATION ${DOCDIR}/doc
+    FILES ${DOC} DESTINATION ${DOCDIR}/documentation
     PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
@@ -427,7 +427,7 @@ install (
 )
 
 install (
-    FILES ${ROOT}/CHANGELOG.txt  DESTINATION .
+    FILES ${ROOT}/libmusicxml/CHANGELOG.txt  DESTINATION .
     PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ
 )
 
@@ -454,8 +454,8 @@ endif()
 ####################################
 set (CPACKDEST libMusicFormats-${VERSION})
 set (CPACK_PACKAGE_NAME   "libMusicFormats")
-set (CPACK_PACKAGE_VENDOR "GRAME")
-set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "libMusicFormats - a library and tools to support the MusicXML format.")
+set (CPACK_PACKAGE_VENDOR "Jacques Menu")
+set (CPACK_PACKAGE_DESCRIPTION_SUMMARY "libMusicFormats - a library and tools to convert music scores formats.")
 set (CPACK_PACKAGE_VERSION   ${VERSION})
 set (CPACK_PACKAGE_VERSION_MAJOR   ${VERSION_MAJOR})
 set (CPACK_PACKAGE_VERSION_MINOR   ${VERSION_MINOR})
