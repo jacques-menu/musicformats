@@ -275,7 +275,7 @@
 %\framebox[\textwidth][r]{
 %	\parbox{0.9\textwidth}{
 %		The useful options here are:
-%  		\begin{itemize}
+%\begin{itemize}
 %  		\item \optionBoth{tharms}{trace-harmonies}
 %  		\end{itemize}
 %	}
@@ -942,9 +942,19 @@ listing~\ref{#1}, [#1], page~\pageref{#1}%
 \newcommand{\repo}{repository\index[Main]{repository}}
 \newcommand{\zip}{Zip\index[Main]{Zip}}
 
+\newcommand{\make}{{\tt make}\index[Main]{{\tt make}}}
+\newcommand{\cmake}{{\tt cmake}\index[Main]{{\tt cmake}}}
+\newcommand{\cache}{cache\index[Main]{cache}}
+
 \newcommand{\argcargv}{
 {\tt argc}/{\tt argv}\index[Main]{argc/argv}\index[ConstantsFunctionsAndVariables]{argc/argv}%
 }
+
+\newcommand{\branch}{branch\index[Main]{branch}}
+\newcommand{\default}{default\index[Main]{default}}
+\newcommand{\master}{master\index[Main]{master}}
+\newcommand{\frozen}{frozen\index[Main]{frozen}}
+\newcommand{\version}{version\index[Main]{version}}
 
 \newcommand{\quotes}{quotes\index[Main]{quotes}}
 \newcommand{\Quotes}{Quotes\index[Main]{Quotes}}
@@ -1279,28 +1289,28 @@ Option {\tt -#1, -#2}\index[Main]{\tt -#1, -#2}\index[Options]{\tt -#1, -#2}%
 
 % on GitHub
 
-\newcommand{\mxmlfile}[1]{%
+\newcommand{\gitmxmlfile}[1]{%
 \href{https://github.com/jacques-menu/musicformats/tree/master/files/musicxml/#1}{{\tt #1}}%
 }
 
-\newcommand{\distrib}[1]{%
+\newcommand{\gitdistrib}[1]{%
 \href{https://github.com/jacques-menu/musicformats/tree/master/distrib/#1}{{\tt #1}}%
 }
 
-\newcommand{\docpdf}[2]{%
+\newcommand{\gitdocpdf}[2]{%
 \href{https://github.com/jacques-menu/musicformats/tree/dev/documentation/#1/#2}{{\tt #2}}%
 }
 %%%JMI https://github.com/jacques-menu/musicformats/blob/dev/documentation/MusicFormatsAPIUserGuide/MusicFormatsAPIUserGuide.pdf
 
-\newcommand{\schemafile}[1]{%
+\newcommand{\gitschemafile}[1]{%
 \href{https://github.com/jacques-menu/musicformats/tree/master/schemas/MusicXML/dtds/3.1/#1}{{\tt #1}}%
 }
 
-\newcommand{\subdir}[1]{%
+\newcommand{\gitsubdir}[1]{%
 \href{https://github.com/jacques-menu/musicformats/tree/master/#1}{{\tt #1}}%
 }
 
-\newcommand{\cppsamplefile}[1]{%
+\newcommand{\gitcppsamplefile}[1]{%
 \href{https://github.com/jacques-menu/musicformats/tree/master/samples/#1}{{\tt #1}}%
 }
 

@@ -169,7 +169,7 @@ The same occurs for \mxml's \musicXmlMarkup{direction} elements, that contain di
       </direction>
 \end{lstlisting}
 
-Note that two \musicXmlMarkup{direction-type} elements are needed, since only one of \musicXmlMarkup{words} and \musicXmlMarkup{metronome} can be present in a given instance, as stated in \schemafile{direction.mod}:
+Note that two \musicXmlMarkup{direction-type} elements are needed, since only one of \musicXmlMarkup{words} and \musicXmlMarkup{metronome} can be present in a given instance, as stated in \gitschemafile{direction.mod}:
 \begin{lstlisting}[language=MusicXML]
 <!ELEMENT direction-type (rehearsal+ | segno+ | coda+ |
 	(words | symbol)+ | wedge | dynamics+ | dashes |
@@ -1103,7 +1103,8 @@ When not shown for clarity, the common base class of all these classes is \class
 The {\tt otherMeasureElements} classes are:
 \begin{itemize}
 \item bars:
-  \begin{itemize}
+  
+\begin{itemize}
   \item \class{msrBarCheck}
   \item \class{msrBarNumberCheck}
   \item \class{msrBarLine}
@@ -1111,19 +1112,22 @@ The {\tt otherMeasureElements} classes are:
   \end{itemize}
 
 \item breaks:
-  \begin{itemize}
+  
+\begin{itemize}
   \item \class{msrLineBreak}
   \item \class{msrPageBreak}
   \end{itemize}
 
 \item notes:
-  \begin{itemize}
+  
+\begin{itemize}
   \item \class{msrVoiceStaffChange}
   \item \class{msrOctaveShift}
   \end{itemize}
 
 \item clefs, keys, times, tempo:
-  \begin{itemize}
+  
+\begin{itemize}
   \item \class{msrClef}
   \item \class{msrKey}
   \item \class{msrTime}
@@ -1131,7 +1135,8 @@ The {\tt otherMeasureElements} classes are:
   \end{itemize}
 
 \item instruments:
-  \begin{itemize}
+  
+\begin{itemize}
   \item \class{msrStaffDetails}
   \item \class{msrScordatura}
   \item \class{msrAccordionRegistration}
@@ -1142,12 +1147,14 @@ The {\tt otherMeasureElements} classes are:
   \end{itemize}
 
 \item lyrics:
-  \begin{itemize}
+  
+\begin{itemize}
 	\item \class{msrSyllable}
   \end{itemize}
 
 \item rehearsals, segno and coda:
-  \begin{itemize}
+  
+\begin{itemize}
   \item \class{msrRehearsal}
 	\item \class{msrSegno}
   \item \class{msrDalSegno}
@@ -1155,7 +1162,8 @@ The {\tt otherMeasureElements} classes are:
  \end{itemize}
 
 \item others:
-  \begin{itemize}
+  
+\begin{itemize}
   \item \class{msrPrintLayout}
   \item \class{msrEyeGlasses}
   \item \class{msrStaffLevelElement}
@@ -1847,7 +1855,8 @@ Segment are not explicit in music scores, but they are there alright and we have
 \item it is a sequence of music elements not containing a repeat. This is equivalent to so-called \MainIt{basic blocs} in compiler technology, that are linear sequences of instructions without jumps, i.e. there is exactly one entry and one exit.%%%JMI
 \end{itemize}
 
-For example, at \figureRef{Three segments in a voice}, there are three segments:\begin{itemize}
+For example, at \figureRef{Three segments in a voice}, there are three segments:
+\begin{itemize}
 \item the first one contains the {\tt c1}, and belongs to a first repeat;
 \item the second one contains the {\tt d1}, and is a member of the voice;
 \item the last one contains the {\tt e1} and belongs to a second repeat.

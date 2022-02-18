@@ -1,8 +1,8 @@
 #!/bin/sh
 #
 
-LIB=libmusicxml2
-BINLIB=libmusicxml2.framework/libmusicxml2
+LIB=musicformats
+BINLIB=${LIB}.framework/${LIB}
 
 while [ $1 ]
 do

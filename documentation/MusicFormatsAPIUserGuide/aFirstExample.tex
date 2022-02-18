@@ -4,7 +4,7 @@
 \chapter{Raw {\tt xml2ly} usage}
 % -------------------------------------------------------------------------
 
-In computer science, the simplest example one can write with a language is often named 'Hello World'. \mf\ abides to this rule, suppling \mxmlfile{basic/HelloWorld.xml}:
+In computer science, the simplest example one can write with a language is often named 'Hello World'. \mf\ abides to this rule, suppling \gitmxmlfile{basic/HelloWorld.xml}:
 \begin{lstlisting}[language=MusicXML]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/HelloWorld.xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -61,7 +61,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Hell
 
 By default, the standard output and error streams are directed to the terminal in which the \xmlToLy\ command has been submitted.
 
-Let's consider the case of \mxmlfile{basic/UnknownMaintainerIdentification.xml}:
+Let's consider the case of \gitmxmlfile{basic/UnknownMaintainerIdentification.xml}:
 \begin{lstlisting}[language=Lilypond]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/UnknownMaintainerIdentification.xml
 *** MusicXML warning *** basic/UnknownMaintainerIdentification.xml:11: creator type "maintainer" is unknown

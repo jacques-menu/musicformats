@@ -7,7 +7,7 @@
 
 The code base of the \mf\ library contains:
 \begin{itemize}
-\item \fileName{build} : a set of files to build the library in various environments with \fileName{make}
+\item \fileName{build} : a set of files to build the library in various environments with \make
 \item \fileName{doc} : the documentation in \LaTeX\ source and PDF formats
 \item \fileName{files} : a set of sample files for \mxml\ and \msdlLang
 \item \fileName{javascript} : a set of files for the generation of Java Script, to allow the use of \mf\ in \Web\ sites
@@ -126,7 +126,8 @@ total 320
 \end{lstlisting}
 
 \item \fileName{converters} : the multi-pass converter combining those in \fileName{passes}
-  \begin{itemize}
+
+\begin{itemize}
   \item \fileName{msdl2braille}
   \item \fileName{msdl2guido}
   \item \fileName{msdl2lilypond}
@@ -145,7 +146,8 @@ total 320
   \end{itemize}
 
 \item \fileName{generators} :
-  \begin{itemize}
+
+\begin{itemize}
   \item \fileName{LilyPondIssue34}
   \item \fileName{Mikrokosmos3Wandering}
   \end{itemize}
@@ -223,7 +225,8 @@ total 1456
 \end{lstlisting}
 
 \item \fileName{formatsgeneration} : support for various output kinds
-  \begin{itemize}
+
+\begin{itemize}
   \item \fileName{brailleGeneration}
   \item \fileName{guidoGeneration}
   \item \fileName{lilypondGeneration}
@@ -233,7 +236,8 @@ total 1456
   \end{itemize}
 
 \item \fileName{passes} : code for the individual passes
-  \begin{itemize}
+
+\begin{itemize}
   \item \fileName{bsr2braille}
   \item \fileName{bsr2bsr}\\[-0.5ex]
 
@@ -250,7 +254,8 @@ total 1456
   \end{itemize}
 
 \item \fileName{formats} : the various internal representations used by \mf\
-  \begin{itemize}
+
+\begin{itemize}
   \item \fileName{bsr}
   \item \fileName{lpsr}
   \item \fileName{msdl}
@@ -289,11 +294,11 @@ jacquesmenu@macmini: ~/musicformats-git-dev/validation > cat musicformatsversion
 1.0.0
 \end{lstlisting}
 
-In this example, \fileName{make} will create a folder named \fileName{1.0.0} containing the converted files, including PDF files produced by \fileName{lilypond}.
+In this example, \make\ will create a folder named \fileName{1.0.0} containing the converted files, including PDF files produced by \fileName{lilypond}.
 
 This validation version number allows for comparisions between version to ease regression tests.
 
-There is no \fileName{clean} target in the \fileName{Makefile}. Removing the \fileName{1.0.0} folder in this case does the equivalent, then we can run \fileName{make} again.
+There is no \fileName{clean} target in the \fileName{Makefile}. Removing the \fileName{1.0.0} folder in this case does the equivalent, then we can run \make\ again.
 
 
 

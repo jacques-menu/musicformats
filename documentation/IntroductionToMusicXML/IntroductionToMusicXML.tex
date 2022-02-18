@@ -52,7 +52,7 @@ This document presents a basic view of \mxml\ and a couple of short examples ill
 
 \sep
 
-All the examples mentioned can be downloaded from \url{https://github.com/jacques-menu/musicformats/tree/master/files/musicxml}. They are grouped by subject in subdirectories, such as \mxmlfile{basic/HelloWorld.xml}.
+All the examples mentioned can be downloaded from \url{https://github.com/jacques-menu/musicformats/tree/master/files/musicxml}. They are grouped by subject in subdirectories, such as \gitmxmlfile{basic/HelloWorld.xml}.
 
 \sep
 
@@ -89,7 +89,7 @@ The scores fragments shown in this document have been produced by translating th
 
 The translations have been done by \xmlToLy, a prototype tool developed by this author. \xmlToLy\ and some of the specific examples presented in this document are this author's contribution to \libmusicxml, an open-source C++ library created and maintained by \fober at Grame, Lyon, France.
 
-The home page to \libmusicxml\ is \url{https://github.com/jacques-menu/musicformats}, and \xmlToLy\ is in the '\fileName{\tt lilypond}' branch.
+The home page to \libmusicxml\ is \url{https://github.com/jacques-menu/musicformats}, and \xmlToLy\ is in the '\fileName{\tt lilypond}' \branch.
 
 \sep
 
@@ -181,7 +181,7 @@ Some elements contain a single unnamed data item, such as durations and voice an
 
 \sep
 
-The \subdir{dtds/3.1/schema} subdirectory contains '\fileName{\tt *.mod}' text files defining the various concepts. The file \schemafile{common.mod} contains definitions used in other '\fileName{\tt *.mod}' files:
+The \gitsubdir{dtds/3.1/schema} subdirectory contains '\fileName{\tt *.mod}' text files defining the various concepts. The file \gitschemafile{common.mod} contains definitions used in other '\fileName{\tt *.mod}' files:
 \begin{lstlisting}[language=MusicXML]
 <!--
 	This file contains entities and elements that are common
@@ -192,7 +192,7 @@ The \subdir{dtds/3.1/schema} subdirectory contains '\fileName{\tt *.mod}' text f
 
 \sep
 
-For example, \schemafile{note.mod} defines the \musicXmlMarkup{backup} and \musicXmlMarkup{forward} markups this way:
+For example, \gitschemafile{note.mod} defines the \musicXmlMarkup{backup} and \musicXmlMarkup{forward} markups this way:
 \begin{lstlisting}[language=MusicXML, caption={\musicXmlMarkup{backup} and \musicXmlMarkup{forward} definition}]
 <!--
 	The backup and forward elements are required to coordinate
@@ -317,7 +317,8 @@ The syntax of \mxml\ data quite regular and simple, and it is easy to program le
 \item a '{\tt <score-partwise>}' element indicating the \mxml\ DTD number that the forthcoming data complies to, and that contains:
 
 \item a score header containing:
-  \begin{itemize}
+
+\begin{itemize}
   \item an optional '{\tt <work>}' element, containing sub-elements such as '{\tt <work-number>}', \\
   '{\tt <work-title>}' and '{\tt <opus>}';
 
@@ -332,7 +333,7 @@ The syntax of \mxml\ data quite regular and simple, and it is easy to program le
 \item a sequence of '{\tt <part>}' elements in the order they appear in the score, each one containing the measures in the given part, in order.
 \end{itemize}
 
-Here is how the score header is actually defined in \schemafile{score.mod}:
+Here is how the score header is actually defined in \gitschemafile{score.mod}:
 \begin{lstlisting}[language=MusicXML]
 <!--
 	The score-header entity contains basic score metadata
@@ -358,7 +359,7 @@ It is very difficult to define the semantics -- the meaning of the sentences -- 
 
 \sep
 
-For example, clefs are defined in \schemafile{attributes.mod}, starting with:
+For example, clefs are defined in \gitschemafile{attributes.mod}, starting with:
 \begin{lstlisting}[language=MusicXML]
 <!--
 	Clefs are represented by the sign, line, and
@@ -368,7 +369,7 @@ For example, clefs are defined in \schemafile{attributes.mod}, starting with:
 	... ... ... ... ...
 \end{lstlisting}
 
-What is a '{\tt none}' clef? Is the clef currently in use still to be used from now on, merely hiding the '{\tt none}' clef, or should an implicit, default treble clef be used? As it turns out, various applications don't agree on the answer to this question, see the next-to-last measure of \mxmlfile{clefs/Clefs.xml}.
+What is a '{\tt none}' clef? Is the clef currently in use still to be used from now on, merely hiding the '{\tt none}' clef, or should an implicit, default treble clef be used? As it turns out, various applications don't agree on the answer to this question, see the next-to-last measure of \gitmxmlfile{clefs/Clefs.xml}.
 
 \sep
 
@@ -381,7 +382,7 @@ This author has found \mxml\ files that contain '{\tt PERCUSSION}': is this to b
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 
-As is usual in computer science, this minimal example is named \mxmlfile{basic/HelloWorld.xml}. It is displayed below, together with the resulting graphic score.
+As is usual in computer science, this minimal example is named \gitmxmlfile{basic/HelloWorld.xml}. It is displayed below, together with the resulting graphic score.
 
 \sep
 
@@ -396,7 +397,7 @@ After this, we find the sequence of '{\tt part}'s with their '{\tt id}' attribut
 The nesting of elements, such as '{\tt <key>}' containing a '{\tt <fifths>}' element, leads the structure of a \mxml\ representation to be a tree. The way the specification is written conforms to the computer science habit of drawing trees with their root at the top and their leaves at the bottom.
 
 %\begin{figure}
-%\caption{Contents of \mxmlfile{basic/Helloworld.xml}\mylabel{helloworld}
+%\caption{Contents of \gitmxmlfile{basic/Helloworld.xml}\mylabel{helloworld}
 \includegraphics{HelloWorld.png}
 
 \begin{lstlisting}[language=MusicXML, caption={\tt HelloWorld.xml}]
@@ -465,7 +466,7 @@ The nesting of elements, such as '{\tt <key>}' containing a '{\tt <fifths>}' ele
 
 \sep
 
-In \schemafile{common.mod} we find:
+In \gitschemafile{common.mod} we find:
 
 \begin{lstlisting}[language=MusicXML,caption={Relative lengths}]
 <!--
@@ -483,7 +484,7 @@ In \schemafile{common.mod} we find:
 
 \sep
 
-In order to obtain absolute lengths for \drawing, \mxml\ specifies how many tenths are equal to how many millimeters in the '{\tt <scaling>}' element, defined in \schemafile{layout.mod}:
+In order to obtain absolute lengths for \drawing, \mxml\ specifies how many tenths are equal to how many millimeters in the '{\tt <scaling>}' element, defined in \gitschemafile{layout.mod}:
 
 \begin{lstlisting}[language=MusicXML,caption={Abolute lengths}]
 <!--
@@ -634,7 +635,7 @@ For example, '{\tt <dynamics>}' elements are placed outside of '{\tt <note>}' el
 
 \sep
 
-The elements attached to notes are placed inside a '{\tt <notations>}' element, itself placed inside a '{\tt <note>}' element. Notations are defined in \schemafile{note.mod}:
+The elements attached to notes are placed inside a '{\tt <notations>}' element, itself placed inside a '{\tt <note>}' element. Notations are defined in \gitschemafile{note.mod}:
 \begin{lstlisting}[language=MusicXML, caption={Notations definition}]
 <!--
 	Notations are musical notations, not XML notations. Multiple
@@ -671,7 +672,7 @@ The elements attached to notes are placed inside a '{\tt <notations>}' element, 
 \subsection{Identification, rights and credits}
 % -------------------------------------------------------------------------
 
-The '{\tt  <identification>}' element is defined in \schemafile{identity.mod}:
+The '{\tt  <identification>}' element is defined in \gitschemafile{identity.mod}:
 \begin{lstlisting}[language=MusicXML]
 <!--
 	Identification contains basic metadata about the score.
@@ -686,7 +687,7 @@ The '{\tt  <identification>}' element is defined in \schemafile{identity.mod}:
 
 \sep
 
-For example, \mxmlfile{xmlsamples3.1/ActorPreludeSample.xml} contains:
+For example, \gitmxmlfile{xmlsamples3.1/ActorPreludeSample.xml} contains:
 \begin{lstlisting}[language=MusicXML,caption={Identification and rights example}]
   <identification>
     <creator type="composer">Lee Actor</creator>
@@ -705,11 +706,11 @@ For example, \mxmlfile{xmlsamples3.1/ActorPreludeSample.xml} contains:
 
 \sep
 
-The '{\tt <credit>}' element, defined in \schemafile{score.mod}, represents various legal informations about the score. It contains placement indication such as page number and alignment, as well as fonts information.
+The '{\tt <credit>}' element, defined in \gitschemafile{score.mod}, represents various legal informations about the score. It contains placement indication such as page number and alignment, as well as fonts information.
 
 \sep
 
-For example, one finds in \mxmlfile{xmlsamples3.1/ActorPreludeSample.xml}:
+For example, one finds in \gitmxmlfile{xmlsamples3.1/ActorPreludeSample.xml}:
 \begin{lstlisting}[language=MusicXML,caption={Credits example}]
   <credit page="1">
     <credit-type>title</credit-type>
@@ -739,7 +740,7 @@ For example, one finds in \mxmlfile{xmlsamples3.1/ActorPreludeSample.xml}:
 
 \sep
 
-We see the '{\tt <credit-words>}' element in the example above. In \mxml, '{\tt words}' means text, as defined in \schemafile{direction.mod}:
+We see the '{\tt <credit-words>}' element in the example above. In \mxml, '{\tt words}' means text, as defined in \gitschemafile{direction.mod}:
 \begin{lstlisting}[language=MusicXML]
 <!--
 	The words element specifies a standard text direction.
@@ -759,7 +760,7 @@ We see the '{\tt <credit-words>}' element in the example above. In \mxml, '{\tt 
 \subsection{Score geometry}
 % -------------------------------------------------------------------------
 
-The dimensions and margins of the graphics score can be specified with the '{\tt <page-layout>}' element, as in \mxmlfile{basic/ClefKeyTime.xml}:
+The dimensions and margins of the graphics score can be specified with the '{\tt <page-layout>}' element, as in \gitmxmlfile{basic/ClefKeyTime.xml}:
 \begin{lstlisting}[language=MusicXML, caption={Page layout example}]
   <defaults>
     <scaling>
@@ -806,7 +807,7 @@ Part groups can be nested, leading to a hierarchy of groups. This is done with t
 
 \sep
 
-For example, \mxmlfile{partgroups/NestedPartGroups.xml} contains:\\
+For example, \gitmxmlfile{partgroups/NestedPartGroups.xml} contains:\\
 \includegraphics[scale=0.7]{NestedPartGroups.png}
 
 \begin{lstlisting}[language=MusicXML, caption={Nested part groups example}]
@@ -845,7 +846,7 @@ The \mxml\ DTD states that part groups may \MainIt{overlap}. This author suspect
 
 \sep
 
-Various applications handle \mxmlfile{lilypond-ignored/OverlappingPartGroups.xml} their own way. \xmlToLy\ rejects such data for the time being, with this message:
+Various applications handle \gitmxmlfile{lilypond-ignored/OverlappingPartGroups.xml} their own way. \xmlToLy\ rejects such data for the time being, with this message:
 \begin{lstlisting}[language=MusicXML,caption={Overlapping groups \xmlToLy\ error message}]
   ### MusicXML ERROR ### lilypond-ignored/OverlappingPartGroups.xml:39:
 There are overlapping part groups, namely:
@@ -883,7 +884,7 @@ A given voice can change staff and come back to the former one, for example in k
 
 \sep
 
-This author has found \mxml\ files in which the voice numbers are not contiguous, such as '{\tt 1}', '{\tt 5}' and '{\tt 9}'. The DTD doesn't preclude this, and the applications handle example \mxmlfile{multistaff/NonContiguousVoiceNumbers.xml} their own way.
+This author has found \mxml\ files in which the voice numbers are not contiguous, such as '{\tt 1}', '{\tt 5}' and '{\tt 9}'. The DTD doesn't preclude this, and the applications handle example \gitmxmlfile{multistaff/NonContiguousVoiceNumbers.xml} their own way.
 
 
 % -------------------------------------------------------------------------
@@ -901,7 +902,7 @@ This author has found \mxml\ files in which the voice numbers are not contiguous
 
 \page
 
-An example is found in \mxmlfile{basic/ClefKeyTime.xml}:\\
+An example is found in \gitmxmlfile{basic/ClefKeyTime.xml}:\\
 \includegraphics{ClefKeyTime.png}
 \begin{lstlisting}[language=MusicXML, caption={Clef, key and time signature example}]
       <attributes>
@@ -972,7 +973,7 @@ Composite time signatures such as '{\tt 2/4 + 3/8}' and '{\tt 3+2/8}' can be spe
 
 \page
 
-\mxml\ also supports non-traditional keys the Humdrum/Scot way. For example, the time signature at the beginning of measure 2 in \mxmlfile{keys/HumdrumScotKeys.xml} is described by:\\
+\mxml\ also supports non-traditional keys the Humdrum/Scot way. For example, the time signature at the beginning of measure 2 in \gitmxmlfile{keys/HumdrumScotKeys.xml} is described by:\\
 \includegraphics{HumdrumScotKeys.png}
 
 \begin{lstlisting}[language=MusicXML, caption={Humdrum/Scot non-traditional key example}]
@@ -1002,7 +1003,7 @@ This is another example handled diffently by some applications.
 \subsection{Metromone and tempo}
 % -------------------------------------------------------------------------
 
-\mxml\ has rich support for metronome specifications. Example \mxmlfile{tempos/SwingTempo.xml} contains:\\
+\mxml\ has rich support for metronome specifications. Example \gitmxmlfile{tempos/SwingTempo.xml} contains:\\
 \includegraphics{SwingTempo.png}.
 \begin{lstlisting}[language=MusicXML,caption={Swing tempo example}]
      <direction placement="above">
@@ -1048,7 +1049,7 @@ This is another example handled diffently by some applications.
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 
-A note is described by a '{\tt note}' element, defined in \schemafile{note.mod}:
+A note is described by a '{\tt note}' element, defined in \gitschemafile{note.mod}:
 \begin{lstlisting}[language=MusicXML, caption={Note definition}]
 <!--
 	Notes are the most common type of MusicXML data. The
@@ -1074,7 +1075,7 @@ A note is described by a '{\tt note}' element, defined in \schemafile{note.mod}:
 
 \sep
 
-Consider \mxmlfile{basic/MinimalScore.xml}:\\
+Consider \gitmxmlfile{basic/MinimalScore.xml}:\\
 \includegraphics{MinimalScore.png}
 
 \page
@@ -1229,7 +1230,7 @@ The \mxml\ articulation elementss are:
 \subsection{Ornaments}
 % -------------------------------------------------------------------------
 
-Ornaments are defined in \schemafile{note.mod}:
+Ornaments are defined in \gitschemafile{note.mod}:
 \begin{lstlisting}[language=MusicXML]
 <!ELEMENT ornaments
 	(((trill-mark | turn | delayed-turn | inverted-turn |
@@ -1253,7 +1254,7 @@ Ornaments are defined in \schemafile{note.mod}:
 \subsection{Dynamics}
 % -------------------------------------------------------------------------
 
-\mxml\ dynamics are defined in \schemafile{common.mod}:
+\mxml\ dynamics are defined in \gitschemafile{common.mod}:
 
 \begin{lstlisting}[language=MusicXML]
 <!ELEMENT dynamics ((p | pp | ppp | pppp | ppppp | pppppp |
@@ -1282,7 +1283,7 @@ The other-dynamics element
 \subsection{An example of articulations and dynamics}
 % -------------------------------------------------------------------------
 
-The reader can see various such in \mxmlfile{articulations/ArticulationsAndOrnaments.xml}:\\
+The reader can see various such in \gitmxmlfile{articulations/ArticulationsAndOrnaments.xml}:\\
 \includegraphics{ArticulationsAndOrnaments.png}
 
 \page
@@ -1293,7 +1294,7 @@ The reader can see various such in \mxmlfile{articulations/ArticulationsAndOrnam
 \mylabel{graceNotes}
 % -------------------------------------------------------------------------
 
-The '{\tt <grace>}' element is defined in \schemafile{note.mod}:
+The '{\tt <grace>}' element is defined in \gitschemafile{note.mod}:
 \begin{lstlisting}[language=MusicXML]
 <!--
 	The grace element indicates the presence of a grace note.
@@ -1318,7 +1319,7 @@ The '{\tt <grace>}' element is defined in \schemafile{note.mod}:
 
 \sep
 
-For example, in \mxmlfile{gracenotes/LilyPondIssue34.xml}, the three grace notes at the beginning of the lower staff are described by:\\
+For example, in \gitmxmlfile{gracenotes/LilyPondIssue34.xml}, the three grace notes at the beginning of the lower staff are described by:\\
 \includegraphics[scale=0.85]{LilyPondIssue34.png}
 \begin{lstlisting}[language=MusicXML,caption={Grace notes example}]
       <note>
@@ -1377,7 +1378,7 @@ For example, in \mxmlfile{gracenotes/LilyPondIssue34.xml}, the three grace notes
 
 \sep
 
-These two elements are defined in \schemafile{note.mod}:
+These two elements are defined in \gitschemafile{note.mod}:
 \begin{lstlisting}[language=MusicXML]
 <!ELEMENT tie EMPTY>
 <!ATTLIST tie
@@ -1408,7 +1409,7 @@ These two elements are defined in \schemafile{note.mod}:
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 
-The '{\tt <slur>}' element is placed inside a '{\tt <notations>}' element, itself placed inside a '{\tt <note>}' element.  It is defined in \schemafile{note.mod}:
+The '{\tt <slur>}' element is placed inside a '{\tt <notations>}' element, itself placed inside a '{\tt <note>}' element.  It is defined in \gitschemafile{note.mod}:
 \begin{lstlisting}[language=MusicXML]
 <!ELEMENT slur EMPTY>
 <!ATTLIST slur
@@ -1432,7 +1433,7 @@ The '{\tt <slur>}' element is placed inside a '{\tt <notations>}' element, itsel
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 
-This example is in \mxmlfile{basic/TieAndSlur.xml}:\\
+This example is in \gitmxmlfile{basic/TieAndSlur.xml}:\\
 \includegraphics{TieAndSlur.png}
 
 \sep
@@ -1514,8 +1515,9 @@ This example is in \mxmlfile{basic/TieAndSlur.xml}:\\
 %
 %The '{\tt <harmony>}' element in \mxml\ goes beyond merely displaying harmonies, since it can describe harmonic analysis. i.e. harmonies functions.
 %
-%Here is how it is defined in \schemafile{direction.mod}:
-%\begin{lstlisting}[language=MusicXML]
+%Here is how it is defined in \gitschemafile{direction.mod}:
+%
+\begin{lstlisting}[language=MusicXML]
 %<!--
 %	The harmony elements are based on Humdrum's **harm
 %	encoding, extended to support chord symbols in popular
@@ -1562,8 +1564,9 @@ This example is in \mxmlfile{basic/TieAndSlur.xml}:\\
 %\section{Figured bass}
 %% -------------------------------------------------------------------------
 %
-%The '{\tt <figured-bass>}' element is defined in \schemafile{node.mod} this way:
-%\begin{lstlisting}[language=MusicXML]
+%The '{\tt <figured-bass>}' element is defined in \gitschemafile{node.mod} this way:
+%
+\begin{lstlisting}[language=MusicXML]
 %<!--
 %	Figured bass elements take their position from the first
 %	regular note (not a grace note or chord note) that follows
@@ -1617,10 +1620,10 @@ Chords are not evidenced as such in \mxml\ data. Instead, the '{\tt <chord>}' el
 
 \sep
 
-The code for the last three note chord in \mxmlfile{chords/Chords.xml} is shown below.
+The code for the last three note chord in \gitmxmlfile{chords/Chords.xml} is shown below.
 
 %\begin{figure}
-%\caption{Last chord from \mxmlfile{chords/Chords.xml}\mylabel{chords}
+%\caption{Last chord from \gitmxmlfile{chords/Chords.xml}\mylabel{chords}
 \includegraphics{Chords.png}
 
 \begin{lstlisting}[language=MusicXML, caption={Chord example}]
@@ -1696,10 +1699,10 @@ One should play '{\tt <actual-notes>}' within the time taken by only '{\tt <norm
 
 \sep
 
-In the case of \mxmlfile{tuplets/Tuplets.xml}, shown below, the duration of the tuplets member is 20 quanta, i.e. 2/3 of a quarter note, whose duration is 30, and the 'display' duration is a quarter note. The duration of the triplet as a whole is that of a half note, i.e. 60 quanta.
+In the case of \gitmxmlfile{tuplets/Tuplets.xml}, shown below, the duration of the tuplets member is 20 quanta, i.e. 2/3 of a quarter note, whose duration is 30, and the 'display' duration is a quarter note. The duration of the triplet as a whole is that of a half note, i.e. 60 quanta.
 
 %\begin{figure}
-%\caption{First tuplet from \mxmlfile{tuplets/Tuplet.xml}}\mylabel{tuplets}
+%\caption{First tuplet from \gitmxmlfile{tuplets/Tuplet.xml}}\mylabel{tuplets}
 \includegraphics{Tuplets.png}
 
 \begin{lstlisting}[language=MusicXML, caption={Tuplet example}]
@@ -1766,7 +1769,7 @@ Repeats are not described by high-level elements in \mxml. Instead, specific bar
 \subsection{Simple barLines}
 % -------------------------------------------------------------------------
 
-The '{\tt <barLine>}' element is defined in \schemafile{barLine.mod}. It has two main attributes:
+The '{\tt <barLine>}' element is defined in \gitschemafile{barLine.mod}. It has two main attributes:
 %\begin{adjustwidth}{-0.5cm}{-0.5cm}
 \begin{center}
 \footnotesize
@@ -1804,8 +1807,9 @@ The '{\tt <barLine>}' element is defined in \schemafile{barLine.mod}. It has two
 \end{center}
 %\end{adjustwidth}
 
-%The possible bar styles are defined in \schemafile{barLine.mod}:
-%\begin{lstlisting}[language=MusicXML,caption={Existing bar styles}]
+%The possible bar styles are defined in \gitschemafile{barLine.mod}:
+%
+\begin{lstlisting}[language=MusicXML,caption={Existing bar styles}]
 %<!--
 %	Bar-style contains style information. Choices are
 %	regular, dotted, dashed, heavy, light-light,
@@ -1831,7 +1835,7 @@ In the '{\tt <bar-style>}' element, '{\tt light}' is a thin vertical line, and '
 
 \sep
 
-One can see the various simple barLines in \mxmlfile{barLines/SimpleBarLines.xml}:\\
+One can see the various simple barLines in \gitmxmlfile{barLines/SimpleBarLines.xml}:\\
 \includegraphics[scale=0.85]{SimpleBarLines.png}
 
 
@@ -1839,7 +1843,7 @@ One can see the various simple barLines in \mxmlfile{barLines/SimpleBarLines.xml
 \subsection{Repeats}
 % -------------------------------------------------------------------------
 
-The '{\tt <repeat>}' element in barLine can contains these attributes, also defined in \schemafile{barLine.mod}:
+The '{\tt <repeat>}' element in barLine can contains these attributes, also defined in \gitschemafile{barLine.mod}:
 %\begin{adjustwidth}{-0.5cm}{-0.5cm}
 \begin{center}
 \footnotesize
@@ -1867,7 +1871,8 @@ The '{\tt straight}' and '{\tt curved}' values represent single wings, while
 \end{center}
 %\end{adjustwidth}
 
-%\begin{lstlisting}[language=MusicXML,caption={Repeats barLines}]
+%
+\begin{lstlisting}[language=MusicXML,caption={Repeats barLines}]
 %<!--
 %	Repeat marks. The start of the repeat has a forward direction
 %	while the end of the repeat has a backward direction. Backward
@@ -1911,7 +1916,7 @@ The '{\tt straight}' and '{\tt curved}' values represent single wings, while
 \subsection{A repeat example}
 % -------------------------------------------------------------------------
 
-Here is a simple example in \mxmlfile{repeats/SimpleRepeatWithAnacrusis.xml}:\\
+Here is a simple example in \gitmxmlfile{repeats/SimpleRepeatWithAnacrusis.xml}:\\
 \includegraphics{SimpleRepeatWithAnacrusis.png}
 \begin{lstlisting}[language=MusicXML]
 <!-- ... ... ... ... ...-->
@@ -2003,7 +2008,7 @@ Here is a simple example in \mxmlfile{repeats/SimpleRepeatWithAnacrusis.xml}:\\
 \subsection{The '{\tt <lyric>}' element}
 % -------------------------------------------------------------------------
 
-In \mxml\, the '{\tt <lyrics>}' elements are sub-elements of the '{\tt <note>}' elements. The definition is in \schemafile{note.mod}:
+In \mxml\, the '{\tt <lyrics>}' elements are sub-elements of the '{\tt <note>}' elements. The definition is in \gitschemafile{note.mod}:
 \begin{lstlisting}[language=MusicXML]
 <!ELEMENT lyric
 	((((syllabic?, text),
@@ -2065,7 +2070,7 @@ The '{\tt <text>}' sub-element contains the text to be sung. It can have attribu
 
 \sep
 
-For example, the first note of \mxmlfile{lyrics/QuemQueritis.xml} contains the single word '{\tt Quem}':\\
+For example, the first note of \gitmxmlfile{lyrics/QuemQueritis.xml} contains the single word '{\tt Quem}':\\
 \includegraphics{QuemQueritis.png}
 \begin{lstlisting}[language=MusicXML]
 			<note>
@@ -2096,7 +2101,7 @@ Stanzas are not represented in \mxml\ per se, but implicitly: the '{\tt number}'
 
 \sep
 
-For example, in \mxmlfile{lyrics/MultipleStanzas.xml}, the first note (E\raisebox{0.35em}{$\flat$}) of the first chord in the upper staff contains the lyrics for the first syllable of all the successive stanzas, preceded by the stanza number and a dot:\\
+For example, in \gitmxmlfile{lyrics/MultipleStanzas.xml}, the first note (E\raisebox{0.35em}{$\flat$}) of the first chord in the upper staff contains the lyrics for the first syllable of all the successive stanzas, preceded by the stanza number and a dot:\\
 \includegraphics{MultipleStanzas.png}
 \begin{lstlisting}[language=MusicXML,caption={Multiple stanzas example}]
       <note default-x="129.06" default-y="-40.00">
@@ -2156,7 +2161,7 @@ For example, in \mxmlfile{lyrics/MultipleStanzas.xml}, the first note (E\raisebo
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 
-Let's look in some detail at the score specified in \mxmlfile{multistaff/MultipleVoicesPerPart.xml}:\\
+Let's look in some detail at the score specified in \gitmxmlfile{multistaff/MultipleVoicesPerPart.xml}:\\
 \includegraphics{MultipleVoicesPerPart.png}
 
 \sep
@@ -2351,9 +2356,9 @@ The '{\tt <harmony>}' element can contain an '{\tt <inversion>}' sub-element to 
 
 \sep
 
-Here is how \xmlToLy\ handlles the second inversion of the chord in \mxmlfile{harmonies/Inversion.xml}:\\
+Here is how \xmlToLy\ handlles the second inversion of the chord in \gitmxmlfile{harmonies/Inversion.xml}:\\
 %\begin{figure}
-%\caption{Harmony inversion from \mxmlfile{harmonies/Inversion.xml}}\mylabel{inversion}
+%\caption{Harmony inversion from \gitmxmlfile{harmonies/Inversion.xml}}\mylabel{inversion}
 \includegraphics{Inversion.png}
 
 \page
@@ -2379,7 +2384,7 @@ Multi-measure rests are specified in \mxml\ with the '{\tt <multiple-rest>}' ele
 
 \sep
 
-For example, the first two measures of \mxmlfile{rests/MultiMeasureRests.xml} are a multi-measure rest, described by:
+For example, the first two measures of \gitmxmlfile{rests/MultiMeasureRests.xml} are a multi-measure rest, described by:
 \begin{lstlisting}[language=MusicXML]
   <part id="P1">
     <measure number="1">
@@ -2454,7 +2459,7 @@ This file is handled differently by various applications, as can be seen below.
 \subsection{Elements often not well handled}
 % -------------------------------------------------------------------------
 
-There are elements that are not displayed in a "standard" way by the usual music score editors. One of them is the '{\tt <beat-repeat>}', found for example in \mxmlfile{repeats/BeatRepeat.xml}.
+There are elements that are not displayed in a "standard" way by the usual music score editors. One of them is the '{\tt <beat-repeat>}', found for example in \gitmxmlfile{repeats/BeatRepeat.xml}.
 
 \sep
 
@@ -2464,7 +2469,7 @@ There are elements that are not displayed in a "standard" way by the usual music
 \fin\ produces:\\
 \includegraphics[scale=0.8]{BeatRepeatFinale.png}.
 
-And if one exports that score from \fin\ to \mxml, the beat repeat information is lost, see \mxmlfile{repeats/BeatRepeatExportedFromFinale.xml}.
+And if one exports that score from \fin\ to \mxml, the beat repeat information is lost, see \gitmxmlfile{repeats/BeatRepeatExportedFromFinale.xml}.
 
 
 % -------------------------------------------------------------------------
@@ -2475,7 +2480,7 @@ There are elements that are not displayed by the usual music score editors, beca
 
 \sep
 
-For example, the scordatura in \mxmlfile{strings/Scordatura.xml} is the case where the sixth string of the guitar is tuned a tone down to D, which can be described by:\\
+For example, the scordatura in \gitmxmlfile{strings/Scordatura.xml} is the case where the sixth string of the guitar is tuned a tone down to D, which can be described by:\\
 \includegraphics{Scordatura.png}
 
 \begin{lstlisting}[language=MusicXML, caption={Scordatura example}]
@@ -2518,7 +2523,7 @@ For example, the scordatura in \mxmlfile{strings/Scordatura.xml} is the case whe
 \subsection{A real challenge}
 % -------------------------------------------------------------------------
 
-The file \mxmlfile{challenging/BeethovenNinthSymphony.xml} is over 66 megabytes large -- it contains the whole score for this symphony.
+The file \gitmxmlfile{challenging/BeethovenNinthSymphony.xml} is over 66 megabytes large -- it contains the whole score for this symphony.
 
 \sep
 
@@ -2538,7 +2543,7 @@ The interested reader is urged to try and import this file into their favorite s
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 
-\mxml\ supports other score elements such as harmonies and figured bass, as well as nested repeats. There is a lot of information about \mxml\ on the Internet. And of course, plenty of targeted, ready-to-use examples can be found in \subdir{files/musicxml}.
+\mxml\ supports other score elements such as harmonies and figured bass, as well as nested repeats. There is a lot of information about \mxml\ on the Internet. And of course, plenty of targeted, ready-to-use examples can be found in \gitsubdir{files/musicxml}.
 
 \mxml\ has become a de facto standard for music scores data interchange between applications. The way it is exported and imported by the various applications is quite diverse though, and manual editing of the result is to be expected after import.
 

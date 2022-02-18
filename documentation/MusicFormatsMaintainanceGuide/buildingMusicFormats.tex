@@ -7,7 +7,7 @@
 In order to build \mf\ from source on your machine, you need:
 \begin{itemize}
 \item a C++11 compiler;
-\item the \fileName{cmake} tool.
+\item the \cmake\ tool.
 \end{itemize}
 
 The supported \OS s both to build the library and run the \CLI\ tools are Linux, Windows and MacOS. Other systems may be fine but have not been tested.
@@ -19,39 +19,31 @@ The C++11 language is needed because \mf\ uses \fileName{$<$regex$>$} and the {\
 \section{Cloning the repository}
 % -------------------------------------------------------------------------
 
-Commands such as the following can be used to clone the \Main{dev}, \Main{test} and \Main{stable} branches, respectively:
+Commands such as the following can be used to clone the \master\ and \version\ \branch es, respectively:
 
 \begin{lstlisting}[language=Terminal]
-BRANCH=dev
-MUSIC_FORMATS_DEV=${HOME}/musicformats-git-${BRANCH}
-git clone -b ${BRANCH} https://github.com/jacques-menu/musicformats.git ${MUSIC_FORMATS_DEV}
+MUSIC_FORMATS_DIR=${HOME}/musicformats-git-dev
+git clone https://github.com/jacques-menu/musicformats.git ${MUSIC_FORMATS_DIR}
 cd ${MUSIC_FORMATS_DEV}
 \end{lstlisting}
 
 \begin{lstlisting}[language=Terminal]
-BRANCH=test-v0.9.51
-MUSIC_FORMATS_TEST=${HOME}/musicformats-git-${BRANCH}
-git clone -b ${BRANCH} https://github.com/jacques-menu/musicformats.git ${MUSIC_FORMATS_TEST}
-cd ${MUSIC_FORMATS_TEST}
-\end{lstlisting}
-
-\begin{lstlisting}[language=Terminal]
-BRANCH=stable-v0.9.51
-MUSIC_FORMATS_STABLE=${HOME}/musicformats-git-${BRANCH}
-git clone -b ${BRANCH} https://github.com/jacques-menu/musicformats.git ${MUSIC_FORMATS_STABLE}
-cd ${MUSIC_FORMATS_STABLE}
+VERSION_BRANCH=v0.9.59
+MUSIC_FORMATS_DIR=${HOME}/musicformats-git-${VERSION_BRANCH}
+git clone -b ${VERSION_BRANCH} https://github.com/jacques-menu/musicformats.git ${MUSIC_FORMATS_DIR}
+cd ${MUSIC_FORMATS_DIR}
 \end{lstlisting}
 
 
 % -------------------------------------------------------------------------
-\section{One-shot partial make runs}
+\section{One-shot partial {\tt make} runs}
 % -------------------------------------------------------------------------
 
-Some parts of the source code base have to be created by their own \code{make} file once and for all. %%%JMI
+Some parts of the source code base have to be created by their own \make\ file once and for all. %%%JMI
 
 
 % -------------------------------------------------------------------------
-\section{{\tt cmake} configuration}
+\section{{\tt \cmake} configuration}
 % -------------------------------------------------------------------------
 
 This configuration is in \build{CMakesList.txt}.

@@ -3997,7 +3997,7 @@ R"(Generate repeats start and and bar lines even though LilyPond would take care
     appendAtomToSubGroup (
       oahBooleanAtom::create (
         "repeat-brackets", "rbracks",
-R"(Generate repeats with brackets instead of regular bar lines.)",
+R"(Generate repeats with brackets instead of regular bar lines for readibility.)",
         "fRepeatBrackets",
         fRepeatBrackets));
 
