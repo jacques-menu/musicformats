@@ -691,8 +691,9 @@ alias dimsdlm='lldb -- msdl -insider -generate midi'
 
 #----------------------------------------------
 
-alias gitb='git branch'
-alias gitc='git checkout'
+alias gb='git branch'
+alias gc='git checkout'
+alias gp='git push'
 
 function addSrc ()
 {

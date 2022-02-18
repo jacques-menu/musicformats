@@ -17,7 +17,7 @@ The following chapters show the details.
 \chapter{Using a distribution}
 % -------------------------------------------------------------------------
 
-The \mf\ \repo\ is hosted by \github\ and use so-called \MainIt{actions} to build the library on \MacOS, \Ubuntu\ and \Windows. The resulting files are then uploaded to the \repo, where they are available to create the distributions for these there \OS s. 
+The \mf\ \repo\ is hosted by \github\ and use so-called \MainIt{actions} to build the library on \MacOS, \Ubuntu\ and \Windows. The resulting files are then uploaded to the \repo, where they are available to create the distributions for these there \OS s.
 
 These distributions are in the form of \zip\ files. They are are available from \url{https://github.com/jacques-menu/musicformats/tree/master/distrib}, as well as the documentation PDF files:
 \begin{lstlisting}[language=Terminal]
@@ -85,7 +85,7 @@ total 661992
 \subsection{Security issue in recent MacOS\texttrademark\ versions}
 % -------------------------------------------------------------------------
 
-\MacOS\ gets more and more stringent over time regarding security. The \OS\ part in charge of this is named \Gatekeeper. 
+\MacOS\ gets more and more stringent over time regarding security. The \OS\ part in charge of this is named \Gatekeeper.
 
 When installing \mf\ from the \repo\ on versions up to 10 (\Main{High Sierra}), the executables in \code{bin} are usable alright.
 
@@ -252,7 +252,15 @@ Receiving objects: 100% (20619/20619), 107.32 MiB | 11.14 MiB/s, done.
 Resolving deltas: 100% (15569/15569), done.
 \end{lstlisting}
 
-More precisely, the local copy is that of the \MainIt{default branch}, which is a stable one, i.e. you can use is safely. It contains:
+This creates a local copy i\default, \master\ \branch.
+Alternatively, a previous \mf\ \version\ can be cloned with something like:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~ > VERSION_NUMBER=v.0.60
+
+jacquesmenu@macmini: ~ > git clone -b ${VERSION_NUMBER} https://github.com/jacques-menu/musicformats.git musicformats_local_clone-${VERSION_NUMBER}
+\end{lstlisting}
+
+The local clone contains:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~ > cd musicformats_local_clone
 jacquesmenu@macmini: ~/musicformats_local_clone > ls -sal
@@ -279,39 +287,37 @@ total 96
  0 drwxr-xr-x   7 jacquesmenu  staff    224 Feb  2 17:26 validation
  0 drwxr-xr-x  11 jacquesmenu  staff    352 Feb  2 17:26 web
  0 drwxr-xr-x   4 jacquesmenu  staff    128 Feb  2 17:26 win32
-jacquesmenu@macmini: ~/musicformats_local_clone > git branch
-* stable-v0.9.59
 \end{lstlisting}
 
 
+%% -------------------------------------------------------------------------
+%\section{Selecting a library version}
+%% -------------------------------------------------------------------------
+%
+%The \mf\ \repo\ uses tags to refer to successive versions. The existing tags can be displayed with \code{git tag}:
+%\begin{lstlisting}[language=Terminal]
+%jacquesmenu@macmini: ~/musicformats-git-dev > git branch
+%* master
+%
+%jacquesmenu@macmini: ~/musicformats-git-dev > git tag
+%v0.9.60
+%\end{lstlisting}
+%
+%To stop using an older version and come back to the most recent one:
+%\begin{lstlisting}[language=Terminal]
+%git switch -
+%git branch
+%\end{lstlisting}
+
+
 % -------------------------------------------------------------------------
-\section{Selecting a library version}
+\section{{\tt make} and {\tt cmake} definitions}
 % -------------------------------------------------------------------------
 
-The \mf\ \repo\ uses tags to refer to successive versions. The existing tags can be displayed with \code{git tag}:
-\begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > git branch
-* master
+\make\ is used to build the library, while \cmake\ implements the portability of \mf\ to multiple \OS s and environments. Thanks to \fober\ for providing this setup \libmusicxml\ in the first place.
+The respective settings are in \build{Makefile} and \build{CMakeLists.txt}.
 
-jacquesmenu@macmini: ~/musicformats-git-dev > git tag
-v0.9.60
-\end{lstlisting}
-
-To stop using an older version and come back to the most recent one:
-\begin{lstlisting}[language=Terminal]
-git switch -
-git branch
-\end{lstlisting}
-
-
-% -------------------------------------------------------------------------
-\section{{\tt cmake} and {\tt make} definitions}
-% -------------------------------------------------------------------------
-
-\code{cmake} is used to implement the portability of \mf\ to multiple \OS s and environments. \code{make} is used to build the library. Thanks to \fober\ for providing this in \libmusicxml\ in the first place.
-The respective settings are in \build{CMakeLists.txt} and \build{Makefile}.
-
-The \code{make} file as a number of possibilities>
+The \make\ file as a number of possibilities:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats_local_clone/build > make help
 MusicFormats makefile - Targets are :
@@ -359,7 +365,7 @@ NOTE:  CMake options can be passed using CMAKEOPT, e.g.
 In order to build \mf\ from source on your machine, you need:
 \begin{itemize}
 \item a C++11 compiler. Use \xcode\ on \MacOS\ ang GNU compilers on \Unix -like machines;
-\item the \fileName{cmake} tool. It is available ready to install on \MacOS\ via \macports\ (\url{https://www.macports.org}).
+\item the \cmake\ tool. It is available ready to install on \MacOS\ via \macports\ (\url{https://www.macports.org}).
 \end{itemize}
 
 The supported \OS s to build the library and run the \CLI\ tools are Linux, Windows and MacOS. Other systems may be fine but have not been tested.
@@ -447,7 +453,7 @@ Make sure this \code{bin} directory is in your shell \code{PATH}, and there you 
 \subsection{Global installation on Mac OS\texttrademark}
 % -------------------------------------------------------------------------
 
-This installation requires administration privileges:
+This installation, done with \code{make install}, requires administration privileges:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats_local_clone/build > sudo make install
 \end{lstlisting}
@@ -457,6 +463,22 @@ jacquesmenu@macmini: ~/musicformats_local_clone/build > sudo make install
 \section{Building the library on Windows\texttrademark}
 % -------------------------------------------------------------------------
 
-Please contribute to this section, this author does not have any access to a \Windows\ machine.
+*** Please contribute to this section, this author does not have any access to a \Windows\ machine. ***
 
+In order to build \mf\ from source on your machine, you need:
+\begin{itemize}
+\item a C++11 compiler. Use \xcode\ on \MacOS\ ang GNU compilers on \Unix -like machines;
+\item the \cmake\ tool. It is available ready to install on \MacOS\ via \macports\ (\url{https://www.macports.org}).
+\end{itemize}
+
+The supported \OS s to build the library and run the \CLI\ tools are Linux, Windows and MacOS. Other systems may be fine but have not been used for tests.
+
+\mf\ requires C++11 at least. More recent versions are fine too.
+
+Once in the local repository clone, just execute:
+\begin{lstlisting}[language=Terminal]
+cd build
+
+cmake --build <buildir> --target install
+\end{lstlisting}
 

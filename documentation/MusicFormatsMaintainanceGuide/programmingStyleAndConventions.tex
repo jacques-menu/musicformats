@@ -107,9 +107,9 @@ When building \mf\ with:
 cd build
 make
 \end{lstlisting}
-a {\tt cmake} cache is created in file {\tt build/libdir/CMakeCache.txt}, containing the list of all the C++ files in the library, including those of the embedded \libmusicxml.
+a \cmake\ \cache\ is created in file {\tt build/libdir/CMakeCache.txt}, containing the list of all the C++ files in the library, including those of the embedded \libmusicxml.
 
-Adding individual files in fine, but adding new folders in the {\tt src} hierarchy implies to update variable {\tt SRC_FOLDERS} in {\tt build/CMakeLists.txt} accordingly and to remove the {\tt build/libdir/CMakeCache.txt} cache.
+Adding individual files in fine, but adding new folders in the {\tt src} hierarchy implies to update variable {\tt SRC_FOLDERS} in {\tt build/CMakeLists.txt} accordingly and to remove the {\tt build/libdir/CMakeCache.txt} \cache.
 
 Care must be taken when adding a new file on a case insensitive file system: the type case in its name should be what is needed in the first place.
 
@@ -133,13 +133,13 @@ The best solution here, both for files and folders names, is to use '{\tt git mv
 
 Renaming a C++ file causes {\tt build/libdir/CMakeCache.txt} to be obsolete: it then has to be removed, and the library should be built anew.
 
-For example, this author uses the \code{rmcache} bash alias to remove the cache:
+For example, this author uses the \code{rmcache} bash alias to remove the \cache:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev > type rmcache
 rmcache is aliased to `rm /Users/jacquesmenu/musicformats-git-dev/build/libdir/CMakeCache.txt'
 \end{lstlisting}
 
-Running {\tt make} will re-create this cache with the new file name.
+Running \make\ will re-create this \cache\ with the new file name.
 
 Caution has to be taken when a file name case is changed in a case-insensitive development environment such as Windows or MacOS. Cloning \mf\ in Linux will then fail to find the file under its new name.
 
@@ -154,7 +154,7 @@ if (MSR)
 	set (SRC_FOLDERS ${SRC_FOLDERS} passes/musicxml2mxsr formats/mxsr passes/mxsr2msr formats/msr passes/msr2msr formatsgeneration/multiGeneration formatsgeneration/msrGeneration generators/Mikrokosmos3Wandering generators/LilyPondIssue34)
 endif()
 \end{lstlisting}
-In such a case, the cache should be removed before building, see \code{rmcache} above.
+In such a case, the \cache\ should be removed before building, see \code{rmcache} above.
 
 
 % -------------------------------------------------------------------------

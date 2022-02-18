@@ -4,11 +4,11 @@
 //----------------------------------------------------------------------------
 // the libMusicXML interface
 //----------------------------------------------------------------------------
-class libmusicxml {
+class libmusicformats {
 	constructor() {
 		this.fLibrary = 0;
 	}
-	
+
 	//------------------------------------------------------------------------
 	// async initialization
 	initialize (lib) {
@@ -17,7 +17,7 @@ class libmusicxml {
 			return new Promise ( (success) => {
 					module().then ( (instance) => {
 					this.moduleInit ( instance );
-					success ( this ); 
+					success ( this );
 				});
 			});
 		}
@@ -26,18 +26,18 @@ class libmusicxml {
 			return new Promise ( (success, failure) => {
 				module['onRuntimeInitialized'] = () => {
 				this.moduleInit ( module );
-				success ( this ); 
+				success ( this );
 				}
 			});
 		}
 	}
-	
+
 	//------------------------------------------------------------------------
 	// async initialization
 	moduleInit ( module ) {
 		this.fLibrary = new module.libMusicXMLAdapter();
 	}
-		
+
 	//------------------------------------------------------------------------
 	// libMusicXML interface
 	libVersion ()						{ return this.fLibrary.libVersion (); }
@@ -52,5 +52,5 @@ class libmusicxml {
 
 
 if ((typeof process !== 'undefined') && (process.release.name === 'node')) {
-	module.exports = libmusicxml;
+	module.exports = libmusicformats;
 }

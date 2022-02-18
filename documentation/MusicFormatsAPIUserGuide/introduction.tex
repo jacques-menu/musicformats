@@ -4,17 +4,16 @@
 \chapter{Introduction}
 % -------------------------------------------------------------------------
 
-\mf\ is open source software, available with source code and documentation at \url{https://github.com/jacques-menu/musicformats}. It is written in C++11 and provides a set of music scores representations and converters between various textual music scores formats. Building it only requires a C++11 compiler and {\tt cmake}.
+\mf\ is open source software, available with source code and documentation at \url{https://github.com/jacques-menu/musicformats}. It is written in C++11 and provides a set of music scores representations and converters between various textual music scores formats. Building it only requires a C++11 compiler and \cmake.
 
-This document shows how to use the \mf\ library, both from the \CLI\ and from within applications. It is part of the \mf\ documentation, and can be found at \docpdf{MusicFormatsCLIUserGuide}{MusicFormatsCLIUserGuide.pdf}.
+This document shows how to use the \mf\ library, both from the \CLI\ and from within applications. It is part of the \mf\ documentation, and can be found at \gitdocpdf{MusicFormatsCLIUserGuide}{MusicFormatsCLIUserGuide.pdf}.
 
 \mf\ can be used from the \CLI\ on Linux, Windows and Mac OS. The \API\ also allows it to be used from applications, including in \Web\ sites.
 
 The \mf\ repository contains several versions:
 \begin{itemize}
-\item the \code{dev} version, to be found at \url{https://github.com/jacques-menu/musicformats/tree/dev}, is where changes are pushed by the maintainers of \mf. It is the most up to date, but should not be used for regular work, since it is not stable yet;
-\item the \code{test-v...} versions are the \code{dev} version frozen at some time for users to validate the new version;
-\item the \code{stable-v...} versions are \code{test-v...} versions frozen at some time, and can be used safely.
+\item the \default \master\ version, to be found at \url{https://github.com/jacques-menu/musicformats}, is where changes are pushed by the maintainers of \mf. It is the most up to date;
+\item the \code{v.\dots} versions are the \master\ versions \frozen\ at some time.
 \end{itemize}
 
 This document mentions sample files in various formats. They can be seen online on the \code{dev} version, whose name and URL never change, at \url{https://github.com/jacques-menu/musicformats/tree/dev/files}.
@@ -28,7 +27,7 @@ These examples are mentioned in this document as they appear in the \mf\ reposit
 %\item \fileName{midifiles} for \MIDI\ files.
 \end{itemize}
 
-A typical example is \mxmlfile{basic/HelloWorld.xml}, which stands for the following, with the \code{dev} cloned locally in the \fileName{musicformats-git-dev} directory:
+A typical example is \gitmxmlfile{basic/HelloWorld.xml}, which stands for the following, with the \code{dev} cloned locally in the \fileName{musicformats-git-dev} directory:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev > ls -sal files/musicxmlfiles/basic/HelloWorld.xml
 8 -rw-r--r--@ 1 jacquesmenu  staff  1266 Apr 22  2021 files/musicxmlfiles/basic/HelloWorld.xml

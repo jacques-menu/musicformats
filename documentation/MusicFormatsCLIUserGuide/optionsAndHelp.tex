@@ -42,7 +42,7 @@ THe \oahRepr\ options are very easy to use. They are inspired by \Main{GNU} opti
 \item the options can be supplied in the \CLI\ as usual;
 
   \item they can also be supplied in a call to an \API\ \Main{function} such as \functionName{musicxmlfile2lilypond}, in an options and arguments argument. \\
-    		See the \docpdf{MusicFormatsAPIUserGuide}{MusicFormatsAPIUserGuide} for the details;
+    		See the \gitdocpdf{MusicFormatsAPIUserGuide}{MusicFormatsAPIUserGuide} for the details;
 
 %%%JMI https://github.com/jacques-menu/musicformats/blob/dev/documentation/MusicFormatsAPIUserGuide/MusicFormatsAPIUserGuide.pdf
 
@@ -846,7 +846,7 @@ Note that the current \mf\ services can take at most one argument, that can be e
 \section{An options and arguments file example}
 % -------------------------------------------------------------------------
 
-A file that be included with the option sample is \mxmlfile{basic/AnacrusisOptionsAndArguments.txt}:
+A file that be included with the option sample is \gitmxmlfile{basic/AnacrusisOptionsAndArguments.txt}:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/AnacrusisOptionsAndArguments.txt
 # some options
@@ -905,7 +905,7 @@ As shown in \sectionRef{Quoting, variables and aliases}, the shell identifies wo
 
 In included files, these values are merely extracted from a line, and taken verbatim. To ease copying/pasting from the \CLI\, though, any \quotes\ or \doubleQuotes\ around the values are ignored.
 
-For example, \mxmlfile{basic/QuotingInIncludedOptionsFiles.txt} contains:
+For example, \gitmxmlfile{basic/QuotingInIncludedOptionsFiles.txt} contains:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/basic > cat QuotingInIncludedOptionsFiles.txt
 # contents
@@ -959,7 +959,7 @@ A file containing options and argument may itself use the \optionNameBoth{includ
 
 Note, however, that \earlyOption s are detected \MainIt{before} the files inclusion are performed. In particular, the \optionNameBoth{insider}{ins} option should be in the \CLI\ itself, at the top level so to say, to be taken into account.
 
-For example, \mxmlfile{basic/HelloWorldOptionsAndArguments_1.txt} contains:
+For example, \gitmxmlfile{basic/HelloWorldOptionsAndArguments_1.txt} contains:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/HelloWorldOptionsAndArguments_1.txt
 # output file
@@ -983,7 +983,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Hell
   -include basic/HelloWorldOptionsAndArguments_2.txt
 \end{lstlisting}
 
-The included \mxmlfile{basic/HelloWorldOptionsAndArguments_2.txt} file contains:
+The included \gitmxmlfile{basic/HelloWorldOptionsAndArguments_2.txt} file contains:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/HelloWorldOptionsAndArguments_2.txt
 # non-musical
@@ -993,7 +993,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Hell
 #  -include HelloWorldOptionsAndArguments_1.txt
 \end{lstlisting}
 
-Including \mxmlfile{basic/HelloWorldOptionsAndArguments_1.txt}, we get:
+Including \gitmxmlfile{basic/HelloWorldOptionsAndArguments_1.txt}, we get:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -include basic/HelloWorldOptionsAndArguments_1.txt
 Timing information:
@@ -1026,7 +1026,7 @@ There are resources limitations on the machines \mf\ is used on, and we should p
 
 \mf\ prevents this by limiting the level of such includes.
 
-Let us uncomment the \optionName{include}{inc} option in \mxmlfile{basic/HelloWorldOptionsAndArguments_2.txt}, leading to:
+Let us uncomment the \optionName{include}{inc} option in \gitmxmlfile{basic/HelloWorldOptionsAndArguments_2.txt}, leading to:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/HelloWorldOptionsAndArguments_2.txt
 # non-musical

@@ -7,7 +7,7 @@
 This document presents the design principles and architecture of \mf, as well as information needed to maintain it. It is part of the \mf\ documentation, to be found at \url{https://github.com/jacques-menu/musicformats/tree/master/doc}.
 
 All the \mxml\ examples mentioned can be downloaded from \url{https://github.com/jacques-menu/musicformats/tree/master/files/musicxml}.\\
-They are grouped by subject in subdirectories, such as \mxmlfile{basic/HelloWorld.xml}.
+They are grouped by subject in subdirectories, such as \gitmxmlfile{basic/HelloWorld.xml}.
 
 The MSDL examples can be found at \url{https://github.com/jacques-menu/musicformats/tree/master/files/msdl}.
 
@@ -27,7 +27,7 @@ In order to maintain \mf, one needs to do the following:
 \begin{itemize}
 \item obtain a working knowledge of C++ programming. The code base of \mf\ uses classes, simple inheritance, and templates;
 
-%%%%%%%%\item study \mxml, starting maybe from \docpdf{introductionToMusicXML}{IntroductionToMusicXML.tex}. A deep knowledge of that matter comes with experience;
+%%%%%%%%\item study \mxml, starting maybe from \gitdocpdf{introductionToMusicXML}{IntroductionToMusicXML.tex}. A deep knowledge of that matter comes with experience;
 
 \item study the architecture of \mf, which can be seen in \figureRef{Architecture}, and is presented in more detail at:\\
 \url{https://github.com/jacques-menu/musicformats/blob/master/doc/musicformatsArchitecture/musicformatsArchitecture.pdf}
@@ -59,7 +59,7 @@ When tackling the conversion of \mxml\ to LilyPond, this author created MSR as t
 The only change made to the existing \mxsrRepr\ format has been to add an input line number to {\tt xmlElement}.
 
 The conversion from MSR to BSR music was two-pass from the beginning, first creating a \bsrRepr format with unlimited line and page lenghs, and then constraining that in a second BSR would take the numbers of cell per line and lines per page into account.
-This was frozen in autumn 1999 due to the lack of interest from the numerous persons and bodies that this author contacted about {\tt xml2brl}.
+This was \frozen\ in autumn 2019 due to the lack of interest from the numerous persons and bodies that this author contacted about {\tt xml2brl}.
 The current status is the braille output is that the cells per line and lines per page values are ignored.
 
 The creation of \mxml\ code from MSR data was then added to close a loop with \mxml2xml, with the idea that it would make \mf\ a kind of swiss knife for textual formats of music scores.
@@ -78,11 +78,9 @@ This document contains technical information about the internal working of the c
 \section{The GitHub repository}
 % -------------------------------------------------------------------------
 
-The GitHub repository, hosted at \url{https://github.com/jacques-menu/musicformats}, contains three branches types:
+The GitHub repository, hosted at \url{https://github.com/jacques-menu/musicformats}, contains two \branch es types:
 \begin{itemize}
-\item \code{dev} : the most recent version of \mf\ files, which may evolve without notice;
-\item \code{test-v*} : such a version is a freezed version of the {\tt dev} state for users to test, allowing for the maintainers to modify the {\tt dev} files at will;
-\item \code{stable-v*} : a stable version of the library, copied from the \code{test-v*} branch from the same version number.
+\item the \default \master\ version, to be found at \url{https://github.com/jacques-menu/musicformats}, is where changes are pushed by the maintainers of \mf. It is the most up to date;
+\item the \code{v.\dots} versions are the \master\ versions \frozen\ at some point in time.
 \end{itemize}
-%The default branch is {\tt master}. JMI
 %%%JMI \Web\ site

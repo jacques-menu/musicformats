@@ -5791,7 +5791,9 @@ void lpsr2lilypondTranslator::generateGlobalStaffSize ()
     globalStaffSizeHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getGlobalStaffSizeAtom ()->
-          getVariableHasBeenSet (),
+          getVariableHasBeenSet ();
+
+  Bool
     doGenerateGlobalStaffSize =
       globalStaffSizeHasBeenSet || generateCommentedOutVariables;
 
