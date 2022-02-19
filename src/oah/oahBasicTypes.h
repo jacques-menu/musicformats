@@ -59,6 +59,8 @@ enum class oahOptionOrArgumentKind {
 string optionOrArgumentKindAsString (
   oahOptionOrArgumentKind optionOrArgumentKind );
 
+ostream& operator<< (ostream& os, oahOptionOrArgumentKind& elt);
+
 //_______________________________________________________________________________
 /*
   A type to hold options and their values if any or arguments
@@ -265,6 +267,8 @@ enum class oahEarlyOptionKind {
 string oahEarlyOptionKindAsString (
   oahEarlyOptionKind earlyOptionKind);
 
+ostream& operator<< (ostream& os, oahEarlyOptionKind& elt);
+
 //_______________________________________________________________________________
 // handler used thru...?
 enum class oahHandlerUsedThruKind {
@@ -275,6 +279,8 @@ enum class oahHandlerUsedThruKind {
 
 string oahHandlerUsedThruKindAsString (
   oahHandlerUsedThruKind handlerUsedThruKind);
+
+ostream& operator<< (ostream& os, oahHandlerUsedThruKind& elt);
 
 //______________________________________________________________________________
 class oahPrefix;

@@ -1999,69 +1999,70 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
       appendSyllableToNoteAndSetItsNoteUpLink (
         fCurrentNonGraceNoteClone);
 
-    if (gGlobalMsr2msrOahGroup->getAddMsrWordsFromTheMsrLyrics ()) {
-      // get the syllable texts list
-      const list<string>&
-        syllableTextsList =
-          elt->getSyllableTextsList ();
-
-      if (syllableTextsList.size ()) {
-        // build a single words value from the texts list
-        // JMI create an msrWords instance for each???
-        string wordsValue =
-          elt->syllableTextsListAsString();
-
-        // create the words
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-          gLogStream <<
-            "Changing lyrics '" <<
-            wordsValue <<
-            "' into words for note '" <<
-            fCurrentNonGraceNoteClone->asShortString () <<
-            "'" <<
-      // JMI      fCurrentSyllableClone->asString () <<
-            endl;
-        }
-#endif
-
-        S_msrWords
-          words =
-            msrWords::create (
-              inputLineNumber,
-              msrPlacementKind::k_NoPlacement,                      // default value
-              wordsValue,
-              msrJustifyKind::kJustifyNone,                         // default value
-              msrHorizontalAlignmentKind::kHorizontalAlignmentNone, // default value
-              msrVerticalAlignmentKind::kVerticalAlignmentNone,     // default value
-              msrFontStyleKind::kFontStyleNone,                     // default value
-              msrFontSize::create (
-                msrFontSizeKind::kFontSizeNone),                    // default value
-              msrFontWeightKind::kFontWeightNone,                   // default value
-              msrXMLLangKind::kXMLLangIt,                           // default value
-              elt->
-                getSyllableNoteUpLink ()->
-                  fetchNoteStaffUpLink ()->
-                    getStaffNumber ());
-
-        // append it to the current non-grace note
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceWords ()) {
-          gLogStream <<
-            "Appending words '" <<
-            words->asShortString () <<
-            "' to note '" <<
-            fCurrentNonGraceNoteClone->asShortString () <<
-            "'" <<
-            endl;
-        }
-#endif
-        fCurrentNonGraceNoteClone->
-          appendWordsToNote (
-            words);
-      }
-    }
+//     if (gGlobalMsr2msrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) { JMI ???
+//       // get the syllable texts list
+//       const list<string>&
+//         syllableTextsList =
+//           elt->getSyllableTextsList ();
+//
+//       if (syllableTextsList.size ()) {
+//         // build a single words value from the texts list
+//         // JMI create an msrWords instance for each???
+//         string wordsValue =
+//           elt->syllableTextsListAsString();
+//
+//         // create the words
+// #ifdef TRACING_IS_ENABLED
+//         if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+//           gLogStream <<
+//             "Changing lyrics '" <<
+//             wordsValue <<
+//             "' into words for note '" <<
+//             fCurrentNonGraceNoteClone->asShortString () <<
+//             "'" <<
+//       // JMI      fCurrentSyllableClone->asString () <<
+//             endl;
+//         }
+// #endif
+//
+//         S_msrWords
+//           words =
+//             msrWords::create (
+//               inputLineNumber,
+//               msrPlacementKind::k_NoPlacement,                      // default value
+//               wordsValue,
+//               msrJustifyKind::kJustifyNone,                         // default value
+//               msrHorizontalAlignmentKind::kHorizontalAlignmentNone, // default value
+//               msrVerticalAlignmentKind::kVerticalAlignmentNone,     // default value
+//               msrFontStyleKind::kFontStyleNone,                     // default value
+//               msrFontSize::create (
+//                 msrFontSizeKind::kFontSizeNone),                    // default value
+//               msrFontWeightKind::kFontWeightNone,                   // default value
+//               msrXMLLangKind::kXMLLangIt,                           // default value
+//               elt->
+//                 getSyllableNoteUpLink ()->
+//                   fetchNoteStaffUpLink ()->
+//                     getStaffNumber ());
+//
+//         // append it to the current non-grace note
+// #ifdef TRACING_IS_ENABLED
+//         if (gGlobalTracingOahGroup->getTraceWords ()) {
+//           gLogStream <<
+//             "Appending words '" <<
+//             words->asShortString () <<
+//             "' to note '" <<
+//             fCurrentNonGraceNoteClone->asShortString () <<
+//             "'" <<
+//             endl;
+//         }
+// #endif
+//         fCurrentNonGraceNoteClone->
+//           appendWordsToNote (
+//             words);
+//       }
+//     }
   }
+
   else {
     stringstream s;
 
@@ -2234,38 +2235,38 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
   }
 #endif
 
-  if (gGlobalMsr2msrOahGroup->getConvertTemposToRehearsalMarks ()) {
-    // create a rehearsal mark containing elt's words
-
-    S_msrRehearsal
-      rehearsal =
-        msrRehearsal::create (
-          elt->getInputLineNumber (),
-          msrRehearsal::kNone,
-          elt->tempoWordsListAsString (" "), //JMI ???
-          elt->getTempoPlacementKind ());
-
-#ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceTempos ()) {
-      gLogStream <<
-        "Converting tempos '" <<
-        elt->asShortString () <<
-        "' to rehearsal mark '" <<
-        rehearsal->asShortString () <<
-        "'" <<
-        endl;
-    }
-#endif
-
-    // append the rehearsal to the current voice clone
-    fCurrentVoiceClone->
-      appendRehearsalToVoice (rehearsal);
-  }
-
-  else {
+//   if (gGlobalMsr2msrOahGroup->getConvertMusicXMLTemposToMSRRehearsalMarks ()) { JMI ???
+//     // create a rehearsal mark containing elt's words
+//
+//     S_msrRehearsal
+//       rehearsal =
+//         msrRehearsal::create (
+//           elt->getInputLineNumber (),
+//           msrRehearsal::kNone,
+//           elt->tempoWordsListAsString (" "), //JMI ???
+//           elt->getTempoPlacementKind ());
+//
+// #ifdef TRACING_IS_ENABLED
+//     if (gGlobalTracingOahGroup->getTraceTempos ()) {
+//       gLogStream <<
+//         "Converting tempos '" <<
+//         elt->asShortString () <<
+//         "' to rehearsal mark '" <<
+//         rehearsal->asShortString () <<
+//         "'" <<
+//         endl;
+//     }
+// #endif
+//
+//     // append the rehearsal to the current voice clone
+//     fCurrentVoiceClone->
+//       appendRehearsalToVoice (rehearsal);
+//   }
+//
+//   else {
     fCurrentVoiceClone->
       appendTempoToVoice (elt);
-  }
+//   }
 }
 
 void msr2msrTranslator::visitEnd (S_msrTempo& elt)
@@ -3085,36 +3086,36 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
   if (fOnGoingNonGraceNote || fOnGoingChord) {
     Bool wordsHasBeenHandled;
 
-    if (gGlobalMsr2msrOahGroup->getConvertMsrWordsToTempo ()) {
-      // create a tempo containing elt
-      S_msrTempo
-        tempo =
-          msrTempo::createTempoWordsOnly (
-            inputLineNumber,
-            elt,
-            msrTempo::kTempoParenthesizedNo,    // JMI
-            msrPlacementKind::kPlacementAbove); // JMI
-
-#ifdef TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceWords ()) {
-        gLogStream <<
-          "Converting words '" <<
-          elt->asShortString () <<
-          "' to tempo '" <<
-          tempo->asShortString () <<
-          "'" <<
-          endl;
-      }
-#endif
-
-      // append the tempo to the current voice clone
-      fCurrentVoiceClone->
-        appendTempoToVoice (tempo);
-
-      wordsHasBeenHandled = true;
-    }
-
-    else {
+//     if (gGlobalMsr2msrOahGroup->getConvertMusicXMLWordsToMSRTempos ()) { // JMI ???
+//       // create a tempo containing elt
+//       S_msrTempo
+//         tempo =
+//           msrTempo::createTempoWordsOnly (
+//             inputLineNumber,
+//             elt,
+//             msrTempo::kTempoParenthesizedNo,    // JMI
+//             msrPlacementKind::kPlacementAbove); // JMI
+//
+// #ifdef TRACING_IS_ENABLED
+//       if (gGlobalTracingOahGroup->getTraceWords ()) {
+//         gLogStream <<
+//           "Converting words '" <<
+//           elt->asShortString () <<
+//           "' to tempo '" <<
+//           tempo->asShortString () <<
+//           "'" <<
+//           endl;
+//       }
+// #endif
+//
+//       // append the tempo to the current voice clone
+//       fCurrentVoiceClone->
+//         appendTempoToVoice (tempo);
+//
+//       wordsHasBeenHandled = true;
+//     }
+//
+//     else {
       if (! wordsHasBeenHandled) {
         if (fOnGoingNonGraceNote) {
           // append the words to the current non-grace note clone
@@ -3127,7 +3128,7 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
             appendWordsToChord (elt);
         }
       }
-    }
+//     }
   }
 
   else {

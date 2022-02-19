@@ -1117,20 +1117,6 @@ R"(Ignore ornaments in MusicXML data.)",
     appendAtomToSubGroup (
       ignoreOrnamentsAtom);
 
-  // ignore words
-  // --------------------------------------
-
-  S_oahBooleanAtom
-    ignoreMusicXMLWordsAtom =
-      oahBooleanAtom::create (
-        "ignore-musicxml-words", "iwords",
-R"(Ignore '<words />' in MusicXML data.)",
-        "fIgnoreMusicXMLWords",
-        fIgnoreMusicXMLWords);
-  subGroup->
-    appendAtomToSubGroup (
-      ignoreMusicXMLWordsAtom);
-
   // ignore ties
   // --------------------------------------
 
@@ -1415,32 +1401,6 @@ R"('<wedge/>' in MusicXML, '<!' in LilyPond)",
       delayRestsWedgesAtom);
 }
 
-void mxsr2msrOahGroup::initializeWordsOptions ()
-{
-  S_oahSubGroup
-    subGroup =
-      oahSubGroup::create (
-        "Words",
-        "help-musicxml-words", "hmxmlw",
-R"(Ignore words in MusicXML data.)",
-        oahElementVisibilityKind::kElementVisibilityWhole,
-        this);
-
-  appendSubGroupToGroup (subGroup);
-
-  // convert words to dal segno
-  // --------------------------------------
-
-  subGroup->
-    appendAtomToSubGroup (
-      msrDalSegnoAtom::create (
-        "convert-musicxml-words-to-msr-dal-segno", "cmwtmds",
-R"(Convert MusicXML words element STRING to an MSR 'dal segno'.)",
-        "STRING",
-        "fConverStringToMsrDalSegnoMap",
-        fConverStringToMsrDalSegnoMap));
-}
-
 void mxsr2msrOahGroup::initializeDynamicsAndWedgesOptions ()
 {
   S_oahSubGroup
@@ -1475,6 +1435,152 @@ R"(Ignore dynamics placement and set it to 'below'.)",
 R"(Ignore wedges placement and set it to 'below'.)",
         "fAllWedgesBelow",
         fAllWedgesBelow));
+}
+
+void mxsr2msrOahGroup::initializeWordsOptions ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Words",
+        "help-musicxml-words", "hmxmlw",
+R"(Ignore words in MusicXML data.)",
+        oahElementVisibilityKind::kElementVisibilityWhole,
+        this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // ignore words
+
+  S_oahBooleanAtom
+    ignoreMusicXMLWordsAtom =
+      oahBooleanAtom::create (
+        "ignore-musicxml-words", "imwords",
+R"(Ignore '<words />' in MusicXML data.)",
+        "fIgnoreMusicXMLWords",
+        fIgnoreMusicXMLWords);
+  subGroup->
+    appendAtomToSubGroup (
+      ignoreMusicXMLWordsAtom);
+
+  // convert MusicXML words to tempo
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "convert-musicxml-words-to-msr-tempos", "cmwtmt",
+R"(Convert MusicXML words to MSR tempos.
+This may come in handy when MusicXML data has been obtained
+from scanned instrumental music images.)",
+        "fConvertMusicXMLWordsToMSRTempos",
+        fConvertMusicXMLWordsToMSRTempos));
+
+  // convert MusicXML words to MSR dal segnos
+
+  subGroup->
+    appendAtomToSubGroup (
+      msrDalSegnoAtom::create (
+        "convert-musicxml-words-to-msr-dal-segnos", "cmwtmds",
+R"(Convert MusicXML words element STRING to an MSR 'dal segno'.)",
+        "STRING",
+        "fConverStringToMsrDalSegnoMap",
+        fConverStringToMsrDalSegnoMap));
+
+  // convert MusicXML words to MSR rehearsal marks
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "convert-musicxml-words-to-msr-rehearsal-marks", "cmwtmrm",
+R"(Convert MSR words to rehearsal marks.
+This may come in handy when MusicXML data has been obtained
+from scanned instrumental music images.)",
+        "fConvertMusicXMLWordsToMSRRehearsalMarks",
+        fConvertMusicXMLWordsToMSRRehearsalMarks));
+
+  // convert MusicXML tempos to rehearsal marks
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "convert-musicxml-tempos-to-msr-rehearsal-marks", "cttrmim",
+R"(Convert MusicXML tempos to MSR rehearsal marks.
+This may come in handy when MusicXML data has been obtained
+from scanned instrumental music images.)",
+        "fConvertMusicXMLTemposToMSRRehearsalMarks",
+        fConvertMusicXMLTemposToMSRRehearsalMarks));
+
+/* JMI
+  // convert MusicXMLwords to dal segno
+
+  subGroup->
+    appendAtomToSubGroup (
+      lpsrDalSegnoAtom::create (
+        "convert-msr-words-to-msr-dal-segno", "ds",
+R"(Convert MSR words elements STRING to an MSR 'dal segno' element'.)",
+        "STRING",
+        "fConvertMsrWordsToDalSegno",
+        fConvertMsrWordsToDalSegno));
+
+  // convert MusicXMLwords to dal segno al fine
+
+  subGroup->
+    appendAtomToSubGroup (
+      lpsrDalSegnoAlFineAtom::create (
+        "convert-msr-words-to-msr-dal-segno-al-fine", "dsaf",
+R"(Convert MSR words elements STRING to an MSR 'dal segno al fine' element.)",
+        "STRING",
+        "fConvertMsrWordsToDalSegnoAlFine",
+        fConvertMsrWordsToDalSegnoAlFine));
+
+  // convert words to dal segno al coda
+
+  subGroup->
+    appendAtomToSubGroup (
+      lpsrDalSegnoAlCodaAtom::create (
+        "convert-msr-words-to-msr-dal-segno-al-coda", "dsac",
+R"(Convert MSR words elements STRING to an MSR 'dal segno al coda' element.)",
+        "STRING",
+        "fConvertMsrWordsToDalSegnoAlCoda",
+        fConvertMsrWordsToDalSegnoAlCoda));
+*/
+
+/* JMI
+
+        regex_replace (
+          regex_replace (
+            regex_replace (
+R"(Use LANGUAGE to display note pitches in the MSR logs and views,
+as well as in the generated LilyPond code.
+The NUMBER LilyPond pitches languages available are:
+PITCHES_LANGUAGES.
+The default is 'DEFAULT_VALUE'.)",
+              regex ("NUMBER"),
+              to_string (gGlobalQuarterTonesPitchesLanguageKindsMap.size ())),
+            regex ("PITCHES_LANGUAGES"),
+            gIndenter.indentMultiLineString (
+              existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+          regex ("DEFAULT_VALUE"),
+          msrQuarterTonesPitchesLanguageKindAsString (
+            msrQuarterTonesPitchesLanguageKindDefaultValue)),
+        "LANGUAGE",
+        "fLpsrQuarterTonesPitchesLanguageKind",
+        fLpsrQuarterTonesPitchesLanguageKind));
+
+    map<string, msrDalSegno::msrDalSegnoKind>
+                          fConvertMsrWordsToDalSegno;
+                          */
+
+  // add words from the MusicXML lyrics
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "add-msr-words-from-the-msr-lyrics", "awftl",
+R"(Add MSR words with the MSR lyrics contents, keeping the latter untouched.
+This may come in handy when MusicXML data has been obtained from scanned images.)",
+        "fAddMsrWordsFromTheMusicXMLLyrics",
+        fAddMsrWordsFromTheMusicXMLLyrics));
 }
 
 void mxsr2msrOahGroup::initializeCombinedOptionsOptions ()
@@ -1902,6 +2008,26 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   gLogStream << left <<
     setw (valueFieldWidth) << "fIgnoreMusicXMLWords" << " : " <<
     fIgnoreMusicXMLWords <<
+    endl <<
+
+    setw (valueFieldWidth) <<
+    "fConvertMusicXMLWordsToMSRTempos" << " : " <<
+    fConvertMusicXMLWordsToMSRTempos <<
+    endl <<
+
+    setw (valueFieldWidth) <<
+    "fConvertMusicXMLWordsToMSRRehearsalMarks" << " : " <<
+    fConvertMusicXMLWordsToMSRRehearsalMarks <<
+    endl <<
+
+    setw (valueFieldWidth) <<
+    "fConvertMusicXMLTemposToMSRRehearsalMarks" << " : " <<
+    fConvertMusicXMLTemposToMSRRehearsalMarks <<
+    endl <<
+
+    setw (valueFieldWidth) <<
+    "fAddMsrWordsFromTheMusicXMLLyrics" << " : " <<
+    fAddMsrWordsFromTheMusicXMLLyrics <<
     endl;
 
   --gIndenter;

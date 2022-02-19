@@ -554,16 +554,6 @@ class EXP msrPart : public msrPartGroupElement
     string                fPartInstrumentAbbreviation;
 
     // staves
-/*
-enum class msrStaffKind {
-  kStaffKindRegular,
-  kStaffKindTablature,
-  kStaffKindHarmonies,
-  kStaffKindFiguredBass,
-  kStaffKindDrum,
-  kStaffKindRythmic
-};
-*/
 
     list<S_msrStaff>      fPartAllStavesList;
 

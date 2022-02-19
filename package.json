@@ -1,0 +1,30 @@
+{
+  "name": "musicformats",
+  "version": "0.9.61",
+  "description": "MusicFormats library - Jacques Menu",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacques-menu/musicformats.git"
+  },
+  "keywords": [
+    "MusicFormats",
+    "MusicXML",
+    "converters",
+    "generators",
+    "MSDL",
+    "compiler"
+  ],
+  "author": "Jacques Menu",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/jacques-menu/musicformats/issues"
+  },
+  "homepage": "https://github.com/jacques-menu/musicformats#readme"
+}

@@ -18298,6 +18298,12 @@ string msrSlashUseStemsKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, msrSlashUseStemsKind& elt)
+{
+  os << msrSlashUseStemsKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 string msrLineTypeKindAsString (
   msrLineTypeKind lineTypeKind)

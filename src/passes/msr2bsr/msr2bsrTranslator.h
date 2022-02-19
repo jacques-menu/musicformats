@@ -241,7 +241,7 @@ class EXP msr2bsrTranslator :
 
     bsrNoteOctaveKind         fCurrentNoteOctaveKind;
 
-    bsrNote::bsrNoteValueSizeKind
+    bsrNoteValueSizeKind
                               fCurrentNoteValueSizeKind;
 
     void                      createBsrForNote (S_msrNote note);
@@ -251,8 +251,7 @@ class EXP msr2bsrTranslator :
     S_msrNote                 fRelativeOctaveReference;
                                 // contains absolute octave
 
-    bsrNote::bsrNoteOctaveIsNeeded
-                              brailleOctaveMarkInNeeded (S_msrNote note);
+    bsrNoteOctaveIsNeeded     brailleOctaveMarkInNeeded (S_msrNote note);
 
 
 /*

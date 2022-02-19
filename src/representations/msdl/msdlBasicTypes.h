@@ -39,6 +39,8 @@ enum class msdlUserLanguageKind {
 string msdlUserLanguageKindAsString (
   msdlUserLanguageKind languageKind);
 
+ostream& operator<< (ostream& os, msdlUserLanguageKind& elt);
+
 msdlUserLanguageKind msdlUserLanguageKindFromString (
   const string& theString);
 
@@ -58,6 +60,8 @@ enum class msdlCommentsTypeKind {
 
 string msdlCommentsTypeKindAsString (
   msdlCommentsTypeKind languageKind);
+
+ostream& operator<< (ostream& os, msdlCommentsTypeKind& elt);
 
 msdlCommentsTypeKind msdlCommentsTypeKindFromString (
   const string& theString);

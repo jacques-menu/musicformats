@@ -366,6 +366,18 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  getIgnoreMusicXMLWords () const
                               { return fIgnoreMusicXMLWords; }
 
+    Bool                  getConvertMusicXMLWordsToMSRTempos () const
+                              { return fConvertMusicXMLWordsToMSRTempos; }
+
+    Bool                  getAddMsrWordsFromTheMusicXMLLyrics () const
+                              { return fAddMsrWordsFromTheMusicXMLLyrics; }
+
+    Bool                  getConvertMusicXMLWordsToMSRRehearsalMarks () const
+                              { return fConvertMusicXMLWordsToMSRRehearsalMarks; }
+
+    Bool                  getConvertMusicXMLTemposToMSRRehearsalMarks () const
+                              { return fConvertMusicXMLTemposToMSRRehearsalMarks; }
+
     // ties
     // --------------------------------------
 
@@ -573,6 +585,13 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // --------------------------------------
 
     Bool                  fIgnoreMusicXMLWords;
+
+    Bool                  fConvertMusicXMLWordsToMSRTempos;
+    Bool                  fConvertMusicXMLWordsToMSRRehearsalMarks;
+
+    Bool                  fConvertMusicXMLTemposToMSRRehearsalMarks; // JMI???
+
+    Bool                  fAddMsrWordsFromTheMusicXMLLyrics;
 
     // ties
     // --------------------------------------

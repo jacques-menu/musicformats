@@ -150,8 +150,8 @@ S_bsrCellsList bsrTempo::buildCellsList () const
               tempoDottedDuration.getDotsNumber ();
 
           // determine the note sign
-          bsrNote::bsrNoteValueKind
-            noteValueKind = bsrNote::kNoteValueNone;
+          bsrNoteValueKind
+            noteValueKind = bsrNoteValueKind::kNoteValueNone;
 
           switch (durationKind) {
             case msrDurationKind::k_NoDuration:
@@ -162,34 +162,34 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             case msrDurationKind::k512th: // JMI
               break;
             case msrDurationKind::k256th:
-              noteValueKind = bsrNote::kNoteValueC256th;
+              noteValueKind = bsrNoteValueKind::kNoteValueC256th;
               break;
             case msrDurationKind::k128th:
-              noteValueKind = bsrNote::kNoteValueC128th;
+              noteValueKind = bsrNoteValueKind::kNoteValueC128th;
               break;
             case msrDurationKind::k64th:
-              noteValueKind = bsrNote::kNoteValueC64th;
+              noteValueKind = bsrNoteValueKind::kNoteValueC64th;
               break;
             case msrDurationKind::k32nd:
-              noteValueKind = bsrNote::kNoteValueC32nd;
+              noteValueKind = bsrNoteValueKind::kNoteValueC32nd;
               break;
             case msrDurationKind::k16th:
-              noteValueKind = bsrNote::kNoteValueC16th;
+              noteValueKind = bsrNoteValueKind::kNoteValueC16th;
               break;
             case msrDurationKind::kEighth:
-              noteValueKind = bsrNote::kNoteValueC8th;
+              noteValueKind = bsrNoteValueKind::kNoteValueC8th;
               break;
             case msrDurationKind::kQuarter:
-              noteValueKind = bsrNote::kNoteValueCQuarter;
+              noteValueKind = bsrNoteValueKind::kNoteValueCQuarter;
               break;
             case msrDurationKind::kHalf:
-              noteValueKind = bsrNote::kNoteValueCHalf;
+              noteValueKind = bsrNoteValueKind::kNoteValueCHalf;
               break;
             case msrDurationKind::kWhole:
-              noteValueKind = bsrNote::kNoteValueCWhole;
+              noteValueKind = bsrNoteValueKind::kNoteValueCWhole;
               break;
             case msrDurationKind::kBreve:
-              noteValueKind = bsrNote::kNoteValueCBreve;
+              noteValueKind = bsrNoteValueKind::kNoteValueCBreve;
               break;
             case msrDurationKind::kLonga:
               break;
@@ -205,8 +205,8 @@ S_bsrCellsList bsrTempo::buildCellsList () const
                 noteValueKind,
                 dotsNumber,
                 bsrNoteOctaveKind::kNoteOctaveNone,
-                bsrNote::kNoteOctaveIsNeededNo,
-                bsrNote::bsrAccidentalKind::kAccidentalNone);
+                bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededNo,
+                bsrAccidentalKind::kAccidentalNone);
 
           // append its cells to result
           result->

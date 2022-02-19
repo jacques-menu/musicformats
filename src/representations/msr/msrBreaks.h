@@ -28,6 +28,8 @@ enum class msrUserChosenLineBreakKind {
 string userChosenLineBreakKindAsString (
   msrUserChosenLineBreakKind userChosenLineBreakKind);
 
+ostream& operator<< (ostream& os, msrUserChosenLineBreakKind& elt);
+
 class EXP msrLineBreak : public msrMeasureElement
 {
   public:
@@ -111,6 +113,8 @@ enum class msrUserChosenPageBreakKind {
 
 string userChosenPageBreakKindAsString (
   msrUserChosenPageBreakKind userChosenPageBreakKind);
+
+ostream& operator<< (ostream& os, msrUserChosenPageBreakKind& elt);
 
 class EXP msrPageBreak : public msrMeasureElement
 {

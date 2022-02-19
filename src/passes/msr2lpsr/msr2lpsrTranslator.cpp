@@ -3193,7 +3193,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
       break;
   } // switch
 
-  if (gGlobalLpsrOahGroup->getConvertTemposToRehearsalMarks ()) {
+  if (gGlobalLpsrOahGroup->getConvertMusicXMLTemposToMSRRehearsalMarks ()) {
     // create a rehearsal mark containing elt's words
 
     S_msrRehearsal

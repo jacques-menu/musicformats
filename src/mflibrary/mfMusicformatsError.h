@@ -12,10 +12,13 @@
 #ifndef ___musicformatsError___
 #define ___musicformatsError___
 
-#include <string>
-
 #include "exports.h"
 
+#include <iostream>
+#include <string>
+
+
+using namespace std;
 
 namespace MusicFormats
 {
@@ -24,7 +27,9 @@ enum class mfMusicformatsError {
   k_NoError, kErrorInvalidFile, kErrorInvalidOption, kErrorUnsupported
 };
 
-EXP std::string mfMusicFormatsErrorAsString (mfMusicformatsError err);
+EXP string mfMusicFormatsErrorAsString (mfMusicformatsError err);
+
+ostream& operator<< (ostream& os, mfMusicformatsError& elt);
 
 
 }

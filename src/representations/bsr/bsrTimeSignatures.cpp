@@ -435,57 +435,57 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 switch (beatValueToBeUsed) {
                   case 1:
                     result->appendCellsListToCellsList (
-                      bsrNote::noteValueKindAsCellsList (
+                      noteValueKindAsCellsList (
                         fInputLineNumber,
-                        bsrNote::kNoteValueCWhole));
+                        bsrNoteValueKind::kNoteValueCWhole));
                     break;
                   case 2:
                     result->appendCellsListToCellsList (
-                      bsrNote::noteValueKindAsCellsList (
+                      noteValueKindAsCellsList (
                         fInputLineNumber,
-                        bsrNote::kNoteValueCHalf));
+                        bsrNoteValueKind::kNoteValueCHalf));
                     break;
                   case 4:
                     result->appendCellsListToCellsList (
-                      bsrNote::noteValueKindAsCellsList (
+                      noteValueKindAsCellsList (
                         fInputLineNumber,
-                        bsrNote::kNoteValueCQuarter));
+                        bsrNoteValueKind::kNoteValueCQuarter));
                     break;
                   case 8:
                     result->appendCellsListToCellsList (
-                      bsrNote::noteValueKindAsCellsList (
+                      noteValueKindAsCellsList (
                         fInputLineNumber,
-                        bsrNote::kNoteValueC8th));
+                        bsrNoteValueKind::kNoteValueC8th));
                     break;
                   case 16:
                     result->appendCellsListToCellsList (
-                      bsrNote::noteValueKindAsCellsList (
+                      noteValueKindAsCellsList (
                         fInputLineNumber,
-                        bsrNote::kNoteValueC16th));
+                        bsrNoteValueKind::kNoteValueC16th));
                     break;
                   case 32:
                     result->appendCellsListToCellsList (
-                      bsrNote::noteValueKindAsCellsList (
+                      noteValueKindAsCellsList (
                         fInputLineNumber,
-                        bsrNote::kNoteValueC32nd));
+                        bsrNoteValueKind::kNoteValueC32nd));
                     break;
                   case 64:
                     result->appendCellsListToCellsList (
-                      bsrNote::noteValueKindAsCellsList (
+                      noteValueKindAsCellsList (
                         fInputLineNumber,
-                        bsrNote::kNoteValueC64th));
+                        bsrNoteValueKind::kNoteValueC64th));
                     break;
                   case 128:
                     result->appendCellsListToCellsList (
-                      bsrNote::noteValueKindAsCellsList (
+                      noteValueKindAsCellsList (
                         fInputLineNumber,
-                        bsrNote::kNoteValueC128th));
+                        bsrNoteValueKind::kNoteValueC128th));
                     break;
                   case 256:
                     result->appendCellsListToCellsList (
-                      bsrNote::noteValueKindAsCellsList (
+                      noteValueKindAsCellsList (
                         fInputLineNumber,
-                        bsrNote::kNoteValueC256th));
+                        bsrNoteValueKind::kNoteValueC256th));
                     break;
                   default:
                     {

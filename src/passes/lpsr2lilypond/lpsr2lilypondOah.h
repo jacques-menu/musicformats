@@ -1012,6 +1012,8 @@ enum class lilypondScoreNotationKind {
 extern string lilypondScoreNotationKindAsString (
   lilypondScoreNotationKind notationKind);
 
+ostream& operator<< (ostream& os, lilypondScoreNotationKind& elt);
+
 class EXP lpsr2lilypondOahGroup : public oahGroup
 {
   public:

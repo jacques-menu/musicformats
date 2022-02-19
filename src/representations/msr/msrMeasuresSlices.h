@@ -32,6 +32,8 @@ enum class msrNoteEventKind {
 string noteEventKindAsString (
   msrNoteEventKind noteEventKind);
 
+ostream& operator<< (ostream& os, msrNoteEventKind& elt);
+
 //________________________________________________________________________
 class msrNoteEvent : public smartable
 {
