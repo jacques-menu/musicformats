@@ -44,12 +44,14 @@ enum class msrXMLLangKind {
   kXMLLangIt, kXMLLangEn, kXMLLangDe, kXMLLangFr, kXMLLangJa, kXMLLangLa
 };
 
+string msrXMLLangKindAsString (
+  msrXMLLangKind XMLLangKind);
+
+ostream& operator<< (ostream& os, msrXMLLangKind& elt);
+
 EXP msrXMLLangKind msrXMLLangKindFromString (
   int           inputLineNumber,
   const string& XMLLangString);
-
-string msrXMLLangKindAsString (
-  msrXMLLangKind XMLLangKind);
 
 // diatonic pitches
 //______________________________________________________________________________
@@ -62,11 +64,17 @@ enum class msrDiatonicPitchKind {
   kDiatonicPitchG, kDiatonicPitchA, kDiatonicPitchB
 };
 
-EXP msrDiatonicPitchKind msrDiatonicPitchKindFromChar (
-  char diatonicNoteName);
-
 string msrDiatonicPitchKindAsString (
   msrDiatonicPitchKind diatonicPitchKind);
+
+ostream& operator<< (ostream& os, msrDiatonicPitchKind& elt);
+
+EXP msrXMLLangKind msrXMLLangKindFromString (
+  int           inputLineNumber,
+  const string& XMLLangString);
+
+EXP msrDiatonicPitchKind msrDiatonicPitchKindFromChar (
+  char diatonicNoteName);
 
 // alterations
 //______________________________________________________________________________
@@ -80,13 +88,15 @@ enum class msrAlterationKind {
   kAlterationDoubleSharp, kAlterationTripleSharp
 };
 
+string msrAlterationKindAsString (
+  msrAlterationKind alterationKind);
+
+ostream& operator<< (ostream& os, msrAlterationKind& elt);
+
 EXP msrAlterationKind msrAlterationKindFromMusicXMLAlter (
   float alter);
 
 EXP float msrMusicXMLAlterFromAlterationKind (
-  msrAlterationKind alterationKind);
-
-string msrAlterationKindAsString (
   msrAlterationKind alterationKind);
 
 // accidentals
@@ -121,6 +131,8 @@ enum class msrAccidentalKind {
 string msrAccidentalKindAsString (
   msrAccidentalKind accidentalKind);
 
+ostream& operator<< (ostream& os, msrAccidentalKind& elt);
+
 string msrAccidentalKindAsMusicXMLString (
   msrAccidentalKind accidentalKind);
 
@@ -134,6 +146,8 @@ enum class msrEditorialAccidentalKind {
 string msrEditorialAccidentalKindAsString (
   msrEditorialAccidentalKind noteEditorialAccidentalKind);
 
+ostream& operator<< (ostream& os, msrEditorialAccidentalKind& elt);
+
 // cautionary accidentals
 //______________________________________________________________________________
 
@@ -143,6 +157,8 @@ enum class msrCautionaryAccidentalKind {
 
 string msrCautionaryAccidentalKindAsString (
   msrCautionaryAccidentalKind noteCautionaryAccidentalKind);
+
+ostream& operator<< (ostream& os, msrCautionaryAccidentalKind& elt);
 
 // semi tones pitches
 //______________________________________________________________________________
@@ -194,6 +210,8 @@ enum class msrSemiTonesPitchKind {
 
 string msrSemiTonesPitchKindAsString (
   msrSemiTonesPitchKind semiTonesPitchKind);
+
+ostream& operator<< (ostream& os, msrSemiTonesPitchKind& elt);
 
 // quarter tones pitches
 //______________________________________________________________________________
@@ -248,6 +266,8 @@ enum class msrQuarterTonesPitchKind {
 EXP string msrQuarterTonesPitchKindAsString (
   msrQuarterTonesPitchKind quarterTonesPitchKind);
 
+ostream& operator<< (ostream& os, msrQuarterTonesPitchKind& elt);
+
 EXP void fetchDiatonicPitchKindAndAlterationKindFromQuarterTonesPitchKind (
   int                      inputLineNumber,
   msrQuarterTonesPitchKind quarterTonesPitchKind,
@@ -282,7 +302,9 @@ enum class msrAlterationPreferenceKind {
   kAlterationPreferenceFlat, kAlterationPreferenceNatural, kAlterationPreferenceSharp
 };
 
-EXP msrQuarterTonesPitchKind msrSemiTonesPitchKindAsQuarterTonesPitchKind (
+ostream& operator<< (ostream& os, msrAlterationPreferenceKind& elt);
+
+msrQuarterTonesPitchKind msrSemiTonesPitchKindAsQuarterTonesPitchKind (
   msrSemiTonesPitchKind       semiTonesPitchKind,
   msrAlterationPreferenceKind alterationPreferenceKind);
 
@@ -353,6 +375,8 @@ enum class msrNoteKind {
 EXP string noteKindAsString (
   msrNoteKind noteKind);
 
+ostream& operator<< (ostream& os, msrNoteKind& elt);
+
 // solo notes or rests
 //______________________________________________________________________________
 
@@ -374,6 +398,8 @@ enum class msrSoloNoteOrRestInVoiceKind {
 string soloNoteOrRestInVoiceKindAsString (
   msrSoloNoteOrRestInVoiceKind soloNoteOrRestInVoiceKind);
 
+ostream& operator<< (ostream& os, msrSoloNoteOrRestInVoiceKind& elt);
+
 enum class msrSoloNoteOrRestInStaffKind {
   kSoloNoteOrRestInStaffYes,
   kSoloNoteOrRestInStaffPartially,
@@ -382,6 +408,8 @@ enum class msrSoloNoteOrRestInStaffKind {
 
 string soloNoteOrRestInStaffKindAsString (
   msrSoloNoteOrRestInStaffKind soloNoteOrRestInStaffKind);
+
+ostream& operator<< (ostream& os, msrSoloNoteOrRestInStaffKind& elt);
 
 // chords
 //______________________________________________________________________________
@@ -397,6 +425,8 @@ enum class msrChordInKind {
 EXP string chordKindAsString (
   msrChordInKind chordKind);
 
+ostream& operator<< (ostream& os, msrChordInKind& elt);
+
 // tuplets
 //______________________________________________________________________________
 
@@ -409,6 +439,8 @@ enum class msrTupletInKind {
 
 EXP string tupletKindAsString (
   msrTupletInKind tupletKind);
+
+ostream& operator<< (ostream& os, msrTupletInKind& elt);
 
 // beams
 //______________________________________________________________________________
@@ -443,6 +475,8 @@ enum class msrBeamKind {
 EXP string msrBeamKindAsString (
   msrBeamKind beamKind);
 
+ostream& operator<< (ostream& os, msrBeamKind& elt);
+
 // ties
 // ------------------------------------------------------
 
@@ -453,6 +487,8 @@ enum class msrTieKind {
 
 string msrTieKindAsString (
   msrTieKind tieKind);
+
+ostream& operator<< (ostream& os, msrTieKind& elt);
 
 // slurs
 // ------------------------------------------------------
@@ -467,6 +503,8 @@ enum class msrSlurTypeKind {
 
 string msrSlurTypeKindAsString (
   msrSlurTypeKind slurTypeKind);
+
+ostream& operator<< (ostream& os, msrSlurTypeKind& elt);
 
 // intervals
 //______________________________________________________________________________
@@ -513,16 +551,18 @@ enum class msrIntervalKind {
   kIntervalMajorThirteenth, kIntervalAugmentedThirteenth
 };
 
-EXP int msrIntervalKindAsSemiTones (
-  msrIntervalKind intervalKind);
-
-EXP int msrIntervalKindAsQuarterTones (
-  msrIntervalKind intervalKind);
-
 string msrIntervalKindAsString (
   msrIntervalKind intervaKindl);
 
 string msrIntervalKindAsShortString (
+  msrIntervalKind intervalKind);
+
+ostream& operator<< (ostream& os, msrIntervalKind& elt);
+
+EXP int msrIntervalKindAsSemiTones (
+  msrIntervalKind intervalKind);
+
+EXP int msrIntervalKindAsQuarterTones (
   msrIntervalKind intervalKind);
 
 EXP msrIntervalKind invertIntervalKind (
@@ -567,6 +607,8 @@ enum class msrStaffKind {
 string msrStaffKindAsString (
   msrStaffKind staffKind);
 
+ostream& operator<< (ostream& os, msrStaffKind& elt);
+
 string msrStaffKindAsStringForPrint (
   msrStaffKind staffKind);
 
@@ -581,6 +623,8 @@ enum class msrVoiceKind {
 
 string msrVoiceKindAsString (
   msrVoiceKind voiceKind);
+
+ostream& operator<< (ostream& os, msrVoiceKind& elt);
 
 string msrVoiceKindAsStringForPrint (
   msrVoiceKind voiceKind);
@@ -606,6 +650,8 @@ enum class msrMeasureKind {
 string msrMeasureKindAsString (
   msrMeasureKind measureKind);
 
+ostream& operator<< (ostream& os, msrMeasureKind& elt);
+
 string msrMeasureKindasShortStringForMeasuresSlices (
   msrMeasureKind measureKind);
 
@@ -616,6 +662,8 @@ enum class msrMeasureImplicitKind {
 
 string msrMeasureImplicitKindAsString (
   msrMeasureImplicitKind measureImplicitKind);
+
+ostream& operator<< (ostream& os, msrMeasureImplicitKind& elt);
 
 // clefs
 //______________________________________________________________________________
@@ -642,6 +690,8 @@ enum class msrClefKind {
 string msrClefKindAsString (
   msrClefKind clefKind);
 
+ostream& operator<< (ostream& os, msrClefKind& elt);
+
 EXP msrClefKind clefKindFromString (
   int           inputLineNumber,
   const string& clefString);
@@ -667,6 +717,8 @@ enum class msrKeyKind {
 string msrKeyKindAsString (
   msrKeyKind keyKind);
 
+ostream& operator<< (ostream& os, msrKeyKind& elt);
+
 enum class msrModeKind {
   k_NoMode,
 
@@ -677,6 +729,8 @@ enum class msrModeKind {
 
 string msrModeKindAsString (
   msrModeKind modeKind);
+
+ostream& operator<< (ostream& os, msrModeKind& elt);
 
 msrModeKind modeKindFromString (
   int           inputLineNumber,
@@ -697,6 +751,8 @@ enum class msrTimeSignatureSymbolKind {
 string msrTimeSignatureSymbolKindAsString (
   msrTimeSignatureSymbolKind timeSignatureSymbolKind);
 
+ostream& operator<< (ostream& os, msrTimeSignatureSymbolKind& elt);
+
 enum class msrTimeSignatureSeparatorKind {
   kTimeSignatureSeparatorNone,
   kTimeSignatureSeparatorHorizontal,
@@ -707,6 +763,8 @@ enum class msrTimeSignatureSeparatorKind {
 
 string msrTimeSignatureSeparatorKindAsString (
   msrTimeSignatureSeparatorKind timeSignatureSeparatorKind);
+
+ostream& operator<< (ostream& os, msrTimeSignatureSeparatorKind& elt);
 
 enum class msrTimeSignatureRelationKind {
   kTimeSignatureRelationNone,
@@ -721,6 +779,8 @@ enum class msrTimeSignatureRelationKind {
 string msrTimeSignatureRelationKindAsString (
   msrTimeSignatureRelationKind timeSignatureRelationKind);
 
+ostream& operator<< (ostream& os, msrTimeSignatureRelationKind& elt);
+
 // repeats
 //______________________________________________________________________________
 enum class msrRepeatEndingKind {
@@ -730,6 +790,8 @@ enum class msrRepeatEndingKind {
 
 string msrRepeatEndingKindAsString (
   msrRepeatEndingKind repeatEndingKind);
+
+ostream& operator<< (ostream& os, msrRepeatEndingKind& elt);
 
 // harmonies
 //______________________________________________________________________________
@@ -796,6 +858,8 @@ string msrHarmonyKindAsString (
 
 string msrHarmonyKindAsShortString (
   msrHarmonyKind harmonyKind);
+
+ostream& operator<< (ostream& os, msrHarmonyKind& elt);
 
 string msrHarmonyKindShortName (
   msrHarmonyKind harmonyKind);
@@ -869,6 +933,8 @@ enum class msrQuarterTonesPitchesLanguageKind {
 string msrQuarterTonesPitchesLanguageKindAsString (
   msrQuarterTonesPitchesLanguageKind languageKind);
 
+ostream& operator<< (ostream& os, msrQuarterTonesPitchesLanguageKind& elt);
+
 msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString (
   const string& theString);
 
@@ -921,6 +987,10 @@ enum class msrOctaveKind {
   kOctave5, kOctave6, kOctave7, kOctave8, kOctave9
 };
 
+string msrOctaveKindAsString (msrOctaveKind octaveKind);
+
+ostream& operator<< (ostream& os, msrOctaveKind& elt);
+
 EXP int octaveNumberFromOctaveKind (msrOctaveKind octaveKind);
 
 // successor and predecessor
@@ -949,8 +1019,6 @@ EXP msrOctaveKind msrOctaveKindFromCommasOrQuotes (
   int           inputLineNumber,
   const string& octaveIndication);
 
-string msrOctaveKindAsString (msrOctaveKind octaveKind);
-
 // octave entry
 //______________________________________________________________________________
 enum class msrOctaveEntryKind {
@@ -961,6 +1029,8 @@ enum class msrOctaveEntryKind {
 
 string msrOctaveEntryKindAsString (
   msrOctaveEntryKind octaveEntryKind);
+
+ostream& operator<< (ostream& os, msrOctaveEntryKind& elt);
 
 extern map<string, msrOctaveEntryKind>
   gGlobalMsrOctaveEntryKindsMap;
@@ -979,6 +1049,10 @@ enum class msrDurationKind {
   kQuarter,
   kEighth, k16th, k32nd, k64th, k128th, k256th, k512th, k1024th
 };
+
+string msrDurationKindAsString (msrDurationKind durationKind);
+
+ostream& operator<< (ostream& os, msrDurationKind& elt);
 
 EXP msrDurationKind msrDurationKindFromMusicXMLString (
   int           inputLineNumber,
@@ -1002,8 +1076,6 @@ EXP rational msrDurationKindAsWholeNotes (
 EXP msrDurationKind wholeNotesAsDurationKind (rational wholeNotes);
 
 string msrDurationKindAsMusicXMLType (msrDurationKind durationKind);
-
-string msrDurationKindAsString (msrDurationKind durationKind);
 
 // whole notes
 //______________________________________________________________________________
@@ -1256,6 +1328,8 @@ enum class msrLengthUnitKind {
 string msrLengthUnitKindAsString (
   msrLengthUnitKind lengthUnitKind);
 
+ostream& operator<< (ostream& os, msrLengthUnitKind& elt);
+
 string existingMsrLengthUnitKinds (unsigned int namesListMaxLength);
 
 extern map<string, msrLengthUnitKind>
@@ -1357,6 +1431,8 @@ enum class msrMarginTypeKind {
 
 string msrMarginTypeKindAsString (
   msrMarginTypeKind marginTypeKind);
+
+ostream& operator<< (ostream& os, msrMarginTypeKind& elt);
 
 string existingMsrMarginTypeKinds (unsigned int namesListMaxLength);
 
@@ -1570,6 +1646,8 @@ enum class msrFontSizeKind {
 string msrFontSizeKindAsString (
   msrFontSizeKind fontSizeKind);
 
+ostream& operator<< (ostream& os, msrFontSizeKind& elt);
+
 class EXP msrFontSize : public smartable
 {
   public:
@@ -1638,24 +1716,28 @@ enum class msrFontStyleKind {
   kFontStyleNormal, KFontStyleItalic
 };
 
+string msrFontStyleKindAsString (
+  msrFontStyleKind fontStyleKind);
+
+ostream& operator<< (ostream& os, msrFontStyleKind& elt);
+
 msrFontStyleKind msrFontStyleKindFromString (
   int           inputLineNumber,
   const string& fontStyleString);
-
-string msrFontStyleKindAsString (
-  msrFontStyleKind fontStyleKind);
 
 enum class msrFontWeightKind {
   kFontWeightNone,
   kFontWeightNormal, kFontWeightBold
 };
 
+string msrFontWeightKindAsString (
+  msrFontWeightKind fontWeightKind);
+
+ostream& operator<< (ostream& os, msrFontWeightKind& elt);
+
 msrFontWeightKind msrFontWeightKindFromString (
   int           inputLineNumber,
   const string& fontWeightString);
-
-string msrFontWeightKindAsString (
-  msrFontWeightKind fontWeightKind);
 
 // alignements
 //______________________________________________________________________________
@@ -1672,36 +1754,44 @@ enum class msrJustifyKind {
   kJustifyLeft, kJustifyCenter, kJustifyRight
 };
 
+string msrJustifyKindAsString (
+  msrJustifyKind justifyKind);
+
+ostream& operator<< (ostream& os, msrJustifyKind& elt);
+
 msrJustifyKind msrJustifyKindFromString (
   int           inputLineNumber,
   const string& justifyString);
 
-string msrJustifyKindAsString (
-  msrJustifyKind justifyKind);
-
+// -----
 enum class msrHorizontalAlignmentKind {
   kHorizontalAlignmentNone,
   kHorizontalAlignmentLeft, kHorizontalAlignmentCenter, kHorizontalAlignmentRight
 };
 
+string msrHorizontalAlignmentKindAsString (
+  msrHorizontalAlignmentKind horizontalAlignmentKind);
+
+ostream& operator<< (ostream& os, msrHorizontalAlignmentKind& elt);
+
 msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
   int           inputLineNumber,
   const string& horizontalAlignString);
 
-string msrHorizontalAlignmentKindAsString (
-  msrHorizontalAlignmentKind horizontalAlignmentKind);
-
+// -----
 enum class msrVerticalAlignmentKind {
   kVerticalAlignmentNone,
   kVerticalAlignmentTop, kVerticalAlignmentMiddle, kVerticalAlignmentBottom
 };
 
+string msrVerticalAlignmentKindAsString (
+  msrVerticalAlignmentKind verticalAlignmentKind);
+
+ostream& operator<< (ostream& os, msrVerticalAlignmentKind& elt);
+
 msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
   int           inputLineNumber,
   const string& verticalAlignmentString);
-
-string msrVerticalAlignmentKindAsString (
-  msrVerticalAlignmentKind verticalAlignmentKind);
 
 // directions
 //______________________________________________________________________________
@@ -1713,6 +1803,8 @@ enum class msrDirectionKind {
 string msrDirectionKindAsString (
   msrDirectionKind directionKind);
 
+ostream& operator<< (ostream& os, msrDirectionKind& elt);
+
 // print object
 //______________________________________________________________________________
 enum class msrPrintObjectKind {
@@ -1721,12 +1813,14 @@ enum class msrPrintObjectKind {
   kPrintObjectNo
 };
 
+string msrPrintObjectKindAsString (
+  msrPrintObjectKind printObjectKind);
+
+ostream& operator<< (ostream& os, msrPrintObjectKind& elt);
+
 msrPrintObjectKind msrPrintObjectKindFromString (
   int           inputLineNumber,
   const string& printObjectString);
-
-string msrPrintObjectKindAsString (
-  msrPrintObjectKind printObjectKind);
 
 // placements
 //______________________________________________________________________________
@@ -1736,12 +1830,14 @@ enum class msrPlacementKind {
   kPlacementAbove, kPlacementBelow
 };
 
+string msrPlacementKindAsString (
+  msrPlacementKind placementKind);
+
+ostream& operator<< (ostream& os, msrPlacementKind& elt);
+
 msrPlacementKind msrPlacementKindFromString (
   int           inputLineNumber,
   const string& placementString);
-
-string msrPlacementKindAsString (
-  msrPlacementKind placementKind);
 
 // dynamics
 // ------------------------------------------------------
@@ -1765,6 +1861,8 @@ enum class msrDynamicKind {
 string msrDynamicKindAsString (
   msrDynamicKind dynamicKind);
 
+ostream& operator<< (ostream& os, msrDynamicKind& elt);
+
 msrDynamicKind dynamicFromString (const string& theString);
 
 // measure styles
@@ -1778,18 +1876,22 @@ enum class msrSlashTypeKind {
 string msrSlashTypeKindAsString (
   msrSlashTypeKind slashTypeKind);
 
+ostream& operator<< (ostream& os, msrSlashTypeKind& elt);
+
 enum class msrUseDotsKind {
   k_NoUseDots,
 
   kUseDotsYes, kUseDotsNo
 };
 
+string msrUseDotsKindAsString (
+  msrUseDotsKind useDotsKind);
+
+ostream& operator<< (ostream& os, msrUseDotsKind& elt);
+
 msrUseDotsKind msrUseDotsFromString (
   int           inputLineNumber,
   const string& useDotsString);
-
-string msrUseDotsKindAsString (
-  msrUseDotsKind useDotsKind);
 
 enum class msrSlashUseStemsKind {
   k_NoSlashUseStems,
@@ -1800,6 +1902,8 @@ enum class msrSlashUseStemsKind {
 string msrSlashUseStemsKindAsString (
   msrSlashUseStemsKind slashUseStemsKind);
 
+ostream& operator<< (ostream& os, msrSlashUseStemsKind& elt);
+
 // line types
 //______________________________________________________________________________
 enum class msrLineTypeKind {
@@ -1809,6 +1913,8 @@ enum class msrLineTypeKind {
 
 string msrLineTypeKindAsString (
   msrLineTypeKind lineTypeKind);
+
+ostream& operator<< (ostream& os, msrLineTypeKind& elt);
 
 // tremolo types
 //______________________________________________________________________________
@@ -1821,6 +1927,8 @@ enum class msrTremoloTypeKind {
 string msrTremoloTypeKindAsString (
   msrTremoloTypeKind tremoloTypeKind);
 
+ostream& operator<< (ostream& os, msrTremoloTypeKind& elt);
+
 // technical types
 //______________________________________________________________________________
 enum class msrTechnicalTypeKind { // JMI ???
@@ -1832,6 +1940,8 @@ enum class msrTechnicalTypeKind { // JMI ???
 string msrTechnicalTypeKindAsString (
   msrTechnicalTypeKind technicalTypeKind);
 
+ostream& operator<< (ostream& os, msrTechnicalTypeKind& elt);
+
 // spanner types
 //______________________________________________________________________________
 enum class msrSpannerTypeKind {
@@ -1842,6 +1952,8 @@ enum class msrSpannerTypeKind {
 
 string msrSpannerTypeKindAsString (
   msrSpannerTypeKind spannerTypeKind);
+
+ostream& operator<< (ostream& os, msrSpannerTypeKind& elt);
 
 // moments
 //______________________________________________________________________________
@@ -2457,6 +2569,8 @@ enum class msrScoreNotationKind {
 
 string msrScoreNotationKindAsString (
   msrScoreNotationKind lilypondScoreNotationKind);
+
+ostream& operator<< (ostream& os, msrScoreNotationKind& elt);
 
 // global variables
 //______________________________________________________________________________

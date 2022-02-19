@@ -265,20 +265,6 @@ class EXP msr2msrOahGroup : public oahGroup
     Bool                  getCreateImplicitInitialRepeatBarLine () const
                               { return fCreateImplicitInitialRepeatBarLine; }
 
-    // convert words to tempo
-    Bool                  getConvertMsrWordsToTempo () const
-                              { return fConvertMsrWordsToTempo; }
-    // add words from the lyrics
-    Bool                  getAddMsrWordsFromTheMsrLyrics () const
-                              { return fAddMsrWordsFromTheMsrLyrics; }
-
-    // convert MSR words to rehearsal marks
-    Bool                  getConvertMsrWordsToRehearsalMarks () const
-                              { return fConvertMsrWordsToRehearsalMarks; }
-
-    // convert tempos to rehearsal marks
-    Bool                  getConvertTemposToRehearsalMarks () const
-                              { return fConvertTemposToRehearsalMarks; }
   public:
 
     // public services
@@ -304,10 +290,6 @@ class EXP msr2msrOahGroup : public oahGroup
     void                  initializeNotesOptions ();
 
     void                  initializeLyricsOptions ();
-
-    void                  initializeTemposOptions ();
-
-    void                  initializeWordsOptions ();
 
   public:
 
@@ -350,17 +332,6 @@ class EXP msr2msrOahGroup : public oahGroup
 
     // repeats
     Bool                  fCreateImplicitInitialRepeatBarLine;
-
-    // rehearsal marks
-    Bool                  fConvertTemposToRehearsalMarks;
-
-    // convert MSR words to tempo
-    Bool                  fConvertMsrWordsToTempo;
-    // add MSR words from the lyrics
-    Bool                  fAddMsrWordsFromTheMsrLyrics;
-
-    // convert MSR words to rehearsal marks
-    Bool                  fConvertMsrWordsToRehearsalMarks;
 };
 typedef SMARTP<msr2msrOahGroup> S_msr2msrOahGroup;
 EXP ostream& operator<< (ostream& os, const S_msr2msrOahGroup& elt);

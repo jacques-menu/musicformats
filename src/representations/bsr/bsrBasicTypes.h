@@ -99,10 +99,11 @@ enum class bsrCellKind {
   kDots123456    // L'\u283f'
 };
 
-//______________________________________________________________________________
 string bsrCellKindAsShortString (bsrCellKind cellKind);
 
 string bsrCellKindAsString (bsrCellKind cellKind);
+
+ostream& operator<< (ostream& os, bsrCellKind& elt);
 
 // lower case letters
 //______________________________________________________________________________
@@ -221,6 +222,8 @@ enum class bsrBrailleOutputKind {
 string bsrBrailleOutputKindAsString (
   bsrBrailleOutputKind brailleOutputKind);
 
+ostream& operator<< (ostream& os, bsrBrailleOutputKind& elt);
+
 extern map<string, bsrBrailleOutputKind>
   gGlobalBsrBrailleOutputKindsMap;
 
@@ -237,6 +240,8 @@ enum class bsrTextsLanguageKind {
 
 string bsrTextsLanguageKindAsString (
   bsrTextsLanguageKind languageKind);
+
+ostream& operator<< (ostream& os, bsrTextsLanguageKind& elt);
 
 extern map<string, bsrTextsLanguageKind>
   gGlobalBsrTextsLanguageKindsMap;

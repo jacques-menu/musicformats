@@ -8172,7 +8172,7 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
       appendSyllableToNoteAndSetItsNoteUpLink (
         fCurrentNonGraceNoteClone);
 
-    if (gGlobalLpsrOahGroup->getAddMsrWordsFromTheMsrLyrics ()) {
+    if (gGlobalLpsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
       // get the syllable texts list
       const list<string>&
         syllableTextsList =

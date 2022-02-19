@@ -152,6 +152,8 @@ enum class msdlTokenKind {
 string msdlTokenKindAsString (
   msdlTokenKind tokenKind);
 
+ostream& operator<< (ostream& os, msdlTokenKind& elt);
+
 string msdlTokenKindAsMsdlString (
   msdlTokenKind            tokenKind,
   msdlKeywordsLanguageKind languageKind);

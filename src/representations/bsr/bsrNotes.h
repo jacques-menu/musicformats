@@ -26,12 +26,159 @@ enum class bsrNoteOctaveKind {
 extern string noteOctaveKindAsString (
   bsrNoteOctaveKind noteOctaveKind);
 
+ostream& operator<< (ostream& os, bsrTextsLanguageKind& elt);
+
 extern string noteOctaveKindAsDebugString (
   bsrNoteOctaveKind noteOctaveKind);
 
 extern S_bsrCellsList noteOctaveKindAsCellsList (
   int               inputLineNumber,
   bsrNoteOctaveKind noteOctaveKind);
+
+//______________________________________________________________________________
+enum class bsrNoteValueKind {
+  kNoteValueNone,
+
+  kNoteValueRestBreve,
+  kNoteValueRestWhole,
+  kNoteValueRestHalf,
+  kNoteValueRestQuarter,
+  kNoteValueRest8th,
+  kNoteValueRest16th,
+  kNoteValueRest32nd,
+  kNoteValueRest64th,
+  kNoteValueRest128th,
+  kNoteValueRest256th,
+
+  kNoteValueCBreve,
+  kNoteValueCWhole,
+  kNoteValueCHalf,
+  kNoteValueCQuarter,
+  kNoteValueC8th,
+  kNoteValueC16th,
+  kNoteValueC32nd,
+  kNoteValueC64th,
+  kNoteValueC128th,
+  kNoteValueC256th,
+
+  kNoteValueDBreve,
+  kNoteValueDWhole,
+  kNoteValueDHalf,
+  kNoteValueDQuarter,
+  kNoteValueD8th,
+  kNoteValueD16th,
+  kNoteValueD32nd,
+  kNoteValueD64th,
+  kNoteValueD128th,
+  kNoteValueD256th,
+
+  kNoteValueEBreve,
+  kNoteValueEWhole,
+  kNoteValueEHalf,
+  kNoteValueEQuarter,
+  kNoteValueE8th,
+  kNoteValueE16th,
+  kNoteValueE32nd,
+  kNoteValueE64th,
+  kNoteValueE128th,
+  kNoteValueE256th,
+
+  kNoteValueFBreve,
+  kNoteValueFWhole,
+  kNoteValueFHalf,
+  kNoteValueFQuarter,
+  kNoteValueF8th,
+  kNoteValueF16th,
+  kNoteValueF32nd,
+  kNoteValueF64th,
+  kNoteValueF128th,
+  kNoteValueF256th,
+
+  kNoteValueGBreve,
+  kNoteValueGWhole,
+  kNoteValueGHalf,
+  kNoteValueGQuarter,
+  kNoteValueG8th,
+  kNoteValueG16th,
+  kNoteValueG32nd,
+  kNoteValueG64th,
+  kNoteValueG128th,
+  kNoteValueG256th,
+
+  kNoteValueABreve,
+  kNoteValueAWhole,
+  kNoteValueAHalf,
+  kNoteValueAQuarter,
+  kNoteValueA8th,
+  kNoteValueA16th,
+  kNoteValueA32nd,
+  kNoteValueA64th,
+  kNoteValueA128th,
+  kNoteValueA256th,
+
+  kNoteValueBBreve,
+  kNoteValueBWhole,
+  kNoteValueBHalf,
+  kNoteValueBQuarter,
+  kNoteValueB8th,
+  kNoteValueB16th,
+  kNoteValueB32nd,
+  kNoteValueB64th,
+  kNoteValueB128th,
+  kNoteValueB256th
+};
+
+string noteValueKindAsString (
+  bsrNoteValueKind noteValueKind);
+
+ostream& operator<< (ostream& os, bsrNoteValueKind& elt);
+
+string noteValueKindAsDebugString (
+  bsrNoteValueKind noteValueKind);
+
+S_bsrCellsList noteValueKindAsCellsList (
+  int              inputLineNumber,
+  bsrNoteValueKind noteValueKind);
+
+enum class bsrNoteValueSizeKind {
+  kNoteValueSizeNone,
+  kNoteValueSizeLarger,
+  kNoteValueSizeSmaller
+};
+
+string noteValueSizeKindAsString (
+  bsrNoteValueSizeKind noteValueSizeKind);
+
+ostream& operator<< (ostream& os, bsrNoteValueSizeKind& elt);
+
+bsrNoteValueSizeKind noteValueSizeKindFromNoteValueKind (
+  bsrNoteValueKind noteValueKind);
+
+S_bsrCellsList noteValueSizeKindAsCellsList (
+  int                  inputLineNumber,
+  bsrNoteValueSizeKind noteValueSizeKind);
+
+enum class bsrNoteOctaveIsNeeded {
+  kNoteOctaveIsNeededYes, kNoteOctaveIsNeededNo
+};
+
+string noteOctaveIsNeededAsString (
+  bsrNoteOctaveIsNeeded noteOctaveIsNeeded);
+
+ostream& operator<< (ostream& os, bsrNoteOctaveIsNeeded& elt);
+
+enum class bsrAccidentalKind {
+  kAccidentalNone,
+  kAccidentalSharp, kAccidentalNatural, kAccidentalFlat,
+  kAccidentalDoubleFlat, kAccidentalDoubleSharp,
+  kAccidentalQuarterSharp, kAccidentalQuarterFlat,
+  kAccidentalThreeQuarterSharp, kAccidentalThreeQuarterFlat
+};
+
+string msrAccidentalKindAsString (
+  bsrAccidentalKind accidentalKind);
+
+ostream& operator<< (ostream& os, bsrAccidentalKind& elt);
 
 //______________________________________________________________________________
 class EXP bsrNote : public bsrLineContentsElement
@@ -41,148 +188,12 @@ class EXP bsrNote : public bsrLineContentsElement
     // data types
     // ------------------------------------------------------
 
-    enum bsrNoteValueKind {
-      kNoteValueNone,
-
-      kNoteValueRestBreve,
-      kNoteValueRestWhole,
-      kNoteValueRestHalf,
-      kNoteValueRestQuarter,
-      kNoteValueRest8th,
-      kNoteValueRest16th,
-      kNoteValueRest32nd,
-      kNoteValueRest64th,
-      kNoteValueRest128th,
-      kNoteValueRest256th,
-
-      kNoteValueCBreve,
-      kNoteValueCWhole,
-      kNoteValueCHalf,
-      kNoteValueCQuarter,
-      kNoteValueC8th,
-      kNoteValueC16th,
-      kNoteValueC32nd,
-      kNoteValueC64th,
-      kNoteValueC128th,
-      kNoteValueC256th,
-
-      kNoteValueDBreve,
-      kNoteValueDWhole,
-      kNoteValueDHalf,
-      kNoteValueDQuarter,
-      kNoteValueD8th,
-      kNoteValueD16th,
-      kNoteValueD32nd,
-      kNoteValueD64th,
-      kNoteValueD128th,
-      kNoteValueD256th,
-
-      kNoteValueEBreve,
-      kNoteValueEWhole,
-      kNoteValueEHalf,
-      kNoteValueEQuarter,
-      kNoteValueE8th,
-      kNoteValueE16th,
-      kNoteValueE32nd,
-      kNoteValueE64th,
-      kNoteValueE128th,
-      kNoteValueE256th,
-
-      kNoteValueFBreve,
-      kNoteValueFWhole,
-      kNoteValueFHalf,
-      kNoteValueFQuarter,
-      kNoteValueF8th,
-      kNoteValueF16th,
-      kNoteValueF32nd,
-      kNoteValueF64th,
-      kNoteValueF128th,
-      kNoteValueF256th,
-
-      kNoteValueGBreve,
-      kNoteValueGWhole,
-      kNoteValueGHalf,
-      kNoteValueGQuarter,
-      kNoteValueG8th,
-      kNoteValueG16th,
-      kNoteValueG32nd,
-      kNoteValueG64th,
-      kNoteValueG128th,
-      kNoteValueG256th,
-
-      kNoteValueABreve,
-      kNoteValueAWhole,
-      kNoteValueAHalf,
-      kNoteValueAQuarter,
-      kNoteValueA8th,
-      kNoteValueA16th,
-      kNoteValueA32nd,
-      kNoteValueA64th,
-      kNoteValueA128th,
-      kNoteValueA256th,
-
-      kNoteValueBBreve,
-      kNoteValueBWhole,
-      kNoteValueBHalf,
-      kNoteValueBQuarter,
-      kNoteValueB8th,
-      kNoteValueB16th,
-      kNoteValueB32nd,
-      kNoteValueB64th,
-      kNoteValueB128th,
-      kNoteValueB256th
-    };
-
-    static string noteValueKindAsString (
-      bsrNoteValueKind noteValueKind);
-
-    static string noteValueKindAsDebugString (
-      bsrNoteValueKind noteValueKind);
-
-    static S_bsrCellsList noteValueKindAsCellsList (
-      int              inputLineNumber,
-      bsrNoteValueKind noteValueKind);
-
-    enum bsrNoteValueSizeKind {
-      kNoteValueSizeNone,
-      kNoteValueSizeLarger,
-      kNoteValueSizeSmaller
-    };
-
-    static string noteValueSizeKindAsString (
-      bsrNoteValueSizeKind noteValueSizeKind);
-
-    static bsrNoteValueSizeKind noteValueSizeKindFromNoteValueKind (
-      bsrNoteValueKind noteValueKind);
-
-    static S_bsrCellsList noteValueSizeKindAsCellsList (
-      int                  inputLineNumber,
-      bsrNoteValueSizeKind noteValueSizeKind);
-
-    enum bsrNoteOctaveIsNeeded {
-      kNoteOctaveIsNeededYes, kNoteOctaveIsNeededNo
-    };
-
-    static string noteOctaveIsNeededAsString (
-      bsrNoteOctaveIsNeeded noteOctaveIsNeeded);
-
-    enum class bsrAccidentalKind {
-      kAccidentalNone,
-      kAccidentalSharp, kAccidentalNatural, kAccidentalFlat,
-      kAccidentalDoubleFlat, kAccidentalDoubleSharp,
-      kAccidentalQuarterSharp, kAccidentalQuarterFlat,
-      kAccidentalThreeQuarterSharp, kAccidentalThreeQuarterFlat
-    };
-
-    static string msrAccidentalKindAsString (
-      bsrAccidentalKind accidentalKind);
-
     static string accidentalKindAsDebugString (
       bsrAccidentalKind accidentalKind);
 
     static S_bsrCellsList accidentalKindAsCellsList (
-      int                   inputLineNumber,
-      bsrAccidentalKind accidentalKind);
+                            int               inputLineNumber,
+                            bsrAccidentalKind accidentalKind);
 
     // creation
     // ------------------------------------------------------
@@ -251,10 +262,6 @@ class EXP bsrNote : public bsrLineContentsElement
 
     // private services
     // ------------------------------------------------------
-
-    S_bsrCellsList        noteValueKindAsCellsList () const;
-
-    S_bsrCellsList        noteValueSizeKindAsCellsList () const;
 
     S_bsrCellsList        accidentalKindAsCellsList () const;
 

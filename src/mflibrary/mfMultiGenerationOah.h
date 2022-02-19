@@ -45,6 +45,8 @@ enum class mfMultiGenerationOutputKind {
 EXP extern string mfMultiGenerationOutputKindAsString (
   mfMultiGenerationOutputKind multiGenerationOutputKind);
 
+ostream& operator<< (ostream& os, mfMultiGenerationOutputKind& elt);
+
 EXP extern mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
   const string& theString);
 

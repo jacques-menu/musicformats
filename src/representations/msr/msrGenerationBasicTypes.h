@@ -39,6 +39,8 @@ enum class msrGenerationAPIKind {
 EXP extern string msrGenerationAPIKindAsString (
   msrGenerationAPIKind generationAPIKind);
 
+ostream& operator<< (ostream& os, msrGenerationAPIKind& elt);
+
 EXP extern msrGenerationAPIKind msrGenerationAPIKindFromString (
   const string& theString);
 

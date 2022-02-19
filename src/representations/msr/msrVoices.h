@@ -106,8 +106,9 @@ enum class msrVoiceRepeatPhaseKind {
 };
 
 extern string voiceRepeatPhaseKindAsString (
-  msrVoiceRepeatPhaseKind
-    afterRepeatComponentPhaseKind);
+  msrVoiceRepeatPhaseKind afterRepeatComponentPhaseKind);
+
+ostream& operator<< (ostream& os, msrVoiceRepeatPhaseKind& elt);
 
 enum class msrVoiceFinalizationStatusKind { // JMI ???
   kKeepVoice,
@@ -117,6 +118,8 @@ enum class msrVoiceFinalizationStatusKind { // JMI ???
 extern string voiceFinalizationStatusKindAsString (
   msrVoiceFinalizationStatusKind voiceFinalizationStatusKind);
 
+ostream& operator<< (ostream& os, msrVoiceFinalizationStatusKind& elt);
+
 enum class msrVoiceCreateInitialLastSegmentKind {
   kCreateInitialLastSegmentYes,
   kCreateInitialLastSegmentNo
@@ -124,6 +127,8 @@ enum class msrVoiceCreateInitialLastSegmentKind {
 
 extern string voiceFinalizationStatusKindAsString (
   msrVoiceCreateInitialLastSegmentKind voiceCreateInitialLastSegmentKind);
+
+ostream& operator<< (ostream& os, msrVoiceCreateInitialLastSegmentKind& elt);
 
 //________________________________________________________________________
 class EXP msrRepeatDescr : public smartable

@@ -39,6 +39,8 @@ enum class msdlKeywordsLanguageKind {
 string msdlKeywordsLanguageKindAsString (
   msdlKeywordsLanguageKind languageKind);
 
+ostream& operator<< (ostream& os, msdlKeywordsLanguageKind& elt);
+
 msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (
   const string& theString);
 
@@ -86,6 +88,8 @@ enum class msdlKeywordKind {
 
 string msdlKeywordKindAsString (
   msdlKeywordKind keywordKind);
+
+ostream& operator<< (ostream& os, msdlKeywordKind& elt);
 
 string msdlKeywordKindAsMsdlString (
   msdlKeywordsLanguageKind languageKind,

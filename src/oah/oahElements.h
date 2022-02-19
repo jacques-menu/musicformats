@@ -41,6 +41,8 @@ enum class oahElementValueKind {
 string elementValueKindAsString (
   oahElementValueKind elementValueKind);
 
+ostream& operator<< (ostream& os, oahElementValueKind& elt);
+
 enum class oahElementVisibilityKind {
 kElementVisibilityNone, // default value
   kElementVisibilityWhole,
@@ -51,6 +53,8 @@ kElementVisibilityNone, // default value
 string elementVisibilityKindAsString (
   oahElementVisibilityKind elementVisibilityKind);
 
+ostream& operator<< (ostream& os, oahElementVisibilityKind& elt);
+
 enum class oahElementHelpOnlyKind {
   kElementHelpOnlyYes,
   kElementHelpOnlyNo
@@ -58,6 +62,8 @@ enum class oahElementHelpOnlyKind {
 
 string elementHelpOnlyKindAsString (
   oahElementHelpOnlyKind elementHelpOnlyKind);
+
+ostream& operator<< (ostream& os, oahElementHelpOnlyKind& elt);
 
 //______________________________________________________________________________
 // PRE-declaration for class self dependency

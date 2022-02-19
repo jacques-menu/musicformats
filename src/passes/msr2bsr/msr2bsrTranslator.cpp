@@ -98,7 +98,7 @@ S_bsrScore msr2bsrTranslator::translateMsrToBsr (
 
   // notes
   fCurrentNoteOctaveKind    = bsrNoteOctaveKind::kNoteOctaveNone;
-  fCurrentNoteValueSizeKind = bsrNote::kNoteValueSizeLarger;
+  fCurrentNoteValueSizeKind = bsrNoteValueSizeKind::kNoteValueSizeLarger;
 
   // measures
 // JMI  fMeasuresCounter = 0;
@@ -1625,11 +1625,11 @@ void msr2bsrTranslator::visitEnd (S_msrTempo& elt)
 }
 
 //________________________________________________________________________
-bsrNote::bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkInNeeded (
+bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkInNeeded (
   S_msrNote note)
 {
-  bsrNote::bsrNoteOctaveIsNeeded
-    result = bsrNote::kNoteOctaveIsNeededNo;
+  bsrNoteOctaveIsNeeded
+    result = bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededNo;
 
   int inputLineNumber =
     note->getInputLineNumber ();
@@ -1756,15 +1756,15 @@ bsrNote::bsrNoteOctaveIsNeeded msr2bsrTranslator::brailleOctaveMarkInNeeded (
     case 4: case -4:
       // a fourth or fifth, octave sign needed if there an octave change
       if (noteAbsoluteOctaveKind == referenceAbsoluteOctaveKind) {
-        result = bsrNote::kNoteOctaveIsNeededNo;
+        result = bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededNo;
       }
       else {
-        result = bsrNote::kNoteOctaveIsNeededYes;
+        result = bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededYes;
       }
       break;
     default:
       // more that a fifth, use an octave sign
-      result = bsrNote::kNoteOctaveIsNeededYes;
+      result = bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededYes;
   } // switch
 
   return result;
@@ -1935,7 +1935,7 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
       ;
   } // switch
 
-  bsrNote::bsrNoteValueKind noteValueKind = bsrNote::kNoteValueNone;
+  bsrNoteValueKind noteValueKind = bsrNoteValueKind::kNoteValueNone;
 
   if (note->fetchNoteIsARest ()) {
     switch (noteGraphicDurationKind) {
@@ -1947,34 +1947,34 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
       case msrDurationKind::k512th:
         break;
       case msrDurationKind::k256th:
-        noteValueKind = bsrNote::kNoteValueRest256th;
+        noteValueKind = bsrNoteValueKind::kNoteValueRest256th;
         break;
       case msrDurationKind::k128th:
-        noteValueKind = bsrNote::kNoteValueRest128th;
+        noteValueKind = bsrNoteValueKind::kNoteValueRest128th;
         break;
       case msrDurationKind::k64th:
-        noteValueKind = bsrNote::kNoteValueRest64th;
+        noteValueKind = bsrNoteValueKind::kNoteValueRest64th;
         break;
       case msrDurationKind::k32nd:
-        noteValueKind = bsrNote::kNoteValueRest32nd;
+        noteValueKind = bsrNoteValueKind::kNoteValueRest32nd;
         break;
       case msrDurationKind::k16th:
-        noteValueKind = bsrNote::kNoteValueRest16th;
+        noteValueKind = bsrNoteValueKind::kNoteValueRest16th;
         break;
       case msrDurationKind::kEighth:
-        noteValueKind = bsrNote::kNoteValueRest8th;
+        noteValueKind = bsrNoteValueKind::kNoteValueRest8th;
         break;
       case msrDurationKind::kQuarter:
-        noteValueKind = bsrNote::kNoteValueRestQuarter;
+        noteValueKind = bsrNoteValueKind::kNoteValueRestQuarter;
         break;
       case msrDurationKind::kHalf:
-        noteValueKind = bsrNote::kNoteValueRestHalf;
+        noteValueKind = bsrNoteValueKind::kNoteValueRestHalf;
         break;
       case msrDurationKind::kWhole:
-        noteValueKind = bsrNote::kNoteValueRestWhole;
+        noteValueKind = bsrNoteValueKind::kNoteValueRestWhole;
         break;
       case msrDurationKind::kBreve:
-        noteValueKind = bsrNote::kNoteValueRestBreve;
+        noteValueKind = bsrNoteValueKind::kNoteValueRestBreve;
         break;
       case msrDurationKind::kLonga:
         break;
@@ -1998,34 +1998,34 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
           case msrDurationKind::k512th:
             break;
           case msrDurationKind::k256th:
-            noteValueKind = bsrNote::kNoteValueA256th;
+            noteValueKind = bsrNoteValueKind::kNoteValueA256th;
             break;
           case msrDurationKind::k128th:
-            noteValueKind = bsrNote::kNoteValueA128th;
+            noteValueKind = bsrNoteValueKind::kNoteValueA128th;
             break;
           case msrDurationKind::k64th:
-            noteValueKind = bsrNote::kNoteValueA64th;
+            noteValueKind = bsrNoteValueKind::kNoteValueA64th;
             break;
           case msrDurationKind::k32nd:
-            noteValueKind = bsrNote::kNoteValueA32nd;
+            noteValueKind = bsrNoteValueKind::kNoteValueA32nd;
             break;
           case msrDurationKind::k16th:
-            noteValueKind = bsrNote::kNoteValueA16th;
+            noteValueKind = bsrNoteValueKind::kNoteValueA16th;
             break;
           case msrDurationKind::kEighth:
-            noteValueKind = bsrNote::kNoteValueA8th;
+            noteValueKind = bsrNoteValueKind::kNoteValueA8th;
             break;
           case msrDurationKind::kQuarter:
-            noteValueKind = bsrNote::kNoteValueAQuarter;
+            noteValueKind = bsrNoteValueKind::kNoteValueAQuarter;
             break;
           case msrDurationKind::kHalf:
-            noteValueKind = bsrNote::kNoteValueAHalf;
+            noteValueKind = bsrNoteValueKind::kNoteValueAHalf;
             break;
           case msrDurationKind::kWhole:
-            noteValueKind = bsrNote::kNoteValueAWhole;
+            noteValueKind = bsrNoteValueKind::kNoteValueAWhole;
             break;
           case msrDurationKind::kBreve:
-            noteValueKind = bsrNote::kNoteValueABreve;
+            noteValueKind = bsrNoteValueKind::kNoteValueABreve;
             break;
           case msrDurationKind::kLonga:
             break;
@@ -2044,34 +2044,34 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
           case msrDurationKind::k512th:
             break;
           case msrDurationKind::k256th:
-            noteValueKind = bsrNote::kNoteValueB256th;
+            noteValueKind = bsrNoteValueKind::kNoteValueB256th;
             break;
           case msrDurationKind::k128th:
-            noteValueKind = bsrNote::kNoteValueB128th;
+            noteValueKind = bsrNoteValueKind::kNoteValueB128th;
             break;
           case msrDurationKind::k64th:
-            noteValueKind = bsrNote::kNoteValueB64th;
+            noteValueKind = bsrNoteValueKind::kNoteValueB64th;
             break;
           case msrDurationKind::k32nd:
-            noteValueKind = bsrNote::kNoteValueB32nd;
+            noteValueKind = bsrNoteValueKind::kNoteValueB32nd;
             break;
           case msrDurationKind::k16th:
-            noteValueKind = bsrNote::kNoteValueB16th;
+            noteValueKind = bsrNoteValueKind::kNoteValueB16th;
             break;
           case msrDurationKind::kEighth:
-            noteValueKind = bsrNote::kNoteValueB8th;
+            noteValueKind = bsrNoteValueKind::kNoteValueB8th;
             break;
           case msrDurationKind::kQuarter:
-            noteValueKind = bsrNote::kNoteValueBQuarter;
+            noteValueKind = bsrNoteValueKind::kNoteValueBQuarter;
             break;
           case msrDurationKind::kHalf:
-            noteValueKind = bsrNote::kNoteValueBHalf;
+            noteValueKind = bsrNoteValueKind::kNoteValueBHalf;
             break;
           case msrDurationKind::kWhole:
-            noteValueKind = bsrNote::kNoteValueBWhole;
+            noteValueKind = bsrNoteValueKind::kNoteValueBWhole;
             break;
           case msrDurationKind::kBreve:
-            noteValueKind = bsrNote::kNoteValueBBreve;
+            noteValueKind = bsrNoteValueKind::kNoteValueBBreve;
             break;
           case msrDurationKind::kLonga:
             break;
@@ -2090,34 +2090,34 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
           case msrDurationKind::k512th:
             break;
           case msrDurationKind::k256th:
-            noteValueKind = bsrNote::kNoteValueC256th;
+            noteValueKind = bsrNoteValueKind::kNoteValueC256th;
             break;
           case msrDurationKind::k128th:
-            noteValueKind = bsrNote::kNoteValueC128th;
+            noteValueKind = bsrNoteValueKind::kNoteValueC128th;
             break;
           case msrDurationKind::k64th:
-            noteValueKind = bsrNote::kNoteValueC64th;
+            noteValueKind = bsrNoteValueKind::kNoteValueC64th;
             break;
           case msrDurationKind::k32nd:
-            noteValueKind = bsrNote::kNoteValueC32nd;
+            noteValueKind = bsrNoteValueKind::kNoteValueC32nd;
             break;
           case msrDurationKind::k16th:
-            noteValueKind = bsrNote::kNoteValueC16th;
+            noteValueKind = bsrNoteValueKind::kNoteValueC16th;
             break;
           case msrDurationKind::kEighth:
-            noteValueKind = bsrNote::kNoteValueC8th;
+            noteValueKind = bsrNoteValueKind::kNoteValueC8th;
             break;
           case msrDurationKind::kQuarter:
-            noteValueKind = bsrNote::kNoteValueCQuarter;
+            noteValueKind = bsrNoteValueKind::kNoteValueCQuarter;
             break;
           case msrDurationKind::kHalf:
-            noteValueKind = bsrNote::kNoteValueCHalf;
+            noteValueKind = bsrNoteValueKind::kNoteValueCHalf;
             break;
           case msrDurationKind::kWhole:
-            noteValueKind = bsrNote::kNoteValueCWhole;
+            noteValueKind = bsrNoteValueKind::kNoteValueCWhole;
             break;
           case msrDurationKind::kBreve:
-            noteValueKind = bsrNote::kNoteValueCBreve;
+            noteValueKind = bsrNoteValueKind::kNoteValueCBreve;
             break;
           case msrDurationKind::kLonga:
             break;
@@ -2136,34 +2136,34 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
           case msrDurationKind::k512th:
             break;
           case msrDurationKind::k256th:
-            noteValueKind = bsrNote::kNoteValueD256th;
+            noteValueKind = bsrNoteValueKind::kNoteValueD256th;
             break;
           case msrDurationKind::k128th:
-            noteValueKind = bsrNote::kNoteValueD128th;
+            noteValueKind = bsrNoteValueKind::kNoteValueD128th;
             break;
           case msrDurationKind::k64th:
-            noteValueKind = bsrNote::kNoteValueD64th;
+            noteValueKind = bsrNoteValueKind::kNoteValueD64th;
             break;
           case msrDurationKind::k32nd:
-            noteValueKind = bsrNote::kNoteValueD32nd;
+            noteValueKind = bsrNoteValueKind::kNoteValueD32nd;
             break;
           case msrDurationKind::k16th:
-            noteValueKind = bsrNote::kNoteValueD16th;
+            noteValueKind = bsrNoteValueKind::kNoteValueD16th;
             break;
           case msrDurationKind::kEighth:
-            noteValueKind = bsrNote::kNoteValueD8th;
+            noteValueKind = bsrNoteValueKind::kNoteValueD8th;
             break;
           case msrDurationKind::kQuarter:
-            noteValueKind = bsrNote::kNoteValueDQuarter;
+            noteValueKind = bsrNoteValueKind::kNoteValueDQuarter;
             break;
           case msrDurationKind::kHalf:
-            noteValueKind = bsrNote::kNoteValueDHalf;
+            noteValueKind = bsrNoteValueKind::kNoteValueDHalf;
             break;
           case msrDurationKind::kWhole:
-            noteValueKind = bsrNote::kNoteValueDWhole;
+            noteValueKind = bsrNoteValueKind::kNoteValueDWhole;
             break;
           case msrDurationKind::kBreve:
-            noteValueKind = bsrNote::kNoteValueDBreve;
+            noteValueKind = bsrNoteValueKind::kNoteValueDBreve;
             break;
           case msrDurationKind::kLonga:
             break;
@@ -2182,34 +2182,34 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
           case msrDurationKind::k512th:
             break;
           case msrDurationKind::k256th:
-            noteValueKind = bsrNote::kNoteValueE256th;
+            noteValueKind = bsrNoteValueKind::kNoteValueE256th;
             break;
           case msrDurationKind::k128th:
-            noteValueKind = bsrNote::kNoteValueE128th;
+            noteValueKind = bsrNoteValueKind::kNoteValueE128th;
             break;
           case msrDurationKind::k64th:
-            noteValueKind = bsrNote::kNoteValueE64th;
+            noteValueKind = bsrNoteValueKind::kNoteValueE64th;
             break;
           case msrDurationKind::k32nd:
-            noteValueKind = bsrNote::kNoteValueE32nd;
+            noteValueKind = bsrNoteValueKind::kNoteValueE32nd;
             break;
           case msrDurationKind::k16th:
-            noteValueKind = bsrNote::kNoteValueE16th;
+            noteValueKind = bsrNoteValueKind::kNoteValueE16th;
             break;
           case msrDurationKind::kEighth:
-            noteValueKind = bsrNote::kNoteValueE8th;
+            noteValueKind = bsrNoteValueKind::kNoteValueE8th;
             break;
           case msrDurationKind::kQuarter:
-            noteValueKind = bsrNote::kNoteValueEQuarter;
+            noteValueKind = bsrNoteValueKind::kNoteValueEQuarter;
             break;
           case msrDurationKind::kHalf:
-            noteValueKind = bsrNote::kNoteValueEHalf;
+            noteValueKind = bsrNoteValueKind::kNoteValueEHalf;
             break;
           case msrDurationKind::kWhole:
-            noteValueKind = bsrNote::kNoteValueEWhole;
+            noteValueKind = bsrNoteValueKind::kNoteValueEWhole;
             break;
           case msrDurationKind::kBreve:
-            noteValueKind = bsrNote::kNoteValueEBreve;
+            noteValueKind = bsrNoteValueKind::kNoteValueEBreve;
             break;
           case msrDurationKind::kLonga:
             break;
@@ -2228,34 +2228,34 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
           case msrDurationKind::k512th:
             break;
           case msrDurationKind::k256th:
-            noteValueKind = bsrNote::kNoteValueF256th;
+            noteValueKind = bsrNoteValueKind::kNoteValueF256th;
             break;
           case msrDurationKind::k128th:
-            noteValueKind = bsrNote::kNoteValueF128th;
+            noteValueKind = bsrNoteValueKind::kNoteValueF128th;
             break;
           case msrDurationKind::k64th:
-            noteValueKind = bsrNote::kNoteValueF64th;
+            noteValueKind = bsrNoteValueKind::kNoteValueF64th;
             break;
           case msrDurationKind::k32nd:
-            noteValueKind = bsrNote::kNoteValueF32nd;
+            noteValueKind = bsrNoteValueKind::kNoteValueF32nd;
             break;
           case msrDurationKind::k16th:
-            noteValueKind = bsrNote::kNoteValueF16th;
+            noteValueKind = bsrNoteValueKind::kNoteValueF16th;
             break;
           case msrDurationKind::kEighth:
-            noteValueKind = bsrNote::kNoteValueF8th;
+            noteValueKind = bsrNoteValueKind::kNoteValueF8th;
             break;
           case msrDurationKind::kQuarter:
-            noteValueKind = bsrNote::kNoteValueFQuarter;
+            noteValueKind = bsrNoteValueKind::kNoteValueFQuarter;
             break;
           case msrDurationKind::kHalf:
-            noteValueKind = bsrNote::kNoteValueFHalf;
+            noteValueKind = bsrNoteValueKind::kNoteValueFHalf;
             break;
           case msrDurationKind::kWhole:
-            noteValueKind = bsrNote::kNoteValueFWhole;
+            noteValueKind = bsrNoteValueKind::kNoteValueFWhole;
             break;
           case msrDurationKind::kBreve:
-            noteValueKind = bsrNote::kNoteValueFBreve;
+            noteValueKind = bsrNoteValueKind::kNoteValueFBreve;
             break;
           case msrDurationKind::kLonga:
             break;
@@ -2274,34 +2274,34 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
           case msrDurationKind::k512th:
             break;
           case msrDurationKind::k256th:
-            noteValueKind = bsrNote::kNoteValueG256th;
+            noteValueKind = bsrNoteValueKind::kNoteValueG256th;
             break;
           case msrDurationKind::k128th:
-            noteValueKind = bsrNote::kNoteValueG128th;
+            noteValueKind = bsrNoteValueKind::kNoteValueG128th;
             break;
           case msrDurationKind::k64th:
-            noteValueKind = bsrNote::kNoteValueG64th;
+            noteValueKind = bsrNoteValueKind::kNoteValueG64th;
             break;
           case msrDurationKind::k32nd:
-            noteValueKind = bsrNote::kNoteValueG32nd;
+            noteValueKind = bsrNoteValueKind::kNoteValueG32nd;
             break;
           case msrDurationKind::k16th:
-            noteValueKind = bsrNote::kNoteValueG16th;
+            noteValueKind = bsrNoteValueKind::kNoteValueG16th;
             break;
           case msrDurationKind::kEighth:
-            noteValueKind = bsrNote::kNoteValueG8th;
+            noteValueKind = bsrNoteValueKind::kNoteValueG8th;
             break;
           case msrDurationKind::kQuarter:
-            noteValueKind = bsrNote::kNoteValueGQuarter;
+            noteValueKind = bsrNoteValueKind::kNoteValueGQuarter;
             break;
           case msrDurationKind::kHalf:
-            noteValueKind = bsrNote::kNoteValueGHalf;
+            noteValueKind = bsrNoteValueKind::kNoteValueGHalf;
             break;
           case msrDurationKind::kWhole:
-            noteValueKind = bsrNote::kNoteValueGWhole;
+            noteValueKind = bsrNoteValueKind::kNoteValueGWhole;
             break;
           case msrDurationKind::kBreve:
-            noteValueKind = bsrNote::kNoteValueGBreve;
+            noteValueKind = bsrNoteValueKind::kNoteValueGBreve;
             break;
           case msrDurationKind::kLonga:
             break;
@@ -2313,9 +2313,9 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
   }
 
   // is the note octave needed?
-  bsrNote::bsrNoteOctaveIsNeeded
+  bsrNoteOctaveIsNeeded
     noteOctaveIsNeeded =
-      bsrNote::kNoteOctaveIsNeededNo;
+      bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededNo;
 
   if (fCurrentNoteOctaveKind == bsrNoteOctaveKind::kNoteOctaveNone) {
     // this note is the first one in the voice,
@@ -2323,11 +2323,11 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
     // unless it is a rest
     if (note->fetchNoteIsARest ()) {
       noteOctaveIsNeeded =
-        bsrNote::kNoteOctaveIsNeededNo;
+        bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededNo;
     }
     else {
       noteOctaveIsNeeded =
-        bsrNote::kNoteOctaveIsNeededYes;
+        bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededYes;
     }
   }
   else if (fRelativeOctaveReference) {
@@ -2340,32 +2340,32 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
   fCurrentNoteOctaveKind = noteOctaveKind;
 
   // is there an accidental attached to the note?
-  bsrNote::bsrAccidentalKind
+  bsrAccidentalKind
     bAccidentalKind =
-      bsrNote::bsrAccidentalKind::kAccidentalNone;
+      bsrAccidentalKind::kAccidentalNone;
 
   switch (mAccidentalKind) {
     case msrAccidentalKind::kAccidentalNone:
       break;
 
     case msrAccidentalKind::kAccidentalSharp:
-      bAccidentalKind = bsrNote::bsrAccidentalKind::kAccidentalSharp;
+      bAccidentalKind = bsrAccidentalKind::kAccidentalSharp;
       break;
     case msrAccidentalKind::kAccidentalNatural:
-      bAccidentalKind = bsrNote::bsrAccidentalKind::kAccidentalNatural;
+      bAccidentalKind = bsrAccidentalKind::kAccidentalNatural;
       break;
     case msrAccidentalKind::kAccidentalFlat:
-      bAccidentalKind = bsrNote::bsrAccidentalKind::kAccidentalFlat;
+      bAccidentalKind = bsrAccidentalKind::kAccidentalFlat;
       break;
 
     case msrAccidentalKind::kAccidentalDoubleSharp:
-      bAccidentalKind = bsrNote::bsrAccidentalKind::kAccidentalDoubleSharp;
+      bAccidentalKind = bsrAccidentalKind::kAccidentalDoubleSharp;
       break;
     case msrAccidentalKind::kAccidentalSharpSharp:
       break;
 
     case msrAccidentalKind::kAccidentalFlatFlat:
-      bAccidentalKind = bsrNote::bsrAccidentalKind::kAccidentalDoubleFlat;
+      bAccidentalKind = bsrAccidentalKind::kAccidentalDoubleFlat;
       break;
     case msrAccidentalKind::kAccidentalNaturalSharp:
       break;
@@ -2373,17 +2373,17 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
       break;
 
     case msrAccidentalKind::kAccidentalQuarterFlat:
-      bAccidentalKind = bsrNote::bsrAccidentalKind::kAccidentalDoubleFlat;
+      bAccidentalKind = bsrAccidentalKind::kAccidentalDoubleFlat;
       break;
     case msrAccidentalKind::kAccidentalQuarterSharp:
-      bAccidentalKind = bsrNote::bsrAccidentalKind::kAccidentalQuarterSharp;
+      bAccidentalKind = bsrAccidentalKind::kAccidentalQuarterSharp;
       break;
 
     case msrAccidentalKind::kAccidentalThreeQuartersFlat:
-      bAccidentalKind = bsrNote::bsrAccidentalKind::kAccidentalThreeQuarterFlat;
+      bAccidentalKind = bsrAccidentalKind::kAccidentalThreeQuarterFlat;
       break;
     case msrAccidentalKind::kAccidentalThreeQuartersSharp:
-      bAccidentalKind = bsrNote::bsrAccidentalKind::kAccidentalThreeQuarterSharp;
+      bAccidentalKind = bsrAccidentalKind::kAccidentalThreeQuarterSharp;
       break;
 
     case msrAccidentalKind::kAccidentalSharpDown:
@@ -2450,9 +2450,9 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
     appendNoteToMeasure (bNote);
 
   // determine the note value size kind
-  bsrNote::bsrNoteValueSizeKind
+  bsrNoteValueSizeKind
     noteValueSizeKind =
-      bsrNote::noteValueSizeKindFromNoteValueKind (
+      noteValueSizeKindFromNoteValueKind (
         noteValueKind);
 
   // is a note value sign needed?
@@ -2460,11 +2460,11 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
     gLogStream <<
       "--> fCurrentNoteValueSizeKind = " <<
-      bsrNote::noteValueSizeKindAsString (fCurrentNoteValueSizeKind) <<
+      noteValueSizeKindAsString (fCurrentNoteValueSizeKind) <<
       ", noteValueSizeKind = " <<
-      bsrNote::noteValueSizeKindAsString (noteValueSizeKind) <<
+      noteValueSizeKindAsString (noteValueSizeKind) <<
       ", noteOctaveIsNeeded = " <<
-      bsrNote::noteOctaveIsNeededAsString (noteOctaveIsNeeded) <<
+      noteOctaveIsNeededAsString (noteOctaveIsNeeded) <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -3266,7 +3266,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
       appendSyllableToNoteAndSetItsNoteUpLink (
         fCurrentNonGraceNoteClone);
 
-    if (gGlobalBsrOahGroup->getAddMsrWordsFromTheMsrLyrics ()) {
+    if (gGlobalBsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
       // get the syllable texts list
       const list<string>&
         syllableTextsList =
