@@ -114,10 +114,6 @@ void msdl2musicxmlRegularHandler::createRegularHandlerGroups ()
 
   createWarningAndErrorsRegularGroup ();
 
-// JMI  createMsrGenerationAPIRegularGroup ();
-
-  createInputRegularGroup ();
-
   createPresentationRegularGroup ();
 
   createPartsRegularGroup ();
@@ -368,41 +364,6 @@ void msdl2musicxmlRegularHandler::createWarningAndErrorsRegularGroup ()
 
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
-}
-
-void msdl2musicxmlRegularHandler::createInputRegularGroup ()
-{
-  // group
-
-  S_oahGroup
-    group =
-      oahGroup::create (
-        "Input group",
-        "help-input-group", "hinput-group",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole);
-  appendGroupToRegulalHandler (group);
-
-  // subgroup
-
-  S_oahSubGroup
-    subGroup =
-      oahSubGroup::create (
-        "Input",
-        "help-input", "hinput",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole,
-        group);
-  group->
-    appendSubGroupToGroup (subGroup);
-
-  // atoms
-
-  registerAtomInRegularSubgroup ("ignore-musicxml-words", subGroup);
-
-  registerAtomInRegularSubgroup ("cubase", subGroup);
-
-  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
 }
 
 void msdl2musicxmlRegularHandler::createPresentationRegularGroup ()

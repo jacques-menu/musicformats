@@ -38,6 +38,36 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string bsrKeyKindAsString (
+  bsrKeyKind keyKind)
+{
+  string result;
+
+  switch (keyKind) {
+    case bsrKeyKind::kKeyKindNone:
+      result = "***keyKindNone***";
+      break;
+    case bsrKeyKind::kKeyKindFlats:
+      result = "kKeyKindFlats";
+      break;
+    case bsrKeyKind::kKeyKindNaturals:
+      result = "kKeyKindNaturals";
+      break;
+    case bsrKeyKind::kKeyKindSharps:
+      result = "kKeyKindSharps";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, bsrKeyKind& elt)
+{
+  os << bsrKeyKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_bsrKey bsrKey::create (
   int          inputLineNumber,
   bsrKeyKind   keyKind,
@@ -61,12 +91,16 @@ bsrKey::bsrKey (
   fNumberOfAlterations = numberOfAlterations;
 
   // consistency check
-  if (fKeyKind == kKeyKindNaturals && fNumberOfAlterations != 0) {
+  if (
+    fKeyKind == bsrKeyKind::kKeyKindNaturals
+      &&
+    fNumberOfAlterations != 0
+  ) {
     stringstream s;
 
     s <<
       "BSR key inconsistency:" <<
-      "keyKind: " << msrKeyKindAsString (fKeyKind) <<
+      "keyKind: " << bsrKeyKindAsString (fKeyKind) <<
       "numberOfAlterations: " << fNumberOfAlterations;
 
     bsrInternalError (
@@ -101,19 +135,19 @@ S_bsrCellsList bsrKey::keyKindAsCellsList () const
       bsrCellsList::create (fInputLineNumber);
 
   switch (fKeyKind) {
-    case bsrKey::kKeyKindNone:
+    case bsrKeyKind::kKeyKindNone:
       break;
-    case bsrKey::kKeyKindFlats:
+    case bsrKeyKind::kKeyKindFlats:
       result->
         appendCellKindToCellsList (
           kCellFlat);
       break;
-    case bsrKey::kKeyKindNaturals:
+    case bsrKeyKind::kKeyKindNaturals:
       result->
         appendCellKindToCellsList (
           kCellNatural);
       break;
-    case bsrKey::kKeyKindSharps:
+    case bsrKeyKind::kKeyKindSharps:
       result->
         appendCellKindToCellsList (
           kCellSharp);
@@ -227,36 +261,13 @@ void bsrKey::acceptOut (basevisitor* v)
 void bsrKey::browseData (basevisitor* v)
 {}
 
-string bsrKey::msrKeyKindAsString (
-  bsrKeyKind keyKind)
-{
-  string result;
-
-  switch (keyKind) {
-    case bsrKey::kKeyKindNone:
-      result = "***keyKindNone***";
-      break;
-    case bsrKey::kKeyKindFlats:
-      result = "keyFlats";
-      break;
-    case bsrKey::kKeyKindNaturals:
-      result = "keyNaturals";
-      break;
-    case bsrKey::kKeyKindSharps:
-      result = "keySharps";
-      break;
-  } // switch
-
-  return result;
-}
-
 string bsrKey::asString () const
 {
   stringstream s;
 
   s <<
     "Key" <<
-    ", " << msrKeyKindAsString (fKeyKind) <<
+    ", " << bsrKeyKindAsString (fKeyKind) <<
     ", numberOfAlterations: " << fNumberOfAlterations <<
     ", keyCellsList: " << fKeyCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
@@ -273,10 +284,10 @@ string bsrKey::asDebugString () const
 
   if (fNumberOfAlterations > 0) {
     switch (fKeyKind) {
-      case bsrKey::kKeyKindNone:
+      case bsrKeyKind::kKeyKindNone:
         break;
 
-      case bsrKey::kKeyKindFlats:
+      case bsrKeyKind::kKeyKindFlats:
         switch (fNumberOfAlterations) {
           case 1:
             s << "F major";
@@ -302,10 +313,10 @@ string bsrKey::asDebugString () const
         } // switch
         break;
 
-      case bsrKey::kKeyKindNaturals:
+      case bsrKeyKind::kKeyKindNaturals:
         break;
 
-      case bsrKey::kKeyKindSharps:
+      case bsrKeyKind::kKeyKindSharps:
         switch (fNumberOfAlterations) {
           case 1:
             s << "G major";
@@ -354,7 +365,7 @@ void bsrKey::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "keyKind" << " : " << msrKeyKindAsString (fKeyKind) <<
+    "keyKind" << " : " << bsrKeyKindAsString (fKeyKind) <<
     endl <<
     setw (fieldWidth) <<
     "numberOfAlterations" << " : " << fNumberOfAlterations <<

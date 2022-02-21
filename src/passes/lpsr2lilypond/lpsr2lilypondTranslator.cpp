@@ -5371,7 +5371,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
   generateGlobalStaffSize ();
 
   // generate myBreak if relevant
-  if (! gGlobalLpsr2lilypondOahGroup->getIgnoreLPSRLineBreaks ()) {
+  if (! gGlobalLpsr2lilypondOahGroup->getIgnoreLpsrLineBreaks ()) {
     fLilypondCodeStream <<
       "% Pick your choice from the next two lines as needed" <<
       endl <<
@@ -5382,7 +5382,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
   }
 
   // generate myPageBreak if relevant
-  if (! gGlobalLpsr2lilypondOahGroup->getIgnoreLPSRPageBreaks ()) {
+  if (! gGlobalLpsr2lilypondOahGroup->getIgnoreLpsrPageBreaks ()) {
     fLilypondCodeStream <<
       "% Pick your choice from the next two lines as needed" <<
       endl <<
@@ -5830,7 +5830,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
     over those found in the header
   */
 
-  list<pair<string, string> > nameValuePairsList;
+  list<pair<string, string> > nameStringValuePairsList;
 
   S_msrIdentification
     headerIdentification =
@@ -5840,20 +5840,20 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
   if (headerIdentification) {
     generateHeaderIdentificationPart (
       headerIdentification,
-      nameValuePairsList);
+      nameStringValuePairsList);
   }
 
   generateHeaderLilypondPart (
     header,
-    nameValuePairsList);
+    nameStringValuePairsList);
 
   // compute field width
   int fieldWidth = 0;
 
   for (
     list<pair<string, string> >::const_iterator i =
-      nameValuePairsList.begin ();
-    i != nameValuePairsList.end ();
+      nameStringValuePairsList.begin ();
+    i != nameStringValuePairsList.end ();
     ++i
   ) {
     string name = (*i).first;
@@ -5878,8 +5878,8 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
   // generate the name-value pairs
   for (
     list<pair<string, string> >::const_iterator i =
-      nameValuePairsList.begin ();
-    i != nameValuePairsList.end ();
+      nameStringValuePairsList.begin ();
+    i != nameStringValuePairsList.end ();
     ++i
   ) {
     string name  = (*i).first;
@@ -5897,7 +5897,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
   S_msrIdentification          identification,
-  list<pair<string, string> >& nameValuePairsList)
+  list<pair<string, string> >& nameStringValuePairsList)
 {
   /*
     the values given through options have precedence
@@ -5915,7 +5915,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       identification->getIdentificationWorkNumber ();
 
   if (workNumber.size ()) {
-    nameValuePairsList.push_back (
+    nameStringValuePairsList.push_back (
       make_pair (
         "workNumber",
         workNumber));
@@ -5927,7 +5927,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       identification->getIdentificationWorkTitle ();
 
   if (workTitle.size ()) {
-    nameValuePairsList.push_back (
+    nameStringValuePairsList.push_back (
       make_pair (
         "workTitle",
         workTitle));
@@ -5939,7 +5939,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       identification->getIdentificationOpus ();
 
   if (opus.size ()) {
-    nameValuePairsList.push_back (
+    nameStringValuePairsList.push_back (
       make_pair (
         "opus",
         opus));
@@ -5951,7 +5951,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       identification->getIdentificationMovementNumber ();
 
   if (movementNumber.size ()) {
-    nameValuePairsList.push_back (
+    nameStringValuePairsList.push_back (
       make_pair (
         "movementNumber",
         movementNumber));
@@ -5963,7 +5963,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       identification->getIdentificationMovementTitle ();
 
   if (movementTitle.size ()) {
-    nameValuePairsList.push_back (
+    nameStringValuePairsList.push_back (
       make_pair (
         "movementTitle",
         movementTitle));
@@ -5975,7 +5975,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       identification->getIdentificationEncodingDate ();
 
   if (encodingDate.size ()) {
-    nameValuePairsList.push_back (
+    nameStringValuePairsList.push_back (
       make_pair (
         "encodingDate",
         encodingDate));
@@ -5987,7 +5987,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       identification->getIdentificationMiscellaneousField ();
 
   if (miscellaneousField.size ()) {
-    nameValuePairsList.push_back (
+    nameStringValuePairsList.push_back (
       make_pair (
         "miscellaneousField",
         miscellaneousField));
@@ -5999,7 +5999,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
       identification->getIdentificationScoreInstrument ();
 
   if (scoreInstrument.size ()) {
-    nameValuePairsList.push_back (
+    nameStringValuePairsList.push_back (
       make_pair (
         "scoreInstrument",
         scoreInstrument));
@@ -6017,7 +6017,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = composersList.begin (); i != composersList.end (); ++i) {
       string composer = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "composer",
           composer));
@@ -6036,7 +6036,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = lyricistsList.begin (); i != lyricistsList.end (); ++i) {
       string lyricist = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "lyricist",
           lyricist));
@@ -6055,7 +6055,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = arrangersList.begin (); i != arrangersList.end (); ++i) {
       string arranger = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "arranger",
           arranger));
@@ -6074,7 +6074,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = poetsList.begin (); i != poetsList.end (); ++i) {
       string poet = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "poet",
           poet));
@@ -6093,7 +6093,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = translatorsList.begin (); i != translatorsList.end (); ++i) {
       string translator = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "translator",
           translator));
@@ -6112,7 +6112,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = artistsList.begin (); i != artistsList.end (); ++i) {
       string artist = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "artist",
           artist));
@@ -6131,7 +6131,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = softwaresList.begin (); i != softwaresList.end (); ++i) {
       string software = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "software",
           software));
@@ -6150,7 +6150,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = rightsList.begin (); i != rightsList.end (); ++i) {
       string right = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "right",
           right));
@@ -6169,7 +6169,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = sourcesList.begin (); i != sourcesList.end (); ++i) {
       string source = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "source",
           source));
@@ -6188,7 +6188,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
     for (i = relationsList.begin (); i != relationsList.end (); ++i) {
       string relation = (*i);
 
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "relation",
           relation));
@@ -6198,13 +6198,13 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     fLilypondCodeStream <<
-      "% --> The identification nameValuePairsList contains:" <<
+      "% --> The identification nameStringValuePairsList contains:" <<
       endl;
 
     for (
       list<pair<string, string> >::const_iterator i =
-        nameValuePairsList.begin ();
-      i != nameValuePairsList.end ();
+        nameStringValuePairsList.begin ();
+      i != nameStringValuePairsList.end ();
       ++i
     ) {
       string name  = (*i).first;
@@ -6225,7 +6225,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
 //________________________________________________________________________
 void lpsr2lilypondTranslator::generateHeaderLilypondPart (
   S_lpsrHeader                 header,
-  list<pair<string, string> >& nameValuePairsList)
+  list<pair<string, string> >& nameStringValuePairsList)
 {
   /*
     the values given through options have precedence
@@ -6238,7 +6238,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
       gGlobalLpsr2lilypondOahGroup->getDedication ();
 
   if (dedicationFromOption.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "dedication",
           dedicationFromOption));
@@ -6249,7 +6249,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         header->getLilypondDedication ();
 
     if (lilypondDedication.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "dedication",
           lilypondDedication));
@@ -6257,7 +6257,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
     else {
       if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "% dedication",
             ""));
@@ -6271,7 +6271,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
       gGlobalLpsr2lilypondOahGroup->getPiece ();
 
   if (pieceFromOption.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "piece",
           pieceFromOption));
@@ -6282,7 +6282,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         header->getLilypondPiece ();
 
     if (lilypondPiece.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "piece",
           lilypondPiece));
@@ -6290,7 +6290,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
     else {
       if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "% piece",
             ""));
@@ -6304,7 +6304,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
       gGlobalLpsr2lilypondOahGroup->getOpus ();
 
   if (opusFromOption.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "opus",
           opusFromOption));
@@ -6315,7 +6315,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         header->getLilypondOpus ();
 
     if (lilypondOpus.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "opus",
           lilypondOpus));
@@ -6323,7 +6323,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
     else {
       if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "% opus",
             ""));
@@ -6334,7 +6334,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
   // title
   // JMI
   if (gGlobalMsrOahGroup->getUseFilenameAsWorkTitle ()) {
-    nameValuePairsList.push_back (
+    nameStringValuePairsList.push_back (
       make_pair (
         "title",
         gGlobalServiceRunData->getInputSourceName ()));
@@ -6345,7 +6345,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         gGlobalLpsr2lilypondOahGroup->getTitle ();
 
     if (titleFromOption.size ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "title",
             titleFromOption));
@@ -6356,7 +6356,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
           header->getLilypondTitle ();
 
       if (lilypondTitle.size ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "title",
             lilypondTitle));
@@ -6364,7 +6364,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
       else {
         if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-          nameValuePairsList.push_back (
+          nameStringValuePairsList.push_back (
             make_pair (
               "% title",
               ""));
@@ -6379,7 +6379,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
       gGlobalLpsr2lilypondOahGroup->getSubTitle ();
 
   if (subtitleFromOption.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "subtitle",
           subtitleFromOption));
@@ -6390,7 +6390,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         header->getLilypondSubTitle ();
 
     if (lilypondSubTitle.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "subtitle",
           lilypondSubTitle));
@@ -6398,7 +6398,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
     else {
       if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "% subtitle",
             ""));
@@ -6412,7 +6412,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
       gGlobalLpsr2lilypondOahGroup->getSubSubTitle ();
 
   if (subsubtitleFromOption.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "subsubtitle",
           subsubtitleFromOption));
@@ -6423,7 +6423,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         header->getLilypondSubSubTitle ();
 
     if (lilypondSubSubTitle.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "subsubtitle",
           lilypondSubSubTitle));
@@ -6431,7 +6431,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
     else {
       if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "% subsubtitle",
             ""));
@@ -6445,7 +6445,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
       gGlobalLpsr2lilypondOahGroup->getInstrument ();
 
   if (instrumentFromOption.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "instrument",
           instrumentFromOption));
@@ -6456,7 +6456,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         header->getLilypondInstrument ();
 
     if (lilypondInstrument.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "instrument",
           lilypondInstrument));
@@ -6464,7 +6464,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
     else {
       if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "% instrument",
             ""));
@@ -6478,7 +6478,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
       gGlobalLpsr2lilypondOahGroup->getMeter ();
 
   if (meterFromOption.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "meter",
           meterFromOption));
@@ -6489,7 +6489,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         header->getLilypondMeter ();
 
     if (lilypondMeter.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "meter",
           lilypondMeter));
@@ -6497,7 +6497,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
     else {
       if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "% meter",
             ""));
@@ -6511,7 +6511,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
       gGlobalLpsr2lilypondOahGroup->getCopyright ();
 
   if (copyrightFromOption.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "copyright",
           copyrightFromOption));
@@ -6522,7 +6522,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         header->getLilypondCopyright ();
 
     if (lilypondCopyright.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "copyright",
           lilypondCopyright));
@@ -6530,7 +6530,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
     else {
       if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "% copyright",
             ""));
@@ -6544,7 +6544,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
       gGlobalLpsr2lilypondOahGroup->getTagline ();
 
   if (taglineFromOption.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "tagline",
           taglineFromOption));
@@ -6555,7 +6555,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
         header->getLilypondTagline ();
 
     if (lilypondTagline.size ()) {
-      nameValuePairsList.push_back (
+      nameStringValuePairsList.push_back (
         make_pair (
           "tagline",
           lilypondTagline));
@@ -6563,7 +6563,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 
     else {
       if (gGlobalLpsr2lilypondOahGroup->getGenerateCommentedOutVariables ()) {
-        nameValuePairsList.push_back (
+        nameStringValuePairsList.push_back (
           make_pair (
             "% tagline",
             ""));
@@ -6583,7 +6583,8 @@ void lpsr2lilypondTranslator::generatePaper (
 
   // default length unit
   msrLengthUnitKind
-    defaultLengthUnit = msrLengthUnitKind::kUnitMillimeter; // JMI
+    defaultLengthUnit =
+      msrLengthUnitKind::kUnitMillimeter; // JMI
 
   fLilypondCodeStream <<
     "\\paper {" <<
@@ -6591,19 +6592,26 @@ void lpsr2lilypondTranslator::generatePaper (
 
   ++gIndenter;
 
-  list<pair<string, msrLength> > nameValuePairsList;
+  // fetch length values from paper page size
+  list<pair<string, msrLength> > nameLengthValuePairsList;
 
-  fetchValuesFromPaperPageSize (
+  fetchLengthValuesFromPaperPageSize (
     paper,
-    nameValuePairsList );
+    nameLengthValuePairsList );
+
+  // fetch boolean values from LPSR options group
+  list<pair<string, Bool> > nameBooleanValuePairsList;
+
+  fetchBooleanValuesFromLpsrOptionsGroup (
+    nameBooleanValuePairsList);
 
   // compute fieldWidth
   int fieldWidth = 0;
 
   for (
     list<pair<string, msrLength> >::const_iterator i =
-      nameValuePairsList.begin ();
-    i != nameValuePairsList.end ();
+      nameLengthValuePairsList.begin ();
+    i != nameLengthValuePairsList.end ();
     ++i
   ) {
     string name = (*i).first;
@@ -6618,17 +6626,58 @@ void lpsr2lilypondTranslator::generatePaper (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     fLilypondCodeStream <<
-      "% --> The paper nameValuePairsList contains:" <<
+      "% --> The paper nameLengthValuePairsList contains:" <<
       endl;
 
     for (
       list<pair<string, msrLength> >::const_iterator i =
-        nameValuePairsList.begin ();
-      i != nameValuePairsList.end ();
+        nameLengthValuePairsList.begin ();
+      i != nameLengthValuePairsList.end ();
       ++i
     ) {
       string    name  = (*i).first;
       msrLength value = (*i).second;
+
+      fLilypondCodeStream <<
+        "% " << name << " ---> " << value <<
+        endl;
+    } // for
+
+    fLilypondCodeStream <<
+      "% ====> fieldWidth: " << fieldWidth <<
+      endl;
+  }
+#endif
+
+  for (
+    list<pair<string, Bool> >::const_iterator i =
+      nameBooleanValuePairsList.begin ();
+    i != nameBooleanValuePairsList.end ();
+    ++i
+  ) {
+    string name = (*i).first;
+
+    unsigned int nameSize = name.size ();
+
+    if (nameSize > fieldWidth) {
+      fieldWidth = nameSize;
+    }
+  } // for
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceIdentification ()) {
+    fLilypondCodeStream <<
+      "% --> The paper nameLengthValuePairsList contains:" <<
+      endl;
+
+    for (
+      list<pair<string, Bool> >::const_iterator i =
+        nameBooleanValuePairsList.begin ();
+      i != nameBooleanValuePairsList.end ();
+      ++i
+    ) {
+      string name  = (*i).first;
+      Bool   value = (*i).second;
 
       fLilypondCodeStream <<
         "% " << name << " ---> " << value <<
@@ -6686,6 +6735,14 @@ void lpsr2lilypondTranslator::generatePaper (
   // separator
 // JMI    fLilypondCodeStream << endl;
 
+  // boolean
+  generatePaperBooleans (
+    paper,
+    fieldWidth);
+
+  // separator
+// JMI    fLilypondCodeStream << endl;
+
   // headers and footers
   generatePaperHeadersAndFooters (
     paper,
@@ -6708,9 +6765,9 @@ void lpsr2lilypondTranslator::generatePaper (
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::fetchValuesFromPaperPageSize (
+void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
   S_lpsrPaper                     paper,
-  list<pair<string, msrLength> >& nameValuePairsList)
+  list<pair<string, msrLength> >& nameLengthValuePairsList)
 {
   Bool
     generateCommentedOutVariables =
@@ -6731,7 +6788,7 @@ void lpsr2lilypondTranslator::fetchValuesFromPaperPageSize (
       paperHeight =
         gGlobalLpsrOahGroup->getPaperHeight ();
 
-    nameValuePairsList.push_back (
+    nameLengthValuePairsList.push_back (
       make_pair (
         "paper-height",
         paperHeight));
@@ -6751,10 +6808,22 @@ void lpsr2lilypondTranslator::fetchValuesFromPaperPageSize (
       paperWidth =
         gGlobalLpsrOahGroup->getPaperWidth ();
 
-    nameValuePairsList.push_back (
+    nameLengthValuePairsList.push_back (
       make_pair (
         "paper-width",
         paperWidth));
+  }
+}
+
+void lpsr2lilypondTranslator::fetchBooleanValuesFromLpsrOptionsGroup (
+  list<pair<string, Bool> >& nameBooleanValuePairsList)
+{
+  // ragged-last-bottom
+  if (gGlobalLpsrOahGroup->getRaggedLastBottom ()) {
+    nameBooleanValuePairsList.push_back (
+      make_pair (
+        "ragged-last-bottom",
+        false));
   }
 }
 
@@ -7104,7 +7173,6 @@ void lpsr2lilypondTranslator::generatePaperCounts (
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
-  return; // JMI
   // page count
   int
     pageCount =
@@ -7116,8 +7184,8 @@ void lpsr2lilypondTranslator::generatePaperCounts (
   fLilypondCodeStream << left <<
     setw (fieldWidth) <<
     "page-count" << " = " <<
-     pageCount <<
-     endl;
+    pageCount <<
+    endl;
 
   // system count
   int
@@ -7130,8 +7198,46 @@ void lpsr2lilypondTranslator::generatePaperCounts (
   fLilypondCodeStream << left <<
     setw (fieldWidth) <<
     "system-count" << " = " <<
-     systemCount <<
-     endl;
+    systemCount <<
+    endl;
+}
+
+//________________________________________________________________________
+void lpsr2lilypondTranslator::generatePaperBooleans (
+  S_lpsrPaper       pagePaper,
+  int               fieldWidth)
+{
+  // ragged bottom
+  Bool
+    raggedBottom =
+      pagePaper->getRaggeBottom ();
+
+  fLilypondCodeStream << left <<
+    setw (fieldWidth) <<
+    "ragged-bottom" << " = ";
+  if (raggedBottom) {
+    fLilypondCodeStream << "##t";
+  }
+  else {
+    fLilypondCodeStream << "##f";
+  }
+  fLilypondCodeStream << endl;
+
+  // ragged last bottom
+  Bool
+    raggedLastBottom =
+      pagePaper->getRaggedLastBottom ();
+
+  fLilypondCodeStream << left <<
+    setw (fieldWidth) <<
+    "ragged-last-bottom" << " = ";
+  if (raggedLastBottom) {
+    fLilypondCodeStream << "##t";
+  }
+  else {
+    fLilypondCodeStream << "##f";
+  }
+  fLilypondCodeStream << endl;
 }
 
 //________________________________________________________________________
@@ -7427,6 +7533,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
   }
 #endif
 
+  // should we set the repeat brackets type?
   if (gGlobalLpsr2lilypondOahGroup->getRepeatBrackets ()) {
     fLilypondCodeStream <<
       "\\context " "{" <<
@@ -7453,32 +7560,59 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
       endl;
   }
 
-//   if (false) {//  // JMI XXL
-//     fLilypondCodeStream <<
-//       "\\context {" <<
-//       endl;
-//
-//     ++gIndenter;
-//
-//     fLilypondCodeStream <<
-//       "\\Staff" <<
-//       endl <<
-//       "\\consists \"Span_arpeggio_engraver\"" <<
-//       endl;
-//
-//     --gIndenter;
-//
-//     fLilypondCodeStream <<
-//       "}" " % staff context";
-//
-//     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-//       fLilypondCodeStream << left <<
-//         setw (commentFieldWidth) <<
-//         " % layout";
-//     }
-//
-//     fLilypondCodeStream << endl;
-//   }
+  // should we set the bars number size?
+  S_oahFloatAtom
+    barNumbersSizeAtom =
+      gGlobalLpsr2lilypondOahGroup->getBarNumbersSizeAtom ();
+
+  if (barNumbersSizeAtom->getVariableHasBeenSet ()) {
+    fLilypondCodeStream <<
+      "\\context " "{" <<
+      endl;
+
+    ++gIndenter;
+
+    fLilypondCodeStream <<
+      "\\Score" <<
+      endl <<
+      "\\override BarNumber.font-size = " <<
+      barNumbersSizeAtom->getFloatVariable () <<
+      endl;
+
+    --gIndenter;
+
+    fLilypondCodeStream <<
+      "}" <<
+      endl;
+  }
+
+  // should we use an arpeggio engraver?
+  if (gGlobalLpsr2lilypondOahGroup->getConnectArpeggios ()) {
+    fLilypondCodeStream <<
+      "\\context {" <<
+      endl;
+
+    ++gIndenter;
+
+    fLilypondCodeStream <<
+      "\\Staff" <<
+      endl <<
+      "\\consists \"Span_arpeggio_engraver\"" <<
+      endl;
+
+    --gIndenter;
+
+    fLilypondCodeStream <<
+      "}" " % staff context";
+
+    if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+      fLilypondCodeStream << left <<
+        setw (commentFieldWidth) <<
+        " % layout";
+    }
+
+    fLilypondCodeStream << endl;
+  }
 
   --gIndenter; // incremented in visitStart (S_lpsrLayout& elt)
 
@@ -11764,6 +11898,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
   }
 #endif
 
+  // generate measure start comment if relevant
+  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+    fLilypondCodeStream << left <<
+      setw (commentFieldWidth) <<
+      "" <<
+      "% start of " <<
+      msrMeasureKindAsString (elt->getMeasureKind ()) <<
+      " measure " <<
+      measureNumber <<
+      ", line " << inputLineNumber <<
+      endl;
+
+    ++gIndenter; // decremented in visitEnd (S_msrMeasure& elt)
+  }
+
   // should we generate a box around this bar number?
   {
     set<int>::const_iterator
@@ -11771,7 +11920,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         gGlobalLpsr2lilypondOahGroup->
           getBoxAroundBarNumberSet ().find (measurePuristNumber);
 
-    if (it != gGlobalLpsr2lilypondOahGroup->getBoxAroundBarNumberSet ().end ()) {
+    if (
+      gGlobalLpsr2lilypondOahGroup->getBoxAroundAllBarNumbers ()
+        ||
+      it != gGlobalLpsr2lilypondOahGroup->getBoxAroundBarNumberSet ().end ()
+    ) {
       // yes, generate a box around the bar number
   #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
@@ -11797,7 +11950,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         gGlobalLpsr2lilypondOahGroup->
           getResetMeasureElementMeasureNumberMap ().find (measureNumber);
 
-    if (it != gGlobalLpsr2lilypondOahGroup->getResetMeasureElementMeasureNumberMap ().end ()) {
+    if (
+      it
+        !=
+      gGlobalLpsr2lilypondOahGroup->getResetMeasureElementMeasureNumberMap ().end ()
+    ) {
       // yes, reset measure number
       int lilypondMeasureNumber = (*it).second;
 
@@ -11855,19 +12012,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
   }
 #endif
 
-  // generate comment if relevant
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << left <<
-      setw (commentFieldWidth) <<
-      "" <<
-      "% start of " <<
-      msrMeasureKindAsString (elt->getMeasureKind ()) <<
-      " measure " <<
-      measureNumber <<
-      ", line " << inputLineNumber <<
-      endl;
+  // should we show the measure number???
+  set<string, int>::const_iterator
+    it =
+      gGlobalLpsr2lilypondOahGroup->
+        getShowNumbersAtMeasureSet ().find (measureNumber); //JMI variable
 
-    ++gIndenter; // decremented in visitEnd (S_msrMeasure& elt)
+  if (
+    it
+      !=
+    gGlobalLpsr2lilypondOahGroup->getShowNumbersAtMeasureSet ().end ()
+  ) {
+    // yes, display the measure number
+    fLilypondCodeStream <<
+      "\\once \\override Score.BarNumber.break-visibility = ##f" <<
+      endl;
   }
 
   // take this measure into account for counting
@@ -17923,36 +18082,36 @@ void lpsr2lilypondTranslator::generateNoteWedges (
       S_msrWedge wedge = (*i);
 
       switch (wedge->getWedgeKind ()) {
-        case msrWedge::kWedgeKindNone:
+        case msrWedgeKind::kWedgeKindNone:
           break;
 
-        case msrWedge::kWedgeCrescendo:
+        case msrWedgeKind::kWedgeCrescendo:
           switch (wedge->getWedgeNienteKind ()) {
-            case msrWedge::kWedgeNienteYes:
+            case msrWedgeNienteKind::kWedgeNienteYes:
               fLilypondCodeStream <<
                 endl <<
                 "\\once\\override Hairpin.circled-tip = ##t " <<
                 endl;
               break;
-            case msrWedge::kWedgeNienteNo:
+            case msrWedgeNienteKind::kWedgeNienteNo:
               break;
             } // switch
           break;
 
-        case msrWedge::kWedgeDecrescendo:
+        case msrWedgeKind::kWedgeDecrescendo:
           switch (wedge->getWedgeNienteKind ()) {
-            case msrWedge::kWedgeNienteYes:
+            case msrWedgeNienteKind::kWedgeNienteYes:
               fLilypondCodeStream <<
                 endl <<
                 "\\once\\override Hairpin.circled-tip = ##t " <<
                 endl;
               break;
-            case msrWedge::kWedgeNienteNo:
+            case msrWedgeNienteKind::kWedgeNienteNo:
               break;
             } // switch
           break;
 
-        case msrWedge::kWedgeStop:
+        case msrWedgeKind::kWedgeStop:
           break;
       } // switch
     } // for
@@ -18835,10 +18994,10 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       S_msrWedge wedge = (*i);
 
       switch (wedge->getWedgeKind ()) {
-        case msrWedge::kWedgeKindNone:
+        case msrWedgeKind::kWedgeKindNone:
           break;
 
-        case msrWedge::kWedgeCrescendo:
+        case msrWedgeKind::kWedgeCrescendo:
           switch (wedge->getWedgePlacementKind ()) {
             case msrPlacementKind::k_NoPlacement:
               break;
@@ -18855,7 +19014,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
             "\\< ";
           break;
 
-        case msrWedge::kWedgeDecrescendo:
+        case msrWedgeKind::kWedgeDecrescendo:
           switch (wedge->getWedgePlacementKind ()) {
             case msrPlacementKind::k_NoPlacement:
               break;
@@ -18872,7 +19031,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
             "\\> ";
           break;
 
-        case msrWedge::kWedgeStop:
+        case msrWedgeKind::kWedgeStop:
           fLilypondCodeStream <<
             "\\! ";
           break;
@@ -20329,15 +20488,15 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
       ++i
       ) {
       switch ((*i)->getWedgeKind ()) {
-        case msrWedge::kWedgeKindNone:
+        case msrWedgeKind::kWedgeKindNone:
           break;
-        case msrWedge::kWedgeCrescendo:
+        case msrWedgeKind::kWedgeCrescendo:
           fLilypondCodeStream << "\\< ";
           break;
-        case msrWedge::kWedgeDecrescendo:
+        case msrWedgeKind::kWedgeDecrescendo:
           fLilypondCodeStream << "\\> ";
           break;
-        case msrWedge::kWedgeStop:
+        case msrWedgeKind::kWedgeStop:
           fLilypondCodeStream << "\\! ";
           break;
       } // switch

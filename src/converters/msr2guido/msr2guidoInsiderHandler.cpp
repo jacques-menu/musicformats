@@ -32,10 +32,9 @@
 #include "displayOah.h"
 
 #include "mxsrOah.h"
-#include "msr2mxsrOah.h"
 #include "msrOah.h"
 #include "msr2msrOah.h"
-#include "mxsr2msrOah.h"
+#include "msr2mxsrOah.h"
 
 #include "oahEarlyOptions.h"
 
@@ -206,11 +205,6 @@ void msr2guidoInsiderHandler::createTheMsr2guidoOptionGroups (
   // create the MXSR OAH group
   appendGroupToHandler (
     createGlobalMxsrOahGroup ());
-
-  // create the mxsr2msr OAH group
-  appendGroupToHandler (
-    createGlobalMxsr2msrOahGroup (
-      this));
 
   // create the MSR OAH group
   appendGroupToHandler (
@@ -385,12 +379,6 @@ void msr2guidoInsiderHandler::enforceHandlerQuietness ()
 #endif
 
   gGlobalMsr2guidoInsiderOahGroup->
-    enforceGroupQuietness ();
-
-  gGlobalMxsrOahGroup->
-    enforceGroupQuietness ();
-
-  gGlobalMxsr2msrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsrOahGroup->

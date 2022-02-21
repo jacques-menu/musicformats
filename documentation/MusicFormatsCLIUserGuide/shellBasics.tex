@@ -219,3 +219,34 @@ ll ()
 \end{lstlisting}
 The options to \code{ls} may vary depending the on the \OS.
 
+% -------------------------------------------------------------------------
+\section{Scripts}
+% -------------------------------------------------------------------------
+
+A \shell\ script is a text file that can be executed using its name as a command. The first line tells which shell should be used to execute the commands in the remainder of the file, \code{sh} by default.
+
+This author uses scripts as the one below as handy interactive short-cuts. It groups commands to copy a \mxml\ file exported after scanning a PDF file to another file, convert the latter to \lily\ with \xmlToLy\ and open the result with \fresco\ to produce the PDF score:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > cat doBethena_SaxTenor.bash 
+#/bin/bash
+
+cp -p Bethena_SaxTenor_original.xml Bethena_SaxTenor.xml
+
+xml2ly -include  Bethena_SaxTenor_OptionsAndArguments.txt
+
+open Bethena_SaxTenor.ly
+\end{lstlisting}
+
+After creating the script file, make it executable:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > chmod +x doBethena_SaxTenor.bash
+
+jacquesmenu@macmini > ls -sal doBethena_SaxTenor.bash 
+8 -rwxr-xr-x@ 1 jacquesmenu  staff  154 Feb 20 07:46 doBethena_SaxTenor.bash
+\end{lstlisting}
+
+The script can then be executed with:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > ./doBethena_SaxTenor.bash 
+\end{lstlisting}
+

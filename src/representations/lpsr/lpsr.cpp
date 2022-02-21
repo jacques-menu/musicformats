@@ -26,7 +26,7 @@ void initializeLPSR ()
 
   if (! pPrivateThisMethodHasBeenRun) {
     // initialize
-    initializeLPSRBasicTypes ();
+    initializeLpsrBasicTypes ();
 
     pPrivateThisMethodHasBeenRun = true;
   }

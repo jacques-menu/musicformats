@@ -110,8 +110,6 @@ class EXP msr2guidoRegularHandler : public oahRegularHandler
 
     void                  createWarningAndErrorsRegularGroup ();
 
-    void                  createInputRegularGroup ();
-
     void                  createPresentationRegularGroup ();
 
     void                  createPartsRegularGroup ();

@@ -4741,21 +4741,21 @@ void msr2mxsrTranslator:: appendNoteWedges (
     for (i=noteWedges.begin (); i!=noteWedges.end (); ++i) {
       S_msrWedge wedge = (*i);
 
-      msrWedge::msrWedgeKind wedgeKind = wedge->getWedgeKind ();
+      msrWedgeKind wedgeKind = wedge->getWedgeKind ();
 
       string typeString;
 
       switch (wedgeKind) {
-        case msrWedge::kWedgeKindNone:
+        case msrWedgeKind::kWedgeKindNone:
           // should not occur
           break;
-        case msrWedge::kWedgeCrescendo:
+        case msrWedgeKind::kWedgeCrescendo:
           typeString = "crescendo";
           break;
-        case msrWedge::kWedgeDecrescendo:
+        case msrWedgeKind::kWedgeDecrescendo:
           typeString = "diminuendo";
           break;
-        case msrWedge::kWedgeStop:
+        case msrWedgeKind::kWedgeStop:
           typeString = "stop";
           break;
       } // switch
@@ -5131,7 +5131,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
     gGlobalMxsrOahGroup->getTraceForward ()
   ) {
     gLogStream <<
-      "Appendin a backup or forward to measure if needed, theMsrNote = " <<
+      "Appending a backup or forward to measure if needed, theMsrNote = " <<
       theMsrNote->asShortString () <<
       ", fCurrentCumulatedSkipsDurations: " << fCurrentCumulatedSkipsDurations <<
       ", previousMSRNote: ";
@@ -9125,7 +9125,7 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
       const map<string, msrDalSegno::msrDalSegnoKind>&
         converStringToDalSegnoMap =
           gGlobalMxsr2msrOahGroup->
-            getConverStringToMsrDalSegnoMap ();
+            getStringToDalSegnoKindMap ();
 
       map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
         it =

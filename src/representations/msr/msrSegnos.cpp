@@ -312,6 +312,8 @@ void msrDalSegno::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     "dalSegnoString" << " : \"" << fDalSegnoString << "\"" <<
+    endl <<
+    setw (fieldWidth) <<
     "staffNumber" << " : " << fStaffNumber <<
     endl <<
     setw (fieldWidth) <<

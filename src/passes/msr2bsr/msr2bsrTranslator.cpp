@@ -918,8 +918,8 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
 
   // let's go
 
-  bsrKey::bsrKeyKind theBsrKeyKind = bsrKey::kKeyKindNone;
-  int                numberOfAlterations = 0;
+  bsrKeyKind theBsrKeyKind = bsrKeyKind::kKeyKindNone;
+  int        numberOfAlterations = 0;
 
   switch (theMsrKeyKind) {
     case msrKeyKind::kKeyTraditional:
@@ -935,16 +935,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
           break;
         case msrSemiTonesPitchKind::kSTP_C_Flat:
           break;
+
         case msrSemiTonesPitchKind::kSTP_C_Natural:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindNaturals;
+              theBsrKeyKind = bsrKeyKind::kKeyKindNaturals;
               numberOfAlterations = 0;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 3;
               break;
             case msrModeKind::kModeIonian:
@@ -963,16 +964,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_C_Sharp:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 7;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 4;
               break;
             case msrModeKind::kModeIonian:
@@ -991,6 +993,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_C_DoubleSharp:
           break;
         case msrSemiTonesPitchKind::kSTP_C_TripleSharp:
@@ -1000,16 +1003,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
           break;
         case msrSemiTonesPitchKind::kSTP_D_DoubleFlat:
           break;
+
         case msrSemiTonesPitchKind::kSTP_D_Flat:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 5;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 8;
               break;
             case msrModeKind::kModeIonian:
@@ -1028,16 +1032,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_D_Natural:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 2;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 1;
               break;
             case msrModeKind::kModeIonian:
@@ -1056,6 +1061,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_D_Sharp:
           break;
         case msrSemiTonesPitchKind::kSTP_D_DoubleSharp:
@@ -1067,16 +1073,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
           break;
         case msrSemiTonesPitchKind::kSTP_E_DoubleFlat:
           break;
+
         case msrSemiTonesPitchKind::kSTP_E_Flat:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 3;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 6;
               break;
             case msrModeKind::kModeIonian:
@@ -1095,16 +1102,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_E_Natural:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 4;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 1;
               break;
             case msrModeKind::kModeIonian:
@@ -1123,6 +1131,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_E_Sharp:
         case msrSemiTonesPitchKind::kSTP_E_DoubleSharp:
           break;
@@ -1135,16 +1144,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
           break;
         case msrSemiTonesPitchKind::kSTP_F_Flat:
           break;
+
         case msrSemiTonesPitchKind::kSTP_F_Natural:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 1;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 4;
               break;
             case msrModeKind::kModeIonian:
@@ -1163,16 +1173,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_F_Sharp:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 6;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 3;
               break;
             case msrModeKind::kModeIonian:
@@ -1191,6 +1202,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_F_DoubleSharp:
           break;
         case msrSemiTonesPitchKind::kSTP_F_TripleSharp:
@@ -1202,16 +1214,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
           break;
         case msrSemiTonesPitchKind::kSTP_G_Flat:
           break;
+
         case msrSemiTonesPitchKind::kSTP_G_Natural:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 1;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 2;
               break;
             case msrModeKind::kModeIonian:
@@ -1230,6 +1243,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_G_Sharp:
           break;
         case msrSemiTonesPitchKind::kSTP_G_DoubleSharp:
@@ -1241,16 +1255,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
           break;
         case msrSemiTonesPitchKind::kSTP_A_DoubleFlat:
           break;
+
         case msrSemiTonesPitchKind::kSTP_A_Flat:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 4;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 7;
               break;
             case msrModeKind::kModeIonian:
@@ -1269,16 +1284,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_A_Natural:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 3;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindNaturals;
+              theBsrKeyKind = bsrKeyKind::kKeyKindNaturals;
               numberOfAlterations = 0;
               break;
             case msrModeKind::kModeIonian:
@@ -1297,6 +1313,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_A_Sharp:
           break;
         case msrSemiTonesPitchKind::kSTP_A_DoubleSharp:
@@ -1308,16 +1325,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
           break;
         case msrSemiTonesPitchKind::kSTP_B_DoubleFlat:
           break;
+
         case msrSemiTonesPitchKind::kSTP_B_Flat:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 2;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindFlats;
+              theBsrKeyKind = bsrKeyKind::kKeyKindFlats;
               numberOfAlterations = 5;
               break;
             case msrModeKind::kModeIonian:
@@ -1336,16 +1354,17 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_B_Natural:
           switch (mModeKind) {
             case msrModeKind::k_NoMode:
               break;
             case msrModeKind::kModeMajor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 5;
               break;
             case msrModeKind::kModeMinor:
-              theBsrKeyKind = bsrKey::kKeyKindSharps;
+              theBsrKeyKind = bsrKeyKind::kKeyKindSharps;
               numberOfAlterations = 2;
               break;
             case msrModeKind::kModeIonian:
@@ -1364,6 +1383,7 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
               break;
           } // switch
           break;
+
         case msrSemiTonesPitchKind::kSTP_B_Sharp:
           break;
         case msrSemiTonesPitchKind::kSTP_B_DoubleSharp:
@@ -1379,12 +1399,12 @@ void msr2bsrTranslator::visitStart (S_msrKey& elt)
   } // switch
 
   // create the BSR key
-  if (theBsrKeyKind == bsrKey::kKeyKindNone) {
+  if (theBsrKeyKind == bsrKeyKind::kKeyKindNone) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceKeys ()) {
       gLogStream <<
-        "MSR key kind is absent, ignoring '" <<
-        msrKeyKindAsString (theMsrKeyKind) <<
+        "BSR key kind is absent, ignoring '" <<
+        bsrKeyKindAsString (theBsrKeyKind) <<
         ", " <<
        msrSemiTonesPitchKindAsString (mSemiTonesPitchKind) <<
        endl;

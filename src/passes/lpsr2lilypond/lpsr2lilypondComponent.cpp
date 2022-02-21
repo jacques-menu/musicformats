@@ -69,6 +69,16 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
             "Added kVoiceKindDynamics to enum class msrVoiceKind"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.53"),
+          "February 21, 2022",
+          list<string> {
+            "Finalized paper options handling"
+          }
+      ));
   }
 
   return pPassComponent;

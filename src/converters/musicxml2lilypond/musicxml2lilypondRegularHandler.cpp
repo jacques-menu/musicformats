@@ -389,11 +389,22 @@ void xml2lyRegularHandler::createInputRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("ignore-musicxml-words", subGroup);
-// JMI  registerAtomInRegularSubgroup ("convert-tempos-to-rehearsal-marks-in-msr", subGroup);
-  registerAtomInRegularSubgroup ("convert-msr-words-to-rehearsal-marks", subGroup);
-// JMI  registerAtomInRegularSubgroup ("convert-words-to-tempo", subGroup);
 
-  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-bold", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-italic", subGroup);
+
+  registerAtomInRegularSubgroup ("place-musicxml-words-above", subGroup);
+  registerAtomInRegularSubgroup ("place-musicxml-words-below", subGroup);
+
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-rehearsal-mark", subGroup);
+
+//   registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
+
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-tempo", subGroup);
+
+// JMI  registerAtomInRegularSubgroup ("convert-musicxml-tempos-to-msr-rehearsal-marks", subGroup);
+
+  registerAtomInRegularSubgroup ("cubase", subGroup);
 }
 
 void xml2lyRegularHandler::createFilesRegularGroup ()
@@ -655,7 +666,6 @@ void xml2lyRegularHandler::createTimesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("cubase", subGroup);
   registerAtomInRegularSubgroup ("ignore-redundant-times", subGroup);
   registerAtomInRegularSubgroup ("numerical-time-signatures", subGroup);
 }
@@ -760,6 +770,7 @@ void xml2lyRegularHandler::createRestsRegularGroup ()
   registerAtomInRegularSubgroup ("delay-rests-slashes", subGroup);
 
   registerAtomInRegularSubgroup ("insert-page-break-after-measure", subGroup);
+  registerAtomInRegularSubgroup ("insert-line-break-after-measure", subGroup);
 
   registerAtomInRegularSubgroup ("coalesce-empty-measures", subGroup);
   registerAtomInRegularSubgroup ("compress-empty-measures-in-lilypond", subGroup);
@@ -1584,7 +1595,10 @@ void xml2lyRegularHandler::createOutputRegularGroup ()
 
   registerAtomInRegularSubgroup ("all-bar-numbers", subGroup);
   registerAtomInRegularSubgroup ("all-measure-numbers", subGroup);
-  registerAtomInRegularSubgroup ("generate-box-around-bar-number", subGroup);
+  registerAtomInRegularSubgroup ("show-measure-number-at", subGroup);
+  registerAtomInRegularSubgroup ("bar-numbers-size", subGroup);
+  registerAtomInRegularSubgroup ("generate-a-box-around-all-bar-numbers", subGroup);
+  registerAtomInRegularSubgroup ("generate-a-box-around-bar-number", subGroup);
   registerAtomInRegularSubgroup ("reset-measure-number", subGroup);
   registerAtomInRegularSubgroup ("original-measure-numbers", subGroup);
 

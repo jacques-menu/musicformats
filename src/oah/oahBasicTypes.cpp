@@ -6318,7 +6318,7 @@ void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
 //   os  <<
 //     fHandlerServiceName <<
 //     gIndenter.indentMultiLineString (
-// R"( supports two styles for this, see '-ovs, -optional-values-style' option.)") <<
+// R"( supports two styles for this, see '-optional-values-style' option, -ovs, .)") <<
 //     endl;
 //
 //   --gIndenter;

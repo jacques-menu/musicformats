@@ -1067,9 +1067,12 @@ class EXP lpsr2lilypondTranslator :
     // ------------------------------------------------------
     void                  generatePaper (S_lpsrPaper paper);
 
-    void                  fetchValuesFromPaperPageSize (
+    void                  fetchLengthValuesFromPaperPageSize (
                             S_lpsrPaper                     paper,
-                            list<pair<string, msrLength> >& nameValuePairsList);
+                            list<pair<string, msrLength> >& nameLengthValuePairsList);
+
+    void                  fetchBooleanValuesFromLpsrOptionsGroup (
+                            list<pair<string, Bool> >& nameBooleanValuePairsList);
 
     void                  generatePaperPageSize (
                             S_msrPageLayout   pageLayout,
@@ -1094,6 +1097,10 @@ class EXP lpsr2lilypondTranslator :
     void                  generatePaperCounts (
                             S_lpsrPaper       pagePaper,
                             msrLengthUnitKind defaultLengthUnit,
+                            int               fieldWidth);
+
+    void                  generatePaperBooleans (
+                            S_lpsrPaper       pagePaper,
                             int               fieldWidth);
 
     void                  generatePaperHeadersAndFooters (

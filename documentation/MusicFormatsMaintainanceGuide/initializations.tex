@@ -89,7 +89,7 @@ void initializeMSR ()
     initializeMsrRepresentationComponent ();
 
     // initialize
-    initializeMSRBasicTypes ();
+    initializeMsrBasicTypes ();
 
     pPrivateThisMethodHasBeenRun = true;
   }
@@ -103,7 +103,7 @@ void initializeMSR ()
 
 \msrBoth{msrBasicTypes} defines \function{initializeMSRBasicTypes} for this \initialization:
 \begin{lstlisting}[language=CPlusPlus]
-void initializeMSRBasicTypes ()
+void initializeMsrBasicTypes ()
 {
   // protect library against multiple initializations
   static Bool pPrivateThisMethodHasBeenRun (false);

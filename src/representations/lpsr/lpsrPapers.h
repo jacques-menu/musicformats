@@ -114,6 +114,17 @@ class EXP lpsrPaper : public lpsrElement
     int                   getSystemCount () const
                               { return fSystemCount; }
 
+    // booleans
+    void                  setRaggeBottom (Bool value)
+                              { fRaggedBottom = value; }
+    Bool                  getRaggeBottom () const
+                              { return fRaggedBottom; }
+
+    void                  setRaggedLastBottom (Bool value)
+                              { fRaggedLastBottom = value; }
+    Bool                  getRaggedLastBottom () const
+                              { return fRaggedLastBottom; }
+
     // headers and footers
     void                  setOddHeaderMarkup (string value)
                               { fOddHeaderMarkup = value; }
@@ -184,6 +195,10 @@ class EXP lpsrPaper : public lpsrElement
     // counts
     int                   fPageCount;
     int                   fSystemCount;
+
+    // booleans
+    Bool                  fRaggedBottom;
+    Bool                  fRaggedLastBottom;
 
     // headers and footers
     string                fOddHeaderMarkup;

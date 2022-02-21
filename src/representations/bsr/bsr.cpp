@@ -26,7 +26,7 @@ void initializeBSR ()
 
   if (! pPrivateThisMethodHasBeenRun) {
     // initialize
-    initializeBSRBasicTypes ();
+    initializeBsrBasicTypes ();
 
     pPrivateThisMethodHasBeenRun = true;
   }

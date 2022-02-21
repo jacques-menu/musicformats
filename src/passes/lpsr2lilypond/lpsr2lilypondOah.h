@@ -1354,6 +1354,20 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getShowAllBarNumbers () const
                               { return fShowAllBarNumbers; }
 
+    Bool                  getBoxAroundAllBarNumbers () const
+                              { return fBoxAroundAllBarNumbers; }
+
+    const set<string>&    getShowNumbersAtMeasureSet () const
+                              { return fShowNumbersAtMeasureSet; }
+
+    void                  setBarNumbersSize (int value)
+                              { fBarNumbersSize = value; }
+    float                 getBarNumbersSize () const
+                              { return fBarNumbersSize; }
+
+    S_oahFloatAtom        getBarNumbersSizeAtom () const
+                              { return fBarNumbersSizeAtom; }
+
     const set<int>&       getBoxAroundBarNumberSet () const
                               { return fBoxAroundBarNumberSet; }
 
@@ -1368,10 +1382,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // line breaks
     // --------------------------------------
 
-    void                  setIgnoreLPSRLineBreaks ()
-                              { fIgnoreLPSRLineBreaks = true; }
-    Bool                  getIgnoreLPSRLineBreaks () const
-                              { return fIgnoreLPSRLineBreaks; }
+    void                  setIgnoreLpsrLineBreaks ()
+                              { fIgnoreLpsrLineBreaks = true; }
+    Bool                  getIgnoreLpsrLineBreaks () const
+                              { return fIgnoreLpsrLineBreaks; }
 
     void                  setBreakLinesAtIncompleteRightMeasures ()
                               { fBreakLinesAtIncompleteRightMeasures = true; }
@@ -1389,10 +1403,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // page breaks
     // --------------------------------------
 
-    void                  setIgnoreLPSRPageBreaks ()
-                              { fIgnoreLPSRPageBreaks = true; }
-    Bool                  getIgnoreLPSRPageBreaks () const
-                              { return fIgnoreLPSRPageBreaks; }
+    void                  setIgnoreLpsrPageBreaks ()
+                              { fIgnoreLpsrPageBreaks = true; }
+    Bool                  getIgnoreLpsrPageBreaks () const
+                              { return fIgnoreLpsrPageBreaks; }
 
     const set<string>&    getBreakPageAfterMeasureNumberSet () const
                               { return fBreakPageAfterMeasureNumberSet; }
@@ -1874,6 +1888,13 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fShowAllBarNumbers;
 
+    set<string>           fShowNumbersAtMeasureSet;
+    S_oahStringSetAtom    fShowNumbersAtMeasureAtom;
+
+    float                 fBarNumbersSize;
+    S_oahFloatAtom        fBarNumbersSizeAtom;
+
+    Bool                  fBoxAroundAllBarNumbers;
     set<int>              fBoxAroundBarNumberSet;
 
     // bar number checks
@@ -1886,9 +1907,9 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // line breaks
     // --------------------------------------
 
-    Bool                  fIgnoreLPSRLineBreaks;
+    Bool                  fIgnoreLpsrLineBreaks;
     // this atom is used by the '-minimal' combined option
-    S_oahBooleanAtom      fIgnoreLPSRLineBreaksAtom;
+    S_oahBooleanAtom      fIgnoreLpsrLineBreaksAtom;
 
     Bool                  fBreakLinesAtIncompleteRightMeasures;
 
@@ -1899,9 +1920,9 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // page breaks
     // --------------------------------------
 
-    Bool                  fIgnoreLPSRPageBreaks;
+    Bool                  fIgnoreLpsrPageBreaks;
     // this atom is used by the '-minimal' combined option
-    S_oahBooleanAtom      fIgnoreLPSRPageBreaksAtom;
+    S_oahBooleanAtom      fIgnoreLpsrPageBreaksAtom;
 
     set<string>           fBreakPageAfterMeasureNumberSet;
 

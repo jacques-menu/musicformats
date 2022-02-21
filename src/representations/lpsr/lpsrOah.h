@@ -477,10 +477,10 @@ class EXP lpsrOahGroup : public oahGroup
     // --------------------------------------
 
     // convert tempos to rehearsal marks
-    void                  setConvertMusicXMLTemposToMSRRehearsalMarks ()
-                              { fConvertMusicXMLTemposToMSRRehearsalMarks = true; }
-    Bool                  getConvertMusicXMLTemposToMSRRehearsalMarks () const
-                              { return fConvertMusicXMLTemposToMSRRehearsalMarks; }
+    void                  setConvertMusicXMLTemposToMsrRehearsalMarks ()
+                              { fConvertMusicXMLTemposToMsrRehearsalMarks = true; }
+    Bool                  getConvertMusicXMLTemposToMsrRehearsalMarks () const
+                              { return fConvertMusicXMLTemposToMsrRehearsalMarks; }
 
     // words
     // --------------------------------------
@@ -677,7 +677,7 @@ class EXP lpsrOahGroup : public oahGroup
     // --------------------------------------
 
     // convert tempos to rehearsal marks
-    Bool                  fConvertMusicXMLTemposToMSRRehearsalMarks;
+    Bool                  fConvertMusicXMLTemposToMsrRehearsalMarks;
 
     // words
     // --------------------------------------

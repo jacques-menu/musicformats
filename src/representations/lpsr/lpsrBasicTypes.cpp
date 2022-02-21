@@ -1407,7 +1407,7 @@ string existingLpsrLyricsDurationsKinds (unsigned int namesListMaxLength)
 }
 
 //______________________________________________________________________________
-void initializeLPSRBasicTypes ()
+void initializeLpsrBasicTypes ()
 {
   // protect library against multiple initializations
   static Bool pPrivateThisMethodHasBeenRun (false);

@@ -110,8 +110,6 @@ class EXP msdl2lilypondRegularHandler : public oahRegularHandler
 
     void                  createWarningAndErrorsRegularGroup ();
 
-    void                  createInputRegularGroup ();
-
     void                  createPartsRegularGroup ();
     void                  createStavesRegularGroup ();
     void                  createVoicesRegularGroup ();

@@ -32,7 +32,6 @@
 
 #include "oahOah.h"
 
-#include "mxsr2msrOah.h" // ill-homed option??? JMI
 #include "msrOah.h"
 #include "msr2lpsrOah.h"
 #include "lpsrOah.h"
@@ -953,7 +952,11 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
   }
 
   // is the LilyPond macro 'boxAroundNextBarNumber' to be generated?
-  if (gGlobalLpsr2lilypondOahGroup->getBoxAroundBarNumberSet ().size ()) {
+  if (
+    gGlobalLpsr2lilypondOahGroup->getBoxAroundAllBarNumbers ()
+      ||
+    gGlobalLpsr2lilypondOahGroup->getBoxAroundBarNumberSet ().size ()
+  ) {
     fResultingLpsr->
       // this score needs the 'boxAroundNextBarNumber' Scheme function
       setBoxAroundNextBarNumberIsNeeded ();
@@ -3193,7 +3196,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
       break;
   } // switch
 
-  if (gGlobalLpsrOahGroup->getConvertMusicXMLTemposToMSRRehearsalMarks ()) {
+  if (gGlobalLpsrOahGroup->getConvertMusicXMLTemposToMsrRehearsalMarks ()) {
     // create a rehearsal mark containing elt's words
 
     S_msrRehearsal
@@ -4205,61 +4208,6 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
         appendRehearsalToVoice (rehearsal);
 
       wordsHasBeenHandled = true;
-    }
-
-    else {
-      string wordsContents = elt->getWordsContents ();
-
-      // is this words contents in the string to dal segno kind map?
-      const map<string, msrDalSegno::msrDalSegnoKind>&
-        converStringToDalSegnoMap =
-          gGlobalMxsr2msrOahGroup->
-            getConverStringToMsrDalSegnoMap ();
-
-      map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
-        it =
-          converStringToDalSegnoMap.find (wordsContents);
-
-      if (it != converStringToDalSegnoMap.end ()) {
-        // yes
-        msrDalSegno::msrDalSegnoKind
-          dalSegnoKind =
-            (*it).second;
-
-        // create a dal segno element containing elt's words contents
-        S_msrDalSegno
-          dalSegno =
-            msrDalSegno::create (
-              inputLineNumber,
-              dalSegnoKind,
-              wordsContents,
-              elt->getWordsStaffNumber ());
-
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceWords ()) {
-          gLogStream <<
-            "Converting words '" <<
-            elt->asShortString () <<
-            "' to dal segno element '" <<
-            dalSegno->asShortString () <<
-            "'" <<
-            endl;
-        }
-#endif
-
-        if (fOnGoingNonGraceNote) {
-          // append the words to the current non-grace note clone
-          fCurrentNonGraceNoteClone->
-            appendDalSegnoToNote (dalSegno);
-        }
-        else if (fOnGoingChord) {
-          // append the words to the current chord clone
-          fCurrentChordClone->
-            appendDalSegnoToChord (dalSegno);
-        }
-
-      wordsHasBeenHandled = true;
-      }
     }
 
     if (! wordsHasBeenHandled) {

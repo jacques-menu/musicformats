@@ -112,8 +112,6 @@ class EXP msdl2brailleRegularHandler : public oahRegularHandler
 
     void                  createWarningAndErrorsRegularGroup ();
 
-    void                  createInputRegularGroup ();
-
     void                  createPresentationRegularGroup ();
 
     void                  createPartsRegularGroup ();

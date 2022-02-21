@@ -281,7 +281,7 @@ class EXP msr2msrOahGroup : public oahGroup
 
     void                  initializeBookOptions ();
 
-    void                  initializePageBreakOptions ();
+    void                  initializeBreakOptions ();
 
     void                  initializeCompressOptions ();
 
@@ -321,9 +321,12 @@ class EXP msr2msrOahGroup : public oahGroup
     // book
     Bool                  fExpandToHarmonyBandBook;
 
-    // page breaks
+    // breaks
     set<string>           fInserPageBreakAfterMeasureSet;
     S_oahStringSetAtom    fInserPageBreakAfterMeasureAtom;
+
+    set<string>           fInserLineBreakAfterMeasureSet;
+    S_oahStringSetAtom    fInserLineBreakAfterMeasureAtom;
 
     // compress
     Bool                  fCoalesceEmptyMeasures;

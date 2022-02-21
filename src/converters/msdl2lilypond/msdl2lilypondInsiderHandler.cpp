@@ -37,8 +37,6 @@
 
 #include "msdl2msrOah.h"
 
-#include "mxsrOah.h"
-#include "mxsr2msrOah.h"
 #include "msrOah.h"
 #include "msr2lpsrOah.h"
 #include "lpsrOah.h"
@@ -243,15 +241,6 @@ void msdl2lilypondInsiderHandler::createTheMsdl2lyOptionGroups (
   // create the msdl2lilypond OAH group
   appendGroupToHandler (
     createGlobalMsdl2lyInsiderOahGroup ());
-
-  // create the MXSR OAH group
-  appendGroupToHandler (
-    createGlobalMxsrOahGroup ());
-
-  // create the mxsr2msr OAH group
-  appendGroupToHandler (
-    createGlobalMxsr2msrOahGroup (
-      this));
 
   // create the MSR OAH group
   appendGroupToHandler (

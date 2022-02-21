@@ -25,10 +25,9 @@
 #include "mfStringsHandling.h"
 
 #include "oahOah.h"
+#include "mxsr2msrOah.h"
 
 #include "oahEarlyOptions.h"
-
-#include "mxsr2msrOah.h"
 
 
 using namespace std;
@@ -36,298 +35,301 @@ using namespace std;
 namespace MusicFormats
 {
 
-//______________________________________________________________________________
-S_msrDalSegnoAtom msrDalSegnoAtom::create (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
-  map<string, msrDalSegno::msrDalSegnoKind>&
-                    stringToDalSegnoKindMapVariable)
-{
-  msrDalSegnoAtom* o = new
-    msrDalSegnoAtom (
-      longName,
-      shortName,
-      description,
-      valueSpecification,
-      variableName,
-      stringToDalSegnoKindMapVariable);
-  assert (o != nullptr);
-  return o;
-}
-
-msrDalSegnoAtom::msrDalSegnoAtom (
-  const string&     longName,
-  const string&     shortName,
-  const string&     description,
-  const string&     valueSpecification,
-  const string&     variableName,
-  map<string, msrDalSegno::msrDalSegnoKind>&
-                    stringToDalSegnoKindMapVariable)
-  : oahAtomStoringAValue (
-      longName,
-      shortName,
-      description,
-      valueSpecification,
-      variableName),
-    fStringToDalSegnoKindMapVariable (
-      stringToDalSegnoKindMapVariable)
-{
-  fMultipleOccurrencesAllowed = true;
-}
-
-msrDalSegnoAtom::~msrDalSegnoAtom ()
-{}
-
-void msrDalSegnoAtom::applyAtomWithValue (
-  const string& theString,
-  ostream&      os)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
-      "==> oahAtom is of type 'msrDalSegnoAtom'" <<
-      endl;
-  }
-#endif
-
-  // theString contains the dal segno specification
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
-      "==> oahAtom is of type 'msrDalSegnoAtom'" <<
-      endl;
-  }
-#endif
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-    gLogStream <<
-      "--> theString = \"" << theString << "\", " <<
-      endl;
-  }
-#endif
-
-  // is this part name in the part renaming map?
-  map<string, msrDalSegno::msrDalSegnoKind>::iterator
-    it =
-      fStringToDalSegnoKindMapVariable.find (theString);
-
-  if (it != fStringToDalSegnoKindMapVariable.end ()) {
-    // yes, issue error message
-    stringstream s;
-
-    s <<
-      "Dal segno value \"" << theString << "\" occurs more that once" <<
-      "in a '--convert-musicxml-words-to-msr-dal-segno' option";
-
-    oahError (s.str ());
-  }
-
-  else {
-    fStringToDalSegnoKindMapVariable [theString] = msrDalSegno::kDalSegno;
-  }
-}
-
-void msrDalSegnoAtom::acceptIn (basevisitor* v)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
-      ".\\\" ==> msrDalSegnoAtom::acceptIn ()" <<
-      endl;
-  }
-#endif
-
-  if (visitor<S_msrDalSegnoAtom>*
-    p =
-      dynamic_cast<visitor<S_msrDalSegnoAtom>*> (v)) {
-        S_msrDalSegnoAtom elem = this;
-
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
-            ".\\\" ==> Launching msrDalSegnoAtom::visitStart ()" <<
-            endl;
-        }
-#endif
-        p->visitStart (elem);
-  }
-}
-
-void msrDalSegnoAtom::acceptOut (basevisitor* v)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
-      ".\\\" ==> msrDalSegnoAtom::acceptOut ()" <<
-      endl;
-  }
-#endif
-
-  if (visitor<S_msrDalSegnoAtom>*
-    p =
-      dynamic_cast<visitor<S_msrDalSegnoAtom>*> (v)) {
-        S_msrDalSegnoAtom elem = this;
-
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
-            ".\\\" ==> Launching msrDalSegnoAtom::visitEnd ()" <<
-            endl;
-        }
-#endif
-        p->visitEnd (elem);
-  }
-}
-
-void msrDalSegnoAtom::browseData (basevisitor* v)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
-      ".\\\" ==> msrDalSegnoAtom::browseData ()" <<
-      endl;
-  }
-#endif
-}
-
-string msrDalSegnoAtom::asShortNamedOptionString () const
-{
-  stringstream s;
-
-  s <<
-    "-" << fShortName << " ";
-
-  if (! fStringToDalSegnoKindMapVariable.size ()) {
-    s << "empty";
-  }
-  else {
-    map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
-      iBegin = fStringToDalSegnoKindMapVariable.begin (),
-      iEnd   = fStringToDalSegnoKindMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      s << (*i).first << "=" << (*i).second;
-      if (++i == iEnd) break;
-      s << ",";
-    } // for
-  }
-
-  return s.str ();
-}
-
-string msrDalSegnoAtom::asActualLongNamedOptionString () const
-{
-  stringstream s;
-
-  s <<
-    "-" << fLongName << " ";
-
-  if (! fStringToDalSegnoKindMapVariable.size ()) {
-    s << "empty";
-  }
-  else {
-    map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
-      iBegin = fStringToDalSegnoKindMapVariable.begin (),
-      iEnd   = fStringToDalSegnoKindMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      s << (*i).first << "=" << (*i).second;
-      if (++i == iEnd) break;
-      s << ",";
-    } // for
-  }
-
-  return s.str ();
-}
-
-void msrDalSegnoAtom::print (ostream& os) const
-{
-  const int fieldWidth = K_OAH_FIELD_WIDTH;
-
-  os <<
-    "msrDalSegnoAtom:" <<
-    endl;
-
-  ++gIndenter;
-
-  printAtomWithVariableEssentials (
-    os, fieldWidth);
-
-  os << left <<
-    setw (fieldWidth) <<
-    "variableName" << " : " <<
-    fVariableName <<
-    setw (fieldWidth) <<
-    "fStringToDalSegnoKindMapVariable" << " : " <<
-    endl;
-
-  if (! fStringToDalSegnoKindMapVariable.size ()) {
-    os << "empty";
-  }
-  else {
-    map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
-      iBegin = fStringToDalSegnoKindMapVariable.begin (),
-      iEnd   = fStringToDalSegnoKindMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os <<
-        "\"" << (*i).first << "\"" <<
-        " --> " <<
-        "\"" << msrDalSegno::dalSegnoKindAsString ((*i).second) << "\"";
-      if (++i == iEnd) break;
-      os << endl;
-    } // for
-  }
-  os << endl;
-
-  --gIndenter;
-}
-
-void msrDalSegnoAtom::printAtomWithVariableOptionsValues (
-  ostream& os,
-  int      valueFieldWidth) const
-{
-  os << left <<
-    setw (valueFieldWidth) <<
-    fVariableName <<
-    " : ";
-
-  if (! fStringToDalSegnoKindMapVariable.size ()) {
-    os <<
-      "empty" <<
-      endl;
-  }
-  else {
-    os << endl;
-    ++gIndenter;
-
-    map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
-      iBegin = fStringToDalSegnoKindMapVariable.begin (),
-      iEnd   = fStringToDalSegnoKindMapVariable.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os <<
-        "\"" << (*i).first << "\"" <<
-        " --> " <<
-        "\"" << msrDalSegno::dalSegnoKindAsString ((*i).second) << "\"" <<
-        endl;
-      if (++i == iEnd) break;
-    } // for
-
-    --gIndenter;
-  }
-}
-
-ostream& operator<< (ostream& os, const S_msrDalSegnoAtom& elt)
-{
-  elt->print (os);
-  return os;
-}
+// //______________________________________________________________________________
+// S_mxsr2msrStringToDalSegnoKindAtom mxsr2msrStringToDalSegnoKindAtom::create (
+//   const string&     longName,
+//   const string&     shortName,
+//   const string&     description,
+//   const string&     valueSpecification,
+//   const string&     variableName,
+//   map<string, msrDalSegno::msrDalSegnoKind>&
+//                     stringToDalSegnoKindMapVariable)
+// {
+//   mxsr2msrStringToDalSegnoKindAtom* o = new
+//     mxsr2msrStringToDalSegnoKindAtom (
+//       longName,
+//       shortName,
+//       description,
+//       valueSpecification,
+//       variableName,
+//       stringToDalSegnoKindMapVariable);
+//   assert (o != nullptr);
+//   return o;
+// }
+//
+// mxsr2msrStringToDalSegnoKindAtom::mxsr2msrStringToDalSegnoKindAtom (
+//   const string&     longName,
+//   const string&     shortName,
+//   const string&     description,
+//   const string&     valueSpecification,
+//   const string&     variableName,
+//   map<string, msrDalSegno::msrDalSegnoKind>&
+//                     stringToDalSegnoKindMapVariable)
+//   : oahAtomStoringAValue (
+//       longName,
+//       shortName,
+//       description,
+//       valueSpecification,
+//       variableName),
+//     fStringToDalSegnoKindMapVariable (
+//       stringToDalSegnoKindMapVariable)
+// {
+//   fMultipleOccurrencesAllowed = true;
+// }
+//
+// mxsr2msrStringToDalSegnoKindAtom::~mxsr2msrStringToDalSegnoKindAtom ()
+// {}
+//
+// void mxsr2msrStringToDalSegnoKindAtom::applyAtomWithValue (
+//   const string& theString,
+//   ostream&      os)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+//     gLogStream <<
+//       "==> oahAtom is of type 'mxsr2msrStringToDalSegnoKindAtom'" <<
+//       endl;
+//   }
+// #endif
+//
+//   // theString contains the dal segno specification
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+//     gLogStream <<
+//       "==> oahAtom is of type 'mxsr2msrStringToDalSegnoKindAtom'" <<
+//       endl;
+//   }
+// #endif
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+//     gLogStream <<
+//       "--> theString = \"" << theString << "\", " <<
+//       endl;
+//   }
+// #endif
+//
+//   // is this part name in the part renaming map?
+//   map<string, msrDalSegno::msrDalSegnoKind>::iterator
+//     it =
+//       fStringToDalSegnoKindMapVariable.find (theString);
+//
+//   if (it != fStringToDalSegnoKindMapVariable.end ()) {
+//     // yes, issue error message
+//     stringstream s;
+//
+//     s <<
+//       "Dal segno value \"" << theString << "\" occurs more that once" <<
+//       "in  a " <<
+//       fetchNamesBetweenQuotes () <<
+//       " option";
+//
+//     oahError (s.str ());
+//   }
+//
+//   else {
+//     fStringToDalSegnoKindMapVariable [theString] =
+//       msrDalSegno::kDalSegno;
+//   }
+// }
+//
+// void mxsr2msrStringToDalSegnoKindAtom::acceptIn (basevisitor* v)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//     gLogStream <<
+//       ".\\\" ==> mxsr2msrStringToDalSegnoKindAtom::acceptIn ()" <<
+//       endl;
+//   }
+// #endif
+//
+//   if (visitor<S_mxsr2msrStringToDalSegnoKindAtom>*
+//     p =
+//       dynamic_cast<visitor<S_mxsr2msrStringToDalSegnoKindAtom>*> (v)) {
+//         S_mxsr2msrStringToDalSegnoKindAtom elem = this;
+//
+// #ifdef TRACING_IS_ENABLED
+//         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//           gLogStream <<
+//             ".\\\" ==> Launching mxsr2msrStringToDalSegnoKindAtom::visitStart ()" <<
+//             endl;
+//         }
+// #endif
+//         p->visitStart (elem);
+//   }
+// }
+//
+// void mxsr2msrStringToDalSegnoKindAtom::acceptOut (basevisitor* v)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//     gLogStream <<
+//       ".\\\" ==> mxsr2msrStringToDalSegnoKindAtom::acceptOut ()" <<
+//       endl;
+//   }
+// #endif
+//
+//   if (visitor<S_mxsr2msrStringToDalSegnoKindAtom>*
+//     p =
+//       dynamic_cast<visitor<S_mxsr2msrStringToDalSegnoKindAtom>*> (v)) {
+//         S_mxsr2msrStringToDalSegnoKindAtom elem = this;
+//
+// #ifdef TRACING_IS_ENABLED
+//         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//           gLogStream <<
+//             ".\\\" ==> Launching mxsr2msrStringToDalSegnoKindAtom::visitEnd ()" <<
+//             endl;
+//         }
+// #endif
+//         p->visitEnd (elem);
+//   }
+// }
+//
+// void mxsr2msrStringToDalSegnoKindAtom::browseData (basevisitor* v)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//     gLogStream <<
+//       ".\\\" ==> mxsr2msrStringToDalSegnoKindAtom::browseData ()" <<
+//       endl;
+//   }
+// #endif
+// }
+//
+// string mxsr2msrStringToDalSegnoKindAtom::asShortNamedOptionString () const
+// {
+//   stringstream s;
+//
+//   s <<
+//     "-" << fShortName << " ";
+//
+//   if (! fStringToDalSegnoKindMapVariable.size ()) {
+//     s << "empty";
+//   }
+//   else {
+//     map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
+//       iBegin = fStringToDalSegnoKindMapVariable.begin (),
+//       iEnd   = fStringToDalSegnoKindMapVariable.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       s << (*i).first << "=" << (*i).second;
+//       if (++i == iEnd) break;
+//       s << ",";
+//     } // for
+//   }
+//
+//   return s.str ();
+// }
+//
+// string mxsr2msrStringToDalSegnoKindAtom::asActualLongNamedOptionString () const
+// {
+//   stringstream s;
+//
+//   s <<
+//     "-" << fLongName << " ";
+//
+//   if (! fStringToDalSegnoKindMapVariable.size ()) {
+//     s << "empty";
+//   }
+//   else {
+//     map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
+//       iBegin = fStringToDalSegnoKindMapVariable.begin (),
+//       iEnd   = fStringToDalSegnoKindMapVariable.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       s << (*i).first << "=" << (*i).second;
+//       if (++i == iEnd) break;
+//       s << ",";
+//     } // for
+//   }
+//
+//   return s.str ();
+// }
+//
+// void mxsr2msrStringToDalSegnoKindAtom::print (ostream& os) const
+// {
+//   const int fieldWidth = K_OAH_FIELD_WIDTH;
+//
+//   os <<
+//     "mxsr2msrStringToDalSegnoKindAtom:" <<
+//     endl;
+//
+//   ++gIndenter;
+//
+//   printAtomWithVariableEssentials (
+//     os, fieldWidth);
+//
+//   os << left <<
+//     setw (fieldWidth) <<
+//     "variableName" << " : " <<
+//     fVariableName <<
+//     setw (fieldWidth) <<
+//     "fStringToDalSegnoKindMapVariable" << " : " <<
+//     endl;
+//
+//   if (! fStringToDalSegnoKindMapVariable.size ()) {
+//     os << "empty";
+//   }
+//   else {
+//     map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
+//       iBegin = fStringToDalSegnoKindMapVariable.begin (),
+//       iEnd   = fStringToDalSegnoKindMapVariable.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os <<
+//         "\"" << (*i).first << "\"" <<
+//         " --> " <<
+//         "\"" << msrDalSegno::dalSegnoKindAsString ((*i).second) << "\"";
+//       if (++i == iEnd) break;
+//       os << endl;
+//     } // for
+//   }
+//   os << endl;
+//
+//   --gIndenter;
+// }
+//
+// void mxsr2msrStringToDalSegnoKindAtom::printAtomWithVariableOptionsValues (
+//   ostream& os,
+//   int      valueFieldWidth) const
+// {
+//   os << left <<
+//     setw (valueFieldWidth) <<
+//     fVariableName <<
+//     " : ";
+//
+//   if (! fStringToDalSegnoKindMapVariable.size ()) {
+//     os <<
+//       "empty" <<
+//       endl;
+//   }
+//   else {
+//     os << endl;
+//     ++gIndenter;
+//
+//     map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
+//       iBegin = fStringToDalSegnoKindMapVariable.begin (),
+//       iEnd   = fStringToDalSegnoKindMapVariable.end (),
+//       i      = iBegin;
+//     for ( ; ; ) {
+//       os <<
+//         "\"" << (*i).first << "\"" <<
+//         " --> " <<
+//         "\"" << msrDalSegno::dalSegnoKindAsString ((*i).second) << "\"" <<
+//         endl;
+//       if (++i == iEnd) break;
+//     } // for
+//
+//     --gIndenter;
+//   }
+// }
+//
+// ostream& operator<< (ostream& os, const S_mxsr2msrStringToDalSegnoKindAtom& elt)
+// {
+//   elt->print (os);
+//   return os;
+// }
 
 //______________________________________________________________________________
 S_msrReplaceClefAtom msrReplaceClefAtom::create (
@@ -473,7 +475,9 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
     s <<
       "Replace clef value \"" << theString << "\" occurs more that once" <<
-      "in a '--convert-musicxml-words-to-msr-dal-segno' option";
+      "in  a " <<
+      fetchNamesBetweenQuotes () <<
+      " option";
 
     oahError (s.str ());
   }
@@ -1450,7 +1454,7 @@ R"(Ignore words in MusicXML data.)",
 
   appendSubGroupToGroup (subGroup);
 
-  // ignore words
+  // ignore MusicXML words
 
   S_oahBooleanAtom
     ignoreMusicXMLWordsAtom =
@@ -1463,54 +1467,105 @@ R"(Ignore '<words />' in MusicXML data.)",
     appendAtomToSubGroup (
       ignoreMusicXMLWordsAtom);
 
-  // convert MusicXML words to tempo
+  // convert words to bold
+
+  fBoldWordsAtom =
+    oahStringSetAtom::create (
+      "convert-musicxml-words-to-bold", "bold-words",
+R"(Convert MusicXML words STRING to bold.
+There can be several occurrences of this option.)",
+      "STRING",
+      "fBoldWordsSet",
+      fBoldWordsSet);
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "convert-musicxml-words-to-msr-tempos", "cmwtmt",
-R"(Convert MusicXML words to MSR tempos.
-This may come in handy when MusicXML data has been obtained
-from scanned instrumental music images.)",
-        "fConvertMusicXMLWordsToMSRTempos",
-        fConvertMusicXMLWordsToMSRTempos));
+      fBoldWordsAtom);
 
-  // convert MusicXML words to MSR dal segnos
+  // convert words to italic
+
+  fItalicWordsAtom =
+    oahStringSetAtom::create (
+      "convert-musicxml-words-to-italic", "italic-words",
+R"(Convert MusicXML words STRING to italic.
+There can be several occurrences of this option.)",
+      "STRING",
+      "fItalicWordsSet",
+      fItalicWordsSet);
 
   subGroup->
     appendAtomToSubGroup (
-      msrDalSegnoAtom::create (
-        "convert-musicxml-words-to-msr-dal-segnos", "cmwtmds",
-R"(Convert MusicXML words element STRING to an MSR 'dal segno'.)",
-        "STRING",
-        "fConverStringToMsrDalSegnoMap",
-        fConverStringToMsrDalSegnoMap));
+      fItalicWordsAtom);
+
+  // place words above
+
+  fWordsToBePlacedAboveAtom =
+    oahStringSetAtom::create (
+      "place-musicxml-words-above", "words-above",
+R"(Place MusicXML words STRING above the staff.
+There can be several occurrences of this option.)",
+      "STRING",
+      "fWordsToBePlacedAboveSet",
+      fWordsToBePlacedAboveSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fWordsToBePlacedAboveAtom);
+
+  // place words below
+
+  fWordsToBePlacedBelowAtom =
+    oahStringSetAtom::create (
+      "place-musicxml-words-below", "words-below",
+R"(Place MusicXML words STRING below the staff.
+There can be several occurrences of this option.)",
+      "STRING",
+      "fWordsToBePlacedBelowSet",
+      fWordsToBePlacedBelowSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fWordsToBePlacedBelowAtom);
+
+  // convert MusicXML words to MSR tempos
+
+  fWordsToTempoAtom =
+    oahStringSetAtom::create (
+      "convert-musicxml-words-to-msr-tempo", "words-to-tempo",
+R"(Convert MusicXML words STRING to an MSR tempo.
+There can be several occurrences of this option.)",
+      "STRING",
+      "fWordsToTemposSet",
+      fWordsToTemposSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fWordsToTempoAtom);
 
   // convert MusicXML words to MSR rehearsal marks
 
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "convert-musicxml-words-to-msr-rehearsal-marks", "cmwtmrm",
-R"(Convert MSR words to rehearsal marks.
-This may come in handy when MusicXML data has been obtained
-from scanned instrumental music images.)",
-        "fConvertMusicXMLWordsToMSRRehearsalMarks",
-        fConvertMusicXMLWordsToMSRRehearsalMarks));
-
-  // convert MusicXML tempos to rehearsal marks
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "convert-musicxml-tempos-to-msr-rehearsal-marks", "cttrmim",
-R"(Convert MusicXML tempos to MSR rehearsal marks.
-This may come in handy when MusicXML data has been obtained
-from scanned instrumental music images.)",
-        "fConvertMusicXMLTemposToMSRRehearsalMarks",
-        fConvertMusicXMLTemposToMSRRehearsalMarks));
+      oahStringSetAtom::create (
+        "convert-musicxml-words-to-msr-rehearsal-mark", "words-to-rehearsal",
+  R"(Convert MusicXML words STRING to an MSR rehearsal mark.
+  There can be several occurrences of this option.)",
+        "STRING",
+        "fWordsToRehearsalMarkSet",
+        fWordsToRehearsalMarkSet));
 
 /* JMI
+//   // convert MusicXML words to MSR dal segnos
+//
+//   subGroup->
+//     appendAtomToSubGroup (
+//       mxsr2msrStringToDalSegnoKindAtom::create (
+//         "convert-musicxml-words-to-msr-dal-segno", "cmwtmds",
+// R"(Convert MusicXML words element STRING to an MSR 'dal segno'.)",
+//         "STRING",
+//         "fStringToDalSegnoKindMap",
+//         fStringToDalSegnoKindMap));
+
   // convert MusicXMLwords to dal segno
 
   subGroup->
@@ -1570,6 +1625,18 @@ The default is 'DEFAULT_VALUE'.)",
     map<string, msrDalSegno::msrDalSegnoKind>
                           fConvertMsrWordsToDalSegno;
                           */
+
+//   // convert MusicXML tempos to rehearsal marks
+//
+//   subGroup->
+//     appendAtomToSubGroup (
+//       oahBooleanAtom::create (
+//         "convert-musicxml-tempos-to-msr-rehearsal-marks", "cttrmim",
+// R"(Convert MusicXML tempos to MSR rehearsal marks.
+// This may come in handy when MusicXML data has been obtained
+// from scanned instrumental music images.)",
+//         "fConvertMusicXMLTemposToMsrRehearsalMarks",
+//         fConvertMusicXMLTemposToMsrRehearsalMarks));
 
   // add words from the MusicXML lyrics
 
@@ -1675,6 +1742,140 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 
     oahError (s.str ());
   }
+}
+
+//______________________________________________________________________________
+Bool mxsr2msrOahGroup::wordsIsToBeConvertedToBold (
+  const string& wordsValue)
+{
+  Bool result;
+
+  // is wordsValue in the string to dal segno kind map?
+  if (fBoldWordsSet.size ()) {
+    set<string>::const_iterator
+      it =
+        fBoldWordsSet.find (wordsValue);
+
+    if (it != fBoldWordsSet.end ()) {
+      // register wordsValue as to be converted
+// JMI      fWordsToBeConvertedSet.insert (wordsValue);
+
+      result = true;
+    }
+  }
+
+  return result;
+}
+
+Bool mxsr2msrOahGroup::wordsIsToBeConvertedToItalic (
+  const string& wordsValue)
+{
+  Bool result;
+
+  // is wordsValue in the string to dal segno kind map?
+  if (fItalicWordsSet.size ()) {
+    set<string>::const_iterator
+      it =
+        fItalicWordsSet.find (wordsValue);
+
+    if (it != fItalicWordsSet.end ()) {
+      // register wordsValue as to be converted
+// JMI      fWordsToBeConvertedSet.insert (wordsValue);
+
+      result = true;
+    }
+  }
+
+  return result;
+}
+
+Bool mxsr2msrOahGroup::wordsIsToBePlacedAbove (
+  const string& wordsValue)
+{
+  Bool result;
+
+  // is wordsValue in the string to dal segno kind map?
+  if (fWordsToBePlacedAboveSet.size ()) {
+    set<string>::const_iterator
+      it =
+        fWordsToBePlacedAboveSet.find (wordsValue);
+
+    if (it != fWordsToBePlacedAboveSet.end ()) {
+      // register wordsValue as to be converted
+// JMI      fWordsToBeConvertedSet.insert (wordsValue);
+
+      result = true;
+    }
+  }
+
+  return result;
+}
+
+Bool mxsr2msrOahGroup::wordsIsToBePlacedBelow (
+  const string& wordsValue)
+{
+  Bool result;
+
+  // is wordsValue in the string to dal segno kind map?
+  if (fWordsToBePlacedBelowSet.size ()) {
+    set<string>::const_iterator
+      it =
+        fWordsToBePlacedBelowSet.find (wordsValue);
+
+    if (it != fWordsToBePlacedBelowSet.end ()) {
+      // register wordsValue as to be converted
+// JMI      fWordsToBeConvertedSet.insert (wordsValue);
+
+      result = true;
+    }
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
+Bool mxsr2msrOahGroup::wordsIsToBeConvertedToTempo (
+  const string& wordsValue)
+{
+  Bool result;
+
+  // is wordsValue in the string to dal segno kind map?
+  if (fWordsToTemposSet.size ()) {
+    set<string>::const_iterator
+      it =
+        fWordsToTemposSet.find (wordsValue);
+
+    if (it != fWordsToTemposSet.end ()) {
+      // register wordsValue as to be converted
+      fWordsToBeConvertedSet.insert (wordsValue);
+
+      result = true;
+    }
+  }
+
+  return result;
+}
+
+Bool mxsr2msrOahGroup::wordsIsToBeConvertedToRehearsalMark (
+  const string& wordsValue)
+{
+  Bool result;
+
+  // is wordsValue in the string to dal segno kind map?
+  if (fWordsToRehearsalMarkSet.size ()) {
+    set<string>::const_iterator
+      it =
+        fWordsToRehearsalMarkSet.find (wordsValue);
+
+    if (it != fWordsToRehearsalMarkSet.end ()) {
+      // register wordsValue as to be converted
+      fWordsToBeConvertedSet.insert (wordsValue);
+
+      result = true;
+    }
+  }
+
+  return result;
 }
 
 //______________________________________________________________________________
@@ -2011,21 +2212,6 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
     endl <<
 
     setw (valueFieldWidth) <<
-    "fConvertMusicXMLWordsToMSRTempos" << " : " <<
-    fConvertMusicXMLWordsToMSRTempos <<
-    endl <<
-
-    setw (valueFieldWidth) <<
-    "fConvertMusicXMLWordsToMSRRehearsalMarks" << " : " <<
-    fConvertMusicXMLWordsToMSRRehearsalMarks <<
-    endl <<
-
-    setw (valueFieldWidth) <<
-    "fConvertMusicXMLTemposToMSRRehearsalMarks" << " : " <<
-    fConvertMusicXMLTemposToMSRRehearsalMarks <<
-    endl <<
-
-    setw (valueFieldWidth) <<
     "fAddMsrWordsFromTheMusicXMLLyrics" << " : " <<
     fAddMsrWordsFromTheMusicXMLLyrics <<
     endl;
@@ -2231,3 +2417,53 @@ S_mxsr2msrOahGroup createGlobalMxsr2msrOahGroup (
 
 
 }
+
+
+/*
+    // is wordsValue in the string to dal segno kind map?
+    const map<string, msrDalSegno::msrDalSegnoKind>&
+      converStringToDalSegnoMap =
+        gGlobalMxsr2msrOahGroup->
+          getStringToDalSegnoKindMap ();
+
+    if (converStringToDalSegnoMap.size ()) {
+      map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
+        it =
+          converStringToDalSegnoMap.find (wordsValue);
+
+      if (it != converStringToDalSegnoMap.end ()) {
+        // yes, get dal segno kind
+        msrDalSegno::msrDalSegnoKind
+          dalSegnoKind =
+            (*it).second;
+
+        // create a dal segno element containing wordsValue
+        S_msrDalSegno
+          dalSegno =
+            msrDalSegno::create (
+              inputLineNumber,
+              dalSegnoKind,
+              wordsValue,
+              fCurrentDirectionStaffNumber);
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalTracingOahGroup->getTraceWords () || gGlobalTracingOahGroup->getTraceDalSegnos ()) {
+          gLogStream <<
+            "Converting words '" <<
+            wordsValue <<
+            "' to dal segno element '" <<
+            dalSegno->asString () <<
+            "'" <<
+            ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+            ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+            ", line " << inputLineNumber <<
+            endl;
+        }
+#endif
+
+        fPendingDalSegnosList.push_back (dalSegno);
+
+        wordsHasBeenHandled = true;
+      }
+    }
+*/

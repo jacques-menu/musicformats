@@ -2235,7 +2235,7 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
   }
 #endif
 
-//   if (gGlobalMsr2msrOahGroup->getConvertMusicXMLTemposToMSRRehearsalMarks ()) { JMI ???
+//   if (gGlobalMsr2msrOahGroup->getConvertMusicXMLTemposToMsrRehearsalMarks ()) { JMI ???
 //     // create a rehearsal mark containing elt's words
 //
 //     S_msrRehearsal
@@ -3086,7 +3086,7 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
   if (fOnGoingNonGraceNote || fOnGoingChord) {
     Bool wordsHasBeenHandled;
 
-//     if (gGlobalMsr2msrOahGroup->getConvertMusicXMLWordsToMSRTempos ()) { // JMI ???
+//     if (gGlobalMsr2msrOahGroup->getConvertMusicXMLWordsToMsrTempos ()) { // JMI ???
 //       // create a tempo containing elt
 //       S_msrTempo
 //         tempo =
@@ -5851,7 +5851,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //       const map<string, msrDalSegno::msrDalSegnoKind>&
 //         converStringToDalSegnoMap =
 //           gGlobalMsr2msrOahGroup->
-//             getConverStringToMsrDalSegnoMap ();
+//             getStringToDalSegnoKindMap ();
 //
 //       map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
 //         it = converStringToDalSegnoMap.find (wordsContents);

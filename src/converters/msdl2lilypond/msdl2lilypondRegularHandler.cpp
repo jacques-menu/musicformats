@@ -108,8 +108,6 @@ void msdl2lilypondRegularHandler::createRegularHandlerGroups ()
 
   createWarningAndErrorsRegularGroup ();
 
-  createInputRegularGroup ();
-
   createPartsRegularGroup ();
   createStavesRegularGroup ();
   createVoicesRegularGroup ();
@@ -344,42 +342,6 @@ void msdl2lilypondRegularHandler::createWarningAndErrorsRegularGroup ()
 
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
-}
-
-void msdl2lilypondRegularHandler::createInputRegularGroup ()
-{
-  // group
-
-  S_oahGroup
-    group =
-      oahGroup::create (
-        "Input group",
-        "help-input-group", "hinput-group",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole);
-  appendGroupToRegulalHandler (group);
-
-  // subgroup
-
-  S_oahSubGroup
-    subGroup =
-      oahSubGroup::create (
-        "Input",
-        "help-input", "hinput",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole,
-        group);
-  group->
-    appendSubGroupToGroup (subGroup);
-
-  // atoms
-
-  registerAtomInRegularSubgroup ("ignore-musicxml-words", subGroup);
-  registerAtomInRegularSubgroup ("convert-tempos-to-rehearsal-marks-in-msr", subGroup);
-  registerAtomInRegularSubgroup ("convert-msr-words-to-rehearsal-marks", subGroup);
-  registerAtomInRegularSubgroup ("convert-words-to-tempo", subGroup);
-
-  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
 }
 
 void msdl2lilypondRegularHandler::createFilesRegularGroup ()
@@ -638,7 +600,6 @@ void msdl2lilypondRegularHandler::createTimesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("cubase", subGroup);
   registerAtomInRegularSubgroup ("ignore-redundant-times", subGroup);
   registerAtomInRegularSubgroup ("numerical-time-signatures", subGroup);
 }
@@ -743,6 +704,7 @@ void msdl2lilypondRegularHandler::createRestsRegularGroup ()
   registerAtomInRegularSubgroup ("delay-rests-slashes", subGroup);
 
   registerAtomInRegularSubgroup ("insert-page-break-after-measure", subGroup);
+  registerAtomInRegularSubgroup ("insert-line-break-after-measure", subGroup);
 
   registerAtomInRegularSubgroup ("coalesce-empty-measures", subGroup);
   registerAtomInRegularSubgroup ("compress-empty-measures-in-lilypond", subGroup);
@@ -1569,7 +1531,10 @@ void msdl2lilypondRegularHandler::createOutputRegularGroup ()
 
   registerAtomInRegularSubgroup ("all-bar-numbers", subGroup);
   registerAtomInRegularSubgroup ("all-measure-numbers", subGroup);
-  registerAtomInRegularSubgroup ("generate-box-around-bar-number", subGroup);
+  registerAtomInRegularSubgroup ("show-measure-number-at", subGroup);
+  registerAtomInRegularSubgroup ("bar-numbers-size", subGroup);
+  registerAtomInRegularSubgroup ("generate-a-box-around-all-bar-numbers", subGroup);
+  registerAtomInRegularSubgroup ("generate-a-box-around-bar-number", subGroup);
   registerAtomInRegularSubgroup ("reset-measure-number", subGroup);
   registerAtomInRegularSubgroup ("original-measure-numbers", subGroup);
 

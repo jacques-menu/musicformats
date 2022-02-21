@@ -38,7 +38,6 @@
 
 // MXSR
 #include "mxsrOah.h"
-#include "mxsr2msrOah.h"
 #include "msr2mxsrOah.h"
 
 // MSR
@@ -690,9 +689,6 @@ void LilyPondIssue34InsiderHandler::enforceHandlerQuietness ()
     enforceGroupQuietness ();
 
   gGlobalMxsrOahGroup->
-    enforceGroupQuietness ();
-
-  gGlobalMxsr2msrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsrOahGroup->

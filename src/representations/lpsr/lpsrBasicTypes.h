@@ -201,7 +201,7 @@ void initializeLpsrLyricsDurationsKindsMap ();
 
 // initialization
 //______________________________________________________________________________
-void initializeLPSRBasicTypes ();
+void initializeLpsrBasicTypes ();
 
 
 } // namespace MusicFormats

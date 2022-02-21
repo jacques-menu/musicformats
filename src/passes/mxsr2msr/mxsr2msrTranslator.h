@@ -1627,7 +1627,7 @@ class EXP mxsr2msrTranslator :
     msrFiguredBassElement::msrFiguredBassElementParenthesesKind
                               fCurrentFiguredBassParenthesesKind;
 
-    list<S_msrBassFigure>         fPendingFiguredBassFiguresList;
+    list<S_msrBassFigure>     fPendingFiguredBassFiguresList;
 
     // frames handling
     // ------------------------------------------------------

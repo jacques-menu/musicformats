@@ -26,7 +26,7 @@ void initializeMSR ()
 
   if (! pPrivateThisMethodHasBeenRun) {
     // initialize
-    initializeMSRBasicTypes ();
+    initializeMsrBasicTypes ();
 
     pPrivateThisMethodHasBeenRun = true;
   }

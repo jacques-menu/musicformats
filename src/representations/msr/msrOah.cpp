@@ -411,8 +411,9 @@ void msrRenamePartAtom::applyAtomWithValue (
     stringstream s;
 
     s <<
-      "Part \"" << oldPartName << "\" occurs more that once" <<
-      "in the '--rename-part' option";
+      "Part \"" << oldPartName << "\" occurs more that once in the " <<
+      fetchNamesBetweenQuotes () <<
+      " option";
 
     oahError (s.str ());
   }

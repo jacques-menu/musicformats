@@ -95,6 +95,16 @@ EXP S_mfcConverterComponent createMusicxml2lilypondConverterComponent ()
           }
       ));
 
+    pConverterComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.53"),
+          "February 21, 2022",
+          list<string> {
+            "Added options for LilyPond generation of words"
+          }
+      ));
+
     populateMultiComponent ();
 }
 

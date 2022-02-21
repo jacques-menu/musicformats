@@ -386,8 +386,9 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
     stringstream s;
 
     s <<
-      "Part name \"" << partName << "\" occurs more that once" <<
-      " in the '-lilypond-transpose-part' option";
+      "Part name \"" << partName << "\" occurs more that once in the " <<
+      fetchNamesBetweenQuotes () <<
+      " option";
 
     oahError (s.str ());
   }
@@ -735,8 +736,9 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
     stringstream s;
 
     s <<
-      "Part ID \"" << partID << "\" occurs more that once" <<
-      " in the '-lilypond-transpose-part' option";
+      "Part ID \"" << partID << "\" occurs more that once in the " <<
+      fetchNamesBetweenQuotes () <<
+      " option";
 
     oahError (s.str ());
   }
@@ -3659,7 +3661,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // all bar numbers
+  // show all bar numbers
   // --------------------------------------
 
   S_oahBooleanAtom
@@ -3673,7 +3675,7 @@ R"(Generate LilyPond code to show all bar numbers.)",
   subGroup->
     appendAtomToSubGroup (allBarNumbersAtom);
 
-  // all measure numbers
+  // show measure numbers
   // --------------------------------------
 
   subGroup->
@@ -3684,7 +3686,23 @@ R"(Generate LilyPond code to show all measure numbers.
 This option is a alias for '-abn, -all-bar-numbers'.)",
         allBarNumbersAtom));
 
+  // show measure number at
+  // --------------------------------------
+
+  fShowNumbersAtMeasureAtom =
+    oahStringSetAtom::create (
+      "show-measure-number-at", "smna",
+R"(Generate LilyPond code to show the measure number at measure MEASURE_NUMBER.)",
+      "MEASURE_NUMBER",
+      "fShowNumbersAtMeasureSet",
+      fShowNumbersAtMeasureSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fShowNumbersAtMeasureAtom);
+
   // reset measure number
+  // --------------------------------------
 
   subGroup->
     appendAtomToSubGroup (
@@ -3707,14 +3725,28 @@ There can be several occurrences of this option.)",
         "fResetMeasureElementMeasureNumberMap",
         fResetMeasureElementMeasureNumberMap));
 
-  // generate box around bar number
+  // generate a box around all bar numbers
+  // --------------------------------------
+
+  S_oahBooleanAtom
+    generateABoxAroundAllBarNumbers =
+      oahBooleanAtom::create (
+        "generate-a-box-around-all-bar-numbers", "gabaabn",
+R"(Generate LilyPond code to show a box around all bar numbers.)",
+        "fBoxAroundAllBarNumbers",
+        fBoxAroundAllBarNumbers);
+
+  subGroup->
+    appendAtomToSubGroup (generateABoxAroundAllBarNumbers);
+
+  // generate a box around bar number
   // --------------------------------------
 
   S_oahIntSetAtom
-    generateBoxAroundBarNumber =
+    generateABoxAroundBarNumberAtom =
       oahIntSetAtom::create (
-        "generate-box-around-bar-number", "gbabn",
-R"(Generate a box around LilyPond purist bar number BAR_NUMBER,
+        "generate-a-box-around-bar-number", "gababn",
+R"(Generate a box around LilyPond bar number BAR_NUMBER, // purist JMI ???
 where BAR_NUMBER is an integer.
 This implies that bar numbers are centered on the bars.
 There can be several occurrences of this option.)",
@@ -3723,7 +3755,25 @@ There can be several occurrences of this option.)",
         fBoxAroundBarNumberSet);
 
   subGroup->
-    appendAtomToSubGroup (generateBoxAroundBarNumber);
+    appendAtomToSubGroup (
+      generateABoxAroundBarNumberAtom);
+
+  // bar numbers size
+  // --------------------------------------
+
+  fBarNumbersSizeAtom =
+    oahFloatAtom::create (
+      "bar-numbers-size", "bns",
+R"(Set the LilyPond bar numbers to SIZE, where SIZE is a floating number.
+The default is 0, -1 is smaller, +1 is bigger.
+Each step of 1 is approximately 12% larger; 6 steps are exactly a factor of 2.)",
+      "SIZE",
+      "fBarNumbersSize",
+      fBarNumbersSize);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fBarNumbersSizeAtom);
 
   // bar number checks
   // --------------------------------------
@@ -3758,17 +3808,17 @@ R"()",
 
   // JMI fBreakLinesAtIncompleteRightMeasures = false; // ??? forgotten ???
 
-  fIgnoreLPSRLineBreaksAtom =
+  fIgnoreLpsrLineBreaksAtom =
     oahBooleanAtom::create (
       "ignore-lpsr-line-breaks", "ilplb",
 R"(Suppress the line breaks from the LPSR data - let LilyPond decide about them,
 and don't generate an empty \myBreak.)",
-      "fIgnoreLPSRLineBreaks",
-      fIgnoreLPSRLineBreaks);
+      "fIgnoreLpsrLineBreaks",
+      fIgnoreLpsrLineBreaks);
 
   subGroup->
     appendAtomToSubGroup (
-      fIgnoreLPSRLineBreaksAtom);
+      fIgnoreLpsrLineBreaksAtom);
 
   subGroup->
     appendAtomToSubGroup (
@@ -3779,7 +3829,7 @@ which is handy in popular folk dances and tunes.)",
         "fBreakLinesAtIncompleteRightMeasures",
         fBreakLinesAtIncompleteRightMeasures));
 
-  fSeparatorLineEveryNMeasures = -1;
+  fSeparatorLineEveryNMeasures = -1; // JMI
 
   subGroup->
     appendAtomToSubGroup (
@@ -3823,17 +3873,17 @@ R"()",
   // page breaks
   // --------------------------------------
 
-  fIgnoreLPSRPageBreaksAtom =
+  fIgnoreLpsrPageBreaksAtom =
     oahBooleanAtom::create (
       "ignore-lpsr-page-breaks", "ilppb",
 R"(Suppress the page breaks from the LPSR data - let LilyPond decide about them,
 and don't generate an empty \myPageBreak.)",
-      "fIgnoreLPSRPageBreaks",
-      fIgnoreLPSRPageBreaks);
+      "fIgnoreLpsrPageBreaks",
+      fIgnoreLpsrPageBreaks);
 
   subGroup->
     appendAtomToSubGroup (
-      fIgnoreLPSRPageBreaksAtom);
+      fIgnoreLpsrPageBreaksAtom);
 
   // break page after measure number
   // --------------------------------------
@@ -4674,11 +4724,11 @@ meant to facilitate manual editing and completion of the result.)");
 
   minimalCombinedBooleansAtom->
     addBooleanAtom (
-      fIgnoreLPSRLineBreaksAtom);
+      fIgnoreLpsrLineBreaksAtom);
 
   minimalCombinedBooleansAtom->
     addBooleanAtom (
-      fIgnoreLPSRPageBreaksAtom);
+      fIgnoreLpsrPageBreaksAtom);
 }
 
 void lpsr2lilypondOahGroup::initializeLilypondGenerationOahGroup ()
@@ -5214,8 +5264,11 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << left <<
-    setw (valueFieldWidth) << "showAllBarNumbers" << " : " <<
+    setw (valueFieldWidth) << "fShowAllBarNumbers" << " : " <<
     fShowAllBarNumbers <<
+    endl <<
+    setw (valueFieldWidth) << "fBoxAroundAllBarNumbers" << " : " <<
+    fBoxAroundAllBarNumbers <<
     endl;
 
   os << left <<
@@ -5266,8 +5319,8 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << left <<
-    setw (valueFieldWidth) << "fIgnoreLPSRLineBreaks" << " : " <<
-      fIgnoreLPSRLineBreaks <<
+    setw (valueFieldWidth) << "fIgnoreLpsrLineBreaks" << " : " <<
+      fIgnoreLpsrLineBreaks <<
       endl <<
 
     setw (valueFieldWidth) << "fBreakLinesAtIncompleteRightMeasures" << " : " <<
@@ -5290,8 +5343,8 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   ++gIndenter;
 
   os << left <<
-    setw (valueFieldWidth) << "fIgnoreLPSRPageBreaks" << " : " <<
-    fIgnoreLPSRPageBreaks <<
+    setw (valueFieldWidth) << "fIgnoreLpsrPageBreaks" << " : " <<
+    fIgnoreLpsrPageBreaks <<
     endl;
 
   --gIndenter;
@@ -5834,6 +5887,9 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   gLogStream << left <<
     setw (fieldWidth) << "fShowAllBarNumbers" << " : " <<
     fShowAllBarNumbers <<
+    endl <<
+    setw (fieldWidth) << "fBoxAroundAllBarNumbers" << " : " <<
+    fBoxAroundAllBarNumbers <<
     endl;
 
   gLogStream << left <<
@@ -5884,8 +5940,8 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fIgnoreLPSRLineBreaks" << " : " <<
-      fIgnoreLPSRLineBreaks <<
+    setw (fieldWidth) << "fIgnoreLpsrLineBreaks" << " : " <<
+      fIgnoreLpsrLineBreaks <<
       endl <<
 
     setw (fieldWidth) << "fBreakLinesAtIncompleteRightMeasures" << " : " <<
@@ -5908,8 +5964,8 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fIgnoreLPSRPageBreaks" << " : " <<
-    fIgnoreLPSRPageBreaks <<
+    setw (fieldWidth) << "fIgnoreLpsrPageBreaks" << " : " <<
+    fIgnoreLpsrPageBreaks <<
     endl;
 
   --gIndenter;

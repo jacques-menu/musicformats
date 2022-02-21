@@ -30,9 +30,8 @@
 
 #include "oahOah.h"
 
-#include "msrOah.h"
-
 #include "mxsr2msrOah.h"
+#include "msrOah.h"
 
 #include "msrBrowsers.h"
 

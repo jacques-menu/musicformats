@@ -1721,8 +1721,8 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fConvertMusicXMLTemposToMSRRehearsalMarks" << " : " <<
-    fConvertMusicXMLTemposToMSRRehearsalMarks <<
+    setw (fieldWidth) << "fConvertMusicXMLTemposToMsrRehearsalMarks" << " : " <<
+    fConvertMusicXMLTemposToMsrRehearsalMarks <<
     endl << endl;
 
   --gIndenter;
