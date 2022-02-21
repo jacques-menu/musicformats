@@ -9,20 +9,20 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+enum class bsrKeyKind {
+  kKeyKindNone,
+  kKeyKindFlats, kKeyKindNaturals, kKeyKindSharps
+};
+
+string bsrKeyKindAsString (
+  bsrKeyKind keyKind);
+
+ostream& operator<< (ostream& os, bsrKeyKind& elt);
+
+//______________________________________________________________________________
 class EXP bsrKey : public bsrLineContentsElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum bsrKeyKind {
-      kKeyKindNone,
-      kKeyKindFlats, kKeyKindNaturals, kKeyKindSharps
-    };
-
-    static string msrKeyKindAsString (
-      bsrKeyKind keyKind);
 
     // creation
     // ------------------------------------------------------

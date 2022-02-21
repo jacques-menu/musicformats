@@ -55,7 +55,6 @@
 // MXSR
 #include "mxsrOah.h"
 #include "msr2mxsrOah.h"
-#include "mxsr2msrOah.h"
 #include "msr2mxsrOah.h"
 
 #include "msdl2musicxmlInsiderHandler.h"
@@ -818,12 +817,6 @@ void msdlConverterInsiderHandler::enforceHandlerQuietness ()
 #endif
 
   gGlobalmsdlConverterInsiderOahGroup->
-    enforceGroupQuietness ();
-
-  gGlobalMxsrOahGroup->
-    enforceGroupQuietness ();
-
-  gGlobalMxsr2msrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsrOahGroup->

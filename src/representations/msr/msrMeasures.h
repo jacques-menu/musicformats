@@ -323,9 +323,9 @@ class EXP msrMeasure : public msrElement
 
     // lengthes
 
-    string                fullMeasureWholeNotesDurationAsMSRString ();
+    string                fullMeasureWholeNotesDurationAsMsrString ();
 
-    string                currentMeasureWholeNotesDurationAsMSRString ();
+    string                currentMeasureWholeNotesDurationAsMsrString ();
 
     // backup and padding
 

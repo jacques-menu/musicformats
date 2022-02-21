@@ -248,6 +248,59 @@ ostream& operator<< (ostream& os, const S_msrOtherDynamic& elt)
 }
 
 //______________________________________________________________________________
+string wedgeKindAsString (
+  msrWedgeKind wedgeKind)
+{
+  string result;
+
+  switch (wedgeKind) {
+    case msrWedgeKind::kWedgeKindNone:
+      result = "kWedgeKindNone";
+      break;
+    case msrWedgeKind::kWedgeCrescendo:
+      result = "kWedgeCrescendo";
+      break;
+    case msrWedgeKind::kWedgeDecrescendo:
+      result = "kWedgeDecrescendo";
+      break;
+    case msrWedgeKind::kWedgeStop:
+      result = "kWedgeStop";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const msrWedgeKind& elt)
+{
+  os << wedgeKindAsString (elt);
+  return os;
+}
+
+string wedgeNienteKindAsString (
+  msrWedgeNienteKind wedgeNienteKind)
+{
+  string result;
+
+  switch (wedgeNienteKind) {
+    case msrWedgeNienteKind::kWedgeNienteYes:
+      result = "kWedgeNienteYes";
+      break;
+    case msrWedgeNienteKind::kWedgeNienteNo:
+      result = "kWedgeNienteNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const msrWedgeNienteKind& elt)
+{
+  os << wedgeNienteKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrWedge msrWedge::create (
   int                inputLineNumber,
   msrWedgeKind       wedgeKind,
@@ -282,45 +335,6 @@ msrWedge::msrWedge (
 
 msrWedge::~msrWedge ()
 {}
-
-string msrWedge::wedgeKindAsString () const
-{
-  string result;
-
-  switch (fWedgeKind) {
-    case msrWedge::kWedgeKindNone:
-      result = "wedgeKindNone";
-      break;
-    case msrWedge::kWedgeCrescendo:
-      result = "wedgeCrescendo";
-      break;
-    case msrWedge::kWedgeDecrescendo:
-      result = "wedgeDecrescendo";
-      break;
-    case msrWedge::kWedgeStop:
-      result = "wedgeStop";
-      break;
-  } // switch
-
-  return result;
-}
-
-string msrWedge::wedgeNienteKindAsString (
-  msrWedgeNienteKind wedgeNienteKind)
-{
-  string result;
-
-  switch (wedgeNienteKind) {
-    case msrWedge::kWedgeNienteYes:
-      result = "kWedgeNienteYes";
-      break;
-    case msrWedge::kWedgeNienteNo:
-      result = "kWedgeNienteNo";
-      break;
-  } // switch
-
-  return result;
-}
 
 void msrWedge::acceptIn (basevisitor* v)
 {
@@ -372,7 +386,7 @@ void msrWedge::browseData (basevisitor* v)
 void msrWedge::print (ostream& os) const
 {
   os <<
-    "[Wedge" " " << wedgeKindAsString () <<
+    "[Wedge" " " << fWedgeKind <<
     ", line " << fInputLineNumber <<
     endl;
 

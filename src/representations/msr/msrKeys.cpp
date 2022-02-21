@@ -548,7 +548,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
       "\"" <<
       endl <<
       "keyModeKind = \"" <<
-      msrModeKindAsString (keyModeKind) <<
+      keyModeKind <<
       "\"" <<
       endl;
   }
@@ -618,7 +618,7 @@ string msrKey::asString () const
 
   s <<
     "[Key " <<
-    msrKeyKindAsString (fKeyKind) <<
+    fKeyKind <<
     ", ";
 
   switch (fKeyKind) {
@@ -629,7 +629,7 @@ string msrKey::asString () const
           gGlobalMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
         " " <<
-        msrModeKindAsString (fModeKind);
+        fModeKind;
       break;
 
     case msrKeyKind::kKeyHumdrumScot:
@@ -662,7 +662,7 @@ string msrKey::asShortStringForMeasuresSlices () const
           gGlobalMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
         " " <<
-        msrModeKindAsString (fModeKind);
+        fModeKind;
       break;
 
     case msrKeyKind::kKeyHumdrumScot:
@@ -684,7 +684,7 @@ void msrKey::print (ostream& os) const
 {
   os <<
     "[Key" <<
-    ", " << msrKeyKindAsString (fKeyKind) <<
+    ", " << fKeyKind <<
     ",";
 
   switch (fKeyKind) {
@@ -696,7 +696,7 @@ void msrKey::print (ostream& os) const
           gGlobalMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
         " " <<
-        msrModeKindAsString (fModeKind) <<
+        fModeKind <<
         ", line " << fInputLineNumber;
       break;
 

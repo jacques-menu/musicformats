@@ -171,29 +171,29 @@ typedef SMARTP<msrOtherDynamic> S_msrOtherDynamic;
 EXP ostream& operator<< (ostream& os, const S_msrOtherDynamic& elt);
 
 //______________________________________________________________________________
+enum class msrWedgeKind {
+  kWedgeKindNone,
+  kWedgeCrescendo, kWedgeDecrescendo, kWedgeStop
+};
+
+string wedgeKindAsString (
+  msrWedgeKind wedgeKind);
+
+ostream& operator<< (ostream& os,const msrWedgeKind& elt);
+
+enum class msrWedgeNienteKind {
+  kWedgeNienteYes, kWedgeNienteNo
+};
+
+string wedgeNienteKindAsString (
+  msrWedgeNienteKind wedgeNienteKind);
+
+ostream& operator<< (ostream& os,const msrWedgeNienteKind& elt);
+
+//______________________________________________________________________________
 class EXP msrWedge : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrWedgeKind {
-      kWedgeKindNone,
-      kWedgeCrescendo, kWedgeDecrescendo, kWedgeStop
-    };
-
-/* JMI
-    static string wedgeKindAsString (
-      msrWedgeKind wedgeKind);
-*/
-
-    enum msrWedgeNienteKind {
-      kWedgeNienteYes, kWedgeNienteNo
-    };
-
-    static string wedgeNienteKindAsString (
-      msrWedgeNienteKind wedgeNienteKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -255,8 +255,6 @@ class EXP msrWedge : public msrElement
 
     // print
     // ------------------------------------------------------
-
-    string                wedgeKindAsString () const;
 
     void                  print (ostream& os) const override;
 

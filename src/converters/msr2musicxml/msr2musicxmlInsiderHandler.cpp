@@ -35,7 +35,6 @@
 #include "msr2mxsrOah.h"
 #include "msrOah.h"
 #include "msr2msrOah.h"
-#include "mxsr2msrOah.h"
 
 #include "oahEarlyOptions.h"
 
@@ -206,11 +205,6 @@ void msr2musicxmlInsiderHandler::createTheMsr2musicxmlOptionGroups (
   // create the MXSR OAH group
   appendGroupToHandler (
     createGlobalMxsrOahGroup ());
-
-  // create the mxsr2msr OAH group
-  appendGroupToHandler (
-    createGlobalMxsr2msrOahGroup (
-      this));
 
   // create the MSR OAH group
   appendGroupToHandler (
@@ -385,12 +379,6 @@ void msr2musicxmlInsiderHandler::enforceHandlerQuietness ()
 #endif
 
   gGlobalMsr2musicxmlInsiderOahGroup->
-    enforceGroupQuietness ();
-
-  gGlobalMxsrOahGroup->
-    enforceGroupQuietness ();
-
-  gGlobalMxsr2msrOahGroup->
     enforceGroupQuietness ();
 
   gGlobalMsrOahGroup->

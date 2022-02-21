@@ -23,92 +23,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrDalSegnoAtom : public oahAtomStoringAValue
-{
-  public:
-
-    // creation
-    // ------------------------------------------------------
-
-    static SMARTP<msrDalSegnoAtom> create (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
-                            map<string, msrDalSegno::msrDalSegnoKind>&
-                                              stringToDalSegnoKindMapVariable);
-
-  protected:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          msrDalSegnoAtom (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
-                            map<string, msrDalSegno::msrDalSegnoKind>&
-                                              stringToDalSegnoKindMapVariable);
-
-    virtual               ~msrDalSegnoAtom ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-    const map<string, msrDalSegno::msrDalSegnoKind>&
-                          getStringToDalSegnoKindMapVariable () const
-                              { return fStringToDalSegnoKindMapVariable; }
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-    void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
-
-  public:
-
-    // visitors
-    // ------------------------------------------------------
-
-    void                  acceptIn  (basevisitor* v) override;
-    void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
-
-    void                  print (ostream& os) const override;
-
-    void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
-                            int      valueFieldWidth) const override;
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    map<string, msrDalSegno::msrDalSegnoKind>&
-                          fStringToDalSegnoKindMapVariable;
-};
-typedef SMARTP<msrDalSegnoAtom> S_msrDalSegnoAtom;
-EXP ostream& operator<< (ostream& os, const S_msrDalSegnoAtom& elt);
-
-//______________________________________________________________________________
 class EXP msrReplaceClefAtom : public oahAtomStoringAValue
 {
   public:
@@ -360,23 +274,46 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  getIgnoreOrnaments () const
                               { return fIgnoreOrnaments; }
 
-    // words
+    // words conversions
     // --------------------------------------
 
     Bool                  getIgnoreMusicXMLWords () const
                               { return fIgnoreMusicXMLWords; }
 
-    Bool                  getConvertMusicXMLWordsToMSRTempos () const
-                              { return fConvertMusicXMLWordsToMSRTempos; }
+    const set<string>&    getBoldWordsSet () const
+                              { return fBoldWordsSet; }
+    S_oahStringSetAtom    getBoldWordsAtom () const
+                              { return fBoldWordsAtom; }
+
+    const set<string>&    getItalicWordsSet () const
+                              { return fItalicWordsSet; }
+    S_oahStringSetAtom    getItalicWordsAtom () const
+                              { return fItalicWordsAtom; }
+
+    const set<string>&    getWordsToBePlacedAboveSet () const
+                              { return fWordsToBePlacedAboveSet; }
+    S_oahStringSetAtom    getWordsToBePlacedAboveAtom () const
+                              { return fWordsToBePlacedAboveAtom; }
+
+    const set<string>&    getWordsToBePlacedBelowSet () const
+                              { return fWordsToBePlacedBelowSet; }
+    S_oahStringSetAtom    getWordsToBePlacedBelowAtom () const
+                              { return fWordsToBePlacedBelowAtom; }
 
     Bool                  getAddMsrWordsFromTheMusicXMLLyrics () const
                               { return fAddMsrWordsFromTheMusicXMLLyrics; }
 
-    Bool                  getConvertMusicXMLWordsToMSRRehearsalMarks () const
-                              { return fConvertMusicXMLWordsToMSRRehearsalMarks; }
+    S_oahStringSetAtom    getWordsToTempoAtom () const
+                              { return fWordsToTempoAtom; }
 
-    Bool                  getConvertMusicXMLTemposToMSRRehearsalMarks () const
-                              { return fConvertMusicXMLTemposToMSRRehearsalMarks; }
+    const set<string>&    getWordsToRehearsalMarkSet () const
+                              { return fWordsToRehearsalMarkSet; }
+    S_oahStringSetAtom    getWordsToRehearsalMarkAtom () const
+                              { return fWordsToRehearsalMarkAtom; }
+
+    const map<string, msrDalSegno::msrDalSegnoKind>&
+                          getStringToDalSegnoKindMap () const
+                              { return fStringToDalSegnoKindMap; }
 
     // ties
     // --------------------------------------
@@ -428,13 +365,6 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  getAllWedgesBelow () const
                               { return fAllWedgesBelow; }
 
-    // convert words to dal segno
-    // --------------------------------------
-
-    const map<string, msrDalSegno::msrDalSegnoKind>&
-                          getConverStringToMsrDalSegnoMap () const
-                              { return fConverStringToMsrDalSegnoMap; }
-
     // combined options, cubase
     // --------------------------------------
 
@@ -447,6 +377,24 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     // public services
     // ------------------------------------------------------
+
+    Bool                  wordsIsToBeConvertedToBold (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBeConvertedToItalic (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBePlacedAbove (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBePlacedBelow (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBeConvertedToTempo (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBeConvertedToRehearsalMark (
+                            const string& wordsValue);
 
   private:
 
@@ -586,12 +534,32 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     Bool                  fIgnoreMusicXMLWords;
 
-    Bool                  fConvertMusicXMLWordsToMSRTempos;
-    Bool                  fConvertMusicXMLWordsToMSRRehearsalMarks;
+    set<string>           fBoldWordsSet;
+    S_oahStringSetAtom    fBoldWordsAtom;
 
-    Bool                  fConvertMusicXMLTemposToMSRRehearsalMarks; // JMI???
+    set<string>           fItalicWordsSet;
+    S_oahStringSetAtom    fItalicWordsAtom;
 
-    Bool                  fAddMsrWordsFromTheMusicXMLLyrics;
+    set<string>           fWordsToBePlacedAboveSet;
+    S_oahStringSetAtom    fWordsToBePlacedAboveAtom;
+
+    set<string>           fWordsToBePlacedBelowSet;
+    S_oahStringSetAtom    fWordsToBePlacedBelowAtom;
+
+    Bool                  fAddMsrWordsFromTheMusicXMLLyrics; // JMI
+
+    // words conversions
+    set<string>           fWordsToBeConvertedSet;
+
+    set<string>           fWordsToTemposSet;
+    S_oahStringSetAtom    fWordsToTempoAtom;
+
+    set<string>           fWordsToRehearsalMarkSet;
+    S_oahStringSetAtom    fWordsToRehearsalMarkAtom;
+
+    map<string, msrDalSegno::msrDalSegnoKind>
+                          fStringToDalSegnoKindMap;
+
 
     // ties
     // --------------------------------------
@@ -633,12 +601,6 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     Bool                  fAllDynamicsBelow;
     Bool                  fAllWedgesBelow;
-
-    // convert words to dal segno
-    // --------------------------------------
-
-    map<string, msrDalSegno::msrDalSegnoKind>
-                          fConverStringToMsrDalSegnoMap;
 
     // combined options, cubase, needed in case it occurs in MusicXML <software/>
     // --------------------------------------

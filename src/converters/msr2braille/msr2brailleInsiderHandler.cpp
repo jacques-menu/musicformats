@@ -36,8 +36,6 @@
 #include "outputFileOah.h"
 #include "displayOah.h"
 
-#include "mxsrOah.h"
-#include "mxsr2msrOah.h"
 #include "msrOah.h"
 #include "msr2bsrOah.h"
 #include "bsrOah.h"
@@ -213,15 +211,6 @@ void msr2brailleInsiderHandler::createTheXml2brailleOptionGroups (
     createGlobalMrailleGenerationOahGroup (
       serviceName,
       fHandlerHeader));
-
-  // create the MXSR OAH group
-  appendGroupToHandler (
-    createGlobalMxsrOahGroup ());
-
-  // create the mxsr2msr OAH group
-  appendGroupToHandler (
-    createGlobalMxsr2msrOahGroup (
-      this));
 
   // create the MSR OAH group
   appendGroupToHandler (

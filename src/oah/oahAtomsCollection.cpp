@@ -590,7 +590,7 @@ such as '-t=voices,meas' for '-tvoices, -tmeas'.
 The options can be placed in any order,
 provided the values immediately follow the atoms that need them.
 
-Using options that attempt to create files, such as '-o, -output-file-name',
+Using options that attempt to create files, such as '-output-file-name, -o',
 leads to an error if the environment is read-only access,
 as is the case of https://libmusicxml.grame.fr .)",
           regex ("OPTION_NAME_HELP_NAMES"),
@@ -4402,8 +4402,7 @@ void oahFloatAtom::applyAtomWithValue (
 
   // check whether it is well-formed
   string regularExpression (
-    // no sign, a '-' would be handled as an option name JMI   "([+|-]?)"
-    "([[:digit:]]+)(.[[:digit:]]*)?"
+    "([+|-]?[[:digit:]]+)(.[[:digit:]]*)?"
     );
 
   regex e (regularExpression);
@@ -6715,8 +6714,9 @@ void oahStringSetAtom::applyAtomWithValue (
     stringstream s;
 
     s <<
-      "part \"" << partName << "\" occurs more that once" <<
-      "in the '--msr-ignore-part' option";
+      "part \"" << partName << "\" occurs more that once in the " <<
+      fetchNamesBetweenQuotes () <<
+      " option";
 
     oahError (s.str ());
   }
@@ -7008,7 +7008,9 @@ void oahStringToIntMapAtom::applyAtomWithValue (
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "There are " << smSize << " matches" <<
-      " for reset measure number string \"" << theString <<
+      " for " <<
+      fetchNamesBetweenQuotes () <<
+      " string \"" << theString <<
       "\" with regex \"" << regularExpression <<
       "\":" <<
       endl;

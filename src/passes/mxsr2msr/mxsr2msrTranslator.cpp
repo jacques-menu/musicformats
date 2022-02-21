@@ -4443,56 +4443,93 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         inputLineNumber,
         wordsXMLLangString);
 
+  // should the MusicXML words be ignored?
   if (! gGlobalMxsr2msrOahGroup->getIgnoreMusicXMLWords ()) {
+    // no
+
     Bool wordsHasBeenHandled (false);
 
-    // is wordsValue in the string to dal segno kind map?
-    const map<string, msrDalSegno::msrDalSegnoKind>&
-      converStringToDalSegnoMap =
-        gGlobalMxsr2msrOahGroup->
-          getConverStringToMsrDalSegnoMap ();
-
-//REGEX
-
-    if (converStringToDalSegnoMap.size ()) {
-      map<string, msrDalSegno::msrDalSegnoKind>::const_iterator
-        it =
-          converStringToDalSegnoMap.find (wordsValue);
-
-      if (it != converStringToDalSegnoMap.end ()) {
-        // yes, get dal segno kind
-        msrDalSegno::msrDalSegnoKind
-          dalSegnoKind =
-            (*it).second;
-
-        // create a dal segno element containing wordsValue
-        S_msrDalSegno
-          dalSegno =
-            msrDalSegno::create (
-              inputLineNumber,
-              dalSegnoKind,
-              wordsValue,
-              fCurrentDirectionStaffNumber);
+    // is wordsValue to be converted to a rehearsal mark?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToRehearsalMark (wordsValue)) {
+      // create an msrWords containing wordsValue
+      S_msrRehearsal
+        rehearsal =
+          msrRehearsal::create (
+            inputLineNumber,
+            msrRehearsal::kNone, // JMI allow for other values???
+            wordsValue,
+            fCurrentDirectionPlacementKind);
 
 #ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceWords () || gGlobalTracingOahGroup->getTraceDalSegnos ()) {
-          gLogStream <<
-            "Converting words '" <<
-            wordsValue <<
-            "' to dal segno element '" <<
-            dalSegno->asString () <<
-            "'" <<
-            ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-            ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
-            ", line " << inputLineNumber <<
-            endl;
-        }
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceDalSegnos ()
+      ) {
+        gLogStream <<
+          "Converting words \"" <<
+          wordsValue <<
+          "\" to an MSR rehearsal mark" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
 #endif
 
-        fPendingDalSegnosList.push_back (dalSegno);
+      // append the rehearsal to the pending tempos list
+      fPendingRehearsalsList.push_back (rehearsal);
 
-        wordsHasBeenHandled = true;
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to an MSR tempo?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToTempo (wordsValue)) {
+      // create an msrWords containing wordsValue
+      S_msrWords
+        words =
+          msrWords::create (
+            inputLineNumber,
+            fCurrentDirectionPlacementKind,
+            wordsValue,
+            justifyKind,
+            horizontalAlignmentKind,
+            verticalAlignmentKind,
+            fontStyleKind,
+            fontSize,
+            fontWeightKind,
+            wordsXMLLangKind,
+            fCurrentDirectionStaffNumber);
+
+      // create an msrTempo containing words
+      S_msrTempo
+        tempo =
+          msrTempo::createTempoWordsOnly (
+            inputLineNumber,
+            words,
+            msrTempo::kTempoParenthesizedNo,    // JMI
+            msrPlacementKind::kPlacementAbove); // JMI
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceDalSegnos ()
+      ) {
+        gLogStream <<
+          "Converting words \"" <<
+          wordsValue <<
+          "\" to an MSR tempo" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
       }
+#endif
+
+      fPendingTemposList.push_back (tempo);
+
+      wordsHasBeenHandled = true;
     }
 
     if (! wordsHasBeenHandled) {
@@ -4509,6 +4546,26 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           endl;
       }
 #endif
+
+      // should we convert wordsValue to bold?
+      if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToBold (wordsValue)) {
+        fontWeightKind = msrFontWeightKind::kFontWeightBold;
+      }
+
+      // should we convert wordsValue to italic?
+      if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToItalic (wordsValue)) {
+        fontStyleKind = msrFontStyleKind::KFontStyleItalic;
+      }
+
+      // should we place wordsValue above the staff?
+      if (gGlobalMxsr2msrOahGroup->wordsIsToBePlacedAbove (wordsValue)) {
+        fCurrentDirectionPlacementKind = msrPlacementKind::kPlacementAbove;
+      }
+
+      // should we place wordsValue below the staff?
+      if (gGlobalMxsr2msrOahGroup->wordsIsToBePlacedBelow (wordsValue)) {
+        fCurrentDirectionPlacementKind = msrPlacementKind::kPlacementBelow;
+      }
 
       S_msrWords
         words =
@@ -7071,16 +7128,16 @@ void mxsr2msrTranslator::visitStart ( S_wedge& elt )
 
   string type = elt->getAttributeValue("type");
 
-  msrWedge::msrWedgeKind wedgeKind = msrWedge::kWedgeKindNone;
+  msrWedgeKind wedgeKind = msrWedgeKind::kWedgeKindNone;
 
   if      (type == "crescendo") {
-    wedgeKind = msrWedge::kWedgeCrescendo;
+    wedgeKind = msrWedgeKind::kWedgeCrescendo;
   }
   else if (type == "diminuendo") {
-    wedgeKind = msrWedge::kWedgeDecrescendo;
+    wedgeKind = msrWedgeKind::kWedgeDecrescendo;
   }
   else if (type == "stop") {
-    wedgeKind = msrWedge::kWedgeStop;
+    wedgeKind = msrWedgeKind::kWedgeStop;
   }
   else {
     if (type.size ()) {
@@ -7103,14 +7160,14 @@ void mxsr2msrTranslator::visitStart ( S_wedge& elt )
 
   string nienteString = elt->getAttributeValue ("niente");
 
-  msrWedge::msrWedgeNienteKind
-    wedgeNienteKind = msrWedge::kWedgeNienteNo;
+  msrWedgeNienteKind
+    wedgeNienteKind = msrWedgeNienteKind::kWedgeNienteNo;
 
   if       (nienteString == "yes") {
-    wedgeNienteKind = msrWedge::kWedgeNienteYes;
+    wedgeNienteKind = msrWedgeNienteKind::kWedgeNienteYes;
   }
   else  if (nienteString == "no") {
-    wedgeNienteKind = msrWedge::kWedgeNienteNo;
+    wedgeNienteKind = msrWedgeNienteKind::kWedgeNienteNo;
   }
   else {
     if (nienteString.size ()) {
@@ -17120,12 +17177,13 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
     i!=noteWedges.end ();
     ++i
   ) {
+    S_msrWedge wedge = (*i);
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceWedges ()) {
       gLogStream <<
         "Copying wedges '" <<
-        (*i)->wedgeKindAsString () <<
+        wedgeKindAsString (wedge->getWedgeKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         endl;

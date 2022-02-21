@@ -109,8 +109,6 @@ class EXP msdl2musicxmlRegularHandler : public oahRegularHandler
 
     void                  createWarningAndErrorsRegularGroup ();
 
-    void                  createInputRegularGroup ();
-
     void                  createPresentationRegularGroup ();
 
     void                  createPartsRegularGroup ();

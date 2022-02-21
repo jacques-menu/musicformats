@@ -111,8 +111,6 @@ void msr2brailleRegularHandler::createRegularHandlerGroups ()
 
   createWarningAndErrorsRegularGroup ();
 
-  createInputRegularGroup ();
-
   createPartsRegularGroup ();
   createStavesRegularGroup ();
   createVoicesRegularGroup ();
@@ -367,41 +365,6 @@ void msr2brailleRegularHandler::createPresentationRegularGroup ()
 
   registerAtomInRegularSubgroup ("use-filename-as-work-title", subGroup);
   registerAtomInRegularSubgroup ("use-lyricists-as-poets", subGroup);
-}
-
-void msr2brailleRegularHandler::createInputRegularGroup ()
-{
-  // group
-
-  S_oahGroup
-    group =
-      oahGroup::create (
-        "Input group",
-        "help-input-group", "hinput-group",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole);
-  appendGroupToRegulalHandler (group);
-
-  // subgroup
-
-  S_oahSubGroup
-    subGroup =
-      oahSubGroup::create (
-        "Input",
-        "help-input", "hinput",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole,
-        group);
-  group->
-    appendSubGroupToGroup (subGroup);
-
-  // atoms
-
-  registerAtomInRegularSubgroup ("ignore-musicxml-words", subGroup);
-
-  registerAtomInRegularSubgroup ("cubase", subGroup);
-
-  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
 }
 
 void msr2brailleRegularHandler::createFilesRegularGroup ()

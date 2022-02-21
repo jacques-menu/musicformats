@@ -717,7 +717,7 @@ enum class msrKeyKind {
 string msrKeyKindAsString (
   msrKeyKind keyKind);
 
-ostream& operator<< (ostream& os, msrKeyKind& elt);
+ostream& operator<< (ostream& os, const msrKeyKind& elt);
 
 enum class msrModeKind {
   k_NoMode,
@@ -730,7 +730,7 @@ enum class msrModeKind {
 string msrModeKindAsString (
   msrModeKind modeKind);
 
-ostream& operator<< (ostream& os, msrModeKind& elt);
+ostream& operator<< (ostream& os,const msrModeKind& elt);
 
 msrModeKind modeKindFromString (
   int           inputLineNumber,
@@ -2619,7 +2619,7 @@ string existingQuarterTonesPitchesLanguageKinds (unsigned int namesListMaxLength
 
 // initialization
 //______________________________________________________________________________
-void initializeMSRBasicTypes ();
+void initializeMsrBasicTypes ();
 
 
 } // namespace MusicFormats

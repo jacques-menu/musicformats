@@ -277,7 +277,7 @@ EXP ostream& operator<< (ostream& os, const wstring& wstr);
 
 // initialization
 //______________________________________________________________________________
-void initializeBSRBasicTypes ();
+void initializeBsrBasicTypes ();
 
 
 } // namespace MusicFormats

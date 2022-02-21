@@ -114,7 +114,9 @@ void msrIgnorePartAtom::applyAtomWithValue (
 
     s <<
       "Part \"" << partName << "\" occurs more that once" <<
-      "in the '--msr-ignore-part' option";
+      " in the " <<
+      fetchNamesBetweenQuotes () <<
+      " option";
 
     oahError (s.str ());
   }
@@ -399,7 +401,9 @@ void msrKeepPartAtom::applyAtomWithValue (
 
     s <<
       "Part \"" << partName << "\" occurs more that once" <<
-      "in the '--msr-keep-part' option";
+      " in the " <<
+      fetchNamesBetweenQuotes () <<
+      " option";
 
     oahError (s.str ());
   }
@@ -672,12 +676,12 @@ R"(Expand the book to as many scores as needed for a harmony band.)",
         fExpandToHarmonyBandBook));
 }
 
-void msr2msrOahGroup::initializePageBreakOptions ()
+void msr2msrOahGroup::initializeBreakOptions ()
 {
   S_oahSubGroup subGroup =
     oahSubGroup::create (
-      "Page breaks",
-      "help-msr2msr-page-breaks", "hmpb",
+      "Breaks",
+      "help-msr2msr-breaks", "hmb",
 R"()",
     oahElementVisibilityKind::kElementVisibilityWhole,
     this);
@@ -700,6 +704,23 @@ There can be several occurrences of this option.)",
   subGroup->
     appendAtomToSubGroup (
       fInserPageBreakAfterMeasureAtom);
+
+  // line breaks
+  // --------------------------------------
+
+  fInserLineBreakAfterMeasureAtom =
+    oahStringSetAtom::create (
+      "insert-line-break-after-measure", "ilbam",
+R"(Insert a line break after measure MEASURE_NUMBER
+when creating a new MSR from an existing one.
+There can be several occurrences of this option.)",
+      "MEASURE_NUMBER",
+      "fInserLineBreakAfterMeasureSet",
+      fInserLineBreakAfterMeasureSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fInserLineBreakAfterMeasureAtom);
 }
 
 void msr2msrOahGroup::initializeCompressOptions ()
@@ -805,8 +826,8 @@ void msr2msrOahGroup::initializeMsr2msrOahGroup ()
   // --------------------------------------
   initializeBookOptions ();
 
-  // page breaks
-  initializePageBreakOptions ();
+  // breaks
+  initializeBreakOptions ();
 
   // compress
   // --------------------------------------

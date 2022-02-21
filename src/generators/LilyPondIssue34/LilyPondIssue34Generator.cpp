@@ -754,8 +754,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
         appendWedgeToNote (
           msrWedge::create (
             __LINE__,
-            msrWedge::kWedgeCrescendo,
-            msrWedge::kWedgeNienteNo,
+            msrWedgeKind::kWedgeCrescendo,
+            msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
             msrPlacementKind::kPlacementBelow));
 
@@ -899,8 +899,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
         appendWedgeToNote (
           msrWedge::create (
             __LINE__,
-            msrWedge::kWedgeStop,
-            msrWedge::kWedgeNienteNo,
+            msrWedgeKind::kWedgeStop,
+            msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
             msrPlacementKind::kPlacementBelow));
 
@@ -961,8 +961,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
         appendWedgeToNote (
           msrWedge::create (
             __LINE__,
-            msrWedge::kWedgeDecrescendo,
-            msrWedge::kWedgeNienteNo,
+            msrWedgeKind::kWedgeDecrescendo,
+            msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
             msrPlacementKind::kPlacementBelow));
 
@@ -1023,8 +1023,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
         appendWedgeToNote (
           msrWedge::create (
             __LINE__,
-            msrWedge::kWedgeStop,
-            msrWedge::kWedgeNienteNo,
+            msrWedgeKind::kWedgeStop,
+            msrWedgeNienteKind::kWedgeNienteNo,
             msrLineTypeKind::kLineTypeSolid,
             msrPlacementKind::kPlacementBelow));
 

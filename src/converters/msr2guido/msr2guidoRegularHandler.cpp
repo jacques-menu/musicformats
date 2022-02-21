@@ -114,8 +114,6 @@ void msr2guidoRegularHandler::createRegularHandlerGroups ()
 
   createWarningAndErrorsRegularGroup ();
 
-  createInputRegularGroup ();
-
   createPresentationRegularGroup ();
 
   createPartsRegularGroup ();
@@ -363,41 +361,6 @@ void msr2guidoRegularHandler::createWarningAndErrorsRegularGroup ()
 
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);
-}
-
-void msr2guidoRegularHandler::createInputRegularGroup ()
-{
-  // group
-
-  S_oahGroup
-    group =
-      oahGroup::create (
-        "Input group",
-        "help-input-group", "hinput-group",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole);
-  appendGroupToRegulalHandler (group);
-
-  // subgroup
-
-  S_oahSubGroup
-    subGroup =
-      oahSubGroup::create (
-        "Input",
-        "help-input", "hinput",
-        "",
-        oahElementVisibilityKind::kElementVisibilityWhole,
-        group);
-  group->
-    appendSubGroupToGroup (subGroup);
-
-  // atoms
-
-  registerAtomInRegularSubgroup ("ignore-musicxml-words", subGroup);
-
-  registerAtomInRegularSubgroup ("cubase", subGroup);
-
-  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
 }
 
 void msr2guidoRegularHandler::createPresentationRegularGroup ()

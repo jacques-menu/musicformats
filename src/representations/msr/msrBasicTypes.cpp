@@ -10972,48 +10972,10 @@ string msrKeyKindAsString (
   return result;
 }
 
-msrModeKind modeKindFromString (
-  int           inputLineNumber,
-  const string& modeString)
+ostream& operator<< (ostream& os, const msrKeyKind& elt)
 {
-
-  msrModeKind result = msrModeKind::k_NoMode;
-
-  if      (modeString == "major")
-    result = msrModeKind::kModeMajor;
-  else if (modeString == "minor")
-    result = msrModeKind::kModeMinor;
-  else if (modeString == "ionian")
-    result = msrModeKind::kModeIonian;
-  else if (modeString == "dorian")
-    result = msrModeKind::kModeDorian;
-  else if (modeString == "phrygian")
-    result = msrModeKind::kModePhrygian;
-  else if (modeString == "lydian")
-    result = msrModeKind::kModeLydian;
-  else if (modeString == "mixolydian")
-    result = msrModeKind::kModeMixolydian;
-  else if (modeString == "aeolian")
-    result = msrModeKind::kModeAeolian;
-  else if (modeString == "locrian")
-    result = msrModeKind::kModeLocrian;
-  else {
-    stringstream s;
-
-    s <<
-      "mode string \"" <<
-      modeString <<
-      "\" is unknown" <<
-      ", line = " << inputLineNumber;
-
-    msrError (
-      gGlobalServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      s.str ());
-  }
-
-  return result;
+  os << msrKeyKindAsString (elt);
+  return os;
 }
 
 string msrModeKindAsString (
@@ -11053,6 +11015,56 @@ string msrModeKindAsString (
       result = "kModeLocrian";
       break;
   } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const msrModeKind& elt)
+{
+  os << msrModeKindAsString (elt);
+  return os;
+}
+
+msrModeKind modeKindFromString (
+  int           inputLineNumber,
+  const string& modeString)
+{
+  // no CamelCase here, these strings are used in the command line options
+  msrModeKind result = msrModeKind::k_NoMode;
+
+  if      (modeString == "major")
+    result = msrModeKind::kModeMajor;
+  else if (modeString == "minor")
+    result = msrModeKind::kModeMinor;
+  else if (modeString == "ionian")
+    result = msrModeKind::kModeIonian;
+  else if (modeString == "dorian")
+    result = msrModeKind::kModeDorian;
+  else if (modeString == "phrygian")
+    result = msrModeKind::kModePhrygian;
+  else if (modeString == "lydian")
+    result = msrModeKind::kModeLydian;
+  else if (modeString == "mixolydian")
+    result = msrModeKind::kModeMixolydian;
+  else if (modeString == "aeolian")
+    result = msrModeKind::kModeAeolian;
+  else if (modeString == "locrian")
+    result = msrModeKind::kModeLocrian;
+  else {
+    stringstream s;
+
+    s <<
+      "mode string \"" <<
+      modeString <<
+      "\" is unknown" <<
+      ", line = " << inputLineNumber;
+
+    msrError (
+      gGlobalServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      s.str ());
+  }
 
   return result;
 }
@@ -23588,7 +23600,7 @@ string msrScoreNotationKindAsString (
 }
 
 //______________________________________________________________________________
-void initializeMSRBasicTypes ()
+void initializeMsrBasicTypes ()
 {
   // protect library against multiple initializations
   static Bool pPrivateThisMethodHasBeenRun (false);

@@ -69,6 +69,16 @@ S_mfcPassComponent createMxsr2msrComponent ()
             "Fixed a long-standing issue in barlines handling at the beginning of repeat alternatives"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.53"),
+          "February 21, 2022",
+          list<string> {
+            "Added options for words conversions and placement"
+          }
+      ));
   }
 
   return pPassComponent;

@@ -406,7 +406,7 @@ ostream& operator<< (ostream& os, const wstring& wstr)
 */
 
 //______________________________________________________________________________
-void initializeBSRBasicTypes ()
+void initializeBsrBasicTypes ()
 {
   // protect library against multiple initializations
   static Bool pPrivateThisMethodHasBeenRun (false);

@@ -1295,7 +1295,7 @@ void msrMeasure::setMeasureFirstInVoice ()
   fMeasureFirstInVoice = true;
 }
 
-string msrMeasure::fullMeasureWholeNotesDurationAsMSRString ()
+string msrMeasure::fullMeasureWholeNotesDurationAsMsrString ()
 {
   return
     wholeNotesAsMsrString (
@@ -1434,7 +1434,7 @@ if (false) // JMI
     newMeasureWholeNotesDuration;
 }
 
-string msrMeasure::currentMeasureWholeNotesDurationAsMSRString ()
+string msrMeasure::currentMeasureWholeNotesDurationAsMsrString ()
 {
   return
     wholeNotesAsMsrString (
@@ -6322,12 +6322,12 @@ void msrMeasure::print (ostream& os) const
     /* JMI
 
     setw (fieldWidth) <<
-    "fCurrentMeasureWholeNotesDurationAsMSRString" << " : " <<
-    currentMeasureWholeNotesDurationAsMSRString () <<
+    "fCurrentMeasureWholeNotesDurationAsMsrString" << " : " <<
+    currentMeasureWholeNotesDurationAsMsrString () <<
     endl <<
     setw (fieldWidth) <<
-    "fullMeasureWholeNotesDurationAsMSRString" << " : " <<
-    fullMeasureWholeNotesDurationAsMSRString () <<
+    "fullMeasureWholeNotesDurationAsMsrString" << " : " <<
+    fullMeasureWholeNotesDurationAsMsrString () <<
     endl <<
       */
 

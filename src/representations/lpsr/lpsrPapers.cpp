@@ -219,7 +219,7 @@ void lpsrPaper::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "scaling" << " : ";
+    "fScaling" << " : ";
   if (fScaling) {
     os << fScaling;
   }
@@ -232,7 +232,7 @@ void lpsrPaper::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "pageLayout" << " : ";
+    "fPageLayout" << " : ";
   if (fPageLayout) {
     os << fPageLayout;
   }
@@ -245,7 +245,7 @@ void lpsrPaper::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "horizontalShift" << " : ";
+    "fHorizontalShift" << " : ";
   if (fHorizontalShift) {
     os << fHorizontalShift;
   }
@@ -257,7 +257,7 @@ void lpsrPaper::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "indent" << " : ";
+    "fIndent" << " : ";
   if (fIndent) {
     os << fIndent;
   }
@@ -268,7 +268,7 @@ void lpsrPaper::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "shortIndent" << " : ";
+    "fShortIndent" << " : ";
   if (fShortIndent) {
     os << fShortIndent;
   }
@@ -277,12 +277,11 @@ void lpsrPaper::print (ostream& os) const
   }
   os << endl;
 
-/*
   // spaces
 
   os << left <<
     setw (fieldWidth) <<
-    "markupSystemSpacingPadding" << " : ";
+    "fMarkupSystemSpacingPadding" << " : ";
   if (fMarkupSystemSpacingPadding) {
     os << fMarkupSystemSpacingPadding;
   }
@@ -293,7 +292,7 @@ void lpsrPaper::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "betweenSystemSpace" << " : ";
+    "fBetweenSystemSpace" << " : ";
   if (fBetweenSystemSpace) {
     os << fBetweenSystemSpace;
   }
@@ -304,7 +303,7 @@ void lpsrPaper::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "pageTopSpace" << " : ";
+    "fPageTopSpace" << " : ";
   if (fPageTopSpace) {
     os << fPageTopSpace;
   }
@@ -312,13 +311,12 @@ void lpsrPaper::print (ostream& os) const
     os << "none";
   }
   os << endl;
-*/
 
   // counts
 
   os << left <<
     setw (fieldWidth) <<
-    "pageCount" << " : ";
+    "fPageCount" << " : ";
   if (fPageCount) {
     os << fPageCount;
   }
@@ -329,7 +327,7 @@ void lpsrPaper::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "systemCount" << " : ";
+    "fSystemCount" << " : ";
   if (fSystemCount) {
     os << fSystemCount;
   }
@@ -338,37 +336,45 @@ void lpsrPaper::print (ostream& os) const
   }
   os << endl;
 
-/*
+  // booleans
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fRaggedBottom" << " : " << fRaggedBottom <<
+    endl <<
+    setw (fieldWidth) <<
+    "fRaggedLastBottom" << " : " << fRaggedLastBottom <<
+    endl;
+
   // headers and footers
 
   os << left <<
     setw (fieldWidth) <<
-    "oddHeaderMarkup" << " : \"" <<
+    "fOddHeaderMarkup" << " : \"" <<
     fOddHeaderMarkup <<
     "\"" <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
-    "evenHeaderMarkup" << " : " <<
+    "fEvenHeaderMarkup" << " : " <<
     fEvenHeaderMarkup <<
     "\"" <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
-    "oddFooterMarkup" << " : " <<
+    "fOddFooterMarkup" << " : " <<
     fOddFooterMarkup <<
     "\"" <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
-    "evenFooterMarkup" << " : " <<
+    "fEvenFooterMarkup" << " : " <<
     fEvenFooterMarkup <<
     "\"" <<
     endl;
-*/
 
   --gIndenter;
 }
@@ -387,7 +393,7 @@ void lpsrPaper::printShort (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "scaling" << " : ";
+    "fScaling" << " : ";
   if (fScaling) {
     os << fScaling;
   }
@@ -400,7 +406,7 @@ void lpsrPaper::printShort (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "pageLayout" << " : ";
+    "fPageLayout" << " : ";
   if (fPageLayout) {
     os << fPageLayout;
   }
@@ -411,10 +417,9 @@ void lpsrPaper::printShort (ostream& os) const
 
   // indents
 
-/*
   os << left <<
     setw (fieldWidth) <<
-    "horizontalShift" << " : ";
+    "fHorizontalShift" << " : ";
   if (fHorizontalShift) {
     os << fHorizontalShift;
   }
@@ -422,11 +427,10 @@ void lpsrPaper::printShort (ostream& os) const
     os << "none";
   }
   os << endl;
-*/
 
   os << left <<
     setw (fieldWidth) <<
-    "indent" << " : ";
+    "fIndent" << " : ";
   if (fIndent) {
     os << fIndent;
   }
@@ -437,7 +441,7 @@ void lpsrPaper::printShort (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "shortIndent" << " : ";
+    "fShortIndent" << " : ";
   if (fShortIndent) {
     os << fShortIndent;
   }
@@ -446,12 +450,11 @@ void lpsrPaper::printShort (ostream& os) const
   }
   os << endl;
 
-/*
   // spaces
 
   os << left <<
     setw (fieldWidth) <<
-    "markupSystemSpacingPadding" << " : ";
+    "fMarkupSystemSpacingPadding" << " : ";
   if (fMarkupSystemSpacingPadding) {
     os << fMarkupSystemSpacingPadding;
   }
@@ -462,7 +465,7 @@ void lpsrPaper::printShort (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "betweenSystemSpace" << " : ";
+    "fBetweenSystemSpace" << " : ";
   if (fBetweenSystemSpace) {
     os << fBetweenSystemSpace;
   }
@@ -473,7 +476,7 @@ void lpsrPaper::printShort (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "pageTopSpace" << " : ";
+    "fPageTopSpace" << " : ";
   if (fPageTopSpace) {
     os << fPageTopSpace;
   }
@@ -481,13 +484,12 @@ void lpsrPaper::printShort (ostream& os) const
     os << "none";
   }
   os << endl;
-*/
 
   // counts
 
   os << left <<
     setw (fieldWidth) <<
-    "pageCount" << " : ";
+    "fPageCount" << " : ";
   if (fPageCount) {
     os << fPageCount;
   }
@@ -498,7 +500,7 @@ void lpsrPaper::printShort (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "systemCount" << " : ";
+    "fSystemCount" << " : ";
   if (fSystemCount) {
     os << fSystemCount;
   }
@@ -507,7 +509,16 @@ void lpsrPaper::printShort (ostream& os) const
   }
   os << endl;
 
-/*
+  // booleans
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fRaggedBottom" << " : " << fRaggedBottom <<
+    endl <<
+    setw (fieldWidth) <<
+    "fRaggedLastBottom" << " : " << fRaggedLastBottom <<
+    endl;
+
   // headers and footers
 
   os << left <<
@@ -537,7 +548,6 @@ void lpsrPaper::printShort (ostream& os) const
     fEvenFooterMarkup <<
     "\"" <<
     endl;
-*/
 
   --gIndenter;
 }

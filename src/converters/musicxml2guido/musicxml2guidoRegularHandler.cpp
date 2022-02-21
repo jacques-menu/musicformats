@@ -408,9 +408,21 @@ void xml2gmnRegularHandler::createInputRegularGroup ()
 
   registerAtomInRegularSubgroup ("ignore-musicxml-words", subGroup);
 
-  registerAtomInRegularSubgroup ("cubase", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-bold", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-italic", subGroup);
 
-  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
+  registerAtomInRegularSubgroup ("place-musicxml-words-above", subGroup);
+  registerAtomInRegularSubgroup ("place-musicxml-words-below", subGroup);
+
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-rehearsal-mark", subGroup);
+
+//   registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
+
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-tempo", subGroup);
+
+// JMI  registerAtomInRegularSubgroup ("convert-musicxml-tempos-to-msr-rehearsal-marks", subGroup);
+
+  registerAtomInRegularSubgroup ("cubase", subGroup);
 }
 
 void xml2gmnRegularHandler::createPresentationRegularGroup ()
