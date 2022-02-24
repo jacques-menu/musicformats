@@ -243,9 +243,9 @@ void lilypondScoreOutputKindAtom::printAtomWithVariableOptionsValues (
       fLpsrScoreOutputKindVariable) <<
     "\"";
 
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }
@@ -399,7 +399,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
         K_NO_INPUT_LINE_NUMBER,
         destinationPitchName);
 
-    fVariableHasBeenSet = true;
+    fSetByUser = true;
   }
 }
 
@@ -569,10 +569,10 @@ void lilypondTransposePartNameAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : ";
 
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      "ffVariableHasBeenSet: " <<
-      fVariableHasBeenSet;
+      "ffSetByUser: " <<
+      fSetByUser;
   }
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
@@ -749,7 +749,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
         K_NO_INPUT_LINE_NUMBER,
         destinationPitchName);
 
-    fVariableHasBeenSet = true;
+    fSetByUser = true;
   }
 }
 
@@ -919,10 +919,10 @@ void lilypondTransposePartIDAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : ";
 
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      "ffVariableHasBeenSet: " <<
-      fVariableHasBeenSet;
+      "ffSetByUser: " <<
+      fSetByUser;
   }
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
@@ -1887,9 +1887,9 @@ void lilypondAccidentalStyleKindAtom::printAtomWithVariableOptionsValues (
     lpsrAccidentalStyleKindAsString (
       fLpsrAccidentalStyleKindVariable);
 
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }
@@ -2242,10 +2242,10 @@ void lilypondChordsDisplayAtom::printAtomWithVariableOptionsValues (
       os << endl;
     } // for
 
-    if (fVariableHasBeenSet) {
+    if (fSetByUser) {
       os <<
-        "ffVariableHasBeenSet: " <<
-        fVariableHasBeenSet <<
+        "ffSetByUser: " <<
+        fSetByUser <<
         endl;
     }
 
@@ -2486,9 +2486,9 @@ void lilypondLyricsDurationsKindAtom::printAtomWithVariableOptionsValues (
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable);
 
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
 
   }
   os << endl;
@@ -2721,9 +2721,9 @@ void lilypondDynamicsTextSpannersStyleKindAtom::printAtomWithVariableOptionsValu
     lpsrDynamicsTextSpannersStyleKindAsString (
       fLpsrdDynamicsTextSpannersStyleKindVariable);
 
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
 
   }
   os << endl;
@@ -3180,20 +3180,13 @@ R"()",
       lilypondTransposePartNameAtom::create (
         "lilypond-transpose-part-name", "lilytpn",
 R"(Transpose part PART_NAME using TRANSPOSITION in the LilyPond code.
-PART_TRANSPOSITION_SPEC can be:
-'PART_NAME = TRANSPOSITION'
-or
-"PART_NAME = TRANSPOSITION"
-The single or double quotes are used to allow spaces in the names
-and around the '=' sign, otherwise they can be dispensed with.
+PART_TRANSPOSITION_SPEC should be of the form PART_NAME:TRANSPOSITION .
+There can be spaces around the ':'.
 TRANSPOSITION should contain a diatonic pitch, followed if needed
 by a sequence of ',' or '\'' octave indications.
 Such indications cannot be mixed, and they are relative to c\', i.e. middle C.
 For example, 'a', 'f' and 'bes,' can be used respectively
 for instruments in 'a', 'f' and B flat respectively.
-Using double quotes allows for shell variables substitutions, as in:
-SAXOPHONE="bes,"
-EXECUTABLE -lilypond-transpose-part-name "P1 ${SAXOPHONE}" .
 There can be several occurrences of this option.)",
         "PART_TRANSPOSITION_SPEC",
         "fPartNamesTranspositionMap",
@@ -3690,7 +3683,7 @@ This option is a alias for '-abn, -all-bar-numbers'.)",
   // --------------------------------------
 
   fShowNumbersAtMeasureAtom =
-    oahStringSetAtom::create (
+    oahStringSetElementAtom::create (
       "show-measure-number-at", "smna",
 R"(Generate LilyPond code to show the measure number at measure MEASURE_NUMBER.)",
       "MEASURE_NUMBER",
@@ -3706,7 +3699,7 @@ R"(Generate LilyPond code to show the measure number at measure MEASURE_NUMBER.)
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringToIntMapAtom::create (
+      oahStringToIntMapElementAtom::create (
         "reset-measure-number", "rmn",
 R"(Generate a '\set Score.currentBarNumber = #NEW' command
 at the beginning of measure OLD in the LilyPond code.
@@ -3742,9 +3735,9 @@ R"(Generate LilyPond code to show a box around all bar numbers.)",
   // generate a box around bar number
   // --------------------------------------
 
-  S_oahIntSetAtom
+  S_oahIntSetElementAtom
     generateABoxAroundBarNumberAtom =
-      oahIntSetAtom::create (
+      oahIntSetElementAtom::create (
         "generate-a-box-around-bar-number", "gababn",
 R"(Generate a box around LilyPond bar number BAR_NUMBER, // purist JMI ???
 where BAR_NUMBER is an integer.
@@ -4626,16 +4619,9 @@ R"()",
       regex_replace (
         regex_replace (
 R"(Generate a '\tempo' command in the \midi block.
-MIDI_TEMPO_SPEC can be:
-'DURATION = PER_SECOND'
-or
-"DURATION = PER_SECOND" .
+MIDI_TEMPO_SPEC should be of the form DURATION=PER_SECOND .
 DURATION is a string such as '8.', and PER_SECOND is an integer.
-The single or double quotes are used to allow spaces around the '=' sign,
-otherwise they can be dispensed with.
-Using double quotes allows for shell variables substitutions, as in:
-PER_SECOND=66
-EXECUTABLE -midiTempo "8. ${PER_SECOND}" .
+There can be spaces around the ':'.
 The default is 'DEFAULT_VALUE'.)",
           regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
@@ -5163,10 +5149,10 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
           setw (valueFieldWidth) <<
           "relativeOctaveEntrySemiTonesPitchAndOctave" << " : ";
 /* JMI
-        if (fVariableHasBeenSet) {
+        if (fSetByUser) {
           os <<
-            ", fVariableHasBeenSet: " <<
-            fVariableHasBeenSet;
+            ", fSetByUser: " <<
+            fSetByUser;
         }
 */
         os <<
@@ -5182,10 +5168,10 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
           setw (valueFieldWidth) <<
           "fixedOctaveEntrySemiTonesPitchAndOctave" << " : ";
 /* JMI
-        if (fVariableHasBeenSet) {
+        if (fSetByUser) {
           os <<
-            ", fVariableHasBeenSet: " <<
-            fVariableHasBeenSet;
+            ", fSetByUser: " <<
+            fSetByUser;
         }
 */
         os <<
@@ -6449,8 +6435,8 @@ void lilypondBreakPageAfterMeasureNumberAtom::printAtomWithVariableOptionsValues
         "\" --> \"" <<
         (*i).second <<
         "\"" <<
-        ", fVariableHasBeenSet: " <<
-        fVariableHasBeenSet <<
+        ", fSetByUser: " <<
+        fSetByUser <<
         endl;
       if (++i == iEnd) break;
     } // for

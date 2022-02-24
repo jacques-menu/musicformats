@@ -1432,10 +1432,10 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentials (
     "fVariableName" << " : " <<
     fVariableName <<
     endl;
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os << left <<
       setw (fieldWidth) <<
-      "has been set" <<
+      "set by user" <<
       endl;
   }
 }
@@ -1452,10 +1452,10 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentialsShort (
     "fVariableName" << " : " <<
     fVariableName <<
     endl;
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os << left <<
       setw (fieldWidth) <<
-      "has been set" <<
+      "set by user" <<
       endl;
   }
 }
@@ -1466,9 +1466,9 @@ void oahAtomImplicitlyStoringAValue::print (ostream& os) const
 
   os <<
     "AtomWithVariable:";
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 
@@ -1486,9 +1486,9 @@ void oahAtomImplicitlyStoringAValue::printShort (ostream& os) const
 
   os <<
     "AtomWithVariable: ";
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   printAtomWithVariableEssentialsShort (
@@ -1520,8 +1520,8 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableOptionsValues (
 {
   os <<
     "AtomWithVariable values:" <<
-    "???, fVariableHasBeenSet: " <<
-    fVariableHasBeenSet <<
+    "???, fSetByUser: " <<
+    fSetByUser <<
     endl;
 }
 
@@ -1654,8 +1654,8 @@ void oahAtomStoringAValue::printAtomWithVariableEssentials (
     fVariableName <<
     endl <<
     setw (fieldWidth) <<
-    "fVariableHasBeenSet" << " : " <<
-    fVariableHasBeenSet <<
+    "fSetByUser" << " : " <<
+    fSetByUser <<
     endl;
 }
 
@@ -1677,8 +1677,8 @@ void oahAtomStoringAValue::printAtomWithVariableEssentialsShort (
     fVariableName <<
     endl <<
     setw (fieldWidth) <<
-    "fVariableHasBeenSet" << " : " <<
-    fVariableHasBeenSet <<
+    "fSetByUser" << " : " <<
+    fSetByUser <<
     endl;
 }
 
@@ -1688,9 +1688,9 @@ void oahAtomStoringAValue::print (ostream& os) const
 
   os <<
     "AtomWithVariable:";
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 
@@ -1708,9 +1708,9 @@ void oahAtomStoringAValue::printShort (ostream& os) const
 
   os <<
     "AtomWithVariable: ";
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   printAtomWithVariableEssentialsShort (
@@ -1785,8 +1785,8 @@ void oahAtomStoringAValue::printAtomWithVariableOptionsValues (
 {
   os <<
     "AtomWithVariable values:" <<
-    "???, fVariableHasBeenSet: " <<
-    fVariableHasBeenSet <<
+    "???, fSetByUser: " <<
+    fSetByUser <<
     endl;
 }
 
@@ -2916,8 +2916,8 @@ void oahSubGroup::printSubGroupOptionsValues (
           booleanAtom =
             dynamic_cast<oahBooleanAtom*>(&(*atom))
       ) {
-        // print the atom value if the variable has been set
-        if (booleanAtom->getVariableHasBeenSet ()) {
+        // print the atom value if the variable has been set by user by user
+        if (booleanAtom->getSetByUser ()) {
           atom->
             printAtomWithVariableOptionsValues (
               os,
@@ -2932,8 +2932,8 @@ void oahSubGroup::printSubGroupOptionsValues (
           atomImplicitlyStoringAValue =
             dynamic_cast<oahAtomImplicitlyStoringAValue*>(&(*atom))
       ) {
-        // print the atom value if the variable has been set
-        if (atomImplicitlyStoringAValue->getVariableHasBeenSet ()) {
+        // print the atom value if the variable has been set by user by user
+        if (atomImplicitlyStoringAValue->getSetByUser ()) {
           atom->
             printAtomWithVariableOptionsValues (
               os,
@@ -2948,8 +2948,8 @@ void oahSubGroup::printSubGroupOptionsValues (
           atomStoringAValue =
             dynamic_cast<oahAtomStoringAValue*>(&(*atom))
       ) {
-        // print the atom value if the variable has been set
-        if (atomStoringAValue->getVariableHasBeenSet ()) {
+        // print the atom value if the variable has been set by user by user
+        if (atomStoringAValue->getSetByUser ()) {
           atom->
             printAtomWithVariableOptionsValues (
               os,
@@ -5802,6 +5802,17 @@ void oahHandler::includeOptionsFileInHandler (
   includeOptionsFromFile (
     optionsStream,
     fOptionsAndArguments);
+
+  // close options file
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+    gLogStream <<
+      "Closing options file \"" << optionsFileName << "\"" <<
+      endl;
+  }
+#endif
+
+  optionsStream.close ();
 
   //  print the options and arguments found
 #ifdef TRACING_IS_ENABLED

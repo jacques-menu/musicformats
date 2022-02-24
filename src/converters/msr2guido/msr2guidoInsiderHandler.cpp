@@ -267,12 +267,12 @@ string msr2guidoInsiderHandler::fetchOutputFileNameFromTheOptions () const
   Bool
     outputFileNameHasBeenSet =
       outputFileNameStringAtom->
-        getVariableHasBeenSet ();
+        getSetByUser ();
 
   Bool
     autoOutputFileNameHasBeenSet =
       autoOutputFileNameAtom->
-        getVariableHasBeenSet ();
+        getSetByUser ();
 
   string outputFileName;
 

@@ -127,6 +127,36 @@ ostream& operator<< (ostream& os, const S_msrSegno& elt)
 }
 
 //______________________________________________________________________________
+string dalSegnoKindAsString (
+  msrDalSegnoKind dalSegnoKind)
+{
+  string result;
+
+  switch (dalSegnoKind) {
+    case msrDalSegnoKind::kDalSegnoNone:
+      result = "kDalSegnoNone";
+      break;
+    case msrDalSegnoKind::kDalSegno:
+      result = "kDalSegno";
+      break;
+    case msrDalSegnoKind::kDalSegnoAlFine:
+      result = "kDalSegnoAlFine";
+      break;
+    case msrDalSegnoKind::kDalSegnoAlCoda:
+      result = "kDalSegnoAlCoda";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const msrDalSegnoKind& elt)
+{
+  os << dalSegnoKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrDalSegno msrDalSegno::create (
   int             inputLineNumber,
   msrDalSegnoKind dalSegnoKind,
@@ -256,29 +286,6 @@ void msrDalSegno::acceptOut (basevisitor* v)
 
 void msrDalSegno::browseData (basevisitor* v)
 {}
-
-string msrDalSegno::dalSegnoKindAsString (
-  msrDalSegnoKind dalSegnoKind)
-{
-  string result;
-
-  switch (dalSegnoKind) {
-    case msrDalSegno::kDalSegnoNone:
-      result = "dalSegnoNone";
-      break;
-    case msrDalSegno::kDalSegno:
-      result = "dalSegno";
-      break;
-    case msrDalSegno::kDalSegnoAlFine:
-      result = "dalSegnoAlFine";
-      break;
-    case msrDalSegno::kDalSegnoAlCoda:
-      result = "dalSegnoAlCoda";
-      break;
-  } // switch
-
-  return result;
-}
 
 string msrDalSegno::asString () const
 {

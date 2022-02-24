@@ -191,14 +191,18 @@ class EXP mxsr2msrOahGroup : public oahGroup
                               { return fPartsKeepNameSet; }
 
     // for checkOptionsConsistency()
-    S_oahStringSetAtom    getIgnorePartIDAtom () const
+    S_oahStringSetElementAtom
+                          getIgnorePartIDAtom () const
                               { return fIgnorePartIDAtom; }
-    S_oahStringSetAtom    getKeepPartIDAtom () const
+    S_oahStringSetElementAtom
+                          getKeepPartIDAtom () const
                               { return fKeepPartIDAtom; }
 
-    S_oahStringSetAtom    getIgnorePartNameAtom () const
+    S_oahStringSetElementAtom
+                          getIgnorePartNameAtom () const
                               { return fIgnorePartNameAtom; }
-    S_oahStringSetAtom    getKeepPartNameAtom () const
+    S_oahStringSetElementAtom
+                          getKeepPartNameAtom () const
                               { return fKeepPartNameAtom; }
 
     // clefs, keys, time signatures
@@ -230,6 +234,12 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     // measures
     // --------------------------------------
+
+    const set<string>&    getMeasuresToBeReplicatedSet () const
+                              { return fMeasuresToBeReplicatedSet; }
+    S_oahStringSetElementAtom
+                          getMeasuresToBeReplicatedSetAtom () const
+                              { return fMeasuresToBeReplicatedSetAtom; }
 
     const map<string,int>&
                           getAddEmptyMeasuresStringToIntMap () const
@@ -282,40 +292,86 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     const set<string>&    getBoldWordsSet () const
                               { return fBoldWordsSet; }
-    S_oahStringSetAtom    getBoldWordsAtom () const
+    S_oahStringSetElementAtom
+                          getBoldWordsAtom () const
                               { return fBoldWordsAtom; }
 
     const set<string>&    getItalicWordsSet () const
                               { return fItalicWordsSet; }
-    S_oahStringSetAtom    getItalicWordsAtom () const
+    S_oahStringSetElementAtom
+                          getItalicWordsAtom () const
                               { return fItalicWordsAtom; }
 
     const set<string>&    getWordsToBePlacedAboveSet () const
                               { return fWordsToBePlacedAboveSet; }
-    S_oahStringSetAtom    getWordsToBePlacedAboveAtom () const
+    S_oahStringSetElementAtom
+                          getWordsToBePlacedAboveAtom () const
                               { return fWordsToBePlacedAboveAtom; }
 
     const set<string>&    getWordsToBePlacedBelowSet () const
                               { return fWordsToBePlacedBelowSet; }
-    S_oahStringSetAtom    getWordsToBePlacedBelowAtom () const
+    S_oahStringSetElementAtom
+                          getWordsToBePlacedBelowAtom () const
                               { return fWordsToBePlacedBelowAtom; }
 
     Bool                  getAddMsrWordsFromTheMusicXMLLyrics () const
                               { return fAddMsrWordsFromTheMusicXMLLyrics; }
 
-    S_oahStringSetAtom    getWordsToTempoAtom () const
-                              { return fWordsToTempoAtom; }
-
     const set<string>&    getWordsToRehearsalMarkSet () const
                               { return fWordsToRehearsalMarkSet; }
-    S_oahStringSetAtom    getWordsToRehearsalMarkAtom () const
+    S_oahStringSetElementAtom
+                          getWordsToRehearsalMarkAtom () const
                               { return fWordsToRehearsalMarkAtom; }
 
-    const map<string, msrDalSegno::msrDalSegnoKind>&
-                          getStringToDalSegnoKindMap () const
-                              { return fStringToDalSegnoKindMap; }
+    const set<string>&    getWordsToSegnoSet () const
+                              { return fWordsToSegnoSet; }
+    S_oahStringSetElementAtom
+                          getWordsToSegnoAtom () const
+                              { return fWordsToSegnoAtom; }
 
-    // ties
+    const set<string>&    getWordsToDalSegnoSet () const
+                              { return fWordsToDalSegnoSet; }
+    S_oahStringSetElementAtom
+                          getWordsToDalSegnoAtom () const
+                              { return fWordsToDalSegnoAtom; }
+
+    const set<string>&    getWordsToDalSegnoAlFineSet () const
+                              { return fWordsToDalSegnoAlFineSet; }
+    S_oahStringSetElementAtom
+                          getWordsToDalSegnoAlFineAtom () const
+                              { return fWordsToDalSegnoAlFineAtom; }
+
+    const set<string>&    getWordsToDalSegnoAlCodaSet () const
+                              { return fWordsToDalSegnoAlCodaSet; }
+    S_oahStringSetElementAtom
+                          getWordsToSegnoAlCodaAtom () const
+                              { return fWordsToDalSegnoAlCodaAtom; }
+
+    const set<string>&    getWordsToCodaFirstSet () const
+                              { return fWordsToCodaFirstSet; }
+    S_oahStringSetElementAtom
+                          getWordsToCodFirstaAtom () const
+                              { return fWordsToCodaFirstAtom; }
+
+    const set<string>&    getWordsToCodaSecondSet () const
+                              { return fWordsToCodaSecondSet; }
+    S_oahStringSetElementAtom
+                          getWordsToCodaSecondAtom () const
+                              { return fWordsToCodaSecondAtom; }
+
+    const set<string>&    getWordsToCrescSet () const
+                              { return fWordsToCrescSet; }
+    S_oahStringSetElementAtom
+                          getWordsToCrescAtom () const
+                              { return fWordsToCrescAtom; }
+
+    const set<string>&    getWordsToDecrescSet () const
+                              { return fWordsToDecrescSet; }
+    S_oahStringSetElementAtom
+                          getWordsToDecrescAtom () const
+                              { return fWordsToDecrescAtom; }
+
+// ties
     // --------------------------------------
 
     Bool                  getIgnoreTies () const
@@ -396,6 +452,29 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  wordsIsToBeConvertedToRehearsalMark (
                             const string& wordsValue);
 
+    Bool                  wordsIsToBeConvertedToSegno (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBeConvertedToDalSegno (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBeConvertedToDalSegnoAlFine (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBeConvertedToDalSegnoAlCoda (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBeConvertedToCodaFirst (
+                            const string& wordsValue);
+    Bool                  wordsIsToBeConvertedToCodaSecond (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBeConvertedToCresc (
+                            const string& wordsValue);
+
+    Bool                  wordsIsToBeConvertedToDecresc (
+                            const string& wordsValue);
+
   private:
 
     // private services
@@ -469,11 +548,15 @@ class EXP mxsr2msrOahGroup : public oahGroup
     set<string>           fPartsKeepNameSet;
 
     // for checkOptionsConsistency()
-    S_oahStringSetAtom    fIgnorePartIDAtom;
-    S_oahStringSetAtom    fKeepPartIDAtom;
+    S_oahStringSetElementAtom
+                          fIgnorePartIDAtom;
+    S_oahStringSetElementAtom
+                          fKeepPartIDAtom;
 
-    S_oahStringSetAtom    fIgnorePartNameAtom;
-    S_oahStringSetAtom    fKeepPartNameAtom;
+    S_oahStringSetElementAtom
+                          fIgnorePartNameAtom;
+    S_oahStringSetElementAtom
+                          fKeepPartNameAtom;
 
     // clefs, keys, time signatures
     // --------------------------------------
@@ -500,6 +583,12 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     // measures
     // --------------------------------------
+
+    set<string>           fMeasuresToBeReplicatedSet;
+    S_oahStringSetElementAtom
+                          fMeasuresToBeReplicatedSetAtom;
+
+    map<string,int>       fReplicateMeasure;
 
     map<string,int>       fAddEmptyMeasuresStringToIntMap;
 
@@ -535,31 +624,65 @@ class EXP mxsr2msrOahGroup : public oahGroup
     Bool                  fIgnoreMusicXMLWords;
 
     set<string>           fBoldWordsSet;
-    S_oahStringSetAtom    fBoldWordsAtom;
+    S_oahStringSetElementAtom
+                          fBoldWordsAtom;
 
     set<string>           fItalicWordsSet;
-    S_oahStringSetAtom    fItalicWordsAtom;
+    S_oahStringSetElementAtom
+                          fItalicWordsAtom;
 
     set<string>           fWordsToBePlacedAboveSet;
-    S_oahStringSetAtom    fWordsToBePlacedAboveAtom;
+    S_oahStringSetElementAtom
+                          fWordsToBePlacedAboveAtom;
 
     set<string>           fWordsToBePlacedBelowSet;
-    S_oahStringSetAtom    fWordsToBePlacedBelowAtom;
+    S_oahStringSetElementAtom
+                          fWordsToBePlacedBelowAtom;
 
-    Bool                  fAddMsrWordsFromTheMusicXMLLyrics; // JMI
+    Bool                  fAddMsrWordsFromTheMusicXMLLyrics;
 
     // words conversions
     set<string>           fWordsToBeConvertedSet;
 
     set<string>           fWordsToTemposSet;
-    S_oahStringSetAtom    fWordsToTempoAtom;
+    S_oahStringSetElementAtom
+                          fWordsToTempoAtom;
 
     set<string>           fWordsToRehearsalMarkSet;
-    S_oahStringSetAtom    fWordsToRehearsalMarkAtom;
+    S_oahStringSetElementAtom
+                          fWordsToRehearsalMarkAtom;
 
-    map<string, msrDalSegno::msrDalSegnoKind>
-                          fStringToDalSegnoKindMap;
+    set<string>           fWordsToSegnoSet;
+    S_oahStringSetElementAtom
+                          fWordsToSegnoAtom;
 
+    set<string>           fWordsToDalSegnoSet;
+    S_oahStringSetElementAtom
+                          fWordsToDalSegnoAtom;
+
+    set<string>           fWordsToDalSegnoAlFineSet;
+    S_oahStringSetElementAtom
+                          fWordsToDalSegnoAlFineAtom;
+
+    set<string>           fWordsToDalSegnoAlCodaSet;
+    S_oahStringSetElementAtom
+                          fWordsToDalSegnoAlCodaAtom;
+
+    set<string>           fWordsToCodaFirstSet;
+    S_oahStringSetElementAtom
+                          fWordsToCodaFirstAtom;
+
+    set<string>           fWordsToCodaSecondSet;
+    S_oahStringSetElementAtom
+                          fWordsToCodaSecondAtom;
+
+    set<string>           fWordsToCrescSet;
+    S_oahStringSetElementAtom
+                          fWordsToCrescAtom;
+
+    set<string>           fWordsToDecrescSet;
+    S_oahStringSetElementAtom
+                          fWordsToDecrescAtom;
 
     // ties
     // --------------------------------------

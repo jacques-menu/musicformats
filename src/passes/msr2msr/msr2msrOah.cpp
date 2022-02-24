@@ -311,7 +311,7 @@ void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", has been set";
+      ", set by user";
 
     --gIndenter;
   }
@@ -598,7 +598,7 @@ void msrKeepPartAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", has been set";
+      ", set by user";
 
     --gIndenter;
   }
@@ -692,7 +692,7 @@ R"()",
   // --------------------------------------
 
   fInserPageBreakAfterMeasureAtom =
-    oahStringSetAtom::create (
+    oahStringSetElementAtom::create (
       "insert-page-break-after-measure", "ipbam",
 R"(Insert a page break after measure MEASURE_NUMBER
 when creating a new MSR from an existing one.
@@ -709,7 +709,7 @@ There can be several occurrences of this option.)",
   // --------------------------------------
 
   fInserLineBreakAfterMeasureAtom =
-    oahStringSetAtom::create (
+    oahStringSetElementAtom::create (
       "insert-line-break-after-measure", "ilbam",
 R"(Insert a line break after measure MEASURE_NUMBER
 when creating a new MSR from an existing one.

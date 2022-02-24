@@ -388,18 +388,32 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         fMeasureElementMeasureNumber,
         containingSegment);
 
-  // set measureDeepClone's ordinal number
+  // measure numbers
   measureDeepClone->
     setMeasureOrdinalNumberInVoice (
       containingSegmentVoiceUpLink->
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
-  // lengthes
+  measureDeepClone->fMeasurePuristNumber =
+    fMeasurePuristNumber;
+
+  measureDeepClone->fMeasureDebugNumber =
+    fMeasureDebugNumber;
+
+  // measure lengthes, in whole notes
   measureDeepClone->fFullMeasureWholeNotesDuration =
     fFullMeasureWholeNotesDuration;
 
-  measureDeepClone->fCurrentMeasureWholeNotesDuration =
+  measureDeepClone->fCurrentMeasureWholeNotesDuration = // JMI ???
     fCurrentMeasureWholeNotesDuration;
+
+  // measure print layout, MusicXML specific
+  measureDeepClone->fMeasurePrintLayout =
+    fMeasurePrintLayout;
+
+  // measure longest note
+  measureDeepClone->fMeasureLongestNote = // JMI ???
+    fMeasureLongestNote;
 
   // measure kind
   measureDeepClone->fMeasureKind =
@@ -412,6 +426,11 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   // measure 'first in segment' kind
   measureDeepClone->fMeasureFirstInSegmentKind =
     fMeasureFirstInSegmentKind;
+
+    // full measure rest?
+
+  measureDeepClone->fMeasureIsAFullMeasureRest =
+    fMeasureIsAFullMeasureRest;
 
   // elements
 
@@ -483,7 +502,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 #endif
 
         // share the element with the original measure
-        elementDeepClone = time;
+        elementDeepClone = element;
       }
 
       else {
@@ -3127,10 +3146,10 @@ void msrMeasure::appendTempoToMeasure (
   appendElementToMeasure (tempo);
 }
 
-void msrMeasure::appendRehearsalToMeasure (
-  S_msrRehearsal rehearsal)
+void msrMeasure::appendRehearsalMarkToMeasure (
+  S_msrRehearsalMark rehearsalMark)
 {
-  appendElementToMeasure (rehearsal);
+  appendElementToMeasure (rehearsalMark);
 }
 
 void msrMeasure::appendOctaveShiftToMeasure (
@@ -5005,8 +5024,8 @@ void msrMeasure::handleSubsequentFiguredBassElementInFiguredBassMeasure (
 }
 
 void msrMeasure::postHandleCurrentFiguredBassElementInFiguredBassMeasure (
-  int          inputLineNumber,
-  S_msrVoice   voice,
+  int                     inputLineNumber,
+  S_msrVoice              voice,
   S_msrFiguredBassElement currentFiguredBass)
 {
   // does currentFiguredBass overflow the measure?

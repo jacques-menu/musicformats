@@ -742,6 +742,23 @@ void msr2summaryVisitor::visitEnd (S_msrDynamic& elt)
 }
 
 //________________________________________________________________________
+void msr2summaryVisitor::visitStart (S_msrCrescDecresc& elt)
+{
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrCrescDecresc" << endl;
+  }
+}
+
+void msr2summaryVisitor::visitEnd (S_msrCrescDecresc& elt)
+{
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> End visiting msrCrescDecresc" << endl;
+  }
+}
+
+//________________________________________________________________________
 void msr2summaryVisitor::visitStart (S_msrWedge& elt)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {

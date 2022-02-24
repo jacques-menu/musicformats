@@ -27,11 +27,11 @@ class EXP oahStringAtom : public oahAtomStoringAValue
 class EXP oahFactorizedStringAtom : public oahAtom
 class EXP oahStringWithDefaultValueAtom : public oahStringAtom
 class EXP oahRationalAtom : public oahAtomStoringAValue
-class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
+class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 class EXP oahRGBColorAtom : public oahAtomStoringAValue
-class EXP oahIntSetAtom : public oahAtomStoringAValue
-class EXP oahStringSetAtom : public oahAtomStoringAValue
-class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
+class EXP oahIntSetElementAtom : public oahAtomStoringAValue
+class EXP oahStringSetElementAtom : public oahAtomStoringAValue
+class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
 class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
 class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
 class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
@@ -238,7 +238,7 @@ class EXP msrOctaveEntryVariable : public smartable
     string                fVariableName;
     msrOctaveEntryKind    fOctaveEntryKind;
 
-    Bool                  fVariableHasBeenSet;
+    Bool                  fSetByUser;
 };
 
 \end{lstlisting}

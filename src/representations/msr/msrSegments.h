@@ -7,7 +7,7 @@
 
 #include "msrCodas.h"
 #include "msrEyeGlasses.h"
-#include "msrRehearsals.h"
+#include "msrRehearsalMarks.h"
 #include "msrSegnos.h"
 #include "msrStaves.h"
 #include "msrTablatures.h"
@@ -235,10 +235,10 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  appendTempoToSegment (S_msrTempo tempo);
 
-    // rehearsals
+    // rehearsal marks
 
-    void                  appendRehearsalToSegment (
-                            S_msrRehearsal rehearsal);
+    void                  appendRehearsalMarkToSegment (
+                            S_msrRehearsalMark rehearsalMark);
 
     // octave shifts
 

@@ -947,7 +947,7 @@ class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValu
                             lpsrDynamicsTextSpannersStyleKind value)
                               {
                                 fLpsrdDynamicsTextSpannersStyleKindVariable = value;
-                                fVariableHasBeenSet = true;
+                                fSetByUser = true;
                               }
 
     lpsrDynamicsTextSpannersStyleKind
@@ -1889,7 +1889,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fShowAllBarNumbers;
 
     set<string>           fShowNumbersAtMeasureSet;
-    S_oahStringSetAtom    fShowNumbersAtMeasureAtom;
+    S_oahStringSetElementAtom
+                          fShowNumbersAtMeasureAtom;
 
     float                 fBarNumbersSize;
     S_oahFloatAtom        fBarNumbersSizeAtom;

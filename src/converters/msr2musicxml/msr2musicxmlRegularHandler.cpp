@@ -620,7 +620,9 @@ void msr2musicxmlRegularHandler::createMeasuresRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("ignore-musicxml-page-breaks", subGroup);
-  registerAtomInRegularSubgroup ("add-empty-measures", subGroup);
+
+  registerAtomInRegularSubgroup ("add-empty-msr-measures", subGroup);
+  registerAtomInRegularSubgroup ("replicate-msr-measure", subGroup);
 }
 
 void msr2musicxmlRegularHandler::createRestsRegularGroup ()

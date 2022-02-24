@@ -257,9 +257,9 @@ void msr2lpsrScoreOutputKindAtom::printAtomWithVariableOptionsValues (
     " : " <<
     lpsrScoreOutputKindAsString (
       fLpsrScoreOutputKindVariable);
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }

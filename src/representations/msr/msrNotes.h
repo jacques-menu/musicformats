@@ -621,6 +621,11 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteSlashes; }
 
     // wedges
+    const list<S_msrCrescDecresc>&
+                          getNoteCrescDecrescs () const
+                              { return fNoteCrescDecrescs; }
+
+    // wedges
     const list<S_msrWedge>&
                           getNoteWedges () const
                               { return fNoteWedges; }
@@ -859,6 +864,9 @@ class EXP msrNote : public msrTupletElement
 
     //  slashes
     void                  appendSlashToNote (S_msrSlash slash);
+
+    // cresc/decresc
+    void                  appendCrescDecrescToNote (S_msrCrescDecresc crescDecresc);
 
     //  wedges
     void                  appendWedgeToNote (S_msrWedge wedge);
@@ -1147,6 +1155,12 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     list<S_msrSlash>      fNoteSlashes;
+
+    // cresc/decresc
+    // ------------------------------------------------------
+
+    list<S_msrCrescDecresc>
+                          fNoteCrescDecrescs;
 
     // wedges
     // ------------------------------------------------------

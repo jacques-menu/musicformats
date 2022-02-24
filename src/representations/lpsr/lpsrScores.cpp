@@ -341,7 +341,7 @@ lpsrScore::lpsrScore (
   msrLength paperWidth =
     elt->getPaperWidth ();
 //  if (gGlobalLpsrOahGroup->getPaperWidth ().getLengthValue () > 0.0) {
-  if (gGlobalLpsrOahGroup->getPaperWidthAtom ()->getVariableHasBeenSet ()) {
+  if (gGlobalLpsrOahGroup->getPaperWidthAtom ()->getSetByUser ()) {
     paperWidth = gGlobalLpsrOahGroup->getPaperWidth ();
   }
   paper ->
@@ -350,7 +350,7 @@ lpsrScore::lpsrScore (
   msrLength paperHeight =
     elt->getPaperHeight ();
 //  if (gGlobalLpsrOahGroup->getPaperHeight ().getLengthValue () > 0.0) {
-  if (gGlobalLpsrOahGroup->getPaperHeightAtom ()->getVariableHasBeenSet ()) {
+  if (gGlobalLpsrOahGroup->getPaperHeightAtom ()->getSetByUser ()) {
     paperWidth = gGlobalLpsrOahGroup->getPaperHeight ();
   }
   paper->

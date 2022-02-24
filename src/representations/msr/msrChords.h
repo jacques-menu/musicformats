@@ -218,6 +218,10 @@ class EXP msrChord : public msrTupletElement
                           getChordOtherDynamics () const
                               { return fChordOtherDynamics; }
 
+    const list<S_msrCrescDecresc>&
+                          getChordCrescDecrescs () const
+                              { return fChordCrescDecrescs; }
+
     const list<S_msrWedge>&
                           getChordWedges () const
                               { return fChordWedges; }
@@ -411,6 +415,10 @@ class EXP msrChord : public msrTupletElement
     void                  appendSlashToChord (S_msrSlash slash)
                               { fChordSlashes.push_back (slash); }
 
+    // cresc/decresc
+    void                  appendCrescDecrescToChord (S_msrCrescDecresc crescDecresc)
+                              { fChordCrescDecrescs.push_back (crescDecresc); }
+
     // wedges
     void                  appendWedgeToChord (S_msrWedge wedge)
                               { fChordWedges.push_back (wedge); }
@@ -567,6 +575,10 @@ class EXP msrChord : public msrTupletElement
 
     // slashes
     list<S_msrSlash>      fChordSlashes;
+
+    // cresc/decresc
+    list<S_msrCrescDecresc>
+                          fChordCrescDecrescs;
 
     // wedges
     list<S_msrWedge>      fChordWedges;

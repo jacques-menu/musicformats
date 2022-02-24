@@ -1663,12 +1663,12 @@ void lpsr2lilypondTranslator::generateNoteHead (
 void lpsr2lilypondTranslator::generateCoda (S_msrCoda coda)
 {
   switch (coda->getCodaKind ()) {
-    case msrCoda::kCodaFirst:
+    case msrCodaKind::kCodaFirst:
       // generate the coda
       fLilypondCodeStream <<
         "\\mark \\markup { \\musicglyph #\"scripts.coda\" }%{ first %}";
       break;
-    case msrCoda::kCodaSecond:
+    case msrCodaKind::kCodaSecond:
       // generate the coda
       fLilypondCodeStream <<
         "\\mark \\markup { \\musicglyph #\"scripts.coda\" }%{ second %}";
@@ -1701,9 +1701,9 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeNote (
 
         // generate only the second coda before the note
         switch (coda->getCodaKind ()) {
-          case msrCoda::kCodaFirst:
+          case msrCodaKind::kCodaFirst:
             break;
-          case msrCoda::kCodaSecond:
+          case msrCodaKind::kCodaSecond:
             // generate the coda
             generateCoda (coda);
             break;
@@ -3259,11 +3259,11 @@ void lpsr2lilypondTranslator::generateCodeRightAfterNote (
 
         // generate only the first coda before the note
         switch (coda->getCodaKind ()) {
-          case msrCoda::kCodaFirst:
+          case msrCodaKind::kCodaFirst:
             // generate the coda
             generateCoda (coda);
             break;
-          case msrCoda::kCodaSecond:
+          case msrCodaKind::kCodaSecond:
             break;
         } // switch
       } // for
@@ -5761,7 +5761,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
     lilypondVersionHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getLilypondVersionAtom ()->
-          getVariableHasBeenSet ();
+          getSetByUser ();
 
   string
     lilypondVersion =
@@ -5791,7 +5791,7 @@ void lpsr2lilypondTranslator::generateGlobalStaffSize ()
     globalStaffSizeHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getGlobalStaffSizeAtom ()->
-          getVariableHasBeenSet ();
+          getSetByUser ();
 
   Bool
     doGenerateGlobalStaffSize =
@@ -6779,7 +6779,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
     paperHeightHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperHeightAtom ()->
-          getVariableHasBeenSet (),
+          getSetByUser (),
     doGeneratePaperHeight =
       paperHeightHasBeenSet || generateCommentedOutVariables;
 
@@ -6799,7 +6799,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
     paperWidthHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperWidthAtom ()->
-          getVariableHasBeenSet (),
+          getSetByUser (),
     doGeneratePaperWidth =
       paperWidthHasBeenSet || generateCommentedOutVariables;
 
@@ -6843,7 +6843,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
     paperHeightHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperHeightAtom ()->
-          getVariableHasBeenSet (),
+          getSetByUser (),
     doGeneratePaperHeight =
       paperHeightHasBeenSet || generateCommentedOutVariables;
 
@@ -6870,7 +6870,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
     paperWidthHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperWidthAtom ()->
-          getVariableHasBeenSet (),
+          getSetByUser (),
     doGeneratePaperWidth =
       paperWidthHasBeenSet || generateCommentedOutVariables;
 
@@ -6909,7 +6909,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     leftMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperLeftMarginAtom ()->
-          getVariableHasBeenSet (),
+          getSetByUser (),
     doGenerateLeftMargin =
       leftMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -6936,7 +6936,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     rightMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperRightMarginAtom ()->
-          getVariableHasBeenSet (),
+          getSetByUser (),
     doGenerateRightMargin =
       rightMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -6963,7 +6963,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     topMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperTopMarginAtom ()->
-          getVariableHasBeenSet (),
+          getSetByUser (),
     doGenerateTopMargin =
       topMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -6990,7 +6990,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     bottomMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperBottomMarginAtom ()->
-          getVariableHasBeenSet (),
+          getSetByUser (),
     doGenerateBottomMargin =
       bottomMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -7565,7 +7565,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     barNumbersSizeAtom =
       gGlobalLpsr2lilypondOahGroup->getBarNumbersSizeAtom ();
 
-  if (barNumbersSizeAtom->getVariableHasBeenSet ()) {
+  if (barNumbersSizeAtom->getSetByUser ()) {
     fLilypondCodeStream <<
       "\\context " "{" <<
       endl;
@@ -11099,7 +11099,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       gGlobalLpsr2lilypondOahGroup->
         getDynamicsTextSpannersStyleKindAtom ();
 
-  if (dynamicsTextSpannersStyleKindAtom->getVariableHasBeenSet ()) {
+  if (dynamicsTextSpannersStyleKindAtom->getSetByUser ()) {
     fLilypondCodeStream <<
       "\\override DynamicTextSpanner.style = #'" <<
       lpsrDynamicsTextSpannersStyleKindAsString (
@@ -16395,6 +16395,71 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
 }
 
 //________________________________________________________________________
+void lpsr2lilypondTranslator::visitStart (S_msrCrescDecresc& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  {
+    Bool
+      traceMsrVisitors =
+        gGlobalMsrOahGroup->
+          getTraceMsrVisitors (),
+      generateMsrVisitingInformation =
+        gGlobalLpsr2lilypondOahGroup->
+          getGenerateMsrVisitingInformation ();
+
+    if (traceMsrVisitors || generateMsrVisitingInformation) {
+      stringstream s;
+
+      s <<
+        "% --> Start visiting msrCrescDecresc" <<
+        ", line " << elt->getInputLineNumber () <<
+        endl;
+
+      if (traceMsrVisitors) {
+        gLogStream << s.str ();
+      }
+
+      if (generateMsrVisitingInformation) {
+        fLilypondCodeStream << s.str ();
+      }
+    }
+  }
+#endif
+}
+
+void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  {
+    Bool
+      traceMsrVisitors =
+        gGlobalMsrOahGroup->
+          getTraceMsrVisitors (),
+      generateMsrVisitingInformation =
+        gGlobalLpsr2lilypondOahGroup->
+          getGenerateMsrVisitingInformation ();
+
+    if (traceMsrVisitors || generateMsrVisitingInformation) {
+      stringstream s;
+
+      s <<
+        "% --> End visiting msrCrescDecresc" <<
+        ", line " << elt->getInputLineNumber () <<
+        endl;
+
+      if (traceMsrVisitors) {
+        gLogStream << s.str ();
+      }
+
+      if (generateMsrVisitingInformation) {
+        fLilypondCodeStream << s.str ();
+      }
+    }
+  }
+#endif
+}
+
+//________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrWedge& elt)
 {
 #ifdef TRACING_IS_ENABLED
@@ -17713,7 +17778,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
                 getNonPrintNotesHeadRGBColorAtom ();
 
           // has the note color been set?
-          if (nonPrintNotesHeadRGBColorAtom->getVariableHasBeenSet ()) {
+          if (nonPrintNotesHeadRGBColorAtom->getSetByUser ()) {
             const msrRGBColor&
               theRGBColor =
                 gGlobalLpsr2lilypondOahGroup->
@@ -22576,7 +22641,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::visitStart (S_msrRehearsal& elt)
+void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -22592,7 +22657,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsal& elt)
       stringstream s;
 
       s <<
-        "% --> Start visiting msrRehearsal" <<
+        "% --> Start visiting msrRehearsalMark" <<
         ", line " << elt->getInputLineNumber () <<
         endl;
 
@@ -22609,7 +22674,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsal& elt)
 
   fLilypondCodeStream << endl;
 
-  switch (elt->getRehearsalPlacementKind ()) {
+  switch (elt->getRehearsalMarkPlacementKind ()) {
     case msrPlacementKind::k_NoPlacement:
       break;
     case msrPlacementKind::kPlacementAbove:
@@ -22624,32 +22689,32 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsal& elt)
     endl <<
     "\\mark\\markup { ";
 
-  switch (elt->getRehearsalKind ()) {
-    case msrRehearsal::kNone:
+  switch (elt->getRehearsalMarkKind ()) {
+    case msrRehearsalMark::kNone:
       fLilypondCodeStream <<
         "\\box"; // default value
       break;
-    case msrRehearsal::kRectangle:
+    case msrRehearsalMark::kRectangle:
       fLilypondCodeStream <<
         "\\box";
       break;
-    case msrRehearsal::kOval:
+    case msrRehearsalMark::kOval:
       fLilypondCodeStream <<
         "\\oval";
       break;
-    case msrRehearsal::kCircle:
+    case msrRehearsalMark::kCircle:
       fLilypondCodeStream <<
         "\\circle";
       break;
-    case msrRehearsal::kBracket:
+    case msrRehearsalMark::kBracket:
       fLilypondCodeStream <<
         "\\bracket";
       break;
-    case msrRehearsal::kTriangle:
+    case msrRehearsalMark::kTriangle:
       fLilypondCodeStream <<
         "%{ \\triangle??? %}";
       break;
-    case msrRehearsal::kDiamond:
+    case msrRehearsalMark::kDiamond:
       fLilypondCodeStream <<
         "%{ \\diamond??? %}";
       break;
@@ -22657,12 +22722,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsal& elt)
 
   fLilypondCodeStream <<
     " { \"" <<
-    elt->getRehearsalText () <<
+    elt->getRehearsalMarkText () <<
     "\"" "}}" <<
     endl;
 }
 
-void lpsr2lilypondTranslator::visitEnd (S_msrRehearsal& elt)
+void lpsr2lilypondTranslator::visitEnd (S_msrRehearsalMark& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -22678,7 +22743,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRehearsal& elt)
       stringstream s;
 
       s <<
-        "% --> End visiting msrRehearsal" <<
+        "% --> End visiting msrRehearsalMark" <<
         ", line " << elt->getInputLineNumber () <<
         endl;
 

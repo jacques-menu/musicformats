@@ -2269,7 +2269,7 @@ void oahBooleanAtom::setBooleanVariable (Bool value)
 #endif
 
   fBooleanVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahBooleanAtom::acceptIn (basevisitor* v)
@@ -2359,8 +2359,8 @@ void oahBooleanAtom::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fVariableHasBeenSet" << " : " <<
-    fVariableHasBeenSet <<
+    "fSetByUser" << " : " <<
+    fSetByUser <<
     endl;
 
   --gIndenter;
@@ -2376,9 +2376,9 @@ void oahBooleanAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fBooleanVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -2464,7 +2464,7 @@ void oahTwoBooleansAtom::setTwoBooleansVariables (Bool value)
 
   fSecondBooleanAtom->setBooleanVariable (value);
 
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahTwoBooleansAtom::acceptIn (basevisitor* v)
@@ -2573,9 +2573,9 @@ void oahTwoBooleansAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fBooleanVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -2667,7 +2667,7 @@ void oahThreeBooleansAtom::setThreeBooleansVariables (Bool value)
   fSecondBooleanAtom->setBooleanVariable (value);
   fThirdBooleanAtom->setBooleanVariable (value);
 
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahThreeBooleansAtom::acceptIn (basevisitor* v)
@@ -2781,7 +2781,7 @@ void oahThreeBooleansAtom::printAtomWithVariableOptionsValues (
     fBooleanVariable;
 //   if (fBooleanVariable) {
 //     os <<
-//       ", has been set";
+//       ", set by user";
 //   }
   os << endl;
 }
@@ -3945,7 +3945,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
 #endif
 
   fIntegerVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahIntegerAtom::acceptIn (basevisitor* v)
@@ -4063,9 +4063,9 @@ void oahIntegerAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fIntegerVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -4122,7 +4122,7 @@ oahTwoIntegersAtom::oahTwoIntegersAtom (
 oahTwoIntegersAtom::~oahTwoIntegersAtom ()
 {}
 
-void oahTwoIntegersAtom::applyAtomWithValue (
+void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
   const string& theString,
   ostream&      os)
 {
@@ -4205,7 +4205,7 @@ void oahTwoIntegersAtom::setIntegerVariable (int value)
 #endif
 
   fIntegerVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahTwoIntegersAtom::acceptIn (basevisitor* v)
@@ -4339,9 +4339,9 @@ void oahTwoIntegersAtom::printAtomWithVariableOptionsValues (
     " " <<
     fIntegerSecondaryVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -4470,7 +4470,7 @@ void oahFloatAtom::setFloatVariable (float value)
 #endif
 
   fFloatVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahFloatAtom::acceptIn (basevisitor* v)
@@ -4588,9 +4588,9 @@ void oahFloatAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fFloatVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -4665,7 +4665,7 @@ void oahStringAtom::setStringVariable (const string& value)
 #endif
 
   fStringVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahStringAtom::acceptIn (basevisitor* v)
@@ -4783,9 +4783,9 @@ void oahStringAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fStringVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -5293,7 +5293,7 @@ void oahStringWithDefaultValueAtom::setStringVariable (const string& value)
 #endif
 
   oahStringAtom::setStringVariable (value);
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahStringWithDefaultValueAtom::acceptOut (basevisitor* v)
@@ -5389,9 +5389,9 @@ void oahStringWithDefaultValueAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fStringVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -5513,7 +5513,7 @@ void oahStringWithRegexAtom::setStringVariable (const string& value)
 #endif
 
   oahStringAtom::setStringVariable (value);
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahStringWithRegexAtom::acceptOut (basevisitor* v)
@@ -5609,9 +5609,9 @@ void oahStringWithRegexAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fStringVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -5863,9 +5863,9 @@ void oahRationalAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fRationalVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -5878,7 +5878,7 @@ ostream& operator<< (ostream& os, const S_oahRationalAtom& elt)
 }
 
 //______________________________________________________________________________
-S_oahNaturalNumbersSetAtom oahNaturalNumbersSetAtom::create (
+S_oahNaturalNumbersSetElementAtom oahNaturalNumbersSetElementAtom::create (
   const string& longName,
   const string& shortName,
   const string& description,
@@ -5886,8 +5886,8 @@ S_oahNaturalNumbersSetAtom oahNaturalNumbersSetAtom::create (
   const string& variableName,
   set<int>&     naturalNumbersSetVariable)
 {
-  oahNaturalNumbersSetAtom* o = new
-    oahNaturalNumbersSetAtom (
+  oahNaturalNumbersSetElementAtom* o = new
+    oahNaturalNumbersSetElementAtom (
       longName,
       shortName,
       description,
@@ -5898,7 +5898,7 @@ S_oahNaturalNumbersSetAtom oahNaturalNumbersSetAtom::create (
   return o;
 }
 
-oahNaturalNumbersSetAtom::oahNaturalNumbersSetAtom (
+oahNaturalNumbersSetElementAtom::oahNaturalNumbersSetElementAtom (
   const string& longName,
   const string& shortName,
   const string& description,
@@ -5915,10 +5915,10 @@ oahNaturalNumbersSetAtom::oahNaturalNumbersSetAtom (
       naturalNumbersSetVariable)
 {}
 
-oahNaturalNumbersSetAtom::~oahNaturalNumbersSetAtom ()
+oahNaturalNumbersSetElementAtom::~oahNaturalNumbersSetElementAtom ()
 {}
 
-void oahNaturalNumbersSetAtom::applyAtomWithValue (
+void oahNaturalNumbersSetElementAtom::applyAtomWithValue (
   const string& theString,
   ostream&      os)
 {
@@ -5928,25 +5928,25 @@ void oahNaturalNumbersSetAtom::applyAtomWithValue (
       false); // 'true' to debug it
 }
 
-void oahNaturalNumbersSetAtom::acceptIn (basevisitor* v)
+void oahNaturalNumbersSetElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahNaturalNumbersSetAtom::acceptIn ()" <<
+      ".\\\" ==> oahNaturalNumbersSetElementAtom::acceptIn ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahNaturalNumbersSetAtom>*
+  if (visitor<S_oahNaturalNumbersSetElementAtom>*
     p =
-      dynamic_cast<visitor<S_oahNaturalNumbersSetAtom>*> (v)) {
-        S_oahNaturalNumbersSetAtom elem = this;
+      dynamic_cast<visitor<S_oahNaturalNumbersSetElementAtom>*> (v)) {
+        S_oahNaturalNumbersSetElementAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahNaturalNumbersSetAtom::visitStart ()" <<
+            ".\\\" ==> Launching oahNaturalNumbersSetElementAtom::visitStart ()" <<
             endl;
         }
 #endif
@@ -5954,25 +5954,25 @@ void oahNaturalNumbersSetAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahNaturalNumbersSetAtom::acceptOut (basevisitor* v)
+void oahNaturalNumbersSetElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahNaturalNumbersSetAtom::acceptOut ()" <<
+      ".\\\" ==> oahNaturalNumbersSetElementAtom::acceptOut ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahNaturalNumbersSetAtom>*
+  if (visitor<S_oahNaturalNumbersSetElementAtom>*
     p =
-      dynamic_cast<visitor<S_oahNaturalNumbersSetAtom>*> (v)) {
-        S_oahNaturalNumbersSetAtom elem = this;
+      dynamic_cast<visitor<S_oahNaturalNumbersSetElementAtom>*> (v)) {
+        S_oahNaturalNumbersSetElementAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahNaturalNumbersSetAtom::visitEnd ()" <<
+            ".\\\" ==> Launching oahNaturalNumbersSetElementAtom::visitEnd ()" <<
             endl;
         }
 #endif
@@ -5980,18 +5980,18 @@ void oahNaturalNumbersSetAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahNaturalNumbersSetAtom::browseData (basevisitor* v)
+void oahNaturalNumbersSetElementAtom::browseData (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahNaturalNumbersSetAtom::browseData ()" <<
+      ".\\\" ==> oahNaturalNumbersSetElementAtom::browseData ()" <<
       endl;
   }
 #endif
 }
 
-string oahNaturalNumbersSetAtom::asShortNamedOptionString () const
+string oahNaturalNumbersSetElementAtom::asShortNamedOptionString () const
 {
   stringstream s;
 
@@ -6016,7 +6016,7 @@ string oahNaturalNumbersSetAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string oahNaturalNumbersSetAtom::asActualLongNamedOptionString () const
+string oahNaturalNumbersSetElementAtom::asActualLongNamedOptionString () const
 {
   stringstream s;
 
@@ -6041,12 +6041,12 @@ string oahNaturalNumbersSetAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void oahNaturalNumbersSetAtom::print (ostream& os) const
+void oahNaturalNumbersSetElementAtom::print (ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "NaturalNumbersSetAtom:" <<
+    "NaturalNumbersSetElementAtom:" <<
     endl;
 
   ++gIndenter;
@@ -6088,7 +6088,7 @@ void oahNaturalNumbersSetAtom::print (ostream& os) const
   --gIndenter;
 }
 
-void oahNaturalNumbersSetAtom::printAtomWithVariableOptionsValues (
+void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
   ostream& os,
   int      valueFieldWidth) const
 {
@@ -6120,15 +6120,15 @@ void oahNaturalNumbersSetAtom::printAtomWithVariableOptionsValues (
     os <<
         "'";
 
-    if (fVariableHasBeenSet) {
+    if (fSetByUser) {
       os <<
-        ", fVariableHasBeenSet: " <<
-        fVariableHasBeenSet;
+        ", fSetByUser: " <<
+        fSetByUser;
     }
   }
 }
 
-ostream& operator<< (ostream& os, const S_oahNaturalNumbersSetAtom& elt)
+ostream& operator<< (ostream& os, const S_oahNaturalNumbersSetElementAtom& elt)
 {
   elt->print (os);
   return os;
@@ -6306,10 +6306,10 @@ void oahRGBColorAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : " <<
     fRGBColorVariable.asString ();
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", ffVariableHasBeenSet: " <<
-      fVariableHasBeenSet;
+      ", ffSetByUser: " <<
+      fSetByUser;
   }
   os << endl;
 }
@@ -6321,7 +6321,7 @@ ostream& operator<< (ostream& os, const S_oahRGBColorAtom& elt)
 }
 
 //______________________________________________________________________________
-S_oahIntSetAtom oahIntSetAtom::create (
+S_oahIntSetElementAtom oahIntSetElementAtom::create (
   const string& longName,
   const string& shortName,
   const string& description,
@@ -6329,8 +6329,8 @@ S_oahIntSetAtom oahIntSetAtom::create (
   const string& variableName,
   set<int>&     intSetVariable)
 {
-  oahIntSetAtom* o = new
-    oahIntSetAtom (
+  oahIntSetElementAtom* o = new
+    oahIntSetElementAtom (
       longName,
       shortName,
       description,
@@ -6341,7 +6341,7 @@ S_oahIntSetAtom oahIntSetAtom::create (
   return o;
 }
 
-oahIntSetAtom::oahIntSetAtom (
+oahIntSetElementAtom::oahIntSetElementAtom (
   const string& longName,
   const string& shortName,
   const string& description,
@@ -6360,10 +6360,10 @@ oahIntSetAtom::oahIntSetAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahIntSetAtom::~oahIntSetAtom ()
+oahIntSetElementAtom::~oahIntSetElementAtom ()
 {}
 
-void oahIntSetAtom::applyAtomWithValue (
+void oahIntSetElementAtom::applyAtomWithValue (
   const string& theString,
   ostream&      os)
 {
@@ -6375,7 +6375,7 @@ void oahIntSetAtom::applyAtomWithValue (
     gLogStream <<
       "Handling atom '" <<
       fetchNames () <<
-      "' of type 'oahIntSetAtom'" <<
+      "' of type 'oahIntSetElementAtom'" <<
       " with value \"" << theString << "\"" <<
       endl;
   }
@@ -6441,28 +6441,28 @@ void oahIntSetAtom::applyAtomWithValue (
 #endif
 
   fIntSetVariable.insert (lilypondMeasureNumber);
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
-void oahIntSetAtom::acceptIn (basevisitor* v)
+void oahIntSetElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahIntSetAtom::acceptIn ()" <<
+      ".\\\" ==> oahIntSetElementAtom::acceptIn ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahIntSetAtom>*
+  if (visitor<S_oahIntSetElementAtom>*
     p =
-      dynamic_cast<visitor<S_oahIntSetAtom>*> (v)) {
-        S_oahIntSetAtom elem = this;
+      dynamic_cast<visitor<S_oahIntSetElementAtom>*> (v)) {
+        S_oahIntSetElementAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahIntSetAtom::visitStart ()" <<
+            ".\\\" ==> Launching oahIntSetElementAtom::visitStart ()" <<
             endl;
         }
 #endif
@@ -6470,25 +6470,25 @@ void oahIntSetAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahIntSetAtom::acceptOut (basevisitor* v)
+void oahIntSetElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahIntSetAtom::acceptOut ()" <<
+      ".\\\" ==> oahIntSetElementAtom::acceptOut ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahIntSetAtom>*
+  if (visitor<S_oahIntSetElementAtom>*
     p =
-      dynamic_cast<visitor<S_oahIntSetAtom>*> (v)) {
-        S_oahIntSetAtom elem = this;
+      dynamic_cast<visitor<S_oahIntSetElementAtom>*> (v)) {
+        S_oahIntSetElementAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahIntSetAtom::visitEnd ()" <<
+            ".\\\" ==> Launching oahIntSetElementAtom::visitEnd ()" <<
             endl;
         }
 #endif
@@ -6496,18 +6496,18 @@ void oahIntSetAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahIntSetAtom::browseData (basevisitor* v)
+void oahIntSetElementAtom::browseData (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahIntSetAtom::browseData ()" <<
+      ".\\\" ==> oahIntSetElementAtom::browseData ()" <<
       endl;
   }
 #endif
 }
 
-string oahIntSetAtom::asShortNamedOptionString () const
+string oahIntSetElementAtom::asShortNamedOptionString () const
 {
   stringstream s;
 
@@ -6532,7 +6532,7 @@ string oahIntSetAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string oahIntSetAtom::asActualLongNamedOptionString () const
+string oahIntSetElementAtom::asActualLongNamedOptionString () const
 {
   stringstream s;
 
@@ -6557,12 +6557,12 @@ string oahIntSetAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void oahIntSetAtom::print (ostream& os) const
+void oahIntSetElementAtom::print (ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "IntSetAtom:" <<
+    "IntSetElementAtom:" <<
     endl;
 
   ++gIndenter;
@@ -6595,7 +6595,7 @@ void oahIntSetAtom::print (ostream& os) const
   --gIndenter;
 }
 
-void oahIntSetAtom::printAtomWithVariableOptionsValues (
+void oahIntSetElementAtom::printAtomWithVariableOptionsValues (
   ostream& os,
   int      valueFieldWidth) const
 {
@@ -6623,22 +6623,22 @@ void oahIntSetAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", fVariableHasBeenSet: " <<
-      fVariableHasBeenSet <<
+      ", fSetByUser: " <<
+      fSetByUser <<
       endl;
 
     --gIndenter;
   }
 }
 
-ostream& operator<< (ostream& os, const S_oahIntSetAtom& elt)
+ostream& operator<< (ostream& os, const S_oahIntSetElementAtom& elt)
 {
   elt->print (os);
   return os;
 }
 
 //______________________________________________________________________________
-S_oahStringSetAtom oahStringSetAtom::create (
+S_oahStringSetElementAtom oahStringSetElementAtom::create (
   const string& longName,
   const string& shortName,
   const string& description,
@@ -6646,8 +6646,8 @@ S_oahStringSetAtom oahStringSetAtom::create (
   const string& variableName,
   set<string>&  stringSetVariable)
 {
-  oahStringSetAtom* o = new
-    oahStringSetAtom (
+  oahStringSetElementAtom* o = new
+    oahStringSetElementAtom (
       longName,
       shortName,
       description,
@@ -6658,7 +6658,7 @@ S_oahStringSetAtom oahStringSetAtom::create (
   return o;
 }
 
-oahStringSetAtom::oahStringSetAtom (
+oahStringSetElementAtom::oahStringSetElementAtom (
   const string& longName,
   const string& shortName,
   const string& description,
@@ -6677,17 +6677,17 @@ oahStringSetAtom::oahStringSetAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahStringSetAtom::~oahStringSetAtom ()
+oahStringSetElementAtom::~oahStringSetElementAtom ()
 {}
 
-void oahStringSetAtom::applyAtomWithValue (
+void oahStringSetElementAtom::applyAtomWithValue (
   const string& theString,
   ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> oahAtom is of type 'oahStringSetAtom'" <<
+      "==> oahAtom is of type 'oahStringSetElementAtom'" <<
       endl;
   }
 #endif
@@ -6726,25 +6726,25 @@ void oahStringSetAtom::applyAtomWithValue (
   }
 }
 
-void oahStringSetAtom::acceptIn (basevisitor* v)
+void oahStringSetElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringSetAtom::acceptIn ()" <<
+      ".\\\" ==> oahStringSetElementAtom::acceptIn ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahStringSetAtom>*
+  if (visitor<S_oahStringSetElementAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringSetAtom>*> (v)) {
-        S_oahStringSetAtom elem = this;
+      dynamic_cast<visitor<S_oahStringSetElementAtom>*> (v)) {
+        S_oahStringSetElementAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahStringSetAtom::visitStart ()" <<
+            ".\\\" ==> Launching oahStringSetElementAtom::visitStart ()" <<
             endl;
         }
 #endif
@@ -6752,25 +6752,25 @@ void oahStringSetAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahStringSetAtom::acceptOut (basevisitor* v)
+void oahStringSetElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringSetAtom::acceptOut ()" <<
+      ".\\\" ==> oahStringSetElementAtom::acceptOut ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahStringSetAtom>*
+  if (visitor<S_oahStringSetElementAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringSetAtom>*> (v)) {
-        S_oahStringSetAtom elem = this;
+      dynamic_cast<visitor<S_oahStringSetElementAtom>*> (v)) {
+        S_oahStringSetElementAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahStringSetAtom::visitEnd ()" <<
+            ".\\\" ==> Launching oahStringSetElementAtom::visitEnd ()" <<
             endl;
         }
 #endif
@@ -6778,18 +6778,18 @@ void oahStringSetAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahStringSetAtom::browseData (basevisitor* v)
+void oahStringSetElementAtom::browseData (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringSetAtom::browseData ()" <<
+      ".\\\" ==> oahStringSetElementAtom::browseData ()" <<
       endl;
   }
 #endif
 }
 
-string oahStringSetAtom::asShortNamedOptionString () const
+string oahStringSetElementAtom::asShortNamedOptionString () const
 {
   stringstream s;
 
@@ -6814,7 +6814,7 @@ string oahStringSetAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string oahStringSetAtom::asActualLongNamedOptionString () const
+string oahStringSetElementAtom::asActualLongNamedOptionString () const
 {
   stringstream s;
 
@@ -6839,12 +6839,12 @@ string oahStringSetAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void oahStringSetAtom::print (ostream& os) const
+void oahStringSetElementAtom::print (ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "StringSetAtom:" <<
+    "StringSetElementAtom:" <<
     endl;
 
   ++gIndenter;
@@ -6876,7 +6876,7 @@ void oahStringSetAtom::print (ostream& os) const
   --gIndenter;
 }
 
-void oahStringSetAtom::printAtomWithVariableOptionsValues (
+void oahStringSetElementAtom::printAtomWithVariableOptionsValues (
   ostream& os,
   int      valueFieldWidth) const
 {
@@ -6907,22 +6907,22 @@ void oahStringSetAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", fVariableHasBeenSet: " <<
-      fVariableHasBeenSet <<
+      ", fSetByUser: " <<
+      fSetByUser <<
       endl;
 
     --gIndenter;
   }
 }
 
-ostream& operator<< (ostream& os, const S_oahStringSetAtom& elt)
+ostream& operator<< (ostream& os, const S_oahStringSetElementAtom& elt)
 {
   elt->print (os);
   return os;
 }
 
 //______________________________________________________________________________
-S_oahStringToIntMapAtom oahStringToIntMapAtom::create (
+S_oahStringToIntMapElementAtom oahStringToIntMapElementAtom::create (
   const string&     shortName,
   const string&     longName,
   const string&     description,
@@ -6930,8 +6930,8 @@ S_oahStringToIntMapAtom oahStringToIntMapAtom::create (
   const string&     variableName,
   map<string, int>& stringToIntMapVariable)
 {
-  oahStringToIntMapAtom* o = new
-    oahStringToIntMapAtom (
+  oahStringToIntMapElementAtom* o = new
+    oahStringToIntMapElementAtom (
       longName,
       shortName,
       description,
@@ -6942,7 +6942,7 @@ S_oahStringToIntMapAtom oahStringToIntMapAtom::create (
   return o;
 }
 
-oahStringToIntMapAtom::oahStringToIntMapAtom (
+oahStringToIntMapElementAtom::oahStringToIntMapElementAtom (
   const string&     shortName,
   const string&     longName,
   const string&     description,
@@ -6961,17 +6961,17 @@ oahStringToIntMapAtom::oahStringToIntMapAtom (
   fMultipleOccurrencesAllowed = true;
 }
 
-oahStringToIntMapAtom::~oahStringToIntMapAtom ()
+oahStringToIntMapElementAtom::~oahStringToIntMapElementAtom ()
 {}
 
-void oahStringToIntMapAtom::applyAtomWithValue (
+void oahStringToIntMapElementAtom::applyAtomWithValue (
   const string& theString,
   ostream&      os)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> oahAtom is of type 'oahStringToIntMapAtom'" <<
+      "==> oahAtom is of type 'oahStringToIntMapElementAtom'" <<
       endl;
   }
 #endif
@@ -6982,7 +6982,7 @@ void oahStringToIntMapAtom::applyAtomWithValue (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "==> oahAtom is of type 'oahStringToIntMapAtom'" <<
+      "==> oahAtom is of type 'oahStringToIntMapElementAtom'" <<
       endl;
   }
 #endif
@@ -6991,8 +6991,8 @@ void oahStringToIntMapAtom::applyAtomWithValue (
     "[[:space:]]*"
     "([[:w:]]+)"     // string
     "[[:space:]]*"
-//    "=" JMI
-//    "[[:space:]]*"
+    ":"
+    "[[:space:]]*"
     "([[:digit:]]+)" // int
     "[[:space:]]*"
     );
@@ -7063,25 +7063,25 @@ void oahStringToIntMapAtom::applyAtomWithValue (
   fStringToIntMapVariable [musicxmlMeasureNumber] = lilypondMeasureNumber;
 }
 
-void oahStringToIntMapAtom::acceptIn (basevisitor* v)
+void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringToIntMapAtom::acceptIn ()" <<
+      ".\\\" ==> oahStringToIntMapElementAtom::acceptIn ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahStringToIntMapAtom>*
+  if (visitor<S_oahStringToIntMapElementAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringToIntMapAtom>*> (v)) {
-        S_oahStringToIntMapAtom elem = this;
+      dynamic_cast<visitor<S_oahStringToIntMapElementAtom>*> (v)) {
+        S_oahStringToIntMapElementAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahStringToIntMapAtom::visitStart ()" <<
+            ".\\\" ==> Launching oahStringToIntMapElementAtom::visitStart ()" <<
             endl;
         }
 #endif
@@ -7089,25 +7089,25 @@ void oahStringToIntMapAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahStringToIntMapAtom::acceptOut (basevisitor* v)
+void oahStringToIntMapElementAtom::acceptOut (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringToIntMapAtom::acceptOut ()" <<
+      ".\\\" ==> oahStringToIntMapElementAtom::acceptOut ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahStringToIntMapAtom>*
+  if (visitor<S_oahStringToIntMapElementAtom>*
     p =
-      dynamic_cast<visitor<S_oahStringToIntMapAtom>*> (v)) {
-        S_oahStringToIntMapAtom elem = this;
+      dynamic_cast<visitor<S_oahStringToIntMapElementAtom>*> (v)) {
+        S_oahStringToIntMapElementAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahStringToIntMapAtom::visitEnd ()" <<
+            ".\\\" ==> Launching oahStringToIntMapElementAtom::visitEnd ()" <<
             endl;
         }
 #endif
@@ -7115,18 +7115,18 @@ void oahStringToIntMapAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahStringToIntMapAtom::browseData (basevisitor* v)
+void oahStringToIntMapElementAtom::browseData (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahStringToIntMapAtom::browseData ()" <<
+      ".\\\" ==> oahStringToIntMapElementAtom::browseData ()" <<
       endl;
   }
 #endif
 }
 
-string oahStringToIntMapAtom::asShortNamedOptionString () const
+string oahStringToIntMapElementAtom::asShortNamedOptionString () const
 {
   stringstream s;
 
@@ -7151,7 +7151,7 @@ string oahStringToIntMapAtom::asShortNamedOptionString () const
   return s.str ();
 }
 
-string oahStringToIntMapAtom::asActualLongNamedOptionString () const
+string oahStringToIntMapElementAtom::asActualLongNamedOptionString () const
 {
   stringstream s;
 
@@ -7176,7 +7176,7 @@ string oahStringToIntMapAtom::asActualLongNamedOptionString () const
   return s.str ();
 }
 
-void oahStringToIntMapAtom::print (ostream& os) const
+void oahStringToIntMapElementAtom::print (ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
@@ -7214,7 +7214,7 @@ void oahStringToIntMapAtom::print (ostream& os) const
   --gIndenter;
 }
 
-void oahStringToIntMapAtom::printAtomWithVariableOptionsValues (
+void oahStringToIntMapElementAtom::printAtomWithVariableOptionsValues (
   ostream& os,
   int      valueFieldWidth) const
 {
@@ -7248,15 +7248,15 @@ void oahStringToIntMapAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", fVariableHasBeenSet: " <<
-      fVariableHasBeenSet <<
+      ", fSetByUser: " <<
+      fSetByUser <<
       endl;
 
     --gIndenter;
   }
 }
 
-ostream& operator<< (ostream& os, const S_oahStringToIntMapAtom& elt)
+ostream& operator<< (ostream& os, const S_oahStringToIntMapElementAtom& elt)
 {
   elt->print (os);
   return os;
@@ -7327,6 +7327,8 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
   string regularExpression (
     "(.+)"           // string
     "[[:space:]]+"
+    ":"
+    "[[:space:]]+"
     "([[:digit:]]+)" // int
     );
 
@@ -7395,7 +7397,7 @@ void oahStringAndIntegerAtom::setIntegerVariable (int value)
 #endif
 
   fIntegerVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahStringAndIntegerAtom::setStringVariable (const string& value)
@@ -7413,7 +7415,7 @@ void oahStringAndIntegerAtom::setStringVariable (const string& value)
 #endif
 
   fStringVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahStringAndIntegerAtom::acceptIn (basevisitor* v)
@@ -7558,9 +7560,9 @@ void oahStringAndIntegerAtom::printAtomWithVariableOptionsValues (
     " : " <<
     "\"" << fIntegerVariable << "\"";
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -7573,7 +7575,7 @@ ostream& operator<< (ostream& os, const S_oahStringAndIntegerAtom& elt)
 }
 
 //______________________________________________________________________________
-S_oahStringAndTwoIntegersAtom oahStringAndTwoIntegersAtom::create (
+S_oahStringAndTwoIntegersAtom oahStringAndTwoIntegersAtom::create ( // UNUSED JMI
   const string&  shortName,
   const string&  longName,
   const string&  description,
@@ -7712,7 +7714,7 @@ void oahStringAndTwoIntegersAtom::setStringVariable (const string& value)
 #endif
 
   fStringVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahStringAndTwoIntegersAtom::setPrimaryIntegerVariable (int value)
@@ -7730,7 +7732,7 @@ void oahStringAndTwoIntegersAtom::setPrimaryIntegerVariable (int value)
 #endif
 
   fPrimaryIntegerVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahStringAndTwoIntegersAtom::setSecondaryIntegerVariable (int value)
@@ -7748,7 +7750,7 @@ void oahStringAndTwoIntegersAtom::setSecondaryIntegerVariable (int value)
 #endif
 
   fSecondaryIntegerVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahStringAndTwoIntegersAtom::acceptIn (basevisitor* v)
@@ -7897,9 +7899,9 @@ void oahStringAndTwoIntegersAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fSecondaryIntegerVariable;
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -8127,9 +8129,9 @@ void oahLengthUnitKindAtom::printAtomWithVariableOptionsValues (
     msrLengthUnitKindAsString (
       fLengthUnitKindVariable);
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -8406,9 +8408,9 @@ void oahLengthAtom::printAtomWithVariableOptionsValues (
     " : " <<
     fLengthVariable.asString ();
 
-  if (fVariableHasBeenSet) { // JMIJMIJMI
+  if (fSetByUser) { // JMIJMIJMI
     os <<
-      ", has been set";
+      ", set by user";
   }
 
   os << endl;
@@ -8474,7 +8476,7 @@ void oahMidiTempoAtom::setMidiTempoVariable (
 #endif
 
   fMidiTempoVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void oahMidiTempoAtom::applyAtomWithValue (
@@ -8697,10 +8699,10 @@ void oahMidiTempoAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : " <<
     fMidiTempoVariable.asString ();
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", ffVariableHasBeenSet: " <<
-      fVariableHasBeenSet;
+      ", ffSetByUser: " <<
+      fSetByUser;
   }
   os << endl;
 }

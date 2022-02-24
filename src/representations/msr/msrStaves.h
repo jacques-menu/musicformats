@@ -280,6 +280,9 @@ class EXP msrStaff : public msrElement
     void                  appendPendingFullMeasureRestsToStaff (
                             int inputLineNumber);
 
+    void                  replicateLastAppendedMeasureInStaff (
+                            int           inputLineNumber);
+
     void                  addFullMeasureRestsToStaff (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,

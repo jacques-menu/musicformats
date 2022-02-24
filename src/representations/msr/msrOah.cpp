@@ -264,9 +264,9 @@ void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }
@@ -610,7 +610,7 @@ void msrRenamePartAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", has been set";
+      ", set by user";
 
     --gIndenter;
   }
@@ -981,15 +981,8 @@ R"()",
 R"(Rename part ORIGINAL_NAME to NEW_NAME, for example after displaying
 the names in the score or a summary of the latter in a first run with options
 '-dmsrnames, -display-msr-names' or 'dmsrsum, -display-msr-summary'.
-PART_RENAME_SPEC can be:
-'ORIGINAL_NAME = NEW_NAME'
-or
-"ORIGINAL_NAME = NEW_NAME"
-The single or double quotes are used to allow spaces in the names
-and around the '=' sign, otherwise they can be dispensed with.
-Using double quotes allows for shell variables substitutions, as in:
-DESSUS="Cor anglais"
-EXECUTABLE -msr-rename-part "P1 = ${DESSUS}" .
+PART_RENAME_SPEC should be of the form ORIGINAL_NAM:NEW_NAME .
+There can be spaces around the ':'.
 There can be several occurrences of this option.)",
          regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),

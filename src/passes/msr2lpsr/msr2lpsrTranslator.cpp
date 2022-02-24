@@ -990,7 +990,7 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
         getLedgerLinesRGBColorAtom ();
 
   // has the atom been used?
-  if (ledgerLinesRGBColorAtom->getVariableHasBeenSet ()) {
+  if (ledgerLinesRGBColorAtom->getSetByUser ()) {
     // this score needs the 'colored ledger lines' Scheme function
     fResultingLpsr->
       setColoredLedgerLinesIsNeeded ();
@@ -3199,11 +3199,11 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
   if (gGlobalLpsrOahGroup->getConvertMusicXMLTemposToMsrRehearsalMarks ()) {
     // create a rehearsal mark containing elt's words
 
-    S_msrRehearsal
-      rehearsal =
-        msrRehearsal::create (
+    S_msrRehearsalMark
+      rehearsalMark =
+        msrRehearsalMark::create (
           elt->getInputLineNumber (),
-          msrRehearsal::kNone,
+          msrRehearsalMark::kNone,
           elt->tempoWordsListAsString (" "), //JMI ???
           elt->getTempoPlacementKind ());
 
@@ -3213,15 +3213,15 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
         "Converting tempo " <<
         elt->asShortString () <<
         " to rehearsal mark '" <<
-        rehearsal->asShortString () <<
+        rehearsalMark->asShortString () <<
         "'" <<
         endl;
     }
 #endif
 
-    // append the rehearsal to the current voice clone
+    // append the rehearsalMark to the current voice clone
     fCurrentVoiceClone->
-      appendRehearsalToVoice (rehearsal);
+      appendRehearsalMarkToVoice (rehearsalMark);
   }
 
   else {
@@ -3243,27 +3243,27 @@ void msr2lpsrTranslator::visitEnd (S_msrTempo& elt)
 }
 
 //________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrRehearsal& elt)
+void msr2lpsrTranslator::visitStart (S_msrRehearsalMark& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrRehearsal" <<
+      "--> Start visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
 #endif
 
   fCurrentVoiceClone->
-    appendRehearsalToVoice (elt);
+    appendRehearsalMarkToVoice (elt);
 }
 
-void msr2lpsrTranslator::visitEnd (S_msrRehearsal& elt)
+void msr2lpsrTranslator::visitEnd (S_msrRehearsalMark& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrRehearsal" <<
+      "--> End visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
@@ -4183,11 +4183,11 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
 
     else if (gGlobalLpsrOahGroup->getConvertLpsrWordsToRehearsalMarks ()) {
       // create a rehearsal mark containing elt's words contents
-      S_msrRehearsal
-        rehearsal =
-          msrRehearsal::create (
+      S_msrRehearsalMark
+        rehearsalMark =
+          msrRehearsalMark::create (
             inputLineNumber,
-            msrRehearsal::kNone,
+            msrRehearsalMark::kNone,
             elt->getWordsContents (),
             elt->getWordsPlacementKind ()); // above ??? JMI
 
@@ -4197,15 +4197,15 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
           "Converting words '" <<
           elt->asShortString () <<
           "' to rehearsal mark '" <<
-          rehearsal->asShortString () <<
+          rehearsalMark->asShortString () <<
           "'" <<
           endl;
       }
 #endif
 
-      // append the rehearsal to the current voice clone
+      // append the rehearsalMark to the current voice clone
       fCurrentVoiceClone->
-        appendRehearsalToVoice (rehearsal);
+        appendRehearsalMarkToVoice (rehearsalMark);
 
       wordsHasBeenHandled = true;
     }
@@ -4498,6 +4498,54 @@ void msr2lpsrTranslator::visitStart (S_msrSlash& elt)
       __FILE__, __LINE__,
       s.str ());
   }
+}
+
+//________________________________________________________________________
+void msr2lpsrTranslator::visitStart (S_msrCrescDecresc& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrCrescDecresc" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  if (fOnGoingNonGraceNote) {
+    fCurrentNonGraceNoteClone->
+      appendCrescDecrescToNote (elt);
+  }
+  else if (fOnGoingChord) {
+    fCurrentChordClone->
+      appendCrescDecrescToChord (elt);
+  }
+  else {
+    stringstream s;
+
+    s <<
+      "cresc/decresc is out of context, cannot be handled: '" <<
+      elt->asShortString () <<
+      "'";
+
+    msr2lpsrInternalError (
+      gGlobalServiceRunData->getInputSourceName (),
+      elt->getInputLineNumber (),
+      __FILE__, __LINE__,
+      s.str ());
+  }
+}
+
+void msr2lpsrTranslator::visitEnd (S_msrCrescDecresc& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> End visiting msrCrescDecresc" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
 }
 
 //________________________________________________________________________
@@ -7058,7 +7106,7 @@ void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
   }
 
   // is there a poet option?
-  if (gGlobalLpsr2lilypondOahGroup->getPoetAtom ()->getVariableHasBeenSet ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getPoetAtom ()->getSetByUser ()) {
     // remove all poets
     fCurrentLpsrScoreHeader->
       removeAllPoets (inputLineNumber);

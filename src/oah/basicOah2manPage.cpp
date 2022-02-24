@@ -807,13 +807,13 @@ void basicOah2manPage::visitEnd (S_oahStringWithDefaultValueAtom& elt)
 }
 
 //________________________________________________________________________
-void basicOah2manPage::visitStart (S_oahNaturalNumbersSetAtom& elt)
+void basicOah2manPage::visitStart (S_oahNaturalNumbersSetElementAtom& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       endl <<
-      ".\\\" --> Start visiting oahNaturalNumbersSetAtom '" <<
+      ".\\\" --> Start visiting oahNaturalNumbersSetElementAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
@@ -822,13 +822,13 @@ void basicOah2manPage::visitStart (S_oahNaturalNumbersSetAtom& elt)
 #endif
 }
 
-void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetAtom& elt)
+void basicOah2manPage::visitEnd (S_oahNaturalNumbersSetElementAtom& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       endl <<
-      ".\\\" --> End visiting oahNaturalNumbersSetAtom" <<
+      ".\\\" --> End visiting oahNaturalNumbersSetElementAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       endl;
   }
@@ -867,13 +867,13 @@ void basicOah2manPage::visitEnd (S_oahStringsSetElementAtom& elt)
 */
 
 //________________________________________________________________________
-void basicOah2manPage::visitStart (S_oahStringSetAtom& elt)
+void basicOah2manPage::visitStart (S_oahStringSetElementAtom& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       endl <<
-      ".\\\" --> Start visiting oahStringSetAtom '" <<
+      ".\\\" --> Start visiting oahStringSetElementAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
@@ -882,13 +882,13 @@ void basicOah2manPage::visitStart (S_oahStringSetAtom& elt)
 #endif
 }
 
-void basicOah2manPage::visitEnd (S_oahStringSetAtom& elt)
+void basicOah2manPage::visitEnd (S_oahStringSetElementAtom& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       endl <<
-      ".\\\" --> End visiting oahStringSetAtom" <<
+      ".\\\" --> End visiting oahStringSetElementAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       endl;
   }

@@ -344,16 +344,23 @@ class EXP tracingOahGroup : public oahGroup
 
     Bool                  getTraceRepeatsDetails () const
                               { return fTraceRepeatsDetails; }
+
     // measure repeats
     void                  setTraceMeasureRepeats ()
                               { fTraceMeasureRepeats = true; }
     Bool                  getTraceMeasureRepeats () const
                               { return fTraceMeasureRepeats; }
+
     // full measure rests
     void                  setTraceFullMeasureRests ()
                               { fTraceFullMeasureRests = true; }
     Bool                  getTraceFullMeasureRests () const
                               { return fTraceFullMeasureRests; }
+
+    void                  setTraceFullMeasureRestsDetails ()
+                              { fTraceFullMeasureRestsDetails = true; }
+    Bool                  getTraceFullMeasureRestsDetails () const
+                              { return fTraceFullMeasureRestsDetails; }
     // beats repeats
     void                  setTraceBeatRepeats ()
                               { fTraceBeatRepeats = true; }
@@ -374,6 +381,7 @@ class EXP tracingOahGroup : public oahGroup
                               { fTraceNotes = true; }
     Bool                  getTraceNotes () const
                               { return fTraceNotes; }
+
     // notes details
     Bool                  getTraceNotesDetails () const
                               { return fTraceNotesDetails; }
@@ -382,26 +390,31 @@ class EXP tracingOahGroup : public oahGroup
                               { return fTraceWholeNotes; }
     Bool                  getTraceWholeNotesDetails () const
                               { return fTraceWholeNotesDetails; }
+
     // skip notes
     void                  setTraceSkipNotes ()
                               { fTraceSkipNotes = true; }
     Bool                  getTraceSkipNotes () const
                               { return fTraceSkipNotes; }
+
     // rest notes
     void                  setTraceRestNotes ()
                               { fTraceRestNotes = true; }
     Bool                  getTraceRestNotes () const
                               { return fTraceRestNotes; }
+
     // notes octave entry
     void                  setTraceNotesOctaveEntry ()
                               { fTraceNotesOctaveEntry = true; }
     Bool                  getTraceNotesOctaveEntry () const
                               { return fTraceNotesOctaveEntry; }
+
     // grace notes
     void                  setTraceGraceNotes ()
                               { fTraceGraceNotes = true; }
     Bool                  getTraceGraceNotes () const
                               { return fTraceGraceNotes; }
+
     // tremolos
     void                  setTraceTremolos ()
                               { fTraceTremolos = true; }
@@ -417,26 +430,31 @@ class EXP tracingOahGroup : public oahGroup
                               { fTraceStems = true; }
     Bool                  getTraceStems () const
                               { return fTraceStems; }
+
     // beams
     void                  setTraceBeams ()
                               { fTraceBeams = true; }
     Bool                  getTraceBeams () const
                               { return fTraceBeams; }
+
     // articulations
     void                  setTraceArticulations ()
                               { fTraceArticulations = true; }
     Bool                  getTraceArticulations () const
                               { return fTraceArticulations; }
+
     // technicals
     void                  setTraceTechnicals ()
                               { fTraceTechnicals = true; }
     Bool                  getTraceTechnicals () const
                               { return fTraceTechnicals; }
+
     // ornaments
     void                  setTraceOrnaments ()
                               { fTraceOrnaments = true; }
     Bool                  getTraceOrnaments () const
                               { return fTraceOrnaments; }
+
     // dynamics
     void                  setTraceDynamics ()
                               { fTraceDynamics = true; }
@@ -523,7 +541,10 @@ class EXP tracingOahGroup : public oahGroup
                               { fTraceTies = true; }
     Bool                  getTraceTies () const
                               { return fTraceTies; }
+
     // glissandos
+    // --------------------------------------
+
     void                  setTraceGlissandos ()
                               { fTraceGlissandos = true; }
     Bool                  getTraceGlissandos () const
@@ -532,26 +553,30 @@ class EXP tracingOahGroup : public oahGroup
     // above staff
     // --------------------------------------
 
-    // rehearsals
-    void                  setTraceRehearsals ()
-                              { fTraceRehearsals = true; }
-    Bool                  getTraceRehearsals () const
-                              { return fTraceRehearsals; }
+    // rehearsal marks
+    void                  setTraceRehearsalMarks ()
+                              { fTraceRehearsalMarks = true; }
+    Bool                  getTraceRehearsalMarks () const
+                              { return fTraceRehearsalMarks; }
+
     // segnos
     void                  setTraceSegnos ()
                               { fTraceSegnos = true; }
     Bool                  getTraceSegnos () const
                               { return fTraceSegnos; }
+
     // dal segnos
     void                  setTraceDalSegnos ()
                               { fTraceDalSegnos = true; }
     Bool                  getTraceDalSegnos () const
                               { return fTraceDalSegnos; }
+
     // codas
     void                  setTraceCodas ()
                               { fTraceCodas = true; }
     Bool                  getTraceCodas () const
                               { return fTraceCodas; }
+
     // eyeglases
     void                  setTraceEyeGlasses ()
                               { fTraceEyeGlasses = true; }
@@ -601,11 +626,13 @@ class EXP tracingOahGroup : public oahGroup
                               { fTraceFrames = true; }
     Bool                  getTraceFrames () const
                               { return fTraceFrames; }
+
     // scordaturas
     void                  setTraceScordaturas ()
                               { fTraceScordaturas = true; }
     Bool                  getTraceScordaturas () const
                               { return fTraceScordaturas; }
+
     // slides
     void                  setTraceSlides ()
                               { fTraceSlides = true; }
@@ -616,31 +643,37 @@ class EXP tracingOahGroup : public oahGroup
                               { fTracePedals = true; }
     Bool                  getTracePedals () const
                               { return fTracePedals; }
+
     // accordion registrations
     void                  setTraceAccordionRegistrations ()
                               { fTraceAccordionRegistrations = true; }
     Bool                  getTraceAccordionRegistrations () const
                               { return fTraceAccordionRegistrations; }
+
     // harp pedals
     void                  setTraceHarpPedals ()
                               { fTraceHarpPedals = true; }
     Bool                  getTraceHarpPedals () const
                               { return fTraceHarpPedals; }
+
     // harp pedals tuning
     void                  setTraceHarpPedalsTunings ()
                               { fTraceHarpPedalsTunings = true; }
     Bool                  getTraceHarpPedalsTunings () const
                               { return fTraceHarpPedalsTunings; }
+
     // damps
     void                  setTraceDamps ()
                               { fTraceDamps = true; }
     Bool                  getTraceDamps () const
                               { return fTraceDamps; }
+
     // dampalls
     void                  setTraceDampAlls ()
                               { fTraceDampAlls = true; }
     Bool                  getTraceDampAlls () const
                               { return fTraceDampAlls; }
+
     // midi
     void                  setTraceMidi ()
                               { fTraceMidi = true; }
@@ -840,6 +873,7 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  fTraceMeasureRepeats;
     // full measure rests
     Bool                  fTraceFullMeasureRests;
+    Bool                  fTraceFullMeasureRestsDetails;
     // beats repeats
     Bool                  fTraceBeatRepeats;
     // slashes
@@ -933,8 +967,8 @@ class EXP tracingOahGroup : public oahGroup
     // above staff
     // --------------------------------------
 
-    // rehearsals
-    Bool                  fTraceRehearsals;
+    // rehearsal marks
+    Bool                  fTraceRehearsalMarks;
     // segnos
     Bool                  fTraceSegnos;
     // dal segnos

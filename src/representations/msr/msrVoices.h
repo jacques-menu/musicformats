@@ -78,8 +78,8 @@ typedef SMARTP<msrFiguredBassElement> S_msrFiguredBassElement;
 class msrTempo;
 typedef SMARTP<msrTempo> S_msrTempo;
 
-class msrRehearsal;
-typedef SMARTP<msrRehearsal> S_msrRehearsal;
+class msrRehearsalMark;
+typedef SMARTP<msrRehearsalMark> S_msrRehearsalMark;
 
 class msrLineBreak;
 typedef SMARTP<msrLineBreak> S_msrLineBreak;
@@ -550,10 +550,10 @@ class EXP msrVoice : public msrElement
 
     void                  appendTempoToVoice (S_msrTempo tempo);
 
-    // rehearsals
+    // rehearsal marks
 
-    void                  appendRehearsalToVoice (
-                            S_msrRehearsal rehearsal);
+    void                  appendRehearsalMarkToVoice (
+                            S_msrRehearsalMark rehearsalMark);
 
     // octave shifts
 
@@ -811,6 +811,9 @@ class EXP msrVoice : public msrElement
                             int                   inputLineNumber,
                             S_msrFullMeasureRests fullMeasureRests);
 
+    void                  replicateLastAppendedMeasureInVoice (
+                            int inputLineNumber);
+
     void                  addFullMeasureRestsToVoice (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
@@ -820,7 +823,7 @@ class EXP msrVoice : public msrElement
                             int inputLineNumber);
 
     void                  handleFullMeasureRestsStartInVoiceClone (
-                            int               inputLineNumber,
+                            int                   inputLineNumber,
                             S_msrFullMeasureRests fullMeasureRests);
 
     void                  handleFullMeasureRestsEndInVoiceClone (
@@ -833,7 +836,7 @@ class EXP msrVoice : public msrElement
                             int inputLineNumber);
 
     void                  appendFullMeasureRestsCloneToVoiceClone ( // JMI ???
-                            int               inputLineNumber,
+                            int                   inputLineNumber,
                             S_msrFullMeasureRests fullMeasureRestsClone);
 
     // measure repeats
@@ -850,7 +853,7 @@ class EXP msrVoice : public msrElement
                             int beatRepeatSlashesNumber);
 
     void                  appendMeasureRepeatToVoice (
-                            int                 inputLineNumber,
+                            int                inputLineNumber,
                             S_msrMeasureRepeat beatRepeat);
 
     void                  appendPendingMeasureRepeatToVoice (
@@ -862,7 +865,7 @@ class EXP msrVoice : public msrElement
                             int beatRepeatSlashesNumber);
 
     void                  handleMeasureRepeatStartInVoiceClone (
-                            int                 inputLineNumber,
+                            int                inputLineNumber,
                             S_msrMeasureRepeat beatRepeat);
 
     void                  handleMeasureRepeatEndInVoiceClone (
@@ -881,7 +884,7 @@ class EXP msrVoice : public msrElement
                             int inputLineNumber);
 
     void                  appendMeasureRepeatCloneToVoiceClone ( // JMI ???
-                            int                 inputLineNumber,
+                            int                inputLineNumber,
                             S_msrMeasureRepeat beatRepeatClone);
 
     // stanzas
