@@ -377,6 +377,9 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendPendingFullMeasureRestsToPart (
                             int inputLineNumber);
 
+    void                  replicateLastAppendedMeasureInPart (
+                            int           inputLineNumber);
+
     void                  addFullMeasureRestsToPart (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,

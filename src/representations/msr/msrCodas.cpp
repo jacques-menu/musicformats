@@ -33,6 +33,30 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string codaKindAsString (
+  msrCodaKind codaKind)
+{
+  string result;
+
+  switch (codaKind) {
+    case msrCodaKind::kCodaFirst:
+      result = "kCodaFirst";
+      break;
+    case msrCodaKind::kCodaSecond:
+      result = "kCodaSecond";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const msrCodaKind& elt)
+{
+  os << codaKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrCoda msrCoda::create (
   int         inputLineNumber,
   int         staffNumber,
@@ -107,23 +131,6 @@ void msrCoda::acceptOut (basevisitor* v)
 
 void msrCoda::browseData (basevisitor* v)
 {}
-
-string msrCoda::codaKindAsString (
-  msrCodaKind codaKind)
-{
-  string result;
-
-  switch (codaKind) {
-    case msrCoda::kCodaFirst:
-      result = "codaFirst";
-      break;
-    case msrCoda::kCodaSecond:
-      result = "codaSecond";
-      break;
-  } // switch
-
-  return result;
-}
 
 string msrCoda::asString () const
 {

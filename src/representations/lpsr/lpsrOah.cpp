@@ -262,9 +262,9 @@ void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }
@@ -493,9 +493,9 @@ void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
     " : " <<
     lpsrChordsLanguageKindAsString (
       fLpsrChordsLanguageKindVariable);
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }
@@ -699,8 +699,8 @@ void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
     ++gIndenter;
     os <<
       fSemiTonesPitchAndOctaveVariable <<
-      ", fVariableHasBeenSet: " <<
-      fVariableHasBeenSet;
+      ", fSetByUser: " <<
+      fSetByUser;
     --gIndenter;
   }
   else {
@@ -1232,13 +1232,14 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahStringAndIntegerAtom::create (
-        "replicate-empty-measure", "rem",
-R"###(Replicate an empty mesure, adding empty others according to SPECIFICATION.
-SPECIFICATION should be of the form 'MEASURE_NUMBER REPLICATES',
+        "replicate-empty-lpsr-measure", "rem",
+R"###(Replicate an empty LPSR mesure, adding empty others according to SPECIFICATION.
+SPECIFICATION should be of the form 'MEASURE_NUMBER:REPLICATES',
 where MEASURE_NUMBER is a string, and REPLICATES is the number
 of empty measures to add after measure MEASURE_NUMBER.
 MEASURE_NUMBER should be the number of an existing, empty measure,
-and REPLICATES should be at least 1, , such as '17 3'.
+and REPLICATES should be at least 1, , such as '17:3'.
+There can be spaces around the ':'.
 This comes in handly when MusicXML data obtained by scanning contains
 a single empty measure when there were several in the original score.
 This option can be used any number of times.)###",

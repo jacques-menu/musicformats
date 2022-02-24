@@ -84,23 +84,20 @@ typedef SMARTP<msrSegno> S_msrSegno;
 EXP ostream& operator<< (ostream& os, const S_msrSegno& elt);
 
 //______________________________________________________________________________
+enum class msrDalSegnoKind {
+  kDalSegnoNone,
+  kDalSegno, kDalSegnoAlFine, kDalSegnoAlCoda
+};
+
+string dalSegnoKindAsString (
+  msrDalSegnoKind dalSegnoKind);
+
+ostream& operator<< (ostream& os,const msrDalSegnoKind& elt);
+
+//______________________________________________________________________________
 class EXP msrDalSegno : public msrMeasureElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrDalSegnoKind {
-      kDalSegnoNone,
-      kDalSegno, kDalSegnoAlFine, kDalSegnoAlCoda
-    };
-
-    static string dalSegnoKindAsString (
-      msrDalSegnoKind dalSegnoKind);
-
-    static msrDalSegnoKind msrDalSegnoKindFromString (
-      const string& theString);
 
   public:
 

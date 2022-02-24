@@ -99,9 +99,9 @@ class EXP msr2lpsrTranslator :
 
   public visitor<S_msrSegment>,
 
-  // rehearsal
+  // rehearsal mark
 
-  public visitor<S_msrRehearsal>,
+  public visitor<S_msrRehearsalMark>,
 
   // harmonies
 
@@ -170,6 +170,8 @@ class EXP msr2lpsrTranslator :
   public visitor<S_msrSlash>,
 
   // wedges
+
+  public visitor<S_msrCrescDecresc>,
 
   public visitor<S_msrWedge>,
 
@@ -329,8 +331,8 @@ class EXP msr2lpsrTranslator :
     virtual void visitStart (S_msrTempo& elt);
     virtual void visitEnd   (S_msrTempo& elt);
 
-    virtual void visitStart (S_msrRehearsal& elt);
-    virtual void visitEnd   (S_msrRehearsal& elt);
+    virtual void visitStart (S_msrRehearsalMark& elt);
+    virtual void visitEnd   (S_msrRehearsalMark& elt);
 
     virtual void visitStart (S_msrSegment& elt);
     virtual void visitEnd   (S_msrSegment& elt);
@@ -395,6 +397,9 @@ class EXP msr2lpsrTranslator :
     virtual void visitEnd   (S_msrOtherDynamic& elt);
 
     // wedges
+    virtual void visitStart (S_msrCrescDecresc& elt);
+    virtual void visitEnd   (S_msrCrescDecresc& elt);
+
     virtual void visitStart (S_msrWedge& elt);
     virtual void visitEnd   (S_msrWedge& elt);
 

@@ -27,27 +27,36 @@ namespace MusicFormats
 class EXP msrException: public mfException
 {
   public:
-    msrException (string const& exceptionDescription) throw ()
-      : mfException (exceptionDescription)
-    {}
+
+    static SMARTP<msrException> create (
+                          string const& exceptionDescription);
+
+                          msrException (
+                            string const& exceptionDescription) throw ();
 };
 typedef SMARTP<msrException> S_msrException;
 
 class EXP msrInternalException: public mfException
 {
   public:
-    msrInternalException (string const& exceptionDescription) throw ()
-      : mfException (exceptionDescription)
-    {}
+
+    static SMARTP<msrInternalException> create (
+                          string const& exceptionDescription);
+
+                          msrInternalException (
+                            string const& exceptionDescription) throw ();
 };
 typedef SMARTP<msrInternalException> S_msrInternalException;
 
 class EXP msrUnsupportedException: public mfException
 {
   public:
-    msrUnsupportedException (string const& exceptionDescription) throw ()
-      : mfException (exceptionDescription)
-    {}
+
+    static SMARTP<msrUnsupportedException> create (
+                          string const& exceptionDescription);
+
+                          msrUnsupportedException (
+                            string const& exceptionDescription) throw ();
 };
 typedef SMARTP<msrUnsupportedException> S_msrUnsupportedException;
 

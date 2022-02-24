@@ -1196,6 +1196,11 @@ S_msrNote msrNote::createNoteDeepClone (
     } // for
   }
 
+    // cresc/decresc
+    // ------------------------------------------------------
+
+    list<S_msrCrescDecresc>
+                          fCrescDecrescs;
   // wedges
   // ------------------------------------------------------
 
@@ -3072,6 +3077,11 @@ void msrNote::appendSlashToNote (S_msrSlash slash)
 #endif
 
   fNoteSlashes.push_back (slash);
+}
+
+void msrNote::appendCrescDecrescToNote (S_msrCrescDecresc crescDecresc)
+{
+  fNoteCrescDecrescs.push_back (crescDecresc);
 }
 
 void msrNote::appendWedgeToNote (S_msrWedge wedge)

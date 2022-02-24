@@ -249,7 +249,8 @@ class EXP msr2msrOahGroup : public oahGroup
     // page breaks
     const set<string>&    getInserPageBreakAfterMeasureSet () const
                               { return fInserPageBreakAfterMeasureSet; }
-    S_oahStringSetAtom    getInserPageBreakAfterMeasureAtom () const
+    S_oahStringSetElementAtom
+                          getInserPageBreakAfterMeasureAtom () const
                               { return fInserPageBreakAfterMeasureAtom; }
 
     // compress
@@ -323,10 +324,12 @@ class EXP msr2msrOahGroup : public oahGroup
 
     // breaks
     set<string>           fInserPageBreakAfterMeasureSet;
-    S_oahStringSetAtom    fInserPageBreakAfterMeasureAtom;
+    S_oahStringSetElementAtom
+                          fInserPageBreakAfterMeasureAtom;
 
     set<string>           fInserLineBreakAfterMeasureSet;
-    S_oahStringSetAtom    fInserLineBreakAfterMeasureAtom;
+    S_oahStringSetElementAtom
+                          fInserLineBreakAfterMeasureAtom;
 
     // compress
     Bool                  fCoalesceEmptyMeasures;

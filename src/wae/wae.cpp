@@ -141,6 +141,8 @@ void waeErrorWithException (
     sourceCodeLineNumber,
     message);
 
+abort (); // JMI
+
   throw *exception;
 }
 

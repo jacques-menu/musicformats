@@ -1308,15 +1308,19 @@ class EXP mxsr2msrTranslator :
                                 S_msrVoice voice);
 
 
-    // rehearsal handling
+    // rehearsal marks handling
     // ------------------------------------------------------
-    // rehearsals remain pending until the next note:
+    // rehearsal marks remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
-    list<S_msrRehearsal>      fPendingRehearsalsList;
+    list<S_msrRehearsalMark>  fPendingRehearsalMarksList;
 
-    void                      attachPendingRehearsalsToVoice (
+    void                      attachPendingRehearsalMarksToVoice (
                                 S_msrVoice voice);
+
+//     void                      convertWordsToRehearsalMark (
+//                                 int           inputLineNumber,
+//                                 const string& wordsValuee);
 
 
     // segnos handling
@@ -1329,10 +1333,14 @@ class EXP mxsr2msrTranslator :
     void                      attachPendingSegnosToNote (
                                 S_msrNote note);
 
+//     void                      convertWordsToSegno (
+//                                 int           inputLineNumber,
+//                                 const string& wordsValuee);
+
 
     // dal segnos handling
     // ------------------------------------------------------
-    // dal segnos are note represented as such in MusicXML,
+    // dal segnos are not represented as such in MusicXML,
     // but they are in MSR, hence an option to convert words
     // with specific contents to dal segnos
     list<S_msrDalSegno>       fPendingDalSegnosList;
@@ -1341,6 +1349,11 @@ class EXP mxsr2msrTranslator :
                                 S_msrNote note);
     void                      attachPendingDalSegnosToChord (
                                 S_msrChord chord);
+
+//     void                      convertWordsToDalSegno (
+//                                 int           inputLineNumber,
+//                                 const string& wordsValuee);
+
 
     // codas handling
     // ------------------------------------------------------
@@ -1353,6 +1366,35 @@ class EXP mxsr2msrTranslator :
 
     void                      attachPendingCodasToNote (
                                 S_msrNote note);
+
+//     void                      convertWordsToDalSegnoAlFine (
+//                                 int           inputLineNumber,
+//                                 const string& wordsValuee);
+//
+//     void                      convertWordsToDalSegnoAlCoda (
+//                                 int           inputLineNumber,
+//                                 const string& wordsValuee);
+//
+//     void                      convertWordsToCoda (
+//                                 int           inputLineNumber,
+//                                 const string& wordsValuee);
+
+
+    // cresc/decresc handling
+    // ------------------------------------------------------
+    // cresc/decresc are not represented as such in MusicXML,
+    // but they are in MSR, hence an option to convert words
+    // with specific contents to dal segnos
+
+    list<S_msrCrescDecresc>   fPendinCrescDecrescList;
+
+//     void                      convertWordsToCresc (
+//                                 int           inputLineNumber,
+//                                 const string& wordsValuee);
+
+//     void                      convertWordsToDecresc (
+//                                 int           inputLineNumber,
+//                                 const string& wordsValuee);
 
 
     // eyeglasses handling
@@ -1450,6 +1492,10 @@ class EXP mxsr2msrTranslator :
 
     void                      attachPendingTemposToVoice (
                                 S_msrVoice voice);
+
+//     void                      convertWordsToTempo (
+//                                 int           inputLineNumber,
+//                                 const string& wordsValue);
 
 
     // line breaks handling
@@ -1676,7 +1722,7 @@ class EXP mxsr2msrTranslator :
 
     int                       fCurrentBarLineTimes;
 
-    // tempos remain pending until the next note:
+    // barlines remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
     list<S_msrBarLine>        fPendingBarLinesList;

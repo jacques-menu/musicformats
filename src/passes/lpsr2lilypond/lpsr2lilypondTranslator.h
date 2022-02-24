@@ -279,6 +279,8 @@ class EXP lpsr2lilypondTranslator :
 
   public visitor<S_msrOtherDynamic>,
 
+  public visitor<S_msrCrescDecresc>,
+
   public visitor<S_msrWedge>,
 
   // grace notes
@@ -362,9 +364,9 @@ class EXP lpsr2lilypondTranslator :
   public visitor<S_msrFullMeasureRests>,
   public visitor<S_msrFullMeasureRestsContents>,
 
-  // rehearsal
+  // rehearsal mark
 
-  public visitor<S_msrRehearsal>,
+  public visitor<S_msrRehearsalMark>,
 
   // midi
 
@@ -611,6 +613,9 @@ class EXP lpsr2lilypondTranslator :
     virtual void visitStart (S_msrOtherDynamic& elt);
     virtual void visitEnd   (S_msrOtherDynamic& elt);
 
+    virtual void visitStart (S_msrCrescDecresc& elt);
+    virtual void visitEnd   (S_msrCrescDecresc& elt);
+
     virtual void visitStart (S_msrWedge& elt);
     virtual void visitEnd   (S_msrWedge& elt);
 
@@ -722,9 +727,9 @@ class EXP lpsr2lilypondTranslator :
     virtual void visitStart (S_msrFullMeasureRestsContents& elt);
     virtual void visitEnd   (S_msrFullMeasureRestsContents& elt);
 
-    // rehearsals
-    virtual void visitStart (S_msrRehearsal& elt);
-    virtual void visitEnd   (S_msrRehearsal& elt);
+    // rehearsal marks
+    virtual void visitStart (S_msrRehearsalMark& elt);
+    virtual void visitEnd   (S_msrRehearsalMark& elt);
 
     // MIDI
     virtual void visitStart (S_msrMidiTempo& elt);

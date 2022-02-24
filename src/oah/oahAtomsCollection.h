@@ -848,8 +848,8 @@ class EXP oahBooleanAtom : public oahAtom
     Bool                  getBooleanVariable () const
                               { return fBooleanVariable; }
 
-    Bool                  getVariableHasBeenSet () const
-                              { return fVariableHasBeenSet; }
+    Bool                  getSetByUser () const
+                              { return fSetByUser; }
 
   public:
 
@@ -886,7 +886,7 @@ class EXP oahBooleanAtom : public oahAtom
 
     string                fVariableName;
     Bool&                 fBooleanVariable;
-    Bool                  fVariableHasBeenSet;
+    Bool                  fSetByUser;
 };
 typedef SMARTP<oahBooleanAtom> S_oahBooleanAtom;
 EXP ostream& operator<< (ostream& os, const S_oahBooleanAtom& elt);
@@ -1922,7 +1922,7 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
                             const rational& value)
                               {
                                 fRationalVariable = value;
-                                fVariableHasBeenSet = true;
+                                fSetByUser = true;
                               }
 
     rational              getRationalVariable () const
@@ -1972,7 +1972,7 @@ typedef SMARTP<oahRationalAtom> S_oahRationalAtom;
 EXP ostream& operator<< (ostream& os, const S_oahRationalAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
+class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a set of natural number variables
@@ -1983,7 +1983,7 @@ class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahNaturalNumbersSetAtom> create (
+    static SMARTP<oahNaturalNumbersSetElementAtom> create (
                             const string& longName,
                             const string& shortName,
                             const string& description,
@@ -1996,7 +1996,7 @@ class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahNaturalNumbersSetAtom (
+                          oahNaturalNumbersSetElementAtom (
                             const string& longName,
                             const string& shortName,
                             const string& description,
@@ -2004,7 +2004,7 @@ class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
                             const string& variableName,
                             set<int>&     naturalNumbersSetVariable);
 
-    virtual               ~oahNaturalNumbersSetAtom ();
+    virtual               ~oahNaturalNumbersSetElementAtom ();
 
   public:
 
@@ -2015,7 +2015,7 @@ class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
                             set<int>& value)
                               {
                                 fNaturalNumbersSetVariable = value;
-                                fVariableHasBeenSet = true;
+                                fSetByUser = true;
                               }
 
     const set<int>&       getNaturalNumbersSetVariable () const
@@ -2061,8 +2061,8 @@ class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
 
     set<int>&             fNaturalNumbersSetVariable;
 };
-typedef SMARTP<oahNaturalNumbersSetAtom> S_oahNaturalNumbersSetAtom;
-EXP ostream& operator<< (ostream& os, const S_oahNaturalNumbersSetAtom& elt);
+typedef SMARTP<oahNaturalNumbersSetElementAtom> S_oahNaturalNumbersSetElementAtom;
+EXP ostream& operator<< (ostream& os, const S_oahNaturalNumbersSetElementAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahRGBColorAtom : public oahAtomStoringAValue
@@ -2108,7 +2108,7 @@ class EXP oahRGBColorAtom : public oahAtomStoringAValue
                             msrRGBColor& value)
                               {
                                 fRGBColorVariable = value;
-                                fVariableHasBeenSet = true;
+                                fSetByUser = true;
                               }
 
     const msrRGBColor&    getRGBColorVariable () const
@@ -2158,7 +2158,7 @@ typedef SMARTP<oahRGBColorAtom> S_oahRGBColorAtom;
 EXP ostream& operator<< (ostream& os, const S_oahRGBColorAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahIntSetAtom : public oahAtomStoringAValue
+class EXP oahIntSetElementAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a set of integer variables
@@ -2169,7 +2169,7 @@ class EXP oahIntSetAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahIntSetAtom> create (
+    static SMARTP<oahIntSetElementAtom> create (
                             const string& longName,
                             const string& shortName,
                             const string& description,
@@ -2182,7 +2182,7 @@ class EXP oahIntSetAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahIntSetAtom (
+                          oahIntSetElementAtom (
                             const string& longName,
                             const string& shortName,
                             const string& description,
@@ -2190,7 +2190,7 @@ class EXP oahIntSetAtom : public oahAtomStoringAValue
                             const string& variableName,
                             set<int>&     intSetVariable);
 
-    virtual               ~oahIntSetAtom ();
+    virtual               ~oahIntSetElementAtom ();
 
   public:
 
@@ -2240,11 +2240,11 @@ class EXP oahIntSetAtom : public oahAtomStoringAValue
 
     set<int>&             fIntSetVariable;
 };
-typedef SMARTP<oahIntSetAtom> S_oahIntSetAtom;
-EXP ostream& operator<< (ostream& os, const S_oahIntSetAtom& elt);
+typedef SMARTP<oahIntSetElementAtom> S_oahIntSetElementAtom;
+EXP ostream& operator<< (ostream& os, const S_oahIntSetElementAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahStringSetAtom : public oahAtomStoringAValue
+class EXP oahStringSetElementAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a set of string variables
@@ -2255,7 +2255,7 @@ class EXP oahStringSetAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahStringSetAtom> create (
+    static SMARTP<oahStringSetElementAtom> create (
                             const string& longName,
                             const string& shortName,
                             const string& description,
@@ -2268,7 +2268,7 @@ class EXP oahStringSetAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahStringSetAtom (
+                          oahStringSetElementAtom (
                             const string& longName,
                             const string& shortName,
                             const string& description,
@@ -2276,7 +2276,7 @@ class EXP oahStringSetAtom : public oahAtomStoringAValue
                             const string& variableName,
                             set<string>&  stringSetVariable);
 
-    virtual               ~oahStringSetAtom ();
+    virtual               ~oahStringSetElementAtom ();
 
   public:
 
@@ -2287,7 +2287,7 @@ class EXP oahStringSetAtom : public oahAtomStoringAValue
                             const string& partName)
                               {
                                 fStringSetVariable.insert (partName);
-                                fVariableHasBeenSet = true;
+                                fSetByUser = true;
                               }
 
     const set<string>&    getStringSetVariable () const
@@ -2333,11 +2333,11 @@ class EXP oahStringSetAtom : public oahAtomStoringAValue
 
     set<string>&          fStringSetVariable;
 };
-typedef SMARTP<oahStringSetAtom> S_oahStringSetAtom;
-EXP ostream& operator<< (ostream& os, const S_oahStringSetAtom& elt);
+typedef SMARTP<oahStringSetElementAtom> S_oahStringSetElementAtom;
+EXP ostream& operator<< (ostream& os, const S_oahStringSetElementAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
+class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling a string to integer mapping variable
@@ -2348,7 +2348,7 @@ class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahStringToIntMapAtom> create (
+    static SMARTP<oahStringToIntMapElementAtom> create (
                             const string&     longName,
                             const string&     shortName,
                             const string&     description,
@@ -2361,7 +2361,7 @@ class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahStringToIntMapAtom (
+                          oahStringToIntMapElementAtom (
                             const string&     longName,
                             const string&     shortName,
                             const string&     description,
@@ -2369,7 +2369,7 @@ class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
                             const string&     variableName,
                             map<string, int>& stringToIntMapVariable);
 
-    virtual               ~oahStringToIntMapAtom ();
+    virtual               ~oahStringToIntMapElementAtom ();
 
   public:
 
@@ -2379,7 +2379,7 @@ class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
     const map<string, int>&
                           getStringToIntMapVariable () const
                               { return fStringToIntMapVariable; }
-/// JMI                                 fVariableHasBeenSet = true;
+/// JMI                                 fSetByUser = true;
 
   public:
 
@@ -2421,8 +2421,8 @@ class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
 
     map<string, int>&     fStringToIntMapVariable;
 };
-typedef SMARTP<oahStringToIntMapAtom> S_oahStringToIntMapAtom;
-EXP ostream& operator<< (ostream& os, const S_oahStringToIntMapAtom& elt);
+typedef SMARTP<oahStringToIntMapElementAtom> S_oahStringToIntMapElementAtom;
+EXP ostream& operator<< (ostream& os, const S_oahStringToIntMapElementAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
@@ -2674,7 +2674,7 @@ class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
                             msrLengthUnitKind value)
                               {
                                 fLengthUnitKindVariable = value;
-                                fVariableHasBeenSet = true;
+                                fSetByUser = true;
                               }
 
     msrLengthUnitKind     getLengthUnitKindVariable () const
@@ -2767,7 +2767,7 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
                             msrLength value)
                               {
                                 fLengthVariable = value;
-                                fVariableHasBeenSet = true;
+                                fSetByUser = true;
                               }
 
     msrLength             getLengthVariable () const

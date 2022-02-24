@@ -531,12 +531,12 @@ string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions ()
   Bool
     outputFileNameHasBeenSet =
       outputFileNameStringAtom->
-        getVariableHasBeenSet ();
+        getSetByUser ();
 
   Bool
     autoOutputFileNameHasBeenSet =
       autoOutputFileNameAtom->
-        getVariableHasBeenSet ();
+        getSetByUser ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

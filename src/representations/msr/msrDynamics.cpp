@@ -248,6 +248,117 @@ ostream& operator<< (ostream& os, const S_msrOtherDynamic& elt)
 }
 
 //______________________________________________________________________________
+string crescDecrescKindAsString (
+  msrCrescDecrescKind crescDecrescKind)
+{
+  string result;
+
+  switch (crescDecrescKind) {
+    case msrCrescDecrescKind::kCrescDecrescCrescendo:
+      result = "kWedgeKindNone";
+      break;
+    case msrCrescDecrescKind::kCrescDecrescDecrescendo:
+      result = "kWedgeCrescendo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const msrCrescDecrescKind& elt)
+{
+  os << crescDecrescKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
+S_msrCrescDecresc msrCrescDecresc::create (
+  int                 inputLineNumber,
+  msrCrescDecrescKind crescDecrescKind)
+{
+  msrCrescDecresc* o =
+    new msrCrescDecresc (
+      inputLineNumber,
+      crescDecrescKind);
+  assert (o != nullptr);
+  return o;
+}
+
+msrCrescDecresc::msrCrescDecresc (
+  int                 inputLineNumber,
+  msrCrescDecrescKind crescDecrescKind)
+    : msrElement (inputLineNumber)
+{
+  fCrescDecrescKind = crescDecrescKind;
+}
+
+msrCrescDecresc::~msrCrescDecresc ()
+{}
+
+void msrCrescDecresc::acceptIn (basevisitor* v)
+{
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrCrescDecresc::acceptIn ()" <<
+      endl;
+  }
+
+  if (visitor<S_msrCrescDecresc>*
+    p =
+      dynamic_cast<visitor<S_msrCrescDecresc>*> (v)) {
+        S_msrCrescDecresc elem = this;
+
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrCrescDecresc::visitStart ()" <<
+            endl;
+        }
+        p->visitStart (elem);
+  }
+}
+
+void msrCrescDecresc::acceptOut (basevisitor* v)
+{
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrCrescDecresc::acceptOut ()" <<
+      endl;
+  }
+
+  if (visitor<S_msrCrescDecresc>*
+    p =
+      dynamic_cast<visitor<S_msrCrescDecresc>*> (v)) {
+        S_msrCrescDecresc elem = this;
+
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrCrescDecresc::visitEnd ()" <<
+            endl;
+        }
+        p->visitEnd (elem);
+  }
+}
+
+void msrCrescDecresc::browseData (basevisitor* v)
+{}
+
+void msrCrescDecresc::print (ostream& os) const
+{
+  os <<
+    "[CrescDecresc" " " << fCrescDecrescKind <<
+    ", line " << fInputLineNumber <<
+    endl;
+
+  os << "]" << endl;
+}
+
+ostream& operator<< (ostream& os, const S_msrCrescDecresc& elt)
+{
+  elt->print (os);
+  return os;
+}
+
+//______________________________________________________________________________
 string wedgeKindAsString (
   msrWedgeKind wedgeKind)
 {

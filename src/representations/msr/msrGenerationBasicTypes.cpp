@@ -213,7 +213,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
 
   fGenerationAPIKindVariable =
     (*it).second;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 
 void msrGenerationAPIKindAtom::acceptIn (basevisitor* v)
@@ -337,9 +337,9 @@ void msrGenerationAPIKindAtom::printAtomWithVariableOptionsValues (
     fVariableName << " : " <<
     msrGenerationAPIKindAsString (
       fGenerationAPIKindVariable);
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }

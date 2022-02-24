@@ -3408,27 +3408,27 @@ void msr2bsrTranslator::visitEnd (S_msrTranspose& elt)
 }
 
 //________________________________________________________________________
-void msr2bsrTranslator::visitStart (S_msrRehearsal& elt)
+void msr2bsrTranslator::visitStart (S_msrRehearsalMark& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrRehearsal" <<
+      "--> Start visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
 #endif
 
   fCurrentVoiceClone->
-    appendRehearsalToVoice (elt);
+    appendRehearsalMarkToVoice (elt);
 }
 
-void msr2bsrTranslator::visitEnd (S_msrRehearsal& elt)
+void msr2bsrTranslator::visitEnd (S_msrRehearsalMark& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrRehearsal" <<
+      "--> End visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
@@ -4139,6 +4139,41 @@ void msr2bsrTranslator::visitStart (S_msrSlash& elt)
     fCurrentChordClone->
       appendSlashToChord (elt);
   }
+}
+
+//________________________________________________________________________
+void msr2bsrTranslator::visitStart (S_msrCrescDecresc& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrCrescDecresc" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  if (fOnGoingNote) {
+    fCurrentNonGraceNoteClone->
+      appendCrescDecrescToNote (elt);
+  }
+
+  else if (fOnGoingChord) {
+    fCurrentChordClone->
+      appendWedgeToChord (elt);
+  }
+}
+
+void msr2bsrTranslator::visitEnd (S_msrCrescDecresc& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> End visiting msrCrescDecresc" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
 }
 
 //________________________________________________________________________

@@ -3964,7 +3964,7 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
 void mxsr2msrTranslator::visitStart (S_direction_type& elt)
 {
 /*
-<!ELEMENT direction-type (rehearsal+ | segno+ | coda+ |
+<!ELEMENT direction-type (rehearsalMark+ | segno+ | coda+ |
 	(words | symbol)+ | wedge | dynamics+ | dashes |
 	bracket | pedal | metronome | octave-shift | harp-pedals |
 	damp | damp-all | eyeglasses | string-mute |
@@ -4449,42 +4449,12 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
     Bool wordsHasBeenHandled (false);
 
-    // is wordsValue to be converted to a rehearsal mark?
-    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToRehearsalMark (wordsValue)) {
-      // create an msrWords containing wordsValue
-      S_msrRehearsal
-        rehearsal =
-          msrRehearsal::create (
-            inputLineNumber,
-            msrRehearsal::kNone, // JMI allow for other values???
-            wordsValue,
-            fCurrentDirectionPlacementKind);
-
-#ifdef TRACING_IS_ENABLED
-      if (
-        gGlobalTracingOahGroup->getTraceWords ()
-          ||
-        gGlobalTracingOahGroup->getTraceDalSegnos ()
-      ) {
-        gLogStream <<
-          "Converting words \"" <<
-          wordsValue <<
-          "\" to an MSR rehearsal mark" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
-          ", line " << inputLineNumber <<
-          endl;
-      }
-#endif
-
-      // append the rehearsal to the pending tempos list
-      fPendingRehearsalsList.push_back (rehearsal);
-
-      wordsHasBeenHandled = true;
-    }
-
     // is wordsValue to be converted to an MSR tempo?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToTempo (wordsValue)) {
+//       convertWordsToTempo (
+//         inputLineNumber,
+//         wordsValue);
+
       // create an msrWords containing wordsValue
       S_msrWords
         words =
@@ -4514,7 +4484,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       if (
         gGlobalTracingOahGroup->getTraceWords ()
           ||
-        gGlobalTracingOahGroup->getTraceDalSegnos ()
+        gGlobalTracingOahGroup->getTraceTempos ()
       ) {
         gLogStream <<
           "Converting words \"" <<
@@ -4532,6 +4502,344 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       wordsHasBeenHandled = true;
     }
 
+    // is wordsValue to be converted to a rehearsal mark?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToRehearsalMark (wordsValue)) {
+//       convertWordsToRehearsalMark (
+//         inputLineNumber,
+//         wordsValue);
+
+      // create an msrWords containing wordsValue
+      S_msrRehearsalMark
+        rehearsalMark =
+          msrRehearsalMark::create (
+            inputLineNumber,
+            msrRehearsalMark::kNone, // JMI allow for other values???
+            wordsValue,
+            fCurrentDirectionPlacementKind);
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceRehearsalMarks ()
+      ) {
+        gLogStream <<
+          "Converting words \"" <<
+          wordsValue <<
+          "\" to an MSR rehearsal mark" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
+      // append the rehearsalMark to the pending tempos list
+      fPendingRehearsalMarksList.push_back (rehearsalMark);
+
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to a segno?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToSegno (wordsValue)) {
+//       convertWordsToSegno (
+//         inputLineNumber,
+//         wordsValue);
+      // create the segno
+      S_msrSegno
+        segno =
+          msrSegno::create (
+            inputLineNumber,
+            fCurrentDirectionStaffNumber);
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceSegnos ()
+      ) {
+        gLogStream <<
+          "Converting words \"" <<
+          wordsValue <<
+          "\" to an MSR segno" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
+      // append dal segno to the pending tempos list
+      fPendingSegnosList.push_back (segno);
+
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to a dal segno?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToDalSegno (wordsValue)) {
+//       convertWordsToDalSegno (
+//         inputLineNumber,
+//         wordsValue);
+      // create a dal segno element containing wordsValue
+      S_msrDalSegno
+        dalSegno =
+          msrDalSegno::create (
+            inputLineNumber,
+            msrDalSegnoKind::kDalSegno,
+            wordsValue,
+            fCurrentDirectionStaffNumber);
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceDalSegnos ()
+      ) {
+        gLogStream <<
+          "Converting words '" <<
+          wordsValue <<
+          "' to an MSR dal segno '" <<
+          dalSegno->asString () <<
+          "'" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
+      fPendingDalSegnosList.push_back (dalSegno);
+
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to a dal segno al fine?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToDalSegnoAlFine (wordsValue)) {
+//       convertWordsToDalSegnoAlFine (
+//         inputLineNumber,
+//         wordsValue);
+      // create a dal segno element containing wordsValue
+      S_msrDalSegno
+        dalSegno =
+          msrDalSegno::create (
+            inputLineNumber,
+            msrDalSegnoKind::kDalSegno,
+            wordsValue,
+            fCurrentDirectionStaffNumber);
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceDalSegnos ()
+      ) {
+        gLogStream <<
+          "Converting words '" <<
+          wordsValue <<
+          "' to an MSR dal segno '" <<
+          dalSegno->asString () <<
+          "'" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
+      fPendingDalSegnosList.push_back (dalSegno);
+
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to a dal segno al coda?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToDalSegnoAlCoda (wordsValue)) {
+//       convertWordsToDalSegnoAlCoda (
+//         inputLineNumber,
+//         wordsValue);
+      // create a dal segno element containing wordsValue
+      S_msrDalSegno
+        dalSegno =
+          msrDalSegno::create (
+            inputLineNumber,
+            msrDalSegnoKind::kDalSegno,
+            wordsValue,
+            fCurrentDirectionStaffNumber);
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceDalSegnos ()
+      ) {
+        gLogStream <<
+          "Converting words '" <<
+          wordsValue <<
+          "' to an MSR dal segno '" <<
+          dalSegno->asString () <<
+          "'" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
+      fPendingDalSegnosList.push_back (dalSegno);
+
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to a coda first?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToCodaFirst (wordsValue)) {
+//       convertWordsToCoda (
+//         inputLineNumber,
+//         wordsValue);
+      // create the coda
+      S_msrCoda
+        coda =
+          msrCoda::create (
+            inputLineNumber,
+            fCurrentDirectionStaffNumber,
+            msrCodaKind::kCodaFirst);
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceCodas ()
+      ) {
+        gLogStream <<
+          "Converting words '" <<
+          wordsValue <<
+          "' to an MSR coda first '" <<
+          coda->asString () <<
+          "'" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
+      // append it to the pending codas list
+      fPendingCodasList.push_back (coda);
+
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to a coda second?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToCodaSecond (wordsValue)) {
+//       convertWordsToCoda (
+//         inputLineNumber,
+//         wordsValue);
+      // create the coda
+      S_msrCoda
+        coda =
+          msrCoda::create (
+            inputLineNumber,
+            fCurrentDirectionStaffNumber,
+            msrCodaKind::kCodaSecond);
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceCodas ()
+      ) {
+        gLogStream <<
+          "Converting words '" <<
+          wordsValue <<
+          "' to an MSR coda second '" <<
+          coda->asString () <<
+          "'" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
+      // append it to the pending codas list
+      fPendingCodasList.push_back (coda);
+
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to a cresc?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToCresc (wordsValue)) {
+//       convertWordsToCresc (
+//         inputLineNumber,
+//         wordsValue);
+      // create an msrCrescDecresc
+      S_msrCrescDecresc
+        crescDecresc =
+          msrCrescDecresc::create (
+            inputLineNumber,
+            msrCrescDecrescKind::kCrescDecrescCrescendo);
+
+      fPendinCrescDecrescList.push_back (crescDecresc);
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceDynamics ()
+      ) {
+        gLogStream <<
+          "Converting words \"" <<
+          wordsValue <<
+          "\" to an MSR cresc" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
+      // append the rehearsalMark to the pending tempos list
+      fPendinCrescDecrescList.push_back (crescDecresc);
+
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to a decresc?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToDecresc (wordsValue)) {
+//       convertWordsToDecresc (
+//         inputLineNumber,
+//         wordsValue);
+      // create an msrCrescDecresc
+      S_msrCrescDecresc
+        crescDecresc =
+          msrCrescDecresc::create (
+            inputLineNumber,
+            msrCrescDecrescKind::kCrescDecrescDecrescendo);
+
+      fPendinCrescDecrescList.push_back (crescDecresc);
+
+#ifdef TRACING_IS_ENABLED
+      if (
+        gGlobalTracingOahGroup->getTraceWords ()
+          ||
+        gGlobalTracingOahGroup->getTraceDynamics ()
+      ) {
+        gLogStream <<
+          "Converting words \"" <<
+          wordsValue <<
+          "\" to an MSR decresc" <<
+          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
+      // append the rehearsalMark to the pending tempos list
+      fPendinCrescDecrescList.push_back (crescDecresc);
+
+      wordsHasBeenHandled = true;
+    }
+
+    // has wordsValue ben handled?
     if (! wordsHasBeenHandled) {
       // create the words
 #ifdef TRACING_IS_ENABLED
@@ -8004,12 +8312,16 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   // forget about the current non-grace note JMI HERE???
 // JMI  fCurrentNonGraceNote = nullptr;
 
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
   // append a new measure to the current part
   fCurrentPart->
     createAMeasureAndAppendItToPart (
       inputLineNumber,
       fCurrentMeasureNumber,
       measureImplicitKind);
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
 
   // reset staff change detection
   fPreviousNoteMusicXMLStaffNumber = 1; // default value
@@ -8156,6 +8468,38 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
     finalizeLastAppendedMeasureInPart (
       inputLineNumber);
 
+  // should this measure be replicated?
+  if (gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedSet ().size ()) {
+  //  if (! fOnGoingFullMeasureRests) { JMI
+      // should we add empty measures after current measures?
+      set<string>::const_iterator
+        it =
+          gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedSet ().find (
+            fCurrentMeasureNumber);
+
+      if (it != gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedSet ().end ()) {
+        // fCurrentMeasureNumber is to be replicated,
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+          gLogStream <<
+            endl <<
+            "Replicating meaure " <<
+            " in part " <<
+            fCurrentPart->getPartCombinedName () <<
+            endl;
+        }
+#endif
+
+        fCurrentPart->
+          replicateLastAppendedMeasureInPart (
+            inputLineNumber);
+      }
+      else {
+        // fRemainingFullMeasureRestsMeasuresNumber JMI ???
+      }
+ //   }
+  }
+
   // should empty measures be added after this one?
   if (gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ().size ()) {
   //  if (! fOnGoingFullMeasureRests) { JMI
@@ -8172,17 +8516,18 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
         s << (*it).second;
 
-        int measuresToAdd;
+        int measuresToBeAdded;
 
-        s >> measuresToAdd;
+        s >> measuresToBeAdded;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
           gLogStream <<
             endl <<
-            "Creating " <<
-            measuresToAdd <<
-            " full measure rests in part " <<
+            "Adding " <<
+            mfSingularOrPlural (
+              measuresToBeAdded, "full measure rest", "full measure rests") <<
+            " to part " <<
             fCurrentPart->getPartCombinedName () <<
             endl;
         }
@@ -8192,7 +8537,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
           addFullMeasureRestsToPart (
             inputLineNumber,
             fCurrentMeasureNumber,
-            measuresToAdd);
+            measuresToBeAdded);
       }
       else {
         // fRemainingFullMeasureRestsMeasuresNumber JMI ???
@@ -8758,14 +9103,14 @@ void mxsr2msrTranslator::visitStart ( S_coda& elt )
     // account for this coda
     ++fCodasCounter;
 
-    msrCoda::msrCodaKind codaKind = msrCoda::kCodaFirst;
+    msrCodaKind codaKind = msrCodaKind::kCodaFirst;
 
     switch (fCodasCounter) {
       case 1:
-        codaKind = msrCoda::kCodaFirst;
+        codaKind = msrCodaKind::kCodaFirst;
         break;
       case 2:
-        codaKind = msrCoda::kCodaSecond;
+        codaKind = msrCodaKind::kCodaSecond;
         break;
       default:
         {
@@ -18345,13 +18690,13 @@ void mxsr2msrTranslator::attachPendingBarLinesToVoice (
   }
 }
 
-void mxsr2msrTranslator::attachPendingRehearsalsToVoice (
+void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
   S_msrVoice voice)
 {
  // attach the pending rehearsals if any to the note
-  if (fPendingRehearsalsList.size ()) {
+  if (fPendingRehearsalMarksList.size ()) {
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceRehearsals ()) {
+    if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
       gLogStream <<
         "Attaching pending rehearsals to voice \""  <<
         voice->getVoiceName () <<
@@ -18360,15 +18705,15 @@ void mxsr2msrTranslator::attachPendingRehearsalsToVoice (
     }
 #endif
 
-    while (fPendingRehearsalsList.size ()) {
-      S_msrRehearsal
-        rehearsal =
-          fPendingRehearsalsList.front ();
+    while (fPendingRehearsalMarksList.size ()) {
+      S_msrRehearsalMark
+        rehearsalMark =
+          fPendingRehearsalMarksList.front ();
 
       voice->
-        appendRehearsalToVoice (rehearsal);
+        appendRehearsalMarkToVoice (rehearsalMark);
 
-      fPendingRehearsalsList.pop_front ();
+      fPendingRehearsalMarksList.pop_front ();
     } // while
   }
 }
@@ -19645,7 +19990,7 @@ void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
   // prior to the note itself
 
   // attach pending rehearsals if any to voice
-  attachPendingRehearsalsToVoice (voice);
+  attachPendingRehearsalMarksToVoice (voice);
 
   // attach pending barlines if any to voice
   attachPendingBarLinesToVoice (voice);
@@ -23254,37 +23599,37 @@ void mxsr2msrTranslator::visitStart ( S_rehearsal& elt )
   string rehearsalEnclosure =
     elt->getAttributeValue ("enclosure");
 
-  msrRehearsal::msrRehearsalKind
+  msrRehearsalMark::msrRehearsalMarkKind
     rehearsalKind =
-      msrRehearsal::kNone; // default value
+      msrRehearsalMark::kNone; // default value
 
   if      (rehearsalEnclosure == "none") {
-    rehearsalKind = msrRehearsal::kNone;
+    rehearsalKind = msrRehearsalMark::kNone;
   }
   else if (rehearsalEnclosure == "rectangle") {
-    rehearsalKind = msrRehearsal::kRectangle;
+    rehearsalKind = msrRehearsalMark::kRectangle;
   }
   else if (rehearsalEnclosure == "oval") {
-    rehearsalKind = msrRehearsal::kOval;
+    rehearsalKind = msrRehearsalMark::kOval;
   }
   else if (rehearsalEnclosure == "circle") {
-    rehearsalKind = msrRehearsal::kCircle;
+    rehearsalKind = msrRehearsalMark::kCircle;
   }
   else if (rehearsalEnclosure == "bracket") {
-    rehearsalKind = msrRehearsal::kBracket;
+    rehearsalKind = msrRehearsalMark::kBracket;
   }
   else if (rehearsalEnclosure == "triangle") {
-    rehearsalKind = msrRehearsal::kTriangle;
+    rehearsalKind = msrRehearsalMark::kTriangle;
   }
   else if (rehearsalEnclosure == "diamond") {
-    rehearsalKind = msrRehearsal::kDiamond;
+    rehearsalKind = msrRehearsalMark::kDiamond;
   }
   else {
     if (rehearsalEnclosure.size ()) {
       stringstream s;
 
       s <<
-        "rehearsal enclosure \"" << rehearsalEnclosure <<
+        "rehearsalMark enclosure \"" << rehearsalEnclosure <<
         "\"" << " is not handled, ignored";
 
       mxsr2msrWarning (
@@ -23294,27 +23639,27 @@ void mxsr2msrTranslator::visitStart ( S_rehearsal& elt )
     }
   }
 
-  // create a rehearsal
+  // create a rehearsalMark
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRehearsals ()) {
+  if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
     gLogStream <<
-      "Creating rehearsal \"" << rehearsalValue << "\"" <<
+      "Creating rehearsalMark \"" << rehearsalValue << "\"" <<
       " in part " <<
       fCurrentPart->getPartCombinedName () <<
       endl;
   }
 #endif
 
-  S_msrRehearsal
-    rehearsal =
-      msrRehearsal::create (
+  S_msrRehearsalMark
+    rehearsalMark =
+      msrRehearsalMark::create (
         inputLineNumber,
         rehearsalKind,
         rehearsalValue,
         fCurrentDirectionPlacementKind);
 
-  // append the rehearsal to the pending tempos list
-  fPendingRehearsalsList.push_back (rehearsal);
+  // append the rehearsalMark to the pending tempos list
+  fPendingRehearsalMarksList.push_back (rehearsalMark);
 }
 
 //______________________________________________________________________________
@@ -25384,3 +25729,284 @@ The discontinue value is typically used for the last ending in a set, where ther
 
     */
 
+// void mxsr2msrTranslator::convertWordsToTempo (
+//   int           inputLineNumber,
+//   const string& wordsValue)
+// {
+//   // create an msrWords containing wordsValue
+//   S_msrWords
+//     words =
+//       msrWords::create (
+//         inputLineNumber,
+//         fCurrentDirectionPlacementKind,
+//         wordsValue,
+//         justifyKind,
+//         horizontalAlignmentKind,
+//         verticalAlignmentKind,
+//         fontStyleKind,
+//         fontSize,
+//         fontWeightKind,
+//         wordsXMLLangKind,
+//         fCurrentDirectionStaffNumber);
+//
+//   // create an msrTempo containing words
+//   S_msrTempo
+//     tempo =
+//       msrTempo::createTempoWordsOnly (
+//         inputLineNumber,
+//         words,
+//         msrTempo::kTempoParenthesizedNo,    // JMI
+//         msrPlacementKind::kPlacementAbove); // JMI
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (
+//     gGlobalTracingOahGroup->getTraceWords ()
+//       ||
+//     gGlobalTracingOahGroup->getTraceDalSegnos ()
+//   ) {
+//     gLogStream <<
+//       "Converting words \"" <<
+//       wordsValue <<
+//       "\" to an MSR tempo" <<
+//       ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+//       ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//       ", line " << inputLineNumber <<
+//       endl;
+//   }
+// #endif
+//
+//   fPendingTemposList.push_back (tempo);
+// }
+
+// void mxsr2msrTranslator::convertWordsToRehearsalMark (
+//   int           inputLineNumber,
+//   const string& wordsValue)
+//     {
+//       // create an msrWords containing wordsValue
+//       S_msrRehearsalMark
+//         rehearsalMark =
+//           msrRehearsalMark::create (
+//             inputLineNumber,
+//             msrRehearsalMark::kNone, // JMI allow for other values???
+//             wordsValue,
+//             fCurrentDirectionPlacementKind);
+//
+//     #ifdef TRACING_IS_ENABLED
+//       if (
+//         gGlobalTracingOahGroup->getTraceWords ()
+//           ||
+//         gGlobalTracingOahGroup->getTraceDalSegnos ()
+//       ) {
+//         gLogStream <<
+//           "Converting words \"" <<
+//           wordsValue <<
+//           "\" to an MSR rehearsal mark" <<
+//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", line " << inputLineNumber <<
+//           endl;
+//       }
+//     #endif
+//
+//       // append the rehearsalMark to the pending tempos list
+//       fPendingRehearsalMarksList.push_back (rehearsalMark);
+// }
+//
+// void mxsr2msrTranslator::convertWordsToSegno (
+//   int           inputLineNumber,
+//   const string& wordsValue)
+//     {
+//       // create an msrWords containing wordsValue
+//       S_msrRehearsalMark
+//         rehearsalMark =
+//           msrRehearsalMark::create (
+//             inputLineNumber,
+//             msrRehearsalMark::kNone, // JMI allow for other values???
+//             wordsValue,
+//             fCurrentDirectionPlacementKind);
+//
+//     #ifdef TRACING_IS_ENABLED
+//       if (
+//         gGlobalTracingOahGroup->getTraceWords ()
+//           ||
+//         gGlobalTracingOahGroup->getTraceDalSegnos ()
+//       ) {
+//         gLogStream <<
+//           "Converting words \"" <<
+//           wordsValue <<
+//           "\" to an MSR dal segno" <<
+//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", line " << inputLineNumber <<
+//           endl;
+//       }
+//     #endif
+//
+//       // append dal segno to the pending tempos list
+//       fPendingRehearsalMarksList.push_back (rehearsalMark);
+// }
+//
+// {
+//   // create an msrWords containing wordsValue
+//   S_msrRehearsalMark
+//     rehearsalMark =
+//       msrRehearsalMark::create (
+//         inputLineNumber,
+//         msrRehearsalMark::kNone, // JMI allow for other values???
+//         wordsValue,
+//         fCurrentDirectionPlacementKind);
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (
+//     gGlobalTracingOahGroup->getTraceWords ()
+//       ||
+//     gGlobalTracingOahGroup->getTraceDalSegnos ()
+//   ) {
+//     gLogStream <<
+//       "Converting words \"" <<
+//       wordsValue <<
+//       "\" to an MSR dal segno al fine" <<
+//       ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+//       ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//       ", line " << inputLineNumber <<
+//       endl;
+//   }
+// #endif
+//
+//   // append dal segno al fine to the pending tempos list
+//   fPendingRehearsalMarksList.push_back (rehearsalMark);
+// }
+//
+// void mxsr2msrTranslator::convertWordsToDalSegnoAlCoda (
+//   int           inputLineNumber,
+//   const string& wordsValue)
+// {
+//   // create an msrWords containing wordsValue
+//   S_msrRehearsalMark
+//     rehearsalMark =
+//       msrRehearsalMark::create (
+//         inputLineNumber,
+//         msrRehearsalMark::kNone, // JMI allow for other values???
+//         wordsValue,
+//         fCurrentDirectionPlacementKind);
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (
+//     gGlobalTracingOahGroup->getTraceWords ()
+//       ||
+//     gGlobalTracingOahGroup->getTraceDalSegnos ()
+//   ) {
+//     gLogStream <<
+//       "Converting words \"" <<
+//       wordsValue <<
+//       "\" to an MSR dal segno al coda" <<
+//       ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+//       ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//       ", line " << inputLineNumber <<
+//       endl;
+//   }
+// #endif
+//
+//   // append dal segno al coda to the pending tempos list
+//   fPendingRehearsalMarksList.push_back (rehearsalMark);
+// }
+// void mxsr2msrTranslator::convertWordsToCoda (
+//   int           inputLineNumber,
+//   const string& wordsValue)
+//     {
+//       // create an msrWords containing wordsValue
+//       S_msrRehearsalMark
+//         rehearsalMark =
+//           msrRehearsalMark::create (
+//             inputLineNumber,
+//             msrRehearsalMark::kNone, // JMI allow for other values???
+//             wordsValue,
+//             fCurrentDirectionPlacementKind);
+//
+//     #ifdef TRACING_IS_ENABLED
+//       if (
+//         gGlobalTracingOahGroup->getTraceWords ()
+//           ||
+//         gGlobalTracingOahGroup->getTraceDalSegnos ()
+//       ) {
+//         gLogStream <<
+//           "Converting words \"" <<
+//           wordsValue <<
+//           "\" to an MSR coda" <<
+//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", line " << inputLineNumber <<
+//           endl;
+//       }
+//     #endif
+//
+//       // append coda to the pending tempos list
+//       fPendingRehearsalMarksList.push_back (rehearsalMark);
+// }
+//
+// void mxsr2msrTranslator::convertWordsToCresc (
+//   int           inputLineNumber,
+//   const string& wordsValue)
+//     {
+//       // create an msrWords containing wordsValue
+//       S_msrCrescDecresc
+//         crescDecresc =
+//           msrCrescDecresc::create (
+//             inputLineNumber,
+//             msrCrescDecrescKind::kCrescDecrescCrescendo);
+//
+//       fPendinCrescDecrescList.push_back (crescDecresc);
+//
+//     #ifdef TRACING_IS_ENABLED
+//       if (
+//         gGlobalTracingOahGroup->getTraceWords ()
+//           ||
+//         gGlobalTracingOahGroup->getTraceDalSegnos ()
+//       ) {
+//         gLogStream <<
+//           "Converting words \"" <<
+//           wordsValue <<
+//           "\" to an MSR cresc" <<
+//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", line " << inputLineNumber <<
+//           endl;
+//       }
+//     #endif
+//
+//       // append the rehearsalMark to the pending tempos list
+//       fPendinCrescDecrescList.push_back (crescDecresc);
+// }
+// void mxsr2msrTranslator::convertWordsToDecresc (
+//   int           inputLineNumber,
+//   const string& wordsValue)
+//     {
+//       // create an msrWords containing wordsValue
+//       S_msrCrescDecresc
+//         crescDecresc =
+//           msrCrescDecresc::create (
+//             inputLineNumber,
+//             msrCrescDecrescKind::kCrescDecrescCrescendo);
+//
+//       fPendinCrescDecrescList.push_back (crescDecresc);
+//
+//     #ifdef TRACING_IS_ENABLED
+//       if (
+//         gGlobalTracingOahGroup->getTraceWords ()
+//           ||
+//         gGlobalTracingOahGroup->getTraceDalSegnos ()
+//       ) {
+//         gLogStream <<
+//           "Converting words \"" <<
+//           wordsValue <<
+//           "\" to an MSR decresc" <<
+//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", line " << inputLineNumber <<
+//           endl;
+//       }
+//     #endif
+//
+//       // append the rehearsalMark to the pending tempos list
+//       fPendinCrescDecrescList.push_back (crescDecresc);
+// }

@@ -54,6 +54,9 @@ class EXP msr2summaryVisitor :
   public visitor<S_msrArticulation>,
 
   public visitor<S_msrDynamic>,
+
+  public visitor<S_msrCrescDecresc>,
+
   public visitor<S_msrWedge>,
 
   public visitor<S_msrGraceNotesGroup>,
@@ -134,6 +137,9 @@ class EXP msr2summaryVisitor :
 
     virtual void visitStart (S_msrDynamic& elt);
     virtual void visitEnd   (S_msrDynamic& elt);
+
+    virtual void visitStart (S_msrCrescDecresc& elt);
+    virtual void visitEnd   (S_msrCrescDecresc& elt);
 
     virtual void visitStart (S_msrWedge& elt);
     virtual void visitEnd   (S_msrWedge& elt);

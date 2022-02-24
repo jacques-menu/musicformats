@@ -2544,19 +2544,19 @@ void msrVoice::appendHarpPedalsTuningToVoice (
       harpPedalsTuning);
 }
 
-void msrVoice::appendRehearsalToVoice (S_msrRehearsal rehearsal)
+void msrVoice::appendRehearsalMarkToVoice (S_msrRehearsalMark rehearsalMark)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRehearsals ()) {
+  if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
     gLogStream <<
-      "Appending rehearsal '" << rehearsal->getRehearsalText () <<
+      "Appending rehearsalMark '" << rehearsalMark->getRehearsalMarkText () <<
       "' to voice \"" << getVoiceName () << "\"" <<
       endl;
   }
 #endif
 
   fVoiceLastSegment->
-    appendRehearsalToSegment (rehearsal);
+    appendRehearsalMarkToSegment (rehearsalMark);
 }
 
 void msrVoice::appendVoiceStaffChangeToVoice (
@@ -6600,13 +6600,13 @@ void msrVoice::createFullMeasureRestsInVoice (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
     gLogStream <<
-      "Creating multiple full measure rests in voice \"" <<
+      "Creating " <<
+      mfSingularOrPlural (
+        fullMeasureRestsNumber, "full measure rest", "full measure rests") <<
+      " to voice \"" <<
       getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
-      ", " <<
-      mfSingularOrPlural (
-        fullMeasureRestsNumber, "measure", "measures") <<
       endl;
   }
 #endif
@@ -6730,6 +6730,63 @@ void msrVoice::createFullMeasureRestsInVoice (
 #endif
 }
 
+void msrVoice::replicateLastAppendedMeasureInVoice (
+  int inputLineNumber)
+{
+  string
+    voiceLastAppendedMeasureMeasureNumber =
+      fVoiceLastAppendedMeasure->
+        getMeasureElementMeasureNumber ();
+
+  // create a clone of the last appended measure
+  S_msrMeasure
+    lastAppendedMeasureClone =
+      fVoiceLastAppendedMeasure->
+        createMeasureDeepClone (
+          fVoiceLastSegment);
+
+  // change its contents
+  lastAppendedMeasureClone->
+    setMeasureElementMeasureNumber (
+      voiceLastAppendedMeasureMeasureNumber + " replicated");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+    gLogStream <<
+      "Replicating last appended measure " <<
+      fVoiceLastAppendedMeasure->getMeasureElementMeasureNumber () <<
+      " as measure " <<
+      lastAppendedMeasureClone->getMeasureElementMeasureNumber () <<
+      "in voice \"" <<
+      getVoiceName () <<
+      "\"" <<
+      endl;
+  }
+#endif
+
+
+  // register its whole notes duration
+  fetchVoicePartUpLink ()->
+    registerOrdinalMeasureNumberWholeNotesDuration (
+      inputLineNumber,
+      lastAppendedMeasureClone->
+        getMeasureOrdinalNumberInVoice (),
+      lastAppendedMeasureClone->
+        getFullMeasureWholeNotesDuration ()); // JMI
+
+  // append it to the voice last segment
+  fVoiceLastSegment->
+    appendMeasureToSegment (
+      lastAppendedMeasureClone);
+
+//   // update fVoiceLastAppendedMeasure
+//   fVoiceLastAppendedMeasure->
+//     setNextMeasureNumber (
+//       );
+//
+
+}
+
 void msrVoice::addFullMeasureRestsToVoice (
   int           inputLineNumber,
   const string& previousMeasureNumber,
@@ -6739,19 +6796,19 @@ void msrVoice::addFullMeasureRestsToVoice (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
     gLogStream <<
-      "Adding multiple full measure rests in voice \"" <<
+      "Adding " <<
+      mfSingularOrPlural (
+        fullMeasureRestsNumber, "full measure rest", "full measure rests") <<
+      " to voice \"" <<
       getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
-      ", " <<
-      mfSingularOrPlural (
-        fullMeasureRestsNumber, "measure", "measures") <<
       endl;
   }
 #endif
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullMeasureRestsDetails ()) {
     displayVoiceFullMeasureRestsAndVoice (
       inputLineNumber,
       "addFullMeasureRestsToVoice() 1");
@@ -6856,7 +6913,7 @@ void msrVoice::addFullMeasureRestsToVoice (
 
   // print resulting voice contents
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullMeasureRestsDetails ()) {
     displayVoiceFullMeasureRestsAndVoice (
       inputLineNumber,
       "addFullMeasureRestsToVoice() 4");

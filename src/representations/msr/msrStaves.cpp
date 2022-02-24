@@ -2026,13 +2026,14 @@ void msrStaff::createFullMeasureRestsInStaff (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
     gLogStream <<
-      "Creating multiple full measure rests in staff \"" <<
+      "Creating " <<
+      mfSingularOrPlural (
+        fullMeasureRestsMeasuresNumber, "full measure rest", "full measures rests") <<
+      " to staff \"" <<
       getStaffName () <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
-      ", " <<
-      mfSingularOrPlural (
-        fullMeasureRestsMeasuresNumber, "measure", "measures") <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -2047,6 +2048,27 @@ void msrStaff::createFullMeasureRestsInStaff (
   } // for
 }
 
+void msrStaff::replicateLastAppendedMeasureInStaff (
+  int inputLineNumber)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+    gLogStream <<
+      "Replicating last appended measure in staff \"" <<
+      getStaffName () <<
+      "\"" <<
+      endl;
+  }
+#endif
+
+  // add multiple rest to all staves
+  for (S_msrVoice voice : fStaffAllVoicesList) {
+    voice->
+      replicateLastAppendedMeasureInVoice (
+        inputLineNumber);
+  } // for
+}
+
 void msrStaff::addFullMeasureRestsToStaff (
   int           inputLineNumber,
   const string& previousMeasureNumber,
@@ -2055,13 +2077,14 @@ void msrStaff::addFullMeasureRestsToStaff (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
     gLogStream <<
-      "Adding multiple full measure rests to staff \"" <<
+      "Adding " <<
+      mfSingularOrPlural (
+        fullMeasureRestsNumber, "full measure rest", "full measure rests") <<
+      " to staff \"" <<
       getStaffName () <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
-      ", " <<
-      mfSingularOrPlural (
-        fullMeasureRestsNumber, "measure", "measures") <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif

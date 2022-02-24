@@ -233,9 +233,9 @@ void bsrFacSimileKindAtom::printAtomWithVariableOptionsValues (
     " : " <<
     bsrFacSimileKindAsString (
       fBsrFacSimileKindVariable);
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }
@@ -425,9 +425,9 @@ void bsrTextsLanguageAtom::printAtomWithVariableOptionsValues (
     " : " <<
     bsrTextsLanguageKindAsString (
       fBsrTextsLanguageKindVariable);
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }

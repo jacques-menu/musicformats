@@ -637,7 +637,7 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
       "fetchPartMeasuresWholeNotesDurationsVectorAt() in part \"" <<
       getPartCombinedName () <<
       "\"" <<
-      ", fPartMeasuresWholeNotesDurationsVector is EMPTY" <<
+      ", fPartMeasuresWholeNotesDurationsVector is empty" <<
       ", indexValue: " << indexValue <<
       ", line " << inputLineNumber;
 
@@ -660,6 +660,23 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
       inputLineNumber,
       __FILE__, __LINE__,
       s.str ());
+  }
+
+  else if (
+    indexValue == partMeasuresWholeNotesDurationsVectorSize // TEMP JMI
+  ) {
+    stringstream s;
+
+    s <<
+      "fetchPartMeasuresWholeNotesDurationsVectorAt() in part \"" <<
+      getPartCombinedName () <<
+      "\"" <<
+      ", partMeasuresWholeNotesDurationsVectorSize: " <<
+      partMeasuresWholeNotesDurationsVectorSize <<
+      ", indexValue: " << indexValue << " is equal to size, PROBLEM" <<
+      ", line " << inputLineNumber;
+
+    return rational (3, 4); // TEMP JMI v0.9.61
   }
 
   else if (
@@ -835,7 +852,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
   ) {
     rational
       currentValue =
-        fPartMeasuresWholeNotesDurationsVector [index];
+        fPartMeasuresWholeNotesDurationsVector.at (index);
 
     if (currentValue.getNumerator () != 0) {
       if (currentValue != wholeNotesDuration) {
@@ -1307,11 +1324,12 @@ void msrPart::createFullMeasureRestsInPart (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
     gLogStream <<
-      "Creating multiple full measure rests in part " <<
-      getPartCombinedName () <<
-      ", " <<
+      "Creating " <<
       mfSingularOrPlural (
-        multipleFullMeasureRestsMeasuresNumber, "measure", "measures") <<
+        multipleFullMeasureRestsMeasuresNumber, "full measure rest", "full measure rests") <<
+      " in part " <<
+      getPartCombinedName () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -1327,6 +1345,26 @@ void msrPart::createFullMeasureRestsInPart (
   } // for
 }
 
+void msrPart::replicateLastAppendedMeasureInPart (
+  int inputLineNumber)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+    gLogStream <<
+      "Replicating last appended measure in part " <<
+      getPartCombinedName () <<
+      endl;
+  }
+#endif
+
+  // add multiple rest to all staves
+  for (S_msrStaff staff : fPartAllStavesList) {
+    staff->
+      replicateLastAppendedMeasureInStaff (
+        inputLineNumber);
+  } // for
+}
+
 void msrPart::addFullMeasureRestsToPart (
   int           inputLineNumber,
   const string& previousMeasureNumber,
@@ -1335,11 +1373,12 @@ void msrPart::addFullMeasureRestsToPart (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
     gLogStream <<
-      "Creating multiple full measure rests in part " <<
+      "Adding " <<
+      mfSingularOrPlural (
+        fullMeasureRestsNumber, "full measure rest", "full measure rests") <<
+      " to part " <<
       getPartCombinedName () <<
       ", " <<
-      mfSingularOrPlural (
-        fullMeasureRestsNumber, "measure", "measures") <<
       endl;
   }
 #endif

@@ -303,22 +303,22 @@ R"()",
     appendAtomToSubGroup (
       aboveStaffMultiplexBooleansAtom);
 
-  // rehearsals
+  // rehearsal marks
 
   S_oahTwoBooleansAtom
-    traceRehearsalsAtom =
+    traceRehearsalMarksAtom =
       oahTwoBooleansAtom::create (
-        "trace-rehearsals", "trehears",
-R"(Rehearsals)",
-        "fTraceRehearsals",
-        fTraceRehearsals,
+        "trace-rehearsals-marks", "thm",
+R"(Rehearsal marks)",
+        "fTraceRehearsalMarks",
+        fTraceRehearsalMarks,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      traceRehearsalsAtom);
+      traceRehearsalMarksAtom);
   aboveStaffMultiplexBooleansAtom->
     addBooleanAtom (
-      traceRehearsalsAtom);
+      traceRehearsalMarksAtom);
 
   // segnos
 
@@ -2233,8 +2233,8 @@ R"(Measure repeats)",
   S_oahTwoBooleansAtom
     traceFullMeasureRestsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-rest-measures", "trmeas",
-R"(Multiple rests)",
+        "trace-full-measure-rests", "tfmr",
+R"(Full measure rests)",
         "fTraceFullMeasureRests",
         fTraceFullMeasureRests,
         fTracePassesBooleanAtom);
@@ -2569,9 +2569,9 @@ void tracingOahGroup::printAtomWithVariableOptionsValues (
     fTraceTempos <<
     endl <<
 
-    // rehearsals
+    // rehearsal marks
     setw (valueFieldWidth) << "fTtraceRehearsals" << " : " <<
-    fTraceRehearsals <<
+    fTraceRehearsalMarks <<
     endl <<
 
     // line breaks
@@ -3026,9 +3026,9 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     fTraceTempos <<
     endl <<
 
-    // rehearsals
+    // rehearsal marks
     setw (fieldWidth) << "fTtraceRehearsals" << " : " <<
-    fTraceRehearsals <<
+    fTraceRehearsalMarks <<
     endl <<
 
     // line breaks
@@ -3388,7 +3388,7 @@ R"()",
 
     traceAndDisplaySubGroup->
       appendAtomToSubGroup (
-        oahNaturalNumbersSetAtom::create (
+        oahNaturalNumbersSetElementAtom::create (
           "trace-detailed", "tdetail",
 R"('measureNumbersSet' has a form such as '0,2-14,^8-10',
 where '^' excludes the corresponding numbers interval

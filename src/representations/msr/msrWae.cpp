@@ -25,6 +25,55 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+msrException::msrException (
+  string const& exceptionDescription) throw ()
+  : mfException (exceptionDescription)
+{}
+
+S_msrException msrException::create (
+  string const& exceptionDescription)
+{
+  msrException* o = new
+    msrException (
+      exceptionDescription);
+  assert (o!=0);
+
+  return o;
+}
+
+msrInternalException::msrInternalException (
+  string const& exceptionDescription) throw ()
+  : mfException (exceptionDescription)
+{}
+
+S_msrInternalException msrInternalException::create (
+  string const& exceptionDescription)
+{
+  msrInternalException* o = new
+    msrInternalException (
+      exceptionDescription);
+  assert (o!=0);
+
+  return o;
+}
+
+msrUnsupportedException::msrUnsupportedException (
+  string const& exceptionDescription) throw ()
+  : mfException (exceptionDescription)
+{}
+
+S_msrUnsupportedException msrUnsupportedException::create (
+  string const& exceptionDescription)
+{
+  msrUnsupportedException* o = new
+    msrUnsupportedException (
+      exceptionDescription);
+  assert (o!=0);
+
+  return o;
+}
+
+//______________________________________________________________________________
 void msrWarning (
   const string& inputSourceName,
   int           inputLineNumber,
@@ -122,13 +171,15 @@ void msrInternalError (
 
   gIndenter.resetToZero ();
 
-  waeErrorWithoutException (
+//  waeErrorWithoutException ( // JMI
+   waeErrorWithException (
     "MSR INTERNAL",
     inputSourceName,
     inputLineNumber,
     sourceCodeFileName,
     sourceCodeLineNumber,
-    message);
+    message,
+    msrInternalException::create (message));
 
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();

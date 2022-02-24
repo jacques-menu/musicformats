@@ -1237,13 +1237,13 @@ void msrSegment::appendTempoToSegment (
   --gIndenter;
 }
 
-void msrSegment::appendRehearsalToSegment (
-  S_msrRehearsal rehearsal)
+void msrSegment::appendRehearsalMarkToSegment (
+  S_msrRehearsalMark rehearsalMark)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceRehearsals ()) {
+  if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
     gLogStream <<
-      "Appending rehearsal " <<
+      "Appending rehearsalMark " <<
       " to segment " << asString () <<
       "' in voice \"" <<
       fSegmentVoiceUpLink->getVoiceName () <<
@@ -1254,13 +1254,13 @@ void msrSegment::appendRehearsalToSegment (
 
   // sanity check
   assertSegmentMeasuresListIsNotEmpty (
-    rehearsal->getInputLineNumber ());
+    rehearsalMark->getInputLineNumber ());
 
   ++gIndenter;
 
   // append it to this segment
   fSegmentMeasuresList.back ()->
-    appendRehearsalToMeasure (rehearsal);
+    appendRehearsalMarkToMeasure (rehearsalMark);
 
   --gIndenter;
 }

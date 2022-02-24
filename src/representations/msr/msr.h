@@ -34,7 +34,7 @@
 
 #include "msrTempos.h"
 
-#include "msrRehearsals.h"
+#include "msrRehearsalMarks.h"
 
 #include "msrWords.h"
 

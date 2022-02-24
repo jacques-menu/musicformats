@@ -398,11 +398,17 @@ void xml2lyRegularHandler::createInputRegularGroup ()
 
   registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-rehearsal-mark", subGroup);
 
-//   registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-segno", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal-segno", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal_segno-al-fine", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-dal_segno-al-coda", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-coda-first", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-coda-second", subGroup);
+
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-cresc", subGroup);
+  registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-decresc", subGroup);
 
   registerAtomInRegularSubgroup ("convert-musicxml-words-to-msr-tempo", subGroup);
-
-// JMI  registerAtomInRegularSubgroup ("convert-musicxml-tempos-to-msr-rehearsal-marks", subGroup);
 
   registerAtomInRegularSubgroup ("cubase", subGroup);
 }
@@ -733,8 +739,10 @@ void xml2lyRegularHandler::createMeasuresRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("ignore-musicxml-page-breaks", subGroup);
-  registerAtomInRegularSubgroup ("add-empty-measures", subGroup);
-  registerAtomInRegularSubgroup ("replicate-empty-measure", subGroup);
+
+  registerAtomInRegularSubgroup ("add-empty-msr-measures", subGroup);
+  registerAtomInRegularSubgroup ("replicate-msr-measure", subGroup);
+  registerAtomInRegularSubgroup ("replicate-empty-lpsr-measure", subGroup);
 }
 
 void xml2lyRegularHandler::createRestsRegularGroup ()

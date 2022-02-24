@@ -15,7 +15,7 @@
 #include "msrParts.h"
 #include "msrPartGroups.h"
 #include "msrNotes.h"
-#include "msrRehearsals.h"
+#include "msrRehearsalMarks.h"
 #include "msrScores.h"
 #include "msrSegments.h"
 #include "msrVoiceStaffChanges.h"
@@ -325,8 +325,6 @@ class EXP msrMeasure : public msrElement
 
     string                fullMeasureWholeNotesDurationAsMsrString ();
 
-    string                currentMeasureWholeNotesDurationAsMsrString ();
-
     // backup and padding
 
     S_msrNote             createPaddingSkipNoteForVoice (
@@ -401,10 +399,10 @@ class EXP msrMeasure : public msrElement
 
     void                  appendTempoToMeasure (S_msrTempo tempo);
 
-    // rehearsals
+    // rehearsal marks
 
-    void                  appendRehearsalToMeasure (
-                            S_msrRehearsal rehearsal);
+    void                  appendRehearsalMarkToMeasure (
+                            S_msrRehearsalMark rehearsalMark);
 
     // octave shifts
 
@@ -663,7 +661,7 @@ class EXP msrMeasure : public msrElement
                             // when there is a time signature,
                             // but not for cadenzas
 
-    // measure numbers, shared by newborn clones and deep copies
+    // measure numbers
 
     string                fMeasureElementMeasureNumber;
     string                fNextMeasureNumber;
@@ -800,8 +798,8 @@ class EXP msrMeasure : public msrElement
                             const rational&         currentFiguredBassPositionInMeasure);
 
     void                  postHandleCurrentFiguredBassElementInFiguredBassMeasure (
-                            int          inputLineNumber,
-                            S_msrVoice   voice,
+                            int                     inputLineNumber,
+                            S_msrVoice              voice,
                             S_msrFiguredBassElement currentFiguredBass);
 
     void                  finalizeFiguredBassElementsInFiguredBassMeasure (
@@ -839,6 +837,8 @@ class EXP msrMeasure : public msrElement
     rational              fCurrentMeasureWholeNotesDuration;
                             // this increases when musical elements
                             // are appended to the measure
+
+    string                currentMeasureWholeNotesDurationAsMsrString ();
 
     // pending measure elements, which may have to be delayed
     // because of <backup />

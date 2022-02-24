@@ -667,8 +667,10 @@ void msdl2lilypondRegularHandler::createMeasuresRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("ignore-musicxml-page-breaks", subGroup);
-  registerAtomInRegularSubgroup ("add-empty-measures", subGroup);
-  registerAtomInRegularSubgroup ("replicate-empty-measure", subGroup);
+
+  registerAtomInRegularSubgroup ("add-empty-msr-measures", subGroup);
+  registerAtomInRegularSubgroup ("replicate-msr-measure", subGroup);
+  registerAtomInRegularSubgroup ("replicate-empty-lpsr-measure", subGroup);
 }
 
 void msdl2lilypondRegularHandler::createRestsRegularGroup ()

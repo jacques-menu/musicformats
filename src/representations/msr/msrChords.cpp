@@ -1182,6 +1182,16 @@ void msrChord::browseData (basevisitor* v)
   } // for
 
   for (
+    list<S_msrCrescDecresc>::const_iterator i = fChordCrescDecrescs.begin ();
+    i != fChordCrescDecrescs.end ();
+    ++i
+  ) {
+    // browse the cresc/decresc
+    msrBrowser<msrCrescDecresc> browser (v);
+    browser.browse (*(*i));
+  } // for
+
+  for (
     list<S_msrWedge>::const_iterator i = fChordWedges.begin ();
     i != fChordWedges.end ();
     ++i
@@ -1438,7 +1448,7 @@ void msrChord::print (ostream& os) const
     "chordSoundingWholeNotes" << " : " << fMeasureElementSoundingWholeNotes <<
     endl <<
     setw (fieldWidth) <<
-    "chordDisplayWholeNotes" << " : " << fChordDisplayWholeNotes <<
+    "fChordDisplayWholeNotes" << " : " << fChordDisplayWholeNotes <<
     endl <<
     setw (fieldWidth) <<
     "measureNumber" << " : " << fMeasureElementMeasureNumber <<
@@ -1454,7 +1464,7 @@ void msrChord::print (ostream& os) const
     endl;
 
   os <<
-    "chordDirectTupletUpLink" << " : ";
+    "fChordDirectTupletUpLink" << " : ";
   if (fChordDirectTupletUpLink) {
     os <<
       fChordDirectTupletUpLink->asShortString ();
@@ -1466,7 +1476,7 @@ void msrChord::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "positionInTuplet" << " : " <<
+    "fPositionInTuplet" << " : " <<
     fPositionInTuplet <<
     endl;
 
@@ -1504,7 +1514,7 @@ void msrChord::print (ostream& os) const
   if (fChordGraceNotesGroupLinkBefore || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordGraceNotesGroupLinkBefore";
+      "fChordGraceNotesGroupLinkBefore";
 
     if (fChordGraceNotesGroupLinkBefore) {
       os << endl;
@@ -1521,7 +1531,7 @@ void msrChord::print (ostream& os) const
   if (chordArticulationsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordArticulations";
+      "fChordArticulations";
     if (chordArticulationsSize) {
       os << endl;
       ++gIndenter;
@@ -1546,7 +1556,7 @@ void msrChord::print (ostream& os) const
   if (chordSpannersSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordSpanners";
+      "fChordSpanners";
     if (chordSpannersSize) {
       os << endl;
       ++gIndenter;
@@ -1571,7 +1581,7 @@ void msrChord::print (ostream& os) const
   if (chordTechnicalsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordTechnicals";
+      "fChordTechnicals";
     if (chordTechnicalsSize) {
       os << endl;
       ++gIndenter;
@@ -1596,7 +1606,7 @@ void msrChord::print (ostream& os) const
   if (chordOrnamentsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordOrnaments";
+      "fChordOrnaments";
     if (chordOrnamentsSize) {
       os << endl;
       ++gIndenter;
@@ -1621,7 +1631,7 @@ void msrChord::print (ostream& os) const
   if (chordGlissandosSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordGlissandos";
+      "fChordGlissandos";
     if (chordGlissandosSize) {
       os << endl;
       ++gIndenter;
@@ -1646,7 +1656,7 @@ void msrChord::print (ostream& os) const
   if (chordSlidesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordSlides";
+      "fChordSlides";
     if (chordSlidesSize) {
       os << endl;
       ++gIndenter;
@@ -1671,7 +1681,7 @@ void msrChord::print (ostream& os) const
   if (chordDynamicsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordDynamics";
+      "fChordDynamics";
     if (chordDynamicsSize) {
       os << endl;
       ++gIndenter;
@@ -1696,7 +1706,7 @@ void msrChord::print (ostream& os) const
   if (chordOtherDynamicsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordOtherDynamics";
+      "fChordOtherDynamics";
     if (chordOtherDynamicsSize) {
       os << endl;
       ++gIndenter;
@@ -1721,7 +1731,7 @@ void msrChord::print (ostream& os) const
   if (chordStemsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordStems";
+      "fChordStems";
     if (chordStemsSize) {
       os << endl;
       ++gIndenter;
@@ -1740,14 +1750,14 @@ void msrChord::print (ostream& os) const
     }
   }
 
-/*
+/* JMI
   // print the beams if any
   unsigned int chordBeamsSize = fChordBeams.size ();
 
   if (chordBeamsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordBeams";
+      "fChordBeams";
     if (chordBeamsSize) {
       os << endl;
       ++gIndenter;
@@ -1773,7 +1783,7 @@ void msrChord::print (ostream& os) const
   if (gGlobalTracingOahGroup->getTraceBeams () || chordBeamLinksSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "===> chordBeamLinks ===>";
+      "===> fChordBeamLinks ===>";
     if (chordBeamLinksSize) {
       os << endl;
       ++gIndenter;
@@ -1799,7 +1809,7 @@ void msrChord::print (ostream& os) const
   if (chordWordsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordWords";
+      "fChordBeamLinks";
     if (chordWordsSize) {
       os << endl;
       ++gIndenter;
@@ -1824,7 +1834,7 @@ void msrChord::print (ostream& os) const
   if (chordTiesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordTies";
+      "fChordTies";
     if (chordTiesSize) {
       os << endl;
       ++gIndenter;
@@ -1849,7 +1859,7 @@ void msrChord::print (ostream& os) const
   if (chordLigaturesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordLigatures";
+      "fChordLigatures";
     if (chordLigaturesSize) {
       os << endl;
       ++gIndenter;
@@ -1874,7 +1884,7 @@ void msrChord::print (ostream& os) const
   if (chordSlashesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordSlashes";
+      "fChordSlashes";
     if (chordSlashesSize) {
       os << endl;
       ++gIndenter;
@@ -1893,13 +1903,38 @@ void msrChord::print (ostream& os) const
     }
   }
 
+  // print the cresc/decresc if any
+  unsigned int chordCrescDecrescsSize = fChordCrescDecrescs.size ();
+
+  if (chordCrescDecrescsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+    os <<
+      setw (fieldWidth) <<
+      "fChordCrescDecrescs";
+    if (chordCrescDecrescsSize) {
+      os << endl;
+      ++gIndenter;
+
+      list<S_msrCrescDecresc>::const_iterator i;
+      for (i=fChordCrescDecrescs.begin (); i!=fChordCrescDecrescs.end (); ++i) {
+        os << (*i);
+      } // for
+
+      --gIndenter;
+    }
+    else {
+      os <<
+        " : " << "none" <<
+      endl;
+    }
+  }
+
   // print the wedges if any
   unsigned int chordWedgesSize = fChordWedges.size ();
 
   if (chordWedgesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordWedges";
+      "fChordWedges";
     if (chordWedgesSize) {
       os << endl;
       ++gIndenter;
@@ -1924,7 +1959,7 @@ void msrChord::print (ostream& os) const
   if (chordSegnosSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordSegnos";
+      "fChordSegnos";
     if (chordSegnosSize) {
       os << endl;
       ++gIndenter;
@@ -1949,7 +1984,7 @@ void msrChord::print (ostream& os) const
   if (chordDalSegnosSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordDalSegnos";
+      "fChordDalSegnos";
     if (chordDalSegnosSize) {
       os << endl;
       ++gIndenter;
@@ -1974,7 +2009,7 @@ void msrChord::print (ostream& os) const
   if (chordCodasSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordCodas";
+      "fChordCodas";
     if (chordCodasSize) {
       os << endl;
       ++gIndenter;
@@ -1997,7 +2032,7 @@ void msrChord::print (ostream& os) const
   if (fChordOctaveShift || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordOctaveShift";
+      "fChordOctaveShift";
     if (fChordOctaveShift) {
       os << endl;
       ++gIndenter;
@@ -2017,7 +2052,7 @@ void msrChord::print (ostream& os) const
   if (chordHarmoniesListSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordHarmonies";
+      "fChordHarmoniesList";
     if (chordHarmoniesListSize) {
       os << endl;
       ++gIndenter;
@@ -2049,7 +2084,7 @@ void msrChord::print (ostream& os) const
   if (fChordFiguredBass || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordFiguredBass" << " : " <<
+      "fChordFiguredBass" << " : " <<
       endl;
 
     ++gIndenter;
@@ -2073,7 +2108,7 @@ void msrChord::print (ostream& os) const
   if (chordNotesVectorSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordNotes";
+      "fChordNotesVector";
     if (chordNotesVectorSize) {
       os << endl;
       ++gIndenter;
@@ -2106,7 +2141,7 @@ void msrChord::print (ostream& os) const
   if (gGlobalTracingOahGroup->getTraceSlurs () || chordSlurLinksSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "===> chordSlurLinks ===>";
+      "===> fChordSlurLinks ===>";
     if (chordSlurLinksSize) {
       os << endl;
       ++gIndenter;
@@ -2131,7 +2166,7 @@ void msrChord::print (ostream& os) const
   if (fChordGraceNotesGroupBefore || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordGraceNotesGroupBefore";
+      "fChordGraceNotesGroupBefore";
 
     if (fChordGraceNotesGroupBefore) {
       os << endl;
@@ -2150,7 +2185,7 @@ void msrChord::print (ostream& os) const
   if (fChordGraceNotesGroupAfter || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordGraceNotesGroupAfter";
+      "fChordGraceNotesGroupAfter";
 
     if (fChordGraceNotesGroupAfter) {
       os << endl;
@@ -2169,7 +2204,7 @@ void msrChord::print (ostream& os) const
   if (fChordGraceNotesGroupLinkAfter || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
       setw (fieldWidth) <<
-      "chordGraceNotesGroupLinkAfter";
+      "fChordGraceNotesGroupLinkAfter";
 
     if (fChordGraceNotesGroupLinkAfter) {
       os << endl;
@@ -2214,7 +2249,7 @@ void msrChord::printShort (ostream& os) const
     "chordSoundingWholeNotes" << " : " << fMeasureElementSoundingWholeNotes <<
     endl <<
     setw (fieldWidth) <<
-    "chordDisplayWholeNotes" << " : " << fChordDisplayWholeNotes <<
+    "fChordDisplayWholeNotes" << " : " << fChordDisplayWholeNotes <<
     endl <<
     setw (fieldWidth) <<
     "measureNumber" << " : " << fMeasureElementMeasureNumber <<
@@ -2239,7 +2274,7 @@ void msrChord::printShort (ostream& os) const
   if (fChordGraceNotesGroupLinkBefore) {
     os <<
       setw (fieldWidth) <<
-      "===> chordGraceNotesGroupLinkBefore ===>";
+      "===> fChordGraceNotesGroupLinkBefore ===>";
 
     if (fChordGraceNotesGroupLinkBefore) {
       os << endl;
@@ -2258,7 +2293,7 @@ void msrChord::printShort (ostream& os) const
   if (chordArticulationsSize) {
     os <<
       setw (fieldWidth) <<
-      "chordArticulations";
+      "fChordArticulations";
     if (chordArticulationsSize) {
       os << endl;
       ++gIndenter;
@@ -2283,7 +2318,7 @@ void msrChord::printShort (ostream& os) const
   if (chordSpannersSize) {
     os <<
       setw (fieldWidth) <<
-      "chordSpanners";
+      "fChordSpanners";
     if (chordSpannersSize) {
       os << endl;
       ++gIndenter;
@@ -2308,7 +2343,7 @@ void msrChord::printShort (ostream& os) const
   if (chordTechnicalsSize) {
     os <<
       setw (fieldWidth) <<
-      "chordTechnicals";
+      "fChordTechnicals";
     if (chordTechnicalsSize) {
       os << endl;
       ++gIndenter;
@@ -2333,7 +2368,7 @@ void msrChord::printShort (ostream& os) const
   if (chordOrnamentsSize) {
     os <<
       setw (fieldWidth) <<
-      "chordOrnaments";
+      "fChordOrnaments";
     if (chordOrnamentsSize) {
       os << endl;
       ++gIndenter;
@@ -2358,7 +2393,7 @@ void msrChord::printShort (ostream& os) const
   if (chordGlissandosSize) {
     os <<
       setw (fieldWidth) <<
-      "chordGlissandos";
+      "fChordGlissandos";
     if (chordGlissandosSize) {
       os << endl;
       ++gIndenter;
@@ -2383,7 +2418,7 @@ void msrChord::printShort (ostream& os) const
   if (chordSlidesSize) {
     os <<
       setw (fieldWidth) <<
-      "chordSlides";
+      "fChordSlides";
     if (chordSlidesSize) {
       os << endl;
       ++gIndenter;
@@ -2408,7 +2443,7 @@ void msrChord::printShort (ostream& os) const
   if (chordDynamicsSize) {
     os <<
       setw (fieldWidth) <<
-      "chordDynamics";
+      "fChordDynamics";
     if (chordDynamicsSize) {
       os << endl;
       ++gIndenter;
@@ -2433,7 +2468,7 @@ void msrChord::printShort (ostream& os) const
   if (chordOtherDynamicsSize) {
     os <<
       setw (fieldWidth) <<
-      "chordOtherDynamics";
+      "fChordOtherDynamics";
     if (chordOtherDynamicsSize) {
       os << endl;
       ++gIndenter;
@@ -2458,7 +2493,7 @@ void msrChord::printShort (ostream& os) const
   if (chordStemsSize) {
     os <<
       setw (fieldWidth) <<
-      "chordStems";
+      "fChordStems";
     if (chordStemsSize) {
       os << endl;
       ++gIndenter;
@@ -2485,7 +2520,7 @@ void msrChord::printShort (ostream& os) const
   if (chordBeamsSize) {
     os <<
       setw (fieldWidth) <<
-      "chordBeams";
+      "fChordBeams";
     if (chordBeamsSize) {
       os << endl;
       ++gIndenter;
@@ -2512,7 +2547,7 @@ void msrChord::printShort (ostream& os) const
   if (gGlobalTracingOahGroup->getTraceBeams () || chordBeamLinksSize) {
     os <<
       setw (fieldWidth) <<
-      "chordBeamLinks";
+      "fChordBeamLinks";
     if (chordBeamLinksSize) {
       os << endl;
       ++gIndenter;
@@ -2538,7 +2573,7 @@ void msrChord::printShort (ostream& os) const
   if (chordWordsSize) {
     os <<
       setw (fieldWidth) <<
-      "chordWords";
+      "fChordWords";
     if (chordWordsSize) {
       os << endl;
       ++gIndenter;
@@ -2563,7 +2598,7 @@ void msrChord::printShort (ostream& os) const
   if (chordTiesSize) {
     os <<
       setw (fieldWidth) <<
-      "chordTies";
+      "fChordTies";
     if (chordTiesSize) {
       os << endl;
       ++gIndenter;
@@ -2589,7 +2624,7 @@ void msrChord::printShort (ostream& os) const
   if (gGlobalTracingOahGroup->getTraceSlurs () || chordSlurLinksSize) {
     os <<
       setw (fieldWidth) <<
-      "chordSlurLinks";
+      "fChordSlurLinks";
     if (chordSlurLinksSize) {
       os << endl;
       ++gIndenter;
@@ -2615,7 +2650,7 @@ void msrChord::printShort (ostream& os) const
   if (chordLigaturesSize) {
     os <<
       setw (fieldWidth) <<
-      "chordLigatures";
+      "fChordLigatures";
     if (chordLigaturesSize) {
       os << endl;
       ++gIndenter;
@@ -2641,7 +2676,7 @@ void msrChord::printShort (ostream& os) const
   if (chordSlashesSize) {
     os <<
       setw (fieldWidth) <<
-      "chordSlashes";
+      "fChordSlashes";
     if (chordSlashesSize) {
       os << endl;
       ++gIndenter;
@@ -2660,13 +2695,38 @@ void msrChord::printShort (ostream& os) const
     }
   }
 
+  // print the cresc/descrec if any
+  unsigned int chordCrescDescrecsSize = fChordCrescDescrecs.size ();
+
+  if (chordCrescDescrecsSize) {
+    os <<
+      setw (fieldWidth) <<
+      "fChordCrescDescrecs";
+    if (chordCrescDescrecsSize) {
+      os << endl;
+      ++gIndenter;
+
+      list<S_msrCrescDescrec>::const_iterator i;
+      for (i=fChordCrescDescrecs.begin (); i!=fChordCrescDescrecs.end (); ++i) {
+        os << (*i);
+      } // for
+
+      --gIndenter;
+    }
+    else {
+      os <<
+        " : " << "none" <<
+      endl;
+    }
+  }
+
   // print the wedges if any
   unsigned int chordWedgesSize = fChordWedges.size ();
 
   if (chordWedgesSize) {
     os <<
       setw (fieldWidth) <<
-      "chordWedges";
+      "fChordWedges";
     if (chordWedgesSize) {
       os << endl;
       ++gIndenter;
@@ -2691,7 +2751,7 @@ void msrChord::printShort (ostream& os) const
   if (chordSegnosSize) {
     os <<
       setw (fieldWidth) <<
-      "chordSegnos";
+      "fChordSegnos";
     if (chordSegnosSize) {
       os << endl;
       ++gIndenter;
@@ -2716,7 +2776,7 @@ void msrChord::printShort (ostream& os) const
   if (chordDalSegnosSize) {
     os <<
       setw (fieldWidth) <<
-      "chordDalSegnos";
+      "fChordDalSegnos";
     if (chordDalSegnosSize) {
       os << endl;
       ++gIndenter;
@@ -2741,7 +2801,7 @@ void msrChord::printShort (ostream& os) const
   if (chordCodasSize) {
     os <<
       setw (fieldWidth) <<
-      "chordCodas";
+      "fChordCodas";
     if (chordCodasSize) {
       os << endl;
       ++gIndenter;
@@ -2764,7 +2824,7 @@ void msrChord::printShort (ostream& os) const
   if (fChordOctaveShift) {
     os <<
       setw (fieldWidth) <<
-      "chordOctaveShift";
+      "fChordOctaveShift";
     if (fChordOctaveShift) {
       os << endl;
       ++gIndenter;
@@ -2785,7 +2845,7 @@ void msrChord::printShort (ostream& os) const
   if (chordHarmoniesListSize) {
     os <<
       setw (fieldWidth) <<
-      "chordHarmonies";
+      "fChordHarmoniesList";
     if (chordHarmoniesListSize) {
       os << endl;
       ++gIndenter;
@@ -2817,7 +2877,7 @@ void msrChord::printShort (ostream& os) const
   if (fChordFiguredBass) {
     os <<
       setw (fieldWidth) <<
-      "chordFiguredBass" << " : " <<
+      "fChordFiguredBass" << " : " <<
       endl;
 
     ++gIndenter;
@@ -2842,7 +2902,7 @@ void msrChord::printShort (ostream& os) const
   if (chordNotesVectorSize) {
     os <<
       setw (fieldWidth) <<
-      "chordNotes";
+      "fChordNotesVector";
     if (chordNotesVectorSize) {
       os << endl;
       ++gIndenter;
@@ -2873,7 +2933,7 @@ void msrChord::printShort (ostream& os) const
   if (fChordGraceNotesGroupBefore) {
     os <<
       setw (fieldWidth) <<
-      "chordGraceNotesGroupBefore";
+      "fChordGraceNotesGroupBefore";
 
     if (fChordGraceNotesGroupBefore) {
       os << endl;
@@ -2890,7 +2950,7 @@ void msrChord::printShort (ostream& os) const
   if (fChordGraceNotesGroupAfter) {
     os <<
       setw (fieldWidth) <<
-      "chordGraceNotesGroupAfter";
+      "fChordGraceNotesGroupAfter";
 
     if (fChordGraceNotesGroupAfter) {
       os << endl;
@@ -2909,7 +2969,7 @@ void msrChord::printShort (ostream& os) const
   if (fChordGraceNotesGroupLinkAfter) {
     os <<
       setw (fieldWidth) <<
-      "===> chordGraceNotesGroupLinkAfter ===>";
+      "===> fChordGraceNotesGroupLinkAfter ===>";
 
     if (fChordGraceNotesGroupLinkAfter) {
       os << endl;

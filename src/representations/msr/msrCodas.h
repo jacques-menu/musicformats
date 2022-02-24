@@ -19,17 +19,20 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+enum class msrCodaKind {
+  kCodaFirst,
+  kCodaSecond
+};
+
+string codaKindAsString (
+  msrCodaKind codaKind);
+
+ostream& operator<< (ostream& os,const msrCodaKind& elt);
+
+//______________________________________________________________________________
 class EXP msrCoda : public msrMeasureElement
 {
   public:
-
-    enum msrCodaKind {
-      kCodaFirst,
-      kCodaSecond
-    };
-
-    static string codaKindAsString (
-      msrCodaKind codaKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

@@ -1173,13 +1173,8 @@ R"()",
         regex_replace (
 R"(Write the details of the harmony for the given diatonic (semitones) pitch
 in the current language and the given harmony to standard output.
-HARMONY_SPEC can be:
-'ROOT_DIATONIC_PITCH HARMONY_NAME'
-or
-"ROOT_DIATONIC_PITCH = HARMONY_NAME"
-Using double quotes allows for shell variables substitutions, as in:
-HARMONY="maj7"
-EXECUTABLE -show-harmony-details "bes ${HARMONY}")",
+HARMONY_SPEC should be of the form ROOT_DIATONIC_PITCH:HARMONY_NAME .
+There can be spaces around the ':'.")",
          regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "HARMONY_SPEC",
@@ -1207,14 +1202,7 @@ R"()",
         regex_replace (
 R"(Write an analysis of the harmony for the given diatonic (semitones) pitch
 in the current language and the given harmony to standard output.
-HARMONY_SPEC can be:
-'ROOT_DIATONIC_PITCH HARMONY_NAME INVERSION'
-or
-"ROOT_DIATONIC_PITCH = HARMONY_NAME INVERSION"
-Using double quotes allows for shell variables substitutions, as in:
-HARMONY="maj7"
-INVERSION=2
-EXECUTABLE -show-harmony-analysis "bes ${HARMONY} ${INVERSION}")",
+HARMONY_SPEC should be of the form ROOT_DIATONIC_PITCH:HARMONY_NAME INVERSION .")",
           regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "HARMONY_SPEC",

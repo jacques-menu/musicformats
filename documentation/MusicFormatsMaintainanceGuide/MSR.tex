@@ -171,7 +171,7 @@ The same occurs for \mxml's \musicXmlMarkup{direction} elements, that contain di
 
 Note that two \musicXmlMarkup{direction-type} elements are needed, since only one of \musicXmlMarkup{words} and \musicXmlMarkup{metronome} can be present in a given instance, as stated in \gitschemafile{direction.mod}:
 \begin{lstlisting}[language=MusicXML]
-<!ELEMENT direction-type (rehearsal+ | segno+ | coda+ |
+<!ELEMENT direction-type (rehearsalMark+ | segno+ | coda+ |
 	(words | symbol)+ | wedge | dynamics+ | dashes |
 	bracket | pedal | metronome | octave-shift | harp-pedals |
 	damp | damp-all | eyeglasses | string-mute |
@@ -1155,7 +1155,7 @@ The {\tt otherMeasureElements} classes are:
 \item rehearsals, segno and coda:
   
 \begin{itemize}
-  \item \class{msrRehearsal}
+  \item \class{msrRehearsalMark}
 	\item \class{msrSegno}
   \item \class{msrDalSegno}
   \item \class{msrCoda}
@@ -1441,7 +1441,7 @@ msrInstruments.h:class EXP msrDampAll : public msrMeasureElement
 msrKeys.h:class EXP msrKey : public msrMeasureElement
 msrLyrics.h:class EXP msrSyllable : public msrMeasureElement
 msrMusicXMLSpecifics.h:class EXP msrPrintLayout : public msrMeasureElement
-msrRehearsals.h:class EXP msrRehearsal : public msrMeasureElement
+msrRehearsalMarks.h:class EXP msrRehearsalMark : public msrMeasureElement
 msrSegnos.h:class EXP msrSegno : public msrMeasureElement
 msrSegnos.h:class EXP msrDalSegno : public msrMeasureElement
 msrStavesDetails.h:class EXP msrStaffDetails : public msrMeasureElement

@@ -171,6 +171,79 @@ typedef SMARTP<msrOtherDynamic> S_msrOtherDynamic;
 EXP ostream& operator<< (ostream& os, const S_msrOtherDynamic& elt);
 
 //______________________________________________________________________________
+enum class msrCrescDecrescKind {
+  kCrescDecrescCrescendo, kCrescDecrescDecrescendo
+};
+
+string crescDecrescKindAsString (
+  msrCrescDecrescKind crescDecrescKind);
+
+ostream& operator<< (ostream& os,const msrCrescDecrescKind& elt);
+
+//______________________________________________________________________________
+class EXP msrCrescDecresc : public msrElement
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+    static SMARTP<msrCrescDecresc> create (
+                            int                 inputLineNumber,
+                            msrCrescDecrescKind crescDecrescKind);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          msrCrescDecresc (
+                            int                 inputLineNumber,
+                            msrCrescDecrescKind crescDecrescKind);
+
+    virtual               ~msrCrescDecresc ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    msrCrescDecrescKind   getCrescDecrescKind () const
+                              { return fCrescDecrescKind; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    void                  print (ostream& os) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    msrCrescDecrescKind   fCrescDecrescKind;
+};
+typedef SMARTP<msrCrescDecresc> S_msrCrescDecresc;
+EXP ostream& operator<< (ostream& os, const S_msrCrescDecresc& elt);
+
+//______________________________________________________________________________
 enum class msrWedgeKind {
   kWedgeKindNone,
   kWedgeCrescendo, kWedgeDecrescendo, kWedgeStop

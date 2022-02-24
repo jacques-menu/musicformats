@@ -203,13 +203,13 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     string                fValueSpecification;
 
     string                fVariableName;
-    Bool                  fVariableHasBeenSet;
+    Bool                  fSetByUser;
 };
 \end{lstlisting}
 
-The \field{oahAtomStoringAValue}{fVariableHasBeenSet} is used because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahRGBColorAtom}, for example.
+The \field{oahAtomStoringAValue}{fSetByUser} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahRGBColorAtom}, for example. It is not used for data structures such as sets, lists and vector, since this is indicated by their size.
 
-It is set in \methodName{set*Variable} methods, as in \method{oahIntegerAtom}{setIntegerVariable}\\
+\fieldName{fSetByUser} is set in \methodName{set*Variable} methods, as in \method{oahIntegerAtom}{setIntegerVariable}\\
 in \oah{oahAtomsCollection.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahIntegerAtom::setIntegerVariable (int value)
@@ -227,7 +227,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
 #endif
 
   fIntegerVariable = value;
-  fVariableHasBeenSet = true;
+  fSetByUser = true;
 }
 \end{lstlisting}
 
@@ -236,7 +236,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
 \subsection{The {\tt oahBooleanAtom} special case}
 % -------------------------------------------------------------------------
 
-\Class{oahBooleanAtom} has its own \fieldName{fVariableHasBeenSet} field, because is it not derived from\\
+\Class{oahBooleanAtom} has its own \fieldName{fSetByUser} field, because is it not derived from\\
 \class{oahAtomStoringAValue}: there isn't any value to be supplied in the command line, since \fieldName{fBooleanVariable} is \code{false} by default:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
@@ -258,7 +258,7 @@ class EXP oahBooleanAtom : public oahAtom
 
     string                fVariableName;
     Bool&                 fBooleanVariable;
-    Bool                  fVariableHasBeenSet;
+    Bool                  fSetByUser;
 };
 \end{lstlisting}
 
@@ -267,7 +267,7 @@ class EXP oahBooleanAtom : public oahAtom
 \subsection{Checking whether an option has been selected}
 % -------------------------------------------------------------------------
 
-This in done by calls to the \methodName{getVariableHasBeenSet} methods.
+This in done by calls to the \methodName{getSetByUser} methods.
 
 For example, \method{lpsr2lilypondTranslator}{generateLilypondVersion} in \\
 \lpsr{lpsr2lilypondTranslator.cpp} contains:
@@ -279,7 +279,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
     lilypondVersionHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getLilypondVersionAtom ()->
-          getVariableHasBeenSet ();
+          getSetByUser ();
 
   string
     lilypondVersion =
@@ -323,11 +323,11 @@ oah/oahAtomsCollection.h:class EXP oahIntegerAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahFloatAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahStringAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahRationalAtom : public oahAtomStoringAValue
-oah/oahAtomsCollection.h:class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
+oah/oahAtomsCollection.h:class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahRGBColorAtom : public oahAtomStoringAValue
-oah/oahAtomsCollection.h:class EXP oahIntSetAtom : public oahAtomStoringAValue
-oah/oahAtomsCollection.h:class EXP oahStringSetAtom : public oahAtomStoringAValue
-oah/oahAtomsCollection.h:class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
+oah/oahAtomsCollection.h:class EXP oahIntSetElementAtom : public oahAtomStoringAValue
+oah/oahAtomsCollection.h:class EXP oahStringSetElementAtom : public oahAtomStoringAValue
+oah/oahAtomsCollection.h:class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
@@ -476,7 +476,7 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // ------------------------------------------------------
 
     string                fVariableName;
-    Bool                  fVariableHasBeenSet;
+    Bool                  fSetByUser;
 };
 \end{lstlisting}
 
@@ -705,11 +705,11 @@ class EXP oahStringAtom : public oahAtomStoringAValue
 class EXP oahFactorizedStringAtom : public oahAtom
 class EXP oahStringWithDefaultValueAtom : public oahStringAtom
 class EXP oahRationalAtom : public oahAtomStoringAValue
-class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
+class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 class EXP oahRGBColorAtom : public oahAtomStoringAValue
-class EXP oahIntSetAtom : public oahAtomStoringAValue
-class EXP oahStringSetAtom : public oahAtomStoringAValue
-class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
+class EXP oahIntSetElementAtom : public oahAtomStoringAValue
+class EXP oahStringSetElementAtom : public oahAtomStoringAValue
+class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
 class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
 class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
 class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
@@ -1587,7 +1587,7 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
                             msrLength value)
                               {
                                 fLengthVariable = value;
-                                fVariableHasBeenSet = true;
+                                fSetByUser = true;
                               }
 
     msrLength             getLengthVariable () const
@@ -1713,9 +1713,9 @@ void oahLengthAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : " <<
     fLengthVariable.asString ();
-  if (fVariableHasBeenSet) {
+  if (fSetByUser) {
     os <<
-      ", has been set";
+      ", set by user";
   }
   os << endl;
 }
@@ -1909,11 +1909,11 @@ As an internal representation, OAH can be browsed with the two-phase visitors. T
 %class EXP oahStringWithDefaultValueAtom : public oahStringAtom
 %class EXP oahStringWithRegexAtom : public oahStringAtom
 %class EXP oahRationalAtom : public oahAtomStoringAValue
-%class EXP oahNaturalNumbersSetAtom : public oahAtomStoringAValue
+%class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
 %class EXP oahRGBColorAtom : public oahAtomStoringAValue
-%class EXP oahIntSetAtom : public oahAtomStoringAValue
-%class EXP oahStringSetAtom : public oahAtomStoringAValue
-%class EXP oahStringToIntMapAtom : public oahAtomStoringAValue
+%class EXP oahIntSetElementAtom : public oahAtomStoringAValue
+%class EXP oahStringSetElementAtom : public oahAtomStoringAValue
+%class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
 %class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue
 %class EXP oahStringAndTwoIntegersAtom : public oahAtomStoringAValue
 %class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue

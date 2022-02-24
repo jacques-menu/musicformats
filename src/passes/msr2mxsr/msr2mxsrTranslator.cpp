@@ -5297,7 +5297,7 @@ void msr2mxsrTranslator:: populateNoteDirections (
 #endif
 
 /*
-<!ELEMENT direction-type (rehearsal+ | segno+ | coda+ |
+<!ELEMENT direction-type (rehearsalMark+ | segno+ | coda+ |
 	(words | symbol)+ | wedge | dynamics+ | dashes |
 	bracket | pedal | metronome | octave-shift | harp-pedals |
 	damp | damp-all | eyeglasses | string-mute |
@@ -8307,27 +8307,27 @@ void msr2mxsrTranslator::visitEnd (S_msrTranspose& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrRehearsal& elt)
+void msr2mxsrTranslator::visitStart (S_msrRehearsalMark& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrRehearsal" <<
+      "--> Start visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
 #endif
 
   fCurrentVoiceClone->
-    appendRehearsalToVoice (elt);
+    appendRehearsalMarkToVoice (elt);
 }
 
-void msr2mxsrTranslator::visitEnd (S_msrRehearsal& elt)
+void msr2mxsrTranslator::visitEnd (S_msrRehearsalMark& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrRehearsal" <<
+      "--> End visiting msrRehearsalMark" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
@@ -9090,11 +9090,11 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
 
     else if (gGlobalLpsrOahGroup->getConvertWordsToRehearsalMarks ()) {
       // create a rehearsal mark containing elt's words contents
-      S_msrRehearsal
-        rehearsal =
-          msrRehearsal::create (
+      S_msrRehearsalMark
+        rehearsalMark =
+          msrRehearsalMark::create (
             inputLineNumber,
-            msrRehearsal::kNone,
+            msrRehearsalMark::kNone,
             elt->getWordsContents (),
             elt->getWordsPlacementKind ()); // above ??? JMI
 
@@ -9104,15 +9104,15 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
           "Converting words '" <<
           elt->asShortString () <<
           "' to rehearsal mark '" <<
-          rehearsal->asShortString () <<
+          rehearsalMark->asShortString () <<
           "'" <<
           endl;
       }
 #endif
 
-      // append the rehearsal to the current voice clone
+      // append the rehearsalMark to the current voice clone
       fCurrentVoiceClone->
-        appendRehearsalToVoice (rehearsal);
+        appendRehearsalMarkToVoice (rehearsalMark);
 
       wordsHasBeenAppended = true;
     }
@@ -9360,6 +9360,100 @@ void msr2mxsrTranslator::visitStart (S_msrSlash& elt)
       __FILE__, __LINE__,
       s.str ());
   }
+}
+
+//________________________________________________________________________
+void msr2mxsrTranslator::visitStart (S_msrCrescDecresc& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrCrescDecresc" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  if (fOnGoingNonGraceNote) {
+    fCurrentNonGraceNoteClone->
+      appendCrescDecrescToNote (elt);
+  }
+  else if (fOnGoingChord) {
+    fCurrentChordClone->
+      appendWedgeToChord (elt);
+  }
+  else {
+    stringstream s;
+
+    s <<
+      "wedge '" << elt->asShortString () <<
+      "' is out of context, cannot be handled";
+
+    msr2mxsrInternalError (
+      gGlobalServiceRunData->getInputSourceName (),
+      elt->getInputLineNumber (),
+      __FILE__, __LINE__,
+      s.str ());
+  }
+}
+
+void msr2mxsrTranslator::visitEnd (S_msrCrescDecresc& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> End visiting msrCrescDecresc" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+}
+
+//________________________________________________________________________
+void msr2mxsrTranslator::visitStart (S_msrWedge& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting msrWedge" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+  if (fOnGoingNonGraceNote) {
+    fCurrentNonGraceNoteClone->
+      appendWedgeToNote (elt);
+  }
+  else if (fOnGoingChord) {
+    fCurrentChordClone->
+      appendWedgeToChord (elt);
+  }
+  else {
+    stringstream s;
+
+    s <<
+      "wedge '" << elt->asShortString () <<
+      "' is out of context, cannot be handled";
+
+    msr2mxsrInternalError (
+      gGlobalServiceRunData->getInputSourceName (),
+      elt->getInputLineNumber (),
+      __FILE__, __LINE__,
+      s.str ());
+  }
+}
+
+void msr2mxsrTranslator::visitEnd (S_msrWedge& elt)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "--> End visiting msrWedge" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
 }
 
 //________________________________________________________________________

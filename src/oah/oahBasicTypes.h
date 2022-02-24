@@ -611,8 +611,8 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // set and get
     // ------------------------------------------------------
 
-    Bool                  getVariableHasBeenSet () const
-                              { return fVariableHasBeenSet; }
+    Bool                  getSetByUser () const
+                              { return fSetByUser; }
 
   public:
 
@@ -659,7 +659,7 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // ------------------------------------------------------
 
     string                fVariableName;
-    Bool                  fVariableHasBeenSet;
+    Bool                  fSetByUser;
 };
 typedef SMARTP<oahAtomImplicitlyStoringAValue> S_oahAtomImplicitlyStoringAValue;
 EXP ostream& operator<< (ostream& os, const S_oahAtomImplicitlyStoringAValue& elt);
@@ -707,8 +707,8 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     string                getValueSpecification () const
                               { return fValueSpecification; }
 
-    Bool                  getVariableHasBeenSet () const
-                              { return fVariableHasBeenSet; }
+    Bool                  getSetByUser () const
+                              { return fSetByUser; }
 
   public:
 
@@ -757,7 +757,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     string                fValueSpecification;
 
     string                fVariableName;
-    Bool                  fVariableHasBeenSet;
+    Bool                  fSetByUser;
 };
 typedef SMARTP<oahAtomStoringAValue> S_oahAtomStoringAValue;
 EXP ostream& operator<< (ostream& os, const S_oahAtomStoringAValue& elt);
