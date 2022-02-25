@@ -289,6 +289,7 @@ void msr2brailleRegularHandler::createInformationsRegularGroup ()
 
   registerAtomInRegularSubgroup ("about", subGroup);
   registerAtomInRegularSubgroup ("version", subGroup);
+  registerAtomInRegularSubgroup ("version-full", subGroup);
   registerAtomInRegularSubgroup ("history", subGroup);
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);

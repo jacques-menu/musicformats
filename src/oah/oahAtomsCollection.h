@@ -408,6 +408,16 @@ typedef SMARTP<oahAboutAtom> S_oahAboutAtom;
 EXP ostream& operator<< (ostream& os, const S_oahAboutAtom& elt);
 
 //______________________________________________________________________________
+enum class oahVersionKind {
+  kOahVersionShort, kOahVersionFull
+};
+
+string oahVersionKindAsString (
+  oahVersionKind versionKind);
+
+ostream& operator<< (ostream& os, oahVersionKind& elt);
+
+//______________________________________________________________________________
 class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
 {
   public:
@@ -416,10 +426,11 @@ class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
     // ------------------------------------------------------
 
     static SMARTP<oahVersionAtom> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& serviceName);
+                            const string&  longName,
+                            const string&  shortName,
+                            const string&  description,
+                            const string&  serviceName,
+                            oahVersionKind versionKind);
 
   protected:
 
@@ -427,10 +438,11 @@ class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
     // ------------------------------------------------------
 
                           oahVersionAtom (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& serviceName);
+                            const string&  longName,
+                            const string&  shortName,
+                            const string&  description,
+                            const string&  serviceName,
+                            oahVersionKind versionKind);
 
     virtual               ~oahVersionAtom ();
 
@@ -458,7 +470,10 @@ class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue
 
     void                  print (ostream& os) const override;
 
-    void                  printVersion (ostream& os) const;
+    void                  printVersionShort (ostream& os) const;
+    void                  printVersionFull (ostream& os) const;
+
+    oahVersionKind        fVersionKind;
 };
 typedef SMARTP<oahVersionAtom> S_oahVersionAtom;
 EXP ostream& operator<< (ostream& os, const S_oahVersionAtom& elt);

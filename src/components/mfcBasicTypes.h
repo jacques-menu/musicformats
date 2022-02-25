@@ -493,7 +493,9 @@ class EXP mfcMultiComponent : public mfcComponentDescr
 
     virtual void          print (ostream& os) const;
 
-    virtual void          printVersion (ostream& os) const;
+    virtual void          printVersionShort (ostream& os) const;
+    virtual void          printVersionFull (ostream& os) const;
+
     virtual void          printHistory (ostream& os) const;
 
   protected:
@@ -643,7 +645,9 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
     // print
     // ------------------------------------------------------
 
-    void                  printVersion (ostream& os) const override;
+    void                  printVersionShort (ostream& os) const override;
+    void                  printVersionFull (ostream& os) const override;
+
     void                  printHistory (ostream& os) const override;
 
   protected:

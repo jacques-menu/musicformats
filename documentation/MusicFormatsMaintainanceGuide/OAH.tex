@@ -881,6 +881,7 @@ void xml2xmlRegularHandler::createInformationsRegularGroup ()
 
   registerAtomInRegularSubgroup ("about", subGroup);
   registerAtomInRegularSubgroup ("version", subGroup);
+  registerAtomInRegularSubgroup ("version-full", subGroup);
   registerAtomInRegularSubgroup ("history", subGroup);
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);
@@ -1513,6 +1514,7 @@ R"(Display EXECUTABLE_NAME's history.)",
 And the new option long name {\tt version} has been added to all \regular\ \oahRepr\ handlers that already contained the \optionBoth{version}{v}, such as in \method{xml2lyRegularHandler}{createInformationsRegularGroup}, alongside the existing \optionBoth{version}{v}:
 \begin{lstlisting}[language=CPlusPlus]
   registerAtomInRegularSubgroup ("version", subGroup);
+  registerAtomInRegularSubgroup ("version-full", subGroup);
   registerAtomInRegularSubgroup ("history", subGroup);
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);

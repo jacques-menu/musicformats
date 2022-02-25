@@ -4568,13 +4568,13 @@ to avoid having to add them by hand afterwards.)",
   // generate MSR visiting information
   // --------------------------------------
 
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "generate-msr-visiting-information", "gmvisi",
-R"(Generate MSR visiting information as comment..)",
-        "fGenerateMsrVisitingInformation",
-        fGenerateMsrVisitingInformation));
+//   subGroup->
+//     appendAtomToSubGroup (
+//       oahBooleanAtom::create (
+//         "generate-msr-visiting-information", "gmvisi",
+// R"(Generate MSR visiting information as comment..)",
+//         "fGenerateMsrVisitingInformation",
+//         fGenerateMsrVisitingInformation));
 
   // generate LPSR visiting information
   // --------------------------------------
@@ -6145,9 +6145,9 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
       fGenerateCommentedOutVariables <<
       endl <<
 
-    setw (fieldWidth) << "fGenerateMsrVisitingInformation" << " : " <<
-      fGenerateMsrVisitingInformation <<
-      endl <<
+//     setw (fieldWidth) << "fGenerateMsrVisitingInformation" << " : " <<
+//       fGenerateMsrVisitingInformation <<
+//       endl <<
 
     setw (fieldWidth) << "fGenerateLpsrVisitingInformation" << " : " <<
       fGenerateLpsrVisitingInformation <<
