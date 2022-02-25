@@ -945,6 +945,10 @@ listing~\ref{#1}, [#1], page~\pageref{#1}%
 \newcommand{\zip}{Zip\index[Main]{Zip}}
 
 \newcommand{\make}{{\tt make}\index[Main]{{\tt make}}}
+\newcommand{\Makefile}{{\tt Makefile}\index[Main]{{\tt Makefile}}}
+
+\newcommand{\symbolicLink}{symbolic link}\index[Main]{symbolic link}
+
 \newcommand{\cmake}{{\tt cmake}\index[Main]{{\tt cmake}}}
 \newcommand{\cache}{cache\index[Main]{cache}}
 
@@ -1392,6 +1396,14 @@ Option {\tt -#1, -#2}\index[Main]{\tt -#1, -#2}\index[Options]{\tt -#1, -#2}%
 \newcommand{\build}[1]{%
 {\textcolor{brown}{\tt build/#1}}\index[Files]{build!#1}%
 }
+
+\newcommand{\mfFiles}[1]{%
+{\textcolor{brown}{\tt files/#1}}\index[Main]{#1}\index[Files]{files!#1}%
+}
+\newcommand{\mfFilesBoth}[1]{%
+{\textcolor{brown}{\tt files/#1.h/.cpp}}\index[Main]{#1.h/.cpp}\index[Files]{files!#1.h/.cpp}%
+}
+
 
 \newcommand{\mfc}[1]{%
 {\textcolor{brown}{\tt src/components/#1}}\index[Main]{#1}\index[Files]{src/components!#1}%

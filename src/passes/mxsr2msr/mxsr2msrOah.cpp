@@ -905,7 +905,7 @@ R"(Ignore '<wedge/>' in MusicXML data.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "ignore-musicxml-lyrics", "ilyrics",
+        "ignore-musicxml-lyrics", "imlyrics",
 R"(Ignore lyrics in MusicXML data.)",
         "fIgnoreLyrics",
         fIgnoreLyrics));

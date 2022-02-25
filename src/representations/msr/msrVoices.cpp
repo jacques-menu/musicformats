@@ -6697,7 +6697,7 @@ void msrVoice::createFullMeasureRestsInVoice (
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
           gLogStream <<
-            "Creating a new last segment containing the first rest measure in voice \"" <<
+            "Creating a new last segment to create the first, rest measure in voice \"" <<
             fVoiceName << "\"" <<
             ", line " << inputLineNumber <<
             endl;
@@ -6783,13 +6783,11 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
 //   fVoiceLastAppendedMeasure->
 //     setNextMeasureNumber (
 //       );
-//
-
 }
 
 void msrVoice::addFullMeasureRestsToVoice (
   int           inputLineNumber,
-  const string& previousMeasureNumber,
+  const string& previousMeasureNumber, // JMI ???
   int           fullMeasureRestsNumber)
 {
   // create a full measure rests
@@ -6807,109 +6805,118 @@ void msrVoice::addFullMeasureRestsToVoice (
   }
 #endif
 
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRestsDetails ()) {
-    displayVoiceFullMeasureRestsAndVoice (
-      inputLineNumber,
-      "addFullMeasureRestsToVoice() 1");
-  }
-#endif
+  createFullMeasureRestsInVoice (
+    inputLineNumber,
+    fullMeasureRestsNumber);
 
-  switch (fVoiceKind) {
-    case msrVoiceKind::kVoiceKindRegular:
-    case msrVoiceKind::kVoiceKindDynamics:
-    case msrVoiceKind::kVoiceKindHarmonies:
-    case msrVoiceKind::kVoiceKindFiguredBass:
-      {
-        ++gIndenter;
+  // change the measure number
+  fVoiceLastAppendedMeasure->
+    setMeasureElementMeasureNumber (
+      fVoiceLastAppendedMeasure->getMeasureElementMeasureNumber () + " added"); // JMI BLARK v0.9.61
 
-        // move the current voice last segment to the initial elements list
-        moveVoiceLastSegmentToInitialVoiceElementsIfRelevant ( //JMI
-          inputLineNumber,
-          "addFullMeasureRestsToVoice() 2");
-
-        // create the full measure rests
-        if (fVoicePendingFullMeasureRests) {
-          stringstream s;
-
-          s <<
-            "attempting to create a full measure rests while another one is pending";
-
-          msrInternalError (
-            gGlobalServiceRunData->getInputSourceName (),
-            inputLineNumber,
-            __FILE__, __LINE__,
-            s.str ());
-        }
-
-/* JMI
-        fVoicePendingFullMeasureRests =
-          msrFullMeasureRests::create (
-            inputLineNumber,
-            firstRestMeasure->getFullMeasureWholeNotesDuration (),
-            fullMeasureRestsNumber,
-            this);
-*/
-
-         // remember fVoicePendingFullMeasureRests for later next measure number setting JMI ???
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
-          gLogStream <<
-            "Registering full measure rests as waiting for its next measure number" <<
-            ", fullMeasureRestsNumber = " <<
-            fullMeasureRestsNumber <<
-            " in voice \"" <<
-            fVoiceName << "\"" <<
-            endl;
-        }
-#endif
-
-        fVoiceFullMeasureRestsWaitingForItsNextMeasureNumber =
-          fVoicePendingFullMeasureRests;
-
-        fVoiceRemainingFullMeasureRests =
-          fullMeasureRestsNumber;
-
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
-          gLogStream <<
-            "Setting fVoiceRemainingFullMeasureRests to '" <<
-            fVoiceRemainingFullMeasureRests <<
-            "' in voice \"" <<
-            fVoiceName << "\"" <<
-            endl;
-        }
-#endif
-
-        // create a new segment to collect the full measure rests,
-        // containing the first, rest measure
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
-          gLogStream <<
-            "Creating a new last segment containing the first rest measure in voice \"" <<
-            fVoiceName << "\"" <<
-            ", line " << inputLineNumber <<
-            endl;
-        }
-#endif
-
-/* JMI
-        createNewLastSegmentFromItsFirstMeasureForVoice (
-          inputLineNumber,
-          firstRestMeasure,
-          "addFullMeasureRestsToVoice() 3");
-*/
-
-        // this voice contails full measure rests
-        this->setVoiceContainsFullMeasureRests (
-          inputLineNumber);
-
-        // keep the full measure rests pending
-
-        --gIndenter;
-      }
-      break;
-  } // switch
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceFullMeasureRestsDetails ()) {
+//     displayVoiceFullMeasureRestsAndVoice (
+//       inputLineNumber,
+//       "addFullMeasureRestsToVoice() 1");
+//   }
+// #endif
+//
+//   switch (fVoiceKind) {
+//     case msrVoiceKind::kVoiceKindRegular:
+//     case msrVoiceKind::kVoiceKindDynamics:
+//     case msrVoiceKind::kVoiceKindHarmonies:
+//     case msrVoiceKind::kVoiceKindFiguredBass:
+//       {
+//         ++gIndenter;
+//
+//         // move the current voice last segment to the initial elements list
+//         moveVoiceLastSegmentToInitialVoiceElementsIfRelevant ( //JMI
+//           inputLineNumber,
+//           "addFullMeasureRestsToVoice() 2");
+//
+//         // create the full measure rests
+//         if (fVoicePendingFullMeasureRests) {
+//           stringstream s;
+//
+//           s <<
+//             "attempting to create a full measure rests while another one is pending";
+//
+//           msrInternalError (
+//             gGlobalServiceRunData->getInputSourceName (),
+//             inputLineNumber,
+//             __FILE__, __LINE__,
+//             s.str ());
+//         }
+//
+// /* JMI
+//         fVoicePendingFullMeasureRests =
+//           msrFullMeasureRests::create (
+//             inputLineNumber,
+//             firstRestMeasure->getFullMeasureWholeNotesDuration (),
+//             fullMeasureRestsNumber,
+//             this);
+// */
+//
+//          // remember fVoicePendingFullMeasureRests for later next measure number setting JMI ???
+// #ifdef TRACING_IS_ENABLED
+//         if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+//           gLogStream <<
+//             "Registering full measure rests as waiting for its next measure number" <<
+//             ", fullMeasureRestsNumber = " <<
+//             fullMeasureRestsNumber <<
+//             " in voice \"" <<
+//             fVoiceName << "\"" <<
+//             endl;
+//         }
+// #endif
+//
+//         fVoiceFullMeasureRestsWaitingForItsNextMeasureNumber =
+//           fVoicePendingFullMeasureRests;
+//
+//         fVoiceRemainingFullMeasureRests =
+//           fullMeasureRestsNumber;
+//
+// #ifdef TRACING_IS_ENABLED
+//         if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+//           gLogStream <<
+//             "Setting fVoiceRemainingFullMeasureRests to '" <<
+//             fVoiceRemainingFullMeasureRests <<
+//             "' in voice \"" <<
+//             fVoiceName << "\"" <<
+//             endl;
+//         }
+// #endif
+//
+//         // create a new segment to collect the full measure rests,
+//         // containing the first, rest measure
+// #ifdef TRACING_IS_ENABLED
+//         if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+//           gLogStream <<
+//             "Creating a new last segment to add the first, rest measure in voice \"" <<
+//             fVoiceName << "\"" <<
+//             ", line " << inputLineNumber <<
+//             endl;
+//         }
+// #endif
+//
+// /* JMI
+//         createNewLastSegmentFromItsFirstMeasureForVoice (
+//           inputLineNumber,
+//           firstRestMeasure,
+//           "addFullMeasureRestsToVoice() 3");
+// */
+//
+//         // this voice contails full measure rests
+//         this->setVoiceContainsFullMeasureRests (
+//           inputLineNumber);
+//
+//         // keep the full measure rests pending
+//
+//         --gIndenter;
+//       }
+//       break;
+//   } // switch
 
   // print resulting voice contents
 #ifdef TRACING_IS_ENABLED

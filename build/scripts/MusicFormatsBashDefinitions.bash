@@ -745,18 +745,19 @@ function addDoc ()
 
 function addFxml ()
 {
+  git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.xml
+  git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.txt
+  git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/Makefile
+}
+
+function addAll ()
+{
   addSrc
   addBuild
   addDistrib
   addDoc
 
   addFxml
-}
-
-function addAll ()
-{
-  git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.xml
-  git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.txt
 }
 
 function mergeTestFromDev ()

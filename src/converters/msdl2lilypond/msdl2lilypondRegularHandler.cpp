@@ -299,6 +299,7 @@ void msdl2lilypondRegularHandler::createInformationsRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("version", subGroup);
+  registerAtomInRegularSubgroup ("version-full", subGroup);
   registerAtomInRegularSubgroup ("history", subGroup);
   registerAtomInRegularSubgroup ("mf-version", subGroup);
   registerAtomInRegularSubgroup ("mf-history", subGroup);

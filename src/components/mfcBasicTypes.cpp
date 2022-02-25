@@ -1632,7 +1632,33 @@ void mfcMultiComponent::print (ostream& os) const
   }
 }
 
-void mfcMultiComponent::printVersion (ostream& os) const
+void mfcMultiComponent::printVersionShort (ostream& os) const
+{
+  switch (fComponentUsedFromTheCLIKind) {
+    case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes:
+      os <<
+        "Command line version of " <<
+        fComponentName <<
+        " " <<
+        componenKindAsString (fComponenKind) <<
+        " ";
+      break;
+
+    case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLINo:
+      os <<
+        fComponentName <<
+        " " <<
+        componenKindAsString (fComponenKind) <<
+      " API version ";
+      break;
+  } // switch
+
+  os <<
+    currentVersionNumberAndDateAsString () <<
+    endl;
+}
+
+void mfcMultiComponent::printVersionFull (ostream& os) const
 {
   switch (fComponentUsedFromTheCLIKind) {
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes:
@@ -2035,7 +2061,26 @@ void mfcLibraryComponent::printConvertersHistory (ostream&  os) const
   --gIndenter;
 }
 
-void mfcLibraryComponent::printVersion (ostream& os) const
+void mfcLibraryComponent::printVersionShort (ostream& os) const
+{
+  os <<
+    fComponentName <<
+    " library " <<
+    currentVersionNumberAndDateAsString () <<
+    endl << endl;
+
+  printRepresentationsVersions (os);
+
+  os << endl;
+
+  printPassesVersions (os);
+
+  os << endl;
+
+  printConvertersVersions (os);
+}
+
+void mfcLibraryComponent::printVersionFull (ostream& os) const
 {
   os <<
     fComponentName <<

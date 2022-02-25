@@ -1131,33 +1131,62 @@ ostream& operator<< (ostream& os, const S_oahAboutAtom& elt)
 }
 
 //______________________________________________________________________________
+string oahVersionKindAsString (
+  oahVersionKind versionKind)
+{
+  string result;
+
+  switch (versionKind) {
+    case oahVersionKind::kOahVersionShort:
+      result = "kOahVersionShort";
+      break;
+    case oahVersionKind::kOahVersionFull:
+      result = "kOahVersionFull";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const oahVersionKind& elt)
+{
+  os << oahVersionKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahVersionAtom oahVersionAtom::create (
-  const string& longName,
-  const string& shortName,
-  const string& description,
-  const string& serviceName)
+  const string&  longName,
+  const string&  shortName,
+  const string&  description,
+  const string&  serviceName,
+  oahVersionKind versionKind)
 {
   oahVersionAtom* o = new
     oahVersionAtom (
       longName,
       shortName,
       description,
-      serviceName);
+      serviceName,
+      versionKind);
   assert (o != nullptr);
   return o;
 }
 
 oahVersionAtom::oahVersionAtom (
-  const string& longName,
-  const string& shortName,
-  const string& description,
-  const string& serviceName)
+  const string&  longName,
+  const string&  shortName,
+  const string&  description,
+  const string&  serviceName,
+  oahVersionKind versionKind)
   : oahPureHelpAtomWithoutAValue (
       longName,
       shortName,
       description,
       serviceName)
-{}
+{
+  fVersionKind = versionKind;
+}
 
 oahVersionAtom::~oahVersionAtom ()
 {}
@@ -1176,7 +1205,14 @@ void oahVersionAtom::applyElement (ostream& os)
 
   gIndenter.resetToZero ();
 
-  printVersion (os);
+  switch (fVersionKind) {
+    case oahVersionKind::kOahVersionShort:
+      printVersionShort (os);
+      break;
+    case oahVersionKind::kOahVersionFull:
+      printVersionFull (os);
+      break;
+  } // switch
 
   gIndenter.setIndent (saveIndent);
 }
@@ -1260,7 +1296,7 @@ void oahVersionAtom::print (ostream& os) const
   --gIndenter;
 }
 
-void oahVersionAtom::printVersion (ostream& os) const
+void oahVersionAtom::printVersionShort (ostream& os) const
 {
   // get the handler version
   S_mfcMultiComponent
@@ -1275,7 +1311,25 @@ void oahVersionAtom::printVersion (ostream& os) const
     "handlerMultiComponent is null");
 
   handlerMultiComponent->
-    printVersion (os);
+    printVersionShort (os);
+}
+
+void oahVersionAtom::printVersionFull (ostream& os) const
+{
+  // get the handler version
+  S_mfcMultiComponent
+    handlerMultiComponent =
+      fetchAtomHandlerUpLink ()->
+        getHandlerMultiComponent ();
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    handlerMultiComponent != nullptr,
+    "handlerMultiComponent is null");
+
+  handlerMultiComponent->
+    printVersionFull (os);
 }
 
 ostream& operator<< (ostream& os, const S_oahVersionAtom& elt)

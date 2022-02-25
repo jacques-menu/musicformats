@@ -1777,7 +1777,7 @@ void lpsr2lilypondTranslator::generateCodeForNote (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       stringstream s;
@@ -1923,7 +1923,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -2013,7 +2013,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -2204,7 +2204,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -2275,7 +2275,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
     stringstream s;
@@ -2356,7 +2356,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInChord (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -2444,7 +2444,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
     stringstream s;
@@ -2523,7 +2523,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
     stringstream s;
@@ -2610,7 +2610,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -2678,7 +2678,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -2757,7 +2757,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -2834,7 +2834,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -2909,7 +2909,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInTupletInGraceNotesGroup (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -3009,7 +3009,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
           getTraceNotes (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
       stringstream s;
@@ -5450,14 +5450,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrIdentification& elt) // JMI
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -5465,7 +5465,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrIdentification& elt) // JMI
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -5482,14 +5482,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrIdentification& elt) // JMI
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -5497,7 +5497,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrIdentification& elt) // JMI
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -8214,8 +8214,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
       ++gIndenter;
 
-      if (doGenerateAWithBlock) { // JMI
-      /* ??? JMI
+      if (doGenerateAWithBlock) { // JMI BLARK
         if (partGroupName.size ()) {
           fLilypondCodeStream <<
             "instrumentName = " <<
@@ -8228,7 +8227,6 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
             nameAsLilypondString (partGroupAbbreviation) <<
             endl;
         }
-        */
       }
 
       switch (partGroupSymbolKind) {
@@ -8654,7 +8652,6 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
     // generate the instrument name
     //* JMI BLARKBLARK
     if (partName.size ()) {
-    /* JMI
       fLilypondCodeStream <<
         "instrumentName = ";
 
@@ -8682,7 +8679,6 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
             markupColumnKindLeftACentered) << // JMI ???
           endl;
       }
-      */
     }
     /* ??? JMI
     if (partAbbreviation.size ()) {
@@ -10031,14 +10027,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrScore& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10046,7 +10042,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScore& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10063,14 +10059,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScore& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10078,7 +10074,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScore& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10096,14 +10092,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrScaling& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10111,7 +10107,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScaling& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10128,14 +10124,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScaling& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10143,7 +10139,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrScaling& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10161,14 +10157,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageLayout& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10176,7 +10172,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageLayout& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10216,14 +10212,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageLayout& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10231,7 +10227,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageLayout& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10249,14 +10245,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrSystemLayout& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10264,7 +10260,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSystemLayout& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10281,14 +10277,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSystemLayout& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10296,7 +10292,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSystemLayout& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10314,14 +10310,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffLayout& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10329,7 +10325,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffLayout& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10346,14 +10342,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaffLayout& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10361,7 +10357,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaffLayout& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10379,14 +10375,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrAppearance& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10394,7 +10390,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAppearance& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10411,14 +10407,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAppearance& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10426,7 +10422,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAppearance& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10444,14 +10440,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrCredit& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10459,7 +10455,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCredit& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10476,14 +10472,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCredit& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10491,7 +10487,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCredit& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10508,14 +10504,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrCreditWords& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10523,7 +10519,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCreditWords& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10540,14 +10536,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCreditWords& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10555,7 +10551,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCreditWords& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10573,14 +10569,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10590,7 +10586,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPartGroup& elt)
         elt->getPartGroupCombinedName () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10607,14 +10603,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10623,7 +10619,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPartGroup& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10645,14 +10641,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10661,7 +10657,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10694,14 +10690,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10710,7 +10706,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10731,14 +10727,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10748,7 +10744,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaff& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10767,14 +10763,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10784,7 +10780,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStaff& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10803,21 +10799,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffTuning& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
         "%--> Start visiting msrStaffTuning" <<
         endl;
 
-        if (traceMsrVisitors) {
+        if (traceLpsrVisitors) {
           gLogStream << s.str ();
         }
 
@@ -10870,21 +10866,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrStaffDetails& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
         "%--> Start visiting msrStaffDetails" <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -10917,14 +10913,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -10934,7 +10930,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11198,14 +11194,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11215,7 +11211,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11294,14 +11290,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11310,7 +11306,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11346,14 +11342,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11369,7 +11365,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11421,14 +11417,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11437,7 +11433,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11469,14 +11465,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBassElement& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11492,7 +11488,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBassElement& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11545,14 +11541,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11562,7 +11558,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11679,14 +11675,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBassElement& elt)
 
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11696,7 +11692,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBassElement& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11748,14 +11744,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11763,7 +11759,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegment& elt)
         elt->getSegmentAbsoluteNumber () << "'" <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11794,14 +11790,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11809,7 +11805,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSegment& elt)
         elt->getSegmentAbsoluteNumber () << "'" <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -11862,14 +11858,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -11887,7 +11883,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -12350,14 +12346,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -12375,7 +12371,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -12589,14 +12585,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -12606,7 +12602,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -12655,14 +12651,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -12672,7 +12668,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -12705,14 +12701,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -12722,7 +12718,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-        if (traceMsrVisitors) {
+        if (traceLpsrVisitors) {
           gLogStream << s.str ();
         }
 
@@ -13057,14 +13053,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -13074,7 +13070,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSyllable& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -13092,14 +13088,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -13109,7 +13105,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -13272,14 +13268,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -13289,7 +13285,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrClef& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -13307,14 +13303,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -13324,7 +13320,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -13474,14 +13470,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrKey& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -13491,7 +13487,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrKey& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -13509,14 +13505,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -13525,7 +13521,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -13721,14 +13717,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -13737,7 +13733,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -13755,14 +13751,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTranspose& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -13770,7 +13766,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTranspose& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -14264,14 +14260,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTranspose& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -14279,7 +14275,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTranspose& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -14297,14 +14293,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -14312,7 +14308,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -14808,14 +14804,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNotesRelationshipshipElement
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -14823,7 +14819,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNotesRelationshipshipElement
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -14846,14 +14842,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoNotesRelationshipshipElements&
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -14861,7 +14857,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoNotesRelationshipshipElements&
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -14885,14 +14881,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNote& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -14900,7 +14896,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoNote& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -14924,14 +14920,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoTuplet& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -14939,7 +14935,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoTuplet& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -14966,14 +14962,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoTuplet& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -14981,7 +14977,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoTuplet& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15001,14 +14997,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempo& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15016,7 +15012,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempo& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15034,14 +15030,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrArticulation& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15049,7 +15045,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArticulation& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15069,14 +15065,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArticulation& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15084,7 +15080,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArticulation& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15102,14 +15098,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrFermata& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15117,7 +15113,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFermata& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15179,14 +15175,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFermata& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15194,7 +15190,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFermata& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15212,14 +15208,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrArpeggiato& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15227,7 +15223,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrArpeggiato& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15247,14 +15243,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArpeggiato& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15262,7 +15258,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrArpeggiato& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15280,14 +15276,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrNonArpeggiato& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15295,7 +15291,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNonArpeggiato& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15315,14 +15311,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNonArpeggiato& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15330,7 +15326,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNonArpeggiato& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15348,14 +15344,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnical& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15363,7 +15359,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnical& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15383,14 +15379,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnical& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15398,7 +15394,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnical& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15416,14 +15412,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithInteger& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15433,7 +15429,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithInteger& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15453,14 +15449,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15468,7 +15464,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithInteger& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15486,14 +15482,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithFloat& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15503,7 +15499,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithFloat& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15523,14 +15519,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15538,7 +15534,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithFloat& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15556,14 +15552,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithString& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15571,7 +15567,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTechnicalWithString& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15591,14 +15587,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithString& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15606,7 +15602,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTechnicalWithString& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15624,14 +15620,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrOrnament& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15639,7 +15635,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOrnament& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15659,14 +15655,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOrnament& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15674,7 +15670,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOrnament& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15692,14 +15688,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrGlissando& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15707,7 +15703,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGlissando& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15727,14 +15723,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGlissando& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15742,7 +15738,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGlissando& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15760,14 +15756,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlide& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15775,7 +15771,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlide& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15795,14 +15791,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlide& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15810,7 +15806,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlide& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15828,14 +15824,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrSingleTremolo& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15843,7 +15839,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSingleTremolo& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15863,14 +15859,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSingleTremolo& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15878,7 +15874,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSingleTremolo& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15896,14 +15892,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15911,7 +15907,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -15966,14 +15962,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDoubleTremolo& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -15981,7 +15977,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDoubleTremolo& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16005,14 +16001,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrDynamic& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16020,7 +16016,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDynamic& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16037,14 +16033,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDynamic& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16052,7 +16048,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDynamic& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16070,14 +16066,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrOtherDynamic& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16085,7 +16081,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOtherDynamic& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16102,14 +16098,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOtherDynamic& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16117,7 +16113,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOtherDynamic& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16135,14 +16131,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrWords& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16150,7 +16146,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWords& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16167,14 +16163,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWords& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16182,7 +16178,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWords& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16200,14 +16196,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlur& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16216,7 +16212,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSlur& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16233,14 +16229,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlur& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16249,7 +16245,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrSlur& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16267,14 +16263,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordSlurLink& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16283,7 +16279,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordSlurLink& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16300,14 +16296,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordSlurLink& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16316,7 +16312,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordSlurLink& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16335,14 +16331,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrLigature& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16350,7 +16346,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLigature& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16367,14 +16363,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16382,7 +16378,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLigature& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16400,14 +16396,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrCrescDecresc& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16415,7 +16411,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCrescDecresc& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16432,14 +16428,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16447,7 +16443,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16465,14 +16461,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrWedge& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16480,7 +16476,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrWedge& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -16497,14 +16493,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -16512,7 +16508,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrWedge& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17043,14 +17039,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrGraceNotesGroup& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -17065,7 +17061,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrGraceNotesGroup& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17084,14 +17080,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -17100,7 +17096,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrGraceNotesGroup& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17120,14 +17116,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -17136,7 +17132,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17155,14 +17151,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -17171,7 +17167,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChordGraceNotesGroupLink& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17191,14 +17187,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroup& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -17207,7 +17203,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroup& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17228,14 +17224,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroupContents& elt
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -17244,7 +17240,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroupContents& elt
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17269,14 +17265,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -17285,7 +17281,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17305,14 +17301,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroup& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -17321,7 +17317,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroup& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17430,17 +17426,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
       traceLpsrVisitors =
         gGlobalLpsrOahGroup->
           getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || traceLpsrVisitors || generateMsrVisitingInformation) { // JMI
+    if (traceLpsrVisitors || traceLpsrVisitors || generateMsrVisitingInformation) { // JMI
       stringstream s;
 
       s <<
@@ -17457,7 +17450,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -17535,7 +17528,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         case msrNoteKind::kNoteInChordInGraceNotesGroup:
 #ifdef TRACING_IS_ENABLED
           if (
-            gGlobalMsrOahGroup->getTraceMsrVisitors ()
+            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gGlobalTracingOahGroup->getTraceGraceNotes ()
           ) {
@@ -17582,7 +17575,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
             if (inhibitFullMeasureRestsBrowsing) {
               if (
-                gGlobalMsrOahGroup->getTraceMsrVisitors ()
+                gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
                   ||
                 gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
                 gLogStream <<
@@ -17605,7 +17598,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
 #ifdef TRACING_IS_ENABLED
           if (
-            gGlobalMsrOahGroup->getTraceMsrVisitors ()
+            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gGlobalTracingOahGroup->getTraceFullMeasureRests ()
           ) {
@@ -17623,7 +17616,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         if (elt->getNoteDirectGraceNotesGroupUpLink ()) {
 #ifdef TRACING_IS_ENABLED
           if (
-            gGlobalMsrOahGroup->getTraceMsrVisitors ()
+            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gGlobalTracingOahGroup->getTraceNotes ()
           ) {
@@ -17642,7 +17635,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
 #ifdef TRACING_IS_ENABLED
           if (
-            gGlobalMsrOahGroup->getTraceMsrVisitors ()
+            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gGlobalTracingOahGroup->getTraceGraceNotes ()
           ) {
@@ -17659,7 +17652,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       case msrNoteKind::kNoteInChordInGraceNotesGroup:
 #ifdef TRACING_IS_ENABLED
           if (
-            gGlobalMsrOahGroup->getTraceMsrVisitors ()
+            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gGlobalTracingOahGroup->getTraceGraceNotes ()
           ) {
@@ -18528,14 +18521,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -18544,7 +18537,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -18602,7 +18595,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         if (elt->getNoteDirectGraceNotesGroupUpLink ()) {
 #ifdef TRACING_IS_ENABLED
           if (
-            gGlobalMsrOahGroup->getTraceMsrVisitors ()
+            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gGlobalTracingOahGroup->getTraceNotes ()
           ) {
@@ -18620,7 +18613,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
       case msrNoteKind::kNoteSkipInGraceNotesGroup:
 #ifdef TRACING_IS_ENABLED
           if (
-            gGlobalMsrOahGroup->getTraceMsrVisitors ()
+            gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
             gGlobalTracingOahGroup->getTraceGraceNotes ()) {
             gLogStream <<
@@ -19312,14 +19305,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrOctaveShift& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -19327,7 +19320,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrOctaveShift& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -19344,14 +19337,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOctaveShift& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -19359,7 +19352,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrOctaveShift& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -19377,14 +19370,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrAccordionRegistration& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -19392,7 +19385,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAccordionRegistration& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -19448,14 +19441,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarpPedalsTuning& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -19463,7 +19456,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarpPedalsTuning& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -19515,14 +19508,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrStem& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -19530,7 +19523,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStem& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -19547,14 +19540,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStem& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -19562,7 +19555,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStem& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -19580,14 +19573,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrBeam& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -19595,7 +19588,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBeam& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -19612,14 +19605,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -19627,7 +19620,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -20676,14 +20669,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -20698,7 +20691,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -20757,14 +20750,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
 
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -20773,7 +20766,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrChord& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -20828,14 +20821,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -20850,7 +20843,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21010,14 +21003,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21025,7 +21018,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21079,14 +21072,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
 
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21094,7 +21087,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTie& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21130,14 +21123,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTie& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21145,7 +21138,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTie& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21163,14 +21156,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegno& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21178,7 +21171,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSegno& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21195,14 +21188,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21210,7 +21203,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21232,14 +21225,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrCoda& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21247,7 +21240,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrCoda& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21265,14 +21258,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrEyeGlasses& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21280,7 +21273,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrEyeGlasses& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21300,14 +21293,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrScordatura& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21315,7 +21308,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScordatura& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21392,14 +21385,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21407,7 +21400,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21465,14 +21458,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrDamp& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21480,7 +21473,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDamp& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21500,14 +21493,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrDampAll& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21515,7 +21508,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDampAll& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21536,14 +21529,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21552,7 +21545,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21739,14 +21732,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarLine& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21755,7 +21748,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarLine& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21776,14 +21769,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21793,7 +21786,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21857,14 +21850,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarCheck& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21872,7 +21865,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarCheck& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21893,14 +21886,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21908,7 +21901,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
         ", line " << inputLineNumber <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -21972,14 +21965,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarNumberCheck& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -21987,7 +21980,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBarNumberCheck& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22005,14 +21998,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22020,7 +22013,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22075,14 +22068,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLineBreak& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22090,7 +22083,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrLineBreak& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22108,14 +22101,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22123,7 +22116,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22162,14 +22155,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageBreak& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22177,7 +22170,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrPageBreak& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22195,14 +22188,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22210,7 +22203,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeat& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22272,14 +22265,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22287,7 +22280,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22334,14 +22327,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatCommonPart& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22349,7 +22342,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatCommonPart& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22366,14 +22359,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatCommonPart& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22381,7 +22374,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatCommonPart& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22399,14 +22392,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22414,7 +22407,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22535,14 +22528,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22550,7 +22543,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22605,7 +22598,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
       "'" <<
       endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22646,14 +22639,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22661,7 +22654,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22732,14 +22725,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRehearsalMark& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22747,7 +22740,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRehearsalMark& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22765,14 +22758,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22780,7 +22773,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeat& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22850,14 +22843,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -22865,7 +22858,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeat& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22901,21 +22894,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
         "%--> Start visiting msrMeasureRepeatPattern" <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22932,21 +22925,21 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
         "%--> End visiting msrMeasureRepeatPattern" <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -22963,21 +22956,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
         "%--> Start visiting msrMeasureRepeatReplicas" <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -23010,21 +23003,21 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
         "%--> End visiting msrMeasureRepeatReplicas" <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -23044,14 +23037,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullMeasureRests& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -23059,7 +23052,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullMeasureRests& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -23098,14 +23091,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRests& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -23113,7 +23106,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRests& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -23220,21 +23213,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
         "%--> Start visiting msrFullMeasureRestsContents" <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -23270,21 +23263,21 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
         "%--> End visiting msrFullMeasureRestsContents" <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -23321,17 +23314,17 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       traceMidi =
         gGlobalTracingOahGroup->
           getTraceMidi (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || traceMidi || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || traceMidi || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -23339,7 +23332,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 
@@ -23396,14 +23389,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
 #ifdef TRACING_IS_ENABLED
   {
     Bool
-      traceMsrVisitors =
-        gGlobalMsrOahGroup->
-          getTraceMsrVisitors (),
+      traceLpsrVisitors =
+        gGlobalLpsrOahGroup->
+          getTraceLpsrVisitors (),
       generateMsrVisitingInformation =
         gGlobalLpsr2lilypondOahGroup->
-          getGenerateMsrVisitingInformation ();
+          getGenerateLpsrVisitingInformation ();
 
-    if (traceMsrVisitors || generateMsrVisitingInformation) {
+    if (traceLpsrVisitors || generateMsrVisitingInformation) {
       stringstream s;
 
       s <<
@@ -23411,7 +23404,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMidiTempo& elt)
         ", line " << elt->getInputLineNumber () <<
         endl;
 
-      if (traceMsrVisitors) {
+      if (traceLpsrVisitors) {
         gLogStream << s.str ();
       }
 

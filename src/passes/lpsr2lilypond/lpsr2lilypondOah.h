@@ -1568,10 +1568,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getGenerateCommentedOutVariables () const
                               { return fGenerateCommentedOutVariables; }
 
-    void                  setGenerateMsrVisitingInformation ()
-                              { fGenerateMsrVisitingInformation = true; }
-    Bool                  getGenerateMsrVisitingInformation () const
-                              { return fGenerateMsrVisitingInformation; }
+//     void                  setGenerateMsrVisitingInformation ()
+//                               { fGenerateMsrVisitingInformation = true; }
+//     Bool                  getGenerateMsrVisitingInformation () const
+//                               { return fGenerateMsrVisitingInformation; }
 
     void                  setGenerateLpsrVisitingInformation ()
                               { fGenerateLpsrVisitingInformation = true; }
@@ -2061,7 +2061,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
                             // this is to avoid having to add them by hand
                             // in the LilyPond output
 
-    Bool                  fGenerateMsrVisitingInformation;
+//     Bool                  fGenerateMsrVisitingInformation; // JMI v0.9.61
     Bool                  fGenerateLpsrVisitingInformation;
 
     // dynamics

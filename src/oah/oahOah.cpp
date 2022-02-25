@@ -468,7 +468,19 @@ R"(Display information about EXECUTABLE_NAME.)",
 R"(Display EXECUTABLE_NAME's version.)",
           regex ("EXECUTABLE_NAME"),
           serviceName),
-        serviceName));
+        serviceName,
+        oahVersionKind::kOahVersionShort));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahVersionAtom::create (
+        "version-full", "vf",
+        regex_replace (
+R"(Display EXECUTABLE_NAME's version.)",
+          regex ("EXECUTABLE_NAME"),
+          serviceName),
+        serviceName,
+        oahVersionKind::kOahVersionFull));
 
   // library version
 

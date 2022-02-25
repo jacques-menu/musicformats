@@ -674,6 +674,12 @@ string oahHandlerUsedThruKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const oahHandlerUsedThruKind& elt)
+{
+  os << oahHandlerUsedThruKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_oahPrefix oahPrefix::create (
   const string& prefixName,
