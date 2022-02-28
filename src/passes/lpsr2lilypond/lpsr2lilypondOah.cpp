@@ -4621,7 +4621,7 @@ R"()",
 R"(Generate a '\tempo' command in the \midi block.
 MIDI_TEMPO_SPEC should be of the form DURATION=PER_SECOND .
 DURATION is a string such as '8.', and PER_SECOND is an integer.
-There can be spaces around the ':'.
+There can be spaces around the '='.
 The default is 'DEFAULT_VALUE'.)",
           regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
@@ -6205,7 +6205,7 @@ ostream& operator<< (ostream& os, const S_lpsr2lilypondOahGroup& elt)
 S_lpsr2lilypondOahGroup createGlobalLpsr2lilypondOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalWaeOahGroup->getQuiet ()) {
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     gLogStream <<
       "Initializing LilyPond OAH handling" <<
       endl;

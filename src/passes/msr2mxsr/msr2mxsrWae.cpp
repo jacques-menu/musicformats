@@ -12,6 +12,8 @@
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 
+#include "oahEarlyOptions.h"
+
 #include "wae.h"
 #include "msr2mxsrWae.h"
 
@@ -34,7 +36,7 @@ void msr2mxsrUnsupported (
 {
   if (!
     (
-      gGlobalWaeOahGroup->getQuiet ()
+      gGlobalOahEarlyOptions.getEarlyQuietOption ()
         &&
       gGlobalWaeOahGroup->getDontShowErrors ()
     )

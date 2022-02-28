@@ -235,11 +235,9 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // measures
     // --------------------------------------
 
-    const set<string>&    getMeasuresToBeReplicatedSet () const
-                              { return fMeasuresToBeReplicatedSet; }
-    S_oahStringSetElementAtom
-                          getMeasuresToBeReplicatedSetAtom () const
-                              { return fMeasuresToBeReplicatedSetAtom; }
+    const map<string,int>&
+                          getMeasuresToBeReplicatedStringToIntMap () const
+                              { return fMeasuresToBeReplicatedStringToIntMap; }
 
     const map<string,int>&
                           getAddEmptyMeasuresStringToIntMap () const
@@ -584,11 +582,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // measures
     // --------------------------------------
 
-    set<string>           fMeasuresToBeReplicatedSet;
-    S_oahStringSetElementAtom
-                          fMeasuresToBeReplicatedSetAtom;
-
-    map<string,int>       fReplicateMeasure;
+    map<string,int>       fMeasuresToBeReplicatedStringToIntMap;
 
     map<string,int>       fAddEmptyMeasuresStringToIntMap;
 

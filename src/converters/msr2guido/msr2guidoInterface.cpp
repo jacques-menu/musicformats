@@ -26,6 +26,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "oahEarlyOptions.h"
+
 #include "waeOah.h"
 
 #include "msrOah.h"
@@ -65,7 +67,7 @@ EXP mfMusicformatsError msrScore2guidoWithHandler (
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalWaeOahGroup->getQuiet ()) {
+  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();

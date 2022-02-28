@@ -1170,6 +1170,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
           "\" is null";
 
         oahInternalError (s.str ());
+        
   // ... ... ...
 }
 \end{lstlisting}
@@ -1183,53 +1184,86 @@ Debugging OAH needs the trace handling tracing options \optionBoth{trace-oah}{to
 
 The same holds to handle the \option{insider} option, since it involves using the \insider\ handler and not a \regular\ one.
 
+Also, the \optionNameBoth{quiet}{q} option should be handled early, to avoid errors in the options being reported.
+
 Another case is the \optionBoth{trace-components}{tcomps} option. The versions data should exist when the \optionBoth{version}{v} is applied in \method{oahVersionAtom}{applyElement} in \oah{oahAtomsCollection.cpp}, but building them should be able to produce a trace if this option is selected. This circularity \Main{circularity} should thus be broken. Version history handling is presented in \chapterRef{musicformats components}}.
 
-Handling these options ahead of regular options handling is easily done in the \mainFunction\ functions\index{functions} of the CLI tools, as in \clisamples{xml2ly}:%%%JMI
+The early options names are declared in \oah{oahEarlyOptions.h}:
+\begin{lstlisting}[language=Terminal]
+// ... ... ...
+
+// insider
+EXP extern const string K_INSIDER_OPTION_LONG_NAME;
+EXP extern const string K_INSIDER_OPTION_SHORT_NAME;
+
+// ... ... ...
+
+class EXP oahEarlyOptions
+{
+	// ... ... ...
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    void                  setEarlyInsiderOption ();
+    Bool                  getEarlyInsiderOption () const
+                              { return fEarlyInsiderOption; }
+
+	// ... ... ...
+
+ private:
+
+    // fields
+    // ------------------------------------------------------
+
+    Bool                  fEarlyInsiderOption;
+
+	  // ... ... ...
+}
+\end{lstlisting}
+
+Then, in \oah{oahEarlyOptions.cpp}, there is:
+\begin{lstlisting}[language=Terminal]
+// ... ... ...
+
+const string K_INSIDER_OPTION_LONG_NAME  = "insider";
+const string K_INSIDER_OPTION_SHORT_NAME = "ins";
+
+void oahEarlyOptions::setEarlyInsiderOption ()
+{
+  if (fTraceEarlyOptions) {
+    gLogStream <<
+      "Setting fEarlyInsiderOption" <<
+      endl;
+  }
+
+  fEarlyInsiderOption = true;
+}
+
+// ... ... ...
+\end{lstlisting}
+
+\Method {oahEarlyOptions}{applyEarlyOptionIfRelevant} performs the analysis:
 \begin{lstlisting}[language=CPlusPlus]
-  // are there insider/regular or trace OAH options present?
-  // ------------------------------------------------------
+void oahEarlyOptions::applyEarlyOptionIfRelevant (
+  const string& argumentWithoutDashToBeUsed,
+  const string& optionValue)
+{
+  // this is OAH handling pass 1
+  if (
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_INSIDER_OPTION_LONG_NAME)
+      ||
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_INSIDER_OPTION_SHORT_NAME)
+  ) {
+    setEarlyInsiderOption ();
+  }
 
-  Bool insiderOption;
-
-	for (int i = 1; i < argc; ++i) {
-	  string argumentAsString = string (argv [i]);
-
-    string argumentWithoutDash = argumentAsString.substr (1);
-
-#ifdef TRACING_IS_ENABLED
-    if (
-      argumentWithoutDash == K_TRACE_OAH_SHORT_OPTION_NAME
-        ||
-      argumentWithoutDash == K_TRACE_OAH_LONG_OPTION_NAME
-    ) {
-      setEarlyTracingOah ();
-    }
-
-    if (
-      argumentWithoutDash == K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME
-        ||
-      argumentWithoutDash == K_TRACE_OAH_DETAILS_LONG_OPTION_NAME
-    ) {
-      setEarlyTracingOahDetails ();
-    }
-
-    if (
-      argumentWithoutDash == K_TRACE_COMPONENTS_SHORT_OPTION_NAME
-        ||
-      argumentWithoutDash == K_TRACE_COMPONENTS_LONG_OPTION_NAME
-    ) {
-      setEarlyTraceComponents ();
-    }
-#endif
-
-		if (argumentWithoutDash == K_INSIDER_OPTION_LONG_NAME) {
-		  insiderOption = true;
-		}
-%		if (argumentWithoutDash == K_REGULAR_OPTION_LONG_NAME) {
-%		  regularOption = true;
-%		}
-	} // for
+	// ... ... ...
+}
 \end{lstlisting}
 
 

@@ -97,7 +97,7 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalWaeOahGroup->getQuiet ()) {
+  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();

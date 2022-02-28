@@ -378,7 +378,8 @@ class EXP msrPart : public msrPartGroupElement
                             int inputLineNumber);
 
     void                  replicateLastAppendedMeasureInPart (
-                            int           inputLineNumber);
+                            int inputLineNumber,
+                            int replicatasNumber);
 
     void                  addFullMeasureRestsToPart (
                             int           inputLineNumber,

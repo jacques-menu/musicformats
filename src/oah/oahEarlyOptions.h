@@ -23,31 +23,42 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// insider
 EXP extern const string K_INSIDER_OPTION_LONG_NAME;
 EXP extern const string K_INSIDER_OPTION_SHORT_NAME;
 // EXP extern const string K_REGULAR_OPTION_LONG_NAME;
 // EXP extern const string K_REGULAR_OPTION_SHORT_NAME;
 
+// quiet mode
+EXP extern const string K_QUIET_OPTION_LONG_NAME;
+EXP extern const string K_QUIET_OPTION_SHORT_NAME;
+
+// trace early options
 EXP extern const string K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME;
 EXP extern const string K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME;
 
+// verbose mode
 EXP extern const string K_OAH_VERBOSE_MODE_LONG_OPTION_NAME;
 EXP extern const string K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME;
 
+// include
 EXP extern const string K_INCLUDE_OPTION_LONG_NAME;
 EXP extern const string K_INCLUDE_OPTION_SHORT_NAME;
 
 #ifdef TRACING_IS_ENABLED
 
+// trace OAH
 EXP extern const string K_TRACE_OAH_LONG_OPTION_NAME;
 EXP extern const string K_TRACE_OAH_SHORT_OPTION_NAME;
 
 EXP extern const string K_TRACE_OAH_DETAILS_LONG_OPTION_NAME;
 EXP extern const string K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME;
 
+// trace components
 EXP extern const string K_TRACE_COMPONENTS_LONG_OPTION_NAME;
 EXP extern const string K_TRACE_COMPONENTS_SHORT_OPTION_NAME;
 
+// trace passes
 EXP extern const string K_TRACE_PASSES_LONG_OPTION_NAME;
 EXP extern const string K_TRACE_PASSES_SHORT_OPTION_NAME;
 
@@ -69,6 +80,10 @@ class EXP oahEarlyOptions
 
     // set and get
     // ------------------------------------------------------
+
+    void                  setEarlyQuietOption ();
+    Bool                  getEarlyQuietOption () const
+                              { return fEarlyQuietOption; }
 
     void                  setEarlyInsiderOption ();
     Bool                  getEarlyInsiderOption () const
@@ -149,6 +164,8 @@ class EXP oahEarlyOptions
 
     // fields
     // ------------------------------------------------------
+
+    Bool                  fEarlyQuietOption;
 
     Bool                  fEarlyInsiderOption;
 //     Bool                  fEarlyRegularOption;

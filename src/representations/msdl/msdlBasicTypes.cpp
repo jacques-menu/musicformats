@@ -289,7 +289,7 @@ void initializeMSDLBasicTypes ()
 
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalWaeOahGroup->getQuiet ()) {
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       gLogStream <<
         "Initializing MSDL basic types handling" <<
         endl;

@@ -33,6 +33,8 @@
 #include "bsrNotes.h"
 #include "bsrNumbers.h"
 
+#include "oahEarlyOptions.h"
+
 #include "oahOah.h"
 #include "waeOah.h"
 
@@ -242,7 +244,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           unsigned int smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
-          if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalWaeOahGroup->getQuiet ()) {
+          if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
             gLogStream <<
               "There are " << smSize << " matches" <<
               " for rational string '" << tempoPerMinuteString <<
@@ -286,7 +288,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             unsigned int smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
-            if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalWaeOahGroup->getQuiet ()) {
+            if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
               gLogStream <<
                 "There are " << smSize << " matches" <<
                 " for rational string '" << tempoPerMinuteString <<

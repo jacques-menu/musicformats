@@ -135,7 +135,7 @@ void displayMsrScore_OptionalPass (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<
@@ -209,7 +209,7 @@ void displayMsrScoreShort_OptionalPass (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<
@@ -284,7 +284,7 @@ void displayMsrScoreSlices (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<

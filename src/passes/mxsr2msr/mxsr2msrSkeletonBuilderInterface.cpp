@@ -105,7 +105,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 
   // check indentation
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<

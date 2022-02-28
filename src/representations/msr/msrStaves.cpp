@@ -2049,7 +2049,8 @@ void msrStaff::createFullMeasureRestsInStaff (
 }
 
 void msrStaff::replicateLastAppendedMeasureInStaff (
-  int inputLineNumber)
+  int inputLineNumber,
+  int replicatasNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
@@ -2065,7 +2066,8 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       replicateLastAppendedMeasureInVoice (
-        inputLineNumber);
+        inputLineNumber,
+        replicatasNumber);
   } // for
 }
 

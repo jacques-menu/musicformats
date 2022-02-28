@@ -109,7 +109,7 @@ S_msrScore translateMsrToMsr (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<
@@ -235,7 +235,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<
@@ -340,7 +340,7 @@ void displayResultingNewMsrScore_OptionalPass (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<
@@ -400,7 +400,7 @@ void displayResultingNewMsrScoreShort_OptionalPass (
     endClock);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<

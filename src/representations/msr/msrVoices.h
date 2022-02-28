@@ -812,7 +812,8 @@ class EXP msrVoice : public msrElement
                             S_msrFullMeasureRests fullMeasureRests);
 
     void                  replicateLastAppendedMeasureInVoice (
-                            int inputLineNumber);
+                            int inputLineNumber,
+                            int replicatasNumber);
 
     void                  addFullMeasureRestsToVoice (
                             int           inputLineNumber,

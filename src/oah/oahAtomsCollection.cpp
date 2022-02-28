@@ -1939,7 +1939,7 @@ void oahContactAtom::printContact (ostream& os) const
 R"(To contact the maintainers of EXECUTABLE_NAME:
   Create an issue at https://github.com/jacques-menu/musicformats,
   describing the problem and any error messages you get if relevant.
-  You should sign up for d GitHub for that.)",
+  You should sign up for GitHub for that.)",
         regex ("EXECUTABLE_NAME"),
         fHelpAtomWithoutAValueServiceName)) <<
     endl;

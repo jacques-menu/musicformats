@@ -67,8 +67,8 @@ alias doc="cd ${DOC_DIR}"
 
 alias common="cd ${DOC_DIR}/CommonLaTeXFiles"
 alias maint="cd ${DOC_DIR}/MusicFormatsMaintainanceGuide"
-alias user="cd ${DOC_DIR}/MusicFormatsCLIUserGuide"
-alias api="cd ${DOC_DIR}/MusicFormatsAPIUserGuide"
+alias user="cd ${DOC_DIR}/MusicFormatsUserGuide"
+alias api="cd ${DOC_DIR}/MusicFormatsAPIGuide"
 alias graph="cd ${DOC_DIR}/graphics"
 alias dist="cd ${DISTRIB_DIR}"
 
@@ -246,6 +246,23 @@ function smvn ()
 {
 #  set -x
   SCRIPT_NAME=SetMusicFormatsVersionNumber.bash
+  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
+  echo LOGFILE = ${LOGFILE}
+
+  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+
+  echo
+
+#  set +x
+}
+
+# version date
+#----------------------------------------------
+
+function smvd ()
+{
+#  set -x
+  SCRIPT_NAME=SetMusicFormatsVersionDate.bash
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
@@ -723,6 +740,10 @@ function addBuild ()
 function addDistrib ()
 {
   git add -f ${DISTRIB_DIR}/MusicFormatsVersionNumber.txt
+  git add -f ${DISTRIB_DIR}/MusicFormatsVersionNumber.h
+
+  git add -f ${DISTRIB_DIR}/MusicFormatsVersionDate.txt
+  git add -f ${DISTRIB_DIR}/MusicFormatsVersionDate.h
 
   git add    ${DISTRIB_DIR}/*.pdf
 

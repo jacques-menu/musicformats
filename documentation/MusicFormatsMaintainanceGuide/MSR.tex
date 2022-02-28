@@ -1083,19 +1083,22 @@ A brick that can be used in \class{msrTimeSignature} is {\tt msrTimeSignatureIte
 
 The picture at \figureRef{The MSR classes hierarchy}, shows the hierarchy of the main MSR classes. The  colors are used as follows:
 
-\subimport{./}{msrClassesHierarchyPicture}
+\subimport{../CommonLaTeXFiles}{MusicFormatsClassesHierarchyPicture}
 
+The background colors are used as follows:
 \begin{itemize}
-
 \item \colorbox{black}{\textcolor{green}{green}}: a score element that is expected to be found in a score representation, such as \class{msrStaff} and \class{msrChord};
 
 \item \colorbox{black}{\textcolor{pink}{pink}}: a element needed in MSR to structure the representation, such as \class{msrSegment} and \class{msrSyllable};
 
 \item \colorbox{black}{\textcolor{yellow}{yellow}}: a base class with name \class{msr*Element} for elements that can be used in another class, such as \class{msrVoiceElement};
+\end{itemize}
 
+The arrows colors have the following meaning:
+\begin{itemize}
 \item \textcolor{red}{red}: a link from a class to its base class. For example, \class{msrPart} is derived from \class{msrPartGroupElement};
 
-\item \textcolor{blue}{blue}: a link from a class to another that uses smart pointers to one or more instances the former. For example, an \class{msrTuplet} may be an element of an \class{msrGraceNotesGroup}.
+\item \textcolor{blue}{blue}: a link from a class to another that uses smart pointers to one or more instances of the former. For example, an \class{msrTuplet} may be an element of an \class{msrGraceNotesGroup}.
 \end{itemize}
 
 When not shown for clarity, the common base class of all these classes is \class{msrElement}, that contains an integer input line number.
@@ -1103,7 +1106,7 @@ When not shown for clarity, the common base class of all these classes is \class
 The {\tt otherMeasureElements} classes are:
 \begin{itemize}
 \item bars:
-  
+
 \begin{itemize}
   \item \class{msrBarCheck}
   \item \class{msrBarNumberCheck}
@@ -1112,21 +1115,21 @@ The {\tt otherMeasureElements} classes are:
   \end{itemize}
 
 \item breaks:
-  
+
 \begin{itemize}
   \item \class{msrLineBreak}
   \item \class{msrPageBreak}
   \end{itemize}
 
 \item notes:
-  
+
 \begin{itemize}
   \item \class{msrVoiceStaffChange}
   \item \class{msrOctaveShift}
   \end{itemize}
 
 \item clefs, keys, times, tempo:
-  
+
 \begin{itemize}
   \item \class{msrClef}
   \item \class{msrKey}
@@ -1135,7 +1138,7 @@ The {\tt otherMeasureElements} classes are:
   \end{itemize}
 
 \item instruments:
-  
+
 \begin{itemize}
   \item \class{msrStaffDetails}
   \item \class{msrScordatura}
@@ -1147,13 +1150,13 @@ The {\tt otherMeasureElements} classes are:
   \end{itemize}
 
 \item lyrics:
-  
+
 \begin{itemize}
 	\item \class{msrSyllable}
   \end{itemize}
 
 \item rehearsals, segno and coda:
-  
+
 \begin{itemize}
   \item \class{msrRehearsalMark}
 	\item \class{msrSegno}
@@ -1162,7 +1165,7 @@ The {\tt otherMeasureElements} classes are:
  \end{itemize}
 
 \item others:
-  
+
 \begin{itemize}
   \item \class{msrPrintLayout}
   \item \class{msrEyeGlasses}

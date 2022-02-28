@@ -22,6 +22,11 @@ using namespace std;
 namespace MusicFormats
 {
 //______________________________________________________________________________
+
+EXP extern const string gGlobalMusicFormatsVersionNumber;
+EXP extern const string gGlobalMusicFormatsVersionDate;
+
+//______________________________________________________________________________
 S_mfcLibraryComponent EXP createLibraryComponent ();
 
 

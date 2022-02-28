@@ -23,6 +23,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "oahEarlyOptions.h"
+
 #include "oahOah.h"
 #include "waeOah.h"
 
@@ -172,7 +174,7 @@ void displayLpsrScore_OptionalPass (
     lpsrOpts);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<
@@ -201,7 +203,7 @@ void displayLpsrScoreShort_OptionalPass (
     lpsrOpts);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<
@@ -230,7 +232,7 @@ void displayLpsrScoreFull_OptionalPass (
     lpsrOpts);
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<
