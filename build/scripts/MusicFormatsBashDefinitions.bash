@@ -755,6 +755,10 @@ function addDoc ()
   git add ${DOC_DIR}/presentation/*.pdf  # libmusicxml2
 
   git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
+  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.h
+
+  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt
+  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.h
 
   git add ${DOC_DIR}/*/*.tex
   git add ${DOC_DIR}/*/*.ist
