@@ -9,6 +9,12 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "../../../MusicFormatsVersionNumber.h"
+
+#include "../../../MusicFormatsVersionDate.h"
+
+#include "mfIndentedTextOutput.h"
+
 #include "mfcComponents.h"
 
 
@@ -16,6 +22,13 @@ using namespace std;
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+const string gGlobalMusicFormatsVersionNumber =
+  MUSICFORMATS_VERSION_NUMBER;
+
+const string gGlobalMusicFormatsVersionDate =
+  MUSICFORMATS_VERSION_DATE;
 
 //______________________________________________________________________________
 S_mfcLibraryComponent createLibraryComponent ()
@@ -28,7 +41,11 @@ S_mfcLibraryComponent createLibraryComponent ()
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       gLogStream <<
-        "Creating the  MFC library component" <<
+        "Creating the MusicFormats library component" <<
+        ", " <<
+        gGlobalMusicFormatsVersionNumber <<
+        ", " <<
+        gGlobalMusicFormatsVersionDate <<
         endl;
     }
 #endif

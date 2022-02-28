@@ -664,6 +664,8 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
 
   else if (
     indexValue == partMeasuresWholeNotesDurationsVectorSize // TEMP JMI
+      ||
+    indexValue == partMeasuresWholeNotesDurationsVectorSize + 1 // TEMP JMI
   ) {
     stringstream s;
 
@@ -1346,7 +1348,8 @@ void msrPart::createFullMeasureRestsInPart (
 }
 
 void msrPart::replicateLastAppendedMeasureInPart (
-  int inputLineNumber)
+  int inputLineNumber,
+  int replicatasNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
@@ -1361,7 +1364,8 @@ void msrPart::replicateLastAppendedMeasureInPart (
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
       replicateLastAppendedMeasureInStaff (
-        inputLineNumber);
+        inputLineNumber,
+        replicatasNumber);
   } // for
 }
 

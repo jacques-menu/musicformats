@@ -8469,30 +8469,38 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       inputLineNumber);
 
   // should this measure be replicated?
-  if (gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedSet ().size ()) {
+  const map<string,int>&
+    measuresToBeReplicatedStringToIntMap =
+      gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedStringToIntMap ();
+
+  if (measuresToBeReplicatedStringToIntMap.size ()) {
   //  if (! fOnGoingFullMeasureRests) { JMI
       // should we add empty measures after current measures?
-      set<string>::const_iterator
+      map<string,int>::const_iterator
         it =
-          gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedSet ().find (
+          measuresToBeReplicatedStringToIntMap.find (
             fCurrentMeasureNumber);
 
-      if (it != gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedSet ().end ()) {
+      if (it != measuresToBeReplicatedStringToIntMap.end ()) {
         // fCurrentMeasureNumber is to be replicated,
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
           gLogStream <<
             endl <<
             "Replicating meaure " <<
+            fCurrentMeasureNumber <<
             " in part " <<
             fCurrentPart->getPartCombinedName () <<
             endl;
         }
 #endif
 
+        int measureReplicatesNumber = (*it).second;
+
         fCurrentPart->
           replicateLastAppendedMeasureInPart (
-            inputLineNumber);
+            inputLineNumber,
+            measureReplicatesNumber);
       }
       else {
         // fRemainingFullMeasureRestsMeasuresNumber JMI ???
@@ -8501,15 +8509,19 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
   }
 
   // should empty measures be added after this one?
-  if (gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ().size ()) {
+  const map<string,int>&
+    addEmptyMeasuresStringToIntMap =
+      gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ();
+
+  if (addEmptyMeasuresStringToIntMap.size ()) {
   //  if (! fOnGoingFullMeasureRests) { JMI
       // should we add empty measures after current measures?
       map<string,int>::const_iterator
         it =
-          gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ().find (
+          addEmptyMeasuresStringToIntMap.find (
             fCurrentMeasureNumber);
 
-      if (it != gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ().end ()) {
+      if (it != addEmptyMeasuresStringToIntMap.end ()) {
         // fCurrentMeasureNumber is present in the map,
         // fetch the number of empty measures to add
         stringstream s;

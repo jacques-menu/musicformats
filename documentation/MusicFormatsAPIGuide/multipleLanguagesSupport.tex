@@ -1,0 +1,63 @@
+% !TEX root = MusicFormatsUserGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{Multiple languages support}
+% -------------------------------------------------------------------------
+
+The \mf\ components support a number of languages, most of which being taken over from \mxml\ and \lily.
+
+For example, \xmlToLy\ offers several languages options:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly -find language
+6 occurrences of string "language" have been found:
+   1:
+    -msr-pitches-language, -mplang LANGUAGE
+    Use LANGUAGE to display note pitches in the MSR logs and text views.
+                    The 13 MSR pitches languages available are:
+                    arabic, catalan, deutsch, english, espanol, francais,
+                    italiano, nederlands, norsk, portugues, suomi, svenska and vlaams.
+                    The default is 'kQTPNederlands'.
+   2:
+    -lpsr-pitches-language, -lppl LANGUAGE
+    Use LANGUAGE to display note pitches in the LPSR logs and views,
+                    as well as in the generated LilyPond code.
+                    The 13 LPSR pitches languages available are:
+                    arabic, catalan, deutsch, english, espanol, francais,
+                    italiano, nederlands, norsk, portugues, suomi, svenska and vlaams.
+                    The default is 'kQTPNederlands'.
+   3:
+    -lpsr-chords-language, -lpcl LANGUAGE
+    Use LANGUAGE to display chord names, their root and bass notes,
+                    in the LPSR logs and views and the generated LilyPond code.
+                    The 5 LPSR chords pitches languages available are:
+                    french, german, ignatzek, italian and semiGerman.
+                    'ignatzek' is Ignatzek's jazz-like, english naming used by LilyPond by default.
+                    The default is 'kChordsIgnatzek'.
+   4:
+    -show-all-harmonies-contents, -sacc PITCH
+    Write all harmonies contents for the given diatonic (semitones) PITCH,
+                    supplied in the current language to standard output.
+   5:
+    -show-harmony-details, -scd HARMONY_SPEC
+    Write the details of the harmony for the given diatonic (semitones) pitch
+                    in the current language and the given harmony to standard output.
+                    HARMONY_SPEC can be:
+                    'ROOT_DIATONIC_PITCH HARMONY_NAME'
+                    or
+                    "ROOT_DIATONIC_PITCH = HARMONY_NAME"
+                    Using double quotes allows for shell variables substitutions, as in:
+                    HARMONY="maj7"
+                    xml2ly -show-harmony-details "bes ${HARMONY}"
+   6:
+    -show-harmony-analysis, -sca HARMONY_SPEC
+    Write an analysis of the harmony for the given diatonic (semitones) pitch
+                    in the current language and the given harmony to standard output.
+                    HARMONY_SPEC can be:
+                    'ROOT_DIATONIC_PITCH HARMONY_NAME INVERSION'
+                    or
+                    "ROOT_DIATONIC_PITCH = HARMONY_NAME INVERSION"
+                    Using double quotes allows for shell variables substitutions, as in:
+                    HARMONY="maj7"
+                    INVERSION=2
+                    xml2ly -show-harmony-analysis "bes ${HARMONY} ${INVERSION}"
+\end{lstlisting}

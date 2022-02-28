@@ -100,7 +100,7 @@ S_bsrScore translateBsrToFinalizedBsr (
   }
 
   if (gIndenter != 0) {
-    if (! gGlobalWaeOahGroup->getQuiet ()) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
       stringstream s;
 
       s <<

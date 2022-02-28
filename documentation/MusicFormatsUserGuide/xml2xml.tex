@@ -1,0 +1,44 @@
+% !TEX root = MusicFormatsUserGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{\xmlToXml\ }
+% -------------------------------------------------------------------------
+
+\subimport{./}{xml2xmlArchitecturePicture}
+
+
+% -------------------------------------------------------------------------
+\section{Why \xmlToXml?}
+% -------------------------------------------------------------------------
+
+\xmlToXml\ has been designed to operate on \mxml\ data, applying options to apply the desired changes. It does a good job already, and will be completed as needed.
+
+
+% -------------------------------------------------------------------------
+\section{What \xmlToXml\ does}
+% -------------------------------------------------------------------------
+
+\xmlToXml\ performs the 5 steps from \mxml\ to LilyPond\ to translate the former into the latter, as shown in \figureRef{xmlToLyArchitecture}. Converting from MXSR to MSR\ is done in two sub-phases for implementation reasons.
+
+The '{\tt -about}' option to \xmlToXml\ details that somewhat:
+\begin{lstlisting}[language=MusicXML]
+jacquesmenu@macmini > xml2xml -about
+What xml2xml does:
+
+    This multi-pass converter basically performs 6 passes:
+        Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
+                 and converts it to a MusicXML tree;
+        Pass 2a: converts that MusicXML tree into
+                 a first Music Score Representation (MSR) skeleton;
+        Pass 2b: populates the MSR skeleton from the MusicXML tree
+                 to get a full MSR;
+        Pass 3:  converts the first MSR into a second MSR, to apply options;
+        Pass 4:  converts the second MSR into a second MusicXML tree;
+        Pass 5:  converts the second MusicXML tree to MusicXML code
+                 and writes it to standard output.
+
+    Other passes are performed according to the options, such as
+    displaying views of the internal data or printing a summary of the score.
+
+    The activity log and warning/error messages go to standard error.
+\end{lstlisting}

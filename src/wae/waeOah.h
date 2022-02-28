@@ -55,9 +55,6 @@ class EXP waeOahGroup : public oahGroup
     // warning and error handling
     // --------------------------------------
 
-    Bool                  getQuiet () const
-                              { return fQuiet;  }
-
     Bool                  getDontShowErrors () const
                               { return fDontShowErrors;  }
 

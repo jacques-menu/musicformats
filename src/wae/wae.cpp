@@ -34,7 +34,7 @@ void waeWarning (
   int           inputLineNumber,
   const string& message)
 {
-  if (! gGlobalWaeOahGroup->getQuiet ()) {
+  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndent ();
 
     gIndenter.resetToZero ();
@@ -56,7 +56,7 @@ void waeInternalWarning (
   int           inputLineNumber,
   const string& message)
 {
-  if (! gGlobalWaeOahGroup->getQuiet ()) {
+  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     int saveIndent = gIndenter.getIndent ();
 
     gIndenter.resetToZero ();
@@ -81,7 +81,7 @@ void waeErrorWithoutException (
   int           sourceCodeLineNumber,
   const string& message)
 {
-  if (! gGlobalWaeOahGroup->getQuiet ()) {
+  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
       gLogStream <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
@@ -198,7 +198,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
   if (
     warningsInputLineNumbersSize
       &&
-    ! gGlobalWaeOahGroup->getQuiet ()
+    ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
   ) {
     gLogStream <<
       "Warning message(s) were issued for input " <<
@@ -256,7 +256,7 @@ void msrStreamsWarning (
   int    sourceCodeLineNumber,
   string  message)
 {
-  if (! (gGlobalWaeOahGroup->getQuiet () && gGlobalWaeOahGroup->getDontShowErrors ())) {
+  if (! (gGlobalOahEarlyOptions.getEarlyQuietOption () && gGlobalWaeOahGroup->getDontShowErrors ())) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
       gLogStream <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
@@ -277,7 +277,7 @@ void msrStreamsError (
   int    sourceCodeLineNumber,
   string  message)
 {
-  if (! (gGlobalWaeOahGroup->getQuiet () && gGlobalWaeOahGroup->getDontShowErrors ())) {
+  if (! (gGlobalOahEarlyOptions.getEarlyQuietOption () && gGlobalWaeOahGroup->getDontShowErrors ())) {
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
       gLogStream <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<

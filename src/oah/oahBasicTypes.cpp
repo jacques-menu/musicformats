@@ -4521,7 +4521,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
   if (
     gGlobalOahEarlyOptions.getTraceEarlyOptions ()
       &&
-    ! gGlobalWaeOahGroup->getQuiet ()
+    ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
   ) {
     if (argumentsNumber > 0) {
       gLogStream <<
@@ -4609,7 +4609,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
   if (
     gGlobalOahEarlyOptions.getTraceEarlyOptions  ()
       &&
-    ! gGlobalWaeOahGroup->getQuiet ()
+    ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
   ) {
     if (argumentsNumber > 0) {
       gLogStream <<
@@ -4716,7 +4716,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
   if (
     gGlobalOahEarlyOptions.getTraceEarlyOptions  ()
       &&
-    ! gGlobalWaeOahGroup->getQuiet ()
+    ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
   ) {
     if (argumentsNumber > 0) {
       gLogStream <<

@@ -1,0 +1,48 @@
+% !TEX root = MusicFormatsAPIGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{\xmlToGmn\ }
+% -------------------------------------------------------------------------
+
+\subimport{./}{xml2gmnArchitecturePicture}
+
+
+% -------------------------------------------------------------------------
+\section{Why \xmlToGmn?}
+% -------------------------------------------------------------------------
+
+\libmusicxml\ comes with \xmlToGuido, a \converter\ of \mxml\ files to \guido\ syntax, which has some limitations. It is supplied as as sample of the library's use.
+
+\xmlToGmn\ has been designed to complement \libmusicxml\ features: it provides the same translation as \xmlToGuido, with more options for flexibility.
+
+Work remains to be done in the conversion of \msrRepr\ to MXSR, but \xmlToGmn\ is already fairly complete.
+
+
+% -------------------------------------------------------------------------
+\section{What \xmlToGmn\ does}
+% -------------------------------------------------------------------------
+
+\xmlToGmn\ performs the 5 steps from \mxml\ to LilyPond\ to translate the former into the latter, as shown in \figureRef{xmlToLyArchitecture}. Converting from MXSR to MSR\ is done in two sub-phases for implementation reasons.
+
+The '{\tt -about}' option to \xmlToGmn\ details that somewhat:
+\begin{lstlisting}[language=MusicXML]
+jacquesmenu@macmini > xml2xml -about
+What xml2xml does:
+
+    This multi-pass converter basically performs 6 passes:
+        Pass 1:  reads the contents of MusicXMLFile or stdin ('-')
+                 and converts it to a MusicXML tree;
+        Pass 2a: converts that MusicXML tree into
+                 a first Music Score Representation (MSR) skeleton;
+        Pass 2b: populates the MSR skeleton from the MusicXML tree
+                 to get a full MSR;
+        Pass 3:  converts the first MSR into a second MSR, to apply options;
+        Pass 4:  converts the second MSR into a second MusicXML tree;
+        Pass 5:  converts the second MusicXML tree to MusicXML code
+                 and writes it to standard output.
+
+    Other passes are performed according to the options, such as
+    displaying views of the internal data or printing a summary of the score.
+
+    The activity log and warning/error messages go to standard error.
+\end{lstlisting}

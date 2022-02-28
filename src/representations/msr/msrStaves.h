@@ -281,7 +281,8 @@ class EXP msrStaff : public msrElement
                             int inputLineNumber);
 
     void                  replicateLastAppendedMeasureInStaff (
-                            int           inputLineNumber);
+                            int inputLineNumber,
+                            int replicatasNumber);
 
     void                  addFullMeasureRestsToStaff (
                             int           inputLineNumber,

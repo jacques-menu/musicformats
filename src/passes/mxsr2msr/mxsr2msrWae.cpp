@@ -11,6 +11,8 @@
 
 #include "mfIndentedTextOutput.h"
 
+#include "oahEarlyOptions.h"
+
 #include "wae.h"
 #include "mxsr2msrWae.h"
 

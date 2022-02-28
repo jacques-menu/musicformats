@@ -82,7 +82,7 @@ msrDivisions::~msrDivisions ()
 void msrDivisions::initializeDivisions ()
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalMxsrOahGroup->getTraceDivisions () && ! gGlobalWaeOahGroup->getQuiet ()) {
+  if (gGlobalMxsrOahGroup->getTraceDivisions () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     gLogStream <<
       "Initializing divisions" <<
       ", divisionsPerQuarterNote = " << fDivisionsPerQuarterNote <<

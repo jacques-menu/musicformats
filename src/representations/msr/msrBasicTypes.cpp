@@ -23610,7 +23610,7 @@ void initializeMsrBasicTypes ()
     if (
       gGlobalOahEarlyOptions.getEarlyTracingOah ()
         &&
-      ! gGlobalWaeOahGroup->getQuiet ()
+      ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
     ) {
       gLogStream <<
         "Initializing MSR basic types handling" <<

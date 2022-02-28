@@ -6731,58 +6731,65 @@ void msrVoice::createFullMeasureRestsInVoice (
 }
 
 void msrVoice::replicateLastAppendedMeasureInVoice (
-  int inputLineNumber)
+  int inputLineNumber,
+  int replicatasNumber)
 {
   string
     voiceLastAppendedMeasureMeasureNumber =
       fVoiceLastAppendedMeasure->
         getMeasureElementMeasureNumber ();
 
-  // create a clone of the last appended measure
-  S_msrMeasure
-    lastAppendedMeasureClone =
-      fVoiceLastAppendedMeasure->
-        createMeasureDeepClone (
-          fVoiceLastSegment);
+  replicatasNumber = 1; // TEMP JMI
 
-  // change its contents
-  lastAppendedMeasureClone->
-    setMeasureElementMeasureNumber (
-      voiceLastAppendedMeasureMeasureNumber + " replicated");
+  for (int i = 1; i <= replicatasNumber; ++i) {
+    // create a clone of the last appended measure
+    S_msrMeasure
+      lastAppendedMeasureClone =
+        fVoiceLastAppendedMeasure->
+          createMeasureDeepClone (
+            fVoiceLastSegment);
 
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
-    gLogStream <<
-      "Replicating last appended measure " <<
-      fVoiceLastAppendedMeasure->getMeasureElementMeasureNumber () <<
-      " as measure " <<
-      lastAppendedMeasureClone->getMeasureElementMeasureNumber () <<
-      "in voice \"" <<
-      getVoiceName () <<
-      "\"" <<
-      endl;
-  }
-#endif
+    // change its contents
+    lastAppendedMeasureClone->
+      setMeasureElementMeasureNumber (
+        voiceLastAppendedMeasureMeasureNumber +
+          '.' +
+          to_string (i) +
+          " (replicated)");
 
+  #ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+      gLogStream <<
+        "Replicating last appended measure " <<
+        fVoiceLastAppendedMeasure->getMeasureElementMeasureNumber () <<
+        " as measure " <<
+        lastAppendedMeasureClone->getMeasureElementMeasureNumber () <<
+        "in voice \"" <<
+        getVoiceName () <<
+        "\"" <<
+        endl;
+    }
+  #endif
 
-  // register its whole notes duration
-  fetchVoicePartUpLink ()->
-    registerOrdinalMeasureNumberWholeNotesDuration (
-      inputLineNumber,
-      lastAppendedMeasureClone->
-        getMeasureOrdinalNumberInVoice (),
-      lastAppendedMeasureClone->
-        getFullMeasureWholeNotesDuration ()); // JMI
+    // register its whole notes duration
+    fetchVoicePartUpLink ()->
+      registerOrdinalMeasureNumberWholeNotesDuration (
+        inputLineNumber,
+        lastAppendedMeasureClone->
+          getMeasureOrdinalNumberInVoice (),
+        lastAppendedMeasureClone->
+          getFullMeasureWholeNotesDuration ()); // JMI
 
-  // append it to the voice last segment
-  fVoiceLastSegment->
-    appendMeasureToSegment (
-      lastAppendedMeasureClone);
+    // append it to the voice last segment
+    fVoiceLastSegment->
+      appendMeasureToSegment (
+        lastAppendedMeasureClone);
 
-//   // update fVoiceLastAppendedMeasure
-//   fVoiceLastAppendedMeasure->
-//     setNextMeasureNumber (
-//       );
+    //   // update fVoiceLastAppendedMeasure // JMI
+    //   fVoiceLastAppendedMeasure->
+    //     setNextMeasureNumber (
+    //       );
+  } // for
 }
 
 void msrVoice::addFullMeasureRestsToVoice (

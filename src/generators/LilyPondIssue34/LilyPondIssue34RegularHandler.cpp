@@ -566,7 +566,7 @@ void LilyPondIssue34RegularHandler::createWarningAndErrorsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("quiet", subGroup);
+  registerAtomInRegularSubgroup (K_QUIET_OPTION_LONG_NAME, subGroup);
 
   registerAtomInRegularSubgroup ("dont-show-errors", subGroup);
   registerAtomInRegularSubgroup ("dont-quit-on-errors", subGroup);

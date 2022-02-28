@@ -249,7 +249,7 @@ int main (int argc, char* argv[])
   // has quiet mode been requested?
   // ------------------------------------------------------
 
-  if (gGlobalWaeOahGroup->getQuiet ()) {
+  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
     // disable all trace and display options
     handler->
       enforceHandlerQuietness ();

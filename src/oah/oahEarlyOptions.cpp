@@ -85,6 +85,21 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 //   return fEarlyRegularOption;
 // }
 
+//_______________________________________________________________________________
+const string K_QUIET_OPTION_LONG_NAME  = "quiet";
+const string K_QUIET_OPTION_SHORT_NAME = "q";
+
+void oahEarlyOptions::setEarlyQuietOption ()
+{
+  if (fTraceEarlyOptions) {
+    gLogStream <<
+      "Setting fEarlyQuietOption" <<
+      endl;
+  }
+
+  fEarlyQuietOption = true;
+}
+
 //______________________________________________________________________________
 void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
   mfMultiGenerationOutputKind value)
@@ -259,6 +274,16 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
 //   ) {
 //     setEarlyRegularOption ();
 //   }
+
+  if (
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_QUIET_OPTION_LONG_NAME)
+      ||
+    isEarlyOptionRecognized (
+      argumentWithoutDashToBeUsed, K_QUIET_OPTION_SHORT_NAME)
+  ) {
+    setEarlyInsiderOption ();
+  }
 
   if (
     isEarlyOptionRecognized (
@@ -471,7 +496,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
   if (
     gGlobalOahEarlyOptions.getTraceEarlyOptions ()
       &&
-    ! gGlobalWaeOahGroup->getQuiet ()
+    ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
   ) {
     if (argumentsNumber > 0) {
       gLogStream <<
@@ -600,19 +625,23 @@ void oahEarlyOptions::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
+    "EarlyInsiderOption" << " : " << fEarlyInsiderOption <<
+    endl <<
+//     setw (fieldWidth) <<
+//     "EarlyRegularOption" << " : " << fEarlyRegularOption <<
+//     endl <<
+
+    setw (fieldWidth) <<
+    "EarlyQuietOption" << " : " << fEarlyQuietOption <<
+    endl <<
+
+    setw (fieldWidth) <<
     "TraceEarlyOptions" << " : " << fTraceEarlyOptions <<
     endl <<
 
     setw (fieldWidth) <<
     "EarlyOahVerboseMode" << " : " << fEarlyOahVerboseMode <<
     endl <<
-
-    setw (fieldWidth) <<
-    "EarlyInsiderOption" << " : " << fEarlyInsiderOption <<
-    endl <<
-//     setw (fieldWidth) <<
-//     "EarlyRegularOption" << " : " << fEarlyRegularOption <<
-//     endl <<
 
     setw (fieldWidth) <<
     "EarlyTracingOah" << " : " << fEarlyTracingOah <<

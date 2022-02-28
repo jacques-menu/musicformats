@@ -769,17 +769,22 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      oahStringSetElementAtom::create (
+      oahStringToIntMapElementAtom::create (
         "replicate-msr-measure", "rmmeas",
-R"###(Replicate MSR mesure MEASURE_NUMBER.
-MEASURE_NUMBER should be the number of an existing measure.
+R"###(Replicate an MSR mesure according to SPECIFICATION.
+SPECIFICATION should be of the form 'MEASURE_NUMBER:NUMBER_OF_MEASURES_TO_ADD',
+where MEASURE_NUMBER is a string, and NUMBER_OF_MEASURES_TO_ADD is the number
+of empty measures to add after measure MEASURE_NUMBER.
+MEASURE_NUMBER should be the number of an existing, empty measure,
+and NUMBER_OF_MEASURES_TO_ADD should be at least 1, , such as '17:3'.
+There can be spaces around the ':'.
 This comes in handly when MusicXML data obtained by scanning contains
 a single empty measure when there were several in the original score,
 but for other needs too.
 This option can be used any number of times.)###",
         "MEASURE_NUMBER",
-        "fMeasuresToBeReplicatedSet",
-        fMeasuresToBeReplicatedSet));
+        "fMeasuresToBeReplicatedStringToIntMap",
+        fMeasuresToBeReplicatedStringToIntMap));
 
   // add empty MSR measures
   // --------------------------------------
