@@ -284,7 +284,7 @@ S_mfcLibraryComponent createLibraryComponent ()
             "Finalized the options values display options",
             "Added distributions for MacOS, Ubuntu and Windows",
             "Finalized multi-generation output handling",
-            "Complements to the CLI user's guide"
+            "Complements to the CLI guide"
           }
       ));
 
@@ -294,7 +294,7 @@ S_mfcLibraryComponent createLibraryComponent ()
           mfcVersionNumber::createFromString ("0.9.61"),
           "February 18, 2022",
           list<string> {
-            "Complements to the CLI user's guide"
+            "Complements to the CLI guide"
           }
       ));
  }

@@ -179,7 +179,7 @@ The code base of \xmlToLy\ is \MainIt{defensive programming} oriented, which mea
 
 \item the code is organized in sections, with an initial comment documenting what the code does;
 
-\item the C++11's {\tt auto} declaration feature is used only for \enumType s, see below. Writing the explicit types in a large code base helps the maintainer mastering the code;
+\item the \CPlusplus 's {\tt auto} declaration feature is used only for \enumType s, see below. Writing the explicit types in a large code base helps the maintainer mastering the code;
 
 \item \function{mfAssert} is used to perform sanity checks, such as detect a null pointer prior to using it.
 \end{itemize}
@@ -822,7 +822,7 @@ void initializeBSR ()
 \section{Enumeration types}
 % -------------------------------------------------------------------------
 
-All \enumType s use the C++11 '{\tt enum class}' feature, such as:
+All \enumType s use the \CPlusplus\ '{\tt enum class}' feature, such as:
 
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrSlurTypeKind {
@@ -838,7 +838,7 @@ This prevents enumeration constants name conflicts across \enumType s, and quali
 
 Many enumerations names end in '{\tt Kind}', which is a way distinguish them from rather similar classes names in some cases.
 
-Enumeration constants in the form {\tt k_No*} are used to indicate a value that \MainIt{has not been set yet}. There are always the first on in the corresponding enumeration, to benefit from the the C++11 implicit \initialization\  to the the equivalent of 0.
+Enumeration constants in the form {\tt k_No*} are used to indicate a value that \MainIt{has not been set yet}. There are always the first on in the corresponding enumeration, to benefit from the the \CPlusplus\ implicit \initialization\  to the the equivalent of 0.
 
 An enumeration constant may end in '{\tt None}', meaning that {\tt "none"} is actually a possible value for the corresponding type:
 \begin{lstlisting}[language=CPlusPlus]

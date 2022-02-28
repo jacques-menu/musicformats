@@ -911,6 +911,8 @@ listing~\ref{#1}, [#1], page~\pageref{#1}%
 
 \newcommand{\OS}{operating system\index[Main]{operating system}}
 
+\newcommand{\CPlusplus}{C++11\index[Main]{C++11}}
+
 \newcommand{\MacOS}{Mac OS\texttrademark\index[Main]{Mac OS\texttrademark}}
 \newcommand{\xcode}{Xcode\index[Main]{Xcode}}
 \newcommand{\macports}{MacPorts\index[Main]{MacPorts}}
@@ -1039,6 +1041,20 @@ listing~\ref{#1}, [#1], page~\pageref{#1}%
 }
 \newcommand{\musicXmlAttribute}[1]{%
 {\tt "#1"}\index[Main]{{\tt $<$#1 /$>$}}\index[MusicXML]{{\tt #1 ""}}%
+}
+
+\newcommand{\directory}[1]{%
+\directory {\tt #1/}\index[Main]{{\tt #1}}\index[Files]{{\tt #1/}}%
+}
+\newcommand{\Directory}[1]{%
+Directory {\tt #1/}\index[Main]{{\tt #1}}\index[Files]{{\tt #1/}}%
+}
+
+\newcommand{\directoryName}[1]{%
+{\tt #1/}\index[Main]{{\tt #1}}\index[Files]{{\tt #1/}}%
+}
+\newcommand{\DirectoryName}[1]{%
+{\tt #1/}\index[Main]{{\tt #1}}\index[Files]{{\tt #1/}}%
 }
 
 \newcommand{\file}[1]{%
