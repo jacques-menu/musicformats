@@ -26,7 +26,7 @@ In compiler writing terminology:
 \item a set of multi-pass converters are supplied, such as \xmlToLy\, \xmlToXml\ and \msdLangComp.%%%JMI
 \end{itemize}
 
-In the \mf\ user's documentation, the term '\converter' is used because it is more meaningfull for musicians.
+In the \mf\ user documentation, the term '\converter' is used because it is more meaningfull for musicians.
 
 \mf\ provides high-level interfaces to its components as functions\index{functions} in \fileName{Interface} files:
 \begin{lstlisting}[language=Terminal]
@@ -356,7 +356,7 @@ total 32
 \section{Running a service}
 % -------------------------------------------------------------------------
 
-When a \mf\ \service\ is \MainIt{run} from the \CLI\ or through an \API\ function, an instance of \class{mfServiceRunData} is created. 
+When a \mf\ \service\ is \MainIt{run} from the \CLI\ or through an \API\ function, an instance of \class{mfServiceRunData} is created.
 
 This class is defined in \mflibraryBoth{mfServiceRunData} to hold data specific to the run. They are global data, but don't belong to the regular, invariant data contained in the library, such as the notes pitches in various languages: %%%JMI
 \begin{lstlisting}[language=CPlusPlus]
@@ -397,7 +397,7 @@ class EXP mfServiceRunData : public smartable
     virtual               ~mfServiceRunData ();
 
 	// .. .. ..
-	
+
   private:
 
     // private fields
@@ -425,7 +425,7 @@ class EXP mfServiceRunData : public smartable
 
     // input source
     string                fInputSourceName;
-};	
+};
 \end{lstlisting}
 
 The various constructors are used depending on the way the service is run.
@@ -516,7 +516,7 @@ lpsrScore::lpsrScore (
           lpsrComment::kGapAfterwardsYes);
     }
 	}
-	
+
 	// ...
 }
 \end{lstlisting}

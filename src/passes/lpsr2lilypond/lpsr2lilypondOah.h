@@ -2096,7 +2096,7 @@ EXP extern S_lpsr2lilypondOahGroup gGlobalLpsr2lilypondOahGroup;
 // JMI typedef void (lpsr2lilypondOahGroup::*lpsr2lilypondOahMethodPtr)(); //MyTypedef is a type!
 
 /*
-  It's worth noting that, as of C++11, you could write this expression
+  It's worth noting that, from C++11 up, one could write this expression
   as a more legible using statement:
     using lpsr2lilypondOahMethodPtr = void (lpsr2lilypondOahGroup::*)();
 */
