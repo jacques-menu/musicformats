@@ -2071,7 +2071,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
   } // for
 }
 
-void msrStaff::addFullMeasureRestsToStaff (
+void msrStaff::addEmptyMeasuresToStaff (
   int           inputLineNumber,
   const string& previousMeasureNumber,
   int           fullMeasureRestsNumber)
@@ -2095,7 +2095,7 @@ void msrStaff::addFullMeasureRestsToStaff (
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      addFullMeasureRestsToVoice (
+      addEmptyMeasuresToVoice (
         inputLineNumber,
         previousMeasureNumber,
         fullMeasureRestsNumber);

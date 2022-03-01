@@ -280,6 +280,11 @@ class EXP msrPart : public msrPartGroupElement
                             int inputLineNumber,
                             int indexValue) const;
 
+    void                  registerOrdinalMeasureNumberWholeNotesDuration (
+                            int             inputLineNumber,
+                            int             measureOrdinalNumber,
+                            const rational& wholeNotesDuration);
+
     // path shortest note
 
     void                  registerShortestNoteInPartIfRelevant (
@@ -296,11 +301,6 @@ class EXP msrPart : public msrPartGroupElement
     void                  setNextMeasureNumberInPart (
                             int           inputLineNumber,
                             const string& nextMeasureNumber);
-
-    void                  registerOrdinalMeasureNumberWholeNotesDuration (
-                            int             inputLineNumber,
-                            int             measureOrdinalNumber,
-                            const rational& wholeNotesDuration);
 
     // clef, key, time signature
 
@@ -381,7 +381,7 @@ class EXP msrPart : public msrPartGroupElement
                             int inputLineNumber,
                             int replicatasNumber);
 
-    void                  addFullMeasureRestsToPart (
+    void                  addEmptyMeasuresToPart (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
                             int           fullMeasureRestsNumber);

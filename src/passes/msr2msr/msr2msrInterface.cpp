@@ -321,7 +321,7 @@ void displayResultingNewMsrScore_OptionalPass (
     separator <<
     endl <<
     gTab <<
-    "Optional pass: displaying the resulting MSR as text" <<
+    "Pass (ptional): displaying the resulting MSR as text" <<
     endl <<
     separator <<
     endl << endl <<
@@ -378,7 +378,7 @@ void displayResultingNewMsrScoreShort_OptionalPass (
     separator <<
     endl <<
     gTab <<
-    "Optional pass: displaying the resulting MSR as text, short version" <<
+    "Pass (ptional): displaying the resulting MSR as text, short version" <<
     endl <<
     separator <<
     endl << endl;

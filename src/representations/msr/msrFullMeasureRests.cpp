@@ -40,7 +40,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrFullMeasureRestsContents msrFullMeasureRestsContents::create (
-  int               inputLineNumber,
+  int                   inputLineNumber,
   S_msrFullMeasureRests fullMeasureRests)
 {
   msrFullMeasureRestsContents* o =
@@ -52,7 +52,7 @@ S_msrFullMeasureRestsContents msrFullMeasureRestsContents::create (
 }
 
 msrFullMeasureRestsContents::msrFullMeasureRestsContents (
-  int              inputLineNumber,
+  int                  inputLineNumber,
   S_msrFullMeasureRests fullMeasureRests)
     : msrElement (inputLineNumber)
 {

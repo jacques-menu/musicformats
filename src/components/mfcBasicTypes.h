@@ -228,9 +228,9 @@ class EXP mfcVersionsHistory : public smartable
     void                  appendVersionDescrToHistory (
                             S_mfcVersionDescr versionDescr);
 
-    S_mfcVersionDescr     fetchCurrentVersion () const;
+    S_mfcVersionDescr     fetchMostRecentVersion () const;
 
-    S_mfcVersionNumber    fetchCurrentVersionNumber () const;
+    S_mfcVersionNumber    fetchMostRecentVersionNumber () const;
 
   public:
 
@@ -305,18 +305,19 @@ class EXP mfcComponentDescr : public smartable
     // public services
     // ------------------------------------------------------
 
-    S_mfcVersionDescr     fetchComponentCurrentVersion () const
+    S_mfcVersionDescr     fetchComponentMostRecentVersion () const
                               {
                                 return
                                   fVersionsHistory->
-                                     fetchCurrentVersion();
+                                     fetchMostRecentVersion ();
                               }
 
-    S_mfcVersionNumber    fetchComponentCurrentVersionNumber () const
+    S_mfcVersionNumber    fetchComponentMostRecentVersionNumber () const
                               {
                                 return
                                   fVersionsHistory->
-                                     fetchCurrentVersionNumber();
+                                     fetchMostRecentVersion ()->
+                                        getVersionNumber ();
                               }
 
     void                  appendVersionDescrToComponent (
@@ -329,7 +330,7 @@ class EXP mfcComponentDescr : public smartable
 
     string                asString () const;
 
-    string                currentVersionNumberAndDateAsString () const;
+    string                mostRecentVersionNumberAndDateAsString () const;
 
     virtual void          print (ostream& os) const;
 

@@ -59,7 +59,7 @@ void basicOah2manPage::visitStart (S_oahHandler& elt)
     " " <<
     elt->
       getHandlerMultiComponent ()->
-        fetchComponentCurrentVersionNumber () <<
+        fetchComponentMostRecentVersionNumber () <<
     " on " <<
     gGlobalServiceRunData->getRunDateFull () <<
     endl;
