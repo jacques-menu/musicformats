@@ -265,11 +265,7 @@ int main (int argc, char* argv[])
 
     gLogStream <<
       "This is " << serviceName << " " <<
-      createMusicxml2musicxmlConverterComponent ()->
-        currentVersionNumberAndDateAsString () <<
-      " from MusicFormats " <<
-      createLibraryComponent ()->
-        currentVersionNumberAndDateAsString () <<
+      getGlobalMusicFormatsVersionNumberAndDate () <<
       endl;
 
     gLogStream <<

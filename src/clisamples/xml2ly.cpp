@@ -109,9 +109,7 @@ int main (int argc, char* argv[])
 // JMI  testIncludeOptionsFromFile ();
 
 //   gLogStream <<
-//     "gGlobalMusicFormatsVersionNumber: " << gGlobalMusicFormatsVersionNumber <<
-//     endl <<
-//     "gGlobalMusicFormatsVersionDate:   " << gGlobalMusicFormatsVersionDate <<
+//     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<
 //     endl;
 
   // apply early options if any
@@ -287,11 +285,7 @@ int main (int argc, char* argv[])
 
     gLogStream <<
       "This is " << serviceName << " " <<
-      createMusicxml2lilypondConverterComponent ()->
-        currentVersionNumberAndDateAsString () <<
-      " from MusicFormats " <<
-      createLibraryComponent ()->
-        currentVersionNumberAndDateAsString () <<
+      getGlobalMusicFormatsVersionNumberAndDate () <<
       endl;
 
     gLogStream <<

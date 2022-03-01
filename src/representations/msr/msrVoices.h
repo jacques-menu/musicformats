@@ -507,8 +507,10 @@ class EXP msrVoice : public msrElement
 
     void                  appendKeyToVoice  (S_msrKey  key);
 
-    void                  appendTimeSignatureToVoice (S_msrTimeSignature timeSignature);
-    void                  appendTimeSignatureToVoiceClone (S_msrTimeSignature timeSignature);
+    void                  appendTimeSignatureToVoice (
+                            S_msrTimeSignature timeSignature);
+    void                  appendTimeSignatureToVoiceClone (
+                            S_msrTimeSignature timeSignature);
 
     // dal segno
 
@@ -815,7 +817,7 @@ class EXP msrVoice : public msrElement
                             int inputLineNumber,
                             int replicatasNumber);
 
-    void                  addFullMeasureRestsToVoice (
+    void                  addEmptyMeasuresToVoice (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
                             int           fullMeasureRestsNumber);
@@ -1241,7 +1243,8 @@ class EXP msrVoice : public msrElement
     S_msrKey              getVoiceCurrentKey  () const
                               { return fVoiceCurrentKey; }
 
-    void                  setVoiceCurrentTimeSignature (S_msrTimeSignature timeSignature);
+    void                  setVoiceCurrentTimeSignature (
+                            S_msrTimeSignature timeSignature);
 
     S_msrTimeSignature    getVoiceCurrentTimeSignature () const
                               { return fVoiceCurrentTimeSignature; }

@@ -73,7 +73,7 @@ S_mfcPassComponent createMxsr2msrComponent ()
     pPassComponent->
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
-          mfcVersionNumber::createFromString ("0.9.53"),
+          mfcVersionNumber::createFromString ("0.9.60"),
           "February 21, 2022",
           list<string> {
             "Added options for words conversions and placement"

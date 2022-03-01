@@ -23,8 +23,10 @@ namespace MusicFormats
 {
 //______________________________________________________________________________
 
-EXP extern const string gGlobalMusicFormatsVersionNumber;
-EXP extern const string gGlobalMusicFormatsVersionDate;
+EXP extern string getGlobalMusicFormatsVersionNumber ();
+EXP extern string getGlobalMusicFormatsVersionDate ();
+
+EXP extern string getGlobalMusicFormatsVersionNumberAndDate ();
 
 //______________________________________________________________________________
 S_mfcLibraryComponent EXP createLibraryComponent ();

@@ -81,14 +81,14 @@ class EXP oahEarlyOptions
     // set and get
     // ------------------------------------------------------
 
-    void                  setEarlyQuietOption ();
-    Bool                  getEarlyQuietOption () const
-                              { return fEarlyQuietOption; }
-
     void                  setEarlyInsiderOption ();
     Bool                  getEarlyInsiderOption () const
                               { return fEarlyInsiderOption; }
 //     void                  setEarlyRegularOption ();
+
+    void                  setEarlyQuietOption ();
+    Bool                  getEarlyQuietOption () const
+                              { return fEarlyQuietOption; }
 
     void                  setEarlyMultiGenerationOutputKind (
                             mfMultiGenerationOutputKind value);
@@ -165,10 +165,10 @@ class EXP oahEarlyOptions
     // fields
     // ------------------------------------------------------
 
-    Bool                  fEarlyQuietOption;
-
     Bool                  fEarlyInsiderOption;
 //     Bool                  fEarlyRegularOption;
+
+    Bool                  fEarlyQuietOption;
 
     mfMultiGenerationOutputKind
                           fEarlyMultiGenerationOutputKind;

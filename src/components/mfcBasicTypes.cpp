@@ -824,7 +824,7 @@ void mfcVersionsHistory::appendVersionDescrToHistory (
   fVersionsList.push_back (versionDescr);
 }
 
-S_mfcVersionDescr mfcVersionsHistory::fetchCurrentVersion () const
+S_mfcVersionDescr mfcVersionsHistory::fetchMostRecentVersion () const
 {
   // sanity check
   mfAssert (
@@ -833,19 +833,6 @@ S_mfcVersionDescr mfcVersionsHistory::fetchCurrentVersion () const
     "fVersionsList is empty");
 
   return fVersionsList.back ();
-}
-
-S_mfcVersionNumber mfcVersionsHistory::fetchCurrentVersionNumber () const
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fVersionsList.size () > 0,
-    "fVersionsList is empty");
-
-  return
-    fetchCurrentVersion () ->
-      getVersionNumber ();
 }
 
 void mfcVersionsHistory::print (ostream& os) const
@@ -970,19 +957,19 @@ string mfcComponentDescr::asString () const
   stringstream s;
 
   S_mfcVersionDescr
-    componentCurrentVersion =
-      fetchComponentCurrentVersion ();
+    componentMostRecentVersion =
+      fetchComponentMostRecentVersion ();
 
   s <<
     fComponentName <<
     " " <<
     componenKindAsString (fComponenKind) <<
     " " <<
-    componentCurrentVersion->
+    componentMostRecentVersion->
       getVersionNumber ()->
         asString () <<
     " (" <<
-    componentCurrentVersion->
+    componentMostRecentVersion->
       getVersionDate () <<
     ")" <<
     endl;
@@ -990,20 +977,20 @@ string mfcComponentDescr::asString () const
   return s.str ();
 }
 
-string mfcComponentDescr::currentVersionNumberAndDateAsString () const
+string mfcComponentDescr::mostRecentVersionNumberAndDateAsString () const
 {
   stringstream s;
 
   S_mfcVersionDescr
-    componentCurrentVersion =
-      fetchComponentCurrentVersion ();
+    componentMostRecentVersion =
+      fetchComponentMostRecentVersion ();
 
   s <<
-    componentCurrentVersion->
+    componentMostRecentVersion->
       getVersionNumber ()->
         asString () <<
     " (" <<
-    componentCurrentVersion->
+    componentMostRecentVersion->
       getVersionDate () <<
     ")";
 
@@ -1030,21 +1017,15 @@ void mfcComponentDescr::printOwnHistory (ostream&  os) const
 void mfcComponentDescr::printVersion (ostream& os) const
 {
   S_mfcVersionDescr
-    componentCurrentVersion =
-      fetchComponentCurrentVersion ();
+    componentMostRecentVersion =
+      fetchComponentMostRecentVersion ();
 
   os <<
     fComponentName <<
     " " <<
     componenKindAsString (fComponenKind) <<
     " " <<
-    componentCurrentVersion->
-      getVersionNumber ()->
-        asString () <<
-    " (" <<
-    componentCurrentVersion->
-      getVersionDate () <<
-    ")" <<
+    getGlobalMusicFormatsVersionNumberAndDate () <<
     endl;
 }
 
@@ -1274,16 +1255,16 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
       {
         // is the multi component versions numbering consistent?
         S_mfcVersionNumber
-          multiComponentCurrentVersionNumber =
-            fetchComponentCurrentVersionNumber (),
-          formatComponentCurrentVersionNumber =
+          multiComponentMostRecentVersionNumber =
+            fetchComponentMostRecentVersionNumber (),
+          formatComponentMostRecentVersionNumber =
             format->
-              fetchComponentCurrentVersionNumber ();
+              fetchComponentMostRecentVersionNumber ();
 
         if (
-          *multiComponentCurrentVersionNumber
+          *multiComponentMostRecentVersionNumber
             <
-          *formatComponentCurrentVersionNumber
+          *formatComponentMostRecentVersionNumber
         ) {
           stringstream s;
 
@@ -1293,11 +1274,11 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
             " " <<
             componenKindAsString (fComponenKind) <<
             " has version number " <<
-            multiComponentCurrentVersionNumber->asString () <<
+            multiComponentMostRecentVersionNumber->asString () <<
             " while " <<
             format->getComponentName () <<
             " has version number " <<
-            formatComponentCurrentVersionNumber->asString ();
+            formatComponentMostRecentVersionNumber->asString ();
 
           oahInternalError (s.str ());
         }
@@ -1335,16 +1316,16 @@ void mfcMultiComponent::appendPassToMultiComponent (
       {
         // is the multi component versions numbering consistent?
         S_mfcVersionNumber
-          multiComponentCurrentVersionNumber =
-            fetchComponentCurrentVersionNumber (),
-          passComponentCurrentVersionNumber =
+          multiComponentMostRecentVersionNumber =
+            fetchComponentMostRecentVersionNumber (),
+          passComponentMostRecentVersionNumber =
             pass->
-              fetchComponentCurrentVersionNumber ();
+              fetchComponentMostRecentVersionNumber ();
 
         if (
-          *multiComponentCurrentVersionNumber
+          *multiComponentMostRecentVersionNumber
             <
-          *passComponentCurrentVersionNumber
+          *passComponentMostRecentVersionNumber
         ) {
           stringstream s;
 
@@ -1354,11 +1335,11 @@ void mfcMultiComponent::appendPassToMultiComponent (
             " " <<
             componenKindAsString (fComponenKind) <<
             " has version number " <<
-            multiComponentCurrentVersionNumber->asString () <<
+            multiComponentMostRecentVersionNumber->asString () <<
             " while " <<
             pass->getComponentName () <<
             " has version number " <<
-            passComponentCurrentVersionNumber->asString ();
+            passComponentMostRecentVersionNumber->asString ();
 
           oahInternalError (s.str ());
         }
@@ -1399,7 +1380,7 @@ void mfcMultiComponent::printRepresentationsVersions (ostream&  os) const
 
       ++gIndenter;
       os <<
-        formatComponent->currentVersionNumberAndDateAsString () <<
+        formatComponent->mostRecentVersionNumberAndDateAsString () <<
         endl;
       --gIndenter;
 
@@ -1441,7 +1422,7 @@ void mfcMultiComponent::printPassesVersions (ostream&  os) const
 
       ++gIndenter;
       os <<
-        passComponent->currentVersionNumberAndDateAsString () <<
+        passComponent->mostRecentVersionNumberAndDateAsString () <<
         endl;
       --gIndenter;
 
@@ -1558,14 +1539,8 @@ void mfcMultiComponent::print (ostream& os) const
   } // switch
 
   os <<
-    currentVersionNumberAndDateAsString () <<
+    getGlobalMusicFormatsVersionNumberAndDate () <<
     endl;
-
-  os <<
-    "A member of MusicFormats " <<
-    createLibraryComponent ()->
-      currentVersionNumberAndDateAsString () <<
-    endl << endl;
 
   os <<
     "fRepresentationComponentsList:";
@@ -1587,7 +1562,7 @@ void mfcMultiComponent::print (ostream& os) const
       os << left <<
         setw (fieldWidth) <<
         formatComponent->getComponentName () <<
-        formatComponent->currentVersionNumberAndDateAsString ();
+        formatComponent->mostRecentVersionNumberAndDateAsString ();
 
       if (++i == iEnd) break;
     // JMI  os << endl;
@@ -1619,7 +1594,7 @@ void mfcMultiComponent::print (ostream& os) const
       os << left <<
         setw (fieldWidth) <<
         passComponent->getComponentName () <<
-        passComponent->fetchComponentCurrentVersionNumber ();
+        passComponent->fetchComponentMostRecentVersionNumber ();
 
       if (++i == iEnd) break;
     // JMI  os << endl;
@@ -1654,7 +1629,7 @@ void mfcMultiComponent::printVersionShort (ostream& os) const
   } // switch
 
   os <<
-    currentVersionNumberAndDateAsString () <<
+    getGlobalMusicFormatsVersionNumberAndDate  () <<
     endl;
 }
 
@@ -1675,19 +1650,15 @@ void mfcMultiComponent::printVersionFull (ostream& os) const
         fComponentName <<
         " " <<
         componenKindAsString (fComponenKind) <<
-      " API version ";
+        " API version ";
       break;
   } // switch
 
   os <<
-    currentVersionNumberAndDateAsString () <<
+    getGlobalMusicFormatsVersionNumberAndDate () <<
     endl;
 
-  os <<
-    "A member of MusicFormats " <<
-    createLibraryComponent ()->
-      currentVersionNumberAndDateAsString () <<
-    endl << endl;
+  os << endl;
 
   printRepresentationsVersions (os);
 
@@ -1718,14 +1689,8 @@ void mfcMultiComponent::printHistory (ostream&  os) const
   } // switch
 
   os <<
-    currentVersionNumberAndDateAsString () <<
+    getGlobalMusicFormatsVersionNumberAndDate () <<
     endl;
-
-  os <<
-    "A member of MusicFormats " <<
-    createLibraryComponent ()->
-      currentVersionNumberAndDateAsString () <<
-    endl << endl;
 
   printOwnHistory (os);
 
@@ -1941,16 +1906,16 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
       {
         // is the multi component versions numbering consistent?
         S_mfcVersionNumber
-          multiComponentCurrentVersionNumber =
-            fetchComponentCurrentVersionNumber (),
-          converterComponentCurrentVersionNumber =
+          multiComponentMostRecentVersionNumber =
+            fetchComponentMostRecentVersionNumber (),
+          converterComponentMostRecentVersionNumber =
             converter->
-              fetchComponentCurrentVersionNumber ();
+              fetchComponentMostRecentVersionNumber ();
 
         if (
-          *multiComponentCurrentVersionNumber
+          *multiComponentMostRecentVersionNumber
             <
-          *converterComponentCurrentVersionNumber
+          *converterComponentMostRecentVersionNumber
         ) {
           stringstream s;
 
@@ -1960,11 +1925,11 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
             " " <<
             componenKindAsString (fComponenKind) <<
             " has version number " <<
-            multiComponentCurrentVersionNumber->asString () <<
+            multiComponentMostRecentVersionNumber->asString () <<
             " while " <<
             converter->getComponentName () <<
             " has version number " <<
-            converterComponentCurrentVersionNumber->asString ();
+            converterComponentMostRecentVersionNumber->asString ();
 
           oahInternalError (s.str ());
         }
@@ -2005,7 +1970,7 @@ void mfcLibraryComponent::printConvertersVersions (ostream&  os) const
 
       ++gIndenter;
       os <<
-        converterComponent->currentVersionNumberAndDateAsString () <<
+        converterComponent->mostRecentVersionNumberAndDateAsString () <<
         endl;
       --gIndenter;
 
@@ -2066,8 +2031,10 @@ void mfcLibraryComponent::printVersionShort (ostream& os) const
   os <<
     fComponentName <<
     " library " <<
-    currentVersionNumberAndDateAsString () <<
+    getGlobalMusicFormatsVersionNumberAndDate  () <<
     endl << endl;
+
+  os << endl;
 
   printRepresentationsVersions (os);
 
@@ -2085,8 +2052,10 @@ void mfcLibraryComponent::printVersionFull (ostream& os) const
   os <<
     fComponentName <<
     " library " <<
-    currentVersionNumberAndDateAsString () <<
+    getGlobalMusicFormatsVersionNumberAndDate () <<
     endl << endl;
+
+  os << endl;
 
   printRepresentationsVersions (os);
 
@@ -2104,7 +2073,7 @@ void mfcLibraryComponent::printHistory (ostream&  os) const
   os <<
     fComponentName <<
     " library " <<
-    currentVersionNumberAndDateAsString () <<
+    getGlobalMusicFormatsVersionNumberAndDate () <<
     endl << endl;
 
   printOwnHistory (os);

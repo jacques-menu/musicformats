@@ -1,7 +1,7 @@
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
-\chapter{musicformats components (MFC)}\label{musicformats components (MFC)}
+\chapter{MusicFormats components (MFC)}\label{MusicFormats components (MFC)}
 % -------------------------------------------------------------------------
 
 \mf\ supports keeping the history of its \component s versions using a dedicated representation, as an alternative to separate \Main{release notes}. The source files are in \mfc.
@@ -96,9 +96,9 @@ class mfcVersionsHistory : public smartable
     void                  appendVersionDescrToHistory (
                             S_mfcVersionDescr versionDescr);
 
-    S_mfcVersionDescr     fetchCurrentVersion () const;
+    S_mfcVersionDescr     fetchMostRecentVersion () const;
 
-    S_mfcVersionNumber    fetchCurrentVersionNumber () const;
+    S_mfcVersionNumber    fetchMostRecentVersionNumber () const;
 
 	// ... ... ...
 
@@ -114,7 +114,7 @@ class mfcVersionsHistory : public smartable
 
 The current version of a component is the last one appended to \fieldName{fVersionsList}:
 \begin{lstlisting}[language=CPlusPlus]
-S_mfcVersionDescr mfcVersionsHistory::fetchCurrentVersion () const
+S_mfcVersionDescr mfcVersionsHistory::fetchMostRecentVersion () const
 {
   // sanity check
   mfAssert (
@@ -153,11 +153,11 @@ class mfcComponentDescr : public smartable
     // public services
     // ------------------------------------------------------
 
-    S_mfcVersionDescr     fetchComponentCurrentVersion () const
+    S_mfcVersionDescr     fetchComponentMostRecentVersion () const
                               {
                                 return
                                   fVersionsHistory->
-                                     fetchCurrentVersion();
+                                     fetchMostRecentVersion ();
                               }
 
 	// ... ... ...
@@ -169,7 +169,7 @@ class mfcComponentDescr : public smartable
 
     string                asString () const;
 
-    string                currentVersionNumberAndDateAsString () const;
+    string                mostRecentVersionNumberAndDateAsString () const;
 
     virtual void          print (ostream& os) const;
 
@@ -205,7 +205,7 @@ Representations and passes have a single, linear history, whereas the generators
 \item \class{mfcPassComponent} for passes;
 \item \purelyVirtualClass{mfcMultiComponent} for the generators, converters and \mf\ library, itself the superclass of:
 
-	
+
 \begin{itemize}
 	\item \class{mfcGeneratorComponent};
 	\item \class{mfcConverterComponent};
@@ -344,6 +344,13 @@ Passes history:
 % -------------------------------------------------------------------------
 \section{Versions history creation}\label{Versions history creation}
 % -------------------------------------------------------------------------
+
+\mf\ uses \MainIt{semantic} version numbering, such as \code{v0.9.61}:%%%JMI
+\begin{itemize}
+\item the library itself gets a new number right after a new branch as been created for it. Branching to "v0.9.61" causes the library to be numbered "v0.9.61" with \code{SetMusicFormatsVersionNumber.bash};
+
+\item each representation, converter or pass that is modified this new branch has been created gets a new history element with the same number as the library.
+\end{itemize}
 
 The versions history must exist before the \optionNameBoth{version}{v} and \optionNameBoth{history}{hist} options are handled. They are thus created early by specific functions, placed in \starFileNameBoth{Component} files.
 
@@ -975,7 +982,7 @@ lpsrScore::lpsrScore (
         gGlobalOahOahGroup->getOahOahGroupServiceName () <<
         " " <<
         fMultiComponent->
-          currentVersionNumberAndDateAsString () <<
+          mostRecentVersionNumberAndDateAsString () <<
         endl <<
 
         "% on " <<
@@ -1056,9 +1063,9 @@ void msr2mxsrTranslator::visitStart (S_msrScore& elt)
 
   // get the pass component current version number and date
   string
-    passComponentCurrentVersionNumberAndDateAsString =
+    passComponentMostRecentVersionNumberAndDateAsString =
       passComponent->
-        currentVersionNumberAndDateAsString ();
+        mostRecentVersionNumberAndDateAsString ();
 
   // create the initial creation comment
   stringstream s;
@@ -1069,7 +1076,7 @@ void msr2mxsrTranslator::visitStart (S_msrScore& elt)
     "Created by " <<
     gGlobalOahOahGroup->getOahOahGroupServiceName () <<
     " " <<
-    passComponentCurrentVersionNumberAndDateAsString <<
+    passComponentMostRecentVersionNumberAndDateAsString <<
     endl <<
 
     "on " <<
@@ -1093,7 +1100,7 @@ void msr2mxsrTranslator::visitStart (S_msrScore& elt)
         k_software,
         gGlobalOahOahGroup->getOahOahGroupServiceName ()
           + " "
-          + passComponentCurrentVersionNumberAndDateAsString +
+          + passComponentMostRecentVersionNumberAndDateAsString +
           ", https://github.com/jacques-menu/musicformats");
 
   // append it to the identification encoding

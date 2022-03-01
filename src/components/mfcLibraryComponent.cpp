@@ -24,11 +24,33 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-const string gGlobalMusicFormatsVersionNumber =
+const string pMusicFormatsVersionNumber =
   MUSICFORMATS_VERSION_NUMBER;
 
-const string gGlobalMusicFormatsVersionDate =
+const string pMusicFormatsVersionDate =
   MUSICFORMATS_VERSION_DATE;
+
+EXP extern string getGlobalMusicFormatsVersionNumber ()
+{
+  return pMusicFormatsVersionNumber;
+}
+
+EXP extern string getGlobalMusicFormatsVersionDate ()
+{
+  return pMusicFormatsVersionDate;
+}
+
+EXP extern string getGlobalMusicFormatsVersionNumberAndDate ()
+{
+  string result;
+
+  return
+    "v" +
+    pMusicFormatsVersionNumber +
+    " (" +
+    pMusicFormatsVersionDate +
+    ")";
+}
 
 //______________________________________________________________________________
 S_mfcLibraryComponent createLibraryComponent ()
@@ -43,9 +65,9 @@ S_mfcLibraryComponent createLibraryComponent ()
       gLogStream <<
         "Creating the MusicFormats library component" <<
         ", " <<
-        gGlobalMusicFormatsVersionNumber <<
+        getGlobalMusicFormatsVersionNumber <<
         ", " <<
-        gGlobalMusicFormatsVersionDate <<
+        getGlobalMusicFormatsVersionDate <<
         endl;
     }
 #endif

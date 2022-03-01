@@ -34,7 +34,7 @@ class EXP msrFullMeasureRestsContents : public msrElement
     // ------------------------------------------------------
 
     static SMARTP<msrFullMeasureRestsContents> create (
-                            int               inputLineNumber,
+                            int                   inputLineNumber,
                             S_msrFullMeasureRests fullMeasureRests);
 
     SMARTP<msrFullMeasureRestsContents> createFullMeasureRestsContentsNewbornClone (
@@ -49,7 +49,7 @@ class EXP msrFullMeasureRestsContents : public msrElement
     // ------------------------------------------------------
 
                           msrFullMeasureRestsContents (
-                            int               inputLineNumber,
+                            int                   inputLineNumber,
                             S_msrFullMeasureRests fullMeasureRests);
 
     virtual               ~msrFullMeasureRestsContents ();

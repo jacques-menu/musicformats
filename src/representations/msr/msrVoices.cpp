@@ -6612,7 +6612,7 @@ void msrVoice::createFullMeasureRestsInVoice (
 #endif
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullMeasureRestsDetails ()) {
     displayVoiceFullMeasureRestsAndVoice (
       inputLineNumber,
       "createFullMeasureRestsInVoice() 1");
@@ -6722,7 +6722,7 @@ void msrVoice::createFullMeasureRestsInVoice (
 
   // print resulting voice contents
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullMeasureRestsDetails ()) {
     displayVoiceFullMeasureRestsAndVoice (
       inputLineNumber,
       "createFullMeasureRestsInVoice() 4");
@@ -6738,8 +6738,6 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
     voiceLastAppendedMeasureMeasureNumber =
       fVoiceLastAppendedMeasure->
         getMeasureElementMeasureNumber ();
-
-  replicatasNumber = 1; // TEMP JMI
 
   for (int i = 1; i <= replicatasNumber; ++i) {
     // create a clone of the last appended measure
@@ -6764,7 +6762,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
         fVoiceLastAppendedMeasure->getMeasureElementMeasureNumber () <<
         " as measure " <<
         lastAppendedMeasureClone->getMeasureElementMeasureNumber () <<
-        "in voice \"" <<
+        " in voice \"" <<
         getVoiceName () <<
         "\"" <<
         endl;
@@ -6792,10 +6790,10 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
   } // for
 }
 
-void msrVoice::addFullMeasureRestsToVoice (
+void msrVoice::addEmptyMeasuresToVoice (
   int           inputLineNumber,
   const string& previousMeasureNumber, // JMI ???
-  int           fullMeasureRestsNumber)
+  int           emptyMeasuresNumber)
 {
   // create a full measure rests
 #ifdef TRACING_IS_ENABLED
@@ -6803,7 +6801,7 @@ void msrVoice::addFullMeasureRestsToVoice (
     gLogStream <<
       "Adding " <<
       mfSingularOrPlural (
-        fullMeasureRestsNumber, "full measure rest", "full measure rests") <<
+        emptyMeasuresNumber, "empty measure", "empty measures") <<
       " to voice \"" <<
       getVoiceName () <<
       "\"" <<
@@ -6812,24 +6810,104 @@ void msrVoice::addFullMeasureRestsToVoice (
   }
 #endif
 
-  createFullMeasureRestsInVoice (
-    inputLineNumber,
-    fullMeasureRestsNumber);
+  // get the empty measure whole notes duration
+  // JMI maybe not OK if first measure such as after a repeat segment???
+  rational
+    emptyMeasureWholeNotesDuration =
+      fVoiceLastAppendedMeasure->
+        getFullMeasureWholeNotesDuration ();
 
-  // change the measure number
-  fVoiceLastAppendedMeasure->
-    setMeasureElementMeasureNumber (
-      fVoiceLastAppendedMeasure->getMeasureElementMeasureNumber () + " added"); // JMI BLARK v0.9.61
+  for (int i = 1; i <= emptyMeasuresNumber; ++i) {
+    // create a measure
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    gLogStream <<
+      "Creating an empty measure and appending it to segment " <<
+      asString () <<
+      ", in voice \"" <<
+      fVoiceName <<
+      "\"" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
 
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceFullMeasureRestsDetails ()) {
-//     displayVoiceFullMeasureRestsAndVoice (
-//       inputLineNumber,
-//       "addFullMeasureRestsToVoice() 1");
-//   }
-// #endif
-//
-//   switch (fVoiceKind) {
+  string measureNumber = to_string (i) + " (added)"; // JMI
+
+  S_msrMeasure
+    emptyMeasure =
+      msrMeasure::create (
+        inputLineNumber,
+        measureNumber,
+        fVoiceLastSegment);
+
+  // set emptyMeasure's ordinal number
+  emptyMeasure->
+    setMeasureOrdinalNumberInVoice (
+      this->
+        incrementVoiceCurrentMeasureOrdinalNumber ());
+
+  // set its whole notes duration
+//   emptyMeasure->
+//     setFullMeasureWholeNotesDuration (
+//       emptyMeasureWholeNotesDuration);
+
+  // create a rest the whole empty measure long
+  S_msrNote
+    wholeMeasureRestNote =
+      msrNote::createRestNote (
+        inputLineNumber,
+        measureNumber,
+        emptyMeasureWholeNotesDuration, // soundingWholeNotes
+        emptyMeasureWholeNotesDuration, // displayWholeNotes
+        0); // dotsNumber
+
+   wholeMeasureRestNote->
+    setNoteOccupiesAFullMeasure ();
+
+  // append it to emptyMeasure
+  rational partCurrentPositionInMeasure; // needs to be supplied
+
+  emptyMeasure->
+    appendNoteToMeasure (
+      wholeMeasureRestNote,
+      partCurrentPositionInMeasure);
+
+  // append emptyMeasure to the voice last segment
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    gLogStream <<
+      "Creating an empty measure '" << measureNumber <<
+      "' and appending it to segment " << asString () <<
+      ", in voice \"" <<
+      fVoiceName  <<
+      "\"" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+  fVoiceLastSegment->
+    appendMeasureToSegment (emptyMeasure);
+
+
+//   // change the measure number
+//   fVoiceLastAppendedMeasure->
+//     setMeasureElementMeasureNumber (
+//       fVoiceLastAppendedMeasure->
+//         getMeasureElementMeasureNumber () + " added"); // JMI BLARK v0.9.61
+
+  } //for
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceFullMeasureRestsDetails ()) {
+    displayVoiceFullMeasureRestsAndVoice (
+      inputLineNumber,
+      "addEmptyMeasuresToVoice() 1");
+  }
+#endif
+
+//   switch (fVoiceKind) {//
 //     case msrVoiceKind::kVoiceKindRegular:
 //     case msrVoiceKind::kVoiceKindDynamics:
 //     case msrVoiceKind::kVoiceKindHarmonies:
@@ -6840,7 +6918,7 @@ void msrVoice::addFullMeasureRestsToVoice (
 //         // move the current voice last segment to the initial elements list
 //         moveVoiceLastSegmentToInitialVoiceElementsIfRelevant ( //JMI
 //           inputLineNumber,
-//           "addFullMeasureRestsToVoice() 2");
+//           "addEmptyMeasuresToVoice() 2");
 //
 //         // create the full measure rests
 //         if (fVoicePendingFullMeasureRests) {
@@ -6911,7 +6989,7 @@ void msrVoice::addFullMeasureRestsToVoice (
 //         createNewLastSegmentFromItsFirstMeasureForVoice (
 //           inputLineNumber,
 //           firstRestMeasure,
-//           "addFullMeasureRestsToVoice() 3");
+//           "addEmptyMeasuresToVoice() 3");
 // */
 //
 //         // this voice contails full measure rests
@@ -6930,7 +7008,7 @@ void msrVoice::addFullMeasureRestsToVoice (
   if (gGlobalTracingOahGroup->getTraceFullMeasureRestsDetails ()) {
     displayVoiceFullMeasureRestsAndVoice (
       inputLineNumber,
-      "addFullMeasureRestsToVoice() 4");
+      "addEmptyMeasuresToVoice() 4");
   }
 #endif
 }

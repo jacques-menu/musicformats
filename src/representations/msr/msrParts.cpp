@@ -613,6 +613,8 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
   int inputLineNumber,
   int indexValue) const
 {
+  rational result;
+
   unsigned int
     partMeasuresWholeNotesDurationsVectorSize =
       fPartMeasuresWholeNotesDurationsVector.size ();
@@ -630,62 +632,19 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
     }
 #endif
 
-  if (partMeasuresWholeNotesDurationsVectorSize == 0) {
-    stringstream s;
+  // has this measureOrdinalNumber been registered already?
+  try {
+    rational
+      currentValue =
+        fPartMeasuresWholeNotesDurationsVector.at (indexValue);
 
-    s <<
-      "fetchPartMeasuresWholeNotesDurationsVectorAt() in part \"" <<
-      getPartCombinedName () <<
-      "\"" <<
-      ", fPartMeasuresWholeNotesDurationsVector is empty" <<
-      ", indexValue: " << indexValue <<
-      ", line " << inputLineNumber;
-
-    gLogStream <<
-      "+++++++++++++++++++++++++++++" <<
-      endl <<
-      "part \"" <<
-      getPartCombinedName () <<
-      "\":" <<
-      endl;
-    ++gIndenter;
-    this->printShort (gLogStream);
-    --gIndenter;
-    gLogStream <<
-      "+++++++++++++++++++++++++++++" <<
-      endl;
-
-    msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      s.str ());
+    // yes
+    result = currentValue;
   }
 
-  else if (
-    indexValue == partMeasuresWholeNotesDurationsVectorSize // TEMP JMI
-      ||
-    indexValue == partMeasuresWholeNotesDurationsVectorSize + 1 // TEMP JMI
-  ) {
-    stringstream s;
+  catch (const out_of_range& e) {
+    // no
 
-    s <<
-      "fetchPartMeasuresWholeNotesDurationsVectorAt() in part \"" <<
-      getPartCombinedName () <<
-      "\"" <<
-      ", partMeasuresWholeNotesDurationsVectorSize: " <<
-      partMeasuresWholeNotesDurationsVectorSize <<
-      ", indexValue: " << indexValue << " is equal to size, PROBLEM" <<
-      ", line " << inputLineNumber;
-
-    return rational (3, 4); // TEMP JMI v0.9.61
-  }
-
-  else if (
-    indexValue < 0
-      ||
-    indexValue >= partMeasuresWholeNotesDurationsVectorSize
-  ) {
     stringstream s;
 
     s <<
@@ -697,16 +656,17 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
       ", indexValue: " << indexValue << " is out of bounds" <<
       ", line " << inputLineNumber;
 
-    msrInternalError (
+    msrInternalWarning (
+//     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
       inputLineNumber,
-      __FILE__, __LINE__,
+//       __FILE__, __LINE__,
       s.str ());
+
+      result = rational (3, 4); // TEMP JMI v0.9.61
   }
 
-  return
-    fPartMeasuresWholeNotesDurationsVector.at ( // [] ??? JMI
-      indexValue);
+  return result;
 }
 
 void msrPart::registerShortestNoteInPartIfRelevant (S_msrNote note)
@@ -840,49 +800,55 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
   }
 #endif
 
-  unsigned int
-    fPartMeasuresWholeNotesDurationsVectorSize =
-      fPartMeasuresWholeNotesDurationsVector.size ();
-
   unsigned int index = measureOrdinalNumber - 1;
 
-  // caution for first registration in the vector
-  if (
-    index >= 0
-      &&
-    index < fPartMeasuresWholeNotesDurationsVectorSize
-  ) {
+  // has this measureOrdinalNumber been registered already?
+  try {
     rational
       currentValue =
         fPartMeasuresWholeNotesDurationsVector.at (index);
 
-    if (currentValue.getNumerator () != 0) {
-      if (currentValue != wholeNotesDuration) {
-        // allow for polymetrics in non-MusicXML contexts? JMI
+    // yes
+
+    // allow for polymetrics in non-MusicXML contexts? JMI
 #ifdef TRACING_IS_ENABLED
-        if (
-          gGlobalTracingOahGroup->getTraceMeasures ()
-            ||
-          gGlobalTracingOahGroup->getTracePositionsInMeasures ()
-        ) {
-          gLogStream <<
-            "The measure with ordinal number " <<
-            measureOrdinalNumber <<
-            " was known with a whole notes duration of " <<
-            currentValue <<
-            ", now registering it with a duration of " <<
-            wholeNotesDuration <<
-            " in part " << getPartCombinedName () <<
-            endl;
-        }
-#endif
-        }
-        // else it's OK JMI ???
-      }
-    else {
-      fPartMeasuresWholeNotesDurationsVector [index] =
-        wholeNotesDuration;
+    if (
+      gGlobalTracingOahGroup->getTraceMeasures ()
+        ||
+      gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+    ) {
+      gLogStream <<
+        "The measure with ordinal number " <<
+        measureOrdinalNumber <<
+        " was known with a whole notes duration of " <<
+        currentValue <<
+        ", now registering it with a duration of " <<
+        wholeNotesDuration <<
+        " in part " << getPartCombinedName () <<
+        endl;
     }
+#endif
+  }
+
+  catch (const out_of_range& e) {
+    // no
+
+    fPartMeasuresWholeNotesDurationsVector [index] =
+      wholeNotesDuration;
+
+#ifdef TRACING_IS_ENABLED
+    if (true || gGlobalTracingOahGroup->getTraceMeasures ()) {
+      gLogStream <<
+        "The measure with ordinal number " <<
+        measureOrdinalNumber <<
+        " is now registered with a duration of " <<
+        wholeNotesDuration <<
+        " in part " << getPartCombinedName () <<
+        ", fPartMeasuresWholeNotesDurationsVector.size () = " <<
+        fPartMeasuresWholeNotesDurationsVector.size () <<
+        endl;
+    }
+#endif
   }
 }
 
@@ -1369,7 +1335,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
   } // for
 }
 
-void msrPart::addFullMeasureRestsToPart (
+void msrPart::addEmptyMeasuresToPart (
   int           inputLineNumber,
   const string& previousMeasureNumber,
   int           fullMeasureRestsNumber)
@@ -1392,7 +1358,7 @@ void msrPart::addFullMeasureRestsToPart (
   // add multiple rest to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      addFullMeasureRestsToStaff (
+      addEmptyMeasuresToStaff (
         inputLineNumber,
         previousMeasureNumber,
         fullMeasureRestsNumber);

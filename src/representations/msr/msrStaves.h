@@ -273,7 +273,7 @@ class EXP msrStaff : public msrElement
     void                  appendPendingMeasureRepeatToStaff (
                             int inputLineNumber);
 
-    void                  createFullMeasureRestsInStaff (
+    void                  createFullMeasureRestsInStaff ( // JMI UNUSED
                             int inputLineNumber,
                             int fullMeasureRestsNumber);
 
@@ -284,7 +284,7 @@ class EXP msrStaff : public msrElement
                             int inputLineNumber,
                             int replicatasNumber);
 
-    void                  addFullMeasureRestsToStaff (
+    void                  addEmptyMeasuresToStaff (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
                             int           fullMeasureRestsNumber);

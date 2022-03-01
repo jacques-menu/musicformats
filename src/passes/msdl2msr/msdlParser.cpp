@@ -74,7 +74,7 @@ msdlParser::msdlParser (istream& inputStream)
     string ("MSDL converter ")
       +
     createMsdlConverterConverterComponent ()->
-      fetchComponentCurrentVersionNumber ()->
+      fetchComponentMostRecentVersionNumber ()->
         asString ();
 
   // user language

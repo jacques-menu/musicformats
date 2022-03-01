@@ -23,20 +23,20 @@ set (XMLVERSION 3.1)
 
 #######################################
 # MusicFormats versions management
-#set (VERSION 0.9.60)
+#set (VERSION 0.9.61)
 execute_process(COMMAND cat ../../MusicFormatsVersionNumber.txt OUTPUT_VARIABLE VERSION)
 message (STATUS "VERSION: ${VERSION}")
 
-macro (get_major_minor_patch version)
-	string( REGEX REPLACE "([0-9]*)\\.([0-9]*)\\.([0-9]*)" "\\1"  VERSION_MAJOR ${version} )
-	string( REGEX REPLACE "([0-9]*)\\.([0-9]*)\\.([0-9]*)" "\\2"  VERSION_MINOR ${version} )
-	string( REGEX REPLACE "([0-9]*)\\.([0-9]*)\\.([0-9]*)" "\\3"  VERSION_PATCH ${version} )
+macro (get_major_minor_patch version_num)
+	string( REGEX REPLACE "([0-9]*)\\.([0-9]*)\\.([0-9]*)" "\\1"  VERSION_MAJOR ${version_num} )
+	string( REGEX REPLACE "([0-9]*)\\.([0-9]*)\\.([0-9]*)" "\\2"  VERSION_MINOR ${version_num} )
+	string( REGEX REPLACE "([0-9]*)\\.([0-9]*)\\.([0-9]*)" "\\3"  VERSION_PATCH ${version_num} )
 endmacro()
 
 get_major_minor_patch( ${VERSION} )
 set (SOVERS ${VERSION_MAJOR})
-set (STRVERS "v0.9.60")
-set (SSTRVERS "0.9.60")
+set (STRVERS "v"${VERSION})
+set (SSTRVERS ${VERSION})
 
 message (STATUS "Configuring version ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 

@@ -6850,255 +6850,255 @@ void mxsr2msrTranslator::visitStart (S_slur& elt )
   }
 #endif
 
+  if (! gGlobalMxsr2msrOahGroup->getIgnoreSlurs ()) {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSlursDetails ()) {
-    displaySlurStartsStack ("BEFORE handling slur");
-  }
+    if (gGlobalTracingOahGroup->getTraceSlursDetails ()) {
+      displaySlurStartsStack ("BEFORE handling slur");
+    }
 #endif
 
-  /*
-    Only the  first note of the chord should get the slur notation.
-    Some applications print out the slur for all notes,
-    i.e. a stop and a start in sequqnce:
-    these should be ignored
-  */
-  if (fCurrentNoteBelongsToAChord) {
-    stringstream s;
+    /*
+      Only the  first note of the chord should get the slur notation.
+      Some applications print out the slur for all notes,
+      i.e. a stop and a start in sequqnce:
+      these should be ignored
+    */
+    if (fCurrentNoteBelongsToAChord) {
+      stringstream s;
 
-    s <<
-      "ignoring a slur in a chord member note other than the first one";
+      s <<
+        "ignoring a slur in a chord member note other than the first one";
 
-    mxsr2msrWarning (
-      gGlobalServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      s.str ());
-  }
-
-  else {
-
-    // number
-
-    int slurNumber = elt->getAttributeIntValue ("number", 0);
-
-    // type
-
-    fCurrentSlurType = elt->getAttributeValue ("type");
-
-    // placement
-
-    string placementString = elt->getAttributeValue ("placement");
-
-    fCurrentDirectionPlacementKind = // use it JMI ???
-      msrPlacementKindFromString (
+      mxsr2msrWarning (
+        gGlobalServiceRunData->getInputSourceName (),
         inputLineNumber,
-        placementString);
-
-    // a phrasing slur is recognized as such
-    // when the nested regular slur start is found
-
-    unsigned int slurStartsStackSize = fSlurStartsStack.size ();
-
-    if (fCurrentSlurType == "start") {
-      switch (slurStartsStackSize) {
-        case 0:
-          fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStart;
-          break;
-
-        case 1:
-          {
-            S_msrSlur
-              containingSlur =
-                fSlurStartsStack.front ();
-
-            fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStart;
-
-/* JMI BUGGED?
-            // the stack top is in fact a phrasing slur start
-#ifdef TRACING_IS_ENABLED
-            if (gGlobalTracingOahGroup->getTraceSlurs ()) {
-              gLogStream <<
-                "The slur start '" <<
-                containingSlur->asString () <<
-                "' contains a nested slur, it is thus a phrasing slur start" <<
-                ", line " << inputLineNumber <<
-                endl;
-            }
-#endif
-
-            containingSlur->
-              setSlurTypeKind (
-                msrSlurTypeKind::kSlurTypePhrasingStart);
-                */
-          }
-          break;
-
-        default:
-          {
-            stringstream s;
-
-            s <<
-              "only one slur nesting level is meaningfull";
-
-      //      mxsr2msrError ( // JMI
-            mxsr2msrWarning (
-              gGlobalServiceRunData->getInputSourceName (),
-              inputLineNumber,
-      //        __FILE__, __LINE__,
-              s.str ());
-          }
-      } // switch
-
-      fOnGoingSlur = true;
-    }
-
-    else if (fCurrentSlurType == "continue") {
-			// the current slur continue kind depends on that of the stack's top
-			switch (fSlurStartsStack.front ()->getSlurTypeKind ()) {
-				case msrSlurTypeKind::kSlurTypeRegularStart:
-					fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularContinue;
-					break;
-
-				case msrSlurTypeKind::kSlurTypePhrasingStart:
-					// the stack top is in fact a phrasing slur start
-					fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypePhrasingContinue;
-					break;
-
-				default:
-					; // should not occur
-			} // switch
-    }
-
-    else if (fCurrentSlurType == "stop") {
-      fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
-      switch (slurStartsStackSize) {
-        case 0:
-          {
-            stringstream s;
-
-            s <<
-              "a standalone slur 'stop' is meaningless, ignoring it";
-
-            mxsr2msrWarning (
-              gGlobalServiceRunData->getInputSourceName (),
-              inputLineNumber,
-              s.str ());
-          }
-          break;
-
-        case 1:
-        /* JMI
-          // the current slur stop is regular
-          fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
-
-          // pop the top element off the stack
-          fSlurStartsStack.pop_front ();
-          break;
-  */
-        case 2:
-          // the current slur stop kind depends on that of the stack's top
-          switch (fSlurStartsStack.front ()->getSlurTypeKind ()) {
-            case msrSlurTypeKind::kSlurTypeRegularStart:
-              fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
-              break;
-
-            case msrSlurTypeKind::kSlurTypePhrasingStart:
-              // the stack top is in fact a phrasing slur start
-#ifdef TRACING_IS_ENABLED
-              if (gGlobalTracingOahGroup->getTraceSlurs ()) {
-                gLogStream <<
-                  "A slur stop matches a phrasing slur start, it is thus a phrasing slur stop" <<
-                  ", line " << inputLineNumber <<
-                  endl;
-              }
-#endif
-
-              fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypePhrasingStop;
-              break;
-
-            default:
-              ; // should not occur
-          } // switch
-
-          // pop the top element off the stack
-          fSlurStartsStack.pop_front ();
-          break;
-
-        default:
-          ; // should not occur
-      } // switch
-
-      fOnGoingSlur = false;
+        s.str ());
     }
 
     else {
-      // inner slur notes may miss the "continue" type:
-      // let' complain only on slur notes outside of slurs
-      if (! fOnGoingSlur) {
-        if (fCurrentSlurType.size ()) {
-          stringstream s;
 
-          s <<
-            "slur type \"" << fCurrentSlurType <<
-            "\" is unknown";
+      // number
 
+      int slurNumber = elt->getAttributeIntValue ("number", 0);
+
+      // type
+
+      fCurrentSlurType = elt->getAttributeValue ("type");
+
+      // placement
+
+      string placementString = elt->getAttributeValue ("placement");
+
+      fCurrentDirectionPlacementKind = // use it JMI ???
+        msrPlacementKindFromString (
+          inputLineNumber,
+          placementString);
+
+      // a phrasing slur is recognized as such
+      // when the nested regular slur start is found
+
+      unsigned int slurStartsStackSize = fSlurStartsStack.size ();
+
+      if (fCurrentSlurType == "start") {
+        switch (slurStartsStackSize) {
+          case 0:
+            fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStart;
+            break;
+
+          case 1:
+            {
+              S_msrSlur
+                containingSlur =
+                  fSlurStartsStack.front ();
+
+              fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStart;
+
+  /* JMI BUGGED?
+              // the stack top is in fact a phrasing slur start
+  #ifdef TRACING_IS_ENABLED
+              if (gGlobalTracingOahGroup->getTraceSlurs ()) {
+                gLogStream <<
+                  "The slur start '" <<
+                  containingSlur->asString () <<
+                  "' contains a nested slur, it is thus a phrasing slur start" <<
+                  ", line " << inputLineNumber <<
+                  endl;
+              }
+  #endif
+
+              containingSlur->
+                setSlurTypeKind (
+                  msrSlurTypeKind::kSlurTypePhrasingStart);
+                  */
+            }
+            break;
+
+          default:
+            {
+              stringstream s;
+
+              s <<
+                "only one slur nesting level is meaningfull";
+
+        //      mxsr2msrError ( // JMI
+              mxsr2msrWarning (
+                gGlobalServiceRunData->getInputSourceName (),
+                inputLineNumber,
+        //        __FILE__, __LINE__,
+                s.str ());
+            }
+        } // switch
+
+        fOnGoingSlur = true;
+      }
+
+      else if (fCurrentSlurType == "continue") {
+        // the current slur continue kind depends on that of the stack's top
+        switch (fSlurStartsStack.front ()->getSlurTypeKind ()) {
+          case msrSlurTypeKind::kSlurTypeRegularStart:
+            fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularContinue;
+            break;
+
+          case msrSlurTypeKind::kSlurTypePhrasingStart:
+            // the stack top is in fact a phrasing slur start
+            fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypePhrasingContinue;
+            break;
+
+          default:
+            ; // should not occur
+        } // switch
+      }
+
+      else if (fCurrentSlurType == "stop") {
+        fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
+        switch (slurStartsStackSize) {
+          case 0:
+            {
+              stringstream s;
+
+              s <<
+                "a standalone slur 'stop' is meaningless, ignoring it";
+
+              mxsr2msrWarning (
+                gGlobalServiceRunData->getInputSourceName (),
+                inputLineNumber,
+                s.str ());
+            }
+            break;
+
+          case 1:
+          /* JMI
+            // the current slur stop is regular
+            fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
+
+            // pop the top element off the stack
+            fSlurStartsStack.pop_front ();
+            break;
+    */
+          case 2:
+            // the current slur stop kind depends on that of the stack's top
+            switch (fSlurStartsStack.front ()->getSlurTypeKind ()) {
+              case msrSlurTypeKind::kSlurTypeRegularStart:
+                fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypeRegularStop;
+                break;
+
+              case msrSlurTypeKind::kSlurTypePhrasingStart:
+                // the stack top is in fact a phrasing slur start
+  #ifdef TRACING_IS_ENABLED
+                if (gGlobalTracingOahGroup->getTraceSlurs ()) {
+                  gLogStream <<
+                    "A slur stop matches a phrasing slur start, it is thus a phrasing slur stop" <<
+                    ", line " << inputLineNumber <<
+                    endl;
+                }
+  #endif
+
+                fCurrentSlurTypeKind = msrSlurTypeKind::kSlurTypePhrasingStop;
+                break;
+
+              default:
+                ; // should not occur
+            } // switch
+
+            // pop the top element off the stack
+            fSlurStartsStack.pop_front ();
+            break;
+
+          default:
+            ; // should not occur
+        } // switch
+
+        fOnGoingSlur = false;
+      }
+
+      else {
+        // inner slur notes may miss the "continue" type:
+        // let' complain only on slur notes outside of slurs
+        if (! fOnGoingSlur) {
+          if (fCurrentSlurType.size ()) {
+            stringstream s;
+
+            s <<
+              "slur type \"" << fCurrentSlurType <<
+              "\" is unknown";
+
+            mxsr2msrError (
+              gGlobalServiceRunData->getInputSourceName (),
+              inputLineNumber,
+              __FILE__, __LINE__,
+              s.str ());
+          }
+        }
+      }
+
+      // line-type
+
+      string slurLineType = elt->getAttributeValue ("line-type");
+
+      msrLineTypeKind
+        slurLineTypeKind =
+          msrLineTypeKind::kLineTypeSolid; // default value
+
+      if      (slurLineType == "solid") {
+        slurLineTypeKind = msrLineTypeKind::kLineTypeSolid;
+      }
+      else if (slurLineType == "dashed") {
+        slurLineTypeKind = msrLineTypeKind::kLineTypeDashed;
+      }
+      else if (slurLineType == "dotted") {
+        slurLineTypeKind = msrLineTypeKind::kLineTypeDotted;
+      }
+      else if (slurLineType == "wavy") {
+        slurLineTypeKind = msrLineTypeKind::kLineTypeWavy;
+      }
+      else {
+        if (slurLineType.size ()) {
           mxsr2msrError (
             gGlobalServiceRunData->getInputSourceName (),
             inputLineNumber,
             __FILE__, __LINE__,
-            s.str ());
+            "slur line-type \"" + slurLineType + "\" is unknown");
         }
       }
-    }
 
-    // line-type
-
-    string slurLineType = elt->getAttributeValue ("line-type");
-
-    msrLineTypeKind
-      slurLineTypeKind =
-        msrLineTypeKind::kLineTypeSolid; // default value
-
-    if      (slurLineType == "solid") {
-      slurLineTypeKind = msrLineTypeKind::kLineTypeSolid;
-    }
-    else if (slurLineType == "dashed") {
-      slurLineTypeKind = msrLineTypeKind::kLineTypeDashed;
-    }
-    else if (slurLineType == "dotted") {
-      slurLineTypeKind = msrLineTypeKind::kLineTypeDotted;
-    }
-    else if (slurLineType == "wavy") {
-      slurLineTypeKind = msrLineTypeKind::kLineTypeWavy;
-    }
-    else {
-      if (slurLineType.size ()) {
-        mxsr2msrError (
-          gGlobalServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          "slur line-type \"" + slurLineType + "\" is unknown");
-      }
-    }
-
-  // color JMI
+    // color JMI
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceSlurs ()) {
-      gLogStream <<
-        "visitStart (S_slur&)"
-        ", slurNumber: " <<
-        slurNumber <<
-        ", slurTypeKind: " <<
-        msrSlurTypeKindAsString (
-          fCurrentSlurTypeKind) <<
-        ", slurLineType: " <<
-        msrLineTypeKindAsString (
-          slurLineTypeKind) <<
-        endl;
-    }
+      if (gGlobalTracingOahGroup->getTraceSlurs ()) {
+        gLogStream <<
+          "visitStart (S_slur&)"
+          ", slurNumber: " <<
+          slurNumber <<
+          ", slurTypeKind: " <<
+          msrSlurTypeKindAsString (
+            fCurrentSlurTypeKind) <<
+          ", slurLineType: " <<
+          msrLineTypeKindAsString (
+            slurLineTypeKind) <<
+          endl;
+      }
 #endif
 
-    if (! gGlobalMxsr2msrOahGroup->getIgnoreSlurs ()) {
       S_msrSlur
         slur =
           msrSlur::create (
@@ -8546,7 +8546,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 #endif
 
         fCurrentPart->
-          addFullMeasureRestsToPart (
+          addEmptyMeasuresToPart (
             inputLineNumber,
             fCurrentMeasureNumber,
             measuresToBeAdded);
