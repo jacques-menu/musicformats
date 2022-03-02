@@ -109,10 +109,10 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
 
   map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
-      gGlobalQuarterTonesPitchesLanguageKindsMap.find (
+      getQuarterTonesPitchesLanguageKindsMap ().find (
         theString);
 
-  if (it == gGlobalQuarterTonesPitchesLanguageKindsMap.end ()) {
+  if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
     // no, language is unknown in the map
 
     stringstream s;
@@ -122,7 +122,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
       "' is unknown" <<
       endl <<
       "The " <<
-      gGlobalQuarterTonesPitchesLanguageKindsMap.size () <<
+      getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known MSR pitches languages are:" <<
       endl;
 
@@ -879,7 +879,7 @@ R"()",
       "MSR pitches language 'nederlands' is unknown" <<
       endl <<
       "The " <<
-      gGlobalQuarterTonesPitchesLanguageKindsMap.size () <<
+      getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known MSR pitches languages are:" <<
       endl;
 
@@ -909,7 +909,7 @@ The NUMBER MSR pitches languages available are:
 PITCHES_LANGUAGES.
 The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
-              to_string (gGlobalQuarterTonesPitchesLanguageKindsMap.size ())),
+              to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
             regex ("PITCHES_LANGUAGES"),
             gIndenter.indentMultiLineString (
               existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
@@ -1141,9 +1141,9 @@ Bool msrOahGroup::setMsrQuarterTonesPitchesLanguage (const string& language)
   // is language in the pitches languages map?
   map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
-      gGlobalQuarterTonesPitchesLanguageKindsMap.find (language);
+      getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
-  if (it == gGlobalQuarterTonesPitchesLanguageKindsMap.end ()) {
+  if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
     // no, language is unknown in the map
     return false;
   }

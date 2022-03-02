@@ -25,11 +25,11 @@ namespace MusicFormats
 */
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlFile2lilypondWithHandler (
-  const char*  fileName,
-  ostream&     out,
-  ostream&     err,
-  S_oahHandler handler);
+// EXP mfMusicformatsError convertMsdlFile2lilypondWithHandler ( // JMI
+//   const char*  fileName,
+//   ostream&     out,
+//   ostream&     err,
+//   S_oahHandler handler);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsError convertMsdlFd2lilypondWithHandler (

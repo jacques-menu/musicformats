@@ -13,11 +13,11 @@
 #define ___msdl2msrOah___
 
 
+#include "msrPitchesNames.h"
+
 #include "oahBasicTypes.h"
 
 #include "msdlKeywords.h"
-
-// JMI #include "mfMultiGenerationOah.h"
 
 #include "msdlInputOah.h"
 

@@ -10849,8 +10849,7 @@ void msrVoice::printShort (ostream& os) const
 
     ++gIndenter;
     fVoiceLastSegment->printShort (os);
-    os <<
-      endl;
+    os << endl;
     --gIndenter;
   }
   else {

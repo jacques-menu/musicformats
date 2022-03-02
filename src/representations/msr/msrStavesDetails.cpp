@@ -20,6 +20,7 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrPitchesNames.h"
 #include "msrStavesDetails.h"
 
 #include "oahOah.h"

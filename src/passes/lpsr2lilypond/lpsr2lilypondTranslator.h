@@ -12,6 +12,8 @@
 #ifndef ___lpsr2lilypondTranslator___
 #define ___lpsr2lilypondTranslator___
 
+#include "msrPitchesNames.h"
+
 #include "lpsr.h"
 
 #include "msrOah.h"

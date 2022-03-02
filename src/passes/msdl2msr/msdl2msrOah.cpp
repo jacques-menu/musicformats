@@ -24,6 +24,8 @@
 
 #include "mfStringsHandling.h"
 
+#include "msrPitchesNames.h"
+
 #include "oahOah.h"
 
 #include "msdlInputOah.h"
@@ -173,7 +175,7 @@ R"()",
       "MSDR pitches default language 'english' is unknown" <<
       endl <<
       "The " <<
-      gGlobalQuarterTonesPitchesLanguageKindsMap.size () <<
+      getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known MSDL pitches languages are:" <<
       endl;
 
@@ -240,7 +242,7 @@ The NUMBER MSDL pitches languages available are:
 PITCHES_LANGUAGES.
 The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
-              to_string (gGlobalQuarterTonesPitchesLanguageKindsMap.size ())),
+              to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
             regex ("PITCHES_LANGUAGES"),
             gIndenter.indentMultiLineString (
               existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
@@ -396,9 +398,9 @@ Bool msdl2msrOahGroup::setMsdlQuarterTonesPitchesLanguage (string language)
   // is language in the pitches languages map?
   map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
-      gGlobalQuarterTonesPitchesLanguageKindsMap.find (language);
+      getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
-  if (it == gGlobalQuarterTonesPitchesLanguageKindsMap.end ()) {
+  if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
     // no, language is unknown in the map
     return false;
   }

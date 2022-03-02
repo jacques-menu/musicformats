@@ -1968,10 +1968,10 @@ void msr2msrTranslator::visitEnd (S_msrStanza& elt)
 //________________________________________________________________________
 void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 {
+#ifdef TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrSyllable" <<
@@ -3071,10 +3071,10 @@ void msr2msrTranslator::visitEnd (S_msrOtherDynamic& elt)
 //________________________________________________________________________
 void msr2msrTranslator::visitStart (S_msrWords& elt)
 {
+#ifdef TRACING_IS_ENABLED
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-#ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting msrWords" <<
@@ -3084,9 +3084,24 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
 #endif
 
   if (fOnGoingNonGraceNote || fOnGoingChord) {
-    Bool wordsHasBeenHandled;
+    if (fOnGoingNonGraceNote) {
+      // append the words to the current non-grace note clone
+      fCurrentNonGraceNoteClone->
+        appendWordsToNote (elt);
+    }
+    else if (fOnGoingChord) {
+      // append the words to the current chord clone
+      fCurrentChordClone->
+        appendWordsToChord (elt);
+    }
 
-//     if (gGlobalMsr2msrOahGroup->getConvertMusicXMLWordsToMsrTempos ()) { // JMI ???
+// JMI v0.9.61
+//     Bool wordsHasBeenHandled;
+//
+//     // is wordsValue to be converted to an MSR tempo?
+//     string wordsValue = elt->getWordsContents ();
+//
+//     if (gGlobalMsr2msrOahGroup->wordsIsToBeConvertedToTempo (wordsValue)) {
 //       // create a tempo containing elt
 //       S_msrTempo
 //         tempo =
@@ -3116,34 +3131,34 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
 //     }
 //
 //     else {
-      if (! wordsHasBeenHandled) {
-        if (fOnGoingNonGraceNote) {
-          // append the words to the current non-grace note clone
-          fCurrentNonGraceNoteClone->
-            appendWordsToNote (elt);
-        }
-        else if (fOnGoingChord) {
-          // append the words to the current chord clone
-          fCurrentChordClone->
-            appendWordsToChord (elt);
-        }
-      }
-//     }
-  }
-
-  else {
-    stringstream s;
-
-    s <<
-      "words is out of context, cannot be handled: '" <<
-      elt->asShortString () <<
-      "'";
-
-    msr2msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
-      elt->getInputLineNumber (),
-      __FILE__, __LINE__,
-      s.str ());
+//       if (! wordsHasBeenHandled) {
+//         if (fOnGoingNonGraceNote) {
+//           // append the words to the current non-grace note clone
+//           fCurrentNonGraceNoteClone->
+//             appendWordsToNote (elt);
+//         }
+//         else if (fOnGoingChord) {
+//           // append the words to the current chord clone
+//           fCurrentChordClone->
+//             appendWordsToChord (elt);
+//         }
+//       }
+// //     }
+//   }
+//
+//   else {
+//     stringstream s;
+//
+//     s <<
+//       "words is out of context, cannot be handled: '" <<
+//       elt->asShortString () <<
+//       "'";
+//
+//     msr2msrInternalError (
+//       gGlobalServiceRunData->getInputSourceName (),
+//       elt->getInputLineNumber (),
+//       __FILE__, __LINE__,
+//       s.str ());
   }
 }
 

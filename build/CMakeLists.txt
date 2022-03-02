@@ -111,7 +111,7 @@ set (LIBDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 
 #######################################
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 17) # for <filesystem>
 
 if(UNIX)
   if (GDB)

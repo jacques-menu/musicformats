@@ -4930,6 +4930,7 @@ void oahFactorizedStringAtom::addStringAtom (
     stringAtom->getShortName ();
 
   if (stringAtomShortName.size () == 0) {
+#ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyOahVerboseMode ()) {
       stringstream s;
 
@@ -4940,6 +4941,7 @@ void oahFactorizedStringAtom::addStringAtom (
 
       oahWarning (s.str ());
     }
+#endif
   }
   else {
     // register this string atom's suffix in the list

@@ -24,6 +24,8 @@
 
 #include "mfStringsHandling.h"
 
+#include "msrPitchesNames.h"
+
 #include "msrMidi.h"
 
 #include "oahOah.h"
@@ -2568,10 +2570,10 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
 
   map<string, lpsrDynamicsTextSpannersStyleKind>::const_iterator
     it =
-      gGlobalLpsrDynamicsTextSpannersStyleKindsMap.find (
+      getLpsrDynamicsTextSpannersStyleKindsMap ().find (
         theString);
 
-  if (it == gGlobalLpsrDynamicsTextSpannersStyleKindsMap.end ()) {
+  if (it == getLpsrDynamicsTextSpannersStyleKindsMap ().end ()) {
     // no, dynamics text spanners style kind is unknown in the map
     stringstream s;
 
@@ -2580,7 +2582,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
       "' is unknown" <<
       endl <<
       "The " <<
-      gGlobalLpsrDynamicsTextSpannersStyleKindsMap.size () - 1 <<
+      getLpsrDynamicsTextSpannersStyleKindsMap ().size () - 1 <<
       " known LPSR lyrics alignment kind are:" <<
       endl;
 
@@ -4196,7 +4198,7 @@ R"(The NUMBER LilyPond dynamics text spanners styles available are:
 LYRICS_DYNAMICS_TEXT_SPANNERS_STYLE_KINDS.
 The default is 'DEFAULT_VALUE'.)",
             regex ("NUMBER"),
-            to_string (gGlobalLpsrDynamicsTextSpannersStyleKindsMap.size ())),
+            to_string (getLpsrDynamicsTextSpannersStyleKindsMap ().size ())),
           regex ("LYRICS_DYNAMICS_TEXT_SPANNERS_STYLE_KINDS"),
           existingLpsrDynamicsTextSpannersStyleKinds (K_NAMES_LIST_MAX_LENGTH)),
         regex ("DEFAULT_VALUE"),

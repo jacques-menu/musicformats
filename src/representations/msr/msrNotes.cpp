@@ -27,6 +27,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrPitchesNames.h"
+
 #include "msrNotes.h"
 
 #include "oahOah.h"
@@ -1196,11 +1198,17 @@ S_msrNote msrNote::createNoteDeepClone (
     } // for
   }
 
-    // cresc/decresc
-    // ------------------------------------------------------
+  // cresc/decresc
+  // ------------------------------------------------------
 
-    list<S_msrCrescDecresc>
-                          fCrescDecrescs;
+  {
+    for (S_msrCrescDecresc crescDecresc : fNoteCrescDecrescs) {
+      // share this data
+      noteDeepClone->
+        fNoteCrescDecrescs.push_back (crescDecresc);
+    } // for
+  }
+
   // wedges
   // ------------------------------------------------------
 
@@ -3631,25 +3639,34 @@ void msrNote::browseData (basevisitor* v)
   }
 
   // browse the wedges if any
-  if (fNoteSlashes.size ()) {
+  if (fNoteWedges.size ()) {
     ++gIndenter;
-    list<S_msrSlash>::const_iterator i;
-    for (i=fNoteSlashes.begin (); i!=fNoteSlashes.end (); ++i) {
+    for (S_msrWedge wedge : fNoteWedges) {
       // browse the wedge
-      msrBrowser<msrSlash> browser (v);
-      browser.browse (*(*i));
+      msrBrowser<msrWedge> browser (v);
+      browser.browse (*wedge);
     } // for
     --gIndenter;
   }
 
-  // browse the wedges if any
-  if (fNoteWedges.size ()) {
+  // browse the slashes if any
+  if (fNoteSlashes.size ()) {
     ++gIndenter;
-    list<S_msrWedge>::const_iterator i;
-    for (i=fNoteWedges.begin (); i!=fNoteWedges.end (); ++i) {
-      // browse the wedge
-      msrBrowser<msrWedge> browser (v);
-      browser.browse (*(*i));
+    for (S_msrSlash slash : fNoteSlashes) {
+      // browse the slash
+      msrBrowser<msrSlash> browser (v);
+      browser.browse (*slash);
+    } // for
+    --gIndenter;
+  }
+
+  // browse the crescDecresc if any
+  if (fNoteCrescDecrescs.size ()) {
+    ++gIndenter;
+    for (S_msrCrescDecresc crescDecresc : fNoteCrescDecrescs) {
+      // browse the crescDecresc
+      msrBrowser<msrCrescDecresc> browser (v);
+      browser.browse (*crescDecresc);
     } // for
     --gIndenter;
   }
@@ -3892,7 +3909,7 @@ string msrNote::noteDiatonicPitchKindAsString (
   int inputLineNumber) const
 {
   return
-    msrDiatonicPitchKindAsString (
+    msrDiatonicPitchKindAsStringInLanguage (
       gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
       noteDiatonicPitchKind (
         fInputLineNumber));

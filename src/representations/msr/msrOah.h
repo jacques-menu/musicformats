@@ -12,6 +12,7 @@
 #ifndef ___msrOah___
 #define ___msrOah___
 
+#include "msrPitchesNames.h"
 #include "msrBasicTypes.h"
 
 #include "oahAtomsCollection.h"

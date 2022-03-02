@@ -4767,18 +4767,6 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 
     // is wordsValue to be converted to a cresc?
     if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToCresc (wordsValue)) {
-//       convertWordsToCresc (
-//         inputLineNumber,
-//         wordsValue);
-      // create an msrCrescDecresc
-      S_msrCrescDecresc
-        crescDecresc =
-          msrCrescDecresc::create (
-            inputLineNumber,
-            msrCrescDecrescKind::kCrescDecrescCrescendo);
-
-      fPendinCrescDecrescList.push_back (crescDecresc);
-
 #ifdef TRACING_IS_ENABLED
       if (
         gGlobalTracingOahGroup->getTraceWords ()
@@ -4796,15 +4784,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       }
 #endif
 
-      // append the rehearsalMark to the pending tempos list
-      fPendinCrescDecrescList.push_back (crescDecresc);
-
-      wordsHasBeenHandled = true;
-    }
-
-    // is wordsValue to be converted to a decresc?
-    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToDecresc (wordsValue)) {
-//       convertWordsToDecresc (
+//       convertWordsToCresc (
 //         inputLineNumber,
 //         wordsValue);
       // create an msrCrescDecresc
@@ -4812,10 +4792,16 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         crescDecresc =
           msrCrescDecresc::create (
             inputLineNumber,
-            msrCrescDecrescKind::kCrescDecrescDecrescendo);
+            msrCrescDecrescKind::kCrescDecrescCrescendo);
 
-      fPendinCrescDecrescList.push_back (crescDecresc);
+      // append the rehearsalMark to the pending tempos list
+      fPendinCrescDecrescsList.push_back (crescDecresc);
 
+      wordsHasBeenHandled = true;
+    }
+
+    // is wordsValue to be converted to a decresc?
+    if (gGlobalMxsr2msrOahGroup->wordsIsToBeConvertedToDecresc (wordsValue)) {
 #ifdef TRACING_IS_ENABLED
       if (
         gGlobalTracingOahGroup->getTraceWords ()
@@ -4833,8 +4819,18 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
       }
 #endif
 
+//       convertWordsToDecresc (
+//         inputLineNumber,
+//         wordsValue);
+      // create an msrCrescDecresc
+      S_msrCrescDecresc
+        crescDecresc =
+          msrCrescDecresc::create (
+            inputLineNumber,
+            msrCrescDecrescKind::kCrescDecrescDecrescendo);
+
       // append the rehearsalMark to the pending tempos list
-      fPendinCrescDecrescList.push_back (crescDecresc);
+      fPendinCrescDecrescsList.push_back (crescDecresc);
 
       wordsHasBeenHandled = true;
     }
@@ -6412,7 +6408,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt )
       endl <<
       setw (fieldWidth) <<
       "fCurrentStaffTuningDiatonicPitch" << " = " <<
-      msrDiatonicPitchKindAsString (
+      msrDiatonicPitchKindAsStringInLanguage (
         gGlobalMsrOahGroup->
           getMsrQuarterTonesPitchesLanguageKind (),
         fCurrentStaffTuningDiatonicPitchKind) <<
@@ -18882,7 +18878,7 @@ void mxsr2msrTranslator::attachPendingCodasToNote (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceCodas ()) {
       gLogStream <<
-        "Attaching pending Codas to note " <<
+        "Attaching pending codas to note " <<
         note->asString () <<
         endl;
     }
@@ -18897,6 +18893,34 @@ void mxsr2msrTranslator::attachPendingCodasToNote (
         appendCodaToNote (coda);
 
       fPendingCodasList.pop_front ();
+    } // while
+  }
+}
+
+//______________________________________________________________________________
+void mxsr2msrTranslator::attachPendingCrescDecrescsToNote (
+  S_msrNote note)
+{
+ // attach the pending crescDecresc if any to the note
+  if (fPendingCodasList.size ()) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceCodas ()) {
+      gLogStream <<
+        "Attaching pending crescDecresc to note " <<
+        note->asString () <<
+        endl;
+    }
+#endif
+
+    while (fPendinCrescDecrescsList.size ()) {
+      S_msrCrescDecresc
+        crescDecresc =
+          fPendinCrescDecrescsList.front ();
+
+      note->
+        appendCrescDecrescToNote (crescDecresc);
+
+      fPendinCrescDecrescsList.pop_front ();
     } // while
   }
 }
@@ -20026,6 +20050,9 @@ void mxsr2msrTranslator::attachPendingNoteLevelElementsToNote (
 
   // attach the pending codas, if any, to the note
   attachPendingCodasToNote (note);
+
+  // attach the pending crescDecresc, if any, to the note
+  attachPendingCrescDecrescsToNote (note);
 
   // attach the pending eyeglasses, if any, to the note
   attachPendingEyeGlassesToNote (note);
@@ -24249,7 +24276,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
     s <<
       "harmony root and bass notes are both equal to '" <<
-      msrDiatonicPitchKindAsString (
+      msrDiatonicPitchKindAsStringInLanguage (
         gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
         diatonicPitchKindFromQuarterTonesPitchKind (
           inputLineNumber,
@@ -24300,7 +24327,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
         */
 
         setw (fieldWidth) << "fCurrentHarmonyRootDiatonicPitch" << " = " <<
-        msrDiatonicPitchKindAsString (
+        msrDiatonicPitchKindAsStringInLanguage (
           gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
           fCurrentHarmonyRootDiatonicPitchKind) <<
         endl <<
@@ -24322,7 +24349,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
         endl <<
 
         setw (fieldWidth) << "fCurrentHarmonyBassDiatonicPitch" << " = " <<
-        msrDiatonicPitchKindAsString (
+        msrDiatonicPitchKindAsStringInLanguage (
           gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
           fCurrentHarmonyBassDiatonicPitchKind) <<
         endl <<
@@ -25192,7 +25219,7 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt )
     gLogStream << left <<
       setw (fieldWidth) <<
       "fCurrentHarpPedalDiatonicPitch" << " = " <<
-      msrDiatonicPitchKindAsString (
+      msrDiatonicPitchKindAsStringInLanguage (
         gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
         fCurrentHarpPedalDiatonicPitchKind) <<
       endl <<
@@ -25967,7 +25994,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //             inputLineNumber,
 //             msrCrescDecrescKind::kCrescDecrescCrescendo);
 //
-//       fPendinCrescDecrescList.push_back (crescDecresc);
+//       fPendinCrescDecrescsList.push_back (crescDecresc);
 //
 //     #ifdef TRACING_IS_ENABLED
 //       if (
@@ -25987,7 +26014,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //     #endif
 //
 //       // append the rehearsalMark to the pending tempos list
-//       fPendinCrescDecrescList.push_back (crescDecresc);
+//       fPendinCrescDecrescsList.push_back (crescDecresc);
 // }
 // void mxsr2msrTranslator::convertWordsToDecresc (
 //   int           inputLineNumber,
@@ -26000,7 +26027,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //             inputLineNumber,
 //             msrCrescDecrescKind::kCrescDecrescCrescendo);
 //
-//       fPendinCrescDecrescList.push_back (crescDecresc);
+//       fPendinCrescDecrescsList.push_back (crescDecresc);
 //
 //     #ifdef TRACING_IS_ENABLED
 //       if (
@@ -26020,5 +26047,5 @@ The discontinue value is typically used for the last ending in a set, where ther
 //     #endif
 //
 //       // append the rehearsalMark to the pending tempos list
-//       fPendinCrescDecrescList.push_back (crescDecresc);
+//       fPendinCrescDecrescsList.push_back (crescDecresc);
 // }

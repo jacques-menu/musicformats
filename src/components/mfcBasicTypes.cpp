@@ -1261,7 +1261,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
             format->
               fetchComponentMostRecentVersionNumber ();
 
-        if (
+        if (false && // JMI v0.9.61 ???
           *multiComponentMostRecentVersionNumber
             <
           *formatComponentMostRecentVersionNumber
@@ -1322,7 +1322,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
             pass->
               fetchComponentMostRecentVersionNumber ();
 
-        if (
+        if (false && // JMI v0.9.61 ???
           *multiComponentMostRecentVersionNumber
             <
           *passComponentMostRecentVersionNumber
@@ -1912,7 +1912,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
             converter->
               fetchComponentMostRecentVersionNumber ();
 
-        if (
+        if (false && // JMI v0.9.61 ???
           *multiComponentMostRecentVersionNumber
             <
           *converterComponentMostRecentVersionNumber

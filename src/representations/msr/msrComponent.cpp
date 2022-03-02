@@ -70,6 +70,16 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
             "Finalized harmonies handling in MSR"
           }
       ));
+
+    pRepresentationComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.61"),
+          "November 27, 2021",
+          list<string> {
+            "Added msrCrescDecresc to MSR"
+          }
+      ));
   }
 
   return pRepresentationComponent;
