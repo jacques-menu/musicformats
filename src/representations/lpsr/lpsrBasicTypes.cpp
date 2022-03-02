@@ -1074,54 +1074,54 @@ string msrSemiTonesPitchAndOctaveAsLilypondString (
         semiTonesPitchAndOctave->
           getSemiTonesPitchKind ());
 
-  map<msrQuarterTonesPitchKind, string>
-    *pitchNamesMapPTR =
-      &gGlobalNederlandsPitchesNamesMap; // default LilyPond value
+  map<msrQuarterTonesPitchKind, string>*
+    pitchesNamesMapPTR =
+      &getNederlandsPitchesNamesMap (); // default LilyPond value
 
   // is quarterTonesPitchName in the part renaming map?
   switch (languageKind) {
     case msrQuarterTonesPitchesLanguageKind::kQTPNederlands:
-      pitchNamesMapPTR = &gGlobalNederlandsPitchesNamesMap;
+      pitchesNamesMapPTR = &getNederlandsPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPCatalan:
-      pitchNamesMapPTR = &gGlobalCatalanPitchesNamesMap;
+      pitchesNamesMapPTR = &getCatalanPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPDeutsch:
-      pitchNamesMapPTR = &gGlobalDeutschPitchesNamesMap;
+      pitchesNamesMapPTR = &getDeutschPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPEnglish:
-      pitchNamesMapPTR = &gGlobalEnglishPitchesNamesMap;
+      pitchesNamesMapPTR = &getEnglishPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPEspanol:
-      pitchNamesMapPTR = &gGlobalEspanolPitchesNamesMap;
+      pitchesNamesMapPTR = &getEspanolPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPFrancais:
-      pitchNamesMapPTR = &gGlobalFrancaisPitchesNamesMap;
+      pitchesNamesMapPTR = &getFrancaisPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPItaliano:
-      pitchNamesMapPTR = &gGlobalItalianoPitchesNamesMap;
+      pitchesNamesMapPTR = &getItalianoPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPNorsk:
-      pitchNamesMapPTR = &gGlobalNorskPitchesNamesMap;
+      pitchesNamesMapPTR = &getNorskPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPPortugues:
-      pitchNamesMapPTR = &gGlobalPortuguesPitchesNamesMap;
+      pitchesNamesMapPTR = &getPortuguesPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPSuomi:
-      pitchNamesMapPTR = &gGlobalSuomiPitchesNamesMap;
+      pitchesNamesMapPTR = &getSuomiPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPSvenska:
-      pitchNamesMapPTR = &gGlobalSvenskaPitchesNamesMap;
+      pitchesNamesMapPTR = &getSvenskaPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPVlaams:
-      pitchNamesMapPTR = &gGlobalVlaamsPitchesNamesMap;
+      pitchesNamesMapPTR = &getVlaamsPitchesNamesMap ();
       break;
     case msrQuarterTonesPitchesLanguageKind::kQTPArabic:
-      pitchNamesMapPTR = &gGlobalArabicPitchesNamesMap;
+      pitchesNamesMapPTR = &getArabicPitchesNamesMap ();
       break;
   } // switch
 
-  s << (*pitchNamesMapPTR) [quarterTonesPitchKind];
+  s << (*pitchesNamesMapPTR) [quarterTonesPitchKind];
 
   switch (semiTonesPitchAndOctave->getOctaveKind ()) {
     case msrOctaveKind::k_NoOctave:
@@ -1193,7 +1193,13 @@ string msrSemiTonesPitchAndOctaveAsLilypondString (
 // dynamics
 //______________________________________________________________________________
 map<string, lpsrDynamicsTextSpannersStyleKind>
-  gGlobalLpsrDynamicsTextSpannersStyleKindsMap;
+  pLpsrDynamicsTextSpannersStyleKindsMap;
+
+map<string, lpsrDynamicsTextSpannersStyleKind>&
+  getLpsrDynamicsTextSpannersStyleKindsMap ()
+{
+  return pLpsrDynamicsTextSpannersStyleKindsMap;
+}
 
 string lpsrDynamicsTextSpannersStyleKindAsString (
   lpsrDynamicsTextSpannersStyleKind dynamicsTextSpannersStyleKind)
@@ -1265,13 +1271,13 @@ void initializeLpsrDynamicsTextSpannersStyleKindsMap ()
 
   // no CamelCase here, these strings are used in the command line options
 
-  gGlobalLpsrDynamicsTextSpannersStyleKindsMap ["none"] =
+  pLpsrDynamicsTextSpannersStyleKindsMap ["none"] =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleNone;
-  gGlobalLpsrDynamicsTextSpannersStyleKindsMap ["dashed-line"] =
+  pLpsrDynamicsTextSpannersStyleKindsMap ["dashed-line"] =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleDashedLine;
-  gGlobalLpsrDynamicsTextSpannersStyleKindsMap ["zigzag"] =
+  pLpsrDynamicsTextSpannersStyleKindsMap ["zigzag"] =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleZigzag;
-  gGlobalLpsrDynamicsTextSpannersStyleKindsMap ["trill"] =
+  pLpsrDynamicsTextSpannersStyleKindsMap ["trill"] =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleTrill;
 }
 
@@ -1282,7 +1288,7 @@ string existingLpsrDynamicsTextSpannersStyleKinds (
 
   unsigned int
     lpsrDynamicsTextSpannersStyleKindsMapSize =
-      gGlobalLpsrDynamicsTextSpannersStyleKindsMap.size ();
+      pLpsrDynamicsTextSpannersStyleKindsMap.size ();
 
   if (lpsrDynamicsTextSpannersStyleKindsMapSize) {
     unsigned int
@@ -1294,8 +1300,8 @@ string existingLpsrDynamicsTextSpannersStyleKinds (
 
     for (
       map<string, lpsrDynamicsTextSpannersStyleKind>::const_iterator i =
-        gGlobalLpsrDynamicsTextSpannersStyleKindsMap.begin ();
-      i != gGlobalLpsrDynamicsTextSpannersStyleKindsMap.end ();
+        pLpsrDynamicsTextSpannersStyleKindsMap.begin ();
+      i != pLpsrDynamicsTextSpannersStyleKindsMap.end ();
       ++i
     ) {
       string theString = (*i).first;

@@ -380,6 +380,7 @@ such a slurs, tuplets and figured bass.)"));
 //   such a slurs, tuplets and figured bass.
 //   This is the default.)"));
 
+#ifdef TRACING_IS_ENABLED
   // trace early options
 
   fTraceEarlyOptionsAtom =
@@ -409,6 +410,7 @@ This option is handy to debug OAH.)",
   subGroup->
     appendAtomToSubGroup (
       fOahVerboseModeAtom);
+#endif
 
   // help
 

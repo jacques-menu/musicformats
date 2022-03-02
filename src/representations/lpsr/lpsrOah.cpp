@@ -26,6 +26,8 @@
 
 #include "mfStringsHandling.h"
 
+#include "msrPitchesNames.h"
+
 #include "oahOah.h"
 
 #include "lpsrOah.h"
@@ -107,10 +109,10 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
 
   map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
-      gGlobalQuarterTonesPitchesLanguageKindsMap.find (
+      getQuarterTonesPitchesLanguageKindsMap ().find (
         theString);
 
-  if (it == gGlobalQuarterTonesPitchesLanguageKindsMap.end ()) {
+  if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
     // no, language is unknown in the map
 
     stringstream s;
@@ -120,7 +122,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
       "' is unknown" <<
       endl <<
       "The " <<
-      gGlobalQuarterTonesPitchesLanguageKindsMap.size () <<
+      getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known LPSR pitches languages are:" <<
       endl;
 
@@ -1275,7 +1277,7 @@ R"()",
       "LPSR pitches language 'nederlands' is unknown" <<
       endl <<
       "The " <<
-      gGlobalQuarterTonesPitchesLanguageKindsMap.size () <<
+      getQuarterTonesPitchesLanguageKindsMap ().size () <<
       " known LPSR pitches languages are:" <<
       endl;
 
@@ -1309,7 +1311,7 @@ The NUMBER LPSR pitches languages available are:
 PITCHES_LANGUAGES.
 The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
-              to_string (gGlobalQuarterTonesPitchesLanguageKindsMap.size ())),
+              to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
             regex ("PITCHES_LANGUAGES"),
             gIndenter.indentMultiLineString (
               existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
@@ -1427,9 +1429,9 @@ Bool lpsrOahGroup::setLpsrQuarterTonesPitchesLanguage (string language)
   // is language in the note names languages map?
   map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator
     it =
-      gGlobalQuarterTonesPitchesLanguageKindsMap.find (language);
+      getQuarterTonesPitchesLanguageKindsMap ().find (language);
 
-  if (it == gGlobalQuarterTonesPitchesLanguageKindsMap.end ()) {
+  if (it == getQuarterTonesPitchesLanguageKindsMap ().end ()) {
     // no, language is unknown in the map
     return false;
   }

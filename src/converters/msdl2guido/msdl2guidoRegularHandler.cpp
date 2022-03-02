@@ -271,8 +271,10 @@ void msdl2guidoRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup (K_INSIDER_OPTION_LONG_NAME, subGroup);
 //  registerAtomInRegularSubgroup (K_REGULAR_OPTION_LONG_NAME, subGroup);
 
+#ifdef TRACING_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME, subGroup);
   registerAtomInRegularSubgroup (K_OAH_VERBOSE_MODE_LONG_OPTION_NAME, subGroup);
+#endif
 
   registerAtomInRegularSubgroup ("help", subGroup);
   registerAtomInRegularSubgroup ("help-summary", subGroup);

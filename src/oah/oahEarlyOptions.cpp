@@ -42,9 +42,15 @@ oahEarlyOptions::oahEarlyOptions ()
     "Enforcing fTraceEarlyOptions" <<
     endl;
 
+#ifdef TRACING_IS_ENABLED
   fTraceEarlyOptions = true;
+#endif
+
 #elsif
+#ifdef TRACING_IS_ENABLED
   fTraceEarlyOptions = false;
+#endif
+
 #endif
 }
 
@@ -57,11 +63,13 @@ const string K_INSIDER_OPTION_SHORT_NAME = "ins";
 
 void oahEarlyOptions::setEarlyInsiderOption ()
 {
+#ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyInsiderOption" <<
       endl;
   }
+#endif
 
   fEarlyInsiderOption = true;
 }
@@ -71,11 +79,13 @@ void oahEarlyOptions::setEarlyInsiderOption ()
 //
 // void oahEarlyOptions::setEarlyRegularOption ()
 // {
+// #ifdef TRACING_IS_ENABLED
 //   if (fTraceEarlyOptions) {
 //     gLogStream <<
 //       "Setting fEarlyRegularOption" <<
 //       endl;
 //   }
+// #endif
 //
 //   fEarlyRegularOption = true;
 // }
@@ -91,11 +101,13 @@ const string K_QUIET_OPTION_SHORT_NAME = "q";
 
 void oahEarlyOptions::setEarlyQuietOption ()
 {
+#ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyQuietOption" <<
       endl;
   }
+#endif
 
   fEarlyQuietOption = true;
 }
@@ -104,11 +116,13 @@ void oahEarlyOptions::setEarlyQuietOption ()
 void oahEarlyOptions::setEarlyMultiGenerationOutputKind (
   mfMultiGenerationOutputKind value)
 {
+#ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyInsiderOption" <<
       endl;
   }
+#endif
 
   fEarlyMultiGenerationOutputKind = value;
 }
@@ -119,6 +133,7 @@ const string K_INCLUDE_OPTION_SHORT_NAME = "inc";
 
 void oahEarlyOptions::appendEarlyIncludeFileName (string includeFileName)
 {
+#ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Appending fEarlyIncludeFileName [" <<
@@ -126,6 +141,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (string includeFileName)
       "]" <<
       endl;
   }
+#endif
 
   fEarlyIncludeFileNamesList.push_back (includeFileName);
 }
@@ -153,11 +169,13 @@ const string K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME = "ovm";
 
 void oahEarlyOptions::setEarlyOahVerboseMode ()
 {
+#ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyOahVerboseMode" <<
       endl;
   }
+#endif
 
   fEarlyOahVerboseMode = true;
 }
@@ -168,11 +186,13 @@ const string K_TRACE_OAH_SHORT_OPTION_NAME = "toah";
 
 void oahEarlyOptions::setEarlyTracingOah ()
 {
+#ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracingOah" <<
       endl;
   }
+#endif
 
   fEarlyTracingOah = true;
 }
@@ -183,11 +203,13 @@ const string K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME = "toahd";
 
 void oahEarlyOptions::setEarlyTracingOahDetails ()
 {
+#ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracingOahDetails" <<
       endl;
   }
+#endif
 
   fEarlyTracingOahDetails = true;
 }
@@ -198,11 +220,13 @@ const string K_TRACE_COMPONENTS_SHORT_OPTION_NAME = "tcomps";
 
 void oahEarlyOptions::setEarlyTraceComponents ()
 {
+#ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTraceComponents" <<
       endl;
   }
+#endif
 
   fEarlyTraceComponents = true;
 }
@@ -213,11 +237,13 @@ const string K_TRACE_PASSES_SHORT_OPTION_NAME = "tpasses";
 
 void oahEarlyOptions::setEarlyTracePasses ()
 {
+#ifdef TRACING_IS_ENABLED
   if (fTraceEarlyOptions) {
     gLogStream <<
       "Setting fEarlyTracePasses" <<
       endl;
   }
+#endif
 
   fEarlyTracePasses = true;
 }
@@ -240,6 +266,7 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
 //   }
 
   if (theString == optionName) {
+#ifdef TRACING_IS_ENABLED
     if (fTraceEarlyOptions) {
       gLogStream <<
         "Option '-" <<
@@ -247,6 +274,7 @@ Bool oahEarlyOptions::isEarlyOptionRecognized (
         "' has been recognized early" <<
         endl;
     }
+#endif
 
     result = true;
   }
@@ -422,6 +450,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
     }
 
     if (argumentIsAnOption) {
+#ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
           gLogStream <<
             "argumentIsAnOption, " <<
@@ -430,6 +459,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
             "'" <<
             endl;
       }
+#endif
 
       // is argumentWithoutDash starting with a prefix?
       Bool   argumentWithoutDashStartsWithAPrefix;
@@ -460,6 +490,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           string ("trace-") + argumentWithoutDash.substr (6);
       }
 
+#ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
         gLogStream <<
           serviceName <<
@@ -473,6 +504,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
           "'" <<
           endl;
       }
+#endif
 
       // apply argumentWithoutDashToBeUsed early if it is known as such
       gGlobalOahEarlyOptions.applyEarlyOptionIfRelevant (
@@ -553,6 +585,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
     }
 
     if (argumentIsAnOption) {
+#ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
           gLogStream <<
             "argumentIsAnOption, " <<
@@ -561,6 +594,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
             "'" <<
             endl;
       }
+#endif
 
       // is argumentWithoutDash starting with a prefix?
       Bool   argumentWithoutDashStartsWithAPrefix;
@@ -591,6 +625,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           string ("trace-") + argumentWithoutDash.substr (6);
       }
 
+#ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
         gLogStream <<
           "??? serviceName" <<
@@ -604,6 +639,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
           "'" <<
           endl;
       }
+#endif
 
       // apply argumentWithoutDashToBeUsed early if it is known as such
       gGlobalOahEarlyOptions.applyEarlyOptionIfRelevant (
@@ -633,14 +669,42 @@ void oahEarlyOptions::print (ostream& os) const
 
     setw (fieldWidth) <<
     "EarlyQuietOption" << " : " << fEarlyQuietOption <<
-    endl <<
+    endl;
 
-    setw (fieldWidth) <<
-    "TraceEarlyOptions" << " : " << fTraceEarlyOptions <<
-    endl <<
-
+#ifdef TRACING_IS_ENABLED
+  os << left <<
     setw (fieldWidth) <<
     "EarlyOahVerboseMode" << " : " << fEarlyOahVerboseMode <<
+    endl;
+#endif
+
+  os << left <<
+    setw (fieldWidth) <<
+    "EarlyIncludeFileNamesList" << " : " <<
+    endl;
+
+  if (fEarlyIncludeFileNamesList.size ()) {
+    os << endl;
+
+    ++gIndenter;
+
+    for ( string includeFileName : fEarlyIncludeFileNamesList ) {
+      os <<
+        "[" << includeFileName << "]" <<
+        endl;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
+  }
+
+#ifdef TRACING_IS_ENABLED
+
+  os << left <<
+    setw (fieldWidth) <<
+    "TraceEarlyOptions" << " : " << fTraceEarlyOptions <<
     endl <<
 
     setw (fieldWidth) <<
@@ -657,27 +721,7 @@ void oahEarlyOptions::print (ostream& os) const
     "EarlyTracePasses" << " : " << fEarlyTracePasses <<
     endl;
 
-  os << left <<
-    setw (fieldWidth) <<
-    "EarlyIncludeFileNamesList" << " : ";
-
-  if (fEarlyIncludeFileNamesList.size ()) {
-    os <<
-      endl;
-
-    ++gIndenter;
-
-    for (auto fileName : fEarlyIncludeFileNamesList) {
-    os <<
-      "[" << fileName << "]" <<
-      endl;
-    } // for
-
-    --gIndenter;
-  }
-  else {
-    os << "none" << endl;
-  }
+#endif
 
   --gIndenter;
 }

@@ -190,7 +190,7 @@ EXP void displayStringPairVector (
 //       endl;
 //
 //     gLogStream << "==> stringsVector:" << endl;
-//     for (auto str: stringsVector) {
+//     for (string str: stringsVector) {
 //       gLogStream << "   " << str << endl;
 //     } // for
 //
@@ -346,7 +346,7 @@ EXP void displayStringPairVector (
 // 	string currentOption;
 //
 //   if (stringsVectorSize) {
-//     for (auto currString: stringsVector) {
+//     for (string currString: stringsVector) {
 //
 // #ifdef TRACING_IS_ENABLED
 //       if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
@@ -5838,12 +5838,12 @@ void oahHandler::printHandlerOptionsAndArguments (
 void oahHandler::printHandlerOptionsValues (
   ostream& os) const
 {
+#ifdef TRACING_IS_ENABLED
   // print the options handler values header
   unsigned int
     handlerCommandLineElementsMultisetSize =
       fHandlerCommandLineElementsMultiset.size ();
 
-#ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) { // JMI
     os <<
       "There are " <<
@@ -5940,12 +5940,12 @@ void oahHandler::printHandlerOptionsValues (
 void oahHandler::printHandlerOptionsValuesAll (
   ostream& os) const
 {
+#ifdef TRACING_IS_ENABLED
   // print the options handler values header
   unsigned int
     handlerCommandLineElementsMultisetSize =
       fHandlerCommandLineElementsMultiset.size ();
 
-#ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) { // JMI
     os <<
       "There are " <<
@@ -6042,7 +6042,7 @@ void oahHandler::printIncludeFileNamesStack (
     const unsigned int fieldWidth = 2;
 
     int counter = 1; // this is to be displayed to the user
-    for (auto fileName : fIncludeFileNamesStack) {
+    for (string fileName : fIncludeFileNamesStack) {
       os <<
         right << setw (fieldWidth) << counter++ <<
         ": [" <<
@@ -6501,6 +6501,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
   }
 
 /* JMI
+#ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       ", fHandlerOptionalValuesStyleKind: " <<
@@ -6511,6 +6512,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
         fElementValueKind) <<
       endl;
   }
+#endif
 */
 #endif
 
@@ -7206,8 +7208,6 @@ if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
 string oahHandler::handleArgvOptionName (
   const string& optionName)
 {
-  gGlobalOahEarlyOptions.getEarlyTracingOahDetails (); // JMIJMIJMI
-
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
@@ -8987,12 +8987,14 @@ void oahHandler::includeOptionsAndArgumentsFile (
   const string&           includeFileName,
   ostream&                os)
 {
+#ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     os << "Including options and arguments file \"" <<
       includeFileName <<
       "\"" <<
       endl;
   }
+#endif
 
   fIncludeFileNamesStack.push_back (includeFileName);
 
@@ -9019,6 +9021,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
   }
 
   // open options and arguments file
+#ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
     os <<
       "Opening options and arguments file \"" <<
@@ -9026,6 +9029,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
       "\" for reading" <<
       endl;
   }
+#endif
 
   ifstream
     optionsStream (
@@ -9054,6 +9058,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
     optionsStream,
     fOptionsAndArguments);
 
+#ifdef TRACING_IS_ENABLED
   //  print the options and arguments found
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) { // JMI
     os <<
@@ -9062,6 +9067,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
       endl <<
       fOptionsAndArguments;
   }
+#endif
 
   fIncludeFileNamesStack.pop_back ();
   --fIncludeFilesCurrentLevel;

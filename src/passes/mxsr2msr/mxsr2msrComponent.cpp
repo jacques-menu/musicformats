@@ -79,6 +79,17 @@ S_mfcPassComponent createMxsr2msrComponent ()
             "Added options for words conversions and placement"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.61"),
+          "February 21, 2022",
+          list<string> {
+            "Finalized options -replicate-empty-lpsr-measure and add-empty-msr-measures",
+            "Added conversion of MusicXML words to cresc/decresc"
+          }
+      ));
   }
 
   return pPassComponent;

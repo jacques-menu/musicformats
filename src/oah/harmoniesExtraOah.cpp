@@ -27,6 +27,8 @@
 
 #include "oahOah.h"
 
+#include "msrPitchesNames.h"
+
 #include "lpsrOah.h"
 
 #include "oahEarlyOptions.h"

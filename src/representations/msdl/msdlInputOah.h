@@ -12,6 +12,8 @@
 #ifndef ___msdlInputOah___
 #define ___msdlInputOah___
 
+#include "msrPitchesNames.h"
+
 #include "msdlBasicTypes.h"
 #include "msdlKeywords.h"
 

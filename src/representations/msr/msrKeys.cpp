@@ -27,6 +27,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrPitchesNames.h"
+
 #include "msrKeys.h"
 
 #include "oahOah.h"

@@ -12,8 +12,7 @@
 #ifndef ___msr___
 #define ___msr___
 
-
-
+#include "msrPitchesNames.h"
 #include "msrBasicTypes.h"
 #include "msrElements.h"
 

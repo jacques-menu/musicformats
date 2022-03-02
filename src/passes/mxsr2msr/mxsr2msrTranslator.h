@@ -1386,7 +1386,10 @@ class EXP mxsr2msrTranslator :
     // but they are in MSR, hence an option to convert words
     // with specific contents to dal segnos
 
-    list<S_msrCrescDecresc>   fPendinCrescDecrescList;
+    list<S_msrCrescDecresc>   fPendinCrescDecrescsList;
+
+    void                      attachPendingCrescDecrescsToNote (
+                                S_msrNote note);
 
 //     void                      convertWordsToCresc (
 //                                 int           inputLineNumber,

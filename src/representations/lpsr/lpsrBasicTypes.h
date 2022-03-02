@@ -19,6 +19,7 @@
 
 #include "rational.h"
 
+#include "msrPitchesNames.h"
 #include "msrBasicTypes.h"
 
 
@@ -172,8 +173,8 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
   int           inputLineNumber,
   const string& dynamicsTextSpannersStyleKindString);
 
-extern map<string, lpsrDynamicsTextSpannersStyleKind>
-  gGlobalLpsrDynamicsTextSpannersStyleKindsMap;
+extern map<string, lpsrDynamicsTextSpannersStyleKind>&
+  getLpsrDynamicsTextSpannersStyleKindsMap ();
 
 string existingLpsrDynamicsTextSpannersStyleKinds (
   unsigned int namesListMaxLength);

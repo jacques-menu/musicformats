@@ -922,55 +922,6 @@ typename EnumTrueHarmonies<T>::Iterator end (EnumTrueHarmonies<T>)
   return typename EnumTrueHarmonies<T>::Iterator (((int)T::TrueHarmoniesLast) + 1);
 }
 
-// quarter tones pitches languages
-//______________________________________________________________________________
-enum class msrQuarterTonesPitchesLanguageKind {
-  kQTPNederlands, kQTPCatalan, kQTPDeutsch, kQTPEnglish,
-  kQTPEspanol, kQTPFrancais, kQTPItaliano, kQTPNorsk,
-  kQTPPortugues, kQTPSuomi, kQTPSvenska, kQTPVlaams, kQTPArabic
-};
-
-string msrQuarterTonesPitchesLanguageKindAsString (
-  msrQuarterTonesPitchesLanguageKind languageKind);
-
-ostream& operator<< (ostream& os, msrQuarterTonesPitchesLanguageKind& elt);
-
-msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString (
-  const string& theString);
-
-string msrDiatonicPitchKindAsString ( // JMI
-  msrQuarterTonesPitchesLanguageKind languageKind,
-  msrDiatonicPitchKind               diatonicPitchKind);
-
-string msrQuarterTonesPitchKindAsStringInLanguage (
-  msrQuarterTonesPitchKind           quarterTonesPitchKind,
-  msrQuarterTonesPitchesLanguageKind languageKind);
-
-EXP msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
-  msrQuarterTonesPitchesLanguageKind languageKind,
-  const string&                      quarterTonesPitchName);
-
-/* JMI
- msrSemiTonesPitchKindAsString (
-  msrQuarterTonesPitchesLanguageKind languageKind,
-  msrSemiTonesPitchKind              semiTonesPitchKind);
-  */
-
-/* JMI
-string semiTonesPitchKindAsFlatsAndSharps (
-  msrQuarterTonesPitchesLanguageKind languageKind,
-  msrSemiTonesPitchKind              semiTonesPitchKind);
-*/
-
-/* JMI
-string msrQuarterTonesPitchKindAsFlatsAndSharps (
-  msrQuarterTonesPitchesLanguageKind languageKind,
-  msrQuarterTonesPitchKind           quarterTonesPitchKind);
-*/
-
-string existingMsrQuarterTonesPitchesLanguageKinds (
-  unsigned int namesListMaxLength);
-
 // enharmonies
 //______________________________________________________________________________
 EXP msrSemiTonesPitchKind enharmonicSemiTonesPitch (
@@ -2580,42 +2531,6 @@ extern map<msrHarmonyKind, S_msrHarmonyStructure>
 void initializeHarmonyStructuresMap ();
 
 void printHarmonyStructuresMap ();
-
-extern map<string, msrQuarterTonesPitchesLanguageKind>
-  gGlobalQuarterTonesPitchesLanguageKindsMap;
-
-extern map<msrQuarterTonesPitchKind, string> gGlobalNederlandsPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalCatalanPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalDeutschPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalEnglishPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalEspanolPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalFrancaisPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalItalianoPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalNorskPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalPortuguesPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalSuomiPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalSvenskaPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalVlaamsPitchesNamesMap;
-extern map<msrQuarterTonesPitchKind, string> gGlobalArabicPitchesNamesMap;
-
-void initializeQuarterTonesPitchesLanguageKinds ();
-
-/* the reference for note pitches names is LilyPond's scm/define-note-names.scm */
-void initializeNederlandsPitchNamesMap ();
-void initializeCatalanPitchNamesMap ();
-void initializeDeutschPitchNamesMap ();
-void initializeEnglishPitchNamesMap ();
-void initializeEspanolPitchNamesMap ();
-void initializeFrancaisPitchNamesMap ();
-void initializeItalianoPitchNamesMap ();
-void initializeNorskPitchNamesMap ();
-void initializePortuguesPitchNamesMap ();
-void initializeSuomiPitchNamesMap ();
-void initializeSvenskaPitchNamesMap ();
-void initializeVlaamsPitchNamesMap ();
-void initializeArabicPitchNamesMap ();
-
-string existingQuarterTonesPitchesLanguageKinds (unsigned int namesListMaxLength);
 
 // initialization
 //______________________________________________________________________________

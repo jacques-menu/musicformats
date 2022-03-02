@@ -12,6 +12,8 @@
 #ifndef ___lpsrOah___
 #define ___lpsrOah___
 
+#include "msrPitchesNames.h"
+
 #include "lpsrBasicTypes.h"
 
 #include "enableTracingIfDesired.h"
