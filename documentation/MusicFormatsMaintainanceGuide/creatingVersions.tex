@@ -1,7 +1,7 @@
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
-\chapter{MusicFormats repository branches}\label{MusicFormats repository branches}
+\chapter{MusicFormats branches and versions}\label{MusicFormats branches and versions}
 % -------------------------------------------------------------------------
 
 The \mf\ \repo\ contains:
@@ -15,8 +15,85 @@ When a \code{git push} is performed, the \code{musicformats-*-distrib} archives 
 Thus, in order to create a new version, one should:
 \begin{enumerate}
 \item push a satisfactory state of the local development \repo;
+
 \item check that the actions were executed successfully at \url{https://github.com/jacques-menu/musicformats/actions};
+
 \item when that is the case, download the resulting \code{musicformats-*-distrib} archives locally;
-\item \MainIt{push again} with the new version name in the \code{-m "\dots~\dots~\dots"} message. Now, the \masterBranch\ contains the distribution files of itself;
-\item create the new version \branch.
+
+\item \MainIt{push again} with the new version name in the \code{-m "\dots~\dots~\dots"} message, such as:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "Switched from C++11 to C++17 for <filesystem>" -a 
+
+jacquesmenu@macmini: ~/musicformats-git-dev > git push
+\end{lstlisting}
+
+Now, the \masterBranch\ contains the distribution files of itself:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/distrib > ls -sal
+total 154128
+     0 drwxr-xr-x  16 jacquesmenu  staff       512 Mar  3 13:18 .
+     0 drwxr-xr-x  35 jacquesmenu  staff      1120 Mar  3 07:13 ..
+    24 -rw-r--r--@  1 jacquesmenu  staff      8196 Feb 24 13:33 .DS_Store
+  1704 -rw-r--r--@  1 jacquesmenu  staff    869211 Mar  3 07:10 IntroductionToMusicXML.pdf
+     0 drwxr-xr-x   4 jacquesmenu  staff       128 Mar  3 13:18 MusicFormatsForMacOS
+109960 -rw-r--r--   1 jacquesmenu  staff  55888914 Mar  3 13:18 MusicFormatsForMacOS.zip
+     0 drwxr-xr-x   5 jacquesmenu  staff       160 Mar  3 13:18 MusicFormatsForUbuntu
+ 35216 -rw-r--r--   1 jacquesmenu  staff  17559638 Mar  3 13:18 MusicFormatsForUbuntu.zip
+     0 drwxr-xr-x   5 jacquesmenu  staff       160 Mar  3 13:18 MusicFormatsForWindows
+  4208 -rw-r--r--   1 jacquesmenu  staff   2153547 Mar  3 13:18 MusicFormatsForWindows.zip
+  3000 -rw-r--r--@  1 jacquesmenu  staff   1532300 Mar  3 07:10 MusicFormatsUserGuide.pdf
+     8 -rw-r--r--@  1 jacquesmenu  staff         6 Mar  3 07:10 MusicFormatsVersionNumber.txt
+     8 -rwxr-xr-x@  1 jacquesmenu  staff        95 Mar  3 12:54 doClean.bash
+     0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-macos-distrib
+     0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-ubuntu-distrib
+     0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-windows-distrib
+\end{lstlisting}
+
+\item create the new version \branch:
+\begin{lstlisting}[language=Terminal]
+git checkout master
+git branch
+git push --set-upstream master v0.9.61
+git branch
+\end{lstlisting}
+
+\item create a new version number and date, for example:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVersionNumber.bash 0.9.62
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev
+
+==> Writing MusicFormats version number 0.9.62 to MusicFormatsVersionNumber.txt
+
+8 -rw-r--r--@ 1 jacquesmenu  staff  6 Mar  3 13:46:49 2022 MusicFormatsVersionNumber.txt
+0.9.62
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev/src
+
+==> Writing MusicFormats version number 0.9.62 to MusicFormatsVersionNumber.h
+
+8 -rw-r--r--@ 1 jacquesmenu  staff  45 Mar  3 13:46:49 2022 MusicFormatsVersionNumber.h
+#define MUSICFORMATS_VERSION_NUMBER "0.9.62"
+\end{lstlisting}
+
+\begin{lstlisting}[language=Terminal]
+
+jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVersionDate.bash "March 3, 2022"
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev
+
+==> Writing MusicFormats version date March 3, 2022 to MusicFormatsVersionDate.txt
+
+8 -rw-r--r--@ 1 jacquesmenu  staff  14 Mar  3 13:47:11 2022 MusicFormatsVersionDate.txt
+March 3, 2022
+
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev/src
+
+==> Writing MusicFormats version date March 3, 2022 to MusicFormatsVersionDate.h
+
+8 -rw-r--r--@ 1 jacquesmenu  staff  50 Mar  3 13:47:11 2022 MusicFormatsVersionDate.h
+#define MUSICFORMATS_VERSION_DATE "March 3, 2022"
+\end{lstlisting}
+
 \end{enumerate}
