@@ -1912,6 +1912,26 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
 void msrMeasure::appendTransposeToMeasure (
   S_msrTranspose transpose)
 {
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
+    // fetch the voice
+    S_msrVoice
+      voice =
+        fMeasureSegmentUpLink->
+          getSegmentVoiceUpLink ();
+
+    gLogStream <<
+      "Appending transpose " <<
+      transpose->asShortString () <<
+      " to measure " <<
+      this->asShortString () <<
+      " in voice \"" <<
+      voice->getVoiceName () <<
+      "\"" <<
+      endl;
+  }
+#endif
+
   // append it to the measure elements list
   appendElementToMeasure (transpose);
 }

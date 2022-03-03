@@ -3375,22 +3375,36 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
       break;
   } // switch
 
+  // JMI v0.9.61
+  msrArticulation::msrArticulationKind
+    articulationKind =
+      articulation->getArticulationKind ();
+
+
   if (doGeneratePlacement) {
-    switch (articulation->getArticulationPlacementKind ()) {
-      case msrPlacementKind::k_NoPlacement:
-        fLilypondCodeStream << "-";
-        break;
-      case msrPlacementKind::kPlacementAbove:
-        fLilypondCodeStream << "^";
-        break;
-      case msrPlacementKind::kPlacementBelow:
-        fLilypondCodeStream << "_";
-        break;
-    } // switch
+    // dont generate a placement for breath marks JMI v0.9.61
+//     switch (articulationKind) {
+//       case msrArticulation::kBreathMark:
+//         break;
+//
+//       default:
+        switch (articulation->getArticulationPlacementKind ()) {
+          case msrPlacementKind::k_NoPlacement:
+            fLilypondCodeStream << "-";
+            break;
+
+          case msrPlacementKind::kPlacementAbove:
+            fLilypondCodeStream << "^";
+            break;
+
+          case msrPlacementKind::kPlacementBelow:
+            fLilypondCodeStream << "_";
+        } // switch
+//     } // switch
   }
 
   // generate note articulation itself
-  switch (articulation->getArticulationKind ()) {
+  switch (articulationKind) {
     case msrArticulation::k_NoArticulation:
       fLilypondCodeStream << ">";
       break;
@@ -20160,26 +20174,26 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   fLilypondCodeStream <<
     ' ';
 
-  // get the chord articulations
-  const list<S_msrArticulation>&
-    chordArticulations =
-      chord->getChordArticulations ();
-
-  // generate the chord articulations if any
-  if (chordArticulations.size ()) {
-    list<S_msrArticulation>::const_iterator i;
-    for (
-      i=chordArticulations.begin ();
-      i!=chordArticulations.end ();
-      ++i
-    ) {
-      generateChordArticulation ((*i));
-
-      fLilypondCodeStream <<
-        ' ';
-    } // for
-  }
-
+//   // get the chord articulations
+//   const list<S_msrArticulation>&
+//     chordArticulations =
+//       chord->getChordArticulations ();
+//
+//   // generate the chord articulations if any
+//   if (chordArticulations.size ()) {
+//     list<S_msrArticulation>::const_iterator i;
+//     for (
+//       i=chordArticulations.begin ();
+//       i!=chordArticulations.end ();
+//       ++i
+//     ) {
+//       generateChordArticulation ((*i));
+//
+//       fLilypondCodeStream <<
+//         ' ';
+//     } // for
+//   }
+//
   // generate the chord technicals if any
   const list<S_msrTechnical>&
     chordTechnicals =
@@ -20346,6 +20360,27 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
         "\\otherDynamic \"" <<
         otherDynamic->getOtherDynamicsString () <<
         "\" ";
+    } // for
+  }
+
+  // JMI v0.9.61, only now after the various dynamics
+  // get the chord articulations
+  const list<S_msrArticulation>&
+    chordArticulations =
+      chord->getChordArticulations ();
+
+  // generate the chord articulations if any
+  if (chordArticulations.size ()) {
+    list<S_msrArticulation>::const_iterator i;
+    for (
+      i=chordArticulations.begin ();
+      i!=chordArticulations.end ();
+      ++i
+    ) {
+      generateChordArticulation ((*i));
+
+      fLilypondCodeStream <<
+        ' ';
     } // for
   }
 

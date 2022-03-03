@@ -1,0 +1,22 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{MusicFormats repository branches}\label{MusicFormats repository branches}
+% -------------------------------------------------------------------------
+
+The \mf\ \repo\ contains:
+\begin{itemize}
+\item a \masterBranch, that contains the current evolution of the code base, examples and documentation;
+\item \code{vX.Y.Z} \branch es, created from the \masterBranch\ where it is in a useful state. An example is \code{v0.9.61}.
+\end{itemize}
+
+When a \code{git push} is performed, the \code{musicformats-*-distrib} archives are created, but they cannot be added to the \mf\ \repo\ by \github\ on the fly.
+
+Thus, in order to create a new version, one should:
+\begin{enumerate}
+\item push a satisfactory state of the local development \repo;
+\item check that the actions were executed successfully at \url{https://github.com/jacques-menu/musicformats/actions};
+\item when that is the case, download the resulting \code{musicformats-*-distrib} archives locally;
+\item \MainIt{push again} with the new version name in the \code{-m "\dots~\dots~\dots"} message. Now, the \masterBranch\ contains the distribution files of itself;
+\item create the new version \branch.
+\end{enumerate}

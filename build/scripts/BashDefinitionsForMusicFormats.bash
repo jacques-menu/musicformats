@@ -741,9 +741,9 @@ function addBuild ()
 
 function addDistrib ()
 {
-  git add -f ${DISTRIB_DIR}/MusicFormatsVersionNumber.txt
+  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
 
-  git add -f ${DISTRIB_DIR}/MusicFormatsVersionDate.txt
+  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt
 
   git add    ${DISTRIB_DIR}/*.pdf
 
