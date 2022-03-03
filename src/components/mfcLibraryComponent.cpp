@@ -9,9 +9,9 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "../../../MusicFormatsVersionNumber.h"
+#include "../../MusicFormatsVersionNumber.h"
 
-#include "../../../MusicFormatsVersionDate.h"
+#include "../../MusicFormatsVersionDate.h"
 
 #include "mfIndentedTextOutput.h"
 
