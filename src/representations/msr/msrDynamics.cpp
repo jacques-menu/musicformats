@@ -255,10 +255,10 @@ string crescDecrescKindAsString (
 
   switch (crescDecrescKind) {
     case msrCrescDecrescKind::kCrescDecrescCrescendo:
-      result = "kWedgeKindNone";
+      result = "kCrescDecrescCrescendo";
       break;
     case msrCrescDecrescKind::kCrescDecrescDecrescendo:
-      result = "kWedgeCrescendo";
+      result = "kCrescDecrescDecrescendo";
       break;
   } // switch
 

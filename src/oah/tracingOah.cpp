@@ -749,6 +749,23 @@ R"(Spanners)",
     addBooleanAtom (
       traceSpannersAtom);
 
+  // cresc/decresc
+
+  S_oahTwoBooleansAtom
+    traceCrescDecrescsAtom =
+      oahTwoBooleansAtom::create (
+        "trace-cresc-decrescs", "tcrescDecrescs",
+R"(Cresc/Decrescs)",
+        "fTraceCrescDecrescs",
+        fTraceCrescDecrescs,
+        fTracePassesBooleanAtom);
+  subGroup->
+    appendAtomToSubGroup (
+      traceCrescDecrescsAtom);
+  spannersMultiplexBooleansAtom->
+    addBooleanAtom (
+      traceCrescDecrescsAtom);
+
   // wedges
 
   S_oahTwoBooleansAtom
@@ -2806,6 +2823,11 @@ void tracingOahGroup::printAtomWithVariableOptionsValues (
     fTracePedals <<
     endl <<
 
+    // cresc/decresc
+    setw (valueFieldWidth) << "fTraceCrescDecrescs" << " : " <<
+    fTraceCrescDecrescs <<
+    endl <<
+
     // wedges
     setw (valueFieldWidth) << "fTtraceWedges" << " : " <<
     fTraceWedges <<
@@ -3261,6 +3283,11 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     // pedals
     setw (fieldWidth) << "fTtracePedals" << " : " <<
     fTracePedals <<
+    endl <<
+
+    // cresc/decresc
+    setw (fieldWidth) << "fTraceCrescDecrescs" << " : " <<
+    fTraceCrescDecrescs <<
     endl <<
 
     // wedges

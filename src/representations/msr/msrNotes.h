@@ -866,7 +866,8 @@ class EXP msrNote : public msrTupletElement
     void                  appendSlashToNote (S_msrSlash slash);
 
     // cresc/decresc
-    void                  appendCrescDecrescToNote (S_msrCrescDecresc crescDecresc);
+    void                  appendCrescDecrescToNote (
+                            S_msrCrescDecresc crescDecresc);
 
     //  wedges
     void                  appendWedgeToNote (S_msrWedge wedge);
