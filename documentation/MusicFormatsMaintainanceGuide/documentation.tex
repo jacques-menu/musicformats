@@ -52,35 +52,47 @@ jacquesmenu@macmini: ~/musicformats-git-dev/documentation > ls -sal CommonLaTeXF
 
 The following files contain the current \mf\ version number and date:
 \begin{itemize}
-\item \file{MusicFormatsVersionNumber.h} and \file{MusicFormatsVersionDate.h} files are used by the C++ code base;
+\item the \src{MusicFormatsVersionNumber.h} and \src{MusicFormatsVersionDate.h} files are used by the C++ code base;
 \item \file{MusicFormatsVersionNumber.txt} and \file{MusicFormatsVersionDate.txt} are used by the \LaTeX\ source files
 \end{itemize}
 Those files should be re-generated when a new version of \mf\ is created, for example:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > build/scripts/SetMusicFormatsVersionNumber.bash 0.9.61
+jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVersionNumber.bash "0.9.61"
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev
+
 ==> Writing MusicFormats version number 0.9.61 to MusicFormatsVersionNumber.txt
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  7 Feb 28 10:16:48 2022 MusicFormatsVersionNumber.txt
+8 -rw-r--r--@ 1 jacquesmenu  staff  6 Mar  2 13:43:04 2022 MusicFormatsVersionNumber.txt
 0.9.61
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev/src
 
 ==> Writing MusicFormats version number 0.9.61 to MusicFormatsVersionNumber.h
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  45 Feb 28 10:16:48 2022 MusicFormatsVersionNumber.h
+8 -rw-r--r--@ 1 jacquesmenu  staff  45 Mar  2 13:43:04 2022 MusicFormatsVersionNumber.h
 #define MUSICFORMATS_VERSION_NUMBER "0.9.61"
 \end{lstlisting}
 
 and:
+
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > build/scripts/SetMusicFormatsVersionDate.bash "February 28, 2022"
-==> Writing MusicFormats version date February 28, 2022 to MusicFormatsVersionDate.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVersionDate.bash "March 2, 2022"
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  18 Feb 28 10:17:36 2022 MusicFormatsVersionDate.txt
-February 28, 2022
+==> Writing MusicFormats version date March 2, 2022 to MusicFormatsVersionDate.txt
 
-==> Writing MusicFormats version date February 28, 2022 to MusicFormatsVersionDate.h
+8 -rw-r--r--@ 1 jacquesmenu  staff  14 Mar  2 13:43:32 2022 MusicFormatsVersionDate.txt
+March 2, 2022
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  54 Feb 28 10:17:36 2022 MusicFormatsVersionDate.h
-#define MUSICFORMATS_VERSION_DATE "February 28, 2022"
+==> PWD is:
+/Users/jacquesmenu/musicformats-git-dev/src
+
+==> Writing MusicFormats version date March 2, 2022 to MusicFormatsVersionDate.h
+
+8 -rw-r--r--@ 1 jacquesmenu  staff  50 Mar  2 13:43:32 2022 MusicFormatsVersionDate.h
+#define MUSICFORMATS_VERSION_DATE "March 2, 2022"
 \end{lstlisting}
 
 Avoid editing these files manually. In particular, \fileName{MusicFormatsVersionNumber.txt} should {\bf NOT} be terminated by an end of line, since its contents is used in the name of library files generated in \build{lib}.

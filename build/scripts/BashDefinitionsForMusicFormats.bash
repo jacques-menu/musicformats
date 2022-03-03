@@ -714,6 +714,8 @@ alias gp='git push'
 
 function addSrc ()
 {
+  git add ${SRC_DIR}/*.h
+
   git add ${SRC_DIR}/clisamples/*
   git add ${SRC_DIR}/components/*
   git add ${SRC_DIR}/converters/*/*
@@ -770,10 +772,10 @@ function addFxml ()
 function addAll ()
 {
   git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
-  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.h
-
   git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt
-  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.h
+
+  git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionNumber.h
+  git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionDate.h
 
   addSrc
   addBuild

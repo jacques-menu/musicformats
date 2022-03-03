@@ -6,7 +6,7 @@ function usage ()
   {
     echo "An argument is expected."
     echo "Usage is:"
-    echo "  $0 [cmake] NUMBER"
+    echo "  $0 NUMBER"
     exit 1
   }
 
@@ -28,14 +28,13 @@ VERSION_NUMBER=$1
 
 VERSION_NUMBER_FILE_NAME_ROOT="MusicFormatsVersionNumber"
 
-cd ${LIBMUSICFORMATS_GIT}
-#echo "==> PWD is:"
-#pwd
-#echo "==> date is:"
-#date
-#echo
 
 # VERSION_NUMBER_FILE_NAME
+cd ${LIBMUSICFORMATS_GIT}
+echo "==> PWD is:"
+pwd
+echo
+
 VERSION_NUMBER_FILE_NAME="${VERSION_NUMBER_FILE_NAME_ROOT}.txt"
 
 echo "==> Writing MusicFormats version number ${VERSION_NUMBER} to ${VERSION_NUMBER_FILE_NAME}"
@@ -48,7 +47,13 @@ cat ${VERSION_NUMBER_FILE_NAME}
 
 echo
 
+
 #VERSION_NUMBER_HEADER_NAME
+cd ${LIBMUSICFORMATS_GIT}/src
+echo "==> PWD is:"
+pwd
+echo
+
 VERSION_NUMBER_HEADER_NAME="${VERSION_NUMBER_FILE_NAME_ROOT}.h"
 
 echo "==> Writing MusicFormats version number ${VERSION_NUMBER} to ${VERSION_NUMBER_HEADER_NAME}"

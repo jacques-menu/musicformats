@@ -1,1 +1,0 @@
-#define MUSICFORMATS_VERSION_DATE "February 28, 2022"

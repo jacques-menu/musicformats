@@ -4772,6 +4772,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         gGlobalTracingOahGroup->getTraceWords ()
           ||
         gGlobalTracingOahGroup->getTraceDynamics ()
+          ||
+        gGlobalTracingOahGroup->getTraceCrescDecrescs ()
       ) {
         gLogStream <<
           "Converting words \"" <<
@@ -4788,6 +4790,15 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 //         inputLineNumber,
 //         wordsValue);
       // create an msrCrescDecresc
+#ifdef TRACING_IS_ENABLED
+      if (gGlobalTracingOahGroup->getTraceCrescDecrescs ()) {
+        gLogStream <<
+          "Creating an msrCrescDecresc crescendo" <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
       S_msrCrescDecresc
         crescDecresc =
           msrCrescDecresc::create (
@@ -4807,6 +4818,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         gGlobalTracingOahGroup->getTraceWords ()
           ||
         gGlobalTracingOahGroup->getTraceDynamics ()
+          ||
+        gGlobalTracingOahGroup->getTraceCrescDecrescs ()
       ) {
         gLogStream <<
           "Converting words \"" <<
@@ -4823,6 +4836,15 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
 //         inputLineNumber,
 //         wordsValue);
       // create an msrCrescDecresc
+#ifdef TRACING_IS_ENABLED
+      if (gGlobalTracingOahGroup->getTraceCrescDecrescs ()) {
+        gLogStream <<
+          "Creating an msrCrescDecresc decrescendo" <<
+          ", line " << inputLineNumber <<
+          endl;
+      }
+#endif
+
       S_msrCrescDecresc
         crescDecresc =
           msrCrescDecresc::create (
@@ -8534,7 +8556,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
             endl <<
             "Adding " <<
             mfSingularOrPlural (
-              measuresToBeAdded, "full measure rest", "full measure rests") <<
+              measuresToBeAdded, "empty measure", "empty measures") <<
             " to part " <<
             fCurrentPart->getPartCombinedName () <<
             endl;
@@ -18902,9 +18924,9 @@ void mxsr2msrTranslator::attachPendingCrescDecrescsToNote (
   S_msrNote note)
 {
  // attach the pending crescDecresc if any to the note
-  if (fPendingCodasList.size ()) {
+  if (fPendinCrescDecrescsList.size ()) {
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceCodas ()) {
+    if (gGlobalTracingOahGroup->getTraceCrescDecrescs ()) {
       gLogStream <<
         "Attaching pending crescDecresc to note " <<
         note->asString () <<

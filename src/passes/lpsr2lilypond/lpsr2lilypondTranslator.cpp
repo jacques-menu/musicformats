@@ -16421,6 +16421,17 @@ void lpsr2lilypondTranslator::visitStart (S_msrCrescDecresc& elt)
     }
   }
 #endif
+
+  switch (elt->getCrescDecrescKind ()) {
+    case msrCrescDecrescKind::kCrescDecrescCrescendo:
+      fLilypondCodeStream <<
+        "\\cresc ";
+      break;
+    case msrCrescDecrescKind::kCrescDecrescDecrescendo:
+      fLilypondCodeStream <<
+        "\\decresc ";
+      break;
+  } // switch
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrCrescDecresc& elt)

@@ -470,6 +470,11 @@ class EXP tracingOahGroup : public oahGroup
                               { fTraceSpanners = true; }
     Bool                  getTraceSpanners () const
                               { return fTraceSpanners; }
+    // cresc/decresc
+    void                  setTraceCrescDecrescs ()
+                              { fTraceCrescDecrescs = true; }
+    Bool                  getTraceCrescDecrescs () const
+                              { return fTraceCrescDecrescs; }
     // wedges
     void                  setTraceWedges ()
                               { fTraceWedges = true; }
@@ -924,6 +929,8 @@ class EXP tracingOahGroup : public oahGroup
 
     // spanners
     Bool                  fTraceSpanners; // ???
+    // cresc/decresc
+    Bool                  fTraceCrescDecrescs;
     // wedges
     Bool                  fTraceWedges;
     // spanners

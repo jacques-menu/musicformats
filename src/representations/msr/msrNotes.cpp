@@ -3087,7 +3087,8 @@ void msrNote::appendSlashToNote (S_msrSlash slash)
   fNoteSlashes.push_back (slash);
 }
 
-void msrNote::appendCrescDecrescToNote (S_msrCrescDecresc crescDecresc)
+void msrNote::appendCrescDecrescToNote (
+  S_msrCrescDecresc crescDecresc)
 {
   fNoteCrescDecrescs.push_back (crescDecresc);
 }
@@ -3638,11 +3639,22 @@ void msrNote::browseData (basevisitor* v)
     --gIndenter;
   }
 
+  // browse the crescDecresc if any
+  if (fNoteCrescDecrescs.size ()) {
+    ++gIndenter;
+    for (S_msrCrescDecresc crescDecresc : fNoteCrescDecrescs) {
+      // browse the crescDecresc
+      msrBrowser<msrCrescDecresc> browser (v);
+      browser.browse (*crescDecresc);
+    } // for
+    --gIndenter;
+  }
+
   // browse the wedges if any
   if (fNoteWedges.size ()) {
     ++gIndenter;
     for (S_msrWedge wedge : fNoteWedges) {
-      // browse the wedge
+      // browse the crescDecresc
       msrBrowser<msrWedge> browser (v);
       browser.browse (*wedge);
     } // for
@@ -3656,17 +3668,6 @@ void msrNote::browseData (basevisitor* v)
       // browse the slash
       msrBrowser<msrSlash> browser (v);
       browser.browse (*slash);
-    } // for
-    --gIndenter;
-  }
-
-  // browse the crescDecresc if any
-  if (fNoteCrescDecrescs.size ()) {
-    ++gIndenter;
-    for (S_msrCrescDecresc crescDecresc : fNoteCrescDecrescs) {
-      // browse the crescDecresc
-      msrBrowser<msrCrescDecresc> browser (v);
-      browser.browse (*crescDecresc);
     } // for
     --gIndenter;
   }
@@ -6099,6 +6100,33 @@ void msrNote::print (ostream& os) const
       endl;
   }
 
+  // print the crescDecresc if any
+  os <<
+    setw (fieldWidth) <<
+    "fNoteCrescDecrescs";
+  if (fNoteCrescDecrescs.size ()) {
+    os << endl;
+
+    ++gIndenter;
+
+    list<S_msrCrescDecresc>::const_iterator
+      iBegin = fNoteCrescDecrescs.begin (),
+      iEnd   = fNoteCrescDecrescs.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      // no endl here;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << " : " <<
+      "none" <<
+      endl;
+  }
+
   // print the wedges if any
   os <<
     setw (fieldWidth) <<
@@ -6952,6 +6980,28 @@ void msrNote::printShort (ostream& os) const
     list<S_msrSlash>::const_iterator
       iBegin = fNoteSlashes.begin (),
       iEnd   = fNoteSlashes.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i);
+      if (++i == iEnd) break;
+      // no endl here;
+    } // for
+
+    --gIndenter;
+  }
+
+  // print the crescDecresc if any
+  if (fNoteCrescDecrescs.size ()) {
+    os <<
+      setw (fieldWidth) <<
+      "fNoteCrescDecrescs";
+      os << endl;
+
+    ++gIndenter;
+
+    list<S_msrCrescDecresc>::const_iterator
+      iBegin = fNoteCrescDecrescs.begin (),
+      iEnd   = fNoteCrescDecrescs.end (),
       i      = iBegin;
     for ( ; ; ) {
       os << (*i);
