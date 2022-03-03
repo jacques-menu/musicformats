@@ -22,9 +22,9 @@ total 32
 8 -rw-r--r--@ 1 jacquesmenu  staff  1396 Feb 11 17:55 windows-check.yml
 \end{lstlisting}
 
-For example, the \Ubuntu\ action in \file{ubuntu-check.yml} is:
+For example, the \Ubuntu\ action in \file{ubuntu-check.yml} is show below. It is executed each time a \code{git push} is performed to the \masterBranch:
 \begin{lstlisting}[language=Terminal]
-# This is a basic workflow to help you get started with Actions
+# This is a workflow to build MusicFormats and create a distribution of it
 
 name: Ubuntu
 
@@ -64,7 +64,7 @@ jobs:
             build/lib/*.a
             build/lib/*.so
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
-            documentation/MusicFormatsCLIUserGuide/MusicFormatsCLIUserGuide.pdf
+            documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
 \end{lstlisting}
 
 After a push to the \masterBranch, we get for example:\\

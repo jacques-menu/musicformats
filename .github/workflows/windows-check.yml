@@ -1,4 +1,4 @@
-# This is a workflow to build a MusicFormats distribution with actions
+# This is a workflow to build MusicFormats and create a distribution of it
 
 name: Windows
 
