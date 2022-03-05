@@ -6,6 +6,11 @@
 
 The \mf\ documentation is written in \LaTeX, the pictures being created with the \tikzpgf\ package, see \url{https://www.bu.edu/math/files/2013/08/tikzpgfmanual.pdf}.
 
+All the \LaTeX\ files have an initial '\code{!~TEX root}' comment. This is a \texshop\ specific feature, allowing a documentation to be composed from any of the files that it imports, such as:
+\begin{lstlisting}[language=Latex]
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+\end{lstlisting}
+
 The \directoryName{documentation} directory contains:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/documentation > ls -sal

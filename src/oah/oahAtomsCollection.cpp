@@ -2833,10 +2833,11 @@ void oahThreeBooleansAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : " <<
     fBooleanVariable;
-//   if (fBooleanVariable) {
-//     os <<
-//       ", set by user";
-//   }
+
+  if (fSetByUser) {
+    os <<
+      ", set by user";
+  }
   os << endl;
 }
 
@@ -4230,6 +4231,8 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
       s >> integerValue;
     }
     fIntegerSecondaryVariable = integerValue;
+
+    fSetByUser = true;
   }
 
   else {
@@ -4835,7 +4838,7 @@ void oahStringAtom::printAtomWithVariableOptionsValues (
     setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
-    fStringVariable;
+    "[" << fStringVariable << "]";
 
   if (fSetByUser) { // JMIJMIJMI
     os <<
@@ -5523,6 +5526,8 @@ void oahStringWithRegexAtom::applyAtomWithValue (
   }
 #endif
 
+  // JMI to do!
+
   oahStringAtom::applyAtomWithValue (
     theString,
     os);
@@ -6159,8 +6164,11 @@ void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
   }
 
   else {
-    os <<
-      "'";
+    if (fSetByUser) {
+      os <<
+        "set by user" <<
+        endl;
+    }
 
     set<int>::const_iterator
       iBegin = fNaturalNumbersSetVariable.begin (),
@@ -6173,14 +6181,7 @@ void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
       os << " ";
     } // for
 
-    os <<
-        "'";
-
-    if (fSetByUser) {
-      os <<
-        ", fSetByUser: " <<
-        fSetByUser;
-    }
+    os << "'";
   }
 }
 
@@ -6364,8 +6365,8 @@ void oahRGBColorAtom::printAtomWithVariableOptionsValues (
     fRGBColorVariable.asString ();
   if (fSetByUser) {
     os <<
-      ", ffSetByUser: " <<
-      fSetByUser;
+      ", set by user" <<
+      endl;
   }
   os << endl;
 }
@@ -6679,8 +6680,7 @@ void oahIntSetElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", fSetByUser: " <<
-      fSetByUser <<
+      "set by user" <<
       endl;
 
     --gIndenter;
@@ -6779,6 +6779,7 @@ void oahStringSetElementAtom::applyAtomWithValue (
 
   else {
     fStringSetVariable.insert (partName);
+    fSetByUser = true;
   }
 }
 
@@ -6947,7 +6948,9 @@ void oahStringSetElementAtom::printAtomWithVariableOptionsValues (
       endl;
   }
   else {
-    os << endl;
+    os <<
+      "set by user" <<
+      endl;
 
     ++gIndenter;
 
@@ -6961,11 +6964,6 @@ void oahStringSetElementAtom::printAtomWithVariableOptionsValues (
         endl;
       if (++i == iEnd) break;
     } // for
-
-    os <<
-      ", fSetByUser: " <<
-      fSetByUser <<
-      endl;
 
     --gIndenter;
   }
@@ -7116,7 +7114,9 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
   }
 #endif
 
-  fStringToIntMapVariable [musicxmlMeasureNumber] = lilypondMeasureNumber;
+  fStringToIntMapVariable [musicxmlMeasureNumber] =
+    lilypondMeasureNumber;
+  fSetByUser = true;
 }
 
 void oahStringToIntMapElementAtom::acceptIn (basevisitor* v)
@@ -7304,8 +7304,7 @@ void oahStringToIntMapElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", fSetByUser: " <<
-      fSetByUser <<
+      "set by user" <<
       endl;
 
     --gIndenter;
@@ -7423,7 +7422,10 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
       s << sm [ 2 ];
       s >> integerValue;
     }
+
     fIntegerVariable = integerValue;
+
+    fSetByUser = true;
   }
 
   else {
@@ -7741,6 +7743,8 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
       s >> integerValue;
     }
     fSecondaryIntegerVariable = integerValue;
+
+    fSetByUser = true;
   }
 
   else {
@@ -8757,8 +8761,8 @@ void oahMidiTempoAtom::printAtomWithVariableOptionsValues (
     fMidiTempoVariable.asString ();
   if (fSetByUser) {
     os <<
-      ", ffSetByUser: " <<
-      fSetByUser;
+      ", set by user" <<
+      endl;
   }
   os << endl;
 }

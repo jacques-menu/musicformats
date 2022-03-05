@@ -253,6 +253,12 @@ class EXP msr2msrOahGroup : public oahGroup
                           getIgnoreMsrVoicesSetAtom () const
                               { return fIgnoreMsrVoicesSetAtom; }
 
+    const set<string>&    getKeepMsrVoicesSet () const
+                              { return fKeepMsrVoicesSet; }
+    S_oahStringSetElementAtom
+                          getKeepMsrVoicesSetAtom () const
+                              { return fKeepMsrVoicesSetAtom; }
+
     // page breaks
     const set<string>&    getInserPageBreakAfterMeasureSet () const
                               { return fInserPageBreakAfterMeasureSet; }
@@ -332,9 +338,13 @@ class EXP msr2msrOahGroup : public oahGroup
     Bool                  fExpandToHarmonyBandBook;
 
     // voices
-    set<string>           fIgnoreMsrVoicesSet; // JMI v0.9.62
+    set<string>           fIgnoreMsrVoicesSet;
     S_oahStringSetElementAtom
                           fIgnoreMsrVoicesSetAtom;
+
+    set<string>           fKeepMsrVoicesSet;
+    S_oahStringSetElementAtom
+                          fKeepMsrVoicesSetAtom;
 
     // breaks
     set<string>           fInserPageBreakAfterMeasureSet;

@@ -8224,6 +8224,10 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   // check the consistency of the options
   // ------------------------------------------------------
 
+  gLogStream <<
+    "==> checkHandlerOptionsConsistency();" <<
+    endl;
+
   checkHandlerOptionsConsistency ();
 
   --gIndenter;

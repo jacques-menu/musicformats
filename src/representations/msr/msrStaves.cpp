@@ -2817,12 +2817,42 @@ void msrStaff::browseData (basevisitor* v)
 
   if (fStaffAllVoicesList.size ()) {
     for (S_msrVoice voice : fStaffAllVoicesList) {
-      // is this voice name in the ignore voices set?
-      Bool ignoreVoice (false);
+      // get the  set of voices to ignore
+      S_oahStringSetElementAtom
+        ignoreMsrVoicesSetAtom =
+          gGlobalMsr2msrOahGroup->
+            getIgnoreMsrVoicesSetAtom ();;
 
-      string voiceName =
-        voice->
-          getVoiceName ();
+      Bool ignoreMsrVoicesSetIsSetByUser =
+        ignoreMsrVoicesSetAtom->getSetByUser ();;
+
+      // get the  set of voices to keep
+      S_oahStringSetElementAtom
+        keepMsrVoicesSetAtom =
+          gGlobalMsr2msrOahGroup->
+            getKeepMsrVoicesSetAtom ();;
+
+      Bool keepMsrVoicesSetIsSetByUser =
+        keepMsrVoicesSetAtom->getSetByUser ();;
+
+      // JMI this should be done in mxsr2msrOahGroup::checkGroupOptionsConsistency () v0.9.62
+      if (ignoreMsrVoicesSetIsSetByUser && keepMsrVoicesSetIsSetByUser) {
+        stringstream s;
+
+        s <<
+          "Options " <<
+          ignoreMsrVoicesSetAtom->fetchNamesBetweenQuotes () <<
+          " and " <<
+          keepMsrVoicesSetAtom->fetchNamesBetweenQuotes () <<
+          " are incompatible" <<
+          endl;
+
+        msrError (
+          gGlobalServiceRunData->getInputSourceName (),
+          voice->getInputLineNumber (),
+          __FILE__, __LINE__,
+          s.str ());
+      }
 
       const set<string>&
         ignoreMsrVoicesSet =
@@ -2838,14 +2868,48 @@ void msrStaff::browseData (basevisitor* v)
       }
 #endif
 
-      if (ignoreMsrVoicesSet.size ()) {
-        ignoreVoice =
-          mfStringIsInStringSet (
+      const set<string>&
+        keepMsrVoicesSet =
+          gGlobalMsr2msrOahGroup->
+            getKeepMsrVoicesSet ();
+
+#ifdef TRACING_IS_ENABLED // JMI
+      if (gGlobalTracingOahGroup->getTraceVoices ()) {
+        mfDisplayStringSet (
+          "keepMsrVoicesSet",
+          keepMsrVoicesSet,
+          gLogStream);
+      }
+#endif
+
+      // is this voice name in the ignore voices set?
+      Bool voiceIsToBeBrowsed;
+
+      string voiceName =
+        voice->
+          getVoiceName ();
+
+      if (ignoreMsrVoicesSetIsSetByUser) {
+        // a voice is to be browsed by default
+        voiceIsToBeBrowsed =
+          ! mfStringIsInStringSet (
             voiceName,
             ignoreMsrVoicesSet);
       }
+      else { // keepMsrVoicesSetIsSetByUser
+        // a voice is NOT to be browsed by default
+        voiceIsToBeBrowsed =
+          mfStringIsInStringSet (
+            voiceName,
+            keepMsrVoicesSet);
+      }
 
-      if (ignoreVoice) {
+      // now take that into account
+      if (voiceIsToBeBrowsed) {
+        msrBrowser<msrVoice> browser (v);
+        browser.browse (*voice);
+      }
+      else {
 #ifdef TRACING_IS_ENABLED // JMI
         if (gGlobalTracingOahGroup->getTraceVoices ()) {
           gLogStream <<
@@ -2855,11 +2919,6 @@ void msrStaff::browseData (basevisitor* v)
             endl;
         }
 #endif
-      }
-
-      else {
-        msrBrowser<msrVoice> browser (v);
-        browser.browse (*voice);
       }
     } // for
   }

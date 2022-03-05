@@ -1268,6 +1268,22 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
 
 
 % -------------------------------------------------------------------------
+\section{Checking options consistency}
+% -------------------------------------------------------------------------
+
+%%%JMI
+
+The options groups have a \methodName{checkGroupOptionsConsistency} to check that the use of the options if this group are consistent.
+
+For example:
+\begin{lstlisting}[language=Terminal]
+void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
+{
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
 \section{Adding new options}
 % -------------------------------------------------------------------------
 

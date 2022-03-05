@@ -705,6 +705,24 @@ There can be several occurrences of this option.)",
   subGroup->
     appendAtomToSubGroup (
       fIgnoreMsrVoicesSetAtom);
+
+  // keep MSR voices
+  // --------------------------------------
+
+  fKeepMsrVoicesSetAtom =
+    oahStringSetElementAtom::create (
+      "keep-msr-voice", "kmv",
+R"(Keep voice VOICE_NAME in the MSR data
+when creating a new MSR from an existing one.
+An example name is Part_POne_Staff_One_Voice_Two.
+There can be several occurrences of this option.)",
+      "voice",
+      "fKeepMsrVoicesSet",
+      fKeepMsrVoicesSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fKeepMsrVoicesSetAtom);
 }
 
 void msr2msrOahGroup::initializeBreakOptions ()
@@ -1009,6 +1027,11 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
   mfDisplayStringSet (
     "fIgnoreMsrVoicesSet",
     fIgnoreMsrVoicesSet,
+    gLogStream);
+
+  mfDisplayStringSet (
+    "fKeepMsrVoicesSet",
+    fKeepMsrVoicesSet,
     gLogStream);
 
   --gIndenter;
