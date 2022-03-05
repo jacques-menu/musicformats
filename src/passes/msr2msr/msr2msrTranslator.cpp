@@ -1077,32 +1077,11 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
   }
 #endif
 
-//   // JMI TEMP TEST
-//   S_msrPathToVoice
-//     pathToVoice =
-//       msrPathToVoice::createFromVoice (elt);
-//
-//   gLogStream <<
-//     "--> path to voice \"" <<
-//     elt->getVoiceName () << "\":" <<
-//     endl;
-//   ++gIndenter;
-//   pathToVoice->print (gLogStream);
-//   --gIndenter;
-//
-//   gLogStream <<
-//     "--> path to voice \"" <<
-//     elt->getVoiceName () << "\" as string:" <<
-//     endl;
-//   ++gIndenter;
-//   gLogStream <<
-//     pathToVoice->asString () <<
-//     endl;
-//   --gIndenter;
-
   fCurrentVoiceOriginal = elt;
 
   ++gIndenter;
+
+  string voiceName = elt->getVoiceName ();
 
   // create a voice clone
   fCurrentVoiceClone =
@@ -1134,9 +1113,6 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
           fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI
           ) {
           // create a ChordNames context
-          string voiceName =
-            fCurrentVoiceOriginal->getVoiceName ();
-
           string partCombinedName =
             fCurrentVoiceOriginal->
               fetchVoicePartUpLink ()->
@@ -1167,9 +1143,6 @@ void msr2msrTranslator::visitStart (S_msrVoice& elt)
           fCurrentVoiceOriginal->getMusicHasBeenInsertedInVoice () // superfluous test ??? JMI
           ) {
           // create a FiguredBass context
-          string voiceName =
-            fCurrentVoiceOriginal->getVoiceName ();
-
           string partCombinedName =
             fCurrentVoiceOriginal->
               fetchVoicePartUpLink ()->

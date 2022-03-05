@@ -248,6 +248,16 @@ string mfBaseName (const string& filename);
 //______________________________________________________________________________
 string  mfMakeSingleWordFromString (const string& theString);
 
+//______________________________________________________________________________
+Bool mfStringIsInStringSet (
+  const string&     theString,
+  const set<string> stringSet);
+
+void mfDisplayStringSet (
+  const string&     title,
+  const set<string> stringSet,
+  ostream&          os);
+
 
 }
 

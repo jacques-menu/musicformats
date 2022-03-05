@@ -12,9 +12,22 @@ The \mf\ \repo\ contains:
 
 When a \code{git push} is performed, the \code{musicformats-*-distrib} archives are created, but they cannot be added to the \mf\ \repo\ by \github\ on the fly.
 
-Thus, in order to create a new version, one should:
+Thus, in order to create a new version of a satisfactory state of the local development \repo, one should:
 \begin{enumerate}
-\item push a satisfactory state of the local development \repo;
+\item check that the version number and date are fine in \fileName{MusicFormatsVersionNumber.txt} and \\\fileName{MusicFormatsVersionDate.txt}:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev > cat MusicFormatsVersionNumber.txt 
+0.9.61jacquesmenu@macmini: ~/musicformats-git-dev > cat MusicFormatsVersionDate.txt 
+March 3, 2022
+\end{lstlisting}
+Note that \file{MusicFormatsVersionNumber.txt} should not end with an end of line, since that would disturb the creation of the PDF documentation files with \LaTeX;
+
+\item (re-)create the up-to-date documentation with:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./CreateDocumentationPDFs.bash
+\end{lstlisting}
+ 
+\item push to \mf\ repo with \code{git push};
 
 \item check that the actions were executed successfully at \url{https://github.com/jacques-menu/musicformats/actions};
 
@@ -28,7 +41,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev > git push
 \end{lstlisting}
 
 Now, the \masterBranch\ contains the distribution files of itself:
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=TerminalSmall]
 jacquesmenu@macmini: ~/musicformats-git-dev/distrib > ls -sal
 total 154128
      0 drwxr-xr-x  16 jacquesmenu  staff       512 Mar  3 13:18 .
@@ -49,16 +62,17 @@ total 154128
      0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-windows-distrib
 \end{lstlisting}
 
-\item create the new version \branch:
-\begin{lstlisting}[language=Terminal]
+\item create the new version \branch\ locally and remotely:
+\begin{lstlisting}[language=TerminalSmall]
 git checkout master
-git branch
+git branch v0.9.61
 git push --set-upstream master v0.9.61
 git branch
+git branch -r
 \end{lstlisting}
 
 \item create a new version number and date, for example:
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=TerminalSmall]
 jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVersionNumber.bash 0.9.62
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev
@@ -77,23 +91,22 @@ jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVer
 \end{lstlisting}
 
 \begin{lstlisting}[language=Terminal]
-
-jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVersionDate.bash "March 3, 2022"
+jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVersionDate.bash "March 4, 2022"
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev
 
-==> Writing MusicFormats version date March 3, 2022 to MusicFormatsVersionDate.txt
+==> Writing MusicFormats version date March 4, 2022 to MusicFormatsVersionDate.txt
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  14 Mar  3 13:47:11 2022 MusicFormatsVersionDate.txt
-March 3, 2022
+8 -rw-r--r--@ 1 jacquesmenu  staff  14 Mar  4 11:15:02 2022 MusicFormatsVersionDate.txt
+March 4, 2022
 
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev/src
 
-==> Writing MusicFormats version date March 3, 2022 to MusicFormatsVersionDate.h
+==> Writing MusicFormats version date March 4, 2022 to MusicFormatsVersionDate.h
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  50 Mar  3 13:47:11 2022 MusicFormatsVersionDate.h
-#define MUSICFORMATS_VERSION_DATE "March 3, 2022"
+8 -rw-r--r--@ 1 jacquesmenu  staff  50 Mar  4 11:15:02 2022 MusicFormatsVersionDate.h
+#define MUSICFORMATS_VERSION_DATE "March 4, 2022"
 \end{lstlisting}
 
 \end{enumerate}

@@ -172,20 +172,30 @@ string wholeNotesAsLilypondString (
 
   // sanity check
   if (numerator <= 0) {
-    stringstream s;
+    stringstream s1;
 
-    s <<
+    s1 <<
       "numerator is not positive in wholeNotesAsLilypondString()" <<
       ", wholeNotes = " << wholeNotes;
+
+    string message = s1.str ();
 
  //   lpsrError ( JMI
     lpsrWarning (
       gGlobalServiceRunData->getInputSourceName (),
       inputLineNumber,
   //    __FILE__, __LINE__,
-      s.str ());
+      message);
 
-    return "%{wholeNotesAsLilypondString ???%}";
+    stringstream s2;
+
+    s2 <<
+      "%{ " <<
+      message <<
+      ", line = " << inputLineNumber <<
+      " ???%}";
+
+    return s2.str ();
   }
 
 //   wholeNotes.rationalise (); // JMI ???
@@ -307,7 +317,7 @@ string wholeNotesAsLilypondString (
     lpsrDurationBinaryLogarithm (denominator);
 
   if (denominatorDurationLog == INT_MIN) {
-     string result;
+    string result;
 
     {
       stringstream s;

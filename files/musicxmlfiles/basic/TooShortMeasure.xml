@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 1.1 Partwise//EN"
+                                "http://www.musicxml.org/dtds/partwise.dtd">
+<score-partwise version="1.1">
+  <movement-title>Prélude n°3 </movement-title>
+  <identification>
+    <creator type="composer">Gentil compositeur</creator>
+    <creator type="arranger">Gentil arrangeur</creator>
+    <rights>2022</rights>
+    <encoding>
+      <software>Finale 2008 for Windows</software>
+      <software>Dolet Light for Finale 2008</software>
+      <encoding-date>2022-02-28</encoding-date>
+    </encoding>
+  </identification>
+  <defaults>
+    <scaling>
+      <millimeters>5.3034</millimeters>
+      <tenths>40</tenths>
+    </scaling>
+    <page-layout>
+      <page-height>2239</page-height>
+      <page-width>1583</page-width>
+      <page-margins type="both">
+        <left-margin>192</left-margin>
+        <right-margin>96</right-margin>
+        <top-margin>120</top-margin>
+        <bottom-margin>120</bottom-margin>
+      </page-margins>
+    </page-layout>
+    <system-layout>
+      <system-margins>
+        <left-margin>0</left-margin>
+        <right-margin>0</right-margin>
+      </system-margins>
+      <system-distance>120</system-distance>
+      <top-system-distance>47</top-system-distance>
+    </system-layout>
+    <staff-layout>
+      <staff-distance>70</staff-distance>
+    </staff-layout>
+    <music-font font-family="Maestro" font-size="15"/>
+    <word-font font-family="Times New Roman" font-size="7.5"/>
+    <lyric-font font-family="Times New Roman" font-size="7.5" name="verse"/>
+  </defaults>
+  <credit>
+    <credit-words default-x="831" default-y="1915" font-size="12.6" valign="top">à 2</credit-words>
+  </credit>
+  <credit>
+    <credit-words default-x="171" default-y="1877" font-size="12.6" valign="top">2</credit-words>
+  </credit>
+  <credit>
+    <credit-words default-x="247" default-y="1875" font-size="12.6" valign="top">s</credit-words>
+  </credit>
+  <credit>
+    <credit-words default-x="613" default-y="2093" font-size="12.6" valign="top">Essai xml</credit-words>
+  </credit>
+  <part-list>
+    <part-group number="1" type="start">
+      <group-name>WW</group-name>
+      <group-symbol default-x="-6">bracket</group-symbol>
+      <group-barline>yes</group-barline>
+    </part-group>
+    <score-part id="P1">
+      <part-name>Flûte</part-name>
+      <part-abbreviation>Fl.</part-abbreviation>
+      <score-instrument id="P1-I1">
+        <instrument-name>Flûte</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P1-I1">
+        <midi-channel>1</midi-channel>
+        <midi-program>74</midi-program>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P2">
+      <part-name>Hautbois</part-name>
+      <part-abbreviation>Hb.</part-abbreviation>
+      <score-instrument id="P2-I2">
+        <instrument-name>Hautbois</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P2-I2">
+        <midi-channel>2</midi-channel>
+        <midi-program>69</midi-program>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P3">
+      <part-name>Cor anglais</part-name>
+      <part-abbreviation>Cor. an.</part-abbreviation>
+      <score-instrument id="P3-I3">
+        <instrument-name>Cor anglais</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P3-I3">
+        <midi-channel>3</midi-channel>
+        <midi-program>70</midi-program>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P4">
+      <part-name>Clarinette en Si bémol</part-name>
+      <part-abbreviation>Cl. Sib</part-abbreviation>
+      <score-instrument id="P4-I4">
+        <instrument-name>Clarinette en Si bémol</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P4-I4">
+        <midi-channel>4</midi-channel>
+        <midi-program>72</midi-program>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P5">
+      <part-name>Basson</part-name>
+      <part-abbreviation>Bsn.</part-abbreviation>
+      <score-instrument id="P5-I5">
+        <instrument-name>Basson</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P5-I5">
+        <midi-channel>5</midi-channel>
+        <midi-program>71</midi-program>
+      </midi-instrument>
+    </score-part>
+    <part-group number="1" type="stop"/>
+    <part-group number="1" type="start">
+      <group-name>Brass</group-name>
+      <group-symbol default-x="-6">bracket</group-symbol>
+      <group-barline>yes</group-barline>
+    </part-group>
+    <score-part id="P6">
+      <part-name>Cor en Fa 1</part-name>
+      <part-abbreviation>Cor 1</part-abbreviation>
+      <score-instrument id="P6-I6">
+        <instrument-name>Cor en Fa 1</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P6-I6">
+        <midi-channel>6</midi-channel>
+        <midi-program>61</midi-program>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P7">
+      <part-name>Cor en Fa 2</part-name>
+      <part-abbreviation>Cor 2</part-abbreviation>
+      <score-instrument id="P7-I7">
+        <instrument-name>Cor en Fa 2</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P7-I7">
+        <midi-channel>7</midi-channel>
+        <midi-program>61</midi-program>
+      </midi-instrument>
+    </score-part>
+    <part-group number="1" type="stop"/>
+    <part-group number="1" type="start">
+      <group-name>Non-Pitched Percussion</group-name>
+      <group-symbol default-x="-6">bracket</group-symbol>
+      <group-barline>yes</group-barline>
+    </part-group>
+    <score-part id="P8">
+      <part-name>Triangle</part-name>
+      <part-abbreviation>Trgl.</part-abbreviation>
+      <score-instrument id="P8-X1">
+        <instrument-name>Mute Triangle</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P8-X1">
+        <midi-channel>10</midi-channel>
+        <midi-program>49</midi-program>
+        <midi-unpitched>81</midi-unpitched>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P9">
+      <part-name>Cymbales</part-name>
+      <part-abbreviation>Cym.</part-abbreviation>
+      <score-instrument id="P9-M67">
+        <instrument-name>MIDI68</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P9-M67">
+        <midi-channel>10</midi-channel>
+        <midi-program>1</midi-program>
+        <midi-unpitched>68</midi-unpitched>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P10">
+      <part-name>Crotales</part-name>
+      <part-abbreviation>Crt.</part-abbreviation>
+      <score-instrument id="P10-I10">
+        <instrument-name>Crotales</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P10-I10">
+        <midi-channel>8</midi-channel>
+        <midi-program>1</midi-program>
+      </midi-instrument>
+    </score-part>
+    <part-group number="1" type="stop"/>
+    <score-part id="P11">
+      <part-name>Harpe</part-name>
+      <part-abbreviation>Hp.</part-abbreviation>
+      <score-instrument id="P11-I11">
+        <instrument-name>Harpe</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P11-I11">
+        <midi-channel>9</midi-channel>
+        <midi-program>47</midi-program>
+      </midi-instrument>
+    </score-part>
+    <part-group number="1" type="start">
+      <group-name>Strings</group-name>
+      <group-symbol default-x="-6">bracket</group-symbol>
+      <group-barline>yes</group-barline>
+    </part-group>
+    <score-part id="P12">
+      <part-name>Violon I</part-name>
+      <part-abbreviation>Vln. I</part-abbreviation>
+      <score-instrument id="P12-I12">
+        <instrument-name>Violon I</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P12-I12">
+        <midi-channel>11</midi-channel>
+        <midi-program>49</midi-program>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P13">
+      <part-name>Violon II</part-name>
+      <part-abbreviation>Vln. II</part-abbreviation>
+      <score-instrument id="P13-I13">
+        <instrument-name>Violon II</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P13-I13">
+        <midi-channel>12</midi-channel>
+        <midi-program>49</midi-program>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P14">
+      <part-name>Alto</part-name>
+      <part-abbreviation>alt.</part-abbreviation>
+      <score-instrument id="P14-I14">
+        <instrument-name>Alto</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P14-I14">
+        <midi-channel>13</midi-channel>
+        <midi-program>49</midi-program>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P15">
+      <part-name>Violoncelle</part-name>
+      <part-abbreviation>Vc.</part-abbreviation>
+      <score-instrument id="P15-I15">
+        <instrument-name>Violoncelle</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P15-I15">
+        <midi-channel>14</midi-channel>
+        <midi-program>49</midi-program>
+      </midi-instrument>
+    </score-part>
+    <score-part id="P16">
+      <part-name>Contrebasse</part-name>
+      <part-abbreviation>Cb.</part-abbreviation>
+      <score-instrument id="P16-I16">
+        <instrument-name>Contrebasse</instrument-name>
+      </score-instrument>
+      <midi-instrument id="P16-I16">
+        <midi-channel>15</midi-channel>
+        <midi-program>49</midi-program>
+      </midi-instrument>
+    </score-part>
+    <part-group number="1" type="stop"/>
+  </part-list>
+  <!--=========================================================-->
+  <part id="P2">
+    <measure number="1" width="237">
+      <attributes>
+        <divisions>8</divisions>
+        <key>
+          <fifths>3</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>3</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+      </attributes>
+      <sound tempo="52"/>
+      <note>
+        <rest/>
+        <duration>24</duration>
+        <voice>1</voice>
+      </note>
+    </measure>
+    <!--=======================================================-->
+    <measure number="8" width="247">
+      <print new-page="yes"/>
+      <note default-x="108">
+        <rest/>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+      </note>
+      <note default-x="146">
+        <rest/>
+        <duration>8</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+      </note>
+    </measure>
+  </part>
+  <!--=========================================================-->
+  <!--=========================================================-->
+</score-partwise>

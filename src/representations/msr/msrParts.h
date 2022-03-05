@@ -294,6 +294,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  createAMeasureAndAppendItToPart (
                             int           inputLineNumber,
+                            int           previousMeasureEndInputLineNumber,
                             const string& measureNumber,
                             msrMeasureImplicitKind
                                           measureImplicitKind);

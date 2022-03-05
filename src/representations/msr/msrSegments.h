@@ -189,6 +189,7 @@ class EXP msrSegment : public msrVoiceElement
 
     S_msrMeasure          createAMeasureAndAppendItToSegment (
                             int           inputLineNumber,
+                            int           previousMeasureEndInputLineNumber,
                             const string& measureNumber,
                             msrMeasureImplicitKind
                                           measureImplicitKind);

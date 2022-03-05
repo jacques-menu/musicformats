@@ -477,6 +477,7 @@ class EXP msrVoice : public msrElement
 
     S_msrMeasure          createAMeasureAndAppendItToVoice (
                             int           inputLineNumber,
+                            int           previousMeasureEndInputLineNumber,
                             const string& measureNumber,
                             msrMeasureImplicitKind
                                           measureImplicitKind);
@@ -1340,6 +1341,9 @@ class EXP msrVoice : public msrElement
     void                  displayVoiceMeasureRepeatAndVoice (
                             int           inputLineNumber,
                             const string& context);
+
+    void                  displayVoiceMeasuresFlatList () const;
+
 
   private:
 

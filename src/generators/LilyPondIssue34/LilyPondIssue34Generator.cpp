@@ -340,6 +340,7 @@ S_msrMeasure LilyPondIssue34Generator::createMeasureInVoice (
     voice->
       createAMeasureAndAppendItToVoice (
         inputLineNumber,
+        333, //         previousMeasureEndInputLineNumber, v0.9.62
         measureNumber,
         msrMeasureImplicitKind::kMeasureImplicitKindNo);
 }

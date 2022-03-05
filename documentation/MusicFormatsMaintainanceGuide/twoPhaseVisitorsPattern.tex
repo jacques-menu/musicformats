@@ -398,6 +398,57 @@ void msrNote::browseData (basevisitor* v)
 }
 \end{lstlisting}
 
+Choosing which elements to browse can be more selective:
+\begin{lstlisting}[language=Terminal]
+void msrStaff::browseData (basevisitor* v)
+{
+  // ... ... ...
+
+  if (fStaffAllVoicesList.size ()) {
+    for (S_msrVoice voice : fStaffAllVoicesList) {
+      // is this voice name in the ignore voices set?
+      Bool ignoreVoice (false);
+
+      string voiceName =
+        voice->
+          getVoiceName ();
+
+      const set<string>&
+        ignoreMsrVoicesSet =
+          gGlobalMsr2msrOahGroup->
+            getIgnoreMsrVoicesSet ();
+
+  		// ... ... ...
+
+      if (ignoreMsrVoicesSet.size ()) {
+        ignoreVoice =
+          mfStringIsInStringSet (
+            voiceName,
+            ignoreMsrVoicesSet);
+      }
+
+      if (ignoreVoice) {
+#ifdef TRACING_IS_ENABLED // JMI
+        if (gGlobalTracingOahGroup->getTraceVoices ()) {
+          gLogStream <<
+            "Ignoring voice \"" <<
+            voiceName <<
+            "\"" <<
+            endl;
+        }
+#endif
+      }
+
+      else {
+        msrBrowser<msrVoice> browser (v);
+        browser.browse (*voice);
+      }
+    } // for
+  }
+
+  // ... ... ...
+}
+\end{lstlisting}
 
 % -------------------------------------------------------------------------
 \section{Adapting visitors to data browsing order with booleans}

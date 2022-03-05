@@ -30,8 +30,10 @@
 
 #include "oahOah.h"
 
-#include "mxsr2msrOah.h"
+#include "oahOah.h"
 #include "msrOah.h"
+#include "mxsr2msrOah.h"
+#include "msr2msrOah.h"
 
 #include "msrBrowsers.h"
 
@@ -492,6 +494,7 @@ const int msrStaff::getStaffNumberOfMusicVoices () const
 
 void msrStaff::createAMeasureAndAppendItToStaff (
   int           inputLineNumber,
+  int           previousMeasureEndInputLineNumber,
   const string& measureNumber,
   msrMeasureImplicitKind
                 measureImplicitKind)
@@ -518,6 +521,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
     voice->
       createAMeasureAndAppendItToVoice (
         inputLineNumber,
+        previousMeasureEndInputLineNumber,
         measureNumber,
         measureImplicitKind);
   } // for
@@ -2813,8 +2817,50 @@ void msrStaff::browseData (basevisitor* v)
 
   if (fStaffAllVoicesList.size ()) {
     for (S_msrVoice voice : fStaffAllVoicesList) {
-      msrBrowser<msrVoice> browser (v);
-      browser.browse (*voice);
+      // is this voice name in the ignore voices set?
+      Bool ignoreVoice (false);
+
+      string voiceName =
+        voice->
+          getVoiceName ();
+
+      const set<string>&
+        ignoreMsrVoicesSet =
+          gGlobalMsr2msrOahGroup->
+            getIgnoreMsrVoicesSet ();
+
+#ifdef TRACING_IS_ENABLED // JMI
+      if (gGlobalTracingOahGroup->getTraceVoices ()) {
+        mfDisplayStringSet (
+          "ignoreMsrVoicesSet",
+          ignoreMsrVoicesSet,
+          gLogStream);
+      }
+#endif
+
+      if (ignoreMsrVoicesSet.size ()) {
+        ignoreVoice =
+          mfStringIsInStringSet (
+            voiceName,
+            ignoreMsrVoicesSet);
+      }
+
+      if (ignoreVoice) {
+#ifdef TRACING_IS_ENABLED // JMI
+        if (gGlobalTracingOahGroup->getTraceVoices ()) {
+          gLogStream <<
+            "Ignoring voice \"" <<
+            voiceName <<
+            "\"" <<
+            endl;
+        }
+#endif
+      }
+
+      else {
+        msrBrowser<msrVoice> browser (v);
+        browser.browse (*voice);
+      }
     } // for
   }
 

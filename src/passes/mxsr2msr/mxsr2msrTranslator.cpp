@@ -161,6 +161,8 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fPartFirstMeasureNumber = "";
   fCurrentMeasureNumber = "???";
 
+  fPreviousMeasureEndInputLineNumber = -1;
+
   // transpose handling
   fCurrentTransposeNumber = -213;
   fCurrentTransposeDiatonic = -214;
@@ -2195,6 +2197,8 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   fScoreFirstMeasureNumber = "";
   fPartFirstMeasureNumber = "";
   fCurrentMeasureNumber = "???";
+
+  fPreviousMeasureEndInputLineNumber = -1;
 
   fCurrentMusicXMLStaffNumber = msrStaff::K_NO_STAFF_NUMBER;
   fCurrentMusicXMLVoiceNumber = msrVoice::K_NO_VOICE_NUMBER;
@@ -8336,8 +8340,12 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   fCurrentPart->
     createAMeasureAndAppendItToPart (
       inputLineNumber,
+      fPreviousMeasureEndInputLineNumber,
       fCurrentMeasureNumber,
       measureImplicitKind);
+
+  fPreviousMeasureEndInputLineNumber = inputLineNumber;
+
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 

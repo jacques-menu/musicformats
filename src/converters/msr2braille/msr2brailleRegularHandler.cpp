@@ -439,10 +439,10 @@ void msr2brailleRegularHandler::createPartsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("msr-ignore-musicxml-part-id", subGroup);
-  registerAtomInRegularSubgroup ("msr-ignore-musicxml-part-name", subGroup);
-  registerAtomInRegularSubgroup ("msr-keep-musicxml-part-id", subGroup);
-  registerAtomInRegularSubgroup ("msr-keep-musicxml-part-name", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-part-id", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-part-name", subGroup);
+  registerAtomInRegularSubgroup ("keep-musicxml-part-id", subGroup);
+  registerAtomInRegularSubgroup ("keep-musicxml-part-name", subGroup);
   registerAtomInRegularSubgroup ("msr-rename-part", subGroup);
 }
 
@@ -506,6 +506,8 @@ void msr2brailleRegularHandler::createVoicesRegularGroup ()
     appendSubGroupToGroup (subGroup);
 
   // atoms
+
+  registerAtomInRegularSubgroup ("ignore-msr-voice", subGroup);
 
   registerAtomInRegularSubgroup ("create-single-line-staves-as-rythmic", subGroup);
 }

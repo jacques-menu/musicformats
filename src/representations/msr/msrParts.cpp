@@ -547,6 +547,7 @@ string msrPart::getPartCombinedName () const
 
 void msrPart::createAMeasureAndAppendItToPart (
   int           inputLineNumber,
+  int           previousMeasureEndInputLineNumber,
   const string& measureNumber,
   msrMeasureImplicitKind
                 measureImplicitKind)
@@ -573,6 +574,7 @@ void msrPart::createAMeasureAndAppendItToPart (
     staff->
       createAMeasureAndAppendItToStaff (
         inputLineNumber,
+        previousMeasureEndInputLineNumber,
         measureNumber,
         measureImplicitKind);
   } // for
@@ -2574,8 +2576,13 @@ void msrPart::printPartMeasuresWholeNotesDurationsVector (
         setw (3) << right <<
         j << " : " <<
         setw (4) <<
-        fPartMeasuresWholeNotesDurationsVector [ i ].toString () <<
-        endl;
+        fPartMeasuresWholeNotesDurationsVector [ i ].toString ();
+
+      if (i % 3 == 1) {
+        os << endl;
+      }
+
+      os << endl;
     } // for
 
     --gIndenter;

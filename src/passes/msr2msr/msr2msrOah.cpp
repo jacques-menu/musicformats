@@ -653,7 +653,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // book
+  // avoid msr2msr
   // --------------------------------------
 
   subGroup->
@@ -664,7 +664,7 @@ R"(Avoid the msr2msr pass, for TESTS.)",
         "fAvoidMsr2msr",
         fAvoidMsr2msr));
 
-  // book
+  // expand to harmony band
   // --------------------------------------
 
   subGroup->
@@ -674,6 +674,37 @@ R"(Avoid the msr2msr pass, for TESTS.)",
 R"(Expand the book to as many scores as needed for a harmony band.)",
         "fExpandToHarmonyBandBook",
         fExpandToHarmonyBandBook));
+}
+
+void msr2msrOahGroup::initializeVoicesOptions ()
+{
+  S_oahSubGroup subGroup =
+    oahSubGroup::create (
+      "Voices",
+      "help-msr2msr-voices", "hmsrv",
+R"()",
+    oahElementVisibilityKind::kElementVisibilityWhole,
+    this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // ignore MSR voices
+  // --------------------------------------
+
+  fIgnoreMsrVoicesSetAtom =
+    oahStringSetElementAtom::create (
+      "ignore-msr-voice", "imv",
+R"(Ignore voice VOICE_NAME in the MSR data
+when creating a new MSR from an existing one.
+An example name is Part_POne_Staff_One_Voice_Two.
+There can be several occurrences of this option.)",
+      "voice",
+      "fIgnoreMsrVoicesSet",
+      fIgnoreMsrVoicesSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fIgnoreMsrVoicesSetAtom);
 }
 
 void msr2msrOahGroup::initializeBreakOptions ()
@@ -826,6 +857,9 @@ void msr2msrOahGroup::initializeMsr2msrOahGroup ()
   // --------------------------------------
   initializeBookOptions ();
 
+  // voices
+  initializeVoicesOptions ();
+
   // breaks
   initializeBreakOptions ();
 
@@ -959,6 +993,45 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
     "fExpandToHarmonyBandBook" << " : " <<
     fExpandToHarmonyBandBook <<
     endl;
+
+  --gIndenter;
+
+
+  // voices
+  // --------------------------------------
+
+  gLogStream <<
+    "Voices:" <<
+    endl;
+
+  ++gIndenter;
+
+  mfDisplayStringSet (
+    "fIgnoreMsrVoicesSet",
+    fIgnoreMsrVoicesSet,
+    gLogStream);
+
+  --gIndenter;
+
+
+  // breaks
+  // --------------------------------------
+
+  gLogStream <<
+    "Breaks:" <<
+    endl;
+
+  ++gIndenter;
+
+  mfDisplayStringSet (
+    "fInserPageBreakAfterMeasureSet",
+    fInserPageBreakAfterMeasureSet,
+    gLogStream);
+
+  mfDisplayStringSet (
+    "fInserLineBreakAfterMeasureSet",
+    fInserLineBreakAfterMeasureSet,
+    gLogStream);
 
   --gIndenter;
 

@@ -810,6 +810,7 @@ void msdlParser::createMeasureNumber (
     fCurrentVoice->
       createAMeasureAndAppendItToVoice (
         inputLineNumber,
+        333, //         previousMeasureEndInputLineNumber, v0.9.62
         s.str (),
         msrMeasureImplicitKind::kMeasureImplicitKindNo);
 }
