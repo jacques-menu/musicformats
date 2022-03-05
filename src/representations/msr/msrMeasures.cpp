@@ -5665,7 +5665,7 @@ void msrMeasure::finalizeMeasure (
           getSegmentVoiceUpLink ()->
             getVoiceName () <<
         "\" (" << context << ")" <<
-        ", line " << inputLineNumber <<
+        ", lines " << inputLineNumber << " .. " << fMeasureEndInputLineNumber << // JMI
         endl;
     }
 #endif
@@ -6282,6 +6282,11 @@ void msrMeasure::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
+    "fMeasureEndInputLineNumber" << " : " <<
+    fMeasureEndInputLineNumber <<
+    endl <<
+
+    setw (fieldWidth) <<
     "fMeasureEndRegularKind" << " : " <<
     measureEndRegularKindAsString (
       fMeasureEndRegularKind) <<
@@ -6536,6 +6541,11 @@ void msrMeasure::printShort (ostream& os) const
     setw (fieldWidth) <<
     "fMeasureDebugNumber" << " : " <<
     fMeasureDebugNumber <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fMeasureEndInputLineNumber" << " : " <<
+    fMeasureEndInputLineNumber <<
     endl;
 
   os << left <<

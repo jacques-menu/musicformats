@@ -541,12 +541,12 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // MSR ignore MusicXML part ID
+  // ignore MusicXML part ID
   // --------------------------------------
 
   fIgnorePartIDAtom =
     oahStringSetElementAtom::create (
-      "msr-ignore-musicxml-part-id", "mompi",
+      "ignore-musicxml-part-id", "mompi",
 R"(Ignore the part with ID PART_ID, which is a string.
 There can be several occurrences of this option.
 All the parts not ignored are kept.
@@ -559,12 +559,12 @@ This option is incompatible with '-mkpi, -msr-keep-musicxml-part-id'.)",
     appendAtomToSubGroup (
       fIgnorePartIDAtom);
 
-  // MSR ignore MusicXML part name
+  // ignore MusicXML part name
   // --------------------------------------
 
   fIgnorePartNameAtom =
     oahStringSetElementAtom::create (
-      "msr-ignore-musicxml-part-name", "mompn",
+      "ignore-musicxml-part-name", "mompn",
 R"(Ignore the part named PART_NAME, which is a string.
 There can be several occurrences of this option.
 All the parts not ignored are kept.
@@ -577,12 +577,12 @@ This option is incompatible with '-mkpn, -msr-keep-musicxml-part-name'.)",
     appendAtomToSubGroup (
       fIgnorePartNameAtom);
 
-  // MSR keep MusicXML part ID
+  // keep MusicXML part ID
   // --------------------------------------
 
   fKeepPartIDAtom =
     oahStringSetElementAtom::create (
-      "msr-keep-musicxml-part-id", "mkmpi",
+      "keep-musicxml-part-id", "mkmpi",
 R"(Keep the part with ID PART_ID, which is a string.
 There can be several occurrences of this option.
 All the parts not kept are ignored.
@@ -595,12 +595,12 @@ This option is incompatible with '-mopi, -msr-ignore-musicxml-part-id'.)",
     appendAtomToSubGroup (
       fKeepPartIDAtom);
 
-  // MSR keep MusicXML part name
+  // keep MusicXML part name
   // --------------------------------------
 
   fKeepPartNameAtom =
     oahStringSetElementAtom::create (
-      "msr-keep-musicxml-part-name", "mkmpn",
+      "keep-musicxml-part-name", "mkmpn",
 R"(Keep the part named PART_NAME, which is a string.
 There can be several occurrences of this option.
 All the parts not kept are ignored.

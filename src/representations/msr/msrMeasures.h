@@ -157,6 +157,12 @@ class EXP msrMeasure : public msrElement
     Bool                  getMeasureFirstInVoice () const
                               { return fMeasureFirstInVoice; }
 
+    void                  setMeasureEndInputLineNumber (int value)
+                              { fMeasureEndInputLineNumber = value; }
+
+    int                   getMeasureEndInputLineNumber () const
+                              { return fMeasureEndInputLineNumber; }
+
     // measure lengthes, in whole notes
 
     void                  setFullMeasureWholeNotesDuration (
@@ -677,6 +683,10 @@ class EXP msrMeasure : public msrElement
 
     static int            gGlobalMeasureDebugNumber;
     int                   fMeasureDebugNumber;
+
+    // measure end line number
+
+    int                   fMeasureEndInputLineNumber;
 
     // first measure in voice?
 

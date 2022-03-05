@@ -1267,6 +1267,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
 
 S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
   int           inputLineNumber,
+  int           previousMeasureEndInputLineNumber,
   const string& measureNumber,
   msrMeasureImplicitKind
                 measureImplicitKind)
@@ -1329,6 +1330,7 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
       fVoiceLastSegment->
         createAMeasureAndAppendItToSegment (
           inputLineNumber,
+          previousMeasureEndInputLineNumber,
           measureNumber,
           measureImplicitKind);
 
@@ -3008,6 +3010,7 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
     // then create the first measure
     createAMeasureAndAppendItToVoice (
       inputLineNumber,
+      333, //         previousMeasureEndInputLineNumber, v0.9.62
       graceNotesGroup->
         getGraceNotesGroupMeasureNumber (),
       msrMeasureImplicitKind::kMeasureImplicitKindNo);
@@ -3589,6 +3592,117 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
   displayVoice (
     inputLineNumber,
     context);
+}
+
+// v0.9.62
+//   // print the voice measures flat list
+//   unsigned int voiceMeasuresFlatListSize =
+//     fVoiceMeasuresFlatList.size ();
+//
+//   os <<
+//     setw (fieldWidth) <<
+//     "fVoiceMeasuresFlatList";
+//   if (voiceMeasuresFlatListSize) {
+//     os <<
+//       mfSingularOrPlural (
+//         voiceMeasuresFlatListSize, "element", "elements");
+//   }
+//   else {
+//     os <<
+//       " : " << "empty";
+//   }
+//   os << endl;
+//
+//   if (voiceMeasuresFlatListSize) {
+//     ++gIndenter;
+//
+//     list<S_msrMeasure>::const_iterator
+//       iBegin = fVoiceMeasuresFlatList.begin (),
+//       iEnd   = fVoiceMeasuresFlatList.end (),
+//       i      = iBegin;
+//
+//     for ( ; ; ) {
+//       S_msrMeasure measure = (*i);
+//
+//       // print the measure
+//       if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+//         os <<
+//           measure->asShortStringForMeasuresSlices ();
+//       }
+//       else {
+//         os <<
+//           measure->getMeasureElementMeasureNumber ();
+//       }
+//       if (++i == iEnd) break;
+//       os << endl;
+//     } // for
+//     os << endl;
+//
+//     --gIndenter;
+//   }
+
+void msrVoice::displayVoiceMeasuresFlatList () const
+{
+  unsigned int voiceMeasuresFlatListSize =
+    fVoiceMeasuresFlatList.size ();
+
+  const int fieldWidth = 7;
+
+  gLogStream <<
+    setw (fieldWidth) <<
+    "fVoiceMeasuresFlatList" << " : ";
+  if (voiceMeasuresFlatListSize) {
+    gLogStream <<
+      " : " <<
+      mfSingularOrPlural (
+        voiceMeasuresFlatListSize, "element", "elements");
+  }
+  else {
+    gLogStream << "empty";
+  }
+  gLogStream << endl;
+
+  if (voiceMeasuresFlatListSize) {
+    ++gIndenter;
+
+    list<S_msrMeasure>::const_iterator
+      iBegin = fVoiceMeasuresFlatList.begin (),
+      iEnd   = fVoiceMeasuresFlatList.end (),
+      i      = iBegin;
+
+    int counter = 0;
+    for ( ; ; ) {
+      ++counter;
+
+      S_msrMeasure measure = (*i);
+
+      // print the measure
+#ifdef TRACING_IS_ENABLED
+//      if (gGlobalTracingOahGroup->getTraceMeasures ()) { // CAFE JMI
+        gLogStream << measure->asShortStringForMeasuresSlices ();
+//      }
+//      else {
+//        gLogStream << measure->getMeasureElementMeasureNumber ();
+ //     }
+#else
+      gLogStream << measure->getMeasureElementMeasureNumber ();
+#endif
+
+      if (++i == iEnd) break;
+
+      if (counter % 8 == 1) {
+        gLogStream << ' ';
+      }
+      else {
+        gLogStream << endl;
+      }
+    } // for
+    gLogStream << endl;
+
+    --gIndenter;
+  }
+
+  gLogStream << endl;
 }
 
 void msrVoice::displayVoiceFullMeasureRests (
@@ -4229,6 +4343,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
           // and append it to the voice,
           createAMeasureAndAppendItToVoice (
             inputLineNumber,
+            333, //         previousMeasureEndInputLineNumber, v0.9.62
             lastMeasureInLastSegment->getMeasureElementMeasureNumber (),
             msrMeasureImplicitKind::kMeasureImplicitKindNo);
 
@@ -4922,6 +5037,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
     // and append it to the voice,
     createAMeasureAndAppendItToVoice (
       inputLineNumber,
+      333, //         previousMeasureEndInputLineNumber, v0.9.62
       measureNumber,
       msrMeasureImplicitKind::kMeasureImplicitKindNo);
 
@@ -10575,55 +10691,7 @@ void msrVoice::print (ostream& os) const
   os << endl;
 
   // print the voice measures flat list
-  unsigned int voiceMeasuresFlatListSize =
-    fVoiceMeasuresFlatList.size ();
-
-  os <<
-    setw (fieldWidth) <<
-    "fVoiceMeasuresFlatList" << " : ";
-  if (voiceMeasuresFlatListSize) {
-    os <<
-      " : " <<
-      mfSingularOrPlural (
-        voiceMeasuresFlatListSize, "element", "elements");
-  }
-  else {
-    os << "empty";
-  }
-  os << endl;
-
-  if (voiceMeasuresFlatListSize) {
-    ++gIndenter;
-
-    list<S_msrMeasure>::const_iterator
-      iBegin = fVoiceMeasuresFlatList.begin (),
-      iEnd   = fVoiceMeasuresFlatList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_msrMeasure measure = (*i);
-
-      // print the measure
-#ifdef TRACING_IS_ENABLED
-//      if (gGlobalTracingOahGroup->getTraceMeasures ()) { // CAFE JMI
-        os << measure->asShortStringForMeasuresSlices ();
-//      }
-//      else {
-//        os << measure->getMeasureElementMeasureNumber ();
- //     }
-#else
-      os << measure->getMeasureElementMeasureNumber ();
-#endif
-
-      if (++i == iEnd) break;
-      os << ' ';
-    } // for
-    os << endl;
-
-    --gIndenter;
-  }
-
-  os << endl;
+  displayVoiceMeasuresFlatList ();
 
   // print the voice initial elements
   unsigned int voiceInitialElementsListSize =
@@ -10748,51 +10816,7 @@ void msrVoice::printShort (ostream& os) const
   const int fieldWidth = 41;
 
 #ifdef TRACING_IS_ENABLED
-  // print the voice measures flat list
-  unsigned int voiceMeasuresFlatListSize =
-    fVoiceMeasuresFlatList.size ();
-
-  os <<
-    setw (fieldWidth) <<
-    "fVoiceMeasuresFlatList";
-  if (voiceMeasuresFlatListSize) {
-    os <<
-      mfSingularOrPlural (
-        voiceMeasuresFlatListSize, "element", "elements");
-  }
-  else {
-    os <<
-      " : " << "empty";
-  }
-  os << endl;
-
-  if (voiceMeasuresFlatListSize) {
-    ++gIndenter;
-
-    list<S_msrMeasure>::const_iterator
-      iBegin = fVoiceMeasuresFlatList.begin (),
-      iEnd   = fVoiceMeasuresFlatList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      S_msrMeasure measure = (*i);
-
-      // print the measure
-      if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-        os <<
-          measure->asShortStringForMeasuresSlices ();
-      }
-      else {
-        os <<
-          measure->getMeasureElementMeasureNumber ();
-      }
-      if (++i == iEnd) break;
-      os << endl;
-    } // for
-    os << endl;
-
-    --gIndenter;
-  }
+  displayVoiceMeasuresFlatList ();
 #endif
 
   // print the voice initial elements

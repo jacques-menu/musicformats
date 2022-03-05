@@ -353,6 +353,7 @@ void msrSegment::assertSegmentMeasuresListIsNotEmpty (
 
 S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
   int           inputLineNumber,
+  int           previousMeasureEndInputLineNumber,
   const string& measureNumber,
   msrMeasureImplicitKind
                 measureImplicitKind)
@@ -410,6 +411,28 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
         inputLineNumber,
         measureNumber,
         this);
+
+  // set measure end line number
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    gLogStream <<
+      "Setting measure end line number for " << // JMI
+      measureNumber <<
+      " to " <<
+      previousMeasureEndInputLineNumber <<
+//       " in segment '" << // JMI
+//       fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+//       "' in voice \"" <<
+//       fMeasureSegmentUpLink->
+//         getSegmentVoiceUpLink ()->
+//           getVoiceName () <<
+      endl;
+  }
+#endif
+
+  result->
+    setMeasureEndInputLineNumber (
+      previousMeasureEndInputLineNumber);
 
   // set result's ordinal number
   result->

@@ -60,6 +60,16 @@ S_mfcPassComponent createMsr2msrComponent ()
             "Added 'generate-stems-directions, ksd' option to lpsr2lilypond"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.62"),
+          "March 5, 2022",
+          list<string> {
+            "Added '-ignore-msr-voice, -imv' option"
+          }
+      ));
   }
 
   return pPassComponent;

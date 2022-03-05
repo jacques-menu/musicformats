@@ -1496,6 +1496,79 @@ string mfMakeSingleWordFromString (const string& theString)
   return result;
 }
 
+//______________________________________________________________________________
+Bool mfStringIsInStringSet (
+  const string&     theString,
+  const set<string> stringSet)
+{
+  Bool result (false);
+
+  if (stringSet.size ()) {
+    set<string>::iterator
+      it =
+        stringSet.find (
+          theString);
+
+    if (it != stringSet.end ()) {
+      result = true;
+    }
+  }
+
+  return result;
+}
+
+void mfDisplayStringSet (
+  const string&     title,
+  const set<string> stringSet,
+  ostream&          os)
+{
+  // print the title
+  os << title << endl;
+
+  // print the set elements if any
+  os << title << ":";
+
+  unsigned int stringSetSize =
+    stringSet.size ();
+
+  if (stringSetSize) {
+    os << endl;
+
+    ++gIndenter;
+
+    set<string>::const_iterator
+      iBegin = stringSet.begin (),
+      iEnd   = stringSet.end (),
+      i      = iBegin;
+
+    unsigned int nextToLast =
+      stringSetSize - 1;
+
+    unsigned int count = 0;
+
+    for ( ; ; ) {
+      ++count;
+
+      os << "\"" << (*i) << "\"";
+      if (++i == iEnd) break;
+
+      if (count == nextToLast) {
+        os << " and ";
+      }
+      else if (count != stringSetSize) {
+        os << ", ";
+      }
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << " empty";
+  }
+
+  os << endl;
+}
+
 
 }
 

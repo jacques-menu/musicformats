@@ -482,6 +482,51 @@ showstringspaces=false,
 \lstset{style=Terminal}}{}
 
 
+% TerminalSmall definition; copied from lstdrvrs.dtx
+\lstdefinelanguage{TerminalSmall}%
+{%
+	morekeywords={%
+		% sh
+	  awk,break,case,cat,cd,continue,do,done,echo,elif,else,%
+    env,esac,eval,exec,exit,export,expr,false,fi,for,function,getopts,%
+    hash,history,if,in,kill,login,newgrp,nice,nohup,ps,pwd,read,%
+    readonly,return,set,sed,shift,test,then,times,trap,true,type,%
+    ulimit,umask,unset,until,wait,while,%
+    % bash
+		alias,bg,bind,builtin,caller,command,compgen,compopt,%
+    complete,coproc,declare,disown,dirs,enable,fc,fg,help,history,%
+    jobs,let,local,logout,mapfile,printf,pushd,popd,readarray,select,%
+    set,suspend,shopt,source,times,type,typeset,ulimit,unalias,wait,%
+    % our own
+		cd,ls,ll,cat,more,%
+		make,%
+		RandomChords,RandomMusic,countnotes,%
+		xml2guido,%
+		xml2gmn,xml2ly,xml2brl,xml2xml,msdlcompiler%
+		Mikrokosmos3Wandering,LilyPondIssue34,%
+		%
+		sudo,%
+	},%
+  % sensitive,%
+  morecomment=[l]\#,%
+  morestring=[d]",%
+  morestring=[d]’%
+}[keywords,comments,strings]%
+
+\lstdefinestyle{TerminalSmall}{
+language=TerminalSmall,
+basicstyle=\scriptsize\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{TerminalSmall}{
+\lstset{style=TerminalSmall}}{}
+
+
 % CPlusPlus
 
 % modified C++ definition; copied from lstdrvrs.dtx

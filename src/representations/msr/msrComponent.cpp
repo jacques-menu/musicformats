@@ -80,6 +80,16 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
             "Added msrCrescDecresc to MSR"
           }
       ));
+
+    pRepresentationComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.62"),
+          "November 27, 2021",
+          list<string> {
+            "Added measure end line numbers to MSR"
+          }
+      ));
   }
 
   return pRepresentationComponent;

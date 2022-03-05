@@ -2334,7 +2334,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          "%{ line " << inputLineNumber << "%}" <<
+          " %{ line " << inputLineNumber << "%}" <<
           " ~  %{ kUnpitchedNote %}"; // JMI spaces???
       }
     }
@@ -2586,7 +2586,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInTuplet (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          "%{ line " << inputLineNumber << " %}" <<
+          " %{ line " << inputLineNumber << " %}" <<
           "~  %{ kTupletMemberNote %}"; // JMI spaces???
       }
     }
@@ -2656,7 +2656,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInTuplet (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          "%{ line " << inputLineNumber << " %}" <<
+          " %{ line " << inputLineNumber << " %}" <<
           "~  %{ kTupletUnpitchedMemberNote %}";
       }
     }
@@ -2724,7 +2724,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInGraceNotesGroup (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          "%{ line " << inputLineNumber << " %}" <<
+          " %{ line " << inputLineNumber << " %}" <<
           "~  %{ kGraceNote %}";
       }
     }
@@ -2876,7 +2876,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInChordInGraceNotesGroup (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          "%{ line " << inputLineNumber << " %}" <<
+          " %{ line " << inputLineNumber << " %}" <<
           "~  %{ msrNoteKind::kNoteInChordInGraceNotesGroup %}";
       }
     }
@@ -3058,7 +3058,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
     if (noteTie) {
       if (noteTie->getTieKind () == msrTieKind::kTieStart) {
         fLilypondCodeStream <<
-          "%{ line " << inputLineNumber << " %}" <<
+          " %{ line " << inputLineNumber << " %}" <<
           " ~ %{ kDoubleTremoloMemberNote %}";
       }
     }
@@ -3380,7 +3380,6 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
     articulationKind =
       articulation->getArticulationKind ();
 
-
   if (doGeneratePlacement) {
     // dont generate a placement for breath marks JMI v0.9.61
 //     switch (articulationKind) {
@@ -3550,19 +3549,38 @@ void lpsr2lilypondTranslator::generateChordArticulation (
   }
 #endif
 
-  switch (articulation->getArticulationPlacementKind ()) {
+  // JMI v0.9.62
+  msrArticulation::msrArticulationKind
+    articulationKind =
+      articulation->getArticulationKind ();
+
+  switch (articulation->getArticulationPlacementKind ()) { // JMI v0.9.62
     case msrPlacementKind::k_NoPlacement:
       fLilypondCodeStream << "-";
       break;
+
     case msrPlacementKind::kPlacementAbove:
       fLilypondCodeStream << "^";
       break;
+
     case msrPlacementKind::kPlacementBelow:
-      fLilypondCodeStream << "_";
+      switch (articulationKind) {
+        case msrArticulation::k_NoArticulation:
+          break;
+
+        case msrArticulation::kAccent:
+          fLilypondCodeStream << ">";
+          break;
+        case msrArticulation::kBreathMark:
+          //  JMI v0.9.62      fLilypondCodeStream << "\\breathe";
+          break;
+        default:
+          fLilypondCodeStream << "_";
+      } // switch
       break;
   } // switch
 
-  switch (articulation->getArticulationKind ()) {
+  switch (articulationKind) {
     case msrArticulation::k_NoArticulation:
       break;
 
@@ -3570,7 +3588,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
       fLilypondCodeStream << ">";
       break;
     case msrArticulation::kBreathMark:
-      fLilypondCodeStream << "\\breathe";
+//  JMI v0.9.62      fLilypondCodeStream << "\\breathe";
       break;
     case msrArticulation::kCaesura:
     /* JMI
@@ -12934,7 +12952,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
             // generate information and line number as a comment
             fLilypondCodeStream <<
-              "%{ line " <<
+              " %{ line " <<
               elt->getInputLineNumber () <<
               " %}";
           }
@@ -13268,8 +13286,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrClef& elt)
           break;
       } // switch
 
-    fLilypondCodeStream <<
-      endl;
+      if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+        fLilypondCodeStream <<
+          " %{ " << elt->getInputLineNumber () << " %}";
+      }
+
+      fLilypondCodeStream << endl;
     }
   }
 
@@ -13395,8 +13417,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
               fLilypondCodeStream <<
                 " " <<
                 msrModeKindAsLilypondString (
-                  modeKindToBeUsed) <<
-                endl;
+                  modeKindToBeUsed);
+
+                if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+                  fLilypondCodeStream <<
+                    " %{ " << elt->getInputLineNumber () << " %}";
+                }
+
+                fLilypondCodeStream << endl;
               }
             break;
 
@@ -13651,8 +13679,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
             "\\time " <<
             beatsNumbersVector [0] << // the only element
             "/" <<
-            timeSignatureItem->getTimeSignatureBeatValue () <<
-            endl;
+            timeSignatureItem->getTimeSignatureBeatValue ();
         }
 
         else {
@@ -13704,10 +13731,16 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
             }
           } // for
 
-        fLilypondCodeStream <<
-          ")" <<
-          endl;
+          fLilypondCodeStream <<
+            ")";
         }
+
+        if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+          fLilypondCodeStream <<
+            " %{ " << elt->getInputLineNumber () << " %}";
+        }
+
+        fLilypondCodeStream << endl;
       }
 
       else {
@@ -16595,7 +16628,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
               if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
                 // generate the input line number as a comment
                 fLilypondCodeStream <<
-                  "%{ line " << beam->getInputLineNumber () << " kBeamBegin %} ";
+                  " %{ line " << beam->getInputLineNumber () << " kBeamBegin %} ";
               }
             }
           }
@@ -16612,7 +16645,7 @@ void lpsr2lilypondTranslator::generateNoteBeams (
               if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
                 // generate the input line number as a comment
                 fLilypondCodeStream <<
-                  "%{ line " << beam->getInputLineNumber () << " kBeamEnd %} ";
+                  " %{ line " << beam->getInputLineNumber () << " kBeamEnd %} ";
               }
             }
           }
@@ -16729,7 +16762,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
             // generate the input line number as a comment
             fLilypondCodeStream <<
-              "%{ line " << slur->getInputLineNumber () << " AA %} ";
+              " %{ line " << slur->getInputLineNumber () << " AA %} ";
           }
           break;
 
@@ -16754,7 +16787,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
             // generate the input line number as a comment
             fLilypondCodeStream <<
-              "%{ line " << slur->getInputLineNumber () << " BB %} ";
+              " %{ line " << slur->getInputLineNumber () << " BB %} ";
           }
 
           switch (slur->getSlurPlacementKind ()) {
@@ -16784,7 +16817,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
             // generate the input line number as a comment
             fLilypondCodeStream <<
-              "%{ line " << slur->getInputLineNumber () << " CC %} ";
+              " %{ line " << slur->getInputLineNumber () << " CC %} ";
           }
           break;
 
@@ -16809,7 +16842,7 @@ void lpsr2lilypondTranslator::generateNoteSlurs (
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
             // generate the input line number as a comment
             fLilypondCodeStream <<
-              "%{ line " << slur->getInputLineNumber () << "DD %} ";
+              " %{ line " << slur->getInputLineNumber () << "DD %} ";
           }
           break;
       } // switch
@@ -20510,7 +20543,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
       if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
         // generate the input line number as a comment
         fLilypondCodeStream <<
-          "%{ line " << originalSlur->getInputLineNumber () << " chord %} ";
+          " %{ line " << originalSlur->getInputLineNumber () << " chord %} ";
       }
     } // for
   }
@@ -20780,7 +20813,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrChord& elt)
   // generate the start of the chord
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     fLilypondCodeStream <<
-      "%{ line " << elt->getInputLineNumber () << " %} " <<
+      " %{ line " << elt->getInputLineNumber () << " %} " <<
       endl;
   }
 
@@ -20921,7 +20954,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     fLilypondCodeStream <<
-      "%{ line " << inputLineNumber << " %} " <<
+      " %{ line " << inputLineNumber << " %} " <<
       endl;
   }
 
@@ -21262,8 +21295,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrHiddenMeasureAndBarLine& elt)
 
   fLilypondCodeStream <<
     "\\HiddenMeasureAndBarLine " <<
-    "\\time " <<
-    "4/4 ";
+    "\\time 4/4";
+
+  if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+    fLilypondCodeStream <<
+      " %{ " << elt->getInputLineNumber () << " %}";
+  }
+
+  fLilypondCodeStream << endl;
 }
 
 void lpsr2lilypondTranslator::visitStart (S_msrCoda& elt)
@@ -21653,7 +21692,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
       if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
         // generate the barLine line number as a comment
         fLilypondCodeStream <<
-          "%{ line " << inputLineNumber << " %} ";
+          " %{ line " << inputLineNumber << " %} ";
       }
 
       fLilypondCodeStream << endl;
@@ -21675,7 +21714,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
             // generate the input line number as a comment
             fLilypondCodeStream <<
-              "%{ line " << note->getInputLineNumber () << " %} ";
+              " %{ line " << note->getInputLineNumber () << " %} ";
           }
           fLilypondCodeStream << endl;
           break;
@@ -21769,7 +21808,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
 
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     fLilypondCodeStream <<
-      "%{ line " << inputLineNumber << " %}";
+      " %{ line " << inputLineNumber << " %}";
   }
 }
 
@@ -21877,7 +21916,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
     if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
       // generate the line number as a comment
       fLilypondCodeStream <<
-        "%{ line " << inputLineNumber << " %} ";
+        " %{ line " << inputLineNumber << " %} ";
     }
 
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
@@ -21991,7 +22030,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
     if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
       // generate the line number as a comment
       fLilypondCodeStream <<
-        "%{ line " << inputLineNumber << " %} ";
+        " %{ line " << inputLineNumber << " %} ";
     }
 
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
@@ -22077,7 +22116,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate the line number as a comment
     fLilypondCodeStream <<
-      "%{ line " << elt->getNextBarNumber () << " %} ";
+      " %{ line " << elt->getNextBarNumber () << " %} ";
   }
 
   if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
@@ -22102,7 +22141,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrLineBreak& elt)
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate the line number as a comment
     fLilypondCodeStream <<
-      "%{ line " << elt->getInputLineNumber () << " %} ";
+      " %{ line " << elt->getInputLineNumber () << " %} ";
   }
 
   fLilypondCodeStream <<
@@ -22189,7 +22228,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPageBreak& elt)
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate the line number as a comment
     fLilypondCodeStream <<
-      "%{ line " << elt->getInputLineNumber () << " %} ";
+      " %{ line " << elt->getInputLineNumber () << " %} ";
   }
 
   fLilypondCodeStream <<
@@ -23207,7 +23246,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRests& elt)
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate information and line number as a comment
     fLilypondCodeStream <<
-      "%{ line " <<
+      " %{ line " <<
       elt->getInputLineNumber () <<
       " %}";
   }

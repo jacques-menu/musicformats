@@ -230,10 +230,11 @@ class EXP msrStaff : public msrElement
     // measures
 
     void                  createAMeasureAndAppendItToStaff (
-                            int         inputLineNumber,
-                          const string& measureNumber,
+                            int           inputLineNumber,
+                            int           previousMeasureEndInputLineNumber,
+                            const string& measureNumber,
                             msrMeasureImplicitKind
-                                        measureImplicitKind);
+                                          measureImplicitKind);
 
     void                  setNextMeasureNumberInStaff (
                             int           inputLineNumber,

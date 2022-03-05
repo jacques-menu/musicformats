@@ -1141,6 +1141,10 @@ class EXP mxsr2msrTranslator :
     string                    fPartFirstMeasureNumber;
     string                    fCurrentMeasureNumber;
 
+    // measure end line number
+
+    int                       fPreviousMeasureEndInputLineNumber;
+
     // measure style handling
     // ------------------------------------------------------
 
