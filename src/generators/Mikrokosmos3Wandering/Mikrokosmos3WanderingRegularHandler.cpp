@@ -734,6 +734,7 @@ void Mikrokosmos3WanderingRegularHandler::createVoicesRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("ignore-msr-voice", subGroup);
+  registerAtomInRegularSubgroup ("keep-msr-voice", subGroup);
 
   registerAtomInRegularSubgroup ("create-single-line-staves-as-rythmic", subGroup);
 }
