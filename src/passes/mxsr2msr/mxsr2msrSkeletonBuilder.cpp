@@ -3654,7 +3654,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
         fCurrentVoiceMusicXMLNumber);
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+  if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
     gLogStream <<
       "--> S_note, fCurrentStaffMusicXMLNumber = " <<
       fCurrentStaffMusicXMLNumber <<

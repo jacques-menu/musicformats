@@ -2599,18 +2599,11 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Appending note '" <<
+      "Appending note " <<
+      note->asShortString () <<
+      " to voice \"" << getVoiceName () << "\"" <<
+      ", line " << inputLineNumber <<
       endl;
-
-    ++gIndenter;
-
-    gLogStream <<
-      note <<
-        "' to voice \"" << getVoiceName () << "\"" <<
-        ", line " << inputLineNumber <<
-        endl;
-
-    --gIndenter;
   }
 #endif
 
@@ -9849,9 +9842,9 @@ void msrVoice::finalizeVoice (
     s <<
       mfSingularOrPluralWithoutNumber (
         voicePendingRepeatDescrsStackSize, "There is", "There are") <<
-      " " <<
+      ' ' <<
       voicePendingRepeatDescrsStackSize <<
-      " " <<
+      ' ' <<
       mfSingularOrPluralWithoutNumber (
         voicePendingRepeatDescrsStackSize, "repeat", "repeats") <<
       " pending in the voice repeats stack in voice \"" <<
@@ -9999,9 +9992,9 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
     s <<
       mfSingularOrPluralWithoutNumber (
         voicePendingRepeatDescrsStackSize, "There is", "There are") <<
-      " " <<
+      ' ' <<
       voicePendingRepeatDescrsStackSize <<
-      " " <<
+      ' ' <<
       mfSingularOrPluralWithoutNumber (
         voicePendingRepeatDescrsStackSize, "repeat", "repeats") <<
       " pending in the voice repeats stack in voice \"" <<
@@ -10424,7 +10417,7 @@ void msrVoice::displayVoiceRepeatsStackFullMeasureRestsMeasureRepeatAndVoice (
 void msrVoice::print (ostream& os) const
 {
   os <<
-    "[" <<
+    '[' <<
     msrVoiceKindAsStringForPrint (fVoiceKind) <<
     " voice \"" << getVoiceName () <<
     "\", fVoiceNumber '" <<
@@ -10435,7 +10428,7 @@ void msrVoice::print (ostream& os) const
   ++gIndenter;
 
   os << left <<
-    "(" <<
+    '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<
@@ -10774,13 +10767,13 @@ void msrVoice::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrVoice::printShort (ostream& os) const
 {
   os <<
-    "[" <<
+    '[' <<
     msrVoiceKindAsStringForPrint (fVoiceKind) <<
     " voice \"" << getVoiceName () <<
     "\", fVoiceNumber '" <<
@@ -10792,7 +10785,7 @@ void msrVoice::printShort (ostream& os) const
   ++gIndenter;
 
   os << left <<
-    "(" <<
+    '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<
@@ -10902,7 +10895,7 @@ void msrVoice::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 // void msrVoice::printSlices (ostream& os) const JMI

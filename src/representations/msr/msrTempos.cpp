@@ -194,7 +194,7 @@ void msrTempoNote::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrTempoNote& elt)
@@ -574,7 +574,7 @@ string msrTempoTuplet::asString () const
   s <<
     "TempoTuplet " <<
     fTempoTupletFactor <<
-    " " << fTempoTupletDisplayWholeNotes << " display whole notes" <<
+    ' ' << fTempoTupletDisplayWholeNotes << " display whole notes" <<
     ":";
 
   s << "[[";
@@ -609,7 +609,7 @@ string msrTempoTuplet::asString () const
       }
 
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
 
     } // for
   }
@@ -627,7 +627,7 @@ string msrTempoTuplet::asString () const
   s <<
     "TempoTuplet " <<
     fTempoTupletFactor <<
-    " " << fTempoTupletSoundingWholeNotes << " sound whole notes" <<
+    ' ' << fTempoTupletSoundingWholeNotes << " sound whole notes" <<
     " measure '" <<
     fTempoTupletMeasureNumber <<
     "':";
@@ -678,7 +678,7 @@ string msrTempoTuplet::asString () const
       }
 
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
     } // for
   }
 
@@ -760,7 +760,7 @@ void msrTempoTuplet::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrTempoTuplet& elt)
@@ -948,7 +948,7 @@ void msrTempoNotesRelationshipshipElements::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrTempoNotesRelationshipshipElements& elt)
@@ -1494,7 +1494,7 @@ void msrTempo::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrTempo::printShort (ostream& os) const

@@ -185,7 +185,7 @@ void msrStaffTuning::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrStaffTuning& elt)
@@ -445,7 +445,7 @@ void msrStaffDetails::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrStaffDetails& elt)

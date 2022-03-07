@@ -1,0 +1,32 @@
+#!/some/path/to/some/dispatcher/script		# why not?
+
+# the MusicFormats tool to be used
+tool : xml2ly
+
+# the input file
+input : V3bis_extraits.xml
+
+# parts
+  -keep-musicxml-part-id P1
+
+# the voices choice
+VOICES_CHOICE :  voice1Only | voice2Only ;		# could be : choice VOICES_CHOICE : … … … ;
+
+VOICES_CHOICE = voice1Only
+  # change this to voice2Only to switch to another subset of options
+  # could even be parameter to the script such a $1
+
+# choose which options to use according to VOICES_CHOICE
+case VOICES_CHOICE
+	voice1Only:
+    -title "Joli morceau - voix 1"
+    -ignore-msr-voice Part_POne_Staff_One_Voice_Two
+  ;
+
+	voice2Only:
+    -title "Joli morceau - voix 2"
+    -ignore-msr-voice Part_POne_Staff_One_Voice_One
+
+    -display-options-values
+  ;
+;

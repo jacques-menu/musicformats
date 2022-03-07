@@ -758,7 +758,7 @@ void msrSyllable::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrSyllable& elt)
@@ -1373,7 +1373,7 @@ void msrStanza::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrStanza& elt)

@@ -202,7 +202,7 @@ string msr2lpsrScoreOutputKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     lpsrScoreOutputKindAsString (fLpsrScoreOutputKindVariable);
 
   return s.str ();
@@ -213,7 +213,7 @@ string msr2lpsrScoreOutputKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     lpsrScoreOutputKindAsString (fLpsrScoreOutputKindVariable);
 
   return s.str ();

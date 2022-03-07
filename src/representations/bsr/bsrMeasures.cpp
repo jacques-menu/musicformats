@@ -327,7 +327,7 @@ string bsrMeasure::asDebugString () const // JMI
     } // for
   }
 
-  s << "}";
+  s << '}';
 
   return s.str ();
 }

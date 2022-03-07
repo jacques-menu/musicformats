@@ -272,7 +272,7 @@ string msrClef::asShortStringForMeasuresSlices () const
   stringstream s;
 
   s <<
-    "[" <<
+    '[' <<
     msrClefKindAsString (fClefKind) <<
 // JMI    ", fClefStaffNumber: " << fClefStaffNumber <<
 // JMI    ", " << fClefStaffNumber <<

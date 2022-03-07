@@ -188,7 +188,7 @@ string lilypondScoreOutputKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     lpsrScoreOutputKindAsString (fLpsrScoreOutputKindVariable);
 
   return s.str ();
@@ -199,7 +199,7 @@ string lilypondScoreOutputKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     lpsrScoreOutputKindAsString (fLpsrScoreOutputKindVariable);
 
   return s.str ();
@@ -348,7 +348,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
       gLogStream << endl;
     }
@@ -474,7 +474,7 @@ string lilypondTransposePartNameAtom::asShortNamedOptionString () const
 
   if (fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
     s <<
-      "-" << fShortName << " \"";
+      '-' << fShortName << " \"";
 
     map<string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
@@ -501,7 +501,7 @@ string lilypondTransposePartNameAtom::asActualLongNamedOptionString () const
 
   if (fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
     s <<
-      "-" << fShortName << " \"";
+      '-' << fShortName << " \"";
 
     map<string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
@@ -698,7 +698,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
       gLogStream << endl;
     }
@@ -824,7 +824,7 @@ string lilypondTransposePartIDAtom::asShortNamedOptionString () const
 
   if (fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
     s <<
-      "-" << fShortName << " \"";
+      '-' << fShortName << " \"";
 
     map<string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
@@ -851,7 +851,7 @@ string lilypondTransposePartIDAtom::asActualLongNamedOptionString () const
 
   if (fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
     s <<
-      "-" << fShortName << " \"";
+      '-' << fShortName << " \"";
 
     map<string, S_msrSemiTonesPitchAndOctave>::const_iterator
       iBegin = fStringToMsrSemiTonesPitchAndOctaveMapVariable.begin (),
@@ -1390,7 +1390,7 @@ string lilypondRelativeOctaveEntryAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
   return s.str ();
@@ -1401,7 +1401,7 @@ string lilypondRelativeOctaveEntryAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
   return s.str ();
@@ -1599,7 +1599,7 @@ string lilypondFixedOctaveEntryAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
   return s.str ();
@@ -1610,7 +1610,7 @@ string lilypondFixedOctaveEntryAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
   return s.str ();
@@ -1833,7 +1833,7 @@ string lilypondAccidentalStyleKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     lpsrAccidentalStyleKindAsString (fLpsrAccidentalStyleKindVariable);
 
   return s.str ();
@@ -1844,7 +1844,7 @@ string lilypondAccidentalStyleKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     lpsrAccidentalStyleKindAsString (fLpsrAccidentalStyleKindVariable);
 
   return s.str ();
@@ -2136,7 +2136,7 @@ string lilypondChordsDisplayAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " ";
+    '-' << fShortName << ' ';
 
   if (fStringsPairListVariable.size ()) { // JMI superflous???
     list<pair<string, string> >::const_iterator
@@ -2160,7 +2160,7 @@ string lilypondChordsDisplayAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " ";
+    '-' << fLongName << ' ';
 
   if (fStringsPairListVariable.size ()) { // JMI superflous???
     list<pair<string, string> >::const_iterator
@@ -2431,7 +2431,7 @@ string lilypondLyricsDurationsKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable);
 
@@ -2443,7 +2443,7 @@ string lilypondLyricsDurationsKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable);
 
@@ -2668,7 +2668,7 @@ string lilypondDynamicsTextSpannersStyleKindAtom::asShortNamedOptionString () co
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     lpsrDynamicsTextSpannersStyleKindAsString (fLpsrdDynamicsTextSpannersStyleKindVariable);
 
   return s.str ();
@@ -2679,7 +2679,7 @@ string lilypondDynamicsTextSpannersStyleKindAtom::asActualLongNamedOptionString 
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     lpsrDynamicsTextSpannersStyleKindAsString (fLpsrdDynamicsTextSpannersStyleKindVariable);
 
   return s.str ();

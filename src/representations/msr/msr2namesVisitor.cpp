@@ -148,7 +148,7 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
       getPartGroupElementsList ().size ();
 
   gLogStream <<
-    "PartGroup" << " " << elt->getPartGroupCombinedName () <<
+    "PartGroup" << ' ' << elt->getPartGroupCombinedName () <<
     " contains " <<
     mfSingularOrPlural (
       partGroupElementsSize,
@@ -276,7 +276,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
       getStaffAllVoicesVector ().size ();
 
   gLogStream <<
-    "Staff" << " " << elt->getStaffName () <<
+    "Staff" << ' ' << elt->getStaffName () <<
     " contains " <<
     mfSingularOrPlural (
       staffAllVoicesVectorSize,
@@ -336,7 +336,7 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
   unsigned int voiceStanzasMapSize = elt->getVoiceStanzasMap ().size ();
 
   gLogStream <<
-    "Voice" << " " << elt->getVoiceName () <<
+    "Voice" << ' ' << elt->getVoiceName () <<
     " has " <<
     mfSingularOrPlural (
       voiceStanzasMapSize,

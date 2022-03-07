@@ -2627,7 +2627,7 @@ void msrStaff::collectStaffMeasuresSlices (
       "\", " <<
       mfSingularOrPluralWithoutNumber (
         staffVoiceNumbersToAllVoicesMapSize, "there is", "there are") <<
-      " " <<
+      ' ' <<
       mfSingularOrPlural (
         staffVoiceNumbersToAllVoicesMapSize, "voice", "voices") <<
       ", line " << inputLineNumber <<
@@ -2933,7 +2933,7 @@ void msrStaff::browseData (basevisitor* v)
 void msrStaff::print (ostream& os) const
 {
   os <<
-    "[" <<
+    '[' <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
     " staff \"" << getStaffName () <<
     "\", staff number '" <<
@@ -3317,13 +3317,13 @@ void msrStaff::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrStaff::printShort (ostream& os) const
 {
   os <<
-    "[" <<
+    '[' <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
     " staff \"" << getStaffName () <<
     "\", staff number '" <<
@@ -3363,13 +3363,13 @@ void msrStaff::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrStaff::printSummary (ostream& os) const
 {
   os <<
-    "[" <<
+    '[' <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
     " staff \"" << getStaffName () <<
     "\", staff number '" <<
@@ -3451,7 +3451,7 @@ void msrStaff::printSummary (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrStaff::printSlices (ostream& os) const

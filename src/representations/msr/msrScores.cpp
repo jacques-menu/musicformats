@@ -595,7 +595,7 @@ void msrScore::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrScore::printShort (ostream& os) const

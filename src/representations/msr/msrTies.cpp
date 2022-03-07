@@ -120,7 +120,7 @@ string msrTie::asString () const
   stringstream s;
 
   s <<
-    "Tie" << " " << msrTieKindAsString (fTieKind) <<
+    "Tie" << ' ' << msrTieKindAsString (fTieKind) <<
     ", line " << fInputLineNumber;
 
   return s.str ();

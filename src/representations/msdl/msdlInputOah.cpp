@@ -208,7 +208,7 @@ string msdlKeywordsLanguageAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     msdlKeywordsLanguageKindAsString (fMsdlKeywordsLanguageKindVariable);
 
   return s.str ();
@@ -219,7 +219,7 @@ string msdlKeywordsLanguageAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     msdlKeywordsLanguageKindAsString (fMsdlKeywordsLanguageKindVariable);
 
   return s.str ();
@@ -446,7 +446,7 @@ string oahDisplayMsdlKeywordsInLanguageAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName;
+    '-' << fShortName;
 
   return s.str ();
 }
@@ -456,7 +456,7 @@ string oahDisplayMsdlKeywordsInLanguageAtom::asActualLongNamedOptionString () co
   stringstream s;
 
   s <<
-    "-" << fLongName;
+    '-' << fLongName;
 
   return s.str ();
 }
@@ -653,7 +653,7 @@ string oahDisplayMsdlTokensInLanguageAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName;
+    '-' << fShortName;
 
   return s.str ();
 }
@@ -663,7 +663,7 @@ string oahDisplayMsdlTokensInLanguageAtom::asActualLongNamedOptionString () cons
   stringstream s;
 
   s <<
-    "-" << fLongName;
+    '-' << fLongName;
 
   return s.str ();
 }
@@ -855,7 +855,7 @@ string msdlCommentsTypeAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     msdlCommentsTypeKindAsString (fMsdlCommentsTypeKindVariable);
 
   return s.str ();
@@ -866,7 +866,7 @@ string msdlCommentsTypeAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     msdlCommentsTypeKindAsString (fMsdlCommentsTypeKindVariable);
 
   return s.str ();
@@ -1091,7 +1091,7 @@ string msdlUserLanguageAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     msdlUserLanguageKindAsString (
       fMsdlUserLanguageVariable);
 
@@ -1103,7 +1103,7 @@ string msdlUserLanguageAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     msdlUserLanguageKindAsString (
       fMsdlUserLanguageVariable);
 
@@ -1330,7 +1330,7 @@ string msdlPitchesLanguageAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
 
@@ -1342,7 +1342,7 @@ string msdlPitchesLanguageAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
 

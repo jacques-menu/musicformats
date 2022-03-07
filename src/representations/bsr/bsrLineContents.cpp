@@ -383,7 +383,7 @@ string bsrLineContents::asDebugString () const
     for ( ; ; ) {
       s << (*i)->asDebugString ();
       if (++i == iEnd) break;
- // JMI     s << " ";
+ // JMI     s << ' ';
     } // for
   }
 

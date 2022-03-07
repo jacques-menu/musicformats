@@ -398,7 +398,7 @@ void msrRepeatCommonPart::print (ostream& os) const
     "fRepeatCommonPartElementsList: ";
   if (elementsNumber) {
     os <<
-      "(" <<
+      '(' <<
       mfSingularOrPlural (
         elementsNumber, "element", "elements") <<
       ")";
@@ -430,7 +430,7 @@ void msrRepeatCommonPart::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrRepeatCommonPart::printShort (ostream& os) const
@@ -459,7 +459,7 @@ void msrRepeatCommonPart::printShort (ostream& os) const
     "repeatCommonPartElementsList: ";
   if (elementsNumber) {
     os <<
-      "(" <<
+      '(' <<
       mfSingularOrPlural (
         elementsNumber, "element", "elements") <<
       ")";
@@ -799,7 +799,7 @@ void msrRepeatEnding::print (ostream& os) const
     "repeatEndingElementsList: ";
   if (elementsNumber) {
     os <<
-      "(" <<
+      '(' <<
       mfSingularOrPlural (
         elementsNumber, "element", "elements") <<
       ")";
@@ -831,7 +831,7 @@ void msrRepeatEnding::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrRepeatEnding::printShort (ostream& os) const
@@ -879,7 +879,7 @@ void msrRepeatEnding::printShort (ostream& os) const
     "repeatEndingElementsList: ";
   if (elementsNumber) {
     os <<
-      "(" <<
+      '(' <<
       mfSingularOrPlural (
         elementsNumber, "element", "elements") <<
       ")";
@@ -1237,7 +1237,7 @@ void msrRepeat::appendSegmentToRepeat (
           "segment '" <<
           segment->asShortString () <<
           "'cannot be added to a completed repeat" <<
-          "(" << context << ")";
+          '(' << context << ")";
 
         msrError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -1321,7 +1321,7 @@ void msrRepeat::appendRepeatToRepeat (
           "repeat '" <<
           repeat->asShortString () <<
           "'cannot be added to a completed repeat" <<
-          "(" << context << ")";
+          '(' << context << ")";
 
         msrError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -1405,7 +1405,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
           "measures repeat '" <<
           measureRepeat->asShortString () <<
           "'cannot be added to a completed repeat" <<
-          "(" << context << ")";
+          '(' << context << ")";
 
         msrError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -1489,7 +1489,7 @@ void msrRepeat::appendFullMeasureRestsToRepeat (
           "full measure rests '" <<
           fullMeasureRests->asShortString () <<
           "'cannot be added to a completed repeat" <<
-          "(" << context << ")";
+          '(' << context << ")";
 
         msrError (
           gGlobalServiceRunData->getInputSourceName (),
@@ -1735,7 +1735,7 @@ string msrRepeat::asString () const
       // print the repeat ending
       s << (*i)->asShortString ();
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
     } // for
   }
 
@@ -1851,7 +1851,7 @@ void msrRepeat::print (ostream& os) const
   os <<
     "fRepeatEndings: ";
   if (endingsNumber) {
-    os << "(" << endingsNumber << ")";
+    os << '(' << endingsNumber << ")";
   }
   else {
     os << "none";
@@ -1878,7 +1878,7 @@ void msrRepeat::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrRepeat::printShort (ostream& os) const
@@ -1906,7 +1906,7 @@ void msrRepeat::printShort (ostream& os) const
   os <<
     "fRepeatEndings: ";
   if (endingsNumber) {
-    os << "(" << endingsNumber << ")";
+    os << '(' << endingsNumber << ")";
   }
   else {
     os << "none";

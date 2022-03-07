@@ -1290,9 +1290,9 @@ void lpsr2lilypondTranslator::generateNoteHeadColor (
         "\\once \\override NoteHead.color = #(map (lambda (x) (/ x 255)) "
         "'(" <<
         "#X" << noteRGB [0] << noteRGB [1] <<
-        " " <<
+        ' ' <<
         "#X" << noteRGB [2] << noteRGB [3] <<
-        " " <<
+        ' ' <<
         "#X" << noteRGB [4] << noteRGB [5] <<
         "))" <<
         endl;
@@ -5032,7 +5032,7 @@ string lpsr2lilypondTranslator::figuredBassElementAsLilypondString (
     for ( ; ; ) {
       s << figureAsLilypondString ((*i));
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
     } // for
   }
 
@@ -5137,9 +5137,9 @@ string lpsr2lilypondTranslator::frameAsLilypondString (
       s <<
         "c:" <<
         barre.getBarreStartString () <<
-        "-" <<
+        '-' <<
         barre.getBarreStopString () <<
-        "-" <<
+        '-' <<
         barre.getBarreFretNumber () <<
         ";";
 
@@ -5201,7 +5201,7 @@ string lpsr2lilypondTranslator::frameAsLilypondString (
 
       if (frameNoteFingering != -1) {
         s <<
-          "-" <<
+          '-' <<
           frameNoteFingering;
       }
 
@@ -5241,7 +5241,7 @@ void lpsr2lilypondTranslator::generateInputLineNumberAndOrPositionInMeasureAsACo
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate the input line number as a comment
     fLilypondCodeStream <<
-      "line " << measureElement->getInputLineNumber () << " ";
+      "line " << measureElement->getInputLineNumber () << ' ';
   }
 
   if (gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()) {
@@ -5249,7 +5249,7 @@ void lpsr2lilypondTranslator::generateInputLineNumberAndOrPositionInMeasureAsACo
     fLilypondCodeStream <<
       "pim: " <<
       measureElement->getMeasureElementPositionInMeasure () <<
-      " ";
+      ' ';
   }
 
   fLilypondCodeStream <<
@@ -5429,7 +5429,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrScore& elt)
     fLilypondCodeStream <<
       "global = {" <<
       endl <<
-      "}" <<
+      '}' <<
       endl << endl;
   }
 }
@@ -5771,7 +5771,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrHeader& elt)
 #endif
 
   fLilypondCodeStream <<
-    "}";
+    '}';
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
@@ -6784,7 +6784,7 @@ void lpsr2lilypondTranslator::generatePaper (
   --gIndenter;
 
   fLilypondCodeStream <<
-    "}";
+    '}';
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
@@ -7470,12 +7470,12 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream << left <<
         setw (commentFieldWidth) <<
-        "}" <<
+        '}' <<
         "% score context";
     }
     else {
       fLilypondCodeStream <<
-        "}";
+        '}';
     }
     fLilypondCodeStream << endl;
   }
@@ -7505,12 +7505,12 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream << left <<
         setw (commentFieldWidth) <<
-        "}" <<
+        '}' <<
         "% voice context";
     }
     else {
       fLilypondCodeStream <<
-        "}";
+        '}';
     }
     fLilypondCodeStream << endl;
   }
@@ -7568,7 +7568,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
   // should we set the repeat brackets type?
   if (gGlobalLpsr2lilypondOahGroup->getRepeatBrackets ()) {
     fLilypondCodeStream <<
-      "\\context " "{" <<
+      "\\context ' '{" <<
       endl;
 
     ++gIndenter;
@@ -7588,7 +7588,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      "}" <<
+      '}' <<
       endl;
   }
 
@@ -7599,7 +7599,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
 
   if (barNumbersSizeAtom->getSetByUser ()) {
     fLilypondCodeStream <<
-      "\\context " "{" <<
+      "\\context ' '{" <<
       endl;
 
     ++gIndenter;
@@ -7614,7 +7614,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      "}" <<
+      '}' <<
       endl;
   }
 
@@ -7649,7 +7649,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
   --gIndenter; // incremented in visitStart (S_lpsrLayout& elt)
 
   fLilypondCodeStream <<
-    "}";
+    '}';
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
@@ -7746,13 +7746,13 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookBlock& elt)
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
       setw (commentFieldWidth) <<
-      "}" <<
+      '}' <<
       "% book";
   }
 
   else {
     fLilypondCodeStream <<
-      "}";
+      '}';
   }
 
   fLilypondCodeStream << endl;
@@ -7837,13 +7837,13 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrScoreBlock& elt)
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
       setw (commentFieldWidth) <<
-      "}" <<
+      '}' <<
       "% score";
   }
 
   else {
     fLilypondCodeStream <<
-      "}";
+      '}';
   }
 
   fLilypondCodeStream <<
@@ -7927,7 +7927,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrBookPartBlock& elt)
   --gIndenter; // incremented in visitStart (S_lpsrBookPartBlock& elt)
 
   fLilypondCodeStream <<
-    "}";
+    '}';
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
@@ -8301,7 +8301,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       // if the part group is not implicit
       if (doGenerateAWithBlock) {
         fLilypondCodeStream <<
-          "}" <<
+          '}' <<
           endl;
       }
 
@@ -8509,7 +8509,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
 
     // generate the 'with' block ending
     fLilypondCodeStream <<
-      "}" <<
+      '}' <<
       endl;
 
     fLilypondCodeStream <<
@@ -8843,7 +8843,7 @@ R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
 
   // generate the 'with' block ending
   fLilypondCodeStream <<
-    "}" <<
+    '}' <<
     endl;
 
   // generate the comment if relevant
@@ -9148,7 +9148,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
 // if (voice->getStaffRelativeVoiceNumber () > 0) { JMI
   fLilypondCodeStream <<
-    "\\context " << voiceContextName << " = " "\"" <<
+    "\\context " << voiceContextName << " = ' '\"" <<
     voice->getVoiceName () << "\"" << " <<" <<
      endl;
 
@@ -9189,7 +9189,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
             default: // should not occur
               fLilypondCodeStream <<
                 "\\voice_" <<
-                regularVoiceStaffSequentialNumber << " ";
+                regularVoiceStaffSequentialNumber << ' ';
           } // switch
 
           fLilypondCodeStream <<
@@ -9304,7 +9304,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
        semiTonesPitchAndOctaveAsLilypondString <<
        endl <<
        "\\transpose " <<
-       semiTonesPitchAndOctaveAsLilypondString << " " << "c'" <<
+       semiTonesPitchAndOctaveAsLilypondString << ' ' << "c'" <<
       endl;
   }
 
@@ -9434,7 +9434,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
     }
 
     fLilypondCodeStream <<
-      "}" <<
+      '}' <<
       endl;
 
     switch (gGlobalLpsr2lilypondOahGroup->getLyricsDurationsKind ()) {
@@ -9442,7 +9442,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrNewLyricsBlock& elt)
         fLilypondCodeStream <<
           "\\lyricsto \"" << elt->getVoice ()->getVoiceName () << "\" {" <<
           "\\" << stanza->getStanzaName () <<
-          "}" <<
+          '}' <<
           endl;
         break;
       case lpsrLyricsDurationsKind::kLyricsDurationsExplicit:
@@ -9622,7 +9622,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrChordNamesContext& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      "}" <<
+      '}' <<
       endl;
   }
       */
@@ -9724,7 +9724,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrFiguredBassContext& elt)
     --gIndenter;
 
     fLilypondCodeStream <<
-      "}" <<
+      '}' <<
       endl;
   }
   */
@@ -10994,7 +10994,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
           ) {
             // option '-rel, -relative' has been used
             fLilypondCodeStream <<
-              " " <<
+              ' ' <<
               msrSemiTonesPitchAndOctaveAsLilypondString (
                 gGlobalLpsrOahGroup->
                   getLpsrQuarterTonesPitchesLanguageKind (),
@@ -11261,7 +11261,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
     gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
   ) {
     fLilypondCodeStream <<
-  // JMI    "}" <<
+  // JMI    '}' <<
       endl;
 
     --g Indenter; // JMI ???
@@ -11269,7 +11269,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 
   if (gGlobalLpsr2lilypondOahGroup->getDisplayMusic ()) {
     fLilypondCodeStream <<
-      "}";
+      '}';
 
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream << left <<
@@ -11286,13 +11286,13 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
       setw (commentFieldWidth) <<
-      "}" <<
+      '}' <<
       "% voice";
   }
 
   else {
     fLilypondCodeStream <<
-      "}";
+      '}';
   }
 
   fLilypondCodeStream << endl << endl;
@@ -12717,7 +12717,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrStanza& elt)
 
       fLilypondCodeStream <<
         endl <<
-        "}" <<
+        '}' <<
         endl << endl;
     }
 
@@ -13415,7 +13415,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
                 } // switch
 
               fLilypondCodeStream <<
-                " " <<
+                ' ' <<
                 msrModeKindAsLilypondString (
                   modeKindToBeUsed);
 
@@ -13455,8 +13455,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
                       // starting with middle C,
                       // and the latter is c' in LilyPond
                       fLilypondCodeStream <<
-                        "(" <<
-                          "(" <<
+                        '(' <<
+                          '(' <<
                           (int) item->getKeyItemOctaveKind () - 3 <<
                           " . " <<
                           (int) item->getKeyItemDiatonicPitchKind () << // JMI ???
@@ -13471,7 +13471,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
                     // Alternatively, for each item in the list, using the more concise format (step . alter) specifies that the same alteration should hold in all octaves.
 
                       fLilypondCodeStream <<
-                        "(" <<
+                        '(' <<
                         (int) item->getKeyItemDiatonicPitchKind () << // JMI ???
                         " . ," <<
                         alterationKindAsLilypondString (
@@ -14287,7 +14287,7 @@ If the double element is present, it indicates that the music is doubled one oct
       transpositionPitchAsString <<
       ", transpositionOctaveKind: " <<
       transpositionOctaveKindAsString <<
-      "(" << transpositionOctaveKind << ")" <<
+      '(' << transpositionOctaveKind << ")" <<
       endl;
     }
 #endif
@@ -14535,13 +14535,13 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
       fLilypondCodeStream << endl;
 
       fLilypondCodeStream <<
-        "}" << "% concat" <<
+        '}' << "% concat" <<
         endl;
 
       --gIndenter;
 
       fLilypondCodeStream <<
-        "}" <<
+        '}' <<
         endl;
     break;
 
@@ -14619,13 +14619,13 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
   --gIndenter;
 
   fLilypondCodeStream <<
-    "}" << "% concat" <<
+    '}' << "% concat" <<
     endl;
 
   --gIndenter;
 
   fLilypondCodeStream <<
-    "}" <<
+    '}' <<
     endl;
   } // switch
 }
@@ -14687,7 +14687,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
   switch (tempoParenthesizedKind) {
     case msrTempo::kTempoParenthesizedYes:
       fLilypondCodeStream <<
-        "(" <<
+        '(' <<
         endl;
       break;
     case msrTempo::kTempoParenthesizedNo:
@@ -14782,13 +14782,13 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
   --gIndenter;
 
   fLilypondCodeStream <<
-    "}" <<
+    '}' <<
     endl;
 
   --gIndenter;
 
   fLilypondCodeStream <<
-    "}" <<
+    '}' <<
     endl;
 }
 
@@ -14919,7 +14919,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoNotesRelationshipshipElements&
 
   fLilypondCodeStream <<
     endl <<
-    "}" <<
+    '}' <<
     endl;
 }
 
@@ -15036,7 +15036,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTempoTuplet& elt)
 #endif
 
   fLilypondCodeStream <<
-    "}";
+    '}';
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTempo& elt)
@@ -16038,7 +16038,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrDoubleTremolo& elt)
   --gIndenter; // incremented in visitStart (S_msrDoubleTremolo& elt)
 
   fLilypondCodeStream <<
-    "}" <<
+    '}' <<
     endl;
 }
 
@@ -18089,7 +18089,7 @@ void lpsr2lilypondTranslator::generateNoteScordaturas (
       --gIndenter;
 
       fLilypondCodeStream <<
-        "}" <<
+        '}' <<
         endl;
 
       --gIndenter;
@@ -19242,7 +19242,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
           default:
             generateNoteArticulation ((*i));
             fLilypondCodeStream <<
-              " ";
+              ' ';
         } // switch
       } // for
     }
@@ -19322,7 +19322,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
 
     fLilypondCodeStream <<
       endl <<
-      "}" <<
+      '}' <<
       endl;
 
     --gIndenter;
@@ -19710,7 +19710,7 @@ void lpsr2lilypondTranslator::generateCodeForOctaveShift (
     case msrOctaveShift::kOctaveShiftUp:
       fLilypondCodeStream <<
       "\\ottava #" <<
-        "-" << (octaveShiftSize - 1) / 7 << // 1 or 2
+        '-' << (octaveShiftSize - 1) / 7 << // 1 or 2
         ' ';
       break;
     case msrOctaveShift::kOctaveShiftDown:
@@ -21115,7 +21115,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
   }
 
   fLilypondCodeStream <<
-    "}" <<
+    '}' <<
     endl;
 
   // get line shape kind
@@ -21449,7 +21449,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrScordatura& elt)
   fLilypondCodeStream <<
     ">4" <<
     endl <<
-    "}" <<
+    '}' <<
     endl;
 
   --gIndenter;
@@ -22390,13 +22390,13 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeat& elt)
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream << left <<
         setw (commentFieldWidth) <<
-        "}" << "% end of repeat" <<
+        '}' << "% end of repeat" <<
         endl;
     }
     else {
       fLilypondCodeStream <<
         endl <<
-        "}" <<
+        '}' <<
         endl << endl;
     }
   }
@@ -22518,13 +22518,13 @@ void lpsr2lilypondTranslator::visitStart (S_msrRepeatEnding& elt)
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
       fLilypondCodeStream <<
         setw (commentFieldWidth) << left <<
-        "}" << "% end of repeat" <<
+        '}' << "% end of repeat" <<
         endl;
     }
     else {
       fLilypondCodeStream <<
         endl <<
-        "}" <<
+        '}' <<
         endl;
     }
     fRepeatDescrsStack.back ()->
@@ -22649,12 +22649,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream << left <<
           setw (commentFieldWidth) <<
-          "}" << "% end of repeat hooked ending" <<
+          '}' << "% end of repeat hooked ending" <<
           endl;
       }
       else {
         fLilypondCodeStream <<
-          "}" <<
+          '}' <<
           endl;
       }
       break;
@@ -22663,12 +22663,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ())   {
         fLilypondCodeStream << left <<
           setw (commentFieldWidth) <<
-          "}" << "% end of repeat hookless ending" <<
+          '}' << "% end of repeat hookless ending" <<
           endl;
       }
       else {
         fLilypondCodeStream <<
-          "}" <<
+          '}' <<
           endl;
       }
       break;
@@ -22707,12 +22707,12 @@ void lpsr2lilypondTranslator::visitEnd (S_msrRepeatEnding& elt)
     if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ())   {
       fLilypondCodeStream << left <<
         setw (commentFieldWidth) <<
-        "}" << "% end of alternative" <<
+        '}' << "% end of alternative" <<
         endl;
     }
     else {
       fLilypondCodeStream <<
-        "}" <<
+        '}' <<
         endl << endl;
     }
   }
@@ -23457,7 +23457,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
   --gIndenter;
 
   fLilypondCodeStream <<
-    "}" <<
+    '}' <<
     endl;
 
   if (gGlobalLpsr2lilypondOahGroup->getNoMidi ()) {

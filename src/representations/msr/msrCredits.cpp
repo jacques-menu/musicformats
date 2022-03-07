@@ -214,7 +214,7 @@ void msrCreditWords::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrCreditWords& elt)
@@ -365,7 +365,7 @@ void msrCredit::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrCredit& elt)

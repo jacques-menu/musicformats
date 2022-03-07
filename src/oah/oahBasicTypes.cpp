@@ -148,7 +148,7 @@ EXP void displayStringPairVector (
         first <<
         "] [" <<
         second <<
-        "]" <<
+        ']' <<
         endl;
     } //for
 
@@ -513,7 +513,7 @@ void oahOptionNameAndValue::print (ostream& os) const
   os <<
     "oahOptionNameAndValue [" <<
     fOptionName << "] [" << fOptionValue <<
-    "]" <<
+    ']' <<
     endl;
 }
 
@@ -586,7 +586,7 @@ void oahOptionsAndArguments::displayOptionNameAndValuesVector (ostream& os) cons
         optionName <<
         "] [" <<
         optionValue <<
-        "]" <<
+        ']' <<
         endl;
     } //for
 
@@ -1727,7 +1727,7 @@ void oahAtomStoringAValue::printHelp (ostream& os) const
 {
   os <<
     fetchNames () <<
-    " " << fValueSpecification <<
+    ' ' << fValueSpecification <<
     endl;
 
   if (fDescription.size ()) {
@@ -1766,7 +1766,7 @@ void oahAtomStoringAValue::findStringInAtom (
     // add the element's names and value specification
     s <<
       fetchNames () <<
-      " " <<
+      ' ' <<
       fValueSpecification <<
       endl;
 
@@ -2065,7 +2065,7 @@ void oahPureHelpAtomExpectingAValue::printHelp (ostream& os) const
 {
   os <<
     fetchNames () <<
-    " " << fValueSpecification <<
+    ' ' << fValueSpecification <<
     endl;
 
   if (fDescription.size ()) {
@@ -2540,7 +2540,7 @@ void oahSubGroup::printSubGroupHeader (ostream& os) const
     fSubGroupHeader;
 
   os <<
-    " " <<
+    ' ' <<
     fetchNamesBetweenParentheses ();
 
   switch (fElementVisibilityKind) {
@@ -2572,7 +2572,7 @@ void oahSubGroup::printSubGroupHeaderWithHeaderWidth (
   os << left <<
     setw (subGroupHeaderWidth) <<
     fSubGroupHeader <<
-    " " <<
+    ' ' <<
     fetchNamesBetweenParentheses ();
 
   switch (fElementVisibilityKind) {
@@ -2776,7 +2776,7 @@ void oahSubGroup::printOptionsSummary (
   os << left <<
     setw (maximumSubGroupsHelpHeadersSize) <<
     fSubGroupHeader <<
-    " " <<
+    ' ' <<
     /* JMI
     fetchNamesInColumnsBetweenParentheses (
       maximumShortNameWidth);
@@ -2898,7 +2898,7 @@ void oahSubGroup::printSubGroupOptionsValues (
     // print the header
     os <<
       fSubGroupHeader <<
-      " " <<
+      ' ' <<
       fetchNamesBetweenParentheses () <<
       ", " <<
       mfSingularOrPlural (
@@ -2975,7 +2975,7 @@ void oahSubGroup::printSubGroupOptionsValuesAll (
   // print the header
   os <<
     fSubGroupHeader <<
-    " " <<
+    ' ' <<
     fetchNamesBetweenParentheses ();
   if (fNumberOfUserChoseAtomsInThisSubGroup > 0) {
     os <<
@@ -3575,7 +3575,7 @@ void oahGroup::printGroupHeader (ostream& os) const
   // print the header and option names
   os <<
     fGroupHeader <<
-    " " <<
+    ' ' <<
     fetchNamesBetweenParentheses ();
 
   switch (fElementVisibilityKind) {
@@ -3673,7 +3673,7 @@ void oahGroup::printGroupAndSubGroupHelp (
   // print the header and option names
   os <<
     fGroupHeader <<
-    " " <<
+    ' ' <<
     fetchNamesBetweenParentheses () <<
     ":" <<
     endl;
@@ -3747,7 +3747,7 @@ void oahGroup::printOptionsSummary (ostream& os) const
   // the description is the header of the information
   os <<
     fGroupHeader <<
-    " " <<
+    ' ' <<
     fetchNamesBetweenParentheses () <<
     ":" <<
     endl;
@@ -3813,7 +3813,7 @@ void oahGroup::printGroupAndSubGroupSpecificHelp (
     // the description is the header of the information
     os <<
       fGroupHeader <<
-      " " <<
+      ' ' <<
       fetchNamesBetweenParentheses () <<
       ":" <<
       endl;
@@ -3864,7 +3864,7 @@ void oahGroup::printGroupOptionsValues (
     // print the header
     os <<
       fGroupHeader <<
-      " " <<
+      ' ' <<
       fetchNamesBetweenParentheses () <<
       ", " <<
       mfSingularOrPlural (
@@ -3919,7 +3919,7 @@ void oahGroup::printGroupOptionsValuesAll (
   // print the header
   os <<
     fGroupHeader <<
-    " " <<
+    ' ' <<
     fetchNamesBetweenParentheses ();
   if (fNumberOfUserChoseAtomsInThisGroup > 0) {
     os <<
@@ -4408,9 +4408,9 @@ void oahHandler::checkOptionsAndArgumentsConsistency ()
       gLogStream <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "There is", "There are") <<
-        " " <<
+        ' ' <<
         argumentsNumber <<
-        " " <<
+        ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
         " in handler arguments vector for " <<
@@ -4527,9 +4527,9 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
       gLogStream <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "There is", "There are") <<
-        " " <<
+        ' ' <<
         argumentsNumber <<
-        " " <<
+        ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
         " in handler arguments vector for " <<
@@ -4615,9 +4615,9 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
       gLogStream <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "There is", "There are") <<
-        " " <<
+        ' ' <<
         argumentsNumber <<
-        " " <<
+        ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
         " in handler arguments vector for " <<
@@ -4722,9 +4722,9 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
       gLogStream <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "There is", "There are") <<
-        " " <<
+        ' ' <<
         argumentsNumber <<
-        " " <<
+        ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
         " in handler arguments vector for " <<
@@ -5709,9 +5709,9 @@ void oahHandler::findStringInHandler (
 
     s <<
       fHandlerHeader <<
-      " " <<
+      ' ' <<
       fHandlerDescription <<
-      " " <<
+      ' ' <<
       fHandlerUsage;
 
     // append the string
@@ -6047,7 +6047,7 @@ void oahHandler::printIncludeFileNamesStack (
         right << setw (fieldWidth) << counter++ <<
         ": [" <<
         fileName <<
-        "]" <<
+        ']' <<
         endl;
     } //for
 
@@ -6290,7 +6290,7 @@ void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
         break;
       }
 
-      os << "-" << theString;
+      os << '-' << theString;
 
       if (++i == iEnd) break;
 
@@ -6711,33 +6711,68 @@ void oahHandler::registerOahElementUseInLaunchCommand (
 
   size_t valueUsedSize = valueUsed.size ();
 
+  // register elementUsed in fLaunchCommandAsSupplied
   fLaunchCommandAsSupplied +=
     " -" + nameUsed;
+
   if (valueUsedSize) {
-    fLaunchCommandAsSupplied +=
-      ' ' + valueUsed;
+    if (valueUsed.find ('\'') != string::npos) {
+      fLaunchCommandAsSupplied +=
+        " \"" + valueUsed + '"';
+    }
+    else if (valueUsed.find ('"') != string::npos) {
+      fLaunchCommandAsSupplied +=
+        " '" + valueUsed + "\'";
+    }
+    else if (valueUsed.find (' ') != string::npos) {
+      fLaunchCommandAsSupplied +=
+        " \"" + valueUsed + '"';
+    }
+    else {
+      fLaunchCommandAsSupplied +=
+        ' ' + valueUsed;
+    }
   }
 
+  // register elementUsed in fLaunchCommandWithLongOptionsNames
   string longName = elementUsed->getLongName ();
 
   fLaunchCommandWithLongOptionsNames +=
     " -" + longName;
+
   if (valueUsedSize) {
-    fLaunchCommandWithLongOptionsNames +=
-      ' ' + valueUsed;
+    if (valueUsed.find ('\'') != string::npos) {
+      fLaunchCommandWithLongOptionsNames +=
+        " \"" + valueUsed + '"';
+    }
+    else if (valueUsed.find ('"') != string::npos) {
+      fLaunchCommandWithLongOptionsNames +=
+        " '" + valueUsed + "\'";
+    }
+    else if (valueUsed.find (' ') != string::npos) {
+      fLaunchCommandWithLongOptionsNames +=
+        " \"" + valueUsed + '"';
+    }
+    else {
+      fLaunchCommandWithLongOptionsNames +=
+        ' ' + valueUsed;
+    }
   }
 
-  string shortName = elementUsed->getShortName ();
-
-  if (shortName.size ()) {
+  // register elementUsed in fLaunchCommandWithShortOptionsNames
+  if (valueUsed.find ('\'') != string::npos) {
     fLaunchCommandWithShortOptionsNames +=
-      " -" + shortName;
+      " \"" + valueUsed + '"';
+  }
+  else if (valueUsed.find ('"') != string::npos) {
+    fLaunchCommandWithShortOptionsNames +=
+      " '" + valueUsed + "\'";
+  }
+  else if (valueUsed.find (' ') != string::npos) {
+    fLaunchCommandWithShortOptionsNames +=
+      " \"" + valueUsed + '"';
   }
   else {
-    fLaunchCommandWithShortOptionsNames +=
-      " -" + longName;
-  }
-  if (valueUsedSize) {
     fLaunchCommandWithShortOptionsNames +=
       ' ' + valueUsed;
   }
@@ -6746,13 +6781,59 @@ void oahHandler::registerOahElementUseInLaunchCommand (
 void oahHandler::registerArgumentUseInLaunchCommand (
   const string& argumentUsed)
 {
-  fLaunchCommandAsSupplied +=
-    ' ' + argumentUsed;
+  // register argumentUsed in fLaunchCommandAsSupplied
+  if (argumentUsed.find ('\'') != string::npos) {
+    fLaunchCommandAsSupplied +=
+      " \"" + argumentUsed + '"';
+  }
+  else if (argumentUsed.find ('"') != string::npos) {
+    fLaunchCommandAsSupplied +=
+      " '" + argumentUsed + "\'";
+  }
+  else if (argumentUsed.find (' ') != string::npos) {
+    fLaunchCommandAsSupplied +=
+      " \"" + argumentUsed + '"';
+  }
+  else {
+    fLaunchCommandAsSupplied +=
+      ' ' + argumentUsed;
+  }
 
-  fLaunchCommandWithLongOptionsNames +=
-    ' ' + argumentUsed;
-  fLaunchCommandWithShortOptionsNames +=
-    ' ' + argumentUsed;
+  // register argumentUsed in fLaunchCommandWithLongOptionsNames
+  if (argumentUsed.find ('\'') != string::npos) {
+    fLaunchCommandWithLongOptionsNames +=
+      " \"" + argumentUsed + '"';
+  }
+  else if (argumentUsed.find ('"') != string::npos) {
+    fLaunchCommandWithLongOptionsNames +=
+      " '" + argumentUsed + "\'";
+  }
+  else if (argumentUsed.find (' ') != string::npos) {
+    fLaunchCommandWithLongOptionsNames +=
+      " \"" + argumentUsed + '"';
+  }
+  else {
+    fLaunchCommandWithLongOptionsNames +=
+      ' ' + argumentUsed;
+  }
+
+  // register argumentUsed in fLaunchCommandWithShortOptionsNames
+  if (argumentUsed.find ('\'') != string::npos) {
+    fLaunchCommandWithShortOptionsNames +=
+      " \"" + argumentUsed + '"';
+  }
+  else if (argumentUsed.find ('"') != string::npos) {
+    fLaunchCommandWithShortOptionsNames +=
+      " '" + argumentUsed + "\'";
+  }
+  else if (argumentUsed.find (' ') != string::npos) {
+    fLaunchCommandWithShortOptionsNames +=
+      " \"" + argumentUsed + '"';
+  }
+  else {
+    fLaunchCommandWithShortOptionsNames +=
+      ' ' + argumentUsed;
+  }
 }
 
 void oahHandler::handleOptionPrefixName (
@@ -6799,10 +6880,10 @@ void oahHandler::handleOptionPrefixName (
 
     for ( ; ; ) {
       gLogStream <<
-        "[" << (*i) << "]";
+        '[' << (*i) << "]";
       if (++i == iEnd) break;
       gLogStream <<
-        " ";
+        ' ';
     } // for
 
     gLogStream << endl;
@@ -7290,7 +7371,7 @@ void oahHandler::handleOptionNameAndValueAtTopOahLevel (
       "Handling options and arguments element [" <<
       optionName <<
       "] [" <<
-      optionValue << "]" <<
+      optionValue << ']' <<
       endl;
   }
 #endif
@@ -7845,7 +7926,7 @@ void oahHandler::createElementUsesListFromArgcArgv (
       n <<
       ": [" <<
       currentString <<
-      "]" <<
+      ']' <<
       endl;
   }
 #endif
@@ -8224,9 +8305,9 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
   // check the consistency of the options
   // ------------------------------------------------------
 
-  gLogStream <<
-    "==> checkHandlerOptionsConsistency();" <<
-    endl;
+//   gLogStream <<
+//     "==> checkHandlerOptionsConsistency();" << // JMI
+//     endl;
 
   checkHandlerOptionsConsistency ();
 
@@ -9066,7 +9147,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
   //  print the options and arguments found
   if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) { // JMI
     os <<
-      "After the inclusion of [" + includeFileName + "]" <<
+      "After the inclusion of [" + includeFileName + ']' <<
       ", fOptionsAndArguments contains:" <<
       endl <<
       fOptionsAndArguments;
@@ -9099,7 +9180,7 @@ void oahHandler::includeOptionsFromFile (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
       gLogStream <<
-        "==> currentLine: [" << currentLine << "]" <<
+        "==> currentLine: [" << currentLine << ']' <<
         endl;
     }
 #endif
@@ -9112,7 +9193,7 @@ void oahHandler::includeOptionsFromFile (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
-          "--> currentLine with comment: [" << currentLine << "]" <<
+          "--> currentLine with comment: [" << currentLine << ']' <<
           endl;
       }
 #endif
@@ -9124,7 +9205,7 @@ void oahHandler::includeOptionsFromFile (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
-          "--> currentLine without comment: [" << currentLine << "]" <<
+          "--> currentLine without comment: [" << currentLine << ']' <<
           endl;
       }
 #endif
@@ -9137,7 +9218,7 @@ void oahHandler::includeOptionsFromFile (
 #ifdef TRACING_IS_ENABLED
       if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
         gLogStream <<
-          "--> trimmed currentLine: [" << currentLine << "]" <<
+          "--> trimmed currentLine: [" << currentLine << ']' <<
           endl;
       }
 #endif
@@ -9152,7 +9233,7 @@ void oahHandler::includeOptionsFromFile (
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
           gLogStream <<
-            "--> option found: [" << currentLine << "]" <<
+            "--> option found: [" << currentLine << ']' <<
             endl;
         }
 #endif
@@ -9175,7 +9256,7 @@ void oahHandler::includeOptionsFromFile (
 #ifdef TRACING_IS_ENABLED
           if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
             gLogStream <<
-              "Found option [" << optionNamePart << "]" <<
+              "Found option [" << optionNamePart << ']' <<
               endl;
           }
 #endif
@@ -9200,7 +9281,7 @@ void oahHandler::includeOptionsFromFile (
 #ifdef TRACING_IS_ENABLED
           if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
             gLogStream <<
-              "Found option [" << optionNamePart << " " << valuePart << "]" <<
+              "Found option [" << optionNamePart << ' ' << valuePart << ']' <<
               endl;
           }
 #endif
@@ -9242,9 +9323,9 @@ void oahHandler::includeOptionsFromFile (
 #ifdef TRACING_IS_ENABLED
           if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
             gLogStream <<
-              "valuePart: [" << valuePart << "]" <<
+              "valuePart: [" << valuePart << ']' <<
               endl <<
-              "valuePartToBeUsed: [" << valuePartToBeUsed << "]" <<
+              "valuePartToBeUsed: [" << valuePartToBeUsed << ']' <<
               endl;
           }
 #endif
@@ -9324,7 +9405,7 @@ void oahHandler::includeOptionsFromFile (
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
           gLogStream <<
-            "Found argument [" << currentLine << "]" <<
+            "Found argument [" << currentLine << ']' <<
             endl;
         }
 #endif
@@ -9399,7 +9480,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
 
       gLogStream << endl;
@@ -9455,7 +9536,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 
         for (unsigned i = 0; i < smSize; ++i) {
           gLogStream <<
-            "[" << sm [i] << "] ";
+            '[' << sm [i] << "] ";
         } // for
 
         gLogStream << endl;
@@ -9501,7 +9582,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 // //       fOptionsAndArguments.getOptionNameAndValuesVector ();
 // //
 // //   if (optionNameAndValuesVector.size ()) {
-// //     s << " ";
+// //     s << ' ';
 // //
 // //     vector<oahOptionNameAndValue>::const_iterator
 // //       iBegin = optionNameAndValuesVector.begin (),
@@ -9510,12 +9591,12 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 // //     for ( ; ; ) {
 // //       s << (*i);
 // //       if (++i == iEnd) break;
-// //       s << " ";
+// //       s << ' ';
 // //     } // for
 // //   }
 // //
 // //   if (fHandlerCommandLineElementsList.size ()) {
-// //     s << " ";
+// //     s << ' ';
 // //
 // //     list<S_oahElement>::const_iterator
 // //       iBegin = fHandlerCommandLineElementsList.begin (),
@@ -9526,7 +9607,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 // //
 // //       s << element-> asShortNamedOptionString ();
 // //       if (++i == iEnd) break;
-// //       s << " ";
+// //       s << ' ';
 // //     } // for
 // //   }
 

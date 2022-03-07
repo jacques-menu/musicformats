@@ -190,7 +190,7 @@ string msrArticulation::asString () const
   stringstream s;
 
   s <<
-    "[Articulation" " " <<
+    "[Articulation " <<
     articulationKindAsString () <<
     ", " <<
     articulationPlacementKindAsString () <<
@@ -446,7 +446,7 @@ void msrArpeggiato::browseData (basevisitor* v)
 void msrArpeggiato::print (ostream& os) const
 {
   os <<
-    "Arpeggiato" " " <<
+    "Arpeggiato " <<
     articulationKindAsString () <<
     ", " <<
     articulationPlacementKindAsString () <<
@@ -575,7 +575,7 @@ void msrNonArpeggiato::browseData (basevisitor* v)
 void msrNonArpeggiato::print (ostream& os) const
 {
   os <<
-    "NonArpeggiato" " " <<
+    "NonArpeggiato " <<
     articulationKindAsString () <<
     ", " <<
     articulationPlacementKindAsString () <<

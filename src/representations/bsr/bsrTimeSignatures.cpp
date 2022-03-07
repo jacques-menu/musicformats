@@ -247,7 +247,7 @@ string bsrTimeSignatureItem::asString () const
 
         if (i != timeSignatureBeatsNumbersVectorSize - 1) {
           s <<
-            " ";
+            ' ';
         }
       } // for
 
@@ -529,7 +529,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
 
                 if (i != vectorSize - 1) {
                   s <<
-                    " ";
+                    ' ';
                 }
               } // for
 
@@ -646,7 +646,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
 
                 if (i != vectorSize - 1) {
                   s <<
-                    " ";
+                    ' ';
                 }
               } // for
 

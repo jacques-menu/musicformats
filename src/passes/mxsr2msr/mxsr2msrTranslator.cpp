@@ -7793,7 +7793,7 @@ void mxsr2msrTranslator::visitStart ( S_elision& elt )
   string elisionValue = elt->getValue ();
 
   if (! elisionValue.size ()) {
-    elisionValue = " ";
+    elisionValue = ' ';
   }
 
   // color JMI
@@ -19273,9 +19273,9 @@ void mxsr2msrTranslator::attachPendingWordsToNote (
           s <<
             mfSingularOrPluralWithoutNumber (
               numberOfWords, "There is", "There are") <<
-            " " <<
+            ' ' <<
             numberOfWords <<
-            " " <<
+            ' ' <<
             mfSingularOrPluralWithoutNumber (
               numberOfWords, "word", "words") <<
             " attached to a rest";
@@ -20248,7 +20248,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "--> Gathered note information:" <<
+      "Gathered note informations:" <<
       endl;
 
     ++gIndenter;

@@ -284,7 +284,7 @@ string msrGenerationAPIKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     msrGenerationAPIKindAsString (fGenerationAPIKindVariable);
 
   return s.str ();
@@ -295,7 +295,7 @@ string msrGenerationAPIKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     msrGenerationAPIKindAsString (fGenerationAPIKindVariable);
 
   return s.str ();

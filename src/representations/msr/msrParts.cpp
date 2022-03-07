@@ -2335,7 +2335,7 @@ void msrPart::collectPartMeasuresSlices (
       "\", " <<
       mfSingularOrPluralWithoutNumber (
         partAllStavesListSize, "there is", "there are") <<
-      " " <<
+      ' ' <<
       mfSingularOrPlural (
         partAllStavesListSize, "voice", "voices") <<
       ", line " << inputLineNumber <<
@@ -2592,7 +2592,7 @@ void msrPart::printPartMeasuresWholeNotesDurationsVector (
 void msrPart::print (ostream& os) const
 {
   os <<
-    "[Part" << " " << fPartMsrName <<
+    "[Part" << ' ' << fPartMsrName <<
     " (" <<
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
@@ -2936,13 +2936,13 @@ void msrPart::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrPart::printShort (ostream& os) const
 {
   os <<
-    "[Part" << " " << fPartMsrName <<
+    "[Part" << ' ' << fPartMsrName <<
     " (" <<
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
@@ -3051,13 +3051,13 @@ void msrPart::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrPart::printSummary (ostream& os) const
 {
   os <<
-    "[Part" << " " << fPartMsrName <<
+    "[Part" << ' ' << fPartMsrName <<
     " (" <<
     mfSingularOrPlural (
       fPartAllStavesList.size (), "staff", "staves") <<
@@ -3176,7 +3176,7 @@ void msrPart::printSummary (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrPart::printSlices (ostream& os) const

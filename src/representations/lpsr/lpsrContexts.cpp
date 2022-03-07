@@ -154,7 +154,7 @@ void lpsrContext::print (ostream& os) const
       fContextExistingKind);
 
   if (fContextName.size ()) {
-    os << " " << fContextName;
+    os << ' ' << fContextName;
   }
   os << endl;
 

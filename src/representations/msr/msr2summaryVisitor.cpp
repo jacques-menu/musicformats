@@ -257,7 +257,7 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
   unsigned int partGroupElementsSize = elt->getPartGroupElementsList ().size ();
 
   gLogStream <<
-    "PartGroup" << " " << elt->getPartGroupCombinedName () <<
+    "PartGroup" << ' ' << elt->getPartGroupCombinedName () <<
     " contains " <<
     mfSingularOrPlural (
       partGroupElementsSize,
@@ -418,7 +418,7 @@ void msr2summaryVisitor::visitStart (S_msrStaff& elt)
     elt->getStaffAllVoicesVector ().size ();
 
   gLogStream <<
-    "Staff" << " " << elt->getStaffName () <<
+    "Staff" << ' ' << elt->getStaffName () <<
     " contains " <<
     mfSingularOrPlural (
       staffAllVoicesVectorSize,
@@ -479,7 +479,7 @@ void msr2summaryVisitor::visitStart (S_msrVoice& elt)
   unsigned int voiceStanzasMapSize = elt->getVoiceStanzasMap ().size ();
 
   gLogStream <<
-    "Voice" << " " << elt->getVoiceName () <<
+    "Voice" << ' ' << elt->getVoiceName () <<
     " has " <<
     mfSingularOrPlural (
       voiceStanzasMapSize,
@@ -542,7 +542,7 @@ void msr2summaryVisitor::visitStart (S_msrStanza& elt)
   unsigned int syllablesSize = elt->getSyllables ().size ();
 
   gLogStream <<
-    "Stanza" << " " << elt->getStanzaName () <<
+    "Stanza" << ' ' << elt->getStanzaName () <<
     " contains " <<
     mfSingularOrPlural (
       syllablesSize,
@@ -671,7 +671,7 @@ void msr2summaryVisitor::visitStart (S_msrTempo& elt)
 
   gLogStream <<
     "Tempo " <<
-    elt->getTempoBeatUnit () << " " << elt->getTempoPerMinute () <<
+    elt->getTempoBeatUnit () << ' ' << elt->getTempoPerMinute () <<
     endl;
 }
 

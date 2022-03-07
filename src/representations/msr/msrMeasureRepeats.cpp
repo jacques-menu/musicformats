@@ -323,7 +323,7 @@ void msrMeasureRepeatElement::print (ostream& os) const
     "measureRepeatElementsList: ";
   if (elementsNumber) {
     os <<
-      "(" <<
+      '(' <<
       mfSingularOrPlural (
         elementsNumber, "element", "elements") <<
       ")";
@@ -382,7 +382,7 @@ void msrMeasureRepeatElement::printShort (ostream& os) const
     "repeatElementsList: ";
   if (elementsNumber) {
     os <<
-      "(" <<
+      '(' <<
       mfSingularOrPlural (
         elementsNumber, "element", "elements") <<
       ")";
@@ -574,7 +574,7 @@ void msrMeasureRepeatPattern::print (ostream& os) const
 {
   os <<
     endl <<
-    "[" <<
+    '[' <<
     asString () <<
     endl << endl;
 
@@ -602,7 +602,7 @@ void msrMeasureRepeatPattern::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrMeasureRepeatPattern& elt)
@@ -763,7 +763,7 @@ void msrMeasureRepeatReplicas::print (ostream& os) const
 {
   os <<
     endl <<
-    "[" <<
+    '[' <<
     asString () <<
     endl << endl;
 
@@ -791,7 +791,7 @@ void msrMeasureRepeatReplicas::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrMeasureRepeatReplicas& elt)
@@ -1206,7 +1206,7 @@ void msrMeasureRepeat::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrMeasureRepeat& elt)

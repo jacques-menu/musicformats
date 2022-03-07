@@ -134,7 +134,7 @@ void bsrBrailleGenerator::generateCodeForCellsList (
     for ( ; ; ) {
       generateCodeForBrailleCell ((*i));
       if (++i == iEnd) break;
-      // JMI s << " ";
+      // JMI s << ' ';
     } // for
   }
 }

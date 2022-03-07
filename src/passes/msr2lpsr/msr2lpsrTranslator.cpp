@@ -5009,6 +5009,8 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
   // register clone in this tranlastors' voice notes map and ongoing notes stack
   fVoiceNotesMap [elt] = noteClone; // JMI XXL
   fOnGoingNotesStack.push_front (noteClone);
+abort ();
+  displayOnGoingNotesStack ("visitStart (S_msrNote&)");
 
   // don't register grace notes as the current note clone,
   // but as the current grace note clone instead

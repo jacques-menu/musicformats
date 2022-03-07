@@ -640,7 +640,7 @@ string msrDoubleTremolo::asString () const
   stringstream s;
 
   s <<
-    "DoubleTremolo" " " <<
+    "DoubleTremolo " <<
     ", " << msrTremoloTypeKindAsString (fDoubleTremoloTypeKind) <<
     ", line " << fInputLineNumber <<
     fDoubleTremoloMarksNumber << " marks" <<
@@ -805,7 +805,7 @@ void msrDoubleTremolo::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrDoubleTremolo& elt)

@@ -1364,7 +1364,7 @@ string msdlScanner::currentLocationAsString () const
     stringstream s;
 
     s <<
-      gGlobalServiceRunData->getInputSourceName () << ":" << fCurrentLineNumber << " ";
+      gGlobalServiceRunData->getInputSourceName () << ":" << fCurrentLineNumber << ' ';
 
     lineIndication = s.str ();
   }

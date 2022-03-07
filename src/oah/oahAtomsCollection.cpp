@@ -3142,7 +3142,7 @@ void oahCombinedBooleansAtom::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << " ";
+      os << ' ';
     } // for
 
     os << "'";
@@ -3722,7 +3722,7 @@ void oahCommonPrefixBooleansAtom::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << " ";
+      os << ' ';
     } // for
 
     --gIndenter;
@@ -3735,9 +3735,9 @@ void oahCommonPrefixBooleansAtom::print (ostream& os) const
 void oahCommonPrefixBooleansAtom::printHelp (ostream& os) const
 {
   os <<
-    "-" << fShortNamesPrefixName << "<" << fShortSuffixDescriptor << ">" <<
+    '-' << fShortNamesPrefixName << "<" << fShortSuffixDescriptor << ">" <<
     ", " <<
-    "-" << fLongNamesPrefixName << "-<" << fLongSuffixDescriptor << ">" <<
+    '-' << fLongNamesPrefixName << "-<" << fLongSuffixDescriptor << ">" <<
     endl;
 
   if (fDescription.size ()) {
@@ -3954,7 +3954,7 @@ void oahIntegerAtom::applyAtomWithValue (
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
-        "[" << sm [i] << "] ";
+        '[' << sm [i] << "] ";
     } // for
 
     gLogStream << endl;
@@ -4071,7 +4071,7 @@ string oahIntegerAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " << fIntegerVariable;
+    '-' << fShortName << ' ' << fIntegerVariable;
 
   return s.str ();
 }
@@ -4081,7 +4081,7 @@ string oahIntegerAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " << fIntegerVariable;
+    '-' << fLongName << ' ' << fIntegerVariable;
 
   return s.str ();
 }
@@ -4208,7 +4208,7 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
-        "[" << sm [i] << "] ";
+        '[' << sm [i] << "] ";
     } // for
 
     gLogStream << endl;
@@ -4333,10 +4333,10 @@ string oahTwoIntegersAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName <<
+    '-' << fShortName <<
     " \"" <<
     fIntegerVariable <<
-    " " <<
+    ' ' <<
     fIntegerSecondaryVariable <<
     "\"";
 
@@ -4348,10 +4348,10 @@ string oahTwoIntegersAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName <<
+    '-' << fLongName <<
     " \"" <<
     fIntegerVariable <<
-    " " <<
+    ' ' <<
     fIntegerSecondaryVariable <<
     "\"";
 
@@ -4393,7 +4393,7 @@ void oahTwoIntegersAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : " <<
     fIntegerVariable <<
-    " " <<
+    ' ' <<
     fIntegerSecondaryVariable;
 
   if (fSetByUser) { // JMIJMIJMI
@@ -4480,7 +4480,7 @@ void oahFloatAtom::applyAtomWithValue (
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
-        "[" << sm [i] << "] ";
+        '[' << sm [i] << "] ";
     } // for
 
     gLogStream << endl;
@@ -4598,7 +4598,7 @@ string oahFloatAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " << fFloatVariable;
+    '-' << fShortName << ' ' << fFloatVariable;
 
   return s.str ();
 }
@@ -4608,7 +4608,7 @@ string oahFloatAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " << fFloatVariable;
+    '-' << fLongName << ' ' << fFloatVariable;
 
   return s.str ();
 }
@@ -4793,7 +4793,7 @@ string oahStringAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " '" << fStringVariable << "'";
+    '-' << fShortName << " '" << fStringVariable << "'";
 
   return s.str ();
 }
@@ -4803,7 +4803,7 @@ string oahStringAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " '" << fStringVariable << "'";
+    '-' << fLongName << " '" << fStringVariable << "'";
 
   return s.str ();
 }
@@ -4838,7 +4838,7 @@ void oahStringAtom::printAtomWithVariableOptionsValues (
     setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
-    "[" << fStringVariable << "]";
+    '[' << fStringVariable << "]";
 
   if (fSetByUser) { // JMIJMIJMI
     os <<
@@ -5151,7 +5151,7 @@ void oahFactorizedStringAtom::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << " ";
+      os << ' ';
     } // for
 
     os << "'";
@@ -5167,7 +5167,7 @@ void oahFactorizedStringAtom::print (ostream& os) const
 void oahFactorizedStringAtom::printHelp (ostream& os) const
 {
   os <<
-    "-" << fAtomNameDescriptor << " " << fStringValueDescriptor <<
+    '-' << fAtomNameDescriptor << ' ' << fStringValueDescriptor <<
     endl;
 
   if (fDescription.size ()) {
@@ -5397,7 +5397,7 @@ string oahStringWithDefaultValueAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " << fStringVariable;
+    '-' << fShortName << ' ' << fStringVariable;
 
   return s.str ();
 }
@@ -5407,7 +5407,7 @@ string oahStringWithDefaultValueAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " << fStringVariable;
+    '-' << fLongName << ' ' << fStringVariable;
 
   return s.str ();
 }
@@ -5619,7 +5619,7 @@ string oahStringWithRegexAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " << fStringVariable;
+    '-' << fShortName << ' ' << fStringVariable;
 
   return s.str ();
 }
@@ -5629,7 +5629,7 @@ string oahStringWithRegexAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " << fStringVariable;
+    '-' << fLongName << ' ' << fStringVariable;
 
   return s.str ();
 }
@@ -5759,7 +5759,7 @@ void oahRationalAtom::applyAtomWithValue (
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
-        "[" << sm [i] << "] ";
+        '[' << sm [i] << "] ";
     } // for
 
     gLogStream << endl;
@@ -5877,7 +5877,7 @@ string oahRationalAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " << fRationalVariable;
+    '-' << fShortName << ' ' << fRationalVariable;
 
   return s.str ();
 }
@@ -5887,7 +5887,7 @@ string oahRationalAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " << fRationalVariable;
+    '-' << fLongName << ' ' << fRationalVariable;
 
   return s.str ();
 }
@@ -6057,7 +6057,7 @@ string oahNaturalNumbersSetElementAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     "[";
 
   set<int>::const_iterator
@@ -6068,7 +6068,7 @@ string oahNaturalNumbersSetElementAtom::asShortNamedOptionString () const
   for ( ; ; ) {
     s << (*i);
     if (++i == iEnd) break;
-    s << " ";
+    s << ' ';
   } // for
 
   s <<
@@ -6082,7 +6082,7 @@ string oahNaturalNumbersSetElementAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     "[";
 
   set<int>::const_iterator
@@ -6093,7 +6093,7 @@ string oahNaturalNumbersSetElementAtom::asActualLongNamedOptionString () const
   for ( ; ; ) {
     s << (*i);
     if (++i == iEnd) break;
-    s << " ";
+    s << ' ';
   } // for
 
   s <<
@@ -6137,7 +6137,7 @@ void oahNaturalNumbersSetElementAtom::print (ostream& os) const
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << " ";
+      os << ' ';
     } // for
 
     os <<
@@ -6178,7 +6178,7 @@ void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
     for ( ; ; ) {
       os << (*i);
       if (++i == iEnd) break;
-      os << " ";
+      os << ' ';
     } // for
 
     os << "'";
@@ -6311,8 +6311,8 @@ string oahRGBColorAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
-    "[" <<
+    '-' << fShortName << ' ' <<
+    '[' <<
     fRGBColorVariable.asString () <<
     "]";
 
@@ -6324,8 +6324,8 @@ string oahRGBColorAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
-    "[" <<
+    '-' << fLongName << ' ' <<
+    '[' <<
     fRGBColorVariable.asString () <<
     "]";
 
@@ -6569,7 +6569,7 @@ string oahIntSetElementAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " ";
+    '-' << fShortName << ' ';
 
   if (! fIntSetVariable.size ()) {
     s << "empty";
@@ -6594,7 +6594,7 @@ string oahIntSetElementAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " ";
+    '-' << fLongName << ' ';
 
   if (! fIntSetVariable.size ()) {
     s << "empty";
@@ -6851,7 +6851,7 @@ string oahStringSetElementAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " ";
+    '-' << fShortName << ' ';
 
   if (! fStringSetVariable.size ()) {
     s << "empty";
@@ -6876,7 +6876,7 @@ string oahStringSetElementAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " ";
+    '-' << fLongName << ' ';
 
   if (! fStringSetVariable.size ()) {
     s << "empty";
@@ -7187,7 +7187,7 @@ string oahStringToIntMapElementAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " ";
+    '-' << fShortName << ' ';
 
   if (! fStringToIntMapVariable.size ()) {
     s << "empty";
@@ -7212,7 +7212,7 @@ string oahStringToIntMapElementAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " ";
+    '-' << fLongName << ' ';
 
   if (! fStringToIntMapVariable.size ()) {
     s << "empty";
@@ -7405,7 +7405,7 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
-        "[" << sm [i] << "] ";
+        '[' << sm [i] << "] ";
     } // for
 
     gLogStream << endl;
@@ -7544,7 +7544,7 @@ string oahStringAndIntegerAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     "\"" <<
     fStringVariable <<
     "\" " <<
@@ -7558,7 +7558,7 @@ string oahStringAndIntegerAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     "\"" <<
     fStringVariable <<
     "\" " <<
@@ -7718,7 +7718,7 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
-        "[" << sm [i] << "] ";
+        '[' << sm [i] << "] ";
     } // for
 
     gLogStream << endl;
@@ -7881,12 +7881,12 @@ string oahStringAndTwoIntegersAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     "\"" <<
     fStringVariable <<
     "\" " <<
     fPrimaryIntegerVariable <<
-    " " <<
+    ' ' <<
     fSecondaryIntegerVariable;
 
   return s.str ();
@@ -7897,12 +7897,12 @@ string oahStringAndTwoIntegersAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     "\"" <<
     fStringVariable <<
     "\" " <<
     fPrimaryIntegerVariable <<
-    " " <<
+    ' ' <<
     fSecondaryIntegerVariable;
 
   return s.str ();
@@ -8138,7 +8138,7 @@ string oahLengthUnitKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     msrLengthUnitKindAsString (fLengthUnitKindVariable);
 
   return s.str ();
@@ -8149,7 +8149,7 @@ string oahLengthUnitKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     msrLengthUnitKindAsString (fLengthUnitKindVariable);
 
   return s.str ();
@@ -8284,7 +8284,7 @@ void oahLengthAtom::applyAtomWithValue (
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
-        "[" << sm [i] << "] ";
+        '[' << sm [i] << "] ";
     } // for
 
     gLogStream << endl;
@@ -8419,7 +8419,7 @@ string oahLengthAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     fLengthVariable.asString ();
 
   return s.str ();
@@ -8430,7 +8430,7 @@ string oahLengthAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     fLengthVariable.asString ();
 
   return s.str ();
@@ -8710,7 +8710,7 @@ string oahMidiTempoAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     fMidiTempoVariable.asString ();
 
   return s.str ();
@@ -8721,7 +8721,7 @@ string oahMidiTempoAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     fMidiTempoVariable.asString ();
 
   return s.str ();
@@ -8923,7 +8923,7 @@ string oahOptionNameHelpAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " << fVariableName;
+    '-' << fShortName << ' ' << fVariableName;
 
   return s.str ();
 }
@@ -8933,7 +8933,7 @@ string oahOptionNameHelpAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " << fVariableName;
+    '-' << fLongName << ' ' << fVariableName;
 
   return s.str ();
 }
@@ -9100,7 +9100,7 @@ string oahQueryOptionNameAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName;
+    '-' << fShortName;
 
   return s.str ();
 }
@@ -9110,7 +9110,7 @@ string oahQueryOptionNameAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName;
+    '-' << fLongName;
 
   return s.str ();
 }
@@ -9346,7 +9346,7 @@ string oahFindStringAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName;
+    '-' << fShortName;
 
   return s.str ();
 }
@@ -9356,7 +9356,7 @@ string oahFindStringAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName;
+    '-' << fLongName;
 
   return s.str ();
 }
@@ -9524,7 +9524,7 @@ string oahIncludeOptionsAndArgumentsFileAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName;
+    '-' << fShortName;
 
   return s.str ();
 }
@@ -9534,7 +9534,7 @@ string oahIncludeOptionsAndArgumentsFileAtom::asActualLongNamedOptionString () c
   stringstream s;
 
   s <<
-    "-" << fLongName;
+    '-' << fLongName;
 
   return s.str ();
 }

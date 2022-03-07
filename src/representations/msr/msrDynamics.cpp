@@ -130,7 +130,7 @@ void msrDynamic::browseData (basevisitor* v)
 void msrDynamic::print (ostream& os) const
 {
   os <<
-    "Dynamics" " " <<
+    "Dynamics " <<
     msrDynamicKindAsString (fDynamicKind) <<
     ", dynamicPlacementKind: " <<
     msrPlacementKindAsString (fDynamicPlacementKind) <<
@@ -345,11 +345,11 @@ void msrCrescDecresc::browseData (basevisitor* v)
 void msrCrescDecresc::print (ostream& os) const
 {
   os <<
-    "[CrescDecresc" " " << fCrescDecrescKind <<
+    "[CrescDecresc " << fCrescDecrescKind <<
     ", line " << fInputLineNumber <<
     endl;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrCrescDecresc& elt)
@@ -497,7 +497,7 @@ void msrWedge::browseData (basevisitor* v)
 void msrWedge::print (ostream& os) const
 {
   os <<
-    "[Wedge" " " << fWedgeKind <<
+    "[Wedge " << fWedgeKind <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -524,7 +524,7 @@ void msrWedge::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrWedge& elt)

@@ -1402,26 +1402,26 @@ string oahElement::fetchNames () const
   ) {
     if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
       s <<
-        "-" << fShortName <<
+        '-' << fShortName <<
         ", " <<
-        "-" << fLongName;
+        '-' << fLongName;
     }
     else {
       s <<
-        "-" << fLongName <<
+        '-' << fLongName <<
         ", " <<
-        "-" << fShortName;
+        '-' << fShortName;
     }
   }
 
   else {
     if (fShortName.size ()) {
       s <<
-      "-" << fShortName;
+      '-' << fShortName;
     }
     if (fLongName.size ()) {
       s <<
-        "-" << fLongName;
+        '-' << fLongName;
     }
   }
 

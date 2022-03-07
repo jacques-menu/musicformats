@@ -284,7 +284,7 @@ int main (int argc, char* argv[])
         outputFileName.size ();
 
     gLogStream <<
-      "This is " << serviceName << " " <<
+      "This is " << serviceName << ' ' <<
       getGlobalMusicFormatsVersionNumberAndDate () <<
       endl;
 

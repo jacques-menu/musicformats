@@ -213,7 +213,7 @@ void msrFullMeasureRestsContents::print (ostream& os) const
 {
   os <<
     endl <<
-    "[" <<
+    '[' <<
     asString () <<
     endl;
 
@@ -241,7 +241,7 @@ void msrFullMeasureRestsContents::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrFullMeasureRestsContents& elt)

@@ -208,7 +208,7 @@ string lpsrPitchesLanguageAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
 
@@ -220,7 +220,7 @@ string lpsrPitchesLanguageAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
 
@@ -442,7 +442,7 @@ string lpsrChordsLanguageAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     lpsrChordsLanguageKindAsString (fLpsrChordsLanguageKindVariable);
 
   return s.str ();
@@ -453,7 +453,7 @@ string lpsrChordsLanguageAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     lpsrChordsLanguageKindAsString (fLpsrChordsLanguageKindVariable);
 
   return s.str ();
@@ -655,7 +655,7 @@ string lpsrTransposeAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
   return s.str ();
@@ -666,7 +666,7 @@ string lpsrTransposeAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     fSemiTonesPitchAndOctaveVariable->asString ();
 
   return s.str ();

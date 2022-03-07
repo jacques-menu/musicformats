@@ -525,7 +525,7 @@ string msrHarpPedalsTuning::asString () const
       s <<
         msrDiatonicPitchKindAsString (
           (*i).first) <<
-        " " <<
+        ' ' <<
         msrAlterationKindAsString (
           (*i).second);
       if (++i == iEnd) break;
@@ -564,7 +564,7 @@ void msrHarpPedalsTuning::print (ostream& os) const
       os <<
         msrDiatonicPitchKindAsString (
           (*i).first) <<
-        " " <<
+        ' ' <<
         msrAlterationKindAsString (
           (*i).second);
       if (++i == iEnd) break;
@@ -580,7 +580,7 @@ void msrHarpPedalsTuning::print (ostream& os) const
       endl;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrHarpPedalsTuning& elt)

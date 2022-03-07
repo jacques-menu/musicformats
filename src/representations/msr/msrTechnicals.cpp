@@ -198,7 +198,7 @@ string msrTechnical::asString () const
 void msrTechnical::print (ostream& os) const
 {
   os <<
-    "Technical" " " <<
+    "Technical " <<
     asString () <<
     ", line " << fInputLineNumber <<
 //    ", accidental mark" << " = " << technicalAccidentalMarkKindAsString () <<

@@ -631,7 +631,7 @@ string existingTokensInLanguage (
       s << nonSeparatorTokenAsMsdlString;
 
       if (count <= nextToLast) {
-        s << " ";
+        s << ' ';
       }
 /*
       if ((int) i < (int) msdlTokenKind::LastIterable - 2) { JMI KEEP
@@ -1423,9 +1423,9 @@ string msdlToken::asString () const
     "[ " <<
     "@" << fTokenLineNumber <<
     ":" << fTokenPositionInLine <<
-    " " <<
+    ' ' <<
     msdlTokenKindAsString (fTokenKind) <<
-    " ";
+    ' ';
 
   switch (fTokenKind) {
     case msdlTokenKind::k_NoToken:
@@ -1525,10 +1525,10 @@ string msdlToken::asString () const
       break;
 
     case msdlTokenKind::kTokenLeftBracket:
-      s << "{";
+      s << '{';
       break;
     case msdlTokenKind::kTokenRightBracket:
-      s << "}";
+      s << '}';
       break;
 
     case msdlTokenKind::kTokenQuote:
@@ -1619,7 +1619,7 @@ string msdlToken::asMsdlString (
     // ------------------------------------
 
     case msdlTokenKind::kTokenSpace:
-      s << " ";
+      s << ' ';
       break;
     case msdlTokenKind::kTokenTabSeparator:
       s << "TokenTab";

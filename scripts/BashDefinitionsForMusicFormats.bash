@@ -1,6 +1,8 @@
 # These definitions can be used in your bash setup
 # and modified ad libitum to suit your needs.
 
+alias pb='. ${HOME}/.bashrc'
+
 # dev branch
 #----------------------------------------------
 
@@ -38,7 +40,7 @@ SRC_DIR=${MUSIC_FORMATS_DEV}/src
 LXML_SRC_DIR=${LXML_DIR}/src
 LXML_INTERFACE_DIR=${LXML_SRC_DIR}/interface
 
-SCRIPTS_DIR=${MUSIC_FORMATS_DEV}/build/scripts
+SCRIPTS_DIR=${MUSIC_FORMATS_DEV}/scripts
 alias skr="cd ${SCRIPTS_DIR}"
 
 BUILD_DIR=${MUSIC_FORMATS_DEV}/build
@@ -144,6 +146,15 @@ alias msdlc='cd ${SRC_DIR}/converters/msdlconverter'
 #----------------------------------------------
 
 alias msdr='cd ${SRC_DIR}/representations/msdr'
+
+
+# MFSL
+#----------------------------------------------
+
+MFSL_DIR=${SRC_DIR}/mfsl
+alias mfsl="cd ${MFSL_DIR}"
+
+alias mfsli='mfslInterpreter'
 
 
 # musicxml2ly
@@ -716,12 +727,15 @@ function addSrc ()
 {
   git add ${SRC_DIR}/*.h
 
+  git add -f ${SRC_DIR}/mfsl/Makefile
+
   git add ${SRC_DIR}/clisamples/*
   git add ${SRC_DIR}/components/*
   git add ${SRC_DIR}/converters/*/*
   git add ${SRC_DIR}/formats/*/*
   git add ${SRC_DIR}/generators/*/*
   git add ${SRC_DIR}/mflibrary/*
+  git add ${SRC_DIR}/mfsl/*
   git add ${SRC_DIR}/oah/*
   git add ${SRC_DIR}/passes/*/*
   git add ${SRC_DIR}/representations/*/*

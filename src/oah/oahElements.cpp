@@ -165,6 +165,19 @@ S_oahElement oahElement::thisElementIfItHasName (
   return result;
 }
 
+string oahElement::getShortNameOrLongNameIfEmpty () const
+{
+  string result;
+
+  if (fShortName.size ()) {
+    result = fShortName;
+  }
+  else {
+    result = fLongName;
+  }
+
+}
+
 string oahElement::fetchNames () const
 {
   stringstream s;
@@ -176,26 +189,26 @@ string oahElement::fetchNames () const
   ) {
     if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
       s <<
-        "-" << fShortName <<
+        '-' << fShortName <<
         ", " <<
-        "-" << fLongName;
+        '-' << fLongName;
     }
     else {
       s <<
-        "-" << fLongName <<
+        '-' << fLongName <<
         ", " <<
-        "-" << fShortName;
+        '-' << fShortName;
     }
   }
 
   else {
     if (fLongName.size ()) {
       s <<
-        "-" << fLongName;
+        '-' << fLongName;
     }
     if (fShortName.size ()) {
       s <<
-      "-" << fShortName;
+      '-' << fShortName;
     }
   }
 
@@ -215,16 +228,16 @@ string oahElement::fetchNamesInColumns (
       if (gGlobalOahOahGroup->getReverseNamesDisplayOrder ()) {
         s << left <<
           setw (subGroupsShortNameFieldWidth) <<
-          "-" << fLongName <<
+          '-' << fLongName <<
           ", " <<
-          "-" << fShortName;
+          '-' << fShortName;
       }
       else {
         s << left <<
           setw (subGroupsShortNameFieldWidth) <<
-          "-" << fLongName <<
+          '-' << fLongName <<
           ", " <<
-          "-" << fShortName;
+          '-' << fShortName;
       }
   }
 
@@ -234,11 +247,11 @@ string oahElement::fetchNamesInColumns (
 
     if (fLongName.size ()) {
       s <<
-        "-" << fLongName;
+        '-' << fLongName;
     }
     if (fShortName.size ()) {
       s << left <<
-          "-" + fShortName;
+         '-' << fShortName;
     }
   }
 
@@ -262,7 +275,7 @@ string oahElement::fetchNamesBetweenParentheses () const
   stringstream s;
 
   s <<
-    "(" <<
+    '(' <<
     fetchNames () <<
     ")";
 
@@ -275,7 +288,7 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
   stringstream s;
 
   s <<
-    "(" <<
+    '(' <<
     fetchNamesInColumns (
       subGroupsShortNameFieldWidth) <<
     ")";
@@ -433,9 +446,9 @@ string oahElement::asString () const
 void oahElement::printOptionHeader (ostream& os) const
 {
   os <<
-    "-" << fLongName <<
+    '-' << fLongName <<
     endl <<
-    "-" << fShortName <<
+    '-' << fShortName <<
     endl;
 
   if (fDescription.size ()) {

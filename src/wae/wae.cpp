@@ -85,7 +85,7 @@ void waeErrorWithoutException (
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
       gLogStream <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
-        " ";
+        ' ';
     }
 
     if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
@@ -204,7 +204,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
       "Warning message(s) were issued for input " <<
       mfSingularOrPluralWithoutNumber (
         warningsInputLineNumbersSize, "line", "lines") <<
-      " ";
+      ' ';
 
     set<int>::const_iterator
       iBegin = gGlobalWarningsInputLineNumbers.begin (),
@@ -228,7 +228,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
       "Error message(s) were issued for input " <<
       mfSingularOrPluralWithoutNumber (
         errorsInputLineNumbersSize, "line", "lines") <<
-      " ";
+      ' ';
 
     set<int>::const_iterator
       iBegin = gGlobalErrorsInputLineNumbers.begin (),
@@ -260,7 +260,7 @@ void msrStreamsWarning (
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
       gLogStream <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
-        " ";
+        ' ';
     }
 
     gLogStream <<
@@ -281,7 +281,7 @@ void msrStreamsError (
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
       gLogStream <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
-        " ";
+        ' ';
     }
 
     gLogStream <<

@@ -537,7 +537,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
       smSize << " elements: ";
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
-        "[" << sm [i] << "] ";
+        '[' << sm [i] << "] ";
     } // for
     gLogStream << endl;
   }
@@ -838,7 +838,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
         smSize << " elements: ";
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
       gLogStream << endl;
     }

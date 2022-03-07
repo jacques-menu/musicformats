@@ -304,7 +304,7 @@ void lpsrHeader::print (ostream& os) const
 
   if (emptyHeader) {
     os <<
-      " " << "nothing specified" <<
+      ' ' << "nothing specified" <<
       endl << endl; // JMI
   }
 

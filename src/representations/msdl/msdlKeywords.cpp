@@ -790,10 +790,10 @@ string existingKeywordsInLanguage (
       s << theString;
 
       if (count == nextToLast) {
-        s << " ";
+        s << ' ';
       }
       else if (count != keywordsNameMapSize) {
-        s << " ";
+        s << ' ';
       }
     } // for
   }

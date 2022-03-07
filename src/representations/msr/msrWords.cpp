@@ -188,7 +188,7 @@ string msrWords::asString () const
   s <<
     "Words" <<
     ", line " << fInputLineNumber <<
-    " " <<
+    ' ' <<
     fWordsContents << ", placement = " <<
     msrPlacementKindAsString (fWordsPlacementKind);
 
@@ -255,7 +255,7 @@ void msrWords::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrWords& elt)
