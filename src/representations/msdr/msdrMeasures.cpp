@@ -232,7 +232,7 @@ void msdrMeasure::print (ostream& os) const
 
 /* JMI
   os << left <<
-    "(" <<
+    '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<
@@ -316,7 +316,7 @@ void msdrMeasure::printShort (ostream& os) const
 
 /* JMI
   os << left <<
-    "(" <<
+    '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<

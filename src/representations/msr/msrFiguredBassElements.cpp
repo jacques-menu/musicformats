@@ -646,7 +646,7 @@ string msrFiguredBassElement::asString () const
     for ( ; ; ) {
       s << (*i)->asString ();
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
     } // for
   s << "]";
   }
@@ -762,7 +762,7 @@ void msrFiguredBassElement::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrFiguredBassElement& elt)

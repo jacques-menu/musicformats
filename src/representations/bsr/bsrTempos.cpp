@@ -254,7 +254,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
             for (unsigned i = 0; i < smSize; ++i) {
               gLogStream <<
-                "[" << sm [i] << "] ";
+                '[' << sm [i] << "] ";
             } // for
 
             gLogStream << endl;
@@ -298,7 +298,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
               for (unsigned i = 0; i < smSize; ++i) {
                 gLogStream <<
-                  "[" << sm [i] << "] ";
+                  '[' << sm [i] << "] ";
               } // for
 
               gLogStream << endl;

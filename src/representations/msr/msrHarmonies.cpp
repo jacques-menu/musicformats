@@ -805,7 +805,7 @@ string msrHarmony::asString () const
     for ( ; ; ) {
       s << (*i)->asString ();
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
     } // for
   }
 
@@ -994,7 +994,7 @@ void msrHarmony::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrHarmony& elt)

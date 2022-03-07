@@ -398,7 +398,7 @@ string mfMultiGenerationOutputKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindVariable);
 
@@ -410,7 +410,7 @@ string mfMultiGenerationOutputKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindVariable);
 

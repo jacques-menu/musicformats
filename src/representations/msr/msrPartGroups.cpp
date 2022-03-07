@@ -1148,7 +1148,7 @@ void msrPartGroup::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrPartGroup::printShort (ostream& os) const
@@ -1190,7 +1190,7 @@ void msrPartGroup::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrPartGroup::printSummary (ostream& os) const
@@ -1259,7 +1259,7 @@ void msrPartGroup::printSummary (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrPartGroup::printSlices (ostream& os) const

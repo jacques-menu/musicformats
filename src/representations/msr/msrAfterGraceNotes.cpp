@@ -198,7 +198,7 @@ string msrAfterGraceNotesGroupContents::asShortString () const
     for ( ; ; ) {
       s << (*i)->asShortString ();
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
     } // for
   }
 
@@ -232,7 +232,7 @@ void msrAfterGraceNotesGroupContents::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrAfterGraceNotesGroupContents& elt)
@@ -453,7 +453,7 @@ void msrAfterGraceNotesGroup::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrAfterGraceNotesGroup& elt)

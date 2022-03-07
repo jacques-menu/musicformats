@@ -153,7 +153,7 @@ void msrMidiTempo::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrMidiTempo& elt)

@@ -116,6 +116,8 @@ class EXP oahElement : public smartable
     string                getShortName () const
                               { return fShortName; }
 
+    string                getShortNameOrLongNameIfEmpty () const;
+
     string                getDescription () const
                               { return fDescription; }
 
@@ -195,11 +197,9 @@ class EXP oahElement : public smartable
     // ------------------------------------------------------
 
     virtual string        asActualLongNamedOptionString () const
-                              {   return "-" + fLongName; }
+                              { return '-' + fLongName; }
     virtual string        asShortNamedOptionString () const
-                              {
-                                return "-" + fShortName;
-                              }
+                              { return '-' + fShortName; }
 
     string                asLongNamedOptionString () const;
 

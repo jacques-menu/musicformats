@@ -230,7 +230,7 @@ void msrRepeatCoda::print (ostream& os) const
 {
   os <<
     endl <<
-    "[" <<
+    '[' <<
     asString () <<
     endl;
 
@@ -241,7 +241,7 @@ void msrRepeatCoda::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrRepeatCoda& elt)

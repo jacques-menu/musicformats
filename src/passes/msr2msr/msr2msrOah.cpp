@@ -194,7 +194,7 @@ string msrIgnorePartAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " ";
+    '-' << fShortName << ' ';
 
   if (! fStringSetVariable.size ()) {
     s << "empty";
@@ -219,7 +219,7 @@ string msrIgnorePartAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " ";
+    '-' << fLongName << ' ';
 
   if (! fStringSetVariable.size ()) {
     s << "empty";
@@ -481,7 +481,7 @@ string msrKeepPartAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " ";
+    '-' << fShortName << ' ';
 
   if (! fStringSetVariable.size ()) {
     s << "empty";
@@ -506,7 +506,7 @@ string msrKeepPartAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " ";
+    '-' << fLongName << ' ';
 
   if (! fStringSetVariable.size ()) {
     s << "empty";

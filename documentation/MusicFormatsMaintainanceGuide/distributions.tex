@@ -73,7 +73,7 @@ After a push to the \masterBranch:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "Switched from C++11 to C++17 for <filesystem>" -a[master 77d3d29] Switched from C++11 to C++17 for <filesystem>
  7 files changed, 10 insertions(+), 10 deletions(-)
- 
+
 jacquesmenu@macmini: ~/musicformats-git-dev > git push
 Enumerating objects: 33, done.
 Counting objects: 100% (33/33), done.
@@ -92,7 +92,7 @@ we get for example:\\
 Then cliking on the link leads to:\\
 \includegraphics[scale=0.45]{../graphics/GitHubUbuntuActionResult.png}
 
-The \code{musicformats-ubuntu-distrib} archive has to be clicked to get downloaded, since its URL cannot be guessed by an algorithm (it contains numbers internal to \github). 
+The \code{musicformats-ubuntu-distrib} archive has to be clicked to get downloaded, since its URL cannot be guessed by an algorithm (it contains numbers internal to \github).
 
 Doing so for the three distributions, we get the following, here in the \directoryName{Downloads} folder on \MacOS, with the \zip\ archives are automatically uncompressed :
 \begin{lstlisting}[language=Terminal]
@@ -226,7 +226,7 @@ The hierarchy in the \directoryName{musicformats-*-distrib} directories comes fr
 
 Their contents is thus re-structured by \scripts{MakeMusicFormatsDistributions.bash}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/distrib > ../build/scripts/MakeMusicFormatsDistributions.bash
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/MakeMusicFormatsDistributions.bash
 ... ... ...
 
 ==> final distrib contents:
@@ -296,7 +296,7 @@ When downloading the \mf\ distributions from the \repo\ on versions up to 10 (\M
 
 From version 11 (\Main{Catalina}) on, though, the executables you get are not executable actually, because their developer is unknown to the \OS, and actions have to be taken for them to be usable.
 
-The trouble is that these executables are in {\it \quarantine} by default. To make them usable, they have to quit quarantine and explicitly be made executable. 
+The trouble is that these executables are in {\it \quarantine} by default. To make them usable, they have to quit quarantine and explicitly be made executable.
 
 This is done this way using \code{chmod} and \code{xattr} in \scripts{MakeMusicFormatsDistributions.bash}:
 \begin{lstlisting}[language=Terminal]

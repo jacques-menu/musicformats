@@ -76,7 +76,7 @@ void crackVersionNumber (
 
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
 
       gLogStream << endl;
@@ -132,7 +132,7 @@ void crackVersionNumber (
 
         for (unsigned i = 0; i < smSize; ++i) {
           gLogStream <<
-            "[" << sm [i] << "] ";
+            '[' << sm [i] << "] ";
         } // for
 
         gLogStream << endl;
@@ -398,7 +398,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
     for (unsigned i = 0; i < smSize; ++i) {
       gLogStream <<
-        "[" << sm [i] << "] ";
+        '[' << sm [i] << "] ";
     } // for
 
     gLogStream << endl;
@@ -679,7 +679,7 @@ string mfcVersionNumber::asString () const
 
   if (fPreRelease.size ()) {
     s <<
-// JMI      "-" <<
+// JMI      '-' <<
       fPreRelease;
    }
 
@@ -942,7 +942,7 @@ void mfcComponentDescr::appendVersionDescrToComponent (
       versionDescr <<
       " to " <<
       componenKindAsString (fComponenKind) <<
-      " " <<
+      ' ' <<
       fComponentName <<
       endl;
   }
@@ -962,9 +962,9 @@ string mfcComponentDescr::asString () const
 
   s <<
     fComponentName <<
-    " " <<
+    ' ' <<
     componenKindAsString (fComponenKind) <<
-    " " <<
+    ' ' <<
     componentMostRecentVersion->
       getVersionNumber ()->
         asString () <<
@@ -1022,9 +1022,9 @@ void mfcComponentDescr::printVersion (ostream& os) const
 
   os <<
     fComponentName <<
-    " " <<
+    ' ' <<
     componenKindAsString (fComponenKind) <<
-    " " <<
+    ' ' <<
     getGlobalMusicFormatsVersionNumberAndDate () <<
     endl;
 }
@@ -1236,9 +1236,9 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
       format <<
       " to " <<
       fComponentName <<
-      " " <<
+      ' ' <<
       componenKindAsString (fComponenKind) <<
-      " " <<
+      ' ' <<
       "\"" <<
       endl;
   }
@@ -1271,7 +1271,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
           s <<
             "Versions numbering inconsistency: multi component " <<
             fComponentName <<
-            " " <<
+            ' ' <<
             componenKindAsString (fComponenKind) <<
             " has version number " <<
             multiComponentMostRecentVersionNumber->asString () <<
@@ -1332,7 +1332,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
           s <<
             "Versions numbering inconsistency: multi component " <<
             fComponentName <<
-            " " <<
+            ' ' <<
             componenKindAsString (fComponenKind) <<
             " has version number " <<
             multiComponentMostRecentVersionNumber->asString () <<
@@ -1524,15 +1524,15 @@ void mfcMultiComponent::print (ostream& os) const
       os <<
         "Command line version of " <<
         fComponentName <<
-        " " <<
+        ' ' <<
         componenKindAsString (fComponenKind) <<
-        " ";
+        ' ';
       break;
 
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLINo:
       os <<
         fComponentName <<
-        " " <<
+        ' ' <<
         componenKindAsString (fComponenKind) <<
         " API version ";
       break;
@@ -1614,15 +1614,15 @@ void mfcMultiComponent::printVersionShort (ostream& os) const
       os <<
         "Command line version of " <<
         fComponentName <<
-        " " <<
+        ' ' <<
         componenKindAsString (fComponenKind) <<
-        " ";
+        ' ';
       break;
 
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLINo:
       os <<
         fComponentName <<
-        " " <<
+        ' ' <<
         componenKindAsString (fComponenKind) <<
       " API version ";
       break;
@@ -1640,15 +1640,15 @@ void mfcMultiComponent::printVersionFull (ostream& os) const
       os <<
         "Command line version of " <<
         fComponentName <<
-        " " <<
+        ' ' <<
         componenKindAsString (fComponenKind) <<
-        " ";
+        ' ';
       break;
 
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLINo:
       os <<
         fComponentName <<
-        " " <<
+        ' ' <<
         componenKindAsString (fComponenKind) <<
         " API version ";
       break;
@@ -1674,15 +1674,15 @@ void mfcMultiComponent::printHistory (ostream&  os) const
       os <<
         "Command line version of " <<
         fComponentName <<
-        " " <<
+        ' ' <<
         componenKindAsString (fComponenKind) <<
-        " ";
+        ' ';
       break;
 
     case mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLINo:
       os <<
         fComponentName <<
-        " " <<
+        ' ' <<
         componenKindAsString (fComponenKind) <<
       " API version ";
       break;
@@ -1887,9 +1887,9 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
       converter <<
       " to " <<
       fComponentName <<
-      " " <<
+      ' ' <<
       componenKindAsString (fComponenKind) <<
-      " " <<
+      ' ' <<
       "\"" <<
       endl;
   }
@@ -1922,7 +1922,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
           s <<
             "Versions numbering inconsistency: multi component " <<
             fComponentName <<
-            " " <<
+            ' ' <<
             componenKindAsString (fComponenKind) <<
             " has version number " <<
             multiComponentMostRecentVersionNumber->asString () <<

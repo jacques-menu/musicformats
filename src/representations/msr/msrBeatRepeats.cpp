@@ -323,7 +323,7 @@ void msrBeatRepeatElement::print (ostream& os) const
     "beatRepeatElementsList: ";
   if (elementsNumber) {
     os <<
-      "(" <<
+      '(' <<
       mfSingularOrPlural (
         elementsNumber, "element", "elements") <<
       ")";
@@ -382,7 +382,7 @@ void msrBeatRepeatElement::printShort (ostream& os)
     "repeatElementsList: ";
   if (elementsNumber) {
     os <<
-      "(" <<
+      '(' <<
       mfSingularOrPlural (
         elementsNumber, "element", "elements") <<
       ")";
@@ -574,7 +574,7 @@ void msrBeatRepeatPattern::print (ostream& os) const
 {
   os <<
     endl <<
-    "[" <<
+    '[' <<
     asString () <<
     endl << endl;
 
@@ -602,7 +602,7 @@ void msrBeatRepeatPattern::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrBeatRepeatPattern& elt)
@@ -763,7 +763,7 @@ void msrBeatRepeatReplicas::print (ostream& os) const
 {
   os <<
     endl <<
-    "[" <<
+    '[' <<
     asString () <<
     endl << endl;
 
@@ -791,7 +791,7 @@ void msrBeatRepeatReplicas::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrBeatRepeatReplicas& elt)
@@ -1208,7 +1208,7 @@ void msrBeatRepeat::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrBeatRepeat& elt)

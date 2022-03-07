@@ -192,7 +192,7 @@ string brailleOutputKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     bsrBrailleOutputKindAsString (fBrailleOutputKindVariable);
 
   return s.str ();
@@ -203,7 +203,7 @@ string brailleOutputKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     bsrBrailleOutputKindAsString (fBrailleOutputKindVariable);
 
   return s.str ();
@@ -414,7 +414,7 @@ string brailleUTFKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     bsrUTFKindAsString (fBsrUTFKindVariable);
 
   return s.str ();
@@ -425,7 +425,7 @@ string brailleUTFKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     bsrUTFKindAsString (fBsrUTFKindVariable);
 
   return s.str ();
@@ -630,7 +630,7 @@ string brailleByteOrderingKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     bsrByteOrderingKindAsString (fBsrByteOrderingKindVariable);
 
   return s.str ();
@@ -641,7 +641,7 @@ string brailleByteOrderingKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     bsrByteOrderingKindAsString (fBsrByteOrderingKindVariable);
 
   return s.str ();

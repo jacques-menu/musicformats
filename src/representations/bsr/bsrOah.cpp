@@ -179,7 +179,7 @@ string bsrFacSimileKindAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     bsrFacSimileKindAsString (fBsrFacSimileKindVariable);
 
   return s.str ();
@@ -190,7 +190,7 @@ string bsrFacSimileKindAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     bsrFacSimileKindAsString (fBsrFacSimileKindVariable);
 
   return s.str ();
@@ -372,7 +372,7 @@ string bsrTextsLanguageAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     bsrTextsLanguageKindAsString (fBsrTextsLanguageKindVariable);
 
   return s.str ();
@@ -383,7 +383,7 @@ string bsrTextsLanguageAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     bsrTextsLanguageKindAsString (fBsrTextsLanguageKindVariable);
 
   return s.str ();

@@ -106,8 +106,8 @@ void lpsrNewLyricsBlock::browseData (basevisitor* v)
 void lpsrNewLyricsBlock::print (ostream& os) const
 {
   os <<
-    "NewLyricsBlock" << " " <<
-    fStanza->getStanzaName () << " " <<
+    "NewLyricsBlock" << ' ' <<
+    fStanza->getStanzaName () << ' ' <<
     fVoice->getVoiceName () <<
     endl;
 }

@@ -240,7 +240,7 @@ string msrTimeSignatureItem::asString () const
 
         if (i != vectorSize - 1) {
           s <<
-            " ";
+            ' ';
         }
       } // for
 
@@ -292,7 +292,7 @@ string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
 
         if (i != vectorSize - 1) {
           s <<
-            " ";
+            ' ';
         }
       } // for
 
@@ -1136,7 +1136,7 @@ void msrTimeSignature::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrTimeSignature& elt)

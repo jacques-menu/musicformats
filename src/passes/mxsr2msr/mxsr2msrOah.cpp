@@ -132,7 +132,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
       gLogStream << endl;
     }
@@ -266,7 +266,7 @@ string msrReplaceClefAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " ";
+    '-' << fShortName << ' ';
 
   if (! fClefKindToClefKindMapVariable.size ()) {
     s << "empty";
@@ -294,7 +294,7 @@ string msrReplaceClefAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " ";
+    '-' << fLongName << ' ';
 
   if (! fClefKindToClefKindMapVariable.size ()) {
     s << "empty";

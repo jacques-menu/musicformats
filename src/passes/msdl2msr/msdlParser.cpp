@@ -281,7 +281,7 @@ void msdlParser::displayTokenKindsSetsStack (const string& context)
     mfSingularOrPlural (
       tokensSetsStackSize, "set", "sets") <<
     "):" <<
-    " [" << context << "]" <<
+    " [" << context << ']' <<
     endl;
 
   if (tokensSetsStackSize) {
@@ -351,7 +351,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const string& context)
         tokensSetsStackSize, "set", "sets") <<
       "):" <<
       ", fCurrentToken: " << currentTokenAsString () <<
-      " [" << context << "]" <<
+      " [" << context << ']' <<
       endl;
   }
 #endif
@@ -374,7 +374,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const string& context)
           endl <<
           "-->isCurrentTokenKindInSetsStack()" <<
           ", fCurrentToken: " << currentTokenAsString () <<
-          " [" << context << "]" <<
+          " [" << context << ']' <<
           endl;
 
         displayTokenKindsSetsStack ("---isCurrentTokenKindInSetsStack()");
@@ -432,7 +432,7 @@ Bool msdlParser::checkMandatoryTokenKind (
       "-->checkMandatoryTokenKind()" <<
       ", @" << mfBaseName (fileName) << ":" << lineNumber <<
       ", tokenKind: " << msdlTokenKindAsString (tokenKind) <<
-      " [" << context << "]" <<
+      " [" << context << ']' <<
       endl;
   }
 #endif
@@ -494,7 +494,7 @@ Bool msdlParser::checkMandatoryTokenKind (
     gLogStream <<
       endl <<
       "<-- checkMandatoryTokenKind()" <<
-      ", context: [" << context << "]" <<
+      ", context: [" << context << ']' <<
       ", tokenKind: " << msdlTokenKindAsString (tokenKind) <<
       ", result: " << result <<
       endl;
@@ -520,7 +520,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
       endl <<
       "-->checkMandatoryTokenKindsSet()" <<
       ", @" << mfBaseName (fileName) << ":" << lineNumber <<
-      ", context: [" << context << "]" <<
+      ", context: [" << context << ']' <<
       ", fCurrentToken: " << currentTokenAsString () <<
       ", tokenKindsSet: " << tokenKindsSet->asString () <<
       endl;
@@ -582,7 +582,7 @@ Bool msdlParser:: checkMandatoryTokenKindsSet (
     gLogStream <<
       endl <<
       "<-- checkMandatoryTokenKindsSet()" <<
-      ", context: [" << context << "]" <<
+      ", context: [" << context << ']' <<
       ", tokenKindsSet: " << tokenKindsSet->asString () <<
       ", result: " << result <<
       endl;
@@ -715,7 +715,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
       endl <<
       "-->checkOptionalTokenKindsSet()" <<
       ", @" << mfBaseName (fileName) << ":" << lineNumber <<
-      ", context: [" << context << "]" <<
+      ", context: [" << context << ']' <<
       ", fCurrentToken: " << currentTokenAsString () <<
       ", tokenKindsSet: " << tokenKindsSet->asString () <<
       endl;
@@ -781,7 +781,7 @@ Bool msdlParser:: checkOptionalTokenKindsSet (
     gLogStream <<
       endl <<
       "<-- checkOptionalTokenKindsSet()" <<
-      ", context: [" << context << "]" <<
+      ", context: [" << context << ']' <<
       ", tokenKindsSet: " << tokenKindsSet->asString () <<
       ", result: " << result <<
       endl;

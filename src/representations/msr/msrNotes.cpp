@@ -4526,7 +4526,7 @@ string msrNote::soundingNoteEssentialsAsStringForMeasuresSlices () const
   } // for
 
   s <<
-    " " <<
+    ' ' <<
     msrOctaveKindAsString (fNoteOctaveKind);
 
   return s.str ();
@@ -4539,7 +4539,7 @@ string msrNote::asShortStringForTimeView () const
   s <<
     "@:" <<
     fMeasureElementPositionInMeasure <<
-    " " <<
+    ' ' <<
     asShortStringForMeasuresSlices ();
 
   return s.str ();
@@ -4551,7 +4551,7 @@ string msrNote::nonSoundingNoteEssentialsAsString () const
 
   s <<
     notePitchAsString () <<
-    " " << // JMI
+    ' ' << // JMI
     noteDisplayWholeNotesAsMsrString ();
 
   for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4575,7 +4575,7 @@ string msrNote::nonSoundingNoteEssentialsAsStringForMeasuresSlices () const
 
   s <<
 //     notePitchAsString () << JMI
-//     " " <<
+//     ' ' <<
     noteDisplayWholeNotesAsMsrString ();
 
   for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4729,7 +4729,7 @@ string msrNote::asString () const
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
       break;
   } // switch
-  s << " ";
+  s << ' ';
 
 
 /* JMI
@@ -5062,7 +5062,7 @@ void msrNote::print (ostream& os) const
   }
   else {
     os <<
-      " " << "none";
+      ' ' << "none";
   }
   os << endl;
 

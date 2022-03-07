@@ -135,7 +135,7 @@ void msrUnsupported (
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
       gLogStream <<
         mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
-        " ";
+        ' ';
     }
 
     gLogStream <<

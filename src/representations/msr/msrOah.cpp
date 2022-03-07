@@ -208,7 +208,7 @@ string msrPitchesLanguageAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " " <<
+    '-' << fShortName << ' ' <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
 
@@ -220,7 +220,7 @@ string msrPitchesLanguageAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " " <<
+    '-' << fLongName << ' ' <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
 
@@ -371,7 +371,7 @@ void msrRenamePartAtom::applyAtomWithValue (
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
       gLogStream << endl;
     }
@@ -491,7 +491,7 @@ string msrRenamePartAtom::asShortNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fShortName << " ";
+    '-' << fShortName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
     s << "empty";
@@ -516,7 +516,7 @@ string msrRenamePartAtom::asActualLongNamedOptionString () const
   stringstream s;
 
   s <<
-    "-" << fLongName << " ";
+    '-' << fLongName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
     s << "empty";

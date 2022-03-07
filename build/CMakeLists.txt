@@ -177,7 +177,7 @@ if (LIB)
     add_definitions(-DXML)
 endif()
 
-set (SRC_FOLDERS ${SRC_FOLDERS} mflibrary components oah wae manpage)
+set (SRC_FOLDERS ${SRC_FOLDERS} mflibrary components oah mfsl wae manpage)
 
 if (MSR)
 	set (SRC_FOLDERS ${SRC_FOLDERS} passes/musicxml2mxsr representations/mxsr passes/mxsr2msr representations/msr passes/msr2msr generators/Mikrokosmos3Wandering generators/LilyPondIssue34)
@@ -303,7 +303,7 @@ endif()
 # set sample targets
 set (LXML_CLI_SAMPLES xmlversion RandomMusic RandomChords xmlfactory partsummary xml2guido xmliter countnotes readunrolled xml2midi xmlread xmltranspose xmlclone)
 
-set (MF_CLI_SAMPLES displayMusicformatsVersion displayMusicformatsHistory MusicAndHarmonies Mikrokosmos3Wandering LilyPondIssue34)
+set (MF_CLI_SAMPLES displayMusicformatsVersion displayMusicformatsHistory MusicAndHarmonies Mikrokosmos3Wandering LilyPondIssue34 mfslInterpreter)
 
 set (LXML_TOOLS xml2guido xmlread xmltranspose xmlversion)
 

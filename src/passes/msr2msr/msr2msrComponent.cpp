@@ -67,7 +67,7 @@ S_mfcPassComponent createMsr2msrComponent ()
           mfcVersionNumber::createFromString ("0.9.62"),
           "March 5, 2022",
           list<string> {
-            "Added '-ignore-msr-voice, -imv' option"
+            "Added '-ignore-msr-voice, -imv' and '-keep-msr-voice, -kmv' options"
           }
       ));
   }

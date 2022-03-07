@@ -137,7 +137,7 @@ string bsrSpaces::asDebugString () const
   string result;
 
   for (int i = 1; i <= fNumberOfSpaces; ++i) {
-    result += " ";
+    result += ' ';
   } // for
 
   return result;

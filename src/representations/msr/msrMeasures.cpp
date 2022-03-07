@@ -443,7 +443,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       gLogStream <<
         mfSingularOrPluralWithoutNumber (
           numberOfMeasureElements, "There is", "There are") <<
-        " " <<
+        ' ' <<
         mfSingularOrPlural (
           numberOfMeasureElements, "element", "elements") <<
         " to be deep copied in measure " <<
@@ -616,7 +616,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
       gLogStream <<
         mfSingularOrPluralWithoutNumber (
           numberOfMeasureElements, "There is", "There are") <<
-        " " <<
+        ' ' <<
         mfSingularOrPlural (
           numberOfMeasureElements, "element", "elements") <<
         " to be copied with notes only in measure " <<
@@ -6500,7 +6500,7 @@ void msrMeasure::print (ostream& os) const
         note->asShortStringForTimeView ();
 
       if (++i == iEnd) break;
-      os << " ";
+      os << ' ';
     } // for
     os << endl;
 
@@ -6509,7 +6509,7 @@ void msrMeasure::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrMeasure::printShort (ostream& os) const
@@ -6585,7 +6585,7 @@ void msrMeasure::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrMeasure& elt)

@@ -453,7 +453,7 @@ string msrBarLine::endingNumbersListAsString () const
     for ( ; ; ) {
       s << (*i);
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
     } // for
   }
 
@@ -623,7 +623,7 @@ void msrBarLine::print (ostream& os) const
   --gIndenter;
 
   os <<
-    "]" <<
+    ']' <<
     endl;
 }
 

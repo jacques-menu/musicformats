@@ -138,7 +138,7 @@ void oahEarlyOptions::appendEarlyIncludeFileName (string includeFileName)
     gLogStream <<
       "Appending fEarlyIncludeFileName [" <<
       includeFileName <<
-      "]" <<
+      ']' <<
       endl;
   }
 #endif
@@ -535,9 +535,9 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
         "applyEarlyOptionsIfPresentInOptionsAndArguments()," <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "There is", "There are") <<
-        " " <<
+        ' ' <<
         argumentsNumber <<
-        " " <<
+        ' ' <<
         mfSingularOrPluralWithoutNumber (
           argumentsNumber, "argument", "arguments") <<
         " in handler arguments vector for " <<
@@ -690,7 +690,7 @@ void oahEarlyOptions::print (ostream& os) const
 
     for ( string includeFileName : fEarlyIncludeFileNamesList ) {
       os <<
-        "[" << includeFileName << "]" <<
+        '[' << includeFileName << ']' <<
         endl;
     } // for
 

@@ -796,13 +796,13 @@ void msrIdentification::print (ostream& os) const
 
   if (emptyIdentification) {
     os <<
-      " " << "nothing specified" <<
+      ' ' << "nothing specified" <<
       endl;
   }
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrIdentification& elt)

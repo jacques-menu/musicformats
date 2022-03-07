@@ -630,7 +630,7 @@ string msrKey::asString () const
           fKeyTonicQuarterTonesPitchKind,
           gGlobalMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
-        " " <<
+        ' ' <<
         fModeKind;
       break;
 
@@ -663,7 +663,7 @@ string msrKey::asShortStringForMeasuresSlices () const
           fKeyTonicQuarterTonesPitchKind,
           gGlobalMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
-        " " <<
+        ' ' <<
         fModeKind;
       break;
 
@@ -692,12 +692,12 @@ void msrKey::print (ostream& os) const
   switch (fKeyKind) {
     case msrKeyKind::kKeyTraditional:
       os <<
-        " " <<
+        ' ' <<
         msrQuarterTonesPitchKindAsStringInLanguage (
           fKeyTonicQuarterTonesPitchKind,
           gGlobalMsrOahGroup->
             getMsrQuarterTonesPitchesLanguageKind ()) <<
-        " " <<
+        ' ' <<
         fModeKind <<
         ", line " << fInputLineNumber;
       break;
@@ -740,7 +740,7 @@ void msrKey::print (ostream& os) const
       break;
   } // switch
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrKey& elt)

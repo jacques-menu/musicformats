@@ -338,7 +338,7 @@ void msrPageLayout::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrPageLayout& elt)
@@ -491,7 +491,7 @@ void msrSystemLayout::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrSystemLayout& elt)
@@ -601,7 +601,7 @@ void msrSystemDividers::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrSystemDividers& elt)
@@ -719,7 +719,7 @@ void msrStaffLayout::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrStaffLayout& elt)
@@ -823,7 +823,7 @@ void msrMeasureLayout::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrMeasureLayout& elt)
@@ -1054,7 +1054,7 @@ void msrPrintLayout::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrPrintLayout::printShort (ostream& os) const
@@ -1276,7 +1276,7 @@ void msrLineWidth::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrLineWidth& elt)
@@ -1429,7 +1429,7 @@ void msrNoteSize::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrNoteSize& elt)
@@ -1579,7 +1579,7 @@ void msrDistance::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrDistance& elt)
@@ -1768,7 +1768,7 @@ void msrGlyph::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrGlyph& elt)
@@ -1912,7 +1912,7 @@ void msrOtherAppearance::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrOtherAppearance& elt)
@@ -2197,7 +2197,7 @@ void msrAppearance::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrAppearance& elt)

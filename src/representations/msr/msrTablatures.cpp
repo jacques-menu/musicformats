@@ -202,7 +202,7 @@ void msrFrameNote::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrFrameNote& elt)
@@ -521,7 +521,7 @@ void msrFrame::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrFrame& elt)

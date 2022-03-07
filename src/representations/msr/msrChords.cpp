@@ -1327,13 +1327,13 @@ string msrChord::asStringwithRawDivisions () const
       /* JMI
         note->notePitchAsString () <<
         note->noteSoundingWholeNotesAsMsrString () <<
-        "[" << note->getNoteOctave () << "]"
+        '[' << note->getNoteOctave () << "]"
         */
 
         note->asShortStringWithRawWholeNotes ();
 
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
     } // for
   }
 
@@ -1372,7 +1372,7 @@ string msrChord::asString () const
         "]";
 
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
     } // for
   }
 
@@ -2218,7 +2218,7 @@ void msrChord::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrChord::printShort (ostream& os) const
@@ -2983,7 +2983,7 @@ void msrChord::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrChord& elt)
@@ -3171,7 +3171,7 @@ void msrChordBeamLink::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrChordBeamLink::printShort (ostream& os) const
@@ -3199,7 +3199,7 @@ void msrChordBeamLink::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrChordBeamLink& elt)
@@ -3387,7 +3387,7 @@ void msrChordSlurLink::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrChordSlurLink::printShort (ostream& os) const
@@ -3415,7 +3415,7 @@ void msrChordSlurLink::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrChordSlurLink& elt)
@@ -3606,7 +3606,7 @@ void msrChordGraceNotesGroupLink::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrChordGraceNotesGroupLink::printShort (ostream& os) const
@@ -3634,7 +3634,7 @@ void msrChordGraceNotesGroupLink::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrChordGraceNotesGroupLink& elt)

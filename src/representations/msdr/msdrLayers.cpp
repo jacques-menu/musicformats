@@ -253,7 +253,7 @@ void msdrLayer::print (ostream& os) const
 
 /* JMI
   os << left <<
-    "(" <<
+    '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<
@@ -337,7 +337,7 @@ void msdrLayer::printShort (ostream& os) const
 
 /* JMI
   os << left <<
-    "(" <<
+    '(' <<
     mfSingularOrPlural (
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<

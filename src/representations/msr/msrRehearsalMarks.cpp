@@ -142,7 +142,7 @@ string msrRehearsalMark::rehearsalKindAsString (
 void msrRehearsalMark::print (ostream& os) const
 {
   os <<
-    "RehearsalMark" << " " << fRehearsalMarkText <<
+    "RehearsalMark" << ' ' << fRehearsalMarkText <<
     " kind: " <<
     rehearsalKindAsString (fRehearsalMarkKind) <<
     " rehearsalPlacementKind: " <<

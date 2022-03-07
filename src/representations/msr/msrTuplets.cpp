@@ -955,7 +955,7 @@ string msrTuplet::asString () const
     "[Tuplet" <<
     ", tupletKind: " << tupletKindAsString (fTupletKind) <<
     fTupletFactor.asString () <<
-    " " << fMeasureElementSoundingWholeNotes << " tupletSoundingWholeNotes" <<
+    ' ' << fMeasureElementSoundingWholeNotes << " tupletSoundingWholeNotes" <<
     ", measure ' " <<
     ", line " << fInputLineNumber <<
     fMeasureElementMeasureNumber <<
@@ -1007,7 +1007,7 @@ string msrTuplet::asString () const
       }
 
       if (++i == iEnd) break;
-      s << " ";
+      s << ' ';
 
     } // for
   }
@@ -1156,7 +1156,7 @@ void msrTuplet::print (ostream& os) const
     fPositionInTuplet <<
     endl;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrTuplet::printShort (ostream& os)
@@ -1303,7 +1303,7 @@ void msrTuplet::printShort (ostream& os)
   }
   os << endl;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrTuplet& elt)

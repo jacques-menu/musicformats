@@ -2301,7 +2301,7 @@ string msrSegment::asShortString () const
   stringstream s;
 
   s <<
-    "[" <<
+    '[' <<
     "Segment '" <<
     fSegmentAbsoluteNumber <<
       ", fSegmentDebugNumber: '" <<
@@ -2319,7 +2319,7 @@ string msrSegment::asString () const
   stringstream s;
 
   s <<
-    "[" <<
+    '[' <<
     "Segment '" <<
     fSegmentAbsoluteNumber <<
       ", fSegmentDebugNumber: '" <<
@@ -2452,7 +2452,7 @@ void msrSegment::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrSegment::printShort (ostream& os) const
@@ -2496,7 +2496,7 @@ void msrSegment::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrSegment& elt)

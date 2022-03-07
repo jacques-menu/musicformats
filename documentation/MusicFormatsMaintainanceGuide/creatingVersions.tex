@@ -16,17 +16,17 @@ Thus, in order to create a new version of a satisfactory state of the local deve
 \begin{enumerate}
 \item check that the version number and date are fine in \fileName{MusicFormatsVersionNumber.txt} and \\\fileName{MusicFormatsVersionDate.txt}:
 \begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev > cat MusicFormatsVersionNumber.txt 
-0.9.61jacquesmenu@macmini: ~/musicformats-git-dev > cat MusicFormatsVersionDate.txt 
+jacquesmenu@macmini: ~/musicformats-git-dev > cat MusicFormatsVersionNumber.txt
+0.9.61jacquesmenu@macmini: ~/musicformats-git-dev > cat MusicFormatsVersionDate.txt
 March 3, 2022
 \end{lstlisting}
 Note that \file{MusicFormatsVersionNumber.txt} should not end with an end of line, since that would disturb the creation of the PDF documentation files with \LaTeX;
 
 \item (re-)create the up-to-date documentation with:
 \begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./CreateDocumentationPDFs.bash
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/CreateDocumentationPDFs.bash
 \end{lstlisting}
- 
+
 \item push to \mf\ repo with \code{git push};
 
 \item check that the actions were executed successfully at \url{https://github.com/jacques-menu/musicformats/actions};
@@ -35,7 +35,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./CreateDocumentatio
 
 \item \MainIt{push again} with the new version name in the \code{-m "\dots~\dots~\dots"} message, such as:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "Switched from C++11 to C++17 for <filesystem>" -a 
+jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "Switched from C++11 to C++17 for <filesystem>" -a
 
 jacquesmenu@macmini: ~/musicformats-git-dev > git push
 \end{lstlisting}
@@ -73,7 +73,7 @@ git branch -r
 
 \item create a new version number and date, for example:
 \begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVersionNumber.bash 0.9.62
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionNumber.bash 0.9.62
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev
 
@@ -91,7 +91,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVer
 \end{lstlisting}
 
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/build/scripts > ./SetMusicFormatsVersionDate.bash "March 4, 2022"
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionDate.bash "March 4, 2022"
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev
 

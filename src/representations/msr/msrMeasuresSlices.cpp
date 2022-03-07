@@ -158,9 +158,9 @@ string msrNoteEvent::asString () const
   s <<
     "[NoteEvent" <<
     " @:" << fNoteEventPositionInMeasure <<
-    " " <<
+    ' ' <<
     fNoteEventNote->asShortStringForMeasuresSlices () <<
-    " ";
+    ' ';
 
   switch (fNoteEventKind) {
     case msrNoteEventKind::kNoteEventStart:
@@ -956,7 +956,7 @@ void msrMeasuresSlice::print (ostream& os) const
           asShortStringForTimeView ();
 
       if (++i == iEnd) break;
-      os << " ";
+      os << ' ';
     } // for
     os << endl;
 
@@ -1029,7 +1029,7 @@ void msrMeasuresSlice::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrMeasuresSlice::printShort (ostream& os) const
@@ -1391,7 +1391,7 @@ void msrMeasuresSlicesSequence::print (ostream& os) const
     --gIndenter;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrMeasuresSlicesSequence::printShort (ostream& os) const

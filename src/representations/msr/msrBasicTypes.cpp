@@ -771,7 +771,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
 
       gLogStream << endl;
@@ -1045,7 +1045,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
 
       gLogStream << endl;
@@ -2490,7 +2490,7 @@ void msrMoment::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 };
 
 ostream& operator<< (ostream& os, const msrMoment& elt)
@@ -6951,7 +6951,7 @@ msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
         s <<
           "Sorry, computing intervals from semitones pitch '" <<
           msrSemiTonesPitchKindAsString (semiTonesPitchKind) <<
-          "(" << msrSemiTonesPitchKindAsString (semiTonesPitchKind) << ")" <<
+          '(' << msrSemiTonesPitchKindAsString (semiTonesPitchKind) << ")" <<
           "' is not supported"
           ", line = " << inputLineNumber;
 
@@ -9843,7 +9843,7 @@ msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
             quarterTonesPitchKind,
             gGlobalMsrOahGroup->
               getMsrQuarterTonesPitchesLanguageKind ()) <<
-          "(" << msrQuarterTonesPitchKindAsString (quarterTonesPitchKind) << ")" <<
+          '(' << msrQuarterTonesPitchKindAsString (quarterTonesPitchKind) << ")" <<
           "' is not supported"
           ", line = " << inputLineNumber;
 
@@ -15280,10 +15280,10 @@ string msrLength::asString () const
   stringstream s;
 
   s <<
-    "[" <<
+    '[' <<
     setprecision (4) <<
     fLengthValue <<
-    " " <<
+    ' ' <<
     msrLengthUnitKindAsString (fLengthUnitKind) <<
     "]";
 
@@ -15426,7 +15426,7 @@ string msrMargin::asString () const
     "[Margin, " <<
     setprecision (4) <<
     fMarginLength.asString () <<
-    " " <<
+    ' ' <<
     msrMarginTypeKindAsString (fMarginTypeKind) <<
     "]";
 
@@ -21103,7 +21103,7 @@ void printHarmonyDetails (
   os <<
     "The details of harmony '" <<
     rootQuarterTonesPitchKindAsString <<
-    " " <<
+    ' ' <<
     harmonyKindShortName <<
     "' are:" <<
     endl << endl;
@@ -21171,7 +21171,7 @@ void printHarmonyDetails (
       os <<
         "Chord '" <<
         rootQuarterTonesPitchKindAsString <<
-        " " <<
+        ' ' <<
         harmonyKindShortName <<
         "'";
 
@@ -21283,7 +21283,7 @@ void printHarmonyAnalysis (
   os <<
     "The analysis of harmony '" <<
     rootQuarterTonesPitchKindAsString <<
-    " " <<
+    ' ' <<
     harmonyKindShortName <<
     "' inversion " <<
     inversion <<
@@ -21343,7 +21343,7 @@ void printHarmonyAnalysis (
         os <<
           "Harmony '" <<
           rootQuarterTonesPitchKindAsString <<
-          " " <<
+          ' ' <<
           harmonyKindShortName <<
           "'";
 
@@ -21420,7 +21420,7 @@ void printHarmonyAnalysis (
         os <<
           "Chord '" <<
           rootQuarterTonesPitchKindAsString <<
-          " " <<
+          ' ' <<
           harmonyKindShortName <<
           "'";
 
@@ -21547,7 +21547,7 @@ void printHarmonyAnalysis (
               setw (fieldWidth2) << // JMI
               msrIntervalKindAsString (innerIntervalKind) <<
 
-              "(" <<
+              '(' <<
               setw (fieldWidth2) <<
               msrIntervalKindAsString (intervalKind1) <<
               " -> " <<
@@ -21585,7 +21585,7 @@ void printHarmonyAnalysis (
       os <<
         "Chord '" <<
         rootQuarterTonesPitchKindAsString <<
-        " " <<
+        ' ' <<
         harmonyKindShortName <<
         "' has only " <<
         harmonyStructureIntervalsNumber <<
@@ -21653,7 +21653,7 @@ msrRGBColor::msrRGBColor (
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
       for (unsigned i = 0; i < smSize; ++i) {
         gLogStream <<
-          "[" << sm [i] << "] ";
+          '[' << sm [i] << "] ";
       } // for
       gLogStream << endl;
     }
@@ -21734,7 +21734,7 @@ string msrRGBColor::asString (int precision) const
 
   s <<
     setprecision (precision) <<
-    "[" <<
+    '[' <<
     fR <<
     "," <<
     fG <<
@@ -21752,9 +21752,9 @@ string msrRGBColor::asSpaceSeparatedString (int precision) const
   s <<
     setprecision (precision) <<
     fR <<
-    " " <<
+    ' ' <<
     fG <<
-    " " <<
+    ' ' <<
     fB;
 
   return s.str ();

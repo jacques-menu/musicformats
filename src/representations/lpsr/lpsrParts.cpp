@@ -482,7 +482,7 @@ void lpsrPartBlock::browseData (basevisitor* v)
 void lpsrPartBlock::print (ostream& os) const
 {
   os <<
-    "PartBlock" << " " <<
+    "PartBlock" << ' ' <<
     "for part " << fPart->getPartCombinedName () <<
     ", " <<
     mfSingularOrPlural (

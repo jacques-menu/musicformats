@@ -284,7 +284,7 @@ string uncompressMXLFile (
 
             for (unsigned i = 1; i < sm.size (); ++i) {
               gLogStream <<
-                "[" << sm [i] << "] " <<
+                '[' << sm [i] << "] " <<
                 endl;
             } // for
 

@@ -254,7 +254,7 @@ void msrScaling::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrScaling& elt) {

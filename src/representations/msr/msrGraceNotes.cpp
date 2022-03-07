@@ -667,7 +667,7 @@ void msrGraceNotesGroup::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrGraceNotesGroup::printShort (ostream& os) const

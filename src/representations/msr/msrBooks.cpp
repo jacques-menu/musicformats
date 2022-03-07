@@ -691,7 +691,7 @@ void msrBook::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrBook::printShort (ostream& os) const
@@ -888,7 +888,7 @@ void msrBook::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void msrBook::printSummary (ostream& os) const
@@ -1017,7 +1017,7 @@ void msrBook::printSummary (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrBook& elt)

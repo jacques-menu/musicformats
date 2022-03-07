@@ -221,7 +221,7 @@ void bsrCellsList::appendCellsListToCellsList (
       for ( ; ; ) {
         fCellsListElements.push_back ((*i));
         if (++i == iEnd) break;
-   // JMI      os << " ";
+   // JMI      os << ' ';
       } // for
     }
   }
@@ -239,7 +239,7 @@ void bsrCellsList::prependCellsListToCellsList (
       for ( ; ; ) {
         fCellsListElements.push_front ((*i));
         if (++i == iEnd) break;
-   // JMI      os << " ";
+   // JMI      os << ' ';
       } // for
     }
   }
@@ -257,7 +257,7 @@ void bsrCellsList::generateBrailleCode (ostream& os)
       os <<
         bsrCellKindAsShortString ((*i));
       if (++i == iEnd) break;
-       os << " ";
+       os << ' ';
     } // for
   }
 }
@@ -335,7 +335,7 @@ string bsrCellsList::asString () const
       s <<
         bsrCellKindAsShortString ((*i));
       if (++i == iEnd) break;
-       s << " ";
+       s << ' ';
     } // for
   }
 
@@ -364,7 +364,7 @@ void bsrCellsList::print (ostream& os) const
       os <<
         bsrCellKindAsShortString ((*i));
       if (++i == iEnd) break;
-       os << " ";
+       os << ' ';
     } // for
   }
 
