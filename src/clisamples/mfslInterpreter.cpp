@@ -9,19 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include "Langues.h"
-//
-// #include "SupportCPlusPlus.h"
-//
-// #include "SupportFlexBison.h"
-//
-// #include "LanguesSyntaxe.h"
-//
-// #include "DecodageDOptionsSyntaxe.h"
-//
-//
-// #include <cstdlib>
-
 #include <iostream>
 
 #ifndef WIN32
@@ -130,7 +117,7 @@ int main (int argc, char* argv[])
     gLogStream <<
       "Launching the interpretation of ";
 
-//     if (inputSourceName == "-") {
+//     if (inputSourceName == "-") { // JMI
 //       gLogStream <<
 //         "standard input";
 //     }
@@ -162,13 +149,36 @@ int main (int argc, char* argv[])
   // do the interpretation
   // ------------------------------------------------------
 
+  Bool verboseMode (false); // JMI ???
+
   mfMusicformatsError
     err =
-		  launchMfslInterpreter (
+      mfMusicformatsError::k_NoError;
+
+  if (false) {
+    performMfslLexicalAnalysisOnly (
+      argc,
+      argv,
+      verboseMode);
+  }
+
+  else {
+    string                 theMfTool;
+    oahOptionsAndArguments optionsAndArguments;
+
+    err =
+      launchMfslInterpreter (
         argc,
         argv,
-        true // gModeVerbeux
-  		);
+        theMfTool,
+        optionsAndArguments,
+        verboseMode);
+
+    gLogStream <<
+      "==> theMfTool: " <<
+      theMfTool <<
+      endl;
+  }
 
 //   // display the input line numbers for which messages have been issued
 //   // ------------------------------------------------------

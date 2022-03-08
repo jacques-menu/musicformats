@@ -33,61 +33,81 @@ string mfslTokenKindAsString (
       s << "kMfslEOF";
       break;
 
-    case kMfslTool:
-      s << "kMfslTool";
+    case kTOOL:
+      s << "kTOOL";
       break;
-    case kMfslInput:
-      s << "kMfslInput";
-      break;
-    case kMfslCase:
-      s << "kMfslCase";
+    case kINPUT:
+      s << "kINPUT";
       break;
 
-    case kMfslString:
-      s << "kMfslString";
+    case kBOOK:
+      s << "kBOOK";
       break;
 
-    case kMfslIntegerNumber:
-      s << "kMfslIntegerNumber";
-      break;
-    case kMfslDoubleNumber:
-      s << "kMfslDoubleNumber";
+    case kCASE:
+      s << "kCASE";
       break;
 
-    case kMfslName:
-      s << "kMfslName";
+    case kSINGLE_QUOTED_STRING:
+      s << "kSINGLE_QUOTED_STRING";
+      break;
+    case kDOUBLE_QUOTED_STRING:
+      s << "kDOUBLE_QUOTED_STRING";
       break;
 
-    case kMfslLeftParenthesis:
-      s << "kMfslLeftParenthesis";
+    case kINTEGER_NUMBER:
+      s << "kINTEGER_NUMBER";
       break;
-    case kMfslRightParenthesis:
-      s << "kMfslRightParenthesis";
+    case kDOUBLE_NUMBER:
+      s << "kDOUBLE_NUMBER";
       break;
 
-    case kMfslEquals:
-      s << "kMfslEquals";
+    case kNAME:
+      s << "kNAME";
       break;
-    case kMfslComma:
-      s << "kMfslComma";
+
+    case kLEFT_PARENTHESIS:
+      s << "kLEFT_PARENTHESIS";
       break;
-    case kMfslPlus:
-      s << "kMfslPlus";
+    case kRIGHT_PARENTHESIS:
+      s << "kRIGHT_PARENTHESIS";
       break;
-    case kMfslMinus:
-      s << "kMfslMinus";
+
+    case kEQUALS:
+      s << "kEQUALS";
       break;
-    case kMfslTimes:
-      s << "kMfslTimes";
+    case kCOMMA:
+      s << "kCOMMA";
       break;
-    case kMfslSlash:
-      s << "kMfslSlash";
+    case kPLUS:
+      s << "kPLUS";
       break;
-    case kMfslColon:
-      s << "kMfslColon";
+    case kMINUS:
+      s << "kMINUS";
       break;
-    case kMfslSemicolon:
-      s << "kMfslSemicolon";
+    case kSTAR:
+      s << "kSTAR";
+      break;
+    case kSLASH:
+      s << "kSLASH";
+      break;
+    case kCOLON:
+      s << "kCOLON";
+      break;
+    case kSEMI_COLON:
+      s << "kSEMI_COLON";
+      break;
+
+    case kBAR:
+      s << "kBAR";
+      break;
+
+    case kDASH:
+      s << "kDASH";
+      break;
+    case kDASH_DASH:
+      s << "kDASH_DASH";
+      break;
   } // switch
 
   return s.str ();

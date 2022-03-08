@@ -18,17 +18,30 @@
 
 #include "mfBool.h"
 
+#include "oahBasicTypes.h"
 
-namespace MusicFormats
-{
+
+using namespace MusicFormats;
+
+/*
+  CAUTION:
+    DONT't put these interface functions in the MusicFormats namespace:
+    there would be no way to 'see' them from outside mfslScanner.cpp
+*/
+
+//_______________________________________________________________________________
+EXP extern void performMfslLexicalAnalysisOnly (
+	int		argc,
+	char* argv[],
+	Bool	verboseMode);
+
 //_______________________________________________________________________________
 EXP extern mfMusicformatsError launchMfslInterpreter (
-  int   argc,
-  char* argv[],
-  Bool  verboseMode);
-
-
-} // namespace MusicFormats
+  int                     argc,
+  char*                   argv[],
+  string&                 theMfTool,
+  oahOptionsAndArguments& optionsAndArguments,
+  Bool                    verboseMode);
 
 
 #endif
