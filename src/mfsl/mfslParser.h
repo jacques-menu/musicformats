@@ -54,18 +54,28 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    MFTOOL = 258,                  /* MFTOOL  */
-    INPUT = 259,                   /* INPUT  */
-    NAME = 260,                    /* NAME  */
-    COLON = 261,                   /* COLON  */
-    SEMICOLON = 262,               /* SEMICOLON  */
-    EQUALS = 263,                  /* EQUALS  */
-    BAR = 264,                     /* BAR  */
-    CASE = 265,                    /* CASE  */
-    QUOTED_STRING = 266,           /* QUOTED_STRING  */
-    DOUBLE_QUOTED_STRING = 267,    /* DOUBLE_QUOTED_STRING  */
-    DASH = 268,                    /* DASH  */
-    DASH_DASH = 269                /* DASH_DASH  */
+    kTOOL = 258,                   /* kTOOL  */
+    kINPUT = 259,                  /* kINPUT  */
+    kBOOK = 260,                   /* kBOOK  */
+    kCASE = 261,                   /* kCASE  */
+    kSINGLE_QUOTED_STRING = 262,   /* kSINGLE_QUOTED_STRING  */
+    kDOUBLE_QUOTED_STRING = 263,   /* kDOUBLE_QUOTED_STRING  */
+    kINTEGER_NUMBER = 264,         /* kINTEGER_NUMBER  */
+    kDOUBLE_NUMBER = 265,          /* kDOUBLE_NUMBER  */
+    kNAME = 266,                   /* kNAME  */
+    kLEFT_PARENTHESIS = 267,       /* kLEFT_PARENTHESIS  */
+    kRIGHT_PARENTHESIS = 268,      /* kRIGHT_PARENTHESIS  */
+    kEQUALS = 269,                 /* kEQUALS  */
+    kCOMMA = 270,                  /* kCOMMA  */
+    kPLUS = 271,                   /* kPLUS  */
+    kMINUS = 272,                  /* kMINUS  */
+    kSTAR = 273,                   /* kSTAR  */
+    kSLASH = 274,                  /* kSLASH  */
+    kCOLON = 275,                  /* kCOLON  */
+    kSEMI_COLON = 276,             /* kSEMI_COLON  */
+    kBAR = 277,                    /* kBAR  */
+    kDASH = 278,                   /* kDASH  */
+    kDASH_DASH = 279               /* kDASH_DASH  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -74,22 +84,16 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 43 "mfsl.y"
-
+#line 44 "mfsl.y"
+ // with a basic C description of strings
  int                      fIntegerNumber;
  double                   fDoubleNumber;
 
- string*                  fString;
+ char*                    fString;
 
- string*                  fName;
+ char*                    fName;
 
-//   // avoid default constructor deletion
-//   YYSTYPE () {}
-//
-//   // avoid default constructor deletion
-//    string* operator= (const string&) { return fString; }
-
-#line 93 "mfslParser.h"
+#line 97 "mfslParser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

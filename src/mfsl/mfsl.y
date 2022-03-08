@@ -15,24 +15,25 @@
 
 #include <string>
 
+#include "mfIndentedTextOutput.h"
+
 #include "mfslTokens.h"
 
 
 using namespace std;
+
+using namespace MusicFormats;
 
 
 /* necessary declarations */
 /* ---------------------- */
 
 extern int                yylex ();
-extern int                yyerror (char* message);
+extern int                yyerror (char const* message);
 
 
 // options */
 /* ------- */
-
-bool                      gVerboseMode;
-bool                      gDisplayTheTokens; // for yylex ()
 
 %}
 
@@ -40,42 +41,51 @@ bool                      gDisplayTheTokens; // for yylex ()
 /* MFSL tokens description */
 /* ----------------------- */
 
-%union {
+%union { // with a basic C description of strings
  int                      fIntegerNumber;
  double                   fDoubleNumber;
 
- string*                  fString;
+ char*                    fString;
 
- string*                  fName;
-
-//   // avoid default constructor deletion
-//   YYSTYPE () {}
-//
-//   // avoid default constructor deletion
-//    string* operator= (const string&) { return fString; }
+ char*                    fName;
 };
 
 
 /* MFSL tokens */
 /* ----------- */
 
-%token MFTOOL
+%token kTOOL
 
-%token INPUT
-%token NAME
+%token kINPUT
 
-%token COLON
-%token SEMICOLON
-%token EQUALS
+%token kBOOK
 
-%token BAR
-%token CASE
+%token kCASE
 
-%token QUOTED_STRING
-%token DOUBLE_QUOTED_STRING
+%token kSINGLE_QUOTED_STRING
+%token kDOUBLE_QUOTED_STRING
 
-%token DASH
-%token DASH_DASH
+%token kINTEGER_NUMBER
+%token kDOUBLE_NUMBER
+
+%token kNAME
+
+%token kLEFT_PARENTHESIS
+%token kRIGHT_PARENTHESIS
+
+%token kEQUALS
+%token kCOMMA
+%token kPLUS
+%token kMINUS
+%token kSTAR
+%token kSLASH
+%token kCOLON
+%token kSEMI_COLON
+
+%token kBAR
+
+%token kDASH
+%token kDASH_DASH
 
 
 /* the MFSL axiom */
@@ -92,34 +102,53 @@ bool                      gDisplayTheTokens; // for yylex ()
 
 MfslScript
  : MfTool
+ /*
    Input
    Contents
-/*
  | error
-  {
-  cout <<
-   endl <<
-   "MESSAGE" <<
-   endl << endl;
-  }
+    {
+    cerr <<
+      endl <<
+      "MESSAGE" <<
+      endl;
+    }
 */
  ;
 
 
 STRING
-  : QUOTED_STRING
-  | DOUBLE_QUOTED_STRING
-  | NAME
+  : kSINGLE_QUOTED_STRING
+  | kDOUBLE_QUOTED_STRING
+  | kNAME
   ;
 
 
 MfTool
- : MFTOOL NAME
+ : kTOOL kNAME
+    {
+      gLogStream <<
+        "tool: " << yylval.fName <<
+        endl;
+    }
+ | error
+    {
+      cerr <<
+        endl <<
+        "'tool name' expected" <<
+        endl;
+    }
  ;
 
 
 Input
- : INPUT STRING
+  : kNAME
+  | kINPUT kDOUBLE_QUOTED_STRING
+  | kINPUT kSINGLE_QUOTED_STRING
+    {
+      gLogStream <<
+        "input: " << yylval.fName <<
+        endl;
+    }
  ;
 
 
@@ -133,28 +162,32 @@ Contents
 
 
 Option
-  : DASH NAME
-  | DASH NAME STRING
-  | DASH_DASH NAME
-  | DASH_DASH NAME STRING
+  : kDASH kNAME
+  | kDASH_DASH kNAME
+
+  | kDASH kNAME kSINGLE_QUOTED_STRING
+  | kDASH_DASH kNAME kSINGLE_QUOTED_STRING
+
+  | kDASH kNAME kDOUBLE_QUOTED_STRING
+  | kDASH_DASH kNAME kDOUBLE_QUOTED_STRING
 
 
 ChoiceDeclaration
-  : NAME COLON Choices SEMICOLON
+  : kNAME kCOLON Choices kSEMI_COLON
   ;
 
 ChoiceSetting
-  : NAME EQUALS NAME SEMICOLON
+  : kNAME kEQUALS kNAME kSEMI_COLON
   ;
 
 Choices
-  : NAME
-  | Choices BAR NAME
+  : kNAME
+  | Choices kBAR kNAME
 ;
 
 
 CaseStatement
-  : CASE NAME Cases
+  : kCASE kNAME Cases
 ;
 
 Cases
@@ -163,7 +196,7 @@ Cases
 ;
 
 Case
-  : NAME COLON Options
+  : kNAME kCOLON Options
 ;
 
 Options
@@ -173,12 +206,6 @@ Options
 
 
 %%
-
-
-// On doit fournir l'analyseur lexical */
-// ----------------------------------- */
-//
-// #include "mfslParser.cpp"
 
 
 /* other service code */

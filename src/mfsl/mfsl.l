@@ -12,20 +12,29 @@
 */
 
 
+#define DEBUG_MFSL_SCANNER
+
+
 /* ---------------------------------------------------------------------- */
 /* inclusions */
 /* ---------------------------------------------------------------------- */
 
+#include <iostream> // for cout, cerr, TEMP JMI
 #include <sstream>
 
-#include "mfslTokens.h"
+#include "mfBool.h"
 
+#include "mfMusicformatsError.h" // for mfMusicformatsError
+
+#include "oahBasicTypes.h"
+
+#include "mfslTokens.h"
 #include "mfslParser.h"
 
 #include "mfslWae.h"
 
+#include "mfslInterpreterInterface.h"
 
-// using namespace std;
 
 using namespace MusicFormats;
 
@@ -34,9 +43,13 @@ using namespace MusicFormats;
 /* variables global to yylex() */
 /* ---------------------------------------------------------------------- */
 
-// bool                gMontrerLesTerminaux;
+// Bool                   gMontrerLesTerminaux;
 //
-// mfslTokenKind      gmfslTokenKindCourant;
+// mfslTokenKind          gmfslTokenKindCourant;
+
+string                    pInputFileName;
+
+Bool                      pVerboseMode; // JMI
 
 
 /* ---------------------------------------------------------------------- */
@@ -79,10 +92,11 @@ backSlash                 [\\]
 /* exclusive modes */
 /* ---------------------------------------------------------------------- */
 
-%x                        STRING_ACCEPTATION
+%x                        SINGLE_QUOTED_STRING_MODE
+%x                        DOUBLE_QUOTED_STRING_MODE
 
-%x                        COMMENT_TO_END_OF_LINE
-%x                        PARENTHESIZED_COMMENT
+%x                        COMMENT_TO_END_OF_LINE_MODE
+%x                        PARENTHESIZED_COMMENT_MODE
 
 
 %% /* the language tokens and the corresponding actions */
@@ -94,85 +108,157 @@ backSlash                 [\\]
 /* variables local to yylex() */
 /* ---------------------------------------------------------------------- */
 
+#define                   STRING_BUFFER_SIZE 1024
+char                      pStringBuffer [STRING_BUFFER_SIZE];
+
 %}
 
 
 "#" {
-  /*
-  cout << "==> mode COMMENT_TO_END_OF_LINE" << endl;
-  */
-  BEGIN COMMENT_TO_END_OF_LINE;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "==> mode COMMENT_TO_END_OF_LINE_MODE" << endl;
+#endif
+
+  BEGIN COMMENT_TO_END_OF_LINE_MODE;
 }
 
-<COMMENT_TO_END_OF_LINE>{endOfLine} {
-  /* cout << "==> mode INITIAL" << endl; */
+<COMMENT_TO_END_OF_LINE_MODE>{endOfLine} {
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "==> back to mode INITIAL" << endl;
+#endif
+
   BEGIN INITIAL;
 }
 
-<COMMENT_TO_END_OF_LINE>. {
+<COMMENT_TO_END_OF_LINE_MODE>. {
   /* accepting any character other than {endOfLine} */
 }
 
 
 
 "/*" {
-  /* cout << "==> mode PARENTHESIZED_COMMENT" << endl; */
-  BEGIN PARENTHESIZED_COMMENT;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "==> mode PARENTHESIZED_COMMENT_MODE" << endl;
+#endif
+
+  BEGIN PARENTHESIZED_COMMENT_MODE;
 }
 
-<PARENTHESIZED_COMMENT>[^*{endOfLine}]* {
+<PARENTHESIZED_COMMENT_MODE>[^*{endOfLine}]* {
   /* accepting any character other than '*' */
 }
 
-<PARENTHESIZED_COMMENT>"*"+[^*/{endOfLine}]* {
+<PARENTHESIZED_COMMENT_MODE>"*"+[^*/{endOfLine}]* {
   /* accepting all lthe '*' not followed by a '/' */
 }
 
-<PARENTHESIZED_COMMENT>"*"+"/" {
-  /* cout << "==> mode INITIAL" << endl; */
+<PARENTHESIZED_COMMENT_MODE>"*"+"/" {
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "==> back to mode INITIAL" << endl;
+#endif
+
   BEGIN INITIAL;
 }
 
-<PARENTHESIZED_COMMENT>. {
+<PARENTHESIZED_COMMENT_MODE>. {
+}
+
+
+
+{singleleQuote} {
+  pStringBuffer [0] = '\0';
+
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "==> mode SINGLE_QUOTED_STRING_MODE" << endl;
+#endif
+
+  BEGIN SINGLE_QUOTED_STRING_MODE;
+}
+
+<SINGLE_QUOTED_STRING_MODE>{singleleQuote} {
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> single quoted string: [" << yytext << "]" << endl;
+
+  cerr << "==> back to mode INITIAL" << endl;
+#endif
+
+  BEGIN INITIAL;
+
+  yylval.fString = pStringBuffer;
+  return MusicFormats::kSINGLE_QUOTED_STRING;
+}
+
+<SINGLE_QUOTED_STRING_MODE>{backSlash}{singleleQuote} {
+  strlcat (pStringBuffer, "'", STRING_BUFFER_SIZE);
+}
+
+<SINGLE_QUOTED_STRING_MODE>{backSlash}n {
+  strlcat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
+}
+
+<SINGLE_QUOTED_STRING_MODE>{backSlash}t {
+  strlcat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
+}
+
+<SINGLE_QUOTED_STRING_MODE>{backSlash}{backSlash} {
+  strlcat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
+}
+
+<SINGLE_QUOTED_STRING_MODE>{endOfLine} {
+  strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
+}
+
+<SINGLE_QUOTED_STRING_MODE>. {
+  strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 
 
 
 {doubleQuote} {
-  yylval.fString = new string ("");
-  /* cout << "==> mode STRING_ACCEPTATION" << endl; */
-  BEGIN STRING_ACCEPTATION;
+  pStringBuffer [0] = '\0';
+
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "==> mode kDOUBLE_QUOTED_STRING" << endl;
+#endif
+
+  BEGIN DOUBLE_QUOTED_STRING_MODE;
 }
 
-<STRING_ACCEPTATION>{doubleQuote} {
-  /* cout << "==> mode INITIAL" << endl; */
+<DOUBLE_QUOTED_STRING_MODE>{doubleQuote} {
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> double quoted string: [" << yytext << "]" << endl;
+
+  cerr << "==> back to mode INITIAL" << endl;
+#endif
+
   BEGIN INITIAL;
-  /* yylval.fString is already right */
-  return kMfslString;
+
+  yylval.fString = pStringBuffer;
+  return MusicFormats::kSINGLE_QUOTED_STRING;
 }
 
-<STRING_ACCEPTATION>{backSlash}{doubleQuote} {
-  *(yylval.fString) += "\"";
+<DOUBLE_QUOTED_STRING_MODE>{backSlash}{doubleQuote} {
+  strlcat (pStringBuffer, "\"", STRING_BUFFER_SIZE);
 }
 
-<STRING_ACCEPTATION>{backSlash}n {
-  *(yylval.fString) += "\n";
+<DOUBLE_QUOTED_STRING_MODE>{backSlash}n {
+  strlcat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 
-<STRING_ACCEPTATION>{backSlash}t {
-  *(yylval.fString) += "\t";
+<DOUBLE_QUOTED_STRING_MODE>{backSlash}t {
+  strlcat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 
-<STRING_ACCEPTATION>{backSlash}{backSlash} {
-  *(yylval.fString) += "\\";
+<DOUBLE_QUOTED_STRING_MODE>{backSlash}{backSlash} {
+  strlcat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
 
-<STRING_ACCEPTATION>{endOfLine} {
-  *(yylval.fString) += yytext;
+<DOUBLE_QUOTED_STRING_MODE>{endOfLine} {
+  strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 
-<STRING_ACCEPTATION>. {
-  *(yylval.fString) += yytext;
+<DOUBLE_QUOTED_STRING_MODE>. {
+  strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 
 
@@ -188,77 +274,141 @@ backSlash                 [\\]
 
 
 {integer}"."{integer}({exponent})? |
-{integer}{exponent}? {
-  yylval.fDoubleNumber = atof (yytext);
-  return kMfslDoubleNumber;
+{integer}{exponent} {
+ #ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> float: " << yytext << endl;
+#endif
+
+ yylval.fDoubleNumber = atof (yytext);
+  return MusicFormats::kDOUBLE_NUMBER;
 }
 
 {integer} {
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> integer: " << yytext << endl;
+#endif
+
   yylval.fIntegerNumber = atoi (yytext);
-  return kMfslIntegerNumber;
+  return MusicFormats::kINTEGER_NUMBER;
 }
 
 
 
 "tool" {
-  return kMfslTool;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> tool" << endl;
+#endif
+
+  return MusicFormats::kTOOL;
 }
 
 "input" {
-  return kMfslInput;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> input" << endl;
+#endif
+
+  return MusicFormats::kINPUT;
 }
 
 "case" {
-  return kMfslCase;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> case" << endl;
+#endif
+
+  return MusicFormats::kCASE;
 }
 
 
 
 {name} {
-  *(yylval.fName) = yytext;
-  return kMfslName;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> name: " << yytext << endl;
+#endif
+
+  yylval.fName = strdup (yytext);
+  return MusicFormats::kNAME;
 }
 
 
 
 "(" {
-  return kMfslLeftParenthesis;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> (" << endl;
+#endif
+
+  return MusicFormats::kLEFT_PARENTHESIS;
 }
 
 ")" {
-  return kMfslRightParenthesis;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> )" << endl;
+#endif
+
+  return MusicFormats::kRIGHT_PARENTHESIS;
 }
 
 "=" {
-  return kMfslEquals;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> =" << endl;
+#endif
+
+  return MusicFormats::kEQUALS;
 }
 
 "," {
-  return kMfslComma;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> ," << endl;
+#endif
+
+  return MusicFormats::kCOMMA;
 }
 
 "+" {
-  return kMfslPlus;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> +" << endl;
+#endif
+
+  return MusicFormats::kPLUS;
 }
 
 "-" {
-  return kMfslMinus;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> -" << endl;
+#endif
+
+  return MusicFormats::kMINUS;
 }
 
 "*" {
-  return kMfslTimes;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> *" << endl;
+#endif
+
+  return MusicFormats::kSTAR;
 }
 
 "/" {
-  return kMfslSlash;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> /" << endl;
+#endif
+
+  return MusicFormats::kSLASH;
 }
 
 ":" {
-  return kMfslColon;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> :" << endl;
+#endif
+
+  return MusicFormats::kCOLON;
 }
 
 ";" {
-  return kMfslSemicolon;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> ;" << endl;
+#endif
+
+  return MusicFormats::kSEMI_COLON;
 }
 
 
@@ -290,20 +440,81 @@ backSlash                 [\\]
 //______________________________________________________________________________
 int yywrap (void)
 {
+  if (pInputFileName == "-") {
+    // read from standard input
+  }
+
+  else {
+    const char*
+      pInputFileNameCString =
+        pInputFileName.c_str ();
+
+    if ( (yyin = fopen (pInputFileNameCString, "r")) == NULL ) {
+      perror (pInputFileNameCString);
+      return 1;
+    }
+  }
+
   // only one script file is to be analyzed
   return 1;
 }
 
 //______________________________________________________________________________
-int yyerror (char* message)
+int yyerror (char const* message)
 {
-  mfslError (
-    "gGlobalServiceRunData->getInputSourceName ()",
-    yylineno,
-    __FILE__, __LINE__,
-    message);
+  cerr <<
+    "### MFSL error: " << message <<
+    endl;
 
- return 0;
+  abort ();
+
+//   mfslError (
+//     "gGlobalServiceRunData->getInputSourceName ()",
+//     yylineno,
+//     __FILE__, __LINE__,
+//     message);
+
+  return 0;
 }
 
+//______________________________________________________________________________
+EXP void performMfslLexicalAnalysisOnly (
+	int		argc,
+	char* argv[],
+	Bool	verboseMode)
+{
+  pInputFileName = argv [1];
+	pVerboseMode   = verboseMode;
 
+	yywrap ();	// open the first (and only) script file
+
+	while (yylex () != 0)	//	till the end of file
+		;	//	nothing
+}
+
+//_______________________________________________________________________________
+mfMusicformatsError launchMfslInterpreter (
+  int                     argc,
+  char*                   argv[],
+  string&                 theMfTool,
+  oahOptionsAndArguments& optionsAndArguments,
+  Bool                    verboseMode)
+{
+  mfMusicformatsError
+    res =
+      mfMusicformatsError::k_NoError;
+
+  pInputFileName = argv [1];
+	pVerboseMode   = verboseMode;
+
+//  	yywrap ();	// open the first (and only) script file
+
+	if (yyparse ()) {
+	  // the interpretation failed
+	  res = mfMusicformatsError::kErrorInvalidFile;
+	}
+
+  theMfTool = "theMfTool";
+
+	return res;
+}

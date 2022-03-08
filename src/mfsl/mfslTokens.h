@@ -29,28 +29,40 @@ enum mfslTokenKind {
 	kMfslEOF,	//	0, will be returned by yylex () when 'yywrap ()'
 						//	retuns a non-null valu itself
 
-  kMfslTool,
-  kMfslInput,
-  kMfslCase,
+  // keywords
+  kTOOL,
+  kINPUT,
 
-  kMfslString,
+  kBOOK,
 
-  kMfslIntegerNumber,
-  kMfslDoubleNumber,
+  kCASE,
 
-  kMfslName,
+  // constants
+  kSINGLE_QUOTED_STRING,
+  kDOUBLE_QUOTED_STRING,
 
-  kMfslLeftParenthesis,
-  kMfslRightParenthesis,
+  kINTEGER_NUMBER,
+  kDOUBLE_NUMBER,
 
-  kMfslEquals,
-  kMfslComma,
-  kMfslPlus,
-  kMfslMinus,
-  kMfslTimes,
-  kMfslSlash,
-  kMfslColon,
-  kMfslSemicolon
+  kNAME,
+
+  // others
+  kLEFT_PARENTHESIS,
+  kRIGHT_PARENTHESIS,
+
+  kEQUALS,
+  kCOMMA,
+  kPLUS,
+  kMINUS,
+  kSTAR,
+  kSLASH,
+  kCOLON,
+  kSEMI_COLON,
+
+  kBAR,
+
+  kDASH,
+  kDASH_DASH
 };
 
 EXP string mfslTokenKindAsString (
