@@ -81,6 +81,10 @@
   https://github.com/jacques-menu/musicformats
 */
 
+
+#define DEBUG_MFSL_SCANNER
+
+
 #include <iostream>
 
 #include <string>
@@ -106,7 +110,7 @@ extern int                yyerror (char const* message);
 /* ------- */
 
 
-#line 110 "mfslParser.cpp"
+#line 114 "mfslParser.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -140,28 +144,27 @@ enum yysymbol_kind_t
   YYSYMBOL_kTOOL = 3,                      /* kTOOL  */
   YYSYMBOL_kINPUT = 4,                     /* kINPUT  */
   YYSYMBOL_kBOOK = 5,                      /* kBOOK  */
-  YYSYMBOL_kCASE = 6,                      /* kCASE  */
-  YYSYMBOL_kSINGLE_QUOTED_STRING = 7,      /* kSINGLE_QUOTED_STRING  */
-  YYSYMBOL_kDOUBLE_QUOTED_STRING = 8,      /* kDOUBLE_QUOTED_STRING  */
-  YYSYMBOL_kINTEGER_NUMBER = 9,            /* kINTEGER_NUMBER  */
-  YYSYMBOL_kDOUBLE_NUMBER = 10,            /* kDOUBLE_NUMBER  */
-  YYSYMBOL_kNAME = 11,                     /* kNAME  */
-  YYSYMBOL_kLEFT_PARENTHESIS = 12,         /* kLEFT_PARENTHESIS  */
-  YYSYMBOL_kRIGHT_PARENTHESIS = 13,        /* kRIGHT_PARENTHESIS  */
-  YYSYMBOL_kEQUALS = 14,                   /* kEQUALS  */
-  YYSYMBOL_kCOMMA = 15,                    /* kCOMMA  */
-  YYSYMBOL_kPLUS = 16,                     /* kPLUS  */
-  YYSYMBOL_kMINUS = 17,                    /* kMINUS  */
+  YYSYMBOL_kSCORE = 6,                     /* kSCORE  */
+  YYSYMBOL_kCASE = 7,                      /* kCASE  */
+  YYSYMBOL_kSINGLE_QUOTED_STRING = 8,      /* kSINGLE_QUOTED_STRING  */
+  YYSYMBOL_kDOUBLE_QUOTED_STRING = 9,      /* kDOUBLE_QUOTED_STRING  */
+  YYSYMBOL_kINTEGER_NUMBER = 10,           /* kINTEGER_NUMBER  */
+  YYSYMBOL_kDOUBLE_NUMBER = 11,            /* kDOUBLE_NUMBER  */
+  YYSYMBOL_kNAME = 12,                     /* kNAME  */
+  YYSYMBOL_kLEFT_PARENTHESIS = 13,         /* kLEFT_PARENTHESIS  */
+  YYSYMBOL_kRIGHT_PARENTHESIS = 14,        /* kRIGHT_PARENTHESIS  */
+  YYSYMBOL_kEQUALS = 15,                   /* kEQUALS  */
+  YYSYMBOL_kCOMMA = 16,                    /* kCOMMA  */
+  YYSYMBOL_kPLUS = 17,                     /* kPLUS  */
   YYSYMBOL_kSTAR = 18,                     /* kSTAR  */
   YYSYMBOL_kSLASH = 19,                    /* kSLASH  */
   YYSYMBOL_kCOLON = 20,                    /* kCOLON  */
   YYSYMBOL_kSEMI_COLON = 21,               /* kSEMI_COLON  */
   YYSYMBOL_kBAR = 22,                      /* kBAR  */
-  YYSYMBOL_kDASH = 23,                     /* kDASH  */
-  YYSYMBOL_kDASH_DASH = 24,                /* kDASH_DASH  */
-  YYSYMBOL_YYACCEPT = 25,                  /* $accept  */
-  YYSYMBOL_MfslScript = 26,                /* MfslScript  */
-  YYSYMBOL_MfTool = 27                     /* MfTool  */
+  YYSYMBOL_kOPTION = 23,                   /* kOPTION  */
+  YYSYMBOL_YYACCEPT = 24,                  /* $accept  */
+  YYSYMBOL_MfslScript = 25,                /* MfslScript  */
+  YYSYMBOL_Tool = 26                       /* Tool  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -492,16 +495,16 @@ union yyalloc
 #define YYLAST   3
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  25
+#define YYNTOKENS  24
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  3
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  4
+#define YYNRULES  5
 /* YYNSTATES -- Number of states.  */
 #define YYNSTATES  7
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   279
+#define YYMAXUTOK   278
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -542,14 +545,14 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
-      15,    16,    17,    18,    19,    20,    21,    22,    23,    24
+      15,    16,    17,    18,    19,    20,    21,    22,    23
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   104,   104,   127,   133
+       0,   119,   119,   123,   185,   194
 };
 #endif
 
@@ -566,11 +569,11 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "kTOOL", "kINPUT",
-  "kBOOK", "kCASE", "kSINGLE_QUOTED_STRING", "kDOUBLE_QUOTED_STRING",
-  "kINTEGER_NUMBER", "kDOUBLE_NUMBER", "kNAME", "kLEFT_PARENTHESIS",
-  "kRIGHT_PARENTHESIS", "kEQUALS", "kCOMMA", "kPLUS", "kMINUS", "kSTAR",
-  "kSLASH", "kCOLON", "kSEMI_COLON", "kBAR", "kDASH", "kDASH_DASH",
-  "$accept", "MfslScript", "MfTool", YY_NULLPTR
+  "kBOOK", "kSCORE", "kCASE", "kSINGLE_QUOTED_STRING",
+  "kDOUBLE_QUOTED_STRING", "kINTEGER_NUMBER", "kDOUBLE_NUMBER", "kNAME",
+  "kLEFT_PARENTHESIS", "kRIGHT_PARENTHESIS", "kEQUALS", "kCOMMA", "kPLUS",
+  "kSTAR", "kSLASH", "kCOLON", "kSEMI_COLON", "kBAR", "kOPTION", "$accept",
+  "MfslScript", "Tool", YY_NULLPTR
 };
 
 static const char *
@@ -580,7 +583,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-11)
+#define YYPACT_NINF (-12)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -594,7 +597,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -1,   -11,   -10,     3,   -11,   -11,   -11
+      -1,   -12,   -11,     3,   -12,   -12,   -12
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -602,13 +605,13 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     4,     0,     0,     2,     3,     1
+       0,     3,     0,     0,     2,     4,     1
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -11,   -11,   -11
+     -12,   -12,   -12
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
@@ -627,26 +630,26 @@ static const yytype_int8 yytable[] =
 
 static const yytype_int8 yycheck[] =
 {
-       1,    11,     3,     0
+       1,    12,     3,     0
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     1,     3,    26,    27,    11,     0
+       0,     1,     3,    25,    26,    12,     0
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    25,    26,    27,    27
+       0,    24,    25,    25,    26,    26
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     2,     1
+       0,     2,     1,     1,     2,     1
 };
 
 
@@ -1109,29 +1112,42 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 3: /* MfTool: kTOOL kNAME  */
-#line 128 "mfsl.y"
+  case 3: /* MfslScript: error  */
+#line 124 "mfsl.y"
     {
       gLogStream <<
-        "tool: " << yylval.fName <<
-        endl;
-    }
-#line 1120 "mfslParser.cpp"
-    break;
-
-  case 4: /* MfTool: error  */
-#line 134 "mfsl.y"
-    {
-      cerr <<
         endl <<
-        "'tool name' expected" <<
+        "Ill-formed MDSL input" <<
         endl;
     }
-#line 1131 "mfslParser.cpp"
+#line 1124 "mfslParser.cpp"
+    break;
+
+  case 4: /* Tool: kTOOL kNAME  */
+#line 186 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> tool " << (yyvsp[0].fName) <<
+        endl;
+#endif
+    }
+#line 1136 "mfslParser.cpp"
+    break;
+
+  case 5: /* Tool: error  */
+#line 195 "mfsl.y"
+    {
+      gLogStream <<
+        endl <<
+        "'tool <NAME>' expected" <<
+        endl;
+    }
+#line 1147 "mfslParser.cpp"
     break;
 
 
-#line 1135 "mfslParser.cpp"
+#line 1151 "mfslParser.cpp"
 
       default: break;
     }
@@ -1324,7 +1340,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 208 "mfsl.y"
+#line 303 "mfsl.y"
 
 
 

@@ -176,6 +176,7 @@ string oahElement::getShortNameOrLongNameIfEmpty () const
     result = fLongName;
   }
 
+  return result;
 }
 
 string oahElement::fetchNames () const

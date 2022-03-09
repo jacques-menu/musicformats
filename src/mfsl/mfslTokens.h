@@ -34,6 +34,7 @@ enum mfslTokenKind {
   kINPUT,
 
   kBOOK,
+  kSCORE,
 
   kCASE,
 
@@ -53,7 +54,7 @@ enum mfslTokenKind {
   kEQUALS,
   kCOMMA,
   kPLUS,
-  kMINUS,
+//   kMINUS,
   kSTAR,
   kSLASH,
   kCOLON,
@@ -61,8 +62,7 @@ enum mfslTokenKind {
 
   kBAR,
 
-  kDASH,
-  kDASH_DASH
+  kOPTION
 };
 
 EXP string mfslTokenKindAsString (

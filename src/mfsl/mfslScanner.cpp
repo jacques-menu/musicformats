@@ -371,8 +371,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 45
-#define YY_END_OF_BUFFER 46
+#define YY_NUM_RULES 47
+#define YY_END_OF_BUFFER 48
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -380,17 +380,17 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[82] =
+static const flex_int16_t yy_accept[88] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    5,    5,
-       46,   44,   25,   26,   17,    1,    9,   34,   35,   40,
-       38,   37,   39,   41,   29,   42,   43,   36,   33,   33,
-       33,   33,   16,   15,   10,   16,   24,   23,   18,   24,
-        3,    2,    5,    5,    6,    8,   25,    4,    0,   29,
-        0,   33,   33,   33,   33,   11,   14,   12,   13,   19,
-       22,   20,   21,    5,    6,    6,    7,   27,    0,   28,
-       33,   33,   33,    0,   32,   33,   30,    0,   27,   31,
-        0
+       48,   46,   25,   26,   17,    1,    9,   36,   37,   41,
+       40,   39,   46,   42,   29,   43,   44,   38,   33,   33,
+       33,   33,   45,   16,   15,   10,   16,   24,   23,   18,
+       24,    3,    2,    5,    5,    6,    8,   25,    0,   35,
+        4,    0,   29,    0,   33,   33,   33,   33,   11,   14,
+       12,   13,   19,   22,   20,   21,    5,    6,    6,    7,
+       34,   35,   27,    0,   28,   33,   33,   33,   34,    0,
+       32,   33,   30,    0,   27,   31,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -408,7 +408,7 @@ static const YY_CHAR yy_ec[256] =
 
        26,   21,   19,   19,   27,   19,   19,   28,   19,   29,
        30,   31,   19,   19,   32,   33,   34,   19,   19,   19,
-       19,   19,   35,    1,   35,    1,    1,    1,    1,    1,
+       19,   19,   35,   36,   35,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,   19,   19,    1,    1,    1,
         1,   19,   19,   19,    1,    1,    1,   19,    1,    1,
         1,   19,   19,    1,    1,    1,   19,   19,    1,    1,
@@ -425,98 +425,108 @@ static const YY_CHAR yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static const YY_CHAR yy_meta[36] =
+static const YY_CHAR yy_meta[37] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    2,    1,
-        1,    1,    1,    1,    3,    1,    1,    1,    3,    3,
-        4,    1,    3,    3,    3,    4,    4,    3,    4,    3,
-        3,    3,    3,    3,    5
+        1,    3,    4,    1,    4,    1,    1,    1,    5,    5,
+        6,    1,    4,    5,    5,    6,    6,    5,    6,    5,
+        5,    5,    5,    5,    7,    1
     } ;
 
-static const flex_int16_t yy_base[89] =
+static const flex_int16_t yy_base[99] =
     {   0,
-        0,    0,   33,   34,   38,   40,  105,  104,   60,   93,
-      106,  157,  103,  157,  157,  157,  157,  157,  157,  157,
-      157,  157,  157,   95,   32,  157,  157,  157,    0,   79,
-       72,   70,  157,  157,  157,   32,  157,  157,  157,   42,
-      157,  157,    0,    0,   39,  157,   96,  157,   76,   53,
-       62,    0,   58,   53,   52,  157,  157,  157,  157,  157,
-      157,  157,  157,    0,   69,   71,  157,   73,   61,   55,
-       41,   25,   29,   82,    0,   18,    0,   35,   34,    0,
-      157,  128,  133,  138,  143,  146,  150,  153
+        0,    0,   34,   35,   39,   41,  107,  106,   61,   94,
+      108,  186,  105,  186,  186,  186,  186,  186,  186,  186,
+      186,  186,   94,   96,   33,  186,  186,  186,    0,   80,
+       73,   71,  186,  186,  186,  186,   33,  186,  186,  186,
+       43,  186,  186,    0,    0,   40,  186,   97,    0,    0,
+      186,   77,   54,   63,    0,   59,   54,   53,  186,  186,
+      186,  186,  186,  186,  186,  186,    0,   70,   72,  186,
+        0,    0,   74,   62,   56,   42,   26,   30,    0,   83,
+        0,   19,    0,   36,   35,    0,  186,  129,  136,  143,
+      150,  155,  159,  165,  170,  171,  175,  179
+
     } ;
 
-static const flex_int16_t yy_def[89] =
+static const flex_int16_t yy_def[99] =
     {   0,
-       81,    1,   82,   82,   83,   83,   84,   84,   85,   85,
-       81,   81,   81,   81,   81,   81,   81,   81,   81,   81,
-       81,   81,   81,   81,   81,   81,   81,   81,   86,   86,
-       86,   86,   81,   81,   81,   81,   81,   81,   81,   81,
-       81,   81,   87,   87,   88,   81,   81,   81,   81,   81,
-       81,   86,   86,   86,   86,   81,   81,   81,   81,   81,
-       81,   81,   81,   87,   88,   88,   81,   81,   81,   81,
-       86,   86,   86,   81,   86,   86,   86,   81,   81,   86,
-        0,   81,   81,   81,   81,   81,   81,   81
+       87,    1,   88,   88,   89,   89,   90,   90,   91,   91,
+       87,   87,   87,   87,   87,   87,   87,   87,   87,   87,
+       87,   87,   92,   87,   87,   87,   87,   87,   93,   93,
+       93,   93,   87,   87,   87,   87,   87,   87,   87,   87,
+       87,   87,   87,   94,   94,   95,   87,   87,   96,   97,
+       87,   87,   87,   87,   93,   93,   93,   93,   87,   87,
+       87,   87,   87,   87,   87,   87,   94,   95,   95,   87,
+       98,   97,   87,   87,   87,   93,   93,   93,   98,   87,
+       93,   93,   93,   87,   87,   93,    0,   87,   87,   87,
+       87,   87,   87,   87,   87,   87,   87,   87
+
     } ;
 
-static const flex_int16_t yy_nxt[193] =
+static const flex_int16_t yy_nxt[223] =
     {   0,
        12,   13,   14,   15,   16,   17,   18,   19,   20,   21,
        22,   23,   12,   24,   25,   26,   27,   28,   29,   29,
        29,   12,   12,   29,   30,   29,   31,   29,   29,   29,
-       29,   29,   32,   29,   12,   34,   34,   56,   35,   35,
-       38,   39,   38,   39,   49,   60,   50,   66,   79,   79,
-       80,   51,   67,   57,   36,   36,   77,   51,   76,   40,
-       58,   40,   44,   61,   59,   49,   75,   50,   45,   70,
-       62,   69,   51,   69,   63,   70,   70,   81,   51,   66,
-       46,   73,   81,   72,   67,   46,   46,   68,   46,   71,
-       68,   78,   74,   78,   46,   44,   79,   47,   74,   55,
+       29,   29,   32,   29,   12,   33,   35,   35,   59,   36,
+       36,   39,   40,   39,   40,   52,   63,   53,   69,   85,
+       85,   86,   54,   70,   60,   37,   37,   83,   54,   82,
+       41,   61,   41,   45,   64,   62,   52,   81,   53,   46,
+       75,   65,   74,   54,   74,   66,   75,   75,   87,   54,
+       69,   47,   78,   87,   77,   70,   47,   47,   73,   47,
+       76,   73,   84,   80,   84,   47,   45,   85,   48,   80,
 
-       54,   45,   53,   48,   47,   81,   42,   42,   81,   81,
-       81,   81,   81,   46,   81,   81,   81,   81,   46,   46,
-       81,   46,   81,   81,   81,   81,   81,   46,   33,   33,
-       33,   33,   33,   37,   37,   37,   37,   37,   41,   41,
-       41,   41,   41,   43,   43,   43,   43,   43,   52,   52,
-       64,   81,   64,   65,   65,   65,   11,   81,   81,   81,
-       81,   81,   81,   81,   81,   81,   81,   81,   81,   81,
-       81,   81,   81,   81,   81,   81,   81,   81,   81,   81,
-       81,   81,   81,   81,   81,   81,   81,   81,   81,   81,
-       81,   81
+       58,   57,   46,   56,   51,   49,   48,   87,   43,   43,
+       87,   87,   87,   87,   47,   87,   87,   87,   87,   47,
+       47,   87,   47,   87,   87,   87,   87,   87,   47,   34,
+       34,   34,   34,   34,   34,   34,   38,   38,   38,   38,
+       38,   38,   38,   42,   42,   42,   42,   42,   42,   42,
+       44,   44,   44,   44,   44,   44,   44,   50,   87,   50,
+       50,   55,   55,   55,   55,   67,   87,   67,   67,   67,
+       68,   68,   68,   68,   68,   71,   71,   72,   72,   72,
+       72,   79,   79,   79,   79,   11,   87,   87,   87,   87,
+       87,   87,   87,   87,   87,   87,   87,   87,   87,   87,
 
+       87,   87,   87,   87,   87,   87,   87,   87,   87,   87,
+       87,   87,   87,   87,   87,   87,   87,   87,   87,   87,
+       87,   87
     } ;
 
-static const flex_int16_t yy_chk[193] =
+static const flex_int16_t yy_chk[223] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    3,    4,   36,    3,    4,
-        5,    5,    6,    6,   25,   40,   25,   45,   79,   78,
-       76,   25,   45,   36,    3,    4,   73,   25,   72,    5,
-       36,    6,    9,   40,   36,   50,   71,   50,    9,   70,
-       40,   51,   50,   51,   40,   69,   51,   65,   50,   66,
-        9,   55,   65,   54,   66,    9,    9,   68,    9,   53,
-       49,   74,   68,   74,    9,   10,   74,   47,   68,   32,
+        1,    1,    1,    1,    1,    1,    3,    4,   37,    3,
+        4,    5,    5,    6,    6,   25,   41,   25,   46,   85,
+       84,   82,   25,   46,   37,    3,    4,   78,   25,   77,
+        5,   37,    6,    9,   41,   37,   53,   76,   53,    9,
+       75,   41,   54,   53,   54,   41,   74,   54,   68,   53,
+       69,    9,   58,   68,   57,   69,    9,    9,   73,    9,
+       56,   52,   80,   73,   80,    9,   10,   80,   48,   73,
 
-       31,   10,   30,   24,   13,   11,    8,    7,    0,    0,
-        0,    0,    0,   10,    0,    0,    0,    0,   10,   10,
-        0,   10,    0,    0,    0,    0,    0,   10,   82,   82,
-       82,   82,   82,   83,   83,   83,   83,   83,   84,   84,
-       84,   84,   84,   85,   85,   85,   85,   85,   86,   86,
-       87,    0,   87,   88,   88,   88,   81,   81,   81,   81,
-       81,   81,   81,   81,   81,   81,   81,   81,   81,   81,
-       81,   81,   81,   81,   81,   81,   81,   81,   81,   81,
-       81,   81,   81,   81,   81,   81,   81,   81,   81,   81,
-       81,   81
+       32,   31,   10,   30,   24,   23,   13,   11,    8,    7,
+        0,    0,    0,    0,   10,    0,    0,    0,    0,   10,
+       10,    0,   10,    0,    0,    0,    0,    0,   10,   88,
+       88,   88,   88,   88,   88,   88,   89,   89,   89,   89,
+       89,   89,   89,   90,   90,   90,   90,   90,   90,   90,
+       91,   91,   91,   91,   91,   91,   91,   92,    0,   92,
+       92,   93,   93,   93,   93,   94,    0,   94,   94,   94,
+       95,   95,   95,   95,   95,   96,   96,   97,   97,   97,
+       97,   98,   98,   98,   98,   87,   87,   87,   87,   87,
+       87,   87,   87,   87,   87,   87,   87,   87,   87,   87,
 
+       87,   87,   87,   87,   87,   87,   87,   87,   87,   87,
+       87,   87,   87,   87,   87,   87,   87,   87,   87,   87,
+       87,   87
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static const flex_int32_t yy_rule_can_match_eol[46] =
+static const flex_int32_t yy_rule_can_match_eol[48] =
     {   0,
 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 
     0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -557,6 +567,8 @@ char *yytext;
 #include <iostream> // for cout, cerr, TEMP JMI
 #include <sstream>
 
+#include <string.h>
+
 #include "mfBool.h"
 
 #include "mfMusicformatsError.h" // for mfMusicformatsError
@@ -591,7 +603,7 @@ Bool                      pVerboseMode; // JMI
 /* functions */
 /* ---------------------------------------------------------------------- */
 
-#line 594 "mfslScanner.cpp"
+#line 606 "mfslScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* flex options */
 /* ---------------------------------------------------------------------- */
@@ -602,7 +614,7 @@ Bool                      pVerboseMode; // JMI
 /* exclusive modes */
 /* ---------------------------------------------------------------------- */
 
-#line 605 "mfslScanner.cpp"
+#line 617 "mfslScanner.cpp"
 
 #define INITIAL 0
 #define SINGLE_QUOTED_STRING_MODE 1
@@ -823,13 +835,13 @@ YY_DECL
 		}
 
 	{
-#line 102 "mfsl.l"
+#line 104 "mfsl.l"
 
 
 
 
 
-#line 108 "mfsl.l"
+#line 110 "mfsl.l"
 /* ---------------------------------------------------------------------- */
 /* variables local to yylex() */
 /* ---------------------------------------------------------------------- */
@@ -840,7 +852,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 
 
-#line 843 "mfslScanner.cpp"
+#line 855 "mfslScanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -867,13 +879,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 82 )
+				if ( yy_current_state >= 88 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 157 );
+		while ( yy_base[yy_current_state] != 186 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -909,10 +921,10 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 118 "mfsl.l"
+#line 120 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> mode COMMENT_TO_END_OF_LINE_MODE" << endl;
+//   cerr << "// ==> mode COMMENT_TO_END_OF_LINE_MODE" << endl;
 #endif
 
   BEGIN COMMENT_TO_END_OF_LINE_MODE;
@@ -921,10 +933,10 @@ YY_RULE_SETUP
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 126 "mfsl.l"
+#line 128 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> back to mode INITIAL" << endl;
+//   cerr << "==> back to mode INITIAL" << endl;
 #endif
 
   BEGIN INITIAL;
@@ -932,17 +944,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 134 "mfsl.l"
+#line 136 "mfsl.l"
 {
   /* accepting any character other than {endOfLine} */
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 140 "mfsl.l"
+#line 142 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> mode PARENTHESIZED_COMMENT_MODE" << endl;
+//   cerr << "==> mode PARENTHESIZED_COMMENT_MODE" << endl;
 #endif
 
   BEGIN PARENTHESIZED_COMMENT_MODE;
@@ -951,7 +963,7 @@ YY_RULE_SETUP
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 148 "mfsl.l"
+#line 150 "mfsl.l"
 {
   /* accepting any character other than '*' */
 }
@@ -959,17 +971,17 @@ YY_RULE_SETUP
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 152 "mfsl.l"
+#line 154 "mfsl.l"
 {
   /* accepting all lthe '*' not followed by a '/' */
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 156 "mfsl.l"
+#line 158 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> back to mode INITIAL" << endl;
+//   cerr << "==> back to mode INITIAL" << endl;
 #endif
 
   BEGIN INITIAL;
@@ -977,18 +989,18 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 164 "mfsl.l"
+#line 166 "mfsl.l"
 {
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 169 "mfsl.l"
+#line 171 "mfsl.l"
 {
   pStringBuffer [0] = '\0';
 
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> mode SINGLE_QUOTED_STRING_MODE" << endl;
+//   cerr << "==> mode SINGLE_QUOTED_STRING_MODE" << endl;
 #endif
 
   BEGIN SINGLE_QUOTED_STRING_MODE;
@@ -996,44 +1008,45 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 179 "mfsl.l"
+#line 181 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> single quoted string: [" << yytext << "]" << endl;
+  yylval.fString = strdup (pStringBuffer);
 
-  cerr << "==> back to mode INITIAL" << endl;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> single quoted string: [" << yylval.fString << "]" << endl;
+
+//   cerr << "==> back to mode INITIAL" << endl;
 #endif
 
   BEGIN INITIAL;
 
-  yylval.fString = pStringBuffer;
   return MusicFormats::kSINGLE_QUOTED_STRING;
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 192 "mfsl.l"
+#line 195 "mfsl.l"
 {
   strlcat (pStringBuffer, "'", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 196 "mfsl.l"
+#line 199 "mfsl.l"
 {
   strlcat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 200 "mfsl.l"
+#line 203 "mfsl.l"
 {
   strlcat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 204 "mfsl.l"
+#line 207 "mfsl.l"
 {
   strlcat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
@@ -1041,26 +1054,26 @@ YY_RULE_SETUP
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
-#line 208 "mfsl.l"
+#line 211 "mfsl.l"
 {
   strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 212 "mfsl.l"
+#line 215 "mfsl.l"
 {
   strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 218 "mfsl.l"
+#line 221 "mfsl.l"
 {
   pStringBuffer [0] = '\0';
 
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> mode kDOUBLE_QUOTED_STRING" << endl;
+//   cerr << "==> mode kDOUBLE_QUOTED_STRING" << endl;
 #endif
 
   BEGIN DOUBLE_QUOTED_STRING_MODE;
@@ -1068,44 +1081,45 @@ YY_RULE_SETUP
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 228 "mfsl.l"
+#line 231 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> double quoted string: [" << yytext << "]" << endl;
+  yylval.fString = strdup (pStringBuffer);
 
-  cerr << "==> back to mode INITIAL" << endl;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> double quoted string: [" << yylval.fString << "]" << endl;
+
+//   cerr << "==> back to mode INITIAL" << endl;
 #endif
 
   BEGIN INITIAL;
 
-  yylval.fString = pStringBuffer;
   return MusicFormats::kSINGLE_QUOTED_STRING;
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 241 "mfsl.l"
+#line 245 "mfsl.l"
 {
   strlcat (pStringBuffer, "\"", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 245 "mfsl.l"
+#line 249 "mfsl.l"
 {
   strlcat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 249 "mfsl.l"
+#line 253 "mfsl.l"
 {
   strlcat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 253 "mfsl.l"
+#line 257 "mfsl.l"
 {
   strlcat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
@@ -1113,21 +1127,21 @@ YY_RULE_SETUP
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 257 "mfsl.l"
+#line 261 "mfsl.l"
 {
   strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 261 "mfsl.l"
+#line 265 "mfsl.l"
 {
   strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 267 "mfsl.l"
+#line 271 "mfsl.l"
 {
   /* ignoring this separator */
 }
@@ -1135,16 +1149,16 @@ YY_RULE_SETUP
 case 26:
 /* rule 26 can match eol */
 YY_RULE_SETUP
-#line 271 "mfsl.l"
+#line 275 "mfsl.l"
 {
   /* ignoring this separator */
 }
 	YY_BREAK
 case 27:
-#line 278 "mfsl.l"
+#line 282 "mfsl.l"
 case 28:
 YY_RULE_SETUP
-#line 278 "mfsl.l"
+#line 282 "mfsl.l"
 {
  #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> float: " << yytext << endl;
@@ -1156,7 +1170,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 287 "mfsl.l"
+#line 291 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> integer: " << yytext << endl;
@@ -1168,7 +1182,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 298 "mfsl.l"
+#line 302 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> tool" << endl;
@@ -1179,7 +1193,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 306 "mfsl.l"
+#line 310 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> input" << endl;
@@ -1190,7 +1204,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 314 "mfsl.l"
+#line 318 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> case" << endl;
@@ -1201,19 +1215,35 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 324 "mfsl.l"
+#line 328 "mfsl.l"
 {
+  yylval.fName = strdup (yytext);
+
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> name: " << yytext << endl;
+  cerr << "--> name: " << yylval.fName << endl;
 #endif
 
-  yylval.fName = strdup (yytext);
   return MusicFormats::kNAME;
 }
 	YY_BREAK
 case 34:
+#line 341 "mfsl.l"
+case 35:
 YY_RULE_SETUP
-#line 335 "mfsl.l"
+#line 341 "mfsl.l"
+{
+  yylval.fOption = strdup (yytext);
+
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> option: " << yylval.fOption << endl;
+#endif
+
+  return MusicFormats::kOPTION;
+}
+	YY_BREAK
+case 36:
+YY_RULE_SETUP
+#line 353 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> (" << endl;
@@ -1222,9 +1252,9 @@ YY_RULE_SETUP
   return MusicFormats::kLEFT_PARENTHESIS;
 }
 	YY_BREAK
-case 35:
+case 37:
 YY_RULE_SETUP
-#line 343 "mfsl.l"
+#line 361 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> )" << endl;
@@ -1233,9 +1263,9 @@ YY_RULE_SETUP
   return MusicFormats::kRIGHT_PARENTHESIS;
 }
 	YY_BREAK
-case 36:
+case 38:
 YY_RULE_SETUP
-#line 351 "mfsl.l"
+#line 369 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> =" << endl;
@@ -1244,9 +1274,9 @@ YY_RULE_SETUP
   return MusicFormats::kEQUALS;
 }
 	YY_BREAK
-case 37:
+case 39:
 YY_RULE_SETUP
-#line 359 "mfsl.l"
+#line 377 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> ," << endl;
@@ -1255,9 +1285,9 @@ YY_RULE_SETUP
   return MusicFormats::kCOMMA;
 }
 	YY_BREAK
-case 38:
+case 40:
 YY_RULE_SETUP
-#line 367 "mfsl.l"
+#line 385 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> +" << endl;
@@ -1266,20 +1296,9 @@ YY_RULE_SETUP
   return MusicFormats::kPLUS;
 }
 	YY_BREAK
-case 39:
+case 41:
 YY_RULE_SETUP
-#line 375 "mfsl.l"
-{
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> -" << endl;
-#endif
-
-  return MusicFormats::kMINUS;
-}
-	YY_BREAK
-case 40:
-YY_RULE_SETUP
-#line 383 "mfsl.l"
+#line 393 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> *" << endl;
@@ -1288,9 +1307,9 @@ YY_RULE_SETUP
   return MusicFormats::kSTAR;
 }
 	YY_BREAK
-case 41:
+case 42:
 YY_RULE_SETUP
-#line 391 "mfsl.l"
+#line 401 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> /" << endl;
@@ -1299,9 +1318,9 @@ YY_RULE_SETUP
   return MusicFormats::kSLASH;
 }
 	YY_BREAK
-case 42:
+case 43:
 YY_RULE_SETUP
-#line 399 "mfsl.l"
+#line 409 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> :" << endl;
@@ -1310,9 +1329,9 @@ YY_RULE_SETUP
   return MusicFormats::kCOLON;
 }
 	YY_BREAK
-case 43:
+case 44:
 YY_RULE_SETUP
-#line 407 "mfsl.l"
+#line 417 "mfsl.l"
 {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> ;" << endl;
@@ -1321,32 +1340,43 @@ YY_RULE_SETUP
   return MusicFormats::kSEMI_COLON;
 }
 	YY_BREAK
-case 44:
+case 45:
 YY_RULE_SETUP
-#line 417 "mfsl.l"
+#line 425 "mfsl.l"
+{
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> |" << endl;
+#endif
+
+  return MusicFormats::kBAR;
+}
+	YY_BREAK
+case 46:
+YY_RULE_SETUP
+#line 435 "mfsl.l"
 {
   stringstream s;
 
   s <<
-    "illegal character [" <<
+    "illegal character '" <<
     yytext [0] <<
-    "] at line " <<
-    yylineno <<
-    " in MFSL script";
+    " in MFSL script" <<
+    ", line " <<
+    yylineno;
 
   mfslError (
-    "gGlobalServiceRunData->getInputSourceName ()",
-    44, // inputLineNumber,
+    pInputFileName,
+    yylineno,
     __FILE__, __LINE__,
     s.str ());
 }
 	YY_BREAK
-case 45:
+case 47:
 YY_RULE_SETUP
-#line 435 "mfsl.l"
+#line 453 "mfsl.l"
 ECHO;
 	YY_BREAK
-#line 1349 "mfslScanner.cpp"
+#line 1379 "mfslScanner.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(SINGLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(DOUBLE_QUOTED_STRING_MODE):
@@ -1647,7 +1677,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 82 )
+			if ( yy_current_state >= 88 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1675,11 +1705,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 82 )
+		if ( yy_current_state >= 88 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 81);
+	yy_is_jam = (yy_current_state == 87);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2367,7 +2397,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 435 "mfsl.l"
+#line 453 "mfsl.l"
 
 
 /* ---------------------------------------------------------------------- */
@@ -2378,16 +2408,26 @@ void yyfree (void * ptr )
 int yywrap (void)
 {
   if (pInputFileName == "-") {
-    // read from standard input
+    gLogStream <<
+      "Reading from standard input" <<
+      endl;
   }
 
   else {
-    const char*
-      pInputFileNameCString =
-        pInputFileName.c_str ();
+    gLogStream <<
+      "Opening \"" << pInputFileName << "\" for reading" <<
+      endl;
 
-    if ( (yyin = fopen (pInputFileNameCString, "r")) == NULL ) {
-      perror (pInputFileNameCString);
+    if ( (yyin = fopen (pInputFileName.c_str (), "r")) == NULL ) {
+      stringstream s;
+
+      s <<
+        "Cannot open \"" << pInputFileName << "\"";
+
+      mfslFileError (
+        pInputFileName,
+        s.str ());
+
       return 1;
     }
   }
@@ -2399,28 +2439,21 @@ int yywrap (void)
 //______________________________________________________________________________
 int yyerror (char const* message)
 {
-  cerr <<
-    "### MFSL error: " << message <<
-    endl;
-
-  abort ();
-
-//   mfslError (
-//     "gGlobalServiceRunData->getInputSourceName ()",
-//     yylineno,
-//     __FILE__, __LINE__,
-//     message);
+  mfslError (
+    pInputFileName,
+    yylineno,
+    __FILE__, __LINE__,
+    message);
 
   return 0;
 }
 
 //______________________________________________________________________________
 EXP void performMfslLexicalAnalysisOnly (
-	int		argc,
-	char* argv[],
-	Bool	verboseMode)
+  const string& inputSourceName,
+	Bool	        verboseMode)
 {
-  pInputFileName = argv [1];
+  pInputFileName = inputSourceName;
 	pVerboseMode   = verboseMode;
 
 	yywrap ();	// open the first (and only) script file
@@ -2430,9 +2463,8 @@ EXP void performMfslLexicalAnalysisOnly (
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError launchMfslInterpreter (
-  int                     argc,
-  char*                   argv[],
+mfMusicformatsError launchMfslInterpreter (
+  const string&           inputSourceName,
   string&                 theMfTool,
   oahOptionsAndArguments& optionsAndArguments,
   Bool                    verboseMode)
@@ -2441,15 +2473,23 @@ EXP mfMusicformatsError launchMfslInterpreter (
     res =
       mfMusicformatsError::k_NoError;
 
-  pInputFileName = argv [1];
+  pInputFileName = inputSourceName;
 	pVerboseMode   = verboseMode;
 
-//  	yywrap ();	// open the first (and only) script file
+  gLogStream <<
+    "--> pInputFileName: \"" << pInputFileName << "\"" <<
+    endl <<
+    "--> pVerboseMode: " << pVerboseMode <<
+    endl;
+
+ 	yywrap ();	// open the first (and only) script file
 
 	if (yyparse ()) {
 	  // the interpretation failed
 	  res = mfMusicformatsError::kErrorInvalidFile;
 	}
+
+  fclose (yyin);
 
   theMfTool = "theMfTool";
 

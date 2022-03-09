@@ -4810,6 +4810,11 @@ void oahHandler::setOahHandlerFoundAHelpOption (
   fOahHandlerFoundAHelpOption = true;
 }
 
+string oahHandler::fetchOutputFileNameFromTheOptions () const
+{
+  return "*** no output file name ***"; // for MFSL v0.9.62
+}
+
 void oahHandler::checkHandlerOwnOptionsConsistency ()
 {}
 

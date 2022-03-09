@@ -33,7 +33,6 @@ EXP void mfslWarning (
     inputSourceName,
     inputLineNumber,
     message);
-
 }
 
 EXP void mfslError (
@@ -84,6 +83,21 @@ EXP void mfslInternalError (
   gIndenter.setIndent (saveIndent);
 
   throw mfslInternalException (message);
+}
+
+EXP void mfslFileError (
+  const string& inputSourceName,
+  const string& message)
+{
+  gLogStream <<
+    "### MFSL file error: " << message <<
+    endl;
+
+  if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
+    throw mfslException (message);
+  }
+
+  throw mfslException (message);
 }
 
 

@@ -57,25 +57,24 @@ extern int yydebug;
     kTOOL = 258,                   /* kTOOL  */
     kINPUT = 259,                  /* kINPUT  */
     kBOOK = 260,                   /* kBOOK  */
-    kCASE = 261,                   /* kCASE  */
-    kSINGLE_QUOTED_STRING = 262,   /* kSINGLE_QUOTED_STRING  */
-    kDOUBLE_QUOTED_STRING = 263,   /* kDOUBLE_QUOTED_STRING  */
-    kINTEGER_NUMBER = 264,         /* kINTEGER_NUMBER  */
-    kDOUBLE_NUMBER = 265,          /* kDOUBLE_NUMBER  */
-    kNAME = 266,                   /* kNAME  */
-    kLEFT_PARENTHESIS = 267,       /* kLEFT_PARENTHESIS  */
-    kRIGHT_PARENTHESIS = 268,      /* kRIGHT_PARENTHESIS  */
-    kEQUALS = 269,                 /* kEQUALS  */
-    kCOMMA = 270,                  /* kCOMMA  */
-    kPLUS = 271,                   /* kPLUS  */
-    kMINUS = 272,                  /* kMINUS  */
+    kSCORE = 261,                  /* kSCORE  */
+    kCASE = 262,                   /* kCASE  */
+    kSINGLE_QUOTED_STRING = 263,   /* kSINGLE_QUOTED_STRING  */
+    kDOUBLE_QUOTED_STRING = 264,   /* kDOUBLE_QUOTED_STRING  */
+    kINTEGER_NUMBER = 265,         /* kINTEGER_NUMBER  */
+    kDOUBLE_NUMBER = 266,          /* kDOUBLE_NUMBER  */
+    kNAME = 267,                   /* kNAME  */
+    kLEFT_PARENTHESIS = 268,       /* kLEFT_PARENTHESIS  */
+    kRIGHT_PARENTHESIS = 269,      /* kRIGHT_PARENTHESIS  */
+    kEQUALS = 270,                 /* kEQUALS  */
+    kCOMMA = 271,                  /* kCOMMA  */
+    kPLUS = 272,                   /* kPLUS  */
     kSTAR = 273,                   /* kSTAR  */
     kSLASH = 274,                  /* kSLASH  */
     kCOLON = 275,                  /* kCOLON  */
     kSEMI_COLON = 276,             /* kSEMI_COLON  */
     kBAR = 277,                    /* kBAR  */
-    kDASH = 278,                   /* kDASH  */
-    kDASH_DASH = 279               /* kDASH_DASH  */
+    kOPTION = 278                  /* kOPTION  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -84,16 +83,18 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 44 "mfsl.y"
+#line 48 "mfsl.y"
  // with a basic C description of strings
- int                      fIntegerNumber;
- double                   fDoubleNumber;
+  int                     fIntegerNumber;
+  double                  fDoubleNumber;
 
- char*                    fString;
+  char*                   fString;
 
- char*                    fName;
+  char*                   fName;
 
-#line 97 "mfslParser.h"
+  char*                   fOption;
+
+#line 98 "mfslParser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

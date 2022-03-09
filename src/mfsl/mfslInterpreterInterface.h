@@ -31,14 +31,12 @@ using namespace MusicFormats;
 
 //_______________________________________________________________________________
 EXP extern void performMfslLexicalAnalysisOnly (
-	int		argc,
-	char* argv[],
-	Bool	verboseMode);
+  const string& inputSourceName,
+	Bool	        verboseMode);
 
 //_______________________________________________________________________________
 EXP extern mfMusicformatsError launchMfslInterpreter (
-  int                     argc,
-  char*                   argv[],
+  const string&           inputSourceName,
   string&                 theMfTool,
   oahOptionsAndArguments& optionsAndArguments,
   Bool                    verboseMode);

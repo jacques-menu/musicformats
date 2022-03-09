@@ -11,6 +11,10 @@
   https://github.com/jacques-menu/musicformats
 */
 
+
+#define DEBUG_MFSL_SCANNER
+
+
 #include <iostream>
 
 #include <string>
@@ -42,16 +46,18 @@ extern int                yyerror (char const* message);
 /* ----------------------- */
 
 %union { // with a basic C description of strings
- int                      fIntegerNumber;
- double                   fDoubleNumber;
+  int                     fIntegerNumber;
+  double                  fDoubleNumber;
 
- char*                    fString;
+  char*                   fString;
 
- char*                    fName;
+  char*                   fName;
+
+  char*                   fOption;
 };
 
 
-/* MFSL tokens */
+/* the MFSL tokens */
 /* ----------- */
 
 %token kTOOL
@@ -59,16 +65,17 @@ extern int                yyerror (char const* message);
 %token kINPUT
 
 %token kBOOK
+%token kSCORE
 
 %token kCASE
 
-%token kSINGLE_QUOTED_STRING
-%token kDOUBLE_QUOTED_STRING
+%token <fString> kSINGLE_QUOTED_STRING
+%token <fString> kDOUBLE_QUOTED_STRING
 
-%token kINTEGER_NUMBER
-%token kDOUBLE_NUMBER
+%token <fIntegerNumber> kINTEGER_NUMBER
+%token <fDoubleNumber> kDOUBLE_NUMBER
 
-%token kNAME
+%token <fName> kNAME
 
 %token kLEFT_PARENTHESIS
 %token kRIGHT_PARENTHESIS
@@ -76,7 +83,7 @@ extern int                yyerror (char const* message);
 %token kEQUALS
 %token kCOMMA
 %token kPLUS
-%token kMINUS
+/* %token kMINUS JMI */
 %token kSTAR
 %token kSLASH
 %token kCOLON
@@ -84,8 +91,12 @@ extern int                yyerror (char const* message);
 
 %token kBAR
 
-%token kDASH
-%token kDASH_DASH
+%token <fOption> kOPTION
+
+
+// the MFSL non-terminals types
+
+// %type <fString> String
 
 
 /* the MFSL axiom */
@@ -97,60 +108,127 @@ extern int                yyerror (char const* message);
 %%
 
 
+/* ---------------------- */
 /* the MFSL non-terminals */
 /* ---------------------- */
 
+// the MFSL axiom
+//_______________________________________________________________________________
+
 MfslScript
- : MfTool
- /*
-   Input
-   Contents
+ : Tool
+//   Input
+//   Contents
+
  | error
     {
-    cerr <<
-      endl <<
-      "MESSAGE" <<
-      endl;
+      gLogStream <<
+        endl <<
+        "Ill-formed MDSL input" <<
+        endl;
     }
-*/
  ;
 
 
-STRING
+/*
+// strings
+//_______________________________________________________________________________
+
+String
   : kSINGLE_QUOTED_STRING
   | kDOUBLE_QUOTED_STRING
-  | kNAME
   ;
 
 
-MfTool
+// options
+//_______________________________________________________________________________
+
+Options
+  : Option
+  | Options Option
+;
+
+Option
+  :  kOPTION
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> option" <<
+        endl;
+#endif
+    }
+
+  |  kOPTION kNAME
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "$1" << ' ' << $2 <<
+        endl;
+#endif
+    }
+
+  | kOPTION String
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> option" << $2 <<
+        endl;
+#endif
+    }
+
+*/
+
+// tool
+//_______________________________________________________________________________
+
+Tool
  : kTOOL kNAME
     {
+#ifdef DEBUG_MFSL_SCANNER
       gLogStream <<
-        "tool: " << yylval.fName <<
+        "==> tool " << $2 <<
         endl;
+#endif
     }
+
  | error
     {
-      cerr <<
+      gLogStream <<
         endl <<
-        "'tool name' expected" <<
+        "'tool <NAME>' expected" <<
         endl;
     }
  ;
 
+
+/*
+
+// input
+//_______________________________________________________________________________
 
 Input
-  : kNAME
-  | kINPUT kDOUBLE_QUOTED_STRING
-  | kINPUT kSINGLE_QUOTED_STRING
+  : kINPUT kNAME
     {
+#ifdef DEBUG_MFSL_SCANNER
       gLogStream <<
-        "input: " << yylval.fName <<
+        "==> input" << $2 <<
         endl;
+#endif
+    }
+
+  | kINPUT String
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> input" << $2 <<
+        endl;
+#endif
     }
  ;
 
+
+// contents
+//_______________________________________________________________________________
 
 Contents
   : Option
@@ -161,23 +239,29 @@ Contents
   ;
 
 
-Option
-  : kDASH kNAME
-  | kDASH_DASH kNAME
-
-  | kDASH kNAME kSINGLE_QUOTED_STRING
-  | kDASH_DASH kNAME kSINGLE_QUOTED_STRING
-
-  | kDASH kNAME kDOUBLE_QUOTED_STRING
-  | kDASH_DASH kNAME kDOUBLE_QUOTED_STRING
-
+// choices
+//_______________________________________________________________________________
 
 ChoiceDeclaration
   : kNAME kCOLON Choices kSEMI_COLON
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> ChoiceDeclaration" << $1 <<
+        endl;
+#endif
+    }
   ;
 
 ChoiceSetting
   : kNAME kEQUALS kNAME kSEMI_COLON
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> ChoiceSetting" << $1 << ' ' << $3 <<
+        endl;
+#endif
+    }
   ;
 
 Choices
@@ -188,6 +272,13 @@ Choices
 
 CaseStatement
   : kCASE kNAME Cases
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> CaseStatement" << $2 <<
+        endl;
+#endif
+    }
 ;
 
 Cases
@@ -197,12 +288,16 @@ Cases
 
 Case
   : kNAME kCOLON Options
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> Case" <<
+        endl;
+#endif
+    }
 ;
 
-Options
-  : Option
-  | Options Option
-;
+*/
 
 
 %%

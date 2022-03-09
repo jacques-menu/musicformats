@@ -17,8 +17,28 @@
 
 #include "mfslWae.h"
 
-#include "mfBool.h"
-#include "mfIndentedTextOutput.h"
+#include "mfTiming.h"
+
+#include "wae.h"
+#include "oahWae.h"
+
+#include "enableTracingIfDesired.h"
+#ifdef TRACING_IS_ENABLED
+  #include "tracingOah.h"
+#endif
+
+// #include "mfServiceRunData.h"
+
+#include "libmusicxml.h" // for mfMusicformatsError
+
+#include "displayOah.h"
+
+#include "oahEarlyOptions.h"
+
+#include "mfcLibraryComponent.h"
+
+#include "mfslInterpreterInsiderHandler.h"
+#include "mfslInterpreterRegularHandler.h"
 
 #include "mfslInterpreterInterface.h"
 
@@ -69,69 +89,264 @@ int main (int argc, char* argv[])
 
   string executableName = argv [0];
 
+  // the service name
+  // ------------------------------------------------------
+
+  string serviceName = argv [0];
+
   // create the global output and log indented streams
   // ------------------------------------------------------
 
   createTheGlobalIndentedOstreams (cout, cerr);
 
-	// decipher the options and arguments
+  // apply early options if any
   // ------------------------------------------------------
 
-  string scriptFileName;
+  gGlobalOahEarlyOptions.applyEarlyOptionsIfPresentInArgcArgv (
+    argc,
+    argv);
 
-	switch (argc)
-		{
-		case 2 :
-			{
-        scriptFileName = argv [1];
-			}
-			break;
+  // has the '-insider' option been used?
+  // ------------------------------------------------------
 
-		default:
-		  {
-        string message =
-          "Input file name or '-' for standard input expected";
+  Bool insiderOption =
+    gGlobalOahEarlyOptions.getEarlyInsiderOption ();
 
-        gLogStream <<
-          message <<
-          endl;
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      serviceName << " main()" <<
+      ", insiderOption: " << insiderOption <<
+      endl;
+  }
+#endif
 
-        throw mfslException (message);
-			}
-		}	//	switch
+  // the oahHandler, set below
+  // ------------------------------------------------------
+
+  S_oahHandler handler;
+
+  try {
+    // create an mfslInterpreter insider OAH handler
+    // ------------------------------------------------------
+
+    S_mfslInterpreterInsiderHandler
+      insiderOahHandler =
+        mfslInterpreterInsiderHandler::create (
+          serviceName,
+          serviceName + " insider OAH handler with argc/argv");
+
+    // the OAH handler to be used, a regular handler is the default
+    // ------------------------------------------------------
+
+    if (insiderOption) {
+      // use the insider mfslInterpreter OAH handler
+      handler = insiderOahHandler;
+    }
+    else {
+      // create a regular mfslInterpreter OAH handler
+      handler =
+        mfslInterpreterRegularHandler::create (
+          serviceName,
+          serviceName + " regular OAH handler with argc/argv",
+          insiderOahHandler);
+    }
+
+    // create the global run data
+    // ------------------------------------------------------
+
+    gGlobalServiceRunData =
+      mfServiceRunData::create (
+        serviceName);
+
+    // handle the command line options and arguments
+    // ------------------------------------------------------
+
+    // handle the options and arguments from argc/argv
+    oahElementHelpOnlyKind
+      helpOnlyKind =
+        handler->
+          handleOptionsAndArgumentsFromArgcArgv (
+            argc,
+            argv);
+
+    // have help options been used?
+    switch (helpOnlyKind) {
+      case oahElementHelpOnlyKind::kElementHelpOnlyYes:
+        return 0; // quit now
+        break;
+      case oahElementHelpOnlyKind::kElementHelpOnlyNo:
+        // go ahead
+        break;
+    } // switch
+  }
+  catch (mfOahException& e) {
+    mfDisplayException (e, gOutputStream);
+    return (int) mfMusicformatsError::kErrorInvalidOption;
+  }
+  catch (exception& e) {
+    mfDisplayException (e, gOutputStream);
+    return (int) mfMusicformatsError::kErrorInvalidFile;
+  }
+
+  // check indentation
+  // ------------------------------------------------------
+
+  if (gIndenter != 0) {
+    gLogStream <<
+      "### " <<
+      serviceName <<
+      " gIndenter value after options ands arguments checking: " <<
+      gIndenter.getIndent () <<
+      " ###" <<
+      endl;
+
+    gIndenter.resetToZero ();
+  }
+
+  // display the OAH handler if needed
+  // ------------------------------------------------------
+
+  if (gGlobalDisplayOahGroup->getDisplayOahHandler ()) {
+    gLogStream <<
+      "The OAH handler contains:" <<
+      endl;
+
+    ++gIndenter;
+    handler->print (gLogStream);
+    --gIndenter;
+  }
+
+  if (gGlobalDisplayOahGroup->getDisplayOahHandlerSummary ()) {
+    gLogStream <<
+      "The summary of the OAH handler contains:" <<
+      endl;
+
+    ++gIndenter;
+    handler->printSummary (gLogStream);
+    --gIndenter;
+  }
+
+  if (gGlobalDisplayOahGroup->getDisplayOahHandlerEssentials ()) {
+    gLogStream <<
+      "The essentials of the OAH handler contains:" <<
+      endl;
+
+    ++gIndenter;
+    handler->printHandlerEssentials (
+      gLogStream,
+      30); // fieldWidth
+    --gIndenter;
+  }
+
+  // let's go ahead
+  // ------------------------------------------------------
+
+  string
+    inputSourceName =
+      gGlobalServiceRunData->getInputSourceName ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    string separator =
+      "%--------------------------------------------------------------";
+
+    gLogStream <<
+      serviceName << ": " <<
+      "inputSourceName = \"" << inputSourceName << "\"" <<
+      endl <<
+      separator <<
+      endl;
+  }
+#endif
+
+  // what if no input source name has been supplied?
+  if (! inputSourceName.size ()) {
+    if (handler->getOahHandlerFoundAHelpOption ()) {
+      return 0; // pure help run
+    }
+    else {
+      stringstream s;
+
+      s <<
+        "this is not a pure help run, \"" <<
+        serviceName <<
+        " needs an input file name. " <<
+        handler->getHandlerUsage ();
+
+      oahWarning (s.str ());
+//       oahError (s.str ()); JMI
+    }
+  }
+
+  // has quiet mode been requested?
+  // ------------------------------------------------------
+
+  if (gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    // disable all trace and display options
+    handler->
+      enforceHandlerQuietness ();
+  }
 
   // welcome message
   // ------------------------------------------------------
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-    int
-      outputFileNameSize =
-        outputFileName.size ();
-
     gLogStream <<
-      "This is " << executableName << ' ' <<
+      "This is " << serviceName << ' ' <<
       getGlobalMusicFormatsVersionNumberAndDate () <<
       endl;
 
     gLogStream <<
       "Launching the interpretation of ";
 
-//     if (inputSourceName == "-") { // JMI
-//       gLogStream <<
-//         "standard input";
-//     }
-//     else {
-//       gLogStream <<
-//         "\"" << inputSourceName << "\"";
-//     }
-      scriptFileName <<
-      endl;
+    if (inputSourceName == "-") {
+      gLogStream <<
+        "standard input";
+    }
+    else {
+      gLogStream <<
+        "\"" << inputSourceName << "\"";
+    }
 
     gLogStream <<
       "Time is " <<
       gGlobalServiceRunData->getRunDateFull () <<
       endl;
+
+    gLogStream <<
+      "The command line is:" <<
+      endl;
+
+    ++gIndenter;
+    gLogStream <<
+      handler->
+        getLaunchCommandAsSupplied () <<
+      endl;
+    --gIndenter;
+
+    gLogStream <<
+      "or with options long names:" <<
+      endl;
+
+    ++gIndenter;
+    gLogStream <<
+      handler->
+        getLaunchCommandWithLongOptionsNames () <<
+      endl;
+    --gIndenter;
+
+    gLogStream <<
+      "or with options short names:" <<
+      endl;
+
+    ++gIndenter;
+    gLogStream <<
+      handler->
+        getLaunchCommandWithShortOptionsNames () <<
+      endl;
+    --gIndenter;
   }
 #endif
 
@@ -149,27 +364,58 @@ int main (int argc, char* argv[])
   // do the interpretation
   // ------------------------------------------------------
 
+/*
+  if (false) {
+    performMfslLexicalAnalysisOnly (
+      inputSourceName,
+      verboseMode);
+  }
+
+  else {
+  }
+*/
+
   Bool verboseMode (false); // JMI ???
 
   mfMusicformatsError
     err =
       mfMusicformatsError::k_NoError;
 
-  if (false) {
-    performMfslLexicalAnalysisOnly (
-      argc,
-      argv,
-      verboseMode);
-  }
+  string                 theMfTool;
+  oahOptionsAndArguments optionsAndArguments;
 
-  else {
-    string                 theMfTool;
-    oahOptionsAndArguments optionsAndArguments;
+  try {
+    if (inputSourceName == "-") {
+      // MFSL data comes from standard input
+#ifdef TRACING_IS_ENABLED
+      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+        gLogStream << "Reading standard input" << endl;
+      }
+#endif
 
     err =
       launchMfslInterpreter (
-        argc,
-        argv,
+        "-",
+        theMfTool,
+        optionsAndArguments,
+        verboseMode);
+    }
+
+    else {
+      // MFSL data comes from a file
+#ifdef TRACING_IS_ENABLED
+      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+        gLogStream <<
+          "Reading file \"" <<
+          inputSourceName <<
+          "\"" <<
+          endl;
+      }
+#endif
+
+    err =
+      launchMfslInterpreter (
+        inputSourceName,
         theMfTool,
         optionsAndArguments,
         verboseMode);
@@ -178,20 +424,29 @@ int main (int argc, char* argv[])
       "==> theMfTool: " <<
       theMfTool <<
       endl;
+    }
+  }
+  catch (mfException& e) {
+    mfDisplayException (e, gOutputStream);
+    return (int) mfMusicformatsError::kErrorInvalidFile;
+  }
+  catch (std::exception& e) {
+    mfDisplayException (e, gOutputStream);
+    return (int) mfMusicformatsError::kErrorInvalidFile;
   }
 
-//   // display the input line numbers for which messages have been issued
-//   // ------------------------------------------------------
-//
-//   displayWarningsAndErrorsInputLineNumbers ();
-//
-//   // print timing information
-//   // ------------------------------------------------------
-//
-//   if (gGlobalDisplayOahGroup->getDisplayCPUusage ()) {
-//     gLogStream <<
-//       mfTimingItemsList::gGlobalTimingItemsList;
-//   }
+  // display the input line numbers for which messages have been issued
+  // ------------------------------------------------------
+
+  displayWarningsAndErrorsInputLineNumbers ();
+
+  // print timing information
+  // ------------------------------------------------------
+
+  if (gGlobalDisplayOahGroup->getDisplayCPUusage ()) {
+    gLogStream <<
+      mfTimingItemsList::gGlobalTimingItemsList;
+  }
 
   // check indentation
   // ------------------------------------------------------
@@ -212,11 +467,22 @@ int main (int argc, char* argv[])
 //   if (err != mfMusicformatsError::k_NoError) {
   if (err != mfMusicformatsError::k_NoError) {
     gLogStream <<
-      "### Conversion from MusicXML to LilyPond failed ###" <<
+      "### The interpretation failed ###" <<
       endl;
-
-    return 1;
   }
 
-  return 0;
+  switch (err) {
+    case mfMusicformatsError::k_NoError:
+      return 0;
+      break;
+    case mfMusicformatsError::kErrorInvalidFile:
+      return 1;
+      break;
+    case mfMusicformatsError::kErrorInvalidOption:
+      return 2;
+      break;
+    case mfMusicformatsError::kErrorUnsupported:
+      return 3;
+      break;
+  } // switch
 }

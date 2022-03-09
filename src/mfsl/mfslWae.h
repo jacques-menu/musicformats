@@ -133,6 +133,10 @@ EXP void mfslInternalError (
   int           sourceCodeLineNumber,
   const string& message);
 
+EXP void mfslFileError (
+  const string& inputSourceName,
+  const string& message);
+
 
 }
 
