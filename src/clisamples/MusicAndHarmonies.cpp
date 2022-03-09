@@ -15,10 +15,6 @@
 #include <string>
 #include <stdlib.h>
 
-#ifdef WIN32
-#include <windows.h>
-#endif
-
 #include "elements.h"
 #include "factory.h"
 #include "xml.h"

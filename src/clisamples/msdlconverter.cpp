@@ -12,10 +12,6 @@
 #include <cstring>
 #include <signal.h>
 
-#ifdef WIN32
-#include <windows.h>
-#endif
-
 #include <fstream>
 
 #include "mfServiceRunData.h"

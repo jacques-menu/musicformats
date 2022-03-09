@@ -1503,7 +1503,8 @@ class EXP oahHandler : public smartable
     void                  setOahHandlerFoundAHelpOption (
                             const string& context);
 
-    virtual string        fetchOutputFileNameFromTheOptions () const = 0;
+    virtual string        fetchOutputFileNameFromTheOptions () const;
+                            // JMI the MFSL interpreter has no output file... v0.9.62
 
     // quiet mode
     virtual void          enforceHandlerQuietness ();

@@ -43,6 +43,9 @@ string mfslTokenKindAsString (
     case kBOOK:
       s << "kBOOK";
       break;
+    case kSCORE:
+      s << "kSCORE";
+      break;
 
     case kCASE:
       s << "kCASE";
@@ -82,9 +85,9 @@ string mfslTokenKindAsString (
     case kPLUS:
       s << "kPLUS";
       break;
-    case kMINUS:
-      s << "kMINUS";
-      break;
+//     case kMINUS:
+//       s << "kMINUS";
+//       break;
     case kSTAR:
       s << "kSTAR";
       break;
@@ -102,11 +105,8 @@ string mfslTokenKindAsString (
       s << "kBAR";
       break;
 
-    case kDASH:
-      s << "kDASH";
-      break;
-    case kDASH_DASH:
-      s << "kDASH_DASH";
+    case kOPTION:
+      s << "kOPTION";
       break;
   } // switch
 

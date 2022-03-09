@@ -22,6 +22,8 @@
 #include <iostream> // for cout, cerr, TEMP JMI
 #include <sstream>
 
+#include <string.h>
+
 #include "mfBool.h"
 
 #include "mfMusicformatsError.h" // for mfMusicformatsError
@@ -78,7 +80,7 @@ endOfLine                 [\n]
 letter                    [A-Za-zéèêàâòôùûî]
 digit                     [0-9]
 
-name                      {letter}(_|{letter}|{digit})*
+name                      {letter}(_|-|\.|{letter}|{digit})*
 integer                   {digit}+
 exponent                  [eE][+-]?{integer}
 
@@ -116,7 +118,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 "#" {
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> mode COMMENT_TO_END_OF_LINE_MODE" << endl;
+//   cerr << "// ==> mode COMMENT_TO_END_OF_LINE_MODE" << endl;
 #endif
 
   BEGIN COMMENT_TO_END_OF_LINE_MODE;
@@ -124,7 +126,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 <COMMENT_TO_END_OF_LINE_MODE>{endOfLine} {
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> back to mode INITIAL" << endl;
+//   cerr << "==> back to mode INITIAL" << endl;
 #endif
 
   BEGIN INITIAL;
@@ -138,7 +140,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 "/*" {
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> mode PARENTHESIZED_COMMENT_MODE" << endl;
+//   cerr << "==> mode PARENTHESIZED_COMMENT_MODE" << endl;
 #endif
 
   BEGIN PARENTHESIZED_COMMENT_MODE;
@@ -154,7 +156,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 <PARENTHESIZED_COMMENT_MODE>"*"+"/" {
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> back to mode INITIAL" << endl;
+//   cerr << "==> back to mode INITIAL" << endl;
 #endif
 
   BEGIN INITIAL;
@@ -169,22 +171,23 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
   pStringBuffer [0] = '\0';
 
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> mode SINGLE_QUOTED_STRING_MODE" << endl;
+//   cerr << "==> mode SINGLE_QUOTED_STRING_MODE" << endl;
 #endif
 
   BEGIN SINGLE_QUOTED_STRING_MODE;
 }
 
 <SINGLE_QUOTED_STRING_MODE>{singleleQuote} {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> single quoted string: [" << yytext << "]" << endl;
+  yylval.fString = strdup (pStringBuffer);
 
-  cerr << "==> back to mode INITIAL" << endl;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> single quoted string: [" << yylval.fString << "]" << endl;
+
+//   cerr << "==> back to mode INITIAL" << endl;
 #endif
 
   BEGIN INITIAL;
 
-  yylval.fString = pStringBuffer;
   return MusicFormats::kSINGLE_QUOTED_STRING;
 }
 
@@ -218,22 +221,23 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
   pStringBuffer [0] = '\0';
 
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "==> mode kDOUBLE_QUOTED_STRING" << endl;
+//   cerr << "==> mode kDOUBLE_QUOTED_STRING" << endl;
 #endif
 
   BEGIN DOUBLE_QUOTED_STRING_MODE;
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{doubleQuote} {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> double quoted string: [" << yytext << "]" << endl;
+  yylval.fString = strdup (pStringBuffer);
 
-  cerr << "==> back to mode INITIAL" << endl;
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> double quoted string: [" << yylval.fString << "]" << endl;
+
+//   cerr << "==> back to mode INITIAL" << endl;
 #endif
 
   BEGIN INITIAL;
 
-  yylval.fString = pStringBuffer;
   return MusicFormats::kSINGLE_QUOTED_STRING;
 }
 
@@ -321,12 +325,26 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 
 {name} {
+  yylval.fName = strdup (yytext);
+
 #ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> name: " << yytext << endl;
+  cerr << "--> name: " << yylval.fName << endl;
 #endif
 
-  yylval.fName = strdup (yytext);
   return MusicFormats::kNAME;
+}
+
+
+
+"--"{name} |
+"-"{name} {
+  yylval.fOption = strdup (yytext);
+
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> option: " << yylval.fOption << endl;
+#endif
+
+  return MusicFormats::kOPTION;
 }
 
 
@@ -371,14 +389,6 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
   return MusicFormats::kPLUS;
 }
 
-"-" {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> -" << endl;
-#endif
-
-  return MusicFormats::kMINUS;
-}
-
 "*" {
 #ifdef DEBUG_MFSL_SCANNER
   cerr << "--> *" << endl;
@@ -411,21 +421,29 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
   return MusicFormats::kSEMI_COLON;
 }
 
+"|" {
+#ifdef DEBUG_MFSL_SCANNER
+  cerr << "--> |" << endl;
+#endif
+
+  return MusicFormats::kBAR;
+}
+
 
 
 . {
   stringstream s;
 
   s <<
-    "illegal character [" <<
+    "illegal character '" <<
     yytext [0] <<
-    "] at line " <<
-    yylineno <<
-    " in MFSL script";
+    " in MFSL script" <<
+    ", line " <<
+    yylineno;
 
   mfslError (
-    "gGlobalServiceRunData->getInputSourceName ()",
-    44, // inputLineNumber,
+    pInputFileName,
+    yylineno,
     __FILE__, __LINE__,
     s.str ());
 }
@@ -441,16 +459,26 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 int yywrap (void)
 {
   if (pInputFileName == "-") {
-    // read from standard input
+    gLogStream <<
+      "Reading from standard input" <<
+      endl;
   }
 
   else {
-    const char*
-      pInputFileNameCString =
-        pInputFileName.c_str ();
+    gLogStream <<
+      "Opening \"" << pInputFileName << "\" for reading" <<
+      endl;
 
-    if ( (yyin = fopen (pInputFileNameCString, "r")) == NULL ) {
-      perror (pInputFileNameCString);
+    if ( (yyin = fopen (pInputFileName.c_str (), "r")) == NULL ) {
+      stringstream s;
+
+      s <<
+        "Cannot open \"" << pInputFileName << "\"";
+
+      mfslFileError (
+        pInputFileName,
+        s.str ());
+
       return 1;
     }
   }
@@ -462,28 +490,21 @@ int yywrap (void)
 //______________________________________________________________________________
 int yyerror (char const* message)
 {
-  cerr <<
-    "### MFSL error: " << message <<
-    endl;
-
-  abort ();
-
-//   mfslError (
-//     "gGlobalServiceRunData->getInputSourceName ()",
-//     yylineno,
-//     __FILE__, __LINE__,
-//     message);
+  mfslError (
+    pInputFileName,
+    yylineno,
+    __FILE__, __LINE__,
+    message);
 
   return 0;
 }
 
 //______________________________________________________________________________
 EXP void performMfslLexicalAnalysisOnly (
-	int		argc,
-	char* argv[],
-	Bool	verboseMode)
+  const string& inputSourceName,
+	Bool	        verboseMode)
 {
-  pInputFileName = argv [1];
+  pInputFileName = inputSourceName;
 	pVerboseMode   = verboseMode;
 
 	yywrap ();	// open the first (and only) script file
@@ -494,8 +515,7 @@ EXP void performMfslLexicalAnalysisOnly (
 
 //_______________________________________________________________________________
 mfMusicformatsError launchMfslInterpreter (
-  int                     argc,
-  char*                   argv[],
+  const string&           inputSourceName,
   string&                 theMfTool,
   oahOptionsAndArguments& optionsAndArguments,
   Bool                    verboseMode)
@@ -504,15 +524,23 @@ mfMusicformatsError launchMfslInterpreter (
     res =
       mfMusicformatsError::k_NoError;
 
-  pInputFileName = argv [1];
+  pInputFileName = inputSourceName;
 	pVerboseMode   = verboseMode;
 
-//  	yywrap ();	// open the first (and only) script file
+  gLogStream <<
+    "--> pInputFileName: \"" << pInputFileName << "\"" <<
+    endl <<
+    "--> pVerboseMode: " << pVerboseMode <<
+    endl;
+
+ 	yywrap ();	// open the first (and only) script file
 
 	if (yyparse ()) {
 	  // the interpretation failed
 	  res = mfMusicformatsError::kErrorInvalidFile;
 	}
+
+  fclose (yyin);
 
   theMfTool = "theMfTool";
 

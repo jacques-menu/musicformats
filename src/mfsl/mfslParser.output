@@ -1,0 +1,135 @@
+Terminals unused in grammar
+
+    kINPUT
+    kBOOK
+    kSCORE
+    kCASE
+    kSINGLE_QUOTED_STRING
+    kDOUBLE_QUOTED_STRING
+    kINTEGER_NUMBER
+    kDOUBLE_NUMBER
+    kLEFT_PARENTHESIS
+    kRIGHT_PARENTHESIS
+    kEQUALS
+    kCOMMA
+    kPLUS
+    kSTAR
+    kSLASH
+    kCOLON
+    kSEMI_COLON
+    kBAR
+    kOPTION
+
+
+Rules useless in parser due to conflicts
+
+    4 Tool: error
+
+
+State 1 conflicts: 1 reduce/reduce
+
+
+Grammar
+
+    0 $accept: MfslScript $end
+
+    1 MfslScript: Tool
+    2           | error
+
+    3 Tool: kTOOL kNAME
+    4     | error
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    error (256) 2 4
+    kTOOL (258) 3
+    kINPUT (259)
+    kBOOK (260)
+    kSCORE (261)
+    kCASE (262)
+    kSINGLE_QUOTED_STRING <fString> (263)
+    kDOUBLE_QUOTED_STRING <fString> (264)
+    kINTEGER_NUMBER <fIntegerNumber> (265)
+    kDOUBLE_NUMBER <fDoubleNumber> (266)
+    kNAME <fName> (267) 3
+    kLEFT_PARENTHESIS (268)
+    kRIGHT_PARENTHESIS (269)
+    kEQUALS (270)
+    kCOMMA (271)
+    kPLUS (272)
+    kSTAR (273)
+    kSLASH (274)
+    kCOLON (275)
+    kSEMI_COLON (276)
+    kBAR (277)
+    kOPTION <fOption> (278)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (24)
+        on left: 0
+    MfslScript (25)
+        on left: 1 2
+        on right: 0
+    Tool (26)
+        on left: 3 4
+        on right: 1
+
+
+State 0
+
+    0 $accept: • MfslScript $end
+
+    error  shift, and go to state 1
+    kTOOL  shift, and go to state 2
+
+    MfslScript  go to state 3
+    Tool        go to state 4
+
+
+State 1
+
+    2 MfslScript: error •
+    4 Tool: error •
+
+    $end      reduce using rule 2 (MfslScript)
+    $end      [reduce using rule 4 (Tool)]
+    $default  reduce using rule 2 (MfslScript)
+
+
+State 2
+
+    3 Tool: kTOOL • kNAME
+
+    kNAME  shift, and go to state 5
+
+
+State 3
+
+    0 $accept: MfslScript • $end
+
+    $end  shift, and go to state 6
+
+
+State 4
+
+    1 MfslScript: Tool •
+
+    $default  reduce using rule 1 (MfslScript)
+
+
+State 5
+
+    3 Tool: kTOOL kNAME •
+
+    $default  reduce using rule 3 (Tool)
+
+
+State 6
+
+    0 $accept: MfslScript $end •
+
+    $default  accept
