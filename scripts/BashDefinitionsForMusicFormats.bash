@@ -102,6 +102,7 @@ alias repr="cd ${SRC_DIR}/representations"
 alias pass="cd ${SRC_DIR}/passes"
 alias gener="cd ${SRC_DIR}/generators"
 alias conv="cd ${SRC_DIR}/converters"
+alias interp="cd ${SRC_DIR}/interpreters"
 
 alias msr="cd ${SRC_DIR}/representations/msr"
 alias lpsr="cd ${SRC_DIR}/representations/lpsr"
@@ -151,7 +152,7 @@ alias msdr='cd ${SRC_DIR}/representations/msdr'
 # MFSL
 #----------------------------------------------
 
-MFSL_DIR=${SRC_DIR}/mfsl
+MFSL_DIR=${SRC_DIR}/interpreters/mfsl
 alias mfsl="cd ${MFSL_DIR}"
 
 alias mfsli='mfslInterpreter'
@@ -727,19 +728,20 @@ function addSrc ()
 {
   git add ${SRC_DIR}/*.h
 
-  git add -f ${SRC_DIR}/mfsl/Makefile
+  git add -f ${SRC_DIR}/interpreters/mfsl/Makefile
 
   git add ${SRC_DIR}/clisamples/*
   git add ${SRC_DIR}/components/*
   git add ${SRC_DIR}/converters/*/*
   git add ${SRC_DIR}/formats/*/*
   git add ${SRC_DIR}/generators/*/*
+  git add ${SRC_DIR}/interpreters/*/*
   git add ${SRC_DIR}/mflibrary/*
-  git add ${SRC_DIR}/mfsl/*
   git add ${SRC_DIR}/oah/*
   git add ${SRC_DIR}/passes/*/*
   git add ${SRC_DIR}/representations/*/*
   git add ${SRC_DIR}/wae/*
+
   git add ${SRC_DIR}/*.ts ${SRC_DIR}/*.js ${SRC_DIR}/*.json
 }
 
@@ -749,8 +751,11 @@ function addBuild ()
   git add -f ${BUILD_DIR}/CMakeLists.txt
   git add    ${BUILD_DIR}/MakePkg.bat
   git add -f ${BUILD_DIR}/Makefile
+}
 
-  git add    ${BUILD_DIR}/scripts
+function addScripts ()
+{
+  git add    ${MUSIC_FORMATS_DEV}/scripts
 }
 
 function addDistrib ()

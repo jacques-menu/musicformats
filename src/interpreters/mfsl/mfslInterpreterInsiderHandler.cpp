@@ -89,10 +89,10 @@ R"(
   initializeHandlerMultiComponent ();
 
   // create the mfslInterpreter prefixes
-  createThemfslInterpreterPrefixes ();
+  createTheMfslInterpreterPrefixes ();
 
   // create the mfslInterpreter option groups
-  createThemfslInterpreterOptionGroups (
+  createTheMfslInterpreterOptionGroups (
     serviceName);
 }
 
@@ -126,38 +126,22 @@ string mfslInterpreterInsiderHandler::handlerServiceAboutInformation () const
 
 string mfslInterpreterInsiderHandler::mfslInterpreterAboutInformation () const
 {
-  string result;
-
-  string headPart;
-
-  stringstream headPartStream;
-
-  headPartStream <<
+  string result =
 R"(What mfslInterpreter does:
 
-    This multi-pass interpreter basically reads a text file
-    containing a tool name, an input file name, keywords and options
+    This interpreter basically reads a text file containing
+    a tool name, an input file name, keywords and options,
     and launches the specified tool
-    with these options applied to the input file name.)";
-
-        headPart = headPartStream.str ();
-
-  string specificPart;
-
-   string commonTailPart = // JMI
-R"(
-
-//     Other passes are performed according to the options, such as
-//     displaying views of the internal data or printing a summary of the score.
+    with these options applied to the input file name.
 
     The activity log and warning/error messages go to standard error.)";
 
- return
-   headPart + specificPart + commonTailPart;
+  return
+    result;
 }
 
 //______________________________________________________________________________
-void mfslInterpreterInsiderHandler::createThemfslInterpreterPrefixes ()
+void mfslInterpreterInsiderHandler::createTheMfslInterpreterPrefixes ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -173,7 +157,7 @@ void mfslInterpreterInsiderHandler::createThemfslInterpreterPrefixes ()
 }
 
 //______________________________________________________________________________
-void mfslInterpreterInsiderHandler::createThemfslInterpreterOptionGroups (
+void mfslInterpreterInsiderHandler::createTheMfslInterpreterOptionGroups (
   const string& serviceName)
 {
 #ifdef TRACING_IS_ENABLED
@@ -467,7 +451,7 @@ void mfslInterpreterInsiderOahGroup::initializemfslInterpreterInsiderOahGroup ()
 }
 
 //______________________________________________________________________________
-void mfslInterpreterInsiderOahGroup::printmfslInterpreterInsiderOahGroupValues (int fieldWidth)
+void mfslInterpreterInsiderOahGroup::printMfslInterpreterInsiderOahGroupValues (int fieldWidth)
 {
   gLogStream <<
     "The mfslInterpreter options are:" <<

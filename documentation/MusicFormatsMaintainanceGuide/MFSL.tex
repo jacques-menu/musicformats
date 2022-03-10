@@ -1,0 +1,115 @@
+% !TEX root = MusicFormatsMaintainanceGuide.tex
+
+% -------------------------------------------------------------------------
+\chapter{MFSL (MusicFormats Scripting Language}
+% -------------------------------------------------------------------------
+
+
+\mfslLang\ is meant for launching \mf\ tools easily, with options and control structures. 
+
+An example is:
+\begin{lstlisting}[language=MFSL]
+#!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfslInterpreter
+
+# the MusicFormats tool to be used
+tool : xml2ly
+
+# the input file
+input : V3bis_extraits.xml
+
+# parts
+  -keep-musicxml-part-id P1
+
+# the voices choice
+VOICES_CHOICE :  voice1Only | voice2Only ;
+  # could be : choice VOICES_CHOICE : ... ... ... ;
+
+VOICES_CHOICE = voice1Only ;
+  # change this to voice2Only to switch to another subset of options
+  # could even be parameter to the script such a $1
+
+# choose which options to use according to VOICES_CHOICE
+case VOICES_CHOICE
+	voice1Only:
+    -title "Joli morceau - voix 1"
+    -ignore-msr-voice Part_POne_Staff_One_Voice_Two
+  ;
+
+	voice2Only:
+    -title "Joli morceau - voix 2"
+    --ignore-msr-voice Part_POne_Staff_One_Voice_One
+
+    -display-options-values
+
+    -global-staff-size 25.5
+  ;
+;
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Main features of MFSL}
+% -------------------------------------------------------------------------
+
+They are:
+\begin{itemize}
+\item note are written much like in \lily\, such as {\tt b2...};
+\item the keywords such as {\tt pitches} and {\tt music}, are reserved;
+\item they are available in a number of languages such as english, french, german and italian. It is easy to add other languages;
+\end{itemize}
+
+A first, limited converter is provided by \mf\, with service {\tt mfsl}. It also performs reserved keywords translation from one language to another:
+
+
+% -------------------------------------------------------------------------
+\section{MFSL basic types}\label{MFSL basic types}
+% -------------------------------------------------------------------------
+
+Some types used thoughout \msrRepr\ are defined in \mfslBoth{mfslBasicTypes}:%%%JMI
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/mfsl >  egrep -rIn  '^// ' mfslBasicTypes.h
+mfslBasicTypes.h:28:// user languages
+mfslBasicTypes.h:52:// comments types
+mfslBasicTypes.h:74:// initialization
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{What the \mfslLangInterp\ does}
+% -------------------------------------------------------------------------
+
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > mfslInterpreter -about
+What mfslInterpreter does:
+
+    This interpreter basically reads a text file containing
+    a tool name, an input file name, keywords and options,
+    and launches the specified tool
+    with these options applied to the input file name.
+
+    The activity log and warning/error messages go to standard error.
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Lexical analysis}
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\section{Syntax and semantic analysis}
+% -------------------------------------------------------------------------
+
+The language-dependent keywords leads to a recursive descent parser, since {\tt flex}-generated scanners need 'fixed' keyword in the language description.
+
+
+% -------------------------------------------------------------------------
+\subsection{Error recovery}
+% -------------------------------------------------------------------------
+
+The \mfslLangInterp\ uses a variant of the \MainIt{stopper sets} method that was present in the early Pascal and Pascal-S converters. The latter passed a set of tokens not to be overtaken to the procedures in charge of accepting the various statements in the language. Strangely enough, this was not done for declarations.
+
+We use a stack of tokens sets that grows and shrinks in parallel with the accepting functions\index{functions}, to know more contextual informations when deciding wether to consume a token or not. The corresponding term is {it shift}
+when building the analysis tables in LR technology.
+
+

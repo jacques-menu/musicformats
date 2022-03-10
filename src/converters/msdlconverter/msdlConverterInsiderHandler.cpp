@@ -358,7 +358,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterPrefixes ()
 
 //______________________________________________________________________________
 void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
-  const string&             serviceName,
+  const string&               serviceName,
   mfMultiGenerationOutputKind mfMultiGenerationOutputKind)
 {
 #ifdef TRACING_IS_ENABLED

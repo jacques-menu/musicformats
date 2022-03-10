@@ -1,4 +1,4 @@
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfslInterpreter
 
 # the MusicFormats tool to be used
-tool : xml2ly
+#tool

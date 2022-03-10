@@ -51,20 +51,61 @@ R"(These options control the way MFSL interpreter works.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {
   // initialize it
-  initializemfslInterpreterOahGroup ();
+  initializeMfslInterpreterOahGroup ();
 }
 
 mfslInterpreterOahGroup::~mfslInterpreterOahGroup ()
 {}
 
-void mfslInterpreterOahGroup::initializemfslInterpreterOahGroup ()
+void mfslInterpreterOahGroup::initializeMfslInterpreterOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   // trace
   // --------------------------------------
 // JMI  initializemfslInterpretertracingOah ();
 #endif
+
+  // midi
+  // --------------------------------------
+  initializeMfslOptions ();
 }
+
+void mfslInterpreterOahGroup::initializeMfslOptions ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "MFSL",
+        "help-mfsl", "hmfsl",
+R"()",
+      oahElementVisibilityKind::kElementVisibilityWhole,
+      this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // verbose mode
+  // --------------------------------------
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "verbose-mode", "verbose",
+R"(Don't execute the MFSL input, merely display the tokens it contains.)",
+        "fVerboseMode",
+        fVerboseMode));
+
+  // lexical analysis only
+  // --------------------------------------
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "lexical-analysis-only", "lao",
+R"(Don't execute the MFSL input, merely display the tokens it contains.)",
+        "fLexicalAnalysisOnly",
+        fLexicalAnalysisOnly));
+}
+
 
 void mfslInterpreterOahGroup::enforceGroupQuietness ()
 {}
@@ -135,7 +176,7 @@ void mfslInterpreterOahGroup::browseData (basevisitor* v)
 #endif
 }
 
-void mfslInterpreterOahGroup::printmfslInterpreterOahValues (
+void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   int fieldWidth)
 {
   gLogStream <<
@@ -143,6 +184,38 @@ void mfslInterpreterOahGroup::printmfslInterpreterOahValues (
     endl;
 
   ++gIndenter;
+
+  // verbose mode
+  // --------------------------------------
+
+  gLogStream <<
+    "VerboseMode:" <<
+    endl;
+
+  ++gIndenter;
+
+  gLogStream << left <<
+    setw (fieldWidth) << "fVerboseMode" << " : " <<
+      fVerboseMode <<
+      endl;
+
+  --gIndenter;
+
+  // lexical analysis only
+  // --------------------------------------
+
+  gLogStream <<
+    "LexicalAnalysisOnly:" <<
+    endl;
+
+  ++gIndenter;
+
+  gLogStream << left <<
+    setw (fieldWidth) << "fLexicalAnalysisOnly" << " : " <<
+      fLexicalAnalysisOnly <<
+      endl;
+
+  --gIndenter;
 
   --gIndenter;
 }

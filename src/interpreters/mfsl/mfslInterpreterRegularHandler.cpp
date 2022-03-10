@@ -214,7 +214,8 @@ void mfslInterpreterRegularHandler::createMfslRegularGroup ()
 
   // atoms from the insider handler
 
-//   registerAtomInRegularSubgroup ("mfsl-keywords-input-language", subGroup);
+  registerAtomInRegularSubgroup ("verbose-mode", subGroup);
+  registerAtomInRegularSubgroup ("lexical-analysis-only", subGroup);
 }
 
 void mfslInterpreterRegularHandler::createOahRegularGroup ()

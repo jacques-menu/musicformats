@@ -177,7 +177,7 @@ if (LIB)
     add_definitions(-DXML)
 endif()
 
-set (SRC_FOLDERS ${SRC_FOLDERS} mflibrary components oah mfsl wae manpage)
+set (SRC_FOLDERS ${SRC_FOLDERS} mflibrary components oah interpreters/mfsl wae manpage)
 
 if (MSR)
 	set (SRC_FOLDERS ${SRC_FOLDERS} passes/musicxml2mxsr representations/mxsr passes/mxsr2msr representations/msr passes/msr2msr generators/Mikrokosmos3Wandering generators/LilyPondIssue34)

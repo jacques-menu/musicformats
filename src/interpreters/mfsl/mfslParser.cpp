@@ -84,6 +84,8 @@
 
 #define DEBUG_MFSL_SCANNER
 
+#define YYDEBUG 1
+
 
 #include <iostream>
 
@@ -94,9 +96,11 @@
 #include "mfslTokens.h"
 
 
-using namespace std;
+// using namespace std;
 
 using namespace MusicFormats;
+
+#define gLogStream        *MusicFormats::gGlobalLogIndentedOstream
 
 
 /* necessary declarations */
@@ -110,7 +114,7 @@ extern int                yyerror (char const* message);
 /* ------- */
 
 
-#line 114 "mfslParser.cpp"
+#line 118 "mfslParser.cpp"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -164,7 +168,18 @@ enum yysymbol_kind_t
   YYSYMBOL_kOPTION = 23,                   /* kOPTION  */
   YYSYMBOL_YYACCEPT = 24,                  /* $accept  */
   YYSYMBOL_MfslScript = 25,                /* MfslScript  */
-  YYSYMBOL_Tool = 26                       /* Tool  */
+  YYSYMBOL_String = 26,                    /* String  */
+  YYSYMBOL_Options = 27,                   /* Options  */
+  YYSYMBOL_Option = 28,                    /* Option  */
+  YYSYMBOL_Tool = 29,                      /* Tool  */
+  YYSYMBOL_Input = 30,                     /* Input  */
+  YYSYMBOL_Contents = 31,                  /* Contents  */
+  YYSYMBOL_ChoiceDeclaration = 32,         /* ChoiceDeclaration  */
+  YYSYMBOL_ChoiceSetting = 33,             /* ChoiceSetting  */
+  YYSYMBOL_Choices = 34,                   /* Choices  */
+  YYSYMBOL_CaseStatement = 35,             /* CaseStatement  */
+  YYSYMBOL_Cases = 36,                     /* Cases  */
+  YYSYMBOL_Case = 37                       /* Case  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -492,16 +507,16 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  6
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   3
+#define YYLAST   32
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  24
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  3
+#define YYNNTS  14
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  5
+#define YYNRULES  27
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  7
+#define YYNSTATES  42
 
 /* YYMAXUTOK -- Last valid token kind.  */
 #define YYMAXUTOK   278
@@ -550,9 +565,11 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,   119,   119,   123,   185,   194
+       0,   123,   123,   129,   143,   144,   152,   153,   157,   166,
+     175,   189,   198,   212,   221,   236,   237,   238,   239,   240,
+     248,   259,   270,   271,   276,   287,   288,   292
 };
 #endif
 
@@ -573,7 +590,9 @@ static const char *const yytname[] =
   "kDOUBLE_QUOTED_STRING", "kINTEGER_NUMBER", "kDOUBLE_NUMBER", "kNAME",
   "kLEFT_PARENTHESIS", "kRIGHT_PARENTHESIS", "kEQUALS", "kCOMMA", "kPLUS",
   "kSTAR", "kSLASH", "kCOLON", "kSEMI_COLON", "kBAR", "kOPTION", "$accept",
-  "MfslScript", "Tool", YY_NULLPTR
+  "MfslScript", "String", "Options", "Option", "Tool", "Input", "Contents",
+  "ChoiceDeclaration", "ChoiceSetting", "Choices", "CaseStatement",
+  "Cases", "Case", YY_NULLPTR
 };
 
 static const char *
@@ -583,12 +602,12 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-12)
+#define YYPACT_NINF (-18)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
 
-#define YYTABLE_NINF (-1)
+#define YYTABLE_NINF (-13)
 
 #define yytable_value_is_error(Yyn) \
   0
@@ -597,7 +616,11 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -1,   -12,   -11,     3,   -12,   -12,   -12
+      11,    -1,     3,    20,     7,   -18,   -18,    -4,    -6,   -18,
+     -18,   -18,   -18,    10,   -13,     1,   -18,     0,   -18,   -18,
+     -18,    12,    13,    14,   -18,   -18,   -18,     8,    12,   -18,
+       6,   -18,    -3,     0,   -18,   -18,   -18,    17,     0,   -18,
+     -18,   -18
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -605,19 +628,25 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     3,     0,     0,     2,     4,     1
+       0,     3,     0,     0,     0,    11,     1,     0,     0,     4,
+       5,    13,    14,     0,     0,     8,    15,     2,    16,    17,
+      18,     0,     0,     0,     9,    10,    19,     0,    24,    25,
+       0,    22,     0,     0,    26,    21,    20,     0,    27,     6,
+      23,     7
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -12,   -12,   -12
+     -18,   -18,    15,   -18,   -17,   -18,   -18,   -18,   -18,   -18,
+     -18,   -18,   -18,     4
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     3,     4
+       0,     3,    12,    38,    16,     4,     8,    17,    18,    19,
+      32,    20,    28,    29
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -625,31 +654,45 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-       1,     5,     2,     6
+      26,    13,    22,   -12,     9,    10,    14,    23,    11,     9,
+      10,     7,     1,    24,     2,     5,    39,    15,    36,    37,
+       6,    41,    21,    15,    27,    30,    31,    35,    33,    40,
+      25,     0,    34
 };
 
 static const yytype_int8 yycheck[] =
 {
-       1,    12,     3,     0
+      17,     7,    15,     4,     8,     9,    12,    20,    12,     8,
+       9,     4,     1,    12,     3,    12,    33,    23,    21,    22,
+       0,    38,    12,    23,    12,    12,    12,    21,    20,    12,
+      15,    -1,    28
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     1,     3,    25,    26,    12,     0
+       0,     1,     3,    25,    29,    12,     0,     4,    30,     8,
+       9,    12,    26,     7,    12,    23,    28,    31,    32,    33,
+      35,    12,    15,    20,    12,    26,    28,    12,    36,    37,
+      12,    12,    34,    20,    37,    21,    21,    22,    27,    28,
+      12,    28
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,    24,    25,    25,    26,    26
+       0,    24,    25,    25,    26,    26,    27,    27,    28,    28,
+      28,    29,    29,    30,    30,    31,    31,    31,    31,    31,
+      32,    33,    34,    34,    35,    36,    36,    37
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,     1,     1,     2,     1
+       0,     2,     3,     1,     1,     1,     1,     2,     1,     2,
+       2,     2,     1,     2,     2,     1,     1,     1,     1,     2,
+       4,     4,     1,     3,     3,     1,     2,     3
 };
 
 
@@ -1113,18 +1156,54 @@ yyreduce:
   switch (yyn)
     {
   case 3: /* MfslScript: error  */
-#line 124 "mfsl.y"
+#line 130 "mfsl.y"
     {
       gLogStream <<
         endl <<
-        "Ill-formed MDSL input" <<
+        "### Ill-formed MDSL input" <<
         endl;
     }
-#line 1124 "mfslParser.cpp"
+#line 1167 "mfslParser.cpp"
     break;
 
-  case 4: /* Tool: kTOOL kNAME  */
-#line 186 "mfsl.y"
+  case 8: /* Option: kOPTION  */
+#line 158 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> option" <<
+        endl;
+#endif
+    }
+#line 1179 "mfslParser.cpp"
+    break;
+
+  case 9: /* Option: kOPTION kNAME  */
+#line 167 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "$1" << ' ' << (yyvsp[0].fName) <<
+        endl;
+#endif
+    }
+#line 1191 "mfslParser.cpp"
+    break;
+
+  case 10: /* Option: kOPTION String  */
+#line 176 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> option" << (yyvsp[0].fString) <<
+        endl;
+#endif
+    }
+#line 1203 "mfslParser.cpp"
+    break;
+
+  case 11: /* Tool: kTOOL kNAME  */
+#line 190 "mfsl.y"
     {
 #ifdef DEBUG_MFSL_SCANNER
       gLogStream <<
@@ -1132,22 +1211,94 @@ yyreduce:
         endl;
 #endif
     }
-#line 1136 "mfslParser.cpp"
+#line 1215 "mfslParser.cpp"
     break;
 
-  case 5: /* Tool: error  */
-#line 195 "mfsl.y"
+  case 12: /* Tool: error  */
+#line 199 "mfsl.y"
     {
       gLogStream <<
         endl <<
         "'tool <NAME>' expected" <<
         endl;
     }
-#line 1147 "mfslParser.cpp"
+#line 1226 "mfslParser.cpp"
+    break;
+
+  case 13: /* Input: kINPUT kNAME  */
+#line 213 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> input" << (yyvsp[0].fName) <<
+        endl;
+#endif
+    }
+#line 1238 "mfslParser.cpp"
+    break;
+
+  case 14: /* Input: kINPUT String  */
+#line 222 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> input" << (yyvsp[0].fString) <<
+        endl;
+#endif
+    }
+#line 1250 "mfslParser.cpp"
+    break;
+
+  case 20: /* ChoiceDeclaration: kNAME kCOLON Choices kSEMI_COLON  */
+#line 249 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> ChoiceDeclaration" << (yyvsp[-3].fName) <<
+        endl;
+#endif
+    }
+#line 1262 "mfslParser.cpp"
+    break;
+
+  case 21: /* ChoiceSetting: kNAME kEQUALS kNAME kSEMI_COLON  */
+#line 260 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> ChoiceSetting" << (yyvsp[-3].fName) << ' ' << (yyvsp[-1].fName) <<
+        endl;
+#endif
+    }
+#line 1274 "mfslParser.cpp"
+    break;
+
+  case 24: /* CaseStatement: kCASE kNAME Cases  */
+#line 277 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> CaseStatement" << (yyvsp[-1].fName) <<
+        endl;
+#endif
+    }
+#line 1286 "mfslParser.cpp"
+    break;
+
+  case 27: /* Case: kNAME kCOLON Options  */
+#line 293 "mfsl.y"
+    {
+#ifdef DEBUG_MFSL_SCANNER
+      gLogStream <<
+        "==> Case" <<
+        endl;
+#endif
+    }
+#line 1298 "mfslParser.cpp"
     break;
 
 
-#line 1151 "mfslParser.cpp"
+#line 1302 "mfslParser.cpp"
 
       default: break;
     }

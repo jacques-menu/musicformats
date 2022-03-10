@@ -557,9 +557,6 @@ char *yytext;
 */
 
 
-#define DEBUG_MFSL_SCANNER
-
-
 /* ---------------------------------------------------------------------- */
 /* inclusions */
 /* ---------------------------------------------------------------------- */
@@ -567,7 +564,8 @@ char *yytext;
 #include <iostream> // for cout, cerr, TEMP JMI
 #include <sstream>
 
-#include <string.h>
+#include <string.h> // strcat(), strlcat() is not available on Ubuntu nor Windows
+#include <stdlib.h> // getenv()
 
 #include "mfBool.h"
 
@@ -583,7 +581,7 @@ char *yytext;
 #include "mfslInterpreterInterface.h"
 
 
-using namespace MusicFormats;
+// using namespace MusicFormats;
 
 
 /* ---------------------------------------------------------------------- */
@@ -594,16 +592,16 @@ using namespace MusicFormats;
 //
 // mfslTokenKind          gmfslTokenKindCourant;
 
-string                    pInputFileName;
+Bool                      pVerboseMode;
 
-Bool                      pVerboseMode; // JMI
+string                    pInputFileName;
 
 
 /* ---------------------------------------------------------------------- */
 /* functions */
 /* ---------------------------------------------------------------------- */
 
-#line 606 "mfslScanner.cpp"
+#line 604 "mfslScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* flex options */
 /* ---------------------------------------------------------------------- */
@@ -614,7 +612,7 @@ Bool                      pVerboseMode; // JMI
 /* exclusive modes */
 /* ---------------------------------------------------------------------- */
 
-#line 617 "mfslScanner.cpp"
+#line 615 "mfslScanner.cpp"
 
 #define INITIAL 0
 #define SINGLE_QUOTED_STRING_MODE 1
@@ -835,13 +833,13 @@ YY_DECL
 		}
 
 	{
-#line 104 "mfsl.l"
+#line 102 "mfsl.l"
 
 
 
 
 
-#line 110 "mfsl.l"
+#line 108 "mfsl.l"
 /* ---------------------------------------------------------------------- */
 /* variables local to yylex() */
 /* ---------------------------------------------------------------------- */
@@ -852,7 +850,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 
 
-#line 855 "mfslScanner.cpp"
+#line 853 "mfslScanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -921,11 +919,11 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 120 "mfsl.l"
+#line 118 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
+if (pVerboseMode) {
 //   cerr << "// ==> mode COMMENT_TO_END_OF_LINE_MODE" << endl;
-#endif
+}
 
   BEGIN COMMENT_TO_END_OF_LINE_MODE;
 }
@@ -933,29 +931,29 @@ YY_RULE_SETUP
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 128 "mfsl.l"
+#line 126 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
+if (pVerboseMode) {
 //   cerr << "==> back to mode INITIAL" << endl;
-#endif
+}
 
   BEGIN INITIAL;
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 136 "mfsl.l"
+#line 134 "mfsl.l"
 {
   /* accepting any character other than {endOfLine} */
 }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 142 "mfsl.l"
+#line 140 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
+if (pVerboseMode) {
 //   cerr << "==> mode PARENTHESIZED_COMMENT_MODE" << endl;
-#endif
+}
 
   BEGIN PARENTHESIZED_COMMENT_MODE;
 }
@@ -963,7 +961,7 @@ YY_RULE_SETUP
 case 5:
 /* rule 5 can match eol */
 YY_RULE_SETUP
-#line 150 "mfsl.l"
+#line 148 "mfsl.l"
 {
   /* accepting any character other than '*' */
 }
@@ -971,177 +969,177 @@ YY_RULE_SETUP
 case 6:
 /* rule 6 can match eol */
 YY_RULE_SETUP
-#line 154 "mfsl.l"
+#line 152 "mfsl.l"
 {
   /* accepting all lthe '*' not followed by a '/' */
 }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 158 "mfsl.l"
+#line 156 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
+if (pVerboseMode) {
 //   cerr << "==> back to mode INITIAL" << endl;
-#endif
+}
 
   BEGIN INITIAL;
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 166 "mfsl.l"
+#line 164 "mfsl.l"
 {
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 171 "mfsl.l"
+#line 169 "mfsl.l"
 {
   pStringBuffer [0] = '\0';
 
-#ifdef DEBUG_MFSL_SCANNER
+if (pVerboseMode) {
 //   cerr << "==> mode SINGLE_QUOTED_STRING_MODE" << endl;
-#endif
+}
 
   BEGIN SINGLE_QUOTED_STRING_MODE;
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 181 "mfsl.l"
+#line 179 "mfsl.l"
 {
   yylval.fString = strdup (pStringBuffer);
 
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> single quoted string: [" << yylval.fString << "]" << endl;
+if (pVerboseMode) {
+  cerr << "--> token: single quoted string [" << yylval.fString << "]" << endl;
 
 //   cerr << "==> back to mode INITIAL" << endl;
-#endif
+}
 
   BEGIN INITIAL;
 
-  return MusicFormats::kSINGLE_QUOTED_STRING;
+  return MfslToken::kSINGLE_QUOTED_STRING;
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 195 "mfsl.l"
+#line 193 "mfsl.l"
 {
-  strlcat (pStringBuffer, "'", STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, "'"); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 199 "mfsl.l"
+#line 197 "mfsl.l"
 {
-  strlcat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, "\n"); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 203 "mfsl.l"
+#line 201 "mfsl.l"
 {
-  strlcat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, "\t"); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 207 "mfsl.l"
+#line 205 "mfsl.l"
 {
-  strlcat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, "\\"); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
-#line 211 "mfsl.l"
+#line 209 "mfsl.l"
 {
-  strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 215 "mfsl.l"
+#line 213 "mfsl.l"
 {
-  strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 221 "mfsl.l"
+#line 219 "mfsl.l"
 {
   pStringBuffer [0] = '\0';
 
-#ifdef DEBUG_MFSL_SCANNER
+if (pVerboseMode) {
 //   cerr << "==> mode kDOUBLE_QUOTED_STRING" << endl;
-#endif
+}
 
   BEGIN DOUBLE_QUOTED_STRING_MODE;
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 231 "mfsl.l"
+#line 229 "mfsl.l"
 {
   yylval.fString = strdup (pStringBuffer);
 
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> double quoted string: [" << yylval.fString << "]" << endl;
+if (pVerboseMode) {
+  cerr << "--> token: double quoted string [" << yylval.fString << "]" << endl;
 
 //   cerr << "==> back to mode INITIAL" << endl;
-#endif
+}
 
   BEGIN INITIAL;
 
-  return MusicFormats::kSINGLE_QUOTED_STRING;
+  return MfslToken::kSINGLE_QUOTED_STRING;
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 245 "mfsl.l"
+#line 243 "mfsl.l"
 {
-  strlcat (pStringBuffer, "\"", STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, "\""); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 249 "mfsl.l"
+#line 247 "mfsl.l"
 {
-  strlcat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, "\n"); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 253 "mfsl.l"
+#line 251 "mfsl.l"
 {
-  strlcat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, "\t"); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 257 "mfsl.l"
+#line 255 "mfsl.l"
 {
-  strlcat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, "\\"); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 23:
 /* rule 23 can match eol */
 YY_RULE_SETUP
-#line 261 "mfsl.l"
+#line 259 "mfsl.l"
 {
-  strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 265 "mfsl.l"
+#line 263 "mfsl.l"
 {
-  strlcat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
+  strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 271 "mfsl.l"
+#line 269 "mfsl.l"
 {
   /* ignoring this separator */
 }
@@ -1149,211 +1147,211 @@ YY_RULE_SETUP
 case 26:
 /* rule 26 can match eol */
 YY_RULE_SETUP
-#line 275 "mfsl.l"
+#line 273 "mfsl.l"
 {
   /* ignoring this separator */
 }
 	YY_BREAK
 case 27:
-#line 282 "mfsl.l"
+#line 280 "mfsl.l"
 case 28:
 YY_RULE_SETUP
-#line 282 "mfsl.l"
+#line 280 "mfsl.l"
 {
- #ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> float: " << yytext << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: float " << yytext << endl;
+}
 
  yylval.fDoubleNumber = atof (yytext);
-  return MusicFormats::kDOUBLE_NUMBER;
+  return MfslToken::kDOUBLE_NUMBER;
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 291 "mfsl.l"
+#line 289 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> integer: " << yytext << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: integer " << yytext << endl;
+}
 
   yylval.fIntegerNumber = atoi (yytext);
-  return MusicFormats::kINTEGER_NUMBER;
+  return MfslToken::kINTEGER_NUMBER;
 }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 302 "mfsl.l"
+#line 300 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> tool" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: tool" << endl;
+}
 
-  return MusicFormats::kTOOL;
+  return MfslToken::kTOOL;
 }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 310 "mfsl.l"
+#line 308 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> input" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: input" << endl;
+}
 
-  return MusicFormats::kINPUT;
+  return MfslToken::kINPUT;
 }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 318 "mfsl.l"
+#line 316 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> case" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: case" << endl;
+}
 
-  return MusicFormats::kCASE;
+  return MfslToken::kCASE;
 }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 328 "mfsl.l"
+#line 326 "mfsl.l"
 {
   yylval.fName = strdup (yytext);
 
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> name: " << yylval.fName << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: name " << yylval.fName << endl;
+}
 
-  return MusicFormats::kNAME;
+  return MfslToken::kNAME;
 }
 	YY_BREAK
 case 34:
-#line 341 "mfsl.l"
+#line 339 "mfsl.l"
 case 35:
 YY_RULE_SETUP
-#line 341 "mfsl.l"
+#line 339 "mfsl.l"
 {
   yylval.fOption = strdup (yytext);
 
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> option: " << yylval.fOption << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: option " << yylval.fOption << endl;
+}
 
-  return MusicFormats::kOPTION;
+  return MfslToken::kOPTION;
 }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 353 "mfsl.l"
+#line 351 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> (" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: (" << endl;
+}
 
-  return MusicFormats::kLEFT_PARENTHESIS;
+  return MfslToken::kLEFT_PARENTHESIS;
 }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 361 "mfsl.l"
+#line 359 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> )" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: )" << endl;
+}
 
-  return MusicFormats::kRIGHT_PARENTHESIS;
+  return MfslToken::kRIGHT_PARENTHESIS;
 }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 369 "mfsl.l"
+#line 367 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> =" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: =" << endl;
+}
 
-  return MusicFormats::kEQUALS;
+  return MfslToken::kEQUALS;
 }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 377 "mfsl.l"
+#line 375 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> ," << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: ," << endl;
+}
 
-  return MusicFormats::kCOMMA;
+  return kCOMMA;
 }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 385 "mfsl.l"
+#line 383 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> +" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: +" << endl;
+}
 
-  return MusicFormats::kPLUS;
+  return MfslToken::kPLUS;
 }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 393 "mfsl.l"
+#line 391 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> *" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: *" << endl;
+}
 
-  return MusicFormats::kSTAR;
+  return MfslToken::kSTAR;
 }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 401 "mfsl.l"
+#line 399 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> /" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: /" << endl;
+}
 
-  return MusicFormats::kSLASH;
+  return MfslToken::kSLASH;
 }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 409 "mfsl.l"
+#line 407 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> :" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: :" << endl;
+}
 
-  return MusicFormats::kCOLON;
+  return MfslToken::kCOLON;
 }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 417 "mfsl.l"
+#line 415 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> ;" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: ;" << endl;
+}
 
-  return MusicFormats::kSEMI_COLON;
+  return MfslToken::kSEMI_COLON;
 }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 425 "mfsl.l"
+#line 423 "mfsl.l"
 {
-#ifdef DEBUG_MFSL_SCANNER
-  cerr << "--> |" << endl;
-#endif
+if (pVerboseMode) {
+  cerr << "--> token: |" << endl;
+}
 
-  return MusicFormats::kBAR;
+  return MfslToken::kBAR;
 }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 435 "mfsl.l"
+#line 433 "mfsl.l"
 {
   stringstream s;
 
@@ -1373,10 +1371,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 453 "mfsl.l"
+#line 451 "mfsl.l"
 ECHO;
 	YY_BREAK
-#line 1379 "mfslScanner.cpp"
+#line 1377 "mfslScanner.cpp"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(SINGLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(DOUBLE_QUOTED_STRING_MODE):
@@ -2397,7 +2395,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 453 "mfsl.l"
+#line 451 "mfsl.l"
 
 
 /* ---------------------------------------------------------------------- */
@@ -2407,29 +2405,35 @@ void yyfree (void * ptr )
 //______________________________________________________________________________
 int yywrap (void)
 {
-  if (pInputFileName == "-") {
-    gLogStream <<
-      "Reading from standard input" <<
-      endl;
-  }
+  static Bool pPrivateThisFunctionHasBeenRun (false);
 
-  else {
-    gLogStream <<
-      "Opening \"" << pInputFileName << "\" for reading" <<
-      endl;
-
-    if ( (yyin = fopen (pInputFileName.c_str (), "r")) == NULL ) {
-      stringstream s;
-
-      s <<
-        "Cannot open \"" << pInputFileName << "\"";
-
-      mfslFileError (
-        pInputFileName,
-        s.str ());
-
-      return 1;
+  if (! pPrivateThisFunctionHasBeenRun) {
+    if (pInputFileName == "-") {
+      gLogStream <<
+        "Reading from standard input" <<
+        endl;
     }
+
+    else {
+      gLogStream <<
+        "Opening \"" << pInputFileName << "\" for reading" <<
+        endl;
+
+      if ( (yyin = fopen (pInputFileName.c_str (), "r")) == NULL ) {
+        stringstream s;
+
+        s <<
+          "Cannot open \"" << pInputFileName << "\"";
+
+        mfslFileError (
+          pInputFileName,
+          s.str ());
+
+        return 1;
+      }
+    }
+
+    pPrivateThisFunctionHasBeenRun = true;
   }
 
   // only one script file is to be analyzed
@@ -2453,8 +2457,9 @@ EXP void performMfslLexicalAnalysisOnly (
   const string& inputSourceName,
 	Bool	        verboseMode)
 {
-  pInputFileName = inputSourceName;
 	pVerboseMode   = verboseMode;
+
+  pInputFileName = inputSourceName;
 
 	yywrap ();	// open the first (and only) script file
 
@@ -2470,29 +2475,45 @@ mfMusicformatsError launchMfslInterpreter (
   Bool                    verboseMode)
 {
   mfMusicformatsError
-    res =
+    result =
       mfMusicformatsError::k_NoError;
 
-  pInputFileName = inputSourceName;
+//   if (getenv ("YYDEBUG") != nullptr) {
+//     gLogStream <<
+//       "--> YYDEBUG is defined in the environment" <<
+//       endl;
+//
+//     yydebug = 1;
+//   }
+//   else {
+//     gLogStream <<
+//       "--> YYDEBUG is NOT defined in the environment" <<
+//       endl;
+//   }
+//
+//   yydebug = 1;
+
 	pVerboseMode   = verboseMode;
 
-  gLogStream <<
-    "--> pInputFileName: \"" << pInputFileName << "\"" <<
-    endl <<
-    "--> pVerboseMode: " << pVerboseMode <<
-    endl;
+  pInputFileName = inputSourceName;
+
+//   gLogStream <<
+//     "--> pInputFileName: \"" << pInputFileName << "\"" <<
+//     endl <<
+//     "--> pVerboseMode: " << pVerboseMode <<
+//     endl;
 
  	yywrap ();	// open the first (and only) script file
 
 	if (yyparse ()) {
 	  // the interpretation failed
-	  res = mfMusicformatsError::kErrorInvalidFile;
+	  result = mfMusicformatsError::kErrorInvalidFile;
 	}
 
   fclose (yyin);
 
   theMfTool = "theMfTool";
 
-	return res;
+	return result;
 }
 

@@ -720,6 +720,39 @@ showstringspaces=false,
 \lstset{style=MSDL}}{}
 
 
+% MFSL
+
+% MFSL definition; inspired from lstdrvrs.dtx
+\lstdefinelanguage{MFSL}%
+  {%
+  morekeywords={%
+  	tool,%
+		input,%
+		%
+		book,%
+		score,%,
+		%
+		case,:,=,|,%
+	},%
+  sensitive,%
+  morestring=[b]",%
+  morestring=[m]', % changed from `b' to `m'
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{MFSL}{
+language=MFSL,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{MFSL}{
+\lstset{style=MFSL}}{}
+
+
 % -------------------------------------------------------------------------
 % fonts
 % -------------------------------------------------------------------------
@@ -851,8 +884,12 @@ showstringspaces=false,
 \newcommand{\guido}{Guido\index[Main]{Guido}}
 
 \newcommand{\msdlLang}{MSDL\index[Main]{MSDL}}
-\newcommand{\msdLangComp}{MSDL converter}
+\newcommand{\msdLangConv}{MSDL converter}
 \newcommand{\msdlconverter}{{\tt msdlconverter}}
+
+\newcommand{\mfslLang}{MFSL\index[Main]{MFSL}}
+\newcommand{\mfslLangInterp}{MFSL interpreter}
+\newcommand{\mfslconverter}{{\tt mfslconverter}}
 
 \newcommand{\meiLang}{MEI\index[Main]{MEI}}
 
@@ -1706,21 +1743,6 @@ Option {\tt -#1, -#2}\index[Main]{\tt -#1, -#2}\index[Options]{\tt -#1, -#2}%
 {\textcolor{brown}{\tt src/converters/msdl2lilypond/#1.h/.cpp}}%
 }
 
-% MusicFormats interfaces access paths
-
-%\newcommand{\interfaces}[1]{%
-%{\textcolor{brown}{\tt src/interfaces/#1}}%
-%}
-%\newcommand{\interfacesBoth}[1]{%
-%{\textcolor{brown}{\tt src/interfaces/#1.h/.cpp}}%
-%}
-%
-%\newcommand{\libraryInterfaces}[1]{%
-%{\textcolor{brown}{\tt src/interfaces/libraryinterfaces/#1}}%
-%}
-%\newcommand{\libraryInterfacesBoth}[1]{%
-%{\textcolor{brown}{\tt src/interfaces/libraryinterfaces/#1.h/.cpp}}%
-%}
 
 % MusicFormats generators access paths
 
@@ -1737,6 +1759,24 @@ Option {\tt -#1, -#2}\index[Main]{\tt -#1, -#2}\index[Options]{\tt -#1, -#2}%
 \newcommand{\xmlToXmlToolBoth}[1]{%
 {\textcolor{brown}{\tt src/clisamples/xml2xml/#1.h/.cpp}}%
 }
+
+
+% MusicFormats interpreters access paths
+
+\newcommand{\interpreters}[1]{%
+{\textcolor{brown}{\tt src/interpreters/#1}}%
+}
+\newcommand{\interpretersBoth}[1]{%
+{\textcolor{brown}{\tt src/interpreters/#1.h/.cpp}}%
+}
+
+\newcommand{\mfsl}[1]{%
+{\textcolor{brown}{\tt src/interpreters/mfsl/#1}}\index[Main]{#1}\index[Files]{src/interpreters/mfsl!#1}%
+}
+\newcommand{\mfslBoth}[1]{%
+{\textcolor{brown}{\tt src/interpreters/mfsl/#1.h/.cpp}}\index[Files]{src/interpreters/mfsl!#1.h/.cpp}%
+}
+
 
 % MusicFormats manpage sgeneration access paths JMI???
 

@@ -365,24 +365,21 @@ int main (int argc, char* argv[])
   // ------------------------------------------------------
 
 /*
-  if (false) {
-    performMfslLexicalAnalysisOnly (
-      inputSourceName,
-      verboseMode);
-  }
-
-  else {
-  }
 */
 
-  Bool verboseMode (false); // JMI ???
+  Bool
+    verboseMode =
+      gGlobalMfslInterpreterOahGroup->
+        getVerboseMode ();
 
   mfMusicformatsError
     err =
       mfMusicformatsError::k_NoError;
 
-  string                 theMfTool;
-  oahOptionsAndArguments optionsAndArguments;
+  Bool
+    lexicalAnalysisOnly =
+      gGlobalMfslInterpreterOahGroup->
+        getLexicalAnalysisOnly ();
 
   try {
     if (inputSourceName == "-") {
@@ -393,12 +390,28 @@ int main (int argc, char* argv[])
       }
 #endif
 
-    err =
-      launchMfslInterpreter (
-        "-",
-        theMfTool,
-        optionsAndArguments,
-        verboseMode);
+      if (lexicalAnalysisOnly) {
+        performMfslLexicalAnalysisOnly (
+          inputSourceName,
+          verboseMode);
+      }
+
+      else {
+        string                 theMfTool;
+        oahOptionsAndArguments optionsAndArguments;
+
+        err =
+          launchMfslInterpreter (
+            "-",
+            theMfTool,
+            optionsAndArguments,
+            verboseMode);
+
+        gLogStream <<
+          "==> theMfTool: " <<
+          theMfTool <<
+          endl;
+      }
     }
 
     else {
@@ -413,17 +426,28 @@ int main (int argc, char* argv[])
       }
 #endif
 
-    err =
-      launchMfslInterpreter (
-        inputSourceName,
-        theMfTool,
-        optionsAndArguments,
-        verboseMode);
+      if (lexicalAnalysisOnly) {
+        performMfslLexicalAnalysisOnly (
+          inputSourceName,
+          verboseMode);
+      }
 
-    gLogStream <<
-      "==> theMfTool: " <<
-      theMfTool <<
-      endl;
+      else {
+        string                 theMfTool;
+        oahOptionsAndArguments optionsAndArguments;
+
+        err =
+          launchMfslInterpreter (
+            inputSourceName,
+            theMfTool,
+            optionsAndArguments,
+            verboseMode);
+
+        gLogStream <<
+          "==> theMfTool: " <<
+          theMfTool <<
+          endl;
+      }
     }
   }
   catch (mfException& e) {

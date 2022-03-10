@@ -196,6 +196,61 @@ EXP ostream& operator<< (ostream& os, const S_oahOptionNameAndValue& elt);
 EXP ostream& operator<< (ostream& os, const oahOptionNameAndValue& elt);
 
 //_______________________________________________________________________________
+class EXP oahOptionsNamesAndValues : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahOptionsNamesAndValues> create ();
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahOptionsNamesAndValues ();
+
+    virtual               ~oahOptionsNamesAndValues ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const vector<oahOptionNameAndValue>&
+                          getOptionNameAndValuesVector () const
+                              { return fOptionNameAndValuesVector; }
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  appendOptionNameAndValue (
+                            const string& optionName,
+                            const string& optionValue);
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    void                  displayOptionNameAndValuesVector (ostream& os) const;
+
+    virtual void          print (ostream& os) const;
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    vector<oahOptionNameAndValue>
+                          fOptionNameAndValuesVector;
+};
+typedef SMARTP<oahOptionsNamesAndValues> S_oahOptionsNamesAndValues;
+EXP ostream& operator<< (ostream& os, const S_oahOptionsNamesAndValues& elt);
+EXP ostream& operator<< (ostream& os, const oahOptionsNamesAndValues& elt);
+
+//_______________________________________________________________________________
 class EXP oahOptionsAndArguments : public smartable
 {
   public:

@@ -61,9 +61,9 @@ class EXP mfslInterpreterInsiderHandler : public oahInsiderHandler
     // private initialization
     // ------------------------------------------------------
 
-    void                  createThemfslInterpreterPrefixes ();
+    void                  createTheMfslInterpreterPrefixes ();
 
-    void                  createThemfslInterpreterOptionGroups (
+    void                  createTheMfslInterpreterOptionGroups (
                             const string& serviceName);
 
   public:
@@ -170,9 +170,9 @@ class EXP mfslInterpreterInsiderOahGroup : public oahGroup
     // print
     // ------------------------------------------------------
 
-    void                  printmfslInterpreterInsiderOahGroupHelp ();
+    void                  printMfslInterpreterInsiderOahGroupHelp ();
 
-    void                  printmfslInterpreterInsiderOahGroupValues (
+    void                  printMfslInterpreterInsiderOahGroupValues (
                             int fieldWidth);
 
   private:

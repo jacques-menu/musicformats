@@ -530,6 +530,96 @@ ostream& operator<< (ostream& os, const oahOptionNameAndValue& elt)
 }
 
 //______________________________________________________________________________
+S_oahOptionsNamesAndValues oahOptionsNamesAndValues::create ()
+{
+  oahOptionsNamesAndValues* o = new
+    oahOptionsNamesAndValues ();
+  assert (o != nullptr);
+  return o;
+}
+
+oahOptionsNamesAndValues::oahOptionsNamesAndValues ()
+{}
+
+oahOptionsNamesAndValues::~oahOptionsNamesAndValues ()
+{}
+
+void oahOptionsNamesAndValues::appendOptionNameAndValue (
+  const string& optionName,
+  const string& optionValue)
+{
+  fOptionNameAndValuesVector.push_back (
+    oahOptionNameAndValue (
+      optionName,
+      optionValue));
+}
+
+void oahOptionsNamesAndValues::displayOptionNameAndValuesVector (ostream& os) const
+{
+  os <<
+    "The option name and values vector contains " <<
+    mfSingularOrPlural (
+      fOptionNameAndValuesVector.size (), "element", "elements");
+
+  if (fOptionNameAndValuesVector.size ()) {
+    os << ":" << endl;
+
+    ++gIndenter;
+
+    const int fieldWidth = 2;
+
+    int counter = 0;
+    for (oahOptionNameAndValue optionNameAndValue : fOptionNameAndValuesVector) {
+      string optionName  =
+        optionNameAndValue.getOptionName ();
+      string optionValue =
+        optionNameAndValue.getOptionValue ();
+
+      os <<
+        right << setw (fieldWidth) << counter++ <<
+        ": [" <<
+        optionName <<
+        "] [" <<
+        optionValue <<
+        ']' <<
+        endl;
+    } //for
+
+    os << endl;
+
+    --gIndenter;
+  }
+  else {
+    os << endl;
+  }
+}
+
+void oahOptionsNamesAndValues::print (ostream& os) const
+{
+//   os << JMI
+//     "oahOptionsNamesAndValues:" <<
+//     endl;
+//
+//   ++gIndenter;
+//
+  displayOptionNameAndValuesVector (os);
+
+//   --gIndenter;
+}
+
+ostream& operator<< (ostream& os, const S_oahOptionsNamesAndValues& elt)
+{
+  elt->print (os);
+  return os;
+}
+
+ostream& operator<< (ostream& os, const oahOptionsNamesAndValues& elt)
+{
+  elt.print (os);
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahOptionsAndArguments oahOptionsAndArguments::create ()
 {
   oahOptionsAndArguments* o = new
