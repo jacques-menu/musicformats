@@ -10,7 +10,8 @@ input : V3bis_extraits.xml
   -keep-musicxml-part-id P1
 
 # the voices choice
-VOICES_CHOICE :  voice1Only | voice2Only ;		# could be : choice VOICES_CHOICE : … … … ;
+VOICES_CHOICE :  voice1Only | voice2Only ;
+  # could be : choice VOICES_CHOICE : ... ... ... ;
 
 VOICES_CHOICE = voice1Only ;
   # change this to voice2Only to switch to another subset of options

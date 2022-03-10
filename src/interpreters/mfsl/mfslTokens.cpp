@@ -17,95 +17,95 @@
 #include "mfslTokens.h"
 
 
-using namespace std;
+// using namespace std;
 
-namespace MusicFormats
-{
+// namespace MusicFormats
+// {
 
 //________________________________________________________________________
 string mfslTokenKindAsString (
-  mfslTokenKind tokenKind)
+  MfslToken::mfslTokenKind tokenKind)
 {
   stringstream s;
 
   switch (tokenKind) {
-    case kMfslEOF:
-      s << "kMfslEOF";
-      break;
-
-    case kTOOL:
+//     case MfslToken::kMFSL_EOF:
+//       s << "kMFSL_EOF";
+//       break;
+//
+    case MfslToken::kTOOL:
       s << "kTOOL";
       break;
-    case kINPUT:
+    case MfslToken::kINPUT:
       s << "kINPUT";
       break;
 
-    case kBOOK:
+    case MfslToken::kBOOK:
       s << "kBOOK";
       break;
-    case kSCORE:
+    case MfslToken::kSCORE:
       s << "kSCORE";
       break;
 
-    case kCASE:
+    case MfslToken::kCASE:
       s << "kCASE";
       break;
 
-    case kSINGLE_QUOTED_STRING:
+    case MfslToken::kSINGLE_QUOTED_STRING:
       s << "kSINGLE_QUOTED_STRING";
       break;
-    case kDOUBLE_QUOTED_STRING:
+    case MfslToken::kDOUBLE_QUOTED_STRING:
       s << "kDOUBLE_QUOTED_STRING";
       break;
 
-    case kINTEGER_NUMBER:
+    case MfslToken::kINTEGER_NUMBER:
       s << "kINTEGER_NUMBER";
       break;
-    case kDOUBLE_NUMBER:
+    case MfslToken::kDOUBLE_NUMBER:
       s << "kDOUBLE_NUMBER";
       break;
 
-    case kNAME:
+    case MfslToken::kNAME:
       s << "kNAME";
       break;
 
-    case kLEFT_PARENTHESIS:
+    case MfslToken::kLEFT_PARENTHESIS:
       s << "kLEFT_PARENTHESIS";
       break;
-    case kRIGHT_PARENTHESIS:
+    case MfslToken::kRIGHT_PARENTHESIS:
       s << "kRIGHT_PARENTHESIS";
       break;
 
-    case kEQUALS:
+    case MfslToken::kEQUALS:
       s << "kEQUALS";
       break;
-    case kCOMMA:
+    case MfslToken::kCOMMA:
       s << "kCOMMA";
       break;
-    case kPLUS:
+    case MfslToken::kPLUS:
       s << "kPLUS";
       break;
-//     case kMINUS:
+//     case MfslToken::kMINUS:
 //       s << "kMINUS";
 //       break;
-    case kSTAR:
+    case MfslToken::kSTAR:
       s << "kSTAR";
       break;
-    case kSLASH:
+    case MfslToken::kSLASH:
       s << "kSLASH";
       break;
-    case kCOLON:
+    case MfslToken::kCOLON:
       s << "kCOLON";
       break;
-    case kSEMI_COLON:
+    case MfslToken::kSEMI_COLON:
       s << "kSEMI_COLON";
       break;
 
-    case kBAR:
+    case MfslToken::kBAR:
       s << "kBAR";
       break;
 
-    case kOPTION:
+    case MfslToken::kOPTION:
       s << "kOPTION";
       break;
   } // switch
@@ -113,10 +113,10 @@ string mfslTokenKindAsString (
   return s.str ();
 }
 
-ostream& operator<< (ostream& os, const mfslTokenKind& elt){
+ostream& operator<< (ostream& os, const MfslToken::mfslTokenKind& elt){
   os << mfslTokenKindAsString (elt);
   return os;
 }
 
 
-} // namespace
+// } // namespace

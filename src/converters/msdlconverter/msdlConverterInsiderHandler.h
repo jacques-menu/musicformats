@@ -68,7 +68,7 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     void                  createTheMsdlConverterPrefixes ();
 
     void                  createTheMsdlConverterOptionGroups (
-                            const string&             serviceName,
+                            const string&              serviceName,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 
   public:
@@ -111,10 +111,12 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     string                usageInformation (
-                            mfMultiGenerationOutputKind multiGenerationOutputKind);
+                            mfMultiGenerationOutputKind
+                              multiGenerationOutputKind);
 
     string                msdlConverterAboutInformation (
-                            mfMultiGenerationOutputKind multiGenerationOutputKind) const;
+                            mfMultiGenerationOutputKind
+                              multiGenerationOutputKind) const;
 
   private:
 
@@ -160,7 +162,8 @@ class EXP msdlConverterInsiderOahGroup : public oahGroup
     void                  setMultiGenerationOutputKind (
                             mfMultiGenerationOutputKind value)
                               { fMultiGenerationOutputKind = value; }
-    mfMultiGenerationOutputKind   getMultiGenerationOutputKind () const
+    mfMultiGenerationOutputKind
+                          getMultiGenerationOutputKind () const
                               { return fMultiGenerationOutputKind; }
 
   public:

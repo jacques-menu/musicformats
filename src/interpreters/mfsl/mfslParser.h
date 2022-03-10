@@ -83,7 +83,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 48 "mfsl.y"
+#line 52 "mfsl.y"
  // with a basic C description of strings
   int                     fIntegerNumber;
   double                  fDoubleNumber;

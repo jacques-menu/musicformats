@@ -1,11 +1,11 @@
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
-\chapter{MSDL}
+\chapter{MSDL (Music Scores Description Language}
 % -------------------------------------------------------------------------
 
 
-MSDL is an attempt at a description of music score in a non-linear way, much like a painter puts touches of paint on his work. This is also what users do with GUI music scoring applications, but scores textual descriptions such as \lily\ and \guido\ impose a linear, left to right, writing of the scores contents.
+\msdlLang\ is an attempt at a description of music score in a non-linear way, much like a painter puts touches of paint on his work. This is also what users do with GUI music scoring applications, but scores textual descriptions such as \lily\ and \guido\ impose a linear, left to right, writing of the scores contents.
 
 Contrary to LilyPond, the {\tt |} token in \msdlLang\ is not the end of a measure. Writing {\tt |2} means that the music that follows will be placed in a new layer in measure 2.
 
@@ -38,7 +38,7 @@ msdlBasicTypes.h:74:// initialization
 
 
 % -------------------------------------------------------------------------
-\section{What the \msdLangComp\ does}
+\section{What the \msdLangConv\ does}
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=Terminal]
@@ -57,7 +57,7 @@ The output format is selected via options.
 \end{lstlisting}
 
 % -------------------------------------------------------------------------
-  \subsection{\lily\ generation}
+\subsection{\lily\ generation}
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=Terminal]
@@ -80,7 +80,7 @@ What msdlConverter does:
 \end{lstlisting}
 
 % -------------------------------------------------------------------------
-  \subsection{\braille\ generation}
+\subsection{\braille\ generation}
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=Terminal]
@@ -109,7 +109,7 @@ What msdlConverter does:
 \end{lstlisting}
 
 % -------------------------------------------------------------------------
-  \subsection{\mxml\ generation}
+\subsection{\mxml\ generation}
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=Terminal]
@@ -132,7 +132,7 @@ What msdlConverter does:
 \end{lstlisting}
 
 % -------------------------------------------------------------------------
-  \subsection{\guido\ generation}
+\subsection{\guido\ generation}
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=Terminal]
@@ -193,13 +193,13 @@ anacrusis                 % measure numbers start at 0
 
 
 % -------------------------------------------------------------------------
-\section{First example output from the \msdLangComp}
+\section{First example output from the \msdLangConv}
 % -------------------------------------------------------------------------
 
 Compiling {\tt HelloWorld.msdl} to LilyPond, we get the output below.
 
 % -------------------------------------------------------------------------
-  \subsection{\lily\ output}
+\subsection{\lily\ output}
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=Lilypond]
@@ -273,7 +273,7 @@ c2.. d''8 }
 \end{lstlisting}
 
 % -------------------------------------------------------------------------
-  \subsection{\braille\ output}
+\subsection{\braille\ output}
 % -------------------------------------------------------------------------
 
 With:
@@ -294,7 +294,7 @@ we get in file {\tt HelloWorld.msdl_UTF8Debug.brf} \braille\ 6-dots cells, which
 The interpretation shows a textual view of the contents of the previous line. {\tt o*} indicates the octave number.
 
 % -------------------------------------------------------------------------
-  \subsection{\mxml\ output}
+\subsection{\mxml\ output}
 % -------------------------------------------------------------------------
 
 Compiling {\tt HelloWorld.msdl} to \mxml, we get:
@@ -360,7 +360,7 @@ Compiling {\tt HelloWorld.msdl} to \mxml, we get:
 \end{lstlisting}
 
 % -------------------------------------------------------------------------
-  \subsection{\guido\ output}
+\subsection{\guido\ output}
 % -------------------------------------------------------------------------
 
 Compiling {\tt HelloWorld.msdl} to Guido, we get:
@@ -454,12 +454,12 @@ Jean also provided the output created by hand with \lily, see \figureRef{Un Peti
 
 
 % -------------------------------------------------------------------------
-  \subsection{Multi-language messages handling}
+\subsection{Multi-language messages handling}
 % -------------------------------------------------------------------------
 
 
 % -------------------------------------------------------------------------
-  \subsection{Multi-language keywords handling}
+\subsection{Multi-language keywords handling}
 % -------------------------------------------------------------------------
 
 
@@ -481,10 +481,10 @@ The language-dependent keywords leads to a recursive descent parser, since {\tt 
 
 
 % -------------------------------------------------------------------------
-  \subsection{Error recovery}
+\subsection{Error recovery}
 % -------------------------------------------------------------------------
 
-The \msdLangComp\ uses a variant of the \MainIt{stopper sets} method that was present in the early Pascal and Pascal-S converters. The latter passed a set of tokens not to be overtaken to the procedures in charge of accepting the various statements in the language. Strangely enough, this was not done for declarations.
+The \msdLangConv\ uses a variant of the \MainIt{stopper sets} method that was present in the early Pascal and Pascal-S converters. The latter passed a set of tokens not to be overtaken to the procedures in charge of accepting the various statements in the language. Strangely enough, this was not done for declarations.
 
 We use a stack of tokens sets that grows and shrinks in parallel with the accepting functions\index{functions}, to know more contextual informations when deciding wether to consume a token or not. The corresponding term is {it shift}
 when building the analysis tables in LR technology.

@@ -42,7 +42,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     // initialisation
     // ------------------------------------------------------
 
-    void                  initializemfslInterpreterOahGroup ();
+    void                  initializeMfslInterpreterOahGroup ();
 
   protected:
 
@@ -72,6 +72,18 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     // set and get
     // ------------------------------------------------------
 
+    void                  setVerboseMode ()
+                              { fVerboseMode = true; }
+
+    Bool                  getVerboseMode () const
+                              { return fVerboseMode; }
+
+    void                  setLexicalAnalysisOnly ()
+                              { fLexicalAnalysisOnly = true; }
+
+    Bool                  getLexicalAnalysisOnly () const
+                              { return fLexicalAnalysisOnly; }
+
   public:
 
     // public services
@@ -85,6 +97,8 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 #ifdef TRACING_IS_ENABLED
 // JMI    void                  initializemfslInterpretertracingOah ();
 #endif
+
+    void                  initializeMfslOptions ();
 
   public:
 
@@ -101,15 +115,19 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     // print
     // ------------------------------------------------------
 
-    void                  printmfslInterpreterOahHelp ();
+    void                  printMfslInterpreterOahHelp ();
 
-    void                  printmfslInterpreterOahValues (
+    void                  printMfslInterpreterOahValues (
                             int fieldWidth);
 
   private:
 
     // private fields
     // ------------------------------------------------------
+
+    Bool                  fVerboseMode;
+
+    Bool                  fLexicalAnalysisOnly;
 };
 typedef SMARTP<mfslInterpreterOahGroup> S_mfslInterpreterOahGroup;
 EXP ostream& operator<< (ostream& os, const S_mfslInterpreterOahGroup& elt);

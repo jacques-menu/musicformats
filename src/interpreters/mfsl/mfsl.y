@@ -14,6 +14,8 @@
 
 #define DEBUG_MFSL_SCANNER
 
+#define YYDEBUG 1
+
 
 #include <iostream>
 
@@ -24,9 +26,11 @@
 #include "mfslTokens.h"
 
 
-using namespace std;
+// using namespace std;
 
 using namespace MusicFormats;
+
+#define gLogStream        *MusicFormats::gGlobalLogIndentedOstream
 
 
 /* necessary declarations */
@@ -58,7 +62,7 @@ extern int                yyerror (char const* message);
 
 
 /* the MFSL tokens */
-/* ----------- */
+/* --------------- */
 
 %token kTOOL
 
@@ -96,7 +100,7 @@ extern int                yyerror (char const* message);
 
 // the MFSL non-terminals types
 
-// %type <fString> String
+%type <fString> String
 
 
 /* the MFSL axiom */
@@ -115,22 +119,23 @@ extern int                yyerror (char const* message);
 // the MFSL axiom
 //_______________________________________________________________________________
 
-MfslScript
- : Tool
-//   Input
-//   Contents
+MfslScript :
+  Tool
+
+  Input
+
+  Contents
 
  | error
     {
       gLogStream <<
         endl <<
-        "Ill-formed MDSL input" <<
+        "### Ill-formed MDSL input" <<
         endl;
     }
  ;
 
 
-/*
 // strings
 //_______________________________________________________________________________
 
@@ -176,7 +181,6 @@ Option
 #endif
     }
 
-*/
 
 // tool
 //_______________________________________________________________________________
@@ -200,8 +204,6 @@ Tool
     }
  ;
 
-
-/*
 
 // input
 //_______________________________________________________________________________
@@ -296,8 +298,6 @@ Case
 #endif
     }
 ;
-
-*/
 
 
 %%
