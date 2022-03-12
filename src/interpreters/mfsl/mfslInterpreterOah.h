@@ -78,11 +78,29 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  getVerboseMode () const
                               { return fVerboseMode; }
 
-    void                  setLexicalAnalysisOnly ()
-                              { fLexicalAnalysisOnly = true; }
+    void                  setTraceScanning ()
+                              { fTraceScanning = true; }
 
-    Bool                  getLexicalAnalysisOnly () const
-                              { return fLexicalAnalysisOnly; }
+    Bool                  getTraceScanning () const
+                              { return fTraceScanning; }
+
+    void                  setTraceParsing ()
+                              { fTraceParsing = true; }
+
+    Bool                  getTraceParsing () const
+                              { return fTraceParsing; }
+
+    void                  setDisplayTokens ()
+                              { fDisplayTokens = true; }
+
+    Bool                  getDisplayTokens () const
+                              { return fDisplayTokens; }
+
+    void                  setDisplayNonTerminals ()
+                              { fDisplayNonTerminals = true; }
+
+    Bool                  getDisplayNonTerminals () const
+                              { return fDisplayNonTerminals; }
 
   public:
 
@@ -127,7 +145,12 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     Bool                  fVerboseMode;
 
-    Bool                  fLexicalAnalysisOnly;
+    Bool                  fTraceScanning;
+
+    Bool                  fTraceParsing;
+
+    Bool                  fDisplayTokens;
+    Bool                  fDisplayNonTerminals;
 };
 typedef SMARTP<mfslInterpreterOahGroup> S_mfslInterpreterOahGroup;
 EXP ostream& operator<< (ostream& os, const S_mfslInterpreterOahGroup& elt);

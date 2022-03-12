@@ -681,7 +681,7 @@ void msr2msrOahGroup::initializeVoicesOptions ()
   S_oahSubGroup subGroup =
     oahSubGroup::create (
       "Voices",
-      "help-msr2msr-voices", "hmsrv",
+      "help-msr2msr-voices", "hm2mv",
 R"()",
     oahElementVisibilityKind::kElementVisibilityWhole,
     this);

@@ -24,7 +24,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 /*
-  This class to ensure all values are initialized (to false as it is)
+  This class to ensure all values are initialized (to false as it is) JMI
 */
 /*
 Matrix::Matrix(const Matrix& rMatrix) :
@@ -81,7 +81,11 @@ bool Matrix::ValidateSizes(const Matrix& rMatrix) const
 }
 */
 
+//______________________________________________________________________________
 class EXP Bool
+/*
+  this class encapsulates a 'bool' value to guarantee it is initialized
+*/
 {
   public:
 

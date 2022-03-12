@@ -3904,7 +3904,7 @@ void lpsr2lilypondOahGroup::initializeStavesOptions ()
     subGroup =
       oahSubGroup::create (
         "Staves",
-       "helpLilypondStaves",  "hlps",
+       "help-lilypond-staves",  "hlps",
 R"()",
       oahElementVisibilityKind::kElementVisibilityWhole,
       this);
