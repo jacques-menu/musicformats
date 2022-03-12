@@ -215,7 +215,12 @@ void mfslInterpreterRegularHandler::createMfslRegularGroup ()
   // atoms from the insider handler
 
   registerAtomInRegularSubgroup ("verbose-mode", subGroup);
-  registerAtomInRegularSubgroup ("lexical-analysis-only", subGroup);
+
+  registerAtomInRegularSubgroup ("trace-scanning", subGroup);
+  registerAtomInRegularSubgroup ("trace-parsing", subGroup);
+  
+  registerAtomInRegularSubgroup ("display-tokens", subGroup);
+  registerAtomInRegularSubgroup ("display-non-terminals", subGroup);
 }
 
 void mfslInterpreterRegularHandler::createOahRegularGroup ()

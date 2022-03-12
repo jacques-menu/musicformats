@@ -29,17 +29,15 @@ using namespace MusicFormats;
     there would be no way to 'see' them from outside mfslScanner.cpp
 */
 
-//_______________________________________________________________________________
-EXP extern void performMfslLexicalAnalysisOnly (
-  const string& inputSourceName,
-	Bool	        verboseMode);
-
-//_______________________________________________________________________________
 EXP extern mfMusicformatsError launchMfslInterpreter (
   const string&           inputSourceName,
+  bool                    traceScanning,
+  bool                    traceParsing,
+  bool                    displayTokens,
+  bool                    displayNonTerminals,
   string&                 theMfTool,
-  oahOptionsAndArguments& optionsAndArguments,
-  Bool                    verboseMode);
+  string&                 theInputFile,
+  oahOptionsAndArguments& optionsAndArguments);
 
 
 #endif

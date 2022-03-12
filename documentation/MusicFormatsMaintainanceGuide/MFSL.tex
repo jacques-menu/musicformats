@@ -4,10 +4,11 @@
 \chapter{MFSL (MusicFormats Scripting Language}
 % -------------------------------------------------------------------------
 
+% -------------------------------------------------------------------------
+\section{A script example}
+% -------------------------------------------------------------------------
 
-\mfslLang\ is meant for launching \mf\ tools easily, with options and control structures. 
-
-An example is:
+This \script\ illustrates the basic features of \mfslLang:
 \begin{lstlisting}[language=MFSL]
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfslInterpreter
 
@@ -15,21 +16,21 @@ An example is:
 tool : xml2ly
 
 # the input file
-input : V3bis_extraits.xml
+input :test.mfsl
 
 # parts
   -keep-musicxml-part-id P1
 
 # the voices choice
-VOICES_CHOICE :  voice1Only | voice2Only ;
+choice VOICES_CHOICE : voice1Only | voice2Only ;
   # could be : choice VOICES_CHOICE : ... ... ... ;
 
-VOICES_CHOICE = voice1Only ;
+set VOICES_CHOICE = voice1Only ;
   # change this to voice2Only to switch to another subset of options
   # could even be parameter to the script such a $1
 
 # choose which options to use according to VOICES_CHOICE
-case VOICES_CHOICE
+case VOICES_CHOICE :
 	voice1Only:
     -title "Joli morceau - voix 1"
     -ignore-msr-voice Part_POne_Staff_One_Voice_Two
@@ -46,61 +47,687 @@ case VOICES_CHOICE
 ;
 \end{lstlisting}
 
+This first line of an \mfslLang\ \script is \MainIt{shebang} containing the \filePath\ to the interpreter, allow for running such \script s by their name provided they are made executable.
+
 
 % -------------------------------------------------------------------------
-\section{Main features of MFSL}
+\section{Implementation principles}
 % -------------------------------------------------------------------------
 
-They are:
+\mfslLang\ is implemented with the \flex\ and \bison\ code generators:
 \begin{itemize}
-\item note are written much like in \lily\, such as {\tt b2...};
-\item the keywords such as {\tt pitches} and {\tt music}, are reserved;
-\item they are available in a number of languages such as english, french, german and italian. It is easy to add other languages;
+\item \mfsl{mfslScanner.l} contains the \flex\ lexical description of \mfslLang. It is used to create \mfsl{mfslScanner.cpp};
+
+\item \mfsl{mfslParser.y} is the syntax and semantics description of \mfslLang. From it, \bison\ creates \mfsl{mfslParser.h}, \mfsl{mfslParser.cpp} and \mfsl{mfslParser.output}. 
+
+The latter file can be used to check the grammar, in particular if \LR\ conflicts are detected;
+
+\item communication between the code generated this way is done by a so-called \MainIt{driver}, along the lines of the \code{C++-calc} example provided by \bison\ v3.8.1;
+
+\item the whole power of \oahRepr\ is used to handle the contents of \mfslLang\ \script s as well as the options to the \mfslLangInterp\ itself.
 \end{itemize}
 
-A first, limited converter is provided by \mf\, with service {\tt mfsl}. It also performs reserved keywords translation from one language to another:
-
 
 % -------------------------------------------------------------------------
-\section{MFSL basic types}\label{MFSL basic types}
+\section{The contents of the MFSL folder}
 % -------------------------------------------------------------------------
 
-Some types used thoughout \msrRepr\ are defined in \mfslBoth{mfslBasicTypes}:%%%JMI
-\begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/mfsl >  egrep -rIn  '^// ' mfslBasicTypes.h
-mfslBasicTypes.h:28:// user languages
-mfslBasicTypes.h:52:// comments types
-mfslBasicTypes.h:74:// initialization
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ls -sal
+total 608
+  0 drwxr-xr-x  27 jacquesmenu  staff    864 Mar 12 17:49 .
+  0 drwxr-xr-x@  6 jacquesmenu  staff    192 Mar 10 17:03 ..
+ 16 -rw-r--r--@  1 jacquesmenu  staff   6148 Mar 12 17:38 .DS_Store
+  8 -rw-r--r--@  1 jacquesmenu  staff   1665 Mar 12 00:39 Makefile
+ 16 -rw-r--r--   1 jacquesmenu  staff   7864 Mar 12 17:50 location.hh
+  8 -rw-r--r--@  1 jacquesmenu  staff   1275 Mar 10 11:45 mfslBasicTypes.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff    685 Mar 10 11:43 mfslBasicTypes.h
+  8 -rw-r--r--@  1 jacquesmenu  staff   1361 Mar 12 10:14 mfslDriver.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff   3099 Mar 12 10:20 mfslDriver.h
+  8 -rw-r--r--@  1 jacquesmenu  staff   3041 Mar  9 07:35 mfslInterpreterComponent.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff    661 Mar  9 07:02 mfslInterpreterComponent.h
+ 24 -rw-r--r--@  1 jacquesmenu  staff  11981 Mar 10 11:38 mfslInterpreterInsiderHandler.cpp
+ 16 -rw-r--r--@  1 jacquesmenu  staff   5270 Mar 10 07:11 mfslInterpreterInsiderHandler.h
+  8 -rw-r--r--@  1 jacquesmenu  staff   1120 Mar 12 17:44 mfslInterpreterInterface.h
+ 16 -rw-r--r--@  1 jacquesmenu  staff   6890 Mar 12 17:50 mfslInterpreterOah.cpp
+ 16 -rw-r--r--@  1 jacquesmenu  staff   4430 Mar 12 17:50 mfslInterpreterOah.h
+ 24 -rw-r--r--@  1 jacquesmenu  staff  10008 Mar 12 10:47 mfslInterpreterRegularHandler.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff   3533 Mar  9 08:22 mfslInterpreterRegularHandler.h
+ 88 -rw-r--r--@  1 jacquesmenu  staff  42680 Mar 12 17:50 mfslParser.cpp
+ 96 -rw-r--r--   1 jacquesmenu  staff  45852 Mar 12 17:50 mfslParser.h
+ 24 -rw-r--r--@  1 jacquesmenu  staff  10256 Mar 12 17:50 mfslParser.output
+ 16 -rw-r--r--@  1 jacquesmenu  staff   5860 Mar 12 17:50 mfslParser.y
+136 -rw-r--r--   1 jacquesmenu  staff  69091 Mar 12 17:49 mfslScanner.cpp
+ 24 -rw-r--r--@  1 jacquesmenu  staff  11874 Mar 12 17:49 mfslScanner.l
+  8 -rw-r--r--@  1 jacquesmenu  staff   2047 Mar  9 11:45 mfslWae.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff   3681 Mar  9 11:44 mfslWae.h
+  8 -rwxr-xr-x@  1 jacquesmenu  staff    817 Mar 12 17:35 test.mfsl
 \end{lstlisting}
 
 
 % -------------------------------------------------------------------------
-\section{What the \mfslLangInterp\ does}
+\section{The MFSL Makefile}\label{The MFSL Makefile}
 % -------------------------------------------------------------------------
 
+This \Makefile\ is quite simple: the options to \flex\ and \bison\ are placed in \mfsl{mfslScanner.l} and \mfsl{mfslParser.y}, respectively:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > mfslInterpreter -about
-What mfslInterpreter does:
+jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > cat Makefile 
+#
+#  MusicFormats Library
+#  Copyright (C) Jacques Menu 2016-2022
 
-    This interpreter basically reads a text file containing
-    a tool name, an input file name, keywords and options,
-    and launches the specified tool
-    with these options applied to the input file name.
+#  This Source Code Form is subject to the terms of the Mozilla Public
+#  License, v. 2.0. If a copy of the MPL was not distributed with this
+#  file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-    The activity log and warning/error messages go to standard error.
+#  https://github.com/jacques-menu/musicformats
+#
+
+#
+# https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
+#   $@ The file name of the target of the rule.
+#   $% The target member name, when the target is an archive member.
+#   $< The name of the first prerequisite.
+#
+
+# variables
+
+MAKEFILE = Makefile
+
+GENERATED_FILES  = mfslParser.h mfslScanner.cpp mfslParser.cpp
+
+BISON = bison # -Wcounterexamples -Wother
+FLEX  = flex
+
+CXXFLAGS = -I.. -DMAIN
+
+
+# implicit target
+# ---------------------------------------------------------------------------
+
+all : $(GENERATED_FILES)
+
+
+# generation rules
+# ---------------------------------------------------------------------------
+
+mfslScanner.cpp : $(MAKEFILE) mfslScanner.l
+	$(FLEX) -omfslScanner.cpp mfslScanner.l
+
+
+mfslParser.h mfslParser.cpp : $(MAKEFILE) mfslParser.y
+	$(BISON) --defines=mfslParser.h -o mfslParser.cpp mfslParser.y
+
+
+# clean
+# ---------------------------------------------------------------------------
+
+clean:
+	rm -f $(GENERATED_FILES)
 \end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{The driver}
+% -------------------------------------------------------------------------
+
+\mfsl{mfslDriver.h} contains a prototype of \function{yylex}:
+\begin{lstlisting}[language=Terminal]
+//______________________________________________________________________________
+// Give Flex the prototype of yylex we want ...
+# define YY_DECL \
+  yy::parser::symbol_type yylex (mfslDriver& drv)
+// ... and declare it for the parser's sake.
+YY_DECL;
+\end{lstlisting}
+
+Then it contains the declaration of \class{mfslDriver}:
+\begin{lstlisting}[language=Terminal]
+//______________________________________________________________________________
+// Conducting the whole scanning and parsing of MFSL
+class mfslDriver
+{
+  public:
+
+    // // constructor/destructor
+    // ------------------------------------------------------
+
+                          mfslDriver (
+                              bool traceScanning,
+                              bool tTraceParsing,
+                              bool displayTokens,
+                              bool displayNonTerminals);
+
+	// ... ... ...
+	
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    // run the parser on file inputFileName,
+    // return 0 on success
+
+    int                   parseFile (const string& inputFileName);
+
+    // handling the scanner
+
+    void                  scanBegin ();
+    void                  scanEnd ();
+
+  protected:
+
+    // public fields
+    // ------------------------------------------------------
+
+    // The name of the file being parsed.
+    string                fInputFileName;
+
+    // scanning
+    bool                  fTraceScanning;
+    yy::location          fScannerLocation;
+
+    // parsing
+    bool                  fTraceParsing;
+
+    // display
+    bool                  fDisplayTokens;
+    bool                  fDisplayNonTerminals;
+
+    // variables handling
+    map<string, int>      fScannerVariables;
+
+		string                fToolName;
+    
+    int                   fDriverResult;
+};
+\end{lstlisting}
+
+The definitions are placed in two files due to the specificity of the sharing of variables and function in the \flex\ and \bison-generated code:
+\begin{itemize}
+
+\item \mfsl{mfslDriver.cpp} contains the \className{mfslDriver} \constructor, that runs the parser:
+\begin{lstlisting}[language=Terminal]
+mfslDriver::mfslDriver (
+  bool traceScanning,
+  bool tTraceParsing,
+  bool displayTokens,
+  bool displayNonTerminals)
+{
+  fTraceParsing  = traceScanning;
+  fTraceScanning = tTraceParsing;
+
+  fDisplayTokens       = displayTokens;
+  fDisplayNonTerminals = displayNonTerminals;
+
+  fScannerVariables ["one"] = 1;
+  fScannerVariables ["two"] = 2;
+}
+
+int mfslDriver::parseFile (const string &inputFileName)
+{
+  // input file name
+  fInputFileName = inputFileName;
+
+  // initialize scanner location
+  fScannerLocation.initialize (
+    &fInputFileName);
+
+  // begin scan
+  scanBegin ();
+
+  // do the parsing
+  yy::parser theParser (*this);
+
+  theParser.set_debug_level (
+    fTraceParsing);
+
+  int result = theParser ();
+
+  // end scan
+  scanEnd ();
+
+  return result;
+}
+\end{lstlisting}
+
+\item the remaining code is placed in the third part of (service code) of \mfsl{mfslScanner.l}, since it needs to access variables in the code generated by \flex:
+\begin{lstlisting}[language=Terminal]
+void mfslDriver::scanBegin ()
+{
+  yy_flex_debug = fTraceScanning;
+
+  if (fInputFileName.empty () || fInputFileName == "-") {
+    yyin = stdin;
+  }
+
+  else if (!(yyin = fopen (fInputFileName.c_str (), "r")))
+    {
+      std::cerr <<
+        "cannot open " << fInputFileName << ": " << strerror (errno) <<
+        '\n';
+
+      exit (EXIT_FAILURE);
+    }
+}
+
+void mfslDriver::scanEnd ()
+{
+  fclose (yyin);
+}
+\end{lstlisting}
+
+\end{itemize}
 
 
 % -------------------------------------------------------------------------
 \section{Lexical analysis}
 % -------------------------------------------------------------------------
 
+% -------------------------------------------------------------------------
+\subsection{Flex options}
+% -------------------------------------------------------------------------
+
+\begin{lstlisting}[language=Terminal]
+%option interactive
+%option debug
+
+%option yylineno
+%option noyywrap
+
+%option nounput noinput
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{Flex regular expressions}
+% -------------------------------------------------------------------------
+
+\begin{lstlisting}[language=Terminal]
+blank                     [ \t\r]
+endOfLine                 [\n]
+character                 .
+
+letter                    [A-Za-zéèêàâòôùûî]
+digit                     [0-9]
+
+name                      {letter}(_|-|\.|{letter}|{digit})*
+integer                   {digit}+
+exponent                  [eE][+-]?{integer}
+
+singleleQuote             [']
+doubleQuote               ["]
+tabulator                 [\t]
+backSlash                 [\\]
+
+
+%{
+  // Code run each time a pattern is matched.
+  # define YY_USER_ACTION  loc.columns (yyleng);
+%}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Terminal]
+%x                        SINGLE_QUOTED_STRING_MODE
+%x                        DOUBLE_QUOTED_STRING_MODE
+
+%x                        COMMENT_TO_END_OF_LINE_MODE
+%x                        PARENTHESIZED_COMMENT_MODE
+\end{lstlisting}
+
+\begin{lstlisting}[language=Terminal]
+/* strings */
+
+#define                   STRING_BUFFER_SIZE 1024
+char                      pStringBuffer [STRING_BUFFER_SIZE];
+
+  // A handy shortcut to the location held by the mfslDriver.
+  yy::location& loc = drv.getScannerLocation ();
+  // Code run each time yylex is called.
+  loc.step ();
+
+%}
+
+
+{blank}+   loc.step ();
+\n+        loc.lines (yyleng); loc.step ();
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Terminal]
+{integer}"."{integer}({exponent})? |
+{integer}{exponent} {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () << " double: " << yytext << endl;
+  }
+  return yy::parser::make_DOUBLE (yytext, loc);
+}
+
+{integer} {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () << " integer: " << yytext << endl;
+  }
+  return yy::parser::make_INTEGER (yytext, loc);
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Terminal]
+"tool" {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+  }
+  return yy::parser::make_TOOL (loc);
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Terminal]
+{name} {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () << ": name [" << yytext << "]" << endl;
+  }
+  return yy::parser::make_NAME (yytext, loc);
+}
+
+
+
+"--"{name} |
+"-"{name} {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () << ": option [" << yytext << "]" << endl;
+  }
+  return yy::parser::make_OPTION (yytext, loc);
+}
+
+
+
+"(" {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+  }
+  return yy::parser::make_LEFT_PARENTHESIS (loc);
+}
+\end{lstlisting}
+
+
+\begin{lstlisting}[language=Terminal]
+. {
+   throw yy::parser::syntax_error (
+     loc,
+     "invalid character: " + std::string (yytext));
+}
+
+
+<<EOF>>    return yy::parser::make_YYEOF (loc);
+\end{lstlisting}
+
+
 
 % -------------------------------------------------------------------------
 \section{Syntax and semantic analysis}
 % -------------------------------------------------------------------------
 
-The language-dependent keywords leads to a recursive descent parser, since {\tt flex}-generated scanners need 'fixed' keyword in the language description.
+
+% -------------------------------------------------------------------------
+\subsection{{\tt Bison} options}
+% -------------------------------------------------------------------------
+
+\begin{lstlisting}[language=Terminal]
+%skeleton "lalr1.cc" // -*- C++ -*-
+%require "3.8.1"
+%defines
+
+%printer { yyo << $$; } <*>;
+
+%define api.token.raw
+
+%define api.token.constructor
+%define api.value.type variant
+%define parse.assert
+
+%code requires {
+  #include <string>
+
+  class mfslDriver;
+}
+
+// The parsing context
+%param { mfslDriver& drv } // declaration, any parameter name is fine
+
+%locations
+
+%verbose // to produce mfslParser.output
+
+%define parse.trace
+%define parse.error detailed
+%define parse.lac full
+
+//%define parse.report
+//%define parse.verbose
+
+%code {
+# include "mfslDriver.h"
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Terminal]
+%define api.token.prefix {TOK_}
+%token
+  BAR  "|"
+  SEMICOLON ";"
+  COLON ":"
+  EQUAL  "="
+
+  SLASH  "/"
+  COMMA  ","
+
+  STAR  "*"
+
+  LEFT_PARENTHESIS  "("
+  RIGHT_PARENTHESIS ")"
+
+  TOOL    "tool"
+  INPUT   "input"
+  CHOICE  "choice"
+  SET     "set"
+  CASE    "case"
+;
+
+%token <std::string> INTEGER "integer"
+%token <std::string> DOUBLE  "double"
+
+%token <std::string> SINGLE_QUOTED_STRING "single quoted_string"
+%token <std::string> DOUBLE_QUOTED_STRING "double quoted_string"
+
+%token <std::string> NAME "name"
+
+%token <std::string> OPTION "option"
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\subsection{{\tt Bison} regular expressions}
+% -------------------------------------------------------------------------
+
+\begin{lstlisting}[language=Terminal]
+/* the MFSL non-terminals */
+/* ---------------------- */
+
+%nterm <std::string> Number
+%nterm <std::string> String
+%nterm <std::string> OptionValue
+
+
+
+/* the MFSL axiom */
+/* -------------- */
+
+%start script
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Interface to the MFSL parser}
+% -------------------------------------------------------------------------
+
+This is provided by \mfsl{mfslInterpreterInterface.h}:
+\begin{lstlisting}[language=Terminal]
+EXP extern mfMusicformatsError launchMfslInterpreter (
+  const string&           inputSourceName,
+  bool                    traceScanning,
+  bool                    traceParsing,
+  bool                    displayTokens,
+  bool                    displayNonTerminals,
+  string&                 theMfTool,
+  string&                 theInputFile,
+  oahOptionsAndArguments& optionsAndArguments);
+\end{lstlisting}
+
+The definition of this function is placed in \mfsl{mfslScanner.l}:
+\begin{lstlisting}[language=Terminal]
+mfMusicformatsError launchMfslInterpreter (
+  const string&           inputSourceName,
+  bool                    traceScanning,
+  bool                    traceParsing,
+  bool                    displayTokens,
+  bool                    displayNonTerminals,
+  string&                 theMfTool,
+  string&                 theInputFile,
+  oahOptionsAndArguments& optionsAndArguments)
+{
+  mfMusicformatsError
+    result =
+      mfMusicformatsError::k_NoError;
+
+  mfslDriver
+    theDriver (
+      traceScanning,
+      traceParsing,
+      displayTokens,
+      displayNonTerminals);
+
+  int parseResult =
+  	theDriver.parseFile (inputSourceName);
+
+  gLogStream <<
+    "--> parseResult: " << parseResult <<
+    endl;
+
+  if (! parseResult) {
+    result =
+      mfMusicformatsError::kErrorInvalidFile;
+  }
+
+	gLogStream <<
+    "inputFileName: " << theDriver.getInputFileName () <<
+  	endl <<
+		"toolName: " << theDriver.getToolName () <<
+  	endl;
+
+  theMfTool    = theDriver.getToolName ();
+  theInputFile = theDriver.getInputFileName ();
+
+	return result;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Running the example MFSL script}
+% -------------------------------------------------------------------------
+
+Let's show show the \mfslLangInterp\ uses the options above:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl -display-tokens -display-non-terminals -display-options-values
+  The options values for //Users/jacquesmenu/musicformats-git-dev/build/bin/mfslInterpreter are:
+    MFSL group (-help-mfsl-group, -hmfsl-group), 2 atoms chosen:
+    --------------------------
+      MFSL (-help-mfsl, -hmfsl), 2 atoms chosen:
+        fDisplayTokens                     : true, set by user
+        fDisplayNonTerminals               : true, set by user
+    
+    Options and help group (-help-oah-group, -hoah-group), 1 atom chosen:
+    --------------------------
+      Options and help (-help-oah, -hoah), 1 atom chosen:
+        fDisplayOptionsValues              : true, set by user
+    
+  
+--> ./test.mfsl:2.1-39: tool
+--> ./test.mfsl:2.41: :
+--> ./test.mfsl:2.43-48: name [xml2ly]
+  ==> tool: xml2ly
+
+--> ./test.mfsl:4.1-22: input
+--> ./test.mfsl:4.24: :
+--> ./test.mfsl:4.25-33: name [test.mfsl]
+  ==> input: test.mfsl
+
+--> test.mfsl:6.11-32: option [-keep-musicxml-part-id]
+--> test.mfsl:6.34-35: name [P1]
+  ==> option -keep-musicxml-part-id P1
+
+--> test.mfsl:8.1-26: choice
+--> test.mfsl:8.28-40: name [VOICES_CHOICE]
+--> test.mfsl:8.42: :
+--> test.mfsl:8.44-53: name [voice1Only]
+--> test.mfsl:8.55: |
+--> test.mfsl:8.57-66: name [voice2Only]
+--> test.mfsl:8.68: ;
+  ==> ChoiceDeclaration VOICES_CHOICE : ...
+
+--> test.mfsl:10.1-3: set
+--> test.mfsl:10.5-17: name [VOICES_CHOICE]
+--> test.mfsl:10.19: =
+--> test.mfsl:10.21-30: name [voice1Only]
+--> test.mfsl:10.32: ;
+  ==> ChoiceSetting, set VOICES_CHOICE = voice1Only
+
+--> test.mfsl:12.1-61: case
+--> test.mfsl:12.63-75: name [VOICES_CHOICE]
+--> test.mfsl:12.77: :
+--> test.mfsl:13.2-11: name [voice1Only]
+--> test.mfsl:13.12: :
+--> test.mfsl:14.5-10: option [-title]
+--> test.mfsl:14.12-34: double quoted string ["]
+  ==> option -title "
+
+--> test.mfsl:15.5-21: option [-ignore-msr-voice]
+--> test.mfsl:15.23-51: name [Part_POne_Staff_One_Voice_Two]
+  ==> option -ignore-msr-voice Part_POne_Staff_One_Voice_Two
+
+--> test.mfsl:16.3: ;
+  ==> Case voice1Only : ...
+
+--> test.mfsl:18.2-11: name [voice2Only]
+--> test.mfsl:18.12: :
+--> test.mfsl:19.5-10: option [-title]
+--> test.mfsl:19.12-34: double quoted string ["]
+  ==> option -title "
+
+--> test.mfsl:20.5-22: option [--ignore-msr-voice]
+--> test.mfsl:20.24-52: name [Part_POne_Staff_One_Voice_One]
+  ==> option --ignore-msr-voice Part_POne_Staff_One_Voice_One
+
+--> test.mfsl:22.5-27: option [-display-options-values]
+--> test.mfsl:24.5-22: option [-global-staff-size]
+  ==> option -display-options-values
+
+--> test.mfsl:24.24-27 double: 25.5
+  ==> option -global-staff-size 25.5
+
+--> test.mfsl:25.3: ;
+  ==> Case voice2Only : ...
+
+--> test.mfsl:26.1: ;
+  ==> CaseStatement, VOICES_CHOICE : ...
+
+--> parseResult: 0
+==> inputFileName: test.mfsl
+==> toolName:      xml2ly
+jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > 
+\end{lstlisting}
 
 
 % -------------------------------------------------------------------------

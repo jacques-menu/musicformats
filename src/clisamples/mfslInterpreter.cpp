@@ -368,87 +368,63 @@ int main (int argc, char* argv[])
 */
 
   Bool
-    verboseMode =
+    traceScanning =
       gGlobalMfslInterpreterOahGroup->
-        getVerboseMode ();
+        getTraceScanning (),
+    traceParsing =
+      gGlobalMfslInterpreterOahGroup->
+        getTraceParsing (),
+    displayTokens =
+      gGlobalMfslInterpreterOahGroup->
+        getDisplayTokens (),
+    displayNonTerminals =
+      gGlobalMfslInterpreterOahGroup->
+        getDisplayNonTerminals ();
 
   mfMusicformatsError
     err =
       mfMusicformatsError::k_NoError;
 
-  Bool
-    lexicalAnalysisOnly =
-      gGlobalMfslInterpreterOahGroup->
-        getLexicalAnalysisOnly ();
+  if (inputSourceName == "-") {
+    // MFSL data comes from standard input
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+      gLogStream << "Reading standard input" << endl;
+    }
+#endif
+	}
+  else {
+    // MFSL data comes from a file
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+      gLogStream <<
+        "Reading file \"" << inputSourceName << "\"" <<
+        endl;
+    }
+#endif
+	}
 
   try {
-    if (inputSourceName == "-") {
-      // MFSL data comes from standard input
-#ifdef TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream << "Reading standard input" << endl;
-      }
-#endif
+    string                 theMfTool;
+    string                 theInputFile;
+    oahOptionsAndArguments optionsAndArguments;
 
-      if (lexicalAnalysisOnly) {
-        performMfslLexicalAnalysisOnly (
-          inputSourceName,
-          verboseMode);
-      }
+    err =
+      launchMfslInterpreter (
+        inputSourceName,
+        traceScanning.getValue (),
+        traceParsing.getValue (),
+        displayTokens.getValue (),
+        displayNonTerminals.getValue (),
+        theMfTool,
+        theInputFile,
+        optionsAndArguments);
 
-      else {
-        string                 theMfTool;
-        oahOptionsAndArguments optionsAndArguments;
-
-        err =
-          launchMfslInterpreter (
-            "-",
-            theMfTool,
-            optionsAndArguments,
-            verboseMode);
-
-        gLogStream <<
-          "==> theMfTool: " <<
-          theMfTool <<
-          endl;
-      }
-    }
-
-    else {
-      // MFSL data comes from a file
-#ifdef TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        gLogStream <<
-          "Reading file \"" <<
-          inputSourceName <<
-          "\"" <<
-          endl;
-      }
-#endif
-
-      if (lexicalAnalysisOnly) {
-        performMfslLexicalAnalysisOnly (
-          inputSourceName,
-          verboseMode);
-      }
-
-      else {
-        string                 theMfTool;
-        oahOptionsAndArguments optionsAndArguments;
-
-        err =
-          launchMfslInterpreter (
-            inputSourceName,
-            theMfTool,
-            optionsAndArguments,
-            verboseMode);
-
-        gLogStream <<
-          "==> theMfTool: " <<
-          theMfTool <<
-          endl;
-      }
-    }
+//     gLogStream << // JMI
+//       "==> theMfTool:    " << theMfTool <<
+//       endl <<
+//       "==> theInputFile: " << theInputFile <<
+//       endl;
   }
   catch (mfException& e) {
     mfDisplayException (e, gOutputStream);
@@ -487,13 +463,6 @@ int main (int argc, char* argv[])
 
   // over!
   // ------------------------------------------------------
-
-//   if (err != mfMusicformatsError::k_NoError) {
-  if (err != mfMusicformatsError::k_NoError) {
-    gLogStream <<
-      "### The interpretation failed ###" <<
-      endl;
-  }
 
   switch (err) {
     case mfMusicformatsError::k_NoError:

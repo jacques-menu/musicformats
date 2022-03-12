@@ -94,16 +94,43 @@ R"(Don't execute the MFSL input, merely display the tokens it contains.)",
         "fVerboseMode",
         fVerboseMode));
 
-  // lexical analysis only
+  // trace
   // --------------------------------------
 
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "lexical-analysis-only", "lao",
-R"(Don't execute the MFSL input, merely display the tokens it contains.)",
-        "fLexicalAnalysisOnly",
-        fLexicalAnalysisOnly));
+        "trace-scanning", "tscan",
+R"(Write a trace of the MFSL scanning activity to standard error.)",
+        "fTraceScanning",
+        fTraceScanning));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "trace-parsing", "tparse",
+R"(Write a trace of the MFSL parsing activity to standard error.)",
+        "fTraceParsing",
+        fTraceParsing));
+
+  // display
+  // --------------------------------------
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-tokens", "dtoks",
+R"(Display the MFSL tokens after they’re accepted.)",
+        "fDisplayTokens",
+        fDisplayTokens));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-non-terminals", "dnterms",
+R"(Display the MFSL non-terminals after they’re accepted.)",
+        "fDisplayNonTerminals",
+        fDisplayNonTerminals));
 }
 
 
@@ -201,18 +228,40 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
 
   --gIndenter;
 
-  // lexical analysis only
+  // trace
   // --------------------------------------
 
   gLogStream <<
-    "LexicalAnalysisOnly:" <<
+    "Trace:" <<
     endl;
 
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fLexicalAnalysisOnly" << " : " <<
-      fLexicalAnalysisOnly <<
+    setw (fieldWidth) << "fTraceScanning" << " : " <<
+      fTraceScanning <<
+      endl <<
+    setw (fieldWidth) << "fTraceParsing" << " : " <<
+      fTraceParsing <<
+      endl;
+
+  --gIndenter;
+
+  // display
+  // --------------------------------------
+
+  gLogStream <<
+    "Display:" <<
+    endl;
+
+  ++gIndenter;
+
+  gLogStream << left <<
+    setw (fieldWidth) << "fDisplayTokens" << " : " <<
+      fDisplayTokens <<
+      endl <<
+    setw (fieldWidth) << "fDisplayNonTerminals" << " : " <<
+      fDisplayNonTerminals <<
       endl;
 
   --gIndenter;
