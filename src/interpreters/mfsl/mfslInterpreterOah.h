@@ -102,6 +102,12 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  getDisplayNonTerminals () const
                               { return fDisplayNonTerminals; }
 
+    void                  setTraceSemantics ()
+                              { fTraceSemantics = true; }
+
+    Bool                  getTraceSemantics () const
+                              { return fTraceSemantics; }
+
   public:
 
     // public services
@@ -151,6 +157,8 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     Bool                  fDisplayTokens;
     Bool                  fDisplayNonTerminals;
+
+    Bool                  fTraceSemantics;
 };
 typedef SMARTP<mfslInterpreterOahGroup> S_mfslInterpreterOahGroup;
 EXP ostream& operator<< (ostream& os, const S_mfslInterpreterOahGroup& elt);

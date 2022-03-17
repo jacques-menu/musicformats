@@ -19,7 +19,7 @@
 #include <iostream> // for cout, cerr, TEMP JMI
 #include <sstream>
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+// #include "mfMusicformatsError.h" // for mfMusicformatsError
 
 #include "oahBasicTypes.h"
 
@@ -30,6 +30,16 @@
 
 #include "mfslInterpreterInterface.h"
 
+
+/* ---------------------------------------------------------------------- */
+/* variables global to yylex() */
+/* ---------------------------------------------------------------------- */
+
+
+/* ---------------------------------------------------------------------- */
+/* functions */
+/* ---------------------------------------------------------------------- */
+
 %}
 
 
@@ -37,13 +47,18 @@
 /* flex options */
 /* ---------------------------------------------------------------------- */
 
-%option interactive
-%option debug
-
 %option yylineno
+
 %option noyywrap
 
-%option nounput noinput
+%option nounput noinput interactive debug
+
+
+%{
+//   yy::parser::symbol_type
+//   make_NAME (const std::string &s, const yy::parser::location_type& loc);
+%}
+
 
 
 /* ---------------------------------------------------------------------- */
@@ -85,7 +100,7 @@ backSlash                 [\\]
 
 
 
-%% /* the language tokens and the corresponding actions */
+%% /* ------------------------------------------------------------------- */
 
 
 
@@ -101,10 +116,11 @@ backSlash                 [\\]
 #define                   STRING_BUFFER_SIZE 1024
 char                      pStringBuffer [STRING_BUFFER_SIZE];
 
-  // A handy shortcut to the location held by the mfslDriver.
-  yy::location& loc = drv.getScannerLocation ();
-  // Code run each time yylex is called.
-  loc.step ();
+// A handy shortcut to the location held by the mfslDriver.
+yy::location& loc = drv.getScannerLocation ();
+
+// Code run each time yylex is called.
+loc.step ();
 
 %}
 
@@ -156,12 +172,15 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 <SINGLE_QUOTED_STRING_MODE>{singleleQuote} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": single quoted string [" << yytext << "]" << endl;
+    gLogStream <<
+      "--> " << drv.getScannerLocation () <<
+      ": single quoted string [" << pStringBuffer << "]" <<
+      endl << endl;
   }
 
   BEGIN INITIAL;
 
-  return yy::parser::make_SINGLE_QUOTED_STRING (yytext,loc);
+  return yy::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
 }
 
 <SINGLE_QUOTED_STRING_MODE>{backSlash}{singleleQuote} {
@@ -197,12 +216,15 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 <DOUBLE_QUOTED_STRING_MODE>{doubleQuote} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": double quoted string [" << yytext << "]" << endl;
+    gLogStream <<
+      "--> " << drv.getScannerLocation () <<
+      ": double quoted string [" << pStringBuffer << "]" <<
+      endl << endl;
   }
 
   BEGIN INITIAL;
 
-  return yy::parser::make_DOUBLE_QUOTED_STRING (yytext, loc);
+  return yy::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{backSlash}{doubleQuote} {
@@ -234,14 +256,18 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 {integer}"."{integer}({exponent})? |
 {integer}{exponent} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << " double: " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    " double: " << yytext <<
+    endl << endl;
   }
   return yy::parser::make_DOUBLE (yytext, loc);
 }
 
 {integer} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << " integer: " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    " integer: " << yytext <<
+    endl << endl;
   }
   return yy::parser::make_INTEGER (yytext, loc);
 }
@@ -251,42 +277,65 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 "tool" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
   }
   return yy::parser::make_TOOL (loc);
 }
 
 "input" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
   }
   return yy::parser::make_INPUT (loc);
 }
 
 "choice" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
   }
   return yy::parser::make_CHOICE (loc);
 }
+
 "set" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
   }
   return yy::parser::make_SET (loc);
 }
+
 "case" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
   }
   return yy::parser::make_CASE (loc);
+}
+
+"all" {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
+  }
+  return yy::parser::make_ALL (loc);
 }
 
 
 
 {name} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": name [" << yytext << "]" << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": name [" << yytext << "]" <<
+    endl << endl;
   }
   return yy::parser::make_NAME (yytext, loc);
 }
@@ -296,7 +345,9 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 "--"{name} |
 "-"{name} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": option [" << yytext << "]" << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": option [" << yytext << "]" <<
+    endl << endl;
   }
   return yy::parser::make_OPTION (yytext, loc);
 }
@@ -305,63 +356,81 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 "(" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl << endl;
   }
   return yy::parser::make_LEFT_PARENTHESIS (loc);
 }
 
 ")" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl << endl;
   }
   return yy::parser::make_RIGHT_PARENTHESIS (loc);
 }
 
 "=" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl << endl;
   }
   return yy::parser::make_EQUAL (loc);
 }
 
 "," {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl << endl;
   }
   return yy::parser::make_COMMA (loc);
 }
 
 "*" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl << endl;
   }
   return yy::parser::make_STAR (loc);
 }
 
 "/" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl << endl;
   }
   return yy::parser::make_SLASH (loc);
 }
 
 ":" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl << endl;
   }
   return yy::parser::make_COLON (loc);
 }
 
 ";" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl << endl;
   }
   return yy::parser::make_SEMICOLON (loc);
 }
 
 "|" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl << endl;
   }
   return yy::parser::make_BAR (loc);
 }
@@ -370,15 +439,16 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 . {
    throw yy::parser::syntax_error (
      loc,
-     "invalid character: " + std::string (yytext));
+     "### invalid character: " + std::string (yytext));
 }
+
 
 
 <<EOF>>    return yy::parser::make_YYEOF (loc);
 
 
 
-%%
+%% /* ------------------------------------------------------------------- */
 
 
 
@@ -412,14 +482,12 @@ void mfslDriver::scanEnd ()
 
 //_______________________________________________________________________________
 mfMusicformatsError launchMfslInterpreter (
-  const string&           inputSourceName,
-  bool                    traceScanning,
-  bool                    traceParsing,
-  bool                    displayTokens,
-  bool                    displayNonTerminals,
-  string&                 theMfTool,
-  string&                 theInputFile,
-  oahOptionsAndArguments& optionsAndArguments)
+  const string& inputSourceName,
+  bool          traceScanning,
+  bool          traceParsing,
+  bool          displayTokens,
+  bool          displayNonTerminals,
+  bool          traceSemantics)
 {
   mfMusicformatsError
     result =
@@ -430,28 +498,41 @@ mfMusicformatsError launchMfslInterpreter (
       traceScanning,
       traceParsing,
       displayTokens,
-      displayNonTerminals);
+      displayNonTerminals,
+      traceSemantics);
 
-  int parseResult =
-  	theDriver.parseFile (inputSourceName);
+  int
+    parseResult =
+  	  theDriver.parseFile (inputSourceName);
 
-  gLogStream <<
-    "--> parseResult: " << parseResult <<
-    endl;
+  string
+    theMfToolName =
+      theDriver.getToolName (),
+    theInputFileName =
+      theDriver.getInputFileName ();
 
-  if (! parseResult) {
+  if (theDriver.getTraceSemantics ()) {
+    gLogStream <<
+      "--> parseResult:   " << parseResult <<
+      endl;
+
+    gLogStream <<
+      "--> toolName:      " << theMfToolName <<
+      endl <<
+      "--> inputFileName: " << theInputFileName <<
+      endl << endl;
+  }
+
+  // parse the script
+  if (parseResult != 0) {
     result =
       mfMusicformatsError::kErrorInvalidFile;
   }
 
-	gLogStream <<
-    "==> inputFileName: " << theDriver.getInputFileName () <<
-  	endl <<
-		"==> toolName:      " << theDriver.getToolName () <<
-  	endl;
-
-  theMfTool    = theDriver.getToolName ();
-  theInputFile = theDriver.getInputFileName ();
+  else {
+    result =
+      theDriver.launchMfslTool ();
+  }
 
 	return result;
 }

@@ -724,11 +724,27 @@ alias gb='git branch'
 alias gc='git checkout'
 alias gp='git push'
 
+function addAll ()
+{
+  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
+  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt
+
+  git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionNumber.h
+  git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionDate.h
+
+  addSrc
+  addBuild
+  addDistrib
+  addDoc
+
+  addFxml
+}
+
 function addSrc ()
 {
   git add ${SRC_DIR}/*.h
 
-  git add -f ${SRC_DIR}/interpreters/mfsl/Makefile
+  git add -f ${MFSL_DIR}/Makefile
 
   git add ${SRC_DIR}/clisamples/*
   git add ${SRC_DIR}/components/*
@@ -786,22 +802,6 @@ function addFxml ()
   git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.xml
   git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.txt
   git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/Makefile
-}
-
-function addAll ()
-{
-  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
-  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt
-
-  git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionNumber.h
-  git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionDate.h
-
-  addSrc
-  addBuild
-  addDistrib
-  addDoc
-
-  addFxml
 }
 
 function mergeTestFromDev ()

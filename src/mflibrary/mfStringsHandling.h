@@ -253,6 +253,9 @@ Bool mfStringIsInStringSet (
   const string&     theString,
   const set<string> stringSet);
 
+string mfStringSetAsString (
+  const set<string> stringSet);
+
 void mfDisplayStringSet (
   const string&     title,
   const set<string> stringSet,

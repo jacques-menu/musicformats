@@ -98,7 +98,7 @@ S_mfcConverterComponent createmfslInterpreterConverterComponent ()
     pConverterComponent->
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
-          mfcVersionNumber::createFromString ("0.9.50"),
+          mfcVersionNumber::createFromString ("0.9.62"),
           "March 9, 2022",
           list<string> {
             "Created the MFSL component"

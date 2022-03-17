@@ -379,7 +379,10 @@ int main (int argc, char* argv[])
         getDisplayTokens (),
     displayNonTerminals =
       gGlobalMfslInterpreterOahGroup->
-        getDisplayNonTerminals ();
+        getDisplayNonTerminals (),
+    traceSemantics =
+      gGlobalMfslInterpreterOahGroup->
+        getTraceSemantics ();
 
   mfMusicformatsError
     err =
@@ -405,10 +408,6 @@ int main (int argc, char* argv[])
 	}
 
   try {
-    string                 theMfTool;
-    string                 theInputFile;
-    oahOptionsAndArguments optionsAndArguments;
-
     err =
       launchMfslInterpreter (
         inputSourceName,
@@ -416,15 +415,7 @@ int main (int argc, char* argv[])
         traceParsing.getValue (),
         displayTokens.getValue (),
         displayNonTerminals.getValue (),
-        theMfTool,
-        theInputFile,
-        optionsAndArguments);
-
-//     gLogStream << // JMI
-//       "==> theMfTool:    " << theMfTool <<
-//       endl <<
-//       "==> theInputFile: " << theInputFile <<
-//       endl;
+        traceSemantics.getValue ());
   }
   catch (mfException& e) {
     mfDisplayException (e, gOutputStream);

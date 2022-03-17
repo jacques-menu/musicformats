@@ -131,6 +131,14 @@ R"(Display the MFSL tokens after they’re accepted.)",
 R"(Display the MFSL non-terminals after they’re accepted.)",
         "fDisplayNonTerminals",
         fDisplayNonTerminals));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "trace-semantics", "tsem",
+R"(Write MFSL semantics analysis activity to standard output.)",
+        "fTraceSemantics",
+        fTraceSemantics));
 }
 
 

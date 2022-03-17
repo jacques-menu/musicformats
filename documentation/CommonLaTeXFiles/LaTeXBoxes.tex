@@ -1,0 +1,32 @@
+\newcommand{\iBox}[2][]{%
+   \ifthenelse { \equal{#2}{} }
+      {
+      	\hspace{#1}
+      	\mbox{
+      		\begin{minipage}[b]{0.925\textwidth}
+      		#2
+      		\end{minipage}
+      	}
+			}
+      {
+      	\hspace{#1}
+      	\mbox{
+      		\begin{minipage}[b]{0.925\textwidth}
+      		#2
+      		\end{minipage}
+      	}
+			}
+}
+
+\newcommand{\indentedBox}[2][0.05\textwidth]{
+	\hspace{#1}
+	\mbox{
+		\begin{minipage}[b]{0.925\textwidth}
+%		Mandatory arg: #2
+%	  Optional arg : #1
+		#2
+		\end{minipage}
+	}
+}
+
+

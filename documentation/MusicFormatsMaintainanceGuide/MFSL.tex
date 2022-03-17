@@ -47,61 +47,87 @@ case VOICES_CHOICE :
 ;
 \end{lstlisting}
 
-This first line of an \mfslLang\ \script is \MainIt{shebang} containing the \filePath\ to the interpreter, allow for running such \script s by their name provided they are made executable.
+This first line of an \mfslLang\ \script\ is the so-called \MainIt{shebang} containing the \filePath\ to the interpreter, allow for running such \script s by their name provided they are made executable.
 
 
 % -------------------------------------------------------------------------
 \section{Implementation principles}
 % -------------------------------------------------------------------------
 
-\mfslLang\ is implemented with the \flex\ and \bison\ code generators:
+\mfslLang\ is implemented with the \flex\ and \bison\ C++ code generators:
 \begin{itemize}
-\item \mfsl{mfslScanner.l} contains the \flex\ lexical description of \mfslLang. It is used to create \mfsl{mfslScanner.cpp};
+\item \mfsl{mfslScanner.ll} contains the \flex\ lexical description of \mfslLang.
 
-\item \mfsl{mfslParser.y} is the syntax and semantics description of \mfslLang. From it, \bison\ creates \mfsl{mfslParser.h}, \mfsl{mfslParser.cpp} and \mfsl{mfslParser.output}. 
+It is used to create \mfsl{mfslScanner.cpp};
+
+\item \mfsl{mfslParser.yy} is the syntax and semantics description of \mfslLang.
+
+From it, \bison\ creates \mfsl{mfslParser.h}, \mfsl{mfslParser.cpp} and \mfsl{mfslParser.output}.
 
 The latter file can be used to check the grammar, in particular if \LR\ conflicts are detected;
 
 \item communication between the code generated this way is done by a so-called \MainIt{driver}, along the lines of the \code{C++-calc} example provided by \bison\ v3.8.1;
 
+\item the way the tokens description is shared by the scanner and parser is described at \sectionRef{Tokens description};
+
 \item the whole power of \oahRepr\ is used to handle the contents of \mfslLang\ \script s as well as the options to the \mfslLangInterp\ itself.
 \end{itemize}
+
+Only the predefined \code{bool} type is used, since the generated C++ code relies on this. This is why \methodName{getValue} is used in \clisamples{mfslInterpreter.cpp}:
+\begin{lstlisting}[language=CPlusPlus]
+    string                 theMfTool;
+    string                 theInputFile;
+    oahOptionsAndArguments optionsAndArguments;
+
+    err =
+      launchMfslInterpreter (
+        inputSourceName,
+        traceScanning.getValue (),
+        traceParsing.getValue (),
+        displayTokens.getValue (),
+        displayNonTerminals.getValue (),
+        theMfTool,
+        theInputFile,
+        optionsAndArguments);
+\end{lstlisting}
 
 
 % -------------------------------------------------------------------------
 \section{The contents of the MFSL folder}
 % -------------------------------------------------------------------------
 
+\mfsl{location.hh} defines the \className{yy::location} class, that contains the script file name and input line number:
 \begin{lstlisting}[language=TerminalSmall]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ls -sal
-total 608
-  0 drwxr-xr-x  27 jacquesmenu  staff    864 Mar 12 17:49 .
-  0 drwxr-xr-x@  6 jacquesmenu  staff    192 Mar 10 17:03 ..
- 16 -rw-r--r--@  1 jacquesmenu  staff   6148 Mar 12 17:38 .DS_Store
-  8 -rw-r--r--@  1 jacquesmenu  staff   1665 Mar 12 00:39 Makefile
- 16 -rw-r--r--   1 jacquesmenu  staff   7864 Mar 12 17:50 location.hh
-  8 -rw-r--r--@  1 jacquesmenu  staff   1275 Mar 10 11:45 mfslBasicTypes.cpp
-  8 -rw-r--r--@  1 jacquesmenu  staff    685 Mar 10 11:43 mfslBasicTypes.h
-  8 -rw-r--r--@  1 jacquesmenu  staff   1361 Mar 12 10:14 mfslDriver.cpp
-  8 -rw-r--r--@  1 jacquesmenu  staff   3099 Mar 12 10:20 mfslDriver.h
+total 776
+  0 drwxr-xr-x  28 jacquesmenu  staff    896 Mar 15 05:16 .
+  0 drwxr-xr-x@  4 jacquesmenu  staff    128 Mar 13 00:47 ..
+ 16 -rw-r--r--@  1 jacquesmenu  staff   6148 Mar 14 10:18 .DS_Store
+  8 -rw-r--r--@  1 jacquesmenu  staff   1266 Mar 15 05:15 Makefile
+ 16 -rw-r--r--@  1 jacquesmenu  staff   7864 Mar 15 05:16 location.hh
+ 24 -rw-r--r--@  1 jacquesmenu  staff  10106 Mar 14 18:26 mfslBasicTypes.cpp
+ 16 -rw-r--r--@  1 jacquesmenu  staff   4568 Mar 14 18:16 mfslBasicTypes.h
+  8 -rw-r--r--@  1 jacquesmenu  staff   1585 Mar 15 05:12 mfslDriver.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff   3413 Mar 15 05:12 mfslDriver.h
   8 -rw-r--r--@  1 jacquesmenu  staff   3041 Mar  9 07:35 mfslInterpreterComponent.cpp
   8 -rw-r--r--@  1 jacquesmenu  staff    661 Mar  9 07:02 mfslInterpreterComponent.h
  24 -rw-r--r--@  1 jacquesmenu  staff  11981 Mar 10 11:38 mfslInterpreterInsiderHandler.cpp
  16 -rw-r--r--@  1 jacquesmenu  staff   5270 Mar 10 07:11 mfslInterpreterInsiderHandler.h
-  8 -rw-r--r--@  1 jacquesmenu  staff   1120 Mar 12 17:44 mfslInterpreterInterface.h
- 16 -rw-r--r--@  1 jacquesmenu  staff   6890 Mar 12 17:50 mfslInterpreterOah.cpp
- 16 -rw-r--r--@  1 jacquesmenu  staff   4430 Mar 12 17:50 mfslInterpreterOah.h
- 24 -rw-r--r--@  1 jacquesmenu  staff  10008 Mar 12 10:47 mfslInterpreterRegularHandler.cpp
+  8 -rw-r--r--@  1 jacquesmenu  staff   1161 Mar 15 05:13 mfslInterpreterInterface.h
+ 16 -rw-r--r--@  1 jacquesmenu  staff   7116 Mar 14 15:53 mfslInterpreterOah.cpp
+ 16 -rw-r--r--@  1 jacquesmenu  staff   4692 Mar 14 15:51 mfslInterpreterOah.h
+ 24 -rw-r--r--@  1 jacquesmenu  staff  10070 Mar 14 15:53 mfslInterpreterRegularHandler.cpp
   8 -rw-r--r--@  1 jacquesmenu  staff   3533 Mar  9 08:22 mfslInterpreterRegularHandler.h
- 88 -rw-r--r--@  1 jacquesmenu  staff  42680 Mar 12 17:50 mfslParser.cpp
- 96 -rw-r--r--   1 jacquesmenu  staff  45852 Mar 12 17:50 mfslParser.h
- 24 -rw-r--r--@  1 jacquesmenu  staff  10256 Mar 12 17:50 mfslParser.output
- 16 -rw-r--r--@  1 jacquesmenu  staff   5860 Mar 12 17:50 mfslParser.y
-136 -rw-r--r--   1 jacquesmenu  staff  69091 Mar 12 17:49 mfslScanner.cpp
- 24 -rw-r--r--@  1 jacquesmenu  staff  11874 Mar 12 17:49 mfslScanner.l
+ 88 -rw-r--r--   1 jacquesmenu  staff  43880 Mar 15 05:16 mfslParser.cpp
+ 96 -rw-r--r--   1 jacquesmenu  staff  45868 Mar 15 05:16 mfslParser.h
+ 24 -rw-r--r--@  1 jacquesmenu  staff  10722 Mar 13 16:57 mfslParser.output
+ 16 -rw-r--r--@  1 jacquesmenu  staff   5930 Mar 14 18:19 mfslParser.yy
+136 -rw-r--r--   1 jacquesmenu  staff  68514 Mar 15 05:16 mfslScanner.cpp
+ 24 -rw-r--r--@  1 jacquesmenu  staff  11251 Mar 15 05:12 mfslScanner.ll
+144 -rw-r--r--@  1 jacquesmenu  staff  71091 Mar 15 05:14 mfslScanner.log
   8 -rw-r--r--@  1 jacquesmenu  staff   2047 Mar  9 11:45 mfslWae.cpp
   8 -rw-r--r--@  1 jacquesmenu  staff   3681 Mar  9 11:44 mfslWae.h
-  8 -rwxr-xr-x@  1 jacquesmenu  staff    817 Mar 12 17:35 test.mfsl
+  8 -rwxr-xr-x@  1 jacquesmenu  staff    817 Mar 14 18:20 test.mfsl
 \end{lstlisting}
 
 
@@ -109,34 +135,19 @@ total 608
 \section{The MFSL Makefile}\label{The MFSL Makefile}
 % -------------------------------------------------------------------------
 
-This \Makefile\ is quite simple: the options to \flex\ and \bison\ are placed in \mfsl{mfslScanner.l} and \mfsl{mfslParser.y}, respectively:
+This \Makefile\ is quite simple: the options to \flex\ and \bison\ are placed in \mfsl{mfslScanner.ll} and \mfsl{mfslParser.yy}, respectively:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > cat Makefile 
-#
-#  MusicFormats Library
-#  Copyright (C) Jacques Menu 2016-2022
-
-#  This Source Code Form is subject to the terms of the Mozilla Public
-#  License, v. 2.0. If a copy of the MPL was not distributed with this
-#  file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
-#  https://github.com/jacques-menu/musicformats
-#
-
-#
-# https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html
-#   $@ The file name of the target of the rule.
-#   $% The target member name, when the target is an archive member.
-#   $< The name of the first prerequisite.
-#
+jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > cat Makefile
+# ... ... ...
 
 # variables
+# ---------------------------------------------------------------------------
 
 MAKEFILE = Makefile
 
 GENERATED_FILES  = mfslParser.h mfslScanner.cpp mfslParser.cpp
 
-BISON = bison # -Wcounterexamples -Wother
+BISON = bison
 FLEX  = flex
 
 CXXFLAGS = -I.. -DMAIN
@@ -151,12 +162,12 @@ all : $(GENERATED_FILES)
 # generation rules
 # ---------------------------------------------------------------------------
 
-mfslScanner.cpp : $(MAKEFILE) mfslScanner.l
-	$(FLEX) -omfslScanner.cpp mfslScanner.l
+mfslScanner.cpp : $(MAKEFILE) mfslScanner.ll
+	$(FLEX) -omfslScanner.cpp mfslScanner.ll
 
 
-mfslParser.h mfslParser.cpp : $(MAKEFILE) mfslParser.y
-	$(BISON) --defines=mfslParser.h -o mfslParser.cpp mfslParser.y
+mfslParser.h mfslParser.cpp : $(MAKEFILE) mfslParser.yy
+	$(BISON) --defines=mfslParser.h -o mfslParser.cpp mfslParser.yy
 
 
 # clean
@@ -168,11 +179,92 @@ clean:
 
 
 % -------------------------------------------------------------------------
+\section{Tokens description}\label{Tokens description}
+
+% -------------------------------------------------------------------------
+
+The tokens are described in \mfsl{mfslParser.yy}, such as:
+\begin{lstlisting}[language=Bison]
+%token <string> OPTION "option"
+\end{lstlisting}
+
+Both \code{OPTION} and \code{"option"} can be used in the productions, but the grammar is more readable if the capitalized name is used:
+\begin{lstlisting}[language=Bison]
+Option
+  : OPTION
+    {
+	    if (drv.getDisplayNonTerminals ()) {
+        gLogStream <<
+          "  ==> option " << $1 <<
+          endl << endl;
+			}
+
+			$$ = oahOptionNameAndValue::create ($1, "");
+    }
+
+  | OPTION OptionValue
+    {
+      if (drv.getDisplayNonTerminals ()) {
+        gLogStream <<
+          "  ==> option " << $1 << ' ' << $2 <<
+          endl << endl;
+      }
+
+      $$ = oahOptionNameAndValue::create ($1, $2);
+    }
+;
+\end{lstlisting}
+
+In case of error, \code{"option"} is used to display a message to the user.
+
+The name \code{OPTION} is used in \mfsl{mfslScanner.ll} prefixed by \code{yy::parser::make_}:
+\begin{lstlisting}[language=Flex]
+"--"{name} |
+"-"{name} {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": option [" << yytext << "]" <<
+    endl;
+  }
+  return yy::parser::make_OPTION (yytext, loc);
+}
+\end{lstlisting}
+
+In \mfsl{mfslParser.cpp}, this becomes:
+\begin{lstlisting}[language=CPlusPlus]
+      case symbol_kind::S_OPTION: // "option"
+\end{lstlisting}
+
+We don't have to create \method{yy::parser}{make_OPTION} ourselves, though: it is taken care of by Bison itself, since it returns a \type{char*}.
+
+The \code{calc++} example in the \bison\ documentation contains the case of numbers:
+\begin{lstlisting}[language=Flex]
+%{
+  // A number symbol corresponding to the value in S.
+  yy::parser::symbol_type
+  make_NUMBER (const std::string &s, const yy::parser::location_type& loc);
+%}
+
+// ... ... ...
+
+yy::parser::symbol_type
+make_NUMBER (const std::string &s, const yy::parser::location_type& loc)
+{
+  errno = 0;
+  long n = strtol (s.c_str(), NULL, 10);
+  if (! (INT_MIN <= n && n <= INT_MAX && errno != ERANGE))
+    throw yy::parser::syntax_error (loc, "integer is out of range: " + s);
+  return yy::parser::make_NUMBER ((int) n, loc);
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
 \section{The driver}
 % -------------------------------------------------------------------------
 
 \mfsl{mfslDriver.h} contains a prototype of \function{yylex}:
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
 // Give Flex the prototype of yylex we want ...
 # define YY_DECL \
@@ -182,7 +274,7 @@ YY_DECL;
 \end{lstlisting}
 
 Then it contains the declaration of \class{mfslDriver}:
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
 // Conducting the whole scanning and parsing of MFSL
 class mfslDriver
@@ -199,7 +291,7 @@ class mfslDriver
                               bool displayNonTerminals);
 
 	// ... ... ...
-	
+
   public:
 
     // public services
@@ -238,7 +330,7 @@ class mfslDriver
     map<string, int>      fScannerVariables;
 
 		string                fToolName;
-    
+
     int                   fDriverResult;
 };
 \end{lstlisting}
@@ -246,8 +338,8 @@ class mfslDriver
 The definitions are placed in two files due to the specificity of the sharing of variables and function in the \flex\ and \bison-generated code:
 \begin{itemize}
 
-\item \mfsl{mfslDriver.cpp} contains the \className{mfslDriver} \constructor, that runs the parser:
-\begin{lstlisting}[language=Terminal]
+\item \mfsl{mfslDriver.cpp} contains the \constructorName{mfslDriver} constructor, that runs the parser:
+\begin{lstlisting}[language=CPlusPlus]
 mfslDriver::mfslDriver (
   bool traceScanning,
   bool tTraceParsing,
@@ -291,8 +383,8 @@ int mfslDriver::parseFile (const string &inputFileName)
 }
 \end{lstlisting}
 
-\item the remaining code is placed in the third part of (service code) of \mfsl{mfslScanner.l}, since it needs to access variables in the code generated by \flex:
-\begin{lstlisting}[language=Terminal]
+\item the remaining code is placed in the third part of (service code) of \mfsl{mfslScanner.ll}, since it needs to access variables in the code generated by \flex:
+\begin{lstlisting}[language=CPlusPlus]
 void mfslDriver::scanBegin ()
 {
   yy_flex_debug = fTraceScanning;
@@ -328,7 +420,7 @@ void mfslDriver::scanEnd ()
 \subsection{Flex options}
 % -------------------------------------------------------------------------
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Flex]
 %option interactive
 %option debug
 
@@ -343,7 +435,7 @@ void mfslDriver::scanEnd ()
 \subsection{Flex regular expressions}
 % -------------------------------------------------------------------------
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Flex]
 blank                     [ \t\r]
 endOfLine                 [\n]
 character                 .
@@ -355,11 +447,12 @@ name                      {letter}(_|-|\.|{letter}|{digit})*
 integer                   {digit}+
 exponent                  [eE][+-]?{integer}
 
-singleleQuote             [']
+singleQuote             [']
 doubleQuote               ["]
 tabulator                 [\t]
 backSlash                 [\\]
 
+... ... ...
 
 %{
   // Code run each time a pattern is matched.
@@ -368,7 +461,7 @@ backSlash                 [\\]
 \end{lstlisting}
 
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Flex]
 %x                        SINGLE_QUOTED_STRING_MODE
 %x                        DOUBLE_QUOTED_STRING_MODE
 
@@ -376,7 +469,7 @@ backSlash                 [\\]
 %x                        PARENTHESIZED_COMMENT_MODE
 \end{lstlisting}
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Flex]
 /* strings */
 
 #define                   STRING_BUFFER_SIZE 1024
@@ -386,47 +479,56 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
   yy::location& loc = drv.getScannerLocation ();
   // Code run each time yylex is called.
   loc.step ();
+\end{lstlisting}
 
-%}
-
-
+\begin{lstlisting}[language=Flex]
 {blank}+   loc.step ();
 \n+        loc.lines (yyleng); loc.step ();
 \end{lstlisting}
 
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Flex]
 {integer}"."{integer}({exponent})? |
 {integer}{exponent} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << " double: " << yytext << endl;
+    gLogStream <<
+    	"--> " << drv.getScannerLocation () <<
+			" double: " << yytext <<
+			endl;
   }
   return yy::parser::make_DOUBLE (yytext, loc);
 }
 
 {integer} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << " integer: " << yytext << endl;
+    gLogStream <<
+    	"--> " << drv.getScannerLocation () <<
+			" integer: " << yytext <<
+			endl;
   }
   return yy::parser::make_INTEGER (yytext, loc);
 }
 \end{lstlisting}
 
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Flex]
 "tool" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream <<
+    	"--> " << drv.getScannerLocation () << ": " << yytext <<
+			endl;
   }
   return yy::parser::make_TOOL (loc);
 }
 \end{lstlisting}
 
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Flex]
 {name} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": name [" << yytext << "]" << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": name [" << yytext << "]" <<
+    endl;
   }
   return yy::parser::make_NAME (yytext, loc);
 }
@@ -436,7 +538,9 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 "--"{name} |
 "-"{name} {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": option [" << yytext << "]" << endl;
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": option [" << yytext << "]" <<
+    endl;
   }
   return yy::parser::make_OPTION (yytext, loc);
 }
@@ -445,14 +549,16 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 "(" {
   if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () << ": " << yytext << endl;
+    gLogStream <<
+    	"--> " << drv.getScannerLocation () << ": " << yytext <<
+			endl;
   }
   return yy::parser::make_LEFT_PARENTHESIS (loc);
 }
 \end{lstlisting}
 
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Flex]
 . {
    throw yy::parser::syntax_error (
      loc,
@@ -464,7 +570,6 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 \end{lstlisting}
 
 
-
 % -------------------------------------------------------------------------
 \section{Syntax and semantic analysis}
 % -------------------------------------------------------------------------
@@ -474,7 +579,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 \subsection{{\tt Bison} options}
 % -------------------------------------------------------------------------
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Bison]
 %skeleton "lalr1.cc" // -*- C++ -*-
 %require "3.8.1"
 %defines
@@ -512,7 +617,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 }
 \end{lstlisting}
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Bison]
 %define api.token.prefix {TOK_}
 %token
   BAR  "|"
@@ -551,7 +656,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 \subsection{{\tt Bison} regular expressions}
 % -------------------------------------------------------------------------
 
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=Bison]
 /* the MFSL non-terminals */
 /* ---------------------- */
 
@@ -585,7 +690,7 @@ EXP extern mfMusicformatsError launchMfslInterpreter (
   oahOptionsAndArguments& optionsAndArguments);
 \end{lstlisting}
 
-The definition of this function is placed in \mfsl{mfslScanner.l}:
+The definition of this function is placed in \mfsl{mfslScanner.ll}:
 \begin{lstlisting}[language=Terminal]
 mfMusicformatsError launchMfslInterpreter (
   const string&           inputSourceName,
@@ -647,13 +752,13 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl 
       MFSL (-help-mfsl, -hmfsl), 2 atoms chosen:
         fDisplayTokens                     : true, set by user
         fDisplayNonTerminals               : true, set by user
-    
+
     Options and help group (-help-oah-group, -hoah-group), 1 atom chosen:
     --------------------------
       Options and help (-help-oah, -hoah), 1 atom chosen:
         fDisplayOptionsValues              : true, set by user
-    
-  
+
+
 --> ./test.mfsl:2.1-39: tool
 --> ./test.mfsl:2.41: :
 --> ./test.mfsl:2.43-48: name [xml2ly]
@@ -726,7 +831,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl 
 --> parseResult: 0
 ==> inputFileName: test.mfsl
 ==> toolName:      xml2ly
-jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > 
+jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl >
 \end{lstlisting}
 
 

@@ -6,13 +6,9 @@ tool : xml2ly
 # the input file
 # input : '-'
 input : "HelloWorld.xml"
-# input : "-"
 
-# output file
+# output
 #   -auto-output-file-name
-
-# geometry
-    -global-staff-size 25.5
 
 # header
 
@@ -39,5 +35,7 @@ case VOICES_CHOICE :
     --keep-msr-voice Part_POne_Staff_One_Voice_Two
 
     -display-options-values
-#   ;
+
+    -global-staff-size 25.5
+  ;
 ;

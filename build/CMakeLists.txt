@@ -1,6 +1,6 @@
-#######################################
+#===============================================================
 # CMAKE musicformats
-#######################################
+#===============================================================
 
 project(musicformats)
 cmake_minimum_required(VERSION 2.4)
@@ -9,19 +9,19 @@ if(CMAKE_CONFIGURATION_TYPES)
 endif()
 
 
-#######################################
+#===============================================================
 # prevent execution in build folder
 if (EXISTS .nocmake)
 	message (FATAL_ERROR "Can't execute cmake in build folder")
 endif()
 
 
-#######################################
+#===============================================================
 # MusicXML versions management
 set (XMLVERSION 3.1)
 
 
-#######################################
+#===============================================================
 # MusicFormats versions management
 #set (VERSION 0.9.61)
 execute_process(COMMAND cat ../../MusicFormatsVersionNumber.txt OUTPUT_VARIABLE VERSION)
@@ -43,7 +43,7 @@ message (STATUS "Configuring version ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION
 get_filename_component(ROOT ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 
 
-#######################################
+#===============================================================
 option ( LIB 		      "Generates the musicxml library by default"     	on )
 option ( LILY         "Generates lilypond part"       	                on )
 option ( BRAILLE      "Generates braille part"	                        on )
@@ -100,7 +100,7 @@ if (MSDL)
 endif()
 
 
-#######################################
+#===============================================================
 get_filename_component(ROOT ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 set (DOCDIR ${ROOT}/documentation)
 set (DOC    ${DOCDIR}/presentation/libmusicxml2.pdf ${DOCDIR}/IntroductionToMusicXML/IntroductionToMusicXML.pdf ${DOCDIR}/MusicFormatsCLIUserGuide/MusicFormatsCLIUserGuide.pdf ${DOCDIR}/MusicFormatsAPIUserGuide/MusicFormatsAPIUserGuide.pdf ${DOCDIR}/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf)
@@ -110,7 +110,7 @@ set (BINDIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 set (LIBDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 
-#######################################
+#===============================================================
 set (CMAKE_CXX_STANDARD 17) # for <filesystem>
 
 if(UNIX)
@@ -122,9 +122,9 @@ if(UNIX)
 endif()
 
 
-#########################################
+###===============================================================
 # mac os specific part
-#########################################
+###===============================================================
 if(APPLE)
 	if ( IOS )
 		message (STATUS "Generates project for iOS - Use -DIOS=no to change.")
@@ -148,9 +148,9 @@ if(APPLE)
   endif()
 
 
-#########################################
+#===============================================================
 # windows specific part
-#########################################
+#===============================================================
 elseif(WIN32)
   add_definitions(-DWINVER=0x0400 -DWIN32)
   if(MSVC)
@@ -159,7 +159,7 @@ elseif(WIN32)
 endif()
 
 
-#######################################
+#===============================================================
 # set directories, src and headers.
 set (MF_SRC_DIR ${ROOT}/src)
 set (LXML_SRC_DIR ${ROOT}/libmusicxml/src)
@@ -211,26 +211,26 @@ message (STATUS "SRC_FOLDERS: ${SRC_FOLDERS}")
 message (STATUS "LXML_FOLDERS: ${LXML_FOLDERS}")
 
 foreach(folder ${LXML_FOLDERS})
-  set(SRC ${SRC} "${LXML_SRC_DIR}/${folder}/*.cpp")          # add source files
-endforeach()
-
-foreach(folder ${SRC_FOLDERS})
-  set(SRC ${SRC} "${MF_SRC_DIR}/${folder}/*.cpp")          # add source files
+  set(SRC ${SRC} "${LXML_SRC_DIR}/${folder}/*.cpp")        # add source files
 endforeach()
 
 foreach(folder ${LXML_FOLDERS})
-  set(HEADERS ${HEADERS} "${LXML_SRC_DIR}/${folder}/*.h")    # add header files
+  set(HEADERS ${HEADERS} "${LXML_SRC_DIR}/${folder}/*.h")  # add header files
 endforeach()
 
 foreach(folder ${SRC_FOLDERS})
   set(HEADERS ${HEADERS} "${MF_SRC_DIR}/${folder}/*.h")    # add header files
 endforeach()
 
+foreach(folder ${SRC_FOLDERS})
+  set(SRC ${SRC} "${MF_SRC_DIR}/${folder}/*.cpp")          # add source files
+endforeach()
+
 file (GLOB CORESRC RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${SRC})
 file (GLOB COREH   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ${HEADERS})
 
 foreach(folder ${LXML_FOLDERS})
-  set(INCL ${INCL} "${LXML_SRC_DIR}/${folder}")              # add include folders
+  set(INCL ${INCL} "${LXML_SRC_DIR}/${folder}")            # add include folders
 endforeach(folder)
 
 foreach(folder ${SRC_FOLDERS})
@@ -238,7 +238,7 @@ foreach(folder ${SRC_FOLDERS})
 endforeach(folder)
 
 
-#######################################
+#===============================================================
 # set includes
 include_directories( ${INCL})
 set_source_files_properties (${COREH} PROPERTIES HEADER_FILE_ONLY TRUE)
@@ -246,7 +246,7 @@ set_source_files_properties (${COREH} PROPERTIES HEADER_FILE_ONLY TRUE)
 message (STATUS "INCL: ${INCL}")
 
 
-#######################################
+#===============================================================
 if(WIN32 OR MSYS)
   enable_language(RC)
   set(LIBCONTENT ${CORESRC} ${COREH} ${ROOT}/win32/musicformats/musicformats.rc)
@@ -299,7 +299,7 @@ set_target_properties (${target} PROPERTIES
 )
 endif()
 
-#######################################
+#===============================================================
 # set sample targets
 set (LXML_CLI_SAMPLES xmlversion RandomMusic RandomChords xmlfactory partsummary xml2guido xmliter countnotes readunrolled xml2midi xmlread xmltranspose xmlclone)
 
@@ -364,7 +364,7 @@ if(NOT IOS )
 endif()
 
 
-#######################################
+#===============================================================
 # install setup
 if (PACK)
 	set (CMAKE_INSTALL_PREFIX .)
@@ -406,7 +406,7 @@ install ( TARGETS ${LXML_TOOLS}
 )
 
 
-####################################
+#===============================================================
 # install misc files
 install (
     DIRECTORY ${SCHEMA} DESTINATION ${DOCDIR}/schema
@@ -432,7 +432,7 @@ install (
 )
 
 
-####################################
+#===============================================================
 # install VS redistributables
 if (WIN32)
 if (${CMAKE_GENERATOR} STREQUAL "Visual Studio 14 2015 Win64")
@@ -449,9 +449,9 @@ install (
 endif()
 
 
-####################################
+#===============================================================
 # cpack section
-####################################
+#===============================================================
 set (CPACKDEST libMusicFormats-${VERSION})
 set (CPACK_PACKAGE_NAME   "libMusicFormats")
 set (CPACK_PACKAGE_VENDOR "Jacques Menu")
@@ -466,7 +466,7 @@ set (CPACK_RESOURCE_FILE_LICENSE  ${ROOT}/LICENSE)
 set (CPACK_PACKAGE_INSTALL_DIRECTORY  ${CPACKDEST})
 
 
-####################################
+#===============================================================
 # NSIS specific section
 set (CPACK_NSIS_INSTALL_ROOT "C:\\\\Program Files")
 set (CPACK_NSIS_MODIFY_PATH on)

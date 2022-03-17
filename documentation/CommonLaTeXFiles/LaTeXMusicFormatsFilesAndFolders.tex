@@ -1,0 +1,390 @@
+% -------------------------------------------------------------------------
+% files commands
+% -------------------------------------------------------------------------
+
+% on GitHub
+
+\newcommand{\gitmxmlfile}[1]{%
+\href{https://github.com/jacques-menu/musicformats/tree/master/files/musicxml/#1}{{\tt #1}}%
+}
+
+\newcommand{\gitdistrib}[1]{%
+\href{https://github.com/jacques-menu/musicformats/tree/master/distrib/#1}{{\tt #1}}%
+}
+
+\newcommand{\gitdocpdf}[2]{%
+\href{https://github.com/jacques-menu/musicformats/tree/dev/documentation/#1/#2}{{\tt #2}}%
+}
+%%%JMI https://github.com/jacques-menu/musicformats/blob/dev/documentation/MusicFormatsAPIGuide/MusicFormatsAPIGuide.pdf
+
+\newcommand{\gitschemafile}[1]{%
+\href{https://github.com/jacques-menu/musicformats/tree/master/schemas/MusicXML/dtds/3.1/#1}{{\tt #1}}%
+}
+
+\newcommand{\gitsubdir}[1]{%
+\href{https://github.com/jacques-menu/musicformats/tree/master/#1}{{\tt #1}}%
+}
+
+\newcommand{\gitcppsamplefile}[1]{%
+\href{https://github.com/jacques-menu/musicformats/tree/master/samples/#1}{{\tt #1}}%
+}
+
+\newcommand{\passfile}[1]{%
+\href{https://github.com/jacques-menu/musicformats/tree/dev/src/passes/#1}{{\tt passes/#1}}%
+}
+
+% libmusicxml2 access path
+
+\newcommand{\elements}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/elements!#1}}%
+}
+\newcommand{\elementsBoth}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/elements!#1.h/.cpp}}%
+}
+
+\newcommand{\templates}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/elements/templates!#1}}%
+}
+\newcommand{\templatesBoth}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/elements/templates!#1.h/.cpp}}%
+}
+
+\newcommand{\factory}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/factory!#1}}%
+}
+\newcommand{\factoryBoth}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/factory!#1.h/.cpp}}%
+}
+
+\newcommand{\libFiles}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/files/#1}}\index[Main]{#1}\index[Files]{libmusicxml/src/files!#1}%
+}
+\newcommand{\libFilesBoth}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/files/#1.h/.cpp}}\index[Main]{#1.h/.cpp}\index[Files]{libmusicxml/src/files!#1.h/.cpp}%
+}
+
+\newcommand{\visitors}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/visitors!#1}}%
+}
+\newcommand{\visitorsBoth}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/visitors!#1.h/.cpp}}%
+}
+
+\newcommand{\lib}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/lib!#1}}%
+}
+\newcommand{\libBoth}[1]{%
+{\textcolor{brown}{\tt libmusicxml/src/lib!#1.h/.cpp}}%
+}
+
+\newcommand{\libmusicxmlsamples}[1]{%
+{\textcolor{brown}{\tt libmusicxml/samples/#1}}\index[Main]{#1}\index[Files]{libmusicxml/samples!#1}%
+}
+
+% MusicFormats folders
+
+\newcommand{\doc}[1]{%
+{\textcolor{brown}{\tt documentation/#1}}\index[Files]{documentation!#1}%
+}
+
+\newcommand{\common}[1]{%
+{\textcolor{brown}{\tt documentation/common/#1}}\index[Files]{documentation/common!#1}%
+}
+
+\newcommand{\src}[1]{%
+{\textcolor{brown}{\tt src/#1}}\index[Files]{src!#1}%
+}
+
+\newcommand{\build}[1]{%
+{\textcolor{brown}{\tt build/#1}}\index[Files]{build!#1}%
+}
+
+\newcommand{\scripts}[1]{%
+{\textcolor{brown}{\tt scripts/#1}}\index[Files]{scripts!#1}%
+}
+
+\newcommand{\distrib}[1]{%
+{\textcolor{brown}{\tt distrib/#1}}\index[Files]{distrib!#1}%
+}
+
+\newcommand{\mfFiles}[1]{%
+{\textcolor{brown}{\tt files/#1}}\index[Main]{#1}\index[Files]{files!#1}%
+}
+\newcommand{\mfFilesBoth}[1]{%
+{\textcolor{brown}{\tt files/#1.h/.cpp}}\index[Main]{#1.h/.cpp}\index[Files]{files!#1.h/.cpp}%
+}
+
+
+\newcommand{\mfc}[1]{%
+{\textcolor{brown}{\tt src/components/#1}}\index[Main]{#1}\index[Files]{src/components!#1}%
+}
+\newcommand{\mfcBoth}[1]{%
+{\textcolor{brown}{\tt src/utilities/#1.h/.cpp}}\index[Main]{#1.h/.cpp}\index[Files]{src/utilities!#1.h/.cpp}%
+}
+
+\newcommand{\mfutilities}[1]{%
+{\textcolor{brown}{\tt src/mfutilities/#1}}\index[Main]{#1}\index[Files]{src/mfutilities!#1}%
+}
+\newcommand{\mfutilitiesBoth}[1]{%
+{\textcolor{brown}{\tt src/utilities/#1.h/.cpp}}\index[Main]{#1.h/.cpp}\index[Files]{src/utilities!#1.h/.cpp}%
+}
+
+% MusicFormats wae access paths
+
+\newcommand{\wae}[1]{%
+{\textcolor{brown}{\tt src/wae/#1}}\index[Main]{#1}\index[Files]{src/wae!#1}%
+}
+\newcommand{\waeBoth}[1]{%
+{\textcolor{brown}{\tt src/wae/#1.h/.cpp}}\index[Files]{src/wae!#1.h/.cpp}%
+}
+
+% MusicFormats oah access paths
+
+\newcommand{\oah}[1]{%
+{\textcolor{brown}{\tt src/oah/#1}}\index[Main]{#1}\index[Files]{src/oah!#1}%
+}
+\newcommand{\oahBoth}[1]{%
+{\textcolor{brown}{\tt src/oah/#1.h/.cpp}}\index[Files]{src/oah!#1.h/.cpp}%
+}
+
+% MusicFormats CLI samples access paths
+
+\newcommand{\clisamples}[1]{%
+{\textcolor{brown}{\tt src/clisamples/#1}}\index[Main]{#1}\index[Files]{src/clisamples!#1}\index[Files]{clisamples!#1}%
+}
+
+% MusicFormats formats access paths
+
+\newcommand{\mflibrary}[1]{%
+{\textcolor{brown}{\tt src/mflibrary#1}}\index[Main]{#1}\index[Files]{src/mflibrary!#1}%
+}
+\newcommand{\mflibraryBoth}[1]{%
+{\textcolor{brown}{\tt src/mflibrary/#1.h/.cpp}}\index[Files]{src/mflibrary!#1.h/.cpp}%
+}
+
+\newcommand{\mxsr}[1]{%
+{\textcolor{brown}{\tt src/formats/mxsr/#1}}\index[Main]{#1}\index[Files]{src/formats/mxsr!#1}%
+}
+\newcommand{\mxsrBoth}[1]{%
+{\textcolor{brown}{\tt src/formats/mxsr/#1.h/.cpp}}\index[Files]{src/formats/mxsr!#1.h/.cpp}%
+}
+
+\newcommand{\msr}[1]{%
+{\textcolor{brown}{\tt src/formats/msr/#1}}\index[Main]{#1}\index[Files]{src/formats/msr!#1}%
+}
+\newcommand{\msrBoth}[1]{%
+{\textcolor{brown}{\tt src/formats/msr/#1.h/.cpp}}\index[Files]{src/formats/msr!#1.h/.cpp}%
+}
+
+\newcommand{\bsr}[1]{%
+{\textcolor{brown}{\tt src/formats/bsr/#1}}\index[Main]{#1}\index[Files]{src/formats/bsr!#1}%
+}
+\newcommand{\bsrBoth}[1]{%
+{\textcolor{brown}{\tt src/formats/bsr/#1.h/.cpp}}\index[Main]{#1}\index[Files]{src/formats/bsr!#1.h/.cpp}%
+}
+
+\newcommand{\lpsr}[1]{%
+{\textcolor{brown}{\tt src/formats/lpsr//#1}}\index[Main]{#1}\index[Files]{src/formats/lpsr!#1}%
+}
+\newcommand{\lpsrBoth}[1]{%
+{\textcolor{brown}{\tt src/formats/lpsr//#1.h/.cpp}}\index[Files]{src/formats/lpsr!#1.h/.cpp}%
+}
+
+\newcommand{\msdl}[1]{%
+{\textcolor{brown}{\tt src/formats/msdl/#1}}\index[Main]{#1}\index[Files]{src/formats/msdl!#1}%
+}
+\newcommand{\msdlBoth}[1]{%
+{\textcolor{brown}{\tt src/formats/msdl/#1.h/.cpp}}\index[Files]{src/formats/msdl!#1.h/.cpp}%
+}
+
+% MusicFormats passes access paths
+
+\newcommand{\msdlToMsr}[1]{%
+{\textcolor{brown}{\tt src/passes/msdl2msr/#1}}%
+}
+\newcommand{\msdlToMsrBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/msdl2msr/#1.h/.cpp}}%
+}
+
+\newcommand{\bsrToBraille}[1]{%
+{\textcolor{brown}{\tt src/passes/bsr2braille/#1}}%
+}
+\newcommand{\bsrToBrailleBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/bsr2braille/#1.h/.cpp}}%
+}
+
+\newcommand{\mxsrToMsr}[1]{%
+{\textcolor{brown}{\tt src/passes/mxsr2msr/#1}}%
+}
+\newcommand{\mxsrToMsrBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/mxsr2msr/#1.h/.cpp}}%
+}
+
+\newcommand{\msrToMsr}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2msr/#1}}%
+}
+\newcommand{\msrToMsrBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2msr/#1.h/.cpp}}%
+}
+
+\newcommand{\msrToLpsr}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2lpsr/#1}}%
+}
+\newcommand{\msrToLpsrBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2lpsr/#1.h/.cpp}}%
+}
+
+\newcommand{\lpsrToLilypond}[1]{%
+{\textcolor{brown}{\tt src/passes/lpsr2lilypond/#1}}%
+}
+\newcommand{\lpsrToLilypondBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/lpsr2lilypond/#1.h/.cpp}}%
+}
+
+\newcommand{\msrToBsr}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2bsr/#1}}%
+}
+\newcommand{\msrToBsrBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2bsr/#1.h/.cpp}}%
+}
+
+\newcommand{\msrToMxsr}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2mxsr/#1}}%
+}
+\newcommand{\msrToMxsrBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/msr2mxsr/#1.h/.cpp}}%
+}
+
+\newcommand{\mxsrToMusicxml}[1]{%
+{\textcolor{brown}{\tt src/passes/mxsr2musicxml/#1}}%
+}
+\newcommand{\mxsrToMusicxmlBoth}[1]{%
+{\textcolor{brown}{\tt src/passes/mxsr2musicxml/#1.h/.cpp}}%
+}
+
+% MusicFormats formats generation access paths
+
+\newcommand{\lilypondGeneration}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/lilypondGeneration/#1}}%
+}
+\newcommand{\lilypondGenerationBoth}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/lilypondGeneration/#1.h/.cpp}}%
+}
+
+\newcommand{\brailleGeneration}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/brailleGeneration/#1}}%
+}
+\newcommand{\brailleGenerationBoth}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/brailleGeneration/#1.h/.cpp}}%
+}
+
+\newcommand{\mxsrGeneration}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/mxsrGeneration/#1}}%
+}
+\newcommand{\mxsrGenerationBoth}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/mxsrGeneration/#1.h/.cpp}}%
+}
+
+\newcommand{\guidoGeneration}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/guidoGeneration/#1}}%
+}
+\newcommand{\guidoGenerationBoth}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/guidoGeneration/#1.h/.cpp}}%
+}
+
+\newcommand{\multiGeneration}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/multiGeneration/#1}}%
+}
+\newcommand{\multiGenerationBoth}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/multiGeneration/#1.h/.cpp}}%
+}
+
+% MusicFormats converters access paths
+
+\newcommand{\converters}[1]{%
+{\textcolor{brown}{\tt src/converters/#1}}%
+}
+\newcommand{\convertersBoth}[1]{%
+{\textcolor{brown}{\tt src/converters/#1.h/.cpp}}%
+}
+
+\newcommand{\musicxmlToLilypond}[1]{%
+{\textcolor{brown}{\tt src/converters/musicxml2lilypond/#1}}%
+}
+\newcommand{\musicxmlToLilypondBoth}[1]{%
+{\textcolor{brown}{\tt src/converters/musicxml2lilypond/#1.h/.cpp}}%
+}
+
+\newcommand{\musicxmlToBraille}[1]{%
+{\textcolor{brown}{\tt src/converters/musicxml2braille/#1}}%
+}
+\newcommand{\musicxmlToBrailleBoth}[1]{%
+{\textcolor{brown}{\tt src/converters/musicxml2braille/#1.h/.cpp}}%
+}
+
+\newcommand{\musicxmlToMusicxml}[1]{%
+{\textcolor{brown}{\tt src/converters/musicxml2musicxml/#1}}%
+}
+\newcommand{\musicxmlToMusicxmlBoth}[1]{%
+{\textcolor{brown}{\tt src/converters/musicxml2musicxml/#1.h/.cpp}}%
+}
+
+\newcommand{\musicxmlToGuido}[1]{%
+{\textcolor{brown}{\tt src/converters/musicxml2guido/#1}}%
+}
+\newcommand{\musicxmlToGuidoBoth}[1]{%
+{\textcolor{brown}{\tt src/converters/musicxml2guido/#1.h/.cpp}}%
+}
+
+\newcommand{\msdlToLilypond}[1]{%
+{\textcolor{brown}{\tt src/converters/msdl2lilypond/#1}}%
+}
+\newcommand{\msdlToLilypondBoth}[1]{%
+{\textcolor{brown}{\tt src/converters/msdl2lilypond/#1.h/.cpp}}%
+}
+
+
+% MusicFormats generators access paths
+
+\newcommand{\generators}[1]{%
+{\textcolor{brown}{\tt src/generators/#1}}%
+}
+\newcommand{\generatorsBoth}[1]{%
+{\textcolor{brown}{\tt src/generators/#1.h/.cpp}}%
+}
+
+\newcommand{\xmlToXmlTool}[1]{%
+{\textcolor{brown}{\tt src/clisamples/xml2xml/#1}}%
+}
+\newcommand{\xmlToXmlToolBoth}[1]{%
+{\textcolor{brown}{\tt src/clisamples/xml2xml/#1.h/.cpp}}%
+}
+
+
+% MusicFormats interpreters access paths
+
+\newcommand{\interpreters}[1]{%
+{\textcolor{brown}{\tt src/interpreters/#1}}%
+}
+\newcommand{\interpretersBoth}[1]{%
+{\textcolor{brown}{\tt src/interpreters/#1.h/.cpp}}%
+}
+
+\newcommand{\mfsl}[1]{%
+{\textcolor{brown}{\tt src/interpreters/mfsl/#1}}\index[Main]{#1}\index[Files]{src/interpreters/mfsl!#1}%
+}
+\newcommand{\mfslBoth}[1]{%
+{\textcolor{brown}{\tt src/interpreters/mfsl/#1.h/.cpp}}\index[Files]{src/interpreters/mfsl!#1.h/.cpp}%
+}
+
+
+% MusicFormats manpage sgeneration access paths JMI???
+
+\newcommand{\formatsgeneration}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/#1}}%
+}
+\newcommand{\formatsgenerationBoth}[1]{%
+{\textcolor{brown}{\tt src/formatsgeneration/#1.h/.cpp}}%
+}
+
+

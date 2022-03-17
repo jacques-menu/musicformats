@@ -1,0 +1,38 @@
+% -------------------------------------------------------------------------
+% indexing (BEFORE hyperref)
+% -------------------------------------------------------------------------
+
+\usepackage[]{imakeidx}
+%\usepackage[splitindex]{imakeidx}
+	% https://mirror.foobar.to/CTAN/macros/latex/contrib/imakeidx/imakeidx.pdf
+	% https://www.tuteurs.ens.fr/logiciels/latex/makeindex.html
+	% https://en.wikibooks.org/wiki/LaTeX/Indexing
+
+% this necessary to have the subitems and subsubitems idented the same way
+\usepackage[indentunit=0.75em, hangindent=1.5em, subindent=1.5em, subsubindent=1.5em]{idxlayout}
+	% https://mirror.foobar.to/CTAN/macros/latex/contrib/idxlayout/idxlayout.pdf
+
+\newcommand{\Main}[1]{%
+#1\index[Main]{#1}%
+}
+\newcommand{\MainIt}[1]{%
+{\it #1}\index[Main]{#1}%
+}
+
+\newcommand{\MainName}[1]{%
+\index[Main]{#1}%
+}
+
+\newcommand{\code}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}%
+}
+
+%%%JMI\usepackage{cleveref}
+
+%\usepackage{multido}%%%JMI
+%
+%\usepackage{multicol}
+%
+%\usepackage{chngpage}%for ``adjustwidth'' environment
+
+

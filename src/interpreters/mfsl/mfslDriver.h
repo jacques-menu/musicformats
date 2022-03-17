@@ -13,21 +13,21 @@
 #define ___mfslDriver___
 
 #include <string>
-#include <map>
+#include <stack> // JMI
 
-//#include "mfBool.h"
+#include "mfBool.h"
+#include "mfMusicformatsError.h" // for mfMusicformatsError
+
+#include "mfslBasicTypes.h"
+
+#include "location.hh"
 
 #include "mfslParser.h"
 
 using namespace std;
 
+using namespace MusicFormats;
 
-//______________________________________________________________________________
-// Give Flex the prototype of yylex we want ...
-# define YY_DECL \
-  yy::parser::symbol_type yylex (mfslDriver& drv)
-// ... and declare it for the parser's sake.
-YY_DECL;
 
 //______________________________________________________________________________
 // Conducting the whole scanning and parsing of MFSL
@@ -39,10 +39,11 @@ class mfslDriver
     // ------------------------------------------------------
 
                           mfslDriver (
-                              bool traceScanning,
-                              bool tTraceParsing,
-                              bool displayTokens,
-                              bool displayNonTerminals);
+                            bool traceScanning,
+                            bool tTraceParsing,
+                            bool displayTokens,
+                            bool displayNonTerminals,
+                            bool traceSemantics);
 
     virtual               ~mfslDriver ();
 
@@ -51,8 +52,13 @@ class mfslDriver
     // set and get
     // ------------------------------------------------------
 
-    void  			          setInputFileName (string value)
-                              { fInputFileName = value; }
+    // internal
+    void  			          setToolName (string value);
+
+    string			          getToolName ()
+                              { return fToolName; }
+
+    void  			          setInputFileName (string value);
 
     string			          getInputFileName ()
                               { return fInputFileName; }
@@ -66,11 +72,38 @@ class mfslDriver
     bool				          getDisplayNonTerminals ()
                               { return fDisplayNonTerminals; }
 
-    void  			          setToolName (string value)
-                              { fToolName = value; }
+    bool				          getTraceSemantics ()
+                              { return fTraceSemantics; }
 
-    string			          getToolName ()
-                              { return fToolName; }
+    S_mfslVariablesTable  getVariablesTable () const
+                              { return fVariablesTable; }
+
+//     void  			          setOptionsNamesAndValues (
+//                             S_oahOptionsNamesAndValuesVector
+//                               optionsNamesAndValuesVector)
+//                               {
+//                                 fOptionsNamesAndValues =
+//                                   optionsNamesAndValuesVector;
+//                               }
+
+//     S_oahOptionsNamesAndValuesVector
+//                           getOptionsNamesAndValues () const
+//                               { return fOptionsNamesAndValues; }
+//
+// //     // scopes
+// //     const list<S_mfslScope>&
+// //                           getScopesStack () const // JMI ???
+// //                               { return fScopesStack; }
+//
+//     // options and values
+//     const list<S_oahOptionsNamesAndValuesVector>&
+//                           getOptionsNamesAndValuesStack () const
+//                               { return fOptionsNamesAndValuesStack; }
+//
+//     // case statements
+//     const list<S_mfslCaseStatement>&
+//                           getCaseStatementsStack () const
+//                               { return fCaseStatementsStack; }
 
   public:
 
@@ -87,12 +120,46 @@ class mfslDriver
     void                  scanBegin ();
     void                  scanEnd ();
 
-  protected:
+    // scopes
+    void                  pushScopeOntoStack (
+                              S_mfslScope scope);
 
-    // public fields
+    S_mfslScope
+                          topOfScopesStack () const
+                              { return fScopesStack.front (); }
+
+    void                  popScopeFromStack ()
+                              { fScopesStack.pop_front (); }
+
+    // options
+    void                  registerOptionNamesAndValuesInCurrentScope (
+                            S_oahOptionNameAndValue
+                              optionNameAndValue);
+
+    // case statements
+    void                  pushCaseStatementOntoStack (
+                            S_mfslCaseStatement
+                              caseStatement);
+
+    S_mfslCaseStatement
+                          topOfCaseStatementStack () const
+                              { return fCaseStatementsStack.front (); }
+
+    void                  popCaseStatementFromStack ()
+                              { fCaseStatementsStack.pop_front (); }
+
+   // launching the MFSL tool
+    mfMusicformatsError   launchMfslTool ();
+
+  private:
+
+    // private fields
     // ------------------------------------------------------
 
-    // The name of the file being parsed.
+    // the name of the MusicFormsts tool
+		string                fToolName;
+
+    // the name of the file being parsed
     string                fInputFileName;
 
     // scanning
@@ -106,13 +173,33 @@ class mfslDriver
     bool                  fDisplayTokens;
     bool                  fDisplayNonTerminals;
 
+    bool                  fTraceSemantics;
+
     // variables handling
-    map<string, int>      fScannerVariables;
+    S_mfslVariablesTable  fVariablesTable;
 
-		string                fToolName;
+//     // ??? JMI
+//     S_oahOptionsNamesAndValuesVector
+//                           fOptionsNamesAndValues;
 
-    int                   fDriverResult;
+    // scopes
+    list<S_mfslScope>     fScopesStack;
+
+//     // options and values
+//     list<S_oahOptionsNamesAndValuesVector>
+//                           fOptionsNamesAndValuesStack;
+
+    // case statements
+    list<S_mfslCaseStatement>
+                          fCaseStatementsStack;
 };
+
+//______________________________________________________________________________
+// Give Flex the prototype of yylex we want ...
+# define YY_DECL \
+  yy::parser::symbol_type yylex (mfslDriver& drv)
+// ... and declare it for the parser's sake
+YY_DECL;
 
 
 #endif

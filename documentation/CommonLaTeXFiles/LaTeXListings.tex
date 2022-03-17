@@ -1,0 +1,476 @@
+
+% -------------------------------------------------------------------------
+% listings
+% -------------------------------------------------------------------------
+
+\usepackage{listings}
+%\usepackage{textcomp} % to handle single quotes properly
+
+\definecolor{codered}{rgb}{0.9,0,0}
+\definecolor{codegreen}{rgb}{0,0.4,0}
+\definecolor{codeblue}{rgb}{0,0,0.9}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.88,0,0.62}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+%\definecolor{backcolour}{rgb}{0.97,0.97,0.94}
+
+\lstdefinestyle{mystyle}{
+	frame=shadowbox, framesep=3pt, rulesep=2pt, rulesepcolor=\color{orange},
+  %backgroundcolor=\color{backcolour},
+  commentstyle=\color{codered},
+  keywordstyle=\color{codeblue},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=t,      % top
+  keepspaces=true,
+	%
+  %numbers=left,
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  numbers=left,
+  numbersep=5pt,
+  %
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  %
+  extendedchars=true,
+  literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
+  {©}{{\textcopyright}}1
+  {®}{{\textregistered}}1
+  {™}{{\texttrademark}}1
+}
+
+\lstset{style=mystyle}
+
+\lstloadlanguages{[11]C++}
+
+% LaTeX
+
+% LaTeX definition; inspired from lstdrvrs.dtx
+\lstdefinelanguage{Latex}%
+  {%
+  morekeywords={%
+  	\document,%
+  	\usepackage,%
+  	\command,\newcommand,%
+		\lstset,\lstdefinelanguage,%
+	},%
+  sensitive,%
+  morestring=[b]",%
+  morestring=[m]', % changed from `b' to `m'
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{Latex}{
+language=Latex,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{Latex}{
+\lstset{style=Latex}}{}
+
+
+% Terminal
+
+% Terminal definition; copied from lstdrvrs.dtx
+\lstdefinelanguage{Terminal}%
+{%
+	morekeywords={%
+		% sh
+	  awk,break,case,cat,cd,continue,do,done,echo,elif,else,%
+    env,esac,eval,exec,exit,export,expr,false,fi,for,function,getopts,%
+    hash,history,if,in,kill,login,newgrp,nice,nohup,ps,pwd,read,%
+    readonly,return,set,sed,shift,test,then,times,trap,true,type,%
+    ulimit,umask,unset,until,wait,while,%
+    % bash
+		alias,bg,bind,builtin,caller,command,compgen,compopt,%
+    complete,coproc,declare,disown,dirs,enable,fc,fg,help,history,%
+    jobs,let,local,logout,mapfile,printf,pushd,popd,readarray,select,%
+    set,suspend,shopt,source,times,type,typeset,ulimit,unalias,wait,%
+    % our own
+		cd,ls,ll,cat,more,%
+		make,%
+		RandomChords,RandomMusic,countnotes,%
+		xml2guido,%
+		xml2gmn,xml2ly,xml2brl,xml2xml,msdlcompiler%
+		Mikrokosmos3Wandering,LilyPondIssue34,%
+		%
+		sudo,%
+	},%
+  % sensitive,%
+  morecomment=[l]\#,%
+  morestring=[d]",%
+  morestring=[d]’%
+}[keywords,comments,strings]%
+
+\lstdefinestyle{Terminal}{
+language=Terminal,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{Terminal}{
+\lstset{style=Terminal}}{}
+
+
+% TerminalSmall definition; copied from lstdrvrs.dtx
+\lstdefinelanguage{TerminalSmall}%
+{%
+	morekeywords={%
+		% sh
+	  awk,break,case,cat,cd,continue,do,done,echo,elif,else,%
+    env,esac,eval,exec,exit,export,expr,false,fi,for,function,getopts,%
+    hash,history,if,in,kill,login,newgrp,nice,nohup,ps,pwd,read,%
+    readonly,return,set,sed,shift,test,then,times,trap,true,type,%
+    ulimit,umask,unset,until,wait,while,%
+    % bash
+		alias,bg,bind,builtin,caller,command,compgen,compopt,%
+    complete,coproc,declare,disown,dirs,enable,fc,fg,help,history,%
+    jobs,let,local,logout,mapfile,printf,pushd,popd,readarray,select,%
+    set,suspend,shopt,source,times,type,typeset,ulimit,unalias,wait,%
+    % our own
+		cd,ls,ll,cat,more,%
+		make,%
+		RandomChords,RandomMusic,countnotes,%
+		xml2guido,%
+		xml2gmn,xml2ly,xml2brl,xml2xml,msdlcompiler%
+		Mikrokosmos3Wandering,LilyPondIssue34,%
+		%
+		sudo,%
+	},%
+  % sensitive,%
+  morecomment=[l]\#,%
+  morestring=[d]",%
+  morestring=[d]’%
+}[keywords,comments,strings]%
+
+\lstdefinestyle{TerminalSmall}{
+language=TerminalSmall,
+basicstyle=\scriptsize\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{TerminalSmall}{
+\lstset{style=TerminalSmall}}{}
+
+
+% CPlusPlus
+
+% modified C++ definition; copied from lstdrvrs.dtx
+\lstdefinelanguage{CPlusPlus}[]{C++}%
+{%
+  morestring=[b]",%
+  morestring=[m]',% changed from `b' to `m'
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{CPlusPlus}{
+language=CPlusPlus,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{CPlusPlus}{
+\lstset{style=CPlusPlus}}{}
+
+ %\lstset{language=CPlusPlus, basicstyle=\tiny, emph={countnotes}, emphstyle=\color{red}}
+
+
+% modified XML definition; copied from lstdrvrs.dtx
+\lstdefinelanguage{MusicXML}%
+{%
+ 	keywords={%
+		% XML
+		score,partwise,%
+    identification,attributes,%
+    work,identification,%
+    part,measure%
+    %
+		,CDATA,DOCTYPE,ATTLIST,termdef,ELEMENT,EMPTY,ANY,ID,%
+	  IDREF,IDREFS,ENTITY,ENTITIES,NMTOKEN,NMTOKENS,NOTATION,%
+    INCLUDE,IGNORE,SYSTEM,PUBLIC,NDATA,PUBLIC,%
+    PCDATA,REQUIRED,IMPLIED,FIXED,%%% preceded by #
+    xml,xml:space,xml:lang,version,standalone,default,preserve,%
+    %
+    % our own
+		xml2gmn,xml2ly,xml2brl,xml2xml,msdlcompiler%
+   },%
+ alsoother=$,%
+ alsoletter=:,%
+ tag=**[s]<>,%
+ morestring=[d]",% ??? doubled
+ morestring=[d]’,% ??? doubled
+ MoreSelectCharTable=%
+    \lst@CArgX--\relax\lst@DefDelimB{}{}%
+        {\ifnum\lst@mode=\lst@tagmode\else
+             \expandafter\@gobblethree
+         \fi}%
+        \lst@BeginComment\lst@commentmode{{\lst@commentstyle}}%
+    \lst@CArgX--\relax\lst@DefDelimE{}{}{}%
+        \lst@EndComment\lst@commentmode
+    \lst@CArgX[CDATA[\relax\lst@CDef{}%
+        {\ifnum\lst@mode=\lst@tagmode
+             \expandafter\lst@BeginCDATA
+         \else \expandafter\lst@CArgEmpty
+         \fi}%
+        \@empty
+    \lst@CArgX]]\relax\lst@CDef{}%
+        {\ifnum\lst@mode=\lst@GPmode
+             \expandafter\lst@EndComment
+         \else \expandafter\lst@CArgEmpty
+         \fi}%
+        \@empty
+}[keywords,comments,strings,html]%
+
+\lstdefinestyle{MusicXML}{
+language=MusicXML,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{MusicXML}{
+\lstset{style=MusicXML}}{}
+
+
+% LilyPond
+
+% LilyPond definition; inspired from lstdrvrs.dtx
+\lstdefinelanguage{Lilypond}%
+  {%
+  morekeywords={%
+  	\version,%
+  	\header,\paper,\score,\book,\layout,\midi,%
+		\new,\context,\with,%
+		\absolute,\relative,\fixed,%
+		\language,\clef,\key,\time,%
+	},%
+  sensitive,%
+  morestring=[b]",%
+  morestring=[m]', % changed from `b' to `m'
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{Lilypond}{
+language=Lilypond,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{Lilypond}{
+\lstset{style=Lilypond}}{}
+
+
+% Guido
+
+% Guido definition; inspired from lstdrvrs.dtx
+\lstdefinelanguage{Guido}%
+  {%
+  morekeywords={%
+  	\staff,%
+		\barFormat,\bar,%
+  	\beamsOff,%
+		\new,\context,\with,%
+		\absolute,\relative,\fixed,%
+		\language,\clef,\key,\time,%
+	},%
+  sensitive,%
+  morestring=[b]",%
+  morestring=[m]', % changed from `b' to `m'
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{Guido}{
+language=Guido,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{Guido}{
+\lstset{style=Guido}}{}
+
+
+% MSDL
+
+% MSDL definition; inspired from lstdrvrs.dtx
+\lstdefinelanguage{MSDL}%
+  {%
+  morekeywords={%
+  	title,titre,%
+		composer,compositeur,%
+		opus,%
+		%
+  	pitches,hauteurs,%
+		octaves,%
+		%
+		anacrusis,anacrouse,%
+		%
+		book,livre,%
+		score,partitions,%
+		partGroup,groupeDeParties,%
+		part,partie,%
+  	music,musique,%
+		fragment,%
+		%
+		clef,clé,%
+		key,armure,%
+		time,métrique,%
+	},%
+  sensitive,%
+  morestring=[b]",%
+  morestring=[m]', % changed from `b' to `m'
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{MSDL}{
+language=MSDL,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{MSDL}{
+\lstset{style=MSDL}}{}
+
+
+% MFSL
+
+% MFSL definition; inspired from lstdrvrs.dtx
+\lstdefinelanguage{MFSL}%
+  {%
+  morekeywords={%
+  	tool,input,%
+		%
+		book,%
+		score,%,
+		%
+		choice,set,case,%
+	},%
+  sensitive,%
+  morestring=[b]",%
+  morestring=[m]', % changed from `b' to `m'
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{MFSL}{
+language=MFSL,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{MFSL}{
+\lstset{style=MFSL}}{}
+
+
+% Flex
+
+% Flex definition; inspired from lstdrvrs.dtx
+\lstdefinelanguage{Flex}%
+  {%
+  morekeywords={%
+  	tool,input,%
+		choice,set,case,%
+		%
+		return,%
+		throw,%,
+		%
+		define,%
+		%
+		singleQuote,doubleleQuote,%
+		integer,double,%
+		%
+		name,option,%		
+	},%
+  sensitive,%
+  morestring=[b]",%
+  morestring=[m]', % changed from `b' to `m'
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{Flex}{
+language=Flex,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullflexible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{Flex}{
+\lstset{style=Flex}}{}
+
+
+% Bison
+
+% Bison definition; inspired from lstdrvrs.dtx
+\lstdefinelanguage{Bison}%
+  {%
+  morekeywords={%
+  	option,%
+		param,locations,verbose,%
+		%
+		skeleton,require,printer,
+		%
+		define,code,%
+		token,nterm,start,%
+	},%
+  sensitive,%
+  morestring=[b]",%
+  morestring=[m]', % changed from `b' to `m'
+}[keywords,comments,strings,directives]%
+
+\lstdefinestyle{Bison}{
+language=Bison,
+basicstyle=\small\sffamily,
+numbers=left,
+numberstyle=\tiny,
+frame=L,
+columns=fullBisonible,
+showstringspaces=false,
+}
+
+\lstnewenvironment{Bison}{
+\lstset{style=Bison}}{}

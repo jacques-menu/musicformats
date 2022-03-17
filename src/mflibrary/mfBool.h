@@ -23,65 +23,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-/*
-  This class to ensure all values are initialized (to false as it is) JMI
-*/
-/*
-Matrix::Matrix(const Matrix& rMatrix) :
-    _iRows(rMatrix._iRows), _iColumns(rMatrix._iColumns), _pVector(0)
-{
-    _pVector = new Vector[_iRows];
-    for (int i = 0; i < _iRows; i++) { _pVector[i] = rMatrix._pVector[i]; }
-}
-
-Matrix& Matrix::operator=(const Matrix& rMatrix)
-{
-    if (this != &rMatrix)
-    {
-        if (0 != _pVector) { delete[] _pVector; pVector = 0; }
-        _iRows = rMatrix._iRows;
-        _iColumns = rMatrix._iColumns;
-        _pVector = new Vector[_iRows];
-        for (int i = 0; i < _iRows; i++) { _pVector[i] = rMatrix._pVector[i]; }
-    }
-    return *this;
-}
-Matrix& Matrix::operator+=(const Matrix& rMatrix)
-{
-    *this = *this + rMatrix;
-    return *this;
-}
-
-Matrix Matrix::operator+(const Matrix& rMatrix) const
-{
-    Matrix matrix(_iRows, _iColumns);
-    ValidateSizes(rMatrix);
-    for (int i = 0; i < _iRows; i++) { matrix._pVector[i] = _pVector[i] + rMatrix._pVector[i]; }
-    return matrix;
-}
-
-Matrix operator+(const Matrix& rMatrix, double dNum)
-{
-    Matrix matrix(rMatrix._iRows, rMatrix._iColumns);
-    matrix.ValidateSizes(rMatrix);
-    for (int i = 0; i < matrix._iRows; i++) { matrix._pVector[i] = dNum + rMatrix._pVector[i]; }
-    return matrix;
-}
-
-Matrix operator+(double dNum, const Matrix& rMatrix)
-{
-    return operator+(rMatrix, dNum);
-}
-
-bool Matrix::ValidateSizes(const Matrix& rMatrix) const
-{
-    if (_iRows != rMatrix._iRows) { / * THROW EXCEPTION * / }
-    if (_iColumns != rMatrix._iColumns) { / * THROW EXCEPTION * / }
-    return true;
-}
-*/
-
-//______________________________________________________________________________
 class EXP Bool
 /*
   this class encapsulates a 'bool' value to guarantee it is initialized
