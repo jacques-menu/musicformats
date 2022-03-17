@@ -17,12 +17,13 @@
 #
 
 # variables
+# ---------------------------------------------------------------------------
 
 MAKEFILE = Makefile
 
 GENERATED_FILES  = mfslParser.h mfslScanner.cpp mfslParser.cpp
 
-BISON = bison # -Wcounterexamples -Wother
+BISON = bison
 FLEX  = flex
 
 CXXFLAGS = -I.. -DMAIN
@@ -37,16 +38,16 @@ all : $(GENERATED_FILES)
 # generation rules
 # ---------------------------------------------------------------------------
 
-mfslScanner.cpp : $(MAKEFILE) mfslScanner.l
-	$(FLEX) -omfslScanner.cpp mfslScanner.l
+mfslScanner.cpp : $(MAKEFILE) mfslScanner.ll
+	$(FLEX) -omfslScanner.cpp mfslScanner.ll
 
 
-mfslParser.h mfslParser.cpp : $(MAKEFILE) mfslParser.y
-	$(BISON) --defines=mfslParser.h -o mfslParser.cpp mfslParser.y
+mfslParser.h mfslParser.cpp : $(MAKEFILE) mfslParser.yy
+	$(BISON) --defines=mfslParser.h -o mfslParser.cpp mfslParser.yy
 
 
 # clean
 # ---------------------------------------------------------------------------
 
 clean:
-	rm -f $(GENERATED_FILES)
+	rm -f $(GENERATED_FILES) mfslParser.output location.hh mfslScanner.log

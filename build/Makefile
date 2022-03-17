@@ -37,12 +37,21 @@ CMAKEOPT ?=
 
 TOOLS := LilyPondIssue34 Mikrokosmos3Wandering MusicAndHarmonies RandomChords RandomMusic countnotes displayMusicformatsHistory displayMusicformatsVersion msdlconverter partsummary readunrolled xml2brl xml2gmn xml2guido xml2ly xml2midi xml2xml xmlclone xmlfactory xmliter xmlread xmltranspose xmlversion
 
+
+#===============================================================
 #	make submodule
+#===============================================================
+
 all :
 	make $(TARGET)
 
 undefined:
 	$(error System is undefined, not target available)
+
+
+#===============================================================
+# help
+#===============================================================
 
 help :
 	@echo MusicFormats makefile - Targets are :
@@ -83,9 +92,19 @@ help :
 $(PDIR) :
 	mkdir $(PDIR)
 
+
+#===============================================================
+# clean
+#===============================================================
+
+clean:
+	rm -r bin lib libdir
+
+
 #===============================================================
 # updating submodules
 #===============================================================
+
 submodule:
 	git submodule update --init --recursive
 	git -C ../libmusicxml checkout dev
@@ -95,12 +114,14 @@ submodule:
 #===============================================================
 # building the javascript library
 #===============================================================
+
 js:
 	make -C ../javascript
 
 #===============================================================
 # building the library on Mac OS X
 #===============================================================
+
 macos : $(PDIR)/musicformats.xcodeproj
 	cmake --build $(PDIR) --config Release
 	-cd lib &&  [ -d musicformats.framework ] && tar czf musicformats.tgz musicformats.framework || echo "no framework"
@@ -112,6 +133,7 @@ $(PDIR)/musicformats.xcodeproj : $(PDIR) CMakeLists.txt
 #===============================================================
 # building the library for iOS
 #===============================================================
+
 ios : $(IOS)/musicformats.xcodeproj
 	cmake --build $(IOS) --config Release
 
@@ -150,9 +172,11 @@ win64/musicformats.sln : CMakeLists.txt
 	[ -d win64 ] || mkdir win64
 	cd win64 && cmake .. $(GENERATOR) $(CMAKEOPT)
 
+
 #===============================================================
 # building the library on linux
 #===============================================================
+
 linux : $(PDIR)/Makefile
 	cmake --build $(PDIR) --config Release
 
@@ -164,17 +188,21 @@ $(PDIR)/Makefile : $(PDIR) CMakeLists.txt
 cmake : $(PDIR)
 	cd $(PDIR) && cmake .. $(GENERATOR) -Wno-dev $(CMAKEOPT)
 
+
 #===============================================================
 # building the library for Android
 #===============================================================
+
 android :
 	ndk-build -C android -j 6
 	cp android/libs/armeabi-v7a/musicformats.so android/musicformats.armeabi-v7a.so
 	cp android/libs/x86/musicformats.so android/musicformats.x86.so
 
+
 #===============================================================
 # install
 #===============================================================
+
 installLog := $(PDIR)/install_manifest.txt
 install:
 	cd $(PDIR) && cmake .. -DCMAKE_INSTALL_PREFIX=$(PREFIX)
@@ -191,6 +219,7 @@ localinstall:
 #===============================================================
 # packaging
 #===============================================================
+
 PACKDIR := ../packages
 PACK := $(PACKDIR)/musicformats-$(VERSION)
 package:

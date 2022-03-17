@@ -291,7 +291,7 @@ from https://brltty.app/pipermail/brltty/2012-October/009556.html :
 
 [BRLTTY] Braille Code
 
-Dave Mielke dave at mielke.cc
+Dave Mielke dave at mielke.cpp
 Wed Oct 10 14:15:08 EDT 2012
 Previous message: [BRLTTY] Braille Code
 Next message: [BRLTTY] Braille Code
@@ -308,8 +308,8 @@ I forgot to attach the table. Here it is.
 --
 Dave Mielke           | 2213 Fox Crescent | The Bible is the very Word of God.
 Phone: 1-613-726-0014 | Ottawa, Ontario   | 2011 May 21 is the End of Salvation.
-EMail: dave at mielke.cc | Canada  K2A 1H7   | http://Mielke.cc/now.html
-http://FamilyRadio.com/                   | http://Mielke.cc/bible/
+EMail: dave at mielke.cpp | Canada  K2A 1H7   | http://Mielke.cpp/now.html
+http://FamilyRadio.com/                   | http://Mielke.cpp/bible/
 -------------- next part --------------
 ###############################################################################
 # BRLTTY - A background process providing access to the console screen (when in
@@ -324,9 +324,9 @@ http://FamilyRadio.com/                   | http://Mielke.cc/bible/
 # Foundation; either version 2.1 of the License, or (at your option) any
 # later version. Please see the file LICENSE-LGPL for details.
 #
-# Web Page: http://mielke.cc/brltty/
+# Web Page: http://mielke.cpp/brltty/
 #
-# This software is maintained by Dave Mielke <dave at mielke.cc>.
+# This software is maintained by Dave Mielke <dave at mielke.cpp>.
 ###############################################################################
 
 # BRLTTY Text Table - English (North American Braille Computer Code)

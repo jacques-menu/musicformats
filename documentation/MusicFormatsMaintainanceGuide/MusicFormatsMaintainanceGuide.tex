@@ -10,7 +10,31 @@
 
 \usepackage{import}
 
-\subimport{../CommonLaTeXFiles}{CommonMusicFormatsLaTeXSettings}
+\subimport{../CommonLaTeXFiles}{LaTeXCommonSettings.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXDivisionsCommands.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXIndexing.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXFontsAndColors.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXReferencing.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXBoxes.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXGraphicsAndPictures.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXMusicFormatsCommands.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXMusicFormatsFilesAndFolders.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXMusicFormatsNames.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXShortcuts.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXListings.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXTablesAndLists.tex}
 
 
 % -------------------------------------------------------------------------
@@ -154,57 +178,57 @@ This document presents the internal working of \mf. It is part of the \mf\ docum
 \fancyhead[R]{\nouppercase\rightmark}
 
 
-\subimport{./}{introduction}
+\subimport{./}{introduction.tex}
 
-\subimport{./}{documentation}
+\subimport{./}{documentation.tex}
 
-\subimport{./}{buildingMusicFormats}
+\subimport{./}{buildingMusicFormats.tex}
 
-\subimport{./}{codeBaseStructure}
+\subimport{./}{codeBaseStructure.tex}
 
-\subimport{./}{components}
+\subimport{./}{components.tex}
 
-\subimport{./}{clisamples}
+\subimport{./}{clisamples.tex}
 
-\subimport{./}{WAE}
+\subimport{./}{WAE.tex}
 
-\subimport{./}{traceFacility}
+\subimport{./}{traceFacility.tex}
 
-\subimport{./}{multiLingualSupport}
+\subimport{./}{multiLingualSupport.tex}
 
-\subimport{./}{textualInputAndOutput}
+\subimport{./}{textualInputAndOutput.tex}
 
-\subimport{./}{binaryDataOutput}
+\subimport{./}{binaryDataOutput.tex}
 
-\subimport{./}{CPUMeasurements}
+\subimport{./}{CPUMeasurements.tex}
 
 
 % -------------------------------------------------------------------------
 \part{The two-phase visitors pattern}
 % -------------------------------------------------------------------------
 
-\subimport{./}{twoPhaseVisitorsPattern}
+\subimport{./}{twoPhaseVisitorsPattern.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Programming style and conventions}
 % -------------------------------------------------------------------------
 
-\subimport{./}{programmingStyleAndConventions}
+\subimport{./}{programmingStyleAndConventions.tex}
 
 
 % -------------------------------------------------------------------------
 \part{MusicFormats components}
 % -------------------------------------------------------------------------
 
-\subimport{./}{MFC}
+\subimport{./}{MFC.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Options and help}
 % -------------------------------------------------------------------------
 
-\subimport{./}{OAH}
+\subimport{./}{OAH.tex}
 
 
 % -------------------------------------------------------------------------
@@ -213,71 +237,70 @@ This document presents the internal working of \mf. It is part of the \mf\ docum
 
 \subimport{./}{representationsGeneralPrinciples.tex}
 
-\subimport{./}{displayingRepresentations}
+\subimport{./}{displayingRepresentations.tex}
 
-\subimport{./}{MSR}
+\subimport{./}{MSR.tex}
 
-\subimport{./}{msrTimeOrientedRepresentation}
+\subimport{./}{msrTimeOrientedRepresentation.tex}
 
-\subimport{./}{pathToVoice}
+\subimport{./}{pathToVoice.tex}
 
-\subimport{./}{LPSR}
+\subimport{./}{LPSR.tex}
 
-\subimport{./}{BSR}
+\subimport{./}{BSR.tex}
 
-\subimport{./}{MXSR}
+\subimport{./}{MXSR.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Passes}
 % -------------------------------------------------------------------------
 
-\subimport{./}{passes}
+\subimport{./}{passes.tex}
 
-\subimport{./}{lilypondGeneration}
+\subimport{./}{lilypondGeneration.tex}
 
-\subimport{./}{brailleGeneration}
+\subimport{./}{brailleGeneration.tex}
 
-\subimport{./}{musicxmlGeneration}
+\subimport{./}{musicxmlGeneration.tex}
 
-\subimport{./}{guidoGeneration}
+\subimport{./}{guidoGeneration.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Generators}
 % -------------------------------------------------------------------------
 
-\subimport{./}{generators}
+\subimport{./}{generators.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Converters}
 % -------------------------------------------------------------------------
 
-\subimport{./}{converters}
+\subimport{./}{converters.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Interfaces}
 % -------------------------------------------------------------------------
 
-\subimport{./}{libraryInterfaces}
+\subimport{./}{libraryInterfaces.tex}
 
-\subimport{./}{representationsInterfaces}
+\subimport{./}{representationsInterfaces.tex}
 
-\subimport{./}{passesInterfaces}
+\subimport{./}{passesInterfaces.tex}
 
-\subimport{./}{convertersInterfaces}
+\subimport{./}{convertersInterfaces.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Distributions and versions}
 % -------------------------------------------------------------------------
 
-\subimport{./}{distributions}
+\subimport{./}{distributions.tex}
 
-
-\subimport{./}{creatingVersions}
+\subimport{./}{creatingVersions.tex}
 
 
 % -------------------------------------------------------------------------
@@ -287,7 +310,7 @@ This document presents the internal working of \mf. It is part of the \mf\ docum
 % initializations
 % -------------------------------------------------------------------------
 
-\subimport{./}{initializations}
+\subimport{./}{initializations.tex}
 
 
 % the OAH atoms collection
@@ -299,84 +322,84 @@ This document presents the internal working of \mf. It is part of the \mf\ docum
 % MSR
 % -------------------------------------------------------------------------
 
-\subimport{./}{measuresHandling}
+\subimport{./}{measuresHandling.tex}
 
-\subimport{./}{positionsInMeasures}
+\subimport{./}{positionsInMeasures.tex}
 
-\subimport{./}{finalizations}
+\subimport{./}{finalizations.tex}
 
-\subimport{./}{temposHandling}
+\subimport{./}{temposHandling.tex}
 
-\subimport{./}{positionsInMeasures}
+\subimport{./}{positionsInMeasures.tex}
 
-\subimport{./}{notesHandling}
+\subimport{./}{notesHandling.tex}
 
-\subimport{./}{segmentsHandling}
+\subimport{./}{segmentsHandling.tex}
 
-\subimport{./}{beatRepeatsHandling}
+\subimport{./}{beatRepeatsHandling.tex}
 
-\subimport{./}{measureRepeatsHandling}
+\subimport{./}{measureRepeatsHandling.tex}
 
-\subimport{./}{fullMeasureRestsHandling}
+\subimport{./}{fullMeasureRestsHandling.tex}
 
-\subimport{./}{repeatsHandling}
+\subimport{./}{repeatsHandling.tex}
 
-\subimport{./}{voicesHandling}
+\subimport{./}{voicesHandling.tex}
 
-\subimport{./}{stavesHandling}
+\subimport{./}{stavesHandling.tex}
 
-\subimport{./}{partsHandling}
+\subimport{./}{partsHandling.tex}
 
-\subimport{./}{scoresHandling}
+\subimport{./}{scoresHandling.tex}
 
-\subimport{./}{booksHandling}
+\subimport{./}{booksHandling.tex}
 
-\subimport{./}{ornamentsHandling}
+\subimport{./}{ornamentsHandling.tex}
 
-\subimport{./}{tiesHandling}
+\subimport{./}{tiesHandling.tex}
 
-\subimport{./}{dynamicsHandling}
+\subimport{./}{dynamicsHandling.tex}
 
-\subimport{./}{beamsHandling}
+\subimport{./}{beamsHandling.tex}
 
-\subimport{./}{slursHandling}
+\subimport{./}{slursHandling.tex}
 
-\subimport{./}{graceNotesGroupsHandling}
+\subimport{./}{graceNotesGroupsHandling.tex}
 
-\subimport{./}{chordsHandling}
+\subimport{./}{chordsHandling.tex}
 
-\subimport{./}{tupletsHandling}
+\subimport{./}{tupletsHandling.tex}
 
-\subimport{./}{harmoniesHandling}
+\subimport{./}{harmoniesHandling.tex}
 
-\subimport{./}{figuredBassElementsHandling}
+\subimport{./}{figuredBassElementsHandling.tex}
 
-\subimport{./}{lyricsHandling}
+\subimport{./}{lyricsHandling.tex}
 
-\subimport{./}{fullMeasureRestsHandling}
+\subimport{./}{fullMeasureRestsHandling.tex}
 
-\subimport{./}{MIDIHandling}
+\subimport{./}{MIDIHandling.tex}
 
 
 % -------------------------------------------------------------------------
 \part{MusicFormats Scripting Language (MFSL)}
 % -------------------------------------------------------------------------
 
-\subimport{./}{MFSL}
+\subimport{./}{MFSL.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Music Scores Description Language (MSDL)}
 % -------------------------------------------------------------------------
 
-\subimport{./}{MSDL}
+\subimport{./}{MSDL.tex}
 
 
 % -------------------------------------------------------------------------
 \part{Debugging}
 % -------------------------------------------------------------------------
 
-\subimport{./}{debugging}
+\subimport{./}{debugging.tex}
 
 
 % -------------------------------------------------------------------------

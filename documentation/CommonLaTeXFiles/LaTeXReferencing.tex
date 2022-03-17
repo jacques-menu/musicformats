@@ -1,0 +1,49 @@
+% -------------------------------------------------------------------------
+% hyperref (as LATE as possible)
+% -------------------------------------------------------------------------
+
+\usepackage[
+  pdftex,pdfpagemode={FullScreen},
+  pdfstartview={FitH},
+  plainpages=false,
+  pdfkeywords={latex,introduction UniBe},
+  pdfauthor={Jacques Menu},
+  colorlinks=true,linkcolor={blue},
+  citecolor={red},
+  urlcolor={red}
+]{hyperref}
+
+\newcommand{\mylabel}[1]{%Arguments: label
+\hypertarget{#1}{\label{#1}}%
+}
+
+\newcommand{\mylink}[1]{%Arguments: label
+\hyperlink{#1}{section~\ref{#1}, page~\pageref{#1}}%
+}
+
+
+% -------------------------------------------------------------------------
+% references to labels
+% -------------------------------------------------------------------------
+
+\newcommand{\chapterRef}[1]{%
+chapter~\ref{#1}, [#1], page~\pageref{#1}%
+}
+
+\newcommand{\sectionRef}[1]{%
+section~\ref{#1}, [#1], page~\pageref{#1}%
+}
+
+\newcommand{\subSectionRef}[1]{%
+subsection~\ref{#1}, [#1], page~\pageref{#1}%
+}
+
+\newcommand{\figureRef}[1]{%
+figure~\ref{#1}, [#1], page~\pageref{#1}%
+}
+
+\newcommand{\listingRef}[1]{%
+listing~\ref{#1}, [#1], page~\pageref{#1}%
+}
+
+

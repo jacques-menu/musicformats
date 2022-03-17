@@ -4,15 +4,10 @@
 tool : xml2ly
 
 # the input file
-# input : '-'
-input : "HelloWorld.xml"
-# input : "-"
+input : 'HelloWorld.xml'
 
-# output file
-#   -auto-output-file-name
-
-# geometry
-    -global-staff-size 25.5
+# output
+  -auto-output-file-name
 
 # header
 
@@ -27,17 +22,22 @@ set VOICES_CHOICE = voice1Only ;
   # change this to voice2Only to switch to another subset of options
   # could even be parameter to the script such a $1
 
-# choose which options to use according to VOICES_CHOICE
-case VOICES_CHOICE :
-	voice1Only:
-    -title "Joli morceau - voix 1"
-    -keep-msr-voice Part_POne_Staff_One_Voice_One
+# generate all score
+all VOICES_CHOICE :
+  # choose which options to use according to VOICES_CHOICE
+  case VOICES_CHOICE :
+    voice1Only:
+      -title "Joli morceau - voix 1"
+      -keep-msr-voice Part_POne_Staff_One_Voice_One
+    ;
+
+    voice2Only:
+      -title "Joli morceau - voix 2"
+      --keep-msr-voice Part_POne_Staff_One_Voice_Two
+
+      -display-options-values
+
+      -global-staff-size 25.5
+    ;
   ;
-
-	voice2Only:
-    -title "Joli morceau - voix 2"
-    --keep-msr-voice Part_POne_Staff_One_Voice_Two
-
-    -display-options-values
-#   ;
 ;

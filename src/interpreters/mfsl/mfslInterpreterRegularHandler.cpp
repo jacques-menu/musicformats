@@ -218,9 +218,11 @@ void mfslInterpreterRegularHandler::createMfslRegularGroup ()
 
   registerAtomInRegularSubgroup ("trace-scanning", subGroup);
   registerAtomInRegularSubgroup ("trace-parsing", subGroup);
-  
+
   registerAtomInRegularSubgroup ("display-tokens", subGroup);
   registerAtomInRegularSubgroup ("display-non-terminals", subGroup);
+
+  registerAtomInRegularSubgroup ("trace-semantics", subGroup);
 }
 
 void mfslInterpreterRegularHandler::createOahRegularGroup ()

@@ -7,7 +7,23 @@
 
 \usepackage{import}
 
-\subimport{../CommonLaTeXFiles}{CommonMusicFormatsLaTeXSettings}
+\subimport{../CommonLaTeXFiles}{LaTeXCommonSettings.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXIndexing.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXFontsAndColors.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXReferencing.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXMusicFormatsNames.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXMusicFormatsCommands.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXMusicFormatsFilesAndFolders.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXShortcuts.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXListings.tex}
 
 
 % -------------------------------------------------------------------------
@@ -141,7 +157,7 @@ As a historical note, an XSL/XSLT script was supplied in the early days of \mxml
 
 
 % -------------------------------------------------------------------------
-\subsection{\mxml's formal definition}
+\subsection{MusicXML's formal definition}
 \mylabel{formalDefinition}
 % -------------------------------------------------------------------------
 
@@ -193,7 +209,7 @@ The \gitsubdir{dtds/3.1/schema} subdirectory contains '\fileName{\tt *.mod}' tex
 \sep
 
 For example, \gitschemafile{note.mod} defines the \musicXmlMarkup{backup} and \musicXmlMarkup{forward} markups this way:
-\begin{lstlisting}[language=MusicXML, caption={\musicXmlMarkup{backup} and \musicXmlMarkup{forward} definition}]
+\begin{lstlisting}[language=MusicXML, caption={{\tt <backup/>} and {\tt <forward/>} definition}]
 <!--
 	The backup and forward elements are required to coordinate
 	multiple voices in one part, including music on multiple
@@ -210,7 +226,7 @@ For example, \gitschemafile{note.mod} defines the \musicXmlMarkup{backup} and \m
 \end{lstlisting}
 
 An example of their use is:
-\begin{lstlisting}[language=MusicXML, caption={\musicXmlMarkup{backup} and \musicXmlMarkup{forward} example}]
+\begin{lstlisting}[language=MusicXML, caption={{\tt <backup/>} and {\tt <forward/>} example}]
       <forward>
         <duration>4</duration>
         <voice>2</voice>
@@ -2287,7 +2303,7 @@ Then comes the specification of voice '{\tt 3}' in staff '{\tt 2}', again after 
 
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
-\section{Creating \mxml\ data}
+\section{Creating MusicXML data}
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 
@@ -2339,7 +2355,7 @@ Here is a score containing random 3-note chords created by \libmusicxmlsamples{R
 
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
-\section{Importing \mxml\ data}
+\section{Importing MusicXML data}
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
 

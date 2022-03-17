@@ -45,9 +45,9 @@
 #ifndef YY_YY_MFSLPARSER_H_INCLUDED
 # define YY_YY_MFSLPARSER_H_INCLUDED
 // "%code requires" blocks.
-#line 45 "mfslParser.y"
+#line 42 "mfslParser.yy"
 
-  #include <string>
+  # include <string>
 
   class mfslDriver;
 
@@ -419,7 +419,7 @@ namespace yy {
       // Number
       // String
       // OptionValue
-      char dummy1[sizeof (std::string)];
+      char dummy1[sizeof (string)];
     };
 
     /// The size of the largest semantic type.
@@ -486,12 +486,13 @@ namespace yy {
     TOK_CHOICE = 14,               // "choice"
     TOK_SET = 15,                  // "set"
     TOK_CASE = 16,                 // "case"
-    TOK_INTEGER = 17,              // "integer"
-    TOK_DOUBLE = 18,               // "double"
-    TOK_SINGLE_QUOTED_STRING = 19, // "single quoted_string"
-    TOK_DOUBLE_QUOTED_STRING = 20, // "double quoted_string"
-    TOK_NAME = 21,                 // "name"
-    TOK_OPTION = 22                // "option"
+    TOK_ALL = 17,                  // "all"
+    TOK_INTEGER = 18,              // "integer"
+    TOK_DOUBLE = 19,               // "double"
+    TOK_SINGLE_QUOTED_STRING = 20, // "single quoted_string"
+    TOK_DOUBLE_QUOTED_STRING = 21, // "double quoted_string"
+    TOK_NAME = 22,                 // "name"
+    TOK_OPTION = 23                // "option"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -508,7 +509,7 @@ namespace yy {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 23, ///< Number of tokens.
+        YYNTOKENS = 24, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -527,28 +528,34 @@ namespace yy {
         S_CHOICE = 14,                           // "choice"
         S_SET = 15,                              // "set"
         S_CASE = 16,                             // "case"
-        S_INTEGER = 17,                          // "integer"
-        S_DOUBLE = 18,                           // "double"
-        S_SINGLE_QUOTED_STRING = 19,             // "single quoted_string"
-        S_DOUBLE_QUOTED_STRING = 20,             // "double quoted_string"
-        S_NAME = 21,                             // "name"
-        S_OPTION = 22,                           // "option"
-        S_YYACCEPT = 23,                         // $accept
-        S_script = 24,                           // script
-        S_Number = 25,                           // Number
-        S_String = 26,                           // String
-        S_Tool = 27,                             // Tool
-        S_Input = 28,                            // Input
-        S_ContentsElements = 29,                 // ContentsElements
-        S_ContentsElement = 30,                  // ContentsElement
-        S_Option = 31,                           // Option
-        S_OptionValue = 32,                      // OptionValue
-        S_ChoiceDeclaration = 33,                // ChoiceDeclaration
-        S_Choices = 34,                          // Choices
-        S_ChoiceSetting = 35,                    // ChoiceSetting
-        S_CaseStatement = 36,                    // CaseStatement
-        S_Cases = 37,                            // Cases
-        S_Case = 38                              // Case
+        S_ALL = 17,                              // "all"
+        S_INTEGER = 18,                          // "integer"
+        S_DOUBLE = 19,                           // "double"
+        S_SINGLE_QUOTED_STRING = 20,             // "single quoted_string"
+        S_DOUBLE_QUOTED_STRING = 21,             // "double quoted_string"
+        S_NAME = 22,                             // "name"
+        S_OPTION = 23,                           // "option"
+        S_YYACCEPT = 24,                         // $accept
+        S_Script = 25,                           // Script
+        S_26_1 = 26,                             // $@1
+        S_Number = 27,                           // Number
+        S_String = 28,                           // String
+        S_Tool = 29,                             // Tool
+        S_Input = 30,                            // Input
+        S_ScriptElementsSequence = 31,           // ScriptElementsSequence
+        S_ScriptElement = 32,                    // ScriptElement
+        S_Option = 33,                           // Option
+        S_OptionValue = 34,                      // OptionValue
+        S_ChoiceDeclaration = 35,                // ChoiceDeclaration
+        S_36_2 = 36,                             // $@2
+        S_ChoicesPossibleValues = 37,            // ChoicesPossibleValues
+        S_ChoiceSetting = 38,                    // ChoiceSetting
+        S_39_3 = 39,                             // $@3
+        S_CaseStatement = 40,                    // CaseStatement
+        S_41_4 = 41,                             // $@4
+        S_CaseAlternativesSequence = 42,         // CaseAlternativesSequence
+        S_CaseAlternative = 43,                  // CaseAlternative
+        S_44_5 = 44                              // $@5
       };
     };
 
@@ -594,7 +601,7 @@ namespace yy {
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
-        value.move< std::string > (std::move (that.value));
+        value.move< string > (std::move (that.value));
         break;
 
       default:
@@ -621,13 +628,13 @@ namespace yy {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::string&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, string&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::string& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const string& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -667,7 +674,7 @@ switch (yykind)
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
-        value.template destroy< std::string > ();
+        value.template destroy< string > ();
         break;
 
       default:
@@ -768,14 +775,14 @@ switch (yykind)
       {
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOK_YYEOF
-                   || (token::TOK_YYerror <= tok && tok <= token::TOK_CASE));
+                   || (token::TOK_YYerror <= tok && tok <= token::TOK_ALL));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
-      symbol_type (int tok, std::string v, location_type l)
+      symbol_type (int tok, string v, location_type l)
         : super_type (token_kind_type (tok), std::move (v), std::move (l))
 #else
-      symbol_type (int tok, const std::string& v, const location_type& l)
+      symbol_type (int tok, const string& v, const location_type& l)
         : super_type (token_kind_type (tok), v, l)
 #endif
       {
@@ -1089,14 +1096,29 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_INTEGER (std::string v, location_type l)
+      make_ALL (location_type l)
+      {
+        return symbol_type (token::TOK_ALL, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_ALL (const location_type& l)
+      {
+        return symbol_type (token::TOK_ALL, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_INTEGER (string v, location_type l)
       {
         return symbol_type (token::TOK_INTEGER, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_INTEGER (const std::string& v, const location_type& l)
+      make_INTEGER (const string& v, const location_type& l)
       {
         return symbol_type (token::TOK_INTEGER, v, l);
       }
@@ -1104,14 +1126,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DOUBLE (std::string v, location_type l)
+      make_DOUBLE (string v, location_type l)
       {
         return symbol_type (token::TOK_DOUBLE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DOUBLE (const std::string& v, const location_type& l)
+      make_DOUBLE (const string& v, const location_type& l)
       {
         return symbol_type (token::TOK_DOUBLE, v, l);
       }
@@ -1119,14 +1141,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SINGLE_QUOTED_STRING (std::string v, location_type l)
+      make_SINGLE_QUOTED_STRING (string v, location_type l)
       {
         return symbol_type (token::TOK_SINGLE_QUOTED_STRING, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SINGLE_QUOTED_STRING (const std::string& v, const location_type& l)
+      make_SINGLE_QUOTED_STRING (const string& v, const location_type& l)
       {
         return symbol_type (token::TOK_SINGLE_QUOTED_STRING, v, l);
       }
@@ -1134,14 +1156,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DOUBLE_QUOTED_STRING (std::string v, location_type l)
+      make_DOUBLE_QUOTED_STRING (string v, location_type l)
       {
         return symbol_type (token::TOK_DOUBLE_QUOTED_STRING, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DOUBLE_QUOTED_STRING (const std::string& v, const location_type& l)
+      make_DOUBLE_QUOTED_STRING (const string& v, const location_type& l)
       {
         return symbol_type (token::TOK_DOUBLE_QUOTED_STRING, v, l);
       }
@@ -1149,14 +1171,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_NAME (std::string v, location_type l)
+      make_NAME (string v, location_type l)
       {
         return symbol_type (token::TOK_NAME, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_NAME (const std::string& v, const location_type& l)
+      make_NAME (const string& v, const location_type& l)
       {
         return symbol_type (token::TOK_NAME, v, l);
       }
@@ -1164,14 +1186,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_OPTION (std::string v, location_type l)
+      make_OPTION (string v, location_type l)
       {
         return symbol_type (token::TOK_OPTION, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_OPTION (const std::string& v, const location_type& l)
+      make_OPTION (const string& v, const location_type& l)
       {
         return symbol_type (token::TOK_OPTION, v, l);
       }
@@ -1520,9 +1542,9 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 43,     ///< Last index in yytable_.
-      yynnts_ = 16,  ///< Number of nonterminal symbols.
-      yyfinal_ = 5 ///< Termination state number.
+      yylast_ = 45,     ///< Last index in yytable_.
+      yynnts_ = 21,  ///< Number of nonterminal symbols.
+      yyfinal_ = 3 ///< Termination state number.
     };
 
 
@@ -1556,7 +1578,7 @@ switch (yykind)
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
-        value.copy< std::string > (YY_MOVE (that.value));
+        value.copy< string > (YY_MOVE (that.value));
         break;
 
       default:
@@ -1599,7 +1621,7 @@ switch (yykind)
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
-        value.move< std::string > (YY_MOVE (s.value));
+        value.move< string > (YY_MOVE (s.value));
         break;
 
       default:
@@ -1668,7 +1690,7 @@ switch (yykind)
 
 
 } // yy
-#line 1672 "mfslParser.h"
+#line 1694 "mfslParser.h"
 
 
 

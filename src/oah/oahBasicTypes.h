@@ -109,12 +109,6 @@ class oahOptionOrArgument : public smartable
     // public services
     // ------------------------------------------------------
 
-    void                  appendOptionNameAndValue (
-                            const string& optionName,
-                            const string& optionValue);
-
-    void                  appendArgument (const string& argument);
-
   public:
 
     // print
@@ -181,6 +175,9 @@ class EXP oahOptionNameAndValue : public smartable
     // print
     // ------------------------------------------------------
 
+    string                asString () const;
+    string                asStringForCommandLine () const;
+
     virtual void          print (ostream& os) const;
 
   protected:
@@ -195,61 +192,88 @@ typedef SMARTP<oahOptionNameAndValue> S_oahOptionNameAndValue;
 EXP ostream& operator<< (ostream& os, const S_oahOptionNameAndValue& elt);
 EXP ostream& operator<< (ostream& os, const oahOptionNameAndValue& elt);
 
-//_______________________________________________________________________________
-class EXP oahOptionsNamesAndValues : public smartable
-{
-  public:
+//______________________________________________________________________________
+string oahOptionNameAndValueForCommandLine (
+  const string& optionName,
+  const string& optionValue);
 
-    // creation
-    // ------------------------------------------------------
+void optionsNameAndValueVectorsPlusEquals (
+  vector<S_oahOptionNameAndValue>& vector1,
+  vector<S_oahOptionNameAndValue>& vector2);
 
-    static SMARTP<oahOptionsNamesAndValues> create ();
-  public:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          oahOptionsNamesAndValues ();
-
-    virtual               ~oahOptionsNamesAndValues ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-    const vector<oahOptionNameAndValue>&
-                          getOptionNameAndValuesVector () const
-                              { return fOptionNameAndValuesVector; }
-
-    // public services
-    // ------------------------------------------------------
-
-    void                  appendOptionNameAndValue (
-                            const string& optionName,
-                            const string& optionValue);
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    void                  displayOptionNameAndValuesVector (ostream& os) const;
-
-    virtual void          print (ostream& os) const;
-
-  protected:
-
-    // protected fields
-    // ------------------------------------------------------
-
-    vector<oahOptionNameAndValue>
-                          fOptionNameAndValuesVector;
-};
-typedef SMARTP<oahOptionsNamesAndValues> S_oahOptionsNamesAndValues;
-EXP ostream& operator<< (ostream& os, const S_oahOptionsNamesAndValues& elt);
-EXP ostream& operator<< (ostream& os, const oahOptionsNamesAndValues& elt);
-
+// //_______________________________________________________________________________
+// class EXP oahOptionsNamesAndValuesVector;
+// typedef SMARTP<oahOptionsNamesAndValuesVector> S_oahOptionsNamesAndValuesVector;
+//
+// class EXP oahOptionsNamesAndValuesVector : public smartable
+// {
+//   public:
+//
+//     // creation
+//     // ------------------------------------------------------
+//
+//     static SMARTP<oahOptionsNamesAndValuesVector> create ();
+//
+//     static S_oahOptionsNamesAndValuesVector
+//                           mergeOptionsNamesAndValues (
+//                             S_oahOptionsNamesAndValuesVector
+//                               optionsNamesAndValues1,
+//                             S_oahOptionsNamesAndValuesVector
+//                               optionsNamesAndValues2);
+//
+//   public:
+//
+//     // constructors/destructor
+//     // ------------------------------------------------------
+//
+//                           oahOptionsNamesAndValuesVector ();
+//
+//     virtual               ~oahOptionsNamesAndValuesVector ();
+//
+//   public:
+//
+//     // set and get
+//     // ------------------------------------------------------
+//
+//     const vector<S_oahOptionNameAndValue>&
+//                           getOptionNamesAndValuesVector () const
+//                               { return fOptionNamesAndValuesVector; }
+//
+//     // public services
+//     // ------------------------------------------------------
+//
+//     void                  appendOptionNameAndValue (
+//                             const string& optionName,
+//                             const string& optionValue);
+//
+//     void                  appendOptionNameAndValue (
+//                             S_oahOptionNameAndValue
+//                               optionNameAndValue);
+//
+//   public:
+//
+//     // print
+//     // ------------------------------------------------------
+//
+//     void                  displayOptionNamesAndValuesVector (ostream& os) const;
+//
+// //     string                asString () const;
+//     string                asCommandLineOptionsString () const;
+//
+//     virtual void          print (ostream& os) const;
+//
+//   protected:
+//
+//     // protected fields
+//     // ------------------------------------------------------
+//
+//     vector<S_oahOptionNameAndValue>
+//                           fOptionNamesAndValuesVector;
+// };
+// typedef SMARTP<oahOptionsNamesAndValuesVector> S_oahOptionsNamesAndValuesVector;
+// EXP ostream& operator<< (ostream& os, const S_oahOptionsNamesAndValuesVector& elt);
+// EXP ostream& operator<< (ostream& os, const oahOptionsNamesAndValuesVector& elt);
+//
 //_______________________________________________________________________________
 class EXP oahOptionsAndArguments : public smartable
 {
@@ -274,8 +298,8 @@ class EXP oahOptionsAndArguments : public smartable
     // ------------------------------------------------------
 
     const vector<oahOptionNameAndValue>&
-                          getOptionNameAndValuesVector () const
-                              { return fOptionNameAndValuesVector; }
+                          getOptionNamesAndValuesVector () const
+                              { return fOptionNamesAndValuesVector; }
 
     const vector<string>& getArgumentsVector () const
                               { return fArgumentsVector; }
@@ -284,17 +308,24 @@ class EXP oahOptionsAndArguments : public smartable
     // ------------------------------------------------------
 
     void                  appendOptionNameAndValue (
+                              const oahOptionNameAndValue&
+                                optionNameAndValue);
+
+    void                  appendOptionNameAndValue (
                             const string& optionName,
                             const string& optionValue);
 
-    void                  appendArgument (const string& argument);
+    void                  appendArgument (const string& argument)
+                            {
+                              fArgumentsVector.push_back (argument);
+                            }
 
   public:
 
     // print
     // ------------------------------------------------------
 
-    void                  displayOptionNameAndValuesVector (ostream& os) const;
+    void                  displayOptionNamesAndValuesVector (ostream& os) const;
     void                  displayArgumentsVector (ostream& os) const;
 
     virtual void          print (ostream& os) const;
@@ -305,7 +336,7 @@ class EXP oahOptionsAndArguments : public smartable
     // ------------------------------------------------------
 
     vector<oahOptionNameAndValue>
-                          fOptionNameAndValuesVector;
+                          fOptionNamesAndValuesVector;
     vector<string>        fArgumentsVector;
 };
 typedef SMARTP<oahOptionsAndArguments> S_oahOptionsAndArguments;

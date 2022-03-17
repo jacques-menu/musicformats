@@ -1517,6 +1517,50 @@ Bool mfStringIsInStringSet (
   return result;
 }
 
+string mfStringSetAsString (
+  const set<string> stringSet)
+{
+  stringstream s;
+
+  s << "[";
+
+  // append the set elements if any
+  unsigned int stringSetSize =
+    stringSet.size ();
+
+  if (stringSetSize) {
+    set<string>::const_iterator
+      iBegin = stringSet.begin (),
+      iEnd   = stringSet.end (),
+      i      = iBegin;
+
+    unsigned int nextToLast =
+      stringSetSize - 1;
+
+    unsigned int count = 0;
+
+    for ( ; ; ) {
+      ++count;
+
+      s << "\"" << (*i) << "\"";
+      if (++i == iEnd) break;
+
+      if (count == nextToLast) {
+        s << " and ";
+      }
+      else if (count != stringSetSize) {
+        s << ", ";
+      }
+    } // for
+
+    --gIndenter;
+  }
+
+  s << "]";
+
+  return s.str ();
+}
+
 void mfDisplayStringSet (
   const string&     title,
   const set<string> stringSet,

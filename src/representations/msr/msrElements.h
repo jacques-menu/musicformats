@@ -91,7 +91,6 @@ class EXP msrElement : public smartable
 
     virtual void          printSummary (ostream& os) const;
 
-
   protected:
 
     // protected fields

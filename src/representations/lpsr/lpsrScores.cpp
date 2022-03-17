@@ -2172,7 +2172,7 @@ void lpsrScore::addColoredLedgerLinesToScore ()
   s <<
 R"###(% there is ony one ledger line spanner/grob/stencil
 % produced for each musical system on the page (!)
-% see: ledger-line-spanner.cc for c++ code for ly:ledger-line-spanner::print
+% see: ledger-line-spanner.cpp for c++ code for ly:ledger-line-spanner::print
 
 #(define (MyLedgerLineSpannerPrint grob)
    (let*

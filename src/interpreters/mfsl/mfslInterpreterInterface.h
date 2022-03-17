@@ -30,14 +30,12 @@ using namespace MusicFormats;
 */
 
 EXP extern mfMusicformatsError launchMfslInterpreter (
-  const string&           inputSourceName,
-  bool                    traceScanning,
-  bool                    traceParsing,
-  bool                    displayTokens,
-  bool                    displayNonTerminals,
-  string&                 theMfTool,
-  string&                 theInputFile,
-  oahOptionsAndArguments& optionsAndArguments);
+  const string& inputSourceName,
+  bool          traceScanning,
+  bool          traceParsing,
+  bool          displayTokens,
+  bool          displayNonTerminals,
+  bool          traceSemantics);
 
 
 #endif
