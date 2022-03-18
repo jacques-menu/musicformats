@@ -128,7 +128,7 @@ class EXP mfslInterpreterInsiderOahGroup : public oahGroup
     // initialisation
     // ------------------------------------------------------
 
-    void                  initializemfslInterpreterInsiderOahGroup ();
+    void                  initializeMfslInterpreterInsiderOahGroup ();
 
   protected:
 

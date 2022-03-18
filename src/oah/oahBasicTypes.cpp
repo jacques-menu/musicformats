@@ -485,19 +485,19 @@ ostream& operator<< (ostream& os, const oahOptionOrArgument& elt)
 }
 
 //______________________________________________________________________________
-S_oahOptionNameAndValue oahOptionNameAndValue::create (
+S_oahOption oahOption::create (
   const string& optionName,
   const string& optionValue)
 {
-  oahOptionNameAndValue* o = new
-    oahOptionNameAndValue (
+  oahOption* o = new
+    oahOption (
       optionName,
       optionValue);
   assert (o != nullptr);
   return o;
 }
 
-oahOptionNameAndValue::oahOptionNameAndValue (
+oahOption::oahOption (
   const string& optionName,
   const string& optionValue)
 {
@@ -505,15 +505,15 @@ oahOptionNameAndValue::oahOptionNameAndValue (
   fOptionValue = optionValue;
 }
 
-oahOptionNameAndValue::~oahOptionNameAndValue ()
+oahOption::~oahOption ()
 {}
 
-string oahOptionNameAndValue::asString () const
+string oahOption::asString () const
 {
   stringstream s;
 
   s <<
-    "oahOptionNameAndValue [" << fOptionName << "]";
+    "oahOption [" << fOptionName << "]";
 
   if (fOptionValue.size ()) {
     s << " [";
@@ -541,33 +541,33 @@ string oahOptionNameAndValue::asString () const
   return s.str ();
 }
 
-string oahOptionNameAndValue::asStringForCommandLine () const
+string oahOption::asStringForCommandLine () const
 {
   return
-    oahOptionNameAndValueForCommandLine (
+    oahOptionForCommandLine (
       fOptionName,
       fOptionValue);
 }
 
-void oahOptionNameAndValue::print (ostream& os) const
+void oahOption::print (ostream& os) const
 {
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_oahOptionNameAndValue& elt)
+ostream& operator<< (ostream& os, const S_oahOption& elt)
 {
   elt->print (os);
   return os;
 }
 
-ostream& operator<< (ostream& os, const oahOptionNameAndValue& elt)
+ostream& operator<< (ostream& os, const oahOption& elt)
 {
   elt.print (os);
   return os;
 }
 
 //______________________________________________________________________________
-string oahOptionNameAndValueForCommandLine (
+string oahOptionForCommandLine (
   const string& optionName,
   const string& optionValue)
 {
@@ -599,12 +599,12 @@ string oahOptionNameAndValueForCommandLine (
 }
 
 void optionsNameAndValueVectorsPlusEquals (
-  vector<S_oahOptionNameAndValue>& vector1,
-  vector<S_oahOptionNameAndValue>& vector2)
+  vector<S_oahOption>&       vector1,
+  const vector<S_oahOption>& vector2)
 {
-  // copy the elements of vector2 into vector1
-  for (S_oahOptionNameAndValue optionNameAndValue :vector2) {
-    vector1.push_back (optionNameAndValue);
+  // insert the elements of vector2 into vector1
+  for (S_oahOption option :vector2) {
+    vector1.push_back (option);
   } //for
 }
 
@@ -634,36 +634,36 @@ void optionsNameAndValueVectorsPlusEquals (
 //       oahOptionsNamesAndValuesVector::create ();
 //
 //   for (
-//     S_oahOptionNameAndValue optionNameAndValue
+//     S_oahOption option
 //     :
-//     optionsNamesAndValues1->getOptionNamesAndValuesVector ()
+//     optionsNamesAndValues1->getOptionsVector ()
 //   ) {
 //     result->
 //       appendOptionNameAndValue (
-//         optionNameAndValue);
+//         option);
 //   } //for
 //
 //   for (
-//     S_oahOptionNameAndValue optionNameAndValue
+//     S_oahOption option
 //     :
-//     optionsNamesAndValues1->getOptionNamesAndValuesVector ()
+//     optionsNamesAndValues1->getOptionsVector ()
 //   ) {
 //     result->
 //       appendOptionNameAndValue (
-//         optionNameAndValue);
+//         option);
 //   } //for
 //
 //   return result;
 // }
 //
-// void oahOptionsNamesAndValuesVector::displayOptionNamesAndValuesVector (ostream& os) const
+// void oahOptionsNamesAndValuesVector::displayOptionsVector (ostream& os) const
 // {
 //   os <<
 //     "The option name and values vector contains " <<
 //     mfSingularOrPlural (
-//       fOptionNamesAndValuesVector.size (), "element", "elements");
+//       fOptionsVector.size (), "element", "elements");
 //
-//   if (fOptionNamesAndValuesVector.size ()) {
+//   if (fOptionsVector.size ()) {
 //     os << ":" << endl;
 //
 //     ++gIndenter;
@@ -671,11 +671,11 @@ void optionsNameAndValueVectorsPlusEquals (
 //     const int fieldWidth = 2;
 //
 //     int counter = 0;
-//     for (S_oahOptionNameAndValue optionNameAndValue : fOptionNamesAndValuesVector) {
+//     for (S_oahOption option : fOptionsVector) {
 //       string optionName  =
-//         optionNameAndValue->getOptionName ();
+//         option->getOptionName ();
 //       string optionValue =
-//         optionNameAndValue->getOptionValue ();
+//         option->getOptionValue ();
 //
 //       os <<
 //         right << setw (fieldWidth) << counter++ <<
@@ -700,12 +700,12 @@ void optionsNameAndValueVectorsPlusEquals (
 // {
 //   stringstream s;
 //
-//   for (S_oahOptionNameAndValue optionNameAndValue : fOptionNamesAndValuesVector) {
+//   for (S_oahOption option : fOptionsVector) {
 //     string
 //       optionName  =
-//         optionNameAndValue->getOptionName (),
+//         option->getOptionName (),
 //       optionValue =
-//         optionNameAndValue->getOptionValue ();
+//         option->getOptionValue ();
 //
 //     s <<
 //       optionName;
@@ -742,11 +742,11 @@ void optionsNameAndValueVectorsPlusEquals (
 //
 // void oahOptionsNamesAndValuesVector::print (ostream& os) const
 // {
-//   for (S_oahOptionNameAndValue optionNameAndValue : fOptionNamesAndValuesVector) {
+//   for (S_oahOption option : fOptionsVector) {
 //     string optionName  =
-//       optionNameAndValue->getOptionName ();
+//       option->getOptionName ();
 //     string optionValue =
-//       optionNameAndValue->getOptionValue ();
+//       option->getOptionValue ();
 //
 //     os <<
 //       optionName;
@@ -802,31 +802,31 @@ oahOptionsAndArguments::~oahOptionsAndArguments ()
 {}
 
 void oahOptionsAndArguments::appendOptionNameAndValue (
-  const oahOptionNameAndValue&
-    optionNameAndValue)
+  const oahOption&
+    option)
 {
-  fOptionNamesAndValuesVector.push_back (
-    optionNameAndValue);
+  fOptionsVector.push_back (
+    option);
 }
 
 void oahOptionsAndArguments::appendOptionNameAndValue (
   const string& optionName,
   const string& optionValue)
 {
-  fOptionNamesAndValuesVector.push_back (
-    oahOptionNameAndValue (
+  fOptionsVector.push_back (
+    oahOption (
       optionName,
       optionValue));
 }
 
-void oahOptionsAndArguments::displayOptionNamesAndValuesVector (ostream& os) const
+void oahOptionsAndArguments::displayOptionsVector (ostream& os) const
 {
   os <<
     "The option name and values vector contains " <<
     mfSingularOrPlural (
-      fOptionNamesAndValuesVector.size (), "element", "elements");
+      fOptionsVector.size (), "element", "elements");
 
-  if (fOptionNamesAndValuesVector.size ()) {
+  if (fOptionsVector.size ()) {
     os << ":" << endl;
 
     ++gIndenter;
@@ -834,11 +834,11 @@ void oahOptionsAndArguments::displayOptionNamesAndValuesVector (ostream& os) con
     const int fieldWidth = 2;
 
     int counter = 0;
-    for (oahOptionNameAndValue optionNameAndValue : fOptionNamesAndValuesVector) {
+    for (oahOption option : fOptionsVector) {
       string optionName  =
-        optionNameAndValue.getOptionName ();
+        option.getOptionName ();
       string optionValue =
-        optionNameAndValue.getOptionValue ();
+        option.getOptionValue ();
 
       os <<
         right << setw (fieldWidth) << counter++ <<
@@ -875,7 +875,7 @@ void oahOptionsAndArguments::print (ostream& os) const
 //
 //   ++gIndenter;
 //
-  displayOptionNamesAndValuesVector (os);
+  displayOptionsVector (os);
   displayArgumentsVector (os);
 
 //   --gIndenter;
@@ -8078,17 +8078,17 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
   fHandlerServiceName = serviceName;
 
 //   // analyze the options
-//   const vector<oahOptionNameAndValue>&
-//     optionNamesAndValuesVector =
+//   const vector<oahOption>&
+//     optionsVector =
 //       gGlobalServiceRunData->
-//         getOptionsAndArguments ().getOptionNamesAndValuesVector ();
+//         getOptionsAndArguments ().getOptionsVector ();
 //
-//   if (optionNamesAndValuesVector.size ()) {
-//     for (unsigned int i = 0; i < optionNamesAndValuesVector.size (); ++i) {
+//   if (optionsVector.size ()) {
+//     for (unsigned int i = 0; i < optionsVector.size (); ++i) {
 //         string optionName =
-//           optionNamesAndValuesVector [i].getOptionName ();
+//           optionsVector [i].getOptionName ();
 //         string optionValue =
-//           optionNamesAndValuesVector [i].getOptionValue ();
+//           optionsVector [i].getOptionValue ();
 //
 //       handleOptionNameAndValueAtTopOahLevel (
 //         optionName,
@@ -9223,16 +9223,16 @@ void oahHandler::handleOptionNameCommon (
 //   }
 //
 //   // analyze the options
-//   const vector<oahOptionNameAndValue>&
-//     optionNamesAndValuesVector =
-//       fOptionsAndArguments.getOptionNamesAndValuesVector ();
+//   const vector<oahOption>&
+//     optionsVector =
+//       fOptionsAndArguments.getOptionsVector ();
 //
-//   if (optionNamesAndValuesVector.size ()) {
-//     for (unsigned int i = 0; i < optionNamesAndValuesVector.size (); ++i) {
+//   if (optionsVector.size ()) {
+//     for (unsigned int i = 0; i < optionsVector.size (); ++i) {
 //       string optionName =
-//         optionNamesAndValuesVector [i].getOptionName ();
+//         optionsVector [i].getOptionName ();
 //       string optionValue =
-//         optionNamesAndValuesVector [i].getOptionValue ();
+//         optionsVector [i].getOptionValue ();
 //
 //       Bool   argumentIsAnOption;
 //       string argumentWithoutDash;
@@ -9844,16 +9844,16 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 */
 
 
-// //   const vector<oahOptionNameAndValue>& // JMI
-// //     optionNamesAndValuesVector =
-// //       fOptionsAndArguments.getOptionNamesAndValuesVector ();
+// //   const vector<oahOption>& // JMI
+// //     optionsVector =
+// //       fOptionsAndArguments.getOptionsVector ();
 // //
-// //   if (optionNamesAndValuesVector.size ()) {
+// //   if (optionsVector.size ()) {
 // //     s << ' ';
 // //
-// //     vector<oahOptionNameAndValue>::const_iterator
-// //       iBegin = optionNamesAndValuesVector.begin (),
-// //       iEnd   = optionNamesAndValuesVector.end (),
+// //     vector<oahOption>::const_iterator
+// //       iBegin = optionsVector.begin (),
+// //       iEnd   = optionsVector.end (),
 // //       i      = iBegin;
 // //     for ( ; ; ) {
 // //       s << (*i);

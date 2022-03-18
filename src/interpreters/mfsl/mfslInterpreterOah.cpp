@@ -139,8 +139,25 @@ R"(Display the MFSL non-terminals after they’re accepted.)",
 R"(Write MFSL semantics analysis activity to standard output.)",
         "fTraceSemantics",
         fTraceSemantics));
-}
 
+  // setting choices
+  // --------------------------------------
+
+  subGroup->
+    appendAtomToSubGroup (
+      msrRenamePartAtom::create (
+        "set-choice", "set",
+        regex_replace (
+R"(Set the value of CHOICE_NAME to VALUE.
+SET_CHOICE_SPEC should be of the form ORIGINAL_NAME:VALUE .
+There can be spaces around the ':'.
+There can be several occurrences of this option.)",
+          regex ("EXECUTABLE"),
+          gGlobalOahOahGroup->getOahOahGroupServiceName ()),
+        "SET_CHOICE_SPEC",
+        "fSetChoiceToValueMap",
+        fSetChoiceToValueMap));
+}
 
 void mfslInterpreterOahGroup::enforceGroupQuietness ()
 {}

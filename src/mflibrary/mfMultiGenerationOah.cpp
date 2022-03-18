@@ -197,17 +197,17 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
       mfMultiGenerationOutputKind::k_NoGeneration;
 //
 //   // analyze the options
-//   const vector<oahOptionNameAndValue>&
-//     optionNamesAndValuesVector =
+//   const vector<oahOption>&
+//     optionsVector =
 //       gGlobalServiceRunData->
-//         getOptionsAndArguments ().getOptionNamesAndValuesVector ();
+//         getOptionsAndArguments ().getOptionsVector ();
 //
-//   if (optionNamesAndValuesVector.size ()) {
-//     for (unsigned int i = 0; i < optionNamesAndValuesVector.size (); ++i) {
+//   if (optionsVector.size ()) {
+//     for (unsigned int i = 0; i < optionsVector.size (); ++i) {
 //       string optionName =
-//         optionNamesAndValuesVector [i].getOptionName ();
+//         optionsVector [i].getOptionName ();
 //       string optionValue =
-//         optionNamesAndValuesVector [i].getOptionValue ();
+//         optionsVector [i].getOptionValue ();
 //
 //       string optionNameWithoutDash = optionName.substr (1);
 //

@@ -10,6 +10,7 @@
 */
 
 #include "mfAssert.h"
+#include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 #include "mfSystemInterface.h"
 
@@ -40,6 +41,13 @@ mfslDriver::mfslDriver (
 
   fTraceSemantics = traceSemantics;
 
+  fKnownToolNames.insert ("xml2ly");
+  fKnownToolNames.insert ("xml2brl");
+  fKnownToolNames.insert ("xml2xml");
+  fKnownToolNames.insert ("xml2gmn");
+
+  fKnownToolNames.insert ("msdlconverter");
+
   fVariablesTable = mfslVariablesTable::create ();
 }
 
@@ -48,6 +56,15 @@ void mfslDriver::setToolName (string value)
   if (fDisplayNonTerminals) {
     gLogStream <<
       "====> tool" << value<<
+      endl;
+  }
+
+  // is this value a known tool name?
+  if (! mfStringIsInStringSet (value, fKnownToolNames)) {
+    gLogStream <<
+      "### Unkown tool name \"" << value << "\"" <<
+      ", the known tool names are " <<
+      mfStringSetAsString (fKnownToolNames) <<
       endl;
   }
 
@@ -72,7 +89,7 @@ void mfslDriver::pushScopeOntoStack (
     gLogStream <<
       "====> Pushing [" <<
       scope <<
-      "] onto scopes descrs stack" <<
+      "] onto scopes stack" <<
       endl << endl;
   }
 
@@ -80,21 +97,85 @@ void mfslDriver::pushScopeOntoStack (
     scope);
 }
 
-void mfslDriver::registerOptionNamesAndValuesInCurrentScope (
-  S_oahOptionNameAndValue
-    optionNameAndValue)
+void mfslDriver::popScopeFromStack ()
 {
+  // fetch the top scope in the stack
+  list<S_mfslScope>::iterator
+    topIt = fScopesStack.begin ();
+
+  S_mfslScope
+    topScope = (*topIt);
+
+  if (fCaseStatementsStack.size () > 1) {
+    // fetch the next to top scope in the stack
+    list<S_mfslScope>::iterator
+      nextToTopIt = next (topIt);
+
+    S_mfslScope
+      nextToTopScope = (*nextToTopIt);
+
+    // merge the top scope into the one immediately below it in the stack
+    if (fTraceSemantics) {
+      gLogStream <<
+        "====> Inserting elements from [" <<
+        topScope->getScopeName () <<
+        "] into [" <<
+        nextToTopScope->getScopeName () <<
+        endl << endl;
+    }
+
+    vector<S_oahOption>&
+      optionsVector1 =
+        topScope->
+          getScopeOptionsVectorToModify ();
+
+    const vector<S_oahOption>&
+      optionsVector2 =
+        nextToTopScope->
+          getScopeOptionsVector ();
+
+    optionsNameAndValueVectorsPlusEquals (
+      optionsVector1,
+      optionsVector2);
+  }
+
   if (fTraceSemantics) {
     gLogStream <<
-      "====> Registering [" <<
-      optionNameAndValue <<
-      "] in current scope" <<
+      "====> Popping [" <<
+      topScope->getScopeName () <<
+      "] from the scopes stack" <<
       endl;
   }
 
-  fScopesStack.front ()->
-    registerOptionNamesAndValuesInScope (
-      optionNameAndValue);
+  fScopesStack.pop_front ();
+}
+
+void mfslDriver::registerOptionInCurrentScope (
+  S_oahOption option)
+{
+  S_mfslScope
+    currentScope =
+      fScopesStack.front ();
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    currentScope != nullptr,
+    "currentScope is null");
+
+  if (fTraceSemantics) {
+    gLogStream <<
+      "====> Registering [" <<
+      option <<
+      "] in (current) \"" <<
+      currentScope->getScopeName () <<
+      "\" scope" <<
+      endl;
+  }
+
+  currentScope->
+    registerOptionsInScope (
+      option);
 }
 
 void mfslDriver::pushCaseStatementOntoStack (
@@ -111,6 +192,31 @@ void mfslDriver::pushCaseStatementOntoStack (
   fCaseStatementsStack.push_front (
     caseStatement);
 }
+
+void mfslDriver::popCaseStatementFromStack ()
+{
+  fCaseStatementsStack.pop_front ();
+}
+
+void mfslDriver::appendAllStatementToList (
+  S_mfslAllStatement allStatement)
+{
+  if (fTraceSemantics) {
+    gLogStream <<
+      "====> Pushing [" <<
+      allStatement <<
+      "] onto all statements stack" <<
+      endl << endl;
+  }
+
+  fAllStatementsList.push_back (
+    allStatement);
+}
+
+// void mfslDriver::popAllStatementFromList ()
+// {
+//   fAllStatementsList.pop_back ();
+// }
 
 int mfslDriver::parseFile (const string &inputFileName)
 {
@@ -205,12 +311,12 @@ mfMusicformatsError mfslDriver::launchMfslTool ()
     ' ';
 
   for (
-    S_oahOptionNameAndValue
-      optionNameAndValue :
-        mainScope->getScopeOptionsNamesAndValuesVector ()
+    S_oahOption
+      option :
+        mainScope->getScopeOptionsVector ()
   ) {
     s <<
-      optionNameAndValue->asStringForCommandLine () <<
+      option->asStringForCommandLine () <<
       ' ';
   } // for
 

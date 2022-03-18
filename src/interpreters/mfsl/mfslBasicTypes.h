@@ -111,18 +111,22 @@ class EXP mfslScope : public smartable
 //                           getScopeElementsList () const
 //                               { return fScopeElementsList; }
 
-    const vector<S_oahOptionNameAndValue>&
-                          getScopeOptionsNamesAndValuesVector () const
-                              { return fScopeOptionsNamesAndValuesVector; }
+    const vector<S_oahOption>&
+                          getScopeOptionsVector () const
+                              { return fScopeOptionsVector; }
+
+    vector<S_oahOption>&
+                          getScopeOptionsVectorToModify ()
+                              { return fScopeOptionsVector; }
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    void                  registerOptionNamesAndValuesInScope (
-                            S_oahOptionNameAndValue
-                              optionNameAndValue);
+    void                  registerOptionsInScope (
+                            S_oahOption
+                              option);
 
 //     void                  appendElementToScope (S_mfslElement element);
 
@@ -143,8 +147,7 @@ class EXP mfslScope : public smartable
 
     string                fScopeName;
 
-    vector<S_oahOptionNameAndValue>
-                          fScopeOptionsNamesAndValuesVector;
+    vector<S_oahOption>   fScopeOptionsVector;
 
 //     list<S_mfslElement>   fScopeElementsList;
 };
@@ -152,6 +155,16 @@ typedef SMARTP<mfslScope> S_mfslScope;
 EXP ostream& operator<< (ostream& os, const S_mfslScope& elt);
 
 //______________________________________________________________________________
+enum class mfslVariableKind {
+  kVariableChoice,
+  kVariablePath
+};
+
+string mfslVariableKindAsString (
+  mfslVariableKind variableKind);
+
+ostream& operator<< (ostream& os, const mfslVariableKind& elt);
+
 enum class mfslVariableValueKind {
   kVariableValueNone,
   kVariableValueSuppliedToScript,
@@ -172,7 +185,8 @@ class EXP mfslVariable : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfslVariable> create (
-                            const string& variableName);
+                            const string&    variableName,
+                            mfslVariableKind variableKind);
 
   protected:
 
@@ -180,7 +194,8 @@ class EXP mfslVariable : public smartable
     // ------------------------------------------------------
 
                           mfslVariable (
-                            const string& variableName);
+                            const string&    variableName,
+                            mfslVariableKind variableKind);
 
     virtual               ~mfslVariable ();
 
@@ -194,6 +209,9 @@ class EXP mfslVariable : public smartable
 
     string                getVariableName () const
                               { return fVariableName; }
+
+    mfslVariableKind      getVariableKind () const
+                              { return fVariableKind; }
 
     void                  setVariableValue (const string& value);
 
@@ -232,6 +250,8 @@ class EXP mfslVariable : public smartable
     // ------------------------------------------------------
 
     string                fVariableName;
+    mfslVariableKind      fVariableKind;
+
     string                fVariableValue;
 
     set<string>           fPossibleValuesSet;
@@ -361,6 +381,67 @@ class EXP mfslCaseStatement : public smartable
 };
 typedef SMARTP<mfslCaseStatement> S_mfslCaseStatement;
 EXP ostream& operator<< (ostream& os, const S_mfslCaseStatement& elt);
+
+//______________________________________________________________________________
+class EXP mfslAllStatement : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mfslAllStatement> create (
+                            S_mfslVariable allVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfslAllStatement (
+                            S_mfslVariable allVariable);
+
+    virtual               ~mfslAllStatement ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    S_mfslVariable        getAllVariable () const
+                              { return fAllVariable; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  registerAllLabelValue (const string& value);
+
+    void                  checkThatAllPossibleValuesHaveBeenUsed ();
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    string                asString () const;
+
+    void                  print (ostream& os) const;
+
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    S_mfslVariable        fAllVariable;
+
+    // checking unused possible values
+    set<string>           fAllUnusedLabels;
+};
+typedef SMARTP<mfslAllStatement> S_mfslAllStatement;
+EXP ostream& operator<< (ostream& os, const S_mfslAllStatement& elt);
 
 // // initialization
 // //______________________________________________________________________________

@@ -1552,8 +1552,6 @@ string mfStringSetAsString (
         s << ", ";
       }
     } // for
-
-    --gIndenter;
   }
 
   s << "]";

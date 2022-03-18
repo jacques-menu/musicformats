@@ -2394,7 +2394,6 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
     const map<string, int>&
                           getStringToIntMapVariable () const
                               { return fStringToIntMapVariable; }
-/// JMI                                 fSetByUser = true;
 
   public:
 
@@ -2438,6 +2437,93 @@ class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
 };
 typedef SMARTP<oahStringToIntMapElementAtom> S_oahStringToIntMapElementAtom;
 EXP ostream& operator<< (ostream& os, const S_oahStringToIntMapElementAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
+{
+/*
+  an atom controlling a string to integer mapping variable
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahStringToStringMapElementAtom> create (
+                            const string&         longName,
+                            const string&         shortName,
+                            const string&         description,
+                            const string&         valueSpecification,
+                            const string&         variableName,
+                            map<string, string>&  stringToStringMapVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahStringToStringMapElementAtom (
+                            const string&         longName,
+                            const string&         shortName,
+                            const string&         description,
+                            const string&         valueSpecification,
+                            const string&         variableName,
+                            map<string, string>&  stringToStringMapVariable);
+
+    virtual               ~oahStringToStringMapElementAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const map<string, string>&
+                          getStringToStringMapVariable () const
+                              { return fStringToStringMapVariable; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const string& theString,
+                            ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    string                asShortNamedOptionString () const override;
+    string                asActualLongNamedOptionString () const override;
+
+    void                  print (ostream& os) const override;
+
+    void                  printAtomWithVariableOptionsValues (
+                            ostream& os,
+                            int      valueFieldWidth) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    map<string, string>&     fStringToStringMapVariable;
+};
+typedef SMARTP<oahStringToStringMapElementAtom> S_oahStringToStringMapElementAtom;
+EXP ostream& operator<< (ostream& os, const S_oahStringToStringMapElementAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue

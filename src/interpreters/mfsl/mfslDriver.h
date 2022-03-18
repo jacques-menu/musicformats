@@ -13,7 +13,6 @@
 #define ___mfslDriver___
 
 #include <string>
-#include <stack> // JMI
 
 #include "mfBool.h"
 #include "mfMusicformatsError.h" // for mfMusicformatsError
@@ -78,33 +77,6 @@ class mfslDriver
     S_mfslVariablesTable  getVariablesTable () const
                               { return fVariablesTable; }
 
-//     void  			          setOptionsNamesAndValues (
-//                             S_oahOptionsNamesAndValuesVector
-//                               optionsNamesAndValuesVector)
-//                               {
-//                                 fOptionsNamesAndValues =
-//                                   optionsNamesAndValuesVector;
-//                               }
-
-//     S_oahOptionsNamesAndValuesVector
-//                           getOptionsNamesAndValues () const
-//                               { return fOptionsNamesAndValues; }
-//
-// //     // scopes
-// //     const list<S_mfslScope>&
-// //                           getScopesStack () const // JMI ???
-// //                               { return fScopesStack; }
-//
-//     // options and values
-//     const list<S_oahOptionsNamesAndValuesVector>&
-//                           getOptionsNamesAndValuesStack () const
-//                               { return fOptionsNamesAndValuesStack; }
-//
-//     // case statements
-//     const list<S_mfslCaseStatement>&
-//                           getCaseStatementsStack () const
-//                               { return fCaseStatementsStack; }
-
   public:
 
     // public services
@@ -122,31 +94,37 @@ class mfslDriver
 
     // scopes
     void                  pushScopeOntoStack (
-                              S_mfslScope scope);
+                            S_mfslScope scope);
 
     S_mfslScope
                           topOfScopesStack () const
                               { return fScopesStack.front (); }
 
-    void                  popScopeFromStack ()
-                              { fScopesStack.pop_front (); }
+    void                  popScopeFromStack ();
 
     // options
-    void                  registerOptionNamesAndValuesInCurrentScope (
-                            S_oahOptionNameAndValue
-                              optionNameAndValue);
+    void                  registerOptionInCurrentScope (
+                            S_oahOption option);
 
     // case statements
     void                  pushCaseStatementOntoStack (
-                            S_mfslCaseStatement
-                              caseStatement);
+                            S_mfslCaseStatement caseStatement);
 
     S_mfslCaseStatement
                           topOfCaseStatementStack () const
                               { return fCaseStatementsStack.front (); }
 
-    void                  popCaseStatementFromStack ()
-                              { fCaseStatementsStack.pop_front (); }
+    void                  popCaseStatementFromStack ();
+
+    // all statements
+    void                  appendAllStatementToList (
+                            S_mfslAllStatement allStatement);
+
+//     S_mfslAllStatement
+//                           topOfAllStatementsList () const
+//                               { return fAllStatementsList.front (); }
+//
+//     void                  popAllStatementFromList ();
 
    // launching the MFSL tool
     mfMusicformatsError   launchMfslTool ();
@@ -175,23 +153,22 @@ class mfslDriver
 
     bool                  fTraceSemantics;
 
+    // known tool names
+    set<string>           fKnownToolNames;
+
     // variables handling
     S_mfslVariablesTable  fVariablesTable;
-
-//     // ??? JMI
-//     S_oahOptionsNamesAndValuesVector
-//                           fOptionsNamesAndValues;
 
     // scopes
     list<S_mfslScope>     fScopesStack;
 
-//     // options and values
-//     list<S_oahOptionsNamesAndValuesVector>
-//                           fOptionsNamesAndValuesStack;
-
     // case statements
     list<S_mfslCaseStatement>
                           fCaseStatementsStack;
+
+    // all statements
+    list<S_mfslAllStatement>
+                          fAllStatementsList;
 };
 
 //______________________________________________________________________________

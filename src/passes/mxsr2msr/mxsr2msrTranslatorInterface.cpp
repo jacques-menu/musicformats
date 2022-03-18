@@ -127,7 +127,7 @@ void populateMsrSkeletonFromMxsr (
   if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
     displayPopulatedMsrScore_OptionalPass (
       scoreSkeletonToBePopulated,
-      "Display the populated MSR as short text");
+      "Display the populated MSR as text, short version");
   }
 
   // display the populated MSR score summary if requested

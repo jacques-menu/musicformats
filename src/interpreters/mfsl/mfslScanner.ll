@@ -19,7 +19,7 @@
 #include <iostream> // for cout, cerr, TEMP JMI
 #include <sstream>
 
-// #include "mfMusicformatsError.h" // for mfMusicformatsError
+#include <string.h> // memset, strlcat
 
 #include "oahBasicTypes.h"
 
@@ -55,7 +55,7 @@
 
 
 %{
-//   yy::parser::symbol_type
+//   yy::parser::symbol_type JMI
 //   make_NAME (const std::string &s, const yy::parser::location_type& loc);
 %}
 
@@ -125,34 +125,45 @@ loc.step ();
 %}
 
 
-{blank}+   loc.step ();
-\n+        loc.lines (yyleng); loc.step ();
+{blank} {
+  loc.step ();
+}
 
+{endOfLine} {
+  loc.lines (yyleng); loc.step ();
+}
 
 
 "#" {
+  loc.step ();
   BEGIN COMMENT_TO_END_OF_LINE_MODE;
 }
 
 <COMMENT_TO_END_OF_LINE_MODE>{endOfLine} {
+  loc.lines (yyleng); loc.step ();
   BEGIN INITIAL;
 }
 
 <COMMENT_TO_END_OF_LINE_MODE>. {
   /* accepting any character other than {endOfLine} */
+  loc.step ();
 }
 
 
 "/*" {
+  loc.begin.column += yyleng;
+  loc.step ();
   BEGIN PARENTHESIZED_COMMENT_MODE;
 }
 
 <PARENTHESIZED_COMMENT_MODE>[^*{endOfLine}]* {
   /* accepting any character other than '*' */
+  loc.step ();
 }
 
 <PARENTHESIZED_COMMENT_MODE>"*"+[^*/{endOfLine}]* {
-  /* accepting all lthe '*' not followed by a '/' */
+  /* accepting all the '*' not followed by a '/' */
+  loc.step ();
 }
 
 <PARENTHESIZED_COMMENT_MODE>"*"+"/" {
@@ -160,13 +171,14 @@ loc.step ();
 }
 
 <PARENTHESIZED_COMMENT_MODE>. {
+  loc.step ();
 }
 
 
 
 {singleleQuote} {
   pStringBuffer [0] = '\0';
-
+  loc.step ();
   BEGIN SINGLE_QUOTED_STRING_MODE;
 }
 
@@ -180,37 +192,44 @@ loc.step ();
 
   BEGIN INITIAL;
 
-  return yy::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
+  return
+    yy::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
 }
 
 <SINGLE_QUOTED_STRING_MODE>{backSlash}{singleleQuote} {
-  strcat (pStringBuffer, "'"); // , STRING_BUFFER_SIZE);
+  strlcat (pStringBuffer, "'", STRING_BUFFER_SIZE);
+  loc.step ();
 }
 
 <SINGLE_QUOTED_STRING_MODE>{backSlash}n {
   strcat (pStringBuffer, "\n"); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 
 <SINGLE_QUOTED_STRING_MODE>{backSlash}t {
   strcat (pStringBuffer, "\t"); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 
 <SINGLE_QUOTED_STRING_MODE>{backSlash}{backSlash} {
+  loc.step ();
   strcat (pStringBuffer, "\\"); // , STRING_BUFFER_SIZE);
 }
 
 <SINGLE_QUOTED_STRING_MODE>{endOfLine} {
   strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
+  loc.lines (yyleng); loc.step ();
 }
 
 <SINGLE_QUOTED_STRING_MODE>. {
   strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 
 
 {doubleQuote} {
   pStringBuffer [0] = '\0';
-
+  loc.step ();
   BEGIN DOUBLE_QUOTED_STRING_MODE;
 }
 
@@ -222,33 +241,40 @@ loc.step ();
       endl << endl;
   }
 
+  loc.step ();
   BEGIN INITIAL;
-
-  return yy::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
+  return
+    yy::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{backSlash}{doubleQuote} {
   strcat (pStringBuffer, "\""); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{backSlash}n {
   strcat (pStringBuffer, "\n"); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{backSlash}t {
+  loc.step ();
   strcat (pStringBuffer, "\t"); // , STRING_BUFFER_SIZE);
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{backSlash}{backSlash} {
   strcat (pStringBuffer, "\\"); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{endOfLine} {
   strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
+  loc.lines (yyleng); loc.step ();
 }
 
 <DOUBLE_QUOTED_STRING_MODE>. {
   strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 
 
@@ -260,7 +286,12 @@ loc.step ();
     " double: " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_DOUBLE (yytext, loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_DOUBLE (yytext, loc);
 }
 
 {integer} {
@@ -269,7 +300,12 @@ loc.step ();
     " integer: " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_INTEGER (yytext, loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_INTEGER (yytext, loc);
 }
 
 
@@ -281,7 +317,12 @@ loc.step ();
     ": " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_TOOL (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_TOOL (loc);
 }
 
 "input" {
@@ -290,7 +331,12 @@ loc.step ();
     ": " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_INPUT (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_INPUT (loc);
 }
 
 "choice" {
@@ -299,7 +345,12 @@ loc.step ();
     ": " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_CHOICE (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_CHOICE (loc);
 }
 
 "set" {
@@ -308,7 +359,12 @@ loc.step ();
     ": " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_SET (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_SET (loc);
 }
 
 "case" {
@@ -317,7 +373,12 @@ loc.step ();
     ": " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_CASE (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_CASE (loc);
 }
 
 "all" {
@@ -326,7 +387,12 @@ loc.step ();
     ": " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_ALL (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_ALL (loc);
 }
 
 
@@ -337,7 +403,12 @@ loc.step ();
     ": name [" << yytext << "]" <<
     endl << endl;
   }
-  return yy::parser::make_NAME (yytext, loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_NAME (yytext, loc);
 }
 
 
@@ -349,7 +420,11 @@ loc.step ();
     ": option [" << yytext << "]" <<
     endl << endl;
   }
-  return yy::parser::make_OPTION (yytext, loc);
+
+  loc.begin.column += yyleng;
+
+  return
+    yy::parser::make_OPTION (yytext, loc);
 }
 
 
@@ -360,7 +435,12 @@ loc.step ();
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_LEFT_PARENTHESIS (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_LEFT_PARENTHESIS (loc);
 }
 
 ")" {
@@ -369,7 +449,12 @@ loc.step ();
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_RIGHT_PARENTHESIS (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_RIGHT_PARENTHESIS (loc);
 }
 
 "=" {
@@ -378,7 +463,12 @@ loc.step ();
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_EQUAL (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_EQUAL (loc);
 }
 
 "," {
@@ -387,7 +477,12 @@ loc.step ();
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_COMMA (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_COMMA (loc);
 }
 
 "*" {
@@ -396,7 +491,12 @@ loc.step ();
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_STAR (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_STAR (loc);
 }
 
 "/" {
@@ -405,7 +505,12 @@ loc.step ();
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_SLASH (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_SLASH (loc);
 }
 
 ":" {
@@ -414,7 +519,12 @@ loc.step ();
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_COLON (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_COLON (loc);
 }
 
 ";" {
@@ -423,7 +533,12 @@ loc.step ();
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_SEMICOLON (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_SEMICOLON (loc);
 }
 
 "|" {
@@ -432,7 +547,12 @@ loc.step ();
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_BAR (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_BAR (loc);
 }
 
 
@@ -444,7 +564,10 @@ loc.step ();
 
 
 
-<<EOF>>    return yy::parser::make_YYEOF (loc);
+<<EOF>> {
+  return
+    yy::parser::make_YYEOF (loc);
+}
 
 
 
