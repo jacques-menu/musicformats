@@ -7318,6 +7318,348 @@ ostream& operator<< (ostream& os, const S_oahStringToIntMapElementAtom& elt)
 }
 
 //______________________________________________________________________________
+S_oahStringToStringMapElementAtom oahStringToStringMapElementAtom::create (
+    const string&         longName,
+    const string&         shortName,
+    const string&         description,
+    const string&         valueSpecification,
+    const string&         variableName,
+    map<string, string>&  stringToStringMapVariable)
+{
+  oahStringToStringMapElementAtom* o = new
+    oahStringToStringMapElementAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName,
+      stringToStringMapVariable);
+  assert (o != nullptr);
+  return o;
+}
+
+oahStringToStringMapElementAtom::oahStringToStringMapElementAtom (
+    const string&         longName,
+    const string&         shortName,
+    const string&         description,
+    const string&         valueSpecification,
+    const string&         variableName,
+    map<string, string>&  stringToStringMapVariable)
+  : oahAtomStoringAValue (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName),
+    fStringToStringMapVariable (
+      stringToStringMapVariable)
+{
+  fMultipleOccurrencesAllowed = true;
+}
+
+oahStringToStringMapElementAtom::~oahStringToStringMapElementAtom ()
+{}
+
+void oahStringToStringMapElementAtom::applyAtomWithValue (
+  const string& theString,
+  ostream&      os)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "==> oahAtom is of type 'oahStringToStringMapElementAtom'" <<
+      endl;
+  }
+#endif
+
+  // theString contains the string string map specification
+  // decipher it to extract duration and perSecond values
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "==> oahAtom is of type 'oahStringToStringMapElementAtom'" <<
+      endl;
+  }
+#endif
+
+  string regularExpression (
+    "[[:space:]]*"
+    "([[:w:]]+)"      // string
+    "[[:space:]]*"
+    ":"
+    "[[:space:]]*"
+    "([[:w:]]+)"      // string
+    "[[:space:]]*"
+    );
+
+  regex  e (regularExpression);
+  smatch sm;
+
+  regex_match (theString, sm, e);
+
+  unsigned int smSize = sm.size ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "There are " << smSize << " matches" <<
+      " for " <<
+      fetchNamesBetweenQuotes () <<
+      " string \"" << theString <<
+      "\" with regex \"" << regularExpression <<
+      "\":" <<
+      endl;
+
+    ++gIndenter;
+
+    for (unsigned i = 0; i < smSize; ++i) {
+      gLogStream <<
+        i << ": " << "\"" << sm [i] << "\"" <<
+        endl;
+    } // for
+    gLogStream << endl;
+
+    --gIndenter;
+  }
+#endif
+
+  if (smSize != 3) {
+    stringstream s;
+
+    s <<
+      "-resetMeasureElementMeasureNumber argument \"" <<
+      theString <<
+      "\" is ill-formed";
+
+    oahError (s.str ());
+  }
+
+  string musicxmlMeasureNumber = sm [1];
+
+  int lilypondMeasureNumber;
+  {
+    stringstream s;
+    s << sm [2];
+    s >> lilypondMeasureNumber;
+  }
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "musicxmlMeasureNumber = " <<
+      musicxmlMeasureNumber <<
+      endl <<
+      "lilypondMeasureNumber = " <<
+      lilypondMeasureNumber <<
+      endl;
+  }
+#endif
+
+  fStringToStringMapVariable [musicxmlMeasureNumber] =
+    lilypondMeasureNumber;
+  fSetByUser = true;
+}
+
+void oahStringToStringMapElementAtom::acceptIn (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahStringToStringMapElementAtom::acceptIn ()" <<
+      endl;
+  }
+#endif
+
+  if (visitor<S_oahStringToStringMapElementAtom>*
+    p =
+      dynamic_cast<visitor<S_oahStringToStringMapElementAtom>*> (v)) {
+        S_oahStringToStringMapElementAtom elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahStringToStringMapElementAtom::visitStart ()" <<
+            endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void oahStringToStringMapElementAtom::acceptOut (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahStringToStringMapElementAtom::acceptOut ()" <<
+      endl;
+  }
+#endif
+
+  if (visitor<S_oahStringToStringMapElementAtom>*
+    p =
+      dynamic_cast<visitor<S_oahStringToStringMapElementAtom>*> (v)) {
+        S_oahStringToStringMapElementAtom elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahStringToStringMapElementAtom::visitEnd ()" <<
+            endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void oahStringToStringMapElementAtom::browseData (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahStringToStringMapElementAtom::browseData ()" <<
+      endl;
+  }
+#endif
+}
+
+string oahStringToStringMapElementAtom::asShortNamedOptionString () const
+{
+  stringstream s;
+
+  s <<
+    '-' << fShortName << ' ';
+
+  if (! fStringToStringMapVariable.size ()) {
+    s << "empty";
+  }
+  else {
+    map<string, string>::const_iterator
+      iBegin = fStringToStringMapVariable.begin (),
+      iEnd   = fStringToStringMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      s << (*i).first << "=" << (*i).second;
+      if (++i == iEnd) break;
+      s << ",";
+    } // for
+  }
+
+  return s.str ();
+}
+
+string oahStringToStringMapElementAtom::asActualLongNamedOptionString () const
+{
+  stringstream s;
+
+  s <<
+    '-' << fLongName << ' ';
+
+  if (! fStringToStringMapVariable.size ()) {
+    s << "empty";
+  }
+  else {
+    map<string, string>::const_iterator
+      iBegin = fStringToStringMapVariable.begin (),
+      iEnd   = fStringToStringMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      s << (*i).first << "=" << (*i).second;
+      if (++i == iEnd) break;
+      s << ",";
+    } // for
+  }
+
+  return s.str ();
+}
+
+void oahStringToStringMapElementAtom::print (ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "StringToStringMapAtom:" <<
+    endl;
+
+  ++gIndenter;
+
+  printAtomWithVariableEssentials (
+    os, fieldWidth);
+
+  os << left <<
+    setw (fieldWidth) <<
+    "stringSetVariable" << " : '" <<
+    endl;
+
+  if (! fStringToStringMapVariable.size ()) {
+    os << "empty";
+  }
+  else {
+    map<string, string>::const_iterator
+      iBegin = fStringToStringMapVariable.begin (),
+      iEnd   = fStringToStringMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i).first << " --> " << (*i).second;
+      if (++i == iEnd) break;
+      os << endl;
+    } // for
+  }
+
+  os << endl;
+
+  --gIndenter;
+}
+
+void oahStringToStringMapElementAtom::printAtomWithVariableOptionsValues (
+  ostream& os,
+  int      valueFieldWidth) const
+{
+  os << left <<
+    setw (valueFieldWidth) <<
+    fVariableName <<
+    " : ";
+
+  if (! fStringToStringMapVariable.size ()) {
+    os <<
+      "empty" <<
+      endl;
+  }
+  else {
+    os << endl;
+    ++gIndenter;
+
+    map<string, string>::const_iterator
+      iBegin = fStringToStringMapVariable.begin (),
+      iEnd   = fStringToStringMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os <<
+        "\"" <<
+        (*i).first <<
+        "\" --> \"" <<
+        (*i).second <<
+        "\"" <<
+        endl;
+      if (++i == iEnd) break;
+    } // for
+
+    os <<
+      "set by user" <<
+      endl;
+
+    --gIndenter;
+  }
+}
+
+ostream& operator<< (ostream& os, const S_oahStringToStringMapElementAtom& elt)
+{
+  elt->print (os);
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahStringAndIntegerAtom oahStringAndIntegerAtom::create (
   const string& longName,
   const string& shortName,

@@ -16,6 +16,8 @@
 
 #include "mfExceptions.h"
 
+#include "location.hh"
+
 
 using namespace std;
 
@@ -115,16 +117,12 @@ typedef SMARTP<mfsl2musicxmlException> S_mfsl2musicxmlException;
 
 //______________________________________________________________________________
 EXP void mfslWarning (
-  const string& inputSourceName,
-  int           inputLineNumber,
-  const string& message);
+  const string&       message,
+  const yy::location& loc);
 
 EXP void mfslError (
-  const string& inputSourceName,
-  int           inputLineNumber,
-  const string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
-  const string& message);
+  const string&       message,
+  const yy::location& loc);
 
 EXP void mfslInternalError (
   const string& inputSourceName,

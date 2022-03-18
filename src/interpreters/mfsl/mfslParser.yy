@@ -20,6 +20,8 @@
 
 #include "oahBasicTypes.h"
 
+#include "mfslWae.h"
+
 
 using namespace MusicFormats;
 
@@ -54,6 +56,7 @@ using namespace MusicFormats;
 %define parse.trace
 %define parse.error detailed
 %define parse.lac full
+// %define api.pure full
 
 %printer { yyo << $$; } <*>;
 
@@ -98,8 +101,8 @@ S_mfslVariable pCurrentChoiceVariable;
 # include "mfslDriver.h"
 }
 
-%token <string> INTEGER     "integer"
-%token <string> DOUBLE     "double"
+%token <string> INTEGER "integer number"
+%token <string> DOUBLE  "double number"
 
 %token <string> SINGLE_QUOTED_STRING "single quoted_string"
 %token <string> DOUBLE_QUOTED_STRING "double quoted_string"
@@ -140,7 +143,6 @@ S_mfslVariable pCurrentChoiceVariable;
 
 Script :
       {
-
         // push a new current scope onto the stack
         drv.pushScopeOntoStack (
           mfslScope::create ("Main scope"));
@@ -152,12 +154,8 @@ Script :
 
   ScriptElementsSequence
       {
-        // store the resulting current scope in the driver
-//         drv.setOptionsNamesAndValues (
-//           drv.topOfScopesStack ());
-
-        // pop the current current scope from the stack
-//         drv.popScopeFromStack ();
+        // DON'T pop the current current scope from the stack,
+        // it contains the consolidated options and values
       }
 ;
 
@@ -204,6 +202,13 @@ Input
       {
         drv.setInputFileName ($3);
      }
+
+//   | INPUT ":" error
+//       {
+//         mfslError (
+//           "file name expected after 'input :'",
+//           yy::location ());
+//       }
 ;
 
 
@@ -221,6 +226,7 @@ ScriptElement
   | ChoiceDeclaration
   | ChoiceSetting
   | CaseStatement
+  | AllStatement
 ;
 
 
@@ -236,15 +242,8 @@ Option
             endl;
         }
 
-//         S_oahOptionsNamesAndValuesVector
-//           optionsNamesAndValuesVector =
-//             oahOptionsNamesAndValuesVector::create ();
-//
-//         optionsNamesAndValuesVector->
-//           appendOptionNameAndValue ($1, "");
-
-        drv.registerOptionNamesAndValuesInCurrentScope (
-          oahOptionNameAndValue::create ($1, ""));
+        drv.registerOptionInCurrentScope (
+          oahOption::create ($1, ""));
       }
 
   | OPTION OptionValue
@@ -255,15 +254,8 @@ Option
             endl;
         }
 
-//         S_oahOptionsNamesAndValuesVector
-//           optionsNamesAndValuesVector =
-//             oahOptionsNamesAndValuesVector::create ();
-//
-//         optionsNamesAndValuesVector->
-//           appendOptionNameAndValue;
-
-        drv.registerOptionNamesAndValuesInCurrentScope (
-          oahOptionNameAndValue::create ($1, $2));
+        drv.registerOptionInCurrentScope (
+          oahOption::create ($1, $2));
       }
 ;
 
@@ -345,39 +337,29 @@ CaseStatement
             endl;
         }
 
-        // push a new current case statement descr
+        // push a new current case statement
         drv.pushCaseStatementOntoStack (
           mfslCaseStatement::create (
             drv.getVariablesTable () ->
               checkCaseVariableByName ($2)));
+//
+//         // push a new current scope onto the stack
+//         string caseScopeName = "Case " + $2;
+//
+//         drv.pushScopeOntoStack (
+//           mfslScope::create (caseScopeName));
       }
 
     CaseAlternativesSequence SEMICOLON
       {
-        if (drv.getTraceSemantics ()) {
-//           S_oahOptionsNamesAndValuesVector
-//             optionsNamesAndValuesVector=
-//               drv.topOfOptionNamesAndValuesStack ();
-
-//           gLogStream <<
-//             "====> CaseStatement: ";
-//
-//           if (optionsNamesAndValuesVector) {
-//             gLogStream << optionsNamesAndValuesVector;
-//           }
-//           else {
-//             gLogStream << " none";
-//           }
-//
-//           gLogStream <<
-//             endl;
-        }
-
         // have all the possible value been used as labels?
         drv.topOfCaseStatementStack ()->
           checkThatAllPossibleValuesHaveBeenUsed ();
 
-        // pop the current case statement descr from the stack
+        // pop the current scorpe from the stack
+        drv.popScopeFromStack ();
+
+        // pop the current case statement from the stack
         drv.popCaseStatementFromStack ();
       }
 ;
@@ -400,34 +382,13 @@ CaseAlternative :
 
         // push a new current options names and values
         // for this case alternative
-//         drv.registerOptionNamesAndValuesInCurrentScope (
-//           oahOptionsNamesAndValuesVector::create ());
+//         drv.registerOptionInCurrentScope (
+//           oahOptionsVector::create ());
       }
 
   ScriptElementsSequence SEMICOLON
       {
         string label = $1;
-
-//         S_oahOptionsNamesAndValuesVector
-//           optionsNamesAndValuesVector =
-//             drv.topOfOptionNamesAndValuesStack ();
-
-//         if (drv.getTraceSemantics ()) {
-//           gLogStream <<
-//             "====> CaseAlternative \"" <<
-//             label <<
-//             "\", optionsNamesAndValuesVector: ";
-//
-//           if (optionsNamesAndValuesVector) {
-//             gLogStream << optionsNamesAndValuesVector;
-//           }
-//           else {
-//             gLogStream << " none";
-//           }
-//
-//           gLogStream <<
-//             endl;
-//         }
 
         S_mfslCaseStatement
           currentCaseStatement =
@@ -449,47 +410,137 @@ CaseAlternative :
             gLogStream <<
               "====> Keeping caseAlternative \"" <<
               label <<
-              "\", optionsNamesAndValuesVector: ";
-
-  // optionsNameAndValueVectorsPlusEquals
-
-
-//             if (optionsNamesAndValuesVector) {
-//               gLogStream << optionsNamesAndValuesVector;
-//             }
-//             else {
-//               gLogStream << " none";
-//             }
-//
-//             gLogStream <<
-//               endl;
+              "\", optionsVector: " <<
+              endl << endl;
           }
 
-//           drv.registerOptionNamesAndValuesInCurrentScope (
-//             optionsNamesAndValuesVector);
+//           drv.registerOptionInCurrentScope (
+//             optionsVector);
         }
+
         else {
           // discard this case alternative
           if (drv.getTraceSemantics ()) {
             gLogStream <<
               "====> Discarding caseAlternative \"" <<
               label <<
-              "\", optionsNamesAndValuesVector: ";
-
-//             if (optionsNamesAndValuesVector) {
-//               gLogStream << optionsNamesAndValuesVector;
-//             }
-//             else {
-//               gLogStream << " none";
-//             }
-//
-//             gLogStream <<
-//               endl;
+              "\", optionsVector: " <<
+              endl << endl;
           }
         }
 
         // pop the current options names and values from the stack
-//         drv.popOptionNamesAndValuesFromStack ();
+//         drv.popOptionsFromStack ();
+      }
+;
+
+
+// all
+//_______________________________________________________________________________
+
+AllStatement
+  : ALL NAME ":"
+      {
+        if (drv.getTraceSemantics ()) {
+          gLogStream <<
+            "====> AllStatement: " << $2 << ":" << " ..." <<
+            endl;
+        }
+
+        // push a new current case statement
+//         drv.appendAllStatementToList (
+//           mfslAllStatement::create (
+//             drv.getVariablesTable () ->
+//               checkAllVariableByName ($2)));
+
+//         // push a new current scope onto the stack
+//         string caseScopeName = "All " + $2;
+//
+//         drv.pushScopeOntoStack (
+//           mfslScope::create (caseScopeName));
+      }
+
+    AllAlternativesSequence SEMICOLON
+      {
+        // have all the possible value been used as labels?
+//         drv.topOfAllStatementsList ()->
+//           checkThatAllPossibleValuesHaveBeenUsed ();
+
+        // pop the current scorpe from the stack
+        drv.popScopeFromStack ();
+
+//         // pop the current case statement from the stack
+//         drv.popAllStatementFromList ();
+      }
+;
+
+AllAlternativesSequence
+  : AllAlternative
+
+  | AllAlternativesSequence AllAlternative
+;
+
+AllAlternative :
+  NAME ":"
+      {
+        if (drv.getTraceSemantics ()) {
+          gLogStream <<
+            "====> AllAlternative \"" <<
+            $1 <<
+            endl;
+        }
+
+        // push a new current options names and values
+        // for this case alternative
+//         drv.registerOptionInCurrentScope (
+//           oahOptionsVector::create ());
+      }
+
+  ScriptElementsSequence SEMICOLON
+      {
+        string label = $1;
+
+        S_mfslAllStatement
+          currentAllStatement = nullptr; // JMI
+//             drv.topOfAllStatementsList ();
+
+        S_mfslVariable
+          currentAllVariable =
+            currentAllStatement->
+              getAllVariable ();
+
+        // register this case label value
+        currentAllStatement->
+          registerAllLabelValue (label);
+
+        // is label equal to case variable value?
+        if (currentAllVariable->getVariableValue () == label) {
+          // this is the case alternative to keep
+          if (drv.getTraceSemantics ()) {
+            gLogStream <<
+              "====> Keeping caseAlternative \"" <<
+              label <<
+              "\", optionsVector: " <<
+              endl << endl;
+          }
+
+//           drv.registerOptionInCurrentScope (
+//             optionsVector);
+        }
+
+        else {
+          // discard this case alternative
+          if (drv.getTraceSemantics ()) {
+            gLogStream <<
+              "====> Discarding caseAlternative \"" <<
+              label <<
+              "\", optionsVector: " <<
+              endl << endl;
+          }
+        }
+
+        // pop the current options names and values from the stack
+//         drv.popOptionsFromStack ();
       }
 ;
 
@@ -505,30 +556,9 @@ CaseAlternative :
 
 
 void
-yy::parser::error (const location_type& l, const string& m)
+yy::parser::error (const location_type& loc, const string& message)
 {
-  cerr << l << ": " << m << '\n';
+  mfslError (
+    message,
+    loc);
 }
-
-//         if (drv.getTraceSemantics ()) {
-//           S_oahOptionsNamesAndValuesVector
-//             optionsNamesAndValuesVector =
-//               drv.topOfOptionNamesAndValuesStack ();
-//
-//           gLogStream <<
-//             "====> Script optionsNamesAndValuesVector: ";
-//
-//           if (optionsNamesAndValuesVector) {
-//             gLogStream << optionsNamesAndValuesVector;
-//           }
-//           else {
-//             gLogStream << " none";
-//           }
-//
-//           gLogStream <<
-//             endl;
-//         }
-
-//         for (S_oahOptionsNamesAndValuesVector ptionsNamesAndValues: drv.getOptionsNamesAndValuesStack) {
-//           gLogStream << ptionsNamesAndValues << endl;
-//         }

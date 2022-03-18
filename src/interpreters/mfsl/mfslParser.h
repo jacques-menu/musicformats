@@ -45,7 +45,7 @@
 #ifndef YY_YY_MFSLPARSER_H_INCLUDED
 # define YY_YY_MFSLPARSER_H_INCLUDED
 // "%code requires" blocks.
-#line 42 "mfslParser.yy"
+#line 44 "mfslParser.yy"
 
   # include <string>
 
@@ -410,8 +410,8 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // "integer"
-      // "double"
+      // "integer number"
+      // "double number"
       // "single quoted_string"
       // "double quoted_string"
       // "name"
@@ -487,8 +487,8 @@ namespace yy {
     TOK_SET = 15,                  // "set"
     TOK_CASE = 16,                 // "case"
     TOK_ALL = 17,                  // "all"
-    TOK_INTEGER = 18,              // "integer"
-    TOK_DOUBLE = 19,               // "double"
+    TOK_INTEGER = 18,              // "integer number"
+    TOK_DOUBLE = 19,               // "double number"
     TOK_SINGLE_QUOTED_STRING = 20, // "single quoted_string"
     TOK_DOUBLE_QUOTED_STRING = 21, // "double quoted_string"
     TOK_NAME = 22,                 // "name"
@@ -529,8 +529,8 @@ namespace yy {
         S_SET = 15,                              // "set"
         S_CASE = 16,                             // "case"
         S_ALL = 17,                              // "all"
-        S_INTEGER = 18,                          // "integer"
-        S_DOUBLE = 19,                           // "double"
+        S_INTEGER = 18,                          // "integer number"
+        S_DOUBLE = 19,                           // "double number"
         S_SINGLE_QUOTED_STRING = 20,             // "single quoted_string"
         S_DOUBLE_QUOTED_STRING = 21,             // "double quoted_string"
         S_NAME = 22,                             // "name"
@@ -555,7 +555,12 @@ namespace yy {
         S_41_4 = 41,                             // $@4
         S_CaseAlternativesSequence = 42,         // CaseAlternativesSequence
         S_CaseAlternative = 43,                  // CaseAlternative
-        S_44_5 = 44                              // $@5
+        S_44_5 = 44,                             // $@5
+        S_AllStatement = 45,                     // AllStatement
+        S_46_6 = 46,                             // $@6
+        S_AllAlternativesSequence = 47,          // AllAlternativesSequence
+        S_AllAlternative = 48,                   // AllAlternative
+        S_49_7 = 49                              // $@7
       };
     };
 
@@ -592,8 +597,8 @@ namespace yy {
       {
         switch (this->kind ())
     {
-      case symbol_kind::S_INTEGER: // "integer"
-      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_INTEGER: // "integer number"
+      case symbol_kind::S_DOUBLE: // "double number"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted_string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted_string"
       case symbol_kind::S_NAME: // "name"
@@ -665,8 +670,8 @@ namespace yy {
         // Value type destructor.
 switch (yykind)
     {
-      case symbol_kind::S_INTEGER: // "integer"
-      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_INTEGER: // "integer number"
+      case symbol_kind::S_DOUBLE: // "double number"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted_string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted_string"
       case symbol_kind::S_NAME: // "name"
@@ -1542,8 +1547,8 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 45,     ///< Last index in yytable_.
-      yynnts_ = 21,  ///< Number of nonterminal symbols.
+      yylast_ = 60,     ///< Last index in yytable_.
+      yynnts_ = 26,  ///< Number of nonterminal symbols.
       yyfinal_ = 3 ///< Termination state number.
     };
 
@@ -1569,8 +1574,8 @@ switch (yykind)
   {
     switch (this->kind ())
     {
-      case symbol_kind::S_INTEGER: // "integer"
-      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_INTEGER: // "integer number"
+      case symbol_kind::S_DOUBLE: // "double number"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted_string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted_string"
       case symbol_kind::S_NAME: // "name"
@@ -1612,8 +1617,8 @@ switch (yykind)
     super_type::move (s);
     switch (this->kind ())
     {
-      case symbol_kind::S_INTEGER: // "integer"
-      case symbol_kind::S_DOUBLE: // "double"
+      case symbol_kind::S_INTEGER: // "integer number"
+      case symbol_kind::S_DOUBLE: // "double number"
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted_string"
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted_string"
       case symbol_kind::S_NAME: // "name"
@@ -1690,7 +1695,7 @@ switch (yykind)
 
 
 } // yy
-#line 1694 "mfslParser.h"
+#line 1699 "mfslParser.h"
 
 
 

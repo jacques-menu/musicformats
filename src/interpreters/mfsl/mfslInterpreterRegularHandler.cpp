@@ -223,6 +223,8 @@ void mfslInterpreterRegularHandler::createMfslRegularGroup ()
   registerAtomInRegularSubgroup ("display-non-terminals", subGroup);
 
   registerAtomInRegularSubgroup ("trace-semantics", subGroup);
+
+  registerAtomInRegularSubgroup ("set-choice", subGroup);
 }
 
 void mfslInterpreterRegularHandler::createOahRegularGroup ()

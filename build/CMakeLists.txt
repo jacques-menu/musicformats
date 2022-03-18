@@ -324,7 +324,7 @@ if (GUIDO)
 endif()
 
 if (MSDL)
-	set (MF_CLI_SAMPLES ${MF_CLI_SAMPLES}   msdlconverter)
+	set (MF_CLI_SAMPLES ${MF_CLI_SAMPLES}   msdlConverter)
 endif()
 
 

@@ -159,6 +159,8 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  fDisplayNonTerminals;
 
     Bool                  fTraceSemantics;
+
+    map<string, string>   fSetChoiceToValueMap;
 };
 typedef SMARTP<mfslInterpreterOahGroup> S_mfslInterpreterOahGroup;
 EXP ostream& operator<< (ostream& os, const S_mfslInterpreterOahGroup& elt);

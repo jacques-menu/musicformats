@@ -428,14 +428,14 @@ mfslInterpreterInsiderOahGroup::mfslInterpreterInsiderOahGroup ()
 R"(Options that are used by mfslInterpreter are grouped here.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {
-  initializemfslInterpreterInsiderOahGroup ();
+  initializeMfslInterpreterInsiderOahGroup ();
 }
 
 mfslInterpreterInsiderOahGroup::~mfslInterpreterInsiderOahGroup ()
 {}
 
 //_______________________________________________________________________________
-void mfslInterpreterInsiderOahGroup::initializemfslInterpreterInsiderOahGroup ()
+void mfslInterpreterInsiderOahGroup::initializeMfslInterpreterInsiderOahGroup ()
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

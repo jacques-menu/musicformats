@@ -24,31 +24,25 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 EXP void mfslWarning (
-  const string& inputSourceName,
-  int           inputLineNumber,
-  const string& message)
+  const string&       message,
+  const yy::location& loc)
 {
-  waeWarning (
-    "mfsl",
-    inputSourceName,
-    inputLineNumber,
-    message);
+  gLogStream <<
+    "### [MFSL] WARNING " <<
+    loc << ": " << message <<
+    endl;
 }
 
 EXP void mfslError (
-  const string& inputSourceName,
-  int           inputLineNumber,
-  const string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
-  const string& message)
+  const string&       message,
+  const yy::location& loc)
 {
-  waeError (
-    "mfsl",
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
+  gIndenter.resetToZero ();
+
+  gLogStream <<
+    "### [MFSL] ERROR " <<
+    loc << ": " << message <<
+    endl;
 
   if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
     throw mfslException (message);

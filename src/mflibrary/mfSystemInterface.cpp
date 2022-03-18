@@ -38,7 +38,7 @@ EXP int mfExecuteCommand (
 
   const char* commandAsCString = command.c_str ();
 
-  const char* mode = "r+";
+  const char* mode = "r+"; // bi-directional pipe
 
 #if (WIN32)
 

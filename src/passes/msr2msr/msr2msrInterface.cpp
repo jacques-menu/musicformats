@@ -92,7 +92,7 @@ S_msrScore translateMsrToMsr (
   msr2msrTranslator
     translator;
 
-  // build the resulting MSR score
+  // build the resulting second MSR score
   S_msrScore
     resultingNewMsrScore =
       translator.translateMsrToMsr (
@@ -136,19 +136,19 @@ S_msrScore translateMsrToMsr (
     gIndenter.resetToZero ();
   }
 
-  // display the resulting MSR score if requested
+  // display the resulting second MSR score if requested
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
     displayPopulatedMsrScore_OptionalPass (
       resultingNewMsrScore,
-      "Display the resulting MSR as text");
+      "Display the resulting second MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
     displayPopulatedMsrScore_OptionalPass (
       resultingNewMsrScore,
-      "Display the resulting MSR as short text");
+      "Display the resulting second MSR as text, short version");
   }
 
   // display the populated MSR score summary if requested
@@ -274,7 +274,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
     displayPopulatedMsrScore_OptionalPass (
       resultingNewMsrScore,
-      "Display the resulting new MSR as short text");
+      "Display the resulting new MSR as text, short version");
   }
 
   // display the resulting new MSR score summary if requested

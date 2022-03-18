@@ -981,10 +981,10 @@ R"()",
 R"(Rename part ORIGINAL_NAME to NEW_NAME, for example after displaying
 the names in the score or a summary of the latter in a first run with options
 '-dmsrnames, -display-msr-names' or 'dmsrsum, -display-msr-summary'.
-PART_RENAME_SPEC should be of the form ORIGINAL_NAM:NEW_NAME .
+PART_RENAME_SPEC should be of the form ORIGINAL_NAME:NEW_NAME .
 There can be spaces around the ':'.
 There can be several occurrences of this option.)",
-         regex ("EXECUTABLE"),
+          regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "PART_RENAME_SPEC",
         "fPartsRenamingMap",

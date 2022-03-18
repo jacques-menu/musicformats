@@ -462,18 +462,18 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static const flex_int16_t yy_accept[99] =
+static const flex_int16_t yy_accept[97] =
     {   0,
         0,    0,    0,    0,    0,    0,    0,    0,    7,    7,
        50,   48,    1,    2,   19,    3,   11,   39,   40,   43,
        42,   48,   44,   29,   45,   46,   41,   36,   36,   36,
        36,   36,   36,   47,   18,   17,   12,   18,   26,   25,
-       20,   26,    5,    4,    7,    7,    8,   10,    1,    2,
-        0,   38,    6,    0,   29,    0,   36,   36,   36,   36,
-       36,   36,   36,   13,   16,   14,   15,   21,   24,   22,
-       23,    7,    8,    8,    9,   37,   38,   27,    0,   28,
-       35,   36,   36,   36,   33,   36,   37,    0,   34,   36,
-       36,   30,    0,   27,   36,   31,   32,    0
+       20,   26,    5,    4,    7,    7,    8,   10,    0,   38,
+        6,    0,   29,    0,   36,   36,   36,   36,   36,   36,
+       36,   13,   16,   14,   15,   21,   24,   22,   23,    7,
+        8,    8,    9,   37,   38,   27,    0,   28,   35,   36,
+       36,   36,   33,   36,   37,    0,   34,   36,   36,   30,
+        0,   27,   36,   31,   32,    0
 
     } ;
 
@@ -517,36 +517,36 @@ static const YY_CHAR yy_meta[38] =
         5,    5,    5,    5,    5,    7,    1
     } ;
 
-static const flex_int16_t yy_base[110] =
+static const flex_int16_t yy_base[108] =
     {   0,
-        0,    0,   35,   36,   40,   42,  122,  120,   62,   96,
-      121,  189,  118,  116,  189,  189,  189,  189,  189,  189,
-      189,  106,  107,   34,  189,  189,  189,    0,   86,   24,
-       84,   87,   81,  189,  189,  189,  189,   44,  189,  189,
-      189,   51,  189,  189,    0,    0,   47,  189,  109,  107,
-        0,    0,  189,   94,   67,   57,    0,   79,   74,   73,
-       70,   66,   66,  189,  189,  189,  189,  189,  189,  189,
-      189,    0,   54,   61,  189,    0,    0,   69,   81,   79,
-        0,   65,   58,   44,    0,   48,    0,   91,    0,   51,
-       25,    0,   38,   37,   14,    0,    0,  189,  132,  139,
+        0,    0,   35,   36,   40,   42,  116,  115,   62,   96,
+      116,  189,  189,  189,  189,  189,  189,  189,  189,  189,
+      189,  103,  105,   34,  189,  189,  189,    0,   84,   24,
+       82,   85,   79,  189,  189,  189,  189,   44,  189,  189,
+      189,   51,  189,  189,    0,    0,   47,  189,    0,    0,
+      189,   94,   67,   57,    0,   79,   74,   73,   70,   66,
+       66,  189,  189,  189,  189,  189,  189,  189,  189,    0,
+       54,   61,  189,    0,    0,   69,   81,   79,    0,   65,
+       58,   44,    0,   48,    0,   91,    0,   51,   25,    0,
+       38,   37,   14,    0,    0,  189,  132,  139,  146,  153,
 
-      146,  153,  158,  162,  168,  173,  174,  178,  182
+      158,  162,  168,  173,  174,  178,  182
     } ;
 
-static const flex_int16_t yy_def[110] =
+static const flex_int16_t yy_def[108] =
     {   0,
-       98,    1,   99,   99,  100,  100,  101,  101,  102,  102,
-       98,   98,   98,   98,   98,   98,   98,   98,   98,   98,
-       98,  103,   98,   98,   98,   98,   98,  104,  104,  104,
-      104,  104,  104,   98,   98,   98,   98,   98,   98,   98,
-       98,   98,   98,   98,  105,  105,  106,   98,   98,   98,
-      107,  108,   98,   98,   98,   98,  104,  104,  104,  104,
-      104,  104,  104,   98,   98,   98,   98,   98,   98,   98,
-       98,  105,  106,  106,   98,  109,  108,   98,   98,   98,
-      104,  104,  104,  104,  104,  104,  109,   98,  104,  104,
-      104,  104,   98,   98,  104,  104,  104,    0,   98,   98,
+       96,    1,   97,   97,   98,   98,   99,   99,  100,  100,
+       96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
+       96,  101,   96,   96,   96,   96,   96,  102,  102,  102,
+      102,  102,  102,   96,   96,   96,   96,   96,   96,   96,
+       96,   96,   96,   96,  103,  103,  104,   96,  105,  106,
+       96,   96,   96,   96,  102,  102,  102,  102,  102,  102,
+      102,   96,   96,   96,   96,   96,   96,   96,   96,  103,
+      104,  104,   96,  107,  106,   96,   96,   96,  102,  102,
+      102,  102,  102,  102,  107,   96,  102,  102,  102,  102,
+       96,   96,  102,  102,  102,    0,   96,   96,   96,   96,
 
-       98,   98,   98,   98,   98,   98,   98,   98,   98
+       96,   96,   96,   96,   96,   96,   96
     } ;
 
 static const flex_int16_t yy_nxt[227] =
@@ -554,28 +554,28 @@ static const flex_int16_t yy_nxt[227] =
        12,   13,   14,   15,   16,   17,   18,   19,   20,   12,
        21,   22,   12,   23,   24,   25,   26,   27,   28,   28,
        28,   12,   12,   29,   30,   28,   28,   31,   28,   28,
-       28,   28,   32,   33,   28,   12,   34,   36,   36,   97,
-       37,   37,   40,   41,   40,   41,   54,   59,   55,   64,
-       60,   94,   94,   56,   68,   74,   38,   38,   96,   56,
-       75,   42,   98,   42,   46,   65,   79,   98,   79,   74,
-       47,   80,   69,   66,   75,   95,   92,   67,   91,   54,
-       70,   55,   48,   78,   71,   90,   56,   48,   88,   48,
-       89,   48,   56,   80,   88,   80,   86,   48,   46,   85,
+       28,   28,   32,   33,   28,   12,   34,   36,   36,   95,
+       37,   37,   40,   41,   40,   41,   52,   57,   53,   62,
+       58,   92,   92,   54,   66,   72,   38,   38,   94,   54,
+       73,   42,   96,   42,   46,   63,   77,   96,   77,   72,
+       47,   78,   67,   64,   73,   93,   90,   65,   89,   52,
+       68,   53,   48,   76,   69,   88,   54,   48,   86,   48,
+       87,   48,   54,   78,   86,   78,   84,   48,   46,   83,
 
-       93,   84,   93,   83,   47,   94,   82,   81,   78,   50,
-       49,   63,   62,   61,   58,   53,   48,   51,   50,   49,
-       98,   48,   44,   48,   44,   48,   98,   98,   98,   98,
-       98,   48,   35,   35,   35,   35,   35,   35,   35,   39,
+       91,   82,   91,   81,   47,   92,   80,   79,   76,   61,
+       60,   59,   56,   51,   49,   96,   48,   44,   44,   96,
+       96,   48,   96,   48,   96,   48,   96,   96,   96,   96,
+       96,   48,   35,   35,   35,   35,   35,   35,   35,   39,
        39,   39,   39,   39,   39,   39,   43,   43,   43,   43,
        43,   43,   43,   45,   45,   45,   45,   45,   45,   45,
-       52,   98,   52,   52,   57,   57,   57,   57,   72,   98,
-       72,   72,   72,   73,   73,   73,   73,   73,   76,   76,
-       77,   77,   77,   77,   87,   87,   87,   87,   11,   98,
-       98,   98,   98,   98,   98,   98,   98,   98,   98,   98,
+       50,   96,   50,   50,   55,   55,   55,   55,   70,   96,
+       70,   70,   70,   71,   71,   71,   71,   71,   74,   74,
+       75,   75,   75,   75,   85,   85,   85,   85,   11,   96,
+       96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
 
-       98,   98,   98,   98,   98,   98,   98,   98,   98,   98,
-       98,   98,   98,   98,   98,   98,   98,   98,   98,   98,
-       98,   98,   98,   98,   98,   98
+       96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
+       96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
+       96,   96,   96,   96,   96,   96
     } ;
 
 static const flex_int16_t yy_chk[227] =
@@ -583,28 +583,28 @@ static const flex_int16_t yy_chk[227] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    3,    4,   95,
+        1,    1,    1,    1,    1,    1,    1,    3,    4,   93,
         3,    4,    5,    5,    6,    6,   24,   30,   24,   38,
-       30,   94,   93,   24,   42,   47,    3,    4,   91,   24,
-       47,    5,   73,    6,    9,   38,   56,   73,   56,   74,
-        9,   56,   42,   38,   74,   90,   86,   38,   84,   55,
-       42,   55,    9,   78,   42,   83,   55,    9,   78,    9,
-       82,    9,   55,   80,   78,   79,   63,    9,   10,   62,
+       30,   92,   91,   24,   42,   47,    3,    4,   89,   24,
+       47,    5,   71,    6,    9,   38,   54,   71,   54,   72,
+        9,   54,   42,   38,   72,   88,   84,   38,   82,   53,
+       42,   53,    9,   76,   42,   81,   53,    9,   76,    9,
+       80,    9,   53,   78,   76,   77,   61,    9,   10,   60,
 
-       88,   61,   88,   60,   10,   88,   59,   58,   54,   50,
-       49,   33,   32,   31,   29,   23,   10,   22,   14,   13,
-       11,   10,    8,   10,    7,   10,    0,    0,    0,    0,
-        0,   10,   99,   99,   99,   99,   99,   99,   99,  100,
-      100,  100,  100,  100,  100,  100,  101,  101,  101,  101,
-      101,  101,  101,  102,  102,  102,  102,  102,  102,  102,
-      103,    0,  103,  103,  104,  104,  104,  104,  105,    0,
-      105,  105,  105,  106,  106,  106,  106,  106,  107,  107,
-      108,  108,  108,  108,  109,  109,  109,  109,   98,   98,
-       98,   98,   98,   98,   98,   98,   98,   98,   98,   98,
+       86,   59,   86,   58,   10,   86,   57,   56,   52,   33,
+       32,   31,   29,   23,   22,   11,   10,    8,    7,    0,
+        0,   10,    0,   10,    0,   10,    0,    0,    0,    0,
+        0,   10,   97,   97,   97,   97,   97,   97,   97,   98,
+       98,   98,   98,   98,   98,   98,   99,   99,   99,   99,
+       99,   99,   99,  100,  100,  100,  100,  100,  100,  100,
+      101,    0,  101,  101,  102,  102,  102,  102,  103,    0,
+      103,  103,  103,  104,  104,  104,  104,  104,  105,  105,
+      106,  106,  106,  106,  107,  107,  107,  107,   96,   96,
+       96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
 
-       98,   98,   98,   98,   98,   98,   98,   98,   98,   98,
-       98,   98,   98,   98,   98,   98,   98,   98,   98,   98,
-       98,   98,   98,   98,   98,   98
+       96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
+       96,   96,   96,   96,   96,   96,   96,   96,   96,   96,
+       96,   96,   96,   96,   96,   96
     } ;
 
 /* Table of booleans, true if rule could match eol. */
@@ -622,11 +622,11 @@ int yy_flex_debug = 1;
 
 static const flex_int16_t yy_rule_linenum[49] =
     {   0,
-      129,  130,  134,  138,  142,  147,  151,  155,  159,  163,
-      168,  174,  187,  191,  195,  199,  203,  207,  212,  218,
-      231,  235,  239,  243,  247,  251,  257,  258,  267,  279,
-      288,  297,  306,  315,  324,  335,  346,  347,  358,  367,
-      376,  385,  394,  403,  412,  421,  430,  440
+      129,  133,  138,  143,  148,  154,  160,  165,  170,  174,
+      180,  186,  200,  205,  210,  215,  220,  225,  231,  237,
+      251,  256,  261,  266,  271,  276,  283,  284,  298,  315,
+      329,  343,  357,  371,  385,  401,  417,  418,  433,  447,
+      461,  475,  489,  503,  517,  531,  545,  560
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -659,7 +659,7 @@ char *yytext;
 #include <iostream> // for cout, cerr, TEMP JMI
 #include <sstream>
 
-// #include "mfMusicformatsError.h" // for mfMusicformatsError
+#include <string.h> // memset, strlcat
 
 #include "oahBasicTypes.h"
 
@@ -686,7 +686,7 @@ char *yytext;
 /* ---------------------------------------------------------------------- */
 #define YY_NO_INPUT 1
 #line 58 "mfslScanner.ll"
-//   yy::parser::symbol_type
+//   yy::parser::symbol_type JMI
 //   make_NAME (const std::string &s, const yy::parser::location_type& loc);
 #line 691 "mfslScanner.cpp"
 /* ---------------------------------------------------------------------- */
@@ -1038,7 +1038,7 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 99 )
+				if ( yy_current_state >= 97 )
 					yy_c = yy_meta[yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1102,84 +1102,96 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 129 "mfslScanner.ll"
-loc.step ();
+{
+  loc.step ();
+}
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 130 "mfslScanner.ll"
-loc.lines (yyleng); loc.step ();
+#line 133 "mfslScanner.ll"
+{
+  loc.lines (yyleng); loc.step ();
+}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 134 "mfslScanner.ll"
+#line 138 "mfslScanner.ll"
 {
+  loc.step ();
   BEGIN COMMENT_TO_END_OF_LINE_MODE;
 }
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 138 "mfslScanner.ll"
+#line 143 "mfslScanner.ll"
 {
+  loc.lines (yyleng); loc.step ();
   BEGIN INITIAL;
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 142 "mfslScanner.ll"
+#line 148 "mfslScanner.ll"
 {
   /* accepting any character other than {endOfLine} */
+  loc.step ();
 }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 147 "mfslScanner.ll"
+#line 154 "mfslScanner.ll"
 {
+  loc.begin.column += yyleng;
+  loc.step ();
   BEGIN PARENTHESIZED_COMMENT_MODE;
 }
 	YY_BREAK
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 151 "mfslScanner.ll"
+#line 160 "mfslScanner.ll"
 {
   /* accepting any character other than '*' */
+  loc.step ();
 }
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 155 "mfslScanner.ll"
+#line 165 "mfslScanner.ll"
 {
-  /* accepting all lthe '*' not followed by a '/' */
+  /* accepting all the '*' not followed by a '/' */
+  loc.step ();
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 159 "mfslScanner.ll"
+#line 170 "mfslScanner.ll"
 {
   BEGIN INITIAL;
 }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 163 "mfslScanner.ll"
+#line 174 "mfslScanner.ll"
 {
+  loc.step ();
 }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 168 "mfslScanner.ll"
+#line 180 "mfslScanner.ll"
 {
   pStringBuffer [0] = '\0';
-
+  loc.step ();
   BEGIN SINGLE_QUOTED_STRING_MODE;
 }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 174 "mfslScanner.ll"
+#line 186 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream <<
@@ -1190,64 +1202,71 @@ YY_RULE_SETUP
 
   BEGIN INITIAL;
 
-  return yy::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
+  return
+    yy::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
 }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 187 "mfslScanner.ll"
+#line 200 "mfslScanner.ll"
 {
-  strcat (pStringBuffer, "'"); // , STRING_BUFFER_SIZE);
+  strlcat (pStringBuffer, "'", STRING_BUFFER_SIZE);
+  loc.step ();
 }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 191 "mfslScanner.ll"
+#line 205 "mfslScanner.ll"
 {
   strcat (pStringBuffer, "\n"); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 195 "mfslScanner.ll"
+#line 210 "mfslScanner.ll"
 {
   strcat (pStringBuffer, "\t"); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 199 "mfslScanner.ll"
+#line 215 "mfslScanner.ll"
 {
+  loc.step ();
   strcat (pStringBuffer, "\\"); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 17:
 /* rule 17 can match eol */
 YY_RULE_SETUP
-#line 203 "mfslScanner.ll"
+#line 220 "mfslScanner.ll"
 {
   strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
+  loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 207 "mfslScanner.ll"
+#line 225 "mfslScanner.ll"
 {
   strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 212 "mfslScanner.ll"
+#line 231 "mfslScanner.ll"
 {
   pStringBuffer [0] = '\0';
-
+  loc.step ();
   BEGIN DOUBLE_QUOTED_STRING_MODE;
 }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 218 "mfslScanner.ll"
+#line 237 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream <<
@@ -1256,129 +1275,98 @@ YY_RULE_SETUP
       endl << endl;
   }
 
+  loc.step ();
   BEGIN INITIAL;
-
-  return yy::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
+  return
+    yy::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
 }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 231 "mfslScanner.ll"
+#line 251 "mfslScanner.ll"
 {
   strcat (pStringBuffer, "\""); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 235 "mfslScanner.ll"
+#line 256 "mfslScanner.ll"
 {
   strcat (pStringBuffer, "\n"); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 239 "mfslScanner.ll"
+#line 261 "mfslScanner.ll"
 {
+  loc.step ();
   strcat (pStringBuffer, "\t"); // , STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 243 "mfslScanner.ll"
+#line 266 "mfslScanner.ll"
 {
   strcat (pStringBuffer, "\\"); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 	YY_BREAK
 case 25:
 /* rule 25 can match eol */
 YY_RULE_SETUP
-#line 247 "mfslScanner.ll"
+#line 271 "mfslScanner.ll"
 {
   strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
+  loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 251 "mfslScanner.ll"
+#line 276 "mfslScanner.ll"
 {
   strcat (pStringBuffer, yytext); // , STRING_BUFFER_SIZE);
+  loc.step ();
 }
 	YY_BREAK
 case 27:
-#line 258 "mfslScanner.ll"
+#line 284 "mfslScanner.ll"
 case 28:
 YY_RULE_SETUP
-#line 258 "mfslScanner.ll"
+#line 284 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     " double: " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_DOUBLE (yytext, loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_DOUBLE (yytext, loc);
 }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 267 "mfslScanner.ll"
+#line 298 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     " integer: " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_INTEGER (yytext, loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_INTEGER (yytext, loc);
 }
 	YY_BREAK
 case 30:
-YY_RULE_SETUP
-#line 279 "mfslScanner.ll"
-{
-  if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl << endl;
-  }
-  return yy::parser::make_TOOL (loc);
-}
-	YY_BREAK
-case 31:
-YY_RULE_SETUP
-#line 288 "mfslScanner.ll"
-{
-  if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl << endl;
-  }
-  return yy::parser::make_INPUT (loc);
-}
-	YY_BREAK
-case 32:
-YY_RULE_SETUP
-#line 297 "mfslScanner.ll"
-{
-  if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl << endl;
-  }
-  return yy::parser::make_CHOICE (loc);
-}
-	YY_BREAK
-case 33:
-YY_RULE_SETUP
-#line 306 "mfslScanner.ll"
-{
-  if (drv.getDisplayTokens ()) {
-    gLogStream << "--> " << drv.getScannerLocation () <<
-    ": " << yytext <<
-    endl << endl;
-  }
-  return yy::parser::make_SET (loc);
-}
-	YY_BREAK
-case 34:
 YY_RULE_SETUP
 #line 315 "mfslScanner.ll"
 {
@@ -1387,158 +1375,290 @@ YY_RULE_SETUP
     ": " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_CASE (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_TOOL (loc);
 }
 	YY_BREAK
-case 35:
+case 31:
 YY_RULE_SETUP
-#line 324 "mfslScanner.ll"
+#line 329 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
     endl << endl;
   }
-  return yy::parser::make_ALL (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_INPUT (loc);
+}
+	YY_BREAK
+case 32:
+YY_RULE_SETUP
+#line 343 "mfslScanner.ll"
+{
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_CHOICE (loc);
+}
+	YY_BREAK
+case 33:
+YY_RULE_SETUP
+#line 357 "mfslScanner.ll"
+{
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_SET (loc);
+}
+	YY_BREAK
+case 34:
+YY_RULE_SETUP
+#line 371 "mfslScanner.ll"
+{
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_CASE (loc);
+}
+	YY_BREAK
+case 35:
+YY_RULE_SETUP
+#line 385 "mfslScanner.ll"
+{
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl << endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_ALL (loc);
 }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 335 "mfslScanner.ll"
+#line 401 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": name [" << yytext << "]" <<
     endl << endl;
   }
-  return yy::parser::make_NAME (yytext, loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_NAME (yytext, loc);
 }
 	YY_BREAK
 case 37:
-#line 347 "mfslScanner.ll"
+#line 418 "mfslScanner.ll"
 case 38:
 YY_RULE_SETUP
-#line 347 "mfslScanner.ll"
+#line 418 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << "]" <<
     endl << endl;
   }
-  return yy::parser::make_OPTION (yytext, loc);
+
+  loc.begin.column += yyleng;
+
+  return
+    yy::parser::make_OPTION (yytext, loc);
 }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 358 "mfslScanner.ll"
+#line 433 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_LEFT_PARENTHESIS (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_LEFT_PARENTHESIS (loc);
 }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 367 "mfslScanner.ll"
+#line 447 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_RIGHT_PARENTHESIS (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_RIGHT_PARENTHESIS (loc);
 }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 376 "mfslScanner.ll"
+#line 461 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_EQUAL (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_EQUAL (loc);
 }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 385 "mfslScanner.ll"
+#line 475 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_COMMA (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_COMMA (loc);
 }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 394 "mfslScanner.ll"
+#line 489 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_STAR (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_STAR (loc);
 }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 403 "mfslScanner.ll"
+#line 503 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_SLASH (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_SLASH (loc);
 }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 412 "mfslScanner.ll"
+#line 517 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_COLON (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_COLON (loc);
 }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 421 "mfslScanner.ll"
+#line 531 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_SEMICOLON (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_SEMICOLON (loc);
 }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 430 "mfslScanner.ll"
+#line 545 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": '" << yytext << '\'' <<
     endl << endl;
   }
-  return yy::parser::make_BAR (loc);
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_BAR (loc);
 }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 440 "mfslScanner.ll"
+#line 560 "mfslScanner.ll"
 {
    throw yy::parser::syntax_error (
      loc,
@@ -1550,15 +1670,18 @@ case YY_STATE_EOF(SINGLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(DOUBLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(COMMENT_TO_END_OF_LINE_MODE):
 case YY_STATE_EOF(PARENTHESIZED_COMMENT_MODE):
-#line 448 "mfslScanner.ll"
-return yy::parser::make_YYEOF (loc);
+#line 568 "mfslScanner.ll"
+{
+  return
+    yy::parser::make_YYEOF (loc);
+}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 452 "mfslScanner.ll"
+#line 575 "mfslScanner.ll"
 ECHO;
 	YY_BREAK
-#line 1561 "mfslScanner.cpp"
+#line 1684 "mfslScanner.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -1876,7 +1999,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 99 )
+			if ( yy_current_state >= 97 )
 				yy_c = yy_meta[yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
@@ -1909,11 +2032,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 99 )
+		if ( yy_current_state >= 97 )
 			yy_c = yy_meta[yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + yy_c];
-	yy_is_jam = (yy_current_state == 98);
+	yy_is_jam = (yy_current_state == 96);
 
 		return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2669,7 +2792,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 452 "mfslScanner.ll"
+#line 575 "mfslScanner.ll"
 
 
 

@@ -14,17 +14,17 @@
 #include "mfBool.h"
 #include "mfStringsHandling.h"
 
-#include "mfslBasicTypes.h"
-
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
 
 #include "oahOah.h"
+
+#include "mfslBasicTypes.h"
 #include "mfslInterpreterOah.h"
 
-#include "oahWae.h"
+#include "mfslWae.h"
 
 
 using namespace std;
@@ -59,6 +59,29 @@ ostream& operator<< (ostream& os, const S_mfslElement& elt)
 }
 
 //_______________________________________________________________________________
+string mfslVariableKindAsString (
+  mfslVariableKind variableKind)
+{
+  string result;
+
+  switch (variableKind) {
+    case mfslVariableKind::kVariableChoice:
+      result = "kVariableChoice";
+      break;
+    case mfslVariableKind::kVariablePath:
+      result = "kVariablePath";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const mfslVariableKind& elt)
+{
+  os << mfslVariableKindAsString (elt);
+  return os;
+}
+
 string mfslVariableValueKindAsString (
   mfslVariableValueKind variableValueKind)
 {
@@ -87,19 +110,23 @@ ostream& operator<< (ostream& os, const mfslVariableValueKind& elt)
 
 //_______________________________________________________________________________
 S_mfslVariable mfslVariable::create (
-  const string& variableName)
+  const string&    variableName,
+  mfslVariableKind variableKind)
 {
   mfslVariable* o =
     new mfslVariable (
-      variableName);
+      variableName,
+      variableKind);
   assert (o != nullptr);
   return o;
 }
 
 mfslVariable::mfslVariable (
-  const string& variableName)
+  const string&    variableName,
+  mfslVariableKind variableKind)
 {
   fVariableName = variableName;
+  fVariableKind = variableKind;
 
   fVariableValueKind =
     mfslVariableValueKind::kVariableValueNone;
@@ -112,9 +139,14 @@ void mfslVariable::setVariableValue (const string& value)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceSemantics ()) {
     gLogStream <<
-      "====> setting the value of variable \"" << fVariableName <<
-      "\" to \"" << value << "\"" <<
-      endl;
+      "====> Setting the value of " <<
+      fVariableKind <<
+      " variable \"" <<
+      fVariableName <<
+      "\" to \"" <<
+      value <<
+      "\"" <<
+      endl << endl;
   }
 
   // is this value in the variable's possible values set?
@@ -127,12 +159,19 @@ void mfslVariable::setVariableValue (const string& value)
     stringstream s;
 
     s <<
-      "variable \"" << fVariableName <<
-      " cannot be set to value \"" << value <<
+      fVariableKind <<
+      " variable \"" <<
+      fVariableName <<
+      " cannot be set to value \"" <<
+      value <<
       ", the possible values are: " <<
       possibleValuesAsString ();
 
-    oahError (s.str ());
+    mfslError (
+      s.str (),
+      yy::location (
+        yy::position (),
+        yy::position ())); // JMI
   }
 
   switch (fVariableValueKind) {
@@ -150,12 +189,21 @@ void mfslVariable::setVariableValue (const string& value)
         stringstream s;
 
         s <<
-          "variable \"" << fVariableName <<
-          " already got value \"" << fVariableValue <<
+          fVariableKind <<
+          " variable \"" <<
+          fVariableName <<
+          " already got value \"" <<
+          fVariableValue <<
           "\" supplied to the script"
-          ", ingnoring value \"" << value << "\"";
+          ", ingnoring value \"" <<
+          value <<
+          "\"";
 
-        oahWarning (s.str ());
+        mfslWarning (
+          s.str (),
+          yy::location (
+            yy::position (),
+            yy::position ())); // JMI
       }
       break;
 
@@ -165,12 +213,19 @@ void mfslVariable::setVariableValue (const string& value)
         stringstream s;
 
         s <<
-          "variable \"" << fVariableName <<
+          fVariableKind <<
+          " variable \"" <<
+          fVariableName <<
           "\"" <<
-          " already has value \"" << fVariableValue <<
+          " already has value \"" <<
+          fVariableValue <<
           "\" supplied to the script";
 
-        oahError (s.str ());
+        mfslError (
+          s.str (),
+          yy::location (
+            yy::position (),
+            yy::position ())); // JMI
       }
       break;
   } // switch
@@ -184,29 +239,44 @@ string mfslVariable::getVariableValue () const
         stringstream s;
 
         s <<
-          "variable \"" << fVariableName <<
+          fVariableKind <<
+          " variable \"" <<
+          fVariableName <<
           "\" has not got any value";
 
-        oahError (s.str ());
+        mfslError (
+          s.str (),
+          yy::location (
+            yy::position (),
+            yy::position ())); // JMI
       }
       break;
 
     case mfslVariableValueKind::kVariableValueSuppliedToScript:
       if (gGlobalMfslInterpreterOahGroup->getTraceSemantics ()) {
         gLogStream <<
-          "====> variable \"" << fVariableName << fVariableValue <<
+          "====> " <<
+          fVariableKind <<
+          " Variable \"" <<
+          fVariableName <<
+          ", " <<
+          fVariableValue <<
           "\", supplied to the script" <<
-          endl;
+          endl << endl;
       }
       break;
 
     case mfslVariableValueKind::kVariableValueSetInScript:
       if (gGlobalMfslInterpreterOahGroup->getTraceSemantics ()) {
         gLogStream <<
-          "====> variable \"" << fVariableName <<
-          "\" has value \"" << fVariableValue <<
+          "====>" <<
+          fVariableKind <<
+          "  Variable \"" <<
+          fVariableName <<
+          "\" has value \"" <<
+          fVariableValue <<
           "\", set in the script" <<
-          endl;
+          endl << endl;
       }
       break;
   } // switch
@@ -222,10 +292,16 @@ string mfslVariable::getVariableValueWithoutTrace () const
         stringstream s;
 
         s <<
-          "variable \"" << fVariableName <<
+          fVariableKind <<
+          " variable \"" <<
+          fVariableName <<
           "\" has not got any value";
 
-        oahError (s.str ());
+        mfslError (
+          s.str (),
+          yy::location (
+            yy::position (),
+            yy::position ())); // JMI
       }
       break;
 
@@ -249,19 +325,32 @@ void mfslVariable::addPossibleValue (const string& value)
     stringstream s;
 
     s <<
-      "variable \"" << fVariableName <<
-      " possible value \"" << value <<
+      fVariableKind <<
+      " variable \"" <<
+      fVariableName <<
+      " possible value \"" <<
+      value <<
       "\" occurs more that once";
 
-    oahError (s.str ());
+    mfslError (
+      s.str (),
+      yy::location (
+        yy::position (),
+        yy::position ())); // JMI
   }
 
   else {
     if (gGlobalMfslInterpreterOahGroup->getTraceSemantics ()) {
       gLogStream <<
-        "====> adding \"" << value << "\"" <<
-        " as possible value of variable \"" << fVariableName << "\"" <<
-        endl;
+        "====> Adding \"" <<
+        value <<
+        "\"" <<
+        " as possible value of " <<
+        fVariableKind <<
+        " variable \"" <<
+        fVariableName <<
+        "\"" <<
+        endl << endl;
     }
 
     fPossibleValuesSet.insert (value);
@@ -332,6 +421,9 @@ string mfslVariable::asString () const
     "mfslVariable [" <<
     "fVariableName: " << fVariableName <<
     ", " <<
+    "fVariableKind: " << fVariableKind <<
+    ", " <<
+
     "fVariableValue: [" << fVariableValue << "]" <<
     "]";
 
@@ -353,8 +445,13 @@ void mfslVariable::print (ostream& os) const
     "fVariableName" << " : \"" << fVariableName << "\"" <<
     endl <<
     setw (fieldWidth) <<
+    "fVariableKind" << " : \"" << fVariableKind << "\"" <<
+    endl <<
+
+    setw (fieldWidth) <<
     "fVariableValueKind" << " : " << fVariableValueKind << "" <<
     endl <<
+
     setw (fieldWidth) <<
     "fVariableValue" << " : \"" << fVariableValue << "\"" <<
     endl;
@@ -410,7 +507,8 @@ S_mfslVariable mfslVariablesTable::createAndInsertVariable (
   S_mfslVariable
     variable =
        mfslVariable::create (
-         variableName);
+         variableName,
+         mfslVariableKind::kVariableChoice);
 
   fVariablesMap [variableName] = variable;
 
@@ -455,7 +553,11 @@ S_mfslVariable mfslVariablesTable::checkCaseVariableByName (
             "variable \"" << variableName <<
             "\" never got a value";
 
-          oahError (s.str ());
+          mfslError (
+            s.str (),
+            yy::location (
+              yy::position (),
+              yy::position ())); // JMI
         }
         break;
 
@@ -464,11 +566,12 @@ S_mfslVariable mfslVariablesTable::checkCaseVariableByName (
         if (gGlobalMfslInterpreterOahGroup->getTraceSemantics ()) {
           // that's fine
           gLogStream <<
-            "====> variable \"" << variableName <<
+            "====> Variable \"" <<
+            variableName <<
             "\" has value \"" <<
             variable->getVariableValueWithoutTrace () <<
             "\"" <<
-            endl;
+            endl << endl;
         }
         break;
     } // switch
@@ -481,7 +584,11 @@ S_mfslVariable mfslVariablesTable::checkCaseVariableByName (
       "variable \"" << variableName <<
       "\" is unknown";
 
-    oahError (s.str ());
+    mfslError (
+      s.str (),
+      yy::location (
+        yy::position (),
+        yy::position ())); // JMI
   }
 
   return variable;
@@ -543,22 +650,22 @@ mfslScope::mfslScope (const string& scopeName)
 mfslScope::~mfslScope ()
 {}
 
-void mfslScope::registerOptionNamesAndValuesInScope (
-  S_oahOptionNameAndValue
-    optionNameAndValue)
+void mfslScope::registerOptionsInScope (
+  S_oahOption
+    option)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceSemantics ()) {
     gLogStream <<
       "====> Registering [" <<
-      optionNameAndValue <<
+      option <<
       "] in scope \"" <<
       fScopeName <<
       "\"" <<
       endl << endl;
   }
 
-  fScopeOptionsNamesAndValuesVector.push_back (
-      optionNameAndValue);
+  fScopeOptionsVector.push_back (
+    option);
 }
 
 // void mfslScope::appendElementToScope (S_mfslElement element)
@@ -593,34 +700,26 @@ void mfslScope::print (ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 14;
+  const int fieldWidth = 34;
 
   os << left <<
     setw (fieldWidth) <<
-    "fScopeName:" << " : " << fScopeName <<
+    "fScopeName" << " : " << fScopeName <<
     endl;
 
   // print the scopes option name and value vector
   if (gGlobalMfslInterpreterOahGroup->getTraceSemantics ()) {
     gLogStream <<
-      "fScopesStack:" << " : " <<
+      "fScopeOptionsVector" << " : " <<
       endl;
 
     ++gIndenter;
 
-    for (
-      S_oahOptionNameAndValue
-        optionNameAndValue :
-          fScopeOptionsNamesAndValuesVector
-    ) {
-      gLogStream <<
-        optionNameAndValue <<
-        endl;
+    for (S_oahOption option : fScopeOptionsVector) {
+      gLogStream << option;
     } // for
 
     --gIndenter;
-
-    gLogStream << endl;
   }
 
 //   os << left <<
@@ -683,7 +782,11 @@ void mfslCaseStatement::registerCaseLabelValue (const string& value)
       " value \"" << value <<
       " is already present in this case statement";
 
-    oahError (s.str ());
+    mfslError (
+      s.str (),
+      yy::location (
+        yy::position (),
+        yy::position ())); // JMI
   }
 
   // is this value in the variable's possible values set?
@@ -707,7 +810,11 @@ void mfslCaseStatement::registerCaseLabelValue (const string& value)
       ", the possible values are: " <<
       fCaseVariable->possibleValuesAsString ();
 
-    oahError (s.str ());
+    mfslError (
+      s.str (),
+      yy::location (
+        yy::position (),
+        yy::position ())); // JMI
   }
 
   // value is no longer unused
@@ -725,7 +832,11 @@ void mfslCaseStatement::checkThatAllPossibleValuesHaveBeenUsed ()
       "\" have not been used in this case statement: " <<
       mfStringSetAsString (fCaseUnusedLabels);
 
-    oahError (s.str ());
+    mfslError (
+      s.str (),
+      yy::location (
+        yy::position (),
+        yy::position ())); // JMI
   }
 }
 
@@ -771,6 +882,148 @@ void mfslCaseStatement::print (ostream& os) const
 }
 
 ostream& operator<< (ostream& os, const S_mfslCaseStatement& elt)
+{
+  os << elt->asString ();
+  return os;
+}
+
+//_______________________________________________________________________________
+S_mfslAllStatement mfslAllStatement::create (
+  S_mfslVariable allVariable)
+{
+  mfslAllStatement* o =
+    new mfslAllStatement (
+      allVariable);
+  assert (o != nullptr);
+  return o;
+}
+
+mfslAllStatement::mfslAllStatement (
+  S_mfslVariable allVariable)
+{
+  fAllVariable = allVariable;
+
+  // all possible values are initially unused
+  for (string value : fAllVariable->getPossibleValuesSet ()) {
+    fAllUnusedLabels.insert (value);
+  }
+}
+
+mfslAllStatement::~mfslAllStatement ()
+{}
+
+void mfslAllStatement::registerAllLabelValue (const string& value)
+{
+  if (! mfStringIsInStringSet (value, fAllUnusedLabels)) {
+    // this label value has already been registered
+    stringstream s;
+
+    s <<
+      "variable \"" <<
+      fAllVariable->getVariableName () <<
+      " value \"" << value <<
+      " is already present in this all statement";
+
+    mfslError (
+      s.str (),
+      yy::location (
+        yy::position (),
+        yy::position ())); // JMI
+  }
+
+  // is this value in the variable's possible values set?
+  set<string>
+    possibleValueSet =
+      fAllVariable->
+        getPossibleValuesSet ();
+
+  set<string>::const_iterator
+    it =
+      possibleValueSet.find (value);
+
+  if (it == possibleValueSet.end ()) {
+    // no, issue error message
+    stringstream s;
+
+    s <<
+      "variable \"" <<
+      fAllVariable->getVariableName () <<
+      " cannot have value \"" << value <<
+      ", the possible values are: " <<
+      fAllVariable->possibleValuesAsString ();
+
+    mfslError (
+      s.str (),
+      yy::location (
+        yy::position (),
+        yy::position ())); // JMI
+  }
+
+  // value is no longer unused
+  fAllUnusedLabels.erase (value);
+}
+
+void mfslAllStatement::checkThatAllPossibleValuesHaveBeenUsed ()
+{
+  if (fAllUnusedLabels.size ()) {
+    stringstream s;
+
+    s <<
+      "The following values for variable \"" <<
+      fAllVariable->getVariableName () <<
+      "\" have not been used in this all statement: " <<
+      mfStringSetAsString (fAllUnusedLabels);
+
+    mfslError (
+      s.str (),
+      yy::location (
+        yy::position (),
+        yy::position ())); // JMI
+  }
+}
+
+string mfslAllStatement::asString () const
+{
+  stringstream s;
+
+  s <<
+    "mfslAllStatement [" <<
+    "]";
+
+  return s.str ();
+}
+
+void mfslAllStatement::print (ostream& os) const
+{
+  os <<
+    "mfslAllStatement [" <<
+    "fAllVariable: " <<
+    fAllVariable <<
+    ", fAllUnusedLabels: " <<
+    mfStringSetAsString (fAllUnusedLabels) <<
+    endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 17;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fAllVariable" << " : " <<
+    fAllVariable <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fAllUnusedLabels" << " : " <<
+    mfStringSetAsString (fAllUnusedLabels) <<
+    endl;
+
+  --gIndenter;
+
+  os << "]";
+}
+
+ostream& operator<< (ostream& os, const S_mfslAllStatement& elt)
 {
   os << elt->asString ();
   return os;

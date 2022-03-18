@@ -2883,7 +2883,7 @@ void msrStaff::browseData (basevisitor* v)
 #endif
 
       // is this voice name in the ignore voices set?
-      Bool voiceIsToBeBrowsed;
+      Bool voiceIsToBeBrowsed (true);
 
       string voiceName =
         voice->
