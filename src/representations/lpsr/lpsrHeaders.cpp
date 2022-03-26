@@ -50,9 +50,9 @@ lpsrHeader::lpsrHeader (
 lpsrHeader::~lpsrHeader ()
 {}
 
-unsigned int lpsrHeader::maxLilypondVariablesNamesLength ()
+size_t lpsrHeader::maxLilypondVariablesNamesLength ()
 {
-  unsigned int result = 0;
+  size_t result = 0;
 
   // LilyPond informations
 

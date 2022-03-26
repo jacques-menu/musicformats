@@ -163,7 +163,7 @@ msdlTokenKind msdlTokenKindFromKeywordKind (
 
 string existingTokensInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
-  unsigned int             namesListMaxLength);
+  size_t             namesListMaxLength);
 
 //________________________________________________________________________
 template< typename T >

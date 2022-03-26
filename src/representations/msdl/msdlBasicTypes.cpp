@@ -116,20 +116,20 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const string& theString)
   return result;
 }
 
-string existingMsdlUserLanguageKinds (unsigned int namesListMaxLength)
+string existingMsdlUserLanguageKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     msdlUserLanguageKindsMapSize =
       gGlobalMsdlUserLanguageKindsMap.size ();
 
   if (msdlUserLanguageKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       msdlUserLanguageKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msdlUserLanguageKind>::const_iterator i =
@@ -235,20 +235,20 @@ string msdlCommentsTypeKindAsString (
   return result;
 }
 
-string existingMsdlCommentsTypeKinds (unsigned int namesListMaxLength)
+string existingMsdlCommentsTypeKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     msdlCommentsTypeKindsMapSize =
       gGlobalMsdlCommentsTypeKindsMap.size ();
 
   if (msdlCommentsTypeKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       msdlCommentsTypeKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msdlCommentsTypeKind>::const_iterator i =

@@ -1,0 +1,45 @@
+#!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
+
+###
+  An MFSL script should contain at least:
+    - a tool specification, telling which MusicFormats tool to use;
+    - an input specification, the input file to apply the latter to.
+
+  Then there can be any number of MusicFormats options,
+  as well as choice, set and case specifications,
+  in any order.
+  This produces a set of options to be supplied to the tool
+  when handling the input file.
+
+  A final each specification is optionnal.
+  If present, the tool is run several times,
+  each time with the corresponding options added to the set obtained
+  prioto to the each specification.
+
+  This minimal script runs xml2ly with an input source argument,
+  writing to the standard output and error streams.
+###
+
+
+# ----------------------------------------------------------
+# the MusicFormats tool to be used
+# ----------------------------------------------------------
+
+tool : xml2ly
+
+
+# ----------------------------------------------------------
+# the input source
+# ----------------------------------------------------------
+
+###
+  A string containing the input source name,
+  or '-' for standard input.
+
+  Both single and double quotes can be used.
+###
+
+# input : "-"
+# input : '-'
+input : "Hymn121.xml"
+# input : 'Hymn121.xml'

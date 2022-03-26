@@ -518,7 +518,7 @@ void extraShowHarmonyDetailsAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -818,7 +818,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1176,7 +1176,7 @@ R"()",
 R"(Write the details of the harmony for the given diatonic (semitones) pitch
 in the current language and the given harmony to standard output.
 HARMONY_SPEC should be of the form ROOT_DIATONIC_PITCH:HARMONY_NAME .
-There can be spaces around the ':'.")",
+There can be spaces around the ':', in which case quoting is needed.")",
          regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "HARMONY_SPEC",

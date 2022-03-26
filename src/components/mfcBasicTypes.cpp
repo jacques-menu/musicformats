@@ -62,7 +62,7 @@ void crackVersionNumber (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
@@ -118,7 +118,7 @@ void crackVersionNumber (
 
     regex_match (theString, sm, e);
 
-    unsigned int smSize = sm.size ();
+    size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
@@ -384,7 +384,7 @@ S_mfcVersionNumber mfcVersionNumber::createFromString (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {

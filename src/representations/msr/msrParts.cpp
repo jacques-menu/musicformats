@@ -112,11 +112,27 @@ void msrPart::initializePart ()
   // is this part name in the part renaming map?
   map<string, string>::const_iterator
     it =
-      gGlobalMsrOahGroup->getPartsRenamingMap ().find (fPartID);
+      gGlobalMsrOahGroup->getMsrPartsRenamingMap ().find (fPartID);
 
-  if (it != gGlobalMsrOahGroup->getPartsRenamingMap ().end ()) {
+  if (it != gGlobalMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
     // yes, rename the part accordinglingly
-    fPartMsrName = (*it).second;
+    string newMsrPartName = (*it).second;
+
+    stringstream s;
+
+    s <<
+      "Renaming MSR part " <<
+      getPartCombinedName () <<
+      " to \"" <<
+      newMsrPartName <<
+      "\"";
+
+    msrWarning (
+      gGlobalServiceRunData->getInputSourceName (),
+      fInputLineNumber,
+      s.str ());
+
+    fPartMsrName = newMsrPartName;
   }
   else {
     // coin the name from the argument
@@ -485,9 +501,9 @@ void msrPart::setPartMsrName (const string& partMsrName)
   // is this part name in the part renaming map?
   map<string, string>::const_iterator
     it =
-      gGlobalMsrOahGroup->getPartsRenamingMap ().find (fPartMsrName);
+      gGlobalMsrOahGroup->getMsrPartsRenamingMap ().find (fPartMsrName);
 
-  if (it != gGlobalMsrOahGroup->getPartsRenamingMap ().end ()) {
+  if (it != gGlobalMsrOahGroup->getMsrPartsRenamingMap ().end ()) {
     // yes, rename the part accordinglingly
     fPartMsrName = (*it).second;
 
@@ -617,7 +633,7 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
 {
   rational result;
 
-  unsigned int
+  size_t
     partMeasuresWholeNotesDurationsVectorSize =
       fPartMeasuresWholeNotesDurationsVector.size ();
 
@@ -720,7 +736,7 @@ void msrPart::registerShortestNoteInPartIfRelevant (S_msrNote note)
   */
 }
 
-void msrPart::setPartNumberOfMeasures (unsigned int partNumberOfMeasures)
+void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -735,7 +751,7 @@ void msrPart::setPartNumberOfMeasures (unsigned int partNumberOfMeasures)
 
   fPartNumberOfMeasures = partNumberOfMeasures;
 
-  unsigned int
+  size_t
     fPartMeasuresWholeNotesDurationsVectorSize =
       fPartMeasuresWholeNotesDurationsVector.size ();
 
@@ -802,7 +818,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
   }
 #endif
 
-  unsigned int index = measureOrdinalNumber - 1;
+  size_t index = measureOrdinalNumber - 1;
 
   // has this measureOrdinalNumber been registered already?
   try {
@@ -2160,25 +2176,27 @@ void msrPart::setPartInstrumentNamesMaxLengthes ()
       fPartPartGroupUpLink->
         getPartGroupScoreUpLink ();
 
-  unsigned int partInstrumentNameLength =
+  size_t partInstrumentNameLength =
     fPartInstrumentName.size ();
 
   if (
     partInstrumentNameLength
       >
-    score->getScoreInstrumentNamesMaxLength ()) {
+    score->getScoreInstrumentNamesMaxLength ()
+  ) {
     score->
       setIdentificationScoreInstrumentNamesMaxLength (
         partInstrumentNameLength);
   }
 
-  unsigned int partInstrumentAbbreviationLength =
+  size_t partInstrumentAbbreviationLength =
     fPartInstrumentAbbreviation.size ();
 
   if (
     partInstrumentAbbreviationLength
       >
-    score->getScoreInstrumentAbbreviationsMaxLength ()) {
+    score->getScoreInstrumentAbbreviationsMaxLength ()
+  ) {
     score->
       setIdentificationScoreInstrumentAbbreviationsMaxLength (
         partInstrumentAbbreviationLength);
@@ -2325,7 +2343,7 @@ void msrPart::collectPartMeasuresSlices (
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    unsigned int
+    size_t
       partAllStavesListSize =
         fPartAllStavesList.size ();
 
@@ -2501,7 +2519,7 @@ void msrPart::browseData (basevisitor* v)
   }
 #endif
 
-  /* don't enforce any order here, leave it to the client thru sorting JMI */
+  /* don't enforce any order here, leave it to the client thru sorting ??? JMI */
 
   // browse the part harmonies staff if any right now, JMI
   // to place it before the corresponding part
@@ -2524,7 +2542,7 @@ void msrPart::browseData (basevisitor* v)
     browser.browse (*fPartFiguredBassStaff);
   }
 
-//   // browse all the part staves JMI
+//   // browse all the part staves JMI ---> this leads to 4 HelloWorld scores... v0.9.62
 //   for (S_msrStaff staff : fPartAllStavesList) {
 //     if (staff != fPartHarmoniesStaff && staff != fPartFiguredBassStaff) {
 //       // browse the staff
@@ -2553,8 +2571,8 @@ string msrPart::asString () const
 }
 
 void msrPart::printPartMeasuresWholeNotesDurationsVector (
-  ostream&     os,
-  int fieldWidth) const
+  ostream& os,
+  int      fieldWidth) const
 {
   os << left <<
     setw (fieldWidth) <<
@@ -2568,7 +2586,7 @@ void msrPart::printPartMeasuresWholeNotesDurationsVector (
 
     ++gIndenter;
 
-    for (unsigned int i = 0; i < fPartNumberOfMeasures; ++i) {
+    for (size_t i = 0; i < fPartNumberOfMeasures; ++i) {
       int j = i + 1; // indices start at 0
 
       os << left <<
@@ -2754,7 +2772,7 @@ void msrPart::print (ostream& os) const
   --gIndenter;
 
   // print all the staves if any
-  unsigned int partAllStavesListSize =
+  size_t partAllStavesListSize =
     fPartAllStavesList.size ();
 
   os << left <<
@@ -2776,7 +2794,7 @@ void msrPart::print (ostream& os) const
     os << "none" << endl;
   }
 
-  unsigned int partNonHarmoniesNorFiguredBassStavesListSize =
+  size_t partNonHarmoniesNorFiguredBassStavesListSize =
     fPartNonHarmoniesNorFiguredBassStavesList.size ();
 
   os << left <<
@@ -2799,7 +2817,7 @@ void msrPart::print (ostream& os) const
   }
 
   // print all the voices names if any
-  unsigned int partAllVoicesListSize =
+  size_t partAllVoicesListSize =
     fPartAllVoicesList.size ();
 
   os << left <<

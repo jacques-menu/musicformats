@@ -416,7 +416,7 @@ void msrScore::print (ostream& os) const
 
   const int fieldWidth = 38;
 
-  unsigned int partGroupsListSize =
+  size_t partGroupsListSize =
     fPartGroupsList.size ();
 
   os << left <<
@@ -514,7 +514,7 @@ void msrScore::print (ostream& os) const
   os << endl;
 
   // print the credits if any
-  unsigned int creditsListSize = fCreditsList.size ();
+  size_t creditsListSize = fCreditsList.size ();
 
   os <<
     setw (fieldWidth) <<
@@ -545,7 +545,7 @@ void msrScore::print (ostream& os) const
   os << endl;
 
   // print all the voices if any
-  unsigned int scoreAllVoicesListSize = fScoreAllVoicesList.size ();
+  size_t scoreAllVoicesListSize = fScoreAllVoicesList.size ();
 
   os <<
     setw (fieldWidth) <<
@@ -608,7 +608,7 @@ void msrScore::printShort (ostream& os) const
 
   const int fieldWidth = 38;
 
-  unsigned int partGroupsListSize =
+  size_t partGroupsListSize =
     fPartGroupsList.size ();
 
   os << left <<
@@ -702,7 +702,7 @@ void msrScore::printSummary (ostream& os) const
 
   const int fieldWidth = 38;
 
-  unsigned int partGroupsListSize =
+  size_t partGroupsListSize =
     fPartGroupsList.size ();
 
   // print global information

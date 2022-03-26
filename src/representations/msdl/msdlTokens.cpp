@@ -565,7 +565,7 @@ msdlTokenKind msdlTokenKindFromKeywordKind (
 
 string existingTokensInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
-  unsigned int             namesListMaxLength)
+  size_t             namesListMaxLength)
 {
   string result;
 
@@ -598,12 +598,12 @@ string existingTokensInLanguage (
   } // switch
 
   if (keywordsNamesMapPTR) {
-    unsigned int
+    size_t
       nextToLast =
         (int) msdlTokenKind::NonSeparatorsLast - 2;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     stringstream s;
 

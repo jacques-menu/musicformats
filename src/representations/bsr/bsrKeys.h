@@ -30,7 +30,7 @@ class EXP bsrKey : public bsrLineContentsElement
     static SMARTP<bsrKey> create (
                             int          inputLineNumber,
                             bsrKeyKind   keyKind,
-                            unsigned int numberOfAlterations);
+                            size_t numberOfAlterations);
 
   protected:
 
@@ -40,7 +40,7 @@ class EXP bsrKey : public bsrLineContentsElement
                           bsrKey (
                             int          inputLineNumber,
                             bsrKeyKind   keyKind,
-                            unsigned int numberOfAlterations);
+                            size_t numberOfAlterations);
 
     virtual               ~bsrKey ();
 
@@ -55,7 +55,7 @@ class EXP bsrKey : public bsrLineContentsElement
     bsrKeyKind            getKeyKind () const
                               { return fKeyKind; }
 
-    void                  setNumberOfAlterations (unsigned int numberOfAlterations)
+    void                  setNumberOfAlterations (size_t numberOfAlterations)
                               { fNumberOfAlterations = numberOfAlterations; }
 
     int                   getNumberOfAlterations () const

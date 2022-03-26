@@ -1541,9 +1541,9 @@ void msr2bsrTranslator::visitStart (S_msrTimeSignature& elt)
         mTimeSignatureBeatsNumbersVector =
           mTimeSignatureItem->getTimeSignatureBeatsNumbersVector ();
 
-      unsigned int vectorSize = mTimeSignatureBeatsNumbersVector.size ();
+      size_t vectorSize = mTimeSignatureBeatsNumbersVector.size ();
 
-      for (unsigned int i = 0; i < vectorSize; ++i) {
+      for (size_t i = 0; i < vectorSize; ++i) {
         int
           mTimeSignatureItemBeatsNumber =
             mTimeSignatureBeatsNumbersVector [i];

@@ -330,7 +330,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -680,7 +680,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2014,7 +2014,7 @@ void lilypondChordsDisplayAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -3044,16 +3044,16 @@ R"(Set 'opus' to STRING in the LilyPond code \header.)",
     addStringAtom (
       opusAtom);
 
-  S_oahBooleanAtom
-    opusInTitleAtom =
-      oahBooleanAtom::create (
-         "opus-in-title", "oit",
-R"(Place the opus number in the LilyPond code \header title field.)",
-        "fOpusInTitle",
-        fOpusInTitle);
-  subGroup->
-    appendAtomToSubGroup (
-      opusInTitleAtom);
+//   S_oahBooleanAtom JMI v0.9.62
+//     opusInTitleAtom =
+//       oahBooleanAtom::create (
+//          "opus-in-title", "oit",
+// R"(Place the opus number in the LilyPond code \header.)",
+//         "fOpusInTitle",
+//         fOpusInTitle);
+//   subGroup->
+//     appendAtomToSubGroup (
+//       opusInTitleAtom);
 
   S_oahStringAtom
     titleAtom =
@@ -3103,11 +3103,11 @@ R"(Set 'subsubtitle' to STRING in the LilyPond code \header.)",
   S_oahStringAtom
     instrumentAtom =
       oahStringAtom::create (
-        "instrument", "",
+        "header-instrument", "",
 R"(Set 'instrument' to STRING in the LilyPond code \header.)",
         "STRING",
-        "fInstrument",
-        fInstrument);
+        "fHeaderInstrument",
+        fHeaderInstrument);
   subGroup->
     appendAtomToSubGroup (
       instrumentAtom);
@@ -3118,11 +3118,11 @@ R"(Set 'instrument' to STRING in the LilyPond code \header.)",
   S_oahStringAtom
     meterAtom =
       oahStringAtom::create (
-        "meter", "",
+        "header-meter", "meter",
 R"(Set 'meter' to STRING in the LilyPond code \header.)",
         "STRING",
-        "fMeter",
-        fMeter);
+        "fHeaderMeter",
+        fHeaderMeter);
   subGroup->
     appendAtomToSubGroup (
       meterAtom);
@@ -3183,7 +3183,7 @@ R"()",
         "lilypond-transpose-part-name", "lilytpn",
 R"(Transpose part PART_NAME using TRANSPOSITION in the LilyPond code.
 PART_TRANSPOSITION_SPEC should be of the form PART_NAME:TRANSPOSITION .
-There can be spaces around the ':'.
+There can be spaces around the ':', in which case quoting is needed.
 TRANSPOSITION should contain a diatonic pitch, followed if needed
 by a sequence of ',' or '\'' octave indications.
 Such indications cannot be mixed, and they are relative to c\', i.e. middle C.
@@ -4991,12 +4991,12 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
       fSubSubTitle <<
       endl <<
 
-    setw (valueFieldWidth) << "fInstrument" << " : " <<
-      fInstrument <<
+    setw (valueFieldWidth) << "fHeaderInstrument" << " : " <<
+      fHeaderInstrument <<
       endl <<
 
-    setw (valueFieldWidth) << "fMeter" << " : " <<
-      fMeter <<
+    setw (valueFieldWidth) << "fHeaderMeter" << " : " <<
+      fHeaderMeter <<
       endl <<
 
     setw (valueFieldWidth) << "fTagline" << " : " <<
@@ -5260,9 +5260,11 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
     endl;
 
   os << left <<
-    setw (valueFieldWidth) << "resetMeasureElementMeasureNumberMap" << " : ";
+    setw (valueFieldWidth) <<
+    fetchNamesBetweenQuotes () <<
+    " :";
   if (! fResetMeasureElementMeasureNumberMap.size ()) {
-    os << "empty";
+    os << " empty";
   }
   else {
     map<string, int>::const_iterator
@@ -5699,11 +5701,11 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
     setw (fieldWidth) << "fSubSubTitle" << " : " <<
       fSubSubTitle <<
       endl <<
-    setw (fieldWidth) << "fInstrument" << " : " <<
-      fInstrument <<
+    setw (fieldWidth) << "fHeaderInstrument" << " : " <<
+      fHeaderInstrument <<
       endl <<
-    setw (fieldWidth) << "fMeter" << " : " <<
-      fMeter <<
+    setw (fieldWidth) << "fHeaderMeter" << " : " <<
+      fHeaderMeter <<
       endl <<
 
     setw (fieldWidth) << "fTagline" << " : " <<
@@ -6310,7 +6312,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

@@ -295,6 +295,8 @@ class EXP msr2msrOahGroup : public oahGroup
 
     void                  initializeBookOptions ();
 
+    void                  initializeStavesOptions ();
+
     void                  initializeVoicesOptions ();
 
     void                  initializeBreakOptions ();
@@ -336,6 +338,15 @@ class EXP msr2msrOahGroup : public oahGroup
 
     // book
     Bool                  fExpandToHarmonyBandBook;
+
+    // staves
+    set<string>           fIgnoreMsrStavesSet;
+    S_oahStringSetElementAtom
+                          fIgnoreMsrStavesSetAtom;
+
+    set<string>           fKeepMsrStavesSet;
+    S_oahStringSetElementAtom
+                          fKeepMsrStavesSetAtom;
 
     // voices
     set<string>           fIgnoreMsrVoicesSet;

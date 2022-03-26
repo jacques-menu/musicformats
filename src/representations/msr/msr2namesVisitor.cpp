@@ -143,7 +143,7 @@ void msr2namesVisitor::visitStart (S_msrPartGroup& elt)
 
   ++fPartGroupsCounter;
 
-  unsigned int partGroupElementsSize =
+  size_t partGroupElementsSize =
     elt->
       getPartGroupElementsList ().size ();
 
@@ -204,7 +204,7 @@ void msr2namesVisitor::visitStart (S_msrPart& elt)
 
   ++fPartsCounter;
 
-  unsigned int partStavesMapSize =
+  size_t partStavesMapSize =
     elt->
       getPartStaveNumbersToStavesMap ().size ();
 
@@ -271,7 +271,7 @@ void msr2namesVisitor::visitStart (S_msrStaff& elt)
 
   ++fStavesCounter;
 
-  unsigned int staffAllVoicesVectorSize =
+  size_t staffAllVoicesVectorSize =
     elt->
       getStaffAllVoicesVector ().size ();
 
@@ -333,7 +333,7 @@ void msr2namesVisitor::visitStart (S_msrVoice& elt)
 
   ++fVoicesCounter;
 
-  unsigned int voiceStanzasMapSize = elt->getVoiceStanzasMap ().size ();
+  size_t voiceStanzasMapSize = elt->getVoiceStanzasMap ().size ();
 
   gLogStream <<
     "Voice" << ' ' << elt->getVoiceName () <<

@@ -254,7 +254,7 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
 
   ++fPartGroupsCounter;
 
-  unsigned int partGroupElementsSize = elt->getPartGroupElementsList ().size ();
+  size_t partGroupElementsSize = elt->getPartGroupElementsList ().size ();
 
   gLogStream <<
     "PartGroup" << ' ' << elt->getPartGroupCombinedName () <<
@@ -341,7 +341,7 @@ void msr2summaryVisitor::visitStart (S_msrPart& elt)
 
   ++fPartsCounter;
 
-  unsigned int partStavesMapSize = elt->getPartStaveNumbersToStavesMap ().size ();
+  size_t partStavesMapSize = elt->getPartStaveNumbersToStavesMap ().size ();
 
   gLogStream <<
     "Part " << elt->getPartCombinedName () <<
@@ -414,7 +414,7 @@ void msr2summaryVisitor::visitStart (S_msrStaff& elt)
 
   ++fStavesCounter;
 
-  unsigned int staffAllVoicesVectorSize =
+  size_t staffAllVoicesVectorSize =
     elt->getStaffAllVoicesVector ().size ();
 
   gLogStream <<
@@ -476,7 +476,7 @@ void msr2summaryVisitor::visitStart (S_msrVoice& elt)
 
   ++fVoicesCounter;
 
-  unsigned int voiceStanzasMapSize = elt->getVoiceStanzasMap ().size ();
+  size_t voiceStanzasMapSize = elt->getVoiceStanzasMap ().size ();
 
   gLogStream <<
     "Voice" << ' ' << elt->getVoiceName () <<
@@ -539,7 +539,7 @@ void msr2summaryVisitor::visitStart (S_msrStanza& elt)
 
   ++fStanzasCounter;
 
-  unsigned int syllablesSize = elt->getSyllables ().size ();
+  size_t syllablesSize = elt->getSyllables ().size ();
 
   gLogStream <<
     "Stanza" << ' ' << elt->getStanzaName () <<

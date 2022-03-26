@@ -1549,7 +1549,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   string measureNumber =
     measure->getMeasureElementMeasureNumber ();
 
-  unsigned int segmentMeasuresListSize =
+  size_t segmentMeasuresListSize =
     fSegmentMeasuresList.size ();
 
   string currentMeasureNumber =
@@ -1632,7 +1632,7 @@ void msrSegment::prependMeasureToSegment (S_msrMeasure measure)
   string measureNumber =
     measure->getMeasureElementMeasureNumber ();
 
-  unsigned int segmentMeasuresListSize =
+  size_t segmentMeasuresListSize =
     fSegmentMeasuresList.size ();
 
   string currentMeasureNumber =

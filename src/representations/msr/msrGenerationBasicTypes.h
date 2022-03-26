@@ -47,7 +47,7 @@ EXP extern msrGenerationAPIKind msrGenerationAPIKindFromString (
 extern map<string, msrGenerationAPIKind>
   gGlobalGenerationAPIKindsMap;
 
-string existingGenerationAPIKinds (unsigned int namesListMaxLength);
+string existingGenerationAPIKinds (size_t namesListMaxLength);
 
 void initializeGenerationAPIKindsMap ();
 

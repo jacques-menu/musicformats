@@ -150,20 +150,20 @@ string msdlKeywordsLanguageKindAsString (
   return result;
 }
 
-string existingMsdlKeywordsLanguageKinds (unsigned int namesListMaxLength)
+string existingMsdlKeywordsLanguageKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     msdlKeywordsLanguageKindsMapSize =
       gGlobalMsdlKeywordsLanguageKindsMap.size ();
 
   if (msdlKeywordsLanguageKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       msdlKeywordsLanguageKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msdlKeywordsLanguageKind>::const_iterator i =
@@ -727,7 +727,7 @@ msdlKeywordKind msdlKeywordKindFromString (
 
 string existingKeywordsInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
-  unsigned int             namesListMaxLength)
+  size_t             namesListMaxLength)
 {
   stringstream s;
 
@@ -760,16 +760,16 @@ string existingKeywordsInLanguage (
   } // switch
 
   if (keywordsNamesMapPTR) {
-    unsigned int
+    size_t
       keywordsNameMapSize =
         (*keywordsNamesMapPTR).size ();
 
-    unsigned int
+    size_t
       nextToLast =
         keywordsNameMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<msdlKeywordKind, string>::const_iterator i =

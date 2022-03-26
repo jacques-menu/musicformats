@@ -496,7 +496,7 @@ string bsrLine::asDebugString () const
 
 void bsrLine::print (ostream& os) const
 {
-  unsigned int lineContentsListSize = fLineContentsList.size ();
+  size_t lineContentsListSize = fLineContentsList.size ();
 
   os <<
     "Line" <<

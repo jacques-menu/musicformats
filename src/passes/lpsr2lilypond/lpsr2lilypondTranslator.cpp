@@ -4501,7 +4501,7 @@ string lpsr2lilypondTranslator::singleTremoloDurationAsLilypondString (
   s <<
     ":" <<
  // JMI   int (pow (2, durationToUse + 2)) <<
-      int (1 << (durationToUse + 2)) <<
+    int (1 << (durationToUse + 2)) <<
     ' ';
 
   return s.str ();
@@ -5890,7 +5890,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
   ) {
     string name = (*i).first;
 
-    unsigned int nameSize = name.size ();
+    size_t nameSize = name.size ();
 
     if (nameSize > fieldWidth) {
       fieldWidth = nameSize;
@@ -6474,7 +6474,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
   // instrument
   string
     instrumentFromOption =
-      gGlobalLpsr2lilypondOahGroup->getInstrument ();
+      gGlobalLpsr2lilypondOahGroup->getHeaderInstrument ();
 
   if (instrumentFromOption.size ()) {
       nameStringValuePairsList.push_back (
@@ -6507,7 +6507,7 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
   // meter
   string
     meterFromOption =
-      gGlobalLpsr2lilypondOahGroup->getMeter ();
+      gGlobalLpsr2lilypondOahGroup->getHeaderMeter ();
 
   if (meterFromOption.size ()) {
       nameStringValuePairsList.push_back (
@@ -6634,7 +6634,8 @@ void lpsr2lilypondTranslator::generatePaper (
   // fetch boolean values from LPSR options group
   list<pair<string, Bool> > nameBooleanValuePairsList;
 
-  fetchBooleanValuesFromLpsrOptionsGroup (
+  fetchOnOffValuesFromLpsrOptionsGroup (
+    paper,
     nameBooleanValuePairsList);
 
   // compute fieldWidth
@@ -6648,7 +6649,7 @@ void lpsr2lilypondTranslator::generatePaper (
   ) {
     string name = (*i).first;
 
-    unsigned int nameSize = name.size ();
+    size_t nameSize = name.size ();
 
     if (nameSize > fieldWidth) {
       fieldWidth = nameSize;
@@ -6689,7 +6690,7 @@ void lpsr2lilypondTranslator::generatePaper (
   ) {
     string name = (*i).first;
 
-    unsigned int nameSize = name.size ();
+    size_t nameSize = name.size ();
 
     if (nameSize > fieldWidth) {
       fieldWidth = nameSize;
@@ -6847,15 +6848,88 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
   }
 }
 
-void lpsr2lilypondTranslator::fetchBooleanValuesFromLpsrOptionsGroup (
+void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
+  S_lpsrPaper                paper,
   list<pair<string, Bool> >& nameBooleanValuePairsList)
 {
+  // ragged-last
+  if (gGlobalLpsrOahGroup->getRaggedLastAtom ()->getSetByUser ()) {
+    oahOnOffKind
+      raggedLast =
+        paper->getRaggedLast ();
+
+    switch (raggedLast) {
+      case oahOnOffKind::kOahOnOffUnknown:
+        break;
+
+      case oahOnOffKind::kOahOnOffOn:
+      case oahOnOffKind::kOahOnOffOff:
+        nameBooleanValuePairsList.push_back (
+          make_pair (
+            "ragged-last",
+            oahOnOffKindAsBool (raggedLast)));
+        break;
+    } // switch
+  }
+
+  // ragged-bottom
+  if (gGlobalLpsrOahGroup->getRaggedBottomAtom ()->getSetByUser ()) {
+    oahOnOffKind
+      raggedBottom =
+        paper->getRaggedBottom ();
+
+    switch (raggedBottom) {
+      case oahOnOffKind::kOahOnOffUnknown:
+        break;
+
+      case oahOnOffKind::kOahOnOffOn:
+      case oahOnOffKind::kOahOnOffOff:
+        nameBooleanValuePairsList.push_back (
+          make_pair (
+            "ragged-bottom",
+            oahOnOffKindAsBool (raggedBottom)));
+        break;
+    } // switch
+  }
+
   // ragged-last-bottom
-  if (gGlobalLpsrOahGroup->getRaggedLastBottom ()) {
-    nameBooleanValuePairsList.push_back (
-      make_pair (
-        "ragged-last-bottom",
-        false));
+  if (gGlobalLpsrOahGroup->getRaggedLastBottomAtom ()->getSetByUser ()) {
+    oahOnOffKind
+      raggedLastBottom =
+        paper->getRaggedLastBottom ();
+
+    switch (raggedLastBottom) {
+      case oahOnOffKind::kOahOnOffUnknown:
+        break;
+
+      case oahOnOffKind::kOahOnOffOn:
+      case oahOnOffKind::kOahOnOffOff:
+        nameBooleanValuePairsList.push_back (
+          make_pair (
+            "ragged-last-bottom",
+            oahOnOffKindAsBool (raggedLastBottom)));
+        break;
+    } // switch
+  }
+
+  // ragged-right
+  if (gGlobalLpsrOahGroup->getRaggedRightAtom ()->getSetByUser ()) {
+    oahOnOffKind
+      raggedRight =
+        paper->getRaggedRight ();
+
+    switch (raggedRight) {
+      case oahOnOffKind::kOahOnOffUnknown:
+        break;
+
+      case oahOnOffKind::kOahOnOffOn:
+      case oahOnOffKind::kOahOnOffOff:
+        nameBooleanValuePairsList.push_back (
+          make_pair (
+            "ragged-right",
+            oahOnOffKindAsBool (raggedRight)));
+        break;
+    } // switch
   }
 }
 
@@ -7239,36 +7313,101 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
   S_lpsrPaper       pagePaper,
   int               fieldWidth)
 {
-  // ragged bottom
-  Bool
-    raggedBottom =
-      pagePaper->getRaggeBottom ();
+  // ragged last
+  oahOnOffKind
+    raggedLast =
+      pagePaper->getRaggedLast ();
 
-  fLilypondCodeStream << left <<
-    setw (fieldWidth) <<
-    "ragged-bottom" << " = ";
-  if (raggedBottom) {
-    fLilypondCodeStream << "##t";
-  }
-  else {
-    fLilypondCodeStream << "##f";
-  }
+  switch (raggedLast) {
+    case oahOnOffKind::kOahOnOffUnknown:
+      break;
+
+    case oahOnOffKind::kOahOnOffOn:
+    case oahOnOffKind::kOahOnOffOff:
+      fLilypondCodeStream << left <<
+        setw (fieldWidth) <<
+        "ragged-last" << " = ";
+      if (oahOnOffKindAsBool (raggedLast)) {
+        fLilypondCodeStream << "##t";
+      }
+      else {
+        fLilypondCodeStream << "##f";
+      }
+      break;
+  } // switch
+  fLilypondCodeStream << endl;
+
+  // ragged bottom
+  oahOnOffKind
+    raggedBottom =
+      pagePaper->getRaggedBottom ();
+
+  switch (raggedBottom) {
+    case oahOnOffKind::kOahOnOffUnknown:
+      break;
+
+    case oahOnOffKind::kOahOnOffOn:
+    case oahOnOffKind::kOahOnOffOff:
+      fLilypondCodeStream << left <<
+        setw (fieldWidth) <<
+        "ragged-bottom" << " = ";
+      if (oahOnOffKindAsBool (raggedBottom)) {
+        fLilypondCodeStream << "##t";
+      }
+      else {
+        fLilypondCodeStream << "##f";
+      }
+      break;
+  } // switch
   fLilypondCodeStream << endl;
 
   // ragged last bottom
-  Bool
+  oahOnOffKind
     raggedLastBottom =
       pagePaper->getRaggedLastBottom ();
 
-  fLilypondCodeStream << left <<
-    setw (fieldWidth) <<
-    "ragged-last-bottom" << " = ";
-  if (raggedLastBottom) {
-    fLilypondCodeStream << "##t";
-  }
-  else {
-    fLilypondCodeStream << "##f";
-  }
+  switch (raggedLastBottom) {
+    case oahOnOffKind::kOahOnOffUnknown:
+      break;
+
+    case oahOnOffKind::kOahOnOffOn:
+    case oahOnOffKind::kOahOnOffOff:
+      fLilypondCodeStream << left <<
+        setw (fieldWidth) <<
+        "ragged-last-bottom" << " = ";
+      if (oahOnOffKindAsBool (raggedLastBottom)) {
+        fLilypondCodeStream << "##t";
+      }
+      else {
+        fLilypondCodeStream << "##f";
+      }
+      break;
+  } // switch
+  fLilypondCodeStream << endl;
+
+  // ragged right
+  oahOnOffKind
+    raggedRight =
+      pagePaper->getRaggedRight ();
+
+  switch (raggedRight) {
+    case oahOnOffKind::kOahOnOffUnknown:
+      break;
+
+    case oahOnOffKind::kOahOnOffOn:
+    case oahOnOffKind::kOahOnOffOff:
+      fLilypondCodeStream << left <<
+        setw (fieldWidth) <<
+        "ragged-right" << " = ";
+      if (oahOnOffKindAsBool (raggedRight)) {
+        fLilypondCodeStream << "##t";
+      }
+      else {
+        fLilypondCodeStream << "##f";
+      }
+      break;
+  } // switch
+
   fLilypondCodeStream << endl;
 }
 
@@ -7568,7 +7707,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
   // should we set the repeat brackets type?
   if (gGlobalLpsr2lilypondOahGroup->getRepeatBrackets ()) {
     fLilypondCodeStream <<
-      "\\context ' '{" <<
+      "\\context {" <<
       endl;
 
     ++gIndenter;
@@ -7599,7 +7738,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
 
   if (barNumbersSizeAtom->getSetByUser ()) {
     fLilypondCodeStream <<
-      "\\context ' '{" <<
+      "\\context {" <<
       endl;
 
     ++gIndenter;
@@ -8450,14 +8589,17 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
   fNumberOfStaffBlocksElements =
     elt->getPartBlockElementsList ().size ();
 
-  if (part->getPartStaveNumbersToStavesMap ().size () > 1) {
-    // don't generate code for a part with only one stave
+  if (part->getPartStaveNumbersToStavesMap ().size () > 1) { // JMI
+    // don't generate code here for a part with only one stave
 
     string
       partName =
         part->getPartName (),
       partAbbreviation =
         part->getPartAbbreviation ();
+
+ // JMI       gLogStream << "@@@@@@@@@@ partName: " << partName << ", partAbbreviation: " << partAbbreviation << endl;
+
         /*
     string
       partInstrumentName =  // JMI
@@ -8512,7 +8654,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartBlock& elt)
       '}' <<
       endl;
 
-    fLilypondCodeStream <<
+    fLilypondCodeStream << // JMI ??? v0.9.62
       " <<" <<
       endl;
   }
@@ -9148,8 +9290,8 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
 // if (voice->getStaffRelativeVoiceNumber () > 0) { JMI
   fLilypondCodeStream <<
-    "\\context " << voiceContextName << " = ' '\"" <<
-    voice->getVoiceName () << "\"" << " <<" <<
+    "\\context " << voiceContextName << " = \"" <<
+    voice->getVoiceName () << "\" <<" <<
      endl;
 
   ++gIndenter;
@@ -13489,11 +13631,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrKey& elt)
               }
 
               else {
-                  lpsr2lilypondInternalError (
-                    gGlobalServiceRunData->getInputSourceName (),
-                    elt->getInputLineNumber (),
-                    __FILE__, __LINE__,
-                    "Humdrum/Scot key items vector is empty");
+                lpsr2lilypondInternalError (
+                  gGlobalServiceRunData->getInputSourceName (),
+                  elt->getInputLineNumber (),
+                  __FILE__, __LINE__,
+                  "Humdrum/Scot key items vector is empty");
               }
             }
             break;
@@ -14411,7 +14553,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsWordsOnly (
     tempoWordsList =
       tempo->getTempoWordsList ();
 
-  unsigned int tempoWordsListSize = tempoWordsList.size ();
+  size_t tempoWordsListSize = tempoWordsList.size ();
 
   if (tempoWordsListSize) {
     list<S_msrWords>::const_iterator
@@ -14450,7 +14592,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsPerMinute (
     tempoWordsList =
       tempo->getTempoWordsList ();
 
-  unsigned int tempoWordsListSize = tempoWordsList.size ();
+  size_t tempoWordsListSize = tempoWordsList.size ();
 
   msrDottedDuration tempoBeatUnit  = tempo->getTempoBeatUnit ();
   string            tempoPerMinute = tempo->getTempoPerMinute ();
@@ -14644,7 +14786,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
     tempoWordsList =
       tempo->getTempoWordsList ();
 
-  unsigned int tempoWordsListSize = tempoWordsList.size ();
+  size_t tempoWordsListSize = tempoWordsList.size ();
 
   msrDottedDuration tempoBeatUnit  = tempo->getTempoBeatUnit ();
   string            tempoPerMinute = tempo->getTempoPerMinute ();
@@ -14803,7 +14945,7 @@ void lpsr2lilypondTranslator::generateCodeForTempoNotesRelationship (
     tempoWordsList =
       tempo->getTempoWordsList ();
 
-  unsigned int tempoWordsListSize = tempoWordsList.size ();
+  size_t tempoWordsListSize = tempoWordsList.size ();
 
   fLilypondCodeStream <<
     "\\tempoNotesRelationshipship #\"";
@@ -16958,7 +17100,7 @@ slash = \tweak Flag.stroke-style grace \etc
       graceNotesGroup->
         getGraceNotesGroupElementsList ();
 
-  unsigned int
+  size_t
     graceNotesGroupElementsListSize =
       graceNotesGroupElementsList.size ();
 
@@ -16968,7 +17110,7 @@ slash = \tweak Flag.stroke-style grace \etc
       iEnd   = graceNotesGroupElementsList.end (),
       i      = iBegin;
 
-    unsigned int elementNumber = 0;
+    size_t elementNumber = 0;
 
     for ( ; ; ) {
       S_msrElement element = (*i);

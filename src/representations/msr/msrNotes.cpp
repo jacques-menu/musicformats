@@ -1757,7 +1757,7 @@ S_msrNote msrNote::createRestFromString (
 
   regex_match (restString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1797,7 +1797,7 @@ S_msrNote msrNote::createRestFromString (
     restDuration = sm [1],
     restDots     = sm [2];
 
-  unsigned int dotsNumber = restDots.size ();
+  size_t dotsNumber = restDots.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1895,7 +1895,7 @@ S_msrNote msrNote::createSkipFromString (
 
   regex_match (skipString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1935,7 +1935,7 @@ S_msrNote msrNote::createSkipFromString (
     skipDuration = sm [1],
     skipDots     = sm [2];
 
-  unsigned int dotsNumber = skipDots.size ();
+  size_t dotsNumber = skipDots.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2039,7 +2039,7 @@ S_msrNote msrNote::createNoteFromString (
 
   regex_match (noteString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2081,7 +2081,7 @@ S_msrNote msrNote::createNoteFromString (
     noteDuration         = sm [3],
     noteDots             = sm [4];
 
-  unsigned int dotsNumber = noteDots.size ();
+  size_t dotsNumber = noteDots.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

@@ -82,19 +82,19 @@ void initializeGenerationAPIKindsMap ()
 }
 
 string existingGenerationAPIKinds (
-  unsigned int namesListMaxLength)
+  size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int brailleOutputKindsMapSize =
+  size_t brailleOutputKindsMapSize =
     gGlobalGenerationAPIKindsMap.size ();
 
   if (brailleOutputKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       brailleOutputKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msrGenerationAPIKind>::const_iterator i =

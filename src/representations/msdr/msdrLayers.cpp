@@ -362,7 +362,7 @@ void msdrLayer::printShort (ostream& os) const
 
 #ifdef TRACING_IS_ENABLED
   // print the voice measures flat list
-  unsigned int voiceMeasuresFlatListSize =
+  size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();
 
   os <<

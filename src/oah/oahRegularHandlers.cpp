@@ -360,11 +360,11 @@ void initializeOahOptionalValuesStyleKindsMap ()
   gGlobalOahOptionalValuesStyleKindsMap ["oah"] = kOptionalValuesStyleOAH;
 }
 
-string existingOahOptionalValuesStyleKinds (unsigned int namesListMaxLength)
+string existingOahOptionalValuesStyleKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     optionalValuesStyleKindsMapSize =
       gGlobalOahOptionalValuesStyleKindsMap.size ();
 

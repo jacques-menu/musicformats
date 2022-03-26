@@ -321,9 +321,9 @@ void msrIdentification::appendRelation (
   fIdentificationRelationsList.push_back (value);
 }
 
-unsigned int msrIdentification::maxIdentificationNamesLength ()
+size_t msrIdentification::maxIdentificationNamesLength ()
 {
-  unsigned int result = 0;
+  size_t result = 0;
 
   if (fIdentificationWorkNumber.size () > result) {
     result = fIdentificationWorkNumber.size ();
@@ -361,7 +361,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationComposersList.begin (); i!=fIdentificationComposersList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result){
         result = length;
       }
@@ -372,7 +372,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationLyricistsList.begin (); i!=fIdentificationLyricistsList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result) {
         result = length;
       }
@@ -383,7 +383,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationArrangersList.begin (); i!=fIdentificationArrangersList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result) {
         result = length;
       }
@@ -394,7 +394,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationPoetsList.begin (); i!=fIdentificationPoetsList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result) {
         result = length;
       }
@@ -405,7 +405,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationTranslatorsList.begin (); i!=fIdentificationTranslatorsList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result) {
         result = length;
       }
@@ -416,7 +416,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationArtistsList.begin (); i!=fIdentificationArtistsList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result) {
         result = length;
       }
@@ -427,7 +427,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationSoftwaresList.begin (); i!=fIdentificationSoftwaresList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result) {
         result = length;
       }
@@ -438,7 +438,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationRightsList.begin (); i!=fIdentificationRightsList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result) {
         result = length;
       }
@@ -449,7 +449,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationSourcesList.begin (); i!=fIdentificationSourcesList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result) {
         result = length;
       }
@@ -460,7 +460,7 @@ unsigned int msrIdentification::maxIdentificationNamesLength ()
     list<string>::const_iterator i;
 
     for (i=fIdentificationRelationsList.begin (); i!=fIdentificationRelationsList.end (); ++i) {
-      unsigned int length = (*i).size ();
+      size_t length = (*i).size ();
       if (length > result) {
         result = length;
       }

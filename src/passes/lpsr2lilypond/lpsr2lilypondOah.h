@@ -1135,11 +1135,11 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     string                getSubSubTitle () const
                               { return fSubSubTitle; }
 
-    string                getInstrument () const
-                              { return fInstrument; }
+    string                getHeaderInstrument () const
+                              { return fHeaderInstrument; }
 
-    string                getMeter () const
-                              { return fMeter; }
+    string                getHeaderMeter () const
+                              { return fHeaderMeter; }
 
     string                getTagline () const
                               { return fTagline; }
@@ -1362,7 +1362,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     void                  setBarNumbersSize (int value)
                               { fBarNumbersSize = value; }
-    float                 getBarNumbersSize () const
+    int                   getBarNumbersSize () const
                               { return fBarNumbersSize; }
 
     S_oahFloatAtom        getBarNumbersSizeAtom () const
@@ -1796,9 +1796,9 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     string                fSubTitle;
     string                fSubSubTitle;
 
-    string                fInstrument;
+    string                fHeaderInstrument;
 
-    string                fMeter;
+    string                fHeaderMeter;
 
     string                fTagline;
 

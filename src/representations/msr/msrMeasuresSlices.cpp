@@ -233,7 +233,7 @@ string msrSimultaneousNotesChunk::asString () const
 {
   stringstream s;
 
-  unsigned int chunkNotesListSize =
+  size_t chunkNotesListSize =
     fChunkNotesList.size ();
 
   s <<
@@ -393,7 +393,7 @@ if (true) // JMI
       s.str ());
   }
 
-  unsigned int otherSliceSize = otherSlice->getSliceSize ();
+  size_t otherSliceSize = otherSlice->getSliceSize ();
 
   if (otherSliceSize) {
     // get the other slices vector
@@ -402,7 +402,7 @@ if (true) // JMI
         otherSlice->
           getSliceMeasuresVector ();
 
-    for (unsigned int i = 0; i < otherSliceSize; ++i) {
+    for (size_t i = 0; i < otherSliceSize; ++i) {
       S_msrMeasure
         otherMeasure =
           otherMeasuresVector [i];
@@ -721,7 +721,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                       noteStaff->
                         getStaffRegularVoicesList ();
 
-                  unsigned int
+                  size_t
                     staffRegularVoicesListSize =
                       staffRegularVoicesList.size ();
 
@@ -806,7 +806,7 @@ string msrMeasuresSlice::asShortString () const
 {
   stringstream s;
 
-  unsigned int sliceMeasuresVectorSize =
+  size_t sliceMeasuresVectorSize =
     fSliceMeasuresVector.size ();
 
   s <<
@@ -845,7 +845,7 @@ string msrMeasuresSlice::asShortStringForMeasuresSlices () const
 {
   stringstream s;
 
-  unsigned int sliceMeasuresVectorSize =
+  size_t sliceMeasuresVectorSize =
     fSliceMeasuresVector.size ();
 
   s <<
@@ -883,7 +883,7 @@ string msrMeasuresSlice::asShortStringForMeasuresSlices () const
 
 void msrMeasuresSlice::print (ostream& os) const
 {
-  unsigned int sliceMeasuresVectorSize =
+  size_t sliceMeasuresVectorSize =
     fSliceMeasuresVector.size ();
 
   os <<
@@ -932,7 +932,7 @@ void msrMeasuresSlice::print (ostream& os) const
   }
 
   // print the slice notes flat list
-  unsigned int sliceNotesFlatListSize =
+  size_t sliceNotesFlatListSize =
     fSliceNotesFlatList.size ();
 
   if (sliceNotesFlatListSize) {
@@ -964,7 +964,7 @@ void msrMeasuresSlice::print (ostream& os) const
   }
 
   // print the slice notes events list
-  unsigned int sliceNoteEventsListSize =
+  size_t sliceNoteEventsListSize =
     fSliceNoteEventsList.size ();
 
   if (sliceNoteEventsListSize) {
@@ -996,7 +996,7 @@ void msrMeasuresSlice::print (ostream& os) const
   }
 
   // print the simultaneous notes chunks list
-  unsigned int sliceSimultaneousNotesChunksListSize =
+  size_t sliceSimultaneousNotesChunksListSize =
     fSliceSimultaneousNotesChunksList.size ();
 
   if (sliceSimultaneousNotesChunksListSize) {
@@ -1163,7 +1163,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
   }
 #endif
 
-  unsigned int sequenceSize =
+  size_t sequenceSize =
     getSlicesSequenceSize ();
 
 #ifdef TRACING_IS_ENABLED
@@ -1195,7 +1195,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
       msrMeasuresSlicesSequence::create (
         measuresOrigin);
 
-    unsigned int otherSequenceSize =
+    size_t otherSequenceSize =
       otherMeasuresSlicesSequence->getSlicesSequenceSize ();
 
 #ifdef TRACING_IS_ENABLED
@@ -1244,7 +1244,7 @@ S_msrMeasuresSlicesSequence msrMeasuresSlicesSequence::mergeWithMeasuresSlicesSe
               getMeasuresSlicesVector ();
 
         // iterate over the measures slices
-        for (unsigned int i = 0; i < sequenceSize; ++i) {
+        for (size_t i = 0; i < sequenceSize; ++i) {
           S_msrMeasuresSlice
             currentSlice =
               fMeasuresSlicesVector [i];
@@ -1351,7 +1351,7 @@ string msrMeasuresSlicesSequence::asShortStringForMeasuresSlices () const
 
 void msrMeasuresSlicesSequence::print (ostream& os) const
 {
-  unsigned int measuresSlicesVectorSize =
+  size_t measuresSlicesVectorSize =
     fMeasuresSlicesVector.size ();
 
   os <<

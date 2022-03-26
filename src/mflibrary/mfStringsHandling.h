@@ -14,6 +14,7 @@
 
 #include <string>
 #include <set>
+#include <map>
 #include <list>
 #include <vector>
 
@@ -149,6 +150,12 @@ EXP void displayStringPairVector (
   ostream&                   os);
 
 //______________________________________________________________________________
+char* mfCharStarCat (
+  char*        dest,
+  const char*  source,
+  const size_t destSize);
+
+//______________________________________________________________________________
 string mfInt2EnglishWord (int n);
 
 //______________________________________________________________________________
@@ -250,16 +257,30 @@ string  mfMakeSingleWordFromString (const string& theString);
 
 //______________________________________________________________________________
 Bool mfStringIsInStringSet (
-  const string&     theString,
-  const set<string> stringSet);
+  const string&      theString,
+  const set<string>& stringSet);
 
 string mfStringSetAsString (
-  const set<string> stringSet);
+  const set<string>& stringSet);
 
 void mfDisplayStringSet (
-  const string&     title,
-  const set<string> stringSet,
-  ostream&          os);
+  const string&      title,
+  const set<string>& stringSet,
+  ostream&           os);
+
+//______________________________________________________________________________
+Bool mfStringIsInStringToStringMap (
+  const string&              theKey,
+  const map<string, string>& stringToStringMap,
+  string&                    theValue);
+
+string mfStringToStringMapAsString (
+  const map<string, string>& stringToStringMap);
+
+void mfDisplayStringToStringMap (
+  const string&              title,
+  const map<string, string>& stringToStringMap,
+  ostream&                   os);
 
 
 }

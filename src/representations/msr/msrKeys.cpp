@@ -391,7 +391,7 @@ Bool msrKey::isEqualTo (S_msrKey otherKey) const
           return false;
         }
 
-        for (unsigned int i = 0; i < fHumdrumScotKeyItemsVector.size (); ++i) {
+        for (size_t i = 0; i < fHumdrumScotKeyItemsVector.size (); ++i) {
           if (
             ! (
               fHumdrumScotKeyItemsVector [i]->isEqualTo (
@@ -475,7 +475,7 @@ S_msrKey msrKey::createTraditionalKeyFromString (
 
   regex_match (keyString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

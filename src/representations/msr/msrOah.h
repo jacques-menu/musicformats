@@ -338,8 +338,8 @@ class EXP msrOahGroup : public oahGroup
 
     // parts
     const map<string, string>&
-                          getPartsRenamingMap () const
-                              { return fPartsRenamingMap; }
+                          getMsrPartsRenamingMap () const
+                              { return fMsrPartsRenamingMap; }
 
     // staves
     void                  setCreateSingleLineStavesAsRythmic ()
@@ -481,7 +481,7 @@ class EXP msrOahGroup : public oahGroup
                           fMsrQuarterTonesPitchesLanguageKind;
 
     // parts
-    map<string, string>   fPartsRenamingMap;
+    map<string, string>   fMsrPartsRenamingMap;
 
     // staves
     Bool                  fCreateSingleLineStavesAsRythmic;

@@ -189,7 +189,7 @@ void bsrScore::print (ostream& os) const
         */
 
   // print the score pages if any
-  unsigned int scorePagesListSize = fScorePagesList.size ();
+  size_t scorePagesListSize = fScorePagesList.size ();
 
   if (scorePagesListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
     os <<
@@ -264,7 +264,7 @@ void bsrScore::printShort (ostream& os) const
         */
 
   // print the score pages if any
-  unsigned int scorePagesListSize = fScorePagesList.size ();
+  size_t scorePagesListSize = fScorePagesList.size ();
 
   if (scorePagesListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
     os <<

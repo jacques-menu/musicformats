@@ -181,7 +181,7 @@ string Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingAboutInformatio
 {
   string result;
 
-  unsigned int passesNumber = 0;
+  size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::k_NoGeneration:
@@ -872,7 +872,7 @@ S_Mikrokosmos3WanderingInsiderOahGroup Mikrokosmos3WanderingInsiderOahGroup::cre
 Mikrokosmos3WanderingInsiderOahGroup::Mikrokosmos3WanderingInsiderOahGroup ()
   : oahGroup (
     "Mikrokosmos3Wandering",
-    "help-Mikrokosmos3Wandering", "hmkk",
+    "help-Mikrokosmos3Wandering", "hmkk3w",
 R"(Options that are used by Mikrokosmos3Wandering are grouped here.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {

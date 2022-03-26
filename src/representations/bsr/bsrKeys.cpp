@@ -71,7 +71,7 @@ ostream& operator<< (ostream& os, bsrKeyKind& elt)
 S_bsrKey bsrKey::create (
   int          inputLineNumber,
   bsrKeyKind   keyKind,
-  unsigned int numberOfAlterations)
+  size_t numberOfAlterations)
 {
   bsrKey* o =
     new bsrKey (
@@ -84,7 +84,7 @@ S_bsrKey bsrKey::create (
 bsrKey::bsrKey (
   int          inputLineNumber,
   bsrKeyKind   keyKind,
-  unsigned int numberOfAlterations)
+  size_t numberOfAlterations)
     : bsrLineContentsElement (inputLineNumber)
 {
   fKeyKind             = keyKind;
@@ -172,7 +172,7 @@ S_bsrCellsList bsrKey::buildCellsList () const
     case 2:
     case 3:
       // create as many flat or sharp signs as needed
-      for (unsigned int i = 1; i <= fNumberOfAlterations; ++i) {
+      for (size_t i = 1; i <= fNumberOfAlterations; ++i) {
         result->appendCellsListToCellsList (
           keyKindAsCellsList ());
       } // for

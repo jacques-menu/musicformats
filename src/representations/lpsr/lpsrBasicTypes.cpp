@@ -731,21 +731,21 @@ void initializeLpsrScoreOutputKindsMap ()
   gGlobalLpsrScoreOutputKindsMap ["parts-only-one-file"] = lpsrScoreOutputKind::kScoreOutputPartsOnlyOneFile;
 }
 
-string existingLpsrScoreOutputKinds (unsigned int namesListMaxLength)
+string existingLpsrScoreOutputKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     lpsrScoreOutputKindsMapSize =
       gGlobalLpsrScoreOutputKindsMap.size ();
 
   if (lpsrScoreOutputKindsMapSize) {
-    unsigned int
+    size_t
       nextToLast =
         lpsrScoreOutputKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, lpsrScoreOutputKind>::const_iterator i =
@@ -938,21 +938,21 @@ void initializeLpsrAccidentalStyleKindsMap ()
   gGlobalLpsrAccidentalStyleKindsMap ["forget"] = lpsrAccidentalStyleKind::kAccidentalStyleForget;
 }
 
-string existingLpsrAccidentalStyleKinds (unsigned int namesListMaxLength)
+string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     accidentalStyleKindsMapSize =
       gGlobalLpsrAccidentalStyleKindsMap.size ();
 
   if (accidentalStyleKindsMapSize) {
-    unsigned int
+    size_t
       nextToLast =
         accidentalStyleKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, lpsrAccidentalStyleKind>::const_iterator i =
@@ -1025,20 +1025,20 @@ string lpsrChordsLanguageKindAsString (
   return result;
 }
 
-string existingLpsrChordsLanguageKinds (unsigned int namesListMaxLength)
+string existingLpsrChordsLanguageKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     lpsrChordsLanguageKindsMapSize =
       gGlobalLpsrChordsLanguageKindsMap.size ();
 
   if (lpsrChordsLanguageKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       lpsrChordsLanguageKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, lpsrChordsLanguageKind>::const_iterator i =
@@ -1292,21 +1292,21 @@ void initializeLpsrDynamicsTextSpannersStyleKindsMap ()
 }
 
 string existingLpsrDynamicsTextSpannersStyleKinds (
-  unsigned int namesListMaxLength)
+  size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     lpsrDynamicsTextSpannersStyleKindsMapSize =
       pLpsrDynamicsTextSpannersStyleKindsMap.size ();
 
   if (lpsrDynamicsTextSpannersStyleKindsMapSize) {
-    unsigned int
+    size_t
       nextToLast =
         lpsrDynamicsTextSpannersStyleKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, lpsrDynamicsTextSpannersStyleKind>::const_iterator i =
@@ -1375,21 +1375,21 @@ void initializeLpsrLyricsDurationsKindsMap ()
   gGlobalLpsrLyricsDurationsKindsMap ["explicit"] = lpsrLyricsDurationsKind::kLyricsDurationsExplicit;
 }
 
-string existingLpsrLyricsDurationsKinds (unsigned int namesListMaxLength)
+string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     lpsrLyricsDurationsKindsMapSize =
       gGlobalLpsrLyricsDurationsKindsMap.size ();
 
   if (lpsrLyricsDurationsKindsMapSize) {
-    unsigned int
+    size_t
       nextToLast =
         lpsrLyricsDurationsKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, lpsrLyricsDurationsKind>::const_iterator i =

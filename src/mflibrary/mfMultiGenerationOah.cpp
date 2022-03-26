@@ -145,19 +145,19 @@ void initializeMultiGenerationOutputKindsMap ()
     mfMultiGenerationOutputKind::kGenerationMidi;
 }
 
-string existingMultiGenerationOutputKinds (unsigned int namesListMaxLength)
+string existingMultiGenerationOutputKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int brailleOutputKindsMapSize =
+  size_t brailleOutputKindsMapSize =
     gGlobalMultiGenerationOutputKindsMap.size ();
 
   if (brailleOutputKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       brailleOutputKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, mfMultiGenerationOutputKind>::const_iterator i =
@@ -203,7 +203,7 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //         getOptionsAndArguments ().getOptionsVector ();
 //
 //   if (optionsVector.size ()) {
-//     for (unsigned int i = 0; i < optionsVector.size (); ++i) {
+//     for (size_t i = 0; i < optionsVector.size (); ++i) {
 //       string optionName =
 //         optionsVector [i].getOptionName ();
 //       string optionValue =

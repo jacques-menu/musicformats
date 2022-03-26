@@ -287,12 +287,15 @@ void msr2msrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
 void msr2msrTranslator::displayOnGoingNotesStack (
   const string& context)
 {
-  unsigned int onGoingNotesStackSize = fOnGoingNotesStack.size ();
+  size_t onGoingNotesStackSize = fOnGoingNotesStack.size ();
 
   gLogStream <<
     endl <<
     ">>++++++++++++++++ " <<
-    "The on-going notes stack contains " << onGoingNotesStackSize << " elements:" <<
+    "The on-going notes stack contains " <<
+    onGoingNotesStackSize <<
+    " elements" <<
+    " (" << context << "):" <<
     endl;
 
   if (onGoingNotesStackSize) {

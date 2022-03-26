@@ -398,7 +398,7 @@ void mxsr2msrSkeletonBuilder::showPartGroupDescrsVector (
 
   ++gIndenter;
 
-  for (unsigned int i = 0; i < fPartGroupDescsVector.size (); ++i) {
+  for (size_t i = 0; i < fPartGroupDescsVector.size (); ++i) {
     S_mxmlPartGroupDescr
       partGroupDescr = fPartGroupDescsVector [i];
 
@@ -431,7 +431,7 @@ void mxsr2msrSkeletonBuilder::showPositionStartingPartGroupDescrsVector (
   if (fPositionStartingPartGroupDescrsVector.size ()) {
     ++gIndenter;
 
-    for (unsigned int k = 0; k < fPositionStartingPartGroupDescrsVector.size (); ++k) {
+    for (size_t k = 0; k < fPositionStartingPartGroupDescrsVector.size (); ++k) {
       gLogStream <<
         k << ": " <<
         endl;
@@ -494,7 +494,7 @@ void mxsr2msrSkeletonBuilder::showPositionStoppingPartGroupDescrsVector (
   if (fPositionStoppingPartGroupDescrsVector.size ()) {
     ++gIndenter;
 
-    for (unsigned int k = 0; k < fPositionStoppingPartGroupDescrsVector.size (); ++k) {
+    for (size_t k = 0; k < fPositionStoppingPartGroupDescrsVector.size (); ++k) {
       gLogStream <<
         k << ": " <<
         endl;
@@ -557,7 +557,7 @@ void mxsr2msrSkeletonBuilder::showPartsVector (
   if (fPartsVector.size ()) {
     ++gIndenter;
 
-    for (unsigned int i = 0; i < fPartsVector.size (); ++i) {
+    for (size_t i = 0; i < fPartsVector.size (); ++i) {
       S_msrPart
         part = fPartsVector [i];
 

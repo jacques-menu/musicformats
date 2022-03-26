@@ -237,19 +237,19 @@ string bsrBrailleOutputKindAsString (
   return result;
 }
 
-string existingBsrBrailleOutputKinds (unsigned int namesListMaxLength)
+string existingBsrBrailleOutputKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int brailleOutputKindsMapSize =
+  size_t brailleOutputKindsMapSize =
     gGlobalBsrBrailleOutputKindsMap.size ();
 
   if (brailleOutputKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       brailleOutputKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, bsrBrailleOutputKind>::const_iterator i =
@@ -318,19 +318,19 @@ string bsrTextsLanguageKindAsString (
   return result;
 }
 
-string existingBsrTextsLanguageKinds (unsigned int namesListMaxLength)
+string existingBsrTextsLanguageKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int textsLanguageKindsMapSize =
+  size_t textsLanguageKindsMapSize =
     gGlobalBsrTextsLanguageKindsMap.size ();
 
   if (textsLanguageKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       textsLanguageKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, bsrTextsLanguageKind>::const_iterator i =
@@ -379,7 +379,7 @@ void write_wchar_t ( wchar_t cell )
 
 void write_wstring (ostream& os, wstring wstr )
 {
-  for (unsigned int i = 0; i < wstr.size (); ++i) {
+  for (size_t i = 0; i < wstr.size (); ++i) {
     wchar_t cell = wstr [i];
     write_wchar_t (os, cell);
   } // for
@@ -387,7 +387,7 @@ void write_wstring (ostream& os, wstring wstr )
 
 ostream& operator<< (ostream& os, const wstring& wstr)
 {
-  for (unsigned int i = 0; i < wstr.size (); ++i) {
+  for (size_t i = 0; i < wstr.size (); ++i) {
     wchar_t cell = wstr [i];
 
     union Conversion {

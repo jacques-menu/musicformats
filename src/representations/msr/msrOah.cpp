@@ -345,7 +345,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
   string regularExpression (
     "[[:space:]]*([^[:space:]]*)[[:space:]]*"
-    "="
+    ":"
     "[[:space:]]*([^[:space:]]*)[[:space:]]*");
 
   regex  e (regularExpression);
@@ -353,7 +353,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -420,6 +420,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
   else {
     fStringToStringMapVariable [oldPartName] = newPartName;
+    fSetByUser = true;
   }
 }
 
@@ -982,13 +983,13 @@ R"(Rename part ORIGINAL_NAME to NEW_NAME, for example after displaying
 the names in the score or a summary of the latter in a first run with options
 '-dmsrnames, -display-msr-names' or 'dmsrsum, -display-msr-summary'.
 PART_RENAME_SPEC should be of the form ORIGINAL_NAME:NEW_NAME .
-There can be spaces around the ':'.
+There can be spaces around the ':', in which case quoting is needed.
 There can be several occurrences of this option.)",
           regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "PART_RENAME_SPEC",
-        "fPartsRenamingMap",
-        fPartsRenamingMap));
+        "fMsrPartsRenamingMap",
+        fMsrPartsRenamingMap));
 }
 
 void msrOahGroup::initializeMsrStavesOptions ()
@@ -1346,15 +1347,15 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
   gLogStream << left <<
     setw (valueFieldWidth) << "parts renaming" << " : ";
 
-  if (! fPartsRenamingMap.size ()) {
+  if (! fMsrPartsRenamingMap.size ()) {
     gLogStream <<
       "none";
   }
   else {
     for (
       map<string, string>::const_iterator i =
-        fPartsRenamingMap.begin ();
-      i != fPartsRenamingMap.end ();
+        fMsrPartsRenamingMap.begin ();
+      i != fMsrPartsRenamingMap.end ();
       ++i
   ) {
         gLogStream <<

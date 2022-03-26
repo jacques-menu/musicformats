@@ -125,6 +125,8 @@ alias b2015="cd ${MXML_FILES_DIR}/2015_bana_braille"
 
 alias igno="cd ${MXML_FILES_DIR}/lilypond-ignored"
 
+alias fmfsl="cd ${FILES_DIR}/mfslfiles"
+
 alias fmsdl="cd ${FILES_DIR}/msdlfiles"
 alias fbmml="cd ${FILES_DIR}/bmmlfiles"
 alias fmei="cd ${FILES_DIR}/meifiles"
@@ -152,10 +154,8 @@ alias msdr='cd ${SRC_DIR}/representations/msdr'
 # MFSL
 #----------------------------------------------
 
-MFSL_DIR=${SRC_DIR}/interpreters/mfsl
-alias mfsl="cd ${MFSL_DIR}"
-
-alias mfsli='mfslInterpreter'
+MFSL_DIR=${SRC_DIR}/interpreters/mfslinterpreter
+alias mfsld="cd ${MFSL_DIR}"
 
 
 # musicxml2ly
@@ -718,6 +718,15 @@ alias dimsdlm='lldb -- msdl -insider -generate midi'
 # xml2gmn basic/HelloWorld.xml -generate-bars -generate-stem -generate-comments -d=msr
 
 
+# mfsl
+#----------------------------------------------
+alias mfslh='mfsl -help'
+
+alias mfslq='mfsl -query'
+alias mfslf='mfsl -find'
+
+
+# git
 #----------------------------------------------
 
 alias gb='git branch'
@@ -738,6 +747,7 @@ function addAll ()
   addDoc
 
   addFxml
+  addFmfsl
 }
 
 function addSrc ()
@@ -802,6 +812,11 @@ function addFxml ()
   git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.xml
   git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.txt
   git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/Makefile
+}
+
+function addFmfsl ()
+{
+  git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.mfsl
 }
 
 function mergeTestFromDev ()

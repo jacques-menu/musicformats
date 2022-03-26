@@ -159,7 +159,7 @@ void bsrParallel::print (ostream& os) const
     endl;
 
   // print the parallel elements if any
-  unsigned int parallelElementsListSize = fParallelElementsList.size ();
+  size_t parallelElementsListSize = fParallelElementsList.size ();
 
   if (parallelElementsListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
     os <<

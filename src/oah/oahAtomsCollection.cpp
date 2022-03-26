@@ -2248,6 +2248,280 @@ ostream& operator<< (ostream& os, const S_oahDisplaySingleCharacterOptions& elt)
 }
 
 //______________________________________________________________________________
+Bool oahOnOffKindAsBool (
+  oahOnOffKind onOffKind)
+{
+  Bool result;
+
+  switch (onOffKind) {
+    case oahOnOffKind::kOahOnOffUnknown:
+      {
+        oahError (
+          "oahOnOffKind::kOahOnOffUnknown cannot be converted to Bool");
+      }
+      break;
+    case oahOnOffKind::kOahOnOffOn:
+      result = true;
+      break;
+    case oahOnOffKind::kOahOnOffOff:
+      result = false;
+      break;
+  } // switch
+
+  return result;
+}
+
+string oahOnOffKindAsString (
+  oahOnOffKind onOffKind)
+{
+  string result;
+
+  // no CamelCase here, these strings are used in the command line options
+
+  switch (onOffKind) {
+    case oahOnOffKind::kOahOnOffUnknown:
+      result = "unknown";
+      break;
+    case oahOnOffKind::kOahOnOffOn:
+      result = "on";
+      break;
+    case oahOnOffKind::kOahOnOffOff:
+      result = "off";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const oahOnOffKind elt)
+{
+  os << oahOnOffKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
+S_oahOnOffAtom oahOnOffAtom::create (
+  const string& longName,
+  const string& shortName,
+  const string& description,
+  const string& valueSpecification,
+  const string& variableName,
+  oahOnOffKind& onOffKindVariable)
+{
+  oahOnOffAtom* o = new
+    oahOnOffAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName,
+      onOffKindVariable);
+  assert (o != nullptr);
+  return o;
+}
+
+oahOnOffAtom::oahOnOffAtom (
+  const string& longName,
+  const string& shortName,
+  const string& description,
+  const string& valueSpecification,
+  const string& variableName,
+  oahOnOffKind& onOffKindVariable)
+  : oahAtomStoringAValue (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName),
+    fOnOffKindVariable (
+      onOffKindVariable)
+{}
+
+oahOnOffAtom::~oahOnOffAtom ()
+{}
+
+void oahOnOffAtom::applyAtomWithValue (
+  const string& theString,
+  ostream&      os)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Handling option name '" <<
+      fetchNames () <<
+      "' which is a oahOnOffAtom" <<
+      endl;
+  }
+#endif
+
+  if (theString == "on") {
+    setOnOffKindVariable (
+      oahOnOffKind::kOahOnOffOn);
+  }
+  else if (theString == "off") {
+    setOnOffKindVariable (
+      oahOnOffKind::kOahOnOffOn);
+  }
+  else if (theString == "unknown") {
+    setOnOffKindVariable (
+      oahOnOffKind::kOahOnOffUnknown);
+  }
+  else {
+    stringstream s;
+
+    s <<
+      "Ill-formed value for option " <<
+      fetchNamesBetweenQuotes () <<
+      ", \"on\", \"off\" or \"unknown\" expected";
+
+    oahError (s.str ());
+  }
+}
+
+void oahOnOffAtom::setOnOffKindVariable (oahOnOffKind value)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    if (fLongName == K_TRACE_OAH_LONG_OPTION_NAME) {
+      // get the options handler
+      S_oahHandler
+        handler =
+          fetchAtomHandlerUpLink (); // JMI
+
+      gLogStream <<
+        "Setting option '" <<
+        fetchNames () <<
+        "' onOffKind variable to '" <<
+        value <<
+        "'" <<
+        endl;
+    }
+  }
+#endif
+
+  fOnOffKindVariable = value;
+  fSetByUser = true;
+}
+
+void oahOnOffAtom::acceptIn (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahOnOffAtom::acceptIn ()" <<
+      endl;
+  }
+#endif
+
+  if (visitor<S_oahOnOffAtom>*
+    p =
+      dynamic_cast<visitor<S_oahOnOffAtom>*> (v)) {
+        S_oahOnOffAtom elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahOnOffAtom::visitStart ()" <<
+            endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void oahOnOffAtom::acceptOut (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahOnOffAtom::acceptOut ()" <<
+      endl;
+  }
+#endif
+
+  if (visitor<S_oahOnOffAtom>*
+    p =
+      dynamic_cast<visitor<S_oahOnOffAtom>*> (v)) {
+        S_oahOnOffAtom elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahOnOffAtom::visitEnd ()" <<
+            endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void oahOnOffAtom::browseData (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahOnOffAtom::browseData ()" <<
+      endl;
+  }
+#endif
+}
+
+void oahOnOffAtom::print (ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "OnOffAtom:" <<
+    endl;
+
+  ++gIndenter;
+
+  oahElement::printOahElementEssentials (
+    os, fieldWidth);
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fOnOffKindVariable" << " : " <<
+    fOnOffKindVariable <<
+    endl <<
+    setw (fieldWidth) <<
+    "fVariableName" << " : " <<
+    fVariableName <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fSetByUser" << " : " <<
+    fSetByUser <<
+    endl;
+
+  --gIndenter;
+}
+
+void oahOnOffAtom::printAtomWithVariableOptionsValues (
+  ostream& os,
+  int      valueFieldWidth) const
+{
+  os << left <<
+    setw (valueFieldWidth) <<
+    fVariableName <<
+    " : " <<
+    fOnOffKindVariable;
+
+  if (fSetByUser) { // JMIJMIJMI
+    os <<
+      ", set by user";
+  }
+
+  os << endl;
+}
+
+ostream& operator<< (ostream& os, const S_oahOnOffAtom& elt)
+{
+  elt->print (os);
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahBooleanAtom oahBooleanAtom::create (
   const string& longName,
   const string& shortName,
@@ -3941,7 +4215,7 @@ void oahIntegerAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -4195,7 +4469,7 @@ void oahTwoIntegersAtom::applyAtomWithValue ( // NOT USE YET JMI
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -4467,7 +4741,7 @@ void oahFloatAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -5746,7 +6020,7 @@ void oahRationalAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -6447,7 +6721,7 @@ void oahIntSetElementAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -7056,7 +7330,7 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -7086,7 +7360,8 @@ void oahStringToIntMapElementAtom::applyAtomWithValue (
     stringstream s;
 
     s <<
-      "-resetMeasureElementMeasureNumber argument \"" <<
+      fetchNamesBetweenQuotes () <<
+      " argument \"" <<
       theString <<
       "\" is ill-formed";
 
@@ -7398,7 +7673,7 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -7428,36 +7703,32 @@ void oahStringToStringMapElementAtom::applyAtomWithValue (
     stringstream s;
 
     s <<
-      "-resetMeasureElementMeasureNumber argument \"" <<
+      fetchNamesBetweenQuotes () <<
+      " argument \"" <<
       theString <<
       "\" is ill-formed";
 
     oahError (s.str ());
   }
 
-  string musicxmlMeasureNumber = sm [1];
-
-  int lilypondMeasureNumber;
-  {
-    stringstream s;
-    s << sm [2];
-    s >> lilypondMeasureNumber;
-  }
+  string
+    key   = sm [1],
+    value = sm [2];
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      "musicxmlMeasureNumber = " <<
-      musicxmlMeasureNumber <<
+      "key = " <<
+      key <<
       endl <<
-      "lilypondMeasureNumber = " <<
-      lilypondMeasureNumber <<
+      "value = " <<
+      value <<
       endl;
   }
 #endif
 
-  fStringToStringMapVariable [musicxmlMeasureNumber] =
-    lilypondMeasureNumber;
+  fStringToStringMapVariable [key] =
+    value;
   fSetByUser = true;
 }
 
@@ -7734,7 +8005,7 @@ void oahStringAndIntegerAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -8047,7 +8318,7 @@ void oahStringAndTwoIntegersAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -8613,7 +8884,7 @@ void oahLengthAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -8919,7 +9190,7 @@ void oahMidiTempoAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -9555,7 +9826,7 @@ void oahFindStringAtom::applyAtomWithValue (
       os);
 
   //  print the found strings
-  unsigned int foundStringsListSize =
+  size_t foundStringsListSize =
     foundStringsList.size ();
 
   int saveIndent = gIndenter.getIndent ();

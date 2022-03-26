@@ -427,33 +427,52 @@ class EXP lpsrOahGroup : public oahGroup
     // counts
     void                  setPageCount (int value)
                               { fPageCount = value; }
+
     int                   getPageCount () const
                               { return fPageCount; }
+    S_oahIntegerAtom      getPageCountAtom () const
+                              { return fPageCountAtom; }
 
     void                  setSystemCount (int value)
                               { fSystemCount = value; }
+
     int                   getSystemCount () const
                               { return fSystemCount; }
+    S_oahIntegerAtom      getSystemCountAtom () const
+                              { return fSystemCountAtom; }
 
-    void                  setRaggedBottom ()
-                              { fRaggedBottom = true; }
-    Bool                  getRaggedBottom () const
+    void                  setRaggedBottom (oahOnOffKind value)
+                              { fRaggedBottom = value; }
+
+    oahOnOffKind          getRaggedBottom () const
                               { return fRaggedBottom; }
 
-    void                  setRaggedLast ()
-                              { fRaggedLast = true; }
-    Bool                  getRaggedLast () const
+    S_oahOnOffAtom        getRaggedBottomAtom () const
+                              { return fRaggedBottomAtom; }
+
+    void                  setRaggedLast (oahOnOffKind value)
+                              { fRaggedLast = value; }
+
+    oahOnOffKind          getRaggedLast () const
                               { return fRaggedLast; }
+    S_oahOnOffAtom        getRaggedLastAtom () const
+                              { return fRaggedLastAtom; }
 
-    void                  setRaggedLastBottom ()
-                              { fRaggedLastBottom = true; }
-    Bool                  getRaggedLastBottom () const
+    void                  setRaggedLastBottom (oahOnOffKind value)
+                              { fRaggedLastBottom = value; }
+
+    oahOnOffKind          getRaggedLastBottom () const
                               { return fRaggedLastBottom; }
+    S_oahOnOffAtom        getRaggedLastBottomAtom () const
+                              { return fRaggedLastBottomAtom; }
 
-    void                  setRaggedRight ()
-                              { fRaggedRight = true; }
-    Bool                  getRaggedRight () const
+    void                  setRaggedRight (oahOnOffKind value)
+                              { fRaggedRight = value; }
+
+    oahOnOffKind          getRaggedRight () const
                               { return fRaggedRight; }
+    S_oahOnOffAtom        getRaggedRightAtom () const
+                              { return fRaggedRightAtom; }
 
     void                  setTagline ()
                               { fTagline = true; }
@@ -653,14 +672,24 @@ class EXP lpsrOahGroup : public oahGroup
     msrLength             fPageTopSpace;
 
     // counts
-    int                   fPageCount;   // 0 if not specified
-    int                   fSystemCount; // 0 if not specified
+    int                   fPageCount;   // 0 by default
+    S_oahIntegerAtom      fPageCountAtom;
 
-    // ragging
-    Bool                  fRaggedBottom;
-    Bool                  fRaggedLast;
-    Bool                  fRaggedLastBottom;
-    Bool                  fRaggedRight;
+    int                   fSystemCount; // 0 by default
+    S_oahIntegerAtom      fSystemCountAtom;
+
+    // ragged output
+    oahOnOffKind          fRaggedBottom;
+    S_oahOnOffAtom        fRaggedBottomAtom;
+
+    oahOnOffKind          fRaggedLast;
+    S_oahOnOffAtom        fRaggedLastAtom;
+
+    oahOnOffKind          fRaggedLastBottom;
+    S_oahOnOffAtom        fRaggedLastBottomAtom;
+
+    oahOnOffKind          fRaggedRight;
+    S_oahOnOffAtom        fRaggedRightAtom;
 
     // tag line
     Bool                  fTagline;

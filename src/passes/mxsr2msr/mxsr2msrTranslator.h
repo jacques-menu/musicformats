@@ -147,9 +147,12 @@ class EXP mxsr2msrTranslator :
   public visitor<S_interchangeable>,
   public visitor<S_time_relation>,
 
-  // ???
+  // instruments
   // ------------------------------------------------------
 
+  public visitor<S_score_instrument>,
+  public visitor<S_instrument_name>,
+  public visitor<S_solo>,
   public visitor<S_instruments>,
 
   // transpose
@@ -666,9 +669,13 @@ class EXP mxsr2msrTranslator :
     virtual void visitStart ( S_interchangeable& elt );
     virtual void visitStart ( S_time_relation& elt );
 
-    // ???
+    // instruments
     // ------------------------------------------------------
 
+    virtual void visitStart ( S_score_instrument& elt);
+    virtual void visitStart ( S_instrument_name& elt);
+    virtual void visitStart ( S_solo& elt);
+    virtual void visitStart ( S_instrument& elt);
     virtual void visitStart ( S_instruments& elt );
 
     // transpose
@@ -820,7 +827,6 @@ class EXP mxsr2msrTranslator :
     virtual void visitStart ( S_alter& elt);
     virtual void visitStart ( S_octave& elt);
     virtual void visitStart ( S_duration& elt);
-    virtual void visitStart ( S_instrument& elt);
     virtual void visitStart ( S_dot& elt );
 
     // repeats

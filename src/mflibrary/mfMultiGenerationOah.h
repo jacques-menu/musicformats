@@ -53,7 +53,7 @@ EXP extern mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
 extern map<string, mfMultiGenerationOutputKind>
   gGlobalMultiGenerationOutputKindsMap;
 
-string existingMultiGenerationOutputKinds (unsigned int namesListMaxLength);
+string existingMultiGenerationOutputKinds (size_t namesListMaxLength);
 
 void initializeMultiGenerationOutputKindsMap ();
 

@@ -226,7 +226,7 @@ Usage:
                               { fIndentedStreamBuf.flush (); }
 
     // indentation
-    mfOutputIndenter&       getIndenter () const
+    mfOutputIndenter&     getIndenter () const
                               { return fIndentedStreamBuf.getOutputIndenter (); }
 
     void                  incrIdentation ()

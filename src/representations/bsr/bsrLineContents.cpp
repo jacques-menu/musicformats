@@ -130,7 +130,7 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
     }
 #endif
 
-  unsigned int
+  size_t
     lineContentsElementsListSize =
       fLineContentsLineElementsList.size ();
 
@@ -310,7 +310,7 @@ string bsrLineContents::asString () const
 
 void bsrLineContents::print (ostream& os) const
 {
-  unsigned int lineElementsListSize =
+  size_t lineElementsListSize =
     fLineContentsLineElementsList.size ();
 
   os <<
@@ -371,7 +371,7 @@ string bsrLineContents::asDebugString () const
 {
   stringstream s;
 
-  unsigned int lineElementsListSize =
+  size_t lineElementsListSize =
     fLineContentsLineElementsList.size ();
 
   // collect the line elements debug strings if any

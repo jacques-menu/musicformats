@@ -1,0 +1,50 @@
+#!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
+
+# the MusicFormats tool to be used
+tool : xml2ly
+
+# the input file
+# input : "HelloWorld.xml"
+input : "Hymn121.xml"
+
+# output file
+  -auto-output-file-name
+
+# tracing
+  -trace-passes
+
+# options and help
+  -display-options-values
+
+# geometry
+#   -global-staff-size 30.3
+
+# header
+
+# parts
+  -keep-musicxml-part-id P1
+
+# the voices choice
+choice VOICES_CHOICE : voice1Only | voice2Only ;
+  # could be : choice VOICES_CHOICE : ... ... ... ;
+
+set VOICES_CHOICE = voice1Only ;
+  # change this to voice2Only to switch to another subset of options
+  # could even be parameter to the script such a $1
+
+# choose which options to use according to VOICES_CHOICE
+# case VOICES_CHOICE :
+# 	voice1Only:
+#     -title "Joli morceau - voix 1"
+#     -keep-msr-voice Part_POne_Staff_One_Voice_One
+#   ;
+#
+# 	voice2Only:
+#     -title "Joli morceau - voix 2"
+#     --keep-msr-voice Part_POne_Staff_One_Voice_Two
+#
+# #     -display-options-values
+#   ;
+# ;
+
+-display-cpu-usage

@@ -986,7 +986,7 @@ void msrPrintLayout::print (ostream& os) const
       os << "none" << endl;
     }
 
-  unsigned int
+  size_t
     staffLayoutsListSize =
       fStaffLayoutsList.size ();
 
@@ -2056,7 +2056,7 @@ void msrAppearance::print (ostream& os) const
   const int fieldWidth = 18;
 
   // line widths
-  unsigned int
+  size_t
     lineWidthsListSize =
       fLineWidthsList.size ();
 
@@ -2084,7 +2084,7 @@ void msrAppearance::print (ostream& os) const
   }
 
   // note sizes
-  unsigned int
+  size_t
     noteSizesListSize =
       fNoteSizesList.size ();
 
@@ -2112,7 +2112,7 @@ void msrAppearance::print (ostream& os) const
   }
 
   // distances
-  unsigned int
+  size_t
     distancesListSize =
       fDistancesList.size ();
 
@@ -2140,7 +2140,7 @@ void msrAppearance::print (ostream& os) const
   }
 
   // glyphs
-  unsigned int
+  size_t
     glyphsListSize =
       fGlyphsList.size ();
 
@@ -2168,7 +2168,7 @@ void msrAppearance::print (ostream& os) const
   }
 
   // other appearances
-  unsigned int
+  size_t
     otherAppearancesListSize =
       fOtherAppearancesList.size ();
 

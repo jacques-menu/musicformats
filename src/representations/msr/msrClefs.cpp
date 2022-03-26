@@ -100,7 +100,7 @@ S_msrClef msrClef::createClefFromString (
 
   regex_match (clefString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

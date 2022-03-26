@@ -441,12 +441,12 @@ lpsrScore::lpsrScore (
   }
 
   // counts
-  if (gGlobalLpsrOahGroup->getPageCount () > 0) {
+  if (gGlobalLpsrOahGroup->getPageCountAtom ()->getSetByUser ()) {
     fScorePaper->
       setPageCount (gGlobalLpsrOahGroup->getPageCount ());
   }
 
-  if (gGlobalLpsrOahGroup->getSystemCount () > 0) {
+  if (gGlobalLpsrOahGroup->getSystemCountAtom ()->getSetByUser ()) {
     fScorePaper->
       setSystemCount (gGlobalLpsrOahGroup->getSystemCount ());
   }

@@ -136,7 +136,7 @@ class EXP lpsrHeader : public lpsrElement
 
   public:
 
-    unsigned int          maxLilypondVariablesNamesLength ();
+    size_t          maxLilypondVariablesNamesLength ();
 
   public:
 

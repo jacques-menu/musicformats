@@ -521,7 +521,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
     argumentsVector =
       optionsAndArguments.getArgumentsVector ();
 
-  unsigned int argumentsNumber =
+  size_t argumentsNumber =
     argumentsVector.size ();
 
 #ifdef TRACING_IS_ENABLED
@@ -547,7 +547,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
 
       ++gIndenter;
 
-      for (unsigned int i = 0; i < argumentsNumber; ++i) {
+      for (size_t i = 0; i < argumentsNumber; ++i) {
         gLogStream <<
           i << " : " << argumentsVector [i] <<
             endl;
@@ -566,7 +566,7 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInOptionsAndArguments (
   }
 #endif
 
-  for (unsigned int i = 0; i < argumentsNumber; ++i) {
+  for (size_t i = 0; i < argumentsNumber; ++i) {
     string argumentAsString = argumentsVector [i];
 
     Bool   argumentIsAnOption;

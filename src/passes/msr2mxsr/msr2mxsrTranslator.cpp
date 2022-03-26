@@ -944,7 +944,7 @@ void msr2mxsrTranslator::visitEnd (S_msrScore& elt)
   }
 
   // append the score credits element if any to the score part wise element
-  unsigned int pendingScoreCreditElementsListSize =
+  size_t pendingScoreCreditElementsListSize =
     fPendingScoreCreditElementsList.size ();
 
   if (pendingScoreCreditElementsListSize) {
@@ -4226,7 +4226,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
     tempoWordsList =
       elt->getTempoWordsList ();
 
- unsigned int tempoWordsListSize = tempoWordsList.size ();
+ size_t tempoWordsListSize = tempoWordsList.size ();
 */
 
   msrDottedDuration tempoBeatUnit  = elt->getTempoBeatUnit ();
@@ -6069,7 +6069,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
               getNoteDirectTupletUpLink ();
 
         // get theMsrNote's position in tuplet
-        unsigned int
+        size_t
           notePositionInTuplet =
             theMsrNote->
               getPositionInTuplet ();

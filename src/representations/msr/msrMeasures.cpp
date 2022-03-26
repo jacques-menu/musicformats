@@ -1173,7 +1173,7 @@ void msrMeasure::insertElementAtPositionInMeasure (
   }
 #endif
 
-  unsigned int
+  size_t
     measureElementsListSize =
       fMeasureElementsList.size ();
 
@@ -6140,7 +6140,7 @@ string msrMeasure::asShortStringForMeasuresSlices () const
     ", ";
 */
 
-  unsigned int
+  size_t
     measureElementsListSize =
       fMeasureElementsList.size ();
 
@@ -6442,7 +6442,7 @@ void msrMeasure::print (ostream& os) const
     endl;
 
   // print measure elements list
-  unsigned int
+  size_t
     measureElementsListSize =
       fMeasureElementsList.size ();
 
@@ -6476,7 +6476,7 @@ void msrMeasure::print (ostream& os) const
   os << endl;
 
   // print measure notes flat list
-  unsigned int
+  size_t
     measureNotesFlatListSize =
       fMeasureNotesFlatList.size ();
 
@@ -6554,7 +6554,7 @@ void msrMeasure::printShort (ostream& os) const
     fFullMeasureWholeNotesDuration <<
     endl;
 
-  unsigned int
+  size_t
     measureElementsListSize =
       fMeasureElementsList.size ();
 

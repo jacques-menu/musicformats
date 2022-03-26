@@ -512,7 +512,7 @@ void msrBook::print (ostream& os) const
 
   const int fieldWidth = 38;
 
-  unsigned int bookElementsListSize =
+  size_t bookElementsListSize =
     fBookElementsList.size ();
 
   os << left <<
@@ -610,7 +610,7 @@ void msrBook::print (ostream& os) const
   os << endl;
 
   // print the credits if any
-  unsigned int creditsListSize = fCreditsList.size ();
+  size_t creditsListSize = fCreditsList.size ();
 
   os <<
     setw (fieldWidth) <<
@@ -641,7 +641,7 @@ void msrBook::print (ostream& os) const
   os << endl;
 
   // print all the voices if any
-  unsigned int scoreAllVoicesListSize = fBookAllVoicesList.size ();
+  size_t scoreAllVoicesListSize = fBookAllVoicesList.size ();
 
   os <<
     setw (fieldWidth) <<
@@ -704,7 +704,7 @@ void msrBook::printShort (ostream& os) const
 
   const int fieldWidth = 38;
 
-  unsigned int bookElementsListSize =
+  size_t bookElementsListSize =
     fBookElementsList.size ();
 
   os << left <<
@@ -806,7 +806,7 @@ void msrBook::printShort (ostream& os) const
 
 /*
   // print the credits if any
-  unsigned int creditsListSize = fCreditsList.size ();
+  size_t creditsListSize = fCreditsList.size ();
 
   os <<
     setw (fieldWidth) <<
@@ -837,7 +837,7 @@ void msrBook::printShort (ostream& os) const
   os << endl;
 
   // print all the voices if any
-  unsigned int scoreAllVoicesListSize = fBookAllVoicesList.size ();
+  size_t scoreAllVoicesListSize = fBookAllVoicesList.size ();
 
   os <<
     setw (fieldWidth) <<
@@ -901,7 +901,7 @@ void msrBook::printSummary (ostream& os) const
 
   const int fieldWidth = 38;
 
-  unsigned int bookElementsListSize =
+  size_t bookElementsListSize =
     fBookElementsList.size ();
 
   // print global information

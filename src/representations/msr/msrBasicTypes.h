@@ -696,8 +696,8 @@ EXP msrClefKind clefKindFromString (
   int           inputLineNumber,
   const string& clefString);
 
-string existingClefKinds (unsigned int namesListMaxLength);
-string existingClefKindsNames (unsigned int namesListMaxLength);
+string existingClefKinds (size_t namesListMaxLength);
+string existingClefKindsNames (size_t namesListMaxLength);
 
 extern map<string, msrClefKind>
   gGlobalClefKindsMap;
@@ -867,8 +867,8 @@ string msrHarmonyKindShortName (
 EXP msrHarmonyKind msrHarmonyKindFromString (
   const string& theString);
 
-string existingHarmonyKinds (unsigned int namesListMaxLength);
-string existingHarmonyKindsNames (unsigned int namesListMaxLength);
+string existingHarmonyKinds (size_t namesListMaxLength);
+string existingHarmonyKindsNames (size_t namesListMaxLength);
 
 // constant
 EXP extern const int K_HARMONY_NO_INVERSION;
@@ -986,7 +986,7 @@ ostream& operator<< (ostream& os, msrOctaveEntryKind& elt);
 extern map<string, msrOctaveEntryKind>
   gGlobalMsrOctaveEntryKindsMap;
 
-string existingMsrOctaveEntryKinds (unsigned int namesListMaxLength);
+string existingMsrOctaveEntryKinds (size_t namesListMaxLength);
 
 void initializeMsrOctaveEntryKindsMap ();
 
@@ -1281,7 +1281,7 @@ string msrLengthUnitKindAsString (
 
 ostream& operator<< (ostream& os, msrLengthUnitKind& elt);
 
-string existingMsrLengthUnitKinds (unsigned int namesListMaxLength);
+string existingMsrLengthUnitKinds (size_t namesListMaxLength);
 
 extern map<string, msrLengthUnitKind>
   gGlobalMsrLengthUnitKindsMap;
@@ -1385,7 +1385,7 @@ string msrMarginTypeKindAsString (
 
 ostream& operator<< (ostream& os, msrMarginTypeKind& elt);
 
-string existingMsrMarginTypeKinds (unsigned int namesListMaxLength);
+string existingMsrMarginTypeKinds (size_t namesListMaxLength);
 
 extern map<string, msrMarginTypeKind>
   gGlobalMsrMarginTypeKindsMap;

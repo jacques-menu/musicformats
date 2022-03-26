@@ -13,6 +13,7 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h> // system()
 
 #include "mfIndentedTextOutput.h"
 #include "mfSystemInterface.h"
@@ -52,20 +53,67 @@ EXP int mfExecuteCommand (
 
 #else
 
-  FILE*
-    commandOutputStream =
-      popen (commandAsCString, mode);
+  system (commandAsCString); // JMI
 
-  if (! commandOutputStream) {
-    gLogStream <<
-      "#### mfExecuteCommand" <<
-      ", failed to execute command [" <<
-      command <<
-      ", quitting." <<
-      endl;
+//   FILE*
+//     commandOutputStream =
+//       popen (commandAsCString, mode);
+//
+//   if (! commandOutputStream) {
+//     gLogStream <<
+//       "#### mfExecuteCommand" <<
+//       ", failed to execute command [" <<
+//       command <<
+//       ", quitting." <<
+//       endl;
+//
+//     result = pclose (commandOutputStream);
+//   }
 
-    result = pclose (commandOutputStream);
-  }
+
+// 	pid_t		processID;
+//
+// 	switch (processID = fork ())
+// 		{
+// 		case -1:
+// 			Erreur ("'fork ()' a echoue");
+// 			break;
+//
+// 		case 0:
+// 			{
+// 			// ENFANT
+// 			// ------
+//
+// 			printf (
+// 				"--> Ici l'ENFANT %d, de parent %d\n\n", getpid (), getppid () );
+//
+// 			varGlobale += 30000;
+// 			varLocaleAMain += 60000;
+//
+// 			sleep (30);
+// 			}
+// 			break;
+//
+// 		default:
+// 			{
+// 			// PARENT
+// 			// ------
+//
+// 			printf (
+// 				"<-- Ici le PARENT %d, pid de l'enfant = %d\n\n",
+// 				monIdProcess, processID );
+//
+// 			# define DELAI_D_ATTENTE	30
+// 			sleep (DELAI_D_ATTENTE);
+// 			}
+// 			break;
+// 		} // switch
+//
+//
+// 	// PARENT ET ENFANT
+// 	// ----------------
+//
+//
 
 #endif
 

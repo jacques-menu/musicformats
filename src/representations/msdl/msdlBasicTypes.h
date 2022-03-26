@@ -47,7 +47,7 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (
 extern map<string, msdlUserLanguageKind>
   gGlobalMsdlUserLanguageKindsMap;
 
-string existingMsdlUserLanguageKinds (unsigned int namesListMaxLength);
+string existingMsdlUserLanguageKinds (size_t namesListMaxLength);
 
 void initializeMsdlUserLanguageKindsMap ();
 
@@ -71,7 +71,7 @@ extern map<string, msdlCommentsTypeKind>
 
 void initializeMsdlCommentsTypeKinds ();
 
-string existingMsdlCommentsTypeKinds (unsigned int namesListMaxLength);
+string existingMsdlCommentsTypeKinds (size_t namesListMaxLength);
 
 void initializeMsdlCommentsTypeKindsMap ();
 

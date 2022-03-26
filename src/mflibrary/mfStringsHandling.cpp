@@ -9,13 +9,16 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <string.h>     // strncat
+
 #include <sstream>
 #include <iomanip>      // setw, setprecision, ...
 
-#include <cassert>
+// #include <cassert>
 
 #include <map>
 
+#include "mfAssert.h"
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 
@@ -118,6 +121,33 @@ void mfDisplayStringsVector (
   else {
     os << endl;
   }
+}
+
+//______________________________________________________________________________
+char* mfCharStarCat (
+  char*        dest,
+  const char*  source,
+  const size_t destSize)
+{
+//   gLogStream << // JMI
+//     "--------------------------> dest: " << dest <<
+//     endl <<
+//     "source: " << source <<
+//     endl <<
+//     "destSize: " << destSize <<
+//     endl;
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    strlen (source) + strlen (dest) + 1 < destSize,
+    "mfCharStarCat(): attempt at dest overflow");
+
+  return
+    strncat (
+      dest,
+      source,
+      destSize - strlen (dest) - 1);
 }
 
 //______________________________________________________________________________
@@ -305,7 +335,7 @@ string mfStringNumbersToEnglishWords (string str)
 
   string result = "";
 
-  for (unsigned int i = 0; i < chunks.size (); ++i) {
+  for (size_t i = 0; i < chunks.size (); ++i) {
     if (states[i] == kWorkingOnDigits) {
       int integerValue;
 
@@ -1109,15 +1139,15 @@ void mfSplitStringIntoChunks (
     endl << endl;
 #endif
 
-  unsigned int theStringSize = theString.size ();
+  size_t theStringSize = theString.size ();
 
-  unsigned int currentPosition = 0;
+  size_t currentPosition = 0;
 
 #ifdef DEBUG_SPLITTING
   string remainder = theString;
 #endif
 
-  unsigned int theSeparatorSize = theSeparator.size ();
+  size_t theSeparatorSize = theSeparator.size ();
 
   map<string, string>::const_iterator i;
 
@@ -1220,16 +1250,16 @@ void mfSplitRegularStringAtEndOfLines (
     chunksList);
 
     /* JMI
-  unsigned int theStringSize = theString.size ();
+  size_t theStringSize = theString.size ();
 
-  unsigned int currentPosition = 0;
+  size_t currentPosition = 0;
 
 #ifdef DEBUG_SPLITTING
   string remainder = theString;
 #endif
 
   string lookedFor     = "\n";
-  unsigned int    lookedForSize = lookedFor.size ();
+  size_t    lookedForSize = lookedFor.size ();
 
   map<string, string>::const_iterator i;
 
@@ -1327,7 +1357,7 @@ void mfSplitHTMLStringContainingEndOfLines (
     endl << endl;
 #endif
 
-  unsigned int theStringSize = theString.size ();
+  size_t theStringSize = theString.size ();
 
   map<string, string> conversionMap; // JMI
 
@@ -1345,7 +1375,7 @@ void mfSplitHTMLStringContainingEndOfLines (
 
 // JMI  string lookedFor     = "&#xd;";
   string       lookedFor     = "\n";
-  unsigned int lookedForSize = lookedFor.size ();
+  size_t lookedForSize = lookedFor.size ();
 
   map<string, string>::const_iterator i;
 
@@ -1498,13 +1528,13 @@ string mfMakeSingleWordFromString (const string& theString)
 
 //______________________________________________________________________________
 Bool mfStringIsInStringSet (
-  const string&     theString,
-  const set<string> stringSet)
+  const string&      theString,
+  const set<string>& stringSet)
 {
   Bool result (false);
 
   if (stringSet.size ()) {
-    set<string>::iterator
+    set<string>::const_iterator
       it =
         stringSet.find (
           theString);
@@ -1518,14 +1548,14 @@ Bool mfStringIsInStringSet (
 }
 
 string mfStringSetAsString (
-  const set<string> stringSet)
+  const set<string>& stringSet)
 {
   stringstream s;
 
   s << "[";
 
   // append the set elements if any
-  unsigned int stringSetSize =
+  size_t stringSetSize =
     stringSet.size ();
 
   if (stringSetSize) {
@@ -1534,10 +1564,10 @@ string mfStringSetAsString (
       iEnd   = stringSet.end (),
       i      = iBegin;
 
-    unsigned int nextToLast =
+    size_t nextToLast =
       stringSetSize - 1;
 
-    unsigned int count = 0;
+    size_t count = 0;
 
     for ( ; ; ) {
       ++count;
@@ -1560,9 +1590,9 @@ string mfStringSetAsString (
 }
 
 void mfDisplayStringSet (
-  const string&     title,
-  const set<string> stringSet,
-  ostream&          os)
+  const string&      title,
+  const set<string>& stringSet,
+  ostream&           os)
 {
   // print the title
   os << title << endl;
@@ -1570,7 +1600,7 @@ void mfDisplayStringSet (
   // print the set elements if any
   os << title << ":";
 
-  unsigned int stringSetSize =
+  size_t stringSetSize =
     stringSet.size ();
 
   if (stringSetSize) {
@@ -1583,10 +1613,10 @@ void mfDisplayStringSet (
       iEnd   = stringSet.end (),
       i      = iBegin;
 
-    unsigned int nextToLast =
+    size_t nextToLast =
       stringSetSize - 1;
 
-    unsigned int count = 0;
+    size_t count = 0;
 
     for ( ; ; ) {
       ++count;
@@ -1598,6 +1628,133 @@ void mfDisplayStringSet (
         os << " and ";
       }
       else if (count != stringSetSize) {
+        os << ", ";
+      }
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << " empty";
+  }
+
+  os << endl;
+}
+
+//______________________________________________________________________________
+Bool mfStringIsInStringToStringMap (
+  const string&              theKey,
+  const map<string, string>& stringToStringMap,
+  string&                    theValue)
+{
+  Bool result (false);
+
+  if (stringToStringMap.size ()) {
+    map<string, string>::const_iterator
+      it =
+        stringToStringMap.find (
+          theKey);
+
+    if (it != stringToStringMap.end ()) {
+      theValue = (*it).second;
+      result = true;
+    }
+  }
+
+  return result;
+}
+
+string mfStringToStringMapAsString (
+  const map<string, string>& stringToStringMap)
+{
+  stringstream s;
+
+  s << "[";
+
+  // append the set elements if any
+  size_t stringToStringMapSize =
+    stringToStringMap.size ();
+
+  if (stringToStringMapSize) {
+    map<string, string>::const_iterator
+      iBegin = stringToStringMap.begin (),
+      iEnd   = stringToStringMap.end (),
+      i      = iBegin;
+
+    size_t nextToLast =
+      stringToStringMapSize - 1;
+
+    size_t count = 0;
+
+    for ( ; ; ) {
+      string
+        key   = (*i).first,
+        value = (*i).second;
+
+      ++count;
+
+      s << "\"" << key << "\": \"" << value << "\"";
+
+      if (++i == iEnd) break;
+
+      if (count == nextToLast) {
+        s << " and ";
+      }
+      else if (count != stringToStringMapSize) {
+        s << ", ";
+      }
+    } // for
+  }
+
+  s << "]";
+
+  return s.str ();
+}
+
+void mfDisplayStringToStringMap (
+  const string&              title,
+  const map<string, string>& stringToStringMap,
+  ostream&                   os)
+{
+  // print the title
+  os << title << endl;
+
+  // print the set elements if any
+  os << title << ":";
+
+  size_t stringToStringMapSize =
+    stringToStringMap.size ();
+
+  if (stringToStringMapSize) {
+    os << endl;
+
+    ++gIndenter;
+
+    map<string, string>::const_iterator
+      iBegin = stringToStringMap.begin (),
+      iEnd   = stringToStringMap.end (),
+      i      = iBegin;
+
+    size_t nextToLast =
+      stringToStringMapSize - 1;
+
+    size_t count = 0;
+
+    for ( ; ; ) {
+      string
+        key   = (*i).first,
+        value = (*i).second;
+
+      ++count;
+
+      os << "\"" << key << "\": \"" << value << "\"";
+
+      if (++i == iEnd) break;
+
+      if (count == nextToLast) {
+        os << " and ";
+      }
+      else if (count != stringToStringMapSize) {
         os << ", ";
       }
     } // for

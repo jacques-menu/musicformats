@@ -92,7 +92,7 @@ Bool msrTimeSignatureItem::isEqualTo (S_msrTimeSignatureItem otherTimeSignatureI
     return false;
   }
 
-  for (unsigned int i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
+  for (size_t i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
     if (
       ! (
         fTimeSignatureBeatsNumbersVector [i]
@@ -147,7 +147,7 @@ int msrTimeSignatureItem::getTimeSignatureBeatsNumber () const
 {
   int result = 0;
 
-  for (unsigned int i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
+  for (size_t i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
     result +=
       fTimeSignatureBeatsNumbersVector [i];
     } // for
@@ -209,7 +209,7 @@ string msrTimeSignatureItem::asString () const
   s <<
     "TimeSignatureItem ";
 
-  unsigned int vectorSize =
+  size_t vectorSize =
     fTimeSignatureBeatsNumbersVector.size ();
 
   switch (vectorSize) {
@@ -234,7 +234,7 @@ string msrTimeSignatureItem::asString () const
       s <<
         "beats numbers: ";
 
-      for (unsigned int i = 0; i < vectorSize; ++i) {
+      for (size_t i = 0; i < vectorSize; ++i) {
         s <<
           fTimeSignatureBeatsNumbersVector [i];
 
@@ -261,7 +261,7 @@ string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
 //   s <<
 //     "TimeSignatureItem ";
 
-  unsigned int vectorSize =
+  size_t vectorSize =
     fTimeSignatureBeatsNumbersVector.size ();
 
   switch (vectorSize) {
@@ -286,7 +286,7 @@ string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
       s <<
         "beats numbers: ";
 
-      for (unsigned int i = 0; i < vectorSize; ++i) {
+      for (size_t i = 0; i < vectorSize; ++i) {
         s <<
           fTimeSignatureBeatsNumbersVector [i];
 
@@ -359,7 +359,7 @@ Bool msrTimeSignature::isEqualTo (S_msrTimeSignature otherTimeSignature) const
     return false;
   }
 
-  for (unsigned int i = 0; i < fTimeSignatureItemsVector.size (); ++i) {
+  for (size_t i = 0; i < fTimeSignatureItemsVector.size (); ++i) {
     if (
       ! (
         fTimeSignatureItemsVector [i]->isEqualTo (
@@ -708,7 +708,7 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
   regex_match (timeString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -857,7 +857,7 @@ rational msrTimeSignature::wholeNotesPerMeasure () const
 {
   rational result (0, 1); // addition neutral element
 
-  unsigned int vectorSize = fTimeSignatureItemsVector.size ();
+  size_t vectorSize = fTimeSignatureItemsVector.size ();
 
   if (vectorSize) {
     /* JMI
@@ -879,7 +879,7 @@ rational msrTimeSignature::wholeNotesPerMeasure () const
 */
 
     // iterate over the others
-    for (unsigned int i = 0; i < vectorSize; ++i) {
+    for (size_t i = 0; i < vectorSize; ++i) {
       result +=
         rational (
           fTimeSignatureItemsVector [i]->getTimeSignatureBeatsNumber (),

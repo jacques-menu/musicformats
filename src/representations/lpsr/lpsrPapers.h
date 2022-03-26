@@ -19,7 +19,7 @@
 
 #include "lpsrElements.h"
 
-
+#include "oahAtomsCollection.h"
 
 
 using namespace std;
@@ -114,16 +114,40 @@ class EXP lpsrPaper : public lpsrElement
     int                   getSystemCount () const
                               { return fSystemCount; }
 
-    // booleans
-    void                  setRaggeBottom (Bool value)
+    // ragged output
+    void                  setRaggedLast (oahOnOffKind value)
+                              { fRaggedLast = value; }
+
+    oahOnOffKind          getRaggedLast () const
+                              { return fRaggedLast; }
+    S_oahOnOffAtom        getRaggedLastAtom () const
+                              { return fRaggedLastAtom; }
+
+    void                  setRaggedBottom (oahOnOffKind value)
                               { fRaggedBottom = value; }
-    Bool                  getRaggeBottom () const
+
+    oahOnOffKind          getRaggedBottom () const
                               { return fRaggedBottom; }
 
-    void                  setRaggedLastBottom (Bool value)
+    S_oahOnOffAtom        getRaggedBottomAtom () const
+                              { return fRaggedBottomAtom; }
+
+    void                  setRaggedLastBottom (oahOnOffKind value)
                               { fRaggedLastBottom = value; }
-    Bool                  getRaggedLastBottom () const
+
+    oahOnOffKind          getRaggedLastBottom () const
                               { return fRaggedLastBottom; }
+    S_oahOnOffAtom        getRaggedLastBottomAtom () const
+                              { return fRaggedLastBottomAtom; }
+
+    void                  setRaggedRight (oahOnOffKind value)
+                              { fRaggedRight = value; }
+
+    oahOnOffKind          getRaggedRight () const
+                              { return fRaggedRight; }
+    S_oahOnOffAtom        getRaggedRightAtom () const
+                              { return fRaggedRightAtom; }
+
 
     // headers and footers
     void                  setOddHeaderMarkup (string value)
@@ -197,8 +221,17 @@ class EXP lpsrPaper : public lpsrElement
     int                   fSystemCount;
 
     // booleans
-    Bool                  fRaggedBottom;
-    Bool                  fRaggedLastBottom;
+    oahOnOffKind          fRaggedBottom;
+    S_oahOnOffAtom        fRaggedBottomAtom;
+
+    oahOnOffKind          fRaggedLast;
+    S_oahOnOffAtom        fRaggedLastAtom;
+
+    oahOnOffKind          fRaggedLastBottom;
+    S_oahOnOffAtom        fRaggedLastBottomAtom;
+
+    oahOnOffKind          fRaggedRight;
+    S_oahOnOffAtom        fRaggedRightAtom;
 
     // headers and footers
     string                fOddHeaderMarkup;

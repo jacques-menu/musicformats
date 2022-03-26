@@ -184,7 +184,7 @@ string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
 {
   string result;
 
-  unsigned int passesNumber = 0;
+  size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::k_NoGeneration:
@@ -876,7 +876,7 @@ S_LilyPondIssue34InsiderOahGroup LilyPondIssue34InsiderOahGroup::create ()
 LilyPondIssue34InsiderOahGroup::LilyPondIssue34InsiderOahGroup ()
   : oahGroup (
     "LilyPondIssue34",
-    "help-LilyPondIssue34", "hmkk",
+    "help-LilyPondIssue34", "hlpi34",
 R"(Options that are used by LilyPondIssue34 are grouped here.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {
