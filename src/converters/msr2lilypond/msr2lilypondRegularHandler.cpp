@@ -1390,7 +1390,7 @@ void msr2lilypondRegularHandler::createHeaderRegularGroup ()
   registerAtomInRegularSubgroup ("subtitle", subGroup);
   registerAtomInRegularSubgroup ("subsubtitle", subGroup);
 
-  registerAtomInRegularSubgroup ("instrument", subGroup);
+//   registerAtomInRegularSubgroup ("instrument", subGroup); // JMI
 
   registerAtomInRegularSubgroup ("meter", subGroup);
 
@@ -1439,8 +1439,8 @@ void msr2lilypondRegularHandler::createPaperRegularGroup ()
   registerAtomInRegularSubgroup ("top-margin", subGroup);
   registerAtomInRegularSubgroup ("bottom-margin", subGroup);
 
-  registerAtomInRegularSubgroup ("ragged-bottom", subGroup);
   registerAtomInRegularSubgroup ("ragged-last", subGroup);
+  registerAtomInRegularSubgroup ("ragged-bottom", subGroup);
   registerAtomInRegularSubgroup ("ragged-last-bottom", subGroup);
   registerAtomInRegularSubgroup ("ragged-right", subGroup);
 

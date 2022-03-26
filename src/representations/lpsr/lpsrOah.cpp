@@ -1097,51 +1097,79 @@ LilyPond's default value is 0.0 mm.)",
         "fMarkupSystemSpacingPadding",
         fMarkupSystemSpacingPadding));
 
-  // ragged bottom
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "ragged-bottom", "",
-R"(Set the LilyPond 'ragged-bottom' paper variable to '##f' in the LilyPond code.
-LilyPond's default value is '##t'.)",
-        "fRaggedBottom",
-        fRaggedBottom));
-
   // ragged last
 
+  fRaggedLast = oahOnOffKind::kOahOnOffUnknown; // default value
+
+  fRaggedLastAtom =
+    oahOnOffAtom::create (
+      "ragged-last", "",
+R"(Set the LilyPond \"ragged-last\" paper variable to '##t' or '##f',
+if the value is on or off, respectively.
+LilyPond's default value is '##t'.)",
+      "on/off", // JMI ???
+      "fRaggedLast",
+      fRaggedLast);
+
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "ragged-last", "",
-R"(Set the LilyPond 'ragged-last' paper variable to '##f' in the LilyPond code.
+      fRaggedLastAtom);
+
+  // ragged bottom
+
+  fRaggedBottom = oahOnOffKind::kOahOnOffUnknown; // default value
+
+  fRaggedBottomAtom =
+    oahOnOffAtom::create (
+      "ragged-bottom", "",
+R"(Set the LilyPond \"ragged-bottom\" paper variable to '##t' or '##f',
+if the value is on or off, respectively.
 LilyPond's default value is '##t'.)",
-        "fRaggedLast",
-        fRaggedLast));
+      "on/off",
+      "fRaggedBottom",
+      fRaggedBottom);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fRaggedBottomAtom);
 
   // ragged last bottom
 
+  fRaggedLastBottom = oahOnOffKind::kOahOnOffUnknown; // default value
+
+  fRaggedLastBottomAtom =
+    oahOnOffAtom::create (
+      "ragged-last-bottom", "",
+R"(Set the LilyPond \"ragged-last-bottom\" paper variable to '##t' or '##f',
+if the value is on or off, respectively.
+LilyPond's default value is '##t'.)",
+      "on/off",
+      "fRaggedLastBottom",
+      fRaggedLastBottom);
+
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "ragged-last-bottom", "",
-R"(Set the LilyPond 'ragged-last-bottom' paper variable to '##f' in the LilyPond code.
-LilyPond's default value is '##t'.)",
-        "fRaggedLastBottom",
-        fRaggedLastBottom));
+      fRaggedLastBottomAtom);
 
   // ragged right
 
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "ragged-right", "",
-R"(Set the LilyPond 'ragged-right' paper variable to '##f' in the LilyPond code.
-LilyPond's default value is '##t'.)",
-        "fRaggedRight",
-        fRaggedRight));
+  fRaggedRight = oahOnOffKind::kOahOnOffUnknown; // default value
 
-/* LPSR or LilyPond option?"
+  fRaggedRightAtom =
+    oahOnOffAtom::create (
+      "ragged-right", "",
+R"(Set the LilyPond \"ragged-right\" paper variable to '##t' or '##f',
+if the value is on or off, respectively.
+LilyPond's default value is '##t'.)",
+      "on/off",
+      "fRaggedRight",
+      fRaggedRight);
+
+ subGroup->
+    appendAtomToSubGroup (
+      fRaggedRightAtom);
+
+/* LPSR or LilyPond option?" JMI
   // tagline
 
   subGroup->
@@ -1158,31 +1186,37 @@ LilyPond's default value is '##t'.)",
 
   fPageCount = 0;
 
-  subGroup->
-    appendAtomToSubGroup (
-      oahIntegerAtom::create (
-        "page-count", "",
+  fPageCountAtom =
+    oahIntegerAtom::create (
+      "page-count", "",
 R"(Set the LilyPond 'page-count' paper variable to PAGE_COUNT in the LilyPond code.
 PAGE_COUNT should be a positive integer.
 By default, this is left to LilyPond'.)",
-        "PAGE_COUNT",
-        "fPageCount",
-        fPageCount));
+      "PAGE_COUNT",
+      "fPageCount",
+      fPageCount);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fPageCountAtom);
 
   // system count
 
   fSystemCount = 0;
 
-  subGroup->
-    appendAtomToSubGroup (
-      oahIntegerAtom::create (
-        "system-count", "",
+  fSystemCountAtom =
+    oahIntegerAtom::create (
+      "system-count", "",
 R"(Set the LilyPond 'system-count' paper variable to SYSTEM_COUNT in the LilyPond code.
 SYSTEM_COUNT should be a positive integer.
 By default, this is left to LilyPond'.)",
-        "SYSTEM_COUNT",
-        "fSystemCount",
-        fSystemCount));
+      "SYSTEM_COUNT",
+      "fSystemCount",
+      fSystemCount);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fSystemCountAtom);
 }
 
 void lpsrOahGroup::initializeLpsrVoicesOptions ()
@@ -1241,7 +1275,7 @@ where MEASURE_NUMBER is a string, and REPLICATES is the number
 of empty measures to add after measure MEASURE_NUMBER.
 MEASURE_NUMBER should be the number of an existing, empty measure,
 and REPLICATES should be at least 1, , such as '17:3'.
-There can be spaces around the ':'.
+There can be spaces around the ':', in which case quoting is needed.
 This comes in handly when MusicXML data obtained by scanning contains
 a single empty measure when there were several in the original score.
 This option can be used any number of times.)###",
@@ -1660,11 +1694,11 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
     setw (fieldWidth) << "fRaggedBottom" << " : " <<
     fRaggedBottom <<
     endl <<
-    setw (fieldWidth) << "fRaggedLastBottom" << " : " <<
-    fRaggedLastBottom <<
-    endl <<
     setw (fieldWidth) << "fRaggedLast" << " : " <<
     fRaggedLast <<
+    endl <<
+    setw (fieldWidth) << "fRaggedLastBottom" << " : " <<
+    fRaggedLastBottom <<
     endl <<
     setw (fieldWidth) << "fRaggedRight" << " : " <<
     fRaggedRight <<
@@ -1694,7 +1728,9 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "resetMeasureElementMeasureNumberMap" << " : ";
+    setw (fieldWidth) <<
+    fetchNamesBetweenQuotes () <<
+    " :";
   if (! fAddEmptyMeasuresStringToIntMap.size ()) {
     gLogStream << "empty";
   }

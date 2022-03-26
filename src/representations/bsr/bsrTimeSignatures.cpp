@@ -89,7 +89,7 @@ Bool bsrTimeSignatureItem::isEqualTo (S_bsrTimeSignatureItem otherTimeSignatureI
     return false;
   }
 
-  for (unsigned int i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
+  for (size_t i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
     if (
       ! (
         fTimeSignatureBeatsNumbersVector [i]
@@ -144,7 +144,7 @@ int bsrTimeSignatureItem::getTimeSignatureBeatsNumber () const
 {
   int result = 0;
 
-  for (unsigned int i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
+  for (size_t i = 0; i < fTimeSignatureBeatsNumbersVector.size (); ++i) {
     result +=
       fTimeSignatureBeatsNumbersVector [i];
   } // for
@@ -211,7 +211,7 @@ string bsrTimeSignatureItem::asString () const
 {
   stringstream s;
 
-  unsigned int timeSignatureBeatsNumbersVectorSize =
+  size_t timeSignatureBeatsNumbersVectorSize =
     fTimeSignatureBeatsNumbersVector.size ();
 
   s <<
@@ -241,7 +241,7 @@ string bsrTimeSignatureItem::asString () const
       s <<
         ", beats numbers: ";
 
-      for (unsigned int i = 0; i < timeSignatureBeatsNumbersVectorSize; ++i) {
+      for (size_t i = 0; i < timeSignatureBeatsNumbersVectorSize; ++i) {
         s <<
           fTimeSignatureBeatsNumbersVector [i];
 
@@ -366,7 +366,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
           int theBsrTimeSignatureBeatValue =
               theBsrTimeSignatureItem->getTimeSignatureBeatValue ();
 
-          unsigned int vectorSize =
+          size_t vectorSize =
             timeSignatureBeatsNumbersVector.size ();
 
           switch (vectorSize) {
@@ -558,7 +558,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
           int theBsrTimeSignatureBeatValue =
             theBsrTimeSignatureItem->getTimeSignatureBeatValue ();
 
-          unsigned int vectorSize =
+          size_t vectorSize =
             timeSignatureBeatsNumbersVector.size ();
 
           switch (vectorSize) {
@@ -827,7 +827,7 @@ string bsrTimeSignature::asDebugString () const
 
 void bsrTimeSignature::print (ostream& os) const
 {
-  unsigned int timeSignatureItemsVectorSize = fTimeSignatureItemsVector.size ();
+  size_t timeSignatureItemsVectorSize = fTimeSignatureItemsVector.size ();
 
   os <<
     "Time" <<

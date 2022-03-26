@@ -2617,7 +2617,7 @@ void msrStaff::collectStaffMeasuresSlices (
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresSlices ()) {
-    unsigned int
+    size_t
       staffVoiceNumbersToAllVoicesMapSize =
         fStaffVoiceNumbersToAllVoicesMap.size ();
 
@@ -2823,8 +2823,10 @@ void msrStaff::browseData (basevisitor* v)
           gGlobalMsr2msrOahGroup->
             getIgnoreMsrVoicesSetAtom ();;
 
-      Bool ignoreMsrVoicesSetIsSetByUser =
-        ignoreMsrVoicesSetAtom->getSetByUser ();;
+      Bool
+        ignoreMsrVoicesSetIsSetByUser =
+          ignoreMsrVoicesSetAtom->
+            getSetByUser ();;
 
       // get the  set of voices to keep
       S_oahStringSetElementAtom
@@ -2832,8 +2834,10 @@ void msrStaff::browseData (basevisitor* v)
           gGlobalMsr2msrOahGroup->
             getKeepMsrVoicesSetAtom ();;
 
-      Bool keepMsrVoicesSetIsSetByUser =
-        keepMsrVoicesSetAtom->getSetByUser ();;
+      Bool
+        keepMsrVoicesSetIsSetByUser =
+          keepMsrVoicesSetAtom->
+            getSetByUser ();;
 
       // JMI this should be done in mxsr2msrOahGroup::checkGroupOptionsConsistency () v0.9.62
       if (ignoreMsrVoicesSetIsSetByUser && keepMsrVoicesSetIsSetByUser) {
@@ -2882,26 +2886,36 @@ void msrStaff::browseData (basevisitor* v)
       }
 #endif
 
-      // is this voice name in the ignore voices set?
+      // a voice is to be browsed by default
       Bool voiceIsToBeBrowsed (true);
 
-      string voiceName =
-        voice->
-          getVoiceName ();
+      string
+        voiceName =
+          voice->
+            getVoiceName ();
 
+      // is voiceName in the ignore voices set?
       if (ignoreMsrVoicesSetIsSetByUser) {
         // a voice is to be browsed by default
-        voiceIsToBeBrowsed =
-          ! mfStringIsInStringSet (
-            voiceName,
-            ignoreMsrVoicesSet);
-      }
-      else { // keepMsrVoicesSetIsSetByUser
-        // a voice is NOT to be browsed by default
-        voiceIsToBeBrowsed =
+        if (
           mfStringIsInStringSet (
             voiceName,
-            keepMsrVoicesSet);
+            ignoreMsrVoicesSet)
+        ) {
+          voiceIsToBeBrowsed = false;
+        }
+      }
+
+      if (keepMsrVoicesSetIsSetByUser) {
+        // a voice is NOT to be browsed by default
+        if (
+          !
+            mfStringIsInStringSet (
+              voiceName,
+              keepMsrVoicesSet)
+        ) {
+          voiceIsToBeBrowsed = false;
+        }
       }
 
       // now take that into account
@@ -3223,7 +3237,7 @@ void msrStaff::print (ostream& os) const
   os << endl;
 
   // print the staff measures flat list vector
-  unsigned int staffMeasuresFlatListsVectorSize =
+  size_t staffMeasuresFlatListsVectorSize =
     fStaffMeasuresFlatListsVector.size ();
 
   os <<

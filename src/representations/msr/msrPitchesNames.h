@@ -70,7 +70,7 @@ string msrQuarterTonesPitchKindAsFlatsAndSharps (
 */
 
 string existingMsrQuarterTonesPitchesLanguageKinds (
-  unsigned int namesListMaxLength);
+  size_t namesListMaxLength);
 
 extern map<string, msrQuarterTonesPitchesLanguageKind>&
   getQuarterTonesPitchesLanguageKindsMap ();
@@ -78,7 +78,7 @@ extern map<string, msrQuarterTonesPitchesLanguageKind>&
 void initializeQuarterTonesPitchesLanguageKinds ();
 
 string existingQuarterTonesPitchesLanguageKinds (
-  unsigned int namesListMaxLength);
+  size_t namesListMaxLength);
 
 //______________________________________________________________________________
 extern map<msrQuarterTonesPitchKind, string>& getNederlandsPitchesNamesMap ();

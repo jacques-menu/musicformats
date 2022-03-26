@@ -182,13 +182,13 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     const set<string>&    getPartsIgnoreIDSet () const
                               { return fPartsIgnoreIDSet; }
-    const set<string>&    getPartsKeepIDSet () const
-                              { return fPartsKeepIDSet; }
+    const set<string>&    getMusicXMLPartsKeepIDSet () const
+                              { return fMusicXMLPartsKeepIDSet; }
 
-    const set<string>&    getPartsIgnoreNameSet () const
-                              { return fPartsIgnoreNameSet; }
-    const set<string>&    getPartsKeepNameSet () const
-                              { return fPartsKeepNameSet; }
+    const set<string>&    getMusicXMLMusicXMLPartsIgnoreNameSet () const
+                              { return fMusicXMLMusicXMLPartsIgnoreNameSet; }
+    const set<string>&    getMusicXMLPartsKeepNameSet () const
+                              { return fMusicXMLPartsKeepNameSet; }
 
     // for checkOptionsConsistency()
     S_oahStringSetElementAtom
@@ -540,10 +540,10 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // --------------------------------------
 
     set<string>           fPartsIgnoreIDSet;
-    set<string>           fPartsKeepIDSet;
+    set<string>           fMusicXMLPartsKeepIDSet;
 
-    set<string>           fPartsIgnoreNameSet;
-    set<string>           fPartsKeepNameSet;
+    set<string>           fMusicXMLMusicXMLPartsIgnoreNameSet;
+    set<string>           fMusicXMLPartsKeepNameSet;
 
     // for checkOptionsConsistency()
     S_oahStringSetElementAtom

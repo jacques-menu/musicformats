@@ -319,6 +319,16 @@ S_mfcLibraryComponent createLibraryComponent ()
             "Complements to the user guide"
           }
       ));
+
+    pLibraryComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.62"),
+          "March 1238, 2022",
+          list<string> {
+            "Finalized ragged output handling"
+          }
+      ));
  }
 
   return pLibraryComponent;

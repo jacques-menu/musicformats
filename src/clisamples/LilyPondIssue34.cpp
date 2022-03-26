@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <cstring>
+#include <cstring>      // memset
 #include <signal.h>
 
 #include <fstream>

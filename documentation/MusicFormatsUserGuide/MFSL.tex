@@ -4,7 +4,7 @@
 \chapter{MFSL (MusicFormats Scripting Language}
 % -------------------------------------------------------------------------
 
-\mfslLang\ is meant for launching \mf\ tools easily, with options and control structures. Its syntax and semantics are very simple, for use by musicians. 
+\mfslLang\ is meant for launching \mf\ tools easily, with options and control structures. Its syntax and semantics are very simple, for use by musicians.
 
 The main features of \mfslLang\ are:
 \begin{itemize}
@@ -17,8 +17,8 @@ The main features of \mfslLang\ are:
 
 An \MainIt{interpreter} is provided by \mf\, that can run \mfslLang\ \script s as in done by the usual shells:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > mfslInterpreter -about
-What mfslInterpreter does:
+jacquesmenu@macmini > mfsl -about
+What mfsl does:
 
     This interpreter basically reads a text file containing
     a tool name, an input file name, keywords and options,
@@ -30,49 +30,59 @@ What mfslInterpreter does:
 
 
 % -------------------------------------------------------------------------
-\section{A script example}
+\section{A first, minimal script example}
 % -------------------------------------------------------------------------
+
+The \optionNameBoth{no-launch}{nl} option to \mfslI\ has an option to display the essential information found in the script and quit without acutally running the tool:
+\begin{lstlisting}[language=Terminal]
+
+\end{lstlisting}
 
 This \script\ illustrates the basic features of \mfslLang:
 \begin{lstlisting}[language=MFSL]
-#!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfslInterpreter
-
-# the MusicFormats tool to be used
-tool : xml2ly
-
-# the input file
-input :test.mfsl
-
-# parts
-  -keep-musicxml-part-id P1
-
-# the voices choice
-choice VOICES_CHOICE : voice1Only | voice2Only ;
-  # could be : choice VOICES_CHOICE : ... ... ... ;
-
-set VOICES_CHOICE = voice1Only ;
-  # change this to voice2Only to switch to another subset of options
-  # could even be parameter to the script such a $1
-
-# choose which options to use according to VOICES_CHOICE
-case VOICES_CHOICE :
-	voice1Only:
-    -title "Joli morceau - voix 1"
-    -ignore-msr-voice Part_POne_Staff_One_Voice_Two
-  ;
-
-	voice2Only:
-    -title "Joli morceau - voix 2"
-    --ignore-msr-voice Part_POne_Staff_One_Voice_One
-
-    -display-options-values
-
-    -global-staff-size 25.5
-  ;
-;
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.mfsl -no-launch
+====> The known tools names are: ["msdlconverter", "xml2brl", "xml2gmn", "xml2ly" and "xml2xml"]"
+====> tool xml2ly
+====> input: Hymn121.xml
+====> Launching  tool xml2ly
+====> The command to be executed is:
+  xml2ly Hymn121.xml
+====> The command above is *not* executed
 \end{lstlisting}
 
 This first line of an \mfslLang\ \script is \MainIt{shebang} containing the \filePath\ to the interpreter, allow for running such \script s by their name provided they are made executable.
+
+
+% -------------------------------------------------------------------------
+\section{Scripts structure}
+% -------------------------------------------------------------------------
+
+An MFSL script basically contains:
+\begin{itemize}
+\item a tool specification, telling which MusicFormats tool
+    to use, here xml2ly;
+
+\item  an input specification, the input source to apply
+    the latter to, here file name "Hymn121.xml".
+\end{itemize}
+
+Such a script is meant to collect options to launch the tool
+with the input specification as input.
+
+There an thus be:
+\begin{itemize}
+\item  any number of MusicFormats options;
+
+\item  choices specifications, to provide options selection criteria.
+
+%\item a 'set' specification to choose one such SCORE among the possible ones;
+
+\item 'case' specifications stating the options to be used depending on
+  the choices values;
+
+\item optionnaly, an 'only' or 'all' specification.
+
+\end{itemize}
 
 
 % -------------------------------------------------------------------------
@@ -81,9 +91,9 @@ This first line of an \mfslLang\ \script is \MainIt{shebang} containing the \fil
 
 These specific options are:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > mfslInterpreter  -insider -help-mfsl-interpreter-group
---- Help for group "mfslInterpreter" ---
-  mfslInterpreter (-help-mfsl-interpreter-group, -hmi-group):
+jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > mfsl  -insider -help-mfsl-interpreter-group
+--- Help for group "mfsl" ---
+  mfsl (-help-mfsl-interpreter-group, -hmi-group):
     These options control the way MFSL interpreter works.
   --------------------------
     MFSL    (-help-mfsl, -hmfsl):
@@ -107,19 +117,19 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > mfslInterpre
 Let's show show the \mfslLangInterp\ uses the options above:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl -display-tokens -display-non-terminals -display-options-values
-  The options values for //Users/jacquesmenu/musicformats-git-dev/build/bin/mfslInterpreter are:
+  The options values for //Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl are:
     MFSL group (-help-mfsl-group, -hmfsl-group), 2 atoms chosen:
     --------------------------
       MFSL (-help-mfsl, -hmfsl), 2 atoms chosen:
-        fDisplayTokens                     : true, set by user
+        fTraceTokens                     : true, set by user
         fDisplayNonTerminals               : true, set by user
-    
+
     Options and help group (-help-oah-group, -hoah-group), 1 atom chosen:
     --------------------------
       Options and help (-help-oah, -hoah), 1 atom chosen:
         fDisplayOptionsValues              : true, set by user
-    
-  
+
+
 --> ./test.mfsl:2.1-39: tool
 --> ./test.mfsl:2.41: :
 --> ./test.mfsl:2.43-48: name [xml2ly]
@@ -192,6 +202,6 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl 
 --> parseResult: 0
 ==> inputFileName: test.mfsl
 ==> toolName:      xml2ly
-jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > 
+jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl >
 \end{lstlisting}
 

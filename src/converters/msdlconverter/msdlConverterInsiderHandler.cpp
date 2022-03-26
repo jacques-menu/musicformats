@@ -207,7 +207,7 @@ string msdlConverterInsiderHandler::msdlConverterAboutInformation (
 {
   string result;
 
-  unsigned int passesNumber = 0;
+  size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
     case mfMultiGenerationOutputKind::k_NoGeneration:
@@ -1003,8 +1003,8 @@ S_msdlConverterInsiderOahGroup msdlConverterInsiderOahGroup::create ()
 
 msdlConverterInsiderOahGroup::msdlConverterInsiderOahGroup ()
   : oahGroup (
-    "msdlConverter",
-    "help-msdlConverter", "hmkk",
+    "msdl-converter",
+    "help-msdl-converter", "hmc",
 R"(Options that are used by msdlConverter are grouped here.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {

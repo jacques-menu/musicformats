@@ -185,30 +185,32 @@ class EXP msrScore : public msrBookElement
                               { return fStaffContainsFullMeasureRests; }
 
     // part group names max length
-    void                  setScorePartGroupNamesMaxLength (int value)
+    void                  setScorePartGroupNamesMaxLength (size_t value)
                               { fScorePartGroupNamesMaxLength = value; }
 
-    int                   getScorePartGroupNamesMaxLength () const
+    size_t                getScorePartGroupNamesMaxLength () const
                               { return fScorePartGroupNamesMaxLength; }
 
     // part names max length
-    void                  setScorePartNamesMaxLength (int value)
+    void                  setScorePartNamesMaxLength (size_t value)
                               { fScorePartNamesMaxLength = value; }
 
-    int                   getScorePartNamesMaxLength () const
+    size_t               getScorePartNamesMaxLength () const
                               { return fScorePartNamesMaxLength; }
 
     // instrument names max lengthes
-    void                  setIdentificationScoreInstrumentNamesMaxLength (int value)
+    void                  setIdentificationScoreInstrumentNamesMaxLength (
+                            size_t value)
                               { fScoreInstrumentNamesMaxLength = value; }
 
-    int                   getScoreInstrumentNamesMaxLength () const
+    size_t               getScoreInstrumentNamesMaxLength () const
                               { return fScoreInstrumentNamesMaxLength; }
 
-    void                  setIdentificationScoreInstrumentAbbreviationsMaxLength (int value)
+    void                  setIdentificationScoreInstrumentAbbreviationsMaxLength (
+                            size_t value)
                               { fScoreInstrumentAbbreviationsMaxLength = value; }
 
-    int                   getScoreInstrumentAbbreviationsMaxLength () const
+    size_t               getScoreInstrumentAbbreviationsMaxLength () const
                               { return fScoreInstrumentAbbreviationsMaxLength; }
 
     // inhibiting browsing
@@ -387,16 +389,16 @@ class EXP msrScore : public msrBookElement
 
     // part group names max length
 
-    int                   fScorePartGroupNamesMaxLength;
+    size_t               fScorePartGroupNamesMaxLength;
 
     // part names max length
 
-    int                   fScorePartNamesMaxLength;
+    size_t               fScorePartNamesMaxLength;
 
     // instrument names max lengthes
 
-    int                   fScoreInstrumentNamesMaxLength;
-    int                   fScoreInstrumentAbbreviationsMaxLength;
+    size_t               fScoreInstrumentNamesMaxLength;
+    size_t               fScoreInstrumentAbbreviationsMaxLength;
 
     // inhibiting browsing
 

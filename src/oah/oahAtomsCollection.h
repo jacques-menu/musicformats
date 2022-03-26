@@ -818,6 +818,113 @@ typedef SMARTP<oahDisplaySingleCharacterOptions> S_oahDisplaySingleCharacterOpti
 EXP ostream& operator<< (ostream& os, const S_oahDisplaySingleCharacterOptions& elt);
 
 //______________________________________________________________________________
+enum class oahOnOffKind {
+  kOahOnOffUnknown,
+  kOahOnOffOn, kOahOnOffOff
+};
+
+Bool oahOnOffKindAsBool (
+  oahOnOffKind onOffKind);
+
+string oahOnOffKindAsString (
+  oahOnOffKind onOffKind);
+
+ostream& operator<< (ostream& os, const oahOnOffKind elt);
+
+//______________________________________________________________________________
+class EXP oahOnOffAtom : public oahAtomStoringAValue
+{
+/*
+  an atom controlling an on/off variableName,
+  but expecting no value to be supplied:
+  the variable is false initially,
+  and is set to true by the mere occurrence of the atom
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahOnOffAtom> create (
+                            const string& longName,
+                            const string& shortName,
+                            const string& description,
+                            const string& valueSpecification,
+                            const string& variableName,
+                            oahOnOffKind& onOffKindVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahOnOffAtom (
+                            const string& longName,
+                            const string& shortName,
+                            const string& description,
+                            const string& valueSpecification,
+                            const string& variableName,
+                            oahOnOffKind& onOffKindVariable);
+
+    virtual               ~oahOnOffAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    void                  setOnOffKindVariable (oahOnOffKind value);
+
+    oahOnOffKind          getOnOffKindVariable () const
+                              { return fOnOffKindVariable; }
+
+    Bool                  getSetByUser () const
+                              { return fSetByUser; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const string& theString,
+                            ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    void                  print (ostream& os) const override;
+
+    void                  printAtomWithVariableOptionsValues (
+                            ostream& os,
+                            int      valueFieldWidth) const override;
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    string                fVariableName;
+    oahOnOffKind&         fOnOffKindVariable;
+    Bool                  fSetByUser;
+};
+typedef SMARTP<oahOnOffAtom> S_oahOnOffAtom;
+EXP ostream& operator<< (ostream& os, const S_oahOnOffAtom& elt);
+
+//______________________________________________________________________________
 class EXP oahBooleanAtom : public oahAtom
 {
 /*

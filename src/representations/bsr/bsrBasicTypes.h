@@ -227,7 +227,7 @@ ostream& operator<< (ostream& os, bsrBrailleOutputKind& elt);
 extern map<string, bsrBrailleOutputKind>
   gGlobalBsrBrailleOutputKindsMap;
 
-string existingBsrBrailleOutputKinds (unsigned int namesListMaxLength);
+string existingBsrBrailleOutputKinds (size_t namesListMaxLength);
 
 void initializeBsrBrailleOutputKindsMap ();
 
@@ -246,7 +246,7 @@ ostream& operator<< (ostream& os, bsrTextsLanguageKind& elt);
 extern map<string, bsrTextsLanguageKind>
   gGlobalBsrTextsLanguageKindsMap;
 
-string existingBsrTextsLanguageKinds (unsigned int namesListMaxLength);
+string existingBsrTextsLanguageKinds (size_t namesListMaxLength);
 
 void initializeBsrTextsLanguageKindsMap ();
 
@@ -947,8 +947,8 @@ A: The Unicode Standard used to contain a short algorithm, now there is just a b
 
 Using the following type definitions
 
-typedef unsigned int16 UTF16;
-typedef unsigned int32 UTF32;
+typedef size_t16 UTF16;
+typedef size_t32 UTF32;
 the first snippet calculates the high (or leading) surrogate from a character code C.
 
 const UTF16 HI_SURROGATE_START, // 0xD800

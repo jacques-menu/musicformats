@@ -1,0 +1,191 @@
+#!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
+
+###
+  This MFSL script contain s:
+    - a tool specification, telling which MusicFormats tool
+      to use, here xml2ly;
+
+    - an input specification, the input source to apply
+      the latter to, here file name "Hymn121.xml";
+
+    - any number of MusicFormats options;
+
+    - a SCORE choice specifications telling the possible scores
+      that can be generated with this script;
+
+    - a 'set' specification to choose one such SCORE among the possible ones;
+
+    - a 'case' specification stating the options to be used
+      when running xml2ly to obtain the chosen SCORE,
+      in complement to the ones appearing before the case specfication.
+###
+
+
+# ----------------------------------------------------------
+# the MusicFormats tool to be used
+# ----------------------------------------------------------
+
+tool : xml2ly
+
+
+# ----------------------------------------------------------
+# the input file to be handled by the tool
+# ----------------------------------------------------------
+
+input : "Hymn121.xml"
+
+
+# ----------------------------------------------------------
+# the commmon options
+# ----------------------------------------------------------
+
+# header
+  -title "Hymn 121 - Angels From The Realms Of Glory - Harmony band"
+
+# display
+  -display-options-values
+
+# LilyPond
+#   -lilypond-generation-infos
+
+# dynamics
+  -all-wedges-below
+
+
+# ----------------------------------------------------------
+# the SCORE choice
+# ----------------------------------------------------------
+
+# the labels for the SCORE choice
+
+choice SCORE :
+  director |
+
+  part1_C_instruments |
+
+  part2_Bb_instruments |
+
+  part3_Bb_instruments |
+
+  part4_Bb_instruments |
+  part4_BassGuitar
+;
+  # choose names that matches the intent,
+  # uppercase to emphasize is a matter of taste
+
+
+# ----------------------------------------------------------
+# SCORE specific options
+# ----------------------------------------------------------
+
+case SCORE :
+	director:
+    -global-staff-size 17.675
+    -ragged-bottom off
+  ;
+
+  part1_C_instruments,
+
+  part2_Bb_instruments,
+
+  part3_Bb_instruments,
+
+  part4_Bb_instruments,
+  part4_BassGuitar:
+    -ambitus
+    -ragged-bottom off
+  ;
+;
+
+# 	soprano, alto, bass:
+#   ;
+# ### [MFSL] ERROR ./Hymn121ForHarmonyBand.mfsl:97.9: choice "SCORE label "soprano is already present in this case statement
+
+
+case SCORE :
+	director:
+	  -output-file-name "Hymn121_director.ly"
+
+    -global-staff-size 17.675
+    -subtitle "Director"
+  ;
+
+	part1_C_instruments:
+	  -output-file-name "Hymn121_part1_C_instruments.ly"
+
+    -subtitle "Part 1 - C instruments"
+    -keep-musicxml-part-id P1
+    -msr-rename-part "P1:part1_C_instruments"
+
+#     -instrument "Part 1 - C instruments"
+    -display-lpsr-short
+  ;
+
+	part2_Bb_instruments:
+	  -output-file-name "Hymn121_part2_Bb_instruments.ly"
+
+    -subtitle "Part 2 - Bb instruments"
+    -keep-musicxml-part-id P2
+
+    -lilypond-transpose-part-id P2=bes
+  ;
+
+	part3_Bb_instruments:
+	  -output-file-name "Hymn121_part2_Bb_instruments.ly"
+
+    -subtitle "Part 3 - Bb instruments"
+    -keep-musicxml-part-id P3
+
+    -global-staff-size 23 # a more readable score is needed
+
+    -lilypond-transpose-part-id 'P2=bes'
+  ;
+
+	part4_Bb_instruments:
+	  -output-file-name "Hymn121_part4_Bb_instruments.ly"
+
+    -subtitle "Part 4 - Bb instruments"
+    -keep-musicxml-part-id P4
+
+    -ignore-musicxml-lyrics # there's a glitch at the last measure
+
+    -lilypond-transpose-part-id 'P2=bes'
+  ;
+
+	part4_BassGuitar:
+	  -output-file-name "Hymn121_part4_BassGuitar.ly"
+
+    -subtitle "Part 4 - Bass guitar"
+    -keep-musicxml-part-id P4
+
+    -ignore-musicxml-lyrics # there's a glitch at the last measure
+
+    -modern-tab
+    -tab-full-notation
+  ;
+;
+
+
+# ----------------------------------------------------------
+# create only one SCORE or all of them
+# ----------------------------------------------------------
+
+###
+  Comment/uncomment the following to select
+  either one SCORE only or all of them
+
+  The Choice bewlow are default settings, that can be overridden
+  by options to the MFSL interpreter such as:
+    -only SCORE:part2_Bb_instruments
+  or:
+    -all SCORE
+###
+
+
+# generate a particular SCORE
+# only SCORE : director ;
+only SCORE : part4_BassGuitar ;
+
+
+# generate all the SCORE possibilities in a single step
+# all SCORE ;

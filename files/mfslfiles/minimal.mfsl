@@ -1,0 +1,44 @@
+#!/Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
+
+# This is a comment (for human readers), from '#' to the end of line
+
+# The first line above contains a so-called shebang,
+# a special comment indicating the access path to the MFSL interpreter
+# used to process the remainder of this file
+
+###
+  And here is a multi-line comment.
+
+  This minimal MFSL script contains only the mandatory elements:
+    - a tool specification, telling which MusicFormats tool to use,
+      here xml2ly;
+
+    - an input specification, specifying the input source for this too,
+      here file name "Hymn121.xml".
+
+      It can be a file name or '-' to specify standard input.
+
+      Typing './minimal.mfsl' in a terminal causes xml2ly to be launched,
+      in a way equivalent to the direct command:
+          mxl2ly Hymn121.xml
+
+      Useful scripts contain options in complement to that,
+      since MFSL is intended to gather options to be used by the tool.
+###
+
+
+# ----------------------------------------------------------
+# the MusicFormats tool to be used
+# ----------------------------------------------------------
+
+tool : xml2ly
+
+
+# ----------------------------------------------------------
+# the input file to be processed by the tool
+# ----------------------------------------------------------
+
+# input : "Hymn121.xml"
+
+# this would be OK too, since there are no spaces in the file name
+input : Hymn121.xml

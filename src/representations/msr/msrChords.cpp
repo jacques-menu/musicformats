@@ -1526,7 +1526,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the articulations if any
-  unsigned int chordArticulationsSize = fChordArticulations.size ();
+  size_t chordArticulationsSize = fChordArticulations.size ();
 
   if (chordArticulationsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1551,7 +1551,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the spanners if any
-  unsigned int chordSpannersSize = fChordSpanners.size ();
+  size_t chordSpannersSize = fChordSpanners.size ();
 
   if (chordSpannersSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1576,7 +1576,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the technicals if any
-  unsigned int chordTechnicalsSize = fChordTechnicals.size ();
+  size_t chordTechnicalsSize = fChordTechnicals.size ();
 
   if (chordTechnicalsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1601,7 +1601,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the ornaments if any
-  unsigned int chordOrnamentsSize = fChordOrnaments.size ();
+  size_t chordOrnamentsSize = fChordOrnaments.size ();
 
   if (chordOrnamentsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1626,7 +1626,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the glissandos if any
-  unsigned int chordGlissandosSize = fChordGlissandos.size ();
+  size_t chordGlissandosSize = fChordGlissandos.size ();
 
   if (chordGlissandosSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1651,7 +1651,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the slides if any
-  unsigned int chordSlidesSize = fChordSlides.size ();
+  size_t chordSlidesSize = fChordSlides.size ();
 
   if (chordSlidesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1676,7 +1676,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the dynamics if any
-  unsigned int chordDynamicsSize = fChordDynamics.size ();
+  size_t chordDynamicsSize = fChordDynamics.size ();
 
   if (chordDynamicsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1701,7 +1701,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the other dynamics if any
-  unsigned int chordOtherDynamicsSize = fChordOtherDynamics.size ();
+  size_t chordOtherDynamicsSize = fChordOtherDynamics.size ();
 
   if (chordOtherDynamicsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1726,7 +1726,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the stems if any
-  unsigned int chordStemsSize = fChordStems.size ();
+  size_t chordStemsSize = fChordStems.size ();
 
   if (chordStemsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1752,7 +1752,7 @@ void msrChord::print (ostream& os) const
 
 /* JMI
   // print the beams if any
-  unsigned int chordBeamsSize = fChordBeams.size ();
+  size_t chordBeamsSize = fChordBeams.size ();
 
   if (chordBeamsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1778,7 +1778,7 @@ void msrChord::print (ostream& os) const
 */
 #ifdef TRACING_IS_ENABLED
   // print the beam links if any
-  unsigned int chordBeamLinksSize = fChordBeamLinks.size ();
+  size_t chordBeamLinksSize = fChordBeamLinks.size ();
 
   if (gGlobalTracingOahGroup->getTraceBeams () || chordBeamLinksSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1804,7 +1804,7 @@ void msrChord::print (ostream& os) const
 #endif
 
   // print the words if any
-  unsigned int chordWordsSize = fChordWords.size ();
+  size_t chordWordsSize = fChordWords.size ();
 
   if (chordWordsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1829,7 +1829,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the ties if any
-  unsigned int chordTiesSize = fChordTies.size ();
+  size_t chordTiesSize = fChordTies.size ();
 
   if (chordTiesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1854,7 +1854,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the ligatures if any
-  unsigned int chordLigaturesSize = fChordLigatures.size ();
+  size_t chordLigaturesSize = fChordLigatures.size ();
 
   if (chordLigaturesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1879,7 +1879,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the slashes if any
-  unsigned int chordSlashesSize = fChordSlashes.size ();
+  size_t chordSlashesSize = fChordSlashes.size ();
 
   if (chordSlashesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1904,7 +1904,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the cresc/decresc if any
-  unsigned int chordCrescDecrescsSize = fChordCrescDecrescs.size ();
+  size_t chordCrescDecrescsSize = fChordCrescDecrescs.size ();
 
   if (chordCrescDecrescsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1929,7 +1929,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the wedges if any
-  unsigned int chordWedgesSize = fChordWedges.size ();
+  size_t chordWedgesSize = fChordWedges.size ();
 
   if (chordWedgesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1954,7 +1954,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the segnos if any
-  unsigned int chordSegnosSize = fChordSegnos.size ();
+  size_t chordSegnosSize = fChordSegnos.size ();
 
   if (chordSegnosSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -1979,7 +1979,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the dal segnos if any
-  unsigned int chordDalSegnosSize = fChordDalSegnos.size ();
+  size_t chordDalSegnosSize = fChordDalSegnos.size ();
 
   if (chordDalSegnosSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -2004,7 +2004,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the codas if any
-  unsigned int chordCodasSize = fChordCodas.size ();
+  size_t chordCodasSize = fChordCodas.size ();
 
   if (chordCodasSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -2047,7 +2047,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the harmonies associated to this chord if any
-  unsigned int chordHarmoniesListSize = fChordHarmoniesList.size ();
+  size_t chordHarmoniesListSize = fChordHarmoniesList.size ();
 
   if (chordHarmoniesListSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -2103,7 +2103,7 @@ void msrChord::print (ostream& os) const
   os << endl;
 
   // print the chord notes if any
-  unsigned int chordNotesVectorSize = fChordNotesVector.size ();
+  size_t chordNotesVectorSize = fChordNotesVector.size ();
 
   if (chordNotesVectorSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -2136,7 +2136,7 @@ void msrChord::print (ostream& os) const
 
 #ifdef TRACING_IS_ENABLED
   // print the slur links if any
-  unsigned int chordSlurLinksSize = fChordSlurLinks.size ();
+  size_t chordSlurLinksSize = fChordSlurLinks.size ();
 
   if (gGlobalTracingOahGroup->getTraceSlurs () || chordSlurLinksSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
     os <<
@@ -2288,7 +2288,7 @@ void msrChord::printShort (ostream& os) const
 
 /*
   // print the articulations if any
-  unsigned int chordArticulationsSize = fChordArticulations.size ();
+  size_t chordArticulationsSize = fChordArticulations.size ();
 
   if (chordArticulationsSize) {
     os <<
@@ -2313,7 +2313,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the spanners if any
-  unsigned int chordSpannersSize = fChordSpanners.size ();
+  size_t chordSpannersSize = fChordSpanners.size ();
 
   if (chordSpannersSize) {
     os <<
@@ -2338,7 +2338,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the technicals if any
-  unsigned int chordTechnicalsSize = fChordTechnicals.size ();
+  size_t chordTechnicalsSize = fChordTechnicals.size ();
 
   if (chordTechnicalsSize) {
     os <<
@@ -2363,7 +2363,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the ornaments if any
-  unsigned int chordOrnamentsSize = fChordOrnaments.size ();
+  size_t chordOrnamentsSize = fChordOrnaments.size ();
 
   if (chordOrnamentsSize) {
     os <<
@@ -2388,7 +2388,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the glissandos if any
-  unsigned int chordGlissandosSize = fChordGlissandos.size ();
+  size_t chordGlissandosSize = fChordGlissandos.size ();
 
   if (chordGlissandosSize) {
     os <<
@@ -2413,7 +2413,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the slides if any
-  unsigned int chordSlidesSize = fChordSlides.size ();
+  size_t chordSlidesSize = fChordSlides.size ();
 
   if (chordSlidesSize) {
     os <<
@@ -2438,7 +2438,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the dynamics if any
-  unsigned int chordDynamicsSize = fChordDynamics.size ();
+  size_t chordDynamicsSize = fChordDynamics.size ();
 
   if (chordDynamicsSize) {
     os <<
@@ -2463,7 +2463,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the other dynamics if any
-  unsigned int chordOtherDynamicsSize = fChordOtherDynamics.size ();
+  size_t chordOtherDynamicsSize = fChordOtherDynamics.size ();
 
   if (chordOtherDynamicsSize) {
     os <<
@@ -2488,7 +2488,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the stems if any
-  unsigned int chordStemsSize = fChordStems.size ();
+  size_t chordStemsSize = fChordStems.size ();
 
   if (chordStemsSize) {
     os <<
@@ -2515,7 +2515,7 @@ void msrChord::printShort (ostream& os) const
 
 /*
   // print the beams if any
-  unsigned int chordBeamsSize = fChordBeams.size ();
+  size_t chordBeamsSize = fChordBeams.size ();
 
   if (chordBeamsSize) {
     os <<
@@ -2542,7 +2542,7 @@ void msrChord::printShort (ostream& os) const
 
 #ifdef TRACING_IS_ENABLED
   // print the beam links if any
-  unsigned int chordBeamLinksSize = fChordBeamLinks.size ();
+  size_t chordBeamLinksSize = fChordBeamLinks.size ();
 
   if (gGlobalTracingOahGroup->getTraceBeams () || chordBeamLinksSize) {
     os <<
@@ -2568,7 +2568,7 @@ void msrChord::printShort (ostream& os) const
 #endif
 
   // print the words if any
-  unsigned int chordWordsSize = fChordWords.size ();
+  size_t chordWordsSize = fChordWords.size ();
 
   if (chordWordsSize) {
     os <<
@@ -2593,7 +2593,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the ties if any
-  unsigned int chordTiesSize = fChordTies.size ();
+  size_t chordTiesSize = fChordTies.size ();
 
   if (chordTiesSize) {
     os <<
@@ -2619,7 +2619,7 @@ void msrChord::printShort (ostream& os) const
 
 #ifdef TRACING_IS_ENABLED
   // print the slur links if any
-  unsigned int chordSlurLinksSize = fChordSlurLinks.size ();
+  size_t chordSlurLinksSize = fChordSlurLinks.size ();
 
   if (gGlobalTracingOahGroup->getTraceSlurs () || chordSlurLinksSize) {
     os <<
@@ -2645,7 +2645,7 @@ void msrChord::printShort (ostream& os) const
 #endif
 
   // print the ligatures if any
-  unsigned int chordLigaturesSize = fChordLigatures.size ();
+  size_t chordLigaturesSize = fChordLigatures.size ();
 
   if (chordLigaturesSize) {
     os <<
@@ -2671,7 +2671,7 @@ void msrChord::printShort (ostream& os) const
 
 /*
   // print the slashes if any
-  unsigned int chordSlashesSize = fChordSlashes.size ();
+  size_t chordSlashesSize = fChordSlashes.size ();
 
   if (chordSlashesSize) {
     os <<
@@ -2696,7 +2696,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the cresc/descrec if any
-  unsigned int chordCrescDescrecsSize = fChordCrescDescrecs.size ();
+  size_t chordCrescDescrecsSize = fChordCrescDescrecs.size ();
 
   if (chordCrescDescrecsSize) {
     os <<
@@ -2721,7 +2721,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the wedges if any
-  unsigned int chordWedgesSize = fChordWedges.size ();
+  size_t chordWedgesSize = fChordWedges.size ();
 
   if (chordWedgesSize) {
     os <<
@@ -2746,7 +2746,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the segnos if any
-  unsigned int chordSegnosSize = fChordSegnos.size ();
+  size_t chordSegnosSize = fChordSegnos.size ();
 
   if (chordSegnosSize) {
     os <<
@@ -2771,7 +2771,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the dal segnos if any
-  unsigned int chordDalSegnosSize = fChordDalSegnos.size ();
+  size_t chordDalSegnosSize = fChordDalSegnos.size ();
 
   if (chordDalSegnosSize) {
     os <<
@@ -2796,7 +2796,7 @@ void msrChord::printShort (ostream& os) const
   }
 
   // print the codas if any
-  unsigned int chordCodasSize = fChordCodas.size ();
+  size_t chordCodasSize = fChordCodas.size ();
 
   if (chordCodasSize) {
     os <<
@@ -2840,7 +2840,7 @@ void msrChord::printShort (ostream& os) const
 */
 
   // print the harmonies associated to this chord if any
-  unsigned int chordHarmoniesListSize = fChordHarmoniesList.size ();
+  size_t chordHarmoniesListSize = fChordHarmoniesList.size ();
 
   if (chordHarmoniesListSize) {
     os <<
@@ -2897,7 +2897,7 @@ void msrChord::printShort (ostream& os) const
   os << endl;
 
   // print the chord notes if any
-  unsigned int chordNotesVectorSize = fChordNotesVector.size ();
+  size_t chordNotesVectorSize = fChordNotesVector.size ();
 
   if (chordNotesVectorSize) {
     os <<

@@ -397,7 +397,7 @@ void mxsr2msrTranslator::printVoicesLastMetNoteMap (
   int           inputLineNumber,
   const string& context)
 {
-  unsigned int
+  size_t
     voicesLastMetNoteMapSize =
       fVoicesLastMetNoteMap.size ();
 
@@ -2263,14 +2263,14 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
   }
 
   // is this part name in the parts keep IDs set?
-  if (gGlobalMxsr2msrOahGroup->getPartsKeepIDSet ().size ()) {
+  if (gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().size ()) {
     set<string>::iterator
       it =
-        gGlobalMxsr2msrOahGroup->getPartsKeepIDSet ().find (
+        gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().find (
           fCurrentPart->
             getPartID ());
 
-    if (it == gGlobalMxsr2msrOahGroup->getPartsKeepIDSet ().end ()) {
+    if (it == gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepIDSet ().end ()) {
       // the simplest way not to keep this part
       // is to remove it from its part-group
       // now that is has been completely built and populated
@@ -2283,14 +2283,14 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
   }
 
   // is this part name in the parts ignore names set?
-  if (gGlobalMxsr2msrOahGroup->getPartsIgnoreNameSet ().size ()) {
+  if (gGlobalMxsr2msrOahGroup->getMusicXMLMusicXMLPartsIgnoreNameSet ().size ()) {
     set<string>::iterator
       it =
-        gGlobalMxsr2msrOahGroup->getPartsIgnoreNameSet ().find (
+        gGlobalMxsr2msrOahGroup->getMusicXMLMusicXMLPartsIgnoreNameSet ().find (
           fCurrentPart->
             getPartName ());
 
-    if (it != gGlobalMxsr2msrOahGroup->getPartsIgnoreNameSet ().end ()) {
+    if (it != gGlobalMxsr2msrOahGroup->getMusicXMLMusicXMLPartsIgnoreNameSet ().end ()) {
       // the simplest way to ignore this part
       // is to remove it from its part-group
       // now that is has been completely built and populated
@@ -2303,14 +2303,14 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
   }
 
   // is this part name in the parts keep names set?
-  if (gGlobalMxsr2msrOahGroup->getPartsKeepNameSet ().size ()) {
+  if (gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().size ()) {
     set<string>::iterator
       it =
-        gGlobalMxsr2msrOahGroup->getPartsKeepNameSet ().find (
+        gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().find (
           fCurrentPart->
             getPartName ());
 
-    if (it == gGlobalMxsr2msrOahGroup->getPartsKeepNameSet ().end ()) {
+    if (it == gGlobalMxsr2msrOahGroup->getMusicXMLPartsKeepNameSet ().end ()) {
       // the simplest way not to keep this part
       // is to remove it from its part-group
       // now that is has been completely built and populated
@@ -3682,12 +3682,82 @@ void mxsr2msrTranslator::visitEnd ( S_time& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_instruments& elt )
+
+/*
+
+open xmlsamples3.1/Telemann.xml
+
+<score-instrument id="P1-I1">
+    <instrument-name>Voice 1</instrument-name>
+   </score-instrument>
+*/
+
+void mxsr2msrTranslator::visitStart ( S_score_instrument& elt )
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting S_time" <<
+      "--> Start visiting S_score_instrument" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+/*
+<!--
+	The score-instrument element allows for multiple instruments
+	per score-part. As with the score-part element, each
+	score-instrument has a required ID attribute, a name,
+	and an optional abbreviation. The instrument-name and
+	instrument-abbreviation are typically used within a software
+	application, rather than appearing on the printed page of a
+	score.
+
+	A score-instrument element is also required if the score
+	specifies MIDI 1.0 channels, banks, or programs. An initial
+	midi-instrument assignment can also be made here. MusicXML
+	software should be able to automatically assign reasonable
+	channels and instruments without these elements in simple
+	cases, such as where part names match General MIDI
+	instrument names.
+
+	The score-instrument element can also distinguish multiple
+	instruments of the same type that are on the same part,
+	such as Clarinet 1 and Clarinet 2 instruments within a
+	Clarinets 1 and 2 part.
+
+	The virtual-instrument-data entity is defined in the
+	common.mod file, as it can be used within both the
+	score-part and instrument-change elements.
+-->
+<!ELEMENT score-instrument
+	(instrument-name, instrument-abbreviation?,
+	%virtual-instrument-data;)>
+<!ATTLIST score-instrument
+    id ID #REQUIRED
+>
+<!ELEMENT instrument-name (#PCDATA)>
+<!ELEMENT instrument-abbreviation (#PCDATA)>
+
+    <score-part id="P1">
+      <part-name print-object="no">Voice</part-name>
+      <score-instrument id="P1-I6">
+        <instrument-name>Voice</instrument-name>
+        <instrument-sound>voice.vocals</instrument-sound>
+        <solo/>
+      </score-instrument>
+*/
+
+//  int instruments = (int)(*elt); // JMI
+}
+
+
+void mxsr2msrTranslator::visitStart ( S_instrument_name& elt )
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_instrument_name" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
@@ -3695,6 +3765,79 @@ void mxsr2msrTranslator::visitStart ( S_instruments& elt )
 
 /*
         <instruments>2</instruments>
+*/
+
+//  int instruments = (int)(*elt); // JMI
+}
+
+void mxsr2msrTranslator::visitStart ( S_solo& elt )
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_solo" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+/*
+        <instruments>2</instruments>
+*/
+
+//  int instruments = (int)(*elt); // JMI
+}
+
+void mxsr2msrTranslator::visitStart ( S_instruments& elt )
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_instruments" <<
+      ", line " << elt->getInputLineNumber () <<
+      endl;
+  }
+#endif
+
+/*
+<!--
+	Instruments are only used if more than one instrument is
+	represented in the part (e.g., oboe I and II where they
+	play together most of the time). If absent, a value of 1
+	is assumed.
+-->
+<!ELEMENT instruments (#PCDATA)>
+
+    <measure number="1" width="324">
+			<attributes>
+				<divisions>768</divisions>
+				<key>
+					<fifths>0</fifths>
+					<mode>major</mode>
+				</key>
+				<time>
+					<beats>4</beats>
+					<beat-type>4</beat-type>
+				</time>
+				<instruments>2</instruments>
+				<clef>
+					<sign>G</sign>
+					<line>2</line>
+				</clef>
+			</attributes>
+
+      <attributes>
+        <divisions>8</divisions>
+        <key>
+          <fifths>2</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>3</beats>
+          <beat-type>8</beat-type>
+        </time>
+        <staves>2</staves>
+        <instruments>5</instruments>
 */
 
 //  int instruments = (int)(*elt); // JMI
@@ -3928,7 +4071,7 @@ void mxsr2msrTranslator::visitEnd (S_direction& elt)
 #endif
 
   if (fCurrentMetronomeTempo) {
-    unsigned int pendingWordsSize = fPendingWordsList.size ();
+    size_t pendingWordsSize = fPendingWordsList.size ();
 
     if (pendingWordsSize) {
       while (fPendingWordsList.size ()) {
@@ -5834,7 +5977,7 @@ void mxsr2msrTranslator::visitEnd ( S_metronome& elt )
   // append metrenome words to tempo if any
   S_msrWords tempoWords;
 
-  unsigned int pendingWordsSize = fPendingWordsList.size ();
+  size_t pendingWordsSize = fPendingWordsList.size ();
 
   if (pendingWordsSize) {
     if (pendingWordsSize > 1) {
@@ -6814,7 +6957,7 @@ void mxsr2msrTranslator::displaySlurStartsStack (
 void mxsr2msrTranslator::displayTupletsStack (
   const string& context)
 {
-  unsigned int tupletsStackSize = fTupletsStack.size ();
+  size_t tupletsStackSize = fTupletsStack.size ();
 
   gLogStream <<
     endl <<
@@ -6919,7 +7062,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt )
       // a phrasing slur is recognized as such
       // when the nested regular slur start is found
 
-      unsigned int slurStartsStackSize = fSlurStartsStack.size ();
+      size_t slurStartsStackSize = fSlurStartsStack.size ();
 
       if (fCurrentSlurType == "start") {
         switch (slurStartsStackSize) {
@@ -9969,7 +10112,7 @@ void mxsr2msrTranslator::visitStart ( S_note& elt )
 
   Bool wellFormedColor (true);
 
-  unsigned int noteAlphaRGBColorSize = noteAlphaRGBColor.size ();
+  size_t noteAlphaRGBColorSize = noteAlphaRGBColor.size ();
 
   if (noteAlphaRGBColorSize) {
     if (noteAlphaRGBColor [0] != '#') {
@@ -10250,9 +10393,34 @@ void mxsr2msrTranslator::visitStart ( S_instrument& elt )
 #endif
 
 /*
-  <instrument id="P2-I4"/>
+<!--
+	If multiple score-instruments are specified in a
+	score-part, there should be an instrument element for
+	each note in the part. The id attribute is an IDREF back
+	to the score-instrument ID. Notes that are shared between
+	multiple score-instruments can have more than one instrument
+	element.
+-->
+<!ELEMENT instrument EMPTY>
+<!ATTLIST instrument
+    id IDREF #REQUIRED
+>
+
+      <note default-x="99.80" default-y="-10.00">
+        <unpitched>
+          <display-step>E</display-step>
+          <display-octave>4</display-octave>
+          </unpitched>
+        <duration>6</duration>
+        <instrument id="P1-I38"/>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>down</stem>
+        <notehead>x</notehead>
+        </note>
 */
- string id = elt->getAttributeValue ("id"); // JMI
+
+//  int instruments = (int)(*elt); // JMI
 }
 
 void mxsr2msrTranslator::visitStart ( S_dot& elt )

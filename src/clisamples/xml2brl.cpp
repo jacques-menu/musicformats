@@ -7,7 +7,7 @@
   This file is provided as an example of the MusicXML Library use.
 */
 
-#include <cstring>
+#include <cstring> // memset
 #include <iomanip>      // setw()), set::precision(), ...
 #include <fstream>      // ifstream, ...
 

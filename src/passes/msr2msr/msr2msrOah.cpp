@@ -676,6 +676,59 @@ R"(Expand the book to as many scores as needed for a harmony band.)",
         fExpandToHarmonyBandBook));
 }
 
+void msr2msrOahGroup::initializeStavesOptions ()
+{
+  S_oahSubGroup subGroup =
+    oahSubGroup::create (
+      "Staves",
+      "help-msr2msr-staves", "hm2ms",
+R"()",
+    oahElementVisibilityKind::kElementVisibilityWhole,
+    this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // ignore MSR staves
+  // --------------------------------------
+
+  fIgnoreMsrStavesSetAtom =
+    oahStringSetElementAtom::create (
+      "ignore-msr-staff", "ims",
+R"(Ignore staff STAFF_NAME in the MSR data
+when creating a new MSR from an existing one.
+An example name is Part_POne_Staff_One.
+There can be several occurrences of this option.
+When this option is used, any staff not explicitly ignored is kept.)",
+      "staff",
+      "fIgnoreMsrStavesSet",
+      fIgnoreMsrStavesSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fIgnoreMsrStavesSetAtom);
+
+  // keep MSR staves
+  // --------------------------------------
+
+  fKeepMsrStavesSetAtom =
+    oahStringSetElementAtom::create (
+      "keep-msr-staff", "kms",
+R"(Keep staff STAFF_NAME in the MSR data
+when creating a new MSR from an existing one.
+An example name is Part_POne_Staff_One.
+There can be several occurrences of this option.
+When this option is used, any staff not explicitly kept is ignored.
+Note that multi-staff staves may end up with empty staffs in them
+with this option.)", // JMI
+      "staff",
+      "fKeepMsrStavesSet",
+      fKeepMsrStavesSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fKeepMsrStavesSetAtom);
+}
+
 void msr2msrOahGroup::initializeVoicesOptions ()
 {
   S_oahSubGroup subGroup =
@@ -697,7 +750,8 @@ R"()",
 R"(Ignore voice VOICE_NAME in the MSR data
 when creating a new MSR from an existing one.
 An example name is Part_POne_Staff_One_Voice_Two.
-There can be several occurrences of this option.)",
+There can be several occurrences of this option.
+When this option is used, any voice not explicitly ignored is kept.)",
       "voice",
       "fIgnoreMsrVoicesSet",
       fIgnoreMsrVoicesSet);
@@ -715,7 +769,10 @@ There can be several occurrences of this option.)",
 R"(Keep voice VOICE_NAME in the MSR data
 when creating a new MSR from an existing one.
 An example name is Part_POne_Staff_One_Voice_Two.
-There can be several occurrences of this option.)",
+There can be several occurrences of this option.
+When this option is used, any voice not explicitly kept is ignored.
+Note that multi-voice staves may end up with empty voices in them
+with this option.)", // JMI
       "voice",
       "fKeepMsrVoicesSet",
       fKeepMsrVoicesSet);
@@ -874,6 +931,9 @@ void msr2msrOahGroup::initializeMsr2msrOahGroup ()
   // book
   // --------------------------------------
   initializeBookOptions ();
+
+  // staves
+  initializeStavesOptions ();
 
   // voices
   initializeVoicesOptions ();

@@ -505,7 +505,7 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
     result =
       octaveKindBelowMiddleC;
 
-  for (unsigned int i = 0; i < octaveIndication.size (); ++i) {
+  for (size_t i = 0; i < octaveIndication.size (); ++i) {
     switch (octaveIndication [i]) {
       case ',':
         if (result > octaveKindBelowMiddleC) {
@@ -647,21 +647,21 @@ void initializeMsrOctaveEntryKindsMap ()
   gGlobalMsrOctaveEntryKindsMap ["fixed"] = msrOctaveEntryKind::kOctaveEntryFixed;
 }
 
-string existingMsrOctaveEntryKinds (unsigned int namesListMaxLength)
+string existingMsrOctaveEntryKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     msrOctaveEntryKindsMapSize =
       gGlobalMsrOctaveEntryKindsMap.size ();
 
   if (msrOctaveEntryKindsMapSize) {
-    unsigned int
+    size_t
       nextToLast =
         msrOctaveEntryKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msrOctaveEntryKind>::const_iterator i =
@@ -757,7 +757,7 @@ S_msrSemiTonesPitchAndOctave msrSemiTonesPitchAndOctave::createFromString (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -1031,7 +1031,7 @@ S_msrQuarterTonesPitchAndOctave msrQuarterTonesPitchAndOctave::createFromString 
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -10866,19 +10866,19 @@ void initializeClefKinds ()
   }
 }
 
-string existingClefKinds (unsigned int namesListMaxLength)
+string existingClefKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int clefKindsMapSize =
+  size_t clefKindsMapSize =
     gGlobalClefKindsMap.size ();
 
   if (clefKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       clefKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msrClefKind>::const_iterator i =
@@ -10910,19 +10910,19 @@ string existingClefKinds (unsigned int namesListMaxLength)
   return s.str ();
 }
 
-string existingClefKindsNames (unsigned int namesListMaxLength)
+string existingClefKindsNames (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int clefKindsNamesMapSize =
+  size_t clefKindsNamesMapSize =
     gClefKindsNamesList.size ();
 
   if (clefKindsNamesMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       clefKindsNamesMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       list<string>::const_iterator i =
@@ -11848,19 +11848,19 @@ void initializeHarmonyKinds ()
   }
 }
 
-string existingHarmonyKinds (unsigned int namesListMaxLength)
+string existingHarmonyKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int harmonyKindsMapSize =
+  size_t harmonyKindsMapSize =
     gGlobalHarmonyKindsMap.size ();
 
   if (harmonyKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       harmonyKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msrHarmonyKind>::const_iterator i =
@@ -11892,19 +11892,19 @@ string existingHarmonyKinds (unsigned int namesListMaxLength)
   return s.str ();
 }
 
-string existingHarmonyKindsNames (unsigned int namesListMaxLength)
+string existingHarmonyKindsNames (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int harmonyKindsNamesListSize =
+  size_t harmonyKindsNamesListSize =
     gHarmonyKindsNamesList.size ();
 
   if (harmonyKindsNamesListSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       harmonyKindsNamesListSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       list<string>::const_iterator i =
@@ -14141,21 +14141,21 @@ msrSemiTonesPitchKind semiTonesPitchKindFromString (
   return result;
 }
 
-string existingQuarterTonesPitchesLanguageKinds (unsigned int namesListMaxLength)
+string existingQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     quarterTonesPitchesLanguageKindsMapSize =
       getQuarterTonesPitchesLanguageKindsMap ().size ();
 
   if (quarterTonesPitchesLanguageKindsMapSize) {
-    unsigned int
+    size_t
       nextToLast =
         quarterTonesPitchesLanguageKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
@@ -14730,20 +14730,20 @@ msrQuarterTonesPitchKind msrSemiTonesPitchKindAsQuarterTonesPitchKind (
 }
 
 string existingMsrQuarterTonesPitchesLanguageKinds (
-  unsigned int namesListMaxLength)
+  size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int
+  size_t
     quarterTonesPitchesLanguageKindsMapSize =
       getQuarterTonesPitchesLanguageKindsMap ().size ();
 
   if (quarterTonesPitchesLanguageKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       quarterTonesPitchesLanguageKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msrQuarterTonesPitchesLanguageKind>::const_iterator i =
@@ -15150,19 +15150,19 @@ void initializeMsrLengthUnitKindsMap ()
   gGlobalMsrLengthUnitKindsMap ["mm"] = msrLengthUnitKind::kUnitMillimeter;
 }
 
-string existingMsrLengthUnitKinds (unsigned int namesListMaxLength)
+string existingMsrLengthUnitKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int msrLengthUnitKindsMapSize =
+  size_t msrLengthUnitKindsMapSize =
     gGlobalMsrLengthUnitKindsMap.size ();
 
   if (msrLengthUnitKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       msrLengthUnitKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msrLengthUnitKind>::const_iterator i =
@@ -15348,19 +15348,19 @@ void initializeMsrMarginTypeKindsMap ()
   gGlobalMsrMarginTypeKindsMap ["both"] = msrMarginTypeKind::kMarginBoth;
 }
 
-string existingMsrMarginTypeKinds (unsigned int namesListMaxLength)
+string existingMsrMarginTypeKinds (size_t namesListMaxLength)
 {
   stringstream s;
 
-  unsigned int msrMarginTypeKindsMapSize =
+  size_t msrMarginTypeKindsMapSize =
     gGlobalMsrMarginTypeKindsMap.size ();
 
   if (msrMarginTypeKindsMapSize) {
-    unsigned int nextToLast =
+    size_t nextToLast =
       msrMarginTypeKindsMapSize - 1;
 
-    unsigned int count = 0;
-    unsigned int cumulatedLength = 0;
+    size_t count = 0;
+    size_t cumulatedLength = 0;
 
     for (
       map<string, msrMarginTypeKind>::const_iterator i =
@@ -20328,7 +20328,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
       this->
         createHarmonyStructureNewbornClone ();
 
-  unsigned int
+  size_t
     harmonyStructureIntervalsSize =
       fHarmonyStructureIntervals.size ();
 
@@ -20345,7 +20345,7 @@ S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion
 
   if (harmonyStructureIntervalsSize) {
     // add the first items
-    for (unsigned int i = inversion; i < harmonyStructureIntervalsSize; ++i) {
+    for (size_t i = inversion; i < harmonyStructureIntervalsSize; ++i) {
       S_msrHarmonyInterval
         harmonyIntervalClone =
           fHarmonyStructureIntervals [i]->
@@ -20450,7 +20450,7 @@ list<msrSemiTonesPitchKind> buildSemiTonesChord (
       harmonyStructure->
         getHarmonyStructureIntervals ();
 
-  for (unsigned int i = 1; i << harmonyStructureIntervals.size (); ++i) {
+  for (size_t i = 1; i << harmonyStructureIntervals.size (); ++i) {
     result.push_back (rootNote);
   } // for
 
@@ -20783,7 +20783,7 @@ msrHarmonyContents::msrHarmonyContents (
       harmonyStructure->
         getHarmonyStructureIntervals ();
 
-  for (unsigned int i = 1; i < harmonyIntervals.size (); ++i) {
+  for (size_t i = 1; i < harmonyIntervals.size (); ++i) {
     // get the interval
     msrIntervalKind
       intervalKind =
@@ -21048,7 +21048,7 @@ void msrHarmonyContents::print (ostream& os) const
 
     ++gIndenter;
 
-    for (unsigned int i = 0; i < fHarmonyElementsVector.size (); ++i) {
+    for (size_t i = 0; i < fHarmonyElementsVector.size (); ++i) {
       S_msrSemiTonesPitchAndOctave
         harmonyElement =
           fHarmonyElementsVector [i];
@@ -21635,7 +21635,7 @@ msrRGBColor::msrRGBColor (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

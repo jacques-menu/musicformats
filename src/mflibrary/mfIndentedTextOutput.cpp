@@ -20,7 +20,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-//#define DEBUG_INDENTER
+// #define DEBUG_INDENTER
 
 //______________________________________________________________________________
 mfOutputIndenter mfOutputIndenter::gGlobalOStreamIndenter;
@@ -43,6 +43,12 @@ mfOutputIndenter::~mfOutputIndenter ()
 // increase the indentation by 1, prefix operator
 mfOutputIndenter& mfOutputIndenter::operator++ ()
 {
+#ifdef DEBUG_INDENTER
+  gLogStream <<
+    "% Incrementing INDENTER: " << fIndent <<
+    endl;
+#endif
+
   ++fIndent;
 
 #ifdef DEBUG_INDENTER
@@ -57,6 +63,12 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
 // decrease the indentation by 1, prefix operator
 mfOutputIndenter& mfOutputIndenter::operator-- ()
 {
+#ifdef DEBUG_INDENTER
+  gLogStream <<
+    "% Decrementing INDENTER: " << fIndent <<
+    endl;
+#endif
+
   --fIndent;
 
   if (fIndent < 0) {
@@ -260,7 +272,7 @@ int mfIndentedStreamBuf::sync ()
   // 2) reset the buffer
   // 3) flush the actual output stream we are using.
 
-  unsigned int strSize = str ().size ();
+  size_t strSize = str ().size ();
 
   // fetch the last non-space character in the buffer
   // caution: the '\n' is present as the last character!

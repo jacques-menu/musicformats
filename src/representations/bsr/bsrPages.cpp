@@ -216,7 +216,7 @@ void bsrPage::print (ostream& os) const
   os << endl;
 
   // print the page elements if any
-  unsigned int pageElementsListSize = fPageElementsList.size ();
+  size_t pageElementsListSize = fPageElementsList.size ();
 
   if (pageElementsListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
     os <<

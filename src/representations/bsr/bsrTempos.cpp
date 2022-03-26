@@ -126,7 +126,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
               fMsrTempo->getTempoBeatUnit ();
 
           // handle tempo words
-          unsigned int tempoWordsListSize = tempoWordsList.size ();
+          size_t tempoWordsListSize = tempoWordsList.size ();
 
           if (tempoWordsListSize) {
             list<S_msrWords>::const_iterator
@@ -241,7 +241,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
           regex_match (tempoPerMinuteString, sm, e);
 
-          unsigned int smSize = sm.size ();
+          size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
@@ -285,7 +285,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
             regex_match (tempoPerMinuteString, sm, e);
 
-            unsigned int smSize = sm.size ();
+            size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
             if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {

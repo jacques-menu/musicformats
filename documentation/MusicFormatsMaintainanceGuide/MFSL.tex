@@ -10,7 +10,7 @@
 
 This \script\ illustrates the basic features of \mfslLang:
 \begin{lstlisting}[language=MFSL]
-#!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfslInterpreter
+#!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
 
 # the MusicFormats tool to be used
 tool : xml2ly
@@ -73,7 +73,7 @@ The latter file can be used to check the grammar, in particular if \LR\ conflict
 \item the whole power of \oahRepr\ is used to handle the contents of \mfslLang\ \script s as well as the options to the \mfslLangInterp\ itself.
 \end{itemize}
 
-Only the predefined \code{bool} type is used, since the generated C++ code relies on this. This is why \methodName{getValue} is used in \clisamples{mfslInterpreter.cpp}:
+Only the predefined \code{bool} type is used, since the generated C++ code relies on this. This is why \methodName{getValue} is used in \clisamples{mfsl.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
     string                 theMfTool;
     string                 theInputFile;
@@ -110,7 +110,7 @@ total 776
   8 -rw-r--r--@  1 jacquesmenu  staff   1585 Mar 15 05:12 mfslDriver.cpp
   8 -rw-r--r--@  1 jacquesmenu  staff   3413 Mar 15 05:12 mfslDriver.h
   8 -rw-r--r--@  1 jacquesmenu  staff   3041 Mar  9 07:35 mfslInterpreterComponent.cpp
-  8 -rw-r--r--@  1 jacquesmenu  staff    661 Mar  9 07:02 mfslInterpreterComponent.h
+  8 -rw-r--r--@  1 jacquesmenu  staff    661 Mar  9 07:02 mfslInterpreterInterface.h
  24 -rw-r--r--@  1 jacquesmenu  staff  11981 Mar 10 11:38 mfslInterpreterInsiderHandler.cpp
  16 -rw-r--r--@  1 jacquesmenu  staff   5270 Mar 10 07:11 mfslInterpreterInsiderHandler.h
   8 -rw-r--r--@  1 jacquesmenu  staff   1161 Mar 15 05:13 mfslInterpreterInterface.h
@@ -129,6 +129,13 @@ total 776
   8 -rw-r--r--@  1 jacquesmenu  staff   3681 Mar  9 11:44 mfslWae.h
   8 -rwxr-xr-x@  1 jacquesmenu  staff    817 Mar 14 18:20 test.mfsl
 \end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{The MFSL basic types}
+% -------------------------------------------------------------------------
+
+%%%JMI
 
 
 % -------------------------------------------------------------------------
@@ -179,8 +186,14 @@ clean:
 
 
 % -------------------------------------------------------------------------
-\section{Tokens description}\label{Tokens description}
+\section{Locations handling}\label{Locations handling}
+% -------------------------------------------------------------------------
 
+%%%JMI
+
+
+% -------------------------------------------------------------------------
+\section{Tokens description}\label{Tokens description}
 % -------------------------------------------------------------------------
 
 The tokens are described in \mfsl{mfslParser.yy}, such as:
@@ -221,13 +234,18 @@ The name \code{OPTION} is used in \mfsl{mfslScanner.ll} prefixed by \code{yy::pa
 \begin{lstlisting}[language=Flex]
 "--"{name} |
 "-"{name} {
-  if (drv.getDisplayTokens ()) {
+  if (drv.getTraceTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << "]" <<
     endl;
   }
   return yy::parser::make_OPTION (yytext, loc);
 }
+\end{lstlisting}
+
+The suffix after \code{make_} has to be defined in the \mfsl{mfslParser.yy} for this to do the link between the Flex-generated and Bison-generated code:
+\begin{lstlisting}[language=Terminal]
+%token <string> OPTION "option"
 \end{lstlisting}
 
 In \mfsl{mfslParser.cpp}, this becomes:
@@ -323,7 +341,7 @@ class mfslDriver
     bool                  fTraceParsing;
 
     // display
-    bool                  fDisplayTokens;
+    bool                  fTraceTokens;
     bool                  fDisplayNonTerminals;
 
     // variables handling
@@ -349,7 +367,7 @@ mfslDriver::mfslDriver (
   fTraceParsing  = traceScanning;
   fTraceScanning = tTraceParsing;
 
-  fDisplayTokens       = displayTokens;
+  fTraceTokens       = displayTokens;
   fDisplayNonTerminals = displayNonTerminals;
 
   fScannerVariables ["one"] = 1;
@@ -490,7 +508,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 \begin{lstlisting}[language=Flex]
 {integer}"."{integer}({exponent})? |
 {integer}{exponent} {
-  if (drv.getDisplayTokens ()) {
+  if (drv.getTraceTokens ()) {
     gLogStream <<
     	"--> " << drv.getScannerLocation () <<
 			" double: " << yytext <<
@@ -500,7 +518,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 }
 
 {integer} {
-  if (drv.getDisplayTokens ()) {
+  if (drv.getTraceTokens ()) {
     gLogStream <<
     	"--> " << drv.getScannerLocation () <<
 			" integer: " << yytext <<
@@ -513,7 +531,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 \begin{lstlisting}[language=Flex]
 "tool" {
-  if (drv.getDisplayTokens ()) {
+  if (drv.getTraceTokens ()) {
     gLogStream <<
     	"--> " << drv.getScannerLocation () << ": " << yytext <<
 			endl;
@@ -525,7 +543,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 \begin{lstlisting}[language=Flex]
 {name} {
-  if (drv.getDisplayTokens ()) {
+  if (drv.getTraceTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": name [" << yytext << "]" <<
     endl;
@@ -537,7 +555,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 "--"{name} |
 "-"{name} {
-  if (drv.getDisplayTokens ()) {
+  if (drv.getTraceTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": option [" << yytext << "]" <<
     endl;
@@ -548,7 +566,7 @@ char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 
 "(" {
-  if (drv.getDisplayTokens ()) {
+  if (drv.getTraceTokens ()) {
     gLogStream <<
     	"--> " << drv.getScannerLocation () << ": " << yytext <<
 			endl;
@@ -746,11 +764,11 @@ mfMusicformatsError launchMfslInterpreter (
 Let's show show the \mfslLangInterp\ uses the options above:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl -display-tokens -display-non-terminals -display-options-values
-  The options values for //Users/jacquesmenu/musicformats-git-dev/build/bin/mfslInterpreter are:
+  The options values for //Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl are:
     MFSL group (-help-mfsl-group, -hmfsl-group), 2 atoms chosen:
     --------------------------
       MFSL (-help-mfsl, -hmfsl), 2 atoms chosen:
-        fDisplayTokens                     : true, set by user
+        fTraceTokens                     : true, set by user
         fDisplayNonTerminals               : true, set by user
 
     Options and help group (-help-oah-group, -hoah-group), 1 atom chosen:

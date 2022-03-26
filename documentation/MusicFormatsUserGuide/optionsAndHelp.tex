@@ -758,10 +758,10 @@ jacquesmenu@macmini > xml2ly -global-staff-size 30 -display-cpu-usage -display-o
         fPaperRightMargin                        : [15 kUnitMillimeter]
         fPaperTopMargin                          : [15 kUnitMillimeter]
         fPaperBottomMargin                       : [15 kUnitMillimeter]
-        fRaggedBottom                            : false
-        fRaggedLast                              : false
-        fRaggedLastBottom                        : false
-        fRaggedRight                             : false
+        fNoRaggedBottom                            : false
+        fNoRaggedLast                              : false
+        fNoRaggedLastBottom                        : false
+        fNoRaggedRight                             : false
         fPaperHorizontalShift                    : [0 kUnitMillimeter]
         fPaperIndent                             : [0 kUnitMillimeter]
         fPaperShortIndent                        : [0 kUnitMillimeter]
@@ -1084,7 +1084,7 @@ The scanner used by this author does not export tempo information as such, but a
 
 Also, the dynamic wedges are exported as being above the staves, which is fixed by \option{all-wedges-below}.
 
-The score is to be used by a musician who needs very readable scores with large note heads and alterations, hence the \optionName{global-staff-size}, \optionName{page-count}, \optionName{ragged-last-bottom} and \optionName{repeat-brackets} options.
+The score is to be used by a musician who needs very readable scores with large note heads and alterations, hence the \optionName{global-staff-size}, \optionName{page-count}, \optionName{no-ragged-last-bottom} and \optionName{repeat-brackets} options.
 
 And finally, the slurs in the original were wrong, i.e. not the {\it \swing\ \phrase} as should be, hence the use of \option{ignore-slurs}:
 \begin{lstlisting}[language=Terminal]
@@ -1101,7 +1101,7 @@ jacquesmenu@macmini > cat Bethena_SaxTenor_OptionsAndArguments.txt
 # presentation
   -global-staff-size 23
   -page-count 3
-  -ragged-last-bottom
+  -no-ragged-last-bottom
 
 # words conversions
   -convert-musicxml-words-to-msr-tempo "Valse tempo (Thema)"

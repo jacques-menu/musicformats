@@ -272,7 +272,7 @@ msdlParser::~ msdlParser ()
 //________________________________________________________________________
 void msdlParser::displayTokenKindsSetsStack (const string& context)
 {
-  unsigned int
+  size_t
     tokensSetsStackSize = fMsdlTokensSetsStack.size ();
 
   gLogStream <<
@@ -338,7 +338,7 @@ Bool msdlParser::isCurrentTokenKindInSetsStack (const string& context)
 {
   Bool result (false);
 
-  unsigned int
+  size_t
     tokensSetsStackSize = fMsdlTokensSetsStack.size ();
 
 #ifdef TRACING_IS_ENABLED

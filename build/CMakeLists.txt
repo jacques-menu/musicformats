@@ -166,7 +166,7 @@ set (LXML_SRC_DIR ${ROOT}/libmusicxml/src)
 
 set (LXML_SAMPLE_DIR ${ROOT}/libmusicxml/samples)
 
-set (MF_SAMPLE_DIR ${ROOT}/src/clisamples)
+set (MF_CLI_SAMPLES_DIR ${ROOT}/src/clisamples)
 
 set (LXML_FOLDERS factory files elements guido lib operations parser visitors interface)
 
@@ -177,7 +177,7 @@ if (LIB)
     add_definitions(-DXML)
 endif()
 
-set (SRC_FOLDERS ${SRC_FOLDERS} mflibrary components oah interpreters/mfsl wae manpage)
+set (SRC_FOLDERS ${SRC_FOLDERS} mflibrary components oah interpreters/mfslinterpreter wae manpage)
 
 if (MSR)
 	set (SRC_FOLDERS ${SRC_FOLDERS} passes/musicxml2mxsr representations/mxsr passes/mxsr2msr representations/msr passes/msr2msr generators/Mikrokosmos3Wandering generators/LilyPondIssue34)
@@ -303,7 +303,7 @@ endif()
 # set sample targets
 set (LXML_CLI_SAMPLES xmlversion RandomMusic RandomChords xmlfactory partsummary xml2guido xmliter countnotes readunrolled xml2midi xmlread xmltranspose xmlclone)
 
-set (MF_CLI_SAMPLES displayMusicformatsVersion displayMusicformatsHistory MusicAndHarmonies Mikrokosmos3Wandering LilyPondIssue34 mfslInterpreter)
+set (MF_CLI_SAMPLES displayMusicformatsVersion displayMusicformatsHistory MusicAndHarmonies Mikrokosmos3Wandering LilyPondIssue34 mfsl)
 
 set (LXML_TOOLS xml2guido xmlread xmltranspose xmlversion)
 
@@ -324,7 +324,7 @@ if (GUIDO)
 endif()
 
 if (MSDL)
-	set (MF_CLI_SAMPLES ${MF_CLI_SAMPLES}   msdlConverter)
+	set (MF_CLI_SAMPLES ${MF_CLI_SAMPLES}   msdl)
 endif()
 
 
@@ -354,7 +354,7 @@ if(NOT IOS )
   endforeach(sample)
 
   foreach(sample ${MF_CLI_SAMPLES})
-    add_executable( ${sample} ${MF_SAMPLE_DIR}/${sample}.cpp )
+    add_executable( ${sample} ${MF_CLI_SAMPLES_DIR}/${sample}.cpp )
     target_link_libraries( ${sample} ${LINKTO})
     set_target_properties (${sample} PROPERTIES
       RUNTIME_OUTPUT_DIRECTORY  ${BINDIR}

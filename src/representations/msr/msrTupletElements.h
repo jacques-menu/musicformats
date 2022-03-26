@@ -52,7 +52,7 @@ class EXP msrTupletElement : public msrMeasureElement
                             int positionInTuplet)
                               { fPositionInTuplet = positionInTuplet; }
 
-    const unsigned int    getPositionInTuplet () const
+    const size_t    getPositionInTuplet () const
                               { return fPositionInTuplet; }
 
   protected:

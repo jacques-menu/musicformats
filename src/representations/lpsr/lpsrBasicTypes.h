@@ -46,7 +46,7 @@ ostream& operator<< (ostream& os, lpsrScoreOutputKind& elt);
 extern map<string, lpsrScoreOutputKind>
   gGlobalLpsrScoreOutputKindsMap;
 
-string existingLpsrScoreOutputKinds (unsigned int namesListMaxLength);
+string existingLpsrScoreOutputKinds (size_t namesListMaxLength);
 
 void initializeLpsrScoreOutputKindsMap ();
 
@@ -85,7 +85,7 @@ string lpsrAccidentalStyleKindAsLilypondString (
 extern map<string, lpsrAccidentalStyleKind>
   gGlobalLpsrAccidentalStyleKindsMap;
 
-string existingLpsrAccidentalStyleKinds (unsigned int namesListMaxLength);
+string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength);
 
 void initializeLpsrAccidentalStyleKindsMap ();
 
@@ -107,7 +107,7 @@ ostream& operator<< (ostream& os, lpsrChordsLanguageKind& elt);
 extern map<string, lpsrChordsLanguageKind>
   gGlobalLpsrChordsLanguageKindsMap;
 
-string existingLpsrChordsLanguageKinds (unsigned int namesListMaxLength);
+string existingLpsrChordsLanguageKinds (size_t namesListMaxLength);
 
 void initializeLpsrChordsLanguageKindsMap ();
 
@@ -177,7 +177,7 @@ extern map<string, lpsrDynamicsTextSpannersStyleKind>&
   getLpsrDynamicsTextSpannersStyleKindsMap ();
 
 string existingLpsrDynamicsTextSpannersStyleKinds (
-  unsigned int namesListMaxLength);
+  size_t namesListMaxLength);
 
 void initializeLpsrDynamicsTextSpannersStyleKindsMap ();
 
@@ -196,7 +196,7 @@ ostream& operator<< (ostream& os, lpsrLyricsDurationsKind& elt);
 extern map<string, lpsrLyricsDurationsKind>
   gGlobalLpsrLyricsDurationsKindsMap;
 
-string existingLpsrLyricsDurationsKinds (unsigned int namesListMaxLength);
+string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength);
 
 void initializeLpsrLyricsDurationsKindsMap ();
 

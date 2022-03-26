@@ -1078,7 +1078,8 @@ class EXP lpsr2lilypondTranslator :
                             S_lpsrPaper                     paper,
                             list<pair<string, msrLength> >& nameLengthValuePairsList);
 
-    void                  fetchBooleanValuesFromLpsrOptionsGroup (
+    void                  fetchOnOffValuesFromLpsrOptionsGroup (
+                            S_lpsrPaper                paper,
                             list<pair<string, Bool> >& nameBooleanValuePairsList);
 
     void                  generatePaperPageSize (

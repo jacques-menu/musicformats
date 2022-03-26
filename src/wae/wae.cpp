@@ -192,7 +192,7 @@ std::set<int> gGlobalErrorsInputLineNumbers;
 
 void displayWarningsAndErrorsInputLineNumbers ()
 {
-  unsigned int warningsInputLineNumbersSize =
+  size_t warningsInputLineNumbersSize =
     gGlobalWarningsInputLineNumbers.size ();
 
   if (
@@ -219,7 +219,7 @@ void displayWarningsAndErrorsInputLineNumbers ()
     gLogStream << endl;
   }
 
-  unsigned int errorsInputLineNumbersSize =
+  size_t errorsInputLineNumbersSize =
     gGlobalErrorsInputLineNumbers.size ();
 
   if (errorsInputLineNumbersSize) {

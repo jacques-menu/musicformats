@@ -237,7 +237,7 @@ void msr2lpsrTranslator::computeLilypondScoreHeaderFields ()
   // instrument
   string
     instrumentFromOption =
-      gGlobalLpsr2lilypondOahGroup->getInstrument ();
+      gGlobalLpsr2lilypondOahGroup->getHeaderInstrument ();
 
   if (instrumentFromOption.size ()) {
       nameValuePairsList.push_back (
@@ -270,7 +270,7 @@ void msr2lpsrTranslator::computeLilypondScoreHeaderFields ()
   // meter
   string
     meterFromOption =
-      gGlobalLpsr2lilypondOahGroup->getMeter ();
+      gGlobalLpsr2lilypondOahGroup->getHeaderMeter ();
 
   if (meterFromOption.size ()) {
       nameValuePairsList.push_back (
@@ -640,12 +640,15 @@ void msr2lpsrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
 void msr2lpsrTranslator::displayOnGoingNotesStack (
   const string& context)
 {
-  unsigned int onGoingNotesStackSize = fOnGoingNotesStack.size ();
+  size_t onGoingNotesStackSize = fOnGoingNotesStack.size ();
 
   gLogStream <<
     endl <<
     ">>++++++++++++++++ " <<
-    "The on-going notes stack contains " << onGoingNotesStackSize << " elements:" <<
+    "The on-going notes stack contains " <<
+    onGoingNotesStackSize <<
+    " elements" <<
+    " (" << context << "):" <<
     endl;
 
   if (onGoingNotesStackSize) {
@@ -5009,8 +5012,12 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
   // register clone in this tranlastors' voice notes map and ongoing notes stack
   fVoiceNotesMap [elt] = noteClone; // JMI XXL
   fOnGoingNotesStack.push_front (noteClone);
-abort ();
-  displayOnGoingNotesStack ("visitStart (S_msrNote&)");
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceNotesDetails ()) { // JMI
+    displayOnGoingNotesStack ("visitStart (S_msrNote&)");
+  }
+#endif
 
   // don't register grace notes as the current note clone,
   // but as the current grace note clone instead
@@ -7186,11 +7193,11 @@ void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
   }
 
   // is there a meter?
-  if (gGlobalLpsr2lilypondOahGroup->getMeter ().size ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getHeaderMeter ().size ()) {
     // define meter
     fCurrentLpsrScoreHeader->
       setLilypondMeter (
-        gGlobalLpsr2lilypondOahGroup->getMeter ());
+        gGlobalLpsr2lilypondOahGroup->getHeaderMeter ());
   }
 
   // is there a tagline?

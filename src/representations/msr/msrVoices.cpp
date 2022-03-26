@@ -2899,7 +2899,7 @@ void msrVoice::appendChordToVoice (S_msrChord chord)
       chord->
         getChordNotesVector ();
 
-  unsigned int chordNotesVectorSize =
+  size_t chordNotesVectorSize =
     chordNotesVector.size ();
 
   if (chordNotesVectorSize) {
@@ -3424,7 +3424,7 @@ void msrVoice::displayVoiceRepeatsStack (
   int           inputLineNumber,
   const string& context)
 {
-  unsigned int repeatDescrsStackSize =
+  size_t repeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
   gLogStream <<
@@ -3478,7 +3478,7 @@ void msrVoice::displayVoiceRepeatsStackSummary (
   int           inputLineNumber,
   const string& context)
 {
-  unsigned int repeatDescrsStackSize =
+  size_t repeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
   gLogStream <<
@@ -3589,7 +3589,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 
 // v0.9.62
 //   // print the voice measures flat list
-//   unsigned int voiceMeasuresFlatListSize =
+//   size_t voiceMeasuresFlatListSize =
 //     fVoiceMeasuresFlatList.size ();
 //
 //   os <<
@@ -3636,7 +3636,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 
 void msrVoice::displayVoiceMeasuresFlatList () const
 {
-  unsigned int voiceMeasuresFlatListSize =
+  size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();
 
   const int fieldWidth = 7;
@@ -8253,7 +8253,7 @@ void msrVoice::handleHookedRepeatEndingEndInVoice (
   ++gIndenter;
 
 /* JMI
-        unsigned int voicerepeatDescrsStackSize =
+        size_t voicerepeatDescrsStackSize =
           fVoicePendingRepeatDescrsStack.size ();
 */
 
@@ -9825,7 +9825,7 @@ void msrVoice::finalizeVoice (
   }
 
   // are there pending repeats in the voice repeats stack???
-  unsigned int voicePendingRepeatDescrsStackSize =
+  size_t voicePendingRepeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
   if (voicePendingRepeatDescrsStackSize) {
@@ -9975,7 +9975,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
   }
 
   // are there pending repeats in the voice repeats stack???
-  unsigned int voicePendingRepeatDescrsStackSize =
+  size_t voicePendingRepeatDescrsStackSize =
     fVoicePendingRepeatDescrsStack.size ();
 
   if (voicePendingRepeatDescrsStackSize) {
@@ -10081,7 +10081,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
   msrBeamKind beamKind   = beam->getBeamKind ();
   int         beamNumber = beam->getBeamNumber ();
 
-  unsigned int
+  size_t
     noteBeamNumbersStackSize =
       fVoiceBeamNumbersStack.size ();
 
@@ -10687,7 +10687,7 @@ void msrVoice::print (ostream& os) const
   displayVoiceMeasuresFlatList ();
 
   // print the voice initial elements
-  unsigned int voiceInitialElementsListSize =
+  size_t voiceInitialElementsListSize =
     fVoiceInitialElementsList.size ();
 
   os <<
@@ -10813,7 +10813,7 @@ void msrVoice::printShort (ostream& os) const
 #endif
 
   // print the voice initial elements
-  unsigned int voiceInitialElementsListSize =
+  size_t voiceInitialElementsListSize =
     fVoiceInitialElementsList.size ();
 
   os <<

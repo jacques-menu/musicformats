@@ -313,7 +313,7 @@ string bsrMeasure::asDebugString () const // JMI
 
   s << "{";
 
-  unsigned int measureElementsListSize = fMeasureLineElementsList.size ();
+  size_t measureElementsListSize = fMeasureLineElementsList.size ();
 
   if (measureElementsListSize) {
     list<S_bsrLineContentsElement>::const_iterator
@@ -369,7 +369,7 @@ void bsrMeasure::print (ostream& os) const
   os << endl;
 
   // print the measure elements if any
-  unsigned int measureElementsListSize = fMeasureLineElementsList.size ();
+  size_t measureElementsListSize = fMeasureLineElementsList.size ();
 
   if (measureElementsListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
     os <<

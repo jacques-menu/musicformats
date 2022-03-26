@@ -249,7 +249,7 @@ void bsrTranscriptionNotes::print (ostream& os) const
   // print the notes if any
   const int fieldWidth = 19;
 
-  unsigned int transcriptionNotesElementsListSize =
+  size_t transcriptionNotesElementsListSize =
     fTranscriptionNotesElementsList.size ();
 
   if (transcriptionNotesElementsListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {

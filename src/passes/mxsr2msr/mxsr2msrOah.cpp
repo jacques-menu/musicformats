@@ -114,7 +114,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -546,7 +546,7 @@ R"()",
 
   fIgnorePartIDAtom =
     oahStringSetElementAtom::create (
-      "ignore-musicxml-part-id", "mompi",
+      "ignore-musicxml-part-id", "imxmlpi",
 R"(Ignore the part with ID PART_ID, which is a string.
 There can be several occurrences of this option.
 All the parts not ignored are kept.
@@ -564,14 +564,14 @@ This option is incompatible with '-mkpi, -msr-keep-musicxml-part-id'.)",
 
   fIgnorePartNameAtom =
     oahStringSetElementAtom::create (
-      "ignore-musicxml-part-name", "mompn",
+      "ignore-musicxml-part-name", "imxmlpn",
 R"(Ignore the part named PART_NAME, which is a string.
 There can be several occurrences of this option.
 All the parts not ignored are kept.
 This option is incompatible with '-mkpn, -msr-keep-musicxml-part-name'.)",
       "PART_NAME",
-      "fPartsIgnoreNameSet",
-      fPartsIgnoreNameSet);
+      "fMusicXMLMusicXMLPartsIgnoreNameSet",
+      fMusicXMLMusicXMLPartsIgnoreNameSet);
 
   subGroup->
     appendAtomToSubGroup (
@@ -582,14 +582,14 @@ This option is incompatible with '-mkpn, -msr-keep-musicxml-part-name'.)",
 
   fKeepPartIDAtom =
     oahStringSetElementAtom::create (
-      "keep-musicxml-part-id", "mkmpi",
+      "keep-musicxml-part-id", "kmxmlpi",
 R"(Keep the part with ID PART_ID, which is a string.
 There can be several occurrences of this option.
 All the parts not kept are ignored.
 This option is incompatible with '-mopi, -msr-ignore-musicxml-part-id'.)",
       "PART_ID",
-      "fPartsKeepIDSet",
-      fPartsKeepIDSet);
+      "fMusicXMLPartsKeepIDSet",
+      fMusicXMLPartsKeepIDSet);
 
   subGroup->
     appendAtomToSubGroup (
@@ -600,14 +600,14 @@ This option is incompatible with '-mopi, -msr-ignore-musicxml-part-id'.)",
 
   fKeepPartNameAtom =
     oahStringSetElementAtom::create (
-      "keep-musicxml-part-name", "mkmpn",
+      "keep-musicxml-part-name", "kmxmlpn",
 R"(Keep the part named PART_NAME, which is a string.
 There can be several occurrences of this option.
 All the parts not kept are ignored.
 This option is incompatible with '-mopn, -msr-ignore-musicxml-part-name'.)",
       "PART_NAME",
-      "fPartsKeepNameSet",
-      fPartsKeepNameSet);
+      "fMusicXMLPartsKeepNameSet",
+      fMusicXMLPartsKeepNameSet);
 
   subGroup->
     appendAtomToSubGroup (
@@ -777,7 +777,7 @@ where MEASURE_NUMBER is a string, and NUMBER_OF_MEASURES_TO_ADD is the number
 of empty measures to add after measure MEASURE_NUMBER.
 MEASURE_NUMBER should be the number of an existing, empty measure,
 and NUMBER_OF_MEASURES_TO_ADD should be at least 1, , such as '17:3'.
-There can be spaces around the ':'.
+There can be spaces around the ':', in which case quoting is needed.
 This comes in handly when MusicXML data obtained by scanning contains
 a single empty measure when there were several in the original score,
 but for other needs too.
@@ -799,7 +799,7 @@ where MEASURE_NUMBER is a string, and NUMBER_OF_MEASURES_TO_ADD is the number
 of empty measures to add after measure MEASURE_NUMBER.
 MEASURE_NUMBER should be the number of an existing, empty measure,
 and NUMBER_OF_MEASURES_TO_ADD should be at least 1, , such as '17:3'.
-There can be spaces around the ':'.
+There can be spaces around the ':', in which case quoting is needed.
 This comes in handly when MusicXML data obtained by scanning contains
 a single empty measure when there were several in the original score.
 This option can be used any number of times.)###",
@@ -1454,7 +1454,7 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 
   // JMI and if mixed ID and name options are used?
 
-  if (fPartsIgnoreIDSet.size () > 0 && fPartsKeepIDSet.size () > 0) {
+  if (fPartsIgnoreIDSet.size () > 0 && fMusicXMLPartsKeepIDSet.size () > 0) {
     stringstream s;
 
     s <<
@@ -1467,7 +1467,7 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
     oahError (s.str ());
   }
 
-  if (fPartsIgnoreNameSet.size () > 0 && fPartsKeepNameSet.size () > 0) {
+  if (fMusicXMLMusicXMLPartsIgnoreNameSet.size () > 0 && fMusicXMLPartsKeepNameSet.size () > 0) {
     stringstream s;
 
     s <<
@@ -1899,15 +1899,15 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   gLogStream << left <<
     setw (valueFieldWidth) << "parts kept IDs" << " : ";
 
-  if (! fPartsKeepIDSet.size ()) {
+  if (! fMusicXMLPartsKeepIDSet.size ()) {
     gLogStream <<
       "none";
   }
   else {
     for (
       set<string> ::const_iterator i =
-        fPartsKeepIDSet.begin ();
-      i != fPartsKeepIDSet.end ();
+        fMusicXMLPartsKeepIDSet.begin ();
+      i != fMusicXMLPartsKeepIDSet.end ();
       ++i
   ) {
         gLogStream <<
@@ -1920,15 +1920,15 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   gLogStream << left <<
     setw (valueFieldWidth) << "parts ignored names" << " : ";
 
-  if (! fPartsIgnoreNameSet.size ()) {
+  if (! fMusicXMLMusicXMLPartsIgnoreNameSet.size ()) {
     gLogStream <<
       "none";
   }
   else {
     for (
       set<string> ::const_iterator i =
-        fPartsIgnoreNameSet.begin ();
-      i != fPartsIgnoreNameSet.end ();
+        fMusicXMLMusicXMLPartsIgnoreNameSet.begin ();
+      i != fMusicXMLMusicXMLPartsIgnoreNameSet.end ();
       ++i
   ) {
         gLogStream <<
@@ -1941,15 +1941,15 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   gLogStream << left <<
     setw (valueFieldWidth) << "parts kept names" << " : ";
 
-  if (! fPartsKeepNameSet.size ()) {
+  if (! fMusicXMLPartsKeepNameSet.size ()) {
     gLogStream <<
       "none";
   }
   else {
     for (
       set<string> ::const_iterator i =
-        fPartsKeepNameSet.begin ();
-      i != fPartsKeepNameSet.end ();
+        fMusicXMLPartsKeepNameSet.begin ();
+      i != fMusicXMLPartsKeepNameSet.end ();
       ++i
   ) {
         gLogStream <<

@@ -168,7 +168,7 @@ msrPartGroup::msrPartGroup (
 
   fPartGroupName            = partGroupName;
 
-  unsigned int partGroupNameLength =
+  size_t partGroupNameLength =
     fPartGroupName.size ();
 
   if (
@@ -237,7 +237,7 @@ msrPartGroup::msrPartGroup (
 
   fPartGroupName            = partGroupName;
 
-  unsigned int partGroupNameLength =
+  size_t partGroupNameLength =
     fPartGroupName.size ();
 
   if (
@@ -393,7 +393,7 @@ void msrPartGroup::setPartGroupInstrumentName (
     score =
       fPartGroupScoreUpLink;
 
-  unsigned int partGroupInstrumentNameLength =
+  size_t partGroupInstrumentNameLength =
     fPartGroupInstrumentName.size ();
 
   if (
@@ -1102,7 +1102,7 @@ void msrPartGroup::print (ostream& os) const
   os << endl;
 
   // print all the voices if any
-  unsigned int partGroupAllVoicesListSize =
+  size_t partGroupAllVoicesListSize =
     fPartGroupAllVoicesList.size ();
 
   os << left <<

@@ -896,7 +896,7 @@ void msdlScanner::acceptAName ()
 
   // accept all alphanumeric characters, the first character is available
 
-  unsigned int
+  size_t
     nameStartPositionInInput =
       fCurrentTokenPositionInInput;
 
@@ -1072,7 +1072,7 @@ void msdlScanner::acceptAnInteger ()
 {
   // accept digits sequence, the first digit is available
 
-  unsigned int
+  size_t
     integerStartPositionInInput =
       fCurrentTokenPositionInInput;
 
@@ -1145,7 +1145,7 @@ void msdlScanner::acceptAString ()
   // accept all the string characters
   // we're on the initial double quote
 
-  unsigned int
+  size_t
     stringStartPositionInInput =
       fCurrentTokenPositionInInput;
 
