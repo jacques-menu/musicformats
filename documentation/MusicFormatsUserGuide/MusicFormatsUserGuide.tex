@@ -71,12 +71,14 @@
 % -------------------------------------------------------------------------
 
 %%%JMI
+
 %\makeatletter
 %\let\Chapter@Original=\chapter
-%
 %\renewcommand{\chapter}{%
-%	\tiny%
-%	\Chapter@Original%
+%	{%
+%		\tiny%
+%  	\Chapter@Original%
+%	}%
 %	\normalsize%
 %}
 %\makeatother
@@ -254,7 +256,7 @@ What xml2ly does:
 \part{The MusicFormats Scripting Language (MFSL)}
 % -------------------------------------------------------------------------
 
-\subimport{./}{MFSL.tex}
+\subimport{./}{theMFSLLanguage.tex}
 
 
 % -------------------------------------------------------------------------

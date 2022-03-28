@@ -59,7 +59,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Hell
 \chapter{Redirecting the output and error messages to files}
 % -------------------------------------------------------------------------
 
-By default, the standard output and error streams are directed to the terminal in which the \xmlToLy\ command has been submitted.
+By default, \standardInput\ and \standardOutput\ are directed to the terminal in which the \xmlToLy\ command has been submitted.
 
 Let's consider the case of \gitmxmlfile{basic/UnknownMaintainerIdentification.xml}:
 \begin{lstlisting}[language=Lilypond]
@@ -140,11 +140,11 @@ Part_POne_Staff_One_Voice_One = \absolute {
 Warning message(s) were issued for input line 11
 \end{lstlisting}
 
-The standard output and error streams are merged into the terminal window, which may not be satisfactory.
+The \standardOutput\ and \standardError\ are merged into the terminal window, which may not be satisfactory.
 This behaviour can be changed using the shell's redirection operators:
 \begin{itemize}
-\item \code{>}: redirects the standard output stream to a file;
-\item \code{2>}: redirects the standard error stream to a file.
+\item \code{>}: redirects \standardOutput\ to a file;
+\item \code{2>}: redirects \standardError\ to a file.
 \end{itemize}
 
 Thus, after executing:

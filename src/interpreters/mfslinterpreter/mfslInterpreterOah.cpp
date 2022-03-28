@@ -125,19 +125,21 @@ R"(Write MFSL options analysis activity to standard output.)",
   subGroup->
     appendAtomToSubGroup (
       oahTwoBooleansAtom::create (
-        "no-launch", "nl",
-R"(Don't launch the tool. This is useful to check the options collected by
-the MFSL interpreter, and what command(s) would be launched.
-This option implies the '-trace-tool-and-input, -ttai' option.)",
+        "no-launch", "nol",
+R"(Analyze the MFSL script, but don't launch the tool actually.
+This is useful to check the options gathered by the MFSL interpreter,
+and what command(s) would be launched.
+This option implies the '-display-tool-and-input, -ttai' option.)",
         "fNoLaunch",
         fNoLaunch,
         fDisplayToolAndInputAtom));
 
   fGenerateChoiceToLabelsMapAtom =
     oahStringToStringMapElementAtom::create (
-      "only", "",
-R"(Select only Choice for NAME, generating a as many scores.)",
-      "CHOIXCES:VALUE",
+      "select", "sel",
+R"(Select LABEL for choice CHOICE.
+The tool will be run once using the corresponding options block(s).)",
+      "CHOICE:LABEL",
       "fGenerateChoiceToLabelsMap",
       fGenerateChoiceToLabelsMap);
 
@@ -148,7 +150,8 @@ R"(Select only Choice for NAME, generating a as many scores.)",
   fGenerateScoresForAllChoiceAtom =
     oahStringAtom::create (
       "all", "",
-R"(Write a trace of the MFSL scanning by Flex-generated code to standard error.)",
+R"(Select each label for choice CHOICE in turn.
+The tool will be run as many times, using the corresponding options block(s).)",
       "CHOICE",
       "fGenerateScoresForAllChoice",
       fGenerateScoresForAllChoice);
@@ -189,7 +192,7 @@ R"(Write MFSL choice analysis activity to standard output.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "trace-choice-statements", "tChoice",
+        "trace-choice-statements", "tchoicesstats",
 R"(Write MFSL choice statements handling activity to standard output.)",
         "fTraceChoiceStatements",
         fTraceChoiceStatements));
@@ -205,7 +208,7 @@ R"(Write MFSL case statements handling activity to standard output.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "trace-optons-blocks", "toblocks",
+        "trace-options-blocks", "toblocks",
 R"(Write MFSL options blocks analysis activity to standard output.)",
         "fTraceOptionsBlocks",
         fTraceOptionsBlocks));

@@ -12,7 +12,7 @@ OAH is a powerful way of representating the options together with the correspond
 \item more important still, the re-use of options whenever translators are combined into converters could only be achieved with an object oriented handling of the options and help.
 \end{itemize}
 
-The output of the help  goes to standard output, so that the user can pipe it into a {\tt more} or {\tt less} command.
+The output of the help  goes to \standardOutput, so that the user can pipe it into a {\tt more} or {\tt less} command.
 
 
 % -------------------------------------------------------------------------
@@ -1170,7 +1170,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
           "\" is null";
 
         oahInternalError (s.str ());
-        
+
   // ... ... ...
 }
 \end{lstlisting}
@@ -1295,7 +1295,9 @@ In order to make a new option available, one should:
 \item create a suitable atom and append it to the desired \oahRepr\ subgroup;
 \item check the use of the atom wherever needed in the code base;
 \item add the new atom's long name to the corresponding \regular\ \oahRepr\ group;
-\item and last but not least \dots\ test the result.
+\item and last but not least\dots\ test the result.
+
+			This should be done first with the \optionNameBoth{insider}{ins} option, and then without it to ensure that the \regular\ OAH handler knows the new option too.
 \end{itemize}
 
 

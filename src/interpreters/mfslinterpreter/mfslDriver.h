@@ -57,15 +57,19 @@ class mfslDriver
     string			          getToolName () const
                               { return fToolName; }
 
-    void  			          setInputFileName (string inputFileName);
+    void  			          setInputSouceName (string inputSouceName);
 
-    string			          getInputFileName () const
-                              { return fInputFileName; }
+    string			          getInputSouceName () const
+                              { return fInputSouceName; }
 
     bool				          getTraceScanning () const
                               { return fTraceScanning; }
 
-    yy::location&         getScannerLocation ()
+    const yy::location&   getScannerLocation () const
+                            // no const here
+                            // due to Flex-generated code constraints
+                              { return fScannerLocation; }
+    yy::location&         getScannerLocationToModify ()
                             // no const here
                             // due to Flex-generated code constraints
                               { return fScannerLocation; }
@@ -99,7 +103,7 @@ class mfslDriver
     bool				          getNoLaunch () const
                               { return fNoLaunch; }
 
-    S_mfslChoicesTable  getChoicesTable () const
+    S_mfslChoicesTable    getChoicesTable () const
                               { return fChoicesTable; }
 
   public:
@@ -108,7 +112,7 @@ class mfslDriver
     // ------------------------------------------------------
 
     // run the parser, return 0 on success
-    int                   parseInput ();
+    int                   parseInput_Pass1 ();
 
     // handling the scanner
     void                  scanBegin ();
@@ -150,19 +154,21 @@ class mfslDriver
                             const string& context) const;
 
     // launching the MFSL tool
-    void                  setOnlyLabelForToolLaunching (
+    void                  setSelectLabelForToolLaunching (
                             const string& choiceName,
                             const string& label);
 
     void                  setAllChoicesOptionsBlockForToolLaunching (
                             const string& choiceName);
 
-    mfMusicformatsError   launchMfslTool ();
+    mfMusicformatsError   launchMfslTool_Pass2 ();
 
   private:
 
     // private methods
     // ------------------------------------------------------
+
+    void                  populateTheCommandsList ();
 
   private:
 
@@ -175,8 +181,8 @@ class mfslDriver
     // the name of the MusicFormats tool
 		string                fToolName;
 
-    // the name of the file being parsed
-    string                fInputFileName;
+    // the name of the input being parsed
+    string                fInputSouceName;
 
     // scanning
     bool                  fTraceScanning;
@@ -210,17 +216,19 @@ class mfslDriver
     map<string, string>   fOptionsSuppliedChoicesLabelsMap;
     set<string>           fUnusedOptionsSuppliedChoicesSet;
 
-    // case statements stack
+    // case statements
+    int                   fCaseStatementsNumber;
     list<S_mfslCaseStatement>
                           fCaseStatementsStack;
 
     // options blocks
-    list<S_mfslOptionsBlock>   fOptionsBlocksStack;
+    list<S_mfslOptionsBlock>
+                          fOptionsBlocksStack;
 
-    S_mfslOptionsBlock         fMainOptionsBlock;
+    S_mfslOptionsBlock    fMainOptionsBlock;
 
     // tool launching
-    S_mfslOptionsBlock         fOptionsBlockToUseForOnlyLaunching;
+    S_mfslOptionsBlock    fOptionsBlockToUseForSelectLaunching;
 
     S_mfslChoice          fChoiceToUseForAllLaunching;
 

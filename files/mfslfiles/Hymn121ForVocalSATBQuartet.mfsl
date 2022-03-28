@@ -1,23 +1,20 @@
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
 
 ###
-  This MFSL script contain s:
+  This MFSL script contains:
     - a tool specification, telling which MusicFormats tool
       to use, here xml2ly;
 
-    - an input specification, the input source to apply
-      the latter to, here file name "Hymn121.xml";
+    - an input specification, the input source to apply the latter to,
+      here file name "Hymn121.xml";
 
-    - any number of MusicFormats options;
+    - a number of MusicFormats options;
 
-    - a SCORE choice specifications telling the possible scores
-      that can be generated with this script;
+    - a SCORE choice specification containing 5 label,
+      each telling which options to use
+      to get a score generated with this script and xml2ly/LilyPond;
 
-    - a 'set' specification to choose one such SCORE among the possible ones;
-
-    - a 'case' specification stating the options to be used
-      when running xml2ly to obtain the chosen SCORE,
-      in complement to the ones appearing before the case specfication.
+    - a 'select' specification to choose one such SCORE label;
 ###
 
 
@@ -36,14 +33,14 @@ input : "Hymn121.xml"
 
 
 # ----------------------------------------------------------
-# the commmon options
+# some commmon options
 # ----------------------------------------------------------
 
 # header
-  -title "Hymn 121 - Angels From The Realms Of Glory - Vocal quartet"
+  -title "Hymn 121 - Angels From The Realms Of Glory"
 
 # display
-  -display-options-values
+#   -display-options-values
 
 # LilyPond
   -lilypond-generation-infos
@@ -53,48 +50,50 @@ input : "Hymn121.xml"
 
 
 # ----------------------------------------------------------
-# the SCORE Choice
-# ----------------------------------------------------------
-
 # the labels for the SCORE choice
+# ----------------------------------------------------------
 
-choice SCORE : tutti | soprano | alto | tenor | bass ;
-  # choose names that matches the intent,
-  # uppercase to emphasize is a matter of taste
+# choose names that match the intent,
+# uppercase to emphasize a choice name is a matter of taste
+
+choice SCORE :
+  tutti | soprano | alto | tenor | bass,
+
+  default: tutti
+;
 
 
 # ----------------------------------------------------------
-# SCORE specific options
+# tell which options are to be used depending on SCORE labels
 # ----------------------------------------------------------
 
 case SCORE :
 	tutti:
-	  -output-file-name "Hymn121_tutti.ly"
+	  -output-file-name "Hymn121_SATB_tutti.ly"
 
     -global-staff-size 17.675
     -subtitle "Tutti"
   ;
 
 	soprano:
-	  -output-file-name "Hymn121_soprano.ly"
+	  -output-file-name "Hymn121_SATB_soprano.ly"
 
     -subtitle "Soprano"
     -keep-musicxml-part-id P1
     -msr-rename-part "P1:soprano"
 
-#     -instrument "Soprano"
     -display-lpsr-short
   ;
 
 	alto:
-	  -output-file-name "Hymn121_alto.ly"
+	  -output-file-name "Hymn121_SATB_alto.ly"
 
     -subtitle "Alto"
     -keep-musicxml-part-id P2
   ;
 
 	tenor:
-	  -output-file-name "Hymn121_tenor.ly"
+	  -output-file-name "Hymn121_SATB_tenor.ly"
 
     -subtitle "Tenor"
     -keep-musicxml-part-id P3
@@ -103,7 +102,7 @@ case SCORE :
   ;
 
 	bass:
-	  -output-file-name "Hymn121_bass.ly"
+	  -output-file-name "Hymn121_SATB_bass.ly"
 
     -subtitle "Bass"
     -keep-musicxml-part-id P4
@@ -114,23 +113,27 @@ case SCORE :
 
 
 # ----------------------------------------------------------
-# create only one SCORE or all of them
+# select a particular SCORE label to generate the corresponding score
 # ----------------------------------------------------------
 
 ###
-  The 'only' and 'all' statements below provide default settings.
-  They can be overriddenv by options to the MFSL interpreter, such as:
-    -only SCORE:tenor
+  The 'select' statements below override
+  the default "tutti" label setting in the 'choice' statement.
+
+  Comment/uncomment them to select either the SCORE to be generated
+
+  They can also be overridden by options to the MFSL interpreter, such as:
+    -select SCORE:tenor
   or:
     -all SCORE
-
-  Comment/uncomment them to select either one SCORE only or all of them
 ###
 
+# select SCORE : tuttisfg ; # superflous actually
+# select SCORE : soprano ;
+# select SCORE : alto ;
+# select SCORE : tenor ;
+# select SCORE : bass ;
 
-# generate a particular SCORE
-only SCORE : tenor ;
-
-
-# generate all the SCORE possibilities in a single step
 # all SCORE ;
+
+#

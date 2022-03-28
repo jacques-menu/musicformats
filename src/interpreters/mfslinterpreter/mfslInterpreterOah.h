@@ -206,7 +206,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     Bool                  fTraceOptionsBlocks;
 
-    // only
+    // select
     map<string, string>   fGenerateChoiceToLabelsMap;
     S_oahStringToStringMapElementAtom
                           fGenerateChoiceToLabelsMapAtom;

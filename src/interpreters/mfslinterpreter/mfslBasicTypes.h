@@ -104,16 +104,6 @@ typedef SMARTP<mfslOptionsBlock> S_mfslOptionsBlock;
 EXP ostream& operator<< (ostream& os, const S_mfslOptionsBlock& elt);
 
 //______________________________________________________________________________
-enum class mfslChoiceKind {
-  kChoiceChoice,
-  kChoicePath
-};
-
-string mfslChoiceKindAsString (
-  mfslChoiceKind choiceKind);
-
-ostream& operator<< (ostream& os, const mfslChoiceKind& elt);
-
 enum class mfslChoiceLabelKind {
   kChoiceLabelNone,
   kChoiceLabelOptionSupplied,
@@ -134,8 +124,7 @@ class EXP mfslChoice : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfslChoice> create (
-                            const string&   choiceName,
-                            mfslChoiceKind choiceKind);
+                            const string& choiceName);
 
   protected:
 
@@ -143,8 +132,7 @@ class EXP mfslChoice : public smartable
     // ------------------------------------------------------
 
                           mfslChoice (
-                            const string&   choiceName,
-                            mfslChoiceKind choiceKind);
+                            const string& choiceName);
 
     virtual               ~mfslChoice ();
 
@@ -156,8 +144,8 @@ class EXP mfslChoice : public smartable
     string                getChoiceName () const
                               { return fChoiceName; }
 
-    mfslChoiceKind        getChoiceKind () const
-                              { return fChoiceKind; }
+    void                  setChoiceLabelSuppliedByAnOption (
+                            const string& label);
 
     void                  selectChoiceLabel (
                             const string& label,
@@ -175,12 +163,18 @@ class EXP mfslChoice : public smartable
     const set<string>&    getLabelsSet () const
                               { return fLabelsSet; }
 
-    S_mfslOptionsBlock         getChoiceOptionsBlockForLabel (
-                            const string& label) // no const here
-                              {
-                                return
-                                  fChoiceLabelsToOptionsBlocksMap [label];
-                              }
+    string                getChoiceDefaultLabel () const
+                              { return fChoiceDefaultLabel; }
+
+    S_mfslOptionsBlock    getChoiceOptionsBlockForLabel (
+                            const string& label,
+                            mfslDriver&   drv) const;
+
+    void                  setChoiceIsUsedInCaseStatements ()
+                              { fChoiceIsUsedInCaseStatements = true; }
+
+    Bool                  getChoiceIsUsedInCaseStatements () const
+                              { return fChoiceIsUsedInCaseStatements; }
 
   public:
 
@@ -192,8 +186,12 @@ class EXP mfslChoice : public smartable
                             mfslDriver&   drv);
 
     void                  enrichLabelOptionsBlock (
-                            const string& label,
+                            const string&      label,
                             S_mfslOptionsBlock optionsBlock);
+
+    void                  registerChoiceDefaultLabel (
+                            const string& label,
+                            mfslDriver&   drv);
 
   public:
 
@@ -215,12 +213,15 @@ class EXP mfslChoice : public smartable
     // ------------------------------------------------------
 
     string                fChoiceName;
-    mfslChoiceKind        fChoiceKind;
 
     string                fChoiceLabel;
     mfslChoiceLabelKind   fChoiceLabelKind;
 
     set<string>           fLabelsSet;
+
+    string                fChoiceDefaultLabel;
+
+    Bool                  fChoiceIsUsedInCaseStatements;
 
     map<string, S_mfslOptionsBlock>
                           fChoiceLabelsToOptionsBlocksMap;
@@ -261,16 +262,19 @@ class EXP mfslChoicesTable : public smartable
     // public services
     // ------------------------------------------------------
 
-    S_mfslChoice          createAndInsertChoice (
-                            const string&    choiceName,
-                            mfslChoiceKind choiceKind);
+    void                  addChoice (
+                            S_mfslChoice choice,
+                            mfslDriver&  drv);
 
     S_mfslChoice          lookupChoiceByName (
-                            const string& choiceName);
+                            const string& name);
 
     S_mfslChoice          fetchChoiceByName (
-                            const string& choiceName,
-                            mfslDriver&   drv);
+                            const string&     name,
+                            const mfslDriver& drv);
+    S_mfslChoice          fetchChoiceByNameToMofidy (
+                            const string&    name,
+                            const mfslDriver drv);
 
   public:
 
@@ -361,9 +365,11 @@ class EXP mfslCaseStatement : public smartable
 
     S_mfslChoice          fCaseChoice;
 
+    set<string>           fCaseLabelsSet;
     list<string>          fCaseCurrentLabelsList;
 
     // checking unused labels
+    set<string>           fUsedLabels;
     set<string>           fCaseUnusedLabels;
 };
 typedef SMARTP<mfslCaseStatement> S_mfslCaseStatement;

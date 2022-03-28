@@ -86,11 +86,11 @@ S_mfslChoice pCurrentChoiceChoice;
   INPUT      "input"
 
   CHOICE    "choice"
-//   SELECT    "select"
+  DEFAULT   "default"
 
   CASE       "case"
 
-  ONLY       "only"
+  SELECT     "select"
   ALL        "all"
 ;
 
@@ -151,7 +151,7 @@ Script :
         S_mfslOptionsBlock
           mainOptionsBlock =
             mfslOptionsBlock::create (
-              "Main optionsBlock");
+              "Main options block");
 
         // push it onto the stack
         drv.optionsBlocksStackPush (
@@ -172,7 +172,7 @@ Script :
         --gIndenter;
       }
 
-  OptionalOnlyOrAllStatement
+  OptionalSelectOrAllStatement
 ;
 
 
@@ -211,12 +211,12 @@ Tool
 Input
   : INPUT COLON NAME
       {
-        drv.setInputFileName ($3);
+        drv.setInputSouceName ($3);
       }
 
   | INPUT COLON String
       {
-        drv.setInputFileName ($3);
+        drv.setInputSouceName ($3);
       }
 ;
 
@@ -238,7 +238,6 @@ ScriptElementsSeq
 ScriptElement
   : Option
   | ChoiceDeclaration
-//   | ChoiceSelection
   | CaseStatement
 ;
 
@@ -322,17 +321,47 @@ ChoiceDeclaration
             endl;
         }
 
+        // create a choice
         S_mfslChoice
           choice =
-            drv.getChoicesTable ()->
-              createAndInsertChoice (
-                choiceName,
-                mfslChoiceKind::kChoiceChoice);
+             mfslChoice::create (
+               choiceName);
+
+        // add it to the driver's choices table
+        drv.getChoicesTable ()->
+          addChoice (
+            choice,
+            drv);
 
         pCurrentChoiceChoice = choice;
       }
 
-    ChoiceLabels SEMICOLON
+    ChoiceLabels
+
+    COMMA
+
+    DEFAULT COLON NAME
+      {
+        string
+          choiceName = $2,
+          label      = $9;
+
+        // fetch the voice in the choices table
+        S_mfslChoice
+          choice =
+            drv.getChoicesTable ()->
+              fetchChoiceByName (
+                choiceName,
+                drv);
+
+        // register label as the default label in this choice
+        choice->
+          registerChoiceDefaultLabel (
+            label,
+            drv);
+      }
+
+    SEMICOLON
       {
         if (drv.getTraceChoiceStatements ()) {
           gLogStream <<
@@ -421,21 +450,24 @@ CaseStatement
 
         // create a new current case statement
         S_mfslChoicesTable
-          ChoicesTable =
+          choicesTable =
             drv.getChoicesTable ();
 
         S_mfslChoice
           choice =
-            ChoicesTable->
-              lookupChoiceByName (
-                choiceName);
+            choicesTable->
+              fetchChoiceByName (
+                choiceName,
+                drv);
 
         if (! choice) {
           stringstream s;
 
           s <<
-            "choiceName \"" << choiceName <<
-            "\" is no choice name";
+            "name \"" << choiceName <<
+            "\" is no choice name, cannot be used in a 'select' statement" <<
+            ", line " << drv.getScannerLocation () <<
+            endl;
 
           mfslError (
             s.str (),
@@ -450,6 +482,10 @@ CaseStatement
         // push it onto the case statements stack
         drv.caseStatementsStackPush (
           caseStatement);
+
+        // mark the choice as used
+        choice->
+          setChoiceIsUsedInCaseStatements ();
       }
 
     OptionalCaseAlternativesSeq SEMICOLON
@@ -561,23 +597,23 @@ CaseAlternative
 ;
 
 
-// only or all statement
+// select or all statement
 //_______________________________________________________________________________
 
-OptionalOnlyOrAllStatement
-  : OnlyStatement
+OptionalSelectOrAllStatement
+  : SelectStatement
   | AllStatement
   |
 ;
 
-OnlyStatement
-  : ONLY NAME COLON NAME SEMICOLON
+SelectStatement
+  : SELECT NAME COLON NAME SEMICOLON
       {
         string
           choiceName = $2,
           label = $4;
 
-        drv.setOnlyLabelForToolLaunching (
+        drv.setSelectLabelForToolLaunching (
           choiceName,
           label);
       }

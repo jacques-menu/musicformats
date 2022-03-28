@@ -43,12 +43,17 @@ EXP int mfExecuteCommand (
 
 #if (WIN32)
 
+//   system (commandAsCString); // JMI
+
   FILE*
     commandOutputStream =
-      _popen (commandAsCString, mode)
+      _popen (commandAsCString, mode);
 
   if (! commandOutputStream) {
-    E_ERROR_SYSTEM ("_popen (%s, %s) failed\n", command, mode);;
+    E_ERROR_SYSTEM (
+      "_popen (%s, %s) failed\n",
+      command,
+      mode);
   }
 
 #else
