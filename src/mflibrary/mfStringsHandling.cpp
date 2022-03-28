@@ -1547,6 +1547,21 @@ Bool mfStringIsInStringSet (
   return result;
 }
 
+void mfStringSetMinusEquals (
+  set<string>&       dest,
+  const set<string>& source)
+{
+  for (string theString : source) {
+    size_t
+      numberOfEraseElements =
+        dest.erase (theString);
+
+    gLogStream <<
+      "numberOfEraseElements: " << numberOfEraseElements <<
+      endl;
+  } // for
+}
+
 string mfStringSetAsString (
   const set<string>& stringSet)
 {
@@ -1595,11 +1610,9 @@ void mfDisplayStringSet (
   ostream&           os)
 {
   // print the title
-  os << title << endl;
-
-  // print the set elements if any
   os << title << ":";
 
+  // print the set elements if any
   size_t stringSetSize =
     stringSet.size ();
 
@@ -1717,11 +1730,9 @@ void mfDisplayStringToStringMap (
   ostream&                   os)
 {
   // print the title
-  os << title << endl;
-
-  // print the set elements if any
   os << title << ":";
 
+  // print the set elements if any
   size_t stringToStringMapSize =
     stringToStringMap.size ();
 

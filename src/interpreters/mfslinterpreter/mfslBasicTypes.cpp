@@ -11,6 +11,8 @@
 
 #include <iomanip>      // setw()), set::precision(), ...
 
+// #include <stddef>       // size_t JMI
+
 #include "mfAssert.h"
 #include "mfBool.h"
 #include "mfStringsHandling.h"
@@ -145,29 +147,6 @@ ostream& operator<< (ostream& os, const S_mfslOptionsBlock& elt)
 }
 
 //_______________________________________________________________________________
-string mfslChoiceKindAsString (
-  mfslChoiceKind choiceKind)
-{
-  string result;
-
-  switch (choiceKind) {
-    case mfslChoiceKind::kChoiceChoice:
-      result = "kChoiceChoice";
-      break;
-    case mfslChoiceKind::kChoicePath:
-      result = "kChoicePath";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator<< (ostream& os, const mfslChoiceKind& elt)
-{
-  os << mfslChoiceKindAsString (elt);
-  return os;
-}
-
 string mfslChoiceLabelKindAsString (
   mfslChoiceLabelKind choiceLabelKind)
 {
@@ -196,23 +175,19 @@ ostream& operator<< (ostream& os, const mfslChoiceLabelKind& elt)
 
 //_______________________________________________________________________________
 S_mfslChoice mfslChoice::create (
-  const string&  choiceName,
-  mfslChoiceKind choiceKind)
+  const string& choiceName)
 {
   mfslChoice* o =
     new mfslChoice (
-      choiceName,
-      choiceKind);
+      choiceName);
   assert (o != nullptr);
   return o;
 }
 
 mfslChoice::mfslChoice (
-  const string&  choiceName,
-  mfslChoiceKind choiceKind)
+  const string& choiceName)
 {
   fChoiceName = choiceName;
-  fChoiceKind = choiceKind;
 
   fChoiceLabelKind =
     mfslChoiceLabelKind::kChoiceLabelNone;
@@ -221,23 +196,22 @@ mfslChoice::mfslChoice (
 mfslChoice::~mfslChoice ()
 {}
 
-// void mfslChoice::setChoiceLabelSuppliedByAnOption (const string& label)
-// {
-//   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
-//     gLogStream <<
-//       "====> Setting the label of " <<
-//       fChoiceKind <<
-//       " choice \"" <<
-//       fChoiceName <<
-//       "\" to \"" <<
-//       label <<
-//       "\", supplied by an option" <<
-//       endl;
-//   }
-//
-//   // no checks here, the labels are not knoown yet
-//   fChoiceLabel = label;
-// }
+void mfslChoice::setChoiceLabelSuppliedByAnOption (
+  const string& label)
+{
+  if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
+    gLogStream <<
+      "====> Setting the label of choice \"" <<
+      fChoiceName <<
+      "\" to \"" <<
+      label <<
+      "\", supplied by an option" <<
+      endl;
+  }
+
+  // no checks here, the labels are not knoown yet
+  fChoiceLabel = label;
+}
 
 void mfslChoice::selectChoiceLabel (
   const string& label,
@@ -245,9 +219,7 @@ void mfslChoice::selectChoiceLabel (
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
     gLogStream <<
-      "====> Setting the label of " <<
-      fChoiceKind <<
-      " choice \"" <<
+      "====> Setting the label of choice \"" <<
       fChoiceName <<
       "\" to \"" <<
       label <<
@@ -265,8 +237,7 @@ void mfslChoice::selectChoiceLabel (
     stringstream s;
 
     s <<
-      fChoiceKind <<
-      " choice \"" <<
+      "choice \"" <<
       fChoiceName <<
       "\" cannot be set to label \"" <<
       label <<
@@ -333,8 +304,7 @@ void mfslChoice::selectChoiceLabel (
         stringstream s;
 
         s <<
-          fChoiceKind <<
-          " choice \"" <<
+          "choice \"" <<
           fChoiceName <<
           " already got label \"" <<
           fChoiceLabel <<
@@ -355,8 +325,7 @@ void mfslChoice::selectChoiceLabel (
         stringstream s;
 
         s <<
-          fChoiceKind <<
-          " choice \"" <<
+          "choice \"" <<
           fChoiceName <<
           "\"" <<
           " already has label \"" <<
@@ -379,8 +348,7 @@ string mfslChoice::getChoiceLabel (mfslDriver& drv) const
         stringstream s;
 
         s <<
-          fChoiceKind <<
-          "getChoiceLabel(): choice \"" <<
+          "choice \"" <<
           fChoiceName <<
           "\" has not got any label";
 
@@ -394,10 +362,9 @@ string mfslChoice::getChoiceLabel (mfslDriver& drv) const
       if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
         gLogStream <<
           "====> " <<
-          fChoiceKind <<
-          " Choice \"" <<
+          " choice \"" <<
           fChoiceName <<
-          ", " <<
+          ", label " <<
           fChoiceLabel <<
           "\", supplied to the script" <<
           endl;
@@ -408,8 +375,7 @@ string mfslChoice::getChoiceLabel (mfslDriver& drv) const
       if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
         gLogStream <<
           "====>" <<
-          fChoiceKind <<
-          "  Choice \"" <<
+          "choice \"" <<
           fChoiceName <<
           "\" has label \"" <<
           fChoiceLabel <<
@@ -430,8 +396,7 @@ string mfslChoice::getChoiceLabelWithoutTrace (mfslDriver& drv) const
         stringstream s;
 
         s <<
-          fChoiceKind <<
-          "getChoiceLabelWithoutTrace(): choice \"" <<
+          "choice \"" <<
           fChoiceName <<
           "\" has not got any label";
 
@@ -449,6 +414,39 @@ string mfslChoice::getChoiceLabelWithoutTrace (mfslDriver& drv) const
   return fChoiceLabel;
 }
 
+S_mfslOptionsBlock mfslChoice::getChoiceOptionsBlockForLabel (
+  const string& label,
+  mfslDriver&   drv) const
+{
+  S_mfslOptionsBlock result;
+
+  // is this label in the choice's labels to options block map?
+  map<string, S_mfslOptionsBlock>::const_iterator
+    it =
+      fChoiceLabelsToOptionsBlocksMap.find (
+        label);
+
+  if (it != fChoiceLabelsToOptionsBlocksMap.end ()) {
+    result = (*it).second;
+  }
+  else {
+    stringstream s;
+
+    s <<
+      "label \"" <<
+      label <<
+      "\" is not known to choice \"" <<
+      fChoiceName <<
+      "\"";
+
+    mfslError (
+      s.str (),
+      drv.getScannerLocation ());
+  }
+
+  return result;
+}
+
 void mfslChoice::addLabel (
   const string& label,
   mfslDriver&   drv)
@@ -463,12 +461,11 @@ void mfslChoice::addLabel (
     stringstream s;
 
     s <<
-      fChoiceKind <<
-      " choice \"" <<
-      fChoiceName <<
-      " label \"" <<
+      "choice label \"" <<
       label <<
-      "\" occurs more that once";
+      "\" occurs more that once in the \"" <<
+      fChoiceName <<
+      "\" choice";
 
     mfslError (
       s.str (),
@@ -481,11 +478,10 @@ void mfslChoice::addLabel (
         "====> Adding label \"" <<
         label <<
         "\"" <<
-        " to " <<
-        fChoiceKind <<
-        " choice \"" <<
+        " to choice \"" <<
         fChoiceName <<
         "\"" <<
+        ", line " << drv.getScannerLocation () <<
         endl;
     }
 
@@ -500,12 +496,19 @@ void mfslChoice::addLabel (
 }
 
 void mfslChoice::enrichLabelOptionsBlock (
-  const string& label,
+  const string&      label,
   S_mfslOptionsBlock optionsBlock)
 {
   S_mfslOptionsBlock
     labelOptionsBlock =
-      fChoiceLabelsToOptionsBlocksMap [label];
+      fChoiceLabelsToOptionsBlocksMap [
+        label];
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    labelOptionsBlock != nullptr,
+    "labelOptionsBlock is null");
 
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
     gLogStream <<
@@ -538,6 +541,43 @@ void mfslChoice::enrichLabelOptionsBlock (
   optionsNameAndValueVectorsPlusEquals (
     labelOptionsBlockOptionsVector,
     optionsBlockOptionsVector);
+}
+
+void mfslChoice::registerChoiceDefaultLabel (
+  const string& label,
+  mfslDriver&   drv)
+{
+  if (! mfStringIsInStringSet (label, fLabelsSet)) {
+    stringstream s;
+
+    s <<
+      "choice label \"" <<
+      label <<
+      "\" is not present in choice \"" <<
+      fChoiceName <<
+      "\"";
+
+    mfslError (
+      s.str (),
+      drv.getScannerLocation ());
+  }
+
+//   if (fChoiceDefaultLabel.size ()) { // JMI
+//     stringstream s;
+//
+//     s <<
+//       "choice label \"" <<
+//       label <<
+//       "\" is not present in choice \"" <<
+//       fChoiceName <<
+//       "\"";
+//
+//     mfslInternalError (
+//       s.str (),
+//       drv.getScannerLocation ());
+//   }
+
+  fChoiceDefaultLabel = label;
 }
 
 string mfslChoice::labelsSetAsString () const
@@ -593,8 +633,6 @@ string mfslChoice::asString () const
   s <<
     "mfslChoice [" <<
     "fChoiceName: " << fChoiceName <<
-    ", " <<
-    "fChoiceKind: " << fChoiceKind <<
     ", " <<
 
     "fChoiceLabel: [" << fChoiceLabel << "]" <<
@@ -654,9 +692,6 @@ void mfslChoice::print (ostream& os) const
     setw (fieldWidth) <<
     "fChoiceName" << " : \"" << fChoiceName << "\"" <<
     endl <<
-    setw (fieldWidth) <<
-    "fChoiceKind" << " : " << fChoiceKind << "" <<
-    endl <<
 
     setw (fieldWidth) <<
     "fChoiceLabelKind" << " : " << fChoiceLabelKind << "" <<
@@ -684,8 +719,13 @@ void mfslChoice::print (ostream& os) const
   }
   os << "]" << endl;
 
+  os << left <<
+    setw (fieldWidth) <<
+    "fChoiceDefaultLabel" << " : \"" << fChoiceDefaultLabel << "\"" <<
+    endl;
+
   size_t
-    ChoiceLabelsToOptionsBlocksMapSize =
+    choiceLabelsToOptionsBlocksMapSize =
       fLabelsSet.size ();
 
   os <<
@@ -693,7 +733,7 @@ void mfslChoice::print (ostream& os) const
     "fChoiceLabelsToOptionsBlocksMap" << " [" <<
     endl;
 
-  if (ChoiceLabelsToOptionsBlocksMapSize) {
+  if (choiceLabelsToOptionsBlocksMapSize) {
 //     int counter = 0;
     for (pair<string, S_mfslOptionsBlock> thePair : fChoiceLabelsToOptionsBlocksMap) {
       string        key = thePair.first;
@@ -704,8 +744,13 @@ void mfslChoice::print (ostream& os) const
 
       ++gIndenter;
 
-      os <<
-        optionsBlock;
+      if (optionsBlock) {
+        os <<
+          optionsBlock;
+      }
+      else {
+        os << "none" << endl;
+      }
 
       --gIndenter;
 
@@ -742,30 +787,45 @@ mfslChoicesTable::mfslChoicesTable ()
 mfslChoicesTable::~mfslChoicesTable ()
 {}
 
-S_mfslChoice mfslChoicesTable::createAndInsertChoice (
-  const string&  choiceName,
-  mfslChoiceKind choiceKind)
+void mfslChoicesTable::addChoice (
+  S_mfslChoice choice,
+  mfslDriver&  drv)
 {
-  S_mfslChoice
-    choice =
-       mfslChoice::create (
-         choiceName,
-         choiceKind);
+  string
+    choiceName =
+      choice->getChoiceName ();
+
+  // is this choiceName in the choice's labels set?
+  map<string, S_mfslChoice>::const_iterator
+    it =
+      fChoicesMap.find (
+        choiceName);
+
+  if (it != fChoicesMap.end ()) {
+    stringstream s;
+
+    s <<
+      "choice \"" <<
+      choiceName <<
+      "\" occurs more that once in the choices table";
+
+    mfslError (
+      s.str (),
+      drv.getScannerLocation ());
+  }
 
   fChoicesMap [choiceName] = choice;
-
-  return choice;
 }
 
 S_mfslChoice mfslChoicesTable::lookupChoiceByName (
-  const string& choiceName)
+  const string& name)
 {
   S_mfslChoice result;
 
   // is this choiceName in the choice's labels set?
   map<string, S_mfslChoice>::const_iterator
     it =
-      fChoicesMap.find (choiceName);
+      fChoicesMap.find (name);
 
   if (it != fChoicesMap.end ()) {
     result = (*it).second;
@@ -775,15 +835,15 @@ S_mfslChoice mfslChoicesTable::lookupChoiceByName (
 }
 
 S_mfslChoice mfslChoicesTable::fetchChoiceByName (
-  const string& choiceName,
-  mfslDriver&   drv)
+  const string&     name,
+  const mfslDriver& drv)
 {
   S_mfslChoice result;
 
   // is this choiceName in the choice's labels set?
   map<string, S_mfslChoice>::const_iterator
     it =
-      fChoicesMap.find (choiceName);
+      fChoicesMap.find (name);
 
   if (it != fChoicesMap.end ()) {
     result = (*it).second;
@@ -793,8 +853,38 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByName (
     stringstream s;
 
     s <<
-      "choice \"" << choiceName <<
-      "\" is unknown";
+      "choice \"" << name <<
+      "\" is unknown in choice table";
+
+    mfslError (
+      s.str (),
+      drv.getScannerLocation ());
+  }
+
+  return result;
+}
+
+S_mfslChoice mfslChoicesTable::fetchChoiceByNameToMofidy (
+  const string&    name,
+  const mfslDriver drv)
+{
+  S_mfslChoice result;
+
+  // is this choiceName in the choice's labels set?
+  map<string, S_mfslChoice>::const_iterator
+    it =
+      fChoicesMap.find (name);
+
+  if (it != fChoicesMap.end ()) {
+    result = (*it).second;
+  }
+
+  else {
+    stringstream s;
+
+    s <<
+      "choice \"" << name <<
+      "\" is unknown in choice table";
 
     mfslError (
       s.str (),
@@ -815,7 +905,7 @@ string mfslChoicesTable::asString () const
   return s.str ();
 }
 
-void mfslChoicesTable::displayChoicesMap (ostream& os) const
+void mfslChoicesTable::displayChoicesMap (ostream& os) const // useless ??? JMI
 {
   os <<
     "mfslChoicesTable [" <<
@@ -915,49 +1005,53 @@ void mfslCaseStatement::registerCaseLabel (
       "\" in case statement: [" <<
       asString () <<
       "]" <<
+      ", line " << drv.getScannerLocation () <<
       endl;
   }
 
-  if (! mfStringIsInStringSet (label, fCaseUnusedLabels)) {
+  set<string>
+    choiceLabelSet =
+      fCaseChoice->
+        getLabelsSet ();
+
+  if (! mfStringIsInStringSet (label, choiceLabelSet)) {
+    // this label has already been registered in this choice
+    stringstream s;
+
+    s <<
+      "label '" <<
+      label <<
+      "' is not known in choice \"" <<
+      fCaseChoice->getChoiceName () <<
+      ", the labels are: " <<
+      fCaseChoice->labelsSetAsString () <<
+      ", line " << drv.getScannerLocation ();
+
+    mfslError (
+      s.str (),
+      drv.getScannerLocation ());
+  }
+
+  if (mfStringIsInStringSet (label, fCaseLabelsSet)) {
     // this label has already been registered
     stringstream s;
 
     s <<
-      "choice \"" <<
+      "choice label \"" <<
+      label <<
+      "\" occurs more that once in this case \"" <<
       fCaseChoice->getChoiceName () <<
-      " label \"" << label <<
-      " is already present in this case statement";
+      "\" statement";
 
     mfslError (
       s.str (),
       drv.getScannerLocation ());
   }
 
-  // is this label in the choice's labels set?
-  set<string>
-    labelSet =
-      fCaseChoice->
-        getLabelsSet ();
+  // register label as a case label set
+  fCaseLabelsSet.insert (label);
 
-  set<string>::const_iterator
-    it =
-      labelSet.find (label);
-
-  if (it == labelSet.end ()) {
-    // no, issue error message
-    stringstream s;
-
-    s <<
-      "choice \"" <<
-      fCaseChoice->getChoiceName () <<
-      " cannot have label \"" << label <<
-      ", the labels are: " <<
-      fCaseChoice->labelsSetAsString ();
-
-    mfslError (
-      s.str (),
-      drv.getScannerLocation ());
-  }
+  fUsedLabels.insert (label);
 
   // register label in the current labels list
   fCaseCurrentLabelsList.push_back (label);

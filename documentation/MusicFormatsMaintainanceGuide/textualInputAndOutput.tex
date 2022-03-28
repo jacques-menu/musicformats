@@ -77,7 +77,7 @@ This is needed for the use of \mf\ by applications through the \API\ and not as 
 
 So when and where are {\tt mfIndentedOstream} instances created?
 
-\Function{translateLpsrToLilypondWithHandler}, in \lpsrToLilypond{lpsr2lilypondInterface.cpp}, creates one depending on wether it writes the \lily\ code to standard output of to a file.
+\Function{translateLpsrToLilypondWithHandler}, in \lpsrToLilypond{lpsr2lilypondInterface.cpp}, creates one depending on wether it writes the \lily\ code to \standardOutput\ or to a file.
 
 The parameters to this function\index{functions} are:
 \begin{lstlisting}[language=CPlusPlus]
@@ -97,7 +97,7 @@ In order to have a global current indentation, \mf\ uses \globalVariable{gIndent
 #define gIndenter mfOutputIndenter::gGlobalOStreamIndenter
 \end{lstlisting}
 
-When writing to standard output, the indented output stream is constructed above the caller-supplied {\tt out}:
+When writing to \standardOutput, the indented output stream is constructed above the caller-supplied {\tt out}:
 \begin{lstlisting}[language=CPlusPlus]
     // create an indented output stream for the LilyPond code
     // to be written to outputFileStream
@@ -222,7 +222,7 @@ To debug this:
 \section{Printing descriptions}
 % -------------------------------------------------------------------------
 
-There is a standard set of methods to print the contents of the descriptions in \mf\ to standard output, depending on the granularity of the information to be displayed:
+There is a standard set of methods to print the contents of the descriptions in \mf\ to \standardOutput, depending on the granularity of the information to be displayed:
 \begin{lstlisting}[language=CPlusPlus]
     void                  print (ostream& os) const override;
 

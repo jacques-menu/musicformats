@@ -130,10 +130,13 @@ string mfslInterpreterInsiderHandler::mfslInterpreterAboutInformation () const
   string result =
 R"(What mfsl does:
 
-    This interpreter basically reads a text file containing
-    a tool name, an input file name, keywords and options,
+    This interpreter reads text input containing
+    a tool name, an input source name, keywords and options,
     and launches the specified tool
-    with these options applied to the input file name.
+    with these options applied to the input source name.
+
+    The input can come from a file or from standard input,
+    allowing the interpreter to be used interactively or in shell pipes.
 
     The activity log and warning/error messages go to standard error.)";
 

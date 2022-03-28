@@ -817,6 +817,8 @@ function addFxml ()
 function addFmfsl ()
 {
   git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.mfsl
+  git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.xml
+  git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.bash
 }
 
 function mergeTestFromDev ()

@@ -52,31 +52,21 @@ EXP void mfslError (
 }
 
 EXP void mfslnternalError (
-  const string& inputSourceName,
-  int           inputLineNumber,
-  const string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
-  const string& message)
+  const string&       message,
+  const yy::location& loc)
 {
-  int saveIndent = gIndenter.getIndent ();
-
   gIndenter.resetToZero ();
 
-  waeErrorWithoutException (
-    "mfsl INTERNAL",
-    inputSourceName,
-    inputLineNumber,
-    sourceCodeFileName,
-    sourceCodeLineNumber,
-    message);
+  gLogStream <<
+    "### [MFSL] INNTERNAL ERROR " <<
+    loc << ": " << message <<
+    endl;
 
-#ifdef ABORT_TO_DEBUG_ERRORS
-  abort ();
-#endif
+  if (! gGlobalWaeOahGroup->getDontShowErrors ()) { // JMI
+    throw mfslException (message);
+  }
 
-  gIndenter.setIndent (saveIndent);
-
-  throw mfslnternalException (message);
+  throw mfslException (message);
 }
 
 EXP void mfslFileError (

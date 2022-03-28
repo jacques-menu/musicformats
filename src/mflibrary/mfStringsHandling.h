@@ -260,6 +260,10 @@ Bool mfStringIsInStringSet (
   const string&      theString,
   const set<string>& stringSet);
 
+void mfStringSetMinusEquals (
+  set<string>&       dest,
+  const set<string>& source);
+
 string mfStringSetAsString (
   const set<string>& stringSet);
 

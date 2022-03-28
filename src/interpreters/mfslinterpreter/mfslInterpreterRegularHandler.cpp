@@ -206,7 +206,7 @@ void mfslInterpreterRegularHandler::createMfslRegularUserGroup ()
     subGroup =
       oahSubGroup::create (
         "MFSL",
-        "help-user", "hmfsu",
+        "help-user", "hu",
         "",
         oahElementVisibilityKind::kElementVisibilityWhole,
         group);
@@ -221,7 +221,7 @@ void mfslInterpreterRegularHandler::createMfslRegularUserGroup ()
 
   registerAtomInRegularSubgroup ("display-options", subGroup);
 
-  registerAtomInRegularSubgroup ("only", subGroup);
+  registerAtomInRegularSubgroup ("select", subGroup);
   registerAtomInRegularSubgroup ("all", subGroup);
 
   registerAtomInRegularSubgroup ("no-launch", subGroup);
@@ -246,7 +246,7 @@ void mfslInterpreterRegularHandler::createMfslRegularMaintainanceGroup ()
     subGroup =
       oahSubGroup::create (
         "MFSL",
-        "help-maintaince", "hmfsm",
+        "help-maintainer", "hm",
         "",
         oahElementVisibilityKind::kElementVisibilityWhole,
         group);
@@ -263,7 +263,7 @@ void mfslInterpreterRegularHandler::createMfslRegularMaintainanceGroup ()
 
   registerAtomInRegularSubgroup ("trace-case-statements", subGroup);
 
-  registerAtomInRegularSubgroup ("trace-optons-blocks", subGroup);
+  registerAtomInRegularSubgroup ("trace-options-blocks", subGroup);
 }
 
 void mfslInterpreterRegularHandler::createOahRegularGroup ()

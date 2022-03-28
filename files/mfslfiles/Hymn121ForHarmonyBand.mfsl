@@ -2,20 +2,21 @@
 
 ###
   This MFSL script contain s:
-    - a tool specification, telling which MusicFormats tool
+    - a 'tool' specification, telling which MusicFormats tool
       to use, here xml2ly;
 
-    - an input specification, the input source to apply
+    - an 'input' specification, the input source to apply
       the latter to, here file name "Hymn121.xml";
 
     - any number of MusicFormats options;
 
-    - a SCORE choice specifications telling the possible scores
+    - any number of SCORE 'choice' specifications,
+      telling the possible scores
       that can be generated with this script;
 
-    - a 'set' specification to choose one such SCORE among the possible ones;
+    - a 'select' specification to choose one such SCORE;
 
-    - a 'case' specification stating the options to be used
+    - a 'case' specification stating the options blocks to be used
       when running xml2ly to obtain the chosen SCORE,
       in complement to the ones appearing before the case specfication.
 ###
@@ -58,6 +59,9 @@ input : "Hymn121.xml"
 
 # the labels for the SCORE choice
 
+# choose names that matches the intent,
+# uppercase to emphasize the choice name is a matter of taste
+
 choice SCORE :
   director |
 
@@ -68,10 +72,10 @@ choice SCORE :
   part3_Bb_instruments |
 
   part4_Bb_instruments |
-  part4_BassGuitar
+  part4_BassGuitar,
+
+  default: director
 ;
-  # choose names that matches the intent,
-  # uppercase to emphasize is a matter of taste
 
 
 # ----------------------------------------------------------
@@ -97,21 +101,16 @@ case SCORE :
   ;
 ;
 
-# 	soprano, alto, bass:
-#   ;
-# ### [MFSL] ERROR ./Hymn121ForHarmonyBand.mfsl:97.9: choice "SCORE label "soprano is already present in this case statement
-
-
 case SCORE :
 	director:
-	  -output-file-name "Hymn121_director.ly"
+	  -output-file-name "Hymn121_harmony_director.ly"
 
     -global-staff-size 17.675
     -subtitle "Director"
   ;
 
 	part1_C_instruments:
-	  -output-file-name "Hymn121_part1_C_instruments.ly"
+	  -output-file-name "Hymn121_harmony_part1_C_instruments.ly"
 
     -subtitle "Part 1 - C instruments"
     -keep-musicxml-part-id P1
@@ -122,7 +121,7 @@ case SCORE :
   ;
 
 	part2_Bb_instruments:
-	  -output-file-name "Hymn121_part2_Bb_instruments.ly"
+	  -output-file-name "Hymn121_harmony_part2_Bb_instruments.ly"
 
     -subtitle "Part 2 - Bb instruments"
     -keep-musicxml-part-id P2
@@ -131,7 +130,7 @@ case SCORE :
   ;
 
 	part3_Bb_instruments:
-	  -output-file-name "Hymn121_part2_Bb_instruments.ly"
+	  -output-file-name "Hymn121_harmony_part2_Bb_instruments.ly"
 
     -subtitle "Part 3 - Bb instruments"
     -keep-musicxml-part-id P3
@@ -142,7 +141,7 @@ case SCORE :
   ;
 
 	part4_Bb_instruments:
-	  -output-file-name "Hymn121_part4_Bb_instruments.ly"
+	  -output-file-name "Hymn121_harmony_part4_Bb_instruments.ly"
 
     -subtitle "Part 4 - Bb instruments"
     -keep-musicxml-part-id P4
@@ -153,7 +152,7 @@ case SCORE :
   ;
 
 	part4_BassGuitar:
-	  -output-file-name "Hymn121_part4_BassGuitar.ly"
+	  -output-file-name "Hymn121_harmony_part4_BassGuitar.ly"
 
     -subtitle "Part 4 - Bass guitar"
     -keep-musicxml-part-id P4
@@ -167,7 +166,7 @@ case SCORE :
 
 
 # ----------------------------------------------------------
-# create only one SCORE or all of them
+# select only one SCORE or all of them
 # ----------------------------------------------------------
 
 ###
@@ -176,16 +175,16 @@ case SCORE :
 
   The Choice bewlow are default settings, that can be overridden
   by options to the MFSL interpreter such as:
-    -only SCORE:part2_Bb_instruments
+    -select SCORE:part2_Bb_instruments
   or:
     -all SCORE
 ###
 
 
-# generate a particular SCORE
-# only SCORE : director ;
-only SCORE : part4_BassGuitar ;
+# run the tool with a particular SCORE label
+# select SCORE : director ;
+# select SCORE : part4_BassGuitar ;
 
 
-# generate all the SCORE possibilities in a single step
-# all SCORE ;
+# run the tool with all the SCORE labels, each one in turn
+all SCORE ;

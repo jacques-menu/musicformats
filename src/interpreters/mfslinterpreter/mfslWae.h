@@ -127,11 +127,8 @@ EXP void mfslError (
   const yy::location& loc);
 
 EXP void mfslnternalError (
-  const string& inputSourceName,
-  int           inputLineNumber,
-  const string& sourceCodeFileName,
-  int           sourceCodeLineNumber,
-  const string& message);
+  const string&       message,
+  const yy::location& loc);
 
 EXP void mfslFileError (
   const string& inputSourceName,

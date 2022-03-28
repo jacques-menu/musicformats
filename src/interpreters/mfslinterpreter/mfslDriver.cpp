@@ -43,6 +43,7 @@ mfslDriver::mfslDriver ()
     }
 #endif
 	}
+
   else {
     // MFSL data comes from a file
 #ifdef TRACING_IS_ENABLED
@@ -104,13 +105,12 @@ mfslDriver::mfslDriver ()
   fKnownNames.insert ("xml2brl");
   fKnownNames.insert ("xml2xml");
   fKnownNames.insert ("xml2gmn");
-  fKnownNames.insert ("msdlconverter");
+  fKnownNames.insert ("msdl");
 
   if (fDisplayToolAndInput) {
     gLogStream <<
       "====> The known tools names are: " <<
       mfStringSetAsString (fKnownNames) <<
-      "\"" <<
       endl;
   }
 
@@ -137,13 +137,15 @@ mfslDriver::mfslDriver ()
     fUnusedOptionsSuppliedChoicesSet.insert (
       choiceName);
   } // for
+
+  fCaseStatementsNumber = 0;
 }
 
 void mfslDriver::setToolName (string toolName)
 {
   if (fDisplayToolAndInput) {
     gLogStream <<
-      "====> tool " << toolName<<
+      "====> tool: " << toolName<<
       endl;
   }
 
@@ -159,15 +161,15 @@ void mfslDriver::setToolName (string toolName)
   fToolName = toolName;
 }
 
-void mfslDriver::setInputFileName (string inputFileName)
+void mfslDriver::setInputSouceName (string inputSouceName)
 {
   if (fDisplayToolAndInput) {
     gLogStream <<
-      "====> input: " << inputFileName <<
+      "====> input: " << inputSouceName <<
       endl;
   }
 
- fInputFileName = inputFileName;
+ fInputSouceName = inputSouceName;
 }
 
 void mfslDriver::optionsBlocksStackPush (
@@ -300,6 +302,8 @@ void mfslDriver::caseStatementsStackPush (
       endl;
   }
 
+  ++fCaseStatementsNumber;
+
   fCaseStatementsStack.push_front (
     caseStatement);
 
@@ -367,7 +371,7 @@ void mfslDriver::displayCaseStatementsStack (
   }
 }
 
-int mfslDriver::parseInput ()
+int mfslDriver::parseInput_Pass1 ()
 {
   // initialize scanner location
   fScannerLocation.initialize (
@@ -375,6 +379,10 @@ int mfslDriver::parseInput ()
 
   // begin scan
   scanBegin ();
+
+  if (fScriptSourceName.empty () || fScriptSourceName == "-") {
+    fScriptSourceName = "stdin"; // nicer for warning and error messages
+  }
 
   // do the parsing
   yy::parser theParser (*this);
@@ -387,7 +395,7 @@ int mfslDriver::parseInput ()
   // end scan
   scanEnd ();
 
-  // print the options blocks stack
+  // print the options blocks stack if relevant
   if (gGlobalMfslInterpreterOahGroup->getTraceOptionsBlocks ()) {
     gLogStream <<
       "====> fOptionsBlocksStack:" <<
@@ -406,7 +414,7 @@ int mfslDriver::parseInput ()
     gLogStream;
   }
 
-  // print the choices table
+  // print the choices table if relevant
   if (
     gGlobalMfslInterpreterOahGroup->getTraceChoices ()
       ||
@@ -448,38 +456,105 @@ int mfslDriver::parseInput ()
 
     mfslWarning (
       s.str (),
-      yy::location (
-        yy::position (),
-        yy::position ())); // JMI
+      fScannerLocation);
   } // for
 
   return result;
 }
 
-void mfslDriver::setOnlyLabelForToolLaunching (
+void mfslDriver::setSelectLabelForToolLaunching (
   const string& choiceName,
   const string& label)
 {
+  if (fTraceChoices) {
+    gLogStream <<
+      "====> setSelectLabelForToolLaunching()" <<
+      ", choiceName: " << choiceName <<
+      ", label: " << label <<
+      endl;
+  }
+
   S_mfslChoice
     choice =
       fChoicesTable->
-        lookupChoiceByName (
-          choiceName);
+        fetchChoiceByNameToMofidy (
+          choiceName,
+          *this);
 
   if (choice) {
-    // register the options block to use for 'only' launching
-    fOptionsBlockToUseForOnlyLaunching =
+    // register the options block to use for 'select' launching
+    fOptionsBlockToUseForSelectLaunching =
       choice->
         getChoiceOptionsBlockForLabel (
-          label);
+          label,
+          *this);
+
+    if (fTraceChoices) {
+      gLogStream <<
+        "====> setSelectLabelForToolLaunching()" <<
+        ", choice: " <<
+        endl;
+      ++gIndenter;
+      gLogStream <<
+        choice;
+      --gIndenter;
+    }
+
+    const set<string>&
+      labelsSet =
+        choice->
+          getLabelsSet ();
+
+    if (fTraceChoices) {
+      mfDisplayStringSet (
+        "====> labelsSet",
+        labelsSet,
+        gLogStream);
+    }
+
+    if (mfStringIsInStringSet (label, labelsSet)) {
+      S_mfslOptionsBlock
+        optionsBlock =
+          choice->
+            getChoiceOptionsBlockForLabel (
+              label,
+              *this);
+
+      fOptionsBlockToUseForSelectLaunching =
+        optionsBlock;
+
+      if (fTraceChoices) {
+        gLogStream <<
+          "====> fOptionsBlockToUseForSelectLaunching:" <<
+          endl;
+        ++gIndenter;
+        gLogStream <<
+          fOptionsBlockToUseForSelectLaunching;
+        --gIndenter;
+      }
+    }
+
+    else {
+      stringstream s;
+
+      s <<
+        "label \"" << label <<
+        "\" is no label of choice \"" <<
+        choiceName <<
+        "\"";
+
+      mfslError (
+        s.str (),
+        fScannerLocation);
+    }
   }
 
   else {
     stringstream s;
 
     s <<
-      "choiceName \"" << choiceName <<
-      "\" is no choice name";
+      "name \"" << choiceName <<
+      "\" is no choice name, cannot be used in a 'select' statement";
 
     mfslError (
       s.str (),
@@ -506,8 +581,8 @@ void mfslDriver::setAllChoicesOptionsBlockForToolLaunching (
     stringstream s;
 
     s <<
-      "choiceName \"" << choiceName <<
-      "\" is no choice name";
+      "name \"" << choiceName <<
+      "\" is no choice name, cannot be used in a 'all' statement";
 
     mfslError (
       s.str (),
@@ -515,7 +590,7 @@ void mfslDriver::setAllChoicesOptionsBlockForToolLaunching (
   }
 }
 
-mfMusicformatsError mfslDriver::launchMfslTool ()
+mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
 {
   mfMusicformatsError
     result =
@@ -528,7 +603,10 @@ mfMusicformatsError mfslDriver::launchMfslTool ()
 
   if (fDisplayToolAndInput) {
     gLogStream <<
-      "====> Launching  tool " << fToolName <<
+      "====> Launching " <<
+      fToolName <<
+      " with the argument and option gathered from " <<
+      fScriptSourceName <<
       endl;
   }
 
@@ -538,82 +616,8 @@ mfMusicformatsError mfslDriver::launchMfslTool ()
     fCaseStatementsStack.size () == 0,
     "fCaseStatementsStack should be empty after parsing");
 
-  // the tool and input file source as string
-  string
-    toolAndInputAsString =
-      fToolName +
-      ' ' +
-      fInputFileName;
-
-  // the main options block options as string
-  string
-    mainOptionsAsString;
-
-  if (fMainOptionsBlock) {
-    mainOptionsAsString =
-      fMainOptionsBlock->
-        asOptionsString ();
-  }
-
   // populate the commands list with the options gathered in the script
-  if (fChoiceToUseForAllLaunching) {
-    // an 'all' statement has been supplied,
-    // either in the script or by an option
-
-    const set<string>&
-      labelsSet =
-        fChoiceToUseForAllLaunching->
-          getLabelsSet ();
-
-    for (string label : labelsSet) {
-      // fetch the options block
-      S_mfslOptionsBlock
-        optionsBlock =
-          fChoiceToUseForAllLaunching->
-            getChoiceOptionsBlockForLabel (
-              label);
-
-      string
-        labelOptionsBlockAsString =
-          optionsBlock->
-            asOptionsString ();
-
-      fCommandsList.push_back (
-        toolAndInputAsString
-          +
-        ' '
-          +
-        labelOptionsBlockAsString);
-    } // for
-  }
-
-  else if (fOptionsBlockToUseForOnlyLaunching) {
-    // an 'only' statement has been supplied,
-    // either in the script or by an option
-
-    // the only choice options block options as string
-    string
-      onlyChoiceOptionsAsString =
-        fOptionsBlockToUseForOnlyLaunching->
-          asOptionsString ();
-
-    fCommandsList.push_back (
-      toolAndInputAsString
-        +
-      ' '
-        +
-      onlyChoiceOptionsAsString);
-  }
-
-  else {
-    // the options to be uses are in the main options block alone
-    fCommandsList.push_back (
-      toolAndInputAsString
-        +
-      ' '
-        +
-      mainOptionsAsString);
-  }
+  populateTheCommandsList ();
 
   // display the commands list
   if (fDisplayToolAndInput) {
@@ -651,7 +655,7 @@ mfMusicformatsError mfslDriver::launchMfslTool ()
       mfSingularOrPluralWithoutNumber (
         fCommandsList.size (),
         "is", "are") <<
-      " *not* executed" <<
+      " *NOT* executed" <<
       endl;
   }
 
@@ -671,4 +675,164 @@ mfMusicformatsError mfslDriver::launchMfslTool ()
   }
 
 	return result;
+}
+
+void mfslDriver::populateTheCommandsList ()
+{
+  // the tool and input file source as string
+  string
+    toolAndInputAsString =
+      fToolName +
+      ' ' +
+      fInputSouceName;
+
+  // the main options block options as string
+  string
+    mainOptionsAsString;
+
+  if (fMainOptionsBlock) {
+    mainOptionsAsString =
+      fMainOptionsBlock->
+        asOptionsString ();
+  }
+
+  // what has been found in the script?
+  if (fCaseStatementsNumber == 0) {
+    // the options to be used are in the main options block alone
+    fCommandsList.push_back (
+      toolAndInputAsString
+        +
+      ' '
+        +
+      mainOptionsAsString);
+  }
+
+//     setAllChoicesOptionsBlockForToolLaunching ( JMI
+//       );
+
+  else {
+    // there are case statements
+
+    if (fChoiceToUseForAllLaunching) {
+      // an 'all' statement has been supplied,
+      // either in the script or by an option
+
+      const set<string>&
+        labelsSet =
+          fChoiceToUseForAllLaunching->
+            getLabelsSet ();
+
+      for (string label : labelsSet) {
+        // fetch the options block
+        S_mfslOptionsBlock
+          optionsBlock =
+            fChoiceToUseForAllLaunching->
+              getChoiceOptionsBlockForLabel (
+                label,
+                *this);
+
+        string
+          labelOptionsBlockAsString =
+            optionsBlock->
+              asOptionsString ();
+
+        fCommandsList.push_back (
+          toolAndInputAsString
+            +
+          ' '
+            +
+          mainOptionsAsString
+            +
+          ' '
+            +
+          labelOptionsBlockAsString);
+      } // for
+    }
+
+    else if (fOptionsBlockToUseForSelectLaunching) {
+      // a 'select' statement has been supplied,
+      // either in the script or by an option
+
+      // the 'select' choice options block options as string
+      string
+        selectChoiceOptionsAsString =
+          fOptionsBlockToUseForSelectLaunching->
+            asOptionsString ();
+
+      fCommandsList.push_back (
+        toolAndInputAsString
+          +
+        ' '
+          +
+        mainOptionsAsString
+          +
+        ' '
+          +
+        selectChoiceOptionsAsString);
+    }
+
+    else {
+      // there are no 'select' nor 'all' statements,
+      // check that there is only one choice in the script
+
+      // get the choices table
+      const map<string, S_mfslChoice>&
+        choicesMap =
+          fChoicesTable->
+            getChoicesMap ();
+
+      int
+        choicesNumber =
+          choicesMap.size ();
+
+      if (choicesNumber == 1) {
+        // and use this single choice's default label
+
+        // grab the single choice
+        S_mfslChoice
+          singleChoice =
+            (*( choicesMap.begin ())).second;
+
+        // get its default label
+        string
+          singleChoiceDefaultLabel =
+            singleChoice->
+              getChoiceDefaultLabel ();
+
+        // get the options to be used
+        S_mfslOptionsBlock
+          optionsBlockToBeUsed =
+            singleChoice->
+              getChoiceOptionsBlockForLabel (
+                singleChoiceDefaultLabel,
+                *this);
+
+//         fOptionsBlockToUseForSelectLaunching =
+//           optionsBlockToBeUsed;
+
+        // fetch the options to be used as a string
+        string
+          optionsBlockToBeUsedAsString =
+            optionsBlockToBeUsed->
+              asOptionsString ();
+
+        fCommandsList.push_back (
+          toolAndInputAsString
+            +
+          ' '
+            +
+          mainOptionsAsString
+            +
+          ' '
+            +
+          optionsBlockToBeUsedAsString);
+      }
+
+      else {
+        mfslnternalError (
+          "there can be only 1 choice if there is no 'select' nor 'all' statement",
+          fScannerLocation);
+      }
+    }
+  }
 }

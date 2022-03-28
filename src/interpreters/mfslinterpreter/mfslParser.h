@@ -480,15 +480,16 @@ namespace yy {
     TOK_TOOL = 8,                  // "tool"
     TOK_INPUT = 9,                 // "input"
     TOK_CHOICE = 10,               // "choice"
-    TOK_CASE = 11,                 // "case"
-    TOK_ONLY = 12,                 // "only"
-    TOK_ALL = 13,                  // "all"
-    TOK_INTEGER = 14,              // "integer number"
-    TOK_DOUBLE = 15,               // "double number"
-    TOK_SINGLE_QUOTED_STRING = 16, // "single quoted_string"
-    TOK_DOUBLE_QUOTED_STRING = 17, // "double quoted_string"
-    TOK_NAME = 18,                 // "name"
-    TOK_OPTION = 19                // "option"
+    TOK_DEFAULT = 11,              // "default"
+    TOK_CASE = 12,                 // "case"
+    TOK_SELECT = 13,               // "select"
+    TOK_ALL = 14,                  // "all"
+    TOK_INTEGER = 15,              // "integer number"
+    TOK_DOUBLE = 16,               // "double number"
+    TOK_SINGLE_QUOTED_STRING = 17, // "single quoted_string"
+    TOK_DOUBLE_QUOTED_STRING = 18, // "double quoted_string"
+    TOK_NAME = 19,                 // "name"
+    TOK_OPTION = 20                // "option"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -505,7 +506,7 @@ namespace yy {
     {
       enum symbol_kind_type
       {
-        YYNTOKENS = 20, ///< Number of tokens.
+        YYNTOKENS = 21, ///< Number of tokens.
         S_YYEMPTY = -2,
         S_YYEOF = 0,                             // "end of file"
         S_YYerror = 1,                           // error
@@ -518,43 +519,45 @@ namespace yy {
         S_TOOL = 8,                              // "tool"
         S_INPUT = 9,                             // "input"
         S_CHOICE = 10,                           // "choice"
-        S_CASE = 11,                             // "case"
-        S_ONLY = 12,                             // "only"
-        S_ALL = 13,                              // "all"
-        S_INTEGER = 14,                          // "integer number"
-        S_DOUBLE = 15,                           // "double number"
-        S_SINGLE_QUOTED_STRING = 16,             // "single quoted_string"
-        S_DOUBLE_QUOTED_STRING = 17,             // "double quoted_string"
-        S_NAME = 18,                             // "name"
-        S_OPTION = 19,                           // "option"
-        S_YYACCEPT = 20,                         // $accept
-        S_Script = 21,                           // Script
-        S_22_1 = 22,                             // $@1
-        S_23_2 = 23,                             // $@2
-        S_Number = 24,                           // Number
-        S_String = 25,                           // String
-        S_Tool = 26,                             // Tool
-        S_Input = 27,                            // Input
-        S_OptionalScriptElementsSeq = 28,        // OptionalScriptElementsSeq
-        S_ScriptElementsSeq = 29,                // ScriptElementsSeq
-        S_ScriptElement = 30,                    // ScriptElement
-        S_Option = 31,                           // Option
-        S_OptionValue = 32,                      // OptionValue
-        S_ChoiceDeclaration = 33,                // ChoiceDeclaration
-        S_34_3 = 34,                             // $@3
-        S_ChoiceLabels = 35,                     // ChoiceLabels
-        S_CaseLabel = 36,                        // CaseLabel
-        S_CaseLabelsSeq = 37,                    // CaseLabelsSeq
-        S_CaseStatement = 38,                    // CaseStatement
-        S_39_4 = 39,                             // $@4
-        S_OptionalCaseAlternativesSeq = 40,      // OptionalCaseAlternativesSeq
-        S_CaseAlternativesSeq = 41,              // CaseAlternativesSeq
-        S_CaseAlternative = 42,                  // CaseAlternative
-        S_43_5 = 43,                             // $@5
-        S_44_6 = 44,                             // $@6
-        S_OptionalOnlyOrAllStatement = 45,       // OptionalOnlyOrAllStatement
-        S_OnlyStatement = 46,                    // OnlyStatement
-        S_AllStatement = 47                      // AllStatement
+        S_DEFAULT = 11,                          // "default"
+        S_CASE = 12,                             // "case"
+        S_SELECT = 13,                           // "select"
+        S_ALL = 14,                              // "all"
+        S_INTEGER = 15,                          // "integer number"
+        S_DOUBLE = 16,                           // "double number"
+        S_SINGLE_QUOTED_STRING = 17,             // "single quoted_string"
+        S_DOUBLE_QUOTED_STRING = 18,             // "double quoted_string"
+        S_NAME = 19,                             // "name"
+        S_OPTION = 20,                           // "option"
+        S_YYACCEPT = 21,                         // $accept
+        S_Script = 22,                           // Script
+        S_23_1 = 23,                             // $@1
+        S_24_2 = 24,                             // $@2
+        S_Number = 25,                           // Number
+        S_String = 26,                           // String
+        S_Tool = 27,                             // Tool
+        S_Input = 28,                            // Input
+        S_OptionalScriptElementsSeq = 29,        // OptionalScriptElementsSeq
+        S_ScriptElementsSeq = 30,                // ScriptElementsSeq
+        S_ScriptElement = 31,                    // ScriptElement
+        S_Option = 32,                           // Option
+        S_OptionValue = 33,                      // OptionValue
+        S_ChoiceDeclaration = 34,                // ChoiceDeclaration
+        S_35_3 = 35,                             // $@3
+        S_36_4 = 36,                             // $@4
+        S_ChoiceLabels = 37,                     // ChoiceLabels
+        S_CaseLabel = 38,                        // CaseLabel
+        S_CaseLabelsSeq = 39,                    // CaseLabelsSeq
+        S_CaseStatement = 40,                    // CaseStatement
+        S_41_5 = 41,                             // $@5
+        S_OptionalCaseAlternativesSeq = 42,      // OptionalCaseAlternativesSeq
+        S_CaseAlternativesSeq = 43,              // CaseAlternativesSeq
+        S_CaseAlternative = 44,                  // CaseAlternative
+        S_45_6 = 45,                             // $@6
+        S_46_7 = 46,                             // $@7
+        S_OptionalSelectOrAllStatement = 47,     // OptionalSelectOrAllStatement
+        S_SelectStatement = 48,                  // SelectStatement
+        S_AllStatement = 49                      // AllStatement
       };
     };
 
@@ -1005,6 +1008,21 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
+      make_DEFAULT (location_type l)
+      {
+        return symbol_type (token::TOK_DEFAULT, std::move (l));
+      }
+#else
+      static
+      symbol_type
+      make_DEFAULT (const location_type& l)
+      {
+        return symbol_type (token::TOK_DEFAULT, l);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
       make_CASE (location_type l)
       {
         return symbol_type (token::TOK_CASE, std::move (l));
@@ -1020,16 +1038,16 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ONLY (location_type l)
+      make_SELECT (location_type l)
       {
-        return symbol_type (token::TOK_ONLY, std::move (l));
+        return symbol_type (token::TOK_SELECT, std::move (l));
       }
 #else
       static
       symbol_type
-      make_ONLY (const location_type& l)
+      make_SELECT (const location_type& l)
       {
-        return symbol_type (token::TOK_ONLY, l);
+        return symbol_type (token::TOK_SELECT, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1482,7 +1500,7 @@ switch (yykind)
     enum
     {
       yylast_ = 57,     ///< Last index in yytable_.
-      yynnts_ = 28,  ///< Number of nonterminal symbols.
+      yynnts_ = 29,  ///< Number of nonterminal symbols.
       yyfinal_ = 5 ///< Termination state number.
     };
 
@@ -1629,7 +1647,7 @@ switch (yykind)
 
 
 } // yy
-#line 1633 "mfslParser.h"
+#line 1651 "mfslParser.h"
 
 
 

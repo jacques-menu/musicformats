@@ -31,6 +31,22 @@
 
 #include "mfslInterpreterInterface.h"
 
+#ifdef WIN32
+  /*
+    isatty() is needed for Flex interactive mode,
+    but doesn't follow the Standard C rules
+    for implementation-specific names
+
+    we should thus use _isatty() instead on Windows systems
+  */
+
+  #include "io.h" // for _isatty()
+
+  /*
+    the isatty() definition is in the third part of this file
+  */
+#endif
+
 
 /* ---------------------------------------------------------------------- */
 /* choices global to yylex() */
@@ -52,7 +68,7 @@
 
 %option noyywrap
 
-%option nounput noinput interactive debug
+%option nounput noinput debug interactive
 
 
 %{
@@ -118,7 +134,7 @@ backSlash                 [\\]
 char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 // A handy shortcut to the location held by the mfslDriver
-yy::location& loc = drv.getScannerLocation ();
+yy::location& loc = drv.getScannerLocationToModify ();
 
 // Code run each time yylex is called
 loc.step ();
@@ -339,6 +355,20 @@ loc.step ();
     yy::parser::make_CHOICE (loc);
 }
 
+"default" {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": " << yytext <<
+    endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_DEFAULT (loc);
+}
+
 "case" {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -353,7 +383,7 @@ loc.step ();
     yy::parser::make_CASE (loc);
 }
 
-"only" {
+"select" {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
@@ -364,7 +394,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_ONLY (loc);
+    yy::parser::make_SELECT (loc);
 }
 
 "all" {
@@ -509,6 +539,13 @@ loc.step ();
 /* service code */
 /* ---------------------------------------------------------------------- */
 
+#ifdef WIN32
+int isatty (int fd)
+{
+  return _isatty (fd);
+}
+#endif
+
 void mfslDriver::scanBegin ()
 {
   yy_flex_debug = fTraceScanning;
@@ -543,20 +580,20 @@ mfMusicformatsError launchMfslInterpreter ()
     result =
       mfMusicformatsError::k_NoError;
 
-  // the driver get the script source name and the interpreter's options
-  // from the library
+  // the driver
   mfslDriver
     theDriver;
 
+  // parse the script
   int
     parseResult =
-  	  theDriver.parseInput ();
+  	  theDriver.parseInput_Pass1 ();
 
   string
     theToolName =
       theDriver.getToolName (),
-    theInputFileName =
-      theDriver.getInputFileName ();
+    theInputSouceName =
+      theDriver.getInputSouceName ();
 
   if (theDriver.getTraceParsing ()) {
     gLogStream <<
@@ -566,11 +603,11 @@ mfMusicformatsError launchMfslInterpreter ()
     gLogStream <<
       "--> toolName:      " << theToolName <<
       endl <<
-      "--> inputFileName: " << theInputFileName <<
+      "--> inputSouceName: " << theInputSouceName <<
       endl;
   }
 
-  // parse the script
+  // launch the tool
   if (parseResult != 0) {
     result =
       mfMusicformatsError::kErrorInvalidFile;
@@ -578,7 +615,7 @@ mfMusicformatsError launchMfslInterpreter ()
 
   else {
     result =
-      theDriver.launchMfslTool ();
+      theDriver.launchMfslTool_Pass2 ();
   }
 
 	return result;

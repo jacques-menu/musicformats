@@ -603,9 +603,11 @@ void optionsNameAndValueVectorsPlusEquals (
   const vector<S_oahOption>& vector2)
 {
   // insert the elements of vector2 into vector1
-  for (S_oahOption option :vector2) {
-    vector1.push_back (option);
-  } //for
+  if (vector2.size ()) {
+    for (S_oahOption option : vector2) {
+      vector1.push_back (option);
+    } //for
+  }
 }
 
 // //______________________________________________________________________________
