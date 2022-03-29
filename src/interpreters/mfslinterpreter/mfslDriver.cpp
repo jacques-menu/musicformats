@@ -120,7 +120,7 @@ mfslDriver::mfslDriver ()
   // get the choice labels supplied by options
   fOptionsSuppliedChoicesLabelsMap =
     gGlobalMfslInterpreterOahGroup->
-      getGenerateChoiceToLabelsMap ();
+      getSelectChoiceToLabelsMap ();
 
   if (fTraceChoices) {
     gLogStream <<
@@ -501,27 +501,85 @@ void mfslDriver::setSelectLabelForToolLaunching (
     }
 
     const set<string>&
-      labelsSet =
+      choiceLabelsSet =
         choice->
           getLabelsSet ();
 
     if (fTraceChoices) {
       mfDisplayStringSet (
-        "====> labelsSet",
-        labelsSet,
+        "====> choiceLabelsSet",
+        choiceLabelsSet,
         gLogStream);
     }
 
-    if (mfStringIsInStringSet (label, labelsSet)) {
+    if (mfStringIsInStringSet (label, choiceLabelsSet)) {
       // is this label already selected by an option?
       S_oahStringToStringMapElementAtom
-        generateChoiceToLabelsMapAtom =
+        selectChoiceToLabelsMapAtom =
           gGlobalMfslInterpreterOahGroup->
-            getGenerateChoiceToLabelsMapAtom ();
+            getSelectChoiceToLabelsMapAtom ();
 
-      if (generateChoiceToLabelsMapAtom->getSetByUser ()) {
+      gLogStream <<
+        "----------> selectChoiceToLabelsMapAtom: " <<
+        endl <<
+        selectChoiceToLabelsMapAtom <<
+        endl;
+
+      if (selectChoiceToLabelsMapAtom->getSetByUser ()) {
         // yes, this 'select' statement is superseeded by the option
+        const map<string, string>&
+          selectChoiceToLabelsMap =
+            gGlobalMfslInterpreterOahGroup->
+              getSelectChoiceToLabelsMap ();
 
+        string userSuppliedLabel;
+
+        Bool
+          userSuppliedLabelIsKnwonToTheChoice =
+            mfStringIsInStringToStringMap (
+              choiceName,
+              selectChoiceToLabelsMap,
+              userSuppliedLabel);
+
+        if (userSuppliedLabelIsKnwonToTheChoice) {
+          if (fTraceChoices) {
+            gLogStream <<
+              "====> label \"" <<
+              label <<
+              "\" for choice:" <<
+              endl;
+            ++gIndenter;
+            gLogStream <<
+              choice;
+            --gIndenter;
+
+            gLogStream <<
+              "is superseeded by \"" <<
+              userSuppliedLabel <<
+              "\" supplied by an option" <<
+              endl;
+          }
+
+          S_mfslOptionsBlock
+            optionsBlock =
+              choice->
+                getChoiceOptionsBlockForLabel (
+                  userSuppliedLabel,
+                  *this);
+
+          fOptionsBlockToUseForSelectLaunching =
+            optionsBlock;
+
+          if (fTraceChoices) {
+            gLogStream <<
+              "====> fOptionsBlockToUseForSelectLaunching from script:" <<
+              endl;
+            ++gIndenter;
+            gLogStream <<
+              fOptionsBlockToUseForSelectLaunching;
+            --gIndenter;
+          }
+        }
       }
 
       else {
@@ -538,7 +596,7 @@ void mfslDriver::setSelectLabelForToolLaunching (
 
         if (fTraceChoices) {
           gLogStream <<
-            "====> fOptionsBlockToUseForSelectLaunching:" <<
+            "====> fOptionsBlockToUseForSelectLaunching from script:" <<
             endl;
           ++gIndenter;
           gLogStream <<
@@ -752,11 +810,11 @@ void mfslDriver::populateTheCommandsList ()
       // either in the script or by an option
 
       const set<string>&
-        labelsSet =
+        choiceLabelsSet =
           fChoiceToUseForAllLaunching->
             getLabelsSet ();
 
-      for (string label : labelsSet) {
+      for (string label : choiceLabelsSet) {
         // fetch the options block
         S_mfslOptionsBlock
           optionsBlock =

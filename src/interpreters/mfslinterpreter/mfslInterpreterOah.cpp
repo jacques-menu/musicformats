@@ -134,31 +134,31 @@ This option implies the '-display-tool-and-input, -ttai' option.)",
         fNoLaunch,
         fDisplayToolAndInputAtom));
 
-  fGenerateChoiceToLabelsMapAtom =
+  fSelectChoiceToLabelsMapAtom =
     oahStringToStringMapElementAtom::create (
       "select", "sel",
 R"(Select LABEL for choice CHOICE.
 The tool will be run once using the corresponding options block(s).)",
       "CHOICE:LABEL",
-      "fGenerateChoiceToLabelsMap",
-      fGenerateChoiceToLabelsMap);
+      "fSelectChoiceToLabelsMap",
+      fSelectChoiceToLabelsMap);
 
   subGroup->
     appendAtomToSubGroup (
-      fGenerateChoiceToLabelsMapAtom);
+      fSelectChoiceToLabelsMapAtom);
 
-  fGenerateScoresForAllChoiceAtom =
+  fAllChoiceAtom =
     oahStringAtom::create (
       "all", "",
 R"(Select each label for choice CHOICE in turn.
 The tool will be run as many times, using the corresponding options block(s).)",
       "CHOICE",
-      "fGenerateScoresForAllChoice",
-      fGenerateScoresForAllChoice);
+      "fAllChoice",
+      fAllChoice);
 
   subGroup->
     appendAtomToSubGroup (
-      fGenerateScoresForAllChoiceAtom);
+      fAllChoiceAtom);
 
   // maintainance options
   // --------------------------------------
@@ -220,13 +220,13 @@ void mfslInterpreterOahGroup::enforceGroupQuietness ()
 void mfslInterpreterOahGroup::checkGroupOptionsConsistency ()
 {
   if (
-    fGenerateChoiceToLabelsMapAtom->getSetByUser ()
+    fSelectChoiceToLabelsMapAtom->getSetByUser ()
       &&
-    fGenerateScoresForAllChoiceAtom->getSetByUser ()
+    fAllChoiceAtom->getSetByUser ()
   ) {
     mfslOptionsIncompatibilityError (
-      fGenerateChoiceToLabelsMapAtom,
-      fGenerateScoresForAllChoiceAtom);
+      fSelectChoiceToLabelsMapAtom,
+      fAllChoiceAtom);
   }
 }
 
@@ -361,12 +361,12 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fGenerateChoiceToLabelsMap" << " : ";
+    setw (fieldWidth) << "fSelectChoiceToLabelsMap" << " : ";
 
   ++gIndenter;
 
-  if (fGenerateChoiceToLabelsMap.size ()) {
-    for (pair<string, string> thePair : fGenerateChoiceToLabelsMap) {
+  if (fSelectChoiceToLabelsMap.size ()) {
+    for (pair<string, string> thePair : fSelectChoiceToLabelsMap) {
       gLogStream <<
         thePair.first << " : " << thePair.second <<
         endl;
@@ -376,8 +376,8 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   --gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fGenerateScoresForAllChoice" << " : " <<
-      fGenerateScoresForAllChoice <<
+    setw (fieldWidth) << "fAllChoice" << " : " <<
+      fAllChoice <<
       endl;
 
   --gIndenter;

@@ -133,15 +133,15 @@ class EXP mfslInterpreterOahGroup : public oahGroup
                               { return fNoLaunch; }
 
     const map<string, string>&
-                          getGenerateChoiceToLabelsMap () const
-                              { return fGenerateChoiceToLabelsMap; }
+                          getSelectChoiceToLabelsMap () const
+                              { return fSelectChoiceToLabelsMap; }
 
     S_oahStringToStringMapElementAtom
-                          getGenerateChoiceToLabelsMapAtom () const
-                              { return fGenerateChoiceToLabelsMapAtom; }
+                          getSelectChoiceToLabelsMapAtom () const
+                              { return fSelectChoiceToLabelsMapAtom; }
 
-    S_oahStringAtom       getGenerateScoresForAllChoiceAtom () const
-                              { return fGenerateScoresForAllChoiceAtom; }
+    S_oahStringAtom       getAllChoiceAtom () const
+                              { return fAllChoiceAtom; }
 
   public:
 
@@ -206,13 +206,13 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     Bool                  fTraceOptionsBlocks;
 
-    // select
-    map<string, string>   fGenerateChoiceToLabelsMap;
+    // select statement
+    map<string, string>   fSelectChoiceToLabelsMap;
     S_oahStringToStringMapElementAtom
-                          fGenerateChoiceToLabelsMapAtom;
-    // all
-    string                fGenerateScoresForAllChoice;
-    S_oahStringAtom       fGenerateScoresForAllChoiceAtom;
+                          fSelectChoiceToLabelsMapAtom;
+    // all statement
+    string                fAllChoice;
+    S_oahStringAtom       fAllChoiceAtom;
 };
 typedef SMARTP<mfslInterpreterOahGroup> S_mfslInterpreterOahGroup;
 EXP ostream& operator<< (ostream& os, const S_mfslInterpreterOahGroup& elt);
