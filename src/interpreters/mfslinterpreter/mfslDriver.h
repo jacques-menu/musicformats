@@ -66,12 +66,11 @@ class mfslDriver
                               { return fTraceScanning; }
 
     const yy::location&   getScannerLocation () const
-                            // no const here
-                            // due to Flex-generated code constraints
                               { return fScannerLocation; }
-    yy::location&         getScannerLocationToModify ()
+
+    yy::location&         getScannerLocationNonConst ()
                             // no const here
-                            // due to Flex-generated code constraints
+                            // due to constraints in the Flex-generated code
                               { return fScannerLocation; }
 
     bool				          getDisplayToolAndInput () const
@@ -167,6 +166,8 @@ class mfslDriver
 
     // private methods
     // ------------------------------------------------------
+
+    void                  finalSemanticsCheck ();
 
     void                  populateTheCommandsList ();
 

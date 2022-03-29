@@ -1234,7 +1234,7 @@ class EXP msrKey : public msrMeasureElement
 \section{{\tt get*()}, {\tt set*()} and {\tt fetch*()} methods}
 % -------------------------------------------------------------------------
 
-As is usual, classes privates member variables are accessed through \methodName{set*()} and \methodName{get*()} methods. The name of these methods is obtained by replacing the '{\tt f}' in the field name by '{\tt set}' and '{\tt get}', respectively. In \msr{msrTies.h}, one finds:
+As is usual, classes privates member variables are accessed through \methodName{set*()} and \methodName{get*()} methods. The name of these methods is obtained by replacing the '\code{f}' in the field name by '\code{set}' and '\code{get}', respectively. In \msr{msrTies.h}, one finds:
 \begin{lstlisting}[language=CPlusPlus]
     // set and get
     // ------------------------------------------------------
@@ -1253,7 +1253,7 @@ As is usual, classes privates member variables are accessed through \methodName{
 \end{lstlisting}
 
 
-{\tt fetch} is used when the result is not store in a variable, but has to computed in some way. \msr{msrSegment.cpp} contains:
+\code{fetch} is used when the result is not store in a variable, but has to computed in some way. \msr{msrSegment.cpp} contains:
 \begin{lstlisting}[language=CPlusPlus]
 S_msrStaff msrSegment::fetchSegmentStaffUpLink () const
 {
@@ -1267,6 +1267,31 @@ S_msrStaff msrSegment::fetchSegmentStaffUpLink () const
 
   return result;
 }
+\end{lstlisting}
+
+Some methods exist in two versions, the second one with a \code{NonConst} suffix in the name. This can be the case if a private class field is to be modified outside the class, or if there are specific needs.
+
+This happens for example in \msrBoth{mfslNotes}:
+\begin{lstlisting}[language=CPlusPlus]
+    // articulations
+    const list<S_msrArticulation>&
+                          getNoteArticulations () const
+                              { return fNoteArticulations; }
+
+    list<S_msrArticulation>&
+                          getNoteArticulationsNonConst ()
+                              { return fNoteArticulations; }
+\end{lstlisting}
+
+Another case is in \mfslBoth{mfslDriver}:
+\begin{lstlisting}[language=CPlusPlus]
+    const yy::location&   getScannerLocation () const
+                              { return fScannerLocation; }
+
+    yy::location&         getScannerLocationNonConst ()
+                            // no const here
+                            // due to constraints in the Flex-generated code
+                              { return fScannerLocation; }
 \end{lstlisting}
 
 

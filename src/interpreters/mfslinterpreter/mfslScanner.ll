@@ -45,6 +45,8 @@
   /*
     the isatty() definition is in the third part of this file
   */
+
+  #define YY_NO_UNISTD_H
 #endif
 
 
@@ -134,7 +136,7 @@ backSlash                 [\\]
 char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 // A handy shortcut to the location held by the mfslDriver
-yy::location& loc = drv.getScannerLocationToModify ();
+yy::location& loc = drv.getScannerLocationNonConst ();
 
 // Code run each time yylex is called
 loc.step ();
@@ -588,24 +590,6 @@ mfMusicformatsError launchMfslInterpreter ()
   int
     parseResult =
   	  theDriver.parseInput_Pass1 ();
-
-  string
-    theToolName =
-      theDriver.getToolName (),
-    theInputSouceName =
-      theDriver.getInputSouceName ();
-
-  if (theDriver.getTraceParsing ()) {
-    gLogStream <<
-      "--> parseResult:   " << parseResult <<
-      endl;
-
-    gLogStream <<
-      "--> toolName:      " << theToolName <<
-      endl <<
-      "--> inputSouceName: " << theInputSouceName <<
-      endl;
-  }
 
   // launch the tool
   if (parseResult != 0) {

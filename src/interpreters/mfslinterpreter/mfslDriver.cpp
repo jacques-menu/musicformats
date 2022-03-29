@@ -390,10 +390,23 @@ int mfslDriver::parseInput_Pass1 ()
   theParser.set_debug_level (
     fTraceParsing);
 
-  int result = theParser ();
+  int parseResult = theParser ();
 
   // end scan
   scanEnd ();
+
+  // print the basic results
+  if (fTraceParsing) {
+    gLogStream <<
+      "--> parseResult:   " << parseResult <<
+      endl;
+
+    gLogStream <<
+      "--> fToolName:      " << fToolName <<
+      endl <<
+      "--> fInputSouceName: " << fInputSouceName <<
+      endl;
+  }
 
   // print the options blocks stack if relevant
   if (gGlobalMfslInterpreterOahGroup->getTraceOptionsBlocks ()) {
@@ -443,23 +456,10 @@ int mfslDriver::parseInput_Pass1 ()
     }
   }
 
-  // have all the options supplied choices been used?
-  for (string choiceName : fUnusedOptionsSuppliedChoicesSet) {
-    stringstream s;
+  // do the final semantics check
+  finalSemanticsCheck ();
 
-    s <<
-      "option supplied choice \"" <<
-      choiceName <<
-      "\" has not been used in script \"" <<
-      fScriptSourceName <<
-      "\"";
-
-    mfslWarning (
-      s.str (),
-      fScannerLocation);
-  } // for
-
-  return result;
+  return parseResult;
 }
 
 void mfslDriver::setSelectLabelForToolLaunching (
@@ -477,7 +477,7 @@ void mfslDriver::setSelectLabelForToolLaunching (
   S_mfslChoice
     choice =
       fChoicesTable->
-        fetchChoiceByNameToMofidy (
+        fetchChoiceByNameNonConst (
           choiceName,
           *this);
 
@@ -513,24 +513,38 @@ void mfslDriver::setSelectLabelForToolLaunching (
     }
 
     if (mfStringIsInStringSet (label, labelsSet)) {
-      S_mfslOptionsBlock
-        optionsBlock =
-          choice->
-            getChoiceOptionsBlockForLabel (
-              label,
-              *this);
+      // is this label already selected by an option?
+      S_oahStringToStringMapElementAtom
+        generateChoiceToLabelsMapAtom =
+          gGlobalMfslInterpreterOahGroup->
+            getGenerateChoiceToLabelsMapAtom ();
 
-      fOptionsBlockToUseForSelectLaunching =
-        optionsBlock;
+      if (generateChoiceToLabelsMapAtom->getSetByUser ()) {
+        // yes, this 'select' statement is superseeded by the option
 
-      if (fTraceChoices) {
-        gLogStream <<
-          "====> fOptionsBlockToUseForSelectLaunching:" <<
-          endl;
-        ++gIndenter;
-        gLogStream <<
-          fOptionsBlockToUseForSelectLaunching;
-        --gIndenter;
+      }
+
+      else {
+        // no, this 'select' statement is to be applied
+        S_mfslOptionsBlock
+          optionsBlock =
+            choice->
+              getChoiceOptionsBlockForLabel (
+                label,
+                *this);
+
+        fOptionsBlockToUseForSelectLaunching =
+          optionsBlock;
+
+        if (fTraceChoices) {
+          gLogStream <<
+            "====> fOptionsBlockToUseForSelectLaunching:" <<
+            endl;
+          ++gIndenter;
+          gLogStream <<
+            fOptionsBlockToUseForSelectLaunching;
+          --gIndenter;
+        }
       }
     }
 
@@ -568,8 +582,9 @@ void mfslDriver::setAllChoicesOptionsBlockForToolLaunching (
   S_mfslChoice
     choice =
       fChoicesTable->
-        lookupChoiceByName (
-          choiceName);
+        fetchChoiceByNameNonConst (
+          choiceName,
+          *this);
 
   if (choice) {
     // register the choice to use for 'all' launching
@@ -675,6 +690,25 @@ mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
   }
 
 	return result;
+}
+
+void mfslDriver::finalSemanticsCheck ()
+{
+  // have all the options supplied choices been used?
+  for (string choiceName : fUnusedOptionsSuppliedChoicesSet) {
+    stringstream s;
+
+    s <<
+      "option supplied choice \"" <<
+      choiceName <<
+      "\" has not been used in script \"" <<
+      fScriptSourceName <<
+      "\"";
+
+    mfslWarning (
+      s.str (),
+      fScannerLocation);
+  } // for
 }
 
 void mfslDriver::populateTheCommandsList ()

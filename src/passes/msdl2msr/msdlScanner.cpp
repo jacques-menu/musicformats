@@ -85,9 +85,9 @@ msdlScanner::msdlScanner (istream& inputStream)
       fCurrentToken (
         ),
       fCurrentTokenKind (
-        fCurrentToken.getTokenKindToModify ()),
+        fCurrentToken.getTokenKindNonConst ()),
       fCurrentTokenDescription (
-        fCurrentToken.getTokenDescriptionToModify ())
+        fCurrentToken.getTokenDescriptionNonConst ())
 {
   // trace
 #ifdef TRACING_IS_ENABLED

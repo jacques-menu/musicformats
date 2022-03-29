@@ -610,11 +610,11 @@ int yy_flex_debug = 1;
 
 static const flex_int16_t yy_rule_linenum[45] =
     {   0,
-      146,  150,  156,  161,  166,  172,  177,  181,  185,  192,
-      197,  211,  216,  221,  225,  229,  233,  238,  243,  257,
-      262,  267,  271,  275,  279,  285,  286,  300,  317,  331,
-      345,  359,  373,  387,  401,  417,  433,  434,  449,  463,
-      477,  491,  505,  520
+      148,  152,  158,  163,  168,  174,  179,  183,  187,  194,
+      199,  213,  218,  223,  227,  231,  235,  240,  245,  259,
+      264,  269,  273,  277,  281,  287,  288,  302,  319,  333,
+      347,  361,  375,  389,  403,  419,  435,  436,  451,  465,
+      479,  493,  507,  522
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -673,6 +673,8 @@ char *yytext;
   /*
     the isatty() definition is in the third part of this file
   */
+
+  #define YY_NO_UNISTD_H
 #endif
 
 
@@ -685,27 +687,27 @@ char *yytext;
 /* functions */
 /* ---------------------------------------------------------------------- */
 
-#line 688 "mfslScanner.cpp"
+#line 690 "mfslScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* flex options */
 /* ---------------------------------------------------------------------- */
 #define YY_NO_INPUT 1
-#line 75 "mfslScanner.ll"
+#line 77 "mfslScanner.ll"
 //   yy::parser::symbol_type JMI
 //   make_NAME (const std::string &s, const yy::parser::location_type& loc);
-#line 696 "mfslScanner.cpp"
+#line 698 "mfslScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* regular expressions */
 /* ---------------------------------------------------------------------- */
-#line 103 "mfslScanner.ll"
+#line 105 "mfslScanner.ll"
   // Code run each time a pattern is matched.
   # define YY_USER_ACTION  loc.columns (yyleng);
-#line 703 "mfslScanner.cpp"
+#line 705 "mfslScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* exclusive modes */
 /* ---------------------------------------------------------------------- */
 
-#line 708 "mfslScanner.cpp"
+#line 710 "mfslScanner.cpp"
 
 #define INITIAL 0
 #define SINGLE_QUOTED_STRING_MODE 1
@@ -987,14 +989,14 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 120 "mfslScanner.ll"
+#line 122 "mfslScanner.ll"
 
 
 
 
 
 
-#line 127 "mfslScanner.ll"
+#line 129 "mfslScanner.ll"
 /* ---------------------------------------------------------------------- */
 /* choices local to yylex() */
 /* ---------------------------------------------------------------------- */
@@ -1006,7 +1008,7 @@ YY_DECL
 char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 // A handy shortcut to the location held by the mfslDriver
-yy::location& loc = drv.getScannerLocationToModify ();
+yy::location& loc = drv.getScannerLocationNonConst ();
 
 // Code run each time yylex is called
 loc.step ();
@@ -1014,7 +1016,7 @@ loc.step ();
 
 
 
-#line 1017 "mfslScanner.cpp"
+#line 1019 "mfslScanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1106,7 +1108,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 146 "mfslScanner.ll"
+#line 148 "mfslScanner.ll"
 {
   loc.step ();
 }
@@ -1114,14 +1116,14 @@ YY_RULE_SETUP
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 150 "mfslScanner.ll"
+#line 152 "mfslScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 156 "mfslScanner.ll"
+#line 158 "mfslScanner.ll"
 { // comment
   loc.step ();
   BEGIN COMMENT_TO_END_OF_LINE_MODE;
@@ -1130,7 +1132,7 @@ YY_RULE_SETUP
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 161 "mfslScanner.ll"
+#line 163 "mfslScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
   BEGIN INITIAL;
@@ -1138,7 +1140,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 166 "mfslScanner.ll"
+#line 168 "mfslScanner.ll"
 {
   /* accepting any character other than {endOfLine} */
   loc.step ();
@@ -1146,7 +1148,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 172 "mfslScanner.ll"
+#line 174 "mfslScanner.ll"
 {
   loc.step ();
   BEGIN PARENTHESIZED_COMMENT_MODE;
@@ -1155,21 +1157,21 @@ YY_RULE_SETUP
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 177 "mfslScanner.ll"
+#line 179 "mfslScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 181 "mfslScanner.ll"
+#line 183 "mfslScanner.ll"
 {
   BEGIN INITIAL;
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 185 "mfslScanner.ll"
+#line 187 "mfslScanner.ll"
 {
   /* accepting any character other than {endOfLine} */
   loc.step ();
@@ -1177,7 +1179,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 192 "mfslScanner.ll"
+#line 194 "mfslScanner.ll"
 {
   pStringBuffer [0] = '\0';
   BEGIN SINGLE_QUOTED_STRING_MODE;
@@ -1185,7 +1187,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 197 "mfslScanner.ll"
+#line 199 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream <<
@@ -1202,7 +1204,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 211 "mfslScanner.ll"
+#line 213 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "'", STRING_BUFFER_SIZE);
   loc.step ();
@@ -1211,7 +1213,7 @@ YY_RULE_SETUP
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 216 "mfslScanner.ll"
+#line 218 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
   loc.lines (yyleng); loc.step ();
@@ -1219,35 +1221,35 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 221 "mfslScanner.ll"
+#line 223 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 225 "mfslScanner.ll"
+#line 227 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 229 "mfslScanner.ll"
+#line 231 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 233 "mfslScanner.ll"
+#line 235 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 238 "mfslScanner.ll"
+#line 240 "mfslScanner.ll"
 {
   pStringBuffer [0] = '\0';
   BEGIN DOUBLE_QUOTED_STRING_MODE;
@@ -1255,7 +1257,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 243 "mfslScanner.ll"
+#line 245 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream <<
@@ -1272,7 +1274,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 257 "mfslScanner.ll"
+#line 259 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\"", STRING_BUFFER_SIZE);
   loc.step ();
@@ -1281,7 +1283,7 @@ YY_RULE_SETUP
 case 21:
 /* rule 21 can match eol */
 YY_RULE_SETUP
-#line 262 "mfslScanner.ll"
+#line 264 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
   loc.lines (yyleng); loc.step ();
@@ -1289,37 +1291,37 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 267 "mfslScanner.ll"
+#line 269 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 271 "mfslScanner.ll"
+#line 273 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 275 "mfslScanner.ll"
+#line 277 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 279 "mfslScanner.ll"
+#line 281 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 26:
-#line 286 "mfslScanner.ll"
+#line 288 "mfslScanner.ll"
 case 27:
 YY_RULE_SETUP
-#line 286 "mfslScanner.ll"
+#line 288 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1336,7 +1338,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 300 "mfslScanner.ll"
+#line 302 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1353,7 +1355,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 317 "mfslScanner.ll"
+#line 319 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1370,7 +1372,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 331 "mfslScanner.ll"
+#line 333 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1387,7 +1389,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 345 "mfslScanner.ll"
+#line 347 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1404,7 +1406,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 359 "mfslScanner.ll"
+#line 361 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1421,7 +1423,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 373 "mfslScanner.ll"
+#line 375 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1438,7 +1440,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 387 "mfslScanner.ll"
+#line 389 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1455,7 +1457,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 401 "mfslScanner.ll"
+#line 403 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1472,7 +1474,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 417 "mfslScanner.ll"
+#line 419 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1488,10 +1490,10 @@ YY_RULE_SETUP
 }
 	YY_BREAK
 case 37:
-#line 434 "mfslScanner.ll"
+#line 436 "mfslScanner.ll"
 case 38:
 YY_RULE_SETUP
-#line 434 "mfslScanner.ll"
+#line 436 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1507,7 +1509,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 449 "mfslScanner.ll"
+#line 451 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1524,7 +1526,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 463 "mfslScanner.ll"
+#line 465 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1541,7 +1543,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 477 "mfslScanner.ll"
+#line 479 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1558,7 +1560,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 491 "mfslScanner.ll"
+#line 493 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1575,7 +1577,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 505 "mfslScanner.ll"
+#line 507 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1592,7 +1594,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 520 "mfslScanner.ll"
+#line 522 "mfslScanner.ll"
 {
    throw yy::parser::syntax_error (
      loc,
@@ -1604,7 +1606,7 @@ case YY_STATE_EOF(SINGLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(DOUBLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(COMMENT_TO_END_OF_LINE_MODE):
 case YY_STATE_EOF(PARENTHESIZED_COMMENT_MODE):
-#line 528 "mfslScanner.ll"
+#line 530 "mfslScanner.ll"
 {
   return
     yy::parser::make_YYEOF (loc);
@@ -1612,10 +1614,10 @@ case YY_STATE_EOF(PARENTHESIZED_COMMENT_MODE):
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 535 "mfslScanner.ll"
+#line 537 "mfslScanner.ll"
 ECHO;
 	YY_BREAK
-#line 1618 "mfslScanner.cpp"
+#line 1620 "mfslScanner.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2726,7 +2728,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 535 "mfslScanner.ll"
+#line 537 "mfslScanner.ll"
 
 
 
@@ -2784,24 +2786,6 @@ mfMusicformatsError launchMfslInterpreter ()
   int
     parseResult =
   	  theDriver.parseInput_Pass1 ();
-
-  string
-    theToolName =
-      theDriver.getToolName (),
-    theInputSouceName =
-      theDriver.getInputSouceName ();
-
-  if (theDriver.getTraceParsing ()) {
-    gLogStream <<
-      "--> parseResult:   " << parseResult <<
-      endl;
-
-    gLogStream <<
-      "--> toolName:      " << theToolName <<
-      endl <<
-      "--> inputSouceName: " << theInputSouceName <<
-      endl;
-  }
 
   // launch the tool
   if (parseResult != 0) {
