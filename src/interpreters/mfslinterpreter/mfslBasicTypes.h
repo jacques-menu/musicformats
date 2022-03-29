@@ -69,7 +69,7 @@ class EXP mfslOptionsBlock : public smartable
                               { return fOptionsBlockOptionsVector; }
 
     vector<S_oahOption>&
-                          getOptionsBlockOptionsVectorToModify ()
+                          getOptionsBlockOptionsVectorNonConst ()
                               { return fOptionsBlockOptionsVector; }
 
   public:
@@ -266,15 +266,16 @@ class EXP mfslChoicesTable : public smartable
                             S_mfslChoice choice,
                             mfslDriver&  drv);
 
-    S_mfslChoice          lookupChoiceByName (
-                            const string& name);
+//     S_mfslChoice          lookupChoiceByName (
+//                             const string& name);
 
     S_mfslChoice          fetchChoiceByName (
                             const string&     name,
                             const mfslDriver& drv);
-    S_mfslChoice          fetchChoiceByNameToMofidy (
-                            const string&    name,
-                            const mfslDriver drv);
+
+    S_mfslChoice          fetchChoiceByNameNonConst (
+                            const string& name,
+                            mfslDriver&   drv);
 
   public:
 

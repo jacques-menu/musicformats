@@ -127,9 +127,6 @@ class EXP msrSegment : public msrVoiceElement
                           getSegmentMeasuresList () const
                               { return fSegmentMeasuresList; }
 
-    list<S_msrMeasure>&   getSegmentMeasuresListToModify () // JMI
-                              { return fSegmentMeasuresList; }
-
 /* JMI
     // segment shortest note
 

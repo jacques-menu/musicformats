@@ -606,7 +606,7 @@ class EXP msdlToken : public smartable
     msdlTokenKind         getTokenKind () const
                               { return fTokenKind; }
 
-    msdlTokenKind&        getTokenKindToModify ()
+    msdlTokenKind&        getTokenKindNonConst ()
                               { return fTokenKind; }
 
     void                  setTokenDescription (msdlTokenDescription& tokenDescription)
@@ -616,7 +616,7 @@ class EXP msdlToken : public smartable
                           getTokenDescription () const
                               { return fTokenDescription; }
 
-    msdlTokenDescription& getTokenDescriptionToModify ()
+    msdlTokenDescription& getTokenDescriptionNonConst ()
                               { return fTokenDescription; }
 
     void                  setTokenLineNumber (int tokenLineNumber)

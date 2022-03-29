@@ -519,7 +519,7 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteArticulations; }
 
     list<S_msrArticulation>&
-                          getNoteArticulationsToModify ()
+                          getNoteArticulationsNonConst ()
                               { return fNoteArticulations; }
 
     // spanners
@@ -528,7 +528,7 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteSpanners; }
 
     list<S_msrSpanner>&
-                          getNoteSpannersToModify ()
+                          getNoteSpannersNonConst ()
                               { return fNoteSpanners; }
 
     // technicals
@@ -612,7 +612,7 @@ class EXP msrNote : public msrTupletElement
                           getNoteWords () const
                               { return fNoteWords; }
 
-    list<S_msrWords>&     getNoteWordsToModify ()
+    list<S_msrWords>&     getNoteWordsNonConst ()
                               { return fNoteWords; }
 
     // slashes
@@ -631,7 +631,7 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteWedges; }
 
     list<S_msrWedge>&
-                          getNoteWedgesToModify ()
+                          getNoteWedgesNonConst ()
                               { return fNoteWedges; }
 
     // segnos

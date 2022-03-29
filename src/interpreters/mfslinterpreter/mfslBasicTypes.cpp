@@ -531,7 +531,7 @@ void mfslChoice::enrichLabelOptionsBlock (
   vector<S_oahOption>&
     labelOptionsBlockOptionsVector =
       labelOptionsBlock->
-        getOptionsBlockOptionsVectorToModify ();
+        getOptionsBlockOptionsVectorNonConst ();
 
   const vector<S_oahOption>&
     optionsBlockOptionsVector =
@@ -817,22 +817,22 @@ void mfslChoicesTable::addChoice (
   fChoicesMap [choiceName] = choice;
 }
 
-S_mfslChoice mfslChoicesTable::lookupChoiceByName (
-  const string& name)
-{
-  S_mfslChoice result;
-
-  // is this choiceName in the choice's labels set?
-  map<string, S_mfslChoice>::const_iterator
-    it =
-      fChoicesMap.find (name);
-
-  if (it != fChoicesMap.end ()) {
-    result = (*it).second;
-  }
-
-  return result;
-}
+// S_mfslChoice mfslChoicesTable::lookupChoiceByName (
+//   const string& name)
+// {
+//   S_mfslChoice result;
+//
+//   // is this choiceName in the choice's labels set?
+//   map<string, S_mfslChoice>::const_iterator
+//     it =
+//       fChoicesMap.find (name);
+//
+//   if (it != fChoicesMap.end ()) {
+//     result = (*it).second;
+//   }
+//
+//   return result;
+// }
 
 S_mfslChoice mfslChoicesTable::fetchChoiceByName (
   const string&     name,
@@ -864,9 +864,9 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByName (
   return result;
 }
 
-S_mfslChoice mfslChoicesTable::fetchChoiceByNameToMofidy (
-  const string&    name,
-  const mfslDriver drv)
+S_mfslChoice mfslChoicesTable::fetchChoiceByNameNonConst (
+  const string& name,
+  mfslDriver&   drv)
 {
   S_mfslChoice result;
 
