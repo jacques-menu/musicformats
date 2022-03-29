@@ -253,7 +253,7 @@ void mfslChoice::selectChoiceLabel (
   const map<string, string>&
     setChoiceToLabelMap =
       gGlobalMfslInterpreterOahGroup->
-        getGenerateChoiceToLabelsMap ();
+        getSelectChoiceToLabelsMap ();
 
   switch (fChoiceLabelKind) {
     case mfslChoiceLabelKind::kChoiceLabelNone:

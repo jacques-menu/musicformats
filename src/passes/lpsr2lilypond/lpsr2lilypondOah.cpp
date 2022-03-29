@@ -6387,7 +6387,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::print (ostream& os) const
     setw (fieldWidth) <<
     fVariableName <<
     setw (fieldWidth) <<
-    "fStringSetVariable" << " : '" <<
+    "fStringSetVariable" << " : " <<
     endl;
 
   if (! fStringSetVariable.size ()) {

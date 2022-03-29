@@ -128,7 +128,7 @@ case SCORE :
     -all SCORE
 ###
 
-# select SCORE : tuttisfg ; # superflous actually
+select SCORE : tutti ; # superflous actually
 # select SCORE : soprano ;
 # select SCORE : alto ;
 # select SCORE : tenor ;

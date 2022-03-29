@@ -7185,7 +7185,7 @@ void oahStringSetElementAtom::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "stringSetVariable" << " : " <<
+    "fStringSetVariable" << " : " <<
     endl;
 
   if (! fStringSetVariable.size ()) {
@@ -7522,7 +7522,7 @@ void oahStringToIntMapElementAtom::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "stringSetVariable" << " : '" <<
+    "fStringToIntMapVariable" << " : " <<
     endl;
 
   if (! fStringToIntMapVariable.size ()) {
@@ -7860,26 +7860,31 @@ void oahStringToStringMapElementAtom::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "stringSetVariable" << " : '" <<
-    endl;
+    "fStringToStringMapVariable" << " : ";
 
   if (! fStringToStringMapVariable.size ()) {
-    os << "empty";
+    os << "empty" << endl;
   }
   else {
+    os << endl;
+    ++gIndenter;
+
     map<string, string>::const_iterator
       iBegin = fStringToStringMapVariable.begin (),
       iEnd   = fStringToStringMapVariable.end (),
       i      = iBegin;
     for ( ; ; ) {
-      os << (*i).first << " --> " << (*i).second;
+      os <<
+        (*i).first << " --> " << (*i).second <<
+        endl;
       if (++i == iEnd) break;
-      os << endl;
+//       os << endl; // JMI
     } // for
+
+    --gIndenter;
   }
 
   os << endl;
-
   --gIndenter;
 }
 

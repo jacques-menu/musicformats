@@ -17,6 +17,7 @@
 /* ---------------------------------------------------------------------- */
 
 #include <sstream>
+#include <string.h>     // strerror_r
 
 #include "mfStringsHandling.h"
 
@@ -560,8 +561,23 @@ void mfslDriver::scanBegin ()
     {
       stringstream s;
 
+      const int
+        ERROR_STRING_BUFFER_SIZE = 512;
+      char*
+        errorStringBuffer =
+          new char (ERROR_STRING_BUFFER_SIZE);
+
+      int
+        status =
+          strerror_r (
+            errno,
+            errorStringBuffer,
+            ERROR_STRING_BUFFER_SIZE);
+
       s <<
-        "cannot open " << fScriptSourceName << ": " << strerror (errno) <<
+        "cannot open " <<
+        fScriptSourceName << ": " <<
+        &errorStringBuffer <<
         endl;
 
       mfslFileError (

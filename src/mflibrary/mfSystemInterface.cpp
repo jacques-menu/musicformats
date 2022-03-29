@@ -16,6 +16,7 @@
 #include <stdlib.h> // system()
 
 #include "mfIndentedTextOutput.h"
+#include "mfStringsHandling.h"
 #include "mfSystemInterface.h"
 
 
@@ -41,86 +42,59 @@ EXP int mfExecuteCommand (
 
   const char* mode = "r+"; // bi-directional pipe
 
-#if (WIN32)
+  // avoid memory overflow by system(),
+  // truncating command if necessary
 
-//   system (commandAsCString); // JMI
+      const int
+        COMMAND_STRING_BUFFER_SIZE = 512;
+      char*
+        commandStringBuffer =
+          new char (COMMAND_STRING_BUFFER_SIZE);
 
-  FILE*
-    commandOutputStream =
-      _popen (commandAsCString, mode);
+  mfCharStarCat (
+    commandStringBuffer,
+    commandAsCString,
+    COMMAND_STRING_BUFFER_SIZE);
 
-  if (! commandOutputStream) {
-    E_ERROR_SYSTEM (
-      "_popen (%s, %s) failed\n",
-      command,
-      mode);
-  }
+  // execute the command
 
-#else
+  system (commandStringBuffer);
 
-  system (commandAsCString); // JMI
-
+// #if (WIN32)
+//
+// //   system (commandAsCString); // JMI
+//
 //   FILE*
 //     commandOutputStream =
-//       popen (commandAsCString, mode);
+//       _popen (commandAsCString, mode);
 //
 //   if (! commandOutputStream) {
-//     gLogStream <<
-//       "#### mfExecuteCommand" <<
-//       ", failed to execute command [" <<
-//       command <<
-//       ", quitting." <<
-//       endl;
-//
-//     result = pclose (commandOutputStream);
+//     E_ERROR_SYSTEM (
+//       "_popen (%s, %s) failed\n",
+//       command,
+//       mode);
 //   }
-
-
-// 	pid_t		processID;
 //
-// 	switch (processID = fork ())
-// 		{
-// 		case -1:
-// 			Erreur ("'fork ()' a echoue");
-// 			break;
+// #else
 //
-// 		case 0:
-// 			{
-// 			// ENFANT
-// 			// ------
+//   system (commandBuffer);
 //
-// 			printf (
-// 				"--> Ici l'ENFANT %d, de parent %d\n\n", getpid (), getppid () );
+// //   FILE*
+// //     commandOutputStream =
+// //       popen (commandAsCString, mode);
+// //
+// //   if (! commandOutputStream) {
+// //     gLogStream <<
+// //       "#### mfExecuteCommand" <<
+// //       ", failed to execute command [" <<
+// //       command <<
+// //       ", quitting." <<
+// //       endl;
+// //
+// //     result = pclose (commandOutputStream);
+// //   }
 //
-// 			varGlobale += 30000;
-// 			varLocaleAMain += 60000;
-//
-// 			sleep (30);
-// 			}
-// 			break;
-//
-// 		default:
-// 			{
-// 			// PARENT
-// 			// ------
-//
-// 			printf (
-// 				"<-- Ici le PARENT %d, pid de l'enfant = %d\n\n",
-// 				monIdProcess, processID );
-//
-// 			# define DELAI_D_ATTENTE	30
-// 			sleep (DELAI_D_ATTENTE);
-// 			}
-// 			break;
-// 		} // switch
-//
-//
-// 	// PARENT ET ENFANT
-// 	// ----------------
-//
-//
-
-#endif
+// #endif
 
 	return result;
 }
