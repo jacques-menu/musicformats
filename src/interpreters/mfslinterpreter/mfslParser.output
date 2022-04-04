@@ -6,101 +6,104 @@ Grammar
 
     2 $@2: ε
 
-    3 Script: Tool Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectOrAllStatement
+    3 Script: Tool Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectOrEveryStatement
 
     4 Number: "integer number"
     5       | "double number"
 
-    6 String: "single quoted_string"
-    7       | "double quoted_string"
+    6 SingleString: "single quoted_string"
+    7             | "double quoted_string"
 
-    8 Tool: "tool" ":" "name"
+    8 String: SingleString
+    9       | String SingleString
 
-    9 Input: "input" ":" "name"
-   10      | "input" ":" String
+   10 Tool: "tool" ":" "name"
 
-   11 OptionalScriptElementsSeq: ScriptElementsSeq
-   12                          | ε
+   11 Input: "input" ":" "name"
+   12      | "input" ":" String
 
-   13 ScriptElementsSeq: ScriptElement
-   14                  | ScriptElementsSeq ScriptElement
+   13 OptionalScriptElementsSeq: ScriptElementsSeq
+   14                          | ε
 
-   15 ScriptElement: Option
-   16              | ChoiceDeclaration
-   17              | CaseStatement
+   15 ScriptElementsSeq: ScriptElement
+   16                  | ScriptElementsSeq ScriptElement
 
-   18 Option: "option"
-   19       | "option" OptionValue
+   17 ScriptElement: Option
+   18              | ChoiceDeclaration
+   19              | CaseStatement
 
-   20 OptionValue: "name"
-   21            | Number
-   22            | String
-   23            | "name" "=" "name"
-   24            | "name" ":" "name"
-   25            | "name" "=" Number
-   26            | "name" ":" Number
+   20 Option: "option"
+   21       | "option" OptionValue
 
-   27 $@3: ε
+   22 OptionValue: "name"
+   23            | Number
+   24            | String
+   25            | "name" "=" "name"
+   26            | "name" ":" "name"
+   27            | "name" "=" Number
+   28            | "name" ":" Number
 
-   28 $@4: ε
+   29 $@3: ε
 
-   29 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
+   30 $@4: ε
 
-   30 ChoiceLabels: "name"
-   31             | ChoiceLabels "|" "name"
+   31 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
 
-   32 CaseLabel: "name"
+   32 ChoiceLabels: "name"
+   33             | ChoiceLabels "|" "name"
 
-   33 CaseLabelsSeq: CaseLabel
-   34              | CaseLabelsSeq "," CaseLabel
+   34 CaseLabel: "name"
 
-   35 $@5: ε
+   35 CaseLabelsSeq: CaseLabel
+   36              | CaseLabelsSeq "," CaseLabel
 
-   36 CaseStatement: "case" "name" ":" $@5 OptionalCaseAlternativesSeq ";"
+   37 $@5: ε
 
-   37 OptionalCaseAlternativesSeq: CaseAlternativesSeq
-   38                            | ε
+   38 CaseStatement: "case" "name" ":" $@5 OptionalCaseAlternativesSeq ";"
 
-   39 CaseAlternativesSeq: CaseAlternative
-   40                    | CaseAlternativesSeq CaseAlternative
+   39 OptionalCaseAlternativesSeq: CaseAlternativesSeq
+   40                            | ε
 
-   41 $@6: ε
+   41 CaseAlternativesSeq: CaseAlternative
+   42                    | CaseAlternativesSeq CaseAlternative
 
-   42 $@7: ε
+   43 $@6: ε
 
-   43 CaseAlternative: $@6 CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq ";"
+   44 $@7: ε
 
-   44 OptionalSelectOrAllStatement: SelectStatement
-   45                             | AllStatement
-   46                             | ε
+   45 CaseAlternative: $@6 CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq ";"
 
-   47 SelectStatement: "select" "name" ":" "name" ";"
+   46 OptionalSelectOrEveryStatement: SelectStatement
+   47                               | EveryStatement
+   48                               | ε
 
-   48 AllStatement: "all" "name" ";"
+   49 SelectStatement: "select" "name" ":" "name" ";"
+
+   50 EveryStatement: "every" "name" ";"
 
 
 Terminals, with rules where they appear
 
     $end (0) 0
     error (256)
-    "|" (258) 31
-    "=" (259) 23 25
-    ";" (260) 29 36 43 47 48
-    ":" (261) 8 9 10 24 26 29 36 43 47
-    "," (262) 29 34
-    "tool" (263) 8
-    "input" (264) 9 10
-    "choice" (265) 29
-    "default" (266) 29
-    "case" (267) 36
-    "select" (268) 47
-    "all" (269) 48
+    "|" (258) 33
+    "=" (259) 25 27
+    ";" (260) 31 38 45 49 50
+    ":" (261) 10 11 12 26 28 31 38 45 49
+    "," (262) 31 36
+    "tool" (263) 10
+    "input" (264) 11 12
+    "choice" (265) 31
+    "default" (266) 31
+    "case" (267) 38
+    "select" (268) 49
+    "every" (269) 50
     "integer number" <string> (270) 4
     "double number" <string> (271) 5
     "single quoted_string" <string> (272) 6
     "double quoted_string" <string> (273) 7
-    "name" <string> (274) 8 9 20 23 24 25 26 29 30 31 32 36 47 48
-    "option" <string> (275) 18 19
+    "name" <string> (274) 10 11 22 25 26 27 28 31 32 33 34 38 49 50
+    "option" <string> (275) 20 21
 
 
 Nonterminals, with rules where they appear
@@ -118,79 +121,82 @@ Nonterminals, with rules where they appear
         on right: 3
     Number <string> (25)
         on left: 4 5
-        on right: 21 25 26
-    String <string> (26)
+        on right: 23 27 28
+    SingleString <string> (26)
         on left: 6 7
-        on right: 10 22
-    Tool (27)
-        on left: 8
+        on right: 8 9
+    String <string> (27)
+        on left: 8 9
+        on right: 9 12 24
+    Tool (28)
+        on left: 10
         on right: 3
-    Input (28)
-        on left: 9 10
-        on right: 3
-    OptionalScriptElementsSeq (29)
+    Input (29)
         on left: 11 12
-        on right: 3 43
-    ScriptElementsSeq (30)
-        on left: 13 14
-        on right: 11 14
-    ScriptElement (31)
-        on left: 15 16 17
-        on right: 13 14
-    Option (32)
-        on left: 18 19
-        on right: 15
-    OptionValue <string> (33)
-        on left: 20 21 22 23 24 25 26
-        on right: 19
-    ChoiceDeclaration (34)
-        on left: 29
-        on right: 16
-    $@3 (35)
-        on left: 27
-        on right: 29
-    $@4 (36)
-        on left: 28
-        on right: 29
-    ChoiceLabels (37)
-        on left: 30 31
-        on right: 29 31
-    CaseLabel (38)
-        on left: 32
-        on right: 33 34
-    CaseLabelsSeq (39)
-        on left: 33 34
-        on right: 34 43
-    CaseStatement (40)
-        on left: 36
-        on right: 17
-    $@5 (41)
-        on left: 35
-        on right: 36
-    OptionalCaseAlternativesSeq (42)
-        on left: 37 38
-        on right: 36
-    CaseAlternativesSeq (43)
-        on left: 39 40
-        on right: 37 40
-    CaseAlternative (44)
-        on left: 43
-        on right: 39 40
-    $@6 (45)
-        on left: 41
-        on right: 43
-    $@7 (46)
-        on left: 42
-        on right: 43
-    OptionalSelectOrAllStatement (47)
-        on left: 44 45 46
         on right: 3
-    SelectStatement (48)
-        on left: 47
-        on right: 44
-    AllStatement (49)
-        on left: 48
+    OptionalScriptElementsSeq (30)
+        on left: 13 14
+        on right: 3 45
+    ScriptElementsSeq (31)
+        on left: 15 16
+        on right: 13 16
+    ScriptElement (32)
+        on left: 17 18 19
+        on right: 15 16
+    Option (33)
+        on left: 20 21
+        on right: 17
+    OptionValue <string> (34)
+        on left: 22 23 24 25 26 27 28
+        on right: 21
+    ChoiceDeclaration (35)
+        on left: 31
+        on right: 18
+    $@3 (36)
+        on left: 29
+        on right: 31
+    $@4 (37)
+        on left: 30
+        on right: 31
+    ChoiceLabels (38)
+        on left: 32 33
+        on right: 31 33
+    CaseLabel (39)
+        on left: 34
+        on right: 35 36
+    CaseLabelsSeq (40)
+        on left: 35 36
+        on right: 36 45
+    CaseStatement (41)
+        on left: 38
+        on right: 19
+    $@5 (42)
+        on left: 37
+        on right: 38
+    OptionalCaseAlternativesSeq (43)
+        on left: 39 40
+        on right: 38
+    CaseAlternativesSeq (44)
+        on left: 41 42
+        on right: 39 42
+    CaseAlternative (45)
+        on left: 45
+        on right: 41 42
+    $@6 (46)
+        on left: 43
         on right: 45
+    $@7 (47)
+        on left: 44
+        on right: 45
+    OptionalSelectOrEveryStatement (48)
+        on left: 46 47 48
+        on right: 3
+    SelectStatement (49)
+        on left: 49
+        on right: 46
+    EveryStatement (50)
+        on left: 50
+        on right: 47
 
 
 State 0
@@ -205,7 +211,7 @@ State 0
 
 State 1
 
-    8 Tool: "tool" • ":" "name"
+   10 Tool: "tool" • ":" "name"
 
     ":"  shift, and go to state 4
 
@@ -219,7 +225,7 @@ State 2
 
 State 3
 
-    3 Script: Tool • Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectOrAllStatement
+    3 Script: Tool • Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectOrEveryStatement
 
     "input"  shift, and go to state 6
 
@@ -228,7 +234,7 @@ State 3
 
 State 4
 
-    8 Tool: "tool" ":" • "name"
+   10 Tool: "tool" ":" • "name"
 
     "name"  shift, and go to state 8
 
@@ -242,15 +248,15 @@ State 5
 
 State 6
 
-    9 Input: "input" • ":" "name"
-   10      | "input" • ":" String
+   11 Input: "input" • ":" "name"
+   12      | "input" • ":" String
 
     ":"  shift, and go to state 9
 
 
 State 7
 
-    3 Script: Tool Input • $@1 OptionalScriptElementsSeq $@2 OptionalSelectOrAllStatement
+    3 Script: Tool Input • $@1 OptionalScriptElementsSeq $@2 OptionalSelectOrEveryStatement
 
     $default  reduce using rule 1 ($@1)
 
@@ -259,607 +265,635 @@ State 7
 
 State 8
 
-    8 Tool: "tool" ":" "name" •
+   10 Tool: "tool" ":" "name" •
 
-    $default  reduce using rule 8 (Tool)
+    $default  reduce using rule 10 (Tool)
 
 
 State 9
 
-    9 Input: "input" ":" • "name"
-   10      | "input" ":" • String
+   11 Input: "input" ":" • "name"
+   12      | "input" ":" • String
 
     "single quoted_string"  shift, and go to state 11
     "double quoted_string"  shift, and go to state 12
     "name"                  shift, and go to state 13
 
-    String  go to state 14
+    SingleString  go to state 14
+    String        go to state 15
 
 
 State 10
 
-    3 Script: Tool Input $@1 • OptionalScriptElementsSeq $@2 OptionalSelectOrAllStatement
+    3 Script: Tool Input $@1 • OptionalScriptElementsSeq $@2 OptionalSelectOrEveryStatement
 
-    "choice"  shift, and go to state 15
-    "case"    shift, and go to state 16
-    "option"  shift, and go to state 17
+    "choice"  shift, and go to state 16
+    "case"    shift, and go to state 17
+    "option"  shift, and go to state 18
 
-    $default  reduce using rule 12 (OptionalScriptElementsSeq)
+    $default  reduce using rule 14 (OptionalScriptElementsSeq)
 
-    OptionalScriptElementsSeq  go to state 18
-    ScriptElementsSeq          go to state 19
-    ScriptElement              go to state 20
-    Option                     go to state 21
-    ChoiceDeclaration          go to state 22
-    CaseStatement              go to state 23
+    OptionalScriptElementsSeq  go to state 19
+    ScriptElementsSeq          go to state 20
+    ScriptElement              go to state 21
+    Option                     go to state 22
+    ChoiceDeclaration          go to state 23
+    CaseStatement              go to state 24
 
 
 State 11
 
-    6 String: "single quoted_string" •
+    6 SingleString: "single quoted_string" •
 
-    $default  reduce using rule 6 (String)
+    $default  reduce using rule 6 (SingleString)
 
 
 State 12
 
-    7 String: "double quoted_string" •
+    7 SingleString: "double quoted_string" •
 
-    $default  reduce using rule 7 (String)
+    $default  reduce using rule 7 (SingleString)
 
 
 State 13
 
-    9 Input: "input" ":" "name" •
+   11 Input: "input" ":" "name" •
 
-    $default  reduce using rule 9 (Input)
+    $default  reduce using rule 11 (Input)
 
 
 State 14
 
-   10 Input: "input" ":" String •
+    8 String: SingleString •
 
-    $default  reduce using rule 10 (Input)
+    $default  reduce using rule 8 (String)
 
 
 State 15
 
-   29 ChoiceDeclaration: "choice" • "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
+    9 String: String • SingleString
+   12 Input: "input" ":" String •
 
-    "name"  shift, and go to state 24
+    "single quoted_string"  shift, and go to state 11
+    "double quoted_string"  shift, and go to state 12
+
+    $default  reduce using rule 12 (Input)
+
+    SingleString  go to state 25
 
 
 State 16
 
-   36 CaseStatement: "case" • "name" ":" $@5 OptionalCaseAlternativesSeq ";"
+   31 ChoiceDeclaration: "choice" • "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
 
-    "name"  shift, and go to state 25
+    "name"  shift, and go to state 26
 
 
 State 17
 
-   18 Option: "option" •
-   19       | "option" • OptionValue
+   38 CaseStatement: "case" • "name" ":" $@5 OptionalCaseAlternativesSeq ";"
 
-    "integer number"        shift, and go to state 26
-    "double number"         shift, and go to state 27
-    "single quoted_string"  shift, and go to state 11
-    "double quoted_string"  shift, and go to state 12
-    "name"                  shift, and go to state 28
-
-    $default  reduce using rule 18 (Option)
-
-    Number       go to state 29
-    String       go to state 30
-    OptionValue  go to state 31
+    "name"  shift, and go to state 27
 
 
 State 18
 
-    3 Script: Tool Input $@1 OptionalScriptElementsSeq • $@2 OptionalSelectOrAllStatement
+   20 Option: "option" •
+   21       | "option" • OptionValue
 
-    $default  reduce using rule 2 ($@2)
+    "integer number"        shift, and go to state 28
+    "double number"         shift, and go to state 29
+    "single quoted_string"  shift, and go to state 11
+    "double quoted_string"  shift, and go to state 12
+    "name"                  shift, and go to state 30
 
-    $@2  go to state 32
+    $default  reduce using rule 20 (Option)
+
+    Number        go to state 31
+    SingleString  go to state 14
+    String        go to state 32
+    OptionValue   go to state 33
 
 
 State 19
 
-   11 OptionalScriptElementsSeq: ScriptElementsSeq •
-   14 ScriptElementsSeq: ScriptElementsSeq • ScriptElement
+    3 Script: Tool Input $@1 OptionalScriptElementsSeq • $@2 OptionalSelectOrEveryStatement
 
-    "choice"  shift, and go to state 15
-    "case"    shift, and go to state 16
-    "option"  shift, and go to state 17
+    $default  reduce using rule 2 ($@2)
 
-    $default  reduce using rule 11 (OptionalScriptElementsSeq)
-
-    ScriptElement      go to state 33
-    Option             go to state 21
-    ChoiceDeclaration  go to state 22
-    CaseStatement      go to state 23
+    $@2  go to state 34
 
 
 State 20
 
-   13 ScriptElementsSeq: ScriptElement •
+   13 OptionalScriptElementsSeq: ScriptElementsSeq •
+   16 ScriptElementsSeq: ScriptElementsSeq • ScriptElement
 
-    $default  reduce using rule 13 (ScriptElementsSeq)
+    "choice"  shift, and go to state 16
+    "case"    shift, and go to state 17
+    "option"  shift, and go to state 18
+
+    $default  reduce using rule 13 (OptionalScriptElementsSeq)
+
+    ScriptElement      go to state 35
+    Option             go to state 22
+    ChoiceDeclaration  go to state 23
+    CaseStatement      go to state 24
 
 
 State 21
 
-   15 ScriptElement: Option •
+   15 ScriptElementsSeq: ScriptElement •
 
-    $default  reduce using rule 15 (ScriptElement)
+    $default  reduce using rule 15 (ScriptElementsSeq)
 
 
 State 22
 
-   16 ScriptElement: ChoiceDeclaration •
-
-    $default  reduce using rule 16 (ScriptElement)
-
-
-State 23
-
-   17 ScriptElement: CaseStatement •
+   17 ScriptElement: Option •
 
     $default  reduce using rule 17 (ScriptElement)
 
 
+State 23
+
+   18 ScriptElement: ChoiceDeclaration •
+
+    $default  reduce using rule 18 (ScriptElement)
+
+
 State 24
 
-   29 ChoiceDeclaration: "choice" "name" • ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
+   19 ScriptElement: CaseStatement •
 
-    ":"  shift, and go to state 34
+    $default  reduce using rule 19 (ScriptElement)
 
 
 State 25
 
-   36 CaseStatement: "case" "name" • ":" $@5 OptionalCaseAlternativesSeq ";"
+    9 String: String SingleString •
 
-    ":"  shift, and go to state 35
+    $default  reduce using rule 9 (String)
 
 
 State 26
+
+   31 ChoiceDeclaration: "choice" "name" • ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
+
+    ":"  shift, and go to state 36
+
+
+State 27
+
+   38 CaseStatement: "case" "name" • ":" $@5 OptionalCaseAlternativesSeq ";"
+
+    ":"  shift, and go to state 37
+
+
+State 28
 
     4 Number: "integer number" •
 
     $default  reduce using rule 4 (Number)
 
 
-State 27
+State 29
 
     5 Number: "double number" •
 
     $default  reduce using rule 5 (Number)
 
 
-State 28
-
-   20 OptionValue: "name" •
-   23            | "name" • "=" "name"
-   24            | "name" • ":" "name"
-   25            | "name" • "=" Number
-   26            | "name" • ":" Number
-
-    "="  shift, and go to state 36
-    ":"  shift, and go to state 37
-
-    $default  reduce using rule 20 (OptionValue)
-
-
-State 29
-
-   21 OptionValue: Number •
-
-    $default  reduce using rule 21 (OptionValue)
-
-
 State 30
 
-   22 OptionValue: String •
+   22 OptionValue: "name" •
+   25            | "name" • "=" "name"
+   26            | "name" • ":" "name"
+   27            | "name" • "=" Number
+   28            | "name" • ":" Number
+
+    "="  shift, and go to state 38
+    ":"  shift, and go to state 39
 
     $default  reduce using rule 22 (OptionValue)
 
 
 State 31
 
-   19 Option: "option" OptionValue •
+   23 OptionValue: Number •
 
-    $default  reduce using rule 19 (Option)
+    $default  reduce using rule 23 (OptionValue)
 
 
 State 32
 
-    3 Script: Tool Input $@1 OptionalScriptElementsSeq $@2 • OptionalSelectOrAllStatement
+    9 String: String • SingleString
+   24 OptionValue: String •
 
-    "select"  shift, and go to state 38
-    "all"     shift, and go to state 39
+    "single quoted_string"  shift, and go to state 11
+    "double quoted_string"  shift, and go to state 12
 
-    $default  reduce using rule 46 (OptionalSelectOrAllStatement)
+    $default  reduce using rule 24 (OptionValue)
 
-    OptionalSelectOrAllStatement  go to state 40
-    SelectStatement               go to state 41
-    AllStatement                  go to state 42
+    SingleString  go to state 25
 
 
 State 33
 
-   14 ScriptElementsSeq: ScriptElementsSeq ScriptElement •
+   21 Option: "option" OptionValue •
 
-    $default  reduce using rule 14 (ScriptElementsSeq)
+    $default  reduce using rule 21 (Option)
 
 
 State 34
 
-   29 ChoiceDeclaration: "choice" "name" ":" • $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
+    3 Script: Tool Input $@1 OptionalScriptElementsSeq $@2 • OptionalSelectOrEveryStatement
 
-    $default  reduce using rule 27 ($@3)
+    "select"  shift, and go to state 40
+    "every"   shift, and go to state 41
 
-    $@3  go to state 43
+    $default  reduce using rule 48 (OptionalSelectOrEveryStatement)
+
+    OptionalSelectOrEveryStatement  go to state 42
+    SelectStatement                 go to state 43
+    EveryStatement                  go to state 44
 
 
 State 35
 
-   36 CaseStatement: "case" "name" ":" • $@5 OptionalCaseAlternativesSeq ";"
+   16 ScriptElementsSeq: ScriptElementsSeq ScriptElement •
 
-    $default  reduce using rule 35 ($@5)
-
-    $@5  go to state 44
+    $default  reduce using rule 16 (ScriptElementsSeq)
 
 
 State 36
 
-   23 OptionValue: "name" "=" • "name"
-   25            | "name" "=" • Number
+   31 ChoiceDeclaration: "choice" "name" ":" • $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
 
-    "integer number"  shift, and go to state 26
-    "double number"   shift, and go to state 27
-    "name"            shift, and go to state 45
+    $default  reduce using rule 29 ($@3)
 
-    Number  go to state 46
+    $@3  go to state 45
 
 
 State 37
 
-   24 OptionValue: "name" ":" • "name"
-   26            | "name" ":" • Number
+   38 CaseStatement: "case" "name" ":" • $@5 OptionalCaseAlternativesSeq ";"
 
-    "integer number"  shift, and go to state 26
-    "double number"   shift, and go to state 27
+    $default  reduce using rule 37 ($@5)
+
+    $@5  go to state 46
+
+
+State 38
+
+   25 OptionValue: "name" "=" • "name"
+   27            | "name" "=" • Number
+
+    "integer number"  shift, and go to state 28
+    "double number"   shift, and go to state 29
     "name"            shift, and go to state 47
 
     Number  go to state 48
 
 
-State 38
-
-   47 SelectStatement: "select" • "name" ":" "name" ";"
-
-    "name"  shift, and go to state 49
-
-
 State 39
 
-   48 AllStatement: "all" • "name" ";"
+   26 OptionValue: "name" ":" • "name"
+   28            | "name" ":" • Number
 
-    "name"  shift, and go to state 50
+    "integer number"  shift, and go to state 28
+    "double number"   shift, and go to state 29
+    "name"            shift, and go to state 49
+
+    Number  go to state 50
 
 
 State 40
 
-    3 Script: Tool Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectOrAllStatement •
+   49 SelectStatement: "select" • "name" ":" "name" ";"
 
-    $default  reduce using rule 3 (Script)
+    "name"  shift, and go to state 51
 
 
 State 41
 
-   44 OptionalSelectOrAllStatement: SelectStatement •
+   50 EveryStatement: "every" • "name" ";"
 
-    $default  reduce using rule 44 (OptionalSelectOrAllStatement)
+    "name"  shift, and go to state 52
 
 
 State 42
 
-   45 OptionalSelectOrAllStatement: AllStatement •
+    3 Script: Tool Input $@1 OptionalScriptElementsSeq $@2 OptionalSelectOrEveryStatement •
 
-    $default  reduce using rule 45 (OptionalSelectOrAllStatement)
+    $default  reduce using rule 3 (Script)
 
 
 State 43
 
-   29 ChoiceDeclaration: "choice" "name" ":" $@3 • ChoiceLabels "," "default" ":" "name" $@4 ";"
+   46 OptionalSelectOrEveryStatement: SelectStatement •
 
-    "name"  shift, and go to state 51
-
-    ChoiceLabels  go to state 52
+    $default  reduce using rule 46 (OptionalSelectOrEveryStatement)
 
 
 State 44
 
-   36 CaseStatement: "case" "name" ":" $@5 • OptionalCaseAlternativesSeq ";"
+   47 OptionalSelectOrEveryStatement: EveryStatement •
 
-    "name"    reduce using rule 41 ($@6)
-    $default  reduce using rule 38 (OptionalCaseAlternativesSeq)
-
-    OptionalCaseAlternativesSeq  go to state 53
-    CaseAlternativesSeq          go to state 54
-    CaseAlternative              go to state 55
-    $@6                          go to state 56
+    $default  reduce using rule 47 (OptionalSelectOrEveryStatement)
 
 
 State 45
 
-   23 OptionValue: "name" "=" "name" •
+   31 ChoiceDeclaration: "choice" "name" ":" $@3 • ChoiceLabels "," "default" ":" "name" $@4 ";"
 
-    $default  reduce using rule 23 (OptionValue)
+    "name"  shift, and go to state 53
+
+    ChoiceLabels  go to state 54
 
 
 State 46
 
-   25 OptionValue: "name" "=" Number •
+   38 CaseStatement: "case" "name" ":" $@5 • OptionalCaseAlternativesSeq ";"
 
-    $default  reduce using rule 25 (OptionValue)
+    "name"    reduce using rule 43 ($@6)
+    $default  reduce using rule 40 (OptionalCaseAlternativesSeq)
+
+    OptionalCaseAlternativesSeq  go to state 55
+    CaseAlternativesSeq          go to state 56
+    CaseAlternative              go to state 57
+    $@6                          go to state 58
 
 
 State 47
 
-   24 OptionValue: "name" ":" "name" •
+   25 OptionValue: "name" "=" "name" •
 
-    $default  reduce using rule 24 (OptionValue)
+    $default  reduce using rule 25 (OptionValue)
 
 
 State 48
 
-   26 OptionValue: "name" ":" Number •
+   27 OptionValue: "name" "=" Number •
 
-    $default  reduce using rule 26 (OptionValue)
+    $default  reduce using rule 27 (OptionValue)
 
 
 State 49
 
-   47 SelectStatement: "select" "name" • ":" "name" ";"
+   26 OptionValue: "name" ":" "name" •
 
-    ":"  shift, and go to state 57
+    $default  reduce using rule 26 (OptionValue)
 
 
 State 50
 
-   48 AllStatement: "all" "name" • ";"
+   28 OptionValue: "name" ":" Number •
 
-    ";"  shift, and go to state 58
+    $default  reduce using rule 28 (OptionValue)
 
 
 State 51
 
-   30 ChoiceLabels: "name" •
+   49 SelectStatement: "select" "name" • ":" "name" ";"
 
-    $default  reduce using rule 30 (ChoiceLabels)
+    ":"  shift, and go to state 59
 
 
 State 52
 
-   29 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels • "," "default" ":" "name" $@4 ";"
-   31 ChoiceLabels: ChoiceLabels • "|" "name"
+   50 EveryStatement: "every" "name" • ";"
 
-    "|"  shift, and go to state 59
-    ","  shift, and go to state 60
+    ";"  shift, and go to state 60
 
 
 State 53
 
-   36 CaseStatement: "case" "name" ":" $@5 OptionalCaseAlternativesSeq • ";"
+   32 ChoiceLabels: "name" •
 
-    ";"  shift, and go to state 61
+    $default  reduce using rule 32 (ChoiceLabels)
 
 
 State 54
 
-   37 OptionalCaseAlternativesSeq: CaseAlternativesSeq •
-   40 CaseAlternativesSeq: CaseAlternativesSeq • CaseAlternative
+   31 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels • "," "default" ":" "name" $@4 ";"
+   33 ChoiceLabels: ChoiceLabels • "|" "name"
 
-    "name"    reduce using rule 41 ($@6)
-    $default  reduce using rule 37 (OptionalCaseAlternativesSeq)
-
-    CaseAlternative  go to state 62
-    $@6              go to state 56
+    "|"  shift, and go to state 61
+    ","  shift, and go to state 62
 
 
 State 55
 
-   39 CaseAlternativesSeq: CaseAlternative •
+   38 CaseStatement: "case" "name" ":" $@5 OptionalCaseAlternativesSeq • ";"
 
-    $default  reduce using rule 39 (CaseAlternativesSeq)
+    ";"  shift, and go to state 63
 
 
 State 56
 
-   43 CaseAlternative: $@6 • CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq ";"
+   39 OptionalCaseAlternativesSeq: CaseAlternativesSeq •
+   42 CaseAlternativesSeq: CaseAlternativesSeq • CaseAlternative
 
-    "name"  shift, and go to state 63
+    "name"    reduce using rule 43 ($@6)
+    $default  reduce using rule 39 (OptionalCaseAlternativesSeq)
 
-    CaseLabel      go to state 64
-    CaseLabelsSeq  go to state 65
+    CaseAlternative  go to state 64
+    $@6              go to state 58
 
 
 State 57
 
-   47 SelectStatement: "select" "name" ":" • "name" ";"
+   41 CaseAlternativesSeq: CaseAlternative •
 
-    "name"  shift, and go to state 66
+    $default  reduce using rule 41 (CaseAlternativesSeq)
 
 
 State 58
 
-   48 AllStatement: "all" "name" ";" •
+   45 CaseAlternative: $@6 • CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq ";"
 
-    $default  reduce using rule 48 (AllStatement)
+    "name"  shift, and go to state 65
+
+    CaseLabel      go to state 66
+    CaseLabelsSeq  go to state 67
 
 
 State 59
 
-   31 ChoiceLabels: ChoiceLabels "|" • "name"
+   49 SelectStatement: "select" "name" ":" • "name" ";"
 
-    "name"  shift, and go to state 67
+    "name"  shift, and go to state 68
 
 
 State 60
 
-   29 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," • "default" ":" "name" $@4 ";"
+   50 EveryStatement: "every" "name" ";" •
 
-    "default"  shift, and go to state 68
+    $default  reduce using rule 50 (EveryStatement)
 
 
 State 61
 
-   36 CaseStatement: "case" "name" ":" $@5 OptionalCaseAlternativesSeq ";" •
+   33 ChoiceLabels: ChoiceLabels "|" • "name"
 
-    $default  reduce using rule 36 (CaseStatement)
+    "name"  shift, and go to state 69
 
 
 State 62
 
-   40 CaseAlternativesSeq: CaseAlternativesSeq CaseAlternative •
+   31 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," • "default" ":" "name" $@4 ";"
 
-    $default  reduce using rule 40 (CaseAlternativesSeq)
+    "default"  shift, and go to state 70
 
 
 State 63
 
-   32 CaseLabel: "name" •
+   38 CaseStatement: "case" "name" ":" $@5 OptionalCaseAlternativesSeq ";" •
 
-    $default  reduce using rule 32 (CaseLabel)
+    $default  reduce using rule 38 (CaseStatement)
 
 
 State 64
 
-   33 CaseLabelsSeq: CaseLabel •
+   42 CaseAlternativesSeq: CaseAlternativesSeq CaseAlternative •
 
-    $default  reduce using rule 33 (CaseLabelsSeq)
+    $default  reduce using rule 42 (CaseAlternativesSeq)
 
 
 State 65
 
-   34 CaseLabelsSeq: CaseLabelsSeq • "," CaseLabel
-   43 CaseAlternative: $@6 CaseLabelsSeq • ":" $@7 OptionalScriptElementsSeq ";"
+   34 CaseLabel: "name" •
 
-    ":"  shift, and go to state 69
-    ","  shift, and go to state 70
+    $default  reduce using rule 34 (CaseLabel)
 
 
 State 66
 
-   47 SelectStatement: "select" "name" ":" "name" • ";"
+   35 CaseLabelsSeq: CaseLabel •
 
-    ";"  shift, and go to state 71
+    $default  reduce using rule 35 (CaseLabelsSeq)
 
 
 State 67
 
-   31 ChoiceLabels: ChoiceLabels "|" "name" •
+   36 CaseLabelsSeq: CaseLabelsSeq • "," CaseLabel
+   45 CaseAlternative: $@6 CaseLabelsSeq • ":" $@7 OptionalScriptElementsSeq ";"
 
-    $default  reduce using rule 31 (ChoiceLabels)
+    ":"  shift, and go to state 71
+    ","  shift, and go to state 72
 
 
 State 68
 
-   29 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" • ":" "name" $@4 ";"
+   49 SelectStatement: "select" "name" ":" "name" • ";"
 
-    ":"  shift, and go to state 72
+    ";"  shift, and go to state 73
 
 
 State 69
 
-   43 CaseAlternative: $@6 CaseLabelsSeq ":" • $@7 OptionalScriptElementsSeq ";"
+   33 ChoiceLabels: ChoiceLabels "|" "name" •
 
-    $default  reduce using rule 42 ($@7)
-
-    $@7  go to state 73
+    $default  reduce using rule 33 (ChoiceLabels)
 
 
 State 70
 
-   34 CaseLabelsSeq: CaseLabelsSeq "," • CaseLabel
+   31 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" • ":" "name" $@4 ";"
 
-    "name"  shift, and go to state 63
-
-    CaseLabel  go to state 74
+    ":"  shift, and go to state 74
 
 
 State 71
 
-   47 SelectStatement: "select" "name" ":" "name" ";" •
+   45 CaseAlternative: $@6 CaseLabelsSeq ":" • $@7 OptionalScriptElementsSeq ";"
 
-    $default  reduce using rule 47 (SelectStatement)
+    $default  reduce using rule 44 ($@7)
+
+    $@7  go to state 75
 
 
 State 72
 
-   29 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" • "name" $@4 ";"
+   36 CaseLabelsSeq: CaseLabelsSeq "," • CaseLabel
 
-    "name"  shift, and go to state 75
+    "name"  shift, and go to state 65
+
+    CaseLabel  go to state 76
 
 
 State 73
 
-   43 CaseAlternative: $@6 CaseLabelsSeq ":" $@7 • OptionalScriptElementsSeq ";"
+   49 SelectStatement: "select" "name" ":" "name" ";" •
 
-    "choice"  shift, and go to state 15
-    "case"    shift, and go to state 16
-    "option"  shift, and go to state 17
-
-    $default  reduce using rule 12 (OptionalScriptElementsSeq)
-
-    OptionalScriptElementsSeq  go to state 76
-    ScriptElementsSeq          go to state 19
-    ScriptElement              go to state 20
-    Option                     go to state 21
-    ChoiceDeclaration          go to state 22
-    CaseStatement              go to state 23
+    $default  reduce using rule 49 (SelectStatement)
 
 
 State 74
 
-   34 CaseLabelsSeq: CaseLabelsSeq "," CaseLabel •
+   31 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" • "name" $@4 ";"
 
-    $default  reduce using rule 34 (CaseLabelsSeq)
+    "name"  shift, and go to state 77
 
 
 State 75
 
-   29 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" • $@4 ";"
+   45 CaseAlternative: $@6 CaseLabelsSeq ":" $@7 • OptionalScriptElementsSeq ";"
 
-    $default  reduce using rule 28 ($@4)
+    "choice"  shift, and go to state 16
+    "case"    shift, and go to state 17
+    "option"  shift, and go to state 18
 
-    $@4  go to state 77
+    $default  reduce using rule 14 (OptionalScriptElementsSeq)
+
+    OptionalScriptElementsSeq  go to state 78
+    ScriptElementsSeq          go to state 20
+    ScriptElement              go to state 21
+    Option                     go to state 22
+    ChoiceDeclaration          go to state 23
+    CaseStatement              go to state 24
 
 
 State 76
 
-   43 CaseAlternative: $@6 CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq • ";"
+   36 CaseLabelsSeq: CaseLabelsSeq "," CaseLabel •
 
-    ";"  shift, and go to state 78
+    $default  reduce using rule 36 (CaseLabelsSeq)
 
 
 State 77
 
-   29 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 • ";"
+   31 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" • $@4 ";"
 
-    ";"  shift, and go to state 79
+    $default  reduce using rule 30 ($@4)
+
+    $@4  go to state 79
 
 
 State 78
 
-   43 CaseAlternative: $@6 CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq ";" •
+   45 CaseAlternative: $@6 CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq • ";"
 
-    $default  reduce using rule 43 (CaseAlternative)
+    ";"  shift, and go to state 80
 
 
 State 79
 
-   29 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";" •
+   31 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 • ";"
 
-    $default  reduce using rule 29 (ChoiceDeclaration)
+    ";"  shift, and go to state 81
+
+
+State 80
+
+   45 CaseAlternative: $@6 CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq ";" •
+
+    $default  reduce using rule 45 (CaseAlternative)
+
+
+State 81
+
+   31 ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";" •
+
+    $default  reduce using rule 31 (ChoiceDeclaration)

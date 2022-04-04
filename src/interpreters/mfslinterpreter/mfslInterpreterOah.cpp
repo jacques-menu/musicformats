@@ -147,18 +147,18 @@ The tool will be run once using the corresponding options block(s).)",
     appendAtomToSubGroup (
       fSelectChoiceToLabelsMapAtom);
 
-  fAllChoiceAtom =
+  fEveryChoiceAtom =
     oahStringAtom::create (
-      "all", "",
-R"(Select each label for choice CHOICE in turn.
+      "every", "",
+R"(Select every label for choice CHOICE in turn.
 The tool will be run as many times, using the corresponding options block(s).)",
       "CHOICE",
-      "fAllChoice",
-      fAllChoice);
+      "fEveryChoice",
+      fEveryChoice);
 
   subGroup->
     appendAtomToSubGroup (
-      fAllChoiceAtom);
+      fEveryChoiceAtom);
 
   // maintainance options
   // --------------------------------------
@@ -220,13 +220,13 @@ void mfslInterpreterOahGroup::enforceGroupQuietness ()
 void mfslInterpreterOahGroup::checkGroupOptionsConsistency ()
 {
   if (
-    fSelectChoiceToLabelsMapAtom->getSetByUser ()
+    fSelectChoiceToLabelsMapAtom->getSetByAnOption ()
       &&
-    fAllChoiceAtom->getSetByUser ()
+    fEveryChoiceAtom->getSetByAnOption ()
   ) {
     mfslOptionsIncompatibilityError (
       fSelectChoiceToLabelsMapAtom,
-      fAllChoiceAtom);
+      fEveryChoiceAtom);
   }
 }
 
@@ -376,8 +376,8 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   --gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fAllChoice" << " : " <<
-      fAllChoice <<
+    setw (fieldWidth) << "fEveryChoice" << " : " <<
+      fEveryChoice <<
       endl;
 
   --gIndenter;

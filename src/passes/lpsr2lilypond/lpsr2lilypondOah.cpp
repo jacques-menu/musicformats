@@ -245,7 +245,7 @@ void lilypondScoreOutputKindAtom::printAtomWithVariableOptionsValues (
       fLpsrScoreOutputKindVariable) <<
     "\"";
 
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -401,7 +401,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
         K_NO_INPUT_LINE_NUMBER,
         destinationPitchName);
 
-    fSetByUser = true;
+    fSetByAnOption = true;
   }
 }
 
@@ -571,10 +571,10 @@ void lilypondTransposePartNameAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : ";
 
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
-      "ffSetByUser: " <<
-      fSetByUser;
+      "ffSetByAnOption: " <<
+      fSetByAnOption;
   }
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
@@ -751,7 +751,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
         K_NO_INPUT_LINE_NUMBER,
         destinationPitchName);
 
-    fSetByUser = true;
+    fSetByAnOption = true;
   }
 }
 
@@ -921,10 +921,10 @@ void lilypondTransposePartIDAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : ";
 
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
-      "ffSetByUser: " <<
-      fSetByUser;
+      "ffSetByAnOption: " <<
+      fSetByAnOption;
   }
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
@@ -1889,7 +1889,7 @@ void lilypondAccidentalStyleKindAtom::printAtomWithVariableOptionsValues (
     lpsrAccidentalStyleKindAsString (
       fLpsrAccidentalStyleKindVariable);
 
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -2244,10 +2244,10 @@ void lilypondChordsDisplayAtom::printAtomWithVariableOptionsValues (
       os << endl;
     } // for
 
-    if (fSetByUser) {
+    if (fSetByAnOption) {
       os <<
-        "ffSetByUser: " <<
-        fSetByUser <<
+        "ffSetByAnOption: " <<
+        fSetByAnOption <<
         endl;
     }
 
@@ -2488,7 +2488,7 @@ void lilypondLyricsDurationsKindAtom::printAtomWithVariableOptionsValues (
     lpsrLyricsDurationsKindAsString (
       fLpsrLyricsDurationsKindVariable);
 
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
 
@@ -2723,7 +2723,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::printAtomWithVariableOptionsValu
     lpsrDynamicsTextSpannersStyleKindAsString (
       fLpsrdDynamicsTextSpannersStyleKindVariable);
 
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
 
@@ -3181,8 +3181,8 @@ R"()",
     transposePartNameAtom =
       lilypondTransposePartNameAtom::create (
         "lilypond-transpose-part-name", "lilytpn",
-R"(Transpose part PART_NAME using TRANSPOSITION in the LilyPond code.
-PART_TRANSPOSITION_SPEC should be of the form PART_NAME:TRANSPOSITION .
+R"(PART_TRANSPOSITION_SPEC should be of the form PART_NAME:TRANSPOSITION.
+Transpose part PART_NAME using TRANSPOSITION in the LilyPond code.
 There can be spaces around the ':', in which case quoting is needed.
 TRANSPOSITION should contain a diatonic pitch, followed if needed
 by a sequence of ',' or '\'' octave indications.
@@ -5151,10 +5151,10 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
           setw (valueFieldWidth) <<
           "relativeOctaveEntrySemiTonesPitchAndOctave" << " : ";
 /* JMI
-        if (fSetByUser) {
+        if (fSetByAnOption) {
           os <<
-            ", fSetByUser: " <<
-            fSetByUser;
+            ", fSetByAnOption: " <<
+            fSetByAnOption;
         }
 */
         os <<
@@ -5170,10 +5170,10 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
           setw (valueFieldWidth) <<
           "fixedOctaveEntrySemiTonesPitchAndOctave" << " : ";
 /* JMI
-        if (fSetByUser) {
+        if (fSetByAnOption) {
           os <<
-            ", fSetByUser: " <<
-            fSetByUser;
+            ", fSetByAnOption: " <<
+            fSetByAnOption;
         }
 */
         os <<
@@ -6439,8 +6439,8 @@ void lilypondBreakPageAfterMeasureNumberAtom::printAtomWithVariableOptionsValues
         "\" --> \"" <<
         (*i).second <<
         "\"" <<
-        ", fSetByUser: " <<
-        fSetByUser <<
+        ", fSetByAnOption: " <<
+        fSetByAnOption <<
         endl;
       if (++i == iEnd) break;
     } // for

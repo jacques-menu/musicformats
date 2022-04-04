@@ -879,8 +879,8 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
     oahOnOffKind          getOnOffKindVariable () const
                               { return fOnOffKindVariable; }
 
-    Bool                  getSetByUser () const
-                              { return fSetByUser; }
+    Bool                  getSetByAnOption () const
+                              { return fSetByAnOption; }
 
   public:
 
@@ -919,7 +919,7 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
 
     string                fVariableName;
     oahOnOffKind&         fOnOffKindVariable;
-    Bool                  fSetByUser;
+    Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahOnOffAtom> S_oahOnOffAtom;
 EXP ostream& operator<< (ostream& os, const S_oahOnOffAtom& elt);
@@ -970,8 +970,8 @@ class EXP oahBooleanAtom : public oahAtom
     Bool                  getBooleanVariable () const
                               { return fBooleanVariable; }
 
-    Bool                  getSetByUser () const
-                              { return fSetByUser; }
+    Bool                  getSetByAnOption () const
+                              { return fSetByAnOption; }
 
   public:
 
@@ -1008,7 +1008,7 @@ class EXP oahBooleanAtom : public oahAtom
 
     string                fVariableName;
     Bool&                 fBooleanVariable;
-    Bool                  fSetByUser;
+    Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahBooleanAtom> S_oahBooleanAtom;
 EXP ostream& operator<< (ostream& os, const S_oahBooleanAtom& elt);
@@ -2044,7 +2044,7 @@ class EXP oahRationalAtom : public oahAtomStoringAValue
                             const rational& value)
                               {
                                 fRationalVariable = value;
-                                fSetByUser = true;
+                                fSetByAnOption = true;
                               }
 
     rational              getRationalVariable () const
@@ -2137,7 +2137,7 @@ class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
                             set<int>& value)
                               {
                                 fNaturalNumbersSetVariable = value;
-                                fSetByUser = true;
+                                fSetByAnOption = true;
                               }
 
     const set<int>&       getNaturalNumbersSetVariable () const
@@ -2230,7 +2230,7 @@ class EXP oahRGBColorAtom : public oahAtomStoringAValue
                             msrRGBColor& value)
                               {
                                 fRGBColorVariable = value;
-                                fSetByUser = true;
+                                fSetByAnOption = true;
                               }
 
     const msrRGBColor&    getRGBColorVariable () const
@@ -2409,7 +2409,7 @@ class EXP oahStringSetElementAtom : public oahAtomStoringAValue
                             const string& partName)
                               {
                                 fStringSetVariable.insert (partName);
-                                fSetByUser = true;
+                                fSetByAnOption = true;
                               }
 
     const set<string>&    getStringSetVariable () const
@@ -2882,7 +2882,7 @@ class EXP oahLengthUnitKindAtom : public oahAtomStoringAValue
                             msrLengthUnitKind value)
                               {
                                 fLengthUnitKindVariable = value;
-                                fSetByUser = true;
+                                fSetByAnOption = true;
                               }
 
     msrLengthUnitKind     getLengthUnitKindVariable () const
@@ -2975,7 +2975,7 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
                             msrLength value)
                               {
                                 fLengthVariable = value;
-                                fSetByUser = true;
+                                fSetByAnOption = true;
                               }
 
     msrLength             getLengthVariable () const

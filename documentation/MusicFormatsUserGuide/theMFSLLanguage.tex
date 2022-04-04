@@ -24,7 +24,7 @@ The main features of \mfslLang\ are:
 \end{itemize}
 \end{itemize}
 
-The names in a choice specification are so-called \MainIt{labels}, here "tutti", "soprano", alto", "tenor" and "bass":
+The names in a \choice\ specification are so-called \MainIt{labels}, here "tutti", "soprano", alto", "tenor" and "bass":
 \begin{lstlisting}[language=Terminal]
 choice SCORE :
   tutti | soprano | alto | tenor | bass,
@@ -259,7 +259,7 @@ After that, there can be:
 \item  any number of  \code{choice} specifications identified by so-called \MainIt{labels}, to provide options selection criteria;
 
 \item any number of  \code{case} statements stating the options to be used depending on
-  the selected choices labels;
+  the selected \choice\ labels;
 
 \item optionaly, a \code{select} or a \code{all} statement.
 
@@ -416,11 +416,164 @@ produces this score:\\
 \section{Using choices in an MFSL script}
 % -------------------------------------------------------------------------
 
-Let us go one step further: \mfsl{Hymn121ForVocalSATBQuartet.mfsl} a selection criterion in  to obtain scores for a vocal SATB (soprano, alto, tenor, bass) choir.
+Let us go one step further, using \mfsl{Hymn121.xml} again, to obtain various scores for a vocal SATB (soprano, alto, tenor, bass) choir.
 
-This is done in the \mfsl{Hymn121ForVocalSATBQuartet.mfsl} \script:
-\begin{lstlisting}[language=Terminal]
+This example shows the use of a \code{choice} specification and a \code{case} statement, to indicate the various possible score \choice s and what options to use for them, and \code{select} or \code{every} statements or options to do the selection.
 
+The actual selection works this way:
+\begin{itemize}
+\item there can be a \code{select} or \code{every} statement, only one of those, at the end of the \script;
+\item if one of them is present in the \script, it is used to decide which options to use for the tool;
+\item this behaviour can be overridden by the use of \optionNameBoth{select}{sel} or \optionName{every}, respectively;
+\item if none of \code{select} or \code{every} is present, the default \coiceLabel\ for the \choice\ is implicitly used.
+\end{itemize}
+
+The \mfsl{Hymn121ForVocalSATBQuartet.mfsl} \script\ contains:
+\begin{lstlisting}[language=MFSL]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForVocalSATBQuartet.mfsl 
+#!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
+
+###
+  This MFSL script contains:
+    - a tool specification, telling which MusicFormats tool
+      to use, here xml2ly;
+
+    - an input specification, the input source to apply the latter to,
+      here file name "Hymn121.xml";
+
+    - a number of MusicFormats options;
+
+    - a SCORE choice specification containing 5 label,
+      each telling which options to use
+      to get a score generated with this script and xml2ly/LilyPond;
+
+    - a 'select' specification to choose one such SCORE label;
+###
+
+
+# ----------------------------------------------------------
+# the MusicFormats tool to be used
+# ----------------------------------------------------------
+
+tool : xml2ly
+
+
+# ----------------------------------------------------------
+# the input file to be handled by the tool
+# ----------------------------------------------------------
+
+input : "Hymn121.xml"
+
+
+# ----------------------------------------------------------
+# some commmon options
+# ----------------------------------------------------------
+
+# header
+  -title "Hymn 121 - Angels From The Realms Of Glory"
+
+# display
+#   -display-options-values
+
+# LilyPond
+  -lilypond-generation-infos
+
+# dynamics
+  -all-wedges-below
+
+
+# ----------------------------------------------------------
+# the labels for the SCORE choice
+# ----------------------------------------------------------
+
+# choose names that match the intent,
+# uppercase to emphasize a choice name is a matter of taste
+
+choice SCORE :
+  tutti | soprano | alto | tenor | bass,
+
+  default: tutti
+;
+
+
+# ----------------------------------------------------------
+# tell which options are to be used depending on SCORE labels
+# ----------------------------------------------------------
+
+case SCORE :
+	tutti:
+	  -output-file-name "Hymn121_SATB_tutti.ly"
+
+    -global-staff-size 17.675
+    -subtitle "Tutti"
+  ;
+
+	soprano:
+	  -output-file-name "Hymn121_SATB_soprano.ly"
+
+    -subtitle '\markup { "B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
+    -keep-musicxml-part-id P1
+    -msr-rename-part "P1:soprano"
+
+#     -display-lpsr-short
+  ;
+
+	alto:
+	  -output-file-name "Hymn121_SATB_alto.ly"
+
+    -subtitle "Alto"
+    -keep-musicxml-part-id P2
+  ;
+
+	tenor:
+	  -output-file-name "Hymn121_SATB_tenor.ly"
+
+    -subtitle "Tenor"
+    -keep-musicxml-part-id P3
+
+    -global-staff-size 23 # an easier-to-read score is needed
+  ;
+
+	bass:
+	  -output-file-name "Hymn121_SATB_bass.ly"
+
+    -subtitle "Bass"
+    -keep-musicxml-part-id P4
+
+    -ignore-musicxml-lyrics # there's a glitch at the last measure
+  ;
+;
+
+
+# ----------------------------------------------------------
+# choosing which score(s) to generate
+# ----------------------------------------------------------
+
+###
+  Comment/uncomment the statements below to choose
+  either a particular SCORE or every one of them to be generated.
+  Only one of 'select' and 'every' can be used.
+
+  The 'select' statement chooses one particular score, overriding
+  the default "tutti" label setting in the 'choice' statement.
+
+  This can also be done with an option to the MFSL interpreter such as:
+    -select SCORE:tenor
+
+  The 'every' statement causes all possible scores for the given choice
+  to be generated.
+
+  This can also be done with this option to the MFSL interpreter:
+    -every SCORE
+###
+
+# select SCORE : tutti ; # superflous actually
+# select SCORE : soprano ;
+# select SCORE : alto ;
+# select SCORE : tenor ;
+# select SCORE : bass ;
+
+# every SCORE ;
 \end{lstlisting}
 
 
@@ -432,7 +585,7 @@ This is done in the \mfsl{Hymn121ForVocalSATBQuartet.mfsl} \script:
 
 
 % -------------------------------------------------------------------------
-\section{Running the tool for all the choice labels}
+\section{Running the tool for every choice label}
 % -------------------------------------------------------------------------
 
 

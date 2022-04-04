@@ -370,12 +370,12 @@ string xml2lyInsiderHandler::fetchOutputFileNameFromTheOptions () const
   Bool
     outputFileNameHasBeenSet =
       outputFileNameStringAtom->
-        getSetByUser ();
+        getSetByAnOption ();
 
   Bool
     autoOutputFileNameHasBeenSet =
       autoOutputFileNameAtom->
-        getSetByUser ();
+        getSetByAnOption ();
 
   string outputFileName;
 

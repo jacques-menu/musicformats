@@ -174,7 +174,7 @@ void mfslDriver::setInputSouceName (string inputSouceName)
 
 void mfslDriver::optionsBlocksStackPush (
   S_mfslOptionsBlock optionsBlock,
-  const string& context)
+  const string&      context)
 {
   if (fTraceOptionsBlocks) {
     gLogStream <<
@@ -212,7 +212,8 @@ S_mfslOptionsBlock mfslDriver::optionsBlocksStackTop () const
 }
 
 void mfslDriver::registerOptionInCurrentOptionsBlock (
-  S_oahOption option)
+  S_oahOption option,
+  mfslDriver& drv)
 {
   S_mfslOptionsBlock
     currentOptionsBlock =
@@ -236,7 +237,8 @@ void mfslDriver::registerOptionInCurrentOptionsBlock (
 
   currentOptionsBlock->
     registerOptionsInOptionsBlock (
-      option);
+      option,
+      drv);
 }
 
 void mfslDriver::optionsBlocksStackPop (
@@ -513,73 +515,11 @@ void mfslDriver::setSelectLabelForToolLaunching (
     }
 
     if (mfStringIsInStringSet (label, choiceLabelsSet)) {
-      // is this label already selected by an option?
-      S_oahStringToStringMapElementAtom
-        selectChoiceToLabelsMapAtom =
-          gGlobalMfslInterpreterOahGroup->
-            getSelectChoiceToLabelsMapAtom ();
-
-      gLogStream <<
-        "----------> selectChoiceToLabelsMapAtom: " <<
-        endl <<
-        selectChoiceToLabelsMapAtom <<
-        endl;
-
-      if (selectChoiceToLabelsMapAtom->getSetByUser ()) {
-        // yes, this 'select' statement is superseeded by the option
-        const map<string, string>&
-          selectChoiceToLabelsMap =
-            gGlobalMfslInterpreterOahGroup->
-              getSelectChoiceToLabelsMap ();
-
-        string userSuppliedLabel;
-
-        Bool
-          userSuppliedLabelIsKnwonToTheChoice =
-            mfStringIsInStringToStringMap (
-              choiceName,
-              selectChoiceToLabelsMap,
-              userSuppliedLabel);
-
-        if (userSuppliedLabelIsKnwonToTheChoice) {
-          if (fTraceChoices) {
-            gLogStream <<
-              "====> label \"" <<
-              label <<
-              "\" for choice:" <<
-              endl;
-            ++gIndenter;
-            gLogStream <<
-              choice;
-            --gIndenter;
-
-            gLogStream <<
-              "is superseeded by \"" <<
-              userSuppliedLabel <<
-              "\" supplied by an option" <<
-              endl;
-          }
-
-          S_mfslOptionsBlock
-            optionsBlock =
-              choice->
-                getChoiceOptionsBlockForLabel (
-                  userSuppliedLabel,
-                  *this);
-
-          fOptionsBlockToUseForSelectLaunching =
-            optionsBlock;
-
-          if (fTraceChoices) {
-            gLogStream <<
-              "====> fOptionsBlockToUseForSelectLaunching from script:" <<
-              endl;
-            ++gIndenter;
-            gLogStream <<
-              fOptionsBlockToUseForSelectLaunching;
-            --gIndenter;
-          }
-        }
+      if (
+        applySelectOptionIfPresent (
+          choice,
+          label)
+      ) {
       }
 
       else {
@@ -613,7 +553,7 @@ void mfslDriver::setSelectLabelForToolLaunching (
         "label \"" << label <<
         "\" is no label of choice \"" <<
         choiceName <<
-        "\"";
+        "\", cannot be used in a 'select' statement";
 
       mfslError (
         s.str (),
@@ -621,22 +561,30 @@ void mfslDriver::setSelectLabelForToolLaunching (
     }
   }
 
-  else {
-    stringstream s;
-
-    s <<
-      "name \"" << choiceName <<
-      "\" is no choice name, cannot be used in a 'select' statement";
-
-    mfslError (
-      s.str (),
-      fScannerLocation);
-  }
+//   else {
+//     stringstream s;
+//
+//     s <<
+//       "name \"" << choiceName <<
+//       "\" is no choice name, cannot be used in a 'select' statement";
+//
+//     mfslError (
+//       s.str (),
+//       fScannerLocation);
+//   }
 }
 
-void mfslDriver::setAllChoicesOptionsBlockForToolLaunching (
+void mfslDriver::setEveryChoiceForToolLaunching (
   const string& choiceName)
 {
+  if (fTraceChoices) {
+    gLogStream <<
+      "====> setEveryChoiceForToolLaunching()" <<
+      ", choiceName: " << choiceName <<
+      endl;
+  }
+
+  // fetch the choice
   S_mfslChoice
     choice =
       fChoicesTable->
@@ -645,22 +593,61 @@ void mfslDriver::setAllChoicesOptionsBlockForToolLaunching (
           *this);
 
   if (choice) {
-    // register the choice to use for 'all' launching
-    fChoiceToUseForAllLaunching =
-      choice;
+    // is this choice name already selected by an option?
+    S_oahStringAtom
+      everyChoiceAtom =
+        gGlobalMfslInterpreterOahGroup->
+          getEveryChoiceAtom ();
+
+    gLogStream <<
+      "----------> everyChoiceAtom: " <<
+      endl <<
+      everyChoiceAtom <<
+      endl;
+
+    if (applyEveryOptionIfPresent (everyChoiceAtom)) {
+    }
+
+    else {
+      // no, this 'every' statement is to be applied
+      // register the choice to use for 'every' launching
+      fChoiceToUseForEveryLaunching =
+        choice;
+
+      if (fTraceChoices) {
+        gLogStream <<
+          "====> setEveryChoiceForToolLaunching()" <<
+          ", choice: " <<
+          endl;
+        ++gIndenter;
+        gLogStream <<
+          fChoiceToUseForEveryLaunching;
+        --gIndenter;
+      }
+
+      if (fTraceChoices) {
+        gLogStream <<
+          "====> fChoiceToUseForEveryLaunching from script:" <<
+          endl;
+        ++gIndenter;
+        gLogStream <<
+          fChoiceToUseForEveryLaunching;
+        --gIndenter;
+      }
+    }
   }
 
-  else {
-    stringstream s;
-
-    s <<
-      "name \"" << choiceName <<
-      "\" is no choice name, cannot be used in a 'all' statement";
-
-    mfslError (
-      s.str (),
-      fScannerLocation);
-  }
+//   else {
+//     stringstream s;
+//
+//     s <<
+//       "name \"" << choiceName <<
+//       "\" is no choice name, cannot be used in an 'every' statement";
+//
+//     mfslError (
+//       s.str (),
+//       fScannerLocation);
+//   }
 }
 
 mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
@@ -750,6 +737,358 @@ mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
 	return result;
 }
 
+Bool mfslDriver::applySelectOptionIfPresent (
+  const S_mfslChoice choice,
+  const string&      label)
+{
+  Bool result;
+
+  // is this label already selected by an option?
+  S_oahStringToStringMapElementAtom
+    selectChoiceToLabelsMapAtom =
+      gGlobalMfslInterpreterOahGroup->
+        getSelectChoiceToLabelsMapAtom ();
+
+  gLogStream <<
+    "----------> selectChoiceToLabelsMapAtom: " <<
+    endl <<
+    selectChoiceToLabelsMapAtom <<
+    endl;
+
+  if (selectChoiceToLabelsMapAtom->getSetByAnOption ()) {
+    // yes, this 'select' statement is superseeded by the option
+    const map<string, string>&
+      selectChoiceToLabelsMap =
+        gGlobalMfslInterpreterOahGroup->
+          getSelectChoiceToLabelsMap ();
+
+    if (fTraceChoices) {
+      mfDisplayStringToStringMap (
+        "====> selectChoiceToLabelsMap",
+        selectChoiceToLabelsMap,
+        gLogStream);
+    }
+
+    string
+      choiceName =
+        choice->getChoiceName ();
+
+    string
+      optionSuppliedLabel;
+
+    Bool
+      optionSuppliedLabelIsKnwonToTheChoice =
+        mfStringIsInStringToStringMap (
+          choiceName,
+          selectChoiceToLabelsMap,
+          optionSuppliedLabel);
+
+    if (optionSuppliedLabelIsKnwonToTheChoice) {
+      if (fTraceChoices) {
+        gLogStream <<
+          "====> label \"" <<
+          label <<
+          "\" for choice:" <<
+          endl;
+        ++gIndenter;
+        gLogStream <<
+          choice;
+        --gIndenter;
+
+        gLogStream <<
+          "is superseeded by \"" <<
+          optionSuppliedLabel <<
+          "\" supplied by an option" <<
+          endl;
+      }
+
+      S_mfslOptionsBlock
+        optionsBlock =
+          choice->
+            getChoiceOptionsBlockForLabel (
+              optionSuppliedLabel,
+              *this);
+
+      fOptionsBlockToUseForSelectLaunching =
+        optionsBlock;
+
+      if (fTraceChoices) {
+        gLogStream <<
+          "====> fOptionsBlockToUseForSelectLaunching by an option:" <<
+          endl;
+        ++gIndenter;
+        gLogStream <<
+          fOptionsBlockToUseForSelectLaunching;
+        --gIndenter;
+      }
+    }
+
+    else {
+      stringstream s;
+
+      s <<
+        "label \"" << optionSuppliedLabel <<
+        "\" is unknown in choices table";
+
+      mfslError (
+        s.str (),
+        fScannerLocation);
+    }
+  }
+
+  return result;
+}
+
+Bool mfslDriver::applySelectOptionFinally ()
+{
+  Bool result;
+
+  if (fTraceChoices) {
+    gLogStream <<
+      "====> Finally applying 'select' option" <<
+      endl;
+  }
+
+  const map<string, string>&
+    selectChoiceToLabelsMap =
+      gGlobalMfslInterpreterOahGroup->
+        getSelectChoiceToLabelsMap ();
+
+    if (fTraceChoices) {
+      mfDisplayStringToStringMap (
+        "====> selectChoiceToLabelsMap",
+        selectChoiceToLabelsMap,
+        gLogStream);
+    }
+
+  if (selectChoiceToLabelsMap.size () > 1) {
+    stringstream s;
+
+    s <<
+      "there are several 'select' options, only 1 can be used";
+
+    mfslInternalError (
+      s.str (),
+      fScannerLocation);
+  }
+
+  map<string, string>::const_iterator
+    it = selectChoiceToLabelsMap.begin ();
+
+  string
+    optionSuppliedChoiceName =
+      (*it).first,
+    optionSuppliedLabel =
+      (*it).second;
+
+  string
+    optionSuppliedLabelDummy; // because a variable is needed...
+
+    if (fTraceChoices) {
+      gLogStream <<
+        "====> optionSuppliedChoiceName: \"" <<
+        optionSuppliedChoiceName <<
+        "\"" <<
+        endl;
+    }
+
+  Bool
+    optionSuppliedLabelIsKnwonToTheChoice =
+      mfStringIsInStringToStringMap (
+        optionSuppliedChoiceName,
+        selectChoiceToLabelsMap,
+        optionSuppliedLabelDummy);
+
+  if (optionSuppliedLabelIsKnwonToTheChoice) {
+    if (fTraceChoices) {
+      gLogStream <<
+        "====> option-supplied label \"" <<
+        optionSuppliedLabel <<
+        "\" for choice \"" <<
+        optionSuppliedChoiceName <<
+        "\" is being applied" <<
+        endl;
+    }
+
+    S_mfslChoice
+      optionSuppliedChoice =
+        fChoicesTable->
+          fetchChoiceByNameNonConst (
+            optionSuppliedChoiceName,
+            *this);
+
+    S_mfslOptionsBlock
+      optionsBlock =
+        optionSuppliedChoice->
+          getChoiceOptionsBlockForLabel (
+            optionSuppliedLabel,
+            *this);
+
+    fOptionsBlockToUseForSelectLaunching =
+      optionsBlock;
+
+    if (fTraceChoices) {
+      gLogStream <<
+        "====> fOptionsBlockToUseForSelectLaunching by an option:" <<
+        endl;
+      ++gIndenter;
+      gLogStream <<
+        fOptionsBlockToUseForSelectLaunching;
+      --gIndenter;
+    }
+  }
+
+  else {
+    stringstream s;
+
+    s <<
+      "label \"" <<
+      optionSuppliedChoiceName <<
+      "\" is unknown in choice \"" <<
+      optionSuppliedChoiceName <<
+      "\"";
+
+    mfslError (
+      s.str (),
+      fScannerLocation);
+  }
+
+  return result;
+}
+
+Bool mfslDriver::applyEveryOptionIfPresent (
+  const S_oahStringAtom everyChoiceAtom)
+{
+  Bool result;
+
+  if (everyChoiceAtom->getSetByAnOption ()) {
+    // yes, this 'every' statement is superseeded by the option
+
+    // get the option-supplied choice name
+    string
+      optionSuppliedChoiceName =
+        gGlobalMfslInterpreterOahGroup->
+          getEveryChoice ();
+
+    if (fTraceChoices) {
+      gLogStream <<
+        "=====> optionSuppliedChoiceName: " <<
+        endl;
+      ++gIndenter;
+      gLogStream <<
+        optionSuppliedChoiceName;
+      --gIndenter;
+
+      gLogStream <<
+        "is superseeded by \"" <<
+        optionSuppliedChoiceName <<
+        "\" supplied by an option" <<
+        endl;
+    }
+
+    // fetch the choice supplied by this option
+    S_mfslChoice
+      choiceSuppliedByAnOption =
+        fChoicesTable->
+          fetchChoiceByNameNonConst (
+            optionSuppliedChoiceName,
+            *this);
+
+    if (choiceSuppliedByAnOption) { // JMI
+      fChoiceToUseForEveryLaunching =
+        choiceSuppliedByAnOption;
+
+      if (fTraceChoices) {
+        gLogStream <<
+          "====> fChoiceToUseForEveryLaunching supplied by an option:" <<
+          endl;
+        ++gIndenter;
+        gLogStream <<
+          fChoiceToUseForEveryLaunching;
+        --gIndenter;
+      }
+    }
+
+    else {
+      stringstream s;
+
+      s <<
+        "choice \"" << optionSuppliedChoiceName <<
+        "\" is unknown in choices table";
+
+      mfslError (
+        s.str (),
+        fScannerLocation);
+    }
+  }
+
+  return result;
+}
+
+Bool mfslDriver::applyEveryOptionFinally ()
+{
+  Bool result;
+
+  // get the option-supplied choice name
+  string
+    optionSuppliedChoiceName =
+      gGlobalMfslInterpreterOahGroup->
+        getEveryChoice ();
+
+  if (fTraceChoices) {
+    gLogStream <<
+      "=====> optionSuppliedChoiceName: " <<
+      endl;
+    ++gIndenter;
+    gLogStream <<
+      optionSuppliedChoiceName;
+    --gIndenter;
+
+    gLogStream <<
+      "is superseeded by \"" <<
+      optionSuppliedChoiceName <<
+      "\" supplied by an option" <<
+      endl;
+  }
+
+  // fetch the choice supplied by this option
+  S_mfslChoice
+    choiceSuppliedByAnOption =
+      fChoicesTable->
+        fetchChoiceByNameNonConst (
+          optionSuppliedChoiceName,
+          *this);
+
+  if (choiceSuppliedByAnOption) { // JMI
+    fChoiceToUseForEveryLaunching =
+      choiceSuppliedByAnOption;
+
+    if (fTraceChoices) {
+      gLogStream <<
+        "====> fChoiceToUseForEveryLaunching supplied by an option:" <<
+        endl;
+      ++gIndenter;
+      gLogStream <<
+        fChoiceToUseForEveryLaunching;
+      --gIndenter;
+    }
+  }
+
+  else {
+    stringstream s;
+
+    s <<
+      "choice \"" << optionSuppliedChoiceName <<
+      "\" is unknown in choices table";
+
+    mfslError (
+      s.str (),
+      fScannerLocation);
+  }
+
+  return result;
+}
+
 void mfslDriver::finalSemanticsCheck ()
 {
   // have all the options supplied choices been used?
@@ -757,7 +1096,7 @@ void mfslDriver::finalSemanticsCheck ()
     stringstream s;
 
     s <<
-      "option supplied choice \"" <<
+      "option-supplied choice \"" <<
       choiceName <<
       "\" has not been used in script \"" <<
       fScriptSourceName <<
@@ -767,6 +1106,34 @@ void mfslDriver::finalSemanticsCheck ()
       s.str (),
       fScannerLocation);
   } // for
+
+  // is there a pending 'select' option?
+  S_oahStringToStringMapElementAtom
+    selectChoiceToLabelsMapAtom =
+      gGlobalMfslInterpreterOahGroup->
+        getSelectChoiceToLabelsMapAtom ();
+
+  if (
+    selectChoiceToLabelsMapAtom->getSetByAnOption ()
+      &&
+    ! fChoiceToUseForEveryLaunching
+  ) {
+    applySelectOptionFinally ();
+  }
+
+  // is there a pending 'every' option?
+  S_oahStringAtom
+    everyChoiceAtom =
+      gGlobalMfslInterpreterOahGroup->
+        getEveryChoiceAtom ();
+
+  if (
+    everyChoiceAtom->getSetByAnOption ()
+      &&
+    ! fOptionsBlockToUseForSelectLaunching
+  ) {
+    applyEveryOptionFinally ();
+  }
 }
 
 void mfslDriver::populateTheCommandsList ()
@@ -799,26 +1166,23 @@ void mfslDriver::populateTheCommandsList ()
       mainOptionsAsString);
   }
 
-//     setAllChoicesOptionsBlockForToolLaunching ( JMI
-//       );
-
   else {
     // there are case statements
 
-    if (fChoiceToUseForAllLaunching) {
-      // an 'all' statement has been supplied,
+    if (fChoiceToUseForEveryLaunching) {
+      // an 'every' statement has been supplied,
       // either in the script or by an option
 
       const set<string>&
         choiceLabelsSet =
-          fChoiceToUseForAllLaunching->
+          fChoiceToUseForEveryLaunching->
             getLabelsSet ();
 
       for (string label : choiceLabelsSet) {
         // fetch the options block
         S_mfslOptionsBlock
           optionsBlock =
-            fChoiceToUseForAllLaunching->
+            fChoiceToUseForEveryLaunching->
               getChoiceOptionsBlockForLabel (
                 label,
                 *this);
@@ -864,7 +1228,7 @@ void mfslDriver::populateTheCommandsList ()
     }
 
     else {
-      // there are no 'select' nor 'all' statements,
+      // there are no 'select' nor 'every' statements,
       // check that there is only one choice in the script
 
       // get the choices table
@@ -921,8 +1285,8 @@ void mfslDriver::populateTheCommandsList ()
       }
 
       else {
-        mfslnternalError (
-          "there can be only 1 choice if there is no 'select' nor 'all' statement",
+        mfslInternalError (
+          "there can be only 1 choice if there is no 'select' nor 'every' statement",
           fScannerLocation);
       }
     }

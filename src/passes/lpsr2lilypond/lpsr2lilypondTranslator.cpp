@@ -5793,7 +5793,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
     lilypondVersionHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getLilypondVersionAtom ()->
-          getSetByUser ();
+          getSetByAnOption ();
 
   string
     lilypondVersion =
@@ -5823,7 +5823,7 @@ void lpsr2lilypondTranslator::generateGlobalStaffSize ()
     globalStaffSizeHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getGlobalStaffSizeAtom ()->
-          getSetByUser ();
+          getSetByAnOption ();
 
   Bool
     doGenerateGlobalStaffSize =
@@ -5875,7 +5875,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
       nameStringValuePairsList);
   }
 
-  generateHeaderLilypondPart (
+  createLilypondHeaderStringValuePairs (
     header,
     nameStringValuePairsList);
 
@@ -5920,8 +5920,8 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
     fLilypondCodeStream << left <<
       setw (fieldWidth) <<
       name << " = " <<
-//       value <<
-      mfDoubleQuoteString (value) << // JMI  extensive tests???
+      generateStringAsLilypondMarkupOrDoubleQuotedString (
+        value) <<
       endl;
   } // for
 }
@@ -6255,7 +6255,7 @@ void lpsr2lilypondTranslator::generateHeaderIdentificationPart (
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::generateHeaderLilypondPart (
+void lpsr2lilypondTranslator::createLilypondHeaderStringValuePairs (
   S_lpsrHeader                 header,
   list<pair<string, string> >& nameStringValuePairsList)
 {
@@ -6605,6 +6605,24 @@ void lpsr2lilypondTranslator::generateHeaderLilypondPart (
 }
 
 //________________________________________________________________________
+string lpsr2lilypondTranslator::generateStringAsLilypondMarkupOrDoubleQuotedString (
+  const string& value)
+{
+  string result;
+
+  if (value.find ("markup") != string::npos) {
+    // no quoting for markups
+    result = value;
+  }
+  else {
+    result =
+      mfDoubleQuoteString (value); // JMI  extensive tests???
+  }
+
+  return result;
+}
+
+//________________________________________________________________________
 void lpsr2lilypondTranslator::generatePaper (
   S_lpsrPaper paper)
 {
@@ -6812,7 +6830,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
     paperHeightHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperHeightAtom ()->
-          getSetByUser (),
+          getSetByAnOption (),
     doGeneratePaperHeight =
       paperHeightHasBeenSet || generateCommentedOutVariables;
 
@@ -6832,7 +6850,7 @@ void lpsr2lilypondTranslator::fetchLengthValuesFromPaperPageSize (
     paperWidthHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperWidthAtom ()->
-          getSetByUser (),
+          getSetByAnOption (),
     doGeneratePaperWidth =
       paperWidthHasBeenSet || generateCommentedOutVariables;
 
@@ -6853,7 +6871,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   list<pair<string, Bool> >& nameBooleanValuePairsList)
 {
   // ragged-last
-  if (gGlobalLpsrOahGroup->getRaggedLastAtom ()->getSetByUser ()) {
+  if (gGlobalLpsrOahGroup->getRaggedLastAtom ()->getSetByAnOption ()) {
     oahOnOffKind
       raggedLast =
         paper->getRaggedLast ();
@@ -6873,7 +6891,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   }
 
   // ragged-bottom
-  if (gGlobalLpsrOahGroup->getRaggedBottomAtom ()->getSetByUser ()) {
+  if (gGlobalLpsrOahGroup->getRaggedBottomAtom ()->getSetByAnOption ()) {
     oahOnOffKind
       raggedBottom =
         paper->getRaggedBottom ();
@@ -6893,7 +6911,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   }
 
   // ragged-last-bottom
-  if (gGlobalLpsrOahGroup->getRaggedLastBottomAtom ()->getSetByUser ()) {
+  if (gGlobalLpsrOahGroup->getRaggedLastBottomAtom ()->getSetByAnOption ()) {
     oahOnOffKind
       raggedLastBottom =
         paper->getRaggedLastBottom ();
@@ -6913,7 +6931,7 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
   }
 
   // ragged-right
-  if (gGlobalLpsrOahGroup->getRaggedRightAtom ()->getSetByUser ()) {
+  if (gGlobalLpsrOahGroup->getRaggedRightAtom ()->getSetByAnOption ()) {
     oahOnOffKind
       raggedRight =
         paper->getRaggedRight ();
@@ -6949,7 +6967,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
     paperHeightHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperHeightAtom ()->
-          getSetByUser (),
+          getSetByAnOption (),
     doGeneratePaperHeight =
       paperHeightHasBeenSet || generateCommentedOutVariables;
 
@@ -6976,7 +6994,7 @@ void lpsr2lilypondTranslator::generatePaperPageSize (
     paperWidthHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperWidthAtom ()->
-          getSetByUser (),
+          getSetByAnOption (),
     doGeneratePaperWidth =
       paperWidthHasBeenSet || generateCommentedOutVariables;
 
@@ -7015,7 +7033,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     leftMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperLeftMarginAtom ()->
-          getSetByUser (),
+          getSetByAnOption (),
     doGenerateLeftMargin =
       leftMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -7042,7 +7060,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     rightMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperRightMarginAtom ()->
-          getSetByUser (),
+          getSetByAnOption (),
     doGenerateRightMargin =
       rightMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -7069,7 +7087,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     topMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperTopMarginAtom ()->
-          getSetByUser (),
+          getSetByAnOption (),
     doGenerateTopMargin =
       topMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -7096,7 +7114,7 @@ void lpsr2lilypondTranslator::generatePaperMargins (
     bottomMarginHasBeenSet =
       gGlobalLpsrOahGroup->
         getPaperBottomMarginAtom ()->
-          getSetByUser (),
+          getSetByAnOption (),
     doGenerateBottomMargin =
       bottomMarginHasBeenSet || generateCommentedOutVariables;
 
@@ -7736,7 +7754,7 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrLayout& elt)
     barNumbersSizeAtom =
       gGlobalLpsr2lilypondOahGroup->getBarNumbersSizeAtom ();
 
-  if (barNumbersSizeAtom->getSetByUser ()) {
+  if (barNumbersSizeAtom->getSetByAnOption ()) {
     fLilypondCodeStream <<
       "\\context {" <<
       endl;
@@ -8817,11 +8835,15 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
       staffPartUpLink->
         getPartNameDisplayText ();
 
+    gLogStream << "--> partName: \"" << partName << "\"" << endl;
+
     if (partName.size () == 0) {
       partName =
         staffPartUpLink->
           getPartName ();
     }
+
+    gLogStream << "--> partName: \"" << partName << "\"" << endl;
 
     // generate the instrument name
     //* JMI BLARKBLARK
@@ -8829,17 +8851,47 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
       fLilypondCodeStream <<
         "instrumentName = ";
 
+      string staffInstrumentName = partName; // default value
+
+      // fetch the staff instrument name
+      if (
+        gGlobalLpsrOahGroup->
+          getLpsrStavesInstrumentsNamesMapAtom ()->
+            getSetByAnOption ()
+      ) {
+        const map<string, string>&
+          lpsrStavesInstrumentsNamesMap =
+            gGlobalLpsrOahGroup->
+              getLpsrStavesInstrumentsNamesMap ();
+
+        mfDisplayStringToStringMap (
+          "--> lpsrStavesInstrumentsNamesMap",
+          lpsrStavesInstrumentsNamesMap,
+          gLogStream);
+
+        string optionSuppliedInstrumentName;
+
+        if (
+          mfStringIsInStringToStringMap (
+            partName,
+            lpsrStavesInstrumentsNamesMap,
+            optionSuppliedInstrumentName)
+        ) {
+          staffInstrumentName =
+            optionSuppliedInstrumentName;
+        }
+      }
+
       // does the name contain hexadecimal end of lines?
       std::size_t found =
-    // JMI    partName.find ("&#xd");
-        partName.find ("\n");
+    // JMI    staffInstrumentName.find ("&#xd");
+        staffInstrumentName.find ("\n");
 
       if (found == string::npos) {
         // no, escape quotes if any and generate the result
         fLilypondCodeStream <<
-          "\"" <<
-          mfEscapeDoubleQuotes (partName) <<
-          "\"" <<
+          generateStringAsLilypondMarkupOrDoubleQuotedString (
+            staffInstrumentName) <<
           endl;
       }
 
@@ -8849,7 +8901,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
         fLilypondCodeStream <<
           endl <<
           generateMultilineMarkup (
-            partName,
+            staffInstrumentName,
             markupColumnKindLeftACentered) << // JMI ???
           endl;
       }
@@ -11269,7 +11321,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       gGlobalLpsr2lilypondOahGroup->
         getDynamicsTextSpannersStyleKindAtom ();
 
-  if (dynamicsTextSpannersStyleKindAtom->getSetByUser ()) {
+  if (dynamicsTextSpannersStyleKindAtom->getSetByAnOption ()) {
     fLilypondCodeStream <<
       "\\override DynamicTextSpanner.style = #'" <<
       lpsrDynamicsTextSpannersStyleKindAsString (
@@ -17971,7 +18023,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
                 getNonPrintNotesHeadRGBColorAtom ();
 
           // has the note color been set?
-          if (nonPrintNotesHeadRGBColorAtom->getSetByUser ()) {
+          if (nonPrintNotesHeadRGBColorAtom->getSetByAnOption ()) {
             const msrRGBColor&
               theRGBColor =
                 gGlobalLpsr2lilypondOahGroup->

@@ -314,7 +314,7 @@ void mfMultiGenerationOutputKindAtom::applyElement (ostream& os)
   }
 #endif
 
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     stringstream s;
 
     s <<
@@ -326,7 +326,7 @@ void mfMultiGenerationOutputKindAtom::applyElement (ostream& os)
   }
   else {
     fMultiGenerationOutputKindVariable = fMultiGenerationOutputKindValue;
-    fSetByUser = true;
+    fSetByAnOption = true;
   }
 }
 
@@ -459,7 +459,7 @@ void mfMultiGenerationOutputKindAtom::printAtomWithVariableOptionsValues (
     " : " <<
     mfMultiGenerationOutputKindAsString (
       fMultiGenerationOutputKindVariable);
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }

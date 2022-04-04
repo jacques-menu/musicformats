@@ -28,8 +28,6 @@ void mfAssert (
   const string& messageIfFalse)
 {
   if (! condition) {
-    int saveIndent = gIndenter.getIndent ();
-
     gIndenter.resetToZero ();
 
     gLogStream <<
@@ -38,8 +36,6 @@ void mfAssert (
       " -- " << messageIfFalse <<
       ", quitting." <<
       endl;
-
-    gIndenter.setIndent (saveIndent);
 
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();

@@ -761,7 +761,7 @@ class EXP lpsr2lilypondTranslator :
 
     // markups
 
-    enum markupColumnKind {
+    enum markupColumnKind { // JMI
       markupColumnKindLeftAligned,
       markupColumnKindLeftACentered
     };
@@ -1066,9 +1066,12 @@ class EXP lpsr2lilypondTranslator :
                             S_msrIdentification          identification,
                             list<pair<string, string> >& nameValuePairsList);
 
-    void                  generateHeaderLilypondPart (
+    void                  createLilypondHeaderStringValuePairs (
                             S_lpsrHeader                 header,
                             list<pair<string, string> >& nameValuePairsList);
+
+    string                generateStringAsLilypondMarkupOrDoubleQuotedString (
+                            const string& value);
 
     // paper handling
     // ------------------------------------------------------

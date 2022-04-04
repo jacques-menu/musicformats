@@ -263,7 +263,7 @@ void msdlKeywordsLanguageAtom::printAtomWithVariableOptionsValues (
     msdlKeywordsLanguageKindAsString (
       fMsdlKeywordsLanguageKindVariable) <<
     "\"";
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -910,7 +910,7 @@ void msdlCommentsTypeAtom::printAtomWithVariableOptionsValues (
     msdlCommentsTypeKindAsString (
       fMsdlCommentsTypeKindVariable) <<
     "\"";
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -1149,7 +1149,7 @@ void msdlUserLanguageAtom::printAtomWithVariableOptionsValues (
     msdlUserLanguageKindAsString (
       fMsdlUserLanguageVariable) <<
     "\"";
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -1386,7 +1386,7 @@ void msdlPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }

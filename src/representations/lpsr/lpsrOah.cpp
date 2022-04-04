@@ -264,7 +264,7 @@ void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -495,7 +495,7 @@ void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
     " : " <<
     lpsrChordsLanguageKindAsString (
       fLpsrChordsLanguageKindVariable);
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -503,6 +503,371 @@ void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
 }
 
 ostream& operator<< (ostream& os, const S_lpsrChordsLanguageAtom& elt)
+{
+  elt->print (os);
+  return os;
+}
+
+//______________________________________________________________________________
+S_lpsrStaffInstrumentNameAtom lpsrStaffInstrumentNameAtom::create (
+  const string&         longName,
+  const string&         shortName,
+  const string&         description,
+  const string&         valueSpecification,
+  const string&         variableName,
+  map<string, string>&  stringToStringMapVariable)
+{
+  lpsrStaffInstrumentNameAtom* o = new
+    lpsrStaffInstrumentNameAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName,
+      stringToStringMapVariable);
+  assert (o != nullptr);
+  return o;
+}
+
+lpsrStaffInstrumentNameAtom::lpsrStaffInstrumentNameAtom (
+  const string&         longName,
+  const string&         shortName,
+  const string&         description,
+  const string&         valueSpecification,
+  const string&         variableName,
+  map<string, string>&  stringToStringMapVariable)
+  : oahAtomStoringAValue (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName),
+    fStringToStringMapVariable (
+      stringToStringMapVariable)
+{
+  fMultipleOccurrencesAllowed = true;
+}
+
+lpsrStaffInstrumentNameAtom::~lpsrStaffInstrumentNameAtom ()
+{}
+
+void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
+  const string& theString,
+  ostream&      os)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
+      endl;
+  }
+#endif
+
+  // theString contains the part rename specification
+  // decipher it to extract the old and new part names
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "==> oahAtom is of type 'lpsrStaffInstrumentNameAtom'" <<
+      endl;
+  }
+#endif
+
+  string regularExpression (
+    "[[:space:]]*(.+)[[:space:]]*"
+    ":"
+    "[[:space:]]*(.+)[[:space:]]*"
+  );
+
+  regex  e (regularExpression);
+  smatch sm;
+
+  regex_match (theString, sm, e);
+
+  size_t smSize = sm.size ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "There are " << smSize << " matches" <<
+      " for part rename string '" << theString <<
+      "' with regex '" << regularExpression <<
+      "'" <<
+      endl;
+  }
+#endif
+
+  if (smSize == 3) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+      for (unsigned i = 0; i < smSize; ++i) {
+        gLogStream <<
+          '[' << sm [i] << "] ";
+      } // for
+      gLogStream << endl;
+    }
+#endif
+  }
+
+  else {
+    stringstream s;
+
+    s <<
+      "-msrPartRename argument '" << theString <<
+      "' is ill-formed";
+
+    oahError (s.str ());
+  }
+
+  string
+    partName           = sm [1],
+    partInstrumentName = sm [2];
+
+  mfTrimFromBothEnds (partName);
+  mfTrimFromBothEnds (partInstrumentName);
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "--> partName = \"" << partName << "\", " <<
+      "--> partInstrumentName = \"" << partInstrumentName << "\"" <<
+      endl;
+  }
+#endif
+
+  // is this part name in the part renaming map?
+  map<string, string>::iterator
+    it =
+      fStringToStringMapVariable.find (partName);
+
+  if (it != fStringToStringMapVariable.end ()) {
+    // yes, issue error message
+    stringstream s;
+
+    s <<
+      "Part \"" << partName << "\" occurs more that once in the " <<
+      fetchNamesBetweenQuotes () <<
+      " option";
+
+    oahError (s.str ());
+  }
+
+  else {
+    fStringToStringMapVariable [partName] = partInstrumentName;
+    fSetByAnOption = true;
+  }
+}
+
+void lpsrStaffInstrumentNameAtom::acceptIn (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptIn ()" <<
+      endl;
+  }
+#endif
+
+  if (visitor<S_lpsrStaffInstrumentNameAtom>*
+    p =
+      dynamic_cast<visitor<S_lpsrStaffInstrumentNameAtom>*> (v)) {
+        S_lpsrStaffInstrumentNameAtom elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitStart ()" <<
+            endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void lpsrStaffInstrumentNameAtom::acceptOut (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> lpsrStaffInstrumentNameAtom::acceptOut ()" <<
+      endl;
+  }
+#endif
+
+  if (visitor<S_lpsrStaffInstrumentNameAtom>*
+    p =
+      dynamic_cast<visitor<S_lpsrStaffInstrumentNameAtom>*> (v)) {
+        S_lpsrStaffInstrumentNameAtom elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching lpsrStaffInstrumentNameAtom::visitEnd ()" <<
+            endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void lpsrStaffInstrumentNameAtom::browseData (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> lpsrStaffInstrumentNameAtom::browseData ()" <<
+      endl;
+  }
+#endif
+}
+
+string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
+{
+  stringstream s;
+
+  s <<
+    '-' << fShortName << ' ';
+
+  if (! fStringToStringMapVariable.size ()) {
+    s << "empty";
+  }
+  else {
+    map<string, string>::const_iterator
+      iBegin = fStringToStringMapVariable.begin (),
+      iEnd   = fStringToStringMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      s << (*i).first << "=" << (*i).second;
+      if (++i == iEnd) break;
+      s << ",";
+    } // for
+  }
+
+  return s.str ();
+}
+
+string lpsrStaffInstrumentNameAtom::asActualLongNamedOptionString () const
+{
+  stringstream s;
+
+  s <<
+    '-' << fLongName << ' ';
+
+  if (! fStringToStringMapVariable.size ()) {
+    s << "empty";
+  }
+  else {
+    map<string, string>::const_iterator
+      iBegin = fStringToStringMapVariable.begin (),
+      iEnd   = fStringToStringMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      s << (*i).first << "=" << (*i).second;
+      if (++i == iEnd) break;
+      s << ",";
+    } // for
+  }
+
+  return s.str ();
+}
+
+void lpsrStaffInstrumentNameAtom::print (ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "lpsrStaffInstrumentNameAtom:" <<
+    endl;
+
+  ++gIndenter;
+
+  printAtomWithVariableEssentials (
+    os, fieldWidth);
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fVariableName" << " : " <<
+    fVariableName <<
+    setw (fieldWidth) <<
+    "fStringToStringMapVariable" << " : " <<
+    endl;
+
+  if (! fStringToStringMapVariable.size ()) {
+    os << "empty";
+  }
+  else {
+    map<string, string>::const_iterator
+      iBegin = fStringToStringMapVariable.begin (),
+      iEnd   = fStringToStringMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os << (*i).first << " --> " << (*i).second;
+      if (++i == iEnd) break;
+      os << endl;
+    } // for
+  }
+  os << endl;
+
+  --gIndenter;
+}
+
+void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
+  ostream& os,
+  int      valueFieldWidth) const
+{
+  os << left <<
+    setw (valueFieldWidth) <<
+    fVariableName <<
+    " : ";
+
+  if (! fStringToStringMapVariable.size ()) {
+    os <<
+      "empty" <<
+      endl;
+  }
+  else {
+    os << endl;
+    ++gIndenter;
+
+    map<string, string>::const_iterator
+      iBegin = fStringToStringMapVariable.begin (),
+      iEnd   = fStringToStringMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      string
+        staffName           = (*i).first,
+        staffInstrumentName = (*i).second;
+
+      os <<
+        "\"" <<
+        staffName <<
+        "\" --> \"";
+
+      for (char ch : staffInstrumentName) {
+        if (ch == '\n') {
+          os << "EOLN";
+        }
+        else {
+          os << ch;
+        }
+      }
+
+      os <<
+        "\"" <<
+        endl;
+
+      if (++i == iEnd) break;
+    } // for
+
+    os <<
+      ", set by user";
+
+    --gIndenter;
+  }
+}
+
+ostream& operator<< (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt)
 {
   elt->print (os);
   return os;
@@ -701,8 +1066,8 @@ void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
     ++gIndenter;
     os <<
       fSemiTonesPitchAndOctaveVariable <<
-      ", fSetByUser: " <<
-      fSetByUser;
+      ", fSetByAnOption: " <<
+      fSetByAnOption;
     --gIndenter;
   }
   else {
@@ -755,7 +1120,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // trace- lpsr
+  // trace lpsr
 
   subGroup->
     appendAtomToSubGroup (
@@ -1219,13 +1584,50 @@ By default, this is left to LilyPond'.)",
       fSystemCountAtom);
 }
 
+void lpsrOahGroup::initializeLpsrStavesOptions ()
+{
+  S_oahSubGroup
+    subGroup =
+      oahSubGroup::create (
+        "Staves",
+        "help-lpsr-staves", "hlpstaves",
+R"()",
+      oahElementVisibilityKind::kElementVisibilityWhole,
+      this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // LPSR instrument staff name
+
+  fLpsrStavesInstrumentsNamesMapAtom =
+    lpsrStaffInstrumentNameAtom::create (
+      "lpsr-staff-instrument-name", "lpstaffinstrname",
+      regex_replace (
+R"(STAFF_INSTRUMENT_NAME_SPEC should be of the form STAFF:NAME.
+Set the instrument name of staff STAFF to NAME, for example after displaying
+the names in the score or a summary of the latter in a first run with options
+'-dmsrnames, -display-msr-names' or 'dmsrsum, -display-msr-summary'.
+There can be spaces around the ':', in which case quoting is needed.
+There can be several occurrences of this option.)",
+        regex ("EXECUTABLE"),
+        gGlobalOahOahGroup->getOahOahGroupServiceName ()),
+      "STAFF_INSTRUMENT_NAME_SPEC",
+      "fLpsrStavesInstrumentsNamesMap",
+      fLpsrStavesInstrumentsNamesMap);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fLpsrStavesInstrumentsNamesMapAtom);
+}
+
 void lpsrOahGroup::initializeLpsrVoicesOptions ()
-{/* JMI
+{
+/* JMI
   S_oahSubGroup
     subGroup =
       oahSubGroup::create (
         "Voices",
-        "help-lpsr-voices", "hlpsrs",
+        "help-lpsr-voices", "hlpsvoices",
 R"()",
       oahElementVisibilityKind::kElementVisibilityWhole,
       this);
@@ -1437,6 +1839,10 @@ void lpsrOahGroup::initializeLpsrOahGroup ()
   // paper
   // --------------------------------------
   initializeLpsrPaperOptions ();
+
+  // staves
+  // --------------------------------------
+  initializeLpsrStavesOptions ();
 
   // voices
   // --------------------------------------

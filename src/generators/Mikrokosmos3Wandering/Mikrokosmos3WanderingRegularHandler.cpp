@@ -702,6 +702,8 @@ void Mikrokosmos3WanderingRegularHandler::createStavesRegularGroup ()
 
   // atoms
 
+  registerAtomInRegularSubgroup ("lpsr-staff-instrument-name", subGroup);
+  
   registerAtomInRegularSubgroup ("create-voices-staff-relative-numbers", subGroup);
 }
 

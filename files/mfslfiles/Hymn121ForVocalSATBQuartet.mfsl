@@ -78,11 +78,11 @@ case SCORE :
 	soprano:
 	  -output-file-name "Hymn121_SATB_soprano.ly"
 
-    -subtitle "Soprano"
+    -subtitle '\markup { "B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
     -keep-musicxml-part-id P1
     -msr-rename-part "P1:soprano"
 
-    -display-lpsr-short
+#     -display-lpsr-short
   ;
 
 	alto:
@@ -98,7 +98,7 @@ case SCORE :
     -subtitle "Tenor"
     -keep-musicxml-part-id P3
 
-    -global-staff-size 23 # a more readable score is needed
+    -global-staff-size 23 # an easier-to-read score is needed
   ;
 
 	bass:
@@ -113,27 +113,32 @@ case SCORE :
 
 
 # ----------------------------------------------------------
-# select a particular SCORE label to generate the corresponding score
+# choosing which score(s) to generate
 # ----------------------------------------------------------
 
 ###
-  The 'select' statements below override
+  Comment/uncomment the statements below to choose
+  either a particular SCORE or every one of them to be generated.
+  Only one of 'select' and 'every' can be used.
+
+  The 'select' statement chooses one particular score, overriding
   the default "tutti" label setting in the 'choice' statement.
 
-  Comment/uncomment them to select either the SCORE to be generated
-
-  They can also be overridden by options to the MFSL interpreter, such as:
+  This can also be done with an option to the MFSL interpreter such as:
     -select SCORE:tenor
-  or:
-    -all SCORE
+
+  The 'every' statement causes all possible scores for the given choice
+  to be generated.
+
+  This can also be done with this option to the MFSL interpreter:
+    -every SCORE
 ###
 
-select SCORE : tutti ; # superflous actually
+# select SCORE : tutti ; # superflous actually
 # select SCORE : soprano ;
 # select SCORE : alto ;
 # select SCORE : tenor ;
 # select SCORE : bass ;
 
-# all SCORE ;
+# every SCORE ;
 
-#

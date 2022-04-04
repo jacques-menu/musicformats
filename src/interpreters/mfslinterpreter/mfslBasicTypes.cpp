@@ -37,7 +37,8 @@ using namespace std;
 using namespace MusicFormats;
 
 //_______________________________________________________________________________
-S_mfslOptionsBlock mfslOptionsBlock::create (const string& optionsBlockName)
+S_mfslOptionsBlock mfslOptionsBlock::create (
+  const string& optionsBlockName)
 {
   mfslOptionsBlock* o =
     new mfslOptionsBlock (
@@ -46,7 +47,8 @@ S_mfslOptionsBlock mfslOptionsBlock::create (const string& optionsBlockName)
   return o;
 }
 
-mfslOptionsBlock::mfslOptionsBlock (const string& optionsBlockName)
+mfslOptionsBlock::mfslOptionsBlock (
+  const string& optionsBlockName)
 {
   fOptionsBlockName = optionsBlockName;
 }
@@ -54,7 +56,9 @@ mfslOptionsBlock::mfslOptionsBlock (const string& optionsBlockName)
 mfslOptionsBlock::~mfslOptionsBlock ()
 {}
 
-void mfslOptionsBlock::registerOptionsInOptionsBlock (S_oahOption option)
+void mfslOptionsBlock::registerOptionsInOptionsBlock (
+  S_oahOption option,
+  mfslDriver& drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceOptionsBlocks ()) {
     gLogStream <<
@@ -62,7 +66,7 @@ void mfslOptionsBlock::registerOptionsInOptionsBlock (S_oahOption option)
       option->asString () <<
       "] in options block \"" <<
       fOptionsBlockName <<
-      "\"" <<
+      "\", line " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -197,7 +201,8 @@ mfslChoice::~mfslChoice ()
 {}
 
 void mfslChoice::setChoiceLabelSuppliedByAnOption (
-  const string& label)
+  const string& label,
+  mfslDriver&   drv)
 {
   if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
     gLogStream <<
@@ -206,6 +211,7 @@ void mfslChoice::setChoiceLabelSuppliedByAnOption (
       "\" to \"" <<
       label <<
       "\", supplied by an option" <<
+      ", line " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -223,7 +229,7 @@ void mfslChoice::selectChoiceLabel (
       fChoiceName <<
       "\" to \"" <<
       label <<
-      "\"" <<
+      "\", line " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -275,10 +281,11 @@ void mfslChoice::selectChoiceLabel (
               fChoiceName <<
               "\" has been selected as \"" <<
               optionSuppliedLabel <<
-              "\" by an option supplied to the script" <<
+              "\" by an option-supplied to the script" <<
               ", ignoring label \"" <<
               label <<
               "\"" <<
+              "\", line " << drv.getScannerLocation () <<
               endl;
           }
 
@@ -367,6 +374,7 @@ string mfslChoice::getChoiceLabel (mfslDriver& drv) const
           ", label " <<
           fChoiceLabel <<
           "\", supplied to the script" <<
+          ", line " << drv.getScannerLocation () <<
           endl;
       }
       break;
@@ -380,6 +388,7 @@ string mfslChoice::getChoiceLabel (mfslDriver& drv) const
           "\" has label \"" <<
           fChoiceLabel <<
           " \", set in the script" <<
+          ", line " << drv.getScannerLocation () <<
           endl;
       }
       break;
@@ -420,7 +429,16 @@ S_mfslOptionsBlock mfslChoice::getChoiceOptionsBlockForLabel (
 {
   S_mfslOptionsBlock result;
 
-  // is this label in the choice's labels to options block map?
+  if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
+    gLogStream <<
+      "====> Fetching label \"" <<
+      label <<
+      "\" in choice \"" <<
+      fChoiceName <<
+      "\", line " << drv.getScannerLocation () <<
+      endl;
+  }
+
   map<string, S_mfslOptionsBlock>::const_iterator
     it =
       fChoiceLabelsToOptionsBlocksMap.find (
@@ -437,7 +455,7 @@ S_mfslOptionsBlock mfslChoice::getChoiceOptionsBlockForLabel (
       label <<
       "\" is not known to choice \"" <<
       fChoiceName <<
-      "\"";
+      "\", line " << drv.getScannerLocation ();
 
     mfslError (
       s.str (),
@@ -463,9 +481,9 @@ void mfslChoice::addLabel (
     s <<
       "choice label \"" <<
       label <<
-      "\" occurs more that once in the \"" <<
+      "\" occurs more that once in choice \"" <<
       fChoiceName <<
-      "\" choice";
+      "\", line " << drv.getScannerLocation ();
 
     mfslError (
       s.str (),
@@ -497,7 +515,8 @@ void mfslChoice::addLabel (
 
 void mfslChoice::enrichLabelOptionsBlock (
   const string&      label,
-  S_mfslOptionsBlock optionsBlock)
+  S_mfslOptionsBlock optionsBlock,
+  mfslDriver&        drv)
 {
   S_mfslOptionsBlock
     labelOptionsBlock =
@@ -525,6 +544,7 @@ void mfslChoice::enrichLabelOptionsBlock (
         optionsBlock->getOptionsBlockSize (),
         "option", "options") <<
       ')' <<
+      ", line " << drv.getScannerLocation () <<
       endl;
   }
 
@@ -707,8 +727,9 @@ void mfslChoice::print (ostream& os) const
   os <<
     setw (fieldWidth) <<
     "fLabelsSet" << " : [";
+
   if (labelsSetSize) {
-    int counter = 0;
+    size_t counter = 0;
     for (string label : fLabelsSet) {
       os << label;
 
@@ -840,6 +861,15 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByName (
 {
   S_mfslChoice result;
 
+  if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
+    gLogStream <<
+      "====> Fetching choice named \"" <<
+      name <<
+      "\" in choices table" <<
+      ", line " << drv.getScannerLocation () <<
+      endl;
+  }
+
   // is this choiceName in the choice's labels set?
   map<string, S_mfslChoice>::const_iterator
     it =
@@ -854,7 +884,7 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByName (
 
     s <<
       "choice \"" << name <<
-      "\" is unknown in choice table";
+      "\" is unknown in choices table";
 
     mfslError (
       s.str (),
@@ -870,7 +900,16 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByNameNonConst (
 {
   S_mfslChoice result;
 
-  // is this choiceName in the choice's labels set?
+  if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
+    gLogStream <<
+      "====> Fetching choice named \"" <<
+      name <<
+      "\" in choices table (non-const)" <<
+      ", line " << drv.getScannerLocation () <<
+      endl;
+  }
+
+  // is this choiceName in the choice's map?
   map<string, S_mfslChoice>::const_iterator
     it =
       fChoicesMap.find (name);
@@ -884,7 +923,7 @@ S_mfslChoice mfslChoicesTable::fetchChoiceByNameNonConst (
 
     s <<
       "choice \"" << name <<
-      "\" is unknown in choice table";
+      "\" is unknown in choices table (non-const)";
 
     mfslError (
       s.str (),
@@ -956,17 +995,20 @@ ostream& operator<< (ostream& os, const S_mfslChoicesTable& elt)
 
 //_______________________________________________________________________________
 S_mfslCaseStatement mfslCaseStatement::create (
-  S_mfslChoice caseChoice)
+  S_mfslChoice caseChoice,
+  mfslDriver&  drv)
 {
   mfslCaseStatement* o =
     new mfslCaseStatement (
-      caseChoice);
+      caseChoice,
+      drv);
   assert (o != nullptr);
   return o;
 }
 
 mfslCaseStatement::mfslCaseStatement (
-  S_mfslChoice caseChoice)
+  S_mfslChoice caseChoice,
+  mfslDriver&  drv)
 {
   // sanity check
   mfAssert (
@@ -982,6 +1024,7 @@ mfslCaseStatement::mfslCaseStatement (
       ", caseChoice: [" <<
       fCaseChoice->asString () <<
       "]" <<
+      ", line " << drv.getScannerLocation () <<
       endl;
   }
 

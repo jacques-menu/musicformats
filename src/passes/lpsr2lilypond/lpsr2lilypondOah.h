@@ -947,7 +947,7 @@ class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValu
                             lpsrDynamicsTextSpannersStyleKind value)
                               {
                                 fLpsrdDynamicsTextSpannersStyleKindVariable = value;
-                                fSetByUser = true;
+                                fSetByAnOption = true;
                               }
 
     lpsrDynamicsTextSpannersStyleKind

@@ -90,6 +90,16 @@ S_mfcPassComponent createMxsr2msrComponent ()
             "Added conversion of MusicXML words to cresc/decresc"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.62"),
+          "March 31, 2022",
+          list<string> {
+            "Fixed an issue in scordaturas handling"
+          }
+      ));
   }
 
   return pPassComponent;

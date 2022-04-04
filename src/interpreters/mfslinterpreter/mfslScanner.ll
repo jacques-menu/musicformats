@@ -400,7 +400,7 @@ loc.step ();
     yy::parser::make_SELECT (loc);
 }
 
-"all" {
+"every" {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
@@ -411,7 +411,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_ALL (loc);
+    yy::parser::make_EVERY (loc);
 }
 
 
@@ -561,18 +561,32 @@ void mfslDriver::scanBegin ()
     {
       stringstream s;
 
-      const int
+      size_t
         ERROR_STRING_BUFFER_SIZE = 512;
+
       char*
         errorStringBuffer =
           new char (ERROR_STRING_BUFFER_SIZE);
 
-      int
-        status =
-          strerror_r (
-            errno,
-            errorStringBuffer,
-            ERROR_STRING_BUFFER_SIZE);
+      int status = 0;
+
+#ifdef WIN32
+      status =
+        strerror_s (
+          errorStringBuffer,
+          ERROR_STRING_BUFFER_SIZE,
+          errno);
+#else
+      status =
+        strerror_r (
+          errno,
+          errorStringBuffer,
+          ERROR_STRING_BUFFER_SIZE);
+#endif
+
+      if (status) {
+        // JMI
+      }
 
       s <<
         "cannot open " <<

@@ -129,14 +129,6 @@ char* mfCharStarCat (
   const char*  source,
   const size_t destSize)
 {
-//   gLogStream << // JMI
-//     "--------------------------> dest: " << dest <<
-//     endl <<
-//     "source: " << source <<
-//     endl <<
-//     "destSize: " << destSize <<
-//     endl;
-
   // sanity check
   mfAssert (
     __FILE__, __LINE__,

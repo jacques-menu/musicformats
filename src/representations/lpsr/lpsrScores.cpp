@@ -342,7 +342,7 @@ lpsrScore::lpsrScore (
   msrLength paperWidth =
     elt->getPaperWidth ();
 //  if (gGlobalLpsrOahGroup->getPaperWidth ().getLengthValue () > 0.0) {
-  if (gGlobalLpsrOahGroup->getPaperWidthAtom ()->getSetByUser ()) {
+  if (gGlobalLpsrOahGroup->getPaperWidthAtom ()->getSetByAnOption ()) {
     paperWidth = gGlobalLpsrOahGroup->getPaperWidth ();
   }
   paper ->
@@ -351,7 +351,7 @@ lpsrScore::lpsrScore (
   msrLength paperHeight =
     elt->getPaperHeight ();
 //  if (gGlobalLpsrOahGroup->getPaperHeight ().getLengthValue () > 0.0) {
-  if (gGlobalLpsrOahGroup->getPaperHeightAtom ()->getSetByUser ()) {
+  if (gGlobalLpsrOahGroup->getPaperHeightAtom ()->getSetByAnOption ()) {
     paperWidth = gGlobalLpsrOahGroup->getPaperHeight ();
   }
   paper->
@@ -441,12 +441,12 @@ lpsrScore::lpsrScore (
   }
 
   // counts
-  if (gGlobalLpsrOahGroup->getPageCountAtom ()->getSetByUser ()) {
+  if (gGlobalLpsrOahGroup->getPageCountAtom ()->getSetByAnOption ()) {
     fScorePaper->
       setPageCount (gGlobalLpsrOahGroup->getPageCount ());
   }
 
-  if (gGlobalLpsrOahGroup->getSystemCountAtom ()->getSetByUser ()) {
+  if (gGlobalLpsrOahGroup->getSystemCountAtom ()->getSetByAnOption ()) {
     fScorePaper->
       setSystemCount (gGlobalLpsrOahGroup->getSystemCount ());
   }

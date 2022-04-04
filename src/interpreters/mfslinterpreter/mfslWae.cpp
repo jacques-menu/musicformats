@@ -51,7 +51,7 @@ EXP void mfslError (
   throw mfslException (message);
 }
 
-EXP void mfslnternalError (
+EXP void mfslInternalError (
   const string&       message,
   const yy::location& loc)
 {

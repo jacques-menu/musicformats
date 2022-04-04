@@ -91,7 +91,7 @@ S_mfslChoice pCurrentChoiceChoice;
   CASE       "case"
 
   SELECT     "select"
-  ALL        "all"
+  EVERY      "every"
 ;
 
 %code {
@@ -113,6 +113,8 @@ S_mfslChoice pCurrentChoiceChoice;
 //_______________________________________________________________________________
 
 %nterm <string> Number
+
+%nterm <string> SingleString
 %nterm <string> String
 
 %nterm <string> OptionValue
@@ -172,7 +174,7 @@ Script :
         --gIndenter;
       }
 
-  OptionalSelectOrAllStatement
+  OptionalSelectOrEveryStatement
 ;
 
 
@@ -188,9 +190,17 @@ Number
 // strings
 //_______________________________________________________________________________
 
-String
+SingleString
   : SINGLE_QUOTED_STRING
   | DOUBLE_QUOTED_STRING
+;
+
+String
+  : SingleString
+  | String SingleString
+      {
+        $$ = $1 + $2;
+      }
 ;
 
 
@@ -258,7 +268,8 @@ Option
         }
 
         drv.registerOptionInCurrentOptionsBlock (
-          oahOption::create ($1, ""));
+          oahOption::create ($1, ""),
+          drv);
 
         --gIndenter;
       }
@@ -275,7 +286,8 @@ Option
         }
 
         drv.registerOptionInCurrentOptionsBlock (
-          oahOption::create ($1, $2));
+          oahOption::create ($1, $2),
+          drv);
 
         --gIndenter;
       }
@@ -477,7 +489,8 @@ CaseStatement
         S_mfslCaseStatement
           caseStatement =
             mfslCaseStatement::create (
-              choice);
+              choice,
+              drv);
 
         // push it onto the case statements stack
         drv.caseStatementsStackPush (
@@ -551,9 +564,13 @@ CaseAlternative
           caseAlternativeDescription =
             s.str ();
 
+        S_mfslOptionsBlock
+          caseAlternativeOptionsBlock =
+            mfslOptionsBlock::create (
+              caseAlternativeDescription);
+
         drv.optionsBlocksStackPush (
-          mfslOptionsBlock::create (
-            caseAlternativeDescription),
+          caseAlternativeOptionsBlock,
           caseAlternativeDescription);
       }
 
@@ -574,7 +591,8 @@ CaseAlternative
           currentCaseChoice->
             enrichLabelOptionsBlock (
               label,
-              drv.optionsBlocksStackTop ());
+              drv.optionsBlocksStackTop (),
+              drv);
         } // for
 
         // discard this case alternative
@@ -597,12 +615,12 @@ CaseAlternative
 ;
 
 
-// select or all statement
+// select or every statement
 //_______________________________________________________________________________
 
-OptionalSelectOrAllStatement
+OptionalSelectOrEveryStatement
   : SelectStatement
-  | AllStatement
+  | EveryStatement
   |
 ;
 
@@ -618,13 +636,13 @@ SelectStatement
           label);
       }
 
-AllStatement
-  : ALL NAME SEMICOLON
+EveryStatement
+  : EVERY NAME SEMICOLON
       {
         string
           choiceName = $2;
 
-        drv.setAllChoicesOptionsBlockForToolLaunching (
+        drv.setEveryChoiceForToolLaunching (
           choiceName);
       }
 

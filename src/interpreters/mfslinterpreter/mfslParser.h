@@ -417,6 +417,7 @@ namespace yy {
       // "name"
       // "option"
       // Number
+      // SingleString
       // String
       // OptionValue
       char dummy1[sizeof (string)];
@@ -483,7 +484,7 @@ namespace yy {
     TOK_DEFAULT = 11,              // "default"
     TOK_CASE = 12,                 // "case"
     TOK_SELECT = 13,               // "select"
-    TOK_ALL = 14,                  // "all"
+    TOK_EVERY = 14,                // "every"
     TOK_INTEGER = 15,              // "integer number"
     TOK_DOUBLE = 16,               // "double number"
     TOK_SINGLE_QUOTED_STRING = 17, // "single quoted_string"
@@ -522,7 +523,7 @@ namespace yy {
         S_DEFAULT = 11,                          // "default"
         S_CASE = 12,                             // "case"
         S_SELECT = 13,                           // "select"
-        S_ALL = 14,                              // "all"
+        S_EVERY = 14,                            // "every"
         S_INTEGER = 15,                          // "integer number"
         S_DOUBLE = 16,                           // "double number"
         S_SINGLE_QUOTED_STRING = 17,             // "single quoted_string"
@@ -534,30 +535,31 @@ namespace yy {
         S_23_1 = 23,                             // $@1
         S_24_2 = 24,                             // $@2
         S_Number = 25,                           // Number
-        S_String = 26,                           // String
-        S_Tool = 27,                             // Tool
-        S_Input = 28,                            // Input
-        S_OptionalScriptElementsSeq = 29,        // OptionalScriptElementsSeq
-        S_ScriptElementsSeq = 30,                // ScriptElementsSeq
-        S_ScriptElement = 31,                    // ScriptElement
-        S_Option = 32,                           // Option
-        S_OptionValue = 33,                      // OptionValue
-        S_ChoiceDeclaration = 34,                // ChoiceDeclaration
-        S_35_3 = 35,                             // $@3
-        S_36_4 = 36,                             // $@4
-        S_ChoiceLabels = 37,                     // ChoiceLabels
-        S_CaseLabel = 38,                        // CaseLabel
-        S_CaseLabelsSeq = 39,                    // CaseLabelsSeq
-        S_CaseStatement = 40,                    // CaseStatement
-        S_41_5 = 41,                             // $@5
-        S_OptionalCaseAlternativesSeq = 42,      // OptionalCaseAlternativesSeq
-        S_CaseAlternativesSeq = 43,              // CaseAlternativesSeq
-        S_CaseAlternative = 44,                  // CaseAlternative
-        S_45_6 = 45,                             // $@6
-        S_46_7 = 46,                             // $@7
-        S_OptionalSelectOrAllStatement = 47,     // OptionalSelectOrAllStatement
-        S_SelectStatement = 48,                  // SelectStatement
-        S_AllStatement = 49                      // AllStatement
+        S_SingleString = 26,                     // SingleString
+        S_String = 27,                           // String
+        S_Tool = 28,                             // Tool
+        S_Input = 29,                            // Input
+        S_OptionalScriptElementsSeq = 30,        // OptionalScriptElementsSeq
+        S_ScriptElementsSeq = 31,                // ScriptElementsSeq
+        S_ScriptElement = 32,                    // ScriptElement
+        S_Option = 33,                           // Option
+        S_OptionValue = 34,                      // OptionValue
+        S_ChoiceDeclaration = 35,                // ChoiceDeclaration
+        S_36_3 = 36,                             // $@3
+        S_37_4 = 37,                             // $@4
+        S_ChoiceLabels = 38,                     // ChoiceLabels
+        S_CaseLabel = 39,                        // CaseLabel
+        S_CaseLabelsSeq = 40,                    // CaseLabelsSeq
+        S_CaseStatement = 41,                    // CaseStatement
+        S_42_5 = 42,                             // $@5
+        S_OptionalCaseAlternativesSeq = 43,      // OptionalCaseAlternativesSeq
+        S_CaseAlternativesSeq = 44,              // CaseAlternativesSeq
+        S_CaseAlternative = 45,                  // CaseAlternative
+        S_46_6 = 46,                             // $@6
+        S_47_7 = 47,                             // $@7
+        S_OptionalSelectOrEveryStatement = 48,   // OptionalSelectOrEveryStatement
+        S_SelectStatement = 49,                  // SelectStatement
+        S_EveryStatement = 50                    // EveryStatement
       };
     };
 
@@ -601,6 +603,7 @@ namespace yy {
       case symbol_kind::S_NAME: // "name"
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
+      case symbol_kind::S_SingleString: // SingleString
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
         value.move< string > (std::move (that.value));
@@ -674,6 +677,7 @@ switch (yykind)
       case symbol_kind::S_NAME: // "name"
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
+      case symbol_kind::S_SingleString: // SingleString
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
         value.template destroy< string > ();
@@ -777,7 +781,7 @@ switch (yykind)
       {
 #if !defined _MSC_VER || defined __clang__
         YY_ASSERT (tok == token::TOK_YYEOF
-                   || (token::TOK_YYerror <= tok && tok <= token::TOK_ALL));
+                   || (token::TOK_YYerror <= tok && tok <= token::TOK_EVERY));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -1053,16 +1057,16 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ALL (location_type l)
+      make_EVERY (location_type l)
       {
-        return symbol_type (token::TOK_ALL, std::move (l));
+        return symbol_type (token::TOK_EVERY, std::move (l));
       }
 #else
       static
       symbol_type
-      make_ALL (const location_type& l)
+      make_EVERY (const location_type& l)
       {
-        return symbol_type (token::TOK_ALL, l);
+        return symbol_type (token::TOK_EVERY, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1499,8 +1503,8 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 57,     ///< Last index in yytable_.
-      yynnts_ = 29,  ///< Number of nonterminal symbols.
+      yylast_ = 61,     ///< Last index in yytable_.
+      yynnts_ = 30,  ///< Number of nonterminal symbols.
       yyfinal_ = 5 ///< Termination state number.
     };
 
@@ -1533,6 +1537,7 @@ switch (yykind)
       case symbol_kind::S_NAME: // "name"
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
+      case symbol_kind::S_SingleString: // SingleString
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
         value.copy< string > (YY_MOVE (that.value));
@@ -1576,6 +1581,7 @@ switch (yykind)
       case symbol_kind::S_NAME: // "name"
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
+      case symbol_kind::S_SingleString: // SingleString
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
         value.move< string > (YY_MOVE (s.value));
@@ -1647,7 +1653,7 @@ switch (yykind)
 
 
 } // yy
-#line 1651 "mfslParser.h"
+#line 1657 "mfslParser.h"
 
 
 

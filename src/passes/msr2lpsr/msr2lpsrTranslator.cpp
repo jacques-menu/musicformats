@@ -993,7 +993,7 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
         getLedgerLinesRGBColorAtom ();
 
   // has the atom been used?
-  if (ledgerLinesRGBColorAtom->getSetByUser ()) {
+  if (ledgerLinesRGBColorAtom->getSetByAnOption ()) {
     // this score needs the 'colored ledger lines' Scheme function
     fResultingLpsr->
       setColoredLedgerLinesIsNeeded ();
@@ -7115,7 +7115,7 @@ void msr2lpsrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
   }
 
   // is there a poet option?
-  if (gGlobalLpsr2lilypondOahGroup->getPoetAtom ()->getSetByUser ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getPoetAtom ()->getSetByAnOption ()) {
     // remove all poets
     fCurrentLpsrScoreHeader->
       removeAllPoets (inputLineNumber);

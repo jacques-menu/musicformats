@@ -38,12 +38,25 @@ input : "Hymn121.xml"
   -title "Hymn 121 - Angels From The Realms Of Glory"
   -subtitle "Part 4 - Bass guitar"
 
+  -ragged-last-bottom off
+
   -keep-musicxml-part-id P4
 
   -ignore-musicxml-lyrics
     # there's a glitch at the last measure...
 
-  -ragged-bottom off
+# staff
+  -lpsr-staff-instrument-name
+    # let's use LilyPond's '\markup' possibilities
+    # successive MFSL character strings are concatenated into a single one
+    "Voice 4"
+    ":"
+    '\markup {'
+      '\center-column {'
+        '\line { "Bass" }'
+        '\line { "Guitar" }'
+      '}'
+    '}'
 
   -ambitus
 
@@ -55,7 +68,9 @@ input : "Hymn121.xml"
 #   -tab-full-notation
 
 # display
-#   -display-options-values
+ -display-options-values
+#  -display-msr-1-short
+#  -display-lpsr-short
 
 # LilyPond
   -lilypond-generation-infos
