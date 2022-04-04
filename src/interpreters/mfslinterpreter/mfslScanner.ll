@@ -568,35 +568,40 @@ void mfslDriver::scanBegin ()
         errorStringBuffer =
           new char (ERROR_STRING_BUFFER_SIZE);
 
-      int status = 0;
+//       int status = 0;
+//
+// #ifdef WIN32
+//       status =
+//         strerror_s (
+//           errorStringBuffer,
+//           ERROR_STRING_BUFFER_SIZE,
+//           errno);
+// #else
+//       status =
+//         strerror_r (
+//           errno,
+//           errorStringBuffer,
+//           ERROR_STRING_BUFFER_SIZE);
+// #endif
 
-#ifdef WIN32
-      status =
-        strerror_s (
-          errorStringBuffer,
-          ERROR_STRING_BUFFER_SIZE,
-          errno);
-#else
-      status =
-        strerror_r (
-          errno,
-          errorStringBuffer,
-          ERROR_STRING_BUFFER_SIZE);
-#endif
+      char*
+        errorString =
+          strerror (errno);
 
-      if (status) {
-        // JMI
+//       if (status) {
+
+      if (errorString != nullptr) {
+        s <<
+          "cannot open " <<
+          fScriptSourceName << ": " <<
+//           &errorStringBuffer <<
+          errorString <<
+          endl;
+
+        mfslFileError (
+          fScriptSourceName,
+          s.str ());
       }
-
-      s <<
-        "cannot open " <<
-        fScriptSourceName << ": " <<
-        &errorStringBuffer <<
-        endl;
-
-      mfslFileError (
-        fScriptSourceName,
-        s.str ());
     }
 }
 
