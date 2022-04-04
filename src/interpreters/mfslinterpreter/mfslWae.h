@@ -126,7 +126,7 @@ EXP void mfslError (
   const string&       message,
   const yy::location& loc);
 
-EXP void mfslnternalError (
+EXP void mfslInternalError (
   const string&       message,
   const yy::location& loc);
 

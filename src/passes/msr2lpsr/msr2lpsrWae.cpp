@@ -41,8 +41,6 @@ void msr2lpsrUnsupported (
       gGlobalWaeOahGroup->getDontShowErrors ()
     )
   ) {
-    int saveIndent = gIndenter.getIndent ();
-
     gIndenter.resetToZero ();
 
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -55,8 +53,6 @@ void msr2lpsrUnsupported (
       "### MSR LIMITATION ### " <<
       inputSourceName << ":" << inputLineNumber << ": " << message <<
       endl;
-
-    gIndenter.setIndent (saveIndent);
   }
 
   throw msr2lpsrUnsupportedException (message);

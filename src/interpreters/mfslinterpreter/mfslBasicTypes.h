@@ -77,7 +77,9 @@ class EXP mfslOptionsBlock : public smartable
     // public services
     // ------------------------------------------------------
 
-    void                  registerOptionsInOptionsBlock (S_oahOption option);
+    void                  registerOptionsInOptionsBlock (
+                            S_oahOption option,
+                            mfslDriver& drv);
 
   public:
 
@@ -145,7 +147,8 @@ class EXP mfslChoice : public smartable
                               { return fChoiceName; }
 
     void                  setChoiceLabelSuppliedByAnOption (
-                            const string& label);
+                            const string& label,
+                            mfslDriver&   drv);
 
     void                  selectChoiceLabel (
                             const string& label,
@@ -187,7 +190,8 @@ class EXP mfslChoice : public smartable
 
     void                  enrichLabelOptionsBlock (
                             const string&      label,
-                            S_mfslOptionsBlock optionsBlock);
+                            S_mfslOptionsBlock optionsBlock,
+                            mfslDriver&        drv);
 
     void                  registerChoiceDefaultLabel (
                             const string& label,
@@ -309,7 +313,8 @@ class EXP mfslCaseStatement : public smartable
     // ------------------------------------------------------
 
     static SMARTP<mfslCaseStatement> create (
-                            S_mfslChoice caseChoice);
+                            S_mfslChoice caseChoice,
+                            mfslDriver&  drv);
 
   protected:
 
@@ -317,7 +322,8 @@ class EXP mfslCaseStatement : public smartable
     // ------------------------------------------------------
 
                           mfslCaseStatement (
-                            S_mfslChoice caseChoice);
+                            S_mfslChoice caseChoice,
+                            mfslDriver&  drv);
 
     virtual               ~mfslCaseStatement ();
 

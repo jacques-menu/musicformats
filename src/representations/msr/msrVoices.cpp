@@ -2607,6 +2607,8 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
   }
 #endif
 
+  ++gIndenter;
+
   // fetch the part
   S_msrPart
     part =
@@ -2760,6 +2762,8 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
           figuredBassElement);
     } // for
   }
+
+  --gIndenter;
 }
 
 void msrVoice::appendNoteToVoiceClone (S_msrNote note) {

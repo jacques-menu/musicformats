@@ -123,7 +123,7 @@ case SCORE :
 	part2_Bb_instruments:
 	  -output-file-name "Hymn121_harmony_part2_Bb_instruments.ly"
 
-    -subtitle "Part 2 - Bb instruments"
+    -subtitle '\markup {"Part 2 - B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
     -keep-musicxml-part-id P2
 
     -lilypond-transpose-part-id P2=bes
@@ -132,7 +132,7 @@ case SCORE :
 	part3_Bb_instruments:
 	  -output-file-name "Hymn121_harmony_part2_Bb_instruments.ly"
 
-    -subtitle "Part 3 - Bb instruments"
+    -subtitle '\markup {"Part 3 - B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
     -keep-musicxml-part-id P3
 
     -global-staff-size 23 # a more readable score is needed
@@ -143,7 +143,7 @@ case SCORE :
 	part4_Bb_instruments:
 	  -output-file-name "Hymn121_harmony_part4_Bb_instruments.ly"
 
-    -subtitle "Part 4 - Bb instruments"
+    -subtitle '\markup {"Part 4 - B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
     -keep-musicxml-part-id P4
 
     -ignore-musicxml-lyrics # there's a glitch at the last measure
@@ -155,7 +155,6 @@ case SCORE :
 	  -output-file-name "Hymn121_harmony_part4_BassGuitar.ly"
 
     -subtitle "Part 4 - Bass guitar"
-    -keep-musicxml-part-id P4
 
     -ignore-musicxml-lyrics # there's a glitch at the last measure
 
@@ -187,4 +186,4 @@ case SCORE :
 
 
 # run the tool with all the SCORE labels, each one in turn
-all SCORE ;
+every SCORE ;

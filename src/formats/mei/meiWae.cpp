@@ -64,8 +64,6 @@ void meiInternalError (
   int           sourceCodeLineNumber,
   const string& message)
 {
-  int saveIndent = gIndenter.getIndent ();
-
   gIndenter.resetToZero ();
 
   waeErrorWithoutException (
@@ -79,8 +77,6 @@ void meiInternalError (
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();
 #endif
-
-  gIndenter.setIndent (saveIndent);
 
   throw meiInternalException (message);
 }

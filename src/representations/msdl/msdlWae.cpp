@@ -65,8 +65,6 @@ EXP void msdlInternalError (
   int           sourceCodeLineNumber,
   const string& message)
 {
-  int saveIndent = gIndenter.getIndent ();
-
   gIndenter.resetToZero ();
 
   waeErrorWithoutException (
@@ -80,8 +78,6 @@ EXP void msdlInternalError (
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();
 #endif
-
-  gIndenter.setIndent (saveIndent);
 
   throw msdlInternalException (message);
 }

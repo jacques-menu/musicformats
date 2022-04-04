@@ -204,6 +204,89 @@ typedef SMARTP<lpsrChordsLanguageAtom> S_lpsrChordsLanguageAtom;
 EXP ostream& operator<< (ostream& os, const S_lpsrChordsLanguageAtom& elt);
 
 //______________________________________________________________________________
+class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<lpsrStaffInstrumentNameAtom> create (
+                            const string&         longName,
+                            const string&         shortName,
+                            const string&         description,
+                            const string&         valueSpecification,
+                            const string&         variableName,
+                            map<string, string>&  stringToStringMapVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          lpsrStaffInstrumentNameAtom (
+                            const string&         longName,
+                            const string&         shortName,
+                            const string&         description,
+                            const string&         valueSpecification,
+                            const string&         variableName,
+                            map<string, string>&  stringToStringMapVariable);
+
+    virtual               ~lpsrStaffInstrumentNameAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const map<string, string>&
+                          getStringToStringMapVariable () const
+                              { return fStringToStringMapVariable; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const string& theString,
+                            ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    string                asShortNamedOptionString () const override;
+    string                asActualLongNamedOptionString () const override;
+
+    void                  print (ostream& os) const override;
+
+    void                  printAtomWithVariableOptionsValues (
+                            ostream& os,
+                            int      valueFieldWidth) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    map<string, string>&  fStringToStringMapVariable;
+};
+typedef SMARTP<lpsrStaffInstrumentNameAtom> S_lpsrStaffInstrumentNameAtom;
+EXP ostream& operator<< (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt);
+
+//______________________________________________________________________________
 class EXP lpsrTransposeAtom : public oahAtomStoringAValue
 {
   public:
@@ -479,6 +562,17 @@ class EXP lpsrOahGroup : public oahGroup
     Bool                  getTagline () const
                               { return fTagline; }
 
+    // staves
+    // --------------------------------------
+
+    const map<string, string>&
+                          getLpsrStavesInstrumentsNamesMap () const
+                              { return fLpsrStavesInstrumentsNamesMap; }
+
+    S_lpsrStaffInstrumentNameAtom
+                          getLpsrStavesInstrumentsNamesMapAtom () const
+                              { return fLpsrStavesInstrumentsNamesMapAtom; }
+
     // measures
     // --------------------------------------
 
@@ -595,6 +689,8 @@ class EXP lpsrOahGroup : public oahGroup
     void                  initializeLpsrDisplayOptions ();
 
     void                  initializeLpsrPaperOptions ();
+
+    void                  initializeLpsrStavesOptions ();
 
     void                  initializeLpsrVoicesOptions ();
 
@@ -729,6 +825,11 @@ class EXP lpsrOahGroup : public oahGroup
 
     lpsrChordsLanguageKind
                           fLpsrChordsLanguageKind;
+
+    // staves instrument names
+    map<string, string>   fLpsrStavesInstrumentsNamesMap;
+    S_lpsrStaffInstrumentNameAtom
+                          fLpsrStavesInstrumentsNamesMapAtom;
 
     // transpose
     // --------------------------------------

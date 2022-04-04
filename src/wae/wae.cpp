@@ -66,7 +66,8 @@ void waeInternalWarning (
       inputSourceName << ":" << inputLineNumber << ": " <<message <<
       endl;
 
-    gGlobalWarningsInputLineNumbers.insert (inputLineNumber);
+    gGlobalWarningsInputLineNumbers.insert (
+      inputLineNumber);
 
     gIndenter.setIndent (saveIndent);
   }
@@ -100,7 +101,8 @@ void waeErrorWithoutException (
 
       gIndenter.setIndent (saveIndent);
 
-      gGlobalErrorsInputLineNumbers.insert (inputLineNumber);
+      gGlobalErrorsInputLineNumbers.insert (
+        inputLineNumber);
     }
   }
 }
@@ -192,6 +194,9 @@ std::set<int> gGlobalErrorsInputLineNumbers;
 
 void displayWarningsAndErrorsInputLineNumbers ()
 {
+
+  gIndenter.resetToZero ();
+
   size_t warningsInputLineNumbersSize =
     gGlobalWarningsInputLineNumbers.size ();
 
@@ -201,7 +206,10 @@ void displayWarningsAndErrorsInputLineNumbers ()
     ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
   ) {
     gLogStream <<
-      "Warning message(s) were issued for input " <<
+      endl <<
+      mfSingularOrPluralWithoutNumber (
+        warningsInputLineNumbersSize, "A warning message has", "Warning messages have") <<
+      " been issued for input " <<
       mfSingularOrPluralWithoutNumber (
         warningsInputLineNumbersSize, "line", "lines") <<
       ' ';
@@ -225,7 +233,9 @@ void displayWarningsAndErrorsInputLineNumbers ()
   if (errorsInputLineNumbersSize) {
     gLogStream <<
       endl <<
-      "Error message(s) were issued for input " <<
+      mfSingularOrPluralWithoutNumber (
+        errorsInputLineNumbersSize, "An error message has", "Error messages have") <<
+      " been issued for input " <<
       mfSingularOrPluralWithoutNumber (
         errorsInputLineNumbersSize, "line", "lines") <<
       ' ';

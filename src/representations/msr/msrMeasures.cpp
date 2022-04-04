@@ -2120,6 +2120,8 @@ void msrMeasure::appendNoteToMeasure (
   }
 #endif
 
+  ++gIndenter;
+
   // should a skip note be appended before note?
   if (positionsDelta.getNumerator () > 0) {
     // fetch the voice
@@ -2219,6 +2221,8 @@ void msrMeasure::appendNoteToMeasure (
          +
         note->getNoteSoundingWholeNotes ());
   }
+
+  --gIndenter;
 }
 
 void msrMeasure::appendNoteOrPaddingToMeasure (
@@ -3871,7 +3875,7 @@ void msrMeasure::padUpToPositionInMeasure (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
-       "Appending " << paddingNote->asString () <<
+       "Appending padding note " << paddingNote->asString () <<
        " (" << missingDuration << " whole notes)" <<
        " to finalize \"" << measureVoice->getVoiceName () <<
        "\" measure: " <<

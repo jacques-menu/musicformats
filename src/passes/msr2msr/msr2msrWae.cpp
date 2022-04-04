@@ -41,8 +41,6 @@ void msr2msrUnsupported (
       gGlobalWaeOahGroup->getDontShowErrors ()
     )
   ) {
-    int saveIndent = gIndenter.getIndent ();
-
     gIndenter.resetToZero ();
 
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -56,7 +54,6 @@ void msr2msrUnsupported (
       inputSourceName << ":" << inputLineNumber << ": " << message <<
       endl;
 
-    gIndenter.setIndent (saveIndent);
   }
 
   throw msr2msrUnsupportedException (message);
@@ -82,8 +79,6 @@ void msr2msrInternalError (
   int           sourceCodeLineNumber,
   const string& message)
 {
-  int saveIndent = gIndenter.getIndent ();
-
   gIndenter.resetToZero ();
 
   waeErrorWithoutException (
@@ -97,8 +92,6 @@ void msr2msrInternalError (
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();
 #endif
-
-  gIndenter.setIndent (saveIndent);
 
   throw msr2msrInternalException (message);
 }

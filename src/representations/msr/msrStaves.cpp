@@ -2824,9 +2824,9 @@ void msrStaff::browseData (basevisitor* v)
             getIgnoreMsrVoicesSetAtom ();;
 
       Bool
-        ignoreMsrVoicesSetIsSetByUser =
+        ignoreMsrVoicesSetIsSetByAnOption =
           ignoreMsrVoicesSetAtom->
-            getSetByUser ();;
+            getSetByAnOption ();;
 
       // get the  set of voices to keep
       S_oahStringSetElementAtom
@@ -2835,12 +2835,12 @@ void msrStaff::browseData (basevisitor* v)
             getKeepMsrVoicesSetAtom ();;
 
       Bool
-        keepMsrVoicesSetIsSetByUser =
+        keepMsrVoicesSetIsSetByAnOption =
           keepMsrVoicesSetAtom->
-            getSetByUser ();;
+            getSetByAnOption ();;
 
       // JMI this should be done in mxsr2msrOahGroup::checkGroupOptionsConsistency () v0.9.62
-      if (ignoreMsrVoicesSetIsSetByUser && keepMsrVoicesSetIsSetByUser) {
+      if (ignoreMsrVoicesSetIsSetByAnOption && keepMsrVoicesSetIsSetByAnOption) {
         stringstream s;
 
         s <<
@@ -2895,7 +2895,7 @@ void msrStaff::browseData (basevisitor* v)
             getVoiceName ();
 
       // is voiceName in the ignore voices set?
-      if (ignoreMsrVoicesSetIsSetByUser) {
+      if (ignoreMsrVoicesSetIsSetByAnOption) {
         // a voice is to be browsed by default
         if (
           mfStringIsInStringSet (
@@ -2906,7 +2906,7 @@ void msrStaff::browseData (basevisitor* v)
         }
       }
 
-      if (keepMsrVoicesSetIsSetByUser) {
+      if (keepMsrVoicesSetIsSetByAnOption) {
         // a voice is NOT to be browsed by default
         if (
           !

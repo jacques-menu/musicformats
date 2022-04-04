@@ -128,8 +128,6 @@ void msrUnsupported (
       gGlobalWaeOahGroup->getDontShowErrors ()
     )
   ) {
-    int saveIndent = gIndenter.getIndent ();
-
     gIndenter.resetToZero ();
 
     if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
@@ -142,8 +140,6 @@ void msrUnsupported (
       "### MSR LIMITATION ### " <<
       inputSourceName << ":" << inputLineNumber << ": " << message <<
       endl;
-
-    gIndenter.setIndent (saveIndent);
   }
 
   throw msrUnsupportedException (message);
@@ -169,8 +165,6 @@ void msrInternalError (
   int           sourceCodeLineNumber,
   const string& message)
 {
-  int saveIndent = gIndenter.getIndent ();
-
   gIndenter.resetToZero ();
 
 //  waeErrorWithoutException ( // JMI
@@ -186,8 +180,6 @@ void msrInternalError (
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();
 #endif
-
-  gIndenter.setIndent (saveIndent);
 
   throw msrInternalException (message);
 }

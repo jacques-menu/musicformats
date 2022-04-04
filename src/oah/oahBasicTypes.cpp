@@ -1700,7 +1700,7 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentials (
     "fVariableName" << " : " <<
     fVariableName <<
     endl;
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os << left <<
       setw (fieldWidth) <<
       "set by user" <<
@@ -1720,7 +1720,7 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentialsShort (
     "fVariableName" << " : " <<
     fVariableName <<
     endl;
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os << left <<
       setw (fieldWidth) <<
       "set by user" <<
@@ -1734,7 +1734,7 @@ void oahAtomImplicitlyStoringAValue::print (ostream& os) const
 
   os <<
     "AtomWithVariable:";
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -1754,7 +1754,7 @@ void oahAtomImplicitlyStoringAValue::printShort (ostream& os) const
 
   os <<
     "AtomWithVariable: ";
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -1788,8 +1788,8 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableOptionsValues (
 {
   os <<
     "AtomWithVariable values:" <<
-    "???, fSetByUser: " <<
-    fSetByUser <<
+    "???, fSetByAnOption: " <<
+    fSetByAnOption <<
     endl;
 }
 
@@ -1922,8 +1922,8 @@ void oahAtomStoringAValue::printAtomWithVariableEssentials (
     fVariableName <<
     endl <<
     setw (fieldWidth) <<
-    "fSetByUser" << " : " <<
-    fSetByUser <<
+    "fSetByAnOption" << " : " <<
+    fSetByAnOption <<
     endl;
 }
 
@@ -1945,8 +1945,8 @@ void oahAtomStoringAValue::printAtomWithVariableEssentialsShort (
     fVariableName <<
     endl <<
     setw (fieldWidth) <<
-    "fSetByUser" << " : " <<
-    fSetByUser <<
+    "fSetByAnOption" << " : " <<
+    fSetByAnOption <<
     endl;
 }
 
@@ -1956,7 +1956,7 @@ void oahAtomStoringAValue::print (ostream& os) const
 
   os <<
     "AtomWithVariable:";
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -1976,7 +1976,7 @@ void oahAtomStoringAValue::printShort (ostream& os) const
 
   os <<
     "AtomWithVariable: ";
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -2053,8 +2053,8 @@ void oahAtomStoringAValue::printAtomWithVariableOptionsValues (
 {
   os <<
     "AtomWithVariable values:" <<
-    "???, fSetByUser: " <<
-    fSetByUser <<
+    "???, fSetByAnOption: " <<
+    fSetByAnOption <<
     endl;
 }
 
@@ -3185,7 +3185,7 @@ void oahSubGroup::printSubGroupOptionsValues (
             dynamic_cast<oahBooleanAtom*>(&(*atom))
       ) {
         // print the atom value if the variable has been set by user by user
-        if (booleanAtom->getSetByUser ()) {
+        if (booleanAtom->getSetByAnOption ()) {
           atom->
             printAtomWithVariableOptionsValues (
               os,
@@ -3201,7 +3201,7 @@ void oahSubGroup::printSubGroupOptionsValues (
             dynamic_cast<oahAtomImplicitlyStoringAValue*>(&(*atom))
       ) {
         // print the atom value if the variable has been set by user by user
-        if (atomImplicitlyStoringAValue->getSetByUser ()) {
+        if (atomImplicitlyStoringAValue->getSetByAnOption ()) {
           atom->
             printAtomWithVariableOptionsValues (
               os,
@@ -3217,7 +3217,7 @@ void oahSubGroup::printSubGroupOptionsValues (
             dynamic_cast<oahAtomStoringAValue*>(&(*atom))
       ) {
         // print the atom value if the variable has been set by user by user
-        if (atomStoringAValue->getSetByUser ()) {
+        if (atomStoringAValue->getSetByAnOption ()) {
           atom->
             printAtomWithVariableOptionsValues (
               os,
@@ -7009,6 +7009,10 @@ void oahHandler::registerOahElementUseInLaunchCommand (
       fLaunchCommandAsSupplied +=
         " \"" + valueUsed + '"';
     }
+    else if (valueUsed.find ('\n') != string::npos) {
+      fLaunchCommandAsSupplied +=
+        " _EOLN_" + valueUsed + '"';
+    }
     else {
       fLaunchCommandAsSupplied +=
         ' ' + valueUsed;
@@ -7034,6 +7038,10 @@ void oahHandler::registerOahElementUseInLaunchCommand (
       fLaunchCommandWithLongOptionsNames +=
         " \"" + valueUsed + '"';
     }
+    else if (valueUsed.find ('\n') != string::npos) {
+      fLaunchCommandWithLongOptionsNames +=
+        " _EOLN_" + valueUsed + '"';
+    }
     else {
       fLaunchCommandWithLongOptionsNames +=
         ' ' + valueUsed;
@@ -7052,6 +7060,10 @@ void oahHandler::registerOahElementUseInLaunchCommand (
   else if (valueUsed.find (' ') != string::npos) {
     fLaunchCommandWithShortOptionsNames +=
       " \"" + valueUsed + '"';
+  }
+  else if (valueUsed.find ('\n') != string::npos) {
+    fLaunchCommandWithShortOptionsNames +=
+        " _EOLN_" + valueUsed + '"';
   }
   else {
     fLaunchCommandWithShortOptionsNames +=
@@ -7075,6 +7087,10 @@ void oahHandler::registerArgumentUseInLaunchCommand (
     fLaunchCommandAsSupplied +=
       " \"" + argumentUsed + '"';
   }
+  else if (argumentUsed.find ('\n') != string::npos) {
+    fLaunchCommandAsSupplied +=
+      " _EOLN_" + argumentUsed + '"';
+  }
   else {
     fLaunchCommandAsSupplied +=
       ' ' + argumentUsed;
@@ -7093,6 +7109,10 @@ void oahHandler::registerArgumentUseInLaunchCommand (
     fLaunchCommandWithLongOptionsNames +=
       " \"" + argumentUsed + '"';
   }
+  else if (argumentUsed.find ('\n') != string::npos) {
+    fLaunchCommandWithLongOptionsNames +=
+      " _EOLN_" + argumentUsed + '"';
+  }
   else {
     fLaunchCommandWithLongOptionsNames +=
       ' ' + argumentUsed;
@@ -7110,6 +7130,10 @@ void oahHandler::registerArgumentUseInLaunchCommand (
   else if (argumentUsed.find (' ') != string::npos) {
     fLaunchCommandWithShortOptionsNames +=
       " \"" + argumentUsed + '"';
+  }
+  else if (argumentUsed.find ('\n') != string::npos) {
+    fLaunchCommandWithShortOptionsNames +=
+      " _EOLN_" + argumentUsed + '"';
   }
   else {
     fLaunchCommandWithShortOptionsNames +=

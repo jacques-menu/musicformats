@@ -76,8 +76,6 @@ void oahWarningWithContext (
 //______________________________________________________________________________
 void oahError (const string& errorMessage)
 {
-  int saveIndent = gIndenter.getIndent ();
-
   gIndenter.resetToZero ();
 
   gLogStream <<
@@ -89,8 +87,6 @@ void oahError (const string& errorMessage)
   abort ();
 #endif
 
-  gIndenter.setIndent (saveIndent);
-
   throw mfOahException (errorMessage);
 }
 
@@ -98,8 +94,6 @@ void oahErrorWithContext (
   const string& errorMessage,
   const string& context)
 {
-  int saveIndent = gIndenter.getIndent ();
-
   gIndenter.resetToZero ();
 
   gLogStream <<
@@ -113,16 +107,12 @@ void oahErrorWithContext (
   abort ();
 #endif
 
-  gIndenter.setIndent (saveIndent);
-
   throw mfOahException (errorMessage);
 }
 
 //______________________________________________________________________________
 void oahInternalError (const string& errorMessage)
 {
-  int saveIndent = gIndenter.getIndent ();
-
   gIndenter.resetToZero ();
 
   gLogStream <<
@@ -133,8 +123,6 @@ void oahInternalError (const string& errorMessage)
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();
 #endif
-
-  gIndenter.setIndent (saveIndent);
 
   throw mfOahException (errorMessage);
 }
@@ -157,8 +145,6 @@ void oahInternalErrorWithContext (
   const string& errorMessage,
   const string& context)
 {
-  int saveIndent = gIndenter.getIndent ();
-
   gIndenter.resetToZero ();
 
   gLogStream <<
@@ -171,8 +157,6 @@ void oahInternalErrorWithContext (
 #ifdef ABORT_TO_DEBUG_ERRORS
   abort ();
 #endif
-
-  gIndenter.setIndent (saveIndent);
 
   throw mfOahException (errorMessage);
 }

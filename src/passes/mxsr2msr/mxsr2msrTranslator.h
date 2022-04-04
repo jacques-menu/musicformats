@@ -1553,11 +1553,11 @@ class EXP mxsr2msrTranslator :
     void                      attachPendingScordaturasToNote (
                                 S_msrNote note);
 
-    int                       fCurrentStringTuningNumber;
+    int                       fCurrentAccordNumber;
 
-    msrDiatonicPitchKind      fCurrentStringTuningDiatonicPitchKind;
-    msrAlterationKind         fCurrentStringTuningAlterationKind;
-    msrOctaveKind             fCurrentStringTuningOctaveKind;
+    msrDiatonicPitchKind      fCurrentAccordDiatonicPitchKind;
+    msrAlterationKind         fCurrentAccordAlterationKind;
+    msrOctaveKind             fCurrentAccordOctaveKind;
 
     Bool                      fOnGoingAccord;
 

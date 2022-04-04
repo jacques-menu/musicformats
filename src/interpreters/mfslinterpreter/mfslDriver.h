@@ -17,6 +17,8 @@
 #include "mfBool.h"
 #include "mfMusicformatsError.h" // for mfMusicformatsError
 
+#include "oahAtomsCollection.h"
+
 #include "mfslBasicTypes.h"
 
 #include "location.hh"
@@ -120,7 +122,7 @@ class mfslDriver
     // options blocks
     void                  optionsBlocksStackPush (
                             S_mfslOptionsBlock optionsBlock,
-                            const string& context);
+                            const string&      context);
 
     S_mfslOptionsBlock         optionsBlocksStackTop () const;
 
@@ -129,7 +131,8 @@ class mfslDriver
 
     // options
     void                  registerOptionInCurrentOptionsBlock (
-                            S_oahOption option);
+                            S_oahOption option,
+                            mfslDriver& drv);
 
     void                  registerOptionsSuppliedChoicesAsUsed (
                             const string& choiceName)
@@ -157,7 +160,7 @@ class mfslDriver
                             const string& choiceName,
                             const string& label);
 
-    void                  setAllChoicesOptionsBlockForToolLaunching (
+    void                  setEveryChoiceForToolLaunching (
                             const string& choiceName);
 
     mfMusicformatsError   launchMfslTool_Pass2 ();
@@ -167,8 +170,23 @@ class mfslDriver
     // private methods
     // ------------------------------------------------------
 
+    // 'select' statements
+    Bool                  applySelectOptionIfPresent (
+                            const S_mfslChoice choice,
+                            const string&      label);
+
+    Bool                  applySelectOptionFinally ();
+
+    // 'every' statements
+    Bool                  applyEveryOptionIfPresent (
+                            const S_oahStringAtom everyChoiceAtom);
+
+    Bool                  applyEveryOptionFinally ();
+
+    // final semantics check
     void                  finalSemanticsCheck ();
 
+    // populate commands list
     void                  populateTheCommandsList ();
 
   private:
@@ -231,8 +249,9 @@ class mfslDriver
     // tool launching
     S_mfslOptionsBlock    fOptionsBlockToUseForSelectLaunching;
 
-    S_mfslChoice          fChoiceToUseForAllLaunching;
+    S_mfslChoice          fChoiceToUseForEveryLaunching;
 
+    // commands list
     list<string>          fCommandsList;
 };
 

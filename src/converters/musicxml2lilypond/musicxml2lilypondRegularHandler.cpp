@@ -514,6 +514,8 @@ void xml2lyRegularHandler::createStavesRegularGroup ()
 
   // atoms
 
+  registerAtomInRegularSubgroup ("lpsr-staff-instrument-name", subGroup);
+  
   registerAtomInRegularSubgroup ("create-voices-staff-relative-numbers", subGroup);
 
   registerAtomInRegularSubgroup ("ledger-lines-color", subGroup);

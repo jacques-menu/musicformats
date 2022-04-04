@@ -108,7 +108,7 @@ void brailleOutputKindAtom::applyElement (ostream& os)
   }
 #endif
 
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     stringstream s;
 
     s <<
@@ -120,7 +120,7 @@ void brailleOutputKindAtom::applyElement (ostream& os)
   }
   else {
     fBrailleOutputKindVariable = fBrailleOutputKindValue;
-    fSetByUser = true;
+    fSetByAnOption = true;
   }
 }
 
@@ -253,7 +253,7 @@ void brailleOutputKindAtom::printAtomWithVariableOptionsValues (
     " : " <<
     bsrBrailleOutputKindAsString (
       fBrailleOutputKindVariable);
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -343,7 +343,7 @@ void brailleUTFKindAtom::applyAtomWithValue (
   }
 
   fBsrUTFKindVariable = UTFKind;
-  fSetByUser = true;
+  fSetByAnOption = true;
 }
 
 void brailleUTFKindAtom::acceptIn (basevisitor* v)
@@ -469,7 +469,7 @@ void brailleUTFKindAtom::printAtomWithVariableOptionsValues (
     bsrUTFKindAsString (
       fBsrUTFKindVariable) <<
     "\"";
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -559,7 +559,7 @@ void brailleByteOrderingKindAtom::applyAtomWithValue (
   }
 
   fBsrByteOrderingKindVariable = byteOrderingKind;
-  fSetByUser = true;
+  fSetByAnOption = true;
 }
 
 void brailleByteOrderingKindAtom::acceptIn (basevisitor* v)
@@ -685,7 +685,7 @@ void brailleByteOrderingKindAtom::printAtomWithVariableOptionsValues (
     " : " <<
     bsrByteOrderingKindAsString (
       fBsrByteOrderingKindVariable);
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }

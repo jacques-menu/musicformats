@@ -203,13 +203,13 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     string                fValueSpecification;
 
     string                fVariableName;
-    Bool                  fSetByUser;
+    Bool                  fSetByAnOption;
 };
 \end{lstlisting}
 
-The \field{oahAtomStoringAValue}{fSetByUser} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahRGBColorAtom}, for example. It is not used for data structures such as sets, lists and vector, since this is indicated by their size.
+The \field{oahAtomStoringAValue}{fSetByAnOption} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahRGBColorAtom}, for example. It is not used for data structures such as sets, lists and vector, since this is indicated by their size.
 
-\fieldName{fSetByUser} is set in \methodName{set*Variable} methods, as in \method{oahIntegerAtom}{setIntegerVariable}\\
+\fieldName{fSetByAnOption} is set in \methodName{set*Variable} methods, as in \method{oahIntegerAtom}{setIntegerVariable}\\
 in \oah{oahAtomsCollection.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 void oahIntegerAtom::setIntegerVariable (int value)
@@ -227,7 +227,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
 #endif
 
   fIntegerVariable = value;
-  fSetByUser = true;
+  fSetByAnOption = true;
 }
 \end{lstlisting}
 
@@ -236,7 +236,7 @@ void oahIntegerAtom::setIntegerVariable (int value)
 \subsection{The {\tt oahBooleanAtom} special case}
 % -------------------------------------------------------------------------
 
-\Class{oahBooleanAtom} has its own \fieldName{fSetByUser} field, because is it not derived from\\
+\Class{oahBooleanAtom} has its own \fieldName{fSetByAnOption} field, because is it not derived from\\
 \class{oahAtomStoringAValue}: there isn't any value to be supplied in the command line, since \fieldName{fBooleanVariable} is \code{false} by default:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
@@ -258,7 +258,7 @@ class EXP oahBooleanAtom : public oahAtom
 
     string                fVariableName;
     Bool&                 fBooleanVariable;
-    Bool                  fSetByUser;
+    Bool                  fSetByAnOption;
 };
 \end{lstlisting}
 
@@ -267,7 +267,7 @@ class EXP oahBooleanAtom : public oahAtom
 \subsection{Checking whether an option has been selected}
 % -------------------------------------------------------------------------
 
-This in done by calls to the \methodName{getSetByUser} methods.
+This in done by calls to the \methodName{getSetByAnOption} methods.
 
 For example, \method{lpsr2lilypondTranslator}{generateLilypondVersion} in \\
 \lpsr{lpsr2lilypondTranslator.cpp} contains:
@@ -279,7 +279,7 @@ void lpsr2lilypondTranslator::generateLilypondVersion ()
     lilypondVersionHasBeenSet =
       gGlobalLpsr2lilypondOahGroup->
         getLilypondVersionAtom ()->
-          getSetByUser ();
+          getSetByAnOption ();
 
   string
     lilypondVersion =
@@ -476,7 +476,7 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // ------------------------------------------------------
 
     string                fVariableName;
-    Bool                  fSetByUser;
+    Bool                  fSetByAnOption;
 };
 \end{lstlisting}
 
@@ -1641,7 +1641,7 @@ class EXP oahLengthAtom : public oahAtomStoringAValue
                             msrLength value)
                               {
                                 fLengthVariable = value;
-                                fSetByUser = true;
+                                fSetByAnOption = true;
                               }
 
     msrLength             getLengthVariable () const
@@ -1767,7 +1767,7 @@ void oahLengthAtom::printAtomWithVariableOptionsValues (
     fVariableName <<
     " : " <<
     fLengthVariable.asString ();
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }

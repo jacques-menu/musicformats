@@ -264,7 +264,7 @@ void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
     " : " <<
     msrQuarterTonesPitchesLanguageKindAsString (
       fMsrQuarterTonesPitchesLanguageKindVariable);
-  if (fSetByUser) {
+  if (fSetByAnOption) {
     os <<
       ", set by user";
   }
@@ -344,9 +344,10 @@ void msrRenamePartAtom::applyAtomWithValue (
 #endif
 
   string regularExpression (
-    "[[:space:]]*([^[:space:]]*)[[:space:]]*"
+    "[[:space:]]*(.+)[[:space:]]*"
     ":"
-    "[[:space:]]*([^[:space:]]*)[[:space:]]*");
+    "[[:space:]]*(.+)[[:space:]]*"
+  );
 
   regex  e (regularExpression);
   smatch sm;
@@ -392,6 +393,9 @@ void msrRenamePartAtom::applyAtomWithValue (
     oldPartName = sm [1],
     newPartName = sm [2];
 
+  mfTrimFromBothEnds (oldPartName);
+  mfTrimFromBothEnds (newPartName);
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
@@ -420,7 +424,7 @@ void msrRenamePartAtom::applyAtomWithValue (
 
   else {
     fStringToStringMapVariable [oldPartName] = newPartName;
-    fSetByUser = true;
+    fSetByAnOption = true;
   }
 }
 
@@ -979,10 +983,10 @@ R"()",
       msrRenamePartAtom::create (
         "msr-rename-part", "mrp",
         regex_replace (
-R"(Rename part ORIGINAL_NAME to NEW_NAME, for example after displaying
+R"(PART_RENAME_SPEC should be of the form ORIGINAL_NAME:NEW_NAME.
+Rename part ORIGINAL_NAME to NEW_NAME, for example after displaying
 the names in the score or a summary of the latter in a first run with options
 '-dmsrnames, -display-msr-names' or 'dmsrsum, -display-msr-summary'.
-PART_RENAME_SPEC should be of the form ORIGINAL_NAME:NEW_NAME .
 There can be spaces around the ':', in which case quoting is needed.
 There can be several occurrences of this option.)",
           regex ("EXECUTABLE"),

@@ -535,12 +535,12 @@ string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
   Bool
     outputFileNameHasBeenSet =
       outputFileNameStringAtom->
-        getSetByUser ();
+        getSetByAnOption ();
 
   Bool
     autoOutputFileNameHasBeenSet =
       autoOutputFileNameAtom->
-        getSetByUser ();
+        getSetByAnOption ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {

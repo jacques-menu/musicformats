@@ -115,10 +115,10 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 
   // scordatura handling
 
-  fCurrentStringTuningNumber = -1;
-  fCurrentStringTuningDiatonicPitchKind = msrDiatonicPitchKind::k_NoDiatonicPitch;
-  fCurrentStringTuningAlterationKind = msrAlterationKind::k_NoAlteration;
-  fCurrentStringTuningOctaveKind = msrOctaveKind::k_NoOctave;
+  fCurrentAccordNumber = -1;
+  fCurrentAccordDiatonicPitchKind = msrDiatonicPitchKind::k_NoDiatonicPitch;
+  fCurrentAccordAlterationKind    = msrAlterationKind::k_NoAlteration;
+  fCurrentAccordOctaveKind        = msrOctaveKind::k_NoOctave;
 
   // staff handling
   fPreviousNoteMusicXMLStaffNumber = msrStaff::K_NO_STAFF_NUMBER;
@@ -6412,7 +6412,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt )
     fCurrentStaffTuningDiatonicPitchKind = tuningDiatonicKind;
   }
   else if (fOnGoingAccord) {
-    fCurrentStringTuningDiatonicPitchKind = tuningDiatonicKind;
+    fCurrentAccordDiatonicPitchKind = tuningDiatonicKind;
   }
   else {
     stringstream s;
@@ -6456,7 +6456,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_octave& elt )
     fCurrentStaffTuningOctaveKind = tuningOctaveKind;
   }
   else if (fOnGoingAccord) {
-    fCurrentStaffTuningOctaveKind = tuningOctaveKind;
+    fCurrentAccordOctaveKind = tuningOctaveKind;
   }
   else {
     stringstream s;
@@ -6513,7 +6513,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt )
     fCurrentStaffTuningAlterationKind = tuningAlterationKind;
   }
   else if (fOnGoingAccord) {
-    fCurrentStringTuningAlterationKind = tuningAlterationKind;
+    fCurrentAccordAlterationKind = tuningAlterationKind;
   }
   else {
     stringstream s;
@@ -20242,7 +20242,6 @@ void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
 void mxsr2msrTranslator::attachPendingNoteLevelElementsToNote (
   S_msrNote note)
 {
-
   // attach the pending segnos, if any, to the note
   attachPendingSegnosToNote (note);
 
@@ -20657,7 +20656,9 @@ void mxsr2msrTranslator::populateNote (
         alphaRGBColor);
   }
 
-  // set note accidentals
+  // attach the regular pending elements (not dal segnos), if any, to newNote
+//   attachPendingNoteLevelElementsToNote (newNote); would be too early ??? JMI
+
   newNote->
     setNoteAccidentalKind (
       fCurrentAccidentalKind);
@@ -21181,6 +21182,31 @@ void mxsr2msrTranslator::handleBackup (
   }
 #endif
 
+  // fetch current voice
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
+    gLogStream <<
+      "--> handleBackup()" <<
+      ", fCurrentStaffNumberToInsertInto: " <<
+      fCurrentStaffNumberToInsertInto <<
+      ", fCurrentMusicXMLVoiceNumber: " <<
+      fCurrentMusicXMLVoiceNumber <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+  S_msrVoice
+    currentVoice =
+      fetchVoiceFromCurrentPart (
+        inputLineNumber,
+        fCurrentStaffNumberToInsertInto,
+        fCurrentMusicXMLVoiceNumber);
+
+  // are there pending note level elements?
+  attachPendingNoteLevelElementsToNote ( // JMI
+    fCurrentNonGraceNote);
+
   // is there a pending grace notes group?
   attachPendingGraceNotesGroupToNoteIfRelevant (
     inputLineNumber);
@@ -21638,6 +21664,8 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
   int inputLineNumber =
     newNote->getInputLineNumber ();
 
+  ++gIndenter;
+
   // register note/rest kind right now, to have a nice trace below
   if (fCurrentNoteIsAGraceNote) {
     // gracenote
@@ -21649,6 +21677,15 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
   else {
     // non-grace note
     fCurrentNonGraceNote = newNote;
+
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceNotes ()) { // JMI
+      gLogStream <<
+        "handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest(), fCurrentNonGraceNote = " <<
+        fCurrentNonGraceNote->asShortString () <<
+        endl;
+    }
+#endif
 
     if (
       fCurrentTremoloTypeKind == msrTremoloTypeKind::kTremoloTypeStart
@@ -21938,7 +21975,7 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
-        "Appending regular " <<
+        "Appending regular note or rest " <<
         newNote->asString () <<
         ", line " << newNote->getInputLineNumber () <<
         ", to voice \"" <<
@@ -21947,6 +21984,8 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
         endl;
     }
 #endif
+
+    ++gIndenter;
 
     currentVoice->
       appendNoteToVoice (newNote);
@@ -21960,6 +21999,8 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
         currentVoice <<
         endl;
     }
+
+    --gIndenter;
   }
 
   // take care of slurs JMI ???
@@ -21995,6 +22036,8 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
     default:
       ;
   } // switch
+
+  --gIndenter;
 }
 
 //______________________________________________________________________________
@@ -25646,11 +25689,14 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt )
 
 void mxsr2msrTranslator::visitStart (S_accord& elt )
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_accord" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -25662,11 +25708,16 @@ void mxsr2msrTranslator::visitStart (S_accord& elt )
           </accord>
 */
 
-  fCurrentStringTuningNumber = elt->getAttributeIntValue ("string", 0);
+  fCurrentAccordNumber = elt->getAttributeIntValue ("string", 0);
 
-  fCurrentStringTuningDiatonicPitchKind = msrDiatonicPitchKind::k_NoDiatonicPitch;
-  fCurrentStringTuningAlterationKind = msrAlterationKind::kAlterationNatural; // default value
-  fCurrentStringTuningOctaveKind = msrOctaveKind::k_NoOctave;
+  fCurrentAccordDiatonicPitchKind =
+    msrDiatonicPitchKind::k_NoDiatonicPitch;
+
+  fCurrentAccordAlterationKind =
+    msrAlterationKind::kAlterationNatural; // default value
+
+  fCurrentAccordOctaveKind =
+    msrOctaveKind::k_NoOctave;
 
   fOnGoingAccord = true;
 }
@@ -25685,14 +25736,19 @@ void mxsr2msrTranslator::visitEnd (S_accord& elt)
   }
 #endif
 
+  fOnGoingAccord = false;
+
+//   gLogStream <<
+//     "S_tuning_octave: tuningOctaveNumber = " << tuningOctaveNumber << endl;
+
   S_msrStringTuning
     stringTuning =
       msrStringTuning::create (
         inputLineNumber,
-        fCurrentStringTuningNumber,
-        fCurrentStringTuningDiatonicPitchKind,
-        fCurrentStringTuningAlterationKind,
-        fCurrentStringTuningOctaveKind);
+        fCurrentAccordNumber,
+        fCurrentAccordDiatonicPitchKind,
+        fCurrentAccordAlterationKind,
+        fCurrentAccordOctaveKind);
 
   fCurrentScordatura->
     addStringTuningToScordatura (

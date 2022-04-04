@@ -319,6 +319,8 @@ void msrTuplet::appendNoteToTuplet (
   }
 #endif
 
+  ++gIndenter;
+
   // append note to elements list
   fTupletElementsList.push_back (note);
 
@@ -361,6 +363,8 @@ void msrTuplet::appendNoteToTuplet (
   voiceLastMeasure->
     accountForTupletMemberNoteDurationInMeasure (
       note);
+
+  --gIndenter;
 }
 
 void msrTuplet::appendChordToTuplet (S_msrChord chord)
