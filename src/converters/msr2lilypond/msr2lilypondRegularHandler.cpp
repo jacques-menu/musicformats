@@ -269,6 +269,28 @@ void msr2lilypondRegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("trace-backup", subGroup);
   registerAtomInRegularSubgroup ("trace-forward", subGroup);
+
+  registerAtomInRegularSubgroup ("trace-lpsr-blocks", subGroup);
+
+  registerAtomInRegularSubgroup ("all-paper-variables", subGroup);
+
+//   registerAtomInRegularSubgroup ("length-unit", subGroup);
+//
+//   registerAtomInRegularSubgroup ("paper-height", subGroup);
+//   registerAtomInRegularSubgroup ("paper-width", subGroup);
+//
+//   registerAtomInRegularSubgroup ("left-margin", subGroup);
+//   registerAtomInRegularSubgroup ("right-margin", subGroup);
+//   registerAtomInRegularSubgroup ("top-margin", subGroup);
+//   registerAtomInRegularSubgroup ("bottom-margin", subGroup);
+//
+//   registerAtomInRegularSubgroup ("horizontal-shift", subGroup);
+//   registerAtomInRegularSubgroup ("indent", subGroup);
+//   registerAtomInRegularSubgroup ("short-indent", subGroup);
+//
+//   registerAtomInRegularSubgroup ("markup-system-spacing-padding", subGroup);
+//   registerAtomInRegularSubgroup ("between-system-space", subGroup);
+//   registerAtomInRegularSubgroup ("page-top-spacing", subGroup);
 #endif
 }
 
@@ -443,7 +465,7 @@ void msr2lilypondRegularHandler::createStavesRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("lpsr-staff-instrument-name", subGroup);
-  
+
   registerAtomInRegularSubgroup ("create-voices-staff-relative-numbers", subGroup);
 
   registerAtomInRegularSubgroup ("ledger-lines-color", subGroup);

@@ -8,7 +8,7 @@
     - an 'input' specification, the input source to apply
       the latter to, here file name "Hymn121.xml";
 
-    - any number of MusicFormats options,
+    - a number of MusicFormats options,
       which can easily be commented/uncommented at will.
 ###
 
@@ -28,50 +28,42 @@ input : "Hymn121.xml"
 
 
 # ----------------------------------------------------------
-# the options block
+# basic options
 # ----------------------------------------------------------
 
 # output
-  -output-file-name "Hymn121_BassGuitar.ly"
+  -output-file-name "Hymn121_BassEnhanced.ly"
+
+# paper
+  -indent '0\\cm'  # quoting is needed here
 
 # header
   -title "Hymn 121 - Angels From The Realms Of Glory"
-  -subtitle "Part 4 - Bass guitar"
-
-  -ragged-last-bottom off
+  -subtitle "Part 4 - Bass, enhanced"
 
   -keep-musicxml-part-id P4
 
-  -ignore-musicxml-lyrics
-    # there's a glitch in the last measure of the bass...
-
-# staff
-  -lpsr-staff-instrument-name
-    # let's use LilyPond's '\markup' possibilities
-    # successive MFSL character strings are concatenated into a single one
-    "Voice 4"
-    ":"
-    '\markup {'
-      '\center-column {'
-        '\line { "Bass" }'
-        '\line { "Guitar" }'
-      '}'
-    '}'
-
-  -ambitus
-
-# dynamics
-  -all-wedges-below
-
-# staff
-#   -modern-tab
-#   -tab-full-notation
-
 # display
- -display-options-values
+  -display-options-values
 #  -display-msr-1-short
 #  -display-lpsr-short
 
 # LilyPond
   -lilypond-generation-infos
 
+# tracing
+  -trace-identification
+
+
+# ----------------------------------------------------------
+# enhancement options
+# ----------------------------------------------------------
+
+# staff
+  -lpsr-staff-instrument-name "Voice 4:"  # an empty name
+
+# dynamics
+  -all-wedges-below   # there are above the staff in the input file
+
+  -ignore-musicxml-lyrics
+    # there's a glitch in the last measure of the bass...

@@ -135,11 +135,9 @@ class mfslDriver
                             mfslDriver& drv);
 
     void                  registerOptionsSuppliedChoicesAsUsed (
-                            const string& choiceName)
-                              {
-                                fUnusedOptionsSuppliedChoicesSet.erase (
-                                  choiceName);
-                              }
+                            const string& choiceName);
+    void                  registerOptionsSuppliedChoicesAsUnused (
+                            const string& choiceName);
 
     void                  displayOptionsBlocksStack (
                             const string& context) const;
@@ -156,7 +154,7 @@ class mfslDriver
                             const string& context) const;
 
     // launching the MFSL tool
-    void                  setSelectLabelForToolLaunching (
+    void                  appendSelectLabelForToolLaunching (
                             const string& choiceName,
                             const string& label);
 
@@ -171,11 +169,11 @@ class mfslDriver
     // ------------------------------------------------------
 
     // 'select' statements
-    Bool                  applySelectOptionIfPresent (
-                            const S_mfslChoice choice,
-                            const string&      label);
+//     Bool                  applySelectOptionIfPresent (
+//                             const S_mfslChoice choice,
+//                             const string&      label);
 
-    Bool                  applySelectOptionFinally ();
+    Bool                  applySelectOptionsFinally ();
 
     // 'every' statements
     Bool                  applyEveryOptionIfPresent (
@@ -232,7 +230,8 @@ class mfslDriver
     // choices handling
     S_mfslChoicesTable    fChoicesTable;
 
-    map<string, string>   fOptionsSuppliedChoicesLabelsMap;
+    multimap<string, string>
+                          fOptionsSuppliedChoicesLabelsMultiMap;
     set<string>           fUnusedOptionsSuppliedChoicesSet;
 
     // case statements
@@ -247,7 +246,9 @@ class mfslDriver
     S_mfslOptionsBlock    fMainOptionsBlock;
 
     // tool launching
-    S_mfslOptionsBlock    fOptionsBlockToUseForSelectLaunching;
+//     S_mfslOptionsBlock    fOptionsBlockToUseForSelectLaunching;
+    list<S_mfslOptionsBlock>
+                          fSelectedOptionsBlocksList;
 
     S_mfslChoice          fChoiceToUseForEveryLaunching;
 

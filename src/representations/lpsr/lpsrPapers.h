@@ -98,10 +98,10 @@ class EXP lpsrPaper : public lpsrElement
     S_msrLength           getBetweenSystemSpace () const
                               { return fBetweenSystemSpace; }
 
-    void                  setPageTopSpace (S_msrLength val)
-                              { fPageTopSpace = val; }
-    S_msrLength           getPageTopSpace () const
-                              { return fPageTopSpace; }
+    void                  setPageTopSpacing (S_msrLength val)
+                              { fPageTopSpacing = val; }
+    S_msrLength           getPageTopSpacing () const
+                              { return fPageTopSpacing; }
 
     // counts
     void                  setPageCount (int value)
@@ -214,7 +214,7 @@ class EXP lpsrPaper : public lpsrElement
     // spaces
     S_msrLength           fMarkupSystemSpacingPadding;
     S_msrLength           fBetweenSystemSpace;
-    S_msrLength           fPageTopSpace;
+    S_msrLength           fPageTopSpacing;
 
     // counts
     int                   fPageCount;

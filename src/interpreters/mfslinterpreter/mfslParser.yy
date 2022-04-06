@@ -174,7 +174,7 @@ Script :
         --gIndenter;
       }
 
-  OptionalSelectOrEveryStatement
+  OptionalSelectOrEveryStatements
 ;
 
 
@@ -618,10 +618,15 @@ CaseAlternative
 // select or every statement
 //_______________________________________________________________________________
 
-OptionalSelectOrEveryStatement
-  : SelectStatement
+OptionalSelectOrEveryStatements
+  : SelectStatementSeq
   | EveryStatement
   |
+;
+
+SelectStatementSeq
+  : SelectStatement
+  | SelectStatementSeq SelectStatement
 ;
 
 SelectStatement
@@ -631,7 +636,7 @@ SelectStatement
           choiceName = $2,
           label = $4;
 
-        drv.setSelectLabelForToolLaunching (
+        drv.appendSelectLabelForToolLaunching (
           choiceName,
           label);
       }

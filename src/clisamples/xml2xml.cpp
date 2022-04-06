@@ -193,7 +193,7 @@ int main (int argc, char* argv[])
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 
@@ -429,7 +429,7 @@ int main (int argc, char* argv[])
   if (gIndenter != 0) {
     gLogStream <<
       "### " << serviceName << " gIndenter final value: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 

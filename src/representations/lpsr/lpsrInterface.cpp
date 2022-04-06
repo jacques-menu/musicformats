@@ -179,7 +179,7 @@ void displayLpsrScore_OptionalPass (
 
       s <<
         "gIndenter value after LPSR score display: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
      lpsrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -208,7 +208,7 @@ void displayLpsrScoreShort_OptionalPass (
 
       s <<
         "gIndenter value after LPSR score short display: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       lpsrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -237,7 +237,7 @@ void displayLpsrScoreFull_OptionalPass (
 
       s <<
         "gIndenter value after LPSR score full display: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       lpsrWarning (
         gGlobalServiceRunData->getInputSourceName (),

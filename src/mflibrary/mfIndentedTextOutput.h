@@ -44,12 +44,12 @@ class EXP mfOutputIndenter
     // ------------------------------------------------------
 
     // set the indent
-    void                  setIndent (int indent)
-                              { fIndent = indent; }
+    void                  setIndentation (int indentation)
+                              { fIndentation = indentation; }
 
     // get the indent
-    int                   getIndent () const
-                              { return fIndent; }
+    int                   getIndentation () const
+                              { return fIndentation; }
 
   public:
 
@@ -78,13 +78,13 @@ class EXP mfOutputIndenter
 
     // reset the indentation
     void                  resetToZero ()
-                              { fIndent = 0; }
+                              { fIndentation = 0; }
 
     // compare indentation value
     Bool                  operator == (const int &value) const
-                              { return fIndent == value; }
+                              { return fIndentation == value; }
     Bool                  operator != (const int &value) const
-                              { return fIndent != value; }
+                              { return fIndentation != value; }
 
     // output as much space as specified
     void                  print (ostream& os) const;
@@ -103,7 +103,7 @@ class EXP mfOutputIndenter
     static mfOutputIndenter gGlobalOStreamIndenter;
 
   private:
-    int                   fIndent;
+    int                   fIndentation;
     string                fSpacer;
 };
 

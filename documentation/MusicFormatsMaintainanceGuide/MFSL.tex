@@ -70,7 +70,7 @@ The latter file can be used to check the grammar, in particular if \LR\ conflict
 
 \item the way the tokens description is shared by the scanner and parser is described at \sectionRef{Tokens description};
 
-\item the whole power of \oahRepr\ is used to handle the contents of \mfslLang\ \script s as well as the options to the \mfslLangInterp\ itself.
+\item the whole power of \oahRepr\ is used to handle the contents of \mfslLang\ \script s as well as the options to the \mfslInterp\ itself.
 \end{itemize}
 
 Only the predefined \code{bool} type is used, since the generated C++ code relies on this. This is why \methodName{getValue} is used in \clisamples{mfsl.cpp}:
@@ -761,7 +761,7 @@ mfMusicformatsError launchMfslInterpreter (
 \section{Running the example MFSL script}
 % -------------------------------------------------------------------------
 
-Let's show show the \mfslLangInterp\ uses the options above:
+Let's show show the \mfslInterp\ uses the options above:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl > ./test.mfsl -display-tokens -display-non-terminals -display-options-values
   The options values for //Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl are:
@@ -857,7 +857,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/interpreters/mfsl >
 \subsection{Error recovery}
 % -------------------------------------------------------------------------
 
-The \mfslLangInterp\ uses a variant of the \MainIt{stopper sets} method that was present in the early Pascal and Pascal-S converters. The latter passed a set of tokens not to be overtaken to the procedures in charge of accepting the various statements in the language. Strangely enough, this was not done for declarations.
+The \mfslInterp\ uses a variant of the \MainIt{stopper sets} method that was present in the early Pascal and Pascal-S converters. The latter passed a set of tokens not to be overtaken to the procedures in charge of accepting the various statements in the language. Strangely enough, this was not done for declarations.
 
 We use a stack of tokens sets that grows and shrinks in parallel with the accepting functions\index{functions}, to know more contextual informations when deciding wether to consume a token or not. The corresponding term is {it shift}
 when building the analysis tables in LR technology.

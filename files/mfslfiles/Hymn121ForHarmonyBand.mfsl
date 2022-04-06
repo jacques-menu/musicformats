@@ -41,7 +41,7 @@ input : "Hymn121.xml"
 # ----------------------------------------------------------
 
 # header
-  -title "Hymn 121 - Angels From The Realms Of Glory - Harmony band"
+  -title "Hymn 121 - Angels From The Realms Of Glory"
 
 # display
   -display-options-values
@@ -82,6 +82,8 @@ choice SCORE :
 # SCORE specific options
 # ----------------------------------------------------------
 
+# basic stuff
+
 case SCORE :
 	director:
     -global-staff-size 17.675
@@ -89,11 +91,8 @@ case SCORE :
   ;
 
   part1_C_instruments,
-
   part2_Bb_instruments,
-
   part3_Bb_instruments,
-
   part4_Bb_instruments,
   part4_BassGuitar:
     -ambitus
@@ -101,89 +100,195 @@ case SCORE :
   ;
 ;
 
+
+# scores appearance
+
 case SCORE :
 	director:
-	  -output-file-name "Hymn121_harmony_director.ly"
-
     -global-staff-size 17.675
-    -subtitle "Director"
+    -ragged-bottom off
+  ;
+
+  part1_C_instruments:
+  ;
+
+  part2_Bb_instruments:
+  ;
+
+  part3_Bb_instruments:
+  ;
+
+  part4_Bb_instruments:
+  ;
+
+  part4_BassGuitar:
+    -ambitus
+    -ragged-bottom off
+  ;
+;
+
+
+# scores identification
+
+case SCORE :
+	director:
+	  -output-file-name
+	    "Hymn121_band_director.ly"
+    -subtitle
+      "Director - in C"
+  ;
+
+  part1_C_instruments:
+	  -output-file-name
+	    "Hymn121_band_part1_C_instruments.ly"
+    -subtitle
+      "Part 1 - C instruments"
+  ;
+
+  part2_Bb_instruments:
+	  -output-file-name
+	    "Hymn121_band_part2_Bb_instruments.ly"
+    -subtitle
+      '\markup {"Part 2 - B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
+  ;
+
+  part3_Bb_instruments:
+	  -output-file-name
+	    "Hymn121_band_part3_Bb_instruments.ly"
+
+    -subtitle
+      '\markup {"Part 3 - B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
+    -global-staff-size 23
+      # a more readable score is needed
+  ;
+
+  part4_Bb_instruments:
+	  -output-file-name
+	    "Hymn121_band_part4_Bb_instruments.ly"
+    -subtitle
+      '\markup {"Part 4 - B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
+  ;
+
+  part4_BassGuitar:
+	  -output-file-name
+	    "Hymn121_band_part4_BassGuitar.ly"
+
+    -subtitle
+      "Part 4 - Bass guitar"
+  ;
+;
+
+
+# scores contents
+
+case SCORE :
+	director:
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
   ;
 
 	part1_C_instruments:
-	  -output-file-name "Hymn121_harmony_part1_C_instruments.ly"
-
-    -subtitle "Part 1 - C instruments"
     -keep-musicxml-part-id P1
-    -msr-rename-part "P1:part1_C_instruments"
+    -msr-rename-part "P1:partOne_C_instruments"
 
-#     -instrument "Part 1 - C instruments"
-    -display-lpsr-short
+    -lpsr-staff-instrument-name "Voice 1:C instruments"
+    -indent '3.5\cm'
   ;
 
 	part2_Bb_instruments:
-	  -output-file-name "Hymn121_harmony_part2_Bb_instruments.ly"
-
-    -subtitle '\markup {"Part 2 - B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
     -keep-musicxml-part-id P2
+    -msr-rename-part "P2:partTwo_Bb_instruments"
+
+    -indent '2.5\cm'
+    -lpsr-staff-instrument-name
+      # let's use LilyPond's '\markup' possibilities
+      # successive MFSL character strings are concatenated into a single one
+      "Voice 2"
+      ":"
+      '\markup {'
+        '\center-column {'
+          '\line { "B" \hspace #-0.375 \raise #1.5 {\flat} }'
+          '\line { "instruments" }'
+        '}'
+      '}'
 
     -lilypond-transpose-part-id P2=bes
   ;
 
 	part3_Bb_instruments:
-	  -output-file-name "Hymn121_harmony_part2_Bb_instruments.ly"
-
-    -subtitle '\markup {"Part 3 - B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
     -keep-musicxml-part-id P3
+    -msr-rename-part "P3:partThree_Bb_instruments"
 
-    -global-staff-size 23 # a more readable score is needed
+    -indent '3\cm'
+    -lpsr-staff-instrument-name
+      # let's use LilyPond's '\markup' possibilities
+      # successive MFSL character strings are concatenated into a single one
+      "Voice 3"
+      ":"
+      '\markup {'
+        '\center-column {'
+          '\line { "B" \hspace #-0.375 \raise #1.5 {\flat} }'
+          '\line { "instruments" }'
+        '}'
+      '}'
 
-    -lilypond-transpose-part-id 'P2=bes'
+    -lilypond-transpose-part-id 'P3=bes'
   ;
 
 	part4_Bb_instruments:
-	  -output-file-name "Hymn121_harmony_part4_Bb_instruments.ly"
-
-    -subtitle '\markup {"Part 4 - B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
     -keep-musicxml-part-id P4
+    -msr-rename-part "P4:partFour_Bb_instruments"
 
-    -ignore-musicxml-lyrics # there's a glitch at the last measure
+    -indent '2.5\cm'
+    -lpsr-staff-instrument-name
+      # let's use LilyPond's '\markup' possibilities
+      # successive MFSL character strings are concatenated into a single one
+      "Voice 4"
+      ":"
+      '\markup {'
+        '\center-column {'
+          '\line { "B" \hspace #-0.375 \raise #1.5 {\flat} }'
+          '\line { "instruments" }'
+        '}'
+      '}'
 
-    -lilypond-transpose-part-id 'P2=bes'
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
+
+    -lilypond-transpose-part-id 'P4=bes'
   ;
 
 	part4_BassGuitar:
-	  -output-file-name "Hymn121_harmony_part4_BassGuitar.ly"
+    -keep-musicxml-part-id P4
+    -msr-rename-part "P4:partFour_BassGuitar"
 
-    -subtitle "Part 4 - Bass guitar"
+    -indent '2.5\cm'
+    -lpsr-staff-instrument-name "Voice 4:Bass Guitar"
 
-    -ignore-musicxml-lyrics # there's a glitch at the last measure
-
-    -modern-tab
-    -tab-full-notation
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
   ;
 ;
 
 
 # ----------------------------------------------------------
-# select only one SCORE or all of them
+# choosing which score(s) to generate
 # ----------------------------------------------------------
 
-###
-  Comment/uncomment the following to select
-  either one SCORE only or all of them
-
-  The Choice bewlow are default settings, that can be overridden
-  by options to the MFSL interpreter such as:
-    -select SCORE:part2_Bb_instruments
-  or:
-    -all SCORE
-###
-
-
 # run the tool with a particular SCORE label
-# select SCORE : director ;
-# select SCORE : part4_BassGuitar ;
+
+#   select SCORE : director ;
+
+#   select SCORE : part1_C_instruments ;
+
+#   select SCORE : part2_Bb_instruments ;
+
+#   select SCORE : part3_Bb_instruments ;
+
+#   select SCORE : part4_Bb_instruments ;
+#   select SCORE : part4_BassGuitar ;
 
 
 # run the tool with all the SCORE labels, each one in turn
-every SCORE ;
+
+  every SCORE ;

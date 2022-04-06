@@ -43,7 +43,7 @@ S_mfOahException mfOahException::create (
 //______________________________________________________________________________
 void oahWarning (const string& warningMessage)
 {
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
@@ -52,14 +52,14 @@ void oahWarning (const string& warningMessage)
     warningMessage <<
     endl;
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahWarningWithContext (
   const string& warningMessage,
   const string& context)
 {
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
@@ -70,7 +70,7 @@ void oahWarningWithContext (
     context <<
     endl;
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 //______________________________________________________________________________
@@ -129,7 +129,7 @@ void oahInternalError (const string& errorMessage)
 
 void oahInternalWarning (const string& errorMessage)
 {
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
@@ -138,7 +138,7 @@ void oahInternalWarning (const string& errorMessage)
     errorMessage <<
     endl;
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahInternalErrorWithContext (

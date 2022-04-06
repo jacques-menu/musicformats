@@ -110,7 +110,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 
       s <<
         "gIndenter value after " << passNumber << ": " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       mxsr2msrWarning (
         gGlobalServiceRunData->getInputSourceName (),

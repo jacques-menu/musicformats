@@ -132,13 +132,13 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  getNoLaunch () const
                               { return fNoLaunch; }
 
-    const map<string, string>&
-                          getSelectChoiceToLabelsMap () const
-                              { return fSelectChoiceToLabelsMap; }
+    const multimap<string, string>&
+                          getSelectChoiceToLabelsMultiMap () const
+                              { return fSelectChoiceToLabelsMultiMap; }
 
-    S_oahStringToStringMapElementAtom
-                          getSelectChoiceToLabelsMapAtom () const
-                              { return fSelectChoiceToLabelsMapAtom; }
+    S_oahStringToStringMultiMapElementAtom
+                          getSelectChoiceToLabelsMultiMapAtom () const
+                              { return fSelectChoiceToLabelsMultiMapAtom; }
 
     S_oahStringAtom       getEveryChoiceAtom () const
                               { return fEveryChoiceAtom; }
@@ -210,9 +210,10 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  fTraceOptionsBlocks;
 
     // select statement
-    map<string, string>   fSelectChoiceToLabelsMap;
-    S_oahStringToStringMapElementAtom
-                          fSelectChoiceToLabelsMapAtom;
+    multimap<string, string>
+                          fSelectChoiceToLabelsMultiMap;
+    S_oahStringToStringMultiMapElementAtom
+                          fSelectChoiceToLabelsMultiMapAtom;
     // every statement
     string                fEveryChoice;
     S_oahStringAtom       fEveryChoiceAtom;

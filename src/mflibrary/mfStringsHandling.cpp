@@ -14,8 +14,6 @@
 #include <sstream>
 #include <iomanip>      // setw, setprecision, ...
 
-// #incle <cassert>
-
 #include <map>
 
 #include "mfAssert.h"
@@ -125,21 +123,38 @@ void mfDisplayStringsVector (
 
 //______________________________________________________________________________
 char* mfCharStarCat (
-  char*        dest,
+  char*        destination,
   const char*  source,
-  const size_t destSize)
+  const size_t destinationSize)
 {
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    strlen (source) + strlen (dest) + 1 < destSize,
-    "mfCharStarCat(): attempt at dest overflow");
+  Bool
+    destinationOverflow =
+      strlen (source) >= destinationSize - strlen (destination) - 1;
+
+  if (destinationOverflow) {
+    stringstream s;
+
+    s <<
+      "mfCharStarCat(): attempt at destination overflow" <<
+      ", destinationSize: [" << destinationSize <<
+      "], destination: [" << destination <<
+      "], strlen (source): [" << strlen (source) <<
+      "], source: [" << source <<
+      "], destinationSize - strlen (destination) - 1: [" << destinationSize - strlen (destination) - 1 <<
+      "]";
+
+    // sanity check
+    mfAssert (
+      __FILE__, __LINE__,
+      false,
+      s.str ());
+  }
 
   return
     strncat (
-      dest,
+      destination,
       source,
-      destSize - strlen (dest) - 1);
+      destinationSize - strlen (destination) - 1);
 }
 
 //______________________________________________________________________________
@@ -1647,7 +1662,7 @@ void mfDisplayStringSet (
 }
 
 //______________________________________________________________________________
-Bool mfStringIsInStringToStringMap (
+Bool mfFetchValueFromStringToStringMap (
   const string&              theKey,
   const map<string, string>& stringToStringMap,
   string&                    theValue)
@@ -1758,6 +1773,155 @@ void mfDisplayStringToStringMap (
         os << " and ";
       }
       else if (count != stringToStringMapSize) {
+        os << ", ";
+      }
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << " empty";
+  }
+
+  os << endl;
+}
+
+//______________________________________________________________________________
+Bool mfKeyIsInStringToStringMultiMap (
+  const string&                   theKey,
+  const multimap<string, string>& stringToStringMultiMap)
+{
+  const multimap<string, string>::const_iterator it =
+    stringToStringMultiMap.find (theKey);
+
+  return
+    it != stringToStringMultiMap.end ();
+}
+
+Bool mfKeyValuePairIsInStringToStringMultiMap (
+  const string&                   theKey,
+  const multimap<string, string>& stringToStringMultiMap,
+  const string&                   theValue)
+{
+  Bool result (false);
+
+  if (stringToStringMultiMap.size ()) {
+    // find all the  elements with key theKey
+    pair<
+      multimap<string, string>::const_iterator,
+      multimap<string, string>::const_iterator
+      >
+      iteratorsRange =
+        stringToStringMultiMap.equal_range (
+          theKey);
+
+    if (iteratorsRange.first != iteratorsRange.second) {
+      // the range is non-empty, there are elements with key theKey
+      for (
+        multimap<string,string>::const_iterator it = iteratorsRange.first;
+        it != iteratorsRange.second;
+        ++it
+      ) {
+        if ((*it).second == theValue) {
+          result = true;
+          break;
+        }
+      }
+    }
+  }
+
+  return result;
+}
+
+string mfStringToStringMultiMapAsString (
+  const multimap<string, string>& stringToStringMultiMap)
+{
+  stringstream s;
+
+  s << "[";
+
+  // append the set elements if any
+  size_t stringToStringMultiMapSize =
+    stringToStringMultiMap.size ();
+
+  if (stringToStringMultiMapSize) {
+    multimap<string, string>::const_iterator
+      iBegin = stringToStringMultiMap.begin (),
+      iEnd   = stringToStringMultiMap.end (),
+      i      = iBegin;
+
+    size_t nextToLast =
+      stringToStringMultiMapSize - 1;
+
+    size_t count = 0;
+
+    for ( ; ; ) {
+      string
+        key   = (*i).first,
+        value = (*i).second;
+
+      ++count;
+
+      s << "\"" << key << "\": \"" << value << "\"";
+
+      if (++i == iEnd) break;
+
+      if (count == nextToLast) {
+        s << " and ";
+      }
+      else if (count != stringToStringMultiMapSize) {
+        s << ", ";
+      }
+    } // for
+  }
+
+  s << "]";
+
+  return s.str ();
+}
+
+void mfDisplayStringToStringMultiMap (
+  const string&                   title,
+  const multimap<string, string>& stringToStringMultiMap,
+  ostream&                        os)
+{
+  // print the title
+  os << title << ":";
+
+  // print the set elements if any
+  size_t stringToStringMultiMapSize =
+    stringToStringMultiMap.size ();
+
+  if (stringToStringMultiMapSize) {
+    os << endl;
+
+    ++gIndenter;
+
+    multimap<string, string>::const_iterator
+      iBegin = stringToStringMultiMap.begin (),
+      iEnd   = stringToStringMultiMap.end (),
+      i      = iBegin;
+
+    size_t nextToLast =
+      stringToStringMultiMapSize - 1;
+
+    size_t count = 0;
+
+    for ( ; ; ) {
+      string
+        key   = (*i).first,
+        value = (*i).second;
+
+      ++count;
+
+      os << "\"" << key << "\": \"" << value << "\"";
+
+      if (++i == iEnd) break;
+
+      if (count == nextToLast) {
+        os << " and ";
+      }
+      else if (count != stringToStringMultiMapSize) {
         os << ", ";
       }
     } // for
