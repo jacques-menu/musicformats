@@ -5880,7 +5880,7 @@ void lpsr2lilypondTranslator::generateHeader (S_lpsrHeader header)
     nameStringValuePairsList);
 
   // compute field width
-  int fieldWidth = 0;
+  size_t fieldWidth = 0;
 
   for (
     list<pair<string, string> >::const_iterator i =
@@ -6657,7 +6657,7 @@ void lpsr2lilypondTranslator::generatePaper (
     nameBooleanValuePairsList);
 
   // compute fieldWidth
-  int fieldWidth = 0;
+  size_t fieldWidth = 0;
 
   for (
     list<pair<string, msrLength> >::const_iterator i =

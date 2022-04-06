@@ -156,7 +156,7 @@ class EXP msrPart : public msrPartGroupElement
     void                  setPartNumberOfMeasures (
                             size_t partNumberOfMeasures);
 
-    const size_t    getPartNumberOfMeasures () const
+    const size_t          getPartNumberOfMeasures () const
                               { return fPartNumberOfMeasures; }
 
     const vector<rational>&
@@ -586,7 +586,7 @@ class EXP msrPart : public msrPartGroupElement
 
     string                fPartCurrentMeasureNumber;
 
-    int                   fPartNumberOfMeasures;
+    size_t                fPartNumberOfMeasures;
 
     vector<rational>      fPartMeasuresWholeNotesDurationsVector; // SUPERFLOUS ??? JMI NOEL
 

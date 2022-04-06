@@ -58,7 +58,7 @@ class EXP bsrKey : public bsrLineContentsElement
     void                  setNumberOfAlterations (size_t numberOfAlterations)
                               { fNumberOfAlterations = numberOfAlterations; }
 
-    int                   getNumberOfAlterations () const
+    size_t                getNumberOfAlterations () const
                               { return fNumberOfAlterations; }
 
   public:
@@ -107,7 +107,7 @@ class EXP bsrKey : public bsrLineContentsElement
     // ------------------------------------------------------
 
     bsrKeyKind            fKeyKind;
-    int                   fNumberOfAlterations;
+    size_t                fNumberOfAlterations;
 
     S_bsrCellsList        fKeyCellsList;
 };

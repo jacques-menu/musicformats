@@ -27,15 +27,28 @@ Note that \file{MusicFormatsVersionNumber.txt} should not end with an end of lin
 jacquesmenu@macmini: ~/musicformats-git-dev > scripts/CreateDocumentationPDFs.bash
 \end{lstlisting}
 
-\item push to \mf\ repo with \code{git push};
+\item commit to the local repository clone:
+\begin{lstlisting}[language=Terminal]
+git commit -m "Pre v0.9.62" -a
+\end{lstlisting}
+
+\item push to the \mf\ repo with:
+\begin{lstlisting}[language=Terminal]
+git push
+\end{lstlisting}
 
 \item check that the actions were executed successfully at \url{https://github.com/jacques-menu/musicformats/actions};
 
 \item when that is the case, download the resulting \code{musicformats-*-distrib} archives locally;
 
-\item \MainIt{push again} with the new version name in the \code{-m "\dots~\dots~\dots"} message, such as:
+\item create the distribution in the local \mf\ repository clone:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "Switched from C++11 to C++17 for <filesystem>" -a
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/MakeMusicFormatsDistributions.bash
+\end{lstlisting}
+
+\item \MainIt{commit and push again} with the new version name in the \code{-m "\dots~\dots~\dots"} message, such as:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "v0.9.62" -a
 
 jacquesmenu@macmini: ~/musicformats-git-dev > git push
 \end{lstlisting}
