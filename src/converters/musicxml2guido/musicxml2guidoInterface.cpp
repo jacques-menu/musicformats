@@ -445,7 +445,7 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 

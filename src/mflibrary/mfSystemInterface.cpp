@@ -34,22 +34,30 @@ EXP int mfExecuteCommand (
 
   if (doTrace) {
     gLogStream <<
-      "Executing command: " << command <<
+      "Executing command:" <<
       endl;
+
+    ++gIndenter;
+
+    gLogStream <<
+      command <<
+        endl;
+
+    --gIndenter;
   }
 
   const char* commandAsCString = command.c_str ();
 
-  const char* mode = "r+"; // bi-directional pipe
+//   const char* mode = "r+"; // bi-directional pipe
 
   // avoid memory overflow by system(),
   // truncating command if necessary
 
-      const int
-        COMMAND_STRING_BUFFER_SIZE = 512;
-      char*
-        commandStringBuffer =
-          new char (COMMAND_STRING_BUFFER_SIZE);
+  const int
+    COMMAND_STRING_BUFFER_SIZE = 1024;
+  char*
+    commandStringBuffer =
+      new char (COMMAND_STRING_BUFFER_SIZE);
 
   mfCharStarCat (
     commandStringBuffer,
@@ -58,7 +66,8 @@ EXP int mfExecuteCommand (
 
   // execute the command
 
-  system (commandStringBuffer);
+  result =
+    system (commandStringBuffer);
 
 // #if (WIN32)
 //

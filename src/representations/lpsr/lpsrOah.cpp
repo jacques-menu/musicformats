@@ -577,7 +577,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
   string regularExpression (
     "[[:space:]]*(.+)[[:space:]]*"
     ":"
-    "[[:space:]]*(.+)[[:space:]]*"
+    "[[:space:]]*(.*)[[:space:]]*"   // the new name may be empty
   );
 
   regex  e (regularExpression);
@@ -614,7 +614,7 @@ void lpsrStaffInstrumentNameAtom::applyAtomWithValue (
     stringstream s;
 
     s <<
-      "-msrPartRename argument '" << theString <<
+      "-lpsr-staff-instrument-name argument '" << theString <<
       "' is ill-formed";
 
     oahError (s.str ());
@@ -1405,80 +1405,147 @@ By default is 297 mm (A4 format).)",
 
   // fPaperHorizontalShift is 0.0 mm by default
 
-  subGroup->
-    appendAtomToSubGroup (
-      oahLengthAtom::create (
-        "horizontal-shift", "hshift",
+  fPaperHorizontalShiftAtom =
+    oahLengthAtom::create (
+      "horizontal-shift", "hshift",
 R"(Set the LilyPond 'horizontal-shift' paper variable to SHIFT in the LilyPond code.
 SHIFT should be a floating point or integer number,
 immediately followed by a unit name, i.e. 'in', 'mm' or 'cm'.
 The default value is 0.0 mm.)",
-        "SHIFT",
-        "fPaperHorizontalShift",
-        fPaperHorizontalShift));
-
-  // fPaperIndent is 0.0 mm by default
+      "SHIFT",
+      "fPaperHorizontalShift",
+      fPaperHorizontalShift);
 
   subGroup->
     appendAtomToSubGroup (
-      oahLengthAtom::create (
-        "indent", "",
+      fPaperHorizontalShiftAtom);
+
+  // indent
+  // fPaperIndent is 0.0 mm by default
+
+  fPaperIndentAtom =
+    oahLengthAtom::create (
+      "indent", "",
 R"(Set the LilyPond 'indent' paper variable to INDENT in the LilyPond code.
 INDENT should be a floating point or integer number,
 immediately followed by a unit name, i.e. 'in', 'mm' or 'cm'.
 The default value is 0.0 mm.)",
-        "INDENT",
-        "fPaperIndent",
-        fPaperIndent));
-
-  // short indent
-
-  // fPaperShortIndent is 0.0 mm by default
+      "INDENT",
+      "fPaperIndent",
+      fPaperIndent);
 
   subGroup->
     appendAtomToSubGroup (
-      oahLengthAtom::create (
-        "short-indent", "",
+      fPaperIndentAtom);
+
+  // short indent
+  // fPaperShortIndent is 0.0 mm by default
+
+  fPaperShortIndentAtom =
+    oahLengthAtom::create (
+      "short-indent", "",
 R"(Set the LilyPond 'short-indent' paper variable to SHORT_INDENT in the LilyPond code.
 SHORT_INDENT should be a floating point or integer number,
 immediately followed by a unit name, i.e. 'in', 'mm' or 'cm'.
 The default value is 0.0 mm.)",
-        "SHORT_INDENT",
-        "fPaperShortIndent",
-        fPaperShortIndent));
-
-  // fMarkupSystemSpacingPadding is 0.0 mm by default
+      "SHORT_INDENT",
+      "fPaperShortIndent",
+      fPaperShortIndent);
 
   subGroup->
     appendAtomToSubGroup (
-      oahLengthAtom::create (
-        "markup-system-spacing-padding", "mssp",
+      fPaperShortIndentAtom);
+
+  // fMarkupSystemSpacingPadding is 0.0 mm by default
+
+  fMarkupSystemSpacingPaddingAtom =
+    oahLengthAtom::create (
+      "markup-system-spacing-padding", "mssp",
 R"(Set the LilyPond 'markup-system-spacing.padding' paper variable
 to PADDING in the LilyPond code.
 PADDING should be a floating point or integer number,
 immediately followed by a unit name, i.e. 'in', 'mm' or 'cm'.
 LilyPond's default value is 0.0 mm.)",
-        "INDENT",
-        "fMarkupSystemSpacingPadding",
-        fMarkupSystemSpacingPadding));
-
-  // ragged last
-
-  fRaggedLast = oahOnOffKind::kOahOnOffUnknown; // default value
-
-  fRaggedLastAtom =
-    oahOnOffAtom::create (
-      "ragged-last", "",
-R"(Set the LilyPond \"ragged-last\" paper variable to '##t' or '##f',
-if the value is on or off, respectively.
-LilyPond's default value is '##t'.)",
-      "on/off", // JMI ???
-      "fRaggedLast",
-      fRaggedLast);
+      "PADDING",
+      "fMarkupSystemSpacingPadding",
+      fMarkupSystemSpacingPadding);
 
   subGroup->
     appendAtomToSubGroup (
-      fRaggedLastAtom);
+      fMarkupSystemSpacingPaddingAtom);
+
+
+
+  fBetweenSystemSpaceAtom =
+    oahLengthAtom::create (
+      "between-system-space", "bss",
+R"(Set the LilyPond 'markup-system-spacing.padding' paper variable ??? JMI
+to SPACE in the LilyPond code.
+SPACE should be a floating point or integer number,
+immediately followed by a unit name, i.e. 'in', 'mm' or 'cm'.
+LilyPond's default value is 0.0 mm.)",
+      "SPACE",
+      "fBetweenSystemSpace",
+      fBetweenSystemSpace);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fBetweenSystemSpaceAtom);
+
+
+  fPageTopSpacingAtom =
+    oahLengthAtom::create (
+      "page-top-spacing", "pts",
+R"(Set the LilyPond 'top-system-spacing' paper variable ??? JMI
+to SPACING in the LilyPond code.
+PADDING should be a floating point or integer number,
+immediately followed by a unit name, i.e. 'in', 'mm' or 'cm'.
+LilyPond's default value is 0.0 mm.)",
+      "SPACING",
+      "fPageTopSpacing",
+      fPageTopSpacing);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fPageTopSpacingAtom);
+
+
+
+  // page count
+
+  fPageCount = 0;
+
+  fPageCountAtom =
+    oahIntegerAtom::create (
+      "page-count", "",
+R"(Set the LilyPond 'page-count' paper variable to PAGE_COUNT in the LilyPond code.
+PAGE_COUNT should be a positive integer.
+By default, this is left to LilyPond'.)",
+      "PAGE_COUNT",
+      "fPageCount",
+      fPageCount);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fPageCountAtom);
+
+  // system count
+
+  fSystemCount = 0;
+
+  fSystemCountAtom =
+    oahIntegerAtom::create (
+      "system-count", "",
+R"(Set the LilyPond 'system-count' paper variable to SYSTEM_COUNT in the LilyPond code.
+SYSTEM_COUNT should be a positive integer.
+By default, this is left to LilyPond'.)",
+      "SYSTEM_COUNT",
+      "fSystemCount",
+      fSystemCount);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fSystemCountAtom);
 
   // ragged bottom
 
@@ -1497,6 +1564,24 @@ LilyPond's default value is '##t'.)",
   subGroup->
     appendAtomToSubGroup (
       fRaggedBottomAtom);
+
+  // ragged last
+
+  fRaggedLast = oahOnOffKind::kOahOnOffUnknown; // default value
+
+  fRaggedLastAtom =
+    oahOnOffAtom::create (
+      "ragged-last", "",
+R"(Set the LilyPond \"ragged-last\" paper variable to '##t' or '##f',
+if the value is on or off, respectively.
+LilyPond's default value is '##t'.)",
+      "on/off", // JMI ???
+      "fRaggedLast",
+      fRaggedLast);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fRaggedLastAtom);
 
   // ragged last bottom
 
@@ -1534,54 +1619,20 @@ LilyPond's default value is '##t'.)",
     appendAtomToSubGroup (
       fRaggedRightAtom);
 
-/* LPSR or LilyPond option?" JMI
-  // tagline
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "tagline", "",
-R"(Set the LilyPond 'tagline' paper variable to '##f' in the LilyPond code.
-LilyPond's default value is '##t'.)",
-        "fTagline",
-        fTagline));
-*/
-
-  // page count
-
-  fPageCount = 0;
-
-  fPageCountAtom =
-    oahIntegerAtom::create (
-      "page-count", "",
-R"(Set the LilyPond 'page-count' paper variable to PAGE_COUNT in the LilyPond code.
-PAGE_COUNT should be a positive integer.
-By default, this is left to LilyPond'.)",
-      "PAGE_COUNT",
-      "fPageCount",
-      fPageCount);
-
-  subGroup->
-    appendAtomToSubGroup (
-      fPageCountAtom);
-
-  // system count
-
-  fSystemCount = 0;
-
-  fSystemCountAtom =
-    oahIntegerAtom::create (
-      "system-count", "",
-R"(Set the LilyPond 'system-count' paper variable to SYSTEM_COUNT in the LilyPond code.
-SYSTEM_COUNT should be a positive integer.
-By default, this is left to LilyPond'.)",
-      "SYSTEM_COUNT",
-      "fSystemCount",
-      fSystemCount);
-
-  subGroup->
-    appendAtomToSubGroup (
-      fSystemCountAtom);
+// // LPSR or LilyPond option?" JMI
+//   // tagline
+//
+//   fTaglineAtom =
+//     oahBooleanAtom::create (
+//       "tagline", "",
+// R"(Set the LilyPond 'tagline' paper variable to '##f' in the LilyPond code.
+// LilyPond's default value is '##t'.)",
+//       "fTagline",
+//       fTagline);
+//
+//   subGroup->
+//     appendAtomToSubGroup (
+//       fTaglineAtom);
 }
 
 void lpsrOahGroup::initializeLpsrStavesOptions ()

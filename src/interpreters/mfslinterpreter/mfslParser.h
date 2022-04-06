@@ -557,9 +557,10 @@ namespace yy {
         S_CaseAlternative = 45,                  // CaseAlternative
         S_46_6 = 46,                             // $@6
         S_47_7 = 47,                             // $@7
-        S_OptionalSelectOrEveryStatement = 48,   // OptionalSelectOrEveryStatement
-        S_SelectStatement = 49,                  // SelectStatement
-        S_EveryStatement = 50                    // EveryStatement
+        S_OptionalSelectOrEveryStatements = 48,  // OptionalSelectOrEveryStatements
+        S_SelectStatementSeq = 49,               // SelectStatementSeq
+        S_SelectStatement = 50,                  // SelectStatement
+        S_EveryStatement = 51                    // EveryStatement
       };
     };
 
@@ -1503,8 +1504,8 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 61,     ///< Last index in yytable_.
-      yynnts_ = 30,  ///< Number of nonterminal symbols.
+      yylast_ = 64,     ///< Last index in yytable_.
+      yynnts_ = 31,  ///< Number of nonterminal symbols.
       yyfinal_ = 5 ///< Termination state number.
     };
 
@@ -1653,7 +1654,7 @@ switch (yykind)
 
 
 } // yy
-#line 1657 "mfslParser.h"
+#line 1658 "mfslParser.h"
 
 
 

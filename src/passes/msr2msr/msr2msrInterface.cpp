@@ -114,7 +114,7 @@ S_msrScore translateMsrToMsr (
 
       s <<
         "gIndenter value after pass 3: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       msr2msrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -129,7 +129,7 @@ S_msrScore translateMsrToMsr (
   if (gIndenter != 0) {
     gLogStream <<
       "### translateMsrToMsr gIndenter final value: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 
@@ -240,7 +240,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
 
       s <<
         "gIndenter value after pass 3: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       msr2msrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -255,7 +255,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   if (gIndenter != 0) {
     gLogStream <<
       "### translateMsrToMsr gIndenter final value: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 
@@ -345,7 +345,7 @@ void displayResultingNewMsrScore_OptionalPass (
 
       s <<
         "gIndenter value after MSR score display: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       msr2msrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -405,7 +405,7 @@ void displayResultingNewMsrScoreShort_OptionalPass (
 
       s <<
         "gIndenter value after MSR score short display: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       msr2msrWarning (
         gGlobalServiceRunData->getInputSourceName (),

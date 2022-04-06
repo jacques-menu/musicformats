@@ -151,9 +151,9 @@ EXP void displayStringPairVector (
 
 //______________________________________________________________________________
 char* mfCharStarCat (
-  char*        dest,
+  char*        destination,
   const char*  source,
-  const size_t destSize);
+  const size_t destinationSize);
 
 //______________________________________________________________________________
 string mfInt2EnglishWord (int n);
@@ -273,7 +273,7 @@ void mfDisplayStringSet (
   ostream&           os);
 
 //______________________________________________________________________________
-Bool mfStringIsInStringToStringMap (
+Bool mfFetchValueFromStringToStringMap (
   const string&              theKey,
   const map<string, string>& stringToStringMap,
   string&                    theValue);
@@ -285,6 +285,24 @@ void mfDisplayStringToStringMap (
   const string&              title,
   const map<string, string>& stringToStringMap,
   ostream&                   os);
+
+//______________________________________________________________________________
+Bool mfKeyIsInStringToStringMultiMap (
+  const string&                   theKey,
+  const multimap<string, string>& stringToStringMultiMap);
+
+Bool mfKeyValuePairIsInStringToStringMultiMap (
+  const string&                   theKey,
+  const multimap<string, string>& stringToStringMultiMap,
+  const string&                   theValue);
+
+string mfStringToStringMultiMapAsString (
+  const multimap<string, string>& stringToStringMultiMap);
+
+void mfDisplayStringToStringMultiMap (
+  const string&                   title,
+  const multimap<string, string>& stringToStringMultiMap,
+  ostream&                        os);
 
 
 }

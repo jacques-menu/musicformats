@@ -2,4 +2,7 @@
 
 ./Hymn121ForHarmonyBand.mfsl
 
-open Hymn121_harmony_*.ly
+echo
+ls -salt Hymn121_band_*.ly
+
+open Hymn121_band_*.ly

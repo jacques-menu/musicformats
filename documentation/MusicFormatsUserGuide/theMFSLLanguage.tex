@@ -25,7 +25,7 @@ The main features of \mfslLang\ are:
 \end{itemize}
 
 The names in a \choice\ specification are so-called \MainIt{labels}, here "tutti", "soprano", alto", "tenor" and "bass":
-\begin{lstlisting}[language=Terminal]
+\begin{lstlisting}[language=MFSL]
 choice SCORE :
   tutti | soprano | alto | tenor | bass,
 
@@ -56,7 +56,7 @@ This chapter first presents \mfslLang\ with example scripts, and then the MFSL l
 \section{A MusicXML example}
 % -------------------------------------------------------------------------
 
-We use the \mfsl{Hymn121.xml} \mxml\ file in this chapter to show more and more useful uses of the \mfslLangInterp.
+We use the \mfslfiles{Hymn121.xml} \mxml\ file in this chapter to show more and more useful uses of the \mfslInterp.
 
 The score used as a starting point is:\\
 \includegraphics[scale=0.5]{../graphics/Hymn121_OrigianlScore.png}
@@ -64,7 +64,7 @@ The score used as a starting point is:\\
 From that:
 \begin{itemize}
 \item the original PDF file has been scanned with \Main{Photo Score Ultimate\texttrademark} to obtain\\
- \mfsl{Hymn121.xml}
+ \mfslfiles{Hymn121.xml}
 
 \item a glitch has been introduced in the last measure of part \code{P4} in the form of a \musicXmlMarkup{lyric} element:
 \begin{lstlisting}[language=MusicXML]
@@ -80,7 +80,7 @@ From that:
 \section{A first, minimal MFSL script example}
 % -------------------------------------------------------------------------
 
-The \mfsl{minimal.mfsl} \script\ illustrates two basic features of \mfslLang:
+The \mfslfiles{minimal.mfsl} \script\ illustrates two basic features of \mfslLang:
 \begin{lstlisting}[language=MFSL]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat minimal.mfsl
 #!/Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
@@ -137,7 +137,7 @@ input : "Hymn121.xml"
 \section{Launching an MFSL script}
 % -------------------------------------------------------------------------
 
-This first line of an \mfslLang\ \script\ is the so-called \MainIt{shebang}. It contains the \filePath\ to the \mfslLangInterp, allowing running such a \script by its name from the terminal, provided the \script\ file is made executable.
+This first line of an \mfslLang\ \script\ is the so-called \MainIt{shebang}. It contains the \filePath\ to the \mfslInterp, allowing running such a \script by its name from the terminal, provided the \script\ file is made executable.
 
 This can be done in the \OS\ file system \GUI, or using the \code{chmod} command or equivalent in a terminal:
 \begin{lstlisting}[language=Terminal]
@@ -147,7 +147,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal minimal.mf
 8 -rwxr-xr-x@ 1 jacquesmenu  staff  1488 Mar 26 18:20 minimal.mfsl
 \end{lstlisting}
 
-The \mfslLangInterp\ has the \optionNameBoth{no-launch}{nol} option to display the essential information found in the script and quit without actually running the tool:
+The \mfslInterp\ has the \optionNameBoth{no-launch}{nol} option to display the essential information found in the script and quit without actually running the tool:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -query no-launch
 --- Help for atom "no-launch" in subgroup "MFSL"
@@ -167,7 +167,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -query displa
           Write MFSL tool and input analysis activity to standard output.
 \end{lstlisting}
 
-When running the \mfsl{minimal.mfsl} \script\ from the \CLI\ with \optionBoth{no-launch}{nol}, we get:
+When running the \mfslfiles{minimal.mfsl} \script\ from the \CLI\ with \optionBoth{no-launch}{nol}, we get:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.mfsl -no-launch
 ====> The known tools names are: ["msdlconverter", "xml2brl", "xml2gmn", "xml2ly" and "xml2xml"]
@@ -179,7 +179,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.mfsl -no
 ====> The command above is *NOT* executed
 \end{lstlisting}
 
-Launching it without this options gives:
+Launching it without this options gives the following. The output of the \mfslInterp\ goes to standard output by defaut, so we redirect that to file \mfslfiles{Minimal.ly}:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.mfsl > Minimal.ly
 
@@ -187,7 +187,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal Minimal.ly
 24 -rw-r--r--  1 jacquesmenu  staff  11772 Mar 28 09:44 Minimal.ly
 \end{lstlisting}
 
-\FigureRef{The score created with minimal.mfsl} contains the score obtained with LilyPond from \mfsl{Minimal.ly}.
+The score can then be obtained with LilyPond from \mfslfiles{Minimal.ly}. It is shown at \FigureRef{The score created with minimal.mfsl}.
 \begin{figure}[p]
 \begin{center}
 \caption {The score created with {\tt minimal.mfsl}}
@@ -205,7 +205,8 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal Minimal.ly
 \section{Interactive use of the MFSL interpreter}
 % -------------------------------------------------------------------------
 
-As is traditional when using interpreters from the \CLI, the \mfslLangInterp\ \mfslExec\ can be launched without any file name or with a '\code{-}' denoting \standardInput.
+As is traditional when using interpreters from the \CLI, the \mfslInterp\ \mfslExec\ can be launched without any file name or with a '\code{-}' denoting \standardInput.
+
 If that is done in a terminal, a \code{Ctrl-d} (control key held when typing the {\tt d}) should be typed after the input, to indicate the end of it, such as:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl
@@ -261,7 +262,7 @@ After that, there can be:
 \item any number of  \code{case} statements stating the options to be used depending on
   the selected \choice\ labels;
 
-\item optionaly, a \code{select} or a \code{all} statement.
+\item optionaly, any number of \code{select} or an \code{every} statement.
 
 \end{itemize}
 
@@ -272,7 +273,7 @@ The details are presented in the forthcoming sections.
 \section{Options to the MFSL interpreter}
 % -------------------------------------------------------------------------
 
-The \mfslLangInterp\ has its own options, which can be displayed by \optionBoth{help}{h}.
+The \mfslInterp\ has its own options, which can be displayed by \optionBoth{help}{h}.
 
 The specific options are placed in two groups. The first one, seen with \optionBoth{help-user}{hu}, is for regular users:
 \begin{lstlisting}[language=Terminal]
@@ -326,17 +327,17 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -help-maintai
 \section{Options in an MFSL script body}
 % -------------------------------------------------------------------------
 
-Let us now use options to produce a bass guitar score from the same \mfsl{Hymn121.xml} file, which contains four parts named \code{P1} to \code{P4}.
+The \mxml\ file \mfslfiles{Hymn121.xml} contains four parts, named \code{P1} to \code{P4}.
 
-This is done by:
+Let us now use options to produce a bass score from this file. This is done by:
 \begin{itemize}
 \item  filtering the \mxml\ data to keep only part \code{P4};
 \item  using options to obtain the desired result.
 \end{itemize}
 
-For example, in \mfsl{Hymn121ForBassGuitarPart.mfsl}, the \musicXmlMarkup{lyric} element is removed with option \optionNameBoth{ignore-musicxml-lyrics}{imlyrics}:
-\begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForBassGuitarPart.mfsl
+The \mfslfiles{Hymn121ForBass.mfsl} script contains enhancement options that we will keep commented for the time being:
+\begin{lstlisting}[language=MFSL]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForBass.mfsl
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
 
 ###
@@ -347,7 +348,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForBass
     - an 'input' specification, the input source to apply
       the latter to, here file name "Hymn121.xml";
 
-    - any number of MusicFormats options,
+    - a number of MusicFormats options,
       which can easily be commented/uncommented at will.
 ###
 
@@ -367,68 +368,171 @@ input : "Hymn121.xml"
 
 
 # ----------------------------------------------------------
-# the options block
+# basic options
 # ----------------------------------------------------------
 
 # output
-  -output-file-name "Hymn121_BassGuitar.ly"
+  -output-file-name "Hymn121_Bass.ly"
 
 # header
   -title "Hymn 121 - Angels From The Realms Of Glory"
-  -subtitle "Part 4 - Bass guitar"
+  -subtitle "Part 4 - Bass"
 
   -keep-musicxml-part-id P4
 
-  -ignore-musicxml-lyrics
-    # there's a glitch at the last measure...
-
-  -ragged-bottom off
-
-  -ambitus
-
-# dynamics
-  -all-wedges-below
-
-# staff
-#   -modern-tab
-#   -tab-full-notation
-
 # display
-#   -display-options-values
+ -display-options-values
+#  -display-msr-1-short
+#  -display-lpsr-short
 
 # LilyPond
   -lilypond-generation-infos
+
+
+# ----------------------------------------------------------
+# enhancement options
+# ----------------------------------------------------------
+
+# staff
+#   -lpsr-staff-instrument-name "Voice 4:"  # an empty name
+
+# dynamics
+#   -all-wedges-below   # there are above the staff in the input file
+
+#   -ignore-musicxml-lyrics
+#      # there's a glitch in the last measure of the bass...
 \end{lstlisting}
 
-Running this script with:
+Let us run this script with:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./Hymn121ForBassGuitarPart.mfsl
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./Hymn121ForBass.mfsl
+  The options values for xml2ly are:
+    Files group (-help-files-group, -hfiles-group), 1 atom chosen:
+    --------------------------
+      Files (-help-files, -hfiles), 1 atom chosen:
+        fOutputFileName                                 : [Hymn121_Bass.ly], set by user
+    
+    Options and help group (-help-oah-group, -hoah-group), 1 atom chosen:
+    --------------------------
+      Options and help (-help-oah, -hoah), 1 atom chosen:
+        fDisplayOptionsValues                           : true, set by user
+    
+    Parts group (-help-parts-group, -hparts-group), 1 atom chosen:
+    --------------------------
+      Parts (-help-parts, -hparts), 1 atom chosen:
+        fMusicXMLPartsKeepIDSet                         : set by user
+          "P4"
+    
+    Header group (-help-header-group, -hheader-group), 2 atoms chosen:
+    --------------------------
+      Header (-help-header, -hheader), 2 atoms chosen:
+        fTitle                                          : [Hymn 121 - Angels From The Realms Of Glory], set by user
+        fSubTitle                                       : [Part 4 - Bass], set by user
+    
+    Output group (-help-output-group, -houtput-group), 1 atom chosen:
+    --------------------------
+      Output (-help-output, -houtput), 1 atom chosen:
+        fXml2lyInfos                                    : true, set by user
 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal Hymn121_BassGuitar.ly
-8 -rw-r--r--@ 1 jacquesmenu  staff  3952 Mar 27 08:55 Hymn121_BassGuitar.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal Hymn121_Bass.ly
+16 -rw-r--r--@ 1 jacquesmenu  staff  4586 Apr  5 11:18 Hymn121_Bass.ly
 \end{lstlisting}
 
-produces this score:\\
-\includegraphics[scale=0.8]{../graphics/Hymn121_BassGuitar.png}
+The score we obtain is:\\
+\includegraphics[scale=0.8]{../graphics/Hymn121_Bass.png}
+
+
+% -------------------------------------------------------------------------
+\section{Enhancing the produced score}
+% -------------------------------------------------------------------------
+
+The score obtained above is imperfect, but \xmlToLy\ has options that can help us:
+\begin{itemize}
+\item the instrument name 'Voice 4' is not relevant for this single-voice score.
+
+		This can be replaced by an empty name with:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly -query lpsr-staff-instrument-name
+--- Help for atom "lpsr-staff-instrument-name" in subgroup "Staves"
+    -lpsr-staff-instrument-name, -lpstaffinstrname STAFF_INSTRUMENT_NAME_SPEC
+          STAFF_INSTRUMENT_NAME_SPEC should be of the form STAFF:NAME.
+          Set the instrument name of staff STAFF to NAME, for example after displaying
+          the names in the score or a summary of the latter in a first run with options
+          '-dmsrnames, -display-msr-names' or 'dmsrsum, -display-msr-summary'.
+          There can be spaces around the ':', in which case quoting is needed.
+          There can be several occurrences of this option.
+\end{lstlisting}
+
+\item the dynamic wedges $<$ and $>$ are placed above the staff.
+
+	This can be fixed with:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly -query all-wedges-below
+--- Help for atom "all-wedges-below" in subgroup "Wedges"
+    -all-wedges-below, -awb
+          Ignore wedges placement and set it to 'below'.
+\end{lstlisting}
+
+\item there is the lyrics glitch at the end of the bass part.
+
+The \musicXmlMarkup{lyric} element can be ignored with this option:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini > xml2ly -query ignore-musicxml-lyrics
+--- Help for atom "ignore-musicxml-lyrics" in subgroup "Lyrics"
+    -ignore-musicxml-lyrics, -imlyrics
+          Ignore lyrics in MusicXML data.
+\end{lstlisting}
+\end{itemize}
+
+These options can be applied by uncommenting them in \mfslfiles{Hymn121ForBass.mfsl}. The differences between the two are:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > diff Hymn121ForBass.mfsl Hymn121ForBassEnhanced.mfsl 
+35c35
+<   -output-file-name "Hymn121_Bass.ly"
+---
+>   -output-file-name "Hymn121_BassEnhanced.ly"
+39c39
+<   -subtitle "Part 4 - Bass"
+---
+>   -subtitle "Part 4 - Bass, enhanced"
+49a50,63
+> 
+> 
+> # ----------------------------------------------------------
+> # enhancement options
+> # ----------------------------------------------------------
+> 
+> # staff
+>   -lpsr-staff-instrument-name "Voice 4:"  # an empty name
+> 
+> # dynamics
+>   -all-wedges-below   # there are above the staff in the input file
+> 
+>   -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
+\end{lstlisting}
+
+The enhanced score we obtain this way is:\\
+\includegraphics[scale=0.8]{../graphics/Hymn121_BassEnhanced.png}
 
 
 % -------------------------------------------------------------------------
 \section{Using choices in an MFSL script}
 % -------------------------------------------------------------------------
 
-Let us go one step further, using \mfsl{Hymn121.xml} again, to obtain various scores for a vocal SATB (soprano, alto, tenor, bass) choir.
+Let us go one step further, using \mfslfiles{Hymn121.xml} again, to obtain various scores for a vocal SATB (soprano, alto, tenor, bass) choir.
 
 This example shows the use of a \code{choice} specification and a \code{case} statement, to indicate the various possible score \choice s and what options to use for them, and \code{select} or \code{every} statements or options to do the selection.
 
 The actual selection works this way:
 \begin{itemize}
-\item there can be a \code{select} or \code{every} statement, only one of those, at the end of the \script;
-\item if one of them is present in the \script, it is used to decide which options to use for the tool;
+\item there can be either a group of several \code{select} statements or one \code{every} statement at the end of the \script;
+\item if such statements are present in the \script, they are used to decide which options to use for the tool;
 \item this behaviour can be overridden by the use of \optionNameBoth{select}{sel} or \optionName{every}, respectively;
-\item if none of \code{select} or \code{every} is present, the default \coiceLabel\ for the \choice\ is implicitly used.
+\item if none of \code{select} nor \code{every} is present, the default \coiceLabel\ for the \choice\ is implicitly used.
 \end{itemize}
 
-The \mfsl{Hymn121ForVocalSATBQuartet.mfsl} \script\ contains:
+The \mfslfiles{Hymn121ForVocalSATBQuartet.mfsl} \script\ contains:
 \begin{lstlisting}[language=MFSL]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForVocalSATBQuartet.mfsl 
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
@@ -443,11 +547,13 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForVoca
 
     - a number of MusicFormats options;
 
-    - a SCORE choice specification containing 5 label,
+    - a SCORE choice specification containing 5 labels,
       each telling which options to use
       to get a score generated with this script and xml2ly/LilyPond;
 
-    - a 'select' specification to choose one such SCORE label;
+    - a number of 'select' specifications to choose one or more such SCORE label;
+
+    - an 'every' statement to choose all labels in choice SCORE.
 ###
 
 
@@ -486,11 +592,15 @@ input : "Hymn121.xml"
 # the labels for the SCORE choice
 # ----------------------------------------------------------
 
-# choose names that match the intent,
-# uppercase to emphasize a choice name is a matter of taste
+# choose names that match the intent
+# using uppercase to emphasize a choice name is a matter of taste
 
 choice SCORE :
-  tutti | soprano | alto | tenor | bass,
+  tutti |
+
+  soprano | alto | tenor | bass |
+
+  sopranoAndAlto | tenorAndBass,
 
   default: tutti
 ;
@@ -505,6 +615,7 @@ case SCORE :
 	  -output-file-name "Hymn121_SATB_tutti.ly"
 
     -global-staff-size 17.675
+
     -subtitle "Tutti"
   ;
 
@@ -513,6 +624,7 @@ case SCORE :
 
     -subtitle '\markup { "B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
     -keep-musicxml-part-id P1
+
     -msr-rename-part "P1:soprano"
 
 #     -display-lpsr-short
@@ -540,7 +652,39 @@ case SCORE :
     -subtitle "Bass"
     -keep-musicxml-part-id P4
 
-    -ignore-musicxml-lyrics # there's a glitch at the last measure
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
+  ;
+
+  sopranoAndAlto:
+	  -output-file-name "Hymn121_SATB_sopranoAndAlto.ly"
+
+    -subtitle 'Soprano and alto'
+
+    -keep-musicxml-part-id P1
+    -msr-rename-part "P1:soprano"
+    -lpsr-staff-instrument-name "Voice 1:Soprano"
+
+    -keep-musicxml-part-id P2
+    -msr-rename-part "P2:alto"
+    -lpsr-staff-instrument-name "Voice 2:Alto"
+  ;
+
+  tenorAndBass:
+	  -output-file-name "Hymn121_SATB_tenorAndBass.ly"
+
+    -subtitle 'Tenor and bass'
+
+    -keep-musicxml-part-id P3
+    -msr-rename-part "P3:tenor"
+    -lpsr-staff-instrument-name "Voice 3:Tenor"
+
+    -keep-musicxml-part-id P4
+    -msr-rename-part "P4:bass"
+    -lpsr-staff-instrument-name "Voice 4:Bass"
+
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
   ;
 ;
 
@@ -551,62 +695,271 @@ case SCORE :
 
 ###
   Comment/uncomment the statements below to choose
-  either a particular SCORE or every one of them to be generated.
-  Only one of 'select' and 'every' can be used.
+  either individual SCORE labels or every one of them.
+  A group of 'select' statements and an 'every' statement
+  are mutually exclusive.
 
-  The 'select' statement chooses one particular score, overriding
-  the default "tutti" label setting in the 'choice' statement.
+  The 'select' statements choose one particular label each,
+  overriding the default "tutti" label setting in the 'choice' statement.
 
-  This can also be done with an option to the MFSL interpreter such as:
-    -select SCORE:tenor
+  This can also be done with the 'select' option to the MFSL interpreter such as:
+    -select SCORE:tenor -select SCORE:alto
 
-  The 'every' statement causes all possible scores for the given choice
-  to be generated.
+  The 'every' statement causes all the existing labels for the given choice
+  to be selected.
 
   This can also be done with this option to the MFSL interpreter:
     -every SCORE
 ###
 
-# select SCORE : tutti ; # superflous actually
+# select SCORE : tutti ;
 # select SCORE : soprano ;
 # select SCORE : alto ;
 # select SCORE : tenor ;
 # select SCORE : bass ;
+
+# select SCORE: sopranoAndAlto ;
+select SCORE: tenorAndBass ;
 
 # every SCORE ;
 \end{lstlisting}
 
 
 % -------------------------------------------------------------------------
-\section{Running the tool for one choice label}
+\section{Running the tool for one or more choice labels}
 % -------------------------------------------------------------------------
 
-\mfsl{Hymn121ForHarmonyBand.mfsl}
+One or more can be selected by \code{select]} statements or with the \optionNameBoth{select}{sel} option.
+With:
+\begin{lstlisting}[language=MFSL]
+select SCORE: tenorAndBass ;
+\end{lstlisting}
+
+ or:  %%%JMI
+\begin{lstlisting}[language=Terminal]
+mfsl
+\end{lstlisting}
+
+we get this score:\\
+\includegraphics[scale=0.8]{../graphics/Hymn121_SATB_tenorAndBass.png}
 
 
 % -------------------------------------------------------------------------
 \section{Running the tool for every choice label}
 % -------------------------------------------------------------------------
 
+With:
+\begin{lstlisting}[language=Terminal]
+./Hymn121ForVocalSATBQuartet.mfsl -every SCORE
+\end{lstlisting}
+
+we get all these \lily\ files:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal Hymn121_SATB_*.ly
+ 8 -rw-r--r--@ 1 jacquesmenu  staff   3964 Apr  6 21:39 Hymn121_SATB_alto.ly
+ 8 -rw-r--r--@ 1 jacquesmenu  staff   3881 Apr  6 21:39 Hymn121_SATB_bass.ly
+ 8 -rw-r--r--@ 1 jacquesmenu  staff   3931 Apr  6 21:39 Hymn121_SATB_soprano.ly
+16 -rw-r--r--@ 1 jacquesmenu  staff   6381 Apr  6 21:39 Hymn121_SATB_sopranoAndAlto.ly
+ 8 -rw-r--r--@ 1 jacquesmenu  staff   3809 Apr  6 21:39 Hymn121_SATB_tenor.ly
+16 -rw-r--r--@ 1 jacquesmenu  staff   6048 Apr  6 21:39 Hymn121_SATB_tenorAndBass.ly
+24 -rw-r--r--  1 jacquesmenu  staff  10405 Apr  6 21:39 Hymn121_SATB_tutti.ly
+\end{lstlisting}
+
+One of these scores is:\\
+\includegraphics[scale=0.8]{../graphics/Hymn121_SATB_tenorAndBass.png}
+
+
+% -------------------------------------------------------------------------
+\section{Using the MFSL interpreter in shell scripts}\label{Using the MFSL interpreter in shell scripts}
+% -------------------------------------------------------------------------
+
+The \mfslInterp\ is a regular executable application, and as such, it can be used in scripts.
+
+This author uses for exemple \mfslfiles{minimal.bash}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat minimal.bash 
+#!/bin/bash
+
+set -x
+
+MINIMAL_LY=Minimal.ly
+
+./minimal.mfsl > ${MINIMAL_LY}
+
+ls -sal ${MINIMAL_LY}
+
+# on Mac OS, 'open' launches the application set by the user
+# for a given extension, here '.ly',
+# to diplay the file on-screen
+
+open ${MINIMAL_LY}
+
+set +x
+\end{lstlisting}
+
+The \code{set} \bash\ commands toggle an echo of the commands on and off.
+
+The trace produced when running this script is:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.bash 
++ MINIMAL_LY=Minimal.ly
++ ./minimal.mfsl
++ ls -sal Minimal.ly
+24 -rw-r--r--@ 1 jacquesmenu  staff  11769 Apr  5 18:24 Minimal.ly
++ open Minimal.ly
++ set +x
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{A last MFSL example}
+% -------------------------------------------------------------------------
+
+This time, we will create a number of scores for a harmony band, using \lily\ \code{\textbackslash markup} s in MFSL character strings.
+
+The \script\ is \mfslfiles{Hymn121ForHarmonyBand.mfsl}:
+\begin{itemize}
+\item it contains several \code{case} statements, for readability;
+\end{itemize}
+
+\begin{lstlisting}[language=MFSL]
+# basic stuff
+
+case SCORE :
+	director:
+    -global-staff-size 17.675
+    -ragged-bottom off
+  ;
+
+  part1_C_instruments,
+  part2_Bb_instruments,
+  part3_Bb_instruments,
+  part4_Bb_instruments,
+  part4_BassGuitar:
+    -ambitus
+    -ragged-bottom off
+  ;
+;
+\end{lstlisting}
+
+\begin{lstlisting}[language=MFSL]
+# scores appearance
+
+case SCORE :
+	director:
+    -global-staff-size 17.675
+    -ragged-bottom off
+  ;
+
+  part1_C_instruments:
+  ;
+
+  part2_Bb_instruments:
+  ;
+
+  part3_Bb_instruments:
+  ;
+
+  part4_Bb_instruments:
+  ;
+
+  part4_BassGuitar:
+    -ambitus
+    -ragged-bottom off
+  ;
+;
+\end{lstlisting}
+
+\begin{lstlisting}[language=MFSL]
+# scores identification
+
+case SCORE :
+	director:
+	  -output-file-name
+	    "Hymn121_band_director.ly"
+    -subtitle
+      "Director - in C"
+  ;
+ o
+# ... ... ...
+\end{lstlisting}
+
+\begin{lstlisting}[language=MFSL]
+# scores contents
+
+case SCORE :
+	director:
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
+  ;
+
+	part1_C_instruments:
+    -keep-musicxml-part-id P1
+    -msr-rename-part "P1:partOne_C_instruments"
+
+    -lpsr-staff-instrument-name "Voice 1:C instruments"
+    -indent '3.5\cm'
+  ;
+
+	part2_Bb_instruments:
+    -keep-musicxml-part-id P2
+    -msr-rename-part "P2:partTwo_Bb_instruments"
+
+    -indent '2.5\cm'
+    -lpsr-staff-instrument-name
+      # let's use LilyPond's '\markup' possibilities
+      # successive MFSL character strings are concatenated into a single one
+      "Voice 2"
+      ":"
+      '\markup {'
+        '\center-column {'
+          '\line { "B" \hspace #-0.375 \raise #1.5 {\flat} }'
+          '\line { "instruments" }'
+        '}'
+      '}'
+
+    -lilypond-transpose-part-id P2=bes
+  ;
+
+# ... ... ...
+\end{lstlisting}
+
+\mfslfiles{Hymn121ForHarmonyBand.mfsl} can be used to obtain all these \lily\ files:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -l Hymn121_harmony_*.ly
+-rw-r--r--@ 1 jacquesmenu  staff  9765 Apr  6 18:04 Hymn121_band_director.ly
+-rw-r--r--@ 1 jacquesmenu  staff  3366 Apr  6 18:04 Hymn121_band_part1_C_instruments.ly
+-rw-r--r--@ 1 jacquesmenu  staff  3627 Apr  6 18:04 Hymn121_band_part2_Bb_instruments.ly
+-rw-r--r--  1 jacquesmenu  staff  3444 Apr  6 18:04 Hymn121_band_part3_Bb_instruments.ly
+-rw-r--r--@ 1 jacquesmenu  staff  3300 Apr  6 18:04 Hymn121_band_part4_BassGuitar.ly
+-rw-r--r--@ 1 jacquesmenu  staff  3454 Apr  6 17:59 Hymn121_band_part4_Bb_instruments.ly
+\end{lstlisting}
+
+One of the scores produced by \lily\ is:\\
+\includegraphics[scale=0.8]{../graphics/Hymn121_band_part3_Bb_instruments.png}
+
 
 % -------------------------------------------------------------------------
 \section{MFSL language details}
 % -------------------------------------------------------------------------
 
+To be completed. %%%JMI
 
-% -------------------------------------------------------------------------
-\section{Error handling in MFSL scripts}
-% -------------------------------------------------------------------------
+
+%% -------------------------------------------------------------------------
+%\section{Error handling in MFSL scripts}
+%% -------------------------------------------------------------------------
+%
+%%%JMI
 
 
 % -------------------------------------------------------------------------
 \section{Behind the scenes\dots}
 % -------------------------------------------------------------------------
 
-The \mfslLangInterp\ is organized as too \pass es:
+The \mfslInterp\ is organized as too \pass es:
 \begin{enumerate}
-\item a first pass analyses the script body and build an internal representation, which is displayed by the \optionNameBoth{trace-choices}{tchoices} otion;
+\item a first pass analyses the script body and builds an internal representation, which is displayed by the \optionNameBoth{trace-choices}{tchoices} option;
 
-\item the second pass uses the informations thus collected to launch the tool as many times as needed, depending on \code{select} and \code{all} usage in the script body and the options to \mfslLangInterp.
+\item the second pass uses the informations thus collected to launch the tool as many times as needed, depending on \code{select} and \code{every} usage in the script body and the options to the \mfslInterp.
 \end{enumerate}
-

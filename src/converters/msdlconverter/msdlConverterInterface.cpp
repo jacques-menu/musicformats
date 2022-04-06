@@ -614,7 +614,7 @@ static mfMusicformatsError msdlFile2lilypondWithOptionsAndArguments (
 //       "### " <<
 //       serviceName <<
 //       " gIndenter value after options ands arguments checking: " <<
-//       gIndenter.getIndent () <<
+//       gIndenter.getIndentation () <<
 //       " ###" <<
 //       endl;
 //

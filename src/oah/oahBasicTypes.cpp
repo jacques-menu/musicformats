@@ -122,7 +122,7 @@ EXP void displayStringPairVector (
   const mfStringsPairVector& stringPairVector,
   ostream&                  os)
 {
-  unsigned int stringPairVectorSize =
+  size_t stringPairVectorSize =
     stringPairVector.size ();
 
   os <<
@@ -135,7 +135,7 @@ EXP void displayStringPairVector (
 
     ++gIndenter;
 
-    const unsigned int fieldWidth = 2;
+    const size_t fieldWidth = 2;
 
     int counter = 0;
     for (auto stringPair : stringPairVector) {
@@ -203,11 +203,11 @@ EXP void displayStringPairVector (
 //
 // 	string curOption;
 //
-//   unsigned int stringsVectorSize =
+//   size_t stringsVectorSize =
 //     stringsVector.size ();
 //
 //   if (stringsVectorSize) {
-//     for (unsigned int i = 0; i < stringsVectorSize; ++i) {
+//     for (size_t i = 0; i < stringsVectorSize; ++i) {
 //       string str = stringsVector [i];
 //
 //   #ifdef TRACING_IS_ENABLED
@@ -262,9 +262,9 @@ EXP void displayStringPairVector (
 //
 //     ++gIndenter;
 //
-//     const unsigned int fieldWidth = 2;
+//     const size_t fieldWidth = 2;
 //
-//     for (unsigned int i = 0; i < theOptionsVector.size (); ++i) {
+//     for (size_t i = 0; i < theOptionsVector.size (); ++i) {
 //       string optionName  = theOptionsVector [i].first;
 //       string optionValue = theOptionsVector [i].second;
 //
@@ -319,7 +319,7 @@ EXP void displayStringPairVector (
 // 	  argv,
 // 	  stringsVector);
 //
-//   unsigned int stringsVectorSize =
+//   size_t stringsVectorSize =
 //     stringsVector.size ();
 //
 // #ifdef TRACING_IS_ENABLED
@@ -2566,7 +2566,7 @@ void oahSubGroup::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
@@ -2588,7 +2588,7 @@ void oahSubGroup::applyElement (ostream& os)
 
   --gIndenter;
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahSubGroup::checkSubGroupOptionsConsistency ()
@@ -2787,7 +2787,7 @@ void oahSubGroup::printSummary (ostream& os) const
 void oahSubGroup::underlineSubGroupHeader (ostream& os) const
 {
   /* JMI ???
-  for (unsigned int i = 0; i < fSubGroupHeader.size (); ++i) {
+  for (size_t i = 0; i < fSubGroupHeader.size (); ++i) {
     os << "-";
   } // for
   os << endl;
@@ -3021,7 +3021,7 @@ void oahSubGroup::printOptionsSummary (
   ostream& os) const
 {
   // fetch maximum subgroups help headers size
-  unsigned int maximumSubGroupsHelpHeadersSize =
+  size_t maximumSubGroupsHelpHeadersSize =
     getGroupUpLink ()->
       getHandlerUpLink ()->
         getMaximumSubGroupsHeadersSize ();
@@ -3559,7 +3559,7 @@ void oahGroup::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
@@ -3576,7 +3576,7 @@ void oahGroup::applyElement (ostream& os)
 
   --gIndenter;
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahGroup::handleAtomValue (
@@ -3824,7 +3824,7 @@ void oahGroup::printSummary (ostream& os) const
 void oahGroup::underlineGroupHeader (ostream& os) const
 {
   /* JMI
-  for (unsigned int i = 0; i < fGroupHeader.size (); ++i) {
+  for (size_t i = 0; i < fGroupHeader.size (); ++i) {
     os << "-";
   } // for
   os << endl;
@@ -3884,7 +3884,7 @@ void oahGroup::printHelp (ostream& os) const
   // print the options subgroups
   if (fGroupSubGroupsList.size ()) {
     // compute the maximun sub group header length
-    unsigned int maximumSubGroupHeaderLength = 0;
+    size_t maximumSubGroupHeaderLength = 0;
 
     for (
       list<S_oahSubGroup>::const_iterator i = fGroupSubGroupsList.begin ();
@@ -3892,7 +3892,7 @@ void oahGroup::printHelp (ostream& os) const
       ++i
     ) {
       string subGroupHeader  = (*i)->getSubGroupHeader ();
-      unsigned int subGroupHeaderSize = subGroupHeader.size ();
+      size_t subGroupHeaderSize = subGroupHeader.size ();
 
       if (subGroupHeaderSize > maximumSubGroupHeaderLength) {
         maximumSubGroupHeaderLength = subGroupHeaderSize;
@@ -4426,7 +4426,7 @@ void oahHandler::registerElementNamesInHandler (
     elementLongName =
       element->getLongName ();
 
-  unsigned int
+  size_t
     elementShortNameSize =
       elementShortName.size (),
     elementLongNameSize =
@@ -4550,7 +4550,7 @@ void oahHandler::registerElementNamesInHandler (
   }
 
   // take element's display variable name length into account
-  unsigned int
+  size_t
     elementVariableNameLength =
       element->
         fetchVariableNameLength ();
@@ -4646,7 +4646,7 @@ void oahHandler::appendElementToElementsList (
     string
       subHeader=
         subGroup-> getSubGroupHeader ();
-    unsigned int
+    size_t
       subHeaderSize =
         subHeader.size ();
 
@@ -4660,7 +4660,7 @@ void oahHandler::appendElementToElementsList (
 
 void oahHandler::checkOptionsAndArgumentsConsistency ()
 {
-  unsigned int argumentsNumber =
+  size_t argumentsNumber =
     fOptionsAndArguments.
       getArgumentsVector ().size ();
 
@@ -4776,7 +4776,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
     argumentsVector =
       fOptionsAndArguments.getArgumentsVector ();
 
-  unsigned int argumentsNumber =
+  size_t argumentsNumber =
     argumentsVector.size ();
 
 #ifdef TRACING_IS_ENABLED
@@ -4801,7 +4801,7 @@ void oahHandler::checkNoInputSourceInArgumentsVector () const
 
       ++gIndenter;
 
-      for (unsigned int i = 0; i < argumentsNumber; ++i) {
+      for (size_t i = 0; i < argumentsNumber; ++i) {
        gLogStream <<
           i << " : FII " << argumentsVector [i] << // JMIJMIJMI
           endl;
@@ -4864,7 +4864,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
     argumentsVector =
       fOptionsAndArguments.getArgumentsVector ();
 
-  unsigned int argumentsNumber =
+  size_t argumentsNumber =
     argumentsVector.size ();
 
 #ifdef TRACING_IS_ENABLED
@@ -4889,7 +4889,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
 
       ++gIndenter;
 
-      for (unsigned int i = 0; i < argumentsNumber; ++i) {
+      for (size_t i = 0; i < argumentsNumber; ++i) {
         gLogStream <<
           i << " : FUU " << argumentsVector [i] <<
             endl;
@@ -4937,7 +4937,7 @@ void oahHandler::checkNoOrOneInputSourceInArgumentsVector () const
 
         string message = s.str ();
 
-        for (unsigned int i = 1; i < argumentsNumber; ++i) {
+        for (size_t i = 1; i < argumentsNumber; ++i) {
           gLogStream <<
             argumentsVector [i];
 
@@ -4979,7 +4979,7 @@ void oahHandler::checkSingleInputSourceInArgumentsVector () const
     argumentsVector =
       fOptionsAndArguments.getArgumentsVector ();
 
-  unsigned int argumentsNumber =
+  size_t argumentsNumber =
     argumentsVector.size ();
 
 #ifdef TRACING_IS_ENABLED
@@ -5791,7 +5791,7 @@ void oahHandler::printNameIntrospectiveHelp (
         fetchNameInPrefixesMap (name)
   ) {
     // print the help
-    int saveIndent = gIndenter.getIndent ();
+    int saveIndent = gIndenter.getIndentation ();
 
     gIndenter.resetToZero ();
 
@@ -5807,7 +5807,7 @@ void oahHandler::printNameIntrospectiveHelp (
 
     --gIndenter;
 
-    gIndenter.setIndent (saveIndent);
+    gIndenter.setIndentation (saveIndent);
 
     suffixHelpHasBeenProvided = true;
   }
@@ -5827,7 +5827,7 @@ void oahHandler::printNameIntrospectiveHelp (
         group =
           dynamic_cast<oahGroup*>(&(*element))
     ) {
-      int saveIndent = gIndenter.getIndent ();
+      int saveIndent = gIndenter.getIndentation ();
 
       gIndenter.resetToZero ();
 
@@ -5844,7 +5844,7 @@ void oahHandler::printNameIntrospectiveHelp (
 
       --gIndenter;
 
-      gIndenter.setIndent (saveIndent);
+      gIndenter.setIndentation (saveIndent);
     }
 
     else if (
@@ -5859,7 +5859,7 @@ void oahHandler::printNameIntrospectiveHelp (
           subGroup->
             getGroupUpLink ();
 
-      int saveIndent = gIndenter.getIndent ();
+      int saveIndent = gIndenter.getIndentation ();
 
       gIndenter.resetToZero ();
 
@@ -5881,7 +5881,7 @@ void oahHandler::printNameIntrospectiveHelp (
 
       --gIndenter;
 
-      gIndenter.setIndent (saveIndent);
+      gIndenter.setIndentation (saveIndent);
     }
 
     else if (
@@ -5902,7 +5902,7 @@ void oahHandler::printNameIntrospectiveHelp (
           subGroup->
             getGroupUpLink ();
 
-      int saveIndent = gIndenter.getIndent ();
+      int saveIndent = gIndenter.getIndentation ();
 
       gIndenter.resetToZero ();
 
@@ -5932,7 +5932,7 @@ void oahHandler::printNameIntrospectiveHelp (
 
       --gIndenter;
 
-      gIndenter.setIndent (saveIndent);
+      gIndenter.setIndentation (saveIndent);
     }
 
     else {
@@ -6121,7 +6121,7 @@ void oahHandler::printHandlerOptionsValues (
 {
 #ifdef TRACING_IS_ENABLED
   // print the options handler values header
-  unsigned int
+  size_t
     handlerCommandLineElementsMultisetSize =
       fHandlerCommandLineElementsMultiset.size ();
 
@@ -6223,7 +6223,7 @@ void oahHandler::printHandlerOptionsValuesAll (
 {
 #ifdef TRACING_IS_ENABLED
   // print the options handler values header
-  unsigned int
+  size_t
     handlerCommandLineElementsMultisetSize =
       fHandlerCommandLineElementsMultiset.size ();
 
@@ -6307,7 +6307,7 @@ void oahHandler::printHandlerOptionsValuesAll (
 void oahHandler::printIncludeFileNamesStack (
   ostream& os) const
 {
-  unsigned int includeFileNamesStackSize =
+  size_t includeFileNamesStackSize =
     fIncludeFileNamesStack.size ();
 
   os <<
@@ -6320,7 +6320,7 @@ void oahHandler::printIncludeFileNamesStack (
 
     ++gIndenter;
 
-    const unsigned int fieldWidth = 2;
+    const size_t fieldWidth = 2;
 
     int counter = 1; // this is to be displayed to the user
     for (string fileName : fIncludeFileNamesStack) {
@@ -6480,7 +6480,7 @@ void oahHandler::prependGroupToHandler (
 
 void oahHandler::printKnownPrefixes (ostream& os) const
 {
-  unsigned int oahHandlerPrefixesListSize =
+  size_t oahHandlerPrefixesListSize =
     fHandlerPrefixesMap.size ();
 
   os <<
@@ -6530,7 +6530,7 @@ void oahHandler::printKnownPrefixes (ostream& os) const
 
 void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
 {
-  unsigned int oahHandlerPrefixesListSize =
+  size_t oahHandlerPrefixesListSize =
     fSingleCharacterShortNamesSet.size ();
 
   os <<
@@ -6624,7 +6624,7 @@ void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
 
 void oahHandler::displayNamesToElementsMap (ostream& os) const
 {
-  unsigned int handlerElementsMapSize =
+  size_t handlerElementsMapSize =
     fHandlerNamesToElementsMap.size ();
 
   // print the names to elements map
@@ -6674,7 +6674,7 @@ void oahHandler::displayNamesToElementsMap (ostream& os) const
   // create a list of the options map elements names
   list<string> optionsMapElementsNamesList;
 
-  unsigned int optionsMapElementsNamesListSize =
+  size_t optionsMapElementsNamesListSize =
     optionsMapElementsNamesList.size ();
 
   if (optionsMapElementsNamesListSize) {
@@ -7166,7 +7166,7 @@ void oahHandler::handleOptionPrefixName (
     ",",
     chunksList);
 
-  unsigned int chunksListSize = chunksList.size ();
+  size_t chunksListSize = chunksList.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
@@ -7315,7 +7315,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     }
 #endif
 
-  unsigned int clusterElementsListSize =
+  size_t clusterElementsListSize =
     clusterElementsList.size ();
 
 #ifdef TRACING_IS_ENABLED
@@ -7366,7 +7366,7 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
   }
 #endif
 
-  unsigned int optionNameSize =
+  size_t optionNameSize =
     optionName.size ();
 
 #ifdef TRACING_IS_ENABLED
@@ -8110,7 +8110,7 @@ void oahHandler::createElementUsesListFromOptionsAndArguments (
 //         getOptionsAndArguments ().getOptionsVector ();
 //
 //   if (optionsVector.size ()) {
-//     for (unsigned int i = 0; i < optionsVector.size (); ++i) {
+//     for (size_t i = 0; i < optionsVector.size (); ++i) {
 //         string optionName =
 //           optionsVector [i].getOptionName ();
 //         string optionValue =
@@ -9254,7 +9254,7 @@ void oahHandler::handleOptionNameCommon (
 //       fOptionsAndArguments.getOptionsVector ();
 //
 //   if (optionsVector.size ()) {
-//     for (unsigned int i = 0; i < optionsVector.size (); ++i) {
+//     for (size_t i = 0; i < optionsVector.size (); ++i) {
 //       string optionName =
 //         optionsVector [i].getOptionName ();
 //       string optionValue =
@@ -9329,7 +9329,7 @@ void oahHandler::handleOptionNameCommon (
 //     optionArgumentsVector =
 //       optionsAndArguments.getArgumentsVector ();
 //
-//   unsigned int optionArgumentsVectorSize =
+//   size_t optionArgumentsVectorSize =
 //     optionArgumentsVector.size ();
 //
 //   switch (optionArgumentsVectorSize) {
@@ -9759,7 +9759,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 
   regex_match (theString, sm, e);
 
-  unsigned int smSize = sm.size ();
+  size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
@@ -9815,7 +9815,7 @@ EXP void convertArgcArgvToOptionsAndArguments ( // JMIJMIJMI
 
     regex_match (theString, sm, e);
 
-    unsigned int smSize = sm.size ();
+    size_t smSize = sm.size ();
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {

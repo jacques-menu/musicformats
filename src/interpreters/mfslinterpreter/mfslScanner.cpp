@@ -77,7 +77,7 @@ typedef short int flex_int16_t;
 typedef int flex_int32_t;
 typedef unsigned char flex_uint8_t; 
 typedef unsigned short int flex_uint16_t;
-typedef unsigned int flex_uint32_t;
+typedef size_t flex_uint32_t;
 
 /* Limits of integral types. */
 #ifndef INT8_MIN
@@ -2762,40 +2762,14 @@ void mfslDriver::scanBegin ()
     {
       stringstream s;
 
-      size_t
-        ERROR_STRING_BUFFER_SIZE = 512;
-
-      char*
-        errorStringBuffer =
-          new char (ERROR_STRING_BUFFER_SIZE);
-
-//       int status = 0;
-//
-// #ifdef WIN32
-//       status =
-//         strerror_s (
-//           errorStringBuffer,
-//           ERROR_STRING_BUFFER_SIZE,
-//           errno);
-// #else
-//       status =
-//         strerror_r (
-//           errno,
-//           errorStringBuffer,
-//           ERROR_STRING_BUFFER_SIZE);
-// #endif
-
       char*
         errorString =
           strerror (errno);
-
-//       if (status) {
 
       if (errorString != nullptr) {
         s <<
           "cannot open " <<
           fScriptSourceName << ": " <<
-//           &errorStringBuffer <<
           errorString <<
           endl;
 

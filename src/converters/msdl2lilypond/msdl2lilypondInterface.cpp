@@ -498,7 +498,7 @@ mfMusicformatsError convertMsdlStream2lilypondWithHandler (
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 

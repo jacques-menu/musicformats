@@ -256,10 +256,10 @@ void mfslChoice::selectChoiceLabel (
   }
 
   // did fChoiceName get a label by an option?
-  const map<string, string>&
-    setChoiceToLabelMap =
+  const multimap<string, string>&
+    setChoiceToLabelMultiMap =
       gGlobalMfslInterpreterOahGroup->
-        getSelectChoiceToLabelsMap ();
+        getSelectChoiceToLabelsMultiMap ();
 
   switch (fChoiceLabelKind) {
     case mfslChoiceLabelKind::kChoiceLabelNone:
@@ -269,9 +269,9 @@ void mfslChoice::selectChoiceLabel (
 
         Bool
           choiceGotAValueByAnOption =
-            mfStringIsInStringToStringMap (
+            mfKeyValuePairIsInStringToStringMultiMap (
               fChoiceName,
-              setChoiceToLabelMap,
+              setChoiceToLabelMultiMap,
               optionSuppliedLabel);
 
         if (choiceGotAValueByAnOption) {
@@ -460,6 +460,14 @@ S_mfslOptionsBlock mfslChoice::getChoiceOptionsBlockForLabel (
     mfslError (
       s.str (),
       drv.getScannerLocation ());
+  }
+
+  if (gGlobalMfslInterpreterOahGroup->getTraceChoices ()) {
+    gLogStream <<
+      "<==== Result: \"" <<
+      result <<
+      "\", line " << drv.getScannerLocation () <<
+      endl;
   }
 
   return result;

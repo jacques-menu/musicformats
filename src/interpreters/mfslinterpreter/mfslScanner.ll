@@ -561,40 +561,14 @@ void mfslDriver::scanBegin ()
     {
       stringstream s;
 
-      size_t
-        ERROR_STRING_BUFFER_SIZE = 512;
-
-      char*
-        errorStringBuffer =
-          new char (ERROR_STRING_BUFFER_SIZE);
-
-//       int status = 0;
-//
-// #ifdef WIN32
-//       status =
-//         strerror_s (
-//           errorStringBuffer,
-//           ERROR_STRING_BUFFER_SIZE,
-//           errno);
-// #else
-//       status =
-//         strerror_r (
-//           errno,
-//           errorStringBuffer,
-//           ERROR_STRING_BUFFER_SIZE);
-// #endif
-
       char*
         errorString =
           strerror (errno);
-
-//       if (status) {
 
       if (errorString != nullptr) {
         s <<
           "cannot open " <<
           fScriptSourceName << ": " <<
-//           &errorStringBuffer <<
           errorString <<
           endl;
 

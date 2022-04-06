@@ -96,7 +96,7 @@ void translateLpsrToLilypond (
   if (gIndenter != 0) {
     gLogStream <<
       "### translateLpsrToLilypond gIndenter final value: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 

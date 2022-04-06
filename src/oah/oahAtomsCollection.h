@@ -2549,7 +2549,7 @@ EXP ostream& operator<< (ostream& os, const S_oahStringToIntMapElementAtom& elt)
 class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
 {
 /*
-  an atom controlling a string to integer mapping variable
+  an atom controlling a string to string mapping variable
 */
 
   public:
@@ -2631,6 +2631,94 @@ class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
 };
 typedef SMARTP<oahStringToStringMapElementAtom> S_oahStringToStringMapElementAtom;
 EXP ostream& operator<< (ostream& os, const S_oahStringToStringMapElementAtom& elt);
+
+//______________________________________________________________________________
+class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
+{
+/*
+  an atom controlling a string to string multiple mapping variable
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahStringToStringMultiMapElementAtom> create (
+                            const string&         longName,
+                            const string&         shortName,
+                            const string&         description,
+                            const string&         valueSpecification,
+                            const string&         variableName,
+                            multimap<string, string>&  stringToStringMultiMapVariable);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahStringToStringMultiMapElementAtom (
+                            const string&         longName,
+                            const string&         shortName,
+                            const string&         description,
+                            const string&         valueSpecification,
+                            const string&         variableName,
+                            multimap<string, string>&  stringToStringMultiMapVariable);
+
+    virtual               ~oahStringToStringMultiMapElementAtom ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const multimap<string, string>&
+                          getStringToStringMultiMapVariable () const
+                              { return fStringToStringMultiMapVariable; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  applyAtomWithValue (
+                            const string& theString,
+                            ostream&      os) override;
+
+  public:
+
+    // visitors
+    // ------------------------------------------------------
+
+    void                  acceptIn  (basevisitor* v) override;
+    void                  acceptOut (basevisitor* v) override;
+
+    void                  browseData (basevisitor* v) override;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    string                asShortNamedOptionString () const override;
+    string                asActualLongNamedOptionString () const override;
+
+    void                  print (ostream& os) const override;
+
+    void                  printAtomWithVariableOptionsValues (
+                            ostream& os,
+                            int      valueFieldWidth) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    multimap<string, string>&
+                          fStringToStringMultiMapVariable;
+};
+typedef SMARTP<oahStringToStringMultiMapElementAtom> S_oahStringToStringMultiMapElementAtom;
+EXP ostream& operator<< (ostream& os, const S_oahStringToStringMultiMapElementAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahStringAndIntegerAtom : public oahAtomStoringAValue

@@ -337,61 +337,47 @@ lpsrScore::lpsrScore (
       fMsrScore->getScaling (),
       fMsrScore->getPageLayout ());
 
-/* JMI
   // populate the paper
-  msrLength paperWidth =
-    elt->getPaperWidth ();
-//  if (gGlobalLpsrOahGroup->getPaperWidth ().getLengthValue () > 0.0) {
-  if (gGlobalLpsrOahGroup->getPaperWidthAtom ()->getSetByAnOption ()) {
-    paperWidth = gGlobalLpsrOahGroup->getPaperWidth ();
-  }
-  paper ->
-    setPaperWidth (paperWidth);
 
-  msrLength paperHeight =
-    elt->getPaperHeight ();
-//  if (gGlobalLpsrOahGroup->getPaperHeight ().getLengthValue () > 0.0) {
-  if (gGlobalLpsrOahGroup->getPaperHeightAtom ()->getSetByAnOption ()) {
-    paperWidth = gGlobalLpsrOahGroup->getPaperHeight ();
-  }
-  paper->
-    setPaperHeight (paperHeight);
-
-  msrLength topMargin =
-    elt->getTopMargin ();
-  if (gGlobalLpsrOahGroup->getTopMargin () > 0.0) {
-    topMargin = gGlobalLpsrOahGroup->getTopMargin ();
-  }
-  paper->
-    setTopMargin (topMargin);
-
-  msrLength bottomMargin =
-    elt->getBottomMargin ();
-  if (gGlobalLpsrOahGroup->getBottomMargin () > 0.0) {
-    bottomMargin = gGlobalLpsrOahGroup->getBottomMargin ();
-  }
-  paper->
-    setBottomMargin (bottomMargin);
-
-  msrLength leftMargin =
-    elt->getLeftMargin ();
-  if (gGlobalLpsrOahGroup->getLeftMargin () > 0.0) {
-    leftMargin = gGlobalLpsrOahGroup->getLeftMargin ();
-  }
-  paper->
-    setLeftMargin (leftMargin);
-
-  msrLength rightMargin =
-    elt->getRightMargin ();
-  if (gGlobalLpsrOahGroup->getRightMargin () > 0.0) {
-    rightMargin = gGlobalLpsrOahGroup->getRightMargin ();
-  }
-  paper->
-    setRightMargin (rightMargin);
-*/
+  // geometry
+//   if (gGlobalLpsrOahGroup->getPaperWidthAtom ()->getSetByAnOption ()) {
+//     fScorePaper->
+//       setPaperWidth (
+//         gGlobalLpsrOahGroup->getPaperWidth ());
+//   }
+//
+//   if (gGlobalLpsrOahGroup->getPaperHeightAtom ()->getSetByAnOption ()) {
+//     fScorePaper->
+//       setPaperHeight (
+//         gGlobalLpsrOahGroup->getPaperHeight ());
+//   }
+//
+//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
+//     fScorePaper->
+//       setTopMargin (
+//         gGlobalLpsrOahGroup->getTopMargin ());
+//   }
+//
+//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
+//     fScorePaper->
+//       setBottomMargin (
+//         gGlobalLpsrOahGroup->getBottomMargin ());
+//   }
+//
+//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
+//     fScorePaper->
+//       setLeftMargin (
+//         gGlobalLpsrOahGroup->getLeftMargin ());
+//   }
+//
+//   if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
+//     fScorePaper->
+//       setRightMargin (
+//         gGlobalLpsrOahGroup->getRightMargin ());
+//   }
 
   // indents
-  if (gGlobalLpsrOahGroup->getPaperHorizontalShift ().getLengthValue () > 0.0) {
+  if (gGlobalLpsrOahGroup->getPaperHorizontalShiftAtom ()->getSetByAnOption ()) {
     fScorePaper->
       setHorizontalShift (
         msrLength::create (
@@ -399,7 +385,7 @@ lpsrScore::lpsrScore (
           gGlobalLpsrOahGroup->getPaperHorizontalShift ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getPaperIndent ().getLengthValue () > 0.0) {
+  if (gGlobalLpsrOahGroup->getPaperIndentAtom ()->getSetByAnOption ()) {
     fScorePaper->
       setIndent (
         msrLength::create (
@@ -407,7 +393,7 @@ lpsrScore::lpsrScore (
           gGlobalLpsrOahGroup->getPaperIndent ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getPaperShortIndent ().getLengthValue () > 0.0) {
+  if (gGlobalLpsrOahGroup->getPaperShortIndentAtom ()->getSetByAnOption ()) {
     fScorePaper->
       setShortIndent (
         msrLength::create (
@@ -416,7 +402,7 @@ lpsrScore::lpsrScore (
   }
 
   // spaces
-  if (gGlobalLpsrOahGroup->getMarkupSystemSpacingPadding ().getLengthValue () > 0.0) {
+  if (gGlobalLpsrOahGroup->getMarkupSystemSpacingPaddingAtom ()->getSetByAnOption ()) {
     fScorePaper->
       setMarkupSystemSpacingPadding (
         msrLength::create (
@@ -424,7 +410,7 @@ lpsrScore::lpsrScore (
           gGlobalLpsrOahGroup->getMarkupSystemSpacingPadding ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getBetweenSystemSpace ().getLengthValue () > 0.0) {
+  if (gGlobalLpsrOahGroup->getBetweenSystemSpaceAtom ()->getSetByAnOption ()) {
     fScorePaper->
       setBetweenSystemSpace (
         msrLength::create (
@@ -432,12 +418,12 @@ lpsrScore::lpsrScore (
           gGlobalLpsrOahGroup->getBetweenSystemSpace ().getLengthValue ()));
   }
 
-  if (gGlobalLpsrOahGroup->getPageTopSpace ().getLengthValue () > 0.0) {
+  if (gGlobalLpsrOahGroup->getPageTopSpacingAtom ()->getSetByAnOption ()) {
     fScorePaper->
-      setPageTopSpace (
+      setPageTopSpacing (
         msrLength::create (
-          gGlobalLpsrOahGroup->getPageTopSpace ().getLengthUnitKind (),
-          gGlobalLpsrOahGroup->getPageTopSpace ().getLengthValue ()));
+          gGlobalLpsrOahGroup->getPageTopSpacing ().getLengthUnitKind (),
+          gGlobalLpsrOahGroup->getPageTopSpacing ().getLengthValue ()));
   }
 
   // counts

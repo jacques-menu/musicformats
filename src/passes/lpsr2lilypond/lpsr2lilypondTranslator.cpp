@@ -7143,7 +7143,6 @@ void lpsr2lilypondTranslator::generatePaperIndents (
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
-  return; // JMI
   // horizontal shift
   S_msrLength
     horizontalShift =
@@ -7220,7 +7219,6 @@ void lpsr2lilypondTranslator::generatePaperSpaces (
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
-  return; // JMI
   // markup system spacing padding
   S_msrLength
     markupSystemPpacingPadding =
@@ -7270,7 +7268,7 @@ void lpsr2lilypondTranslator::generatePaperSpaces (
   // page top space
   S_msrLength
     pageTopSpace =
-      pagePaper->getPageTopSpace ();
+      pagePaper->getPageTopSpacing ();
 
   if (! pageTopSpace) {
     fLilypondCodeStream << "% ";
@@ -7435,8 +7433,6 @@ void lpsr2lilypondTranslator::generatePaperHeadersAndFooters (
   msrLengthUnitKind defaultLengthUnit,
   int               fieldWidth)
 {
-  return; // JMI ???
-
   string oddHeaderMarkup =
     pagePaper->getOddHeaderMarkup ();
 
@@ -8835,7 +8831,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
       staffPartUpLink->
         getPartNameDisplayText ();
 
-    gLogStream << "--> partName: \"" << partName << "\"" << endl;
+// JMI    gLogStream << "--> partName: \"" << partName << "\"" << endl;
 
     if (partName.size () == 0) {
       partName =
@@ -8843,7 +8839,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
           getPartName ();
     }
 
-    gLogStream << "--> partName: \"" << partName << "\"" << endl;
+// JMI    gLogStream << "--> partName: \"" << partName << "\"" << endl;
 
     // generate the instrument name
     //* JMI BLARKBLARK
@@ -8864,15 +8860,15 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
             gGlobalLpsrOahGroup->
               getLpsrStavesInstrumentsNamesMap ();
 
-        mfDisplayStringToStringMap (
-          "--> lpsrStavesInstrumentsNamesMap",
-          lpsrStavesInstrumentsNamesMap,
-          gLogStream);
+//         mfDisplayStringToStringMap ( JMI
+//           "--> lpsrStavesInstrumentsNamesMap",
+//           lpsrStavesInstrumentsNamesMap,
+//           gLogStream);
 
         string optionSuppliedInstrumentName;
 
         if (
-          mfStringIsInStringToStringMap (
+          mfFetchValueFromStringToStringMap (
             partName,
             lpsrStavesInstrumentsNamesMap,
             optionSuppliedInstrumentName)

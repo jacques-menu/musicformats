@@ -136,7 +136,7 @@ void displayBsrFirstScore_OptionalPass (
 
       s <<
         "gIndenter value after first BSR score display: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       bsrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -165,7 +165,7 @@ void displayBsrFirstScoreShort_OptionalPass (
 
       s <<
         "gIndenter value after first BSR score short display: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       bsrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -279,7 +279,7 @@ void displayFinalizedBsrScore_OptionalPass (
 
       s <<
         "gIndenter value after BSR score display: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       bsrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -308,7 +308,7 @@ void displayFinalizedBsrScoreShort_OptionalPass (
 
       s <<
         "gIndenter value after BSR score short display: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       bsrWarning (
         gGlobalServiceRunData->getInputSourceName (),

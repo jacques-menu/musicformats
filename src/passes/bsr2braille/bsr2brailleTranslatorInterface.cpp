@@ -91,7 +91,7 @@ void translateBsrToBraille (
   if (gIndenter != 0) {
     gLogStream <<
       "### translateBsrToBraille gIndenter final value: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 

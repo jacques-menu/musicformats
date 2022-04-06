@@ -494,18 +494,34 @@ class EXP lpsrOahGroup : public oahGroup
     // indents
     msrLength             getPaperHorizontalShift () const
                               { return fPaperHorizontalShift; }
+    S_oahLengthAtom       getPaperHorizontalShiftAtom () const
+                              { return fPaperHorizontalShiftAtom; }
+
     msrLength             getPaperIndent () const
                               { return fPaperIndent; }
+    S_oahLengthAtom       getPaperIndentAtom () const
+                              { return fPaperIndentAtom; }
+
     msrLength             getPaperShortIndent () const
                               { return fPaperShortIndent; }
+    S_oahLengthAtom       getPaperShortIndentAtom () const
+                              { return fPaperShortIndentAtom; }
 
     // spaces
     msrLength             getMarkupSystemSpacingPadding () const
                               { return fMarkupSystemSpacingPadding; }
+    S_oahLengthAtom       getMarkupSystemSpacingPaddingAtom () const
+                              { return fMarkupSystemSpacingPaddingAtom; }
+
     msrLength             getBetweenSystemSpace () const
                               { return fBetweenSystemSpace; }
-    msrLength             getPageTopSpace () const
-                              { return fPageTopSpace; }
+    S_oahLengthAtom       getBetweenSystemSpaceAtom () const
+                              { return fBetweenSystemSpaceAtom; }
+
+    msrLength             getPageTopSpacing () const
+                              { return fPageTopSpacing; }
+    S_oahLengthAtom       getPageTopSpacingAtom () const
+                              { return fPageTopSpacingAtom; }
 
     // counts
     void                  setPageCount (int value)
@@ -529,7 +545,6 @@ class EXP lpsrOahGroup : public oahGroup
 
     oahOnOffKind          getRaggedBottom () const
                               { return fRaggedBottom; }
-
     S_oahOnOffAtom        getRaggedBottomAtom () const
                               { return fRaggedBottomAtom; }
 
@@ -559,8 +574,11 @@ class EXP lpsrOahGroup : public oahGroup
 
     void                  setTagline ()
                               { fTagline = true; }
+
     Bool                  getTagline () const
                               { return fTagline; }
+    S_oahBooleanAtom      getTaglineAtom () const
+                              { return fTaglineAtom; }
 
     // staves
     // --------------------------------------
@@ -757,15 +775,23 @@ class EXP lpsrOahGroup : public oahGroup
 
     // indents
     msrLength             fPaperHorizontalShift;
+    S_oahLengthAtom       fPaperHorizontalShiftAtom;
 
     msrLength             fPaperIndent;
+    S_oahLengthAtom       fPaperIndentAtom;
+
     msrLength             fPaperShortIndent;
+    S_oahLengthAtom       fPaperShortIndentAtom;
 
     // spaces
     msrLength             fMarkupSystemSpacingPadding;
+    S_oahLengthAtom       fMarkupSystemSpacingPaddingAtom;
 
     msrLength             fBetweenSystemSpace;
-    msrLength             fPageTopSpace;
+    S_oahLengthAtom       fBetweenSystemSpaceAtom;
+
+    msrLength             fPageTopSpacing;
+    S_oahLengthAtom       fPageTopSpacingAtom;
 
     // counts
     int                   fPageCount;   // 0 by default
@@ -789,6 +815,7 @@ class EXP lpsrOahGroup : public oahGroup
 
     // tag line
     Bool                  fTagline;
+    S_oahBooleanAtom      fTaglineAtom;
 
     // measures
     // --------------------------------------

@@ -35,7 +35,7 @@ void waeWarning (
   const string& message)
 {
   if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-    int saveIndent = gIndenter.getIndent ();
+    int saveIndent = gIndenter.getIndentation ();
 
     gIndenter.resetToZero ();
 
@@ -46,7 +46,7 @@ void waeWarning (
 
     gGlobalWarningsInputLineNumbers.insert (inputLineNumber);
 
-    gIndenter.setIndent (saveIndent);
+    gIndenter.setIndentation (saveIndent);
   }
 }
 
@@ -57,7 +57,7 @@ void waeInternalWarning (
   const string& message)
 {
   if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-    int saveIndent = gIndenter.getIndent ();
+    int saveIndent = gIndenter.getIndentation ();
 
     gIndenter.resetToZero ();
 
@@ -69,7 +69,7 @@ void waeInternalWarning (
     gGlobalWarningsInputLineNumbers.insert (
       inputLineNumber);
 
-    gIndenter.setIndent (saveIndent);
+    gIndenter.setIndentation (saveIndent);
   }
 }
 
@@ -90,7 +90,7 @@ void waeErrorWithoutException (
     }
 
     if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
-      int saveIndent = gIndenter.getIndent ();
+      int saveIndent = gIndenter.getIndentation ();
 
       gIndenter.resetToZero ();
 
@@ -99,7 +99,7 @@ void waeErrorWithoutException (
         inputSourceName << ":" << inputLineNumber << ": " << message <<
         endl;
 
-      gIndenter.setIndent (saveIndent);
+      gIndenter.setIndentation (saveIndent);
 
       gGlobalErrorsInputLineNumbers.insert (
         inputLineNumber);

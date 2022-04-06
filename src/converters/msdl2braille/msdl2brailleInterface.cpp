@@ -565,7 +565,7 @@ mfMusicformatsError convertMsdlStream2brailleWithOptionsAndArguments (
       "### " <<
       serviceName <<
       " gIndenter value after options ands arguments checking: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 

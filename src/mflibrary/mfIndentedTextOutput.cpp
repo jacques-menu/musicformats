@@ -27,7 +27,7 @@ mfOutputIndenter mfOutputIndenter::gGlobalOStreamIndenter;
 
 mfOutputIndenter::mfOutputIndenter (string spacer)
 {
-  fIndent = 0;
+  fIndentation = 0;
   fSpacer = spacer;
 }
 
@@ -45,15 +45,15 @@ mfOutputIndenter& mfOutputIndenter::operator++ ()
 {
 #ifdef DEBUG_INDENTER
   gLogStream <<
-    "% Incrementing INDENTER: " << fIndent <<
+    "% Incrementing INDENTER: " << fIndentation <<
     endl;
 #endif
 
-  ++fIndent;
+  ++fIndentation;
 
 #ifdef DEBUG_INDENTER
   gLogStream <<
-    "% INDENTER: " << fIndent <<
+    "% INDENTER: " << fIndentation <<
     endl;
 #endif
 
@@ -65,16 +65,16 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 {
 #ifdef DEBUG_INDENTER
   gLogStream <<
-    "% Decrementing INDENTER: " << fIndent <<
+    "% Decrementing INDENTER: " << fIndentation <<
     endl;
 #endif
 
-  --fIndent;
+  --fIndentation;
 
-  if (fIndent < 0) {
+  if (fIndentation < 0) {
     gLogStream <<
       endl <<
-      "% ### Indentation has become negative: " <<  fIndent <<
+      "% ### Indentation has become negative: " <<  fIndentation <<
       endl << endl;
 
 #ifdef DEBUG_INDENTER
@@ -88,7 +88,7 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 #ifdef DEBUG_INDENTER
   else {
     gLogStream <<
-      "% INDENTER: " << fIndent <<
+      "% INDENTER: " << fIndentation <<
       endl;
   }
 #endif
@@ -99,11 +99,11 @@ mfOutputIndenter& mfOutputIndenter::operator-- ()
 // increase the indentation by 1, postfix operator
 mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
 {
-  ++fIndent;
+  ++fIndentation;
 
 #ifdef DEBUG_INDENTER
   gLogStream <<
-    "% INDENTER: " << fIndent <<
+    "% INDENTER: " << fIndentation <<
     endl;
 #endif
 
@@ -113,12 +113,12 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator++ (int)
 // decrease the indentation by 1, postfix operator
 mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
 {
-  --fIndent;
+  --fIndentation;
 
-  if (fIndent < 0) {
+  if (fIndentation < 0) {
     gLogStream <<
       endl <<
-      "% ### Indentation has become negative: " <<  fIndent <<
+      "% ### Indentation has become negative: " <<  fIndentation <<
       endl << endl;
 
 #ifdef DEBUG_INDENTER
@@ -132,7 +132,7 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
 #ifdef DEBUG_INDENTER
   else {
     gLogStream <<
-      "% INDENTER: " << fIndent <<
+      "% INDENTER: " << fIndentation <<
       endl;
   }
 #endif
@@ -142,12 +142,12 @@ mfOutputIndenter mfOutputIndenter::mfOutputIndenter::operator-- (int)
 
 mfOutputIndenter& mfOutputIndenter::increment (int value)
 {
-  fIndent += value;
+  fIndentation += value;
 
-  if (fIndent < 0) {
+  if (fIndentation < 0) {
     gLogStream <<
       endl <<
-      "% ### Indentation has become negative: " <<  fIndent <<
+      "% ### Indentation has become negative: " <<  fIndentation <<
       endl << endl;
 
 #ifdef DEBUG_INDENTER
@@ -161,7 +161,7 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
 #ifdef DEBUG_INDENTER
   else {
     gLogStream <<
-      "% INDENTER: " << fIndent <<
+      "% INDENTER: " << fIndentation <<
       endl;
   }
 #endif
@@ -171,12 +171,12 @@ mfOutputIndenter& mfOutputIndenter::increment (int value)
 
 mfOutputIndenter& mfOutputIndenter::decrement (int value)
 {
-  fIndent -= value;
+  fIndentation -= value;
 
-  if (fIndent < 0) {
+  if (fIndentation < 0) {
     gLogStream <<
       endl <<
-      "% ### Indentation has become negative: " <<  fIndent <<
+      "% ### Indentation has become negative: " <<  fIndentation <<
       endl << endl;
 
 #ifdef DEBUG_INDENTER
@@ -190,7 +190,7 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
 #ifdef DEBUG_INDENTER
   else {
     gLogStream <<
-      "% INDENTER: " << fIndent <<
+      "% INDENTER: " << fIndentation <<
       endl;
   }
 #endif
@@ -254,7 +254,7 @@ string mfOutputIndenter::indentInitialSpacerIfNeededAndMultiLineString (
 
 void mfOutputIndenter::print (ostream& os) const
 {
-  int i = fIndent;
+  int i = fIndentation;
 
   while (i-- > 0) os << fSpacer;
 }

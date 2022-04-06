@@ -908,7 +908,8 @@ class EXP lpsr2lilypondTranslator :
     string                stemAsLilypondString (
                             msrStem::msrStemKind stemKind);
 
-    void                  generateStemIfNeededAndUpdateCurrentStemKind (S_msrStem stem);
+    void                  generateStemIfNeededAndUpdateCurrentStemKind (
+                            S_msrStem stem);
 
     // articulations
 
@@ -948,10 +949,9 @@ class EXP lpsr2lilypondTranslator :
     msrPlacementKind      fCurrentSpannerPlacementKind;
 
     void                  generateBeforeNoteSpannersIfAny (
-
                             S_msrNote note);
-    void                  generateAfterNoteSpannersIfAny (
 
+    void                  generateAfterNoteSpannersIfAny (
                             S_msrNote note);
 
     void                  generateCodeForSpannerBeforeNote (

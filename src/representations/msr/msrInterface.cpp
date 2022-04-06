@@ -140,7 +140,7 @@ void displayMsrScore_OptionalPass (
 
       s <<
         "gIndenter value after " << optionalPassDescription << ": " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       msrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -214,7 +214,7 @@ void displayMsrScoreShort_OptionalPass (
 
       s <<
         "gIndenter value after " << optionalPassDescription << ": " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       msrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -289,7 +289,7 @@ void displayMsrScoreSlices (
 
       s <<
         "gIndenter value after " << optionalPassDescription << ": " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       msrWarning (
         gGlobalServiceRunData->getInputSourceName (),

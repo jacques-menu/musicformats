@@ -134,24 +134,32 @@ This option implies the '-display-tool-and-input, -ttai' option.)",
         fNoLaunch,
         fDisplayToolAndInputAtom));
 
-  fSelectChoiceToLabelsMapAtom =
-    oahStringToStringMapElementAtom::create (
+  fSelectChoiceToLabelsMultiMapAtom =
+    oahStringToStringMultiMapElementAtom::create (
       "select", "sel",
 R"(Select LABEL for choice CHOICE.
-The tool will be run once using the corresponding options block(s).)",
+The tool will be run using the corresponding options block(s).
+This option cannot be used at the same time as the '-every' option.
+There can be several occurrences of this option,
+in which case the tool will be run several times.)",
       "CHOICE:LABEL",
-      "fSelectChoiceToLabelsMap",
-      fSelectChoiceToLabelsMap);
+      "fSelectChoiceToLabelsMultiMap",
+      fSelectChoiceToLabelsMultiMap);
+
+  fSelectChoiceToLabelsMultiMapAtom->
+      setMultipleOccurrencesAllowed ();
 
   subGroup->
     appendAtomToSubGroup (
-      fSelectChoiceToLabelsMapAtom);
+      fSelectChoiceToLabelsMultiMapAtom);
 
   fEveryChoiceAtom =
     oahStringAtom::create (
       "every", "",
 R"(Select every label for choice CHOICE in turn.
-The tool will be run as many times, using the corresponding options block(s).)",
+The tool will be run as many times, using the corresponding options block(s).
+This option cannot be used at the same time as the '-select, -sel' option.
+There can be only one instance of this option.)",
       "CHOICE",
       "fEveryChoice",
       fEveryChoice);
@@ -220,12 +228,12 @@ void mfslInterpreterOahGroup::enforceGroupQuietness ()
 void mfslInterpreterOahGroup::checkGroupOptionsConsistency ()
 {
   if (
-    fSelectChoiceToLabelsMapAtom->getSetByAnOption ()
+    fSelectChoiceToLabelsMultiMapAtom->getSetByAnOption ()
       &&
     fEveryChoiceAtom->getSetByAnOption ()
   ) {
     mfslOptionsIncompatibilityError (
-      fSelectChoiceToLabelsMapAtom,
+      fSelectChoiceToLabelsMultiMapAtom,
       fEveryChoiceAtom);
   }
 }
@@ -351,7 +359,7 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
 
   --gIndenter;
 
-  // Choice
+  // choice
   // --------------------------------------
 
   gLogStream <<
@@ -361,12 +369,12 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fSelectChoiceToLabelsMap" << " : ";
+    setw (fieldWidth) << "fSelectChoiceToLabelsMultiMap" << " : ";
 
   ++gIndenter;
 
-  if (fSelectChoiceToLabelsMap.size ()) {
-    for (pair<string, string> thePair : fSelectChoiceToLabelsMap) {
+  if (fSelectChoiceToLabelsMultiMap.size ()) {
+    for (pair<string, string> thePair : fSelectChoiceToLabelsMultiMap) {
       gLogStream <<
         thePair.first << " : " << thePair.second <<
         endl;

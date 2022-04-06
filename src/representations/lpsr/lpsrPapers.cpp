@@ -96,8 +96,8 @@ S_lpsrPaper lpsrPaper::createPaperNewbornClone ()
     fMarkupSystemSpacingPadding;
   newbornClone->fBetweenSystemSpace =
     fBetweenSystemSpace;
-  newbornClone->fPageTopSpace =
-    fPageTopSpace;
+  newbornClone->fPageTopSpacing =
+    fPageTopSpacing;
 
   // counts
   newbornClone->fPageCount =
@@ -303,9 +303,9 @@ void lpsrPaper::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fPageTopSpace" << " : ";
-  if (fPageTopSpace) {
-    os << fPageTopSpace;
+    "fPageTopSpacing" << " : ";
+  if (fPageTopSpacing) {
+    os << fPageTopSpacing;
   }
   else {
     os << "none";
@@ -482,9 +482,9 @@ void lpsrPaper::printShort (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fPageTopSpace" << " : ";
-  if (fPageTopSpace) {
-    os << fPageTopSpace;
+    "fPageTopSpacing" << " : ";
+  if (fPageTopSpacing) {
+    os << fPageTopSpacing;
   }
   else {
     os << "none";

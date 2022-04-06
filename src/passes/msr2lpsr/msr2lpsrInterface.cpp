@@ -114,7 +114,7 @@ S_lpsrScore translateMsrToLpsr (
 
       s <<
         "gIndenter value after pass 3: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       msr2lpsrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -140,7 +140,7 @@ S_lpsrScore translateMsrToLpsr (
   if (gIndenter != 0) {
     gLogStream <<
       "### translateMsrToLpsrScore gIndenter final value: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 

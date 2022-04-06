@@ -10,11 +10,13 @@
 
     - a number of MusicFormats options;
 
-    - a SCORE choice specification containing 5 label,
+    - a SCORE choice specification containing 5 labels,
       each telling which options to use
       to get a score generated with this script and xml2ly/LilyPond;
 
-    - a 'select' specification to choose one such SCORE label;
+    - a number of 'select' specifications to choose one or more such SCORE label;
+
+    - an 'every' statement to choose all labels in choice SCORE.
 ###
 
 
@@ -53,11 +55,15 @@ input : "Hymn121.xml"
 # the labels for the SCORE choice
 # ----------------------------------------------------------
 
-# choose names that match the intent,
-# uppercase to emphasize a choice name is a matter of taste
+# choose names that match the intent
+# using uppercase to emphasize a choice name is a matter of taste
 
 choice SCORE :
-  tutti | soprano | alto | tenor | bass,
+  tutti |
+
+  soprano | alto | tenor | bass |
+
+  sopranoAndAlto | tenorAndBass,
 
   default: tutti
 ;
@@ -72,17 +78,22 @@ case SCORE :
 	  -output-file-name "Hymn121_SATB_tutti.ly"
 
     -global-staff-size 17.675
+
     -subtitle "Tutti"
+
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
   ;
 
 	soprano:
 	  -output-file-name "Hymn121_SATB_soprano.ly"
 
-    -subtitle '\markup { "B" \hspace #-0.375 \raise #1.5 {\flat} " instruments" }'
+    -subtitle "Soprano"
     -keep-musicxml-part-id P1
+
     -msr-rename-part "P1:soprano"
 
-#     -display-lpsr-short
+    -lpsr-staff-instrument-name "Voice 1:"  # an empty name
   ;
 
 	alto:
@@ -90,6 +101,10 @@ case SCORE :
 
     -subtitle "Alto"
     -keep-musicxml-part-id P2
+
+    -msr-rename-part "P2:alto"
+
+    -lpsr-staff-instrument-name "Voice 2:"  # an empty name
   ;
 
 	tenor:
@@ -98,7 +113,11 @@ case SCORE :
     -subtitle "Tenor"
     -keep-musicxml-part-id P3
 
+    -msr-rename-part "P3:tenor"
+
     -global-staff-size 23 # an easier-to-read score is needed
+
+    -lpsr-staff-instrument-name "Voice 3:"  # an empty name
   ;
 
 	bass:
@@ -107,7 +126,45 @@ case SCORE :
     -subtitle "Bass"
     -keep-musicxml-part-id P4
 
-    -ignore-musicxml-lyrics # there's a glitch at the last measure
+    -msr-rename-part "P4:bass"
+
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
+
+    -lpsr-staff-instrument-name "Voice 4:"  # an empty name
+
+    -indent '0\cm'
+  ;
+
+  sopranoAndAlto:
+	  -output-file-name "Hymn121_SATB_sopranoAndAlto.ly"
+
+    -subtitle 'Soprano and alto'
+
+    -keep-musicxml-part-id P1
+    -msr-rename-part "P1:soprano"
+    -lpsr-staff-instrument-name "Voice 1:Soprano"
+
+    -keep-musicxml-part-id P2
+    -msr-rename-part "P2:alto"
+    -lpsr-staff-instrument-name "Voice 2:Alto"
+  ;
+
+  tenorAndBass:
+	  -output-file-name "Hymn121_SATB_tenorAndBass.ly"
+
+    -subtitle 'Tenor and bass'
+
+    -keep-musicxml-part-id P3
+    -msr-rename-part "P3:tenor"
+    -lpsr-staff-instrument-name "Voice 3:Tenor"
+
+    -keep-musicxml-part-id P4
+    -msr-rename-part "P4:bass"
+    -lpsr-staff-instrument-name "Voice 4:Bass"
+
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
   ;
 ;
 
@@ -118,27 +175,31 @@ case SCORE :
 
 ###
   Comment/uncomment the statements below to choose
-  either a particular SCORE or every one of them to be generated.
-  Only one of 'select' and 'every' can be used.
+  either individual SCORE labels or every one of them.
+  A group of 'select' statements and an 'every' statement
+  are mutually exclusive.
 
-  The 'select' statement chooses one particular score, overriding
-  the default "tutti" label setting in the 'choice' statement.
+  The 'select' statements choose one particular label each,
+  overriding the default "tutti" label setting in the 'choice' statement.
 
-  This can also be done with an option to the MFSL interpreter such as:
-    -select SCORE:tenor
+  This can also be done with the '-select, -sel' option to the MFSL interpreter,
+  such as:
+    -select SCORE:tenor -select SCORE:alto
 
-  The 'every' statement causes all possible scores for the given choice
-  to be generated.
+  The 'every' statement causes all the existing labels for the given choice
+  to be selected.
 
   This can also be done with this option to the MFSL interpreter:
     -every SCORE
 ###
 
-# select SCORE : tutti ; # superflous actually
+# select SCORE : tutti ;
 # select SCORE : soprano ;
 # select SCORE : alto ;
 # select SCORE : tenor ;
 # select SCORE : bass ;
 
-# every SCORE ;
+# select SCORE: sopranoAndAlto ;
+# select SCORE: tenorAndBass ;
 
+every SCORE ;

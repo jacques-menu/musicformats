@@ -108,7 +108,7 @@ void populateMsrSkeletonFromMxsr (
   if (gIndenter != 0) {
     gLogStream <<
       "### populateMsrSkeletonFromMxsr gIndenter final value: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 

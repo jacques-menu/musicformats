@@ -21196,16 +21196,16 @@ void mxsr2msrTranslator::handleBackup (
   }
 #endif
 
-  S_msrVoice
-    currentVoice =
-      fetchVoiceFromCurrentPart (
-        inputLineNumber,
-        fCurrentStaffNumberToInsertInto,
-        fCurrentMusicXMLVoiceNumber);
-
-  // are there pending note level elements?
-  attachPendingNoteLevelElementsToNote ( // JMI
-    fCurrentNonGraceNote);
+//   S_msrVoice
+//     currentVoice =
+//       fetchVoiceFromCurrentPart (
+//         inputLineNumber,
+//         fCurrentStaffNumberToInsertInto,
+//         fCurrentMusicXMLVoiceNumber);
+//
+//   // are there pending note level elements?
+//   attachPendingNoteLevelElementsToNote ( // JMI
+//     fCurrentNonGraceNote);
 
   // is there a pending grace notes group?
   attachPendingGraceNotesGroupToNoteIfRelevant (

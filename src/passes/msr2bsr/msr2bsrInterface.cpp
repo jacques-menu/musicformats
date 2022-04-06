@@ -101,7 +101,7 @@ S_bsrScore translateMsrToBsr (
 
       s <<
         "gIndenter value after pass 3a: " <<
-        gIndenter.getIndent ();
+        gIndenter.getIndentation ();
 
       msr2bsrWarning (
         gGlobalServiceRunData->getInputSourceName (),
@@ -127,7 +127,7 @@ S_bsrScore translateMsrToBsr (
   if (gIndenter != 0) {
     gLogStream <<
       "### translateMsrToBsr gIndenter final value: " <<
-      gIndenter.getIndent () <<
+      gIndenter.getIndentation () <<
       " ###" <<
       endl;
 

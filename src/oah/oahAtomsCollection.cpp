@@ -554,7 +554,7 @@ void oahOptionsUsageAtom::applyElement (ostream& os)
 
 void oahOptionsUsageAtom::printOptionsUsage (ostream& os) const
 {
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
@@ -606,7 +606,7 @@ as is the case of https://libmusicxml.grame.fr .)",
 
   --gIndenter;
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahOptionsUsageAtom::acceptIn (basevisitor* v)
@@ -738,14 +738,14 @@ void oahHelpAtom::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
   fetchAtomHandlerUpLink ()->
     printHelp (os);
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahHelpAtom::acceptIn (basevisitor* v)
@@ -884,14 +884,14 @@ void oahHelpSummaryAtom::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
   fetchAtomHandlerUpLink ()->
     printOptionsSummary (os);
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahHelpSummaryAtom::acceptIn (basevisitor* v)
@@ -1028,13 +1028,13 @@ void oahAboutAtom::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
   printAbout (os);
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahAboutAtom::acceptIn (basevisitor* v)
@@ -1201,7 +1201,7 @@ void oahVersionAtom::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
@@ -1214,7 +1214,7 @@ void oahVersionAtom::applyElement (ostream& os)
       break;
   } // switch
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahVersionAtom::acceptIn (basevisitor* v)
@@ -1380,13 +1380,13 @@ void oahLibraryVersionAtom::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
   printVersion (os);
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahLibraryVersionAtom::acceptIn (basevisitor* v)
@@ -1534,13 +1534,13 @@ void oahHistoryAtom::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
   printHistory (os);
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahHistoryAtom::acceptIn (basevisitor* v)
@@ -1688,13 +1688,13 @@ void oahLibraryHistoryAtom::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
   printHistory (os);
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahLibraryHistoryAtom::acceptIn (basevisitor* v)
@@ -1843,13 +1843,13 @@ void oahContactAtom::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
   printContact (os);
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahContactAtom::acceptIn (basevisitor* v)
@@ -1994,13 +1994,13 @@ void oahDisplayPrefixes::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
   printPrefixes (os);
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahDisplayPrefixes::acceptIn (basevisitor* v)
@@ -2142,13 +2142,13 @@ void oahDisplaySingleCharacterOptions::applyElement (ostream& os)
   }
 #endif
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
   printSingleCharacterOptions (os);
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahDisplaySingleCharacterOptions::acceptIn (basevisitor* v)
@@ -3499,7 +3499,7 @@ void oahCombinedBooleansAtom::printAtomWithVariableOptionsValues (
   int      valueFieldWidth) const
 {
   int fieldWidth =
-    valueFieldWidth - gIndenter.getIndent () + 1;
+    valueFieldWidth - gIndenter.getIndentation () + 1;
 
   ++gIndenter; // only now
 
@@ -7936,6 +7936,349 @@ ostream& operator<< (ostream& os, const S_oahStringToStringMapElementAtom& elt)
 }
 
 //______________________________________________________________________________
+S_oahStringToStringMultiMapElementAtom oahStringToStringMultiMapElementAtom::create (
+    const string&         longName,
+    const string&         shortName,
+    const string&         description,
+    const string&         valueSpecification,
+    const string&         variableName,
+    multimap<string, string>&  stringToStringMultiMapVariable)
+{
+  oahStringToStringMultiMapElementAtom* o = new
+    oahStringToStringMultiMapElementAtom (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName,
+      stringToStringMultiMapVariable);
+  assert (o != nullptr);
+  return o;
+}
+
+oahStringToStringMultiMapElementAtom::oahStringToStringMultiMapElementAtom (
+    const string&         longName,
+    const string&         shortName,
+    const string&         description,
+    const string&         valueSpecification,
+    const string&         variableName,
+    multimap<string, string>&  stringToStringMultiMapVariable)
+  : oahAtomStoringAValue (
+      longName,
+      shortName,
+      description,
+      valueSpecification,
+      variableName),
+    fStringToStringMultiMapVariable (
+      stringToStringMultiMapVariable)
+{
+  fMultipleOccurrencesAllowed = true;
+}
+
+oahStringToStringMultiMapElementAtom::~oahStringToStringMultiMapElementAtom ()
+{}
+
+void oahStringToStringMultiMapElementAtom::applyAtomWithValue (
+  const string& theString,
+  ostream&      os)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "==> oahAtom is of type 'oahStringToStringMultiMapElementAtom'" <<
+      endl;
+  }
+#endif
+
+  // theString contains the string string multimap specification
+  // decipher it to extract duration and perSecond values
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "==> oahAtom is of type 'oahStringToStringMultiMapElementAtom'" <<
+      endl;
+  }
+#endif
+
+  string regularExpression (
+    "[[:space:]]*"
+    "([[:w:]]+)"      // string
+    "[[:space:]]*"
+    ":"
+    "[[:space:]]*"
+    "([[:w:]]+)"      // string
+    "[[:space:]]*"
+    );
+
+  regex  e (regularExpression);
+  smatch sm;
+
+  regex_match (theString, sm, e);
+
+  size_t smSize = sm.size ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "There are " << smSize << " matches" <<
+      " for " <<
+      fetchNamesBetweenQuotes () <<
+      " string \"" << theString <<
+      "\" with regex \"" << regularExpression <<
+      "\":" <<
+      endl;
+
+    ++gIndenter;
+
+    for (unsigned i = 0; i < smSize; ++i) {
+      gLogStream <<
+        i << ": " << "\"" << sm [i] << "\"" <<
+        endl;
+    } // for
+    gLogStream << endl;
+
+    --gIndenter;
+  }
+#endif
+
+  if (smSize != 3) {
+    stringstream s;
+
+    s <<
+      fetchNamesBetweenQuotes () <<
+      " argument \"" <<
+      theString <<
+      "\" is ill-formed";
+
+    oahError (s.str ());
+  }
+
+  string
+    key   = sm [1],
+    value = sm [2];
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "key = " <<
+      key <<
+      endl <<
+      "value = " <<
+      value <<
+      endl;
+  }
+#endif
+
+  fStringToStringMultiMapVariable.insert (
+    pair<string, string> (key, value));
+  fSetByAnOption = true;
+}
+
+void oahStringToStringMultiMapElementAtom::acceptIn (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahStringToStringMultiMapElementAtom::acceptIn ()" <<
+      endl;
+  }
+#endif
+
+  if (visitor<S_oahStringToStringMultiMapElementAtom>*
+    p =
+      dynamic_cast<visitor<S_oahStringToStringMultiMapElementAtom>*> (v)) {
+        S_oahStringToStringMultiMapElementAtom elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahStringToStringMultiMapElementAtom::visitStart ()" <<
+            endl;
+        }
+#endif
+        p->visitStart (elem);
+  }
+}
+
+void oahStringToStringMultiMapElementAtom::acceptOut (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahStringToStringMultiMapElementAtom::acceptOut ()" <<
+      endl;
+  }
+#endif
+
+  if (visitor<S_oahStringToStringMultiMapElementAtom>*
+    p =
+      dynamic_cast<visitor<S_oahStringToStringMultiMapElementAtom>*> (v)) {
+        S_oahStringToStringMultiMapElementAtom elem = this;
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+          gLogStream <<
+            ".\\\" ==> Launching oahStringToStringMultiMapElementAtom::visitEnd ()" <<
+            endl;
+        }
+#endif
+        p->visitEnd (elem);
+  }
+}
+
+void oahStringToStringMultiMapElementAtom::browseData (basevisitor* v)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+    gLogStream <<
+      ".\\\" ==> oahStringToStringMultiMapElementAtom::browseData ()" <<
+      endl;
+  }
+#endif
+}
+
+string oahStringToStringMultiMapElementAtom::asShortNamedOptionString () const
+{
+  stringstream s;
+
+  s <<
+    '-' << fShortName << ' ';
+
+  if (! fStringToStringMultiMapVariable.size ()) {
+    s << "empty";
+  }
+  else {
+    multimap<string, string>::const_iterator
+      iBegin = fStringToStringMultiMapVariable.begin (),
+      iEnd   = fStringToStringMultiMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      s << (*i).first << "=" << (*i).second;
+      if (++i == iEnd) break;
+      s << ",";
+    } // for
+  }
+
+  return s.str ();
+}
+
+string oahStringToStringMultiMapElementAtom::asActualLongNamedOptionString () const
+{
+  stringstream s;
+
+  s <<
+    '-' << fLongName << ' ';
+
+  if (! fStringToStringMultiMapVariable.size ()) {
+    s << "empty";
+  }
+  else {
+    multimap<string, string>::const_iterator
+      iBegin = fStringToStringMultiMapVariable.begin (),
+      iEnd   = fStringToStringMultiMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      s << (*i).first << "=" << (*i).second;
+      if (++i == iEnd) break;
+      s << ",";
+    } // for
+  }
+
+  return s.str ();
+}
+
+void oahStringToStringMultiMapElementAtom::print (ostream& os) const
+{
+  const int fieldWidth = K_OAH_FIELD_WIDTH;
+
+  os <<
+    "StringToStringMultiMapAtom:" <<
+    endl;
+
+  ++gIndenter;
+
+  printAtomWithVariableEssentials (
+    os, fieldWidth);
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fStringToStringMultiMapVariable" << " : ";
+
+  if (! fStringToStringMultiMapVariable.size ()) {
+    os << "empty" << endl;
+  }
+  else {
+    os << endl;
+    ++gIndenter;
+
+    multimap<string, string>::const_iterator
+      iBegin = fStringToStringMultiMapVariable.begin (),
+      iEnd   = fStringToStringMultiMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os <<
+        (*i).first << " --> " << (*i).second <<
+        endl;
+      if (++i == iEnd) break;
+//       os << endl; // JMI
+    } // for
+
+    --gIndenter;
+  }
+
+  os << endl;
+  --gIndenter;
+}
+
+void oahStringToStringMultiMapElementAtom::printAtomWithVariableOptionsValues (
+  ostream& os,
+  int      valueFieldWidth) const
+{
+  os << left <<
+    setw (valueFieldWidth) <<
+    fVariableName <<
+    " : ";
+
+  if (! fStringToStringMultiMapVariable.size ()) {
+    os <<
+      "empty" <<
+      endl;
+  }
+  else {
+    os << endl;
+    ++gIndenter;
+
+    multimap<string, string>::const_iterator
+      iBegin = fStringToStringMultiMapVariable.begin (),
+      iEnd   = fStringToStringMultiMapVariable.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      os <<
+        "\"" <<
+        (*i).first <<
+        "\" --> \"" <<
+        (*i).second <<
+        "\"" <<
+        endl;
+      if (++i == iEnd) break;
+    } // for
+
+    os <<
+      "set by user" <<
+      endl;
+
+    --gIndenter;
+  }
+}
+
+ostream& operator<< (ostream& os, const S_oahStringToStringMultiMapElementAtom& elt)
+{
+  elt->print (os);
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahStringAndIntegerAtom oahStringAndIntegerAtom::create (
   const string& longName,
   const string& shortName,
@@ -9834,7 +10177,7 @@ void oahFindStringAtom::applyAtomWithValue (
   size_t foundStringsListSize =
     foundStringsList.size ();
 
-  int saveIndent = gIndenter.getIndent ();
+  int saveIndent = gIndenter.getIndentation ();
 
   gIndenter.resetToZero ();
 
@@ -9893,7 +10236,7 @@ void oahFindStringAtom::applyAtomWithValue (
     os << endl;
   }
 
-  gIndenter.setIndent (saveIndent);
+  gIndenter.setIndentation (saveIndent);
 }
 
 void oahFindStringAtom::acceptIn (basevisitor* v)
