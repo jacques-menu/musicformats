@@ -57,7 +57,7 @@ EXP int mfExecuteCommand (
     COMMAND_STRING_BUFFER_SIZE = 1024;
   char*
     commandStringBuffer =
-      new char (COMMAND_STRING_BUFFER_SIZE);
+      new char [COMMAND_STRING_BUFFER_SIZE];
 
   mfCharStarCat (
     commandStringBuffer,

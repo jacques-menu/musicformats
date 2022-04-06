@@ -1019,7 +1019,7 @@ class EXP lpsr2lilypondTranslator :
 
     S_msrFiguredBassElement
                           fCurrentFiguredBass;
-    int                   fCurrentFiguredBassFiguresCounter;
+    size_t                fCurrentFiguredBassFiguresCounter;
 
   private:
 

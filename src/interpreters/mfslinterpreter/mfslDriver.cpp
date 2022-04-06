@@ -9,7 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <sys/wait.h> // wait()
 #include <unistd.h>   // sleep()
 
 #include "mfAssert.h"
@@ -823,15 +822,10 @@ mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
           mfMusicformatsError::kErrorInvalidFile;
       }
 
-//       // wait for child termination
-//       int waitStatus;
-//
-//       pid_t
-//         pid = wait (&waitStatus);
-
-      // sleep for 1 second
+      // sleep for 1 second JMI
       unsigned int
-        sleepResult = sleep (1);
+        sleepResult =  // unused afterwards JMI
+          sleep (1);
     } // for
   }
 

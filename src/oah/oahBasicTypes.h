@@ -1514,10 +1514,10 @@ class EXP oahHandler : public smartable
                               { return fHandlerCommandLineElementsMultiset; }
 
     // widths and sizes
-    int                   getMaximumShortNameWidth () const
+    size_t                getMaximumShortNameWidth () const
                               { return fMaximumShortNameWidth; }
 
-    int                   getMaximumLongNameWidth () const
+    size_t                getMaximumLongNameWidth () const
                               { return fMaximumLongNameWidth; }
 
     int                   getMaximumSubGroupsHeadersSize () const
@@ -1881,7 +1881,7 @@ class EXP oahHandler : public smartable
                             string                        serviceName,
                             const oahOptionsAndArguments& optionsAndArguments);
 
-    int                   getMaximumVariableNameWidth () const
+    size_t                getMaximumVariableNameWidth () const
                               { return fMaximumVariableNameWidth; }
 
   private:
@@ -1908,12 +1908,12 @@ class EXP oahHandler : public smartable
 //     Bool                  fNowEverythingIsAnArgument; // JMI ???
 
     // sizes and widths
-    int                   fMaximumSubGroupsHeadersSize;
+    size_t                fMaximumSubGroupsHeadersSize;
 
-    int                   fMaximumShortNameWidth;
-    int                   fMaximumLongNameWidth;
+    size_t                fMaximumShortNameWidth;
+    size_t                fMaximumLongNameWidth;
 
-    int                   fMaximumVariableNameWidth;
+    size_t                fMaximumVariableNameWidth;
 
     // elements uses
     list<S_oahElementUse> fElementUsesList;

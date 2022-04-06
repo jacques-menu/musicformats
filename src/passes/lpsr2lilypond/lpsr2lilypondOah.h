@@ -1360,9 +1360,9 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     const set<string>&    getShowNumbersAtMeasureSet () const
                               { return fShowNumbersAtMeasureSet; }
 
-    void                  setBarNumbersSize (int value)
+    void                  setBarNumbersSize (float value)
                               { fBarNumbersSize = value; }
-    int                   getBarNumbersSize () const
+    float                 getBarNumbersSize () const
                               { return fBarNumbersSize; }
 
     S_oahFloatAtom        getBarNumbersSizeAtom () const
