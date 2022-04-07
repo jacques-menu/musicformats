@@ -9,7 +9,18 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include <unistd.h>   // sleep()
+#include <thread>         // std::this_thread::sleep_for
+#include <chrono>         // std::chrono::seconds
+
+/*
+int main()
+{
+  std::cout << "countdown:\n";
+  for (int i=10; i>0; --i) {
+    std::cout << i << std::endl;
+    std::this_thread::sleep_for (std::chrono::seconds(1));
+  }
+*/
 
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
@@ -822,10 +833,8 @@ mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
           mfMusicformatsError::kErrorInvalidFile;
       }
 
-      // sleep for 1 second JMI
-      unsigned int
-        sleepResult =  // unused afterwards JMI
-          sleep (1);
+      // sleep for some milliseconds
+          this_thread::sleep_for (chrono::milliseconds (100));
     } // for
   }
 
