@@ -100,6 +100,16 @@ S_mfcPassComponent createMxsr2msrComponent ()
             "Fixed an issue in scordaturas handling"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.63"),
+          "April 14, 2022",
+          list<string> {
+            "Fixed missing final barline issue"
+          }
+      ));
   }
 
   return pPassComponent;

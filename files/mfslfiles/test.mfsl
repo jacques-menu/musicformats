@@ -1,11 +1,11 @@
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
 
 # the MusicFormats tool to be used
-tool : xml2ly
+tool : xml2ly ;
 
 # the input file
 # input : "HelloWorld.xml"
-input : "Hymn121.xml"
+input : "Hymn121.xml" ;
 
 # output file
   -auto-output-file-name

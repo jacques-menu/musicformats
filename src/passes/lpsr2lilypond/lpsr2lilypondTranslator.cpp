@@ -8843,7 +8843,13 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
     // generate the instrument name
     //* JMI BLARKBLARK
-    if (partName.size ()) {
+    if (
+      partName.size ()
+        ||
+      gGlobalLpsrOahGroup->
+        getLpsrStavesInstrumentsNamesMapAtom ()->
+          getSetByAnOption ()
+    ) {
       fLilypondCodeStream <<
         "instrumentName = ";
 
@@ -8860,10 +8866,11 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
             gGlobalLpsrOahGroup->
               getLpsrStavesInstrumentsNamesMap ();
 
-//         mfDisplayStringToStringMap ( JMI
-//           "--> lpsrStavesInstrumentsNamesMap",
-//           lpsrStavesInstrumentsNamesMap,
-//           gLogStream);
+if (true)
+        mfDisplayStringToStringMap ( // JMI
+          "--> lpsrStavesInstrumentsNamesMap",
+          lpsrStavesInstrumentsNamesMap,
+          gLogStream);
 
         string optionSuppliedInstrumentName;
 
@@ -18153,7 +18160,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
           getNoteOctaveShift ();
 
     if (noteOctaveShift) {
-      generateCodeForOctaveShift (
+      generateCodeForOctaveShiftBeforeNote (
         noteOctaveShift);
     }
   }
@@ -18172,6 +18179,20 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
   // generate things after the note
   generateAfterNoteSpannersIfAny (elt);
   generateCodeRightAfterNote (elt);
+
+  // has the note an octave shift up or down?
+  if (! fOnGoingChord) {
+    // the octave shift for the chords has already been generated
+    S_msrOctaveShift
+      noteOctaveShift =
+        elt->
+          getNoteOctaveShift ();
+
+    if (noteOctaveShift) {
+      generateCodeForOctaveShiftAfterNote (
+        noteOctaveShift);
+    }
+  }
 
 /* JMI
   // get the note's grace notes group after ??? JMI
@@ -19881,7 +19902,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrBeam& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::generateCodeForOctaveShift (
+void lpsr2lilypondTranslator::generateCodeForOctaveShiftBeforeNote (
   S_msrOctaveShift octaveShift)
 {
   msrOctaveShift::msrOctaveShiftKind
@@ -19897,22 +19918,57 @@ void lpsr2lilypondTranslator::generateCodeForOctaveShift (
   switch (octaveShiftKind) {
     case msrOctaveShift::kOctaveShiftNone:
       break;
+
     case msrOctaveShift::kOctaveShiftUp:
       fLilypondCodeStream <<
       "\\ottava #" <<
         '-' << (octaveShiftSize - 1) / 7 << // 1 or 2
         ' ';
       break;
+
     case msrOctaveShift::kOctaveShiftDown:
       fLilypondCodeStream <<
         "\\ottava #" <<
         (octaveShiftSize - 1) / 7 << // 1 or 2
         ' ';
       break;
+
+    case msrOctaveShift::kOctaveShiftStop:
+      break;
+
+    case msrOctaveShift::kOctaveShiftContinue:
+      break;
+  } // switch
+}
+
+void lpsr2lilypondTranslator::generateCodeForOctaveShiftAfterNote (
+  S_msrOctaveShift octaveShift)
+{
+  msrOctaveShift::msrOctaveShiftKind
+    octaveShiftKind =
+      octaveShift->
+        getOctaveShiftKind ();
+
+  int
+    octaveShiftSize =
+      octaveShift->
+        getOctaveShiftSize ();
+
+  switch (octaveShiftKind) {
+    case msrOctaveShift::kOctaveShiftNone:
+      break;
+
+    case msrOctaveShift::kOctaveShiftUp:
+      break;
+
+    case msrOctaveShift::kOctaveShiftDown:
+      break;
+
     case msrOctaveShift::kOctaveShiftStop:
           fLilypondCodeStream <<
             "\\ottava #0 ";
       break;
+
     case msrOctaveShift::kOctaveShiftContinue:
       break;
   } // switch
@@ -20223,7 +20279,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
       chord->getChordOctaveShift ();
 
   if (chordOctaveShift) {
-    generateCodeForOctaveShift (
+    generateCodeForOctaveShiftBeforeNote (
       chordOctaveShift);
   }
 }
@@ -20912,6 +20968,16 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
         " }" <<
         endl;
     } // for
+  }
+
+  // should an octave shift be generated?
+  S_msrOctaveShift
+    chordOctaveShift =
+      chord->getChordOctaveShift ();
+
+  if (chordOctaveShift) {
+    generateCodeForOctaveShiftAfterNote (
+      chordOctaveShift);
   }
 }
 
@@ -21692,7 +21758,6 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
     case msrPedal::k_NoPedalType:
       {
         // should not occur
-
         stringstream s;
 
         s <<

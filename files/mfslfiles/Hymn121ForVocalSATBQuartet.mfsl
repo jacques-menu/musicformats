@@ -14,9 +14,8 @@
       each telling which options to use
       to get a score generated with this script and xml2ly/LilyPond;
 
-    - a number of 'select' specifications to choose one or more such SCORE label;
-
-    - an 'every' statement to choose all labels in choice SCORE.
+    - a number of 'select' specifications to choose one or more
+      such SCORE label, or all of them;
 ###
 
 
@@ -24,14 +23,14 @@
 # the MusicFormats tool to be used
 # ----------------------------------------------------------
 
-tool : xml2ly
+tool : xml2ly ;
 
 
 # ----------------------------------------------------------
 # the input file to be handled by the tool
 # ----------------------------------------------------------
 
-input : "Hymn121.xml"
+input : "Hymn121.xml" ;
 
 
 # ----------------------------------------------------------
@@ -175,22 +174,14 @@ case SCORE :
 
 ###
   Comment/uncomment the statements below to choose
-  either individual SCORE labels or every one of them.
-  A group of 'select' statements and an 'every' statement
-  are mutually exclusive.
+  either individual SCORE labels or all of them.
 
-  The 'select' statements choose one particular label each,
+  The 'select' statements choose one particular label of all of them,
   overriding the default "tutti" label setting in the 'choice' statement.
 
   This can also be done with the '-select, -sel' option to the MFSL interpreter,
   such as:
     -select SCORE:tenor -select SCORE:alto
-
-  The 'every' statement causes all the existing labels for the given choice
-  to be selected.
-
-  This can also be done with this option to the MFSL interpreter:
-    -every SCORE
 ###
 
 # select SCORE : tutti ;
@@ -202,4 +193,4 @@ case SCORE :
 # select SCORE: sopranoAndAlto ;
 # select SCORE: tenorAndBass ;
 
-every SCORE ;
+# select SCORE: all ;

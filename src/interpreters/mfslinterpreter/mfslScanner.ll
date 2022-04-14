@@ -400,7 +400,7 @@ loc.step ();
     yy::parser::make_SELECT (loc);
 }
 
-"every" {
+"all" {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
     ": " << yytext <<
@@ -411,7 +411,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_EVERY (loc);
+    yy::parser::make_ALL (loc);
 }
 
 
@@ -553,11 +553,11 @@ void mfslDriver::scanBegin ()
 {
   yy_flex_debug = fTraceScanning;
 
-  if (fScriptSourceName.empty () || fScriptSourceName == "-") {
+  if (fScriptName.empty () || fScriptName == "-") {
     yyin = stdin;
   }
 
-  else if (!(yyin = fopen (fScriptSourceName.c_str (), "r")))
+  else if (!(yyin = fopen (fScriptName.c_str (), "r")))
     {
       stringstream s;
 
@@ -568,12 +568,12 @@ void mfslDriver::scanBegin ()
       if (errorString != nullptr) {
         s <<
           "cannot open " <<
-          fScriptSourceName << ": " <<
+          fScriptName << ": " <<
           errorString <<
           endl;
 
         mfslFileError (
-          fScriptSourceName,
+          fScriptName,
           s.str ());
       }
     }

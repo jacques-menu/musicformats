@@ -91,7 +91,7 @@ S_mfslChoice pCurrentChoiceChoice;
   CASE       "case"
 
   SELECT     "select"
-  EVERY      "every"
+  ALL        "all"
 ;
 
 %code {
@@ -118,6 +118,8 @@ S_mfslChoice pCurrentChoiceChoice;
 %nterm <string> String
 
 %nterm <string> OptionValue
+
+%nterm <string> LabelName
 
 
 // the MFSL axiom
@@ -174,7 +176,7 @@ Script :
         --gIndenter;
       }
 
-  OptionalSelectOrEveryStatements
+  OptionalSelectStatements
 ;
 
 
@@ -208,9 +210,9 @@ String
 //_______________________________________________________________________________
 
 Tool
- : TOOL COLON NAME
+ : TOOL COLON NAME SEMICOLON
       {
-        drv.setToolName ($3);
+        drv.setTool ($3);
       }
  ;
 
@@ -219,14 +221,23 @@ Tool
 //_______________________________________________________________________________
 
 Input
-  : INPUT COLON NAME
+  : INPUT COLON InputSourcesSeq SEMICOLON
+;
+
+InputSourcesSeq
+  : InputSource
+  | InputSourcesSeq COMMA InputSource
+;
+
+InputSource
+  : NAME
       {
-        drv.setInputSouceName ($3);
+        drv.appendInputSouce ($1);
       }
 
-  | INPUT COLON String
+  | String
       {
-        drv.setInputSouceName ($3);
+        drv.appendInputSouce ($1);
       }
 ;
 
@@ -615,12 +626,11 @@ CaseAlternative
 ;
 
 
-// select or every statement
+// select statement
 //_______________________________________________________________________________
 
-OptionalSelectOrEveryStatements
+OptionalSelectStatements
   : SelectStatementSeq
-  | EveryStatement
   |
 ;
 
@@ -629,26 +639,22 @@ SelectStatementSeq
   | SelectStatementSeq SelectStatement
 ;
 
+LabelName
+  : NAME
+  | ALL
+      { $$ = K_ALL_PSEUDO_LABEL_NAME; }
+;
+
 SelectStatement
-  : SELECT NAME COLON NAME SEMICOLON
+  : SELECT NAME COLON LabelName SEMICOLON
       {
         string
           choiceName = $2,
           label = $4;
 
-        drv.appendSelectLabelForToolLaunching (
+        drv.handleSelectLabel (
           choiceName,
           label);
-      }
-
-EveryStatement
-  : EVERY NAME SEMICOLON
-      {
-        string
-          choiceName = $2;
-
-        drv.setEveryChoiceForToolLaunching (
-          choiceName);
       }
 
 

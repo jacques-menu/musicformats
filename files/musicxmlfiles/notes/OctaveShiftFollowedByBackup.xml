@@ -116,7 +116,7 @@
       </direction>
       <note default-x="85">
         <pitch>
-          <step>B</step>
+          <step>G</step>
           <octave>5</octave>
         </pitch>
         <duration>16</duration>
@@ -127,7 +127,7 @@
       </note>
       <note default-x="144">
         <pitch>
-          <step>B</step>
+          <step>A</step>
           <octave>5</octave>
         </pitch>
         <duration>16</duration>
@@ -140,7 +140,7 @@
         <direction-type>
           <octave-shift size="8" type="stop"/>
         </direction-type>
-        <!-- <offset>-8</offset> -->
+        <offset>-8</offset>
         <staff>1</staff>
       </direction>
       <backup>

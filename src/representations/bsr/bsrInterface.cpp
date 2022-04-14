@@ -56,7 +56,7 @@ void displayFirstBsr (
     separator <<
     endl <<
     gTab <<
-    "Pass (ptional): displaying the first BSR as text" <<
+    "Pass (optional): displaying the first BSR as text" <<
     endl <<
     separator <<
     endl << endl <<
@@ -96,7 +96,7 @@ void displayFirstBsrScoreShort (
     separator <<
     endl <<
     gTab <<
-    "Pass (ptional): displaying the first BSR as text, short version" <<
+    "Pass (optional): displaying the first BSR as text, short version" <<
     endl <<
     separator <<
     endl << endl;
@@ -199,7 +199,7 @@ void displayFinalizedBsr (
     separator <<
     endl <<
     gTab <<
-    "Pass (ptional): displaying the finalized BSR as text" <<
+    "Pass (optional): displaying the finalized BSR as text" <<
     endl <<
     separator <<
     endl <<
@@ -239,7 +239,7 @@ void displayFinalizedBsrScoreShort (
     separator <<
     endl <<
     gTab <<
-    "Pass (ptional): displaying the finalized BSR as text, short version" <<
+    "Pass (optional): displaying the finalized BSR as text, short version" <<
     endl <<
     separator <<
     endl;

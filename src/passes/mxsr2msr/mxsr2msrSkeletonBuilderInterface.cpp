@@ -159,7 +159,7 @@ void displayMsrSkeleton (
     separator <<
     endl <<
     gTab <<
-    "Pass (ptional): " << passDescription <<
+    "Pass (optional): " << passDescription <<
     endl <<
     separator <<
     endl << endl <<

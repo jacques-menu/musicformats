@@ -92,7 +92,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // user options
+  // display
   // --------------------------------------
 
   subGroup->
@@ -122,6 +122,8 @@ R"(Write MFSL options analysis activity to standard output.)",
         "fDisplayOptions",
         fDisplayOptions));
 
+  // no launch
+
   subGroup->
     appendAtomToSubGroup (
       oahTwoBooleansAtom::create (
@@ -134,14 +136,37 @@ This option implies the '-display-tool-and-input, -ttai' option.)",
         fNoLaunch,
         fDisplayToolAndInputAtom));
 
+  // input
+
+  fInputSourcesSetAtom =
+    oahStringSetElementAtom::create (
+      "input", "",
+R"(Use INPUT_SOURCE_NAME as input to launch the tool.
+This option overrides the 'input' value(s) specified in the script.
+There can be several occurrences of this option,
+in which case the tool will be run several times.)",
+      "INPUT_SOURCE_NAME",
+      "fInputSourcesSet",
+      fInputSourcesSet);
+
+  fInputSourcesSetAtom->
+      setMultipleOccurrencesAllowed ();
+
+  subGroup->
+    appendAtomToSubGroup (
+      fInputSourcesSetAtom);
+
+  // select
+
   fSelectChoiceToLabelsMultiMapAtom =
     oahStringToStringMultiMapElementAtom::create (
       "select", "sel",
 R"(Select LABEL for choice CHOICE.
 The tool will be run using the corresponding options block(s).
-This option cannot be used at the same time as the '-every' option.
 There can be several occurrences of this option,
-in which case the tool will be run several times.)",
+in which case the tool will be run several times.
+The LABEL can be 'ALL', in which case
+all the labels of the given choice are selected.)",
       "CHOICE:LABEL",
       "fSelectChoiceToLabelsMultiMap",
       fSelectChoiceToLabelsMultiMap);
@@ -152,21 +177,6 @@ in which case the tool will be run several times.)",
   subGroup->
     appendAtomToSubGroup (
       fSelectChoiceToLabelsMultiMapAtom);
-
-  fEveryChoiceAtom =
-    oahStringAtom::create (
-      "every", "",
-R"(Select every label for choice CHOICE in turn.
-The tool will be run as many times, using the corresponding options block(s).
-This option cannot be used at the same time as the '-select, -sel' option.
-There can be only one instance of this option.)",
-      "CHOICE",
-      "fEveryChoice",
-      fEveryChoice);
-
-  subGroup->
-    appendAtomToSubGroup (
-      fEveryChoiceAtom);
 
   // maintainance options
   // --------------------------------------
@@ -226,17 +236,7 @@ void mfslInterpreterOahGroup::enforceGroupQuietness ()
 {}
 
 void mfslInterpreterOahGroup::checkGroupOptionsConsistency ()
-{
-  if (
-    fSelectChoiceToLabelsMultiMapAtom->getSetByAnOption ()
-      &&
-    fEveryChoiceAtom->getSetByAnOption ()
-  ) {
-    mfslOptionsIncompatibilityError (
-      fSelectChoiceToLabelsMultiMapAtom,
-      fEveryChoiceAtom);
-  }
-}
+{}
 
 void mfslInterpreterOahGroup::acceptIn (basevisitor* v)
 {
@@ -382,11 +382,6 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   }
 
   --gIndenter;
-
-  gLogStream << left <<
-    setw (fieldWidth) << "fEveryChoice" << " : " <<
-      fEveryChoice <<
-      endl;
 
   --gIndenter;
 

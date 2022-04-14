@@ -344,6 +344,14 @@ alias llcores='ls -sal /cores/core.*'
 alias rmcores='ls -sal /cores/core.*; sudo rm /cores/core.*; ls -sal /cores/core.*'
 
 
+# rename
+#----------------------------------------------
+
+function renam ()
+{
+  RenameFiles . . $*
+}
+
 # grep in sources
 #----------------------------------------------
 
@@ -386,7 +394,10 @@ function grt ()
 
 alias maki='clear; make clean; make -i'
 
+alias lly='ll lilypond/*.ly'
 alias oly='open lilypond/*.ly'
+
+alias lpdf='ll pdflily/*.pdf'
 alias opdf='open pdflily/*.pdf'
 
 alias showlocal='ll *.ly; ll *.pdf; ll *.midi ll *.brf ll *.gmn'

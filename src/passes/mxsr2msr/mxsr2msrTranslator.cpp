@@ -2237,6 +2237,27 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
 #endif
 */
 
+  // fetch current note's voice
+  S_msrVoice
+    currentNoteVoice =
+      fetchVoiceFromCurrentPart (
+        inputLineNumber,
+        fCurrentMusicXMLStaffNumber,
+        fCurrentMusicXMLVoiceNumber);
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    currentNoteVoice != nullptr,
+    "currentNoteVoice is null");
+
+  // the elements pending since before the note if any
+  // can now be appended to the latter's voice
+  // prior to the note itself
+  attachPendingVoiceLevelElementsToVoice (
+    currentNoteVoice);
+
+
   // finalize the current part
   fCurrentPart->
     finalizePart (
@@ -4637,8 +4658,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR tempo" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -4674,8 +4695,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR rehearsal mark" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -4709,8 +4730,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR segno" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -4748,8 +4769,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "' to an MSR dal segno '" <<
           dalSegno->asString () <<
           "'" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -4786,8 +4807,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "' to an MSR dal segno '" <<
           dalSegno->asString () <<
           "'" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -4824,8 +4845,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "' to an MSR dal segno '" <<
           dalSegno->asString () <<
           "'" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -4861,8 +4882,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "' to an MSR coda first '" <<
           coda->asString () <<
           "'" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -4899,8 +4920,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "' to an MSR coda second '" <<
           coda->asString () <<
           "'" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -4926,8 +4947,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR cresc" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -4972,8 +4993,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           "Converting words \"" <<
           wordsValue <<
           "\" to an MSR decresc" <<
-          ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-          ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+          ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+          ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -6117,10 +6138,10 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     gLogStream <<
-      "--> S_staff, fCurrentMusicXMLStaffNumber = " <<
+      "--> S_staff, fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
       endl <<
-      "--> S_staff, current staff name  = " <<
+      "--> S_staff, current staff name: " <<
       staff->getStaffName() <<
       endl;
   }
@@ -6706,7 +6727,7 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt )
       mfSingularOrPlural (
         fCurrentBackupDivisions, "division", "divisions") <<
       " becomes pending" <<
-      ", fCurrentStaffNumberToInsertInto = " <<
+      ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
       ", line " << inputLineNumber <<
       endl;
@@ -6717,14 +6738,14 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt )
   fPreviousNoteMusicXMLStaffNumber = msrStaff::K_NO_STAFF_NUMBER;
   fCurrentMusicXMLStaffNumber      = msrStaff::K_NO_STAFF_NUMBER;
 
+  // handle the backup right now:
+  handleBackup (
+    inputLineNumber);
+
   // reset staff change detection
   fCurrentStaffNumberToInsertInto = msrStaff::K_NO_STAFF_NUMBER;
 
   fOnGoingBackup = false;
-
-  // handle the backup right now:
-  handleBackup (
-    inputLineNumber);
 }
 
 //______________________________________________________________________________
@@ -6771,9 +6792,9 @@ void mxsr2msrTranslator::visitEnd ( S_forward& elt )
     gLogStream <<
       "Handling 'forward <<< " << fCurrentBackupDivisions <<
       " divisions >>>" <<
-      ", fCurrentForwardStaffNumber = " <<
+      ", fCurrentForwardStaffNumber: " <<
       fCurrentForwardStaffNumber <<
-      ", fCurrentForwardVoiceNumber = " <<
+      ", fCurrentForwardVoiceNumber: " <<
       fCurrentForwardVoiceNumber <<
       "', line " << inputLineNumber <<
       endl;
@@ -8077,9 +8098,9 @@ void mxsr2msrTranslator::visitEnd ( S_lyric& elt )
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyricsDetails ()) {
     gLogStream <<
-      "==> visitEnd ( S_lyric&), fCurrentSyllableKind = " <<
+      "==> visitEnd ( S_lyric&), fCurrentSyllableKind: " <<
       msrSyllable::syllableKindAsString (fCurrentSyllableKind) <<
-      ", line = " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       ", with:" <<
       endl;
 
@@ -8206,7 +8227,7 @@ void mxsr2msrTranslator::visitEnd ( S_lyric& elt )
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
-      "==> visitEnd ( S_lyric&), fCurrentSyllableKind = " <<
+      "==> visitEnd ( S_lyric&), fCurrentSyllableKind: " <<
       msrSyllable::syllableKindAsString (fCurrentSyllableKind) <<
       ", line = " << inputLineNumber <<
       ", with:" <<
@@ -13468,7 +13489,7 @@ void mxsr2msrTranslator::visitStart ( S_tremolo& elt )
 #endif
 
         // it will be handled in
-        // handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest()
+        // handleNonChordNorTupletNoteOrRest()
       }
 
       else {
@@ -20991,7 +21012,7 @@ void mxsr2msrTranslator::handleNoteItself (
       newNote);
 
     // handle it
-    handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
+    handleNonChordNorTupletNoteOrRest (
       newNote);
   }
 
@@ -21178,6 +21199,8 @@ void mxsr2msrTranslator::handleBackup (
       "Handling pending backup" <<
       ", fCurrentBackupDivisions: " <<
       fCurrentBackupDivisions <<
+      ", fCurrentNonGraceNote: " <<
+      fCurrentNonGraceNote->asShortString () <<
       endl;
   }
 #endif
@@ -21196,16 +21219,16 @@ void mxsr2msrTranslator::handleBackup (
   }
 #endif
 
-//   S_msrVoice
-//     currentVoice =
-//       fetchVoiceFromCurrentPart (
-//         inputLineNumber,
-//         fCurrentStaffNumberToInsertInto,
-//         fCurrentMusicXMLVoiceNumber);
-//
-//   // are there pending note level elements?
-//   attachPendingNoteLevelElementsToNote ( // JMI
-//     fCurrentNonGraceNote);
+  S_msrVoice
+    currentVoice =
+      fetchVoiceFromCurrentPart (
+        inputLineNumber,
+        fCurrentStaffNumberToInsertInto,
+        fCurrentMusicXMLVoiceNumber);
+
+  // are there pending note level elements?
+  attachPendingNoteLevelElementsToNote ( // JMI
+    fCurrentNonGraceNote);
 
   // is there a pending grace notes group?
   attachPendingGraceNotesGroupToNoteIfRelevant (
@@ -21350,13 +21373,13 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
   if (gGlobalTracingOahGroup->getTraceNotes () || gGlobalTracingOahGroup->getTraceStaffChanges ()) {
     gLogStream <<
       "==> fetching voice to insert note into" <<
-      ", fCurrentStaffNumberToInsertInto = " <<
+      ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
-      ", fPreviousNoteMusicXMLStaffNumber = " <<
+      ", fPreviousNoteMusicXMLStaffNumber: " <<
       fPreviousNoteMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLStaffNumber = " <<
+      ", fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLVoiceNumber = " <<
+      ", fCurrentMusicXMLVoiceNumber: " <<
       fCurrentMusicXMLVoiceNumber <<
       ", line " << inputLineNumber <<
       endl;
@@ -21381,17 +21404,17 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
   if (gGlobalTracingOahGroup->getTraceNotes () || gGlobalTracingOahGroup->getTraceStaffChanges ()) {
     gLogStream <<
       "==> is there a staff change?" <<
-      " fCurrentStaffNumberToInsertInto = " <<
+      " fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
-      ", fPreviousNoteMusicXMLStaffNumber = " <<
+      ", fPreviousNoteMusicXMLStaffNumber: " <<
       fPreviousNoteMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLStaffNumber = " <<
+      ", fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
       ", in voice \"" <<
       voiceToInsertNoteInto->getVoiceName() <<
       "\"" <<
       /* JMI
-      ", fCurrentMusicXMLStaffNumber = " << fCurrentMusicXMLStaffNumber <<
+      ", fCurrentMusicXMLStaffNumber: " << fCurrentMusicXMLStaffNumber <<
       ", in staff \"" <<
       staff->getStaffName() <<
       "\"" <<
@@ -21416,13 +21439,13 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
   if (gGlobalTracingOahGroup->getTraceNotes () || gGlobalTracingOahGroup->getTraceStaffChanges ()) {
     gLogStream <<
       "==> fetching voice to insert harmonies, figured bass elements and/or frames into" <<
-      ", fCurrentStaffNumberToInsertInto = " <<
+      ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
-      ", fPreviousNoteMusicXMLStaffNumber = " <<
+      ", fPreviousNoteMusicXMLStaffNumber: " <<
       fPreviousNoteMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLStaffNumber = " <<
+      ", fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLVoiceNumber = " <<
+      ", fCurrentMusicXMLVoiceNumber: " <<
       fCurrentMusicXMLVoiceNumber <<
       ", line " << inputLineNumber <<
       endl;
@@ -21471,7 +21494,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
-      "handlePendingHarmonies(), newNote = " <<
+      "handlePendingHarmonies(), newNote: " <<
       endl;
     ++gIndenter;
     gLogStream <<
@@ -21570,7 +21593,7 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBassDetails ()) {
     gLogStream <<
-      "handlePendingFiguredBassElements(), newNote = " <<
+      "handlePendingFiguredBassElements(), newNote: " <<
       endl;
     ++gIndenter;
     gLogStream <<
@@ -21658,7 +21681,7 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
+void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
   S_msrNote newNote)
 {
   int inputLineNumber =
@@ -21681,7 +21704,7 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) { // JMI
       gLogStream <<
-        "handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest(), fCurrentNonGraceNote = " <<
+        "handleNonChordNorTupletNoteOrRest(), fCurrentNonGraceNote: " <<
         fCurrentNonGraceNote->asShortString () <<
         endl;
     }
@@ -21721,7 +21744,7 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) { // JMI
     gLogStream <<
-      "handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest(), newNote = " <<
+      "handleNonChordNorTupletNoteOrRest(), newNote: " <<
       endl;
     ++gIndenter;
     gLogStream <<
@@ -21772,7 +21795,7 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
       gLogStream <<
         setw (fieldWidth) << "fPendingGraceNotesGroup" << " : " <<
         endl <<
-        "======================= handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest" <<
+        "======================= handleNonChordNorTupletNoteOrRest()" <<
         ", line " << inputLineNumber <<
         endl;
       fCurrentPart->print (gLogStream);
@@ -22313,15 +22336,15 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream << // JMI
       endl <<
-      "***==> fCurrentStaffNumberToInsertInto = " <<
+      "***==> fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
-      ", fCurrentChordStaffNumber = " <<
+      ", fCurrentChordStaffNumber: " <<
       fCurrentChordStaffNumber <<
-      ", fPreviousNoteMusicXMLStaffNumber = " <<
+      ", fPreviousNoteMusicXMLStaffNumber: " <<
       fPreviousNoteMusicXMLStaffNumber <<
-      ", fCurrentMusicXMLStaffNumber = " <<
+      ", fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
-      ", staffNumberToUse = " <<
+      ", staffNumberToUse: " <<
       staffNumberToUse <<
       "', line " << inputLineNumber <<
       endl;
@@ -22347,7 +22370,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       "Handling a chord member note" <<
       ", currentVoice = \"" <<
       currentVoice->getVoiceName () <<
-      "\", fOnGoingChord = " <<
+      "\", fOnGoingChord: " <<
       fOnGoingChord <<
       ", line " << inputLineNumber <<
       endl;
@@ -22418,9 +22441,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         "chordFirstNote is null on " <<
         newChordNote->asString () <<
         endl <<
-        "fCurrentMusicXMLStaffNumber = " << fCurrentMusicXMLStaffNumber <<
+        "fCurrentMusicXMLStaffNumber: " << fCurrentMusicXMLStaffNumber <<
         endl <<
-        "fCurrentMusicXMLVoiceNumber = " << fCurrentMusicXMLVoiceNumber;
+        "fCurrentMusicXMLVoiceNumber: " << fCurrentMusicXMLVoiceNumber;
 
       mxsr2msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -22456,7 +22479,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
     if (gGlobalTracingOahGroup->getTraceChords ()) {
       gLogStream <<
         "Handling a note belonging to a chord" <<
-        ", savedChordFirstNoteKind = " <<
+        ", savedChordFirstNoteKind: " <<
         noteKindAsString (savedChordFirstNoteKind) <<
         endl;
 
@@ -22518,11 +22541,11 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
         if (gGlobalTracingOahGroup->getTraceStaffChanges ()) {
           gLogStream << // JMI
             endl <<
-            "***==> fCurrentStaffNumberToInsertInto = " <<
+            "***==> fCurrentStaffNumberToInsertInto: " <<
             fCurrentStaffNumberToInsertInto <<
-            ", fPreviousNoteMusicXMLStaffNumber = " <<
+            ", fPreviousNoteMusicXMLStaffNumber: " <<
             fPreviousNoteMusicXMLStaffNumber <<
-            ", fCurrentMusicXMLStaffNumber = " <<
+            ", fCurrentMusicXMLStaffNumber: " <<
             fCurrentMusicXMLStaffNumber <<
             "', line " << inputLineNumber <<
             endl;
@@ -22662,7 +22685,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
     if (gGlobalTracingOahGroup->getTraceChords ()) {
       gLogStream <<
         "is newChordNote in the same chord but in another voice?" <<
-        ", currentVoice = " <<
+        ", currentVoice: " <<
         currentVoice->getVoiceName () <<
         endl;
 
@@ -23149,7 +23172,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInATuplet (
    The first note of a chord belonging to a tuplet
    is marked in MusicXML as a tuplet member only,
    it has already been appended to the voice in
-   handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (),
+   handleNonChordNorTupletNoteOrRest(),
    and the following ones are marked as both a tuplet and a chord member
   */
 
@@ -23347,7 +23370,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChordInAGraceNotesGroup (
    The first note of a chord belonging to a tuplet
    is marked in MusicXML as a tuplet member only,
    it has already been appended to the voice in
-   handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (),
+   handleNonChordNorTupletNoteOrRest(),
    and the following ones are marked as both a tuplet and a chord member
   */
 
@@ -23534,9 +23557,9 @@ void mxsr2msrTranslator::handleTupletsPendingOnTupletsStack (
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Handling tuplets pending on tuplet stack" <<
-      ", fCurrentStaffNumberToInsertInto = " <<
+      ", fCurrentStaffNumberToInsertInto: " <<
       fCurrentStaffNumberToInsertInto <<
-      ", fCurrentMusicXMLStaffNumber = " <<
+      ", fCurrentMusicXMLStaffNumber: " <<
       fCurrentMusicXMLStaffNumber <<
       ", line: " << inputLineNumber <<
       endl;
@@ -25459,13 +25482,13 @@ void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt )
 
     gLogStream << left <<
       setw (fieldWidth) <<
-      "fCurrentHarpPedalDiatonicPitch" << " = " <<
+      "fCurrentHarpPedalDiatonicPitch" << ": " <<
       msrDiatonicPitchKindAsStringInLanguage (
         gGlobalMsrOahGroup->getMsrQuarterTonesPitchesLanguageKind (),
         fCurrentHarpPedalDiatonicPitchKind) <<
       endl <<
       setw (fieldWidth) <<
-      "fCurrentHarpPedalAlteration" << " = " <<
+      "fCurrentHarpPedalAlteration" << ": " <<
       msrAlterationKindAsString (
         fCurrentHarpPedalAlterationKind) <<
       endl;
@@ -25739,7 +25762,7 @@ void mxsr2msrTranslator::visitEnd (S_accord& elt)
   fOnGoingAccord = false;
 
 //   gLogStream <<
-//     "S_tuning_octave: tuningOctaveNumber = " << tuningOctaveNumber << endl;
+//     "S_tuning_octave: tuningOctaveNumber: " << tuningOctaveNumber << endl;
 
   S_msrStringTuning
     stringTuning =
@@ -26061,8 +26084,8 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       "Converting words \"" <<
 //       wordsValue <<
 //       "\" to an MSR tempo" <<
-//       ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-//       ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+//       ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
 //       endl;
 //   }
@@ -26094,8 +26117,8 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           "Converting words \"" <<
 //           wordsValue <<
 //           "\" to an MSR rehearsal mark" <<
-//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           endl;
 //       }
@@ -26128,8 +26151,8 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           "Converting words \"" <<
 //           wordsValue <<
 //           "\" to an MSR dal segno" <<
-//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           endl;
 //       }
@@ -26159,8 +26182,8 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       "Converting words \"" <<
 //       wordsValue <<
 //       "\" to an MSR dal segno al fine" <<
-//       ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-//       ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+//       ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
 //       endl;
 //   }
@@ -26193,8 +26216,8 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       "Converting words \"" <<
 //       wordsValue <<
 //       "\" to an MSR dal segno al coda" <<
-//       ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-//       ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//       ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+//       ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //       ", line " << inputLineNumber <<
 //       endl;
 //   }
@@ -26226,8 +26249,8 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           "Converting words \"" <<
 //           wordsValue <<
 //           "\" to an MSR coda" <<
-//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           endl;
 //       }
@@ -26260,8 +26283,8 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           "Converting words \"" <<
 //           wordsValue <<
 //           "\" to an MSR cresc" <<
-//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           endl;
 //       }
@@ -26293,8 +26316,8 @@ The discontinue value is typically used for the last ending in a set, where ther
 //           "Converting words \"" <<
 //           wordsValue <<
 //           "\" to an MSR decresc" <<
-//           ", fCurrentDirectionStaffNumber = " << fCurrentDirectionStaffNumber <<
-//           ", fPreviousMusicXMLVoiceNumber = " << fPreviousMusicXMLVoiceNumber <<
+//           ", fCurrentDirectionStaffNumber: " << fCurrentDirectionStaffNumber <<
+//           ", fPreviousMusicXMLVoiceNumber: " << fPreviousMusicXMLVoiceNumber <<
 //           ", line " << inputLineNumber <<
 //           endl;
 //       }
