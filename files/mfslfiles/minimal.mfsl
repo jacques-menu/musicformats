@@ -13,7 +13,7 @@
     - a tool specification, telling which MusicFormats tool to use,
       here xml2ly;
 
-    - an input specification, specifying the input source for this tool,
+    - an input specification, specifying the input source(s) for this tool,
       here file name "Hymn121.xml".
 
       It can be a file name or '-' to specify standard input.
@@ -31,17 +31,17 @@
 # the MusicFormats tool to be used
 # ----------------------------------------------------------
 
-tool : xml2ly
+tool : xml2ly ;
 
 
 # ----------------------------------------------------------
 # the input file to be processed by the tool
 # ----------------------------------------------------------
 
-input : "Hymn121.xml"
+input : "Hymn121.xml" ;
 
 # double quote can be used also to delimitate strings:
-# input : 'Hymn121.xml'
+# input : 'Hymn121.xml' ;
 
 # this would be OK too, since there are no spaces in the file name
-# input : Hymn121.xml
+# input : Hymn121.xml ;

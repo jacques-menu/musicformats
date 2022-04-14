@@ -1228,7 +1228,9 @@ class EXP lpsr2lilypondTranslator :
 
     // octave shifts
     // ------------------------------------------------------
-    void                  generateCodeForOctaveShift (
+    void                  generateCodeForOctaveShiftBeforeNote (
+                            S_msrOctaveShift octaveShift);
+    void                  generateCodeForOctaveShiftAfterNote (
                             S_msrOctaveShift octaveShift);
 
     // chords

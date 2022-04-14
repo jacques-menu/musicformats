@@ -118,7 +118,7 @@ void displayMsrScore_OptionalPass (
     separator <<
     endl <<
     gTab <<
-    "Pass (ptional): " << optionalPassDescription <<
+    "Pass (optional): " << optionalPassDescription <<
     endl <<
     separator <<
     endl << endl <<
@@ -191,7 +191,7 @@ void displayMsrScoreShort_OptionalPass (
     separator <<
     endl <<
     gTab <<
-    "Pass (ptional): " << optionalPassDescription <<
+    "Pass (optional): " << optionalPassDescription <<
     endl <<
     separator <<
     endl << endl;
@@ -266,7 +266,7 @@ void displayMsrScoreSlices (
     separator <<
     endl <<
     gTab <<
-    "Pass (ptional): " << optionalPassDescription <<
+    "Pass (optional): " << optionalPassDescription <<
     endl <<
     separator <<
     endl << endl;
@@ -326,7 +326,7 @@ void displayMsrScoreSummary (
       separator <<
       endl <<
       gTab <<
-      "Pass (ptional): " << optionalPassDescription  <<
+      "Pass (optional): " << optionalPassDescription  <<
       endl <<
       separator <<
       endl << endl;
@@ -376,7 +376,7 @@ void displayMsrScoreNames (
       separator <<
       endl <<
       gTab <<
-      "Pass (ptional): " << "Display the names in the populated MSR" <<
+      "Pass (optional): " << "Display the names in the populated MSR" <<
       endl <<
       separator <<
       endl << endl;

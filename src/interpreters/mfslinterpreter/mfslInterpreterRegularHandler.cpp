@@ -221,8 +221,9 @@ void mfslInterpreterRegularHandler::createMfslRegularUserGroup ()
 
   registerAtomInRegularSubgroup ("display-options", subGroup);
 
+  registerAtomInRegularSubgroup ("input", subGroup);
+
   registerAtomInRegularSubgroup ("select", subGroup);
-  registerAtomInRegularSubgroup ("every", subGroup);
 
   registerAtomInRegularSubgroup ("no-launch", subGroup);
 }

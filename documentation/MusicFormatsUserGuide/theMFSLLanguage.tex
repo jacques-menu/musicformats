@@ -116,14 +116,14 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat minimal.mfsl
 # the MusicFormats tool to be used
 # ----------------------------------------------------------
 
-tool : xml2ly
+tool : xml2ly ;
 
 
 # ----------------------------------------------------------
 # the input file to be processed by the tool
 # ----------------------------------------------------------
 
-input : "Hymn121.xml"
+input : "Hymn121.xml" ;
 
 # double quote can be used also to delimitate strings:
 # input : 'Hymn121.xml'
@@ -210,8 +210,8 @@ As is traditional when using interpreters from the \CLI, the \mfslInterp\ \mfslE
 If that is done in a terminal, a \code{Ctrl-d} (control key held when typing the {\tt d}) should be typed after the input, to indicate the end of it, such as:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl
-tool : xml2ly
-input : "HelloWorld.xml"
+tool : xml2ly ;
+input : "HelloWorld.xml" ;
 
 -auto-output-file-name
 -display-cpu-usage
@@ -262,7 +262,7 @@ After that, there can be:
 \item any number of  \code{case} statements stating the options to be used depending on
   the selected \choice\ labels;
 
-\item optionaly, any number of \code{select} or an \code{every} statement.
+\item optionaly, any number of \code{select} statements.
 
 \end{itemize}
 
@@ -357,14 +357,14 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForBass
 # the MusicFormats tool to be used
 # ----------------------------------------------------------
 
-tool : xml2ly
+tool : xml2ly ;
 
 
 # ----------------------------------------------------------
 # the input file to be handled by the tool
 # ----------------------------------------------------------
 
-input : "Hymn121.xml"
+input : "Hymn121.xml" ;
 
 
 # ----------------------------------------------------------
@@ -522,14 +522,14 @@ The enhanced score we obtain this way is:\\
 
 Let us go one step further, using \mfslfiles{Hymn121.xml} again, to obtain various scores for a vocal SATB (soprano, alto, tenor, bass) choir.
 
-This example shows the use of a \code{choice} specification and a \code{case} statement, to indicate the various possible score \choice s and what options to use for them, and \code{select} or \code{every} statements or options to do the selection.
+This example shows the use of a \code{choice} specification and a \code{case} statement, to indicate the various possible score \choice s and what options to use for them, and \code{select} statements or options to the \mfslInterp\ to do the selection.
 
 The actual selection works this way:
 \begin{itemize}
-\item there can be either a group of several \code{select} statements or one \code{every} statement at the end of the \script;
+\item there can be \code{select} statements at the end of the \script;
 \item if such statements are present in the \script, they are used to decide which options to use for the tool;
-\item this behaviour can be overridden by the use of \optionNameBoth{select}{sel} or \optionName{every}, respectively;
-\item if none of \code{select} nor \code{every} is present, the default \coiceLabel\ for the \choice\ is implicitly used.
+\item this behaviour can be overridden by the use of \optionNameBoth{select}{sel}, which override the \code{select} statements in the \script if any;
+\item if no \code{select} is present in the \script, the default \coiceLabel\ for the \choice\ is implicitly used.
 \end{itemize}
 
 The \mfslfiles{Hymn121ForVocalSATBQuartet.mfsl} \script\ contains:
@@ -561,14 +561,14 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForVoca
 # the MusicFormats tool to be used
 # ----------------------------------------------------------
 
-tool : xml2ly
+tool : xml2ly ;
 
 
 # ----------------------------------------------------------
 # the input file to be handled by the tool
 # ----------------------------------------------------------
 
-input : "Hymn121.xml"
+input : "Hymn121.xml" ;
 
 
 # ----------------------------------------------------------
@@ -695,7 +695,7 @@ case SCORE :
 
 ###
   Comment/uncomment the statements below to choose
-  either individual SCORE labels or every one of them.
+  either individual SCORE labels or all of them.
   A group of 'select' statements and an 'every' statement
   are mutually exclusive.
 
@@ -705,11 +705,11 @@ case SCORE :
   This can also be done with the 'select' option to the MFSL interpreter such as:
     -select SCORE:tenor -select SCORE:alto
 
-  The 'every' statement causes all the existing labels for the given choice
+  The 'all' pseudo-label causes all the existing labels for the given choice
   to be selected.
 
   This can also be done with this option to the MFSL interpreter:
-    -every SCORE
+    -select SCORE:all
 ###
 
 # select SCORE : tutti ;
@@ -720,8 +720,6 @@ case SCORE :
 
 # select SCORE: sopranoAndAlto ;
 select SCORE: tenorAndBass ;
-
-# every SCORE ;
 \end{lstlisting}
 
 
@@ -745,12 +743,12 @@ we get this score:\\
 
 
 % -------------------------------------------------------------------------
-\section{Running the tool for every choice label}
+\section{Running the tool for all choice labels}
 % -------------------------------------------------------------------------
 
 With:
 \begin{lstlisting}[language=Terminal]
-./Hymn121ForVocalSATBQuartet.mfsl -every SCORE
+./Hymn121ForVocalSATBQuartet.mfsl -select SCORE:all
 \end{lstlisting}
 
 we get all these \lily\ files:
@@ -961,5 +959,5 @@ The \mfslInterp\ is organized as too \pass es:
 \begin{enumerate}
 \item a first pass analyses the script body and builds an internal representation, which is displayed by the \optionNameBoth{trace-choices}{tchoices} option;
 
-\item the second pass uses the informations thus collected to launch the tool as many times as needed, depending on \code{select} and \code{every} usage in the script body and the options to the \mfslInterp.
+\item the second pass uses the informations thus collected to launch the tool as many times as needed, depending on \code{select}  usage in the script body and the \optionNameBoth{select}{sel} options to the \mfslInterp.
 \end{enumerate}

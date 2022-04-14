@@ -31,6 +31,9 @@ using namespace MusicFormats;
 
 
 //______________________________________________________________________________
+EXP extern const string K_ALL_PSEUDO_LABEL_NAME;
+
+//______________________________________________________________________________
 // Conducting the whole scanning and parsing of MFSL
 class mfslDriver
 {
@@ -51,18 +54,18 @@ class mfslDriver
     // internal
     void  			          setScriptName (string scriptName);
 
-    string			          getScriptSourceName () const
-                              { return fScriptSourceName; }
+    string			          getScriptName () const
+                              { return fScriptName; }
 
-    void  			          setToolName (string toolName);
+    void  			          setTool (string tool);
 
-    string			          getToolName () const
-                              { return fToolName; }
+    string			          getTool () const
+                              { return fTool; }
 
-    void  			          setInputSouceName (string inputSouceName);
+    void  			          appendInputSouce (string inputSouce);
 
-    string			          getInputSouceName () const
-                              { return fInputSouceName; }
+    const list<string>&   getInputSoucesList () const
+                              { return fInputSoucesList; }
 
     bool				          getTraceScanning () const
                               { return fTraceScanning; }
@@ -154,12 +157,14 @@ class mfslDriver
                             const string& context) const;
 
     // launching the MFSL tool
-    void                  appendSelectLabelForToolLaunching (
+    void                  handleSelectLabel (
                             const string& choiceName,
                             const string& label);
 
-    void                  setEveryChoiceForToolLaunching (
-                            const string& choiceName);
+    void                  appendSelectLabelForToolLaunching (
+                            const S_mfslChoice choice,
+                            const string&      label,
+                            Bool               allLabelSelected);
 
     mfMusicformatsError   launchMfslTool_Pass2 ();
 
@@ -175,11 +180,9 @@ class mfslDriver
 
     Bool                  applySelectOptionsFinally ();
 
-    // 'every' statements
-    Bool                  applyEveryOptionIfPresent (
-                            const S_oahStringAtom everyChoiceAtom);
-
-    Bool                  applyEveryOptionFinally ();
+    Bool                  applySelectOption (
+                            const S_mfslChoice choice,
+                            const string&      label);
 
     // final semantics check
     void                  finalSemanticsCheck ();
@@ -192,14 +195,14 @@ class mfslDriver
     // private fields
     // ------------------------------------------------------
 
-    // the name of the MusicFormats script source
-		string                fScriptSourceName;
-
     // the name of the MusicFormats tool
-		string                fToolName;
+		string                fTool;
 
-    // the name of the input being parsed
-    string                fInputSouceName;
+    // the name of the MusicFormats script
+		string                fScriptName;
+
+    // the names of the input sources
+    list<string>          fInputSoucesList;
 
     // scanning
     bool                  fTraceScanning;
@@ -246,11 +249,8 @@ class mfslDriver
     S_mfslOptionsBlock    fMainOptionsBlock;
 
     // tool launching
-//     S_mfslOptionsBlock    fOptionsBlockToUseForSelectLaunching;
     list<S_mfslOptionsBlock>
                           fSelectedOptionsBlocksList;
-
-    S_mfslChoice          fChoiceToUseForEveryLaunching;
 
     // commands list
     list<string>          fCommandsList;

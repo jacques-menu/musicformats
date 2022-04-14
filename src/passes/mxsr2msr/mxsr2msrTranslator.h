@@ -1901,7 +1901,7 @@ class EXP mxsr2msrTranslator :
                                 S_msrNote  newNote);
 
     // detailed notes handling
-    void                      handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
+    void                      handleNonChordNorTupletNoteOrRest (
                                 S_msrNote newNote);
 
     void                      handleNoteBelongingToAChord (

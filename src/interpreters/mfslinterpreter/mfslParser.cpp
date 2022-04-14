@@ -255,6 +255,7 @@ namespace yy {
       case symbol_kind::S_SingleString: // SingleString
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
+      case symbol_kind::S_LabelName: // LabelName
         value.YY_MOVE_OR_COPY< string > (YY_MOVE (that.value));
         break;
 
@@ -283,6 +284,7 @@ namespace yy {
       case symbol_kind::S_SingleString: // SingleString
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
+      case symbol_kind::S_LabelName: // LabelName
         value.move< string > (YY_MOVE (that.value));
         break;
 
@@ -311,6 +313,7 @@ namespace yy {
       case symbol_kind::S_SingleString: // SingleString
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
+      case symbol_kind::S_LabelName: // LabelName
         value.copy< string > (that.value);
         break;
 
@@ -338,6 +341,7 @@ namespace yy {
       case symbol_kind::S_SingleString: // SingleString
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
+      case symbol_kind::S_LabelName: // LabelName
         value.move< string > (that.value);
         break;
 
@@ -380,61 +384,67 @@ namespace yy {
       case symbol_kind::S_INTEGER: // "integer number"
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 384 "mfslParser.cpp"
+#line 388 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_DOUBLE: // "double number"
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 390 "mfslParser.cpp"
+#line 394 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted_string"
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 396 "mfslParser.cpp"
+#line 400 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted_string"
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 402 "mfslParser.cpp"
+#line 406 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_NAME: // "name"
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 408 "mfslParser.cpp"
+#line 412 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_OPTION: // "option"
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 414 "mfslParser.cpp"
+#line 418 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_Number: // Number
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 420 "mfslParser.cpp"
+#line 424 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_SingleString: // SingleString
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 426 "mfslParser.cpp"
+#line 430 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_String: // String
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 432 "mfslParser.cpp"
+#line 436 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_OptionValue: // OptionValue
 #line 62 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 438 "mfslParser.cpp"
+#line 442 "mfslParser.cpp"
+        break;
+
+      case symbol_kind::S_LabelName: // LabelName
+#line 62 "mfslParser.yy"
+                 { yyo << yysym.value.template as < string > (); }
+#line 448 "mfslParser.cpp"
         break;
 
       default:
@@ -684,6 +694,7 @@ namespace yy {
       case symbol_kind::S_SingleString: // SingleString
       case symbol_kind::S_String: // String
       case symbol_kind::S_OptionValue: // OptionValue
+      case symbol_kind::S_LabelName: // LabelName
         yylhs.value.emplace< string > ();
         break;
 
@@ -708,7 +719,7 @@ namespace yy {
           switch (yyn)
             {
   case 2: // $@1: %empty
-#line 149 "mfslParser.yy"
+#line 151 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -725,11 +736,11 @@ namespace yy {
 
         --gIndenter;
       }
-#line 729 "mfslParser.cpp"
+#line 740 "mfslParser.cpp"
     break;
 
   case 3: // $@2: %empty
-#line 168 "mfslParser.yy"
+#line 170 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -738,73 +749,73 @@ namespace yy {
 
         --gIndenter;
       }
-#line 742 "mfslParser.cpp"
+#line 753 "mfslParser.cpp"
     break;
 
   case 5: // Number: "integer number"
-#line 185 "mfslParser.yy"
+#line 187 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 748 "mfslParser.cpp"
+#line 759 "mfslParser.cpp"
     break;
 
   case 6: // Number: "double number"
-#line 186 "mfslParser.yy"
+#line 188 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 754 "mfslParser.cpp"
+#line 765 "mfslParser.cpp"
     break;
 
   case 7: // SingleString: "single quoted_string"
-#line 194 "mfslParser.yy"
+#line 196 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 760 "mfslParser.cpp"
+#line 771 "mfslParser.cpp"
     break;
 
   case 8: // SingleString: "double quoted_string"
-#line 195 "mfslParser.yy"
+#line 197 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 766 "mfslParser.cpp"
+#line 777 "mfslParser.cpp"
     break;
 
   case 9: // String: SingleString
-#line 199 "mfslParser.yy"
+#line 201 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 772 "mfslParser.cpp"
+#line 783 "mfslParser.cpp"
     break;
 
   case 10: // String: String SingleString
-#line 201 "mfslParser.yy"
+#line 203 "mfslParser.yy"
       {
         yylhs.value.as < string > () = yystack_[1].value.as < string > () + yystack_[0].value.as < string > ();
       }
-#line 780 "mfslParser.cpp"
+#line 791 "mfslParser.cpp"
     break;
 
-  case 11: // Tool: "tool" ":" "name"
-#line 212 "mfslParser.yy"
+  case 11: // Tool: "tool" ":" "name" ";"
+#line 214 "mfslParser.yy"
       {
-        drv.setToolName (yystack_[0].value.as < string > ());
+        drv.setTool (yystack_[1].value.as < string > ());
       }
-#line 788 "mfslParser.cpp"
+#line 799 "mfslParser.cpp"
     break;
 
-  case 12: // Input: "input" ":" "name"
-#line 223 "mfslParser.yy"
+  case 15: // InputSource: "name"
+#line 234 "mfslParser.yy"
       {
-        drv.setInputSouceName (yystack_[0].value.as < string > ());
+        drv.appendInputSouce (yystack_[0].value.as < string > ());
       }
-#line 796 "mfslParser.cpp"
+#line 807 "mfslParser.cpp"
     break;
 
-  case 13: // Input: "input" ":" String
-#line 228 "mfslParser.yy"
+  case 16: // InputSource: String
+#line 239 "mfslParser.yy"
       {
-        drv.setInputSouceName (yystack_[0].value.as < string > ());
+        drv.appendInputSouce (yystack_[0].value.as < string > ());
       }
-#line 804 "mfslParser.cpp"
+#line 815 "mfslParser.cpp"
     break;
 
-  case 21: // Option: "option"
-#line 260 "mfslParser.yy"
+  case 24: // Option: "option"
+#line 271 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -821,11 +832,11 @@ namespace yy {
 
         --gIndenter;
       }
-#line 825 "mfslParser.cpp"
+#line 836 "mfslParser.cpp"
     break;
 
-  case 22: // Option: "option" OptionValue
-#line 278 "mfslParser.yy"
+  case 25: // Option: "option" OptionValue
+#line 289 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -842,61 +853,61 @@ namespace yy {
 
         --gIndenter;
       }
-#line 846 "mfslParser.cpp"
+#line 857 "mfslParser.cpp"
     break;
 
-  case 23: // OptionValue: "name"
-#line 297 "mfslParser.yy"
+  case 26: // OptionValue: "name"
+#line 308 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 852 "mfslParser.cpp"
+#line 863 "mfslParser.cpp"
     break;
 
-  case 24: // OptionValue: Number
-#line 298 "mfslParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 858 "mfslParser.cpp"
-    break;
-
-  case 25: // OptionValue: String
-#line 299 "mfslParser.yy"
-    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 864 "mfslParser.cpp"
-    break;
-
-  case 26: // OptionValue: "name" "=" "name"
-#line 301 "mfslParser.yy"
-      {
-        yylhs.value.as < string > () = yystack_[2].value.as < string > () + "=" + yystack_[0].value.as < string > ();
-      }
-#line 872 "mfslParser.cpp"
-    break;
-
-  case 27: // OptionValue: "name" ":" "name"
-#line 305 "mfslParser.yy"
-      {
-        yylhs.value.as < string > () = yystack_[2].value.as < string > () + ":" + yystack_[0].value.as < string > ();
-      }
-#line 880 "mfslParser.cpp"
-    break;
-
-  case 28: // OptionValue: "name" "=" Number
+  case 27: // OptionValue: Number
 #line 309 "mfslParser.yy"
+    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+#line 869 "mfslParser.cpp"
+    break;
+
+  case 28: // OptionValue: String
+#line 310 "mfslParser.yy"
+    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+#line 875 "mfslParser.cpp"
+    break;
+
+  case 29: // OptionValue: "name" "=" "name"
+#line 312 "mfslParser.yy"
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + "=" + yystack_[0].value.as < string > ();
       }
-#line 888 "mfslParser.cpp"
+#line 883 "mfslParser.cpp"
     break;
 
-  case 29: // OptionValue: "name" ":" Number
-#line 313 "mfslParser.yy"
+  case 30: // OptionValue: "name" ":" "name"
+#line 316 "mfslParser.yy"
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + ":" + yystack_[0].value.as < string > ();
       }
-#line 896 "mfslParser.cpp"
+#line 891 "mfslParser.cpp"
     break;
 
-  case 30: // $@3: %empty
+  case 31: // OptionValue: "name" "=" Number
+#line 320 "mfslParser.yy"
+      {
+        yylhs.value.as < string > () = yystack_[2].value.as < string > () + "=" + yystack_[0].value.as < string > ();
+      }
+#line 899 "mfslParser.cpp"
+    break;
+
+  case 32: // OptionValue: "name" ":" Number
 #line 324 "mfslParser.yy"
+      {
+        yylhs.value.as < string > () = yystack_[2].value.as < string > () + ":" + yystack_[0].value.as < string > ();
+      }
+#line 907 "mfslParser.cpp"
+    break;
+
+  case 33: // $@3: %empty
+#line 335 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -923,11 +934,11 @@ namespace yy {
 
         pCurrentChoiceChoice = choice;
       }
-#line 927 "mfslParser.cpp"
+#line 938 "mfslParser.cpp"
     break;
 
-  case 31: // $@4: %empty
-#line 356 "mfslParser.yy"
+  case 34: // $@4: %empty
+#line 367 "mfslParser.yy"
       {
         string
           choiceName = yystack_[7].value.as < string > (),
@@ -947,11 +958,11 @@ namespace yy {
             label,
             drv);
       }
-#line 951 "mfslParser.cpp"
+#line 962 "mfslParser.cpp"
     break;
 
-  case 32: // ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
-#line 377 "mfslParser.yy"
+  case 35: // ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
+#line 388 "mfslParser.yy"
       {
         if (drv.getTraceChoiceStatements ()) {
           gLogStream <<
@@ -961,11 +972,11 @@ namespace yy {
 
         --gIndenter;
       }
-#line 965 "mfslParser.cpp"
+#line 976 "mfslParser.cpp"
     break;
 
-  case 33: // ChoiceLabels: "name"
-#line 390 "mfslParser.yy"
+  case 36: // ChoiceLabels: "name"
+#line 401 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -978,11 +989,11 @@ namespace yy {
 
         --gIndenter;
       }
-#line 982 "mfslParser.cpp"
+#line 993 "mfslParser.cpp"
     break;
 
-  case 34: // ChoiceLabels: ChoiceLabels "|" "name"
-#line 404 "mfslParser.yy"
+  case 37: // ChoiceLabels: ChoiceLabels "|" "name"
+#line 415 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -995,11 +1006,11 @@ namespace yy {
 
         --gIndenter;
       }
-#line 999 "mfslParser.cpp"
+#line 1010 "mfslParser.cpp"
     break;
 
-  case 35: // CaseLabel: "name"
-#line 424 "mfslParser.yy"
+  case 38: // CaseLabel: "name"
+#line 435 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -1018,11 +1029,11 @@ namespace yy {
 
         --gIndenter;
       }
-#line 1022 "mfslParser.cpp"
+#line 1033 "mfslParser.cpp"
     break;
 
-  case 38: // $@5: %empty
-#line 451 "mfslParser.yy"
+  case 41: // $@5: %empty
+#line 462 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -1075,11 +1086,11 @@ namespace yy {
         choice->
           setChoiceIsUsedInCaseStatements ();
       }
-#line 1079 "mfslParser.cpp"
+#line 1090 "mfslParser.cpp"
     break;
 
-  case 39: // CaseStatement: "case" "name" ":" $@5 OptionalCaseAlternativesSeq ";"
-#line 505 "mfslParser.yy"
+  case 42: // CaseStatement: "case" "name" ":" $@5 OptionalCaseAlternativesSeq ";"
+#line 516 "mfslParser.yy"
       {
         // have all the label been used as labels?
         drv.caseStatementsStackTop ()->
@@ -1096,11 +1107,11 @@ namespace yy {
 
         --gIndenter;
       }
-#line 1100 "mfslParser.cpp"
+#line 1111 "mfslParser.cpp"
     break;
 
-  case 44: // $@6: %empty
-#line 536 "mfslParser.yy"
+  case 47: // $@6: %empty
+#line 547 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -1112,11 +1123,11 @@ namespace yy {
         currentCaseStatement->
           clearCaseCurrentLabelsList ();
       }
-#line 1116 "mfslParser.cpp"
+#line 1127 "mfslParser.cpp"
     break;
 
-  case 45: // $@7: %empty
-#line 549 "mfslParser.yy"
+  case 48: // $@7: %empty
+#line 560 "mfslParser.yy"
       {
         S_mfslCaseStatement
           currentCaseStatement =
@@ -1144,11 +1155,11 @@ namespace yy {
           caseAlternativeOptionsBlock,
           caseAlternativeDescription);
       }
-#line 1148 "mfslParser.cpp"
+#line 1159 "mfslParser.cpp"
     break;
 
-  case 46: // CaseAlternative: $@6 CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq ";"
-#line 578 "mfslParser.yy"
+  case 49: // CaseAlternative: $@6 CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq ";"
+#line 589 "mfslParser.yy"
       {
         S_mfslCaseStatement
           currentCaseStatement =
@@ -1186,37 +1197,37 @@ namespace yy {
 
         --gIndenter;
       }
-#line 1190 "mfslParser.cpp"
+#line 1201 "mfslParser.cpp"
     break;
 
-  case 52: // SelectStatement: "select" "name" ":" "name" ";"
-#line 634 "mfslParser.yy"
+  case 54: // LabelName: "name"
+#line 643 "mfslParser.yy"
+    { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
+#line 1207 "mfslParser.cpp"
+    break;
+
+  case 55: // LabelName: "all"
+#line 645 "mfslParser.yy"
+      { yylhs.value.as < string > () = K_ALL_PSEUDO_LABEL_NAME; }
+#line 1213 "mfslParser.cpp"
+    break;
+
+  case 56: // SelectStatement: "select" "name" ":" LabelName ";"
+#line 650 "mfslParser.yy"
       {
         string
           choiceName = yystack_[3].value.as < string > (),
           label = yystack_[1].value.as < string > ();
 
-        drv.appendSelectLabelForToolLaunching (
+        drv.handleSelectLabel (
           choiceName,
           label);
       }
-#line 1204 "mfslParser.cpp"
-    break;
-
-  case 53: // EveryStatement: "every" "name" ";"
-#line 646 "mfslParser.yy"
-      {
-        string
-          choiceName = yystack_[1].value.as < string > ();
-
-        drv.setEveryChoiceForToolLaunching (
-          choiceName);
-      }
-#line 1216 "mfslParser.cpp"
+#line 1227 "mfslParser.cpp"
     break;
 
 
-#line 1220 "mfslParser.cpp"
+#line 1231 "mfslParser.cpp"
 
             default:
               break;
@@ -1401,16 +1412,17 @@ namespace yy {
     static const char *const yy_sname[] =
     {
     "end of file", "error", "invalid token", "|", "=", ";", ":", ",",
-  "tool", "input", "choice", "default", "case", "select", "every",
+  "tool", "input", "choice", "default", "case", "select", "all",
   "integer number", "double number", "single quoted_string",
   "double quoted_string", "name", "option", "$accept", "Script", "$@1",
   "$@2", "Number", "SingleString", "String", "Tool", "Input",
-  "OptionalScriptElementsSeq", "ScriptElementsSeq", "ScriptElement",
-  "Option", "OptionValue", "ChoiceDeclaration", "$@3", "$@4",
-  "ChoiceLabels", "CaseLabel", "CaseLabelsSeq", "CaseStatement", "$@5",
-  "OptionalCaseAlternativesSeq", "CaseAlternativesSeq", "CaseAlternative",
-  "$@6", "$@7", "OptionalSelectOrEveryStatements", "SelectStatementSeq",
-  "SelectStatement", "EveryStatement", YY_NULLPTR
+  "InputSourcesSeq", "InputSource", "OptionalScriptElementsSeq",
+  "ScriptElementsSeq", "ScriptElement", "Option", "OptionValue",
+  "ChoiceDeclaration", "$@3", "$@4", "ChoiceLabels", "CaseLabel",
+  "CaseLabelsSeq", "CaseStatement", "$@5", "OptionalCaseAlternativesSeq",
+  "CaseAlternativesSeq", "CaseAlternative", "$@6", "$@7",
+  "OptionalSelectStatements", "SelectStatementSeq", "LabelName",
+  "SelectStatement", YY_NULLPTR
     };
     return yy_sname[yysymbol];
   }
@@ -1679,114 +1691,116 @@ namespace yy {
   }
 
 
-  const signed char parser::yypact_ninf_ = -19;
+  const signed char parser::yypact_ninf_ = -24;
 
-  const signed char parser::yytable_ninf_ = -45;
+  const signed char parser::yytable_ninf_ = -48;
 
   const signed char
   parser::yypact_[] =
   {
-      15,    -4,    33,    25,    16,   -19,    30,   -19,   -19,     2,
-      -9,   -19,   -19,   -19,   -19,     8,    19,    20,   -11,   -19,
-      -9,   -19,   -19,   -19,   -19,   -19,    31,    34,   -19,   -19,
-      18,   -19,     8,   -19,    14,   -19,   -19,   -19,    -6,    -1,
-      22,    24,   -19,    29,   -19,   -19,    26,    27,   -19,   -19,
-     -19,   -19,    38,    42,   -19,   -19,     9,    43,    27,   -19,
-      32,    35,   -19,    36,    39,   -19,   -19,   -19,   -19,    23,
-      44,   -19,    46,   -19,    32,   -19,    37,    -9,   -19,   -19,
-      48,    52,   -19,   -19
+      -2,    11,    36,    14,    18,   -24,    32,   -24,    34,     8,
+      -9,   -24,   -24,   -24,   -24,   -24,    -8,    23,   -24,    21,
+      22,    -3,   -24,    -9,   -24,   -24,   -24,   -24,   -24,   -24,
+       8,    37,    38,   -24,   -24,    25,   -24,    -8,   -24,    29,
+     -24,   -24,   -24,   -24,   -11,     3,    27,   -24,    29,   -24,
+      28,    30,   -24,   -24,   -24,   -24,    39,   -24,   -24,    17,
+      43,    30,   -24,    31,   -12,    33,    40,   -24,   -24,   -24,
+     -24,    26,   -24,   -24,    48,   -24,    49,   -24,    31,   -24,
+      35,    -9,   -24,   -24,    51,    52,   -24,   -24
   };
 
   const signed char
   parser::yydefact_[] =
   {
-       0,     0,     0,     0,     0,     1,     0,     2,    11,     0,
-      15,     7,     8,    12,     9,    13,     0,     0,    21,     3,
-      14,    16,    18,    19,    20,    10,     0,     0,     5,     6,
-      23,    24,    25,    22,    49,    17,    30,    38,     0,     0,
-       0,     0,     4,    47,    50,    48,     0,    41,    26,    28,
-      27,    29,     0,     0,    51,    33,     0,     0,    40,    42,
-       0,     0,    53,     0,     0,    39,    43,    35,    36,     0,
-       0,    34,     0,    45,     0,    52,     0,    15,    37,    31,
-       0,     0,    46,    32
+       0,     0,     0,     0,     0,     1,     0,     2,     0,     0,
+      18,    11,     7,     8,    15,     9,    16,     0,    13,     0,
+       0,    24,     3,    17,    19,    21,    22,    23,    10,    12,
+       0,     0,     0,     5,     6,    26,    27,    28,    25,    51,
+      20,    14,    33,    41,     0,     0,     0,     4,    50,    52,
+       0,    44,    29,    31,    30,    32,     0,    53,    36,     0,
+       0,    43,    45,     0,     0,     0,     0,    42,    46,    38,
+      39,     0,    55,    54,     0,    37,     0,    48,     0,    56,
+       0,    18,    40,    34,     0,     0,    49,    35
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -19,   -19,   -19,   -19,    -7,   -15,    40,   -19,   -19,   -18,
-     -19,    41,   -19,   -19,   -19,   -19,   -19,   -19,   -14,   -19,
-     -19,   -19,   -19,   -19,     4,   -19,   -19,   -19,   -19,    21,
-     -19
+     -24,   -24,   -24,   -24,   -10,   -16,    41,   -24,   -24,   -24,
+      42,   -23,   -24,    44,   -24,   -24,   -24,   -24,   -24,   -24,
+     -19,   -24,   -24,   -24,   -24,   -24,    -1,   -24,   -24,   -24,
+     -24,   -24,    13
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-       0,     2,    10,    34,    31,    14,    15,     3,     7,    19,
-      20,    21,    22,    33,    23,    46,    81,    56,    68,    69,
-      24,    47,    57,    58,    59,    60,    77,    42,    43,    44,
-      45
+       0,     2,    10,    39,    36,    15,    16,     3,     7,    17,
+      18,    22,    23,    24,    25,    38,    26,    50,    85,    59,
+      70,    71,    27,    51,    60,    61,    62,    63,    81,    47,
+      48,    74,    49
   };
 
   const signed char
   parser::yytable_[] =
   {
-      25,    16,     4,    17,    28,    29,    11,    12,    30,    28,
-      29,    18,    63,    48,    28,    29,    64,    25,    50,    11,
-      12,    13,    38,     1,    39,    11,    12,    40,    41,    73,
-      74,    49,    51,     5,     6,     8,     9,    36,    26,    27,
-      37,    52,    40,    53,    61,    55,   -44,    62,    65,    75,
-      72,    67,    76,    82,    70,    71,    79,    83,    32,    80,
-      78,    35,    66,     0,    54
+      28,    19,    72,    20,    33,    34,     1,    73,    52,    12,
+      13,    21,    33,    34,    12,    13,    35,     4,    33,    34,
+      65,    28,    54,     6,    66,    12,    13,    14,    29,    44,
+      30,    45,    77,    78,    53,    55,     5,     8,     9,    11,
+      31,    32,    46,    42,    43,    64,    56,    58,    67,   -47,
+      69,    76,    75,    79,    83,    80,    86,    87,    84,    82,
+      68,    57,    37,     0,     0,     0,     0,    40,     0,     0,
+       0,     0,    41
   };
 
   const signed char
   parser::yycheck_[] =
   {
-      15,    10,     6,    12,    15,    16,    17,    18,    19,    15,
-      16,    20,     3,    19,    15,    16,     7,    32,    19,    17,
-      18,    19,     4,     8,     6,    17,    18,    13,    14,     6,
-       7,    38,    39,     0,     9,    19,     6,     6,    19,    19,
-       6,    19,    13,    19,     6,    19,    19,     5,     5,     5,
-      11,    19,     6,     5,    19,    19,    19,     5,    18,    77,
-      74,    20,    58,    -1,    43
+      16,    10,    14,    12,    15,    16,     8,    19,    19,    17,
+      18,    20,    15,    16,    17,    18,    19,     6,    15,    16,
+       3,    37,    19,     9,     7,    17,    18,    19,     5,     4,
+       7,     6,     6,     7,    44,    45,     0,    19,     6,     5,
+      19,    19,    13,     6,     6,     6,    19,    19,     5,    19,
+      19,    11,    19,     5,    19,     6,     5,     5,    81,    78,
+      61,    48,    21,    -1,    -1,    -1,    -1,    23,    -1,    -1,
+      -1,    -1,    30
   };
 
   const signed char
   parser::yystos_[] =
   {
        0,     8,    22,    28,     6,     0,     9,    29,    19,     6,
-      23,    17,    18,    19,    26,    27,    10,    12,    20,    30,
-      31,    32,    33,    35,    41,    26,    19,    19,    15,    16,
-      19,    25,    27,    34,    24,    32,     6,     6,     4,     6,
-      13,    14,    48,    49,    50,    51,    36,    42,    19,    25,
-      19,    25,    19,    19,    50,    19,    38,    43,    44,    45,
-      46,     6,     5,     3,     7,     5,    45,    19,    39,    40,
-      19,    19,    11,     6,     7,     5,     6,    47,    39,    19,
-      30,    37,     5,     5
+      23,     5,    17,    18,    19,    26,    27,    30,    31,    10,
+      12,    20,    32,    33,    34,    35,    37,    43,    26,     5,
+       7,    19,    19,    15,    16,    19,    25,    27,    36,    24,
+      34,    31,     6,     6,     4,     6,    13,    50,    51,    53,
+      38,    44,    19,    25,    19,    25,    19,    53,    19,    40,
+      45,    46,    47,    48,     6,     3,     7,     5,    47,    19,
+      41,    42,    14,    19,    52,    19,    11,     6,     7,     5,
+       6,    49,    41,    19,    32,    39,     5,     5
   };
 
   const signed char
   parser::yyr1_[] =
   {
        0,    21,    23,    24,    22,    25,    25,    26,    26,    27,
-      27,    28,    29,    29,    30,    30,    31,    31,    32,    32,
-      32,    33,    33,    34,    34,    34,    34,    34,    34,    34,
-      36,    37,    35,    38,    38,    39,    40,    40,    42,    41,
-      43,    43,    44,    44,    46,    47,    45,    48,    48,    48,
-      49,    49,    50,    51
+      27,    28,    29,    30,    30,    31,    31,    32,    32,    33,
+      33,    34,    34,    34,    35,    35,    36,    36,    36,    36,
+      36,    36,    36,    38,    39,    37,    40,    40,    41,    42,
+      42,    44,    43,    45,    45,    46,    46,    48,    49,    47,
+      50,    50,    51,    51,    52,    52,    53
   };
 
   const signed char
   parser::yyr2_[] =
   {
        0,     2,     0,     0,     6,     1,     1,     1,     1,     1,
-       2,     3,     3,     3,     1,     0,     1,     2,     1,     1,
-       1,     1,     2,     1,     1,     1,     3,     3,     3,     3,
-       0,     0,    11,     1,     3,     1,     1,     3,     0,     6,
-       1,     0,     1,     2,     0,     0,     6,     1,     1,     0,
-       1,     2,     5,     3
+       2,     4,     4,     1,     3,     1,     1,     1,     0,     1,
+       2,     1,     1,     1,     1,     2,     1,     1,     1,     3,
+       3,     3,     3,     0,     0,    11,     1,     3,     1,     1,
+       3,     0,     6,     1,     0,     1,     2,     0,     0,     6,
+       1,     0,     1,     2,     1,     1,     5
   };
 
 
@@ -1796,12 +1810,12 @@ namespace yy {
   const short
   parser::yyrline_[] =
   {
-       0,   149,   149,   168,   145,   185,   186,   194,   195,   199,
-     200,   211,   222,   227,   238,   239,   243,   245,   249,   250,
-     251,   259,   277,   297,   298,   299,   300,   304,   308,   312,
-     324,   356,   323,   389,   403,   423,   445,   446,   451,   450,
-     524,   525,   529,   531,   536,   549,   536,   622,   623,   624,
-     628,   629,   633,   645
+       0,   151,   151,   170,   147,   187,   188,   196,   197,   201,
+     202,   213,   224,   228,   229,   233,   238,   249,   250,   254,
+     256,   260,   261,   262,   270,   288,   308,   309,   310,   311,
+     315,   319,   323,   335,   367,   334,   400,   414,   434,   456,
+     457,   462,   461,   535,   536,   540,   542,   547,   560,   547,
+     633,   634,   638,   639,   643,   644,   649
   };
 
   void
@@ -1833,9 +1847,9 @@ namespace yy {
 
 
 } // yy
-#line 1837 "mfslParser.cpp"
+#line 1851 "mfslParser.cpp"
 
-#line 656 "mfslParser.yy"
+#line 662 "mfslParser.yy"
 
 //_______________________________________________________________________________
 

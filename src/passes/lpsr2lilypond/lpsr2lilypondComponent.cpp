@@ -79,6 +79,16 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
             "Finalized paper options handling"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.63"),
+          "February 21, 2022",
+          list<string> {
+            "Fixed an issue in octave shift handling"
+          }
+      ));
   }
 
   return pPassComponent;

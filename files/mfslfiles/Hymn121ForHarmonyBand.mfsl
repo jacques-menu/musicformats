@@ -5,7 +5,7 @@
     - a 'tool' specification, telling which MusicFormats tool
       to use, here xml2ly;
 
-    - an 'input' specification, the input source to apply
+    - an 'input' specification, the input source(s) to apply
       the latter to, here file name "Hymn121.xml";
 
     - any number of MusicFormats options;
@@ -26,14 +26,14 @@
 # the MusicFormats tool to be used
 # ----------------------------------------------------------
 
-tool : xml2ly
+tool : xml2ly ;
 
 
 # ----------------------------------------------------------
 # the input file to be handled by the tool
 # ----------------------------------------------------------
 
-input : "Hymn121.xml"
+input : "Hymn121.xml" ;
 
 
 # ----------------------------------------------------------
@@ -275,7 +275,7 @@ case SCORE :
 # choosing which score(s) to generate
 # ----------------------------------------------------------
 
-# run the tool with a particular SCORE label
+# run the tool with a particular SCORE label or all of them
 
 #   select SCORE : director ;
 
@@ -288,7 +288,4 @@ case SCORE :
 #   select SCORE : part4_Bb_instruments ;
 #   select SCORE : part4_BassGuitar ;
 
-
-# run the tool with all the SCORE labels, each one in turn
-
-  every SCORE ;
+#   select SCORE : all ;
