@@ -93,7 +93,7 @@
 #include "msrRepeats.h"
 #include "msrRepeatCodas.h"
 
-#include "msrFullMeasureRests.h"
+#include "msrFullBarRests.h"
 #include "msrMeasureRepeats.h"
 #include "msrBeatRepeats.h"
 #include "msrSlashes.h"

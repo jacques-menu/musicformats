@@ -363,8 +363,8 @@ class EXP lpsr2lilypondTranslator :
   public visitor<S_msrMeasureRepeatPattern>,
   public visitor<S_msrMeasureRepeatReplicas>,
 
-  public visitor<S_msrFullMeasureRests>,
-  public visitor<S_msrFullMeasureRestsContents>,
+  public visitor<S_msrFullBarRests>,
+  public visitor<S_msrFullBarRestsContents>,
 
   // rehearsal mark
 
@@ -678,7 +678,7 @@ class EXP lpsr2lilypondTranslator :
     virtual void visitStart (S_msrLigature& elt);
     virtual void visitEnd   (S_msrLigature& elt);
 
-    // barLines
+    // bar lines
     virtual void visitStart (S_msrBarLine& elt);
     virtual void visitEnd   (S_msrBarLine& elt);
 
@@ -723,11 +723,11 @@ class EXP lpsr2lilypondTranslator :
     virtual void visitStart (S_msrMeasureRepeatReplicas& elt);
     virtual void visitEnd   (S_msrMeasureRepeatReplicas& elt);
 
-    // full measure rests
-    virtual void visitStart (S_msrFullMeasureRests& elt);
-    virtual void visitEnd   (S_msrFullMeasureRests& elt);
-    virtual void visitStart (S_msrFullMeasureRestsContents& elt);
-    virtual void visitEnd   (S_msrFullMeasureRestsContents& elt);
+    // full-bar rests
+    virtual void visitStart (S_msrFullBarRests& elt);
+    virtual void visitEnd   (S_msrFullBarRests& elt);
+    virtual void visitStart (S_msrFullBarRestsContents& elt);
+    virtual void visitEnd   (S_msrFullBarRestsContents& elt);
 
     // rehearsal marks
     virtual void visitStart (S_msrRehearsalMark& elt);
@@ -1200,10 +1200,10 @@ class EXP lpsr2lilypondTranslator :
     list<S_lpsrRepeatDescr>
                           fRepeatDescrsStack;
 
-    // full measure rests
+    // full-bar rests
     // ------------------------------------------------------
-    int                   fRemainingFullMeasureRestsNumber;
-    Bool                  fOnGoingFullMeasureRests;
+    int                   fRemainingFullBarRestsNumber;
+    Bool                  fOnGoingFullBarRests;
 
     // segments
     // ------------------------------------------------------

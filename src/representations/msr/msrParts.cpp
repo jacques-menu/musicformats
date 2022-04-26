@@ -143,8 +143,8 @@ void msrPart::initializePart ()
   // initialize part's number of measures
   fPartNumberOfMeasures = 0;
 
-  // full measure rests
-  fPartContainsFullMeasureRests = false;
+  // full-bar rests
+  fPartContainsFullBarRests = false;
 
   // current position in measure
   fPartCurrentPositionInMeasure = rational (0,0);
@@ -927,7 +927,7 @@ void msrPart::appendClefToPart (S_msrClef clef)
   --gIndenter;
 }
 
-void msrPart::appendKeyToPart  (S_msrKey  key)
+void msrPart::appendKeyToPart (S_msrKey key)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceKeys ()) {
@@ -1023,6 +1023,84 @@ void msrPart::appendTimeSignatureToPartClone (S_msrTimeSignature timeSignature)
   } // for
 
   --gIndenter;
+}
+
+void msrPart::appendTempoToPart (S_msrTempo tempo)
+{
+ #ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceTempos ()) {
+    gLogStream <<
+      "Appending tempo " << tempo->asString () <<
+      " to part " <<
+      getPartCombinedName () <<
+      endl;
+  }
+#endif
+
+ // append tempo to registered staves
+  for (S_msrStaff staff : fPartAllStavesList) {
+    staff->
+      appendTempoToStaff (tempo);
+  } // for
+}
+
+void msrPart::appendRehearsalMarkToPart (
+  S_msrRehearsalMark rehearsalMark)
+{
+ #ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
+    gLogStream <<
+      "Appending rehearsal mark " << rehearsalMark->asString () <<
+      " to part " <<
+      getPartCombinedName () <<
+      endl;
+  }
+#endif
+
+ // append rehearsal mark to registered staves
+  for (S_msrStaff staff : fPartAllStavesList) {
+    staff->
+      appendRehearsalMarkToStaff (rehearsalMark);
+  } // for
+}
+
+
+void msrPart::appendLineBreakToPart (S_msrLineBreak lineBreak)
+{
+ #ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
+    gLogStream <<
+      "Appending line break " << lineBreak->asString () <<
+      " to part " <<
+      getPartCombinedName () <<
+      endl;
+  }
+#endif
+
+ // append line break to registered staves
+  for (S_msrStaff staff : fPartAllStavesList) {
+    staff->
+      appendLineBreakToStaff (lineBreak);
+  } // for
+}
+
+void msrPart::appendPageBreakToPart (S_msrPageBreak pageBreak)
+{
+ #ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
+    gLogStream <<
+      "Appending page break " << pageBreak->asString () <<
+      " to part " <<
+      getPartCombinedName () <<
+      endl;
+  }
+#endif
+
+ // append page break to registered staves
+  for (S_msrStaff staff : fPartAllStavesList) {
+    staff->
+      appendPageBreakToStaff (pageBreak);
+  } // for
 }
 
 void msrPart::insertHiddenMeasureAndBarLineInPartClone (
@@ -1303,16 +1381,16 @@ void msrPart::appendPendingMeasureRepeatToPart (
   } // for
 }
 
-void msrPart::createFullMeasureRestsInPart (
+void msrPart::createFullBarRestsInPart (
   int inputLineNumber,
-  int multipleFullMeasureRestsMeasuresNumber)
+  int multipleFullBarRestsMeasuresNumber)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Creating " <<
       mfSingularOrPlural (
-        multipleFullMeasureRestsMeasuresNumber, "full measure rest", "full measure rests") <<
+        multipleFullBarRestsMeasuresNumber, "full-bar rest", "full-bar rests") <<
       " in part " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -1320,14 +1398,14 @@ void msrPart::createFullMeasureRestsInPart (
   }
 #endif
 
-  fPartContainsFullMeasureRests = true;
+  fPartContainsFullBarRests = true;
 
   // create multiple rest in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      createFullMeasureRestsInStaff (
+      createFullBarRestsInStaff (
         inputLineNumber,
-        multipleFullMeasureRestsMeasuresNumber);
+        multipleFullBarRestsMeasuresNumber);
   } // for
 }
 
@@ -1336,7 +1414,7 @@ void msrPart::replicateLastAppendedMeasureInPart (
   int replicatasNumber)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Replicating last appended measure in part " <<
       getPartCombinedName () <<
@@ -1356,14 +1434,14 @@ void msrPart::replicateLastAppendedMeasureInPart (
 void msrPart::addEmptyMeasuresToPart (
   int           inputLineNumber,
   const string& previousMeasureNumber,
-  int           fullMeasureRestsNumber)
+  int           fullBarRestsNumber)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Adding " <<
       mfSingularOrPlural (
-        fullMeasureRestsNumber, "full measure rest", "full measure rests") <<
+        fullBarRestsNumber, "full-bar rest", "full-bar rests") <<
       " to part " <<
       getPartCombinedName () <<
       ", " <<
@@ -1371,7 +1449,7 @@ void msrPart::addEmptyMeasuresToPart (
   }
 #endif
 
-  fPartContainsFullMeasureRests = true;
+  fPartContainsFullBarRests = true;
 
   // add multiple rest to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -1379,15 +1457,15 @@ void msrPart::addEmptyMeasuresToPart (
       addEmptyMeasuresToStaff (
         inputLineNumber,
         previousMeasureNumber,
-        fullMeasureRestsNumber);
+        fullBarRestsNumber);
   } // for
 }
 
-void msrPart::appendPendingFullMeasureRestsToPart (
+void msrPart::appendPendingFullBarRestsToPart (
   int inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Appending the pending multiple rest to part " <<
       getPartCombinedName () <<
@@ -1398,20 +1476,20 @@ void msrPart::appendPendingFullMeasureRestsToPart (
   // append pending multiple rest to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendPendingFullMeasureRestsToStaff (
+      appendPendingFullBarRestsToStaff (
         inputLineNumber);
   } // for
 }
 
-void msrPart::appendFullMeasureRestsCloneToPart (
+void msrPart::appendFullBarRestsCloneToPart (
   int               inputLineNumber,
-  S_msrFullMeasureRests multipleFullMeasureRests)
+  S_msrFullBarRests multipleFullBarRests)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Appending multiple rest '" <<
-      multipleFullMeasureRests->asString () <<
+      multipleFullBarRests->asString () <<
       "' to part clone " <<
       getPartCombinedName () <<
       endl;
@@ -1420,9 +1498,9 @@ void msrPart::appendFullMeasureRestsCloneToPart (
 
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendFullMeasureRestsCloneToStaff (
+      appendFullBarRestsCloneToStaff (
         inputLineNumber,
-        multipleFullMeasureRests);
+        multipleFullBarRests);
   } // for
 }
 
@@ -2684,8 +2762,8 @@ void msrPart::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fPartContainsFullMeasureRests" << " : " <<
-    fPartContainsFullMeasureRests <<
+    "fPartContainsFullBarRests" << " : " <<
+    fPartContainsFullBarRests <<
     endl <<
 
     setw (fieldWidth) <<
@@ -3139,8 +3217,8 @@ void msrPart::printSummary (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fPartContainsFullMeasureRests" << " : " <<
-    fPartContainsFullMeasureRests <<
+    "fPartContainsFullBarRests" << " : " <<
+    fPartContainsFullBarRests <<
     endl <<
 
     setw (fieldWidth) <<

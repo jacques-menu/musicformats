@@ -948,10 +948,10 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
 //   }
 
   // are the rests to be merged?
-  if (gGlobalLpsr2lilypondOahGroup->getMergeRests ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getMergeStaffCommonRests ()) {
     fResultingLpsr->
       // this score needs the 'merge rests' Scheme functions
-      setMergeRestsIsNeeded ();
+      setMergeStaffCommonRestsIsNeeded ();
   }
 
   // is the LilyPond macro 'boxAroundNextBarNumber' to be generated?
@@ -1436,7 +1436,8 @@ void msr2lpsrTranslator::visitEnd (S_msrPartGroup& elt)
 #endif
 
     fCurrentMsrScoreClone->
-      addPartGroupToScore (currentPartGroup);
+      addPartGroupToScore (
+        currentPartGroup);
 
     fPartGroupsStack.pop ();
   }
@@ -2603,7 +2604,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
         fCurrentSegmentClone);
 
 //   // is this a full measures rest? // JMI
-//   if (elt->getMeasureIsAFullMeasureRest ()) {
+//   if (elt->getMeasureIsAFullBarRest ()) {
 //     // yes
 //
 //     // should we compress full measures rests?
@@ -2611,26 +2612,26 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
 //       // yes
 //
 //       if (! fCurrentRestMeasure) {
-//         // this is the first full measure rest in the sequence
+//         // this is the first full-bar rest in the sequence
 //
-//         // create a full measure rests  containing fCurrentMeasureClone
-//         fCurrentFullMeasureRests =
-//           msrFullMeasureRests::create (
+//         // create a full-bar rests  containing fCurrentMeasureClone
+//         fCurrentFullBarRests =
+//           msrFullBarRests::create (
 //             inputLineNumber,
 //             fCurrentMeasureClone,
 //             fCurrentVoiceClone);
 //
-//         // append the current full measure rests to the current voice clone
+//         // append the current full-bar rests to the current voice clone
 //         fCurrentVoiceClone->
-//           appendFullMeasureRestsToVoice (
+//           appendFullBarRestsToVoice (
 //             inputLineNumber,
-//             fCurrentFullMeasureRests);
+//             fCurrentFullBarRests);
 //       }
 //
 //       else {
-//         // this is a subsequent full measure rest, merely append it
-//         fCurrentFullMeasureRests->
-//           appendMeasureCloneToFullMeasureRests (
+//         // this is a subsequent full-bar rest, merely append it
+//         fCurrentFullBarRests->
+//           appendMeasureCloneToFullBarRests (
 //             fCurrentMeasureClone);
 //       }
 //
@@ -2775,7 +2776,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
   } // switch
 
   // is this a full measures rest?
-  if (elt->getMeasureIsAFullMeasureRest ()) {
+  if (elt->getMeasureIsAFullBarRest ()) {
     // yes JMI
   }
 
@@ -2786,25 +2787,25 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     if (gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()) {
       // yes
 
-      if (fCurrentFullMeasureRests) {
-        // append the current full measure rests to the current voice clone
+      if (fCurrentFullBarRests) {
+        // append the current full-bar rests to the current voice clone
         fCurrentVoiceClone->
-          appendFullMeasureRestsToVoice (
+          appendFullBarRestsToVoice (
             inputLineNumber,
-            fCurrentFullMeasureRests);
+            fCurrentFullBarRests);
 
         // forget about the current rest measure
         fCurrentRestMeasure = nullptr;
 
-        // forget about the current full measure rests
-        fCurrentFullMeasureRests = nullptr;
+        // forget about the current full-bar rests
+        fCurrentFullBarRests = nullptr;
       }
 
       else {
         stringstream s;
 
         s <<
-          "fCurrentFullMeasureRests is null upon full measure rest end" <<
+          "fCurrentFullBarRests is null upon full-bar rest end" <<
           measureNumber <<
           "', measurePuristNumber = '" <<
           measurePuristNumber <<
@@ -3692,7 +3693,7 @@ void msr2lpsrTranslator::visitStart (S_msrOrnament& elt)
 #endif
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceOrnaments ()) {
+    if (gGlobalTracingOahGroup->getTraceOrnamentsDetails ()) {
       displayOnGoingNotesStack ("visitStart (S_msrOrnament&)");
     }
 #endif
@@ -6581,7 +6582,7 @@ void msr2lpsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 }
 
 //________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrFullMeasureRests& elt)
+void msr2lpsrTranslator::visitStart (S_msrFullBarRests& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6589,7 +6590,7 @@ void msr2lpsrTranslator::visitStart (S_msrFullMeasureRests& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrFullMeasureRests" <<
+      "--> Start visiting msrFullBarRests" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -6598,7 +6599,7 @@ void msr2lpsrTranslator::visitStart (S_msrFullMeasureRests& elt)
   ++gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Handling multiple rest start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
@@ -6608,12 +6609,12 @@ void msr2lpsrTranslator::visitStart (S_msrFullMeasureRests& elt)
 #endif
 
   fCurrentVoiceClone->
-    handleFullMeasureRestsStartInVoiceClone (
+    handleFullBarRestsStartInVoiceClone (
       inputLineNumber,
       elt);
 }
 
-void msr2lpsrTranslator::visitEnd (S_msrFullMeasureRests& elt)
+void msr2lpsrTranslator::visitEnd (S_msrFullBarRests& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6621,7 +6622,7 @@ void msr2lpsrTranslator::visitEnd (S_msrFullMeasureRests& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrFullMeasureRests" <<
+      "--> End visiting msrFullBarRests" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -6630,7 +6631,7 @@ void msr2lpsrTranslator::visitEnd (S_msrFullMeasureRests& elt)
   --gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Handling multiple rest start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
@@ -6640,12 +6641,16 @@ void msr2lpsrTranslator::visitEnd (S_msrFullMeasureRests& elt)
 #endif
 
   fCurrentVoiceClone->
-    handleFullMeasureRestsEndInVoiceClone (
+    handleFullBarRestsEndInVoiceClone (
       inputLineNumber);
+
+  fResultingLpsr->
+    // this score needs the 'merge full-bar rests' Scheme function
+    setMergeFullBarRestsIsNeeded ();
 }
 
 //________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
+void msr2lpsrTranslator::visitStart (S_msrFullBarRestsContents& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6653,7 +6658,7 @@ void msr2lpsrTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrFullMeasureRestsContents" <<
+      "--> Start visiting msrFullBarRestsContents" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -6662,20 +6667,20 @@ void msr2lpsrTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
   ++gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRestsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
-        "Upon visitStart (S_msrFullMeasureRestsContents&)");
+        "Upon visitStart (S_msrFullBarRestsContents&)");
   }
 #endif
 
   fCurrentVoiceClone->
-    handleFullMeasureRestsContentsStartInVoiceClone (
+    handleFullBarRestsContentsStartInVoiceClone (
       inputLineNumber);
 }
 
-void msr2lpsrTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
+void msr2lpsrTranslator::visitEnd (S_msrFullBarRestsContents& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6683,7 +6688,7 @@ void msr2lpsrTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrFullMeasureRestsContents" <<
+      "--> End visiting msrFullBarRestsContents" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -6692,16 +6697,16 @@ void msr2lpsrTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
   --gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRestsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
-        "Upon visitEnd (S_msrFullMeasureRestsContents&) 1");
+        "Upon visitEnd (S_msrFullBarRestsContents&) 1");
   }
 #endif
 
   fCurrentVoiceClone->
-    handleFullMeasureRestsContentsEndInVoiceClone (
+    handleFullBarRestsContentsEndInVoiceClone (
       inputLineNumber);
 }
 
@@ -6800,7 +6805,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeatPattern& elt)
   ++gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
@@ -6830,7 +6835,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
   --gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
@@ -6861,7 +6866,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasureRepeatReplicas& elt)
   ++gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
@@ -6892,7 +6897,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,

@@ -76,6 +76,34 @@ void waeInternalWarning (
 //______________________________________________________________________________
 void waeErrorWithoutException (
   const string& context,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message)
+{
+  if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    if (gGlobalOahOahGroup->getDisplaySourceCodePositions ()) {
+      gLogStream <<
+        mfBaseName (sourceCodeFileName) << ":" << sourceCodeLineNumber <<
+        ' ';
+    }
+
+    if (! gGlobalWaeOahGroup->getDontShowErrors ()) {
+      int saveIndent = gIndenter.getIndentation ();
+
+      gIndenter.resetToZero ();
+
+      gLogStream <<
+        "### " << context << " ERROR ### " <<
+        message <<
+        endl;
+
+      gIndenter.setIndentation (saveIndent);
+    }
+  }
+}
+
+void waeErrorWithoutException (
+  const string& context,
   const string& inputSourceName,
   int           inputLineNumber,
   const string& sourceCodeFileName,
@@ -109,6 +137,21 @@ void waeErrorWithoutException (
 
 void waeError (
   const string& context,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message)
+{
+  waeErrorWithoutException (
+    context,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+  throw mfException (message);
+}
+
+void waeError (
+  const string& context,
   const string& inputSourceName,
   int           inputLineNumber,
   const string& sourceCodeFileName,
@@ -124,6 +167,24 @@ void waeError (
     message);
 
   throw mfException (message);
+}
+
+void waeErrorWithException (
+  const string& context,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message,
+  S_mfException exception)
+{
+  waeErrorWithoutException (
+    context,
+    sourceCodeFileName,
+    sourceCodeLineNumber,
+    message);
+
+abort (); // JMI
+
+  throw *exception;
 }
 
 void waeErrorWithException (

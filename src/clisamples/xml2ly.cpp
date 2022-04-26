@@ -85,12 +85,45 @@ static void catchSignals ()	{}
 #endif
 
 //_______________________________________________________________________________
+#include <unistd.h>
+#include <signal.h>
+#include <sys/resource.h>
+#include <stdio.h>
+
+void allowCoreDumps ()
+{
+  pid_t pid = getpid();
+
+  struct rlimit l;
+  int ret = getrlimit(RLIMIT_CORE, &l);
+
+  printf ("--> getrlimit returned %d\n", ret);
+  printf ("--> rlim_cur = %llu\n", l.rlim_cur);
+  printf ("--> rlim_max = %llu\n", l.rlim_max);
+
+  l.rlim_cur = l.rlim_max;
+  printf ("--> setrlimit returned %d\n", setrlimit(RLIMIT_CORE, &l));
+
+  bool killMyself = false;
+
+  if (killMyself) {
+    printf ("Time to kill myself\n");
+    kill (pid, SIGBUS);
+  }
+}
+
+//_______________________________________________________________________________
 int main (int argc, char* argv[])
 {
   // setup signals catching
   // ------------------------------------------------------
 
 // JMI	catchSignals ();
+
+  // core dumps
+  // ------------------------------------------------------
+
+  allowCoreDumps ();
 
   // the service name
   // ------------------------------------------------------

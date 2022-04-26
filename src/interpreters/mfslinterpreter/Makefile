@@ -32,7 +32,7 @@ CXXFLAGS = -I.. -DMAIN
 # implicit target
 # ---------------------------------------------------------------------------
 
-all : $(GENERATED_FILES)
+mfslInterpreterCodeByFlexAndBison : $(GENERATED_FILES)
 
 
 # generation rules

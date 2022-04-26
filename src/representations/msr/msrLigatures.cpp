@@ -156,7 +156,6 @@ string msrLigature::ligatureKindAsString (
   } // switch
 
   return s.str ();
-
 }
 
 string msrLigature::ligatureLineEndKindAsString (
@@ -183,12 +182,36 @@ string msrLigature::ligatureLineEndKindAsString (
   } // switch
 
   return s.str ();
-
 }
 
 string msrLigature::ligatureKindAsString () const
 {
   return ligatureKindAsString (fLigatureKind);
+}
+
+string msrLigature::asString () const
+{
+  stringstream s;
+
+  s <<
+    "[Ligature " << ligatureKindAsString () <<
+
+    "ligatureLineEndKind" << " : " <<
+    ligatureLineEndKindAsString (
+      fLigatureLineEndKind) <<
+
+    "ligatureLineTypeKind" << " : " <<
+    msrLineTypeKindAsString (
+      fLigatureLineTypeKind) <<
+
+    "ligaturePlacementKind" << " : " <<
+    msrPlacementKindAsString (
+      fLigaturePlacementKind) <<
+
+    ", line " << fInputLineNumber <<
+    ']';
+
+  return s.str ();
 }
 
 void msrLigature::print (ostream& os) const

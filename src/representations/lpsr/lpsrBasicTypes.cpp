@@ -618,7 +618,7 @@ string dottedDurationAsLilypondStringWithoutBackSlash (
 }
 
 //_______________________________________________________________________________
-string fullMeasureRestsWholeNoteAsLilypondString (
+string fullBarRestsWholeNoteAsLilypondString (
   int             inputLineNumber,
   const rational& wholeNotes)
 {

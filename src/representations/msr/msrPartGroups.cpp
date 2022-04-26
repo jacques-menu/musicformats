@@ -73,6 +73,7 @@ S_msrPartGroup msrPartGroup::create (
       partGroupPartGroupUpLink,
       partGroupScoreUpLink);
   assert (o != nullptr);
+
   return o;
 }
 
@@ -99,7 +100,7 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
       0,                                  // partGroupSymbolDefaultX,
       msrPartGroup::kPartGroupImplicitYes,
       partGroupBarLineKind,
-      0,                                  // partGroupPartGroupUpLink,
+      nullptr,                            // partGroupPartGroupUpLink,
                                           // will be set below
       partGroupScoreUpLink);
   assert (o != nullptr);
@@ -407,6 +408,30 @@ void msrPartGroup::setPartGroupInstrumentName (
   }
 }
 
+void msrPartGroup::checkPartGroupElement (
+  S_msrPartGroupElement partGroupElement) const // TEMP JMI v0.9.63
+{
+  // sanity check
+  if (
+    ((void*) partGroupElement) == (void*) 0x0000000000000001
+      ||
+    ((void*) partGroupElement) == (void*) 0x0000000000000011
+  ) {
+    stringstream s;
+
+    s <<
+      "###### partGroupElement is " <<
+      (void*) partGroupElement <<
+      " ######"; // JMI v0.9.63
+
+    msrInternalError(
+      gGlobalServiceRunData->getInputSourceName (),
+      fInputLineNumber, // inputLineNumber // TEMP JMI v0.9.63
+      __FILE__, __LINE__,
+      s.str ());
+  }
+}
+
 S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
   int           inputLineNumber,
   const string& partID)
@@ -449,13 +474,20 @@ S_msrPart msrPartGroup::appendPartToPartGroupByItsPartID (
       "Appending part " <<
       part->getPartCombinedName () <<
       " to part group '" <<
-      fPartGroupNumber <<
+      asString () <<
       "'" <<
       endl;
+
+    this->printShort (gLogStream);
+    part->printShort (gLogStream);
   }
 #endif
 
+  // sanity check
+  checkPartGroupElement (part);
+
   fPartGroupPartsMap [partID] = part;
+
   fPartGroupElementsList.push_back (part);
 
 #ifdef TRACING_IS_ENABLED
@@ -517,13 +549,20 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
     gLogStream <<
       "Adding part " <<
       part->getPartCombinedName () <<
-      " to part group " << fPartGroupNumber <<
+      " to part group " << asString () <<
       endl;
+
+    this->printShort (gLogStream);
+    part->printShort (gLogStream);
   }
 #endif
 
   // register part into this part group's data
   fPartGroupPartsMap [part->getPartID ()] = part;
+
+  // sanity check
+  checkPartGroupElement (part);
+
   fPartGroupElementsList.push_back (part);
 
   // set part's partgroup upLink
@@ -540,8 +579,11 @@ void msrPartGroup::removePartFromPartGroup (
     gLogStream <<
       "Removing part " <<
       partToBeRemoved->getPartCombinedName () <<
-      " from part group " << fPartGroupNumber <<
+      " from part group " << asString () <<
       endl;
+
+    this->printShort (gLogStream);
+    partToBeRemoved->printShort (gLogStream);
   }
 #endif
 
@@ -602,10 +644,17 @@ void msrPartGroup::prependSubPartGroupToPartGroup (
     gLogStream <<
       "Prepending (sub-)part group " << partGroup->getPartGroupNumber () <<
       " to part group " << getPartGroupNumber ()  << endl;
+
+    this->printShort (gLogStream);
+    partGroup->printShort (gLogStream);
   }
 #endif
 
   // register it in this part group
+
+  // sanity check
+  checkPartGroupElement (partGroup);
+
   fPartGroupElementsList.push_front (partGroup);
 }
 
@@ -617,84 +666,126 @@ void msrPartGroup::appendSubPartGroupToPartGroup (
     gLogStream <<
       "Appending (sub-)part group " << partGroup->getPartGroupNumber () <<
       " to part group " << getPartGroupNumber ()  << endl;
+
+    this->printShort (gLogStream);
+    partGroup->printShort (gLogStream);
   }
 #endif
 
   // register it in this part group
+
+  // sanity check
+  checkPartGroupElement (partGroup);
+
   fPartGroupElementsList.push_back (partGroup);
 }
 
 void msrPartGroup::printPartGroupElementsList (
   int      inputLineNumber,
-  ostream& os)
+  ostream& os) const
 {
+  os <<
+    "fPartGroupElementsList:";
+
   if (fPartGroupElementsList.size ()) {
+    os << endl;
+    ++gIndenter;
+
     list<S_msrPartGroupElement>::const_iterator
       iBegin = fPartGroupElementsList.begin (),
       iEnd   = fPartGroupElementsList.end (),
       i      = iBegin;
 
     for ( ; ; ) {
-      S_msrElement
-        element = (*i);
-
       if (
-        S_msrPartGroup
-          nestedPartGroup =
-            dynamic_cast<msrPartGroup*>(&(*element))
-        ) {
-        // this is a part group
-        gLogStream <<
-          nestedPartGroup->
-            getPartGroupCombinedNameWithoutEndOfLines () <<
-          endl;
-
-        ++gIndenter;
-
-        nestedPartGroup->
-          printPartGroupElementsList (
-            inputLineNumber,
-            os);
-
-        --gIndenter;
-      }
-
-      else if (
-        S_msrPart
-          part =
-            dynamic_cast<msrPart*>(&(*element))
-        ) {
-        // this is a part
-        gLogStream <<
-          part->
-            getPartCombinedName () <<
-          endl;
-      }
-
-      else {
+        (void*) (*i) == (void*) 0x11
+          ||
+        (void*) (*i) == (void*) 0x1
+          ||
+        (void*) (*i) == (void*) 0x9
+          ||
+        (void*) (*i) == (void*) 0x0000000000000001
+          ||
+        (void*) (*i) == (void*) 0x0000000000000011
+          ||
+        (void*) (*i) <  (void*) 0x0000000001000000
+      ) {
         stringstream s;
 
         s <<
-          "an element of partgroup " <<
-          getPartGroupCombinedName () <<
-          " is not a part group nor a part";
+          "###### (*i) is " <<
+          (*i) <<
+          " ######"; // JMI v0.9.63
 
-        msrInternalError (
+        msrInternalWarning (
           gGlobalServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
+          fInputLineNumber, // inputLineNumber // TEMP JMI v0.9.63
+//           __FILE__, __LINE__,
           s.str ());
+      }
+
+      else {
+        S_msrElement
+          element = (*i);
+
+        if (
+          S_msrPartGroup
+            nestedPartGroup =
+              dynamic_cast<msrPartGroup*>(&(*element))
+          ) {
+          // this is a part group
+          gLogStream <<
+            nestedPartGroup->
+              getPartGroupCombinedNameWithoutEndOfLines () <<
+            endl;
+
+          ++gIndenter;
+
+          nestedPartGroup->
+            printPartGroupElementsList (
+              inputLineNumber,
+              os);
+
+          --gIndenter;
+        }
+
+        else if (
+          S_msrPart
+            part =
+              dynamic_cast<msrPart*>(&(*element))
+          ) {
+          // this is a part
+          gLogStream <<
+            part->
+              getPartCombinedName () <<
+            endl;
+        }
+
+        else {
+          stringstream s;
+
+          s <<
+            "an element of partgroup " <<
+            getPartGroupCombinedName () <<
+            " is not a part group nor a part";
+
+          msrInternalError (
+            gGlobalServiceRunData->getInputSourceName (),
+            inputLineNumber,
+            __FILE__, __LINE__,
+            s.str ());
+        }
       }
 
       if (++i == iEnd) break;
    // JMI   os << endl;
     } // for
+
+    --gIndenter;
   }
 
   else {
-    os <<
-      "none" <<
-      endl;
+    os << ' ' << "none" << endl;
   }
 }
 
@@ -815,6 +906,10 @@ void msrPartGroup::collectPartGroupPartsList (
           dynamic_cast<msrPart*>(&(*element))
       ) {
       // this is a part
+
+      // sanity check
+      checkPartGroupElement (part);
+
       partsList.push_back (part);
     }
 
@@ -898,15 +993,10 @@ void msrPartGroup::browseData (basevisitor* v)
       endl;
   }
 
-  for (
-    list<S_msrPartGroupElement>::const_iterator i =
-      fPartGroupElementsList.begin ();
-    i != fPartGroupElementsList.end ();
-    ++i
-  ) {
-    // browse the part element
+  for (S_msrPartGroupElement partGroupElement : fPartGroupElementsList) {
+    // browse the part group element
     msrBrowser<msrElement> browser (v);
-    browser.browse (*(*i));
+    browser.browse (*partGroupElement);
   } // for
 
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
@@ -1132,19 +1222,10 @@ void msrPartGroup::print (ostream& os) const
   }
 
   // print the part group elements if any
-  if (fPartGroupElementsList.size ()) {
-    os << endl;
-    list<S_msrPartGroupElement>::const_iterator
-      iBegin = fPartGroupElementsList.begin (),
-      iEnd   = fPartGroupElementsList.end (),
-      i      = iBegin;
 
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
-      os << endl;
-    } // for
-  }
+  printPartGroupElementsList (
+    fInputLineNumber,
+    gLogStream);
 
   --gIndenter;
 
@@ -1174,19 +1255,9 @@ void msrPartGroup::printShort (ostream& os) const
     endl;
 
   // print the part group elements if any
-  if (fPartGroupElementsList.size ()) {
-    os << endl;
-    list<S_msrPartGroupElement>::const_iterator
-      iBegin = fPartGroupElementsList.begin (),
-      iEnd   = fPartGroupElementsList.end (),
-      i      = iBegin;
-
-    for ( ; ; ) {
-      (*i)->printShort (os);
-      if (++i == iEnd) break;
-      os << endl;
-    } // for
-  }
+  printPartGroupElementsList (
+    fInputLineNumber,
+    gLogStream);
 
   --gIndenter;
 

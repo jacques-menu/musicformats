@@ -423,7 +423,7 @@ class EXP msrMeasureRepeatElement : public msrElement
                             const string&               context);
 
 
-    void                  appendFullMeasureRestsToMeasureRepeatElementsList (
+    void                  appendFullBarRestsToMeasureRepeatElementsList (
                             int                         inputLineNumber,
                             S_msrMeasureRepeat measureRepeat,
                             const string&                      context);

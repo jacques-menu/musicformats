@@ -86,7 +86,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
           mfcVersionNumber::createFromString ("0.9.63"),
           "February 21, 2022",
           list<string> {
-            "Fixed an issue in octave shift handling"
+            "Fixed an issue in octave shift handling",
+            "Replace \fermataMarkup by \fermata in R* full-bar rests"
           }
       ));
   }

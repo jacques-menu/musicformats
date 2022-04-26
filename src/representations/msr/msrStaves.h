@@ -10,11 +10,13 @@
 #include "msrMeasuresSlices.h"
 #include "msrParts.h"
 #include "msrPartGroups.h"
-#include "msrFullMeasureRests.h"
+#include "msrFullBarRests.h"
+#include "msrRehearsalMarks.h"
 #include "msrRepeats.h"
 #include "msrScores.h"
 #include "msrStavesDetails.h"
 #include "msrTimeSignatures.h"
+#include "msrTempos.h"
 #include "msrTranspositions.h"
 
 
@@ -191,6 +193,20 @@ class EXP msrStaff : public msrElement
     void                  appendTimeSignatureToStaff (S_msrTimeSignature timeSignature);
     void                  appendTimeSignatureToStaffClone (S_msrTimeSignature timeSignature);
 
+    // tempo
+
+    void                  appendTempoToStaff (S_msrTempo tempo);
+
+    // rehearsal marks
+
+    void                  appendRehearsalMarkToStaff (
+                            S_msrRehearsalMark rehearsalMark);
+
+    // breaks
+
+    void                  appendLineBreakToStaff (S_msrLineBreak lineBreak);
+    void                  appendPageBreakToStaff (S_msrPageBreak pageBreak);
+
     // dal segno
 
     void                  insertHiddenMeasureAndBarLineInStaffClone (
@@ -274,11 +290,11 @@ class EXP msrStaff : public msrElement
     void                  appendPendingMeasureRepeatToStaff (
                             int inputLineNumber);
 
-    void                  createFullMeasureRestsInStaff ( // JMI UNUSED
+    void                  createFullBarRestsInStaff ( // JMI UNUSED
                             int inputLineNumber,
-                            int fullMeasureRestsNumber);
+                            int fullBarRestsNumber);
 
-    void                  appendPendingFullMeasureRestsToStaff (
+    void                  appendPendingFullBarRestsToStaff (
                             int inputLineNumber);
 
     void                  replicateLastAppendedMeasureInStaff (
@@ -288,11 +304,11 @@ class EXP msrStaff : public msrElement
     void                  addEmptyMeasuresToStaff (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
-                            int           fullMeasureRestsNumber);
+                            int           fullBarRestsNumber);
 
-    void                  appendFullMeasureRestsCloneToStaff (
+    void                  appendFullBarRestsCloneToStaff (
                             int               inputLineNumber,
-                            S_msrFullMeasureRests fullMeasureRests);
+                            S_msrFullBarRests fullBarRests);
 
     void                  createBeatRepeatFromItsFirstMeasuresInStaff (
                             int inputLineNumber,
@@ -306,7 +322,7 @@ class EXP msrStaff : public msrElement
     void                  appendRepeatEndingCloneToStaff (
                             S_msrRepeatEnding repeatEndingClone);
 
-    // barLines
+    // bar lines
 
     void                  appendBarLineToStaff (S_msrBarLine barLine);
 
@@ -420,9 +436,9 @@ class EXP msrStaff : public msrElement
     vector<list<S_msrMeasure> >
                           fStaffMeasuresFlatListsVector;
 
-    // full measure rests
+    // full-bar rests
 
-    Bool                  fStaffContainsFullMeasureRests;
+    Bool                  fStaffContainsFullBarRests;
 
     // measures slices sequence
 

@@ -247,7 +247,7 @@ void lilypondScoreOutputKindAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }
@@ -1891,7 +1891,7 @@ void lilypondAccidentalStyleKindAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }
@@ -2490,7 +2490,7 @@ void lilypondLyricsDurationsKindAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
 
   }
   os << endl;
@@ -2725,7 +2725,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::printAtomWithVariableOptionsValu
 
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
 
   }
   os << endl;
@@ -3516,7 +3516,7 @@ The default is 'DEFAULT_VALUE'.)",
         "fAccidentalStyleKind",
         fAccidentalStyleKind));
 
-  // full measure rests
+  // full-bar rests
   // --------------------------------------
 
   subGroup->
@@ -3534,13 +3534,12 @@ This causes a \compressEmptyMeasures command to be generated.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "merge-rests-in-lilypond", "mril",
-R"(Merge rests in LilyPond to obtain better looking scores.
-This works only when there are 2 voices per staves.
+        "merge-staff-common-rests-in-lilypond", "mscril",
+R"(Merge common rests in LilyPond staves to obtain better looking scores.
 Limitations: this only handles two voices
 and does not handle multi-measure/whole-measure rests.)",
-        "fMergeRests",
-        fMergeRests));
+        "fMergeStaffCommonRests",
+        fMergeStaffCommonRests));
 
   // input line numbers
   // --------------------------------------
@@ -4033,7 +4032,7 @@ R"()",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "keep-repeat-barLines", "krbls",
+        "keep-repeat-barlines", "krbls",
 R"(Generate repeats start and and bar lines even though LilyPond would take care of them.)",
         "fKeepRepeatBarLines",
         fKeepRepeatBarLines));
@@ -5213,8 +5212,8 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
     setw (valueFieldWidth) << "fCompressEmptyMeasuresInLilypond" << " : " <<
       fCompressEmptyMeasuresInLilypond <<
       endl <<
-    setw (valueFieldWidth) << "fMergeRests" << " : " <<
-      fMergeRests <<
+    setw (valueFieldWidth) << "fMergeStaffCommonRests" << " : " <<
+      fMergeStaffCommonRests <<
       endl <<
 
     setw (valueFieldWidth) << "fInputLineNumbers" << " : " <<
@@ -5836,8 +5835,8 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
       fCompressEmptyMeasuresInLilypond <<
       endl <<
 
-    setw (fieldWidth) << "fMergeRests" << " : " <<
-      fMergeRests <<
+    setw (fieldWidth) << "fMergeStaffCommonRests" << " : " <<
+      fMergeStaffCommonRests <<
       endl <<
 
     setw (fieldWidth) << "fInputLineNumbers" << " : " <<

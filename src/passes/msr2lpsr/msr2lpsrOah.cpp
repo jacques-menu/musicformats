@@ -259,7 +259,7 @@ void msr2lpsrScoreOutputKindAtom::printAtomWithVariableOptionsValues (
       fLpsrScoreOutputKindVariable);
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }
@@ -360,7 +360,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // barLines
+  // bar lines
   // --------------------------------------
 
   subGroup->

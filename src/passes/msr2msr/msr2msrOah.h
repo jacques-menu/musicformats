@@ -272,10 +272,10 @@ class EXP msr2msrOahGroup : public oahGroup
     Bool                  getCoalesceEmptyMeasures () const
                               { return fCoalesceEmptyMeasures; }
 
-    Bool                  getMergeRests () const
-                              { return fMergeRests; }
+    Bool                  getMergeStaffCommonRests () const
+                              { return fMergeStaffCommonRests; }
 
-    // barLines
+    // bar lines
     Bool                  getCreateImplicitInitialRepeatBarLine () const
                               { return fCreateImplicitInitialRepeatBarLine; }
 
@@ -369,7 +369,7 @@ class EXP msr2msrOahGroup : public oahGroup
     // compress
     Bool                  fCoalesceEmptyMeasures;
 
-    Bool                  fMergeRests;
+    Bool                  fMergeStaffCommonRests;
 
     // repeats
     Bool                  fCreateImplicitInitialRepeatBarLine;

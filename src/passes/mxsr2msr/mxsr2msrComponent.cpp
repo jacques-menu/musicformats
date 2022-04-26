@@ -107,7 +107,8 @@ S_mfcPassComponent createMxsr2msrComponent ()
           mfcVersionNumber::createFromString ("0.9.63"),
           "April 14, 2022",
           list<string> {
-            "Fixed missing final barline issue"
+            "Fixed missing final barline issue",
+            "Fixed an octave shifts handling issue"
           }
       ));
   }

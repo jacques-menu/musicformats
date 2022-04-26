@@ -504,6 +504,20 @@ loc.step ();
     yy::parser::make_BAR (loc);
 }
 
+"&" {
+  if (drv.getDisplayTokens ()) {
+    gLogStream << "--> " << drv.getScannerLocation () <<
+    ": '" << yytext << '\'' <<
+    endl;
+  }
+
+  loc.begin.column += yyleng;
+  loc.step ();
+
+  return
+    yy::parser::make_AMPERSAND (loc);
+}
+
 "=" {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<

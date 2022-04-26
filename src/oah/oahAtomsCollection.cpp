@@ -2248,65 +2248,13 @@ ostream& operator<< (ostream& os, const S_oahDisplaySingleCharacterOptions& elt)
 }
 
 //______________________________________________________________________________
-Bool oahOnOffKindAsBool (
-  oahOnOffKind onOffKind)
-{
-  Bool result;
-
-  switch (onOffKind) {
-    case oahOnOffKind::kOahOnOffUnknown:
-      {
-        oahError (
-          "oahOnOffKind::kOahOnOffUnknown cannot be converted to Bool");
-      }
-      break;
-    case oahOnOffKind::kOahOnOffOn:
-      result = true;
-      break;
-    case oahOnOffKind::kOahOnOffOff:
-      result = false;
-      break;
-  } // switch
-
-  return result;
-}
-
-string oahOnOffKindAsString (
-  oahOnOffKind onOffKind)
-{
-  string result;
-
-  // no CamelCase here, these strings are used in the command line options
-
-  switch (onOffKind) {
-    case oahOnOffKind::kOahOnOffUnknown:
-      result = "unknown";
-      break;
-    case oahOnOffKind::kOahOnOffOn:
-      result = "on";
-      break;
-    case oahOnOffKind::kOahOnOffOff:
-      result = "off";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator<< (ostream& os, const oahOnOffKind elt)
-{
-  os << oahOnOffKindAsString (elt);
-  return os;
-}
-
-//______________________________________________________________________________
 S_oahOnOffAtom oahOnOffAtom::create (
   const string& longName,
   const string& shortName,
   const string& description,
   const string& valueSpecification,
   const string& variableName,
-  oahOnOffKind& onOffKindVariable)
+  mfOnOffKind& onOffKindVariable)
 {
   oahOnOffAtom* o = new
     oahOnOffAtom (
@@ -2326,7 +2274,7 @@ oahOnOffAtom::oahOnOffAtom (
   const string& description,
   const string& valueSpecification,
   const string& variableName,
-  oahOnOffKind& onOffKindVariable)
+  mfOnOffKind& onOffKindVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
@@ -2356,15 +2304,15 @@ void oahOnOffAtom::applyAtomWithValue (
 
   if (theString == "on") {
     setOnOffKindVariable (
-      oahOnOffKind::kOahOnOffOn);
+      mfOnOffKind::kMfOnOffOn);
   }
   else if (theString == "off") {
     setOnOffKindVariable (
-      oahOnOffKind::kOahOnOffOn);
+      mfOnOffKind::kMfOnOffOn);
   }
   else if (theString == "unknown") {
     setOnOffKindVariable (
-      oahOnOffKind::kOahOnOffUnknown);
+      mfOnOffKind::kMfOnOffUnknown);
   }
   else {
     stringstream s;
@@ -2378,7 +2326,7 @@ void oahOnOffAtom::applyAtomWithValue (
   }
 }
 
-void oahOnOffAtom::setOnOffKindVariable (oahOnOffKind value)
+void oahOnOffAtom::setOnOffKindVariable (mfOnOffKind value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -2509,7 +2457,7 @@ void oahOnOffAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -2706,7 +2654,7 @@ void oahBooleanAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -2903,7 +2851,7 @@ void oahTwoBooleansAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -3110,7 +3058,7 @@ void oahThreeBooleansAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }
@@ -4394,7 +4342,7 @@ void oahIntegerAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -4672,7 +4620,7 @@ void oahTwoIntegersAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -4921,7 +4869,7 @@ void oahFloatAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -5116,7 +5064,7 @@ void oahStringAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -5724,7 +5672,7 @@ void oahStringWithDefaultValueAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -5946,7 +5894,7 @@ void oahStringWithRegexAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -6200,7 +6148,7 @@ void oahRationalAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -6440,7 +6388,7 @@ void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
   else {
     if (fSetByAnOption) {
       os <<
-        "set by user" <<
+        "set by an option" <<
         endl;
     }
 
@@ -6639,7 +6587,7 @@ void oahRGBColorAtom::printAtomWithVariableOptionsValues (
     fRGBColorVariable.asString ();
   if (fSetByAnOption) {
     os <<
-      ", set by user" <<
+      ", set by an option" <<
       endl;
   }
   os << endl;
@@ -6954,7 +6902,7 @@ void oahIntSetElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      "set by user" <<
+      "set by an option" <<
       endl;
 
     --gIndenter;
@@ -7223,7 +7171,7 @@ void oahStringSetElementAtom::printAtomWithVariableOptionsValues (
   }
   else {
     os <<
-      "set by user" <<
+      "set by an option" <<
       endl;
 
     ++gIndenter;
@@ -7579,7 +7527,7 @@ void oahStringToIntMapElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      "set by user" <<
+      "set by an option" <<
       endl;
 
     --gIndenter;
@@ -7922,7 +7870,7 @@ void oahStringToStringMapElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      "set by user" <<
+      "set by an option" <<
       endl;
 
     --gIndenter;
@@ -8265,7 +8213,7 @@ void oahStringToStringMultiMapElementAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      "set by user" <<
+      "set by an option" <<
       endl;
 
     --gIndenter;
@@ -8581,7 +8529,7 @@ void oahStringAndIntegerAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -8922,7 +8870,7 @@ void oahStringAndTwoIntegersAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -9152,7 +9100,7 @@ void oahLengthUnitKindAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -9431,7 +9379,7 @@ void oahLengthAtom::printAtomWithVariableOptionsValues (
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   os << endl;
@@ -9722,7 +9670,7 @@ void oahMidiTempoAtom::printAtomWithVariableOptionsValues (
     fMidiTempoVariable.asString ();
   if (fSetByAnOption) {
     os <<
-      ", set by user" <<
+      ", set by an option" <<
       endl;
   }
   os << endl;

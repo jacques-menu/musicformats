@@ -16,7 +16,7 @@
 #include <cassert>
 #include "exports.h"
 
-namespace MusicXML2 
+namespace MusicXML2
 {
 
 /*!
@@ -28,15 +28,15 @@ namespace MusicXML2
 */
 class EXP smartable {
 	private:
-		unsigned 	refCount;		
+		unsigned 	refCount;
 	public:
 		//! gives the reference count of the object
 		unsigned refs() const         { return refCount; }
 		//! addReference increments the ref count and checks for refCount overflow
 		void addReference()           { refCount++; assert(refCount != 0); }
-		//! removeReference delete the object when refCount is zero		
+		//! removeReference delete the object when refCount is zero
 		void removeReference()		  { if (--refCount == 0) delete this; }
-		
+
 	protected:
 		smartable() : refCount(0) {}
 		smartable(const smartable&): refCount(0) {}
@@ -48,8 +48,8 @@ class EXP smartable {
 /*!
 \brief the smart pointer implementation
 
-	A smart pointer is in charge of maintaining the objects reference count 
-	by the way of pointers operators overloading. It supports class 
+	A smart pointer is in charge of maintaining the objects reference count
+	by the way of pointers operators overloading. It supports class
 	inheritance and conversion whenever possible.
 \n	Instances of the SMARTP class are supposed to use \e smartable types (or at least
 	objects that implements the \e addReference and \e removeReference
@@ -66,14 +66,14 @@ template<class T> class SMARTP {
 		//! build a smart pointer from a class pointer
 		SMARTP(T* rawptr) : fSmartPtr(rawptr)              { if (fSmartPtr) fSmartPtr->addReference(); }
 		//! build a smart pointer from an convertible class reference
-		template<class T2> 
+		template<class T2>
 		SMARTP(const SMARTP<T2>& ptr) : fSmartPtr((T*)ptr) { if (fSmartPtr) fSmartPtr->addReference(); }
 		//! build a smart pointer from another smart pointer reference
 		SMARTP(const SMARTP& ptr) : fSmartPtr((T*)ptr)     { if (fSmartPtr) fSmartPtr->addReference(); }
 
 		//! the smart pointer destructor: simply removes one reference count
 		~SMARTP()  { if (fSmartPtr) fSmartPtr->removeReference(); }
-		
+
 		//! cast operator to retrieve the actual class pointer
 		operator T*() const  { return fSmartPtr;	}
 
@@ -85,7 +85,7 @@ template<class T> class SMARTP {
 		}
 
 		//! operator -> overloading to access the actual class pointer
-		T* operator->() const	{ 
+		T* operator->() const	{
 			// checks for null dereference
 			assert (fSmartPtr != 0);
 			return fSmartPtr;

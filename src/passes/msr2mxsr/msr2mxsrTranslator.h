@@ -249,8 +249,8 @@ class EXP msr2mxsrTranslator :
   public visitor<S_msrMeasureRepeatPattern>,
   public visitor<S_msrMeasureRepeatReplicas>,
 
-  public visitor<S_msrFullMeasureRests>,
-  public visitor<S_msrFullMeasureRestsContents>,
+  public visitor<S_msrFullBarRests>,
+  public visitor<S_msrFullBarRestsContents>,
 
   // midi
 
@@ -518,10 +518,10 @@ class EXP msr2mxsrTranslator :
     virtual void visitStart (S_msrMeasureRepeatReplicas& elt);
     virtual void visitEnd   (S_msrMeasureRepeatReplicas& elt);
 
-    virtual void visitStart (S_msrFullMeasureRests& elt);
-    virtual void visitEnd   (S_msrFullMeasureRests& elt);
-    virtual void visitStart (S_msrFullMeasureRestsContents& elt);
-    virtual void visitEnd   (S_msrFullMeasureRestsContents& elt);
+    virtual void visitStart (S_msrFullBarRests& elt);
+    virtual void visitEnd   (S_msrFullBarRests& elt);
+    virtual void visitStart (S_msrFullBarRestsContents& elt);
+    virtual void visitEnd   (S_msrFullBarRestsContents& elt);
 */
 
 /*
@@ -820,9 +820,9 @@ class EXP msr2mxsrTranslator :
     void                      createMxmlAttributesElementAndAppendItToMeasure ();
 
 /*
-    // full measure rests compression
+    // full-bar rests compression
     S_msrMeasure              fCurrentRestMeasure;
-    S_msrFullMeasureRests         fCurrentFullMeasureRests;
+    S_msrFullBarRests         fCurrentFullBarRests;
 
     // bar checks
     // ------------------------------------------------------

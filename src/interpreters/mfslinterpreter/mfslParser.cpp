@@ -80,7 +80,7 @@ using namespace MusicFormats;
 
 S_mfslChoice pCurrentChoiceChoice;
 
-#line 97 "mfslParser.yy"
+#line 98 "mfslParser.yy"
 
 # include "mfslDriver.h"
 
@@ -719,7 +719,7 @@ namespace yy {
           switch (yyn)
             {
   case 2: // $@1: %empty
-#line 151 "mfslParser.yy"
+#line 152 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -740,7 +740,7 @@ namespace yy {
     break;
 
   case 3: // $@2: %empty
-#line 170 "mfslParser.yy"
+#line 171 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -753,37 +753,37 @@ namespace yy {
     break;
 
   case 5: // Number: "integer number"
-#line 187 "mfslParser.yy"
+#line 188 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
 #line 759 "mfslParser.cpp"
     break;
 
   case 6: // Number: "double number"
-#line 188 "mfslParser.yy"
+#line 189 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
 #line 765 "mfslParser.cpp"
     break;
 
   case 7: // SingleString: "single quoted_string"
-#line 196 "mfslParser.yy"
+#line 197 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
 #line 771 "mfslParser.cpp"
     break;
 
   case 8: // SingleString: "double quoted_string"
-#line 197 "mfslParser.yy"
+#line 198 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
 #line 777 "mfslParser.cpp"
     break;
 
   case 9: // String: SingleString
-#line 201 "mfslParser.yy"
+#line 202 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
 #line 783 "mfslParser.cpp"
     break;
 
   case 10: // String: String SingleString
-#line 203 "mfslParser.yy"
+#line 204 "mfslParser.yy"
       {
         yylhs.value.as < string > () = yystack_[1].value.as < string > () + yystack_[0].value.as < string > ();
       }
@@ -791,7 +791,7 @@ namespace yy {
     break;
 
   case 11: // Tool: "tool" ":" "name" ";"
-#line 214 "mfslParser.yy"
+#line 215 "mfslParser.yy"
       {
         drv.setTool (yystack_[1].value.as < string > ());
       }
@@ -799,7 +799,7 @@ namespace yy {
     break;
 
   case 15: // InputSource: "name"
-#line 234 "mfslParser.yy"
+#line 235 "mfslParser.yy"
       {
         drv.appendInputSouce (yystack_[0].value.as < string > ());
       }
@@ -807,15 +807,15 @@ namespace yy {
     break;
 
   case 16: // InputSource: String
-#line 239 "mfslParser.yy"
+#line 240 "mfslParser.yy"
       {
         drv.appendInputSouce (yystack_[0].value.as < string > ());
       }
 #line 815 "mfslParser.cpp"
     break;
 
-  case 24: // Option: "option"
-#line 271 "mfslParser.yy"
+  case 25: // Option: "option"
+#line 273 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -835,8 +835,8 @@ namespace yy {
 #line 836 "mfslParser.cpp"
     break;
 
-  case 25: // Option: "option" OptionValue
-#line 289 "mfslParser.yy"
+  case 26: // Option: "option" OptionValue
+#line 291 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -856,64 +856,64 @@ namespace yy {
 #line 857 "mfslParser.cpp"
     break;
 
-  case 26: // OptionValue: "name"
-#line 308 "mfslParser.yy"
+  case 27: // OptionValue: "name"
+#line 310 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
 #line 863 "mfslParser.cpp"
     break;
 
-  case 27: // OptionValue: Number
-#line 309 "mfslParser.yy"
+  case 28: // OptionValue: Number
+#line 311 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
 #line 869 "mfslParser.cpp"
     break;
 
-  case 28: // OptionValue: String
-#line 310 "mfslParser.yy"
+  case 29: // OptionValue: String
+#line 312 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
 #line 875 "mfslParser.cpp"
     break;
 
-  case 29: // OptionValue: "name" "=" "name"
-#line 312 "mfslParser.yy"
+  case 30: // OptionValue: "name" "=" "name"
+#line 314 "mfslParser.yy"
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + "=" + yystack_[0].value.as < string > ();
       }
 #line 883 "mfslParser.cpp"
     break;
 
-  case 30: // OptionValue: "name" ":" "name"
-#line 316 "mfslParser.yy"
+  case 31: // OptionValue: "name" ":" "name"
+#line 318 "mfslParser.yy"
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + ":" + yystack_[0].value.as < string > ();
       }
 #line 891 "mfslParser.cpp"
     break;
 
-  case 31: // OptionValue: "name" "=" Number
-#line 320 "mfslParser.yy"
+  case 32: // OptionValue: "name" "=" Number
+#line 322 "mfslParser.yy"
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + "=" + yystack_[0].value.as < string > ();
       }
 #line 899 "mfslParser.cpp"
     break;
 
-  case 32: // OptionValue: "name" ":" Number
-#line 324 "mfslParser.yy"
+  case 33: // OptionValue: "name" ":" Number
+#line 326 "mfslParser.yy"
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + ":" + yystack_[0].value.as < string > ();
       }
 #line 907 "mfslParser.cpp"
     break;
 
-  case 33: // $@3: %empty
-#line 335 "mfslParser.yy"
+  case 34: // $@3: %empty
+#line 337 "mfslParser.yy"
       {
         ++gIndenter;
 
         string choiceName = yystack_[1].value.as < string > ();
 
-        if (drv.getTraceChoiceStatements ()) {
+        if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "====> choice " << choiceName << " : " << "..." <<
             ", line " << drv.getScannerLocation () <<
@@ -937,8 +937,8 @@ namespace yy {
 #line 938 "mfslParser.cpp"
     break;
 
-  case 34: // $@4: %empty
-#line 367 "mfslParser.yy"
+  case 35: // $@4: %empty
+#line 369 "mfslParser.yy"
       {
         string
           choiceName = yystack_[7].value.as < string > (),
@@ -961,10 +961,10 @@ namespace yy {
 #line 962 "mfslParser.cpp"
     break;
 
-  case 35: // ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
-#line 388 "mfslParser.yy"
+  case 36: // ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
+#line 390 "mfslParser.yy"
       {
-        if (drv.getTraceChoiceStatements ()) {
+        if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
             endl;
@@ -975,8 +975,8 @@ namespace yy {
 #line 976 "mfslParser.cpp"
     break;
 
-  case 36: // ChoiceLabels: "name"
-#line 401 "mfslParser.yy"
+  case 37: // ChoiceLabels: "name"
+#line 403 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -992,8 +992,8 @@ namespace yy {
 #line 993 "mfslParser.cpp"
     break;
 
-  case 37: // ChoiceLabels: ChoiceLabels "|" "name"
-#line 415 "mfslParser.yy"
+  case 38: // ChoiceLabels: ChoiceLabels "|" "name"
+#line 417 "mfslParser.yy"
       {
         ++gIndenter;
 
@@ -1009,21 +1009,21 @@ namespace yy {
 #line 1010 "mfslParser.cpp"
     break;
 
-  case 38: // CaseLabel: "name"
-#line 435 "mfslParser.yy"
+  case 39: // CaseChoiceLabel: "name"
+#line 437 "mfslParser.yy"
       {
         ++gIndenter;
 
         string label = yystack_[0].value.as < string > ();
 
         // fetch case statement stack top
-        S_mfslCaseStatement
-          currentCaseStatement =
-            drv.caseStatementsStackTop ();
+        S_mfslCaseChoiceStatement
+          currentCaseChoiceStatement =
+            drv.caseChoiceStatementsStackTop ();
 
         // register this case label
-        currentCaseStatement->
-          registerCaseLabel (
+        currentCaseChoiceStatement->
+          registerCaseChoiceLabel (
             label,
             drv);
 
@@ -1032,14 +1032,14 @@ namespace yy {
 #line 1033 "mfslParser.cpp"
     break;
 
-  case 41: // $@5: %empty
-#line 462 "mfslParser.yy"
+  case 42: // $@5: %empty
+#line 464 "mfslParser.yy"
       {
         ++gIndenter;
 
         string choiceName = yystack_[1].value.as < string > ();
 
-        if (drv.getTraceCaseStatements ()) {
+        if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "====> case " << choiceName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
@@ -1072,34 +1072,34 @@ namespace yy {
             drv.getScannerLocation ());
         }
 
-        S_mfslCaseStatement
-          caseStatement =
-            mfslCaseStatement::create (
+        S_mfslCaseChoiceStatement
+          caseChoiceStatement =
+            mfslCaseChoiceStatement::create (
               choice,
               drv);
 
         // push it onto the case statements stack
-        drv.caseStatementsStackPush (
-          caseStatement);
+        drv.caseChoiceStatementsStackPush (
+          caseChoiceStatement);
 
         // mark the choice as used
         choice->
-          setChoiceIsUsedInCaseStatements ();
+          setChoiceIsUsedInCaseChoiceStatements ();
       }
 #line 1090 "mfslParser.cpp"
     break;
 
-  case 42: // CaseStatement: "case" "name" ":" $@5 OptionalCaseAlternativesSeq ";"
-#line 516 "mfslParser.yy"
+  case 43: // CaseChoiceStatement: "case" "name" ":" $@5 OptionalCaseChoiceAlternativesSeq ";"
+#line 518 "mfslParser.yy"
       {
         // have all the label been used as labels?
-        drv.caseStatementsStackTop ()->
+        drv.caseChoiceStatementsStackTop ()->
           checkThatAllLabelsHaveBeenUsed (drv);
 
         // pop the current case statement from the case statements stack
-        drv.caseStatementsStackPop ();
+        drv.caseChoiceStatementsStackPop ();
 
-        if (drv.getTraceCaseStatements ()) {
+        if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
             endl;
@@ -1110,68 +1110,68 @@ namespace yy {
 #line 1111 "mfslParser.cpp"
     break;
 
-  case 47: // $@6: %empty
-#line 547 "mfslParser.yy"
+  case 48: // $@6: %empty
+#line 549 "mfslParser.yy"
       {
         ++gIndenter;
 
-        S_mfslCaseStatement
-          currentCaseStatement =
-            drv.caseStatementsStackTop ();
+        S_mfslCaseChoiceStatement
+          currentCaseChoiceStatement =
+            drv.caseChoiceStatementsStackTop ();
 
         // forget about previous case alternative if any
-        currentCaseStatement->
+        currentCaseChoiceStatement->
           clearCaseCurrentLabelsList ();
       }
 #line 1127 "mfslParser.cpp"
     break;
 
-  case 48: // $@7: %empty
-#line 560 "mfslParser.yy"
+  case 49: // $@7: %empty
+#line 562 "mfslParser.yy"
       {
-        S_mfslCaseStatement
-          currentCaseStatement =
-            drv.caseStatementsStackTop ();
+        S_mfslCaseChoiceStatement
+          currentCaseChoiceStatement =
+            drv.caseChoiceStatementsStackTop ();
 
         // push a new current options block onto the stack
         stringstream s;
 
         s <<
           "Case alternative for " <<
-          currentCaseStatement->
+          currentCaseChoiceStatement->
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation ();
 
         string
-          caseAlternativeDescription =
+          CaseChoiceAlternativeDescription =
             s.str ();
 
         S_mfslOptionsBlock
-          caseAlternativeOptionsBlock =
+          CaseChoiceAlternativeOptionsBlock =
             mfslOptionsBlock::create (
-              caseAlternativeDescription);
+              CaseChoiceAlternativeDescription);
 
         drv.optionsBlocksStackPush (
-          caseAlternativeOptionsBlock,
-          caseAlternativeDescription);
+          CaseChoiceAlternativeOptionsBlock,
+          CaseChoiceAlternativeDescription);
       }
 #line 1159 "mfslParser.cpp"
     break;
 
-  case 49: // CaseAlternative: $@6 CaseLabelsSeq ":" $@7 OptionalScriptElementsSeq ";"
-#line 589 "mfslParser.yy"
+  case 50: // CaseChoiceAlternative: $@6 CaseChoiceLabelsSeq ":" $@7 OptionalScriptElementsSeq ";"
+#line 591 "mfslParser.yy"
       {
-        S_mfslCaseStatement
-          currentCaseStatement =
-            drv.caseStatementsStackTop ();
+        S_mfslCaseChoiceStatement
+          currentCaseChoiceStatement =
+            drv.caseChoiceStatementsStackTop ();
 
         S_mfslChoice
           currentCaseChoice =
-            currentCaseStatement->
+            currentCaseChoiceStatement->
               getCaseChoice ();
 
         // handle the labels
-        for (string label : currentCaseStatement->getCaseCurrentLabelsList ()) {
+        for (string label : currentCaseChoiceStatement->getCaseCurrentLabelsList ()) {
           // enrich the options block for label
           currentCaseChoice->
             enrichLabelOptionsBlock (
@@ -1185,7 +1185,7 @@ namespace yy {
 
         s <<
           "Discarding case alternative options block for " <<
-          currentCaseStatement->
+          currentCaseChoiceStatement->
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation () <<
           endl;
@@ -1200,20 +1200,211 @@ namespace yy {
 #line 1201 "mfslParser.cpp"
     break;
 
-  case 54: // LabelName: "name"
-#line 643 "mfslParser.yy"
+  case 51: // CaseInputName: "name"
+#line 636 "mfslParser.yy"
+      {
+        ++gIndenter;
+
+        string label = yystack_[0].value.as < string > ();
+
+        // fetch case input statement stack top
+        S_mfslCaseInputStatement
+          currentCaseInputStatement =
+            drv.caseInputStatementsStackTop ();
+
+        // register this case input label
+        currentCaseInputStatement->
+          registerCaseInputName (
+            label,
+            drv);
+
+        --gIndenter;
+      }
+#line 1224 "mfslParser.cpp"
+    break;
+
+  case 54: // $@8: %empty
+#line 663 "mfslParser.yy"
+      {
+        ++gIndenter;
+
+        string inputName = "$2 INPUT";
+
+        if (drv.getTraceCaseInputStatements ()) {
+          gLogStream <<
+            "====> case input " << inputName << ": ..." <<
+            ", line " << drv.getScannerLocation () <<
+            endl;
+        }
+
+        // create a new current case input statement
+        S_mfslInputsTable
+          inputsTable =
+            drv.getInputsTable ();
+
+        S_mfslInput
+          input =
+            inputsTable->
+              fetchInputByName (
+                inputName,
+                drv);
+
+        if (! input) {
+          stringstream s;
+
+          s <<
+            "name \"" << inputName <<
+            "\" is no input name, cannot be used in a 'select' statement" <<
+            ", line " << drv.getScannerLocation () <<
+            endl;
+
+          mfslError (
+            s.str (),
+            drv.getScannerLocation ());
+        }
+
+        S_mfslCaseInputStatement
+          caseInputStatement =
+            mfslCaseInputStatement::create (
+              input,
+              drv);
+
+        // push it onto the case input statements stack
+        drv.caseInputStatementsStackPush (
+          caseInputStatement);
+
+        // mark the input as used
+        input->
+          setInputIsUsedInCaseInputStatements ();
+      }
+#line 1281 "mfslParser.cpp"
+    break;
+
+  case 55: // CaseInputStatement: "case" "input" ":" $@8 OptionalCaseInputAlternativesSeq ";"
+#line 717 "mfslParser.yy"
+      {
+        // have all the name been used as names?
+        drv.caseInputStatementsStackTop ()->
+          clearCaseInputCurrentNamesList (); // drv ??? JMI
+
+        // pop the current case input statement from the case input statements stack
+        drv.caseInputStatementsStackPop ();
+
+        if (drv.getTraceCaseInputStatements ()) {
+          gLogStream <<
+            "------------------------------------------------------------" <<
+            endl;
+        }
+
+        --gIndenter;
+      }
+#line 1302 "mfslParser.cpp"
+    break;
+
+  case 60: // $@9: %empty
+#line 748 "mfslParser.yy"
+      {
+        ++gIndenter;
+
+        S_mfslCaseInputStatement
+          currentCaseInputStatement =
+            drv.caseInputStatementsStackTop ();
+
+        // forget about previous case input alternative if any
+        currentCaseInputStatement->
+          clearCaseInputCurrentNamesList ();
+      }
+#line 1318 "mfslParser.cpp"
+    break;
+
+  case 61: // $@10: %empty
+#line 761 "mfslParser.yy"
+      {
+        S_mfslCaseInputStatement
+          currentCaseInputStatement =
+            drv.caseInputStatementsStackTop ();
+
+        // push a new current options block onto the stack
+        stringstream s;
+
+        s <<
+          "CaseInput alternative for " <<
+          currentCaseInputStatement->
+            currentNamesListAsString () <<
+          ", line " << drv.getScannerLocation ();
+
+        string
+          caseInputAlternativeDescription =
+            s.str ();
+
+        S_mfslOptionsBlock
+          caseInputAlternativeOptionsBlock =
+            mfslOptionsBlock::create (
+              caseInputAlternativeDescription);
+
+        drv.optionsBlocksStackPush (
+          caseInputAlternativeOptionsBlock,
+          caseInputAlternativeDescription);
+      }
+#line 1350 "mfslParser.cpp"
+    break;
+
+  case 62: // CaseInputAlternative: $@9 CaseInputNamesSeq ":" $@10 OptionalScriptElementsSeq ";"
+#line 790 "mfslParser.yy"
+      {
+        S_mfslCaseInputStatement
+          currentCaseInputStatement =
+            drv.caseInputStatementsStackTop ();
+
+        S_mfslInput
+          currentCaseInputInput =
+            currentCaseInputStatement->
+              getCaseInputInput ();
+
+        // handle the names
+        for (string name : currentCaseInputStatement->getCaseInputCurrentNamesList ()) {
+          // enrich the options block for name
+          currentCaseInputInput->
+            enrichNameOptionsBlock (
+              name,
+              drv.optionsBlocksStackTop (),
+              drv);
+        } // for
+
+        // discard this case input alternative
+        stringstream s;
+
+        s <<
+          "Discarding case input alternative options block for " <<
+          currentCaseInputStatement->
+            currentNamesListAsString () <<
+          ", line " << drv.getScannerLocation () <<
+          endl;
+
+        string context = s.str ();
+
+        drv.optionsBlocksStackPop (
+          context);
+
+        --gIndenter;
+      }
+#line 1392 "mfslParser.cpp"
+    break;
+
+  case 67: // LabelName: "name"
+#line 844 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 1207 "mfslParser.cpp"
+#line 1398 "mfslParser.cpp"
     break;
 
-  case 55: // LabelName: "all"
-#line 645 "mfslParser.yy"
+  case 68: // LabelName: "all"
+#line 846 "mfslParser.yy"
       { yylhs.value.as < string > () = K_ALL_PSEUDO_LABEL_NAME; }
-#line 1213 "mfslParser.cpp"
+#line 1404 "mfslParser.cpp"
     break;
 
-  case 56: // SelectStatement: "select" "name" ":" LabelName ";"
-#line 650 "mfslParser.yy"
+  case 69: // SelectStatement: "select" "name" ":" LabelName ";"
+#line 851 "mfslParser.yy"
       {
         string
           choiceName = yystack_[3].value.as < string > (),
@@ -1223,11 +1414,11 @@ namespace yy {
           choiceName,
           label);
       }
-#line 1227 "mfslParser.cpp"
+#line 1418 "mfslParser.cpp"
     break;
 
 
-#line 1231 "mfslParser.cpp"
+#line 1422 "mfslParser.cpp"
 
             default:
               break;
@@ -1411,18 +1602,21 @@ namespace yy {
   {
     static const char *const yy_sname[] =
     {
-    "end of file", "error", "invalid token", "|", "=", ";", ":", ",",
+    "end of file", "error", "invalid token", "|", "&", "=", ";", ":", ",",
   "tool", "input", "choice", "default", "case", "select", "all",
   "integer number", "double number", "single quoted_string",
   "double quoted_string", "name", "option", "$accept", "Script", "$@1",
   "$@2", "Number", "SingleString", "String", "Tool", "Input",
   "InputSourcesSeq", "InputSource", "OptionalScriptElementsSeq",
   "ScriptElementsSeq", "ScriptElement", "Option", "OptionValue",
-  "ChoiceDeclaration", "$@3", "$@4", "ChoiceLabels", "CaseLabel",
-  "CaseLabelsSeq", "CaseStatement", "$@5", "OptionalCaseAlternativesSeq",
-  "CaseAlternativesSeq", "CaseAlternative", "$@6", "$@7",
-  "OptionalSelectStatements", "SelectStatementSeq", "LabelName",
-  "SelectStatement", YY_NULLPTR
+  "ChoiceDeclaration", "$@3", "$@4", "ChoiceLabels", "CaseChoiceLabel",
+  "CaseChoiceLabelsSeq", "CaseChoiceStatement", "$@5",
+  "OptionalCaseChoiceAlternativesSeq", "CaseChoiceAlternativesSeq",
+  "CaseChoiceAlternative", "$@6", "$@7", "CaseInputName",
+  "CaseInputNamesSeq", "CaseInputStatement", "$@8",
+  "OptionalCaseInputAlternativesSeq", "CaseInputAlternativesSeq",
+  "CaseInputAlternative", "$@9", "$@10", "OptionalSelectStatements",
+  "SelectStatementSeq", "LabelName", "SelectStatement", YY_NULLPTR
     };
     return yy_sname[yysymbol];
   }
@@ -1691,22 +1885,24 @@ namespace yy {
   }
 
 
-  const signed char parser::yypact_ninf_ = -24;
+  const signed char parser::yypact_ninf_ = -65;
 
-  const signed char parser::yytable_ninf_ = -48;
+  const signed char parser::yytable_ninf_ = -61;
 
   const signed char
   parser::yypact_[] =
   {
-      -2,    11,    36,    14,    18,   -24,    32,   -24,    34,     8,
-      -9,   -24,   -24,   -24,   -24,   -24,    -8,    23,   -24,    21,
-      22,    -3,   -24,    -9,   -24,   -24,   -24,   -24,   -24,   -24,
-       8,    37,    38,   -24,   -24,    25,   -24,    -8,   -24,    29,
-     -24,   -24,   -24,   -24,   -11,     3,    27,   -24,    29,   -24,
-      28,    30,   -24,   -24,   -24,   -24,    39,   -24,   -24,    17,
-      43,    30,   -24,    31,   -12,    33,    40,   -24,   -24,   -24,
-     -24,    26,   -24,   -24,    48,   -24,    49,   -24,    31,   -24,
-      35,    -9,   -24,   -24,    51,    52,   -24,   -24
+      10,     3,    22,    33,     7,   -65,    37,   -65,    39,   -13,
+     -10,   -65,   -65,   -65,   -65,   -65,    17,    24,   -65,    27,
+      -8,    -2,   -65,   -10,   -65,   -65,   -65,   -65,   -65,   -65,
+     -13,   -65,    41,    42,    43,   -65,   -65,    26,   -65,    17,
+     -65,    38,   -65,   -65,   -65,   -65,   -65,     4,     9,    31,
+     -65,    38,   -65,    34,    35,    36,   -65,   -65,   -65,   -65,
+      46,   -65,   -65,     1,    40,    35,   -65,    44,    51,    36,
+     -65,    45,    -7,    47,    48,   -65,   -65,   -65,   -65,    30,
+     -65,   -65,   -65,   -65,    32,   -65,   -65,    52,   -65,    54,
+     -65,    44,   -65,    45,   -65,    49,   -10,   -65,   -10,   -65,
+     -65,    53,    56,    57,   -65,   -65,   -65
   };
 
   const signed char
@@ -1714,82 +1910,91 @@ namespace yy {
   {
        0,     0,     0,     0,     0,     1,     0,     2,     0,     0,
       18,    11,     7,     8,    15,     9,    16,     0,    13,     0,
-       0,    24,     3,    17,    19,    21,    22,    23,    10,    12,
-       0,     0,     0,     5,     6,    26,    27,    28,    25,    51,
-      20,    14,    33,    41,     0,     0,     0,     4,    50,    52,
-       0,    44,    29,    31,    30,    32,     0,    53,    36,     0,
-       0,    43,    45,     0,     0,     0,     0,    42,    46,    38,
-      39,     0,    55,    54,     0,    37,     0,    48,     0,    56,
-       0,    18,    40,    34,     0,     0,    49,    35
+       0,    25,     3,    17,    19,    21,    22,    23,    24,    10,
+       0,    12,     0,     0,     0,     5,     6,    27,    28,    29,
+      26,    64,    20,    14,    34,    54,    42,     0,     0,     0,
+       4,    63,    65,     0,    57,    45,    30,    32,    31,    33,
+       0,    66,    37,     0,     0,    56,    58,     0,     0,    44,
+      46,     0,     0,     0,     0,    55,    59,    51,    52,     0,
+      43,    47,    39,    40,     0,    68,    67,     0,    38,     0,
+      61,     0,    49,     0,    69,     0,    18,    53,    18,    41,
+      35,     0,     0,     0,    62,    50,    36
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -24,   -24,   -24,   -24,   -10,   -16,    41,   -24,   -24,   -24,
-      42,   -23,   -24,    44,   -24,   -24,   -24,   -24,   -24,   -24,
-     -19,   -24,   -24,   -24,   -24,   -24,    -1,   -24,   -24,   -24,
-     -24,   -24,    13
+     -65,   -65,   -65,   -65,    -6,   -16,    50,   -65,   -65,   -65,
+      55,   -64,   -65,    58,   -65,   -65,   -65,   -65,   -65,   -65,
+     -27,   -65,   -65,   -65,   -65,   -65,    -1,   -65,   -65,   -21,
+     -65,   -65,   -65,   -65,   -65,     8,   -65,   -65,   -65,   -65,
+     -65,    21
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-       0,     2,    10,    39,    36,    15,    16,     3,     7,    17,
-      18,    22,    23,    24,    25,    38,    26,    50,    85,    59,
-      70,    71,    27,    51,    60,    61,    62,    63,    81,    47,
-      48,    74,    49
+       0,     2,    10,    41,    38,    15,    16,     3,     7,    17,
+      18,    22,    23,    24,    25,    40,    26,    53,   103,    63,
+      83,    84,    27,    55,    68,    69,    70,    71,    98,    78,
+      79,    28,    54,    64,    65,    66,    67,    96,    50,    51,
+      87,    52
   };
 
   const signed char
   parser::yytable_[] =
   {
-      28,    19,    72,    20,    33,    34,     1,    73,    52,    12,
-      13,    21,    33,    34,    12,    13,    35,     4,    33,    34,
-      65,    28,    54,     6,    66,    12,    13,    14,    29,    44,
-      30,    45,    77,    78,    53,    55,     5,     8,     9,    11,
-      31,    32,    46,    42,    43,    64,    56,    58,    67,   -47,
-      69,    76,    75,    79,    83,    80,    86,    87,    84,    82,
-      68,    57,    37,     0,     0,     0,     0,    40,     0,     0,
-       0,     0,    41
+      29,    19,    33,    20,    73,    12,    13,    14,    85,    74,
+       4,    21,    34,    86,    35,    36,    12,    13,    37,     1,
+      35,    36,     5,    29,    56,    35,    36,     8,    30,    58,
+      31,    47,   101,    48,   102,    12,    13,    90,    91,    92,
+      93,    57,    59,     6,     9,    11,    75,    32,    44,    45,
+      46,    60,    49,    72,    62,   -60,   -48,    80,    94,   104,
+      89,    95,   105,   106,    77,    82,    99,    88,    81,   100,
+      97,    39,    61,    76,     0,     0,     0,     0,     0,     0,
+       0,    42,     0,     0,     0,    43
   };
 
   const signed char
   parser::yycheck_[] =
   {
-      16,    10,    14,    12,    15,    16,     8,    19,    19,    17,
-      18,    20,    15,    16,    17,    18,    19,     6,    15,    16,
-       3,    37,    19,     9,     7,    17,    18,    19,     5,     4,
-       7,     6,     6,     7,    44,    45,     0,    19,     6,     5,
-      19,    19,    13,     6,     6,     6,    19,    19,     5,    19,
-      19,    11,    19,     5,    19,     6,     5,     5,    81,    78,
-      61,    48,    21,    -1,    -1,    -1,    -1,    23,    -1,    -1,
-      -1,    -1,    30
+      16,    11,    10,    13,     3,    18,    19,    20,    15,     8,
+       7,    21,    20,    20,    16,    17,    18,    19,    20,     9,
+      16,    17,     0,    39,    20,    16,    17,    20,     4,    20,
+       6,     5,    96,     7,    98,    18,    19,     7,     8,     7,
+       8,    47,    48,    10,     7,     6,     6,    20,     7,     7,
+       7,    20,    14,     7,    20,    20,    20,     6,     6,     6,
+      12,     7,     6,     6,    20,    20,    93,    20,    69,    20,
+      91,    21,    51,    65,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    23,    -1,    -1,    -1,    30
   };
 
   const signed char
   parser::yystos_[] =
   {
-       0,     8,    22,    28,     6,     0,     9,    29,    19,     6,
-      23,     5,    17,    18,    19,    26,    27,    30,    31,    10,
-      12,    20,    32,    33,    34,    35,    37,    43,    26,     5,
-       7,    19,    19,    15,    16,    19,    25,    27,    36,    24,
-      34,    31,     6,     6,     4,     6,    13,    50,    51,    53,
-      38,    44,    19,    25,    19,    25,    19,    53,    19,    40,
-      45,    46,    47,    48,     6,     3,     7,     5,    47,    19,
-      41,    42,    14,    19,    52,    19,    11,     6,     7,     5,
-       6,    49,    41,    19,    32,    39,     5,     5
+       0,     9,    23,    29,     7,     0,    10,    30,    20,     7,
+      24,     6,    18,    19,    20,    27,    28,    31,    32,    11,
+      13,    21,    33,    34,    35,    36,    38,    44,    53,    27,
+       4,     6,    20,    10,    20,    16,    17,    20,    26,    28,
+      37,    25,    35,    32,     7,     7,     7,     5,     7,    14,
+      60,    61,    63,    39,    54,    45,    20,    26,    20,    26,
+      20,    63,    20,    41,    55,    56,    57,    58,    46,    47,
+      48,    49,     7,     3,     8,     6,    57,    20,    51,    52,
+       6,    48,    20,    42,    43,    15,    20,    62,    20,    12,
+       7,     8,     7,     8,     6,     7,    59,    51,    50,    42,
+      20,    33,    33,    40,     6,     6,     6
   };
 
   const signed char
   parser::yyr1_[] =
   {
-       0,    21,    23,    24,    22,    25,    25,    26,    26,    27,
-      27,    28,    29,    30,    30,    31,    31,    32,    32,    33,
-      33,    34,    34,    34,    35,    35,    36,    36,    36,    36,
-      36,    36,    36,    38,    39,    37,    40,    40,    41,    42,
-      42,    44,    43,    45,    45,    46,    46,    48,    49,    47,
-      50,    50,    51,    51,    52,    52,    53
+       0,    22,    24,    25,    23,    26,    26,    27,    27,    28,
+      28,    29,    30,    31,    31,    32,    32,    33,    33,    34,
+      34,    35,    35,    35,    35,    36,    36,    37,    37,    37,
+      37,    37,    37,    37,    39,    40,    38,    41,    41,    42,
+      43,    43,    45,    44,    46,    46,    47,    47,    49,    50,
+      48,    51,    52,    52,    54,    53,    55,    55,    56,    56,
+      58,    59,    57,    60,    60,    61,    61,    62,    62,    63
   };
 
   const signed char
@@ -1797,10 +2002,11 @@ namespace yy {
   {
        0,     2,     0,     0,     6,     1,     1,     1,     1,     1,
        2,     4,     4,     1,     3,     1,     1,     1,     0,     1,
-       2,     1,     1,     1,     1,     2,     1,     1,     1,     3,
-       3,     3,     3,     0,     0,    11,     1,     3,     1,     1,
-       3,     0,     6,     1,     0,     1,     2,     0,     0,     6,
-       1,     0,     1,     2,     1,     1,     5
+       2,     1,     1,     1,     1,     1,     2,     1,     1,     1,
+       3,     3,     3,     3,     0,     0,    11,     1,     3,     1,
+       1,     3,     0,     6,     1,     0,     1,     2,     0,     0,
+       6,     1,     1,     3,     0,     6,     1,     0,     1,     2,
+       0,     0,     6,     1,     0,     1,     2,     1,     1,     5
   };
 
 
@@ -1810,12 +2016,13 @@ namespace yy {
   const short
   parser::yyrline_[] =
   {
-       0,   151,   151,   170,   147,   187,   188,   196,   197,   201,
-     202,   213,   224,   228,   229,   233,   238,   249,   250,   254,
-     256,   260,   261,   262,   270,   288,   308,   309,   310,   311,
-     315,   319,   323,   335,   367,   334,   400,   414,   434,   456,
-     457,   462,   461,   535,   536,   540,   542,   547,   560,   547,
-     633,   634,   638,   639,   643,   644,   649
+       0,   152,   152,   171,   148,   188,   189,   197,   198,   202,
+     203,   214,   225,   229,   230,   234,   239,   250,   251,   255,
+     257,   261,   262,   263,   264,   272,   290,   310,   311,   312,
+     313,   317,   321,   325,   337,   369,   336,   402,   416,   436,
+     458,   459,   464,   463,   537,   538,   542,   544,   549,   562,
+     549,   635,   657,   658,   663,   662,   736,   737,   741,   743,
+     748,   761,   748,   834,   835,   839,   840,   844,   845,   850
   };
 
   void
@@ -1847,9 +2054,9 @@ namespace yy {
 
 
 } // yy
-#line 1851 "mfslParser.cpp"
+#line 2058 "mfslParser.cpp"
 
-#line 662 "mfslParser.yy"
+#line 863 "mfslParser.yy"
 
 //_______________________________________________________________________________
 

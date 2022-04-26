@@ -52,10 +52,13 @@ class EXP msrTupletElement : public msrMeasureElement
                             int positionInTuplet)
                               { fPositionInTuplet = positionInTuplet; }
 
-    const size_t    getPositionInTuplet () const
+    const size_t          getPositionInTuplet () const
                               { return fPositionInTuplet; }
 
   protected:
+
+    // protected fields
+    // ------------------------------------------------------
 
     /*
       The tuplet uplink is declared in the sub-classes,

@@ -7,9 +7,12 @@
 #include "msrPartGroups.h"
 #include "msrPartGroupElements.h"
 #include "msrRepeats.h"
-#include "msrFullMeasureRests.h"
+#include "msrFullBarRests.h"
+#include "msrRehearsalMarks.h"
+#include "msrSegnos.h"
 #include "msrStaves.h"
 #include "msrStavesDetails.h"
+#include "msrTempos.h"
 #include "msrTimeSignatures.h"
 #include "msrTranspositions.h"
 
@@ -307,18 +310,21 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendClefToPart (S_msrClef clef);
 
-    void                  appendKeyToPart (S_msrKey  key);
+    void                  appendKeyToPart (S_msrKey key);
 
     void                  appendTimeSignatureToPart (
                             S_msrTimeSignature timeSignature);
     void                  appendTimeSignatureToPartClone (
                             S_msrTimeSignature timeSignature);
 
-    // dal segno
+    // tempo
 
-    void                  insertHiddenMeasureAndBarLineInPartClone (
-                            int             inputLineNumber,
-                            const rational& positionInMeasure);
+    void                  appendTempoToPart (S_msrTempo tempo);
+
+    // rehearsal marks
+
+    void                  appendRehearsalMarkToPart (
+                            S_msrRehearsalMark rehearsalMark);
 
     // transpose
 
@@ -332,9 +338,18 @@ class EXP msrPart : public msrPartGroupElement
 
     // tuplets JMI ???
 
-    // barLines
+    // bar lines
 
     void                  appendBarLineToPart (S_msrBarLine barLine);
+
+    void                  insertHiddenMeasureAndBarLineInPartClone (
+                            int             inputLineNumber,
+                            const rational& positionInMeasure);
+
+    // breaks
+
+    void                  appendLineBreakToPart (S_msrLineBreak lineBreak);
+    void                  appendPageBreakToPart (S_msrPageBreak pageBreak);
 
     // repeats
 
@@ -369,13 +384,13 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendRepeatEndingCloneToPart (
                             S_msrRepeatEnding repeatEndingCLone);
 
-    // full measure rests
+    // full-bar rests
 
-    void                  createFullMeasureRestsInPart (
+    void                  createFullBarRestsInPart (
                             int inputLineNumber,
-                            int fullMeasureRestsNumber);
+                            int fullBarRestsNumber);
 
-    void                  appendPendingFullMeasureRestsToPart (
+    void                  appendPendingFullBarRestsToPart (
                             int inputLineNumber);
 
     void                  replicateLastAppendedMeasureInPart (
@@ -385,11 +400,11 @@ class EXP msrPart : public msrPartGroupElement
     void                  addEmptyMeasuresToPart (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
-                            int           fullMeasureRestsNumber);
+                            int           fullBarRestsNumber);
 
-    void                  appendFullMeasureRestsCloneToPart (
+    void                  appendFullBarRestsCloneToPart (
                             int               inputLineNumber,
-                            S_msrFullMeasureRests fullMeasureRests);
+                            S_msrFullBarRests fullBarRests);
 
     // measure repeats
 
@@ -403,7 +418,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendMeasureRepeatCloneToPart (
                             int               inputLineNumber,
-                            S_msrFullMeasureRests fullMeasureRests);
+                            S_msrFullBarRests fullBarRests);
 
     // staves
 
@@ -614,9 +629,9 @@ class EXP msrPart : public msrPartGroupElement
 
     static int            gPartsCounter;
 
-    // full measure rests
+    // full-bar rests
 
-    Bool                  fPartContainsFullMeasureRests;
+    Bool                  fPartContainsFullBarRests;
 
     // measures slices sequence
 

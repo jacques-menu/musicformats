@@ -174,15 +174,15 @@ class EXP msrScore : public msrBookElement
     int                   getScoreNumberOfMeasures () const
                               { return fScoreNumberOfMeasures; }
 
-    void                  setStaffContainsFullMeasureRests (
-                            Bool staffContainsFullMeasureRests)
+    void                  setStaffContainsFullBarRests (
+                            Bool staffContainsFullBarRests)
                               {
-                                fStaffContainsFullMeasureRests =
-                                  staffContainsFullMeasureRests;
+                                fStaffContainsFullBarRests =
+                                  staffContainsFullBarRests;
                               }
 
-    Bool                  getStaffContainsFullMeasureRests () const
-                              { return fStaffContainsFullMeasureRests; }
+    Bool                  getStaffContainsFullBarRests () const
+                              { return fStaffContainsFullBarRests; }
 
     // part group names max length
     void                  setScorePartGroupNamesMaxLength (size_t value)
@@ -195,7 +195,7 @@ class EXP msrScore : public msrBookElement
     void                  setScorePartNamesMaxLength (size_t value)
                               { fScorePartNamesMaxLength = value; }
 
-    size_t               getScorePartNamesMaxLength () const
+    size_t                getScorePartNamesMaxLength () const
                               { return fScorePartNamesMaxLength; }
 
     // instrument names max lengthes
@@ -203,14 +203,14 @@ class EXP msrScore : public msrBookElement
                             size_t value)
                               { fScoreInstrumentNamesMaxLength = value; }
 
-    size_t               getScoreInstrumentNamesMaxLength () const
+    size_t                getScoreInstrumentNamesMaxLength () const
                               { return fScoreInstrumentNamesMaxLength; }
 
     void                  setIdentificationScoreInstrumentAbbreviationsMaxLength (
                             size_t value)
                               { fScoreInstrumentAbbreviationsMaxLength = value; }
 
-    size_t               getScoreInstrumentAbbreviationsMaxLength () const
+    size_t                getScoreInstrumentAbbreviationsMaxLength () const
                               { return fScoreInstrumentAbbreviationsMaxLength; }
 
     // inhibiting browsing
@@ -269,15 +269,15 @@ class EXP msrScore : public msrBookElement
                                   fInhibitMeasureRepeatReplicasBrowsing;
                               };
 
-    void                  setInhibitFullMeasureRestsBrowsing ()
+    void                  setInhibitFullBarRestsBrowsing ()
                               {
-                                fInhibitFullMeasureRestsBrowsing = true;
+                                fInhibitFullBarRestsBrowsing = true;
                               }
 
-    Bool                  getInhibitFullMeasureRestsBrowsing () const
+    Bool                  getInhibitFullBarRestsBrowsing () const
                               {
                                 return
-                                  fInhibitFullMeasureRestsBrowsing;
+                                  fInhibitFullBarRestsBrowsing;
                               };
 
     // voices
@@ -383,22 +383,22 @@ class EXP msrScore : public msrBookElement
 
     int                   fScoreNumberOfMeasures;
 
-    // full measure rests
+    // full-bar rests
 
-    Bool                  fStaffContainsFullMeasureRests;
+    Bool                  fStaffContainsFullBarRests;
 
     // part group names max length
 
-    size_t               fScorePartGroupNamesMaxLength;
+    size_t                fScorePartGroupNamesMaxLength;
 
     // part names max length
 
-    size_t               fScorePartNamesMaxLength;
+    size_t                fScorePartNamesMaxLength;
 
     // instrument names max lengthes
 
-    size_t               fScoreInstrumentNamesMaxLength;
-    size_t               fScoreInstrumentAbbreviationsMaxLength;
+    size_t                fScoreInstrumentNamesMaxLength;
+    size_t                fScoreInstrumentAbbreviationsMaxLength;
 
     // inhibiting browsing
 
@@ -416,9 +416,9 @@ class EXP msrScore : public msrBookElement
     // whereas LilyPond only needs the repeated measure
     Bool                  fInhibitMeasureRepeatReplicasBrowsing;
 
-    // in <multiple-rest/>, the full measure rests are explicit,
-    // whereas LilyPond only needs the number of full measure rests
-    Bool                  fInhibitFullMeasureRestsBrowsing;
+    // in <multiple-rest/>, the full-bar rests are explicit,
+    // whereas LilyPond only needs the number of full-bar rests
+    Bool                  fInhibitFullBarRestsBrowsing;
 
     // voices
 

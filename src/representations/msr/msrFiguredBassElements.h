@@ -153,7 +153,7 @@ class EXP msrFiguredBassElement : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrFiguredBassElement> create (
-      int       inputLineNumber); // JMI ???
+                            int inputLineNumber); // JMI ???
 
     static SMARTP<msrFiguredBassElement> create (
                             int             inputLineNumber,

@@ -320,7 +320,7 @@ void msrSegment::assertSegmentMeasuresListIsNotEmpty (
     gGlobalTracingOahGroup->getTraceRepeatsDetails ()
   ) {
     fSegmentVoiceUpLink->
-      displayVoiceRepeatsStackFullMeasureRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "assertSegmentMeasuresListIsNotEmpty()");
   }
@@ -2131,7 +2131,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     fSegmentVoiceUpLink->
-      displayVoiceRepeatsStackFullMeasureRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "removeLastMeasureFromSegment() 1");
   }
@@ -2183,7 +2183,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     fSegmentVoiceUpLink->
-      displayVoiceRepeatsStackFullMeasureRestsMeasureRepeatAndVoice (
+      displayVoiceRepeatsStackFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "removeLastMeasureFromSegment() 2");
   }

@@ -77,6 +77,7 @@ S_mfslChoice pCurrentChoiceChoice;
 %define api.token.prefix {TOK_}
 %token
   BAR        "|"
+  AMPERSAND  "&"
   EQUAL      "="
   SEMICOLON  ";"
   COLON      ":"
@@ -226,7 +227,7 @@ Input
 
 InputSourcesSeq
   : InputSource
-  | InputSourcesSeq COMMA InputSource
+  | InputSourcesSeq AMPERSAND InputSource
 ;
 
 InputSource
@@ -259,7 +260,8 @@ ScriptElementsSeq
 ScriptElement
   : Option
   | ChoiceDeclaration
-  | CaseStatement
+  | CaseChoiceStatement
+  | CaseInputStatement
 ;
 
 
@@ -337,7 +339,7 @@ ChoiceDeclaration
 
         string choiceName = $2;
 
-        if (drv.getTraceChoiceStatements ()) {
+        if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "====> choice " << choiceName << " : " << "..." <<
             ", line " << drv.getScannerLocation () <<
@@ -386,7 +388,7 @@ ChoiceDeclaration
 
     SEMICOLON
       {
-        if (drv.getTraceChoiceStatements ()) {
+        if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
             endl;
@@ -427,10 +429,10 @@ ChoiceLabels
 ;
 
 
-// case statement
+// case choice statement
 //_______________________________________________________________________________
 
-CaseLabel
+CaseChoiceLabel
   : NAME
       {
         ++gIndenter;
@@ -438,13 +440,13 @@ CaseLabel
         string label = $1;
 
         // fetch case statement stack top
-        S_mfslCaseStatement
-          currentCaseStatement =
-            drv.caseStatementsStackTop ();
+        S_mfslCaseChoiceStatement
+          currentCaseChoiceStatement =
+            drv.caseChoiceStatementsStackTop ();
 
         // register this case label
-        currentCaseStatement->
-          registerCaseLabel (
+        currentCaseChoiceStatement->
+          registerCaseChoiceLabel (
             label,
             drv);
 
@@ -452,19 +454,19 @@ CaseLabel
       }
 ;
 
-CaseLabelsSeq
-  : CaseLabel
-  | CaseLabelsSeq COMMA CaseLabel
+CaseChoiceLabelsSeq
+  : CaseChoiceLabel
+  | CaseChoiceLabelsSeq COMMA CaseChoiceLabel
 ;
 
-CaseStatement
+CaseChoiceStatement
   : CASE NAME COLON
       {
         ++gIndenter;
 
         string choiceName = $2;
 
-        if (drv.getTraceCaseStatements ()) {
+        if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "====> case " << choiceName << ": ..." <<
             ", line " << drv.getScannerLocation () <<
@@ -497,31 +499,31 @@ CaseStatement
             drv.getScannerLocation ());
         }
 
-        S_mfslCaseStatement
-          caseStatement =
-            mfslCaseStatement::create (
+        S_mfslCaseChoiceStatement
+          caseChoiceStatement =
+            mfslCaseChoiceStatement::create (
               choice,
               drv);
 
         // push it onto the case statements stack
-        drv.caseStatementsStackPush (
-          caseStatement);
+        drv.caseChoiceStatementsStackPush (
+          caseChoiceStatement);
 
         // mark the choice as used
         choice->
-          setChoiceIsUsedInCaseStatements ();
+          setChoiceIsUsedInCaseChoiceStatements ();
       }
 
-    OptionalCaseAlternativesSeq SEMICOLON
+    OptionalCaseChoiceAlternativesSeq SEMICOLON
       {
         // have all the label been used as labels?
-        drv.caseStatementsStackTop ()->
+        drv.caseChoiceStatementsStackTop ()->
           checkThatAllLabelsHaveBeenUsed (drv);
 
         // pop the current case statement from the case statements stack
-        drv.caseStatementsStackPop ();
+        drv.caseChoiceStatementsStackPop ();
 
-        if (drv.getTraceCaseStatements ()) {
+        if (drv.getTraceCaseChoiceStatements ()) {
           gLogStream <<
             "------------------------------------------------------------" <<
             endl;
@@ -531,73 +533,73 @@ CaseStatement
       }
 ;
 
-OptionalCaseAlternativesSeq
-  : CaseAlternativesSeq
+OptionalCaseChoiceAlternativesSeq
+  : CaseChoiceAlternativesSeq
   |
 ;
 
-CaseAlternativesSeq
-  : CaseAlternative
+CaseChoiceAlternativesSeq
+  : CaseChoiceAlternative
 
-  | CaseAlternativesSeq CaseAlternative
+  | CaseChoiceAlternativesSeq CaseChoiceAlternative
 ;
 
-CaseAlternative
+CaseChoiceAlternative
   :
       {
         ++gIndenter;
 
-        S_mfslCaseStatement
-          currentCaseStatement =
-            drv.caseStatementsStackTop ();
+        S_mfslCaseChoiceStatement
+          currentCaseChoiceStatement =
+            drv.caseChoiceStatementsStackTop ();
 
         // forget about previous case alternative if any
-        currentCaseStatement->
+        currentCaseChoiceStatement->
           clearCaseCurrentLabelsList ();
       }
 
-    CaseLabelsSeq COLON
+    CaseChoiceLabelsSeq COLON
       {
-        S_mfslCaseStatement
-          currentCaseStatement =
-            drv.caseStatementsStackTop ();
+        S_mfslCaseChoiceStatement
+          currentCaseChoiceStatement =
+            drv.caseChoiceStatementsStackTop ();
 
         // push a new current options block onto the stack
         stringstream s;
 
         s <<
           "Case alternative for " <<
-          currentCaseStatement->
+          currentCaseChoiceStatement->
             currentLabelsListAsString () <<
           ", line " << drv.getScannerLocation ();
 
         string
-          caseAlternativeDescription =
+          CaseChoiceAlternativeDescription =
             s.str ();
 
         S_mfslOptionsBlock
-          caseAlternativeOptionsBlock =
+          CaseChoiceAlternativeOptionsBlock =
             mfslOptionsBlock::create (
-              caseAlternativeDescription);
+              CaseChoiceAlternativeDescription);
 
         drv.optionsBlocksStackPush (
-          caseAlternativeOptionsBlock,
-          caseAlternativeDescription);
+          CaseChoiceAlternativeOptionsBlock,
+          CaseChoiceAlternativeDescription);
       }
 
     OptionalScriptElementsSeq SEMICOLON
       {
-        S_mfslCaseStatement
-          currentCaseStatement =
-            drv.caseStatementsStackTop ();
+        S_mfslCaseChoiceStatement
+          currentCaseChoiceStatement =
+            drv.caseChoiceStatementsStackTop ();
 
         S_mfslChoice
           currentCaseChoice =
-            currentCaseStatement->
+            currentCaseChoiceStatement->
               getCaseChoice ();
 
         // handle the labels
-        for (string label : currentCaseStatement->getCaseCurrentLabelsList ()) {
+        for (string label : currentCaseChoiceStatement->getCaseCurrentLabelsList ()) {
           // enrich the options block for label
           currentCaseChoice->
             enrichLabelOptionsBlock (
@@ -611,8 +613,207 @@ CaseAlternative
 
         s <<
           "Discarding case alternative options block for " <<
-          currentCaseStatement->
+          currentCaseChoiceStatement->
             currentLabelsListAsString () <<
+          ", line " << drv.getScannerLocation () <<
+          endl;
+
+        string context = s.str ();
+
+        drv.optionsBlocksStackPop (
+          context);
+
+        --gIndenter;
+      }
+;
+
+
+// case input statementf
+//_______________________________________________________________________________
+
+CaseInputName
+  : NAME
+      {
+        ++gIndenter;
+
+        string label = $1;
+
+        // fetch case input statement stack top
+        S_mfslCaseInputStatement
+          currentCaseInputStatement =
+            drv.caseInputStatementsStackTop ();
+
+        // register this case input label
+        currentCaseInputStatement->
+          registerCaseInputName (
+            label,
+            drv);
+
+        --gIndenter;
+      }
+;
+
+CaseInputNamesSeq
+  : CaseInputName
+  | CaseInputNamesSeq COMMA CaseInputName
+;
+
+CaseInputStatement
+  : CASE INPUT COLON
+      {
+        ++gIndenter;
+
+        string inputName = "$2 INPUT";
+
+        if (drv.getTraceCaseInputStatements ()) {
+          gLogStream <<
+            "====> case input " << inputName << ": ..." <<
+            ", line " << drv.getScannerLocation () <<
+            endl;
+        }
+
+        // create a new current case input statement
+        S_mfslInputsTable
+          inputsTable =
+            drv.getInputsTable ();
+
+        S_mfslInput
+          input =
+            inputsTable->
+              fetchInputByName (
+                inputName,
+                drv);
+
+        if (! input) {
+          stringstream s;
+
+          s <<
+            "name \"" << inputName <<
+            "\" is no input name, cannot be used in a 'select' statement" <<
+            ", line " << drv.getScannerLocation () <<
+            endl;
+
+          mfslError (
+            s.str (),
+            drv.getScannerLocation ());
+        }
+
+        S_mfslCaseInputStatement
+          caseInputStatement =
+            mfslCaseInputStatement::create (
+              input,
+              drv);
+
+        // push it onto the case input statements stack
+        drv.caseInputStatementsStackPush (
+          caseInputStatement);
+
+        // mark the input as used
+        input->
+          setInputIsUsedInCaseInputStatements ();
+      }
+
+    OptionalCaseInputAlternativesSeq SEMICOLON
+      {
+        // have all the name been used as names?
+        drv.caseInputStatementsStackTop ()->
+          clearCaseInputCurrentNamesList (); // drv ??? JMI
+
+        // pop the current case input statement from the case input statements stack
+        drv.caseInputStatementsStackPop ();
+
+        if (drv.getTraceCaseInputStatements ()) {
+          gLogStream <<
+            "------------------------------------------------------------" <<
+            endl;
+        }
+
+        --gIndenter;
+      }
+;
+
+OptionalCaseInputAlternativesSeq
+  : CaseInputAlternativesSeq
+  |
+;
+
+CaseInputAlternativesSeq
+  : CaseInputAlternative
+
+  | CaseInputAlternativesSeq CaseInputAlternative
+;
+
+CaseInputAlternative
+  :
+      {
+        ++gIndenter;
+
+        S_mfslCaseInputStatement
+          currentCaseInputStatement =
+            drv.caseInputStatementsStackTop ();
+
+        // forget about previous case input alternative if any
+        currentCaseInputStatement->
+          clearCaseInputCurrentNamesList ();
+      }
+
+    CaseInputNamesSeq COLON
+      {
+        S_mfslCaseInputStatement
+          currentCaseInputStatement =
+            drv.caseInputStatementsStackTop ();
+
+        // push a new current options block onto the stack
+        stringstream s;
+
+        s <<
+          "CaseInput alternative for " <<
+          currentCaseInputStatement->
+            currentNamesListAsString () <<
+          ", line " << drv.getScannerLocation ();
+
+        string
+          caseInputAlternativeDescription =
+            s.str ();
+
+        S_mfslOptionsBlock
+          caseInputAlternativeOptionsBlock =
+            mfslOptionsBlock::create (
+              caseInputAlternativeDescription);
+
+        drv.optionsBlocksStackPush (
+          caseInputAlternativeOptionsBlock,
+          caseInputAlternativeDescription);
+      }
+
+    OptionalScriptElementsSeq SEMICOLON
+      {
+        S_mfslCaseInputStatement
+          currentCaseInputStatement =
+            drv.caseInputStatementsStackTop ();
+
+        S_mfslInput
+          currentCaseInputInput =
+            currentCaseInputStatement->
+              getCaseInputInput ();
+
+        // handle the names
+        for (string name : currentCaseInputStatement->getCaseInputCurrentNamesList ()) {
+          // enrich the options block for name
+          currentCaseInputInput->
+            enrichNameOptionsBlock (
+              name,
+              drv.optionsBlocksStackTop (),
+              drv);
+        } // for
+
+        // discard this case input alternative
+        stringstream s;
+
+        s <<
+          "Discarding case input alternative options block for " <<
+          currentCaseInputStatement->
+            currentNamesListAsString () <<
           ", line " << drv.getScannerLocation () <<
           endl;
 

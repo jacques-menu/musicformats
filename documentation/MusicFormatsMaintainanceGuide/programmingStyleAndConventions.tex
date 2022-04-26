@@ -945,6 +945,73 @@ For these reasons, \mf\ features a \class{Bool} defined in \mfutilitiesBoth{mfBo
 
 
 % -------------------------------------------------------------------------
+\section{On/off values}
+% -------------------------------------------------------------------------
+
+Some elements in \mf\ are represented by a \MainIt{three-state} value. 
+
+\OnOff values are handled by \enumType{mfOnOffKind}, declared in \mflibrary{mfOnOff.h}:
+\begin{lstlisting}[language=Terminal]
+//______________________________________________________________________________
+enum class mfOnOffKind {
+  kMfOnOffUnknown,
+  kMfOnOffOn, kMfOnOffOff
+};
+
+Bool mfOnOffKindAsBool (
+  mfOnOffKind onOffKind);
+
+string mfOnOffKindAsString (
+  mfOnOffKind onOffKind);
+
+ostream& operator<< (ostream& os, const mfOnOffKind elt);
+\end{lstlisting}
+
+This is the case for example of page ragging information in \lpsr{lpsr/lpsrPapers.h}:
+\begin{lstlisting}[language=Terminal]
+    // on/off values
+    mfOnOffKind           fRaggedBottom;
+    S_oahOnOffAtom        fRaggedBottomAtom;
+
+    mfOnOffKind           fRaggedLast;
+    S_oahOnOffAtom        fRaggedLastAtom;
+
+    mfOnOffKind           fRaggedLastBottom;
+    S_oahOnOffAtom        fRaggedLastBottomAtom;
+
+    mfOnOffKind           fRaggedRight;
+    S_oahOnOffAtom        fRaggedRightAtom;
+\end{lstlisting}
+
+Care must be taken in \mflibrary{mfOnOff.cpp} when converting an \enumType{mfOnOffKind} value to \type{Bool}:
+\begin{lstlisting}[language=Terminal]
+Bool mfOnOffKindAsBool (
+  mfOnOffKind onOffKind)
+{
+  Bool result;
+
+  switch (onOffKind) {
+    case mfOnOffKind::kMfOnOffUnknown:
+      {
+        mfError (
+          __FILE__, __LINE__,
+          "mfOnOffKind::kMfOnOffUnknown cannot be converted to Bool");
+      }
+      break;
+    case mfOnOffKind::kMfOnOffOn:
+      result = true;
+      break;
+    case mfOnOffKind::kMfOnOffOff:
+      result = false;
+      break;
+  } // switch
+
+  return result;
+}
+\end{lstlisting}
+
+
+% -------------------------------------------------------------------------
 \section{Iterating over numeration types}
 % -------------------------------------------------------------------------
 

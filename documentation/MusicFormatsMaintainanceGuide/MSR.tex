@@ -1221,7 +1221,7 @@ A score in MSR is the usual music score concept. It contains a set and a list of
 \section{Part groups}\label{Part groups}
 % -------------------------------------------------------------------------
 
-Part groups handling is presented at \sectionRef{Part groups}.
+Part groups handling is presented at \sectionRef{Part groups handling}.
 
 A part group in MSR contains parts or other part groups. This concept is recursive, as it is in music score: the winds part group can oboes and horns part group, for example.
 An implicit part group exists in MSR if the score does not contain explicit part groups.
@@ -1342,7 +1342,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep 'public msrVo
 msrBeatRepeats.h:class EXP msrBeatRepeat : public msrVoiceElement
 msrMeasureRepeats.h:class EXP msrMeasureRepeat : public msrVoiceElement
 msrRepeats.h:class EXP msrRepeat : public msrVoiceElement
-msrFullMeasureRests.h:class EXP msrFullMeasureRests : public msrVoiceElement
+msrFullBarRests.h:class EXP msrFullBarRests : public msrVoiceElement
 msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \end{lstlisting}
 
@@ -1360,7 +1360,7 @@ A voice is conceptually a sequence of {\tt S_msrVoiceElement}, that may be:
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r 'public msrVoiceElement' *
 formats/msr/msrMeasureRepeats.h:class EXP msrMeasureRepeat : public msrVoiceElement
 formats/msr/msrRepeats.h:class EXP msrRepeat : public msrVoiceElement
-formats/msr/msrFullMeasureRests.h:class EXP msrFullMeasureRests : public msrVoiceElement
+formats/msr/msrFullBarRests.h:class EXP msrFullBarRests : public msrVoiceElement
 formats/msr/msrBeatRepeats.h:class EXP msrBeatRepeat : public msrVoiceElement
 formats/msr/msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \end{lstlisting}
@@ -1693,14 +1693,14 @@ class EXP msrMeasureRepeatReplicas : public msrElement
 
 
 % -------------------------------------------------------------------------
-\section{Full measure rests}\label{Full measure rests}
+\section{Full-bar rests}\label{Full-bar rests}
 % -------------------------------------------------------------------------
 
-Full measure rests handling is presented at \sectionRef{Full measure rests handling}.
+Full-bar rests handling is presented at \sectionRef{Full-bar rests handling}.
 
-\Class{msrFullMeasureRests}, defined in \msrBoth{msrFullMeasureRests}, essentially contains a \class{msrFullMeasureRestsContents} instance and a mesure rests number:
+\Class{msrFullBarRests}, defined in \msrBoth{msrFullBarRests}, essentially contains a \class{msrFullBarRestsContents} instance and a mesure rests number:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrFullMeasureRests : public msrVoiceElement
+class EXP msrFullBarRests : public msrVoiceElement
 {
 	// ... ... ...
 
@@ -1709,24 +1709,24 @@ class EXP msrFullMeasureRests : public msrVoiceElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrVoice            fFullMeasureRestsVoiceUpLink;
+    S_msrVoice            fFullBarRestsVoiceUpLink;
 
-    int                   fFullMeasureRestsNumber;
+    int                   fFullBarRestsNumber;
 
-    S_msrFullMeasureRestsContents
-                          fFullMeasureRestsContents;
+    S_msrFullBarRestsContents
+                          fFullBarRestsContents;
 
-    string                fFullMeasureRestsNextMeasureNumber;
-    int                   fFullMeasureRestsLastMeasurePuristNumber;
+    string                fFullBarRestsNextMeasureNumber;
+    int                   fFullBarRestsLastMeasurePuristNumber;
 
     // shortcut for efficiency
-    rational              fFullMeasureRestsMeasureSoundingNotes;
+    rational              fFullBarRestsMeasureSoundingNotes;
 };
 \end{lstlisting}
 
-\Class{msrFullMeasureRestsContents} contains an \class{msrSegment} instance and an uplink:
+\Class{msrFullBarRestsContents} contains an \class{msrSegment} instance and an uplink:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrFullMeasureRestsContents : public msrElement
+class EXP msrFullBarRestsContents : public msrElement
 {
 	// ... ... ...
 
@@ -1736,9 +1736,9 @@ class EXP msrFullMeasureRestsContents : public msrElement
     // ------------------------------------------------------
 
     // upLink
-    S_msrFullMeasureRests fFullMeasureRestsContentsFullMeasureRestsUpLink;
+    S_msrFullBarRests fFullBarRestsContentsFullBarRestsUpLink;
 
-    S_msrSegment          fFullMeasureRestsContentsSegment;
+    S_msrSegment          fFullBarRestsContentsSegment;
 };
 \end{lstlisting}
 
@@ -1759,7 +1759,7 @@ The following classes are defined in \msrBoth{msrRepeats}, contains:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep class msrRepeats.h
 class msrRepeat;
-class msrFullMeasureRests;
+class msrFullBarRests;
 class msrMeasureRepeat;
 class msrNote;
 class EXP msrRepeatCommonPart : public msrElement

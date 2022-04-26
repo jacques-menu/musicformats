@@ -87,14 +87,25 @@ class mfslDriver
     bool				          getDisplayOptions () const
                               { return fDisplayOptions; }
 
+    // choices
     bool				          getTraceChoices () const
                               { return fTraceChoices; }
 
-    bool				          getTraceChoiceStatements () const
-                              { return fTraceChoiceStatements; }
+    bool				          getTraceCaseChoiceStatements () const
+                              { return fTraceCaseChoiceStatements; }
 
-    bool				          getTraceCaseStatements () const
-                              { return fTraceCaseStatements; }
+    S_mfslChoicesTable    getChoicesTable () const
+                              { return fChoicesTable; }
+
+    // inputs
+    bool				          getTraceInputs () const
+                              { return fTraceInputs; }
+
+    bool				          getTraceCaseInputStatements () const
+                              { return fTraceCaseInputStatements; }
+
+    S_mfslInputsTable     getInputsTable () const
+                              { return fInputsTable; }
 
     void				          setTraceOptionsBlocks () // TEMP JMI
                               { fTraceOptionsBlocks = true; }
@@ -106,9 +117,6 @@ class mfslDriver
 
     bool				          getNoLaunch () const
                               { return fNoLaunch; }
-
-    S_mfslChoicesTable    getChoicesTable () const
-                              { return fChoicesTable; }
 
   public:
 
@@ -145,15 +153,28 @@ class mfslDriver
     void                  displayOptionsBlocksStack (
                             const string& context) const;
 
-    // case statements
-    void                  caseStatementsStackPush (
-                            S_mfslCaseStatement caseStatement);
+    // case choice statements
+    void                  caseChoiceStatementsStackPush (
+                            S_mfslCaseChoiceStatement caseChoiceStatement);
 
-    S_mfslCaseStatement   caseStatementsStackTop () const;
+    S_mfslCaseChoiceStatement
+                          caseChoiceStatementsStackTop () const;
 
-    void                  caseStatementsStackPop ();
+    void                  caseChoiceStatementsStackPop ();
 
-    void                  displayCaseStatementsStack (
+    void                  displayCaseChoiceStatementsStack (
+                            const string& context) const;
+
+    // case input statements
+    void                  caseInputStatementsStackPush (
+                            S_mfslCaseInputStatement caseInputStatement);
+
+    S_mfslCaseInputStatement
+                          caseInputStatementsStackTop () const;
+
+    void                  caseInputStatementsStackPop ();
+
+    void                  displayCaseInputStatementsStack (
                             const string& context) const;
 
     // launching the MFSL tool
@@ -215,14 +236,21 @@ class mfslDriver
 
     bool                  fDisplayOptions;
 
+    // tokens
+    bool                  fDisplayTokens;
+
+    // choices
     bool                  fTraceChoices;
 
-    bool                  fTraceChoiceStatements;
-    bool                  fTraceCaseStatements;
+    bool                  fTraceCaseChoiceStatements;
 
+    // inputs
+    bool                  fTraceInputs;
+
+    bool                  fTraceCaseInputStatements;
+
+    // options
     bool                  fTraceOptionsBlocks;
-
-    bool                  fDisplayTokens;
 
     // launching
     bool                  fNoLaunch;
@@ -237,10 +265,22 @@ class mfslDriver
                           fOptionsSuppliedChoicesLabelsMultiMap;
     set<string>           fUnusedOptionsSuppliedChoicesSet;
 
-    // case statements
-    int                   fCaseStatementsNumber;
-    list<S_mfslCaseStatement>
-                          fCaseStatementsStack;
+    // case choice statements
+    int                   fCaseChoiceStatementsNumber;
+    list<S_mfslCaseChoiceStatement>
+                          fCaseChoiceStatementsStack;
+
+    // inputs handling
+    S_mfslInputsTable     fInputsTable;
+
+    multimap<string, string>
+                          fOptionsSuppliedInputsLabelsMultiMap;
+    set<string>           fUnusedOptionsSuppliedInputsSet;
+
+    // case input statements
+    int                   fCaseInputStatementsNumber;
+    list<S_mfslCaseInputStatement>
+                          fCaseInputStatementsStack;
 
     // options blocks
     list<S_mfslOptionsBlock>

@@ -266,7 +266,7 @@ void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
       fMsrQuarterTonesPitchesLanguageKindVariable);
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }
@@ -497,7 +497,7 @@ void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
       fLpsrChordsLanguageKindVariable);
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }
@@ -861,7 +861,7 @@ void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", set by user";
+      ", set by an option";
 
     --gIndenter;
   }
@@ -1549,7 +1549,7 @@ By default, this is left to LilyPond'.)",
 
   // ragged bottom
 
-  fRaggedBottom = oahOnOffKind::kOahOnOffUnknown; // default value
+  fRaggedBottom = mfOnOffKind::kMfOnOffUnknown; // default value
 
   fRaggedBottomAtom =
     oahOnOffAtom::create (
@@ -1567,7 +1567,7 @@ LilyPond's default value is '##t'.)",
 
   // ragged last
 
-  fRaggedLast = oahOnOffKind::kOahOnOffUnknown; // default value
+  fRaggedLast = mfOnOffKind::kMfOnOffUnknown; // default value
 
   fRaggedLastAtom =
     oahOnOffAtom::create (
@@ -1585,7 +1585,7 @@ LilyPond's default value is '##t'.)",
 
   // ragged last bottom
 
-  fRaggedLastBottom = oahOnOffKind::kOahOnOffUnknown; // default value
+  fRaggedLastBottom = mfOnOffKind::kMfOnOffUnknown; // default value
 
   fRaggedLastBottomAtom =
     oahOnOffAtom::create (
@@ -1603,7 +1603,7 @@ LilyPond's default value is '##t'.)",
 
   // ragged right
 
-  fRaggedRight = oahOnOffKind::kOahOnOffUnknown; // default value
+  fRaggedRight = mfOnOffKind::kMfOnOffUnknown; // default value
 
   fRaggedRightAtom =
     oahOnOffAtom::create (

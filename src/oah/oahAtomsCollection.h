@@ -18,6 +18,8 @@
 
 #include "rational.h"
 
+#include "mfOnOff.h"
+
 #include "msrBasicTypes.h"
 #include "msrMidi.h"
 
@@ -818,20 +820,6 @@ typedef SMARTP<oahDisplaySingleCharacterOptions> S_oahDisplaySingleCharacterOpti
 EXP ostream& operator<< (ostream& os, const S_oahDisplaySingleCharacterOptions& elt);
 
 //______________________________________________________________________________
-enum class oahOnOffKind {
-  kOahOnOffUnknown,
-  kOahOnOffOn, kOahOnOffOff
-};
-
-Bool oahOnOffKindAsBool (
-  oahOnOffKind onOffKind);
-
-string oahOnOffKindAsString (
-  oahOnOffKind onOffKind);
-
-ostream& operator<< (ostream& os, const oahOnOffKind elt);
-
-//______________________________________________________________________________
 class EXP oahOnOffAtom : public oahAtomStoringAValue
 {
 /*
@@ -852,7 +840,7 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
                             const string& description,
                             const string& valueSpecification,
                             const string& variableName,
-                            oahOnOffKind& onOffKindVariable);
+                            mfOnOffKind& onOffKindVariable);
 
   protected:
 
@@ -865,7 +853,7 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
                             const string& description,
                             const string& valueSpecification,
                             const string& variableName,
-                            oahOnOffKind& onOffKindVariable);
+                            mfOnOffKind& onOffKindVariable);
 
     virtual               ~oahOnOffAtom ();
 
@@ -874,9 +862,9 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    void                  setOnOffKindVariable (oahOnOffKind value);
+    void                  setOnOffKindVariable (mfOnOffKind value);
 
-    oahOnOffKind          getOnOffKindVariable () const
+    mfOnOffKind           getOnOffKindVariable () const
                               { return fOnOffKindVariable; }
 
     Bool                  getSetByAnOption () const
@@ -918,7 +906,7 @@ class EXP oahOnOffAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     string                fVariableName;
-    oahOnOffKind&         fOnOffKindVariable;
+    mfOnOffKind&         fOnOffKindVariable;
     Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahOnOffAtom> S_oahOnOffAtom;

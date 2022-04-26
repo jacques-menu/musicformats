@@ -461,7 +461,7 @@ void mfMultiGenerationOutputKindAtom::printAtomWithVariableOptionsValues (
       fMultiGenerationOutputKindVariable);
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }

@@ -735,7 +735,7 @@ void xml2lyRegularHandler::createRepeatsRegularGroup ()
   // atoms
 
 // JMI  registerAtomInRegularSubgroup ("create-implicit-initial-repeat-barline", subGroup);
-  registerAtomInRegularSubgroup ("keep-repeat-barLines", subGroup);
+  registerAtomInRegularSubgroup ("keep-repeat-barlines", subGroup);
   registerAtomInRegularSubgroup ("repeat-brackets", subGroup);
   registerAtomInRegularSubgroup ("ignore-repeat-numbers", subGroup);
 }

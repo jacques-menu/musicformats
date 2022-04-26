@@ -1298,10 +1298,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getCompressEmptyMeasuresInLilypond () const
                               { return fCompressEmptyMeasuresInLilypond; }
 
-    void                  setMergeRests ()
-                              { fMergeRests = true; }
-    Bool                  getMergeRests () const
-                              { return fMergeRests; }
+    void                  setMergeStaffCommonRests ()
+                              { fMergeStaffCommonRests = true; }
+    Bool                  getMergeStaffCommonRests () const
+                              { return fMergeStaffCommonRests; }
 
     void                  setInputLineNumbers ()
                               { fInputLineNumbers = true; }
@@ -1970,7 +1970,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fCompressEmptyMeasuresInLilypond;
 
-    Bool                  fMergeRests;
+    Bool                  fMergeStaffCommonRests;
 
     Bool                  fInputLineNumbers;
     S_oahBooleanAtom      fInputLineNumbersAtom;

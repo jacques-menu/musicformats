@@ -104,7 +104,7 @@ msdlKeywordKind msdlKeywordKindFromString (
 
 string existingKeywordsInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
-  size_t             namesListMaxLength);
+  size_t                   namesListMaxLength);
 
 extern map<msdlKeywordKind, string> gGlobalEnglishKeywordsNamesMap;
 extern map<msdlKeywordKind, string> gGlobalFrenchKeywordsNamesMap;

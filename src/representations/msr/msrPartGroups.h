@@ -312,7 +312,7 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     void                  printPartGroupElementsList (
                             int      inputLineNumber,
-                            ostream& os);
+                            ostream& os) const;
 
     string                partGroupImplicitKindAsString () const;
 
@@ -327,6 +327,14 @@ class EXP msrPartGroup : public msrPartGroupElement
     void                  printSummary (ostream& os) const override;
 
     void                  printSlices (ostream& os) const;
+
+  private:
+
+    // private services
+    // ------------------------------------------------------
+
+    void                  checkPartGroupElement (
+                            S_msrPartGroupElement partGroupElement) const; // TEMP JMI v0.9.63
 
   private:
 
@@ -368,9 +376,6 @@ class EXP msrPartGroup : public msrPartGroupElement
     msrPartGroupImplicitKind
                           fPartGroupImplicitKind;
 
-    // type
-
-
     // bar line
 
     msrPartGroupBarLineKind
@@ -381,10 +386,12 @@ class EXP msrPartGroup : public msrPartGroupElement
     string                fPartGroupInstrumentName; // JMI
 
     // accessing parts by name
+
     map<string, S_msrPart>
                           fPartGroupPartsMap;
 
     // allowing for both parts and (sub-)part groups as elements
+
     list<S_msrPartGroupElement>
                           fPartGroupElementsList;
 

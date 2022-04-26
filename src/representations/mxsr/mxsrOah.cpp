@@ -180,7 +180,7 @@ void mxsrOahGroup::initializeMxsrOah ()
 void mxsrOahGroup::enforceGroupQuietness ()
 {
 #ifdef TRACING_IS_ENABLED
-  fTraceMxsrVisitors = false;
+//   fTraceMxsrVisitors = false; // JMI v0.9.63
 #endif
 }
 

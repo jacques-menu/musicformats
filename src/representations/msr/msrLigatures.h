@@ -130,6 +130,8 @@ class EXP msrLigature : public msrElement
 
     string                ligatureKindAsString () const;
 
+    string                asString () const override;
+
     void                  print (ostream& os) const override;
 
   private:
