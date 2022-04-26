@@ -266,7 +266,7 @@ void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
       fMsrQuarterTonesPitchesLanguageKindVariable);
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }
@@ -615,7 +615,7 @@ void msrRenamePartAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", set by user";
+      ", set by an option";
 
     --gIndenter;
   }

@@ -1164,13 +1164,14 @@ class EXP mxsr2msrTranslator :
     // beats repeats
     int                       fCurrentBeatRepeatSlashes;
 
-    // full measure rests
-    int                       fCurrentFullMeasureRestsMeasuresNumber;
-    int                       fRemainingFullMeasureRestsMeasuresNumber;
-    Bool                      fOnGoingFullMeasureRests;
-    Bool                      fCurrentFullMeasureRestsHasBeenCreated;
+    // full-bar rests
+    int                       fCurrentFullBarRestsMeasuresNumber;
+    int                       fRemainingFullBarRestsMeasuresNumber;
+    Bool                      fOnGoingFullBarRests;
+    Bool                      fCurrentFullBarRestsHasBeenCreated;
+    Bool                      fFullBarRestsUseSymbols;
 
-    void                      handleOnGoingFullMeasureRests (
+    void                      handleOnGoingFullBarRestsAtTheEndOfMeasure (
                                 int inputLineNumber);
 
     // measure repeats
@@ -1314,8 +1315,11 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fOnGoingDirectionType;
 
-    void                      attachPendingVoiceLevelElementsToVoice (
+    void                      attachPendingVoiceLevelElementsToVoice ( // JMI v0.9.63
                                 S_msrVoice voice);
+
+    void                      attachPendingPartLevelElementsToPart (
+                                S_msrPart part);
 
 
     // rehearsal marks handling
@@ -1327,6 +1331,9 @@ class EXP mxsr2msrTranslator :
 
     void                      attachPendingRehearsalMarksToVoice (
                                 S_msrVoice voice);
+
+    void                      attachPendingRehearsalMarksToPart (
+                                S_msrPart part);
 
 //     void                      convertWordsToRehearsalMark (
 //                                 int           inputLineNumber,
@@ -1506,6 +1513,9 @@ class EXP mxsr2msrTranslator :
     void                      attachPendingTemposToVoice (
                                 S_msrVoice voice);
 
+    void                      attachPendingTemposToPart (
+                                S_msrPart part);
+
 //     void                      convertWordsToTempo (
 //                                 int           inputLineNumber,
 //                                 const string& wordsValue);
@@ -1519,6 +1529,9 @@ class EXP mxsr2msrTranslator :
     void                      attachLineBreaksToVoice (
                                 S_msrVoice voice);
 
+    void                      attachLineBreaksToPart (
+                                S_msrPart part);
+
 
     // page breaks handling
     // ------------------------------------------------------
@@ -1527,6 +1540,9 @@ class EXP mxsr2msrTranslator :
 
     void                      attachPageBreaksToVoice (
                                 S_msrVoice voice);
+
+    void                      attachPageBreaksToPart (
+                                S_msrPart part);
 
 
     // octave shift handling
@@ -1709,7 +1725,7 @@ class EXP mxsr2msrTranslator :
 
     list<S_msrFrameNote>      fPendingFramesNotesList;
 
-    // barLines handling
+    // bar lines handling
     // ------------------------------------------------------
 
     Bool                      fOnGoingBarLine;
@@ -1735,13 +1751,16 @@ class EXP mxsr2msrTranslator :
 
     int                       fCurrentBarLineTimes;
 
-    // barlines remain pending until the next note:
+    // bar lines remain pending until the next note:
     // in MusicXML, they precede the note and
     // may occur when no current voice exists
     list<S_msrBarLine>        fPendingBarLinesList;
 
     void                      attachPendingBarLinesToVoice (
                                 S_msrVoice voice);
+
+    void                      attachPendingBarLinesToPart (
+                                S_msrPart part);
 
     // repeats handling
     // ------------------------------------------------------

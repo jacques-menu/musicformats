@@ -126,7 +126,7 @@ void msrMeasure::initializeMeasure ()
   fMeasureFirstInVoice = false; // default value
 
   // single-measure rest?
-  fMeasureIsAFullMeasureRest = false;
+  fMeasureIsAFullBarRest = false;
 
   // initialize measure whole notes
   setCurrentMeasureWholeNotesDuration (
@@ -325,8 +325,8 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
 
 /* JMI
   // single-measure rest?
-  newbornClone->fMeasureIsAFullMeasureRest =
-    fMeasureIsAFullMeasureRest;
+  newbornClone->fMeasureIsAFullBarRest =
+    fMeasureIsAFullBarRest;
 
   // regular measure ends detection // JMI TEMP
   newbornClone->fMeasureEndRegularKind =
@@ -427,10 +427,10 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   measureDeepClone->fMeasureFirstInSegmentKind =
     fMeasureFirstInSegmentKind;
 
-    // full measure rest?
+    // full-bar rest?
 
-  measureDeepClone->fMeasureIsAFullMeasureRest =
-    fMeasureIsAFullMeasureRest;
+  measureDeepClone->fMeasureIsAFullBarRest =
+    fMeasureIsAFullBarRest;
 
   // elements
 
@@ -2189,9 +2189,9 @@ void msrMeasure::appendNoteToMeasure (
   // append note to measure
   appendNoteOrPaddingToMeasure (note);
 
-  // is note a full measure rest?
+  // is note a full-bar rest?
   if (note->fetchNoteIsAFullNoteRest ()) {
-    setMeasureIsAFullMeasureRest ();
+    setMeasureIsAFullBarRest ();
   }
 
   // set grace notes group 'before' elements position in measure in relevant
@@ -3545,7 +3545,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
       voice->
-        displayVoiceRepeatsStackFullMeasureRestsMeasureRepeatAndVoice (
+        displayVoiceRepeatsStackFullBarRestsMeasureRepeatAndVoice (
           inputLineNumber,
           "determineMeasureKindAndPuristNumber() 2 measure has 0 current measure whole notes");
 
@@ -5773,7 +5773,7 @@ void msrMeasure::finalizeMeasureClone (
 #endif
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeMeasureClone() 1");
@@ -5914,7 +5914,7 @@ void msrMeasure::finalizeMeasureClone (
   fMeasureFinalizationContext = "finalizeMeasureClone()";
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
       "finalizeMeasureClone() 4");
@@ -6223,7 +6223,7 @@ void msrMeasure::displayMeasure (
 {
   gLogStream <<
     endl <<
-    "*********>> Measure '" <<
+    "*********>> Measure " <<
     fMeasureElementMeasureNumber <<
     /* JMI
     "', measurePuristNumber: " <<
@@ -6434,8 +6434,8 @@ void msrMeasure::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fMeasureIsAFullMeasureRest" << " : " <<
-    fMeasureIsAFullMeasureRest <<
+    "fMeasureIsAFullBarRest" << " : " <<
+    fMeasureIsAFullBarRest <<
     endl;
 
   os <<

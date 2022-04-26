@@ -73,6 +73,13 @@
 \begin{document}
 % -------------------------------------------------------------------------
 
+% defeat headwidth not being equal to \textwidth %%%JMI should not be necessary ???
+\setlength{\headwidth}{\textwidth}
+
+% use the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
+
+
 \begin{titlepage}
   \begin{center}
     \vspace*{2cm}
@@ -95,6 +102,7 @@
     \large{\textbf{Jacques Menu}}
 
     \vspace{2.5cm}
+
 
 \begin{turn}{1}
 \maxsizebox{0.9\linewidth}{5cm}{
@@ -172,10 +180,9 @@ This document presents the internal working of \mf. It is part of the \mf\ docum
 \part{Overview of MusicFormats}
 % -------------------------------------------------------------------------
 
-% now we can set the regular fancyhead
-\fancyhead[L]{\nouppercase\leftmark}
-\fancyhead[C]{}
-\fancyhead[R]{\nouppercase\rightmark}
+
+% now we can switch to the regular headers and footers
+\useRegularPagesHeadersAndFooters
 
 
 \subimport{./}{introduction.tex}
@@ -340,7 +347,7 @@ This document presents the internal working of \mf. It is part of the \mf\ docum
 
 \subimport{./}{measureRepeatsHandling.tex}
 
-\subimport{./}{fullMeasureRestsHandling.tex}
+\subimport{./}{fullBarRestsHandling.tex}
 
 \subimport{./}{repeatsHandling.tex}
 
@@ -349,6 +356,8 @@ This document presents the internal working of \mf. It is part of the \mf\ docum
 \subimport{./}{stavesHandling.tex}
 
 \subimport{./}{partsHandling.tex}
+
+\subimport{./}{partGroupsHandling.tex}
 
 \subimport{./}{scoresHandling.tex}
 
@@ -375,8 +384,6 @@ This document presents the internal working of \mf. It is part of the \mf\ docum
 \subimport{./}{figuredBassElementsHandling.tex}
 
 \subimport{./}{lyricsHandling.tex}
-
-\subimport{./}{fullMeasureRestsHandling.tex}
 
 \subimport{./}{MIDIHandling.tex}
 
@@ -412,10 +419,8 @@ This document presents the internal working of \mf. It is part of the \mf\ docum
 
 %%%JMI There are several thematic indexes apart from the main, alphabetical one, to provide rich cross-indexing in this document.
 
-% back to the lists fancyhead settings:
-\fancyhead[L]{}
-\fancyhead[C]{\nouppercase\leftmark}
-\fancyhead[R]{}
+% back to the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
 
 \printindex[Files]
 

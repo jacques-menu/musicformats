@@ -106,6 +106,273 @@ typedef SMARTP<mfslOptionsBlock> S_mfslOptionsBlock;
 EXP ostream& operator<< (ostream& os, const S_mfslOptionsBlock& elt);
 
 //______________________________________________________________________________
+enum class mfslInputNameKind {
+  kInputNameNone,
+  kInputNameOptionSupplied,
+  kInputNameSetInScript
+};
+
+string mfslInputNameKindAsString (
+  mfslInputNameKind inputNameKind);
+
+ostream& operator<< (ostream& os, const mfslInputNameKind& elt);
+
+//______________________________________________________________________________
+class EXP mfslInput : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mfslInput> create (
+                            const string& inputName);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfslInput (
+                            const string& inputName);
+
+    virtual               ~mfslInput ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    string                getInputName () const
+                              { return fInputName; }
+
+    void                  setInputNameSuppliedByAnOption (
+                            const string& name,
+                            mfslDriver&   drv);
+
+    void                  selectInputName (
+                            const string& name,
+                            mfslDriver&   drv);
+
+    string                getInputName (
+                            mfslDriver& drv) const;
+
+    string                getInputNameWithoutTrace ( // JMI
+                            mfslDriver& drv) const;
+
+    mfslInputNameKind     getInputNameKind () const
+                              { return fInputNameKind; }
+
+    const set<string>&    getNamesSet () const
+                              { return fNamesSet; }
+
+    S_mfslOptionsBlock    getInputOptionsBlockForName (
+                            const string& name,
+                            mfslDriver&   drv) const;
+
+    void                  setInputIsUsedInCaseInputStatements ()
+                              { fInputIsUsedInCaseInputStatements = true; }
+
+    Bool                  getInputIsUsedInCaseInputStatements () const
+                              { return fInputIsUsedInCaseInputStatements; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  addName (
+                            const string& name,
+                            mfslDriver&   drv);
+
+    void                  enrichNameOptionsBlock (
+                            const string&      name,
+                            S_mfslOptionsBlock optionsBlock,
+                            mfslDriver&        drv);
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    string                namesSetAsString () const;
+
+    string                asString () const;
+
+    void                  displayInputNamesToOptionsBlocksMap (
+                            ostream& os) const;
+
+    void                  print (ostream& os) const;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    string                fInputName;
+
+    mfslInputNameKind     fInputNameKind;
+
+    set<string>           fNamesSet;
+
+    Bool                  fInputIsUsedInCaseInputStatements;
+
+    map<string, S_mfslOptionsBlock>
+                          fInputNamesToOptionsBlocksMap;
+};
+typedef SMARTP<mfslInput> S_mfslInput;
+EXP ostream& operator<< (ostream& os, const S_mfslInput& elt);
+
+//______________________________________________________________________________
+class EXP mfslInputsTable : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mfslInputsTable> create ();
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfslInputsTable ();
+
+    virtual               ~mfslInputsTable ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const map<string, S_mfslInput>&
+                          getInputsMap () const
+                              { return fInputsMap; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  addInput (
+                            S_mfslInput input,
+                            mfslDriver& drv);
+
+//     S_mfslInput          lookupInputByName (
+//                             const string& name);
+
+    S_mfslInput           fetchInputByName (
+                            const string&     name,
+                            const mfslDriver& drv);
+
+    S_mfslInput           fetchInputByNameNonConst (
+                            const string& name,
+                            mfslDriver&   drv);
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    string                asString () const;
+
+    void                  displayInputsMap (ostream& os) const;
+
+    void                  print (ostream& os) const;
+
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    map<string, S_mfslInput>
+                          fInputsMap;
+};
+typedef SMARTP<mfslInputsTable> S_mfslInputsTable;
+EXP ostream& operator<< (ostream& os, const S_mfslInputsTable& elt);
+
+//______________________________________________________________________________
+class EXP mfslCaseInputStatement : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mfslCaseInputStatement> create (
+                            S_mfslInput caseInput,
+                            mfslDriver& drv);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfslCaseInputStatement (
+                            S_mfslInput caseInput,
+                            mfslDriver& drv);
+
+    virtual               ~mfslCaseInputStatement ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    S_mfslInput           getCaseInputInput () const
+                              { return fCaseInputInput; }
+
+    const list<string>&   getCaseInputCurrentNamesList () const
+                              { return fCaseInputCurrentNamesList; }
+
+    void                  clearCaseInputCurrentNamesList ()
+                              { fCaseInputCurrentNamesList.clear (); }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    void                  registerCaseInputName (
+                            const string& name,
+                            mfslDriver&   drv);
+
+    void                  checkThatAllNamesHaveBeenUsed (
+                            mfslDriver& drv);
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    string                asString () const;
+
+    string                currentNamesListAsString () const;
+
+    void                  print (ostream& os) const;
+
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    S_mfslInput           fCaseInputInput;
+
+    set<string>           fCaseInputNamesSet;
+    list<string>          fCaseInputCurrentNamesList;
+
+    // checking unused names
+    set<string>           fUsedNames;
+    set<string>           fCaseInputUnusedNames;
+};
+typedef SMARTP<mfslCaseInputStatement> S_mfslCaseInputStatement;
+EXP ostream& operator<< (ostream& os, const S_mfslCaseInputStatement& elt);
+
+//______________________________________________________________________________
 enum class mfslChoiceLabelKind {
   kChoiceLabelNone,
   kChoiceLabelOptionSupplied,
@@ -173,11 +440,11 @@ class EXP mfslChoice : public smartable
                             const string& label,
                             mfslDriver&   drv) const;
 
-    void                  setChoiceIsUsedInCaseStatements ()
-                              { fChoiceIsUsedInCaseStatements = true; }
+    void                  setChoiceIsUsedInCaseChoiceStatements ()
+                              { fChoiceIsUsedInCaseChoiceStatements = true; }
 
-    Bool                  getChoiceIsUsedInCaseStatements () const
-                              { return fChoiceIsUsedInCaseStatements; }
+    Bool                  getChoiceIsUsedInCaseChoiceStatements () const
+                              { return fChoiceIsUsedInCaseChoiceStatements; }
 
   public:
 
@@ -225,7 +492,7 @@ class EXP mfslChoice : public smartable
 
     string                fChoiceDefaultLabel;
 
-    Bool                  fChoiceIsUsedInCaseStatements;
+    Bool                  fChoiceIsUsedInCaseChoiceStatements;
 
     map<string, S_mfslOptionsBlock>
                           fChoiceLabelsToOptionsBlocksMap;
@@ -305,14 +572,14 @@ typedef SMARTP<mfslChoicesTable> S_mfslChoicesTable;
 EXP ostream& operator<< (ostream& os, const S_mfslChoicesTable& elt);
 
 //______________________________________________________________________________
-class EXP mfslCaseStatement : public smartable
+class EXP mfslCaseChoiceStatement : public smartable
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mfslCaseStatement> create (
+    static SMARTP<mfslCaseChoiceStatement> create (
                             S_mfslChoice caseChoice,
                             mfslDriver&  drv);
 
@@ -321,11 +588,11 @@ class EXP mfslCaseStatement : public smartable
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mfslCaseStatement (
+                          mfslCaseChoiceStatement (
                             S_mfslChoice caseChoice,
                             mfslDriver&  drv);
 
-    virtual               ~mfslCaseStatement ();
+    virtual               ~mfslCaseChoiceStatement ();
 
   public:
 
@@ -346,7 +613,7 @@ class EXP mfslCaseStatement : public smartable
     // public services
     // ------------------------------------------------------
 
-    void                  registerCaseLabel (
+    void                  registerCaseChoiceLabel (
                             const string& label,
                             mfslDriver&   drv);
 
@@ -379,8 +646,8 @@ class EXP mfslCaseStatement : public smartable
     set<string>           fUsedLabels;
     set<string>           fCaseUnusedLabels;
 };
-typedef SMARTP<mfslCaseStatement> S_mfslCaseStatement;
-EXP ostream& operator<< (ostream& os, const S_mfslCaseStatement& elt);
+typedef SMARTP<mfslCaseChoiceStatement> S_mfslCaseChoiceStatement;
+EXP ostream& operator<< (ostream& os, const S_mfslCaseChoiceStatement& elt);
 
 // // initialization
 // //______________________________________________________________________________

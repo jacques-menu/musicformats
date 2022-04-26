@@ -41,7 +41,7 @@ class EXP msr2bsrTranslator :
   public visitor<S_msrVoice>,
   public visitor<S_msrVoiceStaffChange>,
 
-  // barLines
+  // bar lines
 
   public visitor<S_msrBarLine>,
 
@@ -119,7 +119,7 @@ class EXP msr2bsrTranslator :
 
     virtual void visitStart (S_msrVoiceStaffChange& elt);
 
-    // barLines
+    // bar lines
 
     virtual void visitStart (S_msrBarLine& elt);
 
@@ -334,7 +334,7 @@ class EXP msr2bsrTranslator :
     S_msrMeasureRepeatReplicas
                               fCurrentMeasureRepeatReplicasClone;
 
-    // multiple rests
+    // full-bar rests
     // ------------------------------------------------------
 
     S_msrMultipleRest         fCurrentMultipleRestClone; // JMI

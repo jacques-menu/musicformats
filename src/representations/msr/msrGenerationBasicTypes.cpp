@@ -339,7 +339,7 @@ void msrGenerationAPIKindAtom::printAtomWithVariableOptionsValues (
       fGenerationAPIKindVariable);
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }

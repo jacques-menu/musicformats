@@ -1703,7 +1703,7 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentials (
   if (fSetByAnOption) {
     os << left <<
       setw (fieldWidth) <<
-      "set by user" <<
+      "set by an option" <<
       endl;
   }
 }
@@ -1723,7 +1723,7 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableEssentialsShort (
   if (fSetByAnOption) {
     os << left <<
       setw (fieldWidth) <<
-      "set by user" <<
+      "set by an option" <<
       endl;
   }
 }
@@ -1736,7 +1736,7 @@ void oahAtomImplicitlyStoringAValue::print (ostream& os) const
     "AtomWithVariable:";
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 
@@ -1756,7 +1756,7 @@ void oahAtomImplicitlyStoringAValue::printShort (ostream& os) const
     "AtomWithVariable: ";
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   printAtomWithVariableEssentialsShort (
@@ -1958,7 +1958,7 @@ void oahAtomStoringAValue::print (ostream& os) const
     "AtomWithVariable:";
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 
@@ -1978,7 +1978,7 @@ void oahAtomStoringAValue::printShort (ostream& os) const
     "AtomWithVariable: ";
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
 
   printAtomWithVariableEssentialsShort (
@@ -3184,7 +3184,7 @@ void oahSubGroup::printSubGroupOptionsValues (
           booleanAtom =
             dynamic_cast<oahBooleanAtom*>(&(*atom))
       ) {
-        // print the atom value if the variable has been set by user by user
+        // print the atom value if the variable has been set by an option by user
         if (booleanAtom->getSetByAnOption ()) {
           atom->
             printAtomWithVariableOptionsValues (
@@ -3200,7 +3200,7 @@ void oahSubGroup::printSubGroupOptionsValues (
           atomImplicitlyStoringAValue =
             dynamic_cast<oahAtomImplicitlyStoringAValue*>(&(*atom))
       ) {
-        // print the atom value if the variable has been set by user by user
+        // print the atom value if the variable has been set by an option by user
         if (atomImplicitlyStoringAValue->getSetByAnOption ()) {
           atom->
             printAtomWithVariableOptionsValues (
@@ -3216,7 +3216,7 @@ void oahSubGroup::printSubGroupOptionsValues (
           atomStoringAValue =
             dynamic_cast<oahAtomStoringAValue*>(&(*atom))
       ) {
-        // print the atom value if the variable has been set by user by user
+        // print the atom value if the variable has been set by an option by user
         if (atomStoringAValue->getSetByAnOption ()) {
           atom->
             printAtomWithVariableOptionsValues (

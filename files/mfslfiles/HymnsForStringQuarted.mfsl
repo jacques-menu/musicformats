@@ -1,0 +1,163 @@
+#!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
+
+###
+  This MFSL script contains:
+    - a tool specification, telling which MusicFormats tool
+      to use, here xml2ly;
+
+    - an input specification, the input source to apply the latter to,
+      here file name "Hymn121.xml";
+
+    - a number of MusicFormats options;
+
+    - a SCORE choice specification containing 5 labels,
+      each telling which options to use
+      to get a score generated with this script and xml2ly/LilyPond;
+
+    - a number of 'select' specifications to choose one or more
+      such SCORE label, or all of them;
+###
+
+
+# ----------------------------------------------------------
+# the MusicFormats tool to be used
+# ----------------------------------------------------------
+
+tool : xml2ly ;
+
+
+# ----------------------------------------------------------
+# the input file to be handled by the tool
+# ----------------------------------------------------------
+
+input :
+  "Hymn121.xml" &
+  "Hymn125.xml" &
+  "Hymn126.xml" &
+  "Hymn140.xml"
+;
+
+
+# ----------------------------------------------------------
+# some commmon options
+# ----------------------------------------------------------
+
+# header
+  -title "Hymn 121 - Angels From The Realms Of Glory"
+
+# display
+#   -display-options-values
+
+# LilyPond
+  -lilypond-generation-infos
+
+# dynamics
+  -all-wedges-below
+
+
+# ----------------------------------------------------------
+# the labels for the SCORE choice
+# ----------------------------------------------------------
+
+# choose names that match the intent
+# using uppercase to emphasize a choice name is a matter of taste
+
+choice SCORE :
+  tutti |
+
+  violin1 | violin12 | alto | cello |
+
+  default: tutti
+;
+
+
+# ----------------------------------------------------------
+# tell which options are to be used depending on SCORE labels
+# ----------------------------------------------------------
+
+case SCORE :
+	tutti:
+	  -output-file-name "Hymn121_SATB_tutti.ly"
+
+    -global-staff-size 17.675
+
+    -subtitle "Tutti"
+
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
+  ;
+
+	violin1:
+	  -output-file-name "HymnsForStringQuartet_violin1.ly"
+
+    -subtitle "Violin 1"
+    -keep-musicxml-part-id P1
+
+    -msr-rename-part "P1:Violin 1"
+
+    -lpsr-staff-instrument-name "Voice 1:"  # an empty name
+  ;
+
+	violin2:
+	  -output-file-name "HymnsForStringQuartet_violin2.ly"
+
+    -subtitle "Violin 2"
+    -keep-musicxml-part-id P1
+
+    -msr-rename-part "P1:Violin 2"
+
+    -lpsr-staff-instrument-name "Voice 1:"  # an empty name
+  ;
+
+	alto:
+	  -output-file-name "HymnsForStringQuartet_alto.ly"
+
+    -subtitle "Alto"
+    -keep-musicxml-part-id P2
+
+    -msr-rename-part "P2:alto"
+
+    -lpsr-staff-instrument-name "Voice 2:"  # an empty name
+  ;
+
+	cello:
+	  -output-file-name "HymnsForStringQuartet_cello.ly"
+
+    -subtitle "Cello"
+    -keep-musicxml-part-id P4
+
+    -msr-rename-part "P4:cello"
+
+    -ignore-musicxml-lyrics
+      # there's a glitch in the last measure of the bass...
+
+    -lpsr-staff-instrument-name "Voice 4:"  # an empty name
+
+    -indent '0\cm'
+  ;
+;
+
+
+# ----------------------------------------------------------
+# choosing which score(s) to generate
+# ----------------------------------------------------------
+
+###
+  Comment/uncomment the statements below to choose
+  either individual SCORE labels or all of them.
+
+  The 'select' statements choose one particular label of all of them,
+  overriding the default "tutti" label setting in the 'choice' statement.
+
+  This can also be done with the '-select, -sel' option to the MFSL interpreter,
+  such as:
+    -select SCORE:violin2 -select SCORE:alto
+###
+
+# select SCORE : tutti ;
+# select SCORE : violin1 ;
+# select SCORE : violin2 ;
+# select SCORE : alto ;
+# select SCORE : cello ;
+
+# select SCORE: all ;

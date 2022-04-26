@@ -258,17 +258,16 @@ class EXP lpsrScore : public lpsrElement
                                   fHiddenMeasureAndBarLineIsNeeded;
                               }
 
-    // merge rests
-    void                  setMergeRestsIsNeeded ();
+    // merge staff common rests
+    void                  setMergeStaffCommonRestsIsNeeded ();
 
-    Bool                  getMergeRestsIsNeeded () const
+    Bool                  getMergeStaffCommonRestsIsNeeded () const
                               {
                                 return
-                                  fMergeRestsIsNeeded;
+                                  fMergeStaffCommonRestsIsNeeded;
                               }
 
     // spanners with centered text
-
     void                  setTextSpannerWithCenteredTextIsNeeded ();
 
     Bool                  getTextSpannerWithCenteredTextIsNeeded () const
@@ -277,6 +276,14 @@ class EXP lpsrScore : public lpsrElement
                                   fTextSpannerWithCenteredTextIsNeeded;
                               }
 
+    // full-bar rests
+    void                  setMergeFullBarRestsIsNeeded ();
+
+    Bool                  getMergeFullBarRestsIsNeeded () const
+                              {
+                                return
+                                  fMergeFullBarRestsIsNeeded;
+                              }
 
   public:
 
@@ -346,6 +353,7 @@ class EXP lpsrScore : public lpsrElement
     void                  addWhiteNoteHeadsToScore ();
 
     // bar numbers
+
     void                  addBoxAroundNextBarNumberToScore ();
 
     // jazz chords display
@@ -360,13 +368,17 @@ class EXP lpsrScore : public lpsrElement
 
     void                  addHiddenMeasureAndBarLineToScore ();
 
-    // merge rests
+    // merge staff common rests
 
-    void                  addMergeRestsToScore ();
+    void                  addMergeStaffCommonRestsToScore ();
 
     // spanners with centered text
 
     void                  addTextSpannerWithCenteredTextToScore ();
+
+    // full-bar rests
+
+    void                  addMergeFullBarRestsToScore ();
 
   public:
 
@@ -471,12 +483,14 @@ class EXP lpsrScore : public lpsrElement
     // hidden measure and barLine
     Bool                  fHiddenMeasureAndBarLineIsNeeded;
 
-    // merge rests
-    Bool                  fMergeRestsIsNeeded;
+    // merge staff common rests
+    Bool                  fMergeStaffCommonRestsIsNeeded;
 
     // spanners with centered text
-
     Bool                  fTextSpannerWithCenteredTextIsNeeded;
+
+    // full-bar rests
+    Bool                  fMergeFullBarRestsIsNeeded;
 
   private:
 

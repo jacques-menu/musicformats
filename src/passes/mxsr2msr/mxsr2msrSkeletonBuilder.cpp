@@ -1002,7 +1002,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
         fCurrentPartGroupSymbolDefaultX,
         msrPartGroup::kPartGroupImplicitNo,
         fCurrentPartGroupBarLineKind,
-        0, // partGroupPartGroupUpLink will be set upon 'stop'
+        nullptr, // partGroupPartGroupUpLink will be set upon 'stop'
         fMsrScore);
 
   // partGroupToBeStarted will be appended to the MSR score
@@ -1153,7 +1153,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fImplicitPartGroup == 0,
+    fImplicitPartGroup == nullptr,
     "fImplicitPartGroup already exists");
 
   int inputLineNumber = 0;
@@ -1178,10 +1178,10 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
     msrPartGroup::createImplicitPartGroup (
       fCurrentPartGroupNumber,
       fPartGroupsCounter,
-      "Implicit", // partGroupName
-      "",         // PartGroupNameDisplayText
-      "",         // partGroupAccidentalText
-      "Impl.",    // partGroupAbbreviation
+      "Implicit_PartGroup", // partGroupName
+      "",                   // PartGroupNameDisplayText
+      "",                   // partGroupAccidentalText
+      "Impl. PG",           // partGroupAbbreviation
       msrPartGroup::kPartGroupBarLineYes,
       fMsrScore);
 
@@ -1522,7 +1522,7 @@ R"(Please contact the maintainers of MusicFormats (see option '-c, -contact'):
             gLogStream <<
               "Pushing part group descr '" <<
               partGroupDescr->partGroupDescrAsString () <<
-              "' onto the part group stack" <<
+              "' onto the part groups stack" <<
               ", line " << inputLineNumber <<
               endl;
           }

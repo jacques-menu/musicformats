@@ -298,8 +298,8 @@ void msrStaff::initializeStaff ()
     fStaffPartUpLink->
       getPartInstrumentAbbreviation ();
 
-  // full measure rests
-  fStaffContainsFullMeasureRests = false;
+  // full-bar rests
+  fStaffContainsFullBarRests = false;
 
   --gIndenter;
 }
@@ -1775,6 +1775,83 @@ void msrStaff::appendTimeSignatureToStaffClone (S_msrTimeSignature timeSignature
   --gIndenter;
 }
 
+void msrStaff::appendTempoToStaff (S_msrTempo tempo)
+{
+ #ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceTempos ()) {
+    gLogStream <<
+      "Appending tempo " << tempo->asString () <<
+      " to staff " <<
+      getStaffName () <<
+      endl;
+  }
+#endif
+
+ // append tempo to registered staves
+  for (S_msrVoice voice : fStaffAllVoicesList) {
+    voice->
+      appendTempoToVoice (tempo);
+  } // for
+}
+
+void msrStaff::appendRehearsalMarkToStaff (
+  S_msrRehearsalMark rehearsalMark)
+{
+ #ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
+    gLogStream <<
+      "Appending rehearsal mark " << rehearsalMark->asString () <<
+      " to staff " <<
+      getStaffName () <<
+      endl;
+  }
+#endif
+
+ // append rehearsal mark to registered staves
+  for (S_msrVoice voice : fStaffAllVoicesList) {
+    voice->
+      appendRehearsalMarkToVoice (rehearsalMark);
+  } // for
+}
+
+void msrStaff::appendLineBreakToStaff (S_msrLineBreak lineBreak)
+{
+ #ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
+    gLogStream <<
+      "Appending line break " << lineBreak->asString () <<
+      " to staff " <<
+      getStaffName () <<
+      endl;
+  }
+#endif
+
+ // append line break to registered staves
+  for (S_msrVoice voice : fStaffAllVoicesList) {
+    voice->
+      appendLineBreakToVoice (lineBreak);
+  } // for
+}
+
+void msrStaff::appendPageBreakToStaff (S_msrPageBreak pageBreak)
+{
+ #ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
+    gLogStream <<
+      "Appending page break " << pageBreak->asString () <<
+      " to staff " <<
+      getStaffName () <<
+      endl;
+  }
+#endif
+
+ // append page break to registered staves
+  for (S_msrVoice voice : fStaffAllVoicesList) {
+    voice->
+      appendPageBreakToVoice (pageBreak);
+  } // for
+}
+
 void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
   int             inputLineNumber,
   const rational& positionInMeasure)
@@ -2023,16 +2100,16 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
   } // for
 }
 
-void msrStaff::createFullMeasureRestsInStaff (
+void msrStaff::createFullBarRestsInStaff (
   int inputLineNumber,
-  int fullMeasureRestsMeasuresNumber)
+  int fullBarRestsMeasuresNumber)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Creating " <<
       mfSingularOrPlural (
-        fullMeasureRestsMeasuresNumber, "full measure rest", "full measures rests") <<
+        fullBarRestsMeasuresNumber, "full-bar rest", "full measures rests") <<
       " to staff \"" <<
       getStaffName () <<
       "\" in part " <<
@@ -2042,13 +2119,13 @@ void msrStaff::createFullMeasureRestsInStaff (
   }
 #endif
 
-  fStaffContainsFullMeasureRests = true;
+  fStaffContainsFullBarRests = true;
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      createFullMeasureRestsInVoice (
+      createFullBarRestsInVoice (
         inputLineNumber,
-        fullMeasureRestsMeasuresNumber);
+        fullBarRestsMeasuresNumber);
   } // for
 }
 
@@ -2057,7 +2134,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
   int replicatasNumber)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Replicating last appended measure in staff \"" <<
       getStaffName () <<
@@ -2078,14 +2155,14 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
 void msrStaff::addEmptyMeasuresToStaff (
   int           inputLineNumber,
   const string& previousMeasureNumber,
-  int           fullMeasureRestsNumber)
+  int           fullBarRestsNumber)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Adding " <<
       mfSingularOrPlural (
-        fullMeasureRestsNumber, "full measure rest", "full measure rests") <<
+        fullBarRestsNumber, "full-bar rest", "full-bar rests") <<
       " to staff \"" <<
       getStaffName () <<
       "\" in part " <<
@@ -2095,22 +2172,22 @@ void msrStaff::addEmptyMeasuresToStaff (
   }
 #endif
 
-  fStaffContainsFullMeasureRests = true;
+  fStaffContainsFullBarRests = true;
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
       addEmptyMeasuresToVoice (
         inputLineNumber,
         previousMeasureNumber,
-        fullMeasureRestsNumber);
+        fullBarRestsNumber);
   } // for
 }
 
-void msrStaff::appendPendingFullMeasureRestsToStaff (
+void msrStaff::appendPendingFullBarRestsToStaff (
   int inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Appending the pending multiple rest to staff \"" <<
       getStaffName () <<
@@ -2122,20 +2199,20 @@ void msrStaff::appendPendingFullMeasureRestsToStaff (
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      appendPendingFullMeasureRestsToVoice (
+      appendPendingFullBarRestsToVoice (
         inputLineNumber);
   } // for
 }
 
-void msrStaff::appendFullMeasureRestsCloneToStaff (
+void msrStaff::appendFullBarRestsCloneToStaff (
   int               inputLineNumber,
-  S_msrFullMeasureRests fullMeasureRests)
+  S_msrFullBarRests fullBarRests)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Appending multiple rest '" <<
-      fullMeasureRests->asString () <<
+      fullBarRests->asString () <<
       "' to staff clone \"" <<
       getStaffName () <<
       "\"" <<
@@ -2145,9 +2222,9 @@ void msrStaff::appendFullMeasureRestsCloneToStaff (
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      appendFullMeasureRestsCloneToVoiceClone (
+      appendFullBarRestsCloneToVoiceClone (
         inputLineNumber,
-        fullMeasureRests);
+        fullBarRests);
   } // for
 }
 

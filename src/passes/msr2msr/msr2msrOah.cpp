@@ -311,7 +311,7 @@ void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", set by user";
+      ", set by an option";
 
     --gIndenter;
   }
@@ -598,7 +598,7 @@ void msrKeepPartAtom::printAtomWithVariableOptionsValues (
     } // for
 
     os <<
-      ", set by user";
+      ", set by an option";
 
     --gIndenter;
   }
@@ -841,7 +841,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // compress full measure rests
+  // compress full-bar rests
   // --------------------------------------
 
   subGroup->
@@ -864,8 +864,8 @@ R"(Merge rests in the MSR to obtain better looking scores.
 This works only when there are 2 voices per staves.
 Limitations: this only handles two voices
 and does not handle multi-measure/whole-measure rests.)",
-        "fMergeRests",
-        fMergeRests));
+        "fMergeStaffCommonRests",
+        fMergeStaffCommonRests));
 }
 
 void msr2msrOahGroup::initializeRepeatsOptions ()
@@ -880,7 +880,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // barLines
+  // bar lines
   // --------------------------------------
 
   subGroup->
@@ -1135,8 +1135,8 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
     endl <<
 
     setw (valueFieldWidth) <<
-    "fMergeRests" << " : " <<
-    fMergeRests <<
+    "fMergeStaffCommonRests" << " : " <<
+    fMergeStaffCommonRests <<
     endl;
 
   --gIndenter;

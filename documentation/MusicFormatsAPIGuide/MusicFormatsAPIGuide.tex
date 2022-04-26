@@ -68,6 +68,13 @@
 \begin{document}
 % -------------------------------------------------------------------------
 
+% defeat headwidth not being equal to \textwidth %%%JMI should not be necessary ???
+\setlength{\headwidth}{\textwidth}
+
+% use the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
+
+
 \begin{titlepage}
   \begin{center}
     \vspace*{2cm}
@@ -166,6 +173,10 @@ S_lpsrScore translateMsrToLpsr (
 \part{The MXSR API}
 % -------------------------------------------------------------------------
 
+% now we can switch to the regular headers and footers
+\useRegularPagesHeadersAndFooters
+
+
 \subimport{./}{creatingScoresWithTheMxsrAPI.tex}
 
 
@@ -199,10 +210,8 @@ S_lpsrScore translateMsrToLpsr (
 \part{Indexes}
 % -------------------------------------------------------------------------
 
-% back to the lists fancyhead settings:
-\fancyhead[L]{}
-\fancyhead[C]{\nouppercase\leftmark}
-\fancyhead[R]{}
+% back to the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
 
 \printindex[Files]
 

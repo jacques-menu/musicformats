@@ -317,7 +317,7 @@ ostream& operator<< (ostream& os, const S_msrBassFigure& elt)
 //______________________________________________________________________________
 S_msrFiguredBassElement msrFiguredBassElement::create (
   // no figuredBassElementVoiceUpLink yet
-  int       inputLineNumber) // ,
+  int inputLineNumber) // ,
 // JMI  S_msrPart figuredBassElementPartUpLink)
 {
   msrFiguredBassElement* o =

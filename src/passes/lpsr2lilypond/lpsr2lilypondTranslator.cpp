@@ -177,7 +177,7 @@ if (false) // JMI
 // if (false) // JMI CAFE
 //   fVisitedLpsrScore->
 //     getMsrScore ()->
-//       setInhibitFullMeasureRestsBrowsing ();
+//       setInhibitFullBarRestsBrowsing ();
 
   // octaves entry
   // ------------------------------------------------------
@@ -239,8 +239,8 @@ if (false) // JMI
   // figured bass
   fCurrentFiguredBassFiguresCounter = 0;
 
-  // full measure rests
-  fRemainingFullMeasureRestsNumber = 0;
+  // full-bar rests
+  fRemainingFullBarRestsNumber = 0;
 
   // measures
   fCurrentVoiceMeasuresCounter = -1;
@@ -6872,80 +6872,80 @@ void lpsr2lilypondTranslator::fetchOnOffValuesFromLpsrOptionsGroup (
 {
   // ragged-last
   if (gGlobalLpsrOahGroup->getRaggedLastAtom ()->getSetByAnOption ()) {
-    oahOnOffKind
+    mfOnOffKind
       raggedLast =
         paper->getRaggedLast ();
 
     switch (raggedLast) {
-      case oahOnOffKind::kOahOnOffUnknown:
+      case mfOnOffKind::kMfOnOffUnknown:
         break;
 
-      case oahOnOffKind::kOahOnOffOn:
-      case oahOnOffKind::kOahOnOffOff:
+      case mfOnOffKind::kMfOnOffOn:
+      case mfOnOffKind::kMfOnOffOff:
         nameBooleanValuePairsList.push_back (
           make_pair (
             "ragged-last",
-            oahOnOffKindAsBool (raggedLast)));
+            mfOnOffKindAsBool (raggedLast)));
         break;
     } // switch
   }
 
   // ragged-bottom
   if (gGlobalLpsrOahGroup->getRaggedBottomAtom ()->getSetByAnOption ()) {
-    oahOnOffKind
+    mfOnOffKind
       raggedBottom =
         paper->getRaggedBottom ();
 
     switch (raggedBottom) {
-      case oahOnOffKind::kOahOnOffUnknown:
+      case mfOnOffKind::kMfOnOffUnknown:
         break;
 
-      case oahOnOffKind::kOahOnOffOn:
-      case oahOnOffKind::kOahOnOffOff:
+      case mfOnOffKind::kMfOnOffOn:
+      case mfOnOffKind::kMfOnOffOff:
         nameBooleanValuePairsList.push_back (
           make_pair (
             "ragged-bottom",
-            oahOnOffKindAsBool (raggedBottom)));
+            mfOnOffKindAsBool (raggedBottom)));
         break;
     } // switch
   }
 
   // ragged-last-bottom
   if (gGlobalLpsrOahGroup->getRaggedLastBottomAtom ()->getSetByAnOption ()) {
-    oahOnOffKind
+    mfOnOffKind
       raggedLastBottom =
         paper->getRaggedLastBottom ();
 
     switch (raggedLastBottom) {
-      case oahOnOffKind::kOahOnOffUnknown:
+      case mfOnOffKind::kMfOnOffUnknown:
         break;
 
-      case oahOnOffKind::kOahOnOffOn:
-      case oahOnOffKind::kOahOnOffOff:
+      case mfOnOffKind::kMfOnOffOn:
+      case mfOnOffKind::kMfOnOffOff:
         nameBooleanValuePairsList.push_back (
           make_pair (
             "ragged-last-bottom",
-            oahOnOffKindAsBool (raggedLastBottom)));
+            mfOnOffKindAsBool (raggedLastBottom)));
         break;
     } // switch
   }
 
   // ragged-right
   if (gGlobalLpsrOahGroup->getRaggedRightAtom ()->getSetByAnOption ()) {
-    oahOnOffKind
+    mfOnOffKind
       raggedRight =
         paper->getRaggedRight ();
 
     switch (raggedRight) {
-      case oahOnOffKind::kOahOnOffUnknown:
+      case mfOnOffKind::kMfOnOffUnknown:
         break;
 
-      case oahOnOffKind::kOahOnOffOn:
-      case oahOnOffKind::kOahOnOffOff:
+      case mfOnOffKind::kMfOnOffOn:
+      case mfOnOffKind::kMfOnOffOff:
         nameBooleanValuePairsList.push_back (
           make_pair (
             "ragged-right",
-            oahOnOffKindAsBool (raggedRight)));
+            mfOnOffKindAsBool (raggedRight)));
         break;
     } // switch
   }
@@ -7330,20 +7330,20 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
   int               fieldWidth)
 {
   // ragged last
-  oahOnOffKind
+  mfOnOffKind
     raggedLast =
       pagePaper->getRaggedLast ();
 
   switch (raggedLast) {
-    case oahOnOffKind::kOahOnOffUnknown:
+    case mfOnOffKind::kMfOnOffUnknown:
       break;
 
-    case oahOnOffKind::kOahOnOffOn:
-    case oahOnOffKind::kOahOnOffOff:
+    case mfOnOffKind::kMfOnOffOn:
+    case mfOnOffKind::kMfOnOffOff:
       fLilypondCodeStream << left <<
         setw (fieldWidth) <<
         "ragged-last" << " = ";
-      if (oahOnOffKindAsBool (raggedLast)) {
+      if (mfOnOffKindAsBool (raggedLast)) {
         fLilypondCodeStream << "##t";
       }
       else {
@@ -7354,20 +7354,20 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
   fLilypondCodeStream << endl;
 
   // ragged bottom
-  oahOnOffKind
+  mfOnOffKind
     raggedBottom =
       pagePaper->getRaggedBottom ();
 
   switch (raggedBottom) {
-    case oahOnOffKind::kOahOnOffUnknown:
+    case mfOnOffKind::kMfOnOffUnknown:
       break;
 
-    case oahOnOffKind::kOahOnOffOn:
-    case oahOnOffKind::kOahOnOffOff:
+    case mfOnOffKind::kMfOnOffOn:
+    case mfOnOffKind::kMfOnOffOff:
       fLilypondCodeStream << left <<
         setw (fieldWidth) <<
         "ragged-bottom" << " = ";
-      if (oahOnOffKindAsBool (raggedBottom)) {
+      if (mfOnOffKindAsBool (raggedBottom)) {
         fLilypondCodeStream << "##t";
       }
       else {
@@ -7378,20 +7378,20 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
   fLilypondCodeStream << endl;
 
   // ragged last bottom
-  oahOnOffKind
+  mfOnOffKind
     raggedLastBottom =
       pagePaper->getRaggedLastBottom ();
 
   switch (raggedLastBottom) {
-    case oahOnOffKind::kOahOnOffUnknown:
+    case mfOnOffKind::kMfOnOffUnknown:
       break;
 
-    case oahOnOffKind::kOahOnOffOn:
-    case oahOnOffKind::kOahOnOffOff:
+    case mfOnOffKind::kMfOnOffOn:
+    case mfOnOffKind::kMfOnOffOff:
       fLilypondCodeStream << left <<
         setw (fieldWidth) <<
         "ragged-last-bottom" << " = ";
-      if (oahOnOffKindAsBool (raggedLastBottom)) {
+      if (mfOnOffKindAsBool (raggedLastBottom)) {
         fLilypondCodeStream << "##t";
       }
       else {
@@ -7402,20 +7402,20 @@ void lpsr2lilypondTranslator::generatePaperBooleans (
   fLilypondCodeStream << endl;
 
   // ragged right
-  oahOnOffKind
+  mfOnOffKind
     raggedRight =
       pagePaper->getRaggedRight ();
 
   switch (raggedRight) {
-    case oahOnOffKind::kOahOnOffUnknown:
+    case mfOnOffKind::kMfOnOffUnknown:
       break;
 
-    case oahOnOffKind::kOahOnOffOn:
-    case oahOnOffKind::kOahOnOffOff:
+    case mfOnOffKind::kMfOnOffOn:
+    case mfOnOffKind::kMfOnOffOff:
       fLilypondCodeStream << left <<
         setw (fieldWidth) <<
         "ragged-right" << " = ";
-      if (oahOnOffKindAsBool (raggedRight)) {
+      if (mfOnOffKindAsBool (raggedRight)) {
         fLilypondCodeStream << "##t";
       }
       else {
@@ -9032,7 +9032,7 @@ R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
   }
 
   // generate merge rests if needed
-  if (fVisitedLpsrScore->getMergeRestsIsNeeded ()) {
+  if (fVisitedLpsrScore->getMergeStaffCommonRestsIsNeeded ()) {
     fLilypondCodeStream <<
       gTab << "\\override RestCollision.positioning-done = #merge-rests-on-positioning" <<
       endl;
@@ -10910,8 +10910,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
   // remember current part
   fCurrentPart = elt;
 
-  fRemainingFullMeasureRestsNumber = 0; // JMI
-  fOnGoingFullMeasureRests = false; // JMI
+  fRemainingFullBarRestsNumber = 0; // JMI
+  fOnGoingFullBarRests = false; // JMI
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
@@ -11333,10 +11333,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       endl << endl;
   }
 
-  // compress full measure rests?
+  // compress full-bar rests?
   if (gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()) {
     fLilypondCodeStream <<
-      "\\compressEmptyMeasures" <<
+      "\\compressEmptyMeasures" << " %{ BB %}" <<
       endl <<
       "\\set restNumberThreshold = 0" <<
       endl << endl;
@@ -11346,12 +11346,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
 /* JMI
   if (
-    fCurrentVoice->getVoiceContainsFullMeasureRests ()
+    fCurrentVoice->getVoiceContainsFullBarRests ()
       ||
     gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
   ) {
     fLilypondCodeStream <<
-      "\\compressEmptyMeasures" <<
+      "\\compressEmptyMeasures" << " %{ CC %}" <<
       endl;
 
     ++gInde   nter; // JMI ???
@@ -11453,7 +11453,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 
   /* JMI
   if (
-    fCurrentVoice->getVoiceContainsFullMeasureRests ()
+    fCurrentVoice->getVoiceContainsFullBarRests ()
       ||
     gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
   ) {
@@ -12107,8 +12107,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           measureEndRegularKind) <<
         ", measurePuristNumber = '" <<
         measurePuristNumber <<
-        "', onGoingFullMeasureRests = '" <<
-        fOnGoingFullMeasureRests <<
+        "', onGoingFullBarRests = '" <<
+        fOnGoingFullBarRests <<
         ", line " << inputLineNumber <<
         endl;
 
@@ -12230,8 +12230,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         measureEndRegularKind) <<
       ", measurePuristNumber = '" <<
       measurePuristNumber <<
-      "', onGoingFullMeasureRests = '" <<
-      fOnGoingFullMeasureRests <<
+      "', onGoingFullBarRests = '" <<
+      fOnGoingFullBarRests <<
       "', line " << inputLineNumber << " ===-->" <<
       endl;
   }
@@ -12259,13 +12259,32 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindUnknown:
       ++fCurrentVoiceMeasuresCounter;
       break;
+
     case msrMeasureKind::kMeasureKindRegular:
       ++fCurrentVoiceMeasuresCounter;
       break;
+
     case msrMeasureKind::kMeasureKindAnacrusis:
       // keep fCurrentVoiceMeasuresCounter at 0
       break;
-    case msrMeasureKind::kMeasureKindIncompleteStandalone:
+
+    case msrMeasureKind::kMeasureKindIncompleteStandalone: // JMI v0.9.63
+      {
+        ++fCurrentVoiceMeasuresCounter;
+
+        // generate '\partial' at the middle of a voice
+        string
+          upbeatDuration =
+            wholeNotesAsLilypondString (
+              inputLineNumber,
+              elt->getCurrentMeasureWholeNotesDuration ());
+
+        fLilypondCodeStream <<
+          "\\partial " << upbeatDuration <<
+          endl;
+      }
+      break;
+
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart:
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHookedEnding:
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHooklessEnding:
@@ -12274,12 +12293,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       ++fCurrentVoiceMeasuresCounter;
       break;
+
     case msrMeasureKind::kMeasureKindOvercomplete:
       ++fCurrentVoiceMeasuresCounter;
       break;
+
     case msrMeasureKind::kMeasureKindCadenza:
       ++fCurrentVoiceMeasuresCounter;
       break;
+
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
       ++fCurrentVoiceMeasuresCounter;
       break;
@@ -12358,6 +12380,20 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
+      if (elt->getMeasureFirstInVoice ()) {
+        // only generate '\partial' at the beginning of a voice
+        string
+          upbeatDuration =
+            wholeNotesAsLilypondString (
+              inputLineNumber,
+              elt->getCurrentMeasureWholeNotesDuration ());
+
+        fLilypondCodeStream <<
+          "\\partial " << upbeatDuration <<
+          endl;
+      }
+      break;
+
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart:
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHookedEnding:
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatHooklessEnding:
@@ -12595,8 +12631,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           measureEndRegularKind) <<
         ", measurePuristNumber = '" <<
         measurePuristNumber <<
-        "', onGoingFullMeasureRests = '" <<
-        fOnGoingFullMeasureRests <<
+        "', onGoingFullBarRests = '" <<
+        fOnGoingFullBarRests <<
         ", line " << inputLineNumber <<
         endl;
 
@@ -12620,14 +12656,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       msrMeasure::measureEndRegularKindAsString (
         measureEndRegularKind) <<
      "' end, measurePuristNumber = '" << measurePuristNumber << "'" <<
-      ", onGoingFullMeasureRests = '" <<
-      fOnGoingFullMeasureRests <<
+      ", onGoingFullBarRests = '" <<
+      fOnGoingFullBarRests <<
       "', line " << inputLineNumber << " ===-->" <<
       endl;
   }
 #endif
 
-  if (! fOnGoingFullMeasureRests) {
+  if (! fOnGoingFullBarRests) {
     // handle the measure
     switch (measureKind) {
       case msrMeasureKind::kMeasureKindUnknown: // should not occur
@@ -17700,8 +17736,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         fOnGoingGraceNotesGroup <<
         ", fOnGoingChordGraceNotesGroupLink: " <<
         fOnGoingChordGraceNotesGroupLink <<
-        ", fOnGoingFullMeasureRests: " <<
-        fOnGoingFullMeasureRests <<
+        ", fOnGoingFullBarRests: " <<
+        fOnGoingFullBarRests <<
         ", line " << inputLineNumber <<
         endl;
 
@@ -17817,24 +17853,24 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
     }
   }
 
-  if (fOnGoingFullMeasureRests) {
+  if (fOnGoingFullBarRests) {
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
-        // don't handle full measure rests, that's done in visitEnd (S_msrFullMeasureRests&)
+        // don't handle full-bar rests, that's done in visitEnd (S_msrFullBarRests&)
           /*
           if (elt->getNoteOccupiesAFullMeasure ()) {
-            Bool inhibitFullMeasureRestsBrowsing =
+            Bool inhibitFullBarRestsBrowsing =
               fVisitedLpsrScore->
                 getMsrScore ()->
-                  getInhibitFullMeasureRestsBrowsing ();
+                  getInhibitFullBarRestsBrowsing ();
 
-            if (inhibitFullMeasureRestsBrowsing) {
+            if (inhibitFullBarRestsBrowsing) {
               if (
                 gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
                   ||
-                gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+                gGlobalTracingOahGroup->getTraceFullBarRests ()) {
                 gLogStream <<
-                  "% ==> visiting full measure rests is ignored" <<
+                  "% ==> visiting full-bar rests is ignored" <<
                   endl;
               }
 
@@ -17855,7 +17891,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
-            gGlobalTracingOahGroup->getTraceFullMeasureRests ()
+            gGlobalTracingOahGroup->getTraceFullBarRests ()
           ) {
             gLogStream <<
               "% ==> start visiting rest notes is ignored upon note " <<
@@ -17959,8 +17995,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       fOnGoingGraceNotesGroup <<
       ", fOnGoingChordGraceNotesGroupLink: " <<
       fOnGoingChordGraceNotesGroupLink <<
-      ", fOnGoingFullMeasureRests: " <<
-      fOnGoingFullMeasureRests <<
+      ", fOnGoingFullBarRests: " <<
+      fOnGoingFullBarRests <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -18824,25 +18860,25 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     noteIsToBeIgnored = true;
   }
 
-  if (fOnGoingFullMeasureRests) {
+  if (fOnGoingFullBarRests) {
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
-        // don't handle full measure restss, that's done in visitEnd (S_msrFullMeasureRests&)
+        // don't handle full-bar restss, that's done in visitEnd (S_msrFullBarRests&)
           if (elt->getNoteOccupiesAFullMeasure ()) {
-            Bool inhibitFullMeasureRestsBrowsing =
+            Bool inhibitFullBarRestsBrowsing =
               fVisitedLpsrScore->
                 getMsrScore ()->
-                  getInhibitFullMeasureRestsBrowsing ();
+                  getInhibitFullBarRestsBrowsing ();
 
-            if (inhibitFullMeasureRestsBrowsing) {
+            if (inhibitFullBarRestsBrowsing) {
 #ifdef TRACING_IS_ENABLED
               if (
                 gGlobalTracingOahGroup->getTraceNotes ()
                   ||
-                gGlobalTracingOahGroup->getTraceFullMeasureRests ()
+                gGlobalTracingOahGroup->getTraceFullBarRests ()
               ) {
                 gLogStream <<
-                  "% ==> end visiting full measure rests is ignored" <<
+                  "% ==> end visiting full-bar rests is ignored" <<
                   endl;
               }
 #endif
@@ -19419,7 +19455,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                       &&
                     elt->fetchNoteIsARest ()
                   ) {
-                    fLilypondCodeStream << "\\fermataMarkup ";
+//                     fLilypondCodeStream << "\\fermataMarkup ";
+                    fLilypondCodeStream << "\\fermata "; // v0.9.63, since LilyPond 2.23
                   }
                   else {
                     fLilypondCodeStream << "\\fermata ";
@@ -19948,11 +19985,6 @@ void lpsr2lilypondTranslator::generateCodeForOctaveShiftAfterNote (
     octaveShiftKind =
       octaveShift->
         getOctaveShiftKind ();
-
-  int
-    octaveShiftSize =
-      octaveShift->
-        getOctaveShiftSize ();
 
   switch (octaveShiftKind) {
     case msrOctaveShift::kOctaveShiftNone:
@@ -22141,16 +22173,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
     elt->getNextBarPuristNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     fLilypondCodeStream <<
-      "% nextBarPuristNumber = " <<
+      "% nextBarPuristNumber: " <<
       nextBarPuristNumber <<
-      ", fOnGoingFullMeasureRests = " <<
-      "fOnGoingVoiceCadenza = " <<
+      ", fOnGoingFullBarRests: " <<
+      fOnGoingFullBarRests <<
+      "fOnGoingVoiceCadenza: " <<
       fOnGoingVoiceCadenza <<
-      ", fOnGoingFullMeasureRests = " << // JMI ???
-      fOnGoingFullMeasureRests <<
-      ", nextBarPuristNumber = " <<
+      ", nextBarPuristNumber: " <<
       nextBarPuristNumber <<
       ", line " << inputLineNumber <<
       endl;
@@ -22158,11 +22189,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
 #endif
 
   if (
-    ! fOnGoingVoiceCadenza
-      // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
-      // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
-    &&
-    ! fOnGoingFullMeasureRests
+    !
+      (
+        fOnGoingVoiceCadenza
+            // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
+            // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
+          ||
+        fOnGoingFullBarRests
+      )
   ) {
     // don't generate a bar check before the end of measure 1 // JMI ???
     fLilypondCodeStream <<
@@ -22257,23 +22291,26 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
   }
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     fLilypondCodeStream <<
-      "% fOnGoingVoiceCadenza = " <<
+      "%, fOnGoingFullBarRests: " <<
+      fOnGoingFullBarRests <<
+      "% fOnGoingVoiceCadenza: " <<
       fOnGoingVoiceCadenza <<
-      ", fOnGoingFullMeasureRests = " <<
-      fOnGoingFullMeasureRests <<
       ", line " << inputLineNumber <<
       endl;
   }
 #endif
 
   if (
-    ! fOnGoingVoiceCadenza
-      // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
-     // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
-    &&
-    ! fOnGoingFullMeasureRests
+    !
+      (
+        fOnGoingVoiceCadenza
+            // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
+           // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
+          ||
+        fOnGoingFullBarRests
+      )
   ) {
     int nextBarPuristNumber =
       elt->getNextBarPuristNumber ();
@@ -23372,7 +23409,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::visitStart (S_msrFullMeasureRests& elt)
+void lpsr2lilypondTranslator::visitStart (S_msrFullBarRests& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -23388,7 +23425,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullMeasureRests& elt)
       stringstream s;
 
       s <<
-        "% --> Start visiting msrFullMeasureRests" <<
+        "% --> Start visiting msrFullBarRests" <<
         ", line " << elt->getInputLineNumber () <<
         endl;
 
@@ -23406,27 +23443,35 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullMeasureRests& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-  int fullMeasureRestsNumber =
-    elt->getFullMeasureRestsNumber ();
+  int fullBarRestsNumber =
+    elt->getFullBarRestsNumber ();
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
       setw (commentFieldWidth) <<
-      "% start of full measure rests" <<
+      "% start of full-bar rests" <<
       mfSingularOrPlural (
-        fullMeasureRestsNumber,
+        fullBarRestsNumber,
         "measure",
         "measures") <<
       ", line " << inputLineNumber <<
       endl << endl;
 
-    ++gIndenter; // decremented in visitEnd (S_msrFullMeasureRests&)
+    ++gIndenter; // decremented in visitEnd (S_msrFullBarRests&)
   }
 
-  fOnGoingFullMeasureRests = true;
+  fLilypondCodeStream <<
+    "\\mergeFullBarRests {" <<
+    endl;
+  ++gIndenter;
+  fLilypondCodeStream <<
+    "\\compressEmptyMeasures %{ CC %}" <<
+    endl;
+
+  fOnGoingFullBarRests = true;
 }
 
-void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRests& elt)
+void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -23442,7 +23487,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRests& elt)
       stringstream s;
 
       s <<
-        "% --> End visiting msrFullMeasureRests" <<
+        "% --> End visiting msrFullBarRests" <<
         ", line " << elt->getInputLineNumber () <<
         endl;
 
@@ -23460,57 +23505,58 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRests& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-  int fullMeasureRestsNumber =
-    elt->getFullMeasureRestsNumber ();
+  int fullBarRestsNumber =
+    elt->getFullBarRestsNumber ();
 
   // start counting measures
-  fRemainingFullMeasureRestsNumber =
-    elt->getFullMeasureRestsNumber ();
+  fRemainingFullBarRestsNumber =
+    elt->getFullBarRestsNumber ();
 
-  // get full measure rests sounding notes
+  // get full-bar rests sounding notes
   rational
-    fullMeasureRestsMeasureSoundingNotes =
-      elt->getFullMeasureRestsMeasureSoundingNotes ();
+    fullBarRestsMeasureSoundingNotes =
+      elt->getFullBarRestsMeasureSoundingNotes ();
 
-  // generate full measure rests compression if relevant
-  // right befoe Ri*n, because if affects only the next music element
-  if (
-    fCurrentVoice->getVoiceContainsFullMeasureRests ()
-      ||
-    gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
-  ) {
-    fLilypondCodeStream <<
-      "\\compressEmptyMeasures" <<
-      endl;
-  }
+// JMI v0.9.63
+  // generate full-bar rests compression if relevant
+  // right before Ri*n, because if affects only the next music element
+//   if (
+//     fCurrentVoice->getVoiceContainsFullBarRests ()
+//       ||
+//     gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
+//   ) {
+//     fLilypondCodeStream <<
+//       "\\compressEmptyMeasures" << " %{ AA %}" <<
+//       endl;
+//   }
 
-  // generate full measure rests only now, in case there are
+  // generate full-bar rests only now, in case there are
   // clef, keys or times before them in the first measure
-  fLilypondCodeStream <<
-    "R" <<
-    fullMeasureRestsWholeNoteAsLilypondString (
-      inputLineNumber,
-      fullMeasureRestsMeasureSoundingNotes);
+//   fLilypondCodeStream <<
+//     "R" <<
+//     fullBarRestsWholeNoteAsLilypondString (
+//       inputLineNumber,
+//       fullBarRestsMeasureSoundingNotes);
+//
+//   if (fullBarRestsNumber > 1) {
+//     fLilypondCodeStream <<
+//       "*" <<
+//       fullBarRestsNumber;
+//   }
 
-  if (fullMeasureRestsNumber > 1) {
-    fLilypondCodeStream <<
-      "*" <<
-      fullMeasureRestsNumber;
-  }
-
-  if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
-    // generate information and line number as a comment
-    fLilypondCodeStream <<
-      " %{ line " <<
-      elt->getInputLineNumber () <<
-      " %}";
-  }
-
-  if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
-    // generate information and line number as a comment
-    fLilypondCodeStream <<
-      "%{ full measure rest %}";
-  }
+//   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+//     // generate information and line number as a comment
+//     fLilypondCodeStream <<
+//       " %{ line " <<
+//       elt->getInputLineNumber () <<
+//       " %}";
+//   }
+//
+//   if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
+//     // generate information and line number as a comment
+//     fLilypondCodeStream <<
+//       "%{ full-bar rest %}";
+//   }
 
   // wait until all measures have be visited
   // before the bar check is generated // JMI ???
@@ -23518,7 +23564,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRests& elt)
   // now we can generate the bar check
   fLilypondCodeStream <<
     " | % " <<
-    elt->getFullMeasureRestsLastMeasurePuristMeasureNumber () + 1;
+    elt->getFullBarRestsLastMeasurePuristMeasureNumber () + 1;
 
 /* TO BE FINALIZED JMI
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
@@ -23532,23 +23578,28 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRests& elt)
     endl;
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    --gIndenter; // incremented in visitStart (S_msrFullMeasureRests&)
+    --gIndenter; // incremented in visitStart (S_msrFullBarRests&)
 
     fLilypondCodeStream << left <<
       setw (commentFieldWidth) <<
-      "% end of full measure rests" <<
+      "% end of full-bar rests" <<
       mfSingularOrPlural (
-        fullMeasureRestsNumber,
+        fullBarRestsNumber,
         "measure",
         "measures") <<
       ", line " << inputLineNumber <<
       endl << endl;
   }
 
-  fOnGoingFullMeasureRests = false;
+  fLilypondCodeStream <<
+    "}" << // mergeFullBarRests
+    endl;
+  --gIndenter;
+
+  fOnGoingFullBarRests = false;
 }
 
-void lpsr2lilypondTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
+void lpsr2lilypondTranslator::visitStart (S_msrFullBarRestsContents& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -23564,7 +23615,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
       stringstream s;
 
       s <<
-        "%--> Start visiting msrFullMeasureRestsContents" <<
+        "%--> Start visiting msrFullBarRestsContents" <<
         endl;
 
       if (traceLpsrVisitors) {
@@ -23584,21 +23635,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
       setw (commentFieldWidth) <<
-      "% start of full measure rests contents " <<
+      "% start of full-bar rests contents " <<
       /* JMI
       mfSingularOrPlural (
-        fullMeasureRestsNumber,
+        fullBarRestsNumber,
         "measure",
         "measures") <<
         */
       ", line " << inputLineNumber <<
       endl << endl;
 
-    ++gIndenter; // decremented in visitEnd (S_msrFullMeasureRests&)
+    ++gIndenter; // decremented in visitEnd (S_msrFullBarRests&)
   }
 }
 
-void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
+void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRestsContents& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -23614,7 +23665,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
       stringstream s;
 
       s <<
-        "%--> End visiting msrFullMeasureRestsContents" <<
+        "%--> End visiting msrFullBarRestsContents" <<
         endl;
 
       if (traceLpsrVisitors) {
@@ -23634,17 +23685,17 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
       setw (commentFieldWidth) <<
-      "% end of full measure rests contents " <<
+      "% end of full-bar rests contents " <<
       /* JMI
       mfSingularOrPlural (
-        fullMeasureRestsNumber,
+        fullBarRestsNumber,
         "measure",
         "measures") <<
         */
       ", line " << inputLineNumber <<
       endl << endl;
 
-    --gIndenter; // incremented in visitStart (S_msrFullMeasureRests&)
+    --gIndenter; // incremented in visitStart (S_msrFullBarRests&)
   }
 }
 

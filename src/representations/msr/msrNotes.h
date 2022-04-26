@@ -848,7 +848,7 @@ class EXP msrNote : public msrTupletElement
     void                  appendOtherDynamicToNote (
                             S_msrOtherDynamic otherDynamic);
 
-    S_msrDynamic         removeFirstDynamics (); // ???
+    S_msrDynamic          removeFirstDynamics (); // ??? JMI
 
     // words
     void                  appendWordsToNote (S_msrWords words);
@@ -976,6 +976,8 @@ class EXP msrNote : public msrTupletElement
 
     string                asShortStringForTimeView () const;
 
+    string                asMinimalString () const;
+
     virtual void          printNoteEssentials (ostream& os) const;
 
     void                  print (ostream& os) const override;
@@ -1069,8 +1071,8 @@ class EXP msrNote : public msrTupletElement
     // multiple rest member?
     // ------------------------------------------------------
 
-    Bool                  fNoteBelongsToAFullMeasureRests; // JMI
-    int                   fNoteFullMeasureRestsSequenceNumber; // JMI
+    Bool                  fNoteBelongsToAFullBarRests; // JMI
+    int                   fNoteFullBarRestsSequenceNumber; // JMI
 
     // note lyrics
     // ------------------------------------------------------

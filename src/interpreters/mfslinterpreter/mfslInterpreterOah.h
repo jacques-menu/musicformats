@@ -90,6 +90,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  getTraceParsing () const
                               { return fTraceParsing; }
 
+    // display
     void                  setDisplayToolAndInput ()
                               { fDisplayToolAndInput = true; }
 
@@ -102,27 +103,36 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  getDisplayOptions () const
                               { return fDisplayOptions; }
 
+    // choices
     void                  setTraceChoices ()
                               { fTraceChoices = true; }
 
     Bool                  getTraceChoices () const
                               { return fTraceChoices; }
 
-    void                  setTraceChoiceStatements ()
-                              { fTraceChoiceStatements = true; }
+    void                  setTraceCaseChoiceStatements ()
+                              { fTraceCaseChoiceStatements = true; }
 
-    Bool                  getTraceChoiceStatements () const
-                              { return fTraceChoiceStatements; }
+    Bool                  getTraceCaseChoiceStatements () const
+                              { return fTraceCaseChoiceStatements; }
 
-    void                  setTraceCaseStatements ()
-                              { fTraceCaseStatements = true; }
+    // inputs
+    void                  setTraceInputs ()
+                              { fTraceInputs = true; }
 
-    Bool                  getTraceCaseStatements () const
-                              { return fTraceCaseStatements; }
+    Bool                  getTraceInputs () const
+                              { return fTraceInputs; }
+
+    void                  setTraceCaseInputStatements ()
+                              { fTraceCaseInputStatements = true; }
+
+    Bool                  getTraceCaseInputStatements () const
+                              { return fTraceCaseInputStatements; }
 
     void                  setTraceOptionsBlocks ()
                               { fTraceOptionsBlocks = true; }
 
+    // options
     Bool                  getTraceOptionsBlocks () const
                               { return fTraceOptionsBlocks; }
 
@@ -196,6 +206,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     Bool                  fDisplayOptions;
 
+    // nolaunch
     Bool                  fNoLaunch;
 
     // maintainance options
@@ -203,11 +214,15 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     Bool                  fTraceParsing;
 
+    // choices
     Bool                  fTraceChoices;
-    Bool                  fTraceChoiceStatements;
+    Bool                  fTraceCaseChoiceStatements;
 
-    Bool                  fTraceCaseStatements;
+    // inputs
+    Bool                  fTraceInputs;
+    Bool                  fTraceCaseInputStatements;
 
+    // options blocks
     Bool                  fTraceOptionsBlocks;
 
     // input sources

@@ -565,7 +565,7 @@ msdlTokenKind msdlTokenKindFromKeywordKind (
 
 string existingTokensInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
-  size_t             namesListMaxLength)
+  size_t                   namesListMaxLength)
 {
   string result;
 

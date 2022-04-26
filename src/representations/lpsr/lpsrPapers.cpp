@@ -517,19 +517,19 @@ void lpsrPaper::printShort (ostream& os) const
 
   // ragged output
 
-//   os << left <<
-//     setw (fieldWidth) <<
-//     "fRaggedBottom" << " : " << fRaggedBottom <<
-//     endl <<
-//     setw (fieldWidth) <<
-//     "fRaggedLast" << " : " << fRaggedLast <<
-//     endl <<
-//     setw (fieldWidth) <<
-//     "fRaggedLastBottom" << " : " << fRaggedLastBottom <<
-//     endl <<
-//     setw (fieldWidth) <<
-//     "fRaggedRight" << " : " << fRaggedRight <<
-//     endl;
+  os << left <<
+    setw (fieldWidth) <<
+    "fRaggedBottom" << " : " << fRaggedBottom <<
+    endl <<
+    setw (fieldWidth) <<
+    "fRaggedLast" << " : " << fRaggedLast <<
+    endl <<
+    setw (fieldWidth) <<
+    "fRaggedLastBottom" << " : " << fRaggedLastBottom <<
+    endl <<
+    setw (fieldWidth) <<
+    "fRaggedRight" << " : " << fRaggedRight <<
+    endl;
 
   // headers and footers
 

@@ -258,50 +258,6 @@ lpsrScore::lpsrScore (
   // initialize Scheme functions informations
   // ----------------------------------------
 
-  // files includes
-  fJianpuFileIncludeIsNeeded = false;
-
-  // Scheme modules
-  fScmAndAccregSchemeModulesAreNeeded = false;
-
-  // Scheme functions
-  fTongueSchemeFunctionIsNeeded = false;
-  fCustomShortBarLineSchemeFunctionIsNeeded = false;
-  fEditorialAccidentalSchemeFunctionIsNeeded = false;
-  fDynamicsSchemeFunctionIsNeeded = false;
-  fTupletsCurvedBracketsSchemeFunctionIsNeeded = false;
-  fAfterSchemeFunctionIsNeeded = false;
-  fTempoNotesRelationshipshipSchemeFunctionIsNeeded = false;
-  fGlissandoWithTextSchemeFunctionsIsNeeded = false;
-  fOtherDynamicSchemeFunctionIsNeeded = false;
-
-  fAutoVoicesSchemeFunctionIsNeeded = false;
-
-  // markups
-  fDampMarkupIsNeeded = false;
-  fDampAllMarkupIsNeeded = false;
-
-  // white note heads
-  fWhiteNoteHeadsIsNeeded = false;
-
-    // bar numbers
-  fBoxAroundNextBarNumberIsNeeded = false;
-
-  // jazz chords display
-  fJazzChordsDisplayIsNeeded = false;
-
-  // colored ledger lines
-  fColoredLedgerLinesIsNeeded = false;
-
-  // hidden measure and barLine
-  fHiddenMeasureAndBarLineIsNeeded = false;
-
-  // merge rests
-  fMergeRestsIsNeeded = false;
-
-  // spanners with centered text
-  fTextSpannerWithCenteredTextIsNeeded = false;
-
   if (gGlobalLpsr2lilypondOahGroup->getLilypondRunDate ()) {
     // create the date and time signature functions
     addDateAndTimeSchemeFunctionsToScore ();
@@ -698,12 +654,12 @@ void lpsrScore::setHiddenMeasureAndBarLineIsNeeded ()
   }
 }
 
-void lpsrScore::setMergeRestsIsNeeded ()
+void lpsrScore::setMergeStaffCommonRestsIsNeeded ()
 {
-  if (! fMergeRestsIsNeeded) {
-    addMergeRestsToScore ();
+  if (! fMergeStaffCommonRestsIsNeeded) {
+    addMergeStaffCommonRestsToScore ();
 
-    fMergeRestsIsNeeded = true;
+    fMergeStaffCommonRestsIsNeeded = true;
   }
 }
 
@@ -761,6 +717,15 @@ R"(
   // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
+}
+
+void lpsrScore::setMergeFullBarRestsIsNeeded ()
+{
+  if (! fMergeFullBarRestsIsNeeded) {
+    addMergeFullBarRestsToScore ();
+
+    fMergeFullBarRestsIsNeeded = true;
+  }
 }
 
 void lpsrScore::addPointAndClickOffSchemeFunctionsToScore ()
@@ -2269,7 +2234,7 @@ R"(
     schemeFunction;
 }
 
-void lpsrScore::addMergeRestsToScore ()
+void lpsrScore::addMergeStaffCommonRestsToScore ()
 {
   stringstream s;
 
@@ -2357,11 +2322,11 @@ R"###(%% http://lsr.di.unimi.it/LSR/Item?id=336
 
   string
     schemeFunctionName =
-      "MergeRests",
+      "MergeStaffCommonRests",
 
   schemeFunctionDescription =
 R"(
-% Functions to merge rests in two voices
+% Functions to merge staff common rests in two voices
 )",
 
   schemeFunctionCode = s.str ();
@@ -2465,6 +2430,90 @@ TextSpannerWithCenteredText =
   string
     schemeFunctionName =
       "TextSpannerWithCenteredText",
+
+  schemeFunctionDescription =
+R"(
+% Function to create text spanners with text centered in it
+)",
+
+  schemeFunctionCode = s.str ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme function '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
+}
+
+void lpsrScore::addMergeFullBarRestsToScore ()
+{
+  stringstream s;
+
+  s <<
+R"###(
+% thanks to jean@abou-samra.fr
+
+#(define (append-merge x l r)
+   "Add x to the head of list l, merging skips,
+and if r is true also merging full-bar rests."
+   (if (and (pair? l)
+            (ly:music? x)
+            (ly:music? (car l))
+            (or (and (music-is-of-type? x 'skip-event)
+                     (music-is-of-type? (car l) 'skip-event))
+                (and r
+                     (music-is-of-type? x 'multi-measure-rest)
+                     (music-is-of-type? (car l) 'multi-measure-rest)))
+            (not (pair? (ly:music-property (car l) 'articulations))))
+       (let ((total
+              (ly:moment-add
+               (ly:music-duration-length (car l))
+               (ly:music-duration-length x)
+               )))
+         (set! (ly:music-property x 'duration)
+               (make-duration-of-length total))
+         (cons x (cdr l)))
+       (cons x l)))
+
+mergeSkips = #(define-music-function
+               (parser location rests-also music) ((boolean?) ly:music?)
+               "Merge successive skips in sequential music,
+  optionally merge full-measure rests as well."
+               (music-map
+                (lambda (m)
+                  (if (music-is-of-type? m 'sequential-music)
+                      (ly:music-set-property! m
+                                              'elements
+                                              (fold-right (lambda (x l)
+                                                            (append-merge x l rests-also))
+                                                          '()
+                                                          (ly:music-property m 'elements))))
+                  m)
+                music))
+
+mergeFullBarRests = #(define-music-function
+                      (parser location music) (ly:music?)
+                      #{ \mergeSkips ##t $music #})
+)###";
+
+  string
+    schemeFunctionName =
+      "MergeFullBarRests",
 
   schemeFunctionDescription =
 R"(
@@ -2687,6 +2736,12 @@ void lpsrScore::print (ostream& os) const
     "LPSR Score" <<
     endl << endl;
 
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fMsrScore != nullptr,
+    "fMsrScore is null");
+
   ++gIndenter;
 
   // print the MSR structure (without the voices)
@@ -2768,6 +2823,12 @@ void lpsrScore::printShort (ostream& os) const
   os <<
     "LPSR Score, short version" <<
     endl << endl;
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fMsrScore != nullptr,
+    "fMsrScore is null");
 
   ++gIndenter;
 
@@ -2862,6 +2923,12 @@ void lpsrScore::printFull (ostream& os) const
   os <<
     "LPSR Score, full version" <<
     endl << endl;
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fMsrScore != nullptr,
+    "fMsrScore is null");
 
   ++gIndenter;
 

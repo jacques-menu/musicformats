@@ -10207,7 +10207,7 @@ void msr2mxsrTranslator::visitEnd (S_msrRepeatEnding& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrFullMeasureRests& elt)
+void msr2mxsrTranslator::visitStart (S_msrFullBarRests& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10215,7 +10215,7 @@ void msr2mxsrTranslator::visitStart (S_msrFullMeasureRests& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrFullMeasureRests" <<
+      "--> Start visiting msrFullBarRests" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -10224,7 +10224,7 @@ void msr2mxsrTranslator::visitStart (S_msrFullMeasureRests& elt)
   ++gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Handling multiple rest start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
@@ -10234,12 +10234,12 @@ void msr2mxsrTranslator::visitStart (S_msrFullMeasureRests& elt)
 #endif
 
   fCurrentVoiceClone->
-    handleFullMeasureRestsStartInVoiceClone (
+    handleFullBarRestsStartInVoiceClone (
       inputLineNumber,
       elt);
 }
 
-void msr2mxsrTranslator::visitEnd (S_msrFullMeasureRests& elt)
+void msr2mxsrTranslator::visitEnd (S_msrFullBarRests& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10247,7 +10247,7 @@ void msr2mxsrTranslator::visitEnd (S_msrFullMeasureRests& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrFullMeasureRests" <<
+      "--> End visiting msrFullBarRests" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -10256,7 +10256,7 @@ void msr2mxsrTranslator::visitEnd (S_msrFullMeasureRests& elt)
   --gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     gLogStream <<
       "Handling multiple rest start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
@@ -10266,12 +10266,12 @@ void msr2mxsrTranslator::visitEnd (S_msrFullMeasureRests& elt)
 #endif
 
   fCurrentVoiceClone->
-    handleFullMeasureRestsEndInVoiceClone (
+    handleFullBarRestsEndInVoiceClone (
       inputLineNumber);
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
+void msr2mxsrTranslator::visitStart (S_msrFullBarRestsContents& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10279,7 +10279,7 @@ void msr2mxsrTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrFullMeasureRestsContents" <<
+      "--> Start visiting msrFullBarRestsContents" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -10288,20 +10288,20 @@ void msr2mxsrTranslator::visitStart (S_msrFullMeasureRestsContents& elt)
   ++gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRestsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
-        "Upon visitStart (S_msrFullMeasureRestsContents&)");
+        "Upon visitStart (S_msrFullBarRestsContents&)");
   }
 #endif
 
   fCurrentVoiceClone->
-    handleFullMeasureRestsContentsStartInVoiceClone (
+    handleFullBarRestsContentsStartInVoiceClone (
       inputLineNumber);
 }
 
-void msr2mxsrTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
+void msr2mxsrTranslator::visitEnd (S_msrFullBarRestsContents& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10309,7 +10309,7 @@ void msr2mxsrTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrFullMeasureRestsContents" <<
+      "--> End visiting msrFullBarRestsContents" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -10318,16 +10318,16 @@ void msr2mxsrTranslator::visitEnd (S_msrFullMeasureRestsContents& elt)
   --gIndenter;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRestsDetails ()) {
     fCurrentVoiceClone->
       displayVoice (
         inputLineNumber,
-        "Upon visitEnd (S_msrFullMeasureRestsContents&) 1");
+        "Upon visitEnd (S_msrFullBarRestsContents&) 1");
   }
 #endif
 
   fCurrentVoiceClone->
-    handleFullMeasureRestsContentsEndInVoiceClone (
+    handleFullBarRestsContentsEndInVoiceClone (
       inputLineNumber);
 }
 

@@ -89,8 +89,8 @@ msrScore::msrScore (
   // measure repeats replicas should be browsed by default
   fInhibitMeasureRepeatReplicasBrowsing = false;
 
-  // full measure rests should be browsed by default
-  fInhibitFullMeasureRestsBrowsing = false;
+  // full-bar rests should be browsed by default
+  fInhibitFullBarRestsBrowsing = false;
 }
 
 msrScore::~msrScore ()
@@ -144,8 +144,8 @@ S_msrScore msrScore::createScoreNewbornClone ()
   newbornClone->fInhibitMeasureRepeatReplicasBrowsing =
     fInhibitMeasureRepeatReplicasBrowsing;
 
-  newbornClone->fInhibitFullMeasureRestsBrowsing =
-    fInhibitFullMeasureRestsBrowsing;
+  newbornClone->fInhibitFullBarRestsBrowsing =
+    fInhibitFullBarRestsBrowsing;
 
   return newbornClone;
 }
@@ -465,8 +465,8 @@ void msrScore::print (ostream& os) const
     endl<<
 
     setw (fieldWidth) <<
-    "fIinhibitFullMeasureRestsBrowsing" <<  " : " <<
-    fInhibitFullMeasureRestsBrowsing <<
+    "fIinhibitFullBarRestsBrowsing" <<  " : " <<
+    fInhibitFullBarRestsBrowsing <<
     endl<<
     endl;
 
@@ -742,8 +742,8 @@ void msrScore::printSummary (ostream& os) const
     endl<<
 
     setw (fieldWidth) <<
-    "fInhibitFullMeasureRestsBrowsing" <<  " : " <<
-    fInhibitFullMeasureRestsBrowsing <<
+    "fInhibitFullBarRestsBrowsing" <<  " : " <<
+    fInhibitFullBarRestsBrowsing <<
     endl<<
     endl;
 

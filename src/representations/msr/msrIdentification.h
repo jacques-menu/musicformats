@@ -205,7 +205,7 @@ class EXP msrIdentification : public msrElement
                             int           inputLineNumber,
                             const string& value);
 
-    size_t          maxIdentificationNamesLength ();
+    size_t                maxIdentificationNamesLength ();
 
   public:
 

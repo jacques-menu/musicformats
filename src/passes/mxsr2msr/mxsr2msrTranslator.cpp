@@ -85,8 +85,8 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentMeasureRepeatMeasuresNumber = -1;
   fCurrentMeasureRepeatSlashesNumber  = -1;
 
-  fCurrentFullMeasureRestsMeasuresNumber   = 0;
-  fRemainingFullMeasureRestsMeasuresNumber = 0;
+  fCurrentFullBarRestsMeasuresNumber   = 0;
+  fRemainingFullBarRestsMeasuresNumber = 0;
 
   fCurrentSlashDotsNumber = -1;
   fCurrentSlashGraphicDurationKind = msrDurationKind::k_NoDuration;
@@ -2257,6 +2257,8 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
   attachPendingVoiceLevelElementsToVoice (
     currentNoteVoice);
 
+  attachPendingPartLevelElementsToPart (
+    fCurrentPart);
 
   // finalize the current part
   fCurrentPart->
@@ -6743,6 +6745,7 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt )
     inputLineNumber);
 
   // reset staff change detection
+  // only now, it is used by handleBackup() v0.9.63
   fCurrentStaffNumberToInsertInto = msrStaff::K_NO_STAFF_NUMBER;
 
   fOnGoingBackup = false;
@@ -8595,7 +8598,6 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
 
     // attach these grace notes group as an after grace notes group
     // to the last note found in its voice
-
     if (! noteToAttachTo) {
       stringstream s;
 
@@ -8664,7 +8666,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       gGlobalMxsr2msrOahGroup->getMeasuresToBeReplicatedStringToIntMap ();
 
   if (measuresToBeReplicatedStringToIntMap.size ()) {
-  //  if (! fOnGoingFullMeasureRests) { JMI
+  //  if (! fOnGoingFullBarRests) { JMI
       // should we add empty measures after current measures?
       map<string,int>::const_iterator
         it =
@@ -8674,7 +8676,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       if (it != measuresToBeReplicatedStringToIntMap.end ()) {
         // fCurrentMeasureNumber is to be replicated,
 #ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+        if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
           gLogStream <<
             endl <<
             "Replicating meaure " <<
@@ -8693,7 +8695,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
             measureReplicatesNumber);
       }
       else {
-        // fRemainingFullMeasureRestsMeasuresNumber JMI ???
+        // fRemainingFullBarRestsMeasuresNumber JMI ???
       }
  //   }
   }
@@ -8704,7 +8706,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
       gGlobalMxsr2msrOahGroup->getAddEmptyMeasuresStringToIntMap ();
 
   if (addEmptyMeasuresStringToIntMap.size ()) {
-  //  if (! fOnGoingFullMeasureRests) { JMI
+  //  if (! fOnGoingFullBarRests) { JMI
       // should we add empty measures after current measures?
       map<string,int>::const_iterator
         it =
@@ -8723,7 +8725,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
         s >> measuresToBeAdded;
 
 #ifdef TRACING_IS_ENABLED
-        if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+        if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
           gLogStream <<
             endl <<
             "Adding " <<
@@ -8742,77 +8744,77 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
             measuresToBeAdded);
       }
       else {
-        // fRemainingFullMeasureRestsMeasuresNumber JMI ???
+        // fRemainingFullBarRestsMeasuresNumber JMI ???
       }
  //   }
   }
 
   // handle an on-going multiple rest if any only now,
   // JMI do it before???
-  if (fOnGoingFullMeasureRests) {
-    handleOnGoingFullMeasureRests (
+  if (fOnGoingFullBarRests) {
+    handleOnGoingFullBarRestsAtTheEndOfMeasure (
       inputLineNumber);
   }
 }
 
-void mxsr2msrTranslator::handleOnGoingFullMeasureRests (
+void mxsr2msrTranslator::handleOnGoingFullBarRestsAtTheEndOfMeasure (
   int inputLineNumber)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     const int fieldWidth = 37;
 
     gLogStream <<
-      "--> onGoingFullMeasureRests" <<
+      "--> onGoingFullBarRests" <<
       endl;
 
     ++gIndenter;
 
     gLogStream <<
       setw (fieldWidth) <<
-      "currentFullMeasureRestsHasBeenCreated " << " : " <<
-      fCurrentFullMeasureRestsHasBeenCreated <<
+      "currentFullBarRestsHasBeenCreated " << " : " <<
+      fCurrentFullBarRestsHasBeenCreated <<
       endl <<
       setw (fieldWidth) <<
-      "remainingFullMeasureRestsMeasuresNumber" << " : " <<
-      fRemainingFullMeasureRestsMeasuresNumber <<
+      "remainingFullBarRestsMeasuresNumber" << " : " <<
+      fRemainingFullBarRestsMeasuresNumber <<
       endl << endl;
 
     --gIndenter;
   }
 #endif
 
-  if (! fCurrentFullMeasureRestsHasBeenCreated) {
+  if (! fCurrentFullBarRestsHasBeenCreated) {
     // create a pending multiple rest,
-    // that will be handled when fRemainingFullMeasureRestsMeasuresNumber
+    // that will be handled when fRemainingFullBarRestsMeasuresNumber
     // comes down to 0 later in this same method
     fCurrentPart->
-      createFullMeasureRestsInPart (
+      createFullBarRestsInPart (
         inputLineNumber,
-        fCurrentFullMeasureRestsMeasuresNumber);
+        fCurrentFullBarRestsMeasuresNumber);
 
-    fCurrentFullMeasureRestsHasBeenCreated = true;
+    fCurrentFullBarRestsHasBeenCreated = true;
   }
 
-  if (fRemainingFullMeasureRestsMeasuresNumber <= 0) {
+  if (fRemainingFullBarRestsMeasuresNumber <= 0) {
     mxsr2msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
       inputLineNumber,
       __FILE__, __LINE__,
-      "remainingFullMeasureRestsMeasuresNumber problem");
+      "remainingFullBarRestsMeasuresNumber problem");
   }
 
   // account for one more rest measure in the multiple rest
-  --fRemainingFullMeasureRestsMeasuresNumber;
+  --fRemainingFullBarRestsMeasuresNumber;
 
-  if (fRemainingFullMeasureRestsMeasuresNumber == 0) {
-    // all full measure rests have been found,
+  if (fRemainingFullBarRestsMeasuresNumber == 0) {
+    // all full-bar rests have been found,
     // the current one is the first after the multiple rest
     fCurrentPart->
-      appendPendingFullMeasureRestsToPart (
+      appendPendingFullBarRestsToPart (
         inputLineNumber);
 
-    if (fRemainingFullMeasureRestsMeasuresNumber == 1) {
+    if (fRemainingFullBarRestsMeasuresNumber == 1) {
       fCurrentPart-> // JMI ??? BOF
         setNextMeasureNumberInPart (
           inputLineNumber,
@@ -8820,33 +8822,33 @@ void mxsr2msrTranslator::handleOnGoingFullMeasureRests (
     }
 
     // forget about and multiple rest having been created
-    fCurrentFullMeasureRestsHasBeenCreated = false;
+    fCurrentFullBarRestsHasBeenCreated = false;
 
-    fOnGoingFullMeasureRests = false;
+    fOnGoingFullBarRests = false;
   }
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullMeasureRests ()) {
+  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
     const int fieldWidth = 37;
 
     gLogStream <<
-      "--> onGoingFullMeasureRests" <<
+      "--> onGoingFullBarRests" <<
       endl;
 
     ++gIndenter;
 
     gLogStream <<
       setw (fieldWidth) <<
-      "fCurrentFullMeasureRestsHasBeenCreated " << " : " <<
-      fCurrentFullMeasureRestsHasBeenCreated <<
+      "fCurrentFullBarRestsHasBeenCreated " << " : " <<
+      fCurrentFullBarRestsHasBeenCreated <<
       endl <<
       setw (fieldWidth) <<
-      "fRemainingFullMeasureRestsMeasuresNumber" << " : " <<
-      fRemainingFullMeasureRestsMeasuresNumber <<
+      "fRemainingFullBarRestsMeasuresNumber" << " : " <<
+      fRemainingFullBarRestsMeasuresNumber <<
       endl <<
       setw (fieldWidth) <<
-      "fOnGoingFullMeasureRests " << " : " <<
-      fOnGoingFullMeasureRests <<
+      "fOnGoingFullBarRests " << " : " <<
+      fOnGoingFullBarRests <<
       endl;
 
     --gIndenter;
@@ -11136,6 +11138,43 @@ void mxsr2msrTranslator::visitStart ( S_measure_repeat& elt )
 
 void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
 {
+/*
+<!--
+	A measure-style indicates a special way to print partial
+	to multiple measures within a part. This includes multiple
+	rests over several measures, repeats of beats, single, or
+	multiple measures, and use of slash notation.
+
+	The multiple-rest and measure-repeat elements indicate the
+	number of measures covered in the element content. The
+	beat-repeat and slash elements can cover partial measures.
+	All but the multiple-rest element use a type attribute to
+	indicate starting and stopping the use of the style. The
+	optional number attribute specifies the staff number from
+	top to bottom on the system, as with clef.
+-->
+<!ELEMENT measure-style (multiple-rest |
+	measure-repeat | beat-repeat | slash)>
+<!ATTLIST measure-style
+    number CDATA #IMPLIED
+    %font;
+    %color;
+    %optional-unique-id;
+>
+
+<!--
+	The text of the multiple-rest element indicates the number
+	of measures in the multiple rest. Multiple rests may use
+	the 1-bar / 2-bar / 4-bar rest symbols, or a single shape.
+	The use-symbols attribute indicates which to use; it is no
+	if not specified.
+-->
+<!ELEMENT multiple-rest (#PCDATA)>
+<!ATTLIST multiple-rest
+    use-symbols %yes-no; #IMPLIED
+>
+*/
+
   int inputLineNumber =
     elt->getInputLineNumber ();
 
@@ -11148,23 +11187,25 @@ void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
   }
 #endif
 
-  fCurrentFullMeasureRestsMeasuresNumber = (int)(*elt);
+  fCurrentFullBarRestsMeasuresNumber = (int)(*elt);
 
-  string fullMeasureRestsUseSymbols = elt->getAttributeValue ("use-symbols");
+  string useSymbols = elt->getAttributeValue ("use-symbols");
 
-  if      (fullMeasureRestsUseSymbols == "yes") {
-    // JMI
+    // JMI v0.9.63
+    // what do we do with fFullBarRestsUseSymbols ???
+  if      (useSymbols == "yes") {
+    fFullBarRestsUseSymbols = true;
   }
-  else if (fullMeasureRestsUseSymbols == "no") {
-    // JMI
+  else if (useSymbols == "no") {
+    fFullBarRestsUseSymbols = false;
   }
   else {
-    if (fullMeasureRestsUseSymbols.size ()) {
+    if (useSymbols.size ()) {
       stringstream s;
 
       s <<
         "multiple rest use symbols " <<
-        fullMeasureRestsUseSymbols <<
+        useSymbols <<
         " is unknown";
 
       mxsr2msrError (
@@ -11175,14 +11216,14 @@ void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
       }
   }
 
-  // register number of remeaining full measure rests
-  fRemainingFullMeasureRestsMeasuresNumber =
-    fCurrentFullMeasureRestsMeasuresNumber;
+  // register number of remeaining full-bar rests
+  fRemainingFullBarRestsMeasuresNumber =
+    fCurrentFullBarRestsMeasuresNumber;
 
   // the multiple rest will created at the end of its first measure,
   // so that the needed staves/voices have been created
 
-  fOnGoingFullMeasureRests = true;
+  fOnGoingFullBarRests = true;
 }
 
 void mxsr2msrTranslator::visitStart ( S_slash& elt )
@@ -18284,7 +18325,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
 #endif
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+  if (gGlobalTracingOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
       "############## Before  finalizeTupletAndPopItFromTupletsStack()");
   }
@@ -18295,7 +18336,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
     currentVoice =
       fetchVoiceFromCurrentPart (
         inputLineNumber,
-        fCurrentStaffNumberToInsertInto, // fCurrentMusicXMLStaffNumber,
+        fCurrentStaffNumberToInsertInto, // fCurrentMusicXMLStaffNumber ??? JMI
         fCurrentMusicXMLVoiceNumber);
 
   // get tuplet from top of tuplet stack
@@ -18393,7 +18434,7 @@ void mxsr2msrTranslator::finalizeTupletAndPopItFromTupletsStack (
   }
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTuplets ()) {
+  if (gGlobalTracingOahGroup->getTraceTupletsDetails ()) {
     displayTupletsStack (
       "############## After  finalizeTupletAndPopItFromTupletsStack()");
   }
@@ -18886,6 +18927,34 @@ void mxsr2msrTranslator::attachPendingTemposToVoice (
   }
 }
 
+void mxsr2msrTranslator::attachPendingTemposToPart (
+  S_msrPart part)
+{
+  // attach the pending tempos if any to the voice
+  if (fPendingTemposList.size ()) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceTempos ()) {
+      gLogStream <<
+        "Attaching pending tempos to part \""  <<
+        part->getPartName () <<
+        "\"" <<
+        endl;
+    }
+#endif
+
+    while (fPendingTemposList.size ()) {
+      S_msrTempo
+        tempo =
+          fPendingTemposList.front ();
+
+      part->
+        appendTempoToPart (tempo);
+
+      fPendingTemposList.pop_front ();
+    } // while
+  }
+}
+
 void mxsr2msrTranslator::attachPendingBarLinesToVoice (
   S_msrVoice voice)
 {
@@ -18907,10 +18976,41 @@ void mxsr2msrTranslator::attachPendingBarLinesToVoice (
           fPendingBarLinesList.front ();
 
 //       fCurrentPart->
-//         appendBarLineToPart (barLine);
+//         appendBarLineToPart (barLine); // JMI ??? v0.9.63
 
       voice->
         appendBarLineToVoice (barLine); // JMIJMIJMI
+
+      fPendingBarLinesList.pop_front ();
+    } // while
+  }
+}
+
+void mxsr2msrTranslator::attachPendingBarLinesToPart (
+  S_msrPart part)
+{
+  // attach the pending barlines if any to the voice
+  if (fPendingBarLinesList.size ()) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceBarLines ()) {
+      gLogStream <<
+        "Attaching pending barlines to part \""  <<
+        part->getPartName () <<
+        "\"" <<
+        endl;
+    }
+#endif
+
+    while (fPendingBarLinesList.size ()) {
+      S_msrBarLine
+        barLine =
+          fPendingBarLinesList.front ();
+
+//       fCurrentPart->
+//         appendBarLineToPart (barLine); // JMI ??? v0.9.63
+
+      part->
+        appendBarLineToPart (barLine); // JMIJMIJMI
 
       fPendingBarLinesList.pop_front ();
     } // while
@@ -18939,6 +19039,34 @@ void mxsr2msrTranslator::attachPendingRehearsalMarksToVoice (
 
       voice->
         appendRehearsalMarkToVoice (rehearsalMark);
+
+      fPendingRehearsalMarksList.pop_front ();
+    } // while
+  }
+}
+
+void mxsr2msrTranslator::attachPendingRehearsalMarksToPart (
+  S_msrPart part)
+{
+ // attach the pending rehearsals if any to the note
+  if (fPendingRehearsalMarksList.size ()) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceRehearsalMarks ()) {
+      gLogStream <<
+        "Attaching pending rehearsals to part \""  <<
+        part->getPartName () <<
+        "\"" <<
+        endl;
+    }
+#endif
+
+    while (fPendingRehearsalMarksList.size ()) {
+      S_msrRehearsalMark
+        rehearsalMark =
+          fPendingRehearsalMarksList.front ();
+
+      part->
+        appendRehearsalMarkToPart (rehearsalMark);
 
       fPendingRehearsalMarksList.pop_front ();
     } // while
@@ -18975,6 +19103,36 @@ void mxsr2msrTranslator::attachLineBreaksToVoice (
   }
 }
 
+void mxsr2msrTranslator::attachLineBreaksToPart (
+  S_msrPart part)
+{
+ // attach the pending line breaks if any to the note
+  if (fPendingLineBreaksList.size ()) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceLineBreaks ()) {
+      gLogStream <<
+        "Attaching pending line breaks to part \""  <<
+        part->getPartName () <<
+        "\"" <<
+        endl;
+    }
+#endif
+
+    while (fPendingLineBreaksList.size ()) {
+      S_msrLineBreak
+        lineBreak =
+          fPendingLineBreaksList.front ();
+
+      // append it to the voice
+      part->
+        appendLineBreakToPart (lineBreak);
+
+      // remove it from the list
+      fPendingLineBreaksList.pop_front ();
+    } // while
+  }
+}
+
 void mxsr2msrTranslator::attachPageBreaksToVoice (
   S_msrVoice voice)
 {
@@ -18998,6 +19156,36 @@ void mxsr2msrTranslator::attachPageBreaksToVoice (
       // append it to the voice
       voice->
         appendPageBreakToVoice (pageBreak);
+
+      // remove it from the list
+      fPendingPageBreaksList.pop_front ();
+    } // while
+  }
+}
+
+void mxsr2msrTranslator::attachPageBreaksToPart (
+  S_msrPart part)
+{
+ // attach the pending page breaks if any to the note
+  if (fPendingPageBreaksList.size ()) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
+      gLogStream <<
+        "Attaching pending page breaks to part \""  <<
+        part->getPartName () <<
+        "\"" <<
+        endl;
+    }
+#endif
+
+    while (fPendingPageBreaksList.size ()) {
+      S_msrPageBreak
+        pageBreak =
+          fPendingPageBreaksList.front ();
+
+      // append it to the voice
+      part->
+        appendPageBreakToPart (pageBreak);
 
       // remove it from the list
       fPendingPageBreaksList.pop_front ();
@@ -19624,8 +19812,24 @@ void mxsr2msrTranslator::attachPendingSlursToNote (
 void mxsr2msrTranslator::attachPendingLigaturesToNote (
   S_msrNote note)
 {
+  int numberOfLigatures =
+    fPendingLigaturesList.size ();
+
   // attach the pending ligatures if any to the note
-  if (fPendingLigaturesList.size ()) {
+  if (numberOfLigatures) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceLigatures ()) {
+      gLogStream <<
+        "Attaching " <<
+        mfSingularOrPlural (
+          numberOfLigatures,
+          "ligature", "ligatures") <<
+        " to note " <<
+        note->asString () <<
+        endl;
+    }
+#endif
+
     Bool delayAttachment (false);
 
     if (fCurrentNoteIsARest) {
@@ -19642,18 +19846,18 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
         if (gGlobalTracingOahGroup->getTraceLigatures ()) {
           stringstream s;
 
-          int numberOfLigatures = fPendingLigaturesList.size ();
-
-          if (numberOfLigatures > 1) {
-            s <<
-              "there are " << numberOfLigatures << " ligatures";
-          }
-          else {
-            s <<
-              "there is 1 ligature";
-          }
           s <<
-            " attached to a rest";
+            mfSingularOrPluralWithoutNumber (
+              numberOfLigatures,
+              "there is", "there are") <<
+              ' ' <<
+            numberOfLigatures <<
+              ' ' <<
+            mfSingularOrPluralWithoutNumber (
+              numberOfLigatures,
+              "ligature", "ligatures") <<
+            " attached to rest " <<
+            note->asShortString ();
 
           mxsr2msrWarning (
             gGlobalServiceRunData->getInputSourceName (),
@@ -19669,16 +19873,20 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
       if (gGlobalTracingOahGroup->getTraceLigatures ()) {
           stringstream s;
 
-          int numberOfLigatures = fPendingLigaturesList.size ();
+          s <<
+            mfSingularOrPluralWithoutNumber (
+              numberOfLigatures,
+              "there is", "there are") <<
+              ' ' <<
+            numberOfLigatures <<
+              ' ' <<
+              " pending " <<
+            mfSingularOrPluralWithoutNumber (
+              numberOfLigatures,
+              "ligature", "ligatures") <<
+            " attached to note " <<
+            note->asShortString ();
 
-          if (numberOfLigatures > 1) {
-            s <<
-              "There are " << numberOfLigatures << " pending ligatures";
-          }
-          else {
-            s <<
-              "There is 1 pending ligature";
-          }
           mxsr2msrWarning (
             gGlobalServiceRunData->getInputSourceName (),
             note->getInputLineNumber (),
@@ -19694,13 +19902,17 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
         iEnd   = fPendingLigaturesList.end (),
         i      = iBegin;
       for ( ; ; ) {
-  //    list<S_msrLigature>::iterator i;
-  //    for (i=fPendingLigaturesList.begin (); i!=fPendingLigaturesList.end (); ++i) {
-
-     //   if (i == iEnd) break;
-
         S_msrLigature
           ligature = (*i);
+
+#ifdef TRACING_IS_ENABLED
+        if (gGlobalTracingOahGroup->getTraceLigatures ()) {
+          gLogStream <<
+            "--> ligature: " <<
+            ligature->asString () <<
+            endl;
+        }
+#endif
 
         // fetch ligatures placement kind
         msrPlacementKind
@@ -19708,41 +19920,41 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
             ligature->
               getLigaturePlacementKind ();
 
-        // fetch note's measure
-        S_msrMeasure
-          noteMeasure =
-            note->
-              getNoteDirectMeasureUpLink ();
-
-        // sanity check
-        mfAssert (
-          __FILE__, __LINE__,
-          noteMeasure != nullptr,
-          "attachPendingLigaturesToNote(): noteMeasure is null");
-
-        // fetch note's segment
-        S_msrSegment
-          noteSegment =
-            noteMeasure->
-              getMeasureSegmentUpLink ();
-
-        // sanity check
-        mfAssert (
-          __FILE__, __LINE__,
-          noteSegment != nullptr,
-          "noteSegment is null");
-
-        // fetch note's voice
-        S_msrVoice
-          noteVoice =
-            noteSegment->
-              getSegmentVoiceUpLink ();
-
-        // sanity check
-        mfAssert (
-          __FILE__, __LINE__,
-          noteVoice != nullptr,
-          "noteVoice is null");
+//         // fetch note's measure JMI v0.9.63
+//         S_msrMeasure
+//           noteMeasure =
+//             note->
+//               getNoteDirectMeasureUpLink ();
+//
+//         // sanity check
+//         mfAssert (
+//           __FILE__, __LINE__,
+//           noteMeasure != nullptr,
+//           "attachPendingLigaturesToNote(): noteMeasure is null");
+//
+//         // fetch note's segment
+//         S_msrSegment
+//           noteSegment =
+//             noteMeasure->
+//               getMeasureSegmentUpLink ();
+//
+//         // sanity check
+//         mfAssert (
+//           __FILE__, __LINE__,
+//           noteSegment != nullptr,
+//           "noteSegment is null");
+//
+//         // fetch note's voice
+//         S_msrVoice
+//           noteVoice =
+//             noteSegment->
+//               getSegmentVoiceUpLink ();
+//
+//         // sanity check
+//         mfAssert (
+//           __FILE__, __LINE__,
+//           noteVoice != nullptr,
+//           "noteVoice is null");
 
         // handle ligature placement kind
         switch (ligaturePlacementKind) {
@@ -19751,51 +19963,23 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
             break;
 
           case msrPlacementKind::kPlacementAbove:
-            switch (noteVoice->getRegularVoiceStaffSequentialNumber ()) {
-              case 1:
-              case 3:
-#ifdef TRACING_IS_ENABLED
-                if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-                  gLogStream <<
-                    "Attaching pending ligature above to note '" <<
-                    note->asString () <<
-                    "' in voice \"" <<
-                    noteVoice->getVoiceName () <<
-                    "\"" <<
-                    ", line " << ligature->getInputLineNumber () <<
-                    endl;
-                }
-#endif
-
-                note->appendLigatureToNote (ligature);
-                break;
-              default:
-                ;
-            } // switch
-            break;
-
           case msrPlacementKind::kPlacementBelow:
-            switch (noteVoice->getRegularVoiceStaffSequentialNumber ()) {
-              case 2:
-              case 4:
 #ifdef TRACING_IS_ENABLED
-                if (gGlobalTracingOahGroup->getTraceLigatures ()) {
-                  gLogStream <<
-                    "Attaching pending ligature below to note '" <<
-                    note->asString () <<
-                    "' in voice \"" <<
-                    noteVoice->getVoiceName () <<
-                    "\"" <<
-                    ", line " << ligature->getInputLineNumber () <<
-                    endl;
-                }
+            if (gGlobalTracingOahGroup->getTraceLigatures ()) {
+              gLogStream <<
+                "Attaching pending ligature " <<
+                ligature->asString () <<
+                " to note '" <<
+                note->asString () <<
+//                 "' in voice \"" <<
+//                 noteVoice->getVoiceName () <<
+//                 "\"" <<
+                ", line " << ligature->getInputLineNumber () <<
+                endl;
+            }
 #endif
 
-                note->appendLigatureToNote (ligature);
-                break;
-              default:
-                ;
-            } // switch
+            note->appendLigatureToNote (ligature);
             break;
         } // switch
 
@@ -20230,9 +20414,42 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
 void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
   S_msrVoice voice)
 {
+//   JMI
+//   gLogStream <<
+//     "attachPendingVoiceLevelElementsToVoice()" <<
+//     ", fPendingTemposList.size () = " << fPendingTemposList.size () <<
+//     ", fPendingBarLinesList.size () = " << fPendingBarLinesList.size () <<
+//     ", fPendingLineBreaksList.size () = " << fPendingLineBreaksList.size () <<
+//     ", fPendingPageBreaksList.size () = " << fPendingPageBreaksList.size () <<
+//     endl;
+//     */
+//
+//   // the elements pending since before the note
+//   // can now be appended to the latter's voice
+//   // prior to the note itself
+//
+//   // attach pending rehearsals if any to voice
+//   attachPendingRehearsalMarksToVoice (voice);
+//
+//   // attach pending barlines if any to voice
+//   attachPendingBarLinesToVoice (voice);
+//
+//   // attach pending tempos if any to voice
+//   attachPendingTemposToVoice (voice);
+//
+//   // attach pending line breaks if any to voice
+//   attachLineBreaksToVoice (voice);
+//
+//   // attach pending page breaks if any to voice
+//   attachPageBreaksToVoice (voice);
+}
+
+void mxsr2msrTranslator::attachPendingPartLevelElementsToPart ( // JMI v0.9.63
+  S_msrPart part)
+{
   /* JMI
   gLogStream <<
-    "attachPendingVoiceLevelElementsToVoice()" <<
+    "attachPendingPartLevelElementsToPart()" <<
     ", fPendingTemposList.size () = " << fPendingTemposList.size () <<
     ", fPendingBarLinesList.size () = " << fPendingBarLinesList.size () <<
     ", fPendingLineBreaksList.size () = " << fPendingLineBreaksList.size () <<
@@ -20240,25 +20457,26 @@ void mxsr2msrTranslator::attachPendingVoiceLevelElementsToVoice (
     endl;
     */
 
-  // the elements pending since before the note
+  // the elements pending since before the note // JMI
   // can now be appended to the latter's voice
   // prior to the note itself
 
-  // attach pending rehearsals if any to voice
-  attachPendingRehearsalMarksToVoice (voice);
+  // attach pending rehearsals if any to part
+  attachPendingRehearsalMarksToPart (part);
 
-  // attach pending barlines if any to voice
-  attachPendingBarLinesToVoice (voice);
+  // attach pending barlines if any to part
+  attachPendingBarLinesToPart (part);
 
-  // attach pending tempos if any to voice
-  attachPendingTemposToVoice (voice);
+  // attach pending tempos if any to part
+  attachPendingTemposToPart (part);
 
-  // attach pending line breaks if any to voice
-  attachLineBreaksToVoice (voice);
+  // attach pending line breaks if any to part
+  attachLineBreaksToPart (part);
 
-  // attach pending page breaks if any to voice
-  attachPageBreaksToVoice (voice);
+  // attach pending page breaks if any to part
+  attachPageBreaksToPart (part);
 }
+
 
 void mxsr2msrTranslator::attachPendingNoteLevelElementsToNote (
   S_msrNote note)
@@ -21351,6 +21569,9 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
   attachPendingVoiceLevelElementsToVoice (
     currentNoteVoice);
 
+  attachPendingPartLevelElementsToPart (
+    fCurrentPart);
+
   // set current staff number to insert into if needed JMI ???
   if (fCurrentStaffNumberToInsertInto == msrStaff::K_NO_STAFF_NUMBER) {
 #ifdef TRACING_IS_ENABLED
@@ -21461,7 +21682,18 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
         fCurrentStaffNumberToInsertInto);
 */
 
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  // handle newNote itself
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  handleNoteItself (
+    inputLineNumber,
+    newNote);
+
   // populate newNote
+  // only after handleNoteItself() has set its uplinks JMI v0.9.63
   populateNote (
     inputLineNumber,
     newNote);
@@ -21471,16 +21703,6 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
   // may append skip syllables to the notes
   handleLyricsForNote (
     voiceToInsertNoteInto,
-    newNote);
-
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
-  // handle newNote itself
-  ////////////////////////////////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////
-
-  handleNoteItself (
-    inputLineNumber,
     newNote);
 
   fOnGoingNote = false;
@@ -21765,7 +21987,8 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Handling a regular, double tremolo or grace note or rest" <<
+      "Handling non-chord, non-tuplet note or rest" <<
+       newNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
       ", currentVoice = \"" <<
       currentVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -26326,3 +26549,47 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       // append the rehearsalMark to the pending tempos list
 //       fPendinCrescDecrescsList.push_back (crescDecresc);
 // }
+
+//             switch (noteVoice->getRegularVoiceStaffSequentialNumber ()) {
+//               case 1:
+//               case 3:
+// #ifdef TRACING_IS_ENABLED
+//                 if (gGlobalTracingOahGroup->getTraceLigatures ()) {
+//                   gLogStream <<
+//                     "Attaching pending ligature above to note '" <<
+//                     note->asString () <<
+//                     "' in voice \"" <<
+//                     noteVoice->getVoiceName () <<
+//                     "\"" <<
+//                     ", line " << ligature->getInputLineNumber () <<
+//                     endl;
+//                 }
+// #endif
+//
+//                 note->appendLigatureToNote (ligature);
+//                 break;
+//               default:
+//                 ;
+//             } // switch
+
+//             switch (noteVoice->getRegularVoiceStaffSequentialNumber ()) {
+//               case 2:
+//               case 4:
+// #ifdef TRACING_IS_ENABLED
+//                 if (gGlobalTracingOahGroup->getTraceLigatures ()) {
+//                   gLogStream <<
+//                     "Attaching pending ligature below to note '" <<
+//                     note->asString () <<
+//                     "' in voice \"" <<
+//                     noteVoice->getVoiceName () <<
+//                     "\"" <<
+//                     ", line " << ligature->getInputLineNumber () <<
+//                     endl;
+//                 }
+// #endif
+//
+//                 note->appendLigatureToNote (ligature);
+//                 break;
+//               default:
+//                 ;
+//             } // switch

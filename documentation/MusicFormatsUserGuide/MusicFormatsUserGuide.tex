@@ -70,6 +70,13 @@
 \begin{document}
 % -------------------------------------------------------------------------
 
+% defeat headwidth not being equal to \textwidth %%%JMI should not be necessary ???
+\setlength{\headwidth}{\textwidth}
+
+% use the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
+
+
 %%%JMI
 
 %\makeatletter
@@ -165,7 +172,6 @@ What xml2ly does:
   \end{center}
 \end{titlepage}
 
-
 % -------------------------------------------------------------------------
 { % reduce vertical size of tables and lists
   \setlength {\parskip} {0.3ex plus \baselineskip minus 2pt}
@@ -180,12 +186,12 @@ What xml2ly does:
 \part{Preamble}
 %% -------------------------------------------------------------------------
 
-\subimport{./}{acknowledgements}
 
-% now we can set the regular fancyhead
-\fancyhead[L]{\nouppercase\leftmark}
-\fancyhead[C]{}
-\fancyhead[R]{\nouppercase\rightmark}
+% now we can switch to the regular headers and footers
+\useRegularPagesHeadersAndFooters
+
+
+\subimport{./}{acknowledgements}
 
 \subimport{./}{about}
 
@@ -295,10 +301,8 @@ What xml2ly does:
 \part{Indexes}
 % -------------------------------------------------------------------------
 
-% back to the lists fancyhead settings:
-\fancyhead[L]{}
-\fancyhead[C]{\nouppercase\leftmark}
-\fancyhead[R]{}
+% back to the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
 
 \printindex[Files]
 

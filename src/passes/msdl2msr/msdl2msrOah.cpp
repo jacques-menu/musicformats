@@ -97,11 +97,12 @@ R"(Write a trace of the MSDL tokens handling activity to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahThreeBooleansAtom::create (
         "trace-tokens-details", "ttoksd",
 R"(Write a trace of the MSDL tokens handling activity with more details to standard error.)",
         "traceTokensDetails",
         fTraceTokensDetails,
+        traceTokensBooleanAtom,
         traceTokensBooleanAtom));
 
   // MSDL syntax
@@ -121,11 +122,12 @@ R"(Write a trace of the MSDL syntax analysis activity to standard error.)",
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahThreeBooleansAtom::create (
         "trace-syntax-details", "tsyntd",
 R"(Write a trace of the MSDL syntax analysis activity with more details to standard error.)",
         "traceSyntaxDetails",
         fTraceSyntaxDetails,
+        traceSyntaxBooleanAtom,
         traceSyntaxBooleanAtom));
 
   // MSDL syntax error recovery
@@ -145,11 +147,12 @@ R"(Write a trace of the MSDL syntax error recovery activity to standard error.)"
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
+      oahThreeBooleansAtom::create (
         "trace-syntax-error-recovery-details", "tsynterd",
 R"(Write a trace of the MSDL syntax error recovery activity with more details to standard error.)",
         "traceSyntaxErrorRecoveryDetails",
         fTraceSyntaxErrorRecoveryDetails,
+        traceSyntaxErrorRecoveryBooleanAtom,
         traceSyntaxErrorRecoveryBooleanAtom));
 }
 #endif

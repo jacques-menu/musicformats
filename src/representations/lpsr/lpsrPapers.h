@@ -115,35 +115,35 @@ class EXP lpsrPaper : public lpsrElement
                               { return fSystemCount; }
 
     // ragged output
-    void                  setRaggedLast (oahOnOffKind value)
+    void                  setRaggedLast (mfOnOffKind value)
                               { fRaggedLast = value; }
 
-    oahOnOffKind          getRaggedLast () const
+    mfOnOffKind           getRaggedLast () const
                               { return fRaggedLast; }
     S_oahOnOffAtom        getRaggedLastAtom () const
                               { return fRaggedLastAtom; }
 
-    void                  setRaggedBottom (oahOnOffKind value)
+    void                  setRaggedBottom (mfOnOffKind value)
                               { fRaggedBottom = value; }
 
-    oahOnOffKind          getRaggedBottom () const
+    mfOnOffKind           getRaggedBottom () const
                               { return fRaggedBottom; }
 
     S_oahOnOffAtom        getRaggedBottomAtom () const
                               { return fRaggedBottomAtom; }
 
-    void                  setRaggedLastBottom (oahOnOffKind value)
+    void                  setRaggedLastBottom (mfOnOffKind value)
                               { fRaggedLastBottom = value; }
 
-    oahOnOffKind          getRaggedLastBottom () const
+    mfOnOffKind           getRaggedLastBottom () const
                               { return fRaggedLastBottom; }
     S_oahOnOffAtom        getRaggedLastBottomAtom () const
                               { return fRaggedLastBottomAtom; }
 
-    void                  setRaggedRight (oahOnOffKind value)
+    void                  setRaggedRight (mfOnOffKind value)
                               { fRaggedRight = value; }
 
-    oahOnOffKind          getRaggedRight () const
+    mfOnOffKind           getRaggedRight () const
                               { return fRaggedRight; }
     S_oahOnOffAtom        getRaggedRightAtom () const
                               { return fRaggedRightAtom; }
@@ -220,17 +220,17 @@ class EXP lpsrPaper : public lpsrElement
     int                   fPageCount;
     int                   fSystemCount;
 
-    // booleans
-    oahOnOffKind          fRaggedBottom;
+    // on/off values
+    mfOnOffKind           fRaggedBottom;
     S_oahOnOffAtom        fRaggedBottomAtom;
 
-    oahOnOffKind          fRaggedLast;
+    mfOnOffKind           fRaggedLast;
     S_oahOnOffAtom        fRaggedLastAtom;
 
-    oahOnOffKind          fRaggedLastBottom;
+    mfOnOffKind           fRaggedLastBottom;
     S_oahOnOffAtom        fRaggedLastBottomAtom;
 
-    oahOnOffKind          fRaggedRight;
+    mfOnOffKind           fRaggedRight;
     S_oahOnOffAtom        fRaggedRightAtom;
 
     // headers and footers

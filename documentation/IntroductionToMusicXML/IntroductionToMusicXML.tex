@@ -30,6 +30,14 @@
 \begin{document}
 % -------------------------------------------------------------------------
 
+% defeat headwidth not being equal to \textwidth %%%JMI should not be necessary ???
+\setlength{\headwidth}{\textwidth}
+
+
+%% use the first page fancyhead headers and footers
+\useFirstPageHeadersAndFooters
+
+
 %\noindent
 
 \title{
@@ -61,7 +69,12 @@ Jacques Menu
 %\date {}
 
 \maketitle
-\thispagestyle{fancy} % right after \maketitle to apply it to the first page too
+
+%\thispagestyle{fancy} % right after \maketitle to apply it to the first page too
+
+% use the first page fancyhead headers and footers
+%\useListsPagesHeadersAndFooters
+
 
 \abstract {
 This document presents a basic view of \mxml\ and a couple of short examples illustrating how \mxml\ represents a music score. Our goal is to give a flavor of what \mxml\ definitions and data look like from a musician's point of view. We use a combination of formal definitions from the \mxml\ DTD and free text explanations.
@@ -75,11 +88,13 @@ All the examples mentioned can be downloaded from \url{https://github.com/jacque
 The contents of this document is verbose... because \mxml\ itself is!
 }
 
-
 { % reduce vertical size of tables and lists
 	\small
 
   \setlength {\parskip} {0.25ex plus \baselineskip minus 2pt}
+
+% use the lists fancyhead headers and footers
+%\useListsPagesHeadersAndFooters
 
 	\tableofcontents
 
@@ -129,6 +144,11 @@ This author doesn't own licenses for other commercial applications such as Doric
 \section{Overview of MusicXML}
 % -------------------------------------------------------------------------
 % -------------------------------------------------------------------------
+
+
+% now we can switch to the regular headers and footers
+\useRegularPagesHeadersAndFooters
+
 
 % -------------------------------------------------------------------------
 \subsection{What is MusicXML?}

@@ -23,7 +23,8 @@
 
 % defeat headwidth not being equal to \textwidth %%%JMI should not be necessary ???
 % the value depends on 11pt in the \documentclass !!!
-\setlength{\headwidth}{1.425\textwidth}
+%\setlength{\headwidth}{1.425\textwidth}
+%\setlength{\headwidth}{\textwidth}
 
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
@@ -36,21 +37,61 @@
 %\setlength{\topmargin}{2in}
 %\setlength{\headsep}{2in}
 
-% headers
+% headers and footers
 
 % the regular fancyhead will be set after the tables and lists,
 % for which this setting is used:
-\fancyhead[L]{}
-\fancyhead[C]{\nouppercase\leftmark}
-\fancyhead[R]{}
-% then it will use the above again for the index
+\newcommand{\useFirstPageHeadersAndFooters}{
+	\renewcommand{\headrulewidth}{0pt}
 
-% footers
+  \fancyhead[L]{}
+  \fancyhead[C]{}
+  \fancyhead[R]{}
 
-\fancyfoot[L]{}
-\fancyfoot[C]{\thepage/\pageref{LastPage}}
-\fancyfoot[R]{}
+	\renewcommand{\footrulewidth}{0.5pt}
 
+	\fancyfoot[C]{\thepage/\pageref{LastPage}}
+}
+
+
+\newcommand{\useListsPagesHeadersAndFooters}{
+	\renewcommand{\headrulewidth}{0pt}
+
+  \fancyhead[L]{}
+  \fancyhead[C]{\nouppercase\leftmark}
+  \fancyhead[R]{}
+
+	\renewcommand{\footrulewidth}{0.5pt}
+
+	\fancyfoot[C]{\thepage/\pageref{LastPage}}
+}
+
+
+\newcommand{\useRegularPagesHeadersAndFooters}{
+ 	\renewcommand{\headrulewidth}{0.5pt}
+
+  \fancyhead[L]{\nouppercase\leftmark}
+  \fancyhead[C]{}
+  \fancyhead[R]{\nouppercase\rightmark}
+
+	\renewcommand{\footrulewidth}{0.5pt}
+
+	\fancyfoot[C]{\thepage/\pageref{LastPage}}
+}
+
+%\fancyhead[L]{}
+%\fancyhead[R]{}
+%% then it will use the above again for the index
+%
+%% footers
+%
+%\fancyfoot[L]{}
+%\fancyfoot[C]{\thepage/\pageref{LastPage}}
+%\fancyfoot[R]{}
+
+%\fancyhead[L]{}
+%\fancyhead[C]{\nouppercase\leftmark}
+%\fancyhead[R]{}
 
 % resizing
 

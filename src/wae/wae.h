@@ -41,8 +41,20 @@ void waeInternalWarning (
 //______________________________________________________________________________
 void waeErrorWithoutException (
   const string& context,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message);
+
+void waeErrorWithoutException (
+  const string& context,
   const string& inputSourceName,
   int           inputLineNumber,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message);
+
+void waeError (
+  const string& context,
   const string& sourceCodeFileName,
   int           sourceCodeLineNumber,
   const string& message);
@@ -54,6 +66,13 @@ void waeError (
   const string& sourceCodeFileName,
   int           sourceCodeLineNumber,
   const string& message);
+
+void waeErrorWithException (
+  const string& context,
+  const string& sourceCodeFileName,
+  int           sourceCodeLineNumber,
+  const string& message,
+  S_mfException exception);
 
 void waeErrorWithException (
   const string& context,

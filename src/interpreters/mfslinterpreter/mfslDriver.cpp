@@ -96,13 +96,16 @@ mfslDriver::mfslDriver ()
   fTraceChoices =
       gGlobalMfslInterpreterOahGroup->
         getTraceChoices ().getValue ();
-  fTraceChoiceStatements =
+  fTraceCaseChoiceStatements =
       gGlobalMfslInterpreterOahGroup->
-        getTraceChoiceStatements ().getValue ();
+        getTraceCaseChoiceStatements ().getValue ();
 
-  fTraceCaseStatements =
+  fTraceInputs =
       gGlobalMfslInterpreterOahGroup->
-        getTraceCaseStatements ().getValue ();
+        getTraceInputs ().getValue ();
+  fTraceCaseInputStatements =
+      gGlobalMfslInterpreterOahGroup->
+        getTraceCaseInputStatements ().getValue ();
 
   fNoLaunch =
       gGlobalMfslInterpreterOahGroup->
@@ -154,7 +157,7 @@ mfslDriver::mfslDriver ()
       choiceName);
   } // for
 
-  fCaseStatementsNumber = 0;
+  fCaseChoiceStatementsNumber = 0;
 }
 
 void mfslDriver::setTool (string tool)
@@ -339,64 +342,64 @@ void mfslDriver::displayOptionsBlocksStack (
   }
 }
 
-void mfslDriver::caseStatementsStackPush (
-  S_mfslCaseStatement caseStatement)
+void mfslDriver::caseChoiceStatementsStackPush (
+  S_mfslCaseChoiceStatement caseChoiceStatement)
 {
-  if (fTraceCaseStatements) {
+  if (fTraceCaseChoiceStatements) {
     gLogStream <<
       "====> Pushing [" <<
-      caseStatement->asString () <<
+      caseChoiceStatement->asString () <<
       "] onto the case statements stack" <<
       endl;
   }
 
-  ++fCaseStatementsNumber;
+  ++fCaseChoiceStatementsNumber;
 
-  fCaseStatementsStack.push_front (
-    caseStatement);
+  fCaseChoiceStatementsStack.push_front (
+    caseChoiceStatement);
 
-  if (fTraceCaseStatements) {
-    displayCaseStatementsStack (
+  if (fTraceCaseChoiceStatements) {
+    displayCaseChoiceStatementsStack (
       "after pushing a case statement");
   }
 }
 
-S_mfslCaseStatement mfslDriver::caseStatementsStackTop () const
+S_mfslCaseChoiceStatement mfslDriver::caseChoiceStatementsStackTop () const
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fCaseStatementsStack.size (),
-    "caseStatementsStackTop(): fCaseStatementsStack is empty");
+    fCaseChoiceStatementsStack.size (),
+    "caseChoiceStatementsStackTop(): fCaseChoiceStatementsStack is empty");
 
-  return fCaseStatementsStack.front ();
+  return fCaseChoiceStatementsStack.front ();
 }
 
-void mfslDriver::caseStatementsStackPop ()
+void mfslDriver::caseChoiceStatementsStackPop ()
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fCaseStatementsStack.size () != 0,
-    "caseStatementsStackPop(): fCaseStatementsStack is empty");
+    fCaseChoiceStatementsStack.size () != 0,
+    "caseChoiceStatementsStackPop(): fCaseChoiceStatementsStack is empty");
 
-  if (fTraceCaseStatements) {
+  if (fTraceCaseChoiceStatements) {
     gLogStream <<
       "====> Popping [" <<
-      fCaseStatementsStack.front ()->asString () <<
+      fCaseChoiceStatementsStack.front ()->asString () <<
       "] from the case statements stack" <<
       endl;
   }
 
-  fCaseStatementsStack.pop_front ();
+  fCaseChoiceStatementsStack.pop_front ();
 
-  if (fTraceCaseStatements) {
-    displayCaseStatementsStack (
+  if (fTraceCaseChoiceStatements) {
+    displayCaseChoiceStatementsStack (
       "after popping a case statement");
   }
 }
 
-void mfslDriver::displayCaseStatementsStack (
+void mfslDriver::displayCaseChoiceStatementsStack (
   const string& context) const
 {
   gLogStream <<
@@ -404,11 +407,91 @@ void mfslDriver::displayCaseStatementsStack (
     ", context: " << context <<
     endl;
 
-  if (fCaseStatementsStack.size ()) {
+  if (fCaseChoiceStatementsStack.size ()) {
     ++gIndenter;
 
-    for (S_mfslCaseStatement caseStatement : fCaseStatementsStack) {
-      gLogStream << caseStatement;
+    for (S_mfslCaseChoiceStatement caseChoiceStatement : fCaseChoiceStatementsStack) {
+      gLogStream << caseChoiceStatement;
+    } // for
+
+    --gIndenter;
+  }
+
+  else {
+    gLogStream << "empty" << endl;
+  }
+}
+
+void mfslDriver::caseInputStatementsStackPush (
+  S_mfslCaseInputStatement caseInputStatement)
+{
+  if (fTraceCaseInputStatements) {
+    gLogStream <<
+      "====> Pushing [" <<
+      caseInputStatement->asString () <<
+      "] onto the case statements stack" <<
+      endl;
+  }
+
+  ++fCaseInputStatementsNumber;
+
+  fCaseInputStatementsStack.push_front (
+    caseInputStatement);
+
+  if (fTraceCaseInputStatements) {
+    displayCaseInputStatementsStack (
+      "after pushing a case statement");
+  }
+}
+
+S_mfslCaseInputStatement mfslDriver::caseInputStatementsStackTop () const
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fCaseInputStatementsStack.size (),
+    "caseInputStatementsStackTop(): fCaseInputStatementsStack is empty");
+
+  return fCaseInputStatementsStack.front ();
+}
+
+void mfslDriver::caseInputStatementsStackPop ()
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fCaseInputStatementsStack.size () != 0,
+    "caseInputStatementsStackPop(): fCaseInputStatementsStack is empty");
+
+  if (fTraceCaseInputStatements) {
+    gLogStream <<
+      "====> Popping [" <<
+      fCaseInputStatementsStack.front ()->asString () <<
+      "] from the case statements stack" <<
+      endl;
+  }
+
+  fCaseInputStatementsStack.pop_front ();
+
+  if (fTraceCaseInputStatements) {
+    displayCaseInputStatementsStack (
+      "after popping a case statement");
+  }
+}
+
+void mfslDriver::displayCaseInputStatementsStack (
+  const string& context) const
+{
+  gLogStream <<
+    "Case statements stack" <<
+    ", context: " << context <<
+    endl;
+
+  if (fCaseInputStatementsStack.size ()) {
+    ++gIndenter;
+
+    for (S_mfslCaseInputStatement caseInputStatement : fCaseInputStatementsStack) {
+      gLogStream << caseInputStatement;
     } // for
 
     --gIndenter;
@@ -707,8 +790,8 @@ mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
   // sanity checks
   mfAssert (
     __FILE__, __LINE__,
-    fCaseStatementsStack.size () == 0,
-    "fCaseStatementsStack should be empty after parsing");
+    fCaseChoiceStatementsStack.size () == 0,
+    "fCaseChoiceStatementsStack should be empty after parsing");
 
   // populate the commands list with the options gathered in the script
   populateTheCommandsList ();
@@ -1004,7 +1087,7 @@ void mfslDriver::populateTheCommandsList ()
     }
 
     // what has been found in the script?
-    if (fCaseStatementsNumber == 0) {
+    if (fCaseChoiceStatementsNumber == 0) {
       // the options to be used are in the main options block alone
       fCommandsList.push_back (
         toolAndInputAsString

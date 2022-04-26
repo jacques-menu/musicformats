@@ -25,21 +25,45 @@ namespace MusicFormats
 */
 
 class EXP msrPartGroupElement : public msrElement
+/*
+  a purely virtual common ancestor to the msrPartGroup and msrPart classes,
+  which can be inside an msrPartGroup
+*/
 {
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
 
-    // cloning
-    // ------------------------------------------------------
+/* this class is purely virtual
+    static SMARTP<msrPartGroupElement> create (
+                            int inputLineNumber);
+*/
 
   protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
 
                           msrPartGroupElement (
                             int inputLineNumber);
 
     virtual               ~msrPartGroupElement ();
+
+//   public:
+//
+//     // print
+//     // ------------------------------------------------------
+//
+//     string                asString () const override;
+//
+//     void                  print (ostream& os) const override;
+//     void                  printShort (ostream& os) const override;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
 
   /*
     The part group uplink is declared in the sub-classes,

@@ -10,7 +10,6 @@
 */
 
 #include "mfStringsHandling.h"
-#include "mfIndentedTextOutput.h"
 
 #include "oahEarlyOptions.h"
 

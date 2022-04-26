@@ -198,8 +198,8 @@ void msrNote::initializeNote ()
   fNoteBelongsToATuplet = false;
   fNoteOccupiesAFullMeasure = false;
 
-  fNoteBelongsToAFullMeasureRests = false;
-  fNoteFullMeasureRestsSequenceNumber = -1;
+  fNoteBelongsToAFullBarRests = false;
+  fNoteFullBarRestsSequenceNumber = -1;
 
   fNoteAlphaRGBColorHasBenSet = false;
 
@@ -519,6 +519,15 @@ S_msrVoice msrNote::fetchNoteVoiceUpLink () const
 {
   S_msrVoice result;
 
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceNotes ()) {
+    gLogStream <<
+      "--> fetchNoteVoiceUpLink(): " <<
+      asMinimalString () <<
+      endl;
+  }
+#endif
+
   switch (fNoteKind) {
     case msrNoteKind::k_NoNote:
       break;
@@ -540,10 +549,16 @@ S_msrVoice msrNote::fetchNoteVoiceUpLink () const
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
       if (fNoteDirectTupletUpLink) {
-        result =
-          fNoteDirectTupletUpLink->
-            getTupletDirectMeasureUpLink ()->
+        S_msrMeasure
+          tupletDirectMeasureUpLink =
+            fNoteDirectTupletUpLink->
+              getTupletDirectMeasureUpLink ();
+
+        if (tupletDirectMeasureUpLink) {
+          result =
+            tupletDirectMeasureUpLink->
               fetchMeasureVoiceUpLink ();
+        }
       }
       break;
 
@@ -623,8 +638,8 @@ S_msrScore msrNote::fetchNoteScoreUpLink () const
 
   if (fNoteDirectMeasureUpLink) {
     result =
-        fNoteDirectMeasureUpLink->
-          fetchMeasureScoreUpLink ();
+      fNoteDirectMeasureUpLink->
+        fetchMeasureScoreUpLink ();
   }
 
   return result;
@@ -635,11 +650,11 @@ void msrNote::setNoteKind (msrNoteKind noteKind)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Setting the kind of note '" <<
+      "Setting the kind of note " <<
       asString () <<
-      "' to '" <<
+      " to '" <<
       noteKindAsString (noteKind) <<
-      "'" <<
+      '\'' <<
       endl;
   }
 #endif
@@ -660,9 +675,9 @@ S_msrNote msrNote::createNoteNewbornClone (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating a newborn clone of note '" <<
+      "Creating a newborn clone of note " <<
       asString () <<
-      "' in part " <<
+      " in part " <<
       containingPart->
         getPartCombinedName () <<
       endl;
@@ -763,12 +778,12 @@ S_msrNote msrNote::createNoteNewbornClone (
   // ------------------------------------------------------
 
   newbornClone->
-    fNoteBelongsToAFullMeasureRests =
-      fNoteBelongsToAFullMeasureRests;
+    fNoteBelongsToAFullBarRests =
+      fNoteBelongsToAFullBarRests;
 
   newbornClone->
-    fNoteFullMeasureRestsSequenceNumber =
-      fNoteFullMeasureRestsSequenceNumber;
+    fNoteFullBarRestsSequenceNumber =
+      fNoteFullBarRestsSequenceNumber;
 
   // note lyrics
   // ------------------------------------------------------
@@ -990,12 +1005,12 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   noteDeepClone->
-    fNoteBelongsToAFullMeasureRests =
-      fNoteBelongsToAFullMeasureRests;
+    fNoteBelongsToAFullBarRests =
+      fNoteBelongsToAFullBarRests;
 
   noteDeepClone->
-    fNoteFullMeasureRestsSequenceNumber =
-      fNoteFullMeasureRestsSequenceNumber;
+    fNoteFullBarRestsSequenceNumber =
+      fNoteFullBarRestsSequenceNumber;
 
   // note lyrics
   // ------------------------------------------------------
@@ -1450,9 +1465,9 @@ S_msrNote msrNote::createRestNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRestNotes ()) {
     gLogStream <<
-      "Creating rest note '" <<
+      "Creating rest note " <<
       o->asShortString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -1499,9 +1514,9 @@ S_msrNote msrNote::createSkipNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSkipNotes () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Creating skip note '" <<
+      "Creating skip note " <<
       o->asString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -1548,9 +1563,9 @@ S_msrNote msrNote::createGraceSkipNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSkipNotes () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Creating skip note '" <<
+      "Creating skip note " <<
       o->asString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -1599,9 +1614,9 @@ S_msrNote msrNote::createRestNoteWithOctave (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRestNotes ()) {
     gLogStream <<
-      "Creating rest note '" <<
+      "Creating rest note " <<
       o->asShortString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -1650,9 +1665,9 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
     gLogStream <<
-      "Creating skip note '" <<
+      "Creating skip note " <<
       o->asShortString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -1702,9 +1717,9 @@ S_msrNote msrNote::createRegularNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Creating regular note '" <<
+      "Creating regular note " <<
       o->asShortString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -1727,7 +1742,8 @@ S_msrNote msrNote::createRestFromString (
     gLogStream <<
       "Creating rest from string \"" <<
       restString <<
-      "\", restMeasureNumber: '" << restMeasureNumber <<
+      "\", restMeasureNumber: '" <<
+      restMeasureNumber <<
       "', line " << inputLineNumber <<
       endl;
   }
@@ -1865,7 +1881,8 @@ S_msrNote msrNote::createSkipFromString (
     gLogStream <<
       "Creating skip from string \"" <<
       skipString <<
-      "\", skipMeasureNumber: '" << skipMeasureNumber <<
+      "\", skipMeasureNumber: '" <<
+      skipMeasureNumber <<
       "', line " << inputLineNumber <<
       endl;
   }
@@ -2004,7 +2021,8 @@ S_msrNote msrNote::createNoteFromString (
     gLogStream <<
       "Creating note from string \"" <<
       noteString <<
-      "\", noteMeasureNumber: '" << noteMeasureNumber <<
+      "\", noteMeasureNumber: '" <<
+      noteMeasureNumber <<
       "', line " << inputLineNumber <<
       endl;
   }
@@ -2213,11 +2231,11 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesOctaveEntry ()) {
     gLogStream <<
-      "Creating note '" <<
+      "Creating note " <<
       o->asShortString () <<
-      "' from semitones pitch and octave '" <<
+      " from semitones pitch and octave " <<
       semiTonesPitchAndOctave->asString () <<
-      "', line " << inputLineNumber <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -2235,7 +2253,7 @@ void msrNote::setNotePositionInMeasure (
       "Setting note position in measure of " << asString () <<
       " to '" <<
       positionInMeasure <<
-      "'" <<
+      '\'' <<
       endl;
   }
 #endif
@@ -2521,9 +2539,9 @@ void msrNote::setNoteBelongsToAChord ()
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
-      "Setting note '" <<
+      "Setting note " <<
       asShortString () <<
-      "' to belong to a chord"
+      " to belong to a chord"
       ", line " << fInputLineNumber <<
       endl;
   }
@@ -2594,11 +2612,10 @@ void msrNote::appendBeamToNote (S_msrBeam beam)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBeams ()) {
     gLogStream <<
-      "Adding beam '" <<
+      "Adding beam " <<
       beam->asShortString () <<
-      "' to note '" <<
+      " to note " <<
       asString () <<
-      "'" <<
       endl;
   }
 #endif
@@ -2620,11 +2637,10 @@ void msrNote::appendArticulationToNote (S_msrArticulation art)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
     gLogStream <<
-      "Adding articulation '" <<
+      "Adding articulation " <<
       art->asShortString () <<
-      "' to note '" <<
+      " to note " <<
       asString () <<
-      "'" <<
       endl;
   }
 #endif
@@ -2639,9 +2655,8 @@ void msrNote::appendSpannerToNote (S_msrSpanner spanner)
     gLogStream <<
       "Appending spanner '" <<
       spanner->spannerKindAsString () <<
-      "' to note '" <<
+      "' to note " <<
       asString () <<
-      "'" <<
       endl;
   }
 #endif
@@ -2677,10 +2692,11 @@ void msrNote::appendTechnicalToNote (S_msrTechnical technical)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
-      "Adding technical '" <<
+      "Adding technical " <<
       technical->asString () <<
-      "' to note '" << asString () <<
-      "', line " << fInputLineNumber <<
+      " to note " <<
+      asString () <<
+      ", line " << fInputLineNumber <<
       endl;
   }
 #endif
@@ -2695,10 +2711,11 @@ void msrNote::appendTechnicalWithIntegerToNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
-      "Adding technical with integer '" <<
+      "Adding technical with integer " <<
       technicalWithInteger->asString () <<
-      "' to note '" << asString () <<
-      "', line " << fInputLineNumber <<
+      " to note " <<
+      asString () <<
+      ", line " << fInputLineNumber <<
       endl;
   }
 #endif
@@ -2714,10 +2731,11 @@ void msrNote::appendTechnicalWithFloatToNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
-      "Adding technical with float '" <<
+      "Adding technical with float " <<
       technicalWithFloat->asString () <<
-      "' to note '" << asString () <<
-      "', line " << fInputLineNumber <<
+      " to note " <<
+      asString () <<
+      ", line " << fInputLineNumber <<
       endl;
   }
 #endif
@@ -2735,8 +2753,9 @@ void msrNote::appendTechnicalWithStringToNote (
     gLogStream <<
       "Adding technical with string'" <<
       technicalWithString->asString () <<
-      "' to note '" << asString () <<
-      "', line " << fInputLineNumber <<
+      " to note " <<
+      asString () <<
+      ", line " << fInputLineNumber <<
       endl;
   }
 #endif
@@ -2753,9 +2772,8 @@ void msrNote::appendOrnamentToNote (S_msrOrnament ornament)
     gLogStream <<
       "Adding ornament '" <<
       ornament->asString () <<
-      "' to note '" <<
+      " to note " <<
       asString () <<
-      "'" <<
       endl;
   }
 #endif
@@ -2796,11 +2814,10 @@ void msrNote::appendGlissandoToNote (S_msrGlissando glissando)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceGlissandos ()) {
     gLogStream <<
-      "Adding glissando '" <<
+      "Adding glissando " <<
       glissando->asShortString () <<
-      "' to note '" <<
+      " to note " <<
       asString () <<
-      "'" <<
       endl;
   }
 #endif
@@ -2814,11 +2831,10 @@ void msrNote::appendSlideToNote (S_msrSlide slide)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSlides ()) {
     gLogStream <<
-      "Adding slide '" <<
+      "Adding slide " <<
       slide->asShortString () <<
-      "' to note '" <<
+      " to note " <<
       asString () <<
-      "'" <<
       endl;
   }
 #endif
@@ -2898,8 +2914,10 @@ void msrNote::setNoteSingleTremolo (S_msrSingleTremolo trem)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTremolos ()) {
     gLogStream <<
-      "Adding singleTremolo '" << trem->asString () <<
-      "' to note '" << asString () <<
+      "Adding singleTremolo " <<
+      trem->asString () <<
+      " to note " <<
+      asString () <<
       "', line " << trem->getInputLineNumber () <<
       endl;
   }
@@ -2914,9 +2932,9 @@ void msrNote::appendDynamicToNote (S_msrDynamic dynamic)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDynamics ()) {
     gLogStream <<
-      "Attaching dynamic '" <<
+      "Attaching dynamic " <<
       dynamic->asString () <<
-      "' to note '" <<
+      " to note " <<
       asString () <<
       "', line " << dynamic->getInputLineNumber () <<
       endl;
@@ -2993,8 +3011,7 @@ void msrNote::appendLigatureToNote (S_msrLigature ligature)
         gLogStream <<
           "Removing last ligature (start) for note '" <<
           asShortString () <<
-          "'" <<
-          endl;
+              endl;
       }
 #endif
 
@@ -3053,7 +3070,6 @@ void msrNote::appendPedalToNote (S_msrPedal pedal)
         gLogStream <<
           "Removing last pedal (start) for note '" <<
           asShortString () <<
-          "'" <<
           endl;
       }
 #endif
@@ -3076,10 +3092,9 @@ void msrNote::appendSlashToNote (S_msrSlash slash)
   if (gGlobalTracingOahGroup->getTraceSlashes ()) {
     gLogStream <<
       "Appending slash '" <<
-      slash <<
-      "' to note '" <<
+      slash->asString () <<
+      " to note " <<
       asShortString () <<
-      "'" <<
       endl;
   }
 #endif
@@ -3222,7 +3237,6 @@ S_msrDynamic msrNote::removeFirstDynamics () // JMI
     gLogStream <<
       "Removing first dynamic from note '" <<
       asShortString () <<
-      "'" <<
       endl;
   }
 #endif
@@ -3266,10 +3280,10 @@ void msrNote::appendSyllableToNote (S_msrSyllable syllable)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
-      "Appending syllable '" <<
+      "Appending syllable " <<
       syllable->asString () <<
-      "' to note '" << asString () <<
-      "'" <<
+      " to note " <<
+      asString () <<
       endl;
   }
 #endif
@@ -4429,6 +4443,228 @@ string msrNote::asShortString () const
   return s.str ();
 }
 
+string msrNote::asMinimalString () const
+{
+  stringstream s;
+
+  s << "[";
+
+  switch (fNoteKind) {
+    case msrNoteKind::k_NoNote:
+      s <<
+        "k_NoNote" <<
+        ":" <<
+        noteSoundingWholeNotesAsMsrString ();
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+      break;
+
+    case msrNoteKind::kNoteRestInMeasure:
+      s <<
+        "kNoteRestInMeasure" <<
+        ":" <<
+        noteSoundingWholeNotesAsMsrString ();
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+      break;
+
+    case msrNoteKind::kNoteSkipInMeasure:
+      s <<
+        "kNoteSkipInMeasure: " <<
+        noteSoundingWholeNotesAsMsrString ();
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInMeasure:
+      s <<
+        "kNoteUnpitchedInMeasure: " <<
+        noteSoundingWholeNotesAsMsrString ();
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+      break;
+
+    case msrNoteKind::kNoteRegularInMeasure:
+      {
+        s <<
+          "kNoteRegularInMeasure" <<
+          ", " <<
+          notePitchAsString () <<
+          noteSoundingWholeNotesAsMsrString ();
+
+        for (int i = 0; i < fNoteDotsNumber; ++i) {
+          s << ".";
+        } // for
+
+        s <<
+          ", " <<
+          msrOctaveKindAsString (fNoteOctaveKind);
+      }
+      break;
+
+    case msrNoteKind::kNoteInDoubleTremolo:
+      s <<
+        "kNoteInDoubleTremolo " <<
+        ", " <<
+        notePitchAsString () <<
+        noteSoundingWholeNotesAsMsrString () <<
+        ", " <<
+        msrOctaveKindAsString (fNoteOctaveKind);
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+      break;
+
+    case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      s <<
+        "kNoteRegularInGraceNotesGroup" <<
+        ", " <<
+        notePitchAsString () <<
+        noteGraphicDurationAsMsrString () <<
+        ", " <<
+        msrOctaveKindAsString (fNoteOctaveKind);
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+      break;
+
+    case msrNoteKind::kNoteSkipInGraceNotesGroup:
+      s <<
+        "kNoteSkipInGraceNotesGroup: " <<
+        noteSoundingWholeNotesAsMsrString ();
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+      break;
+
+   case msrNoteKind::kNoteInChordInGraceNotesGroup:
+      s <<
+        "kNoteInChordInGraceNotesGroup " <<
+        ", " <<
+        notePitchAsString () <<
+        noteGraphicDurationAsMsrString () <<
+        ", " <<
+        msrOctaveKindAsString (fNoteOctaveKind);
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << "."; // JMI
+      } // for
+      break;
+
+    case msrNoteKind::kNoteRegularInChord:
+      s <<
+        "kNoteRegularInChord " <<
+        ", " <<
+        notePitchAsString () <<
+        noteSoundingWholeNotesAsMsrString () <<
+        ", " <<
+        msrOctaveKindAsString (fNoteOctaveKind);
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+      break;
+
+    case msrNoteKind::kNoteRegularInTuplet:
+      s <<
+        "kNoteRegularInTuplet" <<
+        ", " <<
+        notePitchAsString () <<
+        noteGraphicDurationAsMsrString () <<
+        ", sounding: " <<
+        fMeasureElementSoundingWholeNotes <<
+        ", displayed: " <<
+        fNoteDisplayWholeNotes <<
+        ", " <<
+        msrOctaveKindAsString (fNoteOctaveKind);
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+
+      s <<
+        ", noteTupletFactor " << fNoteTupletFactor.asString ();
+      break;
+
+    case msrNoteKind::kNoteRestInTuplet:
+      s <<
+        "kNoteRestInTuplet" <<
+        ", " <<
+        notePitchAsString () <<
+        noteGraphicDurationAsMsrString () <<
+        ", sounding: " <<
+        fMeasureElementSoundingWholeNotes <<
+        ", displayed: " <<
+        fNoteDisplayWholeNotes;
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+
+      s <<
+        ", noteTupletFactor " << fNoteTupletFactor.asString ();
+      break;
+
+    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+      s <<
+        "kNoteInTupletInGraceNotesGroup" <<
+        ", " <<
+        notePitchAsString () <<
+        noteGraphicDurationAsMsrString () <<
+        ", sounding: " <<
+        fMeasureElementSoundingWholeNotes <<
+        ", displayed: " <<
+        fNoteDisplayWholeNotes;
+
+      if (! fetchNoteIsARest ()) {
+        s <<
+          ", " <<
+          msrOctaveKindAsString (fNoteOctaveKind);
+      }
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+
+      s <<
+        ", noteTupletFactor " << fNoteTupletFactor.asString ();
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInTuplet:
+      s <<
+        "kNoteUnpitchedInTuplet" <<
+        ", sounding: " <<
+        fMeasureElementSoundingWholeNotes <<
+        ", displayed: " <<
+        fNoteDisplayWholeNotes;
+
+      for (int i = 0; i < fNoteDotsNumber; ++i) {
+        s << ".";
+      } // for
+
+      s <<
+        ", noteTupletFactor " << fNoteTupletFactor.asString ();
+      break;
+  } // switch
+
+  s <<
+    ", line " << fInputLineNumber <<
+    "]";
+
+  return s.str ();
+}
+
 string msrNote::noteComplementsAsString () const
 {
   stringstream s;
@@ -4611,7 +4847,7 @@ string msrNote::asString () const
         s <<
           "R" <<
           /* JMI
-          multipleFullMeasureRestsWholeNotesAsMsrString (
+          multipleFullBarRestsWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes);
             */
@@ -4815,7 +5051,7 @@ string msrNote::asShortStringForMeasuresSlices () const
         s <<
           "R" <<
           /* JMI
-          multipleFullMeasureRestsWholeNotesAsMsrString (
+          multipleFullBarRestsWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes);
             */
@@ -5051,7 +5287,7 @@ void msrNote::print (ostream& os) const
   // print note grace notes group uplink
   os <<
     setw (fieldWidth) <<
-    "fNoteDirectGraceNotesGroupUpLink:";
+    "fNoteDirectGraceNotesGroupUpLink" << " :";
 
   if (fNoteDirectGraceNotesGroupUpLink) {
     os << endl;
@@ -5199,12 +5435,12 @@ void msrNote::print (ostream& os) const
   // multiple rest member?
   os << left <<
     setw (fieldWidth) <<
-    "fNoteBelongsToAFullMeasureRests" << " : " <<
-    fNoteBelongsToAFullMeasureRests <<
+    "fNoteBelongsToAFullBarRests" << " : " <<
+    fNoteBelongsToAFullBarRests <<
     endl <<
     setw (fieldWidth) <<
-    "fNoteFullMeasureRestsSequenceNumber" << " : " <<
-    fNoteFullMeasureRestsSequenceNumber <<
+    "fNoteFullBarRestsSequenceNumber" << " : " <<
+    fNoteFullBarRestsSequenceNumber <<
     endl;
 
   // note print kind

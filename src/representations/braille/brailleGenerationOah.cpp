@@ -255,7 +255,7 @@ void brailleOutputKindAtom::printAtomWithVariableOptionsValues (
       fBrailleOutputKindVariable);
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }
@@ -471,7 +471,7 @@ void brailleUTFKindAtom::printAtomWithVariableOptionsValues (
     "\"";
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }
@@ -687,7 +687,7 @@ void brailleByteOrderingKindAtom::printAtomWithVariableOptionsValues (
       fBsrByteOrderingKindVariable);
   if (fSetByAnOption) {
     os <<
-      ", set by user";
+      ", set by an option";
   }
   os << endl;
 }

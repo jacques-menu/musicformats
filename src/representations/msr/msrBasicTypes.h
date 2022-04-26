@@ -1039,7 +1039,7 @@ string wholeNotesAsMsrString (
   int             inputLineNumber,
   const rational& wholeNotes);
 
-string multipleFullMeasureRestsWholeNotesAsMsrString (
+string multipleFullBarRestsWholeNotesAsMsrString (
   int             inputLineNumber, // JMI
   const rational& wholeNotes);
 

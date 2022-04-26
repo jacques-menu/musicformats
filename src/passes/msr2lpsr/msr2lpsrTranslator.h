@@ -219,7 +219,7 @@ class EXP msr2lpsrTranslator :
   public visitor<S_msrBeam>,
   public visitor<S_msrChordBeamLink>,
 
-  // barLines
+  // bar lines
 
   public visitor<S_msrBarLine>,
 
@@ -256,8 +256,8 @@ class EXP msr2lpsrTranslator :
   public visitor<S_msrMeasureRepeatPattern>,
   public visitor<S_msrMeasureRepeatReplicas>,
 
-  public visitor<S_msrFullMeasureRests>,
-  public visitor<S_msrFullMeasureRestsContents>,
+  public visitor<S_msrFullBarRests>,
+  public visitor<S_msrFullBarRestsContents>,
 
   // midi
 
@@ -457,7 +457,7 @@ class EXP msr2lpsrTranslator :
     virtual void visitStart (S_msrLigature& elt);
     virtual void visitEnd   (S_msrLigature& elt);
 
-    // barLines
+    // bar lines
     virtual void visitStart (S_msrBarLine& elt);
     virtual void visitEnd   (S_msrBarLine& elt);
 
@@ -502,11 +502,11 @@ class EXP msr2lpsrTranslator :
     virtual void visitStart (S_msrMeasureRepeatReplicas& elt);
     virtual void visitEnd   (S_msrMeasureRepeatReplicas& elt);
 
-    // full measure rests
-    virtual void visitStart (S_msrFullMeasureRests& elt);
-    virtual void visitEnd   (S_msrFullMeasureRests& elt);
-    virtual void visitStart (S_msrFullMeasureRestsContents& elt);
-    virtual void visitEnd   (S_msrFullMeasureRestsContents& elt);
+    // full-bar rests
+    virtual void visitStart (S_msrFullBarRests& elt);
+    virtual void visitEnd   (S_msrFullBarRests& elt);
+    virtual void visitStart (S_msrFullBarRestsContents& elt);
+    virtual void visitEnd   (S_msrFullBarRestsContents& elt);
 
     // scaling
     virtual void visitStart (S_msrScaling& elt);
@@ -669,9 +669,9 @@ class EXP msr2lpsrTranslator :
     // ------------------------------------------------------
     S_msrMeasure              fCurrentMeasureClone;
 
-    // full measure rests compression
+    // full-bar rests compression
     S_msrMeasure              fCurrentRestMeasure;
-    S_msrFullMeasureRests         fCurrentFullMeasureRests;
+    S_msrFullBarRests         fCurrentFullBarRests;
 
     // bar checks
     // ------------------------------------------------------

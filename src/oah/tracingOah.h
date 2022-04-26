@@ -263,8 +263,13 @@ class EXP tracingOahGroup : public oahGroup
     // keys
     void                  setTraceKeys ()
                               { fTraceKeys = true; }
+    void                  setTraceKeysDetails ()
+                              { fTraceKeysDetails = true; }
+
     Bool                  getTraceKeys () const
                               { return fTraceKeys; }
+    Bool                  getTraceKeysDetails () const
+                              { return fTraceKeysDetails; }
     // time signatures
     void                  setTraceTimeSignatures ()
                               { fTraceTimeSignatures = true; }
@@ -290,12 +295,12 @@ class EXP tracingOahGroup : public oahGroup
                               { fTracePageBreaks = true; }
     Bool                  getTracePageBreaks () const
                               { return fTracePageBreaks; }
-    // barLines
+    // bar lines
     void                  setTraceBarLines ()
                               { fTraceBarLines = true; }
     Bool                  getTraceBarLines () const
                               { return fTraceBarLines; }
-    // barLines details
+    // bar lines details
     Bool                  getTraceBarLinesDetails () const
                               { return fTraceBarLinesDetails; }
 
@@ -351,16 +356,21 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  getTraceMeasureRepeats () const
                               { return fTraceMeasureRepeats; }
 
-    // full measure rests
-    void                  setTraceFullMeasureRests ()
-                              { fTraceFullMeasureRests = true; }
-    Bool                  getTraceFullMeasureRests () const
-                              { return fTraceFullMeasureRests; }
+    void                  setTraceMeasureRepeatsDetails ()
+                              { fTraceMeasureRepeatsDetails = true; }
+    Bool                  getTraceMeasureRepeatsDetails () const
+                              { return fTraceMeasureRepeatsDetails; }
 
-    void                  setTraceFullMeasureRestsDetails ()
-                              { fTraceFullMeasureRestsDetails = true; }
-    Bool                  getTraceFullMeasureRestsDetails () const
-                              { return fTraceFullMeasureRestsDetails; }
+    // full-bar rests
+    void                  setTraceFullBarRests ()
+                              { fTraceFullBarRests = true; }
+    Bool                  getTraceFullBarRests () const
+                              { return fTraceFullBarRests; }
+
+    void                  setTraceFullBarRestsDetails ()
+                              { fTraceFullBarRestsDetails = true; }
+    Bool                  getTraceFullBarRestsDetails () const
+                              { return fTraceFullBarRestsDetails; }
     // beats repeats
     void                  setTraceBeatRepeats ()
                               { fTraceBeatRepeats = true; }
@@ -454,6 +464,11 @@ class EXP tracingOahGroup : public oahGroup
                               { fTraceOrnaments = true; }
     Bool                  getTraceOrnaments () const
                               { return fTraceOrnaments; }
+
+    void                  setTraceOrnamentsDetails ()
+                              { fTraceOrnamentsDetails = true; }
+    Bool                  getTraceOrnamentsDetails () const
+                              { return fTraceOrnamentsDetails; }
 
     // dynamics
     void                  setTraceDynamics ()
@@ -828,6 +843,7 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  fTraceClefs;
     // keys
     Bool                  fTraceKeys;
+    Bool                  fTraceKeysDetails;
     // time signatures
     Bool                  fTraceTimeSignatures;
     // tempos
@@ -841,9 +857,9 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  fTraceLineBreaks;
     // page breaks
     Bool                  fTracePageBreaks;
-    // barLines
+    // bar lines
     Bool                  fTraceBarLines;
-    // barLines details
+    // bar lines details
     Bool                  fTraceBarLinesDetails;
 
 
@@ -876,9 +892,10 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  fTraceRepeatsDetails;
     // measure repeats
     Bool                  fTraceMeasureRepeats;
-    // full measure rests
-    Bool                  fTraceFullMeasureRests;
-    Bool                  fTraceFullMeasureRestsDetails;
+    Bool                  fTraceMeasureRepeatsDetails;
+    // full-bar rests
+    Bool                  fTraceFullBarRests;
+    Bool                  fTraceFullBarRestsDetails;
     // beats repeats
     Bool                  fTraceBeatRepeats;
     // slashes
@@ -920,6 +937,8 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  fTraceTechnicals;
     // ornaments
     Bool                  fTraceOrnaments;
+
+    Bool                  fTraceOrnamentsDetails;
     // dynamics
     Bool                  fTraceDynamics;
 

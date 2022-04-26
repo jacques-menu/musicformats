@@ -212,16 +212,24 @@ R"(Write MFSL choice analysis activity to standard output.)",
       oahBooleanAtom::create (
         "trace-choice-statements", "tchoicesstats",
 R"(Write MFSL choice statements handling activity to standard output.)",
-        "fTraceChoiceStatements",
-        fTraceChoiceStatements));
+        "fTraceCaseChoiceStatements",
+        fTraceCaseChoiceStatements));
 
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "trace-case-statements", "tcases",
+        "trace-case-choice-statements", "tchoices",
 R"(Write MFSL case statements handling activity to standard output.)",
-        "fTraceCaseStatements",
-        fTraceCaseStatements));
+        "fTraceCaseChoiceStatements",
+        fTraceCaseChoiceStatements));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "trace-case-input-statements", "tinputs",
+R"(Write MFSL case statements handling activity to standard output.)",
+        "fTraceCaseInputStatements",
+        fTraceCaseInputStatements));
 
   subGroup->
     appendAtomToSubGroup (
@@ -342,12 +350,15 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
     setw (fieldWidth) << "fTraceChoices" << " : " <<
       fTraceChoices <<
       endl <<
-    setw (fieldWidth) << "fTraceChoiceStatements" << " : " <<
-      fTraceChoiceStatements <<
+    setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
+      fTraceCaseChoiceStatements <<
       endl <<
 
-    setw (fieldWidth) << "fTraceCaseStatements" << " : " <<
-      fTraceCaseStatements <<
+    setw (fieldWidth) << "fTraceCaseChoiceStatements" << " : " <<
+      fTraceCaseChoiceStatements <<
+      endl <<
+    setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
+      fTraceCaseInputStatements <<
       endl <<
     setw (fieldWidth) << "fNoLaunch" << " : " <<
       fNoLaunch <<

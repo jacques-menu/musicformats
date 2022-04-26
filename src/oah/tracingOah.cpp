@@ -395,7 +395,7 @@ void tracingOahGroup::initializeBreaksAndBarLinestracingOah ()
     subGroup =
       oahSubGroup::create (
         "Breaks and barLines",
-        "help-trace-breaks-and-barLines", "htbab",
+        "help-trace-breaks-and-barlines", "htbab",
 R"()",
       oahElementVisibilityKind::kElementVisibilityWhole,
       this);
@@ -407,7 +407,7 @@ R"()",
   S_oahCommonPrefixBooleansAtom
     breaksAndBarLinesMultiplexBooleansAtom =
       oahCommonPrefixBooleansAtom::create (
-        "trace-in-breaks-and-barLines", "tibab",
+        "trace-in-breaks-and-barlines", "tibab",
         "Trace SHORT_NAME/LONG_NAME in breaks and barLines.",
         "SHORT_NAME",
         "LONG_NAME",
@@ -452,12 +452,12 @@ R"(Page breaks)",
     addBooleanAtom (
       tracePageBreaksAtom);
 
-  // barLines
+  // bar lines
 
   S_oahTwoBooleansAtom
     traceBarLinesAtom =
       oahTwoBooleansAtom::create (
-        "trace-barLines", "tblines",
+        "trace-barlines", "tblines",
 R"(BarLines)",
         "fTraceBarLines",
         fTraceBarLines,
@@ -469,12 +469,12 @@ R"(BarLines)",
     addBooleanAtom (
       traceBarLinesAtom);
 
-  // barLines details
+  // bar lines details
 
   S_oahThreeBooleansAtom
     traceBarLinesDetailsAtom =
       oahThreeBooleansAtom::create (
-        "trace-barLines-details", "tblinesd",
+        "trace-barlines-details", "tblinesd",
 R"(BarLines details)",
         "fTraceBarLinesDetails",
         fTraceBarLinesDetails,
@@ -583,9 +583,19 @@ R"(Keys)",
   subGroup->
     appendAtomToSubGroup (
       traceKeysAtom);
-  clefsToTemposMultiplexBooleansAtom->
-    addBooleanAtom (
-      traceKeysAtom);
+
+  S_oahThreeBooleansAtom
+    traceKeysDetailsAtom =
+      oahThreeBooleansAtom::create (
+        "trace-keys-details", "tkeysd",
+R"(Keys details)",
+        "fTraceKeysDetails",
+        fTraceKeysDetails,
+        traceKeysAtom,
+        fTracePassesBooleanAtom);
+  subGroup->
+    appendAtomToSubGroup (
+      traceKeysDetailsAtom);
 
   // time signatures
 
@@ -600,9 +610,6 @@ R"(Times)",
   subGroup->
     appendAtomToSubGroup (
       traceTimeSignaturesAtom);
-  clefsToTemposMultiplexBooleansAtom->
-    addBooleanAtom (
-      traceTimeSignaturesAtom);
 
   // temps
 /* JMI
@@ -615,9 +622,6 @@ R"(Temps)",
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      traceTempsAtom);
-  clefsToTemposMultiplexBooleansAtom->
-    addBooleanAtom (
       traceTempsAtom);
 */
 
@@ -1017,13 +1021,14 @@ R"(Lyrics)",
 
   // lyrics details
 
-  S_oahTwoBooleansAtom
+  S_oahThreeBooleansAtom
     traceLyricsDetailsBooleanAtom =
-      oahTwoBooleansAtom::create (
+      oahThreeBooleansAtom::create (
         "trace-lyrics-details", "tlyricsd",
 R"(Lyrics in MusicXML, stanzas in MSR)",
         "fTraceLyricsDetails",
         fTraceLyricsDetails,
+        traceLyricsBooleanAtom,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
@@ -1466,6 +1471,22 @@ R"(Ornaments)",
     addBooleanAtom (
       traceOrnamentsBooleanAtom);
 
+  S_oahThreeBooleansAtom
+    traceOrnamentsDetailsBooleanAtom =
+      oahThreeBooleansAtom::create (
+        "trace-ornaments-details", "tornsd",
+R"(Ornaments)",
+        "fTraceOrnamentsDetails",
+        fTraceOrnamentsDetails,
+        traceOrnamentsBooleanAtom,
+        fTracePassesBooleanAtom);
+  subGroup->
+    appendAtomToSubGroup (
+      traceOrnamentsDetailsBooleanAtom);
+  notesAttachmentsMultiplexBooleansAtom->
+    addBooleanAtom (
+      traceOrnamentsDetailsBooleanAtom);
+
   // dynamics
 
   S_oahTwoBooleansAtom
@@ -1869,13 +1890,14 @@ R"(Staves)",
 
   // staff details
 
-  S_oahTwoBooleansAtom
+  S_oahThreeBooleansAtom
     traceStaffDetailsBooleanAtom =
-      oahTwoBooleansAtom::create (
-        "trace-staff-details", "tst",
+      oahThreeBooleansAtom::create (
+        "trace-staff-details", "tstd",
 R"(Staff details)",
         "fTraceStaffDetails",
         fTraceStaffDetails,
+        traceStavesBooleanAtom,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
@@ -2245,22 +2267,54 @@ R"(Measure repeats)",
     addBooleanAtom (
       traceMeasureRepeatsBooleanAtom);
 
-  // full measure rests
-
-  S_oahTwoBooleansAtom
-    traceFullMeasureRestsBooleanAtom =
-      oahTwoBooleansAtom::create (
-        "trace-full-measure-rests", "tfmr",
-R"(Full measure rests)",
-        "fTraceFullMeasureRests",
-        fTraceFullMeasureRests,
+  S_oahThreeBooleansAtom
+    traceMeasureRepeatsDetailsBooleanAtom =
+      oahThreeBooleansAtom::create (
+        "trace-measures-repeats-details", "tmrepsd",
+R"(Measure repeats)",
+        "fTraceMeasureRepeatsDetails",
+        fTraceMeasureRepeatsDetails,
+        traceMeasureRepeatsBooleanAtom,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      traceFullMeasureRestsBooleanAtom);
+      traceMeasureRepeatsDetailsBooleanAtom);
   repeatsToSlashesMultiplexBooleansAtom->
     addBooleanAtom (
-      traceFullMeasureRestsBooleanAtom);
+      traceMeasureRepeatsDetailsBooleanAtom);
+
+  // full-bar rests
+
+  S_oahTwoBooleansAtom
+    traceFullBarRestsBooleanAtom =
+      oahTwoBooleansAtom::create (
+        "trace-full-bar-rests", "tfbr",
+R"(Full-bar rests)",
+        "fTraceFullBarRests",
+        fTraceFullBarRests,
+        fTracePassesBooleanAtom);
+  subGroup->
+    appendAtomToSubGroup (
+      traceFullBarRestsBooleanAtom);
+  repeatsToSlashesMultiplexBooleansAtom->
+    addBooleanAtom (
+      traceFullBarRestsBooleanAtom);
+
+  S_oahThreeBooleansAtom
+    traceFullBarRestsDetailsBooleanAtom =
+      oahThreeBooleansAtom::create (
+        "trace-full-bar-rests-details", "tfbrd",
+R"(Full-bar rests details)",
+        "fTraceFullBarRestsDetails",
+        fTraceFullBarRestsDetails,
+        traceFullBarRestsBooleanAtom,
+        fTracePassesBooleanAtom);
+  subGroup->
+    appendAtomToSubGroup (
+      traceFullBarRestsDetailsBooleanAtom);
+  repeatsToSlashesMultiplexBooleansAtom->
+    addBooleanAtom (
+      traceFullBarRestsDetailsBooleanAtom);
 
   // beats repeats
 
@@ -2434,466 +2488,7 @@ void tracingOahGroup::browseData (basevisitor* v)
 void tracingOahGroup::printAtomWithVariableOptionsValues (
   ostream& os,
   int      valueFieldWidth) const
-{
-  os <<
-    "The trace options are:" <<
-    endl;
-
-  ++gIndenter;
-
-  os << left <<
-    setw (valueFieldWidth) << "Trace:" <<
-    endl;
-
-  ++gIndenter;
-
-  os << left <<
-    // options and help display
-    setw (valueFieldWidth) << "fTracingOah" << " : " <<
-    fTracingOah <<
-    endl <<
-    setw (valueFieldWidth) << "fTracingOahDetails" << " : " <<
-    fTracingOahDetails <<
-    endl <<
-
-    // history
-    setw (valueFieldWidth) << "fTtracecomponents" << " : " <<
-    fTraceComponents <<
-    endl <<
-
-    // passes
-    setw (valueFieldWidth) << "fTtracePasses" << " : " <<
-    fTracePasses <<
-    endl <<
-
-    // for tests, hidden
-    setw (valueFieldWidth) << "fTtraceForTests" << " : " <<
-    fTraceForTests <<
-    endl <<
-
-    // score
-    setw (valueFieldWidth) << "fTtraceScores" << " : " <<
-    fTraceScores <<
-    endl <<
-
-    // identification
-    setw (valueFieldWidth) << "fTtraceIdentification" << " : " <<
-    fTraceIdentification <<
-    endl <<
-
-    // credits
-    setw (valueFieldWidth) << "fTtraceCredits" << " : " <<
-    fTraceCredits <<
-    endl <<
-
-    // scaling
-    setw (valueFieldWidth) << "fTtraceGeometry" << " : " <<
-    fTraceGeometry <<
-    endl <<
-
-    // part groups
-    setw (valueFieldWidth) << "fTtracePartGroups" << " : " <<
-    fTracePartGroups <<
-    endl <<
-    setw (valueFieldWidth) << "fTtracePartGroupsDetails" << " : " <<
-    fTracePartGroupsDetails <<
-    endl <<
-
-    // parts
-    setw (valueFieldWidth) << "fTtraceParts" << " : " <<
-    fTraceParts <<
-    endl <<
-
-    // staves
-    setw (valueFieldWidth) << "fTtraceStaves" << " : " <<
-    fTraceStaves <<
-    endl <<
-
-    // voices
-    setw (valueFieldWidth) << "fTtraceVoices" << " : " <<
-    fTraceVoices <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceVoicesDetails" << " : " <<
-    fTraceVoicesDetails <<
-    endl <<
-
-    // measures
-    setw (valueFieldWidth) << "fTtraceMeasuresNumbers" << " : " <<
-    fTraceMeasuresNumbers <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceMeasures" << " : " <<
-    fTraceMeasures <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceMeasuresDetails" << " : " <<
-    fTraceMeasuresDetails <<
-    endl <<
-    setw (valueFieldWidth) << "fTtracePositionsInMeasures" << " : " <<
-    fTracePositionsInMeasures <<
-    endl;
-
-  os << left <<
-    setw (valueFieldWidth) << "fTtraceDetailedMeasureNumbersSet" << " : " <<
-    endl;
-
-  if (fTraceDetailedMeasureNumbersSet.size ()) {
-    set<int>::const_iterator
-      iBegin = fTraceDetailedMeasureNumbersSet.begin (),
-      iEnd   = fTraceDetailedMeasureNumbersSet.end (),
-      i      = iBegin;
-
-    ++gIndenter;
-
-    for ( ; ; ) {
-      os << "v " << (*i);
-      if (++i == iEnd) break;
-      // no endl here
-    } // for
-
-    --gIndenter;
-  }
-  else {
-    os <<
-      "none";
-  }
-  os << endl;
-
-    // segments
-  os << left <<
-    setw (valueFieldWidth) << "fTtraceSegments" << " : " <<
-    fTraceSegments <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceSegmentsDetails" << " : " <<
-    fTraceSegmentsDetails <<
-    endl <<
-
-    // clefs
-    setw (valueFieldWidth) << "fTtraceClefs" << " : " <<
-    fTraceClefs <<
-    endl <<
-
-    // keys
-    setw (valueFieldWidth) << "fTtraceKeys" << " : " <<
-    fTraceKeys <<
-    endl <<
-
-    // time signatures
-    setw (valueFieldWidth) << "fTtraceTimeSignatures" << " : " <<
-    fTraceTimeSignatures <<
-    endl <<
-
-    // tempos
-    setw (valueFieldWidth) << "fTtraceTempos" << " : " <<
-    fTraceTempos <<
-    endl <<
-
-    // rehearsal marks
-    setw (valueFieldWidth) << "fTtraceRehearsals" << " : " <<
-    fTraceRehearsalMarks <<
-    endl <<
-
-    // line breaks
-    setw (valueFieldWidth) << "fTtraceLineBreaks" << " : " <<
-    fTraceLineBreaks <<
-    endl <<
-
-    // page breaks
-    setw (valueFieldWidth) << "fTtracePageBreaks" << " : " <<
-    fTracePageBreaks <<
-    endl <<
-
-    // staff changes
-    setw (valueFieldWidth) << "fTtraceStaffChanges" << " : " <<
-    fTraceStaffChanges <<
-    endl <<
-
-    // transpositions
-    setw (valueFieldWidth) << "fTtraceTranspositions" << " : " <<
-    fTraceTranspositions <<
-    endl <<
-
-    // octave shifts
-    setw (valueFieldWidth) << "fTtraceOctaveShifts" << " : " <<
-    fTraceOctaveShifts <<
-    endl <<
-
-    // barLines
-    setw (valueFieldWidth) << "fTtraceBarLines" << " : " <<
-    fTraceBarLines <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceBarLinesDetails" << " : " <<
-    fTraceBarLinesDetails <<
-    endl <<
-
-    // bar checks
-    setw (valueFieldWidth) << "fTtraceBarChecks" << " : " <<
-    fTraceBarChecks <<
-    endl <<
-
-    // bar number checks
-    setw (valueFieldWidth) << "fTtraceBarNumberChecks" << " : " <<
-    fTraceBarNumberChecks <<
-    endl <<
-
-    // repeats
-    setw (valueFieldWidth) << "fTtraceRepeats" << " : " <<
-    fTraceRepeats <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceRepeatsDetails" << " : " <<
-    fTraceRepeatsDetails <<
-    endl <<
-
-    // measure repeats
-    setw (valueFieldWidth) << "fTtraceMeasureRepeats" << " : " <<
-    fTraceMeasureRepeats <<
-    endl <<
-
-    // full measure rests
-    setw (valueFieldWidth) << "fTtraceFullMeasureRests" << " : " <<
-    fTraceFullMeasureRests <<
-    endl <<
-
-    // slashes
-    setw (valueFieldWidth) << "fTtraceSlashes" << " : " <<
-    fTraceSlashes <<
-    endl <<
-
-    // notes
-    setw (valueFieldWidth) << "fTtraceNotes" << " : " <<
-    fTraceNotes <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceNotesDetails" << " : " <<
-    fTraceNotesDetails <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceWholeNotes" << " : " <<
-    fTraceWholeNotes <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceWholeNotesDetails" << " : " <<
-    fTraceWholeNotesDetails <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceRestNotes" << " : " <<
-    fTraceRestNotes <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceSkipNotes" << " : " <<
-    fTraceSkipNotes <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceNotesOctaveEntry" << " : " <<
-    fTraceNotesOctaveEntry <<
-    endl <<
-
-    // stems
-    setw (valueFieldWidth) << "fTtraceStems" << " : " <<
-    fTraceStems <<
-    endl <<
-
-    // beams
-    setw (valueFieldWidth) << "fTtraceBeams" << " : " <<
-    fTraceBeams <<
-    endl <<
-
-    // articulations
-    setw (valueFieldWidth) << "fTtraceArticulations" << " : " <<
-    fTraceArticulations <<
-    endl <<
-
-    // technicals
-    setw (valueFieldWidth) << "fTtraceTechnicals" << " : " <<
-    fTraceTechnicals <<
-    endl <<
-
-    // ornaments
-    setw (valueFieldWidth) << "fTtraceOrnaments" << " : " <<
-    fTraceOrnaments <<
-    endl <<
-
-    // dynamics
-    setw (valueFieldWidth) << "fTtraceGraceDynamics" << " : " <<
-    fTraceDynamics <<
-    endl <<
-
-    // spanners
-    setw (valueFieldWidth) << "fTtraceSpanners" << " : " <<
-    fTraceSpanners <<
-    endl <<
-
-    // words
-    setw (valueFieldWidth) << "fTtraceWords" << " : " <<
-    fTraceWords <<
-    endl <<
-
-    // tremolos
-    setw (valueFieldWidth) << "fTtraceTremolos" << " : " <<
-    fTraceTremolos <<
-    endl <<
-
-    // chords
-    setw (valueFieldWidth) << "fTtraceChords" << " : " <<
-    fTraceChords <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceChordsDetails" << " : " <<
-    fTraceChordsDetails <<
-    endl <<
-
-    // tuplets
-    setw (valueFieldWidth) << "fTtraceTuplets" << " : " <<
-    fTraceTuplets <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceTupletsDetails" << " : " <<
-    fTraceTupletsDetails <<
-    endl <<
-
-    // glissandos
-    setw (valueFieldWidth) << "fTtraceGlissandos" << " : " <<
-    fTraceGlissandos <<
-    endl <<
-
-    // eyeglases
-    setw (valueFieldWidth) << "fTtraceEyeGlasses" << " : " <<
-    fTraceEyeGlasses <<
-    endl <<
-
-    // damps
-    setw (valueFieldWidth) << "fTtraceDamps" << " : " <<
-    fTraceDamps <<
-    endl <<
-
-    // dampalls
-    setw (valueFieldWidth) << "fTtraceDampAlls" << " : " <<
-    fTraceDampAlls <<
-    endl <<
-
-    // slides
-    setw (valueFieldWidth) << "fTtraceSlides" << " : " <<
-    fTraceSlides <<
-    endl <<
-
-    // grace notes
-    setw (valueFieldWidth) << "fTtraceGraceNotes" << " : " <<
-    fTraceGraceNotes <<
-    endl <<
-
-    // lyrics
-    setw (valueFieldWidth) << "fTtraceLyrics" << " : " <<
-    fTraceLyrics <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceLyricsDetails" << " : " <<
-    fTraceLyricsDetails <<
-    endl <<
-
-    // harmonies
-    setw (valueFieldWidth) << "fTtraceHarmonies" << " : " <<
-    fTraceHarmonies <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceHarmoniesDetails" << " : " <<
-    fTraceHarmoniesDetails <<
-    endl <<
-    setw (valueFieldWidth) << "fTtraceExtraHarmonies" << " : " <<
-    fTraceExtraHarmonies <<
-    endl <<
-
-    // frames
-    setw (valueFieldWidth) << "fTtraceFrames" << " : " <<
-    fTraceFrames <<
-    endl <<
-
-    // figured bass elements
-    setw (valueFieldWidth) << "fTraceFiguredBass" << " : " <<
-    fTraceFiguredBass <<
-    endl <<
-    setw (valueFieldWidth) << "fTraceFiguredBassDetails" << " : " <<
-    fTraceFiguredBassDetails <<
-    endl <<
-
-    // ties
-    setw (valueFieldWidth) << "fTtraceTies" << " : " <<
-    fTraceTies <<
-    endl <<
-
-    // slurs
-    setw (valueFieldWidth) << "fTtraceSlurs" << " : " <<
-    fTraceSlurs <<
-    endl <<
-
-    // ligatures
-    setw (valueFieldWidth) << "fTtraceLigatures" << " : " <<
-    fTraceLigatures <<
-    endl <<
-
-    // pedals
-    setw (valueFieldWidth) << "fTtracePedals" << " : " <<
-    fTracePedals <<
-    endl <<
-
-    // cresc/decresc
-    setw (valueFieldWidth) << "fTraceCrescDecrescs" << " : " <<
-    fTraceCrescDecrescs <<
-    endl <<
-
-    // wedges
-    setw (valueFieldWidth) << "fTtraceWedges" << " : " <<
-    fTraceWedges <<
-    endl <<
-
-    // staff details
-    setw (valueFieldWidth) << "fTtraceStaffDetails" << " : " <<
-    fTraceStaffDetails <<
-    endl <<
-
-    // scordaturas
-    setw (valueFieldWidth) << "fTtraceScordaturas" << " : " <<
-    fTraceScordaturas <<
-    endl <<
-
-    // segnos
-    setw (valueFieldWidth) << "fTtraceSegnos" << " : " <<
-    fTraceSegnos <<
-    endl <<
-
-    // dal segnos
-    setw (valueFieldWidth) << "fTtraceDalSegnos" << " : " <<
-    fTraceDalSegnos <<
-    endl <<
-
-    // codas
-    setw (valueFieldWidth) << "fTtraceCodas" << " : " <<
-    fTraceCodas <<
-    endl <<
-
-    // accordion registrations
-    setw (valueFieldWidth) << "fTtraceAccordionRegistrations" << " : " <<
-    fTraceAccordionRegistrations <<
-    endl <<
-
-    // harp pedals
-    setw (valueFieldWidth) << "fTtraceHarpPedals" << " : " <<
-    fTraceHarpPedals <<
-    endl <<
-
-    // harp pedals tuning
-    setw (valueFieldWidth) << "fTtraceHarpPedalsTunings" << " : " <<
-    fTraceHarpPedalsTunings <<
-    endl <<
-
-    // extra harmonies
-    setw (valueFieldWidth) << "fTtraceExtraHarmonies" << " : " <<
-    fTraceExtraHarmonies <<
-    endl <<
-
-/* JMI
-    // msrStreams
-    setw (valueFieldWidth) << "fTtraceMsrStreams" << " : " <<
-    fTraceMsrStreams <<
-    endl <<
-*/
-
-    // midi
-    setw (valueFieldWidth) << "fTtraceMidi" << " : " <<
-    fTraceMidi <<
-    endl;
-
-  --gIndenter;
-
-  --gIndenter;
-}
+{}
 
 void tracingOahGroup::printtracingOahValues (int fieldWidth)
 {
@@ -3037,6 +2632,9 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     setw (fieldWidth) << "fTtraceKeys" << " : " <<
     fTraceKeys <<
     endl <<
+    setw (fieldWidth) << "fTtraceKeysDetails" << " : " <<
+    fTraceKeysDetails <<
+    endl <<
 
     // time signatures
     setw (fieldWidth) << "fTtraceTimeSignatures" << " : " <<
@@ -3078,7 +2676,7 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     fTraceOctaveShifts <<
     endl <<
 
-    // barLines
+    // bar lines
     setw (fieldWidth) << "fTtraceBarLines" << " : " <<
     fTraceBarLines <<
     endl <<
@@ -3108,10 +2706,16 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     setw (fieldWidth) << "fTtraceMeasureRepeats" << " : " <<
     fTraceMeasureRepeats <<
     endl <<
+    setw (fieldWidth) << "fTtraceMeasureRepeatsDetails" << " : " <<
+    fTraceMeasureRepeatsDetails <<
+    endl <<
 
-    // full measure rests
-    setw (fieldWidth) << "fTtraceFullMeasureRests" << " : " <<
-    fTraceFullMeasureRests <<
+    // full-bar rests
+    setw (fieldWidth) << "fTtraceFullBarRests" << " : " <<
+    fTraceFullBarRests <<
+    endl <<
+    setw (fieldWidth) << "fTtraceFullBarRestsDetails" << " : " <<
+    fTraceFullBarRestsDetails <<
     endl <<
 
     // slashes
@@ -3165,6 +2769,9 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     // ornaments
     setw (fieldWidth) << "fTtraceOrnaments" << " : " <<
     fTraceOrnaments <<
+    endl <<
+    setw (fieldWidth) << "fTtraceOrnamentsDetails" << " : " <<
+    fTraceOrnamentsDetails <<
     endl <<
 
     // dynamics
