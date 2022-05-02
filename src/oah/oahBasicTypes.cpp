@@ -1396,15 +1396,16 @@ void oahAtom::printSummary (ostream& os) const
     endl;
 }
 
-void oahAtom::findStringInAtom (
+Bool oahAtom::findStringInAtom (
   const string& lowerCaseString,
   list<string>& foundStringsList,
   ostream&      os) const
 {
-  findStringInElement (
-    lowerCaseString,
-    foundStringsList,
-    os);
+  return
+    findStringInElement (
+      lowerCaseString,
+      foundStringsList,
+      os);
 }
 
 void oahAtom::printAtomWithVariableOptionsValues (
@@ -2005,11 +2006,13 @@ void oahAtomStoringAValue::printHelp (ostream& os) const
   }
 }
 
-void oahAtomStoringAValue::findStringInAtom (
+Bool oahAtomStoringAValue::findStringInAtom (
   const string& lowerCaseString,
   list<string>& foundStringsList,
   ostream&      os) const
 {
+  Bool result;
+
   // does this element's long name match?
   Bool longNameMatches =
     mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
@@ -2044,7 +2047,11 @@ void oahAtomStoringAValue::findStringInAtom (
 
     // append the string
     foundStringsList.push_back (s.str ());
+
+    result = true;
   }
+
+  return result;
 }
 
 void oahAtomStoringAValue::printAtomWithVariableOptionsValues (
@@ -3126,30 +3133,36 @@ void oahSubGroup::printSubGroupAndAtomHelp (
   }
 }
 
-void oahSubGroup::findStringInSubGroup (
+Bool oahSubGroup::findStringInSubGroup (
   const string& lowerCaseString,
   list<string>& foundStringsList,
   ostream&      os) const
 {
-  findStringInElement (
-    lowerCaseString,
-    foundStringsList,
-    os);
+  Bool result;
+
+  Bool subGroupNameMatches =
+    findStringInElement (
+      lowerCaseString,
+      foundStringsList,
+      os);
 
   // do this subgroups's atoms match?
   if (fSubGroupAtomsList.size ()) {
-   ++gIndenter;
+    ++gIndenter;
 
-   for (S_oahAtom atom : fSubGroupAtomsList) {
-      atom->
-        findStringInAtom (
-          lowerCaseString,
-          foundStringsList,
-          os);
+    for (S_oahAtom atom : fSubGroupAtomsList) {
+      Bool atomMatches =
+        atom->
+          findStringInAtom (
+            lowerCaseString,
+            foundStringsList,
+            os);
     } // for
 
     --gIndenter;
   }
+
+  return result;
 }
 
 void oahSubGroup::printSubGroupOptionsValues (
@@ -4237,21 +4250,23 @@ void oahGroup::findStringInGroup (
       break;
   } // switch
 
-  findStringInElement (
-    lowerCaseString,
-    foundStringsList,
-    os);
+  Bool groupNameMatches =
+    findStringInElement (
+      lowerCaseString,
+      foundStringsList,
+      os);
 
   // do this groups's subgroups match?
   if (fGroupSubGroupsList.size ()) {
     ++gIndenter;
 
     for (S_oahSubGroup subGroup : fGroupSubGroupsList) {
-      subGroup->
-        findStringInSubGroup (
-          lowerCaseString,
-          foundStringsList,
-          os);
+      Bool subGroupMatches =
+        subGroup->
+          findStringInSubGroup (
+            lowerCaseString,
+            foundStringsList,
+            os);
     } // for
 
     --gIndenter;

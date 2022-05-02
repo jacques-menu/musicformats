@@ -555,7 +555,7 @@ class EXP oahAtom : public oahElement
     void                  printShort (ostream& os) const override;
     void                  printSummary (ostream& os) const;
 
-    virtual void          findStringInAtom (
+    virtual Bool          findStringInAtom (
                             const string& lowerCaseString,
                             list<string>& foundStringsList,
                             ostream&      os) const;
@@ -832,7 +832,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
                             ostream& os,
                             int      valueFieldWidth) const override;
 
-    void                  findStringInAtom (
+    Bool                  findStringInAtom (
                             const string& lowerCaseString,
                             list<string>& foundStringsList,
                             ostream&      os) const override;
@@ -1131,7 +1131,7 @@ class EXP oahSubGroup : public oahElement
                             ostream&      os,
                             S_oahSubGroup subGroup) const;
 
-    void                  findStringInSubGroup (
+    Bool                  findStringInSubGroup (
                             const string& lowerCaseString,
                             list<string>& foundStringsList,
                             ostream&      os) const;

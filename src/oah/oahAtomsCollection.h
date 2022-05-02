@@ -3360,6 +3360,64 @@ typedef SMARTP<oahQueryOptionNameAtom> S_oahQueryOptionNameAtom;
 EXP ostream& operator<< (ostream& os, const S_oahQueryOptionNameAtom& elt);
 
 //______________________________________________________________________________
+class EXP oahFindStringResult : public smartable // JMI ???
+{
+/*
+  This is where OAH is introspective too
+*/
+
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahFindStringResult> create (
+                            const string& theString,
+                            S_oahElement  theElement);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahFindStringResult (
+                            const string& theString,
+                            S_oahElement  theElement);
+
+    virtual               ~oahFindStringResult ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    string                asString () const;
+
+    void                  print (ostream& os) const;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+
+    string                fTheString;
+    S_oahElement          fTheElement;
+};
+typedef SMARTP<oahFindStringResult> S_oahFindStringResult;
+EXP ostream& operator<< (ostream& os, const oahFindStringResult& elt);
+EXP ostream& operator<< (ostream& os, const S_oahFindStringResult& elt);
+
+//______________________________________________________________________________
 class EXP oahFindStringAtom : public oahPureHelpAtomExpectingAValue
 {
 /*
