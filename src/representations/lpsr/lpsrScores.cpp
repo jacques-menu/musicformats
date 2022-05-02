@@ -2257,7 +2257,7 @@ R"###(%% http://lsr.di.unimi.it/LSR/Item?id=336
 %%
 %% Limitations:
 %% - only handles two voices
-%% - does not handle multi-measure/whole-measure rests
+%% - does not handle full-bar rests
 
 #(define (rest-score r)
    (let ((score 0)

@@ -1435,6 +1435,17 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     S_oahRGBColorAtom     getLedgerLinesRGBColorAtom () const
                               { return fLedgerLinesRGBColorAtom; }
 
+    // full-bar rests
+    // --------------------------------------
+
+    void                  setFullBarRestsExpandLimit ()
+                              { fFullBarRestsExpandLimit = true; }
+
+    Bool                  getFullBarRestsExpandLimit () const
+                              { return fFullBarRestsExpandLimit; }
+    S_oahIntegerAtom      getFullBarRestsExpandLimitAtom () const
+                              { return fFullBarRestsExpandLimitAtom; }
+
     // chords
     // --------------------------------------
 
@@ -1938,6 +1949,13 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     msrRGBColor           fLedgerLinesRGBColor; // #(rgb-color 1.0 0.9 0.5)
     S_oahRGBColorAtom     fLedgerLinesRGBColorAtom;
+
+
+    // full-bar rests
+    // --------------------------------------
+
+    int                   fFullBarRestsExpandLimit;
+    S_oahIntegerAtom      fFullBarRestsExpandLimitAtom;
 
     // notes
     // --------------------------------------

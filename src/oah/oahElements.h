@@ -177,7 +177,7 @@ class EXP oahElement : public smartable
 
     virtual void          applyElement (ostream& os) = 0;
 
-    void                  findStringInElement (
+    Bool                  findStringInElement (
                             const string& lowerCaseString,
                             list<string>& foundStringsList,
                             ostream&      os) const;

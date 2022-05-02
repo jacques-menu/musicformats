@@ -788,6 +788,10 @@ void msdl2lilypondRegularHandler::createNotesRegularGroup ()
   registerAtomInRegularSubgroup ("lilypond-accidental-style", subGroup);
 
   registerAtomInRegularSubgroup ("non-print-notes-head-color", subGroup);
+
+  registerAtomInRegularSubgroup ("merge-rests-in-msr", subGroup);
+  registerAtomInRegularSubgroup ("merge-staff-common-rests-in-lilypond", subGroup);
+  registerAtomInRegularSubgroup ("full-bar-rests-expand-limit", subGroup);
 }
 
 void msdl2lilypondRegularHandler::creatBeamsRegularGroup ()

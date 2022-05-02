@@ -80,6 +80,12 @@ alias clis="cd ${CLI_SAMPLES_DIR}"
 alias lxmlsamp="cd ${LXML_SAMPLES_DIR}"
 
 
+# using the MacOS distrib
+#----------------------------------------------
+
+alias usedistrib='export PATH=~/MusicFormatsForMacOS/bin:$PATH ; type xml2ly'
+
+
 # validation
 #----------------------------------------------
 

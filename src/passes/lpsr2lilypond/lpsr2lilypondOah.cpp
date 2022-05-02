@@ -3537,9 +3537,26 @@ This causes a \compressEmptyMeasures command to be generated.)",
         "merge-staff-common-rests-in-lilypond", "mscril",
 R"(Merge common rests in LilyPond staves to obtain better looking scores.
 Limitations: this only handles two voices
-and does not handle multi-measure/whole-measure rests.)",
+and does not handle full-bar rests.)",
         "fMergeStaffCommonRests",
         fMergeStaffCommonRests));
+
+  // full-bar rests
+  // --------------------------------------
+
+  fFullBarRestsExpandLimitAtom =
+      oahIntegerAtom::create (
+        "full-bar-rests-expand-limit", "fbrel",
+R"(Set the maximum number of measures expanded in church rests to N,
+where N is a positive integer.
+The default value is 10.)",
+        "N",
+        "fFullBarRestsExpandLimit",
+        fFullBarRestsExpandLimit);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fFullBarRestsExpandLimitAtom);
 
   // input line numbers
   // --------------------------------------
@@ -5212,8 +5229,13 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
     setw (valueFieldWidth) << "fCompressEmptyMeasuresInLilypond" << " : " <<
       fCompressEmptyMeasuresInLilypond <<
       endl <<
+
     setw (valueFieldWidth) << "fMergeStaffCommonRests" << " : " <<
       fMergeStaffCommonRests <<
+      endl <<
+
+    setw (valueFieldWidth) << "fFullBarRestsExpandLimit" << " : " <<
+      fFullBarRestsExpandLimit <<
       endl <<
 
     setw (valueFieldWidth) << "fInputLineNumbers" << " : " <<
@@ -5837,6 +5859,10 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
 
     setw (fieldWidth) << "fMergeStaffCommonRests" << " : " <<
       fMergeStaffCommonRests <<
+      endl <<
+
+    setw (fieldWidth) << "fFullBarRestsExpandLimit" << " : " <<
+      fFullBarRestsExpandLimit <<
       endl <<
 
     setw (fieldWidth) << "fInputLineNumbers" << " : " <<

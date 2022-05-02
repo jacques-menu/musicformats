@@ -297,11 +297,13 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
   return s.str ();
 }
 
-void oahElement::findStringInElement (
+Bool oahElement::findStringInElement (
   const string& lowerCaseString,
   list<string>& foundStringsList,
   ostream&      os) const
 {
+  Bool result;
+
   // does this element's long name match?
   Bool longNameMatches =
     mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
@@ -334,7 +336,11 @@ void oahElement::findStringInElement (
 
     // append the string
     foundStringsList.push_back (s.str ());
+
+    result = true;
   }
+
+  return result;
 }
 
 void oahElement::acceptIn (basevisitor* v)

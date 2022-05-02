@@ -10054,6 +10054,71 @@ ostream& operator<< (ostream& os, const S_oahQueryOptionNameAtom& elt)
 }
 
 //______________________________________________________________________________
+S_oahFindStringResult oahFindStringResult::create (
+  const string& theString,
+  S_oahElement  theElement)
+{
+  oahFindStringResult* o = new
+    oahFindStringResult (
+      theString,
+      theElement);
+  assert (o != nullptr);
+  return o;
+}
+
+oahFindStringResult::oahFindStringResult (
+  const string& theString,
+  S_oahElement  theElement)
+{
+  fTheString  = theString;
+  fTheElement = theElement;
+}
+
+oahFindStringResult::~oahFindStringResult ()
+{}
+
+string oahFindStringResult::asString () const
+{
+  stringstream s;
+
+  s <<
+    fTheString <<
+    " - " <<
+    fTheElement->asShortString ();
+
+  return s.str ();
+}
+
+void oahFindStringResult::print (ostream& os) const
+{
+  os <<
+    "FindStringAtom:" <<
+    endl;
+
+  ++gIndenter;
+
+  gLogStream <<
+    fTheString <<
+    endl <<
+    fTheElement->asShortString () <<
+    endl;
+
+  --gIndenter;
+}
+
+ostream& operator<< (ostream& os, const oahFindStringResult& elt)
+{
+  elt.print (os);
+  return os;
+}
+
+ostream& operator<< (ostream& os, const S_oahFindStringResult& elt)
+{
+  elt->print (os);
+  return os;
+}
+
+//______________________________________________________________________________
 S_oahFindStringAtom oahFindStringAtom::create (
   const string& longName,
   const string& shortName,

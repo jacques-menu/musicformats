@@ -15405,7 +15405,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFermata& elt)
 #endif
 
 /*
-Articulations can be attached to rests as well as notes but they cannot be attached to multi-measure rests. A special predefined command, \fermataMarkup, is available for at- taching a fermata to a multi-measure rest (and only a multi-measure rest). This creates a MultiMeasureRestText object.
+Articulations can be attached to rests as well as notes but they cannot be attached to full-bar rests. A special predefined command, \fermataMarkup, is available for at- taching a fermata to a full-bar rest (and only a full-bar rest). This creates a MultiMeasureRestText object.
 */
 
 /* JMI
@@ -23460,6 +23460,16 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullBarRests& elt)
     ++gIndenter; // decremented in visitEnd (S_msrFullBarRests&)
   }
 
+  if (
+    gGlobalLpsr2lilypondOahGroup->
+      getFullBarRestsExpandLimitAtom ()->getSetByAnOption ()
+  ) {
+    fLilypondCodeStream <<
+      "\\override MultiMeasureRest.expand-limit = " <<
+      gGlobalLpsr2lilypondOahGroup->getFullBarRestsExpandLimit () <<
+      endl;
+  }
+
   fLilypondCodeStream <<
     "\\mergeFullBarRests {" <<
     endl;
@@ -23512,10 +23522,10 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
   fRemainingFullBarRestsNumber =
     elt->getFullBarRestsNumber ();
 
-  // get full-bar rests sounding notes
-  rational
-    fullBarRestsMeasureSoundingNotes =
-      elt->getFullBarRestsMeasureSoundingNotes ();
+//   // get full-bar rests sounding notes JMI USELESS v0.9.63
+//   rational
+//     fullBarRestsMeasureSoundingNotes =
+//       elt->getFullBarRestsMeasureSoundingNotes ();
 
 // JMI v0.9.63
   // generate full-bar rests compression if relevant
