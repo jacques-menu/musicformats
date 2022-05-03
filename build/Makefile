@@ -55,8 +55,8 @@ undefined:
 
 help :
 	@echo MusicFormats makefile - Targets are :
-	@echo "   all (default): build the MusicFormats library for the current platform,"
-	@echo "                  build the MusicFormats tools,"
+	@echo "   all (default): build the MusicFormats library and tools"
+	@echo "                  for the current platform"
 	@echo
 	@echo "Platform targets to build the MusicFormats library are:"
 	@echo "   macos     build the library for macos"
@@ -67,6 +67,9 @@ help :
 	@echo "   msys      build on Windows using MSys"
 	@echo "   js        build a javascript library"
 	@echo "the platform targets is automatically evaluated by the default target."
+	@echo
+	@echo "Clean:"
+	@echo "   clean     remove the bin, lib and libdir folders"
 	@echo
 	@echo "Misc:"
 	@echo "   cmake     re-generates the cmake project"
