@@ -749,6 +749,10 @@ alias mfslf='mfsl -find'
 alias gb='git branch'
 alias gc='git checkout'
 alias gp='git push'
+alias gbi='git bisect'
+
+alias rc='. ~/.bashrc'
+alias cpbashdefs='cp -p ~/local/BashDefinitionsForMusicFormats.bash ${SCRIPTS_DIR}'
 
 function addAll ()
 {
@@ -798,7 +802,7 @@ function addBuild ()
 
 function addScripts ()
 {
-  git add    ${MUSIC_FORMATS_DEV}/scripts
+  git add    ${SCRIPTS_DIR}
 }
 
 function addDistrib ()
