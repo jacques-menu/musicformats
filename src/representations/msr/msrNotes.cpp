@@ -198,8 +198,8 @@ void msrNote::initializeNote ()
   fNoteBelongsToATuplet = false;
   fNoteOccupiesAFullMeasure = false;
 
-  fNoteBelongsToAFullBarRests = false;
-  fNoteFullBarRestsSequenceNumber = -1;
+  fNoteBelongsToAMultipleFullBarRests = false;
+  fNoteMultipleFullBarRestsSequenceNumber = -1;
 
   fNoteAlphaRGBColorHasBenSet = false;
 
@@ -778,12 +778,12 @@ S_msrNote msrNote::createNoteNewbornClone (
   // ------------------------------------------------------
 
   newbornClone->
-    fNoteBelongsToAFullBarRests =
-      fNoteBelongsToAFullBarRests;
+    fNoteBelongsToAMultipleFullBarRests =
+      fNoteBelongsToAMultipleFullBarRests;
 
   newbornClone->
-    fNoteFullBarRestsSequenceNumber =
-      fNoteFullBarRestsSequenceNumber;
+    fNoteMultipleFullBarRestsSequenceNumber =
+      fNoteMultipleFullBarRestsSequenceNumber;
 
   // note lyrics
   // ------------------------------------------------------
@@ -1005,12 +1005,12 @@ S_msrNote msrNote::createNoteDeepClone (
   // ------------------------------------------------------
 
   noteDeepClone->
-    fNoteBelongsToAFullBarRests =
-      fNoteBelongsToAFullBarRests;
+    fNoteBelongsToAMultipleFullBarRests =
+      fNoteBelongsToAMultipleFullBarRests;
 
   noteDeepClone->
-    fNoteFullBarRestsSequenceNumber =
-      fNoteFullBarRestsSequenceNumber;
+    fNoteMultipleFullBarRestsSequenceNumber =
+      fNoteMultipleFullBarRestsSequenceNumber;
 
   // note lyrics
   // ------------------------------------------------------
@@ -4847,7 +4847,7 @@ string msrNote::asString () const
         s <<
           "R" <<
           /* JMI
-          multipleFullBarRestsWholeNotesAsMsrString (
+          multipleMultipleFullBarRestsWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes);
             */
@@ -5051,7 +5051,7 @@ string msrNote::asShortStringForMeasuresSlices () const
         s <<
           "R" <<
           /* JMI
-          multipleFullBarRestsWholeNotesAsMsrString (
+          multipleMultipleFullBarRestsWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes);
             */
@@ -5435,12 +5435,12 @@ void msrNote::print (ostream& os) const
   // multiple rest member?
   os << left <<
     setw (fieldWidth) <<
-    "fNoteBelongsToAFullBarRests" << " : " <<
-    fNoteBelongsToAFullBarRests <<
+    "fNoteBelongsToAMultipleFullBarRests" << " : " <<
+    fNoteBelongsToAMultipleFullBarRests <<
     endl <<
     setw (fieldWidth) <<
-    "fNoteFullBarRestsSequenceNumber" << " : " <<
-    fNoteFullBarRestsSequenceNumber <<
+    "fNoteMultipleFullBarRestsSequenceNumber" << " : " <<
+    fNoteMultipleFullBarRestsSequenceNumber <<
     endl;
 
   // note print kind

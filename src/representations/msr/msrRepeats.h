@@ -4,7 +4,7 @@
 #include "msrElements.h"
 #include "msrMeasureRepeats.h"
 #include "msrNotes.h"
-#include "msrFullBarRests.h"
+#include "msrMultipleFullBarRests.h"
 #include "msrVoiceElements.h"
 
 
@@ -16,8 +16,8 @@ namespace MusicFormats
 class msrRepeat;
 typedef SMARTP<msrRepeat> S_msrRepeat;
 
-class msrFullBarRests;
-typedef SMARTP<msrFullBarRests> S_msrFullBarRests;
+class msrMultipleFullBarRests;
+typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
 
 class msrMeasureRepeat;
 typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
@@ -87,9 +87,9 @@ class EXP msrRepeatCommonPart : public msrElement
                             S_msrMeasureRepeat measureRepeat,
                             const string&      context);
 
-    void                  appendFullBarRestsToRepeatCommonPart (
+    void                  appendMultipleFullBarRestsToRepeatCommonPart (
                             int                   inputLineNumber,
-                            S_msrFullBarRests fullBarRests,
+                            S_msrMultipleFullBarRests multipleFullBarRests,
                             const string&         context);
 
     S_msrNote             fetchRepeatCommonPartFirstNonGraceNote () const;
@@ -220,9 +220,9 @@ class EXP msrRepeatEnding : public msrElement
                             S_msrMeasureRepeat measureRepeat,
                             const string&      context);
 
-    void                  appendFullBarRestsToRepeatEnding (
+    void                  appendMultipleFullBarRestsToRepeatEnding (
                             int                   inputLineNumber,
-                            S_msrFullBarRests fullBarRests,
+                            S_msrMultipleFullBarRests multipleFullBarRests,
                             const string&         context);
 
     void                  collectRepeatEndingMeasuresIntoFlatList (
@@ -398,9 +398,9 @@ class EXP msrRepeat : public msrVoiceElement
                             S_msrMeasureRepeat measureRepeat,
                             const string&      context);
 
-    void                  appendFullBarRestsToRepeat (
+    void                  appendMultipleFullBarRestsToRepeat (
                             int                   inputLineNumber,
-                            S_msrFullBarRests fullBarRests,
+                            S_msrMultipleFullBarRests multipleFullBarRests,
                             const string&         context);
 
     S_msrNote             fetchRepeatFirstNonGraceNote () const;

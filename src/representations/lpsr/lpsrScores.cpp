@@ -719,12 +719,12 @@ R"(
     schemeFunction;
 }
 
-void lpsrScore::setMergeFullBarRestsIsNeeded ()
+void lpsrScore::setMergeMultipleFullBarRestsIsNeeded ()
 {
-  if (! fMergeFullBarRestsIsNeeded) {
-    addMergeFullBarRestsToScore ();
+  if (! fMergeMultipleFullBarRestsIsNeeded) {
+    addMergeMultipleFullBarRestsToScore ();
 
-    fMergeFullBarRestsIsNeeded = true;
+    fMergeMultipleFullBarRestsIsNeeded = true;
   }
 }
 
@@ -2257,7 +2257,7 @@ R"###(%% http://lsr.di.unimi.it/LSR/Item?id=336
 %%
 %% Limitations:
 %% - only handles two voices
-%% - does not handle full-bar rests
+%% - does not handle multiple full-bar rests
 
 #(define (rest-score r)
    (let ((score 0)
@@ -2460,7 +2460,7 @@ R"(
     schemeFunction;
 }
 
-void lpsrScore::addMergeFullBarRestsToScore ()
+void lpsrScore::addMergeMultipleFullBarRestsToScore ()
 {
   stringstream s;
 
@@ -2470,7 +2470,7 @@ R"###(
 
 #(define (append-merge x l r)
    "Add x to the head of list l, merging skips,
-and if r is true also merging full-bar rests."
+and if r is true also merging multiple full-bar rests."
    (if (and (pair? l)
             (ly:music? x)
             (ly:music? (car l))
@@ -2506,14 +2506,14 @@ mergeSkips = #(define-music-function
                   m)
                 music))
 
-mergeFullBarRests = #(define-music-function
+mergeMultipleFullBarRests = #(define-music-function
                       (parser location music) (ly:music?)
                       #{ \mergeSkips ##t $music #})
 )###";
 
   string
     schemeFunctionName =
-      "MergeFullBarRests",
+      "MergeMultipleFullBarRests",
 
   schemeFunctionDescription =
 R"(

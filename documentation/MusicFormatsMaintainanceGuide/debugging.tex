@@ -5,9 +5,9 @@
 \chapter{Debugging}
 % -------------------------------------------------------------------------
 
-Debugging \mf\ can be quite time-consuming. The trace options available have designed to provide fine-grained tracing information to help locate issues.
+Debugging \mf\ can be quite time-consuming. The trace options available have been designed to provide fine-grained tracing information to help locate issues.
 
-\function{catchSignals} in \functionName {main} functions
+\Function{catchSignals} at the beginning of the \functionName {main} function can be commented out in order to run a tool under a debugger.
 
 File \wae{enableAbortToDebugErrors.h} contains:
 \begin{lstlisting}[language=CPlusPlus]
@@ -76,8 +76,11 @@ total 80
  0 drwxr-xr-x  12 jacquesmenu  staff    384 May  2 18:19:25 2022 libdir/
 \end{lstlisting}
 
-The built files are in \distrib{bin}, \distrib{lib} and \distrib{libdir}. There is a \code{clean} target in the \code{Makefile}. They can be removed in a single step with \code{make clean}.
+The built files are in \distrib{bin}, \distrib{lib} and \distrib{libdir}. There is no \code{clean} target in \Makefile. They can be removed in a single step with this alias:
 \begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > type rmbuild
+rmbuild is aliased to `cd ${MUSIC_FORMATS_DEV}/build ; rm -r bin lib libdir; ls -sal'
+\end{lstlisting}
 
 
 % -------------------------------------------------------------------------
@@ -163,7 +166,7 @@ Three have been several \code{git push} occurrences leading from v0.9.60 to v0.9
 
 
 % -------------------------------------------------------------------------
-\section{Locating a bug at random}
+\section{Locating a bug at random in the Git log}
 % -------------------------------------------------------------------------
 
 \git\ provides various ways to display the commits history of the \repo\ through \code{git log} options, for example:
@@ -239,7 +242,7 @@ One can pick one of the commits, revert to it and check wether the bug is presen
 
 
 % -------------------------------------------------------------------------
-\section{Locating a bug with Git's bisection}
+\section{Locating a bug in the commits with Git's bisection}
 % -------------------------------------------------------------------------
 
 Locating the particular push that introduced the bug can be facilitated by \git 's \MainIt{bisect} facility.
@@ -334,6 +337,28 @@ HEAD is now at 2cb4d5f Renamed some documentation folders and files
 Here the code base builds alright, and bug does not show up, so we should continue skipping.
 
 
+% -------------------------------------------------------------------------
+\section{Locating the bug in the code base}
+% -------------------------------------------------------------------------
 
+The bug we're after is found to have been introduced at this point:
+\begin{itemize}
+\item commit \code{2cb4d5f}, does not exhibit the bug;
+\item the next one, commit \code{662454a}, does.
+\end{itemize}
+
+The changes brought by commit \code{} can be shown with: %%% git show 662454a   git show --stat 662454a
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git log --patch -1 662454a > patch_662454a.txt 
+
+jacquesmenu@macmini: ~/musicformats-git-dev > ls -sal patch_662454a.txt 
+256 -rw-r--r--@ 1 jacquesmenu  staff  80782 May  4 10:59 patch_662454a.txt
+\end{lstlisting}
+
+The bug shows up with \mfFiles{musicxmlfiles/fullbarrests/FullBarRestWithoutBarLine.xml}, but not with others such as \mfFiles{musicxmlfiles/multistaff/SATBExample.xml}.
+
+Analysing the patch description in \fileName{patch_662454a.txt}, we find that nothing in the differences between those two successive patches can explain  the crash. The problem thus lies elsewhere\dots
+
+%%%JMI
 
 

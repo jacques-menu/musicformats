@@ -2270,7 +2270,7 @@ string wholeNotesAsMsrString (
       dotsNumber);
 }
 
-string multipleFullBarRestsWholeNotesAsMsrString (
+string multipleMultipleFullBarRestsWholeNotesAsMsrString (
   int             inputLineNumber, // JMI
   const rational& wholeNotes)
 {

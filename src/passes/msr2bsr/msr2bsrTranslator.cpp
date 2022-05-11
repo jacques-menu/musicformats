@@ -6073,7 +6073,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 #endif
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
+  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Handling multiple rest start in voice clone \"" <<
       fCurrentVoiceClone->getVoiceName () <<
@@ -6084,7 +6084,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceFullBarRests ()
+    gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
       ||
     gGlobalTracingOahGroup->getTraceVoicesDetails ()
   ) {
@@ -6112,7 +6112,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRest& elt)
 
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceFullBarRests ()
+    gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
       ||
     gGlobalTracingOahGroup->getTraceVoicesDetails ()
   ) {
@@ -6152,7 +6152,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
   // create the multiple rest clone
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceFullBarRests ()
+    gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
       ||
     gGlobalTracingOahGroup->getTraceSegments ()
       ||
@@ -6190,7 +6190,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
   // containing the next, yet incomplete, measure
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceFullBarRests ()
+    gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
       ||
     gGlobalTracingOahGroup->getTraceSegments ()
       ||
@@ -6218,7 +6218,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRest& elt)
 
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceFullBarRests ()
+    gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
       ||
     gGlobalTracingOahGroup->getTraceVoicesDetails ()
   ) {
@@ -6260,7 +6260,7 @@ void msr2bsrTranslator::visitStart (S_msrMultipleRestContents& elt)
 
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceFullBarRests ()
+    gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
       ||
     gGlobalTracingOahGroup->getTraceVoicesDetails ()
   ) {
@@ -6306,7 +6306,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
 
   // set last segment as the multiple rest contents segment
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
+  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Setting current last segment as multiple rest contents segment in voice \"" <<
       fCurrentVoiceClone->getVoiceName () <<
@@ -6322,7 +6322,7 @@ void msr2bsrTranslator::visitEnd (S_msrMultipleRestContents& elt)
 
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceFullBarRests ()
+    gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
       ||
     gGlobalTracingOahGroup->getTraceVoicesDetails ()
   ) {

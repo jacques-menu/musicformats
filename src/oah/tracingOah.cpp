@@ -2283,38 +2283,38 @@ R"(Measure repeats)",
     addBooleanAtom (
       traceMeasureRepeatsDetailsBooleanAtom);
 
-  // full-bar rests
+  // multiple full-bar rests
 
   S_oahTwoBooleansAtom
-    traceFullBarRestsBooleanAtom =
+    traceMultipleFullBarRestsBooleanAtom =
       oahTwoBooleansAtom::create (
-        "trace-full-bar-rests", "tfbr",
+        "trace-multiple-full-bar-rests", "tmfbr",
 R"(Full-bar rests)",
-        "fTraceFullBarRests",
-        fTraceFullBarRests,
+        "fTraceMultipleFullBarRests",
+        fTraceMultipleFullBarRests,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      traceFullBarRestsBooleanAtom);
+      traceMultipleFullBarRestsBooleanAtom);
   repeatsToSlashesMultiplexBooleansAtom->
     addBooleanAtom (
-      traceFullBarRestsBooleanAtom);
+      traceMultipleFullBarRestsBooleanAtom);
 
   S_oahThreeBooleansAtom
-    traceFullBarRestsDetailsBooleanAtom =
+    traceMultipleFullBarRestsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-full-bar-rests-details", "tfbrd",
+        "trace-multiple full-bar-rests-details", "tfbrd",
 R"(Full-bar rests details)",
-        "fTraceFullBarRestsDetails",
-        fTraceFullBarRestsDetails,
-        traceFullBarRestsBooleanAtom,
+        "fTraceMultipleFullBarRestsDetails",
+        fTraceMultipleFullBarRestsDetails,
+        traceMultipleFullBarRestsBooleanAtom,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      traceFullBarRestsDetailsBooleanAtom);
+      traceMultipleFullBarRestsDetailsBooleanAtom);
   repeatsToSlashesMultiplexBooleansAtom->
     addBooleanAtom (
-      traceFullBarRestsDetailsBooleanAtom);
+      traceMultipleFullBarRestsDetailsBooleanAtom);
 
   // beats repeats
 
@@ -2710,12 +2710,12 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     fTraceMeasureRepeatsDetails <<
     endl <<
 
-    // full-bar rests
-    setw (fieldWidth) << "fTtraceFullBarRests" << " : " <<
-    fTraceFullBarRests <<
+    // multiple full-bar rests
+    setw (fieldWidth) << "fTtraceMultipleFullBarRests" << " : " <<
+    fTraceMultipleFullBarRests <<
     endl <<
-    setw (fieldWidth) << "fTtraceFullBarRestsDetails" << " : " <<
-    fTraceFullBarRestsDetails <<
+    setw (fieldWidth) << "fTtraceMultipleFullBarRestsDetails" << " : " <<
+    fTraceMultipleFullBarRestsDetails <<
     endl <<
 
     // slashes

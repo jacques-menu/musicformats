@@ -66,7 +66,7 @@ msrMeasure::msrMeasure (
   int           inputLineNumber,
   const string& measureNumber,
   S_msrSegment  measureSegmentUpLink)
-    : msrElement (inputLineNumber)
+    : msrSegmentElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
@@ -427,7 +427,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   measureDeepClone->fMeasureFirstInSegmentKind =
     fMeasureFirstInSegmentKind;
 
-    // full-bar rest?
+    // multiple full-bar rest?
 
   measureDeepClone->fMeasureIsAFullBarRest =
     fMeasureIsAFullBarRest;
@@ -2189,7 +2189,7 @@ void msrMeasure::appendNoteToMeasure (
   // append note to measure
   appendNoteOrPaddingToMeasure (note);
 
-  // is note a full-bar rest?
+  // is note a multiple full-bar rest?
   if (note->fetchNoteIsAFullNoteRest ()) {
     setMeasureIsAFullBarRest ();
   }
@@ -3545,7 +3545,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
       voice->
-        displayVoiceRepeatsStackFullBarRestsMeasureRepeatAndVoice (
+        displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
           inputLineNumber,
           "determineMeasureKindAndPuristNumber() 2 measure has 0 current measure whole notes");
 

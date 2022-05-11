@@ -415,6 +415,8 @@ void msrPartGroup::checkPartGroupElement (
   if (
     ((void*) partGroupElement) == (void*) 0x0000000000000001
       ||
+    ((void*) partGroupElement) == (void*) 0x0000000000000009
+      ||
     ((void*) partGroupElement) == (void*) 0x0000000000000011
   ) {
     stringstream s;
@@ -697,84 +699,55 @@ void msrPartGroup::printPartGroupElementsList (
       i      = iBegin;
 
     for ( ; ; ) {
+      S_msrElement
+        element = (*i);
+
       if (
-        (void*) (*i) == (void*) 0x11
-          ||
-        (void*) (*i) == (void*) 0x1
-          ||
-        (void*) (*i) == (void*) 0x9
-          ||
-        (void*) (*i) == (void*) 0x0000000000000001
-          ||
-        (void*) (*i) == (void*) 0x0000000000000011
-          ||
-        (void*) (*i) <  (void*) 0x0000000001000000
-      ) {
-        stringstream s;
+        S_msrPartGroup
+          nestedPartGroup =
+            dynamic_cast<msrPartGroup*>(&(*element))
+        ) {
+        // this is a part group
+        gLogStream <<
+          nestedPartGroup->
+            getPartGroupCombinedNameWithoutEndOfLines () <<
+          endl;
 
-        s <<
-          "###### (*i) is " <<
-          (*i) <<
-          " ######"; // JMI v0.9.63
+        ++gIndenter;
 
-        msrInternalWarning (
-          gGlobalServiceRunData->getInputSourceName (),
-          fInputLineNumber, // inputLineNumber // TEMP JMI v0.9.63
-//           __FILE__, __LINE__,
-          s.str ());
+        nestedPartGroup->
+          printPartGroupElementsList (
+            inputLineNumber,
+            os);
+
+        --gIndenter;
+      }
+
+      else if (
+        S_msrPart
+          part =
+            dynamic_cast<msrPart*>(&(*element))
+        ) {
+        // this is a part
+        gLogStream <<
+          part->
+            getPartCombinedName () <<
+          endl;
       }
 
       else {
-        S_msrElement
-          element = (*i);
+        stringstream s;
 
-        if (
-          S_msrPartGroup
-            nestedPartGroup =
-              dynamic_cast<msrPartGroup*>(&(*element))
-          ) {
-          // this is a part group
-          gLogStream <<
-            nestedPartGroup->
-              getPartGroupCombinedNameWithoutEndOfLines () <<
-            endl;
+        s <<
+          "an element of partgroup " <<
+          getPartGroupCombinedName () <<
+          " is not a part group nor a part";
 
-          ++gIndenter;
-
-          nestedPartGroup->
-            printPartGroupElementsList (
-              inputLineNumber,
-              os);
-
-          --gIndenter;
-        }
-
-        else if (
-          S_msrPart
-            part =
-              dynamic_cast<msrPart*>(&(*element))
-          ) {
-          // this is a part
-          gLogStream <<
-            part->
-              getPartCombinedName () <<
-            endl;
-        }
-
-        else {
-          stringstream s;
-
-          s <<
-            "an element of partgroup " <<
-            getPartGroupCombinedName () <<
-            " is not a part group nor a part";
-
-          msrInternalError (
-            gGlobalServiceRunData->getInputSourceName (),
-            inputLineNumber,
-            __FILE__, __LINE__,
-            s.str ());
-        }
+        msrInternalError (
+          gGlobalServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          __FILE__, __LINE__,
+          s.str ());
       }
 
       if (++i == iEnd) break;

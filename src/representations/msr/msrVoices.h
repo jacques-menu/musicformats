@@ -18,7 +18,7 @@
 #include "msrParts.h"
 #include "msrPartGroups.h"
 #include "msrRepeats.h"
-#include "msrFullBarRests.h"
+#include "msrMultipleFullBarRests.h"
 #include "msrScores.h"
 #include "msrSegments.h"
 #include "msrSegnos.h"
@@ -27,6 +27,7 @@
 #include "msrTimeSignatures.h"
 #include "msrTranspositions.h"
 #include "msrTuplets.h"
+#include "msrVoiceElements.h"
 
 
 namespace MusicFormats
@@ -36,8 +37,8 @@ namespace MusicFormats
 class msrStaff;
 typedef SMARTP<msrStaff> S_msrStaff;
 
-class msrFullBarRests;
-typedef SMARTP<msrFullBarRests> S_msrFullBarRests;
+class msrMultipleFullBarRests;
+typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
 
 class msrVoiceStaffChange;
 typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
@@ -425,11 +426,11 @@ class EXP msrVoice : public msrElement
 
     // rests measures
 
-    void                  setVoiceContainsFullBarRests (
+    void                  setVoiceContainsMultipleFullBarRests (
                             int inputLineNumber);
 
-    Bool                  getVoiceContainsFullBarRests () const
-                              { return fVoiceContainsFullBarRests; }
+    Bool                  getVoiceContainsMultipleFullBarRests () const
+                              { return fVoiceContainsMultipleFullBarRests; }
 
     // measure repeats
 
@@ -801,18 +802,18 @@ class EXP msrVoice : public msrElement
     void                  appendRepeatEndingCloneToVoice (
                             S_msrRepeatEnding repeatEndingClone);
 
-    // full-bar rests
+    // multiple full-bar rests
 
-    void                  appendFullBarRestsToVoiceElementsList (
-                            S_msrFullBarRests fullBarRests);
+    void                  appendMultipleFullBarRestsToVoiceElementsList (
+                            S_msrMultipleFullBarRests multipleFullBarRests);
 
-    void                  createFullBarRestsInVoice (
+    void                  createMultipleFullBarRestsInVoice (
                             int inputLineNumber,
-                            int fullBarRestsNumber);
+                            int multipleFullBarRestsNumber);
 
-    void                  appendFullBarRestsToVoice (
+    void                  appendMultipleFullBarRestsToVoice (
                             int                   inputLineNumber,
-                            S_msrFullBarRests fullBarRests);
+                            S_msrMultipleFullBarRests multipleFullBarRests);
 
     void                  replicateLastAppendedMeasureInVoice (
                             int inputLineNumber,
@@ -821,27 +822,27 @@ class EXP msrVoice : public msrElement
     void                  addEmptyMeasuresToVoice (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
-                            int           fullBarRestsNumber);
+                            int           multipleFullBarRestsNumber);
 
-    void                  appendPendingFullBarRestsToVoice (
+    void                  appendPendingMultipleFullBarRestsToVoice (
                             int inputLineNumber);
 
-    void                  handleFullBarRestsStartInVoiceClone (
+    void                  handleMultipleFullBarRestsStartInVoiceClone (
                             int                   inputLineNumber,
-                            S_msrFullBarRests fullBarRests);
+                            S_msrMultipleFullBarRests multipleFullBarRests);
 
-    void                  handleFullBarRestsEndInVoiceClone (
+    void                  handleMultipleFullBarRestsEndInVoiceClone (
                             int inputLineNumber);
 
-    void                  handleFullBarRestsContentsStartInVoiceClone (
-                            int inputLineNumber);
+//     void                  handleMultipleFullBarRestsContentsStartInVoiceClone (
+//                             int inputLineNumber);
+//
+//     void                  handleMultipleFullBarRestsContentsEndInVoiceClone (
+//                             int inputLineNumber);
 
-    void                  handleFullBarRestsContentsEndInVoiceClone (
-                            int inputLineNumber);
-
-    void                  appendFullBarRestsCloneToVoiceClone ( // JMI ???
+    void                  appendMultipleFullBarRestsCloneToVoiceClone ( // JMI ???
                             int                   inputLineNumber,
-                            S_msrFullBarRests fullBarRestsClone);
+                            S_msrMultipleFullBarRests multipleFullBarRestsClone);
 
     // measure repeats
 
@@ -1082,11 +1083,11 @@ class EXP msrVoice : public msrElement
                             int           inputLineNumber,
                             const string& repeatEndingNumber); // may be "1, 2"
 
-    // full-bar rests
+    // multiple full-bar rests
 
-    void                  appendFullBarRestsToInitialVoiceElements (
+    void                  appendMultipleFullBarRestsToInitialVoiceElements (
                             int                   inputLineNumber,
-                            S_msrFullBarRests fullBarRests,
+                            S_msrMultipleFullBarRests multipleFullBarRests,
                             const string&         context);
 
     // measure repeats
@@ -1129,7 +1130,7 @@ class EXP msrVoice : public msrElement
                             int           inputLineNumber,
                             const string& context) const;
 
-    void                  displayVoiceRepeatsStackFullBarRestsMeasureRepeatAndVoice (
+    void                  displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
                             int           inputLineNumber,
                             const string& context);
 
@@ -1326,11 +1327,11 @@ class EXP msrVoice : public msrElement
                             int           inputLineNumber,
                             const string& context);
 
-    void                  displayVoiceFullBarRests (
+    void                  displayVoiceMultipleFullBarRests (
                             int           inputLineNumber,
                             const string& context);
 
-    void                  displayVoiceFullBarRestsAndVoice (
+    void                  displayVoiceMultipleFullBarRestsAndVoice (
                             int           inputLineNumber,
                             const string& context);
 
@@ -1413,20 +1414,20 @@ class EXP msrVoice : public msrElement
     list<S_msrRepeatDescr>
                           fVoicePendingRepeatDescrsStack;
 
-    // full-bar rests
+    // multiple full-bar rests
 
-    // fVoicePendingFullBarRests is either null
-    // or the last msrFullBarRests created,
+    // fVoicePendingMultipleFullBarRests is either null
+    // or the last msrMultipleFullBarRests created,
     // but not yet appended to the voice
-    S_msrFullBarRests fVoicePendingFullBarRests;
+    S_msrMultipleFullBarRests fVoicePendingMultipleFullBarRests;
 
-    // fVoiceFullBarRestsWaitingForItsNextMeasureNumber is either null
-    // or the last msrFullBarRests created and appended to the voice,
+    // fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber is either null
+    // or the last msrMultipleFullBarRests created and appended to the voice,
     // but with its next measure number not yet set
-    S_msrFullBarRests fVoiceFullBarRestsWaitingForItsNextMeasureNumber;
-    int                   fVoiceRemainingFullBarRests;
+    S_msrMultipleFullBarRests fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber;
+    int                   fVoiceRemainingMultipleFullBarRests;
 
-    Bool                  fVoiceContainsFullBarRests;
+    Bool                  fVoiceContainsMultipleFullBarRests;
 
     // measure repeats
 

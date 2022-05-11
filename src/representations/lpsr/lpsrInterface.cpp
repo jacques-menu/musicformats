@@ -56,7 +56,7 @@ void displayLpsr (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): displaying the LPSR as text" <<
+    "Pass (optional): display the LPSR as text" <<
     endl <<
     separator <<
     endl << endl <<
@@ -96,7 +96,7 @@ void displayLpsrScoreShort (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): displaying the LPSR as text, short version" <<
+    "Pass (optional): display the LPSR as text, short version" <<
     endl <<
     separator <<
     endl << endl;
@@ -139,7 +139,7 @@ void displayLpsrScoreFull (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): displaying the LPSR as text, full version" <<
+    "Pass (optional): display the LPSR as text, full version" <<
     endl <<
     separator <<
     endl << endl;

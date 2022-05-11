@@ -256,8 +256,8 @@ class EXP msr2lpsrTranslator :
   public visitor<S_msrMeasureRepeatPattern>,
   public visitor<S_msrMeasureRepeatReplicas>,
 
-  public visitor<S_msrFullBarRests>,
-  public visitor<S_msrFullBarRestsContents>,
+  public visitor<S_msrMultipleFullBarRests>,
+//   public visitor<S_msrMultipleFullBarRestsContents>,
 
   // midi
 
@@ -502,11 +502,11 @@ class EXP msr2lpsrTranslator :
     virtual void visitStart (S_msrMeasureRepeatReplicas& elt);
     virtual void visitEnd   (S_msrMeasureRepeatReplicas& elt);
 
-    // full-bar rests
-    virtual void visitStart (S_msrFullBarRests& elt);
-    virtual void visitEnd   (S_msrFullBarRests& elt);
-    virtual void visitStart (S_msrFullBarRestsContents& elt);
-    virtual void visitEnd   (S_msrFullBarRestsContents& elt);
+    // multiple full-bar rests
+    virtual void visitStart (S_msrMultipleFullBarRests& elt);
+    virtual void visitEnd   (S_msrMultipleFullBarRests& elt);
+//     virtual void visitStart (S_msrMultipleFullBarRestsContents& elt);
+//     virtual void visitEnd   (S_msrMultipleFullBarRestsContents& elt);
 
     // scaling
     virtual void visitStart (S_msrScaling& elt);
@@ -669,9 +669,11 @@ class EXP msr2lpsrTranslator :
     // ------------------------------------------------------
     S_msrMeasure              fCurrentMeasureClone;
 
-    // full-bar rests compression
-    S_msrMeasure              fCurrentRestMeasure;
-    S_msrFullBarRests         fCurrentFullBarRests;
+    // multiple full-bar rests compression
+//     S_msrMeasure              fCurrentRestMeasure;
+
+    S_msrMultipleFullBarRests fCurrentMultipleFullBarRests;
+    Bool                      fOnGoingMultipleFullBarRests;
 
     // bar checks
     // ------------------------------------------------------

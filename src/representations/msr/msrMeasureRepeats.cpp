@@ -822,7 +822,7 @@ msrMeasureRepeat::msrMeasureRepeat (
   int        measureRepeatMeasuresNumber,
   int        measureRepeatSlashesNumber,
   S_msrVoice voiceUpLink)
-    : msrVoiceElement (inputLineNumber)
+    : msrSegmentElement (inputLineNumber)
 {
   // sanity check
   mfAssert (

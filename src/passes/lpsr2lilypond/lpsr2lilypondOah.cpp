@@ -3390,7 +3390,8 @@ R"()",
     appendAtomToSubGroup (
       lilypondAbsoluteOctaveEntryAtom::create (
         "absolute", "abs",
-R"(Use absolute octave entry in the generated LilyPond code.)",
+R"(Use absolute octave entry in the generated LilyPond code.
+This is the default.)",
         "fOctaveEntryVariable",
         fOctaveEntryVariable));
 
@@ -3516,7 +3517,7 @@ The default is 'DEFAULT_VALUE'.)",
         "fAccidentalStyleKind",
         fAccidentalStyleKind));
 
-  // full-bar rests
+  // multiple full-bar rests
   // --------------------------------------
 
   subGroup->
@@ -3537,26 +3538,26 @@ This causes a \compressEmptyMeasures command to be generated.)",
         "merge-staff-common-rests-in-lilypond", "mscril",
 R"(Merge common rests in LilyPond staves to obtain better looking scores.
 Limitations: this only handles two voices
-and does not handle full-bar rests.)",
+and does not handle multiple full-bar rests.)",
         "fMergeStaffCommonRests",
         fMergeStaffCommonRests));
 
-  // full-bar rests
+  // multiple full-bar rests
   // --------------------------------------
 
-  fFullBarRestsExpandLimitAtom =
+  fMultipleFullBarRestsExpandLimitAtom =
       oahIntegerAtom::create (
-        "full-bar-rests-expand-limit", "fbrel",
+        "multiple full-bar-rests-expand-limit", "fbrel",
 R"(Set the maximum number of measures expanded in church rests to N,
 where N is a positive integer.
 The default value is 10.)",
         "N",
-        "fFullBarRestsExpandLimit",
-        fFullBarRestsExpandLimit);
+        "fMultipleFullBarRestsExpandLimit",
+        fMultipleFullBarRestsExpandLimit);
 
   subGroup->
     appendAtomToSubGroup (
-      fFullBarRestsExpandLimitAtom);
+      fMultipleFullBarRestsExpandLimitAtom);
 
   // input line numbers
   // --------------------------------------
@@ -5234,8 +5235,8 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
       fMergeStaffCommonRests <<
       endl <<
 
-    setw (valueFieldWidth) << "fFullBarRestsExpandLimit" << " : " <<
-      fFullBarRestsExpandLimit <<
+    setw (valueFieldWidth) << "fMultipleFullBarRestsExpandLimit" << " : " <<
+      fMultipleFullBarRestsExpandLimit <<
       endl <<
 
     setw (valueFieldWidth) << "fInputLineNumbers" << " : " <<
@@ -5861,8 +5862,8 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
       fMergeStaffCommonRests <<
       endl <<
 
-    setw (fieldWidth) << "fFullBarRestsExpandLimit" << " : " <<
-      fFullBarRestsExpandLimit <<
+    setw (fieldWidth) << "fMultipleFullBarRestsExpandLimit" << " : " <<
+      fMultipleFullBarRestsExpandLimit <<
       endl <<
 
     setw (fieldWidth) << "fInputLineNumbers" << " : " <<

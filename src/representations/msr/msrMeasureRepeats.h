@@ -4,7 +4,7 @@
 #include "msrElements.h"
 #include "msrSegments.h"
 #include "msrVoices.h"
-#include "msrVoiceElements.h"
+#include "msrSegmentElements.h"
 
 
 namespace MusicFormats
@@ -70,6 +70,9 @@ class EXP msrMeasureRepeatPattern : public msrElement
 
     // public services
     // ------------------------------------------------------
+
+    void                  appendSegmentElement (
+                            S_msrSegmentElement elem) override;
 
     int                   fetchMeasuresNumber () const;
 
@@ -199,7 +202,7 @@ typedef SMARTP<msrMeasureRepeatReplicas> S_msrMeasureRepeatReplicas;
 EXP ostream& operator<< (ostream& os, const S_msrMeasureRepeatReplicas& elt);
 
 //______________________________________________________________________________
-class EXP msrMeasureRepeat : public msrVoiceElement
+class EXP msrMeasureRepeat : public msrSegmentElement
 {
   public:
 
@@ -423,7 +426,7 @@ class EXP msrMeasureRepeatElement : public msrElement
                             const string&               context);
 
 
-    void                  appendFullBarRestsToMeasureRepeatElementsList (
+    void                  appendMultipleFullBarRestsToMeasureRepeatElementsList (
                             int                         inputLineNumber,
                             S_msrMeasureRepeat measureRepeat,
                             const string&                      context);

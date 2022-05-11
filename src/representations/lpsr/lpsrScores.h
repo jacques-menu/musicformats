@@ -276,13 +276,13 @@ class EXP lpsrScore : public lpsrElement
                                   fTextSpannerWithCenteredTextIsNeeded;
                               }
 
-    // full-bar rests
-    void                  setMergeFullBarRestsIsNeeded ();
+    // multiple full-bar rests
+    void                  setMergeMultipleFullBarRestsIsNeeded ();
 
-    Bool                  getMergeFullBarRestsIsNeeded () const
+    Bool                  getMergeMultipleFullBarRestsIsNeeded () const
                               {
                                 return
-                                  fMergeFullBarRestsIsNeeded;
+                                  fMergeMultipleFullBarRestsIsNeeded;
                               }
 
   public:
@@ -376,9 +376,9 @@ class EXP lpsrScore : public lpsrElement
 
     void                  addTextSpannerWithCenteredTextToScore ();
 
-    // full-bar rests
+    // multiple full-bar rests
 
-    void                  addMergeFullBarRestsToScore ();
+    void                  addMergeMultipleFullBarRestsToScore ();
 
   public:
 
@@ -489,8 +489,8 @@ class EXP lpsrScore : public lpsrElement
     // spanners with centered text
     Bool                  fTextSpannerWithCenteredTextIsNeeded;
 
-    // full-bar rests
-    Bool                  fMergeFullBarRestsIsNeeded;
+    // multiple full-bar rests
+    Bool                  fMergeMultipleFullBarRestsIsNeeded;
 
   private:
 

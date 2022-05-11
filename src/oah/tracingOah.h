@@ -361,16 +361,16 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  getTraceMeasureRepeatsDetails () const
                               { return fTraceMeasureRepeatsDetails; }
 
-    // full-bar rests
-    void                  setTraceFullBarRests ()
-                              { fTraceFullBarRests = true; }
-    Bool                  getTraceFullBarRests () const
-                              { return fTraceFullBarRests; }
+    // multiple full-bar rests
+    void                  setTraceMultipleFullBarRests ()
+                              { fTraceMultipleFullBarRests = true; }
+    Bool                  getTraceMultipleFullBarRests () const
+                              { return fTraceMultipleFullBarRests; }
 
-    void                  setTraceFullBarRestsDetails ()
-                              { fTraceFullBarRestsDetails = true; }
-    Bool                  getTraceFullBarRestsDetails () const
-                              { return fTraceFullBarRestsDetails; }
+    void                  setTraceMultipleFullBarRestsDetails ()
+                              { fTraceMultipleFullBarRestsDetails = true; }
+    Bool                  getTraceMultipleFullBarRestsDetails () const
+                              { return fTraceMultipleFullBarRestsDetails; }
     // beats repeats
     void                  setTraceBeatRepeats ()
                               { fTraceBeatRepeats = true; }
@@ -893,9 +893,9 @@ class EXP tracingOahGroup : public oahGroup
     // measure repeats
     Bool                  fTraceMeasureRepeats;
     Bool                  fTraceMeasureRepeatsDetails;
-    // full-bar rests
-    Bool                  fTraceFullBarRests;
-    Bool                  fTraceFullBarRestsDetails;
+    // multiple full-bar rests
+    Bool                  fTraceMultipleFullBarRests;
+    Bool                  fTraceMultipleFullBarRestsDetails;
     // beats repeats
     Bool                  fTraceBeatRepeats;
     // slashes

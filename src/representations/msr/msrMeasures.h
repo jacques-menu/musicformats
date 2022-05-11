@@ -17,7 +17,8 @@
 #include "msrNotes.h"
 #include "msrRehearsalMarks.h"
 #include "msrScores.h"
-#include "msrSegments.h"
+#include "msrSegmentElements.h"
+// #include "msrSegments.h"
 #include "msrVoiceStaffChanges.h"
 #include "msrStaves.h"
 #include "msrTempos.h"
@@ -34,7 +35,7 @@ class msrMeasure;
 typedef SMARTP<msrMeasure> S_msrMeasure;
 
 //______________________________________________________________________________
-class EXP msrMeasure : public msrElement
+class EXP msrMeasure : public msrSegmentElement
 {
   public:
 
@@ -724,7 +725,7 @@ class EXP msrMeasure : public msrElement
     msrMeasureFirstInSegmentKind
                           fMeasureFirstInSegmentKind;
 
-    // full-bar rest?
+    // multiple full-bar rest?
 
     Bool                  fMeasureIsAFullBarRest;
 
