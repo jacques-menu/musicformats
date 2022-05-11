@@ -45,7 +45,8 @@ alias skr="cd ${SCRIPTS_DIR}"
 
 BUILD_DIR=${MUSIC_FORMATS_DEV}/build
 alias build="cd ${BUILD_DIR}"
-alias rmbuild="build ; rm -r bin lib libdir; ls -sal"
+
+alias rmbuild='cd ${MUSIC_FORMATS_DEV}/build ; rm -r bin lib libdir; ls -sal'
 
 FILES_DIR=${MUSIC_FORMATS_DEV}/files
 DOC_DIR=${MUSIC_FORMATS_DEV}/documentation
@@ -468,6 +469,7 @@ alias cgic='checkGIndenterCrement'
 # xml2ly
 #----------------------------------------------
 
+alias xlv='xml2ly -version'
 alias xlq='xml2ly -query'
 alias xlf='xml2ly -find'
 
@@ -764,6 +766,7 @@ function addAll ()
 
   addSrc
   addBuild
+  addScripts
   addDistrib
   addDoc
 
@@ -802,6 +805,8 @@ function addBuild ()
 
 function addScripts ()
 {
+  cp -p ${HOME}/local/BashDefinitionsForMusicFormats.bash ${SCRIPTS_DIR}
+
   git add    ${SCRIPTS_DIR}
 }
 
