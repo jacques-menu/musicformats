@@ -10,7 +10,7 @@
 #include "msrMeasuresSlices.h"
 #include "msrParts.h"
 #include "msrPartGroups.h"
-#include "msrFullBarRests.h"
+#include "msrMultipleFullBarRests.h"
 #include "msrRehearsalMarks.h"
 #include "msrRepeats.h"
 #include "msrScores.h"
@@ -290,11 +290,11 @@ class EXP msrStaff : public msrElement
     void                  appendPendingMeasureRepeatToStaff (
                             int inputLineNumber);
 
-    void                  createFullBarRestsInStaff ( // JMI UNUSED
+    void                  createMultipleFullBarRestsInStaff ( // JMI UNUSED
                             int inputLineNumber,
-                            int fullBarRestsNumber);
+                            int multipleFullBarRestsNumber);
 
-    void                  appendPendingFullBarRestsToStaff (
+    void                  appendPendingMultipleFullBarRestsToStaff (
                             int inputLineNumber);
 
     void                  replicateLastAppendedMeasureInStaff (
@@ -304,11 +304,11 @@ class EXP msrStaff : public msrElement
     void                  addEmptyMeasuresToStaff (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
-                            int           fullBarRestsNumber);
+                            int           multipleFullBarRestsNumber);
 
-    void                  appendFullBarRestsCloneToStaff (
+    void                  appendMultipleFullBarRestsCloneToStaff (
                             int               inputLineNumber,
-                            S_msrFullBarRests fullBarRests);
+                            S_msrMultipleFullBarRests multipleFullBarRests);
 
     void                  createBeatRepeatFromItsFirstMeasuresInStaff (
                             int inputLineNumber,
@@ -436,9 +436,9 @@ class EXP msrStaff : public msrElement
     vector<list<S_msrMeasure> >
                           fStaffMeasuresFlatListsVector;
 
-    // full-bar rests
+    // multiple full-bar rests
 
-    Bool                  fStaffContainsFullBarRests;
+    Bool                  fStaffContainsMultipleFullBarRests;
 
     // measures slices sequence
 

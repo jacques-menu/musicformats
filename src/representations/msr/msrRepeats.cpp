@@ -163,19 +163,19 @@ void msrRepeatCommonPart::appendMeasureRepeatToRepeatCommonPart (
     measureRepeat != nullptr,
     "measureRepeat is null");
 
-  fRepeatCommonPartElementsList.push_back (measureRepeat);
+// KAKA  fRepeatCommonPartElementsList.push_back (measureRepeat);
 }
 
-void msrRepeatCommonPart::appendFullBarRestsToRepeatCommonPart (
+void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
   int                   inputLineNumber,
-  S_msrFullBarRests fullBarRests,
+  S_msrMultipleFullBarRests multipleFullBarRests,
   const string&         context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
+  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
-      "Appending full-bar rests '" <<
-      fullBarRests->asString () <<
+      "Appending multiple full-bar rests '" <<
+      multipleFullBarRests->asString () <<
       "' to repeat common part '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
@@ -186,10 +186,10 @@ void msrRepeatCommonPart::appendFullBarRestsToRepeatCommonPart (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fullBarRests != nullptr,
-    "fullBarRests is null");
+    multipleFullBarRests != nullptr,
+    "multipleFullBarRests is null");
 
-  fRepeatCommonPartElementsList.push_back (fullBarRests);
+//  KAKA fRepeatCommonPartElementsList.push_back (multipleFullBarRests);
 }
 
 void msrRepeatCommonPart::appendVoiceElementToRepeatCommonPart (
@@ -609,19 +609,19 @@ void msrRepeatEnding::appendMeasureRepeatToRepeatEnding (
     measureRepeat != nullptr,
     "measureRepeat is null");
 
-  fRepeatEndingElementsList.push_back (measureRepeat);
+// KAKA  fRepeatEndingElementsList.push_back (measureRepeat);
 }
 
-void msrRepeatEnding::appendFullBarRestsToRepeatEnding (
+void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
   int                   inputLineNumber,
-  S_msrFullBarRests fullBarRests,
+  S_msrMultipleFullBarRests multipleFullBarRests,
   const string&         context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
-      "Appending full-bar rests '" <<
-      fullBarRests->asShortString () <<
+      "Appending multiple full-bar rests '" <<
+      multipleFullBarRests->asShortString () <<
       "' to repeat ending '" << asString () <<
       "' (" << context << ")" <<
       ", line " << inputLineNumber <<
@@ -632,10 +632,10 @@ void msrRepeatEnding::appendFullBarRestsToRepeatEnding (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fullBarRests != nullptr,
-    "fullBarRests is null");
+    multipleFullBarRests != nullptr,
+    "multipleFullBarRests is null");
 
-  fRepeatEndingElementsList.push_back (fullBarRests);
+//  KAKA fRepeatEndingElementsList.push_back (multipleFullBarRests);
 }
 
 void msrRepeatEnding::appendVoiceElementToRepeatEnding (
@@ -1108,9 +1108,9 @@ void msrRepeat::addRepeatEndingToRepeat (
             stringstream s;
 
             s <<
-              "cannot add hookless repeat ending '" <<
+              "cannot add hookless repeat ending " <<
               repeatEnding->asShortString () <<
-              "' right after the repeat has been created";
+              " right after the repeat has been created";
 
             msrInternalError (
               gGlobalServiceRunData->getInputSourceName (),
@@ -1124,14 +1124,15 @@ void msrRepeat::addRepeatEndingToRepeat (
             stringstream s;
 
             s <<
-              "cannot add hookless repeat ending '" <<
+              "cannot add hookless repeat ending " <<
               repeatEnding->asShortString () <<
-              "' right after the repeat common part";
+              " right after the repeat common part";
 
-            msrInternalError (
+//             msrInternalError ( JMI v0.9.63
+            msrInternalWarning (
               gGlobalServiceRunData->getInputSourceName (),
               fInputLineNumber,
-              __FILE__, __LINE__,
+//               __FILE__, __LINE__,
               s.str ());
           }
           break;
@@ -1425,16 +1426,16 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 #endif
 }
 
-void msrRepeat::appendFullBarRestsToRepeat (
+void msrRepeat::appendMultipleFullBarRestsToRepeat (
   int                   inputLineNumber,
-  S_msrFullBarRests fullBarRests,
+  S_msrMultipleFullBarRests multipleFullBarRests,
   const string&         context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
-      "Appending full-bar rests '" <<
-      fullBarRests->asString () <<
+      "Appending multiple full-bar rests '" <<
+      multipleFullBarRests->asString () <<
       "' to repeat '" <<
       asShortString () <<
       "'" <<
@@ -1442,7 +1443,7 @@ void msrRepeat::appendFullBarRestsToRepeat (
 
     displayRepeat (
       inputLineNumber,
-      "appendFullBarRestsToRepeat() 1");
+      "appendMultipleFullBarRestsToRepeat() 1");
   }
 #endif
 
@@ -1452,8 +1453,8 @@ void msrRepeat::appendFullBarRestsToRepeat (
         stringstream s;
 
         s <<
-          "full-bar rests '" <<
-          fullBarRests->asShortString () <<
+          "multiple full-bar rests '" <<
+          multipleFullBarRests->asShortString () <<
           "'cannot be added to a just created repeat" <<
           " (" << context << ")";
 
@@ -1467,17 +1468,17 @@ void msrRepeat::appendFullBarRestsToRepeat (
 
     case msrRepeat::kRepeatBuildPhaseInCommonPart:
       fRepeatCommonPart->
-        appendFullBarRestsToRepeatCommonPart (
+        appendMultipleFullBarRestsToRepeatCommonPart (
           inputLineNumber,
-          fullBarRests,
+          multipleFullBarRests,
           context);
       break;
 
     case msrRepeat::kRepeatBuildPhaseInEndings:
       fRepeatEndings.back ()->
-        appendFullBarRestsToRepeatEnding (
+        appendMultipleFullBarRestsToRepeatEnding (
           inputLineNumber,
-          fullBarRests,
+          multipleFullBarRests,
           context);
       break;
 
@@ -1486,8 +1487,8 @@ void msrRepeat::appendFullBarRestsToRepeat (
         stringstream s;
 
         s <<
-          "full-bar rests '" <<
-          fullBarRests->asShortString () <<
+          "multiple full-bar rests '" <<
+          multipleFullBarRests->asShortString () <<
           "'cannot be added to a completed repeat" <<
           '(' << context << ")";
 
@@ -1504,7 +1505,7 @@ void msrRepeat::appendFullBarRestsToRepeat (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     displayRepeat (
       inputLineNumber,
-      "appendFullBarRestsToRepeat() 2");
+      "appendMultipleFullBarRestsToRepeat() 2");
   }
 #endif
 }

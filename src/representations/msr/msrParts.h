@@ -7,7 +7,7 @@
 #include "msrPartGroups.h"
 #include "msrPartGroupElements.h"
 #include "msrRepeats.h"
-#include "msrFullBarRests.h"
+#include "msrMultipleFullBarRests.h"
 #include "msrRehearsalMarks.h"
 #include "msrSegnos.h"
 #include "msrStaves.h"
@@ -384,13 +384,13 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendRepeatEndingCloneToPart (
                             S_msrRepeatEnding repeatEndingCLone);
 
-    // full-bar rests
+    // multiple full-bar rests
 
-    void                  createFullBarRestsInPart (
+    void                  createMultipleFullBarRestsInPart (
                             int inputLineNumber,
-                            int fullBarRestsNumber);
+                            int multipleFullBarRestsNumber);
 
-    void                  appendPendingFullBarRestsToPart (
+    void                  appendPendingMultipleFullBarRestsToPart (
                             int inputLineNumber);
 
     void                  replicateLastAppendedMeasureInPart (
@@ -400,11 +400,11 @@ class EXP msrPart : public msrPartGroupElement
     void                  addEmptyMeasuresToPart (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
-                            int           fullBarRestsNumber);
+                            int           multipleFullBarRestsNumber);
 
-    void                  appendFullBarRestsCloneToPart (
+    void                  appendMultipleFullBarRestsCloneToPart (
                             int               inputLineNumber,
-                            S_msrFullBarRests fullBarRests);
+                            S_msrMultipleFullBarRests multipleFullBarRests);
 
     // measure repeats
 
@@ -418,7 +418,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  appendMeasureRepeatCloneToPart (
                             int               inputLineNumber,
-                            S_msrFullBarRests fullBarRests);
+                            S_msrMultipleFullBarRests multipleFullBarRests);
 
     // staves
 
@@ -629,9 +629,9 @@ class EXP msrPart : public msrPartGroupElement
 
     static int            gPartsCounter;
 
-    // full-bar rests
+    // multiple full-bar rests
 
-    Bool                  fPartContainsFullBarRests;
+    Bool                  fPartContainsMultipleFullBarRests;
 
     // measures slices sequence
 

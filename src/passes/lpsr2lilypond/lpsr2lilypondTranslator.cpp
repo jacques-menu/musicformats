@@ -177,7 +177,7 @@ if (false) // JMI
 // if (false) // JMI CAFE
 //   fVisitedLpsrScore->
 //     getMsrScore ()->
-//       setInhibitFullBarRestsBrowsing ();
+//       setInhibitMultipleFullBarRestsBrowsing ();
 
   // octaves entry
   // ------------------------------------------------------
@@ -239,8 +239,8 @@ if (false) // JMI
   // figured bass
   fCurrentFiguredBassFiguresCounter = 0;
 
-  // full-bar rests
-  fRemainingFullBarRestsNumber = 0;
+  // multiple full-bar rests
+  fRemainingMultipleFullBarRestsNumber = 0;
 
   // measures
   fCurrentVoiceMeasuresCounter = -1;
@@ -10910,8 +10910,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrPart& elt)
   // remember current part
   fCurrentPart = elt;
 
-  fRemainingFullBarRestsNumber = 0; // JMI
-  fOnGoingFullBarRests = false; // JMI
+  fRemainingMultipleFullBarRestsNumber = 0; // JMI
+  fOnGoingMultipleFullBarRests = false; // JMI
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrPart& elt)
@@ -11333,7 +11333,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
       endl << endl;
   }
 
-  // compress full-bar rests?
+  // compress multiple full-bar rests?
   if (gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()) {
     fLilypondCodeStream <<
       "\\compressEmptyMeasures" << " %{ BB %}" <<
@@ -11346,7 +11346,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
 /* JMI
   if (
-    fCurrentVoice->getVoiceContainsFullBarRests ()
+    fCurrentVoice->getVoiceContainsMultipleFullBarRests ()
       ||
     gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
   ) {
@@ -11453,7 +11453,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
 
   /* JMI
   if (
-    fCurrentVoice->getVoiceContainsFullBarRests ()
+    fCurrentVoice->getVoiceContainsMultipleFullBarRests ()
       ||
     gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
   ) {
@@ -12107,8 +12107,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
           measureEndRegularKind) <<
         ", measurePuristNumber = '" <<
         measurePuristNumber <<
-        "', onGoingFullBarRests = '" <<
-        fOnGoingFullBarRests <<
+        "', onGoingMultipleFullBarRests = '" <<
+        fOnGoingMultipleFullBarRests <<
         ", line " << inputLineNumber <<
         endl;
 
@@ -12230,8 +12230,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         measureEndRegularKind) <<
       ", measurePuristNumber = '" <<
       measurePuristNumber <<
-      "', onGoingFullBarRests = '" <<
-      fOnGoingFullBarRests <<
+      "', onGoingMultipleFullBarRests = '" <<
+      fOnGoingMultipleFullBarRests <<
       "', line " << inputLineNumber << " ===-->" <<
       endl;
   }
@@ -12631,8 +12631,8 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
           measureEndRegularKind) <<
         ", measurePuristNumber = '" <<
         measurePuristNumber <<
-        "', onGoingFullBarRests = '" <<
-        fOnGoingFullBarRests <<
+        "', onGoingMultipleFullBarRests = '" <<
+        fOnGoingMultipleFullBarRests <<
         ", line " << inputLineNumber <<
         endl;
 
@@ -12656,14 +12656,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       msrMeasure::measureEndRegularKindAsString (
         measureEndRegularKind) <<
      "' end, measurePuristNumber = '" << measurePuristNumber << "'" <<
-      ", onGoingFullBarRests = '" <<
-      fOnGoingFullBarRests <<
+      ", onGoingMultipleFullBarRests = '" <<
+      fOnGoingMultipleFullBarRests <<
       "', line " << inputLineNumber << " ===-->" <<
       endl;
   }
 #endif
 
-  if (! fOnGoingFullBarRests) {
+  if (! fOnGoingMultipleFullBarRests) {
     // handle the measure
     switch (measureKind) {
       case msrMeasureKind::kMeasureKindUnknown: // should not occur
@@ -15405,7 +15405,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFermata& elt)
 #endif
 
 /*
-Articulations can be attached to rests as well as notes but they cannot be attached to full-bar rests. A special predefined command, \fermataMarkup, is available for at- taching a fermata to a full-bar rest (and only a full-bar rest). This creates a MultiMeasureRestText object.
+Articulations can be attached to rests as well as notes but they cannot be attached to multiple full-bar rests. A special predefined command, \fermataMarkup, is available for at- taching a fermata to a multiple full-bar rest (and only a multiple full-bar rest). This creates a MultiMeasureRestText object.
 */
 
 /* JMI
@@ -17736,8 +17736,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         fOnGoingGraceNotesGroup <<
         ", fOnGoingChordGraceNotesGroupLink: " <<
         fOnGoingChordGraceNotesGroupLink <<
-        ", fOnGoingFullBarRests: " <<
-        fOnGoingFullBarRests <<
+        ", fOnGoingMultipleFullBarRests: " <<
+        fOnGoingMultipleFullBarRests <<
         ", line " << inputLineNumber <<
         endl;
 
@@ -17853,24 +17853,24 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
     }
   }
 
-  if (fOnGoingFullBarRests) {
+  if (fOnGoingMultipleFullBarRests) {
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
-        // don't handle full-bar rests, that's done in visitEnd (S_msrFullBarRests&)
+        // don't handle multiple full-bar rests, that's done in visitEnd (S_msrMultipleFullBarRests&)
           /*
           if (elt->getNoteOccupiesAFullMeasure ()) {
-            Bool inhibitFullBarRestsBrowsing =
+            Bool inhibitMultipleFullBarRestsBrowsing =
               fVisitedLpsrScore->
                 getMsrScore ()->
-                  getInhibitFullBarRestsBrowsing ();
+                  getInhibitMultipleFullBarRestsBrowsing ();
 
-            if (inhibitFullBarRestsBrowsing) {
+            if (inhibitMultipleFullBarRestsBrowsing) {
               if (
                 gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
                   ||
-                gGlobalTracingOahGroup->getTraceFullBarRests ()) {
+                gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
                 gLogStream <<
-                  "% ==> visiting full-bar rests is ignored" <<
+                  "% ==> visiting multiple full-bar rests is ignored" <<
                   endl;
               }
 
@@ -17891,7 +17891,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
               ||
-            gGlobalTracingOahGroup->getTraceFullBarRests ()
+            gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
           ) {
             gLogStream <<
               "% ==> start visiting rest notes is ignored upon note " <<
@@ -17995,8 +17995,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       fOnGoingGraceNotesGroup <<
       ", fOnGoingChordGraceNotesGroupLink: " <<
       fOnGoingChordGraceNotesGroupLink <<
-      ", fOnGoingFullBarRests: " <<
-      fOnGoingFullBarRests <<
+      ", fOnGoingMultipleFullBarRests: " <<
+      fOnGoingMultipleFullBarRests <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -18860,25 +18860,25 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
     noteIsToBeIgnored = true;
   }
 
-  if (fOnGoingFullBarRests) {
+  if (fOnGoingMultipleFullBarRests) {
     switch (elt->getNoteKind ()) {
       case msrNoteKind::kNoteRestInMeasure:
-        // don't handle full-bar restss, that's done in visitEnd (S_msrFullBarRests&)
+        // don't handle multiple full-bar restss, that's done in visitEnd (S_msrMultipleFullBarRests&)
           if (elt->getNoteOccupiesAFullMeasure ()) {
-            Bool inhibitFullBarRestsBrowsing =
+            Bool inhibitMultipleFullBarRestsBrowsing =
               fVisitedLpsrScore->
                 getMsrScore ()->
-                  getInhibitFullBarRestsBrowsing ();
+                  getInhibitMultipleFullBarRestsBrowsing ();
 
-            if (inhibitFullBarRestsBrowsing) {
+            if (inhibitMultipleFullBarRestsBrowsing) {
 #ifdef TRACING_IS_ENABLED
               if (
                 gGlobalTracingOahGroup->getTraceNotes ()
                   ||
-                gGlobalTracingOahGroup->getTraceFullBarRests ()
+                gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()
               ) {
                 gLogStream <<
-                  "% ==> end visiting full-bar rests is ignored" <<
+                  "% ==> end visiting multiple full-bar rests is ignored" <<
                   endl;
               }
 #endif
@@ -22173,12 +22173,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
     elt->getNextBarPuristNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
+  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     fLilypondCodeStream <<
       "% nextBarPuristNumber: " <<
       nextBarPuristNumber <<
-      ", fOnGoingFullBarRests: " <<
-      fOnGoingFullBarRests <<
+      ", fOnGoingMultipleFullBarRests: " <<
+      fOnGoingMultipleFullBarRests <<
       "fOnGoingVoiceCadenza: " <<
       fOnGoingVoiceCadenza <<
       ", nextBarPuristNumber: " <<
@@ -22195,7 +22195,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarCheck& elt)
             // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
             // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
           ||
-        fOnGoingFullBarRests
+        fOnGoingMultipleFullBarRests
       )
   ) {
     // don't generate a bar check before the end of measure 1 // JMI ???
@@ -22291,10 +22291,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
   }
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFullBarRests ()) {
+  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     fLilypondCodeStream <<
-      "%, fOnGoingFullBarRests: " <<
-      fOnGoingFullBarRests <<
+      "%, fOnGoingMultipleFullBarRests: " <<
+      fOnGoingMultipleFullBarRests <<
       "% fOnGoingVoiceCadenza: " <<
       fOnGoingVoiceCadenza <<
       ", line " << inputLineNumber <<
@@ -22309,7 +22309,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarNumberCheck& elt)
             // should be tested in msr2lpsrTranslator.cpp JMI visitEnd (S_msrMeasure&)
            // MusicXML bar numbers cannot be relied upon for a LilyPond bar number check
           ||
-        fOnGoingFullBarRests
+        fOnGoingMultipleFullBarRests
       )
   ) {
     int nextBarPuristNumber =
@@ -23409,7 +23409,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasureRepeatReplicas& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::visitStart (S_msrFullBarRests& elt)
+void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRests& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -23425,7 +23425,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullBarRests& elt)
       stringstream s;
 
       s <<
-        "% --> Start visiting msrFullBarRests" <<
+        "% --> Start visiting msrMultipleFullBarRests" <<
         ", line " << elt->getInputLineNumber () <<
         endl;
 
@@ -23443,45 +23443,45 @@ void lpsr2lilypondTranslator::visitStart (S_msrFullBarRests& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-  int fullBarRestsNumber =
-    elt->getFullBarRestsNumber ();
+  int multipleFullBarRestsNumber =
+    elt->getMultipleFullBarRestsNumber ();
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
     fLilypondCodeStream << left <<
       setw (commentFieldWidth) <<
-      "% start of full-bar rests" <<
+      "% start of multiple full-bar rests" <<
       mfSingularOrPlural (
-        fullBarRestsNumber,
+        multipleFullBarRestsNumber,
         "measure",
         "measures") <<
       ", line " << inputLineNumber <<
       endl << endl;
 
-    ++gIndenter; // decremented in visitEnd (S_msrFullBarRests&)
+    ++gIndenter; // decremented in visitEnd (S_msrMultipleFullBarRests&)
   }
 
   if (
     gGlobalLpsr2lilypondOahGroup->
-      getFullBarRestsExpandLimitAtom ()->getSetByAnOption ()
+      getMultipleFullBarRestsExpandLimitAtom ()->getSetByAnOption ()
   ) {
     fLilypondCodeStream <<
       "\\override MultiMeasureRest.expand-limit = " <<
-      gGlobalLpsr2lilypondOahGroup->getFullBarRestsExpandLimit () <<
+      gGlobalLpsr2lilypondOahGroup->getMultipleFullBarRestsExpandLimit () <<
       endl;
   }
 
   fLilypondCodeStream <<
-    "\\mergeFullBarRests {" <<
+    "\\mergeMultipleFullBarRests {" <<
     endl;
   ++gIndenter;
   fLilypondCodeStream <<
     "\\compressEmptyMeasures %{ CC %}" <<
     endl;
 
-  fOnGoingFullBarRests = true;
+  fOnGoingMultipleFullBarRests = true;
 }
 
-void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
+void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -23497,7 +23497,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
       stringstream s;
 
       s <<
-        "% --> End visiting msrFullBarRests" <<
+        "% --> End visiting msrMultipleFullBarRests" <<
         ", line " << elt->getInputLineNumber () <<
         endl;
 
@@ -23515,23 +23515,23 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-  int fullBarRestsNumber =
-    elt->getFullBarRestsNumber ();
+  int multipleFullBarRestsNumber =
+    elt->getMultipleFullBarRestsNumber ();
 
   // start counting measures
-  fRemainingFullBarRestsNumber =
-    elt->getFullBarRestsNumber ();
+  fRemainingMultipleFullBarRestsNumber =
+    elt->getMultipleFullBarRestsNumber ();
 
-//   // get full-bar rests sounding notes JMI USELESS v0.9.63
+//   // get multiple full-bar rests sounding notes JMI USELESS v0.9.63
 //   rational
-//     fullBarRestsMeasureSoundingNotes =
-//       elt->getFullBarRestsMeasureSoundingNotes ();
+//     multipleFullBarRestsMeasureSoundingNotes =
+//       elt->getMultipleFullBarRestsMeasureSoundingNotes ();
 
 // JMI v0.9.63
-  // generate full-bar rests compression if relevant
+  // generate multiple full-bar rests compression if relevant
   // right before Ri*n, because if affects only the next music element
 //   if (
-//     fCurrentVoice->getVoiceContainsFullBarRests ()
+//     fCurrentVoice->getVoiceContainsMultipleFullBarRests ()
 //       ||
 //     gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
 //   ) {
@@ -23540,18 +23540,18 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
 //       endl;
 //   }
 
-  // generate full-bar rests only now, in case there are
+  // generate multiple full-bar rests only now, in case there are
   // clef, keys or times before them in the first measure
 //   fLilypondCodeStream <<
 //     "R" <<
-//     fullBarRestsWholeNoteAsLilypondString (
+//     multipleFullBarRestsWholeNoteAsLilypondString (
 //       inputLineNumber,
-//       fullBarRestsMeasureSoundingNotes);
+//       multipleFullBarRestsMeasureSoundingNotes);
 //
-//   if (fullBarRestsNumber > 1) {
+//   if (multipleFullBarRestsNumber > 1) {
 //     fLilypondCodeStream <<
 //       "*" <<
-//       fullBarRestsNumber;
+//       multipleFullBarRestsNumber;
 //   }
 
 //   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
@@ -23565,7 +23565,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
 //   if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
 //     // generate information and line number as a comment
 //     fLilypondCodeStream <<
-//       "%{ full-bar rest %}";
+//       "%{ multiple full-bar rest %}";
 //   }
 
   // wait until all measures have be visited
@@ -23574,7 +23574,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
   // now we can generate the bar check
   fLilypondCodeStream <<
     " | % " <<
-    elt->getFullBarRestsLastMeasurePuristMeasureNumber () + 1;
+    elt->getMultipleFullBarRestsLastMeasurePuristMeasureNumber () + 1;
 
 /* TO BE FINALIZED JMI
     if (gGlobalLpsr2lilypondOahGroup->getOriginalMeasureNumbers ()) {
@@ -23588,13 +23588,13 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
     endl;
 
   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    --gIndenter; // incremented in visitStart (S_msrFullBarRests&)
+    --gIndenter; // incremented in visitStart (S_msrMultipleFullBarRests&)
 
     fLilypondCodeStream << left <<
       setw (commentFieldWidth) <<
-      "% end of full-bar rests" <<
+      "% end of multiple full-bar rests" <<
       mfSingularOrPlural (
-        fullBarRestsNumber,
+        multipleFullBarRestsNumber,
         "measure",
         "measures") <<
       ", line " << inputLineNumber <<
@@ -23602,113 +23602,113 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRests& elt)
   }
 
   fLilypondCodeStream <<
-    "}" << // mergeFullBarRests
+    "}" << // mergeMultipleFullBarRests
     endl;
   --gIndenter;
 
-  fOnGoingFullBarRests = false;
+  fOnGoingMultipleFullBarRests = false;
 }
 
-void lpsr2lilypondTranslator::visitStart (S_msrFullBarRestsContents& elt)
-{
-#ifdef TRACING_IS_ENABLED
-  {
-    Bool
-      traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
-          getTraceLpsrVisitors (),
-      generateMsrVisitingInformation =
-        gGlobalLpsr2lilypondOahGroup->
-          getGenerateLpsrVisitingInformation ();
-
-    if (traceLpsrVisitors || generateMsrVisitingInformation) {
-      stringstream s;
-
-      s <<
-        "%--> Start visiting msrFullBarRestsContents" <<
-        endl;
-
-      if (traceLpsrVisitors) {
-        gLogStream << s.str ();
-      }
-
-      if (generateMsrVisitingInformation) {
-        fLilypondCodeStream << s.str ();
-      }
-    }
-  }
-#endif
-
-  int inputLineNumber =
-    elt->getInputLineNumber ();
-
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << left <<
-      setw (commentFieldWidth) <<
-      "% start of full-bar rests contents " <<
-      /* JMI
-      mfSingularOrPlural (
-        fullBarRestsNumber,
-        "measure",
-        "measures") <<
-        */
-      ", line " << inputLineNumber <<
-      endl << endl;
-
-    ++gIndenter; // decremented in visitEnd (S_msrFullBarRests&)
-  }
-}
-
-void lpsr2lilypondTranslator::visitEnd (S_msrFullBarRestsContents& elt)
-{
-#ifdef TRACING_IS_ENABLED
-  {
-    Bool
-      traceLpsrVisitors =
-        gGlobalLpsrOahGroup->
-          getTraceLpsrVisitors (),
-      generateMsrVisitingInformation =
-        gGlobalLpsr2lilypondOahGroup->
-          getGenerateLpsrVisitingInformation ();
-
-    if (traceLpsrVisitors || generateMsrVisitingInformation) {
-      stringstream s;
-
-      s <<
-        "%--> End visiting msrFullBarRestsContents" <<
-        endl;
-
-      if (traceLpsrVisitors) {
-        gLogStream << s.str ();
-      }
-
-      if (generateMsrVisitingInformation) {
-        fLilypondCodeStream << s.str ();
-      }
-    }
-  }
-#endif
-
-  int inputLineNumber =
-    elt->getInputLineNumber ();
-
-  if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-    fLilypondCodeStream << left <<
-      setw (commentFieldWidth) <<
-      "% end of full-bar rests contents " <<
-      /* JMI
-      mfSingularOrPlural (
-        fullBarRestsNumber,
-        "measure",
-        "measures") <<
-        */
-      ", line " << inputLineNumber <<
-      endl << endl;
-
-    --gIndenter; // incremented in visitStart (S_msrFullBarRests&)
-  }
-}
-
+// void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRestsContents& elt)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   {
+//     Bool
+//       traceLpsrVisitors =
+//         gGlobalLpsrOahGroup->
+//           getTraceLpsrVisitors (),
+//       generateMsrVisitingInformation =
+//         gGlobalLpsr2lilypondOahGroup->
+//           getGenerateLpsrVisitingInformation ();
+//
+//     if (traceLpsrVisitors || generateMsrVisitingInformation) {
+//       stringstream s;
+//
+//       s <<
+//         "%--> Start visiting msrMultipleFullBarRestsContents" <<
+//         endl;
+//
+//       if (traceLpsrVisitors) {
+//         gLogStream << s.str ();
+//       }
+//
+//       if (generateMsrVisitingInformation) {
+//         fLilypondCodeStream << s.str ();
+//       }
+//     }
+//   }
+// #endif
+//
+//   int inputLineNumber =
+//     elt->getInputLineNumber ();
+//
+//   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+//     fLilypondCodeStream << left <<
+//       setw (commentFieldWidth) <<
+//       "% start of multiple full-bar rests contents " <<
+//       /* JMI
+//       mfSingularOrPlural (
+//         multipleFullBarRestsNumber,
+//         "measure",
+//         "measures") <<
+//         */
+//       ", line " << inputLineNumber <<
+//       endl << endl;
+//
+//     ++gIndenter; // decremented in visitEnd (S_msrMultipleFullBarRests&)
+//   }
+// }
+//
+// void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRestsContents& elt)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   {
+//     Bool
+//       traceLpsrVisitors =
+//         gGlobalLpsrOahGroup->
+//           getTraceLpsrVisitors (),
+//       generateMsrVisitingInformation =
+//         gGlobalLpsr2lilypondOahGroup->
+//           getGenerateLpsrVisitingInformation ();
+//
+//     if (traceLpsrVisitors || generateMsrVisitingInformation) {
+//       stringstream s;
+//
+//       s <<
+//         "%--> End visiting msrMultipleFullBarRestsContents" <<
+//         endl;
+//
+//       if (traceLpsrVisitors) {
+//         gLogStream << s.str ();
+//       }
+//
+//       if (generateMsrVisitingInformation) {
+//         fLilypondCodeStream << s.str ();
+//       }
+//     }
+//   }
+// #endif
+//
+//   int inputLineNumber =
+//     elt->getInputLineNumber ();
+//
+//   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+//     fLilypondCodeStream << left <<
+//       setw (commentFieldWidth) <<
+//       "% end of multiple full-bar rests contents " <<
+//       /* JMI
+//       mfSingularOrPlural (
+//         multipleFullBarRestsNumber,
+//         "measure",
+//         "measures") <<
+//         */
+//       ", line " << inputLineNumber <<
+//       endl << endl;
+//
+//     --gIndenter; // incremented in visitStart (S_msrMultipleFullBarRests&)
+//   }
+// }
+//
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
 {

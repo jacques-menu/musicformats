@@ -123,9 +123,9 @@ class EXP msrSegment : public msrVoiceElement
 
     // measures
 
-    const list<S_msrMeasure>&
-                          getSegmentMeasuresList () const
-                              { return fSegmentMeasuresList; }
+    const list<S_msrMeasureElement>&
+                          getSegmentMeasureElementsListt () const
+                              { return fSegmentMeasureElementsListt; }
 
 /* JMI
     // segment shortest note
@@ -430,7 +430,7 @@ class EXP msrSegment : public msrVoiceElement
     // ------------------------------------------------------
 
     // necessary due to the complexity of repeats management
-    void                  assertSegmentMeasuresListIsNotEmpty (
+    void                  assertSegmentMeasureElementsListIsNotEmpty (
                             int inputLineNumber) const;
 
   private:
@@ -445,7 +445,8 @@ class EXP msrSegment : public msrVoiceElement
     int                   fSegmentAbsoluteNumber;
 
     // the measures in the segment contain the mmusic
-    list<S_msrMeasure>    fSegmentMeasuresList;
+    list<S_msrMeasureElement>
+                          fSegmentMeasureElementsList;
 
     // debug number, unique for every msrSegment instance
     static int            gSegmentDebugNumber;

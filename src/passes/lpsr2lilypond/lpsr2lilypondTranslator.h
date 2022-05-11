@@ -363,8 +363,8 @@ class EXP lpsr2lilypondTranslator :
   public visitor<S_msrMeasureRepeatPattern>,
   public visitor<S_msrMeasureRepeatReplicas>,
 
-  public visitor<S_msrFullBarRests>,
-  public visitor<S_msrFullBarRestsContents>,
+  public visitor<S_msrMultipleFullBarRests>,
+//   public visitor<S_msrMultipleFullBarRestsContents>,
 
   // rehearsal mark
 
@@ -723,11 +723,11 @@ class EXP lpsr2lilypondTranslator :
     virtual void visitStart (S_msrMeasureRepeatReplicas& elt);
     virtual void visitEnd   (S_msrMeasureRepeatReplicas& elt);
 
-    // full-bar rests
-    virtual void visitStart (S_msrFullBarRests& elt);
-    virtual void visitEnd   (S_msrFullBarRests& elt);
-    virtual void visitStart (S_msrFullBarRestsContents& elt);
-    virtual void visitEnd   (S_msrFullBarRestsContents& elt);
+    // multiple full-bar rests
+    virtual void visitStart (S_msrMultipleFullBarRests& elt);
+    virtual void visitEnd   (S_msrMultipleFullBarRests& elt);
+//     virtual void visitStart (S_msrMultipleFullBarRestsContents& elt);
+//     virtual void visitEnd   (S_msrMultipleFullBarRestsContents& elt);
 
     // rehearsal marks
     virtual void visitStart (S_msrRehearsalMark& elt);
@@ -1200,10 +1200,10 @@ class EXP lpsr2lilypondTranslator :
     list<S_lpsrRepeatDescr>
                           fRepeatDescrsStack;
 
-    // full-bar rests
+    // multiple full-bar rests
     // ------------------------------------------------------
-    int                   fRemainingFullBarRestsNumber;
-    Bool                  fOnGoingFullBarRests;
+    int                   fRemainingMultipleFullBarRestsNumber;
+    Bool                  fOnGoingMultipleFullBarRests;
 
     // segments
     // ------------------------------------------------------

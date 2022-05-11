@@ -83,8 +83,8 @@ msrBook::msrBook (
   // measure repeats replicas should be browsed by default
   fInhibitMeasureRepeatReplicasBrowsing = false;
 
-  // full-bar rests should be browsed by default
-  fInhibitFullBarRestsBrowsing = false;
+  // multiple full-bar rests should be browsed by default
+  fInhibitMultipleFullBarRestsBrowsing = false;
 }
 
 msrBook::~msrBook ()
@@ -138,8 +138,8 @@ S_msrBook msrBook::createBookNewbornClone ()
   newbornClone->fInhibitMeasureRepeatReplicasBrowsing =
     fInhibitMeasureRepeatReplicasBrowsing;
 
-  newbornClone->fInhibitFullBarRestsBrowsing =
-    fInhibitFullBarRestsBrowsing;
+  newbornClone->fInhibitMultipleFullBarRestsBrowsing =
+    fInhibitMultipleFullBarRestsBrowsing;
 
   return newbornClone;
 }
@@ -561,8 +561,8 @@ void msrBook::print (ostream& os) const
     endl<<
 
     setw (fieldWidth) <<
-    "fInhibitFullBarRestsBrowsing" <<  " : " <<
-    fInhibitFullBarRestsBrowsing <<
+    "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
+    fInhibitMultipleFullBarRestsBrowsing <<
     endl<<
     endl;
 
@@ -755,8 +755,8 @@ void msrBook::printShort (ostream& os) const
     endl<<
 
     setw (fieldWidth) <<
-    "fInhibitFullBarRestsBrowsing" <<  " : " <<
-    fInhibitFullBarRestsBrowsing <<
+    "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
+    fInhibitMultipleFullBarRestsBrowsing <<
     endl<<
     endl;
 
@@ -941,8 +941,8 @@ void msrBook::printSummary (ostream& os) const
     endl<<
 
     setw (fieldWidth) <<
-    "fInhibitFullBarRestsBrowsing" <<  " : " <<
-    fInhibitFullBarRestsBrowsing <<
+    "fInhibitMultipleFullBarRestsBrowsing" <<  " : " <<
+    fInhibitMultipleFullBarRestsBrowsing <<
     endl<<
     endl;
 
