@@ -209,18 +209,18 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //     multipleFullBarRestsContentsSegment != nullptr,
 //     "multipleFullBarRestsContentsSegment is null");
 
-  // get multiple full-bar rests contents segment measures list
+  // get multiple full-bar rests contents segment measure elements list
 //   const list<S_msrMeasure>&
-//     contentsSegmentMeasuresList =
+//     contentsSegmentElementsList =
 //       multipleFullBarRestsContentsSegment->
-//         getSegmentMeasuresList ();
+//         getSegmentElementsList ();
 
   // get multiple full-bar rests contents last measure's purist number
   int lastMeasuresPuristNumber = -1;
 
-//   if (contentsSegmentMeasuresList.size ()) {
+//   if (contentsSegmentElementsList.size ()) {
 //     lastMeasuresPuristNumber =
-//       contentsSegmentMeasuresList.back ()->
+//       contentsSegmentElementsList.back ()->
 //         getMeasurePuristNumber ();
 //   }
 //   else {
@@ -228,7 +228,7 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 //
 //     s <<
 //       "cannot get multiple full-bar rests contents last measure purist number" <<
-//       " because its measures list is empty" <<
+//       " because its measure elements list is empty" <<
 //       " in voice clone '" <<
 //       asShortString () <<
 //       "' ";
@@ -253,6 +253,24 @@ void msrMultipleFullBarRests::setMultipleFullBarRestsLastMeasurePuristMeasureNum
 
   fMultipleFullBarRestsLastMeasurePuristNumber =
     lastMeasuresPuristNumber;
+}
+
+void msrMultipleFullBarRests:: appendMeasureElementToSegmentElement (
+  S_msrMeasureElement elem)
+{
+  stringstream s;
+
+  s <<
+    "cannot append measure element " <<
+    elem->asShortString () <<
+    " to multiple full-bar rests " <<
+    asShortString ();
+
+  msrInternalError (
+    gGlobalServiceRunData->getInputSourceName (),
+    fInputLineNumber,
+    __FILE__, __LINE__,
+    s.str ());
 }
 
 void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
@@ -444,6 +462,11 @@ void msrMultipleFullBarRests::print (ostream& os) const
 //   }
 
   --gIndenter;
+}
+
+void msrMultipleFullBarRests::printShort (ostream& os) const
+{
+  print (os);
 }
 
 ostream& operator<< (ostream& os, const S_msrMultipleFullBarRests& elt)

@@ -51,6 +51,7 @@
 #include "msr2mxsrInterface.h"
 #include "msr2msrInterface.h"
 #include "msr2lpsrInterface.h"
+#include "lpsrInterface.h"
 #include "lpsr2lilypondInterface.h"
 
 #include "msrInterface.h"
@@ -122,7 +123,7 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
         theMxsr,
         gGlobalMsrOahGroup,
         "Pass 2a",
-        "Create an MSR skeleton from the MXSR");
+        "Create a first MSR skeleton from the MXSR");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -137,8 +138,9 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
-    displayMsrScoreSkeleton_OptionalPass (
-      firstMsrScore);
+    displayMsrScore (
+      firstMsrScore,
+      "Display the first MSR score skeleton");
   }
 
   // should we return now?
@@ -153,7 +155,7 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
     return mfMusicformatsError::k_NoError;
   }
 
-  // populate the MSR skeleton from MusicXML data (pass 2b)
+  // populate the first MSR skeleton from MusicXML data (pass 2b)
   // ------------------------------------------------------
 
   try {
@@ -161,7 +163,7 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
       theMxsr,
       firstMsrScore,
         "Pass 2b",
-        "Populate the MSR skeleton from MusicXML data");
+        "Populate the first MSR skeleton from MusicXML data");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -176,15 +178,15 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScore (
       firstMsrScore,
       "Display the first MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplayFirstMsrShort ()) {
-    displayPopulatedMsrScoreShort_OptionalPass (
+    displayMsrScoreShort (
       firstMsrScore,
-      "Display the first MSR as text, short version");
+      "Display the first MSR as text");
   }
 
   // should we return now?
@@ -249,15 +251,15 @@ else {
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScore (
       secondMsrScore,
       "Display the second MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayPopulatedMsrScoreShort_OptionalPass (
+    displayMsrScoreShort (
       secondMsrScore,
-      "Display the second MSR as text, short version");
+      "Display the second MSR as text");
   }
 
   // should we return now?
@@ -304,24 +306,27 @@ else {
     // ------------------------------------------------------
 
     if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
-      displayLpsrScore_OptionalPass (
+      displayLpsrScore (
         theLpsrScore,
         gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup);
+        gGlobalLpsrOahGroup,
+        "Display the LPSR");
     }
 
     if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
-      displayLpsrScoreShort_OptionalPass (
+      displayLpsrScoreShort (
         theLpsrScore,
         gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup);
+        gGlobalLpsrOahGroup,
+        "Display the LPSR");
     }
 
     if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
-      displayLpsrScoreFull_OptionalPass (
+      displayLpsrScoreFull (
         theLpsrScore,
         gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup);
+        gGlobalLpsrOahGroup,
+        "Display the LPSR");
     }
   }
 

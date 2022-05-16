@@ -125,7 +125,7 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
         theMxsr,
         gGlobalMsrOahGroup,
         "Pass 2a",
-        "Create an MSR skeleton from the MXSR");
+        "Create a first MSR skeleton from the MXSR");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -140,8 +140,9 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
-    displayMsrScoreSkeleton_OptionalPass (
-      firstMsrScore);
+    displayMsrScore (
+      firstMsrScore,
+      "Display the first MSR score skeleton");
   }
 
   // should we return now?
@@ -164,7 +165,7 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
       theMxsr,
       firstMsrScore,
         "Pass 2b",
-        "Populate the MSR skeleton from MusicXML data");
+        "Populate the first MSR skeleton from MusicXML data");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -179,15 +180,15 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScore (
       firstMsrScore,
       "Display the first MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplayFirstMsrShort ()) {
-    displayPopulatedMsrScoreShort_OptionalPass (
+    displayMsrScoreShort (
       firstMsrScore,
-      "Display the first MSR as text, short version");
+      "Display the first MSR as text");
   }
 
   // should we return now?
@@ -229,15 +230,15 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScore (
       secondMsrScore,
-      "Display the first MSR as text");
+      "Display the second MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayPopulatedMsrScoreShort_OptionalPass (
+    displayMsrScoreShort (
       secondMsrScore,
-      "Display the second MSR as text, short version");
+      "Display the second MSR as text");
   }
 
   // should we return now?
@@ -283,17 +284,19 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
     // ------------------------------------------------------
 
     if (gGlobalBsrOahGroup->getDisplayBsrFirst ()) {
-      displayBsrFirstScore_OptionalPass (
+      displayBsrScore (
         firstBsrScore,
         gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup);
+        gGlobalBsrOahGroup,
+        "Display the first BSR");
     }
 
     if (gGlobalBsrOahGroup->getDisplayBsrFirstShort ()) {
-      displayBsrFirstScoreShort_OptionalPass (
+      displayBsrScoreShort (
         firstBsrScore,
         gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup);
+        gGlobalBsrOahGroup,
+        "Display the first BSR");
     }
   }
 
@@ -325,17 +328,19 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
     // ------------------------------------------------------
 
     if (gGlobalBsrOahGroup->getDisplayBsrSecond ()) {
-      displayFinalizedBsrScore_OptionalPass (
+      displayBsrScore (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup);
+        gGlobalBsrOahGroup,
+        "Display the finalized BSR");
     }
 
     if (gGlobalBsrOahGroup->getDisplayBsrSecondShort ()) {
-      displayFinalizedBsrScoreShort_OptionalPass (
+      displayBsrScoreShort (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup);
+        gGlobalBsrOahGroup,
+        "Display the finalized BSR");
     }
   }
 

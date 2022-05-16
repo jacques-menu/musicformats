@@ -855,7 +855,11 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
       wholeNotesDuration;
 
 #ifdef TRACING_IS_ENABLED
-    if (true || gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (
+      gGlobalTracingOahGroup->getTraceMeasures ()
+        ||
+      gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+    ) {
       gLogStream <<
         "The measure with ordinal number " <<
         measureOrdinalNumber <<
@@ -1131,8 +1135,8 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
   --gIndenter;
 }
 
-void msrPart::appendTransposeToPart (
-  S_msrTranspose transpose)
+void msrPart::appendTranspositionToPart (
+  S_msrTransposition transpose)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
@@ -1150,7 +1154,7 @@ void msrPart::appendTransposeToPart (
   // cascade it to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendTransposeToStaff (transpose);
+      appendTranspositionToStaff (transpose);
   } // for
 }
 

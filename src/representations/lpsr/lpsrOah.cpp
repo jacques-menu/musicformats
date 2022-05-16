@@ -1871,8 +1871,8 @@ Such indications cannot be mixed.
 For example, 'a', 'f' and 'bes,' can be used respectively
 for instruments in 'a', 'f' and B flat respectively)",
         "TRANSPOSITION",
-        "fTransposeSemiTonesPitchAndOctave",
-        fTransposeSemiTonesPitchAndOctave));
+        "fTranspositionSemiTonesPitchAndOctave",
+        fTranspositionSemiTonesPitchAndOctave));
 }
 
 void lpsrOahGroup::initializeLpsrOahGroup ()
@@ -1908,7 +1908,7 @@ void lpsrOahGroup::initializeLpsrOahGroup ()
   initializeLpsrLanguagesOptions ();
 
 /* superfluous JMI ???
-  // transpose
+  // transposition
   // --------------------------------------
   initializeLpsrTransposeOptions ();
 */
@@ -2268,7 +2268,7 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 
   --gIndenter;
 
-  // transpose
+  // transposition
   // --------------------------------------
 
   gLogStream <<
@@ -2278,11 +2278,11 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fTransposeSemiTonesPitchAndOctave" << " : ";
+    setw (fieldWidth) << "fTranspositionSemiTonesPitchAndOctave" << " : ";
 
-    if (fTransposeSemiTonesPitchAndOctave) {
+    if (fTranspositionSemiTonesPitchAndOctave) {
       gLogStream <<
-        fTransposeSemiTonesPitchAndOctave->asString ();
+        fTranspositionSemiTonesPitchAndOctave->asString ();
     }
     else {
       gLogStream <<

@@ -263,46 +263,46 @@ class EXP msrOahGroup : public oahGroup
     Bool                  getDisplayFirstMsr () const
                               { return fDisplayFirstMsr; }
 
-    void                  setDisplaySecondMsr ()
-                              { fDisplaySecondMsr = true; }
-    Bool                  getDisplaySecondMsr () const
-                              { return fDisplaySecondMsr; }
-
-    Bool                  getDisplayMsr () const
-                              {
-                                return
-                                  fDisplayFirstMsr || fDisplaySecondMsr;
-                              }
-
     void                  setDisplayFirstMsrShort ()
                               { fDisplayFirstMsrShort = true; }
     Bool                  getDisplayFirstMsrShort () const
                               { return fDisplayFirstMsrShort; }
-
-    void                  setDisplaySecondMsrShort ()
-                              { fDisplaySecondMsrShort = true; }
-    Bool                  getDisplaySecondMsrShort () const
-                              { return fDisplaySecondMsrShort; }
-
-    void                  setDisplayFirstMsrSlices ()
-                              { fDisplayFirstMsrSlices = true; }
-    Bool                  getDisplayFirstMsrSlices () const
-                              { return fDisplayFirstMsrSlices; }
-
-    void                  setDisplaySecondMsrSlices ()
-                              { fDisplaySecondMsrSlices = true; }
-    Bool                  getDisplaySecondMsrSlices () const
-                              { return fDisplaySecondMsrSlices; }
 
     void                  setDisplayFirstMsrDetails ()
                               { fDisplayFirstMsrDetails = true; }
     Bool                  getDisplayFirstMsrDetails () const
                               { return fDisplayFirstMsrDetails; }
 
+    void                  setDisplayFirstMsrSlices ()
+                              { fDisplayFirstMsrSlices = true; }
+    Bool                  getDisplayFirstMsrSlices () const
+                              { return fDisplayFirstMsrSlices; }
+
+    void                  setDisplaySecondMsr ()
+                              { fDisplaySecondMsr = true; }
+    Bool                  getDisplaySecondMsr () const
+                              { return fDisplaySecondMsr; }
+
+    void                  setDisplaySecondMsrShort ()
+                              { fDisplaySecondMsrShort = true; }
+    Bool                  getDisplaySecondMsrShort () const
+                              { return fDisplaySecondMsrShort; }
+
+    Bool                  getDisplayMsr () const // JMI ???
+                              {
+                                return
+                                  fDisplayFirstMsr || fDisplaySecondMsr;
+                              }
+
     void                  setDisplaySecondMsrDetails ()
                               { fDisplaySecondMsrDetails = true; }
     Bool                  getDisplaySecondMsrDetails () const
                               { return fDisplaySecondMsrDetails; }
+
+    void                  setDisplaySecondMsrSlices ()
+                              { fDisplaySecondMsrSlices = true; }
+    Bool                  getDisplaySecondMsrSlices () const
+                              { return fDisplaySecondMsrSlices; }
 
     Bool                  getDisplayMsrDetails () const
                               {
@@ -458,23 +458,21 @@ class EXP msrOahGroup : public oahGroup
     Bool                  fDisplayMsrSkeleton;
 
     Bool                  fDisplayFirstMsr;
-    Bool                  fDisplaySecondMsr;
-
     Bool                  fDisplayFirstMsrShort;
+    Bool                  fDisplayFirstMsrDetails;
+
+    Bool                  fDisplaySecondMsr;
     Bool                  fDisplaySecondMsrShort;
+    Bool                  fDisplaySecondMsrDetails;
 
     Bool                  fDisplayFirstMsrSlices;
     Bool                  fDisplaySecondMsrSlices;
-
-    Bool                  fDisplayFirstMsrDetails;
-    Bool                  fDisplaySecondMsrDetails;
 
     Bool                  fDisplayFirstMsrNames;
     Bool                  fDisplaySecondMsrNames;
 
     Bool                  fDisplayFirstMsrSummary;
     Bool                  fDisplaySecondMsrSummary;
-
 
     // languages
     msrQuarterTonesPitchesLanguageKind

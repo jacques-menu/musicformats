@@ -21,7 +21,7 @@
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
 
-
+#include "msrWae.h"
 
 #include "msrMeasureRepeats.h"
 
@@ -484,7 +484,7 @@ int msrMeasureRepeatPattern::fetchMeasuresNumber () const
   if (fMeasureRepeatPatternSegment) {
     result =
       fMeasureRepeatPatternSegment->
-        getSegmentMeasuresList ().size ();
+        getSegmentElementsList ().size ();
   }
   else {
     result = 0;
@@ -673,7 +673,7 @@ int msrMeasureRepeatReplicas::fetchMeasuresNumber () const
   if (fMeasureRepeatReplicasSegment) {
     result =
       fMeasureRepeatReplicasSegment->
-        getSegmentMeasuresList ().size ();
+        getSegmentElementsList ().size ();
   }
   else {
     result = 0;
@@ -1067,6 +1067,24 @@ void msrMeasureRepeat::browseData (basevisitor* v)
   }
 }
 
+void msrMeasureRepeat:: appendMeasureElementToSegmentElement (
+  S_msrMeasureElement elem)
+{
+  stringstream s;
+
+  s <<
+    "cannot append measure element " <<
+    elem->asShortString () <<
+    " to measure repeat " <<
+    asShortString ();
+
+  msrInternalError (
+    gGlobalServiceRunData->getInputSourceName (),
+    fInputLineNumber,
+    __FILE__, __LINE__,
+    s.str ());
+}
+
 string msrMeasureRepeat::measureRepeatBuildPhaseKindAsString (
   msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind)
 {
@@ -1207,6 +1225,11 @@ void msrMeasureRepeat::print (ostream& os) const
   --gIndenter;
 
   os << ']' << endl;
+}
+
+void msrMeasureRepeat::printShort (ostream& os) const
+{
+  print (os);
 }
 
 ostream& operator<< (ostream& os, const S_msrMeasureRepeat& elt)

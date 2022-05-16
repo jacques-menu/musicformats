@@ -185,12 +185,12 @@ All the uses of this method concern repeats (\sectionRef{Repeats handling}), mea
 \section{Appending measures to a segment}
 % -------------------------------------------------------------------------
 
-\Method{msrSegment}{assertSegmentMeasuresListIsNotEmpty} is called as a sanity check by many methods in \msr{msrSegments.cpp}:
+\Method{msrSegment}{assertSegmentElementsListIsNotEmpty} is called as a sanity check by many methods in \msr{msrSegments.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
-void msrSegment::assertSegmentMeasuresListIsNotEmpty (
+void msrSegment::assertSegmentElementsListIsNotEmpty (
   int inputLineNumber) const
 {
-  if (! fSegmentMeasuresList.size ()) {
+  if (! fSegmentElementsList.size ()) {
 #ifdef TRACING_IS_ENABLED
   if (
     gGlobalTracingOahGroup->getTraceMeasuresDetails ()
@@ -202,13 +202,13 @@ void msrSegment::assertSegmentMeasuresListIsNotEmpty (
     fSegmentVoiceUpLink->
       displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
-        "assertSegmentMeasuresListIsNotEmpty()");
+        "assertSegmentElementsListIsNotEmpty()");
   }
 #endif
 
     gLogStream <<
-      "assertSegmentMeasuresListIsNotEmpty()" <<
-      ", fSegmentMeasuresList is empty" <<
+      "assertSegmentElementsListIsNotEmpty()" <<
+      ", fSegmentElementsList is empty" <<
       ", segment: " <<
       this->asString () <<
       ", in voice \"" <<
@@ -220,7 +220,7 @@ void msrSegment::assertSegmentMeasuresListIsNotEmpty (
     mfAssert (
       __FILE__, __LINE__,
       false,
-      ", fSegmentMeasuresList is empty");
+      ", fSegmentElementsList is empty");
   }
 }
 \end{lstlisting}
@@ -242,13 +242,13 @@ void msrSegment::appendKeyToSegment (S_msrKey key)
 #endif
 
   // sanity check
-  assertSegmentMeasuresListIsNotEmpty (
+  assertSegmentElementsListIsNotEmpty (
     key->getInputLineNumber ());
 
   ++gIndenter;
 
   // register key in segments's current measure
-  fSegmentMeasuresList.back ()->
+  fSegmentElementsList.back ()->
     appendKeyToMeasure (key);
 
   --gIndenter;

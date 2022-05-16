@@ -163,10 +163,11 @@ string msrBarCheck::asString () const
   stringstream s;
 
   s <<
-    "BarCheck" <<
+    "[BarCheck" <<
     ", nextBarOriginalNumber = \"" << fNextBarOriginalNumber << "\"" <<
     ", nextBarPuristNumber = \"" << fNextBarPuristNumber << "\"" <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputLineNumber <<
+    "]";
 
   return s.str ();
 }

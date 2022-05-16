@@ -103,19 +103,6 @@ class EXP mfslInterpreterOahGroup : public oahGroup
     Bool                  getDisplayOptions () const
                               { return fDisplayOptions; }
 
-    // choices
-    void                  setTraceChoices ()
-                              { fTraceChoices = true; }
-
-    Bool                  getTraceChoices () const
-                              { return fTraceChoices; }
-
-    void                  setTraceCaseChoiceStatements ()
-                              { fTraceCaseChoiceStatements = true; }
-
-    Bool                  getTraceCaseChoiceStatements () const
-                              { return fTraceCaseChoiceStatements; }
-
     // inputs
     void                  setTraceInputs ()
                               { fTraceInputs = true; }
@@ -128,6 +115,19 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     Bool                  getTraceCaseInputStatements () const
                               { return fTraceCaseInputStatements; }
+
+    // choices
+    void                  setTraceChoices ()
+                              { fTraceChoices = true; }
+
+    Bool                  getTraceChoices () const
+                              { return fTraceChoices; }
+
+    void                  setTraceCaseChoiceStatements ()
+                              { fTraceCaseChoiceStatements = true; }
+
+    Bool                  getTraceCaseChoiceStatements () const
+                              { return fTraceCaseChoiceStatements; }
 
     void                  setTraceOptionsBlocks ()
                               { fTraceOptionsBlocks = true; }
@@ -214,13 +214,13 @@ class EXP mfslInterpreterOahGroup : public oahGroup
 
     Bool                  fTraceParsing;
 
-    // choices
-    Bool                  fTraceChoices;
-    Bool                  fTraceCaseChoiceStatements;
-
     // inputs
     Bool                  fTraceInputs;
     Bool                  fTraceCaseInputStatements;
+
+    // choices
+    Bool                  fTraceChoices;
+    Bool                  fTraceCaseChoiceStatements;
 
     // options blocks
     Bool                  fTraceOptionsBlocks;

@@ -114,17 +114,19 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
     // ------------------------------------------------------
 
     if (gGlobalBsrOahGroup->getDisplayBsrFirst ()) {
-      displayBsrFirstScore_OptionalPass (
+      displayBsrScore (
         firstBsrScore,
         gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup);
+        gGlobalBsrOahGroup,
+        "Display the first BSR");
     }
 
     if (gGlobalBsrOahGroup->getDisplayBsrFirstShort ()) {
-      displayBsrFirstScoreShort_OptionalPass (
+      displayBsrScoreShort (
         firstBsrScore,
         gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup);
+        gGlobalBsrOahGroup,
+        "Display the first BSR");
     }
   }
 
@@ -156,17 +158,19 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
     // ------------------------------------------------------
 
     if (gGlobalBsrOahGroup->getDisplayBsrSecond ()) {
-      displayFinalizedBsrScore_OptionalPass (
+      displayBsrScore (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup);
+        gGlobalBsrOahGroup,
+        "Display the finalized BSR");
     }
 
     if (gGlobalBsrOahGroup->getDisplayBsrSecondShort ()) {
-      displayFinalizedBsrScoreShort_OptionalPass (
+      displayBsrScoreShort (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
-        gGlobalBsrOahGroup);
+        gGlobalBsrOahGroup,
+        "Display the finalized BSR");
     }
   }
 

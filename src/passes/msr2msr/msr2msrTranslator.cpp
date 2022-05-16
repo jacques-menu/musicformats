@@ -2177,12 +2177,12 @@ void msr2msrTranslator::visitEnd (S_msrTimeSignature& elt)
 }
 
 //________________________________________________________________________
-void msr2msrTranslator::visitStart (S_msrTranspose& elt)
+void msr2msrTranslator::visitStart (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrTranspose" <<
+      "--> Start visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
@@ -2190,15 +2190,15 @@ void msr2msrTranslator::visitStart (S_msrTranspose& elt)
 
   // append transpose to voice clone
   fCurrentVoiceClone->
-    appendTransposeToVoice (elt);
+    appendTranspositionToVoice (elt);
 }
 
-void msr2msrTranslator::visitEnd (S_msrTranspose& elt)
+void msr2msrTranslator::visitEnd (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrTranspose" <<
+      "--> End visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }

@@ -115,8 +115,8 @@ void msrSegment::browseData (basevisitor* v)
 	// ... ... ...
 
   for (
-    list<S_msrMeasure>::const_iterator i = fSegmentMeasuresList.begin ();
-    i != fSegmentMeasuresList.end ();
+    list<S_msrMeasure>::const_iterator i = fSegmentElementsList.begin ();
+    i != fSegmentElementsList.end ();
     ++i
   ) {
     // browse the element

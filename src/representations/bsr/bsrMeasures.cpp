@@ -104,7 +104,7 @@ void bsrMeasure::appendLineElementToMeasure (
 void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceClefs () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceClefs ()) {
     gLogStream <<
       "Appending clef '" <<
       clef->asShortString () <<
@@ -121,7 +121,7 @@ void bsrMeasure::appendClefToMeasure (S_bsrClef clef)
 void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceBarLines () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Appending barLine " <<
       barLine->asShortString () <<
@@ -138,7 +138,7 @@ void bsrMeasure::appendBarLineToMeasure (S_bsrBarLine barLine)
 void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceNumbers () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalBsrOahGroup->getTraceNumbers ()) {
     gLogStream <<
       "Appending number '" <<
       number->asShortString () <<
@@ -155,7 +155,7 @@ void bsrMeasure::appendNumberToMeasure (S_bsrNumber number)
 void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalBsrOahGroup->getTraceNumbers () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalBsrOahGroup->getTraceNumbers ()) {
     gLogStream <<
       "Appending words '" <<
       words->asShortString () <<
@@ -172,7 +172,7 @@ void bsrMeasure::appendWordsToMeasure (S_bsrWords words)
 void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Appending note '" <<
       note->asShortString () <<
@@ -189,7 +189,7 @@ void bsrMeasure::appendNoteToMeasure (S_bsrNote note)
 void bsrMeasure::appendDynamicToMeasure (S_bsrDynamic dynamic)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDynamics () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceDynamics ()) {
     gLogStream <<
       "Appending dynamic '" <<
       dynamic->asShortString () <<

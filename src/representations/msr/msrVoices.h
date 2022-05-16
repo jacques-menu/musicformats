@@ -19,6 +19,7 @@
 #include "msrPartGroups.h"
 #include "msrRepeats.h"
 #include "msrMultipleFullBarRests.h"
+#include "msrOctaveShifts.h"
 #include "msrScores.h"
 #include "msrSegments.h"
 #include "msrSegnos.h"
@@ -540,10 +541,10 @@ class EXP msrVoice : public msrElement
                             int           inputLineNumber,
                             const string& currentMeasureNumber);
 
-    // transpose
+    // transposition
 
-    void                  appendTransposeToVoice (
-                            S_msrTranspose transpose);
+    void                  appendTranspositionToVoice (
+                            S_msrTransposition transpose);
 
     // staff details
 
@@ -1303,6 +1304,7 @@ class EXP msrVoice : public msrElement
     const S_msrMeasure    getVoiceFirstMeasure () const
                               { return fVoiceFirstMeasure; }
 
+    // last appended measure
     const S_msrMeasure    getVoiceLastAppendedMeasure () const
                               { return fVoiceLastAppendedMeasure; }
 
@@ -1343,7 +1345,8 @@ class EXP msrVoice : public msrElement
                             int           inputLineNumber,
                             const string& context);
 
-    void                  displayVoiceMeasuresFlatList () const;
+    void                  displayVoiceMeasuresFlatList (
+                            int fieldWidth) const;
 
 
   private:

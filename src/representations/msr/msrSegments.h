@@ -9,6 +9,7 @@
 #include "msrEyeGlasses.h"
 #include "msrRehearsalMarks.h"
 #include "msrSegnos.h"
+#include "msrSegmentElements.h"
 #include "msrStaves.h"
 #include "msrTablatures.h"
 #include "msrTempos.h"
@@ -46,8 +47,8 @@ typedef SMARTP<msrChord> S_msrChord;
 class msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
 
-class msrTranspose;
-typedef SMARTP<msrTranspose> S_msrTranspose;
+class msrTransposition;
+typedef SMARTP<msrTransposition> S_msrTransposition;
 
 class msrStaffDetails;
 typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
@@ -121,11 +122,22 @@ class EXP msrSegment : public msrVoiceElement
     int                   getSegmentAbsoluteNumber () const
                               { return fSegmentAbsoluteNumber; }
 
-    // measures
+    // measures elements
 
-    const list<S_msrMeasureElement>&
-                          getSegmentMeasureElementsListt () const
-                              { return fSegmentMeasureElementsListt; }
+    const list<S_msrSegmentElement>&
+                          getSegmentElementsList () const
+                              { return fSegmentElementsList; }
+
+    // last appended measure
+
+    S_msrMeasure          getSegmentLastAppendedMeasure () const
+                              { return fSegmentLastAppendedMeasure; }
+
+    // measures flat list
+
+    const list<S_msrMeasure>&
+                          getSegmentMeasuresFlatList () const
+                              { return fSegmentMeasuresFlatList; }
 
 /* JMI
     // segment shortest note
@@ -161,7 +173,7 @@ class EXP msrSegment : public msrVoiceElement
 
     // print layout MusicXML specific??? JMI
 
-     void                 appendPrintLayoutToSegment (
+    void                  appendPrintLayoutToSegment (
                             S_msrPrintLayout printLayout);
 
     // backup and padding
@@ -171,14 +183,19 @@ class EXP msrSegment : public msrVoiceElement
                             const rational& wholeNotes);
 
     void                  backupByWholeNotesStepLengthInSegment (
-                            int             inputLineNumber,
-                            const rational& backupTargetMeasureElementPositionInMeasure);
+                            int     inputLineNumber,
+                            const rational&
+                                    backupTargetMeasureElementPositionInMeasure);
 
     void                  appendPaddingNoteToSegment (
                             int             inputLineNumber,
                             const rational& forwardStepLength);
 
     // measures
+
+    S_msrMeasure          fetchSegmentFirstMeasure () const;
+
+    S_msrMeasure          fetchSegmentLastMeasure () const;
 
     S_msrMeasure          fetchLastMeasureFromSegment (
                             int           inputLineNumber,
@@ -219,10 +236,10 @@ class EXP msrSegment : public msrVoiceElement
                             int             inputLineNumber,
                             const rational& positionInMeasure);
 
-    // transpose
+    // transposition
 
-    void                  appendTransposeToSegment (
-                            S_msrTranspose transpose);
+    void                  appendTranspositionToSegment (
+                            S_msrTransposition transpose);
 
     // staff details
 
@@ -430,7 +447,7 @@ class EXP msrSegment : public msrVoiceElement
     // ------------------------------------------------------
 
     // necessary due to the complexity of repeats management
-    void                  assertSegmentMeasureElementsListIsNotEmpty (
+    void                  assertSegmentElementsListIsNotEmpty (
                             int inputLineNumber) const;
 
   private:
@@ -444,9 +461,16 @@ class EXP msrSegment : public msrVoiceElement
     // absolute number, shared by newborn clones and deep copies
     int                   fSegmentAbsoluteNumber;
 
-    // the measures in the segment contain the mmusic
-    list<S_msrMeasureElement>
-                          fSegmentMeasureElementsList;
+    // the measures elements in the segment contain the mmusic
+    list<S_msrSegmentElement>
+                          fSegmentElementsList;
+
+    // the last appended measure
+    S_msrMeasure          fSegmentLastAppendedMeasure;
+
+    // measures flat list
+    // including those not in non-measure segment elements,
+    list<S_msrMeasure>    fSegmentMeasuresFlatList;
 
     // debug number, unique for every msrSegment instance
     static int            gSegmentDebugNumber;

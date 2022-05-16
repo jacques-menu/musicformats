@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrTransposes___
-#define ___msrTransposes___
+#ifndef ___msrTranspositions___
+#define ___msrTranspositions___
 
 #include "msrBasicTypes.h"
 #include "msrMeasureElements.h"
@@ -20,17 +20,17 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrTranspose;
-typedef SMARTP<msrTranspose> S_msrTranspose;
+class msrTransposition;
+typedef SMARTP<msrTransposition> S_msrTransposition;
 
-class EXP msrTranspose : public msrMeasureElement
+class EXP msrTransposition : public msrMeasureElement
 {
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<msrTranspose> create (
+    static SMARTP<msrTransposition> create (
                             int  inputLineNumber,
                             int  transposeDiatonic,
                             int  transposeChromatic,
@@ -42,38 +42,38 @@ class EXP msrTranspose : public msrMeasureElement
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrTranspose (
+                          msrTransposition (
                             int  inputLineNumber,
                             int  transposeDiatonic,
                             int  transposeChromatic,
                             int  transposeOctaveChange,
                             Bool transposeDouble);
 
-    virtual               ~msrTranspose ();
+    virtual               ~msrTransposition ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    int                   getTransposeDiatonic () const
-                              { return fTransposeDiatonic; }
+    int                   getTranspositionDiatonic () const
+                              { return fTranspositionDiatonic; }
 
-    int                   getTransposeChromatic () const
-                              { return fTransposeChromatic; }
+    int                   getTranspositionChromatic () const
+                              { return fTranspositionChromatic; }
 
-    int                   getTransposeOctaveChange () const
-                              { return fTransposeOctaveChange; }
+    int                   getTranspositionOctaveChange () const
+                              { return fTranspositionOctaveChange; }
 
-    Bool                  getTransposeDouble () const
-                              { return fTransposeDouble; }
+    Bool                  getTranspositionDouble () const
+                              { return fTranspositionDouble; }
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    Bool                  isEqualTo (S_msrTranspose otherTranspose) const;
+    Bool                  isEqualTo (S_msrTransposition otherTranspose) const;
 
   public:
 
@@ -99,13 +99,13 @@ class EXP msrTranspose : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    int                   fTransposeDiatonic;
-    int                   fTransposeChromatic;
-    int                   fTransposeOctaveChange;
-    Bool                  fTransposeDouble;
+    int                   fTranspositionDiatonic;
+    int                   fTranspositionChromatic;
+    int                   fTranspositionOctaveChange;
+    Bool                  fTranspositionDouble;
 };
-typedef SMARTP<msrTranspose> S_msrTranspose;
-EXP ostream& operator<< (ostream& os, const S_msrTranspose& elt);
+typedef SMARTP<msrTransposition> S_msrTransposition;
+EXP ostream& operator<< (ostream& os, const S_msrTransposition& elt);
 
 
 } // namespace MusicFormats

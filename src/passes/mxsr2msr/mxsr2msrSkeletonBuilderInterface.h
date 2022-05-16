@@ -26,7 +26,7 @@ EXP S_msrScore translateMxsrToMsrSkeleton (
   const string&   passDescription);
 
 //_______________________________________________________________________________
-EXP void displayMsrSkeleton (
+EXP void displayMsrScoreSkeleton (
   S_msrOahGroup& msrOpts,
   S_msrScore     theMsrScore,
   const string&  passNumber,

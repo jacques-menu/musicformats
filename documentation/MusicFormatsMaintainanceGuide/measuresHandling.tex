@@ -43,7 +43,7 @@ formats/msr/msrSegments.h:class EXP msrSegment : public msrVoiceElement
 \Class{msrSegment} contains a list of measures:
 \begin{lstlisting}[language=CPlusPlus]
     // the measures in the segment contain the mmusic
-    list<S_msrMeasure>    fSegmentMeasuresList;
+    list<S_msrMeasure>    fSegmentElementsList;
 \end{lstlisting}
 
 Class {\tt } contains a list of mesure elements:
@@ -90,7 +90,7 @@ msrStavesDetails.h:class EXP msrStaffDetails : public msrMeasureElement
 msrTempos.h:class EXP msrTempo : public msrMeasureElement
 msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElement
 msrTranspositions.h:class EXP msrOctaveShift : public msrMeasureElement
-msrTranspositions.h:class EXP msrTranspose : public msrMeasureElement
+msrTranspositions.h:class EXP msrTransposition : public msrMeasureElement
 msrTupletElements.h:class EXP msrTupletElement : public msrMeasureElement
 msrVoiceStaffChanges.h:class EXP msrVoiceStaffChange : public msrMeasureElement
 \end{lstlisting}
@@ -263,13 +263,13 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   string measureNumber =
     measure->getMeasureElementMeasureNumber ();
 
-  unsigned int segmentMeasuresListSize =
-    fSegmentMeasuresList.size ();
+  unsigned int segmentElementsListSize =
+    fSegmentElementsList.size ();
 
   string currentMeasureNumber =
-    segmentMeasuresListSize == 0
+    segmentElementsListSize == 0
       ? ""
-      : fSegmentMeasuresList.back ()->getMeasureElementMeasureNumber ();
+      : fSegmentElementsList.back ()->getMeasureElementMeasureNumber ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -277,7 +277,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
       "Appending measure '" << measureNumber <<
       "' to segment " << asString ();
 
-    if (fSegmentMeasuresList.size () == 0)
+    if (fSegmentElementsList.size () == 0)
       gLogStream <<
         ", as first measure";
     else
@@ -298,7 +298,9 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
 
     s <<
       "appending measure number '" << measureNumber <<
-      "' occurs twice in a row in voice \"" <<
+      "' occurs twice in a row in segment " <<
+      asString () <<
+      " in voice \"" <<
       fSegmentVoiceUpLink->getVoiceName () <<
       "\"";
 
@@ -311,7 +313,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   }
 
   // is measure the first one this segment?
-  if (segmentMeasuresListSize == 0) {
+  if (segmentElementsListSize == 0) {
     measure->
       setMeasureFirstInSegmentKind (
         msrMeasure::kMeasureFirstInSegmentKindYes);
@@ -335,7 +337,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   }
 
   // append measure to the segment
-  fSegmentMeasuresList.push_back (measure);
+  fSegmentElementsList.push_back (measure);
 }
 \end{lstlisting}
 

@@ -161,12 +161,12 @@ This sharing of a global variable is needed to produce orderly output, since man
 
 A typical sequence to produce indented output is:
 \begin{lstlisting}[language=CPlusPlus]
-void msrTranspose::print (ostream& os) const
+void msrTransposition::print (ostream& os) const
 {
   const int fieldWidth = 22;
 
   os <<
-    "Transpose" <<
+    "Transposition" <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -174,16 +174,16 @@ void msrTranspose::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "transposeDiatonic" << " = " << fTransposeDiatonic <<
+    "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
     endl <<
     setw (fieldWidth) <<
-    "transposeChromatic" << " = " << fTransposeChromatic <<
+    "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
     endl <<
     setw (fieldWidth) <<
-    "transposeOctaveChange" << " = " << fTransposeOctaveChange <<
+    "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
     endl <<
     setw (fieldWidth) <<
-    "transposeDouble" << " = " << fTransposeDouble <<
+    "fTranspositionDouble" << " = " << fTranspositionDouble <<
     endl << endl;
 
   --gIndenter;
@@ -262,16 +262,16 @@ void msrElement::print (ostream& os) const
 
 All \methodName{asString} methods produce an output of the form {\tt [...]}, in order to facilitate selecting the whole with a double click to help the user, since such output can be nested:
 \begin{lstlisting}[language=CPlusPlus]
-string msrTranspose::asString () const
+string msrTransposition::asString () const
 {
   stringstream s;
 
   s <<
-    "[Transpose" <<
-    ", diatonic = " << fTransposeDiatonic <<
-    ", chromatic = " << fTransposeChromatic <<
-    ", transposeOctaveChange = " << fTransposeOctaveChange <<
-    ", transposeDouble = " << fTransposeDouble <<
+    "[Transposition" <<
+    ", fTranspositionDiatonic = " << fTranspositionDiatonic <<
+    ", fTranspositionChromatic = " << fTranspositionChromatic <<
+    ", fTranspositionOctaveChange = " << fTranspositionOctaveChange <<
+    ", fTranspositionDouble = " << fTranspositionDouble <<
     ", line " << fInputLineNumber <<
     "]";
 
@@ -281,12 +281,12 @@ string msrTranspose::asString () const
 
 A typical sequence to produce indented output is:
 \begin{lstlisting}[language=CPlusPlus]
-void msrTranspose::print (ostream& os) const
+void msrTransposition::print (ostream& os) const
 {
   const int fieldWidth = 22;
 
   os <<
-    "Transpose" <<
+    "Transposition" <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -294,16 +294,16 @@ void msrTranspose::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "transposeDiatonic" << " = " << fTransposeDiatonic <<
+    "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
     endl <<
     setw (fieldWidth) <<
-    "transposeChromatic" << " = " << fTransposeChromatic <<
+    "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
     endl <<
     setw (fieldWidth) <<
-    "transposeOctaveChange" << " = " << fTransposeOctaveChange <<
+    "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
     endl <<
     setw (fieldWidth) <<
-    "transposeDouble" << " = " << fTransposeDouble <<
+    "fTranspositionDouble" << " = " << fTranspositionDouble <<
     endl << endl;
 
   --gIndenter;

@@ -39,13 +39,6 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   const string&     passDescription,
   S_msrPathToVoice  pathToVoice);
 
-//_______________________________________________________________________________
-EXP void displayResultingNewMsrScore_OptionalPass (
-  const S_msrScore originalMsrScore);
-
-EXP void displayResultingNewMsrScoreShort_OptionalPass (
-  S_msrScore originalMsrScore);
-
 
 } // namespace MusicFormats
 

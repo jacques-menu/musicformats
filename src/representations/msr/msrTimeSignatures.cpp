@@ -965,7 +965,7 @@ string msrTimeSignature::asString () const
   stringstream s;
 
   s <<
-    "[Time " <<
+    "[Time" <<
     ", timeSignatureSymbolKind: " <<
     msrTimeSignatureSymbolKindAsString (fTimeSignatureSymbolKind) <<
     ", fTimeIsCompound: " <<

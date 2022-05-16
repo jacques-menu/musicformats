@@ -409,16 +409,16 @@ void msrElement::print (ostream& os) const
 
 All \virtualMethod{asString} methods produce an output of the form {\tt [...]}, in order to facilitate selecting the whole with a double click to help the user, since such output can be nested:
 \begin{lstlisting}[language=CPlusPlus]
-string msrTranspose::asString () const
+string msrTransposition::asString () const
 {
   stringstream s;
 
   s <<
-    "[Transpose" <<
-    ", diatonic = " << fTransposeDiatonic <<
-    ", chromatic = " << fTransposeChromatic <<
-    ", transposeOctaveChange = " << fTransposeOctaveChange <<
-    ", transposeDouble = " << fTransposeDouble <<
+    "[Transposition" <<
+    ", fTranspositionDiatonic = " << fTranspositionDiatonic <<
+    ", fTranspositionChromatic = " << fTranspositionChromatic <<
+    ", fTranspositionOctaveChange = " << fTranspositionOctaveChange <<
+    ", fTranspositionDouble = " << fTranspositionDouble <<
     ", line " << fInputLineNumber <<
     "]";
 
@@ -428,12 +428,12 @@ string msrTranspose::asString () const
 
 A typical sequence to produce indented output is:
 \begin{lstlisting}[language=CPlusPlus]
-void msrTranspose::print (ostream& os) const
+void msrTransposition::print (ostream& os) const
 {
   const int fieldWidth = 22;
 
   os <<
-    "Transpose" <<
+    "Transposition" <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -441,16 +441,16 @@ void msrTranspose::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "transposeDiatonic" << " = " << fTransposeDiatonic <<
+    "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
     endl <<
     setw (fieldWidth) <<
-    "transposeChromatic" << " = " << fTransposeChromatic <<
+    "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
     endl <<
     setw (fieldWidth) <<
-    "transposeOctaveChange" << " = " << fTransposeOctaveChange <<
+    "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
     endl <<
     setw (fieldWidth) <<
-    "transposeDouble" << " = " << fTransposeDouble <<
+    "fTranspositionDouble" << " = " << fTranspositionDouble <<
     endl << endl;
 
   --gIndenter;
@@ -1170,7 +1170,7 @@ The {\tt otherMeasureElements} classes are:
   \item \class{msrPrintLayout}
   \item \class{msrEyeGlasses}
   \item \class{msrStaffLevelElement}
-  \item \class{msrTranspose}
+  \item \class{msrTransposition}
   \item \class{msrTupletElement}
   \end{itemize}
 
@@ -1451,7 +1451,7 @@ msrStavesDetails.h:class EXP msrStaffDetails : public msrMeasureElement
 msrTempos.h:class EXP msrTempo : public msrMeasureElement
 msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElement
 msrTranspositions.h:class EXP msrOctaveShift : public msrMeasureElement
-msrTranspositions.h:class EXP msrTranspose : public msrMeasureElement
+msrTranspositions.h:class EXP msrTransposition : public msrMeasureElement
 msrTupletElements.h:class EXP msrTupletElement : public msrMeasureElement
 msrVoiceStaffChanges.h:class EXP msrVoiceStaffChange : public msrMeasureElement
 \end{lstlisting}
@@ -1478,7 +1478,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
   msrMeasure::msrMeasureFirstInSegmentKind
     measureFirstInSegmentKind;
 
-  if (fSegmentMeasuresList.size () == 0) {
+  if (fSegmentElementsList.size () == 0) {
     // this is the first measure in the segment
     measureFirstInSegmentKind =
       msrMeasure::kMeasureFirstInSegmentKindYes;

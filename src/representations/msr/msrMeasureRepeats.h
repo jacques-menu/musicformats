@@ -63,16 +63,13 @@ class EXP msrMeasureRepeatPattern : public msrElement
                               { return fMeasureRepeatPatternSegment; }
 
     // upLinks
-    S_msrMeasureRepeat   getMeasureRepeatUpLink () const
+    S_msrMeasureRepeat    getMeasureRepeatUpLink () const
                             { return fMeasureRepeatUpLink; }
 
   public:
 
     // public services
     // ------------------------------------------------------
-
-    void                  appendSegmentElement (
-                            S_msrSegmentElement elem) override;
 
     int                   fetchMeasuresNumber () const;
 
@@ -104,7 +101,7 @@ class EXP msrMeasureRepeatPattern : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrMeasureRepeat   fMeasureRepeatUpLink;
+    S_msrMeasureRepeat    fMeasureRepeatUpLink;
 
     // segment
     S_msrSegment          fMeasureRepeatPatternSegment;
@@ -147,7 +144,7 @@ class EXP msrMeasureRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrMeasureRepeat   getMeasureRepeatUpLink () const
+    S_msrMeasureRepeat    getMeasureRepeatUpLink () const
                             { return fMeasureRepeatUpLink; }
     // segment
     void                  setMeasureRepeatReplicasSegment (
@@ -193,7 +190,7 @@ class EXP msrMeasureRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrMeasureRepeat   fMeasureRepeatUpLink;
+    S_msrMeasureRepeat    fMeasureRepeatUpLink;
 
     // segment
     S_msrSegment          fMeasureRepeatReplicasSegment;
@@ -307,6 +304,9 @@ class EXP msrMeasureRepeat : public msrSegmentElement
     // public services
     // ------------------------------------------------------
 
+    void                  appendMeasureElementToSegmentElement (
+                            S_msrMeasureElement elem) override;
+
     int                   fetchMeasureRepeatReplicasNumber () const;
 
     int                   fetchMeasureRepeatPatternMeasuresNumber () const;
@@ -337,6 +337,7 @@ class EXP msrMeasureRepeat : public msrSegmentElement
                             const string& context);
 
     void                  print (ostream& os) const override;
+    void                  printShort (ostream& os) const override;
 
   private:
 

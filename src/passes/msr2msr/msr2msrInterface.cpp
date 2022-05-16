@@ -140,15 +140,15 @@ S_msrScore translateMsrToMsr (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScore (
       resultingNewMsrScore,
-      "Display the resulting second MSR as text");
+      "Display the second MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScoreShort (
       resultingNewMsrScore,
-      "Display the resulting second MSR as text, short version");
+      "Display the second MSR as text");
   }
 
   // display the populated MSR score summary if requested
@@ -159,7 +159,7 @@ S_msrScore translateMsrToMsr (
     displayMsrScoreSummary (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      "Display a summary of the populated MSR");
+      "Display a summary of the second MSR");
   }
 
   // display the populated MSR score names if requested
@@ -169,7 +169,8 @@ S_msrScore translateMsrToMsr (
     // display the score name
     displayMsrScoreNames (
       resultingNewMsrScore,
-      gGlobalMsrOahGroup);
+      gGlobalMsrOahGroup,
+      "Display the names in the second MSR");
   }
   return resultingNewMsrScore;
 }
@@ -266,15 +267,15 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScore (
       resultingNewMsrScore,
-      "Display the resulting new MSR as text");
+      "Display the second MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScoreShort (
       resultingNewMsrScore,
-      "Display the resulting new MSR as text, short version");
+      "Display the second MSR as text");
   }
 
   // display the resulting new MSR score summary if requested
@@ -285,7 +286,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     displayMsrScoreSummary (
       resultingNewMsrScore,
       gGlobalMsrOahGroup,
-      "Display a summary of the resulting new MSR");
+      "Display a summary of the second MSR");
   }
 
   // display the populated MSR score names if requested
@@ -295,126 +296,10 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
     // display the score name
     displayMsrScoreNames (
       resultingNewMsrScore,
-      gGlobalMsrOahGroup);
+      gGlobalMsrOahGroup,
+      "Display the names in the second MSR");
   }
   return resultingNewMsrScore;
-}
-
-//_______________________________________________________________________________
-void displayResultingNewMsrScore_OptionalPass (
-  const S_msrScore originalMsrScore)
-{
-  // display it
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    originalMsrScore != nullptr,
-    "originalMsrScore is null");
-
-  // start the clock
-  clock_t startClock = clock ();
-
-  string separator =
-    "%--------------------------------------------------------------";
-
-  gLogStream <<
-    separator <<
-    endl <<
-    gTab <<
-    "Pass (optional): display the resulting MSR as text" <<
-    endl <<
-    separator <<
-    endl << endl <<
-    originalMsrScore <<
-    separator <<
-    endl << endl;
-
-  // register time spent
-  clock_t endClock = clock ();
-
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    "Display the resulting MSR as text",
-    mfTimingItem::kOptional,
-    startClock,
-    endClock);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after MSR score display: " <<
-        gIndenter.getIndentation ();
-
-      msr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
-}
-
-void displayResultingNewMsrScoreShort_OptionalPass (
-  S_msrScore originalMsrScore)
-{
-  // display it
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    originalMsrScore != nullptr,
-    "originalMsrScore is null");
-
-  // start the clock
-  clock_t startClock = clock ();
-
-  string separator =
-    "%--------------------------------------------------------------";
-
-  gLogStream <<
-    separator <<
-    endl <<
-    gTab <<
-    "Pass (optional): display the resulting MSR as text, short version" <<
-    endl <<
-    separator <<
-    endl << endl;
-
-  originalMsrScore->printShort (gLogStream);
-
-  gLogStream <<
-    separator <<
-    endl << endl;
-
-  // register time spent
-  clock_t endClock = clock ();
-
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    "Display the MSR as text, short version",
-    mfTimingItem::kOptional,
-    startClock,
-    endClock);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after MSR score short display: " <<
-        gIndenter.getIndentation ();
-
-      msr2msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
 }
 
 

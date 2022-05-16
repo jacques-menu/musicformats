@@ -1774,8 +1774,6 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
     gGlobalTracingOahGroup->getTraceWholeNotes ()
       ||
     gGlobalTracingOahGroup->getTraceTimeSignatures ()
-      ||
-    gGlobalTracingOahGroup->getTraceMeasures ()
   ) {
     gLogStream <<
       "Setting measure full measure whole notes from time signature:" <<
@@ -1909,8 +1907,8 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
   --gIndenter;
 }
 
-void msrMeasure::appendTransposeToMeasure (
-  S_msrTranspose transpose)
+void msrMeasure::appendTranspositionToMeasure (
+  S_msrTransposition transpose)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
@@ -2095,8 +2093,6 @@ void msrMeasure::appendNoteToMeasure (
 #ifdef TRACING_IS_ENABLED
   if (
     gGlobalTracingOahGroup->getTraceNotes ()
-      ||
-    gGlobalTracingOahGroup->getTraceMeasures ()
       ||
     gGlobalTracingOahGroup->getTracePositionsInMeasures ()
   ) {
@@ -2345,8 +2341,6 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure (
 #ifdef TRACING_IS_ENABLED
   if (
     gGlobalTracingOahGroup->getTraceNotes ()
-      ||
-    gGlobalTracingOahGroup->getTraceMeasures ()
       ||
     gGlobalTracingOahGroup->getTracePositionsInMeasures ()
   ) {

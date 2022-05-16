@@ -155,7 +155,7 @@ class EXP mxsr2msrTranslator :
   public visitor<S_solo>,
   public visitor<S_instruments>,
 
-  // transpose
+  // transposition
   // ------------------------------------------------------
 
   public visitor<S_transpose>,
@@ -532,532 +532,532 @@ class EXP mxsr2msrTranslator :
     // scaling
     // ------------------------------------------------------
 
-    virtual void visitEnd   ( S_scaling& elt);
-    virtual void visitStart ( S_millimeters& elt);
-    virtual void visitStart ( S_tenths& elt);
+    virtual void          visitEnd   ( S_scaling& elt);
+    virtual void          visitStart ( S_millimeters& elt);
+    virtual void          visitStart ( S_tenths& elt);
 
     // layout
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_page_layout& elt);
-    virtual void visitEnd   ( S_page_layout& elt);
+    virtual void          visitStart ( S_page_layout& elt);
+    virtual void          visitEnd   ( S_page_layout& elt);
 
-    virtual void visitStart ( S_page_height& elt);
-    virtual void visitStart ( S_page_width& elt);
+    virtual void          visitStart ( S_page_height& elt);
+    virtual void          visitStart ( S_page_width& elt);
 
-    virtual void visitStart ( S_page_margins& elt);
-    virtual void visitEnd   ( S_page_margins& elt);
+    virtual void          visitStart ( S_page_margins& elt);
+    virtual void          visitEnd   ( S_page_margins& elt);
 
-    virtual void visitStart ( S_left_margin& elt);
-    virtual void visitStart ( S_right_margin& elt);
-    virtual void visitStart ( S_top_margin& elt);
-    virtual void visitStart ( S_bottom_margin& elt);
+    virtual void          visitStart ( S_left_margin& elt);
+    virtual void          visitStart ( S_right_margin& elt);
+    virtual void          visitStart ( S_top_margin& elt);
+    virtual void          visitStart ( S_bottom_margin& elt);
 
-    virtual void visitStart ( S_system_layout& elt);
-    virtual void visitEnd   ( S_system_layout& elt);
+    virtual void          visitStart ( S_system_layout& elt);
+    virtual void          visitEnd   ( S_system_layout& elt);
 
-    virtual void visitStart ( S_system_margins& elt);
-    virtual void visitEnd   ( S_system_margins& elt);
-    virtual void visitStart ( S_system_distance& elt);
-    virtual void visitStart ( S_top_system_distance& elt);
+    virtual void          visitStart ( S_system_margins& elt);
+    virtual void          visitEnd   ( S_system_margins& elt);
+    virtual void          visitStart ( S_system_distance& elt);
+    virtual void          visitStart ( S_top_system_distance& elt);
 
-    virtual void visitStart ( S_staff_layout& elt);
-    virtual void visitEnd   ( S_staff_layout& elt);
-    virtual void visitStart ( S_staff_distance& elt);
+    virtual void          visitStart ( S_staff_layout& elt);
+    virtual void          visitEnd   ( S_staff_layout& elt);
+    virtual void          visitStart ( S_staff_distance& elt);
 
-    virtual void visitStart ( S_measure_layout& elt);
-    virtual void visitEnd   ( S_measure_layout& elt);
-    virtual void visitStart ( S_measure_distance& elt);
+    virtual void          visitStart ( S_measure_layout& elt);
+    virtual void          visitEnd   ( S_measure_layout& elt);
+    virtual void          visitStart ( S_measure_distance& elt);
 
     // appearance
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_appearance& elt);
-    virtual void visitEnd   ( S_appearance& elt);
-    virtual void visitStart ( S_line_width& elt);
-    virtual void visitStart ( S_note_size& elt);
-    virtual void visitStart ( S_distance& elt);
-    virtual void visitStart ( S_glyph& elt);
-    virtual void visitStart ( S_other_appearance& elt);
+    virtual void          visitStart ( S_appearance& elt);
+    virtual void          visitEnd   ( S_appearance& elt);
+    virtual void          visitStart ( S_line_width& elt);
+    virtual void          visitStart ( S_note_size& elt);
+    virtual void          visitStart ( S_distance& elt);
+    virtual void          visitStart ( S_glyph& elt);
+    virtual void          visitStart ( S_other_appearance& elt);
 
     // system dividers
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_system_dividers& elt);
-    virtual void visitStart ( S_left_divider& elt);
-    virtual void visitStart ( S_right_divider& elt);
+    virtual void          visitStart ( S_system_dividers& elt);
+    virtual void          visitStart ( S_left_divider& elt);
+    virtual void          visitStart ( S_right_divider& elt);
 
     // parts
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_part& elt);
-    virtual void visitEnd   ( S_part& elt);
+    virtual void          visitStart ( S_part& elt);
+    virtual void          visitEnd   ( S_part& elt);
 
     // ???
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_attributes& elt);
-    virtual void visitEnd   ( S_attributes& elt);
+    virtual void          visitStart ( S_attributes& elt);
+    virtual void          visitEnd   ( S_attributes& elt);
 
-    virtual void visitStart ( S_divisions& elt);
+    virtual void          visitStart ( S_divisions& elt);
 
     // staves
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_staves& elt);
+    virtual void          visitStart ( S_staves& elt);
 
-    virtual void visitStart ( S_staff& elt);
+    virtual void          visitStart ( S_staff& elt);
 
     // staff details
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_staff_details& elt);
-    virtual void visitEnd   ( S_staff_details& elt);
-    virtual void visitStart ( S_staff_type& elt);
-    virtual void visitStart ( S_staff_lines& elt);
-    virtual void visitStart ( S_staff_tuning& elt);
-    virtual void visitEnd   ( S_staff_tuning& elt);
-    virtual void visitStart ( S_tuning_step& elt);
-    virtual void visitStart ( S_tuning_octave& elt);
-    virtual void visitStart ( S_tuning_alter& elt);
-    virtual void visitStart ( S_capo& elt);
-    virtual void visitStart ( S_staff_size& elt);
+    virtual void          visitStart ( S_staff_details& elt);
+    virtual void          visitEnd   ( S_staff_details& elt);
+    virtual void          visitStart ( S_staff_type& elt);
+    virtual void          visitStart ( S_staff_lines& elt);
+    virtual void          visitStart ( S_staff_tuning& elt);
+    virtual void          visitEnd   ( S_staff_tuning& elt);
+    virtual void          visitStart ( S_tuning_step& elt);
+    virtual void          visitStart ( S_tuning_octave& elt);
+    virtual void          visitStart ( S_tuning_alter& elt);
+    virtual void          visitStart ( S_capo& elt);
+    virtual void          visitStart ( S_staff_size& elt);
 
     // ???
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_voice& elt );
+    virtual void          visitStart ( S_voice& elt );
 
     // backup & forward
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_backup& elt );
-    virtual void visitEnd   ( S_backup& elt );
-    virtual void visitStart ( S_forward& elt );
-    virtual void visitEnd   ( S_forward& elt );
+    virtual void          visitStart ( S_backup& elt );
+    virtual void          visitEnd   ( S_backup& elt );
+    virtual void          visitStart ( S_forward& elt );
+    virtual void          visitEnd   ( S_forward& elt );
 
     // clefs
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_clef& elt );
-    virtual void visitEnd   ( S_clef& elt );
-    virtual void visitStart ( S_sign& elt );
-    virtual void visitStart ( S_line& elt );
-    virtual void visitStart ( S_clef_octave_change& elt );
+    virtual void          visitStart ( S_clef& elt );
+    virtual void          visitEnd   ( S_clef& elt );
+    virtual void          visitStart ( S_sign& elt );
+    virtual void          visitStart ( S_line& elt );
+    virtual void          visitStart ( S_clef_octave_change& elt );
 
     // keys
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_key& elt );
-    virtual void visitEnd   ( S_key& elt );
-    virtual void visitStart ( S_cancel& elt );
-    virtual void visitStart ( S_fifths& elt );
-    virtual void visitStart ( S_mode& elt );
-    virtual void visitStart ( S_key_step& elt );
-    virtual void visitStart ( S_key_alter& elt );
-    virtual void visitStart ( S_key_octave& elt );
+    virtual void          visitStart ( S_key& elt );
+    virtual void          visitEnd   ( S_key& elt );
+    virtual void          visitStart ( S_cancel& elt );
+    virtual void          visitStart ( S_fifths& elt );
+    virtual void          visitStart ( S_mode& elt );
+    virtual void          visitStart ( S_key_step& elt );
+    virtual void          visitStart ( S_key_alter& elt );
+    virtual void          visitStart ( S_key_octave& elt );
 
     // time signatures
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_time& elt );
-    virtual void visitEnd   ( S_time& elt );
-    virtual void visitStart ( S_beats& elt );
-    virtual void visitStart ( S_beat_type& elt );
-    virtual void visitStart ( S_senza_misura& elt );
+    virtual void          visitStart ( S_time& elt );
+    virtual void          visitEnd   ( S_time& elt );
+    virtual void          visitStart ( S_beats& elt );
+    virtual void          visitStart ( S_beat_type& elt );
+    virtual void          visitStart ( S_senza_misura& elt );
 
-    virtual void visitStart ( S_interchangeable& elt );
-    virtual void visitStart ( S_time_relation& elt );
+    virtual void          visitStart ( S_interchangeable& elt );
+    virtual void          visitStart ( S_time_relation& elt );
 
     // instruments
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_score_instrument& elt);
-    virtual void visitStart ( S_instrument_name& elt);
-    virtual void visitStart ( S_solo& elt);
-    virtual void visitStart ( S_instrument& elt);
-    virtual void visitStart ( S_instruments& elt );
+    virtual void          visitStart ( S_score_instrument& elt);
+    virtual void          visitStart ( S_instrument_name& elt);
+    virtual void          visitStart ( S_solo& elt);
+    virtual void          visitStart ( S_instrument& elt);
+    virtual void          visitStart ( S_instruments& elt );
 
-    // transpose
+    // transposition
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_transpose& elt );
-    virtual void visitEnd   ( S_transpose& elt );
-    virtual void visitStart ( S_diatonic& elt );
-    virtual void visitStart ( S_chromatic& elt );
-    virtual void visitStart ( S_octave_change& elt );
-    virtual void visitStart ( S_double& elt );
+    virtual void          visitStart ( S_transpose& elt );
+    virtual void          visitEnd   ( S_transpose& elt );
+    virtual void          visitStart ( S_diatonic& elt );
+    virtual void          visitStart ( S_chromatic& elt );
+    virtual void          visitStart ( S_octave_change& elt );
+    virtual void          visitStart ( S_double& elt );
 
     // directions
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_direction& elt );
-    virtual void visitEnd   ( S_direction& elt );
-    virtual void visitStart ( S_direction_type& elt );
-    virtual void visitEnd   ( S_direction_type& elt );
-    virtual void visitStart ( S_offset& elt );
+    virtual void          visitStart ( S_direction& elt );
+    virtual void          visitEnd   ( S_direction& elt );
+    virtual void          visitStart ( S_direction_type& elt );
+    virtual void          visitEnd   ( S_direction_type& elt );
+    virtual void          visitStart ( S_offset& elt );
 
-    virtual void visitStart ( S_words& elt );
+    virtual void          visitStart ( S_words& elt );
 
-    virtual void visitStart ( S_octave_shift& elt );
+    virtual void          visitStart ( S_octave_shift& elt );
 
-    virtual void visitStart ( S_scordatura& elt );
-    virtual void visitEnd   ( S_scordatura& elt );
-    virtual void visitStart ( S_accord& elt );
-    virtual void visitEnd   ( S_accord& elt );
+    virtual void          visitStart ( S_scordatura& elt );
+    virtual void          visitEnd   ( S_scordatura& elt );
+    virtual void          visitStart ( S_accord& elt );
+    virtual void          visitEnd   ( S_accord& elt );
 
     // accordion registration
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_accordion_registration& elt );
-    virtual void visitEnd   ( S_accordion_registration& elt );
-    virtual void visitStart ( S_accordion_high& elt );
-    virtual void visitStart ( S_accordion_middle& elt );
-    virtual void visitStart ( S_accordion_low& elt );
+    virtual void          visitStart ( S_accordion_registration& elt );
+    virtual void          visitEnd   ( S_accordion_registration& elt );
+    virtual void          visitStart ( S_accordion_high& elt );
+    virtual void          visitStart ( S_accordion_middle& elt );
+    virtual void          visitStart ( S_accordion_low& elt );
 
     // tempo
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_metronome& elt );
-    virtual void visitEnd   ( S_metronome& elt );
-    virtual void visitStart ( S_beat_unit& elt );
-    virtual void visitStart ( S_beat_unit_dot& elt );
-    virtual void visitStart ( S_per_minute& elt );
-    virtual void visitStart ( S_metronome_note& elt );
-    virtual void visitEnd   ( S_metronome_note& elt );
-    virtual void visitStart ( S_metronome_relation& elt );
-    virtual void visitStart ( S_metronome_type& elt );
-    virtual void visitStart ( S_metronome_beam& elt );
-    virtual void visitStart ( S_metronome_dot& elt );
-    virtual void visitStart ( S_metronome_tuplet& elt );
-    virtual void visitEnd   ( S_metronome_tuplet& elt );
-    virtual void visitStart ( S_normal_dot& elt );
+    virtual void          visitStart ( S_metronome& elt );
+    virtual void          visitEnd   ( S_metronome& elt );
+    virtual void          visitStart ( S_beat_unit& elt );
+    virtual void          visitStart ( S_beat_unit_dot& elt );
+    virtual void          visitStart ( S_per_minute& elt );
+    virtual void          visitStart ( S_metronome_note& elt );
+    virtual void          visitEnd   ( S_metronome_note& elt );
+    virtual void          visitStart ( S_metronome_relation& elt );
+    virtual void          visitStart ( S_metronome_type& elt );
+    virtual void          visitStart ( S_metronome_beam& elt );
+    virtual void          visitStart ( S_metronome_dot& elt );
+    virtual void          visitStart ( S_metronome_tuplet& elt );
+    virtual void          visitEnd   ( S_metronome_tuplet& elt );
+    virtual void          visitStart ( S_normal_dot& elt );
 
     // ties, slurs, brackets & beams
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_tied& elt);
-    virtual void visitStart ( S_slur& elt);
-    virtual void visitStart ( S_bracket& elt);
-    virtual void visitStart ( S_beam& elt);
+    virtual void          visitStart ( S_tied& elt);
+    virtual void          visitStart ( S_slur& elt);
+    virtual void          visitStart ( S_bracket& elt);
+    virtual void          visitStart ( S_beam& elt);
 
     // lyrics
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_lyric& elt);
-    virtual void visitEnd   ( S_lyric& elt);
-    virtual void visitStart ( S_syllabic& elt);
-    virtual void visitStart ( S_text& elt );
-    virtual void visitStart ( S_elision& elt );
-    virtual void visitStart ( S_extend& elt);
+    virtual void          visitStart ( S_lyric& elt);
+    virtual void          visitEnd   ( S_lyric& elt);
+    virtual void          visitStart ( S_syllabic& elt);
+    virtual void          visitStart ( S_text& elt );
+    virtual void          visitStart ( S_elision& elt );
+    virtual void          visitStart ( S_extend& elt);
 
     // ???
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_degree& elt);
-    virtual void visitEnd   ( S_degree& elt);
-    virtual void visitStart ( S_degree_value& elt);
-    virtual void visitStart ( S_degree_alter& elt);
-    virtual void visitStart ( S_degree_type& elt);
+    virtual void          visitStart ( S_degree& elt);
+    virtual void          visitEnd   ( S_degree& elt);
+    virtual void          visitStart ( S_degree_value& elt);
+    virtual void          visitStart ( S_degree_alter& elt);
+    virtual void          visitStart ( S_degree_type& elt);
 
     // harmonies
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_harmony& elt);
-    virtual void visitEnd   ( S_harmony& elt);
-    virtual void visitStart ( S_root_step& elt);
-    virtual void visitStart ( S_root_alter& elt);
-    virtual void visitStart ( S_kind& elt);
-    virtual void visitStart ( S_inversion& elt);
-    virtual void visitStart ( S_bass_step& elt);
-    virtual void visitStart ( S_bass_alter& elt);
+    virtual void          visitStart ( S_harmony& elt);
+    virtual void          visitEnd   ( S_harmony& elt);
+    virtual void          visitStart ( S_root_step& elt);
+    virtual void          visitStart ( S_root_alter& elt);
+    virtual void          visitStart ( S_kind& elt);
+    virtual void          visitStart ( S_inversion& elt);
+    virtual void          visitStart ( S_bass_step& elt);
+    virtual void          visitStart ( S_bass_alter& elt);
 
     // frames
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_frame& elt);
-    virtual void visitEnd   ( S_frame& elt);
-    virtual void visitStart ( S_frame_strings& elt);
-    virtual void visitStart ( S_frame_frets& elt);
-    virtual void visitStart ( S_first_fret& elt);
-    virtual void visitStart ( S_frame_note& elt);
-    virtual void visitEnd   ( S_frame_note& elt);
-    virtual void visitStart ( S_barre& elt);
+    virtual void          visitStart ( S_frame& elt);
+    virtual void          visitEnd   ( S_frame& elt);
+    virtual void          visitStart ( S_frame_strings& elt);
+    virtual void          visitStart ( S_frame_frets& elt);
+    virtual void          visitStart ( S_first_fret& elt);
+    virtual void          visitStart ( S_frame_note& elt);
+    virtual void          visitEnd   ( S_frame_note& elt);
+    virtual void          visitStart ( S_barre& elt);
 
     // figured bass
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_figured_bass& elt);
-    virtual void visitEnd   ( S_figured_bass& elt);
-    virtual void visitStart ( S_figure& elt);
-    virtual void visitEnd   ( S_figure& elt);
-    virtual void visitStart ( S_prefix& elt);
-    virtual void visitStart ( S_figure_number& elt);
-    virtual void visitStart ( S_suffix& elt);
+    virtual void          visitStart ( S_figured_bass& elt);
+    virtual void          visitEnd   ( S_figured_bass& elt);
+    virtual void          visitStart ( S_figure& elt);
+    virtual void          visitEnd   ( S_figure& elt);
+    virtual void          visitStart ( S_prefix& elt);
+    virtual void          visitStart ( S_figure_number& elt);
+    virtual void          visitStart ( S_suffix& elt);
 
     // measures
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_measure& elt);
-    virtual void visitEnd   ( S_measure& elt);
+    virtual void          visitStart ( S_measure& elt);
+    virtual void          visitEnd   ( S_measure& elt);
 
     // print
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_print& elt);
-    virtual void visitEnd   ( S_print& elt);
+    virtual void          visitStart ( S_print& elt);
+    virtual void          visitEnd   ( S_print& elt);
 
-    virtual void visitStart ( S_measure_numbering& elt);
+    virtual void          visitStart ( S_measure_numbering& elt);
 
-    virtual void visitStart ( S_barline& elt);
-    virtual void visitStart ( S_segno& elt);
-    virtual void visitStart ( S_coda& elt);
-    virtual void visitStart ( S_eyeglasses& elt);
-    virtual void visitStart ( S_pedal& elt);
-    virtual void visitStart ( S_bar_style& elt);
-    virtual void visitStart ( S_repeat& elt);
-    virtual void visitStart ( S_ending& elt);
-    virtual void visitEnd   ( S_barline& elt);
+    virtual void          visitStart ( S_barline& elt);
+    virtual void          visitStart ( S_segno& elt);
+    virtual void          visitStart ( S_coda& elt);
+    virtual void          visitStart ( S_eyeglasses& elt);
+    virtual void          visitStart ( S_pedal& elt);
+    virtual void          visitStart ( S_bar_style& elt);
+    virtual void          visitStart ( S_repeat& elt);
+    virtual void          visitStart ( S_ending& elt);
+    virtual void          visitEnd   ( S_barline& elt);
 
     // notes
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_note& elt);
-    virtual void visitStart ( S_step& elt);
-    virtual void visitStart ( S_alter& elt);
-    virtual void visitStart ( S_octave& elt);
-    virtual void visitStart ( S_duration& elt);
-    virtual void visitStart ( S_dot& elt );
+    virtual void          visitStart ( S_note& elt);
+    virtual void          visitStart ( S_step& elt);
+    virtual void          visitStart ( S_alter& elt);
+    virtual void          visitStart ( S_octave& elt);
+    virtual void          visitStart ( S_duration& elt);
+    virtual void          visitStart ( S_dot& elt );
 
     // repeats
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_measure_style& elt );
-    virtual void visitStart ( S_beat_repeat& elt );
-    virtual void visitStart ( S_measure_repeat& elt );
-    virtual void visitStart ( S_multiple_rest& elt );
-    virtual void visitStart ( S_slash& elt );
-    virtual void visitEnd   ( S_slash& elt );
-    virtual void visitStart ( S_slash_type& elt );
-    virtual void visitStart ( S_slash_dot& elt );
+    virtual void          visitStart ( S_measure_style& elt );
+    virtual void          visitStart ( S_beat_repeat& elt );
+    virtual void          visitStart ( S_measure_repeat& elt );
+    virtual void          visitStart ( S_multiple_rest& elt );
+    virtual void          visitStart ( S_slash& elt );
+    virtual void          visitEnd   ( S_slash& elt );
+    virtual void          visitStart ( S_slash_type& elt );
+    virtual void          visitStart ( S_slash_dot& elt );
 
     // atticulations
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_articulations& elt );
-    virtual void visitEnd   ( S_articulations& elt );
-    virtual void visitStart ( S_accent& elt );
-    virtual void visitStart ( S_breath_mark& elt );
-    virtual void visitStart ( S_caesura& elt );
-    virtual void visitStart ( S_spiccato& elt );
-    virtual void visitStart ( S_staccato& elt );
-    virtual void visitStart ( S_staccatissimo& elt );
-    virtual void visitStart ( S_stress& elt );
-    virtual void visitStart ( S_unstress& elt );
-    virtual void visitStart ( S_detached_legato& elt );
-    virtual void visitStart ( S_strong_accent& elt );
-    virtual void visitStart ( S_tenuto& elt );
-    virtual void visitStart ( S_fermata& elt );
-    virtual void visitStart ( S_arpeggiate& elt );
-    virtual void visitStart ( S_non_arpeggiate& elt );
-    virtual void visitStart ( S_doit& elt );
-    virtual void visitStart ( S_falloff& elt );
-    virtual void visitStart ( S_plop& elt );
-    virtual void visitStart ( S_scoop& elt );
+    virtual void          visitStart ( S_articulations& elt );
+    virtual void          visitEnd   ( S_articulations& elt );
+    virtual void          visitStart ( S_accent& elt );
+    virtual void          visitStart ( S_breath_mark& elt );
+    virtual void          visitStart ( S_caesura& elt );
+    virtual void          visitStart ( S_spiccato& elt );
+    virtual void          visitStart ( S_staccato& elt );
+    virtual void          visitStart ( S_staccatissimo& elt );
+    virtual void          visitStart ( S_stress& elt );
+    virtual void          visitStart ( S_unstress& elt );
+    virtual void          visitStart ( S_detached_legato& elt );
+    virtual void          visitStart ( S_strong_accent& elt );
+    virtual void          visitStart ( S_tenuto& elt );
+    virtual void          visitStart ( S_fermata& elt );
+    virtual void          visitStart ( S_arpeggiate& elt );
+    virtual void          visitStart ( S_non_arpeggiate& elt );
+    virtual void          visitStart ( S_doit& elt );
+    virtual void          visitStart ( S_falloff& elt );
+    virtual void          visitStart ( S_plop& elt );
+    virtual void          visitStart ( S_scoop& elt );
 
     // technicals
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_technical& elt );
-    virtual void visitEnd   ( S_technical& elt );
-    virtual void visitStart ( S_arrow& elt );
-    virtual void visitStart ( S_bend& elt );
-    virtual void visitEnd   ( S_bend& elt );
-    virtual void visitStart ( S_bend_alter& elt );
-    virtual void visitStart ( S_double_tongue& elt );
-    virtual void visitStart ( S_down_bow& elt );
-    virtual void visitStart ( S_fingering& elt );
-    virtual void visitStart ( S_fingernails& elt );
-    virtual void visitStart ( S_fret& elt );
-    virtual void visitStart ( S_hammer_on& elt );
-    virtual void visitStart ( S_handbell& elt );
-    virtual void visitStart ( S_harmonic& elt );
-    virtual void visitStart ( S_heel& elt );
-    virtual void visitStart ( S_hole& elt );
-    virtual void visitStart ( S_open_string& elt );
-    virtual void visitStart ( S_other_technical& elt );
-    virtual void visitStart ( S_pluck& elt );
-    virtual void visitStart ( S_pull_off& elt );
-    virtual void visitStart ( S_snap_pizzicato& elt );
-    virtual void visitStart ( S_stopped& elt );
-    virtual void visitStart ( S_string& elt );
-    virtual void visitStart ( S_tap& elt );
-    virtual void visitStart ( S_thumb_position& elt );
-    virtual void visitStart ( S_toe& elt );
-    virtual void visitStart ( S_triple_tongue& elt );
-    virtual void visitStart ( S_up_bow& elt );
+    virtual void          visitStart ( S_technical& elt );
+    virtual void          visitEnd   ( S_technical& elt );
+    virtual void          visitStart ( S_arrow& elt );
+    virtual void          visitStart ( S_bend& elt );
+    virtual void          visitEnd   ( S_bend& elt );
+    virtual void          visitStart ( S_bend_alter& elt );
+    virtual void          visitStart ( S_double_tongue& elt );
+    virtual void          visitStart ( S_down_bow& elt );
+    virtual void          visitStart ( S_fingering& elt );
+    virtual void          visitStart ( S_fingernails& elt );
+    virtual void          visitStart ( S_fret& elt );
+    virtual void          visitStart ( S_hammer_on& elt );
+    virtual void          visitStart ( S_handbell& elt );
+    virtual void          visitStart ( S_harmonic& elt );
+    virtual void          visitStart ( S_heel& elt );
+    virtual void          visitStart ( S_hole& elt );
+    virtual void          visitStart ( S_open_string& elt );
+    virtual void          visitStart ( S_other_technical& elt );
+    virtual void          visitStart ( S_pluck& elt );
+    virtual void          visitStart ( S_pull_off& elt );
+    virtual void          visitStart ( S_snap_pizzicato& elt );
+    virtual void          visitStart ( S_stopped& elt );
+    virtual void          visitStart ( S_string& elt );
+    virtual void          visitStart ( S_tap& elt );
+    virtual void          visitStart ( S_thumb_position& elt );
+    virtual void          visitStart ( S_toe& elt );
+    virtual void          visitStart ( S_triple_tongue& elt );
+    virtual void          visitStart ( S_up_bow& elt );
 
     // ornaments
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_ornaments& elt );
-    virtual void visitEnd   ( S_ornaments& elt );
-    virtual void visitStart ( S_trill_mark& elt );
-    virtual void visitStart ( S_dashes& elt );
-    virtual void visitStart ( S_wavy_line& elt );
-    virtual void visitStart ( S_turn& elt );
-    virtual void visitStart ( S_inverted_turn& elt );
-    virtual void visitStart ( S_delayed_turn& elt );
-    virtual void visitStart ( S_delayed_inverted_turn& elt );
-    virtual void visitStart ( S_vertical_turn& elt );
-    virtual void visitStart ( S_mordent& elt );
-    virtual void visitStart ( S_inverted_mordent& elt );
-    virtual void visitStart ( S_schleifer& elt );
-    virtual void visitStart ( S_shake& elt );
-    virtual void visitStart ( S_accidental_mark& elt );
+    virtual void          visitStart ( S_ornaments& elt );
+    virtual void          visitEnd   ( S_ornaments& elt );
+    virtual void          visitStart ( S_trill_mark& elt );
+    virtual void          visitStart ( S_dashes& elt );
+    virtual void          visitStart ( S_wavy_line& elt );
+    virtual void          visitStart ( S_turn& elt );
+    virtual void          visitStart ( S_inverted_turn& elt );
+    virtual void          visitStart ( S_delayed_turn& elt );
+    virtual void          visitStart ( S_delayed_inverted_turn& elt );
+    virtual void          visitStart ( S_vertical_turn& elt );
+    virtual void          visitStart ( S_mordent& elt );
+    virtual void          visitStart ( S_inverted_mordent& elt );
+    virtual void          visitStart ( S_schleifer& elt );
+    virtual void          visitStart ( S_shake& elt );
+    virtual void          visitStart ( S_accidental_mark& elt );
 
     // tremolos
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_tremolo& elt );
+    virtual void          visitStart ( S_tremolo& elt );
 
     // dynamics
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_f& elt);
-    virtual void visitStart ( S_ff& elt);
-    virtual void visitStart ( S_fff& elt);
-    virtual void visitStart ( S_ffff& elt);
-    virtual void visitStart ( S_fffff& elt);
-    virtual void visitStart ( S_ffffff& elt);
+    virtual void          visitStart ( S_f& elt);
+    virtual void          visitStart ( S_ff& elt);
+    virtual void          visitStart ( S_fff& elt);
+    virtual void          visitStart ( S_ffff& elt);
+    virtual void          visitStart ( S_fffff& elt);
+    virtual void          visitStart ( S_ffffff& elt);
 
-    virtual void visitStart ( S_p& elt);
-    virtual void visitStart ( S_pp& elt);
-    virtual void visitStart ( S_ppp& elt);
-    virtual void visitStart ( S_pppp& elt);
-    virtual void visitStart ( S_ppppp& elt);
-    virtual void visitStart ( S_pppppp& elt);
+    virtual void          visitStart ( S_p& elt);
+    virtual void          visitStart ( S_pp& elt);
+    virtual void          visitStart ( S_ppp& elt);
+    virtual void          visitStart ( S_pppp& elt);
+    virtual void          visitStart ( S_ppppp& elt);
+    virtual void          visitStart ( S_pppppp& elt);
 
-    virtual void visitStart ( S_mf& elt);
-    virtual void visitStart ( S_mp& elt);
-    virtual void visitStart ( S_fp& elt);
-    virtual void visitStart ( S_fz& elt);
-    virtual void visitStart ( S_pf& elt);
+    virtual void          visitStart ( S_mf& elt);
+    virtual void          visitStart ( S_mp& elt);
+    virtual void          visitStart ( S_fp& elt);
+    virtual void          visitStart ( S_fz& elt);
+    virtual void          visitStart ( S_pf& elt);
 
-    virtual void visitStart ( S_rf& elt);
-    virtual void visitStart ( S_sf& elt);
-    virtual void visitStart ( S_rfz& elt);
-    virtual void visitStart ( S_sfz& elt);
+    virtual void          visitStart ( S_rf& elt);
+    virtual void          visitStart ( S_sf& elt);
+    virtual void          visitStart ( S_rfz& elt);
+    virtual void          visitStart ( S_sfz& elt);
 
-    virtual void visitStart ( S_sfp& elt);
-    virtual void visitStart ( S_sfpp& elt);
-    virtual void visitStart ( S_sffz& elt);
-    virtual void visitStart ( S_sfzp& elt);
+    virtual void          visitStart ( S_sfp& elt);
+    virtual void          visitStart ( S_sfpp& elt);
+    virtual void          visitStart ( S_sffz& elt);
+    virtual void          visitStart ( S_sfzp& elt);
 
-    virtual void visitStart ( S_n& elt);
+    virtual void          visitStart ( S_n& elt);
 
-    virtual void visitStart ( S_other_dynamics& elt);
+    virtual void          visitStart ( S_other_dynamics& elt);
 
-    virtual void visitStart ( S_wedge& elt);
+    virtual void          visitStart ( S_wedge& elt);
 
     // harp pedals tuning
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_harp_pedals& elt);
-    virtual void visitStart ( S_pedal_tuning& elt);
-    virtual void visitEnd   ( S_pedal_tuning& elt);
-    virtual void visitStart ( S_pedal_step& elt);
-    virtual void visitStart ( S_pedal_alter& elt);
+    virtual void          visitStart ( S_harp_pedals& elt);
+    virtual void          visitStart ( S_pedal_tuning& elt);
+    virtual void          visitEnd   ( S_pedal_tuning& elt);
+    virtual void          visitStart ( S_pedal_step& elt);
+    virtual void          visitStart ( S_pedal_alter& elt);
 
-    virtual void visitStart ( S_damp& elt);
-    virtual void visitStart ( S_damp_all& elt);
+    virtual void          visitStart ( S_damp& elt);
+    virtual void          visitStart ( S_damp_all& elt);
 
     // cue notes
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_cue& elt );
+    virtual void          visitStart ( S_cue& elt );
 
     // grace notes
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_grace& elt );
+    virtual void          visitStart ( S_grace& elt );
 
     // ???
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_type& elt);
+    virtual void          visitStart ( S_type& elt);
 
     // note heads
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_notehead& elt);
+    virtual void          visitStart ( S_notehead& elt);
 
 
     // notes
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_accidental& elt);
+    virtual void          visitStart ( S_accidental& elt);
 
-    virtual void visitStart ( S_stem& elt);
+    virtual void          visitStart ( S_stem& elt);
 
-    virtual void visitEnd   ( S_note& elt);
+    virtual void          visitEnd   ( S_note& elt);
 
-    virtual void visitStart ( S_rest& elt);
+    virtual void          visitStart ( S_rest& elt);
 
-    virtual void visitEnd   ( S_unpitched& elt);
-    virtual void visitStart ( S_display_step& elt);
-    virtual void visitStart ( S_display_octave& elt);
+    virtual void          visitEnd   ( S_unpitched& elt);
+    virtual void          visitStart ( S_display_step& elt);
+    virtual void          visitStart ( S_display_octave& elt);
 
     // chords
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_chord& elt);
+    virtual void          visitStart ( S_chord& elt);
 
     // time
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_time_modification& elt);
-    virtual void visitStart ( S_actual_notes& elt);
-    virtual void visitStart ( S_normal_notes& elt);
-    virtual void visitStart ( S_normal_type& elt);
+    virtual void          visitStart ( S_time_modification& elt);
+    virtual void          visitStart ( S_actual_notes& elt);
+    virtual void          visitStart ( S_normal_notes& elt);
+    virtual void          visitStart ( S_normal_type& elt);
 
     // tuplets
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_tuplet& elt);
-    virtual void visitStart ( S_tuplet_actual& elt);
-    virtual void visitEnd   ( S_tuplet_actual& elt);
-    virtual void visitStart ( S_tuplet_normal& elt);
-    virtual void visitEnd   ( S_tuplet_normal& elt);
-    virtual void visitStart ( S_tuplet_number& elt);
-    virtual void visitStart ( S_tuplet_type& elt);
-    virtual void visitStart ( S_tuplet_dot& elt);
+    virtual void          visitStart ( S_tuplet& elt);
+    virtual void          visitStart ( S_tuplet_actual& elt);
+    virtual void          visitEnd   ( S_tuplet_actual& elt);
+    virtual void          visitStart ( S_tuplet_normal& elt);
+    virtual void          visitEnd   ( S_tuplet_normal& elt);
+    virtual void          visitStart ( S_tuplet_number& elt);
+    virtual void          visitStart ( S_tuplet_type& elt);
+    virtual void          visitStart ( S_tuplet_dot& elt);
 
     // glissandos
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_glissando& elt);
+    virtual void          visitStart ( S_glissando& elt);
 
     // slides
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_slide& elt);
+    virtual void          visitStart ( S_slide& elt);
 
     // rehearsals
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_rehearsal& elt);
+    virtual void          visitStart ( S_rehearsal& elt);
 
     // sound & MIDI
     // ------------------------------------------------------
 
-    virtual void visitStart ( S_sound& elt);
-    virtual void visitEnd   ( S_sound& elt);
+    virtual void          visitStart ( S_sound& elt);
+    virtual void          visitEnd   ( S_sound& elt);
 
-    virtual void visitStart ( S_instrument_sound& elt);
-    virtual void visitStart ( S_virtual_instrument& elt);
-    virtual void visitStart ( S_midi_device& elt);
-    virtual void visitStart ( S_midi_instrument& elt);
+    virtual void          visitStart ( S_instrument_sound& elt);
+    virtual void          visitStart ( S_virtual_instrument& elt);
+    virtual void          visitStart ( S_midi_device& elt);
+    virtual void          visitStart ( S_midi_instrument& elt);
 
   private:
 

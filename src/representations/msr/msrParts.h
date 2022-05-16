@@ -326,10 +326,10 @@ class EXP msrPart : public msrPartGroupElement
     void                  appendRehearsalMarkToPart (
                             S_msrRehearsalMark rehearsalMark);
 
-    // transpose
+    // transposition
 
-    void                  appendTransposeToPart (
-                            S_msrTranspose transpose);
+    void                  appendTranspositionToPart (
+                            S_msrTransposition transpose);
 
     // staff details
 
@@ -621,9 +621,9 @@ class EXP msrPart : public msrPartGroupElement
     rational              fPartShortestNoteDuration;
     msrTupletFactor       fPartShortestNoteTupletFactor;
 
-    // transpose
+    // transposition
 
-    S_msrTranspose        fPartCurrentTranspose;
+    S_msrTransposition        fPartCurrentTranspose;
 
     // counter
 
@@ -669,9 +669,9 @@ class EXP msrPart : public msrPartGroupElement
     S_msrTimeSignature    getPartCurrentTime () const
                               { return fPartCurrentTimeSignature; }
 
-    // transpose
+    // transposition
 
-    S_msrTranspose        getPartCurrentTranspose () const
+    S_msrTransposition        getPartCurrentTranspose () const
                               { return fPartCurrentTranspose; }
 
     // staff details

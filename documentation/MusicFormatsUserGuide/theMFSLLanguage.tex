@@ -314,9 +314,11 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -help-maintai
             Write a trace of the MFSL parsing by Bison-generated code to standard error.
       -trace-choices, -tchoices
             Write MFSL choice analysis activity to standard output.
-      -trace-choice-statements, -tChoice
+      -trace-choice-statements, -tchoicesstats
             Write MFSL choice statements handling activity to standard output.
-      -trace-case-statements, -tcases
+      -trace-case-input-statements, -tinputs
+            Write MFSL case statements handling activity to standard output.
+      -trace-case-choice-statements, -tcasechoices
             Write MFSL case statements handling activity to standard output.
       -trace-options-blocks, -toblocks
             Write MFSL options blocks analysis activity to standard output.
@@ -411,24 +413,24 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./Hymn121ForBass.m
     --------------------------
       Files (-help-files, -hfiles), 1 atom chosen:
         fOutputFileName                                 : [Hymn121_Bass.ly], set by user
-    
+
     Options and help group (-help-oah-group, -hoah-group), 1 atom chosen:
     --------------------------
       Options and help (-help-oah, -hoah), 1 atom chosen:
         fDisplayOptionsValues                           : true, set by user
-    
+
     Parts group (-help-parts-group, -hparts-group), 1 atom chosen:
     --------------------------
       Parts (-help-parts, -hparts), 1 atom chosen:
         fMusicXMLPartsKeepIDSet                         : set by user
           "P4"
-    
+
     Header group (-help-header-group, -hheader-group), 2 atoms chosen:
     --------------------------
       Header (-help-header, -hheader), 2 atoms chosen:
         fTitle                                          : [Hymn 121 - Angels From The Realms Of Glory], set by user
         fSubTitle                                       : [Part 4 - Bass], set by user
-    
+
     Output group (-help-output-group, -houtput-group), 1 atom chosen:
     --------------------------
       Output (-help-output, -houtput), 1 atom chosen:
@@ -486,7 +488,7 @@ jacquesmenu@macmini > xml2ly -query ignore-musicxml-lyrics
 
 These options can be applied by uncommenting them in \mfslfiles{Hymn121ForBass.mfsl}. The differences between the two are:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > diff Hymn121ForBass.mfsl Hymn121ForBassEnhanced.mfsl 
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > diff Hymn121ForBass.mfsl Hymn121ForBassEnhanced.mfsl
 35c35
 <   -output-file-name "Hymn121_Bass.ly"
 ---
@@ -496,18 +498,18 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > diff Hymn121ForBas
 ---
 >   -subtitle "Part 4 - Bass, enhanced"
 49a50,63
-> 
-> 
+>
+>
 > # ----------------------------------------------------------
 > # enhancement options
 > # ----------------------------------------------------------
-> 
+>
 > # staff
 >   -lpsr-staff-instrument-name "Voice 4:"  # an empty name
-> 
+>
 > # dynamics
 >   -all-wedges-below   # there are above the staff in the input file
-> 
+>
 >   -ignore-musicxml-lyrics
       # there's a glitch in the last measure of the bass...
 \end{lstlisting}
@@ -534,7 +536,7 @@ The actual selection works this way:
 
 The \mfslfiles{Hymn121ForVocalSATBQuartet.mfsl} \script\ contains:
 \begin{lstlisting}[language=MFSL]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForVocalSATBQuartet.mfsl 
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForVocalSATBQuartet.mfsl
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
 
 ###
@@ -775,7 +777,7 @@ The \mfslInterp\ is a regular executable application, and as such, it can be use
 
 This author uses for exemple \mfslfiles{minimal.bash}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat minimal.bash 
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat minimal.bash
 #!/bin/bash
 
 set -x
@@ -799,7 +801,7 @@ The \code{set} \bash\ commands toggle an echo of the commands on and off.
 
 The trace produced when running this script is:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.bash 
+jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.bash
 + MINIMAL_LY=Minimal.ly
 + ./minimal.mfsl
 + ls -sal Minimal.ly

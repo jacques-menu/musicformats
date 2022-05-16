@@ -328,6 +328,12 @@ class EXP msrMeasure : public msrSegmentElement
     // public services
     // ------------------------------------------------------
 
+    // MSR segment elements
+
+    virtual void          appendMeasureElementToSegmentElement (
+                            S_msrMeasureElement elem) override
+                              { appendElementToMeasure (elem); }
+
     // lengthes
 
     string                fullMeasureWholeNotesDurationAsMsrString ();
@@ -382,10 +388,10 @@ class EXP msrMeasure : public msrSegmentElement
                             int             inputLineNumber,
                             const rational& positionInMeasure);
 
-    // transpose
+    // transposition
 
-    void                  appendTransposeToMeasure (
-                            S_msrTranspose transpose);
+    void                  appendTranspositionToMeasure (
+                            S_msrTransposition transpose);
 
     // staff details
 

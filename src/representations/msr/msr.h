@@ -69,6 +69,8 @@
 
 #include "msrSpanners.h"
 
+#include "msrOctaveShifts.h"
+
 #include "msrGraceNotes.h"
 #include "msrAfterGraceNotes.h"
 

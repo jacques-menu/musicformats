@@ -1803,22 +1803,17 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
   S_msrNote result;
 
   if (fVoiceFirstSegment) {
-    // get the segment's measures list
-    const list<S_msrMeasure>&
-      firstSegmentMeasuresList =
+    // get the voice's first measure
+    S_msrMeasure
+      voiceFirstMeasure =
         fVoiceFirstSegment->
-          getSegmentMeasuresList ();
+          fetchSegmentFirstMeasure ();
 
-    if (firstSegmentMeasuresList.size ()) {
-      // get the segment's first measure
-      S_msrMeasure
-        firstMeasure =
-          firstSegmentMeasuresList.front ();
-
+    if (voiceFirstMeasure) {
       // get the first measure's elements list
       const list<S_msrMeasureElement>&
         firstMeasureElementsList =
-          firstMeasure->
+          voiceFirstMeasure->
             getMeasureElementsList ();
 
       // fetch the first note in the first measure to which
@@ -1898,6 +1893,23 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
           }
         } // for
       }
+    }
+
+    else {
+      stringstream s;
+
+      s <<
+        "cannot append a harmony to " <<
+        msrVoiceKindAsString (fVoiceKind) <<
+        " voice \"" <<
+        getVoiceName () <<
+        "\"";
+
+      msrInternalError (
+        gGlobalServiceRunData->getInputSourceName (),
+        fInputLineNumber,
+        __FILE__, __LINE__,
+        s.str ());
     }
   }
 
@@ -2414,8 +2426,8 @@ void msrVoice::appendPaddingNoteToVoice (
   --gIndenter;
 }
 
-void msrVoice::appendTransposeToVoice (
-  S_msrTranspose transpose)
+void msrVoice::appendTranspositionToVoice (
+  S_msrTransposition transpose)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
@@ -2428,7 +2440,7 @@ void msrVoice::appendTransposeToVoice (
 #endif
 
   fVoiceLastSegment->
-    appendTransposeToSegment (transpose);
+    appendTranspositionToSegment (transpose);
 }
 
 void msrVoice::appendStaffDetailsToVoice (
@@ -3159,8 +3171,11 @@ void msrVoice::appendBarCheckToVoice (S_msrBarCheck barCheck)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
-      "Appending bar check '" << barCheck->asString () <<
-      "' to voice \"" << getVoiceName () <<  "\"" <<
+      "Appending bar check " <<
+      barCheck->asString () <<
+      " to voice \"" <<
+      getVoiceName () <<
+      "\"" <<
       endl;
   }
 #endif
@@ -3175,9 +3190,9 @@ void msrVoice::appendBarNumberCheckToVoice (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
-      "Appending barnumber check '" <<
+      "Appending barnumber check " <<
       barNumberCheck->asString () <<
-      "' to voice \"" << getVoiceName () <<  "\"" <<
+      " to voice \"" << getVoiceName () <<  "\"" <<
       endl;
   }
 #endif
@@ -3265,25 +3280,22 @@ S_msrMeasure msrVoice::fetchVoiceLastMeasure (
     fVoiceLastSegment != nullptr,
     "fVoiceLastSegment is null");
 
-  const list<S_msrMeasure>&
-    lastSegmentMeasuresList =
-      fVoiceLastSegment->getSegmentMeasuresList ();
+  result =
+    fVoiceLastSegment->
+      getSegmentLastAppendedMeasure (); // JMI v0.9.63
 
-  if (lastSegmentMeasuresList.size ()) {
-    result = lastSegmentMeasuresList.back ();
-  }
-  else {
-    stringstream s;
-
-    s <<
-      "attempting to fetch voice last measure in an empty measures list";
-
-    msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      s.str ());
-  }
+//   else { JMI v0.9.63
+//     stringstream s;
+//
+//     s <<
+//       "attempting to fetch voice last measure in an empty measure elements list";
+//
+//     msrInternalError (
+//       gGlobalServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       s.str ());
+//   }
 
   return result;
 }
@@ -3638,19 +3650,17 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 //     --gIndenter;
 //   }
 
-void msrVoice::displayVoiceMeasuresFlatList () const
+void msrVoice::displayVoiceMeasuresFlatList (
+  int fieldWidth) const
 {
   size_t voiceMeasuresFlatListSize =
     fVoiceMeasuresFlatList.size ();
-
-  const int fieldWidth = 7;
 
   gLogStream <<
     setw (fieldWidth) <<
     "fVoiceMeasuresFlatList" << " : ";
   if (voiceMeasuresFlatListSize) {
     gLogStream <<
-      " : " <<
       mfSingularOrPlural (
         voiceMeasuresFlatListSize, "element", "elements");
   }
@@ -4118,12 +4128,12 @@ void msrVoice::moveVoiceLastSegmentToInitialVoiceElementsIfRelevant (
   const string& context)
 {
   if (fVoiceLastSegment) {
-    const list<S_msrMeasure>&
-      segmentMeasuresList =
+    const list<S_msrSegmentElement>&
+      segmentElementsList =
         fVoiceLastSegment->
-          getSegmentMeasuresList ();
+          getSegmentElementsList ();
 
-    if (segmentMeasuresList.size ()) {
+    if (segmentElementsList.size ()) {
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceSegments ()) {
         gLogStream <<
@@ -4240,20 +4250,21 @@ void msrVoice::handleVoiceLevelRepeatStart (
   // is there a voice last segment?
   if (fVoiceLastSegment) {
 
-    // fetch last segment's measures list
-    list<S_msrMeasure>
-      voiceLastSegmentMeasuresList =
+    // fetch last segment's measure elements list
+    list<S_msrSegmentElement>
+      voiceLastSegmentElementsList =
         fVoiceLastSegment->
-          getSegmentMeasuresList ();
+          getSegmentElementsList ();
 
     // are there measures in the voice last segment?
-    if (voiceLastSegmentMeasuresList.size ()) {
+    if (voiceLastSegmentElementsList.size ()) {
       // yes
 
       // fetch last measure in the last segment
       S_msrMeasure
         lastMeasureInLastSegment =
-          voiceLastSegmentMeasuresList.back ();
+          fVoiceLastSegment->
+            getSegmentLastAppendedMeasure (); // JMI v0.9.63
 
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
@@ -5525,7 +5536,7 @@ void msrVoice::nestContentsIntoNewRepeatInVoice (
       if (fVoiceLastSegment) {
 
         // are there measures in the voice last segment?
-        if (fVoiceLastSegment->getSegmentMeasuresList ().size ()) {
+        if (fVoiceLastSegment->getSegmentElementsList ().size ()) {
           // finalize current measure in voice
           finalizeLastAppendedMeasureInVoice (
             inputLineNumber);
@@ -6093,7 +6104,7 @@ void msrVoice::createMeasureRepeatFromItsFirstMeasures (
   int
     lastSegmentMeasuresNumber =
       fVoiceLastSegment->
-        getSegmentMeasuresList ().size (),
+        getSegmentElementsList ().size (),
     availableMeasuresNumber =
       lastSegmentMeasuresNumber - 1;
 
@@ -6385,14 +6396,14 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
       s.str ());
   }
 
-  // fetch the last segment's measure list
-  list<S_msrMeasure>
+  // fetch the last segment's measure elements list
+  list<S_msrSegmentElement>
     voiceLastSegmentMeasureList =
       fVoiceLastSegment->
-        getSegmentMeasuresList ();
+        getSegmentElementsList ();
 
   // grab the just created last measure
-  // in the last segment's measure list,
+  // in the last segment's measure elements list,
   // (i.e. the one containing:
   //   <measure-repeat type="stop"/>)
   // which is the next measure after the measures repeat
@@ -6411,10 +6422,11 @@ void msrVoice::appendPendingMeasureRepeatToVoice (
 
   S_msrMeasure
     nextMeasureAfterMeasureRepeat =
-      voiceLastSegmentMeasureList.back ();
+      fVoiceLastSegment->
+        getSegmentLastAppendedMeasure (); // JMI v0.9.63
 
 // BOFBOFBOF JMI
-  // remove the next measure from the last segment's measure list
+  // remove the next measure from the last segment's measure elements list
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasureRepeats ()) {
     gLogStream <<
@@ -7246,7 +7258,7 @@ void msrVoice::handleMultipleFullBarRestsStartInVoiceClone (
 //       if (fVoiceLastSegment) {
 //
 //         // are there measures in the voice last segment?
-//         if (fVoiceLastSegment->getSegmentMeasuresList ().size ()) {
+//         if (fVoiceLastSegment->getSegmentElementsList ().size ()) {
 //
 //           // finalize current measure in voice
 //           finalizeLastAppendedMeasureInVoice (
@@ -8889,14 +8901,14 @@ void msrVoice::handleRepeatStartInVoiceClone (
       // is there a voice last segment?
       if (fVoiceLastSegment) {
 
-        // fetch last segment's measures list
-        list<S_msrMeasure>
-          voiceLastSegmentMeasuresList =
+        // fetch last segment's measure elements list
+        const list<S_msrSegmentElement>
+          voiceLastSegmentElementsList =
             fVoiceLastSegment->
-              getSegmentMeasuresList ();
+              getSegmentElementsList ();
 
         // are there measures in the voice last segment?
-        if (voiceLastSegmentMeasuresList.size ()) {
+        if (voiceLastSegmentElementsList.size ()) {
           // finalize current measure in voice
           finalizeLastAppendedMeasureInVoice (
             inputLineNumber);
@@ -9104,7 +9116,7 @@ void msrVoice::appendMeasureRepeatReplicaToVoice (
         /* JMI
         int fullMeasureWholeNotesDuration =
           fVoiceLastSegment->
-            getSegmentMeasuresList ().back ()->
+            getSegmentElementsList ().back ()->
               getFullMeasureWholeNotesDuration ();
               */
 
@@ -9687,22 +9699,14 @@ void msrVoice:: collectVoiceMeasuresIntoFlatList (
     }
 #endif
 
-    list<S_msrMeasure> lastSegmentMeasuresFlatList;
-
-    const list<S_msrMeasure>&
-      voiceLastSegmentMeasuresList =
+    list<S_msrMeasure>
+      lastSegmentMeasuresFlatList =
         fVoiceLastSegment->
-          getSegmentMeasuresList ();
+          getSegmentMeasuresFlatList ();
 
-    if (voiceLastSegmentMeasuresList.size ()) {
-      list<S_msrMeasure>::const_iterator
-        iBegin = voiceLastSegmentMeasuresList.begin (),
-        iEnd   = voiceLastSegmentMeasuresList.end (),
-        i      = iBegin;
-
-      for ( ; ; ) {
-        fVoiceMeasuresFlatList.push_back ((*i));
-        if (++i == iEnd) break;
+    if (lastSegmentMeasuresFlatList.size ()) {
+      for (S_msrMeasure measure : lastSegmentMeasuresFlatList) {
+        fVoiceMeasuresFlatList.push_back (measure);
       } // for
     }
   }
@@ -9782,7 +9786,7 @@ void msrVoice::finalizeVoice (
       &&
     fVoiceLastSegment != nullptr // JMI should not occur??? v0.9.63
       &&
-    fVoiceLastSegment->getSegmentMeasuresList ().size () == 0
+    fVoiceLastSegment->getSegmentElementsList ().size () == 0
   ) {
     stringstream s;
 
@@ -9932,7 +9936,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
   if (
     fVoiceInitialElementsList.size () == 0
       &&
-    fVoiceLastSegment->getSegmentMeasuresList ().size () == 0
+    fVoiceLastSegment->getSegmentElementsList ().size () == 0
   ) {
     stringstream s;
 
@@ -10658,7 +10662,7 @@ void msrVoice::print (ostream& os) const
   os << endl;
 
   // print the voice measures flat list
-  displayVoiceMeasuresFlatList ();
+  displayVoiceMeasuresFlatList (fieldWidth);
 
   // print the voice initial elements
   size_t voiceInitialElementsListSize =
@@ -10702,9 +10706,11 @@ void msrVoice::print (ostream& os) const
 
   if (fVoiceLastSegment) {
     ++gIndenter;
+
     os <<
       endl <<
       fVoiceLastSegment;
+
     --gIndenter;
   }
   else {
@@ -10783,7 +10789,7 @@ void msrVoice::printShort (ostream& os) const
   const int fieldWidth = 41;
 
 #ifdef TRACING_IS_ENABLED
-  displayVoiceMeasuresFlatList ();
+  displayVoiceMeasuresFlatList (fieldWidth);
 #endif
 
   // print the voice initial elements

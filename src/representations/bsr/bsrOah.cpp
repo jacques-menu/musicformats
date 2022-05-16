@@ -477,7 +477,7 @@ R"()",
   // display first BSR
 
   S_oahBooleanAtom
-    displayBsrFirstBooleanAtom =
+    displayBsrScoreFirstBooleanAtom =
       oahBooleanAtom::create (
         "display-bsr-1", "dbsr1",
 R"(Write the contents of the first BSR data to standard error.)",
@@ -485,7 +485,7 @@ R"(Write the contents of the first BSR data to standard error.)",
         fDisplayBsrFirst);
   subGroup->
     appendAtomToSubGroup (
-      displayBsrFirstBooleanAtom);
+      displayBsrScoreFirstBooleanAtom);
 
   // display first BSR short
 
@@ -506,12 +506,12 @@ R"(Write the contents of the first BSR data, short version, to standard error.)"
 R"(Write the contents of the first BSR data with more details to standard error.)",
         "fDisplayBsrFirstDetails",
         fDisplayBsrFirstDetails,
-        displayBsrFirstBooleanAtom));
+        displayBsrScoreFirstBooleanAtom));
 
   // display second BSR
 
   S_oahBooleanAtom
-    displayBsrSecondBooleanAtom =
+    displayBsrScoreSecondBooleanAtom =
       oahBooleanAtom::create (
         "display-bsr-2", "dbsr2",
 R"(Write the contents of the second BSR data to standard error.)",
@@ -519,7 +519,7 @@ R"(Write the contents of the second BSR data to standard error.)",
         fDisplayBsrSecond);
   subGroup->
     appendAtomToSubGroup (
-      displayBsrSecondBooleanAtom);
+      displayBsrScoreSecondBooleanAtom);
 
   // display second BSR short
 
@@ -540,7 +540,7 @@ R"(Write the contents of the second BSR data, short version, to standard error.)
 R"(Write the contents of the second BSR data with more details to standard error.)",
         "fDisplayBsrSecondDetails",
         fDisplayBsrSecondDetails,
-        displayBsrSecondBooleanAtom));
+        displayBsrScoreSecondBooleanAtom));
 }
 
 void bsrOahGroup::initializeBsrLanguagesOptions ()

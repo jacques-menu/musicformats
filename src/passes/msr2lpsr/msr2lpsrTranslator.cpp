@@ -2609,12 +2609,6 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
         fCurrentMeasureClone);
   }
   else {
-    // append current measure clone to the current voice clone
-    fCurrentVoiceClone->
-      appendMeasureCloneToVoiceClone (
-        inputLineNumber,
-        fCurrentMeasureClone);
-  }
 
 //   // is this a full measures rest? // JMI
 //   if (elt->getMeasureIsAFullBarRest ()) {
@@ -2670,7 +2664,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
       appendMeasureCloneToVoiceClone (
         inputLineNumber,
         fCurrentMeasureClone);
-//   }
+  }
 
   // JMI superflous???
   fCurrentPartClone->
@@ -2796,7 +2790,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
   else {
     // no
 
-    // should we compress full measures rests?
+    // should we compress full measures rests? // JMI v0.9.63
     if (gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()) {
       // yes
 
@@ -3153,12 +3147,12 @@ void msr2lpsrTranslator::visitEnd (S_msrTimeSignature& elt)
 }
 
 //________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrTranspose& elt)
+void msr2lpsrTranslator::visitStart (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrTranspose" <<
+      "--> Start visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
@@ -3166,15 +3160,15 @@ void msr2lpsrTranslator::visitStart (S_msrTranspose& elt)
 
   // append transpose to voice clone
   fCurrentVoiceClone->
-    appendTransposeToVoice (elt);
+    appendTranspositionToVoice (elt);
 }
 
-void msr2lpsrTranslator::visitEnd (S_msrTranspose& elt)
+void msr2lpsrTranslator::visitEnd (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrTranspose" <<
+      "--> End visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }

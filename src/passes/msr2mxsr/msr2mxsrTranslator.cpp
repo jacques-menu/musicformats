@@ -8279,12 +8279,12 @@ void msr2mxsrTranslator::visitEnd (S_msrSyllable& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrTranspose& elt)
+void msr2mxsrTranslator::visitStart (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrTranspose" <<
+      "--> Start visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
@@ -8292,15 +8292,15 @@ void msr2mxsrTranslator::visitStart (S_msrTranspose& elt)
 
   // append transpose to voice clone
   fCurrentVoiceClone->
-    appendTransposeToVoice (elt);
+    appendTranspositionToVoice (elt);
 }
 
-void msr2mxsrTranslator::visitEnd (S_msrTranspose& elt)
+void msr2mxsrTranslator::visitEnd (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrTranspose" <<
+      "--> End visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }

@@ -458,7 +458,7 @@ void msr2bsrTranslator::visitStart (S_msrPart& elt)
 #endif
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       endl <<
       "<!--=== part \"" << partCombinedName << "\"" <<
@@ -478,7 +478,7 @@ void msr2bsrTranslator::visitEnd (S_msrPart& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-  if (gGlobalTracingOahGroup->getTraceParts () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
       "--> End visiting msrPart " <<
       elt->getPartCombinedName () <<
@@ -3043,7 +3043,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
 
   else if (currentMeasureWholeNotesDuration < measureFullLength) {
     / *
-    if (fSegmentMeasuresList.size () == 1) { // JMI
+    if (fSegmentElementsList.size () == 1) { // JMI
       // this is the first measure in the segment
       measureKind =
         msrMeasure::kIncompleteLeftMeasure;
@@ -3379,12 +3379,12 @@ void msr2bsrTranslator::visitEnd (S_msrSyllable& elt)
 
 /*
 //________________________________________________________________________
-void msr2bsrTranslator::visitStart (S_msrTranspose& elt)
+void msr2bsrTranslator::visitStart (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrTranspose" <<
+      "--> Start visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
@@ -3392,15 +3392,15 @@ void msr2bsrTranslator::visitStart (S_msrTranspose& elt)
 
   // append transpose to voice clone
   fCurrentVoiceClone->
-    appendTransposeToVoice (elt);
+    appendTranspositionToVoice (elt);
 }
 
-void msr2bsrTranslator::visitEnd (S_msrTranspose& elt)
+void msr2bsrTranslator::visitEnd (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrTranspose" <<
+      "--> End visiting msrTransposition" <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }

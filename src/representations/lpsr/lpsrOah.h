@@ -651,12 +651,12 @@ class EXP lpsrOahGroup : public oahGroup
                           getLpsrChordsLanguageKind () const
                               { return fLpsrChordsLanguageKind; }
 
-    // transpose
+    // transposition
     // --------------------------------------
 
     S_msrSemiTonesPitchAndOctave
-                          getTransposeSemiTonesPitchAndOctave () const
-                              { return fTransposeSemiTonesPitchAndOctave; }
+                          getTranspositionSemiTonesPitchAndOctave () const
+                              { return fTranspositionSemiTonesPitchAndOctave; }
 
   public:
 
@@ -858,11 +858,11 @@ class EXP lpsrOahGroup : public oahGroup
     S_lpsrStaffInstrumentNameAtom
                           fLpsrStavesInstrumentsNamesMapAtom;
 
-    // transpose
+    // transposition
     // --------------------------------------
 
     S_msrSemiTonesPitchAndOctave
-                          fTransposeSemiTonesPitchAndOctave;
+                          fTranspositionSemiTonesPitchAndOctave;
 };
 typedef SMARTP<lpsrOahGroup> S_lpsrOahGroup;
 EXP ostream& operator<< (ostream& os, const S_lpsrOahGroup& elt);

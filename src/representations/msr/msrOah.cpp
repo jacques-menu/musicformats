@@ -751,16 +751,6 @@ R"(Write the contents of the first MSR data, short version, to standard error.)"
         "fDisplayFirstMsrShort",
         fDisplayFirstMsrShort));
 
-  // display first MSR slices
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "display-msr-1-slices", "dmsr1slices",
-R"(Write the contents of the first MSR data slices to standard error.)",
-        "fDisplayFirstMsrSlices",
-        fDisplayFirstMsrSlices));
-
   // display first MSR details
 
   subGroup->
@@ -771,6 +761,16 @@ R"(Write the contents of the first MSR data with more details to standard error.
         "fDisplayFirstMsrDetails",
         fDisplayFirstMsrDetails,
         displayFirstMsrBooleanAtom));
+
+  // display first MSR slices
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr-1-slices", "dmsr1slices",
+R"(Write the contents of the first MSR data slices to standard error.)",
+        "fDisplayFirstMsrSlices",
+        fDisplayFirstMsrSlices));
 
   // display second MSR
 
@@ -795,16 +795,6 @@ R"(Write the contents of the second MSR data, short version, to standard error.)
         "fDisplaySecondMsrShort",
         fDisplaySecondMsrShort));
 
-  // display second MSR slices
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "display-msr-2-slices", "dmsr2slices",
-R"(Write the contents of the second MSR data slices to standard error.)",
-        "fDisplaySecondMsrSlices",
-        fDisplaySecondMsrSlices));
-
   // display second MSR details
 
   subGroup->
@@ -815,6 +805,16 @@ R"(Write the contents of the second MSR data with more details to standard error
         "fDisplaySecondMsrDetails",
         fDisplaySecondMsrDetails,
         displaySecondMsrBooleanAtom));
+
+  // display second MSR slices
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr-2-slices", "dmsr2slices",
+R"(Write the contents of the second MSR data slices to standard error.)",
+        "fDisplaySecondMsrSlices",
+        fDisplaySecondMsrSlices));
 
   // display first MSR names
 
@@ -850,7 +850,6 @@ This implies that no LilyPond code is generated.)",
         fDisplayFirstMsrSummary));
 
   // display second MSR summary
-
 
   subGroup->
     appendAtomToSubGroup (
@@ -1161,26 +1160,26 @@ Bool msrOahGroup::setMsrQuarterTonesPitchesLanguage (const string& language)
 //______________________________________________________________________________
 void msrOahGroup::enforceGroupQuietness ()
 {
-  fTraceMsr = false;
-
-  fTraceMsrVisitors = false;
-
-  fDisplayPartGroups = false;
-
-  fDisplayFirstMsr = false;
-  fDisplaySecondMsr = false;
-
-  fDisplayFirstMsrShort = false;
-  fDisplaySecondMsrShort = false;
-
-  fDisplayFirstMsrDetails = false;
-  fDisplaySecondMsrDetails = false;
-
-  fDisplayFirstMsrNames = false;
-  fDisplaySecondMsrNames = false;
-
-  fDisplayFirstMsrSummary = false;
-  fDisplaySecondMsrSummary = false;
+//   fTraceMsr = false; JMI v0.9.63
+//
+//   fTraceMsrVisitors = false;
+//
+//   fDisplayPartGroups = false;
+//
+//   fDisplayFirstMsr = false;
+//   fDisplaySecondMsr = false;
+//
+//   fDisplayFirstMsrShort = false;
+//   fDisplaySecondMsrShort = false;
+//
+//   fDisplayFirstMsrDetails = false;
+//   fDisplaySecondMsrDetails = false;
+//
+//   fDisplayFirstMsrNames = false;
+//   fDisplaySecondMsrNames = false;
+//
+//   fDisplayFirstMsrSummary = false;
+//   fDisplaySecondMsrSummary = false;
 }
 
 //______________________________________________________________________________

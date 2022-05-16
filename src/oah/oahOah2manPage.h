@@ -28,16 +28,16 @@ class EXP oahOah2manPage : virtual public oah2manPage,
 {
   public:
 
-    oahOah2manPage (
-      const S_oahHandler handler,
-      ostream&           manPageOutputStream);
+                          oahOah2manPage (
+                            const S_oahHandler handler,
+                            ostream&           manPageOutputStream);
 
     virtual               ~oahOah2manPage ();
 
   protected:
 
-    virtual void visitStart (S_oahOptionalValuesStyleKindAtom& elt);
-    virtual void visitEnd   (S_oahOptionalValuesStyleKindAtom& elt);
+    virtual void          visitStart (S_oahOptionalValuesStyleKindAtom& elt);
+    virtual void          visitEnd   (S_oahOptionalValuesStyleKindAtom& elt);
 };
 typedef SMARTP<oahOah2manPage> S_oahOah2manPage;
 */

@@ -38,11 +38,11 @@ class EXP bsrOah2manPage : virtual public oah2manPage,
 
   protected:
 
-    virtual void visitStart (S_bsrFacSimileKindAtom& elt);
-    virtual void visitEnd   (S_bsrFacSimileKindAtom& elt);
+    virtual void          visitStart (S_bsrFacSimileKindAtom& elt);
+    virtual void          visitEnd   (S_bsrFacSimileKindAtom& elt);
 
-    virtual void visitStart (S_bsrTextsLanguageAtom& elt);
-    virtual void visitEnd   (S_bsrTextsLanguageAtom& elt);
+    virtual void          visitStart (S_bsrTextsLanguageAtom& elt);
+    virtual void          visitEnd   (S_bsrTextsLanguageAtom& elt);
 };
 typedef SMARTP<bsrOah2manPage> S_bsrOah2manPage;
 
