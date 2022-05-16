@@ -27,27 +27,17 @@ namespace MusicFormats
 // ------------------------------------------------------
 
 //_______________________________________________________________________________
-EXP void displayBsrFirstScore_OptionalPass (
-  S_bsrScore    originalBsrScore,
+EXP void displayBsrScore (
+  S_bsrScore    bsrScore,
   S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts);
+  S_bsrOahGroup bsrOpts,
+  const string& passDescription);
 
-EXP void displayBsrFirstScoreShort_OptionalPass (
-  S_bsrScore    originalBsrScore,
+EXP void displayBsrScoreShort (
+  S_bsrScore    bsrScore,
   S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts);
-
-//_______________________________________________________________________________
-EXP void displayFinalizedBsrScore_OptionalPass (
-  S_bsrScore    originalBsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts);
-
-EXP void displayFinalizedBsrScoreShort_OptionalPass (
-  S_bsrScore    originalBsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts);
-
+  S_bsrOahGroup bsrOpts,
+  const string& passDescription);
 
 // parts
 // ------------------------------------------------------

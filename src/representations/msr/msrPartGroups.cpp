@@ -708,17 +708,16 @@ void msrPartGroup::printPartGroupElementsList (
             dynamic_cast<msrPartGroup*>(&(*element))
         ) {
         // this is a part group
-        gLogStream <<
-          nestedPartGroup->
-            getPartGroupCombinedNameWithoutEndOfLines () <<
-          endl;
+//         gLogStream << // KAKA
+//           nestedPartGroup->
+//             getPartGroupCombinedNameWithoutEndOfLines () <<
+//           endl;
 
         ++gIndenter;
 
-        nestedPartGroup->
-          printPartGroupElementsList (
-            inputLineNumber,
-            os);
+        gLogStream <<
+          nestedPartGroup <<
+          endl;
 
         --gIndenter;
       }
@@ -729,10 +728,93 @@ void msrPartGroup::printPartGroupElementsList (
             dynamic_cast<msrPart*>(&(*element))
         ) {
         // this is a part
+        ++gIndenter;
+
         gLogStream <<
-          part->
-            getPartCombinedName () <<
+          part <<
           endl;
+
+        --gIndenter;
+      }
+
+      else {
+        stringstream s;
+
+        s <<
+          "an element of partgroup " <<
+          getPartGroupCombinedName () <<
+          " is not a part group nor a part";
+
+        msrInternalError (
+          gGlobalServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          __FILE__, __LINE__,
+          s.str ());
+      }
+
+      if (++i == iEnd) break;
+   // JMI   os << endl;
+    } // for
+
+    --gIndenter;
+  }
+
+  else {
+    os << ' ' << "none" << endl;
+  }
+}
+
+void msrPartGroup::printPartGroupElementsListShort (
+  int      inputLineNumber,
+  ostream& os) const
+{
+  os <<
+    "fPartGroupElementsList:";
+
+  if (fPartGroupElementsList.size ()) {
+    os << endl;
+    ++gIndenter;
+
+    list<S_msrPartGroupElement>::const_iterator
+      iBegin = fPartGroupElementsList.begin (),
+      iEnd   = fPartGroupElementsList.end (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      S_msrElement
+        element = (*i);
+
+      if (
+        S_msrPartGroup
+          nestedPartGroup =
+            dynamic_cast<msrPartGroup*>(&(*element))
+        ) {
+        // this is a part group
+//         gLogStream << // KAKA
+//           nestedPartGroup->
+//             getPartGroupCombinedNameWithoutEndOfLines () <<
+//           endl;
+
+        ++gIndenter;
+
+        nestedPartGroup->
+          printShort (gLogStream);
+
+        --gIndenter;
+      }
+
+      else if (
+        S_msrPart
+          part =
+            dynamic_cast<msrPart*>(&(*element))
+        ) {
+        // this is a part
+        ++gIndenter;
+
+        part->
+          printShort (gLogStream);
+
+        --gIndenter;
       }
 
       else {
@@ -777,7 +859,8 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 
     ++gIndenter;
 
-    printPartGroupElementsList (
+//     printPartGroupElementsList ( JMI
+    printPartGroupElementsListShort (
       inputLineNumber,
       gLogStream);
 
@@ -1228,7 +1311,7 @@ void msrPartGroup::printShort (ostream& os) const
     endl;
 
   // print the part group elements if any
-  printPartGroupElementsList (
+  printPartGroupElementsListShort (
     fInputLineNumber,
     gLogStream);
 

@@ -619,8 +619,8 @@ string msrKey::asString () const
   stringstream s;
 
   s <<
-    "[Key " <<
-    fKeyKind <<
+    "[Key" <<
+    ", fKeyKind: " << fKeyKind <<
     ", ";
 
   switch (fKeyKind) {
@@ -686,7 +686,7 @@ void msrKey::print (ostream& os) const
 {
   os <<
     "[Key" <<
-    ", " << fKeyKind <<
+    ", fKeyKind: " << fKeyKind <<
     ",";
 
   switch (fKeyKind) {

@@ -277,7 +277,7 @@ void msrScore::collectScorePartsList (
 }
 
 /*
-S_msrPartGroup msrScore::fetchScorePartGroup (
+S_msrPartGroup msrScore::fetchScorePartGroup ( JMI
   int partGroupNumber)
 {
   S_msrPartGroup result;

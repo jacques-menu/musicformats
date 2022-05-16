@@ -35,16 +35,17 @@ using namespace std;
 namespace MusicFormats
 {
 //_______________________________________________________________________________
-void displayFirstBsr (
-  const S_bsrScore originalBsrScore,
-  S_msrOahGroup    msrOpts,
-  S_bsrOahGroup    bsrOpts)
+void displayBsrScore (
+  S_bsrScore    bsrScore,
+  S_msrOahGroup msrOpts,
+  S_bsrOahGroup bsrOpts,
+  const string& passDescription)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    originalBsrScore != nullptr,
-    "originalBsrScore is null");
+    bsrScore != nullptr,
+    "bsrScore is null");
 
   // start the clock
   clock_t startClock = clock ();
@@ -56,11 +57,11 @@ void displayFirstBsr (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): display the first BSR as text" <<
+    "Pass (optional): " << passDescription <<
     endl <<
     separator <<
     endl << endl <<
-    originalBsrScore <<
+    bsrScore <<
     separator <<
     endl << endl;
 
@@ -75,16 +76,18 @@ void displayFirstBsr (
     endClock);
 }
 
-void displayFirstBsrScoreShort (
-  const S_bsrScore originalBsrScore,
-  S_msrOahGroup    msrOpts,
-  S_bsrOahGroup    bsrOpts)
+//_______________________________________________________________________________
+void displayBsrScoreShort (
+  S_bsrScore    bsrScore,
+  S_msrOahGroup msrOpts,
+  S_bsrOahGroup bsrOpts,
+  const string& passDescription)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    originalBsrScore != nullptr,
-    "originalBsrScore is null");
+    bsrScore != nullptr,
+    "bsrScore is null");
 
   // start the clock
   clock_t startClock = clock ();
@@ -96,12 +99,12 @@ void displayFirstBsrScoreShort (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): display the first BSR as text, short version" <<
+    "Pass (optional): " << passDescription << ", short version" <<
     endl <<
     separator <<
     endl << endl;
 
-  originalBsrScore->printShort (gLogStream);
+  bsrScore->printShort (gLogStream);
 
   gLogStream <<
     separator <<
@@ -118,207 +121,22 @@ void displayFirstBsrScoreShort (
     endClock);
 }
 
-//_______________________________________________________________________________
-void displayBsrFirstScore_OptionalPass (
-  S_bsrScore    originalBsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts)
-{
-  // display it
-  displayFirstBsr (
-    originalBsrScore,
-    msrOpts,
-    bsrOpts);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after first BSR score display: " <<
-        gIndenter.getIndentation ();
-
-      bsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
-}
-
-void displayBsrFirstScoreShort_OptionalPass (
-  S_bsrScore    originalBsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts)
-{
-  // display it
-  displayFirstBsrScoreShort (
-    originalBsrScore,
-    msrOpts,
-    bsrOpts);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after first BSR score short display: " <<
-        gIndenter.getIndentation ();
-
-      bsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
-}
-
-//_______________________________________________________________________________
-void displayFinalizedBsr (
-  const S_bsrScore originalBsrScore,
-  S_msrOahGroup    msrOpts,
-  S_bsrOahGroup    bsrOpts)
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    originalBsrScore != nullptr,
-    "originalBsrScore is null");
-
-  // start the clock
-  clock_t startClock = clock ();
-
-  string separator =
-    "%--------------------------------------------------------------";
-
-  gLogStream <<
-    separator <<
-    endl <<
-    gTab <<
-    "Pass (optional): display the finalized BSR as text" <<
-    endl <<
-    separator <<
-    endl <<
-    originalBsrScore <<
-    separator <<
-    endl << endl;
-
-  // register time spent
-  clock_t endClock = clock ();
-
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    "Display the finalized BSR as text",
-    mfTimingItem::kOptional,
-    startClock,
-    endClock);
-}
-
-void displayFinalizedBsrScoreShort (
-  const S_bsrScore originalBsrScore,
-  S_msrOahGroup    msrOpts,
-  S_bsrOahGroup    bsrOpts)
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    originalBsrScore != nullptr,
-    "originalBsrScore is null");
-
-  // start the clock
-  clock_t startClock = clock ();
-
-  string separator =
-    "%--------------------------------------------------------------";
-
-  gLogStream <<
-    separator <<
-    endl <<
-    gTab <<
-    "Pass (optional): display the finalized BSR as text, short version" <<
-    endl <<
-    separator <<
-    endl;
-
-  originalBsrScore->printShort (gLogStream);
-
-  gLogStream <<
-    separator <<
-    endl << endl;
-
-  // register time spent
-  clock_t endClock = clock ();
-
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    "Display the finalized BSR as text, short version",
-    mfTimingItem::kOptional,
-    startClock,
-    endClock);
-}
-
-//_______________________________________________________________________________
-void displayFinalizedBsrScore_OptionalPass (
-  S_bsrScore    originalBsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts)
-{
-  // display it
-  displayFinalizedBsr (
-    originalBsrScore,
-    msrOpts,
-    bsrOpts);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after BSR score display: " <<
-        gIndenter.getIndentation ();
-
-      bsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
-}
-
-void displayFinalizedBsrScoreShort_OptionalPass (
-  S_bsrScore    originalBsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts)
-{
-  // display it
-  displayFinalizedBsrScoreShort (
-    originalBsrScore,
-    msrOpts,
-    bsrOpts);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after BSR score short display: " <<
-        gIndenter.getIndentation ();
-
-      bsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
-}
-
 
 }
+
+//   if (gIndenter != 0) {
+//     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+//       stringstream s;
+//
+//       s <<
+//         "gIndenter value after BSR score short display: " <<
+//         gIndenter.getIndentation ();
+//
+//       bsrWarning (
+//         gGlobalServiceRunData->getInputSourceName (),
+//         1, // JMI inputLineNumber,
+//         s.str ());
+//     }
+//
+//     gIndenter.resetToZero ();
+//   }

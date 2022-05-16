@@ -258,8 +258,8 @@ string msrClef::asString () const
   stringstream s;
 
   s <<
-    "[Clef " <<
-    "fClefKind: " << msrClefKindAsString (fClefKind) <<
+    "[Clef" <<
+    ", fClefKind: " << msrClefKindAsString (fClefKind) <<
     ", fClefStaffNumber: " << fClefStaffNumber <<
     ", line " << fInputLineNumber <<
     "]";

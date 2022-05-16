@@ -35,10 +35,11 @@ using namespace std;
 namespace MusicFormats
 {
 //_______________________________________________________________________________
-void displayLpsr (
+void displayLpsrScore (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts)
+  S_lpsrOahGroup    lpsrOpts,
+  const string&     passDescription)
 {
   // sanity check
   mfAssert (
@@ -56,7 +57,7 @@ void displayLpsr (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): display the LPSR as text" <<
+    "Pass (optional): " << passDescription <<
     endl <<
     separator <<
     endl << endl <<
@@ -75,10 +76,12 @@ void displayLpsr (
     endClock);
 }
 
+//_______________________________________________________________________________
 void displayLpsrScoreShort (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts)
+  S_lpsrOahGroup    lpsrOpts,
+  const string&     passDescription)
 {
   // sanity check
   mfAssert (
@@ -96,7 +99,7 @@ void displayLpsrScoreShort (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): display the LPSR as text, short version" <<
+    "Pass (optional): " << passDescription << ", short version" <<
     endl <<
     separator <<
     endl << endl;
@@ -118,10 +121,12 @@ void displayLpsrScoreShort (
     endClock);
 }
 
+//_______________________________________________________________________________
 void displayLpsrScoreFull (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts)
+  S_lpsrOahGroup    lpsrOpts,
+  const string&     passDescription)
 {
   // sanity check
   mfAssert (
@@ -139,7 +144,7 @@ void displayLpsrScoreFull (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): display the LPSR as text, full version" <<
+    "Pass (optional): " << passDescription << ", full version" <<
     endl <<
     separator <<
     endl << endl;
@@ -161,93 +166,22 @@ void displayLpsrScoreFull (
     endClock);
 }
 
-//_______________________________________________________________________________
-void displayLpsrScore_OptionalPass (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts)
-{
-  // display it
-  displayLpsr (
-    theLpsrScore,
-    msrOpts,
-    lpsrOpts);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after LPSR score display: " <<
-        gIndenter.getIndentation ();
-
-     lpsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
-}
-
-void displayLpsrScoreShort_OptionalPass (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts)
-{
-  // display it
-  displayLpsrScoreShort (
-    theLpsrScore,
-    msrOpts,
-    lpsrOpts);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after LPSR score short display: " <<
-        gIndenter.getIndentation ();
-
-      lpsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
-}
-
-void displayLpsrScoreFull_OptionalPass (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts)
-{
-  // display it
-  displayLpsrScoreFull (
-    theLpsrScore,
-    msrOpts,
-    lpsrOpts);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after LPSR score full display: " <<
-        gIndenter.getIndentation ();
-
-      lpsrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
-}
-
 
 }
+
+//   if (gIndenter != 0) {
+//     if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+//       stringstream s;
+//
+//       s <<
+//         "gIndenter value after LPSR score display: " <<
+//         gIndenter.getIndentation ();
+//
+//      lpsrWarning (
+//         gGlobalServiceRunData->getInputSourceName (),
+//         1, // JMI inputLineNumber,
+//         s.str ());
+//     }
+//
+//     gIndenter.resetToZero ();
+//   }

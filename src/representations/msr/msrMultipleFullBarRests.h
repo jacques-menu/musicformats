@@ -100,8 +100,8 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // public services
     // ------------------------------------------------------
 
-    void                  appendSegmentElement (
-                            S_msrSegmentElement elem) override;
+    void                  appendMeasureElementToSegmentElement (
+                            S_msrMeasureElement elem) override;
 
     void                  appendMeasureToMultipleFullBarRests (
                             S_msrMeasure measure);
@@ -138,6 +138,7 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
                             const string& context);
 
     void                  print (ostream& os) const override;
+    void                  printShort (ostream& os) const override;
 
   private:
 

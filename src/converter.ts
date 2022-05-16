@@ -139,7 +139,7 @@ class XMLConverter {
 		return "";
 	}
 
-	getTranspose () : number {
+	getTransposition () : number {
 		let trsp = <string>$("#transpose").val();
 		if (trsp.length) return parseInt(trsp);
 		return 0;
@@ -186,7 +186,7 @@ class XMLConverter {
 		this.fXmlContent = script;
 		this.fFileName = path.substring(0, path.lastIndexOf('.'));
 		let code = "";
-		let transpose = this.getTranspose();
+		let transpose = this.getTransposition();
 		if (transpose) script = this.fXmlEngine.xmlStringTranspose(script, transpose);
 		try {
 			switch (this.fMode) {

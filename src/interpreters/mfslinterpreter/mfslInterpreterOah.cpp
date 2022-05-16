@@ -199,6 +199,24 @@ R"(Write a trace of the MFSL parsing by Bison-generated code to standard error.)
         "fTraceParsing",
         fTraceParsing));
 
+  // trace inputs
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "trace-inputs", "tinputs",
+R"(Write MFSL case statements handling activity to standard output.)",
+        "fTraceCaseInputStatements",
+        fTraceCaseInputStatements));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "trace-case-input-statements", "tinputsstats",
+R"(Write MFSL case statements handling activity to standard output.)",
+        "fTraceCaseInputStatements",
+        fTraceCaseInputStatements));
+
+  // trace choices
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
@@ -218,19 +236,12 @@ R"(Write MFSL choice statements handling activity to standard output.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "trace-case-choice-statements", "tchoices",
+        "trace-case-choice-statements", "tcasechoices",
 R"(Write MFSL case statements handling activity to standard output.)",
         "fTraceCaseChoiceStatements",
         fTraceCaseChoiceStatements));
 
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "trace-case-input-statements", "tinputs",
-R"(Write MFSL case statements handling activity to standard output.)",
-        "fTraceCaseInputStatements",
-        fTraceCaseInputStatements));
-
+  // trace options blocks
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
@@ -345,6 +356,13 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
 
     setw (fieldWidth) << "fDisplayOptions" << " : " <<
       fDisplayOptions <<
+      endl <<
+
+    setw (fieldWidth) << "fTraceInputs" << " : " <<
+      fTraceInputs <<
+      endl <<
+    setw (fieldWidth) << "fTraceCaseInputStatements" << " : " <<
+      fTraceCaseInputStatements <<
       endl <<
 
     setw (fieldWidth) << "fTraceChoices" << " : " <<

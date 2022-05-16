@@ -119,15 +119,15 @@ void populateMsrSkeletonFromMxsr (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScore (
       scoreSkeletonToBePopulated,
-      "Display the populated MSR as text");
+      "Display the first MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScoreShort (
       scoreSkeletonToBePopulated,
-      "Display the populated MSR as text, short version");
+      "Display the first MSR as text");
   }
 
   // display the populated MSR score summary if requested
@@ -138,7 +138,7 @@ void populateMsrSkeletonFromMxsr (
     displayMsrScoreSummary (
       scoreSkeletonToBePopulated,
       gGlobalMsrOahGroup,
-      "Display a summary of the populated MSR");
+      "Display a summary of the first MSR");
   }
 
   // display the populated MSR score names if requested
@@ -148,7 +148,8 @@ void populateMsrSkeletonFromMxsr (
     // display the score name
     displayMsrScoreNames (
       scoreSkeletonToBePopulated,
-      gGlobalMsrOahGroup);
+      gGlobalMsrOahGroup,
+      "Display the names in the first MSR");
   }
 }
 

@@ -136,7 +136,7 @@ S_msrScore translateMxsrToMsrSkeleton (
 }
 
 //_______________________________________________________________________________
-void displayMsrSkeleton (
+void displayMsrScoreSkeleton (
   S_msrOahGroup&  msrOpts,
   S_msrScore theMsrScore,
   string     passNumber,

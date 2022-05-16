@@ -38,7 +38,7 @@ class EXP harmoniesExtraOah2manPage : virtual public oah2manPage,
 {
   public:
 
-    harmoniesExtraOah2manPage (
+                          harmoniesExtraOah2manPage (
                             const S_oahHandler handler,
                             ostream&           manPageOutputStream);
 
@@ -46,17 +46,17 @@ class EXP harmoniesExtraOah2manPage : virtual public oah2manPage,
 
   protected:
 
-    virtual void visitStart (S_extraShowAllHarmoniesStructuresAtom& elt);
-    virtual void visitEnd   (S_extraShowAllHarmoniesStructuresAtom& elt);
+    virtual void          visitStart (S_extraShowAllHarmoniesStructuresAtom& elt);
+    virtual void          visitEnd   (S_extraShowAllHarmoniesStructuresAtom& elt);
 
-    virtual void visitStart (S_extraShowAllHarmoniesContentsAtom& elt);
-    virtual void visitEnd   (S_extraShowAllHarmoniesContentsAtom& elt);
+    virtual void          visitStart (S_extraShowAllHarmoniesContentsAtom& elt);
+    virtual void          visitEnd   (S_extraShowAllHarmoniesContentsAtom& elt);
 
-    virtual void visitStart (S_extraShowHarmonyDetailsAtom& elt);
-    virtual void visitEnd   (S_extraShowHarmonyDetailsAtom& elt);
+    virtual void          visitStart (S_extraShowHarmonyDetailsAtom& elt);
+    virtual void          visitEnd   (S_extraShowHarmonyDetailsAtom& elt);
 
-    virtual void visitStart (S_extraShowHarmonyAnalysisAtom& elt);
-    virtual void visitEnd   (S_extraShowHarmonyAnalysisAtom& elt);
+    virtual void          visitStart (S_extraShowHarmonyAnalysisAtom& elt);
+    virtual void          visitEnd   (S_extraShowHarmonyAnalysisAtom& elt);
 };
 typedef SMARTP<harmoniesExtraOah2manPage> S_harmoniesExtraOah2manPage;
 

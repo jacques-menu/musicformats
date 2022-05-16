@@ -28,36 +28,30 @@ S_msrBook createBook ();
 S_msrScore createScore ();
 
 //_______________________________________________________________________________
-void displayMsrScoreSkeleton_OptionalPass (
-  S_msrScore theMsrScore);
-
-void displayMsrScoreSkeletonScoreShort_OptionalPass (
-  S_msrScore theMsrScore);
-
-//_______________________________________________________________________________
-void displayPopulatedMsrScore_OptionalPass (
+void displayMsrScore (
   S_msrScore     theMsrScore,
-  const string& optionalPassDescription);
+  const string&  passDescription);
 
-void displayPopulatedMsrScoreShort_OptionalPass (
-  S_msrScore    theMsrScore,
-  const string& optionalPassDescription);
-
-//_______________________________________________________________________________
-void displayMsrScoreSlices (
-  S_msrScore    theMsrScore,
-  const string& optionalPassDescription);
+void displayMsrScoreShort (
+  S_msrScore     theMsrScore,
+  const string&  passDescription);
 
 //______________________________________________________________________________
 EXP void displayMsrScoreSummary (
   S_msrScore     theMsrScore,
   S_msrOahGroup& msrOpts,
-  const string&  optionalPassDescription);
+  const string&  passDescription);
 
 //______________________________________________________________________________
 EXP void displayMsrScoreNames (
   S_msrScore     theMsrScore,
-  S_msrOahGroup& msrOpts);
+  S_msrOahGroup& msrOpts,
+  const string&  passDescription);
+
+//_______________________________________________________________________________
+void displayMsrScoreSlices (
+  S_msrScore    theMsrScore,
+  const string& passDescription);
 
 // parts
 // ------------------------------------------------------

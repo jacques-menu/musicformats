@@ -259,10 +259,12 @@ void mfslInterpreterRegularHandler::createMfslRegularMaintainanceGroup ()
   registerAtomInRegularSubgroup ("trace-scanning", subGroup);
   registerAtomInRegularSubgroup ("trace-parsing", subGroup);
 
+  registerAtomInRegularSubgroup ("trace-inputs", subGroup);
+  registerAtomInRegularSubgroup ("trace-case-input-statements", subGroup);
+
   registerAtomInRegularSubgroup ("trace-choices", subGroup);
   registerAtomInRegularSubgroup ("trace-choice-statements", subGroup);
-
-  registerAtomInRegularSubgroup ("trace-case-statements", subGroup);
+  registerAtomInRegularSubgroup ("trace-case-choice-statements", subGroup);
 
   registerAtomInRegularSubgroup ("trace-options-blocks", subGroup);
 }

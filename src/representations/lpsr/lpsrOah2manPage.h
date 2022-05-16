@@ -43,17 +43,17 @@ class EXP lpsrOah2manPage : virtual public oah2manPage,
   protected:
 
 /* JMI
-    virtual void visitStart (S_lpsrScoreOutputKindAtom& elt);
-    virtual void visitEnd   (S_lpsrScoreOutputKindAtom& elt);
+    virtual void          visitStart (S_lpsrScoreOutputKindAtom& elt);
+    virtual void          visitEnd   (S_lpsrScoreOutputKindAtom& elt);
 */
-    virtual void visitStart (S_lpsrPitchesLanguageAtom& elt);
-    virtual void visitEnd   (S_lpsrPitchesLanguageAtom& elt);
+    virtual void          visitStart (S_lpsrPitchesLanguageAtom& elt);
+    virtual void          visitEnd   (S_lpsrPitchesLanguageAtom& elt);
 
-    virtual void visitStart (S_lpsrChordsLanguageAtom& elt);
-    virtual void visitEnd   (S_lpsrChordsLanguageAtom& elt);
+    virtual void          visitStart (S_lpsrChordsLanguageAtom& elt);
+    virtual void          visitEnd   (S_lpsrChordsLanguageAtom& elt);
 
-    virtual void visitStart (S_lpsrTransposeAtom& elt);
-    virtual void visitEnd   (S_lpsrTransposeAtom& elt);
+    virtual void          visitStart (S_lpsrTransposeAtom& elt);
+    virtual void          visitEnd   (S_lpsrTransposeAtom& elt);
 };
 typedef SMARTP<lpsrOah2manPage> S_lpsrOah2manPage;
 

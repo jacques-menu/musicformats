@@ -3978,7 +3978,7 @@ void mxsr2msrTranslator::visitEnd ( S_transpose& elt )
     stringstream s;
 
     s <<
-      "transpose: augmenting chromatic " <<
+      "fTransposition: augmenting chromatic " <<
       fCurrentTransposeChromatic <<
       " to " << auxTransposeChromatic <<
       " and decrementing octave change by " << octaveOffset;
@@ -4006,7 +4006,7 @@ void mxsr2msrTranslator::visitEnd ( S_transpose& elt )
     stringstream s;
 
     s <<
-      "transpose: diminishing  chromatic to " <<
+      "fTransposition: diminishing  chromatic to " <<
       fCurrentTransposeChromatic <<
       " to " << auxTransposeChromatic <<
       " and incrementing octave change by " << octaveOffset;
@@ -4020,10 +4020,10 @@ void mxsr2msrTranslator::visitEnd ( S_transpose& elt )
     fCurrentTransposeOctaveChange += octaveOffset;
   }
 
-  // create msrTranspose
-  S_msrTranspose
-    transpose =
-      msrTranspose::create (
+  // create the msrTransposition
+  S_msrTransposition
+    transposition =
+      msrTransposition::create (
         inputLineNumber,
         fCurrentTransposeDiatonic,
         fCurrentTransposeChromatic,
@@ -4032,7 +4032,7 @@ void mxsr2msrTranslator::visitEnd ( S_transpose& elt )
 
   if (fCurrentTransposeNumber == 0)
     fCurrentPart->
-      appendTransposeToPart (transpose);
+      appendTranspositionToPart (transposition);
 
   else {
     S_msrStaff
@@ -4042,7 +4042,7 @@ void mxsr2msrTranslator::visitEnd ( S_transpose& elt )
           fCurrentTransposeNumber);
 
     staff->
-      appendTransposeToStaff (transpose);
+      appendTranspositionToStaff (transposition);
   }
 }
 

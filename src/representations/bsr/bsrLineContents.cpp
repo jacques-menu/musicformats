@@ -119,7 +119,7 @@ void bsrLineContents::insertLineElementBeforeLastElementOfLineContents (
   S_bsrLineContentsElement lineElement)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Inserting line element '" <<
       lineElement->asShortString () <<

@@ -195,7 +195,7 @@ void bsrLine::appendSpacesToLine (S_bsrSpaces spaces)
 void bsrLine::appendKeyToLine (S_bsrKey key)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceKeys () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceKeys ()) {
     gLogStream <<
       "Appending key " <<
       key->asShortString () <<
@@ -212,7 +212,7 @@ void bsrLine::appendKeyToLine (S_bsrKey key)
 void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Appending time signature '" <<
       timeSignature->asShortString () <<
@@ -230,7 +230,7 @@ void bsrLine::appendTimeSignatureToLine (S_bsrTimeSignature timeSignature)
 void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignature)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTimeSignatures () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
     gLogStream <<
       "Inserting time signature '" <<
       timeSignature->asShortString () <<
@@ -248,7 +248,7 @@ void bsrLine::insertTimeBeforeLastElementOfLine (S_bsrTimeSignature timeSignatur
 void bsrLine::appendTempoToLine (S_bsrTempo tempo)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceTempos () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "Appending tempo " <<
       tempo->asShortString () <<
@@ -330,7 +330,7 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
 void bsrLine::appendNoteToLine (S_bsrNote note)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceNotes () || gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Appending note '" <<
       note->asShortString () <<

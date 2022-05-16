@@ -213,10 +213,10 @@ class EXP msrStaff : public msrElement
                             int             inputLineNumber,
                             const rational& positionInMeasure);
 
-    // transpose
+    // transposition
 
-    void                  appendTransposeToStaff (
-                            S_msrTranspose transpose);
+    void                  appendTranspositionToStaff (
+                            S_msrTransposition transpose);
 
     // voices
 
@@ -326,10 +326,10 @@ class EXP msrStaff : public msrElement
 
     void                  appendBarLineToStaff (S_msrBarLine barLine);
 
-    // transpose
+    // transposition
 
-    void                  appendTransposeToAllStaffVoices ( // JMI
-                            S_msrTranspose transpose);
+    void                  appendTranspositionToAllStaffVoices ( // JMI
+                            S_msrTransposition transpose);
 
     // scordaturas
 
@@ -512,9 +512,9 @@ class EXP msrStaff : public msrElement
                             int        inputLineNumber,
                             S_msrVoice voice);
 
-    // transpose
+    // transposition
 
-    S_msrTranspose        getStaffCurrentTranspose () const
+    S_msrTransposition        getStaffCurrentTranspose () const
                               { return fStaffCurrentTranspose; }
 
     // voices ordering in staves
@@ -553,9 +553,9 @@ class EXP msrStaff : public msrElement
 
     S_msrStaffDetails     fCurrentStaffStaffDetails;
 
-    // transpose
+    // transposition
 
-    S_msrTranspose        fStaffCurrentTranspose;
+    S_msrTransposition        fStaffCurrentTranspose;
 };
 typedef SMARTP<msrStaff> S_msrStaff;
 EXP ostream& operator<< (ostream& os, const S_msrStaff& elt);

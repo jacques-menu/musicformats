@@ -26,36 +26,24 @@ namespace MusicFormats
 S_msrScore createScore ();
 
 //_______________________________________________________________________________
-EXP void displayLpsr (
+EXP void displayLpsrScore (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts);
+  S_lpsrOahGroup    lpsrOpts,
+  const string&     passDescription);
 
 EXP void displayLpsrScoreShort (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts);
+  S_lpsrOahGroup    lpsrOpts,
+  const string&     passDescription);
 
 EXP void displayLpsrScoreFull (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts);
+  S_lpsrOahGroup    lpsrOpts,
+  const string&     passDescription);
 
-//_______________________________________________________________________________
-EXP void displayLpsrScore_OptionalPass (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts);
-
-EXP void displayLpsrScoreShort_OptionalPass (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts);
-
-EXP void displayLpsrScoreFull_OptionalPass (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts);
 
 // parts
 // ------------------------------------------------------

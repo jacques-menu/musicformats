@@ -135,8 +135,9 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
-    displayMsrScoreSkeleton_OptionalPass (
-      firstMsrScore);
+    displayMsrScore (
+      firstMsrScore,
+      "Display the first MSR score skeleton");
   }
 
   // should we return now?
@@ -160,7 +161,7 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
       originalMxsr,
       firstMsrScore,
         "Pass 2b",
-        "Populate the MSR skeleton from MusicXML data");
+        "Populate the first MSR skeleton from MusicXML data");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -175,15 +176,15 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScore (
       firstMsrScore,
       "Display the first MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplayFirstMsrShort ()) {
-    displayPopulatedMsrScoreShort_OptionalPass (
+    displayMsrScoreShort (
       firstMsrScore,
-      "Display the first MSR as text, short version");
+      "Display the first MSR as text");
   }
 
   // should we return now?
@@ -225,15 +226,15 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
   // ------------------------------------------------------
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayPopulatedMsrScore_OptionalPass (
+    displayMsrScore (
       secondMsrScore,
       "Display the second MSR as text");
   }
 
   if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayPopulatedMsrScoreShort_OptionalPass (
+    displayMsrScoreShort (
       secondMsrScore,
-      "Display the second MSR as text, short version");
+      "Display the second MSR as text");
   }
 
   // should we return now?

@@ -10,6 +10,7 @@
 #include "msrInstruments.h"
 #include "msrLigatures.h"
 #include "msrNotes.h"
+#include "msrOctaveShifts.h"
 #include "msrOrnaments.h"
 #include "msrScores.h"
 #include "msrSegnos.h"
@@ -21,7 +22,6 @@
 #include "msrStems.h"
 #include "msrTechnicals.h"
 #include "msrTies.h"
-#include "msrTranspositions.h"
 #include "msrTuplets.h"
 #include "msrTupletElements.h"
 #include "msrWords.h"
@@ -111,7 +111,10 @@ class EXP msrChord : public msrTupletElement
     // grace notes group upLink
     void                  setChordDirectGraceNotesGroupUpLink (
                             const S_msrGraceNotesGroup& graceNotesGroup)
-                              { fChordDirectGraceNotesGroupUpLink = graceNotesGroup; }
+                              {
+                                fChordDirectGraceNotesGroupUpLink =
+                                  graceNotesGroup;
+                              }
 
     S_msrGraceNotesGroup  getChordDirectGraceNotesGroupUpLink () const
                             { return fChordDirectGraceNotesGroupUpLink; }
@@ -416,7 +419,8 @@ class EXP msrChord : public msrTupletElement
                               { fChordSlashes.push_back (slash); }
 
     // cresc/decresc
-    void                  appendCrescDecrescToChord (S_msrCrescDecresc crescDecresc)
+    void                  appendCrescDecrescToChord (
+                            S_msrCrescDecresc crescDecresc)
                               { fChordCrescDecrescs.push_back (crescDecresc); }
 
     // wedges
@@ -444,14 +448,16 @@ class EXP msrChord : public msrTupletElement
 
     // slurs
 //    void                  appendSlurToChord (S_msrSlur slur);
-    void                  appendChordSlurLinkToChord (S_msrChordSlurLink chordSlurLink);
+    void                  appendChordSlurLinkToChord (
+                            S_msrChordSlurLink chordSlurLink);
 
     // stems
     void                  appendStemToChord (S_msrStem stem);
 
     // beams
 //    void                  appendBeamToChord (S_msrBeam beam);
-    void                  appendChordBeamLinkToChord (S_msrChordBeamLink chordBeamLink);
+    void                  appendChordBeamLinkToChord (
+                            S_msrChordBeamLink chordBeamLink);
 
     // ligatures
     void                  appendLigatureToChord (S_msrLigature ligature)

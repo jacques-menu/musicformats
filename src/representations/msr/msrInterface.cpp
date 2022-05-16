@@ -97,9 +97,9 @@ S_msrScore createScore ()
 }
 
 //_______________________________________________________________________________
-void displayMsrScore_OptionalPass (
+void displayMsrScore (
   S_msrScore    theMsrScore,
-  const string& optionalPassDescription)
+  const string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -118,7 +118,7 @@ void displayMsrScore_OptionalPass (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): " << optionalPassDescription <<
+    "Pass (optional): " << passDescription <<
     endl <<
     separator <<
     endl << endl <<
@@ -129,7 +129,7 @@ void displayMsrScore_OptionalPass (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    optionalPassDescription,
+    passDescription,
     mfTimingItem::kOptional,
     startClock,
     endClock);
@@ -139,7 +139,7 @@ void displayMsrScore_OptionalPass (
       stringstream s;
 
       s <<
-        "gIndenter value after " << optionalPassDescription << ": " <<
+        "gIndenter value after " << passDescription << ": " <<
         gIndenter.getIndentation ();
 
       msrWarning (
@@ -152,27 +152,10 @@ void displayMsrScore_OptionalPass (
   }
 }
 
-void displayMsrScoreSkeleton_OptionalPass (
-  S_msrScore theMsrScore)
-{
-  displayMsrScore_OptionalPass (
-    theMsrScore,
-    "Displaying the MSR skeleton as text");
-}
-
-void displayPopulatedMsrScore_OptionalPass (
-  S_msrScore    theMsrScore,
-  const string& optionalPassDescription)
-{
-  displayMsrScore_OptionalPass (
-    theMsrScore,
-    optionalPassDescription);
-}
-
 //_______________________________________________________________________________
-void displayMsrScoreShort_OptionalPass (
+void displayMsrScoreShort (
   S_msrScore    theMsrScore,
-  const string& optionalPassDescription)
+  const string& passDescription)
 {
   // sanity check
   mfAssert (
@@ -191,7 +174,7 @@ void displayMsrScoreShort_OptionalPass (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): " << optionalPassDescription <<
+    "Pass (optional): " << passDescription << ", short version" <<
     endl <<
     separator <<
     endl << endl;
@@ -203,7 +186,7 @@ void displayMsrScoreShort_OptionalPass (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    "Display the MSR as short text",
+    passDescription,
     mfTimingItem::kOptional,
     startClock,
     endClock);
@@ -213,82 +196,7 @@ void displayMsrScoreShort_OptionalPass (
       stringstream s;
 
       s <<
-        "gIndenter value after " << optionalPassDescription << ": " <<
-        gIndenter.getIndentation ();
-
-      msrWarning (
-        gGlobalServiceRunData->getInputSourceName (),
-        1, // JMI inputLineNumber,
-        s.str ());
-    }
-
-    gIndenter.resetToZero ();
-  }
-}
-
-void displayMsrScoreSkeletonScoreShort_OptionalPass (
-  S_msrScore    theMsrScore,
-  const string& optionalPassDescription)
-{
-  displayMsrScoreShort_OptionalPass (
-    theMsrScore,
-    optionalPassDescription);
-}
-
-void displayPopulatedMsrScoreShort_OptionalPass (
-  S_msrScore    theMsrScore,
-  const string& optionalPassDescription)
-{
-  displayMsrScoreShort_OptionalPass (
-    theMsrScore,
-    optionalPassDescription);
-}
-
-//_______________________________________________________________________________
-void displayMsrScoreSlices (
-  S_msrScore    theMsrScore,
-  const string& optionalPassDescription)
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    theMsrScore != nullptr,
-    "theMsrScore is null");
-
-  // start the clock
-  clock_t startClock = clock ();
-
-  string separator =
-    "%--------------------------------------------------------------";
-
-  gLogStream <<
-    endl <<
-    separator <<
-    endl <<
-    gTab <<
-    "Pass (optional): " << optionalPassDescription <<
-    endl <<
-    separator <<
-    endl << endl;
-
-  theMsrScore->printSlices (gLogStream);
-
-  // register time spent
-  clock_t endClock = clock ();
-
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    "Display the MSR as short text",
-    mfTimingItem::kOptional,
-    startClock,
-    endClock);
-
-  if (gIndenter != 0) {
-    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
-      stringstream s;
-
-      s <<
-        "gIndenter value after " << optionalPassDescription << ": " <<
+        "gIndenter value after " << passDescription << ": " <<
         gIndenter.getIndentation ();
 
       msrWarning (
@@ -305,7 +213,7 @@ void displayMsrScoreSlices (
 void displayMsrScoreSummary (
   S_msrScore     theMsrScore,
   S_msrOahGroup& msrOpts,
-  const string&  optionalPassDescription)
+  const string&  passDescription)
 {
   // sanity check
   mfAssert (
@@ -326,7 +234,7 @@ void displayMsrScoreSummary (
       separator <<
       endl <<
       gTab <<
-      "Pass (optional): " << optionalPassDescription  <<
+      "Pass (optional): " << passDescription  <<
       endl <<
       separator <<
       endl << endl;
@@ -346,7 +254,7 @@ void displayMsrScoreSummary (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    "Display a summary of the populated MSR",
+    passDescription,
     mfTimingItem::kOptional,
     startClock,
     endClock);
@@ -355,7 +263,8 @@ void displayMsrScoreSummary (
 //_______________________________________________________________________________
 void displayMsrScoreNames (
   S_msrScore     theMsrScore,
-  S_msrOahGroup& msrOpts)
+  S_msrOahGroup& msrOpts,
+  const string&  passDescription)
 {
   // sanity check
   mfAssert (
@@ -376,7 +285,7 @@ void displayMsrScoreNames (
       separator <<
       endl <<
       gTab <<
-      "Pass (optional): " << "Display the names in the populated MSR" <<
+      "Pass (optional): " << passDescription <<
       endl <<
       separator <<
       endl << endl;
@@ -396,10 +305,67 @@ void displayMsrScoreNames (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    "Display the names in the populated MSR",
+    passDescription,
     mfTimingItem::kOptional,
     startClock,
     endClock);
+}
+
+//_______________________________________________________________________________
+void displayMsrScoreSlices (
+  S_msrScore    theMsrScore,
+  const string& passDescription)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    theMsrScore != nullptr,
+    "theMsrScore is null");
+
+  // start the clock
+  clock_t startClock = clock ();
+
+  string separator =
+    "%--------------------------------------------------------------";
+
+  gLogStream <<
+    endl <<
+    separator <<
+    endl <<
+    gTab <<
+    "Pass (optional): " << passDescription <<
+    endl <<
+    separator <<
+    endl << endl;
+
+  theMsrScore->printSlices (gLogStream);
+
+  // register time spent
+  clock_t endClock = clock ();
+
+  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+    "",
+    passDescription,
+    mfTimingItem::kOptional,
+    startClock,
+    endClock);
+
+  if (gIndenter != 0) {
+    if (! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+      stringstream s;
+
+      s <<
+        "gIndenter value after " << passDescription << ": " <<
+        gIndenter.getIndentation ();
+
+      msrWarning (
+        gGlobalServiceRunData->getInputSourceName (),
+        1, // JMI inputLineNumber,
+        s.str ());
+    }
+
+    gIndenter.resetToZero ();
+  }
 }
 
 //_______________________________________________________________________________

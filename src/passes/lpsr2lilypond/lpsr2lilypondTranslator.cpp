@@ -14026,7 +14026,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTimeSignature& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::visitStart (S_msrTranspose& elt)
+void lpsr2lilypondTranslator::visitStart (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -14042,7 +14042,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTranspose& elt)
       stringstream s;
 
       s <<
-        "% --> Start visiting msrTranspose" <<
+        "% --> Start visiting msrTransposition" <<
         ", line " << elt->getInputLineNumber () <<
         endl;
 
@@ -14060,10 +14060,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrTranspose& elt)
   int inputLineNumber =
     elt->getInputLineNumber ();
 
-  int  transposeDiatonic     = elt->getTransposeDiatonic ();
-  int  transposeChromatic    = elt->getTransposeChromatic ();
-  int  transposeOctaveChange = elt->getTransposeOctaveChange ();
-  Bool transposeDouble       = elt->getTransposeDouble ();
+  int  transposeDiatonic     = elt->getTranspositionDiatonic ();
+  int  transposeChromatic    = elt->getTranspositionChromatic ();
+  int  transposeOctaveChange = elt->getTranspositionOctaveChange ();
+  Bool transposeDouble       = elt->getTranspositionDouble ();
 
 /*
   // transposition in LilyPond is relative to c',
@@ -14450,7 +14450,7 @@ If the double element is present, it indicates that the music is doubled one oct
         stringstream s;
 
         s <<
-          "transpose chromatic '" << transposeChromatic <<
+          "fTransposition chromatic '" << transposeChromatic <<
           "' is not between -12 and 12, ignored";
 
         lpsr2lilypondError (
@@ -14535,7 +14535,7 @@ If the double element is present, it indicates that the music is doubled one oct
     endl;
 }
 
-void lpsr2lilypondTranslator::visitEnd (S_msrTranspose& elt)
+void lpsr2lilypondTranslator::visitEnd (S_msrTransposition& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -14551,7 +14551,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTranspose& elt)
       stringstream s;
 
       s <<
-        "% --> End visiting msrTranspose" <<
+        "% --> End visiting msrTransposition" <<
         ", line " << elt->getInputLineNumber () <<
         endl;
 

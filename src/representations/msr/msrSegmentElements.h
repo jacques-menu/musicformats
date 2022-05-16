@@ -13,6 +13,7 @@
 #define ___msrSegmentElements___
 
 #include "msrElements.h"
+#include "msrMeasureElements.h"
 
 #include "msrBasicTypes.h"
 
@@ -102,8 +103,8 @@ class EXP msrSegmentElement : public msrElement
     // public services
     // ------------------------------------------------------
 
-    virtual void          appendSegmentElement (
-                            S_msrSegmentElement elem) = 0;
+    virtual void          appendMeasureElementToSegmentElement (
+                            S_msrMeasureElement elem) = 0;
 
     static bool           compareSegmentElementsByIncreasingPositionInMeasure (
                             const SMARTP<msrSegmentElement>& first,
@@ -132,6 +133,7 @@ class EXP msrSegmentElement : public msrElement
     string                asString () const override;
 
     void                  print (ostream& os) const override;
+    void                  printShort (ostream& os) const override = 0;
 
     void                  printSummary (ostream& os) const override {}
 

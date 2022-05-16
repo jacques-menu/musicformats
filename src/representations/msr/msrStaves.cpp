@@ -266,7 +266,7 @@ void msrStaff::initializeStaff ()
 
   // get the initial transpose from the part if any
   {
-    S_msrTranspose
+    S_msrTransposition
       transpose =
         fStaffPartUpLink->
           getPartCurrentTranspose ();
@@ -286,7 +286,7 @@ void msrStaff::initializeStaff ()
 
       fStaffCurrentTranspose = transpose;
 
-      appendTransposeToAllStaffVoices (transpose);
+      appendTranspositionToAllStaffVoices (transpose);
     }
   }
 
@@ -2300,8 +2300,8 @@ void msrStaff::appendBarLineToStaff (S_msrBarLine barLine)
   --gIndenter;
 }
 
-void msrStaff::appendTransposeToStaff (
-  S_msrTranspose transpose)
+void msrStaff::appendTranspositionToStaff (
+  S_msrTransposition transpose)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
@@ -2347,7 +2347,7 @@ void msrStaff::appendTransposeToStaff (
     fStaffCurrentTranspose = transpose;
 
     // cascade it to all voices
-    appendTransposeToAllStaffVoices (transpose);
+    appendTranspositionToAllStaffVoices (transpose);
   }
 }
 
@@ -2409,12 +2409,12 @@ void msrStaff::appendStaffDetailsToStaff (
   } // for
 }
 
-void msrStaff::appendTransposeToAllStaffVoices (
-  S_msrTranspose transpose)
+void msrStaff::appendTranspositionToAllStaffVoices (
+  S_msrTransposition transpose)
 {
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      appendTransposeToVoice (transpose);
+      appendTranspositionToVoice (transpose);
   } // for
 }
 

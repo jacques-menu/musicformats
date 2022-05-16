@@ -63,7 +63,7 @@ class EXP msrBeatRepeatPattern : public msrElement
                               { return fBeatRepeatPatternSegment; }
 
     // upLinks
-    S_msrBeatRepeat      getBeatRepeatUpLink () const
+    S_msrBeatRepeat       getBeatRepeatUpLink () const
                             { return fBeatRepeatUpLink; }
 
   public:
@@ -101,7 +101,7 @@ class EXP msrBeatRepeatPattern : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrBeatRepeat      fBeatRepeatUpLink;
+    S_msrBeatRepeat       fBeatRepeatUpLink;
 
     // segment
     S_msrSegment          fBeatRepeatPatternSegment;
@@ -144,7 +144,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrBeatRepeat      getBeatRepeatUpLink () const
+    S_msrBeatRepeat       getBeatRepeatUpLink () const
                             { return fBeatRepeatUpLink; }
     // segment
     void                  setBeatRepeatReplicasSegment (
@@ -190,7 +190,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrBeatRepeat      fBeatRepeatUpLink;
+    S_msrBeatRepeat       fBeatRepeatUpLink;
 
     // segment
     S_msrSegment          fBeatRepeatReplicasSegment;
@@ -304,8 +304,8 @@ class EXP msrBeatRepeat : public msrSegmentElement
     // public services
     // ------------------------------------------------------
 
-    void                  appendSegmentElement (
-                            S_msrSegmentElement elem) override;
+    void                  appendMeasureElementToSegmentElement (
+                            S_msrMeasureElement elem) override;
 
     int                   fetchBeatRepeatReplicasNumber () const;
 
@@ -337,6 +337,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
                             const string& context);
 
     void                  print (ostream& os) const override;
+    void                  printShort (ostream& os) const override;
 
   private:
 

@@ -837,7 +837,11 @@ function addFxml ()
 {
   git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.xml
   git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.txt
+
   git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/Makefile
+
+  git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.bash
+  git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.mfsl
 }
 
 function addFmfsl ()

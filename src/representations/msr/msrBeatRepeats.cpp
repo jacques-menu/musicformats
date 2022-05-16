@@ -21,7 +21,7 @@
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
 
-
+#include "msrWae.h"
 
 #include "msrBeatRepeats.h"
 
@@ -484,7 +484,7 @@ int msrBeatRepeatPattern::fetchMeasuresNumber () const
   if (fBeatRepeatPatternSegment) {
     result =
       fBeatRepeatPatternSegment->
-        getSegmentMeasuresList ().size ();
+        getSegmentElementsList ().size ();
   }
   else {
     result = 0;
@@ -673,7 +673,7 @@ int msrBeatRepeatReplicas::fetchMeasuresNumber () const
   if (fBeatRepeatReplicasSegment) {
     result =
       fBeatRepeatReplicasSegment->
-        getSegmentMeasuresList ().size ();
+        getSegmentElementsList ().size ();
   }
   else {
     result = 0;
@@ -1069,6 +1069,24 @@ void msrBeatRepeat::browseData (basevisitor* v)
   */
 }
 
+void msrBeatRepeat:: appendMeasureElementToSegmentElement (
+  S_msrMeasureElement elem)
+{
+  stringstream s;
+
+  s <<
+    "cannot append measure element " <<
+    elem->asShortString () <<
+    " to beat repeat " <<
+    asShortString ();
+
+  msrInternalError (
+    gGlobalServiceRunData->getInputSourceName (),
+    fInputLineNumber,
+    __FILE__, __LINE__,
+    s.str ());
+}
+
 string msrBeatRepeat::beatRepeatBuildPhaseKindAsString (
   msrBeatRepeatBuildPhaseKind beatRepeatBuildPhaseKind)
 {
@@ -1209,6 +1227,11 @@ void msrBeatRepeat::print (ostream& os) const
   --gIndenter;
 
   os << ']' << endl;
+}
+
+void msrBeatRepeat::printShort (ostream& os) const
+{
+  print (os);
 }
 
 ostream& operator<< (ostream& os, const S_msrBeatRepeat& elt)

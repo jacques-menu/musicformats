@@ -110,24 +110,27 @@ EXP mfMusicformatsError msrScore2lilypondWithHandler (
     // ------------------------------------------------------
 
     if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
-      displayLpsrScore_OptionalPass (
+      displayLpsrScore (
         theLpsrScore,
         gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup);
+        gGlobalLpsrOahGroup,
+        "Display the LPSR");
     }
 
     if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
-      displayLpsrScoreShort_OptionalPass (
+      displayLpsrScoreShort (
         theLpsrScore,
         gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup);
+        gGlobalLpsrOahGroup,
+        "Display the LPSR");
     }
 
     if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
-      displayLpsrScoreFull_OptionalPass (
+      displayLpsrScoreFull (
         theLpsrScore,
         gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup);
+        gGlobalLpsrOahGroup,
+        "Display the LPSR");
     }
   }
 

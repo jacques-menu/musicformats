@@ -24,7 +24,7 @@
 
 #include "msrOah.h"
 
-#include "msrTransposes.h"
+#include "msrTranspositions.h"
 
 
 using namespace std;
@@ -33,15 +33,15 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-S_msrTranspose msrTranspose::create (
+S_msrTransposition msrTransposition::create (
   int  inputLineNumber,
   int  transposeDiatonic,
   int  transposeChromatic,
   int  transposeOctaveChange,
   Bool transposeDouble)
 {
-  msrTranspose* o =
-    new msrTranspose (
+  msrTransposition* o =
+    new msrTransposition (
       inputLineNumber,
       transposeDiatonic,
       transposeChromatic,
@@ -51,7 +51,7 @@ S_msrTranspose msrTranspose::create (
   return o;
 }
 
-msrTranspose::msrTranspose (
+msrTransposition::msrTransposition (
   int  inputLineNumber,
   int  transposeDiatonic,
   int  transposeChromatic,
@@ -59,10 +59,10 @@ msrTranspose::msrTranspose (
   Bool transposeDouble)
     : msrMeasureElement (inputLineNumber)
 {
-  fTransposeDiatonic     = transposeDiatonic;
-  fTransposeChromatic    = transposeChromatic;
-  fTransposeOctaveChange = transposeOctaveChange;
-  fTransposeDouble       = transposeDouble;
+  fTranspositionDiatonic     = transposeDiatonic;
+  fTranspositionChromatic    = transposeChromatic;
+  fTranspositionOctaveChange = transposeOctaveChange;
+  fTranspositionDouble       = transposeDouble;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
@@ -75,93 +75,93 @@ msrTranspose::msrTranspose (
 #endif
 }
 
-msrTranspose::~msrTranspose ()
+msrTransposition::~msrTransposition ()
 {}
 
-Bool msrTranspose::isEqualTo (S_msrTranspose otherTranspose) const
+Bool msrTransposition::isEqualTo (S_msrTransposition otherTranspose) const
 {
   if (! otherTranspose) {
     return false;
   }
 
   return
-    fTransposeDiatonic ==
-      otherTranspose->fTransposeDiatonic
+    fTranspositionDiatonic ==
+      otherTranspose->fTranspositionDiatonic
       &&
-    fTransposeChromatic ==
-      otherTranspose->fTransposeChromatic
+    fTranspositionChromatic ==
+      otherTranspose->fTranspositionChromatic
       &&
-    fTransposeOctaveChange ==
-      otherTranspose->fTransposeOctaveChange
+    fTranspositionOctaveChange ==
+      otherTranspose->fTranspositionOctaveChange
       &&
-    fTransposeDouble ==
-      otherTranspose->fTransposeDouble;
+    fTranspositionDouble ==
+      otherTranspose->fTranspositionDouble;
 }
 
-void msrTranspose::acceptIn (basevisitor* v)
+void msrTransposition::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "% ==> msrTranspose::acceptIn ()" <<
+      "% ==> msrTransposition::acceptIn ()" <<
       endl;
   }
 
-  if (visitor<S_msrTranspose>*
+  if (visitor<S_msrTransposition>*
     p =
-      dynamic_cast<visitor<S_msrTranspose>*> (v)) {
-        S_msrTranspose elem = this;
+      dynamic_cast<visitor<S_msrTransposition>*> (v)) {
+        S_msrTransposition elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
-            "% ==> Launching msrTranspose::visitStart ()" <<
+            "% ==> Launching msrTransposition::visitStart ()" <<
             endl;
         }
         p->visitStart (elem);
   }
 }
 
-void msrTranspose::acceptOut (basevisitor* v)
+void msrTransposition::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "% ==> msrTranspose::acceptOut ()" <<
+      "% ==> msrTransposition::acceptOut ()" <<
       endl;
   }
 
-  if (visitor<S_msrTranspose>*
+  if (visitor<S_msrTransposition>*
     p =
-      dynamic_cast<visitor<S_msrTranspose>*> (v)) {
-        S_msrTranspose elem = this;
+      dynamic_cast<visitor<S_msrTransposition>*> (v)) {
+        S_msrTransposition elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
-            "% ==> Launching msrTranspose::visitEnd ()" <<
+            "% ==> Launching msrTransposition::visitEnd ()" <<
             endl;
         }
         p->visitEnd (elem);
   }
 }
 
-void msrTranspose::browseData (basevisitor* v)
+void msrTransposition::browseData (basevisitor* v)
 {}
 
-string msrTranspose::asString () const
+string msrTransposition::asString () const
 {
   stringstream s;
 
   s <<
     "[Transpose" <<
-    ", diatonic = " << fTransposeDiatonic <<
-    ", chromatic = " << fTransposeChromatic <<
-    ", transposeOctaveChange = " << fTransposeOctaveChange <<
-    ", transposeDouble = " << fTransposeDouble <<
+    ", fTranspositionDiatonic = " << fTranspositionDiatonic <<
+    ", fTranspositionChromatic = " << fTranspositionChromatic <<
+    ", fTranspositionOctaveChange = " << fTranspositionOctaveChange <<
+    ", fTranspositionDouble = " << fTranspositionDouble <<
     ", line " << fInputLineNumber <<
     "]";
 
   return s.str ();
 }
 
-void msrTranspose::print (ostream& os) const
+void msrTransposition::print (ostream& os) const
 {
   const int fieldWidth = 22;
 
@@ -174,16 +174,16 @@ void msrTranspose::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "transposeDiatonic" << " = " << fTransposeDiatonic <<
+    "fTranspositionDiatonic" << " = " << fTranspositionDiatonic <<
     endl <<
     setw (fieldWidth) <<
-    "transposeChromatic" << " = " << fTransposeChromatic <<
+    "fTranspositionChromatic" << " = " << fTranspositionChromatic <<
     endl <<
     setw (fieldWidth) <<
-    "transposeOctaveChange" << " = " << fTransposeOctaveChange <<
+    "fTranspositionOctaveChange" << " = " << fTranspositionOctaveChange <<
     endl <<
     setw (fieldWidth) <<
-    "transposeDouble" << " = " << fTransposeDouble <<
+    "fTranspositionDouble" << " = " << fTranspositionDouble <<
     endl << endl;
 
   --gIndenter;
@@ -191,7 +191,7 @@ void msrTranspose::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrTranspose& elt)
+ostream& operator<< (ostream& os, const S_msrTransposition& elt)
 {
   elt->print (os);
   return os;
