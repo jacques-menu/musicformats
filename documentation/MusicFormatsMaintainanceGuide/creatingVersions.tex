@@ -71,45 +71,107 @@ git push
 \end{lstlisting}
 
 
-\item check that the actions were executed successfully at \url{https://github.com/jacques-menu/musicformats/actions};
+\item the actions in the \mf\ \repo\ perform a build on \Linux, \Windows and \MacOS. Check that they were executed successfully at \url{https://github.com/jacques-menu/musicformats/actions}:\\
+\includegraphics[scale=0.5]{../graphics/SuccessfulActions.png}
 
 
-\item when that is the case, download the resulting \code{musicformats-*-distrib} archives locally;
+\item when that is the case, download each of the three resulting \code{musicformats-*-distrib} archives locally in turn:\\
+\includegraphics[scale=0.5]{../graphics/DownloadDistribution.png}
 
-
-\item create the distribution in the local \mf\ repository clone:
+On this authors's machine, they go to \code{\$\{HOME\}/Downloads}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/MakeMusicFormatsDistributions.bash
+jacquesmenu@macmini: ~/Downloads > ls -sal musicformats-*-distrib
+musicformats-macos-distrib:
+total 8
+0 drwx------@  5 jacquesmenu  staff  160 Jun  9 11:44 .
+0 drwx------+ 28 jacquesmenu  staff  896 Jun  9 11:44 ..
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Jun  9 07:40 MusicFormatsVersionNumber.txt
+0 drwxr-xr-x@  3 jacquesmenu  staff   96 Jun  9 11:44 build
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Jun  9 11:44 documentation
+
+musicformats-ubuntu-distrib:
+total 8
+0 drwx------@  5 jacquesmenu  staff  160 Jun  9 11:44 .
+0 drwx------+ 28 jacquesmenu  staff  896 Jun  9 11:44 ..
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Jun  9 07:57 MusicFormatsVersionNumber.txt
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Jun  9 11:44 build
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Jun  9 11:44 documentation
+
+musicformats-windows-distrib:
+total 8
+0 drwx------@  5 jacquesmenu  staff  160 Jun  9 11:43 .
+0 drwx------+ 28 jacquesmenu  staff  896 Jun  9 11:44 ..
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Jun  9 08:14 MusicFormatsVersionNumber.txt
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Jun  9 11:43 build
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Jun  9 11:43 documentation
 \end{lstlisting}
 
 
-\item \MainIt{commit and push again} with the new version name in the \code{-m "\dots~\dots~\dots"} message, such as:
+\item create the distributions in the local \mf\ \repo\ clone:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/MakeMusicFormatsDistributions.bash
+... ... ...
+----------------------------------------------
+==> final distrib contents:
+----------------------------------------------
+
+  4368 -rw-r--r--  1 jacquesmenu  staff   2234811 Jun  9 11:47 /Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForWindows.zip
+ 35312 -rw-r--r--  1 jacquesmenu  staff  18076799 Jun  9 11:47 /Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForUbuntu.zip
+127824 -rw-r--r--  1 jacquesmenu  staff  65442854 Jun  9 11:47 /Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForMacOS.zip
+  1712 -rw-r--r--@ 1 jacquesmenu  staff    872863 Jun  9 07:40 /Users/jacquesmenu/musicformats-git-dev/distrib/IntroductionToMusicXML.pdf
+  5328 -rw-r--r--@ 1 jacquesmenu  staff   2724130 Jun  9 07:40 /Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsUserGuide.pdf
+     8 -rw-r--r--@ 1 jacquesmenu  staff         6 Jun  9 07:40 /Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsVersionNumber.txt
+
+/Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForWindows:
+total 8
+0 drwxr-xr-x  14 jacquesmenu  staff  448 Jun  9 11:47 ..
+0 drwxr-xr-x   5 jacquesmenu  staff  160 Jun  9 11:47 .
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Jun  9 11:43 lib
+0 drwxr-xr-x@ 26 jacquesmenu  staff  832 Jun  9 11:43 bin
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Jun  9 08:14 MusicFormatsVersionNumber.txt
+
+/Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForUbuntu:
+total 8
+0 drwxr-xr-x  14 jacquesmenu  staff  448 Jun  9 11:47 ..
+0 drwxr-xr-x   5 jacquesmenu  staff  160 Jun  9 11:47 .
+0 drwxr-xr-x@  4 jacquesmenu  staff  128 Jun  9 11:44 lib
+0 drwxr-xr-x@ 26 jacquesmenu  staff  832 Jun  9 11:44 bin
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Jun  9 07:57 MusicFormatsVersionNumber.txt
+
+/Users/jacquesmenu/musicformats-git-dev/distrib/MusicFormatsForMacOS:
+total 8
+0 drwxr-xr-x  14 jacquesmenu  staff  448 Jun  9 11:47 ..
+0 drwxr-xr-x   4 jacquesmenu  staff  128 Jun  9 11:47 .
+0 drwxr-xr-x@ 26 jacquesmenu  staff  832 Jun  9 07:40 bin
+8 -rw-r--r--@  1 jacquesmenu  staff    6 Jun  9 07:40 MusicFormatsVersionNumber.txt
+\end{lstlisting}
+
+Now, the local \masterBranch\ contains the distribution files of itself:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev/distrib > ls -al
+total 174552
+drwxr-xr-x  14 jacquesmenu  staff       448 Jun  9 11:47 .
+drwxr-xr-x  29 jacquesmenu  staff       928 Jun  9 09:13 ..
+-rw-r--r--@  1 jacquesmenu  staff    872863 Jun  9 07:40 IntroductionToMusicXML.pdf
+drwxr-xr-x   4 jacquesmenu  staff       128 Jun  9 11:47 MusicFormatsForMacOS
+-rw-r--r--   1 jacquesmenu  staff  65442854 Jun  9 11:47 MusicFormatsForMacOS.zip
+drwxr-xr-x   5 jacquesmenu  staff       160 Jun  9 11:47 MusicFormatsForUbuntu
+-rw-r--r--   1 jacquesmenu  staff  18076799 Jun  9 11:47 MusicFormatsForUbuntu.zip
+drwxr-xr-x   5 jacquesmenu  staff       160 Jun  9 11:47 MusicFormatsForWindows
+-rw-r--r--   1 jacquesmenu  staff   2234811 Jun  9 11:47 MusicFormatsForWindows.zip
+-rw-r--r--@  1 jacquesmenu  staff   2724130 Jun  9 07:40 MusicFormatsUserGuide.pdf
+-rw-r--r--@  1 jacquesmenu  staff         6 Jun  9 07:40 MusicFormatsVersionNumber.txt
+drwx------@  5 jacquesmenu  staff       160 Jun  9 11:44 musicformats-macos-distrib
+drwx------@  5 jacquesmenu  staff       160 Jun  9 11:44 musicformats-ubuntu-distrib
+drwx------@  5 jacquesmenu  staff       160 Jun  9 11:43 musicformats-windows-distrib
+\end{lstlisting}
+
+
+\item \MainIt{commit and push again} with the new version name, no 'Pre' this time, in the \code{-m "\dots~\dots~\dots"} message, such as:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "v0.9.63" -a
 
 jacquesmenu@macmini: ~/musicformats-git-dev > git push
-\end{lstlisting}
-
-Now, the \masterBranch\ contains the distribution files of itself:
-\begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev/distrib > ls -sal
-total 154128
-     0 drwxr-xr-x  16 jacquesmenu  staff       512 Mar  3 13:18 .
-     0 drwxr-xr-x  35 jacquesmenu  staff      1120 Mar  3 07:13 ..
-    24 -rw-r--r--@  1 jacquesmenu  staff      8196 Feb 24 13:33 .DS_Store
-  1704 -rw-r--r--@  1 jacquesmenu  staff    869211 Mar  3 07:10 IntroductionToMusicXML.pdf
-     0 drwxr-xr-x   4 jacquesmenu  staff       128 Mar  3 13:18 MusicFormatsForMacOS
-109960 -rw-r--r--   1 jacquesmenu  staff  55888914 Mar  3 13:18 MusicFormatsForMacOS.zip
-     0 drwxr-xr-x   5 jacquesmenu  staff       160 Mar  3 13:18 MusicFormatsForUbuntu
- 35216 -rw-r--r--   1 jacquesmenu  staff  17559638 Mar  3 13:18 MusicFormatsForUbuntu.zip
-     0 drwxr-xr-x   5 jacquesmenu  staff       160 Mar  3 13:18 MusicFormatsForWindows
-  4208 -rw-r--r--   1 jacquesmenu  staff   2153547 Mar  3 13:18 MusicFormatsForWindows.zip
-  3000 -rw-r--r--@  1 jacquesmenu  staff   1532300 Mar  3 07:10 MusicFormatsUserGuide.pdf
-     8 -rw-r--r--@  1 jacquesmenu  staff         6 Mar  3 07:10 MusicFormatsVersionNumber.txt
-     8 -rwxr-xr-x@  1 jacquesmenu  staff        95 Mar  3 12:54 doClean.bash
-     0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-macos-distrib
-     0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-ubuntu-distrib
-     0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-windows-distrib
 \end{lstlisting}
 
 
