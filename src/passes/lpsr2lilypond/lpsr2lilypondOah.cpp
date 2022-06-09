@@ -3525,9 +3525,9 @@ The default is 'DEFAULT_VALUE'.)",
       oahBooleanAtom::create (
         "compress-empty-measures-in-lilypond", "cemil",
 R"(Compress empty measures in the LilyPond output. TEMP !!! JMI
-This causes a \compressEmptyMeasures command to be generated.)",
-        "fCompressEmptyMeasuresInLilypond",
-        fCompressEmptyMeasuresInLilypond));
+This causes a \compressFullBarRests command to be generated.)",
+        "fCompressFullBarRestsInLilypond",
+        fCompressFullBarRestsInLilypond));
 
   // merge rests
   // --------------------------------------
@@ -5227,8 +5227,8 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
       lpsrLyricsDurationsKindAsString (fLyricsDurationsKind) <<
       endl <<
 
-    setw (valueFieldWidth) << "fCompressEmptyMeasuresInLilypond" << " : " <<
-      fCompressEmptyMeasuresInLilypond <<
+    setw (valueFieldWidth) << "fCompressFullBarRestsInLilypond" << " : " <<
+      fCompressFullBarRestsInLilypond <<
       endl <<
 
     setw (valueFieldWidth) << "fMergeStaffCommonRests" << " : " <<
@@ -5854,8 +5854,8 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
       lpsrLyricsDurationsKindAsString (fLyricsDurationsKind) <<
       endl <<
 
-    setw (fieldWidth) << "fCompressEmptyMeasuresInLilypond" << " : " <<
-      fCompressEmptyMeasuresInLilypond <<
+    setw (fieldWidth) << "fCompressFullBarRestsInLilypond" << " : " <<
+      fCompressFullBarRestsInLilypond <<
       endl <<
 
     setw (fieldWidth) << "fMergeStaffCommonRests" << " : " <<

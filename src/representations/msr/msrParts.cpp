@@ -1385,17 +1385,17 @@ void msrPart::appendPendingMeasureRepeatToPart (
   } // for
 }
 
-void msrPart::createMultipleFullBarRestsInPart (
+void msrPart::appendMultipleFullBarRestsToPart (
   int inputLineNumber,
-  int multipleMultipleFullBarRestsMeasuresNumber)
+  int multipleFullBarRestsMeasuresNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
-      "Creating " <<
+      "Appending a multiple full-bar rest for " <<
       mfSingularOrPlural (
-        multipleMultipleFullBarRestsMeasuresNumber, "multiple full-bar rest", "multiple full-bar rests") <<
-      " in part " <<
+        multipleFullBarRestsMeasuresNumber, "measure", "measures") <<
+      " to part " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
@@ -1407,9 +1407,9 @@ void msrPart::createMultipleFullBarRestsInPart (
   // create multiple rest in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      createMultipleFullBarRestsInStaff (
+      appendMultipleFullBarRestsToStaff (
         inputLineNumber,
-        multipleMultipleFullBarRestsMeasuresNumber);
+        multipleFullBarRestsMeasuresNumber);
   } // for
 }
 
@@ -1487,13 +1487,13 @@ void msrPart::appendPendingMultipleFullBarRestsToPart (
 
 void msrPart::appendMultipleFullBarRestsCloneToPart (
   int               inputLineNumber,
-  S_msrMultipleFullBarRests multipleMultipleFullBarRests)
+  S_msrMultipleFullBarRests multipleFullBarRests)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Appending multiple rest '" <<
-      multipleMultipleFullBarRests->asString () <<
+      multipleFullBarRests->asString () <<
       "' to part clone " <<
       getPartCombinedName () <<
       endl;
@@ -1504,7 +1504,7 @@ void msrPart::appendMultipleFullBarRestsCloneToPart (
     staff->
       appendMultipleFullBarRestsCloneToStaff (
         inputLineNumber,
-        multipleMultipleFullBarRests);
+        multipleFullBarRests);
   } // for
 }
 

@@ -798,7 +798,7 @@ void msr2summaryVisitor::visitStart (S_msrNote& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> Start visiting " <<
-      noteKindAsString (
+      msrNoteKindAsString (
         elt->getNoteKind ()) <<
       " msrNote" <<
       endl;
@@ -844,7 +844,7 @@ void msr2summaryVisitor::visitEnd (S_msrNote& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting " <<
-      noteKindAsString (
+      msrNoteKindAsString (
         elt->getNoteKind ()) <<
       " msrNote" <<
       endl;

@@ -5884,7 +5884,6 @@ void msr2mxsrTranslator:: appendNoteArticulations (
         case msrArticulation::kFalloff:
         case msrArticulation::kPlop:
         case msrArticulation::kScoop:
-
         case msrArticulation::kFermata:
           appendToNoteNotationsArticulations (
             articulationElement,
@@ -6812,7 +6811,7 @@ void msr2mxsrTranslator::appendBasicsToNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "-->  noteKind: " << noteKindAsString (noteKind) <<
+      "-->  noteKind: " << msrNoteKindAsString (noteKind) <<
       "-->  noteOctaveKind: " <<
       msrOctaveKindAsString (noteOctaveKind) <<
       "-->  noteDiatonicPitchKind: " <<
@@ -6974,7 +6973,7 @@ void msr2mxsrTranslator::appendDurationToNoteIfRelevant (
 
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "---> noteKind: " << noteKindAsString (noteKind) <<
+      "---> noteKind: " << msrNoteKindAsString (noteKind) <<
       ", noteSoundingWholeNotes: " << noteSoundingWholeNotes <<
       ", noteDisplayWholeNotes: " << noteDisplayWholeNotes <<
       ", noteTupletFactor: " << theMsrNote->getNoteTupletFactor ().asRational () <<
@@ -7363,15 +7362,15 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
           " ===== " <<
           "Note " <<
           theMsrNote->notePitchAndSoundingWholeNotesAsString () <<
-          ", staff: " <<
+          ", staffNumber: " <<
             noteVoice->getVoiceStaffUpLink ()->getStaffNumber () <<
-          ", voice: " <<
+          ", voiceNumber: " <<
             noteVoice->getVoiceNumber () <<
-          ", position: " <<
+          ", measureElementPositionInMeasure: " <<
             theMsrNote->getMeasureElementPositionInMeasure () <<
-          ", moment: " <<
+          ", measureElementMomentInMeasure: " <<
             theMsrNote->getMeasureElementMomentInMeasure () <<
-          ", sounding: " <<
+          ", noteSoundingWholeNotes: " <<
             theMsrNote->getNoteSoundingWholeNotes () <<
           ", line " << inputLineNumber <<
           " ===== ";
@@ -10267,67 +10266,6 @@ void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 
   fCurrentVoiceClone->
     handleMultipleFullBarRestsEndInVoiceClone (
-      inputLineNumber);
-}
-
-//________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrMultipleFullBarRestsContents& elt)
-{
-  int inputLineNumber =
-    elt->getInputLineNumber ();
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
-      "--> Start visiting msrMultipleFullBarRestsContents" <<
-      ", line " << inputLineNumber <<
-      endl;
-  }
-#endif
-
-  ++gIndenter;
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-    fCurrentVoiceClone->
-      displayVoice (
-        inputLineNumber,
-        "Upon visitStart (S_msrMultipleFullBarRestsContents&)");
-  }
-#endif
-
-  fCurrentVoiceClone->
-    handleMultipleFullBarRestsContentsStartInVoiceClone (
-      inputLineNumber);
-}
-
-void msr2mxsrTranslator::visitEnd (S_msrMultipleFullBarRestsContents& elt)
-{
-  int inputLineNumber =
-    elt->getInputLineNumber ();
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
-      "--> End visiting msrMultipleFullBarRestsContents" <<
-      ", line " << inputLineNumber <<
-      endl;
-  }
-#endif
-
-  --gIndenter;
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-    fCurrentVoiceClone->
-      displayVoice (
-        inputLineNumber,
-        "Upon visitEnd (S_msrMultipleFullBarRestsContents&) 1");
-  }
-#endif
-
-  fCurrentVoiceClone->
-    handleMultipleFullBarRestsContentsEndInVoiceClone (
       inputLineNumber);
 }
 

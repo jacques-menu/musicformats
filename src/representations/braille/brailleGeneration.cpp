@@ -45,6 +45,12 @@ string bsrUTFKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const bsrUTFKind& elt)
+{
+  os << bsrUTFKindAsString (elt);
+  return os;
+}
+
 string bsrByteOrderingKindAsString (
   bsrByteOrderingKind byteOrderingKind)
 {
@@ -63,6 +69,12 @@ string bsrByteOrderingKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const bsrByteOrderingKind& elt)
+{
+  os << bsrByteOrderingKindAsString (elt);
+  return os;
 }
 
 //______________________________________________________________________________

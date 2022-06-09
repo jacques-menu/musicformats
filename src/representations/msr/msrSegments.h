@@ -7,6 +7,7 @@
 
 #include "msrCodas.h"
 #include "msrEyeGlasses.h"
+#include "msrMultipleFullBarRests.h"
 #include "msrRehearsalMarks.h"
 #include "msrSegnos.h"
 #include "msrSegmentElements.h"
@@ -128,10 +129,19 @@ class EXP msrSegment : public msrVoiceElement
                           getSegmentElementsList () const
                               { return fSegmentElementsList; }
 
-    // last appended measure
+    // measures
 
-    S_msrMeasure          getSegmentLastAppendedMeasure () const
-                              { return fSegmentLastAppendedMeasure; }
+    void                  setSegmentFirstMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getSegmentFirstMeasure () const
+                              { return fSegmentFirstMeasure; }
+
+    void                  setSegmentLastMeasure (
+                            const S_msrMeasure& measure);
+
+    S_msrMeasure          getSegmentLastMeasure () const
+                              { return fSegmentLastMeasure; }
 
     // measures flat list
 
@@ -193,10 +203,6 @@ class EXP msrSegment : public msrVoiceElement
 
     // measures
 
-    S_msrMeasure          fetchSegmentFirstMeasure () const;
-
-    S_msrMeasure          fetchSegmentLastMeasure () const;
-
     S_msrMeasure          fetchLastMeasureFromSegment (
                             int           inputLineNumber,
                             const string& context);
@@ -217,6 +223,9 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  prependMeasureToSegment (
                             S_msrMeasure measure);
+
+    void                  appendMultipleFullBarRestsToSegment (
+                            S_msrMultipleFullBarRests multipleFullBarRests);
 
     // clef, key, time signature
 
@@ -446,6 +455,10 @@ class EXP msrSegment : public msrVoiceElement
     // private services
     // ------------------------------------------------------
 
+    // measures
+    void                  assertSegmentLastMeasureIsNotNull (
+                            int inputLineNumber) const;
+
     // necessary due to the complexity of repeats management
     void                  assertSegmentElementsListIsNotEmpty (
                             int inputLineNumber) const;
@@ -464,9 +477,6 @@ class EXP msrSegment : public msrVoiceElement
     // the measures elements in the segment contain the mmusic
     list<S_msrSegmentElement>
                           fSegmentElementsList;
-
-    // the last appended measure
-    S_msrMeasure          fSegmentLastAppendedMeasure;
 
     // measures flat list
     // including those not in non-measure segment elements,
@@ -493,6 +503,10 @@ class EXP msrSegment : public msrVoiceElement
 
     // counter
     static int            gSegmentsCounter;
+
+    // measures
+    S_msrMeasure          fSegmentFirstMeasure;
+    S_msrMeasure          fSegmentLastMeasure;
 };
 typedef SMARTP<msrSegment> S_msrSegment;
 EXP ostream& operator<< (ostream& os, const S_msrSegment& elt);

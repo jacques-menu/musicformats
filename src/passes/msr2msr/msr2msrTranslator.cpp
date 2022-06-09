@@ -1588,7 +1588,8 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
         fCurrentSegmentClone);
 
   if (fOnGoingMultipleFullBarRests) {
-    fCurrentMultipleFullBarRests->
+    // append current measure clone to the current multiple full-bar rests clone
+    fCurrentMultipleFullBarRestsClone->
       appendMeasureToMultipleFullBarRests (
         fCurrentMeasureClone);
   }
@@ -1600,12 +1601,12 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
         fCurrentMeasureClone);
   }
 
-  // is this a full measures rest?
+  // is this a full-bar rest? JMI KAKA
 //   if (elt->getMeasureIsAFullBarRest ()) {
 //     // yes
 //
-    // should we compress full measures rests?
-//     if (gGlobalMsr2msrOahGroup->getCompressEmptyMeasures ()) {//
+    // should we compress full-bar rests?
+//     if (gGlobalMsr2msrOahGroup->getCompressFullBarRests ()) {//
 //       // yes
 //
 //       if (! fCurrentRestMeasure) {
@@ -1781,7 +1782,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
       break;
   } // switch
 
-  // is this a full measures rest?
+  // is this a full-bar rest?
   if (elt->getMeasureIsAFullBarRest ()) {
     // yes JMI
   }
@@ -1789,8 +1790,8 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
   else {
     // no
 
-    // should we compress full measures rests?
-//    if (gGlobalMsr2msrOahGroup->getCompressEmptyMeasures ()) {//
+    // should we compress full-bar rests?
+//    if (gGlobalMsr2msrOahGroup->getTraceMultipleFullBarRests ()) {
 //       // yes
 //
 //       if (fCurrentMultipleFullBarRests) {
@@ -5429,12 +5430,18 @@ void msr2msrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
       endl;
   }
 #endif
-//     if (false) // KAKA
 
+  // create a multiple full-bar rests clone
+  fCurrentMultipleFullBarRestsClone =
+    elt->
+      createMultipleFullBarRestsNewbornClone (
+        fCurrentSegmentClone);
+
+  // append it to the current voice clone
   fCurrentVoiceClone->
-    handleMultipleFullBarRestsStartInVoiceClone (
+    appendMultipleFullBarRestsToVoice (
       inputLineNumber,
-      elt);
+      fCurrentMultipleFullBarRestsClone);
 
   fOnGoingMultipleFullBarRests = true;
 }
@@ -5465,76 +5472,11 @@ void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   }
 #endif
 
-    if (false) // KAKA
-  fCurrentVoiceClone->
-    handleMultipleFullBarRestsEndInVoiceClone (
-      inputLineNumber);
+  // forget about the current multiple full-bar rests
+  fCurrentMultipleFullBarRestsClone = nullptr;
 
   fOnGoingMultipleFullBarRests = false;
 }
-
-// //________________________________________________________________________
-// void msr2msrTranslator::visitStart (S_msrMultipleFullBarRestsContents& elt)
-// {
-//   int inputLineNumber =
-//     elt->getInputLineNumber ();
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-//     gLogStream <<
-//       "--> Start visiting msrMultipleFullBarRestsContents" <<
-//       ", line " << inputLineNumber <<
-//       endl;
-//   }
-// #endif
-//
-//   ++gIndenter;
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-//     fCurrentVoiceClone->
-//       displayVoice (
-//         inputLineNumber,
-//         "Upon visitStart (S_msrMultipleFullBarRestsContents&)");
-//   }
-// #endif
-//
-//     if (false) // KAKA
-//   fCurrentVoiceClone->
-//     handleMultipleFullBarRestsContentsStartInVoiceClone (
-//       inputLineNumber);
-// }
-//
-// void msr2msrTranslator::visitEnd (S_msrMultipleFullBarRestsContents& elt)
-// {
-//   int inputLineNumber =
-//     elt->getInputLineNumber ();
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-//     gLogStream <<
-//       "--> End visiting msrMultipleFullBarRestsContents" <<
-//       ", line " << inputLineNumber <<
-//       endl;
-//   }
-// #endif
-//
-//   --gIndenter;
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-//     fCurrentVoiceClone->
-//       displayVoice (
-//         inputLineNumber,
-//         "Upon visitEnd (S_msrMultipleFullBarRestsContents&) 1");
-//   }
-// #endif
-//
-//     if (false) // KAKA
-//   fCurrentVoiceClone->
-//     handleMultipleFullBarRestsContentsEndInVoiceClone (
-//       inputLineNumber);
-// }
 
 //________________________________________________________________________
 void msr2msrTranslator::visitStart (S_msrMeasureRepeat& elt)

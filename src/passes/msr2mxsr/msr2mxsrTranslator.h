@@ -250,7 +250,6 @@ class EXP msr2mxsrTranslator :
   public visitor<S_msrMeasureRepeatReplicas>,
 
   public visitor<S_msrMultipleFullBarRests>,
-//   public visitor<S_msrMultipleFullBarRestsContents>,
 
   // midi
 
@@ -520,8 +519,6 @@ class EXP msr2mxsrTranslator :
 
     virtual void          visitStart (S_msrMultipleFullBarRests& elt);
     virtual void          visitEnd   (S_msrMultipleFullBarRests& elt);
-//     virtual void          visitStart (S_msrMultipleFullBarRestsContents& elt);
-//     virtual void          visitEnd   (S_msrMultipleFullBarRestsContents& elt);
 */
 
 /*

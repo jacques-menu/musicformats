@@ -83,7 +83,7 @@ class EXP msrNote : public msrTupletElement
       kNoteIsACueNoteYes, kNoteIsACueNoteNo
     };
 
-    static string noteIsACueNoteKindAsString (
+    static string noteIsACuemsrNoteKindAsString (
       msrNoteIsACueNoteKind noteIsACueNoteKind);
 
     // creation from MusicXML
@@ -1150,7 +1150,7 @@ class EXP msrNote : public msrTupletElement
     // dynamics
     // ------------------------------------------------------
 
-    list<S_msrDynamic>   fNoteDynamics;
+    list<S_msrDynamic>    fNoteDynamics;
     list<S_msrOtherDynamic>
                           fNoteOtherDynamics;
 

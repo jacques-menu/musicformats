@@ -157,8 +157,7 @@ lpsrScore::lpsrScore (
       stringstream s;
 
       s <<
-        "The conversion date was:" <<
-        gTab <<
+        "The conversion date was: " <<
         gGlobalServiceRunData->getRunDateFull ();
 
       fRunDateComment =
@@ -476,20 +475,97 @@ lpsrScore::~lpsrScore ()
 
 void lpsrScore::setJianpuFileIncludeIsNeeded ()
 {
-  if (! fScmAndAccregSchemeModulesAreNeeded) {
+  if (! fJianpuFileIncludeIsNeeded) {
     addJianpuFileIncludeToScore ();
 
     fJianpuFileIncludeIsNeeded = true;
   }
 }
 
+void lpsrScore::addJianpuFileIncludeToScore ()
+{
+  string
+    schemeModulesName =
+      "jianpu include file",
+
+    schemeModulesDescription =
+R"(
+% The definitions needed to produce jianpu scores.
+)",
+
+    schemeModulesCode =
+R"(
+% From https://github.com/nybbs2003/lilypond-Jianpu
+\include "jianpu10a.ly"
+)";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Including Jianpu definition file '" << schemeModulesName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeModulesName,
+        schemeModulesDescription,
+        schemeModulesCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeModulesName] =
+    schemeFunction;
+}
+
 void lpsrScore::setScmAndAccregSchemeModulesAreNeeded ()
 {
   if (! fScmAndAccregSchemeModulesAreNeeded) {
-    addAccordionRegistrationSchemeModulesToScore (); // JMI
+    // KAKA addAccordionRegistrationSchemeModulesToScore (); // JMI
 
     fScmAndAccregSchemeModulesAreNeeded = true;
   }
+}
+
+void lpsrScore::addAccordionRegistrationSchemeModulesToScore ()
+{
+  string
+    schemeModulesName =
+      "scm & accreg",
+
+    schemeModulesDescription =
+R"(
+% Two modules are to be used in the right order to use accordion registration.
+)",
+
+    schemeModulesCode =
+R"(
+#(use-modules (scm accreg))
+)";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Using Scheme modules '" << schemeModulesName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeModulesName,
+        schemeModulesDescription,
+        schemeModulesCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeModulesName] =
+    schemeFunction;
 }
 
 void lpsrScore::setCustomShortBarLineSchemeFunctionIsNeeded ()
@@ -501,6 +577,59 @@ void lpsrScore::setCustomShortBarLineSchemeFunctionIsNeeded ()
   }
 }
 
+void lpsrScore::addCustomShortBarLineSchemeFunctionToScore ()
+{
+  string
+    schemeModulesName =
+      "curstom short barLine Scheme function",
+
+    schemeModulesDescription =
+R"(
+% The function needed to produce curstom short barLines.
+)",
+
+    schemeModulesCode =
+R"(
+#(define ((make-custom-short-bar-line x y) grob extent)
+   "Draw a short bar line."
+   (let* ((short-staff (* 1/2 (ly:staff-symbol-staff-space grob)))
+          (staff-line-thickness (ly:staff-symbol-line-thickness grob))
+          (height (interval-end extent)))
+     (bar-line::draw-filled-box
+      (cons 0 (+ x staff-line-thickness))
+      (cons (- height (* 7 short-staff) x) (- height short-staff x))
+      staff-line-thickness
+      extent
+      grob)))
+
+#(add-bar-glyph-print-procedure "/" (make-custom-short-bar-line 0.1 0.1))
+
+#(define-bar-line "/" "/" #f #f)
+)";
+
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Including Jianpu definition file '" << schemeModulesName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeModulesName,
+        schemeModulesDescription,
+        schemeModulesCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeModulesName] =
+    schemeFunction;
+}
+
 void lpsrScore::setTongueSchemeFunctionIsNeeded ()
 {
   if (! fTongueSchemeFunctionIsNeeded) {
@@ -508,6 +637,59 @@ void lpsrScore::setTongueSchemeFunctionIsNeeded ()
 
     fTongueSchemeFunctionIsNeeded = true;
   }
+}
+
+void lpsrScore::addTongueSchemeFunctionToScore ()
+{
+  string
+    schemeFunctionName =
+      "tongue",
+
+    schemeFunctionDescription =
+R"(
+% Creates multiple tongue technicals, argument is a number.
+% Example: 'c4 -\tongue #3' creates a triple tongue.
+)",
+
+    schemeFunctionCode =
+R"(
+tongue =
+#(define-music-function (parser location dots) (integer?)
+   (let ((script (make-music 'ArticulationEvent
+                   'articulation-type "staccato")))
+     (set! (ly:music-property script 'tweaks)
+           (acons 'stencil
+             (lambda (grob)
+               (let ((stil (ly:script-interface::print grob)))
+                 (let loop ((count (1- dots)) (new-stil stil))
+                   (if (> count 0)
+                       (loop (1- count)
+                         (ly:stencil-combine-at-edge new-stil X RIGHT stil 0.2))
+                       (ly:stencil-aligned-to new-stil X CENTER)))))
+             (ly:music-property script 'tweaks)))
+     script))
+)";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme function '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
 }
 
 void lpsrScore::setEditorialAccidentalSchemeFunctionIsNeeded ()
@@ -519,6 +701,53 @@ void lpsrScore::setEditorialAccidentalSchemeFunctionIsNeeded ()
   }
 }
 
+void lpsrScore::addEditorialAccidentalSchemeFunctionToScore ()
+{
+  string
+    schemeFunctionName =
+      "editorialAccidental",
+
+    schemeFunctionDescription =
+R"(
+% Craetes editorial accidentals as LilyPond musica ficta.
+% Example: '\editorialAccidental cis4'.
+)",
+
+    schemeFunctionCode =
+R"(
+editorialAccidental =
+#(define-music-function
+  (note)
+  (ly:music?)
+  #{
+    \once\accidentalStyle forget
+    \once\set suggestAccidentals = ##t
+    #note
+  #})
+)";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme function '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
+}
+
 void lpsrScore::setDynamicsSchemeFunctionIsNeeded ()
 {
   if (! fDynamicsSchemeFunctionIsNeeded) {
@@ -526,6 +755,50 @@ void lpsrScore::setDynamicsSchemeFunctionIsNeeded ()
 
     fDynamicsSchemeFunctionIsNeeded = true;
   }
+}
+
+void lpsrScore::addDynamicsSchemeFunctionToScore ()
+{
+  string
+    schemeFunctionName =
+      "dynamics",
+
+    schemeFunctionDescription =
+R"(
+% Creates variables define dynamics not native to LilyPond.
+)",
+
+    schemeFunctionCode =
+R"(
+rf = #(make-dynamic-script "rf")
+sfpp = #(make-dynamic-script "sfpp")
+sffz = #(make-dynamic-script "sffz")
+ppppp = #(make-dynamic-script "ppppp")
+pppppp = #(make-dynamic-script "pppppp")
+fffff = #(make-dynamic-script "fffff")
+ffffff = #(make-dynamic-script "ffffff")
+)";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme function '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
 }
 
 void lpsrScore::setTupletsCurvedBracketsSchemeFunctionIsNeeded ()
@@ -537,6 +810,98 @@ void lpsrScore::setTupletsCurvedBracketsSchemeFunctionIsNeeded ()
   }
 }
 
+void lpsrScore::addTupletsCurvedBracketsSchemeFunctionToScore ()
+{
+  string
+    schemeFunctionName =
+      "tupletsCurvedBrackets",
+
+    schemeFunctionDescription =
+R"(
+% A function to draw curved tuplets brackets, not native to LilyPond.
+% Thanks to Ben, mailto:soundsfromsound@gmail.com
+)",
+
+    schemeFunctionCode =
+R"(
+tupletsCurvedBrackets = {
+  % Use slur-stencil
+  \override TupletBracket.stencil = #ly:slur::print
+  %% Use 'thickness from Slur
+  \override TupletBracket.thickness = #1.2
+  %% 'control-points need to be set
+  \override TupletBracket.control-points =
+  #(lambda (grob)
+     (let* ((x-pos (ly:grob-property grob 'X-positions))
+            (pos (ly:grob-property grob 'positions))
+            (x-ln (interval-length x-pos))
+            (dir (ly:grob-property grob 'direction))
+            ; read out the height of the TupletBracket, may be
+            ; negative!
+            (height (- (cdr pos) (car pos)))
+            ; height-corr is introduced because sometimes the shape
+            ; of the slur needs to be adjusted.
+            ; It is used in the 2nd/3rd control-point.
+            ; The value of 0.3 is found by trial and error
+            (height-corr (* 0.3 dir height))
+            (edge-height (ly:grob-property grob 'edge-height
+                           '(0.7 . 0.7)))
+            (pad 1.0))
+       (list
+        ; first cp
+        (cons
+         (+ (car x-pos) 0.5)
+         (- (+ (* dir pad) (+ (car pos) (* -1 dir
+                                          (car edge-height))))
+           (if (= dir -1)
+               (if (> height 3)
+                   (/ dir 2.0)
+                   0.0)
+               (if (< height -3)
+                   (/ dir 2.0)
+                   0.0))))
+        ; second cp
+        (cons
+         (+ (car x-pos) (* x-ln 1/4))
+         (+ (* dir pad) (+ (car pos) (* dir (+ 0.5 height-corr)))))
+        ; third cp
+        (cons
+         (+ (car x-pos) (* x-ln 3/4))
+         (+ (* dir pad) (+ (cdr pos) (* dir (- 0.5 height-corr)))))
+        ; fourth cp
+        (cons
+         (- (cdr x-pos) 0.5)
+         (+ (* dir pad) (+ (cdr pos) (* -1 dir (cdr edge-height)))))
+        )))
+  \override TupletBracket.staff-padding = #' ()
+  #(define (invert-direction x) (if (eq? UP
+                                         (ly:tuplet-bracket::calc-direction x)) DOWN UP))
+  % \override TupletBracket.direction = #invert-direction
+}
+)";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme function '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
+}
+
 void lpsrScore::setAfterSchemeFunctionIsNeeded ()
 {
   if (! fAfterSchemeFunctionIsNeeded) {
@@ -544,6 +909,52 @@ void lpsrScore::setAfterSchemeFunctionIsNeeded ()
 
     fAfterSchemeFunctionIsNeeded = true;
   }
+}
+
+void lpsrScore::addAfterSchemeFunctionToScore ()
+{
+  string
+    schemeFunctionName =
+      "after",
+
+    schemeFunctionDescription =
+R"(
+% A function to create events after given music.
+% Thanks to David Kastrup for the inspiration!
+)",
+
+    schemeFunctionCode =
+R"(
+after =
+#(define-music-function (t e m) (ly:duration? ly:music? ly:music?)
+   #{
+     \context Bottom <<
+       #m
+       { \skip $t <> -\tweak extra-spacing-width #empty-interval $e }
+     >>
+   #})
+)";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme function '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
 }
 
 void lpsrScore::setTempoNotesRelationshipshipSchemeFunctionIsNeeded ()
@@ -555,6 +966,110 @@ void lpsrScore::setTempoNotesRelationshipshipSchemeFunctionIsNeeded ()
   }
 }
 
+void lpsrScore::addTempoNotesRelationshipshipSchemeFunctionToScore ()
+{
+  string
+    schemeFunctionName =
+      "tempoNotesRelationshipship",
+
+    schemeFunctionDescription =
+R"(
+% A function to create tempo relationships,
+% such as 'b8 [ b8 ]' = '\tuplet 3/2 { b4 b8 }' for swing.
+% See http://lsr.di.unimi.it/LSR/Item?id=204
+)",
+
+    schemeFunctionCode =
+      // add ! before ( and after ) since the code contains )"
+R"!(
+tempoNotesRelationshipshipStaffReduce = #-3
+
+tempoNotesRelationshipship =
+#(define-music-function (parser location label parenthesized musicI musicII)
+   (string? boolean? ly:music? ly:music?)
+   (let* (
+           (left-paren (if parenthesized "(" ""))
+           (right-paren (if parenthesized ")" ""))
+           )
+     #{
+       \tempo \markup {
+         \line \general-align #Y #DOWN {
+           % 1st column in line
+           $label
+
+           % 2nd column in line
+
+           $left-paren
+
+           \score {
+             \new Staff \with {
+               % reduce the font size a la cue
+               fontSize = #tempoNotesRelationshipshipStaffReduce
+               \override StaffSymbol.staff-space = #(magstep tempoNotesRelationshipshipStaffReduce)
+               % hide the staff lines
+               \override StaffSymbol.line-count = #0
+               % align horizontally
+               \override VerticalAxisGroup.Y-extent = #'(-0.85 . 0)
+             }
+
+             {
+               % \override Score.SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/2) % super-tight
+               % \override Score.SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/4) % tight
+               % \override Score.SpacingSpanner.common-shortest-duration = #(ly:make-moment 3/16) % even
+               \override Score.SpacingSpanner.common-shortest-duration = #(ly:make-moment 5/32) % even
+
+               % the left music
+               \relative c' { \stemUp $musicI }
+
+               % the equivalence sign
+               \once \override Score.TextScript.Y-offset = #-0.4
+               s4.^\markup{
+                 \halign #-1 "="
+               }
+
+               % the right music
+               \relative c' { \stemUp $musicII }
+             }
+
+             \layout {
+               indent = 0
+               \context {
+                 \Staff
+                 \remove "Clef_engraver"
+                 \remove "Time_signature_engraver"
+               }
+             } % layout end
+           } % score end
+
+           $right-paren
+
+         } % line end
+       } % markup end
+     #}))
+)!";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme function '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
+}
+
 void lpsrScore::setGlissandoWithTextSchemeFunctionsIsNeeded ()
 {
   if (! fGlissandoWithTextSchemeFunctionsIsNeeded) {
@@ -562,208 +1077,6 @@ void lpsrScore::setGlissandoWithTextSchemeFunctionsIsNeeded ()
 
     fGlissandoWithTextSchemeFunctionsIsNeeded = true;
   }
-}
-
-void lpsrScore::setOtherDynamicSchemeFunctionIsNeeded ()
-{
-  if (! fOtherDynamicSchemeFunctionIsNeeded) {
-    addOtherDynamicSchemeFunctionToScore ();
-
-    fOtherDynamicSchemeFunctionIsNeeded = true;
-  }
-}
-
-void lpsrScore::setAutoVoicesSchemeFunctionIsNeeded ()
-{
-  if (! fAutoVoicesSchemeFunctionIsNeeded) {
-    addAutoVoicesSchemeFunctionToScore ();
-
-    fAutoVoicesSchemeFunctionIsNeeded = true;
-  }
-}
-
-void lpsrScore::setSchleiferSchemeFunctionIsNeeded ()
-{
-  if (! fSchleiferSchemeFunctionIsNeeded) {
-    addSchleiferSchemeFunctionToScore ();
-
-    fSchleiferSchemeFunctionIsNeeded = true;
-  }
-}
-
-void lpsrScore::setDampMarkupIsNeeded ()
-{
-  if (! fDampMarkupIsNeeded) {
-    addDampMarkupToScore ();
-
-    fDampMarkupIsNeeded = true;
-  }
-}
-
-void lpsrScore::setDampAllMarkupIsNeeded ()
-{
-  if (! fDampAllMarkupIsNeeded) {
-    addDampAllMarkupToScore ();
-
-    fDampAllMarkupIsNeeded = true;
-  }
-}
-
-void lpsrScore::setWhiteNoteHeadsIsNeeded ()
-{
-  if (! fWhiteNoteHeadsIsNeeded) {
-    addWhiteNoteHeadsToScore ();
-
-    fWhiteNoteHeadsIsNeeded = true;
-  }
-}
-
-void lpsrScore::setBoxAroundNextBarNumberIsNeeded ()
-{
-  if (! fBoxAroundNextBarNumberIsNeeded) {
-    addBoxAroundNextBarNumberToScore ();
-
-    fBoxAroundNextBarNumberIsNeeded = true;
-  }
-}
-
-void lpsrScore::setJazzChordsDisplayIsNeeded ()
-{
-  if (! fJazzChordsDisplayIsNeeded) {
-    addJazzChordsDisplayToScore ();
-
-    fJazzChordsDisplayIsNeeded = true;
-  }
-}
-
-void lpsrScore::setColoredLedgerLinesIsNeeded ()
-{
-  if (! fColoredLedgerLinesIsNeeded) {
-    addColoredLedgerLinesToScore ();
-
-    fColoredLedgerLinesIsNeeded = true;
-  }
-}
-
-void lpsrScore::setHiddenMeasureAndBarLineIsNeeded ()
-{
-  if (! fHiddenMeasureAndBarLineIsNeeded) {
-    addHiddenMeasureAndBarLineToScore ();
-
-    fHiddenMeasureAndBarLineIsNeeded = true;
-  }
-}
-
-void lpsrScore::setMergeStaffCommonRestsIsNeeded ()
-{
-  if (! fMergeStaffCommonRestsIsNeeded) {
-    addMergeStaffCommonRestsToScore ();
-
-    fMergeStaffCommonRestsIsNeeded = true;
-  }
-}
-
-void lpsrScore::setTextSpannerWithCenteredTextIsNeeded ()
-{
-  if (! fTextSpannerWithCenteredTextIsNeeded) {
-    addTextSpannerWithCenteredTextToScore ();
-
-    fTextSpannerWithCenteredTextIsNeeded = true;
-  }
-}
-
-void lpsrScore::addDateAndTimeSchemeFunctionsToScore ()
-{
-  string
-    schemeFunctionName =
-      "date & time",
-
-    schemeFunctionDescription =
-R"(
-% A set of functions to obtain a source file's modification time.
-)",
-
-    schemeFunctionCode =
-R"(
-#(define comml           (object->string (command-line)))
-#(define loc             (+ (string-rindex comml #\space ) 2))
-#(define commllen        (- (string-length comml) 2))
-#(define filen           (substring comml loc commllen))
-#(define siz             (object->string (stat:size (stat filen))))
-#(define ver             (object->string (lilypond-version)))
-#(define dat             (strftime "%d/%m/%Y" (localtime (current-time))))
-#(define tim             (strftime "%H:%M:%S" (localtime (current-time))))
-#(define modTime         (stat:mtime (stat filen)))
-#(define modTimeAsString (strftime "%d/%m/%Y - %H:%M:%S" (localtime modTimeSignature)))
-)";
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
-      endl;
-  }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeFunctionName,
-        schemeFunctionDescription,
-        schemeFunctionCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeFunctionName] =
-    schemeFunction;
-}
-
-void lpsrScore::setMergeMultipleFullBarRestsIsNeeded ()
-{
-  if (! fMergeMultipleFullBarRestsIsNeeded) {
-    addMergeMultipleFullBarRestsToScore ();
-
-    fMergeMultipleFullBarRestsIsNeeded = true;
-  }
-}
-
-void lpsrScore::addPointAndClickOffSchemeFunctionsToScore ()
-{
-  string
-    schemeFunctionName =
-      "pointAndClickOff",
-
-    schemeFunctionDescription =
-R"(
-% \pointAndClickOff to reduce the size of the produced PDF file.
-)",
-
-    schemeFunctionCode =
-R"(
-\pointAndClickOff
-)";
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
-      endl;
-  }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeFunctionName,
-        schemeFunctionDescription,
-        schemeFunctionCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeFunctionName] =
-    schemeFunction;
 }
 
 void lpsrScore::addGlissandoWithTextSchemeFunctionsToScore ()
@@ -950,6 +1263,15 @@ glissandoTextOff = \revert Glissando.stencil
     schemeFunction;
 }
 
+void lpsrScore::setOtherDynamicSchemeFunctionIsNeeded ()
+{
+  if (! fOtherDynamicSchemeFunctionIsNeeded) {
+    addOtherDynamicSchemeFunctionToScore ();
+
+    fOtherDynamicSchemeFunctionIsNeeded = true;
+  }
+}
+
 void lpsrScore::addOtherDynamicSchemeFunctionToScore ()
 {
   string
@@ -1008,6 +1330,15 @@ otherDynamic =
   // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
+}
+
+void lpsrScore::setAutoVoicesSchemeFunctionIsNeeded ()
+{
+  if (! fAutoVoicesSchemeFunctionIsNeeded) {
+    addAutoVoicesSchemeFunctionToScore ();
+
+    fAutoVoicesSchemeFunctionIsNeeded = true;
+  }
 }
 
 void lpsrScore::addAutoVoicesSchemeFunctionToScore ()
@@ -1233,6 +1564,15 @@ voiceFour = #(make-self-telling-voice-props-set 3)
 )";
 }
 
+void lpsrScore::setSchleiferSchemeFunctionIsNeeded ()
+{
+  if (! fSchleiferSchemeFunctionIsNeeded) {
+    addSchleiferSchemeFunctionToScore ();
+
+    fSchleiferSchemeFunctionIsNeeded = true;
+  }
+}
+
 void lpsrScore::addSchleiferSchemeFunctionToScore ()
 {
   string
@@ -1313,171 +1653,60 @@ schleifer =
     schemeFunction;
 }
 
-void lpsrScore::addCustomShortBarLineSchemeFunctionToScore ()
+void lpsrScore::setScoopSchemeFunctionIsNeeded ()
 {
-  string
-    schemeModulesName =
-      "curstom short barLine Scheme function",
+  if (! fScoopSchemeFunctionIsNeeded) {
+    addScoopSchemeFunctionToScore ();
 
-    schemeModulesDescription =
-R"(
-% The function needed to produce curstom short barLines.
-)",
-
-    schemeModulesCode =
-R"(
-#(define ((make-custom-short-bar-line x y) grob extent)
-   "Draw a short bar line."
-   (let* ((short-staff (* 1/2 (ly:staff-symbol-staff-space grob)))
-          (staff-line-thickness (ly:staff-symbol-line-thickness grob))
-          (height (interval-end extent)))
-     (bar-line::draw-filled-box
-      (cons 0 (+ x staff-line-thickness))
-      (cons (- height (* 7 short-staff) x) (- height short-staff x))
-      staff-line-thickness
-      extent
-      grob)))
-
-#(add-bar-glyph-print-procedure "/" (make-custom-short-bar-line 0.1 0.1))
-
-#(define-bar-line "/" "/" #f #f)
-)";
-
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Including Jianpu definition file '" << schemeModulesName << "'" <<
-      endl;
+    fScoopSchemeFunctionIsNeeded = true;
   }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeModulesName,
-        schemeModulesDescription,
-        schemeModulesCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeModulesName] =
-    schemeFunction;
 }
 
-void lpsrScore::addJianpuFileIncludeToScore ()
+void lpsrScore::addScoopSchemeFunctionToScore ()
 {
-  string
-    schemeModulesName =
-      "jianpu include file",
-
-    schemeModulesDescription =
-R"(
-% The definitions needed to produce jianpu scores.
-)",
-
-    schemeModulesCode =
-R"(
-% From https://github.com/nybbs2003/lilypond-Jianpu
-\include "jianpu10a.ly"
-)";
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Including Jianpu definition file '" << schemeModulesName << "'" <<
-      endl;
-  }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeModulesName,
-        schemeModulesDescription,
-        schemeModulesCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeModulesName] =
-    schemeFunction;
-}
-
-void lpsrScore::addAccordionRegistrationSchemeModulesToScore ()
-{
-  string
-    schemeModulesName =
-      "scm & accreg",
-
-    schemeModulesDescription =
-R"(
-% Two modules are to be used in the right order to use accordion registration.
-)",
-
-    schemeModulesCode =
-R"(
-#(use-modules (scm accreg))
-)";
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Using Scheme modules '" << schemeModulesName << "'" <<
-      endl;
-  }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeModulesName,
-        schemeModulesDescription,
-        schemeModulesCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeModulesName] =
-    schemeFunction;
-}
-
-void lpsrScore::addTongueSchemeFunctionToScore ()
-{
+  // JMI KAKA, check that scoops are up or down?
   string
     schemeFunctionName =
-      "tongue",
+      "scoop_stencils",
 
     schemeFunctionDescription =
 R"(
-% Creates multiple tongue technicals, argument is a number.
-% Example: 'c4 -\tongue #3' creates a triple tongue.
+% \\scoopAbove, \\scoopBelow.
 )",
 
     schemeFunctionCode =
 R"(
-tongue =
-#(define-music-function (parser location dots) (integer?)
-   (let ((script (make-music 'ArticulationEvent
-                   'articulation-type "staccato")))
-     (set! (ly:music-property script 'tweaks)
-           (acons 'stencil
-             (lambda (grob)
-               (let ((stil (ly:script-interface::print grob)))
-                 (let loop ((count (1- dots)) (new-stil stil))
-                   (if (> count 0)
-                       (loop (1- count)
-                         (ly:stencil-combine-at-edge new-stil X RIGHT stil 0.2))
-                       (ly:stencil-aligned-to new-stil X CENTER)))))
-             (ly:music-property script 'tweaks)))
-     script))
+% scoop stencils, thanks to vgay@vintherine.org
+
+#(define (scoop-above-stencil grob)
+   (ly:stencil-add
+    (ly:note-head::print grob)
+    (grob-interpret-markup grob
+                           (markup #:with-dimensions '(0 . 0) '(0 . 0)
+                                   #:translate '(-0.2 . -0.5)
+                                   #:path 0.25 '((moveto -0.2 0.5)
+                                                 (curveto 0.2 2 -1.2 2.5 -1.7 2.5))))))
+scoopAbove = \once \override NoteHead #'stencil = #scoop-above-stencil
+
+#(define (scoop-below-stencil grob)
+   (ly:stencil-add
+    (ly:note-head::print grob)
+    (grob-interpret-markup grob
+                           (markup #:with-dimensions '(0 . 0) '(0 . 0)
+                                   #:translate '(-0.2 . -0.5)
+                                   #:path 0.25 '((moveto 0 0)
+                                                 (curveto 0.2 -1 -1.2 -1.5 -1.7 -1.5))))))
+scoopBelow = \once \override NoteHead #'stencil = #scoop-below-stencil
+
+%\relative c'' {
+%  \scoopAbove c2 \scoopBelow c2
+%}
 )";
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
+      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
       endl;
   }
 #endif
@@ -1496,337 +1725,13 @@ tongue =
     schemeFunction;
 }
 
-void lpsrScore::addEditorialAccidentalSchemeFunctionToScore ()
+void lpsrScore::setDampMarkupIsNeeded ()
 {
-  string
-    schemeFunctionName =
-      "editorialAccidental",
+  if (! fDampMarkupIsNeeded) {
+    addDampMarkupToScore ();
 
-    schemeFunctionDescription =
-R"(
-% Craetes editorial accidentals as LilyPond musica ficta.
-% Example: '\editorialAccidental cis4'.
-)",
-
-    schemeFunctionCode =
-R"(
-editorialAccidental =
-#(define-music-function
-  (note)
-  (ly:music?)
-  #{
-    \once\accidentalStyle forget
-    \once\set suggestAccidentals = ##t
-    #note
-  #})
-)";
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      endl;
+    fDampMarkupIsNeeded = true;
   }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeFunctionName,
-        schemeFunctionDescription,
-        schemeFunctionCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeFunctionName] =
-    schemeFunction;
-}
-
-void lpsrScore::addDynamicsSchemeFunctionToScore ()
-{
-  string
-    schemeFunctionName =
-      "dynamics",
-
-    schemeFunctionDescription =
-R"(
-% Creates variables define dynamics not native to LilyPond.
-)",
-
-    schemeFunctionCode =
-R"(
-rf = #(make-dynamic-script "rf")
-sfpp = #(make-dynamic-script "sfpp")
-sffz = #(make-dynamic-script "sffz")
-ppppp = #(make-dynamic-script "ppppp")
-pppppp = #(make-dynamic-script "pppppp")
-fffff = #(make-dynamic-script "fffff")
-ffffff = #(make-dynamic-script "ffffff")
-)";
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      endl;
-  }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeFunctionName,
-        schemeFunctionDescription,
-        schemeFunctionCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeFunctionName] =
-    schemeFunction;
-}
-
-void lpsrScore::addTupletsCurvedBracketsSchemeFunctionToScore ()
-{
-  string
-    schemeFunctionName =
-      "tupletsCurvedBrackets",
-
-    schemeFunctionDescription =
-R"(
-% A function to draw curved tuplets brackets, not native to LilyPond.
-% Thanks to Ben, mailto:soundsfromsound@gmail.com
-)",
-
-    schemeFunctionCode =
-R"(
-tupletsCurvedBrackets = {
-  % Use slur-stencil
-  \override TupletBracket.stencil = #ly:slur::print
-  %% Use 'thickness from Slur
-  \override TupletBracket.thickness = #1.2
-  %% 'control-points need to be set
-  \override TupletBracket.control-points =
-  #(lambda (grob)
-     (let* ((x-pos (ly:grob-property grob 'X-positions))
-            (pos (ly:grob-property grob 'positions))
-            (x-ln (interval-length x-pos))
-            (dir (ly:grob-property grob 'direction))
-            ; read out the height of the TupletBracket, may be
-            ; negative!
-            (height (- (cdr pos) (car pos)))
-            ; height-corr is introduced because sometimes the shape
-            ; of the slur needs to be adjusted.
-            ; It is used in the 2nd/3rd control-point.
-            ; The value of 0.3 is found by trial and error
-            (height-corr (* 0.3 dir height))
-            (edge-height (ly:grob-property grob 'edge-height
-                           '(0.7 . 0.7)))
-            (pad 1.0))
-       (list
-        ; first cp
-        (cons
-         (+ (car x-pos) 0.5)
-         (- (+ (* dir pad) (+ (car pos) (* -1 dir
-                                          (car edge-height))))
-           (if (= dir -1)
-               (if (> height 3)
-                   (/ dir 2.0)
-                   0.0)
-               (if (< height -3)
-                   (/ dir 2.0)
-                   0.0))))
-        ; second cp
-        (cons
-         (+ (car x-pos) (* x-ln 1/4))
-         (+ (* dir pad) (+ (car pos) (* dir (+ 0.5 height-corr)))))
-        ; third cp
-        (cons
-         (+ (car x-pos) (* x-ln 3/4))
-         (+ (* dir pad) (+ (cdr pos) (* dir (- 0.5 height-corr)))))
-        ; fourth cp
-        (cons
-         (- (cdr x-pos) 0.5)
-         (+ (* dir pad) (+ (cdr pos) (* -1 dir (cdr edge-height)))))
-        )))
-  \override TupletBracket.staff-padding = #' ()
-  #(define (invert-direction x) (if (eq? UP
-                                         (ly:tuplet-bracket::calc-direction x)) DOWN UP))
-  % \override TupletBracket.direction = #invert-direction
-}
-)";
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      endl;
-  }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeFunctionName,
-        schemeFunctionDescription,
-        schemeFunctionCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeFunctionName] =
-    schemeFunction;
-}
-
-void lpsrScore::addAfterSchemeFunctionToScore ()
-{
-  string
-    schemeFunctionName =
-      "after",
-
-    schemeFunctionDescription =
-R"(
-% A function to create events after given music.
-% Thanks to David Kastrup for the inspiration!
-)",
-
-    schemeFunctionCode =
-R"(
-after =
-#(define-music-function (t e m) (ly:duration? ly:music? ly:music?)
-   #{
-     \context Bottom <<
-       #m
-       { \skip $t <> -\tweak extra-spacing-width #empty-interval $e }
-     >>
-   #})
-)";
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      endl;
-  }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeFunctionName,
-        schemeFunctionDescription,
-        schemeFunctionCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeFunctionName] =
-    schemeFunction;
-}
-
-void lpsrScore::addTempoNotesRelationshipshipSchemeFunctionToScore ()
-{
-  string
-    schemeFunctionName =
-      "tempoNotesRelationshipship",
-
-    schemeFunctionDescription =
-R"(
-% A function to create tempo relationships,
-% such as 'b8 [ b8 ]' = '\tuplet 3/2 { b4 b8 }' for swing.
-% See http://lsr.di.unimi.it/LSR/Item?id=204
-)",
-
-    schemeFunctionCode =
-      // add ! before ( and after ) since the code contains )"
-R"!(
-tempoNotesRelationshipshipStaffReduce = #-3
-
-tempoNotesRelationshipship =
-#(define-music-function (parser location label parenthesized musicI musicII)
-   (string? boolean? ly:music? ly:music?)
-   (let* (
-           (left-paren (if parenthesized "(" ""))
-           (right-paren (if parenthesized ")" ""))
-           )
-     #{
-       \tempo \markup {
-         \line \general-align #Y #DOWN {
-           % 1st column in line
-           $label
-
-           % 2nd column in line
-
-           $left-paren
-
-           \score {
-             \new Staff \with {
-               % reduce the font size a la cue
-               fontSize = #tempoNotesRelationshipshipStaffReduce
-               \override StaffSymbol.staff-space = #(magstep tempoNotesRelationshipshipStaffReduce)
-               % hide the staff lines
-               \override StaffSymbol.line-count = #0
-               % align horizontally
-               \override VerticalAxisGroup.Y-extent = #'(-0.85 . 0)
-             }
-
-             {
-               % \override Score.SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/2) % super-tight
-               % \override Score.SpacingSpanner.common-shortest-duration = #(ly:make-moment 1/4) % tight
-               % \override Score.SpacingSpanner.common-shortest-duration = #(ly:make-moment 3/16) % even
-               \override Score.SpacingSpanner.common-shortest-duration = #(ly:make-moment 5/32) % even
-
-               % the left music
-               \relative c' { \stemUp $musicI }
-
-               % the equivalence sign
-               \once \override Score.TextScript.Y-offset = #-0.4
-               s4.^\markup{
-                 \halign #-1 "="
-               }
-
-               % the right music
-               \relative c' { \stemUp $musicII }
-             }
-
-             \layout {
-               indent = 0
-               \context {
-                 \Staff
-                 \remove "Clef_engraver"
-                 \remove "Time_signature_engraver"
-               }
-             } % layout end
-           } % score end
-
-           $right-paren
-
-         } % line end
-       } % markup end
-     #}))
-)!";
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
-    gLogStream <<
-      "Creating Scheme function '" << schemeFunctionName << "'" <<
-      endl;
-  }
-#endif
-
-  // create the Scheme function
-  S_lpsrSchemeFunction
-    schemeFunction =
-      lpsrSchemeFunction::create (
-        1, // inputLineNumber, JMI ???
-        schemeFunctionName,
-        schemeFunctionDescription,
-        schemeFunctionCode);
-
-  // register it in the Scheme functions map
-  fScoreSchemeFunctionsMap [schemeFunctionName] =
-    schemeFunction;
 }
 
 void lpsrScore::addDampMarkupToScore ()
@@ -1883,6 +1788,15 @@ damp = \markup {
     schemeFunction;
 }
 
+void lpsrScore::setDampAllMarkupIsNeeded ()
+{
+  if (! fDampAllMarkupIsNeeded) {
+    addDampAllMarkupToScore ();
+
+    fDampAllMarkupIsNeeded = true;
+  }
+}
+
 void lpsrScore::addDampAllMarkupToScore ()
 {
   string
@@ -1929,6 +1843,15 @@ dampAll = \markup
   // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
+}
+
+void lpsrScore::setWhiteNoteHeadsIsNeeded ()
+{
+  if (! fWhiteNoteHeadsIsNeeded) {
+    addWhiteNoteHeadsToScore ();
+
+    fWhiteNoteHeadsIsNeeded = true;
+  }
 }
 
 void lpsrScore::addWhiteNoteHeadsToScore ()
@@ -1984,6 +1907,15 @@ whiteNoteHeads =
     schemeFunction;
 }
 
+void lpsrScore::setBoxAroundNextBarNumberIsNeeded ()
+{
+  if (! fBoxAroundNextBarNumberIsNeeded) {
+    addBoxAroundNextBarNumberToScore ();
+
+    fBoxAroundNextBarNumberIsNeeded = true;
+  }
+}
+
 void lpsrScore::addBoxAroundNextBarNumberToScore ()
 {
   string
@@ -2028,6 +1960,15 @@ boxAroundNextBarNumber = {
   // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
+}
+
+void lpsrScore::setJazzChordsDisplayIsNeeded ()
+{
+  if (! fJazzChordsDisplayIsNeeded) {
+    addJazzChordsDisplayToScore ();
+
+    fJazzChordsDisplayIsNeeded = true;
+  }
 }
 
 void lpsrScore::addJazzChordsDisplayToScore ()
@@ -2116,6 +2057,15 @@ R"(
     schemeFunction;
 }
 
+void lpsrScore::setColoredLedgerLinesIsNeeded ()
+{
+  if (! fColoredLedgerLinesIsNeeded) {
+    addColoredLedgerLinesToScore ();
+
+    fColoredLedgerLinesIsNeeded = true;
+  }
+}
+
 void lpsrScore::addColoredLedgerLinesToScore ()
 {
   stringstream s;
@@ -2184,6 +2134,15 @@ R"(
     schemeFunction;
 }
 
+void lpsrScore::setHiddenMeasureAndBarLineIsNeeded ()
+{
+  if (! fHiddenMeasureAndBarLineIsNeeded) {
+    addHiddenMeasureAndBarLineToScore ();
+
+    fHiddenMeasureAndBarLineIsNeeded = true;
+  }
+}
+
 void lpsrScore::addHiddenMeasureAndBarLineToScore ()
 {
   stringstream s;
@@ -2232,6 +2191,15 @@ R"(
   // register it in the Scheme functions map
   fScoreSchemeFunctionsMap [schemeFunctionName] =
     schemeFunction;
+}
+
+void lpsrScore::setMergeStaffCommonRestsIsNeeded ()
+{
+  if (! fMergeStaffCommonRestsIsNeeded) {
+    addMergeStaffCommonRestsToScore ();
+
+    fMergeStaffCommonRestsIsNeeded = true;
+  }
 }
 
 void lpsrScore::addMergeStaffCommonRestsToScore ()
@@ -2353,6 +2321,15 @@ R"(
     schemeFunction;
 }
 
+void lpsrScore::setTextSpannerWithCenteredTextIsNeeded ()
+{
+  if (! fTextSpannerWithCenteredTextIsNeeded) {
+    addTextSpannerWithCenteredTextToScore ();
+
+    fTextSpannerWithCenteredTextIsNeeded = true;
+  }
+}
+
 void lpsrScore::addTextSpannerWithCenteredTextToScore ()
 {
   stringstream s;
@@ -2460,6 +2437,15 @@ R"(
     schemeFunction;
 }
 
+void lpsrScore::setMergeMultipleFullBarRestsIsNeeded ()
+{
+  if (! fMergeMultipleFullBarRestsIsNeeded) {
+    addMergeMultipleFullBarRestsToScore ();
+
+    fMergeMultipleFullBarRestsIsNeeded = true;
+  }
+}
+
 void lpsrScore::addMergeMultipleFullBarRestsToScore ()
 {
   stringstream s;
@@ -2526,6 +2512,167 @@ R"(
   if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
     gLogStream <<
       "Creating Scheme function '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
+}
+
+void lpsrScore::setBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded ()
+{
+  if (! fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded) {
+    addBarNumberEveryNAndAtTheBeginningOfLinesToScore ();
+
+    fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded = true;
+  }
+}
+
+void lpsrScore::addBarNumberEveryNAndAtTheBeginningOfLinesToScore ()
+{
+  stringstream s;
+
+  s <<
+R"###(
+% thanks to jean@abou-samra.fr
+
+%{
+The idea is that the Bar_number_engraver gets duplicated,
+in Score and and in the top Staff.
+
+The Score prints a bar number at the beginning of every line, as usual.
+
+The Staff prints a bar number every 5th measure,
+but only in the middle of a line,
+so that it won't duplicate the number typeset by the Score
+if it happens to be at the beginning of the line.
+%}
+
+barNumberEveryNAndAtTheBeginningOfLines = \with {
+  \consists Bar_number_engraver
+  barNumberVisibility = #(every-nth-bar-number-visible 5)
+  \override BarNumber.break-visibility = #center-visible
+}
+
+%<<
+%  \new Staff
+%  \with \barNumberEveryNAndAtTheBeginningOfLines
+%  \repeat unfold 50 { c'1 }
+%  \repeat unfold 50 { c'1 }
+%>>
+)###";
+
+  string
+    schemeFunctionName =
+      "MergeMultipleFullBarRests",
+
+  schemeFunctionDescription =
+R"(
+% Function to create text spanners with text centered in it
+)",
+
+  schemeFunctionCode = s.str ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme function '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
+}
+
+void lpsrScore::addDateAndTimeSchemeFunctionsToScore ()
+{
+  string
+    schemeFunctionName =
+      "date & time",
+
+    schemeFunctionDescription =
+R"(
+% A set of functions to obtain a source file's modification time.
+)",
+
+    schemeFunctionCode =
+R"(
+#(define comml           (object->string (command-line)))
+#(define loc             (+ (string-rindex comml #\space ) 2))
+#(define commllen        (- (string-length comml) 2))
+#(define filen           (substring comml loc commllen))
+#(define siz             (object->string (stat:size (stat filen))))
+#(define ver             (object->string (lilypond-version)))
+#(define dat             (strftime "%d/%m/%Y" (localtime (current-time))))
+#(define tim             (strftime "%H:%M:%S" (localtime (current-time))))
+#(define modTime         (stat:mtime (stat filen)))
+#(define modTimeAsString (strftime "%d/%m/%Y - %H:%M:%S" (localtime modTimeSignature)))
+)";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
+      endl;
+  }
+#endif
+
+  // create the Scheme function
+  S_lpsrSchemeFunction
+    schemeFunction =
+      lpsrSchemeFunction::create (
+        1, // inputLineNumber, JMI ???
+        schemeFunctionName,
+        schemeFunctionDescription,
+        schemeFunctionCode);
+
+  // register it in the Scheme functions map
+  fScoreSchemeFunctionsMap [schemeFunctionName] =
+    schemeFunction;
+}
+
+void lpsrScore::addPointAndClickOffSchemeFunctionsToScore ()
+{
+  string
+    schemeFunctionName =
+      "pointAndClickOff",
+
+    schemeFunctionDescription =
+R"(
+% \pointAndClickOff to reduce the size of the produced PDF file.
+)",
+
+    schemeFunctionCode =
+R"(
+\pointAndClickOff
+)";
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalLpsrOahGroup->getTraceSchemeFunctions ()) {
+    gLogStream <<
+      "Creating Scheme functions for '" << schemeFunctionName << "'" <<
       endl;
   }
 #endif
@@ -2748,17 +2895,133 @@ void lpsrScore::print (ostream& os) const
   fMsrScore->
     printSummary (os);
 
-  // are some Scheme functions needed?
+  // are there needed things?
   const int fieldWidth = 42;
 
   os << left <<
     setw (fieldWidth) <<
+    "fJianpuFileIncludeIsNeeded" << " : " <<
+    fJianpuFileIncludeIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fScmAndAccregSchemeModulesAreNeeded" << " : " <<
+    fScmAndAccregSchemeModulesAreNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
     "fTongueSchemeFunctionIsNeeded" << " : " <<
     fTongueSchemeFunctionIsNeeded <<
     endl <<
+
+    setw (fieldWidth) <<
+    "fCustomShortBarLineSchemeFunctionIsNeeded" << " : " <<
+    fCustomShortBarLineSchemeFunctionIsNeeded <<
+    endl <<
+
     setw (fieldWidth) <<
     "fEditorialAccidentalSchemeFunctionIsNeeded" << " : " <<
     fEditorialAccidentalSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fDynamicsSchemeFunctionIsNeeded" << " : " <<
+    fDynamicsSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fTupletsCurvedBracketsSchemeFunctionIsNeeded" << " : " <<
+    fTupletsCurvedBracketsSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fAfterSchemeFunctionIsNeeded" << " : " <<
+    fAfterSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fTempoNotesRelationshipshipSchemeFunctionIsNeeded" << " : " <<
+    fTempoNotesRelationshipshipSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fGlissandoWithTextSchemeFunctionsIsNeeded" << " : " <<
+    fGlissandoWithTextSchemeFunctionsIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fOtherDynamicSchemeFunctionIsNeeded" << " : " <<
+    fOtherDynamicSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fAutoVoicesSchemeFunctionIsNeeded" << " : " <<
+    fAutoVoicesSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fSchleiferSchemeFunctionIsNeeded" << " : " <<
+    fSchleiferSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fScoopSchemeFunctionIsNeeded" << " : " <<
+    fScoopSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fDampMarkupIsNeeded" << " : " <<
+    fDampMarkupIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fDampAllMarkupIsNeeded" << " : " <<
+    fDampAllMarkupIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fWhiteNoteHeadsIsNeeded" << " : " <<
+    fWhiteNoteHeadsIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fBoxAroundNextBarNumberIsNeeded" << " : " <<
+    fBoxAroundNextBarNumberIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fJazzChordsDisplayIsNeeded" << " : " <<
+    fJazzChordsDisplayIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fColoredLedgerLinesIsNeeded" << " : " <<
+    fColoredLedgerLinesIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fHiddenMeasureAndBarLineIsNeeded" << " : " <<
+    fHiddenMeasureAndBarLineIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fMergeStaffCommonRestsIsNeeded" << " : " <<
+    fMergeStaffCommonRestsIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fTextSpannerWithCenteredTextIsNeeded" << " : " <<
+    fTextSpannerWithCenteredTextIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fMergeMultipleFullBarRestsIsNeeded" << " : " <<
+    fMergeMultipleFullBarRestsIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded" << " : " <<
+    fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded <<
     endl << endl;
 
   // print LPSR basic information
@@ -2836,21 +3099,6 @@ void lpsrScore::printShort (ostream& os) const
   fMsrScore->
     printShort (os);
   os << endl;
-
-/*
-  // are some Scheme functions needed?
-  const int fieldWidth = 42;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fTongueSchemeFunctionIsNeeded" << " : " <<
-    fTongueSchemeFunctionIsNeeded <<
-    endl <<
-    setw (fieldWidth) <<
-    "fEditorialAccidentalSchemeFunctionIsNeeded" << " : " <<
-    fEditorialAccidentalSchemeFunctionIsNeeded <<
-    endl << endl;
-*/
 
   os <<
     "LPSR basic information" <<
@@ -2937,20 +3185,134 @@ void lpsrScore::printFull (ostream& os) const
     print (os);
   os << endl;
 
-/*
-  // are some Scheme functions needed?
+  // are there needed things?
   const int fieldWidth = 42;
 
   os << left <<
     setw (fieldWidth) <<
+    "fJianpuFileIncludeIsNeeded" << " : " <<
+    fJianpuFileIncludeIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fScmAndAccregSchemeModulesAreNeeded" << " : " <<
+    fScmAndAccregSchemeModulesAreNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
     "fTongueSchemeFunctionIsNeeded" << " : " <<
     fTongueSchemeFunctionIsNeeded <<
     endl <<
+
+    setw (fieldWidth) <<
+    "fCustomShortBarLineSchemeFunctionIsNeeded" << " : " <<
+    fCustomShortBarLineSchemeFunctionIsNeeded <<
+    endl <<
+
     setw (fieldWidth) <<
     "fEditorialAccidentalSchemeFunctionIsNeeded" << " : " <<
     fEditorialAccidentalSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fDynamicsSchemeFunctionIsNeeded" << " : " <<
+    fDynamicsSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fTupletsCurvedBracketsSchemeFunctionIsNeeded" << " : " <<
+    fTupletsCurvedBracketsSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fAfterSchemeFunctionIsNeeded" << " : " <<
+    fAfterSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fTempoNotesRelationshipshipSchemeFunctionIsNeeded" << " : " <<
+    fTempoNotesRelationshipshipSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fGlissandoWithTextSchemeFunctionsIsNeeded" << " : " <<
+    fGlissandoWithTextSchemeFunctionsIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fOtherDynamicSchemeFunctionIsNeeded" << " : " <<
+    fOtherDynamicSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fAutoVoicesSchemeFunctionIsNeeded" << " : " <<
+    fAutoVoicesSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fSchleiferSchemeFunctionIsNeeded" << " : " <<
+    fSchleiferSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fScoopSchemeFunctionIsNeeded" << " : " <<
+    fScoopSchemeFunctionIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fDampMarkupIsNeeded" << " : " <<
+    fDampMarkupIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fDampAllMarkupIsNeeded" << " : " <<
+    fDampAllMarkupIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fWhiteNoteHeadsIsNeeded" << " : " <<
+    fWhiteNoteHeadsIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fBoxAroundNextBarNumberIsNeeded" << " : " <<
+    fBoxAroundNextBarNumberIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fJazzChordsDisplayIsNeeded" << " : " <<
+    fJazzChordsDisplayIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fColoredLedgerLinesIsNeeded" << " : " <<
+    fColoredLedgerLinesIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fHiddenMeasureAndBarLineIsNeeded" << " : " <<
+    fHiddenMeasureAndBarLineIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fMergeStaffCommonRestsIsNeeded" << " : " <<
+    fMergeStaffCommonRestsIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fTextSpannerWithCenteredTextIsNeeded" << " : " <<
+    fTextSpannerWithCenteredTextIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fMergeMultipleFullBarRestsIsNeeded" << " : " <<
+    fMergeMultipleFullBarRestsIsNeeded <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded" << " : " <<
+    fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded <<
     endl << endl;
-*/
 
   os <<
     "LPSR basic information" <<

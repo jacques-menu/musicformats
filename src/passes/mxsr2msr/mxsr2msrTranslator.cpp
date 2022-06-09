@@ -85,8 +85,8 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentMeasureRepeatMeasuresNumber = -1;
   fCurrentMeasureRepeatSlashesNumber  = -1;
 
-  fCurrentMultipleFullBarRestsMeasuresNumber   = 0;
-  fRemainingMultipleFullBarRestsMeasuresNumber = 0;
+  fCurrentMultipleFullBarRestsNumber  = 0;
+  fRemainingExpectedMultipleFullBarRests = 0;
 
   fCurrentSlashDotsNumber = -1;
   fCurrentSlashGraphicDurationKind = msrDurationKind::k_NoDuration;
@@ -8503,7 +8503,7 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
-  // append a new measure to the current part
+  // create a new measure and append it to the current part
   fCurrentPart->
     createAMeasureAndAppendItToPart (
       inputLineNumber,
@@ -8694,7 +8694,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
           measureReplicatesNumber);
     }
     else {
-      // fRemainingMultipleFullBarRestsMeasuresNumber JMI ???
+      // fRemainingExpectedMultipleFullBarRests JMI ???
     }
   }
 
@@ -8741,16 +8741,16 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
           measuresToBeAdded);
     }
     else {
-      // fRemainingMultipleFullBarRestsMeasuresNumber JMI ???
+      // fRemainingExpectedMultipleFullBarRests JMI ???
     }
   }
 
-  // handle an on-going multiple rest if any only now,
-  // JMI do it before???
-  if (fOnGoingMultipleFullBarRests) {
-    handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
-      inputLineNumber);
-  }
+//   // handle an on-going multiple full-bar rests if any only now,
+//   // JMI do it before???
+//   if (fOnGoingMultipleFullBarRests) {
+//     handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
+//       inputLineNumber);
+//   }
 }
 
 void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
@@ -8772,8 +8772,8 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
       fCurrentMultipleFullBarRestsHasBeenCreated <<
       endl <<
       setw (fieldWidth) <<
-      "remainingMultipleFullBarRestsMeasuresNumber" << " : " <<
-      fRemainingMultipleFullBarRestsMeasuresNumber <<
+      "fRemainingExpectedMultipleFullBarRests" << " : " <<
+      fRemainingExpectedMultipleFullBarRests <<
       endl << endl;
 
     --gIndenter;
@@ -8783,19 +8783,19 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
   //  if (! fOnGoingMultipleFullBarRests) { JMI
   //   }
 
-  if (! fCurrentMultipleFullBarRestsHasBeenCreated) {
-    // create a pending multiple rest,
-    // that will be handled when fRemainingMultipleFullBarRestsMeasuresNumber
-    // comes down to 0 later in this same method
-    fCurrentPart->
-      createMultipleFullBarRestsInPart (
-        inputLineNumber,
-        fCurrentMultipleFullBarRestsMeasuresNumber);
+//   if (! fCurrentMultipleFullBarRestsHasBeenCreated) {
+//     // create a pending  multiple full-bar rests,
+//     // that will be handled when fRemainingExpectedMultipleFullBarRests
+//     // comes down to 0 later in this very method
+//     fCurrentPart->
+//       appendMultipleFullBarRestsToPart (
+//         inputLineNumber,
+//         fCurrentMultipleFullBarRestsNumber);
+//
+//     fCurrentMultipleFullBarRestsHasBeenCreated = true;
+//   }
 
-    fCurrentMultipleFullBarRestsHasBeenCreated = true;
-  }
-
-  if (fRemainingMultipleFullBarRestsMeasuresNumber <= 0) {
+  if (fRemainingExpectedMultipleFullBarRests <= 0) {
     mxsr2msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
       inputLineNumber,
@@ -8803,24 +8803,24 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
       "remainingMultipleFullBarRestsMeasuresNumber problem");
   }
 
-  // account for one more rest measure in the multiple rest
-  --fRemainingMultipleFullBarRestsMeasuresNumber;
+  // account for one more full-bar rest measure in the multiple full-bar rests
+  --fRemainingExpectedMultipleFullBarRests;
 
-  if (fRemainingMultipleFullBarRestsMeasuresNumber == 0) {
-    // all multiple full-bar rests have been found,
-    // the current one is the first after the multiple rest
+  if (fRemainingExpectedMultipleFullBarRests == 0) {
+    // all multiple full-bar rests have been handled,
+    // the current one is the first after the  multiple full-bar rests
     fCurrentPart->
       appendPendingMultipleFullBarRestsToPart (
         inputLineNumber);
 
-    if (fRemainingMultipleFullBarRestsMeasuresNumber == 1) {
+    if (fRemainingExpectedMultipleFullBarRests == 1) {
       fCurrentPart-> // JMI ??? BOF
         setNextMeasureNumberInPart (
           inputLineNumber,
           fCurrentMeasureNumber);
     }
 
-    // forget about and multiple rest having been created
+    // forget about and  multiple full-bar rests having been created
     fCurrentMultipleFullBarRestsHasBeenCreated = false;
 
     fOnGoingMultipleFullBarRests = false;
@@ -8831,7 +8831,8 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
     const int fieldWidth = 37;
 
     gLogStream <<
-      "--> onGoingMultipleFullBarRests" <<
+      "--> handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure()" <<
+      ", onGoingMultipleFullBarRests:" <<
       endl;
 
     ++gIndenter;
@@ -8842,8 +8843,8 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
       fCurrentMultipleFullBarRestsHasBeenCreated <<
       endl <<
       setw (fieldWidth) <<
-      "fRemainingMultipleFullBarRestsMeasuresNumber" << " : " <<
-      fRemainingMultipleFullBarRestsMeasuresNumber <<
+      "fRemainingExpectedMultipleFullBarRests" << " : " <<
+      fRemainingExpectedMultipleFullBarRests <<
       endl <<
       setw (fieldWidth) <<
       "fOnGoingMultipleFullBarRests " << " : " <<
@@ -11173,34 +11174,7 @@ void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
     use-symbols %yes-no; #IMPLIED
 >
 
-
     <measure number="1" width="298">
-      <print page-number="1">
-        <system-layout>
-          <system-margins>
-            <left-margin>123</left-margin>
-            <right-margin>0</right-margin>
-          </system-margins>
-          <top-system-distance>92</top-system-distance>
-        </system-layout>
-        <measure-numbering>system</measure-numbering>
-      </print>
-      <attributes>
-        <divisions>24</divisions>
-        <key>
-          <fifths>-3</fifths>
-          <mode>major</mode>
-        </key>
-        <time symbol="common">
-          <beats>4</beats>
-          <beat-type>4</beat-type>
-        </time>
-        <clef>
-          <sign>G</sign>
-          <line>2</line>
-        </clef>
-      </attributes>
-      <sound tempo="120"/>
       <direction placement="above">
         <direction-type>
           <words default-y="28" font-size="10.8" font-weight="bold" relative-x="-31">Adagio non troppo</words>
@@ -11242,11 +11216,11 @@ void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
   }
 #endif
 
-  fCurrentMultipleFullBarRestsMeasuresNumber = (int)(*elt);
+  fCurrentMultipleFullBarRestsNumber = (int)(*elt);
 
   string useSymbols = elt->getAttributeValue ("use-symbols");
 
-    // what do we do with fMultipleFullBarRestsUseSymbols ??? JMI v0.9.63
+  // what do we do with fMultipleFullBarRestsUseSymbols ??? JMI v0.9.63
   if      (useSymbols == "yes") {
     fMultipleFullBarRestsUseSymbols = true;
   }
@@ -11270,11 +11244,19 @@ void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
       }
   }
 
-  // register number of remeaining multiple full-bar rests
-  fRemainingMultipleFullBarRestsMeasuresNumber =
-    fCurrentMultipleFullBarRestsMeasuresNumber;
+  // create a multiple full-bar rests
+  fCurrentPart->
+    appendMultipleFullBarRestsToPart (
+      inputLineNumber,
+      fCurrentMultipleFullBarRestsNumber);
 
-  // the multiple rest will created at the end of its first measure,
+  fCurrentMultipleFullBarRestsHasBeenCreated = true;
+
+  // register number of remeaining expected multiple full-bar rests
+  fRemainingExpectedMultipleFullBarRests =
+    fCurrentMultipleFullBarRestsNumber;
+
+  // the  multiple full-bar rests will created at the end of its first measure,
   // so that the needed staves/voices have been created
 
   fOnGoingMultipleFullBarRests = true;
@@ -22757,7 +22739,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
       gLogStream <<
         "Handling a note belonging to a chord" <<
         ", savedChordFirstNoteKind: " <<
-        noteKindAsString (savedChordFirstNoteKind) <<
+        msrNoteKindAsString (savedChordFirstNoteKind) <<
         endl;
 
       ++gIndenter;

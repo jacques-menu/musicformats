@@ -4,11 +4,14 @@
 #include "msrElements.h"
 #include "msrMeasures.h"
 #include "msrSegmentElements.h"
-#include "msrVoices.h"
 
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+class msrSegment;
+typedef SMARTP<msrSegment> S_msrSegment;
 
 //______________________________________________________________________________
 class EXP msrMultipleFullBarRests : public msrSegmentElement
@@ -31,17 +34,16 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
 
     static SMARTP<msrMultipleFullBarRests> create (
                             int             inputLineNumber,
-                            const rational& multipleFullBarRestsMeasureSoundingNotes,
                             int             multipleFullBarRestsNumber,
-                            S_msrVoice      voiceUpLink);
+                            S_msrSegment    segmentUpLink);
 
     static SMARTP<msrMultipleFullBarRests> create (
                             int          inputLineNumber,
                             S_msrMeasure restMeasureClone,
-                            S_msrVoice   voiceUpLink);
+                            S_msrSegment segmentUpLink);
 
     SMARTP<msrMultipleFullBarRests> createMultipleFullBarRestsNewbornClone (
-                              S_msrVoice containingVoice);
+                              S_msrSegment containingVoice);
 
   protected:
 
@@ -50,14 +52,13 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
 
                           msrMultipleFullBarRests (
                             int             inputLineNumber,
-                            const rational& multipleFullBarRestsMeasureSoundingNotes,
                             int             multipleFullBarRestsNumber,
-                            S_msrVoice      voiceUpLink);
+                            S_msrSegment    segmentUpLink);
 
                           msrMultipleFullBarRests (
                             int          inputLineNumber,
                             S_msrMeasure restMeasureClone,
-                            S_msrVoice   voiceUpLink);
+                            S_msrSegment segmentUpLink);
 
     virtual               ~msrMultipleFullBarRests ();
 
@@ -66,19 +67,11 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // set and get
     // ------------------------------------------------------
 
-    S_msrVoice            getMultipleFullBarRestsVoiceUpLink () const
-                            { return fMultipleFullBarRestsVoiceUpLink; }
+    S_msrSegment          getMultipleFullBarRestsSegmentUpLink () const
+                            { return fMultipleFullBarRestsSegmentUpLink; }
 
     int                   getMultipleFullBarRestsNumber () const
                               { return fMultipleFullBarRestsNumber; }
-
-//     void                  setMultipleFullBarRestsContents (
-//                             S_msrMultipleFullBarRestsContents
-//                               multipleFullBarRestsContents);
-
-//     S_msrMultipleFullBarRestsContents
-//                           getMultipleFullBarRestsContents () const
-//                               { return fMultipleFullBarRestsContents; }
 
     void                  setMultipleFullBarRestsNextMeasureNumber (
                             const string& nextMeasureNumber);
@@ -91,6 +84,10 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
 
     int                   getMultipleFullBarRestsLastMeasurePuristMeasureNumber () const
                               { return fMultipleFullBarRestsLastMeasurePuristNumber; }
+
+    void                  setMultipleFullBarRestsMeasureSoundingNotes (
+                            const rational& soundingNotes)
+                              { fMultipleFullBarRestsMeasureSoundingNotes = soundingNotes; }
 
     rational              getMultipleFullBarRestsMeasureSoundingNotes () const
                               { return fMultipleFullBarRestsMeasureSoundingNotes; }
@@ -145,16 +142,14 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrVoice            fMultipleFullBarRestsVoiceUpLink;
+    S_msrSegment          fMultipleFullBarRestsSegmentUpLink;
 
     int                   fMultipleFullBarRestsNumber; // supplied by MusicXML
     list<S_msrMeasure>    fFullBarRestsMeasuresList;
 
-//     S_msrMultipleFullBarRestsContents
-//                           fMultipleFullBarRestsContents;
+    int                   fMultipleFullBarRestsLastMeasurePuristNumber;
 
     string                fMultipleFullBarRestsNextMeasureNumber;
-    int                   fMultipleFullBarRestsLastMeasurePuristNumber;
 
     // shortcut for efficiency JMI ???
     rational              fMultipleFullBarRestsMeasureSoundingNotes;

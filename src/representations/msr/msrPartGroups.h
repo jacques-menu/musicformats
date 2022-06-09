@@ -313,6 +313,7 @@ class EXP msrPartGroup : public msrPartGroupElement
     void                  printPartGroupElementsList (
                             int      inputLineNumber,
                             ostream& os) const;
+
     void                  printPartGroupElementsListShort (
                             int      inputLineNumber,
                             ostream& os) const;

@@ -458,10 +458,10 @@ string lpsr2lilypondTranslator::absoluteOctaveAsLilypondString (
 //           s.str ());
       }
     case msrOctaveKind::kOctave0:
-      result = ",,";
+      result = ",,,";
       break;
     case msrOctaveKind::kOctave1:
-      result = ",";
+      result = ",,";
       break;
     case msrOctaveKind::kOctave2:
       result = ",";
@@ -701,43 +701,45 @@ string lpsr2lilypondTranslator::lilypondOctaveInFixedEntryMode (
   // generate the octaves as needed
   switch (absoluteOctavesDifference) {
     case -12:
-      s << ",,,,,,";
+      s << ",,,,,,,,,,,,";
       break;
     case -11:
-      s << ",,,,,,";
+      s << ",,,,,,,,,,,";
       break;
     case -10:
-      s << ",,,,,";
+      s << ",,,,,,,,,,";
       break;
     case -9:
-      s << ",,,,,";
+      s << ",,,,,,,,,";
       break;
     case -8:
-      s << ",,,,";
+      s << ",,,,,,,,";
       break;
     case -7:
-      s << ",,,,";
+      s << ",,,,,,,";
       break;
     case -6:
-      s << ",,,";
+      s << ",,,,,,";
       break;
     case -5:
-      s << ",,,";
+      s << ",,,,,";
       break;
     case -4:
-      s << ",,";
+      s << ",,,,";
       break;
     case -3:
-      s << ",,";
+      s << ",,,";
       break;
     case -2:
-      s << ",";
+      s << ",,";
       break;
     case -1:
       s << ",";
       break;
+
     case 0:
       break;
+
     case 1:
       s << "'";
       break;
@@ -3529,8 +3531,21 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
         " %{ plop??? %}";
       break;
     case msrArticulation::kScoop:
-      fLilypondCodeStream <<
-        " %{ scoop??? %}";
+      switch (articulation->getArticulationPlacementKind ()) {
+        case msrPlacementKind::k_NoPlacement:
+          fLilypondCodeStream <<
+            "\\scoopAbove"; // JMI v0.9.63 meaningfull default ???
+          break;
+
+        case msrPlacementKind::kPlacementAbove:
+          fLilypondCodeStream <<
+            "\\scoopAbove";
+          break;
+
+        case msrPlacementKind::kPlacementBelow:
+          fLilypondCodeStream <<
+            "\\scoopBelow";
+      } // switch
       break;
   } // switch
 }
@@ -3705,8 +3720,21 @@ void lpsr2lilypondTranslator::generateChordArticulation (
         " %{ plop %}";
       break;
     case msrArticulation::kScoop:
-      fLilypondCodeStream <<
-        " %{ scoop %}";
+      switch (articulation->getArticulationPlacementKind ()) {
+        case msrPlacementKind::k_NoPlacement:
+          fLilypondCodeStream <<
+            "\\scoopAbove"; // JMI v0.9.63 ???
+          break;
+
+        case msrPlacementKind::kPlacementAbove:
+          fLilypondCodeStream <<
+            "\\scoopAbove";
+          break;
+
+        case msrPlacementKind::kPlacementBelow:
+          fLilypondCodeStream <<
+            "\\scoopBelow";
+      } // switch
       break;
   } // switch
 }
@@ -11334,9 +11362,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   }
 
   // compress multiple full-bar rests?
-  if (gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()) {
     fLilypondCodeStream <<
-      "\\compressEmptyMeasures" << " %{ BB %}" <<
+      "\\compressFullBarRests" << " %{ BB %}" <<
       endl <<
       "\\set restNumberThreshold = 0" <<
       endl << endl;
@@ -11348,10 +11376,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   if (
     fCurrentVoice->getVoiceContainsMultipleFullBarRests ()
       ||
-    gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
+    gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()
   ) {
     fLilypondCodeStream <<
-      "\\compressEmptyMeasures" << " %{ CC %}" <<
+      "\\compressFullBarRests" << " %{ CC %}" <<
       endl;
 
     ++gInde   nter; // JMI ???
@@ -11455,7 +11483,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
   if (
     fCurrentVoice->getVoiceContainsMultipleFullBarRests ()
       ||
-    gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
+    gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()
   ) {
     fLilypondCodeStream <<
   // JMI    '}' <<
@@ -23093,7 +23121,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
   fLilypondCodeStream <<
     " { \"" <<
     elt->getRehearsalMarkText () <<
-    "\"" "}}" <<
+    "\"" " } }" <<
     endl;
 }
 
@@ -23475,7 +23503,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRests& elt)
     endl;
   ++gIndenter;
   fLilypondCodeStream <<
-    "\\compressEmptyMeasures %{ CC %}" <<
+    "\\compressFullBarRests %{ CC %}" <<
     endl;
 
   fOnGoingMultipleFullBarRests = true;
@@ -23533,10 +23561,10 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 //   if (
 //     fCurrentVoice->getVoiceContainsMultipleFullBarRests ()
 //       ||
-//     gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()
+//     gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()
 //   ) {
 //     fLilypondCodeStream <<
-//       "\\compressEmptyMeasures" << " %{ AA %}" <<
+//       "\\compressFullBarRests" << " %{ AA %}" <<
 //       endl;
 //   }
 
@@ -23609,106 +23637,6 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   fOnGoingMultipleFullBarRests = false;
 }
 
-// void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRestsContents& elt)
-// {
-// #ifdef TRACING_IS_ENABLED
-//   {
-//     Bool
-//       traceLpsrVisitors =
-//         gGlobalLpsrOahGroup->
-//           getTraceLpsrVisitors (),
-//       generateMsrVisitingInformation =
-//         gGlobalLpsr2lilypondOahGroup->
-//           getGenerateLpsrVisitingInformation ();
-//
-//     if (traceLpsrVisitors || generateMsrVisitingInformation) {
-//       stringstream s;
-//
-//       s <<
-//         "%--> Start visiting msrMultipleFullBarRestsContents" <<
-//         endl;
-//
-//       if (traceLpsrVisitors) {
-//         gLogStream << s.str ();
-//       }
-//
-//       if (generateMsrVisitingInformation) {
-//         fLilypondCodeStream << s.str ();
-//       }
-//     }
-//   }
-// #endif
-//
-//   int inputLineNumber =
-//     elt->getInputLineNumber ();
-//
-//   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-//     fLilypondCodeStream << left <<
-//       setw (commentFieldWidth) <<
-//       "% start of multiple full-bar rests contents " <<
-//       /* JMI
-//       mfSingularOrPlural (
-//         multipleFullBarRestsNumber,
-//         "measure",
-//         "measures") <<
-//         */
-//       ", line " << inputLineNumber <<
-//       endl << endl;
-//
-//     ++gIndenter; // decremented in visitEnd (S_msrMultipleFullBarRests&)
-//   }
-// }
-//
-// void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRestsContents& elt)
-// {
-// #ifdef TRACING_IS_ENABLED
-//   {
-//     Bool
-//       traceLpsrVisitors =
-//         gGlobalLpsrOahGroup->
-//           getTraceLpsrVisitors (),
-//       generateMsrVisitingInformation =
-//         gGlobalLpsr2lilypondOahGroup->
-//           getGenerateLpsrVisitingInformation ();
-//
-//     if (traceLpsrVisitors || generateMsrVisitingInformation) {
-//       stringstream s;
-//
-//       s <<
-//         "%--> End visiting msrMultipleFullBarRestsContents" <<
-//         endl;
-//
-//       if (traceLpsrVisitors) {
-//         gLogStream << s.str ();
-//       }
-//
-//       if (generateMsrVisitingInformation) {
-//         fLilypondCodeStream << s.str ();
-//       }
-//     }
-//   }
-// #endif
-//
-//   int inputLineNumber =
-//     elt->getInputLineNumber ();
-//
-//   if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-//     fLilypondCodeStream << left <<
-//       setw (commentFieldWidth) <<
-//       "% end of multiple full-bar rests contents " <<
-//       /* JMI
-//       mfSingularOrPlural (
-//         multipleFullBarRestsNumber,
-//         "measure",
-//         "measures") <<
-//         */
-//       ", line " << inputLineNumber <<
-//       endl << endl;
-//
-//     --gIndenter; // incremented in visitStart (S_msrMultipleFullBarRests&)
-//   }
-// }
-//
 //________________________________________________________________________
 void lpsr2lilypondTranslator::visitStart (S_msrMidiTempo& elt)
 {

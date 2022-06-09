@@ -1293,10 +1293,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
                           getAccidentalStyleKind () const
                               { return fAccidentalStyleKind; }
 
-    void                  setCompressEmptyMeasuresInLilypond ()
-                              { fCompressEmptyMeasuresInLilypond = true; }
-    Bool                  getCompressEmptyMeasuresInLilypond () const
-                              { return fCompressEmptyMeasuresInLilypond; }
+    void                  setCompressFullBarRestsInLilypond ()
+                              { fCompressFullBarRestsInLilypond = true; }
+    Bool                  getCompressFullBarRestsInLilypond () const
+                              { return fCompressFullBarRestsInLilypond; }
 
     void                  setMergeStaffCommonRests ()
                               { fMergeStaffCommonRests = true; }
@@ -1986,7 +1986,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     lpsrAccidentalStyleKind
                           fAccidentalStyleKind;
 
-    Bool                  fCompressEmptyMeasuresInLilypond;
+    Bool                  fCompressFullBarRestsInLilypond;
 
     Bool                  fMergeStaffCommonRests;
 

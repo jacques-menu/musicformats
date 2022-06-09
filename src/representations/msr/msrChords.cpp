@@ -1348,7 +1348,7 @@ string msrChord::asString () const
 
   s <<
     "[Chord" <<
-    ", chordKind: " << chordKindAsString (fChordKind) <<
+    ", chordKind: " << fChordKind <<
     ", line " << fInputLineNumber <<
     " <";
 
@@ -1387,7 +1387,7 @@ string msrChord::asShortString () const
 
   s <<
     "[Chord" <<
-    ", " << chordKindAsString (fChordKind) <<
+    ", " << fChordKind <<
     ", line " << fInputLineNumber <<
     ", <";
 
@@ -1431,7 +1431,7 @@ void msrChord::print (ostream& os) const
 
   os <<
     "[Chord" <<
-    ", chordKind: " << chordKindAsString (fChordKind) <<
+    ", chordKind: " << fChordKind <<
     ", " <<
     mfSingularOrPlural (
       fChordNotesVector.size (), "note", "notes") <<
