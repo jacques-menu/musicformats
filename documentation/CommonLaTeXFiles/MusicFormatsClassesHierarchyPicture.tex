@@ -49,7 +49,7 @@
 
 \tikzmath{
 	% the absices
-  \leftColumnAbs        = -3.75 mm;
+  \leftColumnAbs        = -4.5 mm;
   \rightColumnAbs       = -\leftColumnAbs;
   %
   % the ordinates
@@ -68,7 +68,8 @@
   \msrVoiceOrd            = -7 mm;
   \msrVoiceElementOrd     = \msrVoiceOrd - 1 mm;
   %
-  \msrSegmentOrd          = -10 mm;
+  \msrSegmentOrd          = -9 mm;
+  \msrSegmentElementOrd   = \msrSegmentOrd - 1 mm;
   %
   \msrMeasureOrd          = -11 mm;
   \msrMeasureElementOrd   = \msrMeasureOrd - 1 mm;
@@ -76,17 +77,18 @@
   \msrStanzaOrd       	= \msrVoiceOrd - 0.75 mm;
   \msrSyllableOrd       = \msrStanzaOrd - 1 mm;
   %
-  \msrHarmonyOrd       	= \msrMeasureElementOrd - 0.5 mm;
+  \msrHarmonyOrd       	       = \msrMeasureElementOrd - 0.5 mm;
   \msrFiguredBassElementOrd    = \msrMeasureElementOrd - 1.5 mm;
   %
-  \msrRepeatOrd       	= \msrVoiceElementOrd - 0.75 mm;
-  \msrMultipleFullBarRestsOrd   = \msrRepeatOrd - 0.75 mm;
-  \msrMeasureRepeatOrd = \msrMultipleFullBarRestsOrd - 0.75 mm;
-  \msrBeatRepeatOrd    = \msrMeasureRepeatOrd - 0.75 mm;
+  \msrRepeatOrd       	       = \msrVoiceElementOrd - 0.75 mm;
   %
-  \otherMeasureElementsOrd  = \msrMeasureElementOrd - 1 mm;
+  \msrMultipleFullBarRestsOrd  = \msrSegmentElementOrd - 0.75 mm;
+  \msrMeasureRepeatOrd         = \msrMultipleFullBarRestsOrd - 0.75 mm;
+  \msrBeatRepeatOrd            = \msrMeasureRepeatOrd - 0.75 mm;
   %
-  \msrDoubleTremoloOrd      = \msrMeasureElementOrd - 2 mm;
+  \otherMeasureElementsOrd  = \msrMeasureElementOrd - 1.5 mm;
+  %
+  \msrDoubleTremoloOrd      = \msrMeasureElementOrd - 2.5 mm;
   %
   \msrTupletAbs         = - \rightColumnAbs * 0.6;
 %  \msrTupletAbs         = -0 mm;
@@ -157,6 +159,7 @@
 \coordinate (msrVoiceElement)     at (0,\msrVoiceElementOrd);
 
 \coordinate (msrSegment)          at (0,\msrSegmentOrd);
+\coordinate (msrSegmentElement)   at (0,\msrSegmentElementOrd);
 
 \coordinate (msrMeasure)          at (0,\msrMeasureOrd);
 \coordinate (msrMeasureElement)   at (0,\msrMeasureElementOrd);
@@ -318,15 +321,23 @@
 	(msrVoiceElement);
 
 
-% msrSegment
+% msrSegment and msrSegmentElement
 % ------------------------------------------------
 \node [fill=\SecondaryRectanglesBackgroundColor]
   (msrSegment) at (msrSegment) {\texttt {msrSegment}};
 
+\node [fill=\ElementsRectanglesBackgroundColor]
+  (msrSegmentElement) at (msrSegmentElement) {\texttt {msrSegmentElement}};
+
 \path [->, thick, \usedByClassArcsColor]
-	(msrMeasure)
+	(msrSegmentElement)
   edge node [draw=none] {}
 	(msrSegment);
+
+\path [->, thick, \baseClassArcsColor]
+	(msrSegment)
+  edge node [draw=none] {}
+	(msrVoiceElement);
 
 
 % msrMeasure and msrMeasureElement
@@ -342,6 +353,10 @@
   edge node [draw=none] {}
 	(msrMeasure);
 
+\path [->, thick, \baseClassArcsColor]
+	(msrMeasure)
+  edge node [draw=none] {}
+	(msrSegmentElement);
 
 
 % msrStanza
@@ -386,6 +401,8 @@
 	controls +(170:3 cm) and +(337.5:6 cm) ..
   (msrVoiceElement);
 
+
+
 % msrMultipleFullBarRests
 % ------------------------------------------------
 \node [fill=\RepeatRectanglesBackgroundColor]
@@ -394,7 +411,7 @@
 \draw [->, thick, \baseClassArcsColor]
 	(msrMultipleFullBarRests) ..
 	controls +(170:5 cm) and +(330:3 cm) ..
-  (msrVoiceElement);
+  (msrSegmentElement);
 
 % msrMeasureRepeat
 % ------------------------------------------------
@@ -404,7 +421,7 @@
 \draw [->, thick, \baseClassArcsColor]
 	(msrMeasureRepeat) ..
 	controls +(170:5 cm) and +(320:3 cm) ..
-  (msrVoiceElement);
+  (msrSegmentElement);
 
 % msrBeatRepeat
 % ------------------------------------------------
@@ -414,7 +431,7 @@
 \draw [->, thick, \baseClassArcsColor]
 	(msrBeatRepeat) ..
 	controls +(170:5 cm) and +(305:6 cm) ..
-  (msrVoiceElement);
+  (msrSegmentElement);
 
 
 

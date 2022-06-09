@@ -217,7 +217,7 @@ void msrNote::initializeNote ()
         "not yet known";
     else
       gLogStream <<
-        noteKindAsString (fNoteKind);
+        msrNoteKindAsString (fNoteKind);
     gLogStream <<
       ", line " << fInputLineNumber << ":" <<
       endl;
@@ -294,7 +294,7 @@ void msrNote::initializeNote ()
       left <<
         setw (fieldWidth) <<
         "fNoteIsACueNoteKind" << " = " <<
-         noteIsACueNoteKindAsString (fNoteIsACueNoteKind) <<
+         noteIsACuemsrNoteKindAsString (fNoteIsACueNoteKind) <<
         endl <<
 
       left <<
@@ -653,7 +653,7 @@ void msrNote::setNoteKind (msrNoteKind noteKind)
       "Setting the kind of note " <<
       asString () <<
       " to '" <<
-      noteKindAsString (noteKind) <<
+      msrNoteKindAsString (noteKind) <<
       '\'' <<
       endl;
   }
@@ -2342,7 +2342,7 @@ string msrNote::noteSoundingWholeNotesAsMsrString () const
   string result;
 
   if (fMeasureElementSoundingWholeNotes.getNumerator () == 0)
-    result = " (no sounding whole notes)";
+    result = " ***no sounding whole notes***";
   else
     result =
       wholeNotesAsMsrString (
@@ -2357,7 +2357,7 @@ string msrNote::noteDisplayWholeNotesAsMsrString () const
   string result;
 
   if (fNoteDisplayWholeNotes.getNumerator () == 0) {
-    result = " (no display whole notes)";
+    result = " ***no display whole notes***";
   }
   else {
     result =
@@ -2492,7 +2492,7 @@ string msrNote::noteHeadParenthesesKindAsString (
   return result;
 }
 
-string msrNote::noteIsACueNoteKindAsString (
+string msrNote::noteIsACuemsrNoteKindAsString (
   msrNoteIsACueNoteKind noteIsACueNoteKind)
 {
   string result;
@@ -3944,12 +3944,11 @@ string msrNote::asShortStringWithRawWholeNotes () const
 
     case msrNoteKind::kNoteRestInMeasure:
       s <<
-        "kNoteRestInMeasure" <<
-        " [" <<
+        "kNoteRestInMeasure: " <<
         msrOctaveKindAsString (fNoteOctaveKind) <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -3960,9 +3959,9 @@ string msrNote::asShortStringWithRawWholeNotes () const
     case msrNoteKind::kNoteSkipInMeasure:
       s <<
         "kNoteSkipInMeasure: " <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -3974,9 +3973,9 @@ string msrNote::asShortStringWithRawWholeNotes () const
       s <<
         "kNoteUnpitchedInMeasure: " <<
         notePitchAsString () <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -3989,9 +3988,9 @@ string msrNote::asShortStringWithRawWholeNotes () const
         "kNoteRegularInMeasure" <<
         notePitchAsString () <<
         msrOctaveKindAsString (fNoteOctaveKind) <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4005,9 +4004,9 @@ string msrNote::asShortStringWithRawWholeNotes () const
         ", " <<
         notePitchAsString () <<
         msrOctaveKindAsString (fNoteOctaveKind) <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", sounding, " <<
+        ", fNoteDisplayWholeNotes, " <<
         fNoteDisplayWholeNotes;
       break;
 
@@ -4029,9 +4028,9 @@ string msrNote::asShortStringWithRawWholeNotes () const
       s <<
         "kNoteSkipInGraceNotesGroup" <<
         ":" <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4059,9 +4058,9 @@ string msrNote::asShortStringWithRawWholeNotes () const
         ", " <<
         notePitchAsString () <<
         msrOctaveKindAsString (fNoteOctaveKind) <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4077,9 +4076,9 @@ string msrNote::asShortStringWithRawWholeNotes () const
         noteGraphicDurationAsMsrString () <<
         ", " <<
         msrOctaveKindAsString (fNoteOctaveKind) <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4096,9 +4095,9 @@ string msrNote::asShortStringWithRawWholeNotes () const
         ", " <<
         notePitchAsString () <<
         noteGraphicDurationAsMsrString () <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4122,9 +4121,9 @@ string msrNote::asShortStringWithRawWholeNotes () const
       }
 
       s <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4132,16 +4131,16 @@ string msrNote::asShortStringWithRawWholeNotes () const
       } // for
 
       s <<
-        ", noteTupletFactor " << fNoteTupletFactor;
+        ", fNoteTupletFactor " << fNoteTupletFactor;
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
       s <<
         "kNoteUnpitchedInTuplet " <<
         noteGraphicDurationAsMsrString () <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       s <<
@@ -4328,11 +4327,11 @@ string msrNote::asShortString () const
         ", " <<
         notePitchAsString () <<
         noteGraphicDurationAsMsrString () <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes <<
-        /* JMI
+        /* JMI KAKA
         notePartUpLink ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
@@ -4357,9 +4356,9 @@ string msrNote::asShortString () const
         ", " <<
         notePitchAsString () <<
         noteGraphicDurationAsMsrString () <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
         /* JMI
         notePartUpLink ()->
@@ -4384,9 +4383,9 @@ string msrNote::asShortString () const
         ", " <<
         notePitchAsString () <<
         noteGraphicDurationAsMsrString () <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
         /* JMI
         notePartUpLink ()->
@@ -4414,9 +4413,9 @@ string msrNote::asShortString () const
     case msrNoteKind::kNoteUnpitchedInTuplet:
       s <<
         "kNoteUnpitchedInTuplet" <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
         /* JMI
         notePartUpLink ()->
@@ -4582,9 +4581,9 @@ string msrNote::asMinimalString () const
         ", " <<
         notePitchAsString () <<
         noteGraphicDurationAsMsrString () <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes <<
         ", " <<
         msrOctaveKindAsString (fNoteOctaveKind);
@@ -4603,9 +4602,9 @@ string msrNote::asMinimalString () const
         ", " <<
         notePitchAsString () <<
         noteGraphicDurationAsMsrString () <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4622,9 +4621,9 @@ string msrNote::asMinimalString () const
         ", " <<
         notePitchAsString () <<
         noteGraphicDurationAsMsrString () <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       if (! fetchNoteIsARest ()) {
@@ -4644,9 +4643,9 @@ string msrNote::asMinimalString () const
     case msrNoteKind::kNoteUnpitchedInTuplet:
       s <<
         "kNoteUnpitchedInTuplet" <<
-        ", sounding: " <<
+        ", fMeasureElementSoundingWholeNotes: " <<
         fMeasureElementSoundingWholeNotes <<
-        ", displayed: " <<
+        ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4662,6 +4661,8 @@ string msrNote::asMinimalString () const
     ", line " << fInputLineNumber <<
     "]";
 
+  return ""; // JMI KAKA
+
   return s.str ();
 }
 
@@ -4673,16 +4674,6 @@ string msrNote::noteComplementsAsString () const
     voice =
       fetchNoteVoiceUpLink ();
 
-  s <<
-    ", voice: ";
-  if (voice) {
-    s <<
-      voice->getVoiceNumber ();
-  }
-  else {
-    s << "*none*";
-  }
-
   S_msrStaff
     staff;
 
@@ -4693,7 +4684,7 @@ string msrNote::noteComplementsAsString () const
   }
 
   s <<
-    ", staff: ";
+    ", staff number: ";
   if (staff) {
     s <<
       staff->getStaffNumber ();
@@ -4703,7 +4694,17 @@ string msrNote::noteComplementsAsString () const
   }
 
   s <<
-    ", measureNumber: ";
+    ", voice number: ";
+  if (voice) {
+    s <<
+      voice->getVoiceNumber ();
+  }
+  else {
+    s << "*none*";
+  }
+
+  s <<
+    ", fMeasureElementMeasureNumber: ";
   if (fMeasureElementMeasureNumber == K_NO_MEASURE_NUMBER) {
     s << "*unknown*";
   }
@@ -4711,17 +4712,7 @@ string msrNote::noteComplementsAsString () const
     s << fMeasureElementMeasureNumber;
   }
 
-  s <<
-    ", measureElementPositionInMeasure " <<
-    fMeasureElementPositionInMeasure;
-    /* JMI
-  if (fMeasureElementPositionInMeasure == msrMoment::K_NO_POSITION_MEASURE_NUMBER) {
-    s << "unknown (" << fMeasureElementPositionInMeasure << ")";
-  }
-  else {
-    s << fMeasureElementPositionInMeasure;
-  }
-*/
+  return ""; // JMI KAKA
 
   return s.str ();
 }
@@ -4731,29 +4722,7 @@ string msrNote::soundingNoteEssentialsAsString () const
   stringstream s;
 
   s <<
-    notePitchAsString () <<
-    noteSoundingWholeNotesAsMsrString ();
-
-  for (int i = 0; i < fNoteDotsNumber; ++i) {
-    s << ".";
-  } // for
-
-  s <<
-    " (" <<
-    msrOctaveKindAsString (fNoteOctaveKind) <<
-    ")";
-
-  s <<
-    noteComplementsAsString ();
-
-  return s.str ();
-}
-
-string msrNote::soundingNoteEssentialsAsStringForMeasuresSlices () const
-{
-  stringstream s;
-
-  s <<
+    "[sounding " <<
     notePitchAsString () <<
     noteSoundingWholeNotesAsMsrString ();
 
@@ -4763,7 +4732,31 @@ string msrNote::soundingNoteEssentialsAsStringForMeasuresSlices () const
 
   s <<
     ' ' <<
-    msrOctaveKindAsString (fNoteOctaveKind);
+    msrOctaveKindAsString (fNoteOctaveKind) <<
+    ",++++ " << // JMI KAKA
+    noteComplementsAsString () <<
+    "]";
+
+  return s.str ();
+}
+
+string msrNote::soundingNoteEssentialsAsStringForMeasuresSlices () const // JMI USELESS??? see above method
+{
+  stringstream s;
+
+  s <<
+    "[sounding " <<
+    notePitchAsString () <<
+    noteSoundingWholeNotesAsMsrString ();
+
+  for (int i = 0; i < fNoteDotsNumber; ++i) {
+    s << ".";
+  } // for
+
+  s <<
+    ' ' <<
+    msrOctaveKindAsString (fNoteOctaveKind) <<
+    "]";
 
   return s.str ();
 }
@@ -4786,6 +4779,7 @@ string msrNote::nonSoundingNoteEssentialsAsString () const
   stringstream s;
 
   s <<
+    '[' <<
     notePitchAsString () <<
     ' ' << // JMI
     noteDisplayWholeNotesAsMsrString ();
@@ -4795,12 +4789,13 @@ string msrNote::nonSoundingNoteEssentialsAsString () const
   } // for
 
   s <<
-    " (" <<
+    ", " <<
     msrOctaveKindAsString (fNoteOctaveKind) <<
-    ")";
+    ",---- " << // JMI KAKA
+    noteComplementsAsString () <<
+    ']';
 
-  s <<
-    noteComplementsAsString ();
+  return ""; // JMI KAKA
 
   return s.str ();
 }
@@ -4831,7 +4826,8 @@ string msrNote::asString () const
   stringstream s;
 
   s <<
-    "[=== ";
+    "[Note" <<
+    ", fNoteKind: ";
 
   switch (fNoteKind) {
     case msrNoteKind::k_NoNote:
@@ -4847,7 +4843,7 @@ string msrNote::asString () const
         s <<
           "R" <<
           /* JMI
-          multipleMultipleFullBarRestsWholeNotesAsMsrString (
+          multipleFullBarRestsWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes);
             */
@@ -4903,7 +4899,7 @@ string msrNote::asString () const
       s <<
         "kNoteInChordInGraceNotesGroup " <<
         nonSoundingNoteEssentialsAsString () <<
-        ", noteTupletFactor " << fNoteTupletFactor.asString ();
+        ", fNoteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteRegularInChord:
@@ -4946,7 +4942,7 @@ string msrNote::asString () const
             */
 
       s <<
-        ", noteTupletFactor " << fNoteTupletFactor.asString ();
+        ", fNoteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
@@ -4965,7 +4961,7 @@ string msrNote::asString () const
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
       break;
   } // switch
-  s << ' ';
+  s << ", ";
 
 
 /* JMI
@@ -5022,11 +5018,11 @@ string msrNote::asString () const
   }
 
   s <<
-    ", " << noteIsACueNoteKindAsString (fNoteIsACueNoteKind);
+    ", " << noteIsACuemsrNoteKindAsString (fNoteIsACueNoteKind);
 
   s <<
     ", line " << fInputLineNumber <<
-    " ===]";
+    "]";
 
   return s.str ();
 }
@@ -5045,13 +5041,13 @@ string msrNote::asShortStringForMeasuresSlices () const
 
     case msrNoteKind::kNoteRestInMeasure:
 //       s <<
-//         "kNoteRestInMeasure, ";
+//         "kNoteRestInMeasure, "; JMI
 
       if (fNoteOccupiesAFullMeasure) {
         s <<
           "R" <<
           /* JMI
-          multipleMultipleFullBarRestsWholeNotesAsMsrString (
+          multipleFullBarRestsWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes);
             */
@@ -5064,7 +5060,7 @@ string msrNote::asShortStringForMeasuresSlices () const
       }
 
 //       s <<
-//         nonSoundingNoteEssentialsAsStringForMeasuresSlices ();
+//         nonSoundingNoteEssentialsAsStringForMeasuresSlices (); JMI KAKA
       break;
 
     case msrNoteKind::kNoteSkipInMeasure:
@@ -5177,19 +5173,603 @@ string msrNote::asShortStringForMeasuresSlices () const
   return s.str ();
 }
 
-void msrNote::printNoteEssentials (ostream& os) const //JMI superflous
-{}
+void msrNote::printNoteEssentials (ostream& os) const
+{
+  os <<
+    "fNoteKind: ";
+
+  switch (fNoteKind) {
+    case msrNoteKind::k_NoNote:
+      os <<
+        "*noNote*" <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteRestInMeasure:
+      os <<
+        "kNoteRestInMeasure: ";
+
+      if (fNoteOccupiesAFullMeasure) {
+        os <<
+          "R" <<
+          /* JMI
+          multipleFullBarRestsWholeNotesAsMsrString (
+            fInputLineNumber,
+            fMeasureElementSoundingWholeNotes);
+            */
+          nonSoundingNoteEssentialsAsString ();
+      }
+      else {
+        os <<
+          "r" <<
+          nonSoundingNoteEssentialsAsString ();
+      }
+      os << endl;
+
+      os <<
+        nonSoundingNoteEssentialsAsString ();
+      break;
+
+    case msrNoteKind::kNoteSkipInMeasure:
+      os <<
+        "kNoteSkipInMeasure: " <<
+        nonSoundingNoteEssentialsAsString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInMeasure:
+      os <<
+        "kNoteUnpitchedInMeasure: " <<
+        nonSoundingNoteEssentialsAsString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteRegularInMeasure:
+      os <<
+        "kNoteRegularInMeasure: " <<
+        soundingNoteEssentialsAsString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteInDoubleTremolo:
+      os <<
+        "kNoteInDoubleTremolo: " <<
+        soundingNoteEssentialsAsString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      os <<
+        "kNoteRegularInGraceNotesGroup " <<
+        nonSoundingNoteEssentialsAsString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteSkipInGraceNotesGroup:
+      os <<
+        "kNoteSkipInGraceNotesGroup: " <<
+        nonSoundingNoteEssentialsAsString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteInChordInGraceNotesGroup:
+      os <<
+        "kNoteInChordInGraceNotesGroup: " <<
+        nonSoundingNoteEssentialsAsString () <<
+        ", fNoteTupletFactor " << fNoteTupletFactor.asString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteRegularInChord:
+      os <<
+        "kNoteRegularInChord: " <<
+        soundingNoteEssentialsAsString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteRegularInTuplet:
+      os <<
+        "kNoteRegularInTuplet: " <<
+        soundingNoteEssentialsAsString () <<
+        endl;
+/* JMI
+        notePartUpLink ()->
+          tupletSoundingWholeNotesAsMsrString (
+            fInputLineNumber,
+            fMeasureElementSoundingWholeNotes,
+            fNoteDirectTupletUpLink->getTupletActualNotes (),
+            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            */
+      break;
+
+    case msrNoteKind::kNoteRestInTuplet:
+      os <<
+        "kNoteRestInTuplet: " <<
+        nonSoundingNoteEssentialsAsString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+      os <<
+        "kNoteInTupletInGraceNotesGroup " <<
+        nonSoundingNoteEssentialsAsString () <<
+        endl;
+/* JMI
+        notePartUpLink ()->
+          tupletSoundingWholeNotesAsMsrString (
+            fInputLineNumber,
+            fMeasureElementSoundingWholeNotes,
+            fNoteDirectTupletUpLink->getTupletActualNotes (),
+            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            */
+
+      os <<
+        ", fNoteTupletFactor: " << fNoteTupletFactor.asString () <<
+        endl;
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInTuplet:
+      os <<
+        "kNoteUnpitchedInTuplet: " <<
+        noteSoundingWholeNotesAsMsrString ();
+/* JMI
+        notePartUpLink ()->
+          tupletSoundingWholeNotesAsMsrString (
+            fInputLineNumber,
+            fMeasureElementSoundingWholeNotes,
+            fNoteDirectTupletUpLink->getTupletActualNotes (),
+            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            */
+      os <<
+        ", noteTupletFactor: " << fNoteTupletFactor.asString () <<
+        endl;
+      break;
+  } // switch
+
+  os << endl;
+}
 
 void msrNote::print (ostream& os) const
 {
-  // print the note itself
   os <<
-    asShortString () <<
+    "[Note " ;
+
+  // print the note essentials
+  printNoteEssentials (os);
+
+  os << ", ";
+
+
+/* JMI
+  os << left <<
+    ", positionInMeasure: ";
+    / * JMI
+  if (fMeasureElementPositionInMeasure == msrMoment::K_NO_POSITION_MEASURE_NUMBER) {
+    os << "unknown (" << fMeasureElementPositionInMeasure << ")";
+  }
+  else {
+    os << fMeasureElementPositionInMeasure;
+  }
+  * /
+  os << fMeasureElementPositionInMeasure;
+
+  os <<
+    ", positionInVoice: " <<
+    fMeasureElementPositionInVoice;
+*/
+
+  const int fieldWidth = 40;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteIsACueNoteKind" << " : " <<
+    fNoteIsACueNoteKind <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteOctaveShift" << " : " <<
+    fNoteOctaveShift <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNotePrintObjectKind" << " : " <<
+    fNotePrintObjectKind <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteHeadKind" << " : " <<
+    fNoteHeadKind <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteHeadFilledKind" << " : " <<
+    fNoteHeadFilledKind <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteHeadParenthesesKind" << " : " <<
+    fNoteHeadParenthesesKind <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteAccidentalKind" << " : " <<
+    fNoteAccidentalKind <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteEditorialAccidentalKind" << " : " <<
+    fNoteEditorialAccidentalKind <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteCautionaryAccidentalKind" << " : " <<
+    fNoteCautionaryAccidentalKind <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteBelongsToAChord" << " : " <<
+    fNoteBelongsToAChord <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteBelongsToATuplet" << " : " <<
+    fNoteBelongsToATuplet <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteOccupiesAFullMeasure" << " : " <<
+    fNoteOccupiesAFullMeasure <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteBelongsToAMultipleFullBarRests" << " : " <<
+    fNoteBelongsToAMultipleFullBarRests <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteMultipleFullBarRestsSequenceNumber" << " : " <<
+    fNoteMultipleFullBarRestsSequenceNumber <<
+    endl;
+
+/*
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteSyllables" << " : " <<
+    fNoteSyllables <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteStem" << " : " <<
+    fNoteStem <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteBeams" << " : " <<
+    fNoteBeams <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteArticulations" << " : " <<
+    fNoteArticulations <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteSpanners" << " : " <<
+    fNoteSpanners <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteTechnicals" << " : " <<
+    fNoteTechnicals <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteTechnicalWithIntegers" << " : " <<
+    fNoteTechnicalWithIntegers <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteTechnicalWithFloats" << " : " <<
+    fNoteTechnicalWithFloats <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteTechnicalWithStrings" << " : " <<
+    fNoteTechnicalWithStrings <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteOrnaments" << " : " <<
+    fNoteOrnaments <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteGlissandos" << " : " <<
+    fNoteGlissandos <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteSlides" << " : " <<
+    fNoteSlides <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteGraceNotesGroupBefore" << " : " <<
+    fNoteGraceNotesGroupBefore <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteGraceNotesGroupBefore" << " : " <<
+    fNoteGraceNotesGroupBefore <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteGraceNotesGroupAfter" << " : " <<
+    fNoteGraceNotesGroupAfter <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteSingleTremolo" << " : " <<
+    fNoteSingleTremolo <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteTie" << " : " <<
+    fNoteDashefNoteTiesOrnament <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDynamics" << " : " <<
+    fNoteDynamics <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteOtherDynamics" << " : " <<
+    fNoteOtherDynamics <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteSlashes" << " : " <<
+    fNoteSlashes <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteCrescDecrescs" << " : " <<
+    fNoteCrescDecrescs <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteWedges" << " : " <<
+    fNoteWedges <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteSegnos" << " : " <<
+    fNoteSegnos <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDalSegnos" << " : " <<
+    fNoteDalSegnos <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteCodas" << " : " <<
+    fNoteCodas <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteEyeGlasses" << " : " <<
+    fNoteEyeGlasses <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDamps" << " : " <<
+    fNoteDamps <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDampAlls" << " : " <<
+    fNoteDampAlls <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteScordaturas" << " : " <<
+    fNoteScordaturas <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteWords" << " : " <<
+    fNoteWords <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteSlurs" << " : " <<
+    fNoteSlurs <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteLigatures" << " : " <<
+    fNoteLigatures <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNotePedals" << " : " <<
+    fNotePedals <<
+    endl;
+*/
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteIsStemless" << " : " <<
+    fNoteIsStemless <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteIsAChordsFirstMemberNote" << " : " <<
+    fNoteIsAChordsFirstMemberNote <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteIsFirstNoteInADoubleTremolo" << " : " <<
+    fNoteIsFirstNoteInADoubleTremolo <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteIsSecondNoteInADoubleTremolo" << " : " <<
+    fNoteIsSecondNoteInADoubleTremolo <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteTrillOrnament" << " : " <<
+    fNoteTrillOrnament <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteIsFollowedByGraceNotesGroup" << " : " <<
+    fNoteIsFollowedByGraceNotesGroup <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDashesOrnament" << " : " <<
+    fNoteDashesOrnament <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDashesOrnament" << " : " <<
+    fNoteDashesOrnament <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDashesOrnament" << " : " <<
+    fNoteDashesOrnament <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDashesOrnament" << " : " <<
+    fNoteDashesOrnament <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDelayedTurnOrnament" << " : " <<
+    fNoteDelayedTurnOrnament <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteDelayedInvertedTurnOrnament" << " : " <<
+    fNoteDelayedInvertedTurnOrnament <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteWavyLineSpannerStart" << " : " <<
+    fNoteWavyLineSpannerStart <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteWavyLineSpannerStop" << " : " <<
+    fNoteWavyLineSpannerStop <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteAlphaRGBColor" << " : " <<
+    fNoteAlphaRGBColor <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteAlphaRGBColorHasBenSet" << " : " <<
+    fNoteAlphaRGBColorHasBenSet <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteSoloNoteOrRestInVoiceKind" << " : " <<
+    fNoteSoloNoteOrRestInVoiceKind <<
+    endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteSoloNoteOrRestInStaffKind" << " : " <<
+    fNoteSoloNoteOrRestInStaffKind <<
+    endl;
+
+  if (fNoteTie) {
+    os <<
+      ", has note tie: " <<
+      msrTieKindAsString (fNoteTie->getTieKind ()) <<
+      endl;
+  }
+
+  os <<
+    ", fNoteIsACueNoteKind: " <<
+    noteIsACuemsrNoteKindAsString (fNoteIsACueNoteKind) <<
+      endl;
+
+  os <<
+    ", line " << fInputLineNumber <<
+    ':' <<
     endl;
 
   ++gIndenter;
-
-  const int fieldWidth = 35;
 
   // print measure number
   os << left <<
@@ -5222,25 +5802,18 @@ void msrNote::print (ostream& os) const
   // print position in measure
   os << left <<
     setw (fieldWidth) <<
-    "measureElementPositionInMeasure" << " : ";
-    /* JMI
-  if (fMeasureElementPositionInMeasure == msrMoment::K_NO_POSITION_MEASURE_NUMBER) {
-    os << "unknown (" << fMeasureElementPositionInMeasure << ")";
-  }
-  else {
-    os << fMeasureElementPositionInMeasure;
-  }
-  */
-  os <<
+    "fMeasureElementPositionInMeasure" << " : " <<
     fMeasureElementPositionInMeasure <<
     endl;
 
   // print position in voice
   os << left <<
-    setw (fieldWidth) << "measureElementPositionInVoice" << " : " <<
+    setw (fieldWidth) <<
+    "fMeasureElementPositionInVoice" << " : " <<
     fMeasureElementPositionInVoice <<
     endl <<
-    setw (fieldWidth) << "measureElementMomentInVoice" << " : " <<
+    setw (fieldWidth) <<
+    "fMeasureElementMomentInVoice" << " : " <<
     endl;
   ++gIndenter;
   os <<
@@ -5385,8 +5958,8 @@ void msrNote::print (ostream& os) const
         os <<
           fNoteTupletFactor;
       --gIndenter;
-      break;
-    } // switch
+        break;
+  } // switch
 
   // print note full measure length
   // may be unknown if there is no time signature
@@ -5396,7 +5969,7 @@ void msrNote::print (ostream& os) const
         ?
           fNoteDirectMeasureUpLink->
             getFullMeasureWholeNotesDuration ()
-        : rational (0, 1); // JMI
+        : rational (0, 1); // JMI KAKA
 
   os << left <<
     setw (fieldWidth) <<
@@ -5514,13 +6087,13 @@ void msrNote::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fNoteIsACueNoteKind" << " : " <<
-    noteIsACueNoteKindAsString (fNoteIsACueNoteKind) <<
+    noteIsACuemsrNoteKindAsString (fNoteIsACueNoteKind) <<
     endl;
 
   // short cuts for efficiency
   os << left <<
     setw (fieldWidth) <<
-    "getNoteIsAGraceNote" << " : " <<
+    "noteIsAGraceNote" << " : " <<
     getNoteIsAGraceNote () <<
     endl;
 
@@ -5728,7 +6301,7 @@ void msrNote::print (ostream& os) const
     case msrNoteKind::kNoteRestInTuplet:
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
     case msrNoteKind::kNoteUnpitchedInTuplet:
-      /* JMI
+      /* JMI KAKA
       os << left <<
         setw (fieldWidth) <<
         "fNoteTupletNoteGraphicDurationAsMsrString" << " : \"" <<
@@ -5756,7 +6329,7 @@ void msrNote::print (ostream& os) const
 
       os <<
         setw (fieldWidth) <<
-        "positionInTuplet" << " : " <<
+        "fPositionInTuplet" << " : " <<
         fPositionInTuplet <<
         endl;
 
@@ -5828,13 +6401,11 @@ void msrNote::print (ostream& os) const
   os <<
     setw (fieldWidth) <<
     "fNoteSoloNoteOrRestInVoiceKind" << " : " <<
-    soloNoteOrRestInVoiceKindAsString (
-      fNoteSoloNoteOrRestInVoiceKind) <<
+    fNoteSoloNoteOrRestInVoiceKind <<
     endl <<
     setw (fieldWidth) <<
     "fNoteSoloNoteOrRestInStaffKind" << " : " <<
-    soloNoteOrRestInStaffKindAsString (
-      fNoteSoloNoteOrRestInStaffKind) <<
+    fNoteSoloNoteOrRestInStaffKind <<
     endl;
 
   // print the tie if any
@@ -6660,7 +7231,7 @@ void msrNote::print (ostream& os) const
 
       os << syllable;
 
-/* JMI
+/* JMI KAKA
       os <<
         syllable->syllableKindAsString () <<
           syllable->syllableExtendKindAsString () <<
@@ -6714,12 +7285,17 @@ void msrNote::print (ostream& os) const
   }
 
   --gIndenter;
+
+  os << ']' << endl;
 }
 
 void msrNote::printShort (ostream& os) const
 {
-  // print the note itself
-  os << asString () << endl;
+  os <<
+    "[Note " ;
+
+  // print the note essentials
+  printNoteEssentials (os);
 
   ++gIndenter;
 
@@ -6728,12 +7304,14 @@ void msrNote::printShort (ostream& os) const
   // print position in measure
   os << left <<
     setw (fieldWidth) <<
-    "measureElementPositionInMeasure" << " : " <<
+    "fMeasureElementPositionInMeasure" << " : " <<
+    fMeasureElementPositionInMeasure <<
     endl;
 
   // print position in voice
   os << left <<
-    setw (fieldWidth) << "measureElementPositionInVoice" << " : " <<
+    setw (fieldWidth) <<
+    "fMeasureElementPositionInVoice" << " : " <<
     fMeasureElementPositionInVoice <<
     endl;
 
@@ -7517,6 +8095,8 @@ void msrNote::printShort (ostream& os) const
   }
 
   --gIndenter;
+
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrNote& elt)

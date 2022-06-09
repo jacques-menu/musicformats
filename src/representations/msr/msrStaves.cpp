@@ -228,7 +228,7 @@ void msrStaff::initializeStaff ()
         gLogStream <<
           "Appending part clef '" << clef->asString () <<
           "' as initial clef to staff \"" <<
-          getStaffName () <<
+          fStaffName <<
           "\" in part " <<
           fStaffPartUpLink->getPartCombinedName () <<
           endl;
@@ -253,7 +253,7 @@ void msrStaff::initializeStaff ()
         gLogStream <<
           "Appending part key '" << key->asString () <<
           "' as initial key to staff \"" <<
-          getStaffName () <<
+          fStaffName <<
           "\" in part " <<
           fStaffPartUpLink->getPartCombinedName () <<
           endl;
@@ -277,7 +277,7 @@ void msrStaff::initializeStaff ()
         gLogStream <<
           "Appending part transpose '" << transpose->asString () <<
           "' as initial transpose to staff \"" <<
-          getStaffName () <<
+          fStaffName <<
           "\" in part " <<
           fStaffPartUpLink->getPartCombinedName () <<
           endl;
@@ -416,7 +416,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (S_msrNote note)
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
-        "The new shortest note in staff \"" << getStaffName () << "\"" <<
+        "The new shortest note in staff \"" << fStaffName << "\"" <<
         " becomes " << note->asString () <<
         endl;
     }
@@ -504,7 +504,7 @@ void msrStaff::createAMeasureAndAppendItToStaff (
     gLogStream <<
       "Creating measure '" <<
       measureNumber <<
-      "' and appending it to staff \"" << getStaffName () << "\"" <<
+      "' and appending it to staff \"" << fStaffName << "\"" <<
       "', line " << inputLineNumber <<
       endl;
   }
@@ -536,7 +536,7 @@ void msrStaff::setNextMeasureNumberInStaff (
     gLogStream <<
       "Setting next measure number to '" <<
       nextMeasureNumber <<
-      ", in staff \"" << getStaffName () << "\"" <<
+      ", in staff \"" << fStaffName << "\"" <<
       "', line " << inputLineNumber <<
       endl;
   }
@@ -586,7 +586,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       voiceNumber <<
       "' as regular voice number '" <<
       fStaffRegularVoicesCounter <<
-      "' of staff \"" << getStaffName () <<
+      "' of staff \"" << fStaffName <<
       "\", line " << inputLineNumber <<
       "\", current measure number: " <<
       currentMeasureNumber <<
@@ -600,7 +600,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
     stringstream s;
 
     s <<
-      "staff \"" << getStaffName () <<
+      "staff \"" << fStaffName <<
       "\" is already filled up with " <<
       msrStaff::gStaffMaxRegularVoices << " regular voices" <<
       endl <<
@@ -682,7 +682,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           voiceNumber <<
           "', voiceKind '" <<
           msrVoiceKindAsString (voiceKind) <<
-          "' in staff \"" << getStaffName () <<
+          "' in staff \"" << fStaffName <<
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
@@ -700,7 +700,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           voiceNumber <<
           "', voiceKind '" <<
           msrVoiceKindAsString (voiceKind) <<
-          "' in staff \"" << getStaffName () <<
+          "' in staff \"" << fStaffName <<
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
@@ -751,7 +751,7 @@ void msrStaff::setStaffShortestNoteDuration (
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
         "The new shortest note duration in staff \"" <<
-        getStaffName () <<
+        fStaffName <<
         "\" becomes " <<
         duration <<
         endl;
@@ -768,7 +768,7 @@ void msrStaff::setStaffShortestNoteTupletFactor (
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
         "The new shortest note tuplet factor in part \"" <<
-        getStaffName () <<
+        fStaffName <<
         "\" becomes " <<
         noteTupletFactor <<
         endl;
@@ -785,7 +785,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Registering voice \"" << voice->getVoiceName () <<
-      "\" in all voices list of staff " << getStaffName () <<
+      "\" in all voices list of staff " << fStaffName <<
       endl;
   }
 #endif
@@ -868,9 +868,11 @@ void msrStaff::registerVoiceByItsNumber (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
-      "Registering voice by its number '" << voiceNumber <<
-      "', named \"" << voice->getVoiceName () <<
-      "\" in staff " << getStaffName () <<
+      "Registering voice named \"" << voice->getVoiceName () <<
+      "\", " <<
+      voice->asShortString () <<
+      ", by its number '" << voiceNumber <<
+      "\" in staff " << fStaffName <<
       endl;
   }
 #endif
@@ -878,7 +880,7 @@ void msrStaff::registerVoiceByItsNumber (
   ++gIndenter;
 
   // register it in the 'all voices' list
-  registerVoiceInStaffAllVoicesList (voice);
+  registerVoiceInStaffAllVoicesList (voice); // JMI v0.9.63 NASTY bug???
 
   // register voice in the 'numbers to all voices' map
   fStaffVoiceNumbersToAllVoicesMap [voiceNumber] = voice;
@@ -906,7 +908,7 @@ void msrStaff::registerVoiceByItsNumber (
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         gLogStream <<
           "Sorting the voices in staff \"" <<
-          getStaffName () << "\"" <<
+          fStaffName << "\"" <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -925,7 +927,7 @@ void msrStaff::registerVoiceByItsNumber (
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         gLogStream <<
           "Sorting the voices in staff \"" <<
-          getStaffName () << "\"" <<
+          fStaffName << "\"" <<
           ", line " << inputLineNumber <<
           endl;
       }
@@ -954,7 +956,7 @@ void msrStaff::registerRegularVoiceByItsNumber (
       "Registering regular voice " <<
       regularVoice->asShortString () <<
       " by it's number '" << voiceNumber <<
-      "\" in staff " << getStaffName () <<
+      "\" in staff " << fStaffName <<
       "'s regular voices list with sequential number '" <<
       fStaffRegularVoicesCounter <<
       "'" <<
@@ -1037,7 +1039,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
     gLogStream <<
       "Registering harmonies voice " <<
       voice->asString () <<
-     " by its number in staff \"" << getStaffName () <<
+     " by its number in staff \"" << fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -1060,7 +1062,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
     gLogStream <<
       "Registering figured bass voice " <<
       voice->asString () <<
-     " by its number in staff \"" << getStaffName () <<
+     " by its number in staff \"" << fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -1085,7 +1087,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
     gLogStream <<
       "Fetching voice number '" <<
       voiceNumber <<
-     "' in staff \"" << getStaffName () <<
+     "' in staff \"" << fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -1109,7 +1111,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
       if (gGlobalTracingOahGroup->getTraceVoices ()) {
         gLogStream <<
           "Voice number '" << voiceNumber <<
-          "' in staff \"" << getStaffName () << "\"" <<
+          "' in staff \"" << fStaffName << "\"" <<
           " has staff relative number '" << number <<
           "'" <<
           endl;
@@ -1196,7 +1198,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Fetching first regular voice in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -1234,7 +1236,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
     if (gGlobalTracingOahGroup->getTraceVoices ()) {
       gLogStream <<
         "The first regular voice in staff \"" <<
-        getStaffName () <<
+        fStaffName <<
         "\" is " <<
         result->asShortString () <<
         endl;
@@ -1271,7 +1273,7 @@ void msrStaff::registerVoiceInStaff (
       "Registering voice \"" << voice->getVoiceName () <<
       "\" as relative voice " <<
       fStaffRegularVoicesCounter <<
-      " of staff \"" << getStaffName () <<
+      " of staff \"" << fStaffName <<
       "\", line " << inputLineNumber <<
 // JMI       " in part " << fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -1295,7 +1297,7 @@ void msrStaff::registerVoiceInStaff (
         stringstream s;
 
         s <<
-          "staff \"" << getStaffName () <<
+          "staff \"" << fStaffName <<
           "\" is already filled up with " <<
           msrStaff::gStaffMaxRegularVoices << " regular voices," <<
           endl <<
@@ -1394,7 +1396,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
         stringstream s;
 
         s <<
-          "staff \"" << getStaffName () <<
+          "staff \"" << fStaffName <<
           "\" is already filled up with " <<
           msrStaff::gStaffMaxRegularVoices << " regular voices," <<
           endl <<
@@ -1425,7 +1427,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
       "Registering voice \"" << voice->getVoiceName () <<
       "\" as part level voice " <<
       fStaffRegularVoicesCounter <<
-      " in staff \"" << getStaffName () <<
+      " in staff \"" << fStaffName <<
       "\", line " << inputLineNumber <<
 // JMI       " in part " << fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -1494,7 +1496,7 @@ void msrStaff::registerVoiceInStaffClone (
       "Registering voice \"" << voice->getVoiceName () <<
       "\" as relative voice " <<
       fStaffRegularVoicesCounter <<
-      " of staff clone \"" << getStaffName () <<
+      " of staff clone \"" << fStaffName <<
       "\", line " << inputLineNumber <<
 // JMI       " in part " << fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -1514,7 +1516,7 @@ void msrStaff::registerVoiceInStaffClone (
         stringstream s;
 
         s <<
-          "staff clone \"" << getStaffName () <<
+          "staff clone \"" << fStaffName <<
           "\" is already filled up with " <<
           msrStaff::gStaffMaxRegularVoices << " regular voices," <<
           endl <<
@@ -1571,7 +1573,7 @@ void msrStaff::appendClefToStaff (S_msrClef clef)
     gLogStream <<
       "Appending clef '" << clef->asString () <<
       "' to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -1613,7 +1615,7 @@ void msrStaff::appendClefToStaff (S_msrClef clef)
         "Clef '" <<
         clef->asString () <<
         "' ignored because it is already present in staff " <<
-        getStaffName () <<
+        fStaffName <<
         "\" in part " <<
         fStaffPartUpLink->getPartCombinedName () <<
         endl;
@@ -1631,7 +1633,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
     gLogStream <<
       "Appending key " << key->asString () <<
       " to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -1660,7 +1662,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
             "Key '" <<
             key->asString () <<
             "' ignored because it is already present in staff " <<
-            getStaffName () <<
+            fStaffName <<
             "\" in part " <<
             fStaffPartUpLink->getPartCombinedName () <<
             endl;
@@ -1693,7 +1695,7 @@ void msrStaff::appendTimeSignatureToStaff (S_msrTimeSignature timeSignature)
     gLogStream <<
       "Appending time '" << timeSignature->asString () <<
       "' to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\"" <<
       endl;
   }
@@ -1721,7 +1723,7 @@ void msrStaff::appendTimeSignatureToStaff (S_msrTimeSignature timeSignature)
             "Time '" <<
             timeSignature->asString () <<
             "' ignored because it is already present in staff " <<
-            getStaffName () <<
+            fStaffName <<
             "\" in part " <<
             fStaffPartUpLink->getPartCombinedName () <<
             endl;
@@ -1754,7 +1756,7 @@ void msrStaff::appendTimeSignatureToStaffClone (S_msrTimeSignature timeSignature
     gLogStream <<
       "Appending time '" << timeSignature->asString () <<
       "' to staff clone \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -1782,7 +1784,7 @@ void msrStaff::appendTempoToStaff (S_msrTempo tempo)
     gLogStream <<
       "Appending tempo " << tempo->asString () <<
       " to staff " <<
-      getStaffName () <<
+      fStaffName <<
       endl;
   }
 #endif
@@ -1802,7 +1804,7 @@ void msrStaff::appendRehearsalMarkToStaff (
     gLogStream <<
       "Appending rehearsal mark " << rehearsalMark->asString () <<
       " to staff " <<
-      getStaffName () <<
+      fStaffName <<
       endl;
   }
 #endif
@@ -1821,7 +1823,7 @@ void msrStaff::appendLineBreakToStaff (S_msrLineBreak lineBreak)
     gLogStream <<
       "Appending line break " << lineBreak->asString () <<
       " to staff " <<
-      getStaffName () <<
+      fStaffName <<
       endl;
   }
 #endif
@@ -1840,7 +1842,7 @@ void msrStaff::appendPageBreakToStaff (S_msrPageBreak pageBreak)
     gLogStream <<
       "Appending page break " << pageBreak->asString () <<
       " to staff " <<
-      getStaffName () <<
+      fStaffName <<
       endl;
   }
 #endif
@@ -1862,7 +1864,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       "Inserting hidden measure and barLine at position " <<
       positionInMeasure <<
       "' in staff clone \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -1891,7 +1893,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Nesting contents into new repeat in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -1913,7 +1915,7 @@ void msrStaff::handleRepeatStartInStaff (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling repeat start in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -1941,7 +1943,7 @@ void msrStaff::handleRepeatEndInStaff (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling a repeat end in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -1969,7 +1971,7 @@ void msrStaff::handleRepeatEndingStartInStaff (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Handling a repeat ending start in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -2001,7 +2003,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
       msrRepeatEndingKindAsString (
         repeatEndingKind) <<
       " repeat ending end in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -2032,7 +2034,7 @@ void msrStaff::finalizeRepeatEndInStaff (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Finalizing a repeat upon its end in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -2063,7 +2065,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Creating a measures repeat from it's first measure in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -2086,7 +2088,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending the pending measures repeat to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -2100,18 +2102,18 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
   } // for
 }
 
-void msrStaff::createMultipleFullBarRestsInStaff (
+void msrStaff::appendMultipleFullBarRestsToStaff (
   int inputLineNumber,
   int multipleFullBarRestsMeasuresNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
-      "Creating " <<
+      "Appending a multiple full-bar rest for " <<
       mfSingularOrPlural (
-        multipleFullBarRestsMeasuresNumber, "multiple full-bar rest", "full measures rests") <<
+        multipleFullBarRestsMeasuresNumber, "measure", "measures") <<
       " to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -2123,7 +2125,7 @@ void msrStaff::createMultipleFullBarRestsInStaff (
 
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->
-      createMultipleFullBarRestsInVoice (
+      appendMultipleFullBarRestsToVoice (
         inputLineNumber,
         multipleFullBarRestsMeasuresNumber);
   } // for
@@ -2137,7 +2139,7 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Replicating last appended measure in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\"" <<
       endl;
   }
@@ -2155,16 +2157,17 @@ void msrStaff::replicateLastAppendedMeasureInStaff (
 void msrStaff::addEmptyMeasuresToStaff (
   int           inputLineNumber,
   const string& previousMeasureNumber,
-  int           multipleFullBarRestsNumber)
+  int           emptyMeasuresNumber)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Adding " <<
       mfSingularOrPlural (
-        multipleFullBarRestsNumber, "multiple full-bar rest", "multiple full-bar rests") <<
+        emptyMeasuresNumber,
+        "empty measure", "empty measures") <<
       " to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << inputLineNumber <<
@@ -2179,7 +2182,7 @@ void msrStaff::addEmptyMeasuresToStaff (
       addEmptyMeasuresToVoice (
         inputLineNumber,
         previousMeasureNumber,
-        multipleFullBarRestsNumber);
+        emptyMeasuresNumber);
   } // for
 }
 
@@ -2190,7 +2193,7 @@ void msrStaff::appendPendingMultipleFullBarRestsToStaff (
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
       "Appending the pending multiple rest to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -2214,7 +2217,7 @@ void msrStaff::appendMultipleFullBarRestsCloneToStaff (
       "Appending multiple rest '" <<
       multipleFullBarRests->asString () <<
       "' to staff clone \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\"" <<
       endl;
   }
@@ -2236,7 +2239,7 @@ void msrStaff::appendRepeatCloneToStaff (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending repeat clone to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -2257,7 +2260,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Appending a repeat ending clone to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       ", line " << repeatEndingClone->getInputLineNumber () <<
@@ -2283,7 +2286,7 @@ void msrStaff::appendBarLineToStaff (S_msrBarLine barLine)
     gLogStream <<
       "Appending barLine " << barLine->asString () <<
       " to staff " <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -2309,7 +2312,7 @@ void msrStaff::appendTranspositionToStaff (
       "Setting transpose '" <<
       transpose->asString () <<
       "' in staff " <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -2331,7 +2334,7 @@ void msrStaff::appendTranspositionToStaff (
           "Transpose '" <<
           transpose->asString () <<
           "' ignored because it is already present in staff " <<
-          getStaffName () <<
+          fStaffName <<
           "\" in part " <<
           fStaffPartUpLink->getPartCombinedName () <<
           endl;
@@ -2360,7 +2363,7 @@ void msrStaff::appendStaffDetailsToStaff (
       "Appending staff details '" <<
       staffDetails->asShortString () <<
       "' to staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -2396,7 +2399,7 @@ void msrStaff::appendStaffDetailsToStaff (
       "Setting staff kind to '" <<
       msrStaffKindAsString (fStaffKind) <<
       "' in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\" in part " <<
       fStaffPartUpLink->getPartCombinedName () <<
       endl;
@@ -2457,7 +2460,7 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Finalizing last appended measure in staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\", line " << inputLineNumber <<
       endl;
   }
@@ -2637,7 +2640,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
   if (gGlobalTracingOahGroup->getTraceStaves ()) {
     gLogStream <<
       "Finalizing staff \"" <<
-      getStaffName () << "\"" <<
+      fStaffName << "\"" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -2650,7 +2653,7 @@ void msrStaff::finalizeStaff (int inputLineNumber)
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Finalizing the voices in staff \"" <<
-      getStaffName () << "\"" <<
+      fStaffName << "\"" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -2677,7 +2680,7 @@ void msrStaff::collectStaffMeasuresIntoFlatListsVector (
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
       "Collecting measures from the staff voices into staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "s measures flat list vector" <<
       ", line " << inputLineNumber <<
       endl;
@@ -2700,7 +2703,7 @@ void msrStaff::collectStaffMeasuresSlices (
 
     gLogStream <<
       "Collecting the measures slices of staff \"" <<
-      getStaffName () <<
+      fStaffName <<
       "\", " <<
       mfSingularOrPluralWithoutNumber (
         staffVoiceNumbersToAllVoicesMapSize, "there is", "there are") <<
@@ -3024,20 +3027,13 @@ void msrStaff::browseData (basevisitor* v)
 void msrStaff::print (ostream& os) const
 {
   os <<
-    '[' <<
+    "[Staff \"" << fStaffName <<
+    "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
-    " staff \"" << getStaffName () <<
-    "\", staff number '" <<
+    "\", fStaffNumber: " <<
     fStaffNumber <<
-    "', " <<
-    mfSingularOrPlural (
-      fStaffAllVoicesList.size (), "voice", "voices") <<
-    ", " <<
-    mfSingularOrPlural (
-      fStaffRegularVoicesCounter,
-      "regular voice",
-      "regular voices") << // JMI
-    ")" <<
+    ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
+    ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
     endl;
 
   ++gIndenter;
@@ -3414,20 +3410,13 @@ void msrStaff::print (ostream& os) const
 void msrStaff::printShort (ostream& os) const
 {
   os <<
-    '[' <<
+    "[Staff \"" << fStaffName <<
+    "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
-    " staff \"" << getStaffName () <<
-    "\", staff number '" <<
+    "\", fStaffNumber: " <<
     fStaffNumber <<
-    "', " <<
-    mfSingularOrPlural (
-      fStaffVoiceNumbersToAllVoicesMap.size (), "voice", "voices") <<
-    ", " <<
-    mfSingularOrPlural (
-      fStaffRegularVoicesCounter,
-      "regular voice",
-      "regular voices") << // JMI
-    ")" <<
+    ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
+    ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
     endl;
 
   ++gIndenter;
@@ -3460,15 +3449,13 @@ void msrStaff::printShort (ostream& os) const
 void msrStaff::printSummary (ostream& os) const
 {
   os <<
-    '[' <<
+    "[Staff \"" << fStaffName <<
+    "\", fStaffKind: " <<
     msrStaffKindAsStringForPrint (fStaffKind) <<
-    " staff \"" << getStaffName () <<
-    "\", staff number '" <<
+    "\", fStaffNumber: " <<
     fStaffNumber <<
-    "', (" <<
-    mfSingularOrPlural (
-      fStaffAllVoicesList.size (), "voice", "voices") <<
-    ")" <<
+    ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
+    ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
     endl;
 
   ++gIndenter;
@@ -3547,7 +3534,7 @@ void msrStaff::printSummary (ostream& os) const
 
 void msrStaff::printSlices (ostream& os) const
 {
-  os << "MSR part slices";
+  os << "MSR staff slices";
 
   os << endl << endl;
 

@@ -41,7 +41,7 @@ enum class lpsrScoreOutputKind {
 string lpsrScoreOutputKindAsString (
   lpsrScoreOutputKind scoreOutputKind);
 
-ostream& operator<< (ostream& os, lpsrScoreOutputKind& elt);
+ostream& operator<< (ostream& os, const lpsrScoreOutputKind& elt);
 
 extern map<string, lpsrScoreOutputKind>
   gGlobalLpsrScoreOutputKindsMap;
@@ -77,7 +77,7 @@ enum class lpsrAccidentalStyleKind {
 string lpsrAccidentalStyleKindAsString (
   lpsrAccidentalStyleKind accidentalStyleKind);
 
-ostream& operator<< (ostream& os, lpsrAccidentalStyleKind& elt);
+ostream& operator<< (ostream& os, const lpsrAccidentalStyleKind& elt);
 
 string lpsrAccidentalStyleKindAsLilypondString (
   lpsrAccidentalStyleKind accidentalStyleKind);
@@ -102,7 +102,7 @@ enum class lpsrChordsLanguageKind {
 string lpsrChordsLanguageKindAsString (
   lpsrChordsLanguageKind languageKind);
 
-ostream& operator<< (ostream& os, lpsrChordsLanguageKind& elt);
+ostream& operator<< (ostream& os, const lpsrChordsLanguageKind& elt);
 
 extern map<string, lpsrChordsLanguageKind>
   gGlobalLpsrChordsLanguageKindsMap;
@@ -167,7 +167,7 @@ enum class lpsrDynamicsTextSpannersStyleKind {
 string lpsrDynamicsTextSpannersStyleKindAsString (
   lpsrDynamicsTextSpannersStyleKind dynamicsTextSpannersStyleKind);
 
-ostream& operator<< (ostream& os, lpsrDynamicsTextSpannersStyleKind& elt);
+ostream& operator<< (ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt);
 
 lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
   int           inputLineNumber,
@@ -191,7 +191,7 @@ enum class lpsrLyricsDurationsKind {
 string lpsrLyricsDurationsKindAsString (
   lpsrLyricsDurationsKind lyricsDurationsKind);
 
-ostream& operator<< (ostream& os, lpsrLyricsDurationsKind& elt);
+ostream& operator<< (ostream& os, const lpsrLyricsDurationsKind& elt);
 
 extern map<string, lpsrLyricsDurationsKind>
   gGlobalLpsrLyricsDurationsKindsMap;

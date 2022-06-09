@@ -257,7 +257,6 @@ class EXP msr2lpsrTranslator :
   public visitor<S_msrMeasureRepeatReplicas>,
 
   public visitor<S_msrMultipleFullBarRests>,
-//   public visitor<S_msrMultipleFullBarRestsContents>,
 
   // midi
 
@@ -505,8 +504,6 @@ class EXP msr2lpsrTranslator :
     // multiple full-bar rests
     virtual void          visitStart (S_msrMultipleFullBarRests& elt);
     virtual void          visitEnd   (S_msrMultipleFullBarRests& elt);
-//     virtual void          visitStart (S_msrMultipleFullBarRestsContents& elt);
-//     virtual void          visitEnd   (S_msrMultipleFullBarRestsContents& elt);
 
     // scaling
     virtual void          visitStart (S_msrScaling& elt);
@@ -672,7 +669,7 @@ class EXP msr2lpsrTranslator :
     // multiple full-bar rests compression
 //     S_msrMeasure              fCurrentRestMeasure;
 
-    S_msrMultipleFullBarRests fCurrentMultipleFullBarRests;
+    S_msrMultipleFullBarRests fCurrentMultipleFullBarRestsClone;
     Bool                      fOnGoingMultipleFullBarRests;
 
     // bar checks

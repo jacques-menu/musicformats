@@ -41,16 +41,14 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
   int              inputLineNumber,
-  const rational&  multipleFullBarRestsMeasureSoundingNotes,
   int              multipleFullBarRestsNumber,
-  S_msrVoice       voiceUpLink)
+  S_msrSegment     segmentUpLink)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
       inputLineNumber,
-      multipleFullBarRestsMeasureSoundingNotes,
       multipleFullBarRestsNumber,
-      voiceUpLink);
+      segmentUpLink);
   assert (o != nullptr);
   return o;
 }
@@ -58,28 +56,26 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
   int          inputLineNumber,
   S_msrMeasure restMeasureClone,
-  S_msrVoice   voiceUpLink)
+  S_msrSegment segmentUpLink)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
       inputLineNumber,
       restMeasureClone,
-      voiceUpLink);
+      segmentUpLink);
   assert (o != nullptr);
   return o;
 }
 
 msrMultipleFullBarRests::msrMultipleFullBarRests (
   int             inputLineNumber,
-  const rational& multipleFullBarRestsMeasureSoundingNotes,
   int             multipleFullBarRestsNumber,
-  S_msrVoice      voiceUpLink)
+  S_msrSegment    segmentUpLink)
     : msrSegmentElement (inputLineNumber)
 {
-  fMultipleFullBarRestsVoiceUpLink = voiceUpLink;
+  fMultipleFullBarRestsSegmentUpLink = segmentUpLink;
 
-  fMultipleFullBarRestsMeasureSoundingNotes =
-    multipleFullBarRestsMeasureSoundingNotes;
+  fMultipleFullBarRestsMeasureSoundingNotes = rational (-1, 1);
 
   fMultipleFullBarRestsNumber = multipleFullBarRestsNumber;
 
@@ -89,10 +85,10 @@ msrMultipleFullBarRests::msrMultipleFullBarRests (
 msrMultipleFullBarRests::msrMultipleFullBarRests (
   int          inputLineNumber,
   S_msrMeasure restMeasureClone,
-  S_msrVoice   voiceUpLink)
+  S_msrSegment segmentUpLink)
     : msrSegmentElement (inputLineNumber)
 {
-  fMultipleFullBarRestsVoiceUpLink = voiceUpLink;
+  fMultipleFullBarRestsSegmentUpLink = segmentUpLink;
 
   fMultipleFullBarRestsMeasureSoundingNotes =
     restMeasureClone->
@@ -102,7 +98,7 @@ msrMultipleFullBarRests::msrMultipleFullBarRests (
 
   fMultipleFullBarRestsLastMeasurePuristNumber = -1;
 
-//   // create the multiple full-bar rests contents
+//   // create the multiple full-bar rests contents JMI KAKA
 //   fMultipleFullBarRestsContents =
 //     msrMultipleFullBarRestsContents::create (
 //       inputLineNumber,
@@ -113,7 +109,7 @@ msrMultipleFullBarRests::~msrMultipleFullBarRests ()
 {}
 
 S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNewbornClone (
-  S_msrVoice containingVoice)
+  S_msrSegment containingVoice)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
@@ -135,42 +131,19 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
     newbornClone =
       msrMultipleFullBarRests::create (
         fInputLineNumber,
-        fMultipleFullBarRestsMeasureSoundingNotes,
         fMultipleFullBarRestsNumber,
         containingVoice);
 
-/* JMI
+/* JMI v0.9.63
   newbornClone->fMultipleFullBarRestsNextMeasureNumber =
     fMultipleFullBarRestsNextMeasureNumber;
+
+  newbornClone->fMultipleFullBarRestsMeasureSoundingNotes =
+    fMultipleFullBarRestsMeasureSoundingNotes;
     */
 
   return newbornClone;
 }
-
-// void msrMultipleFullBarRests::setMultipleFullBarRestsContents (
-//   S_msrMultipleFullBarRestsContents multipleFullBarRestsContents)
-// {
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//     gLogStream <<
-//       "Setting multiple full-bar rests contents containing " <<
-//       mfSingularOrPlural (
-//         multipleFullBarRestsContents->
-//           multipleFullBarRestsContentsMeasuresNumber (),
-//         "measure",
-//         "measures") <<
-//       endl;
-//   }
-// #endif
-//
-//   // sanity check
-//   mfAssert (
-//     __FILE__, __LINE__,
-//     multipleFullBarRestsContents != nullptr,
-//     "multipleFullBarRestsContents is null");
-//
-//   fMultipleFullBarRestsContents = multipleFullBarRestsContents;
-// }
 
 void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
   const string& nextMeasureNumber)
@@ -293,6 +266,34 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
 #endif
 
   fFullBarRestsMeasuresList.push_back (measure);
+
+  // it measure the first one in the segment?
+  if (! fMultipleFullBarRestsSegmentUpLink->getSegmentFirstMeasure ()) {
+    fMultipleFullBarRestsSegmentUpLink->
+      setSegmentFirstMeasure (measure);
+  }
+
+  // is measure the first one it the voice?
+  // this is necessary for voice clones,
+  // which don't go down the part-staff-voice-segment hierarchy
+  S_msrVoice
+    voice =
+      fMultipleFullBarRestsSegmentUpLink->
+        getSegmentVoiceUpLink ();
+
+  if (! voice->getVoiceFirstMeasure ()) {
+    // yes, register it as such
+    voice->
+      setVoiceFirstMeasure (measure);
+
+    measure->
+      setMeasureFirstInVoice ();
+  }
+
+  // register measure as the last one in the segment
+  fMultipleFullBarRestsSegmentUpLink->
+    setSegmentLastMeasure (
+      measure);
 }
 
 void msrMultipleFullBarRests::acceptIn (basevisitor* v)
@@ -368,21 +369,42 @@ string msrMultipleFullBarRests::asString () const
   stringstream s;
 
   s <<
-    "MultipleFullBarRests" <<
-    ", multipleFullBarRestsLastMeasurePuristNumber: '" <<
-    fMultipleFullBarRestsLastMeasurePuristNumber <<
-    "'" <<
-    ", multipleFullBarRestsMeasureSoundingNotes: " <<
-    fMultipleFullBarRestsMeasureSoundingNotes <<
-    ", " <<
+    "[MultipleFullBarRests" <<
+    ", for " <<
     mfSingularOrPlural (
       fMultipleFullBarRestsNumber,
-        "rest measure",
-        "multiple full-bar rests") <<
+        "full-bar rest",
+        "full-bar rests");
+
+  s <<
+    ", fMultipleFullBarRestsSegmentUpLink" << " : ";
+
+  if (fMultipleFullBarRestsSegmentUpLink) {
+    s <<
+      "fMultipleFullBarRestsSegmentUpLink->asString ()"; // KAKA
+  }
+  else {
+    s << "none";
+  }
+
+  s <<
+    ", fFullBarRestsMeasuresList.size(): " <<
+    fFullBarRestsMeasuresList.size () <<
+
+    ", fMultipleFullBarRestsLastMeasurePuristNumber: '" <<
+    fMultipleFullBarRestsLastMeasurePuristNumber <<
+    "'" <<
+
     ", multipleFullBarRestsNextMeasureNumber: '" <<
     fMultipleFullBarRestsNextMeasureNumber <<
     "'" <<
-    ", line " << fInputLineNumber;
+
+    ", fMultipleFullBarRestsMeasureSoundingNotes: " <<
+    fMultipleFullBarRestsMeasureSoundingNotes <<
+    ", " <<
+
+    ", line " << fInputLineNumber <<
+    "]";
 
   return s.str ();
 }
@@ -412,7 +434,7 @@ void msrMultipleFullBarRests::displayMultipleFullBarRests (
 void msrMultipleFullBarRests::print (ostream& os) const
 {
   os <<
-    "MultipleFullBarRests" <<
+    "[MultipleFullBarRests" <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -420,46 +442,81 @@ void msrMultipleFullBarRests::print (ostream& os) const
 
   const int fieldWidth = 36;
 
+  os <<
+    "fMultipleFullBarRestsSegmentUpLink" << " : ";
+
+  if (fMultipleFullBarRestsSegmentUpLink) {
+    os <<
+      "\"" <<
+      fMultipleFullBarRestsSegmentUpLink->asString () <<
+      "\"";
+  }
+  else {
+    os << "none";
+  }
+  os << endl;
+
   os << left <<
     setw (fieldWidth) <<
-    "multipleFullBarRestsLastMeasurePuristNumber" << " : " <<
+    "fMultipleFullBarRestsNumber" << " : " <<
+    fMultipleFullBarRestsNumber <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fMultipleFullBarRestsLastMeasurePuristNumber" << " : " <<
     fMultipleFullBarRestsLastMeasurePuristNumber <<
     endl <<
+
+    setw (fieldWidth) <<
+    "fMultipleFullBarRestsNextMeasureNumber" << " : '" <<
+    fMultipleFullBarRestsNextMeasureNumber <<
+    "'" <<
+    endl <<
+
     setw (fieldWidth) <<
     "multipleFullBarRestsMeasureSoundingNotes" << " : " <<
     fMultipleFullBarRestsMeasureSoundingNotes <<
-    endl <<
-    setw (fieldWidth) <<
-    "multipleFullBarRestsNumber" << " : " <<
-    fMultipleFullBarRestsNumber <<
-    endl <<
-    setw (fieldWidth) <<
-    "multipleFullBarRestsNextMeasureNumber" << " : '" <<
-    fMultipleFullBarRestsNextMeasureNumber <<
-    "'" <<
     endl;
 
-  // print the voice upLink
+  // print the segment upLink
   os << left <<
     setw (fieldWidth) <<
-    "multipleFullBarRestsVoiceUpLink" << " : " <<
-    "\"" <<
-    fMultipleFullBarRestsVoiceUpLink->getVoiceName () <<
-    "\"" <<
-    endl;
+    "fMultipleFullBarRestsSegmentUpLink" << " : ";
+  if (fMultipleFullBarRestsSegmentUpLink) {
+    os << endl;
+    ++gIndenter;
 
-  // print the rests contents
-//   if (! fMultipleFullBarRestsContents) {
-//     os << left <<
-//       setw (fieldWidth) <<
-//       "multipleFullBarRestsContents" << " : " << "none" <<
-//       endl;
-//   }
-//
-//   else {
-// //     os <<
-// //       fMultipleFullBarRestsContents;
-//   }
+    os << "fMultipleFullBarRestsSegmentUpLink" << endl; // KAKA
+
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
+  }
+
+  os << endl;
+
+  // print the full-bar rests measures list
+  os << left <<
+    setw (fieldWidth) <<
+    "fFullBarRestsMeasuresList" << " : ";
+
+  if (fFullBarRestsMeasuresList.size ()) {
+    os << endl;
+    ++gIndenter;
+
+    for (S_msrMeasure measure : fFullBarRestsMeasuresList) {
+      // print the measure
+      os << measure;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os << "empty" << endl;
+  }
+
+  os << "]" << endl;
 
   --gIndenter;
 }

@@ -957,7 +957,7 @@ string msrTuplet::asString () const
 
   s <<
     "[Tuplet" <<
-    ", tupletKind: " << tupletKindAsString (fTupletKind) <<
+    ", tupletKind: " << fTupletKind <<
     fTupletFactor.asString () <<
     ' ' << fMeasureElementSoundingWholeNotes << " tupletSoundingWholeNotes" <<
     ", measure ' " <<
@@ -1025,7 +1025,7 @@ void msrTuplet::print (ostream& os) const
 {
   os <<
     "[Tuplet" <<
-    ", tupletKind: " << tupletKindAsString (fTupletKind) <<
+    ", tupletKind: " << fTupletKind <<
     fTupletNumber <<
     ", " <<
     fTupletFactor.asString () <<

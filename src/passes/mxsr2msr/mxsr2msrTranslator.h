@@ -1165,10 +1165,13 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentBeatRepeatSlashes;
 
     // multiple full-bar rests
-    int                       fCurrentMultipleFullBarRestsMeasuresNumber;
-    int                       fRemainingMultipleFullBarRestsMeasuresNumber;
+    int                       fCurrentMultipleFullBarRestsNumber;
+    int                       fRemainingExpectedMultipleFullBarRests;
+
     Bool                      fCurrentMultipleFullBarRestsHasBeenCreated;
+
     Bool                      fMultipleFullBarRestsUseSymbols;
+
     Bool                      fOnGoingMultipleFullBarRests;
 
     void                      handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (

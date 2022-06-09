@@ -290,9 +290,9 @@ class EXP msrStaff : public msrElement
     void                  appendPendingMeasureRepeatToStaff (
                             int inputLineNumber);
 
-    void                  createMultipleFullBarRestsInStaff ( // JMI UNUSED
+    void                  appendMultipleFullBarRestsToStaff ( // JMI UNUSED
                             int inputLineNumber,
-                            int multipleFullBarRestsNumber);
+                            int multipleFullBarRestsMeasuresNumber);
 
     void                  appendPendingMultipleFullBarRestsToStaff (
                             int inputLineNumber);
@@ -304,10 +304,10 @@ class EXP msrStaff : public msrElement
     void                  addEmptyMeasuresToStaff (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
-                            int           multipleFullBarRestsNumber);
+                            int           emptyMeasuresNumber);
 
     void                  appendMultipleFullBarRestsCloneToStaff (
-                            int               inputLineNumber,
+                            int                       inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRests);
 
     void                  createBeatRepeatFromItsFirstMeasuresInStaff (

@@ -715,6 +715,12 @@ string lpsrScoreOutputKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const lpsrScoreOutputKind& elt)
+{
+  os << lpsrScoreOutputKindAsString (elt);
+  return os;
+}
+
 void initializeLpsrScoreOutputKindsMap ()
 {
   // register the LilyPond score output kinds
@@ -722,13 +728,20 @@ void initializeLpsrScoreOutputKindsMap ()
 
   // no CamelCase here, these strings are used in the command line options
 
-  gGlobalLpsrScoreOutputKindsMap ["score-only"] = lpsrScoreOutputKind::kScoreOutputScoreOnly;
-  gGlobalLpsrScoreOutputKindsMap ["score-and-parts"] = lpsrScoreOutputKind::kScoreOutputScoreAndParts;
-  gGlobalLpsrScoreOutputKindsMap ["parts-and-score"] = lpsrScoreOutputKind::kScoreOutputPartsAndScore;
-  gGlobalLpsrScoreOutputKindsMap ["parts-only"] = lpsrScoreOutputKind::kScoreOutputPartsOnly;
-  gGlobalLpsrScoreOutputKindsMap ["score-and-parts-one-file"] = lpsrScoreOutputKind::kScoreOutputScoreAndPartsOneFile;
-  gGlobalLpsrScoreOutputKindsMap ["parts-and-score-one-file"] = lpsrScoreOutputKind::kScoreOutputPartsAndScoreOneFile;
-  gGlobalLpsrScoreOutputKindsMap ["parts-only-one-file"] = lpsrScoreOutputKind::kScoreOutputPartsOnlyOneFile;
+  gGlobalLpsrScoreOutputKindsMap ["score-only"] =
+    lpsrScoreOutputKind::kScoreOutputScoreOnly;
+  gGlobalLpsrScoreOutputKindsMap ["score-and-parts"] =
+    lpsrScoreOutputKind::kScoreOutputScoreAndParts;
+  gGlobalLpsrScoreOutputKindsMap ["parts-and-score"] =
+    lpsrScoreOutputKind::kScoreOutputPartsAndScore;
+  gGlobalLpsrScoreOutputKindsMap ["parts-only"] =
+    lpsrScoreOutputKind::kScoreOutputPartsOnly;
+  gGlobalLpsrScoreOutputKindsMap ["score-and-parts-one-file"] =
+    lpsrScoreOutputKind::kScoreOutputScoreAndPartsOneFile;
+  gGlobalLpsrScoreOutputKindsMap ["parts-and-score-one-file"] =
+    lpsrScoreOutputKind::kScoreOutputPartsAndScoreOneFile;
+  gGlobalLpsrScoreOutputKindsMap ["parts-only-one-file"] =
+    lpsrScoreOutputKind::kScoreOutputPartsOnlyOneFile;
 }
 
 string existingLpsrScoreOutputKinds (size_t namesListMaxLength)
@@ -848,6 +861,12 @@ string lpsrAccidentalStyleKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const lpsrAccidentalStyleKind& elt)
+{
+  os << lpsrAccidentalStyleKindAsString (elt);
+  return os;
+}
+
 string lpsrAccidentalStyleKindAsLilypondString (
   lpsrAccidentalStyleKind accidentalStyleKind)
 {
@@ -918,24 +937,42 @@ void initializeLpsrAccidentalStyleKindsMap ()
   // register the LilyPond accidental styles
   // --------------------------------------
 
-  gGlobalLpsrAccidentalStyleKindsMap ["default"] = lpsrAccidentalStyleKind::kAccidentalStyleDefault;
-  gGlobalLpsrAccidentalStyleKindsMap ["voice"] = lpsrAccidentalStyleKind::kVoice;
-  gGlobalLpsrAccidentalStyleKindsMap ["modern"] = lpsrAccidentalStyleKind::kAccidentalStyleModern;
-  gGlobalLpsrAccidentalStyleKindsMap ["modern-cautionary"] = lpsrAccidentalStyleKind::kAccidentalStyleModernCautionary;
-  gGlobalLpsrAccidentalStyleKindsMap ["modern-voice"] = lpsrAccidentalStyleKind::kAccidentalStyleModernVoice;
-  gGlobalLpsrAccidentalStyleKindsMap ["modern-voice-cautionary"] = lpsrAccidentalStyleKind::kAccidentalStyleModernVoiceCautionary;
-  gGlobalLpsrAccidentalStyleKindsMap ["piano"] = lpsrAccidentalStyleKind::kAccidentalStylePiano;
-  gGlobalLpsrAccidentalStyleKindsMap ["piano-cautionary"] = lpsrAccidentalStyleKind::kAccidentalStylePianoCautionary;
-  gGlobalLpsrAccidentalStyleKindsMap ["neo-modern"] = lpsrAccidentalStyleKind::kAccidentalStyleNeoModern;
-  gGlobalLpsrAccidentalStyleKindsMap ["neo-modern-cautionary"] = lpsrAccidentalStyleKind::kAccidentalStyleNeoModernCautionary;
-  gGlobalLpsrAccidentalStyleKindsMap ["neo-modern-voice"] = lpsrAccidentalStyleKind::kAccidentalStyleNeoModernVoice;
-  gGlobalLpsrAccidentalStyleKindsMap ["neo-modern-voice-cautionary"] = lpsrAccidentalStyleKind::kAccidentalStyleNeoModernVoiceCautionary;
-  gGlobalLpsrAccidentalStyleKindsMap ["dodecaphonic"] = lpsrAccidentalStyleKind::kAccidentalStyleDodecaphonic;
-  gGlobalLpsrAccidentalStyleKindsMap ["dodecaphonic-no-repeat"] = lpsrAccidentalStyleKind::kAccidentalStyleDodecaphonicNoRepeat;
-  gGlobalLpsrAccidentalStyleKindsMap ["dodecaphonic-first"] = lpsrAccidentalStyleKind::kAccidentalStyleDodecaphonicFirst;
-  gGlobalLpsrAccidentalStyleKindsMap ["teaching"] = lpsrAccidentalStyleKind::kAccidentalStyleTeaching;
-  gGlobalLpsrAccidentalStyleKindsMap ["no-reset"] = lpsrAccidentalStyleKind::kAccidentalStyleNoReset;
-  gGlobalLpsrAccidentalStyleKindsMap ["forget"] = lpsrAccidentalStyleKind::kAccidentalStyleForget;
+  gGlobalLpsrAccidentalStyleKindsMap ["default"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleDefault;
+  gGlobalLpsrAccidentalStyleKindsMap ["voice"] =
+    lpsrAccidentalStyleKind::kVoice;
+  gGlobalLpsrAccidentalStyleKindsMap ["modern"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleModern;
+  gGlobalLpsrAccidentalStyleKindsMap ["modern-cautionary"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleModernCautionary;
+  gGlobalLpsrAccidentalStyleKindsMap ["modern-voice"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleModernVoice;
+  gGlobalLpsrAccidentalStyleKindsMap ["modern-voice-cautionary"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleModernVoiceCautionary;
+  gGlobalLpsrAccidentalStyleKindsMap ["piano"] =
+    lpsrAccidentalStyleKind::kAccidentalStylePiano;
+  gGlobalLpsrAccidentalStyleKindsMap ["piano-cautionary"] =
+    lpsrAccidentalStyleKind::kAccidentalStylePianoCautionary;
+  gGlobalLpsrAccidentalStyleKindsMap ["neo-modern"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleNeoModern;
+  gGlobalLpsrAccidentalStyleKindsMap ["neo-modern-cautionary"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleNeoModernCautionary;
+  gGlobalLpsrAccidentalStyleKindsMap ["neo-modern-voice"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleNeoModernVoice;
+  gGlobalLpsrAccidentalStyleKindsMap ["neo-modern-voice-cautionary"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleNeoModernVoiceCautionary;
+  gGlobalLpsrAccidentalStyleKindsMap ["dodecaphonic"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleDodecaphonic;
+  gGlobalLpsrAccidentalStyleKindsMap ["dodecaphonic-no-repeat"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleDodecaphonicNoRepeat;
+  gGlobalLpsrAccidentalStyleKindsMap ["dodecaphonic-first"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleDodecaphonicFirst;
+  gGlobalLpsrAccidentalStyleKindsMap ["teaching"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleTeaching;
+  gGlobalLpsrAccidentalStyleKindsMap ["no-reset"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleNoReset;
+  gGlobalLpsrAccidentalStyleKindsMap ["forget"] =
+    lpsrAccidentalStyleKind::kAccidentalStyleForget;
 }
 
 string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength)
@@ -992,11 +1029,16 @@ map<string, lpsrChordsLanguageKind>
 
 void initializeLpsrChordsLanguageKindsMap ()
 {
-  gGlobalLpsrChordsLanguageKindsMap ["ignatzek"]   = lpsrChordsLanguageKind::kChordsIgnatzek; // default
-  gGlobalLpsrChordsLanguageKindsMap ["german"]     = lpsrChordsLanguageKind::kChordsGerman;
-  gGlobalLpsrChordsLanguageKindsMap ["semiGerman"] = lpsrChordsLanguageKind::kChordsSemiGerman;
-  gGlobalLpsrChordsLanguageKindsMap ["italian"]    = lpsrChordsLanguageKind::kChordsItalian;
-  gGlobalLpsrChordsLanguageKindsMap ["french"]     = lpsrChordsLanguageKind::kChordsFrench;
+  gGlobalLpsrChordsLanguageKindsMap ["ignatzek"] =
+    lpsrChordsLanguageKind::kChordsIgnatzek; // default
+  gGlobalLpsrChordsLanguageKindsMap ["german"] =
+    lpsrChordsLanguageKind::kChordsGerman;
+  gGlobalLpsrChordsLanguageKindsMap ["semiGerman"] =
+    lpsrChordsLanguageKind::kChordsSemiGerman;
+  gGlobalLpsrChordsLanguageKindsMap ["italian"] =
+    lpsrChordsLanguageKind::kChordsItalian;
+  gGlobalLpsrChordsLanguageKindsMap ["french"] =
+    lpsrChordsLanguageKind::kChordsFrench;
 }
 
 string lpsrChordsLanguageKindAsString (
@@ -1023,6 +1065,12 @@ string lpsrChordsLanguageKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const lpsrChordsLanguageKind& elt)
+{
+  os << lpsrChordsLanguageKindAsString (elt);
+  return os;
 }
 
 string existingLpsrChordsLanguageKinds (size_t namesListMaxLength)
@@ -1236,6 +1284,12 @@ string lpsrDynamicsTextSpannersStyleKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt)
+{
+  os << lpsrDynamicsTextSpannersStyleKindAsString (elt);
+  return os;
+}
+
 lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
   int           inputLineNumber,
   const string& dynamicsTextSpannersStyleKindString)
@@ -1364,6 +1418,12 @@ string lpsrLyricsDurationsKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const lpsrLyricsDurationsKind& elt)
+{
+  os << lpsrLyricsDurationsKindAsString (elt);
+  return os;
+}
+
 void initializeLpsrLyricsDurationsKindsMap ()
 {
   // register the LilyPond score output kinds
@@ -1371,8 +1431,10 @@ void initializeLpsrLyricsDurationsKindsMap ()
 
   // no CamelCase here, these strings are used in the command line options
 
-  gGlobalLpsrLyricsDurationsKindsMap ["implicit"] = lpsrLyricsDurationsKind::kLyricsDurationsImplicit;
-  gGlobalLpsrLyricsDurationsKindsMap ["explicit"] = lpsrLyricsDurationsKind::kLyricsDurationsExplicit;
+  gGlobalLpsrLyricsDurationsKindsMap ["implicit"] =
+    lpsrLyricsDurationsKind::kLyricsDurationsImplicit;
+  gGlobalLpsrLyricsDurationsKindsMap ["explicit"] =
+    lpsrLyricsDurationsKind::kLyricsDurationsExplicit;
 }
 
 string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength)

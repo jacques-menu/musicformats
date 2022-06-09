@@ -501,7 +501,7 @@ void checkSXMLFile (
   string encoding = xmlDecl->getEncoding ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+  if (gGlobalMxsrOahGroup->getTraceEncoding ()) {
     gLogStream <<
       "% MusicXML data uses " <<
       encoding <<
@@ -547,6 +547,15 @@ SXMLFile createSXMLFileFromFile (
 #endif
 
   // read the input MusicXML data from the file
+#ifdef TRACE_OAH
+      if (gtracingOah->fTracePasses) {
+        gLogStream <<
+          endl <<
+          "Reading MusicXML data from file \"" << outputFileName << "\"" <<
+          endl;
+      }
+#endif
+
 	xmlreader r;
 
   sxmlfile = r.read (fileName);
@@ -605,6 +614,15 @@ SXMLFile createSXMLFileFromFd (
 #endif
 
   // read the input MusicXML data from the file descriptor
+#ifdef TRACE_OAH
+      if (gtracingOah->fTracePasses) {
+        gLogStream <<
+          endl <<
+          "Reading MusicXML data from file descriptor \"" << fd << "\"" <<
+          endl;
+      }
+#endif
+
 	xmlreader r;
 
 	sxmlfile = r.read (fd);
@@ -647,6 +665,15 @@ SXMLFile createSXMLFileFromString (
 	xmlreader r;
 
   if (buffer [0] != '\0') { // superflous ??? JMI
+#ifdef TRACE_OAH
+    if (gtracingOah->fTracePasses) {
+      gLogStream <<
+        endl <<
+        "Reading MusicXML data from a string " << buffer.size () << " characters long" <<
+        endl;
+    }
+#endif
+
   	xmlreader r;
 
 	  sxmlfile = r.readbuff (buffer);

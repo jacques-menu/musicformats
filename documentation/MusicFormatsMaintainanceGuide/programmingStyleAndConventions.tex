@@ -901,6 +901,54 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
     // ... ... ...
 \end{lstlisting}
 
+The \mf\ \enumType s come with a \code{$<$$<$} operator to display their values in a user friendly way, such as \type{msrChordInKind} in \msrBoth{msrBasicTypes}:
+\begin{lstlisting}[language=CPlusPlus]
+enum class msrChordInKind {
+  k_NoChordIn,
+
+  kChordInMeasure,
+  kChordInTuplet,
+  kChordInGraceNotesGroup
+};
+
+EXP string msrChordInKindAsString (
+  msrChordInKind chordInKind);
+
+ostream& operator<< (ostream& os, const msrChordInKind& elt);
+\end{lstlisting}
+
+The implementation is:
+\begin{lstlisting}[language=CPlusPlus]
+string msrChordInKindAsString (
+  msrChordInKind chordInKind)
+{
+  string result;
+
+  switch (chordInKind) {
+    case msrChordInKind::k_NoChordIn:
+      result = "***k_NoChordIn***";
+      break;
+    case msrChordInKind::kChordInMeasure:
+      result = "kChordInMeasure";
+      break;
+    case msrChordInKind::kChordInTuplet:
+      result = "kChordInTuplet";
+      break;
+    case msrChordInKind::kChordInGraceNotesGroup:
+      result = "kChordInGraceNotesGroup";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const msrChordInKind& elt)
+{
+  os << msrChordInKindAsString (elt);
+  return os;
+}
+\end{lstlisting}
+
 
 % -------------------------------------------------------------------------
 \section{yes/no enumerations types}

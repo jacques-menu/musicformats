@@ -1114,7 +1114,7 @@ string msrMeasureRepeat::asString () const
 
   s <<
 
-    "MeasureRepeat" <<
+    "'MeasureRepeat" <<
     ", line " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
@@ -1128,7 +1128,8 @@ string msrMeasureRepeat::asString () const
       "replicas measures") <<
     ", " <<
     fetchMeasureRepeatReplicasNumber () << " replicas" <<
-    ")";
+    ")" <<
+    "]";
 
   return s.str ();
 }

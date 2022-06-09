@@ -1,0 +1,39 @@
+#!/Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
+
+
+# ----------------------------------------------------------
+# the MusicFormats tool to be used
+# ----------------------------------------------------------
+
+tool : xml2ly ;
+
+
+# ----------------------------------------------------------
+# the input file to be processed by the tool
+# ----------------------------------------------------------
+
+input : "basic/MaxBarockAmbitus.xml" ;
+
+
+# ----------------------------------------------------------
+# the options to the tool
+# ----------------------------------------------------------
+
+-auto-output-file-name
+
+-trace-passes
+
+# -absolute
+# -relative "c'"
+-fixed "c'"
+
+# -display-msr-1-summary
+# -display-msr-1-short
+
+# -display-msr-2-short
+
+-display-lpsr-short
+
+# -quit-after-pass-3
+
+# -cpu

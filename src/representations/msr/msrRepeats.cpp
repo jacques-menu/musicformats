@@ -174,10 +174,10 @@ void msrRepeatCommonPart::appendMultipleFullBarRestsToRepeatCommonPart (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
     gLogStream <<
-      "Appending multiple full-bar rests '" <<
+      "Appending multiple full-bar rests " <<
       multipleFullBarRests->asString () <<
-      "' to repeat common part '" << asString () <<
-      "' (" << context << ")" <<
+      " to repeat common part " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -620,10 +620,10 @@ void msrRepeatEnding::appendMultipleFullBarRestsToRepeatEnding (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceVoices ()) {
     gLogStream <<
-      "Appending multiple full-bar rests '" <<
+      "Appending multiple full-bar rests " <<
       multipleFullBarRests->asShortString () <<
-      "' to repeat ending '" << asString () <<
-      "' (" << context << ")" <<
+      " to repeat ending " << asString () <<
+      " (" << context << ")" <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -1434,11 +1434,10 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
-      "Appending multiple full-bar rests '" <<
+      "Appending multiple full-bar rests " <<
       multipleFullBarRests->asString () <<
-      "' to repeat '" <<
+      " to repeat " <<
       asShortString () <<
-      "'" <<
       endl;
 
     displayRepeat (

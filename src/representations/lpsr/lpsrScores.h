@@ -187,6 +187,15 @@ class EXP lpsrScore : public lpsrElement
                                   fSchleiferSchemeFunctionIsNeeded;
                               }
 
+    // scoops
+    void                  setScoopSchemeFunctionIsNeeded ();
+
+    Bool                  getScoopSchemeFunctionIsNeeded () const
+                              {
+                                return
+                                  fScoopSchemeFunctionIsNeeded;
+                              }
+
     // other dynamic
 
     void                  setOtherDynamicSchemeFunctionIsNeeded ();
@@ -285,6 +294,15 @@ class EXP lpsrScore : public lpsrElement
                                   fMergeMultipleFullBarRestsIsNeeded;
                               }
 
+    // bar number every N and at the beginning of lines
+    void                  setBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded ();
+
+    Bool                  getBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded () const
+                              {
+                                return
+                                  fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded;
+                              }
+
   public:
 
     // public services
@@ -343,6 +361,8 @@ class EXP lpsrScore : public lpsrElement
 
     void                  addSchleiferSchemeFunctionToScore ();
 
+    void                  addScoopSchemeFunctionToScore ();
+
     // markups
 
     void                  addDampMarkupToScore ();
@@ -379,6 +399,9 @@ class EXP lpsrScore : public lpsrElement
     // multiple full-bar rests
 
     void                  addMergeMultipleFullBarRestsToScore ();
+
+    // bar number every N and at the beginning of lines
+    void                  addBarNumberEveryNAndAtTheBeginningOfLinesToScore ();
 
   public:
 
@@ -462,7 +485,11 @@ class EXP lpsrScore : public lpsrElement
 
     Bool                  fAutoVoicesSchemeFunctionIsNeeded;
 
+    // schleifer
     Bool                  fSchleiferSchemeFunctionIsNeeded;
+
+    // scoops
+    Bool                  fScoopSchemeFunctionIsNeeded;
 
     // markups
     Bool                  fDampMarkupIsNeeded;
@@ -491,6 +518,9 @@ class EXP lpsrScore : public lpsrElement
 
     // multiple full-bar rests
     Bool                  fMergeMultipleFullBarRestsIsNeeded;
+
+    // bar number every N and at the beginning of lines
+    Bool                  fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded;
 
   private:
 

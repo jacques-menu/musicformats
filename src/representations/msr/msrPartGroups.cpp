@@ -687,11 +687,10 @@ void msrPartGroup::printPartGroupElementsList (
   ostream& os) const
 {
   os <<
-    "fPartGroupElementsList:";
+    "fPartGroupElementsList";
 
   if (fPartGroupElementsList.size ()) {
     os << endl;
-    ++gIndenter;
 
     list<S_msrPartGroupElement>::const_iterator
       iBegin = fPartGroupElementsList.begin (),
@@ -755,8 +754,6 @@ void msrPartGroup::printPartGroupElementsList (
       if (++i == iEnd) break;
    // JMI   os << endl;
     } // for
-
-    --gIndenter;
   }
 
   else {
@@ -769,11 +766,10 @@ void msrPartGroup::printPartGroupElementsListShort (
   ostream& os) const
 {
   os <<
-    "fPartGroupElementsList:";
+    "fPartGroupElementsList";
 
   if (fPartGroupElementsList.size ()) {
     os << endl;
-    ++gIndenter;
 
     list<S_msrPartGroupElement>::const_iterator
       iBegin = fPartGroupElementsList.begin (),
@@ -835,8 +831,6 @@ void msrPartGroup::printPartGroupElementsListShort (
       if (++i == iEnd) break;
    // JMI   os << endl;
     } // for
-
-    --gIndenter;
   }
 
   else {
@@ -1276,6 +1270,8 @@ void msrPartGroup::print (ostream& os) const
   else {
     os << "none" << endl;
   }
+
+  os << endl;
 
   // print the part group elements if any
 

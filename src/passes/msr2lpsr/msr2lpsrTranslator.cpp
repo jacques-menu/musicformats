@@ -2604,25 +2604,32 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
         fCurrentSegmentClone);
 
   if (fOnGoingMultipleFullBarRests) {
-    fCurrentMultipleFullBarRests->
+    // append current measure clone to the current multiple full-bar rests clone
+    fCurrentMultipleFullBarRestsClone->
       appendMeasureToMultipleFullBarRests (
         fCurrentMeasureClone);
   }
   else {
+    // append current measure clone to the current voice clone
+    fCurrentVoiceClone->
+      appendMeasureCloneToVoiceClone (
+        inputLineNumber,
+        fCurrentMeasureClone);
+  }
 
-//   // is this a full measures rest? // JMI
+//   // is this a full-bar rest? // JMI
 //   if (elt->getMeasureIsAFullBarRest ()) {
 //     // yes
 //
-//     // should we compress full measures rests?
-//     if (gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()) {
+//     // should we compress full-bar rests?
+//     if (gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()) {
 //       // yes
 //
 //       if (! fCurrentRestMeasure) {
 //         // this is the first multiple full-bar rest in the sequence
 //
 //         // create a multiple full-bar rests  containing fCurrentMeasureClone
-//         fCurrentMultipleFullBarRests =
+//         fCurrentMultipleFullBarRestsClone =
 //           msrMultipleFullBarRests::create (
 //             inputLineNumber,
 //             fCurrentMeasureClone,
@@ -2632,12 +2639,12 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
 //         fCurrentVoiceClone->
 //           appendMultipleFullBarRestsToVoice (
 //             inputLineNumber,
-//             fCurrentMultipleFullBarRests);
+//             fCurrentMultipleFullBarRestsClone);
 //       }
 //
 //       else {
 //         // this is a subsequent multiple full-bar rest, merely append it
-//         fCurrentMultipleFullBarRests->
+//         fCurrentMultipleFullBarRestsClone->
 //           appendMeasureCloneToMultipleFullBarRests (
 //             fCurrentMeasureClone);
 //       }
@@ -2657,14 +2664,14 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
 //   }
 //
 //   else {
-    // no, this is a regular measure
-
-    // append current measure clone to the current voice clone
-    fCurrentVoiceClone->
-      appendMeasureCloneToVoiceClone (
-        inputLineNumber,
-        fCurrentMeasureClone);
-  }
+//     // no, this is a regular measure
+//
+//     // append current measure clone to the current voice clone
+//     fCurrentVoiceClone->
+//       appendMeasureCloneToVoiceClone (
+//         inputLineNumber,
+//         fCurrentMeasureClone);
+//   }
 
   // JMI superflous???
   fCurrentPartClone->
@@ -2782,52 +2789,52 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       break;
   } // switch
 
-  // is this a full measures rest?
-  if (elt->getMeasureIsAFullBarRest ()) {
-    // yes JMI
-  }
-
-  else {
-    // no
-
-    // should we compress full measures rests? // JMI v0.9.63
-    if (gGlobalLpsr2lilypondOahGroup->getCompressEmptyMeasuresInLilypond ()) {
-      // yes
-
-      if (fCurrentMultipleFullBarRests) {
-        // append the current multiple full-bar rests to the current voice clone
-        fCurrentVoiceClone->
-          appendMultipleFullBarRestsToVoice (
-            inputLineNumber,
-            fCurrentMultipleFullBarRests);
-
-        // forget about the current rest measure
-//         fCurrentRestMeasure = nullptr;
-
-        // forget about the current multiple full-bar rests
-        fCurrentMultipleFullBarRests = nullptr;
-      }
-
-      else {
-        stringstream s;
-
-        s <<
-          "fCurrentMultipleFullBarRests is null upon multiple full-bar rest end" <<
-          measureNumber <<
-          "', measurePuristNumber = '" <<
-          measurePuristNumber <<
-          "', line " << inputLineNumber;
-
-/* JMI ???
-        msr2lpsrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          s.str ());
-          */
-      }
-    }
-  }
+//   // is this a full-bar rest?
+//   if (elt->getMeasureIsAFullBarRest ()) {
+//     // yes JMI
+//   }
+//
+//   else {//
+//     // no
+//
+//     // should we compress full-bar rests? // JMI v0.9.63
+//     if (gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()) {
+//       // yes
+//
+//       if (fCurrentMultipleFullBarRestsClone) {
+//         // append the current multiple full-bar rests to the current voice clone
+//         fCurrentVoiceClone->
+//           appendMultipleFullBarRestsToVoice (
+//             inputLineNumber,
+//             fCurrentMultipleFullBarRestsClone);
+//
+//         // forget about the current rest measure
+// //         fCurrentRestMeasure = nullptr;
+//
+//         // forget about the current multiple full-bar rests
+//         fCurrentMultipleFullBarRestsClone = nullptr;
+//       }
+//
+//       else {
+//         stringstream s;
+//
+//         s <<
+//           "fCurrentMultipleFullBarRestsClone is null upon multiple full-bar rest end" <<
+//           measureNumber <<
+//           "', measurePuristNumber = '" <<
+//           measurePuristNumber <<
+//           "', line " << inputLineNumber;
+//
+// /* JMI ???
+//         msr2lpsrInternalError (
+//           gGlobalServiceRunData->getInputSourceName (),
+//           inputLineNumber,
+//           __FILE__, __LINE__,
+//           s.str ());
+//           */
+//       }
+//     }
+//   }
 
   if (doCreateABarCheck) {
     // create a bar check
@@ -3315,6 +3322,17 @@ void msr2lpsrTranslator::visitStart (S_msrArticulation& elt)
       __FILE__, __LINE__,
       s.str ());
   }
+
+  switch (elt->getArticulationKind ()) {
+    case msrArticulation::kScoop:
+      // this score needs the 'scoop' stencils
+      fResultingLpsr->
+        setScoopSchemeFunctionIsNeeded ();
+      break;
+
+    default:
+      ;
+  } // switch
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrArticulation& elt)
@@ -3731,10 +3749,11 @@ void msr2lpsrTranslator::visitStart (S_msrOrnament& elt)
 
   switch (elt->getOrnamentKind ()) {
     case msrOrnament::kOrnamentSchleifer:
+      // this score needs the 'schleifer' Scheme function
       fResultingLpsr->
-        // this score needs the 'schleifer' Scheme function
         setSchleiferSchemeFunctionIsNeeded ();
       break;
+
     default:
       ;
   } // switch
@@ -6615,10 +6634,17 @@ void msr2lpsrTranslator::visitStart (S_msrMultipleFullBarRests& elt)
   }
 #endif
 
+  // create a multiple full-bar rests clone
+  fCurrentMultipleFullBarRestsClone =
+    elt->
+      createMultipleFullBarRestsNewbornClone (
+        fCurrentSegmentClone);
+
+  // append it to the current voice clone
   fCurrentVoiceClone->
-    handleMultipleFullBarRestsStartInVoiceClone (
+    appendMultipleFullBarRestsToVoice (
       inputLineNumber,
-      elt);
+      fCurrentMultipleFullBarRestsClone);
 
   fOnGoingMultipleFullBarRests = true;
 }
@@ -6649,9 +6675,8 @@ void msr2lpsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   }
 #endif
 
-  fCurrentVoiceClone->
-    handleMultipleFullBarRestsEndInVoiceClone (
-      inputLineNumber);
+  // forget about the current multiple full-bar rests
+  fCurrentMultipleFullBarRestsClone = nullptr;
 
   fResultingLpsr->
     // this score needs the 'merge multiple full-bar rests' Scheme function
@@ -6659,67 +6684,6 @@ void msr2lpsrTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 
   fOnGoingMultipleFullBarRests = false;
 }
-
-// //________________________________________________________________________
-// void msr2lpsrTranslator::visitStart (S_msrMultipleFullBarRestsContents& elt)
-// {
-//   int inputLineNumber =
-//     elt->getInputLineNumber ();
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-//     gLogStream <<
-//       "--> Start visiting msrMultipleFullBarRestsContents" <<
-//       ", line " << inputLineNumber <<
-//       endl;
-//   }
-// #endif
-//
-//   ++gIndenter;
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-//     fCurrentVoiceClone->
-//       displayVoice (
-//         inputLineNumber,
-//         "Upon visitStart (S_msrMultipleFullBarRestsContents&)");
-//   }
-// #endif
-//
-//   fCurrentVoiceClone->
-//     handleMultipleFullBarRestsContentsStartInVoiceClone (
-//       inputLineNumber);
-// }
-//
-// void msr2lpsrTranslator::visitEnd (S_msrMultipleFullBarRestsContents& elt)
-// {
-//   int inputLineNumber =
-//     elt->getInputLineNumber ();
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-//     gLogStream <<
-//       "--> End visiting msrMultipleFullBarRestsContents" <<
-//       ", line " << inputLineNumber <<
-//       endl;
-//   }
-// #endif
-//
-//   --gIndenter;
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-//     fCurrentVoiceClone->
-//       displayVoice (
-//         inputLineNumber,
-//         "Upon visitEnd (S_msrMultipleFullBarRestsContents&) 1");
-//   }
-// #endif
-//
-//   fCurrentVoiceClone->
-//     handleMultipleFullBarRestsContentsEndInVoiceClone (
-//       inputLineNumber);
-// }
 
 //________________________________________________________________________
 void msr2lpsrTranslator::visitStart (S_msrMeasureRepeat& elt)

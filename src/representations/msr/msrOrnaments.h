@@ -25,7 +25,8 @@ class EXP msrOrnament : public msrElement
       kOrnamentTurn, kOrnamentInvertedTurn, kOrnamentDelayedTurn,
       kOrnamentDelayedInvertedTurn, kOrnamentVerticalTurn,
       kOrnamentMordent, kOrnamentInvertedMordent,
-      kOrnamentSchleifer, kOrnamentShake,
+      kOrnamentSchleifer,
+      kOrnamentShake,
       kOrnamentAccidentalKind
     };
 

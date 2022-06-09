@@ -1116,7 +1116,7 @@ string msrBeatRepeat::asString () const
 
   s <<
 
-    "BeatRepeat" <<
+    "[BeatRepeat" <<
     ", line " << fInputLineNumber <<
     " (" <<
     mfSingularOrPlural (
@@ -1130,7 +1130,8 @@ string msrBeatRepeat::asString () const
       "replicas measures") <<
     ", " <<
     fetchBeatRepeatReplicasNumber () << " replicas" <<
-    ")";
+    ")" <<
+    "]";
 
   return s.str ();
 }

@@ -386,7 +386,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // multiple full-bar rests
 
-    void                  createMultipleFullBarRestsInPart (
+    void                  appendMultipleFullBarRestsToPart (
                             int inputLineNumber,
                             int multipleFullBarRestsNumber);
 

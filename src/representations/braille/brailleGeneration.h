@@ -28,7 +28,7 @@ enum class bsrUTFKind {
 string bsrUTFKindAsString (
   bsrUTFKind UTFKind);
 
-ostream& operator<< (ostream& os, msrSlashUseStemsKind& elt);
+ostream& operator<< (ostream& os, const bsrUTFKind& elt);
 
 enum class bsrByteOrderingKind {
   kByteOrderingNone,
@@ -38,7 +38,7 @@ enum class bsrByteOrderingKind {
 string bsrByteOrderingKindAsString (
   bsrByteOrderingKind byteOrderingKind);
 
-ostream& operator<< (ostream& os, bsrByteOrderingKind& elt);
+ostream& operator<< (ostream& os, const bsrByteOrderingKind& elt);
 
 //______________________________________________________________________________
 // Bytes Encoding Marks (BOM)

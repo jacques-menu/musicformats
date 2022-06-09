@@ -364,7 +364,6 @@ class EXP lpsr2lilypondTranslator :
   public visitor<S_msrMeasureRepeatReplicas>,
 
   public visitor<S_msrMultipleFullBarRests>,
-//   public visitor<S_msrMultipleFullBarRestsContents>,
 
   // rehearsal mark
 
@@ -726,8 +725,6 @@ class EXP lpsr2lilypondTranslator :
     // multiple full-bar rests
     virtual void          visitStart (S_msrMultipleFullBarRests& elt);
     virtual void          visitEnd   (S_msrMultipleFullBarRests& elt);
-//     virtual void          visitStart (S_msrMultipleFullBarRestsContents& elt);
-//     virtual void          visitEnd   (S_msrMultipleFullBarRestsContents& elt);
 
     // rehearsal marks
     virtual void          visitStart (S_msrRehearsalMark& elt);

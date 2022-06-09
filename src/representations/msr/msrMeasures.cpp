@@ -970,7 +970,10 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       fCurrentMeasureWholeNotesDuration <<
       ", line " << inputLineNumber <<
       endl;
+  }
 
+  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+    // JMI ??? v0.9.63
     typedef list<S_msrMeasureElement>::iterator iter_type;
 
     gLogStream <<
@@ -987,9 +990,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     } // for
     gLogStream << endl;
     --gIndenter;
-  }
 
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
       "appendPaddingNoteAtTheEndOfMeasure() 1");
@@ -998,11 +999,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
 
   if (! fMeasureElementsList.size ()) {
 #ifdef TRACING_IS_ENABLED
-    if (
-      gGlobalTracingOahGroup->getTraceMeasures ()
-        ||
-      gGlobalTracingOahGroup->getTraceBarLines ()
-    ) {
+    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "fMeasureElementsList is empty " <<
         ", inserting elem at the end" <<
@@ -1026,11 +1023,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
         fMeasureElementsList.back ();
 
 #ifdef TRACING_IS_ENABLED
-    if (
-      gGlobalTracingOahGroup->getTraceMeasures ()
-        ||
-      gGlobalTracingOahGroup->getTraceBarLines ()
-    ) {
+    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
       gLogStream <<
         "fMeasureElementsList is NOT empty " <<
         ", lastMeasureElement: " <<
@@ -1117,11 +1110,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
   }
 
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
-      ||
-    gGlobalTracingOahGroup->getTraceBarLines ()
-  ) {
+  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     typedef list<S_msrMeasureElement>::iterator iter_type;
 
     gLogStream <<
@@ -1138,9 +1127,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     } // for
     gLogStream << endl;
     --gIndenter;
-  }
 
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     displayMeasure (
       inputLineNumber,
       "appendPaddingNoteAtTheEndOfMeasure() 2");
@@ -1154,7 +1141,7 @@ void msrMeasure::insertElementAtPositionInMeasure (
   S_msrMeasureElement elem)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Inserting element " <<
       elem->asShortString () <<
@@ -1326,11 +1313,7 @@ void msrMeasure::setFullMeasureWholeNotesDuration (
   const rational& wholeNotes)
 {
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
-      ||
-    gGlobalTracingOahGroup->getTraceWholeNotes ()
-  ) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Setting full whole notes duration of measure " <<
       this->asShortString () <<
@@ -1355,11 +1338,7 @@ void msrMeasure::setCurrentMeasureWholeNotesDuration (
   rationalisedCurrentMeasureWholeNotesDuration.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
-      ||
-    gGlobalTracingOahGroup->getTraceWholeNotes ()
-  ) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "Setting current whole notes duration of measure " <<
       this->asShortString () <<
@@ -1410,11 +1389,7 @@ if (false) // JMI
   newMeasureWholeNotesDuration.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
-      ||
-    gGlobalTracingOahGroup->getTraceWholeNotes ()
-  ) {
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Incrementing current whole notes duration of measure " <<
       this->asShortString ()<<
@@ -1507,7 +1482,7 @@ void msrMeasure::setMeasureKind (
 
     case msrMeasureKind::kMeasureKindOvercomplete:
 #ifdef TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+      if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
         gLogStream <<
           "!!! Setting measure kind of measure " <<
           this->asShortString ()<<
@@ -1540,7 +1515,7 @@ void msrMeasure::setMeasureKind (
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
 #ifdef TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+      if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
         gLogStream <<
           "??? Setting measure kind of measure " <<
           this->asShortString ()<<
@@ -1817,10 +1792,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
               wholeNotesPerMeasure ();
 
 #ifdef TRACING_IS_ENABLED
-        if (
-          gGlobalTracingOahGroup->getTraceTimeSignatures ()
-            ||
-          gGlobalTracingOahGroup->getTraceMeasures ()) {
+        if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
           gLogStream <<
             "There are " <<
             wholeNotesPerMeasure <<
@@ -1852,11 +1824,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
           wholeNotesPerMeasure);
 
 #ifdef TRACING_IS_ENABLED
-        if (
-          gGlobalTracingOahGroup->getTraceTimeSignatures ()
-            ||
-          gGlobalTracingOahGroup->getTraceMeasures ()
-        ) {
+        if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
           gLogStream <<
             "Measure " <<
             this->asShortString () <<
@@ -1879,11 +1847,7 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
       // this measure is senza misura
 
 #ifdef TRACING_IS_ENABLED
-      if (
-        gGlobalTracingOahGroup->getTraceTimeSignatures ()
-          ||
-        gGlobalTracingOahGroup->getTraceMeasures ()
-      ) {
+      if (gGlobalTracingOahGroup->getTraceTimeSignatures ()) {
         gLogStream <<
           "Measure " <<
           this->asShortString () <<
@@ -2239,7 +2203,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
         getSegmentVoiceUpLink ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
       "Appending note or padding '" << note->asShortString () <<
       "' to measure " <<
@@ -2383,11 +2347,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (S_msrNote note)
     note->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
-      ||
-    gGlobalTracingOahGroup->getTraceBarLines ()
-  ) {
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Appending padding note " << note->asString () <<
       " at the end of measure " <<
@@ -2981,7 +2941,7 @@ void msrMeasure::padUpToPositionInMeasureInMeasure (
           measureVoice);
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
         "Appending skip " << paddingNote->asString () <<
         " (missingDuration " << missingDuration <<
@@ -3014,7 +2974,7 @@ void msrMeasure::padUpToPositionInMeasureInMeasure (
 
   else if (fCurrentMeasureWholeNotesDuration == wholeNotes) {
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (gGlobalTracingOahGroup->getTraceNotes ()) {
       gLogStream <<
         "No need to pad from current measure whole notes '" <<
         fCurrentMeasureWholeNotesDuration <<
@@ -3078,8 +3038,6 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ???
 
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
-      ||
     gGlobalTracingOahGroup->getTracePositionsInMeasures ()
       ||
     gGlobalTracingOahGroup->getTraceWholeNotes ()
@@ -3121,7 +3079,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
   const rational& forwardStepLength)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Appending padding skip note" <<
       ", forwardStepLength: " <<
@@ -3668,11 +3626,11 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
               stringstream s;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-              displayMeasure (
-                inputLineNumber,
-                "determineMeasureKindAndPuristNumber() 6 kMeasureRepeatContextKindUnknown");
-  }
+              if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+                displayMeasure (
+                  inputLineNumber,
+                  "determineMeasureKindAndPuristNumber() 6 kMeasureRepeatContextKindUnknown");
+              }
 #endif
 
               s <<
@@ -3811,7 +3769,7 @@ void msrMeasure::padUpToPositionInMeasure (
         getSegmentVoiceUpLink ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Padding up to position '" <<
       positionInMeasureToPadUpTo <<
@@ -3844,7 +3802,7 @@ void msrMeasure::padUpToPositionInMeasure (
     missingDuration.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
       gLogStream <<
        "Creating a padding note for measure debug number " <<
        fMeasureDebugNumber <<
@@ -3867,7 +3825,7 @@ void msrMeasure::padUpToPositionInMeasure (
           measureVoice);
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
       gLogStream <<
        "Appending padding note " << paddingNote->asString () <<
        " (" << missingDuration << " whole notes)" <<
@@ -3909,7 +3867,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         getSegmentVoiceUpLink ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Padding up from position " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -3944,7 +3902,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
     missingDuration.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
       gLogStream <<
         "Creating a padding note" <<
         ", missingDuration: " << missingDuration <<
@@ -3978,7 +3936,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
           measureVoice);
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
       gLogStream <<
        "Appending padding note " << paddingNote->asString () <<
        " (" << missingDuration << " whole notes)" <<
@@ -5619,7 +5577,7 @@ void msrMeasure::finalizeMeasure (
       ", line " << inputLineNumber;
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
       gLogStream <<
         endl <<
         s.str () <<
@@ -5850,7 +5808,7 @@ void msrMeasure::finalizeMeasureClone (
 
   if (fMeasureKind != originalMeasureMeasureKind) {
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
       this->
         displayMeasure (
           inputLineNumber,
@@ -6075,23 +6033,25 @@ string msrMeasure::asShortString () const
   s <<
     "[Measure " <<
     fMeasureElementMeasureNumber <<
-// JMI    ", measureKind: " <<
+// JMI    ", fMeasureKind: " <<
     ", " <<
     msrMeasureKindAsString (fMeasureKind) <<
 // JMI    ", voice: " <<
     ", " <<
     voice->getVoiceName () <<
     /* JMI
-    ", measureOrdinalNumberInVoice: " <<
+    ", fMeasureOrdinalNumberInVoice: " <<
     fMeasureOrdinalNumberInVoice <<
-    ", measurePuristNumber: " <<
+    ", fMeasurePuristNumber: " <<
     fMeasurePuristNumber <<
-    ", measureDebugNumber: '" <<
+    ", fMeasureDebugNumber: '" <<
     fMeasureDebugNumber <<
     */
 /* JMI
-    ", currentMeasureWholeNotesDuration: " << fCurrentMeasureWholeNotesDuration <<
-    ", fullMeasureWholeNotesDuration: " << fFullMeasureWholeNotesDuration <<
+    ", fCurrentMeasureWholeNotesDuration: " <<
+    fCurrentMeasureWholeNotesDuration <<
+    ", fFullMeasureWholeNotesDuration: " <<
+    fFullMeasureWholeNotesDuration <<
     */
     ", " <<
     mfSingularOrPlural (
@@ -6123,14 +6083,16 @@ string msrMeasure::asShortStringForMeasuresSlices () const
     ", voice: " <<
     ", " <<
     voice->getVoiceName () <<
-    ", measureOrdinalNumberInVoice: " <<
+    ", fMeasureOrdinalNumberInVoice: " <<
     fMeasureOrdinalNumberInVoice <<
-    ", measurePuristNumber: " <<
+    ", fMeasurePuristNumber: " <<
     fMeasurePuristNumber <<
-    ", measureDebugNumber: '" <<
+    ", fMeasureDebugNumber: '" <<
     fMeasureDebugNumber <<
-    ", currentMeasureWholeNotesDuration: " << fCurrentMeasureWholeNotesDuration <<
-    ", fullMeasureWholeNotesDuration: " << fFullMeasureWholeNotesDuration <<
+    ", fCurrentMeasureWholeNotesDuration: " <<
+    fCurrentMeasureWholeNotesDuration <<
+    ", fFullMeasureWholeNotesDuration: " <<
+    fFullMeasureWholeNotesDuration <<
     ", ";
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
@@ -6188,19 +6150,19 @@ string msrMeasure::asString () const
   s <<
     "[Measure '" <<
     fMeasureElementMeasureNumber <<
-    ", measureKind: " <<
+    "', fMeasureKind: " <<
     msrMeasureKindAsString (fMeasureKind) <<
     ", voice: " <<
     voice->getVoiceName () <<
-    ", measureOrdinalNumberInVoice: " <<
+    ", fMeasureOrdinalNumberInVoice: " <<
     fMeasureOrdinalNumberInVoice <<
-    ", measurePuristNumber: " <<
+    ", fMeasurePuristNumber: " <<
     fMeasurePuristNumber <<
-    ", measureDebugNumber: '" <<
+    ", fMeasureDebugNumber: '" <<
     fMeasureDebugNumber <<
-    ", currentMeasureWholeNotesDuration: " <<
+    ", fCurrentMeasureWholeNotesDuration: " <<
     fCurrentMeasureWholeNotesDuration <<
-    ", fullMeasureWholeNotesDuration: " <<
+    ", fFullMeasureWholeNotesDuration: " <<
     fFullMeasureWholeNotesDuration <<
     ", " <<
     mfSingularOrPlural (
@@ -6220,9 +6182,9 @@ void msrMeasure::displayMeasure (
     "*********>> Measure " <<
     fMeasureElementMeasureNumber <<
     /* JMI
-    "', measurePuristNumber: " <<
+    "', fMeasurePuristNumber: " <<
     fMeasurePuristNumber <<
-    ", measureDebugNumber: '" <<
+    ", fMeasureDebugNumber: '" <<
     fMeasureDebugNumber <<
     */
     " (" << context << ")" <<
@@ -6306,7 +6268,7 @@ void msrMeasure::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "segmentUpLink" << " : " <<
+    "fMeasureSegmentUpLink" << " : " <<
     fMeasureSegmentUpLink->asShortString () <<
     endl;
 
@@ -6331,7 +6293,8 @@ void msrMeasure::print (ostream& os) const
 
   // print the voice current clef, key and time signature
   os << left <<
-    setw (fieldWidth) << "voiceCurrentClef" << " : ";
+    setw (fieldWidth) <<
+    "voiceCurrentClef" << " : ";
   if (voiceCurrentClef) {
     os <<
       voiceCurrentClef;
@@ -6341,7 +6304,8 @@ void msrMeasure::print (ostream& os) const
   }
 
   os << left <<
-    setw (fieldWidth) << "voiceCurrentKey" << " : ";
+    setw (fieldWidth) <<
+    "voiceCurrentKey" << " : ";
   if (voiceCurrentKey) {
     os <<
       voiceCurrentKey;
@@ -6351,7 +6315,8 @@ void msrMeasure::print (ostream& os) const
   }
 
   os << left <<
-    setw (fieldWidth) << "voiceCurrentTimeSignature" << " : ";
+    setw (fieldWidth) <<
+    "voiceCurrentTimeSignature" << " : ";
   if (voiceCurrentTimeSignature) {
     os <<
       voiceCurrentTimeSignature;
@@ -6364,7 +6329,7 @@ void msrMeasure::print (ostream& os) const
     /* JMI
 
     setw (fieldWidth) <<
-    "fCurrentMeasureWholeNotesDurationAsMsrString" << " : " <<
+    "currentMeasureWholeNotesDurationAsMsrString" << " : " <<
     currentMeasureWholeNotesDurationAsMsrString () <<
     endl <<
     setw (fieldWidth) <<
@@ -6434,7 +6399,7 @@ void msrMeasure::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "nextMeasureNumber" << " : \"" <<
+    "fNextMeasureNumber" << " : \"" <<
     fNextMeasureNumber <<
     "\"" <<
     endl;

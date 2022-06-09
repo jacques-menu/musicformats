@@ -1693,10 +1693,10 @@ class EXP msrMeasureRepeatReplicas : public msrElement
 
 
 % -------------------------------------------------------------------------
-\section{Full-bar rests}\label{Full-bar rests}
+\section{Multiple full-bar rests}\label{Multiple full-bar rests}
 % -------------------------------------------------------------------------
 
-Full-bar rests handling is presented at \sectionRef{Full-bar rests handling}.
+Full-bar rests handling is presented at \sectionRef{Multiple full-bar rests handling}.
 
 \Class{msrMultipleFullBarRests}, defined in \msrBoth{msrMultipleFullBarRests}, essentially contains a \class{msrMultipleFullBarRestsContents} instance and a mesure rests number:
 \begin{lstlisting}[language=CPlusPlus]
@@ -1709,12 +1709,9 @@ class EXP msrMultipleFullBarRests : public msrVoiceElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrVoice            fMultipleFullBarRestsVoiceUpLink;
+    S_msrVoice            fMultipleFullBarRestsSegmentUpLink;
 
     int                   fMultipleFullBarRestsNumber;
-
-    S_msrMultipleFullBarRestsContents
-                          fMultipleFullBarRestsContents;
 
     string                fMultipleFullBarRestsNextMeasureNumber;
     int                   fMultipleFullBarRestsLastMeasurePuristNumber;

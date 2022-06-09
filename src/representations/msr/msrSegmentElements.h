@@ -143,7 +143,7 @@ class EXP msrSegmentElement : public msrElement
     // ------------------------------------------------------
 
     /*
-      The measure uplink is declared in the sub-classes,
+      The segment uplink is declared in the sub-classes,
       to allow for separate *.h files, C++ constraint
     */
 

@@ -2303,7 +2303,7 @@ R"(Full-bar rests)",
   S_oahThreeBooleansAtom
     traceMultipleFullBarRestsDetailsBooleanAtom =
       oahThreeBooleansAtom::create (
-        "trace-multiple full-bar-rests-details", "tfbrd",
+        "trace-multiple-full-bar-rests-details", "tmfbrd",
 R"(Full-bar rests details)",
         "fTraceMultipleFullBarRestsDetails",
         fTraceMultipleFullBarRestsDetails,

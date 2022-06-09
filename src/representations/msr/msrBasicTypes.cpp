@@ -128,6 +128,12 @@ string msrXMLLangKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrXMLLangKind& elt)
+{
+  os << msrXMLLangKindAsString (elt);
+  return os;
+}
+
 // dotted durations
 //______________________________________________________________________________
 msrDottedDuration::msrDottedDuration ()
@@ -557,7 +563,7 @@ msrOctaveKind msrOctaveKindFromCommasOrQuotes (
 
 //     gLogStream << JMI
 //       "---> result: " <<
-//       msrOctaveKindAsString (result) <<
+//       result <<
 //       endl;
   } // for
 
@@ -607,6 +613,12 @@ string msrOctaveKindAsString (msrOctaveKind octaveKind)
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrOctaveKind& elt)
+{
+  os << msrOctaveKindAsString (elt);
+  return os;
+}
+
 // octave entry kinds
 //______________________________________________________________________________
 
@@ -633,6 +645,12 @@ string msrOctaveEntryKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrOctaveEntryKind& elt)
+{
+  os << msrOctaveEntryKindAsString (elt);
+  return os;
 }
 
 void initializeMsrOctaveEntryKindsMap ()
@@ -1203,12 +1221,13 @@ string msrQuarterTonesPitchAndOctave::asString () const
   stringstream s;
 
   s << left <<
-    "QuarterTonesPitchAndOctave" <<
+    "[QuarterTonesPitchAndOctave" <<
     ": " <<
-    "quarterTonesPitchKind: " <<
+    "fQuarterTonesPitchKind: " <<
     msrQuarterTonesPitchKindAsString (
       fQuarterTonesPitchKind) <<
-    ", octave: " << msrOctaveKindAsString (fOctaveKind);
+    ", fOctaveKind: " << msrOctaveKindAsString (fOctaveKind) <<
+    ']';
 
   return s.str ();
 }
@@ -2270,7 +2289,7 @@ string wholeNotesAsMsrString (
       dotsNumber);
 }
 
-string multipleMultipleFullBarRestsWholeNotesAsMsrString (
+string multipleFullBarRestsWholeNotesAsMsrString (
   int             inputLineNumber, // JMI
   const rational& wholeNotes)
 {
@@ -2902,6 +2921,12 @@ string msrIntervalKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrIntervalKind& elt)
+{
+  os << msrIntervalKindAsString (elt);
+  return os;
 }
 
 string msrIntervalAsShortString (
@@ -10449,6 +10474,12 @@ string msrStaffKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrStaffKind& elt)
+{
+  os << msrStaffKindAsString (elt);
+  return os;
+}
+
 string msrStaffKindAsStringForPrint (
   msrStaffKind staffKind)
 {
@@ -10501,6 +10532,12 @@ string msrVoiceKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrVoiceKind& elt)
+{
+  os << msrVoiceKindAsString (elt);
+  return os;
 }
 
 string msrVoiceKindAsStringForPrint (
@@ -10578,6 +10615,12 @@ string msrMeasureKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrMeasureKind& elt)
+{
+  os << msrMeasureKindAsString (elt);
+  return os;
+}
+
 string msrMeasureKindasShortStringForMeasuresSlices (
   msrMeasureKind measureKind)
 {
@@ -10643,6 +10686,12 @@ string msrMeasureImplicitKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrMeasureImplicitKind& elt)
+{
+  os << msrMeasureImplicitKindAsString (elt);
+  return os;
 }
 
 // clefs
@@ -10734,6 +10783,12 @@ string msrClefKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrClefKind& elt)
+{
+  os << msrClefKindAsString (elt);
+  return os;
 }
 
 msrClefKind clefKindFromString (
@@ -11105,6 +11160,12 @@ string msrTimeSignatureSymbolKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrTimeSignatureSymbolKind& elt)
+{
+  os << msrTimeSignatureSymbolKindAsString (elt);
+  return os;
+}
+
 string msrTimeSignatureSeparatorKindAsString (
   msrTimeSignatureSeparatorKind timeSignatureSeparatorKind)
 {
@@ -11129,6 +11190,12 @@ string msrTimeSignatureSeparatorKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrTimeSignatureSeparatorKind& elt)
+{
+  os << msrTimeSignatureSeparatorKindAsString (elt);
+  return os;
 }
 
 string msrTimeSignatureRelationKindAsString (
@@ -11163,6 +11230,12 @@ string msrTimeSignatureRelationKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrTimeSignatureRelationKind& elt)
+{
+  os << msrTimeSignatureRelationKindAsString (elt);
+  return os;
+}
+
 // repeats
 //______________________________________________________________________________
 string msrRepeatEndingKindAsString (
@@ -11180,6 +11253,12 @@ string msrRepeatEndingKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrRepeatEndingKind& elt)
+{
+  os << msrRepeatEndingKindAsString (elt);
+  return os;
 }
 
 // harmonies
@@ -11341,6 +11420,12 @@ string msrHarmonyKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrHarmonyKind& elt)
+{
+  os << msrHarmonyKindAsString (elt);
+  return os;
 }
 
 string msrHarmonyKindAsShortString (
@@ -12035,6 +12120,12 @@ string msrDiatonicPitchKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrDiatonicPitchKind& elt)
+{
+  os << msrDiatonicPitchKindAsString (elt);
+  return os;
+}
+
 msrDiatonicPitchKind msrDiatonicPitchKindFromChar (
   char diatonicNoteName)
 {
@@ -12234,6 +12325,12 @@ string msrAlterationKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrAlterationKind& elt)
+{
+  os << msrAlterationKindAsString (elt);
+  return os;
+}
+
 // accidentals
 //______________________________________________________________________________
 string msrAccidentalKindAsString (
@@ -12356,6 +12453,12 @@ string msrAccidentalKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrAccidentalKind& elt)
+{
+  os <<msrAccidentalKindAsString (elt);
+  return os;
 }
 
 string msrAccidentalKindAsMusicXMLString (
@@ -12499,6 +12602,12 @@ string msrEditorialAccidentalKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrEditorialAccidentalKind& elt)
+{
+  os <<msrEditorialAccidentalKindAsString (elt);
+  return os;
+}
+
 // cautionary accidentals
 //______________________________________________________________________________
 
@@ -12517,6 +12626,12 @@ string msrCautionaryAccidentalKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrCautionaryAccidentalKind& elt)
+{
+  os <<msrCautionaryAccidentalKindAsString (elt);
+  return os;
 }
 
 //______________________________________________________________________________
@@ -13110,6 +13225,12 @@ string msrQuarterTonesPitchKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrQuarterTonesPitchKind& elt)
+{
+  os << msrQuarterTonesPitchKindAsString (elt);
+  return os;
 }
 
 void fetchDiatonicPitchKindAndAlterationKindFromQuarterTonesPitchKind (
@@ -14358,6 +14479,12 @@ string msrSemiTonesPitchKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrSemiTonesPitchKind& elt)
+{
+  os << msrSemiTonesPitchKindAsString (elt);
+  return os;
+}
+
 /* JMI
 string semiTonesPitchKindAsFlatsAndSharps (
   msrQuarterTonesPitchesLanguageKind languageKind,
@@ -14537,11 +14664,39 @@ string semiTonesPitchKindAsFlatsAndSharps (
 }
 */
 
+string msrAlterationPreferenceKindAsString (
+  msrAlterationPreferenceKind alterationPreferenceKind)
+{
+  string result;
+
+  switch (alterationPreferenceKind) {
+    case msrAlterationPreferenceKind::kAlterationPreferenceFlat:
+      result = "kAlterationPreferenceFlat";
+      break;
+    case msrAlterationPreferenceKind::kAlterationPreferenceNatural:
+      result = "kAlterationPreferenceNatural";
+      break;
+    case msrAlterationPreferenceKind::kAlterationPreferenceSharp:
+      result = "kAlterationPreferenceSharp";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const msrAlterationPreferenceKind& elt)
+{
+  os << msrAlterationPreferenceKindAsString (elt);
+  return os;
+}
+
 msrQuarterTonesPitchKind msrSemiTonesPitchKindAsQuarterTonesPitchKind (
   msrSemiTonesPitchKind       semiTonesPitchKind,
   msrAlterationPreferenceKind alterationPreferenceKind)
 {
-  msrQuarterTonesPitchKind result = msrQuarterTonesPitchKind::k_NoQuarterTonesPitch;
+  msrQuarterTonesPitchKind
+    result =
+      msrQuarterTonesPitchKind::k_NoQuarterTonesPitch;
 
   /* JMI
   switch (semiTonesPitchKind) {
@@ -14778,7 +14933,7 @@ string existingMsrQuarterTonesPitchesLanguageKinds (
 
 // notes
 //______________________________________________________________________________
-string noteKindAsString (
+string msrNoteKindAsString (
   msrNoteKind noteKind)
 {
   string result;
@@ -14850,10 +15005,16 @@ string noteKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrNoteKind& elt)
+{
+  os << msrNoteKindAsString (elt);
+  return os;
+}
+
 // solo notes or rests
 //______________________________________________________________________________
 
-string soloNoteOrRestInVoiceKindAsString (
+string msrSoloNoteOrRestInVoiceKindAsString (
   msrSoloNoteOrRestInVoiceKind soloNoteOrRestInVoiceKind)
 {
   string result;
@@ -14870,7 +15031,13 @@ string soloNoteOrRestInVoiceKindAsString (
   return result;
 }
 
-string soloNoteOrRestInStaffKindAsString (
+ostream& operator<< (ostream& os, const msrSoloNoteOrRestInVoiceKind& elt)
+{
+  os << msrSoloNoteOrRestInVoiceKindAsString (elt);
+  return os;
+}
+
+string msrSoloNoteOrRestInStaffKindAsString (
   msrSoloNoteOrRestInStaffKind soloNoteOrRestInStaffKind)
 {
   string result;
@@ -14890,15 +15057,21 @@ string soloNoteOrRestInStaffKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrSoloNoteOrRestInStaffKind& elt)
+{
+  os << msrSoloNoteOrRestInStaffKindAsString (elt);
+  return os;
+}
+
 // chords
 //______________________________________________________________________________
 
-string chordKindAsString (
-  msrChordInKind chordKind)
+string msrChordInKindAsString (
+  msrChordInKind chordInKind)
 {
   string result;
 
-  switch (chordKind) {
+  switch (chordInKind) {
     case msrChordInKind::k_NoChordIn:
       result = "***k_NoChordIn***";
       break;
@@ -14916,15 +15089,21 @@ string chordKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrChordInKind& elt)
+{
+  os << msrChordInKindAsString (elt);
+  return os;
+}
+
 // tuplets
 //______________________________________________________________________________
 
-EXP string tupletKindAsString (
-  msrTupletInKind tupletKind)
+EXP string msrTupletInKindAsString (
+  msrTupletInKind tupletInKind)
 {
   string result;
 
-  switch (tupletKind) {
+  switch (tupletInKind) {
     case msrTupletInKind::k_NoTupletIn:
       result = "***k_NoTupletIn***";
       break;
@@ -14937,6 +15116,12 @@ EXP string tupletKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrTupletInKind& elt)
+{
+  os << msrTupletInKindAsString (elt);
+  return os;
 }
 
 // beams
@@ -14970,6 +15155,12 @@ string msrBeamKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrBeamKind& elt)
+{
+  os << msrBeamKindAsString (elt);
+  return os;
+}
+
 // ties
 // ------------------------------------------------------
 string msrTieKindAsString (msrTieKind tieKind)
@@ -14992,6 +15183,12 @@ string msrTieKindAsString (msrTieKind tieKind)
   } // switch
 
   return s.str ();
+}
+
+ostream& operator<< (ostream& os, const msrTieKind& elt)
+{
+  os << msrTieKindAsString (elt);
+  return os;
 }
 
 // slurs
@@ -15028,6 +15225,12 @@ string msrSlurTypeKindAsString (
   } // switch
 
   return s.str ();
+}
+
+ostream& operator<< (ostream& os, const msrSlurTypeKind& elt)
+{
+  os << msrSlurTypeKindAsString (elt);
+  return os;
 }
 
 // enharmonies
@@ -15136,6 +15339,12 @@ string msrLengthUnitKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrLengthUnitKind& elt)
+{
+  os << msrLengthUnitKindAsString (elt);
+  return os;
 }
 
 void initializeMsrLengthUnitKindsMap ()
@@ -15280,12 +15489,12 @@ string msrLength::asString () const
   stringstream s;
 
   s <<
-    '[' <<
+    "[Length " <<
     setprecision (4) <<
     fLengthValue <<
     ' ' <<
     msrLengthUnitKindAsString (fLengthUnitKind) <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -15334,6 +15543,12 @@ string msrMarginTypeKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrMarginTypeKind& elt)
+{
+  os << msrMarginTypeKindAsString (elt);
+  return os;
 }
 
 void initializeMsrMarginTypeKindsMap ()
@@ -15747,6 +15962,12 @@ string msrFontSizeKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const  msrFontSizeKind& elt)
+{
+  os <<  msrFontSizeKindAsString (elt);
+  return os;
+}
+
 S_msrFontSize msrFontSize::create (
   msrFontSizeKind fontSizeKind)
 {
@@ -15919,6 +16140,12 @@ string msrFontStyleKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrFontStyleKind& elt)
+{
+  os << msrFontStyleKindAsString (elt);
+  return os;
+}
+
 // font weight
 //______________________________________________________________________________
 msrFontWeightKind msrFontWeightKindFromString (
@@ -15968,6 +16195,12 @@ string msrFontWeightKindAsString (
     } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrFontWeightKind& elt)
+{
+  os << msrFontWeightKindAsString (elt);
+  return os;
 }
 
 // alignement
@@ -16026,6 +16259,12 @@ string msrJustifyKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrJustifyKind& elt)
+{
+  os << msrJustifyKindAsString (elt);
+  return os;
+}
+
 msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
   int           inputLineNumber,
   const string& horizontalAlignmentString)
@@ -16079,6 +16318,12 @@ string msrHorizontalAlignmentKindAsString (
     } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrHorizontalAlignmentKind& elt)
+{
+  os << msrHorizontalAlignmentKindAsString (elt);
+  return os;
 }
 
 msrVerticalAlignmentKind msrVerticalAlignmentKindFromString (
@@ -16136,6 +16381,12 @@ string msrVerticalAlignmentKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrVerticalAlignmentKind& elt)
+{
+  os << msrVerticalAlignmentKindAsString (elt);
+  return os;
+}
+
 // direction
 //______________________________________________________________________________
 string msrDirectionKindAsString (
@@ -16159,6 +16410,11 @@ string msrDirectionKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrDirectionKind& elt)
+{
+  os << msrDirectionKindAsString (elt);
+  return os;
+}
 
 // print object
 //______________________________________________________________________________
@@ -16166,7 +16422,9 @@ msrPrintObjectKind msrPrintObjectKindFromString (
   int           inputLineNumber,
   const string& printObjectString)
 {
-  msrPrintObjectKind result = msrPrintObjectKind::kPrintObjectNone; // default value KAKA JMI
+  msrPrintObjectKind
+    result =
+      msrPrintObjectKind::kPrintObjectNone; // default value KAKA JMI
 
   if      (printObjectString == "yes")
     result = msrPrintObjectKind::kPrintObjectYes;
@@ -16209,6 +16467,12 @@ string msrPrintObjectKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrPrintObjectKind& elt)
+{
+  os << msrPrintObjectKindAsString (elt);
+  return os;
 }
 
 // placement
@@ -16264,6 +16528,12 @@ string msrPlacementKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrPlacementKind& elt)
+{
+  os << msrPlacementKindAsString (elt);
+  return os;
 }
 
 // dynamics
@@ -16453,6 +16723,12 @@ string msrDynamicKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrDynamicKind& elt)
+{
+  os << msrDynamicKindAsString (elt);
+  return os;
+}
+
 // measure style
 //______________________________________________________________________________
 msrUseDotsKind msrUseDotsFromString (
@@ -16504,6 +16780,12 @@ string msrSlashTypeKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrSlashTypeKind& elt)
+{
+  os << msrSlashTypeKindAsString (elt);
+  return os;
+}
+
 string msrUseDotsKindAsString (
   msrUseDotsKind useDotsKind)
 {
@@ -16522,6 +16804,12 @@ string msrUseDotsKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrUseDotsKind& elt)
+{
+  os << msrUseDotsKindAsString (elt);
+  return os;
 }
 
 string msrSlashUseStemsKindAsString (
@@ -16544,7 +16832,7 @@ string msrSlashUseStemsKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, msrSlashUseStemsKind& elt)
+ostream& operator<< (ostream& os, const msrSlashUseStemsKind& elt)
 {
   os << msrSlashUseStemsKindAsString (elt);
   return os;
@@ -16574,6 +16862,12 @@ string msrLineTypeKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrLineTypeKind& elt)
+{
+  os << msrLineTypeKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 string msrTremoloTypeKindAsString (
   msrTremoloTypeKind tremoloTypeKind)
@@ -16598,6 +16892,12 @@ string msrTremoloTypeKindAsString (
   return result;
 }
 
+ostream& operator<< (ostream& os, const msrTremoloTypeKind& elt)
+{
+  os << msrTremoloTypeKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 string msrTechnicalTypeKindAsString (
   msrTechnicalTypeKind technicalTypeKind)
@@ -16617,6 +16917,12 @@ string msrTechnicalTypeKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrTechnicalTypeKind& elt)
+{
+  os << msrTechnicalTypeKindAsString (elt);
+  return os;
 }
 
 //______________________________________________________________________________
@@ -16641,6 +16947,12 @@ string msrSpannerTypeKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrSpannerTypeKind& elt)
+{
+  os << msrSpannerTypeKindAsString (elt);
+  return os;
 }
 
 //______________________________________________________________________________
@@ -19250,7 +19562,7 @@ string msrHarmonyInterval::asString () const
   s <<
     "[HarmonyInterval " <<
     msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
-    ", rel. oct. " <<
+    ", fHarmonyIntervalRelativeOctave: " <<
     fHarmonyIntervalRelativeOctave <<
     "]";
 
@@ -19262,11 +19574,11 @@ string msrHarmonyInterval::asShortString () const
   stringstream s;
 
   s <<
-    "'" <<
+    "[" <<
     msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
     ", rel.oct. " <<
     fHarmonyIntervalRelativeOctave <<
-    "'";
+    "]";
 
   return s.str ();
 }
@@ -21733,6 +22045,7 @@ string msrRGBColor::asString (int precision) const
   stringstream s;
 
   s <<
+    "[RGBColor " <<
     setprecision (precision) <<
     '[' <<
     fR <<
@@ -21740,7 +22053,7 @@ string msrRGBColor::asString (int precision) const
     fG <<
     "," <<
     fB <<
-    "]";
+    "]]";
 
   return s.str ();
 }
@@ -21795,10 +22108,10 @@ string msrAlphaRGBColor::asString () const
 {
   stringstream s;
 
-  s << "color: " <<
-    "colorRGB = \"" << fColorRGB <<
-    "\", colorAlpha = \"" << fColorAlpha <<
-    "\"";
+  s << "[AlphaRGBColor: " <<
+    "colorRGB: \"" << fColorRGB <<
+    "\", colorAlpha: \"" << fColorAlpha <<
+    "\"]";
 
   return s.str ();
 }
@@ -21831,6 +22144,12 @@ string msrScoreNotationKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator<< (ostream& os, const msrScoreNotationKind& elt)
+{
+  os << msrScoreNotationKindAsString (elt);
+  return os;
 }
 
 //______________________________________________________________________________

@@ -103,7 +103,11 @@ string bsrCellKindAsShortString (bsrCellKind cellKind);
 
 string bsrCellKindAsString (bsrCellKind cellKind);
 
-ostream& operator<< (ostream& os, bsrCellKind& elt);
+/*
+  there is no
+  ostream& operator<< (ostream& os, const bsrCellKind& elt);
+  since we need the numerical value to be output to files
+*/
 
 // lower case letters
 //______________________________________________________________________________
@@ -222,7 +226,7 @@ enum class bsrBrailleOutputKind {
 string bsrBrailleOutputKindAsString (
   bsrBrailleOutputKind brailleOutputKind);
 
-ostream& operator<< (ostream& os, bsrBrailleOutputKind& elt);
+ostream& operator<< (ostream& os, const bsrBrailleOutputKind& elt);
 
 extern map<string, bsrBrailleOutputKind>
   gGlobalBsrBrailleOutputKindsMap;
@@ -241,7 +245,7 @@ enum class bsrTextsLanguageKind {
 string bsrTextsLanguageKindAsString (
   bsrTextsLanguageKind languageKind);
 
-ostream& operator<< (ostream& os, bsrTextsLanguageKind& elt);
+ostream& operator<< (ostream& os, const bsrTextsLanguageKind& elt);
 
 extern map<string, bsrTextsLanguageKind>
   gGlobalBsrTextsLanguageKindsMap;

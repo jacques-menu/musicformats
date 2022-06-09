@@ -7,48 +7,85 @@
 The \mf\ \repo\ contains:
 \begin{itemize}
 \item a \masterBranch, that contains the current evolution of the code base, examples and documentation;
-\item \code{vX.Y.Z} \branch es, created from the \masterBranch\ where it is in a useful state. An example is \code{v0.9.61}.
+\item \code{vX.Y.Z} \branch es, created from the \masterBranch\ where it is in a useful state. An example is \code{v0.9.63}.
 \end{itemize}
 
 When a \code{git push} is performed, the \code{musicformats-*-distrib} archives are created, but they cannot be added to the \mf\ \repo\ by \github\ on the fly.
 
 Thus, in order to create a new version of a satisfactory state of the local development \repo, one should:
 \begin{enumerate}
+
 \item check that the version number and date are fine in \fileName{MusicFormatsVersionNumber.txt} and \\\fileName{MusicFormatsVersionDate.txt}:
 \begin{lstlisting}[language=TerminalSmall]
 jacquesmenu@macmini: ~/musicformats-git-dev > cat MusicFormatsVersionNumber.txt
-0.9.61jacquesmenu@macmini: ~/musicformats-git-dev > cat MusicFormatsVersionDate.txt
-March 3, 2022
+0.9.63jacquesmenu@macmini: ~/musicformats-git-dev > cat MusicFormatsVersionDate.txt
+June 9, 2022
 \end{lstlisting}
 Note that \file{MusicFormatsVersionNumber.txt} should not end with an end of line, since that would disturb the creation of the PDF documentation files with \LaTeX;
+
+These informations can be displayed with \scripts{ShowMusicFormatsVersion.bash}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/ShowMusicFormatsVersion.bash 
+Version number:
+0.9.63Version date:
+June 9, 2022
+\end{lstlisting}
+
 
 \item (re-)create the up-to-date documentation with:
 \begin{lstlisting}[language=TerminalSmall]
 jacquesmenu@macmini: ~/musicformats-git-dev > scripts/CreateDocumentationPDFs.bash
 \end{lstlisting}
 
-\item commit to the local repository clone:
+
+\item add all new and/or modified files to the local repository. The \code{addAll} function is defined for this:
 \begin{lstlisting}[language=Terminal]
-git commit -m "Pre v0.9.62" -a
+jacquesmenu@macmini: ~/musicformats-git-dev > type addAll
+addAll is a function
+addAll () 
+{ 
+    git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt;
+    git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt;
+    git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionNumber.h;
+    git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionDate.h;
+    addSrc;
+    addBuild;
+    addScripts;
+    addDistrib;
+    addDoc;
+    addFxml;
+    addFmfsl
+}
 \end{lstlisting}
 
-\item push to the \mf\ repo with:
+
+\item commit a first time to the local repository clone with a 'Pre' version number:
+\begin{lstlisting}[language=Terminal]
+git commit -m "Pre v0.9.63" -a
+\end{lstlisting}
+
+
+\item push this to the \mf\ repo with:
 \begin{lstlisting}[language=Terminal]
 git push
 \end{lstlisting}
 
+
 \item check that the actions were executed successfully at \url{https://github.com/jacques-menu/musicformats/actions};
 
+
 \item when that is the case, download the resulting \code{musicformats-*-distrib} archives locally;
+
 
 \item create the distribution in the local \mf\ repository clone:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev > scripts/MakeMusicFormatsDistributions.bash
 \end{lstlisting}
 
+
 \item \MainIt{commit and push again} with the new version name in the \code{-m "\dots~\dots~\dots"} message, such as:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "v0.9.62" -a
+jacquesmenu@macmini: ~/musicformats-git-dev > git commit -m "v0.9.63" -a
 
 jacquesmenu@macmini: ~/musicformats-git-dev > git push
 \end{lstlisting}
@@ -75,32 +112,34 @@ total 154128
      0 drwx------@  6 jacquesmenu  staff       192 Mar  3 10:56 musicformats-windows-distrib
 \end{lstlisting}
 
+
 \item create the new version \branch\ locally and remotely:
 \begin{lstlisting}[language=TerminalSmall]
 git checkout master
-git branch v0.9.61
-git push --set-upstream master v0.9.61
+git branch v0.9.63
+git push --set-upstream master v0.9.63
 git branch
 git branch -r
 \end{lstlisting}
 
+
 \item create a new version number and date, for example:
 \begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionNumber.bash 0.9.62
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionNumber.bash 0.9.64
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev
 
-==> Writing MusicFormats version number 0.9.62 to MusicFormatsVersionNumber.txt
+==> Writing MusicFormats version number 0.9.64 to MusicFormatsVersionNumber.txt
 
 8 -rw-r--r--@ 1 jacquesmenu  staff  6 Mar  3 13:46:49 2022 MusicFormatsVersionNumber.txt
-0.9.62
+0.9.64
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev/src
 
-==> Writing MusicFormats version number 0.9.62 to MusicFormatsVersionNumber.h
+==> Writing MusicFormats version number 0.9.64 to MusicFormatsVersionNumber.h
 
 8 -rw-r--r--@ 1 jacquesmenu  staff  45 Mar  3 13:46:49 2022 MusicFormatsVersionNumber.h
-#define MUSICFORMATS_VERSION_NUMBER "0.9.62"
+#define MUSICFORMATS_VERSION_NUMBER "0.9.64"
 \end{lstlisting}
 
 \begin{lstlisting}[language=Terminal]

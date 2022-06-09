@@ -661,5 +661,12 @@ string bsrCellKindAsString (bsrCellKind cellKind)
 {
   return bsrCellKindAsShortString (cellKind);
 }
+
+ostream& operator<< (ostream& os, const bsrCellKind& elt)
+{
+  os << bsrCellKindAsString (elt);
+  return os;
+}
+
 */
 

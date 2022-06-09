@@ -805,15 +805,15 @@ class EXP msrVoice : public msrElement
 
     // multiple full-bar rests
 
-    void                  appendMultipleFullBarRestsToVoiceElementsList (
-                            S_msrMultipleFullBarRests multipleFullBarRests);
-
-    void                  createMultipleFullBarRestsInVoice (
-                            int inputLineNumber,
-                            int multipleFullBarRestsNumber);
+//     void                  appendMultipleFullBarRestsToVoiceElementsList (
+//                             S_msrMultipleFullBarRests multipleFullBarRests);
 
     void                  appendMultipleFullBarRestsToVoice (
-                            int                   inputLineNumber,
+                            int inputLineNumber,
+                            int multipleFullBarRestsMeasuresNumber); // JMI USELESS??? KAKA
+
+    void                  appendMultipleFullBarRestsToVoice (
+                            int                       inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRests);
 
     void                  replicateLastAppendedMeasureInVoice (
@@ -823,13 +823,13 @@ class EXP msrVoice : public msrElement
     void                  addEmptyMeasuresToVoice (
                             int           inputLineNumber,
                             const string& previousMeasureNumber,
-                            int           multipleFullBarRestsNumber);
+                            int           emptyMeasuresNumber);
 
     void                  appendPendingMultipleFullBarRestsToVoice (
                             int inputLineNumber);
 
     void                  handleMultipleFullBarRestsStartInVoiceClone (
-                            int                   inputLineNumber,
+                            int                       inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRests);
 
     void                  handleMultipleFullBarRestsEndInVoiceClone (
@@ -842,7 +842,7 @@ class EXP msrVoice : public msrElement
 //                             int inputLineNumber);
 
     void                  appendMultipleFullBarRestsCloneToVoiceClone ( // JMI ???
-                            int                   inputLineNumber,
+                            int                       inputLineNumber,
                             S_msrMultipleFullBarRests multipleFullBarRestsClone);
 
     // measure repeats
@@ -1086,10 +1086,10 @@ class EXP msrVoice : public msrElement
 
     // multiple full-bar rests
 
-    void                  appendMultipleFullBarRestsToInitialVoiceElements (
-                            int                   inputLineNumber,
-                            S_msrMultipleFullBarRests multipleFullBarRests,
-                            const string&         context);
+//     void                  appendMultipleFullBarRestsToInitialVoiceElements (
+//                             int                       inputLineNumber,
+//                             S_msrMultipleFullBarRests multipleFullBarRests,
+//                             const string&             context);
 
     // measure repeats
 
@@ -1298,19 +1298,21 @@ class EXP msrVoice : public msrElement
     // measures
 
     void                  setVoiceFirstMeasure (
-                            S_msrMeasure measure)
-                              { fVoiceFirstMeasure = measure; }
+                            S_msrMeasure measure);
 
     const S_msrMeasure    getVoiceFirstMeasure () const
                               { return fVoiceFirstMeasure; }
 
-    // last appended measure
-    const S_msrMeasure    getVoiceLastAppendedMeasure () const
-                              { return fVoiceLastAppendedMeasure; }
-
     void                  appendMeasureCloneToVoiceClone (
                             int          inputLineNumber,
                             S_msrMeasure measureClone);
+
+    // last appended measure
+    void                  setVoiceLastAppendedMeasure (
+                            const S_msrMeasure& measure);
+
+    const S_msrMeasure    getVoiceLastAppendedMeasure () const
+                              { return fVoiceLastAppendedMeasure; }
 
   private:
 
@@ -1422,12 +1424,14 @@ class EXP msrVoice : public msrElement
     // fVoicePendingMultipleFullBarRests is either null
     // or the last msrMultipleFullBarRests created,
     // but not yet appended to the voice
-    S_msrMultipleFullBarRests fVoicePendingMultipleFullBarRests;
+    S_msrMultipleFullBarRests
+                          fVoiceCurrentMultipleFullBarRests;
 
     // fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber is either null
     // or the last msrMultipleFullBarRests created and appended to the voice,
     // but with its next measure number not yet set
-    S_msrMultipleFullBarRests fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber;
+    S_msrMultipleFullBarRests
+                          fVoiceMultipleFullBarRestsWaitingForItsNextMeasureNumber;
     int                   fVoiceRemainingMultipleFullBarRests;
 
     Bool                  fVoiceContainsMultipleFullBarRests;
