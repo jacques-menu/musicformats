@@ -165,6 +165,13 @@ MFSL_DIR=${SRC_DIR}/interpreters/mfslinterpreter
 alias mfsld="cd ${MFSL_DIR}"
 
 
+# iScheme
+#----------------------------------------------
+
+ISCM_DIR=${SRC_DIR}/interpreters/ischemeinterpreter
+iscmd="cd ${ISCM_DIR}"
+
+
 # musicxml2ly
 #----------------------------------------------
 
@@ -753,7 +760,7 @@ alias gc='git checkout'
 alias gp='git push'
 alias gbi='git bisect'
 
-alias rc='. ~/.bashrc'
+alias brc='. ~/.bashrc'
 alias cpbashdefs='cp -p ~/local/BashDefinitionsForMusicFormats.bash ${SCRIPTS_DIR}'
 
 function addAll ()
@@ -779,6 +786,8 @@ function addSrc ()
   git add ${SRC_DIR}/*.h
 
   git add -f ${MFSL_DIR}/Makefile
+
+  git add -f ${ISCM_DIR}/Makefile
 
   git add ${SRC_DIR}/clisamples/*
   git add ${SRC_DIR}/components/*
