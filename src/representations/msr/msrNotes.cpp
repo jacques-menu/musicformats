@@ -194,14 +194,9 @@ void msrNote::initializeNote ()
   // note context
   // ------------------------------------------------------
 
-  fNoteBelongsToAChord = false;
-  fNoteBelongsToATuplet = false;
-  fNoteOccupiesAFullMeasure = false;
-
-  fNoteBelongsToAMultipleFullBarRests = false;
   fNoteMultipleFullBarRestsSequenceNumber = -1;
 
-  fNoteAlphaRGBColorHasBenSet = false;
+//   fNoteAlphaRGBColorHasBenSet = false; JMI v0.9.64
 
   // note lyrics
   // ------------------------------------------------------
@@ -360,11 +355,6 @@ void msrNote::initializeNote ()
   }
 #endif
 
-  // note measure information
-  // ------------------------------------------------------
-
-  fNoteOccupiesAFullMeasure = false;
-
   // solo note or rest?
   // ------------------------------------------------------
 
@@ -373,18 +363,6 @@ void msrNote::initializeNote ()
 
   fNoteSoloNoteOrRestInStaffKind =
     msrSoloNoteOrRestInStaffKind::kSoloNoteOrRestInStaffNo;
-
-  // note redundant information (for speed)
-  // ------------------------------------------------------
-
-  fNoteIsStemless = false;
-
-  fNoteIsAChordsFirstMemberNote = false;
-
-  fNoteIsFirstNoteInADoubleTremolo  = false;
-  fNoteIsSecondNoteInADoubleTremolo = false;
-
-  fNoteIsFollowedByGraceNotesGroup = false;
 }
 
 msrNote::~msrNote ()
@@ -4712,8 +4690,6 @@ string msrNote::noteComplementsAsString () const
     s << fMeasureElementMeasureNumber;
   }
 
-  return ""; // JMI KAKA
-
   return s.str ();
 }
 
@@ -4733,7 +4709,7 @@ string msrNote::soundingNoteEssentialsAsString () const
   s <<
     ' ' <<
     msrOctaveKindAsString (fNoteOctaveKind) <<
-    ",++++ " << // JMI KAKA
+//     ",++++ " << // JMI KAKA
     noteComplementsAsString () <<
     "]";
 
@@ -5181,8 +5157,7 @@ void msrNote::printNoteEssentials (ostream& os) const
   switch (fNoteKind) {
     case msrNoteKind::k_NoNote:
       os <<
-        "*noNote*" <<
-        endl;
+        "*noNote*";
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -5213,65 +5188,56 @@ void msrNote::printNoteEssentials (ostream& os) const
     case msrNoteKind::kNoteSkipInMeasure:
       os <<
         "kNoteSkipInMeasure: " <<
-        nonSoundingNoteEssentialsAsString () <<
-        endl;
+        nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
       os <<
         "kNoteUnpitchedInMeasure: " <<
-        nonSoundingNoteEssentialsAsString () <<
-        endl;
+        nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
       os <<
         "kNoteRegularInMeasure: " <<
-        soundingNoteEssentialsAsString () <<
-        endl;
+        soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInDoubleTremolo:
       os <<
         "kNoteInDoubleTremolo: " <<
-        soundingNoteEssentialsAsString () <<
-        endl;
+        soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
       os <<
         "kNoteRegularInGraceNotesGroup " <<
-        nonSoundingNoteEssentialsAsString () <<
-        endl;
+        nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
       os <<
         "kNoteSkipInGraceNotesGroup: " <<
-        nonSoundingNoteEssentialsAsString () <<
-        endl;
+        nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
       os <<
         "kNoteInChordInGraceNotesGroup: " <<
         nonSoundingNoteEssentialsAsString () <<
-        ", fNoteTupletFactor " << fNoteTupletFactor.asString () <<
-        endl;
+        ", fNoteTupletFactor " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       os <<
         "kNoteRegularInChord: " <<
-        soundingNoteEssentialsAsString () <<
-        endl;
+        soundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
       os <<
         "kNoteRegularInTuplet: " <<
-        soundingNoteEssentialsAsString () <<
-        endl;
+        soundingNoteEssentialsAsString ();
 /* JMI
         notePartUpLink ()->
           tupletSoundingWholeNotesAsMsrString (
@@ -5285,15 +5251,13 @@ void msrNote::printNoteEssentials (ostream& os) const
     case msrNoteKind::kNoteRestInTuplet:
       os <<
         "kNoteRestInTuplet: " <<
-        nonSoundingNoteEssentialsAsString () <<
-        endl;
+        nonSoundingNoteEssentialsAsString ();
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       os <<
         "kNoteInTupletInGraceNotesGroup " <<
-        nonSoundingNoteEssentialsAsString () <<
-        endl;
+        nonSoundingNoteEssentialsAsString ();
 /* JMI
         notePartUpLink ()->
           tupletSoundingWholeNotesAsMsrString (
@@ -5304,8 +5268,7 @@ void msrNote::printNoteEssentials (ostream& os) const
             */
 
       os <<
-        ", fNoteTupletFactor: " << fNoteTupletFactor.asString () <<
-        endl;
+        ", fNoteTupletFactor: " << fNoteTupletFactor.asString ();
       break;
 
     case msrNoteKind::kNoteUnpitchedInTuplet:
@@ -5321,24 +5284,24 @@ void msrNote::printNoteEssentials (ostream& os) const
             fNoteDirectTupletUpLink->getTupletNormalNotes ())
             */
       os <<
-        ", noteTupletFactor: " << fNoteTupletFactor.asString () <<
-        endl;
+        ", noteTupletFactor: " << fNoteTupletFactor.asString ();
       break;
   } // switch
 
-  os << endl;
+  os <<
+    ", line " << fInputLineNumber <<
+    endl;
 }
 
 void msrNote::print (ostream& os) const
 {
   os <<
-    "[Note " ;
+    "[Note ";
 
   // print the note essentials
   printNoteEssentials (os);
 
-  os << ", ";
-
+  ++gIndenter;
 
 /* JMI
   os << left <<
@@ -5368,9 +5331,19 @@ void msrNote::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fNoteOctaveShift" << " : " <<
-    fNoteOctaveShift <<
-    endl;
+    "fNoteOctaveShift" << " : ";
+  if (fNoteOctaveShift) {
+    os << endl;
+    ++gIndenter;
+
+    os <<
+      fNoteOctaveShift;
+
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
+  }
 
   os << left <<
     setw (fieldWidth) <<
@@ -5444,206 +5417,6 @@ void msrNote::print (ostream& os) const
     fNoteMultipleFullBarRestsSequenceNumber <<
     endl;
 
-/*
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteSyllables" << " : " <<
-    fNoteSyllables <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteStem" << " : " <<
-    fNoteStem <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteBeams" << " : " <<
-    fNoteBeams <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteArticulations" << " : " <<
-    fNoteArticulations <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteSpanners" << " : " <<
-    fNoteSpanners <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteTechnicals" << " : " <<
-    fNoteTechnicals <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteTechnicalWithIntegers" << " : " <<
-    fNoteTechnicalWithIntegers <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteTechnicalWithFloats" << " : " <<
-    fNoteTechnicalWithFloats <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteTechnicalWithStrings" << " : " <<
-    fNoteTechnicalWithStrings <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteOrnaments" << " : " <<
-    fNoteOrnaments <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteGlissandos" << " : " <<
-    fNoteGlissandos <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteSlides" << " : " <<
-    fNoteSlides <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteGraceNotesGroupBefore" << " : " <<
-    fNoteGraceNotesGroupBefore <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteGraceNotesGroupBefore" << " : " <<
-    fNoteGraceNotesGroupBefore <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteGraceNotesGroupAfter" << " : " <<
-    fNoteGraceNotesGroupAfter <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteSingleTremolo" << " : " <<
-    fNoteSingleTremolo <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteTie" << " : " <<
-    fNoteDashefNoteTiesOrnament <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDynamics" << " : " <<
-    fNoteDynamics <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteOtherDynamics" << " : " <<
-    fNoteOtherDynamics <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteSlashes" << " : " <<
-    fNoteSlashes <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteCrescDecrescs" << " : " <<
-    fNoteCrescDecrescs <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteWedges" << " : " <<
-    fNoteWedges <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteSegnos" << " : " <<
-    fNoteSegnos <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDalSegnos" << " : " <<
-    fNoteDalSegnos <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteCodas" << " : " <<
-    fNoteCodas <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteEyeGlasses" << " : " <<
-    fNoteEyeGlasses <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDamps" << " : " <<
-    fNoteDamps <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDampAlls" << " : " <<
-    fNoteDampAlls <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteScordaturas" << " : " <<
-    fNoteScordaturas <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteWords" << " : " <<
-    fNoteWords <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteSlurs" << " : " <<
-    fNoteSlurs <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteLigatures" << " : " <<
-    fNoteLigatures <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNotePedals" << " : " <<
-    fNotePedals <<
-    endl;
-*/
-
   os << left <<
     setw (fieldWidth) <<
     "fNoteIsStemless" << " : " <<
@@ -5668,64 +5441,26 @@ void msrNote::print (ostream& os) const
     fNoteIsSecondNoteInADoubleTremolo <<
     endl;
 
-  os << left <<
+  os <<
     setw (fieldWidth) <<
-    "fNoteTrillOrnament" << " : " <<
-    fNoteTrillOrnament <<
-    endl;
+    "fNoteTrillOrnament" << " : ";
+  if (fNoteTrillOrnament) {
+    os << endl;
+    ++gIndenter;
+
+    os <<
+      fNoteTrillOrnament;
+
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
+  }
 
   os << left <<
     setw (fieldWidth) <<
     "fNoteIsFollowedByGraceNotesGroup" << " : " <<
     fNoteIsFollowedByGraceNotesGroup <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDashesOrnament" << " : " <<
-    fNoteDashesOrnament <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDashesOrnament" << " : " <<
-    fNoteDashesOrnament <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDashesOrnament" << " : " <<
-    fNoteDashesOrnament <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDashesOrnament" << " : " <<
-    fNoteDashesOrnament <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDelayedTurnOrnament" << " : " <<
-    fNoteDelayedTurnOrnament <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteDelayedInvertedTurnOrnament" << " : " <<
-    fNoteDelayedInvertedTurnOrnament <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteWavyLineSpannerStart" << " : " <<
-    fNoteWavyLineSpannerStart <<
-    endl;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fNoteWavyLineSpannerStop" << " : " <<
-    fNoteWavyLineSpannerStop <<
     endl;
 
   os << left <<
@@ -5752,24 +5487,13 @@ void msrNote::print (ostream& os) const
     fNoteSoloNoteOrRestInStaffKind <<
     endl;
 
-  if (fNoteTie) {
-    os <<
-      ", has note tie: " <<
-      msrTieKindAsString (fNoteTie->getTieKind ()) <<
-      endl;
-  }
-
   os <<
-    ", fNoteIsACueNoteKind: " <<
-    noteIsACuemsrNoteKindAsString (fNoteIsACueNoteKind) <<
-      endl;
-
-  os <<
-    ", line " << fInputLineNumber <<
-    ':' <<
+    setw (fieldWidth) <<
+    "fNoteIsACueNoteKind" << " : " <<
+    fNoteIsACueNoteKind <<
     endl;
 
-  ++gIndenter;
+//  ++gIndenter;
 
   // print measure number
   os << left <<
@@ -6136,56 +5860,84 @@ void msrNote::print (ostream& os) const
       endl;
 // JMI  }
 
-  if (fNoteTrillOrnament) {
-    os <<
-      setw (fieldWidth) <<
-      "fNoteTrillOrnament" <<
-      " : " <<
-      fNoteTrillOrnament-> asString () <<
-      endl;
-  }
-
+  os <<
+    setw (fieldWidth) <<
+    "fNoteDashesOrnament" << " : ";
   if (fNoteDashesOrnament) {
+    os << endl;
+    ++gIndenter;
+
     os <<
-      setw (fieldWidth) <<
-      "fNoteDashesOrnament" <<
-      " : " <<
-      fNoteDashesOrnament-> asString () <<
-      endl;
+      fNoteDashesOrnament;
+
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
   }
 
+  os <<
+    setw (fieldWidth) <<
+    "fNoteDelayedTurnOrnament" << " : ";
   if (fNoteDelayedTurnOrnament) {
+    os << endl;
+    ++gIndenter;
+
     os <<
-      setw (fieldWidth) <<
-      "fNoteDelayedTurnOrnament" <<
-      " : " <<
-      fNoteDelayedTurnOrnament-> asString () <<
-      endl;
+      fNoteDelayedTurnOrnament;
+
+    --gIndenter;
   }
-  if (fNoteDelayedInvertedTurnOrnament) {
-    os <<
-      setw (fieldWidth) <<
-      "fNoteDelayedInvertedTurnOrnament" <<
-      " : " <<
-      fNoteDelayedInvertedTurnOrnament-> asString () <<
-      endl;
+  else {
+    os << "none" << endl;
   }
 
-  if (fNoteWavyLineSpannerStart) {
+  os <<
+    setw (fieldWidth) <<
+    "fNoteDelayedInvertedTurnOrnament" << " : ";
+  if (fNoteDelayedInvertedTurnOrnament) {
+    os << endl;
+    ++gIndenter;
+
     os <<
-      setw (fieldWidth) <<
-      "fNoteWavyLineSpannerStart" <<
-      " : " <<
-      fNoteWavyLineSpannerStart->asShortString () <<
-      endl;
+      fNoteDelayedInvertedTurnOrnament;
+
+    --gIndenter;
   }
-  if (fNoteWavyLineSpannerStop) {
+  else {
+    os << "none" << endl;
+  }
+
+  os <<
+    setw (fieldWidth) <<
+    "fNoteWavyLineSpannerStart" << " : ";
+  if (fNoteWavyLineSpannerStart) {
+    os << endl;
+    ++gIndenter;
+
     os <<
-      setw (fieldWidth) <<
-      "fNoteWavyLineSpannerStop" <<
-      " : " <<
-      fNoteWavyLineSpannerStop->asShortString () <<
-      endl;
+      fNoteWavyLineSpannerStart;
+
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
+  }
+
+  os <<
+    setw (fieldWidth) <<
+    "fNoteWavyLineSpannerStop" << " : ";
+  if (fNoteWavyLineSpannerStop) {
+    os << endl;
+    ++gIndenter;
+
+    os <<
+      fNoteWavyLineSpannerStop;
+
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
   }
 
   if (fNoteIsFollowedByGraceNotesGroup) {
@@ -6343,47 +6095,35 @@ void msrNote::print (ostream& os) const
   } // switch
 
   // print the octave shift if any
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteOctaveShift" << " : ";
   if (fNoteOctaveShift) {
+    os << endl;
+    ++gIndenter;
     os <<
-      setw (fieldWidth) <<
-      "fNoteOctaveShift";
-    if (fNoteOctaveShift) {
-      os << endl;
-
-      ++gIndenter;
-
-      os <<
-        fNoteOctaveShift;
-
-      --gIndenter;
-    }
-    else {
-      os << " : " <<
-        "none" <<
-        endl;
-    }
+      fNoteOctaveShift;
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
   }
 
   // print the stem if any
+  os << left <<
+    setw (fieldWidth) <<
+    "fNoteStem" << " : ";
   if (fNoteStem) {
+    os << endl;
+    ++gIndenter;
+
     os <<
-      setw (fieldWidth) <<
-      "fNoteStem";
-    if (fNoteStem) {
-      os << endl;
+      fNoteStem;
 
-      ++gIndenter;
-
-      os <<
-        fNoteStem;
-
-      --gIndenter;
-    }
-    else {
-      os << " : " <<
-        "none" <<
-        endl;
-    }
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
   }
 
   // print the note color
@@ -6409,25 +6149,20 @@ void msrNote::print (ostream& os) const
     endl;
 
   // print the tie if any
+  os <<
+    setw (fieldWidth) <<
+    "fNoteTie" << " : ";
   if (fNoteTie) {
+    os << endl;
+    ++gIndenter;
+
     os <<
-      setw (fieldWidth) <<
-      "fNoteTie";
-    if (fNoteTie) {
-      os << endl;
+      fNoteTie;
 
-      ++gIndenter;
-
-      os <<
-        fNoteTie;
-
-      --gIndenter;
-    }
-    else {
-      os << " : " <<
-        "none" <<
-        endl;
-    }
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
   }
 
   // print the beams if any
@@ -8101,7 +7836,13 @@ void msrNote::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrNote& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
   return os;
 }
 

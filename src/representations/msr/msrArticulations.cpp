@@ -207,7 +207,13 @@ void msrArticulation::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrArticulation& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -351,7 +357,13 @@ void msrFermata::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrFermata& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -460,7 +472,13 @@ void msrArpeggiato::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrArpeggiato& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -589,7 +607,13 @@ void msrNonArpeggiato::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrNonArpeggiato& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

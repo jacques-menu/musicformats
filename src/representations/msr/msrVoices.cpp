@@ -158,7 +158,13 @@ void msrRepeatDescr::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrRepeatDescr& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
   return os;
 }
 
@@ -3811,8 +3817,6 @@ void msrVoice::displayVoiceMeasuresFlatList (
 
     --gIndenter;
   }
-
-  gLogStream << endl;
 }
 
 void msrVoice::displayVoiceMultipleFullBarRests (
@@ -10660,10 +10664,12 @@ void msrVoice::print (ostream& os) const
   os << left <<
     setw (fieldWidth) << "fVoiceCurrentTimeSignature" << " : ";
   if (fVoiceCurrentTimeSignature) {
+    os << endl;
     ++gIndenter;
+
     os <<
-      endl <<
       fVoiceCurrentTimeSignature;
+
     --gIndenter;
   }
   else {
@@ -11059,7 +11065,13 @@ void msrVoice::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrVoice& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
   return os;
 }
 

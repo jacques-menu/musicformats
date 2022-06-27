@@ -617,7 +617,13 @@ void msdl2msrOahGroup::printMsdl2msrValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_msdl2msrOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

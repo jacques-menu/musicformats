@@ -207,7 +207,13 @@ void msrFrameNote::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrFrameNote& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -526,7 +532,13 @@ void msrFrame::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrFrame& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

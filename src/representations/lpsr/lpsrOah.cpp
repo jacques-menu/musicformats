@@ -273,7 +273,13 @@ void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lpsrPitchesLanguageAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -504,7 +510,13 @@ void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lpsrChordsLanguageAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -869,7 +881,13 @@ void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1079,7 +1097,13 @@ void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lpsrTransposeAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2297,7 +2321,13 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_lpsrOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

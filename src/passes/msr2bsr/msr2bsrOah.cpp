@@ -306,7 +306,13 @@ void msr2bsrOahGroup::printMsr2bsrOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_msr2bsrOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

@@ -199,7 +199,13 @@ void msrTempoNote::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTempoNote& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -765,7 +771,13 @@ void msrTempoTuplet::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTempoTuplet& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -953,7 +965,13 @@ void msrTempoNotesRelationshipshipElements::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTempoNotesRelationshipshipElements& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1504,7 +1522,13 @@ void msrTempo::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTempo& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

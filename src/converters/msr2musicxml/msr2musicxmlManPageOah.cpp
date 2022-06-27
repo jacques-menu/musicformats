@@ -176,7 +176,13 @@ void msr2musicxmlManPageGenerateAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msr2musicxmlManPageGenerateAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -377,7 +383,13 @@ void msr2musicxmlManPageOahGroup::printManPageOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_msr2musicxmlManPageOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

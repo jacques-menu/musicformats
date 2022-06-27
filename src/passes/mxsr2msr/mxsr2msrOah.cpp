@@ -397,7 +397,13 @@ void msrReplaceClefAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msrReplaceClefAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2299,7 +2305,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
 ostream& operator<< (ostream& os, const S_mxsr2msrOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

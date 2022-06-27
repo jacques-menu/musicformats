@@ -763,7 +763,13 @@ void msrSyllable::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrSyllable& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1378,7 +1384,13 @@ void msrStanza::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrStanza& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

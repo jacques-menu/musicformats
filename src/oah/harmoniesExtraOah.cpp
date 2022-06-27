@@ -192,7 +192,13 @@ void extraShowAllHarmoniesStructuresAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_extraShowAllHarmoniesStructuresAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -434,7 +440,13 @@ void extraShowAllHarmoniesContentsAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_extraShowAllHarmoniesContentsAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1325,7 +1337,13 @@ void harmoniesExtraOahGroup::printHarmoniesExtraOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_harmoniesExtraOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

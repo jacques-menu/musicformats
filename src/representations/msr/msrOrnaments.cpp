@@ -174,8 +174,10 @@ string msrOrnament::asString () const
   s <<
     "[Ornament" <<
     ", ornamentKind: " << ornamentKindAsString () <<
-    ", ornamentPlacementKind: " << msrPlacementKindAsString (fOrnamentPlacementKind) <<
-    ", ornamentAccidentalKind: " << msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
+    ", ornamentPlacementKind: " <<
+    msrPlacementKindAsString (fOrnamentPlacementKind) <<
+    ", ornamentAccidentalKind: " <<
+    msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
     "]";
 
   return s.str ();
@@ -215,7 +217,13 @@ void msrOrnament::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrOrnament& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

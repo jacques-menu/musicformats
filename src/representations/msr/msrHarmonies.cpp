@@ -266,7 +266,13 @@ void msrHarmonyDegree::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrHarmonyDegree& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -999,7 +1005,13 @@ void msrHarmony::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrHarmony& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

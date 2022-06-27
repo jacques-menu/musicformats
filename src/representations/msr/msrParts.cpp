@@ -1136,25 +1136,25 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
 }
 
 void msrPart::appendTranspositionToPart (
-  S_msrTransposition transpose)
+  S_msrTransposition transposition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTranspositions ()) {
     gLogStream <<
-      "Appending transpose \"" <<
-      transpose->asString () <<
+      "Appending transposition \"" <<
+      transposition->asString () <<
       "\" to part " << getPartCombinedName () <<
     endl;
   }
 #endif
 
-  // set part current transpose
-  fPartCurrentTranspose = transpose;
+  // set part current transposition
+  fPartCurrentTransposition = transposition;
 
   // cascade it to all staves
   for (S_msrStaff staff : fPartAllStavesList) {
     staff->
-      appendTranspositionToStaff (transpose);
+      appendTranspositionToStaff (transposition);
   } // for
 }
 
@@ -2169,7 +2169,7 @@ void msrPart::appendHarpPedalsTuningToPart (
   } // for
 }
 
-void msrPart::addSkipGraceNotesGroupBeforeAheadOfVoicesClonesIfNeeded (
+void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
   S_msrVoice           graceNotesGroupOriginVoice,
   S_msrGraceNotesGroup skipGraceNotesGroup)
 {
@@ -2187,7 +2187,7 @@ void msrPart::addSkipGraceNotesGroupBeforeAheadOfVoicesClonesIfNeeded (
     gGlobalTracingOahGroup->getTraceParts ()
     ) {
     gLogStream <<
-      "addSkipGraceNotesGroupBeforeAheadOfVoicesClonesIfNeeded () in " <<
+      "addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded () in " <<
       getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
@@ -2676,13 +2676,8 @@ void msrPart::printPartMeasuresWholeNotesDurationsVector (
         setw (3) << right <<
         j << " : " <<
         setw (4) <<
-        fPartMeasuresWholeNotesDurationsVector [ i ].toString ();
-
-      if (i % 3 == 1) {
-        os << endl;
-      }
-
-      os << endl;
+        fPartMeasuresWholeNotesDurationsVector [ i ].toString () <<
+        endl;
     } // for
 
     --gIndenter;
@@ -2729,11 +2724,6 @@ void msrPart::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fPartAbsoluteNumber" << " : " <<
-    fPartAbsoluteNumber <<
-    endl <<
-
-    setw (fieldWidth) <<
     "fPartName" << " : \"" <<
     fPartName << "\"" <<
     endl <<
@@ -2749,6 +2739,11 @@ void msrPart::print (ostream& os) const
     setw (fieldWidth) <<
     "fPartAbbreviationDisplayText" << " : \"" <<
     fPartAbbreviationDisplayText << "\"" <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fPartAbsoluteNumber" << " : " <<
+    fPartAbsoluteNumber <<
     endl <<
 
     setw (fieldWidth) <<
@@ -2853,13 +2848,13 @@ void msrPart::print (ostream& os) const
   os << fPartShortestNoteTupletFactor << endl;
   --gIndenter;
 
-  // print all the staves if any
+  // print the staves list
   size_t partAllStavesListSize =
     fPartAllStavesList.size ();
 
   os << left <<
     setw (fieldWidth) <<
-    "Staff names in fPartAllStavesList" << " : ";
+    "fPartAllStavesList" << " : ";
 
   if (partAllStavesListSize) {
     os << endl;
@@ -2876,12 +2871,36 @@ void msrPart::print (ostream& os) const
     os << "none" << endl;
   }
 
+  // print the regular staves list
+  size_t partRegularStavesListSize =
+    fPartRegularStavesList.size ();
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fPartRegularStavesList" << " : ";
+
+  if (partRegularStavesListSize) {
+    os << endl;
+    ++gIndenter;
+
+    for (S_msrStaff staff : fPartRegularStavesList) {
+      os << "\"" << staff->getStaffName () << "\"" << endl;
+    } // for
+    os << endl;
+
+    --gIndenter;
+  }
+  else {
+    os << "none" << endl;
+  }
+
+  // print the non harmonies nor figured bass staves list
   size_t partNonHarmoniesNorFiguredBassStavesListSize =
     fPartNonHarmoniesNorFiguredBassStavesList.size ();
 
   os << left <<
     setw (fieldWidth) <<
-    "Staff names in fPartNonHarmoniesNorFiguredBassStavesList" << " : ";
+    "fPartNonHarmoniesNorFiguredBassStavesList" << " : ";
 
   if (partNonHarmoniesNorFiguredBassStavesListSize) {
     os << endl;
@@ -2898,7 +2917,7 @@ void msrPart::print (ostream& os) const
     os << "empty" << endl;
   }
 
-  // print all the voices names if any
+  // print part part all voices
   size_t partAllVoicesListSize =
     fPartAllVoicesList.size ();
 
@@ -2928,7 +2947,6 @@ void msrPart::print (ostream& os) const
     "fPartHarmoniesStaff" << " : ";
   if (fPartHarmoniesStaff) {
     os << endl;
-
     ++gIndenter;
     os << fPartHarmoniesStaff;
     --gIndenter;
@@ -2956,7 +2974,7 @@ void msrPart::print (ostream& os) const
 
   os << endl;
 
-  // print the part measure' whole notes durations vector
+  // print the part measures whole notes durations vector
   printPartMeasuresWholeNotesDurationsVector (
     os,
     fieldWidth);
@@ -3305,7 +3323,13 @@ void msrPart::printSlices (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrPart& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

@@ -310,7 +310,13 @@ void msrBassFigure::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrBassFigure& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -767,7 +773,13 @@ void msrFiguredBassElement::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrFiguredBassElement& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

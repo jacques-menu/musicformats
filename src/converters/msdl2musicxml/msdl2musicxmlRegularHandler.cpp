@@ -1245,7 +1245,13 @@ void msdl2musicxmlRegularHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdl2musicxmlRegularHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

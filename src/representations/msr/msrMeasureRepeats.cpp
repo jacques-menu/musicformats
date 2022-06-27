@@ -417,7 +417,13 @@ void msrMeasureRepeatElement::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMeasureRepeatElement& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 */
@@ -607,7 +613,13 @@ void msrMeasureRepeatPattern::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMeasureRepeatPattern& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -796,7 +808,13 @@ void msrMeasureRepeatReplicas::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMeasureRepeatReplicas& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1235,7 +1253,13 @@ void msrMeasureRepeat::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMeasureRepeat& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

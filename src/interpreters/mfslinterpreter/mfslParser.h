@@ -33,7 +33,7 @@
 
 /**
  ** \file mfslParser.h
- ** Define the yy::parser class.
+ ** Define the mfsl::parser class.
  */
 
 // C++ LALR(1) parser skeleton written by Akim Demaille.
@@ -42,12 +42,12 @@
 // especially those whose name start with YY_ or yy_.  They are
 // private implementation details that can be changed or removed.
 
-#ifndef YY_YY_MFSLPARSER_H_INCLUDED
-# define YY_YY_MFSLPARSER_H_INCLUDED
+#ifndef YY_MFSL_MFSLPARSER_H_INCLUDED
+# define YY_MFSL_MFSLPARSER_H_INCLUDED
 // "%code requires" blocks.
-#line 44 "mfslParser.yy"
+#line 46 "mfslParser.yy"
 
-  # include <string>
+  #include <string>
 
   class mfslDriver;
 
@@ -98,9 +98,9 @@
 #endif
 # include "location.hh"
 #include <typeinfo>
-#ifndef YY_ASSERT
+#ifndef MFSL_ASSERT
 # include <cassert>
-# define YY_ASSERT assert
+# define MFSL_ASSERT assert
 #endif
 
 
@@ -186,12 +186,20 @@
 # endif
 
 /* Debug traces.  */
-#ifndef YYDEBUG
-# define YYDEBUG 1
-#endif
+#ifndef MFSLDEBUG
+# if defined YYDEBUG
+#if YYDEBUG
+#   define MFSLDEBUG 1
+#  else
+#   define MFSLDEBUG 0
+#  endif
+# else /* ! defined YYDEBUG */
+#  define MFSLDEBUG 1
+# endif /* ! defined YYDEBUG */
+#endif  /* ! defined MFSLDEBUG */
 
-namespace yy {
-#line 195 "mfslParser.h"
+namespace mfsl {
+#line 203 "mfslParser.h"
 
 
 
@@ -200,11 +208,11 @@ namespace yy {
   class parser
   {
   public:
-#ifdef YYSTYPE
+#ifdef MFSLSTYPE
 # ifdef __GNUC__
-#  pragma GCC message "bison: do not #define YYSTYPE in C++, use %define api.value.type"
+#  pragma GCC message "bison: do not #define MFSLSTYPE in C++, use %define api.value.type"
 # endif
-    typedef YYSTYPE value_type;
+    typedef MFSLSTYPE value_type;
 #else
   /// A buffer to store and retrieve objects.
   ///
@@ -228,7 +236,7 @@ namespace yy {
     value_type (YY_RVREF (T) t)
       : yytypeid_ (&typeid (T))
     {
-      YY_ASSERT (sizeof (T) <= size);
+      MFSL_ASSERT (sizeof (T) <= size);
       new (yyas_<T> ()) T (YY_MOVE (t));
     }
 
@@ -242,7 +250,7 @@ namespace yy {
     /// Destruction, allowed only if empty.
     ~value_type () YY_NOEXCEPT
     {
-      YY_ASSERT (!yytypeid_);
+      MFSL_ASSERT (!yytypeid_);
     }
 
 # if 201103L <= YY_CPLUSPLUS
@@ -251,8 +259,8 @@ namespace yy {
     T&
     emplace (U&&... u)
     {
-      YY_ASSERT (!yytypeid_);
-      YY_ASSERT (sizeof (T) <= size);
+      MFSL_ASSERT (!yytypeid_);
+      MFSL_ASSERT (sizeof (T) <= size);
       yytypeid_ = & typeid (T);
       return *new (yyas_<T> ()) T (std::forward <U>(u)...);
     }
@@ -262,8 +270,8 @@ namespace yy {
     T&
     emplace ()
     {
-      YY_ASSERT (!yytypeid_);
-      YY_ASSERT (sizeof (T) <= size);
+      MFSL_ASSERT (!yytypeid_);
+      MFSL_ASSERT (sizeof (T) <= size);
       yytypeid_ = & typeid (T);
       return *new (yyas_<T> ()) T ();
     }
@@ -273,8 +281,8 @@ namespace yy {
     T&
     emplace (const T& t)
     {
-      YY_ASSERT (!yytypeid_);
-      YY_ASSERT (sizeof (T) <= size);
+      MFSL_ASSERT (!yytypeid_);
+      MFSL_ASSERT (sizeof (T) <= size);
       yytypeid_ = & typeid (T);
       return *new (yyas_<T> ()) T (t);
     }
@@ -303,9 +311,9 @@ namespace yy {
     T&
     as () YY_NOEXCEPT
     {
-      YY_ASSERT (yytypeid_);
-      YY_ASSERT (*yytypeid_ == typeid (T));
-      YY_ASSERT (sizeof (T) <= size);
+      MFSL_ASSERT (yytypeid_);
+      MFSL_ASSERT (*yytypeid_ == typeid (T));
+      MFSL_ASSERT (sizeof (T) <= size);
       return *yyas_<T> ();
     }
 
@@ -314,9 +322,9 @@ namespace yy {
     const T&
     as () const YY_NOEXCEPT
     {
-      YY_ASSERT (yytypeid_);
-      YY_ASSERT (*yytypeid_ == typeid (T));
-      YY_ASSERT (sizeof (T) <= size);
+      MFSL_ASSERT (yytypeid_);
+      MFSL_ASSERT (*yytypeid_ == typeid (T));
+      MFSL_ASSERT (sizeof (T) <= size);
       return *yyas_<T> ();
     }
 
@@ -332,8 +340,8 @@ namespace yy {
     void
     swap (self_type& that) YY_NOEXCEPT
     {
-      YY_ASSERT (yytypeid_);
-      YY_ASSERT (*yytypeid_ == *that.yytypeid_);
+      MFSL_ASSERT (yytypeid_);
+      MFSL_ASSERT (*yytypeid_ == *that.yytypeid_);
       std::swap (as<T> (), that.as<T> ());
     }
 
@@ -470,29 +478,29 @@ namespace yy {
     {
       enum token_kind_type
       {
-        TOK_YYEMPTY = -2,
-    TOK_YYEOF = 0,                 // "end of file"
-    TOK_YYerror = 1,               // error
-    TOK_YYUNDEF = 2,               // "invalid token"
-    TOK_BAR = 3,                   // "|"
-    TOK_AMPERSAND = 4,             // "&"
-    TOK_EQUAL = 5,                 // "="
-    TOK_SEMICOLON = 6,             // ";"
-    TOK_COLON = 7,                 // ":"
-    TOK_COMMA = 8,                 // ","
-    TOK_TOOL = 9,                  // "tool"
-    TOK_INPUT = 10,                // "input"
-    TOK_CHOICE = 11,               // "choice"
-    TOK_DEFAULT = 12,              // "default"
-    TOK_CASE = 13,                 // "case"
-    TOK_SELECT = 14,               // "select"
-    TOK_ALL = 15,                  // "all"
-    TOK_INTEGER = 16,              // "integer number"
-    TOK_DOUBLE = 17,               // "double number"
-    TOK_SINGLE_QUOTED_STRING = 18, // "single quoted_string"
-    TOK_DOUBLE_QUOTED_STRING = 19, // "double quoted_string"
-    TOK_NAME = 20,                 // "name"
-    TOK_OPTION = 21                // "option"
+        MFSL_TOK_MFSLEMPTY = -2,
+    MFSL_TOK_YYEOF = 0,            // "end of file"
+    MFSL_TOK_MFSLerror = 1,        // error
+    MFSL_TOK_MFSLUNDEF = 2,        // "invalid token"
+    MFSL_TOK_BAR = 3,              // "|"
+    MFSL_TOK_AMPERSAND = 4,        // "&"
+    MFSL_TOK_EQUAL = 5,            // "="
+    MFSL_TOK_SEMICOLON = 6,        // ";"
+    MFSL_TOK_COLON = 7,            // ":"
+    MFSL_TOK_COMMA = 8,            // ","
+    MFSL_TOK_TOOL = 9,             // "tool"
+    MFSL_TOK_INPUT = 10,           // "input"
+    MFSL_TOK_CHOICE = 11,          // "choice"
+    MFSL_TOK_DEFAULT = 12,         // "default"
+    MFSL_TOK_CASE = 13,            // "case"
+    MFSL_TOK_SELECT = 14,          // "select"
+    MFSL_TOK_ALL = 15,             // "all"
+    MFSL_TOK_INTEGER = 16,         // "integer number"
+    MFSL_TOK_DOUBLE = 17,          // "double number"
+    MFSL_TOK_SINGLE_QUOTED_STRING = 18, // "single quoted_string"
+    MFSL_TOK_DOUBLE_QUOTED_STRING = 19, // "double quoted_string"
+    MFSL_TOK_NAME = 20,            // "name"
+    MFSL_TOK_OPTION = 21           // "option"
       };
       /// Backward compatibility alias (Bison 3.6).
       typedef token_kind_type yytokentype;
@@ -797,8 +805,8 @@ switch (yykind)
 #endif
       {
 #if !defined _MSC_VER || defined __clang__
-        YY_ASSERT (tok == token::TOK_YYEOF
-                   || (token::TOK_YYerror <= tok && tok <= token::TOK_ALL));
+        MFSL_ASSERT (tok == token::MFSL_TOK_YYEOF
+                   || (token::MFSL_TOK_MFSLerror <= tok && tok <= token::MFSL_TOK_ALL));
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
@@ -810,7 +818,7 @@ switch (yykind)
 #endif
       {
 #if !defined _MSC_VER || defined __clang__
-        YY_ASSERT ((token::TOK_INTEGER <= tok && tok <= token::TOK_OPTION));
+        MFSL_ASSERT ((token::MFSL_TOK_INTEGER <= tok && tok <= token::MFSL_TOK_OPTION));
 #endif
       }
     };
@@ -834,7 +842,7 @@ switch (yykind)
     /// \returns  0 iff parsing succeeded.
     virtual int parse ();
 
-#if YYDEBUG
+#if MFSLDEBUG
     /// The current debugging stream.
     std::ostream& debug_stream () const YY_ATTRIBUTE_PURE;
     /// Set the current debugging stream.
@@ -866,44 +874,44 @@ switch (yykind)
       symbol_type
       make_YYEOF (location_type l)
       {
-        return symbol_type (token::TOK_YYEOF, std::move (l));
+        return symbol_type (token::MFSL_TOK_YYEOF, std::move (l));
       }
 #else
       static
       symbol_type
       make_YYEOF (const location_type& l)
       {
-        return symbol_type (token::TOK_YYEOF, l);
+        return symbol_type (token::MFSL_TOK_YYEOF, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_YYerror (location_type l)
+      make_MFSLerror (location_type l)
       {
-        return symbol_type (token::TOK_YYerror, std::move (l));
+        return symbol_type (token::MFSL_TOK_MFSLerror, std::move (l));
       }
 #else
       static
       symbol_type
-      make_YYerror (const location_type& l)
+      make_MFSLerror (const location_type& l)
       {
-        return symbol_type (token::TOK_YYerror, l);
+        return symbol_type (token::MFSL_TOK_MFSLerror, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_YYUNDEF (location_type l)
+      make_MFSLUNDEF (location_type l)
       {
-        return symbol_type (token::TOK_YYUNDEF, std::move (l));
+        return symbol_type (token::MFSL_TOK_MFSLUNDEF, std::move (l));
       }
 #else
       static
       symbol_type
-      make_YYUNDEF (const location_type& l)
+      make_MFSLUNDEF (const location_type& l)
       {
-        return symbol_type (token::TOK_YYUNDEF, l);
+        return symbol_type (token::MFSL_TOK_MFSLUNDEF, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -911,14 +919,14 @@ switch (yykind)
       symbol_type
       make_BAR (location_type l)
       {
-        return symbol_type (token::TOK_BAR, std::move (l));
+        return symbol_type (token::MFSL_TOK_BAR, std::move (l));
       }
 #else
       static
       symbol_type
       make_BAR (const location_type& l)
       {
-        return symbol_type (token::TOK_BAR, l);
+        return symbol_type (token::MFSL_TOK_BAR, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -926,14 +934,14 @@ switch (yykind)
       symbol_type
       make_AMPERSAND (location_type l)
       {
-        return symbol_type (token::TOK_AMPERSAND, std::move (l));
+        return symbol_type (token::MFSL_TOK_AMPERSAND, std::move (l));
       }
 #else
       static
       symbol_type
       make_AMPERSAND (const location_type& l)
       {
-        return symbol_type (token::TOK_AMPERSAND, l);
+        return symbol_type (token::MFSL_TOK_AMPERSAND, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -941,14 +949,14 @@ switch (yykind)
       symbol_type
       make_EQUAL (location_type l)
       {
-        return symbol_type (token::TOK_EQUAL, std::move (l));
+        return symbol_type (token::MFSL_TOK_EQUAL, std::move (l));
       }
 #else
       static
       symbol_type
       make_EQUAL (const location_type& l)
       {
-        return symbol_type (token::TOK_EQUAL, l);
+        return symbol_type (token::MFSL_TOK_EQUAL, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -956,14 +964,14 @@ switch (yykind)
       symbol_type
       make_SEMICOLON (location_type l)
       {
-        return symbol_type (token::TOK_SEMICOLON, std::move (l));
+        return symbol_type (token::MFSL_TOK_SEMICOLON, std::move (l));
       }
 #else
       static
       symbol_type
       make_SEMICOLON (const location_type& l)
       {
-        return symbol_type (token::TOK_SEMICOLON, l);
+        return symbol_type (token::MFSL_TOK_SEMICOLON, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -971,14 +979,14 @@ switch (yykind)
       symbol_type
       make_COLON (location_type l)
       {
-        return symbol_type (token::TOK_COLON, std::move (l));
+        return symbol_type (token::MFSL_TOK_COLON, std::move (l));
       }
 #else
       static
       symbol_type
       make_COLON (const location_type& l)
       {
-        return symbol_type (token::TOK_COLON, l);
+        return symbol_type (token::MFSL_TOK_COLON, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -986,14 +994,14 @@ switch (yykind)
       symbol_type
       make_COMMA (location_type l)
       {
-        return symbol_type (token::TOK_COMMA, std::move (l));
+        return symbol_type (token::MFSL_TOK_COMMA, std::move (l));
       }
 #else
       static
       symbol_type
       make_COMMA (const location_type& l)
       {
-        return symbol_type (token::TOK_COMMA, l);
+        return symbol_type (token::MFSL_TOK_COMMA, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1001,14 +1009,14 @@ switch (yykind)
       symbol_type
       make_TOOL (location_type l)
       {
-        return symbol_type (token::TOK_TOOL, std::move (l));
+        return symbol_type (token::MFSL_TOK_TOOL, std::move (l));
       }
 #else
       static
       symbol_type
       make_TOOL (const location_type& l)
       {
-        return symbol_type (token::TOK_TOOL, l);
+        return symbol_type (token::MFSL_TOK_TOOL, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1016,14 +1024,14 @@ switch (yykind)
       symbol_type
       make_INPUT (location_type l)
       {
-        return symbol_type (token::TOK_INPUT, std::move (l));
+        return symbol_type (token::MFSL_TOK_INPUT, std::move (l));
       }
 #else
       static
       symbol_type
       make_INPUT (const location_type& l)
       {
-        return symbol_type (token::TOK_INPUT, l);
+        return symbol_type (token::MFSL_TOK_INPUT, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1031,14 +1039,14 @@ switch (yykind)
       symbol_type
       make_CHOICE (location_type l)
       {
-        return symbol_type (token::TOK_CHOICE, std::move (l));
+        return symbol_type (token::MFSL_TOK_CHOICE, std::move (l));
       }
 #else
       static
       symbol_type
       make_CHOICE (const location_type& l)
       {
-        return symbol_type (token::TOK_CHOICE, l);
+        return symbol_type (token::MFSL_TOK_CHOICE, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1046,14 +1054,14 @@ switch (yykind)
       symbol_type
       make_DEFAULT (location_type l)
       {
-        return symbol_type (token::TOK_DEFAULT, std::move (l));
+        return symbol_type (token::MFSL_TOK_DEFAULT, std::move (l));
       }
 #else
       static
       symbol_type
       make_DEFAULT (const location_type& l)
       {
-        return symbol_type (token::TOK_DEFAULT, l);
+        return symbol_type (token::MFSL_TOK_DEFAULT, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1061,14 +1069,14 @@ switch (yykind)
       symbol_type
       make_CASE (location_type l)
       {
-        return symbol_type (token::TOK_CASE, std::move (l));
+        return symbol_type (token::MFSL_TOK_CASE, std::move (l));
       }
 #else
       static
       symbol_type
       make_CASE (const location_type& l)
       {
-        return symbol_type (token::TOK_CASE, l);
+        return symbol_type (token::MFSL_TOK_CASE, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1076,14 +1084,14 @@ switch (yykind)
       symbol_type
       make_SELECT (location_type l)
       {
-        return symbol_type (token::TOK_SELECT, std::move (l));
+        return symbol_type (token::MFSL_TOK_SELECT, std::move (l));
       }
 #else
       static
       symbol_type
       make_SELECT (const location_type& l)
       {
-        return symbol_type (token::TOK_SELECT, l);
+        return symbol_type (token::MFSL_TOK_SELECT, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1091,14 +1099,14 @@ switch (yykind)
       symbol_type
       make_ALL (location_type l)
       {
-        return symbol_type (token::TOK_ALL, std::move (l));
+        return symbol_type (token::MFSL_TOK_ALL, std::move (l));
       }
 #else
       static
       symbol_type
       make_ALL (const location_type& l)
       {
-        return symbol_type (token::TOK_ALL, l);
+        return symbol_type (token::MFSL_TOK_ALL, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1106,14 +1114,14 @@ switch (yykind)
       symbol_type
       make_INTEGER (string v, location_type l)
       {
-        return symbol_type (token::TOK_INTEGER, std::move (v), std::move (l));
+        return symbol_type (token::MFSL_TOK_INTEGER, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
       make_INTEGER (const string& v, const location_type& l)
       {
-        return symbol_type (token::TOK_INTEGER, v, l);
+        return symbol_type (token::MFSL_TOK_INTEGER, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1121,14 +1129,14 @@ switch (yykind)
       symbol_type
       make_DOUBLE (string v, location_type l)
       {
-        return symbol_type (token::TOK_DOUBLE, std::move (v), std::move (l));
+        return symbol_type (token::MFSL_TOK_DOUBLE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
       make_DOUBLE (const string& v, const location_type& l)
       {
-        return symbol_type (token::TOK_DOUBLE, v, l);
+        return symbol_type (token::MFSL_TOK_DOUBLE, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1136,14 +1144,14 @@ switch (yykind)
       symbol_type
       make_SINGLE_QUOTED_STRING (string v, location_type l)
       {
-        return symbol_type (token::TOK_SINGLE_QUOTED_STRING, std::move (v), std::move (l));
+        return symbol_type (token::MFSL_TOK_SINGLE_QUOTED_STRING, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
       make_SINGLE_QUOTED_STRING (const string& v, const location_type& l)
       {
-        return symbol_type (token::TOK_SINGLE_QUOTED_STRING, v, l);
+        return symbol_type (token::MFSL_TOK_SINGLE_QUOTED_STRING, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1151,14 +1159,14 @@ switch (yykind)
       symbol_type
       make_DOUBLE_QUOTED_STRING (string v, location_type l)
       {
-        return symbol_type (token::TOK_DOUBLE_QUOTED_STRING, std::move (v), std::move (l));
+        return symbol_type (token::MFSL_TOK_DOUBLE_QUOTED_STRING, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
       make_DOUBLE_QUOTED_STRING (const string& v, const location_type& l)
       {
-        return symbol_type (token::TOK_DOUBLE_QUOTED_STRING, v, l);
+        return symbol_type (token::MFSL_TOK_DOUBLE_QUOTED_STRING, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1166,14 +1174,14 @@ switch (yykind)
       symbol_type
       make_NAME (string v, location_type l)
       {
-        return symbol_type (token::TOK_NAME, std::move (v), std::move (l));
+        return symbol_type (token::MFSL_TOK_NAME, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
       make_NAME (const string& v, const location_type& l)
       {
-        return symbol_type (token::TOK_NAME, v, l);
+        return symbol_type (token::MFSL_TOK_NAME, v, l);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1181,14 +1189,14 @@ switch (yykind)
       symbol_type
       make_OPTION (string v, location_type l)
       {
-        return symbol_type (token::TOK_OPTION, std::move (v), std::move (l));
+        return symbol_type (token::MFSL_TOK_OPTION, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
       make_OPTION (const string& v, const location_type& l)
       {
-        return symbol_type (token::TOK_OPTION, v, l);
+        return symbol_type (token::MFSL_TOK_OPTION, v, l);
       }
 #endif
 
@@ -1297,7 +1305,7 @@ switch (yykind)
     static const signed char yyr2_[];
 
 
-#if YYDEBUG
+#if MFSLDEBUG
     // YYRLINE[YYN] -- Source line where rule number YYN was defined.
     static const short yyrline_[];
     /// Report on the debug stream that the rule \a r is going to be reduced.
@@ -1686,10 +1694,10 @@ switch (yykind)
   }
 
 
-} // yy
-#line 1691 "mfslParser.h"
+} // mfsl
+#line 1699 "mfslParser.h"
 
 
 
 
-#endif // !YY_YY_MFSLPARSER_H_INCLUDED
+#endif // !YY_MFSL_MFSLPARSER_H_INCLUDED

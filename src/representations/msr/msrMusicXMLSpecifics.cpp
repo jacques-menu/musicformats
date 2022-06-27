@@ -278,7 +278,7 @@ void msrPageLayout::print (ostream& os) const
 {
   os << "[PageLayout" << endl;
 
-  const int fieldWidth = 13;
+  const int fieldWidth = 17;
 
   ++gIndenter;
 
@@ -343,7 +343,13 @@ void msrPageLayout::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrPageLayout& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -496,7 +502,13 @@ void msrSystemLayout::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrSystemLayout& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -606,7 +618,13 @@ void msrSystemDividers::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrSystemDividers& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -724,7 +742,13 @@ void msrStaffLayout::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrStaffLayout& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -828,7 +852,13 @@ void msrMeasureLayout::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMeasureLayout& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1067,7 +1097,13 @@ void msrPrintLayout::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrPrintLayout& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1281,7 +1317,13 @@ void msrLineWidth::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrLineWidth& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1434,7 +1476,13 @@ void msrNoteSize::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrNoteSize& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1584,7 +1632,13 @@ void msrDistance::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrDistance& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1773,7 +1827,13 @@ void msrGlyph::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrGlyph& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1917,7 +1977,13 @@ void msrOtherAppearance::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrOtherAppearance& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2202,7 +2268,13 @@ void msrAppearance::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrAppearance& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

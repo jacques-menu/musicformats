@@ -35,6 +35,8 @@
 // private implementation details that can be changed or removed.
 
 
+// Take the name prefix into account.
+#define yylex   mfsllex
 
 // First part of user prologue.
 #line 1 "mfslParser.yy"
@@ -66,25 +68,21 @@
 using namespace MusicFormats;
 
 
-#line 70 "mfslParser.cpp"
+#line 72 "mfslParser.cpp"
 
 
 #include "mfslParser.h"
 
 
 // Unqualified %code blocks.
-#line 65 "mfslParser.yy"
+#line 68 "mfslParser.yy"
 
-
-#include "mfslBasicTypes.h"
-
-S_mfslChoice pCurrentChoiceChoice;
-
+  #include "mfslBasicTypes.h"
 #line 98 "mfslParser.yy"
 
-# include "mfslDriver.h"
+  #include "mfslDriver.h"
 
-#line 88 "mfslParser.cpp"
+#line 86 "mfslParser.cpp"
 
 
 #ifndef YY_
@@ -131,7 +129,7 @@ S_mfslChoice pCurrentChoiceChoice;
 
 
 // Enable debugging if requested.
-#if YYDEBUG
+#if MFSLDEBUG
 
 // A pseudo ostream that takes yydebug_ into account.
 # define YYCDEBUG if (yydebug_) (*yycdebug_)
@@ -158,14 +156,14 @@ S_mfslChoice pCurrentChoiceChoice;
       yy_stack_print_ ();                \
   } while (false)
 
-#else // !YYDEBUG
+#else // !MFSLDEBUG
 
 # define YYCDEBUG if (false) std::cerr
 # define YY_SYMBOL_PRINT(Title, Symbol)  YY_USE (Symbol)
 # define YY_REDUCE_PRINT(Rule)           static_cast<void> (0)
 # define YY_STACK_PRINT()                static_cast<void> (0)
 
-#endif // !YYDEBUG
+#endif // !MFSLDEBUG
 
 #define yyerrok         (yyerrstatus_ = 0)
 #define yyclearin       (yyla.clear ())
@@ -175,12 +173,12 @@ S_mfslChoice pCurrentChoiceChoice;
 #define YYERROR         goto yyerrorlab
 #define YYRECOVERING()  (!!yyerrstatus_)
 
-namespace yy {
-#line 180 "mfslParser.cpp"
+namespace mfsl {
+#line 178 "mfslParser.cpp"
 
   /// Build a parser object.
   parser::parser (mfslDriver& drv_yyarg)
-#if YYDEBUG
+#if MFSLDEBUG
     : yydebug_ (false),
       yycdebug_ (&std::cerr),
 #else
@@ -364,7 +362,7 @@ namespace yy {
       YY_SYMBOL_PRINT (yymsg, yysym);
   }
 
-#if YYDEBUG
+#if MFSLDEBUG
   template <typename Base>
   void
   parser::yy_print_ (std::ostream& yyo, const basic_symbol<Base>& yysym) const
@@ -382,69 +380,69 @@ namespace yy {
         switch (yykind)
     {
       case symbol_kind::S_INTEGER: // "integer number"
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 388 "mfslParser.cpp"
+#line 386 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_DOUBLE: // "double number"
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 394 "mfslParser.cpp"
+#line 392 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_SINGLE_QUOTED_STRING: // "single quoted_string"
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 400 "mfslParser.cpp"
+#line 398 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_DOUBLE_QUOTED_STRING: // "double quoted_string"
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 406 "mfslParser.cpp"
+#line 404 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_NAME: // "name"
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 412 "mfslParser.cpp"
+#line 410 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_OPTION: // "option"
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 418 "mfslParser.cpp"
+#line 416 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_Number: // Number
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 424 "mfslParser.cpp"
+#line 422 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_SingleString: // SingleString
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 430 "mfslParser.cpp"
+#line 428 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_String: // String
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 436 "mfslParser.cpp"
+#line 434 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_OptionValue: // OptionValue
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 442 "mfslParser.cpp"
+#line 440 "mfslParser.cpp"
         break;
 
       case symbol_kind::S_LabelName: // LabelName
-#line 62 "mfslParser.yy"
+#line 65 "mfslParser.yy"
                  { yyo << yysym.value.template as < string > (); }
-#line 448 "mfslParser.cpp"
+#line 446 "mfslParser.cpp"
         break;
 
       default:
@@ -480,7 +478,7 @@ namespace yy {
     yystack_.pop (n);
   }
 
-#if YYDEBUG
+#if MFSLDEBUG
   std::ostream&
   parser::debug_stream () const
   {
@@ -505,7 +503,7 @@ namespace yy {
   {
     yydebug_ = l;
   }
-#endif // YYDEBUG
+#endif // MFSLDEBUG
 
   parser::state_type
   parser::yy_lr_goto_state_ (state_type yystate, int yysym)
@@ -736,7 +734,7 @@ namespace yy {
 
         --gIndenter;
       }
-#line 740 "mfslParser.cpp"
+#line 738 "mfslParser.cpp"
     break;
 
   case 3: // $@2: %empty
@@ -749,37 +747,37 @@ namespace yy {
 
         --gIndenter;
       }
-#line 753 "mfslParser.cpp"
+#line 751 "mfslParser.cpp"
     break;
 
   case 5: // Number: "integer number"
 #line 188 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 759 "mfslParser.cpp"
+#line 757 "mfslParser.cpp"
     break;
 
   case 6: // Number: "double number"
 #line 189 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 765 "mfslParser.cpp"
+#line 763 "mfslParser.cpp"
     break;
 
   case 7: // SingleString: "single quoted_string"
 #line 197 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 771 "mfslParser.cpp"
+#line 769 "mfslParser.cpp"
     break;
 
   case 8: // SingleString: "double quoted_string"
 #line 198 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 777 "mfslParser.cpp"
+#line 775 "mfslParser.cpp"
     break;
 
   case 9: // String: SingleString
 #line 202 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 783 "mfslParser.cpp"
+#line 781 "mfslParser.cpp"
     break;
 
   case 10: // String: String SingleString
@@ -787,7 +785,7 @@ namespace yy {
       {
         yylhs.value.as < string > () = yystack_[1].value.as < string > () + yystack_[0].value.as < string > ();
       }
-#line 791 "mfslParser.cpp"
+#line 789 "mfslParser.cpp"
     break;
 
   case 11: // Tool: "tool" ":" "name" ";"
@@ -795,7 +793,7 @@ namespace yy {
       {
         drv.setTool (yystack_[1].value.as < string > ());
       }
-#line 799 "mfslParser.cpp"
+#line 797 "mfslParser.cpp"
     break;
 
   case 15: // InputSource: "name"
@@ -803,7 +801,7 @@ namespace yy {
       {
         drv.appendInputSouce (yystack_[0].value.as < string > ());
       }
-#line 807 "mfslParser.cpp"
+#line 805 "mfslParser.cpp"
     break;
 
   case 16: // InputSource: String
@@ -811,7 +809,7 @@ namespace yy {
       {
         drv.appendInputSouce (yystack_[0].value.as < string > ());
       }
-#line 815 "mfslParser.cpp"
+#line 813 "mfslParser.cpp"
     break;
 
   case 25: // Option: "option"
@@ -832,7 +830,7 @@ namespace yy {
 
         --gIndenter;
       }
-#line 836 "mfslParser.cpp"
+#line 834 "mfslParser.cpp"
     break;
 
   case 26: // Option: "option" OptionValue
@@ -853,25 +851,25 @@ namespace yy {
 
         --gIndenter;
       }
-#line 857 "mfslParser.cpp"
+#line 855 "mfslParser.cpp"
     break;
 
   case 27: // OptionValue: "name"
 #line 310 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 863 "mfslParser.cpp"
+#line 861 "mfslParser.cpp"
     break;
 
   case 28: // OptionValue: Number
 #line 311 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 869 "mfslParser.cpp"
+#line 867 "mfslParser.cpp"
     break;
 
   case 29: // OptionValue: String
 #line 312 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 875 "mfslParser.cpp"
+#line 873 "mfslParser.cpp"
     break;
 
   case 30: // OptionValue: "name" "=" "name"
@@ -879,7 +877,7 @@ namespace yy {
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + "=" + yystack_[0].value.as < string > ();
       }
-#line 883 "mfslParser.cpp"
+#line 881 "mfslParser.cpp"
     break;
 
   case 31: // OptionValue: "name" ":" "name"
@@ -887,7 +885,7 @@ namespace yy {
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + ":" + yystack_[0].value.as < string > ();
       }
-#line 891 "mfslParser.cpp"
+#line 889 "mfslParser.cpp"
     break;
 
   case 32: // OptionValue: "name" "=" Number
@@ -895,7 +893,7 @@ namespace yy {
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + "=" + yystack_[0].value.as < string > ();
       }
-#line 899 "mfslParser.cpp"
+#line 897 "mfslParser.cpp"
     break;
 
   case 33: // OptionValue: "name" ":" Number
@@ -903,7 +901,7 @@ namespace yy {
       {
         yylhs.value.as < string > () = yystack_[2].value.as < string > () + ":" + yystack_[0].value.as < string > ();
       }
-#line 907 "mfslParser.cpp"
+#line 905 "mfslParser.cpp"
     break;
 
   case 34: // $@3: %empty
@@ -932,9 +930,9 @@ namespace yy {
             choice,
             drv);
 
-        pCurrentChoiceChoice = choice;
+        drv.setCurrentChoiceChoice (choice);
       }
-#line 938 "mfslParser.cpp"
+#line 936 "mfslParser.cpp"
     break;
 
   case 35: // $@4: %empty
@@ -958,7 +956,7 @@ namespace yy {
             label,
             drv);
       }
-#line 962 "mfslParser.cpp"
+#line 960 "mfslParser.cpp"
     break;
 
   case 36: // ChoiceDeclaration: "choice" "name" ":" $@3 ChoiceLabels "," "default" ":" "name" $@4 ";"
@@ -972,7 +970,7 @@ namespace yy {
 
         --gIndenter;
       }
-#line 976 "mfslParser.cpp"
+#line 974 "mfslParser.cpp"
     break;
 
   case 37: // ChoiceLabels: "name"
@@ -982,14 +980,14 @@ namespace yy {
 
         string label = yystack_[0].value.as < string > ();
 
-        pCurrentChoiceChoice->
+        drv.getCurrentChoiceChoice ()->
           addLabel (
             label,
             drv);
 
         --gIndenter;
       }
-#line 993 "mfslParser.cpp"
+#line 991 "mfslParser.cpp"
     break;
 
   case 38: // ChoiceLabels: ChoiceLabels "|" "name"
@@ -999,14 +997,14 @@ namespace yy {
 
         string label = yystack_[0].value.as < string > ();
 
-        pCurrentChoiceChoice->
+        drv.getCurrentChoiceChoice ()->
           addLabel (
             label,
             drv);
 
         --gIndenter;
       }
-#line 1010 "mfslParser.cpp"
+#line 1008 "mfslParser.cpp"
     break;
 
   case 39: // CaseChoiceLabel: "name"
@@ -1029,7 +1027,7 @@ namespace yy {
 
         --gIndenter;
       }
-#line 1033 "mfslParser.cpp"
+#line 1031 "mfslParser.cpp"
     break;
 
   case 42: // $@5: %empty
@@ -1086,7 +1084,7 @@ namespace yy {
         choice->
           setChoiceIsUsedInCaseChoiceStatements ();
       }
-#line 1090 "mfslParser.cpp"
+#line 1088 "mfslParser.cpp"
     break;
 
   case 43: // CaseChoiceStatement: "case" "name" ":" $@5 OptionalCaseChoiceAlternativesSeq ";"
@@ -1107,7 +1105,7 @@ namespace yy {
 
         --gIndenter;
       }
-#line 1111 "mfslParser.cpp"
+#line 1109 "mfslParser.cpp"
     break;
 
   case 48: // $@6: %empty
@@ -1123,7 +1121,7 @@ namespace yy {
         currentCaseChoiceStatement->
           clearCaseCurrentLabelsList ();
       }
-#line 1127 "mfslParser.cpp"
+#line 1125 "mfslParser.cpp"
     break;
 
   case 49: // $@7: %empty
@@ -1155,7 +1153,7 @@ namespace yy {
           CaseChoiceAlternativeOptionsBlock,
           CaseChoiceAlternativeDescription);
       }
-#line 1159 "mfslParser.cpp"
+#line 1157 "mfslParser.cpp"
     break;
 
   case 50: // CaseChoiceAlternative: $@6 CaseChoiceLabelsSeq ":" $@7 OptionalScriptElementsSeq ";"
@@ -1197,7 +1195,7 @@ namespace yy {
 
         --gIndenter;
       }
-#line 1201 "mfslParser.cpp"
+#line 1199 "mfslParser.cpp"
     break;
 
   case 51: // CaseInputName: "name"
@@ -1220,7 +1218,7 @@ namespace yy {
 
         --gIndenter;
       }
-#line 1224 "mfslParser.cpp"
+#line 1222 "mfslParser.cpp"
     break;
 
   case 54: // $@8: %empty
@@ -1277,7 +1275,7 @@ namespace yy {
         input->
           setInputIsUsedInCaseInputStatements ();
       }
-#line 1281 "mfslParser.cpp"
+#line 1279 "mfslParser.cpp"
     break;
 
   case 55: // CaseInputStatement: "case" "input" ":" $@8 OptionalCaseInputAlternativesSeq ";"
@@ -1298,7 +1296,7 @@ namespace yy {
 
         --gIndenter;
       }
-#line 1302 "mfslParser.cpp"
+#line 1300 "mfslParser.cpp"
     break;
 
   case 60: // $@9: %empty
@@ -1314,7 +1312,7 @@ namespace yy {
         currentCaseInputStatement->
           clearCaseInputCurrentNamesList ();
       }
-#line 1318 "mfslParser.cpp"
+#line 1316 "mfslParser.cpp"
     break;
 
   case 61: // $@10: %empty
@@ -1346,7 +1344,7 @@ namespace yy {
           caseInputAlternativeOptionsBlock,
           caseInputAlternativeDescription);
       }
-#line 1350 "mfslParser.cpp"
+#line 1348 "mfslParser.cpp"
     break;
 
   case 62: // CaseInputAlternative: $@9 CaseInputNamesSeq ":" $@10 OptionalScriptElementsSeq ";"
@@ -1388,19 +1386,19 @@ namespace yy {
 
         --gIndenter;
       }
-#line 1392 "mfslParser.cpp"
+#line 1390 "mfslParser.cpp"
     break;
 
   case 67: // LabelName: "name"
 #line 844 "mfslParser.yy"
     { yylhs.value.as < string > () = yystack_[0].value.as < string > (); }
-#line 1398 "mfslParser.cpp"
+#line 1396 "mfslParser.cpp"
     break;
 
   case 68: // LabelName: "all"
 #line 846 "mfslParser.yy"
-      { yylhs.value.as < string > () = K_ALL_PSEUDO_LABEL_NAME; }
-#line 1404 "mfslParser.cpp"
+      { yylhs.value.as < string > () = mfslDriver::K_ALL_PSEUDO_LABEL_NAME; }
+#line 1402 "mfslParser.cpp"
     break;
 
   case 69: // SelectStatement: "select" "name" ":" LabelName ";"
@@ -1414,11 +1412,11 @@ namespace yy {
           choiceName,
           label);
       }
-#line 1418 "mfslParser.cpp"
+#line 1416 "mfslParser.cpp"
     break;
 
 
-#line 1422 "mfslParser.cpp"
+#line 1420 "mfslParser.cpp"
 
             default:
               break;
@@ -1635,7 +1633,7 @@ namespace yy {
     // Actual number of expected tokens
     int yycount = 0;
 
-#if YYDEBUG
+#if MFSLDEBUG
     // Execute LAC once. We don't care if it is successful, we
     // only do it for the sake of debugging output.
     if (!yyparser_.yy_lac_established_)
@@ -1672,7 +1670,7 @@ namespace yy {
     // Clear it, to get rid of potential left-overs from previous call.
     yylac_stack_.clear ();
     // Reduce until we encounter a shift and thereby accept the token.
-#if YYDEBUG
+#if MFSLDEBUG
     YYCDEBUG << "LAC: checking lookahead " << symbol_name (yytoken) << ':';
 #endif
     std::ptrdiff_t lac_top = 0;
@@ -1773,7 +1771,7 @@ namespace yy {
       return true;
     else
       {
-#if YYDEBUG
+#if MFSLDEBUG
         YYCDEBUG << "LAC: initial context established for "
                  << symbol_name (yytoken) << '\n';
 #endif
@@ -2012,7 +2010,7 @@ namespace yy {
 
 
 
-#if YYDEBUG
+#if MFSLDEBUG
   const short
   parser::yyrline_[] =
   {
@@ -2050,11 +2048,11 @@ namespace yy {
       YY_SYMBOL_PRINT ("   $" << yyi + 1 << " =",
                        yystack_[(yynrhs) - (yyi + 1)]);
   }
-#endif // YYDEBUG
+#endif // MFSLDEBUG
 
 
-} // yy
-#line 2058 "mfslParser.cpp"
+} // mfsl
+#line 2056 "mfslParser.cpp"
 
 #line 863 "mfslParser.yy"
 
@@ -2066,7 +2064,7 @@ namespace yy {
 
 
 void
-yy::parser::error (const location_type& loc, const string& message)
+mfsl::parser::error (const location_type& loc, const string& message)
 {
   mfslError (
     message,

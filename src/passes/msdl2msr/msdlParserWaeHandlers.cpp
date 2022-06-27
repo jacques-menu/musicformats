@@ -68,7 +68,13 @@ void msdlParserWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlParserWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -186,7 +192,13 @@ void msdlParserEnglishWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlParserEnglishWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -305,7 +317,13 @@ void msdlParserFrenchWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlParserFrenchWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -423,7 +441,13 @@ void msdlParserItalianWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlParserItalianWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -542,7 +566,13 @@ void msdlParserGermanWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlParserGermanWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -661,7 +691,13 @@ void msdlParserSpanishWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlParserSpanishWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -780,7 +816,13 @@ void msdlParserDutchWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlParserDutchWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

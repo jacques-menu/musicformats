@@ -693,7 +693,13 @@ void mfcVersionNumber::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfcVersionNumber& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -772,7 +778,13 @@ void mfcVersionDescr::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfcVersionDescr& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -853,7 +865,13 @@ void mfcVersionsHistory::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfcVersionsHistory& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1036,7 +1054,13 @@ void mfcComponentDescr::printHistory (ostream&  os) const
 
 ostream& operator<< (ostream& os, const S_mfcComponentDescr& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1082,7 +1106,13 @@ mfcRepresentationComponent::~mfcRepresentationComponent ()
 
 ostream& operator<< (ostream& os, const S_mfcRepresentationComponent& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1128,7 +1158,13 @@ mfcPassComponent::~mfcPassComponent ()
 
 ostream& operator<< (ostream& os, const S_mfcPassComponent& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1705,7 +1741,13 @@ void mfcMultiComponent::printHistory (ostream&  os) const
 
 ostream& operator<< (ostream& os, const S_mfcMultiComponent& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1763,7 +1805,13 @@ mfcGeneratorComponent::~mfcGeneratorComponent ()
 
 ostream& operator<< (ostream& os, const S_mfcGeneratorComponent& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1821,7 +1869,13 @@ mfcConverterComponent::~mfcConverterComponent ()
 
 ostream& operator<< (ostream& os, const S_mfcConverterComponent& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2093,7 +2147,13 @@ void mfcLibraryComponent::printHistory (ostream&  os) const
 
 ostream& operator<< (ostream& os, const S_mfcLibraryComponent& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

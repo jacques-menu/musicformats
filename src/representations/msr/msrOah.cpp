@@ -273,7 +273,13 @@ void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msrPitchesLanguageAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -623,7 +629,13 @@ void msrRenamePartAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msrRenamePartAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1441,7 +1453,13 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
 ostream& operator<< (ostream& os, const S_msrOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

@@ -562,7 +562,13 @@ void xml2xmlInsiderHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_xml2xmlInsiderHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

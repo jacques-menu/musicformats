@@ -1742,7 +1742,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
   if (fCurrentSkipGraceNotesGroup) {
     // add it ahead of the other voices in the part if needed
     fCurrentPartClone->
-      addSkipGraceNotesGroupBeforeAheadOfVoicesClonesIfNeeded ( // JMI only if there's more than one voice???
+      addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded ( // JMI only if there's more than one voice???
         fCurrentVoiceClone,
         fCurrentSkipGraceNotesGroup);
 
@@ -4840,7 +4840,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
   }
 
-  // addSkipGraceNotesGroupBeforeAheadOfVoicesClonesIfNeeded() will
+  // addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded() will
   // append the same skip grace notes to the ofhter voices if needed
   // in visitEnd (S_msrPart&)
 }

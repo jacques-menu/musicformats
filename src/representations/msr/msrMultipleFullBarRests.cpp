@@ -528,7 +528,13 @@ void msrMultipleFullBarRests::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMultipleFullBarRests& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

@@ -268,7 +268,13 @@ void bsrTimeSignatureItem::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_bsrTimeSignatureItem& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -888,7 +894,13 @@ void bsrTimeSignature::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_bsrTimeSignature& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

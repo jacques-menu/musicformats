@@ -207,7 +207,13 @@ void msrTechnical::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTechnical& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -363,7 +369,13 @@ void msrTechnicalWithInteger::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTechnicalWithInteger& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -513,7 +525,13 @@ void msrTechnicalWithFloat::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTechnicalWithFloat& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -693,7 +711,13 @@ void msrTechnicalWithString::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTechnicalWithString& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

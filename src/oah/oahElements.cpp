@@ -569,7 +569,13 @@ void oahElement::printHelp (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahElement& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -663,7 +669,13 @@ void oahElementUse::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahElementUse& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

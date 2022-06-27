@@ -140,7 +140,13 @@ void msrDynamic::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrDynamic& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -243,7 +249,13 @@ void msrOtherDynamic::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrOtherDynamic& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -354,7 +366,13 @@ void msrCrescDecresc::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrCrescDecresc& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -529,7 +547,13 @@ void msrWedge::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrWedge& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

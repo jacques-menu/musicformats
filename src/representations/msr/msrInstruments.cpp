@@ -150,7 +150,13 @@ void msrStringTuning::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrStringTuning& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -262,7 +268,13 @@ void msrScordatura::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrScordatura& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -368,7 +380,13 @@ void msrAccordionRegistration::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrAccordionRegistration& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -585,7 +603,13 @@ void msrHarpPedalsTuning::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrHarpPedalsTuning& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -739,7 +763,13 @@ void msrPedal::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrPedal& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -819,7 +849,13 @@ void msrDamp::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrDamp& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -899,7 +935,13 @@ void msrDampAll::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrDampAll& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

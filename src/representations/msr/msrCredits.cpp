@@ -219,7 +219,13 @@ void msrCreditWords::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrCreditWords& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -370,7 +376,13 @@ void msrCredit::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrCredit& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

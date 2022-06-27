@@ -262,7 +262,13 @@ void brailleOutputKindAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_brailleOutputKindAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -478,7 +484,13 @@ void brailleUTFKindAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_brailleUTFKindAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -694,7 +706,13 @@ void brailleByteOrderingKindAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_brailleByteOrderingKindAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1138,7 +1156,13 @@ void brailleGenerationOahGroup::printBrailleGenerationOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_brailleGenerationOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

@@ -648,7 +648,13 @@ void xml2brlInsiderHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_xml2brlInsiderHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

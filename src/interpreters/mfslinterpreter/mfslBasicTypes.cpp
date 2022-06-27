@@ -146,7 +146,13 @@ void mfslOptionsBlock::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfslOptionsBlock& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -755,7 +761,13 @@ void mfslInput::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfslInput& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -955,7 +967,13 @@ void mfslInputsTable::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfslInputsTable& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1606,7 +1624,13 @@ void mfslChoice::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfslChoice& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1806,7 +1830,13 @@ void mfslChoicesTable::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfslChoicesTable& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2003,7 +2033,13 @@ void mfslCaseChoiceStatement::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfslCaseChoiceStatement& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2200,7 +2236,13 @@ void mfslCaseInputStatement::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mfslCaseInputStatement& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

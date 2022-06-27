@@ -269,7 +269,7 @@ void msrStaff::initializeStaff ()
     S_msrTransposition
       transpose =
         fStaffPartUpLink->
-          getPartCurrentTranspose ();
+          getPartCurrentTransposition ();
 
     if (transpose) {
 #ifdef TRACING_IS_ENABLED
@@ -3558,7 +3558,13 @@ void msrStaff::printSlices (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrStaff& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

@@ -1411,7 +1411,13 @@ void msrPartGroup::printSlices (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrPartGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

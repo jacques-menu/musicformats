@@ -35,6 +35,8 @@ using namespace MusicFormats;
 %require "3.8.1"
 %defines
 
+%define api.prefix {mfsl}
+
 %define api.token.raw
 
 %define api.token.constructor
@@ -42,15 +44,16 @@ using namespace MusicFormats;
 %define parse.assert
 
 %code requires {
-  # include <string>
+  #include <string>
 
   class mfslDriver;
 }
 
 // the parsing context
-%param { mfslDriver& drv }
+%param { mfslDriver& drv } // declaration, any parameter name is fine
 
-%verbose
+%verbose // to produce mfslParser.output
+
 %locations
 
 // other Bison options
@@ -63,40 +66,37 @@ using namespace MusicFormats;
 
 
 %code {
-
-#include "mfslBasicTypes.h"
-
-S_mfslChoice pCurrentChoiceChoice;
-
+  #include "mfslBasicTypes.h"
 }
 
 
 // the MFSL tokens
 //_______________________________________________________________________________
 
-%define api.token.prefix {TOK_}
+%define api.token.prefix {MFSL_TOK_}
+
 %token
-  BAR        "|"
-  AMPERSAND  "&"
-  EQUAL      "="
-  SEMICOLON  ";"
-  COLON      ":"
-  COMMA      ","
+  BAR         "|"
+  AMPERSAND   "&"
+  EQUAL        "="
+  SEMICOLON   ";"
+  COLON       ":"
+  COMMA       ","
 
-  TOOL      "tool"
-  INPUT      "input"
+  TOOL        "tool"
+  INPUT       "input"
 
-  CHOICE    "choice"
-  DEFAULT   "default"
+  CHOICE      "choice"
+  DEFAULT     "default"
 
-  CASE       "case"
+  CASE        "case"
 
-  SELECT     "select"
-  ALL        "all"
+  SELECT      "select"
+  ALL         "all"
 ;
 
 %code {
-# include "mfslDriver.h"
+  #include "mfslDriver.h"
 }
 
 %token <string> INTEGER "integer number"
@@ -358,7 +358,7 @@ ChoiceDeclaration
             choice,
             drv);
 
-        pCurrentChoiceChoice = choice;
+        drv.setCurrentChoiceChoice (choice);
       }
 
     ChoiceLabels
@@ -405,7 +405,7 @@ ChoiceLabels
 
         string label = $1;
 
-        pCurrentChoiceChoice->
+        drv.getCurrentChoiceChoice ()->
           addLabel (
             label,
             drv);
@@ -419,7 +419,7 @@ ChoiceLabels
 
         string label = $3;
 
-        pCurrentChoiceChoice->
+        drv.getCurrentChoiceChoice ()->
           addLabel (
             label,
             drv);
@@ -843,7 +843,7 @@ SelectStatementSeq
 LabelName
   : NAME
   | ALL
-      { $$ = K_ALL_PSEUDO_LABEL_NAME; }
+      { $$ = mfslDriver::K_ALL_PSEUDO_LABEL_NAME; }
 ;
 
 SelectStatement
@@ -869,7 +869,7 @@ SelectStatement
 
 
 void
-yy::parser::error (const location_type& loc, const string& message)
+mfsl::parser::error (const location_type& loc, const string& message)
 {
   mfslError (
     message,

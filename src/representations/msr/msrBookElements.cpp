@@ -28,7 +28,13 @@ msrBookElement::~msrBookElement ()
 
 ostream& operator<< (ostream& os, const S_msrBookElement& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

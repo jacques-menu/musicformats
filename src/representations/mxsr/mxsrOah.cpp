@@ -302,7 +302,13 @@ void mxsrOahGroup::printMxsrOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_mxsrOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

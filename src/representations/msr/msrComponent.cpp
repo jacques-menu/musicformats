@@ -100,6 +100,16 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
             "Introduced msrSegmentComponent in MSR"
           }
       ));
+
+    pRepresentationComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.64"),
+          "June 23, 2022",
+          list<string> {
+            "Fixed unchechecked smart pointers in msrNotes.cpp"
+          }
+      ));
   }
 
   return pRepresentationComponent;

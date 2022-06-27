@@ -342,7 +342,13 @@ void lpsrChordNamesContext::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_lpsrChordNamesContext& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -500,7 +506,13 @@ void lpsrFiguredBassContext::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_lpsrFiguredBassContext& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

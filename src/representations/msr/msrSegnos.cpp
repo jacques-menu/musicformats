@@ -122,7 +122,13 @@ void msrSegno::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrSegno& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -340,7 +346,13 @@ void msrDalSegno::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrDalSegno& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

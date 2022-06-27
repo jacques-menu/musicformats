@@ -1133,7 +1133,7 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     S_msrGraceNotesGroup  fNoteGraceNotesGroupBefore;
-  // JMI  S_msrAfterGraceNotesGroup
+  // JMI  S_msrAfterGraceNotesGroup ??? v0.9.64
     S_msrGraceNotesGroup
                           fNoteGraceNotesGroupAfter;
 

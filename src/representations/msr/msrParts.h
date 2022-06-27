@@ -329,7 +329,7 @@ class EXP msrPart : public msrPartGroupElement
     // transposition
 
     void                  appendTranspositionToPart (
-                            S_msrTransposition transpose);
+                            S_msrTransposition transposition);
 
     // staff details
 
@@ -494,7 +494,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // work around LilyPond issue #34
 
-    void                  addSkipGraceNotesGroupBeforeAheadOfVoicesClonesIfNeeded (
+    void                  addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
                             S_msrVoice           graceNotesGroupOriginVoice,
                             S_msrGraceNotesGroup skipGraceNotesGroup);
 
@@ -623,7 +623,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // transposition
 
-    S_msrTransposition        fPartCurrentTranspose;
+    S_msrTransposition    fPartCurrentTransposition;
 
     // counter
 
@@ -671,8 +671,8 @@ class EXP msrPart : public msrPartGroupElement
 
     // transposition
 
-    S_msrTransposition        getPartCurrentTranspose () const
-                              { return fPartCurrentTranspose; }
+    S_msrTransposition        getPartCurrentTransposition () const
+                              { return fPartCurrentTransposition; }
 
     // staff details
 

@@ -2228,7 +2228,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
       fSegmentMeasuresFlatList.back ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
     gLogStream <<
       endl <<
       "The fetched measure contains:" <<
@@ -2251,6 +2251,8 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   int           inputLineNumber,
   const string& context)
 {
+  S_msrMeasure result;
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
@@ -2273,7 +2275,28 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   }
 #endif
 
-  if (! fSegmentMeasuresFlatList.size ()) {
+//   if (! fSegmentMeasuresFlatList.size ()) {
+//     stringstream s;
+//
+//     s <<
+//       "cannot remove last measure from segment '" <<
+//       fSegmentAbsoluteNumber <<
+//       ", segmentDebugNumber: '" <<
+//       fSegmentDebugNumber <<
+//       "' in voice \"" <<
+//       fSegmentVoiceUpLink->getVoiceName () <<
+//       "\"" <<
+//       ", since it is empty";
+//
+//     msrInternalError (
+//       gGlobalServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       s.str ());
+//   }
+
+  // sanity check
+  if (! fSegmentLastMeasure) {
     stringstream s;
 
     s <<
@@ -2284,7 +2307,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       "' in voice \"" <<
       fSegmentVoiceUpLink->getVoiceName () <<
       "\"" <<
-      ", since it is empty";
+      ", since that segment does not contain any";
 
     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
@@ -2293,9 +2316,75 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       s.str ());
   }
 
-  S_msrMeasure
-    result =
-      fSegmentLastMeasure;
+  // we've got the result
+  result = fSegmentLastMeasure;
+
+  // remove it from segment elements list too ??? JMI v0.9.63 KAKA
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
+    fSegmentVoiceUpLink->
+      displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
+        inputLineNumber,
+        "removeLastMeasureFromSegment() 2");
+  }
+#endif
+
+  S_msrSegmentElement
+    segmentElementsListLastElement =
+      fSegmentElementsList.back ();
+
+  if (segmentElementsListLastElement == fSegmentLastMeasure) {
+    // remove it from the elements list
+    fSegmentElementsList.pop_back ();
+  }
+  else {
+    stringstream s;
+
+    s <<
+      "attempt at removing the last measure of segment " <<
+      this->asString () <<
+      " which is not at the end of fSegmentElementsList" <<
+      ", in voice \"" <<
+      fSegmentVoiceUpLink->getVoiceName () <<
+      "\"" <<
+      "', line " << inputLineNumber;
+
+    gLogStream <<
+      endl << endl <<
+      s.str () <<
+      endl << endl;
+
+    gLogStream << "THIS:" << endl;
+    gLogStream << "----------------------------" << endl;
+    ++gIndenter;
+    this->printShort (gLogStream);
+    --gIndenter;
+
+    gLogStream << endl;
+
+    gLogStream << "fSegmentLastMeasure:" << endl;
+    gLogStream << "----------------------------" << endl;
+    ++gIndenter;
+    fSegmentLastMeasure->printShort (gLogStream);
+    --gIndenter;
+
+    gLogStream << endl;
+
+    gLogStream << "segmentElementsListLastElement:" << endl;
+    gLogStream << "----------------------------" << endl;
+    ++gIndenter;
+    segmentElementsListLastElement->printShort (gLogStream);
+    --gIndenter;
+
+    abort (); // JMI
+
+    msrInternalError ( // JMI v0.9.64 ???
+      gGlobalServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      s.str ());
+  }
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -2313,18 +2402,8 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
   }
 #endif
 
+  // remove the last measure from the segments measures flat list
   fSegmentMeasuresFlatList.pop_back ();
-
-  // remove it from segment elements list too ??? JMI v0.9.63 KAKA
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-    fSegmentVoiceUpLink->
-      displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
-        inputLineNumber,
-        "removeLastMeasureFromSegment() 2");
-  }
-#endif
 
   // don't forget about fSegmentLastMeasure now,
   // since it may be used and/or re-appended soon JMI v0.9.63
@@ -2447,7 +2526,7 @@ string msrSegment::asString () const
     '[' <<
     "Segment '" <<
     fSegmentAbsoluteNumber <<
-    ", fSegmentDebugNumber: '" <<
+    "', fSegmentDebugNumber: '" <<
     fSegmentDebugNumber <<
     "' in voice \"" <<
     fSegmentVoiceUpLink->getVoiceName () <<
@@ -2523,7 +2602,7 @@ void msrSegment::print (ostream& os) const
   os <<
     "[Segment '" <<
     fSegmentAbsoluteNumber <<
-    ", fSegmentDebugNumber: '" <<
+    "', fSegmentDebugNumber: '" <<
     fSegmentDebugNumber <<
     "', " <<
     mfSingularOrPlural (
@@ -2611,7 +2690,7 @@ void msrSegment::printShort (ostream& os) const
   os <<
     "[Segment '" <<
     fSegmentAbsoluteNumber <<
-    ", fSegmentDebugNumber: '" <<
+    "', fSegmentDebugNumber: '" <<
     fSegmentDebugNumber <<
     "', " <<
     mfSingularOrPlural (
@@ -2652,7 +2731,13 @@ void msrSegment::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrSegment& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
   return os;
 }
 

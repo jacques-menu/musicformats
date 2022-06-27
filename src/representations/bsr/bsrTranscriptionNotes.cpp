@@ -147,7 +147,13 @@ void bsrTranscriptionNotesElement::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_bsrTranscriptionNotesElement& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -287,7 +293,13 @@ void bsrTranscriptionNotes::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_bsrTranscriptionNotes& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
