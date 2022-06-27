@@ -266,7 +266,13 @@ void msr2lpsrScoreOutputKindAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msr2lpsrScoreOutputKindAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -544,7 +550,13 @@ void msr2lpsrOahGroup::printMsr2lpsrOahValues (int valueFieldWidth)
 
 ostream& operator<< (ostream& os, const S_msr2lpsrOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

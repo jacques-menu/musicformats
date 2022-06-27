@@ -176,51 +176,78 @@ jacquesmenu@macmini: ~/musicformats-git-dev > git push
 
 
 \item create the new version \branch\ locally and remotely:
-\begin{lstlisting}[language=TerminalSmall]
-git checkout master
-git branch v0.9.63
-git push --set-upstream master v0.9.63
-git branch
-git branch -r
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > git push --set-upstream origin v0.9.63
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'v0.9.63' on GitHub by visiting:
+remote:      https://github.com/jacques-menu/musicformats/pull/new/v0.9.63
+remote: 
+To https://github.com/jacques-menu/musicformats.git
+ * [new branch]      v0.9.63 -> v0.9.63
+branch 'v0.9.63' set up to track 'origin/v0.9.63'.
+
+jacquesmenu@macmini: ~/musicformats-git-dev > git branch -r
+  origin/HEAD -> origin/master
+  origin/gh-pages
+  origin/master
+  origin/v0.9.60
+  origin/v0.9.61
+  origin/v0.9.62
+  origin/v0.9.63
+  
+jacquesmenu@macmini: ~/musicformats-git-dev > git branch
+* master
+  v0.9.63
 \end{lstlisting}
 
 
 \item create a new version number and date, for example:
 \begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionNumber. bash 0.9.64
+-bash: scripts/SetMusicFormatsVersionNumber.: No such file or directory
 jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionNumber.bash 0.9.64
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev
 
 ==> Writing MusicFormats version number 0.9.64 to MusicFormatsVersionNumber.txt
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  6 Mar  3 13:46:49 2022 MusicFormatsVersionNumber.txt
+8 -rw-r--r--  1 jacquesmenu  staff  6 Jun  9 12:14:57 2022 MusicFormatsVersionNumber.txt
 0.9.64
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev/src
 
 ==> Writing MusicFormats version number 0.9.64 to MusicFormatsVersionNumber.h
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  45 Mar  3 13:46:49 2022 MusicFormatsVersionNumber.h
+8 -rw-r--r--  1 jacquesmenu  staff  45 Jun  9 12:14:57 2022 MusicFormatsVersionNumber.h
 #define MUSICFORMATS_VERSION_NUMBER "0.9.64"
 \end{lstlisting}
 
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionDate.bash "March 4, 2022"
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/SetMusicFormatsVersionDate.bash "June 9, 2022"
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev
 
-==> Writing MusicFormats version date March 4, 2022 to MusicFormatsVersionDate.txt
+==> Writing MusicFormats version date June 9, 2022 to MusicFormatsVersionDate.txt
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  14 Mar  4 11:15:02 2022 MusicFormatsVersionDate.txt
-March 4, 2022
+8 -rw-r--r--  1 jacquesmenu  staff  13 Jun  9 12:15:52 2022 MusicFormatsVersionDate.txt
+June 9, 2022
 
 ==> PWD is:
 /Users/jacquesmenu/musicformats-git-dev/src
 
-==> Writing MusicFormats version date March 4, 2022 to MusicFormatsVersionDate.h
+==> Writing MusicFormats version date June 9, 2022 to MusicFormatsVersionDate.h
 
-8 -rw-r--r--@ 1 jacquesmenu  staff  50 Mar  4 11:15:02 2022 MusicFormatsVersionDate.h
-#define MUSICFORMATS_VERSION_DATE "March 4, 2022"
+8 -rw-r--r--  1 jacquesmenu  staff  49 Jun  9 12:15:52 2022 MusicFormatsVersionDate.h
+#define MUSICFORMATS_VERSION_DATE "June 9, 2022"
+\end{lstlisting}
+
+Check the result with:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini: ~/musicformats-git-dev > scripts/ShowMusicFormatsVersion.bash 
+Version number:
+0.9.64Version date:
+June 9, 2022
 \end{lstlisting}
 
 \end{enumerate}

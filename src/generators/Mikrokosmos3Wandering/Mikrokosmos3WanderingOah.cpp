@@ -306,7 +306,13 @@ void Mikrokosmos3WanderingOahGroup::printMikrokosmos3WanderingOahValues (
 
 ostream& operator<< (ostream& os, const S_Mikrokosmos3WanderingOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

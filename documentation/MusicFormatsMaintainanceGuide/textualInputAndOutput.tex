@@ -243,11 +243,17 @@ Note that:
 \item \virtualMethod{print} may produce its output on multiples lines, which always ends with an end of line.
 \end{itemize}
 
-Most classes in \mf\ can be printed with the {\tt <<} operator:
+Most classes in \mf\ can be printed with the {\tt <<} operator. Since \mf\ is a large, a test is done for nullity, which is safer and easier for the applications that use it:
 \begin{lstlisting}[language=CPlusPlus]
 ostream& operator<< (ostream& os, const S_msrElement& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
   return os;
 }
 \end{lstlisting}

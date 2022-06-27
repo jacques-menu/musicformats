@@ -391,16 +391,16 @@ void msrRepeatCommonPart::print (ostream& os) const
     endl << endl;
 
   // print the elements
-  int elementsNumber =
+  int repeatCommonPartElementsListSize =
     fRepeatCommonPartElementsList.size ();
 
   os <<
     "fRepeatCommonPartElementsList: ";
-  if (elementsNumber) {
+  if (repeatCommonPartElementsListSize) {
     os <<
       '(' <<
       mfSingularOrPlural (
-        elementsNumber, "element", "elements") <<
+        repeatCommonPartElementsListSize, "element", "elements") <<
       ")";
   }
   else {
@@ -408,7 +408,7 @@ void msrRepeatCommonPart::print (ostream& os) const
   }
   os << endl;
 
-  if (elementsNumber) {
+  if (repeatCommonPartElementsListSize) {
     os << endl;
 
     ++gIndenter;
@@ -436,12 +436,16 @@ void msrRepeatCommonPart::print (ostream& os) const
 void msrRepeatCommonPart::printShort (ostream& os) const
 {
   os <<
-    this->asShortString () <<
+    "[RepeatCommonPart" <<
+//     ", repeat upLink: '" <<
+//     fRepeatCommonPartRepeatUpLink->
+//       asShortString () <<
+    "', line " << fInputLineNumber <<
     endl;
 
-/* JMI
   ++gIndenter;
 
+/* JMI
   os <<
     "repeat upLink: '" <<
     fRepeatCommonPartRepeatUpLink->
@@ -450,18 +454,17 @@ void msrRepeatCommonPart::printShort (ostream& os) const
     endl;
 */
 
-/* JMI
   // print the elements
-  int elementsNumber =
+  int repeatCommonPartElementsListSize =
     fRepeatCommonPartElementsList.size ();
 
   os <<
     "repeatCommonPartElementsList: ";
-  if (elementsNumber) {
+  if (repeatCommonPartElementsListSize) {
     os <<
       '(' <<
       mfSingularOrPlural (
-        elementsNumber, "element", "elements") <<
+        repeatCommonPartElementsListSize, "element", "elements") <<
       ")";
   }
   else {
@@ -469,7 +472,7 @@ void msrRepeatCommonPart::printShort (ostream& os) const
   }
   os << endl;
 
-  if (elementsNumber) {
+  if (repeatCommonPartElementsListSize) {
     os << endl;
 
     ++gIndenter;
@@ -490,12 +493,19 @@ void msrRepeatCommonPart::printShort (ostream& os) const
   }
 
   --gIndenter;
-*/
+
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrRepeatCommonPart& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -730,19 +740,18 @@ string msrRepeatEnding::asString () const
   s <<
     "[RepeatEnding" <<
     ", " <<
-    msrRepeatEndingKindAsString (
-      fRepeatEndingKind) <<
+    fRepeatEndingKind <<
     ", repeatEndingRepeatUpLink: '";
 
-  if (fRepeatEndingRepeatUpLink) {
-    s <<
-      fRepeatEndingRepeatUpLink->
-        asShortString ();
-  }
-  else {
-    s <<
-      "none";
-  }
+//   if (fRepeatEndingRepeatUpLink) { JMI v0.9.64
+//     s <<
+//       fRepeatEndingRepeatUpLink->
+//         asShortString ();
+//   }
+//   else {
+//     s <<
+//       "none";
+//   }
 
   s <<
     ", repeatEndingNumber: " << fRepeatEndingNumber <<
@@ -792,16 +801,16 @@ void msrRepeatEnding::print (ostream& os) const
     endl << endl;
 
   // print the elements
-  int elementsNumber =
+  int repeatEndingElementsListSize =
     fRepeatEndingElementsList.size ();
 
   os <<
     "repeatEndingElementsList: ";
-  if (elementsNumber) {
+  if (repeatEndingElementsListSize) {
     os <<
       '(' <<
       mfSingularOrPlural (
-        elementsNumber, "element", "elements") <<
+        repeatEndingElementsListSize, "element", "elements") <<
       ")";
   }
   else {
@@ -809,7 +818,7 @@ void msrRepeatEnding::print (ostream& os) const
   }
   os << endl;
 
-  if (elementsNumber) {
+  if (repeatEndingElementsListSize) {
     os << endl;
 
     ++gIndenter;
@@ -837,7 +846,12 @@ void msrRepeatEnding::print (ostream& os) const
 void msrRepeatEnding::printShort (ostream& os) const
 {
   os <<
-    this->asShortString () <<
+    "[RepeatEnding" <<
+    ", fRepeatEndingKind: " <<
+    fRepeatEndingKind <<
+    ", repeatEndingNumber: " << fRepeatEndingNumber <<
+    ", repeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
+    "', line " << fInputLineNumber <<
     endl;
 
 /*
@@ -872,16 +886,16 @@ void msrRepeatEnding::printShort (ostream& os) const
 * /
 
   // print the elements
-  int elementsNumber =
+  int repeatEndingElementsListSize =
     fRepeatEndingElementsList.size ();
 
   os <<
     "repeatEndingElementsList: ";
-  if (elementsNumber) {
+  if (repeatEndingElementsListSize) {
     os <<
       '(' <<
       mfSingularOrPlural (
-        elementsNumber, "element", "elements") <<
+        repeatEndingElementsListSize, "element", "elements") <<
       ")";
   }
   else {
@@ -889,7 +903,7 @@ void msrRepeatEnding::printShort (ostream& os) const
   }
   os << endl;
 
-  if (elementsNumber) {
+  if (repeatEndingElementsListSize) {
     os << endl;
 
     ++gIndenter;
@@ -911,11 +925,19 @@ void msrRepeatEnding::printShort (ostream& os) const
 
   --gIndenter;
 */
+
+  os << ']' << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrRepeatEnding& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1884,36 +1906,50 @@ void msrRepeat::print (ostream& os) const
 void msrRepeat::printShort (ostream& os) const
 {
   os <<
-    this->asShortString () <<
+    "[Repeat" <<
+    ", " << fRepeatTimes << " times" <<
+    ", fRepeatExplicitStartKind:: " <<
+    fRepeatExplicitStartKind <<
+//     ", fCurrentRepeatBuildPhaseKind: " <<
+//     repeatBuildPhaseKindAsString (
+//       fCurrentRepeatBuildPhaseKind);
+    ", line " << fInputLineNumber <<
     endl;
 
   ++gIndenter;
 
+  const int fieldWidth = 18;
+
   // short print the repeat common part
-  if (! fRepeatCommonPart) {
-    os <<
-      "fRepeatCommonPart: none" <<
-      endl;
+  os <<
+    setw (fieldWidth) <<
+    "fRepeatCommonPart" << " : ";
+  if (fRepeatCommonPart) {
+    os << endl;
+    ++gIndenter;
+    fRepeatCommonPart->printShort (os);
+    --gIndenter;
   }
   else {
-    fRepeatCommonPart->printShort (os);
+    os << "none" << endl;
   }
 
   // short print the repeat endings
-  int endingsNumber =
+  int repeatEndingsSize =
     fRepeatEndings.size ();
 
   os <<
-    "fRepeatEndings: ";
-  if (endingsNumber) {
-    os << '(' << endingsNumber << ")";
+    setw (fieldWidth) <<
+    "fRepeatEndings" << " : ";
+  if (repeatEndingsSize) {
+    os << '(' << repeatEndingsSize << ")";
   }
   else {
     os << "none";
   }
   os << endl;
 
-  if (endingsNumber) {
+  if (repeatEndingsSize) {
     ++gIndenter;
 
     vector<S_msrRepeatEnding>::const_iterator
@@ -1932,11 +1968,19 @@ void msrRepeat::printShort (ostream& os) const
   }
 
   --gIndenter;
+
+  os << "]" << endl;
 }
 
 ostream& operator<< (ostream& os, const S_msrRepeat& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

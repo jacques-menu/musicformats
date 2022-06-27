@@ -120,15 +120,15 @@ typedef SMARTP<mfsl2musicxmlException> S_mfsl2musicxmlException;
 //______________________________________________________________________________
 EXP void mfslWarning (
   const string&       message,
-  const yy::location& loc);
+  const mfsl::location& loc);
 
 EXP void mfslError (
   const string&       message,
-  const yy::location& loc);
+  const mfsl::location& loc);
 
 EXP void mfslInternalError (
   const string&       message,
-  const yy::location& loc);
+  const mfsl::location& loc);
 
 EXP void mfslFileError (
   const string& inputSourceName,

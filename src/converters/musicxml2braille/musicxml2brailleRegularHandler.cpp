@@ -1381,7 +1381,13 @@ void xml2brlRegularHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_xml2brlRegularHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

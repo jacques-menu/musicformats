@@ -319,7 +319,13 @@ void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msrIgnorePartAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -606,7 +612,13 @@ void msrKeepPartAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msrKeepPartAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1165,7 +1177,13 @@ void msr2msrOahGroup::printMsr2msrOahValues (int valueFieldWidth)
 
 ostream& operator<< (ostream& os, const S_msr2msrOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

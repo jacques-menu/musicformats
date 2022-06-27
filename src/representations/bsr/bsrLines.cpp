@@ -267,7 +267,7 @@ void bsrLine::appendMeasureToLine (S_bsrMeasure measure)
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures () || gGlobalBsrOahGroup->getTraceLines ()) {
     gLogStream <<
-      "Appending line '" <<
+      "Appending measure '" <<
       measure->asShortString () <<
       "' to line '" <<
       asString () <<
@@ -567,7 +567,13 @@ void bsrLine::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_bsrLine& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

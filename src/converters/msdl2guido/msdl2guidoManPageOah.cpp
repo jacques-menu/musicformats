@@ -176,7 +176,13 @@ void msdl2guidoManPageGenerateAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msdl2guidoManPageGenerateAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -377,7 +383,13 @@ void msdl2guidoManPageOahGroup::printManPageOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_msdl2guidoManPageOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

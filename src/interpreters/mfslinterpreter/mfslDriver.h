@@ -31,13 +31,15 @@ using namespace MusicFormats;
 
 
 //______________________________________________________________________________
-EXP extern const string K_ALL_PSEUDO_LABEL_NAME;
-
-//______________________________________________________________________________
 // Conducting the whole scanning and parsing of MFSL
 class mfslDriver
 {
   public:
+
+    // constants
+    // ------------------------------------------------------
+
+    static const string   K_ALL_PSEUDO_LABEL_NAME;
 
     // // constructor/destructor
     // ------------------------------------------------------
@@ -70,10 +72,10 @@ class mfslDriver
     bool				          getTraceScanning () const
                               { return fTraceScanning; }
 
-    const yy::location&   getScannerLocation () const
+    const mfsl::location& getScannerLocation () const
                               { return fScannerLocation; }
 
-    yy::location&         getScannerLocationNonConst ()
+    mfsl::location&       getScannerLocationNonConst ()
                             // no const here
                             // due to constraints in the Flex-generated code
                               { return fScannerLocation; }
@@ -96,6 +98,12 @@ class mfslDriver
 
     S_mfslChoicesTable    getChoicesTable () const
                               { return fChoicesTable; }
+
+    void                  setCurrentChoiceChoice ( S_mfslChoice choice)
+                              { fCurrentChoiceChoice = choice; }
+
+    S_mfslChoice          getCurrentChoiceChoice () const
+                              { return fCurrentChoiceChoice; }
 
     // inputs
     bool				          getTraceInputs () const
@@ -135,7 +143,7 @@ class mfslDriver
                             S_mfslOptionsBlock optionsBlock,
                             const string&      context);
 
-    S_mfslOptionsBlock         optionsBlocksStackTop () const;
+    S_mfslOptionsBlock    optionsBlocksStackTop () const;
 
     void                  optionsBlocksStackPop (
                             const string& context);
@@ -227,7 +235,7 @@ class mfslDriver
 
     // scanning
     bool                  fTraceScanning;
-    yy::location          fScannerLocation;
+    mfsl::location        fScannerLocation;
 
     // parsing
     bool                  fDisplayToolAndInput;
@@ -270,6 +278,8 @@ class mfslDriver
     list<S_mfslCaseChoiceStatement>
                           fCaseChoiceStatementsStack;
 
+    S_mfslChoice          fCurrentChoiceChoice;
+
     // inputs handling
     S_mfslInputsTable     fInputsTable;
 
@@ -297,9 +307,9 @@ class mfslDriver
 };
 
 //______________________________________________________________________________
-// Give Flex the prototype of yylex we want ...
+// Give Flex the prototype of yylex() we want ...
 # define YY_DECL \
-  yy::parser::symbol_type yylex (mfslDriver& drv)
+  mfsl::parser::symbol_type yylex (mfslDriver& drv)
 // ... and declare it for the parser's sake
 YY_DECL;
 

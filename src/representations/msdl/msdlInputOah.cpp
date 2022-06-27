@@ -272,7 +272,13 @@ void msdlKeywordsLanguageAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msdlKeywordsLanguageAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -479,7 +485,13 @@ void oahDisplayMsdlKeywordsInLanguageAtom::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahDisplayMsdlKeywordsInLanguageAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -686,7 +698,13 @@ void oahDisplayMsdlTokensInLanguageAtom::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahDisplayMsdlTokensInLanguageAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -919,7 +937,13 @@ void msdlCommentsTypeAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msdlCommentsTypeAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1158,7 +1182,13 @@ void msdlUserLanguageAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msdlUserLanguageAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1395,7 +1425,13 @@ void msdlPitchesLanguageAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msdlPitchesLanguageAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1773,7 +1809,13 @@ void msdlInputOahGroup::printMsdlInputOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_msdlInputOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

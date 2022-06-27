@@ -315,7 +315,13 @@ void msrTimeSignatureItem::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTimeSignatureItem& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
   return os;
 }
 
@@ -1090,7 +1096,7 @@ void msrTimeSignature::print (ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 23;
+  const int fieldWidth = 31;
 
   os << left <<
     setw (fieldWidth) <<
@@ -1141,7 +1147,13 @@ void msrTimeSignature::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrTimeSignature& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
   return os;
 }
 

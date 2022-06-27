@@ -70,7 +70,13 @@ void msdlScannerWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlScannerWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -177,7 +183,13 @@ void msdlScannerEnglishWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlScannerEnglishWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -284,7 +296,13 @@ void msdlScannerFrenchWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlScannerFrenchWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -391,7 +409,13 @@ void msdlScannerItalianWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlScannerItalianWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -499,7 +523,13 @@ void msdlScannerGermanWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlScannerGermanWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -607,7 +637,13 @@ void msdlScannerSpanishWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlScannerSpanishWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -715,7 +751,13 @@ void msdlScannerDutchWaeHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlScannerDutchWaeHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

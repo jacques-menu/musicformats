@@ -4395,7 +4395,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
   }
 
-  // addSkipGraceNotesGroupBeforeAheadOfVoicesClonesIfNeeded() will
+  // addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded() will
   // append the same skip grace notes to the ofhter voices if needed
   // in visitEnd (S_msrPart&)
 }

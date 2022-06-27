@@ -195,7 +195,13 @@ void msrNoteEvent::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrNoteEvent& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -275,7 +281,13 @@ void msrSimultaneousNotesChunk::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrSimultaneousNotesChunk& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1039,7 +1051,13 @@ void msrMeasuresSlice::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMeasuresSlice& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1401,7 +1419,13 @@ void msrMeasuresSlicesSequence::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMeasuresSlicesSequence& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

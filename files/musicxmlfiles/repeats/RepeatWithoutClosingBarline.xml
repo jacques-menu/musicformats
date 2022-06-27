@@ -2,11 +2,10 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 2.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="2.0">
  <work>
-  <work-title></work-title>
+  <work-title>Repeat Without Closing Bar line</work-title>
  </work>
  <identification>
-  <creator type="poet">RepeatWithoutClosingBarline</creator>
-  <rights></rights>
+   <rights></rights>
   <encoding>
    <software>Neuratron PhotoScore</software>
    <encoding-description>MusicXML 2.0</encoding-description>

@@ -981,7 +981,13 @@ void msrSemiTonesPitchAndOctave::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrSemiTonesPitchAndOctave& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1257,7 +1263,13 @@ void msrQuarterTonesPitchAndOctave::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrQuarterTonesPitchAndOctave& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -15513,7 +15525,13 @@ ostream& operator<< (ostream& os, const msrLength& elt)
 
 ostream& operator<< (ostream& os, const S_msrLength& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -15656,7 +15674,13 @@ void msrMargin::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMargin& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -15918,7 +15942,13 @@ void msrMarginsGroup::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMarginsGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -19615,7 +19645,13 @@ void msrHarmonyInterval::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrHarmonyInterval& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -20852,7 +20888,13 @@ void msrHarmonyStructure::printAllHarmoniesStructures (ostream& os)
 
 ostream& operator<< (ostream& os, const S_msrHarmonyStructure& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -20944,7 +20986,13 @@ void msrSemiTonesPitchAndAbsoluteOctave::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrSemiTonesPitchAndAbsoluteOctave& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -21035,7 +21083,13 @@ void msrSemiTonesPitchAndRelativeOctave::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrSemiTonesPitchAndRelativeOctave& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 */
@@ -21383,7 +21437,13 @@ void msrHarmonyContents::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrHarmonyContents& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

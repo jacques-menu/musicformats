@@ -142,7 +142,13 @@ void mxmlPartGroupDescr::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_mxmlPartGroupDescr& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
   return os;
 }
 
@@ -3229,7 +3235,11 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part& elt)
   fCurrentPartID = elt->getAttributeValue ("id");
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceParts ()) {
+  if (
+    gGlobalTracingOahGroup->getTraceParts ()
+      ||
+    gGlobalOahEarlyOptions.getEarlyTracePasses ()
+  ) {
     gLogStream <<
       endl <<
       "<!--=== part \"" << fCurrentPartID << "\"" <<
@@ -3538,10 +3548,14 @@ void mxsr2msrSkeletonBuilder::visitStart (S_measure& elt)
     elt->getAttributeValue ("number");
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+  if (
+    gGlobalTracingOahGroup->getTraceMeasures ()
+      ||
+    gGlobalOahEarlyOptions.getEarlyTracePasses ()
+  ) {
     gLogStream <<
       endl <<
-      "<!--=== measure " << fCurrentMeasureNumber <<
+      "<!--=== measure \"" << fCurrentMeasureNumber << "\"" <<
       ", line " << inputLineNumber << " ===-->" <<
       endl;
   }

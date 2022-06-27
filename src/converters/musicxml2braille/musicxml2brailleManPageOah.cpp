@@ -176,7 +176,13 @@ void xml2brlManPageGenerateAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_xml2brlManPageGenerateAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -362,7 +368,13 @@ void xml2brlManPageOahGroup::printManPageOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_xml2brlManPageOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

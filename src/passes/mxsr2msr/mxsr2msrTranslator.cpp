@@ -2092,7 +2092,11 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
   string partID = elt->getAttributeValue ("id");
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+  if (
+    gGlobalTracingOahGroup->getTraceParts ()
+      ||
+    gGlobalOahEarlyOptions.getEarlyTracePasses ()
+  ) {
     gLogStream <<
       endl <<
       "<!--=== part \"" << partID << "\"" <<
@@ -4418,6 +4422,16 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
         inputLineNumber,
         octaveShiftKind,
         octaveShiftSize);
+
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
+      gLogStream <<
+        "Creating octave shift " <<
+        octaveShift->asString () <<
+        ", line " << inputLineNumber <<
+        endl;
+    }
+#endif
 
   // append the octave shift to the pending octave shifts list
   fPendingOctaveShiftsList.push_back (octaveShift);
@@ -8404,6 +8418,20 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
   fCurrentMeasureNumber =
     elt->getAttributeValue ("number");
 
+#ifdef TRACING_IS_ENABLED
+  if (
+    gGlobalTracingOahGroup->getTraceMeasures ()
+      ||
+    gGlobalOahEarlyOptions.getEarlyTracePasses ()
+  ) {
+    gLogStream <<
+      endl <<
+      "<!--=== measure '" << fCurrentMeasureNumber << "'" <<
+      ", line " << inputLineNumber << " ===-->" <<
+      endl;
+  }
+#endif
+
   // set next measure number in current part' previous measure
   // if this measure is not the first one
   /* JMI ??? SUPERFLOUS ???
@@ -8443,16 +8471,6 @@ void mxsr2msrTranslator::visitStart (S_measure& elt)
       }
     }
   }
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
-    gLogStream <<
-      endl <<
-      "<!--=== measure '" << fCurrentMeasureNumber <<
-      "', line " << inputLineNumber << " ===-->" <<
-      endl;
-  }
-#endif
 
   // implicit
 /*
@@ -9127,7 +9145,7 @@ void mxsr2msrTranslator::visitStart ( S_barline& elt )
   fCurrentBarLineRepeatDirectionKind = msrBarLine::kBarLineRepeatDirectionNone;
   fCurrentBarLineRepeatWingedKind    = msrBarLine::kBarLineRepeatWingedNone;
 
-  fCurrentBarLineTimes = 2; // default value JMI ???
+  fCurrentBarLineTimes = 2; // default value JMI ??? v0.9.64
 
   // location
 

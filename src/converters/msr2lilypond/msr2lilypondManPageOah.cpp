@@ -176,7 +176,13 @@ void msr2lilypondManPageGenerateAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_msr2lilypondManPageGenerateAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -375,7 +381,13 @@ void msr2lilypondManPageOahGroup::printManPageOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_msr2lilypondManPageOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

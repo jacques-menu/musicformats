@@ -354,7 +354,13 @@ void bsrClef::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_bsrClef& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

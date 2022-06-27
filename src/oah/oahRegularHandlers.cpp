@@ -316,7 +316,13 @@ if (false) { // JMI
 
 ostream& operator<< (ostream& os, const S_oahRegularHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

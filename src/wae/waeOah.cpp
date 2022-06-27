@@ -229,7 +229,13 @@ void waeOahGroup::printWaeOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_waeOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

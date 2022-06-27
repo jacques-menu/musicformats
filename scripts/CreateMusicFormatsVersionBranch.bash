@@ -26,11 +26,11 @@ echo
 # Let's go!
 # -----------------------------------------
 
-[ $# != 1 ] usage
+# [ $# != 1 ] usage
 
 VERSION_NUMBER=$1
 
-VERSION_NUMBER_FILE_NAME="MusicFormatsVersionNumber.txt"
+# VERSION_NUMBER_FILE_NAME="MusicFormatsVersionNumber.txt"
 
 cd ${LIBMUSICFORMATS_GIT}
 echo "==> PWD is:"
@@ -38,7 +38,7 @@ pwd
 echo
 
 git checkout master
-git push --set-upstream master ${VERSION_NUMBER}
+git push --set-upstream origin ${VERSION_NUMBER}
 
 
 # Show the results

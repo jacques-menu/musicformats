@@ -1690,7 +1690,13 @@ void msdl2lilypondRegularHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdl2lilypondRegularHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

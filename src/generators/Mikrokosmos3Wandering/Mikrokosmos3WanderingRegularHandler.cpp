@@ -1449,7 +1449,13 @@ void Mikrokosmos3WanderingRegularHandler::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_Mikrokosmos3WanderingRegularHandler& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

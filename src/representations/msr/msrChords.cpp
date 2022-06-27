@@ -2988,7 +2988,13 @@ void msrChord::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrChord& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -3204,7 +3210,13 @@ void msrChordBeamLink::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrChordBeamLink& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -3420,7 +3432,13 @@ void msrChordSlurLink::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrChordSlurLink& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -3639,7 +3657,13 @@ void msrChordGraceNotesGroupLink::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrChordGraceNotesGroupLink& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

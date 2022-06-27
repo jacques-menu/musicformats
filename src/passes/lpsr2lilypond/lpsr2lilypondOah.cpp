@@ -254,7 +254,13 @@ void lilypondScoreOutputKindAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lilypondScoreOutputKindAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -607,7 +613,13 @@ void lilypondTransposePartNameAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lilypondTransposePartNameAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -957,7 +969,13 @@ void lilypondTransposePartIDAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lilypondTransposePartIDAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1454,7 +1472,13 @@ void lilypondRelativeOctaveEntryAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lilypondRelativeOctaveEntryAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1663,7 +1687,13 @@ void lilypondFixedOctaveEntryAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lilypondFixedOctaveEntryAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1898,7 +1928,13 @@ void lilypondAccidentalStyleKindAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lilypondAccidentalStyleKindAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2261,7 +2297,13 @@ void lilypondChordsDisplayAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lilypondChordsDisplayAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2498,7 +2540,13 @@ void lilypondLyricsDurationsKindAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_lilypondLyricsDurationsKindAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2733,7 +2781,13 @@ void lilypondDynamicsTextSpannersStyleKindAtom::printAtomWithVariableOptionsValu
 
 ostream& operator<< (ostream& os, const S_lilypondDynamicsTextSpannersStyleKindAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -6227,7 +6281,13 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
 
 ostream& operator<< (ostream& os, const S_lpsr2lilypondOahGroup& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -6477,7 +6537,13 @@ void lilypondBreakPageAfterMeasureNumberAtom::printAtomWithVariableOptionsValues
 
 ostream& operator<< (ostream& os, const S_lilypondBreakPageAfterMeasureNumberAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 */

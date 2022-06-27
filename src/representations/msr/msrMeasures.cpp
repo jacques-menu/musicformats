@@ -950,8 +950,7 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
     elem->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (
-    gGlobalTracingOahGroup->getTraceMeasures ()
+  if (gGlobalTracingOahGroup->getTraceMeasures ()
       ||
     gGlobalTracingOahGroup->getTraceBarLines ()
   ) {
@@ -6318,8 +6317,13 @@ void msrMeasure::print (ostream& os) const
     setw (fieldWidth) <<
     "voiceCurrentTimeSignature" << " : ";
   if (voiceCurrentTimeSignature) {
+    os << endl;
+    ++gIndenter;
+
     os <<
       voiceCurrentTimeSignature;
+
+    --gIndenter;
   }
   else {
     os << "null" << endl;
@@ -6553,7 +6557,13 @@ void msrMeasure::printShort (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msrMeasure& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

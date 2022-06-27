@@ -38,12 +38,10 @@ int main()
 using namespace std;
 
 //_______________________________________________________________________________
-const string K_ALL_PSEUDO_LABEL_NAME  = "all";
+// constants
+const string mfslDriver::K_ALL_PSEUDO_LABEL_NAME  = "all";
 
 //______________________________________________________________________________
-mfslDriver::~mfslDriver ()
-{}
-
 mfslDriver::mfslDriver ()
 {
   // get the script source name
@@ -159,6 +157,9 @@ mfslDriver::mfslDriver ()
 
   fCaseChoiceStatementsNumber = 0;
 }
+
+mfslDriver::~mfslDriver ()
+{}
 
 void mfslDriver::setTool (string tool)
 {
@@ -516,7 +517,7 @@ int mfslDriver::parseInput_Pass1 ()
   }
 
   // do the parsing
-  yy::parser theParser (*this);
+  mfsl::parser theParser (*this);
 
   theParser.set_debug_level (
     fTraceParsing);

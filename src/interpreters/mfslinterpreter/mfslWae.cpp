@@ -25,7 +25,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 EXP void mfslWarning (
   const string&       message,
-  const yy::location& loc)
+  const mfsl::location& loc)
 {
   gLogStream <<
     "### [MFSL] WARNING " <<
@@ -35,7 +35,7 @@ EXP void mfslWarning (
 
 EXP void mfslError (
   const string&       message,
-  const yy::location& loc)
+  const mfsl::location& loc)
 {
   gIndenter.resetToZero ();
 
@@ -53,7 +53,7 @@ EXP void mfslError (
 
 EXP void mfslInternalError (
   const string&       message,
-  const yy::location& loc)
+  const mfsl::location& loc)
 {
   gIndenter.resetToZero ();
 

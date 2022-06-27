@@ -106,7 +106,13 @@ void lpsrRepeatDescr::print (ostream& os)
 
 ostream& operator<< (ostream& os, S_lpsrRepeatDescr& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

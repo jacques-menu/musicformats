@@ -67,6 +67,8 @@
 /* flex options */
 /* ---------------------------------------------------------------------- */
 
+%option prefix="mfsl"
+
 %option yylineno
 
 %option noyywrap
@@ -75,8 +77,8 @@
 
 
 %{
-//   yy::parser::symbol_type JMI
-//   make_NAME (const std::string &s, const yy::parser::location_type& loc);
+//   mfsl::parser::symbol_type JMI
+//   make_NAME (const std::string &s, const mfsl::parser::location_type& loc);
 %}
 
 
@@ -137,9 +139,9 @@ backSlash                 [\\]
 char                      pStringBuffer [STRING_BUFFER_SIZE];
 
 // A handy shortcut to the location held by the mfslDriver
-yy::location& loc = drv.getScannerLocationNonConst ();
+mfsl::location& loc = drv.getScannerLocationNonConst ();
 
-// Code run each time yylex is called
+// Code run each time yylex() is called
 loc.step ();
 
 %}
@@ -207,7 +209,7 @@ loc.step ();
   BEGIN INITIAL;
 
   return
-    yy::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
+    mfsl::parser::make_SINGLE_QUOTED_STRING (pStringBuffer,loc);
 }
 
 <SINGLE_QUOTED_STRING_MODE>{backSlash}{singleleQuote} {
@@ -253,7 +255,7 @@ loc.step ();
   loc.step ();
   BEGIN INITIAL;
   return
-    yy::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
+    mfsl::parser::make_DOUBLE_QUOTED_STRING (pStringBuffer, loc);
 }
 
 <DOUBLE_QUOTED_STRING_MODE>{backSlash}{doubleQuote} {
@@ -296,7 +298,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_DOUBLE (yytext, loc);
+    mfsl::parser::make_DOUBLE (yytext, loc);
 }
 
 {integer} {
@@ -310,7 +312,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_INTEGER (yytext, loc);
+    mfsl::parser::make_INTEGER (yytext, loc);
 }
 
 
@@ -327,7 +329,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_TOOL (loc);
+    mfsl::parser::make_TOOL (loc);
 }
 
 "input" {
@@ -341,7 +343,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_INPUT (loc);
+    mfsl::parser::make_INPUT (loc);
 }
 
 "choice" {
@@ -355,7 +357,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_CHOICE (loc);
+    mfsl::parser::make_CHOICE (loc);
 }
 
 "default" {
@@ -369,7 +371,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_DEFAULT (loc);
+    mfsl::parser::make_DEFAULT (loc);
 }
 
 "case" {
@@ -383,7 +385,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_CASE (loc);
+    mfsl::parser::make_CASE (loc);
 }
 
 "select" {
@@ -397,7 +399,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_SELECT (loc);
+    mfsl::parser::make_SELECT (loc);
 }
 
 "all" {
@@ -411,7 +413,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_ALL (loc);
+    mfsl::parser::make_ALL (loc);
 }
 
 
@@ -427,7 +429,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_NAME (yytext, loc);
+    mfsl::parser::make_NAME (yytext, loc);
 }
 
 
@@ -443,7 +445,7 @@ loc.step ();
   loc.begin.column += yyleng;
 
   return
-    yy::parser::make_OPTION (yytext, loc);
+    mfsl::parser::make_OPTION (yytext, loc);
 }
 
 
@@ -459,7 +461,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_COMMA (loc);
+    mfsl::parser::make_COMMA (loc);
 }
 
 ":" {
@@ -473,7 +475,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_COLON (loc);
+    mfsl::parser::make_COLON (loc);
 }
 
 ";" {
@@ -487,7 +489,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_SEMICOLON (loc);
+    mfsl::parser::make_SEMICOLON (loc);
 }
 
 "|" {
@@ -501,7 +503,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_BAR (loc);
+    mfsl::parser::make_BAR (loc);
 }
 
 "&" {
@@ -515,7 +517,7 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_AMPERSAND (loc);
+    mfsl::parser::make_AMPERSAND (loc);
 }
 
 "=" {
@@ -529,12 +531,12 @@ loc.step ();
   loc.step ();
 
   return
-    yy::parser::make_EQUAL (loc);
+    mfsl::parser::make_EQUAL (loc);
 }
 
 
 . {
-   throw yy::parser::syntax_error (
+   throw mfsl::parser::syntax_error (
      loc,
      "### invalid character: " + std::string (yytext));
 }
@@ -543,7 +545,7 @@ loc.step ();
 
 <<EOF>> {
   return
-    yy::parser::make_YYEOF (loc);
+    mfsl::parser::make_YYEOF (loc);
 }
 
 

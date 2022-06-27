@@ -825,7 +825,13 @@ void msdlTokenKindsSet::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlTokenKindsSet& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2016,7 +2022,13 @@ void msdlTokensList::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_msdlTokensList& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 

@@ -200,7 +200,13 @@ void oahAtomAlias::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahAtomAlias& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -501,7 +507,13 @@ void oahMacroAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahMacroAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -690,7 +702,13 @@ void oahOptionsUsageAtom::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahOptionsUsageAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -836,7 +854,13 @@ void oahHelpAtom::printOptionsSummary (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahHelpAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -982,7 +1006,13 @@ void oahHelpSummaryAtom::printOptionsSummary (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahHelpSummaryAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1126,7 +1156,13 @@ void oahAboutAtom::printAbout (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahAboutAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1334,7 +1370,13 @@ void oahVersionAtom::printVersionFull (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahVersionAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1488,7 +1530,13 @@ void oahLibraryVersionAtom::printVersion (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahLibraryVersionAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1642,7 +1690,13 @@ void oahHistoryAtom::printHistory (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahHistoryAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1796,7 +1850,13 @@ void oahLibraryHistoryAtom::printHistory (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahLibraryHistoryAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -1947,7 +2007,13 @@ R"(To contact the maintainers of EXECUTABLE_NAME:
 
 ostream& operator<< (ostream& os, const S_oahContactAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2095,7 +2161,13 @@ void oahDisplayPrefixes::printPrefixes (ostream& os) const
 
 ostream& operator<< (ostream& os, const S_oahDisplayPrefixes& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2243,7 +2315,13 @@ void oahDisplaySingleCharacterOptions::printSingleCharacterOptions (ostream& os)
 
 ostream& operator<< (ostream& os, const S_oahDisplaySingleCharacterOptions& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2465,7 +2543,13 @@ void oahOnOffAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahOnOffAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2662,7 +2746,13 @@ void oahBooleanAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahBooleanAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -2859,7 +2949,13 @@ void oahTwoBooleansAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahTwoBooleansAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -3065,7 +3161,13 @@ void oahThreeBooleansAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahThreeBooleansAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -3491,7 +3593,13 @@ void oahCombinedBooleansAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahCombinedBooleansAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -4103,7 +4211,13 @@ void oahCommonPrefixBooleansAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahCommonPrefixBooleansAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -4350,7 +4464,13 @@ void oahIntegerAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahIntegerAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -4628,7 +4748,13 @@ void oahTwoIntegersAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahTwoIntegersAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -4877,7 +5003,13 @@ void oahFloatAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahFloatAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -5072,7 +5204,13 @@ void oahStringAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahStringAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -5463,7 +5601,13 @@ void oahFactorizedStringAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahFactorizedStringAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -5683,7 +5827,13 @@ ostream& operator<< (ostream& os, const S_oahStringWithDefaultValueAtom& elt)
   os <<
     "StringWithDefaultValueAtom:" <<
     endl;
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -5905,7 +6055,13 @@ ostream& operator<< (ostream& os, const S_oahStringWithRegexAtom& elt)
   os <<
     "StringWithDefaultValueAtom:" <<
     endl;
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -6156,7 +6312,13 @@ void oahRationalAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahRationalAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -6409,7 +6571,13 @@ void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahNaturalNumbersSetElementAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -6595,7 +6763,13 @@ void oahRGBColorAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahRGBColorAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -6911,7 +7085,13 @@ void oahIntSetElementAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahIntSetElementAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -7193,7 +7373,13 @@ void oahStringSetElementAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahStringSetElementAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -7536,7 +7722,13 @@ void oahStringToIntMapElementAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahStringToIntMapElementAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -7879,7 +8071,13 @@ void oahStringToStringMapElementAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahStringToStringMapElementAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -8222,7 +8420,13 @@ void oahStringToStringMultiMapElementAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahStringToStringMultiMapElementAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -8537,7 +8741,13 @@ void oahStringAndIntegerAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahStringAndIntegerAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -8878,7 +9088,13 @@ void oahStringAndTwoIntegersAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahStringAndTwoIntegersAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -9108,7 +9324,13 @@ void oahLengthUnitKindAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahLengthUnitKindAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -9387,7 +9609,13 @@ void oahLengthAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahLengthAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -9678,7 +9906,13 @@ void oahMidiTempoAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahMidiTempoAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -9872,7 +10106,13 @@ void oahOptionNameHelpAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahOptionNameHelpAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -10049,7 +10289,13 @@ void oahQueryOptionNameAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahQueryOptionNameAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -10114,7 +10360,13 @@ ostream& operator<< (ostream& os, const oahFindStringResult& elt)
 
 ostream& operator<< (ostream& os, const S_oahFindStringResult& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -10360,7 +10612,13 @@ void oahFindStringAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahFindStringAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
@@ -10538,7 +10796,13 @@ void oahIncludeOptionsAndArgumentsFileAtom::printAtomWithVariableOptionsValues (
 
 ostream& operator<< (ostream& os, const S_oahIncludeOptionsAndArgumentsFileAtom& elt)
 {
-  elt->print (os);
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+  
   return os;
 }
 
