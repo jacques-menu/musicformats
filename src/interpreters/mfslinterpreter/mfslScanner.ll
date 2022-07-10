@@ -33,19 +33,7 @@
 #include "mfslInterpreterInterface.h"
 
 #ifdef WIN32
-  /*
-    isatty() is needed for Flex interactive mode,
-    but doesn't follow the Standard C rules
-    for implementation-specific names
-
-    we should thus use _isatty() instead on Windows systems
-  */
-
-  #include "io.h" // for _isatty()
-
-  /*
-    the isatty() definition is in the third part of this file
-  */
+	#include "mfSystemInterface.h" // for isatty()
 
   #define YY_NO_UNISTD_H
 #endif
@@ -557,13 +545,6 @@ loc.step ();
 /* ---------------------------------------------------------------------- */
 /* service code */
 /* ---------------------------------------------------------------------- */
-
-#ifdef WIN32
-int isatty (int fd)
-{
-  return _isatty (fd);
-}
-#endif
 
 void mfslDriver::scanBegin ()
 {

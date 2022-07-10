@@ -23,6 +23,11 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+#ifdef WIN32
+int isatty (int fd);
+#endif
+
+//______________________________________________________________________________
 EXP int mfExecuteCommand (
   const string& command,
   Bool          doTrace);
