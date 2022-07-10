@@ -328,6 +328,7 @@ typedef int16_t flex_int16_t;
 typedef uint16_t flex_uint16_t;
 typedef int32_t flex_int32_t;
 typedef uint32_t flex_uint32_t;
+typedef uint64_t flex_uint64_t;
 #else
 typedef signed char flex_int8_t;
 typedef short int flex_int16_t;
@@ -452,7 +453,7 @@ typedef size_t yy_size_t;
 #endif
 
 /* %if-not-reentrant */
-extern int yyleng;
+extern yy_size_t yyleng;
 /* %endif */
 
 /* %if-c-only */
@@ -474,7 +475,7 @@ extern FILE *yyin, *yyout;
      */
     #define  YY_LESS_LINENO(n) \
             do { \
-                int yyl;\
+                yy_size_t yyl;\
                 for ( yyl = n; yyl < yyleng; ++yyl )\
                     if ( yytext[yyl] == '\n' )\
                         --yylineno;\
@@ -524,7 +525,7 @@ struct yy_buffer_state
 	/* Number of characters read into yy_ch_buf, not including EOB
 	 * characters.
 	 */
-	int yy_n_chars;
+	yy_size_t yy_n_chars;
 
 	/* Whether we "own" the buffer - i.e., we know we created it,
 	 * and can realloc() it to grow it, and should free() it to
@@ -605,8 +606,8 @@ static YY_BUFFER_STATE * yy_buffer_stack = NULL; /**< Stack as an array. */
 /* %not-for-header */
 /* yy_hold_char holds the character lost when yytext is formed. */
 static char yy_hold_char;
-static int yy_n_chars;		/* number of characters read into yy_ch_buf */
-int yyleng;
+static yy_size_t yy_n_chars;		/* number of characters read into yy_ch_buf */
+yy_size_t yyleng;
 
 /* Points to current character in buffer. */
 static char *yy_c_buf_p = NULL;
@@ -636,7 +637,7 @@ static void yy_init_buffer ( YY_BUFFER_STATE b, FILE *file  );
 
 YY_BUFFER_STATE yy_scan_buffer ( char *base, yy_size_t size  );
 YY_BUFFER_STATE yy_scan_string ( const char *yy_str  );
-YY_BUFFER_STATE yy_scan_bytes ( const char *bytes, int len  );
+YY_BUFFER_STATE yy_scan_bytes ( const char *bytes, yy_size_t len  );
 
 /* %endif */
 
@@ -704,7 +705,7 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 #define YY_DO_BEFORE_ACTION \
 	(yytext_ptr) = yy_bp; \
 /* %% [2.0] code to fiddle yytext and yyleng for yymore() goes here \ */\
-	yyleng = (int) (yy_cp - yy_bp); \
+	yyleng = (yy_size_t) (yy_cp - yy_bp); \
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 /* %% [3.0] code to copy yytext_ptr to yytext[] goes here, if %array \ */\
@@ -868,11 +869,11 @@ int yy_flex_debug = 1;
 
 static const flex_int16_t yy_rule_linenum[46] =
     {   0,
-      151,  155,  161,  166,  171,  177,  182,  186,  190,  197,
-      202,  216,  221,  226,  230,  234,  238,  243,  248,  262,
-      267,  272,  276,  280,  284,  290,  291,  305,  322,  336,
-      350,  364,  378,  392,  406,  422,  438,  439,  454,  468,
-      482,  496,  510,  524,  539
+      139,  143,  149,  154,  159,  165,  170,  174,  178,  185,
+      190,  204,  209,  214,  218,  222,  226,  231,  236,  250,
+      255,  260,  264,  268,  272,  278,  279,  293,  310,  324,
+      338,  352,  366,  380,  394,  410,  426,  427,  442,  456,
+      470,  484,  498,  512,  527
     } ;
 
 /* The intent behind this definition is that it'll catch
@@ -919,19 +920,7 @@ char *yytext;
 #include "mfslInterpreterInterface.h"
 
 #ifdef WIN32
-  /*
-    isatty() is needed for Flex interactive mode,
-    but doesn't follow the Standard C rules
-    for implementation-specific names
-
-    we should thus use _isatty() instead on Windows systems
-  */
-
-  #include "io.h" // for _isatty()
-
-  /*
-    the isatty() definition is in the third part of this file
-  */
+	#include "mfSystemInterface.h" // for isatty()
 
   #define YY_NO_UNISTD_H
 #endif
@@ -946,27 +935,27 @@ char *yytext;
 /* functions */
 /* ---------------------------------------------------------------------- */
 
-#line 949 "mfslScanner.cpp"
+#line 938 "mfslScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* flex options */
 /* ---------------------------------------------------------------------- */
 #define YY_NO_INPUT 1
-#line 80 "mfslScanner.ll"
+#line 68 "mfslScanner.ll"
 //   mfsl::parser::symbol_type JMI
 //   make_NAME (const std::string &s, const mfsl::parser::location_type& loc);
-#line 957 "mfslScanner.cpp"
+#line 946 "mfslScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* regular expressions */
 /* ---------------------------------------------------------------------- */
-#line 108 "mfslScanner.ll"
+#line 96 "mfslScanner.ll"
   // Code run each time a pattern is matched.
   # define YY_USER_ACTION  loc.columns (yyleng);
-#line 964 "mfslScanner.cpp"
+#line 953 "mfslScanner.cpp"
 /* ---------------------------------------------------------------------- */
 /* exclusive modes */
 /* ---------------------------------------------------------------------- */
 
-#line 969 "mfslScanner.cpp"
+#line 958 "mfslScanner.cpp"
 
 #define INITIAL 0
 #define SINGLE_QUOTED_STRING_MODE 1
@@ -1022,7 +1011,7 @@ FILE *yyget_out ( void );
 
 void yyset_out  ( FILE * _out_str  );
 
-			int yyget_leng ( void );
+			yy_size_t yyget_leng ( void );
 
 char *yyget_text ( void );
 
@@ -1109,7 +1098,7 @@ static int input ( void );
 	if ( YY_CURRENT_BUFFER_LVALUE->yy_is_interactive ) \
 		{ \
 		int c = '*'; \
-		int n; \
+		yy_size_t n; \
 		for ( n = 0; n < max_size && \
 			     (c = getc( yyin )) != EOF && c != '\n'; ++n ) \
 			buf[n] = (char) c; \
@@ -1248,14 +1237,14 @@ YY_DECL
 
 	{
 /* %% [7.0] user's declarations go here */
-#line 125 "mfslScanner.ll"
+#line 113 "mfslScanner.ll"
 
 
 
 
 
 
-#line 132 "mfslScanner.ll"
+#line 120 "mfslScanner.ll"
 /* ---------------------------------------------------------------------- */
 /* choices local to yylex() */
 /* ---------------------------------------------------------------------- */
@@ -1275,7 +1264,7 @@ loc.step ();
 
 
 
-#line 1278 "mfslScanner.cpp"
+#line 1267 "mfslScanner.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -1328,7 +1317,7 @@ yy_find_action:
 
 		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
 			{
-			int yyl;
+			yy_size_t yyl;
 			for ( yyl = 0; yyl < yyleng; ++yyl )
 				if ( yytext[yyl] == '\n' )
 					
@@ -1367,7 +1356,7 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 151 "mfslScanner.ll"
+#line 139 "mfslScanner.ll"
 {
   loc.step ();
 }
@@ -1375,14 +1364,14 @@ YY_RULE_SETUP
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 155 "mfslScanner.ll"
+#line 143 "mfslScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 161 "mfslScanner.ll"
+#line 149 "mfslScanner.ll"
 { // comment
   loc.step ();
   BEGIN COMMENT_TO_END_OF_LINE_MODE;
@@ -1391,7 +1380,7 @@ YY_RULE_SETUP
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 166 "mfslScanner.ll"
+#line 154 "mfslScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
   BEGIN INITIAL;
@@ -1399,7 +1388,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 171 "mfslScanner.ll"
+#line 159 "mfslScanner.ll"
 {
   /* accepting any character other than {endOfLine} */
   loc.step ();
@@ -1407,7 +1396,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 177 "mfslScanner.ll"
+#line 165 "mfslScanner.ll"
 {
   loc.step ();
   BEGIN PARENTHESIZED_COMMENT_MODE;
@@ -1416,21 +1405,21 @@ YY_RULE_SETUP
 case 7:
 /* rule 7 can match eol */
 YY_RULE_SETUP
-#line 182 "mfslScanner.ll"
+#line 170 "mfslScanner.ll"
 {
   loc.lines (yyleng); loc.step ();
 }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 186 "mfslScanner.ll"
+#line 174 "mfslScanner.ll"
 {
   BEGIN INITIAL;
 }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 190 "mfslScanner.ll"
+#line 178 "mfslScanner.ll"
 {
   /* accepting any character other than {endOfLine} */
   loc.step ();
@@ -1438,7 +1427,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 197 "mfslScanner.ll"
+#line 185 "mfslScanner.ll"
 {
   pStringBuffer [0] = '\0';
   BEGIN SINGLE_QUOTED_STRING_MODE;
@@ -1446,7 +1435,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 202 "mfslScanner.ll"
+#line 190 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream <<
@@ -1463,7 +1452,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 216 "mfslScanner.ll"
+#line 204 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "'", STRING_BUFFER_SIZE);
   loc.step ();
@@ -1472,7 +1461,7 @@ YY_RULE_SETUP
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
-#line 221 "mfslScanner.ll"
+#line 209 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
   loc.lines (yyleng); loc.step ();
@@ -1480,35 +1469,35 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 226 "mfslScanner.ll"
+#line 214 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 230 "mfslScanner.ll"
+#line 218 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 234 "mfslScanner.ll"
+#line 222 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 238 "mfslScanner.ll"
+#line 226 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 243 "mfslScanner.ll"
+#line 231 "mfslScanner.ll"
 {
   pStringBuffer [0] = '\0';
   BEGIN DOUBLE_QUOTED_STRING_MODE;
@@ -1516,7 +1505,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 248 "mfslScanner.ll"
+#line 236 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream <<
@@ -1533,7 +1522,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 262 "mfslScanner.ll"
+#line 250 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\"", STRING_BUFFER_SIZE);
   loc.step ();
@@ -1542,7 +1531,7 @@ YY_RULE_SETUP
 case 21:
 /* rule 21 can match eol */
 YY_RULE_SETUP
-#line 267 "mfslScanner.ll"
+#line 255 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
   loc.lines (yyleng); loc.step ();
@@ -1550,37 +1539,37 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 272 "mfslScanner.ll"
+#line 260 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\n", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 276 "mfslScanner.ll"
+#line 264 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\t", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 280 "mfslScanner.ll"
+#line 268 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, "\\", STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 284 "mfslScanner.ll"
+#line 272 "mfslScanner.ll"
 {
   mfCharStarCat (pStringBuffer, yytext, STRING_BUFFER_SIZE);
 }
 	YY_BREAK
 case 26:
-#line 291 "mfslScanner.ll"
+#line 279 "mfslScanner.ll"
 case 27:
 YY_RULE_SETUP
-#line 291 "mfslScanner.ll"
+#line 279 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1597,7 +1586,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 305 "mfslScanner.ll"
+#line 293 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1614,7 +1603,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 322 "mfslScanner.ll"
+#line 310 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1631,7 +1620,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 336 "mfslScanner.ll"
+#line 324 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1648,7 +1637,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 350 "mfslScanner.ll"
+#line 338 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1665,7 +1654,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 364 "mfslScanner.ll"
+#line 352 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1682,7 +1671,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 378 "mfslScanner.ll"
+#line 366 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1699,7 +1688,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 392 "mfslScanner.ll"
+#line 380 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1716,7 +1705,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 406 "mfslScanner.ll"
+#line 394 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1733,7 +1722,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 422 "mfslScanner.ll"
+#line 410 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1749,10 +1738,10 @@ YY_RULE_SETUP
 }
 	YY_BREAK
 case 37:
-#line 439 "mfslScanner.ll"
+#line 427 "mfslScanner.ll"
 case 38:
 YY_RULE_SETUP
-#line 439 "mfslScanner.ll"
+#line 427 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1768,7 +1757,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 454 "mfslScanner.ll"
+#line 442 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1785,7 +1774,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 468 "mfslScanner.ll"
+#line 456 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1802,7 +1791,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 482 "mfslScanner.ll"
+#line 470 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1819,7 +1808,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 496 "mfslScanner.ll"
+#line 484 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1836,7 +1825,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 510 "mfslScanner.ll"
+#line 498 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1853,7 +1842,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 524 "mfslScanner.ll"
+#line 512 "mfslScanner.ll"
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
@@ -1870,7 +1859,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 539 "mfslScanner.ll"
+#line 527 "mfslScanner.ll"
 {
    throw mfsl::parser::syntax_error (
      loc,
@@ -1882,7 +1871,7 @@ case YY_STATE_EOF(SINGLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(DOUBLE_QUOTED_STRING_MODE):
 case YY_STATE_EOF(COMMENT_TO_END_OF_LINE_MODE):
 case YY_STATE_EOF(PARENTHESIZED_COMMENT_MODE):
-#line 547 "mfslScanner.ll"
+#line 535 "mfslScanner.ll"
 {
   return
     mfsl::parser::make_YYEOF (loc);
@@ -1890,10 +1879,10 @@ case YY_STATE_EOF(PARENTHESIZED_COMMENT_MODE):
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 554 "mfslScanner.ll"
+#line 542 "mfslScanner.ll"
 ECHO;
 	YY_BREAK
-#line 1896 "mfslScanner.cpp"
+#line 1885 "mfslScanner.cpp"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2094,7 +2083,7 @@ static int yy_get_next_buffer (void)
 
 	else
 		{
-			int num_to_read =
+			yy_size_t num_to_read =
 			YY_CURRENT_BUFFER_LVALUE->yy_buf_size - number_to_move - 1;
 
 		while ( num_to_read <= 0 )
@@ -2108,7 +2097,7 @@ static int yy_get_next_buffer (void)
 
 			if ( b->yy_is_our_buffer )
 				{
-				int new_size = b->yy_buf_size * 2;
+				yy_size_t new_size = b->yy_buf_size * 2;
 
 				if ( new_size <= 0 )
 					b->yy_buf_size += b->yy_buf_size / 8;
@@ -2166,7 +2155,7 @@ static int yy_get_next_buffer (void)
 
 	if (((yy_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
-		int new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) >> 1);
+		yy_size_t new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) >> 1);
 		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) yyrealloc(
 			(void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf, (yy_size_t) new_size  );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
@@ -2287,7 +2276,7 @@ static int yy_get_next_buffer (void)
 
 		else
 			{ /* need more input */
-			int offset = (int) ((yy_c_buf_p) - (yytext_ptr));
+			yy_size_t offset = (yy_c_buf_p) - (yytext_ptr);
 			++(yy_c_buf_p);
 
 			switch ( yy_get_next_buffer(  ) )
@@ -2734,12 +2723,12 @@ YY_BUFFER_STATE yy_scan_string (const char * yystr )
  * 
  * @return the newly allocated buffer state object.
  */
-YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, int  _yybytes_len )
+YY_BUFFER_STATE yy_scan_bytes  (const char * yybytes, yy_size_t  _yybytes_len )
 {
 	YY_BUFFER_STATE b;
 	char *buf;
 	yy_size_t n;
-	int i;
+	yy_size_t i;
     
 	/* Get memory for full buffer, including space for trailing EOB's. */
 	n = (yy_size_t) (_yybytes_len + 2);
@@ -2786,7 +2775,7 @@ static void yynoreturn yy_fatal_error (const char* msg )
 	do \
 		{ \
 		/* Undo effects of setting up yytext. */ \
-        int yyless_macro_arg = (n); \
+        yy_size_t yyless_macro_arg = (n); \
         YY_LESS_LINENO(yyless_macro_arg);\
 		yytext[yyleng] = (yy_hold_char); \
 		(yy_c_buf_p) = yytext + yyless_macro_arg; \
@@ -2830,7 +2819,7 @@ FILE *yyget_out  (void)
 /** Get the length of the current token.
  * 
  */
-int yyget_leng  (void)
+yy_size_t yyget_leng  (void)
 {
         return yyleng;
 }
@@ -3004,7 +2993,7 @@ void yyfree (void * ptr )
 
 /* %ok-for-header */
 
-#line 554 "mfslScanner.ll"
+#line 542 "mfslScanner.ll"
 
 
 
@@ -3012,13 +3001,6 @@ void yyfree (void * ptr )
 /* ---------------------------------------------------------------------- */
 /* service code */
 /* ---------------------------------------------------------------------- */
-
-#ifdef WIN32
-int isatty (int fd)
-{
-  return _isatty (fd);
-}
-#endif
 
 void mfslDriver::scanBegin ()
 {
