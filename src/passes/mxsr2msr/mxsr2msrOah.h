@@ -226,11 +226,17 @@ class EXP mxsr2msrOahGroup : public oahGroup
     S_oahBooleanAtom      getIgnoreRedundantTimesAtom () const
                               { return fIgnoreRedundantTimesAtom; }
 
-    // page breaks
+    // page and line breaks
     // --------------------------------------
 
     Bool                  getIgnorePageBreaksInMusicXML () const
                               { return fIgnorePageBreaksInMusicXML; }
+
+    // line breaks
+    // --------------------------------------
+
+    Bool                  getIgnoreLineBreaksInMusicXML () const
+                              { return fIgnoreLineBreaksInMusicXML; }
 
     // measures
     // --------------------------------------
@@ -486,7 +492,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     void                  initializeClefsKeysTimesOptions ();
 
-    void                  initializePageBreaksOptions ();
+    void                  initializePageAndLineBreaksOptions ();
 
     void                  initializeMeasuresOptions ();
 
@@ -574,10 +580,15 @@ class EXP mxsr2msrOahGroup : public oahGroup
     S_oahBooleanAtom      fIgnoreRedundantKeysAtom;
     S_oahBooleanAtom      fIgnoreRedundantTimesAtom;
 
-    // page breaks
+    // page and line breaks
     // --------------------------------------
 
     Bool                  fIgnorePageBreaksInMusicXML;
+
+    // line breaks
+    // --------------------------------------
+
+    Bool                  fIgnoreLineBreaksInMusicXML;
 
     // measures
     // --------------------------------------

@@ -12,13 +12,35 @@ function usage ()
     exit 1
   }
 
-LIBMUSICFORMATS_GIT=${HOME}/musicformats-git-dev
+#	my actual work directory
+#----------------------------------------------
+
+MY_WORK_DIR=${HOME}
+
+
+# dev branch
+#----------------------------------------------
+
+MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
+# echo
+# echo "========> MUSIC_FORMATS_DEV = ${MUSIC_FORMATS_DEV}"
+# echo
 
 
 # Write all output to logfile
 # -----------------------------------------
 
-exec > ${LIBMUSICFORMATS_GIT}/$(basename $0).log 2>&1
+	SCRIPT_BASE_NAME="$(basename ${0})"
+	LOGFILE_NAME=${SCRIPT_BASE_NAME/%.bash/.log}
+	LOGFILE=${MUSIC_FORMATS_DEV}/${LOGFILE_NAME}
+# 	echo
+# 	echo "========> $0: 0 = ${0}"
+# 	echo "========> $0: SCRIPT_BASE_NAME = ${SCRIPT_BASE_NAME}"
+# 	echo "========> $0: LOGFILE_NAME = ${LOGFILE_NAME}"
+# 	echo "========> $0: LOGFILE = ${LOGFILE}"
+# 	echo
+
+exec > ${LOGFILE} 2>&1
 
 echo
 
@@ -26,7 +48,7 @@ echo
 # Let's go!
 # -----------------------------------------
 
-cd ${LIBMUSICFORMATS_GIT}/build
+cd ${MUSIC_FORMATS_DEV}/build
 
 echo "==> date is:"
 date

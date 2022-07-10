@@ -403,7 +403,7 @@ ostream& operator<< (ostream& os, const S_msrReplaceClefAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -494,9 +494,9 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
   // --------------------------------------
   initializeClefsKeysTimesOptions ();
 
-  // page breaks
+  // page and line breaks
   // --------------------------------------
-  initializePageBreaksOptions ();
+  initializePageAndLineBreaksOptions ();
 
   // measures
   // --------------------------------------
@@ -732,7 +732,7 @@ R"(Ignore times that are the same as the current one.)",
       fIgnoreRedundantTimesAtom);
 }
 
-void mxsr2msrOahGroup::initializePageBreaksOptions ()
+void mxsr2msrOahGroup::initializePageAndLineBreaksOptions ()
 {
   S_oahSubGroup
     subGroup =
@@ -755,6 +755,17 @@ R"()",
 R"(Ignore page breaks in MusicXML data.)",
         "fIgnorePageBreaksInMusicXML",
         fIgnorePageBreaksInMusicXML));
+
+  // ignore MusicXML line breaks
+  // --------------------------------------
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "ignore-musicxml-line-breaks", "imxmllb",
+R"(Ignore line breaks in MusicXML data.)",
+        "fIgnoreLineBreaksInMusicXML",
+        fIgnoreLineBreaksInMusicXML));
 }
 
 void mxsr2msrOahGroup::initializeMeasuresOptions ()
@@ -1991,7 +2002,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   --gIndenter;
 
-  // page breaks
+  // page and line breaks
   // --------------------------------------
 
   gLogStream <<
@@ -2003,6 +2014,22 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   gLogStream << left <<
     setw (valueFieldWidth) << "fIgnorePageBreaksInMusicXML" << " : " <<
     fIgnorePageBreaksInMusicXML <<
+    endl <<
+
+  --gIndenter;
+
+  // line breaks
+  // --------------------------------------
+
+  gLogStream <<
+    "Line breaks:" <<
+    endl;
+
+  ++gIndenter;
+
+  gLogStream << left <<
+    setw (valueFieldWidth) << "fIgnoreLineBreaksInMusicXML" << " : " <<
+    fIgnoreLineBreaksInMusicXML <<
     endl <<
 
   --gIndenter;
@@ -2311,7 +2338,7 @@ ostream& operator<< (ostream& os, const S_mxsr2msrOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

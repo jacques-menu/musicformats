@@ -259,7 +259,7 @@ class EXP msr2msrOahGroup : public oahGroup
                           getKeepMsrVoicesSetAtom () const
                               { return fKeepMsrVoicesSetAtom; }
 
-    // page breaks
+    // page and line breaks
     const set<string>&    getInserPageBreakAfterMeasureSet () const
                               { return fInserPageBreakAfterMeasureSet; }
     S_oahStringSetElementAtom

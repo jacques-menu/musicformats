@@ -713,7 +713,7 @@ void msdlConverterRegularHandler::createStavesRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("lpsr-staff-instrument-name", subGroup);
-  
+
   registerAtomInRegularSubgroup ("create-voices-staff-relative-numbers", subGroup);
 }
 
@@ -876,6 +876,7 @@ void msdlConverterRegularHandler::createMeasuresRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("ignore-musicxml-page-breaks", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-line-breaks", subGroup);
 
   registerAtomInRegularSubgroup ("add-empty-msr-measures", subGroup);
   registerAtomInRegularSubgroup ("replicate-msr-measure", subGroup);
@@ -1478,7 +1479,7 @@ ostream& operator<< (ostream& os, const S_msdlConverterRegularHandler& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

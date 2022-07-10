@@ -1536,7 +1536,7 @@ class EXP mxsr2msrTranslator :
                                 S_msrPart part);
 
 
-    // page breaks handling
+    // page and line breaks handling
     // ------------------------------------------------------
 
     list<S_msrPageBreak>      fPendingPageBreaksList;
