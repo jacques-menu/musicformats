@@ -674,11 +674,11 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
       ", indexValue: " << indexValue << " is out of bounds" <<
       ", line " << inputLineNumber;
 
-    msrInternalWarning (
-//     msrInternalError (
+//     msrInternalWarning (
+     msrInternalError (
       gGlobalServiceRunData->getInputSourceName (),
       inputLineNumber,
-//       __FILE__, __LINE__,
+      __FILE__, __LINE__,
       s.str ());
 
       result = rational (3, 4); // TEMP JMI v0.9.61
@@ -3329,7 +3329,7 @@ ostream& operator<< (ostream& os, const S_msrPart& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

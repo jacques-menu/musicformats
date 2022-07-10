@@ -806,7 +806,7 @@ R"()",
 
   appendSubGroupToGroup (subGroup);
 
-  // page breaks
+  // page and line breaks
   // --------------------------------------
 
   fInserPageBreakAfterMeasureAtom =

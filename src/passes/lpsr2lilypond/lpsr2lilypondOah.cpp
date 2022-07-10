@@ -260,7 +260,7 @@ ostream& operator<< (ostream& os, const S_lilypondScoreOutputKindAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -619,7 +619,7 @@ ostream& operator<< (ostream& os, const S_lilypondTransposePartNameAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -975,7 +975,7 @@ ostream& operator<< (ostream& os, const S_lilypondTransposePartIDAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1478,7 +1478,7 @@ ostream& operator<< (ostream& os, const S_lilypondRelativeOctaveEntryAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1693,7 +1693,7 @@ ostream& operator<< (ostream& os, const S_lilypondFixedOctaveEntryAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1934,7 +1934,7 @@ ostream& operator<< (ostream& os, const S_lilypondAccidentalStyleKindAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2303,7 +2303,7 @@ ostream& operator<< (ostream& os, const S_lilypondChordsDisplayAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2546,7 +2546,7 @@ ostream& operator<< (ostream& os, const S_lilypondLyricsDurationsKindAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2787,7 +2787,7 @@ ostream& operator<< (ostream& os, const S_lilypondDynamicsTextSpannersStyleKindA
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -3856,18 +3856,50 @@ R"(Don't generate bar number checks in the LilyPond code.)",
       fNoBarNumberChecksAtom);
 }
 
-void lpsr2lilypondOahGroup::initializeLineBreaksOptions ()
+void lpsr2lilypondOahGroup::initializePageAndLineBreaksOptions ()
 {
   S_oahSubGroup
     subGroup =
       oahSubGroup::create (
-        "Line breaks",
-        "help-lilypond-line-breaks", "hlplb",
+        "Page and line breaks",
+        "help-lilypond-page-and-line-breaks", "hlpplb",
 R"()",
       oahElementVisibilityKind::kElementVisibilityWhole,
       this);
 
   appendSubGroupToGroup (subGroup);
+
+  // page and line breaks
+  // --------------------------------------
+
+  fIgnoreLpsrPageBreaksAtom =
+    oahBooleanAtom::create (
+      "ignore-lpsr-page-breaks", "ilppb",
+R"(Suppress the page breaks from the LPSR data - let LilyPond decide about them,
+and don't generate an empty \myPageBreak.)",
+      "fIgnoreLpsrPageBreaks",
+      fIgnoreLpsrPageBreaks);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fIgnoreLpsrPageBreaksAtom);
+
+  // break page after measure number
+  // --------------------------------------
+
+/* JMI
+  subGroup->
+    appendAtomToSubGroup (
+      oahStringsSetElementAtom::create (
+        "break-page-after-measure-number", "bpamn",
+R"(Generate a '\pageBreak' command after measure NUMBER in the LilyPond code.
+NUMBER is a MusicXML measure number (a string), to be found in the latter.
+This comes in handy when scanning several movements from a single PDF score.
+There can be several occurrences of this option.)",
+        "NUMBER",
+        "fBreakPageAfterMeasureNumberSet",
+        fBreakPageAfterMeasureNumberSet));
+        */
 
   // line breaks
   // --------------------------------------
@@ -3920,52 +3952,6 @@ There can be several occurrences of this option.)",
         "NUMBER",
         "fBreakLineAfterMeasureNumberSet",
         fBreakLineAfterMeasureNumberSet));
-        */
-}
-
-void lpsr2lilypondOahGroup::initializePageBreaksOptions ()
-{
-  S_oahSubGroup
-    subGroup =
-      oahSubGroup::create (
-        "Page breaks",
-        "help-lilypond-page-breaks", "hlppb",
-R"()",
-      oahElementVisibilityKind::kElementVisibilityWhole,
-      this);
-
-  appendSubGroupToGroup (subGroup);
-
-  // page breaks
-  // --------------------------------------
-
-  fIgnoreLpsrPageBreaksAtom =
-    oahBooleanAtom::create (
-      "ignore-lpsr-page-breaks", "ilppb",
-R"(Suppress the page breaks from the LPSR data - let LilyPond decide about them,
-and don't generate an empty \myPageBreak.)",
-      "fIgnoreLpsrPageBreaks",
-      fIgnoreLpsrPageBreaks);
-
-  subGroup->
-    appendAtomToSubGroup (
-      fIgnoreLpsrPageBreaksAtom);
-
-  // break page after measure number
-  // --------------------------------------
-
-/* JMI
-  subGroup->
-    appendAtomToSubGroup (
-      oahStringsSetElementAtom::create (
-        "break-page-after-measure-number", "bpamn",
-R"(Generate a '\pageBreak' command after measure NUMBER in the LilyPond code.
-NUMBER is a MusicXML measure number (a string), to be found in the latter.
-This comes in handy when scanning several movements from a single PDF score.
-There can be several occurrences of this option.)",
-        "NUMBER",
-        "fBreakPageAfterMeasureNumberSet",
-        fBreakPageAfterMeasureNumberSet));
         */
 }
 
@@ -4832,13 +4818,9 @@ void lpsr2lilypondOahGroup::initializeLilypondGenerationOahGroup ()
   // --------------------------------------
   initializeBarsOptions ();
 
-  // line breaks
+  // page and line breaks
   // --------------------------------------
-  initializeLineBreaksOptions ();
-
-  // page breaks
-  // --------------------------------------
-  initializePageBreaksOptions ();
+  initializePageAndLineBreaksOptions ();
 
   // staves
   // --------------------------------------
@@ -5400,7 +5382,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   --gIndenter;
 
 
-  // page breaks
+  // page and line breaks
   // --------------------------------------
   os <<
     "Page breaks:" <<
@@ -6025,7 +6007,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   --gIndenter;
 
 
-  // page breaks
+  // page and line breaks
   // --------------------------------------
   gLogStream <<
     "Page breaks:" <<
@@ -6287,7 +6269,7 @@ ostream& operator<< (ostream& os, const S_lpsr2lilypondOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -6543,7 +6525,7 @@ ostream& operator<< (ostream& os, const S_lilypondBreakPageAfterMeasureNumberAto
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 */

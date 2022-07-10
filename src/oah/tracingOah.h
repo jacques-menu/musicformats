@@ -290,7 +290,7 @@ class EXP tracingOahGroup : public oahGroup
                               { fTraceLineBreaks = true; }
     Bool                  getTraceLineBreaks () const
                               { return fTraceLineBreaks; }
-    // page breaks
+    // page and line breaks
     void                  setTracePageBreaks ()
                               { fTracePageBreaks = true; }
     Bool                  getTracePageBreaks () const
@@ -855,7 +855,7 @@ class EXP tracingOahGroup : public oahGroup
 
     // line breaks
     Bool                  fTraceLineBreaks;
-    // page breaks
+    // page and line breaks
     Bool                  fTracePageBreaks;
     // bar lines
     Bool                  fTraceBarLines;

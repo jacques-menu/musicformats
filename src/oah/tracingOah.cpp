@@ -435,7 +435,7 @@ R"(Line breaks)",
     addBooleanAtom (
       traceLineBreaksAtom);
 
-  // page breaks
+  // page and line breaks
 
   S_oahTwoBooleansAtom
     tracePageBreaksAtom =
@@ -2656,7 +2656,7 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     fTraceLineBreaks <<
     endl <<
 
-    // page breaks
+    // page and line breaks
     setw (fieldWidth) << "fTtracePageBreaks" << " : " <<
     fTracePageBreaks <<
     endl <<

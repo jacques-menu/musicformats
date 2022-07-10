@@ -1400,7 +1400,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     const set<string>&    getBreakLineAfterMeasureNumberSet () const
                               { return fBreakLineAfterMeasureNumberSet; }
 
-    // page breaks
+    // page and line breaks
     // --------------------------------------
 
     void                  setIgnoreLpsrPageBreaks ()
@@ -1690,9 +1690,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     void                  initializeBarsOptions ();
 
-    void                  initializeLineBreaksOptions ();
-
-    void                  initializePageBreaksOptions ();
+    void                  initializePageAndLineBreaksOptions ();
 
     void                  initializeStavesOptions ();
 
@@ -1929,7 +1927,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     set<string>           fBreakLineAfterMeasureNumberSet;
 
-    // page breaks
+    // page and line breaks
     // --------------------------------------
 
     Bool                  fIgnoreLpsrPageBreaks;
