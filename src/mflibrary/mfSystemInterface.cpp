@@ -37,7 +37,7 @@ namespace MusicFormats
 
 #include "io.h" // for _isatty()
 
-int isatty (int fd)
+EXP int isatty (int fd)
 {
   return _isatty (fd);
 }
