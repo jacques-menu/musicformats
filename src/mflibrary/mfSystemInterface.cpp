@@ -33,11 +33,23 @@ namespace MusicFormats
 	for implementation-specific names
 
 	we should thus use _isatty() instead on Windows systems
+
+
+	#include <stdio.h>
+	#include <io.h>
+
+	int main( void )
+	{
+		 if( _isatty( _fileno( stdout ) ) )
+				printf( "stdout has not been redirected to a file\n" );
+		 else
+				printf( "stdout has been redirected to a file\n");
+	}
 */
 
 #include "io.h" // for _isatty()
 
-EXP int isatty (int fd)
+EXP "C" int isatty (int fd)
 {
   return _isatty (fd);
 }
