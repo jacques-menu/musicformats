@@ -52,10 +52,10 @@ namespace MusicFormats
 
 	#include "io.h" // for _isatty()
 
-	EXP int isatty (int fd)
-	{
-		return _isatty (fd);
-	}
+// 	EXP int isatty (int fd)
+// 	{
+// 		return _isatty (fd);
+// 	}
 
 #endif
 
