@@ -47,12 +47,18 @@ namespace MusicFormats
 	}
 */
 
-#include "io.h" // for _isatty()
+#ifndef ___IS_A_TTY___
+#define ___IS_A_TTY___
 
-int isatty (int fd)
-{
-  return _isatty (fd);
-}
+	#include "io.h" // for _isatty()
+
+	EXP int isatty (int fd)
+	{
+		return _isatty (fd);
+	}
+
+#endif
+
 #endif
 
 //______________________________________________________________________________
