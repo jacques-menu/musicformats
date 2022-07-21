@@ -500,8 +500,8 @@ S_msrVoice msrNote::fetchNoteVoiceUpLink () const
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "--> fetchNoteVoiceUpLink(): " <<
-      asMinimalString () <<
+      "--> fetchNoteVoiceUpLink() for note: " <<
+      asShortString () <<
       endl;
   }
 #endif

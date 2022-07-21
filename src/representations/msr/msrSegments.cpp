@@ -747,8 +747,130 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
   }
 
   // register clef in segments's current measure
-  fSegmentMeasuresFlatList.front ()->
-    appendClefToMeasure (clef);
+
+  S_msrSegmentElement
+    segmentElementsListFirstElement =
+      fSegmentElementsList.front ();
+
+	if (
+		// measure?
+
+		S_msrMeasure
+			measure =
+				dynamic_cast<msrMeasure*>(&(*segmentElementsListFirstElement))
+	) {
+    // prepend the clef to the first measure
+    fSegmentFirstMeasure->
+    	appendClefToMeasure (clef);
+	}
+
+	else if (
+		// full-bar rest?
+
+		S_msrMultipleFullBarRests
+			multipleFullBarRests =
+				dynamic_cast<msrMultipleFullBarRests*>(&(*segmentElementsListFirstElement))
+	) {
+    const list<S_msrMeasure>&
+    	fullBarRestsMeasuresList =
+    		multipleFullBarRests->
+					getFullBarRestsMeasuresList ();
+
+		if (fullBarRestsMeasuresList.size ()) {
+			S_msrMeasure
+				fullBarRestsMeasuresListFirstMeasure = // JMI v0.9.64 ???
+					fullBarRestsMeasuresList.front ();
+
+			// prepend the clef to the full-bar rest first measure
+			fullBarRestsMeasuresListFirstMeasure->
+				appendClefToMeasure (clef);
+		}
+
+		else {
+			stringstream s;
+
+			s <<
+				"attempt at prepending clef " <<
+				clef->asShortString () <<
+				" to segment " <<
+				this->asString () <<
+				" which is not a measure nor a full-bar rest" <<
+				", in voice \"" <<
+				fSegmentVoiceUpLink->getVoiceName () <<
+				"\"" <<
+				"', line " << fInputLineNumber; // JMI v0.9.64
+
+			msrInternalError ( // JMI v0.9.64 ???
+				gGlobalServiceRunData->getInputSourceName (),
+				fInputLineNumber,
+				__FILE__, __LINE__,
+				s.str ());
+		}
+	}
+
+
+//   if (segmentElementsListFirstElement == fSegmentFirstMeasure) {
+//   }
+  else {
+    stringstream s;
+
+    s <<
+      "attempt at prepending clef " <<
+      clef->asShortString () <<
+      " to segment " <<
+      this->asString () <<
+      " which is not a measure nor a full-bar rest" <<
+      ", in voice \"" <<
+      fSegmentVoiceUpLink->getVoiceName () <<
+      "\"" <<
+      "', line " << fInputLineNumber; // JMI v0.9.64
+
+    gLogStream <<
+      endl << endl <<
+      s.str () <<
+      endl << endl;
+
+    gLogStream << "THIS:" << endl;
+    gLogStream << "----------------------------" << endl;
+    ++gIndenter;
+    this->printShort (gLogStream);
+    --gIndenter;
+
+    gLogStream << endl;
+
+    gLogStream << "fSegmentFirstMeasure:" << endl;
+    gLogStream << "----------------------------" << endl;
+    ++gIndenter;
+    fSegmentFirstMeasure->printShort (gLogStream);
+    --gIndenter;
+
+    gLogStream << endl;
+
+    gLogStream << "fSegmentLastMeasure:" << endl;
+    gLogStream << "----------------------------" << endl;
+    ++gIndenter;
+    fSegmentLastMeasure->printShort (gLogStream);
+    --gIndenter;
+
+    gLogStream << endl;
+
+    gLogStream << "segmentElementsListLastElement:" << endl;
+    gLogStream << "----------------------------" << endl;
+    ++gIndenter;
+    segmentElementsListFirstElement->printShort (gLogStream);
+    --gIndenter;
+
+    abort (); // JMI
+
+    msrInternalError ( // JMI v0.9.64 ???
+      gGlobalServiceRunData->getInputSourceName (),
+      fInputLineNumber,
+      __FILE__, __LINE__,
+      s.str ());
+	}
+
+//   fSegmentMeasuresFlatList.front ()-> JMI v0.9.64
+//     appendClefToMeasure (clef);
 
   --gIndenter;
 }

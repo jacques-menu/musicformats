@@ -1395,13 +1395,20 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
         measureNumber,
         fVoiceLastSegment); // JMI KAKA  v0.9.63 ???
 
+		// set result's ordinal number
+		result->
+			setMeasureOrdinalNumberInVoice (
+				incrementVoiceCurrentMeasureOrdinalNumber ());
+
     // append it to the current multiple full-bar rests
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
       "Appending measure " <<
       result->asString () <<
-      " to current multiple full-bar rests in voice \"" <<
+      " to current multiple full-bar rests " <<
+      fVoiceCurrentMultipleFullBarRests->asString () <<
+      "in voice \"" <<
       getVoiceName () << "\"" <<
       "', line " << inputLineNumber <<
       endl;
