@@ -112,7 +112,7 @@ ostream& operator<< (ostream& os, S_lpsrRepeatDescr& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -3438,8 +3438,9 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
         endl;
       break;
     case msrArticulation::kSpiccato:
+    	// does not exist in LilyPond, generate staccatissimo instead JMI v0.9.64
       fLilypondCodeStream <<
-        " %{ spiccato??? %}";
+        "! %{ spiccato %}";
       break;
     case msrArticulation::kStaccato:
       fLilypondCodeStream <<
@@ -23505,12 +23506,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrMultipleFullBarRests& elt)
   }
 
   fLilypondCodeStream <<
-    "\\mergeMultipleFullBarRests {" <<
+    "\\compressMMRests { %{ CC %}" << // JMI v0.9.64
     endl;
   ++gIndenter;
-  fLilypondCodeStream <<
-    "\\compressFullBarRests %{ CC %}" <<
-    endl;
 
   fOnGoingMultipleFullBarRests = true;
 }
@@ -23635,10 +23633,11 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       endl << endl;
   }
 
-  fLilypondCodeStream <<
-    "}" << // mergeMultipleFullBarRests
-    endl;
   --gIndenter;
+
+  fLilypondCodeStream <<
+    "} %{ compressMMRests %}" <<
+    endl;
 
   fOnGoingMultipleFullBarRests = false;
 }

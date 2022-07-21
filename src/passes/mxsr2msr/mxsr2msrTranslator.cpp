@@ -22041,7 +22041,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "Handling non-chord, non-tuplet note or rest" <<
+      "Handling non-chord, non-tuplet note or rest " <<
        newNote->asShortString () << // NO, would lead to infinite recursion ??? JMI
       ", currentVoice = \"" <<
       currentVoice->getVoiceName () <<

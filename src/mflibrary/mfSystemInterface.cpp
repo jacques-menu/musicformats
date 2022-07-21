@@ -26,42 +26,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-#ifdef WIN32
-/*
-	isatty() is needed for Flex interactive mode,
-	but doesn't follow the Standard C rules
-	for implementation-specific names
-
-	we should thus use _isatty() instead on Windows systems
-
-
-	#include <stdio.h>
-	#include <io.h>
-
-	int main( void )
-	{
-		 if( _isatty( _fileno( stdout ) ) )
-				printf( "stdout has not been redirected to a file\n" );
-		 else
-				printf( "stdout has been redirected to a file\n");
-	}
-*/
-
-#ifndef ___IS_A_TTY___
-#define ___IS_A_TTY___
-
-	#include "io.h" // for _isatty()
-
-// 	EXP int isatty (int fd)
-// 	{
-// 		return _isatty (fd);
-// 	}
-
-#endif
-
-#endif
-
-//______________________________________________________________________________
 EXP int mfExecuteCommand (
   const string& command,
   Bool          doTrace)

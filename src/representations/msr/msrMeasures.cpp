@@ -809,6 +809,56 @@ void msrMeasure::setMeasureRepeatContextKind (
   fMeasureRepeatContextKind = measureRepeatContextKind;
 }
 
+void msrMeasure::setMeasureElementMeasureNumber (
+	const string& measureNumber)
+{
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+      gLogStream <<
+        "Setting measure element measure number of measure '" <<
+        fMeasureElementMeasureNumber <<
+        "' to '" <<
+        measureNumber <<
+        "' in segment " <<
+        fMeasureSegmentUpLink->asString () <<
+        " in voice \"" <<
+        fMeasureSegmentUpLink->
+          getSegmentVoiceUpLink ()->
+            getVoiceName () <<
+        "\"" <<
+        ", line " << fInputLineNumber <<
+        endl;
+    }
+#endif
+
+  fMeasureElementMeasureNumber = measureNumber;
+}
+
+void msrMeasure::setMeasureOrdinalNumberInVoice (
+	int measureOrdinalNumber)
+{
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+      gLogStream <<
+        "Setting ordinal number of measure '" <<
+        fMeasureElementMeasureNumber <<
+        "' to '" <<
+        measureOrdinalNumber <<
+        "' in segment " <<
+        fMeasureSegmentUpLink->asString () <<
+        " in voice \"" <<
+        fMeasureSegmentUpLink->
+          getSegmentVoiceUpLink ()->
+            getVoiceName () <<
+        "\"" <<
+        ", line " << fInputLineNumber <<
+        endl;
+    }
+#endif
+
+  fMeasureOrdinalNumberInVoice = measureOrdinalNumber;
+}
+
 void msrMeasure::setMeasurePuristNumber (
   int measurePuristNumber)
 {
@@ -4003,13 +4053,6 @@ void msrMeasure::finalizeRegularMeasure (
     gLogStream << endl;
   }
 
-  rational
-    measureWholeNotesDurationFromPartMeasuresVector =
-      regularPart->
-        fetchPartMeasuresWholeNotesDurationsVectorAt (
-          inputLineNumber,
-          fMeasureOrdinalNumberInVoice - 1);
-
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
@@ -4020,9 +4063,25 @@ void msrMeasure::finalizeRegularMeasure (
       "' in regular voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
-      ", measureWholeNotesDurationFromPartMeasuresVector: " <<
-      measureWholeNotesDurationFromPartMeasuresVector <<
+      ", fMeasureOrdinalNumberInVoice: " <<
+      fMeasureOrdinalNumberInVoice <<
       ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+  rational
+    measureWholeNotesDurationFromPartMeasuresVector =
+      regularPart->
+        fetchPartMeasuresWholeNotesDurationsVectorAt (
+          inputLineNumber,
+          fMeasureOrdinalNumberInVoice - 1);
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceMeasures ()) {
+    gLogStream <<
+      "===> measureWholeNotesDurationFromPartMeasuresVector: " <<
+      measureWholeNotesDurationFromPartMeasuresVector <<
       endl;
   }
 #endif
@@ -4041,7 +4100,7 @@ void msrMeasure::finalizeRegularMeasure (
     inputLineNumber,
     measureWholeNotesDurationFromPartMeasuresVector);
 
-  // register this measures's length in the part
+  // register this measures's whole notes duration in the part
   S_msrPart
     part =
       this->fetchMeasurePartUpLink ();
@@ -5410,9 +5469,9 @@ void msrMeasure::finalizeHarmoniesMeasure (
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
-      "fMeasureOrdinalNumberInVoice = " <<
+      "fMeasureOrdinalNumberInVoice: " <<
       fMeasureOrdinalNumberInVoice <<
-      ", harmoniesPartNumberOfMeasures = " <<
+      ", harmoniesPartNumberOfMeasures" <<
       harmoniesPartNumberOfMeasures <<
       endl;
   }
@@ -5511,7 +5570,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
-      "fMeasureOrdinalNumberInVoice = " <<
+      "fMeasureOrdinalNumberInVoice: " <<
       fMeasureOrdinalNumberInVoice <<
       ", figuredBassPartNumberOfMeasures = " <<
       figuredBassPartNumberOfMeasures <<
@@ -6563,7 +6622,7 @@ ostream& operator<< (ostream& os, const S_msrMeasure& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

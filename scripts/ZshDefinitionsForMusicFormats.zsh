@@ -1,7 +1,7 @@
 # These definitions can be used in your bash setup
 # and modified ad libitum to suit your needs.
 
-alias brc='. ${HOME}/.bashrc'
+alias zrc='. ${HOME}/.zrc'
 
 #	my actual work directory
 #----------------------------------------------
@@ -213,9 +213,9 @@ alias rmmakefiles="rm -rf ./libdir/CMakeFiles"
 function bit ()
 {
 #  set -x
-  SCRIPT_NAME=BuildMusicFormats.bash
+  SCRIPT_NAME=BuildMusicFormats.zsh
 
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT}.log
+  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
 	echo
 	echo "========> LOGFILE = ${LOGFILE}"
 	echo
@@ -250,7 +250,7 @@ alias cmakall='pushd . ; cd ${BUILD_DIR}/libdir; cmake .. -DALL=on -DAPPLEDEBUG=
 function cit () ###JMI
 {
 #  set -x
-  SCRIPT=${SCRIPTS_DIR}/Clean_libmusicformats.bash
+  SCRIPT=${SCRIPTS_DIR}/Clean_libmusicformats.zsh
 
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT}.log
 	echo
@@ -271,7 +271,7 @@ function cit () ###JMI
 function smvn ()
 {
 #  set -x
-  SCRIPT_NAME=SetMusicFormatsVersionNumber.bash
+  SCRIPT_NAME=SetMusicFormatsVersionNumber.zsh
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
@@ -288,7 +288,7 @@ function smvn ()
 function smvd ()
 {
 #  set -x
-  SCRIPT_NAME=SetMusicFormatsVersionDate.bash
+  SCRIPT_NAME=SetMusicFormatsVersionDate.zsh
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
@@ -305,7 +305,7 @@ function smvd ()
 function mmd ()
 {
 #  set -x
-  SCRIPT_NAME=MakeMusicFormatsDistributions.bash
+  SCRIPT_NAME=MakeMusicFormatsDistributions.zsh
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
@@ -323,7 +323,7 @@ function mmd ()
 function cmd ()
 {
 #  set -x
-  SCRIPT_NAME=CleanMusicFormatsDistributions.bash
+  SCRIPT_NAME=CleanMusicFormatsDistributions.zsh
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
   echo LOGFILE = ${LOGFILE}
 
@@ -760,8 +760,8 @@ alias gc='git checkout'
 alias gp='git push'
 alias gbi='git bisect'
 
-alias brc='. ~/.bashrc'
-alias cpbashdefs='cp -p ~/local/BashDefinitionsForMusicFormats.bash ${SCRIPTS_DIR}'
+alias zrc='. ~/.zshrc'
+alias cpbashdefs='cp -p ~/local/BashDefinitionsForMusicFormats.zsh ${SCRIPTS_DIR}'
 
 function addAll ()
 {
@@ -814,7 +814,7 @@ function addBuild ()
 
 function addScripts ()
 {
-  cp -p ${HOME}/local/BashDefinitionsForMusicFormats.bash ${SCRIPTS_DIR}
+  cp -p ${HOME}/local/BashDefinitionsForMusicFormats.zsh ${SCRIPTS_DIR}
 
   git add    ${SCRIPTS_DIR}
 }

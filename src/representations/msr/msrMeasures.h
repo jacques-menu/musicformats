@@ -129,15 +129,13 @@ class EXP msrMeasure : public msrSegmentElement
     // measure numbers
 
     void                  setMeasureElementMeasureNumber (
-                            const string& measureNumber)
-                              { fMeasureElementMeasureNumber = measureNumber; }
+                            const string& measureNumber);
 
     string                getMeasureElementMeasureNumber () const
                               { return fMeasureElementMeasureNumber; }
 
     void                  setMeasureOrdinalNumberInVoice (
-                            int measureOrdinalNumber)
-                              { fMeasureOrdinalNumberInVoice = measureOrdinalNumber; }
+                            int measureOrdinalNumber);
 
     int                   getMeasureOrdinalNumberInVoice () const
                               { return fMeasureOrdinalNumberInVoice; }

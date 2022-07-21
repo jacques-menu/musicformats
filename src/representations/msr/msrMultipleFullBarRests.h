@@ -73,6 +73,10 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     int                   getMultipleFullBarRestsNumber () const
                               { return fMultipleFullBarRestsNumber; }
 
+    const list<S_msrMeasure>&
+    									    getFullBarRestsMeasuresList () const
+    									    		{ return fFullBarRestsMeasuresList; }
+
     void                  setMultipleFullBarRestsNextMeasureNumber (
                             const string& nextMeasureNumber);
 
