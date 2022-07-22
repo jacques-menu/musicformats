@@ -212,10 +212,10 @@ alias rmmakefiles="rm -rf ./libdir/CMakeFiles"
 
 function bit ()
 {
-#  set -x
+  set -x
   SCRIPT_NAME=BuildMusicFormats.bash
 
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT}.log
+  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
 	echo
 	echo "========> LOGFILE = ${LOGFILE}"
 	echo
@@ -237,7 +237,7 @@ function bit ()
   ls -saltr ${BUILD_DIR}/bin/xml2* ${BUILD_DIR}/bin/msdl* # ${BUILD_DIR}/bin/Mikrokosmos3Wandering
 
 #  ll ${BUILD_DIR}/lib
-#  set +x
+  set +x
 }
 
 alias cmakall='pushd . ; cd ${BUILD_DIR}/libdir; cmake .. -DALL=on -DAPPLEDEBUG=on ; popd'

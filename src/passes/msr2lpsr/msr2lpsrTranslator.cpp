@@ -1291,6 +1291,41 @@ void msr2lpsrTranslator::visitStart (S_msrCredit& elt)
   fResultingLpsr->
     getMsrScore ()->
       appendCreditToScore (fCurrentCredit);
+
+	int
+		creditPageNumber = elt->getCreditPageNumber ();
+
+	msrCreditTypeKind
+		creditTypeKind = elt->getCreditTypeKind ();
+
+  switch (creditTypeKind) {
+    case msrCreditTypeKind::k_NoCreditType:
+      break;
+
+    case msrCreditTypeKind::kPageNumber:
+      break;
+
+    case msrCreditTypeKind::kTitle:
+      break;
+    case msrCreditTypeKind::kSubtitle:
+      break;
+
+    case msrCreditTypeKind::kComposer:
+      break;
+    case msrCreditTypeKind::kArranger:
+      break;
+    case msrCreditTypeKind::kLyricist:
+      break;
+
+    case msrCreditTypeKind::kRights:
+      break;
+
+    case msrCreditTypeKind::kPartName:
+      break;
+
+    case msrCreditTypeKind::kOtherCreditType:
+      break;
+  } // switch
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrCredit& elt)
@@ -1304,6 +1339,7 @@ void msr2lpsrTranslator::visitEnd (S_msrCredit& elt)
   }
 #endif
 
+	// forget about the current credit
   fCurrentCredit = nullptr;
 }
 
@@ -1319,11 +1355,55 @@ void msr2lpsrTranslator::visitStart (S_msrCreditWords& elt)
 #endif
 
   // don't append it to the current credit, since the latter is no clone
-  /* JMI
+  /* JMI v0.9.64
   fCurrentCredit->
     appendCreditWordsToCredit (
       elt);
       */
+
+    string
+    	creditWordsContents =
+      	elt->getCreditWordsContents ();
+
+    float
+    	creditWordsWordsDefaultX =
+    		elt->getCreditWordsDefaultX ();
+
+    float
+    	creditWordsWordsDefaultY =
+    		elt-> getCreditWordsDefaultY ();
+
+    string
+    	creditWordsWordsFontFamily =
+    		elt->getCreditWordsFontFamily ();
+
+    float
+    	creditWordsWordsFontSize =
+    		elt->getCreditWordsFontSize ();
+
+    msrFontWeightKind
+    	creditWordsWordsFontWeightKind =
+    		elt->getCreditWordsFontWeightKind ();
+
+    msrFontStyleKind
+    	creditWordsWordsFontStyleKind =
+    		elt->getCreditWordsFontStyleKind ();
+
+    msrJustifyKind
+    	creditWordsWordsJustifyKind =
+    		elt->getCreditWordsJustifyKind ();
+
+    msrHorizontalAlignmentKind
+    	creditWordsWordsHorizontalAlignmentKind =
+         elt->getCreditWordsHorizontalAlignmentKind ();
+
+    msrVerticalAlignmentKind
+    	creditWordsWordsVerticalAlignmentKind =
+         elt->getCreditWordsVerticalAlignmentKind ();
+
+    msrXMLLangKind
+    	creditWordsWordsXMLLang =
+    		elt->getCreditWordsXMLLang ();
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrCreditWords& elt)

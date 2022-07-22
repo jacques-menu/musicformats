@@ -5971,26 +5971,6 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
   }
 #endif
 
-  // analyze segmentClone's context,
-  // multiple full-bar rests and measure repeats first,
-  // since they can be nested in repeats
-//   if (fVoiceCurrentMultipleFullBarRests) {
-//     // segmentClone belongs to a multiple full-bar rests
-//
-//     // get fVoiceCurrentMultipleFullBarRests's contents JMI ??? KAKA
-//     S_msrMultipleFullBarRestsContents
-//       multipleFullBarRestsContents =
-//         fVoiceCurrentMultipleFullBarRests->
-//           getMultipleFullBarRestsContents ();
-//
-//     // set segmentClone as the contents's segment
-//     multipleFullBarRestsContents->
-//       setMultipleFullBarRestsContentsSegment (
-//         inputLineNumber,
-//         segmentClone);
-//   }
-
-//   else
   if (fVoicePendingMeasureRepeat) {
     // segmentClone belongs to a measures repeat
 
@@ -7543,12 +7523,6 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
         setMultipleFullBarRestsLastMeasurePuristMeasureNumber (
           inputLineNumber);
 
-//       // append current voice rest measure to the initial voice elements list
-//       appendMultipleFullBarRestsToInitialVoiceElements (
-//         inputLineNumber,
-//         fVoiceCurrentMultipleFullBarRests,
-//         "handleMultipleFullBarRestsEndInVoiceClone() 2");
-
       // forget about fVoiceCurrentMultipleFullBarRests
       fVoiceCurrentMultipleFullBarRests = nullptr;
 
@@ -7565,144 +7539,6 @@ void msrVoice::handleMultipleFullBarRestsEndInVoiceClone (
   --gIndenter;
 }
 
-// void msrVoice::handleMultipleFullBarRestsContentsStartInVoiceClone (
-//   int inputLineNumber)
-// {
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//     gLogStream <<
-//       "Handling multiple full-bar rests contents start in voice clone \"" <<
-//       getVoiceName () <<
-//       "\", line " << inputLineNumber <<
-//       endl;
-//   }
-// #endif
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-//     displayVoiceMultipleFullBarRestsAndVoice (
-//       inputLineNumber,
-//       "handleMultipleFullBarRestsContentsStartInVoiceClone() 1");
-//   }
-// #endif
-//
-//   ++gIndenter;
-//
-//   if (! fVoiceCurrentMultipleFullBarRests) {
-//     stringstream s;
-//
-//     s <<
-//       "current voice multiple full-bar rests is null when attempting to handle multiple full-bar rests contents start '" <<
-//       "' in voice clone '" <<
-//       asShortString () <<
-//       "' ";
-//
-//     msrInternalError (
-//       gGlobalServiceRunData->getInputSourceName (),
-//       fInputLineNumber,
-//       __FILE__, __LINE__,
-//       s.str ());
-//   }
-//
-//   // create fVoiceCurrentMultipleFullBarRests' rest contents
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//     gLogStream <<
-//       "Appending a multiple full-bar rests contents upon its start to voice \"" <<
-//       getVoiceName () <<
-//       "\"" <<
-//       ", line " << inputLineNumber <<
-//       endl;
-//   }
-// #endif
-//
-//   S_msrMultipleFullBarRestsContents
-//     multipleFullBarRestsContents =
-//       msrMultipleFullBarRestsContents::create (
-//         inputLineNumber,
-//         fVoiceCurrentMultipleFullBarRests);
-//
-//   // register it in fVoiceCurrentMultipleFullBarRests
-//   fVoiceCurrentMultipleFullBarRests->
-//     setMultipleFullBarRestsContents (
-//       multipleFullBarRestsContents);
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-//     displayVoiceMultipleFullBarRestsAndVoice (
-//       inputLineNumber,
-//       "handleMultipleFullBarRestsContentsStartInVoiceClone() 2");
-//   }
-// #endif
-//
-//   --gIndenter;
-// }
-
-// void msrVoice::handleMultipleFullBarRestsContentsEndInVoiceClone (
-//   int inputLineNumber)
-// {
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-//     gLogStream <<
-//       "Handling multiple full-bar rests contents end in voice clone \"" <<
-//       getVoiceName () <<
-//       ", line " << inputLineNumber <<
-//       endl;
-//   }
-// #endif
-//
-//   ++gIndenter;
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-//     displayVoiceMultipleFullBarRestsAndVoice (
-//       inputLineNumber,
-//       "handleMultipleFullBarRestsContentsEndInVoiceClone() 1");
-//   }
-// #endif
-//
-//   if (! fVoiceCurrentMultipleFullBarRests) {
-//     stringstream s;
-//
-//     s <<
-//       "current voice multiple full-bar rests is null when attempting to handle multiple full-bar rests contents end '" <<
-//       "' in voice clone '" <<
-//       asShortString () <<
-//       "' ";
-//
-//     msrInternalError (
-//       gGlobalServiceRunData->getInputSourceName (),
-//       fInputLineNumber,
-//       __FILE__, __LINE__,
-//       s.str ());
-//   }
-//
-//   // get fVoiceCurrentMultipleFullBarRests's contents
-//   S_msrMultipleFullBarRestsContents
-//     multipleFullBarRestsContents =
-//       fVoiceCurrentMultipleFullBarRests->
-//         getMultipleFullBarRestsContents ();
-//
-//   // set fVoiceLastSegment as multipleFullBarRestsContents' segment
-//   multipleFullBarRestsContents->
-//     setMultipleFullBarRestsContentsSegment (
-//       inputLineNumber,
-//       fVoiceLastSegment);
-//
-//   // forget about fVoiceLastSegment
-//  // fVoiceLastSegment = nullptr;
-//
-// #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTraceMultipleFullBarRestsDetails ()) {
-//     displayVoiceMultipleFullBarRestsAndVoice (
-//       inputLineNumber,
-//       "handleMultipleFullBarRestsContentsEndInVoiceClone() 2");
-//   }
-// #endif
-//
-//   --gIndenter;
-// }
-//
 void msrVoice::appendMultipleFullBarRestsCloneToVoiceClone (
   int                       inputLineNumber,
   S_msrMultipleFullBarRests multipleFullBarRestsClone)

@@ -21,6 +21,22 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+enum class msrCreditTypeKind {
+	k_NoCreditType,
+	kPageNumber,
+	kTitle, kSubtitle,
+	kComposer, kArranger, kLyricist,
+	kRights,
+	kPartName,
+	kOtherCreditType
+};
+
+string msrCreditTypeKindAsString (
+  msrCreditTypeKind creditTypeKind);
+
+ostream& operator<< (ostream& os, const msrCreditTypeKind& elt);
+
+//______________________________________________________________________________
 class EXP msrCreditWords : public msrElement
 {
   public:
@@ -183,6 +199,12 @@ class EXP msrCredit : public msrElement
     int                   getCreditPageNumber () const
                               { return fCreditPageNumber; }
 
+    void     							setCreditTypeKind (msrCreditTypeKind creditTypeKind)
+                              { fCreditTypeKind = creditTypeKind; }
+
+    msrCreditTypeKind     getCreditTypeKind () const
+                              { return fCreditTypeKind; }
+
     const vector<S_msrCreditWords>&
                           getCreditWordsList () const
                               { return fCreditWordsList; }
@@ -220,6 +242,8 @@ class EXP msrCredit : public msrElement
     // ------------------------------------------------------
 
     int                   fCreditPageNumber;
+
+		msrCreditTypeKind			fCreditTypeKind;
 
     vector<S_msrCreditWords>
                           fCreditWordsList;

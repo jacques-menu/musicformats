@@ -164,7 +164,10 @@ class EXP mxsr2msrSkeletonBuilder :
   // ------------------------------------------------------
 
   public visitor<S_credit>,
+  public visitor<S_credit_type>,
   public visitor<S_credit_words>,
+  public visitor<S_credit_symbol>,
+  public visitor<S_credit_image>,
 
   // parts & part groups
   // ------------------------------------------------------
@@ -321,7 +324,10 @@ class EXP mxsr2msrSkeletonBuilder :
 
     virtual void          visitStart ( S_credit& elt);
     virtual void          visitEnd   ( S_credit& elt);
+    virtual void          visitStart ( S_credit_type& elt);
     virtual void          visitStart ( S_credit_words& elt);
+    virtual void          visitStart ( S_credit_symbol& elt);
+    virtual void          visitStart ( S_credit_image& elt);
 
     // parts & part groups
     // ------------------------------------------------------

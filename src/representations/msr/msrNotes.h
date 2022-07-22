@@ -62,7 +62,7 @@ class EXP msrNote : public msrTupletElement
       kNoteHeadSo, kNoteHeadLa, kNoteHeadTi
     };
 
-    static string noteHeadKindAsString (
+    static string msrNoteHeadKindAsString (
       msrNoteHeadKind noteHeadKind);
 
     enum msrNoteHeadFilledKind {

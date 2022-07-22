@@ -659,6 +659,37 @@ void msrScore::printShort (ostream& os) const
       endl;
   }
 
+  // print the credits if any
+  size_t creditsListSize = fCreditsList.size ();
+
+  os <<
+    setw (fieldWidth) <<
+    "CreditsList";
+  if (creditsListSize) {
+    os << endl;
+    ++gIndenter;
+
+    list<S_msrCredit>::const_iterator
+      iBegin = fCreditsList.begin (),
+      iEnd   = fCreditsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      S_msrCredit credit = (*i);
+
+      os << credit;
+      if (++i == iEnd) break;
+      os << endl;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os <<
+      " : " << "none" <<
+      endl;
+  }
+  os << endl;
+
   // print the part groups if any
   if (partGroupsListSize) {
     list<S_msrPartGroup>::const_iterator
@@ -870,7 +901,7 @@ ostream& operator<< (ostream& os, const S_msrScore& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

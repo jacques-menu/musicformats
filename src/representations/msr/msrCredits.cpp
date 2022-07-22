@@ -29,6 +29,54 @@ using namespace std;
 namespace MusicFormats
 {
 
+//_______________________________________________________________________________
+string msrCreditTypeKindAsString (
+  msrCreditTypeKind creditTypeKind)
+{
+  string result;
+
+  switch (creditTypeKind) {
+    case msrCreditTypeKind::k_NoCreditType:
+      result = "k_NoCreditType";
+      break;
+    case msrCreditTypeKind::kPageNumber:
+      result = "kPageNumber";
+      break;
+    case msrCreditTypeKind::kTitle:
+      result = "kTitle";
+      break;
+    case msrCreditTypeKind::kSubtitle:
+      result = "kSubtitle";
+      break;
+    case msrCreditTypeKind::kComposer:
+      result = "kComposer";
+      break;
+    case msrCreditTypeKind::kArranger:
+      result = "kArranger";
+      break;
+    case msrCreditTypeKind::kLyricist:
+      result = "kLyricist";
+      break;
+    case msrCreditTypeKind::kRights:
+      result = "kRights";
+      break;
+    case msrCreditTypeKind::kPartName:
+      result = "kPartName";
+      break;
+    case msrCreditTypeKind::kOtherCreditType:
+      result = "kOtherCreditType";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator<< (ostream& os, const msrCreditTypeKind& elt)
+{
+  os << msrCreditTypeKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrCreditWords msrCreditWords::create (
   int                        inputLineNumber,
@@ -77,22 +125,22 @@ msrCreditWords::msrCreditWords (
   msrXMLLangKind             creditWordsXMLLang)
     : msrElement (inputLineNumber)
 {
-  fCreditWordsContents   = creditWordsContents;
+  fCreditWordsContents = creditWordsContents;
 
   fCreditWordsDefaultX = creditWordsDefaultX;
   fCreditWordsDefaultY = creditWordsDefaultY;
 
-  fCreditWordsFontFamily              = creditWordsFontFamily;
-  fCreditWordsFontSize                = creditWordsFontSize;
-  fCreditWordsFontWeightKind          = creditWordsFontWeightKind;
-  fCreditWordsFontStyleKind           = creditWordsFontStyleKind;
+  fCreditWordsFontFamily     = creditWordsFontFamily;
+  fCreditWordsFontSize       = creditWordsFontSize;
+  fCreditWordsFontWeightKind = creditWordsFontWeightKind;
+  fCreditWordsFontStyleKind  = creditWordsFontStyleKind;
 
-  fCreditWordsJustifyKind             = creditWordsJustifyKind;
+  fCreditWordsJustifyKind = creditWordsJustifyKind;
 
   fCreditWordsHorizontalAlignmentKind = creditWordsHorizontalAlignmentKind;
   fCreditWordsVerticalAlignmentKind   = creditWordsVerticalAlignmentKind;
 
-  fCreditWordsXMLLang                 = creditWordsXMLLang;
+  fCreditWordsXMLLang = creditWordsXMLLang;
 }
 
 msrCreditWords::~msrCreditWords ()
@@ -225,7 +273,7 @@ ostream& operator<< (ostream& os, const S_msrCreditWords& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -247,6 +295,8 @@ msrCredit::msrCredit (
     : msrElement (inputLineNumber)
 {
   fCreditPageNumber = creditPageNumber;
+
+  fCreditTypeKind = msrCreditTypeKind::k_NoCreditType;  // default value
 }
 
 msrCredit::~msrCredit ()
@@ -319,10 +369,13 @@ string msrCredit::asString () const
 
   s <<
     "Credit" <<
-    ", fCreditPageNumber" << " = " << fCreditPageNumber << ", ";
+    ", fCreditPageNumber: " <<
+    fCreditPageNumber <<
+    ", fCreditTypeKind: " <<
+    fCreditTypeKind;
 
   if (fCreditWordsList.size ()) {
-    s << "[";
+    s << " [";
 
     vector<S_msrCreditWords>::const_iterator
       iBegin = fCreditWordsList.begin (),
@@ -352,8 +405,14 @@ void msrCredit::print (ostream& os) const
 
   ++gIndenter;
 
-  os <<
+	const int fieldWidth = 33;
+
+  os << left <<
+  	setw (fieldWidth) <<
     "fCreditPageNumber" << " : " << fCreditPageNumber <<
+    endl <<
+  	setw (fieldWidth) <<
+    "fCreditTypeKind" << " : " << fCreditTypeKind <<
     endl;
 
   if (fCreditWordsList.size ()) {
@@ -382,7 +441,7 @@ ostream& operator<< (ostream& os, const S_msrCredit& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
