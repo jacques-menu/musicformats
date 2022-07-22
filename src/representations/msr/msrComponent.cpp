@@ -105,9 +105,10 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.64"),
-          "June 23, 2022",
+          "July 22, 2022",
           list<string> {
-            "Fixed unchechecked smart pointers in msrNotes.cpp"
+            "Fixed unchechecked smart pointers in msrNotes.cpp",
+            "Finalized the representation of full-bar rests"
           }
       ));
   }

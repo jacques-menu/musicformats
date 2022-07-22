@@ -75,8 +75,6 @@ msrMultipleFullBarRests::msrMultipleFullBarRests (
 {
   fMultipleFullBarRestsSegmentUpLink = segmentUpLink;
 
-  fMultipleFullBarRestsMeasureSoundingNotes = rational (-1, 1);
-
   fMultipleFullBarRestsNumber = multipleFullBarRestsNumber;
 
   fMultipleFullBarRestsLastMeasurePuristNumber = -1;
@@ -90,19 +88,9 @@ msrMultipleFullBarRests::msrMultipleFullBarRests (
 {
   fMultipleFullBarRestsSegmentUpLink = segmentUpLink;
 
-  fMultipleFullBarRestsMeasureSoundingNotes =
-    restMeasureClone->
-      getFullMeasureWholeNotesDuration (); // JMI ???
-
-  fMultipleFullBarRestsNumber = 1; // will evolve JMI
+  fMultipleFullBarRestsNumber = 1; // will evolve JMI v0.9.64
 
   fMultipleFullBarRestsLastMeasurePuristNumber = -1;
-
-//   // create the multiple full-bar rests contents JMI KAKA
-//   fMultipleFullBarRestsContents =
-//     msrMultipleFullBarRestsContents::create (
-//       inputLineNumber,
-//       this);
 }
 
 msrMultipleFullBarRests::~msrMultipleFullBarRests ()
@@ -137,12 +125,21 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
 /* JMI v0.9.63
   newbornClone->fMultipleFullBarRestsNextMeasureNumber =
     fMultipleFullBarRestsNextMeasureNumber;
-
-  newbornClone->fMultipleFullBarRestsMeasureSoundingNotes =
-    fMultipleFullBarRestsMeasureSoundingNotes;
     */
 
   return newbornClone;
+}
+
+rational msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes () const
+{
+	rational result;
+
+  for (S_msrMeasure measure : fFullBarRestsMeasuresList) {
+    result +=
+    	measure->getFullMeasureWholeNotesDuration ();
+  } // for
+
+	return result;
 }
 
 void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (
@@ -399,8 +396,8 @@ string msrMultipleFullBarRests::asString () const
     fMultipleFullBarRestsNextMeasureNumber <<
     "'" <<
 
-    ", fMultipleFullBarRestsMeasureSoundingNotes: " <<
-    fMultipleFullBarRestsMeasureSoundingNotes <<
+    ", multipleFullBarRestsMeasureSoundingNotes: " <<
+    fetchMultipleFullBarRestsMeasureSoundingNotes () <<
     ", " <<
 
     ", line " << fInputLineNumber <<
@@ -440,7 +437,7 @@ void msrMultipleFullBarRests::print (ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 36;
+  const int fieldWidth = 41;
 
   os <<
     "fMultipleFullBarRestsSegmentUpLink" << " : ";
@@ -475,7 +472,7 @@ void msrMultipleFullBarRests::print (ostream& os) const
 
     setw (fieldWidth) <<
     "multipleFullBarRestsMeasureSoundingNotes" << " : " <<
-    fMultipleFullBarRestsMeasureSoundingNotes <<
+    fetchMultipleFullBarRestsMeasureSoundingNotes () <<
     endl;
 
   // print the segment upLink
@@ -534,7 +531,7 @@ ostream& operator<< (ostream& os, const S_msrMultipleFullBarRests& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

@@ -91,6 +91,16 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
             "Fixed bug in absolute and relative octaves generation"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.64"),
+          "May 31, 2022",
+          list<string> {
+            "Finalized the generation of LilyPond code for full-bar rests"
+          }
+      ));
   }
 
   return pPassComponent;

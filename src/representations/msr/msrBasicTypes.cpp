@@ -285,7 +285,7 @@ void msrDottedDuration::print (ostream& os) const
 
 ostream& operator<< (ostream& os, const msrDottedDuration& elt)
 {
-  elt.print (os);
+  os << elt.asString ();
   return os;
 }
 
@@ -987,7 +987,7 @@ ostream& operator<< (ostream& os, const S_msrSemiTonesPitchAndOctave& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1269,7 +1269,7 @@ ostream& operator<< (ostream& os, const S_msrQuarterTonesPitchAndOctave& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1790,6 +1790,13 @@ string msrDurationKindAsString (msrDurationKind durationKind)
 
   return result;
 }
+
+ostream& operator<< (ostream& os, const msrDurationKind& elt)
+{
+  os << msrDurationKindAsString (elt);
+  return os;
+}
+
 
 //_______________________________________________________________________________
 int msrDurationBinaryLogarithm (int duration)
@@ -15531,7 +15538,7 @@ ostream& operator<< (ostream& os, const S_msrLength& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -15680,7 +15687,7 @@ ostream& operator<< (ostream& os, const S_msrMargin& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -15948,7 +15955,7 @@ ostream& operator<< (ostream& os, const S_msrMarginsGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -19651,7 +19658,7 @@ ostream& operator<< (ostream& os, const S_msrHarmonyInterval& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -20894,7 +20901,7 @@ ostream& operator<< (ostream& os, const S_msrHarmonyStructure& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -20992,7 +20999,7 @@ ostream& operator<< (ostream& os, const S_msrSemiTonesPitchAndAbsoluteOctave& el
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -21089,7 +21096,7 @@ ostream& operator<< (ostream& os, const S_msrSemiTonesPitchAndRelativeOctave& el
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 */
@@ -21443,7 +21450,7 @@ ostream& operator<< (ostream& os, const S_msrHarmonyContents& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

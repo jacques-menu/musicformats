@@ -1704,9 +1704,9 @@ class EXP msrMeasureRepeatReplicas : public msrElement
 
 Full-bar rests handling is presented at \sectionRef{Multiple full-bar rests handling}.
 
-\Class{msrMultipleFullBarRests}, defined in \msrBoth{msrMultipleFullBarRests}, essentially contains a \class{msrMultipleFullBarRestsContents} instance and a mesure rests number:
+\Class{msrMultipleFullBarRests}, defined in \msrBoth{msrMultipleFullBarRests}, essentially contains a liste of \class{_msrMeasure} instances and a multiple full-bar rests number:
 \begin{lstlisting}[language=CPlusPlus]
-class EXP msrMultipleFullBarRests : public msrVoiceElement
+class EXP msrMultipleFullBarRests : public msrSegmentElement
 {
 	// ... ... ...
 
@@ -1715,33 +1715,14 @@ class EXP msrMultipleFullBarRests : public msrVoiceElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrVoice            fMultipleFullBarRestsSegmentUpLink;
+    S_msrSegment          fMultipleFullBarRestsSegmentUpLink;
 
-    int                   fMultipleFullBarRestsNumber;
+    int                   fMultipleFullBarRestsNumber; // supplied by MusicXML
+    list<S_msrMeasure>    fFullBarRestsMeasuresList;
 
-    string                fMultipleFullBarRestsNextMeasureNumber;
     int                   fMultipleFullBarRestsLastMeasurePuristNumber;
 
-    // shortcut for efficiency
-    rational              fMultipleFullBarRestsMeasureSoundingNotes;
-};
-\end{lstlisting}
-
-\Class{msrMultipleFullBarRestsContents} contains an \class{msrSegment} instance and an uplink:%%%JMI
-\begin{lstlisting}[language=CPlusPlus]
-class EXP msrMultipleFullBarRestsContents : public msrElement
-{
-	// ... ... ...
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-    // upLink
-    S_msrMultipleFullBarRests fMultipleFullBarRestsContentsMultipleFullBarRestsUpLink;
-
-    S_msrSegment          fMultipleFullBarRestsContentsSegment;
+    string                fMultipleFullBarRestsNextMeasureNumber;
 };
 \end{lstlisting}
 
@@ -1749,6 +1730,7 @@ class EXP msrMultipleFullBarRestsContents : public msrElement
 % -------------------------------------------------------------------------
 \section{Barlines}\label{Barlines}
 % -------------------------------------------------------------------------
+
 
 % -------------------------------------------------------------------------
 \section{Repeats}\label{Repeats}

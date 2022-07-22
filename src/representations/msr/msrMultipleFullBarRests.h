@@ -89,13 +89,9 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     int                   getMultipleFullBarRestsLastMeasurePuristMeasureNumber () const
                               { return fMultipleFullBarRestsLastMeasurePuristNumber; }
 
-    void                  setMultipleFullBarRestsMeasureSoundingNotes (
-                            const rational& soundingNotes)
-                              { fMultipleFullBarRestsMeasureSoundingNotes = soundingNotes; }
-
-    rational              getMultipleFullBarRestsMeasureSoundingNotes () const
-                              { return fMultipleFullBarRestsMeasureSoundingNotes; }
-
+    rational              fetchMultipleFullBarRestsMeasureSoundingNotes () const;
+														// don't simply multiply duration by number,
+														// may help pin-point errors in representation
   public:
 
     // public services
@@ -154,9 +150,6 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     int                   fMultipleFullBarRestsLastMeasurePuristNumber;
 
     string                fMultipleFullBarRestsNextMeasureNumber;
-
-    // shortcut for efficiency JMI ???
-    rational              fMultipleFullBarRestsMeasureSoundingNotes;
 };
 typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
 EXP ostream& operator<< (ostream& os, const S_msrMultipleFullBarRests& elt);

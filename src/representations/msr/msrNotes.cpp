@@ -211,8 +211,7 @@ void msrNote::initializeNote ()
       gLogStream <<
         "not yet known";
     else
-      gLogStream <<
-        msrNoteKindAsString (fNoteKind);
+      gLogStream << fNoteKind;
     gLogStream <<
       ", line " << fInputLineNumber << ":" <<
       endl;
@@ -254,15 +253,8 @@ void msrNote::initializeNote ()
 
       left <<
         setw (fieldWidth) <<
-        "fNoteGraphicDurationKind" << " = ";
-      if (fNoteGraphicDurationKind != msrDurationKind::k_NoDuration) {
-        gLogStream <<
-          msrDurationKindAsString (
-            fNoteGraphicDurationKind);
-      }
-      else {
-        gLogStream << "none";
-      }
+        "fNoteGraphicDurationKind" << " = " <<
+        fNoteGraphicDurationKind;
 
     gLogStream <<
       left <<
@@ -301,7 +293,7 @@ void msrNote::initializeNote ()
       left <<
         setw (fieldWidth) <<
         "fNoteHeadKind" << " = " <<
-         noteHeadKindAsString (fNoteHeadKind) <<
+         msrNoteHeadKindAsString (fNoteHeadKind) <<
         endl <<
       left <<
         setw (fieldWidth) <<
@@ -2347,7 +2339,7 @@ string msrNote::noteDisplayWholeNotesAsMsrString () const
   return result;
 }
 
-string msrNote::noteHeadKindAsString (
+string msrNote::msrNoteHeadKindAsString (
   msrNoteHeadKind noteHeadKind)
 {
   string result;
@@ -5773,7 +5765,7 @@ void msrNote::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fNoteHeadKind" << " : " <<
-    noteHeadKindAsString (
+    msrNoteHeadKindAsString (
       fNoteHeadKind) <<
     endl <<
     setw (fieldWidth) <<
@@ -7837,7 +7829,7 @@ void msrNote::printShort (ostream& os) const
 ostream& operator<< (ostream& os, const S_msrNote& elt)
 {
   if (elt) {
-    elt->print (os);
+    os << elt->asString ();
   }
   else {
     os << "*** NONE ***" << endl;

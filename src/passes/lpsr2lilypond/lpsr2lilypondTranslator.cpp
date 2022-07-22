@@ -11369,29 +11369,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
   }
 
   // compress multiple full-bar rests?
-  if (gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()) { // JMI v0.9.64
     fLilypondCodeStream <<
-      "\\compressFullBarRests" << " %{ BB %}" <<
+      "\\compressMMRests" << " %{ JMI v0.9.64 ??? %}" <<
       endl <<
       "\\set restNumberThreshold = 0" <<
       endl << endl;
   }
 
 // JMI   \set Score.alternativeNumberingStyle = #'numbers-with-letters
-
-/* JMI
-  if (
-    fCurrentVoice->getVoiceContainsMultipleFullBarRests ()
-      ||
-    gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()
-  ) {
-    fLilypondCodeStream <<
-      "\\compressFullBarRests" << " %{ CC %}" <<
-      endl;
-
-    ++gInde   nter; // JMI ???
-  }
-*/
 
   if (
     gGlobalLpsr2lilypondOahGroup->getAccidentalStyleKind ()
@@ -23554,51 +23540,66 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
   fRemainingMultipleFullBarRestsNumber =
     elt->getMultipleFullBarRestsNumber ();
 
-//   // get multiple full-bar rests sounding notes JMI USELESS v0.9.63
-//   rational
-//     multipleFullBarRestsMeasureSoundingNotes =
-//       elt->getMultipleFullBarRestsMeasureSoundingNotes ();
+#ifdef TRACING_IS_ENABLED
+	if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+		gLogStream <<
+			endl <<
+			"--> fRemainingMultipleFullBarRestsNumber: " <<
+			fRemainingMultipleFullBarRestsNumber <<
+			endl;
+	}
+#endif
 
-// JMI v0.9.63
-  // generate multiple full-bar rests compression if relevant
-  // right before Ri*n, because if affects only the next music element
-//   if (
-//     fCurrentVoice->getVoiceContainsMultipleFullBarRests ()
-//       ||
-//     gGlobalLpsr2lilypondOahGroup->getCompressFullBarRestsInLilypond ()
-//   ) {
-//     fLilypondCodeStream <<
-//       "\\compressFullBarRests" << " %{ AA %}" <<
-//       endl;
-//   }
+  // get multiple full-bar rests sounding notes JMI USELESS v0.9.63
+  rational
+    multipleFullBarRestsMeasureSoundingNotes =
+      elt->fetchMultipleFullBarRestsMeasureSoundingNotes ();
+
+#ifdef TRACING_IS_ENABLED
+	if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+		gLogStream <<
+			endl <<
+			"--> multipleFullBarRestsMeasureSoundingNotes: " <<
+			multipleFullBarRestsMeasureSoundingNotes <<
+			endl;
+	}
+#endif
 
   // generate multiple full-bar rests only now, in case there are
   // clef, keys or times before them in the first measure
-//   fLilypondCodeStream <<
-//     "R" <<
-//     multipleFullBarRestsWholeNoteAsLilypondString (
-//       inputLineNumber,
-//       multipleFullBarRestsMeasureSoundingNotes);
-//
-//   if (multipleFullBarRestsNumber > 1) {
-//     fLilypondCodeStream <<
-//       "*" <<
-//       multipleFullBarRestsNumber;
-//   }
+  string
+  	fullBarRestsWholeNoteAsLilypondString =
+			multipleFullBarRestsWholeNoteAsLilypondString (
+				inputLineNumber,
+				multipleFullBarRestsMeasureSoundingNotes);
 
-//   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
-//     // generate information and line number as a comment
-//     fLilypondCodeStream <<
-//       " %{ line " <<
-//       elt->getInputLineNumber () <<
-//       " %}";
-//   }
-//
-//   if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
-//     // generate information and line number as a comment
-//     fLilypondCodeStream <<
-//       "%{ multiple full-bar rest %}";
-//   }
+#ifdef TRACING_IS_ENABLED
+	if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+		gLogStream <<
+			endl <<
+			"--> fullBarRestsWholeNoteAsLilypondString: " <<
+			fullBarRestsWholeNoteAsLilypondString <<
+			endl;
+	}
+#endif
+
+  fLilypondCodeStream <<
+    "R" <<
+		fullBarRestsWholeNoteAsLilypondString;
+
+  if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
+    // generate information and line number as a comment
+    fLilypondCodeStream <<
+      " %{ line " <<
+      elt->getInputLineNumber () <<
+      " %}";
+  }
+
+  if (gGlobalLpsr2lilypondOahGroup->getNotesComments ()) {
+    // generate information and line number as a comment
+    fLilypondCodeStream <<
+      "%{ multiple full-bar rest %}";
+  }
 
   // wait until all measures have be visited
   // before the bar check is generated // JMI ???

@@ -169,8 +169,7 @@ iscmd="cd ${ISCM_DIR}"
 # musicxml2ly
 #----------------------------------------------
 
-#alias musicxml2ly_2.23.0-1=/Applications/LilyPond-2.23.0-1.app/Contents/Resources/bin/musicxml2ly
-alias musicxml2ly_2.23.0-1=/opt/local/bin/musicxml2ly
+alias musicxml2ly=/Applications/JMI_Applications/LilyPond/lilypond-2.23.10/bin/musicxml2ly
 
 function m2lf ()
 {
@@ -212,15 +211,20 @@ alias rmmakefiles="rm -rf ./libdir/CMakeFiles"
 
 function bit ()
 {
-#  set -x
+#   set -x
   SCRIPT_NAME=BuildMusicFormats.zsh
 
   LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
-	echo
-	echo "========> LOGFILE = ${LOGFILE}"
-	echo
+# 	echo
+# 	echo "========> LOGFILE = ${LOGFILE}"
+# 	echo
 
-  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+	# execute the SCRIPT
+
+	echo "--> Executing ${SCRIPTS_DIR}/${SCRIPT_NAME}"
+  zsh ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+
+	# filter out log results
 
   egrep \
     --colour=always \
@@ -234,10 +238,12 @@ function bit ()
 
   echo
 
+	# list resulting files
+
   ls -saltr ${BUILD_DIR}/bin/xml2* ${BUILD_DIR}/bin/msdl* # ${BUILD_DIR}/bin/Mikrokosmos3Wandering
 
 #  ll ${BUILD_DIR}/lib
-#  set +x
+#   set +x
 }
 
 alias cmakall='pushd . ; cd ${BUILD_DIR}/libdir; cmake .. -DALL=on -DAPPLEDEBUG=on ; popd'
@@ -814,7 +820,8 @@ function addBuild ()
 
 function addScripts ()
 {
-  cp -p ${HOME}/local/BashDefinitionsForMusicFormats.zsh ${SCRIPTS_DIR}
+  cp -p ${HOME}/local/BashDefinitionsForMusicFormats.bash ${SCRIPTS_DIR}
+  cp -p ${HOME}/local/ZshDefinitionsForMusicFormats.zsh ${SCRIPTS_DIR}
 
   git add    ${SCRIPTS_DIR}
 }
