@@ -111,6 +111,16 @@ S_mfcPassComponent createMxsr2msrComponent ()
             "Fixed an octave shifts handling issue"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.64"),
+          "July 22, 2022",
+          list<string> {
+            "Finalized the conversion of MusicXML <credit /> markups to MSR"
+          }
+      ));
   }
 
   return pPassComponent;
