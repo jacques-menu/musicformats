@@ -58,8 +58,20 @@ echo "--> Add all the files that need it"
 addAll
 echo
 
-echo "--> Commit a first time to the local repository clone with a ’Pre’ version number:"
 
+echo "--> Commit a first time to the local repository clone with a ’Pre’ version number:"
 git commit -m "Pre ${VERSION_NUMBER}" -a
 echo
 
+
+echo "--> Push this to the MusicFormats repo:"
+git push
+echo
+
+
+echo "--> Check at https://github.com/jacques-menu/musicformats/ actions"
+echo
+
+
+echo "--> Now, you should wait until the actions are done and switch to phase 2"
+echo
