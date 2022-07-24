@@ -62,17 +62,7 @@ S_mfcConverterComponent createIschemeInterpreterComponent ()
           mfcVersionNumber::createFromString ("0.9.64"),
           "June 20, 2022",
           list<string> {
-            "Created the iScheme interpreter component"
-          }
-      ));
-
-    // populate the interpreter's own history
-    pConverterComponent->
-      appendVersionDescrToComponent (
-        mfcVersionDescr::create (
-          mfcVersionNumber::createFromString ("0.9.64"),
-          "June 20, 2022",
-          list<string> {
+            "Created the iScheme interpreter component",
             "Cloned the MFSL interpreter into iScheme"
           }
       ));
