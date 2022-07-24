@@ -50,7 +50,7 @@ echo
 
 
 echo "--> Create the documentation PDF files"
-# scripts/CreateDocumentationPDFs.zsh
+scripts/CreateDocumentationPDFs.zsh
 echo
 
 
@@ -69,9 +69,10 @@ git push
 echo
 
 
-echo "--> Check at https://github.com/jacques-menu/musicformats/ actions"
+echo "--> Now, you should wait until the actions are done,"
+echo "    check at https://github.com/jacques-menu/musicformats/actions"
 echo
 
 
-echo "--> Now, you should wait until the actions are done and switch to phase 2"
-echo
+echo "--> After that, download the three resulting musicformats-*-distrib archives locally,"
+echo "    and proceed to phase 2"
