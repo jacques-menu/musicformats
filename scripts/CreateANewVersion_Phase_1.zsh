@@ -5,7 +5,7 @@
 function usage ()
   {
     echo "Usage is:"
-    echo "  $0 versionNumber versionDate"
+    echo "  ${SCRIPT_NAME} versionNumber versionDate"
     echo
     exit 1
   }
@@ -27,6 +27,8 @@ MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
 
 
 # check the arguments number
+
+SCRIPT_NAME="CreateANewVersion_Phase_1.zsh"
 
 [ $# != 2 ] && usage
 VERSION_NUMBER=$1
