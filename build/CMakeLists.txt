@@ -18,7 +18,7 @@ endif()
 
 #===============================================================
 # MusicXML versions management
-set (XMLVERSION 3.1)
+set (XMLVERSION 4.0)
 
 
 #===============================================================
@@ -104,7 +104,6 @@ endif()
 get_filename_component(ROOT ${CMAKE_CURRENT_SOURCE_DIR} DIRECTORY)
 set (DOCDIR ${ROOT}/documentation)
 set (DOC    ${DOCDIR}/presentation/libmusicxml2.pdf ${DOCDIR}/IntroductionToMusicXML/IntroductionToMusicXML.pdf ${DOCDIR}/MusicFormatsCLIUserGuide/MusicFormatsCLIUserGuide.pdf ${DOCDIR}/MusicFormatsAPIUserGuide/MusicFormatsAPIUserGuide.pdf ${DOCDIR}/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf)
-set (SCHEMA   ${ROOT}/schemas/MusicXML/musicxml-${XMLVERSION})
 
 set (BINDIR ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 set (LIBDIR ${CMAKE_CURRENT_SOURCE_DIR}/lib)
@@ -163,6 +162,8 @@ endif()
 #===============================================================
 # set directories, src and headers.
 set (MF_SRC_DIR ${ROOT}/src)
+
+set (SCHEMA ${ROOT}/libmusicxml/schemas)  ### /${XMLVERSION}
 set (LXML_SRC_DIR ${ROOT}/libmusicxml/src)
 
 set (LXML_SAMPLE_DIR ${ROOT}/libmusicxml/samples)

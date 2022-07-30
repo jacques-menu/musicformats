@@ -2829,14 +2829,28 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_name& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_group_name_display& elt)
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_group_name_display" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
 
   fOnGoingPartGroupNameDisplay = true;
 }
@@ -3128,11 +3142,14 @@ void mxsr2msrSkeletonBuilder::visitStart (S_score_part& elt)
 //________________________________________________________________________
 void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_part_name" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -3143,8 +3160,18 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_name& elt)
   if (printStyle == "JMI") {
   }
 
-  string printObject = elt->getAttributeValue ("print-object"); // JMI
-  if (printObject == "JMI") {
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
+
+  if (printObjectString == "JMI") {
   }
 }
 
@@ -3178,16 +3205,30 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_name_display& elt)
 
 void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation& elt)
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_part_abbreviation" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
 
   fCurrentPartAbbreviation = elt->getValue ();
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
 }
 
 void mxsr2msrSkeletonBuilder::visitStart (S_part_abbreviation_display& elt)

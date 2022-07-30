@@ -78,10 +78,27 @@ class EXP mxsr2msrTranslator :
   public visitor<S_left_divider>,
   public visitor<S_right_divider>,
 
+	// notations
+	// ------------------------------------------------------
+
+  public visitor<S_notations>,
+  public visitor<S_other_notation>,
+
+  // groups
+  // ------------------------------------------------------
+
+  public visitor<S_group>,
+  public visitor<S_group_name>,
+  public visitor<S_group_abbreviation>,
+  public visitor<S_group_abbreviation_display>,
+
   // parts
   // ------------------------------------------------------
 
   public visitor<S_part>,
+  public visitor<S_part_abbreviation>,
+  public visitor<S_part_abbreviation_display>,
+  public visitor<S_part_symbol>,
 
   // ???
   // ------------------------------------------------------
@@ -219,12 +236,20 @@ class EXP mxsr2msrTranslator :
   public visitor<S_degree_type>,
 
   public visitor<S_harmony>,
+  public visitor<S_root>,
   public visitor<S_root_step>,
   public visitor<S_root_alter>,
   public visitor<S_kind>,
   public visitor<S_inversion>,
+
+  public visitor<S_bass>,
   public visitor<S_bass_step>,
   public visitor<S_bass_alter>,
+
+  public visitor<S_numeral>,
+  public visitor<S_numeral_root>,
+  public visitor<S_numeral_alter>,
+  public visitor<S_numeral_key>,
 
   // frames
   // ------------------------------------------------------
@@ -249,8 +274,13 @@ class EXP mxsr2msrTranslator :
   // ------------------------------------------------------
 
   public visitor<S_measure>,
-  public visitor<S_print>,
   public visitor<S_measure_numbering>,
+
+
+  // printing
+  // ------------------------------------------------------
+
+  public visitor<S_print>,
 
   // ???
   // ------------------------------------------------------
@@ -587,6 +617,12 @@ class EXP mxsr2msrTranslator :
     virtual void          visitStart ( S_left_divider& elt);
     virtual void          visitStart ( S_right_divider& elt);
 
+    // notations
+    // ------------------------------------------------------
+
+    virtual void          visitStart ( S_notations& elt);
+    virtual void          visitStart ( S_other_notation& elt);
+
     // parts
     // ------------------------------------------------------
 
@@ -706,6 +742,8 @@ class EXP mxsr2msrTranslator :
     virtual void          visitStart ( S_accord& elt );
     virtual void          visitEnd   ( S_accord& elt );
 
+    virtual void          visitStart ( S_other_direction& elt );
+
     // accordion registration
     // ------------------------------------------------------
 
@@ -765,10 +803,13 @@ class EXP mxsr2msrTranslator :
 
     virtual void          visitStart ( S_harmony& elt);
     virtual void          visitEnd   ( S_harmony& elt);
+    virtual void          visitStart ( S_root& elt);
     virtual void          visitStart ( S_root_step& elt);
     virtual void          visitStart ( S_root_alter& elt);
     virtual void          visitStart ( S_kind& elt);
     virtual void          visitStart ( S_inversion& elt);
+
+    virtual void          visitStart ( S_bass& elt);
     virtual void          visitStart ( S_bass_step& elt);
     virtual void          visitStart ( S_bass_alter& elt);
 
@@ -1122,8 +1163,10 @@ class EXP mxsr2msrTranslator :
 
     S_msrMeasureLayout        fCurrentMeasureLayout;
 
-    // print ???
+    // print
     // ------------------------------------------------------
+
+    msrPrintObjectKind        fCurrentPrintObjectKind;
 
     string                    fCurrentDisplayText;
 
@@ -1190,7 +1233,6 @@ class EXP mxsr2msrTranslator :
                               fCurrentStaffTypeKind;
     msrStaffDetails::msrShowFretsKind
                               fCurrentShowFretsKind;
-    msrPrintObjectKind        fCurrentPrintObjectKind;
     msrStaffDetails::msrPrintSpacingKind
                               fCurrentPrintSpacingKind;
 

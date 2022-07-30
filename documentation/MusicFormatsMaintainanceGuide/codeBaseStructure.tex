@@ -4,7 +4,6 @@
 \chapter{Code base structure}
 % -------------------------------------------------------------------------
 
-
 The code base of the \mf\ library contains:
 \begin{itemize}
 \item \fileName{build} : a set of files to build the library in various environments with \make
@@ -25,7 +24,167 @@ The code base of the \mf\ library contains:
 \section{The {\tt libmusicxml} folder}
 % -------------------------------------------------------------------------
 
-This folder contains a version of Grame's \libmusicxml\ library, used by \mf, to avoid the need for installing it separately. The only possible annoyance when installing both libraries is that the executables in \fileName{libmusicxml/build/bin} such as \fileName{countnotes} and \fileName{xml2guido} are installed twice: choosing which one to use can be handled in the {\tt \$\textbraceleft PATH\textbraceright} environment variable or its equivalent.
+This folder contains a version of Grame's \libmusicxml\ library, available at \url{https://github.com/grame-cncm/libmusicxml}. It is used by \mf, to avoid the need for installing it separately. 
+
+The only possible annoyance when installing both libraries is that the executables in \fileName{libmusicxml/build/bin} such as \fileName{countnotes} and \fileName{xml2guido} are installed twice: choosing which one to use can be handled in the {\tt \$\textbraceleft PATH\textbraceright} and {\tt \$\textbraceleft LD_LIBRARY_PATH\textbraceright} environment variables or their equivalent.
+
+
+% -------------------------------------------------------------------------
+\subsection{Embedding {\tt libmusicxml} in MusicFormats}
+% -------------------------------------------------------------------------
+
+\libmusicxml\ was cloned initally like this:
+ \begin{lstlisting}[language=Terminal]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev > git clone https://github.com/grame-cncm/libmusicxml -b dev
+Cloning into 'libmusicxml'...
+remote: Enumerating objects: 56386, done.
+remote: Counting objects: 100% (4692/4692), done.
+remote: Compressing objects: 100% (777/777), done.
+remote: Total 56386 (delta 3917), reused 4671 (delta 3904), pack-reused 51694
+Receiving objects: 100% (56386/56386), 105.98 MiB | 15.91 MiB/s, done.
+Resolving deltas: 100% (46834/46834), done.
+\end{lstlisting}
+
+ \libmusicxml\ is quite stable, and it can be upgraded if needed with:
+ \begin{lstlisting}[language=Terminal]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml > git pull
+Already up to date.
+\end{lstlisting}
+
+There is no need to build \libmusicxml\ manually, since its code is taken into account by the \mf\ \Makefile.
+
+
+% -------------------------------------------------------------------------
+\subsection{Upgrading the supported MusicXML version}
+% -------------------------------------------------------------------------
+
+It may be necessary to upgrade the \mxml\ DTD in \elementsFolder\ to keep up with evolutions if \libmusicxml\ is not up to date yet.
+
+To upgrade from \mxml\ 3.1 to \mxml\ 4.0, the following has been done. \fileName{Makefile_ORIGINAL} is a symbolic link to the \Makefile\ provided by \libmusicxml\ for 3.1 at the time of this writing:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > ls -sal
+total 208
+ 0 drwxr-xr-x  14 jacquesmenu  staff    448 Jul 30 05:59 .
+ 0 drwxr-xr-x  22 jacquesmenu  staff    704 Jul 29 07:19 ..
+ 0 drwxr-xr-x   6 jacquesmenu  staff    192 Jul 29 07:19 2.0
+ 0 drwxr-xr-x   6 jacquesmenu  staff    192 Jul 29 07:19 3.0
+ 0 drwxr-xr-x   6 jacquesmenu  staff    192 Jul 29 07:19 3.1
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 Jul 29 08:04 4.0
+ 8 -rw-r--r--   1 jacquesmenu  staff   1215 Jul 29 07:19 Makefile
+ 8 -rw-r--r--   1 jacquesmenu  staff   1215 Jul 29 07:19 Makefile_3.1
+ 0 lrwxr-xr-x   1 jacquesmenu  staff      8 Jul 30 05:59 Makefile_ORIGINAL -> Makefile
+\end{lstlisting}
+
+First, create the \Makefile\ for version 4.0:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > sed 's/3.1/4.0/g' Makefile_3.1 > Makefile_4.0
+\end{lstlisting}
+
+Then use it to create the C++ files containing the constants and types to be used by \mxsrRepr, such as \code{k_accidental}, \code{S_accidental}:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > make -f Makefile_4.0 
+grep "<xs:element" 4.0/musicxml.xsd | sed -e 's/^.*name="//' | sed -e 's/"..*//' | sort -u > elements.txt
+../src/elements/templates/elements.bash elements.txt ../src/elements/templates constants > elements.h   || rm -f elements.h 
+../src/elements/templates/elements.bash elements.txt ../src/elements/templates types > typedefs.h   || rm -f typedefs.h 
+../src/elements/templates/elements.bash elements.txt ../src/elements/templates map > factory.cpp || rm -f factory.cpp
+\end{lstlisting}
+
+The resulting files are the following, where \fileName{elements.txt} contains an alphabetic list of the \mxml\ markups found in the DTD:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > ls -sal
+total 208
+ 0 drwxr-xr-x  13 jacquesmenu  staff    416 Jul 29 08:27 .
+ 0 drwxr-xr-x  22 jacquesmenu  staff    704 Jul 29 07:19 ..
+ 0 drwxr-xr-x   6 jacquesmenu  staff    192 Jul 29 07:19 2.0
+ 0 drwxr-xr-x   6 jacquesmenu  staff    192 Jul 29 07:19 3.0
+ 0 drwxr-xr-x   6 jacquesmenu  staff    192 Jul 29 07:19 3.1
+ 0 drwxr-xr-x   8 jacquesmenu  staff    256 Jul 29 08:04 4.0
+ 8 -rw-r--r--   1 jacquesmenu  staff   1215 Jul 29 07:19 Makefile_3.1
+ 8 -rw-r--r--@  1 jacquesmenu  staff   1215 Jul 29 08:26 Makefile_4.0
+ 8 -rw-r--r--   1 jacquesmenu  staff   1215 Jul 29 07:19 Makefile_ORIGINAL
+16 -rw-r--r--   1 jacquesmenu  staff   7130 Jul 29 08:27 elements.h
+16 -rw-r--r--   1 jacquesmenu  staff   4561 Jul 29 08:27 elements.txt
+96 -rw-r--r--   1 jacquesmenu  staff  46341 Jul 29 08:27 factory.cpp
+56 -rw-r--r--   1 jacquesmenu  staff  24604 Jul 29 08:27 typedefs.h
+\end{lstlisting}
+
+The mapping between the makups text and the types that describes them is done with:
+\begin{lstlisting}[language=Terminal]
+typedef SMARTP<musicxml<k_accidental> >		S_accidental;
+
+fMap["accidental"] 	= new newElementFunctor<k_accidental>;
+\end{lstlisting}
+
+Finally, copy the new C++ files to the \elementsFolder\ folder:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > cp -p elements.h factory.cpp typedefs.h ../src/elements 
+\end{lstlisting}
+
+Now, rebuild \mf, for it to use the new \mxml\ DTD:
+/libdir/CMakeCache.txt
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/build > rm libdir/CMakeCache.txt 
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/build > make
+\end{lstlisting}
+
+It may happen that error messages regarding the new markups are issued:
+\begin{lstlisting}[language=TerminalSmall]
+Undefined symbols for architecture x86_64:
+  "MusicFormats::mxsr2msrTranslator::visitStart(MusicXML2::SMARTP<MusicXML2::musicxml<241> >&)", referenced from:
+  "MusicFormats::mxsr2msrTranslator::visitStart(MusicXML2::SMARTP<MusicXML2::musicxml<266> >&)", referenced from:
+  "MusicFormats::mxsr2msrTranslator::visitStart(MusicXML2::SMARTP<MusicXML2::musicxml<284> >&)", referenced from:
+  "MusicFormats::mxsr2msrTranslator::visitStart(MusicXML2::SMARTP<MusicXML2::musicxml<29> >&)", referenced from:
+  "non-virtual thunk to MusicFormats::mxsr2msrTranslator::visitStart(MusicXML2::SMARTP<MusicXML2::musicxml<284> >&)", referenced from:
+  "non-virtual thunk to MusicFormats::mxsr2msrTranslator::visitStart(MusicXML2::SMARTP<MusicXML2::musicxml<29> >&)", referenced from:
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+** BUILD FAILED **
+make[1]: *** [macos] Error 65
+make: *** [all] Error 2
+\end{lstlisting}
+
+In that case, the corresponding constants can be found in \fileName{elements.h}, at line '26+numericalValue'. For example, with  \mxml\ version 4.0, 241 is the numerical value of \code{k_notations}, describing markup \musicXmlMarkup{"notations"}:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n kNoElement elements.h
+26:	kNoElement,
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_notations elements.h 
+267:	k_notations,
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_other_notation elements.h
+292:	k_other_notation,
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_part_name elements.h 
+310:	k_part_name,
+311:	k_part_name_display,
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_bass elements.h
+55:	k_bass,
+56:	k_bass_alter,
+57:	k_bass_separator,
+58:	k_bass_step,
+\end{lstlisting}
+
+The incriminated \mxsrRepr\ elements are thus \anonymousEnumConstantName{k_notations}, \anonymousEnumConstantName{k_other_notation}, \anonymousEnumConstantName{k_part_name} and \anonymousEnumConstantName{k_bass}.
+
+The first 4 error messages above mean that the corresponding \methodName{visitStart} methods  are declared alright, but are not defined in \mxsrToMsr{mxsr2msrTranslator.cpp}.
+%without the corresponding public inheritance declaration, such as:
+%\begin{lstlisting}[language=Terminal]
+%  public visitor<S_notations>,
+%\end{lstlisting}
+
+The following methods definitions are thus missing: 
+\begin{itemize}
+\item  \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_notations\& elt)}
+\item  \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_other_notation\& elt)}
+ \item \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_part_name\& elt)}
+\item  \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_bass\& elt)} 
+\end{itemize}
+
+\Type{S_part_name} is there by mistake (some typing was done before the upgrade to 4.0), since it is handled in \class{mxsr2msrSkeletonBuilder}, and the other 3 are new in \mxml\ 4.0.
+
+%%%JMI v0.9.65
+%The last 2 error messages mean that \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_part_name\& elt)} is declared alright, but there is no corresponding definition in \mxsrToMsr{mxsr2msrTranslator.cpp}:
+%\begin{lstlisting}[language=Terminal]
+%  public visitor<S_part_name>,
+%  // ... ... ...
+%    virtual void          visitStart ( S_part_name& elt);
+%\end{lstlisting}
 
 
 % -------------------------------------------------------------------------
@@ -79,7 +238,9 @@ total 504
 \section{The {\tt schemas} folder}
 % -------------------------------------------------------------------------
 
-This folder contains the definitions used to create the classes definitions to analyze textual data in the \mxml, \mei and \bmml forat, and \fileName{elements.bash} scripts that compile the definitions into the C++ code files containing the classes:
+This folder contains the definitions used to create the classes definitions to analyze textual data in the \mxml, \mei\ and \bmml\ formats. 
+
+In the \fileName{scripts} folder, \fileName{elements.bash} compiles the definitions of MusicXML markups into the C++ code files containing the corresponding C++ classes:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/schemas > ll
 total 2576
