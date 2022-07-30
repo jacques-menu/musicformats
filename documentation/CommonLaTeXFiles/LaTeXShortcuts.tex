@@ -253,6 +253,9 @@ Constant {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index
 \newcommand{\constantName}[2]{%
 {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[ConstantsFunctionsAndVariables]{{\tt #2}}%
 }
+\newcommand{\anonymousEnumConstantName}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[Main]{{\tt #1}}\index[ConstantsFunctionsAndVariables]{{\tt #1}}%
+}
 
 \newcommand{\functionPrivateVariable}[1]{%
 function private variable {\tt #1}\index[Main]{{\tt #1}}\index[ConstantsFunctionsAndVariables]{{\tt #1}}%
@@ -285,7 +288,7 @@ field {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[Me
 Field {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
 }
 \newcommand{\fieldIndex}[2]{%
-\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
+\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}% 
 }
 
 \newcommand{\method}[2]{%
@@ -293,6 +296,12 @@ method {\tt #1::#2~()}\index[Main]{{\tt #1}!{\tt #2}~()}\index[Main]{{\tt #2}~()
 }
 \newcommand{\Method}[2]{%
 Method {\tt #1::#2~()}\index[Main]{{\tt #1}!{\tt #2}~()}\index[Main]{{\tt #2}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #2}~()}%
+}
+\newcommand{\methodWithParameters}[2]{%
+method {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}~()}\index[Main]{{\tt #2}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
+}
+\newcommand{\MethodWithParameters}[2]{%
+Method {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}~()}\index[Main]{{\tt #2}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
 }
 
 \newcommand{\starMethodNameTwo}[2]{%

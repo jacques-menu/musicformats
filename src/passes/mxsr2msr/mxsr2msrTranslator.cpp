@@ -943,26 +943,89 @@ void mxsr2msrTranslator::visitStart ( S_system_dividers& elt )
 
 void mxsr2msrTranslator::visitStart ( S_left_divider& elt )
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_left_divider" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
 }
 
 void mxsr2msrTranslator::visitStart ( S_right_divider& elt )
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_right_divider" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
+}
+
+//______________________________________________________________________________
+void mxsr2msrTranslator::visitStart ( S_notations& elt )
+{
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_notations" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+	// JMI
+}
+
+void mxsr2msrTranslator::visitStart ( S_other_notation& elt )
+{
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_other_notation" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+	// JMI
 }
 
 //______________________________________________________________________________
@@ -2160,6 +2223,17 @@ void mxsr2msrTranslator::visitStart (S_part& elt)
     }
   }
 
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
     gLogStream <<
@@ -2471,11 +2545,14 @@ void mxsr2msrTranslator::visitStart ( S_divisions& elt )
 //______________________________________________________________________________
 void mxsr2msrTranslator::visitStart ( S_clef& elt )
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_clef" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -2487,6 +2564,17 @@ void mxsr2msrTranslator::visitStart ( S_clef& elt )
 
   fCurrentClefStaffNumber =
     elt->getAttributeIntValue ("number", 0);
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
 
   fCurrentClefLine = 0;
   fCurrentClefOctaveChange = 0;
@@ -2836,11 +2924,14 @@ void mxsr2msrTranslator::visitEnd ( S_clef& elt )
 //______________________________________________________________________________
 void mxsr2msrTranslator::visitStart ( S_key& elt )
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_key" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
@@ -2852,7 +2943,19 @@ void mxsr2msrTranslator::visitStart ( S_key& elt )
 
   fCurrentKeyKind = msrKeyKind::kKeyTraditional;
 
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
+
   // traditional
+
   fCurrentKeyFifths       = 0;
   fCurrentKeyCancelFifths = 0;
 
@@ -4263,6 +4366,33 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
   }
 }
 
+//________________________________________________________________________
+void mxsr2msrTranslator::visitStart (S_other_direction& elt)
+{
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_direction" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
+}
+
 //______________________________________________________________________________
 void mxsr2msrTranslator::visitStart ( S_sound& elt )
 {
@@ -5273,6 +5403,18 @@ void mxsr2msrTranslator::visitStart ( S_metronome& elt )
         s.str ());
     }
   }
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
+
 
   fCurrentMetronomeBeatUnitsVector.clear();
 
@@ -7830,6 +7972,17 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt )
     // for notes without lyrics
   }
 
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
+
   // color JMI
 
   // forget about any previous texts found,
@@ -9105,6 +9258,7 @@ void mxsr2msrTranslator::visitEnd ( S_print& elt )
   fOnGoingPrint = false;
 }
 
+//______________________________________________________________________________
 void mxsr2msrTranslator::visitStart ( S_measure_numbering& elt )
 {
 #ifdef TRACING_IS_ENABLED
@@ -9612,6 +9766,17 @@ void mxsr2msrTranslator::visitStart ( S_ending& elt )
         s.str ());
     }
   }
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
 }
 
 //______________________________________________________________________________
@@ -10093,7 +10258,6 @@ void mxsr2msrTranslator::visitStart ( S_note& elt )
   fCurrentHarmonyWholeNotesOffset = rational (0, 1);
 
   // lyrics
-
 
   fCurrentStanzaNumber = msrStanza::K_NO_STANZA_NUMBER;
   fCurrentStanzaName = msrStanza::K_NO_STANZA_NAME;
@@ -12648,6 +12812,17 @@ void mxsr2msrTranslator::visitStart ( S_harmonic& elt )
       msrPlacementKindFromString (
         inputLineNumber,
         placementString);
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
 
   // create the technical
   S_msrTechnical
@@ -24257,6 +24432,17 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
   }
 #endif
 
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
+
   ++fHarmoniesVoicesCounter;
 
   fCurrentHarmonyInputLineNumber       = inputLineNumber;
@@ -24274,6 +24460,32 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
   fCurrentHarmonyWholeNotesOffset = rational (0, 1);
 
   fOnGoingHarmony = true;
+}
+
+void mxsr2msrTranslator::visitStart ( S_root& elt )
+{
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_root" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
 }
 
 void mxsr2msrTranslator::visitStart ( S_root_step& elt )
@@ -24582,6 +24794,31 @@ void mxsr2msrTranslator::visitStart ( S_inversion& elt )
   fCurrentHarmonyInversion = (int)(*elt);
 }
 
+void mxsr2msrTranslator::visitStart ( S_bass& elt )
+{
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
+    gLogStream <<
+      "--> Start visiting S_bass" <<
+      ", line " << inputLineNumber <<
+      endl;
+  }
+#endif
+
+  string step = elt->getValue(); // v0.9.65 MusicXML 4.0
+
+  checkStep (
+    inputLineNumber,
+    step);
+
+  fCurrentHarmonyBassDiatonicPitchKind =
+    msrDiatonicPitchKindFromChar (
+      step [0]);
+}
+
 void mxsr2msrTranslator::visitStart ( S_bass_step& elt )
 {
   int inputLineNumber =
@@ -24644,14 +24881,28 @@ void mxsr2msrTranslator::visitStart ( S_bass_alter& elt )
 
 void mxsr2msrTranslator::visitStart ( S_degree& elt )
 {
+  int inputLineNumber =
+    elt->getInputLineNumber ();
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
     gLogStream <<
       "--> Start visiting S_degree" <<
-      ", line " << elt->getInputLineNumber () <<
+      ", line " << inputLineNumber <<
       endl;
   }
 #endif
+
+  // print-object
+
+  string
+    printObjectString =
+      elt->getAttributeValue ("print-object");
+
+  fCurrentPrintObjectKind =
+    msrPrintObjectKindFromString (
+      inputLineNumber,
+      printObjectString);
 }
 
 void mxsr2msrTranslator::visitStart ( S_degree_value& elt )

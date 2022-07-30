@@ -611,6 +611,8 @@ class EXP mxsr2msrSkeletonBuilder :
     // print
     // ------------------------------------------------------
 
+    msrPrintObjectKind        fCurrentPrintObjectKind;
+
     Bool                      fOnGoingPrint;
 
 

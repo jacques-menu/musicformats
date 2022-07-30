@@ -324,9 +324,19 @@ S_mfcLibraryComponent createLibraryComponent ()
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.62"),
-          "March 1238, 2022",
+          "March 28, 2022",
           list<string> {
             "Finalized ragged output handling"
+          }
+      ));
+
+    pLibraryComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.65"),
+          "July 29, 2022",
+          list<string> {
+            "Upgrading MusicXML from version 3.1 to 4.0"
           }
       ));
  }
