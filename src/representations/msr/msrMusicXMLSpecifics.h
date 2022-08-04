@@ -26,19 +26,19 @@ class EXP msrPageLayout : public msrElement
 {
 /*
 <!--
-	Page layout can be defined both in score-wide defaults
-	and in the print element. Page margins are specified either
-	for both even and odd pages, or via separate odd and even
-	page number values. The type is not needed when used as
-	part of a print element. If ignored when used in the
-	defaults element, "both" is the default.
+  Page layout can be defined both in score-wide defaults
+  and in the print element. Page margins are specified either
+  for both even and odd pages, or via separate odd and even
+  page number values. The type is not needed when used as
+  part of a print element. If ignored when used in the
+  defaults element, "both" is the default.
 -->
 <!ELEMENT page-layout ((page-height, page-width)?,
-	(page-margins, page-margins?)?)>
+  (page-margins, page-margins?)?)>
 <!ELEMENT page-height %layout-tenths;>
 <!ELEMENT page-width %layout-tenths;>
 <!ELEMENT page-margins (left-margin, right-margin,
-	top-margin, bottom-margin)>
+  top-margin, bottom-margin)>
 <!ATTLIST page-margins
     type (odd | even | both) #IMPLIED
 >
@@ -240,19 +240,19 @@ class EXP msrSystemDividers : public msrElement
 {
 /*
 <!--
-	The system-dividers element indicates the presence or
-	absence of system dividers (also known as system separation
-	marks) between systems displayed on the same page. Dividers
-	on the left and right side of the page are controlled by
-	the left-divider and right-divider elements respectively.
-	The default vertical position is half the system-distance
-	value from the top of the system that is below the divider.
-	The default horizontal position is the left and right
-	system margin, respectively.
+  The system-dividers element indicates the presence or
+  absence of system dividers (also known as system separation
+  marks) between systems displayed on the same page. Dividers
+  on the left and right side of the page are controlled by
+  the left-divider and right-divider elements respectively.
+  The default vertical position is half the system-distance
+  value from the top of the system that is below the divider.
+  The default horizontal position is the left and right
+  system margin, respectively.
 
-	When used in the print element, the system-dividers element
-	affects the dividers that would appear between the current
-	system and the previous system.
+  When used in the print element, the system-dividers element
+  affects the dividers that would appear between the current
+  system and the previous system.
 -->
 <!ELEMENT system-dividers (left-divider, right-divider)>
 <!ELEMENT left-divider EMPTY>
@@ -353,14 +353,14 @@ class EXP msrStaffLayout : public msrElement
 {
 /*
 <!--
-	Staff layout includes the vertical distance from the bottom
-	line of the previous staff in this system to the top line
-	of the staff specified by the number attribute. The
-	optional number attribute refers to staff numbers within
-	the part, from top to bottom on the system. A value of 1
-	is assumed if not present. When used in the defaults
-	element, the values apply to all parts. This value is
-	ignored for the first staff in a system.
+  Staff layout includes the vertical distance from the bottom
+  line of the previous staff in this system to the top line
+  of the staff specified by the number attribute. The
+  optional number attribute refers to staff numbers within
+  the part, from top to bottom on the system. A value of 1
+  is assumed if not present. When used in the defaults
+  element, the values apply to all parts. This value is
+  ignored for the first staff in a system.
 -->
 <!ELEMENT staff-layout (staff-distance?)>
 <!ELEMENT staff-distance %layout-tenths;>
@@ -449,11 +449,11 @@ class EXP msrMeasureLayout : public msrElement
 {
 /*
 <!--
-	Measure layout includes the horizontal distance from the
-	previous measure. This value is only used for systems
-	where there is horizontal whitespace in the middle of a
-	system, as in systems with codas. To specify the measure
-	width, use the width attribute of the measure element.
+  Measure layout includes the horizontal distance from the
+  previous measure. This value is only used for systems
+  where there is horizontal whitespace in the middle of a
+  system, as in systems with codas. To specify the measure
+  width, use the width attribute of the measure element.
 -->
 <!ELEMENT measure-layout (measure-distance?)>
 <!ELEMENT measure-distance %layout-tenths;>
@@ -528,40 +528,40 @@ class EXP msrPrintLayout : public msrMeasureElement
 {
 /*
 <!--
-	The print element contains general printing parameters,
-	including the layout elements defined in the layout.mod
-	file. The part-name-display and part-abbreviation-display
-	elements used in the score.mod file may also be used here
-	to change how a part name or abbreviation is displayed over
-	the course of a piece. They take effect when the current
-	measure or a succeeding measure starts a new system.
+  The print element contains general printing parameters,
+  including the layout elements defined in the layout.mod
+  file. The part-name-display and part-abbreviation-display
+  elements used in the score.mod file may also be used here
+  to change how a part name or abbreviation is displayed over
+  the course of a piece. They take effect when the current
+  measure or a succeeding measure starts a new system.
 
-	The new-system and new-page attributes indicate whether
-	to force a system or page break, or to force the current
-	music onto the same system or page as the preceding music.
-	Normally this is the first music data within a measure.
-	If used in multi-part music, they should be placed in the
-	same positions within each part, or the results are
-	undefined. The page-number attribute sets the number of a
-	new page; it is ignored if new-page is not "yes". Version
-	2.0 adds a blank-page attribute. This is a positive integer
-	value that specifies the number of blank pages to insert
-	before the current measure. It is ignored if new-page is
-	not "yes". These blank pages have no music, but may have
-	text or images specified by the credit element. This is
-	used to allow a combination of pages that are all text,
-	or all text and images, together with pages of music.
+  The new-system and new-page attributes indicate whether
+  to force a system or page break, or to force the current
+  music onto the same system or page as the preceding music.
+  Normally this is the first music data within a measure.
+  If used in multi-part music, they should be placed in the
+  same positions within each part, or the results are
+  undefined. The page-number attribute sets the number of a
+  new page; it is ignored if new-page is not "yes". Version
+  2.0 adds a blank-page attribute. This is a positive integer
+  value that specifies the number of blank pages to insert
+  before the current measure. It is ignored if new-page is
+  not "yes". These blank pages have no music, but may have
+  text or images specified by the credit element. This is
+  used to allow a combination of pages that are all text,
+  or all text and images, together with pages of music.
 
-	Staff spacing between multiple staves is measured in
-	tenths of staff lines (e.g. 100 = 10 staff lines). This is
-	deprecated as of Version 1.1; the staff-layout element
-	should be used instead. If both are present, the
-	staff-layout values take priority.
+  Staff spacing between multiple staves is measured in
+  tenths of staff lines (e.g. 100 = 10 staff lines). This is
+  deprecated as of Version 1.1; the staff-layout element
+  should be used instead. If both are present, the
+  staff-layout values take priority.
 
-	Layout elements in a print statement only apply to the
-	current page, system, staff, or measure. Music that
-	follows continues to take the default values from the
-	layout included in the defaults element.
+  Layout elements in a print statement only apply to the
+  current page, system, staff, or measure. Music that
+  follows continues to take the default values from the
+  layout included in the defaults element.
 -->
 <!ELEMENT print (page-layout?, system-layout?, staff-layout*,
     measure-layout?, measure-numbering?, part-name-display?,
@@ -720,18 +720,18 @@ class EXP msrLineWidth : public msrElement
     enum msrLineWidthTypeKind {
       k_NoLineWidthTypeKind,
       kBeamLineWidth, kBracketLineWidth, kDashesLineWidth,
-	    kEnclosureLineWidth,
-	    kEndingLineWidth,
-	    kExtendLineWidth,
-	    kHeavyBarLineLineWidth, kLegerLineWidth, kLightBarLineLineWidthLineWidth,
-	    kOctaveShiftLineWidth,
-	    kPedalLineWidth,
-	    kSlurMiddleLineWidth, kSlurTipLineWidth,
-	    kStaffLineWidth, kStemLineWidthLineWidth,
-	    kTieMiddleLineWidth, kTieTipLineWidth,
-	    kTupletBracketLineWidth,
-	    kWedgeLineWidth
-	  };
+      kEnclosureLineWidth,
+      kEndingLineWidth,
+      kExtendLineWidth,
+      kHeavyBarLineLineWidth, kLegerLineWidth, kLightBarLineLineWidthLineWidth,
+      kOctaveShiftLineWidth,
+      kPedalLineWidth,
+      kSlurMiddleLineWidth, kSlurTipLineWidth,
+      kStaffLineWidth, kStemLineWidthLineWidth,
+      kTieMiddleLineWidth, kTieTipLineWidth,
+      kTupletBracketLineWidth,
+      kWedgeLineWidth
+    };
 
     static string lineWidthTypeKindAsString (
       msrLineWidthTypeKind lineWidthTypeKind);
@@ -1115,77 +1115,77 @@ class EXP msrAppearance : public msrElement
 {
 /*
 <!--
-	The appearance element controls general graphical
-	settings for the music's final form appearance on a
-	printed page of display. This includes support
-	for line widths, definitions for note sizes, and standard
-	distances between notation elements, plus an extension
-	element for other aspects of appearance.
+  The appearance element controls general graphical
+  settings for the music's final form appearance on a
+  printed page of display. This includes support
+  for line widths, definitions for note sizes, and standard
+  distances between notation elements, plus an extension
+  element for other aspects of appearance.
 
-	The line-width element indicates the width of a line type
-	in tenths. The type attribute defines what type of line is
-	being defined. Values include beam, bracket, dashes,
-	enclosure, ending, extend, heavy barLine, leger,
-	light barLine, octave shift, pedal, slur middle, slur tip,
-	staff, stem, tie middle, tie tip, tuplet bracket, and
-	wedge. The text content is expressed in tenths.
+  The line-width element indicates the width of a line type
+  in tenths. The type attribute defines what type of line is
+  being defined. Values include beam, bracket, dashes,
+  enclosure, ending, extend, heavy barLine, leger,
+  light barLine, octave shift, pedal, slur middle, slur tip,
+  staff, stem, tie middle, tie tip, tuplet bracket, and
+  wedge. The text content is expressed in tenths.
 
-	The note-size element indicates the percentage of the
-	regular note size to use for notes with a cue and large
-	size as defined in the type element. The grace-cue type
-	is used for notes of grace-cue size. The grace type is
-	used for notes of cue size that include a grace element.
-	The cue type is used for all other notes with cue size,
-	whether defined explicitly or implicitly via a cue element.
-	The large type is used for notes of large size. The text
-	content represent the numeric percentage. A value of 100
-	would be identical to the size of a regular note as defined
-	by the music font.
+  The note-size element indicates the percentage of the
+  regular note size to use for notes with a cue and large
+  size as defined in the type element. The grace-cue type
+  is used for notes of grace-cue size. The grace type is
+  used for notes of cue size that include a grace element.
+  The cue type is used for all other notes with cue size,
+  whether defined explicitly or implicitly via a cue element.
+  The large type is used for notes of large size. The text
+  content represent the numeric percentage. A value of 100
+  would be identical to the size of a regular note as defined
+  by the music font.
 
-	The distance element represents standard distances between
-	notation elements in tenths. The type attribute defines what
-	type of distance is being defined. Values include hyphen
-	(for hyphens in lyrics) and beam.
+  The distance element represents standard distances between
+  notation elements in tenths. The type attribute defines what
+  type of distance is being defined. Values include hyphen
+  (for hyphens in lyrics) and beam.
 
-	The glyph element represents what SMuFL glyph should be used
-	for different variations of symbols that are semantically
-	identical. The type attribute specifies what type of glyph
-	is being defined. The element value specifies what
-	SMuFL glyph to use, including recommended stylistic
-	regulars.
+  The glyph element represents what SMuFL glyph should be used
+  for different variations of symbols that are semantically
+  identical. The type attribute specifies what type of glyph
+  is being defined. The element value specifies what
+  SMuFL glyph to use, including recommended stylistic
+  regulars.
 
-	Glyph type attribute values include quarter-rest,
-	g-clef-ottava-bassa, c-clef, f-clef, percussion-clef,
-	octave-shift-up-8, octave-shift-down-8,
-	octave-shift-continue-8, octave-shift-down-15,
-	octave-shift-up-15, octave-shift-continue-15,
-	octave-shift-down-22, octave-shift-up-22, and
-	octave-shift-continue-22. A quarter-rest type specifies the
-	glyph to use when a note has a rest element and a type value
-	of quarter. The c-clef, f-clef, and percussion-clef types
-	specify the glyph to use when a clef sign element value is C,
-	F, or percussion respectively. The g-clef-ottava-bassa type
-	specifies the glyph to use when a clef sign element value is
-	G and the clef-octave-change element value is -1. The
-	octave-shift types specify the glyph to use when an
-	octave-shift type attribute value is up, down, or continue
-	and the octave-shift size attribute value is 8, 15, or 22.
+  Glyph type attribute values include quarter-rest,
+  g-clef-ottava-bassa, c-clef, f-clef, percussion-clef,
+  octave-shift-up-8, octave-shift-down-8,
+  octave-shift-continue-8, octave-shift-down-15,
+  octave-shift-up-15, octave-shift-continue-15,
+  octave-shift-down-22, octave-shift-up-22, and
+  octave-shift-continue-22. A quarter-rest type specifies the
+  glyph to use when a note has a rest element and a type value
+  of quarter. The c-clef, f-clef, and percussion-clef types
+  specify the glyph to use when a clef sign element value is C,
+  F, or percussion respectively. The g-clef-ottava-bassa type
+  specifies the glyph to use when a clef sign element value is
+  G and the clef-octave-change element value is -1. The
+  octave-shift types specify the glyph to use when an
+  octave-shift type attribute value is up, down, or continue
+  and the octave-shift size attribute value is 8, 15, or 22.
 
-	The SMuFL glyph name should match the type. For instance,
-	a type of quarter-rest would use values restQuarter,
-	restQuarterOld, or restQuarterZ. A type of g-clef-ottava-bassa
-	would use values gClef8vb, gClef8vbOld, or gClef8vbCClef. A
-	type of octave-shift-up-8 would use values ottava, ottavaBassa,
-	ottavaBassaBa, ottavaBassaVb, or octaveBassa.
+  The SMuFL glyph name should match the type. For instance,
+  a type of quarter-rest would use values restQuarter,
+  restQuarterOld, or restQuarterZ. A type of g-clef-ottava-bassa
+  would use values gClef8vb, gClef8vbOld, or gClef8vbCClef. A
+  type of octave-shift-up-8 would use values ottava, ottavaBassa,
+  ottavaBassaBa, ottavaBassaVb, or octaveBassa.
 
-	The other-appearance element is used to define any
-	graphical settings not yet in the current version of the
-	MusicXML format. This allows extended representation,
-	though without application interoperability.
+  The other-appearance element is used to define any
+  graphical settings not yet in the current version of the
+  MusicXML format. This allows extended representation,
+  though without application interoperability.
 -->
 <!ELEMENT appearance
-	(line-width*, note-size*, distance*, glyph*,
-	 other-appearance*)>
+  (line-width*, note-size*, distance*, glyph*,
+   other-appearance*)>
 <!ELEMENT line-width %layout-tenths;>
 <!ATTLIST line-width
     type CDATA #REQUIRED

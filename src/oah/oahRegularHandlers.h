@@ -95,7 +95,9 @@ class EXP oahRegularHandler : public oahHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const;
+    string                asString () const override;
+
+    void                  print (ostream& os) const override;
 
   protected:
 

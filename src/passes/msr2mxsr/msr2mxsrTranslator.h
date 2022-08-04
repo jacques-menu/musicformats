@@ -579,7 +579,7 @@ class EXP msr2mxsrTranslator :
 
 /*
 <!ELEMENT identification (creator*, rights*, encoding?,
-	source?, relation*, miscellaneous?)>
+  source?, relation*, miscellaneous?)>
 */
 
     // identification creator
@@ -602,7 +602,7 @@ class EXP msr2mxsrTranslator :
 
 /* JMI to be handled
 <!ELEMENT encoding ((encoding-date | encoder |
-	encoding-description | supports)*)>
+  encoding-description | supports)*)>
 <!ELEMENT encoding-date %yyyy-mm-dd;>
 <!ELEMENT encoder (#PCDATA)>
 <!ATTLIST encoder

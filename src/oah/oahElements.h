@@ -16,6 +16,8 @@
 
 #include "basevisitor.h"
 
+#include "oahBasicTypes.h"
+
 
 using namespace std;
 
@@ -66,16 +68,142 @@ string elementHelpOnlyKindAsString (
 ostream& operator<< (ostream& os, oahElementHelpOnlyKind& elt);
 
 //______________________________________________________________________________
-// PRE-declaration for class self dependency
+// PRE-declarations for mutual and self dependency
 class oahElement;
 typedef SMARTP<oahElement> S_oahElement;
 
+class oahFindStringMatch;
+typedef SMARTP<oahFindStringMatch> S_oahFindStringMatch;
+
+//______________________________________________________________________________
+/*
+  A type to hold the the OAH elements that can be found by (sub)string
+*/
+class EXP oahFindableElement : public smartable
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+/* this class is purely virtual
+    static SMARTP<oahFindableElement> create ();
+*/
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahFindableElement ();
+
+    virtual               ~oahFindableElement ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    virtual Bool          findStringInFindableElement (
+                            const string&               lowerCaseString,
+                            list<S_oahFindStringMatch>& foundMatchesList,
+                            ostream&                    os) const = 0;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    virtual string        asString () const = 0;
+
+    virtual void          print (ostream& os) const = 0;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+};
+typedef SMARTP<oahFindableElement> S_oahFindableElement;
+EXP ostream& operator<< (ostream& os, const S_oahFindableElement& elt);
+EXP ostream& operator<< (ostream& os, const oahFindableElement& elt);
+
+//_______________________________________________________________________________
+/*
+  A type to hold the matched string and the oahElement it has been found in
+
+  In the pair:
+    - first is the string that has been found
+    - second is the oahElement in which is has been found
+*/
+class oahFindStringMatch : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahFindStringMatch> create (
+                            const string&        foundString,
+                            S_oahFindableElement containingFindableElement);
+
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahFindStringMatch (
+                            const string&        foundString,
+                            S_oahFindableElement containingFindableElement);
+
+    virtual               ~oahFindStringMatch ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const string&         getFoundString () const
+                              { return fFoundString; }
+
+    S_oahFindableElement  getContainingFindableElement () const
+                              { return fContainingFindableElement; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    virtual void          print (ostream& os) const;
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    const string&         fFoundString;
+    S_oahFindableElement  fContainingFindableElement;
+};
+typedef SMARTP<oahFindStringMatch> S_oahFindStringMatch;
+EXP ostream& operator<< (ostream& os, const S_oahFindStringMatch& elt);
+EXP ostream& operator<< (ostream& os, const oahFindStringMatch& elt);
+
+//______________________________________________________________________________
 /*
   a common ancestor for all OAH classes,
   i.e. atoms, subgroups and groups
 */
 
-class EXP oahElement : public smartable
+class EXP oahElement : public oahFindableElement
 {
   public:
 
@@ -177,10 +305,11 @@ class EXP oahElement : public smartable
 
     virtual void          applyElement (ostream& os) = 0;
 
-    Bool                  findStringInElement (
-                            const string& lowerCaseString,
-                            list<string>& foundStringsList,
-                            ostream&      os) const;
+    Bool                  findStringInFindableElement (
+                            const string&               lowerCaseString,
+                            list<S_oahFindStringMatch>& foundMatchesList,
+                            ostream&                    os) const override;
+
   public:
 
     // visitors
@@ -203,7 +332,7 @@ class EXP oahElement : public smartable
 
     string                asLongNamedOptionString () const;
 
-    virtual string        asString () const;
+    virtual string        asString () const override;
     virtual string        asShortString () const;
 
     virtual void          printOptionHeader (ostream& os) const;
@@ -215,7 +344,7 @@ class EXP oahElement : public smartable
                             ostream& os,
                             int fieldWidth) const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (ostream& os) const override;
     virtual void          printShort (ostream& os) const;
 
     virtual void          printHelp (ostream& os) const;
@@ -241,6 +370,7 @@ class EXP oahElement : public smartable
 };
 typedef SMARTP<oahElement> S_oahElement;
 EXP ostream& operator<< (ostream& os, const S_oahElement& elt);
+EXP ostream& operator<< (ostream& os, const oahElement& elt);
 
 //______________________________________________________________________________
 /*

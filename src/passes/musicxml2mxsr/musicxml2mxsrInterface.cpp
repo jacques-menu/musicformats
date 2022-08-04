@@ -556,7 +556,7 @@ SXMLFile createSXMLFileFromFile (
       }
 #endif
 
-	xmlreader r;
+  xmlreader r;
 
   sxmlfile = r.read (fileName);
 
@@ -580,7 +580,7 @@ SXMLFile createSXMLFileFromFile (
     startClock,
     endClock);
 
-	return sxmlfile;
+  return sxmlfile;
 }
 
 //_______________________________________________________________________________
@@ -623,9 +623,9 @@ SXMLFile createSXMLFileFromFd (
       }
 #endif
 
-	xmlreader r;
+  xmlreader r;
 
-	sxmlfile = r.read (fd);
+  sxmlfile = r.read (fd);
 
   // has there been a problem?
   if (! sxmlfile) {
@@ -647,7 +647,7 @@ SXMLFile createSXMLFileFromFd (
     startClock,
     endClock);
 
-	return sxmlfile;
+  return sxmlfile;
 }
 
 //_______________________________________________________________________________
@@ -662,7 +662,7 @@ SXMLFile createSXMLFileFromString (
   clock_t startClock = clock ();
 
   // read the input MusicXML data from the buffer
-	xmlreader r;
+  xmlreader r;
 
   if (buffer [0] != '\0') { // superflous ??? JMI
 #ifdef TRACE_OAH
@@ -674,9 +674,9 @@ SXMLFile createSXMLFileFromString (
     }
 #endif
 
-  	xmlreader r;
+    xmlreader r;
 
-	  sxmlfile = r.readbuff (buffer);
+    sxmlfile = r.readbuff (buffer);
 
     // has there been a problem?
     if (! sxmlfile) {
@@ -699,7 +699,7 @@ SXMLFile createSXMLFileFromString (
     startClock,
     endClock);
 
-	return sxmlfile;
+  return sxmlfile;
 }
 
 //_______________________________________________________________________________

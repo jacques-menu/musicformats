@@ -56,7 +56,7 @@ mfslDriver::mfslDriver ()
       gLogStream << "Reading standard input" << endl;
     }
 #endif
-	}
+  }
 
   else {
     // MFSL data comes from a file
@@ -67,7 +67,7 @@ mfslDriver::mfslDriver ()
         endl;
     }
 #endif
-	}
+  }
 
   // get the options values as bool,
   // since Bool is unknown to Flex and Bison-generated code
@@ -868,7 +868,7 @@ mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
     } // for
   }
 
-	return result;
+  return result;
 }
 
 Bool mfslDriver::applySelectOptionsFinally ()

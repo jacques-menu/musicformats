@@ -54,16 +54,16 @@ namespace MusicFormats
 // #endif
 //
 //   // make sure stringPairVector is empty
-// 	stringPairVector.erase (
-// 	  stringPairVector.begin (),
-// 	  stringPairVector.end ());
+//   stringPairVector.erase (
+//     stringPairVector.begin (),
+//     stringPairVector.end ());
 //
 //   // populate stringPairVector from the elements in argv
 //
-// 	string currentOption;
+//   string currentOption;
 //
-// 	for (int i = 1; i < argc; ++i) {
-// 	  string currString = argv [i];
+//   for (int i = 1; i < argc; ++i) {
+//     string currString = argv [i];
 //
 // #ifdef TRACING_IS_ENABLED
 //     if (gGlobalOahEarlyOptions.getTraceEarlyOptions ()) {
@@ -75,7 +75,7 @@ namespace MusicFormats
 //     }
 // #endif
 //
-//     if (currentOption.empty ()) {	// wait for option
+//     if (currentOption.empty ()) {  // wait for option
 //       if (currString [0] == '-') {
 //         currentOption = currString;
 //       }
@@ -104,7 +104,7 @@ namespace MusicFormats
 //     }
 //   } // for
 //
-// 	if (currentOption.size())
+//   if (currentOption.size())
 //     stringPairVector.push_back (
 //       make_pair (
 //         currentOption, ""));
@@ -166,9 +166,9 @@ EXP void displayStringPairVector (
 //   char*           argv[],
 //   vector<string>& stringsVector)
 // {
-// 	for (int i=1; i<argc; ++i) {
-// 		stringsVector.push_back (argv [i]);
-// 	} // for
+//   for (int i=1; i<argc; ++i) {
+//     stringsVector.push_back (argv [i]);
+//   } // for
 // }
 
 // //_______________________________________________________________________________
@@ -178,9 +178,9 @@ EXP void displayStringPairVector (
 //   oahOptionsVector& theOptionsVector)
 // {
 //   // create a strings vector from the elements in argv
-// 	vector<string> stringsVector;
+//   vector<string> stringsVector;
 //
-// 	argvElements2stringsVector (argc, argv, stringsVector);
+//   argvElements2stringsVector (argc, argv, stringsVector);
 //
 // #ifdef TRACING_IS_ENABLED
 //   if (getEarlyTracingOah ()) {
@@ -201,7 +201,7 @@ EXP void displayStringPairVector (
 //   // populate the oahOptionsVector
 //   // ------------------------------------------------------
 //
-// 	string curOption;
+//   string curOption;
 //
 //   size_t stringsVectorSize =
 //     stringsVector.size ();
@@ -217,7 +217,7 @@ EXP void displayStringPairVector (
 //       }
 //   #endif
 //
-//       if (curOption.empty ()) {	// wait for option
+//       if (curOption.empty ()) {  // wait for option
 //         if (str [0] == '-') {
 //           curOption = str;
 //         }
@@ -241,10 +241,10 @@ EXP void displayStringPairVector (
 //     } // for
 //   }
 //
-// 	if (curOption.size())
-// 		theOptionsVector.push_back (make_pair (curOption, ""));
+//   if (curOption.size())
+//     theOptionsVector.push_back (make_pair (curOption, ""));
 //
-// 	return true;
+//   return true;
 // }
 
 // //______________________________________________________________________________
@@ -293,9 +293,9 @@ EXP void displayStringPairVector (
 //   char*           argv[],
 //   vector<string>& stringsVector)
 // {
-// 	for (int i=1; i<argc; ++i) {
-// 		stringsVector.push_back (argv [i]);
-// 	} // for
+//   for (int i=1; i<argc; ++i) {
+//     stringsVector.push_back (argv [i]);
+//   } // for
 // }
 
 // //_______________________________________________________________________________
@@ -312,12 +312,12 @@ EXP void displayStringPairVector (
 //   }
 // #endif
 //   // create a strings vector from the elements in argv
-// 	vector<string> stringsVector;
+//   vector<string> stringsVector;
 //
-// 	argvElements2stringsVector (
-// 	  argc,
-// 	  argv,
-// 	  stringsVector);
+//   argvElements2stringsVector (
+//     argc,
+//     argv,
+//     stringsVector);
 //
 //   size_t stringsVectorSize =
 //     stringsVector.size ();
@@ -343,7 +343,7 @@ EXP void displayStringPairVector (
 //   // populate optionsAndArguments
 //   // ------------------------------------------------------
 //
-// 	string currentOption;
+//   string currentOption;
 //
 //   if (stringsVectorSize) {
 //     for (string currString: stringsVector) {
@@ -358,7 +358,7 @@ EXP void displayStringPairVector (
 //       }
 // #endif
 //
-//       if (currentOption.empty ()) {	// wait for option
+//       if (currentOption.empty ()) {  // wait for option
 //         if (currString [0] == '-') {
 //           currentOption = currString;
 //         }
@@ -386,7 +386,7 @@ EXP void displayStringPairVector (
 //     } // for
 //   }
 //
-// 	if (currentOption.size())
+//   if (currentOption.size())
 //     optionsAndArguments.appendOption (
 //       currentOption, "");
 //
@@ -1071,11 +1071,13 @@ string oahPrefix::fetchPrefixNames () const
   return s.str ();
 }
 
-void oahPrefix::findStringInPrefix (
-  const string& lowerCaseString,
-  list<string>& foundStringsList,
-  ostream&      os) const
+Bool oahElement::findStringInFindableElement (
+  const string&               lowerCaseString,
+  list<S_oahFindStringMatch>& foundMatchesList,
+  ostream&                    os) const
 {
+	Bool result;
+
   // does this element's short name match?
   Bool prefixNameMatches =
     mfStringToLowerCase (fPrefixName).find (lowerCaseString) != string::npos;
@@ -1105,15 +1107,22 @@ void oahPrefix::findStringInPrefix (
 
  // JMI    gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    // append the string
-    foundStringsList.push_back (s.str ());
+    // append the match to foundStringsList
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        s.str (), this));
+
+    result = true;
   }
+
+  return result;
 }
 
 void oahPrefix::printPrefixEssentials (
-  ostream& os,
-  int fieldWidth) const
+  ostream& os) const
 {
+  const int fieldWidth = 18;
+
   os << left <<
     setw (fieldWidth) <<
     "prefixName" << " : " <<
@@ -1129,21 +1138,44 @@ void oahPrefix::printPrefixEssentials (
     endl;
 }
 
+string oahPrefix::asString () const
+{
+  stringstream s;
+
+  s <<
+    "[oahPrefix" <<
+    ", prefixName: " <<
+    fPrefixName <<
+    ", prefixErsatz: " <<
+    fPrefixErsatz <<
+    ", prefixDescription: " <<
+    fPrefixDescription;
+
+  s << ']';
+
+  return s.str ();
+}
+
 void oahPrefix::print (ostream& os) const
 {
   os <<
-    "??? oahPrefix ???" <<
+    "[oahPrefix" <<
     endl;
 
-  printPrefixEssentials (os, 40); // JMI
+  printPrefixEssentials (os);
+
+  os << ']';
 }
 
 void oahPrefix::printShort (ostream& os) const
 {
   os <<
-    "??? oahPrefix ???" ;
+    "[oahPrefix" <<
+    endl;
 
-  printPrefixEssentials (os, 40); // JMI
+  printPrefixEssentials (os);
+
+  os << ']';
 }
 
 void oahPrefix::printHelp (ostream& os) const
@@ -1427,14 +1459,14 @@ void oahAtom::printSummary (ostream& os) const
 }
 
 Bool oahAtom::findStringInAtom (
-  const string& lowerCaseString,
-  list<string>& foundStringsList,
-  ostream&      os) const
+  const string&               lowerCaseString,
+  list<S_oahFindStringMatch>& foundMatchesList,
+  ostream&                    os) const
 {
   return
-    findStringInElement (
+    findStringInFindableElement (
       lowerCaseString,
-      foundStringsList,
+      foundMatchesList,
       os);
 }
 
@@ -2055,9 +2087,9 @@ void oahAtomStoringAValue::printHelp (ostream& os) const
 }
 
 Bool oahAtomStoringAValue::findStringInAtom (
-  const string& lowerCaseString,
-  list<string>& foundStringsList,
-  ostream&      os) const
+  const string&               lowerCaseString,
+  list<S_oahFindStringMatch>& foundMatchesList,
+  ostream&                    os) const
 {
   Bool result;
 
@@ -2093,8 +2125,10 @@ Bool oahAtomStoringAValue::findStringInAtom (
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    // append the string
-    foundStringsList.push_back (s.str ());
+    // append the match to foundStringsList
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        s.str (), *this));
 
     result = true;
   }
@@ -3200,16 +3234,16 @@ void oahSubGroup::printSubGroupAndAtomHelp (
 }
 
 Bool oahSubGroup::findStringInSubGroup (
-  const string& lowerCaseString,
-  list<string>& foundStringsList,
-  ostream&      os) const
+  const string&               lowerCaseString,
+  list<S_oahFindStringMatch>& foundMatchesList,
+  ostream&                    os) const
 {
   Bool result;
 
-  Bool subGroupNameMatches =
-    findStringInElement (
+  Bool subGroupNameMatches = // unused, side effect is to enrich foundMatchesList
+    findStringInFindableElement (
       lowerCaseString,
-      foundStringsList,
+      foundMatchesList,
       os);
 
   // do this subgroups's atoms match?
@@ -3221,7 +3255,7 @@ Bool oahSubGroup::findStringInSubGroup (
         atom->
           findStringInAtom (
             lowerCaseString,
-            foundStringsList,
+            foundMatchesList,
             os);
     } // for
 
@@ -4306,9 +4340,9 @@ void oahGroup::printGroupOptionsValuesAll (
 }
 
 void oahGroup::findStringInGroup (
-  const string& lowerCaseString,
-  list<string>& foundStringsList,
-  ostream&      os) const
+  const string&               lowerCaseString,
+  list<S_oahFindStringMatch>& foundMatchesList,
+  ostream&                    os) const
 {
   switch (fElementVisibilityKind) { // JMI remove???
     case oahElementVisibilityKind::kElementVisibilityNone:
@@ -4322,10 +4356,10 @@ void oahGroup::findStringInGroup (
       break;
   } // switch
 
-  Bool groupNameMatches =
-    findStringInElement (
+  Bool groupNameMatches = // unused, side effect is to enrich foundMatchesList
+    findStringInFindableElement (
       lowerCaseString,
-      foundStringsList,
+      foundMatchesList,
       os);
 
   // do this groups's subgroups match?
@@ -4337,7 +4371,7 @@ void oahGroup::findStringInGroup (
         subGroup->
           findStringInSubGroup (
             lowerCaseString,
-            foundStringsList,
+            foundMatchesList,
             os);
     } // for
 
@@ -6050,11 +6084,13 @@ void oahHandler::printNameIntrospectiveHelp (
   }
 }
 
-void oahHandler::findStringInHandler (
-  const string& lowerCaseString,
-  list<string>& foundStringsList,
-  ostream&      os) const
+Bool oahHandler::findStringInFindableElement (
+  const string&               lowerCaseString,
+  list<S_oahFindStringMatch>& foundMatchesList,
+  ostream&                    os) const
 {
+	Bool result;
+
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     os << "Finding string \"" <<
@@ -6088,8 +6124,12 @@ void oahHandler::findStringInHandler (
       ' ' <<
       fHandlerUsage;
 
-    // append the string
-    foundStringsList.push_back (s.str ());
+    // append the match to foundStringsList
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        s.str (), *this));
+
+    result = true;
   }
 
   // do this handler's prefixes match?
@@ -6107,9 +6147,9 @@ void oahHandler::findStringInHandler (
 
       // does the prefix match?
       prefix->
-        findStringInPrefix (
+        findStringInFindableElement (
           lowerCaseString,
-          foundStringsList,
+          foundMatchesList,
           os);
     } // for
 
@@ -6124,12 +6164,14 @@ void oahHandler::findStringInHandler (
       group->
         findStringInGroup (
           lowerCaseString,
-          foundStringsList,
+          foundMatchesList,
           os);
     } // for
 
     --gIndenter;
   }
+
+  return result;
 }
 
 void oahHandler::includeOptionsFileInHandler (

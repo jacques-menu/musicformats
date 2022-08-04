@@ -89,7 +89,7 @@ class EXP msr2brailleRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const;
+    void                  print (ostream& os) const override;
 
   private:
 

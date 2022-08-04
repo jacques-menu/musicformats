@@ -63,79 +63,79 @@ void printMxsr (const Sxmlelement theMxsr, ostream& os)
 //------------------------------------------------------------------------
 Sxmlelement createMxmlelement (int type, const string& value)
 {
-	Sxmlelement result = factory::instance().create(type);
+  Sxmlelement result = factory::instance().create(type);
 
-	result->setValue (value);
+  result->setValue (value);
 
-	return result;
+  return result;
 }
 
 Sxmlelement createMxmlIntegerElement (int type, int value)
 {
-	Sxmlelement result = factory::instance().create(type);
+  Sxmlelement result = factory::instance().create(type);
 
-	result->setValue (value);
+  result->setValue (value);
 
-	return result;
+  return result;
 }
 
 Sxmlelement createMxmlFloatElement (int type, float value)
 {
-	Sxmlelement result = factory::instance().create(type);
+  Sxmlelement result = factory::instance().create(type);
 
-	result->setValue (value);
+  result->setValue (value);
 
-	return result;
+  return result;
 }
 
 //------------------------------------------------------------------------
 Sxmlattribute createMxmlAttribute (const string& name, const string& value)
 {
-	Sxmlattribute result = xmlattribute::create();
+  Sxmlattribute result = xmlattribute::create();
 
-	result->setName(name);
-	result->setValue(value);
+  result->setName(name);
+  result->setValue(value);
 
-	return result;
+  return result;
 }
 
 Sxmlattribute createMxmlIntegerAttribute (const string& name, int value)
 {
-	Sxmlattribute result = xmlattribute::create();
+  Sxmlattribute result = xmlattribute::create();
 
-	result->setName(name);
-	result->setValue(value);
+  result->setName(name);
+  result->setValue(value);
 
-	return result;
+  return result;
 }
 
 Sxmlattribute createMxmlFloatAttribute (const string& name, float value)
 {
-	Sxmlattribute result = xmlattribute::create();
+  Sxmlattribute result = xmlattribute::create();
 
-	result->setName(name);
-	result->setValue(value);
+  result->setName(name);
+  result->setValue(value);
 
-	return result;
+  return result;
 }
 
 //------------------------------------------------------------------------
 SXMLFile createSxmlFile ()
 {
-	SXMLFile result = TXMLFile::create ();
+  SXMLFile result = TXMLFile::create ();
   assert (result != nullptr);
 
   TXMLDecl * xmlDecl = new TXMLDecl ("1.0", "UTF-8", TXMLDecl::kNo);
   assert (xmlDecl != nullptr);
 
-	result->set (xmlDecl);
+  result->set (xmlDecl);
 
-	TDocType * docType = new TDocType ("score-partwise");
+  TDocType * docType = new TDocType ("score-partwise");
   assert (docType != nullptr);
 
-	result->set (docType);
+  result->set (docType);
 
-	return result;
+  return result;
 }
 
 //------------------------------------------------------------------------

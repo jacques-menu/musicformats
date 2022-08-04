@@ -405,13 +405,13 @@ void msrCredit::print (ostream& os) const
 
   ++gIndenter;
 
-	const int fieldWidth = 33;
+  const int fieldWidth = 33;
 
   os << left <<
-  	setw (fieldWidth) <<
+    setw (fieldWidth) <<
     "fCreditPageNumber" << " : " << fCreditPageNumber <<
     endl <<
-  	setw (fieldWidth) <<
+    setw (fieldWidth) <<
     "fCreditTypeKind" << " : " << fCreditTypeKind <<
     endl;
 

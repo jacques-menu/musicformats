@@ -104,7 +104,7 @@ class EXP LilyPondIssue34RegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const;
+    void                  print (ostream& os) const override;
 
   private:
 

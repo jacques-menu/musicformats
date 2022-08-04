@@ -431,6 +431,12 @@ void msdl2guidoRegularHandler::createPartsRegularGroup ()
   registerAtomInRegularSubgroup ("keep-musicxml-part-id", subGroup);
   registerAtomInRegularSubgroup ("keep-musicxml-part-name", subGroup);
   registerAtomInRegularSubgroup ("msr-rename-part", subGroup);
+
+  registerAtomInRegularSubgroup ("ignore-musicxml-staff-number", subGroup);
+  registerAtomInRegularSubgroup ("keep-musicxml-staff-number", subGroup);
+
+  registerAtomInRegularSubgroup ("ignore-musicxml-voice-number", subGroup);
+  registerAtomInRegularSubgroup ("keep-musicxml-voice-number", subGroup);
 }
 
 void msdl2guidoRegularHandler::createStavesRegularGroup ()

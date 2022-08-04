@@ -718,38 +718,38 @@ void bsrUTF16BigEndianBrailleGenerator::generateCodeForBrailleCell (
 // to be fixed JMI
 /*
 
-HTML Entity (Decimal)	&#10241;
-HTML Entity (Hexadecimal)	&#x2801;
-URL Escape Code	%E2%A0%81
-UTF-8 (hex)	0xE2 0xA0 0x81 (e2a081)
-UTF-8 (binary)	11100010:10100000:10000001
-UTF-16/UTF-16BE (hex)	0x2801 (2801)
-UTF-16LE (hex)	0x0128 (0128)
-UTF-32/UTF-32bE (hex)	0x00002801 (00002801)
-UTF-32lE (hex)	0x01280000 (01280000)
-Octal Escape Sequence	\342\240\201
+HTML Entity (Decimal)  &#10241;
+HTML Entity (Hexadecimal)  &#x2801;
+URL Escape Code  %E2%A0%81
+UTF-8 (hex)  0xE2 0xA0 0x81 (e2a081)
+UTF-8 (binary)  11100010:10100000:10000001
+UTF-16/UTF-16BE (hex)  0x2801 (2801)
+UTF-16LE (hex)  0x0128 (0128)
+UTF-32/UTF-32bE (hex)  0x00002801 (00002801)
+UTF-32lE (hex)  0x01280000 (01280000)
+Octal Escape Sequence  \342\240\201
 
-HTML Entity (Decimal)	&#10242;
-HTML Entity (Hexadecimal)	&#x2802;
-URL Escape Code	%E2%A0%82
-UTF-8 (hex)	0xE2 0xA0 0x82 (e2a082)
-UTF-8 (binary)	11100010:10100000:10000010
-UTF-16/UTF-16BE (hex)	0x2802 (2802)
-UTF-16LE (hex)	0x0228 (0228)
-UTF-32/UTF-32bE (hex)	0x00002802 (00002802)
-UTF-32lE (hex)	0x02280000 (02280000)
-Octal Escape Sequence	\342\240\202
+HTML Entity (Decimal)  &#10242;
+HTML Entity (Hexadecimal)  &#x2802;
+URL Escape Code  %E2%A0%82
+UTF-8 (hex)  0xE2 0xA0 0x82 (e2a082)
+UTF-8 (binary)  11100010:10100000:10000010
+UTF-16/UTF-16BE (hex)  0x2802 (2802)
+UTF-16LE (hex)  0x0228 (0228)
+UTF-32/UTF-32bE (hex)  0x00002802 (00002802)
+UTF-32lE (hex)  0x02280000 (02280000)
+Octal Escape Sequence  \342\240\202
 
-HTML Entity (Decimal)	&#10243;
-HTML Entity (Hexadecimal)	&#x2803;
-URL Escape Code	%E2%A0%83
-UTF-8 (hex)	0xE2 0xA0 0x83 (e2a083)
-UTF-8 (binary)	11100010:10100000:10000011
-UTF-16/UTF-16BE (hex)	0x2803 (2803)
-UTF-16LE (hex)	0x0328 (0328)
-UTF-32/UTF-32bE (hex)	0x00002803 (00002803)
-UTF-32lE (hex)	0x03280000 (03280000)
-Octal Escape Sequence	\342\240\203*/
+HTML Entity (Decimal)  &#10243;
+HTML Entity (Hexadecimal)  &#x2803;
+URL Escape Code  %E2%A0%83
+UTF-8 (hex)  0xE2 0xA0 0x83 (e2a083)
+UTF-8 (binary)  11100010:10100000:10000011
+UTF-16/UTF-16BE (hex)  0x2803 (2803)
+UTF-16LE (hex)  0x0328 (0328)
+UTF-32/UTF-32bE (hex)  0x00002803 (00002803)
+UTF-32lE (hex)  0x03280000 (03280000)
+Octal Escape Sequence  \342\240\203*/
 
   string stringForCell;
 
@@ -940,38 +940,38 @@ void bsrUTF16SmallEndianBrailleGenerator::generateCodeForBrailleCell (
 // to be fixed JMI
 /*
 
-HTML Entity (Decimal)	&#10241;
-HTML Entity (Hexadecimal)	&#x2801;
-URL Escape Code	%E2%A0%81
-UTF-8 (hex)	0xE2 0xA0 0x81 (e2a081)
-UTF-8 (binary)	11100010:10100000:10000001
-UTF-16/UTF-16BE (hex)	0x2801 (2801)
-UTF-16LE (hex)	0x0128 (0128)
-UTF-32/UTF-32bE (hex)	0x00002801 (00002801)
-UTF-32lE (hex)	0x01280000 (01280000)
-Octal Escape Sequence	\342\240\201
+HTML Entity (Decimal)  &#10241;
+HTML Entity (Hexadecimal)  &#x2801;
+URL Escape Code  %E2%A0%81
+UTF-8 (hex)  0xE2 0xA0 0x81 (e2a081)
+UTF-8 (binary)  11100010:10100000:10000001
+UTF-16/UTF-16BE (hex)  0x2801 (2801)
+UTF-16LE (hex)  0x0128 (0128)
+UTF-32/UTF-32bE (hex)  0x00002801 (00002801)
+UTF-32lE (hex)  0x01280000 (01280000)
+Octal Escape Sequence  \342\240\201
 
-HTML Entity (Decimal)	&#10242;
-HTML Entity (Hexadecimal)	&#x2802;
-URL Escape Code	%E2%A0%82
-UTF-8 (hex)	0xE2 0xA0 0x82 (e2a082)
-UTF-8 (binary)	11100010:10100000:10000010
-UTF-16/UTF-16BE (hex)	0x2802 (2802)
-UTF-16LE (hex)	0x0228 (0228)
-UTF-32/UTF-32bE (hex)	0x00002802 (00002802)
-UTF-32lE (hex)	0x02280000 (02280000)
-Octal Escape Sequence	\342\240\202
+HTML Entity (Decimal)  &#10242;
+HTML Entity (Hexadecimal)  &#x2802;
+URL Escape Code  %E2%A0%82
+UTF-8 (hex)  0xE2 0xA0 0x82 (e2a082)
+UTF-8 (binary)  11100010:10100000:10000010
+UTF-16/UTF-16BE (hex)  0x2802 (2802)
+UTF-16LE (hex)  0x0228 (0228)
+UTF-32/UTF-32bE (hex)  0x00002802 (00002802)
+UTF-32lE (hex)  0x02280000 (02280000)
+Octal Escape Sequence  \342\240\202
 
-HTML Entity (Decimal)	&#10243;
-HTML Entity (Hexadecimal)	&#x2803;
-URL Escape Code	%E2%A0%83
-UTF-8 (hex)	0xE2 0xA0 0x83 (e2a083)
-UTF-8 (binary)	11100010:10100000:10000011
-UTF-16/UTF-16BE (hex)	0x2803 (2803)
-UTF-16LE (hex)	0x0328 (0328)
-UTF-32/UTF-32bE (hex)	0x00002803 (00002803)
-UTF-32lE (hex)	0x03280000 (03280000)
-Octal Escape Sequence	\342\240\203
+HTML Entity (Decimal)  &#10243;
+HTML Entity (Hexadecimal)  &#x2803;
+URL Escape Code  %E2%A0%83
+UTF-8 (hex)  0xE2 0xA0 0x83 (e2a083)
+UTF-8 (binary)  11100010:10100000:10000011
+UTF-16/UTF-16BE (hex)  0x2803 (2803)
+UTF-16LE (hex)  0x0328 (0328)
+UTF-32/UTF-32bE (hex)  0x00002803 (00002803)
+UTF-32lE (hex)  0x03280000 (03280000)
+Octal Escape Sequence  \342\240\203
 */
 
   string stringForCell;

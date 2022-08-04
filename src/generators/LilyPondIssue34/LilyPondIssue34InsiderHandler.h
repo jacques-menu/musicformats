@@ -103,7 +103,7 @@ class EXP LilyPondIssue34InsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const;
+    void                  print (ostream& os) const override;
 
   protected:
 

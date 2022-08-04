@@ -75,6 +75,16 @@ oahInsiderHandler::oahInsiderHandler (
 oahInsiderHandler::~oahInsiderHandler ()
 {}
 
+string oahInsiderHandler::asString () const
+{
+  stringstream s;
+
+  s <<
+    "oahInsiderHandler \"" << fHandlerHeader; // JMI v0.9.65
+
+  return s.str ();
+}
+
 void oahInsiderHandler::print (ostream& os) const
 {
   const int fieldWidth = 27;
@@ -128,7 +138,7 @@ ostream& operator<< (ostream& os, const S_oahInsiderHandler& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

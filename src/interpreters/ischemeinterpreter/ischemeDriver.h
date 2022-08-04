@@ -54,22 +54,22 @@ class ischemeDriver
     // ------------------------------------------------------
 
     // internal
-    void  			          setScriptName (string scriptName);
+    void                  setScriptName (string scriptName);
 
-    string			          getScriptName () const
+    string                getScriptName () const
                               { return fScriptName; }
 
-    void  			          setTool (string tool);
+    void                  setTool (string tool);
 
-    string			          getTool () const
+    string                getTool () const
                               { return fTool; }
 
-    void  			          appendInputSouce (string inputSouce);
+    void                  appendInputSouce (string inputSouce);
 
     const list<string>&   getInputSoucesList () const
                               { return fInputSoucesList; }
 
-    bool				          getTraceScanning () const
+    bool                  getTraceScanning () const
                               { return fTraceScanning; }
 
     const iscm::location& getScannerLocation () const
@@ -80,20 +80,20 @@ class ischemeDriver
                             // due to constraints in the Flex-generated code
                               { return fScannerLocation; }
 
-    bool				          getDisplayToolAndInput () const
+    bool                  getDisplayToolAndInput () const
                               { return fDisplayToolAndInput; }
 
-    bool				          getTraceParsing () const
+    bool                  getTraceParsing () const
                               { return fTraceParsing; }
 
-    bool				          getDisplayOptions () const
+    bool                  getDisplayOptions () const
                               { return fDisplayOptions; }
 
     // choices
-    bool				          getTraceChoices () const
+    bool                  getTraceChoices () const
                               { return fTraceChoices; }
 
-    bool				          getTraceCaseChoiceStatements () const
+    bool                  getTraceCaseChoiceStatements () const
                               { return fTraceCaseChoiceStatements; }
 
     S_ischemeChoicesTable getChoicesTable () const
@@ -106,24 +106,24 @@ class ischemeDriver
                               { return fCurrentChoiceChoice; }
 
     // inputs
-    bool				          getTraceInputs () const
+    bool                  getTraceInputs () const
                               { return fTraceInputs; }
 
-    bool				          getTraceCaseInputStatements () const
+    bool                  getTraceCaseInputStatements () const
                               { return fTraceCaseInputStatements; }
 
     S_ischemeInputsTable  getInputsTable () const
                               { return fInputsTable; }
 
-    void				          setTraceOptionsBlocks () // TEMP JMI
+    void                  setTraceOptionsBlocks () // TEMP JMI
                               { fTraceOptionsBlocks = true; }
-    bool				          getTraceOptionsBlocks () const
+    bool                  getTraceOptionsBlocks () const
                               { return fTraceOptionsBlocks; }
 
-    bool									getDisplayTokens () const
+    bool                  getDisplayTokens () const
                               { return fDisplayTokens; }
 
-    bool				          getNoLaunch () const
+    bool                  getNoLaunch () const
                               { return fNoLaunch; }
 
   public:
@@ -225,10 +225,10 @@ class ischemeDriver
     // ------------------------------------------------------
 
     // the name of the MusicFormats tool
-		string                fTool;
+    string                fTool;
 
     // the name of the MusicFormats script
-		string                fScriptName;
+    string                fScriptName;
 
     // the names of the input sources
     list<string>          fInputSoucesList;

@@ -1439,12 +1439,12 @@ void msdlParser::Specification (S_msdlTokenKindsSet stopperTokensSet)
       msdlTokenKind::kTokenPitches,
       "Specification")
   ) {
-	  Pitches (
+    Pitches (
       fStructureFIRST
         +
       msdlTokenKindsSet::create ({
         msdlTokenKind::kTokenAnacrusis}));
-	}
+  }
 
   // the optional Anacrusis section
   if (

@@ -28,7 +28,6 @@
 
 #include "oahOah.h"
 
-
 #include "oahEarlyOptions.h"
 
 #include "oahAtomsCollection.h"
@@ -206,7 +205,7 @@ ostream& operator<< (ostream& os, const S_oahAtomAlias& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -513,7 +512,7 @@ ostream& operator<< (ostream& os, const S_oahMacroAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -708,7 +707,7 @@ ostream& operator<< (ostream& os, const S_oahOptionsUsageAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -860,7 +859,7 @@ ostream& operator<< (ostream& os, const S_oahHelpAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1012,7 +1011,7 @@ ostream& operator<< (ostream& os, const S_oahHelpSummaryAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1162,7 +1161,7 @@ ostream& operator<< (ostream& os, const S_oahAboutAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1376,7 +1375,7 @@ ostream& operator<< (ostream& os, const S_oahVersionAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1536,7 +1535,7 @@ ostream& operator<< (ostream& os, const S_oahLibraryVersionAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1696,7 +1695,7 @@ ostream& operator<< (ostream& os, const S_oahHistoryAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1856,7 +1855,7 @@ ostream& operator<< (ostream& os, const S_oahLibraryHistoryAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2013,7 +2012,7 @@ ostream& operator<< (ostream& os, const S_oahContactAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2167,7 +2166,7 @@ ostream& operator<< (ostream& os, const S_oahDisplayPrefixes& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2321,7 +2320,7 @@ ostream& operator<< (ostream& os, const S_oahDisplaySingleCharacterOptions& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2549,7 +2548,7 @@ ostream& operator<< (ostream& os, const S_oahOnOffAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2752,7 +2751,7 @@ ostream& operator<< (ostream& os, const S_oahBooleanAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2955,7 +2954,7 @@ ostream& operator<< (ostream& os, const S_oahTwoBooleansAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -3167,7 +3166,7 @@ ostream& operator<< (ostream& os, const S_oahThreeBooleansAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -3599,7 +3598,7 @@ ostream& operator<< (ostream& os, const S_oahCombinedBooleansAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -4217,7 +4216,7 @@ ostream& operator<< (ostream& os, const S_oahCommonPrefixBooleansAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -4470,7 +4469,7 @@ ostream& operator<< (ostream& os, const S_oahIntegerAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -4754,7 +4753,7 @@ ostream& operator<< (ostream& os, const S_oahTwoIntegersAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -5009,7 +5008,7 @@ ostream& operator<< (ostream& os, const S_oahFloatAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -5210,7 +5209,7 @@ ostream& operator<< (ostream& os, const S_oahStringAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -5607,7 +5606,7 @@ ostream& operator<< (ostream& os, const S_oahFactorizedStringAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -5833,7 +5832,7 @@ ostream& operator<< (ostream& os, const S_oahStringWithDefaultValueAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -6061,7 +6060,7 @@ ostream& operator<< (ostream& os, const S_oahStringWithRegexAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -6318,7 +6317,7 @@ ostream& operator<< (ostream& os, const S_oahRationalAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -6577,7 +6576,7 @@ ostream& operator<< (ostream& os, const S_oahNaturalNumbersSetElementAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -6769,7 +6768,7 @@ ostream& operator<< (ostream& os, const S_oahRGBColorAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -7091,7 +7090,7 @@ ostream& operator<< (ostream& os, const S_oahIntSetElementAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -7379,7 +7378,7 @@ ostream& operator<< (ostream& os, const S_oahStringSetElementAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -7728,7 +7727,7 @@ ostream& operator<< (ostream& os, const S_oahStringToIntMapElementAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -8077,7 +8076,7 @@ ostream& operator<< (ostream& os, const S_oahStringToStringMapElementAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -8426,7 +8425,7 @@ ostream& operator<< (ostream& os, const S_oahStringToStringMultiMapElementAtom& 
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -8747,7 +8746,7 @@ ostream& operator<< (ostream& os, const S_oahStringAndIntegerAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -9094,7 +9093,7 @@ ostream& operator<< (ostream& os, const S_oahStringAndTwoIntegersAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -9330,7 +9329,7 @@ ostream& operator<< (ostream& os, const S_oahLengthUnitKindAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -9615,7 +9614,7 @@ ostream& operator<< (ostream& os, const S_oahLengthAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -9912,7 +9911,7 @@ ostream& operator<< (ostream& os, const S_oahMidiTempoAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -10112,7 +10111,7 @@ ostream& operator<< (ostream& os, const S_oahOptionNameHelpAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -10295,7 +10294,7 @@ ostream& operator<< (ostream& os, const S_oahQueryOptionNameAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -10366,7 +10365,7 @@ ostream& operator<< (ostream& os, const S_oahFindStringResult& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -10429,18 +10428,18 @@ void oahFindStringAtom::applyAtomWithValue (
 #endif
 
   // a strings list to collect the results
-  list<string> foundStringsList;
+  list<S_oahFindStringMatch> foundMatchesList;
 
   // delegate this to the handler
   fetchAtomHandlerUpLink ()->
     findStringInHandler (
       mfStringToLowerCase (theString),
-      foundStringsList,
+      foundMatchesList,
       os);
 
   //  print the found strings
-  size_t foundStringsListSize =
-    foundStringsList.size ();
+  size_t foundMatchesListSize =
+    foundMatchesList.size ();
 
   int saveIndent = gIndenter.getIndentation ();
 
@@ -10448,30 +10447,30 @@ void oahFindStringAtom::applyAtomWithValue (
 
   os <<
     mfSingularOrPlural (
-      foundStringsListSize, "occurrence", "occurrences") <<
+      foundMatchesListSize, "occurrence", "occurrences") <<
     " of string \"" <<
     theString <<
     "\" " <<
     mfSingularOrPluralWithoutNumber (
-      foundStringsListSize, "has", "have") <<
+      foundMatchesListSize, "has", "have") <<
     " been found";
 
-  if (foundStringsListSize) {
+  if (foundMatchesListSize) {
     os <<
       ":" <<
       endl;
 
     ++gIndenter;
 
-    list<string>::const_iterator
-      iBegin = foundStringsList.begin (),
-      iEnd   = foundStringsList.end (),
+    list<S_oahFindStringMatch>::const_iterator
+      iBegin = foundMatchesList.begin (),
+      iEnd   = foundMatchesList.end (),
       i      = iBegin;
 
     int counter = 0;
 
     for ( ; ; ) {
-      string theString = (*i);
+      string theString = (*i)->getFoundString ();
 
       ++counter;
 
@@ -10618,7 +10617,7 @@ ostream& operator<< (ostream& os, const S_oahFindStringAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -10802,7 +10801,7 @@ ostream& operator<< (ostream& os, const S_oahIncludeOptionsAndArgumentsFileAtom&
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

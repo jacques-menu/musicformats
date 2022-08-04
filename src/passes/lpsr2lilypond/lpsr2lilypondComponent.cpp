@@ -101,6 +101,16 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
             "Finalized the generation of LilyPond code for full-bar rests"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.65"),
+          "August 2, 2022",
+          list<string> {
+            "Added support for '\"print-object=\"no\"' in notes"
+          }
+      ));
   }
 
   return pPassComponent;

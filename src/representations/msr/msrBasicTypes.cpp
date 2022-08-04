@@ -2368,9 +2368,9 @@ msrMoment::~msrMoment ()
 
 void msrMoment::testMsrMomentComparisons (ostream& os)
 {
-	msrMoment m0 (rational (3, 4));
-	msrMoment m1 (rational (3, 4), rational (-1, 16));
-	msrMoment m2 (rational (3, 4), rational (2, 16));
+  msrMoment m0 (rational (3, 4));
+  msrMoment m1 (rational (3, 4), rational (-1, 16));
+  msrMoment m2 (rational (3, 4), rational (2, 16));
 
   os <<
     "m1: " << m1 << endl <<
@@ -16461,7 +16461,12 @@ msrPrintObjectKind msrPrintObjectKindFromString (
 {
   msrPrintObjectKind
     result =
-      msrPrintObjectKind::kPrintObjectNone; // default value KAKA JMI
+      msrPrintObjectKind::kPrintObjectNone; // default value JMI v0.9.65
+
+  gLogStream <<
+      "printObjectString" << " = " <<
+      printObjectString <<
+      endl;
 
   if      (printObjectString == "yes")
     result = msrPrintObjectKind::kPrintObjectYes;
@@ -16473,7 +16478,7 @@ msrPrintObjectKind msrPrintObjectKindFromString (
 
       s <<
         "printObject \"" << printObjectString <<
-        "\" should be 'above' or 'below'";
+        "\" should be 'yes' or 'no'";
 
       msrError (
         gGlobalServiceRunData->getInputSourceName (),

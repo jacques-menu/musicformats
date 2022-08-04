@@ -2704,7 +2704,7 @@ if (false) // JMI
   // create a part element
   fCurrentPartElement = createMxmlelement (k_part, "");
   // set its "id" attribute
-	fCurrentPartElement->add (createMxmlAttribute ("id", partID));
+  fCurrentPartElement->add (createMxmlAttribute ("id", partID));
 
   // append it to the pending part elements list
   fPendingPartElementsList.push_back (fCurrentPartElement);
@@ -3386,31 +3386,31 @@ void msr2mxsrTranslator::visitStart (S_msrPrintLayout& elt)
   if (staffSpacing > 0) {
     stringstream s;
     s << staffSpacing;
-  	fCurrentPrintElement->add (createMxmlAttribute ("staff-spacing", s.str ()));
+    fCurrentPrintElement->add (createMxmlAttribute ("staff-spacing", s.str ()));
   }
 
   Bool newSystem = elt->getNewSystem ();
   if (newSystem) {
-  	fCurrentPrintElement->add (createMxmlAttribute ("new-system", "yes"));
+    fCurrentPrintElement->add (createMxmlAttribute ("new-system", "yes"));
   }
 
   Bool newPage = elt->getNewPage ();
   if (newPage) {
-  	fCurrentPrintElement->add (createMxmlAttribute ("new-page", "yes"));
+    fCurrentPrintElement->add (createMxmlAttribute ("new-page", "yes"));
   }
 
   int blankPage = elt->getBlankPage ();
   if (blankPage > 0) {
     stringstream s;
     s << blankPage;
-  	fCurrentPrintElement->add (createMxmlAttribute ("blank-page", s.str ()));
+    fCurrentPrintElement->add (createMxmlAttribute ("blank-page", s.str ()));
   }
 
   int pageNumber = elt->getPageNumber ();
   if (pageNumber > 0) {
     stringstream s;
     s << pageNumber;
-  	fCurrentPrintElement->add (createMxmlAttribute ("page-number", s.str ()));
+    fCurrentPrintElement->add (createMxmlAttribute ("page-number", s.str ()));
   }
 
   fOnGoingPrintLayout = true;
@@ -3480,10 +3480,10 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
     /*
       0 by default in MSR,
       1 by default in MusicXML:
-        The optional	number attribute refers to staff numbers within the part,
+        The optional  number attribute refers to staff numbers within the part,
         from top to bottom on the system.
         A value of 1 is assumed if not present.
-	  */
+    */
 
     int clefStaffNumber =
       elt->getClefStaffNumber ();
@@ -5299,11 +5299,11 @@ void msr2mxsrTranslator:: populateNoteDirections (
 
 /*
 <!ELEMENT direction-type (rehearsalMark+ | segno+ | coda+ |
-	(words | symbol)+ | wedge | dynamics+ | dashes |
-	bracket | pedal | metronome | octave-shift | harp-pedals |
-	damp | damp-all | eyeglasses | string-mute |
-	scordatura | image | principal-voice | percussion+ |
-	accordion-registration | staff-divide | other-direction)>
+  (words | symbol)+ | wedge | dynamics+ | dashes |
+  bracket | pedal | metronome | octave-shift | harp-pedals |
+  damp | damp-all | eyeglasses | string-mute |
+  scordatura | image | principal-voice | percussion+ |
+  accordion-registration | staff-divide | other-direction)>
 <!ATTLIST direction-type
     %optional-unique-id;
 >
@@ -5331,12 +5331,12 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
 
 /* JMI
 <!ELEMENT ornaments
-	(((trill-mark
-	| turn | delayed-turn | inverted-turn |
-	   delayed-inverted-turn | vertical-turn |
-	   inverted-vertical-turn | shake | wavy-line |
-	   mordent | inverted-mordent | schleifer | tremolo |
-	   haydn | other-ornament), accidental-mark*)*)>
+  (((trill-mark
+  | turn | delayed-turn | inverted-turn |
+     delayed-inverted-turn | vertical-turn |
+     inverted-vertical-turn | shake | wavy-line |
+     mordent | inverted-mordent | schleifer | tremolo |
+     haydn | other-ornament), accidental-mark*)*)>
 <!ATTLIST ornaments
     %optional-unique-id;
 >
@@ -5346,7 +5346,7 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
     %placement;
     %trill-sound;
 >
-	  */
+    */
 
   // append the ornament elements if any
   const list<S_msrOrnament>&
@@ -5448,17 +5448,17 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
 
 /* JMI
 <!ELEMENT technical
-	((up-bow | down-bow | harmonic | open-string |
-	  thumb-position | fingering | pluck | double-tongue |
-	  triple-tongue | stopped | snap-pizzicato | fret |
-	  string | hammer-on | pull-off | bend | tap | heel |
-	  toe | fingernails | hole | arrow | handbell |
-	  brass-bend | flip | smear | open | half-muted |
-	  harmon-mute | golpe | other-technical)*)>
+  ((up-bow | down-bow | harmonic | open-string |
+    thumb-position | fingering | pluck | double-tongue |
+    triple-tongue | stopped | snap-pizzicato | fret |
+    string | hammer-on | pull-off | bend | tap | heel |
+    toe | fingernails | hole | arrow | handbell |
+    brass-bend | flip | smear | open | half-muted |
+    harmon-mute | golpe | other-technical)*)>
 <!ATTLIST technical
     %optional-unique-id;
 
-	  */
+    */
 
   // append the technical elements if any
   const list<S_msrTechnical>&
@@ -5552,17 +5552,17 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
 
 /* JMI
 <!ELEMENT technical
-	((up-bow | down-bow | harmonic | open-string |
-	  thumb-position | fingering | pluck | double-tongue |
-	  triple-tongue | stopped | snap-pizzicato | fret |
-	  string | hammer-on | pull-off | bend | tap | heel |
-	  toe | fingernails | hole | arrow | handbell |
-	  brass-bend | flip | smear | open | half-muted |
-	  harmon-mute | golpe | other-technical)*)>
+  ((up-bow | down-bow | harmonic | open-string |
+    thumb-position | fingering | pluck | double-tongue |
+    triple-tongue | stopped | snap-pizzicato | fret |
+    string | hammer-on | pull-off | bend | tap | heel |
+    toe | fingernails | hole | arrow | handbell |
+    brass-bend | flip | smear | open | half-muted |
+    harmon-mute | golpe | other-technical)*)>
 <!ATTLIST technical
     %optional-unique-id;
 
-	  */
+    */
 
   // append the technicalWithInteger elements if any
   const list<S_msrTechnicalWithInteger>&
@@ -5630,17 +5630,17 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
 
 /* JMI
 <!ELEMENT technical
-	((up-bow | down-bow | harmonic | open-string |
-	  thumb-position | fingering | pluck | double-tongue |
-	  triple-tongue | stopped | snap-pizzicato | fret |
-	  string | hammer-on | pull-off | bend | tap | heel |
-	  toe | fingernails | hole | arrow | handbell |
-	  brass-bend | flip | smear | open | half-muted |
-	  harmon-mute | golpe | other-technical)*)>
+  ((up-bow | down-bow | harmonic | open-string |
+    thumb-position | fingering | pluck | double-tongue |
+    triple-tongue | stopped | snap-pizzicato | fret |
+    string | hammer-on | pull-off | bend | tap | heel |
+    toe | fingernails | hole | arrow | handbell |
+    brass-bend | flip | smear | open | half-muted |
+    harmon-mute | golpe | other-technical)*)>
 <!ATTLIST technical
     %optional-unique-id;
 
-	  */
+    */
 
   // append the technicalWithFloat elements if any
   const list<S_msrTechnicalWithFloat>&
@@ -5699,17 +5699,17 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
 
 /* JMI
 <!ELEMENT technical
-	((up-bow | down-bow | harmonic | open-string |
-	  thumb-position | fingering | pluck | double-tongue |
-	  triple-tongue | stopped | snap-pizzicato | fret |
-	  string | hammer-on | pull-off | bend | tap | heel |
-	  toe | fingernails | hole | arrow | handbell |
-	  brass-bend | flip | smear | open | half-muted |
-	  harmon-mute | golpe | other-technical)*)>
+  ((up-bow | down-bow | harmonic | open-string |
+    thumb-position | fingering | pluck | double-tongue |
+    triple-tongue | stopped | snap-pizzicato | fret |
+    string | hammer-on | pull-off | bend | tap | heel |
+    toe | fingernails | hole | arrow | handbell |
+    brass-bend | flip | smear | open | half-muted |
+    harmon-mute | golpe | other-technical)*)>
 <!ATTLIST technical
     %optional-unique-id;
 
-	  */
+    */
 
   // append the technicalWithString elements if any
   const list<S_msrTechnicalWithString>&
@@ -5792,12 +5792,12 @@ void msr2mxsrTranslator:: appendNoteArticulations (
       int articulationType = kComment; // JMI
 
 /* JMI
-	((accent | strong-accent | staccato | tenuto |
-	  detached-legato | staccatissimo | spiccato |
-	  scoop | plop | doit | falloff | breath-mark |
-	  caesura | stress | unstress | soft-accent |
-	  other-articulation)*)>
-	  */
+  ((accent | strong-accent | staccato | tenuto |
+    detached-legato | staccatissimo | spiccato |
+    scoop | plop | doit | falloff | breath-mark |
+    caesura | stress | unstress | soft-accent |
+    other-articulation)*)>
+    */
 
       switch (articulationKind) {
         case msrArticulation::k_NoArticulation:
@@ -6568,11 +6568,11 @@ void msr2mxsrTranslator:: appendNoteNotationsToNote (S_msrNote theMsrNote)
 
 /*
 <!ELEMENT notations
-	(%editorial;,
-	 (tied | slur | tuplet | glissando | slide |
-	  ornaments | technical | articulations | dynamics |
-	  fermata | arpeggiate | non-arpeggiate |
-	  accidental-mark | other-notation)*)>
+  (%editorial;,
+   (tied | slur | tuplet | glissando | slide |
+    ornaments | technical | articulations | dynamics |
+    fermata | arpeggiate | non-arpeggiate |
+    accidental-mark | other-notation)*)>
 <!ATTLIST notations
     %print-object;
     %optional-unique-id;
@@ -6616,10 +6616,10 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
 
 /*
 <!ELEMENT lyric
-	((((syllabic?, text),
-	   (elision?, syllabic?, text)*, extend?) |
-	   extend | laughing | humming),
-	  end-line?, end-paragraph?, %editorial;)>
+  ((((syllabic?, text),
+     (elision?, syllabic?, text)*, extend?) |
+     extend | laughing | humming),
+    end-line?, end-paragraph?, %editorial;)>
 <!ATTLIST lyric
     number NMTOKEN #IMPLIED
     name CDATA #IMPLIED
@@ -7478,12 +7478,12 @@ void msr2mxsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
 
 /*
 <!ELEMENT note
-	(((grace, ((%full-note;, (tie, tie?)?) | (cue, %full-note;))) |
-	  (cue, %full-note;, duration) |
-	  (%full-note;, duration, (tie, tie?)?)),
-	 instrument?, %editorial-voice;, type?, dot*,
-	 accidental?, time-modification?, stem?, notehead?,
-	 notehead-text?, staff?, beam*, notations*, lyric*, play?)>
+  (((grace, ((%full-note;, (tie, tie?)?) | (cue, %full-note;))) |
+    (cue, %full-note;, duration) |
+    (%full-note;, duration, (tie, tie?)?)),
+   instrument?, %editorial-voice;, type?, dot*,
+   accidental?, time-modification?, stem?, notehead?,
+   notehead-text?, staff?, beam*, notations*, lyric*, play?)>
 */
 
 //________________________________________________________________________
@@ -10551,7 +10551,7 @@ void msr2mxsrTranslator::displayCurrentOnGoingValues ()
 // a comparison class to sort elements
 class musicxmlOrder
 {
-	public:
+  public:
 
     // constructors/destructor
     // ------------------------------------------------------
@@ -10559,24 +10559,24 @@ class musicxmlOrder
     musicxmlOrder (
       map<int,int>& order, Sxmlelement container);
 
-		virtual	~musicxmlOrder ();
+    virtual  ~musicxmlOrder ();
 
-	public:
+  public:
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-		Bool	                operator()	(Sxmlelement a, Sxmlelement b);
+    Bool                  operator()  (Sxmlelement a, Sxmlelement b);
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-	  map<int,int>&	        fOrder;
-	  Sxmlelement		        fContainer;
+    map<int,int>&          fOrder;
+    Sxmlelement            fContainer;
 };
 
 musicxmlOrder::musicxmlOrder (
@@ -10591,13 +10591,13 @@ musicxmlOrder::~musicxmlOrder ()
 
 Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
 {
-	int aIndex = fOrder [a->getType ()];
-	int bIndex = fOrder [b->getType ()];
+  int aIndex = fOrder [a->getType ()];
+  int bIndex = fOrder [b->getType ()];
 
-	if (aIndex == 0) return false; // wrong a element: reject to end of list
-	if (bIndex == 0) return true;	 // wrong b element: reject to end of list
+  if (aIndex == 0) return false; // wrong a element: reject to end of list
+  if (bIndex == 0) return true;   // wrong b element: reject to end of list
 
-	return aIndex < bIndex;
+  return aIndex < bIndex;
 }
 */
 

@@ -490,6 +490,14 @@ void mxsr2msrOahGroup::initializeMxsr2msrOahGroup ()
   // --------------------------------------
   initializePartsOptions ();
 
+  // staves
+  // --------------------------------------
+  initializeStavesOptions ();
+
+  // voices
+  // --------------------------------------
+  initializeVoiceOptions ();
+
   // clefs, keys, time signatures
   // --------------------------------------
   initializeClefsKeysTimesOptions ();
@@ -540,7 +548,7 @@ void mxsr2msrOahGroup::initializePartsOptions ()
   S_oahSubGroup subGroup =
     oahSubGroup::create (
       "Parts",
-      "help-msr-to-lpsr-parts", "hm2p",
+      "help-mxsr-to-msr-parts", "hm2mparts",
 R"()",
     oahElementVisibilityKind::kElementVisibilityWhole,
     this);
@@ -614,6 +622,104 @@ This option is incompatible with '-mopn, -msr-ignore-musicxml-part-name'.)",
       "PART_NAME",
       "fMusicXMLPartsKeepNameSet",
       fMusicXMLPartsKeepNameSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fKeepPartNameAtom);
+}
+
+void mxsr2msrOahGroup::initializeStavesOptions ()
+{
+  S_oahSubGroup subGroup =
+    oahSubGroup::create (
+      "Staves",
+      "help-mxsr-to-msr-staves", "hm2mstaves",
+R"()",
+    oahElementVisibilityKind::kElementVisibilityWhole,
+    this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // ignore MusicXML staff number
+  // --------------------------------------
+
+  fIgnoreStaffNumberAtom =
+    oahIntSetElementAtom::create (
+      "ignore-musicxml-staff-number", "imxmlsn",
+R"(Ignore the staff numbered STAFF_NUMBER, which is an integer.
+There can be several occurrences of this option.
+All the staves not ignored are kept.
+This option is incompatible with '-mkpn, -msr-keep-musicxml-staff-number'.)",
+      "STAFF_NUMBER",
+      "fMusicXMLMusicXMLStavesIgnoreNumberSet",
+      fMusicXMLMusicXMLStavesIgnoreNumberSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fIgnoreStaffNumberAtom);
+
+  // keep MusicXML staff number
+  // --------------------------------------
+
+  fKeepStaffNumberAtom =
+    oahIntSetElementAtom::create (
+      "keep-musicxml-staff-number", "kmxmlsn",
+R"(Keep the staff numbered STAFF_NUMBER, which is an integer.
+There can be several occurrences of this option.
+All the staves not kept are ignored.
+This option is incompatible with '-mopn, -msr-ignore-musicxml-staff-number'.)",
+      "STAFF_NUMBER",
+      "fMusicXMLStavesKeepNumberSet",
+      fMusicXMLStavesKeepNumberSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fKeepStaffNumberAtom);
+}
+
+void mxsr2msrOahGroup::initializeVoiceOptions ()
+{
+  S_oahSubGroup subGroup =
+    oahSubGroup::create (
+      "Voices",
+      "help-mxsr-to-msr-voices", "hm2mvoices",
+R"()",
+    oahElementVisibilityKind::kElementVisibilityWhole,
+    this);
+
+  appendSubGroupToGroup (subGroup);
+
+  // ignore MusicXML voice number
+  // --------------------------------------
+
+  fIgnoreVoiceNumberAtom =
+    oahIntSetElementAtom::create (
+      "ignore-musicxml-voice-number", "imxmlvn",
+R"(Ignore the voice numbered VOICE_NUMBER, which is an integer.
+There can be several occurrences of this option.
+All the voices not ignored are kept.
+This option is incompatible with '-mkpn, -msr-keep-musicxml-voice-number'.)",
+      "VOICE_NUMBER",
+      "fMusicXMLMusicXMLVoicesIgnoreNumberSet",
+      fMusicXMLMusicXMLVoicesIgnoreNumberSet);
+
+  subGroup->
+    appendAtomToSubGroup (
+      fIgnoreVoiceNumberAtom);
+
+  // keep MusicXML voice number
+  // --------------------------------------
+
+  fKeepVoiceNumberAtom =
+    oahIntSetElementAtom::create (
+      "keep-musicxml-voice-number", "kmxmlvn",
+R"(Keep the voice numbered VOICE_NUMBER, which is an integer.
+There can be several occurrences of this option.
+All the voices not kept are ignored.
+This option is incompatible with '-mopn, -msr-ignore-musicxml-voice-number'.)",
+      "VOICE_NUMBER",
+      "fMusicXMLVoicesKeepNumberSet",
+      fMusicXMLVoicesKeepNumberSet);
 
   subGroup->
     appendAtomToSubGroup (

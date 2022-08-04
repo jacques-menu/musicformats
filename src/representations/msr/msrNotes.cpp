@@ -287,7 +287,7 @@ void msrNote::initializeNote ()
       left <<
         setw (fieldWidth) <<
         "fNotePrintObjectKind" << " = " <<
-         msrPrintObjectKindAsString (fNotePrintObjectKind) <<
+         fNotePrintObjectKind <<
         endl <<
 
       left <<
@@ -695,22 +695,6 @@ S_msrNote msrNote::createNoteNewbornClone (
   newbornClone->fNoteOctaveShift =
     fNoteOctaveShift;
 
-  // note print kind
-  // ------------------------------------------------------
-
-  newbornClone->fNotePrintObjectKind =
-    fNotePrintObjectKind;
-
-  // note head
-  // ------------------------------------------------------
-
-  newbornClone->fNoteHeadKind =
-    fNoteHeadKind;
-  newbornClone->fNoteHeadFilledKind =
-    fNoteHeadFilledKind;
-  newbornClone->fNoteHeadParenthesesKind =
-    fNoteHeadParenthesesKind;
-
   // accidentals
   // ------------------------------------------------------
 
@@ -921,22 +905,6 @@ S_msrNote msrNote::createNoteDeepClone (
 
   noteDeepClone->fNoteOctaveShift = // JMI
     fNoteOctaveShift;
-
-  // note print kind
-  // ------------------------------------------------------
-
-  noteDeepClone->fNotePrintObjectKind =
-    fNotePrintObjectKind;
-
-  // note head
-  // ------------------------------------------------------
-
-  noteDeepClone->fNoteHeadKind =
-    fNoteHeadKind;
-  noteDeepClone->fNoteHeadFilledKind =
-    fNoteHeadFilledKind;
-  noteDeepClone->fNoteHeadParenthesesKind =
-    fNoteHeadParenthesesKind;
 
   // accidentals
   // ------------------------------------------------------
@@ -1425,7 +1393,7 @@ S_msrNote msrNote::createRestNote (
 
       msrNote::kNoteIsACueNoteNo,
 
-      msrPrintObjectKind::kPrintObjectYes, // JMI
+      msrPrintObjectKind::kPrintObjectYes, // default value
 
       kNoteHeadNormal, // JMI
       kNoteHeadFilledYes, // JMI
@@ -1474,7 +1442,7 @@ S_msrNote msrNote::createSkipNote (
 
       msrNote::kNoteIsACueNoteNo,
 
-      msrPrintObjectKind::kPrintObjectYes, // JMI
+      msrPrintObjectKind::kPrintObjectYes, // default value
 
       kNoteHeadNormal, // JMI
       kNoteHeadFilledYes, // JMI
@@ -1523,7 +1491,7 @@ S_msrNote msrNote::createGraceSkipNote (
 
       msrNote::kNoteIsACueNoteNo,
 
-      msrPrintObjectKind::kPrintObjectYes, // JMI
+      msrPrintObjectKind::kPrintObjectYes, // default value
 
       kNoteHeadNormal, // JMI
       kNoteHeadFilledYes, // JMI
@@ -1574,7 +1542,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
       msrNote::kNoteIsACueNoteNo,
 
-      msrPrintObjectKind::kPrintObjectYes, // JMI
+      msrPrintObjectKind::kPrintObjectYes, // default value
 
       kNoteHeadNormal, // JMI
       kNoteHeadFilledYes, // JMI
@@ -1625,7 +1593,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 
       msrNote::kNoteIsACueNoteNo,
 
-      msrPrintObjectKind::kPrintObjectYes, // JMI
+      msrPrintObjectKind::kPrintObjectYes, // default value
 
       kNoteHeadNormal, // JMI
       kNoteHeadFilledYes, // JMI
@@ -1677,7 +1645,7 @@ S_msrNote msrNote::createRegularNote (
 
       msrNote::kNoteIsACueNoteNo,
 
-      msrPrintObjectKind::kPrintObjectYes, // JMI
+      msrPrintObjectKind::kPrintObjectYes, // default value
 
       kNoteHeadNormal, // JMI
       kNoteHeadFilledYes, // JMI
@@ -2191,7 +2159,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 
       msrNote::kNoteIsACueNoteNo,
 
-      msrPrintObjectKind::kPrintObjectNo, // JMI
+      msrPrintObjectKind::kPrintObjectYes, // default value
 
       kNoteHeadNormal, // JMI
       kNoteHeadFilledYes, // JMI
@@ -5730,14 +5698,6 @@ void msrNote::print (ostream& os) const
     setw (fieldWidth) <<
     "fNoteMultipleFullBarRestsSequenceNumber" << " : " <<
     fNoteMultipleFullBarRestsSequenceNumber <<
-    endl;
-
-  // note print kind
-  os << left <<
-    setw (fieldWidth) <<
-   "fNotePrintObjectKind" << " : " <<
-    msrPrintObjectKindAsString (
-      fNotePrintObjectKind) <<
     endl;
 
   // print the grace notes group before if any

@@ -466,7 +466,7 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
     }
   }
 
-	return mfMusicformatsError::k_NoError;
+  return mfMusicformatsError::k_NoError;
 }
 
 //_______________________________________________________________________________
@@ -476,10 +476,10 @@ static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
   std::ostream&           out,
   std::ostream&           err)
 {
-	Sxmlelement theMxsr;
+  Sxmlelement theMxsr;
 
-	if (sxmlfile) {
-	  theMxsr = sxmlfile->elements ();
+  if (sxmlfile) {
+    theMxsr = sxmlfile->elements ();
 
     if (theMxsr) {
       if (theMxsr->getName () == "score-timewise")
@@ -487,7 +487,7 @@ static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
     }
   }
 
-	else {
+  else {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   err <<
@@ -497,7 +497,7 @@ static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
 #endif
 
     return mfMusicformatsError::kErrorInvalidFile;
-	}
+  }
 
   // the service name
   // ------------------------------------------------------
@@ -514,7 +514,7 @@ static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
 
   createTheGlobalIndentedOstreams (out, err);
 
-	// print the options and arguments
+  // print the options and arguments
   // ------------------------------------------------------
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -642,23 +642,23 @@ EXP mfMusicformatsError musicxmlFile2braille (
   std::ostream&           err)
 {
   //
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFile (
-	      fileName,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML file");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFile (
+        fileName,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML file");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2brailleWithOptionsAndArguments (
-		    sxmlfile,
-		    handlerOptionsAndArguments,
-		    out,
-		    err);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2brailleWithOptionsAndArguments (
+        sxmlfile,
+        handlerOptionsAndArguments,
+        out,
+        err);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMusicxmlFile2brailleWithHandler (
@@ -667,23 +667,23 @@ mfMusicformatsError convertMusicxmlFile2brailleWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFile (
-	      fileName,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML file");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFile (
+        fileName,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML file");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2brailleWithHandler (
-		    sxmlfile,
-		    out,
-		    err,
-		    handler);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2brailleWithHandler (
+        sxmlfile,
+        out,
+        err,
+        handler);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
@@ -693,23 +693,23 @@ EXP mfMusicformatsError musicxmlFd2braille (
   std::ostream&           out,
   std::ostream&           err)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFd (
-	      fd,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML descriptor");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFd (
+        fd,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML descriptor");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2brailleWithOptionsAndArguments (
-		    sxmlfile,
-		    handlerOptionsAndArguments,
-		    out,
-		    err);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2brailleWithOptionsAndArguments (
+        sxmlfile,
+        handlerOptionsAndArguments,
+        out,
+        err);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMusicxmlFd2brailleWithHandler (
@@ -718,23 +718,23 @@ mfMusicformatsError convertMusicxmlFd2brailleWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFd (
-	      fd,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML descriptor");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFd (
+        fd,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML descriptor");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2brailleWithHandler (
-		    sxmlfile,
-		    out,
-		    err,
-		    handler);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2brailleWithHandler (
+        sxmlfile,
+        out,
+        err,
+        handler);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
@@ -744,15 +744,15 @@ EXP mfMusicformatsError musicxmlString2braille (
   std::ostream&           out,
   std::ostream&           err)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromString (
-	      buffer,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML buffer");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromString (
+        buffer,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML buffer");
 
-	// call xmlFile2braille() even if sxmlfile is null,
-	// to handle the help options if any
+  // call xmlFile2braille() even if sxmlfile is null,
+  // to handle the help options if any
   return
     xmlFile2brailleWithOptionsAndArguments (
       sxmlfile,
@@ -760,7 +760,7 @@ EXP mfMusicformatsError musicxmlString2braille (
       out,
       err);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMusicxmlString2brailleWithHandler (
@@ -769,15 +769,15 @@ mfMusicformatsError convertMusicxmlString2brailleWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromString (
-	      buffer,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML buffer");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromString (
+        buffer,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML buffer");
 
-	// call xmlFile2braille() even if sxmlfile is null,
-	// to handle the help options if any
+  // call xmlFile2braille() even if sxmlfile is null,
+  // to handle the help options if any
   return
     xmlFile2brailleWithHandler (
       sxmlfile,
@@ -785,7 +785,7 @@ mfMusicformatsError convertMusicxmlString2brailleWithHandler (
       err,
       handler);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 

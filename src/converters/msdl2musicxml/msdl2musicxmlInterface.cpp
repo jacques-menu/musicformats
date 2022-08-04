@@ -264,7 +264,7 @@ EXP mfMusicformatsError convertMsdlStream2musicxmlWithOptionsAndArguments (
 
   createTheGlobalIndentedOstreams (out, err);
 
-	// print the options and arguments
+  // print the options and arguments
   // ------------------------------------------------------
 #ifdef TRACING_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
@@ -488,8 +488,8 @@ EXP mfMusicformatsError msdlString2musicxmlWithOptionsAndArguments (
       buffer,
       ios_base::in);
 
-	// call convertMsdlStream2musicxmlWithOptionsAndArguments() even if buffer is empty,
-	// to handle the help options if any
+  // call convertMsdlStream2musicxmlWithOptionsAndArguments() even if buffer is empty,
+  // to handle the help options if any
   return
     convertMsdlStream2musicxmlWithOptionsAndArguments (
       "buffer",
@@ -498,7 +498,7 @@ EXP mfMusicformatsError msdlString2musicxmlWithOptionsAndArguments (
       out,
       err);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 EXP mfMusicformatsError convertMsdlString2musicxmlWithHandler (
@@ -512,13 +512,13 @@ EXP mfMusicformatsError convertMsdlString2musicxmlWithHandler (
       buffer,
       ios_base::in);
 
-	// call convertMsdlStream2musicxmlWithOptionsAndArguments() even if buffer is empty,
-	// to handle the help options if any
+  // call convertMsdlStream2musicxmlWithOptionsAndArguments() even if buffer is empty,
+  // to handle the help options if any
   return
     convertMsdlStream2musicxmlWithHandler (
       "buffer", inputStream, handler, out, err);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 

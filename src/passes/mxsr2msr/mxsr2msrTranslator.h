@@ -78,8 +78,8 @@ class EXP mxsr2msrTranslator :
   public visitor<S_left_divider>,
   public visitor<S_right_divider>,
 
-	// notations
-	// ------------------------------------------------------
+  // notations
+  // ------------------------------------------------------
 
   public visitor<S_notations>,
   public visitor<S_other_notation>,
@@ -1862,7 +1862,7 @@ class EXP mxsr2msrTranslator :
     msrOctaveKind             fCurrentDisplayOctave;
     msrDiatonicPitchKind      fCurrentDisplayDiatonicPitchKind;
 
-    // note print object kind
+    // note print object kind // JMI for others too v0.9.65
     msrPrintObjectKind        fCurrentNotePrintObjectKind;
 
     // note heads

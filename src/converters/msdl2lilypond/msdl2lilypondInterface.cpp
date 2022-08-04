@@ -371,7 +371,7 @@ mfMusicformatsError convertMsdlStream2lilypondWithHandler (
     }
   }
 
-	return mfMusicformatsError::k_NoError;
+  return mfMusicformatsError::k_NoError;
 }
 
 //_______________________________________________________________________________
@@ -397,7 +397,7 @@ mfMusicformatsError convertMsdlStream2lilypondWithHandler (
 
   createTheGlobalIndentedOstreams (out, err);
 
-	// print the options and arguments
+  // print the options and arguments
   // ------------------------------------------------------
 #ifdef TRACING_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
@@ -624,8 +624,8 @@ EXP mfMusicformatsError convertMsdlString2lilypondWithOptionsAndArguments (
       buffer,
       ios_base::in);
 
-	// call convertMsdlStream2lilypondWithOptionsAndArguments() even if buffer is empty,
-	// to handle the help options if any
+  // call convertMsdlStream2lilypondWithOptionsAndArguments() even if buffer is empty,
+  // to handle the help options if any
   return
     convertMsdlStream2lilypondWithOptionsAndArguments (
       "buffer",
@@ -634,7 +634,7 @@ EXP mfMusicformatsError convertMsdlString2lilypondWithOptionsAndArguments (
       out,
       err);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMsdlString2lilypondWithHandler (
@@ -648,8 +648,8 @@ mfMusicformatsError convertMsdlString2lilypondWithHandler (
       buffer,
       ios_base::in);
 
-	// call convertMsdlStream2lilypondWithOptionsAndArguments() even if buffer is empty,
-	// to handle the help options if any
+  // call convertMsdlStream2lilypondWithOptionsAndArguments() even if buffer is empty,
+  // to handle the help options if any
   return
     convertMsdlStream2lilypondWithHandler (
       "buffer",
@@ -658,7 +658,7 @@ mfMusicformatsError convertMsdlString2lilypondWithHandler (
       out,
       err);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 
