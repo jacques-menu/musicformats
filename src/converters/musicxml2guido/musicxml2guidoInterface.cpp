@@ -307,10 +307,10 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
   std::ostream&           out,
   std::ostream&           err)
 {
-	Sxmlelement st;
+  Sxmlelement st;
 
-	if (sxmlfile) {
-	  st = sxmlfile->elements ();
+  if (sxmlfile) {
+    st = sxmlfile->elements ();
 
     if (st) {
       if (st->getName () == "score-timewise")
@@ -318,7 +318,7 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
     }
   }
 
-	else {
+  else {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   err <<
@@ -328,7 +328,7 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
 #endif
 
     return mfMusicformatsError::kErrorInvalidFile;
-	}
+  }
 
   // the service name
   // ------------------------------------------------------
@@ -345,7 +345,7 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
 
   createTheGlobalIndentedOstreams (out, err);
 
-	// print the options and arguments
+  // print the options and arguments
   // ------------------------------------------------------
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -472,23 +472,23 @@ EXP mfMusicformatsError musicxmlFile2guido (
   std::ostream&           out,
   std::ostream&           err)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFile (
-	      fileName,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML file");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFile (
+        fileName,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML file");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2guidoWithOptionsAndArguments (
-		    sxmlfile,
-		    handlerOptionsAndArguments,
-		    out,
-		    err);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2guidoWithOptionsAndArguments (
+        sxmlfile,
+        handlerOptionsAndArguments,
+        out,
+        err);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMusicxmlFile2guidoWithHandler (
@@ -497,23 +497,23 @@ mfMusicformatsError convertMusicxmlFile2guidoWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFile (
-	      fileName,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML file");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFile (
+        fileName,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML file");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2guidoWithHandler (
-		    sxmlfile,
-		    out,
-		    err,
-		    handler);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2guidoWithHandler (
+        sxmlfile,
+        out,
+        err,
+        handler);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
@@ -523,23 +523,23 @@ EXP mfMusicformatsError musicxmlFd2guido (
   std::ostream&           out,
   std::ostream&           err)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFd (
-	      fd,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML descriptor");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFd (
+        fd,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML descriptor");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2guidoWithOptionsAndArguments (
-		    sxmlfile,
-		    handlerOptionsAndArguments,
-		    out,
-		    err);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2guidoWithOptionsAndArguments (
+        sxmlfile,
+        handlerOptionsAndArguments,
+        out,
+        err);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMusicxmlFd2guidoWithHandler (
@@ -548,23 +548,23 @@ mfMusicformatsError convertMusicxmlFd2guidoWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFd (
-	      fd,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML descriptor");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFd (
+        fd,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML descriptor");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2guidoWithHandler (
-		    sxmlfile,
-		    out,
-		    err,
-		    handler);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2guidoWithHandler (
+        sxmlfile,
+        out,
+        err,
+        handler);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
@@ -574,15 +574,15 @@ EXP mfMusicformatsError musicxmlString2guido (
   std::ostream&           out,
   std::ostream&           err)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromString (
-	      buffer,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML buffer");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromString (
+        buffer,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML buffer");
 
-	// call xmlFile2guido() even if sxmlfile is null,
-	// to handle the help options if any
+  // call xmlFile2guido() even if sxmlfile is null,
+  // to handle the help options if any
   return
     xmlFile2guidoWithOptionsAndArguments (
       sxmlfile,
@@ -590,7 +590,7 @@ EXP mfMusicformatsError musicxmlString2guido (
       out,
       err);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMusicxmlString2guidoWithHandler (
@@ -599,15 +599,15 @@ mfMusicformatsError convertMusicxmlString2guidoWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromString (
-	      buffer,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML buffer");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromString (
+        buffer,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML buffer");
 
-	// call xmlFile2guido() even if sxmlfile is null,
-	// to handle the help options if any
+  // call xmlFile2guido() even if sxmlfile is null,
+  // to handle the help options if any
   return
     xmlFile2guidoWithHandler (
       sxmlfile,
@@ -615,7 +615,7 @@ mfMusicformatsError convertMusicxmlString2guidoWithHandler (
       err,
       handler);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 

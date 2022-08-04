@@ -39,15 +39,15 @@ ischemeInterpreterCodeByFlexAndBison : $(GENERATED_FILES)
 # ---------------------------------------------------------------------------
 
 ischemeScanner.cpp : $(MAKEFILE) ischemeScanner.ll
-	$(FLEX) -oischemeScanner.cpp ischemeScanner.ll
+  $(FLEX) -oischemeScanner.cpp ischemeScanner.ll
 
 
 ischemeParser.h ischemeParser.cpp : $(MAKEFILE) ischemeParser.yy
-	$(BISON) --defines=ischemeParser.h -o ischemeParser.cpp ischemeParser.yy
+  $(BISON) --defines=ischemeParser.h -o ischemeParser.cpp ischemeParser.yy
 
 
 # clean
 # ---------------------------------------------------------------------------
 
 clean:
-	rm -f $(GENERATED_FILES) ischemeParser.output location.hh ischemeScanner.log
+  rm -f $(GENERATED_FILES) ischemeParser.output location.hh ischemeScanner.log

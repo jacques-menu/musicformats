@@ -442,7 +442,7 @@ mfMusicformatsError convertMsdlStream2brailleWithHandler (
     }
   }
 
-	return mfMusicformatsError::k_NoError;
+  return mfMusicformatsError::k_NoError;
 }
 
 //_______________________________________________________________________________
@@ -468,7 +468,7 @@ mfMusicformatsError convertMsdlStream2brailleWithOptionsAndArguments (
 
   createTheGlobalIndentedOstreams (out, err);
 
-	// print the options and arguments
+  // print the options and arguments
   // ------------------------------------------------------
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -692,8 +692,8 @@ EXP mfMusicformatsError convertMsdlString2brailleWithOptionsAndArguments (
       buffer,
       ios_base::in);
 
-	// call convertMsdlStream2brailleWithHandler() even if buffer is empty,
-	// to handle the help options if any
+  // call convertMsdlStream2brailleWithHandler() even if buffer is empty,
+  // to handle the help options if any
   return
     convertMsdlStream2brailleWithOptionsAndArguments (
       "buffer",
@@ -714,8 +714,8 @@ mfMusicformatsError convertMsdlString2brailleWithHandler (
       buffer,
       ios_base::in);
 
-	// call convertMsdlStream2brailleWithHandler() even if buffer is empty,
-	// to handle the help options if any
+  // call convertMsdlStream2brailleWithHandler() even if buffer is empty,
+  // to handle the help options if any
   return
     convertMsdlStream2brailleWithHandler (
       "buffer", inputStream, handler, out, err);

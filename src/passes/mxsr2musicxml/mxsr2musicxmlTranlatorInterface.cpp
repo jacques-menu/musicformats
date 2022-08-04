@@ -158,12 +158,12 @@ EXP void translateMxsrToMusicXML (
     }
 
     // write the MusicXML data to the output file stream
-	if (sxmlfile->elements ()) {
+  if (sxmlfile->elements ()) {
     sxmlfile->print (musicxmlFileOutputStream);
     musicxmlFileOutputStream << endl;
   }
   else {
-  	err << "TXMLFile::elements() is null" << endl;
+    err << "TXMLFile::elements() is null" << endl;
   }
 
     // close output file

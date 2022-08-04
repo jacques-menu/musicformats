@@ -260,8 +260,8 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentNoteDiatonicPitchKind = msrDiatonicPitchKind::k_NoDiatonicPitch;
   fCurrentNoteAlterationKind    = msrAlterationKind::k_NoAlteration;
 
-  // note print kind
-  fCurrentNotePrintObjectKind = msrPrintObjectKind::kPrintObjectYes;
+  // note print object kind
+  fCurrentNotePrintObjectKind = msrPrintObjectKind::kPrintObjectNone;
 
   // note head
   fCurrentNoteHeadKind = msrNote::kNoteHeadNormal;
@@ -1008,7 +1008,7 @@ void mxsr2msrTranslator::visitStart ( S_notations& elt )
   }
 #endif
 
-	// JMI
+  // JMI
 }
 
 void mxsr2msrTranslator::visitStart ( S_other_notation& elt )
@@ -1025,7 +1025,7 @@ void mxsr2msrTranslator::visitStart ( S_other_notation& elt )
   }
 #endif
 
-	// JMI
+  // JMI
 }
 
 //______________________________________________________________________________
@@ -1419,10 +1419,10 @@ void mxsr2msrTranslator::visitStart ( S_staff_layout& elt )
 
 /*
 From DalSegno.xml: JMI there is no <staff-distance /> ...
-				<staff-layout>
-					<?DoletSibelius JustifyAllStaves=false?>
-					<?DoletSibelius ExtraSpacesAbove=3?>
-				</staff-layout>
+        <staff-layout>
+          <?DoletSibelius JustifyAllStaves=false?>
+          <?DoletSibelius ExtraSpacesAbove=3?>
+        </staff-layout>
 */
 
   // number
@@ -1596,76 +1596,76 @@ void mxsr2msrTranslator::visitStart ( S_appearance& elt )
 
 /*
 <!--
-	The appearance element controls general graphical
-	settings for the music's final form appearance on a
-	printed page of display. This includes support
-	for line widths, definitions for note sizes, and standard
-	distances between notation elements, plus an extension
-	element for other aspects of appearance.
+  The appearance element controls general graphical
+  settings for the music's final form appearance on a
+  printed page of display. This includes support
+  for line widths, definitions for note sizes, and standard
+  distances between notation elements, plus an extension
+  element for other aspects of appearance.
 
-	The line-width element indicates the width of a line type
-	in tenths. The type attribute defines what type of line is
-	being defined. Values include beam, bracket, dashes,
-	enclosure, ending, extend, heavy barLine, leger,
-	light barLine, octave shift, pedal, slur middle, slur tip,
-	staff, stem, tie middle, tie tip, tuplet bracket, and
-	wedge. The text content is expressed in tenths.
+  The line-width element indicates the width of a line type
+  in tenths. The type attribute defines what type of line is
+  being defined. Values include beam, bracket, dashes,
+  enclosure, ending, extend, heavy barLine, leger,
+  light barLine, octave shift, pedal, slur middle, slur tip,
+  staff, stem, tie middle, tie tip, tuplet bracket, and
+  wedge. The text content is expressed in tenths.
 
-	The note-size element indicates the percentage of the
-	regular note size to use for notes with a cue and large
-	size as defined in the type element. The grace type is
-	used for notes of cue size that that include a grace
-	element. The cue type is used for all other notes with
-	cue size, whether defined explicitly or implicitly via a
-	cue element. The large type is used for notes of large
-	size. The text content represent the numeric percentage.
-	A value of 100 would be identical to the size of a regular
-	note as defined by the music font.
+  The note-size element indicates the percentage of the
+  regular note size to use for notes with a cue and large
+  size as defined in the type element. The grace type is
+  used for notes of cue size that that include a grace
+  element. The cue type is used for all other notes with
+  cue size, whether defined explicitly or implicitly via a
+  cue element. The large type is used for notes of large
+  size. The text content represent the numeric percentage.
+  A value of 100 would be identical to the size of a regular
+  note as defined by the music font.
 
-	The distance element represents standard distances between
-	notation elements in tenths. The type attribute defines what
-	type of distance is being defined. Values include hyphen
-	(for hyphens in lyrics) and beam.
+  The distance element represents standard distances between
+  notation elements in tenths. The type attribute defines what
+  type of distance is being defined. Values include hyphen
+  (for hyphens in lyrics) and beam.
 
-	The glyph element represents what SMuFL glyph should be used
-	for different variations of symbols that are semantically
-	identical. The type attribute specifies what type of glyph
-	is being defined. The element value specifies what
-	SMuFL glyph to use, including recommended stylistic
-	regulars.
+  The glyph element represents what SMuFL glyph should be used
+  for different variations of symbols that are semantically
+  identical. The type attribute specifies what type of glyph
+  is being defined. The element value specifies what
+  SMuFL glyph to use, including recommended stylistic
+  regulars.
 
-	Glyph type attribute values include quarter-rest,
-	g-clef-ottava-bassa, c-clef, f-clef, percussion-clef,
-	octave-shift-up-8, octave-shift-down-8,
-	octave-shift-continue-8, octave-shift-down-15,
-	octave-shift-up-15, octave-shift-continue-15,
-	octave-shift-down-22, octave-shift-up-22, and
-	octave-shift-continue-22. A quarter-rest type specifies the
-	glyph to use when a note has a rest element and a type value
-	of quarter. The c-clef, f-clef, and percussion-clef types
-	specify the glyph to use when a clef sign element value is C,
-	F, or percussion respectively. The g-clef-ottava-bassa type
-	specifies the glyph to use when a clef sign element value is
-	G and the clef-octave-change element value is -1. The
-	octave-shift types specify the glyph to use when an
-	octave-shift type attribute value is up, down, or continue
-	and the octave-shift size attribute value is 8, 15, or 22.
+  Glyph type attribute values include quarter-rest,
+  g-clef-ottava-bassa, c-clef, f-clef, percussion-clef,
+  octave-shift-up-8, octave-shift-down-8,
+  octave-shift-continue-8, octave-shift-down-15,
+  octave-shift-up-15, octave-shift-continue-15,
+  octave-shift-down-22, octave-shift-up-22, and
+  octave-shift-continue-22. A quarter-rest type specifies the
+  glyph to use when a note has a rest element and a type value
+  of quarter. The c-clef, f-clef, and percussion-clef types
+  specify the glyph to use when a clef sign element value is C,
+  F, or percussion respectively. The g-clef-ottava-bassa type
+  specifies the glyph to use when a clef sign element value is
+  G and the clef-octave-change element value is -1. The
+  octave-shift types specify the glyph to use when an
+  octave-shift type attribute value is up, down, or continue
+  and the octave-shift size attribute value is 8, 15, or 22.
 
-	The SMuFL glyph name should match the type. For instance,
-	a type of quarter-rest would use values restQuarter,
-	restQuarterOld, or restQuarterZ. A type of g-clef-ottava-bassa
-	would use values gClef8vb, gClef8vbOld, or gClef8vbCClef. A
-	type of octave-shift-up-8 would use values ottava, ottavaBassa,
-	ottavaBassaBa, ottavaBassaVb, or octaveBassa.
+  The SMuFL glyph name should match the type. For instance,
+  a type of quarter-rest would use values restQuarter,
+  restQuarterOld, or restQuarterZ. A type of g-clef-ottava-bassa
+  would use values gClef8vb, gClef8vbOld, or gClef8vbCClef. A
+  type of octave-shift-up-8 would use values ottava, ottavaBassa,
+  ottavaBassaBa, ottavaBassaVb, or octaveBassa.
 
-	The other-appearance element is used to define any
-	graphical settings not yet in the current version of the
-	MusicXML format. This allows extended representation,
-	though without application interoperability.
+  The other-appearance element is used to define any
+  graphical settings not yet in the current version of the
+  MusicXML format. This allows extended representation,
+  though without application interoperability.
 -->
 <!ELEMENT appearance
-	(line-width*, note-size*, distance*,
-	 other-appearance*)>
+  (line-width*, note-size*, distance*,
+   other-appearance*)>
 <!ELEMENT line-width %layout-tenths;>
 <!ATTLIST line-width
     type CDATA #REQUIRED
@@ -3709,27 +3709,27 @@ void mxsr2msrTranslator::visitStart ( S_time_relation& elt )
 
   if       (timeSignatureRelation == "parentheses") {
     fCurrentInterchangeableRelationKind =
-    	msrTimeSignatureRelationKind::kTimeSignatureRelationParentheses;
+      msrTimeSignatureRelationKind::kTimeSignatureRelationParentheses;
   }
   else  if (timeSignatureRelation == "bracket") {
     fCurrentInterchangeableRelationKind =
-    	msrTimeSignatureRelationKind::kTimeSignatureRelationBracket;
+      msrTimeSignatureRelationKind::kTimeSignatureRelationBracket;
   }
   else  if (timeSignatureRelation == "equals") {
     fCurrentInterchangeableRelationKind =
-    	msrTimeSignatureRelationKind::kTimeSignatureRelationEquals;
+      msrTimeSignatureRelationKind::kTimeSignatureRelationEquals;
   }
   else  if (timeSignatureRelation == "slash") {
     fCurrentInterchangeableRelationKind =
-    	msrTimeSignatureRelationKind::kTimeSignatureRelationSlash;
+      msrTimeSignatureRelationKind::kTimeSignatureRelationSlash;
   }
   else  if (timeSignatureRelation == "space") {
     fCurrentInterchangeableRelationKind =
-    	msrTimeSignatureRelationKind::kTimeSignatureRelationSpace;
+      msrTimeSignatureRelationKind::kTimeSignatureRelationSpace;
   }
   else  if (timeSignatureRelation == "hyphen") {
     fCurrentInterchangeableRelationKind =
-    	msrTimeSignatureRelationKind::kTimeSignatureRelationHyphen;
+      msrTimeSignatureRelationKind::kTimeSignatureRelationHyphen;
   }
 
   else {
@@ -3835,34 +3835,34 @@ void mxsr2msrTranslator::visitStart ( S_score_instrument& elt )
 
 /*
 <!--
-	The score-instrument element allows for multiple instruments
-	per score-part. As with the score-part element, each
-	score-instrument has a required ID attribute, a name,
-	and an optional abbreviation. The instrument-name and
-	instrument-abbreviation are typically used within a software
-	application, rather than appearing on the printed page of a
-	score.
+  The score-instrument element allows for multiple instruments
+  per score-part. As with the score-part element, each
+  score-instrument has a required ID attribute, a name,
+  and an optional abbreviation. The instrument-name and
+  instrument-abbreviation are typically used within a software
+  application, rather than appearing on the printed page of a
+  score.
 
-	A score-instrument element is also required if the score
-	specifies MIDI 1.0 channels, banks, or programs. An initial
-	midi-instrument assignment can also be made here. MusicXML
-	software should be able to automatically assign reasonable
-	channels and instruments without these elements in simple
-	cases, such as where part names match General MIDI
-	instrument names.
+  A score-instrument element is also required if the score
+  specifies MIDI 1.0 channels, banks, or programs. An initial
+  midi-instrument assignment can also be made here. MusicXML
+  software should be able to automatically assign reasonable
+  channels and instruments without these elements in simple
+  cases, such as where part names match General MIDI
+  instrument names.
 
-	The score-instrument element can also distinguish multiple
-	instruments of the same type that are on the same part,
-	such as Clarinet 1 and Clarinet 2 instruments within a
-	Clarinets 1 and 2 part.
+  The score-instrument element can also distinguish multiple
+  instruments of the same type that are on the same part,
+  such as Clarinet 1 and Clarinet 2 instruments within a
+  Clarinets 1 and 2 part.
 
-	The virtual-instrument-data entity is defined in the
-	common.mod file, as it can be used within both the
-	score-part and instrument-change elements.
+  The virtual-instrument-data entity is defined in the
+  common.mod file, as it can be used within both the
+  score-part and instrument-change elements.
 -->
 <!ELEMENT score-instrument
-	(instrument-name, instrument-abbreviation?,
-	%virtual-instrument-data;)>
+  (instrument-name, instrument-abbreviation?,
+  %virtual-instrument-data;)>
 <!ATTLIST score-instrument
     id ID #REQUIRED
 >
@@ -3931,30 +3931,30 @@ void mxsr2msrTranslator::visitStart ( S_instruments& elt )
 
 /*
 <!--
-	Instruments are only used if more than one instrument is
-	represented in the part (e.g., oboe I and II where they
-	play together most of the time). If absent, a value of 1
-	is assumed.
+  Instruments are only used if more than one instrument is
+  represented in the part (e.g., oboe I and II where they
+  play together most of the time). If absent, a value of 1
+  is assumed.
 -->
 <!ELEMENT instruments (#PCDATA)>
 
     <measure number="1" width="324">
-			<attributes>
-				<divisions>768</divisions>
-				<key>
-					<fifths>0</fifths>
-					<mode>major</mode>
-				</key>
-				<time>
-					<beats>4</beats>
-					<beat-type>4</beat-type>
-				</time>
-				<instruments>2</instruments>
-				<clef>
-					<sign>G</sign>
-					<line>2</line>
-				</clef>
-			</attributes>
+      <attributes>
+        <divisions>768</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <instruments>2</instruments>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+      </attributes>
 
       <attributes>
         <divisions>8</divisions>
@@ -4242,11 +4242,11 @@ void mxsr2msrTranslator::visitStart (S_direction_type& elt)
 {
 /*
 <!ELEMENT direction-type (rehearsalMark+ | segno+ | coda+ |
-	(words | symbol)+ | wedge | dynamics+ | dashes |
-	bracket | pedal | metronome | octave-shift | harp-pedals |
-	damp | damp-all | eyeglasses | string-mute |
-	scordatura | image | principal-voice | percussion+ |
-	accordion-registration | staff-divide | other-direction)>
+  (words | symbol)+ | wedge | dynamics+ | dashes |
+  bracket | pedal | metronome | octave-shift | harp-pedals |
+  damp | damp-all | eyeglasses | string-mute |
+  scordatura | image | principal-voice | percussion+ |
+  accordion-registration | staff-divide | other-direction)>
 <!ATTLIST direction-type
     %optional-unique-id;
 >
@@ -5463,11 +5463,11 @@ void mxsr2msrTranslator::visitStart ( S_beat_unit& elt )
 
   // there can be several <beat-unit/> in a <metronome/> markup,
   if (fCurrentMetronomeBeatUnitsVector.size () < 2) {
-		// register beat unit in in dotted durations list
-		fCurrentMetronomeBeatUnitsVector.push_back (
-			msrDottedDuration (
-				beatUnitDurationKind,
-	      0)); // dots number
+    // register beat unit in in dotted durations list
+    fCurrentMetronomeBeatUnitsVector.push_back (
+      msrDottedDuration (
+        beatUnitDurationKind,
+        0)); // dots number
   }
   else {
     stringstream s;
@@ -9043,40 +9043,40 @@ void mxsr2msrTranslator::visitStart ( S_print& elt )
 #endif
 
 /* JMI
-	The print element contains general printing parameters,
-	including the layout elements defined in the layout.mod
-	file. The part-name-display and part-abbreviation-display
-	elements used in the score.mod file may also be used here
-	to change how a part name or abbreviation is displayed over
-	the course of a piece. They take effect when the current
-	measure or a succeeding measure starts a new system.
+  The print element contains general printing parameters,
+  including the layout elements defined in the layout.mod
+  file. The part-name-display and part-abbreviation-display
+  elements used in the score.mod file may also be used here
+  to change how a part name or abbreviation is displayed over
+  the course of a piece. They take effect when the current
+  measure or a succeeding measure starts a new system.
 
-	The new-system and new-page attributes indicate whether
-	to force a system or page break, or to force the current
-	music onto the same system or page as the preceding music.
-	Normally this is the first music data within a measure.
-	If used in multi-part music, they should be placed in the
-	same positions within each part, or the results are
-	undefined. The page-number attribute sets the number of a
-	new page; it is ignored if new-page is not "yes". Version
-	2.0 adds a blank-page attribute. This is a positive integer
-	value that specifies the number of blank pages to insert
-	before the current measure. It is ignored if new-page is
-	not "yes". These blank pages have no music, but may have
-	text or images specified by the credit element. This is
-	used to allow a combination of pages that are all text,
-	or all text and images, together with pages of music.
+  The new-system and new-page attributes indicate whether
+  to force a system or page break, or to force the current
+  music onto the same system or page as the preceding music.
+  Normally this is the first music data within a measure.
+  If used in multi-part music, they should be placed in the
+  same positions within each part, or the results are
+  undefined. The page-number attribute sets the number of a
+  new page; it is ignored if new-page is not "yes". Version
+  2.0 adds a blank-page attribute. This is a positive integer
+  value that specifies the number of blank pages to insert
+  before the current measure. It is ignored if new-page is
+  not "yes". These blank pages have no music, but may have
+  text or images specified by the credit element. This is
+  used to allow a combination of pages that are all text,
+  or all text and images, together with pages of music.
 
 Staff spacing between multiple staves is measured in
-	tenths of staff lines (e.g. 100 = 10 staff lines). This is
-	deprecated as of Version 1.1; the staff-layout element
-	should be used instead. If both are present, the
-	staff-layout values take priority.
+  tenths of staff lines (e.g. 100 = 10 staff lines). This is
+  deprecated as of Version 1.1; the staff-layout element
+  should be used instead. If both are present, the
+  staff-layout values take priority.
 
-	Layout elements in a print statement only apply to the
-	current page, system, staff, or measure. Music that
-	follows continues to take the default values from the
-	layout included in the defaults element.
+  Layout elements in a print statement only apply to the
+  current page, system, staff, or measure. Music that
+  follows continues to take the default values from the
+  layout included in the defaults element.
 
 <!ELEMENT print (page-layout?, system-layout?, staff-layout*,
     measure-layout?, measure-numbering?, part-name-display?,
@@ -10189,6 +10189,23 @@ void mxsr2msrTranslator::visitStart ( S_note& elt )
   }
 #endif
 
+/*
+====
+print-dot
+Controls the printing of an augmentation dot separately from the rest of the note or rest. This is especially useful for notes that overlap in different voices, or for chord sheets that contain lyrics and chords but no melody. If print-object is set to no, this attribute is also interpreted as being set to no if not present.
+
+print-leger
+Indicates whether leger lines are printed. Notes without leger lines are used to indicate indeterminate high and low notes. It is yes if not present unless print-object is set to no. This attribute is ignored for rests.
+print-lyric  yes-no  No  Controls the printing of a lyric separately from the rest of the note or rest. This is especially useful for notes that overlap in different voices, or for chord sheets that contain lyrics and chords but no melody. If print-object is set to no, this attribute is also interpreted as being set to no if not present.
+
+print-object
+Specifies whether or not to print an object. It is yes if not specified.
+
+print-spacing
+Controls whether or not spacing is left for an invisible note or object. It is used only if no note, dot, or lyric is being printed. The value is yes (leave spacing) if not specified.
+
+*/
+
   // save previous note staff number
   fPreviousNoteMusicXMLStaffNumber = fCurrentMusicXMLStaffNumber;
 
@@ -10302,6 +10319,11 @@ void mxsr2msrTranslator::visitStart ( S_note& elt )
 
   string printObjectString =
     elt->getAttributeValue ("print-object");
+
+  gLogStream <<
+      "fCurrentNotePrintObjectKind" << " = " <<
+      fCurrentNotePrintObjectKind <<
+      endl;
 
   fCurrentNotePrintObjectKind =
     msrPrintObjectKindFromString (
@@ -10599,12 +10621,12 @@ void mxsr2msrTranslator::visitStart ( S_instrument& elt )
 
 /*
 <!--
-	If multiple score-instruments are specified in a
-	score-part, there should be an instrument element for
-	each note in the part. The id attribute is an IDREF back
-	to the score-instrument ID. Notes that are shared between
-	multiple score-instruments can have more than one instrument
-	element.
+  If multiple score-instruments are specified in a
+  score-part, there should be an instrument element for
+  each note in the part. The id attribute is an IDREF back
+  to the score-instrument ID. Notes that are shared between
+  multiple score-instruments can have more than one instrument
+  element.
 -->
 <!ELEMENT instrument EMPTY>
 <!ATTLIST instrument
@@ -11035,14 +11057,14 @@ void mxsr2msrTranslator::visitStart ( S_stem& elt )
 
 /*
 <!--
-	Stems can be down, up, none, or double. For down and up
-	stems, the position attributes can be used to specify
-	stem length. The relative values specify the end of the
-	stem relative to the program default. Default values
-	specify an absolute end stem position. Negative values of
-	relative-y that would flip a stem instead of shortening
-	it are ignored. A stem element associated with a rest
-	refers to a stemlet.
+  Stems can be down, up, none, or double. For down and up
+  stems, the position attributes can be used to specify
+  stem length. The relative values specify the end of the
+  stem relative to the program default. Default values
+  specify an absolute end stem position. Negative values of
+  relative-y that would flip a stem instead of shortening
+  it are ignored. A stem element associated with a rest
+  refers to a stemlet.
 -->
 <!ELEMENT stem (#PCDATA)>
 <!ATTLIST stem
@@ -11187,14 +11209,14 @@ void mxsr2msrTranslator::visitStart ( S_beat_repeat& elt )
 
 /*
 <!--
-	The beat-repeat element is used to indicate that a single
-	beat (but possibly many notes) is repeated. Both the start
-	and stop of the beat being repeated should be specified.
-	The slashes attribute specifies the number of slashes to
-	use in the symbol. The use-dots attribute indicates whether
-	or not to use dots as well (for instance, with mixed rhythm
-	patterns). By default, the value for slashes is 1 and the
-	value for use-dots is no.
+  The beat-repeat element is used to indicate that a single
+  beat (but possibly many notes) is repeated. Both the start
+  and stop of the beat being repeated should be specified.
+  The slashes attribute specifies the number of slashes to
+  use in the symbol. The use-dots attribute indicates whether
+  or not to use dots as well (for instance, with mixed rhythm
+  patterns). By default, the value for slashes is 1 and the
+  value for use-dots is no.
 -->
 <!ELEMENT beat-repeat ((slash-type, slash-dot*)?, except-voice*)>
 <!ATTLIST beat-repeat
@@ -11322,21 +11344,21 @@ void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
 {
 /*
 <!--
-	A measure-style indicates a special way to print partial
-	to multiple measures within a part. This includes multiple
-	rests over several measures, repeats of beats, single, or
-	multiple measures, and use of slash notation.
+  A measure-style indicates a special way to print partial
+  to multiple measures within a part. This includes multiple
+  rests over several measures, repeats of beats, single, or
+  multiple measures, and use of slash notation.
 
-	The multiple-rest and measure-repeat elements indicate the
-	number of measures covered in the element content. The
-	beat-repeat and slash elements can cover partial measures.
-	All but the multiple-rest element use a type attribute to
-	indicate starting and stopping the use of the style. The
-	optional number attribute specifies the staff number from
-	top to bottom on the system, as with clef.
+  The multiple-rest and measure-repeat elements indicate the
+  number of measures covered in the element content. The
+  beat-repeat and slash elements can cover partial measures.
+  All but the multiple-rest element use a type attribute to
+  indicate starting and stopping the use of the style. The
+  optional number attribute specifies the staff number from
+  top to bottom on the system, as with clef.
 -->
 <!ELEMENT measure-style (multiple-rest |
-	measure-repeat | beat-repeat | slash)>
+  measure-repeat | beat-repeat | slash)>
 <!ATTLIST measure-style
     number CDATA #IMPLIED
     %font;
@@ -11345,11 +11367,11 @@ void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
 >
 
 <!--
-	The text of the multiple-rest element indicates the number
-	of measures in the multiple rest. Multiple rests may use
-	the 1-bar / 2-bar / 4-bar rest symbols, or a single shape.
-	The use-symbols attribute indicates which to use; it is no
-	if not specified.
+  The text of the multiple-rest element indicates the number
+  of measures in the multiple rest. Multiple rests may use
+  the 1-bar / 2-bar / 4-bar rest symbols, or a single shape.
+  The use-symbols attribute indicates which to use; it is no
+  if not specified.
 -->
 <!ELEMENT multiple-rest (#PCDATA)>
 <!ATTLIST multiple-rest
@@ -14354,39 +14376,39 @@ void mxsr2msrTranslator::visitStart ( S_accidental_mark& elt )
 
 /*
 <!--
-	Actual notated accidentals. Valid values include: sharp,
-	natural, flat, double-sharp, sharp-sharp, flat-flat,
-	natural-sharp, natural-flat, quarter-flat, quarter-sharp,
-	three-quarters-flat, three-quarters-sharp, sharp-down,
-	sharp-up, natural-down, natural-up, flat-down, flat-up,
-	double-sharp-down, double-sharp-up, flat-flat-down,
-	flat-flat-up, arrow-down, arrow-up, triple-sharp,
-	triple-flat, slash-quarter-sharp, slash-sharp, slash-flat,
-	double-slash-flat, sharp-1, sharp-2, sharp-3, sharp-5,
-	flat-1, flat-2, flat-3, flat-4, sori, koron, and other.
+  Actual notated accidentals. Valid values include: sharp,
+  natural, flat, double-sharp, sharp-sharp, flat-flat,
+  natural-sharp, natural-flat, quarter-flat, quarter-sharp,
+  three-quarters-flat, three-quarters-sharp, sharp-down,
+  sharp-up, natural-down, natural-up, flat-down, flat-up,
+  double-sharp-down, double-sharp-up, flat-flat-down,
+  flat-flat-up, arrow-down, arrow-up, triple-sharp,
+  triple-flat, slash-quarter-sharp, slash-sharp, slash-flat,
+  double-slash-flat, sharp-1, sharp-2, sharp-3, sharp-5,
+  flat-1, flat-2, flat-3, flat-4, sori, koron, and other.
 
-	The quarter- and three-quarters- accidentals are
-	Tartini-style quarter-tone accidentals. The -down and -up
-	accidentals are quarter-tone accidentals that include
-	arrows pointing down or up. The slash- accidentals
-	are used in Turkish classical music. The numbered
-	sharp and flat accidentals are superscripted versions
-	of the accidental signs, used in Turkish folk music.
-	The sori and koron accidentals are microtonal sharp and
-	flat accidentals used in Iranian and Persian music. The
-	other accidental covers accidentals other than those listed
-	here. It is usually used in combination with the smufl
-	attribute to specify a particular SMuFL accidental. The
-	smufl attribute may be used with any accidental value to
-	help specify the appearance of symbols that share the same
-	MusicXML semantics. The attribute value is a SMuFL canonical
-	glyph name that starts with acc.
+  The quarter- and three-quarters- accidentals are
+  Tartini-style quarter-tone accidentals. The -down and -up
+  accidentals are quarter-tone accidentals that include
+  arrows pointing down or up. The slash- accidentals
+  are used in Turkish classical music. The numbered
+  sharp and flat accidentals are superscripted versions
+  of the accidental signs, used in Turkish folk music.
+  The sori and koron accidentals are microtonal sharp and
+  flat accidentals used in Iranian and Persian music. The
+  other accidental covers accidentals other than those listed
+  here. It is usually used in combination with the smufl
+  attribute to specify a particular SMuFL accidental. The
+  smufl attribute may be used with any accidental value to
+  help specify the appearance of symbols that share the same
+  MusicXML semantics. The attribute value is a SMuFL canonical
+  glyph name that starts with acc.
 
-	Editorial and cautionary indications are indicated
-	by attributes. Values for these attributes are "no" if not
-	present. Specific graphic display such as parentheses,
-	brackets, and size are controlled by the level-display
-	entity defined in the common.mod file.
+  Editorial and cautionary indications are indicated
+  by attributes. Values for these attributes are "no" if not
+  present. Specific graphic display such as parentheses,
+  brackets, and size are controlled by the level-display
+  entity defined in the common.mod file.
 -->
 <!ELEMENT accidental (#PCDATA)>
 <!ATTLIST accidental
@@ -16851,24 +16873,24 @@ void mxsr2msrTranslator::visitStart ( S_rest& elt)
 #endif
 
   /*
-		<measure number='65'>
-			<print new-system='yes'/>
-			<note>
-				<rest measure='yes'/>
-				<duration>3072</duration>
-				<voice>1</voice>
-				<staff>1</staff>
-			</note>
-			<backup>
-				<duration>3072</duration>
-			</backup>
-			<note>
-				<rest measure='yes'/>
-				<duration>3072</duration>
-				<voice>5</voice>
-				<staff>2</staff>
-			</note>
-		</measure>
+    <measure number='65'>
+      <print new-system='yes'/>
+      <note>
+        <rest measure='yes'/>
+        <duration>3072</duration>
+        <voice>1</voice>
+        <staff>1</staff>
+      </note>
+      <backup>
+        <duration>3072</duration>
+      </backup>
+      <note>
+        <rest measure='yes'/>
+        <duration>3072</duration>
+        <voice>5</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
 
       <note>
         <rest/>
@@ -20921,8 +20943,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 
       setw (fieldWidth) <<
       "fCurrentNotePrintObjectKind" << " = " <<
-      msrPrintObjectKindAsString (
-        fCurrentNotePrintObjectKind) <<
+      fCurrentNotePrintObjectKind <<
       endl <<
 
       setw (fieldWidth) <<
@@ -21272,10 +21293,10 @@ void mxsr2msrTranslator::populateNote (
           getPartHarmoniesVoice ();
 
     // sanity check
-		mfAssert (
-			__FILE__, __LINE__,
-			voiceToInsertHarmoniesInto != nullptr,
-			"voiceToInsertHarmoniesInto is null");
+    mfAssert (
+      __FILE__, __LINE__,
+      voiceToInsertHarmoniesInto != nullptr,
+      "voiceToInsertHarmoniesInto is null");
 
     handlePendingHarmonies (
       newNote,
@@ -25203,7 +25224,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
     }
 
     else {
-    	// handle harmony degrees if any
+      // handle harmony degrees if any
       while (fCurrentHarmonyDegreesList.size ()) {
         S_msrHarmonyDegree
           harmonyDegree =

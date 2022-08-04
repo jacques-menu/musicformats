@@ -60,7 +60,7 @@ static void _sigaction (int signal, siginfo_t *si, void *arg)
 
 static void catchSignals ()
 {
-	struct sigaction sa;
+  struct sigaction sa;
 
   memset (&sa, 0, sizeof(struct sigaction));
 
@@ -189,7 +189,7 @@ int main (int argc, char*  argv[])
   // setup signals catching
   // ------------------------------------------------------
 
-	catchSignals ();
+  catchSignals ();
 
   // the service name
   // ------------------------------------------------------

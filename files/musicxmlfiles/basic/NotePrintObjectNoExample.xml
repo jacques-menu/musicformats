@@ -263,7 +263,7 @@
 			</backup>
 			<note print-object="no">
 				<pitch>
-					<step>D</step>
+					<step>E</step>
 					<octave>3</octave>
 				</pitch>
 				<duration>768</duration>
@@ -382,7 +382,7 @@
 			</backup>
 			<note print-object="no">
 				<pitch>
-					<step>G</step>
+					<step>A</step>
 					<octave>3</octave>
 				</pitch>
 				<duration>768</duration>

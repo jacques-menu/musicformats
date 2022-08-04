@@ -264,7 +264,7 @@ mfMusicformatsError convertMsdlStream2guidoWithOptionsAndArguments (
 
   createTheGlobalIndentedOstreams (out, err);
 
-	// print the options and arguments
+  // print the options and arguments
   // ------------------------------------------------------
 #ifdef TRACING_IS_ENABLED
 #ifdef ENFORCE_TRACE_OAH
@@ -488,8 +488,8 @@ EXP mfMusicformatsError convertMsdlString2guidoWithOptionsAndArguments (
       buffer,
       ios_base::in);
 
-	// call convertMsdlStream2guidoWithOptionsAndArguments() even if buffer is empty,
-	// to handle the help options if any
+  // call convertMsdlStream2guidoWithOptionsAndArguments() even if buffer is empty,
+  // to handle the help options if any
   return
     convertMsdlStream2guidoWithOptionsAndArguments (
       "buffer",
@@ -498,7 +498,7 @@ EXP mfMusicformatsError convertMsdlString2guidoWithOptionsAndArguments (
       out,
       err);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError msdlString2guidoWithHandler (
@@ -512,8 +512,8 @@ mfMusicformatsError msdlString2guidoWithHandler (
       buffer,
       ios_base::in);
 
-	// call convertMsdlStream2guidoWithOptionsAndArguments() even if buffer is empty,
-	// to handle the help options if any
+  // call convertMsdlStream2guidoWithOptionsAndArguments() even if buffer is empty,
+  // to handle the help options if any
   return
     convertMsdlStream2guidoWithHandler (
       "buffer",
@@ -522,7 +522,7 @@ mfMusicformatsError msdlString2guidoWithHandler (
       out,
       err);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 

@@ -490,6 +490,10 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     void                  initializePartsOptions ();
 
+    void                  initializeStavesOptions ();
+
+    void                  initializeVoiceOptions ();
+
     void                  initializeClefsKeysTimesOptions ();
 
     void                  initializePageAndLineBreaksOptions ();
@@ -551,7 +555,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     set<string>           fMusicXMLMusicXMLPartsIgnoreNameSet;
     set<string>           fMusicXMLPartsKeepNameSet;
 
-    // for checkOptionsConsistency()
+     // for checkOptionsConsistency()
     S_oahStringSetElementAtom
                           fIgnorePartIDAtom;
     S_oahStringSetElementAtom
@@ -561,6 +565,30 @@ class EXP mxsr2msrOahGroup : public oahGroup
                           fIgnorePartNameAtom;
     S_oahStringSetElementAtom
                           fKeepPartNameAtom;
+
+    // staves
+    // --------------------------------------
+
+    set<int>              fMusicXMLMusicXMLStavesIgnoreNumberSet;
+    set<int>              fMusicXMLStavesKeepNumberSet;
+
+     // for checkOptionsConsistency()
+    S_oahIntSetElementAtom
+                          fIgnoreStaffNumberAtom;
+    S_oahIntSetElementAtom
+                          fKeepStaffNumberAtom;
+
+    // voices
+    // --------------------------------------
+
+    set<int>              fMusicXMLMusicXMLVoicesIgnoreNumberSet;
+    set<int>              fMusicXMLVoicesKeepNumberSet;
+
+     // for checkOptionsConsistency()
+    S_oahIntSetElementAtom
+                          fIgnoreVoiceNumberAtom;
+    S_oahIntSetElementAtom
+                          fKeepVoiceNumberAtom;
 
     // clefs, keys, time signatures
     // --------------------------------------

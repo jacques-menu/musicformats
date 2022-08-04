@@ -272,7 +272,7 @@ EXP mfMusicformatsError msrScore2lilypondWithHandler (
     }
   }
 
-	return mfMusicformatsError::k_NoError;
+  return mfMusicformatsError::k_NoError;
 }
 
 

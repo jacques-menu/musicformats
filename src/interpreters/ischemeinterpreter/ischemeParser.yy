@@ -252,9 +252,9 @@ OptionalScriptElementsSeq
 ;
 
 ScriptElementsSeq
-	: ScriptElement
+  : ScriptElement
 
-	| ScriptElementsSeq ScriptElement
+  | ScriptElementsSeq ScriptElement
 ;
 
 ScriptElement

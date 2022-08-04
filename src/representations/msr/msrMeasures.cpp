@@ -810,7 +810,7 @@ void msrMeasure::setMeasureRepeatContextKind (
 }
 
 void msrMeasure::setMeasureElementMeasureNumber (
-	const string& measureNumber)
+  const string& measureNumber)
 {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -835,7 +835,7 @@ void msrMeasure::setMeasureElementMeasureNumber (
 }
 
 void msrMeasure::setMeasureOrdinalNumberInVoice (
-	int measureOrdinalNumber)
+  int measureOrdinalNumber)
 {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {

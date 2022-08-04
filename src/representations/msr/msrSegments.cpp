@@ -752,61 +752,61 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
     segmentElementsListFirstElement =
       fSegmentElementsList.front ();
 
-	if (
-		// measure?
+  if (
+    // measure?
 
-		S_msrMeasure
-			measure =
-				dynamic_cast<msrMeasure*>(&(*segmentElementsListFirstElement))
-	) {
+    S_msrMeasure
+      measure =
+        dynamic_cast<msrMeasure*>(&(*segmentElementsListFirstElement))
+  ) {
     // prepend the clef to the first measure
     fSegmentFirstMeasure->
-    	appendClefToMeasure (clef);
-	}
+      appendClefToMeasure (clef);
+  }
 
-	else if (
-		// full-bar rest?
+  else if (
+    // full-bar rest?
 
-		S_msrMultipleFullBarRests
-			multipleFullBarRests =
-				dynamic_cast<msrMultipleFullBarRests*>(&(*segmentElementsListFirstElement))
-	) {
+    S_msrMultipleFullBarRests
+      multipleFullBarRests =
+        dynamic_cast<msrMultipleFullBarRests*>(&(*segmentElementsListFirstElement))
+  ) {
     const list<S_msrMeasure>&
-    	fullBarRestsMeasuresList =
-    		multipleFullBarRests->
-					getFullBarRestsMeasuresList ();
+      fullBarRestsMeasuresList =
+        multipleFullBarRests->
+          getFullBarRestsMeasuresList ();
 
-		if (fullBarRestsMeasuresList.size ()) {
-			S_msrMeasure
-				fullBarRestsMeasuresListFirstMeasure = // JMI v0.9.64 ???
-					fullBarRestsMeasuresList.front ();
+    if (fullBarRestsMeasuresList.size ()) {
+      S_msrMeasure
+        fullBarRestsMeasuresListFirstMeasure = // JMI v0.9.64 ???
+          fullBarRestsMeasuresList.front ();
 
-			// prepend the clef to the full-bar rest first measure
-			fullBarRestsMeasuresListFirstMeasure->
-				appendClefToMeasure (clef);
-		}
+      // prepend the clef to the full-bar rest first measure
+      fullBarRestsMeasuresListFirstMeasure->
+        appendClefToMeasure (clef);
+    }
 
-		else {
-			stringstream s;
+    else {
+      stringstream s;
 
-			s <<
-				"attempt at prepending clef " <<
-				clef->asShortString () <<
-				" to segment " <<
-				this->asString () <<
-				" which is not a measure nor a full-bar rest" <<
-				", in voice \"" <<
-				fSegmentVoiceUpLink->getVoiceName () <<
-				"\"" <<
-				"', line " << fInputLineNumber; // JMI v0.9.64
+      s <<
+        "attempt at prepending clef " <<
+        clef->asShortString () <<
+        " to segment " <<
+        this->asString () <<
+        " which is not a measure nor a full-bar rest" <<
+        ", in voice \"" <<
+        fSegmentVoiceUpLink->getVoiceName () <<
+        "\"" <<
+        "', line " << fInputLineNumber; // JMI v0.9.64
 
-			msrInternalError ( // JMI v0.9.64 ???
-				gGlobalServiceRunData->getInputSourceName (),
-				fInputLineNumber,
-				__FILE__, __LINE__,
-				s.str ());
-		}
-	}
+      msrInternalError ( // JMI v0.9.64 ???
+        gGlobalServiceRunData->getInputSourceName (),
+        fInputLineNumber,
+        __FILE__, __LINE__,
+        s.str ());
+    }
+  }
 
 
 //   if (segmentElementsListFirstElement == fSegmentFirstMeasure) {
@@ -867,7 +867,7 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
       fInputLineNumber,
       __FILE__, __LINE__,
       s.str ());
-	}
+  }
 
 //   fSegmentMeasuresFlatList.front ()-> JMI v0.9.64
 //     appendClefToMeasure (clef);

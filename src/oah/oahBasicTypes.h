@@ -21,8 +21,6 @@
 
 #include "mfcBasicTypes.h"
 
-#include "oahBasicTypes.h"
-
 #include "mfServiceRunData.h"
 #include "mfIndentedTextOutput.h"
 
@@ -372,7 +370,7 @@ ostream& operator<< (ostream& os, oahHandlerUsedThruKind& elt);
 class oahPrefix;
 typedef SMARTP<oahPrefix> S_oahPrefix;
 
-class EXP oahPrefix : public smartable
+class EXP oahPrefix : public oahFindableElement
 /*
 An options prefix 'trace' --> 'trace-' allows:
   -trace=abc,def,gh
@@ -423,10 +421,10 @@ to be developped into :
 
     string                fetchPrefixNames () const;
 
-    void                  findStringInPrefix (
-                            const string& lowerCaseString,
-                            list<string>& foundStringsList,
-                            ostream&      os) const;
+    Bool                  findStringInFindableElement (
+                            const string&               lowerCaseString,
+                            list<S_oahFindStringMatch>& foundMatchesList,
+                            ostream&                    os) const override;
 
   public:
 
@@ -443,15 +441,14 @@ to be developped into :
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    string                asString () const override;
 
     void                  printPrefixHeader (ostream& os) const;
 
     virtual void          printPrefixEssentials (
-                            ostream& os,
-                            int fieldWidth) const;
+                            ostream& os) const;
 
-    virtual void          print (ostream& os) const;
+    void                  print (ostream& os) const override;
     virtual void          printShort (ostream& os) const;
 
     virtual void          printHelp (ostream& os) const;
@@ -556,9 +553,9 @@ class EXP oahAtom : public oahElement
     void                  printSummary (ostream& os) const;
 
     virtual Bool          findStringInAtom (
-                            const string& lowerCaseString,
-                            list<string>& foundStringsList,
-                            ostream&      os) const;
+                            const string&               lowerCaseString,
+                            list<S_oahFindStringMatch>& foundMatchesList,
+                            ostream&                    os) const;
 
     virtual void          printAtomWithVariableOptionsValues (
                             ostream& os,
@@ -833,9 +830,9 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
                             int      valueFieldWidth) const override;
 
     Bool                  findStringInAtom (
-                            const string& lowerCaseString,
-                            list<string>& foundStringsList,
-                            ostream&      os) const override;
+                            const string&               lowerCaseString,
+                            list<S_oahFindStringMatch>& foundMatchesList,
+                            ostream&                    os) const override;
 
     // protected fields
     // ------------------------------------------------------
@@ -1132,9 +1129,9 @@ class EXP oahSubGroup : public oahElement
                             S_oahSubGroup subGroup) const;
 
     Bool                  findStringInSubGroup (
-                            const string& lowerCaseString,
-                            list<string>& foundStringsList,
-                            ostream&      os) const;
+                            const string&               lowerCaseString,
+                            list<S_oahFindStringMatch>& foundMatchesList,
+                            ostream&                    os) const;
 
     void                  printSubGroupOptionsValues (
                             ostream& os,
@@ -1342,9 +1339,9 @@ class EXP oahGroup : public oahElement
                             S_oahSubGroup subGroup) const;
 
     void                  findStringInGroup (
-                            const string& lowerCaseString,
-                            list<string>& foundStringsList,
-                            ostream&      os) const;
+                            const string&               lowerCaseString,
+                            list<S_oahFindStringMatch>& foundMatchesList,
+                            ostream&                    os) const;
 
     void                  printGroupOptionsValues (
                             ostream& os,
@@ -1396,7 +1393,7 @@ typedef SMARTP<oahGroup> S_oahGroup;
 EXP ostream& operator<< (ostream& os, const S_oahGroup& elt);
 
 //_______________________________________________________________________________
-class EXP oahHandler : public smartable
+class EXP oahHandler : public oahFindableElement
 {
   public:
 
@@ -1629,7 +1626,7 @@ class EXP oahHandler : public smartable
 
 //     void                  displayArgumentsVector (ostream& os) const;
 
-    void                  print (ostream& os) const;
+    void                  print (ostream& os) const override;
     void                  printShort (ostream& os) const;
     void                  printSummary (ostream& os) const;
 
@@ -1647,10 +1644,10 @@ class EXP oahHandler : public smartable
                             ostream&      os,
                             const string& name);
 
-    void                  findStringInHandler (
-                            const string& lowerCaseString,
-                            list<string>& foundStringsList,
-                            ostream&      os) const;
+    Bool                  findStringInFindableElement (
+                            const string&               lowerCaseString,
+                            list<S_oahFindStringMatch>& foundMatchesList,
+                            ostream&                    os) const override;
 
     void                  includeOptionsFileInHandler (
                             const string& optionsFileName,

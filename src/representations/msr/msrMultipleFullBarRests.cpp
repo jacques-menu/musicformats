@@ -132,14 +132,14 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
 
 rational msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes () const
 {
-	rational result;
+  rational result;
 
   for (S_msrMeasure measure : fFullBarRestsMeasuresList) {
     result +=
-    	measure->getFullMeasureWholeNotesDuration ();
+      measure->getFullMeasureWholeNotesDuration ();
   } // for
 
-	return result;
+  return result;
 }
 
 void msrMultipleFullBarRests::setMultipleFullBarRestsNextMeasureNumber (

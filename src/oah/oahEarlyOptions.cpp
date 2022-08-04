@@ -431,8 +431,8 @@ void oahEarlyOptions::applyEarlyOptionsIfPresentInArgcArgv (
 {
   string serviceName = argv [0];
 
-	for (int i = 1; i < argc; ++i) {
-	  string argumentAsString = string (argv [i]);
+  for (int i = 1; i < argc; ++i) {
+    string argumentAsString = string (argv [i]);
 
     Bool   argumentIsAnOption;
     string argumentWithoutDash;

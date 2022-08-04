@@ -18,12 +18,11 @@
   #include "tracingOah.h"
 #endif
 
-
-
 #include "mfStringsHandling.h"
 
-
 #include "oahOah.h"
+
+#include "oahEarlyOptions.h"
 
 #include "oahElements.h"
 
@@ -102,6 +101,79 @@ string elementHelpOnlyKindAsString (
   } // switch
 
   return result;
+}
+
+//______________________________________________________________________________
+S_oahFindStringMatch oahFindStringMatch::create (
+	const string&        foundString,
+	S_oahFindableElement containingFindableElement)
+{
+  oahFindStringMatch* o = new
+    oahFindStringMatch (
+      foundString,
+      containingFindableElement);
+  assert (o != nullptr);
+  return o;
+}
+
+oahFindStringMatch::oahFindStringMatch (
+	const string&        foundString,
+	S_oahFindableElement containingFindableElement)
+    : fFoundString (foundString),
+      fContainingFindableElement (containingFindableElement)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    gLogStream <<
+      "Creating oahFindStringMatch" <<
+      ", fFoundString: " << fFoundString <<
+      ", fContainingFindableElement: " <<
+      fContainingFindableElement->asString () <<
+      endl;
+  }
+#endif
+}
+
+oahFindStringMatch::~oahFindStringMatch ()
+{}
+
+void oahFindStringMatch::print (ostream& os) const
+{
+  os <<
+    "oahFindStringMatch:" <<
+    endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 22;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fFoundString" << " : " << fFoundString <<
+    endl <<
+    setw (fieldWidth) <<
+    "fContainingFindableElement" << " : " << fContainingFindableElement <<
+    endl;
+
+  --gIndenter;
+}
+
+ostream& operator<< (ostream& os, const S_oahFindStringMatch& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
+  return os;
+}
+
+ostream& operator<< (ostream& os, const oahFindStringMatch& elt)
+{
+  elt.print (os);
+  return os;
 }
 
 //______________________________________________________________________________
@@ -297,52 +369,6 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
   return s.str ();
 }
 
-Bool oahElement::findStringInElement (
-  const string& lowerCaseString,
-  list<string>& foundStringsList,
-  ostream&      os) const
-{
-  Bool result;
-
-  // does this element's long name match?
-  Bool longNameMatches =
-    mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
-
-  // does this element's short name match?
-  Bool shortNameMatches =
-    mfStringToLowerCase (fShortName).find (lowerCaseString) != string::npos;
-
-  // does this element's description match?
-  Bool descriptionMatches =
-    mfStringToLowerCase (fDescription).find (lowerCaseString) != string::npos;
-
-  if (shortNameMatches || longNameMatches || descriptionMatches) {
-    stringstream s;
-
-    // add the element's names
-    s <<
-      fetchNames () <<
-      endl;
-
-    // indent a bit more for readability
-    gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
-    // add the element's description
-    s <<
-      gIndenter.indentMultiLineString (
-        fDescription);
-
-    gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
-    // append the string
-    foundStringsList.push_back (s.str ());
-
-    result = true;
-  }
-
-  return result;
-}
-
 void oahElement::acceptIn (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
@@ -404,6 +430,54 @@ void oahElement::browseData (basevisitor* v)
       endl;
   }
 #endif
+}
+
+Bool oahElement::findStringInFindableElement (
+  const string&               lowerCaseString,
+  list<S_oahFindStringMatch>& foundMatchesList,
+  ostream&                    os) const
+{
+  Bool result;
+
+  // does this element's long name match?
+  Bool longNameMatches =
+    mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
+
+  // does this element's short name match?
+  Bool shortNameMatches =
+    mfStringToLowerCase (fShortName).find (lowerCaseString) != string::npos;
+
+  // does this element's description match?
+  Bool descriptionMatches =
+    mfStringToLowerCase (fDescription).find (lowerCaseString) != string::npos;
+
+  if (shortNameMatches || longNameMatches || descriptionMatches) {
+    stringstream s;
+
+    // add the element's names
+    s <<
+      fetchNames () <<
+      endl;
+
+    // indent a bit more for readability
+    gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
+
+    // add the element's description
+    s <<
+      gIndenter.indentMultiLineString (
+        fDescription);
+
+    gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+
+    // append the match to foundStringsList
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        s.str (), this));
+
+    result = true;
+  }
+
+  return result;
 }
 
 string oahElement::asLongNamedOptionString () const
@@ -575,10 +649,15 @@ ostream& operator<< (ostream& os, const S_oahElement& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
+ostream& operator<< (ostream& os, const oahElement& elt)
+{
+  elt.print (os);
+  return os;
+}
 //______________________________________________________________________________
 bool compareOahElements::operator() (
   const S_oahElement firstElement,
@@ -611,6 +690,46 @@ bool compareOahElements::operator() (
   }
 
   return result;
+}
+
+//______________________________________________________________________________
+/* this class is purely virtual
+S_oahFindableElement oahFindableElement::create ()
+{
+  oahFindableElement* o =
+    new oahFindableElement ();
+  assert (o != nullptr);
+  return o;
+}
+*/
+
+oahFindableElement::oahFindableElement ()
+{}
+
+oahFindableElement::~oahFindableElement ()
+{}
+
+void oahFindableElement::print (ostream& os) const
+{
+  os << asString () << endl;
+}
+
+ostream& operator<< (ostream& os, const S_oahFindableElement& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
+  return os;
+}
+
+ostream& operator<< (ostream& os, const oahFindableElement& elt)
+{
+  elt.print (os);
+  return os;
 }
 
 //______________________________________________________________________________
@@ -675,7 +794,7 @@ ostream& operator<< (ostream& os, const S_oahElementUse& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

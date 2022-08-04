@@ -259,6 +259,16 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
 }
 
 //______________________________________________________________________________
+string oahRegularHandler::asString () const
+{
+  stringstream s;
+
+  s <<
+    "oahRegularHandler \"" << fHandlerHeader; // JMI v0.9.65
+
+  return s.str ();
+}
+
 void oahRegularHandler::print (ostream& os) const
 {
   const int fieldWidth = 27;
@@ -322,7 +332,7 @@ ostream& operator<< (ostream& os, const S_oahRegularHandler& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

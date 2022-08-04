@@ -289,11 +289,12 @@ class EXP msrNote : public msrTupletElement
     msrOctaveKind         getNoteOctaveKind () const
                               { return fNoteOctaveKind; }
 
-    // note print kind
+    // note print object kind
 
     void                  setNotePrintObjectKind (
                             msrPrintObjectKind notePrintObjectKind)
                               { fNotePrintObjectKind = notePrintObjectKind; }
+
     msrPrintObjectKind    getNotePrintObjectKind () const
                               { return fNotePrintObjectKind; }
 
@@ -1034,7 +1035,7 @@ class EXP msrNote : public msrTupletElement
     // note octave shift
     S_msrOctaveShift      fNoteOctaveShift;
 
-    // note print kind
+    // note print object kind
     msrPrintObjectKind    fNotePrintObjectKind;
 
     // note head

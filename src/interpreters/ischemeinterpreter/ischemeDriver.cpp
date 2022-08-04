@@ -56,7 +56,7 @@ ischemeDriver::ischemeDriver ()
       gLogStream << "Reading standard input" << endl;
     }
 #endif
-	}
+  }
 
   else {
     // iScheme data comes from a file
@@ -67,7 +67,7 @@ ischemeDriver::ischemeDriver ()
         endl;
     }
 #endif
-	}
+  }
 
   // get the options values as bool,
   // since Bool is unknown to Flex and Bison-generated code
@@ -868,7 +868,7 @@ mfMusicformatsError ischemeDriver::launchIschemeTool_Pass2 ()
     } // for
   }
 
-	return result;
+  return result;
 }
 
 Bool ischemeDriver::applySelectOptionsFinally ()

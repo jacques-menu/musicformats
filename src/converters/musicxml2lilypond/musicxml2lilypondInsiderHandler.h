@@ -92,15 +92,15 @@ class EXP xml2lyInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const;
+    void                  print (ostream& os) const override;
 
   private:
 
     // private methods
     // ------------------------------------------------------
 
-    string               usageFromUsedThruKind (
-                           oahHandlerUsedThruKind handlerUsedThruKind) const;
+    string                usageFromUsedThruKind (
+                            oahHandlerUsedThruKind handlerUsedThruKind) const;
   private:
 
     // private fields

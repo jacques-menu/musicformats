@@ -60,16 +60,16 @@ enum class msdlKeywordKind {
   kKeywordComposer,
   kKeywordOpus,
 
-	kKeywordPitches,
-	kKeywordOctaves,
+  kKeywordPitches,
+  kKeywordOctaves,
 
   kKeywordAnacrusis,
 
-	kKeywordBook,
-	kKeywordScore,
-	kKeywordPartGroup,
-	kKeywordPart,
-	kKeywordMusic,
+  kKeywordBook,
+  kKeywordScore,
+  kKeywordPartGroup,
+  kKeywordPart,
+  kKeywordMusic,
   kKeywordFragment,
 
   kKeywordClef,

@@ -64,7 +64,7 @@ static void _sigaction(int signal, siginfo_t *si, void *arg)
 
 static void catchSignals ()
 {
-	struct sigaction sa;
+  struct sigaction sa;
 
   memset (&sa, 0, sizeof(struct sigaction));
 
@@ -79,7 +79,7 @@ static void catchSignals ()
 }
 
 #else
-static void catchSignals ()	{}
+static void catchSignals ()  {}
 #endif
 
 //_______________________________________________________________________________
@@ -88,7 +88,7 @@ int main (int argc, char* argv[])
   // setup signals catching
   // ------------------------------------------------------
 
-	catchSignals ();
+  catchSignals ();
 
   // fetch service name
   string serviceName = argv [0];

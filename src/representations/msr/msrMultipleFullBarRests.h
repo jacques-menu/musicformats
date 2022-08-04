@@ -74,8 +74,8 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
                               { return fMultipleFullBarRestsNumber; }
 
     const list<S_msrMeasure>&
-    									    getFullBarRestsMeasuresList () const
-    									    		{ return fFullBarRestsMeasuresList; }
+                          getFullBarRestsMeasuresList () const
+                              { return fFullBarRestsMeasuresList; }
 
     void                  setMultipleFullBarRestsNextMeasureNumber (
                             const string& nextMeasureNumber);
@@ -90,8 +90,8 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
                               { return fMultipleFullBarRestsLastMeasurePuristNumber; }
 
     rational              fetchMultipleFullBarRestsMeasureSoundingNotes () const;
-														// don't simply multiply duration by number,
-														// may help pin-point errors in representation
+                            // don't simply multiply duration by number,
+                            // may help pin-point errors in representation
   public:
 
     // public services

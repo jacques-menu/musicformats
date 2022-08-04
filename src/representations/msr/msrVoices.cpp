@@ -1395,10 +1395,10 @@ S_msrMeasure msrVoice::createAMeasureAndAppendItToVoice (
         measureNumber,
         fVoiceLastSegment); // JMI KAKA  v0.9.63 ???
 
-		// set result's ordinal number
-		result->
-			setMeasureOrdinalNumberInVoice (
-				incrementVoiceCurrentMeasureOrdinalNumber ());
+    // set result's ordinal number
+    result->
+      setMeasureOrdinalNumberInVoice (
+        incrementVoiceCurrentMeasureOrdinalNumber ());
 
     // append it to the current multiple full-bar rests
 #ifdef TRACING_IS_ENABLED

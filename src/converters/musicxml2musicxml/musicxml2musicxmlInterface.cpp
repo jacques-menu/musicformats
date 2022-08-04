@@ -310,10 +310,10 @@ static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
   std::ostream&           out,
   std::ostream&           err)
 {
-	Sxmlelement st;
+  Sxmlelement st;
 
-	if (sxmlfile) {
-	  st = sxmlfile->elements ();
+  if (sxmlfile) {
+    st = sxmlfile->elements ();
 
     if (st) {
       if (st->getName () == "score-timewise")
@@ -321,7 +321,7 @@ static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
     }
   }
 
-	else {
+  else {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
   err <<
@@ -331,7 +331,7 @@ static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
 #endif
 
     return mfMusicformatsError::kErrorInvalidFile;
-	}
+  }
 
   // the service name
   // ------------------------------------------------------
@@ -348,7 +348,7 @@ static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
 
   createTheGlobalIndentedOstreams (out, err);
 
-	// print the options and arguments
+  // print the options and arguments
   // ------------------------------------------------------
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
@@ -475,23 +475,23 @@ EXP mfMusicformatsError musicxmlFile2musicxml (
   std::ostream&           out,
   std::ostream&           err)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFile (
-	      fileName,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML file");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFile (
+        fileName,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML file");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2musicxmlWithOptionsAndArguments (
+  if (sxmlfile) {
+    return
+      xmlFile2musicxmlWithOptionsAndArguments (
         sxmlfile,
         handlerOptionsAndArguments,
         out,
         err);
-	}
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMusicxmlFile2musicxmlWithHandler (
@@ -500,23 +500,23 @@ mfMusicformatsError convertMusicxmlFile2musicxmlWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFile (
-	      fileName,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML file");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFile (
+        fileName,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML file");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2musicxmlWithHandler (
-		    sxmlfile,
-		    out,
-		    err,
-		    handler);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2musicxmlWithHandler (
+        sxmlfile,
+        out,
+        err,
+        handler);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
@@ -526,23 +526,23 @@ EXP mfMusicformatsError musicxmlFd2musicxml (
   std::ostream&           out,
   std::ostream&           err)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFd (
-	      fd,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML descriptor");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFd (
+        fd,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML descriptor");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2musicxmlWithOptionsAndArguments (
+  if (sxmlfile) {
+    return
+      xmlFile2musicxmlWithOptionsAndArguments (
         sxmlfile,
         handlerOptionsAndArguments,
         out,
         err);
-	}
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMusicxmlFd2musicxmlWithHandler (
@@ -551,23 +551,23 @@ mfMusicformatsError convertMusicxmlFd2musicxmlWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromFd (
-	      fd,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML descriptor");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromFd (
+        fd,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML descriptor");
 
-	if (sxmlfile) {
-		return
-		  xmlFile2musicxmlWithHandler (
-		    sxmlfile,
-		    out,
-		    err,
-		    handler);
-	}
+  if (sxmlfile) {
+    return
+      xmlFile2musicxmlWithHandler (
+        sxmlfile,
+        out,
+        err,
+        handler);
+  }
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
@@ -577,15 +577,15 @@ EXP mfMusicformatsError musicxmlString2musicxml (
   std::ostream&           out,
   std::ostream&           err)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromString (
-	      buffer,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML buffer");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromString (
+        buffer,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML buffer");
 
-	// call xmlFile2musicxml() even if sxmlfile is null,
-	// to handle the help options if any
+  // call xmlFile2musicxml() even if sxmlfile is null,
+  // to handle the help options if any
   return
     xmlFile2musicxmlWithOptionsAndArguments (
       sxmlfile,
@@ -593,7 +593,7 @@ EXP mfMusicformatsError musicxmlString2musicxml (
       out,
       err);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 mfMusicformatsError convertMusicxmlString2musicxmlWithHandler (
@@ -602,15 +602,15 @@ mfMusicformatsError convertMusicxmlString2musicxmlWithHandler (
   ostream&     err,
   S_oahHandler handler)
 {
-	SXMLFile
-	  sxmlfile =
-	    createSXMLFileFromString (
-	      buffer,
-	      "Pass 1",
-	      "Create an MXSR reading a MusicXML buffer");
+  SXMLFile
+    sxmlfile =
+      createSXMLFileFromString (
+        buffer,
+        "Pass 1",
+        "Create an MXSR reading a MusicXML buffer");
 
-	// call xmlFile2musicxml() even if sxmlfile is null,
-	// to handle the help options if any
+  // call xmlFile2musicxml() even if sxmlfile is null,
+  // to handle the help options if any
   return
     xmlFile2musicxmlWithHandler (
       sxmlfile,
@@ -618,7 +618,7 @@ mfMusicformatsError convertMusicxmlString2musicxmlWithHandler (
       err,
       handler);
 
-	return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsError::kErrorInvalidFile;
 }
 
 

@@ -296,7 +296,7 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
     }
   }
 
-	return mfMusicformatsError::k_NoError;
+  return mfMusicformatsError::k_NoError;
 }
 
 

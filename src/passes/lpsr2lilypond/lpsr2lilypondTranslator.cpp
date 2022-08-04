@@ -3438,7 +3438,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
         endl;
       break;
     case msrArticulation::kSpiccato:
-    	// does not exist in LilyPond, generate staccatissimo instead JMI v0.9.64
+      // does not exist in LilyPond, generate staccatissimo instead JMI v0.9.64
       fLilypondCodeStream <<
         "! %{ spiccato %}";
       break;
@@ -18082,8 +18082,9 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               gGlobalLpsr2lilypondOahGroup->
                 getNonPrintNotesHeadRGBColorAtom ();
 
-          // has the note color been set?
+          // has the note color been set? // JMI v0.9.65
           if (nonPrintNotesHeadRGBColorAtom->getSetByAnOption ()) {
+            // yes
             const msrRGBColor&
               theRGBColor =
                 gGlobalLpsr2lilypondOahGroup->
@@ -18097,17 +18098,21 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
               endl;
           }
           else {
-            if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
-              fLilypondCodeStream <<
-                "%{ " <<
-                gGlobalServiceRunData->getInputSourceName () <<
-                ":" <<
-                inputLineNumber <<
-                ": " <<
-                "ignoring 'msrPrintObjectKind::kPrintObjectNo'" <<
-                " %}" <<
-                endl;
-            }
+            // no
+//             if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
+//               fLilypondCodeStream <<
+//                 "%{ " <<
+//                 gGlobalServiceRunData->getInputSourceName () <<
+//                 ":" <<
+//                 inputLineNumber <<
+//                 ": " <<
+//                 "ignoring 'msrPrintObjectKind::kPrintObjectNo'" <<
+//                 " %}" <<
+//                 endl;
+//             }
+
+            fLilypondCodeStream <<
+              "\\once\\hide NoteHead \\once\\hide Stem ";
           }
         }
         break;
@@ -23541,13 +23546,13 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
     elt->getMultipleFullBarRestsNumber ();
 
 #ifdef TRACING_IS_ENABLED
-	if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-		gLogStream <<
-			endl <<
-			"--> fRemainingMultipleFullBarRestsNumber: " <<
-			fRemainingMultipleFullBarRestsNumber <<
-			endl;
-	}
+  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+    gLogStream <<
+      endl <<
+      "--> fRemainingMultipleFullBarRestsNumber: " <<
+      fRemainingMultipleFullBarRestsNumber <<
+      endl;
+  }
 #endif
 
   // get multiple full-bar rests sounding notes JMI USELESS v0.9.63
@@ -23556,36 +23561,36 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
       elt->fetchMultipleFullBarRestsMeasureSoundingNotes ();
 
 #ifdef TRACING_IS_ENABLED
-	if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-		gLogStream <<
-			endl <<
-			"--> multipleFullBarRestsMeasureSoundingNotes: " <<
-			multipleFullBarRestsMeasureSoundingNotes <<
-			endl;
-	}
+  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+    gLogStream <<
+      endl <<
+      "--> multipleFullBarRestsMeasureSoundingNotes: " <<
+      multipleFullBarRestsMeasureSoundingNotes <<
+      endl;
+  }
 #endif
 
   // generate multiple full-bar rests only now, in case there are
   // clef, keys or times before them in the first measure
   string
-  	fullBarRestsWholeNoteAsLilypondString =
-			multipleFullBarRestsWholeNoteAsLilypondString (
-				inputLineNumber,
-				multipleFullBarRestsMeasureSoundingNotes);
+    fullBarRestsWholeNoteAsLilypondString =
+      multipleFullBarRestsWholeNoteAsLilypondString (
+        inputLineNumber,
+        multipleFullBarRestsMeasureSoundingNotes);
 
 #ifdef TRACING_IS_ENABLED
-	if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
-		gLogStream <<
-			endl <<
-			"--> fullBarRestsWholeNoteAsLilypondString: " <<
-			fullBarRestsWholeNoteAsLilypondString <<
-			endl;
-	}
+  if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
+    gLogStream <<
+      endl <<
+      "--> fullBarRestsWholeNoteAsLilypondString: " <<
+      fullBarRestsWholeNoteAsLilypondString <<
+      endl;
+  }
 #endif
 
   fLilypondCodeStream <<
     "R" <<
-		fullBarRestsWholeNoteAsLilypondString;
+    fullBarRestsWholeNoteAsLilypondString;
 
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate information and line number as a comment

@@ -23,7 +23,7 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP oahVisitor : public smartable,
 
-	public visitor<S_oahHandler>
+  public visitor<S_oahHandler>
 
 {
   public:

@@ -126,16 +126,28 @@
   \vspace{1cm}
 
 
-\mf\ is open source software, available with source code and documentation at \url{https://github.com/jacques-menu/musicformats}. It is written in \CPlusplus\ and provides a set of music scores representations and converters between various textual music scores formats. Building it only requires a \CPlusplus\ compiler and \cmake.
+\mf\ is about creating \MainIt{representations} of music scores and providing \MainIt{automatic conversions} between them. For example, to convert a \mxml\ file into a \lily\ file, one can use:
 
-This document shows how to use the \mf\ library, both from the \CLI\ and from within applications. It is part of the \mf\ documentation, and can be found at \gitdocpdf{MusicFormatsUserGuide}{MusicFormatsUserGuide.pdf}.
+\begin{center}
+\maxsizebox{0.975\linewidth}{5cm}{
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[language=Terminal]
+xml2ly MinimalScore.xml -o MinimalScore.ly
+\end{lstlisting}
+\end{minipage}
+}
+\end{center}
+There are many options such as \code{-o} above to tailor the tools to the user's needs. \\
+\includegraphics[scale=.8]{../graphics/MinimalScore.png}
 
-\mf\ can be used from the \CLI\ on Linux, Windows and Mac OS. The \API\ also allows it to be used from applications, including in \Web\ sites.
+\mf\ is open source software, available with source code and documentation at \url{https://github.com/jacques-menu/musicformats}. It is written in \CPlusplus, and can be used from the \CLI\ on Linux, Windows and Mac OS. It can also be used within applications, including in \Web\ sites.
 
+This document shows how to use the \mf\ library, both from the \CLI\ and from within applications. 
+It can be found at \url{https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf}.
 
-  \begin{center}
+\begin{center}
 \begin{turn}{1}
-\maxsizebox{0.9\linewidth}{5cm}{
+\maxsizebox{0.9125\linewidth}{5cm}{
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini > xml2ly -about
@@ -158,18 +170,11 @@ What xml2ly does:
     displaying views of the internal data or printing a summary of the score.
 
     The activity log and warning/error messages go to standard error.
-}\end{lstlisting} % no line break here
+\end{lstlisting} % no line break here
 \end{minipage}
 }
 \end{turn}
-
-    \vspace{.5cm}
-
-\includegraphics[scale=1.0]{../graphics/MinimalScore.png}
-
-  \vfill
-
-  \end{center}
+\end{center}
 \end{titlepage}
 
 % -------------------------------------------------------------------------
