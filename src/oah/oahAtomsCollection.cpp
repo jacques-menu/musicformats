@@ -10432,7 +10432,7 @@ void oahFindStringAtom::applyAtomWithValue (
 
   // delegate this to the handler
   fetchAtomHandlerUpLink ()->
-    findStringInHandler (
+    findStringInFindableElement (
       mfStringToLowerCase (theString),
       foundMatchesList,
       os);

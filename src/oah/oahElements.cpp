@@ -470,9 +470,9 @@ Bool oahElement::findStringInFindableElement (
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
     // append the match to foundStringsList
-    foundMatchesList.push_back (
-      oahFindStringMatch::create (
-        s.str (), this));
+//     foundMatchesList.push_back (
+//       oahFindStringMatch::create (
+//         s.str (), this));
 
     result = true;
   }
