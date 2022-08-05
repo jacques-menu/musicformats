@@ -135,6 +135,8 @@ int main (int argc, char* argv[])
 
   createTheGlobalIndentedOstreams (cout, cerr);
 
+  gLogStream << "sizeof S_oahHandler: " << S_oahHandler << endl;
+
 // JMI  msrMoment::testMsrMomentComparisons (cerr); // BLARK CLAR
 
 // JMI testBool ();

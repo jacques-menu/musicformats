@@ -190,7 +190,7 @@ class oahFindStringMatch : public smartable
     // protected fields
     // ------------------------------------------------------
 
-    const string&         fFoundString;
+    string			          fFoundString;
     S_oahFindableElement  fContainingFindableElement;
 };
 typedef SMARTP<oahFindStringMatch> S_oahFindStringMatch;
