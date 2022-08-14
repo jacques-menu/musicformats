@@ -1393,7 +1393,7 @@ typedef SMARTP<oahGroup> S_oahGroup;
 EXP ostream& operator<< (ostream& os, const S_oahGroup& elt);
 
 //_______________________________________________________________________________
-class EXP oahHandler : public oahFindableElement
+class EXP oahHandler : public oahElement
 {
   public:
 
@@ -1597,10 +1597,10 @@ class EXP oahHandler : public oahFindableElement
     // visitors
     // ------------------------------------------------------
 
-    virtual void          acceptIn  (basevisitor* v);
-    virtual void          acceptOut (basevisitor* v);
+    virtual void          acceptIn  (basevisitor* v) override;
+    virtual void          acceptOut (basevisitor* v) override;
 
-    virtual void          browseData (basevisitor* v);
+    virtual void          browseData (basevisitor* v) override;
 
   public:
 
@@ -1624,13 +1624,14 @@ class EXP oahHandler : public oahFindableElement
 
     void                  displayOptionsAndArguments (ostream& os) const;
 
-//     void                  displayArgumentsVector (ostream& os) const;
+//     void                  displayArgumentsVector (ostream& os) const; JMI v0.9.65
 
     void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const;
+    void                  printShort (ostream& os) const override;
+
     void                  printSummary (ostream& os) const;
 
-    void                  printHelp (ostream& os) const;
+    void                  printHelp (ostream& os) const override;
 
     void                  printOptionsSummary (ostream& os) const;
     void                  printOptionsSummary () const
