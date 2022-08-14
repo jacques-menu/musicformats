@@ -369,68 +369,68 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
   return s.str ();
 }
 
-void oahElement::acceptIn (basevisitor* v)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
-      ".\\\" ==> oahElement::acceptIn ()" <<
-      endl;
-  }
-#endif
-
-  if (visitor<S_oahElement>*
-    p =
-      dynamic_cast<visitor<S_oahElement>*> (v)) {
-        S_oahElement elem = this;
-
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
-            ".\\\" ==> Launching oahElement::visitStart ()" <<
-            endl;
-        }
-#endif
-        p->visitStart (elem);
-  }
-}
-
-void oahElement::acceptOut (basevisitor* v)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
-      ".\\\" ==> oahElement::acceptOut ()" <<
-      endl;
-  }
-#endif
-
-  if (visitor<S_oahElement>*
-    p =
-      dynamic_cast<visitor<S_oahElement>*> (v)) {
-        S_oahElement elem = this;
-
-#ifdef TRACING_IS_ENABLED
-        if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-          gLogStream <<
-            ".\\\" ==> Launching oahElement::visitEnd ()" <<
-            endl;
-        }
-#endif
-        p->visitEnd (elem);
-  }
-}
-
-void oahElement::browseData (basevisitor* v)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
-    gLogStream <<
-      ".\\\" ==> oahElement::browseData ()" <<
-      endl;
-  }
-#endif
-}
+// void oahElement::acceptIn (basevisitor* v)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//     gLogStream <<
+//       ".\\\" ==> oahElement::acceptIn ()" <<
+//       endl;
+//   }
+// #endif
+//
+//   if (visitor<S_oahElement>*
+//     p =
+//       dynamic_cast<visitor<S_oahElement>*> (v)) {
+//         S_oahElement elem = this;
+//
+// #ifdef TRACING_IS_ENABLED
+//         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//           gLogStream <<
+//             ".\\\" ==> Launching oahElement::visitStart ()" <<
+//             endl;
+//         }
+// #endif
+//         p->visitStart (elem);
+//   }
+// }
+//
+// void oahElement::acceptOut (basevisitor* v)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//     gLogStream <<
+//       ".\\\" ==> oahElement::acceptOut ()" <<
+//       endl;
+//   }
+// #endif
+//
+//   if (visitor<S_oahElement>*
+//     p =
+//       dynamic_cast<visitor<S_oahElement>*> (v)) {
+//         S_oahElement elem = this;
+//
+// #ifdef TRACING_IS_ENABLED
+//         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//           gLogStream <<
+//             ".\\\" ==> Launching oahElement::visitEnd ()" <<
+//             endl;
+//         }
+// #endif
+//         p->visitEnd (elem);
+//   }
+// }
+//
+// void oahElement::browseData (basevisitor* v)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
+//     gLogStream <<
+//       ".\\\" ==> oahElement::browseData ()" <<
+//       endl;
+//   }
+// #endif
+// }
 
 Bool oahElement::findStringInFindableElement (
   const string&               lowerCaseString,
