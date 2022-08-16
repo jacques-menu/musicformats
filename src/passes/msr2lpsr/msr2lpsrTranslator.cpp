@@ -1292,8 +1292,10 @@ void msr2lpsrTranslator::visitStart (S_msrCredit& elt)
     getMsrScore ()->
       appendCreditToScore (fCurrentCredit);
 
+	/* this variable is not used yet
   int
     creditPageNumber = elt->getCreditPageNumber ();
+	*/
 
   msrCreditTypeKind
     creditTypeKind = elt->getCreditTypeKind ();
@@ -1361,49 +1363,52 @@ void msr2lpsrTranslator::visitStart (S_msrCreditWords& elt)
       elt);
       */
 
+	/* the following variables are for further use:
+
     string
       creditWordsContents =
         elt->getCreditWordsContents ();
 
     float
-      creditWordsWordsDefaultX =
+      creditWordsDefaultX =
         elt->getCreditWordsDefaultX ();
 
     float
-      creditWordsWordsDefaultY =
+      creditWordsDefaultY =
         elt-> getCreditWordsDefaultY ();
 
     string
-      creditWordsWordsFontFamily =
+      creditWordsFontFamily =
         elt->getCreditWordsFontFamily ();
 
     float
-      creditWordsWordsFontSize =
+      creditWordsFontSize =
         elt->getCreditWordsFontSize ();
 
     msrFontWeightKind
-      creditWordsWordsFontWeightKind =
+      creditWordsFontWeightKind =
         elt->getCreditWordsFontWeightKind ();
 
     msrFontStyleKind
-      creditWordsWordsFontStyleKind =
+      creditWordsFontStyleKind =
         elt->getCreditWordsFontStyleKind ();
 
     msrJustifyKind
-      creditWordsWordsJustifyKind =
+      creditWordsJustifyKind =
         elt->getCreditWordsJustifyKind ();
 
     msrHorizontalAlignmentKind
-      creditWordsWordsHorizontalAlignmentKind =
+      creditWordsHorizontalAlignmentKind =
          elt->getCreditWordsHorizontalAlignmentKind ();
 
     msrVerticalAlignmentKind
-      creditWordsWordsVerticalAlignmentKind =
+      creditWordsVerticalAlignmentKind =
          elt->getCreditWordsVerticalAlignmentKind ();
 
     msrXMLLangKind
-      creditWordsWordsXMLLang =
+      creditWordsXMLLang =
         elt->getCreditWordsXMLLang ();
+	*/
 }
 
 void msr2lpsrTranslator::visitEnd (S_msrCreditWords& elt)

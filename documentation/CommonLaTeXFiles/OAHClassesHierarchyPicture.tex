@@ -1,0 +1,230 @@
+\begin{adjustwidth}{0.5 cm}{0.5 cm}
+\begin{figure}[p]
+
+%\floatbox[{\capbeside\thisfloatsetup{capbesideposition={left,top},capbesidewidth=4cm}}]{figure}[\FBwidth]
+
+\caption {The OAH classes hierarchy}
+
+%\begin{sidecaption}[fortoc]{title}[label]
+%the body of the float
+%\end{sidecaption}
+
+\label{The OAH classes hierarchy}
+
+\tt
+
+\begin{center}
+
+
+% The sizes
+% ------------------------------------------------
+
+\def \bendAngle {60}
+
+\def \minimumRectangleHeight {8.5 mm}
+\def \minimumRectangleWidth  {30 mm}
+
+\def \separatorWidth {\minimumRectangleWidth}
+
+\def \roundedCorners {10pt}
+
+
+% -------------------------------------------------------------------------
+\begin{tikzpicture}[
+	%
+	scale=0.45,
+	%
+	>=open triangle 45,
+	%
+	every node/.style={
+  	rounded corners=\roundedCorners,
+  	minimum height=\minimumRectangleHeight,
+  	minimum width=\minimumRectangleWidth,
+  	draw=black
+		}
+	]
+
+% elements positions
+% ------------------------------------------------
+
+\tikzmath{
+	% the absisses
+  \leftColumnAbs        = -4.5 mm;
+  \rightColumnAbs       = -\leftColumnAbs;
+  \middleLeftColumnAbs        = -2.25 mm;
+   \middleRightColumnAbs       = -\middleLeftColumnAbs;
+%
+  % the ordinates
+   \oahFindableElementOrd            = 0 mm;
+  %
+ \oahPrefixOrd  = \oahFindableElementOrd - 1 mm;
+  %
+  \oahElementOrd          = \oahFindableElementOrd -1.5 mm;
+  %
+  \oahHandlerOrd       	       = \oahElementOrd - 1.25 mm;
+  %
+   \oahSubGroupOrd      = \oahElementOrd - 2.5 mm;
+   %
+  \oahGroupOrd            = \oahElementOrd - 2.5 mm;
+   %
+  \oahAtomOrd            = \oahElementOrd - 1.25 mm;
+  %
+  %
+  \oahInsiderHandlerAbs = \leftColumnAbs - 1.6 mm;
+  \oahInsiderHandlerOrd = \oahHandlerOrd - 3 mm;
+  %
+   \oahRegularHandlerAbs = \leftColumnAbs + 1.6 mm;
+  \oahRegularHandlerOrd = \oahInsiderHandlerOrd;
+}
+
+
+
+% The colors
+% ------------------------------------------------
+
+\def \SecondaryRectanglesBackgroundColor {pink!10}
+\def \ElementsRectanglesBackgroundColor  {yellow!10}
+\def \PrimaryRectanglesBackgroundColor   {green!7.5}
+\def \RepeatRectanglesBackgroundColor    {orange!10}
+
+\def \baseClassArcsColor {red}
+\def \usedByClassArcsColor {blue}
+\def \loopsColor {red}
+
+
+
+% The coordinates
+% ------------------------------------------------
+
+\coordinate (oahFindableElement)     at (0,\oahFindableElementOrd);
+
+\coordinate (oahPrefix)     at (\rightColumnAbs,\oahPrefixOrd);
+
+\coordinate (oahElement)   at (0,\oahElementOrd);
+
+\coordinate (oahHandler)          at (\leftColumnAbs,\oahHandlerOrd);
+
+\coordinate (oahGroup)             at (\middleLeftColumnAbs,\oahGroupOrd);
+
+\coordinate (oahSubGroup)     at (\middleRightColumnAbs,\oahSubGroupOrd);
+
+\coordinate (oahAtom)     at (\rightColumnAbs,\oahAtomOrd);
+
+
+\coordinate (oahInsiderHandler)          at (\oahInsiderHandlerAbs,\oahInsiderHandlerOrd);
+\coordinate (oahRegularHandler)         at (\oahRegularHandlerAbs,\oahRegularHandlerOrd);
+
+
+
+% Draw the nodes and arcs
+% ------------------------------------------------
+
+% oahFindableElement
+% ------------------------------------------------
+\node [fill=\ElementsRectanglesBackgroundColor]
+  (oahFindableElement) at (oahFindableElement) {\texttt {oahFindableElement}};
+
+
+% oahPrefix
+% ------------------------------------------------
+\node [fill=\RepeatRectanglesBackgroundColor]
+  (oahPrefix) at (oahPrefix) {\texttt {\textbf {oahPrefix}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(oahPrefix)% ..
+%	controls +(170:5 cm) and +(330:3 cm) ..
+	edge node [draw=none] {}
+  (oahFindableElement);
+
+
+% oahElement
+% ------------------------------------------------
+\node [fill=\ElementsRectanglesBackgroundColor]
+  (oahElement) at (oahElement) {\texttt {oahElement}};
+
+\path [->, thick, \baseClassArcsColor]
+	(oahElement)
+  edge node [draw=none] {}
+	(oahFindableElement);
+
+
+% oahHandler
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (oahHandler) at (oahHandler) {\texttt {\textbf {oahHandler}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(oahHandler) %..
+%	controls +(5:7 cm) and +(190:6.5 cm) ..
+	edge node [draw=none] {}
+  (oahFindableElement);
+
+
+% oahInsiderHandler
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (oahInsiderHandler) at (oahInsiderHandler) {\texttt {\textbf {oahInsiderHandler}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(oahInsiderHandler) %..
+%	controls +(5:7 cm) and +(190:6.5 cm) ..
+	edge node [draw=none] {}
+  (oahHandler);
+
+
+% oahRegularHandler
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (oahRegularHandler) at (oahRegularHandler) {\texttt {\textbf {oahRegularHandler}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(oahRegularHandler) %..
+%	controls +(5:7 cm) and +(190:6.5 cm) ..
+	edge node [draw=none] {}
+  (oahHandler);
+
+
+% oahGroup
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (oahGroup) at (oahGroup) {\texttt {\textbf {oahGroup}}};
+
+\draw [->, thick, \usedByClassArcsColor]
+	(oahGroup)
+	edge node [draw=none] {}
+  (oahElement);
+
+
+% oahSubGroup
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (oahSubGroup) at (oahSubGroup) {\texttt {\textbf {oahSubGroup}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(oahSubGroup) %..
+	edge node [draw=none] {}
+%	controls +(170:6 cm) and +(320:3) ..
+  (oahElement);
+
+
+% oahAtom
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (oahAtom) at (oahAtom) {\texttt {\textbf {oahAtom}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(oahAtom) %..
+%	controls +(170:6 cm) and +(320:3) ..
+	edge node [draw=none] {}
+  (oahElement);
+
+
+% -------------------------------------------------------------------------
+\end{tikzpicture}
+ % -------------------------------------------------------------------------
+
+\end{center}
+
+\end{figure}
+\end{adjustwidth}
+

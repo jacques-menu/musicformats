@@ -105,30 +105,30 @@ string elementHelpOnlyKindAsString (
 
 //______________________________________________________________________________
 S_oahFindStringMatch oahFindStringMatch::create (
-	const string&        foundString,
-	S_oahFindableElement containingFindableElement)
+	const string& foundString,
+	const string& containingFindableElementInfo)
 {
   oahFindStringMatch* o = new
     oahFindStringMatch (
       foundString,
-      containingFindableElement);
+      containingFindableElementInfo);
   assert (o != nullptr);
   return o;
 }
 
 oahFindStringMatch::oahFindStringMatch (
-	const string&        foundString,
-	S_oahFindableElement containingFindableElement)
+	const string& foundString,
+	const string& containingFindableElementInfo)
     : fFoundString (foundString),
-      fContainingFindableElement (containingFindableElement)
+    	fContainingFindableElementInfo (containingFindableElementInfo)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
       "Creating oahFindStringMatch" <<
       ", fFoundString: " << fFoundString <<
-      ", fContainingFindableElement: " <<
-      fContainingFindableElement->asString () <<
+      ", fContainingFindableElementInfo: " <<
+      fContainingFindableElementInfo <<
       endl;
   }
 #endif
@@ -152,7 +152,7 @@ void oahFindStringMatch::print (ostream& os) const
     "fFoundString" << " : " << fFoundString <<
     endl <<
     setw (fieldWidth) <<
-    "fContainingFindableElement" << " : " << fContainingFindableElement <<
+    "fContainingFindableElementInfo" << " : " << fContainingFindableElementInfo <<
     endl;
 
   --gIndenter;
@@ -171,6 +171,52 @@ ostream& operator<< (ostream& os, const S_oahFindStringMatch& elt)
 }
 
 ostream& operator<< (ostream& os, const oahFindStringMatch& elt)
+{
+  elt.print (os);
+  return os;
+}
+
+ostream& operator<< (ostream& os, const oahFindStringMatch* elt)
+{
+  elt->print (os);
+  return os;
+}
+
+//______________________________________________________________________________
+/* this class is purely virtual
+S_oahFindableElement oahFindableElement::create ()
+{
+  oahFindableElement* o =
+    new oahFindableElement ();
+  assert (o != nullptr);
+  return o;
+}
+*/
+
+oahFindableElement::oahFindableElement ()
+{}
+
+oahFindableElement::~oahFindableElement ()
+{}
+
+void oahFindableElement::print (ostream& os) const
+{
+  os << asString () << endl;
+}
+
+ostream& operator<< (ostream& os, const S_oahFindableElement& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
+  return os;
+}
+
+ostream& operator<< (ostream& os, const oahFindableElement& elt)
 {
   elt.print (os);
   return os;
@@ -208,14 +254,33 @@ oahElement::oahElement (
   fShortName   = shortName;
   fDescription = description;
 
-  fElementValueKind = elementValueKind;
+  fElementValueKind =
+  	oahElementValueKind::kElementValueWithout; // default value ??? JMI v0.9.65
 
   fElementHelpOnlyKind =
     oahElementHelpOnlyKind::kElementHelpOnlyNo; // default value
 
   fElementVisibilityKind = elementVisibilityKind;
 
-//   fMultipleOccurrencesAllowed = false; superflous
+//   fMultipleOccurrencesAllowed = false; superflous JMI v0.9.65
+}
+
+oahElement::oahElement ()
+{
+  fLongName    = "";
+  fShortName   = "";
+  fDescription = "";
+
+  fElementValueKind =
+  	oahElementValueKind::kElementValueWithout; // default value ??? JMI v0.9.65
+
+  fElementHelpOnlyKind =
+    oahElementHelpOnlyKind::kElementHelpOnlyNo; // default value
+
+  fElementVisibilityKind =
+  	oahElementVisibilityKind::kElementVisibilityNone; // default value;
+
+//   fMultipleOccurrencesAllowed = false; superflous JMI v0.9.65
 }
 
 oahElement::~oahElement ()
@@ -433,25 +498,13 @@ string oahElement::fetchNamesInColumnsBetweenParentheses (
 // }
 
 Bool oahElement::findStringInFindableElement (
-  const string&               lowerCaseString,
-  list<S_oahFindStringMatch>& foundMatchesList,
-  ostream&                    os) const
+	const string&               lowerCaseString,
+	list<S_oahFindStringMatch>& foundMatchesList,
+	ostream&                    os) const
 {
   Bool result;
 
-  // does this element's long name match?
-  Bool longNameMatches =
-    mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
-
-  // does this element's short name match?
-  Bool shortNameMatches =
-    mfStringToLowerCase (fShortName).find (lowerCaseString) != string::npos;
-
-  // does this element's description match?
-  Bool descriptionMatches =
-    mfStringToLowerCase (fDescription).find (lowerCaseString) != string::npos;
-
-  if (shortNameMatches || longNameMatches || descriptionMatches) {
+  if (elementMatchesString (lowerCaseString)) {
     stringstream s;
 
     // add the element's names
@@ -470,14 +523,34 @@ Bool oahElement::findStringInFindableElement (
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
     // append the match to foundStringsList
-//     foundMatchesList.push_back (
-//       oahFindStringMatch::create (
-//         s.str (), this));
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        s.str (),
+        containingFindableElementAsString ()));
 
     result = true;
   }
 
   return result;
+}
+
+Bool oahElement::elementMatchesString (
+	const string& lowerCaseString) const
+{
+  // does this element's long name match?
+  Bool longNameMatches =
+    mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
+
+  // does this element's short name match?
+  Bool shortNameMatches =
+    mfStringToLowerCase (fShortName).find (lowerCaseString) != string::npos;
+
+  // does this element's description match?
+  Bool descriptionMatches =
+    mfStringToLowerCase (fDescription).find (lowerCaseString) != string::npos;
+
+	return
+		shortNameMatches || longNameMatches || descriptionMatches;
 }
 
 string oahElement::asLongNamedOptionString () const
@@ -641,6 +714,17 @@ void oahElement::printHelp (ostream& os) const
   }
 }
 
+const string oahElement::containingFindableElementAsString () const
+{
+	stringstream s;
+
+	s <<
+		fetchNames () << " : " <<
+    fDescription;
+
+	return s.str ();
+}
+
 ostream& operator<< (ostream& os, const S_oahElement& elt)
 {
   if (elt) {
@@ -690,46 +774,6 @@ bool compareOahElements::operator() (
   }
 
   return result;
-}
-
-//______________________________________________________________________________
-/* this class is purely virtual
-S_oahFindableElement oahFindableElement::create ()
-{
-  oahFindableElement* o =
-    new oahFindableElement ();
-  assert (o != nullptr);
-  return o;
-}
-*/
-
-oahFindableElement::oahFindableElement ()
-{}
-
-oahFindableElement::~oahFindableElement ()
-{}
-
-void oahFindableElement::print (ostream& os) const
-{
-  os << asString () << endl;
-}
-
-ostream& operator<< (ostream& os, const S_oahFindableElement& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "*** NONE ***" << endl;
-  }
-
-  return os;
-}
-
-ostream& operator<< (ostream& os, const oahFindableElement& elt)
-{
-  elt.print (os);
-  return os;
 }
 
 //______________________________________________________________________________

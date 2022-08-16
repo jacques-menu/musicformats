@@ -1072,9 +1072,9 @@ string oahPrefix::fetchPrefixNames () const
 }
 
 Bool oahPrefix::findStringInFindableElement (
-  const string&               lowerCaseString,
-  list<S_oahFindStringMatch>& foundMatchesList,
-  ostream&                    os) const
+	const string&               lowerCaseString,
+	list<S_oahFindStringMatch>& foundMatchesList,
+	ostream&                    os) const
 {
 	Bool result;
 
@@ -1108,9 +1108,10 @@ Bool oahPrefix::findStringInFindableElement (
  // JMI    gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
     // append the match to foundStringsList
-//     foundMatchesList.push_back (
-//       oahFindStringMatch::create (
-//         s.str (), this));
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        s.str (),
+        containingFindableElementAsString ()));
 
     result = true;
   }
@@ -1193,6 +1194,16 @@ void oahPrefix::printHelp (ostream& os) const
   }
 
   os << endl;
+}
+
+const string oahPrefix::containingFindableElementAsString () const
+{
+	stringstream s;
+
+	s <<
+    "Prefix:";
+
+	return s.str ();
 }
 
 ostream& operator<< (ostream& os, const S_oahPrefix& elt)
@@ -1458,10 +1469,22 @@ void oahAtom::printSummary (ostream& os) const
     endl;
 }
 
+const string oahAtom::containingFindableElementAsString () const
+{
+	stringstream s;
+
+  s << left <<
+    "Atom in subgroup \"" <<
+    fSubGroupUpLink->getSubGroupHeader () <<
+    "\"";
+
+	return s.str ();
+}
+
 Bool oahAtom::findStringInAtom (
-  const string&               lowerCaseString,
-  list<S_oahFindStringMatch>& foundMatchesList,
-  ostream&                    os) const
+	const string&               lowerCaseString,
+	list<S_oahFindStringMatch>& foundMatchesList,
+	ostream&                    os) const
 {
   return
     findStringInFindableElement (
@@ -2086,55 +2109,56 @@ void oahAtomStoringAValue::printHelp (ostream& os) const
   }
 }
 
-Bool oahAtomStoringAValue::findStringInAtom (
-  const string&               lowerCaseString,
-  list<S_oahFindStringMatch>& foundMatchesList,
-  ostream&                    os) const
-{
-  Bool result;
-
-  // does this element's long name match?
-  Bool longNameMatches =
-    mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
-
-  // does this element's short name match?
-  Bool shortNameMatches =
-    mfStringToLowerCase (fShortName).find (lowerCaseString) != string::npos;
-
-  // does this element's description match?
-  Bool descriptionMatches =
-    mfStringToLowerCase (fDescription).find (lowerCaseString) != string::npos;
-
-  if (shortNameMatches || longNameMatches || descriptionMatches) {
-    stringstream s;
-
-    // add the element's names and value specification
-    s <<
-      fetchNames () <<
-      ' ' <<
-      fValueSpecification <<
-      endl;
-
-    // indent a bit more for readability
-    gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
-    // add the element's description
-    s <<
-      gIndenter.indentMultiLineString (
-        fDescription);
-
-    gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
-    // append the match to foundStringsList
+// Bool oahAtomStoringAValue::findStringInAtom (
+// 	const string&               lowerCaseString,
+// 	list<S_oahFindStringMatch>& foundMatchesList,
+// 	ostream&                    os) const
+// {
+//   Bool result;
+//
+//   // does this element's long name match?
+//   Bool longNameMatches =
+//     mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
+//
+//   // does this element's short name match?
+//   Bool shortNameMatches =
+//     mfStringToLowerCase (fShortName).find (lowerCaseString) != string::npos;
+//
+//   // does this element's description match?
+//   Bool descriptionMatches =
+//     mfStringToLowerCase (fDescription).find (lowerCaseString) != string::npos;
+//
+//   if (shortNameMatches || longNameMatches || descriptionMatches) {
+//     stringstream s;
+//
+//     // add the element's names and value specification
+//     s <<
+//       fetchNames () <<
+//       ' ' <<
+//       fValueSpecification <<
+//       endl;
+//
+//     // indent a bit more for readability
+//     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
+//
+//     // add the element's description
+//     s <<
+//       gIndenter.indentMultiLineString (
+//         fDescription);
+//
+//     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+//
+//     // append the match to foundStringsList
 //     foundMatchesList.push_back (
 //       oahFindStringMatch::create (
-//         s.str (), *this));
-
-    result = true;
-  }
-
-  return result;
-}
+//         s.str (),
+//         containingFindableElementAsString ()));
+//
+//     result = true;
+//   }
+//
+//   return result;
+// }
 
 void oahAtomStoringAValue::printAtomWithVariableOptionsValues (
   ostream& os,
@@ -3233,10 +3257,22 @@ void oahSubGroup::printSubGroupAndAtomHelp (
   }
 }
 
+const string oahSubGroup::containingFindableElementAsString () const
+{
+	stringstream s;
+
+  s << left <<
+    "Subgroup in group \"" <<
+    fGroupUpLink->getGroupHeader () <<
+    "\"";
+
+	return s.str ();
+}
+
 Bool oahSubGroup::findStringInSubGroup (
-  const string&               lowerCaseString,
-  list<S_oahFindStringMatch>& foundMatchesList,
-  ostream&                    os) const
+	const string&               lowerCaseString,
+	list<S_oahFindStringMatch>& foundMatchesList,
+	ostream&                    os) const
 {
   Bool result;
 
@@ -4339,10 +4375,22 @@ void oahGroup::printGroupOptionsValuesAll (
   }
 }
 
+const string oahGroup::containingFindableElementAsString () const
+{
+	stringstream s;
+
+  s << left <<
+    "Group in handler \"" <<
+    fHandlerUpLink->getHandlerHeader () <<
+    "\"";
+
+	return s.str ();
+}
+
 void oahGroup::findStringInGroup (
-  const string&               lowerCaseString,
-  list<S_oahFindStringMatch>& foundMatchesList,
-  ostream&                    os) const
+	const string&               lowerCaseString,
+	list<S_oahFindStringMatch>& foundMatchesList,
+	ostream&                    os) const
 {
   switch (fElementVisibilityKind) { // JMI remove???
     case oahElementVisibilityKind::kElementVisibilityNone:
@@ -4408,10 +4456,10 @@ int oahHandler::pIncludeFilesMaximumLevel = 10;
 
 /* this class is purely virtual
 S_oahHandler oahHandler::create (
-  const string& serviceName,
-  const string& handlerHeader,
-  const string&           handlerDescription,
-  const string&           handlerUsage)
+	const string& serviceName,
+	const string& handlerHeader,
+	const string& handlerDescription,
+	const string& handlerUsage)
 {
   oahHandler* o = new
     oahHandler (
@@ -4425,10 +4473,10 @@ S_oahHandler oahHandler::create (
 */
 
 oahHandler::oahHandler (
-  const string& serviceName,
-  const string& handlerHeader,
-  const string&           handlerDescription,
-  const string&           handlerUsage)
+	const string& serviceName,
+	const string& handlerHeader,
+	const string& handlerDescription,
+	const string& handlerUsage)
 {
   fHandlerServiceName = serviceName;
 
@@ -6084,10 +6132,22 @@ void oahHandler::printNameIntrospectiveHelp (
   }
 }
 
+const string oahHandler::containingFindableElementAsString () const
+{
+	stringstream s;
+
+  s << left <<
+    "Handler in service \"" <<
+    fHandlerServiceName <<
+    "\"";
+
+	return s.str ();
+}
+
 Bool oahHandler::findStringInFindableElement (
-  const string&               lowerCaseString,
-  list<S_oahFindStringMatch>& foundMatchesList,
-  ostream&                    os) const
+	const string&               lowerCaseString,
+	list<S_oahFindStringMatch>& foundMatchesList,
+	ostream&                    os) const
 {
 	Bool result;
 
@@ -6125,9 +6185,10 @@ Bool oahHandler::findStringInFindableElement (
       fHandlerUsage;
 
     // append the match to foundStringsList
-//     foundMatchesList.push_back (
-//       oahFindStringMatch::create (
-//         s.str (), *this));
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        s.str (),
+        containingFindableElementAsString ()));
 
     result = true;
   }

@@ -1,9 +1,9 @@
+
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
 \chapter{Options and help (OAH)}
 % -------------------------------------------------------------------------
-
 
 OAH is a powerful way of representating the options together with the corresponding help. The classical \function{getopt*} family of functions\index{functions} are not up to the task because:
 \begin{itemize}
@@ -115,6 +115,128 @@ The output of the help  goes to \standardOutput, so that the user can pipe it in
     and conversion pass.
     This is how options groups are re-used for various
     converters such as \file{xml2ly}, \file{xml2brl} and \file{xml2xml}.
+
+\end{itemize}
+
+
+% -------------------------------------------------------------------------
+\section{OAH classes inheritance}\label{OAH classes inheritance}
+% -------------------------------------------------------------------------
+
+The picture at \figureRef{The OAH classes hierarchy}, shows the hierarchy of the main OAH classes. The  colors are used as follows:
+
+\subimport{../CommonLaTeXFiles}{OAHClassesHierarchyPicture}
+
+The background colors are used as follows:
+\begin{itemize}
+\item \colorbox{black}{\textcolor{green}{green}}: a OAH element that is expected to be found in a options and help user view, such as \class{msrStaff} and \class{msrChord};
+
+\item \colorbox{black}{\textcolor{pink}{pink}}: a element needed in OAH to structure the OAH data structures, such as \class{msrSegment} and \class{msrSyllable};
+
+\item \colorbox{black}{\textcolor{yellow}{yellow}}: a base class with name \class{msr*Element} for elements that can be used in another class, such as \class{msrVoiceElement};
+\end{itemize}
+
+The arrows colors have the following meaning:
+\begin{itemize}
+\item \textcolor{red}{red}: a link from a class to its base class. For example, \class{msrPart} is derived from \class{msrPartGroupElement};
+
+\item \textcolor{blue}{blue}: a link from a class to another that uses smart pointers to one or more instances of the former. For example, an \class{msrTuplet} may be an element of an \class{msrGraceNotesGroup}.
+\end{itemize}
+
+Here is the essentials of the \oahRepr\ classes:
+\begin{lstlisting}[language=TerminalSmall]
+jacquesmenu@macmini:~/musicformats-git-dev/src/oah > gr Element | grep class
+oahAtomsCollection.h:2085:class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
+oahAtomsCollection.h:2271:class EXP oahIntSetElementAtom : public oahAtomStoringAValue
+oahAtomsCollection.h:2357:class EXP oahStringSetElementAtom : public oahAtomStoringAValue
+oahAtomsCollection.h:2450:class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
+oahAtomsCollection.h:2537:class EXP oahStringToStringMapElementAtom : public oahAtomStoringAValue
+oahAtomsCollection.h:2624:class EXP oahStringToStringMultiMapElementAtom : public oahAtomStoringAValue
+oahBasicTypes.h:373:class EXP oahPrefix : public oahFindableElement
+oahBasicTypes.h:472:class EXP oahAtom : public oahElement
+oahBasicTypes.h:994:class EXP oahSubGroup : public oahElement
+oahBasicTypes.h:1163:class EXP oahGroup : public oahElement
+oahBasicTypes.h:1396:class EXP oahHandler : public oahElement
+oahElements.h:36:enum class oahElementValueKind {
+oahElements.h:48:enum class oahElementVisibilityKind {
+oahElements.h:60:enum class oahElementHelpOnlyKind {
+oahElements.h:72:class oahElement;
+oahElements.h:82:class EXP oahFindableElement : public smartable
+oahElements.h:206:class EXP oahElement : public oahFindableElement
+oahElements.h:391:class EXP oahElementUse : public smartable
+
+\end{lstlisting}
+
+The {\tt otherMeasureElements} classes are:
+\begin{itemize}
+\item bars:
+
+\begin{itemize}
+  \item \class{msrBarCheck}
+  \item \class{msrBarNumberCheck}
+  \item \class{msrBarLine}
+  \item \class{msrHiddenMeasureAndBarLine}
+  \end{itemize}
+
+\item breaks:
+
+\begin{itemize}
+  \item \class{msrLineBreak}
+  \item \class{msrPageBreak}
+  \end{itemize}
+
+\item notes:
+
+\begin{itemize}
+  \item \class{msrVoiceStaffChange}
+  \item \class{msrOctaveShift}
+  \end{itemize}
+
+\item clefs, keys, times, tempo:
+
+\begin{itemize}
+  \item \class{msrClef}
+  \item \class{msrKey}
+  \item \class{msrTime}
+  \item \class{msrTempo}
+  \end{itemize}
+
+\item instruments:
+
+\begin{itemize}
+  \item \class{msrStaffDetails}
+  \item \class{msrScordatura}
+  \item \class{msrAccordionRegistration}
+  \item \class{msrHarpPedalsTuning}
+  \item \class{msrPedal}
+  \item \class{msrDamp}
+  \item \class{msrDampAll}
+  \end{itemize}
+
+\item lyrics:
+
+\begin{itemize}
+	\item \class{msrSyllable}
+  \end{itemize}
+
+\item rehearsals, segno and coda:
+
+\begin{itemize}
+  \item \class{msrRehearsalMark}
+	\item \class{msrSegno}
+  \item \class{msrDalSegno}
+  \item \class{msrCoda}
+ \end{itemize}
+
+\item others:
+
+\begin{itemize}
+  \item \class{msrPrintLayout}
+  \item \class{msrEyeGlasses}
+  \item \class{msrStaffLevelElement}
+  \item \class{msrTransposition}
+  \item \class{msrTupletElement}
+  \end{itemize}
 
 \end{itemize}
 
