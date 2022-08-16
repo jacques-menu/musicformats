@@ -31,7 +31,7 @@
 
 #include "mfcLibraryComponent.h"
 
-
+#include "oahComponent.h"
 
 
 using namespace std;
@@ -699,7 +699,7 @@ ostream& operator<< (ostream& os, const S_mfcVersionNumber& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -784,7 +784,7 @@ ostream& operator<< (ostream& os, const S_mfcVersionDescr& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -871,7 +871,7 @@ ostream& operator<< (ostream& os, const S_mfcVersionsHistory& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1060,7 +1060,59 @@ ostream& operator<< (ostream& os, const S_mfcComponentDescr& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
+  return os;
+}
+
+//______________________________________________________________________________
+S_mfcOahComponent mfcOahComponent::create (
+  const string& formatName)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+    gLogStream <<
+      "Creating mfcOahComponent" <<
+      ", formatName: " << formatName <<
+      endl;
+  }
+#endif
+
+  mfcOahComponent* o =
+    new mfcOahComponent (
+      formatName);
+  assert (o != nullptr);
+  return o;
+}
+
+mfcOahComponent::mfcOahComponent (
+  const string& formatName)
+  : mfcComponentDescr (
+      formatName,
+      mfcComponenKind::kComponentRepresentation)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
+    gLogStream <<
+      "Constructing mfcOahComponent \"" <<
+      formatName <<
+      "\"" <<
+      endl;
+  }
+#endif
+}
+
+mfcOahComponent::~mfcOahComponent ()
+{}
+
+ostream& operator<< (ostream& os, const S_mfcOahComponent& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "*** NONE ***" << endl;
+  }
+
   return os;
 }
 
@@ -1112,7 +1164,7 @@ ostream& operator<< (ostream& os, const S_mfcRepresentationComponent& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1164,7 +1216,7 @@ ostream& operator<< (ostream& os, const S_mfcPassComponent& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1257,6 +1309,10 @@ mfcMultiComponent::mfcMultiComponent (
   fComponentEntropicityKind = componentEntropicityKind;
 
   fComponentUsedFromTheCLIKind = componentUsedFromTheCLIKind;
+
+  // create the OAH component
+  fOahComponent =
+    createOahComponent ();
 }
 
 mfcMultiComponent::~mfcMultiComponent ()
@@ -1389,6 +1445,64 @@ void mfcMultiComponent::appendPassToMultiComponent (
   fPassComponentsList.push_back (pass);
 }
 
+void mfcMultiComponent::printOahVersion (ostream&  os) const
+{
+  os <<
+    "OAH version:" <<
+    endl;
+
+  ++gIndenter;
+
+  if (fOahComponent) {
+    const int fieldWidth = 20;
+
+    os << left <<
+      setw (fieldWidth) <<
+      fOahComponent->
+        getComponentName () <<
+        endl;
+
+    ++gIndenter;
+    os <<
+      fOahComponent->mostRecentVersionNumberAndDateAsString () <<
+      endl;
+    --gIndenter;
+  }
+  else {
+    os << " none" << endl;
+  }
+
+  --gIndenter;
+}
+
+void mfcMultiComponent::printOahHistory (ostream&  os) const
+{
+  os <<
+    "OAH history:" <<
+    endl;
+
+  ++gIndenter;
+
+  if (fOahComponent) {
+    const int fieldWidth = 20;
+
+    os << left <<
+      setw (fieldWidth) <<
+      fOahComponent->
+        getComponentName () <<
+      endl;
+
+    ++gIndenter;
+    fOahComponent->printHistory (os);
+    --gIndenter;
+  }
+  else {
+    os << " none" << endl;
+  }
+
+  --gIndenter;
+}
+
 void mfcMultiComponent::printRepresentationsVersions (ostream&  os) const
 {
   os <<
@@ -1404,19 +1518,19 @@ void mfcMultiComponent::printRepresentationsVersions (ostream&  os) const
       i      = iBegin;
     for ( ; ; ) {
       S_mfcRepresentationComponent
-        formatComponent = (*i);
+        representationComponent = (*i);
 
       const int fieldWidth = 20;
 
       os << left <<
         setw (fieldWidth) <<
-        formatComponent->
+        representationComponent->
           getComponentName () <<
           endl;
 
       ++gIndenter;
       os <<
-        formatComponent->mostRecentVersionNumberAndDateAsString () <<
+        representationComponent->mostRecentVersionNumberAndDateAsString () <<
         endl;
       --gIndenter;
 
@@ -1488,18 +1602,18 @@ void mfcMultiComponent::printRepresentationsHistory (ostream&  os) const
       i      = iBegin;
     for ( ; ; ) {
       S_mfcRepresentationComponent
-        formatComponent = (*i);
+        representationComponent = (*i);
 
       const int fieldWidth = 20;
 
       os << left <<
         setw (fieldWidth) <<
-        formatComponent->
+        representationComponent->
           getComponentName () <<
         endl;
 
       ++gIndenter;
-      formatComponent->printHistory (os);
+      representationComponent->printHistory (os);
       --gIndenter;
 
       if (++i == iEnd) break;
@@ -1696,6 +1810,10 @@ void mfcMultiComponent::printVersionFull (ostream& os) const
 
   os << endl;
 
+  printOahVersion (os);
+
+  os << endl;
+
   printRepresentationsVersions (os);
 
   os << endl;
@@ -1732,6 +1850,10 @@ void mfcMultiComponent::printHistory (ostream&  os) const
 
   os << endl;
 
+  printOahHistory (os);
+
+  os << endl;
+
   printRepresentationsHistory (os);
 
   os << endl;
@@ -1747,7 +1869,7 @@ ostream& operator<< (ostream& os, const S_mfcMultiComponent& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1811,7 +1933,7 @@ ostream& operator<< (ostream& os, const S_mfcGeneratorComponent& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1875,7 +1997,7 @@ ostream& operator<< (ostream& os, const S_mfcConverterComponent& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2090,6 +2212,10 @@ void mfcLibraryComponent::printVersionShort (ostream& os) const
 
   os << endl;
 
+  printOahVersion (os);
+
+  os << endl;
+
   printRepresentationsVersions (os);
 
   os << endl;
@@ -2153,7 +2279,7 @@ ostream& operator<< (ostream& os, const S_mfcLibraryComponent& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

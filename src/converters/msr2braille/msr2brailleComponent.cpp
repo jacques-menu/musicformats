@@ -22,7 +22,7 @@ static S_mfcConverterComponent pConverterComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the converter's formats list
+  // populate the converter's representations list
   pConverterComponent->
     appendRepresentationToMultiComponent (
       createMsrRepresentationComponent ());

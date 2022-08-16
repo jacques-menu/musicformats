@@ -24,7 +24,7 @@ static S_mfcGeneratorComponent pGeneratorComponent;
 //______________________________________________________________________________
 static void populateMultiComponent ()
 {
-  // populate the generator's formats list
+  // populate the generator's representations list
   pGeneratorComponent->
     appendRepresentationToMultiComponent (
       createMsrRepresentationComponent ());

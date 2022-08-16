@@ -367,9 +367,6 @@ string oahHandlerUsedThruKindAsString (
 ostream& operator<< (ostream& os, oahHandlerUsedThruKind& elt);
 
 //______________________________________________________________________________
-class oahPrefix;
-typedef SMARTP<oahPrefix> S_oahPrefix;
-
 class EXP oahPrefix : public oahFindableElement
 /*
 An options prefix 'trace' --> 'trace-' allows:
@@ -453,6 +450,8 @@ to be developped into :
 
     virtual void          printHelp (ostream& os) const;
 
+		const string 					containingFindableElementAsString () const override;
+
   protected:
 
     // protected fields
@@ -462,6 +461,7 @@ to be developped into :
     string                fPrefixErsatz;
     string                fPrefixDescription;
 };
+typedef SMARTP<oahPrefix> S_oahPrefix;
 EXP ostream& operator<< (ostream& os, const S_oahPrefix& elt);
 
 //______________________________________________________________________________
@@ -560,6 +560,8 @@ class EXP oahAtom : public oahElement
     virtual void          printAtomWithVariableOptionsValues (
                             ostream& os,
                             int      valueFieldWidth) const;
+
+		const string 					containingFindableElementAsString () const override;
 
   protected:
 
@@ -829,10 +831,10 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
                             ostream& os,
                             int      valueFieldWidth) const override;
 
-    Bool                  findStringInAtom (
-                            const string&               lowerCaseString,
-                            list<S_oahFindStringMatch>& foundMatchesList,
-                            ostream&                    os) const override;
+//     Bool                  findStringInAtom (
+//                             const string&               lowerCaseString,
+//                             list<S_oahFindStringMatch>& foundMatchesList,
+//                             ostream&                    os) const override;
 
     // protected fields
     // ------------------------------------------------------
@@ -1140,6 +1142,8 @@ class EXP oahSubGroup : public oahElement
                             ostream& os,
                             int      valueFieldWidth) const;
 
+		const string 					containingFindableElementAsString () const override;
+
   private:
 
     // private fields
@@ -1350,6 +1354,8 @@ class EXP oahGroup : public oahElement
                             ostream& os,
                             int      valueFieldWidth) const;
 
+		const string 					containingFindableElementAsString () const override;
+
   private:
 
     // private services
@@ -1393,19 +1399,19 @@ typedef SMARTP<oahGroup> S_oahGroup;
 EXP ostream& operator<< (ostream& os, const S_oahGroup& elt);
 
 //_______________________________________________________________________________
-class EXP oahHandler : public oahElement
+class EXP oahHandler : public oahFindableElement
 {
   public:
 
     // creation
     // ------------------------------------------------------
 
- /* this class is purely virtual
+/* this class is purely virtual
     static SMARTP<oahHandler> create (
-                            const string&           serviceName,
-                            const string&           handlerHeader,
-                            const string&           handlerDescription,
-                            const string&           handlerUsage);
+                            const string& serviceName,
+                            const string& handlerHeader,
+                            const string& handlerDescription,
+                            const string& handlerUsage);
 */
 
   protected:
@@ -1414,12 +1420,12 @@ class EXP oahHandler : public oahElement
     // ------------------------------------------------------
 
                           oahHandler (
-                            const string&           serviceName,
-                            const string&           handlerHeader,
-                            const string&           handlerDescription,
-                            const string&           handlerUsage);
+                            const string& serviceName,
+                            const string& handlerHeader,
+                            const string& handlerDescription,
+                            const string& handlerUsage);
 
-    virtual               ~oahHandler ();
+	 virtual                ~oahHandler ();
 
   protected:
 
@@ -1597,10 +1603,10 @@ class EXP oahHandler : public oahElement
     // visitors
     // ------------------------------------------------------
 
-    virtual void          acceptIn  (basevisitor* v) override;
-    virtual void          acceptOut (basevisitor* v) override;
+    virtual void          acceptIn  (basevisitor* v);
+    virtual void          acceptOut (basevisitor* v);
 
-    virtual void          browseData (basevisitor* v) override;
+    virtual void          browseData (basevisitor* v);
 
   public:
 
@@ -1627,11 +1633,11 @@ class EXP oahHandler : public oahElement
 //     void                  displayArgumentsVector (ostream& os) const; JMI v0.9.65
 
     void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
+    void                  printShort (ostream& os) const;
 
     void                  printSummary (ostream& os) const;
 
-    void                  printHelp (ostream& os) const override;
+    void                  printHelp (ostream& os) const;
 
     void                  printOptionsSummary (ostream& os) const;
     void                  printOptionsSummary () const
@@ -1667,6 +1673,8 @@ class EXP oahHandler : public oahElement
 
     void                  printIncludeFileNamesStack (
                             ostream& os) const;
+
+		const string 					containingFindableElementAsString () const override;
 
   protected:
 

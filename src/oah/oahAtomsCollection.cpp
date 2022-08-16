@@ -10470,7 +10470,21 @@ void oahFindStringAtom::applyAtomWithValue (
     int counter = 0;
 
     for ( ; ; ) {
-      string theString = (*i)->getFoundString ();
+    	oahFindStringMatch* theFindStringMatch = (*i);
+
+    	// sanity check
+    	mfAssert (
+				__FILE__, __LINE__,
+    		theFindStringMatch != nullptr,
+    		"theFindStringMatch is null");
+
+      string
+      	foundString =
+      		theFindStringMatch->
+      			getFoundString (),
+				containingFindableElementInfo =
+					theFindStringMatch->
+						getContainingFindableElementInfo ();
 
       ++counter;
 
@@ -10483,7 +10497,9 @@ void oahFindStringAtom::applyAtomWithValue (
       ++gIndenter;
 
       os <<
-        gIndenter.indentMultiLineString (theString) <<
+      	containingFindableElementInfo <<
+      	endl <<
+        gIndenter.indentMultiLineString (foundString) <<
         endl;
 
 //      gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);

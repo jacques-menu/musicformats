@@ -87,7 +87,7 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
           "May 31, 2022",
           list<string> {
             "Fixed an issue in octave shift handling",
-            "Replace \fermataMarkup by \fermata in R* multiple full-bar rests",
+            "Replace \\fermataMarkup by \\fermata in R* multiple full-bar rests",
             "Fixed bug in absolute and relative octaves generation"
           }
       ));

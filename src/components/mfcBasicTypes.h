@@ -354,6 +354,30 @@ typedef SMARTP<mfcComponentDescr> S_mfcComponentDescr;
 EXP ostream& operator<< (ostream& os, const S_mfcComponentDescr& elt);
 
 //______________________________________________________________________________
+class EXP mfcOahComponent : public mfcComponentDescr
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<mfcOahComponent> create (
+                            const string& formatName);
+
+  protected:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          mfcOahComponent (
+                            const string& formatName);
+
+    virtual               ~mfcOahComponent ();
+};
+typedef SMARTP<mfcOahComponent> S_mfcOahComponent;
+EXP ostream& operator<< (ostream& os, const S_mfcOahComponent& elt);
+
+//______________________________________________________________________________
 class EXP mfcRepresentationComponent : public mfcComponentDescr
 {
   public:
@@ -460,6 +484,9 @@ class EXP mfcMultiComponent : public mfcComponentDescr
     // set and get
     // ------------------------------------------------------
 
+    S_mfcOahComponent        getOahComponent () const
+                              { return fOahComponent; }
+
     const list<S_mfcRepresentationComponent>&
                           getRepresentationComponentsList () const
                               { return fRepresentationComponentsList; }
@@ -504,6 +531,9 @@ class EXP mfcMultiComponent : public mfcComponentDescr
     // protected services
     // ------------------------------------------------------
 
+    void                  printOahVersion (ostream&  os) const;
+    void                  printOahHistory (ostream&  os) const;
+
     void                  printRepresentationsVersions (ostream&  os) const;
     void                  printRepresentationsHistory (ostream&  os) const;
 
@@ -515,8 +545,11 @@ class EXP mfcMultiComponent : public mfcComponentDescr
     // protected fields
     // ------------------------------------------------------
 
+    S_mfcOahComponent        fOahComponent;
+
     list<S_mfcRepresentationComponent>
                           fRepresentationComponentsList;
+
     list<S_mfcPassComponent>
                           fPassComponentsList;
 

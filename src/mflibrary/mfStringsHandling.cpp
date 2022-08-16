@@ -691,7 +691,7 @@ string& mfLeftTrim (string& s)
     find_if (
       s.begin (),
       s.end (),
-      not1 (checkSpace) // 'not1<std::function<int (int)>>' is deprecated
+      unary_negate (checkSpace) // 'not1<std::function<int (int)>>' is deprecated as of C++17
       )
     );
 
@@ -708,7 +708,7 @@ string& mfRightTrim (string& s)
     find_if (
       s.rbegin (),
       s.rend (),
-      not1 (checkSpace) // 'not1<std::function<int (int)>>' is deprecated
+      unary_negate (checkSpace) // 'not1<std::function<int (int)>>' is deprecated as of C++17
       ).base(),
     s.end ()
     );

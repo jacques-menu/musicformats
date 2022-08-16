@@ -46,7 +46,7 @@ string elementValueKindAsString (
 ostream& operator<< (ostream& os, oahElementValueKind& elt);
 
 enum class oahElementVisibilityKind {
-kElementVisibilityNone, // default value
+	kElementVisibilityNone, // default value
   kElementVisibilityWhole,
   kElementVisibilityHeaderOnly,
   kElementVisibilityHidden
@@ -67,17 +67,76 @@ string elementHelpOnlyKindAsString (
 
 ostream& operator<< (ostream& os, oahElementHelpOnlyKind& elt);
 
-//______________________________________________________________________________
-// PRE-declarations for mutual and self dependency
-class oahElement;
-typedef SMARTP<oahElement> S_oahElement;
+//_______________________________________________________________________________
+/*
+  A type to hold the matched string and the oahElement that has been found
+  in a OAH oahFindableElement's hierarchy
 
-class oahFindStringMatch;
+  In the pair:
+    - first is the string that has been found
+    - second is the description of the oahElement in which it has been found
+*/
+class oahFindStringMatch : public smartable
+{
+  public:
+
+    // creation
+    // ------------------------------------------------------
+
+    static SMARTP<oahFindStringMatch> create (
+                            const string& foundString,
+                            const string& containingFindableElementInfo);
+
+  public:
+
+    // constructors/destructor
+    // ------------------------------------------------------
+
+                          oahFindStringMatch (
+                            const string& foundString,
+                            const string& containingFindableElementInfo);
+
+    virtual               ~oahFindStringMatch ();
+
+  public:
+
+    // set and get
+    // ------------------------------------------------------
+
+    const string&         getFoundString () const
+                              { return fFoundString; }
+
+    const string&			    getContainingFindableElementInfo () const
+                              { return fContainingFindableElementInfo; }
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    virtual void          print (ostream& os) const;
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    string			          fFoundString;
+		string                fContainingFindableElementInfo;
+};
 typedef SMARTP<oahFindStringMatch> S_oahFindStringMatch;
+EXP ostream& operator<< (ostream& os, const S_oahFindStringMatch& elt);
+EXP ostream& operator<< (ostream& os, const oahFindStringMatch& elt);
 
 //______________________________________________________________________________
 /*
-  A type to hold the the OAH elements that can be found by (sub)string
+  A type to hold the the OAH elements that can be found by (sub)string,
+  thus implementing OAH introspection
 */
 class EXP oahFindableElement : public smartable
 {
@@ -123,6 +182,8 @@ class EXP oahFindableElement : public smartable
 
     virtual void          print (ostream& os) const = 0;
 
+		virtual const string 	containingFindableElementAsString () const = 0;
+
   private:
 
     // private fields
@@ -132,82 +193,21 @@ typedef SMARTP<oahFindableElement> S_oahFindableElement;
 EXP ostream& operator<< (ostream& os, const S_oahFindableElement& elt);
 EXP ostream& operator<< (ostream& os, const oahFindableElement& elt);
 
-//_______________________________________________________________________________
-/*
-  A type to hold the matched string and the oahElement it has been found in
-
-  In the pair:
-    - first is the string that has been found
-    - second is the oahElement in which is has been found
-*/
-class oahFindStringMatch : public smartable
-{
-  public:
-
-    // creation
-    // ------------------------------------------------------
-
-    static SMARTP<oahFindStringMatch> create (
-                            const string&        foundString,
-                            S_oahFindableElement containingFindableElement);
-
-  public:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          oahFindStringMatch (
-                            const string&        foundString,
-                            S_oahFindableElement containingFindableElement);
-
-    virtual               ~oahFindStringMatch ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-    const string&         getFoundString () const
-                              { return fFoundString; }
-
-    S_oahFindableElement  getContainingFindableElement () const
-                              { return fContainingFindableElement; }
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    virtual void          print (ostream& os) const;
-
-  protected:
-
-    // protected fields
-    // ------------------------------------------------------
-
-    string			          fFoundString;
-    S_oahFindableElement  fContainingFindableElement;
-};
-typedef SMARTP<oahFindStringMatch> S_oahFindStringMatch;
-EXP ostream& operator<< (ostream& os, const S_oahFindStringMatch& elt);
-EXP ostream& operator<< (ostream& os, const oahFindStringMatch& elt);
-
 //______________________________________________________________________________
 /*
   a common ancestor for all OAH classes,
   i.e. atoms, subgroups and groups
 */
 
+// pre-declaration
+class oahElement;
+typedef SMARTP<oahElement> S_oahElement;
+
 class EXP oahElement : public oahFindableElement
 {
   public:
 
-/* JMI
+/* this class is purely virtual
     // creation
     // ------------------------------------------------------
 
@@ -230,6 +230,8 @@ class EXP oahElement : public oahFindableElement
                             const string&            description,
                             oahElementValueKind      elementValueKind,
                             oahElementVisibilityKind elementVisibilityKind);
+
+                          oahElement ();
 
     virtual               ~oahElement ();
 
@@ -310,15 +312,17 @@ class EXP oahElement : public oahFindableElement
                             list<S_oahFindStringMatch>& foundMatchesList,
                             ostream&                    os) const override;
 
+		Bool									elementMatchesString (
+														const string& lowerCaseString) const;
   public:
 
     // visitors
     // ------------------------------------------------------
 
-    virtual void          acceptIn  (basevisitor* v);
-    virtual void          acceptOut (basevisitor* v);
+    virtual void          acceptIn  (basevisitor* v) = 0;
+    virtual void          acceptOut (basevisitor* v) = 0;
 
-    virtual void          browseData (basevisitor* v);
+    virtual void          browseData (basevisitor* v) = 0;
 
   public:
 
@@ -349,6 +353,8 @@ class EXP oahElement : public oahFindableElement
 
     virtual void          printHelp (ostream& os) const;
 
+		const string 					containingFindableElementAsString () const override;
+
   protected:
 
     // protected fields
@@ -368,7 +374,6 @@ class EXP oahElement : public oahFindableElement
 
     Bool                  fMultipleOccurrencesAllowed;
 };
-typedef SMARTP<oahElement> S_oahElement;
 EXP ostream& operator<< (ostream& os, const S_oahElement& elt);
 EXP ostream& operator<< (ostream& os, const oahElement& elt);
 

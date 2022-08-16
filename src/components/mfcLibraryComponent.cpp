@@ -79,7 +79,7 @@ S_mfcLibraryComponent createLibraryComponent ()
         mfcMultiComponentEntropicityKind::kComponentEntropicityNo,
         mfcMultiComponentUsedFromTheCLIKind::kComponentUsedFromTheCLIYes); // JMI ???
 
-    // populate the library's formats list
+    // populate the library's representations list
     pLibraryComponent->
       appendRepresentationToMultiComponent (
         createMsrRepresentationComponent ());
