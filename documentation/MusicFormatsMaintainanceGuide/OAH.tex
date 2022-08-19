@@ -124,26 +124,25 @@ The output of the help  goes to \standardOutput, so that the user can pipe it in
 % -------------------------------------------------------------------------
 
 The picture at \figureRef{The OAH classes hierarchy}, shows the hierarchy of the main OAH classes. The  colors are used as follows:
-
 \subimport{../CommonLaTeXFiles}{OAHClassesHierarchyPicture}
 
 The background colors are used as follows:
 \begin{itemize}
-\item \colorbox{black}{\textcolor{green}{green}}: a OAH element that is expected to be found in a options and help user view, such as \class{msrStaff} and \class{msrChord};
+\item \colorbox{black}{\textcolor{green}{green}}: a OAH element that is expected to be found in an options and help user view, such as \class{oahHandler} and \class{oahSubGroup};
 
-\item \colorbox{black}{\textcolor{pink}{pink}}: a element needed in OAH to structure the OAH data structures, such as \class{msrSegment} and \class{msrSyllable};
+\item \colorbox{black}{\textcolor{pink}{pink}}: a complementary element provided by OAH, such as \class{oahPrefix};
 
-\item \colorbox{black}{\textcolor{yellow}{yellow}}: a base class with name \class{msr*Element} for elements that can be used in another class, such as \class{msrVoiceElement};
+\item \colorbox{black}{\textcolor{yellow}{yellow}}: a base class with name \class{oah*Element} for elements that can be used in another class, such as \class{oahFindableElement};
 \end{itemize}
 
 The arrows colors have the following meaning:
 \begin{itemize}
-\item \textcolor{red}{red}: a link from a class to its base class. For example, \class{msrPart} is derived from \class{msrPartGroupElement};
+\item \textcolor{red}{red}: a link from a class to its base class. For example, \class{oahElement} is derived from \class{oahFindableElement};
 
-\item \textcolor{blue}{blue}: a link from a class to another that uses smart pointers to one or more instances of the former. For example, an \class{msrTuplet} may be an element of an \class{msrGraceNotesGroup}.
+\item \textcolor{blue}{blue}: a link from a class to another that uses smart pointers to one or more instances of the former. For example, an \className{msrTuplet} instance may be an element of an \className{msrGraceNotesGroup} instance.
 \end{itemize}
 
-Here is the essentials of the \oahRepr\ classes:
+There is a whole hierarchy of \className{oahAtom} sub-classes, some of which are provided in \oahBoth{oahAtomsCollection.h}. Here is the essentials of the \oahRepr\ classes:
 \begin{lstlisting}[language=TerminalSmall]
 jacquesmenu@macmini:~/musicformats-git-dev/src/oah > gr Element | grep class
 oahAtomsCollection.h:2085:class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
@@ -164,81 +163,9 @@ oahElements.h:72:class oahElement;
 oahElements.h:82:class EXP oahFindableElement : public smartable
 oahElements.h:206:class EXP oahElement : public oahFindableElement
 oahElements.h:391:class EXP oahElementUse : public smartable
-
 \end{lstlisting}
 
-The {\tt otherMeasureElements} classes are:
-\begin{itemize}
-\item bars:
-
-\begin{itemize}
-  \item \class{msrBarCheck}
-  \item \class{msrBarNumberCheck}
-  \item \class{msrBarLine}
-  \item \class{msrHiddenMeasureAndBarLine}
-  \end{itemize}
-
-\item breaks:
-
-\begin{itemize}
-  \item \class{msrLineBreak}
-  \item \class{msrPageBreak}
-  \end{itemize}
-
-\item notes:
-
-\begin{itemize}
-  \item \class{msrVoiceStaffChange}
-  \item \class{msrOctaveShift}
-  \end{itemize}
-
-\item clefs, keys, times, tempo:
-
-\begin{itemize}
-  \item \class{msrClef}
-  \item \class{msrKey}
-  \item \class{msrTime}
-  \item \class{msrTempo}
-  \end{itemize}
-
-\item instruments:
-
-\begin{itemize}
-  \item \class{msrStaffDetails}
-  \item \class{msrScordatura}
-  \item \class{msrAccordionRegistration}
-  \item \class{msrHarpPedalsTuning}
-  \item \class{msrPedal}
-  \item \class{msrDamp}
-  \item \class{msrDampAll}
-  \end{itemize}
-
-\item lyrics:
-
-\begin{itemize}
-	\item \class{msrSyllable}
-  \end{itemize}
-
-\item rehearsals, segno and coda:
-
-\begin{itemize}
-  \item \class{msrRehearsalMark}
-	\item \class{msrSegno}
-  \item \class{msrDalSegno}
-  \item \class{msrCoda}
- \end{itemize}
-
-\item others:
-
-\begin{itemize}
-  \item \class{msrPrintLayout}
-  \item \class{msrEyeGlasses}
-  \item \class{msrStaffLevelElement}
-  \item \class{msrTransposition}
-  \item \class{msrTupletElement}
-  \end{itemize}
-
-\end{itemize}
+\Class{oahFindableElement} is the base class for all those that can be introspected with the \optionName{find} option.
 
 
 % -------------------------------------------------------------------------
@@ -1387,6 +1314,159 @@ void oahEarlyOptions::applyEarlyOptionIfRelevant (
 	// ... ... ...
 }
 \end{lstlisting}
+
+
+% -------------------------------------------------------------------------
+\section{Implementing the {\tt -find} option}
+% -------------------------------------------------------------------------
+
+\Class{oahFindableElement} in \oahBoth{oahElements} is the base class of all those that can be found with this \Main{introspection} option:
+\begin{lstlisting}[language=Terminal]
+class EXP oahFindableElement : public smartable
+{
+  public:
+
+    // creation from MusicXML
+    // ------------------------------------------------------
+
+/* this class is purely virtual
+    static SMARTP<oahFindableElement> create ();
+*/
+
+  // ... ... ...
+
+  public:
+
+    // public services
+    // ------------------------------------------------------
+
+    virtual Bool          findStringInFindableElement (
+                            const string&               lowerCaseString,
+                            list<S_oahFindStringMatch>& foundMatchesList,
+                            ostream&                    os) const = 0;
+
+  public:
+
+    // print
+    // ------------------------------------------------------
+
+    virtual string        asString () const = 0;
+
+    virtual void          print (ostream& os) const = 0;
+
+		virtual const string 	containingFindableElementAsString () const = 0;
+
+  private:
+
+    // private fields
+    // ------------------------------------------------------
+};
+\end{lstlisting}
+
+When matches are found, there are stored in a list of instances of \className{oahFindStringMatch}:
+\begin{lstlisting}[language=Terminal]
+class oahFindStringMatch : public smartable
+{
+  // ... ... ...
+
+  protected:
+
+    // protected fields
+    // ------------------------------------------------------
+
+    string			          fFoundString;
+		string                fContainingFindableElementInfo;
+};
+\end{lstlisting}
+
+The \fieldName{fContainingFindableElementInfo} describes the \oahRepr\ element that the string was found in, either in its option name(s) or in its description.
+
+For example, method \method{oahHandler}{findStringInFindableElement} in \oah{oahElement.cpp} creates an instance and appends it to the list :
+\begin{lstlisting}[language=Terminal]
+Bool oahHandler::findStringInFindableElement (
+	const string&               lowerCaseString,
+	list<S_oahFindStringMatch>& foundMatchesList,
+	ostream&                    os) const
+{
+	Bool result;
+
+	// .. .. ..
+
+  // does this handler's header match?
+  Bool headerMatches =
+    mfStringToLowerCase (fHandlerHeader).find (lowerCaseString) != string::npos;
+
+  // does this handler's description match?
+  Bool descriptionMatches =
+    mfStringToLowerCase (fHandlerDescription).find (lowerCaseString) != string::npos;
+
+  // does this handler's usage match?
+  Bool usageMatches =
+    mfStringToLowerCase (fHandlerUsage).find (lowerCaseString) != string::npos;
+
+  if (headerMatches || descriptionMatches || usageMatches) {
+    stringstream s;
+
+    s <<
+      fHandlerHeader <<
+      ' ' <<
+      fHandlerDescription <<
+      ' ' <<
+      fHandlerUsage;
+
+    // append the match to foundStringsList
+    foundMatchesList.push_back (
+      oahFindStringMatch::create (
+        s.str (),
+        containingFindableElementAsString ()));
+
+    result = true;
+  }
+
+  // do this handler's prefixes match?
+  if (fHandlerPrefixesMap.size ()) {
+    ++gIndenter;
+
+    for (
+      map<string, S_oahPrefix>::const_iterator i =
+        fHandlerPrefixesMap.begin ();
+      i != fHandlerPrefixesMap.end ();
+      ++i
+    ) {
+      S_oahPrefix
+        prefix = (*i).second;
+
+      // does the prefix match?
+      prefix->
+        findStringInFindableElement (
+          lowerCaseString,
+          foundMatchesList,
+          os);
+    } // for
+
+    --gIndenter;
+  }
+
+  // do this handler's groups match?
+  if (fHandlerGroupsList.size ()) {
+    ++gIndenter;
+
+    for (S_oahGroup group : fHandlerGroupsList) {
+      group->
+        findStringInGroup (
+          lowerCaseString,
+          foundMatchesList,
+          os);
+    } // for
+
+    --gIndenter;
+  }
+
+  return result;
+}
+\end{lstlisting}
+
+The same holds for \method{oahPrefix}{findStringInFindableElement} in \oah{oahElements.cpp}.
 
 
 % -------------------------------------------------------------------------

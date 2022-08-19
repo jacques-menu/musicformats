@@ -69,7 +69,8 @@ ostream& operator<< (ostream& os, oahElementHelpOnlyKind& elt);
 
 //_______________________________________________________________________________
 /*
-  A type to hold the matched string and the oahElement that has been found
+  A type to hold the matched string and information about
+  the oahElement that has been found to contain it
   in a OAH oahFindableElement's hierarchy
 
   In the pair:

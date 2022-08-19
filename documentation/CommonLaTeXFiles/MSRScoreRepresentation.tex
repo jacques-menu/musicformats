@@ -1,0 +1,612 @@
+\begin{adjustwidth}{0.5 cm}{0.5 cm}
+\begin{figure}[p]
+
+%\floatbox[{\capbeside\thisfloatsetup{capbesideposition={left,top},capbesidewidth=4cm}}]{figure}[\FBwidth]
+
+\caption {The MSR music score representation}
+
+%\begin{sidecaption}[fortoc]{title}[label]
+%the body of the float
+%\end{sidecaption}
+
+\label{The MSR music score representation}
+
+\tt
+
+\begin{center}
+
+
+% The sizes
+% ------------------------------------------------
+
+\def \bendAngle {60}
+
+\def \minimumRectangleHeight {8.5 mm}
+\def \minimumRectangleWidth  {30 mm}
+
+\def \separatorWidth {\minimumRectangleWidth}
+
+\def \roundedCorners {10pt}
+
+
+% -------------------------------------------------------------------------
+\begin{tikzpicture}[
+	%
+	scale=0.45,
+	%
+	>=open triangle 45,
+	%
+	every node/.style={
+  	rounded corners=\roundedCorners,
+  	minimum height=\minimumRectangleHeight,
+  	minimum width=\minimumRectangleWidth,
+  	draw=black
+		}
+	]
+
+% elements positions
+% ------------------------------------------------
+
+\tikzmath{
+	% the absices
+  \leftColumnAbs        = -4.5 mm;
+  \rightColumnAbs       = -\leftColumnAbs;
+  %
+  % the ordinates
+  \BookOrd             =  0 mm;
+  \BookElementOrd      = \BookOrd -1 mm;
+  %
+  \ScoreOrd            = -2 mm;
+  %
+  \PartGroupOrd        = -3 mm;
+  \PartGroupElementOrd = \PartGroupOrd - 1 mm;
+  %
+  \PartOrd             = -5 mm;
+  %
+  \StaffOrd            = -6 mm;
+  %
+  \VoiceOrd            = -7 mm;
+  \VoiceElementOrd     = \VoiceOrd - 1 mm;
+  %
+  \SegmentOrd          = -9 mm;
+  \SegmentElementOrd   = \SegmentOrd - 1 mm;
+  %
+  \MeasureOrd          = -11 mm;
+  \MeasureElementOrd   = \MeasureOrd - 1 mm;
+  %
+  \StanzaOrd       	= \VoiceOrd - 0.75 mm;
+  \SyllableOrd       = \StanzaOrd - 1 mm;
+  %
+  \HarmonyOrd       	       = \MeasureElementOrd - 0.5 mm;
+  \FiguredBassElementOrd    = \MeasureElementOrd - 1.5 mm;
+  %
+  \RepeatOrd       	       = \VoiceElementOrd - 0.75 mm;
+  %
+  \MultipleFullBarRestsOrd  = \SegmentElementOrd - 0.75 mm;
+  \MeasureRepeatOrd         = \MultipleFullBarRestsOrd - 0.75 mm;
+  \BeatRepeatOrd            = \MeasureRepeatOrd - 0.75 mm;
+  %
+  \otherMeasureElementsOrd  = \MeasureElementOrd - 1.5 mm;
+  %
+  \DoubleTremoloOrd      = \MeasureElementOrd - 2.5 mm;
+  %
+  \TupletAbs         = - \rightColumnAbs * 0.6;
+%  \TupletAbs         = -0 mm;
+  \TupletOrd         = \MeasureElementOrd - 2.75 mm;
+%  \TupletOrd         = \MeasureElementOrd - 2 mm;
+  \TupletElementOrd  = \TupletOrd - 1 mm;
+  %
+  \GraceNotesGroupOrd = \MeasureElementOrd - 5 mm;
+  %
+  \ChordOrd          = \MeasureElementOrd - 6 mm;
+  \ChordAbs          = - \leftColumnAbs * 0.6;
+  %
+  \NoteOrd            = \MeasureElementOrd - 7 mm;
+	%
+	\TupletToTupletExternalPointAbs = \TupletAbs - 1.75 mm;
+  %
+  \SyllableToNoteExternalPointAbs = \leftColumnAbs - 1.5 mm;
+  \SyllableToNoteExternalPointOrd = \NoteOrd - 0.5 mm;
+  %
+  \HarmonyToNoteExternalPointAbs = \leftColumnAbs - 1 mm;
+  \HarmonyToNoteExternalPointOrd = \NoteOrd + 0;
+  %
+  \FiguredBassElementToNoteExternalPointAbs = \leftColumnAbs - 0.5 mm;
+  \FiguredBassElementToNoteExternalPointOrd = \NoteOrd + 0.5 mm;
+  %
+	\PartGroupToPartGroupExternalPointAbs = \PartGroupOrd - 0.25 mm;
+	%
+%	\NoteToMeasureExternalPointAbs = \ChordAbs + 1.5 mm;
+%	\NoteToMeasureExternalPointOrd = \ChordOrd + 0.125 mm;
+	%
+	\NoteToTupletElementExternalPointAbs = \ChordAbs + 1.5 mm;
+	\NoteToTupletElementExternalPointOrd = \ChordOrd + 0.125 mm;
+	%
+}
+
+
+
+% The colors
+% ------------------------------------------------
+
+\def \SecondaryRectanglesBackgroundColor {pink!10}
+\def \ElementsRectanglesBackgroundColor  {yellow!10}
+\def \PrimaryRectanglesBackgroundColor   {green!7.5}
+\def \RepeatRectanglesBackgroundColor    {orange!10}
+
+\def \baseClassArcsColor {red}
+\def \usedByClassArcsColor {blue}
+\def \loopsColor {red}
+
+
+
+% The coordinates
+% ------------------------------------------------
+
+\coordinate (Book)             at (0,\BookOrd);
+\coordinate (BookElement)      at (0,\BookElementOrd);
+
+\coordinate (Score)            at (0,\ScoreOrd);
+
+\coordinate (PartGroup)        at (0,\PartGroupOrd);
+\coordinate (PartGroupElement) at (0,\PartGroupElementOrd);
+
+\coordinate (Part)             at (0,\PartOrd);
+
+\coordinate (Staff)            at (0,\StaffOrd);
+
+\coordinate (Voice)            at (0,\VoiceOrd);
+\coordinate (VoiceElement)     at (0,\VoiceElementOrd);
+
+\coordinate (Segment)          at (0,\SegmentOrd);
+\coordinate (SegmentElement)   at (0,\SegmentElementOrd);
+
+\coordinate (Measure)          at (0,\MeasureOrd);
+\coordinate (MeasureElement)   at (0,\MeasureElementOrd);
+
+\coordinate (Stanza)           at (\leftColumnAbs,\StanzaOrd);
+
+\coordinate (FiguredBassElement)      at (\leftColumnAbs,\FiguredBassElementOrd);
+\coordinate (Harmony)          at (\leftColumnAbs,\HarmonyOrd);
+
+\coordinate (Syllable)         at (\leftColumnAbs,\SyllableOrd);
+
+\coordinate (Repeat)           at (\rightColumnAbs,\RepeatOrd);
+\coordinate (MultipleFullBarRests)     at (\rightColumnAbs,\MultipleFullBarRestsOrd);
+\coordinate (MeasureRepeat)   at (\rightColumnAbs,\MeasureRepeatOrd);
+\coordinate (BeatRepeat)      at (\rightColumnAbs,\BeatRepeatOrd);
+
+\coordinate (Tuplet)           at (\TupletAbs,\TupletOrd);
+\coordinate (TupletElement)    at (\TupletAbs,\TupletElementOrd);
+
+\coordinate (Chord)            at (\ChordAbs,\ChordOrd);
+
+\coordinate (GraceNotesGroup)  at (0,\GraceNotesGroupOrd);
+
+\coordinate (Note)             at (0,\NoteOrd);
+
+\coordinate (otherMeasureElements) at (\rightColumnAbs,\otherMeasureElementsOrd);
+
+\coordinate (DoubleTremolo)     at (\rightColumnAbs,\DoubleTremoloOrd);
+
+\coordinate (SyllableToNoteExternalPoint)       at (\SyllableToNoteExternalPointAbs,\SyllableToNoteExternalPointOrd);
+
+\coordinate (HarmonyToNoteExternalPoint)        at (\HarmonyToNoteExternalPointAbs,\HarmonyToNoteExternalPointOrd);
+
+\coordinate (FiguredBassElementToNoteExternalPoint)    at (\FiguredBassElementToNoteExternalPointAbs,\FiguredBassElementToNoteExternalPointOrd);
+
+\coordinate (TupletToTupletExternalPoint)       at (\TupletToTupletExternalPointAbs,\TupletOrd);
+
+\coordinate (PartGroupToPartGroupExternalPoint) at (\PartGroupToPartGroupExternalPointAbs,\PartGroupOrd);
+
+\coordinate (NoteToTupletElementExternalPoint)  at (\NoteToTupletElementExternalPointAbs,\NoteToTupletElementExternalPointOrd);
+
+%\coordinate (NoteToMeasureExternalPoint)        at (\NoteToMeasureExternalPointAbs,\NoteToMeasureExternalPointOrd);
+
+
+%\node [draw= none] (caption) at (- 15 cm, 0) {\caption {The \Repr\ classes hierarchy}};
+
+
+% Draw the nodes and arcs
+% ------------------------------------------------
+
+% Note
+% ------------------------------------------------
+% right now, otherwise the inward arrows tip go to the center of the Note node,
+% because the former are drawn before the latter
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Note) at (Note) {\texttt {\textbf {Note}}};
+
+
+% Book and BookElement
+% ------------------------------------------------
+% before the downward links
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Book) at (Book) {\texttt {\textbf {Book}}};
+
+
+\node[fill=\ElementsRectanglesBackgroundColor]
+  (BookElement) at (BookElement) {\texttt {BookElement}};
+
+\path [->, thick, \usedByClassArcsColor]
+  (BookElement)
+  edge node [draw=none] {}
+  (Book);
+
+\path [->, thick, \baseClassArcsColor]
+  (Score)
+  edge node [draw=none] {}
+  (BookElement);
+
+
+% Score
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Score) at (Score) {\texttt {\textbf {Score}}};
+
+\path [->, thick, \usedByClassArcsColor]
+    (PartGroup)
+    edge node [draw=none] {}
+    (Score);
+
+
+% PartGroupElement and PartGroup
+% ------------------------------------------------
+% before the downward links
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (PartGroup) at (PartGroup) {\texttt {\textbf {PartGroup}}};
+
+\node [fill=\ElementsRectanglesBackgroundColor]
+  (PartGroupElement) at (PartGroupElement) {\texttt {PartGroupElement}};
+
+\path [->, thick, \usedByClassArcsColor]
+  (PartGroupElement)
+  edge node [draw=none] {}
+  (PartGroup);
+
+\path [->, thick, \baseClassArcsColor]
+  (PartGroupElement)
+  edge node [draw=none] {}
+  (Part);
+
+\draw [->, thick, \baseClassArcsColor]
+	(PartGroup) ..
+	controls +(160:7.5 cm) and +(200:7.5 cm) ..
+  (PartGroupElement);
+
+
+% Part
+% ------------------------------------------------
+\node[fill=\PrimaryRectanglesBackgroundColor]
+  (Part) at (Part) {\texttt {\textbf {Part}}};
+
+\path [->, thick, \baseClassArcsColor]
+  (Part)
+  edge node [draw=none] {}
+  (PartGroupElement);
+
+\path [->, thick, \usedByClassArcsColor]
+  (Staff)
+   edge node [draw=none] {}
+  (Part);
+
+
+% Staff
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Staff) at (Staff) {\texttt {\textbf {Staff}}};
+
+\path [->, thick, \usedByClassArcsColor]
+  (Voice)
+  edge node [draw=none] {}
+  (Staff);
+
+
+% Voice and VoiceElement
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Voice) at (Voice) {\texttt {\textbf {Voice}}};
+
+\node [fill=\ElementsRectanglesBackgroundColor]
+  (VoiceElement) at (VoiceElement) {\texttt {VoiceElement}};
+
+\path [->, thick, \usedByClassArcsColor]
+	(VoiceElement)
+  edge node [draw=none] {}
+	(Voice);
+
+\path [->, thick, \baseClassArcsColor]
+	(Segment)
+  edge node [draw=none] {}
+	(VoiceElement);
+
+
+% Segment and SegmentElement
+% ------------------------------------------------
+\node [fill=\SecondaryRectanglesBackgroundColor]
+  (Segment) at (Segment) {\texttt {Segment}};
+
+\node [fill=\ElementsRectanglesBackgroundColor]
+  (SegmentElement) at (SegmentElement) {\texttt {SegmentElement}};
+
+\path [->, thick, \usedByClassArcsColor]
+	(SegmentElement)
+  edge node [draw=none] {}
+	(Segment);
+
+\path [->, thick, \baseClassArcsColor]
+	(Segment)
+  edge node [draw=none] {}
+	(VoiceElement);
+
+
+% Measure and MeasureElement
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Measure) at (Measure) {\texttt {\textbf {Measure}}};
+
+\node [fill=\ElementsRectanglesBackgroundColor]
+  (MeasureElement) at (MeasureElement) {\texttt {MeasureElement}};
+
+\path [->, thick, \usedByClassArcsColor]
+	(MeasureElement)
+  edge node [draw=none] {}
+	(Measure);
+
+\path [->, thick, \baseClassArcsColor]
+	(Measure)
+  edge node [draw=none] {}
+	(SegmentElement);
+
+
+% Stanza
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Stanza) at (Stanza) {\texttt {\textbf {Stanza}}};
+
+\draw [->, thick, \usedByClassArcsColor]
+	(Stanza) ..
+	controls +(5:3 cm) and +(205:4 cm) ..
+  (Voice);
+
+% Syllable
+% ------------------------------------------------
+\node [fill=\SecondaryRectanglesBackgroundColor]
+  (Syllable) at (Syllable) {\texttt {Syllable}};
+
+\path [->, thick, \usedByClassArcsColor]
+	(Syllable)
+  edge node [draw=none] {}
+	(Stanza);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(Syllable) ..
+	controls +(195:10 cm) and +(130:6.5 cm) ..
+  (SyllableToNoteExternalPoint);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(SyllableToNoteExternalPoint) ..
+	controls +(310:6 cm) and +(270:4 cm) ..
+  (Note);
+
+
+
+% Repeat
+% ------------------------------------------------
+\node [fill=\RepeatRectanglesBackgroundColor]
+  (Repeat) at (Repeat) {\texttt {\textbf {Repeat}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(Repeat) ..
+	controls +(170:3 cm) and +(337.5:6 cm) ..
+  (VoiceElement);
+
+
+
+% MultipleFullBarRests
+% ------------------------------------------------
+\node [fill=\RepeatRectanglesBackgroundColor]
+  (MultipleFullBarRests) at (MultipleFullBarRests) {\texttt {\textbf {MultipleFullBarRests}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(MultipleFullBarRests) ..
+	controls +(170:5 cm) and +(330:3 cm) ..
+  (SegmentElement);
+
+% MeasureRepeat
+% ------------------------------------------------
+\node [fill=\RepeatRectanglesBackgroundColor]
+    (MeasureRepeat) at (MeasureRepeat) {\texttt {\textbf {MeasureRepeat}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(MeasureRepeat) ..
+	controls +(170:5 cm) and +(320:3 cm) ..
+  (SegmentElement);
+
+% BeatRepeat
+% ------------------------------------------------
+\node [fill=\RepeatRectanglesBackgroundColor]
+  (BeatRepeat) at (BeatRepeat) {\texttt {\textbf {BeatRepeat}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(BeatRepeat) ..
+	controls +(170:5 cm) and +(305:6 cm) ..
+  (SegmentElement);
+
+
+
+% Harmony
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Harmony) at (Harmony) {\texttt {\textbf {Harmony}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(Harmony) ..
+	controls +(5:7 cm) and +(190:6.5 cm) ..
+  (MeasureElement);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(Harmony) ..
+	controls +(195:7 cm) and +(130:4 cm) ..
+  (HarmonyToNoteExternalPoint);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(HarmonyToNoteExternalPoint) ..
+	controls +(310:5 cm) and +(230:4.5 cm) ..
+  (Note);
+
+
+
+% FiguredBassElement
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (FiguredBassElement) at (FiguredBassElement) {\texttt {\textbf {FiguredBassElement}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(FiguredBassElement) ..
+	controls +(15:6 cm) and +(210:5 cm) ..
+  (MeasureElement);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(FiguredBassElement) ..
+	controls +(210:5 cm) and +(130:3 cm) ..
+  (FiguredBassElementToNoteExternalPoint);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(FiguredBassElementToNoteExternalPoint) ..
+	controls +(310:6 cm) and +(210:3 cm) ..
+  (Note);
+
+
+
+% otherMeasureElements
+% ------------------------------------------------
+\node [fill=\ElementsRectanglesBackgroundColor]
+  (otherMeasureElements) at (otherMeasureElements) {\texttt {\textit {otherMeasureElements}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(otherMeasureElements) ..
+	controls +(175:6 cm) and +(335:5) ..
+  (MeasureElement);
+
+
+
+% DoubleTremolo
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (DoubleTremolo) at (DoubleTremolo) {\texttt {\textbf {DoubleTremolo}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(DoubleTremolo) ..
+	controls +(170:6 cm) and +(320:3) ..
+  (MeasureElement);
+
+
+
+% GraceNotesGroup
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (GraceNotesGroup) at (GraceNotesGroup) {\texttt {\textbf {GraceNotesGroup}}};
+
+\draw [->, thick, \usedByClassArcsColor]
+	(GraceNotesGroup) ..
+	controls +(195:4.5 cm) and +(160:4) ..
+  (Note);
+
+
+
+% Tuplet and TupletElement
+% ------------------------------------------------
+% before the downward links
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Tuplet) at (Tuplet) {\texttt {\textbf {Tuplet}}};
+
+\node [fill=\ElementsRectanglesBackgroundColor]
+  (TupletElement) at (TupletElement) {\texttt {TupletElement}};
+
+\draw [->, thick, \usedByClassArcsColor]
+	(TupletElement)
+  edge node [draw=none] {}
+  (Tuplet);
+
+\draw [->, thick, \baseClassArcsColor]
+	(TupletElement) ..
+	controls +(20:5 cm) and +(270:5 cm) ..
+  (MeasureElement);
+
+\draw [->, thick, \baseClassArcsColor]
+	(Tuplet) ..
+	controls +(195:6.0 cm) and +(200:6.0 cm) ..
+  (TupletElement);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(Tuplet) ..
+	controls +(185:7 cm) and +(190:15 cm) ..
+  (GraceNotesGroup);
+
+
+
+% Chord
+% ------------------------------------------------
+\node [fill=\PrimaryRectanglesBackgroundColor]
+  (Chord) at (Chord) {\texttt {\textbf {Chord}}};
+
+\draw [->, thick, \baseClassArcsColor]
+	(Chord) ..
+	controls +(90:6 cm) and +(345:11 cm) ..
+  (TupletElement);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(Chord) ..
+	controls +(130:2.5 cm) and +(315:3) ..
+  (GraceNotesGroup);
+
+
+
+% Note
+% ------------------------------------------------
+\draw [->, thick, \usedByClassArcsColor]
+	(Note)
+	edge node [draw=none] {}
+  (GraceNotesGroup);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(Note) ..
+	controls +(20:4 cm) and +(220:3 cm) ..
+  (Chord);
+
+\draw [->, thick, \baseClassArcsColor]
+	(Note) ..
+	controls +(5:6.5 cm) and +(270:3 cm) ..
+  (NoteToTupletElementExternalPoint);
+
+\draw [->, thick, \baseClassArcsColor]
+	(NoteToTupletElementExternalPoint) ..
+	controls +(90:3 cm) and +(355:16 cm) ..
+  (TupletElement);
+
+%\draw [->, thick, \baseClassArcsColor]
+%	(Note) ..
+%	controls +(5:6.5 cm) and +(270:3 cm) ..
+%  (NoteToMeasureExternalPoint);
+%
+%\draw [->, thick, \baseClassArcsColor]
+%	(NoteToMeasureExternalPoint) ..
+%	controls +(90:3 cm) and +(320:2 cm) ..
+%  (MeasureElement);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(Note) ..
+	controls +(355:18 cm) and +(315:3 cm) ..
+  (DoubleTremolo);
+
+
+% -------------------------------------------------------------------------
+\end{tikzpicture}
+ % -------------------------------------------------------------------------
+
+\end{center}
+
+\end{figure}
+\end{adjustwidth}
+

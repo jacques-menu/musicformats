@@ -1,5 +1,5 @@
 \begin{adjustwidth}{0.5 cm}{0.5 cm}
-\begin{figure}[p]
+\begin{figure}[tpb]
 
 %\floatbox[{\capbeside\thisfloatsetup{capbesideposition={left,top},capbesidewidth=4cm}}]{figure}[\FBwidth]
 
@@ -51,23 +51,27 @@
 	% the absisses
   \leftColumnAbs        = -4.5 mm;
   \rightColumnAbs       = -\leftColumnAbs;
-  \middleLeftColumnAbs        = -2.25 mm;
+  \middleLeftColumnAbs        = -2 mm;
    \middleRightColumnAbs       = -\middleLeftColumnAbs;
 %
   % the ordinates
-   \oahFindableElementOrd            = 0 mm;
-  %
- \oahPrefixOrd  = \oahFindableElementOrd - 1 mm;
-  %
+  \oahFindableElementOrd            = 0 mm;
+   %
   \oahElementOrd          = \oahFindableElementOrd -1.5 mm;
   %
+  \oahHandlerAbs       	       = \leftColumnAbs;
   \oahHandlerOrd       	       = \oahElementOrd - 1.25 mm;
   %
-   \oahSubGroupOrd      = \oahElementOrd - 2.5 mm;
+  \verticalStep = 1mm;
+  %
+  \oahGroupAbs = \oahHandlerAbs * 0.37;
+  \oahGroupOrd            = \oahHandlerOrd - \verticalStep;
    %
-  \oahGroupOrd            = \oahElementOrd - 2.5 mm;
+   \oahSubGroupAbs = - \oahGroupAbs;
+ \oahSubGroupOrd      = \oahGroupOrd - \verticalStep;
    %
-  \oahAtomOrd            = \oahElementOrd - 1.25 mm;
+   \oahAtomAbs = - \oahHandlerAbs;
+    \oahAtomOrd            = \oahSubGroupOrd - \verticalStep;
   %
   %
   \oahInsiderHandlerAbs = \leftColumnAbs - 1.6 mm;
@@ -75,6 +79,9 @@
   %
    \oahRegularHandlerAbs = \leftColumnAbs + 1.6 mm;
   \oahRegularHandlerOrd = \oahInsiderHandlerOrd;
+  %
+	\oahPrefixAbs =\leftColumnAbs - 2.5 mm;
+	\oahPrefixOrd =  \oahHandlerOrd - 1.75 mm;
 }
 
 
@@ -98,17 +105,17 @@
 
 \coordinate (oahFindableElement)     at (0,\oahFindableElementOrd);
 
-\coordinate (oahPrefix)     at (\rightColumnAbs,\oahPrefixOrd);
+\coordinate (oahPrefix)     at (\oahPrefixAbs,\oahPrefixOrd);
 
 \coordinate (oahElement)   at (0,\oahElementOrd);
 
-\coordinate (oahHandler)          at (\leftColumnAbs,\oahHandlerOrd);
+\coordinate (oahHandler)          at (\oahHandlerAbs,\oahHandlerOrd);
 
-\coordinate (oahGroup)             at (\middleLeftColumnAbs,\oahGroupOrd);
+\coordinate (oahGroup)             at (\oahGroupAbs,\oahGroupOrd);
 
-\coordinate (oahSubGroup)     at (\middleRightColumnAbs,\oahSubGroupOrd);
+\coordinate (oahSubGroup)     at (\oahSubGroupAbs,\oahSubGroupOrd);
 
-\coordinate (oahAtom)     at (\rightColumnAbs,\oahAtomOrd);
+\coordinate (oahAtom)     at (\oahAtomAbs,\oahAtomOrd);
 
 
 \coordinate (oahInsiderHandler)          at (\oahInsiderHandlerAbs,\oahInsiderHandlerOrd);
@@ -131,10 +138,15 @@
   (oahPrefix) at (oahPrefix) {\texttt {\textbf {oahPrefix}}};
 
 \draw [->, thick, \baseClassArcsColor]
-	(oahPrefix)% ..
-%	controls +(170:5 cm) and +(330:3 cm) ..
+	(oahPrefix) ..
+	controls +(150:6 cm) and +(190:6 cm) ..
+    (oahFindableElement);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(oahPrefix) %..
+%	controls +(5:7 cm) and +(190:6.5 cm) ..
 	edge node [draw=none] {}
-  (oahFindableElement);
+  (oahHandler);
 
 
 % oahElement
@@ -189,10 +201,15 @@
 \node [fill=\PrimaryRectanglesBackgroundColor]
   (oahGroup) at (oahGroup) {\texttt {\textbf {oahGroup}}};
 
-\draw [->, thick, \usedByClassArcsColor]
+\draw [->, thick, \baseClassArcsColor]
 	(oahGroup)
 	edge node [draw=none] {}
   (oahElement);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(oahGroup)
+	edge node [draw=none] {}
+  (oahHandler);
 
 
 % oahSubGroup
@@ -206,6 +223,11 @@
 %	controls +(170:6 cm) and +(320:3) ..
   (oahElement);
 
+\draw [->, thick, \usedByClassArcsColor]
+	(oahSubGroup)
+	edge node [draw=none] {}
+  (oahGroup);
+
 
 % oahAtom
 % ------------------------------------------------
@@ -217,6 +239,11 @@
 %	controls +(170:6 cm) and +(320:3) ..
 	edge node [draw=none] {}
   (oahElement);
+
+\draw [->, thick, \usedByClassArcsColor]
+	(oahAtom)
+	edge node [draw=none] {}
+  (oahSubGroup);
 
 
 % -------------------------------------------------------------------------
