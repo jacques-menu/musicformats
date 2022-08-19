@@ -30,26 +30,44 @@ total 48
 The \directoryName{CommonLaTeXFiles} directory contains \LaTeX\ settings used by the various documentation files and the code for pictures:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini:~/musicformats-git-dev/documentation/CommonLaTeXFiles > ls -sal *.tex
- 8 -rw-r--r--  1 jacquesmenu  staff    507 Jun 28 20:52 LaTeXBoxes.tex
-16 -rw-r--r--  1 jacquesmenu  staff   6494 Jun 28 20:52 LaTeXCommonSettings.tex
- 8 -rw-r--r--  1 jacquesmenu  staff   1907 Jun 28 20:52 LaTeXDivisionsCommands.tex
- 8 -rw-r--r--  1 jacquesmenu  staff    957 Jun 28 20:52 LaTeXFontsAndColors.tex
- 8 -rw-r--r--  1 jacquesmenu  staff    604 Jun 28 20:52 LaTeXGraphicsAndPictures.tex
- 8 -rw-r--r--  1 jacquesmenu  staff   1128 Jun 28 20:52 LaTeXIndexing.tex
-24 -rw-r--r--  1 jacquesmenu  staff  10728 Jun 28 20:52 LaTeXListings.tex
- 8 -rw-r--r--  1 jacquesmenu  staff   1527 Jun 28 20:52 LaTeXMusicFormatsCommands.tex
-24 -rw-r--r--  1 jacquesmenu  staff  11735 Aug 14 16:50 LaTeXMusicFormatsFilesAndFolders.tex
- 8 -rw-r--r--@ 1 jacquesmenu  staff   2151 Jun 28 20:52 LaTeXMusicFormatsNames.tex
- 8 -rw-r--r--  1 jacquesmenu  staff    441 Jun 28 20:52 LaTeXMusicNotation.tex
- 8 -rw-r--r--  1 jacquesmenu  staff   1535 Jun 28 20:52 LaTeXReferencing.tex
-32 -rw-r--r--  1 jacquesmenu  staff  15145 Aug 14 16:50 LaTeXShortcuts.tex
- 8 -rw-r--r--  1 jacquesmenu  staff   2171 Jun 28 20:52 LaTeXTablesAndLists.tex
-40 -rw-r--r--@ 1 jacquesmenu  staff  17746 Jun 28 20:52 MSRClassesHierarchyPicture.tex
-48 -rw-r--r--  1 jacquesmenu  staff  21749 Jun 28 20:52 MusicFormatsArchitecturePicture.tex
-40 -rw-r--r--@ 1 jacquesmenu  staff  17746 Jun 28 20:52 OAHClassesHierarchyPicture.tex
+ 8 -rwxr--r--@  1 jacquesmenu  staff    241 Aug 17 14:21 CreateMSRScoreRepresentation.zsh
+ 8 -rw-r--r--   1 jacquesmenu  staff    507 Jun 28 20:52 LaTeXBoxes.tex
+16 -rw-r--r--   1 jacquesmenu  staff   6494 Jun 28 20:52 LaTeXCommonSettings.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1907 Jun 28 20:52 LaTeXDivisionsCommands.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff    957 Jun 28 20:52 LaTeXFontsAndColors.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff    604 Jun 28 20:52 LaTeXGraphicsAndPictures.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1128 Jun 28 20:52 LaTeXIndexing.tex
+24 -rw-r--r--   1 jacquesmenu  staff  10728 Jun 28 20:52 LaTeXListings.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1527 Jun 28 20:52 LaTeXMusicFormatsCommands.tex
+24 -rw-r--r--   1 jacquesmenu  staff  11735 Aug 14 16:50 LaTeXMusicFormatsFilesAndFolders.tex
+ 8 -rw-r--r--@  1 jacquesmenu  staff   2151 Jun 28 20:52 LaTeXMusicFormatsNames.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff    441 Jun 28 20:52 LaTeXMusicNotation.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1535 Jun 28 20:52 LaTeXReferencing.tex
+32 -rw-r--r--   1 jacquesmenu  staff  15145 Aug 14 16:50 LaTeXShortcuts.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   2171 Jun 28 20:52 LaTeXTablesAndLists.tex
+40 -rw-r--r--@  1 jacquesmenu  staff  17746 Jun 28 20:52 MSRClassesHierarchyPicture.tex
+40 -rw-r--r--@  1 jacquesmenu  staff  16711 Aug 17 14:21 MSRScoreRepresentation.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff    321 Jun 28 20:52 MusicFormats.ist
+48 -rw-r--r--   1 jacquesmenu  staff  21749 Jun 28 20:52 MusicFormatsArchitecturePicture.tex
+ 8 -rw-r--r--   1 jacquesmenu  staff   1558 Aug 15 23:36 OAHClassesHierarchyPicture.log
+16 -rw-r--r--@  1 jacquesmenu  staff   5906 Aug 16 08:02 OAHClassesHierarchyPicture.tex
 \end{lstlisting}
 
-\Directory{graphics} contains \Main{PNG} files showing screenshorts of the results of using the \mf\ tools.
+It is to be noted that \doc{CommonLaTeXFiles/MSRScoreRepresentation.tex} is generated from \doc{CommonLaTeXFiles/MSRClassesHierarchyPicture.tex} with this script, which should be run only if there is any change in the \msrRepr\ classes hierarchy:
+\begin{lstlisting}[language=Terminal]
+jacquesmenu@macmini-1:~/musicformats-git-dev/documentation/CommonLaTeXFiles > cat CreateMSRScoreRepresentation.zsh
+#!/bin/zsh
+
+# create a LaTeX file for the user guide from the maintainance one
+
+sed 's/msr//g' MSRClassesHierarchyPicture.tex \
+  | \
+sed 's/The MSR classes hierarchy/The MSR music score representation/g' \
+  > \
+MSRScoreRepresentation.tex
+\end{lstlisting}
+
+\Directory{graphics} contains \Main{PNG} files showing screenshots of the results of using the \mf\ tools.
 
 \Directory{presentation} contains a presentation of \libmusicxml\ written by \fober.
 

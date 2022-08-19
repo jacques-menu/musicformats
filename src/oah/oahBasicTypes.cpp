@@ -1476,6 +1476,8 @@ const string oahAtom::containingFindableElementAsString () const
   s << left <<
     "Atom in subgroup \"" <<
     fSubGroupUpLink->getSubGroupHeader () <<
+    "\" in group \"" <<
+    fSubGroupUpLink->getGroupUpLink ()->getGroupHeader () <<
     "\"";
 
 	return s.str ();
