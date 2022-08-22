@@ -34,6 +34,6 @@ jobs:
           name: musicformats-macos-distrib
           path: |
             MusicFormatsVersionNumber.txt
-            build/bin
+            build/lib
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
             documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
