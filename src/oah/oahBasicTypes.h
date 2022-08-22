@@ -1843,8 +1843,8 @@ class EXP oahHandler : public oahFindableElement
     map<string, S_oahPrefix>
                           fHandlerPrefixesMap;
 
-    // single character short names
-    set<string>           fSingleCharacterShortNamesSet;
+    // single character names
+    set<string>           fSingleCharacterNamesSet;
 
     // groups list
     list<S_oahGroup>      fHandlerGroupsList;

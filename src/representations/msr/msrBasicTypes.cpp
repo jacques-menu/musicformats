@@ -16463,10 +16463,10 @@ msrPrintObjectKind msrPrintObjectKindFromString (
     result =
       msrPrintObjectKind::kPrintObjectNone; // default value JMI v0.9.65
 
-  gLogStream <<
-      "printObjectString" << " = " <<
-      printObjectString <<
-      endl;
+//   gLogStream << // JMI TEST JMI v0.9.65
+//     "printObjectString = " <<
+//     printObjectString <<
+//     endl;
 
   if      (printObjectString == "yes")
     result = msrPrintObjectKind::kPrintObjectYes;

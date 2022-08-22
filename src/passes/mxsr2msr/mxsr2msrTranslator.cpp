@@ -10299,7 +10299,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // tremolos
 
-  fCurrentTremoloTypeKind             = msrTremoloTypeKind::k_NoTremoloType;
+  fCurrentTremoloTypeKind = msrTremoloTypeKind::k_NoTremoloType;
 
   // ties
 
@@ -10320,10 +10320,10 @@ Controls whether or not spacing is left for an invisible note or object. It is u
   string printObjectString =
     elt->getAttributeValue ("print-object");
 
-  gLogStream <<
-      "fCurrentNotePrintObjectKind" << " = " <<
-      fCurrentNotePrintObjectKind <<
-      endl;
+//   gLogStream << // JMI TEST v0.9.65
+// 		"fCurrentNotePrintObjectKind = " <<
+// 		fCurrentNotePrintObjectKind <<
+// 		endl;
 
   fCurrentNotePrintObjectKind =
     msrPrintObjectKindFromString (

@@ -192,18 +192,18 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
     // for checkOptionsConsistency()
     S_oahStringSetElementAtom
-                          getIgnorePartIDAtom () const
-                              { return fIgnorePartIDAtom; }
+                          getIgnoreMusicXMLPartIDAtom () const
+                              { return fIgnoreMusicXMLPartIDAtom; }
     S_oahStringSetElementAtom
-                          getKeepPartIDAtom () const
-                              { return fKeepPartIDAtom; }
+                          getKeepMusicXMLPartIDAtom () const
+                              { return fKeepMusicXMLPartIDAtom; }
 
     S_oahStringSetElementAtom
-                          getIgnorePartNameAtom () const
-                              { return fIgnorePartNameAtom; }
+                          getIgnoreMusicXMLPartNameAtom () const
+                              { return fIgnoreMusicXMLPartNameAtom; }
     S_oahStringSetElementAtom
-                          getKeepPartNameAtom () const
-                              { return fKeepPartNameAtom; }
+                          getKeepMusicXMLPartNameAtom () const
+                              { return fKeepMusicXMLPartNameAtom; }
 
     // clefs, keys, time signatures
     // --------------------------------------
@@ -557,14 +557,14 @@ class EXP mxsr2msrOahGroup : public oahGroup
 
      // for checkOptionsConsistency()
     S_oahStringSetElementAtom
-                          fIgnorePartIDAtom;
+                          fIgnoreMusicXMLPartIDAtom;
     S_oahStringSetElementAtom
-                          fKeepPartIDAtom;
+                          fKeepMusicXMLPartIDAtom;
 
     S_oahStringSetElementAtom
-                          fIgnorePartNameAtom;
+                          fIgnoreMusicXMLPartNameAtom;
     S_oahStringSetElementAtom
-                          fKeepPartNameAtom;
+                          fKeepMusicXMLPartNameAtom;
 
     // staves
     // --------------------------------------

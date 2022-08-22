@@ -254,7 +254,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
       "\"";
 
  // JMI   oahError (s.str ());
-    oahWarning (s.str ());
+//     oahWarning (s.str ()); // JMI TEMP v0.9.65
   }
 }
 
