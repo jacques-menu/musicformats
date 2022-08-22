@@ -558,7 +558,7 @@ R"()",
   // ignore MusicXML part ID
   // --------------------------------------
 
-  fIgnorePartIDAtom =
+  fIgnoreMusicXMLPartIDAtom =
     oahStringSetElementAtom::create (
       "ignore-musicxml-part-id", "imxmlpi",
 R"(Ignore the part with ID PART_ID, which is a string.
@@ -571,12 +571,12 @@ This option is incompatible with '-mkpi, -msr-keep-musicxml-part-id'.)",
 
   subGroup->
     appendAtomToSubGroup (
-      fIgnorePartIDAtom);
+      fIgnoreMusicXMLPartIDAtom);
 
   // ignore MusicXML part name
   // --------------------------------------
 
-  fIgnorePartNameAtom =
+  fIgnoreMusicXMLPartNameAtom =
     oahStringSetElementAtom::create (
       "ignore-musicxml-part-name", "imxmlpn",
 R"(Ignore the part named PART_NAME, which is a string.
@@ -589,12 +589,12 @@ This option is incompatible with '-mkpn, -msr-keep-musicxml-part-name'.)",
 
   subGroup->
     appendAtomToSubGroup (
-      fIgnorePartNameAtom);
+      fIgnoreMusicXMLPartNameAtom);
 
   // keep MusicXML part ID
   // --------------------------------------
 
-  fKeepPartIDAtom =
+  fKeepMusicXMLPartIDAtom =
     oahStringSetElementAtom::create (
       "keep-musicxml-part-id", "kmxmlpi",
 R"(Keep the part with ID PART_ID, which is a string.
@@ -607,12 +607,12 @@ This option is incompatible with '-mopi, -msr-ignore-musicxml-part-id'.)",
 
   subGroup->
     appendAtomToSubGroup (
-      fKeepPartIDAtom);
+      fKeepMusicXMLPartIDAtom);
 
   // keep MusicXML part name
   // --------------------------------------
 
-  fKeepPartNameAtom =
+  fKeepMusicXMLPartNameAtom =
     oahStringSetElementAtom::create (
       "keep-musicxml-part-name", "kmxmlpn",
 R"(Keep the part named PART_NAME, which is a string.
@@ -625,7 +625,7 @@ This option is incompatible with '-mopn, -msr-ignore-musicxml-part-name'.)",
 
   subGroup->
     appendAtomToSubGroup (
-      fKeepPartNameAtom);
+      fKeepMusicXMLPartNameAtom);
 }
 
 void mxsr2msrOahGroup::initializeStavesOptions ()
@@ -723,7 +723,7 @@ This option is incompatible with '-mopn, -msr-ignore-musicxml-voice-number'.)",
 
   subGroup->
     appendAtomToSubGroup (
-      fKeepPartNameAtom);
+      fKeepMusicXMLPartNameAtom);
 }
 
 void mxsr2msrOahGroup::initializeClefsKeysTimesOptions ()
@@ -1582,9 +1582,9 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 
     s <<
       "options '" <<
-      fIgnorePartIDAtom->fetchNames () <<
+      fIgnoreMusicXMLPartIDAtom->fetchNames () <<
       "' and '" <<
-      fKeepPartIDAtom->fetchNames () <<
+      fKeepMusicXMLPartIDAtom->fetchNames () <<
       "' are incompatible";
 
     oahError (s.str ());
@@ -1595,9 +1595,9 @@ void mxsr2msrOahGroup::checkGroupOptionsConsistency ()
 
     s <<
       "options '" <<
-      fIgnorePartNameAtom->fetchNames () <<
+      fIgnoreMusicXMLPartNameAtom->fetchNames () <<
       "' and '" <<
-      fKeepPartNameAtom->fetchNames () <<
+      fKeepMusicXMLPartNameAtom->fetchNames () <<
       "' are incompatible";
 
     oahError (s.str ());

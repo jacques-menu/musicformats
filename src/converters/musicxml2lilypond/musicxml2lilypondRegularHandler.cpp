@@ -1773,7 +1773,7 @@ ostream& operator<< (ostream& os, const S_xml2lyRegularHandler& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

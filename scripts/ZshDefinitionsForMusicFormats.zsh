@@ -51,8 +51,6 @@ LXML_SAMPLES_DIR=${LXML_DIR}/samples
 FILES_DIR=${MUSIC_FORMATS_DEV}/files
 MXML_FILES_DIR=${FILES_DIR}/musicxmlfiles
 
-DISTRIB_DIR=${MUSIC_FORMATS_DEV}/distrib
-
 export PATH=${MUSIC_FORMATS_DEV}/build/bin:$PATH
 
 alias lxmlsrc="cd ${LXML_SRC_DIR}"
@@ -62,12 +60,11 @@ alias build="cd ${BUILD_DIR}"
 
 alias doc="cd ${DOC_DIR}"
 
-alias common="cd ${DOC_DIR}/CommonLaTeXFiles"
+alias com="cd ${DOC_DIR}/CommonLaTeXFiles"
 alias maint="cd ${DOC_DIR}/MusicFormatsMaintainanceGuide"
 alias user="cd ${DOC_DIR}/MusicFormatsUserGuide"
 alias api="cd ${DOC_DIR}/MusicFormatsAPIGuide"
 alias graph="cd ${DOC_DIR}/graphics"
-alias dist="cd ${DISTRIB_DIR}"
 
 alias intro="cd ${DOC_DIR}/IntroductionToMusicXML"
 
@@ -75,10 +72,10 @@ alias clis="cd ${CLI_SAMPLES_DIR}"
 alias lxmlsamp="cd ${LXML_SAMPLES_DIR}"
 
 
-# using the MacOS distrib
+# choosing the MacOS version
 #----------------------------------------------
 
-alias usedistrib='export PATH=~/MusicFormatsForMacOS/bin:$PATH ; type xml2ly'
+alias useversion='export PATH=~/MusicFormatsForMacOS/bin:$PATH ; type xml2ly'
 
 
 # validation
@@ -364,6 +361,16 @@ alias llcores='ls -sal /cores/core.*'
 alias rmcores='ls -sal /cores/core.*; sudo rm /cores/core.*; ls -sal /cores/core.*'
 
 
+# type
+#----------------------------------------------
+
+function typ ()
+{
+  type -s $1
+  echo "--"
+  type -f $1
+}
+
 # rename
 #----------------------------------------------
 
@@ -378,31 +385,31 @@ function renam ()
 function grh ()
 {
 #  set -x
-  grep -r "$1" *.h */*.h */*/*.h */*/*/*.h
+  grep -r "$1" * | grep '\.h'
 }
 
 function grc ()
 {
 #  set -x
-  grep -r "$1" *.cpp */*.cpp */*/*.cpp */*/*/*.cpp
+  grep -r "$1" * | grep '\.c'
 }
 
 function grx ()
 {
 #  set -x
-  grep -r "$1" *.xml */*.xml */*/*.xml
+  grep -r "$1" * | grep '\.xml'
 }
 
 function grly ()
 {
 #  set -x
-  grep -r "$1" *.ly */*.ly */*/*.ly
+  grep -r "$1" * | grep '\.ly'
 }
 
 function grt ()
 {
 #  set -x
-  grep -r "$1" *.tex */*.tex */*/*.tex
+  grep -r "$1" * | grep '\.tex'
 }
 
 
@@ -780,7 +787,6 @@ function addAll ()
   addSrc
   addBuild
   addScripts
-  addDistrib
   addDoc
 
   addFxml
@@ -820,21 +826,10 @@ function addBuild ()
 
 function addScripts ()
 {
-  cp -p ${HOME}/local/BashDefinitionsForMusicFormats.bash ${SCRIPTS_DIR}
-  cp -p ${HOME}/local/ZshDefinitionsForMusicFormats.zsh ${SCRIPTS_DIR}
+  cp -p ${HOME}/JMI_ShellSettings/BashDefinitionsForMusicFormats.bash ${SCRIPTS_DIR}
+  cp -p ${HOME}/JMI_ShellSettings/ZshDefinitionsForMusicFormats.zsh ${SCRIPTS_DIR}
 
   git add    ${SCRIPTS_DIR}
-}
-
-function addDistrib ()
-{
-  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionNumber.txt
-
-  git add -f ${MUSIC_FORMATS_DEV}/MusicFormatsVersionDate.txt
-
-  git add    ${DISTRIB_DIR}/*.pdf
-
-  git add    ${DISTRIB_DIR}/MusicFormatsFor*.zip
 }
 
 function addDoc ()

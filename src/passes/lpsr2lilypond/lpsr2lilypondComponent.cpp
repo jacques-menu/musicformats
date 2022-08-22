@@ -108,7 +108,8 @@ S_mfcPassComponent createLpsr2lilypondComponent ()
           mfcVersionNumber::createFromString ("0.9.65"),
           "August 2, 2022",
           list<string> {
-            "Added support for '\"print-object=\"no\"' in notes"
+            "Added support for '\"print-object=\"no\"' in notes",
+            "Removed extraneous '(' in tempo beat units equivalence code generation"
           }
       ));
   }

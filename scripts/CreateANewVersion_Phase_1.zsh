@@ -61,12 +61,12 @@ addAll
 echo
 
 
-echo "--> Commit a first time to the local repository clone with a ’Pre’ version number:"
-git commit -m "Pre ${VERSION_NUMBER}" -a
+echo "--> Commit to the local repository clone:"
+git commit -m "${VERSION_NUMBER}" -a
 echo
 
 
-echo "--> Push this to the MusicFormats repo:"
+echo "--> Push to the MusicFormats repo:"
 git push
 echo
 

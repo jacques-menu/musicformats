@@ -4659,14 +4659,17 @@ void oahHandler::registerElementNamesInHandler (
     oahError (s.str ());
   }
 
-  for (
-    map<string, S_oahElement>::iterator i =
-      fHandlerNamesToElementsMap.begin ();
-    i != fHandlerNamesToElementsMap.end ();
-    ++i
-  ) {
-    string       name    = (*i).first;
-    S_oahElement element = (*i).second;
+  for (pair<string, S_oahElement> thePair : fHandlerNamesToElementsMap) {
+    string       name    = thePair.first;
+    S_oahElement element = thePair.second;
+
+// 		gLogStream << // JMI v0.9.65
+// 			"--> name: " << name <<
+// 			endl <<
+// 			"--> elementLongName: " << elementLongName <<
+// 			endl <<
+// 			"--> elementShortName: " << elementShortName <<
+// 			endl;
 
     // is elementLongName already in the elements names map?
     if (name == elementLongName) {
@@ -4681,7 +4684,10 @@ void oahHandler::registerElementNamesInHandler (
           fHandlerHeader <<
           "\"";
 
-      oahInternalError (s.str ());
+// 			gLogStream << s.str () << endl ; abort (); // JMI TEST v0.9.65
+
+//       oahInternalError (s.str ()); // JMI TEMP v0.9.65
+//       oahInternalWarning (s.str ());
     }
 
     // is elementShortName already in the elements names map?
@@ -4698,14 +4704,22 @@ void oahHandler::registerElementNamesInHandler (
           fHandlerHeader <<
           "\"";
 
-        oahInternalError (s.str ());
+// 			gLogStream << s.str () << endl ; abort (); // JMI TEST v0.9.65
+
+//         oahInternalError (s.str ()); // JMI TEMP v0.9.65
+//         oahInternalWarning (s.str ());
       }
     }
   } // for
 
+  if (elementLongNameSize == 1) {
+    // register element's long name in single character names set
+    fSingleCharacterNamesSet.insert (
+      elementLongName);
+  }
   if (elementShortNameSize == 1) {
-    // register element's short name in single character short names set
-    fSingleCharacterShortNamesSet.insert (
+    // register element's short name in single character names set
+    fSingleCharacterNamesSet.insert (
       elementShortName);
   }
 
@@ -5673,7 +5687,7 @@ void oahHandler::print (ostream& os) const
   }
 
   // print the single-character options if any
-  if (fSingleCharacterShortNamesSet.size ()) {
+  if (fSingleCharacterNamesSet.size ()) {
     printKnownSingleCharacterOptions (os);
   }
 
@@ -5732,7 +5746,7 @@ void oahHandler::printShort (ostream& os) const
   }
 
   // print the single-character options if any
-  if (fSingleCharacterShortNamesSet.size ()) {
+  if (fSingleCharacterNamesSet.size ()) {
     printKnownSingleCharacterOptions (os);
   }
 */
@@ -6735,7 +6749,7 @@ void oahHandler::printKnownPrefixes (ostream& os) const
 void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
 {
   size_t oahHandlerPrefixesListSize =
-    fSingleCharacterShortNamesSet.size ();
+    fSingleCharacterNamesSet.size ();
 
   os <<
     "There are " <<
@@ -6759,8 +6773,8 @@ void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
 
   if (oahHandlerPrefixesListSize) {
     set<string>::const_iterator
-      iBegin = fSingleCharacterShortNamesSet.begin (),
-      iEnd   = fSingleCharacterShortNamesSet.end (),
+      iBegin = fSingleCharacterNamesSet.begin (),
+      iEnd   = fSingleCharacterNamesSet.end (),
       i      = iBegin;
 
     int cumulatedLength = 0;
@@ -7497,10 +7511,10 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
 
     set<string>::const_iterator
       it =
-        fSingleCharacterShortNamesSet.find (
+        fSingleCharacterNamesSet.find (
           singleCharacterString);
 
-    if (it != fSingleCharacterShortNamesSet.end ()) {
+    if (it != fSingleCharacterNamesSet.end ()) {
       // yes, singleCharacterString is known in the set
       clusterElementsList.push_back (
         fetchElementByNameInHandler (
@@ -7552,11 +7566,11 @@ Bool oahHandler::isNameASingleCharacterOptionsCluster (
     --gIndenter;
 
     gLogStream <<
-      "fSingleCharacterShortNamesSet:" <<
+      "fSingleCharacterNamesSet:" <<
       endl;
     for (
-      set<string>::const_iterator i = fSingleCharacterShortNamesSet.begin ();
-      i != fSingleCharacterShortNamesSet.end ();
+      set<string>::const_iterator i = fSingleCharacterNamesSet.begin ();
+      i != fSingleCharacterNamesSet.end ();
       ++i
     ) {
       string singleCharacterElementName = (*i);

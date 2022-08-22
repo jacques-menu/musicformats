@@ -12,7 +12,7 @@ endif()
 #===============================================================
 # prevent execution in build folder
 if (EXISTS .nocmake)
-	message (FATAL_ERROR "Can't execute cmake in build folder")
+	message (FATAL_ERROR "Can't execute cmake in build folder, .nocmake found")
 endif()
 
 

@@ -1,8 +1,44 @@
 # MusicFormats library
 
-The [MusicFormats library](https://github.com/jacques-menu/musicformats) is dedicated to the conversion of music score formats such as MusicXML, LilyPond, braille music and Guido.
-It also contains generators of such formats, as well as a preliminary MSDL (Music Scores Description Language) compiler that generates them.
+The [MusicFormats library](https://github.com/jacques-menu/musicformats) is open source software
+supplied under the Mozilla Public License 2.0 licence.
+It is dedicated to the conversion of music score formats
+such as MusicXML, LilyPond, braille music and Guido.
+It is written in C++17. Building it from the source code requires a C++ compiler and cmake.
 
-There is also an interpreter for MFSL (MusicFormats Scripting Language) to ease the use of options with the tools provided by MusicFormats.
+MusicFormats contains converters between these formats such as xml2ly.
+Examples of the use of the library to generate output files from scratch are provided.
 
-MusicFormats embeds a version of the [libmusicxml library](https://github.com/grame-cncm/libmusicxml.git), which supports the MusicXML format.
+There is also an interpreter for MFSL (MusicFormats Scripting Language), that can be used
+to ease the use and selection of options with the tools provided by MusicFormats.
+
+MusicFormats embeds a version of the [libmusicxml library],
+to be found at (https://github.com/grame-cncm/libmusicxml.git),
+which supports the MusicXML (textual) format, both for reading and writing.
+
+The documentation contains among other things a user guide :
+  https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
+and a maintenance guide for developpers :
+  https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
+
+Ready-to-use versions of [MusicFormats] for the three main operating systems,
+i.e. MacOS™, Linux in its Ubuntu declination and Windows™,
+can be downloaded from the repository main page at https://github.com/jacques-menu/musicformats.
+Under 'Releases' in the right column,
+click on the 'n tags' link to access the various versions.
+One can also go directly to:
+https://github.com/jacques-menu/musicformats/tags
+Then click on the link to the desired version such as v0.9.65, to access its contents.
+
+Each .zip archive contains:
+  - a text file containing the version number;
+  - the executable tools in the build/bin subdirectory;
+  - binary versions of the library in the build/lib subdirectory;
+  - a PDF introduction to MusicXML;
+  - a PDF MusicFormats user guide.
+
+These distributions can be accessed directly with URLs such as:
+https://github.com/jacques-menu/musicformats/releases/download/v0.9.65/musicformats-macos-v0.9.65-distrib.zip.
+https://github.com/jacques-menu/musicformats/releases/download/v0.9.65/musicformats-linux-v0.9.65-distrib.zip.
+https://github.com/jacques-menu/musicformats/releases/download/v0.9.65/musicformats-windows-v0.9.65-distrib.zip.
+Replace v0.9.65 by the version number for the desired operations system.

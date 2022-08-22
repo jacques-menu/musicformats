@@ -14986,8 +14986,6 @@ void lpsr2lilypondTranslator::generateCodeForTempoBeatUnitsEquivalence (
     "\" = \"" <<
     endl;
 
-  fLilypondCodeStream <<
-    "(";
   if (
     versionNumberGreaterThanOrEqualTo (
       gGlobalLpsr2lilypondOahGroup->getLilypondVersion (),

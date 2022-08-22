@@ -17,12 +17,12 @@ MY_WORK_DIR=${HOME}
 . ${MY_WORK_DIR}/JMI_ShellSettings/zsh_20_MusicFormats
 
 
-# dev branch
+# dev directory
 #----------------------------------------------
 
-MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
+MUSIC_FORMATS_DEV_DIR=${MY_WORK_DIR}/musicformats-git-dev
 # echo
-# echo "========> MUSIC_FORMATS_DEV = ${MUSIC_FORMATS_DEV}"
+# echo "========> MUSIC_FORMATS_DEV_DIR = ${MUSIC_FORMATS_DEV_DIR}"
 # echo
 
 
@@ -39,32 +39,19 @@ echo
 
 # let's go
 
-cd ${MUSIC_FORMATS_DEV}
+cd ${MUSIC_FORMATS_DEV_DIR}
 echo "--> Current directory: ${PWD}:"
 echo
 
 
 echo "--> Create the distributions"
-# scripts/MakeMusicFormatsDistributions.zsh
+scripts/MakeMusicFormatsDistributions.zsh
 echo
 ls -sal distrib
 
 set -x
 
-echo "--> Commit again to the local repository clone, no ’Pre’ this time:"
-git commit -m "${NEW_VERSION_NUMBER}" -a
-echo
-
-
-echo "--> Push this to the MusicFormats repo:"
-git push
-echo
-
-
-echo "--> Create the new version branch locally and remotely:"
-git push --set-upstream origin "${VERSION_NUMBER}"
-echo
-
+exit
 
 echo "--> Create a new version number and date"
 scripts/SetMusicFormatsVersionNumber.zsh "${NEW_VERSION_NUMBER}"
