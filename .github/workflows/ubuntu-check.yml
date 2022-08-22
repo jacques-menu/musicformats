@@ -35,7 +35,6 @@ jobs:
           path: |
             MusicFormatsVersionNumber.txt
             build/bin
-            build/lib/*.a
-            build/lib/*.so
+            build/lib
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
             documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
