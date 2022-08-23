@@ -9,6 +9,8 @@ KEEP/*
 libmusicxml/schema/musicxml-2.0/*
 libmusicxml/schema/musicxml-4.0/*
 
+readytouse
+
 build/bin/*
 build/lib/*
 build/libdir/*
