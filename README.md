@@ -1,5 +1,7 @@
 # MusicFormats library
 
+This information is available in french under the name [LISEZ_MOI.md](https://github.com/jacques-menu/musicformats/blob/master/LISEZ_MOI.md).
+
 The [MusicFormats library](https://github.com/jacques-menu/musicformats) is open source software
 supplied under the Mozilla Public License 2.0 licence.
 It is dedicated to the conversion of music score formats
@@ -21,10 +23,10 @@ and a maintenance guide for developpers :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
 
 Ready-to-use versions of [MusicFormats] for the three main operating systems,
-i.e. MacOS™, Linux in its Ubuntu declination and Windows™,
-can be downloaded from the repository main page at https://github.com/jacques-menu/musicformats.
-Under 'Releases' in the right column,
-click on the 'n tags' link to access the various versions.
+i.e. MacOS™, Linux in its Ubuntu declination and Windows™.
+They are in ZIP format and can be downloaded from the repository main page at
+https://github.com/jacques-menu/musicformats.
+Click on the 'n tags' link at the top of the page to access the various versions.
 
 One can also go directly to:
 https://github.com/jacques-menu/musicformats/tags
@@ -37,8 +39,6 @@ Each .zip archive contains:
   - a PDF introduction to MusicXML;
   - a PDF MusicFormats user guide.
 
-These distributions can be accessed directly with URLs such as:
-https://github.com/jacques-menu/musicformats/releases/download/v0.9.65/musicformats-macos-v0.9.65-distrib.zip.
-https://github.com/jacques-menu/musicformats/releases/download/v0.9.65/musicformats-linux-v0.9.65-distrib.zip.
-https://github.com/jacques-menu/musicformats/releases/download/v0.9.65/musicformats-windows-v0.9.65-distrib.zip.
+These ready-to-use versions can be accessed directly with URLs such as:
+  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.65
 Replace v0.9.65 by the version number for the desired operations system.
