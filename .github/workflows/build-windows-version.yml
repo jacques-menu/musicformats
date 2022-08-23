@@ -34,9 +34,10 @@ jobs:
       - name: Upload libraries and executables for Windows
         uses: actions/upload-artifact@v2
         with:
-          name: musicformats-windows-distrib
+          name: musicformats-windows-version
           path: |
             MusicFormatsVersionNumber.txt
+            MusicFormatsVersionDate.txt
             build/bin
             build/lib
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf

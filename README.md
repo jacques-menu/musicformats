@@ -12,8 +12,7 @@ Examples of the use of the library to generate output files from scratch are pro
 There is also an interpreter for MFSL (MusicFormats Scripting Language), that can be used
 to ease the use and selection of options with the tools provided by MusicFormats.
 
-MusicFormats embeds a version of the [libmusicxml library],
-to be found at (https://github.com/grame-cncm/libmusicxml.git),
+MusicFormats embeds a version of the [libmusicxml library](https://github.com/grame-cncm/libmusicxml.git),
 which supports the MusicXML (textual) format, both for reading and writing.
 
 The documentation contains among other things a user guide :
@@ -26,14 +25,15 @@ i.e. MacOS™, Linux in its Ubuntu declination and Windows™,
 can be downloaded from the repository main page at https://github.com/jacques-menu/musicformats.
 Under 'Releases' in the right column,
 click on the 'n tags' link to access the various versions.
+
 One can also go directly to:
 https://github.com/jacques-menu/musicformats/tags
 Then click on the link to the desired version such as v0.9.65, to access its contents.
 
 Each .zip archive contains:
-  - a text file containing the version number;
-  - the executable tools in the build/bin subdirectory;
-  - binary versions of the library in the build/lib subdirectory;
+  - text files containing the version number and date;
+  - the executable tools in the bin subdirectory;
+  - binary versions of the library in the lib subdirectory;
   - a PDF introduction to MusicXML;
   - a PDF MusicFormats user guide.
 
