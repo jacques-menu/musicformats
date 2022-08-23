@@ -862,56 +862,6 @@ function addFmfsl ()
   git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.bash
 }
 
-function mergeTestFromDev ()
-{
-  git checkout test
-  git branch
-  git pull
-  git merge origin/dev
-  git push
-}
-
-function mergeMasterFromTest ()
-{
-  git checkout master
-  git branch
-  git pull
-  git merge origin/test
-  git push
-}
-
-function rebaseTestFromDev ()
-{
-  git checkout dev
-  git branch
-  git pull
-
-  # s’il n’y a pas de conflit:
-  git checkout test
-  git branch
-  git pull
-  git rebase dev
-
-  # puis commiter le résultat, et quand c’est clean:
-  git push
-}
-
-function rebaseReleaseFromTest ()
-{
-  git checkout test
-  git branch
-  git pull
-
-  # s’il n’y a pas de conflit:
-  git checkout release
-  git branch
-  git pull
-  git rebase test
-
-  # puis commiter le résultat, et quand c’est clean:
-  git push
-}
-
 
 #----------------------------------------------
 

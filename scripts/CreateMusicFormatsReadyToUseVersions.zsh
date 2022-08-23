@@ -7,8 +7,6 @@
 
 #exec > ${MUSIC_FORMATS_DEV_DIR}/$(basename $0).log 2>&1
 
-echo
-
 
 MUSIC_FORMATS_DEV_DIR=${HOME}/musicformats-git-dev
 echo "--> MUSIC_FORMATS_DEV_DIR = ${MUSIC_FORMATS_DEV_DIR}"
@@ -29,43 +27,38 @@ mkdir -p ${READY_TO_USE_DIR}
 ls -sal ${READY_TO_USE_DIR}
 echo
 
-DOWNLOADED_MACOS_READY_TO_USE_NAME="musicformats-macos-ready-to-use"
-DOWNLOADED_UBUNTU_READY_TO_USE_NAME="musicformats-ubuntu-ready-to-use"
-DOWNLOADED_WINDOWS_READY_TO_USE_NAME="musicformats-windows-ready-to-use"
+DOWNLOADED_MACOS_VERSION_NAME="musicformats-macos-version"
+DOWNLOADED_UBUNTU_VERSION_NAME="musicformats-ubuntu-version"
+DOWNLOADED_WINDOWS_VERSION_NAME="musicformats-windows-version"
 
-MACOS_READY_TO_USE_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_MACOS_READY_TO_USE_NAME}"
-UBUNTU_READY_TO_USE_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_UBUNTU_READY_TO_USE_NAME}"
-WINDOWS_READY_TO_USE_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_WINDOWS_READY_TO_USE_NAME}"
-echo "MACOS_READY_TO_USE_ORG: ${MACOS_READY_TO_USE_ORG}"
-ls -sal ${MACOS_READY_TO_USE_ORG}
-echo "UBUNTU_READY_TO_USE_ORG: ${UBUNTU_READY_TO_USE_ORG}"
-ls -sal ${UBUNTU_READY_TO_USE_ORG}
-echo "WINDOWS_READY_TO_USE_ORG: ${WINDOWS_READY_TO_USE_ORG}"
-ls -sal ${WINDOWS_READY_TO_USE_ORG}
+MACOS_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_MACOS_VERSION_NAME}"
+UBUNTU_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_UBUNTU_VERSION_NAME}"
+WINDOWS_VERSION_ORG="${DOWNLOADS_DIR}/${DOWNLOADED_WINDOWS_VERSION_NAME}"
+echo "MACOS_VERSION_ORG: ${MACOS_VERSION_ORG}"
+ls -sal ${MACOS_VERSION_ORG}
+echo "UBUNTU_VERSION_ORG: ${UBUNTU_VERSION_ORG}"
+ls -sal ${UBUNTU_VERSION_ORG}
+echo "WINDOWS_VERSION_ORG: ${WINDOWS_VERSION_ORG}"
+ls -sal ${WINDOWS_VERSION_ORG}
 echo
 echo
 
-
-# DOWNLOADED_READY_TO_USE="${MACOS_READY_TO_USE_ORG} ${UBUNTU_READY_TO_USE_ORG} ${WINDOWS_READY_TO_USE_ORG}"
-# echo "--> DOWNLOADED_READY_TO_USE = ${DOWNLOADED_READY_TO_USE}"
-# echo
-# ls -sal ${DOWNLOADED_READY_TO_USE}
-# echo
 
 function CreateReadyToUseVersion ()
 {
-  READY_TO_USE_ORG_DIR_NAME="$1"
-  READY_TO_USE_ORG_DIR="${DOWNLOADS_DIR}/${READY_TO_USE_ORG_DIR_NAME}"
-  READY_TO_USE_DEST_DIR_NAME="${READY_TO_USE_ORG_DIR_NAME}-${VERSION_NUMBER}"
+  VERSION_ORG_DIR_NAME="$1"
+  VERSION_ORG_DIR="${DOWNLOADS_DIR}/${VERSION_ORG_DIR_NAME}"
+
+  READY_TO_USE_DEST_DIR_NAME="${VERSION_ORG_DIR_NAME}-${VERSION_NUMBER}"
   READY_TO_USE_DEST_DIR="${READY_TO_USE_DIR}/${READY_TO_USE_DEST_DIR_NAME}"
 
   echo "----------------------------------------------"
-  echo "Creating ready to use versions, READY_TO_USE_ORG_DIR: ${READY_TO_USE_ORG_DIR}, READY_TO_USE_DEST_DIR: ${READY_TO_USE_DEST_DIR}"
+  echo "Creating ready to use versions, VERSION_ORG_DIR: ${VERSION_ORG_DIR}, READY_TO_USE_DEST_DIR: ${READY_TO_USE_DEST_DIR}"
   echo "----------------------------------------------"
   echo
 
-  echo "READY_TO_USE_ORG_DIR: ${READY_TO_USE_ORG_DIR}"
-  ls -salR ${READY_TO_USE_ORG_DIR}
+  echo "VERSION_ORG_DIR: ${VERSION_ORG_DIR}"
+  ls -salR ${VERSION_ORG_DIR}
   echo "READY_TO_USE_DEST_DIR: ${READY_TO_USE_DEST_DIR}"
   ls -salR ${READY_TO_USE_DEST_DIR}
 
@@ -80,10 +73,11 @@ function CreateReadyToUseVersion ()
   mkdir ${READY_TO_USE_DEST_DIR}
 
   # populate it
-  cp -p ${READY_TO_USE_ORG_DIR}/MusicFormatsVersionNumber.txt ${READY_TO_USE_DEST_DIR}
-  cp -pr ${READY_TO_USE_ORG_DIR}/documentation/*/*.pdf ${READY_TO_USE_DEST_DIR}
-  cp -pr ${READY_TO_USE_ORG_DIR}/build/bin ${READY_TO_USE_DEST_DIR}
-  cp -pr ${READY_TO_USE_ORG_DIR}/build/lib ${READY_TO_USE_DEST_DIR}
+  cp -p ${VERSION_ORG_DIR}/MusicFormatsVersionNumber.txt ${READY_TO_USE_DEST_DIR}
+  cp -p ${VERSION_ORG_DIR}/MusicFormatsVersionDate.txt ${READY_TO_USE_DEST_DIR}
+  cp -pr ${VERSION_ORG_DIR}/documentation/*/*.pdf ${READY_TO_USE_DEST_DIR}
+  cp -pr ${VERSION_ORG_DIR}/build/bin ${READY_TO_USE_DEST_DIR}
+  cp -pr ${VERSION_ORG_DIR}/build/lib ${READY_TO_USE_DEST_DIR}
 
   # zip it
   READY_TO_USE_ZIP_NAME="${READY_TO_USE_DEST_DIR_NAME}.zip"
@@ -91,7 +85,7 @@ function CreateReadyToUseVersion ()
   READY_TO_USE_ZIP="${READY_TO_USE_DIR}/${READY_TO_USE_ZIP_NAME}"
   echo "--> READY_TO_USE_ZIP   = ${READY_TO_USE_ZIP}"
   echo
-  zip ${READY_TO_USE_ZIP} -r ${READY_TO_USE_DEST_DIR}
+  zip ${READY_TO_USE_ZIP} --recurse-paths --junk-paths ${READY_TO_USE_DEST_DIR}
   echo
 
   # show the result
@@ -111,9 +105,9 @@ echo "----------------------------------------------"
 echo "==> create the readytouse versions:"
 echo "----------------------------------------------"
 echo
-CreateReadyToUseVersion "${DOWNLOADED_MACOS_READY_TO_USE_NAME}"
-CreateReadyToUseVersion "${DOWNLOADED_UBUNTU_READY_TO_USE_NAME}"
-CreateReadyToUseVersion "${DOWNLOADED_WINDOWS_READY_TO_USE_NAME}"
+CreateReadyToUseVersion "${DOWNLOADED_MACOS_VERSION_NAME}"
+CreateReadyToUseVersion "${DOWNLOADED_UBUNTU_VERSION_NAME}"
+CreateReadyToUseVersion "${DOWNLOADED_WINDOWS_VERSION_NAME}"
 
 
 echo "----------------------------------------------"

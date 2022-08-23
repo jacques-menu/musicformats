@@ -2,7 +2,7 @@
 
 La [librarie MusicFormats](https://github.com/jacques-menu/musicformats)
 est un logiciel ouvert mis à disposition sous la licence Mozilla Public License 2.0.
-Elle dédiée à la conversion de formats de description de partitions musicales
+Elle est dédiée à la conversion de formats de description de partitions musicales
 comme MusicXML, LilyPond, musique braille et Guido.
 Elle est écrite en C++17. Pour la construire à partir du code source,
 il faut un compilateur C++ et l'outil cmake.
@@ -22,13 +22,11 @@ La documentation contient entre autres un guide d'utilisation en anglais :
 et un guide de maintenance pour les développeurs :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
 
-Des versions directement utilisables de MusicFormats
-pour les trois systèmes d'exploitation principaux,
+Des versions prêtes à l'emploi de MusicFormats pour les trois systèmes d'exploitation principaux,
 soit MacOS™, Linux dans sa déclinaison Ubuntu et Windows™,
-peuvent être téléchargées depuis la page d'accueil du dépôt GitHub à
+Elles sont en format ZIP et peuvent être téléchargées depuis la page d'accueil du dépôt GitHub à
 https://github.com/jacques-menu/musicformats.
-Sous 'Releases' dans la colonne de droite,
-cliquer sur le lien 'n tags' link pour accéder aux diverses versions.
+Cliquer sur le lien 'n tags' en haut de la page pour accéder aux diverses versions.
 
 On peut aussi aller directement à :
 https://github.com/jacques-menu/musicformats/tags .
@@ -41,8 +39,6 @@ Chaque archive .zip contient:
   - un  introduction à MusicXML en PDF;
   - le guide de l'utilisateur de MusicFormats en PDF.
 
-Ces distributions peuvent être accédées directement avec des URL comme:
-https://github.com/jacques-menu/musicformats/releases/download/v0.9.65/musicformats-macos-v0.9.65-distrib.zip.
-https://github.com/jacques-menu/musicformats/releases/download/v0.9.65/musicformats-linux-v0.9.65-distrib.zip.
-https://github.com/jacques-menu/musicformats/releases/download/v0.9.65/musicformats-windows-v0.9.65-distrib.zip.
+Ces versions prêtes à l'emploi peuvent être accédées directement avec des URL comme:
+  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.65
 Remplacer v0.9.65 par le numéro de version pour le système d'exploitation désiré.
