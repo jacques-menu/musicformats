@@ -22,23 +22,23 @@ The documentation contains among other things a user guide :
 and a maintenance guide for developpers :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
 
-Ready-to-use versions of [MusicFormats] for the three main operating systems,
+There are eady-to-use versions of [MusicFormats] for the three main operating systems,
 i.e. MacOS™, Linux in its Ubuntu declination and Windows™.
 They are in ZIP format and can be downloaded from the repository main page at
 https://github.com/jacques-menu/musicformats.
 Click on the 'n tags' link at the top of the page to access the various versions.
 
 One can also go directly to:
-https://github.com/jacques-menu/musicformats/tags
+https://github.com/jacques-menu/musicformats/tags .
 Then click on the link to the desired version such as v0.9.65, to access its contents.
 
 Each .zip archive contains:
-  - text files containing the version number and date;
+  - text files containing the version number and release date;
   - the executable tools in the bin subdirectory;
   - binary versions of the library in the lib subdirectory;
   - a PDF introduction to MusicXML;
   - a PDF MusicFormats user guide.
 
 These ready-to-use versions can be accessed directly with URLs such as:
-  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.65
+  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.65 .
 Replace v0.9.65 by the version number for the desired operations system.

@@ -334,9 +334,11 @@ S_mfcLibraryComponent createLibraryComponent ()
       appendVersionDescrToComponent (
         mfcVersionDescr::create (
           mfcVersionNumber::createFromString ("0.9.65"),
-          "July 29, 2022",
+          "Augus 24, 2022",
           list<string> {
-            "Upgrading MusicXML from version 3.1 to 4.0"
+            "Upgraded MusicXML from version 3.1 to 4.0",
+            "Switched to GitHub's release management",
+            "Ready-to-use versions installation and use documentation complements"
           }
       ));
  }

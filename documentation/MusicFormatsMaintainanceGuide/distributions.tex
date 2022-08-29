@@ -4,9 +4,37 @@
 \chapter{MusicFormats distributions}\label{MusicFormats distributions}
 % -------------------------------------------------------------------------
 
+%Create a new release
+%
+%  create a tag with same name
+%  describe the release
+%  
+%  attach the three .zip archives to the release
+%  
+%  publish the release, il will appear at https://github.com/jacques-menu/musicformats/releases
+%  
+%  it contains the .zip archives as assets, as well as the source code in .zip and .tar.gz formats
+%    
+%    
+%    
+%    git filter-branch --force --index-filter \
+%  'git rm -r --cached --ignore-unmatch scripts/musicformats-macos-version-v0.9.65.zip' \
+%  --prune-empty --tag-name-filter cat -- --all
+%
+%ou
+%
+%git filter-repo --force --index-filter \
+%  'git rm -r --cached --ignore-unmatch scripts/musicformats-macos-version-v0.9.65.zip' \
+%  --prune-empty --tag-name-filter cat -- --all
+%
+%puis
+%
+%git push -f origin master
+
+
 The \mf\ \repo\ is hosted by \github\ and uses so-called \MainIt{actions} to build the library on \MacOS, \Ubuntu\ and \Windows. The resulting files are then uploaded to the \repo, where they are available to create the distributions for these three \OS s.
 
-The distributions \zip\ archives are supplied with all \mf\ versions, i.e. the current, most recent version of \mf\ (the \default\ \masterBranch\ in the \repo), and the earlier versions such as the \code{v0.9.60} branch.
+The distributions \zip\ archives are supplied with all \mf\ versions, i.e. the current, most recent version of \mf\ (the \default\ \masterBranch\ in the \repo), and the earlier versions such as the \code{v0.9.65} branch.
 
 
 % -------------------------------------------------------------------------
@@ -15,20 +43,20 @@ The distributions \zip\ archives are supplied with all \mf\ versions, i.e. the c
 
 These actions are defined in \code{.yml} files in \directoryName{.github/workflows}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/.github/workflows > ls -sal
-total 32
-0 drwxr-xr-x  6 jacquesmenu  staff   192 Feb 19 08:07 .
-0 drwxr-xr-x@ 4 jacquesmenu  staff   128 May  5  2021 ..
-8 -rw-r--r--@ 1 jacquesmenu  staff  1285 Feb 11 17:55 macos-check.yml
-8 -rw-r--r--@ 1 jacquesmenu  staff  1343 Feb 11 17:55 ubuntu-check.yml
-8 -rw-r--r--@ 1 jacquesmenu  staff  1396 Feb 11 17:55 windows-check.yml
+jacquesmenu@macmini:~/musicformats-git-dev/.github/workflows > ls -sal
+total 24
+0 drwxr-xr-x  5 jacquesmenu  staff   160 Aug 24 09:35 .
+0 drwxr-xr-x  4 jacquesmenu  staff   128 Aug 22 08:41 ..
+8 -rw-r--r--@ 1 jacquesmenu  staff  1366 Aug 23 07:09 build-macos-version.yml
+8 -rw-r--r--@ 1 jacquesmenu  staff  1371 Aug 23 07:09 build-ubuntu-version.yml
+8 -rw-r--r--@ 1 jacquesmenu  staff  1455 Aug 23 07:08 build-windows-version.yml
 \end{lstlisting}
 
-For example, the \Ubuntu\ action in \file{ubuntu-check.yml} is shown below. It is executed each time a \code{git push} is performed to the \masterBranch:
+For example, the \Ubuntu\ action in \file{build-ubuntu-version.yml} is shown below. It is executed each time a \code{git push} is performed to the \masterBranch:
 \begin{lstlisting}[language=Terminal]
 # This is a workflow to build MusicFormats and create a distribution of it
 
-name: Ubuntu
+name: Build Ubuntu Version
 
 # Controls when the action will run.
 on:
@@ -59,12 +87,12 @@ jobs:
       - name: Upload libraries and executables for Ubuntu
         uses: actions/upload-artifact@v2
         with:
-          name: musicformats-ubuntu-distrib
+          name: musicformats-ubuntu-version
           path: |
             MusicFormatsVersionNumber.txt
+            MusicFormatsVersionDate.txt
             build/bin
-            build/lib/*.a
-            build/lib/*.so
+            build/lib
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
             documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
 \end{lstlisting}
