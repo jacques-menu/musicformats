@@ -23,7 +23,7 @@ set (XMLVERSION 4.0)
 
 #===============================================================
 # MusicFormats versions management
-#set (VERSION 0.9.61)
+#set (VERSION 0.9.61) # now set from a text file, next line:
 execute_process(COMMAND cat ../../MusicFormatsVersionNumber.txt OUTPUT_VARIABLE VERSION)
 message (STATUS "VERSION: ${VERSION}")
 
@@ -274,21 +274,21 @@ set_target_properties (${target} PROPERTIES
 )
 endif()
 
-if (NOT WIN32)
-add_library(${staticlib} STATIC ${LIBCONTENT})
-set_target_properties (${staticlib} PROPERTIES
-			VERSION ${VERSION}
-			SOVERSION ${SOVERS}
-			ARCHIVE_OUTPUT_DIRECTORY  ${LIBDIR}
-			ARCHIVE_OUTPUT_DIRECTORY_RELEASE  ${LIBDIR}
-			LIBRARY_OUTPUT_DIRECTORY ${LIBDIR}
-			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${LIBDIR}
-			PUBLIC_HEADER "${COREH}"
-			DEFINE_SYMBOL LIBMUSICXML_EXPORTS
-			XCODE_ATTRIBUTE_ENABLE_BITCODE "NO"
-			OUTPUT_NAME musicformats
-)
-endif()
+# if (NOT WIN32)
+add_library(${staticlib} STATIC ${LIBCONTENT}) # JMI v0.9.66
+# set_target_properties (${staticlib} PROPERTIES
+# 			VERSION ${VERSION}
+# 			SOVERSION ${SOVERS}
+# 			ARCHIVE_OUTPUT_DIRECTORY  ${LIBDIR}
+# 			ARCHIVE_OUTPUT_DIRECTORY_RELEASE  ${LIBDIR}
+# 			LIBRARY_OUTPUT_DIRECTORY ${LIBDIR}
+# 			LIBRARY_OUTPUT_DIRECTORY_RELEASE ${LIBDIR}
+# 			PUBLIC_HEADER "${COREH}"
+# 			DEFINE_SYMBOL LIBMUSICXML_EXPORTS
+# 			XCODE_ATTRIBUTE_ENABLE_BITCODE "NO"
+# 			OUTPUT_NAME musicformats
+# )
+# endif()
 
 if (FMWK AND APPLE AND NOT IOS)
 set_target_properties (${target} PROPERTIES

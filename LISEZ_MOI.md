@@ -22,7 +22,7 @@ La documentation contient entre autres un guide d'utilisation en anglais :
 et un guide de maintenance pour les développeurs :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
 
-Des versions prêtes à l'emploi de MusicFormats pour les trois systèmes d'exploitation principaux,
+Il y a des versions prêtes à l'emploi de MusicFormats pour les trois systèmes d'exploitation principaux,
 soit MacOS™, Linux dans sa déclinaison Ubuntu et Windows™,
 Elles sont en format ZIP et peuvent être téléchargées depuis la page d'accueil du dépôt GitHub à
 https://github.com/jacques-menu/musicformats.
@@ -33,12 +33,12 @@ https://github.com/jacques-menu/musicformats/tags .
 Ensuite cliquer sur le lien vers la version voulue, comme v0.9.65, pour accéder à son contenu.
 
 Chaque archive .zip contient:
-  - des fichiers texte contenant le numéro et la date de la version;
+  - des fichiers texte contenant le numéro et la date de création de la version;
   - les outils exécutables dans le sous-dossier bin;
   - des versions binaires de la librairie dans le sous-dossier lib;
   - un  introduction à MusicXML en PDF;
   - le guide de l'utilisateur de MusicFormats en PDF.
 
 Ces versions prêtes à l'emploi peuvent être accédées directement avec des URL comme:
-  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.65
+  https://github.com/jacques-menu/musicformats/releases/tag/v0.9.65 .
 Remplacer v0.9.65 par le numéro de version pour le système d'exploitation désiré.
