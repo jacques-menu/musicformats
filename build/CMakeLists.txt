@@ -366,7 +366,7 @@ if (NOT IOS)
   endforeach(sample)
 
   if (WIN32 OR WIN64 OR MSYS)
-    file (COPY musicformats.dll DESTINATION ${BINDIR})
+    file (COPY ${LIBDIR}/musicformats.dll DESTINATION ${BINDIR})
   endif()
 endif()
 
