@@ -346,7 +346,7 @@ message (STATUS "LXML_TOOLS: ${LXML_TOOLS}")
 message (STATUS "LINKTO: ${LINKTO}")
 
 
-if(NOT IOS )
+if (NOT IOS)
   foreach(sample ${LXML_CLI_SAMPLES})
     add_executable( ${sample} ${LXML_SAMPLE_DIR}/${sample}.cpp )
     target_link_libraries( ${sample} ${LINKTO})
@@ -364,6 +364,10 @@ if(NOT IOS )
       RUNTIME_OUTPUT_DIRECTORY_RELEASE  ${BINDIR})
     add_dependencies(${sample} ${target})
   endforeach(sample)
+
+  if (WIN32 OR WIN64 OR MSYS)
+    file (COPY musicformats.dll DESTINATION ${BINDIR})
+  endif()
 endif()
 
 
