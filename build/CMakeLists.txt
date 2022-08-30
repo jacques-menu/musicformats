@@ -336,6 +336,7 @@ else()
   set (LINKTO ${target})
 endif()
 
+set (LINKTO ${target}) # JMI
 
 message (STATUS "LXML_CLI_SAMPLES: ${LXML_CLI_SAMPLES}")
 message (STATUS "MF_CLI_SAMPLES: ${MF_CLI_SAMPLES}")
