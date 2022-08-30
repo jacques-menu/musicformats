@@ -336,7 +336,7 @@ else()
   set (LINKTO ${target})
 endif()
 
-set (LINKTO ${target}) # JMI v0.9.66
+# set (LINKTO ${target}) # JMI v0.9.66
 
 message (STATUS "LXML_CLI_SAMPLES: ${LXML_CLI_SAMPLES}")
 message (STATUS "MF_CLI_SAMPLES: ${MF_CLI_SAMPLES}")
@@ -364,10 +364,6 @@ if (NOT IOS)
       RUNTIME_OUTPUT_DIRECTORY_RELEASE  ${BINDIR})
     add_dependencies(${sample} ${target})
   endforeach(sample)
-
-#   if (WIN32 OR WIN64 OR MSYS) # JMI v0.9.66
-#     file (COPY ${LIBDIR}/musicformats.dll DESTINATION ${BINDIR})
-#   endif()
 endif()
 
 
