@@ -274,7 +274,7 @@ set_target_properties (${target} PROPERTIES
 )
 endif()
 
-if (NOT WIN32)
+if (NOT (WIN32 OR WIN64) # JMI v0.9.66
 add_library(${staticlib} STATIC ${LIBCONTENT})
 set_target_properties (${staticlib} PROPERTIES
 			VERSION ${VERSION}
