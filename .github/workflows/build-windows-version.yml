@@ -40,5 +40,6 @@ jobs:
             MusicFormatsVersionDate.txt
             build/bin
             build/lib
+            build/libdir
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
             documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf

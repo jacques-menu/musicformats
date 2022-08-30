@@ -138,7 +138,7 @@ if(APPLE)
 		set (CMAKE_OSX_ARCHITECTURES "x86_64")
 		set (CMAKE_OSX_DEPLOYMENT_TARGET 10.12)
 
-#		add_definitions(--analyze --analyzer-output text) #  Run the static analyzer JMI
+#		add_definitions(--analyze --analyzer-output text) # Run the static analyzer JMI
 
 	endif()
 
@@ -336,7 +336,7 @@ else()
   set (LINKTO ${target})
 endif()
 
-set (LINKTO ${target}) # JMI
+set (LINKTO ${target}) # JMI v0.9.66
 
 message (STATUS "LXML_CLI_SAMPLES: ${LXML_CLI_SAMPLES}")
 message (STATUS "MF_CLI_SAMPLES: ${MF_CLI_SAMPLES}")
@@ -365,9 +365,9 @@ if (NOT IOS)
     add_dependencies(${sample} ${target})
   endforeach(sample)
 
-  if (WIN32 OR WIN64 OR MSYS)
-    file (COPY ${LIBDIR}/musicformats.dll DESTINATION ${BINDIR})
-  endif()
+#   if (WIN32 OR WIN64 OR MSYS) # JMI v0.9.66
+#     file (COPY ${LIBDIR}/musicformats.dll DESTINATION ${BINDIR})
+#   endif()
 endif()
 
 
