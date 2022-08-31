@@ -275,6 +275,7 @@ set_target_properties (${target} PROPERTIES
 endif()
 
 if (NOT (WIN32 OR WIN64)) # JMI v0.9.66
+if (NOT WIN32)
 add_library(${staticlib} STATIC ${LIBCONTENT})
 set_target_properties (${staticlib} PROPERTIES
 			VERSION ${VERSION}
@@ -335,8 +336,6 @@ if (APPLE)
 else()
   set (LINKTO ${target})
 endif()
-
-# set (LINKTO ${target}) # JMI v0.9.66
 
 message (STATUS "LXML_CLI_SAMPLES: ${LXML_CLI_SAMPLES}")
 message (STATUS "MF_CLI_SAMPLES: ${MF_CLI_SAMPLES}")
