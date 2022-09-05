@@ -81,6 +81,16 @@ function CreateReadyToUseVersion ()
   cp -pr ${VERSION_ORG_DIR}/build/bin ${READY_TO_USE_DEST_DIR}
   cp -pr ${VERSION_ORG_DIR}/build/lib ${READY_TO_USE_DEST_DIR}
 
+  echo "===> VERSION_ORG_DIR_NAME: ${VERSION_ORG_DIR_NAME},DOWNLOADED_WINDOWS_VERSION_NAME: ${DOWNLOADED_WINDOWS_VERSION_NAME} "
+  if [[ ${VERSION_ORG_DIR_NAME} == ${DOWNLOADED_WINDOWS_VERSION_NAME} ]]; then
+    # pick musicformats.dll from the libdir subdirectory
+    MUSICFORMATS_DLL=${VERSION_ORG_DIR}/build/libdir/Release/musicformats.dll
+    echo "===> MUSICFORMATS_DLL:"
+    ls -sal ${MUSICFORMATS_DLL}
+    cp -pr ${MUSICFORMATS_DLL} ${READY_TO_USE_DEST_DIR}/bin
+    cp -pr ${MUSICFORMATS_DLL} ${READY_TO_USE_DEST_DIR}/lib
+  fi
+
   # zip it
   READY_TO_USE_ZIP_NAME="${READY_TO_USE_DEST_DIR_NAME}.zip"
   echo "--> READY_TO_USE_ZIP_NAME = ${READY_TO_USE_ZIP_NAME}"
