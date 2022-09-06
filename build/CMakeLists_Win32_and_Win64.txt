@@ -151,8 +151,8 @@ if(APPLE)
 #===============================================================
 # windows specific part
 #===============================================================
-elseif(WIN64)
-  add_definitions(-DWINVER=0x0400 -DWIN64)
+elseif(WIN32)
+  add_definitions(-DWINVER=0x0400 -DWIN32)
   if(MSVC)
     add_definitions(-DMSVC)
   endif()
@@ -249,9 +249,9 @@ message (STATUS "INCL: ${INCL}")
 
 
 #===============================================================
-if(WIN64 OR MSYS)
+if(WIN32 OR MSYS)
   enable_language(RC)
-  set(LIBCONTENT ${CORESRC} ${COREH} ${ROOT}/win64/musicformats/musicformats.rc)
+  set(LIBCONTENT ${CORESRC} ${COREH} ${ROOT}/win32/musicformats/musicformats.rc)
 else()
   set(LIBCONTENT ${CORESRC} ${COREH})
 endif()
@@ -274,7 +274,7 @@ set_target_properties (${target} PROPERTIES
 )
 endif()
 
-if (NOT WIN64)
+if (NOT WIN32)
 add_library(${staticlib} STATIC ${LIBCONTENT})
 set_target_properties (${staticlib} PROPERTIES
 			VERSION ${VERSION}
@@ -375,7 +375,7 @@ set (DOCDIR  ${CMAKE_INSTALL_PREFIX}/share/musicformats)
 if (APPLE)
   set (BINDEST bin)
   set (LIBDEST lib)
-elseif (WIN64)
+elseif (WIN32)
   set (BINDEST bin)
   set (LIBDEST bin)
   set (DOCDIR  .)
@@ -387,7 +387,7 @@ endif ()
 
 if (NOT IOS)
 message (STATUS "Install location is ${CMAKE_INSTALL_PREFIX}")
-if (WIN64)
+if (WIN32)
 	set (INSTALLED ${target})
 else()
 	set (INSTALLED ${target}  ${staticlib})
@@ -435,11 +435,11 @@ install (
 
 #===============================================================
 # install VS redistributables
-if (WIN64)
+if (WIN32)
 if (${CMAKE_GENERATOR} STREQUAL "Visual Studio 14 2015 Win64")
-	set (VS "C:/Program Files (x86_64)/Microsoft Visual Studio 14.0/VC/redist/x64/Microsoft.VC140.CRT")
+	set (VS "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/redist/x64/Microsoft.VC140.CRT")
 elseif (${CMAKE_GENERATOR} STREQUAL "Visual Studio 15 2017 Win64")
-	set (VS "C:/Program Files (x86_64)/Microsoft Visual Studio/2017/Community/VC/Redist/MSVC/14.16.27012/x64/Microsoft.VC141.CRT")
+	set (VS "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Redist/MSVC/14.16.27012/x64/Microsoft.VC141.CRT")
 else()
 	set (VS "/unknown/visual/studio/version")
 endif()
