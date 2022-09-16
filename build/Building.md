@@ -1,13 +1,13 @@
 
-Compiling the musicformats project
+Compiling the MusicFormats project
 ======================================================================
 
 ----------------------------------------------------------------------
-### Compiling the musicformats library
+### Compiling the MusicFormats library
 ----------------------------------------------------------------------
-The **musicformats** library relies on [CMake](http://www.cmake.org/), a cross-platform, open-source build system. The `build` folder contains the project description and is used to generate native projects.
+The **MusicFormats** library relies on [CMake](http://www.cmake.org/), a cross-platform, open-source build system. The `build` folder contains the project description and is used to generate native projects.
 
-You should run `make` from the `build` folder. Your target platform is inferred from the Makefile. It builds the musicformats library and various sample applications and tools.
+You should run `make` from the `build` folder. Your target platform is inferred from the Makefile. It builds the MusicFormats library and various sample applications and tools.
 
 Run `make help` for more details and a description of all the possible targets.
 

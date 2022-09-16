@@ -2,214 +2,136 @@
 #
 #
 
-.PHONY : msys win32 win64 linux android
+.PHONY: android
 
-PDIR   ?= libdir
-VERSION = v0.9.60
 
-system	:= $(shell uname -s)
-system := $(shell echo $(system) | grep MINGW > /dev/null && echo MINGW || echo $(system))
-ifeq ($(system), Darwin)
-	TARGET ?= macos
-	GENERATOR ?= -G Xcode
-	PREFIX ?= /usr/local
-	NATIVEPACK = macpack
-else
-ifeq ($(system), MINGW)
-	TARGET ?= windows
-	PDIR  ?= win64
-	NATIVEPACK = winpack
-else
-ifeq ($(system), Linux)
-	TARGET ?= linux
-	PREFIX ?= /usr/local
-	NATIVEPACK = linuxpack
-else
-	TARGET = linux
-	NATIVEPACK = undefined
-endif
-endif
-endif
+#===============================================================
+#	variables
+#===============================================================
+MAKE      ?= make --debug # JMI
+CMAKE     ?= cmake # --help-full
 
-IOS  := iosdir
+LIBDIR    ?= libdir
+IOSDIR    ?= iosdir
 
-CMAKEOPT ?=
+MAKEFILE  ?= Makefile
+
+VERSION   = 0.9.66
+
+CMAKEOPTS ?=
 
 TOOLS := LilyPondIssue34 Mikrokosmos3Wandering MusicAndHarmonies RandomChords RandomMusic countnotes displayMusicformatsHistory displayMusicformatsVersion msdlconverter partsummary readunrolled xml2brl xml2gmn xml2guido xml2ly xml2midi xml2xml xmlclone xmlfactory xmliter xmlread xmltranspose xmlversion
 
 
 #===============================================================
-#	make submodule
+#	default target
 #===============================================================
-
 all :
-	make $(TARGET)
-
-undefined:
-	$(error System is undefined, not target available)
+	$(MAKE) libmusicformats
 
 
 #===============================================================
 # help
 #===============================================================
-
 help :
-	@echo MusicFormats makefile - Targets are :
-	@echo "   all (default): build the MusicFormats library and tools"
-	@echo "                  for the current platform"
-	@echo
-	@echo "Platform targets to build the MusicFormats library are:"
-	@echo "   macos     build the library for macos"
-	@echo "   windows   build 32 and 64 bits library for windows"
-	@echo "   linux     build the library for linux"
-	@echo "   android   build a static library for Android"
-	@echo "   ios       build a static library for iOS"
-	@echo "   msys      build on Windows using MSys"
-	@echo "   js        build a javascript library"
-	@echo "the platform targets is automatically evaluated by the default target."
-	@echo
-	@echo "Clean:"
-	@echo "   clean     remove the bin, lib and libdir folders"
+	@echo "libmusicformats makefile - Available targets:"
+	@echo "   all (default)  build the libmusicformats library for the current platform,"
+	@echo "                     and the libmusicformats tools"
+	@echo "   android        build a static library for Android"
+	@echo "   ios            build a static library for iOS"
+	@echo "   wasm           build the wasm library"
+	@echo "   minimal        build the library with only guido support (no tools and no static library)"
 	@echo
 	@echo "Misc:"
-	@echo "   cmake     re-generates the cmake project"
-	@echo "   format    source code formatting using clang-format"
-	@echo "   install   install library, tools and headers"
+	@echo "   cmake          re-generates the cmake project"
+# 	@echo "   format         source code formatting using clang-format"
+	@echo "   install        install library, tools and headers"
 	@echo "   localinstall   install the tools to ~/bin"
-	@echo "   package   create the musicformats-$(VERSION) package"
+	@echo "   package        create the libmusicformats-$(VERSION) package"
 	@echo
 	@echo "Options:"
-	@echo "   CMAKEOPT  cmake options passed to cmake by the 'cmake' target"
-	@echo "   GENERATOR the cmake generator. Currently '$(GENERATOR)'"
-	@echo "   PDIR      the generation folder. Currently '$(PDIR)'"
-	@echo "   PREFIX    the install location prefix. Currently $(PREFIX)'"
+	@echo "   CMAKEOPTS      cmake options passed to cmake by the 'cmake' target, currently '$(CMAKEOPTS)'"
+	@echo "   GENERATOR      the cmake generator, currently '$(GENERATOR)'"
+	@echo "   LIBDIR         the generation folder, currently '$(LIBDIR)'"
+	@echo "   MSVC           [Windows only] the windows generator, currently '$(MSVC)'"
+	@echo "   PREFIX         the install location prefix, currently '$(PREFIX)'"
 	@echo
 	@echo "CMake options:"
-	@echo "   FMWK 		[MacOS only] Generates a framework on MacOS. Default is on"
-	@echo "   GDB 		Activates ggdb3 option. Default is off"
-	@echo "   LILY 		Include lilypond part. Default is on"
-	@echo "NOTE:  CMake options can be passed using CMAKEOPT, e.g."
-	@echo "      'make cmake CMAKEOPT=-DLILY=off'"
-
-
-$(PDIR) :
-	mkdir $(PDIR)
+	@echo "   FMWK           [MacOS only] Generates a framework on MacOS. Default is off"
+	@echo
+	@echo "Clean:"
+	@echo "   clean          remove the bin, lib and libdir folders"
+	@echo
 
 
 #===============================================================
-# clean
+# building the library
 #===============================================================
+libmusicformats: $(LIBDIR) $(LIBDIR)/$(MAKEFILE)
+	@echo "====> Creating libmusicformats..."
+	$(CMAKE) --build $(LIBDIR) --config Release
 
-clean:
-	rm -r bin lib libdir
+$(LIBDIR):
+	@echo "====> Creating $(LIBDIR)..."
+	mkdir $(LIBDIR)
 
-
-#===============================================================
-# updating submodules
-#===============================================================
-
-submodule:
-	git submodule update --init --recursive
-	git -C ../libmusicxml checkout dev
-	git -C ../libmusicxml pull origin dev
+$(LIBDIR)/$(MAKEFILE): CMakeLists.txt
+	@echo "====> Creating $(LIBDIR)/$(MAKEFILE)..."
+	cd $(LIBDIR) && $(CMAKE) .. $(CMAKEOPTS) $(GENERATOR)
 
 
 #===============================================================
 # building the javascript library
 #===============================================================
-
-js:
-	make -C ../javascript
+wasm:
+	$(MAKE) -C ../javascript
 
 #===============================================================
-# building the library on Mac OS X
+minimal:
 #===============================================================
-
-macos : $(PDIR)/musicformats.xcodeproj
-	cmake --build $(PDIR) --config Release
-	-cd lib &&  [ -d musicformats.framework ] && tar czf musicformats.tgz musicformats.framework || echo "no framework"
-
-$(PDIR)/musicformats.xcodeproj : $(PDIR) CMakeLists.txt
-	cd $(PDIR) && cmake .. -G Xcode $(CMAKEOPT)  -Wno-dev
+	$(MAKE) cmake CMAKEOPTS="-DGENTOOLS=off -DGENSTATIC=off"
+	$(CMAKE) --build $(LIBDIR) --config Release
 
 
 #===============================================================
 # building the library for iOS
 #===============================================================
-
-ios : $(IOS)/musicformats.xcodeproj
-	cmake --build $(IOS) --config Release
-
-$(IOS)/musicformats.xcodeproj : CMakeLists.txt
-	[ -d $(IOS) ] || mkdir $(IOS)
-	cd $(IOS) && cmake .. -G Xcode -DIOS=yes -Wno-dev $(CMAKEOPT)
+ios :
+	$(MAKE) libmusicformats LIBDIR=$(IOSDIR) CMAKEOPTS="-DIOS=on"
 
 
 #===============================================================
-# building the library on windows
+# re-generating the cmake project
 #===============================================================
-
-#===============================================================
-# using msys
-msys : GENERATOR ?= -G "MSYS Makefiles"
-msys : $(PDIR)/Makefile
-	make -C $(PDIR)
-
-#===============================================================
-# using visual studio
-windows :
-	make win32
-	make win64
-
-win32 : win32/musicformats.sln
-	cmake --build win32 --config Release -- /maxcpucount:4
-
-win32/musicformats.sln : CMakeLists.txt
-	[ -d win32 ] || mkdir win32
-	cd win32 && cmake .. $(GENERATOR) $(CMAKEOPT)
-
-win64 : win64/musicformats.sln
-	cmake --build win64 --config Release -- /maxcpucount:4
-
-win64/musicformats.sln : CMakeLists.txt
-	[ -d win64 ] || mkdir win64
-	cd win64 && cmake .. $(GENERATOR) $(CMAKEOPT)
-
-
-#===============================================================
-# building the library on linux
-#===============================================================
-
-linux : $(PDIR)/Makefile
-	cmake --build $(PDIR) --config Release
-
-$(PDIR)/Makefile : $(PDIR) CMakeLists.txt
-	cd $(PDIR) && cmake .. $(GENERATOR)  $(CMAKEOPT)
-
-
-#===============================================================
-cmake : $(PDIR)
-	cd $(PDIR) && cmake .. $(GENERATOR) -Wno-dev $(CMAKEOPT)
+cmake : $(LIBDIR)
+	cd $(LIBDIR) && $(CMAKE) .. $(CMAKEOPTS)
 
 
 #===============================================================
 # building the library for Android
 #===============================================================
-
 android :
-	ndk-build -C android -j 6
-	cp android/libs/armeabi-v7a/musicformats.so android/musicformats.armeabi-v7a.so
-	cp android/libs/x86/musicformats.so android/musicformats.x86.so
+	ndk-build -C android
+	cp android/libs/armeabi-v7a/libmusicformats.so android/libmusicformats.armeabi-v7a.so
+	cp android/libs/x86/libmusicformats.so android/libmusicformats.x86.so
+
+
+#===============================================================
+# src code formatting
+#===============================================================
+# format :
+# 	@which clang-format >/dev/null || (echo "clang-format must be available from your path to run the 'format' target"; false)
+# 	find ../src -path ../src/parser -prune -o -iname '*.cpp' -execdir clang-format -i -style=file {} \;
+# 	find ../src -path ../src/parser -prune -o -iname '*.h' -execdir clang-format -i -style=file {} \;
 
 
 #===============================================================
 # install
 #===============================================================
-
-installLog := $(PDIR)/install_manifest.txt
+installLog := $(LIBDIR)/install_manifest.txt
 install:
-	cd $(PDIR) && cmake .. -DCMAKE_INSTALL_PREFIX=$(PREFIX)
-	cmake --build $(PDIR) --config Release --target install
+	cd $(LIBDIR) && $(CMAKE) .. -DCMAKE_INSTALL_PREFIX=$(PREFIX)
+	$(CMAKE) --build $(LIBDIR) --config Release --target install
 
 uninstall: installedfiles = $(shell cat $(installLog))
 uninstall: $(installLog)
@@ -222,20 +144,17 @@ localinstall:
 #===============================================================
 # packaging
 #===============================================================
-
 PACKDIR := ../packages
-PACK := $(PACKDIR)/musicformats-$(VERSION)
+PACK := $(PACKDIR)/libmusicformats-$(VERSION)
 package:
-	$(MAKE) $(NATIVEPACK)
+	cmake --build $(LIBDIR) --config Release --target package
 
 winpack:
 	$(MAKE) win64
 	cd win64 && cpack -G NSIS64
-	mv win64/musicformats-*.exe .
+	mv win64/libmusicformats-*.exe .
 
 macpack: $(PACKDIR)/README.html
-	$(MAKE) cmake CMAKEOPT="-DLILY=on -DBRL=on -DFMWK=off"
-	$(MAKE) macos
 	-[ -d $(PACK) ] && rm -rf $(PACK)
 	$(MAKE) install PREFIX=../$(PACK)
 	hdiutil create $(PACK).dmg -fs HFS+ -srcfolder $(PACK) -format UDBZ -ov
@@ -249,3 +168,12 @@ $(PACKDIR)/README.html: $(PACKDIR)/README.md
 	echo "</xmp>" >> $@
 	echo "<script src=http://strapdownjs.com/v/0.2/strapdown.js></script>" >> $@
 	echo "</html>" >> $@
+
+
+#===============================================================
+# clean
+#===============================================================
+clean:
+	-[ -d bin ] && rm -rf bin
+	-[ -d lib ] && rm -rf lib
+	-[ -d $(LIBDIR) ] && rm -rf $(LIBDIR)
