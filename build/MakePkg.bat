@@ -10,6 +10,6 @@ IF NOT EXIST musicformats.sln (
 cmake ..  -DPACK=on -DLILY=on -DBRL=on
 cmake --build . --config Release --  /maxcpucount:4
 cpack -G NSIS64
-move libMusicXML-*.exe ..
+move musicformats-*.exe ..
 
 :END
