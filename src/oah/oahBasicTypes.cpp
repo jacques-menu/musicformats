@@ -1091,26 +1091,11 @@ Bool oahPrefix::findStringInFindableElement (
     mfStringToLowerCase (fPrefixDescription).find (lowerCaseString) != string::npos;
 
   if (prefixNameMatches || prefixErsatzMatches || prefixDescriptionMatches) {
-    stringstream s;
-
-    s <<
-      fetchPrefixNames () <<
-        endl;
-
-    // indent a bit more for readability
- // JMI    gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
-    s <<
- //     gIndenter.indentMultiLineString ( // JMI
-//        fDescription) <<
-      fPrefixDescription;
-
- // JMI    gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
     // append the match to foundStringsList
     foundMatchesList.push_back (
       oahFindStringMatch::create (
-        s.str (),
+      	fetchPrefixNames (),
+        fPrefixDescription,
         containingFindableElementAsString ()));
 
     result = true;
@@ -1185,10 +1170,9 @@ void oahPrefix::printHelp (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fPrefixDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fPrefixDescription,
+			os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -1201,7 +1185,7 @@ const string oahPrefix::containingFindableElementAsString () const
 	stringstream s;
 
 	s <<
-    "Prefix:";
+    "Prefix:"; // JMI v0.9.66
 
 	return s.str ();
 }
@@ -1873,10 +1857,9 @@ void oahAtomImplicitlyStoringAValue::printHelp (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -2102,65 +2085,13 @@ void oahAtomStoringAValue::printHelp (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
 }
-
-// Bool oahAtomStoringAValue::findStringInAtom (
-// 	const string&               lowerCaseString,
-// 	list<S_oahFindStringMatch>& foundMatchesList,
-// 	ostream&                    os) const
-// {
-//   Bool result;
-//
-//   // does this element's long name match?
-//   Bool longNameMatches =
-//     mfStringToLowerCase (fLongName).find (lowerCaseString) != string::npos;
-//
-//   // does this element's short name match?
-//   Bool shortNameMatches =
-//     mfStringToLowerCase (fShortName).find (lowerCaseString) != string::npos;
-//
-//   // does this element's description match?
-//   Bool descriptionMatches =
-//     mfStringToLowerCase (fDescription).find (lowerCaseString) != string::npos;
-//
-//   if (shortNameMatches || longNameMatches || descriptionMatches) {
-//     stringstream s;
-//
-//     // add the element's names and value specification
-//     s <<
-//       fetchNames () <<
-//       ' ' <<
-//       fValueSpecification <<
-//       endl;
-//
-//     // indent a bit more for readability
-//     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-//
-//     // add the element's description
-//     s <<
-//       gIndenter.indentMultiLineString (
-//         fDescription);
-//
-//     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-//
-//     // append the match to foundStringsList
-//     foundMatchesList.push_back (
-//       oahFindStringMatch::create (
-//         s.str (),
-//         containingFindableElementAsString ()));
-//
-//     result = true;
-//   }
-//
-//   return result;
-// }
 
 void oahAtomStoringAValue::printAtomWithVariableOptionsValues (
   ostream& os,
@@ -2461,10 +2392,9 @@ void oahPureHelpAtomExpectingAValue::printHelp (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -3000,9 +2930,11 @@ void oahSubGroup::printHelp (ostream& os) const
   // print the description if any
   if (fDescription.size ()) {
     ++gIndenter;
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription);
+
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
+
     --gIndenter;
 
     os << endl;
@@ -3068,9 +3000,11 @@ void oahSubGroup::printHelpWithHeaderWidth (
   // print the description if any
   if (fDescription.size ()) {
     ++gIndenter;
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription);
+
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
+
     --gIndenter;
 
     os << endl;
@@ -3125,10 +3059,11 @@ void oahSubGroup::printSubGroupHelp (ostream& os) const
   // print the description if any
   if (fDescription.size ()) {
     ++gIndenter;
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
+
     --gIndenter;
   }
 
@@ -3199,10 +3134,11 @@ void oahSubGroup::printOptionsSummary (
   // print the description if any
   if (fDescription.size ()) {
     ++gIndenter;
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
+
     --gIndenter;
   }
 }
@@ -4027,10 +3963,11 @@ void oahGroup::printHelp (ostream& os) const
     // print the description if any
     if (fDescription.size ()) {
       ++gIndenter;
-      os <<
-        gIndenter.indentMultiLineString (
-          fDescription) <<
-        endl;
+
+			gIndenter.indentMultiLineString (
+				fDescription,
+				os);
+
       --gIndenter;
     }
 
@@ -4100,10 +4037,11 @@ void oahGroup::printGroupAndSubGroupHelp (
   // print the description if any
   if (fDescription.size ()) {
     ++gIndenter;
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
+
     --gIndenter;
   }
 
@@ -4174,10 +4112,11 @@ void oahGroup::printOptionsSummary (ostream& os) const
   // print the description if any
   if (fDescription.size ()) {
     ++gIndenter;
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
+
     --gIndenter;
   }
 
@@ -4240,10 +4179,11 @@ void oahGroup::printGroupAndSubGroupSpecificHelp (
     // print the description if any
     if (fDescription.size ()) {
       ++gIndenter;
-      os <<
-        gIndenter.indentMultiLineString (
-          fDescription) <<
-        endl;
+
+			gIndenter.indentMultiLineString (
+				fDescription,
+				os);
+
       --gIndenter;
     }
 
@@ -5582,36 +5522,37 @@ void oahHandler::printHandlerEssentials (
     "handlerServiceName:" <<
     endl;
   ++gIndenter;
-  os <<
-    gIndenter.indentMultiLineString (fHandlerServiceName) <<
-    endl;
+	gIndenter.indentMultiLineString (
+		fHandlerServiceName,
+		os);
   --gIndenter;
 
   os << left <<
     "handlerHeader:" <<
     endl;
   ++gIndenter;
-  os <<
-    gIndenter.indentMultiLineString (fHandlerHeader) <<
-    endl;
+	gIndenter.indentMultiLineString (
+		fHandlerHeader,
+		os);
   --gIndenter;
 
   os << left <<
     "handlerDescription:" <<
     endl;
   ++gIndenter;
-  os <<
-    gIndenter.indentMultiLineString (fHandlerDescription) <<
-    endl;
+	gIndenter.indentMultiLineString (
+		fHandlerDescription,
+		os);
   --gIndenter;
 
   os << left <<
     "handlerUsage:" <<
     endl;
   ++gIndenter;
-  os <<
-    gIndenter.indentMultiLineString (fHandlerUsage) <<
-    endl;
+	gIndenter.indentMultiLineString (
+		fHandlerUsage,
+		os);
+	--gIndenter;
 }
 
 void oahHandler::print (ostream& os) const
@@ -5824,9 +5765,9 @@ void oahHandler::printHelp (ostream& os) const
 {
   // print the options handler description
   ++gIndenter;
-  os <<
-    gIndenter.indentMultiLineString (
-      fHandlerDescription);
+	gIndenter.indentMultiLineString (
+		fHandlerDescription,
+		os);
   --gIndenter;
 
   // print the options handler usage
@@ -5882,9 +5823,9 @@ void oahHandler::printHelp (ostream& os) const
 void oahHandler::printOptionsSummary (ostream& os) const
 {
   // print the options handler description
-  os <<
-    gIndenter.indentMultiLineString (
-      fHandlerDescription);
+	gIndenter.indentMultiLineString (
+		fHandlerDescription,
+		os);
 
   // print the options handler help header and option names
   os <<
@@ -6204,6 +6145,7 @@ Bool oahHandler::findStringInFindableElement (
     foundMatchesList.push_back (
       oahFindStringMatch::create (
         s.str (),
+        s.str (), // JMI v0.9.66
         containingFindableElementAsString ()));
 
     result = true;
@@ -6831,6 +6773,9 @@ void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
 //
 //   ++gIndenter;
 //
+// 	gIndenter.indentMultiLineString ( JMI v0.9.66
+// 		foundString,
+// 		os);
 //   os  <<
 //     fHandlerServiceName <<
 //     gIndenter.indentMultiLineString (

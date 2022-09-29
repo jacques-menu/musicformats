@@ -105,11 +105,13 @@ string elementHelpOnlyKindAsString (
 
 //______________________________________________________________________________
 S_oahFindStringMatch oahFindStringMatch::create (
+	const string& elementName,
 	const string& foundString,
 	const string& containingFindableElementInfo)
 {
   oahFindStringMatch* o = new
     oahFindStringMatch (
+    	elementName,
       foundString,
       containingFindableElementInfo);
   assert (o != nullptr);
@@ -117,9 +119,11 @@ S_oahFindStringMatch oahFindStringMatch::create (
 }
 
 oahFindStringMatch::oahFindStringMatch (
+	const string& elementName,
 	const string& foundString,
 	const string& containingFindableElementInfo)
-    : fFoundString (foundString),
+    : fElementName (elementName),
+    	fFoundString (foundString),
     	fContainingFindableElementInfo (containingFindableElementInfo)
 {
 #ifdef TRACING_IS_ENABLED
@@ -149,6 +153,8 @@ void oahFindStringMatch::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
+    "fElementName" << " : " << fElementName <<
+    endl <<
     "fFoundString" << " : " << fFoundString <<
     endl <<
     setw (fieldWidth) <<
@@ -505,27 +511,11 @@ Bool oahElement::findStringInFindableElement (
   Bool result;
 
   if (elementMatchesString (lowerCaseString)) {
-    stringstream s;
-
-    // add the element's names
-    s <<
-      fetchNames () <<
-      endl;
-
-    // indent a bit more for readability
-    gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
-    // add the element's description
-    s <<
-      gIndenter.indentMultiLineString (
-        fDescription);
-
-    gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
-
     // append the match to foundStringsList
     foundMatchesList.push_back (
       oahFindStringMatch::create (
-        s.str (),
+      	fetchNames (),
+        fDescription,
         containingFindableElementAsString ()));
 
     result = true;
@@ -609,10 +599,9 @@ void oahElement::printOptionHeader (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -638,10 +627,9 @@ void oahElement::printOahElementEssentials (
 
 /* JMI
   ++gIndenter;
-  os <<
-    gIndenter.indentMultiLineString (
-      fDescription) <<
-    endl;
+	gIndenter.indentMultiLineString (
+		fDescription,
+		os);
   --gIndenter;
 */
 
@@ -705,10 +693,9 @@ void oahElement::printHelp (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }

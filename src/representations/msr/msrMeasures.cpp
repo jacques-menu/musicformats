@@ -4070,6 +4070,7 @@ void msrMeasure::finalizeRegularMeasure (
   }
 #endif
 
+//* JMI v0.9.66 USELESS ???
   rational
     measureWholeNotesDurationFromPartMeasuresVector =
       regularPart->
@@ -4085,6 +4086,7 @@ void msrMeasure::finalizeRegularMeasure (
       endl;
   }
 #endif
+//*/
 
   ++gIndenter;
 
@@ -4096,9 +4098,11 @@ void msrMeasure::finalizeRegularMeasure (
   }
 #endif
 
+//* JMI v0.9.66 USELESS ??? harmonies problem
   padUpToPositionAtTheEndOfTheMeasure (
     inputLineNumber,
     measureWholeNotesDurationFromPartMeasuresVector);
+//*/
 
   // register this measures's whole notes duration in the part
   S_msrPart

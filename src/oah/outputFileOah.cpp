@@ -109,7 +109,7 @@ R"(Write output to file FILENAME instead of standard output.)",
     oahBooleanAtom::create (
       "auto-output-file-name", "aofn",
 R"(This option can only be used when writing to a file.
-Writethe output to a file in the current working directory.
+Write the output to a file in the current working directory.
 The file name is derived from that of the input file:
 any suffix after the '.' is replaced by one suited for the output format,
 or such a suffix is adde if no '.' is present.)",
@@ -236,7 +236,7 @@ ostream& operator<< (ostream& os, const S_outputFileOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

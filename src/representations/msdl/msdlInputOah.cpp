@@ -278,7 +278,7 @@ ostream& operator<< (ostream& os, const S_msdlKeywordsLanguageAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -374,12 +374,11 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
 
   ++gIndenter;
 
-  gLogStream <<
-    gIndenter.indentMultiLineString (
-      existingKeywordsInLanguage (
-        keywordsLanguageKind,
-        K_NAMES_LIST_MAX_LENGTH)) <<
-    endl;
+	gIndenter.indentMultiLineString (
+    existingKeywordsInLanguage (
+      keywordsLanguageKind,
+      K_NAMES_LIST_MAX_LENGTH),
+		gLogStream);
 
   --gIndenter;
 }
@@ -491,7 +490,7 @@ ostream& operator<< (ostream& os, const S_oahDisplayMsdlKeywordsInLanguageAtom& 
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -587,12 +586,11 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
 
   ++gIndenter;
 
-  gLogStream <<
-    gIndenter.indentMultiLineString (
-      existingTokensInLanguage (
-        keywordsLanguageKind,
-        K_NAMES_LIST_MAX_LENGTH)) <<
-    endl;
+	gIndenter.indentMultiLineString (
+    existingTokensInLanguage (
+      keywordsLanguageKind,
+      K_NAMES_LIST_MAX_LENGTH),
+		gLogStream);
 
   --gIndenter;
 }
@@ -704,7 +702,7 @@ ostream& operator<< (ostream& os, const S_oahDisplayMsdlTokensInLanguageAtom& el
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -943,7 +941,7 @@ ostream& operator<< (ostream& os, const S_msdlCommentsTypeAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1188,7 +1186,7 @@ ostream& operator<< (ostream& os, const S_msdlUserLanguageAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1431,7 +1429,7 @@ ostream& operator<< (ostream& os, const S_msdlPitchesLanguageAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1557,8 +1555,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
             regex ("PITCHES_LANGUAGES"),
-            gIndenter.indentMultiLineString (
-              existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -1589,8 +1589,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalMsdlKeywordsLanguageKindsMap.size ())),
             regex ("KEYWORDS_LANGUAGES"),
-            gIndenter.indentMultiLineString (
-              existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlKeywordsLanguageKindDefaultValue)),
@@ -1620,8 +1622,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalMsdlKeywordsLanguageKindsMap.size ())),
             regex ("KEYWORDS_LANGUAGES"),
-            gIndenter.indentMultiLineString (
-              existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlTokensLanguageKindDefaultValue)),
@@ -1815,7 +1819,7 @@ ostream& operator<< (ostream& os, const S_msdlInputOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

@@ -624,10 +624,13 @@ string existingTokensInLanguage (
           ||
         e == msdlTokenKind::LanguageDependentFirst
       ) {
-        s << endl;
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << nonSeparatorTokenAsMsdlString;
 
       if (count <= nextToLast) {
@@ -831,7 +834,7 @@ ostream& operator<< (ostream& os, const S_msdlTokenKindsSet& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -2028,7 +2031,7 @@ ostream& operator<< (ostream& os, const S_msdlTokensList& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

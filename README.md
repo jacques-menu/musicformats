@@ -22,7 +22,7 @@ The documentation contains among other things a user guide :
 and a maintenance guide for developpers :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
 
-There are eady-to-use versions of [MusicFormats] for the three main operating systems,
+The 'releases' folder contains ready-to-be-used versions of [MusicFormats] for the three main operating systems,
 i.e. MacOS™, Linux in its Ubuntu declination and Windows™.
 They are in ZIP format and can be downloaded from the repository main page at
 https://github.com/jacques-menu/musicformats.

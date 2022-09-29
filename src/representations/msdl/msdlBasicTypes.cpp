@@ -143,11 +143,14 @@ string existingMsdlUserLanguageKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -262,11 +265,14 @@ string existingMsdlCommentsTypeKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {

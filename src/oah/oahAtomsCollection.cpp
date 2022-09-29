@@ -431,10 +431,9 @@ void oahMacroAtom::printHelp (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
   }
 
   os <<
@@ -466,10 +465,9 @@ void oahMacroAtom::printHelp (ostream& os) const
 
       ++gIndenter;
 
-      os <<
-        gIndenter.indentMultiLineString (
-          atom-> getDescription ()) <<
-        endl;
+			gIndenter.indentMultiLineString (
+				atom-> getDescription (),
+				os);
 
       --gIndenter;
 
@@ -576,10 +574,12 @@ void oahOptionsUsageAtom::printOptionsUsage (ostream& os) const
 
   ++gIndenter;
 
-  os <<
-    gIndenter.indentMultiLineString (
-      regex_replace (
-        regex_replace (
+// 	gIndenter.indentMultiLineString (
+// 		foundString,
+// 		os);
+	gIndenter.indentMultiLineString (
+		regex_replace (
+			regex_replace (
 R"(In EXECUTABLE_NAME, '-' as an argument, represents standard input.
 
 Most options have a short and a long name for commodity.
@@ -604,16 +604,15 @@ provided the values immediately follow the atoms that need them.
 Using options that attempt to create files, such as '-output-file-name, -o',
 leads to an error if the environment is read-only access,
 as is the case of https://libmusicxml.grame.fr .)",
-          regex ("OPTION_NAME_HELP_NAMES"),
-          gGlobalOahOahGroup->
-            getOptionNameHelpAtom ()->
-              fetchNamesBetweenQuotes ()
-          ),
-        regex ("EXECUTABLE_NAME"),
-        fHelpAtomWithoutAValueServiceName
-        )
-      ) <<
-    endl;
+				regex ("OPTION_NAME_HELP_NAMES"),
+				gGlobalOahOahGroup->
+					getOptionNameHelpAtom ()->
+						fetchNamesBetweenQuotes ()
+				),
+			regex ("EXECUTABLE_NAME"),
+			fHelpAtomWithoutAValueServiceName
+			),
+		os);
 
   --gIndenter;
 
@@ -1992,16 +1991,15 @@ void oahContactAtom::print (ostream& os) const
 
 void oahContactAtom::printContact (ostream& os) const
 {
-  os <<
-    gIndenter.indentMultiLineString (
-      regex_replace (
+	gIndenter.indentMultiLineString (
+    regex_replace (
 R"(To contact the maintainers of EXECUTABLE_NAME:
   Create an issue at https://github.com/jacques-menu/musicformats,
   describing the problem and any error messages you get if relevant.
   You should sign up for GitHub for that.)",
         regex ("EXECUTABLE_NAME"),
-        fHelpAtomWithoutAValueServiceName)) <<
-    endl;
+        fHelpAtomWithoutAValueServiceName),
+		os);
 }
 
 ostream& operator<< (ostream& os, const S_oahContactAtom& elt)
@@ -2911,9 +2909,15 @@ void oahTwoBooleansAtom::print (ostream& os) const
   os <<
     setw (fieldWidth) <<
     "fDescription" << " : " <<
-    gIndenter.indentMultiLineString (
-      fDescription) <<
     endl;
+
+	++gIndenter;
+
+	gIndenter.indentMultiLineString (
+		fDescription,
+		os);
+
+	--gIndenter;
 
   os << left <<
     setw (fieldWidth) <<
@@ -3119,22 +3123,28 @@ void oahThreeBooleansAtom::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "description" << " : " <<
-    gIndenter.indentMultiLineString (
-      fDescription) <<
+    "fDescription" << " : " <<
     endl;
+
+  ++gIndenter;
+
+	gIndenter.indentMultiLineString (
+		fDescription,
+		os);
+
+	--gIndenter;
 
   os << left <<
     setw (fieldWidth) <<
-    "booleanVariable" << " : " <<
+    "fBooleanVariable" << " : " <<
     fBooleanVariable <<
     endl <<
     setw (fieldWidth) <<
-    "secondBooleanAtom" << " : " <<
+    "fSecondBooleanAtom" << " : " <<
     fSecondBooleanAtom <<
     endl <<
     setw (fieldWidth) <<
-    "thirdBooleanAtom" << " : " <<
+    "fThirdBooleanAtom" << " : " <<
     fThirdBooleanAtom <<
     endl;
 
@@ -3489,10 +3499,9 @@ void oahCombinedBooleansAtom::printHelp (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
   }
 
   os <<
@@ -3524,10 +3533,9 @@ void oahCombinedBooleansAtom::printHelp (ostream& os) const
 
       ++gIndenter;
 
-      os <<
-        gIndenter.indentMultiLineString (
-          booleanAtom-> getDescription ()) <<
-        endl;
+			gIndenter.indentMultiLineString (
+				booleanAtom-> getDescription (),
+				os);
 
       --gIndenter;
 
@@ -4073,10 +4081,9 @@ void oahCommonPrefixBooleansAtom::printHelp (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
 
     gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
   }
@@ -5533,10 +5540,9 @@ void oahFactorizedStringAtom::printHelp (ostream& os) const
     // indent a bit more for readability
     gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
 
-    os <<
-      gIndenter.indentMultiLineString (
-        fDescription) <<
-      endl;
+		gIndenter.indentMultiLineString (
+			fDescription,
+			os);
   }
 
   os <<
@@ -10479,6 +10485,9 @@ void oahFindStringAtom::applyAtomWithValue (
     		"theFindStringMatch is null");
 
       string
+      	elementName =
+      		theFindStringMatch->
+      			getElementName (),
       	foundString =
       		theFindStringMatch->
       			getFoundString (),
@@ -10489,20 +10498,24 @@ void oahFindStringAtom::applyAtomWithValue (
       ++counter;
 
       os << right <<
-        setw (2) << counter << ": " <<
+        setw (2) << counter << ": " << containingFindableElementInfo <<
         endl;
 
-      // indent a bit more for readability
-//      gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
       ++gIndenter;
 
-      os <<
-      	containingFindableElementInfo <<
-      	endl <<
-        gIndenter.indentMultiLineString (foundString) <<
-        endl;
+      os << elementName << endl;
 
-//      gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
+      // indent a bit more for readability
+      gIndenter.increment (K_OAH_ELEMENTS_INDENTER_OFFSET);
+
+			gIndenter.indentMultiLineString (
+				foundString,
+				os);
+
+      os << endl; // JMI v0.9.66
+
+      // unindent a bit more for readability
+      gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
       --gIndenter;
 
       if (++i == iEnd) break;

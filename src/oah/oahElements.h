@@ -85,6 +85,7 @@ class oahFindStringMatch : public smartable
     // ------------------------------------------------------
 
     static SMARTP<oahFindStringMatch> create (
+    												const string& elementName,
                             const string& foundString,
                             const string& containingFindableElementInfo);
 
@@ -94,6 +95,7 @@ class oahFindStringMatch : public smartable
     // ------------------------------------------------------
 
                           oahFindStringMatch (
+    												const string& elementName,
                             const string& foundString,
                             const string& containingFindableElementInfo);
 
@@ -103,6 +105,9 @@ class oahFindStringMatch : public smartable
 
     // set and get
     // ------------------------------------------------------
+
+    const string&         getElementName () const
+                              { return fElementName; }
 
     const string&         getFoundString () const
                               { return fFoundString; }
@@ -127,6 +132,7 @@ class oahFindStringMatch : public smartable
     // protected fields
     // ------------------------------------------------------
 
+    string			          fElementName;
     string			          fFoundString;
 		string                fContainingFindableElementInfo;
 };

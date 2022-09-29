@@ -447,7 +447,8 @@ void mxsr2msrTranslator::printVoicesLastMetNoteMap (
 //________________________________________________________________________
 void mxsr2msrTranslator::checkStep (
   int           inputLineNumber,
-  const string& stepValue)
+  const string& stepValue,
+	const string& markup)
 {
   if (stepValue.size () == 1) {
     char firstChar = stepValue [0];
@@ -456,7 +457,8 @@ void mxsr2msrTranslator::checkStep (
       stringstream s;
 
       s <<
-        "step value " << firstChar <<
+      	markup <<
+        " value " << firstChar <<
         " is not a letter from A to G";
 
       mxsr2msrError (
@@ -471,8 +473,9 @@ void mxsr2msrTranslator::checkStep (
     stringstream s;
 
     s <<
-      "root step value " << stepValue <<
-      " should be a single letter from A to G";
+			markup <<
+      " value '" << stepValue <<
+      "' should be a single letter from A to G";
 
       mxsr2msrError (
         gGlobalServiceRunData->getInputSourceName (),
@@ -3085,7 +3088,8 @@ void mxsr2msrTranslator::visitStart ( S_key_step& elt )
   // check the step value
   checkStep (
     inputLineNumber,
-    step);
+    step,
+    "<key-step/>");
 
   // determine diatonic pitch
   msrDiatonicPitchKind keyDiatonicPitchKind =
@@ -6580,7 +6584,8 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt )
 
   checkStep (
     inputLineNumber,
-    tuningStep);
+    tuningStep,
+    "<tuning-step/>");
 
   msrDiatonicPitchKind
     tuningDiatonicKind =
@@ -10406,7 +10411,8 @@ void mxsr2msrTranslator::visitStart ( S_step& elt )
 
   checkStep (
     inputLineNumber,
-    step);
+    step,
+    "<step/>");
 
   fCurrentNoteDiatonicPitchKind =
     msrDiatonicPitchKindFromChar (step [0]);
@@ -16949,7 +16955,8 @@ void mxsr2msrTranslator::visitStart ( S_display_step& elt)
 
   checkStep (
     inputLineNumber,
-    displayStep);
+    displayStep,
+    "<display-step/>");
 
   fCurrentDisplayDiatonicPitchKind =
     msrDiatonicPitchKindFromChar (
@@ -24527,7 +24534,8 @@ void mxsr2msrTranslator::visitStart ( S_root_step& elt )
 
   checkStep (
     inputLineNumber,
-    step);
+    step,
+    "<root-step/>");
 
   fCurrentHarmonyRootDiatonicPitchKind =
     msrDiatonicPitchKindFromChar (
@@ -24828,16 +24836,6 @@ void mxsr2msrTranslator::visitStart ( S_bass& elt )
       endl;
   }
 #endif
-
-  string step = elt->getValue(); // v0.9.65 MusicXML 4.0
-
-  checkStep (
-    inputLineNumber,
-    step);
-
-  fCurrentHarmonyBassDiatonicPitchKind =
-    msrDiatonicPitchKindFromChar (
-      step [0]);
 }
 
 void mxsr2msrTranslator::visitStart ( S_bass_step& elt )
@@ -24858,7 +24856,8 @@ void mxsr2msrTranslator::visitStart ( S_bass_step& elt )
 
   checkStep (
     inputLineNumber,
-    step);
+    step,
+    "<bass-step/>");
 
   fCurrentHarmonyBassDiatonicPitchKind =
     msrDiatonicPitchKindFromChar (
@@ -25962,7 +25961,8 @@ void mxsr2msrTranslator::visitStart (S_pedal_step& elt )
 
   checkStep (
     inputLineNumber,
-    tuningStep);
+    tuningStep,
+    "<pedal-step/>");
 
   fCurrentHarpPedalDiatonicPitchKind =
     msrDiatonicPitchKindFromChar (

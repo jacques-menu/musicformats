@@ -30,6 +30,103 @@ using namespace std;
 namespace MusicFormats
 {
 
+// //______________________________________________________________________________
+// class EXP mfMultiLineString
+// /*
+//   this class encapsulates a 'bool' value to guarantee it is initialized
+// */
+// {
+//   public:
+//
+//     // constructors/destructor
+//     // ------------------------------------------------------
+//
+//                           mfMultiLineString ();
+//
+//                           mfMultiLineString (bool value);
+//
+//                           mfMultiLineString (const string& theString);
+//
+//     virtual               ~mfMultiLineString ();
+//
+//     // copy constructor
+//     // ------------------------------------------------------
+//
+//                           mfMultiLineString (const mfMultiLineString& obj);
+//
+// public:
+//
+//     // set and get
+//     // ------------------------------------------------------
+//
+//     // set the value
+//     void                  setValue (bool value)
+//                               { fValue = value; }
+//
+//     // get the value
+//     bool                  getValue () const
+//                               { return fValue; }
+//
+//   public:
+//
+//     // public services
+//     // ------------------------------------------------------
+//
+//     // explicit conversion
+//     explicit              operator bool () const { return fValue; }
+//
+//     // copy assignment operator
+//     // ------------------------------------------------------
+//
+//     mfMultiLineString&                 operator= (const mfMultiLineString& themfMultiLineString);
+//
+// /*
+//     // Declare prefix and postfix decrement operators.
+//     Point& operator--();       // Prefix decrement operator.
+//     Point operator--(int);     // Postfix decrement operator.
+// */
+//
+//     // negation, prefix operator
+//     mfMultiLineString                  operator! () const;
+//
+//     // dyadic operators
+//     mfMultiLineString                  operator&& (const mfMultiLineString& othermfMultiLineString) const;
+//     mfMultiLineString                  operator|| (const mfMultiLineString& othermfMultiLineString) const;
+//
+//     // compare value JMI ???
+//     mfMultiLineString                  operator == (const mfMultiLineString &othermfMultiLineString) const
+//                               { return fValue == othermfMultiLineString.fValue; }
+//     mfMultiLineString                  operator != (const mfMultiLineString &othermfMultiLineString) const
+//                               { return fValue != othermfMultiLineString.fValue; }
+//
+//   public:
+//
+//     // print
+//     // ------------------------------------------------------
+//
+//     string                asString () const;
+//
+//     void                  print (ostream& os) const;
+//
+//
+//   private:
+//
+//     // private fields
+//     // ------------------------------------------------------
+//
+//     bool                  fValue;
+// };
+//
+// //EXP mfMultiLineString operator&& (const mfMultiLineString& leftmfMultiLineString, const mfMultiLineString& rightmfMultiLineString);
+// EXP mfMultiLineString operator&& (const mfMultiLineString& leftmfMultiLineString, const bool& themfMultiLineString);
+// EXP mfMultiLineString operator&& (const bool& themfMultiLineString, const mfMultiLineString& rightmfMultiLineString);
+//
+// //EXP mfMultiLineString operator|| (const mfMultiLineString& leftmfMultiLineString, const mfMultiLineString& rightmfMultiLineString);
+// EXP mfMultiLineString operator|| (const mfMultiLineString& leftmfMultiLineString, const bool& themfMultiLineString);
+// EXP mfMultiLineString operator|| (const bool& themfMultiLineString, const mfMultiLineString& rightmfMultiLineString);
+//
+// EXP ostream& operator<< (ostream& os, const mfMultiLineString& themfMultiLineString);
+
 //______________________________________________________________________________
 struct mfStringQuoteEscaper
 {
