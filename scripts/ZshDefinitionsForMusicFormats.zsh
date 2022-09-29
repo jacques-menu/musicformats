@@ -792,6 +792,8 @@ function addAll ()
 
   addFxml
   addFmfsl
+
+  addReleases
 }
 
 function addSrc ()
@@ -861,6 +863,11 @@ function addFmfsl ()
   git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.mfsl
   git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.xml
   git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.bash
+}
+
+function addReleases ()
+{
+  git add    ${MUSIC_FORMATS_DEV}/releases/*
 }
 
 
