@@ -38,6 +38,6 @@ jobs:
             build/bin
             build/lib
             #uncomment to have the full libdir in the .zip archive
-            build/libdir
+            #build/libdir
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
             documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
