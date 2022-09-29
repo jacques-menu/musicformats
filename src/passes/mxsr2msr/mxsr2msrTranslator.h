@@ -1851,7 +1851,8 @@ class EXP mxsr2msrTranslator :
 
     void                      checkStep (
                                 int           inputLineNumber,
-                                const string& stepValue);
+                                const string& stepValue,
+                                const string& markup);
 
     // notes
     msrDiatonicPitchKind      fCurrentNoteDiatonicPitchKind;

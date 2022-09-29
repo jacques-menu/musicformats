@@ -43,11 +43,13 @@ class EXP mfOutputIndenter
     // set and get
     // ------------------------------------------------------
 
-    // set the indent
+    // spacer
+    string                getSpacer () const
+                              { return fSpacer; }
+
+    // indentation
     void                  setIndentation (int indentation)
                               { fIndentation = indentation; }
-
-    // get the indent
     int                   getIndentation () const
                               { return fIndentation; }
 
@@ -63,18 +65,18 @@ class EXP mfOutputIndenter
 */
 
     // increase the indentation by 1, prefix operator
-    mfOutputIndenter&       operator++ ();
+    mfOutputIndenter&     operator++ ();
 
     // decrease the indentation by 1, prefix operator
-    mfOutputIndenter&       operator-- ();
+    mfOutputIndenter&     operator-- ();
 
     // increase the indentation by 1, postfix operator
-    mfOutputIndenter        operator++ (int);
+    mfOutputIndenter      operator++ (int);
     // decrease the indentation by 1, postfix operator
-    mfOutputIndenter        operator-- (int);
+    mfOutputIndenter      operator-- (int);
 
-    mfOutputIndenter&       increment (int value);
-    mfOutputIndenter&       decrement (int value);
+    mfOutputIndenter&     increment (int value);
+    mfOutputIndenter&     decrement (int value);
 
     // reset the indentation
     void                  resetToZero ()
@@ -89,20 +91,26 @@ class EXP mfOutputIndenter
     // output as much space as specified
     void                  print (ostream& os) const;
 
-    // get a spacer for adhoc uses, without increasing the indentation
-    string                getSpacer () const
-                              { return fSpacer; }
+    // current offset
+    string                fetchCurrentOffset ();
 
     // indent a multiline 'R"(...)"' string
-    string                indentMultiLineString (
-                            const string& theString);
-    string                indentInitialSpacerIfNeededAndMultiLineString (
+    void                  indentMultiLineString (
+                            const string& theString,
+                            ostream&      os);
+
+    string                indentMultiLineStringWithCurrentOffset (
                             const string& theString);
 
     // global variables for general use
-    static mfOutputIndenter gGlobalOStreamIndenter;
+    static mfOutputIndenter
+                          gGlobalOStreamIndenter;
 
   private:
+
+    // private fields
+    // ------------------------------------------------------
+
     int                   fIndentation;
     string                fSpacer;
 };
@@ -143,7 +151,7 @@ class EXP mfIndentedStreamBuf: public stringbuf
   private:
 
     ostream&              fOutputSteam;
-    mfOutputIndenter&       fOutputIndenter;
+    mfOutputIndenter&     fOutputIndenter;
 
   public:
 
@@ -158,7 +166,7 @@ class EXP mfIndentedStreamBuf: public stringbuf
                               {}
 
     // indentation
-    mfOutputIndenter&       getOutputIndenter () const
+    mfOutputIndenter&     getOutputIndenter () const
                               { return fOutputIndenter; }
 
     // flush

@@ -31,6 +31,122 @@ namespace MusicFormats
 //______________________________________________________________________________
 //#define DEBUG_SPLITTING
 
+// //______________________________________________________________________________
+// mfMultiLineString::mfMultiLineString ()
+// {
+//   fValue = false;
+// }
+//
+// mfMultiLineString::mfMultiLineString (bool value)
+// {
+//   fValue = value;
+// }
+//
+// mfMultiLineString::~mfMultiLineString ()
+// {}
+//
+// mfMultiLineString::mfMultiLineString(const mfMultiLineString& themfMultiLineString) {
+// //   cout << "mfMultiLineString copy constructor " << endl; // JMI CLAR
+//
+//    // copy the value
+//    fValue = themfMultiLineString.getValue ();
+// }
+//
+// /*
+//   // Declare prefix and postfix decrement operators.
+//   Point& operator--();       // Prefix decrement operator.
+//   Point operator--(int);     // Postfix decrement operator.
+// */
+//
+// mfMultiLineString::mfMultiLineString (const string& theString)
+// {
+//   if (theString == "false") {
+//     fValue = false;
+//   }
+//   else if (theString == "true") {
+//     fValue = true;
+//   }
+//   else {
+//   }
+// }
+//
+// mfMultiLineString& mfMultiLineString::operator= (const mfMultiLineString& themfMultiLineString)
+// {
+//   if (this != &themfMultiLineString) { // JMI costly?
+//     fValue = themfMultiLineString.getValue ();
+//   }
+//
+//   return *this;
+// }
+//
+// mfMultiLineString mfMultiLineString::operator! () const
+// {
+//   mfMultiLineString result (! fValue);
+//
+//   return result;
+// }
+//
+// mfMultiLineString mfMultiLineString::operator&&(const mfMultiLineString& othermfMultiLineString) const
+// {
+//   mfMultiLineString result (fValue && othermfMultiLineString.fValue);
+//
+//   return result;
+// }
+//
+// mfMultiLineString mfMultiLineString::operator||(const mfMultiLineString& othermfMultiLineString) const
+// {
+//   mfMultiLineString result (fValue || othermfMultiLineString.fValue);
+//
+//   return result;
+// }
+//
+// EXP mfMultiLineString operator&& (const mfMultiLineString& leftmfMultiLineString, const bool& themfMultiLineString)
+// {
+//   mfMultiLineString result (leftmfMultiLineString.getValue () && themfMultiLineString);
+//
+//   return result;
+// }
+//
+// EXP mfMultiLineString operator&& (const bool& themfMultiLineString, const mfMultiLineString& rightmfMultiLineString)
+// {
+//   mfMultiLineString result (themfMultiLineString && rightmfMultiLineString.getValue ());
+//
+//   return result;
+// }
+//
+// EXP mfMultiLineString operator|| (const mfMultiLineString& leftmfMultiLineString, const bool& themfMultiLineString)
+// {
+//
+//   mfMultiLineString result (leftmfMultiLineString.getValue () || themfMultiLineString);
+//
+//   return result;
+// }
+//
+// EXP mfMultiLineString operator|| (const bool& themfMultiLineString, const mfMultiLineString& rightmfMultiLineString)
+// {
+//   mfMultiLineString result (themfMultiLineString || rightmfMultiLineString.getValue ());
+//
+//   return result;
+// }
+//
+// string mfMultiLineString::asString () const
+// {
+//   return
+//     fValue
+//       ? "true"
+//       : "false";
+// }
+//
+// void mfMultiLineString::print (ostream& os) const
+// {
+//   os << asString ();
+// }
+//
+// ostream& operator<< (ostream& os, const mfMultiLineString& theBool) {
+//   theBool.print(os);
+//   return os;
+// }
+
 //______________________________________________________________________________
 string mfReplicateString (
   string str,

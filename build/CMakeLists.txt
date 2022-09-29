@@ -57,6 +57,9 @@ message (STATUS "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}")
 #===============================================================
 option ( GENERATE_MACOS_FRAMEWORK   "Generates a framework on MacOS by default"	off )
 
+option ( GDB 		      "Activates ggdb3 option"	                        off )
+option ( APPLEDEBUG   "Activates Apple debug option"	                  on )
+
 option ( GENERATE_EXECUTABLES "Generates tools"	              on )
 option ( GENERATE_STATIC_LIB  "Generates the static library"  on )
 
@@ -90,7 +93,11 @@ message (STATUS "CMAKE_CXX_STANDARD: ${CMAKE_CXX_STANDARD}")
 message (STATUS "UNIX: ${UNIX}")
 
 if (UNIX)
-	add_definitions(-Wall -DGCC -O3 -Wno-overloaded-virtual)
+  if (GDB)
+    add_definitions(-Wall -DGCC -ggdb3 -Wno-overloaded-virtual)
+  else()
+    add_definitions(-Wall -DGCC -O3 -Wno-overloaded-virtual)
+  endif()
 endif ()
 
 
@@ -114,8 +121,11 @@ if (APPLE)
 		set (CMAKE_OSX_ARCHITECTURES "x86_64")
 		set (CMAKE_OSX_DEPLOYMENT_TARGET 10.10)
 	endif ()
-  # to debug:
-  #add_definitions(-O0 -g) # JMI
+
+  if (APPLEDEBUG)
+		message (STATUS "Generates debug information on Apple - Use -DAPPLEDEBUG=on to change. .")
+    add_definitions(-O0 -g)
+  endif()
 
 #===============================================================
 # Windows specific part

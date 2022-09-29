@@ -341,6 +341,16 @@ S_mfcLibraryComponent createLibraryComponent ()
             "Ready-to-use versions installation and use documentation complements"
           }
       ));
+
+    pLibraryComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.66"),
+          "September 29, 2022",
+          list<string> {
+            "Finalized the 'string existing*()' functions"
+          }
+      ));
  }
 
   return pLibraryComponent;

@@ -272,7 +272,7 @@ ostream& operator<< (ostream& os, const S_msr2lpsrScoreOutputKindAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -337,7 +337,7 @@ R"()",
 R"(Use OUTPUT_KIND to create the LPSR blocks,
 as well as in the generated LilyPond code.
 The NUMBER LilyPond score output kinds available are:
-  OUTPUT_KINDS.
+OUTPUT_KINDS.
 '-one-file' means that LilyPond will produce a single file
 containing all the scores and/or parts.
 Otherwise, one file will be generated for each score and/or part.
@@ -556,7 +556,7 @@ ostream& operator<< (ostream& os, const S_msr2lpsrOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

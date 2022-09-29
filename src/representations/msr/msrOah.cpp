@@ -279,7 +279,7 @@ ostream& operator<< (ostream& os, const S_msrPitchesLanguageAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -635,7 +635,7 @@ ostream& operator<< (ostream& os, const S_msrRenamePartAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -927,8 +927,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
             regex ("PITCHES_LANGUAGES"),
-            gIndenter.indentMultiLineString (
-              existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -1459,7 +1461,7 @@ ostream& operator<< (ostream& os, const S_msrOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

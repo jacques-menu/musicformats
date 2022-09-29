@@ -761,8 +761,10 @@ There can be several occurrences of this option.)",
             regex ("NUMBER"),
             to_string (gGlobalClefKindsMap.size ())),
           regex ("CLEFS_NAMES"),
-          gIndenter.indentMultiLineString (
-            existingClefKindsNames (K_NAMES_LIST_MAX_LENGTH))),
+//           gIndenter.indentMultiLineString (
+//             foundString,
+//             os);
+          existingClefKindsNames (K_NAMES_LIST_MAX_LENGTH)),
         "REPLACE_CLEF_SPEC",
         "fReplaceClefKindToClefKindMapVariable",
         fReplaceClefKindToClefKindMapVariable));

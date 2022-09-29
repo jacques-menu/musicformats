@@ -22,7 +22,7 @@ La documentation contient entre autres un guide d'utilisation en anglais :
 et un guide de maintenance pour les développeurs :
   https://github.com/jacques-menu/musicformats/blob/master/documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
 
-Il y a des versions prêtes à l'emploi de MusicFormats pour les trois systèmes d'exploitation principaux,
+Il y a dans le dossier 'releases' des versions prêtes à l'emploi de MusicFormats pour les trois systèmes d'exploitation principaux,
 soit MacOS™, Linux dans sa déclinaison Ubuntu et Windows™,
 Elles sont en format ZIP et peuvent être téléchargées depuis la page d'accueil du dépôt GitHub à
 https://github.com/jacques-menu/musicformats.

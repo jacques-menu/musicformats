@@ -690,25 +690,25 @@ string lpsrScoreOutputKindAsString (
 
   switch (scoreOutputKind) {
     case lpsrScoreOutputKind::kScoreOutputScoreOnly: // default value
-      result = "kScoreOutputScoreOnly";
+      result = "score-only";
       break;
     case lpsrScoreOutputKind::kScoreOutputScoreAndParts:
-      result = "kScoreOutputScoreAndParts";
+      result = "score-and-parts";
       break;
     case lpsrScoreOutputKind::kScoreOutputPartsAndScore:
-      result = "kScoreOutputPartsAndScore";
+      result = "parts-and-score";
       break;
     case lpsrScoreOutputKind::kScoreOutputPartsOnly:
-      result = "kScoreOutputPartsOnly";
+      result = "parts-only";
       break;
     case lpsrScoreOutputKind::kScoreOutputScoreAndPartsOneFile:
-      result = "kScoreOutputScoreAndPartsOneFile";
+      result = "score-and-parts-one-file";
       break;
     case lpsrScoreOutputKind::kScoreOutputPartsAndScoreOneFile:
-      result = "kScoreOutputPartsAndScoreOneFile";
+      result = "parts-and-score-one-file";
       break;
     case lpsrScoreOutputKind::kScoreOutputPartsOnlyOneFile:
-      result = "kScoreOutputPartsOnlyOneFile";
+      result = "parts-only-one-file";
       break;
   } // switch
 
@@ -772,10 +772,13 @@ string existingLpsrScoreOutputKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -1003,10 +1006,13 @@ string existingLpsrAccidentalStyleKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -1100,11 +1106,14 @@ string existingLpsrChordsLanguageKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -1374,11 +1383,14 @@ string existingLpsrDynamicsTextSpannersStyleKinds (
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -1465,11 +1477,14 @@ string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {

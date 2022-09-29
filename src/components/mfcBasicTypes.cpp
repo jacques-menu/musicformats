@@ -670,7 +670,6 @@ string mfcVersionNumber::asString () const
   stringstream s;
 
   s <<
-    "v" <<
     fMajorNumber <<
     "." <<
     fMinorNumber <<
@@ -679,7 +678,6 @@ string mfcVersionNumber::asString () const
 
   if (fPreRelease.size ()) {
     s <<
-// JMI      '-' <<
       fPreRelease;
    }
 

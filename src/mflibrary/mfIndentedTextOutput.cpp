@@ -11,6 +11,8 @@
 
 #include "mfAssert.h"
 
+#include "mfStringsHandling.h"
+
 #include "mfIndentedTextOutput.h"
 
 
@@ -198,55 +200,44 @@ mfOutputIndenter& mfOutputIndenter::decrement (int value)
   return *this;
 }
 
-string mfOutputIndenter::indentMultiLineString (
-  const string& theString)
+string mfOutputIndenter::fetchCurrentOffset ()
 {
-  // add indentation ahead of all lines inside 'theString'
-  istringstream inputStream (theString);
-  string        line;
-  stringstream  s;
-
-  // print theString line by line
-  while (getline (inputStream, line)) {
-    if (s.str ().size ()) {
-      this->print (s);
-    }
-    s << line;
-
-    if (inputStream.eof ()) break;
-
-    s << endl;
-  } // while
-
-  return s.str ();
+  return
+    mfReplicateString (
+      fSpacer,
+      fIndentation);
 }
 
-string mfOutputIndenter::indentInitialSpacerIfNeededAndMultiLineString (
-  const string& theString)
+void mfOutputIndenter::indentMultiLineString (
+  const string& theString,
+  ostream&      os)
 {
-  // the initial spacer is necessary when nothing has been written
-  // since the last endl
+  // add indentation ahead of all lines of theString
 
-  // add indentation ahead of all lines inside 'theString'
+  // the istringstream to read lines from theString
   istringstream inputStream (theString);
   string        line;
-  stringstream  s;
-
-  // print the spacer if theStrint actually contains end of lines JMI ???
-//   if (theString.find ("\n") != string::npos) {
-//     s << fSpacer;
-//   }
 
   // print theString line by line
   while (getline (inputStream, line)) {
-    if (s.str ().size ()) {
-      this->print (s);
-    }
-    s << line;
+    os << line << endl;
+  } // while
+}
 
-    if (inputStream.eof ()) break;
+string mfOutputIndenter::indentMultiLineStringWithCurrentOffset (
+  const string& theString)
+{
+  // add indentation ahead of all lines of theString
 
-    s << endl;
+  stringstream s;
+
+  // the istringstream to read lines from theString
+  istringstream inputStream (theString);
+  string        line;
+
+  // append theString line by line
+  while (getline (inputStream, line)) {
+    s << fetchCurrentOffset () << line << endl;
   } // while
 
   return s.str ();

@@ -215,8 +215,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalMsdlUserLanguageKindsMap.size ())),
             regex ("USER_LANGUAGES"),
-            gIndenter.indentMultiLineString (
-              existingMsdlUserLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingMsdlUserLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlUserLanguageKindAsString (
             msdlUserLanguageKindDefaultValue)),
@@ -247,8 +249,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
             regex ("PITCHES_LANGUAGES"),
-            gIndenter.indentMultiLineString (
-              existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//           gIndenter.indentMultiLineString (
+//             foundString,
+//             os);
+            existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -279,8 +283,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalMsdlKeywordsLanguageKindsMap.size ())),
             regex ("KEYWORDS_LANGUAGES"),
-            gIndenter.indentMultiLineString (
-              existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlKeywordsInputLanguageKindDefaultValue)),
@@ -343,8 +349,10 @@ The default is not to translate the keywords.)",
             regex ("NUMBER"),
             to_string (gGlobalMsdlKeywordsLanguageKindsMap.size ())),
           regex ("KEYWORDS_LANGUAGES"),
-          gIndenter.indentMultiLineString (
-            existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//           gIndenter.indentMultiLineString (
+//             foundString,
+//             os);
+          existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
         "LANGUAGE",
         "fMsdlKeywordsConversionLanguageKind",
         fMsdlKeywordsConversionLanguageKind));
@@ -372,8 +380,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalMsdlCommentsTypeKindsMap.size ())),
             regex ("COMMENTS_TYPES"),
-            gIndenter.indentMultiLineString (
-              existingMsdlCommentsTypeKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingMsdlCommentsTypeKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlCommentsTypeKindAsString (
             msdlCommentsTypeKindDefaultValue)),
@@ -623,7 +633,7 @@ ostream& operator<< (ostream& os, const S_msdl2msrOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

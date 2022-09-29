@@ -22,9 +22,10 @@ alias mfd=mfdev
 # working on dev branch
 #----------------------------------------------
 
-DTD_DIR=${MUSIC_FORMATS_DEV}/schemas/MusicXML/musicxml-4.0/
-alias dtd="cd ${DTD_DIR}"
-SCHEMA_DIR=${DTD_DIR}/schema
+# DTDS_DIR=${MUSIC_FORMATS_DEV}/schemas/MusicXML/musicxml-4.0/
+DTDS_DIR=${MUSIC_FORMATS_DEV}/libmusicxml/dtds
+alias dtds="cd ${DTDS_DIR}"
+SCHEMA_DIR=${DTDS_DIR}/3.1/schema
 alias schem="cd ${SCHEMA_DIR}"
 
 LXML_DIR=${MUSIC_FORMATS_DEV}/libmusicxml

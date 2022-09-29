@@ -831,10 +831,6 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
                             ostream& os,
                             int      valueFieldWidth) const override;
 
-//     Bool                  findStringInAtom (
-//                             const string&               lowerCaseString,
-//                             list<S_oahFindStringMatch>& foundMatchesList,
-//                             ostream&                    os) const override;
 
     // protected fields
     // ------------------------------------------------------

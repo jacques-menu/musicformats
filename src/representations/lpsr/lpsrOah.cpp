@@ -279,7 +279,7 @@ ostream& operator<< (ostream& os, const S_lpsrPitchesLanguageAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -516,7 +516,7 @@ ostream& operator<< (ostream& os, const S_lpsrChordsLanguageAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -887,7 +887,7 @@ ostream& operator<< (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1103,7 +1103,7 @@ ostream& operator<< (ostream& os, const S_lpsrTransposeAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -1287,8 +1287,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalMsrLengthUnitKindsMap.size ())),
             regex ("LENTGTH_UNITS"),
-            gIndenter.indentMultiLineString (
-              existingMsrLengthUnitKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingMsrLengthUnitKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrLengthUnitKindAsString (
             fLengthUnitKindDefaultValue)),
@@ -1824,8 +1826,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (getQuarterTonesPitchesLanguageKindsMap ().size ())),
             regex ("PITCHES_LANGUAGES"),
-            gIndenter.indentMultiLineString (
-              existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -1858,8 +1862,10 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalLpsrChordsLanguageKindsMap.size ())),
             regex ("CHORDS_LANGUAGES"),
-            gIndenter.indentMultiLineString (
-              existingLpsrChordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH))),
+//             gIndenter.indentMultiLineString (
+//               foundString,
+//               os);
+            existingLpsrChordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           lpsrChordsLanguageKindAsString (
             lpsrChordsLanguageKindDefaultValue)),
@@ -2327,7 +2333,7 @@ ostream& operator<< (ostream& os, const S_lpsrOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

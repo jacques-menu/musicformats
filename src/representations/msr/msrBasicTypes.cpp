@@ -693,10 +693,13 @@ string existingMsrOctaveEntryKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -10966,10 +10969,13 @@ string existingClefKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -11010,10 +11016,13 @@ string existingClefKindsNames (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -11978,10 +11987,13 @@ string existingHarmonyKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -12022,10 +12034,13 @@ string existingHarmonyKindsNames (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -14309,10 +14324,13 @@ string existingQuarterTonesPitchesLanguageKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -14931,11 +14949,14 @@ string existingMsrQuarterTonesPitchesLanguageKinds (
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
         break;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -15404,10 +15425,13 @@ string existingMsrLengthUnitKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -15614,10 +15638,13 @@ string existingMsrMarginTypeKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -22294,7 +22321,7 @@ void initializeMsrBasicTypes ()
 
           cumulatedLength += theString.size ();
           if (cumulatedLength >= namesListMaxLength) {
-            s << "\n";
+            s << endl << gIndenter.getSpacer ();
             cumulatedLength = 0;
           }
 

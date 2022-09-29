@@ -25,6 +25,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfIndentedTextOutput.h"
+
 #include "oahOah.h"
 
 #include "lpsr2lilypondOah.h"
@@ -3210,7 +3212,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteWords (
           }
         else {
           s <<
-            gIndenter.indentMultiLineString (
+						gIndenter.indentMultiLineStringWithCurrentOffset (
               generateAColumnForMarkup (
                 wordsContents,
                 markupColumnKindLeftAligned));
@@ -3423,7 +3425,7 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
       fLilypondCodeStream << "\\breathe";
       break;
     case msrArticulation::kCaesura:
-    /* JMI
+    /* JMI v0.9.66
           fLilypondCodeStream <<
             endl <<
             R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.straight"} \breathe)" <<
@@ -3613,7 +3615,7 @@ void lpsr2lilypondTranslator::generateChordArticulation (
 //  JMI v0.9.62      fLilypondCodeStream << "\\breathe";
       break;
     case msrArticulation::kCaesura:
-    /* JMI
+    /* JMI v0.9.66
           fLilypondCodeStream <<
             endl <<
             R"(\once\override BreathingSign.text = \markup {\musicglyph #"scripts.caesura.straight"} \breathe)" <<
@@ -7705,8 +7707,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrLayout& elt)
 
   // ChordNames context
   if (fVisitedLpsrScore->getJazzChordsDisplayIsNeeded ()) {
-    fLilypondCodeStream <<
-      gIndenter.indentMultiLineString (
+		gIndenter.indentMultiLineString (
 R"(\context {
   \ChordNames
   chordNameExceptions = \chExceptions
@@ -7717,8 +7718,8 @@ R"(\context {
     \hspace #-.1
   }
   chordNoteNamer = #lower-extension
-})") <<
-      endl;
+})",
+			fLilypondCodeStream);
   }
 }
 
@@ -9059,11 +9060,10 @@ if (true)
 
   // generate ledger lines coloring code if needed
   if (fVisitedLpsrScore->getColoredLedgerLinesIsNeeded ()) {
-    fLilypondCodeStream <<
-      gIndenter.indentMultiLineString (
+		gIndenter.indentMultiLineString (
 R"(  \override LedgerLineSpanner.stencil = #MyLedgerLineSpannerPrint
-  \override LedgerLineSpanner.after-line-breaking = #grob::display-objects)") <<
-      endl;
+  \override LedgerLineSpanner.after-line-breaking = #grob::display-objects)",
+			fLilypondCodeStream);
   }
 
   // generate merge rests if needed

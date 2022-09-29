@@ -171,10 +171,13 @@ string existingMultiGenerationOutputKinds (size_t namesListMaxLength)
 
       cumulatedLength += theString.size ();
       if (cumulatedLength >= namesListMaxLength) {
-        s << "\n";
+        s << endl << gIndenter.getSpacer ();
         cumulatedLength = 0;
       }
 
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
       s << theString;
 
       if (count == nextToLast) {
@@ -474,7 +477,7 @@ ostream& operator<< (ostream& os, const S_mfMultiGenerationOutputKindAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -694,7 +697,7 @@ ostream& operator<< (ostream& os, const S_multiGenerationOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
