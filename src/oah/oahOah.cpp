@@ -175,7 +175,7 @@ ostream& operator<< (ostream& os, const S_insiderOahAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -323,7 +323,7 @@ ostream& operator<< (ostream& os, const S_regularOahAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -898,7 +898,7 @@ ostream& operator<< (ostream& os, const S_oahOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

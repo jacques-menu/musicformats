@@ -35,48 +35,6 @@ using namespace std;
 namespace MusicFormats
 {
 //_______________________________________________________________________________
-void displayLpsrScore (
-  const S_lpsrScore theLpsrScore,
-  S_msrOahGroup     msrOpts,
-  S_lpsrOahGroup    lpsrOpts,
-  const string&     passDescription)
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    theLpsrScore != nullptr,
-    "theLpsrScore is null");
-
-  // start the clock
-  clock_t startClock = clock ();
-
-  string separator =
-    "%--------------------------------------------------------------";
-
-  gLogStream <<
-    separator <<
-    endl <<
-    gTab <<
-    "Pass (optional): " << passDescription <<
-    endl <<
-    separator <<
-    endl << endl <<
-    theLpsrScore <<
-    separator <<
-    endl << endl;
-
-  // register time spent
-  clock_t endClock = clock ();
-
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    "Display the LPSR as text",
-    mfTimingItem::kOptional,
-    startClock,
-    endClock);
-}
-
-//_______________________________________________________________________________
 void displayLpsrScoreShort (
   const S_lpsrScore theLpsrScore,
   S_msrOahGroup     msrOpts,

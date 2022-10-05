@@ -298,17 +298,16 @@ void msdl2guidoRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
+  
   registerAtomInRegularSubgroup ("display-msr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
-
   registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2-full", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-slices", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-slices", subGroup);
-
-  registerAtomInRegularSubgroup ("display-msr-1-details", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-details", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-names", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-names", subGroup);
@@ -757,7 +756,7 @@ void msdl2guidoRegularHandler::createArticulationsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-articulations", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-articulations", subGroup);
 }
 
 void msdl2guidoRegularHandler::createOrnamentsRegularGroup ()
@@ -789,7 +788,7 @@ void msdl2guidoRegularHandler::createOrnamentsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ornaments", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ornaments", subGroup);
 }
 
 void msdl2guidoRegularHandler::createGraceNotesRegularGroup ()
@@ -886,7 +885,7 @@ void msdl2guidoRegularHandler::createTiesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ties", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ties", subGroup);
 }
 
 void msdl2guidoRegularHandler::createSlursRegularGroup ()
@@ -917,7 +916,7 @@ void msdl2guidoRegularHandler::createSlursRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-slurs", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-slurs", subGroup);
 
   registerAtomInRegularSubgroup ("delay-rests-slurs", subGroup);
 }
@@ -981,7 +980,7 @@ void msdl2guidoRegularHandler::createDynamicRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-dynamics", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-dynamics", subGroup);
 
   registerAtomInRegularSubgroup ("all-dynamics-below", subGroup);
 
@@ -1016,7 +1015,7 @@ void msdl2guidoRegularHandler::createWedgesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-wedges", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-wedges", subGroup);
 
   registerAtomInRegularSubgroup ("all-wedges-below", subGroup);
 
@@ -1115,7 +1114,7 @@ void msdl2guidoRegularHandler::createHarmoniesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-harmonies", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-harmonies", subGroup);
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 }
@@ -1148,7 +1147,7 @@ void msdl2guidoRegularHandler::createFiguredBassRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-figured-bass", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-figured-bass", subGroup);
 
   registerAtomInRegularSubgroup ("show-figured-bass-voices", subGroup);
 }

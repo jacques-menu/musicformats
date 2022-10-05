@@ -742,37 +742,35 @@ R"(Write the contents of the MSR skeleton data to standard error.)",
   // display first MSR
 
   S_oahBooleanAtom
-    displayFirstMsrBooleanAtom =
-      oahBooleanAtom::create (
-        "display-msr-1", "dmsr1",
-  R"(Write the contents of the first MSR data to standard error.)",
-        "fDisplayFirstMsr",
-        fDisplayFirstMsr);
-
-  subGroup->
-    appendAtomToSubGroup (
-      displayFirstMsrBooleanAtom);
-
-  // display first MSR short
-
-  subGroup->
-    appendAtomToSubGroup (
+    displayFirstMsrShortBooleanAtom =
       oahBooleanAtom::create (
         "display-msr-1-short", "dmsr1short",
 R"(Write the contents of the first MSR data, short version, to standard error.)",
         "fDisplayFirstMsrShort",
-        fDisplayFirstMsrShort));
-
-  // display first MSR details
+        fDisplayFirstMsrShort);
+  subGroup->
+    appendAtomToSubGroup (
+      displayFirstMsrShortBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-msr-1-details", "dmsr1d",
-R"(Write the contents of the first MSR data with more details to standard error.)",
-        "fDisplayFirstMsrDetails",
-        fDisplayFirstMsrDetails,
-        displayFirstMsrBooleanAtom));
+      oahAtomAlias::create (
+        "display-msr-1", "dmsr1",
+R"(Write the contents of the first MSR data, short version, to standard error.
+This option is an alias for '-display-msr-1-short, -dmsr1short'.)",
+        displayFirstMsrShortBooleanAtom));
+
+  S_oahBooleanAtom
+    displayFirstMsrFullBooleanAtom =
+      oahBooleanAtom::create (
+        "display-msr-1-full", "dmsr1full",
+  R"(Write the contents of the first MSR data, full version, to standard error.)",
+        "fDisplayFirstMsrFull",
+        fDisplayFirstMsrFull);
+
+  subGroup->
+    appendAtomToSubGroup (
+      displayFirstMsrFullBooleanAtom);
 
   // display first MSR slices
 
@@ -781,42 +779,37 @@ R"(Write the contents of the first MSR data with more details to standard error.
       oahBooleanAtom::create (
         "display-msr-1-slices", "dmsr1slices",
 R"(Write the contents of the first MSR data slices to standard error.)",
-        "fDisplayFirstMsrSlices",
-        fDisplayFirstMsrSlices));
+        "fDisplayFirstMsrShortSlices",
+        fDisplayFirstMsrShortSlices));
 
   // display second MSR
 
   S_oahBooleanAtom
-    displaySecondMsrBooleanAtom =
-      oahBooleanAtom::create (
-        "display-msr-2", "dmsr2",
-R"(Write the contents of the second MSR data to standard error.)",
-        "fDisplaySecondMsr",
-        fDisplaySecondMsr);
-  subGroup->
-    appendAtomToSubGroup (
-      displaySecondMsrBooleanAtom);
-
-  // display second MSR short
-
-  subGroup->
-    appendAtomToSubGroup (
+    displaySecondMsrShortBooleanAtom =
       oahBooleanAtom::create (
         "display-msr-2-short", "dmsr2short",
 R"(Write the contents of the second MSR data, short version, to standard error.)",
         "fDisplaySecondMsrShort",
-        fDisplaySecondMsrShort));
-
-  // display second MSR details
+        fDisplaySecondMsrShort);
+  subGroup->
+    appendAtomToSubGroup (
+      displaySecondMsrShortBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-msr-2-details", "dmsr2d",
-R"(Write the contents of the second MSR data with more details to standard error.)",
-        "fDisplaySecondMsrDetails",
-        fDisplaySecondMsrDetails,
-        displaySecondMsrBooleanAtom));
+      oahAtomAlias::create (
+        "display-msr-2", "dmsr2",
+R"(Write the contents of the second MSR data, short version, to standard error.
+This option is an alias for '-display-msr-2-short, -dmsr2short'.)",
+        displaySecondMsrShortBooleanAtom));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-msr-2-full", "dmsr2full",
+R"(Write the contents of the second MSR data, full version, to standard error.)",
+        "fDisplaySecondMsrFull",
+        fDisplaySecondMsrFull));
 
   // display second MSR slices
 
@@ -825,8 +818,8 @@ R"(Write the contents of the second MSR data with more details to standard error
       oahBooleanAtom::create (
         "display-msr-2-slices", "dmsr2slices",
 R"(Write the contents of the second MSR data slices to standard error.)",
-        "fDisplaySecondMsrSlices",
-        fDisplaySecondMsrSlices));
+        "fDisplaySecondMsrShortSlices",
+        fDisplaySecondMsrShortSlices));
 
   // display first MSR names
 
@@ -836,8 +829,8 @@ R"(Write the contents of the second MSR data slices to standard error.)",
         "display-msr-1-names", "dmsr1names",
 R"(Only write a view of the names in the first MSR to standard error.
 This implies that no LilyPond code is generated.)",
-        "fDisplayFirstMsrNames",
-        fDisplayFirstMsrNames));
+        "fDisplayFirstMsrShortNames",
+        fDisplayFirstMsrShortNames));
 
   // display second MSR names
 
@@ -847,8 +840,8 @@ This implies that no LilyPond code is generated.)",
         "display-msr-2-names", "dmsr2names",
 R"(Only write a view of the names in the second MSR to standard error.
 This implies that no LilyPond code is generated.)",
-        "fDisplaySecondMsrNames",
-        fDisplaySecondMsrNames));
+        "fDisplaySecondMsrShortNames",
+        fDisplaySecondMsrShortNames));
 
   // display first MSR summary
 
@@ -858,8 +851,8 @@ This implies that no LilyPond code is generated.)",
         "display-msr-1-summary", "dmsr1sum",
 R"(Only write a summary of the first MSR to standard error.
 This implies that no LilyPond code is generated.)",
-        "fDisplayFirstMsrSummary",
-        fDisplayFirstMsrSummary));
+        "fDisplayFirstMsrShortSummary",
+        fDisplayFirstMsrShortSummary));
 
   // display second MSR summary
 
@@ -869,8 +862,8 @@ This implies that no LilyPond code is generated.)",
         "display-msr-2-summary", "dmsr2sum",
 R"(Only write a summary of the second MSR to standard error.
 This implies that no LilyPond code is generated.)",
-        "fDisplaySecondMsrSummary",
-        fDisplaySecondMsrSummary));
+        "fDisplaySecondMsrShortSummary",
+        fDisplaySecondMsrShortSummary));
 }
 
 void msrOahGroup::initializeMsrLanguagesOptions ()
@@ -1173,28 +1166,7 @@ Bool msrOahGroup::setMsrQuarterTonesPitchesLanguage (const string& language)
 
 //______________________________________________________________________________
 void msrOahGroup::enforceGroupQuietness ()
-{
-//   fTraceMsr = false; JMI v0.9.63
-//
-//   fTraceMsrVisitors = false;
-//
-//   fDisplayPartGroups = false;
-//
-//   fDisplayFirstMsr = false;
-//   fDisplaySecondMsr = false;
-//
-//   fDisplayFirstMsrShort = false;
-//   fDisplaySecondMsrShort = false;
-//
-//   fDisplayFirstMsrDetails = false;
-//   fDisplaySecondMsrDetails = false;
-//
-//   fDisplayFirstMsrNames = false;
-//   fDisplaySecondMsrNames = false;
-//
-//   fDisplayFirstMsrSummary = false;
-//   fDisplaySecondMsrSummary = false;
-}
+{}
 
 //______________________________________________________________________________
 void msrOahGroup::checkGroupOptionsConsistency ()
@@ -1295,13 +1267,6 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
     fDisplayPartGroups <<
     endl <<
 
-    setw (valueFieldWidth) << "fDisplayFirstMsr" << " : " <<
-    fDisplayFirstMsr <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplaySecondMsr" << " : " <<
-    fDisplaySecondMsr <<
-    endl <<
-
     setw (valueFieldWidth) << "fDisplayFirstMsrShort" << " : " <<
     fDisplayFirstMsrShort <<
     endl <<
@@ -1309,26 +1274,26 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
     fDisplaySecondMsrShort <<
     endl <<
 
-    setw (valueFieldWidth) << "fDisplayFirstMsrDetails" << " : " <<
-    fDisplayFirstMsrDetails <<
+    setw (valueFieldWidth) << "fDisplayFirstMsrFull" << " : " <<
+    fDisplayFirstMsrFull <<
     endl <<
-    setw (valueFieldWidth) << "fDisplaySecondMsrDetails" << " : " <<
-    fDisplaySecondMsrDetails <<
-    endl <<
-
-    setw (valueFieldWidth) << "fDisplayFirstMsrNames" << " : " <<
-    fDisplayFirstMsrNames <<
-    endl <<
-    setw (valueFieldWidth) << "fDisplaySecondMsrNames" << " : " <<
-    fDisplaySecondMsrNames <<
+    setw (valueFieldWidth) << "fDisplaySecondMsrFull" << " : " <<
+    fDisplaySecondMsrFull <<
     endl <<
 
-    setw (valueFieldWidth) << "fDisplayFirstMsrSummary" << " : " <<
-    fDisplayFirstMsrSummary <<
+    setw (valueFieldWidth) << "fDisplayFirstMsrShortNames" << " : " <<
+    fDisplayFirstMsrShortNames <<
+    endl <<
+    setw (valueFieldWidth) << "fDisplaySecondMsrShortNames" << " : " <<
+    fDisplaySecondMsrShortNames <<
     endl <<
 
-    setw (valueFieldWidth) << "fDisplaySecondMsrSummary" << " : " <<
-    fDisplaySecondMsrSummary <<
+    setw (valueFieldWidth) << "fDisplayFirstMsrShortSummary" << " : " <<
+    fDisplayFirstMsrShortSummary <<
+    endl <<
+
+    setw (valueFieldWidth) << "fDisplaySecondMsrShortSummary" << " : " <<
+    fDisplaySecondMsrShortSummary <<
     endl;
 
   --gIndenter;

@@ -468,13 +468,13 @@ void LilyPondIssue34RegularHandler::createOahRegularGroup ()
 
   registerAtomInRegularSubgroup ("display-msr-1", subGroup);
   registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
   registerAtomInRegularSubgroup ("display-msr-1-slices", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1-details", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-2", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2-full", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-slices", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-details", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-names", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-names", subGroup);
@@ -711,7 +711,7 @@ void LilyPondIssue34RegularHandler::createStavesRegularGroup ()
   // atoms
 
   registerAtomInRegularSubgroup ("lpsr-staff-instrument-name", subGroup);
-  
+
   registerAtomInRegularSubgroup ("create-voices-staff-relative-numbers", subGroup);
 }
 
@@ -1002,7 +1002,7 @@ void LilyPondIssue34RegularHandler::createArticulationsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-articulations", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-articulations", subGroup);
 }
 
 void LilyPondIssue34RegularHandler::createOrnamentsRegularGroup ()
@@ -1034,7 +1034,7 @@ void LilyPondIssue34RegularHandler::createOrnamentsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ornaments", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ornaments", subGroup);
 }
 
 void LilyPondIssue34RegularHandler::createGraceNotesRegularGroup ()
@@ -1129,7 +1129,7 @@ void LilyPondIssue34RegularHandler::createTiesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ties", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ties", subGroup);
 }
 
 void LilyPondIssue34RegularHandler::createSlursRegularGroup ()
@@ -1160,7 +1160,7 @@ void LilyPondIssue34RegularHandler::createSlursRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-slurs", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-slurs", subGroup);
 
   registerAtomInRegularSubgroup ("delay-rests-slurs", subGroup);
 }
@@ -1224,7 +1224,7 @@ void LilyPondIssue34RegularHandler::createDynamicRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-dynamics", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-dynamics", subGroup);
 
   registerAtomInRegularSubgroup ("all-dynamics-below", subGroup);
 
@@ -1259,7 +1259,7 @@ void LilyPondIssue34RegularHandler::createWedgesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-wedges", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-wedges", subGroup);
 
   registerAtomInRegularSubgroup ("all-wedges-below", subGroup);
 
@@ -1356,7 +1356,7 @@ void LilyPondIssue34RegularHandler::createHarmoniesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-harmonies", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-harmonies", subGroup);
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 }
@@ -1389,7 +1389,7 @@ void LilyPondIssue34RegularHandler::createFiguredBassRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-figured-bass", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-figured-bass", subGroup);
 
   registerAtomInRegularSubgroup ("show-figured-bass-voices", subGroup);
 }
@@ -1464,7 +1464,7 @@ ostream& operator<< (ostream& os, const S_LilyPondIssue34RegularHandler& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

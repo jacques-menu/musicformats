@@ -10512,8 +10512,6 @@ void oahFindStringAtom::applyAtomWithValue (
 				foundString,
 				os);
 
-      os << endl; // JMI v0.9.66
-
       // unindent a bit more for readability
       gIndenter.decrement (K_OAH_ELEMENTS_INDENTER_OFFSET);
       --gIndenter;

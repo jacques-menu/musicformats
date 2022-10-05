@@ -1302,6 +1302,12 @@ void oahAtom::appendAtomToElementsList (
   // should not have the same name as a prefix,
   // since this would create an ambiguity
   switch (fElementValueKind) {
+    case oahElementValueKind::kElementValueUnknown:
+    	handler->
+				unknownOptionValueKindError (
+					fetchNamesBetweenQuotes ());
+    	break;
+
     case oahElementValueKind::kElementValueWithout:
     case oahElementValueKind::kElementValueImplicit:
     case oahElementValueKind::kElementValueMandatory:
@@ -6768,7 +6774,7 @@ void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
 // {
 //   os <<
 //     endl <<
-//     "Some options needing a value can use a default value:" <<
+//     "Some options expecting a value can use a default value:" <<
 //     endl;
 //
 //   ++gIndenter;
@@ -6974,11 +6980,16 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
 
     // handle the valued atom using the default value
     switch (fPendingArgvAtomExpectingAValue->getElementValueKind ()) {
+    case oahElementValueKind::kElementValueUnknown:
+			unknownOptionValueKindError (
+				lastOptionNameFound);
+    	break;
+
       case oahElementValueKind::kElementValueWithout:
       case oahElementValueKind::kElementValueImplicit:
         unknownOptionNameError (
           lastOptionNameFound,
-          "does not take an optional value, cannot be used with a '='");
+          "does not expect an optional value, cannot be used with a '='");
         break;
 
       case oahElementValueKind::kElementValueMandatory:
@@ -8621,14 +8632,19 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
             }
 #endif
             switch (atomValueKind) {
+							case oahElementValueKind::kElementValueUnknown:
+								unknownOptionValueKindError (
+									atomExpectingAValue->fetchNamesBetweenQuotes ());
+								break;
+
               case oahElementValueKind::kElementValueWithout:
                 {
                   stringstream s;
 
                   s <<
-                    "Atom with value " <<
+                    "Atom " <<
                     atomExpectingAValue->fetchNamesBetweenQuotes () <<
-                    " has been registered as without value";
+                    " is not expecting a value";
 
                   oahInternalError (s.str ());
                 }
@@ -8653,7 +8669,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
                   s <<
                     "Atom expecting a value " <<
                     atomExpectingAValue->fetchNamesBetweenQuotes () <<
-                    " needs a non-empty value";
+                    " expects a non-empty value";
 
                   oahInternalError (s.str ());
                 }
@@ -9133,6 +9149,11 @@ void oahHandler::handleKnownOptionsVectorAtom (
 #endif
 
   switch (atom->getElementValueKind ()) {
+    case oahElementValueKind::kElementValueUnknown:
+			unknownOptionValueKindError (
+				optionNameUsed);
+    	break;
+
     case oahElementValueKind::kElementValueWithout:
     case oahElementValueKind::kElementValueImplicit:
       registerAtomUse (
@@ -9201,6 +9222,11 @@ void oahHandler::handleKnownArgvAtom (
   }
 
   switch (atom->getElementValueKind ()) {
+    case oahElementValueKind::kElementValueUnknown:
+			unknownOptionValueKindError (
+				optionNameUsed);
+    	break;
+
     case oahElementValueKind::kElementValueWithout:
     case oahElementValueKind::kElementValueImplicit:
       registerAtomUse (
@@ -9283,8 +9309,8 @@ void oahHandler::handleUnknownOptionName (
 }
 
 void oahHandler::unknownOptionNameWarning (
-  string name,
-  string context)
+  const string& name,
+  const string& context)
 {
   stringstream s;
 
@@ -9307,8 +9333,8 @@ void oahHandler::unknownOptionNameWarning (
 }
 
 void oahHandler::unknownOptionNameError (
-  string name,
-  string context)
+  const string& name,
+  const string& context)
 {
   stringstream s;
 
@@ -9329,6 +9355,26 @@ void oahHandler::unknownOptionNameError (
 
   oahError (s.str ());
 }
+
+void oahHandler::unknownOptionValueKindError (const string& name)
+{
+  stringstream s;
+
+  s <<
+    "the value kind of option \"" <<
+    name <<
+    "\" is unknown";
+
+  if (gGlobalOahEarlyOptions.getEarlyInsiderOption ()) {
+    s <<
+      " in handler \"" <<
+    fHandlerHeader <<
+    "\"";
+  }
+
+  oahError (s.str ());
+}
+
 
 void oahHandler::handleOptionNameCommon (
   const string& optionName)

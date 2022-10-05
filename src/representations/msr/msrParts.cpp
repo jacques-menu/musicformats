@@ -681,7 +681,7 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
       __FILE__, __LINE__,
       s.str ());
 
-      result = rational (3, 4); // TEMP JMI v0.9.61
+      result = rational (15, 8); // TEMP JMI v0.9.61
   }
 
   return result;
@@ -693,7 +693,7 @@ void msrPart::registerShortestNoteInPartIfRelevant (S_msrNote note)
   rational
     noteSoundingWholeNotes =
       note->
-        getNoteSoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
 /* JMI
   rational
@@ -1802,117 +1802,6 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
   return fPartHarmoniesVoice;
 }
 
-void msrPart::appendHarmonyToPart ( // UNUSED JMI
-  S_msrVoice   harmonySupplierVoice,
-  S_msrHarmony harmony)
-{
-  int inputLineNumber =
-    harmony->getInputLineNumber ();
-
-  ++gIndenter;
-
-  switch (harmonySupplierVoice->getVoiceKind ()) {
-    case msrVoiceKind::kVoiceKindRegular:
-      // append the harmony to the part harmonies voice
-#ifdef TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-        gLogStream <<
-          "Appending harmony " <<
-          harmony->asString () <<
-          " to part " <<
-          getPartCombinedName () <<
-          ", line " << inputLineNumber <<
-          endl;
-      }
-#endif
-
-      fPartHarmoniesVoice->
-        appendHarmonyToVoice (harmony);
-      break;
-
-    case msrVoiceKind::kVoiceKindDynamics:
-      break;
-
-    case msrVoiceKind::kVoiceKindHarmonies:
-    case msrVoiceKind::kVoiceKindFiguredBass:
-      {
-        stringstream s;
-
-        s <<
-          "harmony cannot be appended to part by " <<
-          msrVoiceKindAsString (
-            harmonySupplierVoice->getVoiceKind ()) <<
-          " voice \" " <<
-          harmonySupplierVoice->getVoiceName () <<
-          "\"";
-
-        msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          s.str ());
-      }
-      break;
-  } // switch
-
-  --gIndenter;
-}
-
-void msrPart::appendHarmonyToPartClone (
-  S_msrVoice   harmonySupplierVoice,
-  S_msrHarmony harmony)
-{
-  int inputLineNumber =
-    harmony->getInputLineNumber ();
-
-  ++gIndenter;
-
-  switch (harmonySupplierVoice->getVoiceKind ()) {
-    case msrVoiceKind::kVoiceKindFiguredBass:
-      // append the harmony to the part harmonies voice
-#ifdef TRACING_IS_ENABLED
-      if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-        gLogStream <<
-          "Appending harmony " <<
-          harmony->asString () <<
-          " to part clone " <<
-          getPartCombinedName () <<
-          ", line " << inputLineNumber <<
-          endl;
-      }
-#endif
-
-      fPartHarmoniesVoice->
-        appendHarmonyToVoiceClone (harmony);
-      break;
-
-    case msrVoiceKind::kVoiceKindDynamics:
-      break;
-
-    case msrVoiceKind::kVoiceKindRegular:
-    case msrVoiceKind::kVoiceKindHarmonies:
-      {
-        stringstream s;
-
-        s <<
-          "harmony cannot by appended to part clone by " <<
-          msrVoiceKindAsString (
-            harmonySupplierVoice->getVoiceKind ()) <<
-          " voice \" " <<
-          harmonySupplierVoice->getVoiceName () <<
-          "\"";
-
-        msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          s.str ());
-      }
-      break;
-  } // switch
-
-  --gIndenter;
-}
 
 S_msrVoice msrPart::createPartFiguredBassVoice (
   int           inputLineNumber,

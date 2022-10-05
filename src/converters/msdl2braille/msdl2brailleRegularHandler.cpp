@@ -226,17 +226,14 @@ void msdl2brailleRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2-full", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-slices", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-slices", subGroup);
-
-  registerAtomInRegularSubgroup ("display-msr-1-details", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-details", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-names", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-names", subGroup);
@@ -246,13 +243,12 @@ void msdl2brailleRegularHandler::createOahRegularGroup ()
 
 
   registerAtomInRegularSubgroup ("display-bsr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-bsr-2", subGroup);
-
   registerAtomInRegularSubgroup ("display-bsr-1-short", subGroup);
-  registerAtomInRegularSubgroup ("display-bsr-2-short", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr-1-full", subGroup);
 
-  registerAtomInRegularSubgroup ("display-bsr-1-details", subGroup);
-  registerAtomInRegularSubgroup ("display-bsr-2-details", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr-2", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr-2-short", subGroup);
+  registerAtomInRegularSubgroup ("display-bsr-2-full", subGroup);
 
 #ifdef TRACING_IS_ENABLED
   registerAtomInRegularSubgroup (K_TRACE_OAH_LONG_OPTION_NAME, subGroup);
@@ -773,7 +769,7 @@ void msdl2brailleRegularHandler::createArticulationsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-articulations", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-articulations", subGroup);
 }
 
 void msdl2brailleRegularHandler::createOrnamentsRegularGroup ()
@@ -804,7 +800,7 @@ void msdl2brailleRegularHandler::createOrnamentsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ornaments", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ornaments", subGroup);
 }
 
 void msdl2brailleRegularHandler::createGraceNotesRegularGroup ()
@@ -901,7 +897,7 @@ void msdl2brailleRegularHandler::createTiesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ties", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ties", subGroup);
 }
 
 void msdl2brailleRegularHandler::createSlursRegularGroup ()
@@ -932,7 +928,7 @@ void msdl2brailleRegularHandler::createSlursRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-slurs", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-slurs", subGroup);
 }
 
 void msdl2brailleRegularHandler::createLigaturesRegularGroup ()
@@ -993,7 +989,7 @@ void msdl2brailleRegularHandler::createDynamicRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-dynamics", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-dynamics", subGroup);
 
   registerAtomInRegularSubgroup ("all-dynamics-below", subGroup);
 }
@@ -1026,7 +1022,7 @@ void msdl2brailleRegularHandler::createWedgesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-wedges", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-wedges", subGroup);
 
   registerAtomInRegularSubgroup ("all-wedges-below", subGroup);
 }
@@ -1154,7 +1150,7 @@ void msdl2brailleRegularHandler::createHarmoniesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-harmonies", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-harmonies", subGroup);
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 }
@@ -1187,7 +1183,7 @@ void msdl2brailleRegularHandler::createFiguredBassRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-figured-bass", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-figured-bass", subGroup);
 
   registerAtomInRegularSubgroup ("show-figured-bass-voices", subGroup);
 }

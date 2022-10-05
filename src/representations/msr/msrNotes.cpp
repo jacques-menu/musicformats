@@ -1501,7 +1501,7 @@ S_msrNote msrNote::createGraceSkipNote (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSkipNotes () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Creating skip note " <<
+      "Creating grace skip note " <<
       o->asString () <<
       ", line " << inputLineNumber <<
       endl;
@@ -1603,7 +1603,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSkipNotes ()) {
     gLogStream <<
-      "Creating skip note " <<
+      "Creating skip note with octave " <<
       o->asShortString () <<
       ", line " << inputLineNumber <<
       endl;
@@ -2182,30 +2182,38 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 }
 
 //________________________________________________________________________
-void msrNote::setNotePositionInMeasure (
-  const rational& positionInMeasure)
+void msrNote::setMeasureElementPositionInMeasure (
+  const rational& positionInMeasure,
+  const string&   context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Setting note position in measure of " << asString () <<
+      "Setting note's position in measure of " << asString () <<
       " to '" <<
       positionInMeasure <<
-      '\'' <<
+      "' (was '" <<
+      fMeasureElementPositionInMeasure <<
+      "') in measure '" <<
+      fMeasureElementMeasureNumber <<
+      "', context: \"" <<
+      context <<
+      "\"" <<
       endl;
   }
 #endif
 
 //  positionInMeasure.rationalise (); // TEMP ? JMI
 
-  string context =
-    "setNotePositionInMeasure()";
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != msrMoment::K_NO_POSITION,
+    "positionInMeasure == msrMoment::K_NO_POSITION");
 
-  setMeasureElementPositionInMeasure (
-    positionInMeasure,
-    context);
+  // set note's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
 
-  if (false) { // JMI
   // compute note's position in voice
   rational
      positionInVoice =
@@ -2215,7 +2223,7 @@ void msrNote::setNotePositionInMeasure (
   positionInVoice.rationalise ();
 
   // set note's position in voice
-  setMeasureElementPositionInVoice (
+  msrMeasureElement::setMeasureElementPositionInVoice (
     positionInVoice,
     context);
 
@@ -2228,31 +2236,35 @@ void msrNote::setNotePositionInMeasure (
   voice->
     incrementCurrentPositionInVoice (
       fMeasureElementSoundingWholeNotes);
-}
 
   // are there harmonies attached to this note?
+// JMI v0.9.66
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+    gLogStream << "fNoteHarmoniesList.size (): " << fNoteHarmoniesList.size () << endl;
+  }
+#endif
+
   if (fNoteHarmoniesList.size ()) {
     list<S_msrHarmony>::const_iterator i;
-    for (
-      i=fNoteHarmoniesList.begin (); i!=fNoteHarmoniesList.end (); ++i
-    ) {
+    for (S_msrHarmony harmony : fNoteHarmoniesList) {
       // set the harmony position in measure, taking it's offset into account
-      (*i)->
-        setHarmonyPositionInMeasure (
-          positionInMeasure);
+      harmony->
+        setMeasureElementPositionInMeasure (
+          positionInMeasure,
+          "msrNote::setMeasureElementPositionInMeasure()");
     } // for
   }
 
   // are there figured bass elements attached to this note?
   if (fNoteFiguredBassElementsList.size ()) {
     list<S_msrFiguredBassElement>::const_iterator i;
-    for (
-      i=fNoteFiguredBassElementsList.begin (); i!=fNoteFiguredBassElementsList.end (); ++i
-    ) {
-      // set the figured bass position in measure
-      (*i)->
-        setFiguredBassPositionInMeasure (
-          positionInMeasure);
+    for (S_msrFiguredBassElement figuredBassElement : fNoteFiguredBassElementsList) {
+      // set the figured bass element position in measure
+      figuredBassElement->
+        setMeasureElementPositionInMeasure (
+          positionInMeasure,
+          "msrNote::setMeasureElementPositionInMeasure()");
     } // for
   }
 
@@ -3246,10 +3258,6 @@ void msrNote::appendHarmonyToNoteHarmoniesList (S_msrHarmony harmony)
   // update the harmony whole notes if it belongs to a tuplet ??? utf8.xml JMI
 
   fNoteHarmoniesList.push_back (harmony);
-
-  // register this note as the harmony note upLink
-  harmony->
-    setHarmonyNoteUpLink (this);
 }
 
 void msrNote::appendFiguredBassElementToNoteFiguredBassElementsList (
@@ -4622,7 +4630,7 @@ string msrNote::noteComplementsAsString () const
   }
 
   s <<
-    ", staff number: ";
+    ", staffNumber: ";
   if (staff) {
     s <<
       staff->getStaffNumber ();
@@ -4632,7 +4640,7 @@ string msrNote::noteComplementsAsString () const
   }
 
   s <<
-    ", voice number: ";
+    ", voiceNumber: ";
   if (voice) {
     s <<
       voice->getVoiceNumber ();
@@ -5625,7 +5633,7 @@ void msrNote::print (ostream& os) const
             wholeNotesAsMsrString (
               fInputLineNumber,
               getNoteDirectTupletUpLink ()->
-                getTupletSoundingWholeNotes ());
+                getMeasureElementSoundingWholeNotes ());
         }
         else {
           os <<
@@ -6022,7 +6030,7 @@ void msrNote::print (ostream& os) const
           wholeNotesAsMsrString (
             fInputLineNumber,
             getNoteDirectTupletUpLink ()->
-              getTupletSoundingWholeNotes ()) <<
+              getMeasureElementSoundingWholeNotes ()) <<
           "\"";
       }
       else {
@@ -7069,7 +7077,7 @@ void msrNote::printShort (ostream& os) const
             wholeNotesAsMsrString (
               fInputLineNumber,
               getNoteDirectTupletUpLink ()->
-                getTupletSoundingWholeNotes ());
+                getMeasureElementSoundingWholeNotes ());
         }
         else {
           os <<

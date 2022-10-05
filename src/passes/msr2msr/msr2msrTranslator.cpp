@@ -1288,7 +1288,8 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
-      "', line " << elt->getInputLineNumber () <<
+      ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
+      ", line " << elt->getInputLineNumber () <<
       endl;
   }
 #endif
@@ -1300,6 +1301,10 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
         fCurrentVoiceClone);
 
   if (fOnGoingNonGraceNote) {
+    // register this note as the harmony note uplink
+    fCurrentHarmonyClone->
+      setHarmonyNoteUpLink (fCurrentNonGraceNoteClone);
+
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
       appendHarmonyToNoteHarmoniesList (
@@ -3621,7 +3626,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "nullptr";
+        "*** NONE ***";
     }
     gLogStream << endl;
   }
@@ -3755,7 +3760,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "nullptr";
+        "*** NONE ***";
     }
     gLogStream << endl;
   }
@@ -3909,6 +3914,8 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
   }
 #endif
 
+//  displayCurrentOnGoingValues (); // JMI
+
   // create the note clone
   S_msrNote
     noteClone =
@@ -3919,6 +3926,12 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
   // register clone in this tranlastors' voice notes map and ongoing notes stack
   fVoiceNotesMap [elt] = noteClone; // JMI XXL
   fOnGoingNotesStack.push_front (noteClone);
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceNotesDetails ()) { // JMI
+    displayOnGoingNotesStack ("visitStart (S_msrNote&)");
+  }
+#endif
 
   // don't register grace notes as the current note clone,
   // but as the current grace note clone instead
@@ -4041,7 +4054,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "nullptr" <<
+        "*** NONE ***" <<
         endl;
     }
 
@@ -4054,7 +4067,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "nullptr" <<
+        "*** NONE ***" <<
         endl;
     }
   }
@@ -4083,6 +4096,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
     case msrNoteKind::kNoteSkipInMeasure: // JMI
 #ifdef TRACING_IS_ENABLED
+
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
         gLogStream <<
           "Appending skip note clone '" <<
@@ -4211,20 +4225,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         endl;
         */
 
-      if (! fOnGoingGraceNotesGroup) {
-        stringstream s;
-
-        s <<
-          "grace note '" << fCurrentNonGraceNoteClone->asShortString () <<
-          "' found outside of grace notes";
-
-        msr2msrInternalError (
-          gGlobalServiceRunData->getInputSourceName (),
-          inputLineNumber,
-          __FILE__, __LINE__,
-          s.str ());
-      }
-      else {
+      if (!fOnGoingGraceNotesGroup) { // JMI v0.9.66
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
           gLogStream <<
@@ -4241,6 +4242,19 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
         fCurrentGraceNotesGroupClone->
           appendNoteToGraceNotesGroup (
             fCurrentGraceNoteClone);
+      }
+      else {
+        stringstream s;
+
+        s <<
+          "grace note '" << fCurrentNonGraceNoteClone->asShortString () <<
+          "' found outside of any grace notes group";
+
+        msr2msrInternalError (
+          gGlobalServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          __FILE__, __LINE__,
+          s.str ());
       }
 
     /* JMI ???
@@ -4304,7 +4318,14 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           addAnotherNoteToChord (
             fCurrentNonGraceNoteClone,
             fCurrentVoiceClone);
-      }
+
+        // set its position in measure
+        fCurrentNonGraceNoteClone->
+          setMeasureElementPositionInMeasure (
+            fCurrentChordClone->
+              getMeasureElementPositionInMeasure (),
+            "kNoteRegularInChord");
+     }
 
       else {
         stringstream s;
@@ -4328,6 +4349,13 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           addAnotherNoteToChord (
             fCurrentGraceNoteClone,
             fCurrentVoiceClone);
+
+        // set its position in measure
+        fCurrentNonGraceNoteClone->
+          setMeasureElementPositionInMeasure (
+            fCurrentChordClone->
+              getMeasureElementPositionInMeasure (),
+            "kNoteInChordInGraceNotesGroup");
       }
 
       else {

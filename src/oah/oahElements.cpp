@@ -43,6 +43,9 @@ string elementValueKindAsString (
   string result;
 
   switch (elementValueKind) {
+    case oahElementValueKind::kElementValueUnknown:
+      result = "kElementValueUnknown";
+      break;
     case oahElementValueKind::kElementValueWithout:
       result = "kElementValueWithout";
       break;
@@ -260,15 +263,12 @@ oahElement::oahElement (
   fShortName   = shortName;
   fDescription = description;
 
-  fElementValueKind =
-  	oahElementValueKind::kElementValueWithout; // default value ??? JMI v0.9.65
+  fElementValueKind = elementValueKind;
 
   fElementHelpOnlyKind =
     oahElementHelpOnlyKind::kElementHelpOnlyNo; // default value
 
   fElementVisibilityKind = elementVisibilityKind;
-
-//   fMultipleOccurrencesAllowed = false; superflous JMI v0.9.65
 }
 
 oahElement::oahElement ()
@@ -278,15 +278,13 @@ oahElement::oahElement ()
   fDescription = "";
 
   fElementValueKind =
-  	oahElementValueKind::kElementValueWithout; // default value ??? JMI v0.9.65
+  	oahElementValueKind::kElementValueUnknown; // default value JMI v0.9.66
 
   fElementHelpOnlyKind =
     oahElementHelpOnlyKind::kElementHelpOnlyNo; // default value
 
   fElementVisibilityKind =
   	oahElementVisibilityKind::kElementVisibilityNone; // default value;
-
-//   fMultipleOccurrencesAllowed = false; superflous JMI v0.9.65
 }
 
 oahElement::~oahElement ()

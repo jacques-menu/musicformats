@@ -221,7 +221,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
 }
 \end{lstlisting}
 
-Upon the second visit of \class{msrNote}, the part figured bass voice is created if figured bass elements are not to be ignored due to option \optionBoth{ignore-figured-bass}{ofigbass} and it has not been created yet:
+Upon the second visit of \class{msrNote}, the part figured bass voice is created if figured bass elements are not to be ignored due to option \optionBoth{ignore-musicxml-figured-bass}{ofigbass} and it has not been created yet:
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
 {
@@ -465,7 +465,7 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
   rational
     newNoteSoundingWholeNotes =
       newNote->
-        getNoteSoundingWholeNotes (),
+        getMeasureElementSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
       newNote->
         getNoteDisplayWholeNotes ();

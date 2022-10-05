@@ -951,7 +951,7 @@ R"()",
   S_oahBooleanAtom
     ignoreArticulationsAtom =
       oahBooleanAtom::create (
-        "ignore-articulations", "iarts",
+        "ignore-musicxml-articulations", "imxmlarts",
 R"(Ignore articulations in MusicXML data.)",
         "fIgnoreArticulations",
         fIgnoreArticulations);
@@ -965,7 +965,7 @@ R"(Ignore articulations in MusicXML data.)",
   S_oahBooleanAtom
     ignoreOrnamentsAtom =
       oahBooleanAtom::create (
-        "ignore-ornaments", "iorns",
+        "ignore-musicxml-ornaments", "iimxmlorns",
 R"(Ignore ornaments in MusicXML data.)",
         "fIgnoreOrnaments",
         fIgnoreOrnaments);
@@ -979,7 +979,7 @@ R"(Ignore ornaments in MusicXML data.)",
   S_oahBooleanAtom
     ignoreTiesAtom =
       oahBooleanAtom::create (
-        "ignore-ties", "ities",
+        "ignore-musicxml-ties", "iimxmlties",
 R"(Ignore ties in MusicXML data)",
         "fIgnoreTies",
         fIgnoreTies);
@@ -993,7 +993,7 @@ R"(Ignore ties in MusicXML data)",
   S_oahBooleanAtom
     ignoreDynamicsAtom =
       oahBooleanAtom::create (
-        "ignore-dynamics", "idyns",
+        "ignore-musicxml-dynamics", "iimxmldyns",
 R"(Ignore dynamics in MusicXML data)",
         "fIgnoreDynamics",
         fIgnoreDynamics);
@@ -1007,7 +1007,7 @@ R"(Ignore dynamics in MusicXML data)",
   S_oahBooleanAtom
     ignoreSlursAtom =
       oahBooleanAtom::create (
-        "ignore-slurs", "islurs",
+        "ignore-musicxml-slurs", "imxmlslurs",
 R"(Ignore slurs in MusicXML data.)",
         "fIgnoreSlurs",
         fIgnoreSlurs);
@@ -1021,7 +1021,7 @@ R"(Ignore slurs in MusicXML data.)",
   S_oahBooleanAtom
     ignoreWedgesAtom =
       oahBooleanAtom::create (
-        "ignore-wedges", "iwedges",
+        "ignore-musicxml-wedges", "imxmlwedges",
 R"(Ignore '<wedge/>' in MusicXML data.)",
         "fIgnoreWedges",
         fIgnoreWedges);
@@ -1035,7 +1035,7 @@ R"(Ignore '<wedge/>' in MusicXML data.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "ignore-musicxml-lyrics", "imlyrics",
+        "ignore-musicxml-lyrics", "imxmllyrics",
 R"(Ignore lyrics in MusicXML data.)",
         "fIgnoreLyrics",
         fIgnoreLyrics));
@@ -1047,7 +1047,7 @@ R"(Ignore lyrics in MusicXML data.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "ignore-harmonies", "iharms",
+        "ignore-musicxml-harmonies", "imxmlharms",
 R"(Ignore harmonies in MusicXML data.)",
         "fIgnoreHarmonies",
         fIgnoreHarmonies));
@@ -1059,7 +1059,7 @@ R"(Ignore harmonies in MusicXML data.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "ignore-figured-bass", "ifigbass",
+        "ignore-musicxml-figured-bass", "imxmlfigbass",
 R"(Ignore figured bass elements in MusicXML data.)",
         "fIgnoreFiguredBassElements",
         fIgnoreFiguredBassElements));

@@ -309,17 +309,16 @@ void xml2xmlRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
+  
   registerAtomInRegularSubgroup ("display-msr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
-
   registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2-full", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-slices", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-slices", subGroup);
-
-  registerAtomInRegularSubgroup ("display-msr-1-details", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-details", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-names", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-names", subGroup);
@@ -826,7 +825,7 @@ void xml2xmlRegularHandler::createArticulationsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-articulations", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-articulations", subGroup);
 }
 
 void xml2xmlRegularHandler::createOrnamentsRegularGroup ()
@@ -858,7 +857,7 @@ void xml2xmlRegularHandler::createOrnamentsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ornaments", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ornaments", subGroup);
 }
 
 void xml2xmlRegularHandler::createGraceNotesRegularGroup ()
@@ -953,7 +952,7 @@ void xml2xmlRegularHandler::createTiesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ties", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ties", subGroup);
 }
 
 void xml2xmlRegularHandler::createSlursRegularGroup ()
@@ -984,7 +983,7 @@ void xml2xmlRegularHandler::createSlursRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-slurs", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-slurs", subGroup);
 
   registerAtomInRegularSubgroup ("delay-rests-slurs", subGroup);
 }
@@ -1048,7 +1047,7 @@ void xml2xmlRegularHandler::createDynamicRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-dynamics", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-dynamics", subGroup);
 
   registerAtomInRegularSubgroup ("all-dynamics-below", subGroup);
 
@@ -1083,7 +1082,7 @@ void xml2xmlRegularHandler::createWedgesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-wedges", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-wedges", subGroup);
 
   registerAtomInRegularSubgroup ("all-wedges-below", subGroup);
 
@@ -1180,7 +1179,7 @@ void xml2xmlRegularHandler::createHarmoniesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-harmonies", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-harmonies", subGroup);
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 }
@@ -1213,7 +1212,7 @@ void xml2xmlRegularHandler::createFiguredBassRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-figured-bass", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-figured-bass", subGroup);
 
   registerAtomInRegularSubgroup ("show-figured-bass-voices", subGroup);
 }

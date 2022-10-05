@@ -35,48 +35,6 @@ using namespace std;
 namespace MusicFormats
 {
 //_______________________________________________________________________________
-void displayBsrScore (
-  S_bsrScore    bsrScore,
-  S_msrOahGroup msrOpts,
-  S_bsrOahGroup bsrOpts,
-  const string& passDescription)
-{
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    bsrScore != nullptr,
-    "bsrScore is null");
-
-  // start the clock
-  clock_t startClock = clock ();
-
-  string separator =
-    "%--------------------------------------------------------------";
-
-  gLogStream <<
-    separator <<
-    endl <<
-    gTab <<
-    "Pass (optional): " << passDescription <<
-    endl <<
-    separator <<
-    endl << endl <<
-    bsrScore <<
-    separator <<
-    endl << endl;
-
-  // register time spent
-  clock_t endClock = clock ();
-
-  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
-    "",
-    "Display the first BSR as text",
-    mfTimingItem::kOptional,
-    startClock,
-    endClock);
-}
-
-//_______________________________________________________________________________
 void displayBsrScoreShort (
   S_bsrScore    bsrScore,
   S_msrOahGroup msrOpts,
@@ -102,6 +60,48 @@ void displayBsrScoreShort (
     "Pass (optional): " << passDescription << ", short version" <<
     endl <<
     separator <<
+    endl << endl <<
+    bsrScore <<
+    separator <<
+    endl << endl;
+
+  // register time spent
+  clock_t endClock = clock ();
+
+  mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
+    "",
+    "Display the BSR as text, short version",
+    mfTimingItem::kOptional,
+    startClock,
+    endClock);
+}
+
+//_______________________________________________________________________________
+void displayBsrScoreFull (
+  S_bsrScore    bsrScore,
+  S_msrOahGroup msrOpts,
+  S_bsrOahGroup bsrOpts,
+  const string& passDescription)
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    bsrScore != nullptr,
+    "bsrScore is null");
+
+  // start the clock
+  clock_t startClock = clock ();
+
+  string separator =
+    "%--------------------------------------------------------------";
+
+  gLogStream <<
+    separator <<
+    endl <<
+    gTab <<
+    "Pass (optional): " << passDescription << ", full version" <<
+    endl <<
+    separator <<
     endl << endl;
 
   bsrScore->printShort (gLogStream);
@@ -115,7 +115,7 @@ void displayBsrScoreShort (
 
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
-    "Display the first BSR as text, short version",
+    "Display the BSR as text, full version",
     mfTimingItem::kOptional,
     startClock,
     endClock);

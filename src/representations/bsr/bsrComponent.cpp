@@ -49,6 +49,17 @@ S_mfcRepresentationComponent createBsrRepresentationComponent ()
             "Start of sequential versions numbering"
           }
       ));
+
+    // populate it
+    pRepresentationComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.66"),
+          "October 6, 2021",
+          list<string> {
+            "Finalized the '-display-bsr*' options"
+          }
+      ));
   }
 
   return pRepresentationComponent;

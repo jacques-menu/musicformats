@@ -132,6 +132,42 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 msrDoubleTremolo::~msrDoubleTremolo ()
 {}
 
+void msrDoubleTremolo::setMeasureElementPositionInMeasure (
+  const rational& positionInMeasure,
+  const string&   context)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+    ++gIndenter;
+
+    gLogStream <<
+      "Setting measure element position in measure of double tremolo " <<
+      asString () <<
+      " to '" <<
+      positionInMeasure <<
+      "' (was '" <<
+      fMeasureElementPositionInMeasure <<
+      "') in measure '" <<
+      fMeasureElementMeasureNumber <<
+      "', context: \"" <<
+      context <<
+      "\"" <<
+      endl;
+
+    --gIndenter;
+  }
+#endif
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != msrMoment::K_NO_POSITION,
+    "positionInMeasure == msrMoment::K_NO_POSITION");
+
+  // set double tremolo's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
+}
+
 void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (S_msrNote note)
 {
 #ifdef TRACING_IS_ENABLED
@@ -183,8 +219,9 @@ void msrDoubleTremolo::setDoubleTremoloNoteFirstElement (S_msrNote note)
 
   // set note's sounding whole notes
   note->
-    setNoteSoundingWholeNotes (
-      fDoubleTremoloElementsDuration);
+    setMeasureElementSoundingWholeNotes (
+      fDoubleTremoloElementsDuration,
+      "msrDoubleTremolo::setDoubleTremoloNoteFirstElement()");
 
   // setting number of repeats
   rational
@@ -321,8 +358,9 @@ void msrDoubleTremolo::setDoubleTremoloNoteSecondElement (
 
   // set note's sounding whole notes
   note->
-    setNoteSoundingWholeNotes (
-      fDoubleTremoloElementsDuration);
+    setMeasureElementSoundingWholeNotes (
+      fDoubleTremoloElementsDuration,
+      "msrDoubleTremolo::setDoubleTremoloNoteSecondElement()");
 }
 
 void msrDoubleTremolo::setDoubleTremoloChordFirstElement (
@@ -497,7 +535,7 @@ void msrDoubleTremolo::setDoubleTremoloPositionInMeasure (
         voice->
           incrementCurrentPositionInVoice (
             note->
-              getNoteSoundingWholeNotes ());
+              getMeasureElementSoundingWholeNotes ());
       }
       else {
         msrInternalError (
@@ -517,7 +555,7 @@ void msrDoubleTremolo::setDoubleTremoloPositionInMeasure (
         voice->
           incrementCurrentPositionInVoice (
             chord->
-              getChordSoundingWholeNotes ());
+              getMeasureElementSoundingWholeNotes ());
       }
       else {
         msrInternalError (
@@ -816,7 +854,7 @@ ostream& operator<< (ostream& os, const S_msrDoubleTremolo& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

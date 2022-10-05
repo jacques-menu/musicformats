@@ -2747,7 +2747,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingNote = " << fOnGoingNote <<
       ", fOnGoingChord = " << fOnGoingChord <<
       ", fOnGoingHarmoniesVoice = " << fOnGoingHarmoniesVoice <<
-      "', line " << elt->getInputLineNumber () <<
+      ", line " << elt->getInputLineNumber () <<
       endl;
   }
 #endif
@@ -2758,6 +2758,10 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
       fCurrentVoiceClone);
 
   if (fOnGoingNote) {
+    // register this note as the harmony note upLink
+    harmony->
+      setHarmonyNoteUpLink (fOnGoingNote);
+
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
       appendHarmonyToNoteHarmoniesList (
@@ -4278,7 +4282,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "nullptr";
+        "*** NONE ***";
     }
     gLogStream << endl;
   }
@@ -4558,7 +4562,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "nullptr";
+        "*** NONE ***";
     }
     gLogStream << endl;
   }
@@ -4733,7 +4737,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "nullptr" <<
+        "*** NONE ***" <<
         endl;
     }
 
@@ -4746,7 +4750,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "nullptr" <<
+        "*** NONE ***" <<
         endl;
     }
   }

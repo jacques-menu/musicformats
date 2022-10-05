@@ -34,6 +34,8 @@
 
 #include "oahEarlyOptions.h"
 
+#include "msrInterface.h"
+
 #include "mxsr2msrSkeletonBuilderInterface.h"
 
 #include "mxsr2msrSkeletonBuilder.h"
@@ -92,6 +94,13 @@ S_msrScore translateMxsrToMsrSkeleton (
   // fetch the score skeleton
   scoreSkeleton =
     skeletonBuilder.getMsrScore ();
+
+  // display the first MSR score skeleton if requested
+  if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
+    displayMsrScoreShort (
+      scoreSkeleton,
+      "Display the first MSR score skeleton");
+  }
 
   // register time spent
   clock_t endClock = clock ();

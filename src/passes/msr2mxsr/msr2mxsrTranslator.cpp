@@ -624,7 +624,7 @@ void msr2mxsrTranslator::appendNoteToMeasure (
   // account for theMsrNote's whole notes duration in the measure
   fCurrentPositionInMeasure +=
     theMsrNote->
-      getNoteSoundingWholeNotes ();
+      getMeasureElementSoundingWholeNotes ();
 
   // append the 'after spanner' elements if any
   appendNoteSpannersAfterNote (theMsrNote);
@@ -4598,7 +4598,7 @@ void msr2mxsrTranslator::visitStart (S_msrChord& elt)
       " ===== " <<
       "Chord start " <<
       ", chordSoundingWholeNotes: " <<
-      elt->getChordSoundingWholeNotes () <<
+      elt->getMeasureElementSoundingWholeNotes () <<
       ", " <<
       elt->getChordNotesVector ().size () <<
       " elements" <<
@@ -4634,7 +4634,7 @@ void msr2mxsrTranslator::visitEnd (S_msrChord& elt)
       " ===== " <<
       "Chord end " <<
       ", chordSoundingWholeNotes: " <<
-      elt->getChordSoundingWholeNotes () <<
+      elt->getMeasureElementSoundingWholeNotes () <<
       ", " <<
       elt->getChordNotesVector ().size () <<
       " elements" <<
@@ -4917,12 +4917,12 @@ void msr2mxsrTranslator::appendABackupToMeasure (
     previousNoteMeasureElementPositionInMeasure =
       fPreviousMSRNote->getMeasureElementPositionInMeasure (),
     previousNoteSoundingWholeNotes =
-      fPreviousMSRNote->getNoteSoundingWholeNotes (),
+      fPreviousMSRNote->getMeasureElementSoundingWholeNotes (),
 
     theMsrNoteMeasureElementPositionInMeasure =
       fPreviousMSRNote->getMeasureElementPositionInMeasure (),
     theMsrNoteSoundingWholeNotes =
-      theMsrNote->getNoteSoundingWholeNotes ();
+      theMsrNote->getMeasureElementSoundingWholeNotes ();
 
   rational
     backupDuration =
@@ -5235,7 +5235,7 @@ fCurrentCumulatedSkipsVoiceNumber
           rational
             positionAfterNoteInMeasure =
               notePositionInMeasure +
-                theMsrNote->getNoteSoundingWholeNotes ();
+                theMsrNote->getMeasureElementSoundingWholeNotes ();
           positionAfterNoteInMeasure.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
@@ -7184,7 +7184,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
       doGenerateNote = false;
       // cumulating the skip notes durations for <forward /> elements generation
       fCurrentCumulatedSkipsDurations +=
-        theMsrNote->getNoteSoundingWholeNotes ();
+        theMsrNote->getMeasureElementSoundingWholeNotes ();
       break;
     case msrNoteKind::kNoteUnpitchedInMeasure:
       break;
@@ -7371,7 +7371,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
           ", measureElementMomentInMeasure: " <<
             theMsrNote->getMeasureElementMomentInMeasure () <<
           ", noteSoundingWholeNotes: " <<
-            theMsrNote->getNoteSoundingWholeNotes () <<
+            theMsrNote->getMeasureElementSoundingWholeNotes () <<
           ", line " << inputLineNumber <<
           " ===== ";
         Sxmlelement comment = createMxmlelement (kComment, s.str ());
@@ -7838,7 +7838,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingNonGraceNote: " << fOnGoingNonGraceNote <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
-      "', line " << elt->getInputLineNumber () <<
+      ", line " << elt->getInputLineNumber () <<
       endl;
   }
 #endif
@@ -7850,6 +7850,10 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
         fCurrentVoiceClone);
 
   if (fOnGoingNonGraceNote) {
+    // register this note as the harmony note upLink
+    harmony->
+      setHarmonyNoteUpLink (fOnGoingNonGraceNote);
+
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
       appendHarmonyToNoteHarmoniesList (

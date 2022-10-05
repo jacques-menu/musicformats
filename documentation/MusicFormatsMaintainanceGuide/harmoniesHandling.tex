@@ -217,7 +217,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
 }
 \end{lstlisting}
 
-Upon the second visit of \class{msrNote}, the part harmonies voice is created if harmonies are not to be ignored due to option \optionBoth{ignore-harmonies}{oharms} and it has not been created yet:
+Upon the second visit of \class{msrNote}, the part harmonies voice is created if harmonies are not to be ignored due to option \optionBoth{ignore-musicxml-harmonies}{oharms} and it has not been created yet:
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
 {
@@ -480,7 +480,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
   rational
     newNoteSoundingWholeNotes =
       newNote->
-        getNoteSoundingWholeNotes (),
+        getMeasureElementSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
       newNote->
         getNoteDisplayWholeNotes ();
@@ -506,8 +506,9 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
     // set the harmony's sounding whole notes
     harmony->
-      setHarmonySoundingWholeNotes (
-        newNoteSoundingWholeNotes);
+      setMeasureElementSoundingWholeNotes (
+        newNoteSoundingWholeNotes,
+        "mxsr2msrTranslator::handlePendingHarmonies()");
 
     // set the harmony's display whole notes JMI useless???
     harmony->

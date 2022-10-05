@@ -93,6 +93,7 @@ void msrMeasureElement::setMeasureElementPositionInMeasure (
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+
     gLogStream <<
       "Setting measure element position in measure of " <<
       asString () <<
@@ -107,16 +108,14 @@ void msrMeasureElement::setMeasureElementPositionInMeasure (
       endl;
   }
 #endif
-/* JMI
-  if (positionInMeasure == msrMoment::K_NO_POSITION) abort ();
 
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
     positionInMeasure != msrMoment::K_NO_POSITION,
     "positionInMeasure == msrMoment::K_NO_POSITION");
-*/
 
+  // set measure element's position in measure
   fMeasureElementPositionInMeasure = positionInMeasure;
 }
 
@@ -348,7 +347,7 @@ ostream& operator<< (ostream& os, const S_msrMeasureElement& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

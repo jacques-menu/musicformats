@@ -241,17 +241,16 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
 
+  registerAtomInRegularSubgroup ("display-msr-1", subGroup);
   registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2-full", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-slices", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-slices", subGroup);
-
-  registerAtomInRegularSubgroup ("display-msr-1-details", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-details", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-names", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-names", subGroup);
@@ -260,8 +259,8 @@ void xml2lyRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-msr-2-summary", subGroup);
 
   registerAtomInRegularSubgroup ("display-lpsr", subGroup);
-  registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
   registerAtomInRegularSubgroup ("display-lpsr-short", subGroup);
+  registerAtomInRegularSubgroup ("display-lpsr-full", subGroup);
 
 #ifdef TRACING_IS_ENABLED
   registerAtomInRegularSubgroup ("trace-mxsr", subGroup);
@@ -935,7 +934,7 @@ void xml2lyRegularHandler::createArticulationsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-articulations", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-articulations", subGroup);
 
   registerAtomInRegularSubgroup ("delay-rests-pedals", subGroup);
 }
@@ -968,7 +967,7 @@ void xml2lyRegularHandler::createOrnamentsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ornaments", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ornaments", subGroup);
 
   registerAtomInRegularSubgroup ("delayed-ornaments-fraction", subGroup);
 }
@@ -1069,7 +1068,7 @@ void xml2lyRegularHandler::createTiesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ties", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ties", subGroup);
 }
 
 void xml2lyRegularHandler::createSlursRegularGroup ()
@@ -1100,7 +1099,7 @@ void xml2lyRegularHandler::createSlursRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-slurs", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-slurs", subGroup);
 
   registerAtomInRegularSubgroup ("delay-rests-slurs", subGroup);
 }
@@ -1164,7 +1163,7 @@ void xml2lyRegularHandler::createDynamicRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-dynamics", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-dynamics", subGroup);
 
   registerAtomInRegularSubgroup ("all-dynamics-below", subGroup);
 
@@ -1201,7 +1200,7 @@ void xml2lyRegularHandler::createWedgesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-wedges", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-wedges", subGroup);
 
   registerAtomInRegularSubgroup ("all-wedges-below", subGroup);
 
@@ -1330,7 +1329,7 @@ void xml2lyRegularHandler::createHarmoniesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-harmonies", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-harmonies", subGroup);
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 
@@ -1370,7 +1369,7 @@ void xml2lyRegularHandler::createFiguredBassRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-figured-bass", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-figured-bass", subGroup);
 
   registerAtomInRegularSubgroup ("show-figured-bass-voices", subGroup);
 }

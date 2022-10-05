@@ -630,12 +630,13 @@ void msrBarLine::print (ostream& os) const
 void msrBarLine::printShort (ostream& os) const
 {
   os <<
-    "BarLine, " <<
+    "[BarLine, " <<
     barLineCategoryKindAsString (
       fBarLineCategoryKind) <<
     ", measureNumber " << fMeasureElementMeasureNumber <<
     ", positionInMeasure " << fMeasureElementPositionInMeasure <<
     ", line " << fInputLineNumber <<
+    ']' <<
     endl;
 }
 
@@ -647,7 +648,7 @@ ostream& operator<< (ostream& os, const S_msrBarLine& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

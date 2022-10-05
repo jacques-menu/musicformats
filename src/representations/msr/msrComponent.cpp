@@ -111,6 +111,17 @@ S_mfcRepresentationComponent createMsrRepresentationComponent ()
             "Finalized the representation of full-bar rests"
           }
       ));
+
+    pRepresentationComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.66"),
+          "October 6, 2022",
+          list<string> {
+            "Finalized the computation of positions in measures",
+            "Finalized the '-display-msr-*' options"
+          }
+      ));
   }
 
   return pRepresentationComponent;

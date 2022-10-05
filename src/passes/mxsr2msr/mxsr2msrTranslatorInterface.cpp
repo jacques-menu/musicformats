@@ -118,14 +118,14 @@ void populateMsrSkeletonFromMxsr (
   // display the populated MSR score if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayMsrScore (
+  if (gGlobalMsrOahGroup->getDisplayFirstMsrShort ()) {
+    displayMsrScoreShort (
       scoreSkeletonToBePopulated,
       "Display the first MSR as text");
   }
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayMsrScoreShort (
+  if (gGlobalMsrOahGroup->getDisplayFirstMsrFull ()) {
+    displayMsrScoreFull (
       scoreSkeletonToBePopulated,
       "Display the first MSR as text");
   }

@@ -28,6 +28,8 @@
 
 #include "msr2lpsrComponent.h"
 
+#include "lpsrInterface.h"
+
 #include "msr2lpsrTranslator.h"
 
 #include "oahOah.h"
@@ -526,6 +528,25 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
 
   // browse the visited score with the browser
   browser.browse (*fVisitedMsrScore);
+
+	// display the LPSR score if requested
+	// ------------------------------------------------------
+
+	if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
+		displayLpsrScoreShort (
+			fResultingLpsr,
+			gGlobalMsrOahGroup,
+			gGlobalLpsrOahGroup,
+			"Display the LPSR");
+	}
+
+	if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
+		displayLpsrScoreFull (
+			fResultingLpsr,
+			gGlobalMsrOahGroup,
+			gGlobalLpsrOahGroup,
+			"Display the LPSR");
+	}
 
   // forget about the visited MSR score
   fVisitedMsrScore = nullptr;
@@ -2386,7 +2407,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
-      "', line " << elt->getInputLineNumber () <<
+      ", line " << elt->getInputLineNumber () <<
       endl;
   }
 #endif
@@ -2398,6 +2419,10 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
         fCurrentVoiceClone);
 
   if (fOnGoingNonGraceNote) {
+    // register this note as the harmony note upLink
+    fCurrentHarmonyClone->
+      setHarmonyNoteUpLink (fCurrentNonGraceNoteClone);
+
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
       appendHarmonyToNoteHarmoniesList (
@@ -4824,7 +4849,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "nullptr";
+        "*** NONE ***";
     }
     gLogStream << endl;
   }
@@ -4958,7 +4983,7 @@ void msr2lpsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "nullptr";
+        "*** NONE ***";
     }
     gLogStream << endl;
   }
@@ -5176,6 +5201,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
           gLogStream <<
             "The first note of voice clone RJIRWR '" <<
             fCurrentVoiceClone->getVoiceName () <<
+
             "' is '" <<
             fFirstNoteCloneInVoice->asShortString () <<
              "'" <<
@@ -5252,7 +5278,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "nullptr" <<
+        "*** NONE ***" <<
         endl;
     }
 
@@ -5265,7 +5291,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "nullptr" <<
+        "*** NONE ***" <<
         endl;
     }
   }
@@ -5422,7 +5448,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
         endl;
         */
 
-      if (fCurrentGraceNotesGroupClone) {
+      if (fCurrentGraceNotesGroupClone) { // JMI v0.9.66
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
           gLogStream <<

@@ -199,7 +199,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
       if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
         gLogStream <<
           "Creating a skip grace note" <<
-          ", soundingWholeNotes: " << note->getNoteSoundingWholeNotes () <<
+          ", soundingWholeNotes: " << note->getMeasureElementSoundingWholeNotes () <<
           ", displayWholeNotes: " << note->getNoteDisplayWholeNotes () <<
           endl;
       }
@@ -210,7 +210,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
           msrNote::createGraceSkipNote (
             note->            getInputLineNumber (),
             note->            getMeasureElementMeasureNumber (),
-            note->            getNoteSoundingWholeNotes (), // 0/1 JMI
+            note->            getMeasureElementSoundingWholeNotes (), // 0/1 JMI
             note->            getNoteDisplayWholeNotes (),
             note->            getNoteDotsNumber ());
 
@@ -233,7 +233,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
           msrNote::createGraceSkipNote (
             chordFirstNote->  getInputLineNumber (),
             chordFirstNote->  getMeasureElementMeasureNumber (),
-            chordFirstNote->  getNoteSoundingWholeNotes (), // 0/1 JMI
+            chordFirstNote->  getMeasureElementSoundingWholeNotes (), // 0/1 JMI
             chordFirstNote->  getNoteDisplayWholeNotes (),
             chordFirstNote->  getNoteDotsNumber ());
 
@@ -368,14 +368,14 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
   return result;
 }
 
-void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasure (
+void msrGraceNotesGroup::setGraceNotesGroupElementsPositionsInMeasure (
   S_msrMeasure        measure,
   const rational&     positionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Setting grace notes group elements position in measure of " << asString () <<
+      "Setting grace notes group elements' positions in measure of " << asString () <<
       " to '" <<
       positionInMeasure <<
       "'" <<
@@ -412,7 +412,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasure (
 
   voice->
     incrementCurrentPositionInVoice (
-      fChordNotesVector [0]->getNoteSoundingWholeNotes ());
+      fChordNotesVector [0]->getMeasureElementSoundingWholeNotes ());
 }
 */
 
@@ -432,7 +432,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionInMeasure (
 */
 
     string context =
-      "setGraceNotesGroupElementsPositionInMeasure()";
+      "setGraceNotesGroupElementsPositionsInMeasure()";
 
     for (
       list<S_msrMeasureElement>::const_iterator i =
@@ -767,7 +767,7 @@ ostream& operator<< (ostream& os, const S_msrGraceNotesGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

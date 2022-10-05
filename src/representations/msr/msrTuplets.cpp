@@ -18,6 +18,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
 #include "mfServiceRunData.h"
 
 #include "mfStringsHandling.h"
@@ -155,7 +157,28 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   return newbornClone;
 }
 
-// measure upLink
+void msrTuplet::setMeasureElementPositionInMeasure (
+  const rational& positionInMeasure,
+  const string&   context)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+    gLogStream <<
+      "Setting tuplet's position in measure of " << asString () <<
+      " to '" <<
+      positionInMeasure <<
+      "' (was '" <<
+      fMeasureElementPositionInMeasure <<
+      "') in measure '" <<
+      fMeasureElementMeasureNumber <<
+      "', context: \"" <<
+      context <<
+      "\"" <<
+      endl;
+  }
+#endif
+}
+
 S_msrMeasure msrTuplet::fetchTupletMeasureUpLink () const
 {
   S_msrMeasure result;
@@ -338,7 +361,7 @@ void msrTuplet::appendNoteToTuplet (
 
   // account for note duration in tuplet duration
   fMeasureElementSoundingWholeNotes +=
-    note->getNoteSoundingWholeNotes ();
+    note->getMeasureElementSoundingWholeNotes ();
   fMeasureElementSoundingWholeNotes.rationalise ();
 
   fTupletDisplayWholeNotes += // JMI
@@ -398,7 +421,7 @@ void msrTuplet::appendChordToTuplet (S_msrChord chord)
   // since its first note has been accounted for already
   /* JMI
   fMeasureElementSoundingWholeNotes +=
-    chord->getChordSoundingWholeNotes ();
+    chord->getMeasureElementSoundingWholeNotes ();
   fMeasureElementSoundingWholeNotes.rationalise ();
 */
 
@@ -447,7 +470,7 @@ void msrTuplet::appendTupletToTuplet (S_msrTuplet tuplet)
 
   // account for tuplet duration
   fMeasureElementSoundingWholeNotes +=
-    tuplet->getTupletSoundingWholeNotes ();
+    tuplet->getMeasureElementSoundingWholeNotes ();
   fMeasureElementSoundingWholeNotes.rationalise ();
 
   fTupletDisplayWholeNotes += // JMI
@@ -480,7 +503,7 @@ void msrTuplet::appendTupletToTupletClone (S_msrTuplet tuplet)
 
   // account for tuplet duration
   fMeasureElementSoundingWholeNotes +=
-    tuplet->getTupletSoundingWholeNotes ();
+    tuplet->getMeasureElementSoundingWholeNotes ();
   fMeasureElementSoundingWholeNotes.rationalise ();
 
   fTupletDisplayWholeNotes +=
@@ -572,7 +595,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
 
         // account for note duration
         fMeasureElementSoundingWholeNotes -=
-          note->getNoteSoundingWholeNotes ();
+          note->getMeasureElementSoundingWholeNotes ();
         fMeasureElementSoundingWholeNotes.rationalise ();
 
         fTupletDisplayWholeNotes -= // JMI
@@ -657,7 +680,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 /*
       // decrement the tuplet sounding whole notes accordingly ??? JMI BAD???
       fMeasureElementSoundingWholeNotes +=
-        note->getNoteSoundingWholeNotes ();
+        note->getMeasureElementSoundingWholeNotes ();
       fMeasureElementSoundingWholeNotes.rationalise ();
 */
 
@@ -709,7 +732,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
   return result;
 }
 
-rational msrTuplet::setTupletMembersPositionInMeasure (
+rational msrTuplet::setTupletMembersPositionsInMeasure (
   S_msrMeasure    measure,
   const rational& positionInMeasure)
   // returns the position in measure after the tuplet
@@ -717,7 +740,7 @@ rational msrTuplet::setTupletMembersPositionInMeasure (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Setting tuplet position in measure of " << asString () <<
+      "Setting tuplet members positions in measure of " << asString () <<
       " to '" <<
       positionInMeasure <<
       "'" <<
@@ -725,12 +748,17 @@ rational msrTuplet::setTupletMembersPositionInMeasure (
   }
 #endif
 
-  string context =
-    "setTupletMembersPositionInMeasure()";
+  string context = // JMI v0.9.66
+    "setTupletMembersPositionsInMeasure()";
 
-  setMeasureElementPositionInMeasure (
-    positionInMeasure,
-    context);
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != msrMoment::K_NO_POSITION,
+    "positionInMeasure == msrMoment::K_NO_POSITION");
+
+  // set tuplet's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
 
 if (false) { // JMI
   // compute tuplet's position in voice
@@ -741,10 +769,14 @@ if (false) { // JMI
       positionInMeasure;
   positionInVoice.rationalise ();
 
-  // set tuplet's position in voice
-  setMeasureElementPositionInVoice (
-    positionInVoice,
-    context);
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != msrMoment::K_NO_POSITION,
+    "positionInMeasure == msrMoment::K_NO_POSITION");
+
+  // set tuplet's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
 
   // update current position in voice
   S_msrVoice
@@ -777,12 +809,13 @@ if (false) { // JMI
           measure);
 
       note->
-        setNotePositionInMeasure (
-          currentPosition);
+        setMeasureElementPositionInMeasure (
+          currentPosition,
+          "msrTuplet::setTupletMembersPositionsInMeasure()");
 
       currentPosition +=
         note->
-          getNoteSoundingWholeNotes ();
+          getMeasureElementSoundingWholeNotes ();
       currentPosition.rationalise ();
     }
 
@@ -798,7 +831,7 @@ if (false) { // JMI
 
       currentPosition +=
         chord->
-          getChordSoundingWholeNotes ();
+          getMeasureElementSoundingWholeNotes ();
       currentPosition.rationalise ();
     }
 
@@ -806,15 +839,15 @@ if (false) { // JMI
       S_msrTuplet tuplet = dynamic_cast<msrTuplet*>(&(*(*i)))
     ) {
       // nested tuplet
-      currentPosition =
-        tuplet->
-          setTupletMembersPositionInMeasure ( // a function JMI ???
-            measure,
-            currentPosition);
+//       currentPosition =
+//         tuplet->
+//           setMeasureElementPositionInMeasure ( // a function JMI ??? v0.9.66
+//             measure,
+//             currentPosition);
 
       currentPosition +=
         tuplet->
-          getTupletSoundingWholeNotes ();
+          getMeasureElementSoundingWholeNotes ();
       currentPosition.rationalise ();
     }
 
@@ -886,9 +919,9 @@ void msrTuplet::finalizeTuplet (
   }
 #endif
 
-/ * JMI
+/ * JMI v0.9.66
   // we can now set the position in measure for all the tuplet members
-  setTupletMembersPositionInMeasure (
+  setTupletMembersPositionsInMeasure (
     fMeasureElementPositionInMeasure);
   * /
 }
@@ -1318,7 +1351,7 @@ ostream& operator<< (ostream& os, const S_msrTuplet& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

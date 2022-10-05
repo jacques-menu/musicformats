@@ -248,7 +248,7 @@ ostream& operator<< (ostream& os, const S_bsrFacSimileKindAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -446,7 +446,7 @@ ostream& operator<< (ostream& os, const S_bsrTextsLanguageAtom& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -489,70 +489,60 @@ R"()",
   // display first BSR
 
   S_oahBooleanAtom
-    displayBsrScoreFirstBooleanAtom =
+    displayFirstBsrScoreShortBooleanAtom =
       oahBooleanAtom::create (
-        "display-bsr-1", "dbsr1",
-R"(Write the contents of the first BSR data to standard error.)",
-        "fDisplayBsrFirst",
-        fDisplayBsrFirst);
-  subGroup->
-    appendAtomToSubGroup (
-      displayBsrScoreFirstBooleanAtom);
-
-  // display first BSR short
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "display-bsr-1-short", "dbsr1s",
+        "display-bsr-1-short", "dbsr1short",
 R"(Write the contents of the first BSR data, short version, to standard error.)",
-        "fDisplayBsrFirstShort",
-        fDisplayBsrFirstShort));
-
-  // display first BSR details
+        "fDisplayFirstBsrShort",
+        fDisplayFirstBsrShort);
+  subGroup->
+    appendAtomToSubGroup (
+      displayFirstBsrScoreShortBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-bsr-1-details", "dbsr1d",
-R"(Write the contents of the first BSR data with more details to standard error.)",
-        "fDisplayBsrFirstDetails",
-        fDisplayBsrFirstDetails,
-        displayBsrScoreFirstBooleanAtom));
+      oahAtomAlias::create (
+        "display-bsr-1", "dbsr1",
+R"(Write the contents of the first MSR data, short version, to standard error.
+This option is an alias for '-display-msr-1-short, -dmsr1short'.)",
+        displayFirstBsrScoreShortBooleanAtom));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-bsr-1-full", "dbsr1full",
+R"(Write the contents of the first BSR data, full version, to standard error.)",
+        "fDisplayFirstBsrFull",
+        fDisplayFirstBsrFull));
 
   // display second BSR
 
   S_oahBooleanAtom
-    displayBsrScoreSecondBooleanAtom =
+    displaySecondBsrScoreShortBooleanAtom =
       oahBooleanAtom::create (
-        "display-bsr-2", "dbsr2",
-R"(Write the contents of the second BSR data to standard error.)",
-        "fDisplayBsrSecond",
-        fDisplayBsrSecond);
-  subGroup->
-    appendAtomToSubGroup (
-      displayBsrScoreSecondBooleanAtom);
-
-  // display second BSR short
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "display-bsr-2-short", "dbsr2s",
+        "display-bsr-2-short", "dbsr2-short",
 R"(Write the contents of the second BSR data, short version, to standard error.)",
-        "fDisplayBsrSecondShort",
-        fDisplayBsrSecondShort));
-
-  // display second BSR details
+        "fDisplaySecondBsrShort",
+        fDisplaySecondBsrShort);
+  subGroup->
+    appendAtomToSubGroup (
+      displaySecondBsrScoreShortBooleanAtom);
 
   subGroup->
     appendAtomToSubGroup (
-      oahTwoBooleansAtom::create (
-        "display-bsr-2-details", "dbsr2d",
-R"(Write the contents of the second BSR data with more details to standard error.)",
-        "fDisplayBsrSecondDetails",
-        fDisplayBsrSecondDetails,
-        displayBsrScoreSecondBooleanAtom));
+      oahAtomAlias::create (
+        "display-bsr-2", "dmsr2",
+R"(Write the contents of the second MSR data, short version, to standard error.
+This option is an alias for '-display-bsr-2-short, -dbsr2short'.)",
+        displaySecondBsrScoreShortBooleanAtom));
+
+  subGroup->
+    appendAtomToSubGroup (
+      oahBooleanAtom::create (
+        "display-bsr-2-full", "dbsr2full",
+R"(Write the contents of the second BSR data, full version, to standard error.)",
+        "fDisplaySecondBsrFull",
+        fDisplaySecondBsrFull));
 }
 
 void bsrOahGroup::initializeBsrLanguagesOptions ()
@@ -745,13 +735,11 @@ Bool bsrOahGroup::setBsrTextsLanguage (const string& language)
 //______________________________________________________________________________
 void bsrOahGroup::enforceGroupQuietness ()
 {
-  fDisplayBsrFirst = false;
-  fDisplayBsrFirstShort = false;
-  fDisplayBsrFirstDetails = false;
+  fDisplayFirstBsrShort = false;
+  fDisplayFirstBsrFull = false;
 
-  fDisplayBsrSecond = false;
-  fDisplayBsrSecondShort = false;
-  fDisplayBsrSecondDetails = false;
+  fDisplaySecondBsrShort = false;
+  fDisplaySecondBsrFull = false;
 }
 
 //______________________________________________________________________________
@@ -842,24 +830,18 @@ void bsrOahGroup::printBsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fDisplayBsrFirst" << " : " <<
-    fDisplayBsrFirst <<
+    setw (fieldWidth) << "fDisplayFirstBsrShort" << " : " <<
+    fDisplayFirstBsrShort <<
     endl <<
-    setw (fieldWidth) << "fDisplayBsrFirstShort" << " : " <<
-    fDisplayBsrFirstShort <<
-    endl <<
-    setw (fieldWidth) << "fDisplayBsrFirstDetails" << " : " <<
-    fDisplayBsrFirstDetails <<
+    setw (fieldWidth) << "fDisplayFirstBsrFull" << " : " <<
+    fDisplayFirstBsrFull <<
     endl <<
 
-    setw (fieldWidth) << "fDisplayBsrSecond" << " : " <<
-    fDisplayBsrSecond <<
+    setw (fieldWidth) << "fDisplaySecondBsrShort" << " : " <<
+    fDisplaySecondBsrShort <<
     endl <<
-    setw (fieldWidth) << "fDisplayBsrSecondShort" << " : " <<
-    fDisplayBsrSecondShort <<
-    endl <<
-    setw (fieldWidth) << "fDisplayBsrSecondDetails" << " : " <<
-    fDisplayBsrSecondDetails <<
+    setw (fieldWidth) << "fDisplaySecondBsrFull" << " : " <<
+    fDisplaySecondBsrFull <<
     endl;
 
   --gIndenter;
@@ -911,7 +893,7 @@ ostream& operator<< (ostream& os, const S_bsrOahGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
