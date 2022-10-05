@@ -139,14 +139,14 @@ S_msrScore translateMsrToMsr (
   // display the resulting second MSR score if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayMsrScore (
+  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
+    displayMsrScoreShort (
       resultingNewMsrScore,
       "Display the second MSR as text");
   }
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayMsrScoreShort (
+  if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
+    displayMsrScoreFull (
       resultingNewMsrScore,
       "Display the second MSR as text");
   }
@@ -154,7 +154,7 @@ S_msrScore translateMsrToMsr (
   // display the populated MSR score summary if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrSummary ()) {
+  if (gGlobalMsrOahGroup->getDisplaySecondMsrSummary ()) {
     // display the score summary
     displayMsrScoreSummary (
       resultingNewMsrScore,
@@ -165,7 +165,7 @@ S_msrScore translateMsrToMsr (
   // display the populated MSR score names if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrNames ()) {
+  if (gGlobalMsrOahGroup->getDisplaySecondMsrNames ()) {
     // display the score name
     displayMsrScoreNames (
       resultingNewMsrScore,
@@ -266,14 +266,14 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // display the resulting new MSR score if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayMsrScore (
+  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
+    displayMsrScoreShort (
       resultingNewMsrScore,
       "Display the second MSR as text");
   }
 
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayMsrScoreShort (
+  if (gGlobalMsrOahGroup->getDisplaySecondMsrFull ()) {
+    displayMsrScoreFull (
       resultingNewMsrScore,
       "Display the second MSR as text");
   }
@@ -281,7 +281,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // display the resulting new MSR score summary if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrSummary ()) {
+  if (gGlobalMsrOahGroup->getDisplaySecondMsrSummary ()) {
     // display the score summary
     displayMsrScoreSummary (
       resultingNewMsrScore,
@@ -292,7 +292,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   // display the populated MSR score names if requested
   // ------------------------------------------------------
 
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrNames ()) {
+  if (gGlobalMsrOahGroup->getDisplaySecondMsrNames ()) {
     // display the score name
     displayMsrScoreNames (
       resultingNewMsrScore,

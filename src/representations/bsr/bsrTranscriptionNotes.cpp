@@ -258,7 +258,7 @@ void bsrTranscriptionNotes::print (ostream& os) const
   size_t transcriptionNotesElementsListSize =
     fTranscriptionNotesElementsList.size ();
 
-  if (transcriptionNotesElementsListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
+  if (transcriptionNotesElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "transcriptionNotesElementsList" << " : " <<

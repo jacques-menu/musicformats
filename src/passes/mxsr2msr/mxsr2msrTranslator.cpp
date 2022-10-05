@@ -17050,7 +17050,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
     chord =
       msrChord::create (
         firstNoteInputLineNumber,
-        chordFirstNote->getNoteSoundingWholeNotes (),
+        chordFirstNote->getMeasureElementSoundingWholeNotes (),
         chordFirstNote->getNoteDisplayWholeNotes (),
         chordFirstNote->getNoteGraphicDurationKind ());
 
@@ -18459,7 +18459,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
   // account for note duration
   rational
     memberNotesSoundingWholeNotes =
-      firstNote->getNoteSoundingWholeNotes ();
+      firstNote->getMeasureElementSoundingWholeNotes ();
   memberNotesSoundingWholeNotes.rationalise ();
 
   rational
@@ -21207,8 +21207,9 @@ void mxsr2msrTranslator::populateNote (
         }
 
         newNote->
-          setNoteSoundingWholeNotes (
-            fCurrentNoteDisplayWholeNotesFromType);
+          setMeasureElementSoundingWholeNotes (
+            fCurrentNoteDisplayWholeNotesFromType,
+            "mxsr2msrTranslator::populateNote()");
         break;
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
@@ -21941,17 +21942,28 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
+  // populate newNote
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  // CAUTION JMI v0.9.66
+  // permuted the order of populateNote() and handleNoteItself()
+  // to have newNote's harmonies list already populated if relevant
+  // when newNote is appended to the voice,
+  // so as to compute the harmonies positions in the measure.
+
+  // are all newNote uplinks set alright ??? JMI v0.9.66
+  populateNote (
+    inputLineNumber,
+    newNote);
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
   // handle newNote itself
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
   handleNoteItself (
-    inputLineNumber,
-    newNote);
-
-  // populate newNote
-  // only after handleNoteItself() has set its uplinks JMI v0.9.63
-  populateNote (
     inputLineNumber,
     newNote);
 
@@ -21986,7 +21998,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
   rational
     newNoteSoundingWholeNotes =
       newNote->
-        getNoteSoundingWholeNotes (),
+        getMeasureElementSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
       newNote->
         getNoteDisplayWholeNotes ();
@@ -22012,8 +22024,9 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
     // set the harmony's sounding whole notes
     harmony->
-      setHarmonySoundingWholeNotes (
-        newNoteSoundingWholeNotes);
+      setMeasureElementSoundingWholeNotes (
+        newNoteSoundingWholeNotes,
+        "mxsr2msrTranslator::handlePendingHarmonies()");
 
     // set the harmony's display whole notes JMI useless???
     harmony->
@@ -22026,6 +22039,10 @@ void mxsr2msrTranslator::handlePendingHarmonies (
         msrTupletFactor (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes));
+
+    // register this note as the harmony note upLink
+    harmony->
+      setHarmonyNoteUpLink (newNote);
 
     // attach the harmony to newNote
     newNote->
@@ -22050,14 +22067,14 @@ void mxsr2msrTranslator::handlePendingHarmonies (
       setHarmoniesVoiceUpLink (
         partHarmoniesVoice);
 
-/* JMI CAFE
+/* JMI VIRER v0.9.66
     // append the harmony to the part harmonies voice
     partHarmoniesVoice->
       appendHarmonyToVoice (
         harmony);
 */
-    // don't append the harmony to the part harmonies voice // BLARK
-    // before the note itself has been appended to the voice
+    // don't append the harmony to the part harmonies voice,
+    // this will be done when the note itself is appended to the voice
 
     // remove the harmony from the list
     fPendingHarmoniesList.pop_front ();
@@ -22085,22 +22102,28 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
   rational
     newNoteSoundingWholeNotes =
       newNote->
-        getNoteSoundingWholeNotes (),
+        getMeasureElementSoundingWholeNotes (),
     newNoteDisplayWholeNotes =
       newNote->
         getNoteDisplayWholeNotes ();
 
-  while (fPendingFiguredBassElementsList.size ()) {
-    // recompute at each iteration
+  while (fPendingFiguredBassElementsList.size ()) { // recompute at each iteration
     S_msrFiguredBassElement
       figuredBassElement =
         fPendingFiguredBassElementsList.front ();
 
     /*
-      Figured bass elements take their position from the first
-      regular note (not a grace note or chord note) that follows
-      in score order. The optional duration element is used to
-      indicate changes of figures under a note.
+       MusicXML figured bass elements don't have a duration,
+       and MSR could follow this line, but LilyPond needs one...
+       So:
+         - we register all figured bass elements with the duration of the next note
+         - they will be sorted by position in the measure in finalizeMeasure(),
+           at which time their duration may be shortened
+           so that the offsets values are enforced
+           and they don't overflow the measure
+      It is VITAL that figured bass elements measures be finalized
+      AFTER the corresponding measure in the regular voice,
+      since the current sounding whole notes of the latter is needed for that
     */
 
     // set the figured bass element's sounding whole notes
@@ -23060,7 +23083,7 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
           // fetch chordFirstNote's sounding divisions
           int chordFirstNoteSoundingWholeNotes = // JMI
             chordFirstNote->
-              getNoteSoundingWholeNotes ();
+              getMeasureElementSoundingWholeNotes ();
               */
 
           /* JMI
@@ -23079,8 +23102,9 @@ void mxsr2msrTranslator::handleNoteBelongingToAChord (
 #endif
 
           chord->
-            setChordSoundingWholeNotes ( // ??? JMI
-              chordFirstNoteSoundingWholeNotes);
+            setMeasureElementSoundingWholeNotes ( // ??? JMI
+              chordFirstNoteSoundingWholeNotes,
+              "mxsr2msrTranslator::handleNoteBelongingToAChord()");
               */
 
           if (chordFirstNote->getNoteIsFirstNoteInADoubleTremolo ()) {

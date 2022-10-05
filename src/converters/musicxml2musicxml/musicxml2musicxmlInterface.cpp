@@ -135,15 +135,6 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
     return mfMusicformatsError::kErrorInvalidFile;
   }
 
-  // display the first MSR score skeleton if requested
-  // ------------------------------------------------------
-
-  if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
-    displayMsrScore (
-      firstMsrScore,
-      "Display the first MSR score skeleton");
-  }
-
   // should we return now?
   // ------------------------------------------------------
 
@@ -173,21 +164,6 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
     return mfMusicformatsError::kErrorInvalidFile;
-  }
-
-  // display the populated MSR score if requested
-  // ------------------------------------------------------
-
-  if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
-    displayMsrScore (
-      firstMsrScore,
-      "Display the first MSR as text");
-  }
-
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrShort ()) {
-    displayMsrScoreShort (
-      firstMsrScore,
-      "Display the first MSR as text");
   }
 
   // should we return now?
@@ -223,21 +199,6 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
     return mfMusicformatsError::kErrorInvalidFile;
-  }
-
-  // display the second MSR score if requested
-  // ------------------------------------------------------
-
-  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayMsrScore (
-      secondMsrScore,
-      "Display the second MSR as text");
-  }
-
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayMsrScoreShort (
-      secondMsrScore,
-      "Display the second MSR as text");
   }
 
   // should we return now?

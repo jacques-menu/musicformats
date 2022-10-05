@@ -10,7 +10,7 @@ lilyout           := $(xmllily:./%.xml=lilypond/%.ly)
 pdflily           := $(patsubst ./%.xml, pdflily/%.pdf, $(xmlfiles))
 svglily           := $(patsubst ./%.xml, svglily/%.svg, $(xmlfiles))
 pnglily           := $(patsubst ./%.xml, pnglily/%.png, $(xmlfiles))
-pslily           := $(patsubst ./%.xml, pslily/%.ps, $(xmlfiles))
+pslily            := $(patsubst ./%.xml, pslily/%.ps, $(xmlfiles))
 epslily           := $(patsubst ./%.xml, epslily/%.eps, $(xmlfiles))
 
 validlily 	      = $(patsubst %.ly, %.outly, $(lilyout))
@@ -28,11 +28,8 @@ XML2LY    ?= xml2ly
 
 OPTIONS   ?= -q
 
-#LILYPOND  ?= /opt/local/bin/lilypond
-  # 2.23.5 (running Guile 1.8)
-
-LILYPOND  ?= /Applications/LilyPond/lilypond-2.23.6/bin/lilypond
-  # 2.23.6 (running Guile 2.2)
+LILYPOND  ?= /opt/local/bin/lilypond
+# LILYPOND  ?= /Applications/LilyPond/lilypond-2.23.6/bin/lilypond
 
 .PHONY: lilyignored lily
 .DELETE_ON_ERROR:
@@ -41,6 +38,7 @@ all:
 	@echo "XML2LY   = $(XML2LY)"
 	@echo "OPTIONS  = $(OPTIONS)"
 	@echo "LILYPOND = $(LILYPOND)"
+	@$(LILYPOND) --version
 	@echo
 
 	@#echo "xmlfiles:"

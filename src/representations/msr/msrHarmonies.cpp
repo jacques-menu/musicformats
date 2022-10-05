@@ -272,7 +272,7 @@ ostream& operator<< (ostream& os, const S_msrHarmonyDegree& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -384,11 +384,14 @@ msrHarmony::msrHarmony (
   fHarmonyBassQuarterTonesPitchKind =
     harmonyBassQuarterTonesPitchKind;
 
-// JMI  fHarmonySoundingWholeNotes =
   fMeasureElementSoundingWholeNotes =
     harmonySoundingWholeNotes;
   fHarmonyDisplayWholeNotes =
     harmonyDisplayWholeNotes;
+
+  // a harmony is considered to be at the beginning of the measure
+  // until this is computed in msrMeasure::finalizeHarmonyInHarmoniesMeasure()
+  fMeasureElementPositionInMeasure = rational (0, 1);
 
   fHarmoniesStaffNumber = harmoniesStaffNumber;
 
@@ -567,22 +570,29 @@ void msrHarmony::setHarmonyTupletFactor (
   fHarmonyTupletFactor = tupletFactor;
 }
 
-void msrHarmony::setHarmonyFrame (S_msrFrame frame)
+void msrHarmony::setHarmonyNoteUpLink (S_msrNote note)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFrames ()) {
+  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
-      "Setting harmony '" << asShortString ()  << "'" <<
-      " frame to '" << frame->asString () << "'" <<
+      "Setting harmony " << asShortString ()  <<
+      " note uplink to " << note->asString () <<
       endl;
   }
 #endif
 
-  fHarmonyFrame = frame;
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    note != nullptr,
+    "note is null");
+
+  fHarmonyNoteUpLink = note;
 }
 
-void msrHarmony::setHarmonyPositionInMeasure (
-  const rational& positionInMeasure)
+void msrHarmony::setMeasureElementPositionInMeasure (
+  const rational& positionInMeasure,
+  const string&   context)
 {
   // set the harmony position in measure, taking it's offset into account
 
@@ -599,29 +609,35 @@ void msrHarmony::setHarmonyPositionInMeasure (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Setting actual harmony position in measure of " << asString () <<
+      "Setting harmony's position in measure of " << asString () <<
       " to '" <<
-      actualPositionInMeasure <<
-      "', positionInMeasure = " <<
       positionInMeasure <<
+      "' (was '" <<
+      fMeasureElementPositionInMeasure <<
+      "') in measure '" <<
+      fMeasureElementMeasureNumber <<
+      "', context: \"" <<
+      context <<
+      "\"" <<
       "', harmonyWholeNotesOffset = " <<
       fHarmonyWholeNotesOffset <<
       endl;
   }
 #endif
 
-  string context =
-    "setHarmonyPositionInMeasure()";
-
-  setMeasureElementPositionInMeasure (
-    actualPositionInMeasure,
-    context);
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fHarmonyNoteUpLink != nullptr,
+    "fHarmonyNoteUpLink is null");
 
   // compute harmony's position in voice
   S_msrMeasure
     measure =
       fHarmonyNoteUpLink->
         getNoteDirectMeasureUpLink ();
+
+  if (! measure) abort ();
 
   // sanity check
   mfAssert (
@@ -637,10 +653,14 @@ void msrHarmony::setHarmonyPositionInMeasure (
       actualPositionInMeasure;
   positionInVoice.rationalise ();
 
-  // set harmony's position in voice
-  setMeasureElementPositionInVoice (
-    positionInVoice,
-    context);
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != msrMoment::K_NO_POSITION,
+    "positionInMeasure == msrMoment::K_NO_POSITION");
+
+  // set harmony's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
 
   // update current position in voice
   S_msrVoice
@@ -651,7 +671,21 @@ void msrHarmony::setHarmonyPositionInMeasure (
   voice->
     incrementCurrentPositionInVoice (
       fHarmonyNoteUpLink->
-        getNoteSoundingWholeNotes ());
+        getMeasureElementSoundingWholeNotes ());
+}
+
+void msrHarmony::setHarmonyFrame (S_msrFrame frame)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceFrames ()) {
+    gLogStream <<
+      "Setting harmony " << asShortString ()  <<
+      " frame to " << frame->asString () <<
+      endl;
+  }
+#endif
+
+  fHarmonyFrame = frame;
 }
 
 void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
@@ -685,8 +719,9 @@ void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
   }
 #endif
 
-  setHarmonySoundingWholeNotes (
-    augmentedSoundingWholeNotes);
+  setMeasureElementSoundingWholeNotes (
+    augmentedSoundingWholeNotes,
+    "incrementHarmonySoundingWholeNotesDuration()");
 }
 
 void msrHarmony::acceptIn (basevisitor* v)
@@ -817,7 +852,7 @@ string msrHarmony::asString () const
 
   // print the harmonies staff number
   s <<
-    ", harmoniesStaffNumber: ";
+    ", fHarmoniesStaffNumber: ";
   if (fHarmoniesStaffNumber == msrStaff::K_NO_STAFF_NUMBER)
     s << "none";
   else
@@ -825,13 +860,22 @@ string msrHarmony::asString () const
 
   // print the harmony tuplet factor
   s <<
-    ", harmonyTupletFactor: " <<
+    ", fHarmonyTupletFactor: " <<
     fHarmonyTupletFactor.asString ();
 
   // print the harmony frame
-  s << ", harmonyFrame: ";
+  s << ", fHarmonyFrame: ";
   if (fHarmonyFrame) {
     s << fHarmonyFrame;
+  }
+  else {
+    s << "none";
+  }
+
+  // print the harmony note uplink
+  s << ", fHarmonyNoteUpLink: ";
+  if (fHarmonyNoteUpLink) {
+    s << fHarmonyNoteUpLink;
   }
   else {
     s << "none";
@@ -853,7 +897,7 @@ void msrHarmony::print (ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 26;
+  const int fieldWidth = 33;
 
   os << left <<
     setw (fieldWidth) <<
@@ -864,46 +908,34 @@ void msrHarmony::print (ostream& os) const
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     endl <<
     setw (fieldWidth) <<
-    "harmonyKind" << " : " <<
+    "fHarmonyKind" << " : " <<
     msrHarmonyKindAsString (fHarmonyKind) <<
     endl <<
 
     setw (fieldWidth) <<
-    "harmonySoundingWholeNotes" << " : " <<
+    "fMeasureElementSoundingWholeNotes" << " : " <<
     fMeasureElementSoundingWholeNotes <<
     endl <<
     setw (fieldWidth) <<
-    "harmonyDisplayWholeNotes" << " : " <<
+    "fHarmonyDisplayWholeNotes" << " : " <<
     fHarmonyDisplayWholeNotes <<
     endl;
 
   // print the harmony whole notes offset
   os <<
     setw (fieldWidth) <<
-    "harmonyWholeNotesOffset" << " : " << fHarmonyWholeNotesOffset <<
-    endl;
-
-  // print the harmony position in measure
-  os <<
-    setw (fieldWidth) <<
-    "positionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
-    endl;
-
-  // print the harmony bass position in voice
-  os <<
-    setw (fieldWidth) <<
-    "positionInVoice" << " : " << fMeasureElementPositionInVoice <<
+    "fHarmonyWholeNotesOffset" << " : " << fHarmonyWholeNotesOffset <<
     endl;
 
   os <<
     setw (fieldWidth) <<
-    "harmonyKindText" << " : \"" <<
+    "fHarmonyKindText" << " : \"" <<
     fHarmonyKindText <<
     "\"" <<
     endl <<
 
     setw (fieldWidth) <<
-    "harmonyBass" << " : " <<
+    "fHarmonyBassQuarterTonesPitchKind" << " : " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fHarmonyBassQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
@@ -912,7 +944,7 @@ void msrHarmony::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "harmonyInversion" << " : ";
+    "fHarmonyInversion" << " : ";
   if (fHarmonyInversion == K_HARMONY_NO_INVERSION) {
     os << "none";
   }
@@ -924,7 +956,7 @@ void msrHarmony::print (ostream& os) const
   // print harmony degrees if any
   os <<
     setw (fieldWidth) <<
-    "harmonyDegrees";
+    "fHarmonyDegreesList";
 
   if (fHarmonyDegreesList.size ()) {
     os << endl;
@@ -957,7 +989,7 @@ void msrHarmony::print (ostream& os) const
   // print the harmonies staff number
   os <<
     setw (fieldWidth) <<
-    "harmoniesStaffNumber" << " : ";
+    "fHarmoniesStaffNumber" << " : ";
   if (fHarmoniesStaffNumber == msrStaff::K_NO_STAFF_NUMBER) {
     os << "none";
   }
@@ -969,13 +1001,13 @@ void msrHarmony::print (ostream& os) const
   // print the harmony tuplet factor
   os <<
     setw (fieldWidth) <<
-    "harmonyTupletFactor" << " : " << fHarmonyTupletFactor.asString () <<
+    "fHarmonyTupletFactor" << " : " << fHarmonyTupletFactor.asString () <<
     endl;
 
   // print the harmony frame
   os <<
     setw (fieldWidth) <<
-    "harmonyFrame" << " : ";
+    "fHarmonyFrame" << " : ";
   if (fHarmonyFrame) {
     os << fHarmonyFrame;
   }
@@ -987,7 +1019,7 @@ void msrHarmony::print (ostream& os) const
   // print the harmony note uplink
   os <<
     setw (fieldWidth) <<
-    "harmonyNoteUpLink" << " : ";
+    "fHarmonyNoteUpLink" << " : ";
   if (fHarmonyNoteUpLink) {
     os <<
       endl <<
@@ -997,6 +1029,18 @@ void msrHarmony::print (ostream& os) const
     os << "none";
   }
   os << endl;
+
+  // print the harmony position in measure
+  os <<
+    setw (fieldWidth) <<
+    "fMeasureElementPositionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
+    endl;
+
+  // print the harmony bass position in voice
+  os <<
+    setw (fieldWidth) <<
+    "fMeasureElementPositionInVoice" << " : " << fMeasureElementPositionInVoice <<
+    endl;
 
   --gIndenter;
 
@@ -1011,7 +1055,7 @@ ostream& operator<< (ostream& os, const S_msrHarmony& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

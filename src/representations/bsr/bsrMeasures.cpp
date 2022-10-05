@@ -371,7 +371,7 @@ void bsrMeasure::print (ostream& os) const
   // print the measure elements if any
   size_t measureElementsListSize = fMeasureLineElementsList.size ();
 
-  if (measureElementsListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
+  if (measureElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
 //      setw (fieldWidth) <<
       "MeasureElementsList" <<

@@ -1264,7 +1264,7 @@ string lpsr2lilypondTranslator::pitchedRestAsLilypondString (
     durationAsLilypondString (
       noteInputLineNumber,
       note->
-        getNoteSoundingWholeNotes ());
+        getMeasureElementSoundingWholeNotes ());
 
   // generate the '\rest'
   s <<
@@ -1963,7 +1963,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
   rational
     noteSoundingWholeNotes =
       note->
-        getNoteSoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
   // generate the note duration
   fLilypondCodeStream <<
@@ -2090,7 +2090,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
     // get the note sounding whole notes
     rational
       noteSoundingWholeNotes =
-        note->getNoteSoundingWholeNotes ();
+        note->getMeasureElementSoundingWholeNotes ();
 
     // get note's voice
     S_msrVoice
@@ -2251,7 +2251,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
     durationAsLilypondString (
       inputLineNumber,
       note->
-        getNoteSoundingWholeNotes ());
+        getMeasureElementSoundingWholeNotes ());
 
   if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
     // generate information and line number as a comment
@@ -2315,7 +2315,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
   rational
     noteSoundingWholeNotes =
       note->
-        getNoteSoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
   // generate the note duration
   fLilypondCodeStream <<
@@ -3050,7 +3050,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteInDoubleTremolo (
   fLilypondCodeStream <<
     durationAsLilypondString (
       inputLineNumber,
-      note->getNoteSoundingWholeNotes ());
+      note->getMeasureElementSoundingWholeNotes ());
 
   // handle delayed ornaments if any
   if (note->getNoteDelayedTurnOrnament ()) {
@@ -4631,7 +4631,7 @@ string lpsr2lilypondTranslator::harmonyAsLilypondString (
       durationAsLilypondString (
         inputLineNumber,
         harmony->
-          getHarmonySoundingWholeNotes ());
+          getMeasureElementSoundingWholeNotes ());
   }
   else {
     // use harmony display whole notes and tuplet factor
@@ -16231,7 +16231,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrDoubleTremolo& elt)
 
     fLilypondCodeStream <<
       "% doubleTremoloSoundingWholeNotes = " <<
-      elt->getDoubleTremoloSoundingWholeNotes () <<
+      elt->getMeasureElementSoundingWholeNotes () <<
       endl <<
 
       "% gdoubleTremoloElementsDuration = " <<
@@ -18785,7 +18785,7 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
               {
                 rational
                   noteSoundingWholeNotes =
-                    note->getNoteSoundingWholeNotes ();
+                    note->getMeasureElementSoundingWholeNotes ();
 
                 rational
                   halfWholeNotes =
@@ -18817,7 +18817,7 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
               {
                 rational
                   noteSoundingWholeNotes =
-                    note->getNoteSoundingWholeNotes ();
+                    note->getMeasureElementSoundingWholeNotes ();
 
                 rational
                   halfWholeNotes =
@@ -20085,7 +20085,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
   }
   else {
     gLogStream <<
-      "nullptr";
+      "*** NONE ***";
   }
   gLogStream << endl;
 */
@@ -20424,7 +20424,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
     chord->getChordIsSecondChordInADoubleTremolo ()) {
       // generate chord duration
       fLilypondCodeStream <<
-        chord->getChordSoundingWholeNotes ();
+        chord->getMeasureElementSoundingWholeNotes ();
   }
 
   else {
@@ -20448,7 +20448,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   }
   else {
     gLogStream <<
-      "nullptr";
+      "*** NONE ***";
   }
   gLogStream << endl;
 

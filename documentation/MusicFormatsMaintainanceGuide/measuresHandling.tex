@@ -187,7 +187,7 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
   rational
     harmonySoundingWholeNotes =
       harmony->
-        getHarmonySoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
   incrementCurrentMeasureWholeNotesDuration (
@@ -234,7 +234,7 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
   rational
     harmonySoundingWholeNotes =
       harmony->
-        getHarmonySoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
   // account for harmony duration in measure whole notes
   incrementCurrentMeasureWholeNotesDuration (

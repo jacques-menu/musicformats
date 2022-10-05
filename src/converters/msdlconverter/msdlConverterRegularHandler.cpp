@@ -467,17 +467,16 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
+  
   registerAtomInRegularSubgroup ("display-msr-1", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
-
   registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-short", subGroup);
+  registerAtomInRegularSubgroup ("display-msr-2-full", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-slices", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-slices", subGroup);
-
-  registerAtomInRegularSubgroup ("display-msr-1-details", subGroup);
-  registerAtomInRegularSubgroup ("display-msr-2-details", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-1-names", subGroup);
   registerAtomInRegularSubgroup ("display-msr-2-names", subGroup);
@@ -1010,7 +1009,7 @@ void msdlConverterRegularHandler::createArticulationsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-articulations", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-articulations", subGroup);
 }
 
 void msdlConverterRegularHandler::createOrnamentsRegularGroup ()
@@ -1042,7 +1041,7 @@ void msdlConverterRegularHandler::createOrnamentsRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ornaments", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ornaments", subGroup);
 }
 
 void msdlConverterRegularHandler::createGraceNotesRegularGroup ()
@@ -1139,7 +1138,7 @@ void msdlConverterRegularHandler::createTiesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-ties", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-ties", subGroup);
 }
 
 void msdlConverterRegularHandler::createSlursRegularGroup ()
@@ -1170,7 +1169,7 @@ void msdlConverterRegularHandler::createSlursRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-slurs", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-slurs", subGroup);
 
   registerAtomInRegularSubgroup ("delay-rests-slurs", subGroup);
 }
@@ -1234,7 +1233,7 @@ void msdlConverterRegularHandler::createDynamicRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-dynamics", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-dynamics", subGroup);
 
   registerAtomInRegularSubgroup ("all-dynamics-below", subGroup);
 
@@ -1269,7 +1268,7 @@ void msdlConverterRegularHandler::createWedgesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-wedges", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-wedges", subGroup);
 
   registerAtomInRegularSubgroup ("all-wedges-below", subGroup);
 
@@ -1368,7 +1367,7 @@ void msdlConverterRegularHandler::createHarmoniesRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-harmonies", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-harmonies", subGroup);
 
   registerAtomInRegularSubgroup ("show-harmony-voices", subGroup);
 }
@@ -1401,7 +1400,7 @@ void msdlConverterRegularHandler::createFiguredBassRegularGroup ()
 
   // atoms
 
-  registerAtomInRegularSubgroup ("ignore-figured-bass", subGroup);
+  registerAtomInRegularSubgroup ("ignore-musicxml-figured-bass", subGroup);
 
   registerAtomInRegularSubgroup ("show-figured-bass-voices", subGroup);
 }

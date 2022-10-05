@@ -136,15 +136,6 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
     return mfMusicformatsError::kErrorInvalidFile;
   }
 
-  // display the MSR score skeleton if requested
-  // ------------------------------------------------------
-
-  if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
-    displayMsrScore (
-      firstMsrScore,
-      "Display the first MSR score skeleton");
-  }
-
   // should we return now?
   // ------------------------------------------------------
 
@@ -174,21 +165,6 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
     return mfMusicformatsError::kErrorInvalidFile;
-  }
-
-  // display the populated MSR score if requested
-  // ------------------------------------------------------
-
-  if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
-    displayMsrScore (
-      firstMsrScore,
-      "Display the first MSR as text");
-  }
-
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrShort ()) {
-    displayMsrScoreShort (
-      firstMsrScore,
-      "Display the first MSR as text");
   }
 
   // should we return now?
@@ -224,21 +200,6 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
     return mfMusicformatsError::kErrorInvalidFile;
-  }
-
-  // display the second MSR score if requested
-  // ------------------------------------------------------
-
-  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayMsrScore (
-      secondMsrScore,
-      "Display the second MSR as text");
-  }
-
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayMsrScoreShort (
-      secondMsrScore,
-      "Display the second MSR as text");
   }
 
   // should we return now?
@@ -283,16 +244,16 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
     // display the first BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplayBsrFirst ()) {
-      displayBsrScore (
+    if (gGlobalBsrOahGroup->getDisplayFirstBsrShort ()) {
+      displayBsrScoreShort (
         firstBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
         "Display the first BSR");
     }
 
-    if (gGlobalBsrOahGroup->getDisplayBsrFirstShort ()) {
-      displayBsrScoreShort (
+    if (gGlobalBsrOahGroup->getDisplayFirstBsrFull ()) {
+      displayBsrScoreFull (
         firstBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
@@ -327,16 +288,16 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
     // display the finalized BSR score if requested
     // ------------------------------------------------------
 
-    if (gGlobalBsrOahGroup->getDisplayBsrSecond ()) {
-      displayBsrScore (
+    if (gGlobalBsrOahGroup->getDisplaySecondBsrShort ()) {
+      displayBsrScoreShort (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,
         "Display the finalized BSR");
     }
 
-    if (gGlobalBsrOahGroup->getDisplayBsrSecondShort ()) {
-      displayBsrScoreShort (
+    if (gGlobalBsrOahGroup->getDisplaySecondBsrFull ()) {
+      displayBsrScoreFull (
         finalizedBsrScore,
         gGlobalMsrOahGroup,
         gGlobalBsrOahGroup,

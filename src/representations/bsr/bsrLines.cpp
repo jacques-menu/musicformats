@@ -532,7 +532,7 @@ void bsrLine::print (ostream& os) const
   os << endl;
 
   // print the line contents if any
-  if (lineContentsListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
+  if (lineContentsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
 //      setw (fieldWidth) <<
       "LineContentsList" <<

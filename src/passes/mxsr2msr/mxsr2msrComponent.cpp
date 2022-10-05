@@ -121,6 +121,16 @@ S_mfcPassComponent createMxsr2msrComponent ()
             "Finalized the conversion of MusicXML <credit /> markups to MSR"
           }
       ));
+
+    pPassComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.66"),
+          "October 3, 2022",
+          list<string> {
+            "Permuted the order of populateNote() and handleNoteItself() in mxsr2msrTranslator::visitEnd ( S_note& elt )"
+          }
+      ));
   }
 
   return pPassComponent;

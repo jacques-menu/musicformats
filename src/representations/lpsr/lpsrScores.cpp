@@ -2877,295 +2877,6 @@ void lpsrScore::browseData (basevisitor* v)
 #endif
 }
 
-void lpsrScore::print (ostream& os) const
-{
-  os <<
-    "LPSR Score" <<
-    endl << endl;
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fMsrScore != nullptr,
-    "fMsrScore is null");
-
-  ++gIndenter;
-
-  // print the MSR structure (without the voices)
-  fMsrScore->
-    printSummary (os);
-
-  // are there needed things?
-  const int fieldWidth = 42;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fJianpuFileIncludeIsNeeded" << " : " <<
-    fJianpuFileIncludeIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fScmAndAccregSchemeModulesAreNeeded" << " : " <<
-    fScmAndAccregSchemeModulesAreNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fTongueSchemeFunctionIsNeeded" << " : " <<
-    fTongueSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fCustomShortBarLineSchemeFunctionIsNeeded" << " : " <<
-    fCustomShortBarLineSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fEditorialAccidentalSchemeFunctionIsNeeded" << " : " <<
-    fEditorialAccidentalSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fDynamicsSchemeFunctionIsNeeded" << " : " <<
-    fDynamicsSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fTupletsCurvedBracketsSchemeFunctionIsNeeded" << " : " <<
-    fTupletsCurvedBracketsSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fAfterSchemeFunctionIsNeeded" << " : " <<
-    fAfterSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fTempoNotesRelationshipshipSchemeFunctionIsNeeded" << " : " <<
-    fTempoNotesRelationshipshipSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fGlissandoWithTextSchemeFunctionsIsNeeded" << " : " <<
-    fGlissandoWithTextSchemeFunctionsIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fOtherDynamicSchemeFunctionIsNeeded" << " : " <<
-    fOtherDynamicSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fAutoVoicesSchemeFunctionIsNeeded" << " : " <<
-    fAutoVoicesSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fSchleiferSchemeFunctionIsNeeded" << " : " <<
-    fSchleiferSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fScoopSchemeFunctionIsNeeded" << " : " <<
-    fScoopSchemeFunctionIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fDampMarkupIsNeeded" << " : " <<
-    fDampMarkupIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fDampAllMarkupIsNeeded" << " : " <<
-    fDampAllMarkupIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fWhiteNoteHeadsIsNeeded" << " : " <<
-    fWhiteNoteHeadsIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fBoxAroundNextBarNumberIsNeeded" << " : " <<
-    fBoxAroundNextBarNumberIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fJazzChordsDisplayIsNeeded" << " : " <<
-    fJazzChordsDisplayIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fColoredLedgerLinesIsNeeded" << " : " <<
-    fColoredLedgerLinesIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fHiddenMeasureAndBarLineIsNeeded" << " : " <<
-    fHiddenMeasureAndBarLineIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fMergeStaffCommonRestsIsNeeded" << " : " <<
-    fMergeStaffCommonRestsIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fTextSpannerWithCenteredTextIsNeeded" << " : " <<
-    fTextSpannerWithCenteredTextIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fMergeMultipleFullBarRestsIsNeeded" << " : " <<
-    fMergeMultipleFullBarRestsIsNeeded <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded" << " : " <<
-    fBarNumberEveryNAndAtTheBeginningOfLinesIsNeeded <<
-    endl << endl;
-
-  // print LPSR basic information
-  os <<
-    fScoreHeader <<
-    endl <<
-
-    fScorePaper <<
-    endl;
-
-  if (fScoreLayout) {
-    os <<
-      fScoreLayout <<
-      endl;
-  }
-
-  // print the voices and stanzas
-  if (fScoreElementsList.size ()) {
-    os <<
-      "Voices & Stanzas" <<
-      endl << endl;
-    ++gIndenter;
-
-    list<S_msrElement>::const_iterator
-      iBegin = fScoreElementsList.begin (),
-      iEnd   = fScoreElementsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
-      os << endl;
-    } // for
-
-    --gIndenter;
-  }
-
-  // print the book blocks
-  if (fScoreBookBlocksList.size ()) {
-    os <<
-      "Book blocks" <<
-      endl << endl;
-    ++gIndenter;
-
-    list<S_lpsrBookBlock>::const_iterator
-      iBegin = fScoreBookBlocksList.begin (),
-      iEnd   = fScoreBookBlocksList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      os << (*i);
-      if (++i == iEnd) break;
-      os << endl;
-    } // for
-
-    --gIndenter;
-  }
-
-  --gIndenter;
-}
-
-void lpsrScore::printShort (ostream& os) const
-{
-  os <<
-    "LPSR Score, short version" <<
-    endl << endl;
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fMsrScore != nullptr,
-    "fMsrScore is null");
-
-  ++gIndenter;
-
-  // print the MSR structure (without the voices)
-  fMsrScore->
-    printShort (os);
-  os << endl;
-
-  os <<
-    "LPSR basic information" <<
-    endl << endl;
-
-  ++gIndenter;
-
-  // print LPSR basic information
-  fScoreHeader->printShort (os);
-  os << endl;
-
-  fScorePaper->printShort (os);
-  os << endl;
-
-  if (fScoreLayout) {
-    fScoreLayout->printShort (os);
-    os << endl;
-  }
-
-  --gIndenter;
-
-  // print the voices and stanzas
-  if (fScoreElementsList.size ()) {
-    os <<
-      "Voices & Stanzas" <<
-      endl << endl;
-
-    ++gIndenter;
-
-    list<S_msrElement>::const_iterator
-      iBegin = fScoreElementsList.begin (),
-      iEnd   = fScoreElementsList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      (*i)->printShort (os);
-      if (++i == iEnd) break;
-      os << endl;
-    } // for
-
-    os << endl;
-    --gIndenter;
-  }
-
-  // print the book blocks
-  if (fScoreBookBlocksList.size ()) {
-    os <<
-      "Book blocks" <<
-      endl << endl;
-    ++gIndenter;
-
-    list<S_lpsrBookBlock>::const_iterator
-      iBegin = fScoreBookBlocksList.begin (),
-      iEnd   = fScoreBookBlocksList.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      (*i)->printShort (os);
-      if (++i == iEnd) break;
-      os << endl;
-    } // for
-
-    os << endl;
-    --gIndenter;
-  }
-
-  --gIndenter;
-}
-
 void lpsrScore::printFull (ostream& os) const
 {
   os <<
@@ -3369,6 +3080,91 @@ void lpsrScore::printFull (ostream& os) const
       i      = iBegin;
     for ( ; ; ) {
       (*i)->print (os);
+      if (++i == iEnd) break;
+      os << endl;
+    } // for
+
+    os << endl;
+    --gIndenter;
+  }
+
+  --gIndenter;
+}
+
+void lpsrScore::printShort (ostream& os) const
+{
+  os <<
+    "LPSR Score, short version" <<
+    endl << endl;
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fMsrScore != nullptr,
+    "fMsrScore is null");
+
+  ++gIndenter;
+
+  // print the MSR structure (without the voices)
+  fMsrScore->
+    printShort (os);
+  os << endl;
+
+  os <<
+    "LPSR basic information" <<
+    endl << endl;
+
+  ++gIndenter;
+
+  // print LPSR basic information
+  fScoreHeader->printShort (os);
+  os << endl;
+
+  fScorePaper->printShort (os);
+  os << endl;
+
+  if (fScoreLayout) {
+    fScoreLayout->printShort (os);
+    os << endl;
+  }
+
+  --gIndenter;
+
+  // print the voices and stanzas
+  if (fScoreElementsList.size ()) {
+    os <<
+      "Voices & Stanzas" <<
+      endl << endl;
+
+    ++gIndenter;
+
+    list<S_msrElement>::const_iterator
+      iBegin = fScoreElementsList.begin (),
+      iEnd   = fScoreElementsList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      (*i)->printShort (os);
+      if (++i == iEnd) break;
+      os << endl;
+    } // for
+
+    os << endl;
+    --gIndenter;
+  }
+
+  // print the book blocks
+  if (fScoreBookBlocksList.size ()) {
+    os <<
+      "Book blocks" <<
+      endl << endl;
+    ++gIndenter;
+
+    list<S_lpsrBookBlock>::const_iterator
+      iBegin = fScoreBookBlocksList.begin (),
+      iEnd   = fScoreBookBlocksList.end (),
+      i      = iBegin;
+    for ( ; ; ) {
+      (*i)->printShort (os);
       if (++i == iEnd) break;
       os << endl;
     } // for

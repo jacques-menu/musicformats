@@ -161,7 +161,7 @@ void bsrParallel::print (ostream& os) const
   // print the parallel elements if any
   size_t parallelElementsListSize = fParallelElementsList.size ();
 
-  if (parallelElementsListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
+  if (parallelElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fParallelElementsList";

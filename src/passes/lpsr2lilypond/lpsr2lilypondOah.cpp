@@ -3749,7 +3749,7 @@ R"(Generate LilyPond code to show all bar numbers.)",
       oahAtomAlias::create (
         "all-measure-numbers", "amn",
 R"(Generate LilyPond code to show all measure numbers.
-This option is a alias for '-abn, -all-bar-numbers'.)",
+This option is an alias for '-all-bar-numbers, -abn'.)",
         allBarNumbersAtom));
 
   // show measure number at

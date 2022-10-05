@@ -316,7 +316,7 @@ ostream& operator<< (ostream& os, const S_msrBassFigure& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -390,6 +390,10 @@ msrFiguredBassElement::msrFiguredBassElement (
 
   fFiguredBassElementParenthesesKind =
     figuredBassElementParenthesesKind;
+
+  // a figured bass element is considered to be at the beginning of the measure
+  // until this is computed in msrMeasure::finalizeFiguredBassElementsInFiguredBassMeasure()
+  fMeasureElementPositionInMeasure = rational (0, 1);
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -472,27 +476,37 @@ S_msrFiguredBassElement msrFiguredBassElement::createFiguredBassElementDeepClone
   return figuredBassElementDeepClone;
 }
 
-void msrFiguredBassElement::setFiguredBassPositionInMeasure (
-  const rational& positionInMeasure)
+void msrFiguredBassElement::setMeasureElementPositionInMeasure (
+  const rational& positionInMeasure,
+  const string&   context)
 {
   // set the figured bass position in measure
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Setting figured bass position in measure of " << asString () <<
+      "Setting figured bass element's position in measure of " << asString () <<
       " to '" <<
       positionInMeasure <<
+      "' (was '" <<
+      fMeasureElementPositionInMeasure <<
+      "') in measure '" <<
+      fMeasureElementMeasureNumber <<
+      "', context: \"" <<
+      context <<
+      "\"" <<
       endl;
   }
 #endif
 
-  string context =
-    "setFiguredBassPositionInMeasure()";
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != msrMoment::K_NO_POSITION,
+    "positionInMeasure == msrMoment::K_NO_POSITION");
 
-  setMeasureElementPositionInMeasure (
-    positionInMeasure,
-    context);
+  // set figured bass element's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
 
   // compute figured bass's position in voice
   S_msrMeasure
@@ -524,7 +538,7 @@ void msrFiguredBassElement::setFiguredBassPositionInMeasure (
   voice->
     incrementCurrentPositionInVoice (
       fFiguredBassElementNoteUpLink->
-        getNoteSoundingWholeNotes ());
+        getMeasureElementSoundingWholeNotes ());
 }
 
 void msrFiguredBassElement::appendFigureToFiguredBass (
@@ -779,7 +793,7 @@ ostream& operator<< (ostream& os, const S_msrFiguredBassElement& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

@@ -506,7 +506,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
             notePositionInMeasure
               +
             note->
-              getNoteSoundingWholeNotes ();
+              getMeasureElementSoundingWholeNotes ();
         noteEndPositionInMeasure.rationalise ();
 
         S_msrNoteEvent

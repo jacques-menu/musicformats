@@ -25,6 +25,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfAssert.h"
+
 #include "mfServiceRunData.h"
 
 #include "mfStringsHandling.h"
@@ -821,6 +823,38 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 
 msrTimeSignature::~msrTimeSignature ()
 {}
+
+void msrTimeSignature::setMeasureElementPositionInMeasure (
+  const rational& positionInMeasure,
+  const string&   context)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+    gLogStream <<
+      "Setting time signature's position in measure of " <<
+      asString () <<
+      " to '" <<
+      positionInMeasure <<
+      "' (was '" <<
+      fMeasureElementPositionInMeasure <<
+      "') in measure '" <<
+      fMeasureElementMeasureNumber <<
+      "', context: \"" <<
+      context <<
+      "\"" <<
+      endl;
+  }
+#endif
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != msrMoment::K_NO_POSITION,
+    "positionInMeasure == msrMoment::K_NO_POSITION");
+
+  // set time signature's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
+}
 
 void msrTimeSignature::appendTimeSignatureItem (
   S_msrTimeSignatureItem timeSignatureItem)

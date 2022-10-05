@@ -97,7 +97,7 @@ S_msrScore createScore ()
 }
 
 //_______________________________________________________________________________
-void displayMsrScore (
+void displayMsrScoreShort (
   S_msrScore    theMsrScore,
   const string& passDescription)
 {
@@ -118,7 +118,7 @@ void displayMsrScore (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): " << passDescription <<
+    "Pass (optional): " << passDescription << ", short version" <<
     endl <<
     separator <<
     endl << endl <<
@@ -153,7 +153,7 @@ void displayMsrScore (
 }
 
 //_______________________________________________________________________________
-void displayMsrScoreShort (
+void displayMsrScoreFull (
   S_msrScore    theMsrScore,
   const string& passDescription)
 {
@@ -174,7 +174,7 @@ void displayMsrScoreShort (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): " << passDescription << ", short version" <<
+    "Pass (optional): " << passDescription << ", full version" <<
     endl <<
     separator <<
     endl << endl;
@@ -234,7 +234,7 @@ void displayMsrScoreSummary (
       separator <<
       endl <<
       gTab <<
-      "Pass (optional): " << passDescription  <<
+      "Pass (optional): " << passDescription  << ", summary" <<
       endl <<
       separator <<
       endl << endl;
@@ -285,7 +285,7 @@ void displayMsrScoreNames (
       separator <<
       endl <<
       gTab <<
-      "Pass (optional): " << passDescription <<
+      "Pass (optional): " << passDescription << ", names" <<
       endl <<
       separator <<
       endl << endl;
@@ -333,7 +333,7 @@ void displayMsrScoreSlices (
     separator <<
     endl <<
     gTab <<
-    "Pass (optional): " << passDescription <<
+    "Pass (optional): " << passDescription << ", slices" <<
     endl <<
     separator <<
     endl << endl;

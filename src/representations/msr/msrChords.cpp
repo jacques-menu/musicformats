@@ -137,6 +137,38 @@ S_msrChord msrChord::createChordNewbornClone (
   return newbornClone;
 }
 
+void msrChord::setMeasureElementPositionInMeasure (
+  const rational& positionInMeasure,
+  const string&   context)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+    gLogStream <<
+      "Setting chord's position in measure of " <<
+      asString () <<
+      " to '" <<
+      positionInMeasure <<
+      "' (was '" <<
+      fMeasureElementPositionInMeasure <<
+      "') in measure '" <<
+      fMeasureElementMeasureNumber <<
+      "', context: \"" <<
+      context <<
+      "\"" <<
+      endl;
+  }
+#endif
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != msrMoment::K_NO_POSITION,
+    "positionInMeasure == msrMoment::K_NO_POSITION");
+
+  // set chord's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
+}
+
 // measure upLink
 S_msrMeasure msrChord::fetchChordMeasureUpLink () const
 {
@@ -238,25 +270,6 @@ S_msrScore msrChord::fetchChordScoreUpLink () const
   return result;
 }
 
-void msrChord::setChordSoundingWholeNotes (
-   const rational& wholeNotes)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceChords ()) {
-    gLogStream <<
-      "Setting chord sounding whole notes to '" <<
-      wholeNotes <<
-      "' for chord '" <<
-      asString () <<
-      "'" <<
-      endl;
-  }
-#endif
-
-// JMI  fChordSoundingWholeNotes = wholeNotes;
-  fMeasureElementSoundingWholeNotes = wholeNotes;
-}
-
 void msrChord::setChordDisplayWholeNotes (
    const rational& wholeNotes)
 {
@@ -324,7 +337,7 @@ void msrChord::setChordMembersPositionInMeasure (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Setting chord members position in measure of " << asString () <<
+      "Setting chord members positions in measure of " << asString () <<
       " to '" <<
       positionInMeasure <<
       "'" <<
@@ -360,7 +373,7 @@ void msrChord::setChordMembersPositionInMeasure (
 
   voice->
     incrementCurrentPositionInVoice (
-      fChordNotesVector [0]->getNoteSoundingWholeNotes ());
+      fChordNotesVector [0]->getMeasureElementSoundingWholeNotes ());
 }
 
   // set the chord's elements' position in measure
@@ -380,8 +393,9 @@ void msrChord::setChordMembersPositionInMeasure (
 
       // set note's position in measure
       note->
-        setNotePositionInMeasure (
-          positionInMeasure); // they all share the same one
+        setMeasureElementPositionInMeasure (
+          positionInMeasure, // they all share the same one
+          "chord member");
 
 //    JMI   set note's position in voice
 //       note->
@@ -1364,7 +1378,7 @@ string msrChord::asString () const
         note->notePitchAsString () <<
         ", whole notes: " <<
         " sounding " <<
-        note->getNoteSoundingWholeNotes () <<
+        note->getMeasureElementSoundingWholeNotes () <<
         ", displayed " <<
         note->getNoteDisplayWholeNotes () <<
         ", octave: " <<
@@ -1403,7 +1417,7 @@ string msrChord::asShortString () const
       s <<
         note->notePitchAsString () <<
         " snd: " <<
-        note->getNoteSoundingWholeNotes () <<
+        note->getMeasureElementSoundingWholeNotes () <<
         ", disp: " <<
         note->getNoteDisplayWholeNotes () <<
         ", " <<
@@ -1444,20 +1458,19 @@ void msrChord::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
- // JMI   "chordSoundingWholeNotes" << " : " << fChordSoundingWholeNotes <<
-    "chordSoundingWholeNotes" << " : " << fMeasureElementSoundingWholeNotes <<
+    "fMeasureElementSoundingWholeNotes" << " : " << fMeasureElementSoundingWholeNotes <<
     endl <<
     setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << " : " << fChordDisplayWholeNotes <<
     endl <<
     setw (fieldWidth) <<
-    "measureNumber" << " : " << fMeasureElementMeasureNumber <<
+    "fMeasureElementMeasureNumber" << " : " << fMeasureElementMeasureNumber <<
     endl <<
     setw (fieldWidth) <<
-    "positionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
+    "fMeasureElementPositionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
     endl <<
     setw (fieldWidth) <<
-    "positionInVoice" << " : " << fMeasureElementPositionInVoice <<
+    "fMeasureElementPositionInVoice" << " : " << fMeasureElementPositionInVoice <<
     endl <<
     setw (fieldWidth) <<
     "chordMeasureFullLength" << " : " << chordMeasureFullLength <<
@@ -1511,7 +1524,7 @@ void msrChord::print (ostream& os) const
     endl << endl;
 
   // print the chord grace notes groups links if any
-  if (fChordGraceNotesGroupLinkBefore || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (fChordGraceNotesGroupLinkBefore || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordGraceNotesGroupLinkBefore";
@@ -1528,7 +1541,7 @@ void msrChord::print (ostream& os) const
   // print the articulations if any
   size_t chordArticulationsSize = fChordArticulations.size ();
 
-  if (chordArticulationsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordArticulationsSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordArticulations";
@@ -1553,7 +1566,7 @@ void msrChord::print (ostream& os) const
   // print the spanners if any
   size_t chordSpannersSize = fChordSpanners.size ();
 
-  if (chordSpannersSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordSpannersSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordSpanners";
@@ -1578,7 +1591,7 @@ void msrChord::print (ostream& os) const
   // print the technicals if any
   size_t chordTechnicalsSize = fChordTechnicals.size ();
 
-  if (chordTechnicalsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordTechnicalsSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordTechnicals";
@@ -1603,7 +1616,7 @@ void msrChord::print (ostream& os) const
   // print the ornaments if any
   size_t chordOrnamentsSize = fChordOrnaments.size ();
 
-  if (chordOrnamentsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordOrnamentsSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordOrnaments";
@@ -1628,7 +1641,7 @@ void msrChord::print (ostream& os) const
   // print the glissandos if any
   size_t chordGlissandosSize = fChordGlissandos.size ();
 
-  if (chordGlissandosSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordGlissandosSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordGlissandos";
@@ -1653,7 +1666,7 @@ void msrChord::print (ostream& os) const
   // print the slides if any
   size_t chordSlidesSize = fChordSlides.size ();
 
-  if (chordSlidesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordSlidesSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordSlides";
@@ -1678,7 +1691,7 @@ void msrChord::print (ostream& os) const
   // print the dynamics if any
   size_t chordDynamicsSize = fChordDynamics.size ();
 
-  if (chordDynamicsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordDynamicsSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordDynamics";
@@ -1703,7 +1716,7 @@ void msrChord::print (ostream& os) const
   // print the other dynamics if any
   size_t chordOtherDynamicsSize = fChordOtherDynamics.size ();
 
-  if (chordOtherDynamicsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordOtherDynamicsSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordOtherDynamics";
@@ -1728,7 +1741,7 @@ void msrChord::print (ostream& os) const
   // print the stems if any
   size_t chordStemsSize = fChordStems.size ();
 
-  if (chordStemsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordStemsSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordStems";
@@ -1754,7 +1767,7 @@ void msrChord::print (ostream& os) const
   // print the beams if any
   size_t chordBeamsSize = fChordBeams.size ();
 
-  if (chordBeamsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordBeamsSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordBeams";
@@ -1780,7 +1793,7 @@ void msrChord::print (ostream& os) const
   // print the beam links if any
   size_t chordBeamLinksSize = fChordBeamLinks.size ();
 
-  if (gGlobalTracingOahGroup->getTraceBeams () || chordBeamLinksSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceBeams () || chordBeamLinksSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "===> fChordBeamLinks ===>";
@@ -1806,7 +1819,7 @@ void msrChord::print (ostream& os) const
   // print the words if any
   size_t chordWordsSize = fChordWords.size ();
 
-  if (chordWordsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordWordsSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordBeamLinks";
@@ -1831,7 +1844,7 @@ void msrChord::print (ostream& os) const
   // print the ties if any
   size_t chordTiesSize = fChordTies.size ();
 
-  if (chordTiesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordTiesSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordTies";
@@ -1856,7 +1869,7 @@ void msrChord::print (ostream& os) const
   // print the ligatures if any
   size_t chordLigaturesSize = fChordLigatures.size ();
 
-  if (chordLigaturesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordLigaturesSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordLigatures";
@@ -1881,7 +1894,7 @@ void msrChord::print (ostream& os) const
   // print the slashes if any
   size_t chordSlashesSize = fChordSlashes.size ();
 
-  if (chordSlashesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordSlashesSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordSlashes";
@@ -1906,7 +1919,7 @@ void msrChord::print (ostream& os) const
   // print the cresc/decresc if any
   size_t chordCrescDecrescsSize = fChordCrescDecrescs.size ();
 
-  if (chordCrescDecrescsSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordCrescDecrescsSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordCrescDecrescs";
@@ -1931,7 +1944,7 @@ void msrChord::print (ostream& os) const
   // print the wedges if any
   size_t chordWedgesSize = fChordWedges.size ();
 
-  if (chordWedgesSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordWedgesSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordWedges";
@@ -1956,7 +1969,7 @@ void msrChord::print (ostream& os) const
   // print the segnos if any
   size_t chordSegnosSize = fChordSegnos.size ();
 
-  if (chordSegnosSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordSegnosSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordSegnos";
@@ -1981,7 +1994,7 @@ void msrChord::print (ostream& os) const
   // print the dal segnos if any
   size_t chordDalSegnosSize = fChordDalSegnos.size ();
 
-  if (chordDalSegnosSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordDalSegnosSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordDalSegnos";
@@ -2006,7 +2019,7 @@ void msrChord::print (ostream& os) const
   // print the codas if any
   size_t chordCodasSize = fChordCodas.size ();
 
-  if (chordCodasSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordCodasSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordCodas";
@@ -2029,7 +2042,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the octave shift if any
-  if (fChordOctaveShift || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (fChordOctaveShift || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordOctaveShift";
@@ -2049,7 +2062,7 @@ void msrChord::print (ostream& os) const
   // print the harmonies associated to this chord if any
   size_t chordHarmoniesListSize = fChordHarmoniesList.size ();
 
-  if (chordHarmoniesListSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordHarmoniesListSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordHarmoniesList";
@@ -2081,7 +2094,7 @@ void msrChord::print (ostream& os) const
   }
 
   // print the figured bass if any
-  if (fChordFiguredBass || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (fChordFiguredBass || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordFiguredBass" << " : " <<
@@ -2105,7 +2118,7 @@ void msrChord::print (ostream& os) const
   // print the chord notes if any
   size_t chordNotesVectorSize = fChordNotesVector.size ();
 
-  if (chordNotesVectorSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (chordNotesVectorSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordNotesVector";
@@ -2138,7 +2151,7 @@ void msrChord::print (ostream& os) const
   // print the slur links if any
   size_t chordSlurLinksSize = fChordSlurLinks.size ();
 
-  if (gGlobalTracingOahGroup->getTraceSlurs () || chordSlurLinksSize || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceSlurs () || chordSlurLinksSize || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "===> fChordSlurLinks ===>";
@@ -2163,7 +2176,7 @@ void msrChord::print (ostream& os) const
 
 /*
   // print the chord grace notes groups if any
-  if (fChordGraceNotesGroupBefore || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (fChordGraceNotesGroupBefore || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordGraceNotesGroupBefore";
@@ -2182,7 +2195,7 @@ void msrChord::print (ostream& os) const
 //    os << endl;
   }
 
-  if (fChordGraceNotesGroupAfter || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (fChordGraceNotesGroupAfter || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordGraceNotesGroupAfter";
@@ -2201,7 +2214,7 @@ void msrChord::print (ostream& os) const
   }
 */
 
-  if (fChordGraceNotesGroupLinkAfter || gGlobalMsrOahGroup->getDisplayMsrDetails ()) {
+  if (fChordGraceNotesGroupLinkAfter || gGlobalMsrOahGroup->getDisplayMsrFull ()) {
     os <<
       setw (fieldWidth) <<
       "fChordGraceNotesGroupLinkAfter";
@@ -2246,19 +2259,19 @@ void msrChord::printShort (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
  // JMI   "chordSoundingWholeNotes" << " : " << fChordSoundingWholeNotes <<
-    "chordSoundingWholeNotes" << " : " << fMeasureElementSoundingWholeNotes <<
+    "fMeasureElementSoundingWholeNotes" << " : " << fMeasureElementSoundingWholeNotes <<
     endl <<
     setw (fieldWidth) <<
     "fChordDisplayWholeNotes" << " : " << fChordDisplayWholeNotes <<
     endl <<
     setw (fieldWidth) <<
-    "measureNumber" << " : " << fMeasureElementMeasureNumber <<
+    "fMeasureElementMeasureNumber" << " : " << fMeasureElementMeasureNumber <<
     endl <<
     setw (fieldWidth) <<
-    "positionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
+    "fMeasureElementPositionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
     endl <<
     setw (fieldWidth) <<
-    "positionInVoice" << " : " << fMeasureElementPositionInVoice <<
+    "fMeasureElementPositionInVoice" << " : " << fMeasureElementPositionInVoice <<
     endl <<
     setw (fieldWidth) <<
     "chordMeasureFullLength" << " : " << chordMeasureFullLength <<
@@ -2266,7 +2279,7 @@ void msrChord::printShort (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "positionInTuplet" << " : " <<
+    "fPositionInTuplet" << " : " <<
     fPositionInTuplet <<
     endl;
 
@@ -2994,7 +3007,7 @@ ostream& operator<< (ostream& os, const S_msrChord& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -3216,7 +3229,7 @@ ostream& operator<< (ostream& os, const S_msrChordBeamLink& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -3438,7 +3451,7 @@ ostream& operator<< (ostream& os, const S_msrChordSlurLink& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -3663,7 +3676,7 @@ ostream& operator<< (ostream& os, const S_msrChordGraceNotesGroupLink& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

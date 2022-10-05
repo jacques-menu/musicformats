@@ -294,6 +294,37 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   return syllableDeepClone;
 }
 
+void msrSyllable::setMeasureElementPositionInMeasure (
+  const rational& positionInMeasure,
+  const string&   context)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+    gLogStream <<
+      "Setting syllable's position in measure of " << asString () <<
+      " to '" <<
+      positionInMeasure <<
+      "' (was '" <<
+      fMeasureElementPositionInMeasure <<
+      "') in measure '" <<
+      fMeasureElementMeasureNumber <<
+      "', context: \"" <<
+      context <<
+      "\"" <<
+      endl;
+  }
+#endif
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    positionInMeasure != msrMoment::K_NO_POSITION,
+    "positionInMeasure == msrMoment::K_NO_POSITION");
+
+  // set syllable's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
+}
+
 void msrSyllable::appendLyricTextToSyllable (const string& text)
 {
 #ifdef TRACING_IS_ENABLED
@@ -769,7 +800,7 @@ ostream& operator<< (ostream& os, const S_msrSyllable& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -998,7 +1029,7 @@ void msrStanza::appendSyllableToStanza (
     syllableSoundingWholeNotes =
       syllable->
         getSyllableNoteUpLink ()->
-          getNoteSoundingWholeNotes ();
+          getMeasureElementSoundingWholeNotes ();
 
   // update the stanza's current measure whole notes
   fStanzaCurrentMeasureWholeNotesDuration +=syllableSoundingWholeNotes;
@@ -1390,7 +1421,7 @@ ostream& operator<< (ostream& os, const S_msrStanza& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

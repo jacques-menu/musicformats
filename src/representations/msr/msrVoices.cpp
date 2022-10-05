@@ -2072,7 +2072,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (S_msrNote note)
   rational
     noteSoundingWholeNotes =
       note->
-        getNoteSoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
       /* JMI
   rational
@@ -2133,7 +2133,7 @@ void msrVoice::registerNoteAsVoiceLastAppendedNote (S_msrNote note)
   rational
     noteSoundingWholeNotes =
       note->
-        getNoteSoundingWholeNotes (),
+        getMeasureElementSoundingWholeNotes (),
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes (); // JMI
@@ -2787,7 +2787,7 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
   part->
     incrementPartCurrentPositionInMeasure (
       inputLineNumber,
-      note->getNoteSoundingWholeNotes ());
+      note->getMeasureElementSoundingWholeNotes ());
 
   // register whether music (i.e. not just skips)
   // has been inserted into the voice
@@ -2862,7 +2862,8 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
           getPartHarmoniesVoice ();
 
     for (S_msrHarmony harmony : noteHarmoniesList) {
-      // append the harmony to the part harmonies voice
+      // append the harmony to the part harmonies voice,
+      // only now that the note has been handled
       partHarmoniesVoice->
         appendHarmonyToVoice (
           harmony);
@@ -3023,7 +3024,7 @@ void msrVoice::appendChordToVoice (S_msrChord chord)
     getStaffPartUpLink ()->
       incrementPartCurrentPositionInMeasure (
         chord->getInputLineNumber (),
-        chord->getChordSoundingWholeNotes ());
+        chord->getMeasureElementSoundingWholeNotes ());
 
   // get the chord's notes vector
   const vector<S_msrNote>&
@@ -3089,7 +3090,7 @@ void msrVoice::appendTupletToVoice (S_msrTuplet tuplet)
     getStaffPartUpLink ()->
       incrementPartCurrentPositionInMeasure (
         tuplet->getInputLineNumber (),
-        tuplet->getTupletSoundingWholeNotes ());
+        tuplet->getMeasureElementSoundingWholeNotes ());
 
   --gIndenter;
 
@@ -9521,7 +9522,7 @@ void msrVoice::removeNoteFromVoice (
       decrementPartCurrentPositionInMeasure (
         inputLineNumber,
         note->
-          getNoteSoundingWholeNotes ());
+          getMeasureElementSoundingWholeNotes ());
 
   --gIndenter;
 }

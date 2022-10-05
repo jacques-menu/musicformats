@@ -218,7 +218,7 @@ void bsrPage::print (ostream& os) const
   // print the page elements if any
   size_t pageElementsListSize = fPageElementsList.size ();
 
-  if (pageElementsListSize || gGlobalBsrOahGroup->getDisplayBsrDetails ()) {
+  if (pageElementsListSize || gGlobalBsrOahGroup->getDisplayBsrFull ()) {
     os <<
 //      setw (fieldWidth) <<
       "PageElementsList" <<

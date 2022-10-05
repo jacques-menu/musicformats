@@ -128,7 +128,7 @@ ostream& operator<< (ostream& os, const S_msrSegno& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 
@@ -204,7 +204,7 @@ void msrDalSegno::setDalSegnoPositionInMeasure (
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
-      "Setting dal segno position in measure of " << asString () <<
+      "Setting dal segno's position in measure of " << asString () <<
       " to '" <<
       positionInMeasure <<
       endl;
@@ -241,7 +241,7 @@ void msrDalSegno::setDalSegnoPositionInMeasure (
 
   voice->
     incrementCurrentPositionInVoice (
-      fdal segnoNotesVector [0]->getNoteSoundingWholeNotes ());
+      fdal segnoNotesVector [0]->getMeasureElementSoundingWholeNotes ());
 }
       */
 }
@@ -352,7 +352,7 @@ ostream& operator<< (ostream& os, const S_msrDalSegno& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

@@ -381,7 +381,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (S_msrNote note)
   rational
     noteSoundingWholeNotes =
       note->
-        getNoteSoundingWholeNotes ();
+        getMeasureElementSoundingWholeNotes ();
 
       /* JMI
   rational

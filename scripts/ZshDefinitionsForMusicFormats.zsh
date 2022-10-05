@@ -41,6 +41,9 @@ alias skr="cd ${SCRIPTS_DIR}"
 BUILD_DIR=${MUSIC_FORMATS_DEV}/build
 alias build="cd ${BUILD_DIR}"
 
+INCLUDE_DIR=${SRC_DIR}/include
+alias inc="cd ${INCLUDE_DIR}"
+
 alias rmbuild='cd ${MUSIC_FORMATS_DEV}/build ; rm -r bin lib libdir; ls -sal'
 
 FILES_DIR=${MUSIC_FORMATS_DEV}/files
@@ -786,8 +789,11 @@ function addAll ()
   git add -f ${MUSIC_FORMATS_DEV}/src/MusicFormatsVersionDate.h
 
   addSrc
+
   addBuild
   addScripts
+  addInclude
+
   addDoc
 
   addFxml
@@ -835,6 +841,18 @@ function addScripts ()
   git add    ${SCRIPTS_DIR}
 }
 
+function addInclude ()
+{
+	rm -rf ${INCLUDE_DIR}
+	mkdir -p ${INCLUDE_DIR}
+
+	cd ${SRC_DIR}
+
+	rsync -R **/*.h include
+
+  git add ${INCLUDE_DIR}/*
+}
+
 function addDoc ()
 {
   git add ${DOC_DIR}/presentation/*.pdf  # libmusicxml2
@@ -876,26 +894,9 @@ function addReleases ()
 function wcl ()
 {
   cd "${SRC_DIR}"
+  echo "SRC_DIR = ${SRC_DIR}"
 
-  DIRS_LIST=
-
-  for DIR in \
-    clisamples/* \
-    components \
-    converters/* \
-    formats/* \
-    generators/* \
-    mflibrary \
-    oah \
-    passes/* \
-    representations/* \
-    wae \
-  ; do
-    DIRS_LIST="${DIRS_LIST} ${DIR}/*"
-  done
-  echo "DIRS_LIST = ${DIRS_LIST}"
-
-  wc -l ${DIRS_LIST} | sort -n
+  wc -l **/* | sort -n
 }
 
 function wcla ()

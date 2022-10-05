@@ -1211,15 +1211,24 @@ R"()",
 
   // display LPSR
 
+  S_oahBooleanAtom
+    displayLpsrShortBooleanAtom =
+      oahBooleanAtom::create (
+        "display-lpsr-short", "dlpsrshort",
+R"(Write the contents of the LPSR data, short version, to standard error.)",
+        "fDisplayLpsrShort",
+        fDisplayLpsrShort);
   subGroup->
     appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "display-lpsr", "dlpsr",
-R"(Write the contents of the LPSR data with a summary of it MSR component to standard error.)",
-        "fDisplayLpsr",
-        fDisplayLpsr));
+      displayLpsrShortBooleanAtom);
 
-  // display LPSR full
+  subGroup->
+    appendAtomToSubGroup (
+      oahAtomAlias::create (
+        "display-lpsr", "dlpsr",
+R"(Write the contents of the LPSR data, short version, to standard error.
+This option is an alias for '-display-lpsr-short, -dlpsrshort'.)",
+        displayLpsrShortBooleanAtom));
 
   subGroup->
     appendAtomToSubGroup (
@@ -1228,16 +1237,6 @@ R"(Write the contents of the LPSR data with a summary of it MSR component to sta
 R"(Write the contents of the LPSR data with its full MSR component to standard error.)",
         "fDisplayLpsrFull",
         fDisplayLpsrFull));
-
-  // display LPSR short
-
-  subGroup->
-    appendAtomToSubGroup (
-      oahBooleanAtom::create (
-        "display-lpsr-short", "dlpsrshort",
-R"(Write the contents of the LPSR data, short version, to standard error.)",
-        "fDisplayLpsrShort",
-        fDisplayLpsrShort));
 }
 
 void lpsrOahGroup::initializeLpsrPaperOptions ()
@@ -1991,9 +1990,8 @@ void lpsrOahGroup::enforceGroupQuietness ()
   fTraceSchemeFunctions = false;
 #endif
 
-  fDisplayLpsr = false;
-  fDisplayLpsrFull = false;
   fDisplayLpsrShort = false;
+  fDisplayLpsrFull = false;
 }
 
 //______________________________________________________________________________
@@ -2117,14 +2115,11 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   ++gIndenter;
 
   gLogStream << left <<
-    setw (fieldWidth) << "fDisplayLpsr" << " : " <<
-    fDisplayLpsr <<
+    setw (fieldWidth) << "fDisplayLpsrShort" << " : " <<
+    fDisplayLpsrShort <<
     endl <<
     setw (fieldWidth) << "fDisplayLpsrFull" << " : " <<
     fDisplayLpsrFull <<
-    endl <<
-    setw (fieldWidth) << "fDisplayLpsrShort" << " : " <<
-    fDisplayLpsrShort <<
     endl;
 
   --gIndenter;

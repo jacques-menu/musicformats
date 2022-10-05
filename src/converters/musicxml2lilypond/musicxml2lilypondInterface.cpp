@@ -134,15 +134,6 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
     return mfMusicformatsError::kErrorInvalidFile;
   }
 
-  // display the first MSR score skeleton if requested
-  // ------------------------------------------------------
-
-  if (gGlobalMsrOahGroup->getDisplayMsrSkeleton ()) {
-    displayMsrScore (
-      firstMsrScore,
-      "Display the first MSR score skeleton");
-  }
-
   // should we return now?
   // ------------------------------------------------------
 
@@ -172,21 +163,6 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
     return mfMusicformatsError::kErrorInvalidFile;
-  }
-
-  // display the populated MSR score if requested
-  // ------------------------------------------------------
-
-  if (gGlobalMsrOahGroup->getDisplayFirstMsr ()) {
-    displayMsrScore (
-      firstMsrScore,
-      "Display the first MSR as text");
-  }
-
-  if (gGlobalMsrOahGroup->getDisplayFirstMsrShort ()) {
-    displayMsrScoreShort (
-      firstMsrScore,
-      "Display the first MSR as text");
   }
 
   // should we return now?
@@ -247,21 +223,6 @@ else {
     return mfMusicformatsError::kErrorInvalidFile;
   }
 
-  // display the second MSR score if requested
-  // ------------------------------------------------------
-
-  if (gGlobalMsrOahGroup->getDisplaySecondMsr ()) {
-    displayMsrScore (
-      secondMsrScore,
-      "Display the second MSR as text");
-  }
-
-  if (gGlobalMsrOahGroup->getDisplaySecondMsrShort ()) {
-    displayMsrScoreShort (
-      secondMsrScore,
-      "Display the second MSR as text");
-  }
-
   // should we return now?
   // ------------------------------------------------------
 
@@ -279,21 +240,143 @@ else {
 
   S_lpsrScore theLpsrScore;
 
-  {
-    // create the LPSR from the MSR (pass 4)
-    // ------------------------------------------------------
+  // create the LPSR from the MSR (pass 4)
+  // ------------------------------------------------------
 
-    try {
-      theLpsrScore =
-        translateMsrToLpsr (
-          secondMsrScore,
-          gGlobalMsrOahGroup,
-          gGlobalLpsrOahGroup,
-          "Pass 4",
-          "Convert the second MSR into an LPSR",
-          createMusicxml2lilypondConverterComponent ());
+  try {
+    theLpsrScore =
+      translateMsrToLpsr (
+        secondMsrScore,
+        gGlobalMsrOahGroup,
+        gGlobalLpsrOahGroup,
+        "Pass 4",
+        "Convert the second MSR into an LPSR",
+        createMusicxml2lilypondConverterComponent ());
+  }
+  catch (msr2lpsrException& e) {
+    mfDisplayException (e, gOutputStream);
+    return mfMusicformatsError::kErrorInvalidFile;
+  }
+  catch (std::exception& e) {
+    mfDisplayException (e, gOutputStream);
+    return mfMusicformatsError::kErrorInvalidFile;
+  }
+
+  // convert the LPSR to LilyPond code (pass 5)
+  // ------------------------------------------------------
+
+  string
+    outputFileName =
+      handler->
+        fetchOutputFileNameFromTheOptions ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+    err <<
+      "xmlFile2lilypond() outputFileName = \"" <<
+      outputFileName <<
+      "\"" <<
+      endl;
+  }
+#endif
+
+  if (! outputFileName.size ()) {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+      err <<
+        "xmlFile2lilypond() output goes to standard output" <<
+        endl;
     }
-    catch (msr2lpsrException& e) {
+#endif
+
+    // create an indented output stream for the LilyPond code
+    // to be written to outputFileStream
+    mfIndentedOstream
+      lilypondStandardOutputStream (
+        out,
+        gIndenter);
+
+    // convert the LPSR score to LilyPond code
+    try {
+      translateLpsrToLilypond (
+        theLpsrScore,
+        gGlobalMsrOahGroup,
+        gGlobalLpsrOahGroup,
+        "Pass 5",
+        "Convert the LPSR score to LilyPond code",
+        lilypondStandardOutputStream);
+    }
+    catch (lpsr2lilypondException& e) {
+      mfDisplayException (e, gOutputStream);
+      return mfMusicformatsError::kErrorInvalidFile;
+    }
+    catch (std::exception& e) {
+      mfDisplayException (e, gOutputStream);
+      return mfMusicformatsError::kErrorInvalidFile;
+    }
+  }
+
+  else {
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+      err <<
+        "xmlFile2lilypond() output goes to file \"" <<
+        outputFileName <<
+        "\"" <<
+        endl;
+    }
+#endif
+
+    // open output file
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+      err <<
+        endl <<
+        "Opening file '" << outputFileName << "' for writing" <<
+        endl;
+    }
+#endif
+
+    ofstream
+      outputFileStream (
+        outputFileName.c_str (),
+        ofstream::out);
+
+    if (! outputFileStream.is_open ()) {
+      stringstream s;
+
+      s <<
+        "Could not open LilyPond output file \"" <<
+        outputFileName <<
+        "\" for writing, quitting";
+
+      string message = s.str ();
+
+      err <<
+        message <<
+        endl;
+
+      throw lpsr2lilypondException (message);
+    }
+
+    // create an indented output stream for the LilyPond code
+    // to be written to outputFileStream
+    mfIndentedOstream
+      lilypondFileOutputStream (
+        outputFileStream,
+        gIndenter);
+
+    // convert the LPSR score to LilyPond code
+    try {
+      translateLpsrToLilypond (
+        theLpsrScore,
+        gGlobalMsrOahGroup,
+        gGlobalLpsrOahGroup,
+        "Pass 5",
+        "Convert the LPSR score to LilyPond code",
+        lilypondFileOutputStream);
+    }
+    catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutputStream);
       return mfMusicformatsError::kErrorInvalidFile;
     }
@@ -302,170 +385,17 @@ else {
       return mfMusicformatsError::kErrorInvalidFile;
     }
 
-    // display the LPSR score if requested
-    // ------------------------------------------------------
-
-    if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
-      displayLpsrScore (
-        theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
-        "Display the LPSR");
-    }
-
-    if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
-      displayLpsrScoreShort (
-        theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
-        "Display the LPSR");
-    }
-
-    if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
-      displayLpsrScoreFull (
-        theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
-        "Display the LPSR");
-    }
-  }
-
-  {
-    // convert the LPSR to LilyPond code (pass 5)
-    // ------------------------------------------------------
-
-    string
-      outputFileName =
-        handler->
-          fetchOutputFileNameFromTheOptions ();
-
-#ifdef TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      err <<
-        "xmlFile2lilypond() outputFileName = \"" <<
-        outputFileName <<
-        "\"" <<
+    // close output file
+#ifdef TRACE_OAH
+    if (gtracingOah->fTracePasses) {
+      gLogStream <<
+        endl <<
+        "Closing file \"" << outputFileName << "\"" <<
         endl;
     }
 #endif
 
-    if (! outputFileName.size ()) {
-#ifdef TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        err <<
-          "xmlFile2lilypond() output goes to standard output" <<
-          endl;
-      }
-#endif
-
-      // create an indented output stream for the LilyPond code
-      // to be written to outputFileStream
-      mfIndentedOstream
-        lilypondStandardOutputStream (
-          out,
-          gIndenter);
-
-      // convert the LPSR score to LilyPond code
-      try {
-        translateLpsrToLilypond (
-          theLpsrScore,
-          gGlobalMsrOahGroup,
-          gGlobalLpsrOahGroup,
-          "Pass 5",
-          "Convert the LPSR score to LilyPond code",
-          lilypondStandardOutputStream);
-      }
-      catch (lpsr2lilypondException& e) {
-        mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
-      }
-      catch (std::exception& e) {
-        mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
-      }
-    }
-
-    else {
-#ifdef TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-        err <<
-          "xmlFile2lilypond() output goes to file \"" <<
-          outputFileName <<
-          "\"" <<
-          endl;
-      }
-#endif
-
-      // open output file
-#ifdef TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-        err <<
-          endl <<
-          "Opening file '" << outputFileName << "' for writing" <<
-          endl;
-      }
-#endif
-
-      ofstream
-        outputFileStream (
-          outputFileName.c_str (),
-          ofstream::out);
-
-      if (! outputFileStream.is_open ()) {
-        stringstream s;
-
-        s <<
-          "Could not open LilyPond output file \"" <<
-          outputFileName <<
-          "\" for writing, quitting";
-
-        string message = s.str ();
-
-        err <<
-          message <<
-          endl;
-
-        throw lpsr2lilypondException (message);
-      }
-
-      // create an indented output stream for the LilyPond code
-      // to be written to outputFileStream
-      mfIndentedOstream
-        lilypondFileOutputStream (
-          outputFileStream,
-          gIndenter);
-
-      // convert the LPSR score to LilyPond code
-      try {
-        translateLpsrToLilypond (
-          theLpsrScore,
-          gGlobalMsrOahGroup,
-          gGlobalLpsrOahGroup,
-          "Pass 5",
-          "Convert the LPSR score to LilyPond code",
-          lilypondFileOutputStream);
-      }
-      catch (lpsr2lilypondException& e) {
-        mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
-      }
-      catch (std::exception& e) {
-        mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
-      }
-
-      // close output file
-#ifdef TRACE_OAH
-      if (gtracingOah->fTracePasses) {
-        gLogStream <<
-          endl <<
-          "Closing file \"" << outputFileName << "\"" <<
-          endl;
-      }
-#endif
-
-      outputFileStream.close ();
-    }
+    outputFileStream.close ();
   }
 
   return mfMusicformatsError::k_NoError;

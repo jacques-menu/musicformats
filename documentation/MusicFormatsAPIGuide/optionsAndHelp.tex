@@ -120,19 +120,19 @@ jacquesmenu@macmini > xml2ly -query insider
 
 In regular mode, the options are displayed in subgroups only. The groups containing them are not displayed for simplicity, because a three-level options hierarchy is not what users expect and are used to.
 
-For example, the \optionNameBoth{ignore-ornaments}{oorns} option is displayed this way in regular mode:
+For example, the \optionNameBoth{ignore-musicxml-ornaments}{oorns} option is displayed this way in regular mode:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > xml2ly -query ignore-ornaments
---- Help for atom "ignore-ornaments" in subgroup "Ornaments"
-    -ignore-ornaments, -oorns
+jacquesmenu@macmini > xml2ly -query ignore-musicxml-ornaments
+--- Help for atom "ignore-musicxml-ornaments" in subgroup "Ornaments"
+    -ignore-musicxml-ornaments, -oorns
           Ignore ornaments in MusicXML data.
 \end{lstlisting}
 
 In insider mode, on the contrary, the full group-subgroup-atom hierarchy is visible, as well as the attachment of the options to the groups managed internally by \mf:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini > xml2ly -query ignore-ornaments -insider
---- Help for atom "ignore-ornaments" in subgroup "Notes" of group "mxsr2msr" ---
-    -ignore-ornaments, -oorns
+jacquesmenu@macmini > xml2ly -query ignore-musicxml-ornaments -insider
+--- Help for atom "ignore-musicxml-ornaments" in subgroup "Notes" of group "mxsr2msr" ---
+    -ignore-musicxml-ornaments, -oorns
           Ignore ornaments in MusicXML data.
 \end{lstlisting}
 

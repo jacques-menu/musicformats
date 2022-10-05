@@ -50,6 +50,16 @@ S_mfcOahComponent createOahComponent ()
             "Finalized option '-find' handling"
           }
       ));
+
+    pOahComponent->
+      appendVersionDescrToComponent (
+        mfcVersionDescr::create (
+          mfcVersionNumber::createFromString ("0.9.66"),
+          "October 4, 2022",
+          list<string> {
+            "Added oahElementValueKind::kElementValueUnknown to fix an initialization issue"
+          }
+      ));
   }
 
   return pOahComponent;

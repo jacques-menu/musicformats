@@ -105,33 +105,6 @@ EXP mfMusicformatsError msrScore2lilypondWithHandler (
       mfDisplayException (e, gOutputStream);
       return mfMusicformatsError::kErrorInvalidFile;
     }
-
-    // display the LPSR score if requested
-    // ------------------------------------------------------
-
-    if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
-      displayLpsrScore (
-        theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
-        "Display the LPSR");
-    }
-
-    if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
-      displayLpsrScoreShort (
-        theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
-        "Display the LPSR");
-    }
-
-    if (gGlobalLpsrOahGroup->getDisplayLpsrFull ()) {
-      displayLpsrScoreFull (
-        theLpsrScore,
-        gGlobalMsrOahGroup,
-        gGlobalLpsrOahGroup,
-        "Display the LPSR");
-    }
   }
 
   {

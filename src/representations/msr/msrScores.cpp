@@ -405,7 +405,7 @@ void msrScore::browseData (basevisitor* v)
   }
 }
 
-void msrScore::print (ostream& os) const
+void msrScore::printFull (ostream& os) const
 {
   os <<
     "[MSR Score" <<
@@ -714,10 +714,10 @@ void msrScore::printShort (ostream& os) const
 void msrScore::printSummary (ostream& os) const
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalLpsrOahGroup->getDisplayLpsr ()) {
+  if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) {
     os << "MSR score summary";
   }
-  else if (gGlobalLpsrOahGroup->getDisplayLpsr ()) { // JMI
+  else if (gGlobalLpsrOahGroup->getDisplayLpsrShort ()) { // JMI
     os << "MSR full score";
   }
   else {
