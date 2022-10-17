@@ -10321,11 +10321,14 @@ string msrVoice::asShortString () const
   stringstream s;
 
   s <<
-    msrVoiceKindAsStringForPrint (fVoiceKind) <<
+    "[Voice \"" << getVoiceName () << "\", " <<
+    msrVoiceKindAsString (fVoiceKind) <<
+//     msrVoiceKindAsStringForPrint (fVoiceKind) << // JMI
     " voice \"" << getVoiceName () <<
     "\", fVoiceNumber '" <<
     fVoiceNumber <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -10335,7 +10338,7 @@ string msrVoice::asString () const
   stringstream s;
 
   s <<
-    "Voice \"" << getVoiceName () << "\", " <<
+    "[Voice \"" << getVoiceName () << "\", " <<
     msrVoiceKindAsString (fVoiceKind) <<
      ", " <<
     mfSingularOrPlural (
@@ -10343,7 +10346,8 @@ string msrVoice::asString () const
      ", " <<
     mfSingularOrPlural (
       fVoiceStanzasMap.size (), "stanza", "stanzas") <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }

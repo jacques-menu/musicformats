@@ -22064,14 +22064,14 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
     // register this note as the harmony note upLink
     harmony->
-      setUpLinkToHarmonyToNote (newNote);
+      setHarmonyUpLinkToNote (newNote);
 
-    // attach the harmony to newNote
+    // append the harmony to newNote's harmonies list
     newNote->
       appendHarmonyToNoteHarmoniesList (
         harmony);
 
-    // get the part harmonies voice
+    // get the part harmonies voice for the current voice
     S_msrVoice
       partHarmoniesVoice =
         fCurrentPart->
@@ -22089,12 +22089,12 @@ void mxsr2msrTranslator::handlePendingHarmonies (
       setHarmoniesUpLinkToVoice (
         partHarmoniesVoice);
 
-/* JMI VIRER v0.9.66
+//* JMI VIRER v0.9.66
     // append the harmony to the part harmonies voice
     partHarmoniesVoice->
       appendHarmonyToVoice (
         harmony);
-*/
+//*/
     // don't append the harmony to the part harmonies voice,
     // this will be done when the note itself is appended to the voice
 
@@ -22166,7 +22166,11 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes));
 
-    // append the figured bass to newNote
+    // register this note as the figured bass element note upLink
+    figuredBassElement->
+      setFiguredBassElementUpLinkToNote (newNote);
+
+    // append the figured bass to newNote's figured bass elements list
     newNote->
       appendFiguredBassElementToNoteFiguredBassElementsList (
         figuredBassElement);
@@ -22174,24 +22178,26 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
 //* JMI
     // get the figured bass voice for the current voice
     S_msrVoice
-      voiceForwardLinkToFiguredBassVoice =
-        voiceToInsertInto->
-          getRegularVoiceForwardLinkToFiguredBassVoice ();
+      partFiguredBassVoice =
+//         voiceToInsertInto->
+//         	fetchVoiceUpLinkToPart ()->
+        fCurrentPart->
+        		getPartFiguredBassVoice ();
 
     // sanity check
     mfAssert (
       __FILE__, __LINE__,
-      voiceForwardLinkToFiguredBassVoice != nullptr,
-      "voiceForwardLinkToFiguredBassVoice is null");
+      partFiguredBassVoice != nullptr,
+      "partFiguredBassVoice is null");
 
     // set the figuredBassElement's voice upLink
     // only now that we know which figured bass voice will contain it
     figuredBassElement->
-      setFiguredBassUpLinkToVoice (
-        voiceForwardLinkToFiguredBassVoice);
+      setFiguredBassElementUpLinkToVoice (
+        partFiguredBassVoice);
 
     // append the figured bass to the figured bass voice for the current voice
-    voiceForwardLinkToFiguredBassVoice->
+    partFiguredBassVoice->
       appendFiguredBassElementToVoice (
         figuredBassElement);
 //*/

@@ -7853,7 +7853,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
   if (fOnGoingNonGraceNote) {
     // register this note as the harmony note upLink
     harmony->
-      setUpLinkToHarmonyToNote (fOnGoingNonGraceNote);
+      setHarmonyUpLinkToNote (fOnGoingNonGraceNote);
 
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->

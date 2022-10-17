@@ -369,6 +369,8 @@ class EXP msrStaff : public msrElement
 
     string                staffNumberAsString () const;
 
+    string                asString () const override;
+
     void                  print (ostream& os) const override;
 
     void                  printShort (ostream& os) const override;
