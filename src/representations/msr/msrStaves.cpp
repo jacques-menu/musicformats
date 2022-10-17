@@ -3024,6 +3024,24 @@ void msrStaff::browseData (basevisitor* v)
   }
 }
 
+string msrStaff::asString () const
+{
+  stringstream s;
+
+  s <<
+    "[Staff \"" << fStaffName <<
+    "\", fStaffKind: " <<
+    msrStaffKindAsStringForPrint (fStaffKind) <<
+    "\", fStaffNumber: " <<
+    fStaffNumber <<
+    ", fStaffAllVoicesList.size(): " << fStaffAllVoicesList.size () <<
+    ", fStaffRegularVoicesCounter: " << fStaffRegularVoicesCounter <<
+    ']' <<
+    endl;
+
+  return s.str ();
+}
+
 void msrStaff::print (ostream& os) const
 {
   os <<
@@ -3564,7 +3582,7 @@ ostream& operator<< (ostream& os, const S_msrStaff& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

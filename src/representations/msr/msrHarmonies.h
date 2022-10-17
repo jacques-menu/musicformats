@@ -199,10 +199,10 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplinks
-    void                  setUpLinkToHarmonyToNote (S_msrNote note);
+    void                  setHarmonyUpLinkToNote (S_msrNote note);
 
-    S_msrNote             getUpLinkToHarmonyToNote () const
-                             { return fUpLinkToHarmonyToNote; }
+    S_msrNote             getHarmonyUpLinkToNote () const
+                             { return fHarmonyUpLinkToNote; }
 
     void                  setHarmoniesUpLinkToVoice (
                             S_msrVoice voice)
@@ -320,7 +320,7 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplinks
-    S_msrNote             fUpLinkToHarmonyToNote;
+    S_msrNote             fHarmonyUpLinkToNote;
     S_msrVoice            fHarmoniesUpLinkToVoice; // for use in harmonies voices JMI
 
     // whole notes

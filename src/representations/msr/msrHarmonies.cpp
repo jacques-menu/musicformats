@@ -570,7 +570,7 @@ void msrHarmony::setHarmonyTupletFactor (
   fHarmonyTupletFactor = tupletFactor;
 }
 
-void msrHarmony::setUpLinkToHarmonyToNote (S_msrNote note)
+void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -587,7 +587,7 @@ void msrHarmony::setUpLinkToHarmonyToNote (S_msrNote note)
     note != nullptr,
     "note is null");
 
-  fUpLinkToHarmonyToNote = note;
+  fHarmonyUpLinkToNote = note;
 }
 
 void msrHarmony::setMeasureElementPositionInMeasure (
@@ -628,13 +628,13 @@ void msrHarmony::setMeasureElementPositionInMeasure (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fUpLinkToHarmonyToNote != nullptr,
-    "fUpLinkToHarmonyToNote is null");
+    fHarmonyUpLinkToNote != nullptr,
+    "fHarmonyUpLinkToNote is null");
 
   // compute harmony's position in voice
   S_msrMeasure
     measure =
-      fUpLinkToHarmonyToNote->
+      fHarmonyUpLinkToNote->
         getNoteDirectUpLinkToMeasure ();
 
   if (! measure) abort ();
@@ -670,7 +670,7 @@ void msrHarmony::setMeasureElementPositionInMeasure (
 
   voice->
     incrementCurrentPositionInVoice (
-      fUpLinkToHarmonyToNote->
+      fHarmonyUpLinkToNote->
         getMeasureElementSoundingWholeNotes ());
 }
 
@@ -873,9 +873,9 @@ string msrHarmony::asString () const
   }
 
   // print the harmony note uplink
-  s << ", fUpLinkToHarmonyToNote: ";
-  if (fUpLinkToHarmonyToNote) {
-    s << fUpLinkToHarmonyToNote;
+  s << ", fHarmonyUpLinkToNote: ";
+  if (fHarmonyUpLinkToNote) {
+    s << fHarmonyUpLinkToNote;
   }
   else {
     s << "none";
@@ -1019,11 +1019,11 @@ void msrHarmony::print (ostream& os) const
   // print the harmony note uplink
   os <<
     setw (fieldWidth) <<
-    "fUpLinkToHarmonyToNote" << " : ";
-  if (fUpLinkToHarmonyToNote) {
+    "fHarmonyUpLinkToNote" << " : ";
+  if (fHarmonyUpLinkToNote) {
     os <<
       endl <<
-      gTab << fUpLinkToHarmonyToNote->asString ();
+      gTab << fHarmonyUpLinkToNote->asString ();
   }
   else {
     os << "none";

@@ -4216,7 +4216,7 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
   S_msrNote
     currentUpLinkToHarmonyToNote  =
       currentHarmony->
-        getUpLinkToHarmonyToNote ();
+        getHarmonyUpLinkToNote ();
 
   // get the currentHarmony's note uplink position in the measure
   rational
@@ -4432,7 +4432,7 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
   S_msrNote
     currentUpLinkToHarmonyToNote  =
       currentHarmony->
-        getUpLinkToHarmonyToNote ();
+        getHarmonyUpLinkToNote ();
 
   // compute the measure overflow whole notes
   rational
@@ -4801,7 +4801,7 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
   S_msrNote
     currentUpLinkToHarmonyToNote  =
       currentHarmony->
-        getUpLinkToHarmonyToNote ();
+        getHarmonyUpLinkToNote ();
 
 #ifdef TRACING_IS_ENABLED
   // get the currentHarmony's note uplink position in the measure
@@ -5124,7 +5124,7 @@ void msrMeasure::postHandleCurrentFiguredBassElementInFiguredBassMeasure (
   S_msrNote
     currentFiguredBassUpLinkToNote  =
       currentFiguredBass->
-        getFiguredBassUpLinkToNote ();
+        getFiguredBassElementUpLinkToNote ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
@@ -5369,7 +5369,7 @@ void msrMeasure::finalizeFiguredBassElementsInFiguredBassMeasure (
         S_msrNote
           currentFiguredBassUpLinkToNote  =
             currentFiguredBass->
-              getFiguredBassUpLinkToNote ();
+              getFiguredBassElementUpLinkToNote ();
 
 #ifdef TRACING_IS_ENABLED
         // get the currentFiguredBass's note uplink position in the measure

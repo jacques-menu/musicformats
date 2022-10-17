@@ -189,22 +189,22 @@ class EXP msrFiguredBassElement : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplinks
-    void                  setFiguredBassUpLinkToNote (
+    void                  setFiguredBassElementUpLinkToNote (
                             S_msrNote note)
                               { fFiguredBassElementUpLinkToNote = note; }
 
-    S_msrNote             getFiguredBassUpLinkToNote () const
+    S_msrNote             getFiguredBassElementUpLinkToNote () const
                              { return fFiguredBassElementUpLinkToNote; }
 
-    void                  setFiguredBassUpLinkToVoice (
+    void                  setFiguredBassElementUpLinkToVoice (
                             S_msrVoice voice)
                               { fFiguredBassElementUpLinkToVoice = voice; }
 
-    S_msrVoice            getFiguredBassUpLinkToVoice () const
+    S_msrVoice            getFiguredBassElementUpLinkToVoice () const
                              { return fFiguredBassElementUpLinkToVoice; }
 
 /* JMI
-    S_msrPart             getFiguredBassUpLinkToPart () const
+    S_msrPart             getFiguredBassElementUpLinkToPart () const
                               { return fFiguredBassElementUpLinkToPart; }
 */
 

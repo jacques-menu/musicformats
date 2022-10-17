@@ -3281,7 +3281,7 @@ void msrNote::appendFiguredBassElementToNoteFiguredBassElementsList (
 
   // register this note as the figuredBassElement upLink
   figuredBassElement->
-    setFiguredBassUpLinkToNote (this);
+    setFiguredBassElementUpLinkToNote (this);
 }
 
 void msrNote::acceptIn (basevisitor* v)
