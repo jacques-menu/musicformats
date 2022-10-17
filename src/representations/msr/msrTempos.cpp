@@ -341,7 +341,7 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
 /* JMI
   // register note's tempoTuplet upLink
   note->
-    setNoteTempoTupletUpLink (this);
+    setNoteTempoUpLinkToTuplet (this);
 
   fTupletDisplayWholeNotes += // JMI
     note->getNoteDisplayWholeNotes ();

@@ -870,7 +870,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
     printSubGroupSpecificHelp (
       gLogStream,
       showHarmonyAnalysisAtom->
-        getSubGroupUpLink ());
+        getUpLinkToSubGroup ());
 */
   }
 

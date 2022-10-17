@@ -38,12 +38,12 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
   int        inputLineNumber,
-  S_msrVoice afterGraceNotesGroupContentsVoiceUpLink)
+  S_msrVoice afterGraceNotesGroupContentsUpLinkToVoice)
 {
   msrAfterGraceNotesGroupContents* o =
     new msrAfterGraceNotesGroupContents (
       inputLineNumber,
-      afterGraceNotesGroupContentsVoiceUpLink);
+      afterGraceNotesGroupContentsUpLinkToVoice);
   assert (o != nullptr);
 
   return o;
@@ -51,31 +51,31 @@ S_msrAfterGraceNotesGroupContents msrAfterGraceNotesGroupContents::create (
 
 msrAfterGraceNotesGroupContents::msrAfterGraceNotesGroupContents (
   int        inputLineNumber,
-  S_msrVoice afterGraceNotesGroupContentsVoiceUpLink)
+  S_msrVoice afterGraceNotesGroupContentsUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    afterGraceNotesGroupContentsVoiceUpLink != nullptr,
-    "afterGraceNotesGroupContentsVoiceUpLink is null");
+    afterGraceNotesGroupContentsUpLinkToVoice != nullptr,
+    "afterGraceNotesGroupContentsUpLinkToVoice is null");
 
   // set after notes contents's voice upLink
-  fAfterGraceNotesGroupContentsVoiceUpLink =
-    afterGraceNotesGroupContentsVoiceUpLink;
+  fAfterGraceNotesGroupContentsUpLinkToVoice =
+    afterGraceNotesGroupContentsUpLinkToVoice;
 }
 
 msrAfterGraceNotesGroupContents::~msrAfterGraceNotesGroupContents ()
 {}
 
-S_msrPart msrAfterGraceNotesGroupContents::fetchAfterGraceNotesGroupContentsPartUpLink () const
+S_msrPart msrAfterGraceNotesGroupContents::fetchAfterGraceNotesGroupContentsUpLinkToPart () const
 {
   S_msrPart result;
 
-  if (fAfterGraceNotesGroupContentsVoiceUpLink) {
+  if (fAfterGraceNotesGroupContentsUpLinkToVoice) {
     result =
-      fAfterGraceNotesGroupContentsVoiceUpLink->
-        fetchVoicePartUpLink ();
+      fAfterGraceNotesGroupContentsUpLinkToVoice->
+        fetchVoiceUpLinkToPart ();
   }
 
   return result;
@@ -252,14 +252,14 @@ S_msrAfterGraceNotesGroup msrAfterGraceNotesGroup::create (
   int          inputLineNumber,
   S_msrElement afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
-  S_msrVoice   afterGraceNotesGroupVoiceUpLink)
+  S_msrVoice   afterGraceNotesGroupUpLinkToVoice)
 {
   msrAfterGraceNotesGroup* o =
     new msrAfterGraceNotesGroup (
       inputLineNumber,
       afterGraceNotesGroupElement,
       afterGraceNotesGroupIsSlashed,
-      afterGraceNotesGroupVoiceUpLink);
+      afterGraceNotesGroupUpLinkToVoice);
   assert (o != nullptr);
 
   return o;
@@ -269,18 +269,18 @@ msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
   int          inputLineNumber,
   S_msrElement afterGraceNotesGroupElement,
   Bool         afterGraceNotesGroupIsSlashed,
-  S_msrVoice   afterGraceNotesGroupVoiceUpLink)
+  S_msrVoice   afterGraceNotesGroupUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    afterGraceNotesGroupVoiceUpLink != nullptr,
-    "afterGraceNotesGroupVoiceUpLink is null");
+    afterGraceNotesGroupUpLinkToVoice != nullptr,
+    "afterGraceNotesGroupUpLinkToVoice is null");
 
   // set after gracenotes group voice upLink
-  fAfterGraceNotesGroupVoiceUpLink =
-    afterGraceNotesGroupVoiceUpLink;
+  fAfterGraceNotesGroupUpLinkToVoice =
+    afterGraceNotesGroupUpLinkToVoice;
 
   // pupulate this after grace notes group
   fAfterGraceNotesGroupElement =
@@ -293,20 +293,20 @@ msrAfterGraceNotesGroup::msrAfterGraceNotesGroup (
   fAfterGraceNotesGroupContents =
     msrAfterGraceNotesGroupContents::create (
       inputLineNumber,
-      afterGraceNotesGroupVoiceUpLink);
+      afterGraceNotesGroupUpLinkToVoice);
 }
 
 msrAfterGraceNotesGroup::~msrAfterGraceNotesGroup ()
 {}
 
-S_msrPart msrAfterGraceNotesGroup::fetchAfterGraceNotesGroupPartUpLink () const
+S_msrPart msrAfterGraceNotesGroup::fetchAfterGraceNotesGroupUpLinkToPart () const
 {
   S_msrPart result;
 
-  if (fAfterGraceNotesGroupVoiceUpLink) {
+  if (fAfterGraceNotesGroupUpLinkToVoice) {
     result =
-      fAfterGraceNotesGroupVoiceUpLink->
-        fetchVoicePartUpLink ();
+      fAfterGraceNotesGroupUpLinkToVoice->
+        fetchVoiceUpLinkToPart ();
   }
 
   return result;

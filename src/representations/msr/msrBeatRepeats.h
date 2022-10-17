@@ -31,7 +31,7 @@ class EXP msrBeatRepeatPattern : public msrElement
 
     static SMARTP<msrBeatRepeatPattern> create (
                             int              inputLineNumber,
-                            S_msrBeatRepeat beatRepeatUpLink);
+                            S_msrBeatRepeat upLinkToBeatRepeat);
 
     SMARTP<msrBeatRepeatPattern> createBeatRepeatPatternNewbornClone (
                             S_msrVoice containingVoice);
@@ -46,7 +46,7 @@ class EXP msrBeatRepeatPattern : public msrElement
 
                           msrBeatRepeatPattern (
                             int              inputLineNumber,
-                            S_msrBeatRepeat beatRepeatUpLink);
+                            S_msrBeatRepeat upLinkToBeatRepeat);
 
     virtual               ~msrBeatRepeatPattern ();
 
@@ -63,8 +63,8 @@ class EXP msrBeatRepeatPattern : public msrElement
                               { return fBeatRepeatPatternSegment; }
 
     // upLinks
-    S_msrBeatRepeat       getBeatRepeatUpLink () const
-                            { return fBeatRepeatUpLink; }
+    S_msrBeatRepeat       getUpLinkToBeatRepeat () const
+                            { return fUpLinkToBeatRepeat; }
 
   public:
 
@@ -101,7 +101,7 @@ class EXP msrBeatRepeatPattern : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrBeatRepeat       fBeatRepeatUpLink;
+    S_msrBeatRepeat       fUpLinkToBeatRepeat;
 
     // segment
     S_msrSegment          fBeatRepeatPatternSegment;
@@ -119,7 +119,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
 
     static SMARTP<msrBeatRepeatReplicas> create (
                             int              inputLineNumber,
-                            S_msrBeatRepeat beatRepeatUpLink);
+                            S_msrBeatRepeat upLinkToBeatRepeat);
 
     SMARTP<msrBeatRepeatReplicas> createBeatRepeatReplicasNewbornClone (
                             S_msrVoice containingVoice);
@@ -134,7 +134,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
 
                           msrBeatRepeatReplicas (
                             int              inputLineNumber,
-                            S_msrBeatRepeat beatRepeatUpLink);
+                            S_msrBeatRepeat upLinkToBeatRepeat);
 
     virtual               ~msrBeatRepeatReplicas ();
 
@@ -144,8 +144,8 @@ class EXP msrBeatRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrBeatRepeat       getBeatRepeatUpLink () const
-                            { return fBeatRepeatUpLink; }
+    S_msrBeatRepeat       getUpLinkToBeatRepeat () const
+                            { return fUpLinkToBeatRepeat; }
     // segment
     void                  setBeatRepeatReplicasSegment (
                             S_msrSegment beatRepeatReplicasSegment);
@@ -190,7 +190,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrBeatRepeat       fBeatRepeatUpLink;
+    S_msrBeatRepeat       fUpLinkToBeatRepeat;
 
     // segment
     S_msrSegment          fBeatRepeatReplicasSegment;
@@ -231,7 +231,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
                             int        inputLineNumber,
                             int        beatRepeatMeasuresNumber,
                             int        beatRepeatSlashesNumber,
-                            S_msrVoice voiceUpLink);
+                            S_msrVoice upLinkToVoice);
 
     SMARTP<msrBeatRepeat> createBeatRepeatNewbornClone (
                             S_msrVoice containingVoice);
@@ -248,7 +248,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
                             int        inputLineNumber,
                             int        beatRepeatMeasuresNumber,
                             int        beatRepeatSlashesNumber,
-                            S_msrVoice voiceUpLink);
+                            S_msrVoice upLinkToVoice);
 
     virtual               ~msrBeatRepeat ();
 
@@ -258,8 +258,8 @@ class EXP msrBeatRepeat : public msrSegmentElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            getBeatRepeatVoiceUpLink () const
-                            { return fBeatRepeatVoiceUpLink; }
+    S_msrVoice            getUpLinkToBeatRepeatToVoice () const
+                            { return fUpLinkToBeatRepeatToVoice; }
 
     // numbers
     int                   getBeatRepeatMeasuresNumber () const
@@ -345,7 +345,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            fBeatRepeatVoiceUpLink;
+    S_msrVoice            fUpLinkToBeatRepeatToVoice;
 
     // numbers
     int                   fBeatRepeatMeasuresNumber;

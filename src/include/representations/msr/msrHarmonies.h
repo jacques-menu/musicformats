@@ -66,11 +66,11 @@ class EXP msrHarmonyDegree : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setHarmonyDegreeHarmonyUpLink (
-                            S_msrHarmony harmonyUpLink);
+    void                  setHarmonyDegreeUpLinkToHarmony (
+                            S_msrHarmony UpLinkToHarmony);
 
-    S_msrHarmony          getHarmonyDegreeHarmonyUpLink () const
-                              { return fHarmonyDegreeHarmonyUpLink; }
+    S_msrHarmony          getHarmonyDegreeUpLinkToHarmony () const
+                              { return fHarmonyDegreeUpLinkToHarmony; }
 
     int                   getHarmonyDegreeValue () const
                               { return fHarmonyDegreeValue; }
@@ -117,7 +117,7 @@ class EXP msrHarmonyDegree : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrHarmony          fHarmonyDegreeHarmonyUpLink;
+    S_msrHarmony          fHarmonyDegreeUpLinkToHarmony;
 
     int                   fHarmonyDegreeValue;
     msrAlterationKind     fHarmonyDegreeAlterationKind;
@@ -137,7 +137,7 @@ class EXP msrHarmony : public msrMeasureElement
 
     static SMARTP<msrHarmony> createWithoutVoiceUplink (
                             int                      inputLineNumber,
-                            // no harmoniesVoiceUpLink yet
+                            // no harmoniesUpLinkToVoice yet
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
                             const string&            harmonyKindText,
@@ -160,7 +160,7 @@ class EXP msrHarmony : public msrMeasureElement
 
     static SMARTP<msrHarmony> createWithVoiceUplink (
                             int                      inputLineNumber,
-                            S_msrVoice               harmoniesVoiceUpLink,
+                            S_msrVoice               harmoniesUpLinkToVoice,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
                             const string&            harmonyKindText,
@@ -179,7 +179,7 @@ class EXP msrHarmony : public msrMeasureElement
 
                           msrHarmony (
                             int                      inputLineNumber,
-                            S_msrVoice               harmoniesVoiceUpLink,
+                            S_msrVoice               harmoniesUpLinkToVoice,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
                             const string&            harmonyKindText,
@@ -199,17 +199,17 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplinks
-    void                  setHarmonyNoteUpLink (S_msrNote note);
+    void                  setUpLinkToHarmonyToNote (S_msrNote note);
 
-    S_msrNote             getHarmonyNoteUpLink () const
-                             { return fHarmonyNoteUpLink; }
+    S_msrNote             getUpLinkToHarmonyToNote () const
+                             { return fUpLinkToHarmonyToNote; }
 
-    void                  setHarmoniesVoiceUpLink (
+    void                  setHarmoniesUpLinkToVoice (
                             S_msrVoice voice)
-                              { fHarmoniesVoiceUpLink = voice; }
+                              { fHarmoniesUpLinkToVoice = voice; }
 
-    S_msrVoice            getHarmoniesVoiceUpLink () const
-                             { return fHarmoniesVoiceUpLink; }
+    S_msrVoice            getHarmoniesUpLinkToVoice () const
+                             { return fHarmoniesUpLinkToVoice; }
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
@@ -320,8 +320,8 @@ class EXP msrHarmony : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplinks
-    S_msrNote             fHarmonyNoteUpLink;
-    S_msrVoice            fHarmoniesVoiceUpLink; // for use in harmonies voices JMI
+    S_msrNote             fUpLinkToHarmonyToNote;
+    S_msrVoice            fHarmoniesUpLinkToVoice; // for use in harmonies voices JMI
 
     // whole notes
     rational              fHarmonyDisplayWholeNotes;

@@ -35,12 +35,12 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     static SMARTP<msrMultipleFullBarRests> create (
                             int             inputLineNumber,
                             int             multipleFullBarRestsNumber,
-                            S_msrSegment    segmentUpLink);
+                            S_msrSegment    upLinkToSegment);
 
     static SMARTP<msrMultipleFullBarRests> create (
                             int          inputLineNumber,
                             S_msrMeasure restMeasureClone,
-                            S_msrSegment segmentUpLink);
+                            S_msrSegment upLinkToSegment);
 
     SMARTP<msrMultipleFullBarRests> createMultipleFullBarRestsNewbornClone (
                               S_msrSegment containingVoice);
@@ -53,12 +53,12 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
                           msrMultipleFullBarRests (
                             int             inputLineNumber,
                             int             multipleFullBarRestsNumber,
-                            S_msrSegment    segmentUpLink);
+                            S_msrSegment    upLinkToSegment);
 
                           msrMultipleFullBarRests (
                             int          inputLineNumber,
                             S_msrMeasure restMeasureClone,
-                            S_msrSegment segmentUpLink);
+                            S_msrSegment upLinkToSegment);
 
     virtual               ~msrMultipleFullBarRests ();
 
@@ -67,8 +67,8 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // set and get
     // ------------------------------------------------------
 
-    S_msrSegment          getMultipleFullBarRestsSegmentUpLink () const
-                            { return fMultipleFullBarRestsSegmentUpLink; }
+    S_msrSegment          getMultipleFullBarRestsUpLinkToSegment () const
+                            { return fMultipleFullBarRestsUpLinkToSegment; }
 
     int                   getMultipleFullBarRestsNumber () const
                               { return fMultipleFullBarRestsNumber; }
@@ -142,7 +142,7 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrSegment          fMultipleFullBarRestsSegmentUpLink;
+    S_msrSegment          fMultipleFullBarRestsUpLinkToSegment;
 
     int                   fMultipleFullBarRestsNumber; // supplied by MusicXML
     list<S_msrMeasure>    fFullBarRestsMeasuresList;

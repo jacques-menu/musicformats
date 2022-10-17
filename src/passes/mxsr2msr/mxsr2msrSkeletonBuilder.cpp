@@ -573,13 +573,13 @@ void mxsr2msrSkeletonBuilder::showPartsVector (
         ", upLink to: ";
 
       S_msrPartGroup
-        partPartGroupUpLink =
+        PartUpLinkToPartGroup =
           part->
-            getPartPartGroupUpLink ();
+            getPartUpLinkToPartGroup ();
 
-      if (partPartGroupUpLink) {
+      if (PartUpLinkToPartGroup) {
         gLogStream <<
-          partPartGroupUpLink->
+          PartUpLinkToPartGroup->
             getPartGroupCombinedName ();
       }
       else {
@@ -1008,7 +1008,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
         fCurrentPartGroupSymbolDefaultX,
         msrPartGroup::kPartGroupImplicitNo,
         fCurrentPartGroupBarLineKind,
-        nullptr, // partGroupPartGroupUpLink will be set upon 'stop'
+        nullptr, // partGroupUpLinkToPartGroup will be set upon 'stop'
         fMsrScore);
 
   // partGroupToBeStarted will be appended to the MSR score
@@ -1127,7 +1127,7 @@ void mxsr2msrSkeletonBuilder::doNestPartGroupDescrInItsContainer (
 #endif
 
   partGroupToBeStopped->
-    setPartGroupPartGroupUpLink (
+    setPartGroupUpLinkToPartGroup (
       containingPartGroup);
 
   // appending currentPartGroup to containingPartGroupDescr
@@ -1653,28 +1653,28 @@ S_msrVoice mxsr2msrSkeletonBuilder::fetchFirstRegularVoiceFromStaff (
   return voice;
 }
 
-//______________________________________________________________________________
-S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceHarmoniesVoiceIfNotYetDone (
-  int        inputLineNumber,
-  S_msrVoice voice)
-{
-  // is the harmonies voice already present in voice?
-  S_msrVoice
-    harmoniesVoice =
-      voice->
-        getRegularVoiceHarmoniesVoiceForwardLink ();
-
-  if (! harmoniesVoice) {
-    // create the voice and append it to the staff
-    harmoniesVoice =
-      voice->
-        createRegularVoiceHarmoniesVoice (
-          inputLineNumber,
-          fCurrentMeasureNumber);
-  }
-
-  return harmoniesVoice;
-}
+// //______________________________________________________________________________
+// S_msrVoice mxsr2msrSkeletonBuilder::createRegularVoiceHarmoniesVoiceIfNotYetDone ( JMI v0.9.66
+//   int        inputLineNumber,
+//   S_msrVoice voice)
+// {
+//   // is the harmonies voice already present in voice?
+//   S_msrVoice
+//     harmoniesVoice =
+//       voice->
+//         getRegularVoiceForwardLinkToHarmoniesVoice ();
+//
+//   if (! harmoniesVoice) {
+//     // create the voice and append it to the staff
+//     harmoniesVoice =
+//       voice->
+//         createRegularVoiceHarmoniesVoice (
+//           inputLineNumber,
+//           fCurrentMeasureNumber);
+//   }
+//
+//   return harmoniesVoice;
+// }
 
 S_msrVoice mxsr2msrSkeletonBuilder::createPartHarmoniesVoiceIfNotYetDone (
   int        inputLineNumber,
@@ -1771,7 +1771,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart ( S_work_number& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_work_number& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1791,7 +1791,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_work_number& elt )
       elt->getValue ());
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_work_title& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1813,7 +1813,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_work_title& elt )
       workTitle);
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_opus& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1835,7 +1835,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_opus& elt )
       opus);
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_movement_number& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_movement_number& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1855,7 +1855,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_movement_number& elt )
       elt->getValue ());
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_movement_title& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_movement_title& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1884,7 +1884,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_movement_title& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart ( S_identification& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_identification& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -1899,7 +1899,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_identification& elt )
 #endif
 }
 
-void mxsr2msrSkeletonBuilder::visitEnd ( S_identification& elt )
+void mxsr2msrSkeletonBuilder::visitEnd (S_identification& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -1914,7 +1914,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_identification& elt )
 #endif
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_creator& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_creator& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1997,7 +1997,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_creator& elt )
   }
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_rights& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_rights& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2021,7 +2021,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_rights& elt )
       rightsValue);
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_source& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_source& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2047,7 +2047,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_source& elt )
       */
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_relation& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_relation& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2097,7 +2097,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_encoding& elt)
   fScoreNumberOfMeasures = 0;
 }
 
-void mxsr2msrSkeletonBuilder::visitEnd ( S_encoding& elt )
+void mxsr2msrSkeletonBuilder::visitEnd (S_encoding& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2112,7 +2112,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_encoding& elt )
 #endif
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_encoding_date& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_encoding_date& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2132,7 +2132,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_encoding_date& elt )
       elt->getValue ());
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_encoder& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_encoder& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2154,7 +2154,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_encoder& elt )
       */
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_software& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_software& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2184,7 +2184,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_software& elt )
       S_oahElement
         cubaseOption =
           gGlobalMxsrOahGroup->
-            getHandlerUpLink ()->
+            getUpLinkToHandler ()->
               fetchNameInNamesToElementsMap ("cubase");
 
       if (
@@ -2216,7 +2216,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_software& elt )
       softwareValue);
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_encoding_description& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_encoding_description& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2238,7 +2238,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_encoding_description& elt )
       */
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_supports& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_supports& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2261,7 +2261,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_supports& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart ( S_miscellaneous& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2289,7 +2289,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_miscellaneous& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitEnd ( S_miscellaneous& elt )
+void mxsr2msrSkeletonBuilder::visitEnd (S_miscellaneous& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -2305,7 +2305,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_miscellaneous& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart ( S_miscellaneous_field& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_miscellaneous_field& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2403,7 +2403,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_miscellaneous_field& elt )
 >
 */
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_credit& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_credit& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2431,7 +2431,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_credit& elt )
     appendCreditToScore (fCurrentCredit);
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_credit_type& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2476,7 +2476,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_credit_type& elt )
     setCreditTypeKind (creditTypeKind);
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_credit_symbol& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_credit_symbol& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2491,7 +2491,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_credit_symbol& elt )
 #endif
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_credit_image& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_credit_image& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2506,7 +2506,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_credit_image& elt )
 #endif
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_credit_words& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_credit_words& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2635,7 +2635,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_credit_words& elt )
       creditWords);
 }
 
-void mxsr2msrSkeletonBuilder::visitEnd ( S_credit& elt )
+void mxsr2msrSkeletonBuilder::visitEnd (S_credit& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2986,7 +2986,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
     elt->getAttributeIntValue ("default-x", 0);
 }
 
-void mxsr2msrSkeletonBuilder::visitStart ( S_group_barline& elt)
+void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3336,7 +3336,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_part& elt)
       msrPart::create (
         inputLineNumber,
         fCurrentPartID,
-        0); // partPartGroupUpLink will be set later
+        0); // PartUpLinkToPartGroup will be set later
 
   // populate it
   part->
@@ -3693,7 +3693,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_staff& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3715,7 +3715,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_voice& elt )
 
   // don't attempt to create the voice now,
   // it's staff number if any comes later!
-  // do it upton visitEnd ( S_note& )
+  // do it upton visitEnd (S_note& )
 }
 
 //________________________________________________________________________
@@ -3808,7 +3808,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_print& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart ( S_note& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_note& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3832,7 +3832,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_note& elt )
   fOnGoingNote = true;
 }
 
-void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
+void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3933,7 +3933,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_note& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -4026,7 +4026,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_lyric& elt )
   }
 }
 
-void mxsr2msrSkeletonBuilder::visitEnd ( S_lyric& elt )
+void mxsr2msrSkeletonBuilder::visitEnd (S_lyric& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -4044,7 +4044,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_lyric& elt )
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       endl <<
-      "visitEnd ( S_lyric& )" <<
+      "visitEnd (S_lyric& )" <<
       ", line = " << inputLineNumber <<
       ", with:" <<
       endl;
@@ -4093,7 +4093,7 @@ void mxsr2msrSkeletonBuilder::visitEnd ( S_lyric& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_harmony& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4117,7 +4117,7 @@ void mxsr2msrSkeletonBuilder::visitStart ( S_harmony& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrSkeletonBuilder::visitStart ( S_figured_bass& elt )
+void mxsr2msrSkeletonBuilder::visitStart (S_figured_bass& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {

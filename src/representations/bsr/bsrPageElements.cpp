@@ -50,19 +50,19 @@ bsrPageElement::~bsrPageElement ()
 {}
 
 /*
-void bsrPageElement::setBsrLineUpLink (
-S_bsrLine bsrLineUpLink)
+void bsrPageElement::setUpLinkToBsrLine (
+S_bsrLine upLinkToBsrLine)
 {
-  fBsrLineUpLink = bsrLineUpLink;
+  fUpLinkToBsrLine = upLinkToBsrLine;
 }
 
-S_bsrLine bsrPageElement::getBsrLineUpLink () const
+S_bsrLine bsrPageElement::getUpLinkToBsrLine () const
 {
   S_msrVoice result;
 
-  if (fNoteDirectMeasureUpLink) {
+  if (fNoteDirectUpLinkToMeasure) {
     result =
-  return fBsrLineUpLink;
+  return fUpLinkToBsrLine;
   }
 
   return result;
@@ -150,7 +150,7 @@ ostream& operator<< (ostream& os, const S_bsrPageElement& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

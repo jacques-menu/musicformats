@@ -2760,7 +2760,7 @@ void msr2bsrTranslator::visitStart (S_msrHarmony& elt)
   if (fOnGoingNote) {
     // register this note as the harmony note upLink
     harmony->
-      setHarmonyNoteUpLink (fOnGoingNote);
+      setUpLinkToHarmonyToNote (fOnGoingNote);
 
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
@@ -3002,7 +3002,7 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
   S_msrVoice
     voice =
       fCurrentMeasureClone->
-        fetchMeasureVoiceUpLink ();
+        fetchMeasureUpLinkToVoice ();
 
   // get the measure number
   string
@@ -3128,7 +3128,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
           "measure '" << measureNumber <<
           "' in voice \"" <<
           elt->
-            fetchMeasureVoiceUpLink ()->
+            fetchMeasureUpLinkToVoice ()->
               getVoiceName () <<
           "\" is of unknown kind in msr2bsrTranslator";
 
@@ -3287,7 +3287,7 @@ void msr2bsrTranslator::visitStart (S_msrSyllable& elt)
   else if (fOnGoingNote) { // JMI
     // visiting a syllable as attached to the current non-grace note
     fCurrentSyllableClone->
-      appendSyllableToNoteAndSetItsNoteUpLink (
+      appendSyllableToNoteAndSetItsUpLinkToNote (
         fCurrentNonGraceNoteClone);
 
     if (gGlobalBsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
@@ -4292,7 +4292,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   S_msrNote
     noteNotesGroupIsAttachedTo =
       elt->
-        getGraceNotesGroupNoteUpLink ();
+        getGraceNotesGroupUpLinkToNote ();
 
   if (! noteNotesGroupIsAttachedTo) {
     stringstream s;
@@ -5708,7 +5708,7 @@ void msr2bsrTranslator::visitStart (S_msrRepeat& elt)
       ", line " << inputLineNumber <<
       ", in voice \"" <<
       elt->
-        getRepeatVoiceUpLink ()->
+        getRepeatUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       endl;
@@ -5850,7 +5850,7 @@ void msr2bsrTranslator::visitEnd (S_msrRepeatCommonPart& elt)
     createRepeatUponItsEndAndAppendItToVoiceClone ( // JMI
       inputLineNumber,
       elt->
-        getRepeatCommonPartRepeatUpLink ()->
+        getRepeatCommonPartUpLinkToRepeat ()->
           getRepeatTimes ());
 }
 
@@ -5986,7 +5986,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasureRepeatPattern& elt)
   // get the measures repeat upLink
   S_msrMeasureRepeat
     measureRepeat =
-      elt->getMeasureRepeatUpLink ();
+      elt->getUpLinkToMeasureRepeat ();
 
   // create a measures repeat and append it to voice clone
 #ifdef TRACING_IS_ENABLED

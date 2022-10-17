@@ -18,7 +18,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
 
     static SMARTP<msrAfterGraceNotesGroupContents> create (
                             int        inputLineNumber,
-                            S_msrVoice afterGraceNotesGroupContentsVoiceUpLink);
+                            S_msrVoice afterGraceNotesGroupContentsUpLinkToVoice);
 
     SMARTP<msrAfterGraceNotesGroupContents> createAfterGraceNotesGroupContentsNewbornClone (
                             S_msrVoice containingVoice);
@@ -33,7 +33,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
 
                           msrAfterGraceNotesGroupContents (
                             int        inputLineNumber,
-                            S_msrVoice afterGraceNotesGroupContentsVoiceUpLink);
+                            S_msrVoice afterGraceNotesGroupContentsUpLinkToVoice);
 
     virtual               ~msrAfterGraceNotesGroupContents ();
 
@@ -55,7 +55,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrPart             fetchAfterGraceNotesGroupContentsPartUpLink () const;
+    S_msrPart             fetchAfterGraceNotesGroupContentsUpLinkToPart () const;
 
     // notes
     void                  appendNoteToAfterGraceNotesGroupContents (
@@ -88,7 +88,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            fAfterGraceNotesGroupContentsVoiceUpLink;
+    S_msrVoice            fAfterGraceNotesGroupContentsUpLinkToVoice;
 
     // the notes list
     list<S_msrMeasureElement>
@@ -109,7 +109,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
                             int          inputLineNumber,
                             S_msrElement afterGraceNotesGroupElement,
                             Bool         afterGraceNotesGroupIsSlashed,
-                            S_msrVoice   afterGraceNotesGroupVoiceUpLink);
+                            S_msrVoice   afterGraceNotesGroupUpLinkToVoice);
 
     SMARTP<msrAfterGraceNotesGroup> createAfterGraceNotesGroupNewbornClone (
                             S_msrNote  noteClone,
@@ -128,7 +128,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
                             int          inputLineNumber,
                             S_msrElement afterGraceNotesGroupElement,
                             Bool         afterGraceNotesGroupIsSlashed,
-                            S_msrVoice   afterGraceNotesGroupVoiceUpLink);
+                            S_msrVoice   afterGraceNotesGroupUpLinkToVoice);
 
     virtual               ~msrAfterGraceNotesGroup ();
 
@@ -150,7 +150,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrPart             fetchAfterGraceNotesGroupPartUpLink () const;
+    S_msrPart             fetchAfterGraceNotesGroupUpLinkToPart () const;
 
     // notes
     void                  appendNoteToAfterGraceNotesGroupContents (
@@ -181,7 +181,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            fAfterGraceNotesGroupVoiceUpLink;
+    S_msrVoice            fAfterGraceNotesGroupUpLinkToVoice;
 
     S_msrElement          fAfterGraceNotesGroupElement;
 

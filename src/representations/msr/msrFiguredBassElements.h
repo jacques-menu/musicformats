@@ -45,7 +45,7 @@ class EXP msrBassFigure : public msrElement
 
     static SMARTP<msrBassFigure> create (
       int                 inputLineNumber,
-      S_msrPart           figurePartUpLink,
+      S_msrPart           figureUpLinkToPart,
       msrBassFigurePrefixKind figurePrefixKind,
       int                 figureNumber,
       msrBassFigureSuffixKind figureSuffixKind);
@@ -63,7 +63,7 @@ class EXP msrBassFigure : public msrElement
 
     msrBassFigure (
       int                 inputLineNumber,
-      S_msrPart           figurePartUpLink,
+      S_msrPart           figureUpLinkToPart,
       msrBassFigurePrefixKind figurePrefixKind,
       int                 figureNumber,
       msrBassFigureSuffixKind figureSuffixKind);
@@ -75,8 +75,8 @@ class EXP msrBassFigure : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    S_msrPart             getFigurePartUpLink () const
-                              { return fFigurePartUpLink; }
+    S_msrPart             getFigureUpLinkToPart () const
+                              { return fFigureUpLinkToPart; }
 
     msrBassFigurePrefixKind
                           getFigurePrefixKind () const
@@ -122,7 +122,7 @@ class EXP msrBassFigure : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrPart             fFigurePartUpLink;
+    S_msrPart             fFigureUpLinkToPart;
 
     msrBassFigurePrefixKind
                           fFigurePrefixKind;
@@ -189,23 +189,23 @@ class EXP msrFiguredBassElement : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplinks
-    void                  setFiguredBassNoteUpLink (
+    void                  setFiguredBassUpLinkToNote (
                             S_msrNote note)
-                              { fFiguredBassElementNoteUpLink = note; }
+                              { fFiguredBassElementUpLinkToNote = note; }
 
-    S_msrNote             getFiguredBassNoteUpLink () const
-                             { return fFiguredBassElementNoteUpLink; }
+    S_msrNote             getFiguredBassUpLinkToNote () const
+                             { return fFiguredBassElementUpLinkToNote; }
 
-    void                  setFiguredBassVoiceUpLink (
+    void                  setFiguredBassUpLinkToVoice (
                             S_msrVoice voice)
-                              { fFiguredBassElementVoiceUpLink = voice; }
+                              { fFiguredBassElementUpLinkToVoice = voice; }
 
-    S_msrVoice            getFiguredBassVoiceUpLink () const
-                             { return fFiguredBassElementVoiceUpLink; }
+    S_msrVoice            getFiguredBassUpLinkToVoice () const
+                             { return fFiguredBassElementUpLinkToVoice; }
 
 /* JMI
-    S_msrPart             getFiguredBassPartUpLink () const
-                              { return fFiguredBassElementPartUpLink; }
+    S_msrPart             getFiguredBassUpLinkToPart () const
+                              { return fFiguredBassElementUpLinkToPart; }
 */
 
     // position in measure
@@ -271,8 +271,8 @@ class EXP msrFiguredBassElement : public msrMeasureElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrNote             fFiguredBassElementNoteUpLink;
-    S_msrVoice            fFiguredBassElementVoiceUpLink; // for use in figured bass voices JMI
+    S_msrNote             fFiguredBassElementUpLinkToNote;
+    S_msrVoice            fFiguredBassElementUpLinkToVoice; // for use in figured bass voices JMI
 
     rational              fFiguredBassElementDisplayWholeNotes;
 

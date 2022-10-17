@@ -83,17 +83,17 @@ msrHarmonyDegree::msrHarmonyDegree (
 msrHarmonyDegree::~msrHarmonyDegree ()
 {}
 
-void msrHarmonyDegree::setHarmonyDegreeHarmonyUpLink (
-  S_msrHarmony harmonyUpLink)
+void msrHarmonyDegree::setHarmonyDegreeUpLinkToHarmony (
+  S_msrHarmony UpLinkToHarmony)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    harmonyUpLink != nullptr,
-     "harmonyUpLink is null");
+    UpLinkToHarmony != nullptr,
+     "UpLinkToHarmony is null");
 
-  fHarmonyDegreeHarmonyUpLink =
-    harmonyUpLink;
+  fHarmonyDegreeUpLinkToHarmony =
+    UpLinkToHarmony;
 }
 
 /* JMI ???
@@ -279,7 +279,7 @@ ostream& operator<< (ostream& os, const S_msrHarmonyDegree& elt)
 //______________________________________________________________________________
 S_msrHarmony msrHarmony::createWithoutVoiceUplink (
   int                      inputLineNumber,
-  // no harmoniesVoiceUpLink yet
+  // no harmoniesUpLinkToVoice yet
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
   const string&            harmonyKindText,
@@ -312,7 +312,7 @@ S_msrHarmony msrHarmony::createWithoutVoiceUplink (
 
 S_msrHarmony msrHarmony::createWithVoiceUplink (
   int                      inputLineNumber,
-  S_msrVoice               harmoniesVoiceUpLink,
+  S_msrVoice               harmoniesUpLinkToVoice,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
   const string&            harmonyKindText,
@@ -327,7 +327,7 @@ S_msrHarmony msrHarmony::createWithVoiceUplink (
   msrHarmony* o =
     new msrHarmony (
       inputLineNumber,
-      harmoniesVoiceUpLink,
+      harmoniesUpLinkToVoice,
       harmonyRootQuarterTonesPitchKind,
       harmonyKind,
       harmonyKindText,
@@ -345,7 +345,7 @@ S_msrHarmony msrHarmony::createWithVoiceUplink (
 
 msrHarmony::msrHarmony (
   int                      inputLineNumber,
-  S_msrVoice               harmoniesVoiceUpLink,
+  S_msrVoice               harmoniesUpLinkToVoice,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
   const string&            harmonyKindText,
@@ -365,13 +365,13 @@ msrHarmony::msrHarmony (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    harmoniesVoiceUpLink != nullptr,
-     "harmoniesVoiceUpLink is null");
+    harmoniesUpLinkToVoice != nullptr,
+     "harmoniesUpLinkToVoice is null");
      */
 
   // set harmony's voice upLink
-  fHarmoniesVoiceUpLink =
-    harmoniesVoiceUpLink;
+  fHarmoniesUpLinkToVoice =
+    harmoniesUpLinkToVoice;
 
   fHarmonyRootQuarterTonesPitchKind =
     harmonyRootQuarterTonesPitchKind;
@@ -570,7 +570,7 @@ void msrHarmony::setHarmonyTupletFactor (
   fHarmonyTupletFactor = tupletFactor;
 }
 
-void msrHarmony::setHarmonyNoteUpLink (S_msrNote note)
+void msrHarmony::setUpLinkToHarmonyToNote (S_msrNote note)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -587,7 +587,7 @@ void msrHarmony::setHarmonyNoteUpLink (S_msrNote note)
     note != nullptr,
     "note is null");
 
-  fHarmonyNoteUpLink = note;
+  fUpLinkToHarmonyToNote = note;
 }
 
 void msrHarmony::setMeasureElementPositionInMeasure (
@@ -628,14 +628,14 @@ void msrHarmony::setMeasureElementPositionInMeasure (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fHarmonyNoteUpLink != nullptr,
-    "fHarmonyNoteUpLink is null");
+    fUpLinkToHarmonyToNote != nullptr,
+    "fUpLinkToHarmonyToNote is null");
 
   // compute harmony's position in voice
   S_msrMeasure
     measure =
-      fHarmonyNoteUpLink->
-        getNoteDirectMeasureUpLink ();
+      fUpLinkToHarmonyToNote->
+        getNoteDirectUpLinkToMeasure ();
 
   if (! measure) abort ();
 
@@ -666,11 +666,11 @@ void msrHarmony::setMeasureElementPositionInMeasure (
   S_msrVoice
     voice =
       measure->
-        fetchMeasureVoiceUpLink ();
+        fetchMeasureUpLinkToVoice ();
 
   voice->
     incrementCurrentPositionInVoice (
-      fHarmonyNoteUpLink->
+      fUpLinkToHarmonyToNote->
         getMeasureElementSoundingWholeNotes ());
 }
 
@@ -713,7 +713,7 @@ void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
       " to fill measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fHarmoniesVoiceUpLink->getVoiceName () <<
+      fHarmoniesUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       endl;
   }
@@ -873,9 +873,9 @@ string msrHarmony::asString () const
   }
 
   // print the harmony note uplink
-  s << ", fHarmonyNoteUpLink: ";
-  if (fHarmonyNoteUpLink) {
-    s << fHarmonyNoteUpLink;
+  s << ", fUpLinkToHarmonyToNote: ";
+  if (fUpLinkToHarmonyToNote) {
+    s << fUpLinkToHarmonyToNote;
   }
   else {
     s << "none";
@@ -1019,11 +1019,11 @@ void msrHarmony::print (ostream& os) const
   // print the harmony note uplink
   os <<
     setw (fieldWidth) <<
-    "fHarmonyNoteUpLink" << " : ";
-  if (fHarmonyNoteUpLink) {
+    "fUpLinkToHarmonyToNote" << " : ";
+  if (fUpLinkToHarmonyToNote) {
     os <<
       endl <<
-      gTab << fHarmonyNoteUpLink->asString ();
+      gTab << fUpLinkToHarmonyToNote->asString ();
   }
   else {
     os << "none";

@@ -318,19 +318,19 @@ enum class msrSpannerTypeKind {
 
 An uplink is a direct pointer from one class instance to one that contains it. \class{msrNote} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    S_msrChord            fNoteDirectChordUpLink;
-    S_msrGraceNotesGroup  fNoteDirectGraceNotesGroupUpLink;
-    S_msrTuplet           fNoteDirectTupletUpLink;
-    S_msrMeasure          fNoteDirectMeasureUpLink;
+    S_msrChord            fNoteDirectUpLinkToChord;
+    S_msrGraceNotesGroup  fNoteDirectUpLinkToGraceNotesGroup;
+    S_msrTuplet           fNoteDirectUpLinkToTuplet;
+    S_msrMeasure          fNoteDirectUpLinkToMeasure;
 \end{lstlisting}
 
 A sidelink is used in ligatures and spanners, so that each end of the structure can reference the other one:
 \begin{lstlisting}[language=CPlusPlus]
-msrLigatures.h:    S_msrLigature         fLigatureOtherEndSideLink; // two-way
+msrLigatures.h:    S_msrLigature         fLigatureSideLinkToOtherEnd; // two-way
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
-msrSpanners.h:    S_msrSpanner          fSpannerOtherEndSideLink; // two-way
+msrSpanners.h:    S_msrSpanner          fSpannerSideLinkToOtherEnd; // two-way
 \end{lstlisting}
 
 
@@ -1508,7 +1508,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
   // set result's ordinal number
   result->
     setMeasureOrdinalNumberInVoice (
-      fSegmentVoiceUpLink->
+      fSegmentUpLinkToVoice->
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
   // append result to the segment
@@ -1562,7 +1562,7 @@ class EXP msrBeatRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            fBeatRepeatVoiceUpLink;
+    S_msrVoice            fUpLinkToBeatRepeatToVoice;
 
     // numbers
     int                   fBeatRepeatMeasuresNumber;
@@ -1594,7 +1594,7 @@ class EXP msrBeatRepeatPattern : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrBeatRepeat      fBeatRepeatUpLink;
+    S_msrBeatRepeat      fUpLinkToBeatRepeat;
 
     // segment
     S_msrSegment          fBeatRepeatPatternSegment;
@@ -1613,7 +1613,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrBeatRepeat      fBeatRepeatUpLink;
+    S_msrBeatRepeat      fUpLinkToBeatRepeat;
 
     // segment
     S_msrSegment          fBeatRepeatReplicasSegment;
@@ -1639,7 +1639,7 @@ class EXP msrMeasureRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            fMeasureRepeatVoiceUpLink;
+    S_msrVoice            fUpLinkToMeasureRepeatToVoice;
 
     // numbers
     int                   fMeasureRepeatMeasuresNumber;
@@ -1671,7 +1671,7 @@ class EXP msrMeasureRepeatPattern : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrMeasureRepeat   fMeasureRepeatUpLink;
+    S_msrMeasureRepeat   fUpLinkToMeasureRepeat;
 
     // segment
     S_msrSegment          fMeasureRepeatPatternSegment;
@@ -1690,7 +1690,7 @@ class EXP msrMeasureRepeatReplicas : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrMeasureRepeat   fMeasureRepeatUpLink;
+    S_msrMeasureRepeat   fUpLinkToMeasureRepeat;
 
     // segment
     S_msrSegment          fMeasureRepeatReplicasSegment;
@@ -1715,7 +1715,7 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrSegment          fMultipleFullBarRestsSegmentUpLink;
+    S_msrSegment          fMultipleFullBarRestsUpLinkToSegment;
 
     int                   fMultipleFullBarRestsNumber; // supplied by MusicXML
     list<S_msrMeasure>    fFullBarRestsMeasuresList;
@@ -1794,7 +1794,7 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrRepeat           fRepeatCommonPartRepeatUpLink;
+    S_msrRepeat           fRepeatCommonPartUpLinkToRepeat;
 
     // elements list
     list<S_msrVoiceElement>
@@ -1817,7 +1817,7 @@ enum class msrRepeatEndingKind {
     // ------------------------------------------------------
 
     // upLinks
-    S_msrRepeat           fRepeatEndingRepeatUpLink;
+    S_msrRepeat           fRepeatEndingUpLinkToRepeat;
 
     // numbers
     string                fRepeatEndingNumber; // may be "1, 2"

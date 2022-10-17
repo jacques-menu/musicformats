@@ -174,7 +174,7 @@ string msrNoteEvent::asString () const
   S_msrVoice
     voice =
       fNoteEventNote->
-        fetchNoteVoiceUpLink ();
+        fetchUpLinkToNoteToVoice ();
 
   if (voice) {
     gLogStream <<
@@ -664,7 +664,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
             S_msrVoice
               voice =
                 note->
-                  fetchNoteVoiceUpLink ();
+                  fetchUpLinkToNoteToVoice ();
 
             if (voice) {
               gLogStream <<
@@ -692,7 +692,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
               S_msrVoice
                 voice =
                   note->
-                    fetchNoteVoiceUpLink ();
+                    fetchUpLinkToNoteToVoice ();
 
               if (voice) {
                 gLogStream <<
@@ -726,7 +726,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                 {
                   S_msrStaff
                     noteStaff =
-                      note->fetchNoteStaffUpLink ();
+                      note->fetchUpLinkToNoteToStaff ();
 
                   const list<S_msrVoice>&
                     staffRegularVoicesList =
@@ -761,7 +761,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                       S_msrVoice
                         voice =
                           note->
-                            fetchNoteVoiceUpLink ();
+                            fetchUpLinkToNoteToVoice ();
 
                       if (voice) {
                         gLogStream <<

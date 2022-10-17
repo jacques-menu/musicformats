@@ -179,7 +179,7 @@ void msrTuplet::setMeasureElementPositionInMeasure (
 #endif
 }
 
-S_msrMeasure msrTuplet::fetchTupletMeasureUpLink () const
+S_msrMeasure msrTuplet::fetchTupletUpLinkToMeasure () const
 {
   S_msrMeasure result;
 
@@ -188,14 +188,14 @@ S_msrMeasure msrTuplet::fetchTupletMeasureUpLink () const
       break;
 
     case msrTupletInKind::kTupletInMeasure:
-      result = fTupletDirectMeasureUpLink;
+      result = fTupletDirectUpLinkToMeasure;
       break;
 
     case msrTupletInKind::kTupletInTuplet:
-      if (fTupletDirectTupletUpLink) {
+      if (fTupletDirectUpLinkToTuplet) {
         result =
-          fTupletDirectTupletUpLink->
-            fetchTupletMeasureUpLink ();
+          fTupletDirectUpLinkToTuplet->
+            fetchTupletUpLinkToMeasure ();
       }
       break;
   } // switch
@@ -204,7 +204,7 @@ S_msrMeasure msrTuplet::fetchTupletMeasureUpLink () const
 }
 
 // tuplet upLink
-S_msrTuplet msrTuplet::fetchTupletTupletUpLink () const
+S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
 {
   S_msrTuplet result;
 
@@ -216,7 +216,7 @@ S_msrTuplet msrTuplet::fetchTupletTupletUpLink () const
       break;
 
     case msrTupletInKind::kTupletInTuplet:
-      result = fTupletDirectTupletUpLink;
+      result = fTupletDirectUpLinkToTuplet;
       break;
   } // switch
 
@@ -353,11 +353,11 @@ void msrTuplet::appendNoteToTuplet (
 
   // register note's tuplet upLink
   note->
-    setNoteDirectTupletUpLink (this);
+    setNoteDirectUpLinkToTuplet (this);
 
   // register note's measure upLink // JMI ???
   note->
-    setNoteDirectMeasureUpLink (fTupletDirectMeasureUpLink);
+    setNoteDirectUpLinkToMeasure (fTupletDirectUpLinkToMeasure);
 
   // account for note duration in tuplet duration
   fMeasureElementSoundingWholeNotes +=
@@ -617,8 +617,8 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       note <<
       " from tuplet " << asString () <<
       " in voice \"" <<
-      fTupletDirectMeasureUpLink->
-        fetchMeasureVoiceUpLink ()->
+      fTupletDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"," <<
       " since this note has not been found in fTupletElementsList";
@@ -637,8 +637,8 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
     s <<
       "cannot remove the first note of an empty tuplet " <<
       " in voice \"" <<
-      fTupletDirectMeasureUpLink->
-        fetchMeasureVoiceUpLink ()->
+      fTupletDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"";
 
@@ -706,8 +706,8 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
     s <<
       "cannot remove the last note of an empty tuplet " <<
       " in voice \"" <<
-      fTupletDirectMeasureUpLink->
-        fetchMeasureVoiceUpLink ()->
+      fTupletDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"";
 
@@ -764,7 +764,7 @@ if (false) { // JMI
   // compute tuplet's position in voice
   rational
      positionInVoice =
-      fTupletDirectMeasureUpLink->getMeasurePositionInVoice ()
+      fTupletDirectUpLinkToMeasure->getMeasurePositionInVoice ()
         +
       positionInMeasure;
   positionInVoice.rationalise ();
@@ -781,8 +781,8 @@ if (false) { // JMI
   // update current position in voice
   S_msrVoice
     voice =
-      fTupletDirectMeasureUpLink->
-        fetchMeasureVoiceUpLink ();
+      fTupletDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ();
 
   voice->
     incrementCurrentPositionInVoice (
@@ -805,7 +805,7 @@ if (false) { // JMI
     ) {
       // note
       note->
-        setNoteDirectMeasureUpLink (
+        setNoteDirectUpLinkToMeasure (
           measure);
 
       note->
@@ -1165,10 +1165,10 @@ void msrTuplet::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fTupletDirectMeasureUpLink" << " : ";
-  if (fTupletDirectMeasureUpLink) {
+    "fTupletDirectUpLinkToMeasure" << " : ";
+  if (fTupletDirectUpLinkToMeasure) {
     os <<
-      fTupletDirectMeasureUpLink->asShortString ();
+      fTupletDirectUpLinkToMeasure->asShortString ();
   }
   else {
     os << "none";
@@ -1177,10 +1177,10 @@ void msrTuplet::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fTupletDirectTupletUpLink" << " : ";
-  if (fTupletDirectTupletUpLink) {
+    "fTupletDirectUpLinkToTuplet" << " : ";
+  if (fTupletDirectUpLinkToTuplet) {
     os <<
-      fTupletDirectTupletUpLink->asShortString ();
+      fTupletDirectUpLinkToTuplet->asShortString ();
   }
   else {
     os << "none";
@@ -1318,10 +1318,10 @@ void msrTuplet::printShort (ostream& os)
 
   os << left <<
     setw (fieldWidth) <<
-    "fTupletDirectMeasureUpLink" << " : ";
-  if (fTupletDirectMeasureUpLink) {
+    "fTupletDirectUpLinkToMeasure" << " : ";
+  if (fTupletDirectUpLinkToMeasure) {
     os <<
-      fTupletDirectMeasureUpLink->asShortString ();
+      fTupletDirectUpLinkToMeasure->asShortString ();
   }
   else {
     os << "none";
@@ -1330,10 +1330,10 @@ void msrTuplet::printShort (ostream& os)
 
   os << left <<
     setw (fieldWidth) <<
-    "fTupletDirectTupletUpLink" << " : ";
-  if (fTupletDirectTupletUpLink) {
+    "fTupletDirectUpLinkToTuplet" << " : ";
+  if (fTupletDirectUpLinkToTuplet) {
     os <<
-      fTupletDirectTupletUpLink->asShortString ();
+      fTupletDirectUpLinkToTuplet->asShortString ();
   }
   else {
     os << "none";

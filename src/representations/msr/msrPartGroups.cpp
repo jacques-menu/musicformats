@@ -54,8 +54,8 @@ S_msrPartGroup msrPartGroup::create (
   int                      partGroupSymbolDefaultX,
   msrPartGroupImplicitKind partGroupImplicitKind,
   msrPartGroupBarLineKind  partGroupBarLineKind,
-  S_msrPartGroup           partGroupPartGroupUpLink,
-  S_msrScore               partGroupScoreUpLink)
+  S_msrPartGroup           partGroupUpLinkToPartGroup,
+  S_msrScore               UpLinkToPartGroupToScore)
 {
   msrPartGroup* o =
     new msrPartGroup (
@@ -70,8 +70,8 @@ S_msrPartGroup msrPartGroup::create (
       partGroupSymbolDefaultX,
       partGroupImplicitKind,
       partGroupBarLineKind,
-      partGroupPartGroupUpLink,
-      partGroupScoreUpLink);
+      partGroupUpLinkToPartGroup,
+      UpLinkToPartGroupToScore);
   assert (o != nullptr);
 
   return o;
@@ -85,7 +85,7 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
   const string&            partGroupAccidentalText,
   const string&            partGroupAbbreviation,
   msrPartGroupBarLineKind  partGroupBarLineKind,
-  S_msrScore               partGroupScoreUpLink)
+  S_msrScore               UpLinkToPartGroupToScore)
 {
   msrPartGroup* o =
     new msrPartGroup (
@@ -100,14 +100,14 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
       0,                                  // partGroupSymbolDefaultX,
       msrPartGroup::kPartGroupImplicitYes,
       partGroupBarLineKind,
-      nullptr,                            // partGroupPartGroupUpLink,
+      nullptr,                            // partGroupUpLinkToPartGroup,
                                           // will be set below
-      partGroupScoreUpLink);
+      UpLinkToPartGroupToScore);
   assert (o != nullptr);
 
   // the implicit part group it the top-most one:
   // set its group upLink to point to itself
-  o->fPartGroupPartGroupUpLink = o;
+  o->fPartGroupUpLinkToPartGroup = o;
 
   return o;
 }
@@ -117,8 +117,8 @@ S_msrPartGroup msrPartGroup::create (
   int                      partGroupNumber,
   int                      partGroupAbsoluteNumber,
   const string&            partGroupName,
-  S_msrPartGroup           partGroupPartGroupUpLink,
-  S_msrScore               partGroupScoreUpLink)
+  S_msrPartGroup           partGroupUpLinkToPartGroup,
+  S_msrScore               UpLinkToPartGroupToScore)
 {
   msrPartGroup* o =
     new msrPartGroup (
@@ -126,8 +126,8 @@ S_msrPartGroup msrPartGroup::create (
       partGroupNumber,
       partGroupAbsoluteNumber,
       partGroupName,
-      partGroupPartGroupUpLink,
-      partGroupScoreUpLink);
+      partGroupUpLinkToPartGroup,
+      UpLinkToPartGroupToScore);
   assert (o != nullptr);
   return o;
 }
@@ -144,24 +144,24 @@ msrPartGroup::msrPartGroup (
   int                      partGroupSymbolDefaultX,
   msrPartGroupImplicitKind partGroupImplicitKind,
   msrPartGroupBarLineKind  partGroupBarLineKind,
-  S_msrPartGroup           partGroupPartGroupUpLink,
-  S_msrScore               partGroupScoreUpLink)
+  S_msrPartGroup           partGroupUpLinkToPartGroup,
+  S_msrScore               UpLinkToPartGroupToScore)
     : msrPartGroupElement (inputLineNumber)
 {
-  // no sanity check on partGroupPartGroupUpLink here,
+  // no sanity check on partGroupUpLinkToPartGroup here,
   // it will be set after all 'real' (i.e. not implicit)
   // part groups and part have been analyzed
-  fPartGroupPartGroupUpLink = partGroupPartGroupUpLink;
+  fPartGroupUpLinkToPartGroup = partGroupUpLinkToPartGroup;
 
 /* JMI
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fPartGroupScoreUpLink != nullptr,
-    "fPartGroupScoreUpLink is null");
+    fUpLinkToPartGroupToScore != nullptr,
+    "fUpLinkToPartGroupToScore is null");
     */
 
-  fPartGroupScoreUpLink     = partGroupScoreUpLink;
+  fUpLinkToPartGroupToScore     = UpLinkToPartGroupToScore;
 
   // other fields
   fPartGroupNumber          = partGroupNumber;
@@ -175,9 +175,9 @@ msrPartGroup::msrPartGroup (
   if (
     partGroupNameLength
       >
-    fPartGroupScoreUpLink->getScorePartGroupNamesMaxLength ()
+    fUpLinkToPartGroupToScore->getScorePartGroupNamesMaxLength ()
   ) {  // JMI sanity check ???
-    fPartGroupScoreUpLink->
+    fUpLinkToPartGroupToScore->
       setScorePartGroupNamesMaxLength (
         partGroupNameLength);
   }
@@ -213,24 +213,24 @@ msrPartGroup::msrPartGroup (
   int                      partGroupNumber,
   int                      partGroupAbsoluteNumber,
   const string&            partGroupName,
-  S_msrPartGroup           partGroupPartGroupUpLink,
-  S_msrScore               partGroupScoreUpLink)
+  S_msrPartGroup           partGroupUpLinkToPartGroup,
+  S_msrScore               UpLinkToPartGroupToScore)
     : msrPartGroupElement (inputLineNumber)
 {
-  // no sanity check on partGroupPartGroupUpLink here,
+  // no sanity check on partGroupUpLinkToPartGroup here,
   // it will be set after all 'real' (i.e. not implicit)
   // part groups and part have been analyzed
-  fPartGroupPartGroupUpLink = partGroupPartGroupUpLink;
+  fPartGroupUpLinkToPartGroup = partGroupUpLinkToPartGroup;
 
 /* JMI
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fPartGroupScoreUpLink != nullptr,
-    "fPartGroupScoreUpLink is null");
+    fUpLinkToPartGroupToScore != nullptr,
+    "fUpLinkToPartGroupToScore is null");
     */
 
-  fPartGroupScoreUpLink     = partGroupScoreUpLink;
+  fUpLinkToPartGroupToScore     = UpLinkToPartGroupToScore;
 
   // other fields
   fPartGroupNumber          = partGroupNumber;
@@ -244,9 +244,9 @@ msrPartGroup::msrPartGroup (
   if (
     partGroupNameLength
       >
-    fPartGroupScoreUpLink->getScorePartGroupNamesMaxLength ()
+    fUpLinkToPartGroupToScore->getScorePartGroupNamesMaxLength ()
   ) {  // JMI sanity check ???
-    fPartGroupScoreUpLink->
+    fUpLinkToPartGroupToScore->
       setScorePartGroupNamesMaxLength (
         partGroupNameLength);
   }
@@ -392,7 +392,7 @@ void msrPartGroup::setPartGroupInstrumentName (
 
   S_msrScore
     score =
-      fPartGroupScoreUpLink;
+      fUpLinkToPartGroupToScore;
 
   size_t partGroupInstrumentNameLength =
     fPartGroupInstrumentName.size ();
@@ -568,7 +568,7 @@ void msrPartGroup::appendPartToPartGroup (S_msrPart part)
   fPartGroupElementsList.push_back (part);
 
   // set part's partgroup upLink
-  part->setPartPartGroupUpLink (this);
+  part->setPartUpLinkToPartGroup (this);
 }
 
 void msrPartGroup::removePartFromPartGroup (
@@ -687,7 +687,7 @@ void msrPartGroup::printPartGroupElementsList (
   ostream& os) const
 {
   os <<
-    "fPartGroupElementsList";
+    "fPartGroupElementsList:";
 
   if (fPartGroupElementsList.size ()) {
     os << endl;
@@ -853,7 +853,7 @@ S_msrPart msrPartGroup::fetchPartFromPartGroupByItsPartID (
 
     ++gIndenter;
 
-//     printPartGroupElementsList ( JMI
+//     printPartGroupElementsList ( JMI v0.9.66
     printPartGroupElementsListShort (
       inputLineNumber,
       gLogStream);
@@ -987,7 +987,7 @@ void msrPartGroup::registerVoiceInPartGroupAllVoicesList (
   fPartGroupAllVoicesList.push_back (voice);
 
   // register it in the partgroup uplink
-  fPartGroupScoreUpLink->
+  fUpLinkToPartGroupToScore->
     registerVoiceInScoreAllVoicesList (voice);
 }
 
@@ -1186,11 +1186,11 @@ void msrPartGroup::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fPartGroupPartGroupUpLink" << " : ";
-  if (fPartGroupPartGroupUpLink) {
+    "fPartGroupUpLinkToPartGroup" << " : ";
+  if (fPartGroupUpLinkToPartGroup) {
     os <<
       "\"" <<
-      fPartGroupPartGroupUpLink->
+      fPartGroupUpLinkToPartGroup->
         getPartGroupCombinedName () <<
       "\"";
   }
@@ -1271,7 +1271,7 @@ void msrPartGroup::print (ostream& os) const
     os << "none" << endl;
   }
 
-  os << endl;
+  os << endl << endl;
 
   // print the part group elements if any
 
@@ -1304,7 +1304,7 @@ void msrPartGroup::printShort (ostream& os) const
     "fPartGroupName" << " : \"" <<
     fPartGroupName <<
     "\"" <<
-    endl;
+    endl << endl;
 
   // print the part group elements if any
   printPartGroupElementsListShort (
@@ -1417,7 +1417,7 @@ ostream& operator<< (ostream& os, const S_msrPartGroup& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

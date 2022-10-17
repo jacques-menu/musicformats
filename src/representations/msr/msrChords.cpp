@@ -170,7 +170,7 @@ void msrChord::setMeasureElementPositionInMeasure (
 }
 
 // measure upLink
-S_msrMeasure msrChord::fetchChordMeasureUpLink () const
+S_msrMeasure msrChord::fetchChordUpLinkToMeasure () const
 {
   S_msrMeasure result;
 
@@ -179,23 +179,23 @@ S_msrMeasure msrChord::fetchChordMeasureUpLink () const
       break;
 
     case msrChordInKind::kChordInMeasure:
-      result = fChordDirectMeasureUpLink;
+      result = fChordDirectUpLinkToMeasure;
       break;
 
     case msrChordInKind::kChordInTuplet:
-      if (fChordDirectTupletUpLink) {
+      if (fChordDirectUpLinkToTuplet) {
         result =
-          fChordDirectTupletUpLink->
-            fetchTupletMeasureUpLink ();
+          fChordDirectUpLinkToTuplet->
+            fetchTupletUpLinkToMeasure ();
       }
       break;
 
     case msrChordInKind::kChordInGraceNotesGroup:
-      if (fChordDirectGraceNotesGroupUpLink) {
+      if (fChordDirectUpLinkToGraceNotesGroup) {
         result =
-          fChordDirectGraceNotesGroupUpLink->
-            getGraceNotesGroupNoteUpLink ()->
-              fetchNoteMeasureUpLink ();
+          fChordDirectUpLinkToGraceNotesGroup->
+            getGraceNotesGroupUpLinkToNote ()->
+              fetchNoteUpLinkToMeasure ();
       }
       break;
   } // switch
@@ -204,7 +204,7 @@ S_msrMeasure msrChord::fetchChordMeasureUpLink () const
 }
 
 // tuplet upLink
-S_msrTuplet msrChord::fetchChordTupletUpLink () const
+S_msrTuplet msrChord::fetchChordUpLinkToTuplet () const
 {
   S_msrTuplet result;
 
@@ -216,15 +216,15 @@ S_msrTuplet msrChord::fetchChordTupletUpLink () const
       break;
 
     case msrChordInKind::kChordInTuplet:
-      result = fChordDirectTupletUpLink;
+      result = fChordDirectUpLinkToTuplet;
       break;
 
     case msrChordInKind::kChordInGraceNotesGroup:
-      if (fChordDirectGraceNotesGroupUpLink) {
+      if (fChordDirectUpLinkToGraceNotesGroup) {
         result =
-          fChordDirectGraceNotesGroupUpLink->
-            getGraceNotesGroupNoteUpLink ()->
-              getNoteDirectTupletUpLink ();
+          fChordDirectUpLinkToGraceNotesGroup->
+            getGraceNotesGroupUpLinkToNote ()->
+              getNoteDirectUpLinkToTuplet ();
       }
       break;
   } // switch
@@ -233,7 +233,7 @@ S_msrTuplet msrChord::fetchChordTupletUpLink () const
 }
 
 // grace notes group upLink
-S_msrGraceNotesGroup msrChord::fetchChordGraceNotesGroupUpLink () const
+S_msrGraceNotesGroup msrChord::fetchChordUpLinkToGraceNotesGroup () const
 {
   S_msrGraceNotesGroup result;
 
@@ -245,7 +245,7 @@ S_msrGraceNotesGroup msrChord::fetchChordGraceNotesGroupUpLink () const
     case msrChordInKind::kChordInTuplet:
       break;
     case msrChordInKind::kChordInGraceNotesGroup:
-      result = fChordDirectGraceNotesGroupUpLink; // JMI
+      result = fChordDirectUpLinkToGraceNotesGroup; // JMI
       break;
   } // switch
 
@@ -253,18 +253,18 @@ S_msrGraceNotesGroup msrChord::fetchChordGraceNotesGroupUpLink () const
 }
 
 // score upLink
-S_msrScore msrChord::fetchChordScoreUpLink () const
+S_msrScore msrChord::fetchChordUpLinkToScore () const
 {
   S_msrScore result;
 
   S_msrMeasure
     measure =
-      fetchChordMeasureUpLink ();
+      fetchChordUpLinkToMeasure ();
 
   if (measure) {
     result =
       measure ->
-        fetchMeasureScoreUpLink ();
+        fetchMeasureUpLinkToScore ();
   }
 
   return result;
@@ -356,7 +356,7 @@ void msrChord::setChordMembersPositionInMeasure (
   // compute chord's position in voice
   rational
      positionInVoice =
-      fChordDirectMeasureUpLink->getMeasurePositionInVoice ()
+      fChordDirectUpLinkToMeasure->getMeasurePositionInVoice ()
         +
       positionInMeasure;
 
@@ -369,7 +369,7 @@ void msrChord::setChordMembersPositionInMeasure (
   S_msrVoice
     voice =
       measure->
-        fetchMeasureVoiceUpLink ();
+        fetchMeasureUpLinkToVoice ();
 
   voice->
     incrementCurrentPositionInVoice (
@@ -388,7 +388,7 @@ void msrChord::setChordMembersPositionInMeasure (
 
       // set note's measure uplink
       note->
-        setNoteDirectMeasureUpLink (
+        setNoteDirectUpLinkToMeasure (
           measure);
 
       // set note's position in measure
@@ -442,12 +442,12 @@ void msrChord::addFirstNoteToChord (
 
   // register note's chord upLink
   note->
-    setNoteDirectChordUpLink (this);
+    setNoteDirectUpLinkToChord (this);
 
 /* JMI too early
   // register note's measure upLink
   note->
-    setNoteDirectMeasureUpLink (fChordDirectMeasureUpLink);
+    setNoteDirectUpLinkToMeasure (fChordDirectUpLinkToMeasure);
 */
 
   // mark note as belonging to a chord
@@ -497,14 +497,14 @@ void msrChord::addAnotherNoteToChord (
 
   // register note's chord upLink
   note->
-    setNoteDirectChordUpLink (this);
+    setNoteDirectUpLinkToChord (this);
 
   // mark note as belonging to a chord
   note->setNoteBelongsToAChord ();
 
   // append the note to the measure's notes flat list
   if (false) // JMI
-  fetchChordMeasureUpLink ()->
+  fetchChordUpLinkToMeasure ()->
     appendNoteToMeasureNotesFlatList (note);
 
 /* JMI
@@ -945,7 +945,7 @@ void msrChord::finalizeChord (
 
   // we can now set the position in measures for all the chord members
   setChordMembersPositionInMeasure (
-    fChordDirectMeasureUpLink,
+    fChordDirectUpLinkToMeasure,
     fMeasureElementPositionInMeasure);
 }
 
@@ -999,7 +999,7 @@ void msrChord::browseData (basevisitor* v)
   // fetch the score
   S_msrScore
     score =
-      fetchChordScoreUpLink ();
+      fetchChordUpLinkToScore ();
 
   if (score) {
     Bool
@@ -1437,9 +1437,9 @@ void msrChord::print (ostream& os) const
 {
   rational
     chordMeasureFullLength =
-      fChordDirectMeasureUpLink
+      fChordDirectUpLinkToMeasure
         ?
-          fChordDirectMeasureUpLink->
+          fChordDirectUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
         : rational (0, 1); // JMI
 
@@ -1477,10 +1477,10 @@ void msrChord::print (ostream& os) const
     endl;
 
   os <<
-    "fChordDirectTupletUpLink" << " : ";
-  if (fChordDirectTupletUpLink) {
+    "fChordDirectUpLinkToTuplet" << " : ";
+  if (fChordDirectUpLinkToTuplet) {
     os <<
-      fChordDirectTupletUpLink->asShortString ();
+      fChordDirectUpLinkToTuplet->asShortString ();
   }
   else {
     os << "none";
@@ -1494,7 +1494,7 @@ void msrChord::print (ostream& os) const
     endl;
 
   // print simplified position in measure if relevant
-// JMI  if (fChordDirectMeasureUpLink) {
+// JMI  if (fChordDirectUpLinkToMeasure) {
     // the chord measure upLink may not have been set yet
     rational
       chordPositionBis =
@@ -2238,9 +2238,9 @@ void msrChord::printShort (ostream& os) const
 {
   rational
     chordMeasureFullLength =
-      fChordDirectMeasureUpLink
+      fChordDirectUpLinkToMeasure
         ?
-          fChordDirectMeasureUpLink->
+          fChordDirectUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
         : rational (0, 1); // JMI
 
@@ -3015,13 +3015,13 @@ ostream& operator<< (ostream& os, const S_msrChord& elt)
 S_msrChordBeamLink msrChordBeamLink::create (
   int        inputLineNumber,
   S_msrBeam  originalBeam,
-  S_msrChord chordUpLink)
+  S_msrChord upLinkToChord)
 {
   msrChordBeamLink* o =
     new msrChordBeamLink (
       inputLineNumber,
       originalBeam,
-      chordUpLink);
+      upLinkToChord);
   assert (o != nullptr);
 
   return o;
@@ -3030,7 +3030,7 @@ S_msrChordBeamLink msrChordBeamLink::create (
 msrChordBeamLink::msrChordBeamLink (
   int        inputLineNumber,
   S_msrBeam  originalBeam,
-  S_msrChord chordUpLink)
+  S_msrChord upLinkToChord)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -3042,10 +3042,10 @@ msrChordBeamLink::msrChordBeamLink (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    chordUpLink != nullptr,
-    "chordUpLink is null");
+    upLinkToChord != nullptr,
+    "upLinkToChord is null");
 
-  fChordUpLink = chordUpLink;
+  fUpLinkToChord = upLinkToChord;
 
   fOriginalBeam = originalBeam;
 }
@@ -3078,7 +3078,7 @@ S_msrChordBeamLink msrChordBeamLink::createBeamNewbornClone ()
       msrChordBeamLink::create (
         fInputLineNumber,
         fOriginalBeam,
-        fChordUpLink);
+        fUpLinkToChord);
 
   return newbornClone;
 }
@@ -3142,8 +3142,8 @@ string msrChordBeamLink::asShortString () const
     "[ChordBeamLink" <<
     ", originalBeam \"" <<
     fOriginalBeam->asShortString () <<
-    ", chordUpLink \"" <<
-    fChordUpLink->asShortString () <<
+    ", upLinkToChord \"" <<
+    fUpLinkToChord->asShortString () <<
     ", line " << fInputLineNumber <<
     "]";
 
@@ -3158,8 +3158,8 @@ string msrChordBeamLink::asString () const
     "[ChordBeamLink" <<
     ", originalBeam \"" <<
     fOriginalBeam->asString () <<
-    ", chordUpLink \"" <<
-    fChordUpLink->asString () <<
+    ", upLinkToChord \"" <<
+    fUpLinkToChord->asString () <<
     ", line " << fInputLineNumber <<
     "]";
 
@@ -3185,7 +3185,7 @@ void msrChordBeamLink::print (ostream& os) const
   ++gIndenter;
   os <<
     fOriginalBeam; // <<
-    fChordUpLink->asString ();
+    fUpLinkToChord->asString ();
   --gIndenter;
 
   --gIndenter;
@@ -3212,7 +3212,7 @@ void msrChordBeamLink::printShort (ostream& os) const
   ++gIndenter;
   fOriginalBeam->printShort (os);
   os <<
-    fChordUpLink->asShortString () <<
+    fUpLinkToChord->asShortString () <<
     endl;
   --gIndenter;
 
@@ -3237,13 +3237,13 @@ ostream& operator<< (ostream& os, const S_msrChordBeamLink& elt)
 S_msrChordSlurLink msrChordSlurLink::create (
   int        inputLineNumber,
   S_msrSlur  originalSlur,
-  S_msrChord chordUpLink)
+  S_msrChord upLinkToChord)
 {
   msrChordSlurLink* o =
     new msrChordSlurLink (
       inputLineNumber,
       originalSlur,
-      chordUpLink);
+      upLinkToChord);
   assert (o != nullptr);
 
   return o;
@@ -3252,7 +3252,7 @@ S_msrChordSlurLink msrChordSlurLink::create (
 msrChordSlurLink::msrChordSlurLink (
   int        inputLineNumber,
   S_msrSlur  originalSlur,
-  S_msrChord chordUpLink)
+  S_msrChord upLinkToChord)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -3264,10 +3264,10 @@ msrChordSlurLink::msrChordSlurLink (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    chordUpLink != nullptr,
-    "chordUpLink is null");
+    upLinkToChord != nullptr,
+    "upLinkToChord is null");
 
-  fChordUpLink = chordUpLink;
+  fUpLinkToChord = upLinkToChord;
 
   fOriginalSlur = originalSlur;
 }
@@ -3300,7 +3300,7 @@ S_msrChordSlurLink msrChordSlurLink::createSlurNewbornClone ()
       msrChordSlurLink::create (
         fInputLineNumber,
         fOriginalSlur,
-        fChordUpLink);
+        fUpLinkToChord);
 
   return newbornClone;
 }
@@ -3364,8 +3364,8 @@ string msrChordSlurLink::asShortString () const
     "[ChordSlurLink" <<
     ", originalSlur \"" <<
     fOriginalSlur->asShortString () <<
-    ", chordUpLink \"" <<
-    fChordUpLink->asShortString () <<
+    ", upLinkToChord \"" <<
+    fUpLinkToChord->asShortString () <<
     ", line " << fInputLineNumber <<
     "]";
 
@@ -3380,8 +3380,8 @@ string msrChordSlurLink::asString () const
     "[ChordSlurLink" <<
     ", originalSlur \"" <<
     fOriginalSlur->asString () <<
-    ", chordUpLink \"" <<
-    fChordUpLink->asString () <<
+    ", upLinkToChord \"" <<
+    fUpLinkToChord->asString () <<
     ", line " << fInputLineNumber <<
     "]";
 
@@ -3407,7 +3407,7 @@ void msrChordSlurLink::print (ostream& os) const
   ++gIndenter;
   os <<
     fOriginalSlur <<
-    fChordUpLink->asString ();
+    fUpLinkToChord->asString ();
   --gIndenter;
 
   --gIndenter;
@@ -3434,7 +3434,7 @@ void msrChordSlurLink::printShort (ostream& os) const
   ++gIndenter;
   fOriginalSlur->printShort (os);
   os <<
-    fChordUpLink->asShortString () <<
+    fUpLinkToChord->asShortString () <<
     endl;
   --gIndenter;
 
@@ -3459,13 +3459,13 @@ ostream& operator<< (ostream& os, const S_msrChordSlurLink& elt)
 S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::create (
   int                  inputLineNumber,
   S_msrGraceNotesGroup originalGraceNotesGroup,
-  S_msrChord           chordUpLink)
+  S_msrChord           upLinkToChord)
 {
   msrChordGraceNotesGroupLink* o =
     new msrChordGraceNotesGroupLink (
       inputLineNumber,
       originalGraceNotesGroup,
-      chordUpLink);
+      upLinkToChord);
   assert (o != nullptr);
 
   return o;
@@ -3474,7 +3474,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::create (
 msrChordGraceNotesGroupLink::msrChordGraceNotesGroupLink (
   int                  inputLineNumber,
   S_msrGraceNotesGroup originalGraceNotesGroup,
-  S_msrChord           chordUpLink)
+  S_msrChord           upLinkToChord)
     : msrElement (inputLineNumber)
 {
   // sanity check
@@ -3486,10 +3486,10 @@ msrChordGraceNotesGroupLink::msrChordGraceNotesGroupLink (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    chordUpLink != nullptr,
-    "chordUpLink is null");
+    upLinkToChord != nullptr,
+    "upLinkToChord is null");
 
-  fChordUpLink = chordUpLink;
+  fUpLinkToChord = upLinkToChord;
 
   fOriginalGraceNotesGroup = originalGraceNotesGroup;
 }
@@ -3522,7 +3522,7 @@ S_msrChordGraceNotesGroupLink msrChordGraceNotesGroupLink::createChordGraceNotes
       msrChordGraceNotesGroupLink::create (
         fInputLineNumber,
         fOriginalGraceNotesGroup,
-        fChordUpLink);
+        fUpLinkToChord);
 
   return newbornClone;
 }
@@ -3588,8 +3588,8 @@ string msrChordGraceNotesGroupLink::asShortString () const
     "[chordGraceNotesGroupLink" <<
     ", fOriginalGraceNotesGroup: " <<
     fOriginalGraceNotesGroup->asShortString () <<
-    ", chordUpLink \"" <<
-    fChordUpLink->asShortString () <<
+    ", upLinkToChord \"" <<
+    fUpLinkToChord->asShortString () <<
     ", line " << fInputLineNumber <<
     "]";
 
@@ -3604,8 +3604,8 @@ string msrChordGraceNotesGroupLink::asString () const
     "[chordGraceNotesGroupLink" <<
     ", originalGraceNotesGroup \"" <<
     fOriginalGraceNotesGroup->asString () <<
-    ", chordUpLink \"" <<
-    fChordUpLink->asString () <<
+    ", upLinkToChord \"" <<
+    fUpLinkToChord->asString () <<
     ", line " << fInputLineNumber <<
     "]";
 
@@ -3631,7 +3631,7 @@ void msrChordGraceNotesGroupLink::print (ostream& os) const
   ++gIndenter;
   os <<
     fOriginalGraceNotesGroup <<
-    fChordUpLink->asString () <<
+    fUpLinkToChord->asString () <<
     endl;
   --gIndenter;
 
@@ -3659,7 +3659,7 @@ void msrChordGraceNotesGroupLink::printShort (ostream& os) const
   ++gIndenter;
   fOriginalGraceNotesGroup->printShort (os);
   os <<
-    fChordUpLink->asShortString () <<
+    fUpLinkToChord->asShortString () <<
     endl;
   --gIndenter;
 

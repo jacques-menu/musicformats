@@ -894,7 +894,7 @@ void oahVersionAtom::printVersion (ostream& os) const
   // get the handler version
   S_mfcMultiComponent
     handlerMultiComponent =
-      fetchAtomHandlerUpLink ()->
+      fetchAtomUpLinkToHandler ()->
         getHandlerMultiComponent ();
 
   // sanity check

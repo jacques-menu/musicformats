@@ -99,7 +99,7 @@ class mfslDriver
     S_mfslChoicesTable    getChoicesTable () const
                               { return fChoicesTable; }
 
-    void                  setCurrentChoiceChoice ( S_mfslChoice choice)
+    void                  setCurrentChoiceChoice (S_mfslChoice choice)
                               { fCurrentChoiceChoice = choice; }
 
     S_mfslChoice          getCurrentChoiceChoice () const

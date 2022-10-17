@@ -361,7 +361,7 @@ msrNote::~msrNote ()
 {}
 
 //________________________________________________________________________
-S_msrMeasure msrNote::fetchNoteMeasureUpLink () const
+S_msrMeasure msrNote::fetchNoteUpLinkToMeasure () const
 {
   S_msrMeasure result;
 
@@ -373,24 +373,24 @@ S_msrMeasure msrNote::fetchNoteMeasureUpLink () const
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteUnpitchedInMeasure:
-      result = fNoteDirectMeasureUpLink;
+      result = fNoteDirectUpLinkToMeasure;
       break;
 
     case msrNoteKind::kNoteRegularInChord:
-      if (fNoteDirectChordUpLink) {
+      if (fNoteDirectUpLinkToChord) {
         result =
-          fNoteDirectChordUpLink->
-            getChordDirectMeasureUpLink ();
+          fNoteDirectUpLinkToChord->
+            getChordDirectUpLinkToMeasure ();
       }
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
     case msrNoteKind::kNoteUnpitchedInTuplet:
-      if (fNoteDirectTupletUpLink) {
+      if (fNoteDirectUpLinkToTuplet) {
         result =
-          fNoteDirectTupletUpLink->
-            getTupletDirectMeasureUpLink ();
+          fNoteDirectUpLinkToTuplet->
+            getTupletDirectUpLinkToMeasure ();
       }
       break;
 
@@ -401,13 +401,13 @@ S_msrMeasure msrNote::fetchNoteMeasureUpLink () const
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMi
-      if (fNoteDirectGraceNotesGroupUpLink) {
+      if (fNoteDirectUpLinkToGraceNotesGroup) {
         result =
-          fNoteDirectGraceNotesGroupUpLink->
-            getGraceNotesGroupVoiceUpLink ();
+          fNoteDirectUpLinkToGraceNotesGroup->
+            getGraceNotesGroupUpLinkToVoice ();
               / * JMI
-              getGraceNotesGroupNoteUpLink ()->
-              fetchNoteVoiceUpLink ();
+              getGraceNotesGroupUpLinkToNote ()->
+              fetchUpLinkToNoteToVoice ();
               * /
       }
     */
@@ -424,7 +424,7 @@ S_msrMeasure msrNote::fetchNoteMeasureUpLink () const
 }
 
 // grace notes group upLink
-S_msrGraceNotesGroup msrNote::fetchNoteGraceNotesGroupUpLink () const
+S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
 {
   S_msrGraceNotesGroup result;
 
@@ -436,7 +436,7 @@ S_msrGraceNotesGroup msrNote::fetchNoteGraceNotesGroupUpLink () const
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteRegularInChord:
-      result = fNoteDirectGraceNotesGroupUpLink;
+      result = fNoteDirectUpLinkToGraceNotesGroup;
       break;
 
     case msrNoteKind::kNoteUnpitchedInMeasure:
@@ -444,12 +444,12 @@ S_msrGraceNotesGroup msrNote::fetchNoteGraceNotesGroupUpLink () const
 
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
-      if (fNoteDirectTupletUpLink) {
+      if (fNoteDirectUpLinkToTuplet) {
       /* JMI
         result =
-          fNoteDirectTupletUpLink->
-            getTupletDirectMeasureUpLink ()->
-              fetchMeasureVoiceUpLink ();
+          fNoteDirectUpLinkToTuplet->
+            getTupletDirectUpLinkToMeasure ()->
+              fetchMeasureUpLinkToVoice ();
       */
       }
       break;
@@ -460,13 +460,13 @@ S_msrGraceNotesGroup msrNote::fetchNoteGraceNotesGroupUpLink () const
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMi
-      if (fNoteDirectGraceNotesGroupUpLink) {
+      if (fNoteDirectUpLinkToGraceNotesGroup) {
         result =
-          fNoteDirectGraceNotesGroupUpLink->
-            getGraceNotesGroupVoiceUpLink ();
+          fNoteDirectUpLinkToGraceNotesGroup->
+            getGraceNotesGroupUpLinkToVoice ();
               / * JMI
-              getGraceNotesGroupNoteUpLink ()->
-              fetchNoteVoiceUpLink ();
+              getGraceNotesGroupUpLinkToNote ()->
+              fetchUpLinkToNoteToVoice ();
               * /
       }
     */
@@ -485,14 +485,14 @@ S_msrGraceNotesGroup msrNote::fetchNoteGraceNotesGroupUpLink () const
   return result;
 }
 
-S_msrVoice msrNote::fetchNoteVoiceUpLink () const
+S_msrVoice msrNote::fetchUpLinkToNoteToVoice () const
 {
   S_msrVoice result;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
     gLogStream <<
-      "--> fetchNoteVoiceUpLink() for note: " <<
+      "--> fetchUpLinkToNoteToVoice() for note: " <<
       asShortString () <<
       endl;
   }
@@ -506,10 +506,10 @@ S_msrVoice msrNote::fetchNoteVoiceUpLink () const
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteRegularInChord:
-      if (fNoteDirectMeasureUpLink) {
+      if (fNoteDirectUpLinkToMeasure) {
         result =
-          fNoteDirectMeasureUpLink->
-            fetchMeasureVoiceUpLink ();
+          fNoteDirectUpLinkToMeasure->
+            fetchMeasureUpLinkToVoice ();
       }
       break;
 
@@ -518,16 +518,16 @@ S_msrVoice msrNote::fetchNoteVoiceUpLink () const
 
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
-      if (fNoteDirectTupletUpLink) {
+      if (fNoteDirectUpLinkToTuplet) {
         S_msrMeasure
-          tupletDirectMeasureUpLink =
-            fNoteDirectTupletUpLink->
-              getTupletDirectMeasureUpLink ();
+          tupletDirectUpLinkToMeasure =
+            fNoteDirectUpLinkToTuplet->
+              getTupletDirectUpLinkToMeasure ();
 
-        if (tupletDirectMeasureUpLink) {
+        if (tupletDirectUpLinkToMeasure) {
           result =
-            tupletDirectMeasureUpLink->
-              fetchMeasureVoiceUpLink ();
+            tupletDirectUpLinkToMeasure->
+              fetchMeasureUpLinkToVoice ();
         }
       }
       break;
@@ -538,13 +538,13 @@ S_msrVoice msrNote::fetchNoteVoiceUpLink () const
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     /* JMi
-      if (fNoteDirectGraceNotesGroupUpLink) {
+      if (fNoteDirectUpLinkToGraceNotesGroup) {
         result =
-          fNoteDirectGraceNotesGroupUpLink->
-            getGraceNotesGroupVoiceUpLink ();
+          fNoteDirectUpLinkToGraceNotesGroup->
+            getGraceNotesGroupUpLinkToVoice ();
               / * JMI
-              getGraceNotesGroupNoteUpLink ()->
-              fetchNoteVoiceUpLink ();
+              getGraceNotesGroupUpLinkToNote ()->
+              fetchUpLinkToNoteToVoice ();
               * /
       }
     */
@@ -563,53 +563,53 @@ S_msrVoice msrNote::fetchNoteVoiceUpLink () const
   return result;
 }
 
-S_msrStaff msrNote::fetchNoteStaffUpLink () const
+S_msrStaff msrNote::fetchUpLinkToNoteToStaff () const
 {
   S_msrStaff result;
 
-  if (fNoteDirectMeasureUpLink) {
+  if (fNoteDirectUpLinkToMeasure) {
     result =
-      fNoteDirectMeasureUpLink->
-        fetchMeasureStaffUpLink ();
+      fNoteDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToStaff ();
   }
 
   return result;
 }
 
-S_msrPart msrNote::fetchNotePartUpLink () const
+S_msrPart msrNote::fetchUpLinkToNoteToPart () const
 {
   S_msrPart result;
 
-  if (fNoteDirectMeasureUpLink) {
+  if (fNoteDirectUpLinkToMeasure) {
     result =
-      fNoteDirectMeasureUpLink->
-        fetchMeasurePartUpLink ();
+      fNoteDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToPart ();
   }
 
   return result;
 }
 
-S_msrPartGroup msrNote::fetchNotePartGroupUpLink () const
+S_msrPartGroup msrNote::fetchNoteUpLinkToPartGroup () const
 {
   S_msrPartGroup result;
 
-  if (fNoteDirectMeasureUpLink) {
+  if (fNoteDirectUpLinkToMeasure) {
     result =
-      fNoteDirectMeasureUpLink->
-        fetchMeasurePartGroupUpLink ();
+      fNoteDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToPartGroup ();
   }
 
   return result;
 }
 
-S_msrScore msrNote::fetchNoteScoreUpLink () const
+S_msrScore msrNote::fetchUpLinkToNoteToScore () const
 {
   S_msrScore result;
 
-  if (fNoteDirectMeasureUpLink) {
+  if (fNoteDirectUpLinkToMeasure) {
     result =
-      fNoteDirectMeasureUpLink->
-        fetchMeasureScoreUpLink ();
+      fNoteDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToScore ();
   }
 
   return result;
@@ -838,9 +838,9 @@ S_msrNote msrNote::createNoteNewbornClone (
   // ------------------------------------------------------
 
   /* JMI
-    S_msrTuplet           fNoteDirectTupletUpLink;
+    S_msrTuplet           fNoteDirectUpLinkToTuplet;
 
-    S_msrMeasure          fNoteDirectMeasureUpLink;
+    S_msrMeasure          fNoteDirectUpLinkToMeasure;
 */
 
   return newbornClone;
@@ -1352,13 +1352,13 @@ S_msrNote msrNote::createNoteDeepClone (
 
   /* JMI
 
-    S_msrTuplet           fNoteDirectChordUpLink;
+    S_msrTuplet           fNoteDirectUpLinkToChord;
 
-    S_msrGraceNotesGroup  fNoteGraceNoteGroupUpLink;
+    S_msrGraceNotesGroup  fNoteDirectUpLinkToGraceNoteGroup;
 
-    S_msrTuplet           fNoteDirectTupletUpLink;
+    S_msrTuplet           fNoteDirectUpLinkToTuplet;
 
-    S_msrMeasure          fNoteDirectMeasureUpLink;
+    S_msrMeasure          fNoteDirectUpLinkToMeasure;
 */
 
   return noteDeepClone;
@@ -2217,7 +2217,7 @@ void msrNote::setMeasureElementPositionInMeasure (
   // compute note's position in voice
   rational
      positionInVoice =
-      fNoteDirectMeasureUpLink->getMeasurePositionInVoice ()
+      fNoteDirectUpLinkToMeasure->getMeasurePositionInVoice ()
         +
       positionInMeasure;
   positionInVoice.rationalise ();
@@ -2230,8 +2230,8 @@ void msrNote::setMeasureElementPositionInMeasure (
   // update current position in voice
   S_msrVoice
     voice =
-      fNoteDirectMeasureUpLink->
-        fetchMeasureVoiceUpLink ();
+      fNoteDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ();
 
   voice->
     incrementCurrentPositionInVoice (
@@ -2573,7 +2573,7 @@ void msrNote::appendBeamToNote (S_msrBeam beam)
   // check the order of the beams begins, continues and ends
 if (false) { // JMI, note not yet append to anything....
   S_msrVoice
-    voice = fetchNoteVoiceUpLink ();
+    voice = fetchUpLinkToNoteToVoice ();
 
   voice->checkBeamNumber (beam, this);
 }
@@ -2756,7 +2756,7 @@ void msrNote::appendOrnamentToNote (S_msrOrnament ornament)
 
   // set ornament's note upLink
   ornament->
-    setOrnamentNoteUpLink (this);
+    setOrnamentUpLinkToNote (this);
 }
 
 void msrNote::appendGlissandoToNote (S_msrGlissando glissando)
@@ -2813,7 +2813,7 @@ void msrNote::setNoteGraceNotesGroupBefore (
 
   // setup the grace notes group's note upLink
   graceNotesGroupBefore->
-    setGraceNotesGroupNoteUpLink (
+    setGraceNotesGroupUpLinkToNote (
       this);
 }
 
@@ -2837,7 +2837,7 @@ void msrNote::setNoteGraceNotesGroupAfter (
 
   // setup the grace notes group's note upLink
   graceNotesGroupAfter->
-    setGraceNotesGroupNoteUpLink (
+    setGraceNotesGroupUpLinkToNote (
       this);
 }
 
@@ -3281,7 +3281,7 @@ void msrNote::appendFiguredBassElementToNoteFiguredBassElementsList (
 
   // register this note as the figuredBassElement upLink
   figuredBassElement->
-    setFiguredBassNoteUpLink (this);
+    setFiguredBassUpLinkToNote (this);
 }
 
 void msrNote::acceptIn (basevisitor* v)
@@ -3335,7 +3335,7 @@ void msrNote::browseData (basevisitor* v)
     // fetch the score
     S_msrScore
       score =
-        fetchNoteScoreUpLink ();
+        fetchUpLinkToNoteToScore ();
 
     if (score) {
       Bool
@@ -3757,8 +3757,8 @@ void msrNote::browseData (basevisitor* v)
     // fetch the score
     S_msrScore
       score =
-        fNoteDirectMeasureUpLink->
-          fetchMeasureScoreUpLink ();
+        fNoteDirectUpLinkToMeasure->
+          fetchMeasureUpLinkToScore ();
 
     if (score) {
       Bool
@@ -4168,7 +4168,7 @@ string msrNote::asShortString () const
 
         S_msrVoice
           voice =
-            fetchNoteVoiceUpLink ();
+            fetchUpLinkToNoteToVoice ();
 
         s <<
           ", voice: ";
@@ -4186,7 +4186,7 @@ string msrNote::asShortString () const
         if (voice) {
           staff =
             voice->
-              getVoiceStaffUpLink ();
+              getVoiceUpLinkToStaff ();
         }
 
         s <<
@@ -4278,12 +4278,12 @@ string msrNote::asShortString () const
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes <<
         /* JMI KAKA
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ());
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ());
             */
         ", " <<
         msrOctaveKindAsString (fNoteOctaveKind);
@@ -4307,12 +4307,12 @@ string msrNote::asShortString () const
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
         /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ());
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ());
             */
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4334,12 +4334,12 @@ string msrNote::asShortString () const
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
         /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ());
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ());
             */
 
       if (! fetchNoteIsARest ()) {
@@ -4364,12 +4364,12 @@ string msrNote::asShortString () const
         ", fNoteDisplayWholeNotes: " <<
         fNoteDisplayWholeNotes;
         /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ());
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ());
             */
 
       for (int i = 0; i < fNoteDotsNumber; ++i) {
@@ -4618,7 +4618,7 @@ string msrNote::noteComplementsAsString () const
 
   S_msrVoice
     voice =
-      fetchNoteVoiceUpLink ();
+      fetchUpLinkToNoteToVoice ();
 
   S_msrStaff
     staff;
@@ -4626,7 +4626,7 @@ string msrNote::noteComplementsAsString () const
   if (voice) {
     staff =
       voice->
-        getVoiceStaffUpLink ();
+        getVoiceUpLinkToStaff ();
   }
 
   s <<
@@ -4857,12 +4857,12 @@ string msrNote::asString () const
         "kNoteRegularInTuplet " <<
         soundingNoteEssentialsAsString ();
 /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
       break;
 
@@ -4877,12 +4877,12 @@ string msrNote::asString () const
         "kNoteInTupletInGraceNotesGroup " <<
         nonSoundingNoteEssentialsAsString ();
 /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
 
       s <<
@@ -4894,12 +4894,12 @@ string msrNote::asString () const
         "kNoteUnpitchedInTuplet " <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
       s <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
@@ -5061,12 +5061,12 @@ string msrNote::asShortStringForMeasuresSlices () const
         "kNoteRegularInTuplet " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
 /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
       break;
 
@@ -5081,12 +5081,12 @@ string msrNote::asShortStringForMeasuresSlices () const
         "kNoteInTupletInGraceNotesGroup " <<
         soundingNoteEssentialsAsStringForMeasuresSlices ();
 /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
 
       s <<
@@ -5098,12 +5098,12 @@ string msrNote::asShortStringForMeasuresSlices () const
         "kNoteUnpitchedInTuplet " <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
       s <<
         ", noteTupletFactor " << fNoteTupletFactor.asString ();
@@ -5207,12 +5207,12 @@ void msrNote::printNoteEssentials (ostream& os) const
         "kNoteRegularInTuplet: " <<
         soundingNoteEssentialsAsString ();
 /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
       break;
 
@@ -5227,12 +5227,12 @@ void msrNote::printNoteEssentials (ostream& os) const
         "kNoteInTupletInGraceNotesGroup " <<
         nonSoundingNoteEssentialsAsString ();
 /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
 
       os <<
@@ -5244,12 +5244,12 @@ void msrNote::printNoteEssentials (ostream& os) const
         "kNoteUnpitchedInTuplet: " <<
         noteSoundingWholeNotesAsMsrString ();
 /* JMI
-        notePartUpLink ()->
+        noteUpLinkToPart ()->
           tupletSoundingWholeNotesAsMsrString (
             fInputLineNumber,
             fMeasureElementSoundingWholeNotes,
-            fNoteDirectTupletUpLink->getTupletActualNotes (),
-            fNoteDirectTupletUpLink->getTupletNormalNotes ())
+            fNoteDirectUpLinkToTuplet->getTupletActualNotes (),
+            fNoteDirectUpLinkToTuplet->getTupletNormalNotes ())
             */
       os <<
         ", noteTupletFactor: " << fNoteTupletFactor.asString ();
@@ -5515,15 +5515,15 @@ void msrNote::print (ostream& os) const
   // print note measure uplink
   os <<
     setw (fieldWidth) <<
-    "fNoteDirectMeasureUpLink" << " : ";
+    "fNoteDirectUpLinkToMeasure" << " : ";
 
-  if (fNoteDirectMeasureUpLink) {
+  if (fNoteDirectUpLinkToMeasure) {
     os << endl;
 
     ++gIndenter;
 
     os <<
-      fNoteDirectMeasureUpLink->asShortString () <<
+      fNoteDirectUpLinkToMeasure->asShortString () <<
       endl;
 
     --gIndenter;
@@ -5537,11 +5537,11 @@ void msrNote::print (ostream& os) const
   // print note chord uplink
   os <<
     setw (fieldWidth) <<
-    "fNoteDirectChordUpLink" << " : ";
+    "fNoteDirectUpLinkToChord" << " : ";
 
-  if (fNoteDirectChordUpLink) {
+  if (fNoteDirectUpLinkToChord) {
     os <<
-      fNoteDirectChordUpLink->asShortString ();
+      fNoteDirectUpLinkToChord->asShortString ();
   }
   else {
     os <<
@@ -5552,13 +5552,13 @@ void msrNote::print (ostream& os) const
   // print note grace notes group uplink
   os <<
     setw (fieldWidth) <<
-    "fNoteDirectGraceNotesGroupUpLink" << " :";
+    "fNoteDirectUpLinkToGraceNotesGroup" << " :";
 
-  if (fNoteDirectGraceNotesGroupUpLink) {
+  if (fNoteDirectUpLinkToGraceNotesGroup) {
     os << endl;
     ++gIndenter;
     os <<
-      fNoteDirectGraceNotesGroupUpLink->asShortString ();
+      fNoteDirectUpLinkToGraceNotesGroup->asShortString ();
     --gIndenter;
   }
   else {
@@ -5570,11 +5570,11 @@ void msrNote::print (ostream& os) const
   // print note tuplet uplink
   os <<
     setw (fieldWidth) <<
-    "fNoteDirectTupletUpLink" << " : ";
+    "fNoteDirectUpLinkToTuplet" << " : ";
 
-  if (fNoteDirectTupletUpLink) {
+  if (fNoteDirectUpLinkToTuplet) {
     os <<
-      fNoteDirectTupletUpLink->asShortString ();
+      fNoteDirectUpLinkToTuplet->asShortString ();
   }
   else {
     os <<
@@ -5628,11 +5628,11 @@ void msrNote::print (ostream& os) const
         setw (fieldWidth) <<
         "tupletSoundingWholeNotes" << " : ";
 
-        if (fNoteDirectTupletUpLink) {
+        if (fNoteDirectUpLinkToTuplet) {
           os <<
             wholeNotesAsMsrString (
               fInputLineNumber,
-              getNoteDirectTupletUpLink ()->
+              getNoteDirectUpLinkToTuplet ()->
                 getMeasureElementSoundingWholeNotes ());
         }
         else {
@@ -5657,9 +5657,9 @@ void msrNote::print (ostream& os) const
   // may be unknown if there is no time signature
   rational
     measureFullLength =
-      fNoteDirectMeasureUpLink
+      fNoteDirectUpLinkToMeasure
         ?
-          fNoteDirectMeasureUpLink->
+          fNoteDirectUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
         : rational (0, 1); // JMI KAKA
 
@@ -6024,12 +6024,12 @@ void msrNote::print (ostream& os) const
         "noteTupletNoteSoundingWholeNotesAsMsrString" << " : ";
           */
 
-      if (fNoteDirectTupletUpLink) {
+      if (fNoteDirectUpLinkToTuplet) {
         os <<
           "\"" <<
           wholeNotesAsMsrString (
             fInputLineNumber,
-            getNoteDirectTupletUpLink ()->
+            getNoteDirectUpLinkToTuplet ()->
               getMeasureElementSoundingWholeNotes ()) <<
           "\"";
       }
@@ -6939,12 +6939,12 @@ void msrNote::print (ostream& os) const
       os <<
         ", stanza " <<
         syllable->
-          getSyllableStanzaUpLink ()->
+          getSyllableUpLinkToStanza ()->
             getStanzaNumber () <<
         ", line " << syllable->getInputLineNumber () <<
-        ", noteUpLink: " <<
+        ", syllableUpLinkToNote: " <<
         syllable->
-          getSyllableNoteUpLink ()->
+          getSyllableUpLinkToNote ()->
             asShortString ();
 */
 
@@ -7072,11 +7072,11 @@ void msrNote::printShort (ostream& os) const
         setw (fieldWidth) <<
         "tupletSoundingWholeNotes" << " : ";
 
-        if (fNoteDirectTupletUpLink) {
+        if (fNoteDirectUpLinkToTuplet) {
           os <<
             wholeNotesAsMsrString (
               fInputLineNumber,
-              getNoteDirectTupletUpLink ()->
+              getNoteDirectUpLinkToTuplet ()->
                 getMeasureElementSoundingWholeNotes ());
         }
         else {
@@ -7811,7 +7811,7 @@ ostream& operator<< (ostream& os, const S_msrNote& elt)
 
 /* JMI
 // tuplet upLink
-S_msrTuplet msrNote::fetchNoteTupletUpLink () const
+S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
 {
   S_msrTuplet result;
 
@@ -7823,23 +7823,23 @@ S_msrTuplet msrNote::fetchNoteTupletUpLink () const
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteUnpitchedInMeasure:
-      result = fNoteDirectTupletUpLink;
+      result = fNoteDirectUpLinkToTuplet;
       break;
 
     case msrNoteKind::kNoteRegularInChord:
-      if (fNoteDirectChordUpLink) {
+      if (fNoteDirectUpLinkToChord) {
         result =
-          fNoteDirectChordUpLink->
-            fetchChordTupletUpLink ();
+          fNoteDirectUpLinkToChord->
+            fetchChordUpLinkToTuplet ();
       }
       break;
 
     case msrNoteKind::kNoteRegularInTuplet:
     case msrNoteKind::kNoteRestInTuplet:
-      if (fNoteDirectTupletUpLink) {
+      if (fNoteDirectUpLinkToTuplet) {
         result =
-          fNoteDirectTupletUpLink->
-            fetchTupletTupletUpLink ();
+          fNoteDirectUpLinkToTuplet->
+            fetchTupletUpLinkToTuplet ();
       }
       break;
 
@@ -7849,34 +7849,34 @@ S_msrTuplet msrNote::fetchNoteTupletUpLink () const
     case msrNoteKind::kNoteRegularInGraceNotesGroup:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
     / * JMi
-      if (fNoteDirectGraceNotesGroupUpLink) {
+      if (fNoteDirectUpLinkToGraceNotesGroup) {
         result =
-          fNoteDirectGraceNotesGroupUpLink->
-            getGraceNotesGroupVoiceUpLink ();
+          fNoteDirectUpLinkToGraceNotesGroup->
+            getGraceNotesGroupUpLinkToVoice ();
               / * JMI
-              getGraceNotesGroupNoteUpLink ()->
-              fetchNoteVoiceUpLink ();
+              getGraceNotesGroupUpLinkToNote ()->
+              fetchUpLinkToNoteToVoice ();
               * /
       }
     * /
       break;
 
     case msrNoteKind::kNoteInChordInGraceNotesGroup:
-      if (fNoteDirectChordUpLink) {
+      if (fNoteDirectUpLinkToChord) {
         result =
-          fNoteDirectChordUpLink->
-            getChordDirectGraceNotesGroupUpLink ()->
-              fetchGraceNoteGroupTupletUpLink ();
+          fNoteDirectUpLinkToChord->
+            getChordDirectUpLinkToGraceNotesGroup ()->
+              fetchGraceNoteGroupUpLinkToTuplet ();
       }
       break;
 
     case msrNoteKind::kNoteInTupletInGraceNotesGroup:
       / * cannot happen ??? JMI
-      if (fNoteDirectTupletUpLink) {
+      if (fNoteDirectUpLinkToTuplet) {
         result =
-          fNoteDirectTupletUpLink->
-            getTupletDirectTupletUpLink ()->
-              fetchTupletVoiceUpLink ();
+          fNoteDirectUpLinkToTuplet->
+            getTupletDirectUpLinkToTuplet ()->
+              fetchUpLinkToTupletToVoice ();
       }
       * /
       break;

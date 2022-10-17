@@ -1,7 +1,7 @@
 % !TEX root = MusicFormatsMaintainanceGuide.tex
 
 % -------------------------------------------------------------------------
-\chapter{The two-phase visitors pattern}
+\chapter{The two-phase visitors pattern}\label{The two-phase visitors pattern}
 % -------------------------------------------------------------------------
 
 \mf\ uses a two-phase visitors pattern designed by \fober\ to traverse data structures such an {\tt xmlElement tree} or an MSR description, handling each node in the structure in a systematic way. This is in contrast to a programmed top-down traversal.
@@ -363,7 +363,7 @@ void msrNote::browseData (basevisitor* v)
     // fetch the score
     S_msrScore
       score =
-        fetchNoteScoreUpLink ();
+        fetchUpLinkToNoteToScore ();
 
     if (score) {
       Bool

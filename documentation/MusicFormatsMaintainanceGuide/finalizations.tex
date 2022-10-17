@@ -21,8 +21,8 @@ void msrMeasure::finalizeMeasure (
 
     S_msrVoice
       voice =
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ();
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ();
 
 	// ... ... ...
 
@@ -322,7 +322,7 @@ void msrVoice::finalizeVoice (
   // set part shortest note duration if relevant
   S_msrPart
     voicePart =
-      fetchVoicePartUpLink ();
+      fetchVoiceUpLinkToPart ();
 
   rational
     partShortestNoteDuration =
@@ -403,12 +403,12 @@ void msrMeasure::finalizeMeasure (
       "Attempting to finalize measure " <<
       this->asShortString () <<
       " more than once in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "', context: " << context <<
       "', measureFinalizationContext: " << fMeasureFinalizationContext <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
@@ -424,8 +424,8 @@ void msrMeasure::finalizeMeasure (
   else {
     S_msrVoice
       voice =
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ();
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ();
 
 		// ... ... ...
 
@@ -458,7 +458,7 @@ void msrMeasure::finalizeMeasure (
     // position in voice
     rational
       positionInVoice =
-        fetchMeasureVoiceUpLink ()->
+        fetchMeasureUpLinkToVoice ()->
           getCurrentPositionInVoice ();
 
     // assign measure' elements position in measure
@@ -496,14 +496,14 @@ void msrMeasure::finalizeRegularMeasure (
   // fetch the regular voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   // fetch the regular voice's part
   S_msrPart
     regularPart =
       voice->
-        fetchVoicePartUpLink ();
+        fetchVoiceUpLinkToPart ();
 
   mfAssert (
     __FILE__, __LINE__,
@@ -535,7 +535,7 @@ void msrMeasure::finalizeRegularMeasure (
       "Finalizing regular measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in regular voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
@@ -563,7 +563,7 @@ void msrMeasure::finalizeRegularMeasure (
   // register this measures's length in the part
   S_msrPart
     part =
-      this->fetchMeasurePartUpLink ();
+      this->fetchMeasureUpLinkToPart ();
 
   part->
     registerOrdinalMeasureNumberWholeNotesDuration (
@@ -620,7 +620,7 @@ void msrMeasure::finalizeRegularMeasure (
           "' occupies measure " <<
           this->asShortString () <<
           " fully in segment '" <<
-          fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+          fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
           "' in voice \"" <<
           voice->getVoiceName () <<
           "\", line " << inputLineNumber <<
@@ -659,14 +659,14 @@ void msrMeasure::finalizeHarmoniesMeasure (
   // fetch the harmonies voice
   S_msrVoice
     harmoniesVoice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   // fetch the harmonies part
   S_msrPart
     harmoniesPart =
       harmoniesVoice->
-        fetchVoicePartUpLink ();
+        fetchVoiceUpLinkToPart ();
 
   mfAssert (
     __FILE__, __LINE__,
@@ -679,7 +679,7 @@ void msrMeasure::finalizeHarmoniesMeasure (
       "Finalizing harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in harmonies voice \"" <<
       harmoniesVoice->getVoiceName () <<
       "\" (" << context << ")" <<
@@ -763,14 +763,14 @@ void msrMeasure::finalizeFiguredBassMeasure (
   // fetch the figured bass voice
   S_msrVoice
     figuredBassVoice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   // fetch the figured bass part
   S_msrPart
     figuredBassPart =
       figuredBassVoice->
-        fetchVoicePartUpLink ();
+        fetchVoiceUpLinkToPart ();
 
   mfAssert (
     __FILE__, __LINE__,
@@ -783,7 +783,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       "Finalizing figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in figured bass voice \"" <<
       figuredBassVoice->getVoiceName () <<
       "\" (" << context << ")" <<

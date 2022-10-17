@@ -223,7 +223,7 @@ void msrDalSegno::setDalSegnoPositionInMeasure (
   // compute dal segno's position in voice
   rational
      positionInVoice =
-      fdal segnoMeasureUpLink->getMeasurePositionInVoice ()
+       segnoUpLinkToMeasure->getMeasurePositionInVoice ()
         +
       positionInMeasure;
   positionInVoice.rationalise ();
@@ -237,7 +237,7 @@ void msrDalSegno::setDalSegnoPositionInMeasure (
   S_msrVoice
     voice =
       measure->
-        fetchMeasureVoiceUpLink ();
+        fetchMeasureUpLinkToVoice ();
 
   voice->
     incrementCurrentPositionInVoice (

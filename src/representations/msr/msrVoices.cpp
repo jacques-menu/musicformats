@@ -183,7 +183,7 @@ S_msrVoice msrVoice::create (
   int          voiceNumber,
   msrVoiceCreateInitialLastSegmentKind
                voiceCreateInitialLastSegmentKind,
-  S_msrStaff   voiceStaffUpLink)
+  S_msrStaff   voiceUpLinkToStaff)
 {
   msrVoice* o =
     new msrVoice (
@@ -191,7 +191,7 @@ S_msrVoice msrVoice::create (
       voiceKind,
       voiceNumber,
       voiceCreateInitialLastSegmentKind,
-      voiceStaffUpLink);
+      voiceUpLinkToStaff);
   assert (o != nullptr);
 
   return o;
@@ -200,7 +200,7 @@ S_msrVoice msrVoice::create (
 S_msrVoice msrVoice::createRegularVoice (
   int        inputLineNumber,
   int        voiceNumber,
-  S_msrStaff voiceStaffUpLink)
+  S_msrStaff voiceUpLinkToStaff)
 {
   return
     msrVoice::create (
@@ -209,13 +209,13 @@ S_msrVoice msrVoice::createRegularVoice (
       voiceNumber,
       msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
         // the initial last segment is ready to receive music
-      voiceStaffUpLink);
+      voiceUpLinkToStaff);
 }
 
 S_msrVoice msrVoice::createHarmoniesVoice ( // unused yet JMI
   int        inputLineNumber,
   int        voiceNumber,
-  S_msrStaff voiceStaffUpLink)
+  S_msrStaff voiceUpLinkToStaff)
 {
   return
     msrVoice::create (
@@ -224,13 +224,13 @@ S_msrVoice msrVoice::createHarmoniesVoice ( // unused yet JMI
       voiceNumber,
       msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
         // the initial last segment is ready to receive music
-      voiceStaffUpLink);
+      voiceUpLinkToStaff);
 }
 
 S_msrVoice msrVoice::createFiguredBassVoice ( // unused yet JMI
   int        inputLineNumber,
   int        voiceNumber,
-  S_msrStaff voiceStaffUpLink)
+  S_msrStaff voiceUpLinkToStaff)
 {
   return
     msrVoice::create (
@@ -239,7 +239,7 @@ S_msrVoice msrVoice::createFiguredBassVoice ( // unused yet JMI
       voiceNumber,
       msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
         // the initial last segment is ready to receive music
-      voiceStaffUpLink);
+      voiceUpLinkToStaff);
 }
 
 msrVoice::msrVoice (
@@ -248,17 +248,17 @@ msrVoice::msrVoice (
   int          voiceNumber,
   msrVoiceCreateInitialLastSegmentKind
                voiceCreateInitialLastSegmentKind,
-  S_msrStaff   voiceStaffUpLink)
+  S_msrStaff   voiceUpLinkToStaff)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    voiceStaffUpLink != nullptr,
-    "voiceStaffUpLink is null");
+    voiceUpLinkToStaff != nullptr,
+    "voiceUpLinkToStaff is null");
 
   // set voice staff upLink
-  fVoiceStaffUpLink = voiceStaffUpLink;
+  fVoiceUpLinkToStaff = voiceUpLinkToStaff;
 
   // set voice kind
   fVoiceKind = voiceKind;
@@ -286,7 +286,7 @@ msrVoice::msrVoice (
     : msrElement (inputLineNumber)
 {
   // set voice staff upLink
-  fVoiceStaffUpLink = nullptr;
+  fVoiceUpLinkToStaff = nullptr;
 
   // set voice kind
   fVoiceKind = voiceKind;
@@ -310,40 +310,40 @@ msrVoice::msrVoice (
 msrVoice::~msrVoice ()
 {}
 
-S_msrPart msrVoice::fetchVoicePartUpLink () const
+S_msrPart msrVoice::fetchVoiceUpLinkToPart () const
 {
   S_msrPart result;
 
-  if (fVoiceStaffUpLink) {
+  if (fVoiceUpLinkToStaff) {
     result =
-      fVoiceStaffUpLink->
-        getStaffPartUpLink ();
+      fVoiceUpLinkToStaff->
+        getStaffUpLinkToPart ();
   }
 
   return result;
 }
 
-S_msrPartGroup msrVoice::fetchVoicePartGroupUpLink () const
+S_msrPartGroup msrVoice::fetchVoiceUpLinkToPartGroup () const
 {
   S_msrPartGroup result;
 
-  if (fVoiceStaffUpLink) {
+  if (fVoiceUpLinkToStaff) {
     result =
-      fVoiceStaffUpLink->
-        fetchStaffPartGroupUpLink ();
+      fVoiceUpLinkToStaff->
+        fetchStaffUpLinkToPartGroup ();
   }
 
   return result;
 }
 
-S_msrScore msrVoice::fetchVoiceScoreUpLink () const
+S_msrScore msrVoice::fetchVoiceUpLinkToScore () const
 {
   S_msrScore result;
 
-  if (fVoiceStaffUpLink) {
+  if (fVoiceUpLinkToStaff) {
     result =
-      fVoiceStaffUpLink->
-        fetchStaffScoreUpLink ();
+      fVoiceUpLinkToStaff->
+        fetchStaffUpLinkToScore ();
   }
 
   return result;
@@ -384,7 +384,7 @@ void msrVoice::setVoiceNameFromNumber (
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindRegular:
       fVoiceName =
-        fVoiceStaffUpLink->getStaffName () +
+        fVoiceUpLinkToStaff->getStaffName () +
         "_Voice_" +
         mfInt2EnglishWord (voiceNumber);
       break;
@@ -394,7 +394,7 @@ void msrVoice::setVoiceNameFromNumber (
 
     case msrVoiceKind::kVoiceKindHarmonies:
       fVoiceName =
-        fVoiceStaffUpLink->getStaffName () +
+        fVoiceUpLinkToStaff->getStaffName () +
         "_Voice_" +
         mfInt2EnglishWord (
           voiceNumber) + // JMI - msrVoice::K_VOICE_HARMONIES_VOICE_BASE_NUMBER) +
@@ -403,7 +403,7 @@ void msrVoice::setVoiceNameFromNumber (
 
     case msrVoiceKind::kVoiceKindFiguredBass:
       fVoiceName =
-        fVoiceStaffUpLink->getStaffName () +
+        fVoiceUpLinkToStaff->getStaffName () +
         "_Voice_" +
         mfInt2EnglishWord (
           voiceNumber) + // JMI - msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER) +
@@ -449,7 +449,7 @@ void msrVoice::initializeVoice (
     gLogStream <<
       "Initializing voice \"" << fVoiceName <<
       "\" in staff \"" <<
-      fVoiceStaffUpLink->getStaffName () <<
+      fVoiceUpLinkToStaff->getStaffName () <<
       "\"" <<
       endl;
   }
@@ -509,7 +509,7 @@ void msrVoice::initializeVoice (
 
   // set voice current measure number
   fVoiceCurrentMeasureNumber = // JMI "??";
-    fetchVoicePartUpLink ()->
+    fetchVoiceUpLinkToPart ()->
       getPartCurrentMeasureNumber ();
 
   // set voice  current ordinal measure number
@@ -582,7 +582,7 @@ void msrVoice::initializeVoice (
     gLogStream <<
       "Initial contents of voice \"" << fVoiceName <<
       "\" in staff \"" <<
-      fVoiceStaffUpLink->getStaffName () <<
+      fVoiceUpLinkToStaff->getStaffName () <<
       "\":" <<
       endl;
 
@@ -891,7 +891,7 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   } // for
 
   // upLinks
-  voiceDeepClone->fVoiceStaffUpLink =
+  voiceDeepClone->fVoiceUpLinkToStaff =
     containingStaff;
 
 #ifdef TRACING_IS_ENABLED
@@ -1461,7 +1461,7 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
   int           inputLineNumber,
   const string& currentMeasureNumber)
 {
-  if (fRegularVoiceHarmoniesVoiceForwardLink) {
+  if (fRegularVoiceForwardLinkToHarmoniesVoice) {
     stringstream s;
 
     s <<
@@ -1492,82 +1492,82 @@ S_msrVoice msrVoice::createRegularVoiceHarmoniesVoice (
   }
 #endif
 
-  fRegularVoiceHarmoniesVoiceForwardLink =
+  fRegularVoiceForwardLinkToHarmoniesVoice =
     msrVoice::create (
       inputLineNumber,
       msrVoiceKind::kVoiceKindHarmonies,
       regularVoiceHarmoniesVoiceNumber,
       msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
-      fVoiceStaffUpLink);
+      fVoiceUpLinkToStaff);
 
   // register it in the staff
-  fVoiceStaffUpLink->
+  fVoiceUpLinkToStaff->
     registerVoiceInStaff (
       inputLineNumber,
-      fRegularVoiceHarmoniesVoiceForwardLink);
+      fRegularVoiceForwardLinkToHarmoniesVoice);
 
   // set backward link
-  fRegularVoiceHarmoniesVoiceForwardLink->
+  fRegularVoiceForwardLinkToHarmoniesVoice->
     fHarmoniesVoiceRegularVoiceBackwardLink = this;
 
-  return fRegularVoiceHarmoniesVoiceForwardLink;
+  return fRegularVoiceForwardLinkToHarmoniesVoice;
 }
 
-S_msrVoice msrVoice::createRegularVoiceFiguredBassVoice (
-  int           inputLineNumber,
-  const string& currentMeasureNumber)
-{
-  if (fRegularVoiceFiguredBassVoiceForwardLink) {
-    stringstream s;
-
-    s <<
-      "Voice \"" <<
-      getVoiceName () <<
-      "\" already has a figured bass voice";
-
-    msrInternalError (
-      gGlobalServiceRunData->getInputSourceName (),
-      inputLineNumber,
-      __FILE__, __LINE__,
-      s.str ());
-  }
-
-  // create the voice figured bass voice
-  int regularVoiceFiguredBassVoiceNumber =
-    msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + fVoiceNumber;
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
-    gLogStream <<
-      "Creating figured bass voice for regular voice \"" <<
-      getVoiceName () <<
-      "\" with voice number " <<
-      regularVoiceFiguredBassVoiceNumber <<
-      ", line " << inputLineNumber <<
-      endl;
-  }
-#endif
-
-  fRegularVoiceFiguredBassVoiceForwardLink =
-    msrVoice::create (
-      inputLineNumber,
-      msrVoiceKind::kVoiceKindFiguredBass,
-      regularVoiceFiguredBassVoiceNumber,
-      msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
-      fVoiceStaffUpLink);
-
-  // register it in the staff
-  fVoiceStaffUpLink->
-    registerVoiceInStaff (
-      inputLineNumber,
-      fRegularVoiceFiguredBassVoiceForwardLink);
-
-  // set backward link
-  fRegularVoiceFiguredBassVoiceForwardLink->
-    fFiguredBassVoiceRegularVoiceBackwardLink = this;
-
-  return fRegularVoiceFiguredBassVoiceForwardLink;
-}
+// S_msrVoice msrVoice::createRegularVoiceFiguredBassVoice (
+//   int           inputLineNumber,
+//   const string& currentMeasureNumber)
+// {
+//   if (fRegularVoiceForwardLinkToFiguredBassVoice) {
+//     stringstream s;
+//
+//     s <<
+//       "Voice \"" <<
+//       getVoiceName () <<
+//       "\" already has a figured bass voice";
+//
+//     msrInternalError (
+//       gGlobalServiceRunData->getInputSourceName (),
+//       inputLineNumber,
+//       __FILE__, __LINE__,
+//       s.str ());
+//   }
+//
+//   // create the voice figured bass voice
+//   int regularVoiceFiguredBassVoiceNumber =
+//     msrVoice::K_VOICE_FIGURED_BASS_VOICE_BASE_NUMBER + fVoiceNumber;
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
+//     gLogStream <<
+//       "Creating figured bass voice for regular voice \"" <<
+//       getVoiceName () <<
+//       "\" with voice number " <<
+//       regularVoiceFiguredBassVoiceNumber <<
+//       ", line " << inputLineNumber <<
+//       endl;
+//   }
+// #endif
+//
+//   fRegularVoiceForwardLinkToFiguredBassVoice =
+//     msrVoice::create (
+//       inputLineNumber,
+//       msrVoiceKind::kVoiceKindFiguredBass,
+//       regularVoiceFiguredBassVoiceNumber,
+//       msrVoiceCreateInitialLastSegmentKind::kCreateInitialLastSegmentYes,
+//       fVoiceUpLinkToStaff);
+//
+//   // register it in the staff
+//   fVoiceUpLinkToStaff->
+//     registerVoiceInStaff (
+//       inputLineNumber,
+//       fRegularVoiceForwardLinkToFiguredBassVoice);
+//
+//   // set backward link
+//   fRegularVoiceForwardLinkToFiguredBassVoice->
+//     fFiguredBassVoiceRegularVoiceBackwardLink = this;
+//
+//   return fRegularVoiceForwardLinkToFiguredBassVoice;
+// }
 
 S_msrStanza msrVoice::addStanzaToVoiceByItsNumber (
   int           inputLineNumber,
@@ -2090,7 +2090,7 @@ void msrVoice::registerShortestNoteInVoiceIfRelevant (S_msrNote note)
     // cascade this new value to the voice's part
     S_msrPart
       voicePartUplink =
-        fetchVoicePartUpLink ();
+        fetchVoiceUpLinkToPart ();
 
     voicePartUplink ->
       registerShortestNoteInPartIfRelevant (
@@ -2521,8 +2521,8 @@ void msrVoice::appendPaddingNoteToVoice (
       forwardStepLength);
 
   // account for padding note's duration in staff
-  fVoiceStaffUpLink->
-    getStaffPartUpLink ()->
+  fVoiceUpLinkToStaff->
+    getStaffUpLinkToPart ()->
       incrementPartCurrentPositionInMeasure (
         inputLineNumber,
         forwardStepLength);
@@ -2740,7 +2740,7 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
   // fetch the part
   S_msrPart
     part =
-      fetchVoicePartUpLink ();
+      fetchVoiceUpLinkToPart ();
 
   // fetch the part current position in measure
   rational
@@ -3020,8 +3020,8 @@ void msrVoice::appendChordToVoice (S_msrChord chord)
     appendChordToSegment (chord);
 
   // account for chord duration in the part current position in measure
-  fVoiceStaffUpLink->
-    getStaffPartUpLink ()->
+  fVoiceUpLinkToStaff->
+    getStaffUpLinkToPart ()->
       incrementPartCurrentPositionInMeasure (
         chord->getInputLineNumber (),
         chord->getMeasureElementSoundingWholeNotes ());
@@ -3086,8 +3086,8 @@ void msrVoice::appendTupletToVoice (S_msrTuplet tuplet)
     appendTupletToSegment (tuplet);
 
   // account for tuplet duration in the part's current position in measure
-  fVoiceStaffUpLink->
-    getStaffPartUpLink ()->
+  fVoiceUpLinkToStaff->
+    getStaffUpLinkToPart ()->
       incrementPartCurrentPositionInMeasure (
         tuplet->getInputLineNumber (),
         tuplet->getMeasureElementSoundingWholeNotes ());
@@ -3152,11 +3152,11 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
 
   // get the voice first note's chord upLink
   S_msrChord
-    firstNoteDirectChordUpLink =
+    firstNoteDirectUpLinkToChord =
       voiceFirstNote->
-        getNoteDirectChordUpLink ();
+        getNoteDirectUpLinkToChord ();
 
-  if (firstNoteDirectChordUpLink) {
+  if (firstNoteDirectUpLinkToChord) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceGraceNotes ()) {
       gLogStream <<
@@ -3164,14 +3164,14 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         graceNotesGroup->asString () <<
         "' to the first chord of voice \"" << getVoiceName () <<
         "\", i.e. '" <<
-        firstNoteDirectChordUpLink->asShortString () <<
+        firstNoteDirectUpLinkToChord->asShortString () <<
         "'" <<
         endl;
     }
 #endif
 
 /*
-    firstNoteDirectChordUpLink->
+    firstNoteDirectUpLinkToChord->
       setChordGraceNotesGroupBefore (
         graceNotesGroup);
         */
@@ -3182,10 +3182,10 @@ void msrVoice::addGraceNotesGroupBeforeAheadOfVoiceIfNeeded (
         msrChordGraceNotesGroupLink::create (
           graceNotesGroup->getInputLineNumber (),
           graceNotesGroup,
-          firstNoteDirectChordUpLink);
+          firstNoteDirectUpLinkToChord);
 
     // register it in the chord
-    firstNoteDirectChordUpLink->
+    firstNoteDirectUpLinkToChord->
       setChordGraceNotesGroupLinkBefore (
         inputLineNumber,
         chordChordGraceNotesGroupLink);
@@ -7036,7 +7036,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
   #endif
 
     // register its whole notes duration
-    fetchVoicePartUpLink ()->
+    fetchVoiceUpLinkToPart ()->
       registerOrdinalMeasureNumberWholeNotesDuration (
         inputLineNumber,
         lastAppendedMeasureClone->
@@ -9517,8 +9517,8 @@ void msrVoice::removeNoteFromVoice (
       note);
 
   // update the part current position in measure
-  fVoiceStaffUpLink->
-    getStaffPartUpLink ()->
+  fVoiceUpLinkToStaff->
+    getStaffUpLinkToPart ()->
       decrementPartCurrentPositionInMeasure (
         inputLineNumber,
         note->
@@ -9640,15 +9640,15 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
 
 // JMI
       // handle the harmonies voice if any
-      if (fRegularVoiceHarmoniesVoiceForwardLink) {
-        fRegularVoiceHarmoniesVoiceForwardLink->
+      if (fRegularVoiceForwardLinkToHarmoniesVoice) {
+        fRegularVoiceForwardLinkToHarmoniesVoice->
           finalizeLastAppendedMeasureInVoice (
             inputLineNumber);
       }
 
       // handle the figured bass voice if any
-      if (fRegularVoiceFiguredBassVoiceForwardLink) {
-        fRegularVoiceFiguredBassVoiceForwardLink->
+      if (fRegularVoiceForwardLinkToFiguredBassVoice) {
+        fRegularVoiceForwardLinkToFiguredBassVoice->
           finalizeLastAppendedMeasureInVoice (
             inputLineNumber);
       }
@@ -9752,7 +9752,7 @@ void msrVoice::finalizeVoice (
   // set part shortest note duration if relevant
   S_msrPart
     voicePart =
-      fetchVoicePartUpLink ();
+      fetchVoiceUpLinkToPart ();
 
   rational
     partShortestNoteDuration =
@@ -9854,14 +9854,14 @@ void msrVoice::finalizeVoice (
 
 //
   // finalize the harmonies voice if any
-  if (fRegularVoiceHarmoniesVoiceForwardLink) {
-    fRegularVoiceHarmoniesVoiceForwardLink->finalizeVoice (
+  if (fRegularVoiceForwardLinkToHarmoniesVoice) {
+    fRegularVoiceForwardLinkToHarmoniesVoice->finalizeVoice (
       inputLineNumber);
   }
 
   // finalize the figured bass voice if any
-  if (fRegularVoiceFiguredBassVoiceForwardLink) {
-    fRegularVoiceFiguredBassVoiceForwardLink->finalizeVoice (
+  if (fRegularVoiceForwardLinkToFiguredBassVoice) {
+    fRegularVoiceForwardLinkToFiguredBassVoice->finalizeVoice (
       inputLineNumber);
   }
 //
@@ -9904,7 +9904,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
   // set part shortest note duration if relevant
   S_msrPart
     voicePart =
-      fetchVoicePartUpLink ();
+      fetchVoiceUpLinkToPart ();
 
   rational
     partShortestNoteDuration =
@@ -10004,15 +10004,17 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
 
 // JMI
   // finalize the harmonies voice if any
-  if (fRegularVoiceHarmoniesVoiceForwardLink) {
-    fRegularVoiceHarmoniesVoiceForwardLink->finalizeVoice (
-      inputLineNumber);
+  if (fRegularVoiceForwardLinkToHarmoniesVoice) {
+    fRegularVoiceForwardLinkToHarmoniesVoice->
+      finalizeVoice (
+        inputLineNumber);
   }
 
   // finalize the figured bass voice if any
-  if (fRegularVoiceFiguredBassVoiceForwardLink) {
-    fRegularVoiceFiguredBassVoiceForwardLink->finalizeVoice (
-      inputLineNumber);
+  if (fRegularVoiceForwardLinkToFiguredBassVoice) {
+    fRegularVoiceForwardLinkToFiguredBassVoice->
+      finalizeVoice (
+        inputLineNumber);
   }
 //
 
@@ -10026,13 +10028,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
   }
 #endif
 
-  for (
-    list<S_msrMeasure>::const_iterator i = fVoiceMeasuresFlatList.begin ();
-    i != fVoiceMeasuresFlatList.end ();
-    ++i
-  ) {
-    S_msrMeasure measure = (*i);
-
+  for (S_msrMeasure measure : fVoiceMeasuresFlatList) {
     measure->
       finalizeMeasure (
         inputLineNumber,
@@ -10434,8 +10430,8 @@ void msrVoice::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fVoiceStaffUpLink" << " : " <<
-    fVoiceStaffUpLink->getStaffName () <<
+    "fVoiceUpLinkToStaff" << " : " <<
+    fVoiceUpLinkToStaff->getStaffName () <<
     endl <<
 
     setw (fieldWidth) <<
@@ -10524,10 +10520,10 @@ void msrVoice::print (ostream& os) const
 // JMI
   // print the regular voice harmonies voice name if any
   os << left <<
-    setw (fieldWidth) << "fRegularVoiceHarmoniesVoiceForwardLink" << " : ";
-  if (fRegularVoiceHarmoniesVoiceForwardLink) {
+    setw (fieldWidth) << "fRegularVoiceForwardLinkToHarmoniesVoice" << " : ";
+  if (fRegularVoiceForwardLinkToHarmoniesVoice) {
     os <<
-      fRegularVoiceHarmoniesVoiceForwardLink->getVoiceName ();
+      fRegularVoiceForwardLinkToHarmoniesVoice->getVoiceName ();
   }
   else {
     os <<
@@ -10537,10 +10533,10 @@ void msrVoice::print (ostream& os) const
 
   // print the figured bass voice name if any
   os << left <<
-    setw (fieldWidth) << "fRegularVoiceFiguredBassVoiceForwardLink" << " : ";
-  if (fRegularVoiceFiguredBassVoiceForwardLink) {
+    setw (fieldWidth) << "fRegularVoiceForwardLinkToFiguredBassVoice" << " : ";
+  if (fRegularVoiceForwardLinkToFiguredBassVoice) {
     os <<
-      fRegularVoiceFiguredBassVoiceForwardLink->getVoiceName ();
+      fRegularVoiceForwardLinkToFiguredBassVoice->getVoiceName ();
   }
   else {
     os <<
@@ -10769,6 +10765,34 @@ void msrVoice::printShort (ostream& os) const
 
   ++gIndenter;
 
+  const int fieldWidth = 41;
+
+  // print the regular voice harmonies voice name if any
+  os << left <<
+    setw (fieldWidth) << "fRegularVoiceForwardLinkToHarmoniesVoice" << " : ";
+  if (fRegularVoiceForwardLinkToHarmoniesVoice) {
+    os <<
+      fRegularVoiceForwardLinkToHarmoniesVoice->getVoiceName ();
+  }
+  else {
+    os <<
+      "none";
+  }
+  os << endl;
+
+  // print the figured bass voice name if any
+  os << left <<
+    setw (fieldWidth) << "fRegularVoiceForwardLinkToFiguredBassVoice" << " : ";
+  if (fRegularVoiceForwardLinkToFiguredBassVoice) {
+    os <<
+      fRegularVoiceForwardLinkToFiguredBassVoice->getVoiceName ();
+  }
+  else {
+    os <<
+      "none";
+  }
+  os << endl;
+
   os << left <<
     '(' <<
     mfSingularOrPlural (
@@ -10790,8 +10814,6 @@ void msrVoice::printShort (ostream& os) const
       fVoiceStanzasMap.size (), "stanza", "stanzas") <<
     ")" <<
     endl;
-
-  const int fieldWidth = 41;
 
 #ifdef TRACING_IS_ENABLED
   displayVoiceMeasuresFlatList (fieldWidth);

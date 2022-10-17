@@ -19,7 +19,7 @@ class EXP msrRepeatCoda : public msrElement
     static SMARTP<msrRepeatCoda> create (
                             int          inputLineNumber,
                             S_msrSegment segment,
-                            S_msrRepeat  repeatUpLink);
+                            S_msrRepeat  upLinkToRepeat);
 
     SMARTP<msrRepeatCoda> createRepeatCodaNewbornClone (
                             S_msrRepeat containingRepeat);
@@ -35,7 +35,7 @@ class EXP msrRepeatCoda : public msrElement
                           msrRepeatCoda (
                             int          inputLineNumber,
                             S_msrSegment segment,
-                            S_msrRepeat  repeatUpLink);
+                            S_msrRepeat  upLinkToRepeat);
 
     virtual               ~msrRepeatCoda ();
 
@@ -49,8 +49,8 @@ class EXP msrRepeatCoda : public msrElement
                               { return fRepeatCodaSegment; }
 
     // upLinks
-    S_msrRepeat           getRepeatCodaRepeatUpLink () const
-                              { return fRepeatCodaRepeatUpLink; }
+    S_msrRepeat           getRepeatCodaUpLinkToRepeat () const
+                              { return fRepeatCodaUpLinkToRepeat; }
 
   public:
 
@@ -87,7 +87,7 @@ class EXP msrRepeatCoda : public msrElement
     S_msrSegment          fRepeatCodaSegment;
 
     // upLinks
-    S_msrRepeat           fRepeatCodaRepeatUpLink;
+    S_msrRepeat           fRepeatCodaUpLinkToRepeat;
 };
 typedef SMARTP<msrRepeatCoda> S_msrRepeatCoda;
 EXP ostream& operator<< (ostream& os, const S_msrRepeatCoda& elt);

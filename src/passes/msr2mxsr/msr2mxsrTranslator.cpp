@@ -2959,7 +2959,8 @@ void msr2mxsrTranslator::visitStart (S_msrStaff& elt)
 
         // register it as the part figured bass staff
         fCurrentPartClone->
-          setPartFiguredBassStaff (fCurrentStaffClone);
+          setPartFiguredBassStaff (
+            fCurrentStaffClone);
 
         fOnGoingStaff = true;
       }
@@ -4966,12 +4967,12 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     S_msrVoice
       noteVoice =
-        theMsrNote->fetchNoteVoiceUpLink ();
+        theMsrNote->fetchUpLinkToNoteToVoice ();
 
     int
       noteStaffNumber =
         theMsrNote->
-          fetchNoteStaffUpLink ()->
+          fetchUpLinkToNoteToStaff ()->
             getStaffNumber (),
       previousMSRNoteStaffNumber =
         fPreviousMSRNoteStaff->
@@ -5058,11 +5059,11 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
   int
     noteStaffNumber =
       theMsrNote->
-        fetchNoteStaffUpLink ()->
+        fetchUpLinkToNoteToStaff ()->
           getStaffNumber (),
     noteVoiceNumber =
       theMsrNote->
-        fetchNoteVoiceUpLink ()->
+        fetchUpLinkToNoteToVoice ()->
           getVoiceNumber ();
 
   if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
@@ -5077,7 +5078,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
     // create a forward comment
     S_msrVoice
       noteVoice =
-        theMsrNote->fetchNoteVoiceUpLink ();
+        theMsrNote->fetchUpLinkToNoteToVoice ();
 
     stringstream s;
     s <<
@@ -5153,11 +5154,11 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
   int
     noteStaffNumber =
       theMsrNote->
-        fetchNoteStaffUpLink ()->
+        fetchUpLinkToNoteToStaff ()->
           getStaffNumber (),
     noteVoiceNumber =
       theMsrNote->
-        fetchNoteVoiceUpLink ()->
+        fetchUpLinkToNoteToVoice ()->
           getVoiceNumber (),
     previousMSRNoteStaffNumber =
       fPreviousMSRNoteStaff
@@ -6063,9 +6064,9 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
       {
         // get theMsrNote's tuplet uplink
         S_msrTuplet
-          noteDirectTupletUpLink =
+          noteDirectUpLinkToTuplet =
             theMsrNote->
-              getNoteDirectTupletUpLink ();
+              getNoteDirectUpLinkToTuplet ();
 
         // get theMsrNote's position in tuplet
         size_t
@@ -6082,7 +6083,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
         else if (
           notePositionInTuplet
             ==
-          noteDirectTupletUpLink->getTupletElementsList ().size ()
+          noteDirectUpLinkToTuplet->getTupletElementsList ().size ()
         ) {
           typeString = "stop";
         }
@@ -6095,7 +6096,7 @@ void msr2mxsrTranslator:: appendNoteTupletIfRelevant (
           tupletElement->add (
             createMxmlIntegerAttribute (
               "number",
-              noteDirectTupletUpLink->getTupletNumber ()));
+              noteDirectUpLinkToTuplet->getTupletNumber ()));
 
           // set its "type" attribute
           tupletElement->add (
@@ -6465,8 +6466,8 @@ void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
   S_msrStaff
     noteStaff =
       theMsrNote->
-        fetchNoteVoiceUpLink ()->
-          getVoiceStaffUpLink ();
+        fetchUpLinkToNoteToVoice ()->
+          getVoiceUpLinkToStaff ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
@@ -6520,7 +6521,7 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
   // fetch theMsrNote voice
   S_msrVoice
     noteVoice =
-      theMsrNote->fetchNoteVoiceUpLink ();
+      theMsrNote->fetchUpLinkToNoteToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
@@ -7355,7 +7356,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
         // create a note comment
         S_msrVoice
           noteVoice =
-            theMsrNote->fetchNoteVoiceUpLink ();
+            theMsrNote->fetchUpLinkToNoteToVoice ();
 
         stringstream s;
         s <<
@@ -7363,7 +7364,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
           "Note " <<
           theMsrNote->notePitchAndSoundingWholeNotesAsString () <<
           ", staffNumber: " <<
-            noteVoice->getVoiceStaffUpLink ()->getStaffNumber () <<
+            noteVoice->getVoiceUpLinkToStaff ()->getStaffNumber () <<
           ", voiceNumber: " <<
             noteVoice->getVoiceNumber () <<
           ", measureElementPositionInMeasure: " <<
@@ -7610,8 +7611,8 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
 #endif
 
     fPreviousMSRNote = elt;
-    fPreviousMSRNoteVoice = fPreviousMSRNote->fetchNoteVoiceUpLink ();
-    fPreviousMSRNoteStaff = fPreviousMSRNoteVoice->getVoiceStaffUpLink ();
+    fPreviousMSRNoteVoice = fPreviousMSRNote->fetchUpLinkToNoteToVoice ();
+    fPreviousMSRNoteStaff = fPreviousMSRNoteVoice->getVoiceUpLinkToStaff ();
   }
 
   // forget about the note element
@@ -7852,7 +7853,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
   if (fOnGoingNonGraceNote) {
     // register this note as the harmony note upLink
     harmony->
-      setHarmonyNoteUpLink (fOnGoingNonGraceNote);
+      setUpLinkToHarmonyToNote (fOnGoingNonGraceNote);
 
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
@@ -8173,7 +8174,7 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
   else if (fOnGoingNonGraceNote) { // JMI
     // visiting a syllable as attached to the current non-grace note
     fCurrentSyllableClone->
-      appendSyllableToNoteAndSetItsNoteUpLink (
+      appendSyllableToNoteAndSetItsUpLinkToNote (
         fCurrentNonGraceNoteClone);
 
     if (gGlobalLpsrOahGroup->getAddMsrWordsFromTheMusicXMLLyrics ()) {
@@ -8216,7 +8217,7 @@ void msr2mxsrTranslator::visitStart (S_msrSyllable& elt)
                 msrFontSizeKind::kFontSizeNone), // default value
               msrFontWeightKind::kFontWeightNone,               // default value
               msrXMLLangKind::kXMLLangIt,                    // default value
-              elt->getSyllableNoteUpLink ()->getNoteStaffNumber ());
+              elt->getSyllableUpLinkToNote ()->getNoteStaffNumber ());
 
         // append it to the current non-grace note
 #ifdef TRACING_IS_ENABLED

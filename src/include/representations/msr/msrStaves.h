@@ -56,7 +56,7 @@ class EXP msrStaff : public msrElement
                             int          inputLineNumber,
                             msrStaffKind staffKind,
                             int          staffNumber,
-                            S_msrPart    staffPartUpLink);
+                            S_msrPart    staffUpLinkToPart);
 
     SMARTP<msrStaff> createStaffNewbornClone (
                             S_msrPart containingPart);
@@ -70,7 +70,7 @@ class EXP msrStaff : public msrElement
                             int          inputLineNumber,
                             msrStaffKind staffKind,
                             int          staffNumber,
-                            S_msrPart    staffPartUpLink);
+                            S_msrPart    staffUpLinkToPart);
 
     virtual               ~msrStaff ();
 
@@ -88,8 +88,8 @@ class EXP msrStaff : public msrElement
 
     // upLink
 
-    S_msrPart             getStaffPartUpLink () const
-                              { return fStaffPartUpLink; }
+    S_msrPart             getStaffUpLinkToPart () const
+                              { return fStaffUpLinkToPart; }
 
     // staff kind
 
@@ -171,9 +171,9 @@ class EXP msrStaff : public msrElement
 
     // upLinks
 
-    S_msrPartGroup        fetchStaffPartGroupUpLink () const;
+    S_msrPartGroup        fetchStaffUpLinkToPartGroup () const;
 
-    S_msrScore            fetchStaffScoreUpLink () const;
+    S_msrScore            fetchStaffUpLinkToScore () const;
 
     // part shortest note
 
@@ -384,7 +384,7 @@ class EXP msrStaff : public msrElement
 
     // upLinks
 
-    S_msrPart             fStaffPartUpLink;
+    S_msrPart             fStaffUpLinkToPart;
 
     // staff name
     string                fStaffName;

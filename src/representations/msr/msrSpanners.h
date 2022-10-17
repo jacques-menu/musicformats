@@ -41,7 +41,7 @@ class EXP msrSpanner : public msrElement
                             msrSpannerKind     spannerKind,
                             msrSpannerTypeKind spannerTypeKind,
                             msrPlacementKind   spannerPlacementKind,
-                            S_msrNote          spannerNoteUpLink);
+                            S_msrNote          spannerUpLinkToNote);
 
   protected:
 
@@ -54,7 +54,7 @@ class EXP msrSpanner : public msrElement
                             msrSpannerKind     spannerKind,
                             msrSpannerTypeKind spannerTypeKind,
                             msrPlacementKind   spannerPlacementKind,
-                            S_msrNote          spannerNoteUpLink);
+                            S_msrNote          spannerUpLinkToNote);
 
     virtual               ~msrSpanner ();
 
@@ -64,19 +64,19 @@ class EXP msrSpanner : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    void                  setSpannerNoteUpLink (
-                            S_msrNote spannerNoteUpLink)
-                              { fSpannerNoteUpLink = spannerNoteUpLink; }
+    void                  setSpannerUpLinkToNote (
+                            S_msrNote spannerUpLinkToNote)
+                              { fSpannerUpLinkToNote = spannerUpLinkToNote; }
 
-    S_msrNote             getSpannerNoteUpLink () const
-                              { return fSpannerNoteUpLink; }
+    S_msrNote             getSpannerUpLinkToNote () const
+                              { return fSpannerUpLinkToNote; }
 
     // sideLinks
-    void                  setSpannerOtherEndSideLink (
-                            S_msrSpanner otherEndSideLink);
+    void                  setSpannerSideLinkToOtherEnd (
+                            S_msrSpanner sideLinkToOtherEnd);
 
-    S_msrSpanner          getSpannerOtherEndSideLink () const
-                              { return fSpannerOtherEndSideLink; }
+    S_msrSpanner          getSpannerSideLinkToOtherEnd () const
+                              { return fSpannerSideLinkToOtherEnd; }
 
     // fields
     void                  setSpannerNumber (int spannerNumber)
@@ -156,11 +156,11 @@ class EXP msrSpanner : public msrElement
 
     // upLinks
     // ------------------------------------------------------
-    S_msrNote             fSpannerNoteUpLink;
+    S_msrNote             fSpannerUpLinkToNote;
 
     // sideLinks
     // ------------------------------------------------------
-    S_msrSpanner          fSpannerOtherEndSideLink; // two-way
+    S_msrSpanner          fSpannerSideLinkToOtherEnd; // two-way
 
     // fields
     // ------------------------------------------------------

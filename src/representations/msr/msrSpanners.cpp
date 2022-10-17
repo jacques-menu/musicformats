@@ -36,7 +36,7 @@ S_msrSpanner msrSpanner::create (
   msrSpannerKind     spannerKind,
   msrSpannerTypeKind spannerTypeKind,
   msrPlacementKind   spannerPlacementKind,
-  S_msrNote          spannerNoteUpLink)
+  S_msrNote          spannerUpLinkToNote)
 {
   msrSpanner* o =
     new msrSpanner (
@@ -45,7 +45,7 @@ S_msrSpanner msrSpanner::create (
       spannerKind,
       spannerTypeKind,
       spannerPlacementKind,
-      spannerNoteUpLink);
+      spannerUpLinkToNote);
   assert (o != nullptr);
   return o;
 }
@@ -56,10 +56,10 @@ msrSpanner::msrSpanner (
   msrSpannerKind     spannerKind,
   msrSpannerTypeKind spannerTypeKind,
   msrPlacementKind   spannerPlacementKind,
-  S_msrNote          spannerNoteUpLink)
+  S_msrNote          spannerUpLinkToNote)
     : msrElement (inputLineNumber)
 {
-  fSpannerNoteUpLink = spannerNoteUpLink;
+  fSpannerUpLinkToNote = spannerUpLinkToNote;
 
   fSpannerNumber = spannerNumber;
 
@@ -73,20 +73,20 @@ msrSpanner::msrSpanner (
 msrSpanner::~msrSpanner ()
 {}
 
-void msrSpanner::setSpannerOtherEndSideLink (
-  S_msrSpanner otherEndSideLink)
+void msrSpanner::setSpannerSideLinkToOtherEnd (
+  S_msrSpanner sideLinkToOtherEnd)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    otherEndSideLink != nullptr,
-    "otherEndSideLink is null");
+    sideLinkToOtherEnd != nullptr,
+    "sideLinkToOtherEnd is null");
 
   // set the two-way sideLink between both ends of the spanner
-  fSpannerOtherEndSideLink =
-    otherEndSideLink;
+  fSpannerSideLinkToOtherEnd =
+    sideLinkToOtherEnd;
 
-  otherEndSideLink->fSpannerOtherEndSideLink =
+  sideLinkToOtherEnd->fSpannerSideLinkToOtherEnd =
     this;
 }
 
@@ -215,8 +215,8 @@ void msrSpanner::print (ostream& os) const
     spannerTypeKindAsString () <<
     endl <<
     setw (fieldWidth) <<
-    "spannerNoteUpLink" << " : " <<
-    fSpannerNoteUpLink->asShortString () <<
+    "spannerUpLinkToNote" << " : " <<
+    fSpannerUpLinkToNote->asShortString () <<
     endl <<
     setw (fieldWidth) <<
     "spannerBeginText" << " : \"" <<
@@ -236,22 +236,22 @@ void msrSpanner::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "spannerNoteUpLink" << " : " <<
+    "spannerUpLinkToNote" << " : " <<
     spannerPlacementKindAsString () <<
     endl;
   ++gIndenter;
     os <<
-      fSpannerNoteUpLink->asString () <<
+      fSpannerUpLinkToNote->asString () <<
       endl;
   --gIndenter;
 
   os << left <<
     setw (fieldWidth) <<
-    "spannerOtherEndSideLink";
-  if (fSpannerOtherEndSideLink) {
+    "spannerSideLinkToOtherEnd";
+  if (fSpannerSideLinkToOtherEnd) {
     os <<
       endl <<
-      fSpannerOtherEndSideLink->asShortString ();
+      fSpannerSideLinkToOtherEnd->asShortString ();
   }
   else {
     os <<

@@ -758,7 +758,7 @@ void oahHelpAtom::applyElement (ostream& os)
 
   gIndenter.resetToZero ();
 
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     printHelp (os);
 
   gIndenter.setIndentation (saveIndent);
@@ -910,7 +910,7 @@ void oahHelpSummaryAtom::applyElement (ostream& os)
 
   gIndenter.resetToZero ();
 
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     printOptionsSummary (os);
 
   gIndenter.setIndentation (saveIndent);
@@ -1147,7 +1147,7 @@ void oahAboutAtom::print (ostream& os) const
 void oahAboutAtom::printAbout (ostream& os) const
 {
   os <<
-    fetchAtomHandlerUpLink ()->
+    fetchAtomUpLinkToHandler ()->
       handlerServiceAboutInformation () <<
     endl;
 }
@@ -1335,7 +1335,7 @@ void oahVersionAtom::printVersionShort (ostream& os) const
   // get the handler version
   S_mfcMultiComponent
     handlerMultiComponent =
-      fetchAtomHandlerUpLink ()->
+      fetchAtomUpLinkToHandler ()->
         getHandlerMultiComponent ();
 
   // sanity check
@@ -1353,7 +1353,7 @@ void oahVersionAtom::printVersionFull (ostream& os) const
   // get the handler version
   S_mfcMultiComponent
     handlerMultiComponent =
-      fetchAtomHandlerUpLink ()->
+      fetchAtomUpLinkToHandler ()->
         getHandlerMultiComponent ();
 
   // sanity check
@@ -1513,7 +1513,7 @@ void oahLibraryVersionAtom::printVersion (ostream& os) const
   // get the handler version
   S_mfcMultiComponent
     handlerMultiComponent =
-      fetchAtomHandlerUpLink ()->
+      fetchAtomUpLinkToHandler ()->
         getHandlerMultiComponent ();
 
   // sanity check
@@ -1673,7 +1673,7 @@ void oahHistoryAtom::printHistory (ostream& os) const
   // get the handler history
   S_mfcMultiComponent
     handlerMultiComponent =
-      fetchAtomHandlerUpLink ()->
+      fetchAtomUpLinkToHandler ()->
         getHandlerMultiComponent ();
 
   // sanity check
@@ -1833,7 +1833,7 @@ void oahLibraryHistoryAtom::printHistory (ostream& os) const
   // get the handler history
   S_mfcMultiComponent
     handlerMultiComponent =
-      fetchAtomHandlerUpLink ()->
+      fetchAtomUpLinkToHandler ()->
         getHandlerMultiComponent ();
 
   // sanity check
@@ -2150,7 +2150,7 @@ void oahDisplayPrefixes::printPrefixes (ostream& os) const
   // get the options handler
   S_oahHandler
     handler =
-      fetchAtomHandlerUpLink ();
+      fetchAtomUpLinkToHandler ();
 
   handler->
     printKnownPrefixes (os);
@@ -2304,7 +2304,7 @@ void oahDisplaySingleCharacterOptions::printSingleCharacterOptions (ostream& os)
   // get the options handler
   S_oahHandler
     handler =
-      fetchAtomHandlerUpLink ();
+      fetchAtomUpLinkToHandler ();
 
   handler->
     printKnownSingleCharacterOptions (os);
@@ -2409,7 +2409,7 @@ void oahOnOffAtom::setOnOffKindVariable (mfOnOffKind value)
       // get the options handler
       S_oahHandler
         handler =
-          fetchAtomHandlerUpLink (); // JMI
+          fetchAtomUpLinkToHandler (); // JMI
 
       gLogStream <<
         "Setting option '" <<
@@ -2612,7 +2612,7 @@ void oahBooleanAtom::setBooleanVariable (Bool value)
       // get the options handler
       S_oahHandler
         handler =
-          fetchAtomHandlerUpLink (); // JMI
+          fetchAtomUpLinkToHandler (); // JMI
 
       gLogStream <<
         "Setting option '" <<
@@ -3228,7 +3228,7 @@ void oahCombinedBooleansAtom::addBooleanAtomByName (
   // get the options handler
   S_oahHandler
     handler =
-      fetchAtomHandlerUpLink ();
+      fetchAtomUpLinkToHandler ();
 
   // sanity check
   mfAssert (
@@ -3846,7 +3846,7 @@ void oahCommonPrefixBooleansAtom::addBooleanAtomByName (
   // get the options handler
   S_oahHandler
     handler =
-      fetchAtomHandlerUpLink ();
+      fetchAtomUpLinkToHandler ();
 
   // sanity check
   mfAssert (
@@ -5333,7 +5333,7 @@ void oahFactorizedStringAtom::addStringAtomByName (
   // get the options handler
   S_oahHandler
     handler =
-      fetchAtomHandlerUpLink ();
+      fetchAtomUpLinkToHandler ();
 
   // sanity check
   mfAssert (
@@ -9988,7 +9988,7 @@ void oahOptionNameHelpAtom::applyAtomWithValue (
 #endif
 
   // delegate this to the handler
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     printNameIntrospectiveHelp (
       os,
       theString);
@@ -9997,7 +9997,7 @@ void oahOptionNameHelpAtom::applyAtomWithValue (
 void oahOptionNameHelpAtom::applyAtomWithDefaultValue (ostream& os)
 {
   // delegate this to the handler
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     printNameIntrospectiveHelp (
       os,
       fDefaultStringValue);
@@ -10180,7 +10180,7 @@ void oahQueryOptionNameAtom::applyAtomWithValue (
 #endif
 
   // delegate this to the handler
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     printNameIntrospectiveHelp (
       os,
       theString);
@@ -10437,7 +10437,7 @@ void oahFindStringAtom::applyAtomWithValue (
   list<S_oahFindStringMatch> foundMatchesList;
 
   // delegate this to the handler
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     findStringInFindableElement (
       mfStringToLowerCase (theString),
       foundMatchesList,
@@ -10708,7 +10708,7 @@ void oahIncludeOptionsAndArgumentsFileAtom::applyAtomWithValue (
 #endif
 
   // delegate this to the handler JMIJMIJMI
-//   fetchAtomHandlerUpLink ()->
+//   fetchAtomUpLinkToHandler ()->
 //     includeOptionsFileInHandler (
 //       theString,
 //       os);

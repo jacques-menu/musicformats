@@ -1240,7 +1240,7 @@ oahAtom::oahAtom (
 oahAtom::~oahAtom ()
 {}
 
-void oahAtom::setSubGroupUpLink (
+void oahAtom::setUpLinkToSubGroup (
   S_oahSubGroup subGroup)
 {
   // sanity check
@@ -1250,31 +1250,31 @@ void oahAtom::setSubGroupUpLink (
     "subGroup is null");
 
   // set the atom subgroup upLink
-  fSubGroupUpLink = subGroup;
+  fUpLinkToSubGroup = subGroup;
 }
 
-S_oahGroup oahAtom::fetchAtomGroupUpLink () const
+S_oahGroup oahAtom::fetchAtomUpLinkToGroup () const
 {
   S_oahGroup result;
 
-  if (fSubGroupUpLink) {
+  if (fUpLinkToSubGroup) {
     result =
-      fSubGroupUpLink->
-        getGroupUpLink ();
+      fUpLinkToSubGroup->
+        getUpLinkToGroup ();
   }
 
   return result;
 }
 
-S_oahHandler oahAtom::fetchAtomHandlerUpLink () const
+S_oahHandler oahAtom::fetchAtomUpLinkToHandler () const
 {
   S_oahHandler result;
 
-  if (fSubGroupUpLink) {
+  if (fUpLinkToSubGroup) {
     result =
-      fSubGroupUpLink->
-        getGroupUpLink ()->
-          getHandlerUpLink ();
+      fUpLinkToSubGroup->
+        getUpLinkToGroup ()->
+          getUpLinkToHandler ();
   }
 
   return result;
@@ -1345,12 +1345,12 @@ void oahAtom::appendAtomToElementsList (
 
 void oahAtom::registerAtomAsBeingUsed ()
 {
-  fSubGroupUpLink->
+  fUpLinkToSubGroup->
     incrementNumberOfUserChoseAtomsInThisSubGroup ();
 
   S_oahGroup
     atomGroup =
-      fSubGroupUpLink-> getGroupUpLink ();
+      fUpLinkToSubGroup-> getUpLinkToGroup ();
 
   atomGroup->
     incrementNumberOfUserChoseAtomsInThisGroup ();
@@ -1465,9 +1465,9 @@ const string oahAtom::containingFindableElementAsString () const
 
   s << left <<
     "Atom in subgroup \"" <<
-    fSubGroupUpLink->getSubGroupHeader () <<
+    fUpLinkToSubGroup->getSubGroupHeader () <<
     "\" in group \"" <<
-    fSubGroupUpLink->getGroupUpLink ()->getGroupHeader () <<
+    fUpLinkToSubGroup->getUpLinkToGroup ()->getGroupHeader () <<
     "\"";
 
 	return s.str ();
@@ -2425,7 +2425,7 @@ S_oahSubGroup oahSubGroup::create (
   const string&            shortName,
   const string&            description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahGroup               groupUpLink)
+  S_oahGroup               upLinkToGroup)
 {
   oahSubGroup* o = new
     oahSubGroup (
@@ -2434,7 +2434,7 @@ S_oahSubGroup oahSubGroup::create (
       shortName,
       description,
       optionVisibilityKind,
-      groupUpLink);
+      upLinkToGroup);
   assert (o != nullptr);
   return o;
 }
@@ -2445,7 +2445,7 @@ S_oahSubGroup oahSubGroup::createWithNames (
   const string&            shortName,
   const string&            description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahGroup               groupUpLink)
+  S_oahGroup               upLinkToGroup)
 {
   oahSubGroup* o = new
     oahSubGroup (
@@ -2454,7 +2454,7 @@ S_oahSubGroup oahSubGroup::createWithNames (
       shortName,
       description,
       optionVisibilityKind,
-      groupUpLink);
+      upLinkToGroup);
   assert (o != nullptr);
   return o;
 }
@@ -2465,7 +2465,7 @@ oahSubGroup::oahSubGroup (
   const string&            shortName,
   const string&            description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahGroup               groupUpLink)
+  S_oahGroup               upLinkToGroup)
   : oahElement (
       longName,
       shortName,
@@ -2473,7 +2473,7 @@ oahSubGroup::oahSubGroup (
       oahElementValueKind::kElementValueWithout,
       optionVisibilityKind)
 {
-  fGroupUpLink = groupUpLink;
+  fUpLinkToGroup = upLinkToGroup;
 
   fSubGroupHeader = subGroupHeader;
 
@@ -2486,14 +2486,14 @@ oahSubGroup::oahSubGroup (
 oahSubGroup::~oahSubGroup ()
 {}
 
-S_oahHandler oahSubGroup::fetchSubGroupHandlerUpLink () const
+S_oahHandler oahSubGroup::fetchSubGroupUpLinkToHandler () const
 {
   S_oahHandler result;
 
-  if (fGroupUpLink) {
+  if (fUpLinkToGroup) {
     result =
-      fGroupUpLink->
-        getHandlerUpLink ();
+      fUpLinkToGroup->
+        getUpLinkToHandler ();
   }
 
   return result;
@@ -2520,8 +2520,8 @@ void oahSubGroup::appendSubGroupToElementsList (
   handler->
     appendElementToElementsList (this);
 
-  fGroupUpLink->
-    setHandlerUpLink (handler);
+  fUpLinkToGroup->
+    setUpLinkToHandler (handler);
 
   // register the OAH atoms in the handler
   for (
@@ -2595,7 +2595,7 @@ void oahSubGroup::appendAtomToSubGroup (
 
   // set atom subgroup upLink
   atom->
-    setSubGroupUpLink (this);
+    setUpLinkToSubGroup (this);
 }
 
 S_oahElement oahSubGroup::fetchOptionByNameInSubGroup (
@@ -2644,13 +2644,13 @@ void oahSubGroup::applyElement (ostream& os)
     "--- Help for subgroup \"" <<
     fSubGroupHeader <<
     "\" in group \"" <<
-    fGroupUpLink->getGroupHeader () <<
+    fUpLinkToGroup->getGroupHeader () <<
     "\" ---" <<
     endl;
 
   ++gIndenter;
 
-  fGroupUpLink->
+  fUpLinkToGroup->
     printGroupAndSubGroupHelp (
       os,
       this);
@@ -2999,7 +2999,7 @@ void oahSubGroup::printHelpWithHeaderWidth (
     subGroupHeaderWidth);
 
   // underline the header if the group header is not written
-  if (! fGroupUpLink->getGroupHeaderIsToBeWritten ()) {
+  if (! fUpLinkToGroup->getGroupHeaderIsToBeWritten ()) {
     underlineSubGroupHeader (os);
   }
 
@@ -3096,15 +3096,15 @@ void oahSubGroup::printOptionsSummary (
 {
   // fetch maximum subgroups help headers size
   size_t maximumSubGroupsHelpHeadersSize =
-    getGroupUpLink ()->
-      getHandlerUpLink ()->
+    getUpLinkToGroup ()->
+      getUpLinkToHandler ()->
         getMaximumSubGroupsHeadersSize ();
 
     /* JMI
   // fetch maximum short name width
   int maximumShortNameWidth =
-    getGroupUpLink ()->
-      getHandlerUpLink ()->
+    getUpLinkToGroup ()->
+      getUpLinkToHandler ()->
         getMaximumShortNameWidth ();
 */
 
@@ -3207,7 +3207,7 @@ const string oahSubGroup::containingFindableElementAsString () const
 
   s << left <<
     "Subgroup in group \"" <<
-    fGroupUpLink->getGroupHeader () <<
+    fUpLinkToGroup->getGroupHeader () <<
     "\"";
 
 	return s.str ();
@@ -3404,7 +3404,7 @@ S_oahGroup oahGroup::create (
   const string&            shortName,
   const string&            description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahHandler             groupHandlerUpLink)
+  S_oahHandler             groupUpLinkToHandler)
 {
   oahGroup* o = new
     oahGroup (
@@ -3413,7 +3413,7 @@ S_oahGroup oahGroup::create (
       shortName,
       description,
       optionVisibilityKind,
-      groupHandlerUpLink);
+      groupUpLinkToHandler);
   assert (o != nullptr);
   return o;
 }
@@ -3442,7 +3442,7 @@ S_oahGroup oahGroup::createWithNames (
   const string&            shortName,
   const string&            description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahHandler             groupHandlerUpLink)
+  S_oahHandler             groupUpLinkToHandler)
 {
   oahGroup* o = new
     oahGroup (
@@ -3451,7 +3451,7 @@ S_oahGroup oahGroup::createWithNames (
       shortName,
       description,
       optionVisibilityKind,
-      groupHandlerUpLink);
+      groupUpLinkToHandler);
   assert (o != nullptr);
   return o;
 }
@@ -3485,7 +3485,7 @@ oahGroup::oahGroup (
   const string&            shortName,
   const string&            description,
   oahElementVisibilityKind optionVisibilityKind,
-  S_oahHandler             groupHandlerUpLink)
+  S_oahHandler             groupUpLinkToHandler)
   : oahElement (
       longName,
       shortName,
@@ -3493,7 +3493,7 @@ oahGroup::oahGroup (
       oahElementValueKind::kElementValueWithout,
       optionVisibilityKind)
 {
-  fHandlerUpLink = groupHandlerUpLink;
+  fUpLinkToHandler = groupUpLinkToHandler;
 
   fGroupHeader = header;
 
@@ -3505,10 +3505,10 @@ oahGroup::oahGroup (
 oahGroup::~oahGroup ()
 {}
 
-void oahGroup::setHandlerUpLink (
-  S_oahHandler handlerUpLink)
+void oahGroup::setUpLinkToHandler (
+  S_oahHandler upLinkToHandler)
 {
-  fHandlerUpLink = handlerUpLink;
+  fUpLinkToHandler = upLinkToHandler;
 }
 
 void oahGroup::appendGroupToElementsList (
@@ -3539,7 +3539,7 @@ void oahGroup::appendGroupToElementsList (
     appendElementToElementsList (this);
 
   // set group handler upLink
-  fHandlerUpLink = handler;
+  fUpLinkToHandler = handler;
 
   // append subgroups to elements list
   for (
@@ -3620,7 +3620,7 @@ void  oahGroup::appendSubGroupToGroup (
 
   // set options subgroup group upLink
   subGroup->
-    setGroupUpLink (this);
+    setUpLinkToGroup (this);
 }
 
 S_oahElement oahGroup::fetchOptionByNameInGroup (
@@ -3695,7 +3695,7 @@ void oahGroup::handleAtomValue (
 S_mfcMultiComponent oahGroup::fetchGroupHandlerMultiComponent () const
 {
   return
-    fHandlerUpLink->
+    fUpLinkToHandler->
       getHandlerMultiComponent ();
 }
 
@@ -4329,7 +4329,7 @@ const string oahGroup::containingFindableElementAsString () const
 
   s << left <<
     "Group in handler \"" <<
-    fHandlerUpLink->getHandlerHeader () <<
+    fUpLinkToHandler->getHandlerHeader () <<
     "\"";
 
 	return s.str ();
@@ -5995,7 +5995,7 @@ void oahHandler::printNameIntrospectiveHelp (
       S_oahGroup
         group =
           subGroup->
-            getGroupUpLink ();
+            getUpLinkToGroup ();
 
       int saveIndent = gIndenter.getIndentation ();
 
@@ -6032,13 +6032,13 @@ void oahHandler::printNameIntrospectiveHelp (
       S_oahSubGroup
         subGroup =
           atom->
-            getSubGroupUpLink ();
+            getUpLinkToSubGroup ();
 
       // get the group upLink
       S_oahGroup
         group =
           subGroup->
-            getGroupUpLink ();
+            getUpLinkToGroup ();
 
       int saveIndent = gIndenter.getIndentation ();
 
@@ -6608,7 +6608,7 @@ void oahHandler::appendGroupToHandler (
 
   // set the group upLink to this handler
   group->
-    setHandlerUpLink (this);
+    setUpLinkToHandler (this);
 }
 
 void oahHandler::prependGroupToHandler (
@@ -6641,7 +6641,7 @@ void oahHandler::prependGroupToHandler (
 
   // set the group upLink to this handler
   group->
-    setHandlerUpLink (this);
+    setUpLinkToHandler (this);
 }
 
 void oahHandler::printKnownPrefixes (ostream& os) const

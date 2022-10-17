@@ -48,7 +48,7 @@ S_msrSyllable msrSyllable::create (
   const string&         syllableStanzaNumber,
   const rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           syllableStanzaUpLink)
+  S_msrStanza           SyllableUpLinkToStanza)
 {
   msrSyllable* o =
     new msrSyllable (
@@ -58,7 +58,7 @@ S_msrSyllable msrSyllable::create (
       syllableStanzaNumber,
       syllableWholeNotes,
       syllableTupletFactor,
-      syllableStanzaUpLink);
+      SyllableUpLinkToStanza);
   assert (o != nullptr);
 
   return o;
@@ -71,7 +71,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
   const string&         syllableStanzaNumber,
   const rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           syllableStanzaUpLink,
+  S_msrStanza           SyllableUpLinkToStanza,
   int                   syllableNextMeasurePuristNumber)
 {
   msrSyllable* o =
@@ -82,7 +82,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
       syllableStanzaNumber,
       syllableWholeNotes,
       syllableTupletFactor,
-      syllableStanzaUpLink,
+      SyllableUpLinkToStanza,
       syllableNextMeasurePuristNumber);
   assert (o != nullptr);
 
@@ -96,18 +96,18 @@ msrSyllable::msrSyllable (
   const string&         syllableStanzaNumber,
   const rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           syllableStanzaUpLink)
+  S_msrStanza           SyllableUpLinkToStanza)
     : msrMeasureElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    syllableStanzaUpLink != nullptr,
-    "syllableStanzaUpLink is null");
+    SyllableUpLinkToStanza != nullptr,
+    "SyllableUpLinkToStanza is null");
 
   // set syllable's stanza upLink
-  fSyllableStanzaUpLink =
-    syllableStanzaUpLink;
+  fSyllableUpLinkToStanza =
+    SyllableUpLinkToStanza;
 
   fSyllableKind = syllableKind;
 
@@ -115,8 +115,8 @@ msrSyllable::msrSyllable (
 
   fSyllableStanzaNumber = syllableStanzaNumber;
 
-  // fSyllableNoteUpLink will be set
-  // by appendSyllableToNoteAndSetItsNoteUpLink () later
+  // fSyllableUpLinkToNote will be set
+  // by appendSyllableToNoteAndSetItsUpLinkToNote () later
 
   fSyllableWholeNotes = syllableWholeNotes;
 
@@ -146,7 +146,7 @@ msrSyllable::msrSyllable (
   const string&         syllableStanzaNumber,
   const rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           syllableStanzaUpLink,
+  S_msrStanza           SyllableUpLinkToStanza,
   int                   syllableNextMeasurePuristNumber)
     : msrSyllable (
         inputLineNumber,
@@ -155,7 +155,7 @@ msrSyllable::msrSyllable (
         syllableStanzaNumber,
         syllableWholeNotes,
         syllableTupletFactor,
-        syllableStanzaUpLink)
+        SyllableUpLinkToStanza)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -222,7 +222,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
         fSyllableStanzaNumber,
         fSyllableWholeNotes,
         fSyllableTupletFactor,
-        fSyllableStanzaUpLink);
+        fSyllableUpLinkToStanza);
 
   // append the lyric texts to the syllable clone
   for (
@@ -234,12 +234,12 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
       appendLyricTextToSyllable ((*i));
   } // for
 
-  // dont't set 'newbornClone->fSyllableStanzaUpLink'
-  // nor 'newbornClone->fSyllableNoteUpLink',
+  // dont't set 'newbornClone->fSyllableUpLinkToStanza'
+  // nor 'newbornClone->fSyllableUpLinkToNote',
   // this will be done by the caller
 
-  newbornClone->fSyllableNoteUpLink =
-    fSyllableNoteUpLink; // TEMP
+  newbornClone->fSyllableUpLinkToNote =
+    fSyllableUpLinkToNote; // TEMP
 
   return newbornClone;
 }
@@ -272,7 +272,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
         fSyllableStanzaNumber,
         fSyllableWholeNotes,
         fSyllableTupletFactor,
-        fSyllableStanzaUpLink);
+        fSyllableUpLinkToStanza);
 
   // append the lyric texts to the syllable deep clone
   for (
@@ -284,12 +284,12 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
       appendLyricTextToSyllable ((*i));
   } // for
 
-  // dont't set 'newbornClone->fSyllableStanzaUpLink'
-  // nor 'newbornClone->fSyllableNoteUpLink',
+  // dont't set 'newbornClone->fSyllableUpLinkToStanza'
+  // nor 'newbornClone->fSyllableUpLinkToNote',
   // this will be done by the caller
 
-  syllableDeepClone->fSyllableNoteUpLink =
-    fSyllableNoteUpLink; // TEMP
+  syllableDeepClone->fSyllableUpLinkToNote =
+    fSyllableUpLinkToNote; // TEMP
 
   return syllableDeepClone;
 }
@@ -343,7 +343,7 @@ void msrSyllable::appendLyricTextToSyllable (const string& text)
     text);
 }
 
-void msrSyllable::appendSyllableToNoteAndSetItsNoteUpLink (
+void msrSyllable::appendSyllableToNoteAndSetItsUpLinkToNote (
   S_msrNote note)
 {
   // sanity check
@@ -352,7 +352,7 @@ void msrSyllable::appendSyllableToNoteAndSetItsNoteUpLink (
     note != nullptr,
     "note is empty");
 
-  fSyllableNoteUpLink = note;
+  fSyllableUpLinkToNote = note;
 
 /*
   // sanity check JMI ???
@@ -437,8 +437,8 @@ string msrSyllable::syllableWholeNotesAsMsrString () const
 {
   string result;
 
-  if (fSyllableNoteUpLink) { // JMI
-    switch (fSyllableNoteUpLink->getNoteKind ()) {
+  if (fSyllableUpLinkToNote) { // JMI
+    switch (fSyllableUpLinkToNote->getNoteKind ()) {
       case msrNoteKind::k_NoNote:
       case msrNoteKind::kNoteRestInMeasure:
       case msrNoteKind::kNoteUnpitchedInMeasure:
@@ -463,7 +463,7 @@ string msrSyllable::syllableWholeNotesAsMsrString () const
           stringstream s;
 
           s <<
-            fSyllableNoteUpLink->
+            fSyllableUpLinkToNote->
       // JMI        noteSoundingWholeNotesAsMsrString () <<
               noteDisplayWholeNotesAsMsrString () <<
             "*" <<
@@ -576,12 +576,12 @@ string msrSyllable::syllableExtendKindAsString () const
   return syllableExtendKindAsString (fSyllableExtendKind);
 }
 
-string msrSyllable::syllableNoteUpLinkAsString () const
+string msrSyllable::syllableUpLinkToNoteAsString () const
 {
   string result;
 
-  if (fSyllableNoteUpLink) {
-    result = fSyllableNoteUpLink->asString ();
+  if (fSyllableUpLinkToNote) {
+    result = fSyllableUpLinkToNote->asString ();
   }
   else {
     result = "none";
@@ -654,7 +654,7 @@ string msrSyllable::asString () const
 
   s <<
     ", " <<
-    syllableNoteUpLinkAsString ();
+    syllableUpLinkToNoteAsString ();
 
   switch (fSyllableKind) {
     case msrSyllable::kSyllableNone:
@@ -680,9 +680,9 @@ string msrSyllable::asString () const
 
   s << // JMI LENK
     ", attached to note: ";
-  if (fSyllableNoteUpLink) {
+  if (fSyllableUpLinkToNote) {
     s <<
-      fSyllableNoteUpLink->asShortString ();
+      fSyllableUpLinkToNote->asShortString ();
   }
   else {
     s << "none";
@@ -690,9 +690,9 @@ string msrSyllable::asString () const
 
   s <<
     ", in stanza: ";
-  if (fSyllableStanzaUpLink) {
+  if (fSyllableUpLinkToStanza) {
     s <<
-      fSyllableStanzaUpLink->getStanzaName ();
+      fSyllableUpLinkToStanza->getStanzaName ();
   }
   else {
     s << "none";
@@ -756,12 +756,12 @@ void msrSyllable::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "syllableNoteUpLink" << " : " <<
-    syllableNoteUpLinkAsString () <<
+    "syllableUpLinkToNote" << " : " <<
+    syllableUpLinkToNoteAsString () <<
     endl <<
     setw (fieldWidth) <<
-    "syllableStanzaUpLink" << " : " <<
-    fSyllableStanzaUpLink->getStanzaName () <<
+    "SyllableUpLinkToStanza" << " : " <<
+    fSyllableUpLinkToStanza->getStanzaName () <<
     endl;
 
   switch (fSyllableKind) { // JMI
@@ -812,13 +812,13 @@ const string msrStanza::K_NO_STANZA_NAME   = "Unknown stanza";
 S_msrStanza msrStanza::create (
   int           inputLineNumber,
   const string& stanzaNumber,
-  S_msrVoice    stanzaVoiceUpLink)
+  S_msrVoice    stanzaUpLinkToVoice)
 {
   msrStanza* o =
     new msrStanza (
       inputLineNumber,
       stanzaNumber,
-      stanzaVoiceUpLink);
+      stanzaUpLinkToVoice);
   assert (o != nullptr);
 
   return o;
@@ -827,7 +827,7 @@ S_msrStanza msrStanza::create (
 msrStanza::msrStanza (
   int           inputLineNumber,
   const string& stanzaNumber,
-  S_msrVoice    stanzaVoiceUpLink)
+  S_msrVoice    stanzaUpLinkToVoice)
     : msrElement (inputLineNumber)
 {
   // set stanza number and kind
@@ -836,12 +836,12 @@ msrStanza::msrStanza (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    stanzaVoiceUpLink != nullptr,
-    "stanzaVoiceUpLink is null");
+    stanzaUpLinkToVoice != nullptr,
+    "stanzaUpLinkToVoice is null");
 
   // set stanza's voice upLink
-  fStanzaVoiceUpLink =
-    stanzaVoiceUpLink;
+  fStanzaUpLinkToVoice =
+    stanzaUpLinkToVoice;
 
   // do other initializations
   initializeStanza ();
@@ -850,7 +850,7 @@ msrStanza::msrStanza (
 void msrStanza::initializeStanza ()
 {
   fStanzaName =
-    fStanzaVoiceUpLink->getVoiceName () +
+    fStanzaUpLinkToVoice->getVoiceName () +
     "_Stanza_" +
       mfStringNumbersToEnglishWords (
         mfMakeSingleWordFromString (
@@ -913,7 +913,7 @@ S_msrStanza msrStanza::createStanzaNewbornClone (
     fStanzaTextPresent;
 
   // upLinks
-  newbornClone->fStanzaVoiceUpLink =
+  newbornClone->fStanzaUpLinkToVoice =
     containingVoice;
 
   return newbornClone;
@@ -962,14 +962,14 @@ S_msrStanza msrStanza::createStanzaDeepClone (
       fSyllables [i]->
         createSyllableDeepClone (
           containingVoice->
-            fetchVoicePartUpLink ()));
+            fetchVoiceUpLinkToPart ()));
   } // for
 
   stanzaDeepClone->fStanzaTextPresent =
     fStanzaTextPresent;
 
   // upLinks
-  stanzaDeepClone->fStanzaVoiceUpLink =
+  stanzaDeepClone->fStanzaUpLinkToVoice =
     containingVoice;
 
   return stanzaDeepClone;
@@ -992,7 +992,7 @@ void msrStanza::appendSyllableToStanza (
 
   // set the syllable's stanza uplink
   syllable->
-    setSyllableStanzaUpLink (this);
+    setSyllableUpLinkToStanza (this);
 
   // does this stanza contain text?
   switch (syllable->getSyllableKind ()) {
@@ -1028,7 +1028,7 @@ void msrStanza::appendSyllableToStanza (
   rational
     syllableSoundingWholeNotes =
       syllable->
-        getSyllableNoteUpLink ()->
+        getSyllableUpLinkToNote ()->
           getMeasureElementSoundingWholeNotes ();
 
   // update the stanza's current measure whole notes
@@ -1291,7 +1291,7 @@ void msrStanza::appendPaddingNoteToStanza (
       ", to stanza \"" <<
       fStanzaName <<
       "\" in voice \"" <<
-      fStanzaVoiceUpLink->getVoiceName () <<
+      fStanzaUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       endl;
   }

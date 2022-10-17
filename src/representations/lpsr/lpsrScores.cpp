@@ -2711,7 +2711,7 @@ void lpsrScore::appendLyricsUseToStoreCommand (S_msrStanza stanza)
       lpsrNewLyricsBlock::create (
         fInputLineNumber,
         stanza,
-        stanza->getStanzaVoiceUpLink ());
+        stanza->getStanzaUpLinkToVoice ());
 
   fScoreBlock->
     appendLyricsUseToParallelMusicBLock (newLyricsCommand);

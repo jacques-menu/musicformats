@@ -74,12 +74,12 @@ class EXP msrSlide : public msrElement
                               { return fSlideTextValue; }
 
     // measure upLink
-    void                  setSlideMeasureUpLink (
+    void                  setSlideUpLinkToMeasure (
                             const S_msrMeasure& measure)
-                              { fSlideMeasureUpLink = measure; }
+                              { fSlideUpLinkToMeasure = measure; }
 
-    S_msrMeasure          getSlideMeasureUpLink () const
-                              { return fSlideMeasureUpLink; }
+    S_msrMeasure          getSlideUpLinkToMeasure () const
+                              { return fSlideUpLinkToMeasure; }
 
   public:
 
@@ -111,7 +111,7 @@ class EXP msrSlide : public msrElement
     // ------------------------------------------------------
 
     // upLink
-    S_msrMeasure          fSlideMeasureUpLink;
+    S_msrMeasure          fSlideUpLinkToMeasure;
 
     int                   fSlideNumber;
 

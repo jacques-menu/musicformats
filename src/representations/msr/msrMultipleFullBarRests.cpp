@@ -42,13 +42,13 @@ namespace MusicFormats
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
   int              inputLineNumber,
   int              multipleFullBarRestsNumber,
-  S_msrSegment     segmentUpLink)
+  S_msrSegment     upLinkToSegment)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
       inputLineNumber,
       multipleFullBarRestsNumber,
-      segmentUpLink);
+      upLinkToSegment);
   assert (o != nullptr);
   return o;
 }
@@ -56,13 +56,13 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
 S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
   int          inputLineNumber,
   S_msrMeasure restMeasureClone,
-  S_msrSegment segmentUpLink)
+  S_msrSegment upLinkToSegment)
 {
   msrMultipleFullBarRests* o =
     new msrMultipleFullBarRests (
       inputLineNumber,
       restMeasureClone,
-      segmentUpLink);
+      upLinkToSegment);
   assert (o != nullptr);
   return o;
 }
@@ -70,10 +70,10 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::create (
 msrMultipleFullBarRests::msrMultipleFullBarRests (
   int             inputLineNumber,
   int             multipleFullBarRestsNumber,
-  S_msrSegment    segmentUpLink)
+  S_msrSegment    upLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
-  fMultipleFullBarRestsSegmentUpLink = segmentUpLink;
+  fMultipleFullBarRestsUpLinkToSegment = upLinkToSegment;
 
   fMultipleFullBarRestsNumber = multipleFullBarRestsNumber;
 
@@ -83,10 +83,10 @@ msrMultipleFullBarRests::msrMultipleFullBarRests (
 msrMultipleFullBarRests::msrMultipleFullBarRests (
   int          inputLineNumber,
   S_msrMeasure restMeasureClone,
-  S_msrSegment segmentUpLink)
+  S_msrSegment upLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
-  fMultipleFullBarRestsSegmentUpLink = segmentUpLink;
+  fMultipleFullBarRestsUpLinkToSegment = upLinkToSegment;
 
   fMultipleFullBarRestsNumber = 1; // will evolve JMI v0.9.64
 
@@ -265,8 +265,8 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
   fFullBarRestsMeasuresList.push_back (measure);
 
   // it measure the first one in the segment?
-  if (! fMultipleFullBarRestsSegmentUpLink->getSegmentFirstMeasure ()) {
-    fMultipleFullBarRestsSegmentUpLink->
+  if (! fMultipleFullBarRestsUpLinkToSegment->getSegmentFirstMeasure ()) {
+    fMultipleFullBarRestsUpLinkToSegment->
       setSegmentFirstMeasure (measure);
   }
 
@@ -275,8 +275,8 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
   // which don't go down the part-staff-voice-segment hierarchy
   S_msrVoice
     voice =
-      fMultipleFullBarRestsSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMultipleFullBarRestsUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   if (! voice->getVoiceFirstMeasure ()) {
     // yes, register it as such
@@ -288,7 +288,7 @@ void msrMultipleFullBarRests::appendMeasureToMultipleFullBarRests (
   }
 
   // register measure as the last one in the segment
-  fMultipleFullBarRestsSegmentUpLink->
+  fMultipleFullBarRestsUpLinkToSegment->
     setSegmentLastMeasure (
       measure);
 }
@@ -374,11 +374,11 @@ string msrMultipleFullBarRests::asString () const
         "full-bar rests");
 
   s <<
-    ", fMultipleFullBarRestsSegmentUpLink" << " : ";
+    ", fMultipleFullBarRestsUpLinkToSegment" << " : ";
 
-  if (fMultipleFullBarRestsSegmentUpLink) {
+  if (fMultipleFullBarRestsUpLinkToSegment) {
     s <<
-      "fMultipleFullBarRestsSegmentUpLink->asString ()"; // KAKA
+      "fMultipleFullBarRestsUpLinkToSegment->asString ()"; // KAKA
   }
   else {
     s << "none";
@@ -440,12 +440,12 @@ void msrMultipleFullBarRests::print (ostream& os) const
   const int fieldWidth = 41;
 
   os <<
-    "fMultipleFullBarRestsSegmentUpLink" << " : ";
+    "fMultipleFullBarRestsUpLinkToSegment" << " : ";
 
-  if (fMultipleFullBarRestsSegmentUpLink) {
+  if (fMultipleFullBarRestsUpLinkToSegment) {
     os <<
       "\"" <<
-      fMultipleFullBarRestsSegmentUpLink->asString () <<
+      fMultipleFullBarRestsUpLinkToSegment->asString () <<
       "\"";
   }
   else {
@@ -478,12 +478,12 @@ void msrMultipleFullBarRests::print (ostream& os) const
   // print the segment upLink
   os << left <<
     setw (fieldWidth) <<
-    "fMultipleFullBarRestsSegmentUpLink" << " : ";
-  if (fMultipleFullBarRestsSegmentUpLink) {
+    "fMultipleFullBarRestsUpLinkToSegment" << " : ";
+  if (fMultipleFullBarRestsUpLinkToSegment) {
     os << endl;
     ++gIndenter;
 
-    os << "fMultipleFullBarRestsSegmentUpLink" << endl; // KAKA
+    os << "fMultipleFullBarRestsUpLinkToSegment" << endl; // KAKA
 
     --gIndenter;
   }

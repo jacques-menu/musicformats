@@ -77,11 +77,11 @@ class EXP msrScore : public msrBookElement
     // ------------------------------------------------------
 
     // uplink
-    void                  setScoreBookUpLink (S_msrBook book)
-                              { fScoreBookUpLink = book; }
+    void                  setScoreUpLinkToBook (S_msrBook book)
+                              { fScoreUpLinkToBook = book; }
 
-    S_msrBook             getScoreBookUpLink () const
-                              { return fScoreBookUpLink; }
+    S_msrBook             getScoreUpLinkToBook () const
+                              { return fScoreUpLinkToBook; }
 
     // name
     string                getScoreName () const
@@ -347,7 +347,7 @@ class EXP msrScore : public msrBookElement
     // ------------------------------------------------------
 
     // uplink
-    S_msrBook             fScoreBookUpLink;
+    S_msrBook             fScoreUpLinkToBook;
 
     // name
     string                fScoreName;

@@ -77,12 +77,12 @@ class EXP msrGraceNotesGroup : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setGraceNotesGroupNoteUpLink (
+    void                  setGraceNotesGroupUpLinkToNote (
                             S_msrNote note)
-                              { fGraceNotesGroupNoteUpLink = note; }
+                              { fGraceNotesGroupUpLinkToNote = note; }
 
-    S_msrNote             getGraceNotesGroupNoteUpLink () const
-                              { return fGraceNotesGroupNoteUpLink; }
+    S_msrNote             getGraceNotesGroupUpLinkToNote () const
+                              { return fGraceNotesGroupUpLinkToNote; }
 
     msrGraceNotesGroupKind
                           getGraceNotesGroupKind () const
@@ -137,10 +137,10 @@ class EXP msrGraceNotesGroup : public msrElement
     // ------------------------------------------------------
 
     // tuplet uplink
-    S_msrTuplet           fetchGraceNoteGroupTupletUpLink () const;
+    S_msrTuplet           fetchGraceNoteGroupUpLinkToTuplet () const;
 
     // part uplink
-    S_msrPart             fetchGraceNotesGroupPartUpLink () const;
+    S_msrPart             fetchGraceNotesGroupUpLinkToPart () const;
 
     void                  appendNoteToGraceNotesGroup (S_msrNote note);
     void                  appendChordToGraceNotesGroup (S_msrChord chord);
@@ -180,7 +180,7 @@ class EXP msrGraceNotesGroup : public msrElement
                           fGraceNotesGroupKind;
 
     // note upLink
-    S_msrNote             fGraceNotesGroupNoteUpLink;
+    S_msrNote             fGraceNotesGroupUpLinkToNote;
 
     list<S_msrMeasureElement>
                           fGraceNotesGroupElementsList;

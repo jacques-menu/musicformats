@@ -1357,7 +1357,7 @@ void lpsr2lilypondTranslator::generateNoteLigatures (
             S_msrVoice
               noteVoice =
                 note->
-                  fetchNoteVoiceUpLink ();
+                  fetchUpLinkToNoteToVoice ();
 
             // determine vertical flipping factor
             int ligatureVerticalFlippingFactor = 0;
@@ -1424,7 +1424,7 @@ void lpsr2lilypondTranslator::generateNoteLigatures (
             S_msrLigature
               ligatureOtherEnd =
                 ligature->
-                  getLigatureOtherEndSideLink ();
+                  getLigatureSideLinkToOtherEnd ();
 
             // compute ligature end edge height
             float ligatureEndEdgeHeight = 0.0;
@@ -2096,7 +2096,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
     S_msrVoice
       noteVoice =
         note->
-          fetchNoteVoiceUpLink ();
+          fetchUpLinkToNoteToVoice ();
 
     // generate the rest name and duration
     if (note->getNoteOccupiesAFullMeasure ()) {
@@ -3890,18 +3890,18 @@ void lpsr2lilypondTranslator::generateOrnament (
   S_msrOrnament ornament)
 {
   S_msrNote
-    ornamentNoteUpLink =
+    ornamentUpLinkToNote =
       ornament->
-        getOrnamentNoteUpLink ();
+        getOrnamentUpLinkToNote ();
 
   string
-    noteUpLinkDuration =
-      ornamentNoteUpLink->
+    upLinkToNoteDuration =
+      ornamentUpLinkToNote->
         noteSoundingWholeNotesAsMsrString ();
 
   switch (ornament->getOrnamentKind ()) {
     case msrOrnament::kOrnamentTrill:
-      if (! ornamentNoteUpLink->getNoteWavyLineSpannerStart ()) {
+      if (! ornamentUpLinkToNote->getNoteWavyLineSpannerStart ()) {
         fLilypondCodeStream <<
           "\\trill ";
       }
@@ -3913,7 +3913,7 @@ void lpsr2lilypondTranslator::generateOrnament (
 
 /* JMI
     case msrOrnament::kOrnamentDashes:
-      if (! ornamentNoteUpLink->getNoteWavyLineSpannerStart ()) {
+      if (! ornamentUpLinkToNote->getNoteWavyLineSpannerStart ()) {
         fLilypondCodeStream <<
           "%{ \\dashes %} ";
       }
@@ -3947,7 +3947,7 @@ void lpsr2lilypondTranslator::generateOrnament (
 
         fLilypondCodeStream <<
           "s" <<
-          noteUpLinkDuration <<
+          upLinkToNoteDuration <<
           "*" <<
             denominator
             -
@@ -3960,7 +3960,7 @@ void lpsr2lilypondTranslator::generateOrnament (
           // generate information and line number as a comment
           fLilypondCodeStream <<
             " %{ line " <<
-            ornamentNoteUpLink->getInputLineNumber () << // JMI ornamentNoteUpLink ???
+            ornamentUpLinkToNote->getInputLineNumber () << // JMI ornamentUpLinkToNote ???
             " %}";
         }
 
@@ -3994,14 +3994,14 @@ void lpsr2lilypondTranslator::generateOrnament (
 
         fLilypondCodeStream <<
           "s" <<
-          noteUpLinkDuration <<
+          upLinkToNoteDuration <<
           "*1/3" "\\reverseturn ";
 
         if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
           // generate information and line number as a comment
           fLilypondCodeStream <<
             " %{ line " <<
-            ornamentNoteUpLink->getInputLineNumber () << // JMI ornamentNoteUpLink ???
+            ornamentUpLinkToNote->getInputLineNumber () << // JMI ornamentUpLinkToNote ???
             " %}";
         }
 
@@ -4212,7 +4212,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerBeforeNote (
     case msrSpanner::kSpannerWavyLine:
       switch (spannerTypeKind) {
         case msrSpannerTypeKind::kSpannerTypeStart:
-          if (spanner->getSpannerNoteUpLink ()->getNoteTrillOrnament ()) {
+          if (spanner->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
             // don't generate anything, the trill will display the wavy line
             fOnGoingTrillSpanner = true;
           }
@@ -4337,7 +4337,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
     case msrSpanner::kSpannerWavyLine:
       switch (spannerTypeKind) {
         case msrSpannerTypeKind::kSpannerTypeStart:
-          if (spanner->getSpannerNoteUpLink ()->getNoteTrillOrnament ()) {
+          if (spanner->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
             // don't generate anything, the trill will display the wavy line
             fOnGoingTrillSpanner = true;
           }
@@ -4354,7 +4354,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
             S_msrSpanner
               spannerStartEnd =
                 spanner->
-                  getSpannerOtherEndSideLink ();
+                  getSpannerSideLinkToOtherEnd ();
 
             // sanity check
             mfAssert (
@@ -4363,7 +4363,7 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
               "spannerStartEnd is null");
 
             // has the start end a trill ornament?
-            if (spannerStartEnd->getSpannerNoteUpLink ()->getNoteTrillOrnament ()) {
+            if (spannerStartEnd->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
               fLilypondCodeStream <<
                 "\\stopTrillSpan ";
             }
@@ -4489,9 +4489,9 @@ string lpsr2lilypondTranslator::singleTremoloDurationAsLilypondString (
 
 /* JMI
   S_msrNote
-    singleTremoloNoteUpLink =
+    singleTremoloUpLinkToNote =
       singleTremolo->
-        getSingleTremoloNoteUpLink ();
+        getSingleTremoloUpLinkToNote ();
 */
 
   msrDurationKind
@@ -4499,7 +4499,7 @@ string lpsr2lilypondTranslator::singleTremoloDurationAsLilypondString (
       singleTremolo->
         getSingleTremoloGraphicDurationKind ();
     /*
-      singleTremoloNoteUpLink->
+      singleTremoloUpLinkToNote->
         getNoteGraphicDurationKind ();
     */
 
@@ -8856,22 +8856,22 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrStaffBlock& elt)
 
   // fetch part upLink
   S_msrPart
-    staffPartUpLink =
-      staff->getStaffPartUpLink ();
+    staffUpLinkToPart =
+      staff->getStaffUpLinkToPart ();
 
   // don't generate instrument names in the staves
   // if the containing part contains several of them
-  if (staffPartUpLink->getPartStaveNumbersToStavesMap ().size () == 1) {
+  if (staffUpLinkToPart->getPartStaveNumbersToStavesMap ().size () == 1) {
     // get the part upLink name to be used
     string partName =
-      staffPartUpLink->
+      staffUpLinkToPart->
         getPartNameDisplayText ();
 
 // JMI    gLogStream << "--> partName: \"" << partName << "\"" << endl;
 
     if (partName.size () == 0) {
       partName =
-        staffPartUpLink->
+        staffUpLinkToPart->
           getPartName ();
     }
 
@@ -8956,12 +8956,12 @@ if (true)
 
     // get the part upLink abbreviation display text to be used
     string partAbbreviation =
-      staffPartUpLink->
+      staffUpLinkToPart->
         getPartAbbreviationDisplayText ();
 
     if (partAbbreviation.size () == 0) {
       partAbbreviation =
-        staffPartUpLink->
+        staffUpLinkToPart->
           getPartAbbreviation ();
     }
 
@@ -9336,7 +9336,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
     voice = elt->getVoice ();
 
   S_msrStaff
-    staff = voice-> getVoiceStaffUpLink ();
+    staff = voice-> getVoiceUpLinkToStaff ();
 
   msrStaffKind
     staffKind = staff->getStaffKind ();
@@ -9439,7 +9439,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrUseVoiceCommand& elt)
 
   // fetch the part and part name
   S_msrPart part =
-    staff-> getStaffPartUpLink ();
+    staff-> getStaffUpLinkToPart ();
 
   string partName =
     part->getPartName ();
@@ -12540,14 +12540,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         S_msrVoice
           measureVoice =
             elt->
-              fetchMeasureVoiceUpLink ();
+              fetchMeasureUpLinkToVoice ();
 
         // fetch measure's part
         S_msrPart
           measurePart =
             measureVoice->
-              getVoiceStaffUpLink ()->
-                getStaffPartUpLink ();
+              getVoiceUpLinkToStaff ()->
+                getStaffUpLinkToPart ();
 
         rational
           measureWholeNotesDuration =
@@ -12919,7 +12919,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrStanza& elt)
         // to draw hyphenated lines and extenders under melismata correctly
         "\\set associatedVoice = #\"" <<
         elt->
-          getStanzaVoiceUpLink ()->
+          getStanzaUpLinkToVoice ()->
             getVoiceName () <<
         "\"" <<
         endl <<
@@ -14534,7 +14534,7 @@ If the double element is present, it indicates that the music is doubled one oct
       / * JMI
       getStaffName () <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       * /
       endl <<
       ", transpositionPitch: " <<
@@ -17663,7 +17663,7 @@ void lpsr2lilypondTranslator::generateBeforeNoteSpannersIfAny (
         case msrSpanner::kSpannerDashes:
           break;
         case msrSpanner::kSpannerWavyLine:
-          if (spanner->getSpannerNoteUpLink ()->getNoteTrillOrnament ()) {
+          if (spanner->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
             // don't generate anything, the trill will display the wavy line
             doGenerateSpannerCode = false;
           }
@@ -17707,7 +17707,7 @@ void lpsr2lilypondTranslator::generateAfterNoteSpannersIfAny (
         case msrSpanner::kSpannerDashes:
           break;
         case msrSpanner::kSpannerWavyLine:
-          if (spanner->getSpannerNoteUpLink ()->getNoteTrillOrnament ()) {
+          if (spanner->getSpannerUpLinkToNote ()->getNoteTrillOrnament ()) {
             // don't generate anything, the trill will display the wavy line
             doGenerateSpannerCode = false;
           }
@@ -17818,8 +17818,8 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 /* JMI
             S_msrNote
               noteTheGraceNotesGroupIsAttachedTo =
-                elt->getNoteDirectGraceNotesGroupUpLink ()->
-                  getGraceNotesGroupNoteUpLink ();
+                elt->getNoteDirectUpLinkToGraceNotesGroup ()->
+                  getGraceNotesGroupUpLinkToNote ();
 
             // don't generate note if the notes it's grace notes group is attached to
             // has a ??? JMI
@@ -17843,14 +17843,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
             gGlobalTracingOahGroup->getTraceGraceNotes ()
           ) {
             S_msrGraceNotesGroup
-              graceNotesGroupUpLink =
-                elt->getNoteDirectGraceNotesGroupUpLink ();
+              upLinkToGraceNotesGroup =
+                elt->getNoteDirectUpLinkToGraceNotesGroup ();
 
             gLogStream <<
-              "% ==> graceNotesGroupUpLink: ";
-            if (graceNotesGroupUpLink) {
+              "% ==> upLinkToGraceNotesGroup: ";
+            if (upLinkToGraceNotesGroup) {
               gLogStream <<
-                graceNotesGroupUpLink->asString ();
+                upLinkToGraceNotesGroup->asString ();
             }
             else {
               gLogStream << "none";
@@ -17923,7 +17923,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
         break;
 
       case msrNoteKind::kNoteSkipInMeasure:
-        if (elt->getNoteDirectGraceNotesGroupUpLink ()) {
+        if (elt->getNoteDirectUpLinkToGraceNotesGroup ()) {
 #ifdef TRACING_IS_ENABLED
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()
@@ -18313,7 +18313,7 @@ void lpsr2lilypondTranslator::generateNoteScordaturas (
       fLilypondCodeStream <<
         "\\new Staff \\with { alignAboveContext = \"" <<
         note->
-          fetchNoteStaffUpLink ()->
+          fetchUpLinkToNoteToStaff ()->
             getStaffName () <<
         "\" } {" <<
         endl;
@@ -18921,7 +18921,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
         break;
 
       case msrNoteKind::kNoteSkipInMeasure:
-        if (elt->getNoteDirectGraceNotesGroupUpLink ()) {
+        if (elt->getNoteDirectUpLinkToGraceNotesGroup ()) {
 #ifdef TRACING_IS_ENABLED
           if (
             gGlobalLpsrOahGroup->getTraceLpsrVisitors ()

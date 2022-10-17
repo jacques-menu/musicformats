@@ -163,7 +163,7 @@ void xml2lyManPageGenerateAtom::generateManPageData (ostream& os) const
   fOahVisitor->visitTheHandler ();
 
   // a help option has been applied // JMI superflous?
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     setOahHandlerFoundAHelpOption (
       "musicxml2lilypondInsiderManPageGenerateAtom::generateManPageData");
 }

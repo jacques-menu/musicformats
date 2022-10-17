@@ -53,10 +53,10 @@ msrPathToVoice::msrPathToVoice ()
 void msrPathToVoice::initializeFromVoice (S_msrVoice voice)
 {
   S_msrStaff
-    staffUpLink =
-      voice->getVoiceStaffUpLink ();
+    upLinkToStaff =
+      voice->getVoiceUpLinkToStaff ();
 
-  initializeFromStaff (staffUpLink);
+  initializeFromStaff (upLinkToStaff);
 
   fVoice = voice; // only now
 }
@@ -68,36 +68,36 @@ void msrPathToVoice::initializeFromStaff (S_msrStaff staff)
   fStaff = staff;
 
   fPart =
-    fStaff->getStaffPartUpLink ();
+    fStaff->getStaffUpLinkToPart ();
 
   S_msrPartGroup
     partGroup =
-      fPart->getPartPartGroupUpLink ();
+      fPart->getPartUpLinkToPartGroup ();
 
   fPartGroupsList.push_front (partGroup);
 
   // part groups can be nested
   S_msrPartGroup
-    partGroupPartGroupUpLink =
+    partGroupUpLinkToPartGroup =
       partGroup->
-        getPartGroupPartGroupUpLink ();
+        getPartGroupUpLinkToPartGroup ();
 
   // loop to the top-most part group
-//  while (partGroupPartGroupUpLink) {
+//  while (partGroupUpLinkToPartGroup) {
     fPartGroupsList.push_front (partGroup);
 
-    partGroupPartGroupUpLink =
+    partGroupUpLinkToPartGroup =
       partGroup->
-        getPartGroupPartGroupUpLink ();
+        getPartGroupUpLinkToPartGroup ();
 //  } // while
 
   fScore =
-    partGroupPartGroupUpLink->
-      getPartGroupScoreUpLink ();
+    partGroupUpLinkToPartGroup->
+      getUpLinkToPartGroupToScore ();
 
   fBook =
     fScore->
-      getScoreBookUpLink ();
+      getScoreUpLinkToBook ();
 }
 
 msrPathToVoice::~msrPathToVoice ()
@@ -134,7 +134,7 @@ Bool msrPathToVoice::pathContainsStaff (S_msrStaff staff)
   else {
     // the path contains all the staves in fPart
     result =
-      staff->getStaffPartUpLink () == fPart;
+      staff->getStaffUpLinkToPart () == fPart;
   }
 
 //   for (S_msrPartGroup currentPartGroup : fPartGroupsList) {
@@ -164,7 +164,7 @@ Bool msrPathToVoice::pathContainsVoice (S_msrVoice voice)
   else {
     // the path contains all the voices in fStaff
     result =
-      voice->getVoiceStaffUpLink () == fStaff;
+      voice->getVoiceUpLinkToStaff () == fStaff;
   }
 
   return result;
@@ -315,7 +315,7 @@ ostream& operator<< (ostream& os, const S_msrPathToVoice& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

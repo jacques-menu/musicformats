@@ -162,7 +162,7 @@ void msdl2lilypondManPageGenerateAtom::generateManPageData (ostream& os) const
   fOahVisitor->visitTheHandler ();
 
   // a help option has been applied // JMI superflous?
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     setOahHandlerFoundAHelpOption (
       "msdl2lilypondManPageGenerateAtom::generateManPageData");
 }

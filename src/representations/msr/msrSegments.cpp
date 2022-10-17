@@ -44,12 +44,12 @@ int msrSegment::gSegmentDebugNumber = 0;
 
 S_msrSegment msrSegment::create (
   int        inputLineNumber,
-  S_msrVoice segmentVoicekUpLink)
+  S_msrVoice segmentUpLinkToVoice)
 {
   msrSegment* o =
     new msrSegment (
       inputLineNumber,
-      segmentVoicekUpLink);
+      segmentUpLinkToVoice);
   assert (o != nullptr);
 
   return o;
@@ -57,18 +57,18 @@ S_msrSegment msrSegment::create (
 
 msrSegment::msrSegment (
   int        inputLineNumber,
-  S_msrVoice segmentVoicekUpLink)
+  S_msrVoice segmentUpLinkToVoice)
     : msrVoiceElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    segmentVoicekUpLink != nullptr,
-    "segmentVoicekUpLink is null");
+    segmentUpLinkToVoice != nullptr,
+    "segmentUpLinkToVoice is null");
 
   // set segment's voice upLink
-  fSegmentVoiceUpLink =
-    segmentVoicekUpLink;
+  fSegmentUpLinkToVoice =
+    segmentUpLinkToVoice;
 
   // do other initializations
   initializeSegment ();
@@ -90,7 +90,7 @@ void msrSegment::initializeSegment ()
       "', segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       "', in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << fInputLineNumber <<
       endl;
   }
@@ -166,53 +166,53 @@ void msrSegment::setSegmentLastMeasure (
   fSegmentLastMeasure = measure;
 }
 
-S_msrStaff msrSegment::fetchSegmentStaffUpLink () const
+S_msrStaff msrSegment::fetchSegmentUpLinkToStaff () const
 {
   S_msrStaff result;
 
-  if (fSegmentVoiceUpLink) {
+  if (fSegmentUpLinkToVoice) {
     result =
-      fSegmentVoiceUpLink->
-        getVoiceStaffUpLink ();
+      fSegmentUpLinkToVoice->
+        getVoiceUpLinkToStaff ();
   }
 
   return result;
 }
 
-S_msrPart msrSegment::fetchSegmentPartUpLink () const
+S_msrPart msrSegment::fetchSegmentUpLinkToPart () const
 {
   S_msrPart result;
 
-  if (fSegmentVoiceUpLink) {
+  if (fSegmentUpLinkToVoice) {
     result =
-      fSegmentVoiceUpLink->
-        fetchVoicePartUpLink ();
+      fSegmentUpLinkToVoice->
+        fetchVoiceUpLinkToPart ();
   }
 
   return result;
 }
 
-S_msrPartGroup msrSegment::fetchSegmentPartGroupUpLink () const
+S_msrPartGroup msrSegment::fetchSegmentUpLinkToPartGroup () const
 {
   S_msrPartGroup result;
 
-  if (fSegmentVoiceUpLink) {
+  if (fSegmentUpLinkToVoice) {
     result =
-      fSegmentVoiceUpLink->
-        fetchVoicePartGroupUpLink ();
+      fSegmentUpLinkToVoice->
+        fetchVoiceUpLinkToPartGroup ();
   }
 
   return result;
 }
 
-S_msrScore msrSegment::fetchSegmentScoreUpLink () const
+S_msrScore msrSegment::fetchSegmentUpLinkToScore () const
 {
   S_msrScore result;
 
-  if (fSegmentVoiceUpLink) {
+  if (fSegmentUpLinkToVoice) {
     result =
-      fSegmentVoiceUpLink->
-        fetchVoiceScoreUpLink ();
+      fSegmentUpLinkToVoice->
+        fetchVoiceUpLinkToScore ();
   }
 
   return result;
@@ -321,7 +321,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
   }
 
   // upLinks
-  segmentDeepClone->fSegmentVoiceUpLink =
+  segmentDeepClone->fSegmentUpLinkToVoice =
     containingVoice;
 
   return segmentDeepClone;
@@ -383,7 +383,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
       ||
     gGlobalTracingOahGroup->getTraceRepeatsDetails ()
   ) {
-    fSegmentVoiceUpLink->
+    fSegmentUpLinkToVoice->
       displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "assertSegmentLastMeasureIsNotNull()");
@@ -396,7 +396,7 @@ void msrSegment::assertSegmentLastMeasureIsNotNull (
       "fSegmentLastMeasure is null in segment " <<
       this->asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "', line " << inputLineNumber <<
       endl;
@@ -421,7 +421,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
       ||
     gGlobalTracingOahGroup->getTraceRepeatsDetails ()
   ) {
-    fSegmentVoiceUpLink->
+    fSegmentUpLinkToVoice->
       displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "assertSegmentElementsListIsNotEmpty()");
@@ -436,7 +436,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
       ", segment: " <<
       this->asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "', line " << inputLineNumber <<
       endl;
@@ -466,7 +466,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       "Creating and appending a measure '" << measureNumber <<
       "', to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
       endl;
@@ -497,7 +497,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       "Creating measure '" << measureNumber <<
       "' and appending it to segment " << asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", measureFirstInSegmentKind: " <<
       msrMeasure::measureFirstInSegmentKindAsString (
@@ -523,10 +523,10 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       "' to " <<
       previousMeasureEndInputLineNumber <<
 //       " in segment '" << // JMI
-//       fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+//       fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
 //       "' in voice \"" <<
-//       fMeasureSegmentUpLink->
-//         getSegmentVoiceUpLink ()->
+//       fMeasureUpLinkToSegment->
+//         getSegmentUpLinkToVoice ()->
 //           getVoiceName () <<
 //       "\"" <<
       endl;
@@ -540,7 +540,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
   // set result's ordinal number
   result->
     setMeasureOrdinalNumberInVoice (
-      fSegmentVoiceUpLink->
+      fSegmentUpLinkToVoice->
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
   // append result to the segment
@@ -561,7 +561,7 @@ void msrSegment::setNextMeasureNumberInSegment (
       "Setting next measure number to '" << nextMeasureNumber <<
       "' in segment " << asString () <<
       "'in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "' line " << inputLineNumber <<
       endl;
@@ -578,7 +578,7 @@ void msrSegment::setNextMeasureNumberInSegment (
         "' in segment " << asString () <<
         "'s last measure " <<
         " in voice \"" <<
-        fSegmentVoiceUpLink->getVoiceName () <<
+        fSegmentUpLinkToVoice->getVoiceName () <<
         "\"" <<
         ", line " << inputLineNumber <<
         endl;
@@ -602,7 +602,7 @@ void msrSegment::appendPrintLayoutToSegment (
       "Appending print layout " << printLayout->asString () <<
       " to segment " << asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -621,15 +621,15 @@ void msrSegment::appendPrintLayoutToSegment (
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
     gLogStream <<
-      "fSegmentVoiceUpLink:" <<
+      "fSegmentUpLinkToVoice:" <<
       endl;
     ++gIndenter;
     gLogStream <<
-      fSegmentVoiceUpLink <<
+      fSegmentUpLinkToVoice <<
       endl;
     --gIndenter;
 
@@ -655,7 +655,7 @@ void msrSegment::appendClefToSegment (S_msrClef clef)
       "Appending clef '" << clef->asString () <<
       "' to segment " << asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -674,15 +674,15 @@ void msrSegment::appendClefToSegment (S_msrClef clef)
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
     gLogStream <<
-      "fSegmentVoiceUpLink:" <<
+      "fSegmentUpLinkToVoice:" <<
       endl;
     ++gIndenter;
     gLogStream <<
-      fSegmentVoiceUpLink <<
+      fSegmentUpLinkToVoice <<
       endl;
     --gIndenter;
 
@@ -708,7 +708,7 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
       "Prepending clef '" << clef->asString () <<
       "' to segment " << asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -727,15 +727,15 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
       ", fSegmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
     gLogStream <<
-      "fSegmentVoiceUpLink:" <<
+      "fSegmentUpLinkToVoice:" <<
       endl;
     ++gIndenter;
     gLogStream <<
-      fSegmentVoiceUpLink <<
+      fSegmentUpLinkToVoice <<
       endl;
     --gIndenter;
 
@@ -796,7 +796,7 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
         this->asString () <<
         " which is not a measure nor a full-bar rest" <<
         ", in voice \"" <<
-        fSegmentVoiceUpLink->getVoiceName () <<
+        fSegmentUpLinkToVoice->getVoiceName () <<
         "\"" <<
         "', line " << fInputLineNumber; // JMI v0.9.64
 
@@ -821,7 +821,7 @@ void msrSegment::prependClefToSegment (S_msrClef clef) // JMI
       this->asString () <<
       " which is not a measure nor a full-bar rest" <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "', line " << fInputLineNumber; // JMI v0.9.64
 
@@ -883,7 +883,7 @@ void msrSegment::appendKeyToSegment (S_msrKey key)
       "Appending key " << key->asString () <<
       " to segment " << asString () <<
     ", in voice \"" <<
-    fSegmentVoiceUpLink->getVoiceName () <<
+    fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
       endl;
   }
@@ -920,7 +920,7 @@ void msrSegment::appendTimeSignatureToSegment (S_msrTimeSignature timeSignature)
     gLogStream <<
       "to segment " << asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -957,7 +957,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (S_msrTimeSignature timeSigna
     gLogStream <<
       "to segment clone " << asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -987,7 +987,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
       positionInMeasure <<
       "to segment clone " << asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
       endl;
@@ -1017,7 +1017,7 @@ void msrSegment::appendHarmonyToSegment (S_msrHarmony harmony)
       "Appending harmony " << harmony->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1047,7 +1047,7 @@ void msrSegment::appendHarmonyToSegmentClone (S_msrHarmony harmony)
       "Appending harmony " << harmony->asString () <<
       " to segment clone " << asString () <<
       "' in voice clone \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1072,7 +1072,7 @@ void msrSegment::appendFiguredBassElementToSegment (
       figuredBassElement->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1105,7 +1105,7 @@ void msrSegment::appendFiguredBassElementToSegmentClone (
       figuredBassElement->asString () <<
       " to segment clone " << asString () <<
       "' in voice clone \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1128,7 +1128,7 @@ void msrSegment::appendSegnoToSegment (S_msrSegno segno)
       "Appending segno " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1155,7 +1155,7 @@ void msrSegment::appendCodaToSegment (S_msrCoda coda)
       "Appending coda " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1183,7 +1183,7 @@ void msrSegment::appendEyeGlassesToSegment (
       "Appending eyeGlasses " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1210,7 +1210,7 @@ void msrSegment::appendPedalToSegment (S_msrPedal pedal)
       "Appending pedal " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1237,7 +1237,7 @@ void msrSegment::appendDampToSegment (S_msrDamp damp)
       "Appending damp " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1264,7 +1264,7 @@ void msrSegment::appendDampAllToSegment (S_msrDampAll dampAll)
       "Appending damp all " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1292,7 +1292,7 @@ void msrSegment::appendTranspositionToSegment (
       "Appending transpose " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1328,7 +1328,7 @@ void msrSegment::appendStaffDetailsToSegment (
       staffDetails->asShortString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\" line " << inputLineNumber <<
       endl;
   }
@@ -1340,7 +1340,7 @@ void msrSegment::appendStaffDetailsToSegment (
       ||
     gGlobalTracingOahGroup->getTraceSegments ()
   ) {
-    fSegmentVoiceUpLink->
+    fSegmentUpLinkToVoice->
       displayVoice (
         inputLineNumber,
         "appendStaffDetailsToSegment() 1");
@@ -1363,7 +1363,7 @@ void msrSegment::appendStaffDetailsToSegment (
       ||
     gGlobalTracingOahGroup->getTraceSegments ()
   ) {
-    fSegmentVoiceUpLink->
+    fSegmentUpLinkToVoice->
       displayVoice (
         inputLineNumber,
         "appendStaffDetailsToSegment() 2");
@@ -1382,7 +1382,7 @@ void msrSegment::appendLineBreakToSegment (S_msrLineBreak lineBreak)
       lineBreak->asShortString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1409,7 +1409,7 @@ void msrSegment::appendPageBreakToSegment (S_msrPageBreak pageBreak)
       "Appending break " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1437,7 +1437,7 @@ void msrSegment::appendBarNumberCheckToSegment (
       "Appending bar number check " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1467,7 +1467,7 @@ void msrSegment::appendTempoToSegment (
       " to segment " <<
       asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1495,7 +1495,7 @@ void msrSegment::appendRehearsalMarkToSegment (
       "Appending rehearsalMark " <<
       " to segment " << asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1524,7 +1524,7 @@ void msrSegment::appendOctaveShiftToSegment (
       octaveShift->octaveShiftKindAsString () <<
       "' to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1553,7 +1553,7 @@ void msrSegment::appendScordaturaToSegment (
   // JMI ???    scordatura->octaveShiftKindAsString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1583,7 +1583,7 @@ void msrSegment::appendAccordionRegistrationToSegment (
       accordionRegistration->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1614,7 +1614,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
       harpPedalsTuning->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1647,7 +1647,7 @@ void msrSegment::padUpToPositionInMeasureInSegment (
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       endl;
   }
@@ -1663,15 +1663,15 @@ void msrSegment::padUpToPositionInMeasureInSegment (
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
     gLogStream <<
-      "fSegmentVoiceUpLink:" <<
+      "fSegmentUpLinkToVoice:" <<
       endl;
     ++gIndenter;
     gLogStream <<
-      fSegmentVoiceUpLink <<
+      fSegmentUpLinkToVoice <<
       endl;
     --gIndenter;
 
@@ -1680,7 +1680,7 @@ void msrSegment::padUpToPositionInMeasureInSegment (
       endl;
     ++gIndenter;
     gLogStream <<
-      fSegmentVoiceUpLink->fetchVoicePartUpLink () <<
+      fSegmentUpLinkToVoice->fetchVoiceUpLinkToPart () <<
       endl;
     --gIndenter;
 
@@ -1719,7 +1719,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       endl;
   }
@@ -1749,7 +1749,7 @@ void msrSegment::appendPaddingNoteToSegment (
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
       endl;
   }
@@ -1799,7 +1799,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
 
     gLogStream <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << measure->getInputLineNumber () <<
       endl;
@@ -1814,7 +1814,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
       "' occurs twice in a row in segment " <<
       asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
     msrInternalWarning ( // JMI KAKA v0.9.63
@@ -1842,9 +1842,9 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   // is measure the first one it the voice?
   // this is necessary for voice clones,
   // which don't go down the part-staff-voice-segment hierarchy
-  if (! fSegmentVoiceUpLink->getVoiceFirstMeasure ()) {
+  if (! fSegmentUpLinkToVoice->getVoiceFirstMeasure ()) {
     // yes, register it as such
-    fSegmentVoiceUpLink->
+    fSegmentUpLinkToVoice->
       setVoiceFirstMeasure (measure);
 
     measure->
@@ -1896,7 +1896,7 @@ void msrSegment::prependMeasureToSegment (S_msrMeasure measure)
 
     gLogStream <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"," <<
       ", line " << measure->getInputLineNumber () <<
       endl;
@@ -1911,7 +1911,7 @@ void msrSegment::prependMeasureToSegment (S_msrMeasure measure)
       "' occurs twice in a row in segment " <<
       asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
     msrInternalError (
@@ -1940,7 +1940,7 @@ void msrSegment::appendMultipleFullBarRestsToSegment (
       "Appending multiple full-bar rests " << multipleFullBarRests->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1958,7 +1958,7 @@ void msrSegment::prependBarLineToSegment (S_msrBarLine barLine)
       "Prepending barLine " << barLine->asString () <<
       "' to segment '" << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1986,7 +1986,7 @@ void msrSegment::appendBarLineToSegment (
       "Appending barLine " << barLine->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -2013,7 +2013,7 @@ void msrSegment::appendBarCheckToSegment (S_msrBarCheck barCheck)
       "Appending bar check " << barCheck->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"," <<
       endl;
   }
@@ -2094,7 +2094,7 @@ void msrSegment::appendDoubleTremoloToSegment ( // JMI
       doubleTremolo->asShortString () <<
       " to segment " << asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -2253,7 +2253,7 @@ void msrSegment::removeNoteFromSegment (
       "cannot remove note from segment " <<
       asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"," <<
       " since it is empty";
 
@@ -2296,7 +2296,7 @@ void msrSegment::removeElementFromSegment (
       "cannot remove note from segment " <<
       asString () <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"," <<
       " since it is empty";
 
@@ -2334,7 +2334,7 @@ S_msrMeasure msrSegment::fetchLastMeasureFromSegment (
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", since it is empty";
 
@@ -2390,7 +2390,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-    fSegmentVoiceUpLink->
+    fSegmentUpLinkToVoice->
       displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "removeLastMeasureFromSegment() 1");
@@ -2406,7 +2406,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 //       ", segmentDebugNumber: '" <<
 //       fSegmentDebugNumber <<
 //       "' in voice \"" <<
-//       fSegmentVoiceUpLink->getVoiceName () <<
+//       fSegmentUpLinkToVoice->getVoiceName () <<
 //       "\"" <<
 //       ", since it is empty";
 //
@@ -2427,7 +2427,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       ", segmentDebugNumber: '" <<
       fSegmentDebugNumber <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", since that segment does not contain any";
 
@@ -2445,7 +2445,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
-    fSegmentVoiceUpLink->
+    fSegmentUpLinkToVoice->
       displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "removeLastMeasureFromSegment() 2");
@@ -2468,7 +2468,7 @@ S_msrMeasure msrSegment::removeLastMeasureFromSegment (
       this->asString () <<
       " which is not at the end of fSegmentElementsList" <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "', line " << inputLineNumber;
 
@@ -2633,7 +2633,7 @@ string msrSegment::asShortString () const
     ", fSegmentDebugNumber: '" <<
     fSegmentDebugNumber <<
     "', voice: \"" <<
-    fSegmentVoiceUpLink->getVoiceName () <<
+    fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
     "]";
 
@@ -2651,7 +2651,7 @@ string msrSegment::asString () const
     "', fSegmentDebugNumber: '" <<
     fSegmentDebugNumber <<
     "' in voice \"" <<
-    fSegmentVoiceUpLink->getVoiceName () <<
+    fSegmentUpLinkToVoice->getVoiceName () <<
     "\"";
 
   if (! fSegmentElementsList.size ()) {
@@ -2699,12 +2699,12 @@ void msrSegment::displaySegment (
     /* JMI
     "', score:" <<
     endl <<
-    fSegmentVoiceUpLink->
-      fetchVoiceGroupScoreUpLink () <<
+    fSegmentUpLinkToVoice->
+      fetchVoiceGroupUpLinkToScore () <<
             */
     "', voice:" <<
     endl <<
-    fSegmentVoiceUpLink->getVoiceName () <<
+    fSegmentUpLinkToVoice->getVoiceName () <<
     " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
@@ -2738,9 +2738,9 @@ void msrSegment::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "fSegmentVoiceUpLink" << " : " <<
+    "fSegmentUpLinkToVoice" << " : " <<
     "\"" <<
-    fSegmentVoiceUpLink->getVoiceName () <<
+    fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
     endl;
 

@@ -82,7 +82,7 @@ class EXP msrSegment : public msrVoiceElement
 
     static SMARTP<msrSegment> create (
                             int        inputLineNumber,
-                            S_msrVoice segmentVoicekUpLink);
+                            S_msrVoice segmentUpLinkToVoice);
 
     SMARTP<msrSegment> createSegmentNewbornClone (
                             S_msrVoice containingVoice);
@@ -97,7 +97,7 @@ class EXP msrSegment : public msrVoiceElement
 
                           msrSegment (
                             int        inputLineNumber,
-                            S_msrVoice segmentVoicekUpLink);
+                            S_msrVoice segmentUpLinkToVoice);
 
     virtual               ~msrSegment ();
 
@@ -115,8 +115,8 @@ class EXP msrSegment : public msrVoiceElement
 
     // uplink
 
-    S_msrVoice            getSegmentVoiceUpLink () const
-                              { return fSegmentVoiceUpLink; }
+    S_msrVoice            getSegmentUpLinkToVoice () const
+                              { return fSegmentUpLinkToVoice; }
 
     // number
 
@@ -173,13 +173,13 @@ class EXP msrSegment : public msrVoiceElement
 
     // upLinks
 
-    S_msrStaff            fetchSegmentStaffUpLink () const;
+    S_msrStaff            fetchSegmentUpLinkToStaff () const;
 
-    S_msrPart             fetchSegmentPartUpLink () const;
+    S_msrPart             fetchSegmentUpLinkToPart () const;
 
-    S_msrPartGroup        fetchSegmentPartGroupUpLink () const;
+    S_msrPartGroup        fetchSegmentUpLinkToPartGroup () const;
 
-    S_msrScore            fetchSegmentScoreUpLink () const;
+    S_msrScore            fetchSegmentUpLinkToScore () const;
 
     // print layout MusicXML specific??? JMI
 
@@ -469,7 +469,7 @@ class EXP msrSegment : public msrVoiceElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            fSegmentVoiceUpLink;
+    S_msrVoice            fSegmentUpLinkToVoice;
 
     // absolute number, shared by newborn clones and deep copies
     int                   fSegmentAbsoluteNumber;

@@ -510,7 +510,7 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
     S_msrVoice
       voiceFiguredBassVoice =
         voiceToInsertInto->
-          getRegularVoiceFiguredBassVoiceForwardLink ();
+          getRegularVoiceForwardLinkToFiguredBassVoice ();
 
     // sanity check
     mfAssert (
@@ -521,7 +521,7 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
     // set the figuredBassElement's voice upLink
     // only now that we know which figured bass voice will contain it
     figuredBassElement->
-      setFiguredBassVoiceUpLink (
+      setFiguredBassUpLinkToVoice (
         voiceFiguredBassVoice);
 
     // append the figured bass to the figured bass voice for the current voice

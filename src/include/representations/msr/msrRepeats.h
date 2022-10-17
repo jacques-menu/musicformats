@@ -35,7 +35,7 @@ class EXP msrRepeatCommonPart : public msrElement
 
     static SMARTP<msrRepeatCommonPart> create (
                             int         inputLineNumber,
-                            S_msrRepeat repeatUpLink);
+                            S_msrRepeat upLinkToRepeat);
 
   protected:
 
@@ -44,7 +44,7 @@ class EXP msrRepeatCommonPart : public msrElement
 
                           msrRepeatCommonPart (
                             int         inputLineNumber,
-                            S_msrRepeat repeatUpLink);
+                            S_msrRepeat upLinkToRepeat);
 
     virtual               ~msrRepeatCommonPart ();
 
@@ -54,8 +54,8 @@ class EXP msrRepeatCommonPart : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrRepeat           getRepeatCommonPartRepeatUpLink () const
-                              { return fRepeatCommonPartRepeatUpLink; }
+    S_msrRepeat           getRepeatCommonPartUpLinkToRepeat () const
+                              { return fRepeatCommonPartUpLinkToRepeat; }
 
     // elements
     const list<S_msrVoiceElement>&
@@ -124,7 +124,7 @@ class EXP msrRepeatCommonPart : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrRepeat           fRepeatCommonPartRepeatUpLink;
+    S_msrRepeat           fRepeatCommonPartUpLinkToRepeat;
 
     // elements list
     list<S_msrVoiceElement>
@@ -145,7 +145,7 @@ class EXP msrRepeatEnding : public msrElement
                             int                 inputLineNumber,
                             const string&       repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind repeatEndingKind,
-                            S_msrRepeat         repeatUpLink);
+                            S_msrRepeat         upLinkToRepeat);
 
   protected:
 
@@ -156,7 +156,7 @@ class EXP msrRepeatEnding : public msrElement
                             int                 inputLineNumber,
                             const string&       repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind repeatEndingKind,
-                            S_msrRepeat         repeatUpLink);
+                            S_msrRepeat         upLinkToRepeat);
 
     virtual               ~msrRepeatEnding ();
 
@@ -166,8 +166,8 @@ class EXP msrRepeatEnding : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrRepeat           getRepeatEndingRepeatUpLink () const
-                              { return fRepeatEndingRepeatUpLink; }
+    S_msrRepeat           getRepeatEndingUpLinkToRepeat () const
+                              { return fRepeatEndingUpLinkToRepeat; }
 
     // numbers
     string                getRepeatEndingNumber () const
@@ -255,7 +255,7 @@ class EXP msrRepeatEnding : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrRepeat           fRepeatEndingRepeatUpLink;
+    S_msrRepeat           fRepeatEndingUpLinkToRepeat;
 
     // numbers
     string                fRepeatEndingNumber; // may be "1, 2"
@@ -303,7 +303,7 @@ class EXP msrRepeat : public msrVoiceElement
     static SMARTP<msrRepeat> create (
                             int        inputLineNumber,
                             int        repeatTimes,
-                            S_msrVoice voiceUpLink);
+                            S_msrVoice upLinkToVoice);
 
     SMARTP<msrRepeat> createRepeatNewbornClone (
                             S_msrVoice containingVoice);
@@ -316,7 +316,7 @@ class EXP msrRepeat : public msrVoiceElement
                           msrRepeat (
                             int        inputLineNumber,
                             int        repeatTimes,
-                            S_msrVoice voiceUpLink);
+                            S_msrVoice upLinkToVoice);
 
     virtual               ~msrRepeat ();
 
@@ -326,8 +326,8 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            getRepeatVoiceUpLink () const
-                              { return fRepeatVoiceUpLink; }
+    S_msrVoice            getRepeatUpLinkToVoice () const
+                              { return fRepeatUpLinkToVoice; }
     // time signatures
     int                   getRepeatTimes () const
                               { return fRepeatTimes; }
@@ -440,7 +440,7 @@ class EXP msrRepeat : public msrVoiceElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            fRepeatVoiceUpLink;
+    S_msrVoice            fRepeatUpLinkToVoice;
 
     // number of repetitions
     int                   fRepeatTimes;

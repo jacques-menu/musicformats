@@ -278,23 +278,23 @@ void msdrLayer::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "staffUpLink" << " : " <<
-    fVoiceStaffUpLink->getStaffName () <<
+    "fVoiceUpLinkToStaff" << " : " <<
+    fVoiceUpLinkToStaff->getStaffName () <<
     endl <<
 
     setw (fieldWidth) <<
-    "voiceCurrentMeasureNumber" << " : \"" <<
+    "fVoiceCurrentMeasureNumber" << " : \"" <<
     fVoiceCurrentMeasureNumber <<
     "\"" <<
     endl <<
 
     setw (fieldWidth) <<
-    "voiceCurrentMeasureOrdinalNumber" << " : " <<
+    "fVoiceCurrentMeasureOrdinalNumber" << " : " <<
     fVoiceCurrentMeasureOrdinalNumber <<
     endl <<
 
     setw (fieldWidth) <<
-    "voiceCurrentMeasurePuristNumber" << " : " <<
+    "fVoiceCurrentMeasurePuristNumber" << " : " <<
     fVoiceCurrentMeasurePuristNumber <<
     endl <<
 
@@ -415,7 +415,7 @@ ostream& operator<< (ostream& os, const S_msdrLayer& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

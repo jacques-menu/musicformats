@@ -56,13 +56,13 @@ int msrPart::gPartsCounter = 0;
 S_msrPart msrPart::create (
   int            inputLineNumber,
   const string&  partID,
-  S_msrPartGroup partPartGroupUpLink)
+  S_msrPartGroup PartUpLinkToPartGroup)
 {
   msrPart* o =
     new msrPart (
       inputLineNumber,
       partID,
-      partPartGroupUpLink);
+      PartUpLinkToPartGroup);
   assert (o != nullptr);
   return o;
 }
@@ -70,7 +70,7 @@ S_msrPart msrPart::create (
 msrPart::msrPart (
   int            inputLineNumber,
   const string&  partID,
-  S_msrPartGroup partPartGroupUpLink)
+  S_msrPartGroup PartUpLinkToPartGroup)
     : msrPartGroupElement (inputLineNumber)
 {
   // replace spaces in partID to set fPartID
@@ -83,15 +83,15 @@ msrPart::msrPart (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    partPartGroupUpLink != nullptr,
-    "partPartGroupUpLink is null");
+    PartUpLinkToPartGroup != nullptr,
+    "PartUpLinkToPartGroup is null");
     */
 
   // set part number
   fPartAbsoluteNumber = ++gPartsCounter;
 
   // set part's part group upLink
-  fPartPartGroupUpLink = partPartGroupUpLink;
+  fPartUpLinkToPartGroup = PartUpLinkToPartGroup;
 
   // do other initializations
   initializePart ();
@@ -167,14 +167,14 @@ void msrPart::initializePart ()
 msrPart::~msrPart ()
 {}
 
-S_msrScore  msrPart::fetchPartScoreUpLink () const
+S_msrScore  msrPart::fetchPartUpLinkToScore () const
 {
   S_msrScore result;
 
-  if (fPartPartGroupUpLink) {
+  if (fPartUpLinkToPartGroup) {
     result =
-      fPartPartGroupUpLink->
-        getPartGroupScoreUpLink ();
+      fPartUpLinkToPartGroup->
+        getUpLinkToPartGroupToScore ();
   }
 
   return result;
@@ -1720,7 +1720,7 @@ void msrPart::registerVoiceInPartAllVoicesList (
   fPartAllVoicesList.push_back (voice);
 
   // register it in the partgroup uplink
-  fPartPartGroupUpLink->
+  fPartUpLinkToPartGroup->
     registerVoiceInPartGroupAllVoicesList (voice);
 }
 
@@ -1793,11 +1793,11 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
       inputLineNumber,
       fPartHarmoniesVoice);
 
-/* JMI
+//* JMI v0.9.66
   // set backward link
-  fPartHarmoniesVoice->
-    setHarmoniesVoicePartBackwardLink (this);
-*/
+ // ->
+//     setHarmoniesVoicePartBackwardLink (fPartHarmoniesVoice);
+//*/
 
   return fPartHarmoniesVoice;
 }
@@ -1872,11 +1872,11 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
       inputLineNumber,
       fPartFiguredBassVoice);
 
-/* JMI
+///* JMI v0.9.66
   // set backward link
-  fPartFiguredBassVoice->
-    setFiguredBassVoicePartBackwardLink (this);
-*/
+//   ->
+//     setFiguredBassVoicePartBackwardLink (fPartFiguredBassVoice);
+//*/
 
   return fPartFiguredBassVoice;
 }
@@ -2144,8 +2144,8 @@ void msrPart::setPartInstrumentNamesMaxLengthes ()
 {
   S_msrScore
     score =
-      fPartPartGroupUpLink->
-        getPartGroupScoreUpLink ();
+      fPartUpLinkToPartGroup->
+        getUpLinkToPartGroupToScore ();
 
   size_t partInstrumentNameLength =
     fPartInstrumentName.size ();
@@ -2490,7 +2490,7 @@ void msrPart::browseData (basevisitor* v)
   }
 #endif
 
-  /* don't enforce any order here, leave it to the client thru sorting ??? JMI */
+  /* don't enforce any order here, leave it to the client thru sorting ??? JMI v0.9.66 */
 
   // browse the part harmonies staff if any right now, JMI
   // to place it before the corresponding part
@@ -2590,11 +2590,11 @@ void msrPart::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fPartGroupUpLink" << " : ";
-  if (fPartPartGroupUpLink) {
+    "fUpLinkToPartGroup" << " : ";
+  if (fPartUpLinkToPartGroup) {
     // it may be empty
     os <<
-      fPartPartGroupUpLink->getPartGroupCombinedName ();
+      fPartUpLinkToPartGroup->getPartGroupCombinedName ();
   }
   else {
     os << "none";
@@ -2657,7 +2657,60 @@ void msrPart::print (ostream& os) const
     setw (fieldWidth) <<
     "fPartCurrentPositionInMeasure" << " : " <<
     fPartCurrentPositionInMeasure <<
+    endl <<
+
+    setw (fieldWidth) <<
+    "fPartHarmoniesStaff" << " : \"" <<
+    fPartHarmoniesStaff->asShortString () << "\"" <<
     endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fPartHarmoniesStaff" << " : ";
+    if (fPartHarmoniesStaff) {
+      os <<
+        fPartHarmoniesStaff->asShortString ();
+    }
+    else {
+      os << "none";
+    }
+  os << endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fPartHarmoniesVoice" << " : ";
+    if (fPartHarmoniesVoice) {
+      os <<
+        fPartHarmoniesVoice->asShortString ();
+    }
+    else {
+      os << "none";
+    }
+  os << endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fPartFiguredBassStaff" << " : ";
+    if (fPartFiguredBassStaff) {
+      os <<
+        fPartFiguredBassStaff->asShortString ();
+    }
+    else {
+      os << "none";
+    }
+  os << endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fPartFiguredBassVoice" << " : ";
+    if (fPartFiguredBassVoice) {
+      os <<
+        fPartFiguredBassVoice->asShortString ();
+    }
+    else {
+      os << "none";
+    }
+  os << endl;
 
   // print current the part clef if any
 #ifdef TRACING_IS_ENABLED
@@ -2964,11 +3017,11 @@ void msrPart::printShort (ostream& os) const
 /*
   os << left <<
     setw (fieldWidth) <<
-    "fPartGroupUpLink" << " : ";
-  if (fPartPartGroupUpLink) {
+    "fUpLinkToPartGroup" << " : ";
+  if (fPartUpLinkToPartGroup) {
     // it may be empty
     os <<
-      fPartPartGroupUpLink->getPartGroupCombinedName ();
+      fPartUpLinkToPartGroup->getPartGroupCombinedName ();
   }
   else {
     os << "none";
@@ -2996,6 +3049,54 @@ void msrPart::printShort (ostream& os) const
     "fPartName" << " : \"" <<
     fPartName << "\"" <<
     endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fPartHarmoniesStaff" << " : ";
+    if (fPartHarmoniesStaff) {
+      os <<
+        fPartHarmoniesStaff->asShortString ();
+    }
+    else {
+      os << "none";
+    }
+  os << endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fPartHarmoniesVoice" << " : ";
+    if (fPartHarmoniesVoice) {
+      os <<
+        fPartHarmoniesVoice->asShortString ();
+    }
+    else {
+      os << "none";
+    }
+  os << endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fPartFiguredBassStaff" << " : ";
+    if (fPartFiguredBassStaff) {
+      os <<
+        fPartFiguredBassStaff->asShortString ();
+    }
+    else {
+      os << "none";
+    }
+  os << endl;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fPartFiguredBassVoice" << " : ";
+    if (fPartFiguredBassVoice) {
+      os <<
+        fPartFiguredBassVoice->asShortString ();
+    }
+    else {
+      os << "none";
+    }
+  os << endl;
 
   // print the part measure' whole notes durations vector
   printPartMeasuresWholeNotesDurationsVector (

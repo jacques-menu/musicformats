@@ -50,13 +50,13 @@ int msrMeasure::gGlobalMeasureDebugNumber = 0;
 S_msrMeasure msrMeasure::create (
   int           inputLineNumber,
   const string& measureNumber,
-  S_msrSegment  measureSegmentUpLink)
+  S_msrSegment  measureUpLinkToSegment)
 {
   msrMeasure* o =
     new msrMeasure (
       inputLineNumber,
       measureNumber,
-      measureSegmentUpLink);
+      measureUpLinkToSegment);
   assert (o != nullptr);
 
   return o;
@@ -65,18 +65,18 @@ S_msrMeasure msrMeasure::create (
 msrMeasure::msrMeasure (
   int           inputLineNumber,
   const string& measureNumber,
-  S_msrSegment  measureSegmentUpLink)
+  S_msrSegment  measureUpLinkToSegment)
     : msrSegmentElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    measureSegmentUpLink != nullptr,
-    "measureSegmentUpLink is null");
+    measureUpLinkToSegment != nullptr,
+    "measureUpLinkToSegment is null");
 
   // set measure's segment upLink
-  fMeasureSegmentUpLink =
-    measureSegmentUpLink;
+  fMeasureUpLinkToSegment =
+    measureUpLinkToSegment;
 
   // set measure numbers
   fMeasureElementMeasureNumber = measureNumber;
@@ -95,9 +95,9 @@ msrMeasure::msrMeasure (
 void msrMeasure::initializeMeasure ()
 {
   S_msrVoice
-    voiceUpLink =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+    upLinkToVoice =
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -107,9 +107,9 @@ void msrMeasure::initializeMeasure ()
       ", measureDebugNumber: '" <<
       fMeasureDebugNumber <<
       "' in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
-      voiceUpLink->getVoiceName () <<
+      upLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << fInputLineNumber <<
       endl;
@@ -135,14 +135,14 @@ void msrMeasure::initializeMeasure ()
 
   // fetch the staff
   S_msrStaff
-    staffUpLink =
-      voiceUpLink->
-        getVoiceStaffUpLink ();
+    upLinkToStaff =
+      upLinkToVoice->
+        getVoiceUpLinkToStaff ();
 
   // set the full measure whole notes duration from time if relevant
   S_msrTimeSignature
     staffCurrentTimeSignature =
-      staffUpLink->
+      upLinkToStaff->
         getStaffCurrentTime ();
 
   if (staffCurrentTimeSignature) {
@@ -172,13 +172,13 @@ void msrMeasure::initializeMeasure ()
 
   // position in voice
   fMeasurePositionInVoice =
-    fMeasureSegmentUpLink->
-      getSegmentVoiceUpLink ()->
+    fMeasureUpLinkToSegment->
+      getSegmentUpLinkToVoice ()->
         getCurrentPositionInVoice ();
 
   fMeasureMomentInVoice =
-    fMeasureSegmentUpLink->
-      getSegmentVoiceUpLink ()->
+    fMeasureUpLinkToSegment->
+      getSegmentUpLinkToVoice ()->
         getCurrentMomentInVoice ();
 
   // measure finalization
@@ -189,66 +189,66 @@ void msrMeasure::initializeMeasure ()
 msrMeasure::~msrMeasure ()
 {}
 
-S_msrVoice msrMeasure::fetchMeasureVoiceUpLink () const
+S_msrVoice msrMeasure::fetchMeasureUpLinkToVoice () const
 {
   S_msrVoice result;
 
-  if (fMeasureSegmentUpLink) {
+  if (fMeasureUpLinkToSegment) {
     result =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
   }
 
   return result;
 }
 
-S_msrStaff msrMeasure::fetchMeasureStaffUpLink () const
+S_msrStaff msrMeasure::fetchMeasureUpLinkToStaff () const
 {
   S_msrStaff result;
 
-  if (fMeasureSegmentUpLink) {
+  if (fMeasureUpLinkToSegment) {
     result =
-      fMeasureSegmentUpLink->
-        fetchSegmentStaffUpLink ();
+      fMeasureUpLinkToSegment->
+        fetchSegmentUpLinkToStaff ();
   }
 
   return result;
 }
 
-S_msrPart msrMeasure::fetchMeasurePartUpLink () const
+S_msrPart msrMeasure::fetchMeasureUpLinkToPart () const
 {
   S_msrPart result;
 
-  if (fMeasureSegmentUpLink) {
+  if (fMeasureUpLinkToSegment) {
     result =
-      fMeasureSegmentUpLink->
-        fetchSegmentPartUpLink ();
+      fMeasureUpLinkToSegment->
+        fetchSegmentUpLinkToPart ();
   }
 
   return result;
 }
 
-S_msrPartGroup msrMeasure::fetchMeasurePartGroupUpLink () const
+S_msrPartGroup msrMeasure::fetchMeasureUpLinkToPartGroup () const
 {
   S_msrPartGroup result;
 
-  if (fMeasureSegmentUpLink) {
+  if (fMeasureUpLinkToSegment) {
     result =
-      fMeasureSegmentUpLink->
-        fetchSegmentPartGroupUpLink ();
+      fMeasureUpLinkToSegment->
+        fetchSegmentUpLinkToPartGroup ();
   }
 
   return result;
 }
 
-S_msrScore msrMeasure::fetchMeasureScoreUpLink () const
+S_msrScore msrMeasure::fetchMeasureUpLinkToScore () const
 {
   S_msrScore result;
 
-  if (fMeasureSegmentUpLink) {
+  if (fMeasureUpLinkToSegment) {
     result =
-      fMeasureSegmentUpLink->
-        fetchSegmentScoreUpLink ();
+      fMeasureUpLinkToSegment->
+        fetchSegmentUpLinkToScore ();
   }
 
   return result;
@@ -264,9 +264,9 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
     "containingSegment is null");
 
   S_msrVoice
-    containingSegmentVoiceUpLink =
+    containingSegmentUpLinkToVoice =
       containingSegment->
-        getSegmentVoiceUpLink ();
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -277,7 +277,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
       " in segment " <<
       containingSegment->asString () <<
       " in voice \"" <<
-      containingSegmentVoiceUpLink->getVoiceName () <<
+      containingSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -300,7 +300,7 @@ S_msrMeasure msrMeasure::createMeasureNewbornClone (
   // set newbornClone's ordinal number
   newbornClone->
     setMeasureOrdinalNumberInVoice (
-      containingSegmentVoiceUpLink->
+      containingSegmentUpLinkToVoice->
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
   // next measure number
@@ -358,9 +358,9 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   S_msrSegment containingSegment)
 {
   S_msrVoice
-    containingSegmentVoiceUpLink =
+    containingSegmentUpLinkToVoice =
       containingSegment->
-        getSegmentVoiceUpLink ();
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -370,7 +370,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
       " in segment " <<
       containingSegment->asString () <<
       " in voice \"" <<
-      containingSegmentVoiceUpLink->getVoiceName () <<
+      containingSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -393,7 +393,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
   // measure numbers
   measureDeepClone->
     setMeasureOrdinalNumberInVoice (
-      containingSegmentVoiceUpLink->
+      containingSegmentUpLinkToVoice->
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
   measureDeepClone->fMeasurePuristNumber =
@@ -454,7 +454,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         containingSegment->asString () <<
         " in voice \"" <<
           containingSegment->
-            getSegmentVoiceUpLink ()->
+            getSegmentUpLinkToVoice ()->
               getVoiceName () <<
         "\"" <<
         endl;
@@ -477,7 +477,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         // create the note deep clone
         elementDeepClone =
           note->createNoteDeepClone (
-            fetchMeasureVoiceUpLink ());
+            fetchMeasureUpLinkToVoice ());
 
 /* JMI
         // append the element deep clone to the measure deep clone
@@ -528,7 +528,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
         containingSegment->asString () <<
         " in voice \"" <<
         containingSegment->
-          getSegmentVoiceUpLink ()->
+          getSegmentUpLinkToVoice ()->
             getVoiceName () <<
         "\"" <<
         endl;
@@ -538,7 +538,7 @@ S_msrMeasure msrMeasure::createMeasureDeepClone (
 
   // upLinks
 
-  // fMeasureSegmentUpLink JMI ???
+  // fMeasureUpLinkToSegment JMI ???
 
   return measureDeepClone;
 }
@@ -548,9 +548,9 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
   const string& measureNumber)
 {
   S_msrVoice
-    containingSegmentVoiceUpLink =
+    containingSegmentUpLinkToVoice =
       containingSegment->
-        getSegmentVoiceUpLink ();
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -560,7 +560,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
       " in segment " <<
       containingSegment->asString () <<
       " in voice \"" <<
-      containingSegmentVoiceUpLink->getVoiceName () <<
+      containingSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -583,7 +583,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
   // set measureCopy's ordinal number JMI ???
   measureCopy->
     setMeasureOrdinalNumberInVoice (
-      containingSegmentVoiceUpLink->
+      containingSegmentUpLinkToVoice->
         incrementVoiceCurrentMeasureOrdinalNumber ());
 
 /* JMI
@@ -627,7 +627,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         containingSegment->asString () <<
         " in voice \"" <<
           containingSegment->
-            getSegmentVoiceUpLink ()->
+            getSegmentUpLinkToVoice ()->
               getVoiceName () <<
         "\"" <<
         endl;
@@ -706,7 +706,7 @@ S_msrMeasure msrMeasure::createMeasureCopyWithNotesOnly (
         containingSegment->asString () <<
         " in voice \"" <<
         containingSegment->
-          getSegmentVoiceUpLink ()->
+          getSegmentUpLinkToVoice ()->
             getVoiceName () <<
         "\"" <<
         endl;
@@ -772,10 +772,10 @@ void msrMeasure::setMeasureEndRegularKind (
         "' to '" <<
         measureEndRegularKindAsString (measureEndRegularKind) <<
         "' in segment " <<
-        fMeasureSegmentUpLink->asString () <<
+        fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ()->
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ()->
             getVoiceName () <<
         "\"" <<
         ", line " << fInputLineNumber <<
@@ -797,10 +797,10 @@ void msrMeasure::setMeasureRepeatContextKind (
         "' to '" <<
         measureRepeatContextKindAsString (measureRepeatContextKind) <<
         "' in segment " <<
-        fMeasureSegmentUpLink->asString () <<
+        fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ()->
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ()->
             getVoiceName () <<
         "\"" <<
         ", line " << fInputLineNumber <<
@@ -822,10 +822,10 @@ void msrMeasure::setMeasureElementMeasureNumber (
         "' to '" <<
         measureNumber <<
         "' in segment " <<
-        fMeasureSegmentUpLink->asString () <<
+        fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ()->
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ()->
             getVoiceName () <<
         "\"" <<
         ", line " << fInputLineNumber <<
@@ -847,10 +847,10 @@ void msrMeasure::setMeasureOrdinalNumberInVoice (
         "' to '" <<
         measureOrdinalNumber <<
         "' in segment " <<
-        fMeasureSegmentUpLink->asString () <<
+        fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ()->
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ()->
             getVoiceName () <<
         "\"" <<
         ", line " << fInputLineNumber <<
@@ -872,10 +872,10 @@ void msrMeasure::setMeasurePuristNumber (
         "' to '" <<
         measurePuristNumber <<
         "' in segment " <<
-        fMeasureSegmentUpLink->asString () <<
+        fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ()->
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ()->
             getVoiceName () <<
         "\"" <<
         ", line " << fInputLineNumber <<
@@ -919,7 +919,7 @@ void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
       " to measure " <<
       asShortString () <<
       " in voice \"" <<
-      fetchMeasureVoiceUpLink ()->
+      fetchMeasureUpLinkToVoice ()->
         getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -964,8 +964,8 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
       " in measure " <<
       asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -1012,8 +1012,8 @@ void msrMeasure::appendElementAtTheEndOfMeasure (
       " at the end of measure " <<
       asString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
       "\", has position in measure '" <<
       elem->getMeasureElementPositionInMeasure () <<
@@ -1201,8 +1201,8 @@ void msrMeasure::insertElementAtPositionInMeasure (
       " in measure " <<
       asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -1244,8 +1244,8 @@ void msrMeasure::insertElementAtPositionInMeasure (
           " in measure " <<
           asShortString () <<
           " in voice \"" <<
-          fMeasureSegmentUpLink->
-            getSegmentVoiceUpLink ()
+          fMeasureUpLinkToSegment->
+            getSegmentUpLinkToVoice ()
               ->getVoiceName () <<
           "\", currentMeasureWholeNotesDuration = " <<
           fCurrentMeasureWholeNotesDuration <<
@@ -1274,8 +1274,8 @@ void msrMeasure::insertElementAtPositionInMeasure (
       " in measure " <<
       asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()
           ->getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -1316,10 +1316,10 @@ void msrMeasure::setNextMeasureNumber (const string& nextMeasureNumber)
       "' in measure " <<
       this->asShortString () <<
       " in segment " <<
-      fMeasureSegmentUpLink-> asString () <<
+      fMeasureUpLinkToSegment-> asString () <<
       /* JMI
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       */
       ", line " << fInputLineNumber <<
@@ -1338,12 +1338,12 @@ void msrMeasure::setMeasureFirstInVoice ()
       "Setting measure " <<
       this->asShortString () <<
       " as first measure in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       "' in segment " <<
-      fMeasureSegmentUpLink-> asString () <<
+      fMeasureUpLinkToSegment-> asString () <<
       ", line " << fInputLineNumber <<
       endl;
   }
@@ -1412,8 +1412,8 @@ void msrMeasure::setCurrentMeasureWholeNotesDuration (
 
     gLogStream <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       "', line " << inputLineNumber <<
@@ -1471,8 +1471,8 @@ if (false) // JMI
 
     gLogStream <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       "', line " << inputLineNumber <<
@@ -1505,10 +1505,10 @@ void msrMeasure::setMeasureKind (
         " to '" <<
         msrMeasureKindAsString (measureKind) <<
         "' in segment " <<
-        fMeasureSegmentUpLink->asString () <<
+        fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ()->
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ()->
             getVoiceName () <<
         "\"" <<
         ", line " << fInputLineNumber <<
@@ -1547,10 +1547,10 @@ void msrMeasure::setMeasureKind (
           " to '" <<
           msrMeasureKindAsString (measureKind) <<
           "' in segment " <<
-          fMeasureSegmentUpLink->asString () <<
+          fMeasureUpLinkToSegment->asString () <<
           " in voice \"" <<
-          fMeasureSegmentUpLink->
-            getSegmentVoiceUpLink ()->
+          fMeasureUpLinkToSegment->
+            getSegmentUpLinkToVoice ()->
               getVoiceName () <<
           "\"" <<
           ", line " << fInputLineNumber <<
@@ -1580,10 +1580,10 @@ void msrMeasure::setMeasureKind (
           " to '" <<
           msrMeasureKindAsString (measureKind) <<
           "' in segment " <<
-          fMeasureSegmentUpLink->asString () <<
+          fMeasureUpLinkToSegment->asString () <<
           " in voice \"" <<
-          fMeasureSegmentUpLink->
-            getSegmentVoiceUpLink ()->
+          fMeasureUpLinkToSegment->
+            getSegmentUpLinkToVoice ()->
               getVoiceName () <<
           "\"" <<
           ", line " << fInputLineNumber <<
@@ -1616,7 +1616,7 @@ void msrMeasure::appendPrintLayoutToMeasure (
       " to measure " <<
       this->asShortString () <<
       ", in voice \"" <<
-      fetchMeasureVoiceUpLink ()->
+      fetchMeasureUpLinkToVoice ()->
         getVoiceName () <<
       "\"" <<
       endl;
@@ -1639,7 +1639,7 @@ void msrMeasure::appendClefToMeasure (S_msrClef clef)
       " to measure " <<
       this->asShortString () <<
       ", in voice \"" <<
-      fetchMeasureVoiceUpLink ()->
+      fetchMeasureUpLinkToVoice ()->
         getVoiceName () <<
       "\"" <<
       endl;
@@ -1659,7 +1659,7 @@ void msrMeasure::appendKeyToMeasure (S_msrKey key)
       " to measure " <<
       this->asShortString () <<
       ", in voice \"" <<
-      fetchMeasureVoiceUpLink ()->
+      fetchMeasureUpLinkToVoice ()->
         getVoiceName () <<
       "\"" <<
       endl;
@@ -1695,8 +1695,8 @@ void msrMeasure::appendTimeSignatureToMeasure (S_msrTimeSignature timeSignature)
       "' to measure " <<
       this->asShortString ()<<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       endl;
@@ -1737,17 +1737,17 @@ void msrMeasure::appendTimeSignatureToMeasureClone (S_msrTimeSignature timeSigna
     --gIndenter;
 
     S_msrVoice
-      voiceUpLink =
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ();
+      upLinkToVoice =
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ();
 
     gLogStream <<
       "to measure clone " <<
       this->asShortString () <<
       " in segment clone '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
-      voiceUpLink->getVoiceName () <<
+      upLinkToVoice->getVoiceName () <<
       "\"" <<
       endl;
   }
@@ -1769,9 +1769,9 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
       "' in measure clone \"" <<
       this->asShortString () <<
       "\" in segment clone '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
 // JMI      "' in voice \"" <<
-//      voiceUpLink->getVoiceName () <<
+//      upLinkToVoice->getVoiceName () <<
 //      "\"" <<
       ", line " << inputLineNumber <<
       endl;
@@ -1823,8 +1823,8 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
       "for measure " <<
       this->asShortString ()<<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       ", line " << fInputLineNumber <<
@@ -1868,8 +1868,8 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
             "in measure " <<
             this->asShortString () <<
             " in voice \"" <<
-            fMeasureSegmentUpLink->
-              getSegmentVoiceUpLink ()->
+            fMeasureUpLinkToSegment->
+              getSegmentUpLinkToVoice ()->
                 getVoiceName () <<
             "\"" <<
             ", line " << fInputLineNumber <<
@@ -1887,8 +1887,8 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
             "Measure " <<
             this->asShortString () <<
             "'in voice \"" <<
-            fMeasureSegmentUpLink->
-              getSegmentVoiceUpLink ()->
+            fMeasureUpLinkToSegment->
+              getSegmentUpLinkToVoice ()->
                 getVoiceName () <<
             "\"" <<
             " has " <<
@@ -1910,8 +1910,8 @@ void msrMeasure::setFullMeasureWholeNotesDurationFromTime (
           "Measure " <<
           this->asShortString () <<
            " in voice \"" <<
-          fMeasureSegmentUpLink->
-            getSegmentVoiceUpLink ()->
+          fMeasureUpLinkToSegment->
+            getSegmentUpLinkToVoice ()->
               getVoiceName () <<
           "\"" <<
           " is senza misura" <<
@@ -1937,8 +1937,8 @@ void msrMeasure::appendTranspositionToMeasure (
     // fetch the voice
     S_msrVoice
       voice =
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ();
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ();
 
     gLogStream <<
       "Appending transpose " <<
@@ -1994,8 +1994,8 @@ void msrMeasure::appendBarLineToMeasure (S_msrBarLine barLine)
   // fetch the voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
@@ -2123,8 +2123,8 @@ void msrMeasure::appendNoteToMeasure (
       " to measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       ", partCurrentPositionInMeasure: " <<
@@ -2145,7 +2145,7 @@ void msrMeasure::appendNoteToMeasure (
     // fetch the voice
     S_msrVoice
       voice =
-        fetchMeasureVoiceUpLink ();
+        fetchMeasureUpLinkToVoice ();
 
     // create a skip note of duration wholeNotesDelta
     S_msrNote
@@ -2158,7 +2158,7 @@ void msrMeasure::appendNoteToMeasure (
           0); // dots number JMI ???
           /* JMI
           voice->
-            getVoiceStaffUpLink ()->
+            getVoiceUpLinkToStaff ()->
               getStaffNumber (),
           voice->
             getVoiceNumber ());
@@ -2180,8 +2180,8 @@ void msrMeasure::appendNoteToMeasure (
       "' in measure " <<
       this->asShortString () <<
       ", cannot padup in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       ", fCurrentMeasureWholeNotesDuration " <<
@@ -2257,8 +2257,8 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -2281,7 +2281,7 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 
   // populate measure upLink
   note->
-    setNoteDirectMeasureUpLink (this);
+    setNoteDirectUpLinkToMeasure (this);
 
   // set note's measure number
   note->
@@ -2373,8 +2373,8 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure (
       " in measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       endl;
@@ -2413,8 +2413,8 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (S_msrNote note)
       " at the end of measure " <<
       this->asString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
@@ -2426,7 +2426,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (S_msrNote note)
 
   // populate measure upLink
   note->
-    setNoteDirectMeasureUpLink (this);
+    setNoteDirectUpLinkToMeasure (this);
 
   // append the note at the end of the measure
   appendElementAtTheEndOfMeasure (note);
@@ -2482,10 +2482,10 @@ void msrMeasure::appendNoteToMeasureClone (S_msrNote note)
       "' to measure clone " <<
       this->asShortString () <<
       " in segment clone '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice clone \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       endl;
@@ -2498,7 +2498,7 @@ void msrMeasure::appendNoteToMeasureClone (S_msrNote note)
   if (appendMeasureIfOverflow (inputLineNumber)) {
     // a new measure has been appended to the segment
     // append note to it via the segment
-    fMeasureSegmentUpLink->
+    fMeasureUpLinkToSegment->
       appendNoteToSegment (note);
   }
 
@@ -2508,7 +2508,7 @@ void msrMeasure::appendNoteToMeasureClone (S_msrNote note)
 
     // populate measure upLink
     note->
-      setNoteDirectMeasureUpLink (this);
+      setNoteDirectUpLinkToMeasure (this);
 
     // append the note to the measure elements list
   // JMI  // only now to make it possible to remove it afterwards
@@ -2557,8 +2557,8 @@ void msrMeasure::appendDoubleTremoloToMeasure (
       "' to measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       endl;
@@ -2617,7 +2617,7 @@ void msrMeasure::appendChordToMeasure (S_msrChord chord)
     chord->getInputLineNumber ();
 
   // populate measure upLink
-  chord->setChordDirectMeasureUpLink (this);
+  chord->setChordDirectUpLinkToMeasure (this);
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -2626,8 +2626,8 @@ void msrMeasure::appendChordToMeasure (S_msrChord chord)
       "' to measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       endl;
@@ -2671,8 +2671,8 @@ void msrMeasure::appendTupletToMeasure (S_msrTuplet tuplet)
       " to measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       ", line " << inputLineNumber <<
@@ -2686,7 +2686,7 @@ void msrMeasure::appendTupletToMeasure (S_msrTuplet tuplet)
   tuplet->setTupletKind (msrTupletInKind::kTupletInMeasure);
 
   // populate measure upLink
-  tuplet->setTupletDirectMeasureUpLink (this);
+  tuplet->setTupletDirectUpLinkToMeasure (this);
 
   // append the tuplet to the measure elements list
   appendElementToMeasure (tuplet);
@@ -2712,10 +2712,10 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
       " to measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -2766,10 +2766,10 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
       " to measure clone " <<
       this->asShortString () <<
       " in segment clone '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice clone \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -2813,8 +2813,8 @@ void msrMeasure::appendFiguredBassElementToMeasure (
       " to measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -2871,10 +2871,10 @@ void msrMeasure::appendFiguredBassElementToMeasureClone (
       " to measure clone " <<
       this->asShortString () <<
       " in segment clone '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice clone \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -2939,7 +2939,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
         0); // dots number JMI ???
         /* JMI
         voice->
-          getVoiceStaffUpLink ()->
+          getVoiceUpLinkToStaff ()->
             getStaffNumber (),
         voice->
           getVoiceNumber ());
@@ -2955,8 +2955,8 @@ void msrMeasure::padUpToPositionInMeasureInMeasure (
   // fetch the measure voice
   S_msrVoice
     measureVoice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) { // JMI
@@ -2969,7 +2969,7 @@ void msrMeasure::padUpToPositionInMeasureInMeasure (
       "' in measure " <<
       this->asShortString () <<
       " in segment " <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       " in voice \"" <<
       measureVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -3043,7 +3043,7 @@ void msrMeasure::padUpToPositionInMeasureInMeasure (
         "' since they are equal in measure " <<
         this->asShortString () <<
         " in segment " <<
-        fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+        fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
         " in voice \"" <<
         measureVoice->getVoiceName () <<
         "\", line " << inputLineNumber <<
@@ -3066,7 +3066,7 @@ void msrMeasure::padUpToPositionInMeasureInMeasure (
         "' since the former is larger than the latter in measure " <<
         this->asShortString () <<
         " in segment " <<
-        fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+        fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
         " in voice \"" <<
         measureVoice->getVoiceName () <<
         "\", line " << inputLineNumber;
@@ -3093,8 +3093,8 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ???
   // fetch the measure voice
   S_msrVoice
     measureVoice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (
@@ -3114,7 +3114,7 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ???
       ", fullMeasureWholeNotesDuration: '" <<
       fFullMeasureWholeNotesDuration <<
       "' in segment " <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       " in voice \"" <<
       measureVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -3147,7 +3147,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
       ", to measure " <<
       this->asShortString () <<
       " in segment " <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -3158,8 +3158,8 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
   // fetch the measure voice
   S_msrVoice
     measureVoice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   // create a padding skip note
   S_msrNote
@@ -3234,8 +3234,8 @@ void msrMeasure::appendStaffDetailsToMeasure (
       "' to measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"" <<
       endl;
@@ -3279,8 +3279,8 @@ void msrMeasure::removeNoteFromMeasure (
       "' from measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"," <<
       "fMeasureLastHandledNote:" <<
@@ -3312,13 +3312,13 @@ void msrMeasure::removeNoteFromMeasure (
   } // for
 
   S_msrVoice
-    segmentVoiceUpLink =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+    segmentUpLinkToVoice =
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   S_msrPart
     segmentVoicePart =
-      fetchMeasurePartUpLink ();
+      fetchMeasureUpLinkToPart ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -3333,9 +3333,9 @@ void msrMeasure::removeNoteFromMeasure (
 
     gLogStream <<
       endl << endl <<
-      "@@@@@@@@@@@@@@@@@ segmentVoiceUpLink" <<
+      "@@@@@@@@@@@@@@@@@ segmentUpLinkToVoice" <<
       endl <<
-      segmentVoiceUpLink <<
+      segmentUpLinkToVoice <<
       endl <<
       "@@@@@@@@@@@@@@@@@" <<
       endl << endl;
@@ -3350,7 +3350,7 @@ void msrMeasure::removeNoteFromMeasure (
     " from measure " <<
     this->asShortString () <<
     " in voice \"" <<
-    segmentVoiceUpLink->getVoiceName () <<
+    segmentUpLinkToVoice->getVoiceName () <<
     "\"," <<
     " since this note has not been found in fMeasureElementsList";
 
@@ -3381,8 +3381,8 @@ void msrMeasure::removeElementFromMeasure (
       " from measure " <<
       this->asShortString () <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\"," <<
       endl;
@@ -3426,8 +3426,8 @@ void msrMeasure::removeElementFromMeasure (
     " from measure " <<
     this->asShortString () <<
     " in voice \"" <<
-    fMeasureSegmentUpLink->
-      getSegmentVoiceUpLink ()->
+    fMeasureUpLinkToSegment->
+      getSegmentUpLinkToVoice ()->
         getVoiceName () <<
     "\"," <<
     " since this element has not been found in fMeasureElementsList";
@@ -3494,8 +3494,8 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
   // fetch the voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   // get voice after repeat component phase kind
   msrVoiceRepeatPhaseKind
@@ -3825,8 +3825,8 @@ void msrMeasure::padUpToPositionInMeasure (
   // fetch the voice
   S_msrVoice
     measureVoice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -3836,7 +3836,7 @@ void msrMeasure::padUpToPositionInMeasure (
       "' in measure " <<
       this->asShortString () <<
       " in segment " <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       " in voice \"" <<
       measureVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -3923,8 +3923,8 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
   // fetch the voice
   S_msrVoice
     measureVoice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -3936,7 +3936,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
       "' at the end of measure " <<
       this->asString () <<
       " in segment " <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       " in voice \"" <<
       measureVoice->getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -4037,14 +4037,14 @@ void msrMeasure::finalizeRegularMeasure (
   // fetch the regular voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   // fetch the regular voice's part
   S_msrPart
     regularPart =
       voice->
-        fetchVoicePartUpLink ();
+        fetchVoiceUpLinkToPart ();
 
   mfAssert (
     __FILE__, __LINE__,
@@ -4070,7 +4070,7 @@ void msrMeasure::finalizeRegularMeasure (
       "Finalizing regular measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in regular voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
@@ -4118,7 +4118,7 @@ void msrMeasure::finalizeRegularMeasure (
   // register this measures's whole notes duration in the part
   S_msrPart
     part =
-      this->fetchMeasurePartUpLink ();
+      this->fetchMeasureUpLinkToPart ();
 
   part->
     registerOrdinalMeasureNumberWholeNotesDuration (
@@ -4175,7 +4175,7 @@ void msrMeasure::finalizeRegularMeasure (
           "' occupies measure " <<
           this->asShortString () <<
           " fully in segment '" <<
-          fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+          fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
           "' in voice \"" <<
           voice->getVoiceName () <<
           "\", line " << inputLineNumber <<
@@ -4214,29 +4214,29 @@ void msrMeasure::handleFirstHarmonyInHarmoniesMeasure (
 
   // get currentHarmony's note uplink
   S_msrNote
-    currentHarmonyNoteUpLink  =
+    currentUpLinkToHarmonyToNote  =
       currentHarmony->
-        getHarmonyNoteUpLink ();
+        getUpLinkToHarmonyToNote ();
 
   // get the currentHarmony's note uplink position in the measure
   rational
-    currentHarmonyNoteUpLinkPositionInMeasure =
-      currentHarmonyNoteUpLink->
+    currentUpLinkToHarmonyToNotePositionInMeasure =
+      currentUpLinkToHarmonyToNote->
         getMeasureElementPositionInMeasure ();
 
   // the position to pad up to is the minimum
-  // of those of the currentHarmony and currentHarmonyNoteUpLink,
+  // of those of the currentHarmony and currentUpLinkToHarmonyToNote,
   // to keep comparison points between the regular voice and its harmonies voice
   rational
     positionInMeasureToPadUpTo =
-      currentHarmonyNoteUpLinkPositionInMeasure;
+      currentUpLinkToHarmonyToNotePositionInMeasure;
 //      currentHarmonyPositionInMeasure;
 
 /* JMI
   if (
     currentHarmonyPositionInMeasure
       <
-    currentHarmonyNoteUpLinkPositionInMeasure
+    currentUpLinkToHarmonyToNotePositionInMeasure
   ) {
     positionInMeasureToPadUpTo =
       currentHarmonyPositionInMeasure;
@@ -4430,9 +4430,9 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
   // get the currentHarmony's note uplink
   S_msrNote
-    currentHarmonyNoteUpLink  =
+    currentUpLinkToHarmonyToNote  =
       currentHarmony->
-        getHarmonyNoteUpLink ();
+        getUpLinkToHarmonyToNote ();
 
   // compute the measure overflow whole notes
   rational
@@ -4463,11 +4463,11 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
 
     gLogStream <<
       endl <<
-      "currentHarmonyNoteUpLink:" <<
+      "currentUpLinkToHarmonyToNote:" <<
       endl;
     ++gIndenter;
     gLogStream <<
-      currentHarmonyNoteUpLink->asString () <<
+      currentUpLinkToHarmonyToNote->asString () <<
       endl;
     --gIndenter;
 
@@ -4481,12 +4481,12 @@ void msrMeasure::postHandleCurrentHarmonyInHarmoniesMeasure (
       ", fFullMeasureWholeNotesDuration: " <<
       fFullMeasureWholeNotesDuration <<
       /* JMI
-      ", positionInMeasureFollowingCurrentHarmonyNoteUpLink: " <<
-      positionInMeasureFollowingCurrentHarmonyNoteUpLink <<
-      ", currentHarmonyNoteUpLinkSoundingWholeNotes: " <<
-      currentHarmonyNoteUpLinkSoundingWholeNotes <<
-      ", positionInMeasureFollowingCurrentHarmonyNoteUpLink: " <<
-      positionInMeasureFollowingCurrentHarmonyNoteUpLink <<
+      ", positionInMeasureFollowingCurrentUpLinkToHarmonyToNote: " <<
+      positionInMeasureFollowingCurrentUpLinkToHarmonyToNote <<
+      ", currentUpLinkToHarmonyToNoteSoundingWholeNotes: " <<
+      currentUpLinkToHarmonyToNoteSoundingWholeNotes <<
+      ", positionInMeasureFollowingCurrentUpLinkToHarmonyToNote: " <<
+      positionInMeasureFollowingCurrentUpLinkToHarmonyToNote <<
       */
       ", currentHarmonySoundingWholeNotes: " <<
       currentHarmonySoundingWholeNotes <<
@@ -4624,8 +4624,8 @@ void msrMeasure::finalizeHarmoniesInHarmoniesMeasure (
   // fetch the voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -4633,7 +4633,7 @@ void msrMeasure::finalizeHarmoniesInHarmoniesMeasure (
       "Finalizing harmonies in harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
@@ -4661,7 +4661,7 @@ void msrMeasure::finalizeHarmoniesInHarmoniesMeasure (
         "Sorting the elements in harmonies measure " <<
         this->asShortString () <<
         " in segment '" <<
-        fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+        fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
         "' in voice \"" <<
         voice->getVoiceName () <<
         "\" (" << context << ")" <<
@@ -4788,7 +4788,7 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
       " while finalizing harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
@@ -4799,15 +4799,15 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
 
   // get currentHarmony's note uplink
   S_msrNote
-    currentHarmonyNoteUpLink  =
+    currentUpLinkToHarmonyToNote  =
       currentHarmony->
-        getHarmonyNoteUpLink ();
+        getUpLinkToHarmonyToNote ();
 
 #ifdef TRACING_IS_ENABLED
   // get the currentHarmony's note uplink position in the measure
   rational
-    currentHarmonyNoteUpLinkPositionInMeasure =
-      currentHarmonyNoteUpLink->
+    currentUpLinkToHarmonyToNotePositionInMeasure =
+      currentUpLinkToHarmonyToNote->
         getMeasureElementPositionInMeasure ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -4824,8 +4824,8 @@ void msrMeasure::finalizeHarmonyInHarmoniesMeasure (
     }
 
     gLogStream <<
-      ", currentHarmonyNoteUpLinkPositionInMeasure: " <<
-      currentHarmonyNoteUpLinkPositionInMeasure <<
+      ", currentUpLinkToHarmonyToNotePositionInMeasure: " <<
+      currentUpLinkToHarmonyToNotePositionInMeasure <<
       endl;
   }
 #endif
@@ -4858,18 +4858,18 @@ void msrMeasure::handleFirstFiguredBassElementInFiguredBassMeasure (
   // currentFiguredBass is the first figured bass in the measure
 
   // the position to pad up to is the minimum
-  // of those of the currentFiguredBass and currentFiguredBassNoteUpLink,
+  // of those of the currentFiguredBass and currentFiguredBassUpLinkToNote,
   // to keep comparison points between the regular voice and its figured bass voice
   rational
     positionInMeasureToPadUpTo =
-// JMI        currentFiguredBassNoteUpLinkPositionInMeasure;
+// JMI        currentFiguredBassUpLinkToNotePositionInMeasure;
       currentFiguredBassPositionInMeasure;
 
 /* JMI
   if (
     currentFiguredBassPositionInMeasure
       <
-    currentFiguredBassNoteUpLinkPositionInMeasure
+    currentFiguredBassUpLinkToNotePositionInMeasure
   ) {
     positionInMeasureToPadUpTo =
       currentFiguredBassPositionInMeasure;
@@ -5122,19 +5122,19 @@ void msrMeasure::postHandleCurrentFiguredBassElementInFiguredBassMeasure (
 
   // get the currentFiguredBass's note uplink
   S_msrNote
-    currentFiguredBassNoteUpLink  =
+    currentFiguredBassUpLinkToNote  =
       currentFiguredBass->
-        getFiguredBassNoteUpLink ();
+        getFiguredBassUpLinkToNote ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     gLogStream <<
       "postHandleCurrentFiguredBassElementInFiguredBassMeasure() 1" <<
-      ", currentFiguredBassNoteUpLink:" <<
+      ", currentFiguredBassUpLinkToNote:" <<
       endl;
     ++gIndenter;
     gLogStream <<
-      currentFiguredBassNoteUpLink <<
+      currentFiguredBassUpLinkToNote <<
       endl;
     --gIndenter;
   }
@@ -5170,12 +5170,12 @@ void msrMeasure::postHandleCurrentFiguredBassElementInFiguredBassMeasure (
       ", positionInMeasureFollowingCurrentFiguredBass: " <<
       positionInMeasureFollowingCurrentFiguredBass <<
       /* JMI
-      ", positionInMeasureFollowingCurrentFiguredBassNoteUpLink: " <<
-      positionInMeasureFollowingCurrentFiguredBassNoteUpLink <<
-      ", currentFiguredBassNoteUpLinkSoundingWholeNotes: " <<
-      currentFiguredBassNoteUpLinkSoundingWholeNotes <<
-      ", positionInMeasureFollowingCurrentFiguredBassNoteUpLink: " <<
-      positionInMeasureFollowingCurrentFiguredBassNoteUpLink <<
+      ", positionInMeasureFollowingCurrentFiguredBassUpLinkToNote: " <<
+      positionInMeasureFollowingCurrentFiguredBassUpLinkToNote <<
+      ", currentFiguredBassUpLinkToNoteSoundingWholeNotes: " <<
+      currentFiguredBassUpLinkToNoteSoundingWholeNotes <<
+      ", positionInMeasureFollowingCurrentFiguredBassUpLinkToNote: " <<
+      positionInMeasureFollowingCurrentFiguredBassUpLinkToNote <<
       */
       ", currentFiguredBassSoundingWholeNotes: " <<
       currentFiguredBassSoundingWholeNotes <<
@@ -5258,8 +5258,8 @@ void msrMeasure::finalizeFiguredBassElementsInFiguredBassMeasure (
   // fetch the voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -5267,7 +5267,7 @@ void msrMeasure::finalizeFiguredBassElementsInFiguredBassMeasure (
       "Finalizing harmonies in figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
@@ -5295,7 +5295,7 @@ void msrMeasure::finalizeFiguredBassElementsInFiguredBassMeasure (
       "Sorting the elements in figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
       voice->getVoiceName () <<
       "\" (" << context << ")" <<
@@ -5367,15 +5367,15 @@ void msrMeasure::finalizeFiguredBassElementsInFiguredBassMeasure (
 
         // get the currentFiguredBass's note uplink
         S_msrNote
-          currentFiguredBassNoteUpLink  =
+          currentFiguredBassUpLinkToNote  =
             currentFiguredBass->
-              getFiguredBassNoteUpLink ();
+              getFiguredBassUpLinkToNote ();
 
 #ifdef TRACING_IS_ENABLED
         // get the currentFiguredBass's note uplink position in the measure
         rational
-          currentFiguredBassNoteUpLinkPositionInMeasure =
-            currentFiguredBassNoteUpLink->
+          currentFiguredBassUpLinkToNotePositionInMeasure =
+            currentFiguredBassUpLinkToNote->
               getMeasureElementPositionInMeasure ();
 
         if (gGlobalTracingOahGroup->getTraceHarmonies () ) {
@@ -5394,8 +5394,8 @@ void msrMeasure::finalizeFiguredBassElementsInFiguredBassMeasure (
           gLogStream <<
             ", currentFiguredBassPositionInMeasure: " <<
             currentFiguredBassPositionInMeasure <<
-            ", currentFiguredBassNoteUpLinkPositionInMeasure: " <<
-            currentFiguredBassNoteUpLinkPositionInMeasure <<
+            ", currentFiguredBassUpLinkToNotePositionInMeasure: " <<
+            currentFiguredBassUpLinkToNotePositionInMeasure <<
             endl;
         }
 #endif
@@ -5458,14 +5458,14 @@ void msrMeasure::finalizeHarmoniesMeasure (
   // fetch the harmonies voice
   S_msrVoice
     harmoniesVoice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   // fetch the harmonies part
   S_msrPart
     harmoniesPart =
       harmoniesVoice->
-        fetchVoicePartUpLink ();
+        fetchVoiceUpLinkToPart ();
 
   mfAssert (
     __FILE__, __LINE__,
@@ -5478,7 +5478,7 @@ void msrMeasure::finalizeHarmoniesMeasure (
       "Finalizing harmonies measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in harmonies voice \"" <<
       harmoniesVoice->getVoiceName () <<
       "\" (" << context << ")" <<
@@ -5559,14 +5559,14 @@ void msrMeasure::finalizeFiguredBassMeasure (
   // fetch the figured bass voice
   S_msrVoice
     figuredBassVoice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   // fetch the figured bass part
   S_msrPart
     figuredBassPart =
       figuredBassVoice->
-        fetchVoicePartUpLink ();
+        fetchVoiceUpLinkToPart ();
 
   mfAssert (
     __FILE__, __LINE__,
@@ -5579,7 +5579,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
       "Finalizing figured bass measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in figured bass voice \"" <<
       figuredBassVoice->getVoiceName () <<
       "\" (" << context << ")" <<
@@ -5668,12 +5668,12 @@ void msrMeasure::finalizeMeasure (
       "Attempting to finalize measure " <<
       this->asShortString () <<
       " more than once in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "', context: " << context <<
       "', measureFinalizationContext: " << fMeasureFinalizationContext <<
       " in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\" (" << context << ")" <<
       ", line " << inputLineNumber;
@@ -5687,7 +5687,7 @@ void msrMeasure::finalizeMeasure (
 
       S_msrStaff
         staff =
-          fetchMeasureStaffUpLink ();
+          fetchMeasureUpLinkToStaff ();
 
       gLogStream <<
         "staff:" <<
@@ -5708,8 +5708,8 @@ void msrMeasure::finalizeMeasure (
   else {
     S_msrVoice
       voice =
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ();
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -5717,10 +5717,10 @@ void msrMeasure::finalizeMeasure (
         "Finalizing measure " <<
         this->asString () <<
         " in segment '" <<
-        fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+        fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
         "' in voice \"" <<
-        fMeasureSegmentUpLink->
-          getSegmentVoiceUpLink ()->
+        fMeasureUpLinkToSegment->
+          getSegmentUpLinkToVoice ()->
             getVoiceName () <<
         "\" (" << context << ")" <<
         ", lines " << inputLineNumber << " .. " << fMeasureEndInputLineNumber << // JMI
@@ -5737,7 +5737,7 @@ void msrMeasure::finalizeMeasure (
         "Measure " <<
         this->asShortString () <<
         " in segment '" <<
-        fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+        fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
         "' in voice \"" <<
         voice->getVoiceName () <<
         "\", line " << inputLineNumber <<
@@ -5782,7 +5782,7 @@ void msrMeasure::finalizeMeasure (
     // position in voice
     rational
       positionInVoice =
-        fetchMeasureVoiceUpLink ()->
+        fetchMeasureUpLinkToVoice ()->
           getCurrentPositionInVoice ();
 
     // delegate position measure assignment to the elements in the measure
@@ -5816,9 +5816,9 @@ void msrMeasure::finalizeMeasureClone (
       "Finalizing measure clone " <<
       this->asString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
-// JMI      fMeasureSegmentUpLink->getSegmentVoiceUpLink ()->getVoiceName () <<
+// JMI      fMeasureUpLinkToSegment->getSegmentUpLinkToVoice ()->getVoiceName () <<
       voiceClone->getVoiceName () <<
 // JMI      "\" (" << context << ")" <<
       ", line " << inputLineNumber <<
@@ -5889,8 +5889,8 @@ void msrMeasure::finalizeMeasureClone (
   S_msrPart
     part =
       voiceClone->
-        getVoiceStaffUpLink ()->
-          getStaffPartUpLink ();
+        getVoiceUpLinkToStaff ()->
+          getStaffUpLinkToPart ();
 
   part->
     registerOrdinalMeasureNumberWholeNotesDuration (
@@ -6127,8 +6127,8 @@ string msrMeasure::asShortString () const
   // fetch the voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   stringstream s;
 
@@ -6169,8 +6169,8 @@ string msrMeasure::asShortStringForMeasuresSlices () const
   // fetch the voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   stringstream s;
 
@@ -6244,8 +6244,8 @@ string msrMeasure::asString () const
   // fetch the voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   stringstream s;
 
@@ -6370,8 +6370,8 @@ void msrMeasure::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fMeasureSegmentUpLink" << " : " <<
-    fMeasureSegmentUpLink->asShortString () <<
+    "fMeasureUpLinkToSegment" << " : " <<
+    fMeasureUpLinkToSegment->asShortString () <<
     endl;
 
 
@@ -6379,8 +6379,8 @@ void msrMeasure::print (ostream& os) const
   // fetch the voice
   S_msrVoice
     voice =
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ();
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ();
 
   // fetch voice's current clef, key and time signature
   S_msrClef
