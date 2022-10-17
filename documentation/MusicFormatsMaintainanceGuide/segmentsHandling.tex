@@ -199,7 +199,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
       ||
     gGlobalTracingOahGroup->getTraceRepeatsDetails ()
   ) {
-    fSegmentVoiceUpLink->
+    fSegmentUpLinkToVoice->
       displayVoiceRepeatsStackMultipleFullBarRestsMeasureRepeatAndVoice (
         inputLineNumber,
         "assertSegmentElementsListIsNotEmpty()");
@@ -212,7 +212,7 @@ void msrSegment::assertSegmentElementsListIsNotEmpty (
       ", segment: " <<
       this->asString () <<
       ", in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       "', line " << inputLineNumber <<
       endl;
@@ -235,7 +235,7 @@ void msrSegment::appendKeyToSegment (S_msrKey key)
       "Appending key " << key->asString () <<
       " to segment " << asString () <<
     ", in voice \"" <<
-    fSegmentVoiceUpLink->getVoiceName () <<
+    fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
       endl;
   }

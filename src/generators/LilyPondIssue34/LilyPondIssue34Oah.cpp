@@ -178,7 +178,7 @@ void LilyPondIssue34OahGroup::checkGroupOptionsConsistency ()
         stringstream s;
 
         s <<
-          fHandlerUpLink->getHandlerServiceName () <<
+          fUpLinkToHandler->getHandlerServiceName () <<
           " needs an generate code option chosen among:" <<
           endl;
 

@@ -70,12 +70,12 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // uplink
 
-    void                  setDoubleTremoloMeasureUpLink (
+    void                  setDoubleTremoloUpLinkToMeasure (
                             S_msrMeasure measure)
-                              { fDoubleTremoloMeasureUpLink = measure; }
+                              { fDoubleTremoloUpLinkToMeasure = measure; }
 
-    S_msrMeasure          getDoubleTremoloMeasureUpLink () const
-                              { return fDoubleTremoloMeasureUpLink; }
+    S_msrMeasure          getDoubleTremoloUpLinkToMeasure () const
+                              { return fDoubleTremoloUpLinkToMeasure; }
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
@@ -214,7 +214,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // ------------------------------------------------------
 
     // uplink
-    S_msrMeasure          fDoubleTremoloMeasureUpLink;
+    S_msrMeasure          fDoubleTremoloUpLinkToMeasure;
 
     // sounding whole notes JMI
     // the same as the displayed divisions of both members

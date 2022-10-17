@@ -367,7 +367,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
       harmony =
         msrHarmony::createWithoutVoiceUplink (
           fCurrentHarmonyInputLineNumber,
-          // no harmoniesVoiceUpLink yet
+          // no harmoniesUpLinkToVoice yet
 
           fCurrentHarmonyRootQuarterTonesPitchKind,
 
@@ -542,7 +542,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     // set the harmony's voice upLink
     // only now that we know which harmonies voice will contain it
     harmony->
-      setHarmoniesVoiceUpLink (
+      setHarmoniesUpLinkToVoice (
         partHarmoniesVoice);
 
 /* JMI CAFE
@@ -587,7 +587,7 @@ void msrNote::appendHarmonyToNoteHarmoniesList (S_msrHarmony harmony)
 
   // register this note as the harmony note upLink
   harmony->
-    setHarmonyNoteUpLink (this);
+    setUpLinkToHarmonyToNote (this);
 }
 \end{lstlisting}
 

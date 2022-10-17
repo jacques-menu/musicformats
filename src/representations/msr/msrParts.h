@@ -58,7 +58,7 @@ class EXP msrPart : public msrPartGroupElement
     static SMARTP<msrPart> create (
                             int            inputLineNumber,
                             const string&  partID,
-                            S_msrPartGroup partPartGroupUpLink);
+                            S_msrPartGroup PartUpLinkToPartGroup);
 
     SMARTP<msrPart> createPartNewbornClone (
                             S_msrPartGroup partGroupClone);
@@ -71,7 +71,7 @@ class EXP msrPart : public msrPartGroupElement
                           msrPart (
                             int            inputLineNumber,
                             const string&  partID,
-                            S_msrPartGroup partPartGroupUpLink);
+                            S_msrPartGroup PartUpLinkToPartGroup);
 
     virtual               ~msrPart ();
 
@@ -89,12 +89,12 @@ class EXP msrPart : public msrPartGroupElement
 
     // upLinks
 
-    void                  setPartPartGroupUpLink (
+    void                  setPartUpLinkToPartGroup (
                             S_msrPartGroup partGroup)
-                              { fPartPartGroupUpLink = partGroup; }
+                              { fPartUpLinkToPartGroup = partGroup; }
 
-    S_msrPartGroup        getPartPartGroupUpLink () const
-                              { return fPartPartGroupUpLink; }
+    S_msrPartGroup        getPartUpLinkToPartGroup () const
+                              { return fPartUpLinkToPartGroup; }
 
     // part absolute number
 
@@ -267,7 +267,7 @@ class EXP msrPart : public msrPartGroupElement
     // ------------------------------------------------------
 
     // uplinks
-    S_msrScore            fetchPartScoreUpLink () const;
+    S_msrScore            fetchPartUpLinkToScore () const;
 
     void                  assignSequentialNumbersToRegularVoicesInPart (
                             int inputLineNumber);
@@ -539,7 +539,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // upLinks
 
-    S_msrPartGroup        fPartPartGroupUpLink;
+    S_msrPartGroup        fPartUpLinkToPartGroup;
 
     // part ID and name
 
@@ -698,41 +698,7 @@ class EXP msrPart : public msrPartGroupElement
     void                  registerStaffInPart (
                             S_msrStaff staff);
 
-//     void                  registerStaffInPartByItsNumber ( JMI ???
-//                             int        staffNumber,
-//                             S_msrStaff staff);
-
-    // harmonies
-
-    void                  setPartHarmoniesVoiceForwardLink (
-                            S_msrVoice voice)
-                              { fPartHarmoniesVoiceForwardLink = voice; }
-
-    S_msrVoice            getPartHarmoniesVoiceForwardLink () const
-                              { return fPartHarmoniesVoiceForwardLink; }
-
-    void                  setHarmoniesVoicePartBackwardLink (
-                            S_msrVoice voice)
-                              { fHarmoniesVoicePartBackwardLink = voice; }
-
-    S_msrVoice            getHarmoniesVoicePartBackwardLink () const
-                              { return fHarmoniesVoicePartBackwardLink; }
-
     // figured bass
-
-    void                  setPartFiguredBassVoiceForwardLink (
-                            S_msrVoice voice)
-                              { fPartFiguredBassVoiceForwardLink = voice; }
-
-    S_msrVoice            getPartFiguredBassVoiceForwardLink () const
-                              { return fPartFiguredBassVoiceForwardLink; }
-
-    void                  setFiguredBassVoicePartBackwardLink (
-                            S_msrVoice voice)
-                              { fFiguredBassVoicePartBackwardLink = voice; }
-
-    S_msrVoice            getFiguredBassVoicePartBackwardLink () const
-                              { return fFiguredBassVoicePartBackwardLink; }
 
     static bool           compareStavesToHaveFiguredBassElementsBelowCorrespondingPart (
                             const S_msrStaff& first,
@@ -750,13 +716,6 @@ class EXP msrPart : public msrPartGroupElement
     // position in measure
 
     rational              fPartCurrentPositionInMeasure;
-
-    // two-way links
-    S_msrVoice            fPartHarmoniesVoiceForwardLink;
-    S_msrVoice            fHarmoniesVoicePartBackwardLink;
-
-    S_msrVoice            fPartFiguredBassVoiceForwardLink;
-    S_msrVoice            fFiguredBassVoicePartBackwardLink;
 };
 typedef SMARTP<msrPart> S_msrPart;
 EXP ostream& operator<< (ostream& os, const S_msrPart& elt);

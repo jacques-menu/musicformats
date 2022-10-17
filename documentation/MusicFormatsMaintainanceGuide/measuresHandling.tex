@@ -115,7 +115,7 @@ void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
       " to measure " <<
       asShortString () <<
       " in voice \"" <<
-      fetchMeasureVoiceUpLink ()->
+      fetchMeasureUpLinkToVoice ()->
         getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -160,10 +160,10 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
       " to measure " <<
       this->asShortString () <<
       " in segment '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -213,10 +213,10 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
       " to measure clone " <<
       this->asShortString () <<
       " in segment clone '" <<
-      fMeasureSegmentUpLink->getSegmentAbsoluteNumber () <<
+      fMeasureUpLinkToSegment->getSegmentAbsoluteNumber () <<
       "' in voice clone \"" <<
-      fMeasureSegmentUpLink->
-        getSegmentVoiceUpLink ()->
+      fMeasureUpLinkToSegment->
+        getSegmentUpLinkToVoice ()->
           getVoiceName () <<
       "\", currentMeasureWholeNotesDuration = " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -286,7 +286,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
 
     gLogStream <<
       "' in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", line " << measure->getInputLineNumber () <<
       endl;
@@ -301,7 +301,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
       "' occurs twice in a row in segment " <<
       asString () <<
       " in voice \"" <<
-      fSegmentVoiceUpLink->getVoiceName () <<
+      fSegmentUpLinkToVoice->getVoiceName () <<
       "\"";
 
 //    msrInternalWarning ( // JMI
@@ -327,9 +327,9 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   // is measure the first one it the voice?
   // this is necessary for voice clones,
   // which don't go down the part-staff-voice-segment hierarchy
-  if (! fSegmentVoiceUpLink->getVoiceFirstMeasure ()) {
+  if (! fSegmentUpLinkToVoice->getVoiceFirstMeasure ()) {
     // yes, register it as such
-    fSegmentVoiceUpLink->
+    fSegmentUpLinkToVoice->
       setVoiceFirstMeasure (measure);
 
     measure->

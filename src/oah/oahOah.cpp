@@ -738,7 +738,7 @@ void oahOahGroup::initializeOahOahGroup (
 S_mfcMultiComponent oahOahGroup::fetchOahOahGroupHandlerMultiComponent () const
 {
   return
-    fHandlerUpLink->
+    fUpLinkToHandler->
       getHandlerMultiComponent ();
 }
 

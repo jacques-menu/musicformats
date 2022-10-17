@@ -2182,7 +2182,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
 
           string partCombinedName =
             fCurrentVoiceOriginal->
-              fetchVoicePartUpLink ()->
+              fetchVoiceUpLinkToPart ()->
                 getPartCombinedName ();
 
 #ifdef TRACING_IS_ENABLED
@@ -2244,7 +2244,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
 
           string partCombinedName =
             fCurrentVoiceOriginal->
-              fetchVoicePartUpLink ()->
+              fetchVoiceUpLinkToPart ()->
                 getPartCombinedName ();
 
 #ifdef TRACING_IS_ENABLED
@@ -2262,7 +2262,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
                 inputLineNumber,
                 lpsrContext::kExistingContextYes,
                 voiceName,
-                fCurrentVoiceOriginal-> getVoiceStaffUpLink ());
+                fCurrentVoiceOriginal-> getVoiceUpLinkToStaff ());
 
           // append it to the current part block
 #ifdef TRACING_IS_ENABLED
@@ -2421,7 +2421,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   if (fOnGoingNonGraceNote) {
     // register this note as the harmony note upLink
     fCurrentHarmonyClone->
-      setHarmonyNoteUpLink (fCurrentNonGraceNoteClone);
+      setUpLinkToHarmonyToNote (fCurrentNonGraceNoteClone);
 
     // register the harmony in the current non-grace note clone
     fCurrentNonGraceNoteClone->
@@ -2846,7 +2846,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
           "measure '" << measureNumber <<
           "' in voice \"" <<
           elt->
-            fetchMeasureVoiceUpLink ()->
+            fetchMeasureUpLinkToVoice ()->
               getVoiceName () <<
           "\" is of unknown kind in msr2lpsrTranslator";
 
@@ -3066,7 +3066,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
   else if (fOnGoingNonGraceNote) { // JMI
     // visiting a syllable as attached to the current non-grace note
     fCurrentSyllableClone->
-      appendSyllableToNoteAndSetItsNoteUpLink (
+      appendSyllableToNoteAndSetItsUpLinkToNote (
         fCurrentNonGraceNoteClone);
 
     if (gGlobalLpsrOahGroup->getAddLpsrWordsFromTheLyrics ()) {
@@ -3110,8 +3110,8 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
               msrFontWeightKind::kFontWeightNone,               // default value
               msrXMLLangKind::kXMLLangIt,                    // default value
               elt->
-                getSyllableNoteUpLink ()->
-                  fetchNoteStaffUpLink ()->
+                getSyllableUpLinkToNote ()->
+                  fetchUpLinkToNoteToStaff ()->
                     getStaffNumber ());
 
         // append it to the current non-grace note
@@ -4859,7 +4859,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
   S_msrNote
     noteNotesGroupIsAttachedTo =
       elt->
-        getGraceNotesGroupNoteUpLink ();
+        getGraceNotesGroupUpLinkToNote ();
 
   if (! noteNotesGroupIsAttachedTo) {
     stringstream s;

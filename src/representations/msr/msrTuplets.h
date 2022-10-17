@@ -121,20 +121,20 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletKind; }
 
     // measure upLink
-    void                  setTupletDirectMeasureUpLink (
+    void                  setTupletDirectUpLinkToMeasure (
                             const S_msrMeasure& measure)
-                              { fTupletDirectMeasureUpLink = measure; }
+                              { fTupletDirectUpLinkToMeasure = measure; }
 
-    S_msrMeasure          getTupletDirectMeasureUpLink () const
-                              { return fTupletDirectMeasureUpLink; }
+    S_msrMeasure          getTupletDirectUpLinkToMeasure () const
+                              { return fTupletDirectUpLinkToMeasure; }
 
     // tuplet uplink
-    void                  setTupletDirectTupletUpLink (
+    void                  setTupletDirectUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
-                              { fTupletDirectTupletUpLink = tuplet; }
+                              { fTupletDirectUpLinkToTuplet = tuplet; }
 
-    S_msrTuplet           getTupletDirectTupletUpLink () const
-                              { return fTupletDirectTupletUpLink; }
+    S_msrTuplet           getTupletDirectUpLinkToTuplet () const
+                              { return fTupletDirectUpLinkToTuplet; }
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
@@ -192,10 +192,10 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     // measure upLink
-    S_msrMeasure          fetchTupletMeasureUpLink () const;
+    S_msrMeasure          fetchTupletUpLinkToMeasure () const;
 
     // tuplet upLink
-    S_msrTuplet           fetchTupletTupletUpLink () const;
+    S_msrTuplet           fetchTupletUpLinkToTuplet () const;
 
     void                  appendNoteToTuplet (
                             S_msrNote  note,
@@ -254,10 +254,10 @@ class EXP msrTuplet : public msrTupletElement
     msrTupletInKind       fTupletKind;
 
     // measure upLink
-    S_msrMeasure          fTupletDirectMeasureUpLink;
+    S_msrMeasure          fTupletDirectUpLinkToMeasure;
 
     // tuplet uplink
-    S_msrTuplet           fTupletDirectTupletUpLink;
+    S_msrTuplet           fTupletDirectUpLinkToTuplet;
 
     // number
     int                   fTupletNumber;

@@ -58,11 +58,11 @@ class EXP msrOrnament : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setOrnamentNoteUpLink (S_msrNote note)
-                              { fOrnamentNoteUpLink = note; }
+    void                  setOrnamentUpLinkToNote (S_msrNote note)
+                              { fOrnamentUpLinkToNote = note; }
 
-    S_msrNote             getOrnamentNoteUpLink () const
-                              { return fOrnamentNoteUpLink; }
+    S_msrNote             getOrnamentUpLinkToNote () const
+                              { return fOrnamentUpLinkToNote; }
 
     msrOrnamentKind       getOrnamentKind () const
                               { return fOrnamentKind; }
@@ -124,7 +124,7 @@ class EXP msrOrnament : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrNote             fOrnamentNoteUpLink;
+    S_msrNote             fOrnamentUpLinkToNote;
 
     msrOrnamentKind       fOrnamentKind;
 

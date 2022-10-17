@@ -162,7 +162,7 @@ void msr2musicxmlManPageGenerateAtom::generateManPageData (ostream& os) const
   fOahVisitor->visitTheHandler ();
 
   // a help option has been applied // JMI superflous?
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     setOahHandlerFoundAHelpOption (
       "msr2musicxmlManPageGenerateAtom::generateManPageData");
 }

@@ -164,7 +164,7 @@ void msr2brailleManPageGenerateAtom::generateManPageData (ostream& os) const
   fOahVisitor->visitTheHandler ();
 
   // a help option has been applied // JMI superflous?
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     setOahHandlerFoundAHelpOption (
       "msr2brailleManPageGenerateAtom::generateManPageData");
 }

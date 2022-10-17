@@ -74,12 +74,12 @@ class EXP msrGlissando : public msrElement
                               { return fGlissandoTextValue; }
 
     // measure upLink
-    void                  setGlissandoMeasureUpLink (
+    void                  setGlissandoUpLinkToMeasure (
                             const S_msrMeasure& measure)
-                              { fGlissandoMeasureUpLink = measure; }
+                              { fGlissandoUpLinkToMeasure = measure; }
 
-    S_msrMeasure          getGlissandoMeasureUpLink () const
-                              { return fGlissandoMeasureUpLink; }
+    S_msrMeasure          getGlissandoUpLinkToMeasure () const
+                              { return fGlissandoUpLinkToMeasure; }
 
   public:
 
@@ -111,7 +111,7 @@ class EXP msrGlissando : public msrElement
     // ------------------------------------------------------
 
     // upLink
-    S_msrMeasure          fGlissandoMeasureUpLink;
+    S_msrMeasure          fGlissandoUpLinkToMeasure;
 
     int                   fGlissandoNumber;
 

@@ -507,7 +507,7 @@ void msrDoubleTremolo::setDoubleTremoloPositionInMeasure (
   // compute double tremolo's position in voice
   rational
      positionInVoice =
-      fDoubleTremoloMeasureUpLink->getMeasurePositionInVoice ()
+      fDoubleTremoloUpLinkToMeasure->getMeasurePositionInVoice ()
         +
       positionInMeasure;
   positionInVoice.rationalise ();
@@ -521,8 +521,8 @@ void msrDoubleTremolo::setDoubleTremoloPositionInMeasure (
   // update current position in voice
   S_msrVoice
     voice =
-      fDoubleTremoloMeasureUpLink->
-        fetchMeasureVoiceUpLink ();
+      fDoubleTremoloUpLinkToMeasure->
+        fetchMeasureUpLinkToVoice ();
 
   // the two elements of a double tremolo are notes or chords
   switch (fDoubleTremoloKind) {

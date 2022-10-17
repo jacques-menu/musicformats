@@ -99,7 +99,7 @@ class ischemeDriver
     S_ischemeChoicesTable getChoicesTable () const
                               { return fChoicesTable; }
 
-    void                  setCurrentChoiceChoice ( S_ischemeChoice choice)
+    void                  setCurrentChoiceChoice (S_ischemeChoice choice)
                               { fCurrentChoiceChoice = choice; }
 
     S_ischemeChoice       getCurrentChoiceChoice () const

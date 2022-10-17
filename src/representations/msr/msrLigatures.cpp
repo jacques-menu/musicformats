@@ -71,20 +71,20 @@ msrLigature::msrLigature (
 msrLigature::~msrLigature ()
 {}
 
-void msrLigature::setLigatureOtherEndSideLink (
-  S_msrLigature otherEndSideLink)
+void msrLigature::setLigatureSideLinkToOtherEnd (
+  S_msrLigature sideLinkToOtherEnd)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    otherEndSideLink != nullptr,
-    "otherEndSideLink is null");
+    sideLinkToOtherEnd != nullptr,
+    "sideLinkToOtherEnd is null");
 
   // set the two-way sideLink between both ends of the spanner
-  fLigatureOtherEndSideLink =
-    otherEndSideLink;
+  fLigatureSideLinkToOtherEnd =
+    sideLinkToOtherEnd;
 
-  otherEndSideLink->fLigatureOtherEndSideLink =
+  sideLinkToOtherEnd->fLigatureSideLinkToOtherEnd =
     this;
 }
 

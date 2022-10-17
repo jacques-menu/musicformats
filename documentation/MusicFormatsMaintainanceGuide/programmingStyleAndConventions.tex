@@ -1370,14 +1370,14 @@ As is usual, classes privates member variables are accessed through \methodName{
 
 \code{fetch} is used when the result is not store in a variable, but has to computed in some way. \msr{msrSegment.cpp} contains:
 \begin{lstlisting}[language=CPlusPlus]
-S_msrStaff msrSegment::fetchSegmentStaffUpLink () const
+S_msrStaff msrSegment::fetchSegmentUpLinkToStaff () const
 {
   S_msrStaff result;
 
-  if (fSegmentVoiceUpLink) {
+  if (fSegmentUpLinkToVoice) {
     result =
-      fSegmentVoiceUpLink->
-        getVoiceStaffUpLink ();
+      fSegmentUpLinkToVoice->
+        getVoiceUpLinkToStaff ();
   }
 
   return result;
@@ -1419,7 +1419,7 @@ When a description contains many fields, the ones initialized by the values of t
 msrPart::msrPart (
   int            inputLineNumber,
   string         partID,
-  S_msrPartGroup partPartGroupUpLink)
+  S_msrPartGroup PartUpLinkToPartGroup)
     : msrPartGroupElement (inputLineNumber)
 {
   // replace spaces in partID to set fPartID
@@ -1432,15 +1432,15 @@ msrPart::msrPart (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    partPartGroupUpLink != nullptr,
-    "partPartGroupUpLink is null");
+    PartUpLinkToPartGroup != nullptr,
+    "PartUpLinkToPartGroup is null");
     */
 
   // set part number
   fPartAbsoluteNumber = ++gPartsCounter;
 
   // set part's part group upLink
-  fPartPartGroupUpLink = partPartGroupUpLink;
+  fPartUpLinkToPartGroup = PartUpLinkToPartGroup;
 
   // do other initializations
   initializePart ();
@@ -1631,7 +1631,7 @@ void msrMeasureRepeat::displayMeasureRepeat (
     fMeasureRepeatSlashesNumber <<
     "', voice:" <<
     endl <<
-    fMeasureRepeatVoiceUpLink->getVoiceName () <<
+    fUpLinkToMeasureRepeatToVoice->getVoiceName () <<
     " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<
@@ -1721,4 +1721,72 @@ bool msrPart::compareStavesToHaveFiguredBassElementsBelowCorrespondingPart (
 }
 \end{lstlisting}
 
+
+% -------------------------------------------------------------------------
+\section{Templates usage}
+% -------------------------------------------------------------------------
+
+There are currently few templates in the \mf\ code base, namely:
+\begin{itemize}
+\item some are used by the two-phase visitors pattern, see \chapterRef{The two-phase visitors pattern};
+
+\item some exist for enumeration types, such as:
+\begin{lstlisting}[language=CPlusPlus]
+template< typename T >
+class EnumNonSeparators
+{
+  public:
+
+    class Iterator
+    {
+      public:
+
+        Iterator (int value)
+          : fIterationIndex (value)
+            {}
+
+        T operator* (void) const
+            { return (T) fIterationIndex; }
+
+        void operator++ (void)
+            {  ++fIterationIndex; }
+
+        Bool operator != (Iterator rhs)
+            {  return fIterationIndex != rhs.fIterationIndex; }
+
+      private:
+
+        int fIterationIndex;
+     };
+};
+
+template< typename T >
+typename EnumNonSeparators<T>::Iterator begin (EnumNonSeparators<T>)
+{
+  return typename EnumNonSeparators<T>::Iterator ((int)T::NonSeparatorsFirst);
+}
+
+template< typename T >
+typename EnumNonSeparators<T>::Iterator end (EnumNonSeparators<T>)
+{
+  return typename EnumNonSeparators<T>::Iterator (((int)T::NonSeparatorsLast) + 1);
+}
+\end{lstlisting}
+
+
+\item some are used by the code created by \bison, like:
+\begin{lstlisting}[language=CPlusPlus]
+    /// Construct and fill.
+    template <typename T>
+    value_type (YY_RVREF (T) t)
+      : yytypeid_ (&typeid (T))
+    {
+      ISCM_ASSERT (sizeof (T) <= size);
+      new (yyas_<T> ()) T (YY_MOVE (t));
+    }
+\end{lstlisting}
+
+\end{itemize}
+
+There could be more templates use once \mf\ reaches a rather stable code base and it is clear what parts of it can be restructured with generic code.
 

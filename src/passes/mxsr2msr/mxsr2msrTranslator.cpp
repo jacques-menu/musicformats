@@ -684,7 +684,7 @@ S_msrVoice mxsr2msrTranslator::fetchFirstVoiceFromCurrentPart (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
+void mxsr2msrTranslator::visitStart (S_millimeters& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -698,7 +698,7 @@ void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
   fCurrentMillimeters = (float)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_tenths& elt )
+void mxsr2msrTranslator::visitStart (S_tenths& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -712,7 +712,7 @@ void mxsr2msrTranslator::visitStart ( S_tenths& elt )
   fCurrentTenths = (float)(*elt);
 }
 
-void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
+void mxsr2msrTranslator::visitEnd (S_scaling& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -749,7 +749,7 @@ void mxsr2msrTranslator::visitEnd ( S_scaling& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_system_layout& elt )
+void mxsr2msrTranslator::visitStart (S_system_layout& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -771,7 +771,7 @@ void mxsr2msrTranslator::visitStart ( S_system_layout& elt )
   fOnGoingSystemLayout = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_system_layout& elt )
+void mxsr2msrTranslator::visitEnd (S_system_layout& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -805,7 +805,7 @@ void mxsr2msrTranslator::visitEnd ( S_system_layout& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_system_margins& elt )
+void mxsr2msrTranslator::visitStart (S_system_margins& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -830,7 +830,7 @@ void mxsr2msrTranslator::visitStart ( S_system_margins& elt )
   fOnGoingSystemMargins = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_system_distance& elt )
+void mxsr2msrTranslator::visitStart (S_system_distance& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -860,7 +860,7 @@ void mxsr2msrTranslator::visitStart ( S_system_distance& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_top_system_distance& elt )
+void mxsr2msrTranslator::visitStart (S_top_system_distance& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -893,7 +893,7 @@ void mxsr2msrTranslator::visitStart ( S_top_system_distance& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd ( S_system_margins& elt )
+void mxsr2msrTranslator::visitEnd (S_system_margins& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -919,7 +919,7 @@ void mxsr2msrTranslator::visitEnd ( S_system_margins& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_system_dividers& elt )
+void mxsr2msrTranslator::visitStart (S_system_dividers& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -944,7 +944,7 @@ void mxsr2msrTranslator::visitStart ( S_system_dividers& elt )
      */
 }
 
-void mxsr2msrTranslator::visitStart ( S_left_divider& elt )
+void mxsr2msrTranslator::visitStart (S_left_divider& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -970,7 +970,7 @@ void mxsr2msrTranslator::visitStart ( S_left_divider& elt )
       printObjectString);
 }
 
-void mxsr2msrTranslator::visitStart ( S_right_divider& elt )
+void mxsr2msrTranslator::visitStart (S_right_divider& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -997,7 +997,7 @@ void mxsr2msrTranslator::visitStart ( S_right_divider& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_notations& elt )
+void mxsr2msrTranslator::visitStart (S_notations& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1014,7 +1014,7 @@ void mxsr2msrTranslator::visitStart ( S_notations& elt )
   // JMI
 }
 
-void mxsr2msrTranslator::visitStart ( S_other_notation& elt )
+void mxsr2msrTranslator::visitStart (S_other_notation& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1032,7 +1032,7 @@ void mxsr2msrTranslator::visitStart ( S_other_notation& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_page_layout& elt )
+void mxsr2msrTranslator::visitStart (S_page_layout& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1054,7 +1054,7 @@ void mxsr2msrTranslator::visitStart ( S_page_layout& elt )
   fOnGoingPageLayout = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_page_layout& elt )
+void mxsr2msrTranslator::visitEnd (S_page_layout& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1077,7 +1077,7 @@ void mxsr2msrTranslator::visitEnd ( S_page_layout& elt )
   fOnGoingPageLayout = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_page_height& elt )
+void mxsr2msrTranslator::visitStart (S_page_height& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1106,7 +1106,7 @@ void mxsr2msrTranslator::visitStart ( S_page_height& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_page_width& elt )
+void mxsr2msrTranslator::visitStart (S_page_width& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1135,7 +1135,7 @@ void mxsr2msrTranslator::visitStart ( S_page_width& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_page_margins& elt )
+void mxsr2msrTranslator::visitStart (S_page_margins& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1214,7 +1214,7 @@ void mxsr2msrTranslator::visitStart ( S_page_margins& elt )
   fOnGoingPageMargins = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_page_margins& elt )
+void mxsr2msrTranslator::visitEnd (S_page_margins& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -1231,7 +1231,7 @@ void mxsr2msrTranslator::visitEnd ( S_page_margins& elt )
   fOnGoingPageMargins = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_left_margin& elt )
+void mxsr2msrTranslator::visitStart (S_left_margin& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1281,7 +1281,7 @@ void mxsr2msrTranslator::visitStart ( S_left_margin& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_right_margin& elt )
+void mxsr2msrTranslator::visitStart (S_right_margin& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1331,7 +1331,7 @@ void mxsr2msrTranslator::visitStart ( S_right_margin& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_top_margin& elt )
+void mxsr2msrTranslator::visitStart (S_top_margin& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1368,7 +1368,7 @@ void mxsr2msrTranslator::visitStart ( S_top_margin& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_bottom_margin& elt )
+void mxsr2msrTranslator::visitStart (S_bottom_margin& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1406,7 +1406,7 @@ void mxsr2msrTranslator::visitStart ( S_bottom_margin& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_staff_layout& elt )
+void mxsr2msrTranslator::visitStart (S_staff_layout& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1453,7 +1453,7 @@ From DalSegno.xml: JMI there is no <staff-distance /> ...
   fOnGoingStaffLayout = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_staff_layout& elt )
+void mxsr2msrTranslator::visitEnd (S_staff_layout& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -1473,7 +1473,7 @@ void mxsr2msrTranslator::visitEnd ( S_staff_layout& elt )
   fOnGoingStaffLayout = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_staff_distance& elt )
+void mxsr2msrTranslator::visitStart (S_staff_distance& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1507,7 +1507,7 @@ void mxsr2msrTranslator::visitStart ( S_staff_distance& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_measure_layout& elt )
+void mxsr2msrTranslator::visitStart (S_measure_layout& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1529,7 +1529,7 @@ void mxsr2msrTranslator::visitStart ( S_measure_layout& elt )
   fOnGoingMeasureLayout = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_measure_layout& elt )
+void mxsr2msrTranslator::visitEnd (S_measure_layout& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -1549,7 +1549,7 @@ void mxsr2msrTranslator::visitEnd ( S_measure_layout& elt )
   fOnGoingMeasureLayout = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_measure_distance& elt )
+void mxsr2msrTranslator::visitStart (S_measure_distance& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1583,7 +1583,7 @@ void mxsr2msrTranslator::visitStart ( S_measure_distance& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_appearance& elt )
+void mxsr2msrTranslator::visitStart (S_appearance& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1700,7 +1700,7 @@ void mxsr2msrTranslator::visitStart ( S_appearance& elt )
   fOnGoingAppearance = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_appearance& elt )
+void mxsr2msrTranslator::visitEnd (S_appearance& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -1720,7 +1720,7 @@ void mxsr2msrTranslator::visitEnd ( S_appearance& elt )
   fOnGoingAppearance = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_line_width& elt )
+void mxsr2msrTranslator::visitStart (S_line_width& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1839,7 +1839,7 @@ void mxsr2msrTranslator::visitStart ( S_line_width& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_note_size& elt )
+void mxsr2msrTranslator::visitStart (S_note_size& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -1924,7 +1924,7 @@ void mxsr2msrTranslator::visitStart ( S_note_size& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_distance& elt )
+void mxsr2msrTranslator::visitStart (S_distance& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2008,7 +2008,7 @@ void mxsr2msrTranslator::visitStart ( S_distance& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_glyph& elt )
+void mxsr2msrTranslator::visitStart (S_glyph& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2114,7 +2114,7 @@ void mxsr2msrTranslator::visitStart ( S_glyph& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_other_appearance& elt )
+void mxsr2msrTranslator::visitStart (S_other_appearance& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2359,7 +2359,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
       // is to remove it from its part-group
       // now that is has been completely built and populated
       fCurrentPart->
-        getPartPartGroupUpLink ()->
+        getPartUpLinkToPartGroup ()->
           removePartFromPartGroup (
             inputLineNumber,
             fCurrentPart);
@@ -2379,7 +2379,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
       // is to remove it from its part-group
       // now that is has been completely built and populated
       fCurrentPart->
-        getPartPartGroupUpLink ()->
+        getPartUpLinkToPartGroup ()->
           removePartFromPartGroup (
             inputLineNumber,
             fCurrentPart);
@@ -2399,7 +2399,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
       // is to remove it from its part-group
       // now that is has been completely built and populated
       fCurrentPart->
-        getPartPartGroupUpLink ()->
+        getPartUpLinkToPartGroup ()->
           removePartFromPartGroup (
             inputLineNumber,
             fCurrentPart);
@@ -2419,7 +2419,7 @@ void mxsr2msrTranslator::visitEnd (S_part& elt)
       // is to remove it from its part-group
       // now that is has been completely built and populated
       fCurrentPart->
-        getPartPartGroupUpLink ()->
+        getPartUpLinkToPartGroup ()->
           removePartFromPartGroup (
             inputLineNumber,
             fCurrentPart);
@@ -2488,7 +2488,7 @@ void mxsr2msrTranslator::visitEnd (S_attributes& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_divisions& elt )
+void mxsr2msrTranslator::visitStart (S_divisions& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2546,7 +2546,7 @@ void mxsr2msrTranslator::visitStart ( S_divisions& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_clef& elt )
+void mxsr2msrTranslator::visitStart (S_clef& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2584,7 +2584,7 @@ void mxsr2msrTranslator::visitStart ( S_clef& elt )
   fCurrentClefSign = "";
 }
 
-void mxsr2msrTranslator::visitStart ( S_sign& elt )
+void mxsr2msrTranslator::visitStart (S_sign& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2598,7 +2598,7 @@ void mxsr2msrTranslator::visitStart ( S_sign& elt )
   fCurrentClefSign = elt->getValue();
 }
 
-void mxsr2msrTranslator::visitStart ( S_line& elt )
+void mxsr2msrTranslator::visitStart (S_line& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2612,7 +2612,7 @@ void mxsr2msrTranslator::visitStart ( S_line& elt )
   fCurrentClefLine = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_clef_octave_change& elt )
+void mxsr2msrTranslator::visitStart (S_clef_octave_change& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2643,7 +2643,7 @@ void mxsr2msrTranslator::visitStart ( S_clef_octave_change& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd ( S_clef& elt )
+void mxsr2msrTranslator::visitEnd (S_clef& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2925,7 +2925,7 @@ void mxsr2msrTranslator::visitEnd ( S_clef& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_key& elt )
+void mxsr2msrTranslator::visitStart (S_key& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -2969,7 +2969,7 @@ void mxsr2msrTranslator::visitStart ( S_key& elt )
   fCurrentHumdrumScotKeyItem = nullptr;
 }
 
-void mxsr2msrTranslator::visitStart ( S_cancel& elt )
+void mxsr2msrTranslator::visitStart (S_cancel& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2983,7 +2983,7 @@ void mxsr2msrTranslator::visitStart ( S_cancel& elt )
   fCurrentKeyCancelFifths = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_fifths& elt )
+void mxsr2msrTranslator::visitStart (S_fifths& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -2999,7 +2999,7 @@ void mxsr2msrTranslator::visitStart ( S_fifths& elt )
   fCurrentKeyFifths = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_mode& elt )
+void mxsr2msrTranslator::visitStart (S_mode& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3059,7 +3059,7 @@ void mxsr2msrTranslator::visitStart ( S_mode& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_key_step& elt )
+void mxsr2msrTranslator::visitStart (S_key_step& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3112,7 +3112,7 @@ void mxsr2msrTranslator::visitStart ( S_key_step& elt )
       fCurrentHumdrumScotKeyItem);
 }
 
-void mxsr2msrTranslator::visitStart ( S_key_alter& elt )
+void mxsr2msrTranslator::visitStart (S_key_alter& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3165,7 +3165,7 @@ void mxsr2msrTranslator::visitStart ( S_key_alter& elt )
   fCurrentHumdrumScotKeyItem = nullptr;
 }
 
-void mxsr2msrTranslator::visitStart ( S_key_octave& elt )
+void mxsr2msrTranslator::visitStart (S_key_octave& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3254,7 +3254,7 @@ If the cancel attribute is
       keyOctaveKind);
 }
 
-void mxsr2msrTranslator::visitEnd ( S_key& elt )
+void mxsr2msrTranslator::visitEnd (S_key& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3454,7 +3454,7 @@ S_msrKey mxsr2msrTranslator::handleHumdrumScotKey (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_time& elt )
+void mxsr2msrTranslator::visitStart (S_time& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3513,7 +3513,7 @@ void mxsr2msrTranslator::visitStart ( S_time& elt )
   fOnGoingInterchangeable = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_beats& elt )
+void mxsr2msrTranslator::visitStart (S_beats& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3527,7 +3527,7 @@ void mxsr2msrTranslator::visitStart ( S_beats& elt )
   fCurrentTimeSignatureBeats = elt->getValue (); // can be a string such as 3+2
 }
 
-void mxsr2msrTranslator::visitStart ( S_beat_type& elt )
+void mxsr2msrTranslator::visitStart (S_beat_type& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3587,7 +3587,7 @@ void mxsr2msrTranslator::visitStart ( S_beat_type& elt )
     timeSignatureItem);
 }
 
-void mxsr2msrTranslator::visitStart ( S_senza_misura& elt )
+void mxsr2msrTranslator::visitStart (S_senza_misura& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3601,7 +3601,7 @@ void mxsr2msrTranslator::visitStart ( S_senza_misura& elt )
   fCurrentTimeSignatureSymbolKind = msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura;
 }
 
-void mxsr2msrTranslator::visitStart ( S_interchangeable& elt )
+void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3692,7 +3692,7 @@ void mxsr2msrTranslator::visitStart ( S_interchangeable& elt )
   fOnGoingInterchangeable = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_time_relation& elt )
+void mxsr2msrTranslator::visitStart (S_time_relation& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3752,7 +3752,7 @@ void mxsr2msrTranslator::visitStart ( S_time_relation& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd ( S_time& elt )
+void mxsr2msrTranslator::visitEnd (S_time& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -3826,7 +3826,7 @@ open xmlsamples3.1/Telemann.xml
    </score-instrument>
 */
 
-void mxsr2msrTranslator::visitStart ( S_score_instrument& elt )
+void mxsr2msrTranslator::visitStart (S_score_instrument& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3886,7 +3886,7 @@ void mxsr2msrTranslator::visitStart ( S_score_instrument& elt )
 }
 
 
-void mxsr2msrTranslator::visitStart ( S_instrument_name& elt )
+void mxsr2msrTranslator::visitStart (S_instrument_name& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3904,7 +3904,7 @@ void mxsr2msrTranslator::visitStart ( S_instrument_name& elt )
 //  int instruments = (int)(*elt); // JMI
 }
 
-void mxsr2msrTranslator::visitStart ( S_solo& elt )
+void mxsr2msrTranslator::visitStart (S_solo& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3922,7 +3922,7 @@ void mxsr2msrTranslator::visitStart ( S_solo& elt )
 //  int instruments = (int)(*elt); // JMI
 }
 
-void mxsr2msrTranslator::visitStart ( S_instruments& elt )
+void mxsr2msrTranslator::visitStart (S_instruments& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3978,7 +3978,7 @@ void mxsr2msrTranslator::visitStart ( S_instruments& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_transpose& elt )
+void mxsr2msrTranslator::visitStart (S_transpose& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -3997,7 +3997,7 @@ void mxsr2msrTranslator::visitStart ( S_transpose& elt )
   fCurrentTransposeDouble       = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_diatonic& elt )
+void mxsr2msrTranslator::visitStart (S_diatonic& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4011,7 +4011,7 @@ void mxsr2msrTranslator::visitStart ( S_diatonic& elt )
   fCurrentTransposeDiatonic = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_chromatic& elt )
+void mxsr2msrTranslator::visitStart (S_chromatic& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4025,7 +4025,7 @@ void mxsr2msrTranslator::visitStart ( S_chromatic& elt )
   fCurrentTransposeChromatic = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_octave_change& elt )
+void mxsr2msrTranslator::visitStart (S_octave_change& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4039,7 +4039,7 @@ void mxsr2msrTranslator::visitStart ( S_octave_change& elt )
   fCurrentTransposeOctaveChange = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_double& elt )
+void mxsr2msrTranslator::visitStart (S_double& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -4060,7 +4060,7 @@ void mxsr2msrTranslator::visitStart ( S_double& elt )
   fCurrentTransposeDouble = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_transpose& elt )
+void mxsr2msrTranslator::visitEnd (S_transpose& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -4398,7 +4398,7 @@ void mxsr2msrTranslator::visitStart (S_other_direction& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_sound& elt )
+void mxsr2msrTranslator::visitStart (S_sound& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -4441,7 +4441,7 @@ void mxsr2msrTranslator::visitStart ( S_sound& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd ( S_sound& elt )
+void mxsr2msrTranslator::visitEnd (S_sound& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5231,7 +5231,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_accordion_registration& elt )
+void mxsr2msrTranslator::visitStart (S_accordion_registration& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5261,7 +5261,7 @@ void mxsr2msrTranslator::visitStart ( S_accordion_registration& elt )
   fCurrentAccordionNumbersCounter = 0;
 }
 
-void mxsr2msrTranslator::visitStart ( S_accordion_high& elt )
+void mxsr2msrTranslator::visitStart (S_accordion_high& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5277,7 +5277,7 @@ void mxsr2msrTranslator::visitStart ( S_accordion_high& elt )
   ++fCurrentAccordionNumbersCounter;
 }
 
-void mxsr2msrTranslator::visitStart ( S_accordion_middle& elt )
+void mxsr2msrTranslator::visitStart (S_accordion_middle& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5312,7 +5312,7 @@ void mxsr2msrTranslator::visitStart ( S_accordion_middle& elt )
   ++fCurrentAccordionNumbersCounter;
 }
 
-void mxsr2msrTranslator::visitStart ( S_accordion_low& elt )
+void mxsr2msrTranslator::visitStart (S_accordion_low& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5328,7 +5328,7 @@ void mxsr2msrTranslator::visitStart ( S_accordion_low& elt )
   ++fCurrentAccordionNumbersCounter;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
+void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5370,7 +5370,7 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_metronome& elt )
+void mxsr2msrTranslator::visitStart (S_metronome& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5438,11 +5438,11 @@ void mxsr2msrTranslator::visitStart ( S_metronome& elt )
   fCurrentMetronomeTuplet = nullptr;
 
   // don't create fCurrentMetronomeTempo now,
-  // this will be done in visitEnd ( S_metronome& elt )
+  // this will be done in visitEnd (S_metronome& elt)
   // when the details are known
 }
 
-void mxsr2msrTranslator::visitStart ( S_beat_unit& elt )
+void mxsr2msrTranslator::visitStart (S_beat_unit& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5487,7 +5487,7 @@ void mxsr2msrTranslator::visitStart ( S_beat_unit& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_beat_unit_dot& elt )
+void mxsr2msrTranslator::visitStart (S_beat_unit_dot& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5518,7 +5518,7 @@ void mxsr2msrTranslator::visitStart ( S_beat_unit_dot& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_per_minute& elt )
+void mxsr2msrTranslator::visitStart (S_per_minute& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5532,7 +5532,7 @@ void mxsr2msrTranslator::visitStart ( S_per_minute& elt )
   fCurrentMetrenomePerMinute = elt->getValue ();
 }
 
-void mxsr2msrTranslator::visitStart ( S_metronome_note& elt )
+void mxsr2msrTranslator::visitStart (S_metronome_note& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5546,7 +5546,7 @@ void mxsr2msrTranslator::visitStart ( S_metronome_note& elt )
   fOnGoingMetronomeNote = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_metronome_type& elt )
+void mxsr2msrTranslator::visitStart (S_metronome_type& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5569,7 +5569,7 @@ void mxsr2msrTranslator::visitStart ( S_metronome_type& elt )
      noteType);
 }
 
-void mxsr2msrTranslator::visitStart ( S_metronome_dot& elt )
+void mxsr2msrTranslator::visitStart (S_metronome_dot& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5583,7 +5583,7 @@ void mxsr2msrTranslator::visitStart ( S_metronome_dot& elt )
   ++fCurrentMetrenomeDotsNumber;
 }
 
-void mxsr2msrTranslator::visitStart ( S_metronome_beam& elt )
+void mxsr2msrTranslator::visitStart (S_metronome_beam& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5696,7 +5696,7 @@ void mxsr2msrTranslator::attachCurrentMetronomeBeamsToMetronomeNote (
   }
 }
 
-void mxsr2msrTranslator::visitEnd ( S_metronome_note& elt )
+void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5788,7 +5788,7 @@ void mxsr2msrTranslator::visitEnd ( S_metronome_note& elt )
   fOnGoingMetronomeNote = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_metronome_relation& elt )
+void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5824,7 +5824,7 @@ void mxsr2msrTranslator::visitStart ( S_metronome_relation& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_metronome_tuplet& elt )
+void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -5959,7 +5959,7 @@ void mxsr2msrTranslator::visitStart ( S_metronome_tuplet& elt )
   fOnGoingMetronomeTuplet = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_normal_dot& elt )
+void mxsr2msrTranslator::visitStart (S_normal_dot& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -5973,7 +5973,7 @@ void mxsr2msrTranslator::visitStart ( S_normal_dot& elt )
   ++fCurrentMetrenomeNormalDotsNumber;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_metronome_tuplet& elt )
+void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6046,7 +6046,7 @@ void mxsr2msrTranslator::visitEnd ( S_metronome_tuplet& elt )
   fOnGoingMetronomeTuplet = false;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_metronome& elt )
+void mxsr2msrTranslator::visitEnd (S_metronome& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6342,7 +6342,7 @@ void mxsr2msrTranslator::visitStart (S_staff& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_staff_details& elt )
+void mxsr2msrTranslator::visitStart (S_staff_details& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6473,7 +6473,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt )
   ++gIndenter;
 }
 
-void mxsr2msrTranslator::visitStart (S_staff_type& elt )
+void mxsr2msrTranslator::visitStart (S_staff_type& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6532,7 +6532,7 @@ void mxsr2msrTranslator::visitStart (S_staff_type& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_staff_lines& elt )
+void mxsr2msrTranslator::visitStart (S_staff_lines& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6546,7 +6546,7 @@ void mxsr2msrTranslator::visitStart (S_staff_lines& elt )
   fCurrentStaffLinesNumber = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_staff_tuning& elt )
+void mxsr2msrTranslator::visitStart (S_staff_tuning& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6566,7 +6566,7 @@ void mxsr2msrTranslator::visitStart (S_staff_tuning& elt )
   fOnGoingStaffTuning = true;
 }
 
-void mxsr2msrTranslator::visitStart (S_tuning_step& elt )
+void mxsr2msrTranslator::visitStart (S_tuning_step& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6614,7 +6614,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_step& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_tuning_octave& elt )
+void mxsr2msrTranslator::visitStart (S_tuning_octave& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6658,7 +6658,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_octave& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart (S_tuning_alter& elt )
+void mxsr2msrTranslator::visitStart (S_tuning_alter& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6715,7 +6715,7 @@ void mxsr2msrTranslator::visitStart (S_tuning_alter& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt )
+void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6805,7 +6805,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_tuning& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_voice& elt )
+void mxsr2msrTranslator::visitStart (S_voice& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6852,7 +6852,7 @@ void mxsr2msrTranslator::visitStart (S_voice& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_backup& elt )
+void mxsr2msrTranslator::visitStart (S_backup& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -6869,7 +6869,7 @@ void mxsr2msrTranslator::visitStart (S_backup& elt )
   fOnGoingBackup = true;
 }
 
-void mxsr2msrTranslator::visitEnd (S_backup& elt )
+void mxsr2msrTranslator::visitEnd (S_backup& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -6913,7 +6913,7 @@ void mxsr2msrTranslator::visitEnd (S_backup& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_forward& elt )
+void mxsr2msrTranslator::visitStart (S_forward& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -6937,7 +6937,7 @@ void mxsr2msrTranslator::visitStart ( S_forward& elt )
   fOnGoingForward = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_forward& elt )
+void mxsr2msrTranslator::visitEnd (S_forward& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -7024,7 +7024,7 @@ void mxsr2msrTranslator::visitEnd ( S_forward& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_tied& elt )
+void mxsr2msrTranslator::visitStart (S_tied& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -7186,7 +7186,7 @@ void mxsr2msrTranslator::displayTupletsStack (
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_slur& elt )
+void mxsr2msrTranslator::visitStart (S_slur& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -7480,7 +7480,7 @@ void mxsr2msrTranslator::visitStart (S_slur& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_bracket& elt )
+void mxsr2msrTranslator::visitStart (S_bracket& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -7696,7 +7696,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt )
 
             else {
               ligature->
-                setLigatureOtherEndSideLink (
+                setLigatureSideLinkToOtherEnd (
                   fCurrentLigatureStartAbove);
 
               // forget this ligature spanner start
@@ -7722,7 +7722,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt )
 
           else {
             ligature->
-              setLigatureOtherEndSideLink (
+              setLigatureSideLinkToOtherEnd (
                 fCurrentLigatureStartAbove);
 
             // forget this ligature spanner start
@@ -7747,7 +7747,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt )
 
           else {
             ligature->
-              setLigatureOtherEndSideLink (
+              setLigatureSideLinkToOtherEnd (
                 fCurrentLigatureStartBelow);
 
             // forget this ligature spanner start
@@ -7768,7 +7768,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_wedge& elt )
+void mxsr2msrTranslator::visitStart (S_wedge& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -7895,7 +7895,7 @@ void mxsr2msrTranslator::visitStart ( S_wedge& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_lyric& elt )
+void mxsr2msrTranslator::visitStart (S_lyric& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -7999,7 +7999,7 @@ void mxsr2msrTranslator::visitStart (S_lyric& elt )
   fOnGoingLyric = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_syllabic& elt )
+void mxsr2msrTranslator::visitStart (S_syllabic& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -8047,7 +8047,7 @@ void mxsr2msrTranslator::visitStart ( S_syllabic& elt )
   fCurrentLyricTextsList.clear ();
 }
 
-void mxsr2msrTranslator::visitStart ( S_text& elt )
+void mxsr2msrTranslator::visitStart (S_text& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -8118,7 +8118,7 @@ void mxsr2msrTranslator::visitStart ( S_text& elt )
   fCurrentSyllableExtendKind = msrSyllable::kSyllableExtendNone;
 }
 
-void mxsr2msrTranslator::visitStart ( S_elision& elt )
+void mxsr2msrTranslator::visitStart (S_elision& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -8143,7 +8143,7 @@ void mxsr2msrTranslator::visitStart ( S_elision& elt )
   fCurrentStanzaHasText = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_extend& elt )
+void mxsr2msrTranslator::visitStart (S_extend& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -8203,7 +8203,7 @@ void mxsr2msrTranslator::visitStart ( S_extend& elt )
   // color JMI
 }
 
-void mxsr2msrTranslator::visitEnd ( S_lyric& elt )
+void mxsr2msrTranslator::visitEnd (S_lyric& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -8273,7 +8273,7 @@ void mxsr2msrTranslator::visitEnd ( S_lyric& elt )
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyricsDetails ()) {
     gLogStream <<
-      "==> visitEnd ( S_lyric&), fCurrentSyllableKind: " <<
+      "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       msrSyllable::syllableKindAsString (fCurrentSyllableKind) <<
       ", line " << inputLineNumber <<
       ", with:" <<
@@ -8402,7 +8402,7 @@ void mxsr2msrTranslator::visitEnd ( S_lyric& elt )
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
-      "==> visitEnd ( S_lyric&), fCurrentSyllableKind: " <<
+      "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
       msrSyllable::syllableKindAsString (fCurrentSyllableKind) <<
       ", line = " << inputLineNumber <<
       ", with:" <<
@@ -8517,9 +8517,9 @@ void mxsr2msrTranslator::visitEnd ( S_lyric& elt )
     } // for
 
     // don't forget about fCurrentLyricTextsList here,
-    // this will be done in visitStart ( S_syllabic& )
+    // this will be done in visitStart (S_syllabic& )
 
-    // appendSyllableToNoteAndSetItsNoteUpLink()
+    // appendSyllableToNoteAndSetItsUpLinkToNote()
     // will be called in handleLyrics(),
     // after the note has been created
 
@@ -9033,7 +9033,7 @@ void mxsr2msrTranslator::handleOnGoingMultipleFullBarRestsAtTheEndOfMeasure (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_print& elt )
+void mxsr2msrTranslator::visitStart (S_print& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9232,7 +9232,7 @@ Staff spacing between multiple staves is measured in
   fOnGoingPrint = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_print& elt )
+void mxsr2msrTranslator::visitEnd (S_print& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9264,7 +9264,7 @@ void mxsr2msrTranslator::visitEnd ( S_print& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_measure_numbering& elt )
+void mxsr2msrTranslator::visitStart (S_measure_numbering& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -9279,7 +9279,7 @@ void mxsr2msrTranslator::visitStart ( S_measure_numbering& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_barline& elt )
+void mxsr2msrTranslator::visitStart (S_barline& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9345,7 +9345,7 @@ void mxsr2msrTranslator::visitStart ( S_barline& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_bar_style& elt )
+void mxsr2msrTranslator::visitStart (S_bar_style& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9422,7 +9422,7 @@ void mxsr2msrTranslator::visitStart ( S_bar_style& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_segno& elt )
+void mxsr2msrTranslator::visitStart (S_segno& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9466,7 +9466,7 @@ void mxsr2msrTranslator::visitStart ( S_segno& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_coda& elt )
+void mxsr2msrTranslator::visitStart (S_coda& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9539,7 +9539,7 @@ void mxsr2msrTranslator::visitStart ( S_coda& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_eyeglasses& elt )
+void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9577,7 +9577,7 @@ void mxsr2msrTranslator::visitStart ( S_eyeglasses& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_pedal& elt )
+void mxsr2msrTranslator::visitStart (S_pedal& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9706,7 +9706,7 @@ void mxsr2msrTranslator::visitStart ( S_pedal& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_ending& elt )
+void mxsr2msrTranslator::visitStart (S_ending& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9785,7 +9785,7 @@ void mxsr2msrTranslator::visitStart ( S_ending& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_repeat& elt )
+void mxsr2msrTranslator::visitStart (S_repeat& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -9884,7 +9884,7 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitEnd ( S_barline& elt )
+void mxsr2msrTranslator::visitEnd (S_barline& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10180,7 +10180,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_note& elt )
+void mxsr2msrTranslator::visitStart (S_note& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10286,7 +10286,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   fCurrentSyllabic = "";
   // don't forget about fCurrentLyricTextsList here,
-  // this will be done in visitStart ( S_syllabic& )
+  // this will be done in visitStart (S_syllabic& )
   fCurrentSyllableKind = msrSyllable::kSyllableNone;
 
   if (fOnGoingSyllableExtend) {
@@ -10393,7 +10393,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_step& elt )
+void mxsr2msrTranslator::visitStart (S_step& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10418,7 +10418,7 @@ void mxsr2msrTranslator::visitStart ( S_step& elt )
     msrDiatonicPitchKindFromChar (step [0]);
 }
 
-void mxsr2msrTranslator::visitStart ( S_alter& elt)
+void mxsr2msrTranslator::visitStart (S_alter& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10453,7 +10453,7 @@ void mxsr2msrTranslator::visitStart ( S_alter& elt)
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_octave& elt)
+void mxsr2msrTranslator::visitStart (S_octave& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10490,7 +10490,7 @@ void mxsr2msrTranslator::visitStart ( S_octave& elt)
       octaveNumber);
 }
 
-void mxsr2msrTranslator::visitStart ( S_duration& elt )
+void mxsr2msrTranslator::visitStart (S_duration& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10611,10 +10611,10 @@ void mxsr2msrTranslator::visitStart ( S_duration& elt )
       s.str ());
   }
 
-//  gLogStream << "=== mxsr2msrTranslator::visitStart ( S_duration& elt ), fCurrentDuration = " << fCurrentDuration << endl; JMI
+//  gLogStream << "=== mxsr2msrTranslator::visitStart (S_duration& elt), fCurrentDuration = " << fCurrentDuration << endl; JMI
 }
 
-void mxsr2msrTranslator::visitStart ( S_instrument& elt )
+void mxsr2msrTranslator::visitStart (S_instrument& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -10656,7 +10656,7 @@ void mxsr2msrTranslator::visitStart ( S_instrument& elt )
 //  int instruments = (int)(*elt); // JMI
 }
 
-void mxsr2msrTranslator::visitStart ( S_dot& elt )
+void mxsr2msrTranslator::visitStart (S_dot& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -10670,7 +10670,7 @@ void mxsr2msrTranslator::visitStart ( S_dot& elt )
   ++fCurrentNoteDotsNumber;
 }
 
-void mxsr2msrTranslator::visitStart ( S_type& elt )
+void mxsr2msrTranslator::visitStart (S_type& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10737,7 +10737,7 @@ void mxsr2msrTranslator::visitStart ( S_type& elt )
 #endif
 }
 
-void mxsr2msrTranslator::visitStart ( S_notehead& elt )
+void mxsr2msrTranslator::visitStart (S_notehead& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -10877,7 +10877,7 @@ void mxsr2msrTranslator::visitStart ( S_notehead& elt )
 
 }
 
-void mxsr2msrTranslator::visitStart ( S_accidental& elt ) // JMI
+void mxsr2msrTranslator::visitStart (S_accidental& elt) // JMI
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11047,7 +11047,7 @@ void mxsr2msrTranslator::visitStart ( S_accidental& elt ) // JMI
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_stem& elt )
+void mxsr2msrTranslator::visitStart (S_stem& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11118,7 +11118,7 @@ void mxsr2msrTranslator::visitStart ( S_stem& elt )
       stemKind);
 }
 
-void mxsr2msrTranslator::visitStart ( S_beam& elt )
+void mxsr2msrTranslator::visitStart (S_beam& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11185,7 +11185,7 @@ void mxsr2msrTranslator::visitStart ( S_beam& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_measure_style& elt )
+void mxsr2msrTranslator::visitStart (S_measure_style& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11199,7 +11199,7 @@ void mxsr2msrTranslator::visitStart ( S_measure_style& elt )
   // color JMI
 }
 
-void mxsr2msrTranslator::visitStart ( S_beat_repeat& elt )
+void mxsr2msrTranslator::visitStart (S_beat_repeat& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11246,7 +11246,7 @@ void mxsr2msrTranslator::visitStart ( S_beat_repeat& elt )
       useDotsString);
 }
 
-void mxsr2msrTranslator::visitStart ( S_measure_repeat& elt )
+void mxsr2msrTranslator::visitStart (S_measure_repeat& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11346,7 +11346,7 @@ void mxsr2msrTranslator::visitStart ( S_measure_repeat& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
+void mxsr2msrTranslator::visitStart (S_multiple_rest& elt)
 {
 /*
 <!--
@@ -11472,7 +11472,7 @@ void mxsr2msrTranslator::visitStart ( S_multiple_rest& elt )
   fOnGoingMultipleFullBarRests = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_slash& elt )
+void mxsr2msrTranslator::visitStart (S_slash& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11544,7 +11544,7 @@ void mxsr2msrTranslator::visitStart ( S_slash& elt )
   fCurrentSlashDotsNumber = 0;
 }
 
-void mxsr2msrTranslator::visitStart ( S_slash_type& elt )
+void mxsr2msrTranslator::visitStart (S_slash_type& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11598,7 +11598,7 @@ void mxsr2msrTranslator::visitStart ( S_slash_type& elt )
 #endif
 }
 
-void mxsr2msrTranslator::visitStart ( S_slash_dot& elt )
+void mxsr2msrTranslator::visitStart (S_slash_dot& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11612,7 +11612,7 @@ void mxsr2msrTranslator::visitStart ( S_slash_dot& elt )
   ++fCurrentSlashDotsNumber;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_slash& elt )
+void mxsr2msrTranslator::visitEnd (S_slash& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11638,7 +11638,7 @@ void mxsr2msrTranslator::visitEnd ( S_slash& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_articulations& elt )
+void mxsr2msrTranslator::visitStart (S_articulations& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -11650,7 +11650,7 @@ void mxsr2msrTranslator::visitStart ( S_articulations& elt )
 #endif
 }
 
-void mxsr2msrTranslator::visitStart ( S_accent& elt )
+void mxsr2msrTranslator::visitStart (S_accent& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11687,7 +11687,7 @@ void mxsr2msrTranslator::visitStart ( S_accent& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_breath_mark& elt )
+void mxsr2msrTranslator::visitStart (S_breath_mark& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11724,7 +11724,7 @@ void mxsr2msrTranslator::visitStart ( S_breath_mark& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_caesura& elt )
+void mxsr2msrTranslator::visitStart (S_caesura& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11761,7 +11761,7 @@ void mxsr2msrTranslator::visitStart ( S_caesura& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_spiccato& elt )
+void mxsr2msrTranslator::visitStart (S_spiccato& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11798,7 +11798,7 @@ void mxsr2msrTranslator::visitStart ( S_spiccato& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_staccato& elt )
+void mxsr2msrTranslator::visitStart (S_staccato& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11835,7 +11835,7 @@ void mxsr2msrTranslator::visitStart ( S_staccato& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_staccatissimo& elt )
+void mxsr2msrTranslator::visitStart (S_staccatissimo& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11872,7 +11872,7 @@ void mxsr2msrTranslator::visitStart ( S_staccatissimo& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_stress& elt )
+void mxsr2msrTranslator::visitStart (S_stress& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11909,7 +11909,7 @@ void mxsr2msrTranslator::visitStart ( S_stress& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_unstress& elt )
+void mxsr2msrTranslator::visitStart (S_unstress& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11946,7 +11946,7 @@ void mxsr2msrTranslator::visitStart ( S_unstress& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_detached_legato& elt )
+void mxsr2msrTranslator::visitStart (S_detached_legato& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -11983,7 +11983,7 @@ void mxsr2msrTranslator::visitStart ( S_detached_legato& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_strong_accent& elt )
+void mxsr2msrTranslator::visitStart (S_strong_accent& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12021,7 +12021,7 @@ void mxsr2msrTranslator::visitStart ( S_strong_accent& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_tenuto& elt )
+void mxsr2msrTranslator::visitStart (S_tenuto& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12060,7 +12060,7 @@ void mxsr2msrTranslator::visitStart ( S_tenuto& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_doit& elt )
+void mxsr2msrTranslator::visitStart (S_doit& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12097,7 +12097,7 @@ void mxsr2msrTranslator::visitStart ( S_doit& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_falloff& elt )
+void mxsr2msrTranslator::visitStart (S_falloff& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12134,7 +12134,7 @@ void mxsr2msrTranslator::visitStart ( S_falloff& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_plop& elt )
+void mxsr2msrTranslator::visitStart (S_plop& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12171,7 +12171,7 @@ void mxsr2msrTranslator::visitStart ( S_plop& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_scoop& elt )
+void mxsr2msrTranslator::visitStart (S_scoop& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12208,7 +12208,7 @@ void mxsr2msrTranslator::visitStart ( S_scoop& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd ( S_articulations& elt )
+void mxsr2msrTranslator::visitEnd (S_articulations& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12223,7 +12223,7 @@ void mxsr2msrTranslator::visitEnd ( S_articulations& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_arpeggiate& elt )
+void mxsr2msrTranslator::visitStart (S_arpeggiate& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12291,7 +12291,7 @@ void mxsr2msrTranslator::visitStart ( S_arpeggiate& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_non_arpeggiate& elt )
+void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12365,7 +12365,7 @@ void mxsr2msrTranslator::visitStart ( S_non_arpeggiate& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_technical& elt )
+void mxsr2msrTranslator::visitStart (S_technical& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12379,7 +12379,7 @@ void mxsr2msrTranslator::visitStart ( S_technical& elt )
   fOnGoingTechnical = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_technical& elt )
+void mxsr2msrTranslator::visitEnd (S_technical& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12393,7 +12393,7 @@ void mxsr2msrTranslator::visitEnd ( S_technical& elt )
   fOnGoingTechnical = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_arrow& elt )
+void mxsr2msrTranslator::visitStart (S_arrow& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12428,7 +12428,7 @@ void mxsr2msrTranslator::visitStart ( S_arrow& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_bend_alter& elt )
+void mxsr2msrTranslator::visitStart (S_bend_alter& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12442,7 +12442,7 @@ void mxsr2msrTranslator::visitStart ( S_bend_alter& elt )
   fBendAlterValue = (float)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_bend& elt ) // JMI
+void mxsr2msrTranslator::visitStart (S_bend& elt) // JMI
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -12454,7 +12454,7 @@ void mxsr2msrTranslator::visitStart ( S_bend& elt ) // JMI
 #endif
 }
 
-void mxsr2msrTranslator::visitEnd ( S_bend& elt )
+void mxsr2msrTranslator::visitEnd (S_bend& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12491,7 +12491,7 @@ void mxsr2msrTranslator::visitEnd ( S_bend& elt )
     technicalWithFloat);
 }
 
-void mxsr2msrTranslator::visitStart ( S_double_tongue& elt )
+void mxsr2msrTranslator::visitStart (S_double_tongue& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12526,7 +12526,7 @@ void mxsr2msrTranslator::visitStart ( S_double_tongue& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_down_bow& elt )
+void mxsr2msrTranslator::visitStart (S_down_bow& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12561,7 +12561,7 @@ void mxsr2msrTranslator::visitStart ( S_down_bow& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_fingering& elt )
+void mxsr2msrTranslator::visitStart (S_fingering& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12620,7 +12620,7 @@ void mxsr2msrTranslator::visitStart ( S_fingering& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_fingernails& elt )
+void mxsr2msrTranslator::visitStart (S_fingernails& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12655,7 +12655,7 @@ void mxsr2msrTranslator::visitStart ( S_fingernails& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_fret& elt )
+void mxsr2msrTranslator::visitStart (S_fret& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12713,7 +12713,7 @@ void mxsr2msrTranslator::visitStart ( S_fret& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_hammer_on& elt )
+void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12778,7 +12778,7 @@ void mxsr2msrTranslator::visitStart ( S_hammer_on& elt )
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart ( S_handbell& elt )
+void mxsr2msrTranslator::visitStart (S_handbell& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12817,7 +12817,7 @@ void mxsr2msrTranslator::visitStart ( S_handbell& elt )
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart ( S_harmonic& elt )
+void mxsr2msrTranslator::visitStart (S_harmonic& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12863,7 +12863,7 @@ void mxsr2msrTranslator::visitStart ( S_harmonic& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_heel& elt )
+void mxsr2msrTranslator::visitStart (S_heel& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12898,7 +12898,7 @@ void mxsr2msrTranslator::visitStart ( S_heel& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_hole& elt )
+void mxsr2msrTranslator::visitStart (S_hole& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12933,7 +12933,7 @@ void mxsr2msrTranslator::visitStart ( S_hole& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_open_string& elt )
+void mxsr2msrTranslator::visitStart (S_open_string& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -12968,7 +12968,7 @@ void mxsr2msrTranslator::visitStart ( S_open_string& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_other_technical& elt )
+void mxsr2msrTranslator::visitStart (S_other_technical& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13007,7 +13007,7 @@ void mxsr2msrTranslator::visitStart ( S_other_technical& elt )
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart ( S_pluck& elt )
+void mxsr2msrTranslator::visitStart (S_pluck& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13046,7 +13046,7 @@ void mxsr2msrTranslator::visitStart ( S_pluck& elt )
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart ( S_pull_off& elt )
+void mxsr2msrTranslator::visitStart (S_pull_off& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13111,7 +13111,7 @@ void mxsr2msrTranslator::visitStart ( S_pull_off& elt )
   fCurrentTechnicalWithStringsList.push_back (technicalWithString);
 }
 
-void mxsr2msrTranslator::visitStart ( S_snap_pizzicato& elt )
+void mxsr2msrTranslator::visitStart (S_snap_pizzicato& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13146,7 +13146,7 @@ void mxsr2msrTranslator::visitStart ( S_snap_pizzicato& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_stopped& elt )
+void mxsr2msrTranslator::visitStart (S_stopped& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13181,7 +13181,7 @@ void mxsr2msrTranslator::visitStart ( S_stopped& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_string& elt )
+void mxsr2msrTranslator::visitStart (S_string& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13270,7 +13270,7 @@ void mxsr2msrTranslator::visitStart ( S_string& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_tap& elt )
+void mxsr2msrTranslator::visitStart (S_tap& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13305,7 +13305,7 @@ void mxsr2msrTranslator::visitStart ( S_tap& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_thumb_position& elt )
+void mxsr2msrTranslator::visitStart (S_thumb_position& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13340,7 +13340,7 @@ void mxsr2msrTranslator::visitStart ( S_thumb_position& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_toe& elt )
+void mxsr2msrTranslator::visitStart (S_toe& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13375,7 +13375,7 @@ void mxsr2msrTranslator::visitStart ( S_toe& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_triple_tongue& elt )
+void mxsr2msrTranslator::visitStart (S_triple_tongue& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13410,7 +13410,7 @@ void mxsr2msrTranslator::visitStart ( S_triple_tongue& elt )
   fCurrentTechnicalsList.push_back (technical);
 }
 
-void mxsr2msrTranslator::visitStart ( S_up_bow& elt )
+void mxsr2msrTranslator::visitStart (S_up_bow& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13446,7 +13446,7 @@ void mxsr2msrTranslator::visitStart ( S_up_bow& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_fermata& elt )
+void mxsr2msrTranslator::visitStart (S_fermata& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13535,7 +13535,7 @@ void mxsr2msrTranslator::visitStart ( S_fermata& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_ornaments& elt )
+void mxsr2msrTranslator::visitStart (S_ornaments& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -13547,7 +13547,7 @@ void mxsr2msrTranslator::visitStart ( S_ornaments& elt )
 #endif
 }
 
-void mxsr2msrTranslator::visitStart ( S_tremolo& elt )
+void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13806,7 +13806,7 @@ void mxsr2msrTranslator::visitStart ( S_tremolo& elt )
   } // switch
 }
 
-void mxsr2msrTranslator::visitStart ( S_trill_mark& elt )
+void mxsr2msrTranslator::visitStart (S_trill_mark& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13845,7 +13845,7 @@ void mxsr2msrTranslator::visitStart ( S_trill_mark& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_dashes& elt )
+void mxsr2msrTranslator::visitStart (S_dashes& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -13919,7 +13919,7 @@ void mxsr2msrTranslator::visitStart ( S_dashes& elt )
   fCurrentSpannersList.push_back (spanner);
 }
 
-void mxsr2msrTranslator::visitStart ( S_wavy_line& elt )
+void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14014,7 +14014,7 @@ void mxsr2msrTranslator::visitStart ( S_wavy_line& elt )
         fCurrentSpannersList.push_back (spanner);
 
         spanner->
-          setSpannerOtherEndSideLink (
+          setSpannerSideLinkToOtherEnd (
             fCurrentWavyLineSpannerStart);
 
         // forget about this wavy line spanner start
@@ -14031,7 +14031,7 @@ void mxsr2msrTranslator::visitStart ( S_wavy_line& elt )
   } // switch
 }
 
-void mxsr2msrTranslator::visitStart ( S_turn& elt )
+void mxsr2msrTranslator::visitStart (S_turn& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14068,7 +14068,7 @@ void mxsr2msrTranslator::visitStart ( S_turn& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_inverted_turn& elt )
+void mxsr2msrTranslator::visitStart (S_inverted_turn& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14105,7 +14105,7 @@ void mxsr2msrTranslator::visitStart ( S_inverted_turn& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_delayed_turn& elt )
+void mxsr2msrTranslator::visitStart (S_delayed_turn& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14142,7 +14142,7 @@ void mxsr2msrTranslator::visitStart ( S_delayed_turn& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_delayed_inverted_turn& elt )
+void mxsr2msrTranslator::visitStart (S_delayed_inverted_turn& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14179,7 +14179,7 @@ void mxsr2msrTranslator::visitStart ( S_delayed_inverted_turn& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_vertical_turn& elt )
+void mxsr2msrTranslator::visitStart (S_vertical_turn& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14216,7 +14216,7 @@ void mxsr2msrTranslator::visitStart ( S_vertical_turn& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_mordent& elt )
+void mxsr2msrTranslator::visitStart (S_mordent& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14253,7 +14253,7 @@ void mxsr2msrTranslator::visitStart ( S_mordent& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_inverted_mordent& elt )
+void mxsr2msrTranslator::visitStart (S_inverted_mordent& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14290,7 +14290,7 @@ void mxsr2msrTranslator::visitStart ( S_inverted_mordent& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_schleifer& elt )
+void mxsr2msrTranslator::visitStart (S_schleifer& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14327,7 +14327,7 @@ void mxsr2msrTranslator::visitStart ( S_schleifer& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_shake& elt )
+void mxsr2msrTranslator::visitStart (S_shake& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14364,7 +14364,7 @@ void mxsr2msrTranslator::visitStart ( S_shake& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_accidental_mark& elt )
+void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -14577,7 +14577,7 @@ void mxsr2msrTranslator::visitStart ( S_accidental_mark& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd ( S_ornaments& elt )
+void mxsr2msrTranslator::visitEnd (S_ornaments& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15877,7 +15877,7 @@ void mxsr2msrTranslator::visitStart( S_sostenuto_pedal& elt)
 */
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_cue& elt )
+void mxsr2msrTranslator::visitStart (S_cue& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15892,7 +15892,7 @@ void mxsr2msrTranslator::visitStart ( S_cue& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_grace& elt )
+void mxsr2msrTranslator::visitStart (S_grace& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -15952,7 +15952,7 @@ void mxsr2msrTranslator::visitStart ( S_grace& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_chord& elt)
+void mxsr2msrTranslator::visitStart (S_chord& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15967,13 +15967,13 @@ void mxsr2msrTranslator::visitStart ( S_chord& elt)
   // placed in the corresponding staff AND voice
   fCurrentNoteBelongsToAChord = true;
 
-  // delay the handling until 'visitEnd ( S_note& elt)',
+  // delay the handling until 'visitEnd (S_note& elt)',
   // because we don't know yet the voice and staff numbers for sure
   // (they can be specified after <chord/> in the <note/>)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_time_modification& elt )
+void mxsr2msrTranslator::visitStart (S_time_modification& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -15990,7 +15990,7 @@ void mxsr2msrTranslator::visitStart ( S_time_modification& elt )
   fCurrentNoteHasATimeModification = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_actual_notes& elt )
+void mxsr2msrTranslator::visitStart (S_actual_notes& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16057,7 +16057,7 @@ void mxsr2msrTranslator::visitStart ( S_actual_notes& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_normal_notes& elt )
+void mxsr2msrTranslator::visitStart (S_normal_notes& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16124,7 +16124,7 @@ void mxsr2msrTranslator::visitStart ( S_normal_notes& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_normal_type& elt )
+void mxsr2msrTranslator::visitStart (S_normal_type& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16196,7 +16196,7 @@ void mxsr2msrTranslator::visitStart ( S_normal_type& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_tuplet& elt )
+void mxsr2msrTranslator::visitStart (S_tuplet& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16456,7 +16456,7 @@ void mxsr2msrTranslator::visitStart ( S_tuplet& elt )
   fCurrentNoteBelongsToATuplet = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_tuplet_actual& elt )
+void mxsr2msrTranslator::visitStart (S_tuplet_actual& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16470,7 +16470,7 @@ void mxsr2msrTranslator::visitStart ( S_tuplet_actual& elt )
   fOnGoingTupletActual = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_tuplet_actual& elt )
+void mxsr2msrTranslator::visitEnd (S_tuplet_actual& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16484,7 +16484,7 @@ void mxsr2msrTranslator::visitEnd ( S_tuplet_actual& elt )
   fOnGoingTupletActual = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_tuplet_normal& elt )
+void mxsr2msrTranslator::visitStart (S_tuplet_normal& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16498,7 +16498,7 @@ void mxsr2msrTranslator::visitStart ( S_tuplet_normal& elt )
   fOnGoingTupletNormal = true;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_tuplet_normal& elt )
+void mxsr2msrTranslator::visitEnd (S_tuplet_normal& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -16512,7 +16512,7 @@ void mxsr2msrTranslator::visitEnd ( S_tuplet_normal& elt )
   fOnGoingTupletNormal = false;
 }
 
-void mxsr2msrTranslator::visitStart ( S_tuplet_number& elt )
+void mxsr2msrTranslator::visitStart (S_tuplet_number& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16555,7 +16555,7 @@ void mxsr2msrTranslator::visitStart ( S_tuplet_number& elt )
 #endif
 }
 
-void mxsr2msrTranslator::visitStart ( S_tuplet_type& elt )
+void mxsr2msrTranslator::visitStart (S_tuplet_type& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16598,7 +16598,7 @@ void mxsr2msrTranslator::visitStart ( S_tuplet_type& elt )
 #endif
 }
 
-void mxsr2msrTranslator::visitStart ( S_tuplet_dot& elt )
+void mxsr2msrTranslator::visitStart (S_tuplet_dot& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16630,7 +16630,7 @@ void mxsr2msrTranslator::visitStart ( S_tuplet_dot& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_glissando& elt )
+void mxsr2msrTranslator::visitStart (S_glissando& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16748,7 +16748,7 @@ void mxsr2msrTranslator::visitStart ( S_glissando& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_slide& elt )
+void mxsr2msrTranslator::visitStart (S_slide& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16864,7 +16864,7 @@ void mxsr2msrTranslator::visitStart ( S_slide& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_rest& elt)
+void mxsr2msrTranslator::visitStart (S_rest& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16937,7 +16937,7 @@ void mxsr2msrTranslator::visitStart ( S_rest& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_display_step& elt)
+void mxsr2msrTranslator::visitStart (S_display_step& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -16967,7 +16967,7 @@ void mxsr2msrTranslator::visitStart ( S_display_step& elt)
   fCurrentNoteAlterationKind = msrAlterationKind::kAlterationNatural;
 }
 
-void mxsr2msrTranslator::visitStart ( S_display_octave& elt)
+void mxsr2msrTranslator::visitStart (S_display_octave& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -17004,7 +17004,7 @@ void mxsr2msrTranslator::visitStart ( S_display_octave& elt)
       displayOctaveNumber);
 }
 
-void mxsr2msrTranslator::visitEnd ( S_unpitched& elt)
+void mxsr2msrTranslator::visitEnd (S_unpitched& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -17081,9 +17081,9 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
 
   // get chordFirstNote's measure upLink
   S_msrMeasure
-    chordFirstNoteDirectMeasureUpLink =
+    chordFirstNoteDirectUpLinkToMeasure =
       chordFirstNote->
-        getNoteDirectMeasureUpLink ();
+        getNoteDirectUpLinkToMeasure ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChordsDetails ()) {
@@ -17095,9 +17095,9 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
       endl <<
       "+++++++++++++++++" <<
       endl << endl <<
-      "++++++++++++++++ chordFirstNote->getNoteDirectMeasureUpLink () =";
+      "++++++++++++++++ chordFirstNote->getNoteDirectUpLinkToMeasure () =";
 
-    if (chordFirstNoteDirectMeasureUpLink) {
+    if (chordFirstNoteDirectUpLinkToMeasure) {
       gLogStream <<
         endl << endl;
     }
@@ -17113,8 +17113,8 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
   if (! chordFirstNote->getNoteIsAGraceNote ()) { // JMI
     // register the chord as non cross staff
     fCurrentChordStaffNumber =
-      chordFirstNoteDirectMeasureUpLink->
-        fetchMeasureStaffUpLink ()->
+      chordFirstNoteDirectUpLinkToMeasure->
+        fetchMeasureUpLinkToStaff ()->
           getStaffNumber ();
   }
     */
@@ -17146,7 +17146,7 @@ void mxsr2msrTranslator::registerVoiceCurrentChordInMap (
   fVoicesCurrentChordMap [
     make_pair (
       voice->
-        getVoiceStaffUpLink ()->
+        getVoiceUpLinkToStaff ()->
           getStaffNumber (),
       voice->
         getVoiceNumber ())] =
@@ -18514,7 +18514,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
   // set tuplet's tuplet uplink
   if (fTupletsStack.size ()) {
     tuplet->
-      setTupletDirectTupletUpLink (
+      setTupletDirectUpLinkToTuplet (
         fTupletsStack.front ());
   }
 
@@ -19017,7 +19017,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
 
         // set spanner note upLink
         spanner->
-          setSpannerNoteUpLink (note);
+          setSpannerUpLinkToNote (note);
 
         // forget about this spanner
         fCurrentSpannersList.pop_front ();
@@ -20182,7 +20182,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //         S_msrMeasure
 //           noteMeasure =
 //             note->
-//               getNoteDirectMeasureUpLink ();
+//               getNoteDirectUpLinkToMeasure ();
 //
 //         // sanity check
 //         mfAssert (
@@ -20194,7 +20194,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //         S_msrSegment
 //           noteSegment =
 //             noteMeasure->
-//               getMeasureSegmentUpLink ();
+//               getMeasureUpLinkToSegment ();
 //
 //         // sanity check
 //         mfAssert (
@@ -20206,7 +20206,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //         S_msrVoice
 //           noteVoice =
 //             noteSegment->
-//               getSegmentVoiceUpLink ();
+//               getSegmentUpLinkToVoice ();
 //
 //         // sanity check
 //         mfAssert (
@@ -21136,7 +21136,7 @@ S_msrNote mxsr2msrTranslator::createNote (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::populateNote (
+void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
   int       inputLineNumber,
   S_msrNote newNote)
 {
@@ -21209,7 +21209,7 @@ void mxsr2msrTranslator::populateNote (
         newNote->
           setMeasureElementSoundingWholeNotes (
             fCurrentNoteDisplayWholeNotesFromType,
-            "mxsr2msrTranslator::populateNote()");
+            "mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled()");
         break;
 
       case msrNoteKind::kNoteRegularInGraceNotesGroup:
@@ -21287,7 +21287,12 @@ void mxsr2msrTranslator::populateNote (
     // forget about the pending grace notes
     fPendingGraceNotesGroup = nullptr;
   }
+}
 
+void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
+  int       inputLineNumber,
+  S_msrNote newNote)
+{
   // attach the regular pending elements (not dal segnos), if any, to newNote
   // only now because <lyric> follows <glissando> and <slide> in MusicXML JMI ???
   attachPendingNoteLevelElementsToNote (newNote);
@@ -21726,7 +21731,7 @@ void mxsr2msrTranslator::handleBackup (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitEnd ( S_note& elt )
+void mxsr2msrTranslator::visitEnd (S_note& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -21942,7 +21947,7 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
-  // populate newNote
+  // populate newNote before the note itself is handled
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
@@ -21953,7 +21958,7 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
   // so as to compute the harmonies positions in the measure.
 
   // are all newNote uplinks set alright ??? JMI v0.9.66
-  populateNote (
+  populateNoteBeforeNoteItselfIsHandled (
     inputLineNumber,
     newNote);
 
@@ -21967,10 +21972,27 @@ void mxsr2msrTranslator::visitEnd ( S_note& elt )
     inputLineNumber,
     newNote);
 
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  // populate newNote after the note itself is handled
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  // are all newNote uplinks set alright ??? JMI v0.9.66
+  populateNoteAfterNoteItselfIsHandled (
+    inputLineNumber,
+    newNote);
+
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+  // handle the lyrics for the note after the latter itself is handled
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
   // lyrics if any have to be handled in all cases
   // done only now because attachPendingNoteLevelElementsToNote()
   // may append skip syllables to the notes
-  handleLyricsForNote (
+  handleLyricsForNoteAfterNoteItselfIsHandled (
     voiceToInsertNoteInto,
     newNote);
 
@@ -22042,7 +22064,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 
     // register this note as the harmony note upLink
     harmony->
-      setHarmonyNoteUpLink (newNote);
+      setUpLinkToHarmonyToNote (newNote);
 
     // attach the harmony to newNote
     newNote->
@@ -22064,7 +22086,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
     // set the harmony's voice upLink
     // only now that we know which harmonies voice will contain it
     harmony->
-      setHarmoniesVoiceUpLink (
+      setHarmoniesUpLinkToVoice (
         partHarmoniesVoice);
 
 /* JMI VIRER v0.9.66
@@ -22149,30 +22171,30 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
       appendFiguredBassElementToNoteFiguredBassElementsList (
         figuredBassElement);
 
-/* JMI
+//* JMI
     // get the figured bass voice for the current voice
     S_msrVoice
-      voiceFiguredBassVoice =
+      voiceForwardLinkToFiguredBassVoice =
         voiceToInsertInto->
-          getRegularVoiceFiguredBassVoiceForwardLink ();
+          getRegularVoiceForwardLinkToFiguredBassVoice ();
 
     // sanity check
     mfAssert (
       __FILE__, __LINE__,
-      voiceFiguredBassVoice != nullptr,
-      "voiceFiguredBassVoice is null");
+      voiceForwardLinkToFiguredBassVoice != nullptr,
+      "voiceForwardLinkToFiguredBassVoice is null");
 
     // set the figuredBassElement's voice upLink
     // only now that we know which figured bass voice will contain it
     figuredBassElement->
-      setFiguredBassVoiceUpLink (
-        voiceFiguredBassVoice);
+      setFiguredBassUpLinkToVoice (
+        voiceForwardLinkToFiguredBassVoice);
 
     // append the figured bass to the figured bass voice for the current voice
-    voiceFiguredBassVoice->
+    voiceForwardLinkToFiguredBassVoice->
       appendFiguredBassElementToVoice (
         figuredBassElement);
-*/
+//*/
 
     // don't append the figured bass to the part figured bass voice
     // before the note itself has been appended to the voice
@@ -22567,7 +22589,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handleLyricsForNote (
+void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
   S_msrVoice currentVoice,
   S_msrNote  newNote)
 {
@@ -22657,7 +22679,7 @@ void mxsr2msrTranslator::handleLyricsForNote (
 
       // set syllable note upLink to newNote
       syllable->
-        appendSyllableToNoteAndSetItsNoteUpLink (
+        appendSyllableToNoteAndSetItsUpLinkToNote (
           newNote);
     } // for
 
@@ -22732,7 +22754,7 @@ void mxsr2msrTranslator::handleLyricsForNote (
 
           // set syllable note upLink to newNote
           syllable->
-            appendSyllableToNoteAndSetItsNoteUpLink (
+            appendSyllableToNoteAndSetItsUpLinkToNote (
               newNote);
 
           // append syllable to stanza
@@ -24387,7 +24409,7 @@ void mxsr2msrTranslator::handleRepeatHooklessEndingEnd (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_rehearsal& elt )
+void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24470,7 +24492,7 @@ void mxsr2msrTranslator::visitStart ( S_rehearsal& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_harmony& elt )
+void mxsr2msrTranslator::visitStart (S_harmony& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24514,7 +24536,7 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
   fOnGoingHarmony = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_root& elt )
+void mxsr2msrTranslator::visitStart (S_root& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24540,7 +24562,7 @@ void mxsr2msrTranslator::visitStart ( S_root& elt )
       printObjectString);
 }
 
-void mxsr2msrTranslator::visitStart ( S_root_step& elt )
+void mxsr2msrTranslator::visitStart (S_root_step& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24566,7 +24588,7 @@ void mxsr2msrTranslator::visitStart ( S_root_step& elt )
       step [0]);
 }
 
-void mxsr2msrTranslator::visitStart ( S_root_alter& elt )
+void mxsr2msrTranslator::visitStart (S_root_alter& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24601,7 +24623,7 @@ void mxsr2msrTranslator::visitStart ( S_root_alter& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_kind& elt )
+void mxsr2msrTranslator::visitStart (S_kind& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24828,7 +24850,7 @@ void mxsr2msrTranslator::visitStart ( S_kind& elt )
   */
 }
 
-void mxsr2msrTranslator::visitStart ( S_inversion& elt )
+void mxsr2msrTranslator::visitStart (S_inversion& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -24847,7 +24869,7 @@ void mxsr2msrTranslator::visitStart ( S_inversion& elt )
   fCurrentHarmonyInversion = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_bass& elt )
+void mxsr2msrTranslator::visitStart (S_bass& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24862,7 +24884,7 @@ void mxsr2msrTranslator::visitStart ( S_bass& elt )
 #endif
 }
 
-void mxsr2msrTranslator::visitStart ( S_bass_step& elt )
+void mxsr2msrTranslator::visitStart (S_bass_step& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24888,7 +24910,7 @@ void mxsr2msrTranslator::visitStart ( S_bass_step& elt )
       step [0]);
 }
 
-void mxsr2msrTranslator::visitStart ( S_bass_alter& elt )
+void mxsr2msrTranslator::visitStart (S_bass_alter& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24923,7 +24945,7 @@ void mxsr2msrTranslator::visitStart ( S_bass_alter& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_degree& elt )
+void mxsr2msrTranslator::visitStart (S_degree& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24949,7 +24971,7 @@ void mxsr2msrTranslator::visitStart ( S_degree& elt )
       printObjectString);
 }
 
-void mxsr2msrTranslator::visitStart ( S_degree_value& elt )
+void mxsr2msrTranslator::visitStart (S_degree_value& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -24963,7 +24985,7 @@ void mxsr2msrTranslator::visitStart ( S_degree_value& elt )
   fCurrentHarmonyDegreeValue = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_degree_alter& elt )
+void mxsr2msrTranslator::visitStart (S_degree_alter& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -24998,7 +25020,7 @@ void mxsr2msrTranslator::visitStart ( S_degree_alter& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_degree_type& elt )
+void mxsr2msrTranslator::visitStart (S_degree_type& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25036,7 +25058,7 @@ void mxsr2msrTranslator::visitStart ( S_degree_type& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd ( S_degree& elt )
+void mxsr2msrTranslator::visitEnd (S_degree& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25064,7 +25086,7 @@ void mxsr2msrTranslator::visitEnd ( S_degree& elt )
     harmonyDegree);
 }
 
-void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
+void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25215,7 +25237,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
       harmony =
         msrHarmony::createWithoutVoiceUplink (
           fCurrentHarmonyInputLineNumber,
-          // no harmoniesVoiceUpLink yet
+          // no harmoniesUpLinkToVoice yet
 
           fCurrentHarmonyRootQuarterTonesPitchKind,
 
@@ -25255,7 +25277,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
         // set harmony degree harmony upLink
         harmonyDegree->
-          setHarmonyDegreeHarmonyUpLink (
+          setHarmonyDegreeUpLinkToHarmony (
             harmony);
 
         // append it to harmony's degrees list
@@ -25281,7 +25303,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_frame& elt )
+void mxsr2msrTranslator::visitStart (S_frame& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25371,7 +25393,7 @@ void mxsr2msrTranslator::visitStart ( S_frame& elt )
   fOnGoingFrame = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_frame_strings& elt )
+void mxsr2msrTranslator::visitStart (S_frame_strings& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -25385,7 +25407,7 @@ void mxsr2msrTranslator::visitStart ( S_frame_strings& elt )
   fCurrentFrameStrings = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_frame_frets& elt )
+void mxsr2msrTranslator::visitStart (S_frame_frets& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -25399,7 +25421,7 @@ void mxsr2msrTranslator::visitStart ( S_frame_frets& elt )
   fCurrentFrameFrets = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart ( S_first_fret& elt )
+void mxsr2msrTranslator::visitStart (S_first_fret& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -25421,7 +25443,7 @@ void mxsr2msrTranslator::visitStart ( S_first_fret& elt )
   string firstFretText = elt->getAttributeValue ("text");
 }
 
-void mxsr2msrTranslator::visitStart ( S_frame_note& elt )
+void mxsr2msrTranslator::visitStart (S_frame_note& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -25440,7 +25462,7 @@ void mxsr2msrTranslator::visitStart ( S_frame_note& elt )
   fOnGoingFrameNote = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_barre& elt )
+void mxsr2msrTranslator::visitStart (S_barre& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25481,7 +25503,7 @@ void mxsr2msrTranslator::visitStart ( S_barre& elt )
   // color JMI
 }
 
-void mxsr2msrTranslator::visitEnd ( S_frame_note& elt )
+void mxsr2msrTranslator::visitEnd (S_frame_note& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25511,7 +25533,7 @@ void mxsr2msrTranslator::visitEnd ( S_frame_note& elt )
   fOnGoingFrameNote = false;
 }
 
-void mxsr2msrTranslator::visitEnd ( S_frame& elt )
+void mxsr2msrTranslator::visitEnd (S_frame& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25554,7 +25576,7 @@ void mxsr2msrTranslator::visitEnd ( S_frame& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
+void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25612,7 +25634,7 @@ void mxsr2msrTranslator::visitStart ( S_figured_bass& elt )
   fOnGoingFiguredBass = true;
 }
 
-void mxsr2msrTranslator::visitStart ( S_figure& elt )
+void mxsr2msrTranslator::visitStart (S_figure& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -25624,7 +25646,7 @@ void mxsr2msrTranslator::visitStart ( S_figure& elt )
 #endif
 }
 
-void mxsr2msrTranslator::visitStart ( S_prefix& elt )
+void mxsr2msrTranslator::visitStart (S_prefix& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25680,7 +25702,7 @@ void mxsr2msrTranslator::visitStart ( S_prefix& elt )
 
 }
 
-void mxsr2msrTranslator::visitStart ( S_figure_number& elt )
+void mxsr2msrTranslator::visitStart (S_figure_number& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25710,7 +25732,7 @@ void mxsr2msrTranslator::visitStart ( S_figure_number& elt )
   }
 }
 
-void mxsr2msrTranslator::visitStart ( S_suffix& elt )
+void mxsr2msrTranslator::visitStart (S_suffix& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25768,7 +25790,7 @@ void mxsr2msrTranslator::visitStart ( S_suffix& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd ( S_figure& elt )
+void mxsr2msrTranslator::visitEnd (S_figure& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25797,7 +25819,7 @@ void mxsr2msrTranslator::visitEnd ( S_figure& elt )
     bassFigure);
 }
 
-void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
+void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25859,7 +25881,7 @@ void mxsr2msrTranslator::visitEnd ( S_figured_bass& elt )
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_harp_pedals& elt )
+void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25955,7 +25977,7 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt )
       fCurrentHarpPedalsTuning);
 }
 
-void mxsr2msrTranslator::visitStart (S_pedal_tuning& elt )
+void mxsr2msrTranslator::visitStart (S_pedal_tuning& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -25967,7 +25989,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_tuning& elt )
 #endif
 }
 
-void mxsr2msrTranslator::visitStart (S_pedal_step& elt )
+void mxsr2msrTranslator::visitStart (S_pedal_step& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -25993,7 +26015,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_step& elt )
       tuningStep [0]);
 }
 
-void mxsr2msrTranslator::visitStart (S_pedal_alter& elt )
+void mxsr2msrTranslator::visitStart (S_pedal_alter& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -26028,7 +26050,7 @@ void mxsr2msrTranslator::visitStart (S_pedal_alter& elt )
   }
 }
 
-void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt )
+void mxsr2msrTranslator::visitEnd (S_pedal_tuning& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -26146,7 +26168,7 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
 }
 
 //________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_capo& elt )
+void mxsr2msrTranslator::visitStart (S_capo& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -26160,7 +26182,7 @@ void mxsr2msrTranslator::visitStart (S_capo& elt )
   fCurrentStaffDetailsCapo = (int)(*elt);
 }
 
-void mxsr2msrTranslator::visitStart (S_staff_size& elt )
+void mxsr2msrTranslator::visitStart (S_staff_size& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -26175,7 +26197,7 @@ void mxsr2msrTranslator::visitStart (S_staff_size& elt )
   // JMI not used
 }
 
-void mxsr2msrTranslator::visitEnd (S_staff_details& elt )
+void mxsr2msrTranslator::visitEnd (S_staff_details& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -26243,7 +26265,7 @@ void mxsr2msrTranslator::visitEnd (S_staff_details& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart (S_scordatura& elt )
+void mxsr2msrTranslator::visitStart (S_scordatura& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -26283,7 +26305,7 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt )
       inputLineNumber);
 }
 
-void mxsr2msrTranslator::visitStart (S_accord& elt )
+void mxsr2msrTranslator::visitStart (S_accord& elt)
 {
   int inputLineNumber =
     elt->getInputLineNumber ();
@@ -26370,7 +26392,7 @@ void mxsr2msrTranslator::visitEnd (S_scordatura& elt)
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_instrument_sound& elt )
+void mxsr2msrTranslator::visitStart (S_instrument_sound& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -26383,7 +26405,7 @@ void mxsr2msrTranslator::visitStart ( S_instrument_sound& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_virtual_instrument& elt )
+void mxsr2msrTranslator::visitStart (S_virtual_instrument& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -26396,7 +26418,7 @@ void mxsr2msrTranslator::visitStart ( S_virtual_instrument& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_midi_device& elt )
+void mxsr2msrTranslator::visitStart (S_midi_device& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {
@@ -26413,7 +26435,7 @@ void mxsr2msrTranslator::visitStart ( S_midi_device& elt )
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::visitStart ( S_midi_instrument& elt )
+void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceMxsrVisitors ()) {

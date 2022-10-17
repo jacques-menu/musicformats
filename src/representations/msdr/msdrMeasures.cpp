@@ -257,8 +257,8 @@ void msdrMeasure::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "staffUpLink" << " : " <<
-    fVoiceStaffUpLink->getStaffName () <<
+    "upLinkToStaff" << " : " <<
+    fVoiceUpLinkToStaff->getStaffName () <<
     endl <<
 
     setw (fieldWidth) <<

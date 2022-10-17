@@ -104,8 +104,8 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
-                            S_msrPartGroup           partGroupPartGroupUpLink,
-                            S_msrScore               partGroupScoreUpLink);
+                            S_msrPartGroup           partGroupUpLinkToPartGroup,
+                            S_msrScore               UpLinkToPartGroupToScore);
 
     static SMARTP<msrPartGroup> createImplicitPartGroup (
                             int                      partGroupNumber,
@@ -115,7 +115,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                             const string&            partGroupAccidentalText,
                             const string&            partGroupAbbreviation,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
-                            S_msrScore               partGroupScoreUpLink);
+                            S_msrScore               UpLinkToPartGroupToScore);
 
     SMARTP<msrPartGroup> createPartGroupNewbornClone (
                             S_msrPartGroup partGroupClone,
@@ -130,8 +130,8 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
                             const string&            partGroupName,
-                            S_msrPartGroup           partGroupPartGroupUpLink,
-                            S_msrScore               partGroupScoreUpLink);
+                            S_msrPartGroup           partGroupUpLinkToPartGroup,
+                            S_msrScore               UpLinkToPartGroupToScore);
 
   protected:
 
@@ -150,16 +150,16 @@ class EXP msrPartGroup : public msrPartGroupElement
                             int                      partGroupSymbolDefaultX,
                             msrPartGroupImplicitKind partGroupImplicitKind,
                             msrPartGroupBarLineKind  partGroupBarLineKind,
-                            S_msrPartGroup           partGroupPartGroupUpLink,
-                            S_msrScore               partGroupScoreUpLink);
+                            S_msrPartGroup           partGroupUpLinkToPartGroup,
+                            S_msrScore               UpLinkToPartGroupToScore);
 
                           msrPartGroup (
                             int                      inputLineNumber,
                             int                      partGroupNumber,
                             int                      partGroupAbsoluteNumber,
                             const string&            partGroupName,
-                            S_msrPartGroup           partGroupPartGroupUpLink,
-                            S_msrScore               partGroupScoreUpLink);
+                            S_msrPartGroup           partGroupUpLinkToPartGroup,
+                            S_msrScore               UpLinkToPartGroupToScore);
 
     virtual               ~msrPartGroup ();
 
@@ -169,18 +169,18 @@ class EXP msrPartGroup : public msrPartGroupElement
     // ------------------------------------------------------
 
     // upLinks
-    void                  setPartGroupPartGroupUpLink (
+    void                  setPartGroupUpLinkToPartGroup (
                             S_msrPartGroup partGroup)
                               {
-                                fPartGroupPartGroupUpLink =
+                                fPartGroupUpLinkToPartGroup =
                                   partGroup;
                               }
 
-    S_msrPartGroup        getPartGroupPartGroupUpLink () const
-                              { return fPartGroupPartGroupUpLink; }
+    S_msrPartGroup        getPartGroupUpLinkToPartGroup () const
+                              { return fPartGroupUpLinkToPartGroup; }
 
-    S_msrScore            getPartGroupScoreUpLink () const
-                              { return fPartGroupScoreUpLink; }
+    S_msrScore            getUpLinkToPartGroupToScore () const
+                              { return fUpLinkToPartGroupToScore; }
 
     // numbers
     int                   getPartGroupAbsoluteNumber () const
@@ -347,10 +347,10 @@ class EXP msrPartGroup : public msrPartGroupElement
 
     // upLinks
 
-    S_msrPartGroup        fPartGroupPartGroupUpLink;
+    S_msrPartGroup        fPartGroupUpLinkToPartGroup;
                             // part groups can be nested
 
-    S_msrScore            fPartGroupScoreUpLink;
+    S_msrScore            fUpLinkToPartGroupToScore;
 
     // numbers
 

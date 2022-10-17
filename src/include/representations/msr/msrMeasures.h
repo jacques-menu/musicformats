@@ -80,7 +80,7 @@ class EXP msrMeasure : public msrSegmentElement
     static SMARTP<msrMeasure> create (
                             int           inputLineNumber,
                             const string& measureNumber,
-                            S_msrSegment  measureSegmentUpLink);
+                            S_msrSegment  measureUpLinkToSegment);
 
     SMARTP<msrMeasure> createMeasureNewbornClone (
                             S_msrSegment containingSegment);
@@ -100,7 +100,7 @@ class EXP msrMeasure : public msrSegmentElement
                           msrMeasure (
                             int           inputLineNumber,
                             const string& measureNumber,
-                            S_msrSegment  measureSegmentUpLink);
+                            S_msrSegment  measureUpLinkToSegment);
 
   public:
 
@@ -123,8 +123,8 @@ class EXP msrMeasure : public msrSegmentElement
 
     // uplink
 
-    S_msrSegment          getMeasureSegmentUpLink () const
-                              { return fMeasureSegmentUpLink; }
+    S_msrSegment          getMeasureUpLinkToSegment () const
+                              { return fMeasureUpLinkToSegment; }
 
     // measure numbers
 
@@ -311,15 +311,15 @@ class EXP msrMeasure : public msrSegmentElement
 
     // upLinks
 
-    S_msrVoice            fetchMeasureVoiceUpLink () const;
+    S_msrVoice            fetchMeasureUpLinkToVoice () const;
 
-    S_msrStaff            fetchMeasureStaffUpLink () const;
+    S_msrStaff            fetchMeasureUpLinkToStaff () const;
 
-    S_msrPart             fetchMeasurePartUpLink () const;
+    S_msrPart             fetchMeasureUpLinkToPart () const;
 
-    S_msrPartGroup        fetchMeasurePartGroupUpLink () const;
+    S_msrPartGroup        fetchMeasureUpLinkToPartGroup () const;
 
-    S_msrScore            fetchMeasureScoreUpLink () const;
+    S_msrScore            fetchMeasureUpLinkToScore () const;
 
   public:
 
@@ -663,7 +663,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // upLinks
 
-    S_msrSegment          fMeasureSegmentUpLink;
+    S_msrSegment          fMeasureUpLinkToSegment;
 
     // measure lengthes, in whole notes
 

@@ -90,19 +90,19 @@ S_bsrLineContents bsrLineContents::createLineNewbornClone ()
 }
 
 /*
-void bsrLineContents::setBsrLineUpLink (
-S_bsrLine bsrLineUpLink)
+void bsrLineContents::setUpLinkToBsrLine (
+S_bsrLine upLinkToBsrLine)
 {
-  fBsrLineUpLink = bsrLineUpLink;
+  fUpLinkToBsrLine = upLinkToBsrLine;
 }
 
-S_bsrLine bsrLineContents::getBsrLineUpLink () const
+S_bsrLine bsrLineContents::getUpLinkToBsrLine () const
 {
   S_msrVoice result;
 
-  if (fNoteDirectMeasureUpLink) {
+  if (fNoteDirectUpLinkToMeasure) {
     result =
-  return fBsrLineUpLink;
+  return fUpLinkToBsrLine;
   }
 
   return result;

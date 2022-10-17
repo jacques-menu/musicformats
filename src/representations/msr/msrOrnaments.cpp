@@ -198,16 +198,16 @@ void msrOrnament::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "placement" << " : " <<
+    "ornamentPlacementKind" << " : " <<
     ornamentPlacementKindAsString () <<
     endl <<
     setw (fieldWidth) <<
-    "accidental mark" << " : " <<
+    "ornamentAccidentalKind" << " : " <<
     ornamentAccidentalKindAsString () <<
     endl <<
     setw (fieldWidth) <<
-    "noteUpLink" << " : " <<
-    fOrnamentNoteUpLink->asShortString () <<
+    "ornamentUpLinkToNote" << " : " <<
+    fOrnamentUpLinkToNote->asShortString () <<
     endl;
 
   --gIndenter;
@@ -223,7 +223,7 @@ ostream& operator<< (ostream& os, const S_msrOrnament& elt)
   else {
     os << "*** NONE ***" << endl;
   }
-  
+
   return os;
 }
 

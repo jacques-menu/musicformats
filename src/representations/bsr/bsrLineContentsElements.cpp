@@ -49,19 +49,19 @@ bsrLineContentsElement::~bsrLineContentsElement ()
 {}
 
 /*
-void bsrLineContentsElement::setBsrLineUpLink (
-  S_bsrLine bsrLineUpLink)
+void bsrLineContentsElement::setUpLinkToBsrLine (
+  S_bsrLine upLinkToBsrLine)
 {
-  fBsrLineUpLink = bsrLineUpLink;
+  fUpLinkToBsrLine = upLinkToBsrLine;
 }
 
-S_bsrLine bsrLineContentsElement::getBsrLineUpLink () const
+S_bsrLine bsrLineContentsElement::getUpLinkToBsrLine () const
 {
   S_msrVoice result;
 
-  if (fNoteDirectMeasureUpLink) {
+  if (fNoteDirectUpLinkToMeasure) {
     result =
-  return fBsrLineUpLink;
+  return fUpLinkToBsrLine;
   }
 
   return result;

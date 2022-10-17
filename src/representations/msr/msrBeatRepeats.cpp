@@ -41,28 +41,28 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrBeatRepeatElement msrBeatRepeatElement::create (
   int                 inputLineNumber,
-  S_msrBeatRepeat beatRepeatUpLink)
+  S_msrBeatRepeat upLinkToBeatRepeat)
 {
   msrBeatRepeatElement* o =
     new msrBeatRepeatElement (
       inputLineNumber,
-      beatRepeatUpLink);
+      upLinkToBeatRepeat);
   assert (o != nullptr);
   return o;
 }
 
 msrBeatRepeatElement::msrBeatRepeatElement (
   int                 inputLineNumber,
-  S_msrBeatRepeat beatRepeatUpLink)
+  S_msrBeatRepeat upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    beatRepeatUpLink != nullptr,
-    "beatRepeatUpLink is null");
+    upLinkToBeatRepeat != nullptr,
+    "upLinkToBeatRepeat is null");
 
-  fBeatRepeatElementBeatRepeatUpLink = beatRepeatUpLink;
+  fBeatRepeatElementUpLinkToBeatRepeat = upLinkToBeatRepeat;
 }
 
 msrBeatRepeatElement::~msrBeatRepeatElement ()
@@ -291,7 +291,7 @@ string msrBeatRepeatElement::asString () const
   s <<
     "BeatRepeatElement" <<
     ", beatRepeat upLink: '" <<
-    fBeatRepeatElementBeatRepeatUpLink->
+    fBeatRepeatElementUpLinkToBeatRepeat->
       asShortString () <<
     "', line " << fInputLineNumber <<
     endl;
@@ -310,7 +310,7 @@ void msrBeatRepeatElement::print (ostream& os) const
 
   os <<
     "beatRepeat upLink: '" <<
-    fBeatRepeatElementBeatRepeatUpLink->
+    fBeatRepeatElementUpLinkToBeatRepeat->
       asShortString () <<
       "'" <<
     endl << endl;
@@ -368,7 +368,7 @@ void msrBeatRepeatElement::printShort (ostream& os)
 / / * JMI
   os <<
     "beatRepeat upLink: '" <<
-    fBeatRepeatElementBeatRepeatUpLink->
+    fBeatRepeatElementUpLinkToBeatRepeat->
       asShortString () <<
       "'" <<
     endl;
@@ -431,28 +431,28 @@ ostream& operator<< (ostream& os, const S_msrBeatRepeatElement& elt)
 //______________________________________________________________________________
 S_msrBeatRepeatPattern msrBeatRepeatPattern::create (
   int                 inputLineNumber,
-  S_msrBeatRepeat beatRepeatUpLink)
+  S_msrBeatRepeat upLinkToBeatRepeat)
 {
   msrBeatRepeatPattern* o =
     new msrBeatRepeatPattern (
       inputLineNumber,
-      beatRepeatUpLink);
+      upLinkToBeatRepeat);
   assert (o != nullptr);
   return o;
 }
 
 msrBeatRepeatPattern::msrBeatRepeatPattern (
   int                 inputLineNumber,
-  S_msrBeatRepeat beatRepeatUpLink)
+  S_msrBeatRepeat upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    beatRepeatUpLink != nullptr,
-    "beatRepeatUpLink is null");
+    upLinkToBeatRepeat != nullptr,
+    "upLinkToBeatRepeat is null");
 
-  fBeatRepeatUpLink = beatRepeatUpLink;
+  fUpLinkToBeatRepeat = upLinkToBeatRepeat;
 }
 
 msrBeatRepeatPattern::~msrBeatRepeatPattern ()
@@ -626,28 +626,28 @@ ostream& operator<< (ostream& os, const S_msrBeatRepeatPattern& elt)
 //______________________________________________________________________________
 S_msrBeatRepeatReplicas msrBeatRepeatReplicas::create (
   int                 inputLineNumber,
-  S_msrBeatRepeat beatRepeatUpLink)
+  S_msrBeatRepeat upLinkToBeatRepeat)
 {
   msrBeatRepeatReplicas* o =
     new msrBeatRepeatReplicas (
       inputLineNumber,
-      beatRepeatUpLink);
+      upLinkToBeatRepeat);
   assert (o != nullptr);
   return o;
 }
 
 msrBeatRepeatReplicas::msrBeatRepeatReplicas (
   int                 inputLineNumber,
-  S_msrBeatRepeat beatRepeatUpLink)
+  S_msrBeatRepeat upLinkToBeatRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    beatRepeatUpLink != nullptr,
-    "beatRepeatUpLink is null");
+    upLinkToBeatRepeat != nullptr,
+    "upLinkToBeatRepeat is null");
 
-  fBeatRepeatUpLink = beatRepeatUpLink;
+  fUpLinkToBeatRepeat = upLinkToBeatRepeat;
 }
 
 msrBeatRepeatReplicas::~msrBeatRepeatReplicas ()
@@ -823,14 +823,14 @@ S_msrBeatRepeat msrBeatRepeat::create (
   int        inputLineNumber,
   int        beatRepeatMeasuresNumber,
   int        beatRepeatSlashesNumber,
-  S_msrVoice voiceUpLink)
+  S_msrVoice upLinkToVoice)
 {
   msrBeatRepeat* o =
     new msrBeatRepeat (
       inputLineNumber,
       beatRepeatMeasuresNumber,
       beatRepeatSlashesNumber,
-      voiceUpLink);
+      upLinkToVoice);
   assert (o != nullptr);
   return o;
 }
@@ -839,7 +839,7 @@ msrBeatRepeat::msrBeatRepeat (
   int        inputLineNumber,
   int        beatRepeatMeasuresNumber,
   int        beatRepeatSlashesNumber,
-  S_msrVoice voiceUpLink)
+  S_msrVoice upLinkToVoice)
     : msrSegmentElement (inputLineNumber)
 {
   // sanity check
@@ -858,7 +858,7 @@ msrBeatRepeat::msrBeatRepeat (
 
   fBeatRepeatSlashesNumber  = beatRepeatSlashesNumber;
 
-  fBeatRepeatVoiceUpLink = voiceUpLink;
+  fUpLinkToBeatRepeatToVoice = upLinkToVoice;
 
   // measures repeat build phase
   fCurrentBeatRepeatBuildPhaseKind =
@@ -1060,8 +1060,8 @@ void msrBeatRepeat::browseData (basevisitor* v)
   // fetch the score
   S_msrScore
     score =
-      fBeatRepeatVoiceUpLink->
-        fetchVoiceScoreUpLink ();
+      fUpLinkToBeatRepeatToVoice->
+        fetchVoiceUpLinkToScore ();
 
 /* JMI
   Bool inhibitBeatRepeatReplicasBrowsing =
@@ -1167,7 +1167,7 @@ void msrBeatRepeat::displayBeatRepeat (
     fBeatRepeatSlashesNumber <<
     "', voice:" <<
     endl <<
-    fBeatRepeatVoiceUpLink->getVoiceName () <<
+    fUpLinkToBeatRepeatToVoice->getVoiceName () <<
     " (" << context << ")" <<
     ", line " << inputLineNumber <<
     " contains:" <<

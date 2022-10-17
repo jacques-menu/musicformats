@@ -187,7 +187,7 @@ void msrBook::addBookElementToBook (
         dynamic_cast<msrScore*>(&(*bookElement))
   ) {
     score->
-      setScoreBookUpLink (this);
+      setScoreUpLinkToBook (this);
   }
 }
 

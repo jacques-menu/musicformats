@@ -54,14 +54,14 @@ S_msrStaff msrStaff::create (
   int          inputLineNumber,
   msrStaffKind staffKind,
   int          staffNumber,
-  S_msrPart    staffPartUpLink)
+  S_msrPart    staffUpLinkToPart)
 {
   msrStaff* o =
     new msrStaff (
       inputLineNumber,
       staffKind,
       staffNumber,
-      staffPartUpLink);
+      staffUpLinkToPart);
   assert (o != nullptr);
 
   return o;
@@ -71,18 +71,18 @@ msrStaff::msrStaff (
   int          inputLineNumber,
   msrStaffKind staffKind,
   int          staffNumber,
-  S_msrPart    staffPartUpLink)
+  S_msrPart    staffUpLinkToPart)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    staffPartUpLink != nullptr,
-    "staffPartUpLink is null");
+    staffUpLinkToPart != nullptr,
+    "staffUpLinkToPart is null");
 
   // set staff part upLink
-  fStaffPartUpLink =
-    staffPartUpLink;
+  fStaffUpLinkToPart =
+    staffUpLinkToPart;
 
   // set staff kind and number
   fStaffKind   = staffKind;
@@ -96,7 +96,7 @@ msrStaff::msrStaff (
     gLogStream <<
       "Creating staff \"" << asString () <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -110,39 +110,39 @@ void msrStaff::initializeStaff ()
   switch (fStaffKind) {
     case msrStaffKind::kStaffKindRegular:
       fStaffName =
-        fStaffPartUpLink->getPartMsrName () +
+        fStaffUpLinkToPart->getPartMsrName () +
         "_Staff_" +
         mfInt2EnglishWord (fStaffNumber);
       break;
 
     case msrStaffKind::kStaffKindTablature:
       fStaffName =
-        fStaffPartUpLink->getPartMsrName () +
+        fStaffUpLinkToPart->getPartMsrName () +
         "_Tablature_" +
         mfInt2EnglishWord (fStaffNumber);
       break;
 
     case msrStaffKind::kStaffKindHarmonies:
       fStaffName =
-        fStaffPartUpLink->getPartMsrName () +
+        fStaffUpLinkToPart->getPartMsrName () +
         "_HARMONIES_Staff";
       break;
 
     case msrStaffKind::kStaffKindFiguredBass:
       fStaffName =
-        fStaffPartUpLink->getPartMsrName () +
+        fStaffUpLinkToPart->getPartMsrName () +
         "_FIGURED_BASS_Staff";
       break;
 
     case msrStaffKind::kStaffKindDrum:
       fStaffName =
-        fStaffPartUpLink->getPartMsrName () +
+        fStaffUpLinkToPart->getPartMsrName () +
         "_DRUM_Staff";
       break;
 
     case msrStaffKind::kStaffKindRythmic:
       fStaffName =
-        fStaffPartUpLink->getPartMsrName () +
+        fStaffUpLinkToPart->getPartMsrName () +
         "_RYTHMIC_Staff";
       break;
   } // switch
@@ -207,7 +207,7 @@ void msrStaff::initializeStaff ()
   // get the initial staff details from the part if any
   S_msrStaffDetails
     partStaffDetails =
-      fStaffPartUpLink->
+      fStaffUpLinkToPart->
         getCurrentPartStaffDetails ();
 
   if (partStaffDetails) {
@@ -219,7 +219,7 @@ void msrStaff::initializeStaff ()
   {
     S_msrClef
       clef =
-        fStaffPartUpLink->
+        fStaffUpLinkToPart->
           getPartCurrentClef ();
 
     if (clef) {
@@ -230,7 +230,7 @@ void msrStaff::initializeStaff ()
           "' as initial clef to staff \"" <<
           fStaffName <<
           "\" in part " <<
-          fStaffPartUpLink->getPartCombinedName () <<
+          fStaffUpLinkToPart->getPartCombinedName () <<
           endl;
       }
 #endif
@@ -244,7 +244,7 @@ void msrStaff::initializeStaff ()
     //* JMI
     S_msrKey
       key =
-        fStaffPartUpLink->
+        fStaffUpLinkToPart->
           getPartCurrentKey ();
 
     if (key) {
@@ -255,7 +255,7 @@ void msrStaff::initializeStaff ()
           "' as initial key to staff \"" <<
           fStaffName <<
           "\" in part " <<
-          fStaffPartUpLink->getPartCombinedName () <<
+          fStaffUpLinkToPart->getPartCombinedName () <<
           endl;
       }
 #endif
@@ -268,7 +268,7 @@ void msrStaff::initializeStaff ()
   {
     S_msrTransposition
       transpose =
-        fStaffPartUpLink->
+        fStaffUpLinkToPart->
           getPartCurrentTransposition ();
 
     if (transpose) {
@@ -279,7 +279,7 @@ void msrStaff::initializeStaff ()
           "' as initial transpose to staff \"" <<
           fStaffName <<
           "\" in part " <<
-          fStaffPartUpLink->getPartCombinedName () <<
+          fStaffUpLinkToPart->getPartCombinedName () <<
           endl;
       }
 #endif
@@ -292,10 +292,10 @@ void msrStaff::initializeStaff ()
 
   // set staff instrument names default values // JMI
   fStaffInstrumentName =
-    fStaffPartUpLink->
+    fStaffUpLinkToPart->
       getPartInstrumentName ();
   fStaffInstrumentAbbreviation =
-    fStaffPartUpLink->
+    fStaffUpLinkToPart->
       getPartInstrumentAbbreviation ();
 
   // multiple full-bar rests
@@ -349,27 +349,27 @@ S_msrStaff msrStaff::createStaffNewbornClone (
   return newbornClone;
 }
 
-S_msrPartGroup msrStaff::fetchStaffPartGroupUpLink () const
+S_msrPartGroup msrStaff::fetchStaffUpLinkToPartGroup () const
 {
   S_msrPartGroup result;
 
-  if (fStaffPartUpLink) {
+  if (fStaffUpLinkToPart) {
     result =
-      fStaffPartUpLink->
-        getPartPartGroupUpLink ();
+      fStaffUpLinkToPart->
+        getPartUpLinkToPartGroup ();
   }
 
   return result;
 }
 
-S_msrScore msrStaff::fetchStaffScoreUpLink () const
+S_msrScore msrStaff::fetchStaffUpLinkToScore () const
 {
   S_msrScore result;
 
-  if (fStaffPartUpLink) {
+  if (fStaffUpLinkToPart) {
     result =
-      fStaffPartUpLink->
-        fetchPartScoreUpLink ();
+      fStaffUpLinkToPart->
+        fetchPartUpLinkToScore ();
   }
 
   return result;
@@ -397,7 +397,7 @@ void msrStaff::registerShortestNoteInStaffIfRelevant (S_msrNote note)
         noteSoundingWholeNotes);
 
     // cascade this new value to the staff's part
-    fStaffPartUpLink ->
+    fStaffUpLinkToPart ->
       registerShortestNoteInPartIfRelevant (
         note);
 
@@ -590,7 +590,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
       "\", line " << inputLineNumber <<
       "\", current measure number: " <<
       currentMeasureNumber <<
- // JMI     " in part " << fStaffPartUpLink->getPartCombinedName () <<
+ // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -686,7 +686,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
-     // JMI     " in part " << fStaffPartUpLink->getPartCombinedName () <<
+     // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
           endl;
       }
 #endif
@@ -704,7 +704,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
           "\", line " << inputLineNumber <<
           "\", current measure number: " <<
           currentMeasureNumber <<
-     // JMI     " in part " << fStaffPartUpLink->getPartCombinedName () <<
+     // JMI     " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
           endl;
       }
 #endif
@@ -853,7 +853,7 @@ void msrStaff::registerVoiceInStaffAllVoicesList (
   fStaffAllVoicesList.push_back (voice);
 
   // register it in the part uplink
-  fStaffPartUpLink->
+  fStaffUpLinkToPart->
     registerVoiceInPartAllVoicesList (voice);
 
   --gIndenter;
@@ -1041,7 +1041,7 @@ void msrStaff::registerHarmoniesVoiceByItsNumber (
       voice->asString () <<
      " by its number in staff \"" << fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -1064,7 +1064,7 @@ void msrStaff::registerFiguredBassVoiceByItsNumber (
       voice->asString () <<
      " by its number in staff \"" << fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -1089,7 +1089,7 @@ S_msrVoice msrStaff::fetchRegularVoiceFromStaffByItsNumber (
       voiceNumber <<
      "' in staff \"" << fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -1200,7 +1200,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
       "Fetching first regular voice in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -1212,7 +1212,7 @@ S_msrVoice msrStaff::fetchFirstRegularVoiceFromStaff (
     s <<
       "staff " << fStaffNumber <<
       " in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       " doesn't contain any regular voices, cannot fetch the first one" <<
       ", line " << inputLineNumber;
 
@@ -1275,7 +1275,7 @@ void msrStaff::registerVoiceInStaff (
       fStaffRegularVoicesCounter <<
       " of staff \"" << fStaffName <<
       "\", line " << inputLineNumber <<
-// JMI       " in part " << fStaffPartUpLink->getPartCombinedName () <<
+// JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -1429,7 +1429,7 @@ void msrStaff::registerPartLevelVoiceInStaff (
       fStaffRegularVoicesCounter <<
       " in staff \"" << fStaffName <<
       "\", line " << inputLineNumber <<
-// JMI       " in part " << fStaffPartUpLink->getPartCombinedName () <<
+// JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -1498,7 +1498,7 @@ void msrStaff::registerVoiceInStaffClone (
       fStaffRegularVoicesCounter <<
       " of staff clone \"" << fStaffName <<
       "\", line " << inputLineNumber <<
-// JMI       " in part " << fStaffPartUpLink->getPartCombinedName () <<
+// JMI       " in part " << fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -1575,7 +1575,7 @@ void msrStaff::appendClefToStaff (S_msrClef clef)
       "' to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -1617,7 +1617,7 @@ void msrStaff::appendClefToStaff (S_msrClef clef)
         "' ignored because it is already present in staff " <<
         fStaffName <<
         "\" in part " <<
-        fStaffPartUpLink->getPartCombinedName () <<
+        fStaffUpLinkToPart->getPartCombinedName () <<
         endl;
     }
 #endif
@@ -1635,7 +1635,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -1664,7 +1664,7 @@ void msrStaff::appendKeyToStaff (S_msrKey  key)
             "' ignored because it is already present in staff " <<
             fStaffName <<
             "\" in part " <<
-            fStaffPartUpLink->getPartCombinedName () <<
+            fStaffUpLinkToPart->getPartCombinedName () <<
             endl;
         }
 #endif
@@ -1725,7 +1725,7 @@ void msrStaff::appendTimeSignatureToStaff (S_msrTimeSignature timeSignature)
             "' ignored because it is already present in staff " <<
             fStaffName <<
             "\" in part " <<
-            fStaffPartUpLink->getPartCombinedName () <<
+            fStaffUpLinkToPart->getPartCombinedName () <<
             endl;
         }
 #endif
@@ -1758,7 +1758,7 @@ void msrStaff::appendTimeSignatureToStaffClone (S_msrTimeSignature timeSignature
       "' to staff clone \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -1866,7 +1866,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
       "' in staff clone \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -1895,7 +1895,7 @@ void msrStaff::nestContentsIntoNewRepeatInStaff (
       "Nesting contents into new repeat in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -1917,7 +1917,7 @@ void msrStaff::handleRepeatStartInStaff (
       "Handling repeat start in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -1945,7 +1945,7 @@ void msrStaff::handleRepeatEndInStaff (
       "Handling a repeat end in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -1973,7 +1973,7 @@ void msrStaff::handleRepeatEndingStartInStaff (
       "Handling a repeat ending start in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -2005,7 +2005,7 @@ void msrStaff::handleRepeatEndingEndInStaff (
       " repeat ending end in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -2036,7 +2036,7 @@ void msrStaff::finalizeRepeatEndInStaff (
       "Finalizing a repeat upon its end in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -2067,7 +2067,7 @@ void msrStaff::createMeasureRepeatFromItsFirstMeasuresInStaff (
       "Creating a measures repeat from it's first measure in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -2090,7 +2090,7 @@ void msrStaff::appendPendingMeasureRepeatToStaff (
       "Appending the pending measures repeat to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -2115,7 +2115,7 @@ void msrStaff::appendMultipleFullBarRestsToStaff (
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -2169,7 +2169,7 @@ void msrStaff::addEmptyMeasuresToStaff (
       " to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -2195,7 +2195,7 @@ void msrStaff::appendPendingMultipleFullBarRestsToStaff (
       "Appending the pending multiple rest to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -2241,7 +2241,7 @@ void msrStaff::appendRepeatCloneToStaff (
       "Appending repeat clone to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -2262,7 +2262,7 @@ void msrStaff::appendRepeatEndingCloneToStaff (
       "Appending a repeat ending clone to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       ", line " << repeatEndingClone->getInputLineNumber () <<
       endl;
   }
@@ -2288,7 +2288,7 @@ void msrStaff::appendBarLineToStaff (S_msrBarLine barLine)
       " to staff " <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -2314,7 +2314,7 @@ void msrStaff::appendTranspositionToStaff (
       "' in staff " <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -2336,7 +2336,7 @@ void msrStaff::appendTranspositionToStaff (
           "' ignored because it is already present in staff " <<
           fStaffName <<
           "\" in part " <<
-          fStaffPartUpLink->getPartCombinedName () <<
+          fStaffUpLinkToPart->getPartCombinedName () <<
           endl;
       }
 #endif
@@ -2365,7 +2365,7 @@ void msrStaff::appendStaffDetailsToStaff (
       "' to staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -2401,7 +2401,7 @@ void msrStaff::appendStaffDetailsToStaff (
       "' in staff \"" <<
       fStaffName <<
       "\" in part " <<
-      fStaffPartUpLink->getPartCombinedName () <<
+      fStaffUpLinkToPart->getPartCombinedName () <<
       endl;
   }
 #endif
@@ -2486,7 +2486,7 @@ void msrStaff::finalizeLastAppendedMeasureInStaff (
           S_msrVoice
             regularVoiceHarmoniesVoice =
               voice->
-                getRegularVoiceHarmoniesVoiceForwardLink ();
+                getRegularVoiceForwardLinkToHarmoniesVoice ();
 
           if (regularVoiceHarmoniesVoice) {
             regularVoiceHarmoniesVoice->
@@ -3046,8 +3046,8 @@ void msrStaff::print (ostream& os) const
     staffNumberAsString () <<
     endl <<
     setw (fieldWidth) <<
-    "fStaffPartUpLink" << " : " <<
-    fStaffPartUpLink->getPartCombinedName () <<
+    "fStaffUpLinkToPart" << " : " <<
+    fStaffUpLinkToPart->getPartCombinedName () <<
     endl <<
     setw (fieldWidth) <<
     "fStaffInstrumentName" << " : \"" <<

@@ -223,7 +223,7 @@ class EXP msrVoice : public msrElement
                             int          voiceNumber,
                             msrVoiceCreateInitialLastSegmentKind
                                          voiceCreateInitialLastSegmentKind,
-                            S_msrStaff   voiceStaffUpLink);
+                            S_msrStaff   voiceUpLinkToStaff);
 
     SMARTP<msrVoice> createVoiceNewbornClone (
                             S_msrStaff containingStaff);
@@ -240,17 +240,17 @@ class EXP msrVoice : public msrElement
     static SMARTP<msrVoice> createRegularVoice (
                             int        inputLineNumber,
                             int        voiceNumber,
-                            S_msrStaff voiceStaffUpLink);
+                            S_msrStaff voiceUpLinkToStaff);
 
     static SMARTP<msrVoice> createHarmoniesVoice (
                             int        inputLineNumber,
                             int        voiceNumber,
-                            S_msrStaff voiceStaffUpLink);
+                            S_msrStaff voiceUpLinkToStaff);
 
     static SMARTP<msrVoice> createFiguredBassVoice (
                             int        inputLineNumber,
                             int        voiceNumber,
-                            S_msrStaff voiceStaffUpLink);
+                            S_msrStaff voiceUpLinkToStaff);
 
   protected:
 
@@ -264,7 +264,7 @@ class EXP msrVoice : public msrElement
                             int          voiceNumber,
                             msrVoiceCreateInitialLastSegmentKind
                                          voiceCreateInitialLastSegmentKind,
-                            S_msrStaff   voiceStaffUpLink);
+                            S_msrStaff   voiceUpLinkToStaff);
 
                           msrVoice (
                             int          inputLineNumber,
@@ -290,8 +290,8 @@ class EXP msrVoice : public msrElement
 
     // uplink
 
-    S_msrStaff            getVoiceStaffUpLink () const
-                              { return fVoiceStaffUpLink; }
+    S_msrStaff            getVoiceUpLinkToStaff () const
+                              { return fVoiceUpLinkToStaff; }
 
     // voice kind
 
@@ -327,16 +327,16 @@ class EXP msrVoice : public msrElement
     // harmonies
 
 // JMI
-    S_msrVoice            getRegularVoiceHarmoniesVoiceForwardLink () const
-                              { return fRegularVoiceHarmoniesVoiceForwardLink; }
+    S_msrVoice            getRegularVoiceForwardLinkToHarmoniesVoice () const
+                              { return fRegularVoiceForwardLinkToHarmoniesVoice; }
 
     S_msrVoice            getHarmoniesVoiceRegularVoiceBackwardLink () const
                               { return fHarmoniesVoiceRegularVoiceBackwardLink; }
 
     // figured bass
 
-    S_msrVoice            getRegularVoiceFiguredBassVoiceForwardLink () const
-                              { return fRegularVoiceFiguredBassVoiceForwardLink; }
+    S_msrVoice            getRegularVoiceForwardLinkToFiguredBassVoice () const
+                              { return fRegularVoiceForwardLinkToFiguredBassVoice; }
 
     S_msrVoice            getFiguredBassVoiceRegularVoiceBackwardLink () const
                               { return fFiguredBassVoiceRegularVoiceBackwardLink; }
@@ -460,11 +460,11 @@ class EXP msrVoice : public msrElement
 
     // upLinks
 
-    S_msrPart             fetchVoicePartUpLink () const;
+    S_msrPart             fetchVoiceUpLinkToPart () const;
 
-    S_msrPartGroup        fetchVoicePartGroupUpLink () const;
+    S_msrPartGroup        fetchVoiceUpLinkToPartGroup () const;
 
-    S_msrScore            fetchVoiceScoreUpLink () const;
+    S_msrScore            fetchVoiceUpLinkToScore () const;
 
     // identity
 
@@ -1146,14 +1146,14 @@ class EXP msrVoice : public msrElement
 
     // upLinks
 
-    S_msrStaff            fVoiceStaffUpLink;
+    S_msrStaff            fVoiceUpLinkToStaff;
 
 // JMI
     // two-way links
-    S_msrVoice            fRegularVoiceHarmoniesVoiceForwardLink;
+    S_msrVoice            fRegularVoiceForwardLinkToHarmoniesVoice;
     S_msrVoice            fHarmoniesVoiceRegularVoiceBackwardLink;
 
-    S_msrVoice            fRegularVoiceFiguredBassVoiceForwardLink;
+    S_msrVoice            fRegularVoiceForwardLinkToFiguredBassVoice;
     S_msrVoice            fFiguredBassVoiceRegularVoiceBackwardLink;
 //
 

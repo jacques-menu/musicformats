@@ -35,13 +35,6 @@ class EXP bsrPageElement : public bsrElement
     // set and get
     // ------------------------------------------------------
 
-/* JMI
-    void                  setBsrPageUpLink (
-                            S_bsrPage bsrPageUpLink);
-
-    S_bsrPage             getBsrPageUpLink () const;
-*/
-
     void                  setSpacesBefore (int value)
                               { fSpacesBefore = value; }
 
@@ -88,7 +81,7 @@ class EXP bsrPageElement : public bsrElement
     // ------------------------------------------------------
 
 /*
-    S_bsrPage             fBsrPageUpLink;
+    S_bsrPage             fUpLinkToBsrPage;
 */
 
     int                   fSpacesBefore;

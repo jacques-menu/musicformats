@@ -116,7 +116,7 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createGraceNotesGroupNewbornClone ()
   return newbornClone;
 }
 
-S_msrTuplet msrGraceNotesGroup::fetchGraceNoteGroupTupletUpLink () const
+S_msrTuplet msrGraceNotesGroup::fetchGraceNoteGroupUpLinkToTuplet () const
 {
   S_msrTuplet result;
 
@@ -125,15 +125,15 @@ S_msrTuplet msrGraceNotesGroup::fetchGraceNoteGroupTupletUpLink () const
   return result;
 }
 
-S_msrPart msrGraceNotesGroup::fetchGraceNotesGroupPartUpLink () const
+S_msrPart msrGraceNotesGroup::fetchGraceNotesGroupUpLinkToPart () const
 {
   S_msrPart result;
 
 /* JMI BLARK
-  if (fGraceNotesGroupVoiceUpLink) {
+  if (fGraceNotesGroupUpLinkToVoice) {
     result =
-      fGraceNotesGroupVoiceUpLink->
-        fetchVoicePartUpLink ();
+      fGraceNotesGroupUpLinkToVoice->
+        fetchVoiceUpLinkToPart ();
   }
 */
 
@@ -264,7 +264,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (S_msrNote note)
       " to grace notes group" <<
       asShortString () <<
 //      " in voice \"" <<
-//      fGraceNotesGroupVoiceUpLink->getVoiceName () <<
+//      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"" <<
       endl;
   }
@@ -274,7 +274,7 @@ void msrGraceNotesGroup::appendNoteToGraceNotesGroup (S_msrNote note)
 
   // register note's grace notes groups upLink
   note->
-    setNoteDirectGraceNotesGroupUpLink (this);
+    setNoteDirectUpLinkToGraceNotesGroup (this);
 
   // is this grace note tied?
   if (note->getNoteTie ()) {
@@ -292,7 +292,7 @@ void msrGraceNotesGroup::appendChordToGraceNotesGroup (S_msrChord chord)
       " to grace notes group '" <<
       asShortString () <<
 //      "' in voice \"" <<
-//      fGraceNotesGroupVoiceUpLink->getVoiceName () <<
+//      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"" <<
       endl;
   }
@@ -313,7 +313,7 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
       "Removing last note from grace notes group " <<
       asShortString () <<
 //      " in voice \"" <<
-//      fGraceNotesGroupVoiceUpLink->getVoiceName () <<
+//      fGraceNotesGroupUpLinkToVoice->getVoiceName () <<
 //      "\"" <<
       endl;
   }
@@ -395,7 +395,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionsInMeasure (
   // compute chord's position in voice
   rational
      positionInVoice =
-      fChordDirectMeasureUpLink->getMeasurePositionInVoice ()
+      fChordDirectUpLinkToMeasure->getMeasurePositionInVoice ()
         +
       positionInMeasure;
 
@@ -408,7 +408,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionsInMeasure (
   S_msrVoice
     voice =
       measure->
-        fetchMeasureVoiceUpLink ();
+        fetchMeasureUpLinkToVoice ();
 
   voice->
     incrementCurrentPositionInVoice (
@@ -423,8 +423,8 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionsInMeasure (
     // compute chord's position in voice
     rational
        positionInVoice =
-        fGraceNotesGroupNoteUpLink->
-          getNoteDirectMeasureUpLink ()->
+        fGraceNotesGroupUpLinkToNote->
+          getNoteDirectUpLinkToMeasure ()->
             getMeasurePositionInVoice ()
           +
         positionInMeasure;
@@ -598,10 +598,10 @@ void msrGraceNotesGroup::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "graceNotesGroupNoteUpLink" << " : ";
-    if (fGraceNotesGroupNoteUpLink) {
+    "upLinkToGraceNotesGroupToNote" << " : ";
+    if (fGraceNotesGroupUpLinkToNote) {
       os <<
-        fGraceNotesGroupNoteUpLink->asShortString ();
+        fGraceNotesGroupUpLinkToNote->asShortString ();
     }
     else {
       os <<
@@ -688,10 +688,10 @@ void msrGraceNotesGroup::printShort (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "graceNotesGroupNoteUpLink" << " : ";
-    if (fGraceNotesGroupNoteUpLink) {
+    "upLinkToGraceNotesGroupToNote" << " : ";
+    if (fGraceNotesGroupUpLinkToNote) {
       os <<
-        fGraceNotesGroupNoteUpLink->asShortString ();
+        fGraceNotesGroupUpLinkToNote->asShortString ();
     }
     else {
       os <<

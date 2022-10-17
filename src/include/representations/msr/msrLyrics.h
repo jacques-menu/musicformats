@@ -70,7 +70,7 @@ class EXP msrSyllable : public msrMeasureElement
                             const string&         syllableStanzaNumber,
                             const rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           syllableStanzaUpLink);
+                            S_msrStanza           SyllableUpLinkToStanza);
 
     static SMARTP<msrSyllable> createWithNextMeasurePuristNumber (
                             int                   inputLineNumber,
@@ -79,7 +79,7 @@ class EXP msrSyllable : public msrMeasureElement
                             const string&         syllableStanzaNumber,
                             const rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           syllableStanzaUpLink,
+                            S_msrStanza           SyllableUpLinkToStanza,
                             int                   syllableNextMeasurePuristNumber);
 
     SMARTP<msrSyllable> createSyllableNewbornClone (
@@ -100,7 +100,7 @@ class EXP msrSyllable : public msrMeasureElement
                             const string&         syllableStanzaNumber,
                             const rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           syllableStanzaUpLink);
+                            S_msrStanza           SyllableUpLinkToStanza);
 
                           msrSyllable (
                             int                   inputLineNumber,
@@ -109,7 +109,7 @@ class EXP msrSyllable : public msrMeasureElement
                             const string&         syllableStanzaNumber,
                             const rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           syllableStanzaUpLink,
+                            S_msrStanza           SyllableUpLinkToStanza,
                             int                   syllableNextMeasurePuristNumber);
 
     virtual               ~msrSyllable ();
@@ -120,17 +120,17 @@ class EXP msrSyllable : public msrMeasureElement
     // ------------------------------------------------------
 
     // upLinks
-    void                  setSyllableNoteUpLink (S_msrNote note)
-                              { fSyllableNoteUpLink = note; }
+    void                  setSyllableUpLinkToNote (S_msrNote note)
+                              { fSyllableUpLinkToNote = note; }
 
-    S_msrNote             getSyllableNoteUpLink () const
-                              { return fSyllableNoteUpLink; }
+    S_msrNote             getSyllableUpLinkToNote () const
+                              { return fSyllableUpLinkToNote; }
 
-    void                  setSyllableStanzaUpLink (S_msrStanza stanza)
-                              { fSyllableStanzaUpLink = stanza; }
+    void                  setSyllableUpLinkToStanza (S_msrStanza stanza)
+                              { fSyllableUpLinkToStanza = stanza; }
 
-    S_msrStanza           getSyllableStanzaUpLink () const
-                              { return fSyllableStanzaUpLink; }
+    S_msrStanza           getSyllableUpLinkToStanza () const
+                              { return fSyllableUpLinkToStanza; }
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
@@ -177,7 +177,7 @@ class EXP msrSyllable : public msrMeasureElement
     // public services
     // ------------------------------------------------------
 
-    void                  appendSyllableToNoteAndSetItsNoteUpLink (
+    void                  appendSyllableToNoteAndSetItsUpLinkToNote (
                             S_msrNote note);
 
     void                  appendLyricTextToSyllable (const string& text);
@@ -197,7 +197,7 @@ class EXP msrSyllable : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                syllableNoteUpLinkAsString () const;
+    string                syllableUpLinkToNoteAsString () const;
 
     string                syllableWholeNotesAsMsrString () const;
 
@@ -221,8 +221,8 @@ class EXP msrSyllable : public msrMeasureElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrNote             fSyllableNoteUpLink;
-    S_msrStanza           fSyllableStanzaUpLink; // for use in stanzas
+    S_msrNote             fSyllableUpLinkToNote;
+    S_msrStanza           fSyllableUpLinkToStanza; // for use in stanzas
 
     // syllable kind
     msrSyllableKind       fSyllableKind;
@@ -266,7 +266,7 @@ class EXP msrStanza : public msrElement
     static SMARTP<msrStanza> create (
                             int           inputLineNumber,
                             const string& stanzaNumber,
-                            S_msrVoice    stanzaVoiceUpLink);
+                            S_msrVoice    stanzaUpLinkToVoice);
 
     SMARTP<msrStanza> createStanzaNewbornClone (
                             S_msrVoice containingVoice);
@@ -282,7 +282,7 @@ class EXP msrStanza : public msrElement
                           msrStanza (
                             int           inputLineNumber,
                             const string& stanzaNumber,
-                            S_msrVoice    stanzaVoiceUpLink);
+                            S_msrVoice    stanzaUpLinkToVoice);
 
   public:
 
@@ -320,8 +320,8 @@ class EXP msrStanza : public msrElement
                               { return fStanzaTextPresent; }
 
     // upLinks
-    S_msrVoice            getStanzaVoiceUpLink () const
-                              { return fStanzaVoiceUpLink; }
+    S_msrVoice            getStanzaUpLinkToVoice () const
+                              { return fStanzaUpLinkToVoice; }
 
   public:
 
@@ -417,7 +417,7 @@ class EXP msrStanza : public msrElement
     // ------------------------------------------------------
 
     // upLinks
-    S_msrVoice            fStanzaVoiceUpLink;
+    S_msrVoice            fStanzaUpLinkToVoice;
 
     // number
     // The lyric number indicates multiple lines,

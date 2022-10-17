@@ -241,36 +241,36 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // measure upLink
-    void                  setNoteDirectMeasureUpLink (
+    void                  setNoteDirectUpLinkToMeasure (
                             const S_msrMeasure& measure)
-                              { fNoteDirectMeasureUpLink = measure; }
+                              { fNoteDirectUpLinkToMeasure = measure; }
 
-    S_msrMeasure          getNoteDirectMeasureUpLink () const
-                              { return fNoteDirectMeasureUpLink; }
+    S_msrMeasure          getNoteDirectUpLinkToMeasure () const
+                              { return fNoteDirectUpLinkToMeasure; }
 
     // chord upLink
-    void                  setNoteDirectChordUpLink (
+    void                  setNoteDirectUpLinkToChord (
                             const S_msrChord& chord)
-                              { fNoteDirectChordUpLink = chord; }
+                              { fNoteDirectUpLinkToChord = chord; }
 
-    S_msrChord            getNoteDirectChordUpLink () const
-                              { return fNoteDirectChordUpLink; }
+    S_msrChord            getNoteDirectUpLinkToChord () const
+                              { return fNoteDirectUpLinkToChord; }
 
     // grace notes group upLink
-    void                  setNoteDirectGraceNotesGroupUpLink (
+    void                  setNoteDirectUpLinkToGraceNotesGroup (
                             const S_msrGraceNotesGroup& graceNotesGroup)
-                              { fNoteDirectGraceNotesGroupUpLink = graceNotesGroup; }
+                              { fNoteDirectUpLinkToGraceNotesGroup = graceNotesGroup; }
 
-    S_msrGraceNotesGroup  getNoteDirectGraceNotesGroupUpLink () const
-                              { return fNoteDirectGraceNotesGroupUpLink; }
+    S_msrGraceNotesGroup  getNoteDirectUpLinkToGraceNotesGroup () const
+                              { return fNoteDirectUpLinkToGraceNotesGroup; }
 
     // tuplet upLink
-    void                  setNoteDirectTupletUpLink (
+    void                  setNoteDirectUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
-                              { fNoteDirectTupletUpLink = tuplet; }
+                              { fNoteDirectUpLinkToTuplet = tuplet; }
 
-    S_msrTuplet           getNoteDirectTupletUpLink () const
-                              { return fNoteDirectTupletUpLink; }
+    S_msrTuplet           getNoteDirectUpLinkToTuplet () const
+                              { return fNoteDirectUpLinkToTuplet; }
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
@@ -768,28 +768,28 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // measure upLink
-    S_msrMeasure          fetchNoteMeasureUpLink () const;
+    S_msrMeasure          fetchNoteUpLinkToMeasure () const;
 
     // tuplet upLink
-// JMI ???    S_msrTuplet           fetchNoteTupletUpLink () const;
+// JMI ???    S_msrTuplet           fetchNoteUpLinkToTuplet () const;
 
     // grace notes group upLink
-    S_msrGraceNotesGroup  fetchNoteGraceNotesGroupUpLink () const;
+    S_msrGraceNotesGroup  fetchNoteUpLinkToGraceNotesGroup () const;
 
     // voice upLink
-    S_msrVoice            fetchNoteVoiceUpLink () const;
+    S_msrVoice            fetchUpLinkToNoteToVoice () const;
 
     // staff upLink
-    S_msrStaff            fetchNoteStaffUpLink () const;
+    S_msrStaff            fetchUpLinkToNoteToStaff () const;
 
     // part upLink
-    S_msrPart             fetchNotePartUpLink () const;
+    S_msrPart             fetchUpLinkToNoteToPart () const;
 
     // partgroup upLink
-    S_msrPartGroup        fetchNotePartGroupUpLink () const;
+    S_msrPartGroup        fetchNoteUpLinkToPartGroup () const;
 
     // score upLink
-    S_msrScore            fetchNoteScoreUpLink () const;
+    S_msrScore            fetchUpLinkToNoteToScore () const;
 
     // a pitched rest?
     Bool                  noteIsAPitchedRest () const;
@@ -985,13 +985,13 @@ class EXP msrNote : public msrTupletElement
     // upLinks
     // ------------------------------------------------------
 
-    S_msrChord            fNoteDirectChordUpLink;
+    S_msrChord            fNoteDirectUpLinkToChord;
 
-    S_msrGraceNotesGroup  fNoteDirectGraceNotesGroupUpLink;
+    S_msrGraceNotesGroup  fNoteDirectUpLinkToGraceNotesGroup;
 
-    S_msrTuplet           fNoteDirectTupletUpLink;
+    S_msrTuplet           fNoteDirectUpLinkToTuplet;
 
-    S_msrMeasure          fNoteDirectMeasureUpLink;
+    S_msrMeasure          fNoteDirectUpLinkToMeasure;
 
     // basic note description
     // ------------------------------------------------------
@@ -1233,7 +1233,7 @@ class EXP msrNote : public msrTupletElement
     // ------------------------------------------------------
 
     // this is needed to handle stemless notes,
-    // because the <stem> is visited after 'visitorStart ( S_msrNote )'
+    // because the <stem> is visited after 'visitorStart (S_msrNote )'
     Bool                  fNoteIsStemless;
 
     // this is to distinguish the first chord member note

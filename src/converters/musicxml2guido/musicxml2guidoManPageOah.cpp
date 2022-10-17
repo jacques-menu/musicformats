@@ -162,7 +162,7 @@ void xml2gmnManPageGenerateAtom::generateManPageData (ostream& os) const
   fOahVisitor->visitTheHandler ();
 
   // a help option has been applied // JMI superflous?
-  fetchAtomHandlerUpLink ()->
+  fetchAtomUpLinkToHandler ()->
     setOahHandlerFoundAHelpOption (
       "xml2gmnManPageGenerateAtom::generateManPageData");
 }

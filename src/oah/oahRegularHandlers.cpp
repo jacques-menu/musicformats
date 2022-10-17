@@ -160,7 +160,7 @@ void oahRegularHandler::appendGroupToRegulalHandler (
 
   // set the group upLink to this handler
   group->
-    setHandlerUpLink (this);
+    setUpLinkToHandler (this);
 }
 
 void oahRegularHandler::prependGroupToRegularHandler (
@@ -197,7 +197,7 @@ void oahRegularHandler::prependGroupToRegularHandler (
 
   // set the group upLink to this handler
   group->
-    setHandlerUpLink (this);
+    setUpLinkToHandler (this);
 }
 
 void oahRegularHandler::registerAtomInRegularSubgroup (
@@ -229,7 +229,7 @@ void oahRegularHandler::registerAtomInRegularSubgroup (
         atom =
           dynamic_cast<oahAtom*>(&(*insiderElement))
       ) {
-        // append atom to subgroup, thus modify its fSubGroupUpLink
+        // append atom to subgroup, thus modify its fUpLinkToSubGroup
         // that previous linked it to an insider handler subgroup
         subGroup->
           appendAtomToSubGroup (atom);

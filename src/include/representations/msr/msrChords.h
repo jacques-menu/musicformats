@@ -93,31 +93,31 @@ class EXP msrChord : public msrTupletElement
     // ------------------------------------------------------
 
     // measure upLink
-    void                  setChordDirectMeasureUpLink (
+    void                  setChordDirectUpLinkToMeasure (
                             const S_msrMeasure& measure)
-                              { fChordDirectMeasureUpLink = measure; }
+                              { fChordDirectUpLinkToMeasure = measure; }
 
-    S_msrMeasure          getChordDirectMeasureUpLink () const
-                            { return fChordDirectMeasureUpLink; }
+    S_msrMeasure          getChordDirectUpLinkToMeasure () const
+                            { return fChordDirectUpLinkToMeasure; }
 
     // tuplet upLink
-    void                  setChordDirectTupletUpLink (
+    void                  setChordDirectUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
-                              { fChordDirectTupletUpLink = tuplet; }
+                              { fChordDirectUpLinkToTuplet = tuplet; }
 
-    S_msrTuplet           getChordDirectTupletUpLink () const
-                            { return fChordDirectTupletUpLink; }
+    S_msrTuplet           getChordDirectUpLinkToTuplet () const
+                            { return fChordDirectUpLinkToTuplet; }
 
     // grace notes group upLink
-    void                  setChordDirectGraceNotesGroupUpLink (
+    void                  setChordDirectUpLinkToGraceNotesGroup (
                             const S_msrGraceNotesGroup& graceNotesGroup)
                               {
-                                fChordDirectGraceNotesGroupUpLink =
+                                fChordDirectUpLinkToGraceNotesGroup =
                                   graceNotesGroup;
                               }
 
-    S_msrGraceNotesGroup  getChordDirectGraceNotesGroupUpLink () const
-                            { return fChordDirectGraceNotesGroupUpLink; }
+    S_msrGraceNotesGroup  getChordDirectUpLinkToGraceNotesGroup () const
+                            { return fChordDirectUpLinkToGraceNotesGroup; }
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
@@ -355,16 +355,16 @@ class EXP msrChord : public msrTupletElement
     // ------------------------------------------------------
 
     // measure upLink
-    S_msrMeasure          fetchChordMeasureUpLink () const;
+    S_msrMeasure          fetchChordUpLinkToMeasure () const;
 
     // tuplet upLink
-    S_msrTuplet           fetchChordTupletUpLink () const;
+    S_msrTuplet           fetchChordUpLinkToTuplet () const;
 
     // grace notes group upLink
-    S_msrGraceNotesGroup  fetchChordGraceNotesGroupUpLink () const;
+    S_msrGraceNotesGroup  fetchChordUpLinkToGraceNotesGroup () const;
 
     // score upLink
-    S_msrScore            fetchChordScoreUpLink () const;
+    S_msrScore            fetchChordUpLinkToScore () const;
 
     // notes
     void                  addFirstNoteToChord (
@@ -506,13 +506,13 @@ class EXP msrChord : public msrTupletElement
     // ------------------------------------------------------
 
     // measure upLink
-    S_msrMeasure          fChordDirectMeasureUpLink;
+    S_msrMeasure          fChordDirectUpLinkToMeasure;
 
     // tuplet uplink
-    S_msrTuplet           fChordDirectTupletUpLink;
+    S_msrTuplet           fChordDirectUpLinkToTuplet;
 
     // grace notes group uplink
-    S_msrGraceNotesGroup  fChordDirectGraceNotesGroupUpLink;
+    S_msrGraceNotesGroup  fChordDirectUpLinkToGraceNotesGroup;
 
     msrChordInKind        fChordKind;
 
@@ -645,7 +645,7 @@ class EXP msrChordBeamLink : public msrElement
     static SMARTP<msrChordBeamLink> create (
                             int        inputLineNumber,
                             S_msrBeam  originalBeam,
-                            S_msrChord chordUpLink);
+                            S_msrChord upLinkToChord);
 
     SMARTP<msrChordBeamLink> createBeamNewbornClone ();
 
@@ -657,7 +657,7 @@ class EXP msrChordBeamLink : public msrElement
                           msrChordBeamLink (
                             int        inputLineNumber,
                             S_msrBeam  originalBeam,
-                            S_msrChord chordUpLink);
+                            S_msrChord upLinkToChord);
 
     virtual               ~msrChordBeamLink ();
 
@@ -666,8 +666,8 @@ class EXP msrChordBeamLink : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    S_msrChord            getChordUpLink () const
-                              { return fChordUpLink; }
+    S_msrChord            getUpLinkToChord () const
+                              { return fUpLinkToChord; }
 
     S_msrBeam             getOriginalBeam () const
                               { return fOriginalBeam; }
@@ -699,7 +699,7 @@ class EXP msrChordBeamLink : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrChord            fChordUpLink;
+    S_msrChord            fUpLinkToChord;
 
     S_msrBeam             fOriginalBeam;
 };
@@ -717,7 +717,7 @@ class EXP msrChordSlurLink : public msrElement
     static SMARTP<msrChordSlurLink> create (
                             int        inputLineNumber,
                             S_msrSlur  originalSlur,
-                            S_msrChord chordUpLink);
+                            S_msrChord upLinkToChord);
 
     SMARTP<msrChordSlurLink> createSlurNewbornClone ();
 
@@ -729,7 +729,7 @@ class EXP msrChordSlurLink : public msrElement
                           msrChordSlurLink (
                             int        inputLineNumber,
                             S_msrSlur  originalSlur,
-                            S_msrChord chordUpLink);
+                            S_msrChord upLinkToChord);
 
     virtual               ~msrChordSlurLink ();
 
@@ -738,8 +738,8 @@ class EXP msrChordSlurLink : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    S_msrChord            getChordUpLink () const
-                              { return fChordUpLink; }
+    S_msrChord            getUpLinkToChord () const
+                              { return fUpLinkToChord; }
 
     S_msrSlur             getOriginalSlur () const
                               { return fOriginalSlur; }
@@ -771,7 +771,7 @@ class EXP msrChordSlurLink : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrChord            fChordUpLink;
+    S_msrChord            fUpLinkToChord;
 
     S_msrSlur             fOriginalSlur;
 };
@@ -789,7 +789,7 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     static SMARTP<msrChordGraceNotesGroupLink> create (
                             int                  inputLineNumber,
                             S_msrGraceNotesGroup originalGraceNotesGroup,
-                            S_msrChord            chordUpLink);
+                            S_msrChord            upLinkToChord);
 
     SMARTP<msrChordGraceNotesGroupLink> createChordGraceNotesGroupLinkNewbornClone ();
 
@@ -801,7 +801,7 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
                           msrChordGraceNotesGroupLink (
                             int                  inputLineNumber,
                             S_msrGraceNotesGroup originalGraceNotesGroup,
-                            S_msrChord            chordUpLink);
+                            S_msrChord            upLinkToChord);
 
     virtual               ~msrChordGraceNotesGroupLink ();
 
@@ -810,8 +810,8 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    S_msrChord            getChordUpLink () const
-                              { return fChordUpLink; }
+    S_msrChord            getUpLinkToChord () const
+                              { return fUpLinkToChord; }
 
     S_msrGraceNotesGroup  getOriginalGraceNotesGroup () const
                               { return fOriginalGraceNotesGroup; }
@@ -843,7 +843,7 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    S_msrChord            fChordUpLink;
+    S_msrChord            fUpLinkToChord;
 
     S_msrGraceNotesGroup  fOriginalGraceNotesGroup;
 };

@@ -38,7 +38,7 @@ class EXP bsrLineContentsElement : public bsrElement
     // set and get
     // ------------------------------------------------------
 /*
-    void                  setBsrLineContentsUpLink (
+    void                  setUpLinkToBsrLineContents (
                             S_bsrLineContents lineContents);
 */
 
@@ -88,7 +88,7 @@ class EXP bsrLineContentsElement : public bsrElement
     // ------------------------------------------------------
 
 /*
-    S_bsrLineContents     fBsrLineContentsUpLink;
+    S_bsrLineContents     fUpLinkToBsrLineContents;
 */
 
     int                   fSpacesBefore;

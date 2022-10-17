@@ -503,11 +503,11 @@ class EXP oahAtom : public oahElement
     // ------------------------------------------------------
 
     // uplinks
-    void                  setSubGroupUpLink (
+    void                  setUpLinkToSubGroup (
                             S_oahSubGroup subGroup);
 
-    S_oahSubGroup         getSubGroupUpLink () const
-                              { return fSubGroupUpLink; }
+    S_oahSubGroup         getUpLinkToSubGroup () const
+                              { return fUpLinkToSubGroup; }
 
     // early option?
     void                  setEarlyOptionKind (
@@ -523,9 +523,9 @@ class EXP oahAtom : public oahElement
     // ------------------------------------------------------
 
     // uplinks
-    S_oahGroup            fetchAtomGroupUpLink () const;
+    S_oahGroup            fetchAtomUpLinkToGroup () const;
 
-    S_oahHandler          fetchAtomHandlerUpLink () const;
+    S_oahHandler          fetchAtomUpLinkToHandler () const;
 
     // atoms handling
     void                  appendAtomToElementsList (
@@ -574,7 +574,7 @@ class EXP oahAtom : public oahElement
     // ------------------------------------------------------
 
     // uplink
-    S_oahSubGroup         fSubGroupUpLink;
+    S_oahSubGroup         fUpLinkToSubGroup;
 
     oahEarlyOptionKind    fEarlyOptionKind;
 };
@@ -1002,7 +1002,7 @@ class EXP oahSubGroup : public oahElement
                             const string&            shortName,
                             const string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahGroup               groupUpLink);
+                            S_oahGroup               upLinkToGroup);
 
     static SMARTP<oahSubGroup> createWithNames (
                             const string&            subGroupHeader,
@@ -1010,7 +1010,7 @@ class EXP oahSubGroup : public oahElement
                             const string&            shortName,
                             const string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahGroup               groupUpLink);
+                            S_oahGroup               upLinkToGroup);
 
   protected:
 
@@ -1023,7 +1023,7 @@ class EXP oahSubGroup : public oahElement
                             const string&            shortName,
                             const string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahGroup               groupUpLink);
+                            S_oahGroup               upLinkToGroup);
 
     virtual               ~oahSubGroup ();
 
@@ -1032,12 +1032,12 @@ class EXP oahSubGroup : public oahElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setGroupUpLink (
+    void                  setUpLinkToGroup (
                             S_oahGroup group)
-                              { fGroupUpLink = group; }
+                              { fUpLinkToGroup = group; }
 
-    S_oahGroup            getGroupUpLink () const
-                              { return fGroupUpLink; }
+    S_oahGroup            getUpLinkToGroup () const
+                              { return fUpLinkToGroup; }
 
     string                getSubGroupHeader () const
                               { return fSubGroupHeader; }
@@ -1065,7 +1065,7 @@ class EXP oahSubGroup : public oahElement
     // ------------------------------------------------------
 
     // uplink
-    S_oahHandler          fetchSubGroupHandlerUpLink () const;
+    S_oahHandler          fetchSubGroupUpLinkToHandler () const;
 
     void                  appendSubGroupToElementsList (
                             S_oahHandler handler);
@@ -1145,7 +1145,7 @@ class EXP oahSubGroup : public oahElement
     // private fields
     // ------------------------------------------------------
 
-    S_oahGroup            fGroupUpLink;
+    S_oahGroup            fUpLinkToGroup;
 
     string                fSubGroupHeader;
 
@@ -1180,7 +1180,7 @@ class EXP oahGroup : public oahElement
                             const string&            shortName,
                             const string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahHandler             groupHandlerUpLink);
+                            S_oahHandler             groupUpLinkToHandler);
 
     static SMARTP<oahGroup> createWithNames (
                             const string&            header,
@@ -1195,7 +1195,7 @@ class EXP oahGroup : public oahElement
                             const string&            shortName,
                             const string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahHandler             groupHandlerUpLink);
+                            S_oahHandler             groupUpLinkToHandler);
 
   protected:
 
@@ -1215,7 +1215,7 @@ class EXP oahGroup : public oahElement
                             const string&            shortName,
                             const string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
-                            S_oahHandler             groupHandlerUpLink);
+                            S_oahHandler             groupUpLinkToHandler);
 
     virtual               ~oahGroup ();
 
@@ -1225,11 +1225,11 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
     // uplink
-    void                  setHandlerUpLink (
-                            S_oahHandler handlerUpLink);
+    void                  setUpLinkToHandler (
+                            S_oahHandler upLinkToHandler);
 
-    S_oahHandler          getHandlerUpLink () const
-                              { return fHandlerUpLink; }
+    S_oahHandler          getUpLinkToHandler () const
+                              { return fUpLinkToHandler; }
 
     // header
     string                getGroupHeader () const
@@ -1376,7 +1376,7 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
     // uplink
-    S_oahHandler          fHandlerUpLink;
+    S_oahHandler          fUpLinkToHandler;
 
     string                fGroupHeader;
 

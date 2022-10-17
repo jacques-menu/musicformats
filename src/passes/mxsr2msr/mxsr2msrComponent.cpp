@@ -128,7 +128,7 @@ S_mfcPassComponent createMxsr2msrComponent ()
           mfcVersionNumber::createFromString ("0.9.66"),
           "October 3, 2022",
           list<string> {
-            "Permuted the order of populateNote() and handleNoteItself() in mxsr2msrTranslator::visitEnd ( S_note& elt )"
+            "Permuted the order of populateNote() and handleNoteItself() in mxsr2msrTranslator::visitEnd (S_note& elt)"
           }
       ));
   }

@@ -58,10 +58,10 @@ class EXP bsrLineContents : public bsrElement
     // set and get
     // ------------------------------------------------------
 
-    void                  setLineContentsLineUpLink (
-                            S_bsrLine lineUpLink);
+    void                  setLineContentsUpLinkToLine (
+                            S_bsrLine upLinkToLine);
 
-    S_bsrLine             getLineContentsLineUpLink () const;
+    S_bsrLine             getLineContentsUpLinkToLine () const;
 
     bsrLineContentsKind   getLineContentsKind () const
                               { return fLineContentsKind; }
@@ -121,7 +121,7 @@ class EXP bsrLineContents : public bsrElement
     // protected fields
     // ------------------------------------------------------
 
-    S_bsrLine             fLineContentsLineUpLink;
+    S_bsrLine             fLineContentsUpLinkToLine;
 
     bsrLineContentsKind   fLineContentsKind;
 
