@@ -32,13 +32,13 @@ msrTupletElement::msrTupletElement (
 msrTupletElement::~msrTupletElement ()
 {}
 
-ostream& operator<< (ostream& os, const S_msrTupletElement& elt)
+ostream& operator << (ostream& os, const S_msrTupletElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

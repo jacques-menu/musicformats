@@ -197,7 +197,7 @@ void lpsrHeader::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   // LilyPond informations
@@ -316,13 +316,13 @@ void lpsrHeader::printShort (ostream& os) const
   print (os); // JMI
 }
 
-ostream& operator<< (ostream& os, const S_lpsrHeader& elt)
+ostream& operator << (ostream& os, const S_lpsrHeader& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

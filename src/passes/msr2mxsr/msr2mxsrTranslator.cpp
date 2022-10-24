@@ -61,9 +61,9 @@ msr2mxsrTranslator::msr2mxsrTranslator (
   fVisitedMsrScore = visitedMsrScore;
 
   // backup and forward handling
-  fCurrentPositionInMeasure = rational (0, 1);
+  fCurrentPositionInMeasure = Rational (0, 1);
 
-  fCurrentCumulatedSkipsDurations = rational (0, 1);
+  fCurrentCumulatedSkipsDurations = Rational (0, 1);
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
 };
@@ -96,9 +96,9 @@ Sxmlelement msr2mxsrTranslator::translateMsrToMxsr ()
 //________________________________________________________________________
 int msr2mxsrTranslator::wholeNotesAsDivisions (
   int             inputLineNumber,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
-  rational
+  Rational
     durationAsRational =
       wholeNotes
         /
@@ -106,7 +106,6 @@ int msr2mxsrTranslator::wholeNotesAsDivisions (
         *
       fDivisionsMultiplyingFactor
         * 4; // divisions are per quarter note
-  durationAsRational.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
@@ -2717,27 +2716,26 @@ if (false) // JMI
     elt->getPartShortestNoteTupletFactor ();
 
   // compute the divisions per quarter note
-  if (fPartShortestNoteDuration > rational (1, 4)) {
+  if (fPartShortestNoteDuration > Rational (1, 4)) {
     // the shortest duration should be a quarter note at most
-    fPartShortestNoteDuration = rational (1, 4);
+    fPartShortestNoteDuration = Rational (1, 4);
   }
 */
 
 /*
-  rational
+  Rational
     partShortestNoteTupletFactorAsRational =
       fPartShortestNoteTupletFactor.asRational ();
 */
 
-  rational
+  Rational
     divisionsPerQuarterNoteAsRational =
-      rational (1, 4)
+      Rational (1, 4)
        /
       fPartShortestNoteDuration;
-  divisionsPerQuarterNoteAsRational.rationalise ();
 
     /* JMI
-  rational
+  Rational
     rationalDivisionsPerQuarterNote =
       divisionsPerQuarterNoteAsRational
         *
@@ -2745,7 +2743,6 @@ if (false) // JMI
       divisionsPerQuarterNoteAsRational.getNumerator ()
         *
       divisionsPerQuarterNoteAsRational.getDenominator ();
-  rationalDivisionsPerQuarterNote.rationalise ();
     */
 
   // compute divisions per quarter note and multiplying factor
@@ -3164,7 +3161,7 @@ void msr2mxsrTranslator::visitStart (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
 #ifdef TRACING_IS_ENABLED
   int
@@ -3316,7 +3313,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
   string
     nextMeasureNumber =
@@ -3344,10 +3341,10 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
   fCurrentMeasureElement = nullptr;
 
   // reset the current position in the measure
-  fCurrentPositionInMeasure = rational (0, 1);
+  fCurrentPositionInMeasure = Rational (0, 1);
 
   // reset the cumulated skip durations informations
-  fCurrentCumulatedSkipsDurations = rational (0, 1);
+  fCurrentCumulatedSkipsDurations = Rational (0, 1);
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
 }
@@ -3501,7 +3498,7 @@ void msr2mxsrTranslator::visitStart (S_msrClef& elt)
           clefElement->push (
             createMxmlelement (
               k_sign,
-              "none"));
+              "[NONE]"));
         }
         break;
       case msrClefKind::kClefTreble:
@@ -3847,7 +3844,7 @@ void msr2mxsrTranslator::visitStart (S_msrKey& elt)
         fCurrentPartKey;
     }
     else {
-      gLogStream << "none";
+      gLogStream << "[NONE]";
     }
 
     gLogStream <<
@@ -4062,7 +4059,7 @@ void msr2mxsrTranslator::visitStart (S_msrTimeSignature& elt)
         fCurrentPartTimeSignature;
     }
     else {
-      gLogStream << "none";
+      gLogStream << "[NONE]";
     }
 
     gLogStream <<
@@ -4914,7 +4911,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
     theMsrNote->getInputLineNumber ();
 
   // fetch the backup duration divisions
-  rational
+  Rational
     previousNoteMeasureElementPositionInMeasure =
       fPreviousMSRNote->getMeasureElementPositionInMeasure (),
     previousNoteSoundingWholeNotes =
@@ -4925,14 +4922,13 @@ void msr2mxsrTranslator::appendABackupToMeasure (
     theMsrNoteSoundingWholeNotes =
       theMsrNote->getMeasureElementSoundingWholeNotes ();
 
-  rational
+  Rational
     backupDuration =
       previousNoteMeasureElementPositionInMeasure
         +
       previousNoteSoundingWholeNotes
         -
       theMsrNoteMeasureElementPositionInMeasure;
-  backupDuration.rationalise ();
 
   int
     backupDurationDivisions =
@@ -4967,7 +4963,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
     S_msrVoice
       noteVoice =
-        theMsrNote->fetchUpLinkToNoteToVoice ();
+        theMsrNote->fetchNoteUpLinkToVoice ();
 
     int
       noteStaffNumber =
@@ -5018,7 +5014,7 @@ void msr2mxsrTranslator::appendABackupToMeasure (
   appendOtherToMeasure (backupElement);
 
   // reset the cumulated skip durations informations
-  fCurrentCumulatedSkipsDurations = rational (0, 1);
+  fCurrentCumulatedSkipsDurations = Rational (0, 1);
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
 }
@@ -5063,7 +5059,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
           getStaffNumber (),
     noteVoiceNumber =
       theMsrNote->
-        fetchUpLinkToNoteToVoice ()->
+        fetchNoteUpLinkToVoice ()->
           getVoiceNumber ();
 
   if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
@@ -5078,7 +5074,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
     // create a forward comment
     S_msrVoice
       noteVoice =
-        theMsrNote->fetchUpLinkToNoteToVoice ();
+        theMsrNote->fetchNoteUpLinkToVoice ();
 
     stringstream s;
     s <<
@@ -5114,7 +5110,7 @@ void msr2mxsrTranslator:: appendAForwardToMeasure (
   appendOtherToMeasure (forwardElement);
 
   // reset the cumulated skip durations informations
-  fCurrentCumulatedSkipsDurations = rational (0, 1);
+  fCurrentCumulatedSkipsDurations = Rational (0, 1);
   fCurrentCumulatedSkipsStaffNumber = -1;
   fCurrentCumulatedSkipsVoiceNumber = -1;
 }
@@ -5142,7 +5138,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
         fPreviousMSRNote->asShortString ();
     }
     else {
-      gLogStream << "none";
+      gLogStream << "[NONE]";
     }
 
     gLogStream <<
@@ -5158,7 +5154,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
           getStaffNumber (),
     noteVoiceNumber =
       theMsrNote->
-        fetchUpLinkToNoteToVoice ()->
+        fetchNoteUpLinkToVoice ()->
           getVoiceNumber (),
     previousMSRNoteStaffNumber =
       fPreviousMSRNoteStaff
@@ -5187,7 +5183,7 @@ void msr2mxsrTranslator:: appendABackupOrForwardToMeasureIfNeeded (
         fPreviousMSRNote->asShortString ();
     }
     else {
-      gLogStream << "none";
+      gLogStream << "[NONE]";
     }
 
     gLogStream <<
@@ -5229,15 +5225,14 @@ fCurrentCumulatedSkipsVoiceNumber
         if (fCurrentCumulatedSkipsDurations.getNumerator () != 0) {
           // a skip may have been created due to a <backup /> to a position
           // that is not at the beginning of the measure
-          rational
+          Rational
             notePositionInMeasure =
               theMsrNote->getMeasureElementPositionInMeasure ();
 
-          rational
+          Rational
             positionAfterNoteInMeasure =
               notePositionInMeasure +
                 theMsrNote->getMeasureElementSoundingWholeNotes ();
-          positionAfterNoteInMeasure.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
           if (
@@ -6362,7 +6357,7 @@ void msr2mxsrTranslator:: appendStemToNote (
 
     switch (stemKind) {
       case msrStem::kStemNeutral:
-        stemString = "none";
+        stemString = "[NONE]";
         break;
       case msrStem::kStemUp:
         stemString = "up";
@@ -6466,7 +6461,7 @@ void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
   S_msrStaff
     noteStaff =
       theMsrNote->
-        fetchUpLinkToNoteToVoice ()->
+        fetchNoteUpLinkToVoice ()->
           getVoiceUpLinkToStaff ();
 
 #ifdef TRACING_IS_ENABLED
@@ -6480,7 +6475,7 @@ void msr2mxsrTranslator:: appendStaffToNoteIfRelevant (
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
   }
 #endif
@@ -6521,7 +6516,7 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
   // fetch theMsrNote voice
   S_msrVoice
     noteVoice =
-      theMsrNote->fetchUpLinkToNoteToVoice ();
+      theMsrNote->fetchNoteUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
@@ -6534,7 +6529,7 @@ void msr2mxsrTranslator::appendVoiceToNoteIfRelevant (
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
   }
 #endif
@@ -6963,12 +6958,12 @@ void msr2mxsrTranslator::appendDurationToNoteIfRelevant (
     noteKind =
       theMsrNote->getNoteKind ();
 
-  rational
+  Rational
     noteSoundingWholeNotes =
       theMsrNote->getMeasureElementSoundingWholeNotes ();
 
 #ifdef TRACING_IS_ENABLED
-  rational
+  Rational
     noteDisplayWholeNotes =
       theMsrNote->getNoteDisplayWholeNotes ();
 
@@ -7029,14 +7024,13 @@ void msr2mxsrTranslator::appendDurationToNoteIfRelevant (
   } // switch
 
   if (doAppendDuration) {
-    rational
+    Rational
       soundingDurationAsRational =
         noteSoundingWholeNotes
           /
         fPartShortestNoteDuration
           *
         fDivisionsMultiplyingFactor;
-    soundingDurationAsRational.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -7356,7 +7350,7 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
         // create a note comment
         S_msrVoice
           noteVoice =
-            theMsrNote->fetchUpLinkToNoteToVoice ();
+            theMsrNote->fetchNoteUpLinkToVoice ();
 
         stringstream s;
         s <<
@@ -7369,8 +7363,6 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
             noteVoice->getVoiceNumber () <<
           ", measureElementPositionInMeasure: " <<
             theMsrNote->getMeasureElementPositionInMeasure () <<
-          ", measureElementMomentInMeasure: " <<
-            theMsrNote->getMeasureElementMomentInMeasure () <<
           ", noteSoundingWholeNotes: " <<
             theMsrNote->getMeasureElementSoundingWholeNotes () <<
           ", line " << inputLineNumber <<
@@ -7611,7 +7603,7 @@ void msr2mxsrTranslator::visitEnd (S_msrNote& elt)
 #endif
 
     fPreviousMSRNote = elt;
-    fPreviousMSRNoteVoice = fPreviousMSRNote->fetchUpLinkToNoteToVoice ();
+    fPreviousMSRNoteVoice = fPreviousMSRNote->fetchNoteUpLinkToVoice ();
     fPreviousMSRNoteStaff = fPreviousMSRNoteVoice->getVoiceUpLinkToStaff ();
   }
 
@@ -7867,7 +7859,7 @@ void msr2mxsrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingHarmoniesVoice) {
   / * JMI
     // get the harmony whole notes offset
-    rational
+    Rational
       harmonyWholeNotesOffset =
         elt->getHarmonyWholeNotesOffset ();
 

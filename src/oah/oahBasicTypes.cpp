@@ -472,19 +472,19 @@ void oahOptionOrArgument::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_oahOptionOrArgument& elt)
+ostream& operator << (ostream& os, const S_oahOptionOrArgument& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
 }
 
-ostream& operator<< (ostream& os, const oahOptionOrArgument& elt)
+ostream& operator << (ostream& os, const oahOptionOrArgument& elt)
 {
   elt.print (os);
   return os;
@@ -560,19 +560,19 @@ void oahOption::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_oahOption& elt)
+ostream& operator << (ostream& os, const S_oahOption& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
 }
 
-ostream& operator<< (ostream& os, const oahOption& elt)
+ostream& operator << (ostream& os, const oahOption& elt)
 {
   elt.print (os);
   return os;
@@ -788,19 +788,19 @@ void optionsNameAndValueVectorsPlusEquals (
 //   } //for
 // }
 //
-// ostream& operator<< (ostream& os, const S_oahOptionsNamesAndValuesVector& elt)
+// ostream& operator << (ostream& os, const S_oahOptionsNamesAndValuesVector& elt)
 // {
 //   if (elt) {
 //     elt->print (os);
 //   }
 //   else {
-//     os << "*** NONE ***" << endl;
+//     os << "[NONE]" << endl;
 //   }
 
 //   return os;
 // }
 //
-// ostream& operator<< (ostream& os, const oahOptionsNamesAndValuesVector& elt)
+// ostream& operator << (ostream& os, const oahOptionsNamesAndValuesVector& elt)
 // {
 //   elt.print (os);
 //   return os;
@@ -901,19 +901,19 @@ void oahOptionsAndArguments::print (ostream& os) const
 //   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_oahOptionsAndArguments& elt)
+ostream& operator << (ostream& os, const S_oahOptionsAndArguments& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
 }
 
-ostream& operator<< (ostream& os, const oahOptionsAndArguments& elt)
+ostream& operator << (ostream& os, const oahOptionsAndArguments& elt)
 {
   elt.print (os);
   return os;
@@ -960,7 +960,7 @@ string oahHandlerUsedThruKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const oahHandlerUsedThruKind& elt)
+ostream& operator << (ostream& os, const oahHandlerUsedThruKind& elt)
 {
   os << oahHandlerUsedThruKindAsString (elt);
   return os;
@@ -1190,13 +1190,13 @@ const string oahPrefix::containingFindableElementAsString () const
 	return s.str ();
 }
 
-ostream& operator<< (ostream& os, const S_oahPrefix& elt)
+ostream& operator << (ostream& os, const S_oahPrefix& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1494,13 +1494,13 @@ void oahAtom::printAtomWithVariableOptionsValues (
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_oahAtom& elt)
+ostream& operator << (ostream& os, const S_oahAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1655,13 +1655,13 @@ void oahAtomExpectingAValue::printShort (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_oahAtomExpectingAValue& elt)
+ostream& operator << (ostream& os, const S_oahAtomExpectingAValue& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1882,13 +1882,13 @@ void oahAtomImplicitlyStoringAValue::printAtomWithVariableOptionsValues (
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_oahAtomImplicitlyStoringAValue& elt)
+ostream& operator << (ostream& os, const S_oahAtomImplicitlyStoringAValue& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -2110,13 +2110,13 @@ void oahAtomStoringAValue::printAtomWithVariableOptionsValues (
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_oahAtomStoringAValue& elt)
+ostream& operator << (ostream& os, const S_oahAtomStoringAValue& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -2247,13 +2247,13 @@ void oahPureHelpAtomWithoutAValue::printAtomWithVariableOptionsValues (
   // nothing to print here
 }
 
-ostream& operator<< (ostream& os, const S_oahPureHelpAtomWithoutAValue& elt)
+ostream& operator << (ostream& os, const S_oahPureHelpAtomWithoutAValue& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -2406,13 +2406,13 @@ void oahPureHelpAtomExpectingAValue::printHelp (ostream& os) const
   }
 }
 
-ostream& operator<< (ostream& os, const S_oahPureHelpAtomExpectingAValue& elt)
+ostream& operator << (ostream& os, const S_oahPureHelpAtomExpectingAValue& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -3367,13 +3367,13 @@ void oahSubGroup::printSubGroupOptionsValuesAll (
   }
 }
 
-ostream& operator<< (ostream& os, const S_oahSubGroup& elt)
+ostream& operator << (ostream& os, const S_oahSubGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -4375,13 +4375,13 @@ void oahGroup::findStringInGroup (
   }
 }
 
-ostream& operator<< (ostream& os, const S_oahGroup& elt)
+ostream& operator << (ostream& os, const S_oahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -5587,7 +5587,7 @@ void oahHandler::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
   // launch command
@@ -6234,7 +6234,7 @@ void oahHandler::includeOptionsFileInHandler (
     s <<
       "Could not open options file \"" <<
       optionsFileName <<
-      "\" for reading, quitting";
+      "\" for reading - quitting";
 
     string message = s.str ();
 
@@ -6499,13 +6499,13 @@ void oahHandler::printIncludeFileNamesStack (
   }
 }
 
-ostream& operator<< (ostream& os, const S_oahHandler& elt)
+ostream& operator << (ostream& os, const S_oahHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -6753,7 +6753,7 @@ void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
   }
   else {
     os <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -6834,7 +6834,7 @@ void oahHandler::displayNamesToElementsMap (ostream& os) const
   }
   else {
     os <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -6889,7 +6889,7 @@ void oahHandler::displayNamesToElementsMap (ostream& os) const
   }
   else {
     os <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -9606,7 +9606,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
       includeFileName <<
       "]: more than " <<
       pIncludeFilesMaximumLevel <<
-      " include levels, quitting";
+      " include levels - quitting";
 
     string message = s.str ();
 
@@ -9641,7 +9641,7 @@ void oahHandler::includeOptionsAndArgumentsFile (
     s <<
       "Could not open options and arguments file \"" <<
       includeFileName <<
-      "\" for reading, quitting";
+      "\" for reading - quitting";
 
     string message = s.str ();
 

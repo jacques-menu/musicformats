@@ -589,13 +589,13 @@ void msr2lilypondInsiderHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msr2lilypondInsiderHandler& elt)
+ostream& operator << (ostream& os, const S_msr2lilypondInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

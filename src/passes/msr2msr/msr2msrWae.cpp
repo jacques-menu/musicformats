@@ -12,6 +12,8 @@
 #include "mfStringsHandling.h"
 #include "mfIndentedTextOutput.h"
 
+#include "enableAbortToDebugErrors.h"
+
 #include "oahEarlyOptions.h"
 
 #include "wae.h"

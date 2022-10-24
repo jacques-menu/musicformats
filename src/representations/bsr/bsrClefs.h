@@ -111,7 +111,7 @@ class EXP bsrClef : public bsrLineContentsElement
     S_bsrCellsList        fClefCellsList;
 };
 typedef SMARTP<bsrClef> S_bsrClef;
-EXP ostream& operator<< (ostream& os, const S_bsrClef& elt);
+EXP ostream& operator << (ostream& os, const S_bsrClef& elt);
 
 
 }

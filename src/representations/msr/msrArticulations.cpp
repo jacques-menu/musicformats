@@ -205,13 +205,13 @@ void msrArticulation::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrArticulation& elt)
+ostream& operator << (ostream& os, const S_msrArticulation& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -355,13 +355,13 @@ void msrFermata::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrFermata& elt)
+ostream& operator << (ostream& os, const S_msrFermata& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -470,13 +470,13 @@ void msrArpeggiato::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrArpeggiato& elt)
+ostream& operator << (ostream& os, const S_msrArpeggiato& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -605,13 +605,13 @@ void msrNonArpeggiato::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrNonArpeggiato& elt)
+ostream& operator << (ostream& os, const S_msrNonArpeggiato& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

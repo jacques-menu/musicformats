@@ -10,11 +10,11 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class bsrTimeSignatureItem;
 typedef SMARTP<bsrTimeSignatureItem> S_bsrTimeSignatureItem;
 
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class bsrTimeSignature;
 typedef SMARTP<bsrTimeSignature> S_bsrTimeSignature;
 
@@ -91,7 +91,7 @@ class EXP bsrTimeSignatureItem : public bsrElement
     int                   fTimeSignatureBeatValue;
 };
 typedef SMARTP<bsrTimeSignatureItem> S_bsrTimeSignatureItem;
-EXP ostream& operator<< (ostream& os, const S_bsrTimeSignatureItem& elt);
+EXP ostream& operator << (ostream& os, const S_bsrTimeSignatureItem& elt);
 
 //______________________________________________________________________________
 class EXP bsrTimeSignature : public bsrLineContentsElement
@@ -200,7 +200,7 @@ class EXP bsrTimeSignature : public bsrLineContentsElement
     vector<S_bsrTimeSignatureItem> fTimeSignatureItemsVector;
 };
 typedef SMARTP<bsrTimeSignature> S_bsrTimeSignature;
-EXP ostream& operator<< (ostream& os, const S_bsrTimeSignature& elt);
+EXP ostream& operator << (ostream& os, const S_bsrTimeSignature& elt);
 
 
 }

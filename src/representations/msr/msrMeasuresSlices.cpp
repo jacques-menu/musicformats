@@ -57,7 +57,7 @@ string noteEventKindAsString (
 
 //______________________________________________________________________________
 S_msrNoteEvent msrNoteEvent::create (
-  const rational&  noteEventPositionInMeasure,
+  const Rational&  noteEventPositionInMeasure,
   S_msrNote        noteEventNote,
   msrNoteEventKind noteEventKind)
 {
@@ -71,7 +71,7 @@ S_msrNoteEvent msrNoteEvent::create (
 }
 
 msrNoteEvent::msrNoteEvent (
-  const rational& noteEventPositionInMeasure,
+  const Rational& noteEventPositionInMeasure,
   S_msrNote        noteEventNote,
   msrNoteEventKind noteEventKind)
 {
@@ -91,7 +91,7 @@ bool msrNoteEvent::compareNotesEventsByIncreasingPositionInMeasure (
   // start events with the same position in measure
   bool result = false;
 
-  rational
+  Rational
     firstPositionInMeasure =
       first->
         getNoteEventPositionInMeasure (),
@@ -143,9 +143,11 @@ bool msrNoteEvent::compareNotesEventsByIncreasingPositionInMeasure (
 
   else {
     result =
-      firstPositionInMeasure
-        <
-      secondPositionInMeasure;
+      bool (
+        firstPositionInMeasure
+          <
+        secondPositionInMeasure
+      );
   }
 
   return result;
@@ -174,7 +176,7 @@ string msrNoteEvent::asString () const
   S_msrVoice
     voice =
       fNoteEventNote->
-        fetchUpLinkToNoteToVoice ();
+        fetchNoteUpLinkToVoice ();
 
   if (voice) {
     gLogStream <<
@@ -193,21 +195,21 @@ void msrNoteEvent::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrNoteEvent& elt)
+ostream& operator << (ostream& os, const S_msrNoteEvent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrSimultaneousNotesChunk msrSimultaneousNotesChunk::create (
-  const rational& chunkPositionInMeasure)
+  const Rational& chunkPositionInMeasure)
 {
   msrSimultaneousNotesChunk* o = new
     msrSimultaneousNotesChunk (
@@ -217,7 +219,7 @@ S_msrSimultaneousNotesChunk msrSimultaneousNotesChunk::create (
 }
 
 msrSimultaneousNotesChunk::msrSimultaneousNotesChunk (
-  const rational& chunkPositionInMeasure)
+  const Rational& chunkPositionInMeasure)
 {
   fChunkPositionInMeasure = chunkPositionInMeasure;
 }
@@ -230,9 +232,11 @@ bool msrSimultaneousNotesChunk::compareSimultaneousNotesChunksByIncreasingPositi
   const SMARTP<msrNoteEvent>& second)
 {
   return
-    first->getNoteEventPositionInMeasure ()
-      <
-    second->getNoteEventPositionInMeasure ();
+    bool (
+      first->getNoteEventPositionInMeasure ()
+        <
+      second->getNoteEventPositionInMeasure ()
+    );
 }
 
 string msrSimultaneousNotesChunk::asString () const
@@ -279,15 +283,15 @@ void msrSimultaneousNotesChunk::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrSimultaneousNotesChunk& elt)
+ostream& operator << (ostream& os, const S_msrSimultaneousNotesChunk& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -482,7 +486,7 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
       } // switch
 
       if (doKeepTheNote) {
-        rational
+        Rational
           notePositionInMeasure =
             note->
               getMeasureElementPositionInMeasure ();
@@ -501,13 +505,12 @@ void msrMeasuresSlice::collectNonSkipNotesFromMeasuresSliceMeasures ()
         fSliceNoteEventsList.push_back (noteStartEvent);
 
         // append a note stop event to the slice notes events list
-        rational
+        Rational
           noteEndPositionInMeasure =
             notePositionInMeasure
               +
             note->
               getMeasureElementSoundingWholeNotes ();
-        noteEndPositionInMeasure.rationalise ();
 
         S_msrNoteEvent
           noteStopEvent =
@@ -552,8 +555,8 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
   S_msrSimultaneousNotesChunk
     currentSimultaneousNotesChunk;
 
-  rational
-    currentChunkPositionInMeasure = rational (-1, 1);
+  Rational
+    currentChunkPositionInMeasure = Rational (-1, 1);
 
   for (
     list<S_msrNoteEvent>::const_iterator i = fSliceNoteEventsList.begin ();
@@ -562,7 +565,7 @@ void msrMeasuresSlice::buildTheSimutaneousNotesChunksList ()
   ) {
     S_msrNoteEvent noteEvent = (*i);
 
-    rational
+    Rational
       noteEventPositionInMeasure =
         noteEvent->
           getNoteEventPositionInMeasure ();
@@ -628,7 +631,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
     S_msrNoteEvent noteEvent = (*i);
 
     // handle the note event
-//     rational JMI
+//     Rational JMI
 //       noteEventPositionInMeasure =
 //         noteEvent->
 //           getNoteEventPositionInMeasure ();
@@ -664,7 +667,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
             S_msrVoice
               voice =
                 note->
-                  fetchUpLinkToNoteToVoice ();
+                  fetchNoteUpLinkToVoice ();
 
             if (voice) {
               gLogStream <<
@@ -692,7 +695,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
               S_msrVoice
                 voice =
                   note->
-                    fetchUpLinkToNoteToVoice ();
+                    fetchNoteUpLinkToVoice ();
 
               if (voice) {
                 gLogStream <<
@@ -761,7 +764,7 @@ void msrMeasuresSlice::identifySoloNotesAndRestsInMeasuresSlice ()
                       S_msrVoice
                         voice =
                           note->
-                            fetchUpLinkToNoteToVoice ();
+                            fetchNoteUpLinkToVoice ();
 
                       if (voice) {
                         gLogStream <<
@@ -1049,15 +1052,15 @@ void msrMeasuresSlice::printShort (ostream& os) const
   print (os);
 }
 
-ostream& operator<< (ostream& os, const S_msrMeasuresSlice& elt)
+ostream& operator << (ostream& os, const S_msrMeasuresSlice& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1417,15 +1420,15 @@ void msrMeasuresSlicesSequence::printShort (ostream& os) const
   print (os);
 }
 
-ostream& operator<< (ostream& os, const S_msrMeasuresSlicesSequence& elt)
+ostream& operator << (ostream& os, const S_msrMeasuresSlicesSequence& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

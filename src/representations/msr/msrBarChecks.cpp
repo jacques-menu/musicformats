@@ -177,13 +177,13 @@ void msrBarCheck::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrBarCheck& elt)
+ostream& operator << (ostream& os, const S_msrBarCheck& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

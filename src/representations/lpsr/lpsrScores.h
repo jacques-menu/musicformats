@@ -532,7 +532,7 @@ class EXP lpsrScore : public lpsrElement
                           fScoreSchemeFunctionsMap;
 };
 typedef SMARTP<lpsrScore> S_lpsrScore;
-EXP ostream& operator<< (ostream& os, const S_lpsrScore& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrScore& elt);
 
 
 }

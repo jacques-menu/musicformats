@@ -106,13 +106,13 @@ void lpsrRepeatDescr::print (ostream& os)
     endl;
 }
 
-ostream& operator<< (ostream& os, S_lpsrRepeatDescr& elt)
+ostream& operator << (ostream& os, S_lpsrRepeatDescr& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -238,7 +238,7 @@ if (false) // JMI
         "'";
     }
     else {
-      gLogStream << "none";
+      gLogStream << "[NONE]";
     }
     gLogStream << endl;
   }
@@ -254,7 +254,7 @@ if (false) // JMI
   fCurrentVoiceMeasuresCounter = -1;
 
   // durations
-  fLastMetWholeNotes = rational (0, 1);
+  fLastMetWholeNotes = Rational (0, 1);
 
   // notes
   fCurrentNotePrinObjectKind =
@@ -326,7 +326,7 @@ void lpsr2lilypondTranslator::setCurrentOctaveEntryReferenceFromTheLilypondOah (
         "'";
     }
     else {
-      gLogStream << "none";
+      gLogStream << "[NONE]";
     }
     gLogStream << endl;
   }
@@ -1065,9 +1065,9 @@ stringstream s;
 //________________________________________________________________________
 string lpsr2lilypondTranslator::durationAsLilypondString (
   int             inputLineNumber,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
-  string result;
+  string result; // JMI v0.9.66
 
   Bool generateExplicitDuration;
 
@@ -1357,7 +1357,7 @@ void lpsr2lilypondTranslator::generateNoteLigatures (
             S_msrVoice
               noteVoice =
                 note->
-                  fetchUpLinkToNoteToVoice ();
+                  fetchNoteUpLinkToVoice ();
 
             // determine vertical flipping factor
             int ligatureVerticalFlippingFactor = 0;
@@ -1960,7 +1960,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInMeasure (
   fLilypondCodeStream <<
     notePitchAsLilypondString (note);
 
-  rational
+  Rational
     noteSoundingWholeNotes =
       note->
         getMeasureElementSoundingWholeNotes ();
@@ -2088,7 +2088,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
   else {
     // unpitched rest
     // get the note sounding whole notes
-    rational
+    Rational
       noteSoundingWholeNotes =
         note->getMeasureElementSoundingWholeNotes ();
 
@@ -2096,7 +2096,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
     S_msrVoice
       noteVoice =
         note->
-          fetchUpLinkToNoteToVoice ();
+          fetchNoteUpLinkToVoice ();
 
     // generate the rest name and duration
     if (note->getNoteOccupiesAFullMeasure ()) {
@@ -2174,7 +2174,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteRestInMeasure (
 
 /* JMI BOF
       if (fOnGoingVoiceCadenza) { // JMI
-        if (noteSoundingWholeNotes != rational (1, 1)) {
+        if (noteSoundingWholeNotes != Rational (1, 1)) {
           / * JMI
           // force the generation of the duration if needed
           if (! gGlobalLpsr2lilypondOahGroup->getAllDurations ()) {
@@ -2312,7 +2312,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteUnpitchedInMeasure (
   fLilypondCodeStream <<
       "e";
 
-  rational
+  Rational
     noteSoundingWholeNotes =
       note->
         getMeasureElementSoundingWholeNotes ();
@@ -3933,9 +3933,9 @@ void lpsr2lilypondTranslator::generateOrnament (
     case msrOrnament::kOrnamentDelayedTurn:
       {
         // c2*2/3  s2*1/3\turn
-        rational
+        Rational
           remainingFraction =
-            rational (1, 1)
+            Rational (1, 1)
               -
             gGlobalLpsr2lilypondOahGroup->getDelayedOrnamentsFraction ();
 
@@ -3972,7 +3972,7 @@ void lpsr2lilypondTranslator::generateOrnament (
 
         // forget about the last found whole notes duration,
         // since the latter has been multipled by fDelayedOrnamentsFraction
-        fLastMetWholeNotes = rational (0, 1);
+        fLastMetWholeNotes = Rational (0, 1);
       }
       break;
 
@@ -4641,7 +4641,7 @@ string lpsr2lilypondTranslator::harmonyAsLilypondString (
         harmony->
           getHarmonyDisplayWholeNotes ()) <<
       "*" <<
-      rational (1, 1) / harmonyTupletFactor.asRational ();
+      Rational (1, 1) / harmonyTupletFactor.asRational ();
   }
 
   // generate harmony kind
@@ -11430,11 +11430,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoice& elt)
 
   // force durations to be displayed explicitly
   // at the beginning of the voice
-  fLastMetWholeNotes = rational (0, 1);
+  fLastMetWholeNotes = Rational (0, 1);
 
   // reset current stem kind
   fCurrentStemKind = msrStem::kStemNeutral; // default value
-
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrVoice& elt)
@@ -12089,7 +12088,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
   msrMeasureKind
     measureKind =
@@ -12290,20 +12289,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone: // JMI v0.9.63
-      {
-        ++fCurrentVoiceMeasuresCounter;
-
-        // generate '\partial' at the middle of a voice
-        string
-          upbeatDuration =
-            wholeNotesAsLilypondString (
-              inputLineNumber,
-              elt->getCurrentMeasureWholeNotesDuration ());
-
-        fLilypondCodeStream <<
-          "\\partial " << upbeatDuration <<
-          endl;
-      }
+			++fCurrentVoiceMeasuresCounter;
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart:
@@ -12330,7 +12316,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
   // force durations to be displayed explicitly
   // for the notes at the beginning of the measure
-  fLastMetWholeNotes = rational (0, 1);
+  fLastMetWholeNotes = Rational (0, 1);
 
   // is this the end of a cadenza?
   if (
@@ -12387,7 +12373,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
 
     case msrMeasureKind::kMeasureKindAnacrusis:
       if (elt->getMeasureFirstInVoice ()) {
-        // only generate '\partial' at the beginning of a voice
+        // only generate '\partial' at the beginning of a voice // this code SUPERFLOUS??? JMI v0.9.66
         string
           upbeatDuration =
             wholeNotesAsLilypondString (
@@ -12401,8 +12387,12 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
-      if (elt->getMeasureFirstInVoice ()) {
-        // only generate '\partial' at the beginning of a voice
+      if (
+      	elt->getMeasureFirstInVoice ()
+          &&
+        elt->fetchMeasureUpLinkToScore ()->getScoreNumberOfMeasures () > 1
+      ) {
+        // don't generate '\partial' at the beginning of a voice
         string
           upbeatDuration =
             wholeNotesAsLilypondString (
@@ -12422,19 +12412,18 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHookedEnding:
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       {
-        rational
+        Rational
           currentMeasureWholeNotesDuration =
             elt->getCurrentMeasureWholeNotesDuration ();
 
-        rational
+        Rational
           fullMeasureWholeNotesDuration =
             elt->getFullMeasureWholeNotesDuration ();
 
         // we should set the score current measure whole notes in this case
-        rational
+        Rational
           ratioToFullMeasureWholeNotesDuration =
             currentMeasureWholeNotesDuration / fullMeasureWholeNotesDuration;
-        ratioToFullMeasureWholeNotesDuration.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
@@ -12461,7 +12450,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         }
 #endif
 
-        if (ratioToFullMeasureWholeNotesDuration == rational (1, 1)) {
+        if (ratioToFullMeasureWholeNotesDuration == Rational (1, 1)) {
           stringstream s;
 
           s <<
@@ -12549,7 +12538,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
               getVoiceUpLinkToStaff ()->
                 getStaffUpLinkToPart ();
 
-        rational
+        Rational
           measureWholeNotesDuration =
             measurePart->
               fetchPartMeasuresWholeNotesDurationsVectorAt (
@@ -12613,7 +12602,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
   msrMeasureKind
     measureKind =
@@ -17202,7 +17191,7 @@ slash = \tweak Flag.stroke-style grace \etc
 
   // force durations to be displayed explicitly
   // at the beginning of the grace notes
-  fLastMetWholeNotes = rational (0, 1);
+  fLastMetWholeNotes = Rational (0, 1);
 
   // generate the notes in the grace notes group
   const list<S_msrMeasureElement>&
@@ -17340,7 +17329,7 @@ slash = \tweak Flag.stroke-style grace \etc
 
   // force durations to be displayed explicitly
   // at the end of the grace notes
-  fLastMetWholeNotes = rational (0, 1);
+  fLastMetWholeNotes = Rational (0, 1);
 }
 
 //________________________________________________________________________
@@ -17567,7 +17556,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrAfterGraceNotesGroupContents& elt
 
   // force durations to be displayed explicitly
   // at the beginning of the after grace notes contents
-  fLastMetWholeNotes = rational (0, 1);
+  fLastMetWholeNotes = Rational (0, 1);
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrAfterGraceNotesGroupContents& elt)
@@ -17853,7 +17842,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
                 upLinkToGraceNotesGroup->asString ();
             }
             else {
-              gLogStream << "none";
+              gLogStream << "[NONE]";
             }
             gLogStream << endl;
           }
@@ -18783,11 +18772,11 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
           switch (technicalWithString->getTechnicalWithStringTypeKind ()) {
             case msrTechnicalTypeKind::kTechnicalTypeStart:
               {
-                rational
+                Rational
                   noteSoundingWholeNotes =
                     note->getMeasureElementSoundingWholeNotes ();
 
-                rational
+                Rational
                   halfWholeNotes =
                     noteSoundingWholeNotes /2;
 
@@ -18815,11 +18804,11 @@ void lpsr2lilypondTranslator::generateNoteTechnicalsWithStrings (
           switch (technicalWithString->getTechnicalWithStringTypeKind ()) {
             case msrTechnicalTypeKind::kTechnicalTypeStart:
               {
-                rational
+                Rational
                   noteSoundingWholeNotes =
                     note->getMeasureElementSoundingWholeNotes ();
 
-                rational
+                Rational
                   halfWholeNotes =
                     noteSoundingWholeNotes /2;
 
@@ -20085,7 +20074,7 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
   }
   else {
     gLogStream <<
-      "*** NONE ***";
+      "[NONE]";
   }
   gLogStream << endl;
 */
@@ -20448,7 +20437,7 @@ void lpsr2lilypondTranslator::generateCodeRightAfterChordContents (
   }
   else {
     gLogStream <<
-      "*** NONE ***";
+      "[NONE]";
   }
   gLogStream << endl;
 
@@ -21335,7 +21324,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
     tupletShowTypeKind =
       elt->getTupletShowTypeKind ();
 
-  rational
+  Rational
     memberNoteDisplayWholeNotes =
       elt->getMemberNotesDisplayWholeNotes ();
 
@@ -21386,7 +21375,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
   // force durations to be displayed explicitly
   // at the beginning of the tuplet
-  fLastMetWholeNotes = rational (0, 1);
+  fLastMetWholeNotes = Rational (0, 1);
 }
 
 void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
@@ -23554,7 +23543,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMultipleFullBarRests& elt)
 #endif
 
   // get multiple full-bar rests sounding notes JMI USELESS v0.9.63
-  rational
+  Rational
     multipleFullBarRestsMeasureSoundingNotes =
       elt->fetchMultipleFullBarRestsMeasureSoundingNotes ();
 

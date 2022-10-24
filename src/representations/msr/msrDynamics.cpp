@@ -138,13 +138,13 @@ void msrDynamic::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrDynamic& elt)
+ostream& operator << (ostream& os, const S_msrDynamic& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -247,13 +247,13 @@ void msrOtherDynamic::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrOtherDynamic& elt)
+ostream& operator << (ostream& os, const S_msrOtherDynamic& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -277,7 +277,7 @@ string crescDecrescKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrCrescDecrescKind& elt)
+ostream& operator << (ostream& os, const msrCrescDecrescKind& elt)
 {
   os << crescDecrescKindAsString (elt);
   return os;
@@ -364,13 +364,13 @@ void msrCrescDecresc::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrCrescDecresc& elt)
+ostream& operator << (ostream& os, const S_msrCrescDecresc& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -400,7 +400,7 @@ string wedgeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrWedgeKind& elt)
+ostream& operator << (ostream& os, const msrWedgeKind& elt)
 {
   os << wedgeKindAsString (elt);
   return os;
@@ -423,7 +423,7 @@ string wedgeNienteKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrWedgeNienteKind& elt)
+ostream& operator << (ostream& os, const msrWedgeNienteKind& elt)
 {
   os << wedgeNienteKindAsString (elt);
   return os;
@@ -545,13 +545,13 @@ void msrWedge::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrWedge& elt)
+ostream& operator << (ostream& os, const S_msrWedge& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

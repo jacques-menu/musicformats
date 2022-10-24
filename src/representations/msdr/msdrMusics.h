@@ -140,7 +140,7 @@ class EXP msdrMusic : public smartable
     Bool                  fMusicHasBeenFinalized;
 };
 typedef SMARTP<msdrMusic> S_msdrMusic;
-EXP ostream& operator<< (ostream& os, const S_msdrMusic& elt);
+EXP ostream& operator << (ostream& os, const S_msdrMusic& elt);
 
 
 }

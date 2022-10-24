@@ -697,7 +697,7 @@ void oahEarlyOptions::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
 #ifdef TRACING_IS_ENABLED
@@ -726,7 +726,7 @@ void oahEarlyOptions::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const oahEarlyOptions& elt)
+ostream& operator << (ostream& os, const oahEarlyOptions& elt)
 {
   elt.print (os);
   return os;

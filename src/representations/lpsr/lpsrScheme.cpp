@@ -211,7 +211,7 @@ void lpsrSchemeVariable::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrSchemeVariable& schemeVariable)
+ostream& operator << (ostream& os, const S_lpsrSchemeVariable& schemeVariable)
 {
   schemeVariable->print (os);
   return os;
@@ -322,7 +322,7 @@ void lpsrSchemeFunction::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrSchemeFunction& schemeFunction)
+ostream& operator << (ostream& os, const S_lpsrSchemeFunction& schemeFunction)
 {
   schemeFunction->print (os);
   return os;

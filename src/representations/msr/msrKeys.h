@@ -107,7 +107,7 @@ class EXP msrHumdrumScotKeyItem : public msrElement
     msrOctaveKind         fKeyOctaveKind;
 };
 typedef SMARTP<msrHumdrumScotKeyItem> S_msrHumdrumScotKeyItem;
-EXP ostream& operator<< (ostream& os, const S_msrHumdrumScotKeyItem& elt);
+EXP ostream& operator << (ostream& os, const S_msrHumdrumScotKeyItem& elt);
 
 //______________________________________________________________________________
 class msrKey;
@@ -236,7 +236,7 @@ class EXP msrKey : public msrMeasureElement
     Bool                  fKeyItemsOctavesAreSpecified;
 };
 typedef SMARTP<msrKey> S_msrKey;
-EXP ostream& operator<< (ostream& os, const S_msrKey& elt);
+EXP ostream& operator << (ostream& os, const S_msrKey& elt);
 
 
 } // namespace MusicFormats

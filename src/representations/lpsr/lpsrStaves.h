@@ -80,7 +80,7 @@ class EXP lpsrNewStaffgroupBlock : public lpsrElement
     vector<S_msrElement> fNewStaffgroupElements;
 };
 typedef SMARTP<lpsrNewStaffgroupBlock> S_lpsrNewStaffgroupBlock;
-EXP ostream& operator<< (ostream& os, const S_lpsrNewStaffgroupBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrNewStaffgroupBlock& elt);
 
 //______________________________________________________________________________
 class EXP lpsrNewStaffTuningBlock : public lpsrElement
@@ -143,7 +143,7 @@ class EXP lpsrNewStaffTuningBlock : public lpsrElement
     S_msrStaffTuning fStaffTuning;
 };
 typedef SMARTP<lpsrNewStaffTuningBlock> S_lpsrNewStaffTuningBlock;
-EXP ostream& operator<< (ostream& os, const S_lpsrNewStaffTuningBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrNewStaffTuningBlock& elt);
 
 //______________________________________________________________________________
 class EXP lpsrNewStaffBlock : public lpsrElement
@@ -201,7 +201,7 @@ class EXP lpsrNewStaffBlock : public lpsrElement
     vector<S_msrElement> fNewStaffElements;
 };
 typedef SMARTP<lpsrNewStaffBlock> S_lpsrNewStaffBlock;
-EXP ostream& operator<< (ostream& os, const S_lpsrNewStaffBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrNewStaffBlock& elt);
 
 //______________________________________________________________________________
 class EXP lpsrStaffBlock : public lpsrElement
@@ -301,7 +301,7 @@ class EXP lpsrStaffBlock : public lpsrElement
     string                fStaffBlockShortInstrumentName;
 };
 typedef SMARTP<lpsrStaffBlock> S_lpsrStaffBlock;
-EXP ostream& operator<< (ostream& os, const S_lpsrStaffBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrStaffBlock& elt);
 
 
 }

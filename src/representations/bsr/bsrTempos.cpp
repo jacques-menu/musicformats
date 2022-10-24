@@ -247,7 +247,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
           if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
             gLogStream <<
               "There are " << smSize << " matches" <<
-              " for rational string '" << tempoPerMinuteString <<
+              " for Rational string '" << tempoPerMinuteString <<
               "' with regex '" << regularExpression <<
               "'" <<
               endl;
@@ -291,7 +291,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             if (gGlobalTracingOahGroup->getTraceTempos () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
               gLogStream <<
                 "There are " << smSize << " matches" <<
-                " for rational string '" << tempoPerMinuteString <<
+                " for Rational string '" << tempoPerMinuteString <<
                 "' with regex '" << regularExpression <<
                 "'" <<
                 endl;
@@ -527,13 +527,13 @@ void bsrTempo::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrTempo& elt)
+ostream& operator << (ostream& os, const S_bsrTempo& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

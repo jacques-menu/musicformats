@@ -95,7 +95,7 @@ class EXP bsrPageElement : public bsrElement
  // JMI   int                   fSpacesAfter;
 };
 typedef SMARTP<bsrPageElement> S_bsrPageElement;
-EXP ostream& operator<< (ostream& os, const S_bsrPageElement& elt);
+EXP ostream& operator << (ostream& os, const S_bsrPageElement& elt);
 
 
 }

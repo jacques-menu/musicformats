@@ -164,7 +164,7 @@ class EXP displayOahGroup : public oahGroup
     S_oahBooleanAtom      fDisplayCPUusageAtom;
 };
 typedef SMARTP<displayOahGroup> S_displayOahGroup;
-EXP ostream& operator<< (ostream& os, const S_displayOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_displayOahGroup& elt);
 
 EXP extern S_displayOahGroup gGlobalDisplayOahGroup;
 

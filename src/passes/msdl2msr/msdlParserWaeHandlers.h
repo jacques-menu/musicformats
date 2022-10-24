@@ -89,7 +89,7 @@ class EXP msdlParserWaeHandler : public waeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserWaeHandler> S_msdlParserWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlParserWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlParserWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserEnglishWaeHandler : public msdlParserWaeHandler
@@ -156,7 +156,7 @@ class EXP msdlParserEnglishWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserEnglishWaeHandler> S_msdlParserEnglishWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlParserEnglishWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlParserEnglishWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserFrenchWaeHandler : public msdlParserWaeHandler
@@ -223,7 +223,7 @@ class EXP msdlParserFrenchWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserFrenchWaeHandler> S_msdlParserFrenchWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlParserFrenchWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlParserFrenchWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserItalianWaeHandler : public msdlParserWaeHandler
@@ -290,7 +290,7 @@ class EXP msdlParserItalianWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserItalianWaeHandler> S_msdlParserItalianWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlParserItalianWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlParserItalianWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserGermanWaeHandler : public msdlParserWaeHandler
@@ -357,7 +357,7 @@ class EXP msdlParserGermanWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserGermanWaeHandler> S_msdlParserGermanWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlParserGermanWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlParserGermanWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserSpanishWaeHandler : public msdlParserWaeHandler
@@ -424,7 +424,7 @@ class EXP msdlParserSpanishWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserSpanishWaeHandler> S_msdlParserSpanishWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlParserSpanishWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlParserSpanishWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserDutchWaeHandler : public msdlParserWaeHandler
@@ -491,7 +491,7 @@ class EXP msdlParserDutchWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserDutchWaeHandler> S_msdlParserDutchWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlParserDutchWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlParserDutchWaeHandler& elt);
 
 
 }

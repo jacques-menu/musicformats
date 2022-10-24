@@ -129,7 +129,7 @@ class EXP mfServiceRunData : public smartable
   // JMIJMIJMI
 };
 typedef SMARTP<mfServiceRunData> S_mfServiceRunData;
-EXP ostream& operator<< (ostream& os, const S_mfServiceRunData& elt);
+EXP ostream& operator << (ostream& os, const S_mfServiceRunData& elt);
 
 EXP extern S_mfServiceRunData gGlobalServiceRunData;
 

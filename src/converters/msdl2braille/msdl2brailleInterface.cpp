@@ -136,7 +136,7 @@ mfMusicformatsError convertMsdlStream2brailleWithHandler (
       s <<
         "Could not perform comversion of \"" <<
         inputSourceName <<
-        "\" to MSR, quitting";
+        "\" to MSR - quitting";
 
       string message = s.str ();
 
@@ -399,7 +399,7 @@ mfMusicformatsError convertMsdlStream2brailleWithHandler (
         s <<
           "Could not open Braille output file \"" <<
           outputFileName <<
-          "\" for writing, quitting";
+          "\" for writing - quitting";
 
         string message = s.str ();
 
@@ -617,7 +617,7 @@ EXP mfMusicformatsError convertMsdlFile2brailleWithOptionsAndArguments (
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
-      "\" for reading, quitting";
+      "\" for reading - quitting";
 
     string message = s.str ();
 
@@ -664,7 +664,7 @@ mfMusicformatsError convertMsdlFile2brailleWithHandler (
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
-      "\" for reading, quitting";
+      "\" for reading - quitting";
 
     string message = s.str ();
 

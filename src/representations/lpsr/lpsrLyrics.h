@@ -90,7 +90,7 @@ class EXP lpsrNewLyricsBlock : public lpsrElement
     S_msrVoice            fVoice;
 };
 typedef SMARTP<lpsrNewLyricsBlock> S_lpsrNewLyricsBlock;
-EXP ostream& operator<< (ostream& os, const S_lpsrNewLyricsBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrNewLyricsBlock& elt);
 
 
 }

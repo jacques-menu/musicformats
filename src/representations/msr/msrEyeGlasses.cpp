@@ -114,13 +114,13 @@ void msrEyeGlasses::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrEyeGlasses& elt)
+ostream& operator << (ostream& os, const S_msrEyeGlasses& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

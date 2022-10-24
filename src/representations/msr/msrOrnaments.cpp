@@ -215,13 +215,13 @@ void msrOrnament::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrOrnament& elt)
+ostream& operator << (ostream& os, const S_msrOrnament& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

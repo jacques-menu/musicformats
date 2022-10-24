@@ -188,13 +188,13 @@ void msrStaffTuning::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrStaffTuning& elt)
+ostream& operator << (ostream& os, const S_msrStaffTuning& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -454,13 +454,13 @@ void msrStaffDetails::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrStaffDetails& elt)
+ostream& operator << (ostream& os, const S_msrStaffDetails& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

@@ -125,13 +125,13 @@ void msrSingleTremolo::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrSingleTremolo& elt)
+ostream& operator << (ostream& os, const S_msrSingleTremolo& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

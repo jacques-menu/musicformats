@@ -391,7 +391,7 @@ void write_wstring (ostream& os, wstring wstr )
   } // for
 }
 
-ostream& operator<< (ostream& os, const wstring& wstr)
+ostream& operator << (ostream& os, const wstring& wstr)
 {
   for (size_t i = 0; i < wstr.size (); ++i) {
     wchar_t cell = wstr [i];
@@ -668,7 +668,7 @@ string bsrCellKindAsString (bsrCellKind cellKind)
   return bsrCellKindAsShortString (cellKind);
 }
 
-ostream& operator<< (ostream& os, const bsrCellKind& elt)
+ostream& operator << (ostream& os, const bsrCellKind& elt)
 {
   os << bsrCellKindAsString (elt);
   return os;

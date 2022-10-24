@@ -163,7 +163,7 @@ class EXP msdl2brailleRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdl2brailleRegularHandler> S_msdl2brailleRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_msdl2brailleRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdl2brailleRegularHandler& elt);
 
 
 }

@@ -539,7 +539,7 @@ void msrScore::printFull (ostream& os) const
   }
   else {
     os <<
-      " : " << "none" <<
+      " : " << "[NONE]" <<
       endl;
   }
   os << endl;
@@ -571,7 +571,7 @@ void msrScore::printFull (ostream& os) const
   }
   else {
     os <<
-      " : " << "none" <<
+      " : " << "[NONE]" <<
       endl;
   }
 
@@ -685,7 +685,7 @@ void msrScore::printShort (ostream& os) const
   }
   else {
     os <<
-      " : " << "none" <<
+      " : " << "[NONE]" <<
       endl;
   }
   os << endl;
@@ -893,13 +893,13 @@ void msrScore::printSlices (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrScore& elt)
+ostream& operator << (ostream& os, const S_msrScore& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

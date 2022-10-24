@@ -392,13 +392,13 @@ Note that:
 
 Most classes in \mf\ can be printed with the {\tt <<} operator:
 \begin{lstlisting}[language=CPlusPlus]
-ostream& operator<< (ostream& os, const S_msrElement& elt)
+ostream& operator << (ostream& os, const S_msrElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

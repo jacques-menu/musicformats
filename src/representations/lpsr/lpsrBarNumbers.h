@@ -134,7 +134,7 @@ class EXP lpsrBarCommand : public lpsrElement
     // ------------------------------------------------------
 };
 typedef SMARTP<lpsrBarCommand> S_lpsrBarCommand;
-EXP ostream& operator<< (ostream& os, const S_lpsrBarCommand& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrBarCommand& elt);
 
 
 }

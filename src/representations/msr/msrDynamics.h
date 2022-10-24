@@ -96,7 +96,7 @@ class EXP msrDynamic : public msrElement
     msrPlacementKind      fDynamicPlacementKind;
 };
 typedef SMARTP<msrDynamic> S_msrDynamic;
-EXP ostream& operator<< (ostream& os, const S_msrDynamic& elt);
+EXP ostream& operator << (ostream& os, const S_msrDynamic& elt);
 
 //______________________________________________________________________________
 class EXP msrOtherDynamic : public msrElement
@@ -168,7 +168,7 @@ class EXP msrOtherDynamic : public msrElement
     msrPlacementKind      fOtherDynamicPlacementKind;
 };
 typedef SMARTP<msrOtherDynamic> S_msrOtherDynamic;
-EXP ostream& operator<< (ostream& os, const S_msrOtherDynamic& elt);
+EXP ostream& operator << (ostream& os, const S_msrOtherDynamic& elt);
 
 //______________________________________________________________________________
 enum class msrCrescDecrescKind {
@@ -178,7 +178,7 @@ enum class msrCrescDecrescKind {
 string crescDecrescKindAsString (
   msrCrescDecrescKind crescDecrescKind);
 
-ostream& operator<< (ostream& os,const msrCrescDecrescKind& elt);
+ostream& operator << (ostream& os,const msrCrescDecrescKind& elt);
 
 //______________________________________________________________________________
 class EXP msrCrescDecresc : public msrElement
@@ -241,7 +241,7 @@ class EXP msrCrescDecresc : public msrElement
     msrCrescDecrescKind   fCrescDecrescKind;
 };
 typedef SMARTP<msrCrescDecresc> S_msrCrescDecresc;
-EXP ostream& operator<< (ostream& os, const S_msrCrescDecresc& elt);
+EXP ostream& operator << (ostream& os, const S_msrCrescDecresc& elt);
 
 //______________________________________________________________________________
 enum class msrWedgeKind {
@@ -252,7 +252,7 @@ enum class msrWedgeKind {
 string wedgeKindAsString (
   msrWedgeKind wedgeKind);
 
-ostream& operator<< (ostream& os,const msrWedgeKind& elt);
+ostream& operator << (ostream& os,const msrWedgeKind& elt);
 
 enum class msrWedgeNienteKind {
   kWedgeNienteYes, kWedgeNienteNo
@@ -261,7 +261,7 @@ enum class msrWedgeNienteKind {
 string wedgeNienteKindAsString (
   msrWedgeNienteKind wedgeNienteKind);
 
-ostream& operator<< (ostream& os,const msrWedgeNienteKind& elt);
+ostream& operator << (ostream& os,const msrWedgeNienteKind& elt);
 
 //______________________________________________________________________________
 class EXP msrWedge : public msrElement
@@ -345,7 +345,7 @@ class EXP msrWedge : public msrElement
     msrPlacementKind      fWedgePlacementKind;
 };
 typedef SMARTP<msrWedge> S_msrWedge;
-EXP ostream& operator<< (ostream& os, const S_msrWedge& elt);
+EXP ostream& operator << (ostream& os, const S_msrWedge& elt);
 
 
 } // namespace MusicFormats

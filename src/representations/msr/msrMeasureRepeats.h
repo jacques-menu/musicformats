@@ -11,7 +11,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class msrMeasureRepeat;
 typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
 
@@ -107,7 +107,7 @@ class EXP msrMeasureRepeatPattern : public msrElement
     S_msrSegment          fMeasureRepeatPatternSegment;
 };
 typedef SMARTP<msrMeasureRepeatPattern> S_msrMeasureRepeatPattern;
-EXP ostream& operator<< (ostream& os, const S_msrMeasureRepeatPattern& elt);
+EXP ostream& operator << (ostream& os, const S_msrMeasureRepeatPattern& elt);
 
 //______________________________________________________________________________
 class EXP msrMeasureRepeatReplicas : public msrElement
@@ -196,7 +196,7 @@ class EXP msrMeasureRepeatReplicas : public msrElement
     S_msrSegment          fMeasureRepeatReplicasSegment;
 };
 typedef SMARTP<msrMeasureRepeatReplicas> S_msrMeasureRepeatReplicas;
-EXP ostream& operator<< (ostream& os, const S_msrMeasureRepeatReplicas& elt);
+EXP ostream& operator << (ostream& os, const S_msrMeasureRepeatReplicas& elt);
 
 //______________________________________________________________________________
 class EXP msrMeasureRepeat : public msrSegmentElement
@@ -364,7 +364,7 @@ class EXP msrMeasureRepeat : public msrSegmentElement
                           fCurrentMeasureRepeatBuildPhaseKind;
 };
 typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
-EXP ostream& operator<< (ostream& os, const S_msrMeasureRepeat& elt);
+EXP ostream& operator << (ostream& os, const S_msrMeasureRepeat& elt);
 
 
 }
@@ -481,6 +481,6 @@ class EXP msrMeasureRepeatElement : public msrElement
                           fMeasureRepeatElementsList;
 };
 typedef SMARTP<msrMeasureRepeatElement> S_msrMeasureRepeatElement;
-EXP ostream& operator<< (ostream& os, const S_msrMeasureRepeatElement& elt);
+EXP ostream& operator << (ostream& os, const S_msrMeasureRepeatElement& elt);
 */
 

@@ -178,7 +178,7 @@ class EXP msrSpanner : public msrElement
     string                fSpannerEndText;
 };
 typedef SMARTP<msrSpanner> S_msrSpanner;
-EXP ostream& operator<< (ostream& os, const S_msrSpanner& elt);
+EXP ostream& operator << (ostream& os, const S_msrSpanner& elt);
 
 
 }

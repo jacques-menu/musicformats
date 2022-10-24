@@ -90,7 +90,7 @@ class EXP bsrLineContentsElement : public bsrElement
     int                   fSpacesBefore;
 };
 typedef SMARTP<bsrLineContentsElement> S_bsrLineContentsElement;
-EXP ostream& operator<< (ostream& os, const S_bsrLineContentsElement& elt);
+EXP ostream& operator << (ostream& os, const S_bsrLineContentsElement& elt);
 
 
 }

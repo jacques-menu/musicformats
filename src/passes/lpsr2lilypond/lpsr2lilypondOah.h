@@ -99,7 +99,7 @@ class EXP lilypondScoreOutputKindAtom : public oahAtomStoringAValue
     lpsrScoreOutputKind&  fLpsrScoreOutputKindVariable;
 };
 typedef SMARTP<lilypondScoreOutputKindAtom> S_lilypondScoreOutputKindAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondScoreOutputKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondScoreOutputKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
@@ -199,7 +199,7 @@ class EXP lilypondTransposePartNameAtom : public oahAtomStoringAValue
                           fStringToMsrSemiTonesPitchAndOctaveMapVariable;
 };
 typedef SMARTP<lilypondTransposePartNameAtom> S_lilypondTransposePartNameAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondTransposePartNameAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondTransposePartNameAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
@@ -299,7 +299,7 @@ class EXP lilypondTransposePartIDAtom : public oahAtomStoringAValue
                           fStringToMsrSemiTonesPitchAndOctaveMapVariable;
 };
 typedef SMARTP<lilypondTransposePartIDAtom> S_lilypondTransposePartIDAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondTransposePartIDAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondTransposePartIDAtom& elt);
 
 //______________________________________________________________________________
 class EXP msrOctaveEntryVariable : public smartable
@@ -366,7 +366,7 @@ class EXP msrOctaveEntryVariable : public smartable
     msrOctaveEntryKind    fOctaveEntryKind;
 };
 typedef SMARTP<msrOctaveEntryVariable> S_msrOctaveEntryVariable;
-EXP ostream& operator<< (ostream& os, const msrOctaveEntryVariable& elt);
+EXP ostream& operator << (ostream& os, const msrOctaveEntryVariable& elt);
 
 //______________________________________________________________________________
 class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
@@ -444,7 +444,7 @@ class EXP lilypondAbsoluteOctaveEntryAtom : public oahAtom
                           fOctaveEntryKindVariable;
 };
 typedef SMARTP<lilypondAbsoluteOctaveEntryAtom> S_lilypondAbsoluteOctaveEntryAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondAbsoluteOctaveEntryAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondAbsoluteOctaveEntryAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondRelativeOctaveEntryAtom : public oahAtomStoringAValue
@@ -539,7 +539,7 @@ class EXP lilypondRelativeOctaveEntryAtom : public oahAtomStoringAValue
                           fSemiTonesPitchAndOctaveVariable;
 };
 typedef SMARTP<lilypondRelativeOctaveEntryAtom> S_lilypondRelativeOctaveEntryAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondRelativeOctaveEntryAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondRelativeOctaveEntryAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
@@ -635,7 +635,7 @@ class EXP lilypondFixedOctaveEntryAtom : public oahAtomExpectingAValue
                           fSemiTonesPitchAndOctaveVariable;
 };
 typedef SMARTP<lilypondFixedOctaveEntryAtom> S_lilypondFixedOctaveEntryAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondFixedOctaveEntryAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondFixedOctaveEntryAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondAccidentalStyleKindAtom : public oahAtomStoringAValue
@@ -723,7 +723,7 @@ class EXP lilypondAccidentalStyleKindAtom : public oahAtomStoringAValue
                           fLpsrAccidentalStyleKindVariable;
 };
 typedef SMARTP<lilypondAccidentalStyleKindAtom> S_lilypondAccidentalStyleKindAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondAccidentalStyleKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondAccidentalStyleKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
@@ -815,7 +815,7 @@ class EXP lilypondChordsDisplayAtom : public oahAtomStoringAValue
                           fStringsPairListVariable;
 };
 typedef SMARTP<lilypondChordsDisplayAtom> S_lilypondChordsDisplayAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondChordsDisplayAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondChordsDisplayAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondLyricsDurationsKindAtom : public oahAtomStoringAValue
@@ -903,7 +903,7 @@ class EXP lilypondLyricsDurationsKindAtom : public oahAtomStoringAValue
                           fLpsrLyricsDurationsKindVariable;
 };
 typedef SMARTP<lilypondLyricsDurationsKindAtom> S_lilypondLyricsDurationsKindAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondLyricsDurationsKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondLyricsDurationsKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValue
@@ -999,7 +999,7 @@ class EXP lilypondDynamicsTextSpannersStyleKindAtom : public oahAtomStoringAValu
 };
 typedef SMARTP<lilypondDynamicsTextSpannersStyleKindAtom>
   S_lilypondDynamicsTextSpannersStyleKindAtom;
-EXP ostream& operator<<
+EXP ostream& operator <<
   (ostream& os, const S_lilypondDynamicsTextSpannersStyleKindAtom& elt);
 
 //______________________________________________________________________________
@@ -1012,7 +1012,7 @@ enum class lilypondScoreNotationKind {
 extern string lilypondScoreNotationKindAsString (
   lilypondScoreNotationKind notationKind);
 
-ostream& operator<< (ostream& os, lilypondScoreNotationKind& elt);
+ostream& operator << (ostream& os, lilypondScoreNotationKind& elt);
 
 class EXP lpsr2lilypondOahGroup : public oahGroup
 {
@@ -1486,7 +1486,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // ornaments
     // --------------------------------------
 
-    rational              getDelayedOrnamentsFraction () const
+    Rational              getDelayedOrnamentsFraction () const
                               { return fDelayedOrnamentsFraction; }
 
 
@@ -2025,7 +2025,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     // ornaments
     // --------------------------------------
 
-    rational              fDelayedOrnamentsFraction;
+    Rational              fDelayedOrnamentsFraction;
 
 
     // chords display
@@ -2105,7 +2105,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fNoMidi;
 };
 typedef SMARTP<lpsr2lilypondOahGroup> S_lpsr2lilypondOahGroup;
-EXP ostream& operator<< (ostream& os, const S_lpsr2lilypondOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_lpsr2lilypondOahGroup& elt);
 
 EXP extern S_lpsr2lilypondOahGroup gGlobalLpsr2lilypondOahGroup;
 
@@ -2191,6 +2191,6 @@ class EXP lilypondBreakPageAfterMeasureNumberAtom : public oahAtomStoringAValue
     set<string>&          fStringSetVariable;
 };
 typedef SMARTP<lilypondBreakPageAfterMeasureNumberAtom> S_lilypondBreakPageAfterMeasureNumberAtom;
-EXP ostream& operator<< (ostream& os, const S_lilypondBreakPageAfterMeasureNumberAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lilypondBreakPageAfterMeasureNumberAtom& elt);
 */
 

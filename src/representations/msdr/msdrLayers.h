@@ -163,7 +163,7 @@ class EXP msdrLayer : public smartable
     Bool                  fLayerHasBeenFinalized;
 };
 typedef SMARTP<msdrLayer> S_msdrLayer;
-EXP ostream& operator<< (ostream& os, const S_msdrLayer& elt);
+EXP ostream& operator << (ostream& os, const S_msdrLayer& elt);
 
 
 }

@@ -119,7 +119,7 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
                           fElementsSeparatorKind;
 };
 typedef SMARTP<lpsrParallelMusicBLock> S_lpsrParallelMusicBLock;
-EXP ostream& operator<< (ostream& os, const S_lpsrParallelMusicBLock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrParallelMusicBLock& elt);
 
 
 }

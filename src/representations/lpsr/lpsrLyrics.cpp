@@ -112,7 +112,7 @@ void lpsrNewLyricsBlock::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrNewLyricsBlock& nlc)
+ostream& operator << (ostream& os, const S_lpsrNewLyricsBlock& nlc)
 {
   nlc->print (os);
   return os;

@@ -255,6 +255,8 @@ int main (int argc, char* argv[])
   // let's go ahead
   // ------------------------------------------------------
 
+//   testRational ();
+
   string
     inputSourceName =
       gGlobalServiceRunData->getInputSourceName ();

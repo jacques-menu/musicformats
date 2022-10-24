@@ -635,7 +635,7 @@ void msrBook::print (ostream& os) const
   }
   else {
     os <<
-      " : " << "none" <<
+      " : " << "[NONE]" <<
       endl;
   }
   os << endl;
@@ -667,7 +667,7 @@ void msrBook::print (ostream& os) const
   }
   else {
     os <<
-      " : " << "none" <<
+      " : " << "[NONE]" <<
       endl;
   }
 
@@ -831,7 +831,7 @@ void msrBook::printShort (ostream& os) const
   }
   else {
     os <<
-      " : " << "none" <<
+      " : " << "[NONE]" <<
       endl;
   }
   os << endl;
@@ -863,7 +863,7 @@ void msrBook::printShort (ostream& os) const
   }
   else {
     os <<
-      " : " << "none" <<
+      " : " << "[NONE]" <<
       endl;
   }
 */
@@ -1020,13 +1020,13 @@ void msrBook::printSummary (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrBook& elt)
+ostream& operator << (ostream& os, const S_msrBook& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

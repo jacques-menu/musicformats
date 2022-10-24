@@ -1036,7 +1036,7 @@ Sxmlelement convertMusicXMLToMxsr ( // JMI UNUSED SAX ???
       stringstream s;
 
       s <<
-        "compressed MusicXML files are not handled by xml2ly currently, quitting";
+        "compressed MusicXML files are not handled by xml2ly currently - quitting";
 
       musicxml2mxsrError (
         inputSourceName,

@@ -148,13 +148,13 @@ void msrStringTuning::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrStringTuning& elt)
+ostream& operator << (ostream& os, const S_msrStringTuning& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -266,13 +266,13 @@ void msrScordatura::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrScordatura& elt)
+ostream& operator << (ostream& os, const S_msrScordatura& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -378,13 +378,13 @@ void msrAccordionRegistration::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrAccordionRegistration& elt)
+ostream& operator << (ostream& os, const S_msrAccordionRegistration& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -601,13 +601,13 @@ void msrHarpPedalsTuning::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrHarpPedalsTuning& elt)
+ostream& operator << (ostream& os, const S_msrHarpPedalsTuning& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -761,13 +761,13 @@ void msrPedal::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrPedal& elt)
+ostream& operator << (ostream& os, const S_msrPedal& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -847,13 +847,13 @@ void msrDamp::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrDamp& elt)
+ostream& operator << (ostream& os, const S_msrDamp& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -933,13 +933,13 @@ void msrDampAll::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrDampAll& elt)
+ostream& operator << (ostream& os, const S_msrDampAll& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

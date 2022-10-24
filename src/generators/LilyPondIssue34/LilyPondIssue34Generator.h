@@ -116,7 +116,7 @@ class EXP LilyPondIssue34Generator : public smartable
                             S_msrVoice lowerVoice2);
 };
 typedef SMARTP<LilyPondIssue34Generator> S_LilyPondIssue34Generator;
-// JMI EXP ostream& operator<< (ostream& os, const S_LilyPondIssue34Generator& elt);
+// JMI EXP ostream& operator << (ostream& os, const S_LilyPondIssue34Generator& elt);
 
 
 }

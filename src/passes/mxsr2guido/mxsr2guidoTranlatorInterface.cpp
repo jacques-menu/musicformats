@@ -150,7 +150,7 @@ void translateMxsrToGuido (
       s <<
         "Could not open Guido output file \"" <<
         outputFileName <<
-        "\" for writing, quitting";
+        "\" for writing - quitting";
 
       string message = s.str ();
 

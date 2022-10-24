@@ -66,13 +66,13 @@ void msdlParserWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlParserWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlParserWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -190,13 +190,13 @@ void msdlParserEnglishWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlParserEnglishWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlParserEnglishWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -315,13 +315,13 @@ void msdlParserFrenchWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlParserFrenchWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlParserFrenchWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -439,13 +439,13 @@ void msdlParserItalianWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlParserItalianWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlParserItalianWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -564,13 +564,13 @@ void msdlParserGermanWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlParserGermanWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlParserGermanWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -689,13 +689,13 @@ void msdlParserSpanishWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlParserSpanishWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlParserSpanishWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -814,13 +814,13 @@ void msdlParserDutchWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlParserDutchWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlParserDutchWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

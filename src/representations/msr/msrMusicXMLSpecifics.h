@@ -145,7 +145,7 @@ class EXP msrPageLayout : public msrElement
     S_msrMarginsGroup     fBothMarginsGroup;
 };
 typedef SMARTP<msrPageLayout> S_msrPageLayout;
-EXP ostream& operator<< (ostream& os, const S_msrPageLayout& elt);
+EXP ostream& operator << (ostream& os, const S_msrPageLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrSystemLayout : public msrElement
@@ -233,7 +233,7 @@ class EXP msrSystemLayout : public msrElement
     S_msrLength           fTopSystemDistance;
 };
 typedef SMARTP<msrSystemLayout> S_msrSystemLayout;
-EXP ostream& operator<< (ostream& os, const S_msrSystemLayout& elt);
+EXP ostream& operator << (ostream& os, const S_msrSystemLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrSystemDividers : public msrElement
@@ -346,7 +346,7 @@ class EXP msrSystemDividers : public msrElement
     Bool                  fRightDivider;
 };
 typedef SMARTP<msrSystemDividers> S_msrSystemDividers;
-EXP ostream& operator<< (ostream& os, const S_msrSystemDividers& elt);
+EXP ostream& operator << (ostream& os, const S_msrSystemDividers& elt);
 
 //______________________________________________________________________________
 class EXP msrStaffLayout : public msrElement
@@ -442,7 +442,7 @@ class EXP msrStaffLayout : public msrElement
     S_msrLength           fStaffDistance;
 };
 typedef SMARTP<msrStaffLayout> S_msrStaffLayout;
-EXP ostream& operator<< (ostream& os, const S_msrStaffLayout& elt);
+EXP ostream& operator << (ostream& os, const S_msrStaffLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrMeasureLayout : public msrElement
@@ -521,7 +521,7 @@ class EXP msrMeasureLayout : public msrElement
     S_msrLength           fMeasureDistance;
 };
 typedef SMARTP<msrMeasureLayout> S_msrMeasureLayout;
-EXP ostream& operator<< (ostream& os, const S_msrMeasureLayout& elt);
+EXP ostream& operator << (ostream& os, const S_msrMeasureLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrPrintLayout : public msrMeasureElement
@@ -707,7 +707,7 @@ class EXP msrPrintLayout : public msrMeasureElement
     int                   fPageNumber;
 };
 typedef SMARTP<msrPrintLayout> S_msrPrintLayout;
-EXP ostream& operator<< (ostream& os, const S_msrPrintLayout& elt);
+EXP ostream& operator << (ostream& os, const S_msrPrintLayout& elt);
 
 //______________________________________________________________________________
 class EXP msrLineWidth : public msrElement
@@ -794,7 +794,7 @@ class EXP msrLineWidth : public msrElement
     S_msrLength           fLineWidthValue;
 };
 typedef SMARTP<msrLineWidth> S_msrLineWidth;
-EXP ostream& operator<< (ostream& os, const S_msrLineWidth& elt);
+EXP ostream& operator << (ostream& os, const S_msrLineWidth& elt);
 
 //______________________________________________________________________________
 class EXP msrNoteSize : public msrElement
@@ -871,7 +871,7 @@ class EXP msrNoteSize : public msrElement
     float                 fNoteSizeValue;
 };
 typedef SMARTP<msrNoteSize> S_msrNoteSize;
-EXP ostream& operator<< (ostream& os, const S_msrNoteSize& elt);
+EXP ostream& operator << (ostream& os, const S_msrNoteSize& elt);
 
 //______________________________________________________________________________
 class EXP msrDistance : public msrElement
@@ -947,7 +947,7 @@ class EXP msrDistance : public msrElement
     S_msrLength           fDistanceValue;
 };
 typedef SMARTP<msrDistance> S_msrDistance;
-EXP ostream& operator<< (ostream& os, const S_msrDistance& elt);
+EXP ostream& operator << (ostream& os, const S_msrDistance& elt);
 
 //______________________________________________________________________________
 class EXP msrGlyph : public msrElement
@@ -1031,7 +1031,7 @@ class EXP msrGlyph : public msrElement
     string                fGlyphValue;
 };
 typedef SMARTP<msrGlyph> S_msrGlyph;
-EXP ostream& operator<< (ostream& os, const S_msrGlyph& elt);
+EXP ostream& operator << (ostream& os, const S_msrGlyph& elt);
 
 //______________________________________________________________________________
 class EXP msrOtherAppearance : public msrElement
@@ -1108,7 +1108,7 @@ class EXP msrOtherAppearance : public msrElement
     string                fOtherAppearanceValue;
 };
 typedef SMARTP<msrOtherAppearance> S_msrOtherAppearance;
-EXP ostream& operator<< (ostream& os, const S_msrOtherAppearance& elt);
+EXP ostream& operator << (ostream& os, const S_msrOtherAppearance& elt);
 
 //______________________________________________________________________________
 class EXP msrAppearance : public msrElement
@@ -1310,7 +1310,7 @@ class EXP msrAppearance : public msrElement
                           fOtherAppearancesList;
 };
 typedef SMARTP<msrAppearance> S_msrAppearance;
-EXP ostream& operator<< (ostream& os, const S_msrAppearance& elt);
+EXP ostream& operator << (ostream& os, const S_msrAppearance& elt);
 
 
 } // namespace MusicFormats

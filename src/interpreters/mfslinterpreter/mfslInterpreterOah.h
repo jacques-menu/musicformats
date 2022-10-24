@@ -237,7 +237,7 @@ class EXP mfslInterpreterOahGroup : public oahGroup
                           fSelectChoiceToLabelsMultiMapAtom;
 };
 typedef SMARTP<mfslInterpreterOahGroup> S_mfslInterpreterOahGroup;
-EXP ostream& operator<< (ostream& os, const S_mfslInterpreterOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_mfslInterpreterOahGroup& elt);
 
 EXP extern S_mfslInterpreterOahGroup gGlobalMfslInterpreterOahGroup;
 

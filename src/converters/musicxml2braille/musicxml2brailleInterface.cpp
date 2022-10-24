@@ -125,7 +125,7 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
         theMxsr,
         gGlobalMsrOahGroup,
         "Pass 2a",
-        "Create a first MSR skeleton from the MXSR");
+        "Create an MSR skeleton from the MXSR");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -156,7 +156,7 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
       theMxsr,
       firstMsrScore,
         "Pass 2b",
-        "Populate the first MSR skeleton from MusicXML data");
+        "Populate the MSR skeleton from MusicXML data");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -384,7 +384,7 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
         s <<
           "Could not open Braille output file \"" <<
           outputFileName <<
-          "\" for writing, quitting";
+          "\" for writing - quitting";
 
         string message = s.str ();
 

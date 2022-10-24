@@ -68,7 +68,7 @@ class EXP msrTupletElement : public msrMeasureElement
     int                   fPositionInTuplet;
 };
 typedef SMARTP<msrTupletElement> S_msrTupletElement;
-EXP ostream& operator<< (ostream& os, const S_msrTupletElement& elt);
+EXP ostream& operator << (ostream& os, const S_msrTupletElement& elt);
 
 
 } // namespace MusicFormats

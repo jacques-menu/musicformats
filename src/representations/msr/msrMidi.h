@@ -98,7 +98,7 @@ class EXP msrMidiTempo : public msrElement
     int                   fMidiTempoPerSecond;
 };
 typedef SMARTP<msrMidiTempo> S_msrMidiTempo;
-EXP ostream& operator<< (ostream& os, const S_msrMidiTempo& elt);
+EXP ostream& operator << (ostream& os, const S_msrMidiTempo& elt);
 
 
 } // namespace MusicFormats

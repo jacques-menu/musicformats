@@ -88,7 +88,7 @@ class EXP bsrPagination : public bsrLineContentsElement
     S_bsrCellsList        fPaginationCellsList;
 };
 typedef SMARTP<bsrPagination> S_bsrPagination;
-EXP ostream& operator<< (ostream& os, const S_bsrPagination& elt);
+EXP ostream& operator << (ostream& os, const S_bsrPagination& elt);
 
 
 }

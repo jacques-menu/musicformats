@@ -126,12 +126,13 @@ void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
 
   // set elem's measure number
   elem->
-    setMeasureElementMeasureNumber (
+    setMeasureNumber (
       fMeasureElementMeasureNumber);
 
   // set elem's position in measure
   elem->
     setMeasureElementPositionInMeasure (
+      this,
       fCurrentMeasureWholeNotesDuration,
       "appendElementToMeasure()");
 
@@ -174,7 +175,7 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
 
   // set harmony's measure number
   harmony->
-    setMeasureElementMeasureNumber (
+    setMeasureNumber (
       fMeasureElementMeasureNumber);
 
   // append the harmony to the measure elements list
@@ -261,7 +262,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
     measure->getInputLineNumber ();
 
   string measureNumber =
-    measure->getMeasureElementMeasureNumber ();
+    measure->getMeasureNumber ();
 
   unsigned int segmentElementsListSize =
     fSegmentElementsList.size ();
@@ -269,7 +270,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   string currentMeasureNumber =
     segmentElementsListSize == 0
       ? ""
-      : fSegmentElementsList.back ()->getMeasureElementMeasureNumber ();
+      : fSegmentElementsList.back ()->getMeasureNumber ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {

@@ -82,7 +82,7 @@ struct msrHiddenMeasureAndBarLineDescr : public smartable
     S_msrDalSegno         fDalSegno;
 };
 typedef SMARTP<msrHiddenMeasureAndBarLineDescr> S_msrHiddenMeasureAndBarLineDescr;
-EXP ostream& operator<< (ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt);
+EXP ostream& operator << (ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt);
 
 //________________________________________________________________________
 class EXP msr2msrTranslator :

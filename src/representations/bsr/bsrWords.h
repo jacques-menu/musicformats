@@ -90,7 +90,7 @@ class EXP bsrWords : public bsrLineContentsElement
     S_bsrCellsList        fWordCellsList;
 };
 typedef SMARTP<bsrWords> S_bsrWords;
-EXP ostream& operator<< (ostream& os, const S_bsrWords& elt);
+EXP ostream& operator << (ostream& os, const S_bsrWords& elt);
 
 
 }

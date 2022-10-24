@@ -527,7 +527,7 @@ void lpsrPartBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrPartBlock& scr)
+ostream& operator << (ostream& os, const S_lpsrPartBlock& scr)
 {
   scr->print (os);
   return os;

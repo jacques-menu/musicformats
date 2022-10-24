@@ -89,7 +89,7 @@ class EXP lpsrLayout : public lpsrElement
                           fLpsrSchemeVariablesVector;
 };
 typedef SMARTP<lpsrLayout> S_lpsrLayout;
-EXP ostream& operator<< (ostream& os, const S_lpsrLayout& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrLayout& elt);
 
 
 }

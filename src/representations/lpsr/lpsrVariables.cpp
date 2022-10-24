@@ -109,7 +109,7 @@ void lpsrVariableUseCommand::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrVariableUseCommand& nstf)
+ostream& operator << (ostream& os, const S_lpsrVariableUseCommand& nstf)
 {
   nstf->print (os);
   return os;

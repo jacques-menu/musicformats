@@ -68,13 +68,13 @@ void msdlScannerWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlScannerWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlScannerWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -181,13 +181,13 @@ void msdlScannerEnglishWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlScannerEnglishWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlScannerEnglishWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -294,13 +294,13 @@ void msdlScannerFrenchWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlScannerFrenchWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlScannerFrenchWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -407,13 +407,13 @@ void msdlScannerItalianWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlScannerItalianWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlScannerItalianWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -521,13 +521,13 @@ void msdlScannerGermanWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlScannerGermanWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlScannerGermanWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -635,13 +635,13 @@ void msdlScannerSpanishWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlScannerSpanishWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlScannerSpanishWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -749,13 +749,13 @@ void msdlScannerDutchWaeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlScannerDutchWaeHandler& elt)
+ostream& operator << (ostream& os, const S_msdlScannerDutchWaeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

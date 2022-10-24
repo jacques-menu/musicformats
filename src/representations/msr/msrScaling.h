@@ -96,7 +96,7 @@ class EXP msrScaling : public msrElement
     float                 fTenths;
 };
 typedef SMARTP<msrScaling> S_msrScaling;
-EXP ostream& operator<< (ostream& os, const S_msrScaling& elt);
+EXP ostream& operator << (ostream& os, const S_msrScaling& elt);
 
 
 } // namespace MusicFormats

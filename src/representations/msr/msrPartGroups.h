@@ -409,7 +409,7 @@ class EXP msrPartGroup : public msrPartGroupElement
                           fPartGroupMeasuresSlicesSequence;
 };
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
-EXP ostream& operator<< (ostream& os, const S_msrPartGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msrPartGroup& elt);
 
 
 }

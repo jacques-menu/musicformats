@@ -126,16 +126,17 @@ int lpsrNumberOfDots (int n)
 //_______________________________________________________________________________
 string wholeNotesAsLilypondString (
   int             inputLineNumber,
-  const rational& wholeNotes,
+  const Rational& wholeNotes,
   int&            dotsNumber)
 {
   // this algorithm is inspired by musicxml2ly
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "--> wholeNotesAsLilypondString() 1 -------------------------------------" <<
       ", wholeNotes: " << wholeNotes <<
+      ", dotsNumber: " << dotsNumber <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -146,7 +147,7 @@ string wholeNotesAsLilypondString (
     denominator  = wholeNotes.getDenominator ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "--> numerator:   " << numerator <<
       endl <<
@@ -198,8 +199,7 @@ string wholeNotesAsLilypondString (
     return s2.str ();
   }
 
-//   wholeNotes.rationalise (); // JMI ???
-//
+// JMI
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
 //     gLogStream <<
@@ -292,7 +292,7 @@ string wholeNotesAsLilypondString (
   /*
     valid denominators are powers of 2
 
-    the rational representing a dotted duration has to be brought
+    the Rational representing a dotted duration has to be brought
     to a value less than two, as explained above
 
     this is done by changing it denominator in the resulting string:
@@ -498,7 +498,7 @@ string wholeNotesAsLilypondString (
   }
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
+  if (gGlobalTracingOahGroup->getTraceWholeNotes ()) {
     gLogStream <<
       "--> numerator " << " : " <<
       numerator <<
@@ -577,7 +577,7 @@ string wholeNotesAsLilypondString (
 
 string wholeNotesAsLilypondString (
   int             inputLineNumber,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
   int dotsNumber; // not used
 
@@ -620,13 +620,13 @@ string dottedDurationAsLilypondStringWithoutBackSlash (
 //_______________________________________________________________________________
 string multipleFullBarRestsWholeNoteAsLilypondString (
   int             inputLineNumber,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
   stringstream s;
 
-  rational
+  Rational
     denominatorAsFraction =
-      rational (
+      Rational (
         1,
         wholeNotes.getDenominator ());
 
@@ -715,7 +715,7 @@ string lpsrScoreOutputKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const lpsrScoreOutputKind& elt)
+ostream& operator << (ostream& os, const lpsrScoreOutputKind& elt)
 {
   os << lpsrScoreOutputKindAsString (elt);
   return os;
@@ -864,7 +864,7 @@ string lpsrAccidentalStyleKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const lpsrAccidentalStyleKind& elt)
+ostream& operator << (ostream& os, const lpsrAccidentalStyleKind& elt)
 {
   os << lpsrAccidentalStyleKindAsString (elt);
   return os;
@@ -1073,7 +1073,7 @@ string lpsrChordsLanguageKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const lpsrChordsLanguageKind& elt)
+ostream& operator << (ostream& os, const lpsrChordsLanguageKind& elt)
 {
   os << lpsrChordsLanguageKindAsString (elt);
   return os;
@@ -1293,7 +1293,7 @@ string lpsrDynamicsTextSpannersStyleKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt)
+ostream& operator << (ostream& os, const lpsrDynamicsTextSpannersStyleKind& elt)
 {
   os << lpsrDynamicsTextSpannersStyleKindAsString (elt);
   return os;
@@ -1306,7 +1306,7 @@ lpsrDynamicsTextSpannersStyleKind lpsrDynamicsTextSpannersStyleKindFromString (
   lpsrDynamicsTextSpannersStyleKind result =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleNone;
 
-  if      (dynamicsTextSpannersStyleKindString == "none")
+  if      (dynamicsTextSpannersStyleKindString == "[NONE]")
     result =
       lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleNone;
   else if (dynamicsTextSpannersStyleKindString == "dashed-line")
@@ -1344,7 +1344,7 @@ void initializeLpsrDynamicsTextSpannersStyleKindsMap ()
 
   // no CamelCase here, these strings are used in the command line options
 
-  pLpsrDynamicsTextSpannersStyleKindsMap ["none"] =
+  pLpsrDynamicsTextSpannersStyleKindsMap ["[NONE]"] =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleNone;
   pLpsrDynamicsTextSpannersStyleKindsMap ["dashed-line"] =
     lpsrDynamicsTextSpannersStyleKind::kDynamicsTextSpannersStyleDashedLine;
@@ -1430,7 +1430,7 @@ string lpsrLyricsDurationsKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const lpsrLyricsDurationsKind& elt)
+ostream& operator << (ostream& os, const lpsrLyricsDurationsKind& elt)
 {
   os << lpsrLyricsDurationsKindAsString (elt);
   return os;

@@ -240,13 +240,13 @@ void bsrFacSimileKindAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrFacSimileKindAtom& elt)
+ostream& operator << (ostream& os, const S_bsrFacSimileKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -438,13 +438,13 @@ void bsrTextsLanguageAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrTextsLanguageAtom& elt)
+ostream& operator << (ostream& os, const S_bsrTextsLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -885,13 +885,13 @@ void bsrOahGroup::printBsrOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrOahGroup& elt)
+ostream& operator << (ostream& os, const S_bsrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

@@ -12,7 +12,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 
@@ -125,7 +125,7 @@ class EXP msrHarmonyDegree : public msrElement
                           fHarmonyDegreeTypeKind;
 };
 typedef SMARTP<msrHarmonyDegree> S_msrHarmonyDegree;
-EXP ostream& operator<< (ostream& os, const S_msrHarmonyDegree& elt);
+EXP ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt);
 
 //______________________________________________________________________________
 class EXP msrHarmony : public msrMeasureElement
@@ -143,11 +143,11 @@ class EXP msrHarmony : public msrMeasureElement
                             const string&            harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const rational&          harmonySoundingWholeNotes,
-                            const rational&          harmonyDisplayWholeNotes,
+                            const Rational&          harmonySoundingWholeNotes,
+                            const Rational&          harmonyDisplayWholeNotes,
                             int                      harmoniesStaffNumber,
                             msrTupletFactor          harmonyTupletFactor,
-                            const rational&          harmonyWholeNotesOffset);
+                            const Rational&          harmonyWholeNotesOffset);
 
     SMARTP<msrHarmony> createHarmonyNewbornClone (
                             S_msrVoice containingVoice);
@@ -166,11 +166,11 @@ class EXP msrHarmony : public msrMeasureElement
                             const string&            harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const rational&          harmonySoundingWholeNotes,
-                            const rational&          harmonyDisplayWholeNotes,
+                            const Rational&          harmonySoundingWholeNotes,
+                            const Rational&          harmonyDisplayWholeNotes,
                             int                      harmoniesStaffNumber,
                             msrTupletFactor          harmonyTupletFactor,
-                            const rational&          harmonyWholeNotesOffset);
+                            const Rational&          harmonyWholeNotesOffset);
 
   protected:
 
@@ -185,11 +185,11 @@ class EXP msrHarmony : public msrMeasureElement
                             const string&            harmonyKindText,
                             int                      harmonyInversion,
                             msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const rational&          harmonySoundingWholeNotes,
-                            const rational&          harmonyDisplayWholeNotes,
+                            const Rational&          harmonySoundingWholeNotes,
+                            const Rational&          harmonyDisplayWholeNotes,
                             int                      harmoniesStaffNumber,
                             msrTupletFactor          harmonyTupletFactor,
-                            const rational&          harmonyWholeNotesOffset);
+                            const Rational&          harmonyWholeNotesOffset);
 
     virtual               ~msrHarmony ();
 
@@ -213,22 +213,34 @@ class EXP msrHarmony : public msrMeasureElement
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context) override;
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context) override
+                              {
+                                setHarmonyPositionInMeasure (
+                                  measure,
+                                  positionInMeasure,
+                                  context);
+                              }
+
+    void                  setHarmonyPositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
 
     // whole notes
     void                  setHarmonyDisplayWholeNotes (
-                            const rational& wholeNotes)
+                            const Rational& wholeNotes)
                               { fHarmonyDisplayWholeNotes = wholeNotes; }
 
-    rational              getHarmonyDisplayWholeNotes () const
+    Rational              getHarmonyDisplayWholeNotes () const
                               { return fHarmonyDisplayWholeNotes; }
 
     // offset
-    void                  setHarmonyWholeNotesOffset (rational offset)
+    void                  setHarmonyWholeNotesOffset (Rational offset)
                               { fHarmonyWholeNotesOffset = offset; }
 
-    rational              getHarmonyWholeNotesOffset () const
+    Rational              getHarmonyWholeNotesOffset () const
                               { return fHarmonyWholeNotesOffset; }
 
     // root
@@ -269,7 +281,8 @@ class EXP msrHarmony : public msrMeasureElement
     void                  setHarmonyTupletFactor (
                             msrTupletFactor tupletFactor);
 
-    msrTupletFactor       getHarmonyTupletFactor () const
+    const msrTupletFactor&
+                          getHarmonyTupletFactor () const
                               { return fHarmonyTupletFactor; }
 
     // frame
@@ -293,7 +306,7 @@ class EXP msrHarmony : public msrMeasureElement
 
     void                  incrementHarmonySoundingWholeNotesDuration (
                             int             inputLineNumber,
-                            const rational& wholeNotesDelta);
+                            const Rational& wholeNotesDelta);
 
   public:
 
@@ -324,10 +337,10 @@ class EXP msrHarmony : public msrMeasureElement
     S_msrVoice            fHarmoniesUpLinkToVoice; // for use in harmonies voices JMI
 
     // whole notes
-    rational              fHarmonyDisplayWholeNotes;
+    Rational              fHarmonyDisplayWholeNotes;
 
     // offset
-    rational              fHarmonyWholeNotesOffset;
+    Rational              fHarmonyWholeNotesOffset;
 
     // root
     msrQuarterTonesPitchKind
@@ -358,7 +371,7 @@ class EXP msrHarmony : public msrMeasureElement
     S_msrFrame            fHarmonyFrame;
 };
 typedef SMARTP<msrHarmony> S_msrHarmony;
-EXP ostream& operator<< (ostream& os, const S_msrHarmony& elt);
+EXP ostream& operator << (ostream& os, const S_msrHarmony& elt);
 
 
 }

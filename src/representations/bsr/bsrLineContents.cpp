@@ -359,7 +359,7 @@ void bsrLineContents::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -390,13 +390,13 @@ string bsrLineContents::asDebugString () const
   return s.str ();
 }
 
-ostream& operator<< (ostream& os, const S_bsrLineContents& elt)
+ostream& operator << (ostream& os, const S_bsrLineContents& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

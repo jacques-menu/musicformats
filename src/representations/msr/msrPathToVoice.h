@@ -166,7 +166,7 @@ class EXP msrPathToVoice : public smartable
       // a nullptr fVoice means all the voices in the staff
 };
 typedef SMARTP<msrPathToVoice> S_msrPathToVoice;
-EXP ostream& operator<< (ostream& os, const S_msrPathToVoice& elt);
+EXP ostream& operator << (ostream& os, const S_msrPathToVoice& elt);
 
 
 } // namespace MusicFormats

@@ -45,7 +45,7 @@ string bsrUTFKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const bsrUTFKind& elt)
+ostream& operator << (ostream& os, const bsrUTFKind& elt)
 {
   os << bsrUTFKindAsString (elt);
   return os;
@@ -71,7 +71,7 @@ string bsrByteOrderingKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const bsrByteOrderingKind& elt)
+ostream& operator << (ostream& os, const bsrByteOrderingKind& elt)
 {
   os << bsrByteOrderingKindAsString (elt);
   return os;
@@ -92,7 +92,7 @@ void write_wchar_t (ostream& os, wchar_t cell)
   os << conversion.chars [0] << conversion.chars [1];
 }
 
-ostream& operator<< (ostream& os, const bsrCellKind cell)
+ostream& operator << (ostream& os, const bsrCellKind cell)
 {
   union Conversion {
     wchar_t       cellar;
@@ -184,13 +184,13 @@ void bsrBrailleGenerator::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrBrailleGenerator& elt)
+ostream& operator << (ostream& os, const S_bsrBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -352,13 +352,13 @@ void bsrAsciiBrailleGenerator::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrAsciiBrailleGenerator& elt)
+ostream& operator << (ostream& os, const S_bsrAsciiBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -550,13 +550,13 @@ void bsrUTF8BrailleGenerator::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrUTF8BrailleGenerator& elt)
+ostream& operator << (ostream& os, const S_bsrUTF8BrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -673,13 +673,13 @@ void bsrUTF8DebugBrailleGenerator::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt)
+ostream& operator << (ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -894,13 +894,13 @@ void bsrUTF16BigEndianBrailleGenerator::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrUTF16BigEndianBrailleGenerator& elt)
+ostream& operator << (ostream& os, const S_bsrUTF16BigEndianBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1117,13 +1117,13 @@ void bsrUTF16SmallEndianBrailleGenerator::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrUTF16SmallEndianBrailleGenerator& elt)
+ostream& operator << (ostream& os, const S_bsrUTF16SmallEndianBrailleGenerator& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

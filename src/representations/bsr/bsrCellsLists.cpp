@@ -372,19 +372,19 @@ void bsrCellsList::print (ostream& os) const
     "]";
 }
 
-ostream& operator<< (ostream& os, const S_bsrCellsList& elt)
+ostream& operator << (ostream& os, const S_bsrCellsList& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
 }
 
-bsrCellsList& operator<< (bsrCellsList& cellsList, const bsrCellKind cellKind)
+bsrCellsList& operator << (bsrCellsList& cellsList, const bsrCellKind cellKind)
 {
   cellsList.appendCellKindToCellsList (cellKind);
   return cellsList;

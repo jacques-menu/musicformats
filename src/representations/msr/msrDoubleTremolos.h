@@ -79,8 +79,20 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context) override;
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context) override
+                              {
+                                setDoubleTremoloPositionInMeasure (
+                                  measure,
+                                  positionInMeasure,
+                                  context);
+                              }
+
+    void                  setDoubleTremoloPositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
 
     // double tremolo kind
 
@@ -120,7 +132,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // double tremolo elements duration
 
-    rational              getDoubleTremoloElementsDuration () const
+    Rational              getDoubleTremoloElementsDuration () const
                               { return fDoubleTremoloElementsDuration; }
 
     // double tremolo number of repeats
@@ -168,11 +180,6 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     void                  setDoubleTremoloMeasureNumber (
                             const string& measureNumber);
 
-    // position in measure
-
-    void                  setDoubleTremoloPositionInMeasure (
-                            const rational& positionInMeasure); // v0.9.66 PIM
-
   public:
 
     // public services
@@ -181,7 +188,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // tremolo first note
 
     void                  setDoubleTremoloFirstNotePositionInMeasure (
-                            const rational& positionInMeasure); // v0.9.66 PIM
+                            const Rational& positionInMeasure); // v0.9.66 PIM
 
     void                  setDoubleTremoloFirstNoteMeasureNumber (
                             const string& measureNumber);
@@ -218,8 +225,8 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // sounding whole notes JMI
     // the same as the displayed divisions of both members
-// JMI    rational              fDoubleTremoloSoundingWholeNotes;
-    rational              fDoubleTremoloSoundingWholeNotes;
+// JMI    Rational              fDoubleTremoloSoundingWholeNotes;
+    Rational              fDoubleTremoloSoundingWholeNotes;
 
     msrDoubleTremoloKind  fDoubleTremoloKind;
 
@@ -227,7 +234,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     int                   fDoubleTremoloMarksNumber;
 
-    rational              fDoubleTremoloElementsDuration;
+    Rational              fDoubleTremoloElementsDuration;
 
     int                   fDoubleTremoloNumberOfRepeats;
 
@@ -238,7 +245,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     S_msrElement          fDoubleTremoloSecondElement;
 };
 typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
-EXP ostream& operator<< (ostream& os, const S_msrDoubleTremolo& elt);
+EXP ostream& operator << (ostream& os, const S_msrDoubleTremolo& elt);
 
 
 }

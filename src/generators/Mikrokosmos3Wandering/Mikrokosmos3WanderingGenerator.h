@@ -116,7 +116,7 @@ class EXP Mikrokosmos3WanderingGenerator : public smartable
                             S_msrVoice lowerVoice2);
 };
 typedef SMARTP<Mikrokosmos3WanderingGenerator> S_Mikrokosmos3WanderingGenerator;
-// JMI EXP ostream& operator<< (ostream& os, const S_Mikrokosmos3WanderingGenerator& elt);
+// JMI EXP ostream& operator << (ostream& os, const S_Mikrokosmos3WanderingGenerator& elt);
 
 
 }

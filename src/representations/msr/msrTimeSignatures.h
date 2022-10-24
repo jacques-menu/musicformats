@@ -9,11 +9,13 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrTimes___
-#define ___msrTimes___
+#ifndef ___msrTimeSignatures___
+#define ___msrTimeSignatures___
 
 #include "msrBasicTypes.h"
-#include "msrMeasureElements.h"
+
+// #include "msrMeasureElements.h"
+#include "msrMeasures.h"
 
 
 namespace MusicFormats
@@ -65,7 +67,8 @@ class EXP msrTimeSignatureItem : public msrElement
     // public services
     // ------------------------------------------------------
 
-    Bool                  isEqualTo (S_msrTimeSignatureItem otherTimeSignatureItem) const;
+    Bool                  isEqualTo (
+                            S_msrTimeSignatureItem otherTimeSignatureItem) const;
 
     void                  appendBeatsNumber (int beatsNumber);
 
@@ -100,7 +103,7 @@ class EXP msrTimeSignatureItem : public msrElement
     int                   fTimeSignatureBeatValue;
 };
 typedef SMARTP<msrTimeSignatureItem> S_msrTimeSignatureItem;
-EXP ostream& operator<< (ostream& os, const S_msrTimeSignatureItem& elt);
+EXP ostream& operator << (ostream& os, const S_msrTimeSignatureItem& elt);
 
 //______________________________________________________________________________
 class EXP msrTimeSignature : public msrMeasureElement
@@ -172,8 +175,20 @@ class EXP msrTimeSignature : public msrMeasureElement
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context) override;
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context) override
+                              {
+                                setTimeSignaturePositionInMeasure (
+                                  measure,
+                                  positionInMeasure,
+                                  context);
+                              }
+
+    void                  setTimeSignaturePositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
 
     msrTimeSignatureSymbolKind
                           getTimeSignatureSymbolKind () const
@@ -196,7 +211,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     void                  appendTimeSignatureItem (
                             S_msrTimeSignatureItem timeSignatureItem);
 
-    rational              wholeNotesPerMeasure () const;
+    Rational              wholeNotesDurationPerMeasure () const;
 
   public:
 
@@ -237,7 +252,7 @@ class EXP msrTimeSignature : public msrMeasureElement
     Bool                  fTimeIsCompound;
 };
 typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
-EXP ostream& operator<< (ostream& os, const S_msrTimeSignature& elt);
+EXP ostream& operator << (ostream& os, const S_msrTimeSignature& elt);
 
 
 } // namespace MusicFormats

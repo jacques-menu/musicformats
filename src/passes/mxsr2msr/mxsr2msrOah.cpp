@@ -395,13 +395,13 @@ void msrReplaceClefAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator<< (ostream& os, const S_msrReplaceClefAtom& elt)
+ostream& operator << (ostream& os, const S_msrReplaceClefAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -2005,7 +2005,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   if (! fPartsIgnoreIDSet.size ()) {
     gLogStream <<
-      "none";
+      "[NONE]";
   }
   else {
     for (
@@ -2026,7 +2026,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   if (! fMusicXMLPartsKeepIDSet.size ()) {
     gLogStream <<
-      "none";
+      "[NONE]";
   }
   else {
     for (
@@ -2047,7 +2047,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   if (! fMusicXMLMusicXMLPartsIgnoreNameSet.size ()) {
     gLogStream <<
-      "none";
+      "[NONE]";
   }
   else {
     for (
@@ -2068,7 +2068,7 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
 
   if (! fMusicXMLPartsKeepNameSet.size ()) {
     gLogStream <<
-      "none";
+      "[NONE]";
   }
   else {
     for (
@@ -2438,13 +2438,13 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_mxsr2msrOahGroup& elt)
+ostream& operator << (ostream& os, const S_mxsr2msrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

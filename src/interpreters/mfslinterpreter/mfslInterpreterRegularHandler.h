@@ -114,7 +114,7 @@ class EXP mfslInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<mfslInterpreterRegularHandler> S_mfslInterpreterRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_mfslInterpreterRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_mfslInterpreterRegularHandler& elt);
 
 
 }

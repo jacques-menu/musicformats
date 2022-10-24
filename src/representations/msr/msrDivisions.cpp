@@ -364,10 +364,9 @@ string msrDivisions::divisionsAsMsrString (
 
     if (remainingDivisions < nextDivisionsInList) {
       // the suffix is a multiplication factor
-      rational r (
+      Rational r (
         divisions,
         baseDurationDivisions);
-      r.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
       if (gGlobalMxsrOahGroup->getTraceDivisions ()) {
@@ -497,7 +496,7 @@ string msrDivisions::tupletDivisionsAsMsrString (
 
 string msrDivisions::tupletWholeNotesAsMsrString (
   int             inputLineNumber,
-  const rational& wholeNotes,
+  const Rational& wholeNotes,
   int             actualNotes,
   int             normalNotes)
 {
@@ -506,7 +505,7 @@ string msrDivisions::tupletWholeNotesAsMsrString (
       inputLineNumber,
       wholeNotes
         *
-      rational (actualNotes, normalNotes));
+      Rational (actualNotes, normalNotes));
 }
 
 void msrDivisions::acceptIn (basevisitor* v)
@@ -573,15 +572,15 @@ void msrDivisions::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrDivisions& elt)
+ostream& operator << (ostream& os, const S_msrDivisions& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

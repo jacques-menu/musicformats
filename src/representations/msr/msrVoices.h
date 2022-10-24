@@ -110,7 +110,7 @@ enum class msrVoiceRepeatPhaseKind {
 extern string voiceRepeatPhaseKindAsString (
   msrVoiceRepeatPhaseKind afterRepeatComponentPhaseKind);
 
-ostream& operator<< (ostream& os, msrVoiceRepeatPhaseKind& elt);
+ostream& operator << (ostream& os, msrVoiceRepeatPhaseKind& elt);
 
 enum class msrVoiceFinalizationStatusKind { // JMI ???
   kKeepVoice,
@@ -120,7 +120,7 @@ enum class msrVoiceFinalizationStatusKind { // JMI ???
 extern string voiceFinalizationStatusKindAsString (
   msrVoiceFinalizationStatusKind voiceFinalizationStatusKind);
 
-ostream& operator<< (ostream& os, msrVoiceFinalizationStatusKind& elt);
+ostream& operator << (ostream& os, msrVoiceFinalizationStatusKind& elt);
 
 enum class msrVoiceCreateInitialLastSegmentKind {
   kCreateInitialLastSegmentYes,
@@ -130,7 +130,7 @@ enum class msrVoiceCreateInitialLastSegmentKind {
 extern string voiceFinalizationStatusKindAsString (
   msrVoiceCreateInitialLastSegmentKind voiceCreateInitialLastSegmentKind);
 
-ostream& operator<< (ostream& os, msrVoiceCreateInitialLastSegmentKind& elt);
+ostream& operator << (ostream& os, msrVoiceCreateInitialLastSegmentKind& elt);
 
 //________________________________________________________________________
 class EXP msrRepeatDescr : public smartable
@@ -200,7 +200,7 @@ class EXP msrRepeatDescr : public smartable
     int                   fRepeatDescrStartInputLineNumber;
 };
 typedef SMARTP<msrRepeatDescr> S_msrRepeatDescr;
-EXP ostream& operator<< (ostream& os, const S_msrRepeatDescr& elt);
+EXP ostream& operator << (ostream& os, const S_msrRepeatDescr& elt);
 
 //______________________________________________________________________________
 class EXP msrVoice : public msrElement
@@ -367,9 +367,9 @@ class EXP msrVoice : public msrElement
     // voice shortest note
 
     void                  setVoiceShortestNoteDuration (
-                            const rational& duration);
+                            const Rational& duration);
 
-    rational              getVoiceShortestNoteDuration () const
+    Rational              getVoiceShortestNoteDuration () const
                               { return fVoiceShortestNoteDuration; }
 
     void                  setVoiceShortestNoteTupletFactor (
@@ -408,9 +408,9 @@ class EXP msrVoice : public msrElement
 
     void                  setWholeNotesSinceLastRegularMeasureEnd (
                             int             inputLineNumber,
-                            const rational& value);
+                            const Rational& value);
 
-    rational              getWholeNotesSinceLastRegularMeasureEnd () const
+    Rational              getWholeNotesSinceLastRegularMeasureEnd () const
                               { return fWholeNotesSinceLastRegularMeasureEnd; }
 
     // incomplete measures after repeats detection
@@ -492,17 +492,17 @@ class EXP msrVoice : public msrElement
 
     void                  appendPaddingNoteToVoice (
                             int             inputLineNumber,
-                            const rational& forwardStepLength);
+                            const Rational& forwardStepLength);
 
     // backup and padding
 
     void                  padUpToPositionInMeasureInVoice (
                             int             inputLineNumber,
-                            const rational& wholeNotesPositionInMeasure);
+                            const Rational& wholeNotesPositionInMeasure);
 
     void                  backupByWholeNotesStepLengthInVoice (
                             int             inputLineNumber,
-                            const rational& backupTargetMeasureElementPositionInMeasure);
+                            const Rational& backupTargetMeasureElementPositionInMeasure);
 
     // clef, key, time signature
 
@@ -519,7 +519,7 @@ class EXP msrVoice : public msrElement
 
     void                  insertHiddenMeasureAndBarLineInVoiceClone (
                             int             inputLineNumber,
-                            const rational& positionInMeasure);
+                            const Rational& positionInMeasure);
 
     // notes
 
@@ -919,18 +919,17 @@ class EXP msrVoice : public msrElement
 
     // position in voice
 
-    void                  incrementCurrentPositionInVoice (
-                            const rational& delta)
+    void                  incrementCurrentPositionFromBeginningOfVoice (
+                            const Rational& delta)
                               {
-                                fCurrentPositionInVoice += delta;
-                                fCurrentPositionInVoice.rationalise ();
+                                fCurrentPositionFromBeginningOfVoice += delta;
                               }
 
-    rational              getCurrentPositionInVoice () const
-                              { return fCurrentPositionInVoice; }
+    Rational              getCurrentPositionFromBeginningOfVoice () const
+                              { return fCurrentPositionFromBeginningOfVoice; }
 
-    const msrMoment&      getCurrentMomentInVoice () const
-                              { return fCurrentMomentInVoice; }
+    const msrMoment&      getCurrentMomentFromBeginningOfVoice () const
+                              { return fCurrentMomentFromBeginningOfVoice; }
 
     // beams begin, continue and end check
 
@@ -1167,7 +1166,7 @@ class EXP msrVoice : public msrElement
 
     // regular measure ends detection
 
-    rational              fWholeNotesSinceLastRegularMeasureEnd;
+    Rational              fWholeNotesSinceLastRegularMeasureEnd;
 
      // stanzas
 
@@ -1201,7 +1200,7 @@ class EXP msrVoice : public msrElement
     // fVoiceShortestNoteDuration and fVoiceShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    rational              fVoiceShortestNoteDuration;
+    Rational              fVoiceShortestNoteDuration;
     msrTupletFactor       fVoiceShortestNoteTupletFactor;
 
     // repeats
@@ -1447,8 +1446,8 @@ class EXP msrVoice : public msrElement
 
     // current position in voice
 
-    rational              fCurrentPositionInVoice;
-    msrMoment             fCurrentMomentInVoice;
+    Rational              fCurrentPositionFromBeginningOfVoice;
+    msrMoment             fCurrentMomentFromBeginningOfVoice;
 
     // voice finalization
 
@@ -1462,7 +1461,7 @@ class EXP msrVoice : public msrElement
     int                   fCallsCounter;
 };
 typedef SMARTP<msrVoice> S_msrVoice;
-EXP ostream& operator<< (ostream& os, const S_msrVoice& elt);
+EXP ostream& operator << (ostream& os, const S_msrVoice& elt);
 
 
 }

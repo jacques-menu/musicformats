@@ -98,8 +98,8 @@ class EXP msrNote : public msrTupletElement
                             msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
                             msrOctaveKind              noteOctaveKind,
 
-                            const rational&            noteSoundingWholeNotes,
-                            const rational&            noteDisplayWholeNotes,
+                            const Rational&            noteSoundingWholeNotes,
+                            const Rational&            noteDisplayWholeNotes,
 
                             int                        noteDotsNumber,
 
@@ -128,39 +128,39 @@ class EXP msrNote : public msrTupletElement
     static SMARTP<msrNote> createRestNote (
                             int             inputLineNumber,
                             const string&   noteMeasureNumber,
-                            const rational& soundingWholeNotes,
-                            const rational& displayWholeNotes,
+                            const Rational& soundingWholeNotes,
+                            const Rational& displayWholeNotes,
                             int             dotsNumber);
 
     static SMARTP<msrNote> createRestNoteWithOctave (
                             int             inputLineNumber,
                             const string&   noteMeasureNumber,
                             msrOctaveKind   noteOctave,
-                            const rational& soundingWholeNotes,
-                            const rational& displayWholeNotes,
+                            const Rational& soundingWholeNotes,
+                            const Rational& displayWholeNotes,
                             int             dotsNumber);
 
     static SMARTP<msrNote> createSkipNote (
                             int             inputLineNumber,
                             const string&   noteMeasureNumber,
-                            const rational& soundingWholeNotes,
-                            const rational& displayWholeNotes,
+                            const Rational& soundingWholeNotes,
+                            const Rational& displayWholeNotes,
                             int             dotsNumberr);
 
     static SMARTP<msrNote> createSkipNoteWithOctave (
                             int             inputLineNumber,
                             const string&   noteMeasureNumber,
                             msrOctaveKind   noteOctave,
-                            const rational& soundingWholeNotes,
-                            const rational& displayWholeNotes,
+                            const Rational& soundingWholeNotes,
+                            const Rational& displayWholeNotes,
                             int             dotsNumber);
 
     static SMARTP<msrNote> createGraceSkipNote (
                             // above with MusicXML??? JMI
                             int             inputLineNumber,
                             const string&   noteMeasureNumber,
-                            const rational& soundingWholeNotes,
-                            const rational& displayWholeNotes,
+                            const Rational& soundingWholeNotes,
+                            const Rational& displayWholeNotes,
                             int             dotsNumber);
 
     static SMARTP<msrNote> createRegularNote (
@@ -168,8 +168,8 @@ class EXP msrNote : public msrTupletElement
                             const string&            noteMeasureNumber,
                             msrQuarterTonesPitchKind quarterTonesPitchKind,
                             msrOctaveKind            noteOctaveKind,
-                            const rational&          soundingWholeNotes,
-                            const rational&          displayWholeNotes,
+                            const Rational&          soundingWholeNotes,
+                            const Rational&          displayWholeNotes,
                             int                      dotsNumber);
 
     static SMARTP<msrNote> createRestFromString (
@@ -208,8 +208,8 @@ class EXP msrNote : public msrTupletElement
                             msrQuarterTonesPitchKind   noteQuarterTonesPitchKind,
                             msrOctaveKind              noteOctaveKind,
 
-                            const rational&            noteSoundingWholeNotes,
-                            const rational&            noteDisplayWholeNotes,
+                            const Rational&            noteSoundingWholeNotes,
+                            const Rational&            noteDisplayWholeNotes,
 
                             int                        noteDotsNumber,
 
@@ -274,8 +274,20 @@ class EXP msrNote : public msrTupletElement
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context) override;
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context) override
+                              {
+                                setNotePositionInMeasure (
+                                  measure,
+                                  positionInMeasure,
+                                  context);
+                              }
+
+    void                  setNotePositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
 
     // note kind
 
@@ -374,10 +386,10 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteQuarterTonesDisplayPitchKind; }
 
     void                  setNoteDisplayWholeNotes (
-                            const rational& wholeNotes)
+                            const Rational& wholeNotes)
                               { fNoteDisplayWholeNotes = wholeNotes; }
 
-    rational              getNoteDisplayWholeNotes () const
+    Rational              getNoteDisplayWholeNotes () const
                               { return fNoteDisplayWholeNotes; }
 
     // dots
@@ -777,7 +789,7 @@ class EXP msrNote : public msrTupletElement
     S_msrGraceNotesGroup  fetchNoteUpLinkToGraceNotesGroup () const;
 
     // voice upLink
-    S_msrVoice            fetchUpLinkToNoteToVoice () const;
+    S_msrVoice            fetchNoteUpLinkToVoice () const;
 
     // staff upLink
     S_msrStaff            fetchUpLinkToNoteToStaff () const;
@@ -888,10 +900,6 @@ class EXP msrNote : public msrTupletElement
     // scordaturas
     void                  appendScordaturaToNote (S_msrScordatura scordatura);
 
-    virtual void          assignMeasureElementPositionInVoice (
-                            rational&     positionInVoice,
-                            const string& context) override;
-
     static bool           compareNotesByIncreasingPositionInMeasure (
                             const SMARTP<msrNote>& first,
                             const SMARTP<msrNote>& second);
@@ -971,7 +979,7 @@ class EXP msrNote : public msrTupletElement
 
     string                asMinimalString () const;
 
-    virtual void          printNoteEssentials (ostream& os) const;
+    void                  printNoteEssentials (ostream& os) const;
 
     void                  print (ostream& os) const override;
 
@@ -1007,7 +1015,7 @@ class EXP msrNote : public msrTupletElement
     msrOctaveKind         fNoteOctaveKind;
 
     // whole notes
-    rational              fNoteDisplayWholeNotes;
+    Rational              fNoteDisplayWholeNotes;
 
     int                   fNoteDotsNumber;
 
@@ -1272,7 +1280,7 @@ class EXP msrNote : public msrTupletElement
                           fNoteSoloNoteOrRestInStaffKind;
 };
 typedef SMARTP<msrNote> S_msrNote;
-EXP ostream& operator<< (ostream& os, const S_msrNote& elt);
+EXP ostream& operator << (ostream& os, const S_msrNote& elt);
 
 
 }

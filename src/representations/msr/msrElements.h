@@ -99,7 +99,7 @@ class EXP msrElement : public smartable
     int                   fInputLineNumber;
 };
 typedef SMARTP<msrElement> S_msrElement;
-EXP ostream& operator<< (ostream& os, const S_msrElement& elt);
+EXP ostream& operator << (ostream& os, const S_msrElement& elt);
 
 
 } // namespace MusicFormats

@@ -235,13 +235,13 @@ void msrAfterGraceNotesGroupContents::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrAfterGraceNotesGroupContents& elt)
+ostream& operator << (ostream& os, const S_msrAfterGraceNotesGroupContents& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -462,13 +462,13 @@ void msrAfterGraceNotesGroup::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrAfterGraceNotesGroup& elt)
+ostream& operator << (ostream& os, const S_msrAfterGraceNotesGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

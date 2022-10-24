@@ -93,7 +93,7 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msr2brailleManPageGenerateAtom> S_msr2brailleManPageGenerateAtom;
-EXP ostream& operator<< (ostream& os, const S_msr2brailleManPageGenerateAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msr2brailleManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP msr2brailleManPageOahGroup : public oahGroup
@@ -189,7 +189,7 @@ class EXP msr2brailleManPageOahGroup : public oahGroup
                           fOah2manPage;
 };
 typedef SMARTP<msr2brailleManPageOahGroup> S_msr2brailleManPageOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msr2brailleManPageOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msr2brailleManPageOahGroup& elt);
 
 EXP extern S_msr2brailleManPageOahGroup gGlobalXml2brailleManPageOahGroup;
 

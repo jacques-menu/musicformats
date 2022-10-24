@@ -149,7 +149,7 @@ class EXP LilyPondIssue34OahGroup : public oahGroup
                           fMultiGenerationOutputKindAtom;
 };
 typedef SMARTP<LilyPondIssue34OahGroup> S_LilyPondIssue34OahGroup;
-EXP ostream& operator<< (ostream& os, const S_LilyPondIssue34OahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_LilyPondIssue34OahGroup& elt);
 
 EXP extern S_LilyPondIssue34OahGroup gGlobalLilyPondIssue34OahGroup;
 

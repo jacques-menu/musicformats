@@ -34,7 +34,7 @@ enum class msdlIgnoreSeparatorTokensKind {
 string msdlIgnoreSeparatorTokensKindAsString (
   msdlIgnoreSeparatorTokensKind ignoreSeparatorTokensKind);
 
-ostream& operator<< (ostream& os, msdlIgnoreSeparatorTokensKind& elt);
+ostream& operator << (ostream& os, msdlIgnoreSeparatorTokensKind& elt);
 
 //________________________________________________________________________
 class msdlScanner : public smartable
@@ -197,7 +197,7 @@ class msdlScanner : public smartable
     Bool                  fSourceIsLexicallyCorrect;
 };
 typedef SMARTP<msdlScanner> S_msdlScanner;
-EXP ostream& operator<< (ostream& os, const msdlScanner& elt);
+EXP ostream& operator << (ostream& os, const msdlScanner& elt);
 
 
 }

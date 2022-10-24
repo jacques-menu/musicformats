@@ -159,13 +159,13 @@ void msdlConverterOahGroup::printMsdlConverterOahValues (
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msdlConverterOahGroup& elt)
+ostream& operator << (ostream& os, const S_msdlConverterOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

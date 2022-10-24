@@ -27,7 +27,7 @@ enum class msrCodaKind {
 string codaKindAsString (
   msrCodaKind codaKind);
 
-ostream& operator<< (ostream& os,const msrCodaKind& elt);
+ostream& operator << (ostream& os,const msrCodaKind& elt);
 
 //______________________________________________________________________________
 class EXP msrCoda : public msrMeasureElement
@@ -99,7 +99,7 @@ class EXP msrCoda : public msrMeasureElement
     msrCodaKind           fCodaKind;
 };
 typedef SMARTP<msrCoda> S_msrCoda;
-EXP ostream& operator<< (ostream& os, const S_msrCoda& elt);
+EXP ostream& operator << (ostream& os, const S_msrCoda& elt);
 
 
 } // namespace MusicFormats

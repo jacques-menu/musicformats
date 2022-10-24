@@ -103,7 +103,7 @@ class EXP msrStaffTuning : public msrElement
     msrOctaveKind         fStaffTuningOctaveKind;
 };
 typedef SMARTP<msrStaffTuning> S_msrStaffTuning;
-EXP ostream& operator<< (ostream& os, const S_msrStaffTuning& elt);
+EXP ostream& operator << (ostream& os, const S_msrStaffTuning& elt);
 
 //______________________________________________________________________________
 class EXP msrStaffDetails : public msrMeasureElement
@@ -236,7 +236,7 @@ class EXP msrStaffDetails : public msrMeasureElement
     msrPrintSpacingKind   fPrintSpacingKind;
 };
 typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
-EXP ostream& operator<< (ostream& os, const S_msrStaffDetails& elt);
+EXP ostream& operator << (ostream& os, const S_msrStaffDetails& elt);
 
 
 } // namespace MusicFormats

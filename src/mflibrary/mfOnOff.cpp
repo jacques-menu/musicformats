@@ -68,7 +68,7 @@ string mfOnOffKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const mfOnOffKind elt)
+ostream& operator << (ostream& os, const mfOnOffKind elt)
 {
   os << mfOnOffKindAsString (elt);
   return os;

@@ -171,7 +171,7 @@ void bsrScore::printFull (ostream& os) const
     }
     else {
       os <<
-        "TranscriptionNotes: none" <<
+        "TranscriptionNotes: [NONE]" <<
         endl;
     }
   }
@@ -215,7 +215,7 @@ void bsrScore::printFull (ostream& os) const
     else {
       os <<
         " : " <<
-         "none" <<
+         "[NONE]" <<
       endl;
     }
   }
@@ -246,7 +246,7 @@ void bsrScore::printShort (ostream& os) const
     }
     else {
       os <<
-        "TranscriptionNotes: none" <<
+        "TranscriptionNotes: [NONE]" <<
         endl;
     }
   }
@@ -298,7 +298,7 @@ void bsrScore::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrScore& score)
+ostream& operator << (ostream& os, const S_bsrScore& score)
 {
   score->print (os);
   return os;

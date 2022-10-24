@@ -130,9 +130,9 @@ S_msrMultipleFullBarRests msrMultipleFullBarRests::createMultipleFullBarRestsNew
   return newbornClone;
 }
 
-rational msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes () const
+Rational msrMultipleFullBarRests::fetchMultipleFullBarRestsMeasureSoundingNotes () const
 {
-  rational result;
+  Rational result;
 
   for (S_msrMeasure measure : fFullBarRestsMeasuresList) {
     result +=
@@ -381,7 +381,7 @@ string msrMultipleFullBarRests::asString () const
       "fMultipleFullBarRestsUpLinkToSegment->asString ()"; // KAKA
   }
   else {
-    s << "none";
+    s << "[NONE]";
   }
 
   s <<
@@ -449,7 +449,7 @@ void msrMultipleFullBarRests::print (ostream& os) const
       "\"";
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -488,7 +488,7 @@ void msrMultipleFullBarRests::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
   os << endl;
@@ -523,13 +523,13 @@ void msrMultipleFullBarRests::printShort (ostream& os) const
   print (os);
 }
 
-ostream& operator<< (ostream& os, const S_msrMultipleFullBarRests& elt)
+ostream& operator << (ostream& os, const S_msrMultipleFullBarRests& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

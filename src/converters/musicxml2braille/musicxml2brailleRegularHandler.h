@@ -165,7 +165,7 @@ class EXP xml2brlRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<xml2brlRegularHandler> S_xml2brlRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_xml2brlRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_xml2brlRegularHandler& elt);
 
 
 }

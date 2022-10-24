@@ -20,7 +20,7 @@ class msrChord;
 typedef SMARTP<msrChord> S_msrChord;
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
 
@@ -81,8 +81,8 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
                             msrTupletFactor         tupletFactor,
-                            const rational&         memberNotesSoundingWholeNotes,
-                            const rational&         memberNotesDisplayWholeNotes);
+                            const Rational&         memberNotesSoundingWholeNotes,
+                            const Rational&         memberNotesDisplayWholeNotes);
 
     SMARTP<msrTuplet> createTupletNewbornClone ();
 
@@ -102,8 +102,8 @@ class EXP msrTuplet : public msrTupletElement
                             msrTupletShowNumberKind tupletShowNumberKind,
                             msrTupletShowTypeKind   tupletShowTypeKind,
                             msrTupletFactor         tupletFactor,
-                            const rational&         memberNotesSoundingWholeNotes,
-                            const rational&         memberNotesDisplayWholeNotes);
+                            const Rational&         memberNotesSoundingWholeNotes,
+                            const Rational&         memberNotesDisplayWholeNotes);
 
     virtual               ~msrTuplet ();
 
@@ -138,13 +138,25 @@ class EXP msrTuplet : public msrTupletElement
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context) override;
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context) override
+                              {
+                                setTupletPositionInMeasure (
+                                  measure,
+                                  positionInMeasure,
+                                  context);
+                              }
+
+    void                  setTupletPositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
 
     // members positions in measures
-    rational              setTupletMembersPositionsInMeasure (
+    Rational              setTupletMembersPositionsInMeasure (
                             S_msrMeasure    measure,
-                            const rational& positionInMeasure);
+                            const Rational& positionInMeasure);
                               // returns the position after the tuplet JMI ??? v0.9.66 SUPERFLOUS ???
 
     // number
@@ -172,9 +184,9 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletFactor; }
 
     // member notes durations
-    rational              getMemberNotesSoundingWholeNotes () const
+    Rational              getMemberNotesSoundingWholeNotes () const
                               { return fMemberNotesSoundingWholeNotes; }
-    rational              getMemberNotesDisplayWholeNotes () const
+    Rational              getMemberNotesDisplayWholeNotes () const
                               { return fMemberNotesDisplayWholeNotes; }
 
     // elements
@@ -183,7 +195,7 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletElementsList; }
 
     // tuplet durations
-    rational              getTupletDisplayWholeNotes () const
+    Rational              getTupletDisplayWholeNotes () const
                               { return fTupletDisplayWholeNotes; }
 
   public:
@@ -277,19 +289,19 @@ class EXP msrTuplet : public msrTupletElement
     msrTupletFactor       fTupletFactor;
 
     // member notes durations
-    rational              fMemberNotesSoundingWholeNotes;
-    rational              fMemberNotesDisplayWholeNotes;
+    Rational              fMemberNotesSoundingWholeNotes;
+    Rational              fMemberNotesDisplayWholeNotes;
 
-// JMI    rational              fTupletSoundingWholeNotes;
+// JMI    Rational              fTupletSoundingWholeNotes;
     // display whole notes
-    rational              fTupletDisplayWholeNotes;
+    Rational              fTupletDisplayWholeNotes;
 
     // elements
     list<S_msrTupletElement>
                           fTupletElementsList;
 };
 typedef SMARTP<msrTuplet> S_msrTuplet;
-EXP ostream& operator<< (ostream& os, const S_msrTuplet& elt);
+EXP ostream& operator << (ostream& os, const S_msrTuplet& elt);
 
 
 }

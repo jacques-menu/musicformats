@@ -271,13 +271,13 @@ void msrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrPitchesLanguageAtom& elt)
+ostream& operator << (ostream& os, const S_msrPitchesLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -627,13 +627,13 @@ void msrRenamePartAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator<< (ostream& os, const S_msrRenamePartAtom& elt)
+ostream& operator << (ostream& os, const S_msrRenamePartAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1331,7 +1331,7 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
 
   if (! fMsrPartsRenamingMap.size ()) {
     gLogStream <<
-      "none";
+      "[NONE]";
   }
   else {
     for (
@@ -1418,13 +1418,13 @@ void msrOahGroup::printMsrOahValues (int valueFieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrOahGroup& elt)
+ostream& operator << (ostream& os, const S_msrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

@@ -18,7 +18,7 @@
 
 #include <regex>
 
-#include "rational.h"
+#include "mfRational.h"
 
 #include "mfServiceRunData.h"
 
@@ -128,9 +128,161 @@ string msrXMLLangKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrXMLLangKind& elt)
+ostream& operator << (ostream& os, const msrXMLLangKind& elt)
 {
   os << msrXMLLangKindAsString (elt);
+  return os;
+}
+
+// duration
+//______________________________________________________________________________
+msrDuration::msrDuration ()
+{
+  fDurationKind = msrDurationKind::k_NoDuration;
+  fDotsNumber   = 0;
+}
+
+msrDuration::msrDuration (
+  msrDurationKind durationKind,
+  int             dotsNumber)
+{
+  fDurationKind = durationKind;
+  fDotsNumber   = dotsNumber;
+}
+
+msrDuration::~msrDuration ()
+{}
+
+Rational msrDuration::dottedDurationAsWholeNotes (
+  int inputLineNumber) const
+{
+  // convert duration into whole notes
+  Rational
+    result =
+      msrDurationKindAsWholeNotes (
+        fDurationKind);
+
+#ifdef TRACING_IS_ENABLED
+  if (false) { // JMI
+    print (gLogStream);
+
+    gLogStream <<
+      "=== dottedDurationAsWholeNotes()" <<
+      ", (int) fDurationKind: " << (int) fDurationKind <<
+      ", result: " << result <<
+      endl;
+  }
+#endif
+
+  // take dots into account if any
+  if (fDotsNumber > 0) {
+    Rational
+      increment = result * Rational (1,2);
+
+    int dots = fDotsNumber;
+
+    while (dots > 0) {
+      result += increment;
+
+      increment *= Rational (1,2);
+
+#ifdef TRACING_IS_ENABLED
+  if (false) { // JMI
+    gLogStream <<
+      "=== dottedDurationAsWholeNotes()" <<
+      ", dots: " << dots <<
+      ", result: " << result <<
+      ", increment: " << increment <<
+      endl;
+  }
+#endif
+
+      --dots;
+    } // while
+  }
+
+  return result;
+}
+
+Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
+  // used in lpsrBasicTypes, dottedDurationAsLilypondStringWithoutBackSlash(),
+  // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
+  // JMI BUGGY, NEVER TESTED TEMP???
+  int inputLineNumber) const
+{
+  // convert duration into whole notes
+  Rational
+    result =
+      msrDurationKindAsWholeNotes (
+        fDurationKind);
+
+#ifdef TRACING_IS_ENABLED
+  if (false) {
+    gLogStream <<
+      "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
+      ", result: " << result <<
+      "\"" <<
+      endl;
+  }
+#endif
+
+  // take dots into account if any
+  if (fDotsNumber > 0) {
+    int dots = fDotsNumber;
+
+    while (dots > 0) {
+      result *=
+        Rational (3, 2);
+
+#ifdef TRACING_IS_ENABLED
+  if (false) {
+    gLogStream <<
+      "=== dottedDurationAsWholeNotes_FOR_TEMPO()" <<
+      ", dots: " << dots <<
+      ", result: " << result <<
+      "\"" <<
+      endl;
+  }
+#endif
+
+      --dots;
+    } // while
+  }
+
+  return result;
+}
+
+string msrDuration::asString () const
+{
+  stringstream s;
+
+  s <<
+     msrDurationKindAsString (fDurationKind);
+
+  for (int i = 1; i <= fDotsNumber; ++i) {
+    s << ".";
+  } // for
+
+  return s.str ();
+}
+
+void msrDuration::print (ostream& os) const
+{
+  const int fieldWidth = 11;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "durationKind" << " : " <<
+    msrDurationKindAsString (fDurationKind) <<
+    endl <<
+    setw (fieldWidth) <<
+    "dotsNumber" << " : " << fDotsNumber <<
+    endl;
+};
+
+ostream& operator << (ostream& os, const msrDuration& elt)
+{
+  os << elt.asString ();
   return os;
 }
 
@@ -153,11 +305,11 @@ msrDottedDuration::msrDottedDuration (
 msrDottedDuration::~msrDottedDuration ()
 {}
 
-rational msrDottedDuration::dottedDurationAsWholeNotes (
+Rational msrDottedDuration::dottedDurationAsWholeNotes (
   int inputLineNumber) const
 {
   // convert duration into whole notes
-  rational
+  Rational
     result =
       msrDurationKindAsWholeNotes (
         fDurationKind);
@@ -176,17 +328,15 @@ rational msrDottedDuration::dottedDurationAsWholeNotes (
 
   // take dots into account if any
   if (fDotsNumber > 0) {
-    rational
-      increment = result * rational (1,2);
+    Rational
+      increment = result * Rational (1,2);
 
     int dots = fDotsNumber;
 
     while (dots > 0) {
       result += increment;
-      result.rationalise ();
 
-      increment *= rational (1,2);
-      increment.rationalise ();
+      increment *= Rational (1,2);
 
 #ifdef TRACING_IS_ENABLED
   if (false) { // JMI
@@ -206,14 +356,14 @@ rational msrDottedDuration::dottedDurationAsWholeNotes (
   return result;
 }
 
-rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
+Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
   // used in lpsrBasicTypes, dottedDurationAsLilypondStringWithoutBackSlash(),
   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
   // JMI BUGGY, NEVER TESTED TEMP???
   int inputLineNumber) const
 {
   // convert duration into whole notes
-  rational
+  Rational
     result =
       msrDurationKindAsWholeNotes (
         fDurationKind);
@@ -234,8 +384,7 @@ rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
 
     while (dots > 0) {
       result *=
-        rational (3, 2);
-      result.rationalise ();
+        Rational (3, 2);
 
 #ifdef TRACING_IS_ENABLED
   if (false) {
@@ -283,7 +432,7 @@ void msrDottedDuration::print (ostream& os) const
     endl;
 };
 
-ostream& operator<< (ostream& os, const msrDottedDuration& elt)
+ostream& operator << (ostream& os, const msrDottedDuration& elt)
 {
   os << elt.asString ();
   return os;
@@ -613,7 +762,7 @@ string msrOctaveKindAsString (msrOctaveKind octaveKind)
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrOctaveKind& elt)
+ostream& operator << (ostream& os, const msrOctaveKind& elt)
 {
   os << msrOctaveKindAsString (elt);
   return os;
@@ -647,7 +796,7 @@ string msrOctaveEntryKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrOctaveEntryKind& elt)
+ostream& operator << (ostream& os, const msrOctaveEntryKind& elt)
 {
   os << msrOctaveEntryKindAsString (elt);
   return os;
@@ -982,13 +1131,13 @@ void msrSemiTonesPitchAndOctave::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrSemiTonesPitchAndOctave& elt)
+ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndOctave& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1264,13 +1413,13 @@ void msrQuarterTonesPitchAndOctave::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrQuarterTonesPitchAndOctave& elt)
+ostream& operator << (ostream& os, const S_msrQuarterTonesPitchAndOctave& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1455,12 +1604,12 @@ msrDurationKind msrDurationKindFromString (
   return result;
 }
 
-EXP rational rationalFromDurationKindAndDotsNumber (
+EXP Rational rationalFromDurationKindAndDotsNumber (
   msrDurationKind durationKind,
   int             dotsNumber)
 {
   // convert duration into whole notes
-  rational
+  Rational
     result =
       msrDurationKindAsWholeNotes (
         durationKind);
@@ -1477,17 +1626,15 @@ EXP rational rationalFromDurationKindAndDotsNumber (
 
   // take dots into account if any
   if (dotsNumber > 0) {
-    rational
-      increment = result * rational (1,2);
+    Rational
+      increment = result * Rational (1,2);
 
     int dots = dotsNumber;
 
     while (dots > 0) {
       result += increment;
-      result.rationalise ();
 
-      increment *= rational (1,2);
-      increment.rationalise ();
+      increment *= Rational (1,2);
 
 #ifdef TRACING_IS_ENABLED
   if (false) { // JMI
@@ -1507,63 +1654,63 @@ EXP rational rationalFromDurationKindAndDotsNumber (
   return result;
 }
 
-rational msrDurationKindAsWholeNotes (msrDurationKind durationKind)
+Rational msrDurationKindAsWholeNotes (msrDurationKind durationKind)
 {
-  rational result;
+  Rational result;
 
   switch (durationKind) {
     case msrDurationKind::k_NoDuration:
-      result = rational (0, 1);
+      result = Rational (0, 1);
       break;
 
     case msrDurationKind::k1024th:
-      result = rational (1, 1024);
+      result = Rational (1, 1024);
       break;
     case msrDurationKind::k512th:
-      result = rational (1, 512);
+      result = Rational (1, 512);
       break;
     case msrDurationKind::k256th:
-      result = rational (1, 256);
+      result = Rational (1, 256);
       break;
     case msrDurationKind::k128th:
-      result = rational (1, 128);
+      result = Rational (1, 128);
       break;
     case msrDurationKind::k64th:
-      result = rational (1, 64);
+      result = Rational (1, 64);
       break;
     case msrDurationKind::k32nd:
-      result = rational (1, 32);
+      result = Rational (1, 32);
       break;
     case msrDurationKind::k16th:
-      result = rational (1, 16);
+      result = Rational (1, 16);
       break;
     case msrDurationKind::kEighth:
-      result = rational (1, 8);
+      result = Rational (1, 8);
       break;
     case msrDurationKind::kQuarter:
-      result = rational (1, 4);
+      result = Rational (1, 4);
       break;
     case msrDurationKind::kHalf:
-      result = rational (1, 2);
+      result = Rational (1, 2);
       break;
     case msrDurationKind::kWhole:
-      result = rational (1, 1);
+      result = Rational (1, 1);
       break;
     case msrDurationKind::kBreve:
-      result = rational (2, 1);
+      result = Rational (2, 1);
       break;
     case msrDurationKind::kLonga:
-      result = rational (4, 1);
+      result = Rational (4, 1);
       break;
     case msrDurationKind::kMaxima:
-      result = rational (8, 1);
+      result = Rational (8, 1);
       break;
   } // switch
 
   return result;
 }
 
-msrDurationKind wholeNotesAsDurationKind (rational wholeNotes)
+msrDurationKind wholeNotesAsDurationKind (Rational wholeNotes)
 {
   msrDurationKind result = msrDurationKind::k_NoDuration;
 
@@ -1794,7 +1941,7 @@ string msrDurationKindAsString (msrDurationKind durationKind)
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrDurationKind& elt)
+ostream& operator << (ostream& os, const msrDurationKind& elt)
 {
   os << msrDurationKindAsString (elt);
   return os;
@@ -1900,7 +2047,7 @@ int msrNumberOfDots (int n)
 //_______________________________________________________________________________
 string wholeNotesAsMsrString (
   int             inputLineNumber,
-  const rational& wholeNotes,
+  const Rational& wholeNotes,
   int&            dotsNumber)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1949,7 +2096,7 @@ string wholeNotesAsMsrString (
     return "???";
   }
 
-//   wholeNotes.rationalise (); JMI ???
+//  JMI ???
 //
 // #ifdef TRACING_IS_ENABLED
 //   if (gGlobalTracingOahGroup->getTraceWholeNotesDetails ()) {
@@ -2007,7 +2154,7 @@ string wholeNotesAsMsrString (
   /*
     valid denominators are powers of 2
 
-    the rational representing a dotted duration has to be brought
+    the Rational representing a dotted duration has to be brought
     to a value less than two, as explained above
 
     this is done by changing it denominator in the resulting string:
@@ -2300,7 +2447,7 @@ string wholeNotesAsMsrString (
 
 string wholeNotesAsMsrString (
   int             inputLineNumber,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
   int dotsNumber; // not used
 
@@ -2313,13 +2460,13 @@ string wholeNotesAsMsrString (
 
 string multipleFullBarRestsWholeNotesAsMsrString (
   int             inputLineNumber, // JMI
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
   stringstream s;
 
-  rational
+  Rational
     denominatorAsFraction =
-      rational (
+      Rational (
         1,
         wholeNotes.getDenominator ());
 
@@ -2342,28 +2489,28 @@ string multipleFullBarRestsWholeNotesAsMsrString (
 // moments
 //______________________________________________________________________________
 // constants
-const rational  msrMoment::K_NO_POSITION (-987, 1);
+const Rational  msrMoment::K_NO_POSITION (-987, 1);
 const msrMoment msrMoment::K_NO_MOMENT   (K_NO_POSITION, K_NO_POSITION);
 
 msrMoment::msrMoment ()
 {
-  fWrittenPositionInMeseasure = rational (-1, 1);
-  fSoundingRelativeOffset     = rational (-1, 1);
+  fWrittenPositionInMeseasure = Rational (-1, 1);
+  fSoundingRelativeOffset     = Rational (-1, 1);
 }
 
 msrMoment::msrMoment (
-  const rational& writtenPositionInMeseasure,
-  const rational& soundingRelativeOffset)
+  const Rational& writtenPositionInMeseasure,
+  const Rational& soundingRelativeOffset)
 {
   fWrittenPositionInMeseasure = writtenPositionInMeseasure;
   fSoundingRelativeOffset     = soundingRelativeOffset;
 }
 
 msrMoment::msrMoment (
-  const rational& writtenPositionInMeseasure)
+  const Rational& writtenPositionInMeseasure)
 {
   fWrittenPositionInMeseasure = writtenPositionInMeseasure;
-  fSoundingRelativeOffset     = rational (0, 1);
+  fSoundingRelativeOffset     = Rational (0, 1);
 }
 
 msrMoment::~msrMoment ()
@@ -2371,9 +2518,9 @@ msrMoment::~msrMoment ()
 
 void msrMoment::testMsrMomentComparisons (ostream& os)
 {
-  msrMoment m0 (rational (3, 4));
-  msrMoment m1 (rational (3, 4), rational (-1, 16));
-  msrMoment m2 (rational (3, 4), rational (2, 16));
+  msrMoment m0 (Rational (3, 4));
+  msrMoment m1 (Rational (3, 4), Rational (-1, 16));
+  msrMoment m2 (Rational (3, 4), Rational (2, 16));
 
   os <<
     "m1: " << m1 << endl <<
@@ -2534,7 +2681,7 @@ void msrMoment::print (ostream& os) const
   os << ']' << endl;
 };
 
-ostream& operator<< (ostream& os, const msrMoment& elt)
+ostream& operator << (ostream& os, const msrMoment& elt)
 {
   elt.print (os);
   return os;
@@ -2557,7 +2704,7 @@ msrTupletFactor::msrTupletFactor (
 }
 
 msrTupletFactor::msrTupletFactor (
-  const rational& rationalTupletFactor)
+  const Rational& rationalTupletFactor)
 {
   fTupletActualNotes = rationalTupletFactor.getNumerator ();
   fTupletNormalNotes = rationalTupletFactor.getDenominator ();
@@ -2600,7 +2747,7 @@ void msrTupletFactor::print (ostream& os) const
   --gIndenter;
 };
 
-ostream& operator<< (ostream& os, const msrTupletFactor& elt)
+ostream& operator << (ostream& os, const msrTupletFactor& elt)
 {
   elt.print (os);
   return os;
@@ -2945,7 +3092,7 @@ string msrIntervalKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrIntervalKind& elt)
+ostream& operator << (ostream& os, const msrIntervalKind& elt)
 {
   os << msrIntervalKindAsString (elt);
   return os;
@@ -10496,7 +10643,7 @@ string msrStaffKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrStaffKind& elt)
+ostream& operator << (ostream& os, const msrStaffKind& elt)
 {
   os << msrStaffKindAsString (elt);
   return os;
@@ -10556,7 +10703,7 @@ string msrVoiceKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrVoiceKind& elt)
+ostream& operator << (ostream& os, const msrVoiceKind& elt)
 {
   os << msrVoiceKindAsString (elt);
   return os;
@@ -10637,7 +10784,7 @@ string msrMeasureKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrMeasureKind& elt)
+ostream& operator << (ostream& os, const msrMeasureKind& elt)
 {
   os << msrMeasureKindAsString (elt);
   return os;
@@ -10710,7 +10857,7 @@ string msrMeasureImplicitKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrMeasureImplicitKind& elt)
+ostream& operator << (ostream& os, const msrMeasureImplicitKind& elt)
 {
   os << msrMeasureImplicitKindAsString (elt);
   return os;
@@ -10807,7 +10954,7 @@ string msrClefKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrClefKind& elt)
+ostream& operator << (ostream& os, const msrClefKind& elt)
 {
   os << msrClefKindAsString (elt);
   return os;
@@ -11057,7 +11204,7 @@ string msrKeyKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrKeyKind& elt)
+ostream& operator << (ostream& os, const msrKeyKind& elt)
 {
   os << msrKeyKindAsString (elt);
   return os;
@@ -11104,7 +11251,7 @@ string msrModeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrModeKind& elt)
+ostream& operator << (ostream& os, const msrModeKind& elt)
 {
   os << msrModeKindAsString (elt);
   return os;
@@ -11188,7 +11335,7 @@ string msrTimeSignatureSymbolKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrTimeSignatureSymbolKind& elt)
+ostream& operator << (ostream& os, const msrTimeSignatureSymbolKind& elt)
 {
   os << msrTimeSignatureSymbolKindAsString (elt);
   return os;
@@ -11220,7 +11367,7 @@ string msrTimeSignatureSeparatorKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrTimeSignatureSeparatorKind& elt)
+ostream& operator << (ostream& os, const msrTimeSignatureSeparatorKind& elt)
 {
   os << msrTimeSignatureSeparatorKindAsString (elt);
   return os;
@@ -11258,7 +11405,7 @@ string msrTimeSignatureRelationKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrTimeSignatureRelationKind& elt)
+ostream& operator << (ostream& os, const msrTimeSignatureRelationKind& elt)
 {
   os << msrTimeSignatureRelationKindAsString (elt);
   return os;
@@ -11283,7 +11430,7 @@ string msrRepeatEndingKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrRepeatEndingKind& elt)
+ostream& operator << (ostream& os, const msrRepeatEndingKind& elt)
 {
   os << msrRepeatEndingKindAsString (elt);
   return os;
@@ -11450,7 +11597,7 @@ string msrHarmonyKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrHarmonyKind& elt)
+ostream& operator << (ostream& os, const msrHarmonyKind& elt)
 {
   os << msrHarmonyKindAsString (elt);
   return os;
@@ -11761,7 +11908,7 @@ string msrHarmonyKindShortName (
       result = "other";
       break;
     case msrHarmonyKind::kHarmonyNone:
-      result = "none";
+      result = "[NONE]";
       break;
   } // switch
 
@@ -12154,7 +12301,7 @@ string msrDiatonicPitchKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrDiatonicPitchKind& elt)
+ostream& operator << (ostream& os, const msrDiatonicPitchKind& elt)
 {
   os << msrDiatonicPitchKindAsString (elt);
   return os;
@@ -12359,7 +12506,7 @@ string msrAlterationKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrAlterationKind& elt)
+ostream& operator << (ostream& os, const msrAlterationKind& elt)
 {
   os << msrAlterationKindAsString (elt);
   return os;
@@ -12489,7 +12636,7 @@ string msrAccidentalKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrAccidentalKind& elt)
+ostream& operator << (ostream& os, const msrAccidentalKind& elt)
 {
   os <<msrAccidentalKindAsString (elt);
   return os;
@@ -12636,7 +12783,7 @@ string msrEditorialAccidentalKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrEditorialAccidentalKind& elt)
+ostream& operator << (ostream& os, const msrEditorialAccidentalKind& elt)
 {
   os <<msrEditorialAccidentalKindAsString (elt);
   return os;
@@ -12662,7 +12809,7 @@ string msrCautionaryAccidentalKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrCautionaryAccidentalKind& elt)
+ostream& operator << (ostream& os, const msrCautionaryAccidentalKind& elt)
 {
   os <<msrCautionaryAccidentalKindAsString (elt);
   return os;
@@ -13261,7 +13408,7 @@ string msrQuarterTonesPitchKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrQuarterTonesPitchKind& elt)
+ostream& operator << (ostream& os, const msrQuarterTonesPitchKind& elt)
 {
   os << msrQuarterTonesPitchKindAsString (elt);
   return os;
@@ -14516,7 +14663,7 @@ string msrSemiTonesPitchKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrSemiTonesPitchKind& elt)
+ostream& operator << (ostream& os, const msrSemiTonesPitchKind& elt)
 {
   os << msrSemiTonesPitchKindAsString (elt);
   return os;
@@ -14721,7 +14868,7 @@ string msrAlterationPreferenceKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrAlterationPreferenceKind& elt)
+ostream& operator << (ostream& os, const msrAlterationPreferenceKind& elt)
 {
   os << msrAlterationPreferenceKindAsString (elt);
   return os;
@@ -15045,7 +15192,7 @@ string msrNoteKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrNoteKind& elt)
+ostream& operator << (ostream& os, const msrNoteKind& elt)
 {
   os << msrNoteKindAsString (elt);
   return os;
@@ -15071,7 +15218,7 @@ string msrSoloNoteOrRestInVoiceKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrSoloNoteOrRestInVoiceKind& elt)
+ostream& operator << (ostream& os, const msrSoloNoteOrRestInVoiceKind& elt)
 {
   os << msrSoloNoteOrRestInVoiceKindAsString (elt);
   return os;
@@ -15097,7 +15244,7 @@ string msrSoloNoteOrRestInStaffKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrSoloNoteOrRestInStaffKind& elt)
+ostream& operator << (ostream& os, const msrSoloNoteOrRestInStaffKind& elt)
 {
   os << msrSoloNoteOrRestInStaffKindAsString (elt);
   return os;
@@ -15129,7 +15276,7 @@ string msrChordInKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrChordInKind& elt)
+ostream& operator << (ostream& os, const msrChordInKind& elt)
 {
   os << msrChordInKindAsString (elt);
   return os;
@@ -15158,7 +15305,7 @@ EXP string msrTupletInKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrTupletInKind& elt)
+ostream& operator << (ostream& os, const msrTupletInKind& elt)
 {
   os << msrTupletInKindAsString (elt);
   return os;
@@ -15195,7 +15342,7 @@ string msrBeamKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrBeamKind& elt)
+ostream& operator << (ostream& os, const msrBeamKind& elt)
 {
   os << msrBeamKindAsString (elt);
   return os;
@@ -15225,7 +15372,7 @@ string msrTieKindAsString (msrTieKind tieKind)
   return s.str ();
 }
 
-ostream& operator<< (ostream& os, const msrTieKind& elt)
+ostream& operator << (ostream& os, const msrTieKind& elt)
 {
   os << msrTieKindAsString (elt);
   return os;
@@ -15267,7 +15414,7 @@ string msrSlurTypeKindAsString (
   return s.str ();
 }
 
-ostream& operator<< (ostream& os, const msrSlurTypeKind& elt)
+ostream& operator << (ostream& os, const msrSlurTypeKind& elt)
 {
   os << msrSlurTypeKindAsString (elt);
   return os;
@@ -15381,7 +15528,7 @@ string msrLengthUnitKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrLengthUnitKind& elt)
+ostream& operator << (ostream& os, const msrLengthUnitKind& elt)
 {
   os << msrLengthUnitKindAsString (elt);
   return os;
@@ -15548,19 +15695,19 @@ void msrLength::print (ostream& os) const
     asString (); // JMI
 };
 
-ostream& operator<< (ostream& os, const msrLength& elt)
+ostream& operator << (ostream& os, const msrLength& elt)
 {
   elt.print (os);
   return os;
 }
 
-ostream& operator<< (ostream& os, const S_msrLength& elt)
+ostream& operator << (ostream& os, const S_msrLength& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -15594,7 +15741,7 @@ string msrMarginTypeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrMarginTypeKind& elt)
+ostream& operator << (ostream& os, const msrMarginTypeKind& elt)
 {
   os << msrMarginTypeKindAsString (elt);
   return os;
@@ -15706,13 +15853,13 @@ void msrMargin::print (ostream& os) const
     asString ();
 };
 
-ostream& operator<< (ostream& os, const S_msrMargin& elt)
+ostream& operator << (ostream& os, const S_msrMargin& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -15934,7 +16081,7 @@ void msrMarginsGroup::print (ostream& os) const
       os << fLeftMargin;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -15945,7 +16092,7 @@ void msrMarginsGroup::print (ostream& os) const
       os << fRightMargin;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -15956,7 +16103,7 @@ void msrMarginsGroup::print (ostream& os) const
       os << fTopMargin;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -15967,20 +16114,20 @@ void msrMarginsGroup::print (ostream& os) const
       os << fBottomMargin;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
   --gIndenter;
 };
 
-ostream& operator<< (ostream& os, const S_msrMarginsGroup& elt)
+ostream& operator << (ostream& os, const S_msrMarginsGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -16026,7 +16173,7 @@ string msrFontSizeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const  msrFontSizeKind& elt)
+ostream& operator << (ostream& os, const  msrFontSizeKind& elt)
 {
   os <<  msrFontSizeKindAsString (elt);
   return os;
@@ -16204,7 +16351,7 @@ string msrFontStyleKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrFontStyleKind& elt)
+ostream& operator << (ostream& os, const msrFontStyleKind& elt)
 {
   os << msrFontStyleKindAsString (elt);
   return os;
@@ -16261,7 +16408,7 @@ string msrFontWeightKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrFontWeightKind& elt)
+ostream& operator << (ostream& os, const msrFontWeightKind& elt)
 {
   os << msrFontWeightKindAsString (elt);
   return os;
@@ -16323,7 +16470,7 @@ string msrJustifyKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrJustifyKind& elt)
+ostream& operator << (ostream& os, const msrJustifyKind& elt)
 {
   os << msrJustifyKindAsString (elt);
   return os;
@@ -16384,7 +16531,7 @@ string msrHorizontalAlignmentKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrHorizontalAlignmentKind& elt)
+ostream& operator << (ostream& os, const msrHorizontalAlignmentKind& elt)
 {
   os << msrHorizontalAlignmentKindAsString (elt);
   return os;
@@ -16445,7 +16592,7 @@ string msrVerticalAlignmentKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrVerticalAlignmentKind& elt)
+ostream& operator << (ostream& os, const msrVerticalAlignmentKind& elt)
 {
   os << msrVerticalAlignmentKindAsString (elt);
   return os;
@@ -16474,7 +16621,7 @@ string msrDirectionKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrDirectionKind& elt)
+ostream& operator << (ostream& os, const msrDirectionKind& elt)
 {
   os << msrDirectionKindAsString (elt);
   return os;
@@ -16538,7 +16685,7 @@ string msrPrintObjectKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrPrintObjectKind& elt)
+ostream& operator << (ostream& os, const msrPrintObjectKind& elt)
 {
   os << msrPrintObjectKindAsString (elt);
   return os;
@@ -16599,7 +16746,7 @@ string msrPlacementKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrPlacementKind& elt)
+ostream& operator << (ostream& os, const msrPlacementKind& elt)
 {
   os << msrPlacementKindAsString (elt);
   return os;
@@ -16792,7 +16939,7 @@ string msrDynamicKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrDynamicKind& elt)
+ostream& operator << (ostream& os, const msrDynamicKind& elt)
 {
   os << msrDynamicKindAsString (elt);
   return os;
@@ -16849,7 +16996,7 @@ string msrSlashTypeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrSlashTypeKind& elt)
+ostream& operator << (ostream& os, const msrSlashTypeKind& elt)
 {
   os << msrSlashTypeKindAsString (elt);
   return os;
@@ -16875,7 +17022,7 @@ string msrUseDotsKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrUseDotsKind& elt)
+ostream& operator << (ostream& os, const msrUseDotsKind& elt)
 {
   os << msrUseDotsKindAsString (elt);
   return os;
@@ -16901,7 +17048,7 @@ string msrSlashUseStemsKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrSlashUseStemsKind& elt)
+ostream& operator << (ostream& os, const msrSlashUseStemsKind& elt)
 {
   os << msrSlashUseStemsKindAsString (elt);
   return os;
@@ -16931,7 +17078,7 @@ string msrLineTypeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrLineTypeKind& elt)
+ostream& operator << (ostream& os, const msrLineTypeKind& elt)
 {
   os << msrLineTypeKindAsString (elt);
   return os;
@@ -16961,7 +17108,7 @@ string msrTremoloTypeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrTremoloTypeKind& elt)
+ostream& operator << (ostream& os, const msrTremoloTypeKind& elt)
 {
   os << msrTremoloTypeKindAsString (elt);
   return os;
@@ -16988,7 +17135,7 @@ string msrTechnicalTypeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrTechnicalTypeKind& elt)
+ostream& operator << (ostream& os, const msrTechnicalTypeKind& elt)
 {
   os << msrTechnicalTypeKindAsString (elt);
   return os;
@@ -17018,7 +17165,7 @@ string msrSpannerTypeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrSpannerTypeKind& elt)
+ostream& operator << (ostream& os, const msrSpannerTypeKind& elt)
 {
   os << msrSpannerTypeKindAsString (elt);
   return os;
@@ -19682,13 +19829,13 @@ void msrHarmonyInterval::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrHarmonyInterval& elt)
+ostream& operator << (ostream& os, const S_msrHarmonyInterval& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -20925,13 +21072,13 @@ void msrHarmonyStructure::printAllHarmoniesStructures (ostream& os)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrHarmonyStructure& elt)
+ostream& operator << (ostream& os, const S_msrHarmonyStructure& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -21023,13 +21170,13 @@ void msrSemiTonesPitchAndAbsoluteOctave::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrSemiTonesPitchAndAbsoluteOctave& elt)
+ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndAbsoluteOctave& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -21120,13 +21267,13 @@ void msrSemiTonesPitchAndRelativeOctave::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrSemiTonesPitchAndRelativeOctave& elt)
+ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndRelativeOctave& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -21474,13 +21621,13 @@ void msrHarmonyContents::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrHarmonyContents& elt)
+ostream& operator << (ostream& os, const S_msrHarmonyContents& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -22177,7 +22324,7 @@ void msrRGBColor::print (ostream& os) const
   os << asString () << endl;
 };
 
-ostream& operator<< (ostream& os, const msrRGBColor& elt)
+ostream& operator << (ostream& os, const msrRGBColor& elt)
 {
   elt.print (os);
   return os;
@@ -22220,7 +22367,7 @@ void msrAlphaRGBColor::print (ostream& os) const
   os << asString () << endl;
 };
 
-ostream& operator<< (ostream& os, const msrAlphaRGBColor& elt)
+ostream& operator << (ostream& os, const msrAlphaRGBColor& elt)
 {
   elt.print (os);
   return os;
@@ -22245,7 +22392,7 @@ string msrScoreNotationKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrScoreNotationKind& elt)
+ostream& operator << (ostream& os, const msrScoreNotationKind& elt)
 {
   os << msrScoreNotationKindAsString (elt);
   return os;

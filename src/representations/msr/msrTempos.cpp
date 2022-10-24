@@ -45,7 +45,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrTempoNote msrTempoNote::create (
   int             inputLineNumber,
-  const rational& tempoNoteWholeNotes,
+  const Rational& tempoNoteWholeNotes,
   Bool            tempoNoteBelongsToATuplet)
 {
   msrTempoNote * o =
@@ -60,7 +60,7 @@ S_msrTempoNote msrTempoNote::create (
 
 msrTempoNote::msrTempoNote (
   int             inputLineNumber,
-  const rational& tempoNoteWholeNotes,
+  const Rational& tempoNoteWholeNotes,
   Bool            tempoNoteBelongsToATuplet)
     : msrElement (inputLineNumber)
 {
@@ -188,7 +188,7 @@ void msrTempoNote::print (ostream& os) const
     else {
       os <<
         " : " <<
-       "none" <<
+       "[NONE]" <<
         endl;
     }
 
@@ -197,15 +197,15 @@ void msrTempoNote::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrTempoNote& elt)
+ostream& operator << (ostream& os, const S_msrTempoNote& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -216,7 +216,7 @@ S_msrTempoTuplet msrTempoTuplet::create (
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   msrTupletFactor              tempoTupletFactor,
-  const rational&              memberNotesDisplayWholeNotes)
+  const Rational&              memberNotesDisplayWholeNotes)
 {
   msrTempoTuplet* o =
     new msrTempoTuplet (
@@ -236,7 +236,7 @@ msrTempoTuplet::msrTempoTuplet (
   msrTempoTupletBracketKind    tempoTupletBracketKind,
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
   msrTupletFactor              tempoTupletFactor,
-  const rational&              memberNotesDisplayWholeNotes)
+  const Rational&              memberNotesDisplayWholeNotes)
     : msrElement (inputLineNumber)
 {
   fTempoTupletNumber = tempoTupletNumber;
@@ -248,7 +248,7 @@ msrTempoTuplet::msrTempoTuplet (
 
   fMemberNotesDisplayWholeNotes  = memberNotesDisplayWholeNotes;
 
-  fTempoTupletDisplayWholeNotes  = rational (0, 1);
+  fTempoTupletDisplayWholeNotes  = Rational (0, 1);
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceTempos ()){
@@ -345,7 +345,6 @@ void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
 
   fTupletDisplayWholeNotes += // JMI
     note->getNoteDisplayWholeNotes ();
-  fTempoTupletDisplayWholeNotes.rationalise ();
 
     */
 }
@@ -371,7 +370,6 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
   // account for tempoTuplet duration
   fTempoTupletDisplayWholeNotes += // JMI
     tempoTuplet->getTempoTupletDisplayWholeNotes ();
-  fTempoTupletDisplayWholeNotes.rationalise ();
 
     / *
   fTempoTupletDisplayWholeNotes += // JMI
@@ -422,7 +420,6 @@ void msrTempoTuplet::removeFirstNoteFromTempoTuplet (
         // account for note duration
         fTempoTupletDisplayWholeNotes -= // JMI
           tempoNote->getTempoNoteWholeNotes ();
-        fTempoTupletDisplayWholeNotes.rationalise ();
 
         // don't update measure number nor position in measure: // JMI
         // they have not been set yet
@@ -769,15 +766,15 @@ void msrTempoTuplet::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrTempoTuplet& elt)
+ostream& operator << (ostream& os, const S_msrTempoTuplet& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -954,7 +951,7 @@ void msrTempoNotesRelationshipshipElements::print (ostream& os) const
   }
   else {
     os <<
-      " : " << "none ???" <<
+      " : " << "[NONE]" <<
       endl;
   }
 
@@ -963,15 +960,15 @@ void msrTempoNotesRelationshipshipElements::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrTempoNotesRelationshipshipElements& elt)
+ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipshipElements& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1472,7 +1469,7 @@ void msrTempo::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " << "none" <<
+    os << " : " << "[NONE]" <<
     endl;
   }
 
@@ -1499,7 +1496,7 @@ void msrTempo::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << " : " << "none" <<
+    os << " : " << "[NONE]" <<
     endl;
   }
 
@@ -1520,15 +1517,15 @@ void msrTempo::printShort (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrTempo& elt)
+ostream& operator << (ostream& os, const S_msrTempo& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

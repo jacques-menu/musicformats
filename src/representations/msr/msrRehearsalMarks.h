@@ -105,7 +105,7 @@ class EXP msrRehearsalMark : public msrMeasureElement
     msrPlacementKind      fRehearsalMarkPlacementKind;
 };
 typedef SMARTP<msrRehearsalMark> S_msrRehearsalMark;
-EXP ostream& operator<< (ostream& os, const S_msrRehearsalMark& elt);
+EXP ostream& operator << (ostream& os, const S_msrRehearsalMark& elt);
 
 
 } // namespace MusicFormats

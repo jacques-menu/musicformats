@@ -148,7 +148,7 @@ void lpsrBookBlockElement::print (ostream& os) const
   // will never be called since it is overridden in subclasses
 }
 
-ostream& operator<< (ostream& os, const S_lpsrBookBlockElement& scr)
+ostream& operator << (ostream& os, const S_lpsrBookBlockElement& scr)
 {
   scr->print (os);
   return os;
@@ -398,7 +398,7 @@ void lpsrScoreBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrScoreBlock& scr)
+ostream& operator << (ostream& os, const S_lpsrScoreBlock& scr)
 {
   scr->print (os);
   return os;
@@ -576,7 +576,7 @@ void lpsrBookPartBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrBookPartBlock& scr)
+ostream& operator << (ostream& os, const S_lpsrBookPartBlock& scr)
 {
   scr->print (os);
   return os;
@@ -855,7 +855,7 @@ void lpsrBookBlock::print (ostream& os) const
   }
   else {
     os <<
-      " : none" <<
+      " : [NONE]" <<
       endl;
   }
 
@@ -868,7 +868,7 @@ void lpsrBookBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrBookBlock& scr)
+ostream& operator << (ostream& os, const S_lpsrBookBlock& scr)
 {
   scr->print (os);
   return os;

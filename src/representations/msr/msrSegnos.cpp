@@ -120,13 +120,13 @@ void msrSegno::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrSegno& elt)
+ostream& operator << (ostream& os, const S_msrSegno& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -156,7 +156,7 @@ string dalSegnoKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrDalSegnoKind& elt)
+ostream& operator << (ostream& os, const msrDalSegnoKind& elt)
 {
   os << dalSegnoKindAsString (elt);
   return os;
@@ -197,7 +197,9 @@ msrDalSegno::~msrDalSegno ()
 {}
 
 void msrDalSegno::setDalSegnoPositionInMeasure (
-  const rational& positionInMeasure)
+  const S_msrMeasure measure,
+  const Rational&    positionInMeasure,
+  const string&      context)
 {
   // set the dal segno position in measure
 
@@ -211,26 +213,21 @@ void msrDalSegno::setDalSegnoPositionInMeasure (
   }
 #endif
 
-  string context =
-    "setDalSegnoPositionInMeasure()";
-
-  setMeasureElementPositionInMeasure (
-    positionInMeasure,
-    context);
+  // set harmony's position in measure
+  fMeasureElementPositionInMeasure = positionInMeasure;
 
 /* JMI
-  if (false) { // JMI
+  if (false) { // JMI v0.9.66
   // compute dal segno's position in voice
-  rational
-     positionInVoice =
-       segnoUpLinkToMeasure->getMeasurePositionInVoice ()
+  Rational
+     positionFromBeginningOfVoice =
+       segnoUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
         +
       positionInMeasure;
-  positionInVoice.rationalise ();
 
   // set dal segno's position in voice
-  setMeasureElementPositionInVoice (
-    positionInVoice,
+  setMeasureElementPositionFromBeginningOfVoice (
+    positionFromBeginningOfVoice,
     context);
 
   // update current position in voice
@@ -240,7 +237,7 @@ void msrDalSegno::setDalSegnoPositionInMeasure (
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionInVoice (
+    incrementCurrentPositionFromBeginningOfVoice (
       fdal segnoNotesVector [0]->getMeasureElementSoundingWholeNotes ());
 }
       */
@@ -333,7 +330,7 @@ void msrDalSegno::print (ostream& os) const
     "positionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
     endl <<
     setw (fieldWidth) <<
-    "positionInVoice" << " : " << fMeasureElementPositionInVoice <<
+    "positionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
     endl <<
     setw (fieldWidth) <<
     "line" << " : " << fInputLineNumber <<
@@ -344,13 +341,13 @@ void msrDalSegno::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrDalSegno& elt)
+ostream& operator << (ostream& os, const S_msrDalSegno& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

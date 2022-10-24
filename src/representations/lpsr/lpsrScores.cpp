@@ -3176,7 +3176,7 @@ void lpsrScore::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrScore& scr)
+ostream& operator << (ostream& os, const S_lpsrScore& scr)
 {
   scr->print (os);
   return os;

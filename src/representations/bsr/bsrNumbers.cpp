@@ -286,13 +286,13 @@ void bsrNumber::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrNumber& elt)
+ostream& operator << (ostream& os, const S_bsrNumber& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

@@ -122,7 +122,7 @@ class EXP msrSlur : public msrElement
     msrPlacementKind      fSlurPlacementKind;
 };
 typedef SMARTP<msrSlur> S_msrSlur;
-EXP ostream& operator<< (ostream& os, const S_msrSlur& elt);
+EXP ostream& operator << (ostream& os, const S_msrSlur& elt);
 
 
 } // namespace MusicFormats

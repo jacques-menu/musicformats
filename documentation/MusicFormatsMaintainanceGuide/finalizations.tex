@@ -39,7 +39,7 @@ void msrMeasure::finalizeMeasure (
         break;
 
       case msrVoiceKind::kVoiceKindHarmonies:
-        finalizeHarmoniesMeasure (
+        finalizeHarmonyMeasure (
           inputLineNumber,
           measureRepeatContextKind,
           context);
@@ -89,7 +89,7 @@ There is a set of \virtualMethod{finalize*} methods in \mf. There basic ones are
 
 \item \method{msrMeasure}{finalizeFiguredBassMeasure},\\
 		  defined in \msrBoth{msrMeasures}
-\item \method{msrMeasure}{finalizeHarmoniesMeasure},\\
+\item \method{msrMeasure}{finalizeHarmonyMeasure},\\
 		  defined in \msrBoth{msrMeasures}\\[-0.5ex]
 
 
@@ -442,7 +442,7 @@ void msrMeasure::finalizeMeasure (
         break;
 
       case msrVoiceKind::kVoiceKindHarmonies:
-        finalizeHarmoniesMeasure (
+        finalizeHarmonyMeasure (
           inputLineNumber,
           measureRepeatContextKind,
           context);
@@ -457,9 +457,9 @@ void msrMeasure::finalizeMeasure (
 
     // position in voice
     rational
-      positionInVoice =
+      positionFromBeginningOfVoice =
         fetchMeasureUpLinkToVoice ()->
-          getCurrentPositionInVoice ();
+          getCurrentPositionFromBeginningOfVoice ();
 
     // assign measure' elements position in measure
     for (
@@ -470,8 +470,8 @@ void msrMeasure::finalizeMeasure (
       S_msrMeasureElement measureElement = (*i);
 
       measureElement->
-        assignMeasureElementPositionInVoice (
-          positionInVoice,
+        setMeasureElementPositionFromBeginningOfVoice (
+          positionFromBeginningOfVoice,
           "finalizeMeasure()");
     } // for
 
@@ -651,7 +651,7 @@ void msrMeasure::finalizeRegularMeasure (
 % -------------------------------------------------------------------------
 
 \begin{lstlisting}[language=CPlusPlus]
-void msrMeasure::finalizeHarmoniesMeasure (
+void msrMeasure::finalizeHarmonyMeasure (
   int                          inputLineNumber,
   msrMeasureRepeatContextKind measureRepeatContextKind,
   string                       context)
@@ -694,7 +694,7 @@ void msrMeasure::finalizeHarmoniesMeasure (
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "finalizeHarmoniesMeasure() 1");
+      "finalizeHarmonyMeasure() 1");
   }
 #endif
 
@@ -723,7 +723,7 @@ void msrMeasure::finalizeHarmoniesMeasure (
            fMeasureOrdinalNumberInVoice - 1 ];
 
   // handle the harmonies in this measure
-  finalizeHarmoniesInHarmoniesMeasure (
+  finalizeTheHarmoniesInHarmoniesMeasure (
     inputLineNumber,
     context);
 
@@ -741,7 +741,7 @@ void msrMeasure::finalizeHarmoniesMeasure (
   if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
     displayMeasure (
       inputLineNumber,
-      "finalizeHarmoniesMeasure() 2");
+      "finalizeHarmonyMeasure() 2");
   }
 #endif
 

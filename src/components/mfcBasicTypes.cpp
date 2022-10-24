@@ -689,13 +689,13 @@ void mfcVersionNumber::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_mfcVersionNumber& elt)
+ostream& operator << (ostream& os, const S_mfcVersionNumber& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -774,13 +774,13 @@ void mfcVersionDescr::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_mfcVersionDescr& elt)
+ostream& operator << (ostream& os, const S_mfcVersionDescr& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -861,13 +861,13 @@ void mfcVersionsHistory::print (ostream& os) const
   } // for
 }
 
-ostream& operator<< (ostream& os, const S_mfcVersionsHistory& elt)
+ostream& operator << (ostream& os, const S_mfcVersionsHistory& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1050,13 +1050,13 @@ void mfcComponentDescr::printHistory (ostream&  os) const
   fVersionsHistory->print (os);
 }
 
-ostream& operator<< (ostream& os, const S_mfcComponentDescr& elt)
+ostream& operator << (ostream& os, const S_mfcComponentDescr& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1102,13 +1102,13 @@ mfcOahComponent::mfcOahComponent (
 mfcOahComponent::~mfcOahComponent ()
 {}
 
-ostream& operator<< (ostream& os, const S_mfcOahComponent& elt)
+ostream& operator << (ostream& os, const S_mfcOahComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1154,13 +1154,13 @@ mfcRepresentationComponent::mfcRepresentationComponent (
 mfcRepresentationComponent::~mfcRepresentationComponent ()
 {}
 
-ostream& operator<< (ostream& os, const S_mfcRepresentationComponent& elt)
+ostream& operator << (ostream& os, const S_mfcRepresentationComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1206,13 +1206,13 @@ mfcPassComponent::mfcPassComponent (
 mfcPassComponent::~mfcPassComponent ()
 {}
 
-ostream& operator<< (ostream& os, const S_mfcPassComponent& elt)
+ostream& operator << (ostream& os, const S_mfcPassComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1467,7 +1467,7 @@ void mfcMultiComponent::printOahVersion (ostream&  os) const
     --gIndenter;
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   --gIndenter;
@@ -1495,7 +1495,7 @@ void mfcMultiComponent::printOahHistory (ostream&  os) const
     --gIndenter;
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   --gIndenter;
@@ -1537,7 +1537,7 @@ void mfcMultiComponent::printRepresentationsVersions (ostream&  os) const
     } // for
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   --gIndenter;
@@ -1579,7 +1579,7 @@ void mfcMultiComponent::printPassesVersions (ostream&  os) const
     } // for
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   --gIndenter;
@@ -1619,7 +1619,7 @@ void mfcMultiComponent::printRepresentationsHistory (ostream&  os) const
     } // for
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   --gIndenter;
@@ -1659,7 +1659,7 @@ void mfcMultiComponent::printPassesHistory (ostream&  os) const
     } // for
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   --gIndenter;
@@ -1719,7 +1719,7 @@ void mfcMultiComponent::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   os <<
@@ -1751,7 +1751,7 @@ void mfcMultiComponent::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 }
 
@@ -1859,13 +1859,13 @@ void mfcMultiComponent::printHistory (ostream&  os) const
   printPassesHistory (os);
 }
 
-ostream& operator<< (ostream& os, const S_mfcMultiComponent& elt)
+ostream& operator << (ostream& os, const S_mfcMultiComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1923,13 +1923,13 @@ mfcGeneratorComponent::mfcGeneratorComponent (
 mfcGeneratorComponent::~mfcGeneratorComponent ()
 {}
 
-ostream& operator<< (ostream& os, const S_mfcGeneratorComponent& elt)
+ostream& operator << (ostream& os, const S_mfcGeneratorComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1987,13 +1987,13 @@ mfcConverterComponent::mfcConverterComponent (
 mfcConverterComponent::~mfcConverterComponent ()
 {}
 
-ostream& operator<< (ostream& os, const S_mfcConverterComponent& elt)
+ostream& operator << (ostream& os, const S_mfcConverterComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -2153,7 +2153,7 @@ void mfcLibraryComponent::printConvertersVersions (ostream&  os) const
     } // for
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   --gIndenter;
@@ -2194,7 +2194,7 @@ void mfcLibraryComponent::printConvertersHistory (ostream&  os) const
     } // for
   }
   else {
-    os << " none" << endl;
+    os << " [NONE]" << endl;
   }
 
   --gIndenter;
@@ -2269,13 +2269,13 @@ void mfcLibraryComponent::printHistory (ostream&  os) const
   printConvertersHistory (os);
 }
 
-ostream& operator<< (ostream& os, const S_mfcLibraryComponent& elt)
+ostream& operator << (ostream& os, const S_mfcLibraryComponent& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

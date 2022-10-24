@@ -114,7 +114,7 @@ class EXP msrArticulation : public msrElement
     msrPlacementKind      fArticulationPlacementKind;
 };
 typedef SMARTP<msrArticulation> S_msrArticulation;
-EXP ostream& operator<< (ostream& os, const S_msrArticulation& elt);
+EXP ostream& operator << (ostream& os, const S_msrArticulation& elt);
 
 //______________________________________________________________________________
 class EXP msrFermata : public msrArticulation
@@ -204,7 +204,7 @@ class EXP msrFermata : public msrArticulation
     msrFermataTypeKind    fFermataTypeKind;
 };
 typedef SMARTP<msrFermata> S_msrFermata;
-EXP ostream& operator<< (ostream& os, const S_msrFermata& elt);
+EXP ostream& operator << (ostream& os, const S_msrFermata& elt);
 
 //______________________________________________________________________________
 class EXP msrArpeggiato : public msrArticulation
@@ -278,7 +278,7 @@ class EXP msrArpeggiato : public msrArticulation
     int                   fArpeggiatoNumber;
 };
 typedef SMARTP<msrArpeggiato> S_msrArpeggiato;
-EXP ostream& operator<< (ostream& os, const S_msrArpeggiato& elt);
+EXP ostream& operator << (ostream& os, const S_msrArpeggiato& elt);
 
 //______________________________________________________________________________
 class EXP msrNonArpeggiato : public msrArticulation
@@ -365,7 +365,7 @@ class EXP msrNonArpeggiato : public msrArticulation
     int                   fNonArpeggiatoNumber;
 };
 typedef SMARTP<msrNonArpeggiato> S_msrNonArpeggiato;
-EXP ostream& operator<< (ostream& os, const S_msrNonArpeggiato& elt);
+EXP ostream& operator << (ostream& os, const S_msrNonArpeggiato& elt);
 
 
 } // namespace MusicFormats

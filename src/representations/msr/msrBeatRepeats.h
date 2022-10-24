@@ -11,7 +11,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class msrBeatRepeat;
 typedef SMARTP<msrBeatRepeat> S_msrBeatRepeat;
 
@@ -107,7 +107,7 @@ class EXP msrBeatRepeatPattern : public msrElement
     S_msrSegment          fBeatRepeatPatternSegment;
 };
 typedef SMARTP<msrBeatRepeatPattern> S_msrBeatRepeatPattern;
-EXP ostream& operator<< (ostream& os, const S_msrBeatRepeatPattern& elt);
+EXP ostream& operator << (ostream& os, const S_msrBeatRepeatPattern& elt);
 
 //______________________________________________________________________________
 class EXP msrBeatRepeatReplicas : public msrElement
@@ -196,7 +196,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
     S_msrSegment          fBeatRepeatReplicasSegment;
 };
 typedef SMARTP<msrBeatRepeatReplicas> S_msrBeatRepeatReplicas;
-EXP ostream& operator<< (ostream& os, const S_msrBeatRepeatReplicas& elt);
+EXP ostream& operator << (ostream& os, const S_msrBeatRepeatReplicas& elt);
 
 //______________________________________________________________________________
 class EXP msrBeatRepeat : public msrSegmentElement
@@ -364,7 +364,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
                           fCurrentBeatRepeatBuildPhaseKind; // unused??? JMI
 };
 typedef SMARTP<msrBeatRepeat> S_msrBeatRepeat;
-EXP ostream& operator<< (ostream& os, const S_msrBeatRepeat& elt);
+EXP ostream& operator << (ostream& os, const S_msrBeatRepeat& elt);
 
 
 }

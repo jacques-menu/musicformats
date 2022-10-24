@@ -93,7 +93,7 @@ class EXP bsrDynamic : public bsrLineContentsElement
     S_bsrCellsList        fDynamicsCellsList;
 };
 typedef SMARTP<bsrDynamic> S_bsrDynamic;
-EXP ostream& operator<< (ostream& os, const S_bsrDynamic& elt);
+EXP ostream& operator << (ostream& os, const S_bsrDynamic& elt);
 
 
 }

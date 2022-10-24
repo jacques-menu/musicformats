@@ -415,13 +415,13 @@ void msrBeatRepeatElement::printShort (ostream& os)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrBeatRepeatElement& elt)
+ostream& operator << (ostream& os, const S_msrBeatRepeatElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -592,7 +592,7 @@ void msrBeatRepeatPattern::print (ostream& os) const
 
   if (! fBeatRepeatPatternSegment) {
     os <<
-      " none" <<
+      " [NONE]" <<
       endl;
   }
   else {
@@ -611,13 +611,13 @@ void msrBeatRepeatPattern::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrBeatRepeatPattern& elt)
+ostream& operator << (ostream& os, const S_msrBeatRepeatPattern& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -787,7 +787,7 @@ void msrBeatRepeatReplicas::print (ostream& os) const
 
   if (! fBeatRepeatReplicasSegment) {
     os <<
-      " none" <<
+      " [NONE]" <<
       endl;
   }
   else {
@@ -806,13 +806,13 @@ void msrBeatRepeatReplicas::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrBeatRepeatReplicas& elt)
+ostream& operator << (ostream& os, const S_msrBeatRepeatReplicas& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1222,7 +1222,7 @@ void msrBeatRepeat::print (ostream& os) const
   // print the measures repeat pattern
   if (! fBeatRepeatPattern) {
     os <<
-      "measures repeat pattern: none" <<
+      "measures repeat pattern: [NONE]" <<
       endl;
   }
 
@@ -1234,7 +1234,7 @@ void msrBeatRepeat::print (ostream& os) const
   // print the measures repeat replicas
   if (! fBeatRepeatReplicas) {
     os <<
-      "measures repeat replicas: none" <<
+      "measures repeat replicas: [NONE]" <<
       endl;
   }
 
@@ -1253,13 +1253,13 @@ void msrBeatRepeat::printShort (ostream& os) const
   print (os);
 }
 
-ostream& operator<< (ostream& os, const S_msrBeatRepeat& elt)
+ostream& operator << (ostream& os, const S_msrBeatRepeat& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

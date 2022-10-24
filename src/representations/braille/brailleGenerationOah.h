@@ -114,7 +114,7 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     bsrBrailleOutputKind  fBrailleOutputKindValue;
 };
 typedef SMARTP<brailleOutputKindAtom> S_brailleOutputKindAtom;
-EXP ostream& operator<< (ostream& os, const S_brailleOutputKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_brailleOutputKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP brailleUTFKindAtom : public oahAtomStoringAValue
@@ -193,7 +193,7 @@ class EXP brailleUTFKindAtom : public oahAtomStoringAValue
     bsrUTFKind&           fBsrUTFKindVariable;
 };
 typedef SMARTP<brailleUTFKindAtom> S_brailleUTFKindAtom;
-EXP ostream& operator<< (ostream& os, const S_brailleUTFKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_brailleUTFKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP brailleByteOrderingKindAtom : public oahAtomStoringAValue
@@ -270,7 +270,7 @@ class EXP brailleByteOrderingKindAtom : public oahAtomStoringAValue
     bsrByteOrderingKind&  fBsrByteOrderingKindVariable;
 };
 typedef SMARTP<brailleByteOrderingKindAtom> S_brailleByteOrderingKindAtom;
-EXP ostream& operator<< (ostream& os, const S_brailleByteOrderingKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_brailleByteOrderingKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP brailleGenerationOahGroup : public oahGroup
@@ -456,7 +456,7 @@ class EXP brailleGenerationOahGroup : public oahGroup
     Bool                  fNoBrailleCode;
 };
 typedef SMARTP<brailleGenerationOahGroup> S_brailleGenerationOahGroup;
-EXP ostream& operator<< (ostream& os, const S_brailleGenerationOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_brailleGenerationOahGroup& elt);
 
 EXP extern S_brailleGenerationOahGroup gGlobalBrailleGenerationOahGroup;
 

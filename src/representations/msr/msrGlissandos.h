@@ -122,7 +122,7 @@ class EXP msrGlissando : public msrElement
     string                fGlissandoTextValue;
 };
 typedef SMARTP<msrGlissando> S_msrGlissando;
-EXP ostream& operator<< (ostream& os, const S_msrGlissando& elt);
+EXP ostream& operator << (ostream& os, const S_msrGlissando& elt);
 
 
 }

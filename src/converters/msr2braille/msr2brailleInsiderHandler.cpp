@@ -620,13 +620,13 @@ void msr2brailleInsiderHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msr2brailleInsiderHandler& elt)
+ostream& operator << (ostream& os, const S_msr2brailleInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

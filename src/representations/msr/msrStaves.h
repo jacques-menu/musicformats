@@ -141,9 +141,9 @@ class EXP msrStaff : public msrElement
     // staff shortest note
 
     void                  setStaffShortestNoteDuration (
-                            const rational& duration);
+                            const Rational& duration);
 
-    rational              getStaffShortestNoteDuration () const
+    Rational              getStaffShortestNoteDuration () const
                               { return fStaffShortestNoteDuration; }
 
     void                  setStaffShortestNoteTupletFactor (
@@ -211,7 +211,7 @@ class EXP msrStaff : public msrElement
 
     void                  insertHiddenMeasureAndBarLineInStaffClone (
                             int             inputLineNumber,
-                            const rational& positionInMeasure);
+                            const Rational& positionInMeasure);
 
     // transposition
 
@@ -428,7 +428,7 @@ class EXP msrStaff : public msrElement
 
     // fStaffShortestNoteDuration and fStaffShortestNoteTupletFactor
     // are used in the time-oriented handling of staff measures slices
-    rational              fStaffShortestNoteDuration;
+    Rational              fStaffShortestNoteDuration;
     msrTupletFactor       fStaffShortestNoteTupletFactor;
 
     // measures flat list
@@ -560,7 +560,7 @@ class EXP msrStaff : public msrElement
     S_msrTransposition        fStaffCurrentTranspose;
 };
 typedef SMARTP<msrStaff> S_msrStaff;
-EXP ostream& operator<< (ostream& os, const S_msrStaff& elt);
+EXP ostream& operator << (ostream& os, const S_msrStaff& elt);
 
 
 }

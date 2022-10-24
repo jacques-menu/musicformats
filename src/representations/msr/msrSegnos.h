@@ -12,7 +12,9 @@
 #ifndef ___msrSegnos___
 #define ___msrSegnos___
 
-#include "msrMeasureElements.h"
+// #include "msrMeasureElements.h"
+
+#include "msrMeasures.h"
 
 
 namespace MusicFormats
@@ -81,7 +83,7 @@ class EXP msrSegno : public msrMeasureElement
     int                   fStaffNumber;
 };
 typedef SMARTP<msrSegno> S_msrSegno;
-EXP ostream& operator<< (ostream& os, const S_msrSegno& elt);
+EXP ostream& operator << (ostream& os, const S_msrSegno& elt);
 
 //______________________________________________________________________________
 enum class msrDalSegnoKind {
@@ -92,7 +94,7 @@ enum class msrDalSegnoKind {
 string dalSegnoKindAsString (
   msrDalSegnoKind dalSegnoKind);
 
-ostream& operator<< (ostream& os,const msrDalSegnoKind& elt);
+ostream& operator << (ostream& os,const msrDalSegnoKind& elt);
 
 //______________________________________________________________________________
 class EXP msrDalSegno : public msrMeasureElement
@@ -137,8 +139,22 @@ class EXP msrDalSegno : public msrMeasureElement
     int                   getStaffNumber () const
                               { return fStaffNumber; }
 
+    // position in measure
+    void                  setMeasureElementPositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context) override
+                              {
+                                setDalSegnoPositionInMeasure (
+                                  measure,
+                                  positionInMeasure,
+                                  context);
+                              }
+
     void                  setDalSegnoPositionInMeasure (
-                            const rational& positionInMeasure); // v0.9.66 PIM
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
 
   public:
 
@@ -177,7 +193,7 @@ class EXP msrDalSegno : public msrMeasureElement
       int                 fStaffNumber;
 };
 typedef SMARTP<msrDalSegno> S_msrDalSegno;
-EXP ostream& operator<< (ostream& os, const S_msrDalSegno& elt);
+EXP ostream& operator << (ostream& os, const S_msrDalSegno& elt);
 
 
 }

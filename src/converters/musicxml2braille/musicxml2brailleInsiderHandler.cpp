@@ -646,13 +646,13 @@ void xml2brlInsiderHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_xml2brlInsiderHandler& elt)
+ostream& operator << (ostream& os, const S_xml2brlInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

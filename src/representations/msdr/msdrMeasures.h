@@ -143,7 +143,7 @@ class EXP msdrMeasure : public smartable
     Bool                  fMeasureHasBeenFinalized;
 };
 typedef SMARTP<msdrMeasure> S_msdrMeasure;
-EXP ostream& operator<< (ostream& os, const S_msdrMeasure& elt);
+EXP ostream& operator << (ostream& os, const S_msdrMeasure& elt);
 
 
 }

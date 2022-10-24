@@ -252,13 +252,13 @@ void lilypondScoreOutputKindAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_lilypondScoreOutputKindAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondScoreOutputKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -611,13 +611,13 @@ void lilypondTransposePartNameAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator<< (ostream& os, const S_lilypondTransposePartNameAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondTransposePartNameAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -967,13 +967,13 @@ void lilypondTransposePartIDAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator<< (ostream& os, const S_lilypondTransposePartIDAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondTransposePartIDAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1056,7 +1056,7 @@ void msrOctaveEntryVariable::printAtomWithVariableOptionsValues (
   } // switch
 }
 
-ostream& operator<< (ostream& os, const msrOctaveEntryVariable& elt)
+ostream& operator << (ostream& os, const msrOctaveEntryVariable& elt)
 {
   elt.print (os);
   return os;
@@ -1466,17 +1466,17 @@ void lilypondRelativeOctaveEntryAtom::printAtomWithVariableOptionsValues (
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 }
 
-ostream& operator<< (ostream& os, const S_lilypondRelativeOctaveEntryAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondRelativeOctaveEntryAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1681,17 +1681,17 @@ void lilypondFixedOctaveEntryAtom::printAtomWithVariableOptionsValues (
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 }
 
-ostream& operator<< (ostream& os, const S_lilypondFixedOctaveEntryAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondFixedOctaveEntryAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1926,13 +1926,13 @@ void lilypondAccidentalStyleKindAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_lilypondAccidentalStyleKindAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondAccidentalStyleKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -2295,13 +2295,13 @@ void lilypondChordsDisplayAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_lilypondChordsDisplayAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondChordsDisplayAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -2538,13 +2538,13 @@ void lilypondLyricsDurationsKindAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_lilypondLyricsDurationsKindAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondLyricsDurationsKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -2779,13 +2779,13 @@ void lilypondDynamicsTextSpannersStyleKindAtom::printAtomWithVariableOptionsValu
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_lilypondDynamicsTextSpannersStyleKindAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondDynamicsTextSpannersStyleKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -3489,10 +3489,10 @@ It should be placed between double quotes if it contains single quotes, such as:
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "all-durations", "alldurs",
+        "generate-all-lilypond-durations", "gald",
 R"(Generate all LilyPond durations.
-By default, a duration equal to preceding one found in the current voice
-is ignored for code conciseness.)",
+The LilyPond default is for them is to be a quarter note,
+or the last duration specified in the current voice if relevant.)",
         "fAllDurations",
         fAllDurations));
 
@@ -3650,11 +3650,12 @@ This is useful when debugging EXECUTABLE.)",
   subGroup->
     appendAtomToSubGroup (
       oahBooleanAtom::create (
-        "original-measure-numbers", "omn",
+        "show-musicxml-measure-numbers", "smxmlmn",
         regex_replace (
-R"(Generate after each end of measure a comment containing
-its original MusicXML measure number.
-This is useful for adding line breaks and page breaks, and when debugging EXECUTABLE.)",
+R"(Generate after each end of measure a comment
+containing its original MusicXML measure number.
+This is useful to locate where to add line breaks and page breaks,
+and when debugging EXECUTABLE.)",
           regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
         "fOriginalMeasureNumbers",
@@ -3747,7 +3748,7 @@ R"(Generate LilyPond code to show all bar numbers.)",
   subGroup->
     appendAtomToSubGroup (
       oahAtomAlias::create (
-        "all-measure-numbers", "amn",
+        "all-lilypond-measure-numbers", "almn",
 R"(Generate LilyPond code to show all measure numbers.
 This option is an alias for '-all-bar-numbers, -abn'.)",
         allBarNumbersAtom));
@@ -3757,7 +3758,7 @@ This option is an alias for '-all-bar-numbers, -abn'.)",
 
   fShowNumbersAtMeasureAtom =
     oahStringSetElementAtom::create (
-      "show-measure-number-at", "smna",
+      "show-lilypond-measure-number-at", "slmna",
 R"(Generate LilyPond code to show the measure number at measure MEASURE_NUMBER.)",
       "MEASURE_NUMBER",
       "fShowNumbersAtMeasureSet",
@@ -3782,7 +3783,7 @@ or
 "OLD = NEW" .
 OLD is the MusicXML original measure number (a string),
 that can be generated in the LilyPond code in '| % ...' comments
-with option '-omn, -original-measure-numbers'.
+with option '-show-musicxml-measure-numbers, -smxmlmn'.
 NEW is a LilyPond (integer) measure number.
 This comes in handy when scanning several movements from a single PDF score,
 in which case measure numbers are a single sequence.
@@ -4128,7 +4129,7 @@ R"()",
   // ornaments
   // --------------------------------------
 
-  fDelayedOrnamentsFraction = rational (1, 2);
+  fDelayedOrnamentsFraction = Rational (1, 2);
 
   string delayedOrnamentsFractionDefaultValue =
     to_string (fDelayedOrnamentsFraction.getNumerator ()) +
@@ -5072,7 +5073,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
     setw (valueFieldWidth) << "part names transposition" << " : ";
 
   if (! fPartNamesTranspositionMap.size ()) {
-    gLogStream << "none";
+    gLogStream << "[NONE]";
   }
   else {
     for (
@@ -5548,7 +5549,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   }
   else {
     os <<
-      "none";
+      "[NONE]";
   }
   os << endl;
 
@@ -6261,13 +6262,13 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsr2lilypondOahGroup& elt)
+ostream& operator << (ostream& os, const S_lpsr2lilypondOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -6517,13 +6518,13 @@ void lilypondBreakPageAfterMeasureNumberAtom::printAtomWithVariableOptionsValues
   }
 }
 
-ostream& operator<< (ostream& os, const S_lilypondBreakPageAfterMeasureNumberAtom& elt)
+ostream& operator << (ostream& os, const S_lilypondBreakPageAfterMeasureNumberAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

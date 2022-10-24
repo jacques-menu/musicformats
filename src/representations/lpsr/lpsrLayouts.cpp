@@ -121,7 +121,7 @@ void lpsrLayout::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrLayout& lay)
+ostream& operator << (ostream& os, const S_lpsrLayout& lay)
 {
   lay->print (os);
   return os;

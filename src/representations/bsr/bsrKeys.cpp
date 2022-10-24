@@ -61,7 +61,7 @@ string bsrKeyKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, bsrKeyKind& elt)
+ostream& operator << (ostream& os, bsrKeyKind& elt)
 {
   os << bsrKeyKindAsString (elt);
   return os;
@@ -380,13 +380,13 @@ void bsrKey::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrKey& elt)
+ostream& operator << (ostream& os, const S_bsrKey& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

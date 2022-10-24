@@ -156,13 +156,13 @@ void msrRepeatDescr::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrRepeatDescr& elt)
+ostream& operator << (ostream& os, const S_msrRepeatDescr& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -503,9 +503,9 @@ void msrVoice::initializeVoice (
 
   // voice shortest note
   fVoiceShortestNoteDuration =
-    rational (INT_MAX, 1);
+    Rational (INT_MAX, 1);
   fVoiceShortestNoteTupletFactor =
-    rational (1, 1);
+    Rational (1, 1);
 
   // set voice current measure number
   fVoiceCurrentMeasureNumber = // JMI "??";
@@ -530,7 +530,7 @@ void msrVoice::initializeVoice (
   fVoiceActualFiguredBassElementsCounter = 0;
 
   // regular measure ends detection
-  fWholeNotesSinceLastRegularMeasureEnd = rational (0, 1);
+  fWholeNotesSinceLastRegularMeasureEnd = Rational (0, 1);
 
   // set voice current after repeat component phase kind
   setCurrentVoiceRepeatPhaseKind (
@@ -545,8 +545,8 @@ void msrVoice::initializeVoice (
   fVoiceContainsMeasureRepeats = false;
 
     // position in voice
-  fCurrentPositionInVoice = rational (0, 1);
-  fCurrentMomentInVoice = msrMoment (rational (0,1), rational (0,1));
+  fCurrentPositionFromBeginningOfVoice = Rational (0, 1);
+  fCurrentMomentFromBeginningOfVoice = msrMoment (Rational (0,1), Rational (0,1));
 
   // voice finalization
   fVoiceHasBeenFinalized = false;
@@ -1175,7 +1175,7 @@ void msrVoice::appendMeasureCloneToVoiceClone (
 
 void msrVoice::setWholeNotesSinceLastRegularMeasureEnd (
   int             inputLineNumber,
-  const rational& value)
+  const Rational& value)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -1283,7 +1283,7 @@ void msrVoice::createNewLastSegmentFromItsFirstMeasureForVoice (
       "Creating a new last segment '" <<
       fVoiceLastSegment->asShortString () <<
       "' from its first measure '" <<
-      firstMeasure->getMeasureElementMeasureNumber () <<
+      firstMeasure->getMeasureNumber () <<
       "' for voice \"" <<
       getVoiceName () <<
       "\" (" << context << ")" <<
@@ -1881,7 +1881,7 @@ void msrVoice::appendTimeSignatureToVoiceClone (S_msrTimeSignature timeSignature
 
 void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
   int             inputLineNumber,
-  const rational& positionInMeasure)
+  const Rational& positionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -2033,7 +2033,7 @@ S_msrNote msrVoice::fetchVoiceFirstNonGraceNote () const
 }
 
 void msrVoice::setVoiceShortestNoteDuration (
-  const rational& duration)
+  const Rational& duration)
 {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -2069,13 +2069,13 @@ void msrVoice::setVoiceShortestNoteTupletFactor (
 void msrVoice::registerShortestNoteInVoiceIfRelevant (S_msrNote note)
 {
   // is note the shortest one in this voice?
-  rational
+  Rational
     noteSoundingWholeNotes =
       note->
         getMeasureElementSoundingWholeNotes ();
 
       /* JMI
-  rational
+  Rational
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
@@ -2130,7 +2130,7 @@ void msrVoice::registerNoteAsVoiceLastAppendedNote (S_msrNote note)
   fVoiceLastAppendedNote = note;
 
   // is note the shortest one in this voice?
-  rational
+  Rational
     noteSoundingWholeNotes =
       note->
         getMeasureElementSoundingWholeNotes (),
@@ -2419,7 +2419,7 @@ void msrVoice::appendFiguredBassElementToVoiceClone (
 
 void msrVoice::padUpToPositionInMeasureInVoice (
   int             inputLineNumber,
-  const rational& wholeNotesPositionInMeasure)
+  const Rational& wholeNotesPositionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -2464,7 +2464,7 @@ void msrVoice::padUpToPositionInMeasureInVoice (
 
 void msrVoice::backupByWholeNotesStepLengthInVoice (
   int             inputLineNumber,
-  const rational& backupTargetMeasureElementPositionInMeasure)
+  const Rational& backupTargetMeasureElementPositionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -2497,7 +2497,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
 
 void msrVoice::appendPaddingNoteToVoice (
   int             inputLineNumber,
-  const rational& forwardStepLength)
+  const Rational& forwardStepLength)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -2743,7 +2743,7 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
       fetchVoiceUpLinkToPart ();
 
   // fetch the part current position in measure
-  rational
+  Rational
     partCurrentPositionInMeasure =
       part->
         getPartCurrentPositionInMeasure ();
@@ -3696,7 +3696,7 @@ void msrVoice::displayVoiceMeasureRepeat (
   }
   else {
     gLogStream <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -3757,7 +3757,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 //       }
 //       else {
 //         os <<
-//           measure->getMeasureElementMeasureNumber ();
+//           measure->getMeasureNumber ();
 //       }
 //       if (++i == iEnd) break;
 //       os << endl;
@@ -3806,10 +3806,10 @@ void msrVoice::displayVoiceMeasuresFlatList (
         gLogStream << measure->asShortStringForMeasuresSlices ();
 //      }
 //      else {
-//        gLogStream << measure->getMeasureElementMeasureNumber ();
+//        gLogStream << measure->getMeasureNumber ();
  //     }
 #else
-      gLogStream << measure->getMeasureElementMeasureNumber ();
+      gLogStream << measure->getMeasureNumber ();
 #endif
 
       if (++i == iEnd) break;
@@ -3850,7 +3850,7 @@ void msrVoice::displayVoiceMultipleFullBarRests (
   }
   else {
     gLogStream <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -4401,10 +4401,10 @@ void msrVoice::handleVoiceLevelRepeatStart (
       if (lastMeasureElementsList.size ()) {
         // the last measure is not empty
 
-        rational
+        Rational
           currentMeasureWholeNotesDuration =
             lastMeasureInLastSegment->getCurrentMeasureWholeNotesDuration ();
-        rational
+        Rational
           fullMeasureWholeNotesDuration =
             lastMeasureInLastSegment->getFullMeasureWholeNotesDuration ();
 
@@ -4467,7 +4467,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
           createAMeasureAndAppendItToVoice (
             inputLineNumber,
             333, //         previousMeasureEndInputLineNumber, v0.9.62
-            lastMeasureInLastSegment->getMeasureElementMeasureNumber (),
+            lastMeasureInLastSegment->getMeasureNumber (),
             msrMeasureImplicitKind::kMeasureImplicitKindNo);
 
         /* JMI
@@ -7003,7 +7003,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
   string
     voiceLastAppendedMeasureMeasureNumber =
       fVoiceLastAppendedMeasure->
-        getMeasureElementMeasureNumber ();
+        getMeasureNumber ();
 
   for (int i = 1; i <= replicatasNumber; ++i) {
     // create a clone of the last appended measure
@@ -7015,7 +7015,7 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
 
     // change its contents
     lastAppendedMeasureClone->
-      setMeasureElementMeasureNumber (
+      setMeasureNumber (
         voiceLastAppendedMeasureMeasureNumber +
           '.' +
           to_string (i) +
@@ -7025,9 +7025,9 @@ void msrVoice::replicateLastAppendedMeasureInVoice (
     if (gGlobalTracingOahGroup->getTraceMultipleFullBarRests ()) {
       gLogStream <<
         "Replicating last appended measure " <<
-        fVoiceLastAppendedMeasure->getMeasureElementMeasureNumber () <<
+        fVoiceLastAppendedMeasure->getMeasureNumber () <<
         " as measure " <<
-        lastAppendedMeasureClone->getMeasureElementMeasureNumber () <<
+        lastAppendedMeasureClone->getMeasureNumber () <<
         " in voice \"" <<
         getVoiceName () <<
         "\"" <<
@@ -7078,7 +7078,7 @@ void msrVoice::addEmptyMeasuresToVoice (
 
   // get the empty measure whole notes duration
   // JMI maybe not OK if first measure such as after a repeat segment???
-  rational
+  Rational
     emptyMeasureWholeNotesDuration =
       fVoiceLastAppendedMeasure->
         getFullMeasureWholeNotesDuration ();
@@ -7132,7 +7132,7 @@ void msrVoice::addEmptyMeasuresToVoice (
     setNoteOccupiesAFullMeasure ();
 
   // append it to emptyMeasure
-  rational partCurrentPositionInMeasure; // needs to be supplied
+  Rational partCurrentPositionInMeasure; // needs to be supplied
 
   emptyMeasure->
     appendNoteToMeasure (
@@ -7159,9 +7159,9 @@ void msrVoice::addEmptyMeasuresToVoice (
 
 //   // change the measure number
 //   fVoiceLastAppendedMeasure->
-//     setMeasureElementMeasureNumber (
+//     setMeasureNumber (
 //       fVoiceLastAppendedMeasure->
-//         getMeasureElementMeasureNumber () + " added"); // JMI BLARK v0.9.61
+//         getMeasureNumber () + " added"); // JMI BLARK v0.9.61
 
   } //for
 
@@ -9754,7 +9754,7 @@ void msrVoice::finalizeVoice (
     voicePart =
       fetchVoiceUpLinkToPart ();
 
-  rational
+  Rational
     partShortestNoteDuration =
       voicePart->
         getPartShortestNoteDuration ();
@@ -9906,7 +9906,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
     voicePart =
       fetchVoiceUpLinkToPart ();
 
-  rational
+  Rational
     partShortestNoteDuration =
       voicePart->
         getPartShortestNoteDuration ();
@@ -10531,7 +10531,7 @@ void msrVoice::print (ostream& os) const
   }
   else {
     os <<
-      "none";
+      "[NONE]";
   }
   os << endl;
 
@@ -10544,7 +10544,7 @@ void msrVoice::print (ostream& os) const
   }
   else {
     os <<
-      "none";
+      "[NONE]";
   }
   os << endl;
 //
@@ -10567,11 +10567,11 @@ void msrVoice::print (ostream& os) const
     endl;
 
   os << left <<
-    setw (fieldWidth) << "fCurrentPositionInVoice" << " : " <<
-    fCurrentPositionInVoice <<
+    setw (fieldWidth) << "fCurrentPositionFromBeginningOfVoice" << " : " <<
+    fCurrentPositionFromBeginningOfVoice <<
     endl <<
-    setw (fieldWidth) << "fCurrentMomentInVoice" << " : " <<
-    fCurrentMomentInVoice;
+    setw (fieldWidth) << "fCurrentMomentFromBeginningOfVoice" << " : " <<
+    fCurrentMomentFromBeginningOfVoice;
 
   os << left <<
     setw (fieldWidth) << "fMusicHasBeenInsertedInVoice" << " : " <<
@@ -10595,7 +10595,7 @@ void msrVoice::print (ostream& os) const
     }
   else {
     os <<
-      "none";
+      "[NONE]";
   }
   os << endl;
 
@@ -10610,7 +10610,7 @@ void msrVoice::print (ostream& os) const
     }
   else {
     os <<
-      "none";
+      "[NONE]";
   }
   os << endl;
 
@@ -10625,7 +10625,7 @@ void msrVoice::print (ostream& os) const
     }
   else {
     os <<
-      "none";
+      "[NONE]";
   }
   os << endl;
 
@@ -10645,7 +10645,7 @@ void msrVoice::print (ostream& os) const
     }
     else {
       os <<
-        "none";
+        "[NONE]";
     }
     os << endl;
   }
@@ -10660,7 +10660,7 @@ void msrVoice::print (ostream& os) const
   }
   else {
     os <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -10780,7 +10780,7 @@ void msrVoice::printShort (ostream& os) const
   }
   else {
     os <<
-      "none";
+      "[NONE]";
   }
   os << endl;
 
@@ -10793,7 +10793,7 @@ void msrVoice::printShort (ostream& os) const
   }
   else {
     os <<
-      "none";
+      "[NONE]";
   }
   os << endl;
 
@@ -10933,13 +10933,13 @@ void msrVoice::printShort (ostream& os) const
 //   --gIndenter;
 // }
 
-ostream& operator<< (ostream& os, const S_msrVoice& elt)
+ostream& operator << (ostream& os, const S_msrVoice& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

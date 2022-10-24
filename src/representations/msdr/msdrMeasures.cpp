@@ -371,7 +371,7 @@ void msdrMeasure::printShort (ostream& os) const
         os << (*i)->asShortString ();
       }
       else {
-        os << (*i)->getMeasureElementMeasureNumber ();
+        os << (*i)->getMeasureNumber ();
       }
       if (++i == iEnd) break;
       os << ' ';
@@ -386,15 +386,15 @@ void msdrMeasure::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msdrMeasure& elt)
+ostream& operator << (ostream& os, const S_msdrMeasure& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

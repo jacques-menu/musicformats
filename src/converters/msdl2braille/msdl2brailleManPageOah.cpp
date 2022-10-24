@@ -174,13 +174,13 @@ void msdl2brailleManPageGenerateAtom::printAtomWithVariableOptionsValues (
   // nothing to print here
 }
 
-ostream& operator<< (ostream& os, const S_msdl2brailleManPageGenerateAtom& elt)
+ostream& operator << (ostream& os, const S_msdl2brailleManPageGenerateAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -366,13 +366,13 @@ void msdl2brailleManPageOahGroup::printManPageOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msdl2brailleManPageOahGroup& elt)
+ostream& operator << (ostream& os, const S_msdl2brailleManPageOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

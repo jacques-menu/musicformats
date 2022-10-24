@@ -111,7 +111,7 @@ class EXP msrPitchesLanguageAtom : public oahAtomStoringAValue
                           fMsrQuarterTonesPitchesLanguageKindVariable;
 };
 typedef SMARTP<msrPitchesLanguageAtom> S_msrPitchesLanguageAtom;
-EXP ostream& operator<< (ostream& os, const S_msrPitchesLanguageAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msrPitchesLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP msrRenamePartAtom : public oahAtomStoringAValue
@@ -194,7 +194,7 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     map<string, string>&  fStringToStringMapVariable;
 };
 typedef SMARTP<msrRenamePartAtom> S_msrRenamePartAtom;
-EXP ostream& operator<< (ostream& os, const S_msrRenamePartAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msrRenamePartAtom& elt);
 
 //______________________________________________________________________________
 class EXP msrOahGroup : public oahGroup
@@ -482,7 +482,7 @@ class EXP msrOahGroup : public oahGroup
     Bool                  fShowFiguredBassVoices;
 };
 typedef SMARTP<msrOahGroup> S_msrOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msrOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msrOahGroup& elt);
 
 EXP extern S_msrOahGroup gGlobalMsrOahGroup;
 

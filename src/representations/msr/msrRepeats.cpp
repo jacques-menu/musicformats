@@ -497,13 +497,13 @@ void msrRepeatCommonPart::printShort (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrRepeatCommonPart& elt)
+ostream& operator << (ostream& os, const S_msrRepeatCommonPart& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -750,7 +750,7 @@ string msrRepeatEnding::asString () const
 //   }
 //   else {
 //     s <<
-//       "none";
+//       "[NONE]";
 //   }
 
   s <<
@@ -899,7 +899,7 @@ void msrRepeatEnding::printShort (ostream& os) const
       ")";
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -929,13 +929,13 @@ void msrRepeatEnding::printShort (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrRepeatEnding& elt)
+ostream& operator << (ostream& os, const S_msrRepeatEnding& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1689,7 +1689,7 @@ string msrRepeat::asShortString () const
   }
   else {
     s <<
-      "none";
+      "[NONE]";
   }
 
   int repeatEndingsNumber =
@@ -1735,7 +1735,7 @@ string msrRepeat::asString () const
   }
   else {
     s <<
-      "none";
+      "[NONE]";
   }
 
   int endingsNumber =
@@ -1836,7 +1836,7 @@ void msrRepeat::print (ostream& os) const
       fImmediatelyPrecedingRepeat->asShortString ();
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl << endl;
 
@@ -1848,7 +1848,7 @@ void msrRepeat::print (ostream& os) const
       fImmediatelyFollowingRepeat->asShortString ();
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl << endl;
 
@@ -1862,7 +1862,7 @@ void msrRepeat::print (ostream& os) const
       endl;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl << endl;
 
@@ -1876,7 +1876,7 @@ void msrRepeat::print (ostream& os) const
     os << '(' << endingsNumber << ")";
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -1931,7 +1931,7 @@ void msrRepeat::printShort (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
   // short print the repeat endings
@@ -1945,7 +1945,7 @@ void msrRepeat::printShort (ostream& os) const
     os << '(' << repeatEndingsSize << ")";
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -1972,13 +1972,13 @@ void msrRepeat::printShort (ostream& os) const
   os << "]" << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrRepeat& elt)
+ostream& operator << (ostream& os, const S_msrRepeat& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

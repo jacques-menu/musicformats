@@ -97,7 +97,7 @@ class EXP lpsrComment : public lpsrElement
     lpsrCommentGapKind  fCommentGapKind;
 };
 typedef SMARTP<lpsrComment> S_lpsrComment;
-EXP ostream& operator<< (ostream& os, const S_lpsrComment& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrComment& elt);
 
 
 }

@@ -44,7 +44,7 @@ enum class oahElementValueKind {
 string elementValueKindAsString (
   oahElementValueKind elementValueKind);
 
-ostream& operator<< (ostream& os, oahElementValueKind& elt);
+ostream& operator << (ostream& os, oahElementValueKind& elt);
 
 enum class oahElementVisibilityKind {
 	kElementVisibilityNone, // default value
@@ -56,7 +56,7 @@ enum class oahElementVisibilityKind {
 string elementVisibilityKindAsString (
   oahElementVisibilityKind elementVisibilityKind);
 
-ostream& operator<< (ostream& os, oahElementVisibilityKind& elt);
+ostream& operator << (ostream& os, oahElementVisibilityKind& elt);
 
 enum class oahElementHelpOnlyKind {
   kElementHelpOnlyYes,
@@ -66,7 +66,7 @@ enum class oahElementHelpOnlyKind {
 string elementHelpOnlyKindAsString (
   oahElementHelpOnlyKind elementHelpOnlyKind);
 
-ostream& operator<< (ostream& os, oahElementHelpOnlyKind& elt);
+ostream& operator << (ostream& os, oahElementHelpOnlyKind& elt);
 
 //_______________________________________________________________________________
 /*
@@ -138,8 +138,8 @@ class oahFindStringMatch : public smartable
 		string                fContainingFindableElementInfo;
 };
 typedef SMARTP<oahFindStringMatch> S_oahFindStringMatch;
-EXP ostream& operator<< (ostream& os, const S_oahFindStringMatch& elt);
-EXP ostream& operator<< (ostream& os, const oahFindStringMatch& elt);
+EXP ostream& operator << (ostream& os, const S_oahFindStringMatch& elt);
+EXP ostream& operator << (ostream& os, const oahFindStringMatch& elt);
 
 //______________________________________________________________________________
 /*
@@ -198,8 +198,8 @@ class EXP oahFindableElement : public smartable
     // ------------------------------------------------------
 };
 typedef SMARTP<oahFindableElement> S_oahFindableElement;
-EXP ostream& operator<< (ostream& os, const S_oahFindableElement& elt);
-EXP ostream& operator<< (ostream& os, const oahFindableElement& elt);
+EXP ostream& operator << (ostream& os, const S_oahFindableElement& elt);
+EXP ostream& operator << (ostream& os, const oahFindableElement& elt);
 
 //______________________________________________________________________________
 /*
@@ -207,7 +207,7 @@ EXP ostream& operator<< (ostream& os, const oahFindableElement& elt);
   i.e. atoms, subgroups and groups
 */
 
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class oahElement;
 typedef SMARTP<oahElement> S_oahElement;
 
@@ -382,8 +382,8 @@ class EXP oahElement : public oahFindableElement
 
     Bool                  fMultipleOccurrencesAllowed;
 };
-EXP ostream& operator<< (ostream& os, const S_oahElement& elt);
-EXP ostream& operator<< (ostream& os, const oahElement& elt);
+EXP ostream& operator << (ostream& os, const S_oahElement& elt);
+EXP ostream& operator << (ostream& os, const oahElement& elt);
 
 //______________________________________________________________________________
 /*
@@ -460,7 +460,7 @@ class EXP oahElementUse : public smartable
     string                fValueUsed;
 };
 typedef SMARTP<oahElementUse> S_oahElementUse;
-EXP ostream& operator<< (ostream& os, const S_oahElementUse& elt);
+EXP ostream& operator << (ostream& os, const S_oahElementUse& elt);
 
 
 }

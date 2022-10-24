@@ -130,7 +130,7 @@ void Bool::print (ostream& os) const
   os << asString ();
 }
 
-ostream& operator<< (ostream& os, const Bool& theBool) {
+ostream& operator << (ostream& os, const Bool& theBool) {
   theBool.print(os);
   return os;
 }

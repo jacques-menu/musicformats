@@ -128,7 +128,7 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<msdlConverterInsiderHandler> S_msdlConverterInsiderHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlConverterInsiderHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlConverterInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msdlConverterInsiderOahGroup : public oahGroup
@@ -214,7 +214,7 @@ class EXP msdlConverterInsiderOahGroup : public oahGroup
                           fMultiGenerationOutputKind;
 };
 typedef SMARTP<msdlConverterInsiderOahGroup> S_msdlConverterInsiderOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msdlConverterInsiderOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msdlConverterInsiderOahGroup& elt);
 
 EXP extern S_msdlConverterInsiderOahGroup gGlobalmsdlConverterInsiderOahGroup;
 

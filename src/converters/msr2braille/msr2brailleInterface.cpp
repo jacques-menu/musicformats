@@ -253,7 +253,7 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
         s <<
           "Could not open Braille output file \"" <<
           outputFileName <<
-          "\" for writing, quitting";
+          "\" for writing - quitting";
 
         string message = s.str ();
 

@@ -39,7 +39,7 @@ enum class msrGenerationAPIKind {
 EXP extern string msrGenerationAPIKindAsString (
   msrGenerationAPIKind generationAPIKind);
 
-ostream& operator<< (ostream& os, msrGenerationAPIKind& elt);
+ostream& operator << (ostream& os, msrGenerationAPIKind& elt);
 
 EXP extern msrGenerationAPIKind msrGenerationAPIKindFromString (
   const string& theString);
@@ -128,7 +128,7 @@ class EXP msrGenerationAPIKindAtom : public oahAtomStoringAValue
     msrGenerationAPIKind& fGenerationAPIKindVariable;
 };
 typedef SMARTP<msrGenerationAPIKindAtom> S_msrGenerationAPIKindAtom;
-EXP ostream& operator<< (ostream& os, const S_msrGenerationAPIKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msrGenerationAPIKindAtom& elt);
 
 //______________________________________________________________________________
 void initializeMsrGenerationAPI ();

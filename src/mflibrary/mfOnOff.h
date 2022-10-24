@@ -36,7 +36,7 @@ Bool mfOnOffKindAsBool (
 string mfOnOffKindAsString (
   mfOnOffKind onOffKind);
 
-ostream& operator<< (ostream& os, const mfOnOffKind elt);
+ostream& operator << (ostream& os, const mfOnOffKind elt);
 
 
 }

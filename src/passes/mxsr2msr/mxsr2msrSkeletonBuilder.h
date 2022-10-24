@@ -117,7 +117,7 @@ struct mxmlPartGroupDescr : public smartable
     int                   fStopPosition;
 };
 typedef SMARTP<mxmlPartGroupDescr> S_mxmlPartGroupDescr;
-EXP ostream& operator<< (ostream& os, const S_mxmlPartGroupDescr& elt);
+EXP ostream& operator << (ostream& os, const S_mxmlPartGroupDescr& elt);
 
 //________________________________________________________________________
 class EXP mxsr2msrSkeletonBuilder :

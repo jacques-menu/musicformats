@@ -150,7 +150,7 @@ class EXP msr2bsrOahGroup : public oahGroup
     Bool                  fIncludeClefs;
 };
 typedef SMARTP<msr2bsrOahGroup> S_msr2bsrOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msr2bsrOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msr2bsrOahGroup& elt);
 
 EXP extern S_msr2bsrOahGroup gGlobalMsr2bsrOahGroup;
 

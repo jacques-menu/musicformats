@@ -211,13 +211,13 @@ void msrSlide::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrSlide& elt)
+ostream& operator << (ostream& os, const S_msrSlide& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

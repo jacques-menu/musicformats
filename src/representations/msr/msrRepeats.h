@@ -12,7 +12,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class msrRepeat;
 typedef SMARTP<msrRepeat> S_msrRepeat;
 
@@ -131,7 +131,7 @@ class EXP msrRepeatCommonPart : public msrElement
                           fRepeatCommonPartElementsList;
 };
 typedef SMARTP<msrRepeatCommonPart> S_msrRepeatCommonPart;
-EXP ostream& operator<< (ostream& os, const S_msrRepeatCommonPart& elt);
+EXP ostream& operator << (ostream& os, const S_msrRepeatCommonPart& elt);
 
 //______________________________________________________________________________
 class EXP msrRepeatEnding : public msrElement
@@ -269,7 +269,7 @@ class EXP msrRepeatEnding : public msrElement
                           fRepeatEndingElementsList;
 };
 typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
-EXP ostream& operator<< (ostream& os, const S_msrRepeatEnding& elt);
+EXP ostream& operator << (ostream& os, const S_msrRepeatEnding& elt);
 
 //______________________________________________________________________________
 class EXP msrRepeat : public msrVoiceElement
@@ -495,7 +495,7 @@ class EXP msrRepeat : public msrVoiceElement
                           fCurrentRepeatBuildPhaseKind;
 };
 typedef SMARTP<msrRepeat> S_msrRepeat;
-EXP ostream& operator<< (ostream& os, const S_msrRepeat& elt);
+EXP ostream& operator << (ostream& os, const S_msrRepeat& elt);
 
 
 }

@@ -439,13 +439,13 @@ void mfslInterpreterRegularHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_mfslInterpreterRegularHandler& elt)
+ostream& operator << (ostream& os, const S_mfslInterpreterRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

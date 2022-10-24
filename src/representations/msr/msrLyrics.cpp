@@ -46,7 +46,7 @@ S_msrSyllable msrSyllable::create (
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
   const string&         syllableStanzaNumber,
-  const rational&       syllableWholeNotes,
+  const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           SyllableUpLinkToStanza)
 {
@@ -69,7 +69,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
   const string&         syllableStanzaNumber,
-  const rational&       syllableWholeNotes,
+  const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           SyllableUpLinkToStanza,
   int                   syllableNextMeasurePuristNumber)
@@ -94,7 +94,7 @@ msrSyllable::msrSyllable (
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
   const string&         syllableStanzaNumber,
-  const rational&       syllableWholeNotes,
+  const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           SyllableUpLinkToStanza)
     : msrMeasureElement (inputLineNumber)
@@ -144,7 +144,7 @@ msrSyllable::msrSyllable (
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
   const string&         syllableStanzaNumber,
-  const rational&       syllableWholeNotes,
+  const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           SyllableUpLinkToStanza,
   int                   syllableNextMeasurePuristNumber)
@@ -294,21 +294,24 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   return syllableDeepClone;
 }
 
-void msrSyllable::setMeasureElementPositionInMeasure (
-  const rational& positionInMeasure,
-  const string&   context)
+void msrSyllable::setSyllablePositionInMeasure (
+  const S_msrMeasure measure,
+  const Rational&    positionInMeasure,
+  const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Setting syllable's position in measure of " << asString () <<
-      " to '" <<
+      " to " <<
       positionInMeasure <<
-      "' (was '" <<
+      " (was " <<
       fMeasureElementPositionInMeasure <<
-      "') in measure '" <<
+      ") in measure " <<
+      measure->asShortString () <<
+      " (fMeasureElementMeasureNumber: " <<
       fMeasureElementMeasureNumber <<
-      "', context: \"" <<
+      "), context: \"" <<
       context <<
       "\"" <<
       endl;
@@ -584,7 +587,7 @@ string msrSyllable::syllableUpLinkToNoteAsString () const
     result = fSyllableUpLinkToNote->asString ();
   }
   else {
-    result = "none";
+    result = "[NONE]";
   }
 
   return result;
@@ -685,7 +688,7 @@ string msrSyllable::asString () const
       fSyllableUpLinkToNote->asShortString ();
   }
   else {
-    s << "none";
+    s << "[NONE]";
   }
 
   s <<
@@ -695,7 +698,7 @@ string msrSyllable::asString () const
       fSyllableUpLinkToStanza->getStanzaName ();
   }
   else {
-    s << "none";
+    s << "[NONE]";
   }
 
   return s.str ();
@@ -792,13 +795,13 @@ void msrSyllable::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrSyllable& elt)
+ostream& operator << (ostream& os, const S_msrSyllable& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -866,7 +869,7 @@ void msrStanza::initializeStanza ()
 
   fStanzaTextPresent = false;
 
-  fStanzaCurrentMeasureWholeNotesDuration = rational (0, 1);
+  fStanzaCurrentMeasureWholeNotesDuration = Rational (0, 1);
 }
 
 msrStanza::~msrStanza ()
@@ -1025,7 +1028,7 @@ void msrStanza::appendSyllableToStanza (
 
 /*
   // get the syllable's sounding whole notes JMI
-  rational
+  Rational
     syllableSoundingWholeNotes =
       syllable->
         getSyllableUpLinkToNote ()->
@@ -1038,7 +1041,7 @@ void msrStanza::appendSyllableToStanza (
 
 S_msrSyllable msrStanza::appendRestSyllableToStanza (
   int             inputLineNumber,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -1076,7 +1079,7 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
 
 S_msrSyllable msrStanza::appendSkipSyllableToStanza (
   int             inputLineNumber,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -1143,7 +1146,7 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
   appendSyllableToStanza (syllable);
 
   // reset current measure whole notes
-  fStanzaCurrentMeasureWholeNotesDuration = rational (0, 1);
+  fStanzaCurrentMeasureWholeNotesDuration = Rational (0, 1);
 
   --gIndenter;
 
@@ -1155,7 +1158,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
   int             inputLineNumber,
   msrSyllable::msrSyllableKind
                   syllableKind,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -1273,14 +1276,14 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
 
 void msrStanza::padUpToCurrentMeasureWholeNotesDurationInStanza (
   int             inputLineNumber,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
   // JMI ???
 }
 
 void msrStanza::appendPaddingNoteToStanza (
   int             inputLineNumber,
-  const rational& forwardStepLength)
+  const Rational& forwardStepLength)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
@@ -1413,13 +1416,13 @@ void msrStanza::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrStanza& elt)
+ostream& operator << (ostream& os, const S_msrStanza& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

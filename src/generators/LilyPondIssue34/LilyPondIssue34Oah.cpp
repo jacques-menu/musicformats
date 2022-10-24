@@ -304,13 +304,13 @@ void LilyPondIssue34OahGroup::printLilyPondIssue34OahValues (
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_LilyPondIssue34OahGroup& elt)
+ostream& operator << (ostream& os, const S_LilyPondIssue34OahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

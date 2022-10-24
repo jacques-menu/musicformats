@@ -114,7 +114,7 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<ischemeInterpreterRegularHandler> S_ischemeInterpreterRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_ischemeInterpreterRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeInterpreterRegularHandler& elt);
 
 
 }

@@ -103,7 +103,7 @@ class EXP msrOctaveShift : public msrMeasureElement
     int                   fOctaveShiftSize;
 };
 typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
-EXP ostream& operator<< (ostream& os, const S_msrOctaveShift& elt);
+EXP ostream& operator << (ostream& os, const S_msrOctaveShift& elt);
 
 
 } // namespace MusicFormats

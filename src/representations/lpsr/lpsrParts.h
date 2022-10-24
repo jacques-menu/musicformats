@@ -139,7 +139,7 @@ class EXP lpsrPartBlock : public lpsrElement
     string                fPartBlockShortInstrumentName; // JMI
 };
 typedef SMARTP<lpsrPartBlock> S_lpsrPartBlock;
-EXP ostream& operator<< (ostream& os, const S_lpsrPartBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrPartBlock& elt);
 
 
 }

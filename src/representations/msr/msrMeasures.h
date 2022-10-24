@@ -28,11 +28,10 @@
 
 namespace MusicFormats
 {
-
 //______________________________________________________________________________
-// pre-declaration
-class msrMeasure;
-typedef SMARTP<msrMeasure> S_msrMeasure;
+// PRE-declarations for classes mutual dependencies
+class msrMeasureElement;
+typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 
 //______________________________________________________________________________
 class EXP msrMeasure : public msrSegmentElement
@@ -128,11 +127,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure numbers
 
-    void                  setMeasureElementMeasureNumber (
+    void                  setMeasureNumber (
                             const string& measureNumber);
 
-    string                getMeasureElementMeasureNumber () const
-                              { return fMeasureElementMeasureNumber; }
+    string                getMeasureNumber () const
+                              { return fMeasureNumber; }
 
     void                  setMeasureOrdinalNumberInVoice (
                             int measureOrdinalNumber);
@@ -165,19 +164,19 @@ class EXP msrMeasure : public msrSegmentElement
     // measure lengthes, in whole notes
 
     void                  setFullMeasureWholeNotesDuration (
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
-    rational              getFullMeasureWholeNotesDuration () const
+    Rational              getFullMeasureWholeNotesDuration () const
                               {  return fFullMeasureWholeNotesDuration; }
 
     void                  setCurrentMeasureWholeNotesDuration (
                             int             inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
     void                  incrementCurrentMeasureWholeNotesDuration (
                             int             inputLineNumber,
-                            const rational& wholeNotesDelta);
+                            const Rational& wholeNotesDelta);
 
-    rational              getCurrentMeasureWholeNotesDuration () const
+    Rational              getCurrentMeasureWholeNotesDuration () const
                               { return fCurrentMeasureWholeNotesDuration; }
 
     // measure kind
@@ -229,9 +228,9 @@ class EXP msrMeasure : public msrSegmentElement
     // measure shortest note
 
     void                  setMeasureShortestNoteDuration (
-                            const rational& duration);
+                            const Rational& duration);
 
-    rational              getMeasureShortestNoteDuration () const
+    Rational              getMeasureShortestNoteDuration () const
                               { return fMeasureShortestNoteDuration; }
 
     void                  setMeasureShortestNoteTupletFactor (
@@ -282,21 +281,21 @@ class EXP msrMeasure : public msrSegmentElement
 
     // position in voice
 
-    void                  setMeasurePositionInVoice (
-                            const rational& value)
-                              { fMeasurePositionInVoice = value; }
-//     void                  incrementMeasurePositionInVoice (
-//                             const rational& wholeNotesDelta);
+    void                  setMeasurePositionFromBeginningOfVoice (
+                            const Rational& value)
+                              { fMeasurePositionFromBeginningOfVoice = value; }
+//     void                  incrementMeasurePositionFromBeginningOfVoice (
+//                             const Rational& wholeNotesDelta);
 
-    rational              getMeasurePositionInVoice () const
-                              { return fMeasurePositionInVoice; }
+    Rational              getMeasurePositionFromBeginningOfVoice () const
+                              { return fMeasurePositionFromBeginningOfVoice; }
 
-    void                  setMeasureMomentInVoice (
+    void                  setMeasureMomentFromBeginningOfVoice (
                             msrMoment value)
-                              { fMeasureMomentInVoice = value; }
+                              { fMeasureMomentFromBeginningOfVoice = value; }
 
-    const msrMoment&      getMeasureMomentInVoice () const
-                              { return fMeasureMomentInVoice; }
+    const msrMoment&      getMeasureMomentFromBeginningOfVoice () const
+                              { return fMeasureMomentFromBeginningOfVoice; }
 
     // notes flat list
 
@@ -340,20 +339,20 @@ class EXP msrMeasure : public msrSegmentElement
 
     S_msrNote             createPaddingSkipNoteForVoice (
                             int             inputLineNumber,
-                            const rational& duration,
+                            const Rational& duration,
                             S_msrVoice      voice);
 
     void                  padUpToPositionInMeasureInMeasure (
                             int             inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     void                  backupByWholeNotesStepLengthInMeasure (
                             int             inputLineNumber,
-                            const rational& backupTargetMeasureElementPositionInMeasure);
+                            const Rational& backupTargetMeasureElementPositionInMeasure);
 
     void                  appendPaddingSkipNoteToMeasure (
                             int             inputLineNumber,
-                            const rational& forwardStepLength);
+                            const Rational& forwardStepLength);
 
     // print layout
 
@@ -384,7 +383,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  insertHiddenMeasureAndBarLineInMeasureClone (
                             int             inputLineNumber,
-                            const rational& positionInMeasure);
+                            const Rational& positionInMeasure);
 
     // transposition
 
@@ -455,7 +454,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendNoteToMeasure (
                             S_msrNote       note,
-                            const rational& partCurrentPositionInMeasure);
+                            const Rational& partCurrentPositionInMeasure);
 
     void                  appendNoteOrPaddingToMeasure (
                             S_msrNote note);
@@ -589,11 +588,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  padUpToPositionInMeasure (
                             int             inputLineNumber,
-                            const rational& positionInMeasureToPadUpTo);
+                            const Rational& positionInMeasureToPadUpTo);
 
     void                  padUpToPositionAtTheEndOfTheMeasure (
                             int             inputLineNumber,
-                            const rational& positionInMeasureToPadUpTo);
+                            const Rational& positionInMeasureToPadUpTo);
 
     void                  finalizeMeasure (
                             int                         inputLineNumber,
@@ -618,7 +617,7 @@ class EXP msrMeasure : public msrSegmentElement
                             msrMeasureRepeatContextKind measureRepeatContextKind,
                             const string&               context);
 
-    void                  finalizeHarmoniesMeasure (
+    void                  finalizeHarmonyMeasure (
                             int                         inputLineNumber,
                             msrMeasureRepeatContextKind measureRepeatContextKind,
                             const string&               context);
@@ -667,14 +666,14 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-    rational              fFullMeasureWholeNotesDuration;
+    Rational              fFullMeasureWholeNotesDuration;
                             // meaningfull only
                             // when there is a time signature,
                             // but not for cadenzas
 
     // measure numbers
 
-    string                fMeasureElementMeasureNumber;
+    string                fMeasureNumber;
     string                fNextMeasureNumber;
 
     int                   fMeasureOrdinalNumberInVoice;
@@ -707,7 +706,7 @@ class EXP msrMeasure : public msrSegmentElement
     // fPartShortestNoteDuration and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    rational              fMeasureShortestNoteDuration;
+    Rational              fMeasureShortestNoteDuration;
     msrTupletFactor       fMeasureShortestNoteTupletFactor;
 */
 
@@ -753,8 +752,8 @@ class EXP msrMeasure : public msrSegmentElement
                           fMeasureRepeatContextKind;
 
     // position in voice
-    rational              fMeasurePositionInVoice;
-    msrMoment             fMeasureMomentInVoice;
+    Rational              fMeasurePositionFromBeginningOfVoice;
+    msrMoment             fMeasureMomentFromBeginningOfVoice;
 
     // notes flat list
     // this is used to identify solo notes and rests in measures slices
@@ -782,7 +781,7 @@ class EXP msrMeasure : public msrSegmentElement
                             S_msrVoice   voice,
                             S_msrHarmony currentHarmony);
 
-    void                  finalizeHarmoniesInHarmoniesMeasure (
+    void                  finalizeTheHarmoniesInHarmoniesMeasure (
                             int           inputLineNumber,
                             const string& context);
 
@@ -801,7 +800,7 @@ class EXP msrMeasure : public msrSegmentElement
                                          i,
                             S_msrFiguredBassElement previousFiguredBass,
                             S_msrFiguredBassElement currentFiguredBass,
-                            const rational&         currentFiguredBassPositionInMeasure);
+                            const Rational&         currentFiguredBassPositionInMeasure);
 
     void                  handleSubsequentFiguredBassElementInFiguredBassMeasure (
                             int                     inputLineNumber,
@@ -810,7 +809,7 @@ class EXP msrMeasure : public msrSegmentElement
                                                     i,
                             S_msrFiguredBassElement previousFiguredBass,
                             S_msrFiguredBassElement currentFiguredBass,
-                            const rational&         currentFiguredBassPositionInMeasure);
+                            const Rational&         currentFiguredBassPositionInMeasure);
 
     void                  postHandleCurrentFiguredBassElementInFiguredBassMeasure (
                             int                     inputLineNumber,
@@ -837,7 +836,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  insertElementAtPositionInMeasure (
                             int                 inputLineNumber,
-                            const rational&     positionInMeasure,
+                            const Rational&     positionInMeasure,
                             S_msrMeasureElement elem);
 
     void                  printMeasurePendingMeasureElementsList ();
@@ -849,7 +848,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     // measure lengthes, in whole notes
 
-    rational              fCurrentMeasureWholeNotesDuration;
+    Rational              fCurrentMeasureWholeNotesDuration;
                             // this increases when musical elements
                             // are appended to the measure
 
@@ -867,7 +866,7 @@ class EXP msrMeasure : public msrSegmentElement
     string                fMeasureFinalizationContext;
 };
 typedef SMARTP<msrMeasure> S_msrMeasure;
-EXP ostream& operator<< (ostream& os, const S_msrMeasure& elt);
+EXP ostream& operator << (ostream& os, const S_msrMeasure& elt);
 
 
 }

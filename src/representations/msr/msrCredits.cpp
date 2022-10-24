@@ -71,7 +71,7 @@ string msrCreditTypeKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrCreditTypeKind& elt)
+ostream& operator << (ostream& os, const msrCreditTypeKind& elt)
 {
   os << msrCreditTypeKindAsString (elt);
   return os;
@@ -265,13 +265,13 @@ void msrCreditWords::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrCreditWords& elt)
+ostream& operator << (ostream& os, const S_msrCreditWords& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -433,13 +433,13 @@ void msrCredit::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrCredit& elt)
+ostream& operator << (ostream& os, const S_msrCredit& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

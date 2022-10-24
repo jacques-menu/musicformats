@@ -75,7 +75,7 @@ class EXP bsrFootNotes : public bsrLine
                           fFootNotesElementsList;
 };
 typedef SMARTP<bsrFootNotes> S_bsrFootNotes;
-EXP ostream& operator<< (ostream& os, const S_bsrFootNotes& elt);
+EXP ostream& operator << (ostream& os, const S_bsrFootNotes& elt);
 
 
 }

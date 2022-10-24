@@ -34,7 +34,7 @@ class EXP msrTempoNote : public msrElement
 
     static SMARTP<msrTempoNote> create (
                             int             inputLineNumber,
-                            const rational& tempoNoteWholeNotes,
+                            const Rational& tempoNoteWholeNotes,
                             Bool            tempoNoteBelongsToATuplet);
 
   protected:
@@ -44,7 +44,7 @@ class EXP msrTempoNote : public msrElement
 
                           msrTempoNote (
                             int             inputLineNumber,
-                            const rational& tempoNoteWholeNotes,
+                            const Rational& tempoNoteWholeNotes,
                             Bool            tempoNoteBelongsToATuplet);
 
     virtual               ~msrTempoNote ();
@@ -54,7 +54,7 @@ class EXP msrTempoNote : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    rational              getTempoNoteWholeNotes () const
+    Rational              getTempoNoteWholeNotes () const
                               { return fTempoNoteWholeNotes; }
 
     const list<S_msrBeam>&
@@ -92,14 +92,14 @@ class EXP msrTempoNote : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    rational              fTempoNoteWholeNotes;
+    Rational              fTempoNoteWholeNotes;
 
     list<S_msrBeam>       fTempoNoteBeams;
 
     Bool                  fTempoNoteBelongsToATuplet;
 };
 typedef SMARTP<msrTempoNote> S_msrTempoNote;
-EXP ostream& operator<< (ostream& os, const S_msrTempoNote& elt);
+EXP ostream& operator << (ostream& os, const S_msrTempoNote& elt);
 
 //______________________________________________________________________________
 class EXP msrTempoTuplet : public msrElement
@@ -142,7 +142,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      const rational&              memberNotesDisplayWholeNotes);
+      const Rational&              memberNotesDisplayWholeNotes);
 
   protected:
 
@@ -155,7 +155,7 @@ class EXP msrTempoTuplet : public msrElement
       msrTempoTupletBracketKind    tempoTupletBracketKind,
       msrTempoTupletShowNumberKind tempoTupletShowNumberKind,
       msrTupletFactor              tempoTupletFactor,
-      const rational&              memberNotesDisplayWholeNotes);
+      const Rational&              memberNotesDisplayWholeNotes);
 
     virtual               ~msrTempoTuplet ();
 
@@ -178,14 +178,14 @@ class EXP msrTempoTuplet : public msrElement
                           getTempoTupletFactor () const
                               { return fTempoTupletFactor; }
 
-    rational              getMemberNotesDisplayWholeNotes () const
+    Rational              getMemberNotesDisplayWholeNotes () const
                               { return fMemberNotesDisplayWholeNotes; }
 
     const list<S_msrElement>&
                           getTempoTupletElements () const
                               { return fTempoTupletElements; }
 
-    rational              getTempoTupletDisplayWholeNotes () const
+    Rational              getTempoTupletDisplayWholeNotes () const
                               { return fTempoTupletDisplayWholeNotes; }
 
   public:
@@ -246,14 +246,14 @@ class EXP msrTempoTuplet : public msrElement
 
     msrTupletFactor       fTempoTupletFactor;
 
-    rational              fMemberNotesDisplayWholeNotes;
+    Rational              fMemberNotesDisplayWholeNotes;
 
-    rational              fTempoTupletDisplayWholeNotes;
+    Rational              fTempoTupletDisplayWholeNotes;
 
     list<S_msrElement>    fTempoTupletElements;
 };
 typedef SMARTP<msrTempoTuplet> S_msrTempoTuplet;
-EXP ostream& operator<< (ostream& os, const S_msrTempoTuplet& elt);
+EXP ostream& operator << (ostream& os, const S_msrTempoTuplet& elt);
 
 //______________________________________________________________________________
 class EXP msrTempoNotesRelationshipshipElements : public msrElement
@@ -298,7 +298,7 @@ class EXP msrTempoNotesRelationshipshipElements : public msrElement
     // set and get
     // ------------------------------------------------------
 
-    rational              getTempoNotesRelationshipshipElementsKind () const
+    Rational              getTempoNotesRelationshipshipElementsKind () const
                               { return fTempoNotesRelationshipshipElementsKind; }
 
     const list<S_msrElement>&
@@ -340,7 +340,7 @@ class EXP msrTempoNotesRelationshipshipElements : public msrElement
     list<S_msrElement>    fTempoNotesRelationshipshipElementsList;
 };
 typedef SMARTP<msrTempoNotesRelationshipshipElements> S_msrTempoNotesRelationshipshipElements;
-EXP ostream& operator<< (ostream& os, const S_msrTempoNotesRelationshipshipElements& elt);
+EXP ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipshipElements& elt);
 
 //______________________________________________________________________________
 class EXP msrTempo : public msrMeasureElement
@@ -571,7 +571,7 @@ class EXP msrTempo : public msrMeasureElement
                           fTempoNotesRelationshipRightElements;
 };
 typedef SMARTP<msrTempo> S_msrTempo;
-EXP ostream& operator<< (ostream& os, const S_msrTempo& elt);
+EXP ostream& operator << (ostream& os, const S_msrTempo& elt);
 
 
 } // namespace MusicFormats

@@ -198,7 +198,7 @@ EXP void translateLpsrToLilypondWithHandler (
       s <<
         "Could not open LilyPond output file \"" <<
         outputFileName <<
-        "\" for writing, quitting";
+        "\" for writing - quitting";
 
       string message = s.str ();
 

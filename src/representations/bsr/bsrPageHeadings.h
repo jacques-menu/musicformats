@@ -97,7 +97,7 @@ class EXP bsrPageHeading : public bsrLine
     int                   fPageHeadingNumber;     // after title ??? JMI
 };
 typedef SMARTP<bsrPageHeading> S_bsrPageHeading;
-EXP ostream& operator<< (ostream& os, const S_bsrPageHeading& elt);
+EXP ostream& operator << (ostream& os, const S_bsrPageHeading& elt);
 
 
 }

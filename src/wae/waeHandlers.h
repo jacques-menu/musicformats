@@ -69,7 +69,7 @@ class EXP waeHandler : public smartable
     // ------------------------------------------------------
 };
 typedef SMARTP<waeHandler> S_waeHandler;
-EXP ostream& operator<< (ostream& os, const S_waeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_waeHandler& elt);
 
 
 }

@@ -32,7 +32,7 @@ enum class msrNoteEventKind {
 string noteEventKindAsString (
   msrNoteEventKind noteEventKind);
 
-ostream& operator<< (ostream& os, msrNoteEventKind& elt);
+ostream& operator << (ostream& os, msrNoteEventKind& elt);
 
 //________________________________________________________________________
 class msrNoteEvent : public smartable
@@ -43,7 +43,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrNoteEvent> create (
-                            const rational&  noteEventPositionInMeasure,
+                            const Rational&  noteEventPositionInMeasure,
                             S_msrNote        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -53,7 +53,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
                           msrNoteEvent (
-                            const rational&  noteEventPositionInMeasure,
+                            const Rational&  noteEventPositionInMeasure,
                             S_msrNote        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -64,7 +64,7 @@ class msrNoteEvent : public smartable
     // set and get
     // ------------------------------------------------------
 
-    rational              getNoteEventPositionInMeasure () const
+    Rational              getNoteEventPositionInMeasure () const
                               { return fNoteEventPositionInMeasure; }
 
     S_msrNote             getNoteEventNote () const
@@ -96,12 +96,12 @@ class msrNoteEvent : public smartable
     // private fields
     // ------------------------------------------------------
 
-    rational              fNoteEventPositionInMeasure;
+    Rational              fNoteEventPositionInMeasure;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 };
 typedef SMARTP<msrNoteEvent> S_msrNoteEvent;
-EXP ostream& operator<< (ostream& os, const S_msrNoteEvent& elt);
+EXP ostream& operator << (ostream& os, const S_msrNoteEvent& elt);
 
 //________________________________________________________________________
 class msrSimultaneousNotesChunk : public smartable
@@ -112,7 +112,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrSimultaneousNotesChunk> create (
-                            const rational& chunkPositionInMeasure);
+                            const Rational& chunkPositionInMeasure);
 
   protected:
 
@@ -120,7 +120,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
                           msrSimultaneousNotesChunk (
-                            const rational& chunkPositionInMeasure);
+                            const Rational& chunkPositionInMeasure);
 
     virtual               ~msrSimultaneousNotesChunk ();
 
@@ -129,7 +129,7 @@ class msrSimultaneousNotesChunk : public smartable
     // set and get
     // ------------------------------------------------------
 
-    rational              getChunkPositionInMeasure () const
+    Rational              getChunkPositionInMeasure () const
                               { return fChunkPositionInMeasure; }
 
     const list<S_msrNote>&
@@ -137,7 +137,7 @@ class msrSimultaneousNotesChunk : public smartable
                               { return fChunkNotesList; }
 
 
-    rational              getChunkWholeNotes () const
+    Rational              getChunkWholeNotes () const
                               { return fChunkWholeNotes; }
 
   public:
@@ -167,12 +167,12 @@ class msrSimultaneousNotesChunk : public smartable
     // private fields
     // ------------------------------------------------------
 
-    rational              fChunkPositionInMeasure;
+    Rational              fChunkPositionInMeasure;
     list<S_msrNote>       fChunkNotesList;
-    rational              fChunkWholeNotes;
+    Rational              fChunkWholeNotes;
 };
 typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
-EXP ostream& operator<< (ostream& os, const S_msrSimultaneousNotesChunk& elt);
+EXP ostream& operator << (ostream& os, const S_msrSimultaneousNotesChunk& elt);
 
 //______________________________________________________________________________
 class msrMeasuresSlice;
@@ -291,7 +291,7 @@ class EXP msrMeasuresSlice : public smartable
     list<S_msrSimultaneousNotesChunk>
                           fSliceSimultaneousNotesChunksList;
 };
-EXP ostream& operator<< (ostream& os, const S_msrMeasuresSlice& elt);
+EXP ostream& operator << (ostream& os, const S_msrMeasuresSlice& elt);
 
 //______________________________________________________________________________
 class msrMeasuresSlicesSequence;
@@ -386,7 +386,7 @@ class EXP msrMeasuresSlicesSequence : public smartable
     vector<S_msrMeasuresSlice>
                           fMeasuresSlicesVector;
 };
-EXP ostream& operator<< (ostream& os, const S_msrMeasuresSlicesSequence& elt);
+EXP ostream& operator << (ostream& os, const S_msrMeasuresSlicesSequence& elt);
 
 
 } // namespace MusicFormats

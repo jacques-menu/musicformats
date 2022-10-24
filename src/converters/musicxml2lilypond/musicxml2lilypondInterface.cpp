@@ -123,7 +123,7 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
         theMxsr,
         gGlobalMsrOahGroup,
         "Pass 2a",
-        "Create a first MSR skeleton from the MXSR");
+        "Create an MSR skeleton from the MXSR");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -146,7 +146,7 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
     return mfMusicformatsError::k_NoError;
   }
 
-  // populate the first MSR skeleton from MusicXML data (pass 2b)
+  // populate the MSR skeleton from MusicXML data (pass 2b)
   // ------------------------------------------------------
 
   try {
@@ -154,7 +154,7 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
       theMxsr,
       firstMsrScore,
         "Pass 2b",
-        "Populate the first MSR skeleton from MusicXML data");
+        "Populate the MSR skeleton from MusicXML data");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -348,7 +348,7 @@ else {
       s <<
         "Could not open LilyPond output file \"" <<
         outputFileName <<
-        "\" for writing, quitting";
+        "\" for writing - quitting";
 
       string message = s.str ();
 

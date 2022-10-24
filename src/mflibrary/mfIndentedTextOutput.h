@@ -115,7 +115,7 @@ class EXP mfOutputIndenter
     string                fSpacer;
 };
 
-EXP ostream& operator<< (ostream& os, const mfOutputIndenter& theIndenter);
+EXP ostream& operator << (ostream& os, const mfOutputIndenter& theIndenter);
 
 // useful shortcut macros
 #define gIndenter mfOutputIndenter::gGlobalOStreamIndenter

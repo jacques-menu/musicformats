@@ -184,7 +184,7 @@ class EXP bsrCellsList : public smartable
     list<bsrCellKind>     fCellsListElements;
 };
 typedef SMARTP<bsrCellsList> S_bsrCellsList;
-EXP ostream& operator<< (ostream& os, const S_bsrCellsList& elt);
+EXP ostream& operator << (ostream& os, const S_bsrCellsList& elt);
 
 
 } // namespace MusicFormats

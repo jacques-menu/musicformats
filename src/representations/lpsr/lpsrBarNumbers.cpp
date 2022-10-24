@@ -108,13 +108,13 @@ void lpsrBarNumberCheck::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrBarNumberCheck& elt)
+ostream& operator << (ostream& os, const S_lpsrBarNumberCheck& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -201,7 +201,7 @@ void lpsrBarCommand::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrBarCommand& nstf)
+ostream& operator << (ostream& os, const S_lpsrBarCommand& nstf)
 {
   nstf->print (os);
   return os;

@@ -94,7 +94,7 @@ class EXP msr2guidoManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msr2guidoManPageGenerateAtom> S_msr2guidoManPageGenerateAtom;
-EXP ostream& operator<< (ostream& os, const S_msr2guidoManPageGenerateAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msr2guidoManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP msr2guidoManPageOahGroup : public oahGroup
@@ -181,7 +181,7 @@ class EXP msr2guidoManPageOahGroup : public oahGroup
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msr2guidoManPageOahGroup> S_msr2guidoManPageOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msr2guidoManPageOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msr2guidoManPageOahGroup& elt);
 
 EXP extern S_msr2guidoManPageOahGroup gGlobalMsr2guidoManPageOahGroup;
 

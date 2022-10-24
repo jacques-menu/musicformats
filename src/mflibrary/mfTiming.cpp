@@ -201,7 +201,7 @@ void mfTimingItemsList::print (ostream& os) const
   doPrint (os);
 }
 
-ostream& operator<< (ostream& os, const mfTimingItemsList& tim) {
+ostream& operator << (ostream& os, const mfTimingItemsList& tim) {
   tim.print(os);
   return os;
 }

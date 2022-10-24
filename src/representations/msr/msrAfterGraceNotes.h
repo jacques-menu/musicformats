@@ -95,7 +95,7 @@ class EXP msrAfterGraceNotesGroupContents : public msrElement
                           fAfterGraceNotesGroupContentsNotesList;
 };
 typedef SMARTP<msrAfterGraceNotesGroupContents> S_msrAfterGraceNotesGroupContents;
-EXP ostream& operator<< (ostream& os, const S_msrAfterGraceNotesGroupContents& elt);
+EXP ostream& operator << (ostream& os, const S_msrAfterGraceNotesGroupContents& elt);
 
 //______________________________________________________________________________
 class EXP msrAfterGraceNotesGroup : public msrElement
@@ -191,7 +191,7 @@ class EXP msrAfterGraceNotesGroup : public msrElement
                           fAfterGraceNotesGroupContents;
 };
 typedef SMARTP<msrAfterGraceNotesGroup> S_msrAfterGraceNotesGroup;
-EXP ostream& operator<< (ostream& os, const S_msrAfterGraceNotesGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msrAfterGraceNotesGroup& elt);
 
 
 }

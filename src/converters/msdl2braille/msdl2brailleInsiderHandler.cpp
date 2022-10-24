@@ -12,14 +12,14 @@
 #include <iomanip>      // setw, setprecision, ...
 #include <regex>
 
-#include "enableHarmoniesExtraOahIfDesired.h"
-#ifdef EXTRA_OAH_IS_ENABLED
-  #include "harmoniesExtraOah.h"
-#endif
-
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
+#endif
+
+#include "enableHarmoniesExtraOahIfDesired.h"
+#ifdef EXTRA_OAH_IS_ENABLED
+  #include "harmoniesExtraOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -427,15 +427,15 @@ void msdl2brailleInsiderHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdl2brailleInsiderHandler& elt)
+ostream& operator << (ostream& os, const S_msdl2brailleInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

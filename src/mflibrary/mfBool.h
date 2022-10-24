@@ -117,7 +117,7 @@ EXP Bool operator&& (const bool& theBool, const Bool& rightBool);
 EXP Bool operator|| (const Bool& leftBool, const bool& theBool);
 EXP Bool operator|| (const bool& theBool, const Bool& rightBool);
 
-EXP ostream& operator<< (ostream& os, const Bool& theBool);
+EXP ostream& operator << (ostream& os, const Bool& theBool);
 
 EXP Bool nand (Bool p, Bool q);
 EXP Bool nor (Bool p, Bool q);

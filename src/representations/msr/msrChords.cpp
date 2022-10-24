@@ -43,8 +43,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrChord msrChord::create (
   int             inputLineNumber,
-  const rational& chordSoundingWholeNotes,
-  const rational& chordDisplayWholeNotes,
+  const Rational& chordSoundingWholeNotes,
+  const Rational& chordDisplayWholeNotes,
   msrDurationKind chordGraphicDurationKind)
 {
 #ifdef TRACING_IS_ENABLED
@@ -71,15 +71,16 @@ S_msrChord msrChord::create (
 
 msrChord::msrChord (
   int             inputLineNumber,
-  const rational& chordSoundingWholeNotes,
-  const rational& chordDisplayWholeNotes,
+  const Rational& chordSoundingWholeNotes,
+  const Rational& chordDisplayWholeNotes,
   msrDurationKind chordGraphicDurationKind)
     : msrTupletElement (inputLineNumber)
 {
   fChordKind = msrChordInKind::k_NoChordIn;
 
-// JMI  fChordSoundingWholeNotes = chordSoundingWholeNotes;
-  fMeasureElementSoundingWholeNotes = chordSoundingWholeNotes;
+  doSetMeasureElementSoundingWholeNotes (
+    chordSoundingWholeNotes,
+    "msrChord::msrChord()");
 
   fChordDisplayWholeNotes  = chordDisplayWholeNotes;
 
@@ -137,22 +138,25 @@ S_msrChord msrChord::createChordNewbornClone (
   return newbornClone;
 }
 
-void msrChord::setMeasureElementPositionInMeasure (
-  const rational& positionInMeasure,
-  const string&   context)
+void msrChord::setChordPositionInMeasure (
+  const S_msrMeasure measure,
+  const Rational&    positionInMeasure,
+  const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Setting chord's position in measure of " <<
       asString () <<
-      " to '" <<
+      " to " <<
       positionInMeasure <<
-      "' (was '" <<
+      " (was " <<
       fMeasureElementPositionInMeasure <<
-      "') in measure '" <<
+      ") in measure " <<
+      measure->asShortString () <<
+      " (fMeasureElementMeasureNumber: " <<
       fMeasureElementMeasureNumber <<
-      "', context: \"" <<
+      "), context: \"" <<
       context <<
       "\"" <<
       endl;
@@ -271,7 +275,7 @@ S_msrScore msrChord::fetchChordUpLinkToScore () const
 }
 
 void msrChord::setChordDisplayWholeNotes (
-   const rational& wholeNotes)
+   const Rational& wholeNotes)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -332,7 +336,7 @@ void msrChord::setChordGraceNotesGroupLinkAfter (
 
 void msrChord::setChordMembersPositionInMeasure (
   S_msrMeasure     measure,
-   const rational& positionInMeasure)
+   const Rational& positionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -348,21 +352,22 @@ void msrChord::setChordMembersPositionInMeasure (
   string context =
     "setChordMembersPositionInMeasure()";
 
-  setMeasureElementPositionInMeasure (
+  setChordPositionInMeasure (
+    measure,
     positionInMeasure,
     context);
 
   if (false) { // JMI CAFE
   // compute chord's position in voice
-  rational
-     positionInVoice =
-      fChordDirectUpLinkToMeasure->getMeasurePositionInVoice ()
+  Rational
+     positionFromBeginningOfVoice =
+      fChordDirectUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
         +
       positionInMeasure;
 
   // set chord's position in voice
-  setMeasureElementPositionInVoice (
-    positionInVoice,
+  setMeasureElementPositionFromBeginningOfVoice (
+    positionFromBeginningOfVoice,
     context);
 
   // update current position in voice
@@ -372,20 +377,13 @@ void msrChord::setChordMembersPositionInMeasure (
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionInVoice (
+    incrementCurrentPositionFromBeginningOfVoice (
       fChordNotesVector [0]->getMeasureElementSoundingWholeNotes ());
 }
 
   // set the chord's elements' position in measure
   if (fChordNotesVector.size ()) {
-    vector<S_msrNote>::const_iterator
-      iBegin = fChordNotesVector.begin (),
-      iEnd   = fChordNotesVector.end (),
-      i      = iBegin;
-    for ( ; ; ) {
-      S_msrNote
-        note = (*i);
-
+    for (S_msrNote note : fChordNotesVector) {
       // set note's measure uplink
       note->
         setNoteDirectUpLinkToMeasure (
@@ -393,30 +391,28 @@ void msrChord::setChordMembersPositionInMeasure (
 
       // set note's position in measure
       note->
-        setMeasureElementPositionInMeasure (
+        setNotePositionInMeasure (
+          measure,
           positionInMeasure, // they all share the same one
           "chord member");
 
-//    JMI   set note's position in voice
+//    JMI   set note's position in voice v0.9.66
 //       note->
-//         setMeasureElementPositionInVoice (
-//           positionInVoice,
+//         setMeasureElementPositionFromBeginningOfVoice (
+//           positionFromBeginningOfVoice,
 //           context); // they all share the same one
-
-      if (++i == iEnd) break;
     } // for
   }
 
   // are there dal segnos attached to this chord?
   if (fChordDalSegnos.size ()) {
-    list<S_msrDalSegno>::const_iterator i;
-    for (
-      i=fChordDalSegnos.begin (); i!=fChordDalSegnos.end (); ++i
-    ) {
+    for (S_msrDalSegno dalSegno : fChordDalSegnos) {
       // set the dal segno position in measure
-      (*i)->
+      dalSegno->
         setDalSegnoPositionInMeasure (
-          positionInMeasure);
+          measure,
+          positionInMeasure,
+          "msrChord::setChordMembersPositionInMeasure()");
     } // for
   }
 }
@@ -444,10 +440,11 @@ void msrChord::addFirstNoteToChord (
   note->
     setNoteDirectUpLinkToChord (this);
 
-/* JMI too early
+/* JMI too early v0.9.66
   // register note's measure upLink
   note->
-    setNoteDirectUpLinkToMeasure (fChordDirectUpLinkToMeasure);
+    setNoteDirectUpLinkToMeasure (
+      fChordDirectUpLinkToMeasure);
 */
 
   // mark note as belonging to a chord
@@ -492,6 +489,10 @@ void msrChord::addAnotherNoteToChord (
       endl;
   }
 #endif
+
+  gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+  print (gLogStream);
+  gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
 
   fChordNotesVector.push_back (note);
 
@@ -1435,13 +1436,13 @@ string msrChord::asShortString () const
 
 void msrChord::print (ostream& os) const
 {
-  rational
+  Rational
     chordMeasureFullLength =
       fChordDirectUpLinkToMeasure
         ?
           fChordDirectUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
-        : rational (0, 1); // JMI
+        : Rational (0, 1); // JMI
 
   os <<
     "[Chord" <<
@@ -1454,7 +1455,7 @@ void msrChord::print (ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 35;
+  const int fieldWidth = 44;
 
   os << left <<
     setw (fieldWidth) <<
@@ -1470,20 +1471,33 @@ void msrChord::print (ostream& os) const
     "fMeasureElementPositionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
     endl <<
     setw (fieldWidth) <<
-    "fMeasureElementPositionInVoice" << " : " << fMeasureElementPositionInVoice <<
+    "fMeasureElementPositionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
     endl <<
     setw (fieldWidth) <<
     "chordMeasureFullLength" << " : " << chordMeasureFullLength <<
     endl;
 
   os <<
+    setw (fieldWidth) <<
+    "fChordDirectUpLinkToMeasure" << " : ";
+  if (fChordDirectUpLinkToTuplet) {
+    os <<
+      fChordDirectUpLinkToMeasure->asShortString ();
+  }
+  else {
+    os << "[NONE]";
+  }
+  os << endl;
+
+  os <<
+    setw (fieldWidth) <<
     "fChordDirectUpLinkToTuplet" << " : ";
   if (fChordDirectUpLinkToTuplet) {
     os <<
       fChordDirectUpLinkToTuplet->asShortString ();
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -1496,17 +1510,16 @@ void msrChord::print (ostream& os) const
   // print simplified position in measure if relevant
 // JMI  if (fChordDirectUpLinkToMeasure) {
     // the chord measure upLink may not have been set yet
-    rational
+    Rational
       chordPositionBis =
         fMeasureElementPositionInMeasure;
-    chordPositionBis.rationalise ();
 
     if (
       chordPositionBis.getNumerator ()
         !=
       fMeasureElementPositionInMeasure.getNumerator ()
     ) {
-      // print rationalized rational view
+      // print rationalised Rational view
       os << left <<
         setw (fieldWidth) <<
         "chordPositionBis" << " : " << chordPositionBis <<
@@ -1534,7 +1547,7 @@ void msrChord::print (ostream& os) const
       os << gTab << fChordGraceNotesGroupLinkBefore;
     }
     else {
-      os << " : " << "none" << endl; // JMI TEST
+      os << " : " << "[NONE]" << endl; // JMI TEST
     }
   }
 
@@ -1558,7 +1571,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1583,7 +1596,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1608,7 +1621,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1633,7 +1646,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1658,7 +1671,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1683,7 +1696,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1708,7 +1721,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1733,7 +1746,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1758,7 +1771,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1784,7 +1797,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1810,7 +1823,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1836,7 +1849,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1861,7 +1874,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1886,7 +1899,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1911,7 +1924,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1936,7 +1949,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1961,7 +1974,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -1986,7 +1999,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2011,7 +2024,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2036,7 +2049,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2054,7 +2067,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2070,25 +2083,15 @@ void msrChord::print (ostream& os) const
       os << endl;
       ++gIndenter;
 
-      list<S_msrHarmony>::const_iterator
-        iBegin = fChordHarmoniesList.begin (),
-        iEnd   = fChordHarmoniesList.end (),
-        i      = iBegin;
-      for ( ; ; ) {
-        S_msrHarmony
-          harmony = (*i);
-
+      for (S_msrHarmony harmony : fChordHarmoniesList) {
         os << harmony->asString ();
-
-        if (++i == iEnd) break;
-        // no endl here
       } // for
 
       --gIndenter;
     }
     else {
       os << " : " <<
-        "none" <<
+        "[NONE]" <<
         endl;
     }
   }
@@ -2108,7 +2111,7 @@ void msrChord::print (ostream& os) const
         endl;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
 
     --gIndenter;
@@ -2140,7 +2143,7 @@ void msrChord::print (ostream& os) const
       --gIndenter;
     }
     else {
-      os << ":" << "none" <<
+      os << ":" << "[NONE]" <<
       endl;
     }
 
@@ -2168,7 +2171,7 @@ void msrChord::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2190,7 +2193,7 @@ void msrChord::print (ostream& os) const
       --gIndenter;
     }
     else {
-      os << " : " << "none" << endl; // JMI TEST
+      os << " : " << "[NONE]" << endl; // JMI TEST
     }
 //    os << endl;
   }
@@ -2208,7 +2211,7 @@ void msrChord::print (ostream& os) const
       --gIndenter;
     }
     else {
-      os << " : " << "none";
+      os << " : " << "[NONE]";
     }
     os << endl;
   }
@@ -2224,7 +2227,7 @@ void msrChord::print (ostream& os) const
       os << gTab << fChordGraceNotesGroupLinkAfter;
     }
     else {
-      os << " : " << "none";
+      os << " : " << "[NONE]";
     }
     os << endl;
   }
@@ -2236,13 +2239,13 @@ void msrChord::print (ostream& os) const
 
 void msrChord::printShort (ostream& os) const
 {
-  rational
+  Rational
     chordMeasureFullLength =
       fChordDirectUpLinkToMeasure
         ?
           fChordDirectUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
-        : rational (0, 1); // JMI
+        : Rational (0, 1); // JMI
 
   os <<
     "[Chord" <<
@@ -2254,7 +2257,7 @@ void msrChord::printShort (ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 35;
+  const int fieldWidth = 44;
 
   os << left <<
     setw (fieldWidth) <<
@@ -2271,10 +2274,16 @@ void msrChord::printShort (ostream& os) const
     "fMeasureElementPositionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
     endl <<
     setw (fieldWidth) <<
-    "fMeasureElementPositionInVoice" << " : " << fMeasureElementPositionInVoice <<
+    "fMeasureElementPositionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
     endl <<
     setw (fieldWidth) <<
     "chordMeasureFullLength" << " : " << chordMeasureFullLength <<
+    endl;
+
+  os <<
+    setw (fieldWidth) <<
+    "fChordDirectUpLinkToTuplet" << " : " <<
+    fChordDirectUpLinkToTuplet <<
     endl;
 
   os <<
@@ -2294,7 +2303,7 @@ void msrChord::printShort (ostream& os) const
       os << gTab << fChordGraceNotesGroupLinkBefore->asShortString ();
     }
     else {
-      os << " : " << "none";
+      os << " : " << "[NONE]";
     }
     os << endl;
   }
@@ -2320,7 +2329,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2345,7 +2354,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2370,7 +2379,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2395,7 +2404,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2420,7 +2429,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2445,7 +2454,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2470,7 +2479,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2495,7 +2504,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2520,7 +2529,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2547,7 +2556,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2574,7 +2583,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2600,7 +2609,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2625,7 +2634,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2651,7 +2660,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2677,7 +2686,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2703,7 +2712,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2728,7 +2737,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2753,7 +2762,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2778,7 +2787,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2803,7 +2812,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2828,7 +2837,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2846,7 +2855,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        " : " << "none" <<
+        " : " << "[NONE]" <<
       endl;
     }
   }
@@ -2881,7 +2890,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os << " : " <<
-        "none" <<
+        "[NONE]" <<
         endl;
     }
   }
@@ -2902,7 +2911,7 @@ void msrChord::printShort (ostream& os) const
     }
     else {
       os <<
-        "none";
+        "[NONE]";
     }
 
     --gIndenter;
@@ -2934,7 +2943,7 @@ void msrChord::printShort (ostream& os) const
       --gIndenter;
     }
     else {
-      os << ":" << "none" <<
+      os << ":" << "[NONE]" <<
       endl;
     }
 
@@ -2955,7 +2964,7 @@ void msrChord::printShort (ostream& os) const
       --gIndenter;
     }
     else {
-      os << " : " << "none" << endl; // JMI TEST
+      os << " : " << "[NONE]" << endl; // JMI TEST
     }
 //    os << endl;
   }
@@ -2972,7 +2981,7 @@ void msrChord::printShort (ostream& os) const
       --gIndenter;
     }
     else {
-      os << " : " << "none";
+      os << " : " << "[NONE]";
     }
     os << endl;
   }
@@ -2989,7 +2998,7 @@ void msrChord::printShort (ostream& os) const
       os << gTab << fChordGraceNotesGroupLinkAfter->asShortString ();
     }
     else {
-      os << " : " << "none";
+      os << " : " << "[NONE]";
     }
     os << endl;
   }
@@ -2999,13 +3008,13 @@ void msrChord::printShort (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrChord& elt)
+ostream& operator << (ostream& os, const S_msrChord& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -3221,13 +3230,13 @@ void msrChordBeamLink::printShort (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrChordBeamLink& elt)
+ostream& operator << (ostream& os, const S_msrChordBeamLink& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -3443,13 +3452,13 @@ void msrChordSlurLink::printShort (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrChordSlurLink& elt)
+ostream& operator << (ostream& os, const S_msrChordSlurLink& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -3668,13 +3677,13 @@ void msrChordGraceNotesGroupLink::printShort (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrChordGraceNotesGroupLink& elt)
+ostream& operator << (ostream& os, const S_msrChordGraceNotesGroupLink& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

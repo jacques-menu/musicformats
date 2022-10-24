@@ -88,7 +88,7 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
     S_msrStaff            fStaffToChangeTo;
 };
 typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
-EXP ostream& operator<< (ostream& os, const S_msrVoiceStaffChange& elt);
+EXP ostream& operator << (ostream& os, const S_msrVoiceStaffChange& elt);
 
 
 }

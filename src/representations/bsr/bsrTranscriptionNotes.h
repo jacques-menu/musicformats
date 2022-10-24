@@ -93,7 +93,7 @@ class EXP bsrTranscriptionNotesElement : public bsrElement
     string                fTranscriptionNoteText;
 };
 typedef SMARTP<bsrTranscriptionNotesElement> S_bsrTranscriptionNotesElement;
-EXP ostream& operator<< (ostream& os, const S_bsrTranscriptionNotesElement& elt);
+EXP ostream& operator << (ostream& os, const S_bsrTranscriptionNotesElement& elt);
 
 //______________________________________________________________________________
 class EXP bsrTranscriptionNotes : public bsrLine
@@ -162,7 +162,7 @@ class EXP bsrTranscriptionNotes : public bsrLine
                           fTranscriptionNotesElementsList;
 };
 typedef SMARTP<bsrTranscriptionNotes> S_bsrTranscriptionNotes;
-EXP ostream& operator<< (ostream& os, const S_bsrTranscriptionNotes& elt);
+EXP ostream& operator << (ostream& os, const S_bsrTranscriptionNotes& elt);
 
 
 } // namespace MusicFormats

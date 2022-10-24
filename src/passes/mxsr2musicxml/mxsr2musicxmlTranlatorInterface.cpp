@@ -146,7 +146,7 @@ EXP void translateMxsrToMusicXML (
       s <<
         "Could not open MusicXML output file \"" <<
         outputFileName <<
-        "\" for writing, quitting";
+        "\" for writing - quitting";
 
       string message = s.str ();
 

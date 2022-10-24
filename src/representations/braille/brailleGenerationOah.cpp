@@ -260,13 +260,13 @@ void brailleOutputKindAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_brailleOutputKindAtom& elt)
+ostream& operator << (ostream& os, const S_brailleOutputKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -482,13 +482,13 @@ void brailleUTFKindAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_brailleUTFKindAtom& elt)
+ostream& operator << (ostream& os, const S_brailleUTFKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -704,13 +704,13 @@ void brailleByteOrderingKindAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_brailleByteOrderingKindAtom& elt)
+ostream& operator << (ostream& os, const S_brailleByteOrderingKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1154,13 +1154,13 @@ void brailleGenerationOahGroup::printBrailleGenerationOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_brailleGenerationOahGroup& elt)
+ostream& operator << (ostream& os, const S_brailleGenerationOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

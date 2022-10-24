@@ -10,7 +10,7 @@ Positions in measures is stored in \field{msrMeasureElement}{fMeasureElementPosi
 class EXP msrMeasureElement : public msrElement
 {
 	// ... ... ...
-	
+
   protected:
 
     // protected fields
@@ -26,10 +26,10 @@ class EXP msrMeasureElement : public msrElement
     string                fMeasureElementMeasureNumber;
 
     rational              fMeasureElementPositionInMeasure;
-    rational              fMeasureElementPositionInVoice;
+    rational              fMeasureElementPositionFromBeginningOfVoice;
 
     msrMoment             fMeasureElementMomentInMeasure;
-    msrMoment             fMeasureElementMomentInVoice;
+    msrMoment             fMeasureElementMomentFromBeginningOfVoice;
 };
 \end{lstlisting}
 

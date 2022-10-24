@@ -116,7 +116,7 @@ class EXP bsrMusicHeading : public bsrLine
     S_bsrTimeSignature    fMusicHeadingTimeSignatureSignature;
 };
 typedef SMARTP<bsrMusicHeading> S_bsrMusicHeading;
-EXP ostream& operator<< (ostream& os, const S_bsrMusicHeading& elt);
+EXP ostream& operator << (ostream& os, const S_bsrMusicHeading& elt);
 
 
 }

@@ -130,7 +130,7 @@ class EXP mfcVersionNumber : public smartable
     string                fPreRelease;
 };
 typedef SMARTP<mfcVersionNumber> S_mfcVersionNumber;
-EXP ostream& operator<< (ostream& os, const S_mfcVersionNumber& elt);
+EXP ostream& operator << (ostream& os, const S_mfcVersionNumber& elt);
 
 //______________________________________________________________________________
 class EXP mfcVersionDescr : public smartable
@@ -190,7 +190,7 @@ class EXP mfcVersionDescr : public smartable
     list<string>          fVersionDescriptionItems;
 };
 typedef SMARTP<mfcVersionDescr> S_mfcVersionDescr;
-EXP ostream& operator<< (ostream& os, const S_mfcVersionDescr& elt);
+EXP ostream& operator << (ostream& os, const S_mfcVersionDescr& elt);
 
 //______________________________________________________________________________
 class EXP mfcVersionsHistory : public smartable
@@ -248,7 +248,7 @@ class EXP mfcVersionsHistory : public smartable
                           fVersionsList;
 };
 typedef SMARTP<mfcVersionsHistory> S_mfcVersionsHistory;
-EXP ostream& operator<< (ostream& os, const S_mfcVersionsHistory& elt);
+EXP ostream& operator << (ostream& os, const S_mfcVersionsHistory& elt);
 
 //______________________________________________________________________________
 enum class mfcComponenKind {
@@ -262,7 +262,7 @@ enum class mfcComponenKind {
 string componenKindAsString (
   mfcComponenKind componenKind);
 
-ostream& operator<< (ostream& os, mfcComponenKind& elt);
+ostream& operator << (ostream& os, mfcComponenKind& elt);
 
 //______________________________________________________________________________
 class EXP mfcComponentDescr : public smartable
@@ -351,7 +351,7 @@ class EXP mfcComponentDescr : public smartable
     S_mfcVersionsHistory  fVersionsHistory;
 };
 typedef SMARTP<mfcComponentDescr> S_mfcComponentDescr;
-EXP ostream& operator<< (ostream& os, const S_mfcComponentDescr& elt);
+EXP ostream& operator << (ostream& os, const S_mfcComponentDescr& elt);
 
 //______________________________________________________________________________
 class EXP mfcOahComponent : public mfcComponentDescr
@@ -375,7 +375,7 @@ class EXP mfcOahComponent : public mfcComponentDescr
     virtual               ~mfcOahComponent ();
 };
 typedef SMARTP<mfcOahComponent> S_mfcOahComponent;
-EXP ostream& operator<< (ostream& os, const S_mfcOahComponent& elt);
+EXP ostream& operator << (ostream& os, const S_mfcOahComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcRepresentationComponent : public mfcComponentDescr
@@ -399,7 +399,7 @@ class EXP mfcRepresentationComponent : public mfcComponentDescr
     virtual               ~mfcRepresentationComponent ();
 };
 typedef SMARTP<mfcRepresentationComponent> S_mfcRepresentationComponent;
-EXP ostream& operator<< (ostream& os, const S_mfcRepresentationComponent& elt);
+EXP ostream& operator << (ostream& os, const S_mfcRepresentationComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcPassComponent : public mfcComponentDescr
@@ -423,7 +423,7 @@ class EXP mfcPassComponent : public mfcComponentDescr
     virtual               ~mfcPassComponent ();
 };
 typedef SMARTP<mfcPassComponent> S_mfcPassComponent;
-EXP ostream& operator<< (ostream& os, const S_mfcPassComponent& elt);
+EXP ostream& operator << (ostream& os, const S_mfcPassComponent& elt);
 
 //______________________________________________________________________________
 enum class mfcMultiComponentUsedFromTheCLIKind {
@@ -434,7 +434,7 @@ enum class mfcMultiComponentUsedFromTheCLIKind {
 string componentUsedFromTheCLIKindAsString (
   mfcMultiComponentUsedFromTheCLIKind componentUsedFromTheCLIKind);
 
-ostream& operator<< (ostream& os, mfcMultiComponentUsedFromTheCLIKind& elt);
+ostream& operator << (ostream& os, mfcMultiComponentUsedFromTheCLIKind& elt);
 
 enum class mfcMultiComponentEntropicityKind {
   kComponentEntropicityYes,
@@ -444,7 +444,7 @@ enum class mfcMultiComponentEntropicityKind {
 string componentEntropicityKindAsString (
   mfcMultiComponentEntropicityKind componentEntropicityKind);
 
-ostream& operator<< (ostream& os, mfcMultiComponentEntropicityKind& elt);
+ostream& operator << (ostream& os, mfcMultiComponentEntropicityKind& elt);
 
 //______________________________________________________________________________
 class EXP mfcMultiComponent : public mfcComponentDescr
@@ -562,7 +562,7 @@ class EXP mfcMultiComponent : public mfcComponentDescr
                           fComponentUsedFromTheCLIKind;
 };
 typedef SMARTP<mfcMultiComponent> S_mfcMultiComponent;
-EXP ostream& operator<< (ostream& os, const S_mfcMultiComponent& elt);
+EXP ostream& operator << (ostream& os, const S_mfcMultiComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcGeneratorComponent : public mfcMultiComponent
@@ -594,7 +594,7 @@ class EXP mfcGeneratorComponent : public mfcMultiComponent
     virtual               ~mfcGeneratorComponent ();
 };
 typedef SMARTP<mfcGeneratorComponent> S_mfcGeneratorComponent;
-EXP ostream& operator<< (ostream& os, const S_mfcGeneratorComponent& elt);
+EXP ostream& operator << (ostream& os, const S_mfcGeneratorComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcConverterComponent : public mfcMultiComponent
@@ -626,7 +626,7 @@ class EXP mfcConverterComponent : public mfcMultiComponent
     virtual               ~mfcConverterComponent ();
 };
 typedef SMARTP<mfcConverterComponent> S_mfcConverterComponent;
-EXP ostream& operator<< (ostream& os, const S_mfcConverterComponent& elt);
+EXP ostream& operator << (ostream& os, const S_mfcConverterComponent& elt);
 
 //______________________________________________________________________________
 class EXP mfcLibraryComponent : public mfcMultiComponent
@@ -701,7 +701,7 @@ class EXP mfcLibraryComponent : public mfcMultiComponent
                           fConverterComponentsList;
 };
 typedef SMARTP<mfcLibraryComponent> S_mfcLibraryComponent;
-EXP ostream& operator<< (ostream& os, const S_mfcLibraryComponent& elt);
+EXP ostream& operator << (ostream& os, const S_mfcLibraryComponent& elt);
 
 }
 

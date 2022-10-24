@@ -105,7 +105,7 @@ class EXP msrTransposition : public msrMeasureElement
     Bool                  fTranspositionDouble;
 };
 typedef SMARTP<msrTransposition> S_msrTransposition;
-EXP ostream& operator<< (ostream& os, const S_msrTransposition& elt);
+EXP ostream& operator << (ostream& os, const S_msrTransposition& elt);
 
 
 } // namespace MusicFormats

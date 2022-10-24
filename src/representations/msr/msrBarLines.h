@@ -283,7 +283,7 @@ class EXP msrBarLine : public msrMeasureElement
     list<int>             fEndingNumbersList;
 };
 typedef SMARTP<msrBarLine> S_msrBarLine;
-EXP ostream& operator<< (ostream& os, const S_msrBarLine& elt);
+EXP ostream& operator << (ostream& os, const S_msrBarLine& elt);
 
 
 } // namespace MusicFormats

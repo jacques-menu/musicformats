@@ -133,7 +133,7 @@ class EXP msrOrnament : public msrElement
     msrAccidentalKind     fOrnamentAccidentalKind;
 };
 typedef SMARTP<msrOrnament> S_msrOrnament;
-EXP ostream& operator<< (ostream& os, const S_msrOrnament& elt);
+EXP ostream& operator << (ostream& os, const S_msrOrnament& elt);
 
 
 }

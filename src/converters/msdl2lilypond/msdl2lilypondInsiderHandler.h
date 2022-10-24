@@ -111,7 +111,7 @@ class EXP msdl2lilypondInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<msdl2lilypondInsiderHandler> S_msdl2lilypondInsiderHandler;
-EXP ostream& operator<< (ostream& os, const S_msdl2lilypondInsiderHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdl2lilypondInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msdl2lilypondInsiderOahGroup : public oahGroup
@@ -212,7 +212,7 @@ class EXP msdl2lilypondInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<msdl2lilypondInsiderOahGroup> S_msdl2lilypondInsiderOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msdl2lilypondInsiderOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msdl2lilypondInsiderOahGroup& elt);
 
 EXP extern S_msdl2lilypondInsiderOahGroup gGlobalMsdl2lyInsiderOahGroup;
 
