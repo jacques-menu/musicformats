@@ -366,7 +366,7 @@ void msdrMusic::printShort (ostream& os) const
         os << (*i)->asShortString ();
       }
       else {
-        os << (*i)->getMeasureElementMeasureNumber ();
+        os << (*i)->getMeasureNumber ();
       }
       if (++i == iEnd) break;
       os << ' ';
@@ -381,13 +381,13 @@ void msdrMusic::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msdrMusic& elt)
+ostream& operator << (ostream& os, const S_msdrMusic& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

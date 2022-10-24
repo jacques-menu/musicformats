@@ -270,13 +270,13 @@ void msdlKeywordsLanguageAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlKeywordsLanguageAtom& elt)
+ostream& operator << (ostream& os, const S_msdlKeywordsLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -482,13 +482,13 @@ void oahDisplayMsdlKeywordsInLanguageAtom::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_oahDisplayMsdlKeywordsInLanguageAtom& elt)
+ostream& operator << (ostream& os, const S_oahDisplayMsdlKeywordsInLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -694,13 +694,13 @@ void oahDisplayMsdlTokensInLanguageAtom::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_oahDisplayMsdlTokensInLanguageAtom& elt)
+ostream& operator << (ostream& os, const S_oahDisplayMsdlTokensInLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -933,13 +933,13 @@ void msdlCommentsTypeAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlCommentsTypeAtom& elt)
+ostream& operator << (ostream& os, const S_msdlCommentsTypeAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1178,13 +1178,13 @@ void msdlUserLanguageAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlUserLanguageAtom& elt)
+ostream& operator << (ostream& os, const S_msdlUserLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1421,13 +1421,13 @@ void msdlPitchesLanguageAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdlPitchesLanguageAtom& elt)
+ostream& operator << (ostream& os, const S_msdlPitchesLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1811,13 +1811,13 @@ void msdlInputOahGroup::printMsdlInputOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msdlInputOahGroup& elt)
+ostream& operator << (ostream& os, const S_msdlInputOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

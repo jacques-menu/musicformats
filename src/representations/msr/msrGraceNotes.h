@@ -129,7 +129,7 @@ class EXP msrGraceNotesGroup : public msrElement
     // positions in measures
     void                  setGraceNotesGroupElementsPositionsInMeasure (
                             S_msrMeasure    measure,
-                            const rational& positionInMeasure);
+                            const Rational& positionInMeasure);
 
   public:
 
@@ -198,7 +198,7 @@ class EXP msrGraceNotesGroup : public msrElement
     string                fGraceNotesGroupMeasureNumber; // JMI ???
 };
 typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
-EXP ostream& operator<< (ostream& os, const S_msrGraceNotesGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msrGraceNotesGroup& elt);
 
 
 }

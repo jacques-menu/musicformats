@@ -129,7 +129,7 @@ class EXP bsrLineContents : public bsrElement
                           fLineContentsLineElementsList;
 };
 typedef SMARTP<bsrLineContents> S_bsrLineContents;
-EXP ostream& operator<< (ostream& os, const S_bsrLineContents& elt);
+EXP ostream& operator << (ostream& os, const S_bsrLineContents& elt);
 
 
 }

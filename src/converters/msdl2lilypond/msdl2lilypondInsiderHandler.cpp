@@ -460,13 +460,13 @@ void msdl2lilypondInsiderHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdl2lilypondInsiderHandler& elt)
+ostream& operator << (ostream& os, const S_msdl2lilypondInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

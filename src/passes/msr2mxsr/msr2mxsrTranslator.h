@@ -722,7 +722,7 @@ class EXP msr2mxsrTranslator :
 
     // divisions
     // ------------------------------------------------------
-    rational                  fPartShortestNoteDuration;
+    Rational                  fPartShortestNoteDuration;
     msrTupletFactor           fPartShortestNoteTupletFactor;
 
     int                       fDivisionsPerQuarterNote;
@@ -730,7 +730,7 @@ class EXP msr2mxsrTranslator :
 
     int                       wholeNotesAsDivisions (
                                 int             inputLineNumber,
-                                const rational& wholeNotes);
+                                const Rational& wholeNotes);
 
     Bool                      fPartDivisionsElementHasToBeAppended;
 
@@ -854,9 +854,9 @@ class EXP msr2mxsrTranslator :
     // backup and forward
     // ------------------------------------------------------
 
-    rational                  fCurrentPositionInMeasure;
+    Rational                  fCurrentPositionInMeasure;
 
-    rational                  fCurrentCumulatedSkipsDurations;
+    Rational                  fCurrentCumulatedSkipsDurations;
     int                       fCurrentCumulatedSkipsStaffNumber;
     int                       fCurrentCumulatedSkipsVoiceNumber;
 

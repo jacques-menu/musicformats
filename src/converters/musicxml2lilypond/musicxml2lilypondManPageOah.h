@@ -95,7 +95,7 @@ class EXP xml2lyManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<xml2lyManPageGenerateAtom> S_xml2lyManPageGenerateAtom;
-EXP ostream& operator<< (ostream& os, const S_xml2lyManPageGenerateAtom& elt);
+EXP ostream& operator << (ostream& os, const S_xml2lyManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP xml2lyManPageOahGroup : public oahGroup
@@ -182,7 +182,7 @@ class EXP xml2lyManPageOahGroup : public oahGroup
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<xml2lyManPageOahGroup> S_xml2lyManPageOahGroup;
-EXP ostream& operator<< (ostream& os, const S_xml2lyManPageOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_xml2lyManPageOahGroup& elt);
 
 EXP extern S_xml2lyManPageOahGroup gGlobalXml2lyManPageOahGroup;
 

@@ -114,7 +114,7 @@ class EXP mfslInterpreterInsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<mfslInterpreterInsiderHandler> S_mfslInterpreterInsiderHandler;
-EXP ostream& operator<< (ostream& os, const S_mfslInterpreterInsiderHandler& elt);
+EXP ostream& operator << (ostream& os, const S_mfslInterpreterInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP mfslInterpreterInsiderOahGroup : public oahGroup
@@ -188,7 +188,7 @@ class EXP mfslInterpreterInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 };
 typedef SMARTP<mfslInterpreterInsiderOahGroup> S_mfslInterpreterInsiderOahGroup;
-EXP ostream& operator<< (ostream& os, const S_mfslInterpreterInsiderOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_mfslInterpreterInsiderOahGroup& elt);
 
 EXP extern S_mfslInterpreterInsiderOahGroup gGlobalMfslInterpreterInsiderOahGroup;
 

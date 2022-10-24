@@ -144,13 +144,13 @@ void ischemeOptionsBlock::print (ostream& os) const
   os << "]" << endl;
 }
 
-ostream& operator<< (ostream& os, const S_ischemeOptionsBlock& elt)
+ostream& operator << (ostream& os, const S_ischemeOptionsBlock& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -177,7 +177,7 @@ string ischemeInputNameKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const ischemeInputNameKind& elt)
+ostream& operator << (ostream& os, const ischemeInputNameKind& elt)
 {
   os << ischemeInputNameKindAsString (elt);
   return os;
@@ -742,7 +742,7 @@ void ischemeInput::print (ostream& os) const
           optionsBlock;
       }
       else {
-        os << "none" << endl;
+        os << "[NONE]" << endl;
       }
 
       --gIndenter;
@@ -759,13 +759,13 @@ void ischemeInput::print (ostream& os) const
   os << "]" << endl;
 }
 
-ostream& operator<< (ostream& os, const S_ischemeInput& elt)
+ostream& operator << (ostream& os, const S_ischemeInput& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -965,13 +965,13 @@ void ischemeInputsTable::print (ostream& os) const
   os << "]" << endl;
 }
 
-ostream& operator<< (ostream& os, const S_ischemeInputsTable& elt)
+ostream& operator << (ostream& os, const S_ischemeInputsTable& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -998,7 +998,7 @@ string ischemeChoiceLabelKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const ischemeChoiceLabelKind& elt)
+ostream& operator << (ostream& os, const ischemeChoiceLabelKind& elt)
 {
   os << ischemeChoiceLabelKindAsString (elt);
   return os;
@@ -1605,7 +1605,7 @@ void ischemeChoice::print (ostream& os) const
           optionsBlock;
       }
       else {
-        os << "none" << endl;
+        os << "[NONE]" << endl;
       }
 
       --gIndenter;
@@ -1622,13 +1622,13 @@ void ischemeChoice::print (ostream& os) const
   os << "]" << endl;
 }
 
-ostream& operator<< (ostream& os, const S_ischemeChoice& elt)
+ostream& operator << (ostream& os, const S_ischemeChoice& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1828,13 +1828,13 @@ void ischemeChoicesTable::print (ostream& os) const
   os << "]" << endl;
 }
 
-ostream& operator<< (ostream& os, const S_ischemeChoicesTable& elt)
+ostream& operator << (ostream& os, const S_ischemeChoicesTable& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -2031,13 +2031,13 @@ void ischemeCaseChoiceStatement::print (ostream& os) const
   os << "]" << endl;
 }
 
-ostream& operator<< (ostream& os, const S_ischemeCaseChoiceStatement& elt)
+ostream& operator << (ostream& os, const S_ischemeCaseChoiceStatement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -2234,13 +2234,13 @@ void ischemeCaseInputStatement::print (ostream& os) const
   os << "]" << endl;
 }
 
-ostream& operator<< (ostream& os, const S_ischemeCaseInputStatement& elt)
+ostream& operator << (ostream& os, const S_ischemeCaseInputStatement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

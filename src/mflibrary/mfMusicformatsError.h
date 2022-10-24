@@ -29,7 +29,7 @@ enum class mfMusicformatsError {
 
 EXP string mfMusicFormatsErrorAsString (mfMusicformatsError err);
 
-ostream& operator<< (ostream& os, mfMusicformatsError& elt);
+ostream& operator << (ostream& os, mfMusicformatsError& elt);
 
 
 }

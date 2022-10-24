@@ -192,7 +192,7 @@ class EXP oahEarlyOptions
 #endif
 };
 typedef SMARTP<oahEarlyOptions> S_oahEarlyOptions;
-EXP ostream& operator<< (ostream& os, const oahEarlyOptions& elt);
+EXP ostream& operator << (ostream& os, const oahEarlyOptions& elt);
 
 EXP extern oahEarlyOptions gGlobalOahEarlyOptions;
 

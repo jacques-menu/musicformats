@@ -166,13 +166,17 @@ class EXP msrScore : public msrBookElement
     // measures
     void                  setScoreNumberOfMeasures (
                             int scoreNumberOfMeasures)
-                              {
-                                fScoreNumberOfMeasures =
-                                  scoreNumberOfMeasures;
-                              }
+                              {fScoreNumberOfMeasures = scoreNumberOfMeasures; }
 
     int                   getScoreNumberOfMeasures () const
                               { return fScoreNumberOfMeasures; }
+
+    void                  setScoreLastMeasureNumber (
+                            string measureNumbe)
+                              {fScoreLastMeasureNumber = measureNumbe; }
+
+    string                getScoreLastMeasureNumber () const
+                              { return fScoreLastMeasureNumber; }
 
     void                  setStaffContainsMultipleFullBarRests (
                             Bool staffContainsMultipleFullBarRests)
@@ -381,9 +385,10 @@ class EXP msrScore : public msrBookElement
 // JMI
     S_msrVoice            fScoreMasterVoice;
 
-    // number of measures
+    // measures
 
     int                   fScoreNumberOfMeasures;
+    string                fScoreLastMeasureNumber;
 
     // multiple full-bar rests
 
@@ -432,7 +437,7 @@ class EXP msrScore : public msrBookElement
                           fScoreMeasuresSlicesSequence;
 };
 typedef SMARTP<msrScore> S_msrScore;
-EXP ostream& operator<< (ostream& os, const S_msrScore& elt);
+EXP ostream& operator << (ostream& os, const S_msrScore& elt);
 
 
 }

@@ -147,13 +147,13 @@ void msrPart::initializePart ()
   fPartContainsMultipleFullBarRests = false;
 
   // current position in measure
-  fPartCurrentPositionInMeasure = rational (0,0);
+  fPartCurrentPositionInMeasure = Rational (0, 1);
 
   // part shortest note duration
-  fPartShortestNoteDuration = rational (INT_MAX, 1);
+  fPartShortestNoteDuration = Rational (INT_MAX, 1);
 
   // part shortest note tuplet factor
-  fPartShortestNoteTupletFactor = rational (1, 1);
+  fPartShortestNoteTupletFactor = Rational (1, 1);
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceParts ()) {
@@ -327,7 +327,7 @@ void msrPart::registerStaffInPart (
 
 void msrPart::setPartCurrentPositionInMeasure (
   int             inputLineNumber,
-  const rational& positionInMeasure)
+  const Rational& positionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -363,10 +363,9 @@ void msrPart::setPartCurrentPositionInMeasure (
 
 void msrPart::incrementPartCurrentPositionInMeasure (
   int             inputLineNumber,
-  const rational& duration)
+  const Rational& duration)
 {
   fPartCurrentPositionInMeasure += duration;
-  fPartCurrentPositionInMeasure.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -384,7 +383,7 @@ void msrPart::incrementPartCurrentPositionInMeasure (
 
 void msrPart::decrementPartCurrentPositionInMeasure (
   int             inputLineNumber,
-  const rational& duration)
+  const Rational& duration)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -398,7 +397,6 @@ void msrPart::decrementPartCurrentPositionInMeasure (
 #endif
 
   fPartCurrentPositionInMeasure -= duration;
-  fPartCurrentPositionInMeasure.rationalise ();
 
   if (fPartCurrentPositionInMeasure.getNumerator () < 0) {
     stringstream s;
@@ -432,7 +430,7 @@ void msrPart::decrementPartCurrentPositionInMeasure (
 }
 
 void msrPart::setPartShortestNoteDuration (
-  const rational& duration)
+  const Rational& duration)
 {
 #ifdef TRACING_IS_ENABLED
   if (
@@ -627,11 +625,11 @@ void msrPart::setNextMeasureNumberInPart (
   --gIndenter;
 }
 
-rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
+Rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
   int inputLineNumber,
   int indexValue) const
 {
-  rational result;
+  Rational result;
 
   size_t
     partMeasuresWholeNotesDurationsVectorSize =
@@ -652,7 +650,7 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
 
   // has this measureOrdinalNumber been registered already?
   try {
-    rational
+    Rational
       currentValue =
         fPartMeasuresWholeNotesDurationsVector.at (indexValue);
 
@@ -681,7 +679,7 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
       __FILE__, __LINE__,
       s.str ());
 
-      result = rational (15, 8); // TEMP JMI v0.9.61
+      result = Rational (15, 8); // TEMP JMI v0.9.61
   }
 
   return result;
@@ -690,13 +688,13 @@ rational msrPart::fetchPartMeasuresWholeNotesDurationsVectorAt (
 void msrPart::registerShortestNoteInPartIfRelevant (S_msrNote note)
 {
   // is note the shortest one in this part?
-  rational
+  Rational
     noteSoundingWholeNotes =
       note->
         getMeasureElementSoundingWholeNotes ();
 
 /* JMI
-  rational
+  Rational
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
@@ -773,14 +771,14 @@ void msrPart::setPartNumberOfMeasures (size_t partNumberOfMeasures)
     fPartMeasuresWholeNotesDurationsVector.clear ();
     fPartMeasuresWholeNotesDurationsVector.resize (
       fPartNumberOfMeasures,
-      rational (0, 1));
+      Rational (0, 1));
   }
 }
 
 void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
   int             inputLineNumber,
   int             measureOrdinalNumber,
-  const rational& wholeNotesDuration)
+  const Rational& wholeNotesDuration)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -805,7 +803,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
     gLogStream <<
       "===> fPartMeasuresWholeNotesDurationsVector contents: " <<
       endl;
-    for (rational rat : fPartMeasuresWholeNotesDurationsVector) {
+    for (Rational rat : fPartMeasuresWholeNotesDurationsVector) {
       ++gIndenter;
       gLogStream <<
         rat <<
@@ -822,7 +820,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
 
   // has this measureOrdinalNumber been registered already?
   try {
-    rational
+    Rational
       currentValue =
         fPartMeasuresWholeNotesDurationsVector.at (index);
 
@@ -1109,7 +1107,7 @@ void msrPart::appendPageBreakToPart (S_msrPageBreak pageBreak)
 
 void msrPart::insertHiddenMeasureAndBarLineInPartClone (
   int             inputLineNumber,
-  const rational& positionInMeasure)
+  const Rational& positionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -2104,7 +2102,7 @@ void msrPart::addSkipGraceNotesGroupAheadOfVoicesClonesIfNeeded (
 
 void msrPart::handleBackupInPart (
   int             inputLineNumber,
-  const rational& backupStepLength)
+  const Rational& backupStepLength)
 {
   // account for backup in part
   decrementPartCurrentPositionInMeasure (
@@ -2128,7 +2126,7 @@ void msrPart::finalizeLastAppendedMeasureInPart (
   ++gIndenter;
 
   // reset current position in measure
-  fPartCurrentPositionInMeasure = rational (0,0);
+  fPartCurrentPositionInMeasure = Rational (0, 1);
 
   // finalize current measure in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -2597,7 +2595,7 @@ void msrPart::print (ostream& os) const
       fPartUpLinkToPartGroup->getPartGroupCombinedName ();
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -2672,7 +2670,7 @@ void msrPart::print (ostream& os) const
         fPartHarmoniesStaff->asShortString ();
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -2684,7 +2682,7 @@ void msrPart::print (ostream& os) const
         fPartHarmoniesVoice->asShortString ();
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -2696,7 +2694,7 @@ void msrPart::print (ostream& os) const
         fPartFiguredBassStaff->asShortString ();
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -2708,7 +2706,7 @@ void msrPart::print (ostream& os) const
         fPartFiguredBassVoice->asShortString ();
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -2727,7 +2725,7 @@ void msrPart::print (ostream& os) const
     }
     else {
       os <<
-        "none";
+        "[NONE]";
     }
 
     os << endl;
@@ -2749,7 +2747,7 @@ void msrPart::print (ostream& os) const
     }
     else {
       os <<
-        "none";
+        "[NONE]";
     }
 
     os << endl;
@@ -2770,7 +2768,7 @@ void msrPart::print (ostream& os) const
         "'";
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
 
     os << endl;
@@ -2810,7 +2808,7 @@ void msrPart::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
   // print the regular staves list
@@ -2833,7 +2831,7 @@ void msrPart::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
   // print the non harmonies nor figured bass staves list
@@ -2894,7 +2892,7 @@ void msrPart::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
   os << endl;
@@ -2911,7 +2909,7 @@ void msrPart::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
   os << endl;
@@ -2991,7 +2989,7 @@ void msrPart::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
   --gIndenter;
@@ -3024,7 +3022,7 @@ void msrPart::printShort (ostream& os) const
       fPartUpLinkToPartGroup->getPartGroupCombinedName ();
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 */
@@ -3058,7 +3056,7 @@ void msrPart::printShort (ostream& os) const
         fPartHarmoniesStaff->asShortString ();
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -3070,7 +3068,7 @@ void msrPart::printShort (ostream& os) const
         fPartHarmoniesVoice->asShortString ();
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -3082,7 +3080,7 @@ void msrPart::printShort (ostream& os) const
         fPartFiguredBassStaff->asShortString ();
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -3094,7 +3092,7 @@ void msrPart::printShort (ostream& os) const
         fPartFiguredBassVoice->asShortString ();
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -3311,13 +3309,13 @@ void msrPart::printSlices (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrPart& elt)
+ostream& operator << (ostream& os, const S_msrPart& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

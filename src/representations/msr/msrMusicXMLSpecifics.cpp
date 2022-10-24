@@ -290,7 +290,7 @@ void msrPageLayout::print (ostream& os) const
       os << fPageHeight;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -301,7 +301,7 @@ void msrPageLayout::print (ostream& os) const
       os << fPageWidth;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -313,7 +313,7 @@ void msrPageLayout::print (ostream& os) const
       os << fOddMarginsGroup;
     }
     else {
-      os << "none" << endl;
+      os << "[NONE]" << endl;
     }
 
   os << left <<
@@ -323,7 +323,7 @@ void msrPageLayout::print (ostream& os) const
       os << fEvenMarginsGroup;
     }
     else {
-      os << "none" << endl;
+      os << "[NONE]" << endl;
     }
 
   os << left <<
@@ -333,7 +333,7 @@ void msrPageLayout::print (ostream& os) const
       os << fBothMarginsGroup;
     }
     else {
-      os << "none" << endl;
+      os << "[NONE]" << endl;
     }
 
   --gIndenter;
@@ -341,13 +341,13 @@ void msrPageLayout::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrPageLayout& elt)
+ostream& operator << (ostream& os, const S_msrPageLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -457,7 +457,7 @@ void msrSystemLayout::print (ostream& os) const
       os << fLeftMargin;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -468,7 +468,7 @@ void msrSystemLayout::print (ostream& os) const
       os << fRightMargin;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -480,7 +480,7 @@ void msrSystemLayout::print (ostream& os) const
       os << fSystemDistance;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -491,7 +491,7 @@ void msrSystemLayout::print (ostream& os) const
       os << fTopSystemDistance;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -500,13 +500,13 @@ void msrSystemLayout::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrSystemLayout& elt)
+ostream& operator << (ostream& os, const S_msrSystemLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -616,13 +616,13 @@ void msrSystemDividers::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrSystemDividers& elt)
+ostream& operator << (ostream& os, const S_msrSystemDividers& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -740,13 +740,13 @@ void msrStaffLayout::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrStaffLayout& elt)
+ostream& operator << (ostream& os, const S_msrStaffLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -850,13 +850,13 @@ void msrMeasureLayout::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrMeasureLayout& elt)
+ostream& operator << (ostream& os, const S_msrMeasureLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1003,7 +1003,7 @@ void msrPrintLayout::print (ostream& os) const
       os << fPageLayout;
     }
     else {
-      os << "none" << endl;
+      os << "[NONE]" << endl;
     }
 
   os << left <<
@@ -1013,7 +1013,7 @@ void msrPrintLayout::print (ostream& os) const
       os << fSystemLayout;
     }
     else {
-      os << "none" << endl;
+      os << "[NONE]" << endl;
     }
 
   size_t
@@ -1050,7 +1050,7 @@ void msrPrintLayout::print (ostream& os) const
       os << fSystemDividers;
     }
     else {
-      os << "none" << endl;
+      os << "[NONE]" << endl;
     }
 
   os << left <<
@@ -1095,13 +1095,13 @@ void msrPrintLayout::printShort (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrPrintLayout& elt)
+ostream& operator << (ostream& os, const S_msrPrintLayout& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1274,7 +1274,7 @@ string msrLineWidth::asString () const
       s << fLineWidthValue->asString();
     }
     else {
-      s << "none";
+      s << "[NONE]";
     }
   s <<
     ", line " << fInputLineNumber <<
@@ -1306,7 +1306,7 @@ void msrLineWidth::print (ostream& os) const
       os << fLineWidthValue;
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
   os << endl;
 
@@ -1315,13 +1315,13 @@ void msrLineWidth::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrLineWidth& elt)
+ostream& operator << (ostream& os, const S_msrLineWidth& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1474,13 +1474,13 @@ void msrNoteSize::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrNoteSize& elt)
+ostream& operator << (ostream& os, const S_msrNoteSize& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1630,13 +1630,13 @@ void msrDistance::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrDistance& elt)
+ostream& operator << (ostream& os, const S_msrDistance& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1825,13 +1825,13 @@ void msrGlyph::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrGlyph& elt)
+ostream& operator << (ostream& os, const S_msrGlyph& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1975,13 +1975,13 @@ void msrOtherAppearance::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrOtherAppearance& elt)
+ostream& operator << (ostream& os, const S_msrOtherAppearance& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -2266,13 +2266,13 @@ void msrAppearance::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrAppearance& elt)
+ostream& operator << (ostream& os, const S_msrAppearance& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

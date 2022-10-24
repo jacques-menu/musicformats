@@ -237,7 +237,7 @@ class EXP ischemeInterpreterOahGroup : public oahGroup
                           fSelectChoiceToLabelsMultiMapAtom;
 };
 typedef SMARTP<ischemeInterpreterOahGroup> S_ischemeInterpreterOahGroup;
-EXP ostream& operator<< (ostream& os, const S_ischemeInterpreterOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeInterpreterOahGroup& elt);
 
 EXP extern S_ischemeInterpreterOahGroup gGlobalIschemeInterpreterOahGroup;
 

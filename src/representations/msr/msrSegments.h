@@ -72,6 +72,9 @@ typedef SMARTP<msrVoice> S_msrVoice;
 class msrDoubleTremolo;
 typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
 
+class msrSegno;
+typedef SMARTP<msrSegno> S_msrSegno;
+
 //______________________________________________________________________________
 class EXP msrSegment : public msrVoiceElement
 {
@@ -153,9 +156,9 @@ class EXP msrSegment : public msrVoiceElement
     // segment shortest note
 
     void                  setSegmentShortestNoteDuration (
-                            const rational& duration);
+                            const Rational& duration);
 
-    rational              getSegmentShortestNoteDuration () const
+    Rational              getSegmentShortestNoteDuration () const
                               { return fSegmentShortestNoteDuration; }
 
     void                  setSegmentShortestNoteTupletFactor (
@@ -190,16 +193,16 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  padUpToPositionInMeasureInSegment (
                             int             inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     void                  backupByWholeNotesStepLengthInSegment (
                             int     inputLineNumber,
-                            const rational&
+                            const Rational&
                                     backupTargetMeasureElementPositionInMeasure);
 
     void                  appendPaddingNoteToSegment (
                             int             inputLineNumber,
-                            const rational& forwardStepLength);
+                            const Rational& forwardStepLength);
 
     // measures
 
@@ -243,7 +246,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  insertHiddenMeasureAndBarLineInSegmentClone (
                             int             inputLineNumber,
-                            const rational& positionInMeasure);
+                            const Rational& positionInMeasure);
 
     // transposition
 
@@ -319,7 +322,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  appendNoteToSegment (
                             S_msrNote       note,
-                            const rational& partCurrentPositionInMeasure);
+                            const Rational& partCurrentPositionInMeasure);
 
     void                  appendNoteToSegmentClone (S_msrNote note);
 
@@ -492,7 +495,7 @@ class EXP msrSegment : public msrVoiceElement
     // fPartShortestNoteDuration and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    rational              fSegmentShortestNoteDuration;
+    Rational              fSegmentShortestNoteDuration;
     msrTupletFactor       fSegmentShortestNoteTupletFactor;
     */
 
@@ -509,7 +512,7 @@ class EXP msrSegment : public msrVoiceElement
     S_msrMeasure          fSegmentLastMeasure;
 };
 typedef SMARTP<msrSegment> S_msrSegment;
-EXP ostream& operator<< (ostream& os, const S_msrSegment& elt);
+EXP ostream& operator << (ostream& os, const S_msrSegment& elt);
 
 
 }

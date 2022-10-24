@@ -112,7 +112,7 @@ class EXP msrClef : public msrMeasureElement
                                             // 1 by default in MusicXML
 };
 typedef SMARTP<msrClef> S_msrClef;
-EXP ostream& operator<< (ostream& os, const S_msrClef& elt);
+EXP ostream& operator << (ostream& os, const S_msrClef& elt);
 
 
 } // namespace MusicFormats

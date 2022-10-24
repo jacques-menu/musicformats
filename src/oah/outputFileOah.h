@@ -119,7 +119,7 @@ class EXP outputFileOahGroup : public oahGroup
     S_oahStringAtom       fOutputFileNameStringAtom;
 };
 typedef SMARTP<outputFileOahGroup> S_outputFileOahGroup;
-EXP ostream& operator<< (ostream& os, const S_outputFileOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_outputFileOahGroup& elt);
 
 EXP extern S_outputFileOahGroup gGlobalOutputFileOahGroup;
 

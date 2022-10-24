@@ -74,7 +74,7 @@ class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
     // ------------------------------------------------------
 };
 typedef SMARTP<msrHiddenMeasureAndBarLine> S_msrHiddenMeasureAndBarLine;
-EXP ostream& operator<< (ostream& os, const S_msrHiddenMeasureAndBarLine& elt);
+EXP ostream& operator << (ostream& os, const S_msrHiddenMeasureAndBarLine& elt);
 
 
 }

@@ -26,13 +26,13 @@ msrBookElement::msrBookElement (
 msrBookElement::~msrBookElement ()
 {}
 
-ostream& operator<< (ostream& os, const S_msrBookElement& elt)
+ostream& operator << (ostream& os, const S_msrBookElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

@@ -266,13 +266,13 @@ void bsrTimeSignatureItem::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_bsrTimeSignatureItem& elt)
+ostream& operator << (ostream& os, const S_bsrTimeSignatureItem& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -877,7 +877,7 @@ void bsrTimeSignature::print (ostream& os) const
 
   else {
     os <<
-      " none" <<
+      " [NONE]" <<
       endl;
   }
 
@@ -892,13 +892,13 @@ void bsrTimeSignature::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrTimeSignature& elt)
+ostream& operator << (ostream& os, const S_bsrTimeSignature& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

@@ -157,7 +157,7 @@ void mfServiceRunData::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const mfServiceRunData& elt)
+ostream& operator << (ostream& os, const mfServiceRunData& elt)
 {
   elt.print (os);
   return os;

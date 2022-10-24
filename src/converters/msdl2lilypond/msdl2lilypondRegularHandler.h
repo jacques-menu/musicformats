@@ -170,7 +170,7 @@ class EXP msdl2lilypondRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdl2lilypondRegularHandler> S_msdl2lilypondRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_msdl2lilypondRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdl2lilypondRegularHandler& elt);
 
 
 }

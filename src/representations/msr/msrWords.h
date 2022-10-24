@@ -177,7 +177,7 @@ class EXP msrWords : public msrElement
     int                   fWordsStaffNumber;
 };
 typedef SMARTP<msrWords> S_msrWords;
-EXP ostream& operator<< (ostream& os, const S_msrWords& elt);
+EXP ostream& operator << (ostream& os, const S_msrWords& elt);
 
 
 } // namespace MusicFormats

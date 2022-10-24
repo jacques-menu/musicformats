@@ -106,7 +106,7 @@ class EXP msrReplaceClefAtom : public oahAtomStoringAValue
                           fClefKindToClefKindMapVariable;
 };
 typedef SMARTP<msrReplaceClefAtom> S_msrReplaceClefAtom;
-EXP ostream& operator<< (ostream& os, const S_msrReplaceClefAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msrReplaceClefAtom& elt);
 
 //______________________________________________________________________________
 class EXP mxsr2msrOahGroup : public oahGroup
@@ -770,7 +770,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
 #endif
 };
 typedef SMARTP<mxsr2msrOahGroup> S_mxsr2msrOahGroup;
-EXP ostream& operator<< (ostream& os, const S_mxsr2msrOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_mxsr2msrOahGroup& elt);
 
 EXP extern S_mxsr2msrOahGroup gGlobalMxsr2msrOahGroup;
 

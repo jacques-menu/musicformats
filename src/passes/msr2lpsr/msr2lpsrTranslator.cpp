@@ -917,7 +917,7 @@ void msr2lpsrTranslator::setPaperIndentsIfNeeded (
       gLogStream << paperWidth;
     }
     else {
-      gLogStream << "none";
+      gLogStream << "[NONE]";
     }
     gLogStream << endl;
 */
@@ -2407,6 +2407,7 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
       ", fOnGoingChord: " << fOnGoingChord <<
       ", fOnGoingHarmoniesVoice: " << fOnGoingHarmoniesVoice <<
       ", fOnGoingHarmony: " << fOnGoingHarmony <<
+      ", fCurrentNonGraceNoteClone: " << fCurrentNonGraceNoteClone <<
       ", line " << elt->getInputLineNumber () <<
       endl;
   }
@@ -2435,13 +2436,14 @@ void msr2lpsrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingChord) {
     // register the harmony clone in the current chord clone
     fCurrentChordClone->
-      appendHarmonyToChord (fCurrentHarmonyClone); // JMI
+      appendHarmonyToChord (
+      	fCurrentHarmonyClone); // JMI
   }
 
   else if (fOnGoingHarmoniesVoice) {
   /* JMI
     // get the harmony whole notes offset
-    rational
+    Rational
       harmonyWholeNotesOffset =
         elt->getHarmonyWholeNotesOffset ();
 
@@ -2676,7 +2678,7 @@ void msr2lpsrTranslator::visitStart (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
   int
     measurePuristNumber =
@@ -2805,7 +2807,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
   string
     nextMeasureNumber =
@@ -2835,7 +2837,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       elt, // original measure
       fCurrentVoiceClone);
 
-  Bool doCreateABarCheck (false);
+  Bool doCreateABarCheckAndABarNumberCheck (false);
 
   switch (elt->getMeasureKind ()) {
     case msrMeasureKind::kMeasureKindUnknown:
@@ -2860,11 +2862,69 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindRegular:
-      doCreateABarCheck = true;
+    	{
+				// don't create a bar check for the last measure of the score
+				// is it is not full time-signature wise
+
+				Rational
+					fullMeasureWholeNotesDuration =
+						fCurrentMeasureClone->
+							getFullMeasureWholeNotesDuration (),
+					wholeNotesDurationPerMeasure =
+						fCurrentVoiceClone->
+							getVoiceCurrentTimeSignature ()->
+								wholeNotesDurationPerMeasure ();
+
+#ifdef TRACING_IS_ENABLED
+				if (
+					gGlobalTracingOahGroup->getTraceBarChecks ()
+						||
+					gGlobalTracingOahGroup->getTraceBarNumberChecks ()
+				) {
+					gLogStream <<
+						"--> kMeasureKindRegular" <<
+						", fullMeasureWholeNotesDuration: " <<
+						fullMeasureWholeNotesDuration <<
+						"', wholeNotesDurationPerMeasure: " <<
+						wholeNotesDurationPerMeasure <<
+						endl;
+				}
+#endif
+
+				doCreateABarCheckAndABarNumberCheck =
+					fullMeasureWholeNotesDuration	== wholeNotesDurationPerMeasure;
+			}
       break;
 
     case msrMeasureKind::kMeasureKindAnacrusis:
-      doCreateABarCheck = true;
+    	{
+				Rational
+					fullMeasureWholeNotesDuration =
+						fCurrentMeasureClone->
+							getFullMeasureWholeNotesDuration (),
+					wholeNotesDurationPerMeasure =
+						fCurrentVoiceClone->
+							getVoiceCurrentTimeSignature ()->
+								wholeNotesDurationPerMeasure ();
+
+#ifdef TRACING_IS_ENABLED
+				if (
+					gGlobalTracingOahGroup->getTraceBarChecks ()
+						||
+					gGlobalTracingOahGroup->getTraceBarNumberChecks ()
+				) {
+					gLogStream <<
+						"--> kMeasureKindAnacrusis" <<
+						", fullMeasureWholeNotesDuration: " <<
+						fullMeasureWholeNotesDuration <<
+						"', wholeNotesDurationPerMeasure: " <<
+						wholeNotesDurationPerMeasure <<
+						endl;
+				}
+#endif
+
+	      doCreateABarCheckAndABarNumberCheck = true;
+	    }
       break;
 
     case msrMeasureKind::kMeasureKindIncompleteStandalone:
@@ -2879,7 +2939,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
         case msrMeasure::kMeasureEndRegularKindUnknown:
           break;
         case msrMeasure::kMeasureEndRegularKindYes:
-          doCreateABarCheck = true;
+          doCreateABarCheckAndABarNumberCheck = true;
           break;
         case msrMeasure::kMeasureEndRegularKindNo:
           break;
@@ -2887,11 +2947,11 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       break;
 
     case msrMeasureKind::kMeasureKindOvercomplete:
-      doCreateABarCheck = true;
+      doCreateABarCheckAndABarNumberCheck = true;
       break;
 
     case msrMeasureKind::kMeasureKindCadenza:
-      doCreateABarCheck = true;
+      doCreateABarCheckAndABarNumberCheck = true;
       break;
 
     case msrMeasureKind::kMeasureKindMusicallyEmpty:
@@ -2946,7 +3006,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
 //     }
 //   }
 
-  if (doCreateABarCheck) {
+  if (doCreateABarCheckAndABarNumberCheck) {
     // create a bar check
     int voiceCurrentMeasurePuristNumber =
       fCurrentVoiceClone->
@@ -4849,7 +4909,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***";
+        "[NONE]";
     }
     gLogStream << endl;
   }
@@ -4891,7 +4951,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
     gLogStream <<
        "'" <<
@@ -4912,7 +4972,7 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
     gLogStream <<
        "'" <<
@@ -4983,7 +5043,7 @@ void msr2lpsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***";
+        "[NONE]";
     }
     gLogStream << endl;
   }
@@ -5172,7 +5232,7 @@ void msr2lpsrTranslator::visitStart (S_msrNote& elt)
           }
           else {
             gLogStream <<
-              "none";
+              "[NONE]";
           }
           gLogStream <<
              "'" <<
@@ -5278,7 +5338,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***" <<
+        "[NONE]" <<
         endl;
     }
 
@@ -5291,7 +5351,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***" <<
+        "[NONE]" <<
         endl;
     }
   }
@@ -5541,13 +5601,6 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
           addAnotherNoteToChord (
             fCurrentNonGraceNoteClone,
             fCurrentVoiceClone);
-
-        // set its position in measure
-        fCurrentNonGraceNoteClone->
-          setMeasureElementPositionInMeasure (
-            fCurrentChordClone->
-              getMeasureElementPositionInMeasure (),
-            "kNoteRegularInChord");
       }
 
       else {
@@ -5573,13 +5626,6 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
           addAnotherNoteToChord (
             fCurrentGraceNoteClone,
             fCurrentVoiceClone);
-
-        // set its position in measure
-        fCurrentNonGraceNoteClone->
-          setMeasureElementPositionInMeasure (
-            fCurrentChordClone->
-              getMeasureElementPositionInMeasure (),
-            "kNoteInChordInGraceNotesGroup");
       }
 
       else {

@@ -566,13 +566,13 @@ void xml2gmnInsiderHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_xml2gmnInsiderHandler& elt)
+ostream& operator << (ostream& os, const S_xml2gmnInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

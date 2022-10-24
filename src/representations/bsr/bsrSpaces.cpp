@@ -168,13 +168,13 @@ void bsrSpaces::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrSpaces& elt)
+ostream& operator << (ostream& os, const S_bsrSpaces& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

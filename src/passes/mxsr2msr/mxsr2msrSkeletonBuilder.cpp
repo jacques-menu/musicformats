@@ -140,13 +140,13 @@ void mxmlPartGroupDescr::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_mxmlPartGroupDescr& elt)
+ostream& operator << (ostream& os, const S_mxmlPartGroupDescr& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1762,6 +1762,11 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_score_partwise& elt)
     setScoreNumberOfMeasures (
       fScoreNumberOfMeasures);
 
+  // register the last measure number
+  fMsrScore->
+    setScoreLastMeasureNumber (
+      fCurrentMeasureNumber);
+
 /* JMI ??? THROW AWAY ???
   // fetch the identification from the credits if any
   fMsrScore ->
@@ -2963,7 +2968,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
   else if (groupSymbol == "square")
     fCurrentPartGroupSymbolKind = msrPartGroup::kPartGroupSymbolSquare;
 
-  else if (groupSymbol == "none")
+  else if (groupSymbol == "[NONE]")
     fCurrentPartGroupSymbolKind = msrPartGroup::kPartGroupSymbolNone;
 
   else {

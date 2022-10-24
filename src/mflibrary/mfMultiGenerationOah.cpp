@@ -469,13 +469,13 @@ void mfMultiGenerationOutputKindAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_mfMultiGenerationOutputKindAtom& elt)
+ostream& operator << (ostream& os, const S_mfMultiGenerationOutputKindAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -689,13 +689,13 @@ void mfMultiGenerationOahGroup::printMultiGenerationOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_multiGenerationOahGroup& elt)
+ostream& operator << (ostream& os, const S_multiGenerationOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

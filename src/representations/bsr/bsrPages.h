@@ -113,7 +113,7 @@ class EXP bsrPage : public bsrElement
                           fPageElementsList;
 };
 typedef SMARTP<bsrPage> S_bsrPage;
-EXP ostream& operator<< (ostream& os, const S_bsrPage& elt);
+EXP ostream& operator << (ostream& os, const S_bsrPage& elt);
 
 
 }

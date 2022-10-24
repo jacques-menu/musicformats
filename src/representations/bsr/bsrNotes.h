@@ -26,7 +26,7 @@ enum class bsrNoteOctaveKind {
 extern string noteOctaveKindAsString (
   bsrNoteOctaveKind noteOctaveKind);
 
-ostream& operator<< (ostream& os, bsrTextsLanguageKind& elt);
+ostream& operator << (ostream& os, bsrTextsLanguageKind& elt);
 
 extern string noteOctaveKindAsDebugString (
   bsrNoteOctaveKind noteOctaveKind);
@@ -131,7 +131,7 @@ enum class bsrNoteValueKind {
 string noteValueKindAsString (
   bsrNoteValueKind noteValueKind);
 
-ostream& operator<< (ostream& os, bsrNoteValueKind& elt);
+ostream& operator << (ostream& os, bsrNoteValueKind& elt);
 
 string noteValueKindAsDebugString (
   bsrNoteValueKind noteValueKind);
@@ -149,7 +149,7 @@ enum class bsrNoteValueSizeKind {
 string noteValueSizeKindAsString (
   bsrNoteValueSizeKind noteValueSizeKind);
 
-ostream& operator<< (ostream& os, bsrNoteValueSizeKind& elt);
+ostream& operator << (ostream& os, bsrNoteValueSizeKind& elt);
 
 bsrNoteValueSizeKind noteValueSizeKindFromNoteValueKind (
   bsrNoteValueKind noteValueKind);
@@ -165,7 +165,7 @@ enum class bsrNoteOctaveIsNeeded {
 string noteOctaveIsNeededAsString (
   bsrNoteOctaveIsNeeded noteOctaveIsNeeded);
 
-ostream& operator<< (ostream& os, bsrNoteOctaveIsNeeded& elt);
+ostream& operator << (ostream& os, bsrNoteOctaveIsNeeded& elt);
 
 enum class bsrAccidentalKind {
   kAccidentalNone,
@@ -178,7 +178,7 @@ enum class bsrAccidentalKind {
 string msrAccidentalKindAsString (
   bsrAccidentalKind accidentalKind);
 
-ostream& operator<< (ostream& os, bsrAccidentalKind& elt);
+ostream& operator << (ostream& os, bsrAccidentalKind& elt);
 
 //______________________________________________________________________________
 class EXP bsrNote : public bsrLineContentsElement
@@ -307,7 +307,7 @@ class EXP bsrNote : public bsrLineContentsElement
     bsrAccidentalKind     fAccidentalKind;
 };
 typedef SMARTP<bsrNote> S_bsrNote;
-EXP ostream& operator<< (ostream& os, const S_bsrNote& elt);
+EXP ostream& operator << (ostream& os, const S_bsrNote& elt);
 
 
 }

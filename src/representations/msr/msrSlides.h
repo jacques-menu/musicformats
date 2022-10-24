@@ -122,7 +122,7 @@ class EXP msrSlide : public msrElement
     string                fSlideTextValue;
 };
 typedef SMARTP<msrSlide> S_msrSlide;
-EXP ostream& operator<< (ostream& os, const S_msrSlide& elt);
+EXP ostream& operator << (ostream& os, const S_msrSlide& elt);
 
 
 }

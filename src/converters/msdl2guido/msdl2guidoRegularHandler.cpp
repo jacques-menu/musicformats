@@ -1247,13 +1247,13 @@ void msdl2guidoRegularHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msdl2guidoRegularHandler& elt)
+ostream& operator << (ostream& os, const S_msdl2guidoRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

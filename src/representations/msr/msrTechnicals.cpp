@@ -205,13 +205,13 @@ void msrTechnical::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrTechnical& elt)
+ostream& operator << (ostream& os, const S_msrTechnical& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -367,13 +367,13 @@ void msrTechnicalWithInteger::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrTechnicalWithInteger& elt)
+ostream& operator << (ostream& os, const S_msrTechnicalWithInteger& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -523,13 +523,13 @@ void msrTechnicalWithFloat::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrTechnicalWithFloat& elt)
+ostream& operator << (ostream& os, const S_msrTechnicalWithFloat& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -709,13 +709,13 @@ void msrTechnicalWithString::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrTechnicalWithString& elt)
+ostream& operator << (ostream& os, const S_msrTechnicalWithString& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

@@ -72,13 +72,13 @@ void waeHandler::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_waeHandler& elt)
+ostream& operator << (ostream& os, const S_waeHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

@@ -167,25 +167,25 @@ void oahFindStringMatch::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_oahFindStringMatch& elt)
+ostream& operator << (ostream& os, const S_oahFindStringMatch& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
 }
 
-ostream& operator<< (ostream& os, const oahFindStringMatch& elt)
+ostream& operator << (ostream& os, const oahFindStringMatch& elt)
 {
   elt.print (os);
   return os;
 }
 
-ostream& operator<< (ostream& os, const oahFindStringMatch* elt)
+ostream& operator << (ostream& os, const oahFindStringMatch* elt)
 {
   elt->print (os);
   return os;
@@ -213,19 +213,19 @@ void oahFindableElement::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_oahFindableElement& elt)
+ostream& operator << (ostream& os, const S_oahFindableElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
 }
 
-ostream& operator<< (ostream& os, const oahFindableElement& elt)
+ostream& operator << (ostream& os, const oahFindableElement& elt)
 {
   elt.print (os);
   return os;
@@ -710,19 +710,19 @@ const string oahElement::containingFindableElementAsString () const
 	return s.str ();
 }
 
-ostream& operator<< (ostream& os, const S_oahElement& elt)
+ostream& operator << (ostream& os, const S_oahElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
 }
 
-ostream& operator<< (ostream& os, const oahElement& elt)
+ostream& operator << (ostream& os, const oahElement& elt)
 {
   elt.print (os);
   return os;
@@ -815,13 +815,13 @@ void oahElementUse::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_oahElementUse& elt)
+ostream& operator << (ostream& os, const S_oahElementUse& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

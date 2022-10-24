@@ -247,13 +247,13 @@ void msrLigature::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrLigature& elt)
+ostream& operator << (ostream& os, const S_msrLigature& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

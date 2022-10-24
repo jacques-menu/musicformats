@@ -14,6 +14,8 @@
 #include "mfAssert.h"
 #include "mfIndentedTextOutput.h"
 
+#include "enableAbortToDebugErrors.h"
+
 
 using namespace std;
 
@@ -34,7 +36,7 @@ void mfAssert (
       "#### mfAssert" <<
       ", " << sourceCodeFileName << ":" << sourceCodeLineNumber <<
       " -- " << messageIfFalse <<
-      ", quitting." <<
+      " - quitting." <<
       endl;
 
 #ifdef ABORT_TO_DEBUG_ERRORS

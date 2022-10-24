@@ -109,7 +109,7 @@ class EXP waeOahGroup : public oahGroup
     Bool                  fDontQuitOnErrors;
 };
 typedef SMARTP<waeOahGroup> S_waeOahGroup;
-EXP ostream& operator<< (ostream& os, const S_waeOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_waeOahGroup& elt);
 
 EXP extern S_waeOahGroup gGlobalWaeOahGroup;
 

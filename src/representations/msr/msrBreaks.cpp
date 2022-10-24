@@ -159,13 +159,13 @@ void msrLineBreak::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrLineBreak& elt)
+ostream& operator << (ostream& os, const S_msrLineBreak& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -293,13 +293,13 @@ void msrPageBreak::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrPageBreak& elt)
+ostream& operator << (ostream& os, const S_msrPageBreak& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

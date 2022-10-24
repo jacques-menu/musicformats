@@ -113,7 +113,7 @@ void lpsrUseVoiceCommand::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrUseVoiceCommand& nlc)
+ostream& operator << (ostream& os, const S_lpsrUseVoiceCommand& nlc)
 {
   nlc->print (os);
   return os;

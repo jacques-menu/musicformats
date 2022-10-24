@@ -11,13 +11,16 @@
 
 #include <iomanip>      // setw, setprecision, ...
 
-#include "enableHarmoniesExtraOahIfDesired.h"
-
 #include "oahWae.h"
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
+#endif
+
+#include "enableHarmoniesExtraOahIfDesired.h"
+#ifdef EXTRA_OAH_IS_ENABLED
+  #include "harmoniesExtraOah.h"
 #endif
 
 #include "mfServiceRunData.h"
@@ -546,15 +549,15 @@ void msr2guidoInsiderHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msr2guidoInsiderHandler& elt)
+ostream& operator << (ostream& os, const S_msr2guidoInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -97,7 +97,7 @@ EXP int mfExecuteCommand (
 // //       "#### mfExecuteCommand" <<
 // //       ", failed to execute command [" <<
 // //       command <<
-// //       ", quitting." <<
+// //       " - quitting." <<
 // //       endl;
 // //
 // //     result = pclose (commandOutputStream);

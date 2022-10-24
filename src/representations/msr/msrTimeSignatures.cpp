@@ -224,7 +224,7 @@ string msrTimeSignatureItem::asString () const
         "time signature item beats numbers vector is empty");
         */
       s <<
-        "beats numbers: none";
+        "beats numbers: [NONE]";
       break;
 
     case 1:
@@ -276,7 +276,7 @@ string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
         "time signature item beats numbers vector is empty");
         */
       s <<
-        "beats numbers: none";
+        "beats numbers: [NONE]";
       break;
 
     case 1:
@@ -315,13 +315,13 @@ void msrTimeSignatureItem::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrTimeSignatureItem& elt)
+ostream& operator << (ostream& os, const S_msrTimeSignatureItem& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -824,22 +824,25 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 msrTimeSignature::~msrTimeSignature ()
 {}
 
-void msrTimeSignature::setMeasureElementPositionInMeasure (
-  const rational& positionInMeasure,
-  const string&   context)
+void msrTimeSignature::setTimeSignaturePositionInMeasure (
+  const S_msrMeasure measure,
+  const Rational&    positionInMeasure,
+  const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Setting time signature's position in measure of " <<
       asString () <<
-      " to '" <<
+      " to " <<
       positionInMeasure <<
-      "' (was '" <<
+      " (was " <<
       fMeasureElementPositionInMeasure <<
-      "') in measure '" <<
+      ") in measure " <<
+      measure->asShortString () <<
+      " (fMeasureElementMeasureNumber: " <<
       fMeasureElementMeasureNumber <<
-      "', context: \"" <<
+      "), context: \"" <<
       context <<
       "\"" <<
       endl;
@@ -893,9 +896,9 @@ void msrTimeSignature::appendTimeSignatureItem (
     fTimeSignatureItemsVector.end (), timeSignatureItem);
 }
 
-rational msrTimeSignature::wholeNotesPerMeasure () const
+Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
 {
-  rational result (0, 1); // addition neutral element
+  Rational result (0, 1); // addition neutral element
 
   size_t vectorSize = fTimeSignatureItemsVector.size ();
 
@@ -903,7 +906,7 @@ rational msrTimeSignature::wholeNotesPerMeasure () const
     /* JMI
     // start with first item
     result =
-      rational (
+      Rational (
         fTimeSignatureItemsVector [0]->getTimeSignatureBeatsNumber (),
         fTimeSignatureItemsVector [0]->getTimeSignatureBeatValue ());
 */
@@ -921,7 +924,7 @@ rational msrTimeSignature::wholeNotesPerMeasure () const
     // iterate over the others
     for (size_t i = 0; i < vectorSize; ++i) {
       result +=
-        rational (
+        Rational (
           fTimeSignatureItemsVector [i]->getTimeSignatureBeatsNumber (),
           fTimeSignatureItemsVector [i]->getTimeSignatureBeatValue ());
 
@@ -946,10 +949,7 @@ rational msrTimeSignature::wholeNotesPerMeasure () const
       "time signature items vector is empty");
   }
 
-  // rationalize result
-  result.rationalise ();
-
-  // return it
+  // return result
   return result;
 }
 
@@ -1170,7 +1170,7 @@ void msrTimeSignature::print (ostream& os) const
 
   else {
     os <<
-      " none" <<
+      " [NONE]" <<
       endl;
   }
 
@@ -1179,13 +1179,13 @@ void msrTimeSignature::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrTimeSignature& elt)
+ostream& operator << (ostream& os, const S_msrTimeSignature& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

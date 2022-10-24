@@ -145,13 +145,13 @@ void bsrTranscriptionNotesElement::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrTranscriptionNotesElement& elt)
+ostream& operator << (ostream& os, const S_bsrTranscriptionNotesElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -291,13 +291,13 @@ void bsrTranscriptionNotes::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrTranscriptionNotes& elt)
+ostream& operator << (ostream& os, const S_bsrTranscriptionNotes& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

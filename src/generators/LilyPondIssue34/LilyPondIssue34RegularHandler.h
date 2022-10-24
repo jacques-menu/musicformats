@@ -182,7 +182,7 @@ class EXP LilyPondIssue34RegularHandler : public oahRegularHandler
                           fMultiGenerationOutputKind;
 };
 typedef SMARTP<LilyPondIssue34RegularHandler> S_LilyPondIssue34RegularHandler;
-EXP ostream& operator<< (ostream& os, const S_LilyPondIssue34RegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_LilyPondIssue34RegularHandler& elt);
 
 
 }

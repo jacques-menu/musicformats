@@ -21,6 +21,9 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+class msrTimeSignature;
+typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
+
 class msrStaff;
 typedef SMARTP<msrStaff> S_msrStaff;
 
@@ -162,7 +165,7 @@ class EXP msrPart : public msrPartGroupElement
     const size_t          getPartNumberOfMeasures () const
                               { return fPartNumberOfMeasures; }
 
-    const vector<rational>&
+    const vector<Rational>&
                           getPartMeasuresWholeNotesDurationsVector () const
                               { return fPartMeasuresWholeNotesDurationsVector; }
 
@@ -227,24 +230,24 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  setPartCurrentPositionInMeasure (
                             int             inputLineNumber,
-                            const rational& positionInMeasure);
+                            const Rational& positionInMeasure);
 
     void                  incrementPartCurrentPositionInMeasure (
                             int             inputLineNumber,
-                            const rational& duration);
+                            const Rational& duration);
     void                  decrementPartCurrentPositionInMeasure (
                             int             inputLineNumber,
-                            const rational& duration);
+                            const Rational& duration);
 
-    rational              getPartCurrentPositionInMeasure () const
+    Rational              getPartCurrentPositionInMeasure () const
                               { return fPartCurrentPositionInMeasure; }
 
     // part shortest note
 
     void                  setPartShortestNoteDuration (
-                            const rational& duration);
+                            const Rational& duration);
 
-    rational              getPartShortestNoteDuration () const
+    Rational              getPartShortestNoteDuration () const
                               { return fPartShortestNoteDuration; }
 
     void                  setPartShortestNoteTupletFactor (
@@ -279,14 +282,14 @@ class EXP msrPart : public msrPartGroupElement
 
     // whole notes durations
 
-    rational              fetchPartMeasuresWholeNotesDurationsVectorAt (
+    Rational              fetchPartMeasuresWholeNotesDurationsVectorAt (
                             int inputLineNumber,
                             int indexValue) const;
 
     void                  registerOrdinalMeasureNumberWholeNotesDuration (
                             int             inputLineNumber,
                             int             measureOrdinalNumber,
-                            const rational& wholeNotesDuration);
+                            const Rational& wholeNotesDuration);
 
     // path shortest note
 
@@ -344,7 +347,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  insertHiddenMeasureAndBarLineInPartClone (
                             int             inputLineNumber,
-                            const rational& positionInMeasure);
+                            const Rational& positionInMeasure);
 
     // breaks
 
@@ -501,7 +504,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  handleBackupInPart (
                             int             inputLineNumber,
-                            const rational& backupStepLength);
+                            const Rational& backupStepLength);
 
   public:
 
@@ -595,7 +598,7 @@ class EXP msrPart : public msrPartGroupElement
 
     size_t                fPartNumberOfMeasures;
 
-    vector<rational>      fPartMeasuresWholeNotesDurationsVector; // SUPERFLOUS ??? JMI NOEL
+    vector<Rational>      fPartMeasuresWholeNotesDurationsVector; // SUPERFLOUS ??? JMI NOEL
 
     // clef, key, time signature
 
@@ -610,7 +613,7 @@ class EXP msrPart : public msrPartGroupElement
     // fPartShortestNoteDuration and fPartShortestNoteTupletFactor
     // are used to compute a number of divisions per quarter note
     // if needed, such as when generating MusicXML from MSR
-    rational              fPartShortestNoteDuration;
+    Rational              fPartShortestNoteDuration;
     msrTupletFactor       fPartShortestNoteTupletFactor;
 
     // transposition
@@ -715,10 +718,10 @@ class EXP msrPart : public msrPartGroupElement
 
     // position in measure
 
-    rational              fPartCurrentPositionInMeasure;
+    Rational              fPartCurrentPositionInMeasure;
 };
 typedef SMARTP<msrPart> S_msrPart;
-EXP ostream& operator<< (ostream& os, const S_msrPart& elt);
+EXP ostream& operator << (ostream& os, const S_msrPart& elt);
 
 
 }

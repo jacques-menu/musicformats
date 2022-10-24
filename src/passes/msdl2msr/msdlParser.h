@@ -222,8 +222,8 @@ class msdlParser : public smartable
                             S_msrNote note);
 
     // note
-    rational              fCurrentNoteSoundingWholeNotes;
-    rational              fCurrentNoteDisplayWholeNotes;
+    Rational              fCurrentNoteSoundingWholeNotes;
+    Rational              fCurrentNoteDisplayWholeNotes;
     int                   fCurrentNoteDotsNumber;
 
     // private score building methods
@@ -397,7 +397,7 @@ class msdlParser : public smartable
     void                    NoteDuration (S_msdlTokenKindsSet stopperTokensSet);
 };
 typedef SMARTP<msdlParser> S_msdlParser;
-EXP ostream& operator<< (ostream& os, const msdlParser& elt);
+EXP ostream& operator << (ostream& os, const msdlParser& elt);
 
 
 }

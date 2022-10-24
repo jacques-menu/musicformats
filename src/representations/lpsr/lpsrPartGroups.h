@@ -92,7 +92,7 @@ class EXP lpsrPartGroupBlock : public lpsrElement
 
     list<S_msrElement>    fPartGroupBlockElements;
 };
-EXP ostream& operator<< (ostream& os, const S_lpsrPartGroupBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrPartGroupBlock& elt);
 
 
 }

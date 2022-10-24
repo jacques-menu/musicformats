@@ -179,7 +179,7 @@ class EXP Mikrokosmos3WanderingRegularHandler : public oahRegularHandler
     mfMultiGenerationOutputKind     fMultiGenerationOutputKind;
 };
 typedef SMARTP<Mikrokosmos3WanderingRegularHandler> S_Mikrokosmos3WanderingRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_Mikrokosmos3WanderingRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_Mikrokosmos3WanderingRegularHandler& elt);
 
 
 }

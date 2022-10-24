@@ -409,13 +409,13 @@ void ischemeInterpreterInsiderHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_ischemeInterpreterInsiderHandler& elt)
+ostream& operator << (ostream& os, const S_ischemeInterpreterInsiderHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

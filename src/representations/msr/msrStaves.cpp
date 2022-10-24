@@ -200,9 +200,9 @@ void msrStaff::initializeStaff ()
 
   // staff shortest note
   fStaffShortestNoteDuration =
-    rational (INT_MAX, 1);
+    Rational (INT_MAX, 1);
   fStaffShortestNoteTupletFactor =
-    rational (1, 1);
+    Rational (1, 1);
 
   // get the initial staff details from the part if any
   S_msrStaffDetails
@@ -378,13 +378,13 @@ S_msrScore msrStaff::fetchStaffUpLinkToScore () const
 void msrStaff::registerShortestNoteInStaffIfRelevant (S_msrNote note)
 {
   // is note the shortest one in this staff?
-  rational
+  Rational
     noteSoundingWholeNotes =
       note->
         getMeasureElementSoundingWholeNotes ();
 
       /* JMI
-  rational
+  Rational
     noteDisplayWholeNotes =
       note->
         getNoteDisplayWholeNotes ();
@@ -745,7 +745,7 @@ S_msrVoice msrStaff::createRegularVoiceInStaffByItsNumber (
 */
 
 void msrStaff::setStaffShortestNoteDuration (
-  const rational& duration)
+  const Rational& duration)
 {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -1856,7 +1856,7 @@ void msrStaff::appendPageBreakToStaff (S_msrPageBreak pageBreak)
 
 void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
   int             inputLineNumber,
-  const rational& positionInMeasure)
+  const Rational& positionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -2762,7 +2762,7 @@ void msrStaff::collectStaffMeasuresSlices (
         --gIndenter;
       }
       else {
-        gLogStream << " : none" << endl;
+        gLogStream << " : [NONE]" << endl;
       }
     }
 #endif
@@ -3100,7 +3100,7 @@ void msrStaff::print (ostream& os) const
         "'";
     }
     else {
-      os << "none";
+      os << "[NONE]";
     }
 
     os << endl;
@@ -3122,7 +3122,7 @@ void msrStaff::print (ostream& os) const
     }
     else {
       os <<
-        "none";
+        "[NONE]";
     }
 
     os << endl;
@@ -3144,7 +3144,7 @@ void msrStaff::print (ostream& os) const
     }
     else {
       os <<
-        "none";
+        "[NONE]";
     }
 
     os << endl;
@@ -3161,7 +3161,7 @@ void msrStaff::print (ostream& os) const
     else {
       os << left <<
         setw (fieldWidth) <<
-        "fCurrentStaffStaffDetails" << " : " << "none";
+        "fCurrentStaffStaffDetails" << " : " << "[NONE]";
     }
     os << endl;
   }
@@ -3398,7 +3398,7 @@ void msrStaff::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
   os << endl;
 
@@ -3574,13 +3574,13 @@ void msrStaff::printSlices (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrStaff& elt)
+ostream& operator << (ostream& os, const S_msrStaff& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

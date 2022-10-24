@@ -11,7 +11,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class msrStanza;
 typedef SMARTP<msrStanza> S_msrStanza;
 
@@ -68,7 +68,7 @@ class EXP msrSyllable : public msrMeasureElement
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
                             const string&         syllableStanzaNumber,
-                            const rational&       syllableWholeNotes,
+                            const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           SyllableUpLinkToStanza);
 
@@ -77,7 +77,7 @@ class EXP msrSyllable : public msrMeasureElement
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
                             const string&         syllableStanzaNumber,
-                            const rational&       syllableWholeNotes,
+                            const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           SyllableUpLinkToStanza,
                             int                   syllableNextMeasurePuristNumber);
@@ -98,7 +98,7 @@ class EXP msrSyllable : public msrMeasureElement
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
                             const string&         syllableStanzaNumber,
-                            const rational&       syllableWholeNotes,
+                            const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           SyllableUpLinkToStanza);
 
@@ -107,7 +107,7 @@ class EXP msrSyllable : public msrMeasureElement
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
                             const string&         syllableStanzaNumber,
-                            const rational&       syllableWholeNotes,
+                            const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           SyllableUpLinkToStanza,
                             int                   syllableNextMeasurePuristNumber);
@@ -134,8 +134,20 @@ class EXP msrSyllable : public msrMeasureElement
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context) override;
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context) override
+                              {
+                                setSyllablePositionInMeasure (
+                                  measure,
+                                  positionInMeasure,
+                                  context);
+                              }
+
+    void                  setSyllablePositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
 
     // syllable kind
     msrSyllableKind       getSyllableKind () const
@@ -154,7 +166,7 @@ class EXP msrSyllable : public msrMeasureElement
                               { return fSyllableStanzaNumber; }
 
     // syllable whole notes
-    rational              getSyllableWholeNotes () const
+    Rational              getSyllableWholeNotes () const
                               { return fSyllableWholeNotes; }
 
     // syllable tuplet factor
@@ -237,7 +249,7 @@ class EXP msrSyllable : public msrMeasureElement
     string                fSyllableStanzaNumber;
 
     // syllable whole notes
-    rational              fSyllableWholeNotes;
+    Rational              fSyllableWholeNotes;
 
     // syllable tuplet factor
     msrTupletFactor       fSyllableTupletFactor;
@@ -247,7 +259,7 @@ class EXP msrSyllable : public msrMeasureElement
     int                   fSyllableNextMeasurePuristNumber;
 };
 typedef SMARTP<msrSyllable> S_msrSyllable;
-EXP ostream& operator<< (ostream& os, const S_msrSyllable& elt);
+EXP ostream& operator << (ostream& os, const S_msrSyllable& elt);
 
 //______________________________________________________________________________
 class EXP msrStanza : public msrElement
@@ -333,11 +345,11 @@ class EXP msrStanza : public msrElement
 
     S_msrSyllable         appendRestSyllableToStanza (
                             int             inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     S_msrSyllable         appendSkipSyllableToStanza (
                             int             inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     S_msrSyllable         appendMeasureEndSyllableToStanza (
                             int inputLineNumber);
@@ -346,28 +358,28 @@ class EXP msrStanza : public msrElement
                             int             inputLineNumber,
                             msrSyllable::msrSyllableKind
                                             syllableKind,
-                            const rational& wholeNote);
+                            const Rational& wholeNote);
 
 /* JMI
     S_msrSyllable         appendTiedSyllableToStanza (
                             int      inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     S_msrSyllable         appendSlurSyllableToStanza (
                             int      inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     S_msrSyllable         appendSlurBeyondEndSyllableToStanza (
                             int      inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     S_msrSyllable         appendLigatureSyllableToStanza (
                             int      inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     S_msrSyllable         appendLigatureBeyondEndSyllableToStanza (
                             int      inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     S_msrSyllable         appendBarNumberCheckSyllableToStanza (
                             int           inputLineNumber,
@@ -388,11 +400,11 @@ class EXP msrStanza : public msrElement
 
     void                  padUpToCurrentMeasureWholeNotesDurationInStanza ( // JMI
                             int             inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     void                  appendPaddingNoteToStanza (
                             int             inputLineNumber,
-                            const rational& forwardStepLength);
+                            const Rational& forwardStepLength);
 
   public:
 
@@ -433,10 +445,10 @@ class EXP msrStanza : public msrElement
     Bool                  fStanzaTextPresent;
 
     // current measure whole notes
-    rational              fStanzaCurrentMeasureWholeNotesDuration;
+    Rational              fStanzaCurrentMeasureWholeNotesDuration;
 };
 typedef SMARTP<msrStanza> S_msrStanza;
-EXP ostream& operator<< (ostream& os, const S_msrStanza& elt);
+EXP ostream& operator << (ostream& os, const S_msrStanza& elt);
 
 
 }

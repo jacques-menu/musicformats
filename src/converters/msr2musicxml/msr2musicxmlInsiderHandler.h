@@ -97,7 +97,7 @@ class EXP msr2musicxmlInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<msr2musicxmlInsiderHandler> S_msr2musicxmlInsiderHandler;
-EXP ostream& operator<< (ostream& os, const S_msr2musicxmlInsiderHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msr2musicxmlInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msr2musicxmlInsiderOahGroup : public oahGroup
@@ -189,7 +189,7 @@ class EXP msr2musicxmlInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<msr2musicxmlInsiderOahGroup> S_msr2musicxmlInsiderOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msr2musicxmlInsiderOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msr2musicxmlInsiderOahGroup& elt);
 
 EXP extern S_msr2musicxmlInsiderOahGroup gGlobalMsr2musicxmlInsiderOahGroup;
 

@@ -113,7 +113,7 @@ class EXP guidoGenerationOahGroup : public oahGroup
     Bool                  fGenerateGuidoBars;
 };
 typedef SMARTP<guidoGenerationOahGroup> S_guidoGenerationOahGroup;
-EXP ostream& operator<< (ostream& os, const S_guidoGenerationOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_guidoGenerationOahGroup& elt);
 
 EXP extern S_guidoGenerationOahGroup gGlobalGuidoGenerationOahGroup;
 

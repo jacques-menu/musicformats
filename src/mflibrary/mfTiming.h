@@ -144,7 +144,7 @@ class EXP mfTimingItemsList {
 
     list<S_timingItem>    fTimingItemsList;
 };
-EXP ostream& operator<< (ostream& os, const mfTimingItemsList& tim);
+EXP ostream& operator << (ostream& os, const mfTimingItemsList& tim);
 
 
 

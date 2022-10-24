@@ -97,13 +97,13 @@ void msrHiddenMeasureAndBarLineDescr::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt)
+ostream& operator << (ostream& os, const S_msrHiddenMeasureAndBarLineDescr& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1312,7 +1312,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
         fCurrentHarmonyClone);
 
     // don't append the harmony to the part harmony,
-    // this has been done in pass2b // JMI ???
+    // this has been done in pass2b // JMI ??? v0.9.66
   }
 
   else if (fOnGoingChord) {
@@ -1325,7 +1325,7 @@ void msr2msrTranslator::visitStart (S_msrHarmony& elt)
   else if (fOnGoingHarmoniesVoice) {
   /* JMI
     // get the harmony whole notes offset
-    rational
+    Rational
       harmonyWholeNotesOffset =
         elt->getHarmonyWholeNotesOffset ();
 
@@ -1562,7 +1562,7 @@ void msr2msrTranslator::visitStart (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
   int
     measurePuristNumber =
@@ -1700,7 +1700,7 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
   string
     nextMeasureNumber =
@@ -1840,6 +1840,10 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
 //       }
 //     }
   }
+
+  // bar checks and bar numbers check are already present in fVisitedMsrScore
+  // and handled in the corresponding visitStart() and visitEnd() methods
+  doCreateABarCheck = false; // JMI v0.9.66
 
   if (doCreateABarCheck) {
     // create a bar check
@@ -3627,7 +3631,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***";
+        "[NONE]";
     }
     gLogStream << endl;
   }
@@ -3669,7 +3673,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
     gLogStream <<
        "'" <<
@@ -3690,7 +3694,7 @@ void msr2msrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
     gLogStream <<
        "'" <<
@@ -3761,7 +3765,7 @@ void msr2msrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***";
+        "[NONE]";
     }
     gLogStream << endl;
   }
@@ -3950,7 +3954,7 @@ void msr2msrTranslator::visitStart (S_msrNote& elt)
           }
           else {
             gLogStream <<
-              "none";
+              "[NONE]";
           }
           gLogStream <<
              "'" <<
@@ -4055,7 +4059,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***" <<
+        "[NONE]" <<
         endl;
     }
 
@@ -4068,7 +4072,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***" <<
+        "[NONE]" <<
         endl;
     }
   }
@@ -4320,12 +4324,11 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
             fCurrentNonGraceNoteClone,
             fCurrentVoiceClone);
 
-        // set its position in measure
-        fCurrentNonGraceNoteClone->
-          setMeasureElementPositionInMeasure (
-            fCurrentChordClone->
-              getMeasureElementPositionInMeasure (),
-            "kNoteRegularInChord");
+        // sanity check
+        mfAssert (
+          __FILE__, __LINE__,
+          fCurrentNonGraceNoteClone != nullptr,
+          "fCurrentNonGraceNoteClone is null");
      }
 
       else {
@@ -4350,13 +4353,6 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
           addAnotherNoteToChord (
             fCurrentGraceNoteClone,
             fCurrentVoiceClone);
-
-        // set its position in measure
-        fCurrentNonGraceNoteClone->
-          setMeasureElementPositionInMeasure (
-            fCurrentChordClone->
-              getMeasureElementPositionInMeasure (),
-            "kNoteInChordInGraceNotesGroup");
       }
 
       else {
@@ -4730,6 +4726,12 @@ void msr2msrTranslator::visitStart (S_msrChord& elt)
   fCurrentChordClone =
     elt->createChordNewbornClone (
       fCurrentPartClone);
+
+  // set fCurrentChordClone's position in measure  // JMI ??? v0.9.66
+//   fCurrentMeasureClone->
+//     setChordPositionInMeasure (
+//       Rational (FOO, 1),
+//       "msr2msrTranslator::visitStart (S_msrChord& elt)");
 
   if (fTupletClonesStack.size ()) {
     // a chord in a tuplet is handled as part of the tuplet JMI

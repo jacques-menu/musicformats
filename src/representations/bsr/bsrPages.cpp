@@ -251,13 +251,13 @@ void bsrPage::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrPage& elt)
+ostream& operator << (ostream& os, const S_bsrPage& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

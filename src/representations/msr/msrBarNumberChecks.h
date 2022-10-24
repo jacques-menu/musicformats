@@ -90,7 +90,7 @@ class EXP msrBarNumberCheck : public msrMeasureElement
     int                   fNextBarPuristNumber;
 };
 typedef SMARTP<msrBarNumberCheck> S_msrBarNumberCheck;
-EXP ostream& operator<< (ostream& os, const S_msrBarNumberCheck& elt);
+EXP ostream& operator << (ostream& os, const S_msrBarNumberCheck& elt);
 
 
 } // namespace MusicFormats

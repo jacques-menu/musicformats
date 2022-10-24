@@ -89,7 +89,7 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     int                   getMultipleFullBarRestsLastMeasurePuristMeasureNumber () const
                               { return fMultipleFullBarRestsLastMeasurePuristNumber; }
 
-    rational              fetchMultipleFullBarRestsMeasureSoundingNotes () const;
+    Rational              fetchMultipleFullBarRestsMeasureSoundingNotes () const;
                             // don't simply multiply duration by number,
                             // may help pin-point errors in representation
   public:
@@ -152,7 +152,7 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     string                fMultipleFullBarRestsNextMeasureNumber;
 };
 typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
-EXP ostream& operator<< (ostream& os, const S_msrMultipleFullBarRests& elt);
+EXP ostream& operator << (ostream& os, const S_msrMultipleFullBarRests& elt);
 
 
 }

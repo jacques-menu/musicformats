@@ -1249,13 +1249,13 @@ void msr2musicxmlRegularHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msr2musicxmlRegularHandler& elt)
+ostream& operator << (ostream& os, const S_msr2musicxmlRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

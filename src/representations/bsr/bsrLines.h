@@ -145,7 +145,7 @@ class EXP bsrLine : public bsrPageElement
     Bool                  fASpaceIsNeededInLine;
 };
 typedef SMARTP<bsrLine> S_bsrLine;
-EXP ostream& operator<< (ostream& os, const S_bsrLine& elt);
+EXP ostream& operator << (ostream& os, const S_bsrLine& elt);
 
 
 }

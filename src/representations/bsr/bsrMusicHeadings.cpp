@@ -188,7 +188,7 @@ string bsrMusicHeading::asString () const
   }
   else {
     s <<
-      "none";
+      "[NONE]";
   }
 
   s <<
@@ -200,7 +200,7 @@ string bsrMusicHeading::asString () const
   }
   else {
     s <<
-      "none";
+      "[NONE]";
   }
 
   s <<
@@ -212,7 +212,7 @@ string bsrMusicHeading::asString () const
   }
   else {
     s <<
-      "none";
+      "[NONE]";
   }
 
   s <<
@@ -268,7 +268,7 @@ void bsrMusicHeading::print (ostream& os) const
   }
   else {
     os <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -286,7 +286,7 @@ void bsrMusicHeading::print (ostream& os) const
   }
   else {
     os <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -304,7 +304,7 @@ void bsrMusicHeading::print (ostream& os) const
   }
   else {
     os <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -320,13 +320,13 @@ void bsrMusicHeading::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrMusicHeading& elt)
+ostream& operator << (ostream& os, const S_bsrMusicHeading& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

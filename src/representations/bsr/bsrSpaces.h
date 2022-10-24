@@ -84,7 +84,7 @@ class EXP bsrSpaces : public bsrLineContentsElement
     S_bsrCellsList        fSpacesCellsList;
 };
 typedef SMARTP<bsrSpaces> S_bsrSpaces;
-EXP ostream& operator<< (ostream& os, const S_bsrSpaces& elt);
+EXP ostream& operator << (ostream& os, const S_bsrSpaces& elt);
 
 
 }

@@ -17,7 +17,7 @@ enum class bsrKeyKind {
 string bsrKeyKindAsString (
   bsrKeyKind keyKind);
 
-ostream& operator<< (ostream& os, bsrKeyKind& elt);
+ostream& operator << (ostream& os, bsrKeyKind& elt);
 
 //______________________________________________________________________________
 class EXP bsrKey : public bsrLineContentsElement
@@ -112,7 +112,7 @@ class EXP bsrKey : public bsrLineContentsElement
     S_bsrCellsList        fKeyCellsList;
 };
 typedef SMARTP<bsrKey> S_bsrKey;
-EXP ostream& operator<< (ostream& os, const S_bsrKey& elt);
+EXP ostream& operator << (ostream& os, const S_bsrKey& elt);
 
 
 }

@@ -95,7 +95,7 @@ class EXP msrSlash : public msrElement
     msrSlashUseStemsKind  fSlashUseStemsKind;
 };
 typedef SMARTP<msrSlash> S_msrSlash;
-EXP ostream& operator<< (ostream& os, const S_msrSlash& elt);
+EXP ostream& operator << (ostream& os, const S_msrSlash& elt);
 
 
 } // namespace MusicFormats

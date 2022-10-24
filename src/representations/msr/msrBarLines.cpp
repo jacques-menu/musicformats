@@ -545,11 +545,12 @@ string msrBarLine::asString () const
 void msrBarLine::print (ostream& os) const
 {
   os <<
-    "[BarLine, " <<
+    "[BarLine" <<
+    ", fBarLineCategoryKind: " <<
     barLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    ", measureNumber " << fMeasureElementMeasureNumber <<
-    ", positionInMeasure " << fMeasureElementPositionInMeasure <<
+    ", fMeasureElementMeasureNumber: " << fMeasureElementMeasureNumber <<
+    ", fMeasureElementPositionInMeasure: " << fMeasureElementPositionInMeasure <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -559,53 +560,53 @@ void msrBarLine::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "locationKind" << " : " <<
+    "fLocationKind" << " : " <<
     barLineLocationKindAsString (fLocationKind) <<
     endl <<
     setw (fieldWidth) <<
-    "styleKind" << " : " <<
+    "fStyleKind" << " : " <<
     barLineStyleKindAsString (fStyleKind) <<
     endl <<
 
     setw (fieldWidth) <<
-    "repeatDirectionKind" << " : " <<
+    "fRepeatDirectionKind" << " : " <<
     barLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
     endl <<
 
     setw (fieldWidth) <<
-    "repeatWingedKind" << " : " <<
+    "fRepeatWingedKind" << " : " <<
     barLineRepeatWingedKindAsString (fRepeatWingedKind) <<
     endl <<
 
     setw (fieldWidth) <<
-    "endingTypeKind" << " : " <<
+    "fEndingTypeKind" << " : " <<
     barLineEndingTypeKindAsString (fEndingTypeKind) <<
     endl <<
     setw (fieldWidth) <<
-    "endingNumber" << " : " <<
+    "fEndingNumber" << " : " <<
     fEndingNumber <<
     endl <<
 
     setw (fieldWidth) <<
-    "barLineTimes" << " : " <<
+    "fBarLineTimes" << " : " <<
     fBarLineTimes <<
     endl <<
 
 /* JMI
     setw (fieldWidth) <<
-    "barLineCategoryKind" << " : " <<
+    "fBarLineCategoryKind" << " : " <<
     barLineCategoryKindAsString (
       fBarLineCategoryKind) <<
     endl <<
 */
 
     setw (fieldWidth) <<
-    "barLineHasSegnoKind" << " : " <<
+    "fBarLineHasSegnoKind" << " : " <<
     barLineHasSegnoKindAsString (
       fBarLineHasSegnoKind) <<
     endl <<
     setw (fieldWidth) <<
-    "barLineHasCodaKind" << " : " <<
+    "fBarLineHasCodaKind" << " : " <<
     barLineHasCodaKindAsString (
       fBarLineHasCodaKind) <<
     endl <<
@@ -616,7 +617,7 @@ void msrBarLine::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "measureNumber" << " : " <<
+    "fMeasureElementMeasureNumber" << " : " <<
     fMeasureElementMeasureNumber <<
     endl;
 
@@ -630,23 +631,24 @@ void msrBarLine::print (ostream& os) const
 void msrBarLine::printShort (ostream& os) const
 {
   os <<
-    "[BarLine, " <<
+    "[BarLine" <<
+    ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
     barLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    ", measureNumber " << fMeasureElementMeasureNumber <<
-    ", positionInMeasure " << fMeasureElementPositionInMeasure <<
+    ", fMeasureElementMeasureNumber: " << fMeasureElementMeasureNumber <<
+    ", fMeasureElementPositionInMeasure: " << fMeasureElementPositionInMeasure <<
     ", line " << fInputLineNumber <<
     ']' <<
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrBarLine& elt)
+ostream& operator << (ostream& os, const S_msrBarLine& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

@@ -111,7 +111,7 @@ class EXP oahInsiderHandler : public oahHandler
 
 };
 typedef SMARTP<oahInsiderHandler> S_oahInsiderHandler;
-EXP ostream& operator<< (ostream& os, const S_oahInsiderHandler& elt);
+EXP ostream& operator << (ostream& os, const S_oahInsiderHandler& elt);
 
 
 }

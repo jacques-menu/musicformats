@@ -154,7 +154,7 @@ namespace mfsl {
    */
   template <typename YYChar>
   std::basic_ostream<YYChar>&
-  operator<< (std::basic_ostream<YYChar>& ostr, const position& pos)
+  operator << (std::basic_ostream<YYChar>& ostr, const position& pos)
   {
     if (pos.filename)
       ostr << *pos.filename << ':';
@@ -282,7 +282,7 @@ namespace mfsl {
    */
   template <typename YYChar>
   std::basic_ostream<YYChar>&
-  operator<< (std::basic_ostream<YYChar>& ostr, const location& loc)
+  operator << (std::basic_ostream<YYChar>& ostr, const location& loc)
   {
     location::counter_type end_col
       = 0 < loc.end.column ? loc.end.column - 1 : 0;

@@ -102,7 +102,7 @@ class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
     lpsrScoreOutputKind&  fLpsrScoreOutputKindVariable;
 };
 typedef SMARTP<msr2lpsrScoreOutputKindAtom> S_msr2lpsrScoreOutputKindAtom;
-EXP ostream& operator<< (ostream& os, const S_msr2lpsrScoreOutputKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msr2lpsrScoreOutputKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP msr2lpsrOahGroup : public oahGroup
@@ -210,7 +210,7 @@ class EXP msr2lpsrOahGroup : public oahGroup
     Bool                  fCreateImplicitInitialRepeatBarLine;
 };
 typedef SMARTP<msr2lpsrOahGroup> S_msr2lpsrOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msr2lpsrOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msr2lpsrOahGroup& elt);
 
 EXP extern S_msr2lpsrOahGroup gGlobalMsr2lpsrOahGroup;
 

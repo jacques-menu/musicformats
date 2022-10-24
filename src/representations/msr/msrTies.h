@@ -100,7 +100,7 @@ class EXP msrTie : public msrElement
     msrPlacementKind      fTiePlacementKind;
 };
 typedef SMARTP<msrTie> S_msrTie;
-EXP ostream& operator<< (ostream& os, const S_msrTie& elt);
+EXP ostream& operator << (ostream& os, const S_msrTie& elt);
 
 
 } // namespace MusicFormats

@@ -2610,7 +2610,7 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
   }
   else {
     gLogStream <<
-      "none";
+      "[NONE]";
   }
   gLogStream << endl;
 
@@ -2964,13 +2964,13 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_tracingOahGroup& elt)
+ostream& operator << (ostream& os, const S_tracingOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

@@ -715,7 +715,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
@@ -748,7 +748,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrMeasure '" <<
-      elt->getMeasureElementMeasureNumber () <<
+      elt->getMeasureNumber () <<
       "'" <<
       ", line " << inputLineNumber <<
       endl;
@@ -757,7 +757,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 }
 
 //________________________________________________________________________
@@ -2928,7 +2928,7 @@ void msr2bsrTranslator::visitStart (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
@@ -3008,16 +3008,16 @@ void msr2bsrTranslator::finalizeCurrentMeasureClone (
   string
     measureNumber =
       fCurrentMeasureClone->
-        getMeasureElementMeasureNumber ();
+        getMeasureNumber ();
 
   // get the current measure whole notes
-  rational
+  Rational
     currentMeasureWholeNotesDuration =
       fCurrentMeasureClone->
         getCurrentMeasureWholeNotesDuration ();
 
   // get the full current measure whole notes
-  rational
+  Rational
     measureFullLength =
       fCurrentMeasureClone->
         getMeasureFullLength ();
@@ -3101,7 +3101,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
       "--> End visiting msrMeasure '" <<
-      elt->getMeasureElementMeasureNumber () <<
+      elt->getMeasureNumber () <<
       "'" <<
       ", line " << inputLineNumber <<
       endl;
@@ -3110,7 +3110,7 @@ void msr2bsrTranslator::visitEnd (S_msrMeasure& elt)
 
   string
     measureNumber =
-      elt->getMeasureElementMeasureNumber ();
+      elt->getMeasureNumber ();
 
   finalizeCurrentMeasureClone ( // JMI
     inputLineNumber,
@@ -4282,7 +4282,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***";
+        "[NONE]";
     }
     gLogStream << endl;
   }
@@ -4330,7 +4330,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
     gLogStream <<
        "'" <<
@@ -4357,7 +4357,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
     gLogStream <<
        "'" <<
@@ -4562,7 +4562,7 @@ void msr2bsrTranslator::visitEnd (S_msrGraceNotesGroup& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***";
+        "[NONE]";
     }
     gLogStream << endl;
   }
@@ -4638,7 +4638,7 @@ void msr2bsrTranslator::visitStart (S_msrNote& elt)
           }
           else {
             gLogStream <<
-              "none";
+              "[NONE]";
           }
           gLogStream <<
              "'" <<
@@ -4737,7 +4737,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***" <<
+        "[NONE]" <<
         endl;
     }
 
@@ -4750,7 +4750,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
     }
     else {
       gLogStream <<
-        "*** NONE ***" <<
+        "[NONE]" <<
         endl;
     }
   }

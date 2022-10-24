@@ -1456,13 +1456,13 @@ void LilyPondIssue34RegularHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_LilyPondIssue34RegularHandler& elt)
+ostream& operator << (ostream& os, const S_LilyPondIssue34RegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

@@ -169,7 +169,7 @@ static Sxmlelement makemeasure_TRY(unsigned long num) {
       root->push (newElement(k_root_alter,"1"));              // <-------------select the alteration
       harmony->push (root);
 
-      Sxmlelement kind = newElement(k_kind, "none");  // creates the kind   <------------- change from "major" to "none"
+      Sxmlelement kind = newElement(k_kind, "[NONE]");  // creates the kind   <------------- change from "major" to "[NONE]"
       kind->add (newAttribute("halign", "center"));
       kind->add (newAttribute("text", "13b5"));                                                 // // <-------------- write any arbitrary chord name without being hassled
       harmony->push (kind);
@@ -180,7 +180,7 @@ static Sxmlelement makemeasure_TRY(unsigned long num) {
     }
 
   / *
-    -use "none" for the kind allows the text to print and for me to select any arbitrary chord type
+    -use "[NONE]" for the kind allows the text to print and for me to select any arbitrary chord type
     -use k_root_alter to create sharps or flats of any basic note
     -the example above prints the chord C#13b5 onto beats 1 & 3 of each measure
   * /

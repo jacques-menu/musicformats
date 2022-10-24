@@ -34,7 +34,7 @@ enum class msrQuarterTonesPitchesLanguageKind {
 EXP string msrQuarterTonesPitchesLanguageKindAsString (
   msrQuarterTonesPitchesLanguageKind languageKind);
 
-ostream& operator<< (ostream& os, msrQuarterTonesPitchesLanguageKind& elt);
+ostream& operator << (ostream& os, msrQuarterTonesPitchesLanguageKind& elt);
 
 msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString (
   const string& theString);

@@ -181,7 +181,7 @@ void lpsrContext::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" <<
+    os << "[NONE]" <<
     endl;
   }
 
@@ -333,20 +333,20 @@ void lpsrChordNamesContext::print (ostream& os) const
   }
   else {
     os <<
-      " : " << "none" <<
+      " : " << "[NONE]" <<
     endl;
   }
 
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrChordNamesContext& elt)
+ostream& operator << (ostream& os, const S_lpsrChordNamesContext& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -504,13 +504,13 @@ void lpsrFiguredBassContext::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrFiguredBassContext& elt)
+ostream& operator << (ostream& os, const S_lpsrFiguredBassContext& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

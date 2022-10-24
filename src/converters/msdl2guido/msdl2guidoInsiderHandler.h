@@ -99,7 +99,7 @@ class EXP msdl2guidoInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<msdl2guidoInsiderHandler> S_msdl2guidoInsiderHandler;
-EXP ostream& operator<< (ostream& os, const S_msdl2guidoInsiderHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdl2guidoInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msdl2guidoInsiderOahGroup : public oahGroup
@@ -200,7 +200,7 @@ class EXP msdl2guidoInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<msdl2guidoInsiderOahGroup> S_msdl2guidoInsiderOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msdl2guidoInsiderOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msdl2guidoInsiderOahGroup& elt);
 
 EXP extern S_msdl2guidoInsiderOahGroup gGlobalMsdl2gmnInsiderOahGroup;
 

@@ -1545,7 +1545,7 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentMetronomeNoteNormalNotes;
     string                    fCurrentMetronomeNoteNormalType; // JMI ???
 
-    rational                  fCurrentMetronomeNoteWholeNotesFromMetronomeType;
+    Rational                  fCurrentMetronomeNoteWholeNotesFromMetronomeType;
 
     S_msrTempoTuplet          fCurrentMetronomeTuplet;
     Bool                      fOnGoingMetronomeTuplet;
@@ -1724,7 +1724,7 @@ class EXP mxsr2msrTranslator :
 
     int                       fCurrentHarmoniesStaffNumber;
 
-    rational                  fCurrentHarmonyWholeNotesOffset;
+    Rational                  fCurrentHarmonyWholeNotesOffset;
 
     Bool                      fOnGoingHarmony;
 
@@ -1748,8 +1748,8 @@ class EXP mxsr2msrTranslator :
     msrBassFigure::msrBassFigureSuffixKind
                               fCurrentFigureSuffixKind;
 
-    rational                  fCurrentFiguredBassSoundingWholeNotes;
-    rational                  fCurrentFiguredBassDisplayWholeNotes;
+    Rational                  fCurrentFiguredBassSoundingWholeNotes;
+    Rational                  fCurrentFiguredBassDisplayWholeNotes;
 
     msrFiguredBassElement::msrFiguredBassElementParenthesesKind
                               fCurrentFiguredBassParenthesesKind;
@@ -1900,13 +1900,13 @@ class EXP mxsr2msrTranslator :
 
     // note sound
     msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesPitchKind;
-    rational                  fCurrentNoteSoundingWholeNotesFromDuration;
-    rational                  fCurrentNoteSoundingWholeNotes;
+    Rational                  fCurrentNoteSoundingWholeNotesFromDuration;
+    Rational                  fCurrentNoteSoundingWholeNotes;
 
     // note display
     msrQuarterTonesPitchKind  fCurrentNoteQuarterTonesDisplayPitchKind;
-    rational                  fCurrentNoteDisplayWholeNotesFromType;
-    rational                  fCurrentNoteDisplayWholeNotes;
+    Rational                  fCurrentNoteDisplayWholeNotesFromType;
+    Rational                  fCurrentNoteDisplayWholeNotes;
 
     // augmentation dots
     int                       fCurrentNoteDotsNumber;

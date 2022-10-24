@@ -135,7 +135,7 @@ EXP mfMusicformatsError convertMsdlStream2musicxmlWithHandler (
       s <<
         "Could not perform comversion of \"" <<
         inputSourceName <<
-        "\" to MSR, quitting";
+        "\" to MSR - quitting";
 
       string message = s.str ();
 
@@ -413,7 +413,7 @@ EXP mfMusicformatsError convertMsdlFile2musicxmlWithOptionsAndArguments (
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
-      "\" for reading, quitting";
+      "\" for reading - quitting";
 
     string message = s.str ();
 
@@ -460,7 +460,7 @@ EXP mfMusicformatsError convertMsdlFile2musicxmlWithHandler (
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
-      "\" for reading, quitting";
+      "\" for reading - quitting";
 
     string message = s.str ();
 

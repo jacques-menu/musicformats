@@ -124,7 +124,7 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
         originalMxsr,
         gGlobalMsrOahGroup,
         "Pass 2a",
-        "Create a first MSR skeleton from the MXSR");
+        "Create an MSR skeleton from the MXSR");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
@@ -147,7 +147,7 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
     return mfMusicformatsError::k_NoError;
   }
 
-  // populate the first MSR skeleton from MusicXML data (pass 2b)
+  // populate the MSR skeleton from MusicXML data (pass 2b)
   // ------------------------------------------------------
 
   try {
@@ -155,7 +155,7 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
       originalMxsr,
       firstMsrScore,
       "Pass 2b",
-      "Populate the first MSR skeletonfrom MusicXML data");
+      "Populate the MSR skeletonfrom MusicXML data");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);

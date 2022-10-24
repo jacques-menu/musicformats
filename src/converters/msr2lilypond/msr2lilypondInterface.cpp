@@ -194,7 +194,7 @@ EXP mfMusicformatsError msrScore2lilypondWithHandler (
         s <<
           "Could not open LilyPond output file \"" <<
           outputFileName <<
-          "\" for writing, quitting";
+          "\" for writing - quitting";
 
         string message = s.str ();
 

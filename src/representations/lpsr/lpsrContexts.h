@@ -133,7 +133,7 @@ class EXP lpsrContext : public lpsrElement
     list<S_msrElement>    fContextElementsList;
 };
 typedef SMARTP<lpsrContext> S_lpsrContext;
-EXP ostream& operator<< (ostream& os, const S_lpsrContext& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrContext& elt);
 
 //______________________________________________________________________________
 class EXP lpsrChordNamesContext : public lpsrContext
@@ -200,7 +200,7 @@ class EXP lpsrChordNamesContext : public lpsrContext
     S_msrVoice            fContextVoice;
 };
 typedef SMARTP<lpsrChordNamesContext> S_lpsrChordNamesContext;
-EXP ostream& operator<< (ostream& os, const S_lpsrChordNamesContext& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrChordNamesContext& elt);
 
 //______________________________________________________________________________
 class EXP lpsrFiguredBassContext : public lpsrContext
@@ -267,7 +267,7 @@ class EXP lpsrFiguredBassContext : public lpsrContext
     S_msrStaff            fContextStaff;
 };
 typedef SMARTP<lpsrFiguredBassContext> S_lpsrFiguredBassContext;
-EXP ostream& operator<< (ostream& os, const S_lpsrFiguredBassContext& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrFiguredBassContext& elt);
 
 
 }

@@ -271,13 +271,13 @@ void lpsrPitchesLanguageAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrPitchesLanguageAtom& elt)
+ostream& operator << (ostream& os, const S_lpsrPitchesLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -508,13 +508,13 @@ void lpsrChordsLanguageAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrChordsLanguageAtom& elt)
+ostream& operator << (ostream& os, const S_lpsrChordsLanguageAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -879,13 +879,13 @@ void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator<< (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt)
+ostream& operator << (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1095,13 +1095,13 @@ void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
   }
 }
 
-ostream& operator<< (ostream& os, const S_lpsrTransposeAtom& elt)
+ostream& operator << (ostream& os, const S_lpsrTransposeAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -2311,7 +2311,7 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
   gLogStream << endl;
 
@@ -2320,13 +2320,13 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrOahGroup& elt)
+ostream& operator << (ostream& os, const S_lpsrOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

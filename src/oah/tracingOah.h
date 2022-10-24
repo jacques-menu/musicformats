@@ -1055,7 +1055,7 @@ class EXP tracingOahGroup : public oahGroup
 */
 };
 typedef SMARTP<tracingOahGroup> S_tracingOahGroup;
-EXP ostream& operator<< (ostream& os, const S_tracingOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_tracingOahGroup& elt);
 
 EXP extern S_tracingOahGroup gGlobalTracingOahGroup;
 

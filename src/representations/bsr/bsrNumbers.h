@@ -119,7 +119,7 @@ class EXP bsrNumber : public bsrLineContentsElement
     S_bsrCellsList        fNumberCellsList;
 };
 typedef SMARTP<bsrNumber> S_bsrNumber;
-EXP ostream& operator<< (ostream& os, const S_bsrNumber& elt);
+EXP ostream& operator << (ostream& os, const S_bsrNumber& elt);
 
 
 }

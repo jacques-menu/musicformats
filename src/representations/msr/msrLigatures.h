@@ -21,7 +21,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class msrLigature;
 typedef SMARTP<msrLigature> S_msrLigature;
 
@@ -155,7 +155,7 @@ class EXP msrLigature : public msrElement
     msrPlacementKind      fLigaturePlacementKind;
 };
 typedef SMARTP<msrLigature> S_msrLigature;
-EXP ostream& operator<< (ostream& os, const S_msrLigature& elt);
+EXP ostream& operator << (ostream& os, const S_msrLigature& elt);
 
 
 } // namespace MusicFormats

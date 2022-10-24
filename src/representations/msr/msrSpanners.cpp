@@ -255,7 +255,7 @@ void msrSpanner::print (ostream& os) const
   }
   else {
     os <<
-    " : " << "***none***" <<
+    " : " << "[NONE]" <<
     endl;
   }
 
@@ -264,15 +264,15 @@ void msrSpanner::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrSpanner& elt)
+ostream& operator << (ostream& os, const S_msrSpanner& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

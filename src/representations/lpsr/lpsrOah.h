@@ -113,7 +113,7 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
                           fMsrQuarterTonesPitchesLanguageKindVariable;
 };
 typedef SMARTP<lpsrPitchesLanguageAtom> S_lpsrPitchesLanguageAtom;
-EXP ostream& operator<< (ostream& os, const S_lpsrPitchesLanguageAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrPitchesLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
@@ -201,7 +201,7 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
                           fLpsrChordsLanguageKindVariable;
 };
 typedef SMARTP<lpsrChordsLanguageAtom> S_lpsrChordsLanguageAtom;
-EXP ostream& operator<< (ostream& os, const S_lpsrChordsLanguageAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrChordsLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
@@ -284,7 +284,7 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     map<string, string>&  fStringToStringMapVariable;
 };
 typedef SMARTP<lpsrStaffInstrumentNameAtom> S_lpsrStaffInstrumentNameAtom;
-EXP ostream& operator<< (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt);
 
 //______________________________________________________________________________
 class EXP lpsrTransposeAtom : public oahAtomStoringAValue
@@ -372,7 +372,7 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
                           fSemiTonesPitchAndOctaveVariable;
 };
 typedef SMARTP<lpsrTransposeAtom> S_lpsrTransposeAtom;
-EXP ostream& operator<< (ostream& os, const S_lpsrTransposeAtom& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrTransposeAtom& elt);
 
 //______________________________________________________________________________
 class EXP lpsrOahGroup : public oahGroup
@@ -859,7 +859,7 @@ class EXP lpsrOahGroup : public oahGroup
                           fTranspositionSemiTonesPitchAndOctave;
 };
 typedef SMARTP<lpsrOahGroup> S_lpsrOahGroup;
-EXP ostream& operator<< (ostream& os, const S_lpsrOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrOahGroup& elt);
 
 EXP extern S_lpsrOahGroup gGlobalLpsrOahGroup;
 

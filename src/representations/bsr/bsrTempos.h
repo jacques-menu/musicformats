@@ -104,7 +104,7 @@ class EXP bsrTempo : public bsrLineContentsElement
     S_bsrCellsList        fTempoCellsList;
 };
 typedef SMARTP<bsrTempo> S_bsrTempo;
-EXP ostream& operator<< (ostream& os, const S_bsrTempo& elt);
+EXP ostream& operator << (ostream& os, const S_bsrTempo& elt);
 
 
 }

@@ -417,13 +417,13 @@ void mfslInterpreterOahGroup::printMfslInterpreterOahValues (
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_mfslInterpreterOahGroup& elt)
+ostream& operator << (ostream& os, const S_mfslInterpreterOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

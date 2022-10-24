@@ -174,13 +174,13 @@ void msr2guidoManPageGenerateAtom::printAtomWithVariableOptionsValues (
   // nothing to print here
 }
 
-ostream& operator<< (ostream& os, const S_msr2guidoManPageGenerateAtom& elt)
+ostream& operator << (ostream& os, const S_msr2guidoManPageGenerateAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -381,13 +381,13 @@ void msr2guidoManPageOahGroup::printManPageOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msr2guidoManPageOahGroup& elt)
+ostream& operator << (ostream& os, const S_msr2guidoManPageOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

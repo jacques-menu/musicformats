@@ -89,7 +89,7 @@ class EXP msrBeam : public msrElement
     msrBeamKind           fBeamKind;
 };
 typedef SMARTP<msrBeam> S_msrBeam;
-EXP ostream& operator<< (ostream& os, const S_msrBeam& elt);
+EXP ostream& operator << (ostream& os, const S_msrBeam& elt);
 
 
 } // namespace MusicFormats

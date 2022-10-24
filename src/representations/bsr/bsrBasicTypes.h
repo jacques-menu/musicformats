@@ -105,7 +105,7 @@ string bsrCellKindAsString (bsrCellKind cellKind);
 
 /*
   there is no
-  ostream& operator<< (ostream& os, const bsrCellKind& elt);
+  ostream& operator << (ostream& os, const bsrCellKind& elt);
   since we need the numerical value to be output to files
 */
 
@@ -226,7 +226,7 @@ enum class bsrBrailleOutputKind {
 string bsrBrailleOutputKindAsString (
   bsrBrailleOutputKind brailleOutputKind);
 
-ostream& operator<< (ostream& os, const bsrBrailleOutputKind& elt);
+ostream& operator << (ostream& os, const bsrBrailleOutputKind& elt);
 
 extern map<string, bsrBrailleOutputKind>
   gGlobalBsrBrailleOutputKindsMap;
@@ -245,7 +245,7 @@ enum class bsrTextsLanguageKind {
 string bsrTextsLanguageKindAsString (
   bsrTextsLanguageKind languageKind);
 
-ostream& operator<< (ostream& os, const bsrTextsLanguageKind& elt);
+ostream& operator << (ostream& os, const bsrTextsLanguageKind& elt);
 
 extern map<string, bsrTextsLanguageKind>
   gGlobalBsrTextsLanguageKindsMap;
@@ -272,11 +272,11 @@ void write_bsrDot6Cell (ostream& os, bsrDot6Cell cell);
 
 void write_bsrDot6Cell ( bsrDot6Cell cell );
 
-EXP ostream& operator<< (ostream& os, const bsrDot6Cell cell);
+EXP ostream& operator << (ostream& os, const bsrDot6Cell cell);
 
 void write_wstring (ostream& os, wstring wstr );
 
-EXP ostream& operator<< (ostream& os, const wstring& wstr);
+EXP ostream& operator << (ostream& os, const wstring& wstr);
 */
 
 // initialization

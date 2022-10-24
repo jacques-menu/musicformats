@@ -97,7 +97,7 @@ class EXP xml2xmlInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<xml2xmlInsiderHandler> S_xml2xmlInsiderHandler;
-EXP ostream& operator<< (ostream& os, const S_xml2xmlInsiderHandler& elt);
+EXP ostream& operator << (ostream& os, const S_xml2xmlInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP xml2xmlInsiderOahGroup : public oahGroup
@@ -191,7 +191,7 @@ class EXP xml2xmlInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<xml2xmlInsiderOahGroup> S_xml2xmlInsiderOahGroup;
-EXP ostream& operator<< (ostream& os, const S_xml2xmlInsiderOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_xml2xmlInsiderOahGroup& elt);
 
 EXP extern S_xml2xmlInsiderOahGroup gGlobalXml2xmlInsiderOahGroup;
 

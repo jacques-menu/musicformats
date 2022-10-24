@@ -83,7 +83,7 @@ class EXP insiderOahAtom : public oahAtom
     Bool                  fOptionHasBeenSelected;
 };
 typedef SMARTP<insiderOahAtom> S_insiderOahAtom;
-EXP ostream& operator<< (ostream& os, const S_insiderOahAtom& elt);
+EXP ostream& operator << (ostream& os, const S_insiderOahAtom& elt);
 
 //______________________________________________________________________________
 class EXP regularOahAtom : public oahAtom
@@ -149,7 +149,7 @@ class EXP regularOahAtom : public oahAtom
     Bool                  fOptionHasBeenSelected;
 };
 typedef SMARTP<regularOahAtom> S_regularOahAtom;
-EXP ostream& operator<< (ostream& os, const S_regularOahAtom& elt);
+EXP ostream& operator << (ostream& os, const S_regularOahAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahOahGroup : public oahGroup
@@ -348,7 +348,7 @@ class EXP oahOahGroup : public oahGroup
     Bool                  fTracingOahVisitors;
 };
 typedef SMARTP<oahOahGroup> S_oahOahGroup;
-EXP ostream& operator<< (ostream& os, const S_oahOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_oahOahGroup& elt);
 
 EXP extern S_oahOahGroup gGlobalOahOahGroup;
 

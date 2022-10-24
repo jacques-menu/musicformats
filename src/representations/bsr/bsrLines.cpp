@@ -565,13 +565,13 @@ void bsrLine::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_bsrLine& elt)
+ostream& operator << (ostream& os, const S_bsrLine& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

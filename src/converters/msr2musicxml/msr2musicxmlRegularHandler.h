@@ -157,7 +157,7 @@ class EXP msr2musicxmlRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msr2musicxmlRegularHandler> S_msr2musicxmlRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_msr2musicxmlRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msr2musicxmlRegularHandler& elt);
 
 
 }

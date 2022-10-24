@@ -84,7 +84,7 @@ class EXP lpsrUseVoiceCommand : public lpsrElement
     S_msrVoice            fVoice;
 };
 typedef SMARTP<lpsrUseVoiceCommand> S_lpsrUseVoiceCommand;
-EXP ostream& operator<< (ostream& os, const S_lpsrUseVoiceCommand& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrUseVoiceCommand& elt);
 
 
 }

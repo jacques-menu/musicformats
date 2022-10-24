@@ -220,13 +220,13 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 
   fCurrentHarmoniesStaffNumber = msrStaff::K_NO_STAFF_NUMBER;
 
-  fCurrentHarmonyWholeNotesOffset = rational (0, 1);
+  fCurrentHarmonyWholeNotesOffset = Rational (0, 1);
 
   // figured bass handling
   fFiguredBassVoicesCounter = 0;
 
-  fCurrentFiguredBassSoundingWholeNotes = rational (0, 1);
-  fCurrentFiguredBassDisplayWholeNotes  = rational (0, 1);
+  fCurrentFiguredBassSoundingWholeNotes = Rational (0, 1);
+  fCurrentFiguredBassDisplayWholeNotes  = Rational (0, 1);
   fCurrentFiguredBassParenthesesKind =
     msrFiguredBassElement::kFiguredBassElementParenthesesNo; // default value
   fCurrentFigureNumber                  = -1;
@@ -330,11 +330,11 @@ void mxsr2msrTranslator::initializeNoteData ()
   fCurrentNoteQuarterTonesPitchKind =
     msrQuarterTonesPitchKind::k_NoQuarterTonesPitch;
 
-  fCurrentNoteSoundingWholeNotes             = rational (-13, 1);
-  fCurrentNoteSoundingWholeNotesFromDuration = rational (-17, 1);
+  fCurrentNoteSoundingWholeNotes             = Rational (-13, 1);
+  fCurrentNoteSoundingWholeNotesFromDuration = Rational (-17, 1);
 
-  fCurrentNoteDisplayWholeNotes         = rational (-25, 1);
-  fCurrentNoteDisplayWholeNotesFromType = rational (-29, 1);
+  fCurrentNoteDisplayWholeNotes         = Rational (-25, 1);
+  fCurrentNoteDisplayWholeNotesFromType = Rational (-29, 1);
 
   fCurrentNoteDotsNumber = 0;
 
@@ -501,7 +501,11 @@ S_msrStaff mxsr2msrTranslator::fetchStaffFromCurrentPart (
   }
 #endif
 
-//   if (staffNumber == msrStaff::K_NO_STAFF_NUMBER) abort (); // TEMP JMIJMIJMIJMIJMIJMI
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    staffNumber != msrStaff::K_NO_STAFF_NUMBER,
+    "staffNumber == msrStaff::K_NO_STAFF_NUMBER");
 
   // fetch the staff from current part
   S_msrStaff
@@ -3015,7 +3019,7 @@ void mxsr2msrTranslator::visitStart (S_mode& elt)
 
   string mode = elt->getValue();
 
-  if       (mode == "none") {
+  if       (mode == "[NONE]") {
     fCurrentModeKind = msrModeKind::k_NoMode;
   }
   else if  (mode == "major") {
@@ -3658,7 +3662,7 @@ void mxsr2msrTranslator::visitStart (S_interchangeable& elt)
   fCurrentInterchangeableSeparatorKind =
     msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorNone; // default value
 
-  if       (interchangeableSymbol == "none") {
+  if       (interchangeableSymbol == "[NONE]") {
     fCurrentInterchangeableSeparatorKind = msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorNone;
   }
   else  if (interchangeableSymbol == "horizontal") {
@@ -4311,12 +4315,11 @@ void mxsr2msrTranslator::visitStart (S_offset& elt)
   int offsetValue = (int)(*elt);
 
   // set offset whole notes
-  rational
+  Rational
     offsetWholeNotesFromDuration =
-      rational (
+      Rational (
         offsetValue,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
-  offsetWholeNotesFromDuration.rationalise ();
 
   // sound
 
@@ -5721,8 +5724,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
 
     while (dots > 0) {
       fCurrentMetronomeNoteWholeNotesFromMetronomeType *=
-        rational (3, 2);
-      fCurrentMetronomeNoteWholeNotesFromMetronomeType.rationalise ();
+        Rational (3, 2);
 
       --dots;
     } // while
@@ -5926,7 +5928,7 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
     else if (tupletShowNumber == "both") {
       fCurrentTempoTupletShowNumberKind = msrTempoTuplet::kTempoTupletShowNumberBoth;
     }
-    else if (tupletShowNumber == "none") {
+    else if (tupletShowNumber == "[NONE]") {
       fCurrentTempoTupletShowNumberKind = msrTempoTuplet::kTempoTupletShowNumberNone;
     }
     else {
@@ -7003,12 +7005,11 @@ void mxsr2msrTranslator::visitEnd (S_forward& elt)
     }
 #endif
 
-  rational
+  Rational
     forwardStepLength =
-      rational (
+      Rational (
         fCurrentForwardDivisions,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
-    forwardStepLength.rationalise ();
 
   // append a padding note to the voice to be forwarded
   voiceToBeForwarded ->
@@ -7557,7 +7558,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
   else if (ligatureLineEndValue == "arrow") {
     ligatureLineEndKind = msrLigature::kLigatureLineEndArrow;
   }
-  else if (ligatureLineEndValue == "none") {
+  else if (ligatureLineEndValue == "[NONE]") {
     ligatureLineEndKind = msrLigature::kLigatureLineEndNone;
   }
   else {
@@ -9406,7 +9407,7 @@ void mxsr2msrTranslator::visitStart (S_bar_style& elt)
     fCurrentBarLineStyleKind =
       msrBarLine::kBarLineStyleShort;
   }
-  else if (barStyle == "none") {
+  else if (barStyle == "[NONE]") {
     fCurrentBarLineStyleKind =
       msrBarLine::kBarLineStyleNone;
   }
@@ -9839,7 +9840,7 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
       msrBarLine::kBarLineRepeatWingedNone; // default value
 
     if (winged.size ()) {
-      if       (winged == "none") {
+      if       (winged == "[NONE]") {
         fCurrentBarLineRepeatWingedKind =
           msrBarLine::kBarLineRepeatWingedNone;
       }
@@ -10250,13 +10251,13 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   fCurrentNoteOctave = msrOctaveKind::k_NoOctave;
 
-  fCurrentNoteSoundingWholeNotes             = rational (0, 1);
-  fCurrentNoteSoundingWholeNotesFromDuration = rational (0, 1);
+  fCurrentNoteSoundingWholeNotes             = Rational (0, 1);
+  fCurrentNoteSoundingWholeNotesFromDuration = Rational (0, 1);
 
   fCurrentDisplayDiatonicPitchKind      = msrDiatonicPitchKind::k_NoDiatonicPitch;
   fCurrentDisplayOctave                 = msrOctaveKind::k_NoOctave;
-  fCurrentNoteDisplayWholeNotes         = rational (0, 1);
-  fCurrentNoteDisplayWholeNotesFromType = rational (0, 1);
+  fCurrentNoteDisplayWholeNotes         = Rational (0, 1);
+  fCurrentNoteDisplayWholeNotesFromType = Rational (0, 1);
 
   // note head
 
@@ -10277,7 +10278,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // harmonies
 
-  fCurrentHarmonyWholeNotesOffset = rational (0, 1);
+  fCurrentHarmonyWholeNotesOffset = Rational (0, 1);
 
   // lyrics
 
@@ -10534,10 +10535,9 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
     // set current grace note whole notes
     fCurrentNoteSoundingWholeNotesFromDuration =
-      rational (
+      Rational (
         duration,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
-    fCurrentNoteSoundingWholeNotesFromDuration.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
@@ -10568,10 +10568,9 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
     // set current figured bass sounding whole notes
     fCurrentFiguredBassSoundingWholeNotes =
-      rational (
+      Rational (
         duration,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
-    fCurrentFiguredBassSoundingWholeNotes.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -10584,10 +10583,9 @@ void mxsr2msrTranslator::visitStart (S_duration& elt)
 
     // set current figured bass display whole notes
     fCurrentFiguredBassDisplayWholeNotes =
-      rational (
+      Rational (
         duration,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
-    fCurrentFiguredBassDisplayWholeNotes.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -10788,7 +10786,7 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
       fCurrentNoteHeadKind = msrNote::kNoteHeadLeftTriangle; }
     else if (noteHead == "rectangle") {
       fCurrentNoteHeadKind = msrNote::kNoteHeadRectangle; }
-    else if (noteHead == "none") {
+    else if (noteHead == "[NONE]") {
       fCurrentNoteHeadKind = msrNote::kNoteHeadNone; }
     else if (noteHead == "do") {
       fCurrentNoteHeadKind = msrNote::kNoteHeadDo; }
@@ -11090,7 +11088,7 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
   else if (stem == "down")
     stemKind = msrStem::kStemDown;
 
-  else if (stem == "none")
+  else if (stem == "[NONE]")
     stemKind = msrStem::kStemNeutral;
 
   else if (stem == "double")
@@ -16391,7 +16389,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     else if (tupletShowNumber == "both") {
       fCurrentTupletShowNumberKind = msrTuplet::kTupletShowNumberBoth;
     }
-    else if (tupletShowNumber == "none") {
+    else if (tupletShowNumber == "[NONE]") {
       fCurrentTupletShowNumberKind = msrTuplet::kTupletShowNumberNone;
     }
     else {
@@ -16418,7 +16416,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     else if (tupletShowType == "both") {
       fCurrentTupletShowTypeKind = msrTuplet::kTupletShowTypeBoth;
     }
-    else if (tupletShowType == "none") {
+    else if (tupletShowType == "[NONE]") {
       fCurrentTupletShowTypeKind = msrTuplet::kTupletShowTypeNone;
     }
     else {
@@ -17103,7 +17101,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
     }
     else {
       gLogStream <<
-        "none";
+        "[NONE]";
     }
   }
 #endif
@@ -18457,15 +18455,13 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
 #endif
 
   // account for note duration
-  rational
+  Rational
     memberNotesSoundingWholeNotes =
       firstNote->getMeasureElementSoundingWholeNotes ();
-  memberNotesSoundingWholeNotes.rationalise ();
 
-  rational
+  Rational
     memberNotesDisplayWholeNotes =
       firstNote->getNoteDisplayWholeNotes ();
-  memberNotesDisplayWholeNotes.rationalise ();
 
   S_msrTuplet
     tuplet =
@@ -20852,9 +20848,9 @@ S_msrNote mxsr2msrTranslator::createNote (
 
       // take dots into account if any
       if (fCurrentNoteDotsNumber > 0) {
-        rational
+        Rational
           wholeNotesIncrement =
-            fCurrentNoteDisplayWholeNotesFromType * rational (1, 2);
+            fCurrentNoteDisplayWholeNotesFromType * Rational (1, 2);
         int
           dots =
             fCurrentNoteDotsNumber;
@@ -20863,7 +20859,7 @@ S_msrNote mxsr2msrTranslator::createNote (
           fCurrentNoteDisplayWholeNotesFromType +=
             wholeNotesIncrement;
 
-          wholeNotesIncrement *= rational (1, 2);
+          wholeNotesIncrement *= Rational (1, 2);
 
           --dots;
 
@@ -20885,8 +20881,6 @@ S_msrNote mxsr2msrTranslator::createNote (
           }
 #endif
         } // while
-
-        fCurrentNoteDisplayWholeNotesFromType.rationalise ();
       }
 
 #ifdef TRACING_IS_ENABLED
@@ -21716,12 +21710,11 @@ void mxsr2msrTranslator::handleBackup (
     inputLineNumber);
 
   // compute the backup step length
-  rational
+  Rational
     backupStepLength =
-      rational (
+      Rational (
         fCurrentBackupDivisions,
         fCurrentDivisionsPerQuarterNote * 4); // hence a whole note
-  backupStepLength.rationalise ();
 
   // let fCurrentPart handle the backup
   fCurrentPart->
@@ -22017,7 +22010,7 @@ void mxsr2msrTranslator::handlePendingHarmonies (
   }
 #endif
 
-  rational
+  Rational
     newNoteSoundingWholeNotes =
       newNote->
         getMeasureElementSoundingWholeNotes (),
@@ -22121,7 +22114,7 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
   }
 #endif
 
-  rational
+  Rational
     newNoteSoundingWholeNotes =
       newNote->
         getMeasureElementSoundingWholeNotes (),
@@ -24141,7 +24134,7 @@ void mxsr2msrTranslator::displayLastHandledTupletInVoiceMap (const string& heade
 
   if (! fLastHandledTupletInVoiceMap.size ()) {
     gLogStream <<
-      " none" <<
+      " [NONE]" <<
       endl;
   }
 
@@ -24438,7 +24431,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
     rehearsalKind =
       msrRehearsalMark::kNone; // default value
 
-  if      (rehearsalEnclosure == "none") {
+  if      (rehearsalEnclosure == "[NONE]") {
     rehearsalKind = msrRehearsalMark::kNone;
   }
   else if (rehearsalEnclosure == "rectangle") {
@@ -24537,7 +24530,7 @@ void mxsr2msrTranslator::visitStart (S_harmony& elt)
   fCurrentHarmonyDegreeValue           = -1;
   fCurrentHarmonyDegreeAlterationKind  = msrAlterationKind::kAlterationNatural;
 
-  fCurrentHarmonyWholeNotesOffset = rational (0, 1);
+  fCurrentHarmonyWholeNotesOffset = Rational (0, 1);
 
   fOnGoingHarmony = true;
 }
@@ -24725,7 +24718,7 @@ void mxsr2msrTranslator::visitStart (S_kind& elt)
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyTristan;
   else if (kind == "other")
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyOther;
-  else if (kind == "none") {
+  else if (kind == "[NONE]") {
     fCurrentHarmonyKind = msrHarmonyKind::kHarmonyNone;
   }
 
@@ -25254,9 +25247,9 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 
           fCurrentHarmonyBassQuarterTonesPitchKind,
 
-          rational (1, 1),            // harmonySoundingWholeNotes,
+          Rational (1, 1),            // harmonySoundingWholeNotes,
                                       // will be set upon next note handling
-          rational (1, 1),            // harmonyDisplayWholeNotes,
+          Rational (1, 1),            // harmonyDisplayWholeNotes,
                                       // will be set upon next note handling
           fCurrentHarmoniesStaffNumber,
           msrTupletFactor (1, 1),     // will be set upon next note handling
@@ -25634,8 +25627,8 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
   fCurrentFigurePrefixKind = msrBassFigure::k_NoFigurePrefix;
   fCurrentFigureSuffixKind = msrBassFigure::k_NoFigureSuffix;
 
-  fCurrentFiguredBassSoundingWholeNotes = rational (0, 1);
-  fCurrentFiguredBassDisplayWholeNotes  = rational (0, 1);
+  fCurrentFiguredBassSoundingWholeNotes = Rational (0, 1);
+  fCurrentFiguredBassDisplayWholeNotes  = Rational (0, 1);
 
   fOnGoingFiguredBass = true;
 }

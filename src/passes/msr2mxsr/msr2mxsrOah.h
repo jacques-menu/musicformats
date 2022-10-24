@@ -140,7 +140,7 @@ class EXP msr2mxsrOahGroup : public oahGroup
     string                fMovementNumber;
 };
 typedef SMARTP<msr2mxsrOahGroup> S_msr2mxsrOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msr2mxsrOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msr2mxsrOahGroup& elt);
 
 EXP extern S_msr2mxsrOahGroup gGlobalMsr2mxsrOahGroup;
 

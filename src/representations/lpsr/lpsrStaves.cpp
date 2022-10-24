@@ -120,7 +120,7 @@ void lpsrNewStaffgroupBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrNewStaffgroupBlock& nstf)
+ostream& operator << (ostream& os, const S_lpsrNewStaffgroupBlock& nstf)
 {
   nstf->print (os);
   return os;
@@ -216,7 +216,7 @@ void lpsrNewStaffTuningBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrNewStaffTuningBlock& nstf)
+ostream& operator << (ostream& os, const S_lpsrNewStaffTuningBlock& nstf)
 {
   nstf->print (os);
   return os;
@@ -311,7 +311,7 @@ void lpsrNewStaffBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrNewStaffBlock& nstf)
+ostream& operator << (ostream& os, const S_lpsrNewStaffBlock& nstf)
 {
   nstf->print (os);
   return os;
@@ -495,7 +495,7 @@ void lpsrStaffBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrStaffBlock& scr)
+ostream& operator << (ostream& os, const S_lpsrStaffBlock& scr)
 {
   scr->print (os);
   return os;

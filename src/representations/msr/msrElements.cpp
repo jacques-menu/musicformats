@@ -130,15 +130,15 @@ void msrElement::printSummary (ostream& os) const
   print (os);
 }
 
-ostream& operator<< (ostream& os, const S_msrElement& elt)
+ostream& operator << (ostream& os, const S_msrElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

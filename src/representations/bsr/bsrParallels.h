@@ -100,7 +100,7 @@ class EXP bsrParallel : public bsrElement
                           fParallelElementsList;
 };
 typedef SMARTP<bsrParallel> S_bsrParallel;
-EXP ostream& operator<< (ostream& os, const S_bsrParallel& elt);
+EXP ostream& operator << (ostream& os, const S_bsrParallel& elt);
 
 
 }

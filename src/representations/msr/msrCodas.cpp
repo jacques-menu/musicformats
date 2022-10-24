@@ -50,7 +50,7 @@ string codaKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrCodaKind& elt)
+ostream& operator << (ostream& os, const msrCodaKind& elt)
 {
   os << codaKindAsString (elt);
   return os;
@@ -150,13 +150,13 @@ void msrCoda::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrCoda& elt)
+ostream& operator << (ostream& os, const S_msrCoda& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

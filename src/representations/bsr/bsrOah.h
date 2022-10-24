@@ -116,7 +116,7 @@ class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue
     bsrFacSimileKind      fBsrFacSimileKindVariable;
 };
 typedef SMARTP<bsrFacSimileKindAtom> S_bsrFacSimileKindAtom;
-EXP ostream& operator<< (ostream& os, const S_bsrFacSimileKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_bsrFacSimileKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP bsrTextsLanguageAtom : public oahAtomStoringAValue
@@ -203,7 +203,7 @@ class EXP bsrTextsLanguageAtom : public oahAtomStoringAValue
     bsrTextsLanguageKind& fBsrTextsLanguageKindVariable;
 };
 typedef SMARTP<bsrTextsLanguageAtom> S_bsrTextsLanguageAtom;
-EXP ostream& operator<< (ostream& os, const S_bsrTextsLanguageAtom& elt);
+EXP ostream& operator << (ostream& os, const S_bsrTextsLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP bsrOahGroup : public oahGroup
@@ -418,7 +418,7 @@ class EXP bsrOahGroup : public oahGroup
 #endif
 };
 typedef SMARTP<bsrOahGroup> S_bsrOahGroup;
-EXP ostream& operator<< (ostream& os, const S_bsrOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_bsrOahGroup& elt);
 
 EXP extern S_bsrOahGroup gGlobalBsrOahGroup;
 

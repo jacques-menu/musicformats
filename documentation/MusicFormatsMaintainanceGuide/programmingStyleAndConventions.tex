@@ -370,7 +370,7 @@ class EXP waeHandler : public smartable
     // ------------------------------------------------------
 };
 typedef SMARTP<waeHandler> S_waeHandler;
-EXP ostream& operator<< (ostream& os, const S_waeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_waeHandler& elt);
 \end{lstlisting}
 
 The creation of the instances in \wae{waeHandlers.cpp} is done with:
@@ -408,10 +408,10 @@ In {\tt *.h} files, the classes declarations contain all of part of the followin
 
 A work method is used internally by the class, while a work field is one that evolves as the class contents is populated.
 
-Most class declarations are followed by a smart pointer type and a {\tt operator<<}, such as:
+Most class declarations are followed by a smart pointer type and a {\tt operator <<}, such as:
 \begin{lstlisting}[language=CPlusPlus]
 typedef SMARTP<msrHarmonyDegree> S_msrHarmonyDegree;
-EXP ostream& operator<< (ostream& os, const S_msrHarmonyDegree& elt);
+EXP ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt);
 \end{lstlisting}
 
 The same order for constructors, destructor and methods is followed in most {\tt .cpp} files.
@@ -840,7 +840,7 @@ Many enumerations names end in '{\tt Kind}', which is a way distinguish them fro
 
 Enumeration constants in the form {\tt k_No*} are used to indicate a value that \MainIt{has not been set yet}. There are always the first on in the corresponding enumeration, to benefit from the the \CPlusplus\ implicit \initialization\  to the the equivalent of 0.
 
-An enumeration constant may end in '{\tt None}', meaning that {\tt "none"} is actually a possible value for the corresponding type:
+An enumeration constant may end in '{\tt None}', meaning that {\tt "[NONE]"} is actually a possible value for the corresponding type:
 \begin{lstlisting}[language=CPlusPlus]
     // repeat winged
     enum msrBarLineRepeatWingedKind {
@@ -863,7 +863,7 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
       msrBarLine::kBarLineRepeatWingedNone; // default value
 
     if (winged.size ()) {
-      if       (winged == "none") {
+      if       (winged == "[NONE]") {
         fCurrentBarLineRepeatWingedKind =
           msrBarLine::kBarLineRepeatWingedNone;
       }
@@ -914,7 +914,7 @@ enum class msrChordInKind {
 EXP string msrChordInKindAsString (
   msrChordInKind chordInKind);
 
-ostream& operator<< (ostream& os, const msrChordInKind& elt);
+ostream& operator << (ostream& os, const msrChordInKind& elt);
 \end{lstlisting}
 
 The implementation is:
@@ -942,7 +942,7 @@ string msrChordInKindAsString (
   return result;
 }
 
-ostream& operator<< (ostream& os, const msrChordInKind& elt)
+ostream& operator << (ostream& os, const msrChordInKind& elt)
 {
   os << msrChordInKindAsString (elt);
   return os;
@@ -1012,7 +1012,7 @@ Bool mfOnOffKindAsBool (
 string mfOnOffKindAsString (
   mfOnOffKind onOffKind);
 
-ostream& operator<< (ostream& os, const mfOnOffKind elt);
+ostream& operator << (ostream& os, const mfOnOffKind elt);
 \end{lstlisting}
 
 This is the case for example of page ragging information in \lpsr{lpsr/lpsrPapers.h}:
@@ -1233,7 +1233,7 @@ class EXP rational {
         long int fNumerator;
         long int fDenominator;
 
-        // Used by rationalise()
+        // Used by rationalize()
         long int gcd(long int a, long int b);
 
     public:

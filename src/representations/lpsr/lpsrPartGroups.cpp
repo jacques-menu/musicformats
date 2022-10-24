@@ -155,7 +155,7 @@ void lpsrPartGroupBlock::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrPartGroupBlock& scr)
+ostream& operator << (ostream& os, const S_lpsrPartGroupBlock& scr)
 {
   scr->print (os);
   return os;

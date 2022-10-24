@@ -26,13 +26,13 @@ msrVoiceElement::msrVoiceElement (
 msrVoiceElement::~msrVoiceElement ()
 {}
 
-ostream& operator<< (ostream& os, const S_msrVoiceElement& elt)
+ostream& operator << (ostream& os, const S_msrVoiceElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

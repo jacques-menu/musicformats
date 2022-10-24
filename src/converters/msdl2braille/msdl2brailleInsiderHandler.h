@@ -99,7 +99,7 @@ class EXP msdl2brailleInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<msdl2brailleInsiderHandler> S_msdl2brailleInsiderHandler;
-EXP ostream& operator<< (ostream& os, const S_msdl2brailleInsiderHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdl2brailleInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msdl2brailleInsiderOahGroup : public oahGroup
@@ -204,7 +204,7 @@ class EXP msdl2brailleInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass4;
 };
 typedef SMARTP<msdl2brailleInsiderOahGroup> S_msdl2brailleInsiderOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msdl2brailleInsiderOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msdl2brailleInsiderOahGroup& elt);
 
 EXP extern S_msdl2brailleInsiderOahGroup gGlobalMsdl2brlInsiderOahGroup;
 

@@ -397,7 +397,7 @@ S_msrPart createPartInScore (
 if (false) { // JMI TEMP
   part->
     setPartShortestNoteDuration (
-      rational (1, 16));
+      Rational (1, 16));
 }
 
   return part;
@@ -511,8 +511,8 @@ S_msrMeasure createMeasureInVoice (
             measure1number,
             msrQuarterTonesPitchKind::kQTP_A_Natural,
             msrOctaveKind::kOctave4,
-            rational (1, 8), // soundingWholeNotes
-            rational (1, 8), // displayWholeNotes
+            Rational (1, 8), // soundingWholeNotes
+            Rational (1, 8), // displayWholeNotes
             0);              // dotsNumber
 
       // append the dynamic to the note

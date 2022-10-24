@@ -31,7 +31,7 @@ using namespace MusicXML2;
 using namespace MusicFormats;
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class ischemeDriver;
 
 //______________________________________________________________________________
@@ -103,7 +103,7 @@ class EXP ischemeOptionsBlock : public smartable
     vector<S_oahOption>   fOptionsBlockOptionsVector;
 };
 typedef SMARTP<ischemeOptionsBlock> S_ischemeOptionsBlock;
-EXP ostream& operator<< (ostream& os, const S_ischemeOptionsBlock& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeOptionsBlock& elt);
 
 //______________________________________________________________________________
 enum class ischemeInputNameKind {
@@ -115,7 +115,7 @@ enum class ischemeInputNameKind {
 string ischemeInputNameKindAsString (
   ischemeInputNameKind inputNameKind);
 
-ostream& operator<< (ostream& os, const ischemeInputNameKind& elt);
+ostream& operator << (ostream& os, const ischemeInputNameKind& elt);
 
 //______________________________________________________________________________
 class EXP ischemeInput : public smartable
@@ -221,7 +221,7 @@ class EXP ischemeInput : public smartable
                           fInputNamesToOptionsBlocksMap;
 };
 typedef SMARTP<ischemeInput> S_ischemeInput;
-EXP ostream& operator<< (ostream& os, const S_ischemeInput& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeInput& elt);
 
 //______________________________________________________________________________
 class EXP ischemeInputsTable : public smartable
@@ -292,7 +292,7 @@ class EXP ischemeInputsTable : public smartable
                           fInputsMap;
 };
 typedef SMARTP<ischemeInputsTable> S_ischemeInputsTable;
-EXP ostream& operator<< (ostream& os, const S_ischemeInputsTable& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeInputsTable& elt);
 
 //______________________________________________________________________________
 class EXP ischemeCaseInputStatement : public smartable
@@ -370,7 +370,7 @@ class EXP ischemeCaseInputStatement : public smartable
     set<string>           fCaseInputUnusedNames;
 };
 typedef SMARTP<ischemeCaseInputStatement> S_ischemeCaseInputStatement;
-EXP ostream& operator<< (ostream& os, const S_ischemeCaseInputStatement& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeCaseInputStatement& elt);
 
 //______________________________________________________________________________
 enum class ischemeChoiceLabelKind {
@@ -382,7 +382,7 @@ enum class ischemeChoiceLabelKind {
 string ischemeChoiceLabelKindAsString (
   ischemeChoiceLabelKind choiceLabelKind);
 
-ostream& operator<< (ostream& os, const ischemeChoiceLabelKind& elt);
+ostream& operator << (ostream& os, const ischemeChoiceLabelKind& elt);
 
 //______________________________________________________________________________
 class EXP ischemeChoice : public smartable
@@ -498,7 +498,7 @@ class EXP ischemeChoice : public smartable
                           fChoiceLabelsToOptionsBlocksMap;
 };
 typedef SMARTP<ischemeChoice> S_ischemeChoice;
-EXP ostream& operator<< (ostream& os, const S_ischemeChoice& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeChoice& elt);
 
 //______________________________________________________________________________
 class EXP ischemeChoicesTable : public smartable
@@ -569,7 +569,7 @@ class EXP ischemeChoicesTable : public smartable
                           fChoicesMap;
 };
 typedef SMARTP<ischemeChoicesTable> S_ischemeChoicesTable;
-EXP ostream& operator<< (ostream& os, const S_ischemeChoicesTable& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeChoicesTable& elt);
 
 //______________________________________________________________________________
 class EXP ischemeCaseChoiceStatement : public smartable
@@ -647,7 +647,7 @@ class EXP ischemeCaseChoiceStatement : public smartable
     set<string>           fCaseUnusedLabels;
 };
 typedef SMARTP<ischemeCaseChoiceStatement> S_ischemeCaseChoiceStatement;
-EXP ostream& operator<< (ostream& os, const S_ischemeCaseChoiceStatement& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeCaseChoiceStatement& elt);
 
 // // initialization
 // //______________________________________________________________________________

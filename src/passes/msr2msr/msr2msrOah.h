@@ -105,7 +105,7 @@ class EXP msrIgnorePartAtom : public oahAtomStoringAValue
     set<string>&          fStringSetVariable;
 };
 typedef SMARTP<msrIgnorePartAtom> S_msrIgnorePartAtom;
-EXP ostream& operator<< (ostream& os, const S_msrIgnorePartAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msrIgnorePartAtom& elt);
 
 //______________________________________________________________________________
 class EXP msrKeepPartAtom : public oahAtomStoringAValue
@@ -191,7 +191,7 @@ class EXP msrKeepPartAtom : public oahAtomStoringAValue
     set<string>&          fStringSetVariable;
 };
 typedef SMARTP<msrKeepPartAtom> S_msrKeepPartAtom;
-EXP ostream& operator<< (ostream& os, const S_msrKeepPartAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msrKeepPartAtom& elt);
 
 //______________________________________________________________________________
 class EXP msr2msrOahGroup : public oahGroup
@@ -375,7 +375,7 @@ class EXP msr2msrOahGroup : public oahGroup
     Bool                  fCreateImplicitInitialRepeatBarLine;
 };
 typedef SMARTP<msr2msrOahGroup> S_msr2msrOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msr2msrOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msr2msrOahGroup& elt);
 
 EXP extern S_msr2msrOahGroup gGlobalMsr2msrOahGroup;
 

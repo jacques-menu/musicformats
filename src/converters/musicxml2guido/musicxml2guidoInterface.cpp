@@ -144,7 +144,7 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
   }
 
 
-  // populate the first MSR skeleton from MusicXML data (pass 2b)
+  // populate the MSR skeleton from MusicXML data (pass 2b)
   // ------------------------------------------------------
 
   try {
@@ -152,7 +152,7 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
       originalMxsr,
       firstMsrScore,
         "Pass 2b",
-        "Populate the first MSR skeleton from MusicXML data");
+        "Populate the MSR skeleton from MusicXML data");
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);

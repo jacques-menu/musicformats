@@ -34,7 +34,7 @@ enum class msrCreditTypeKind {
 string msrCreditTypeKindAsString (
   msrCreditTypeKind creditTypeKind);
 
-ostream& operator<< (ostream& os, const msrCreditTypeKind& elt);
+ostream& operator << (ostream& os, const msrCreditTypeKind& elt);
 
 //______________________________________________________________________________
 class EXP msrCreditWords : public msrElement
@@ -166,7 +166,7 @@ class EXP msrCreditWords : public msrElement
     msrXMLLangKind        fCreditWordsXMLLang;
 };
 typedef SMARTP<msrCreditWords> S_msrCreditWords;
-EXP ostream& operator<< (ostream& os, const S_msrCreditWords& elt);
+EXP ostream& operator << (ostream& os, const S_msrCreditWords& elt);
 
 //______________________________________________________________________________
 class EXP msrCredit : public msrElement
@@ -249,7 +249,7 @@ class EXP msrCredit : public msrElement
                           fCreditWordsList;
 };
 typedef SMARTP<msrCredit> S_msrCredit;
-EXP ostream& operator<< (ostream& os, const S_msrCredit& elt);
+EXP ostream& operator << (ostream& os, const S_msrCredit& elt);
 
 
 } // namespace MusicFormats

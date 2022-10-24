@@ -329,7 +329,7 @@ void msrMeasureRepeatElement::print (ostream& os) const
       ")";
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -388,7 +388,7 @@ void msrMeasureRepeatElement::printShort (ostream& os) const
       ")";
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -415,13 +415,13 @@ void msrMeasureRepeatElement::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrMeasureRepeatElement& elt)
+ostream& operator << (ostream& os, const S_msrMeasureRepeatElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -592,7 +592,7 @@ void msrMeasureRepeatPattern::print (ostream& os) const
 
   if (! fMeasureRepeatPatternSegment) {
     os <<
-      " none" <<
+      " [NONE]" <<
       endl;
   }
   else {
@@ -611,13 +611,13 @@ void msrMeasureRepeatPattern::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrMeasureRepeatPattern& elt)
+ostream& operator << (ostream& os, const S_msrMeasureRepeatPattern& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -787,7 +787,7 @@ void msrMeasureRepeatReplicas::print (ostream& os) const
 
   if (! fMeasureRepeatReplicasSegment) {
     os <<
-      " none" <<
+      " [NONE]" <<
       endl;
   }
   else {
@@ -806,13 +806,13 @@ void msrMeasureRepeatReplicas::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrMeasureRepeatReplicas& elt)
+ostream& operator << (ostream& os, const S_msrMeasureRepeatReplicas& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -1220,7 +1220,7 @@ void msrMeasureRepeat::print (ostream& os) const
   // print the measures repeat pattern
   if (! fMeasureRepeatPattern) {
     os <<
-      "measures repeat pattern: none" <<
+      "measures repeat pattern: [NONE]" <<
       endl;
   }
 
@@ -1232,7 +1232,7 @@ void msrMeasureRepeat::print (ostream& os) const
   // print the measures repeat replicas
   if (! fMeasureRepeatReplicas) {
     os <<
-      "measures repeat replicas: none" <<
+      "measures repeat replicas: [NONE]" <<
       endl;
   }
 
@@ -1251,13 +1251,13 @@ void msrMeasureRepeat::printShort (ostream& os) const
   print (os);
 }
 
-ostream& operator<< (ostream& os, const S_msrMeasureRepeat& elt)
+ostream& operator << (ostream& os, const S_msrMeasureRepeat& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

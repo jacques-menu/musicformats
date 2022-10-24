@@ -114,7 +114,7 @@ class EXP msdlKeywordsLanguageAtom : public oahAtomStoringAValue
                           fMsdlKeywordsLanguageKindVariable;
 };
 typedef SMARTP<msdlKeywordsLanguageAtom> S_msdlKeywordsLanguageAtom;
-EXP ostream& operator<< (ostream& os, const S_msdlKeywordsLanguageAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msdlKeywordsLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahDisplayMsdlKeywordsInLanguageAtom : public oahPureHelpAtomExpectingAValue
@@ -185,7 +185,7 @@ class EXP oahDisplayMsdlKeywordsInLanguageAtom : public oahPureHelpAtomExpecting
     // ------------------------------------------------------
 };
 typedef SMARTP<oahDisplayMsdlKeywordsInLanguageAtom> S_oahDisplayMsdlKeywordsInLanguageAtom;
-EXP ostream& operator<< (ostream& os, const S_oahDisplayMsdlKeywordsInLanguageAtom& elt);
+EXP ostream& operator << (ostream& os, const S_oahDisplayMsdlKeywordsInLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahDisplayMsdlTokensInLanguageAtom : public oahPureHelpAtomExpectingAValue
@@ -256,7 +256,7 @@ class EXP oahDisplayMsdlTokensInLanguageAtom : public oahPureHelpAtomExpectingAV
     // ------------------------------------------------------
 };
 typedef SMARTP<oahDisplayMsdlTokensInLanguageAtom> S_oahDisplayMsdlTokensInLanguageAtom;
-EXP ostream& operator<< (ostream& os, const S_oahDisplayMsdlTokensInLanguageAtom& elt);
+EXP ostream& operator << (ostream& os, const S_oahDisplayMsdlTokensInLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP msdlCommentsTypeAtom : public oahAtomStoringAValue
@@ -343,7 +343,7 @@ class EXP msdlCommentsTypeAtom : public oahAtomStoringAValue
     msdlCommentsTypeKind& fMsdlCommentsTypeKindVariable;
 };
 typedef SMARTP<msdlCommentsTypeAtom> S_msdlCommentsTypeAtom;
-EXP ostream& operator<< (ostream& os, const S_msdlCommentsTypeAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msdlCommentsTypeAtom& elt);
 
 //______________________________________________________________________________
 class EXP msdlUserLanguageAtom : public oahAtomStoringAValue
@@ -431,7 +431,7 @@ class EXP msdlUserLanguageAtom : public oahAtomStoringAValue
                           fMsdlUserLanguageVariable;
 };
 typedef SMARTP<msdlUserLanguageAtom> S_msdlUserLanguageAtom;
-EXP ostream& operator<< (ostream& os, const S_msdlUserLanguageAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msdlUserLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP msdlPitchesLanguageAtom : public oahAtomStoringAValue
@@ -519,7 +519,7 @@ class EXP msdlPitchesLanguageAtom : public oahAtomStoringAValue
                           fMsrQuarterTonesPitchesLanguageKindVariable;
 };
 typedef SMARTP<msdlPitchesLanguageAtom> S_msdlPitchesLanguageAtom;
-EXP ostream& operator<< (ostream& os, const S_msdlPitchesLanguageAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msdlPitchesLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP msdlInputOahGroup : public oahGroup
@@ -640,7 +640,7 @@ class EXP msdlInputOahGroup : public oahGroup
                           fMsdlQuarterTonesPitchesLanguageKind;
 };
 typedef SMARTP<msdlInputOahGroup> S_msdlInputOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msdlInputOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msdlInputOahGroup& elt);
 
 EXP extern S_msdlInputOahGroup gGlobalMsdlInputOahGroup;
 

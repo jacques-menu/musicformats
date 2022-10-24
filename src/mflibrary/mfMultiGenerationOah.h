@@ -45,7 +45,7 @@ enum class mfMultiGenerationOutputKind {
 EXP extern string mfMultiGenerationOutputKindAsString (
   mfMultiGenerationOutputKind multiGenerationOutputKind);
 
-ostream& operator<< (ostream& os, mfMultiGenerationOutputKind& elt);
+ostream& operator << (ostream& os, mfMultiGenerationOutputKind& elt);
 
 EXP extern mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
   const string& theString);
@@ -149,7 +149,7 @@ class EXP mfMultiGenerationOutputKindAtom : public oahAtomImplicitlyStoringAValu
                           fMultiGenerationOutputKindValue;
 };
 typedef SMARTP<mfMultiGenerationOutputKindAtom> S_mfMultiGenerationOutputKindAtom;
-EXP ostream& operator<< (ostream& os, const S_mfMultiGenerationOutputKindAtom& elt);
+EXP ostream& operator << (ostream& os, const S_mfMultiGenerationOutputKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP mfMultiGenerationOahGroup : public oahGroup
@@ -228,7 +228,7 @@ class EXP mfMultiGenerationOahGroup : public oahGroup
                           fMultiGenerationOutputKindAtom;
 };
 typedef SMARTP<mfMultiGenerationOahGroup> S_multiGenerationOahGroup;
-EXP ostream& operator<< (ostream& os, const S_multiGenerationOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_multiGenerationOahGroup& elt);
 
 EXP extern S_multiGenerationOahGroup gGlobalMultiGenerationOahGroup;
 

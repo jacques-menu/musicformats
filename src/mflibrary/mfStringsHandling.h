@@ -125,7 +125,7 @@ namespace MusicFormats
 // EXP mfMultiLineString operator|| (const mfMultiLineString& leftmfMultiLineString, const bool& themfMultiLineString);
 // EXP mfMultiLineString operator|| (const bool& themfMultiLineString, const mfMultiLineString& rightmfMultiLineString);
 //
-// EXP ostream& operator<< (ostream& os, const mfMultiLineString& themfMultiLineString);
+// EXP ostream& operator << (ostream& os, const mfMultiLineString& themfMultiLineString);
 
 //______________________________________________________________________________
 struct mfStringQuoteEscaper

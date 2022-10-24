@@ -81,7 +81,7 @@ class EXP msdlScannerWaeHandler : public waeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerWaeHandler> S_msdlScannerWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlScannerWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlScannerWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerEnglishWaeHandler : public msdlScannerWaeHandler
@@ -142,7 +142,7 @@ class EXP msdlScannerEnglishWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerEnglishWaeHandler> S_msdlScannerEnglishWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlScannerEnglishWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlScannerEnglishWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerFrenchWaeHandler : public msdlScannerWaeHandler
@@ -203,7 +203,7 @@ class EXP msdlScannerFrenchWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerFrenchWaeHandler> S_msdlScannerFrenchWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlScannerFrenchWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlScannerFrenchWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerItalianWaeHandler : public msdlScannerWaeHandler
@@ -264,7 +264,7 @@ class EXP msdlScannerItalianWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerItalianWaeHandler> S_msdlScannerItalianWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlScannerItalianWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlScannerItalianWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerGermanWaeHandler : public msdlScannerWaeHandler
@@ -325,7 +325,7 @@ class EXP msdlScannerGermanWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerGermanWaeHandler> S_msdlScannerGermanWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlScannerGermanWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlScannerGermanWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerSpanishWaeHandler : public msdlScannerWaeHandler
@@ -386,7 +386,7 @@ class EXP msdlScannerSpanishWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerSpanishWaeHandler> S_msdlScannerSpanishWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlScannerSpanishWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlScannerSpanishWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlScannerDutchWaeHandler : public msdlScannerWaeHandler
@@ -447,7 +447,7 @@ class EXP msdlScannerDutchWaeHandler : public msdlScannerWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlScannerDutchWaeHandler> S_msdlScannerDutchWaeHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlScannerDutchWaeHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlScannerDutchWaeHandler& elt);
 
 
 }

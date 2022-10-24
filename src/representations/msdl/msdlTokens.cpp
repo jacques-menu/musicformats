@@ -826,13 +826,13 @@ void msdlTokenKindsSet::print (ostream& os) const
   }
 }
 
-ostream& operator<< (ostream& os, const S_msdlTokenKindsSet& elt)
+ostream& operator << (ostream& os, const S_msdlTokenKindsSet& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -1355,7 +1355,7 @@ void msdlTokenDescription::print (ostream& os) const
   os << "]";
 }
 
-ostream& operator<< (ostream& os, const msdlTokenDescription& elt)
+ostream& operator << (ostream& os, const msdlTokenDescription& elt)
 {
   elt.print (os);
   return os;
@@ -1949,7 +1949,7 @@ void msdlToken::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const msdlToken& elt)
+ostream& operator << (ostream& os, const msdlToken& elt)
 {
   elt.print (os);
   return os;
@@ -2023,13 +2023,13 @@ void msdlTokensList::print (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msdlTokensList& elt)
+ostream& operator << (ostream& os, const S_msdlTokensList& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

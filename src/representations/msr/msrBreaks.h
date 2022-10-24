@@ -28,7 +28,7 @@ enum class msrUserChosenLineBreakKind {
 string userChosenLineBreakKindAsString (
   msrUserChosenLineBreakKind userChosenLineBreakKind);
 
-ostream& operator<< (ostream& os, msrUserChosenLineBreakKind& elt);
+ostream& operator << (ostream& os, msrUserChosenLineBreakKind& elt);
 
 class EXP msrLineBreak : public msrMeasureElement
 {
@@ -103,7 +103,7 @@ class EXP msrLineBreak : public msrMeasureElement
                           fUserChosenLineBreakKind;
 };
 typedef SMARTP<msrLineBreak> S_msrLineBreak;
-EXP ostream& operator<< (ostream& os, const S_msrLineBreak& elt);
+EXP ostream& operator << (ostream& os, const S_msrLineBreak& elt);
 
 //______________________________________________________________________________
 enum class msrUserChosenPageBreakKind {
@@ -114,7 +114,7 @@ enum class msrUserChosenPageBreakKind {
 string userChosenPageBreakKindAsString (
   msrUserChosenPageBreakKind userChosenPageBreakKind);
 
-ostream& operator<< (ostream& os, msrUserChosenPageBreakKind& elt);
+ostream& operator << (ostream& os, msrUserChosenPageBreakKind& elt);
 
 class EXP msrPageBreak : public msrMeasureElement
 {
@@ -182,7 +182,7 @@ class EXP msrPageBreak : public msrMeasureElement
                           fUserChosenPageBreakKind;
 };
 typedef SMARTP<msrPageBreak> S_msrPageBreak;
-EXP ostream& operator<< (ostream& os, const S_msrPageBreak& elt);
+EXP ostream& operator << (ostream& os, const S_msrPageBreak& elt);
 
 
 } // namespace MusicFormats

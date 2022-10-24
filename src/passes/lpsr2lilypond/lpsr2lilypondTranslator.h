@@ -100,7 +100,7 @@ struct lpsrRepeatDescr : public smartable
     Bool                  fEndOfRepeatHasBeenGenerated;
 };
 typedef SMARTP<lpsrRepeatDescr> S_lpsrRepeatDescr;
-EXP ostream& operator<< (ostream& os, S_lpsrRepeatDescr& elt);
+EXP ostream& operator << (ostream& os, S_lpsrRepeatDescr& elt);
 
 //________________________________________________________________________
 class EXP lpsr2lilypondTranslator :
@@ -783,11 +783,11 @@ class EXP lpsr2lilypondTranslator :
 
     // durations
 
-    rational              fLastMetWholeNotes;
+    Rational              fLastMetWholeNotes;
 
     string                durationAsLilypondString (
                             int             inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
     string                msrDurationKindAsLilypondString (
                             msrDurationKind durationKind);

@@ -37,7 +37,7 @@ class EXP msrSegmentElement : public msrElement
 
     static const string K_NO_MEASURE_NUMBER;
 
-    static const rational K_NO_WHOLE_NOTES;
+    static const Rational K_NO_WHOLE_NOTES;
 
   protected:
 
@@ -55,48 +55,48 @@ class EXP msrSegmentElement : public msrElement
     // ------------------------------------------------------
 
     void                  setSegmentElementSoundingWholeNotes (
-                            const rational& wholeNotes,
+                            const Rational& wholeNotes,
                             const string&   context);
 
-    rational              getSegmentElementSoundingWholeNotes () const
+    Rational              getSegmentElementSoundingWholeNotes () const
                               { return fSegmentElementSoundingWholeNotes; }
 
-    void                  setSegmentElementMeasureNumber (
-                            const string& positionInMeasure)
-                              {
-                                fSegmentElementMeasureNumber = positionInMeasure;
-                              }
-
-    string                getSegmentElementMeasureNumber () const
-                              { return fSegmentElementMeasureNumber; }
-
-    void                  setSegmentElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context); // v0.9.66 PIM
-
-    rational              getSegmentElementPositionInMeasure () const
-                              { return fSegmentElementPositionInMeasure; }
-
-    void                  setSegmentElementPositionInVoice (
-                            const rational& positionInVoice,
-                            const string&   context);
-
-    rational              getSegmentElementPositionInVoice () const
-                              { return fSegmentElementPositionInVoice; }
-
-    void                  setSegmentElementMomentInMeasure (
-                            const msrMoment& momentInMeasure,
-                            const string&    context);
-
-    const msrMoment&      getSegmentElementMomentInMeasure () const
-                              { return fSegmentElementMomentInMeasure; }
-
-    void                  setSegmentElementMomentInVoice (
-                            const msrMoment& momentInVoice,
-                            const string&    context);
-
-    const msrMoment&      getSegmentElementMomentInVoice () const
-                              { return fSegmentElementMomentInVoice; }
+//     void                  setSegmentElementMeasureNumber (
+//                             const string& positionInMeasure)
+//                               {
+//                                 fSegmentElementMeasureNumber = positionInMeasure;
+//                               }
+//
+//     string                getSegmentElementMeasureNumber () const
+//                               { return fSegmentElementMeasureNumber; }
+//
+//     void                  setSegmentElementPositionInMeasure (
+//                             const Rational& positionInMeasure,
+//                             const string&   context); // v0.9.66 PIM
+//
+//     Rational              getSegmentElementPositionInMeasure () const
+//                               { return fSegmentElementPositionInMeasure; }
+//
+//     void                  setSegmentElementPositionFromBeginningOfVoice (
+//                             const Rational& positionFromBeginningOfVoice,
+//                             const string&   context);
+//
+//     Rational              getSegmentElementPositionFromBeginningOfVoice () const
+//                               { return fSegmentElementPositionFromBeginningOfVoice; }
+//
+//     void                  setSegmentElementMomentInMeasure (
+//                             const msrMoment& momentInMeasure,
+//                             const string&    context);
+//
+//     const msrMoment&      getSegmentElementMomentInMeasure () const
+//                               { return fSegmentElementMomentInMeasure; }
+//
+//     void                  setSegmentElementMomentFromBeginningOfVoice (
+//                             const msrMoment& momentFromBeginningOfVoice,
+//                             const string&    context);
+//
+//     const msrMoment&      getSegmentElementMomentFromBeginningOfVoice () const
+//                               { return fSegmentElementMomentFromBeginningOfVoice; }
 
   public:
 
@@ -106,13 +106,13 @@ class EXP msrSegmentElement : public msrElement
     virtual void          appendMeasureElementToSegmentElement (
                             S_msrMeasureElement elem) = 0;
 
-    static bool           compareSegmentElementsByIncreasingPositionInMeasure (
-                            const SMARTP<msrSegmentElement>& first,
-                            const SMARTP<msrSegmentElement>& second);
-
-    virtual void          assignSegmentElementPositionInVoice (
-                            rational&     positionInVoice,
-                            const string& context);
+//     static bool           compareSegmentElementsByIncreasingPositionInMeasure (
+//                             const SMARTP<msrSegmentElement>& first,
+//                             const SMARTP<msrSegmentElement>& second);
+//
+//     virtual void          assignSegmentElementPositionFromBeginningOfVoice (
+//                             Rational&     positionFromBeginningOfVoice,
+//                             const string& context);
 
   public:
 
@@ -147,18 +147,18 @@ class EXP msrSegmentElement : public msrElement
       to allow for separate *.h files, C++ constraint
     */
 
-    rational              fSegmentElementSoundingWholeNotes;
+    Rational              fSegmentElementSoundingWholeNotes;
 
-    string                fSegmentElementMeasureNumber;
-
-    rational              fSegmentElementPositionInMeasure;
-    rational              fSegmentElementPositionInVoice;
-
-    msrMoment             fSegmentElementMomentInMeasure;
-    msrMoment             fSegmentElementMomentInVoice;
+//     string                fSegmentElementMeasureNumber;
+//
+//     Rational              fSegmentElementPositionInMeasure;
+//     Rational              fSegmentElementPositionFromBeginningOfVoice;
+//
+//     msrMoment             fSegmentElementMomentInMeasure;
+//     msrMoment             fSegmentElementMomentFromBeginningOfVoice;
 };
 typedef SMARTP<msrSegmentElement> S_msrSegmentElement;
-EXP ostream& operator<< (ostream& os, const S_msrSegmentElement& elt);
+EXP ostream& operator << (ostream& os, const S_msrSegmentElement& elt);
 
 
 } // namespace MusicFormats

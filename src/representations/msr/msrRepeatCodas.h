@@ -90,7 +90,7 @@ class EXP msrRepeatCoda : public msrElement
     S_msrRepeat           fRepeatCodaUpLinkToRepeat;
 };
 typedef SMARTP<msrRepeatCoda> S_msrRepeatCoda;
-EXP ostream& operator<< (ostream& os, const S_msrRepeatCoda& elt);
+EXP ostream& operator << (ostream& os, const S_msrRepeatCoda& elt);
 
 
 }

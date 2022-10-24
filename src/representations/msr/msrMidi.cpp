@@ -156,13 +156,13 @@ void msrMidiTempo::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrMidiTempo& elt)
+ostream& operator << (ostream& os, const S_msrMidiTempo& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

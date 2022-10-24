@@ -19,6 +19,10 @@
 
 namespace MusicFormats
 {
+//______________________________________________________________________________
+// PRE-declarations for classes mutual dependencies
+class msrMeasure;
+typedef SMARTP<msrMeasure> S_msrMeasure;
 
 //______________________________________________________________________________
 /*
@@ -35,7 +39,7 @@ class EXP msrMeasureElement : public msrElement
 
     static const string K_NO_MEASURE_NUMBER;
 
-    static const rational K_NO_WHOLE_NOTES;
+    static const Rational K_NO_WHOLE_NOTES;
 
   protected:
 
@@ -53,10 +57,10 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
     void                  setMeasureElementSoundingWholeNotes (
-                            const rational& wholeNotes,
+                            const Rational& wholeNotes,
                             const string&   context);
 
-    rational              getMeasureElementSoundingWholeNotes () const
+    Rational              getMeasureElementSoundingWholeNotes () const
                               { return fMeasureElementSoundingWholeNotes; }
 
     void                  setMeasureElementMeasureNumber (
@@ -65,26 +69,30 @@ class EXP msrMeasureElement : public msrElement
                                 fMeasureElementMeasureNumber = positionInMeasure;
                               }
 
-    string                getMeasureElementMeasureNumber () const
+    string                getMeasureNumber () const
                               { return fMeasureElementMeasureNumber; }
 
-    // this method is overridden in sub-classes for time signatures,
-    // harmonies and figured bass elements,
-    // as well as those elements that have an actual whole notes duration,
-    // to provide context when debugging positions in measures computations
-    virtual void          setMeasureElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context);
+    // this method is overridden in sub-classes such as those for
+    // time signatures, harmonies and figured bass elements,
+    // as well as those elements that have an actual whole notes duration
 
-    rational              getMeasureElementPositionInMeasure () const
+    // the overrides call a class-specific method that can be called directly,
+    // such occurrence are more explicit when debugging
+    // the computations of positions in measures
+    virtual void          setMeasureElementPositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
+
+    Rational              getMeasureElementPositionInMeasure () const
                               { return fMeasureElementPositionInMeasure; }
 
-    void                  setMeasureElementPositionInVoice (
-                            const rational& positionInVoice,
+    void                  setMeasureElementPositionFromBeginningOfVoice (
+                            const Rational& positionFromBeginningOfVoice,
                             const string&   context);
 
-    rational              getMeasureElementPositionInVoice () const
-                              { return fMeasureElementPositionInVoice; }
+    Rational              getMeasureElementPositionFromBeginningOfVoice () const
+                              { return fMeasureElementPositionFromBeginningOfVoice; }
 
     void                  setMeasureElementMomentInMeasure (
                             const msrMoment& momentInMeasure,
@@ -93,12 +101,12 @@ class EXP msrMeasureElement : public msrElement
     const msrMoment&      getMeasureElementMomentInMeasure () const
                               { return fMeasureElementMomentInMeasure; }
 
-    void                  setMeasureElementMomentInVoice (
-                            const msrMoment& momentInVoice,
+    void                  setMeasureElementMomentFromBeginningOfVoice (
+                            const msrMoment& momentFromBeginningOfVoice,
                             const string&    context);
 
-    const msrMoment&      getMeasureElementMomentInVoice () const
-                              { return fMeasureElementMomentInVoice; }
+    const msrMoment&      getMeasureElementMomentFromBeginningOfVoice () const
+                              { return fMeasureElementMomentFromBeginningOfVoice; }
 
   public:
 
@@ -109,9 +117,9 @@ class EXP msrMeasureElement : public msrElement
                             const SMARTP<msrMeasureElement>& first,
                             const SMARTP<msrMeasureElement>& second);
 
-    virtual void          assignMeasureElementPositionInVoice (
-                            rational&     positionInVoice,
-                            const string& context);
+//     virtual void          assignMeasureElementPositionFromBeginningOfVoice ( // JMI v0.9.66 REMOVE
+//                             Rational&     positionFromBeginningOfVoice,
+//                             const string& context);
 
   public:
 
@@ -137,6 +145,15 @@ class EXP msrMeasureElement : public msrElement
 
   protected:
 
+    // protected methods
+    // ------------------------------------------------------
+
+    void                  doSetMeasureElementSoundingWholeNotes (
+                            const Rational& wholeNotes,
+                            const string&   context);
+
+  protected:
+
     // protected fields
     // ------------------------------------------------------
 
@@ -145,18 +162,18 @@ class EXP msrMeasureElement : public msrElement
       to allow for separate *.h files, C++ constraint
     */
 
-    rational              fMeasureElementSoundingWholeNotes;
+    Rational              fMeasureElementSoundingWholeNotes;
 
     string                fMeasureElementMeasureNumber;
 
-    rational              fMeasureElementPositionInMeasure;
-    rational              fMeasureElementPositionInVoice;
+    Rational              fMeasureElementPositionInMeasure;
+    Rational              fMeasureElementPositionFromBeginningOfVoice;
 
     msrMoment             fMeasureElementMomentInMeasure;
-    msrMoment             fMeasureElementMomentInVoice;
+    msrMoment             fMeasureElementMomentFromBeginningOfVoice;
 };
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
-EXP ostream& operator<< (ostream& os, const S_msrMeasureElement& elt);
+EXP ostream& operator << (ostream& os, const S_msrMeasureElement& elt);
 
 
 } // namespace MusicFormats

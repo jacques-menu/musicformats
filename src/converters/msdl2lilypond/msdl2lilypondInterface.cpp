@@ -134,7 +134,7 @@ mfMusicformatsError convertMsdlStream2lilypondWithHandler (
       s <<
         "Could not perform comversion of \"" <<
         inputSourceName <<
-        "\" to MSR, quitting";
+        "\" to MSR - quitting";
 
       string message = s.str ();
 
@@ -290,7 +290,7 @@ mfMusicformatsError convertMsdlStream2lilypondWithHandler (
       s <<
         "Could not open LilyPond output file \"" <<
         outputFileName <<
-        "\" for writing, quitting";
+        "\" for writing - quitting";
 
       string message = s.str ();
 
@@ -518,7 +518,7 @@ EXP mfMusicformatsError convertMsdlFile2lilypondWithOptionsAndArguments (
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
-      "\" for reading, quitting";
+      "\" for reading - quitting";
 
     string message = s.str ();
 
@@ -565,7 +565,7 @@ mfMusicformatsError convertMsdlFile2lilypondWithHandler (
     s <<
       "Could not open MSDL input file \"" <<
       fileName <<
-      "\" for reading, quitting";
+      "\" for reading - quitting";
 
     string message = s.str ();
 

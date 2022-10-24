@@ -224,7 +224,7 @@ void lpsrPaper::print (ostream& os) const
     os << fScaling;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -237,7 +237,7 @@ void lpsrPaper::print (ostream& os) const
     os << fPageLayout;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -250,7 +250,7 @@ void lpsrPaper::print (ostream& os) const
     os << fHorizontalShift;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 */
@@ -262,7 +262,7 @@ void lpsrPaper::print (ostream& os) const
     os << fIndent;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -273,7 +273,7 @@ void lpsrPaper::print (ostream& os) const
     os << fShortIndent;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -286,7 +286,7 @@ void lpsrPaper::print (ostream& os) const
     os << fMarkupSystemSpacingPadding;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -297,7 +297,7 @@ void lpsrPaper::print (ostream& os) const
     os << fBetweenSystemSpace;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -308,7 +308,7 @@ void lpsrPaper::print (ostream& os) const
     os << fPageTopSpacing;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -321,7 +321,7 @@ void lpsrPaper::print (ostream& os) const
     os << fPageCount;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -332,7 +332,7 @@ void lpsrPaper::print (ostream& os) const
     os << fSystemCount;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -404,7 +404,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fScaling;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -417,7 +417,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fPageLayout;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -430,7 +430,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fHorizontalShift;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -441,7 +441,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fIndent;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -452,7 +452,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fShortIndent;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -465,7 +465,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fMarkupSystemSpacingPadding;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -476,7 +476,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fBetweenSystemSpace;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -487,7 +487,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fPageTopSpacing;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -500,7 +500,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fPageCount;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -511,7 +511,7 @@ void lpsrPaper::printShort (ostream& os) const
     os << fSystemCount;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -564,7 +564,7 @@ void lpsrPaper::printShort (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_lpsrPaper& pap) {
+ostream& operator << (ostream& os, const S_lpsrPaper& pap) {
   pap->print (os);
   return os;
 }

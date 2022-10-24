@@ -182,7 +182,7 @@ class EXP msdlConverterRegularHandler : public oahRegularHandler
                           fMultiGenerationOutputKind;
 };
 typedef SMARTP<msdlConverterRegularHandler> S_msdlConverterRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_msdlConverterRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdlConverterRegularHandler& elt);
 
 
 }

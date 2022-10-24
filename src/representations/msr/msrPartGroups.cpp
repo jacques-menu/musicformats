@@ -757,7 +757,7 @@ void msrPartGroup::printPartGroupElementsList (
   }
 
   else {
-    os << ' ' << "none" << endl;
+    os << ' ' << "[NONE]" << endl;
   }
 }
 
@@ -834,7 +834,7 @@ void msrPartGroup::printPartGroupElementsListShort (
   }
 
   else {
-    os << ' ' << "none" << endl;
+    os << ' ' << "[NONE]" << endl;
   }
 }
 
@@ -1195,7 +1195,7 @@ void msrPartGroup::print (ostream& os) const
       "\"";
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -1268,7 +1268,7 @@ void msrPartGroup::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "none" << endl;
+    os << "[NONE]" << endl;
   }
 
   os << endl << endl;
@@ -1409,13 +1409,13 @@ void msrPartGroup::printSlices (ostream& os) const
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_msrPartGroup& elt)
+ostream& operator << (ostream& os, const S_msrPartGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

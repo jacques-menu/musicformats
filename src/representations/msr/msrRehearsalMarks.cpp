@@ -150,13 +150,13 @@ void msrRehearsalMark::print (ostream& os) const
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrRehearsalMark& elt)
+ostream& operator << (ostream& os, const S_msrRehearsalMark& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

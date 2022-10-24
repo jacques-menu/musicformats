@@ -167,13 +167,13 @@ void insiderOahAtom::printAtomWithVariableOptionsValues (
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_insiderOahAtom& elt)
+ostream& operator << (ostream& os, const S_insiderOahAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -315,13 +315,13 @@ void regularOahAtom::printAtomWithVariableOptionsValues (
     endl;
 }
 
-ostream& operator<< (ostream& os, const S_regularOahAtom& elt)
+ostream& operator << (ostream& os, const S_regularOahAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -890,13 +890,13 @@ void oahOahGroup::printOahOahValues (int valueFieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_oahOahGroup& elt)
+ostream& operator << (ostream& os, const S_oahOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

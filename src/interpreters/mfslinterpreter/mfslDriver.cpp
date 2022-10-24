@@ -589,7 +589,7 @@ int mfslDriver::parseInput_Pass1 ()
         --gIndenter;
       }
       else {
-        gLogStream << "none" << endl;
+        gLogStream << "[NONE]" << endl;
       }
 
       gLogStream << endl;

@@ -94,7 +94,7 @@ class EXP msr2musicxmlManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msr2musicxmlManPageGenerateAtom> S_msr2musicxmlManPageGenerateAtom;
-EXP ostream& operator<< (ostream& os, const S_msr2musicxmlManPageGenerateAtom& elt);
+EXP ostream& operator << (ostream& os, const S_msr2musicxmlManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP msr2musicxmlManPageOahGroup : public oahGroup
@@ -181,7 +181,7 @@ class EXP msr2musicxmlManPageOahGroup : public oahGroup
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msr2musicxmlManPageOahGroup> S_msr2musicxmlManPageOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msr2musicxmlManPageOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msr2musicxmlManPageOahGroup& elt);
 
 EXP extern S_msr2musicxmlManPageOahGroup gGlobalMsr2musicxmlManPageOahGroup;
 

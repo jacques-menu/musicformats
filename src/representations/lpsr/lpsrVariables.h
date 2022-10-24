@@ -80,7 +80,7 @@ class EXP lpsrVariableUseCommand : public lpsrElement
     string                fVariableName;
 };
 typedef SMARTP<lpsrVariableUseCommand> S_lpsrVariableUseCommand;
-EXP ostream& operator<< (ostream& os, const S_lpsrVariableUseCommand& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrVariableUseCommand& elt);
 
 
 }

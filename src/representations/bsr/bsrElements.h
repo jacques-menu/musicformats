@@ -71,7 +71,7 @@ class EXP bsrElement : public msrElement
     void                  print (ostream& os) const override;
 };
 typedef SMARTP<bsrElement> S_bsrElement;
-EXP ostream& operator<< (ostream& os, const S_bsrElement& elt);
+EXP ostream& operator << (ostream& os, const S_bsrElement& elt);
 
 
 }

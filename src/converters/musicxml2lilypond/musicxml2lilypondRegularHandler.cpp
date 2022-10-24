@@ -11,11 +11,14 @@
 
 #include <iomanip>      // setw, setprecision, ...
 
-#include "enableHarmoniesExtraOahIfDesired.h"
-
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
+#endif
+
+#include "enableHarmoniesExtraOahIfDesired.h"
+#ifdef EXTRA_OAH_IS_ENABLED
+  #include "harmoniesExtraOah.h"
 #endif
 
 #include "mfStringsHandling.h"
@@ -1642,13 +1645,13 @@ void xml2lyRegularHandler::createOutputRegularGroup ()
   registerAtomInRegularSubgroup ("generate-positions-in-measures", subGroup);
 
   registerAtomInRegularSubgroup ("all-bar-numbers", subGroup);
-  registerAtomInRegularSubgroup ("all-measure-numbers", subGroup);
-  registerAtomInRegularSubgroup ("show-measure-number-at", subGroup);
+  registerAtomInRegularSubgroup ("all-lilypond-measure-numbers", subGroup);
+  registerAtomInRegularSubgroup ("show-lilypond-measure-number-at", subGroup);
   registerAtomInRegularSubgroup ("bar-numbers-size", subGroup);
   registerAtomInRegularSubgroup ("generate-a-box-around-all-bar-numbers", subGroup);
   registerAtomInRegularSubgroup ("generate-a-box-around-bar-number", subGroup);
   registerAtomInRegularSubgroup ("reset-measure-number", subGroup);
-  registerAtomInRegularSubgroup ("original-measure-numbers", subGroup);
+  registerAtomInRegularSubgroup ("show-musicxml-measure-numbers", subGroup);
 
   registerAtomInRegularSubgroup ("separator-line-every-n-measures", subGroup);
 
@@ -1660,7 +1663,7 @@ void xml2lyRegularHandler::createOutputRegularGroup ()
 
   registerAtomInRegularSubgroup ("length-unit", subGroup);
 
-  registerAtomInRegularSubgroup ("all-durations", subGroup);
+  registerAtomInRegularSubgroup ("generate-all-lilypond-durations", subGroup);
 
   registerAtomInRegularSubgroup ("jazz-fonts", subGroup);
 
@@ -1764,13 +1767,13 @@ void xml2lyRegularHandler::print (ostream& os) const
   os << endl;
 }
 
-ostream& operator<< (ostream& os, const S_xml2lyRegularHandler& elt)
+ostream& operator << (ostream& os, const S_xml2lyRegularHandler& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

@@ -264,13 +264,13 @@ void msrHarmonyDegree::print (ostream& os) const
   os << asString () << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrHarmonyDegree& elt)
+ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -285,11 +285,11 @@ S_msrHarmony msrHarmony::createWithoutVoiceUplink (
   const string&            harmonyKindText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const rational&          harmonySoundingWholeNotes,
-  const rational&          harmonyDisplayWholeNotes,
+  const Rational&          harmonySoundingWholeNotes,
+  const Rational&          harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
   msrTupletFactor          harmonyTupletFactor,
-  const rational&          harmonyWholeNotesOffset)
+  const Rational&          harmonyWholeNotesOffset)
 {
   msrHarmony* o =
     new msrHarmony (
@@ -318,11 +318,11 @@ S_msrHarmony msrHarmony::createWithVoiceUplink (
   const string&            harmonyKindText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const rational&          harmonySoundingWholeNotes,
-  const rational&          harmonyDisplayWholeNotes,
+  const Rational&          harmonySoundingWholeNotes,
+  const Rational&          harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
   msrTupletFactor          harmonyTupletFactor,
-  const rational&          harmonyWholeNotesOffset)
+  const Rational&          harmonyWholeNotesOffset)
 {
   msrHarmony* o =
     new msrHarmony (
@@ -351,11 +351,11 @@ msrHarmony::msrHarmony (
   const string&            harmonyKindText,
   int                      harmonyInversion,
   msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const rational&          harmonySoundingWholeNotes,
-  const rational&          harmonyDisplayWholeNotes,
+  const Rational&          harmonySoundingWholeNotes,
+  const Rational&          harmonyDisplayWholeNotes,
   int                      harmoniesStaffNumber,
   msrTupletFactor          harmonyTupletFactor,
-  const rational&          harmonyWholeNotesOffset)
+  const Rational&          harmonyWholeNotesOffset)
     : msrMeasureElement (
         inputLineNumber),
       fHarmonyTupletFactor (
@@ -384,14 +384,16 @@ msrHarmony::msrHarmony (
   fHarmonyBassQuarterTonesPitchKind =
     harmonyBassQuarterTonesPitchKind;
 
-  fMeasureElementSoundingWholeNotes =
-    harmonySoundingWholeNotes;
+  doSetMeasureElementSoundingWholeNotes (
+    harmonySoundingWholeNotes,
+    "msrHarmony::msrHarmony()");
+
   fHarmonyDisplayWholeNotes =
     harmonyDisplayWholeNotes;
 
   // a harmony is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeHarmonyInHarmoniesMeasure()
-  fMeasureElementPositionInMeasure = rational (0, 1);
+  fMeasureElementPositionInMeasure = Rational (0, 1);
 
   fHarmoniesStaffNumber = harmoniesStaffNumber;
 
@@ -500,7 +502,6 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
         fHarmonyKindText,
         fHarmonyInversion,
         fHarmonyBassQuarterTonesPitchKind,
-// JMI        fHarmonySoundingWholeNotes,
         fMeasureElementSoundingWholeNotes,
         fHarmonyDisplayWholeNotes,
         fHarmoniesStaffNumber,
@@ -590,33 +591,41 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
   fHarmonyUpLinkToNote = note;
 }
 
-void msrHarmony::setMeasureElementPositionInMeasure (
-  const rational& positionInMeasure,
-  const string&   context)
+void msrHarmony::setHarmonyPositionInMeasure (
+  const S_msrMeasure measure,
+  const Rational&    positionInMeasure,
+  const string&      context)
 {
   // set the harmony position in measure, taking it's offset into account
+
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    measure != nullptr,
+     "setHarmonyPositionInMeasure(): measure is null");
 
   // the offset can be negative, so we merely add it to positionInMeasure
   // to obtain the harmony's actual positionInMeasure
   // this overwrites it with the same value if fHarmonyWholeNotesOffset is null JMI ???
-  rational
+  Rational
     actualPositionInMeasure =
       positionInMeasure
         +
       fHarmonyWholeNotesOffset;
-  actualPositionInMeasure.rationalise ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Setting harmony's position in measure of " << asString () <<
-      " to '" <<
+      " to " <<
       positionInMeasure <<
-      "' (was '" <<
+      " (was " <<
       fMeasureElementPositionInMeasure <<
-      "') in measure '" <<
+      ") in measure " <<
+      measure->asShortString () <<
+      " (fMeasureElementMeasureNumber: " <<
       fMeasureElementMeasureNumber <<
-      "', context: \"" <<
+      "), context: \"" <<
       context <<
       "\"" <<
       "', harmonyWholeNotesOffset = " <<
@@ -632,26 +641,12 @@ void msrHarmony::setMeasureElementPositionInMeasure (
     "fHarmonyUpLinkToNote is null");
 
   // compute harmony's position in voice
-  S_msrMeasure
-    measure =
-      fHarmonyUpLinkToNote->
-        getNoteDirectUpLinkToMeasure ();
-
-  if (! measure) abort ();
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-     "setHarmonyPositionInMeasure(): measure is null");
-
-  rational
-    positionInVoice =
+  Rational
+    positionFromBeginningOfVoice =
       measure->
-        getMeasurePositionInVoice ()
+        getMeasurePositionFromBeginningOfVoice ()
         +
       actualPositionInMeasure;
-  positionInVoice.rationalise ();
 
   // sanity check
   mfAssert (
@@ -669,7 +664,7 @@ void msrHarmony::setMeasureElementPositionInMeasure (
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionInVoice (
+    incrementCurrentPositionFromBeginningOfVoice (
       fHarmonyUpLinkToNote->
         getMeasureElementSoundingWholeNotes ());
 }
@@ -690,15 +685,14 @@ void msrHarmony::setHarmonyFrame (S_msrFrame frame)
 
 void msrHarmony::incrementHarmonySoundingWholeNotesDuration (
   int             inputLineNumber,
-  const rational& wholeNotesDelta)
+  const Rational& wholeNotesDelta)
 {
   // compute currentHarmony's future sounding whole notes
-  rational
+  Rational
     augmentedSoundingWholeNotes =
       fMeasureElementSoundingWholeNotes
         +
       wholeNotesDelta;
-  augmentedSoundingWholeNotes.rationalise ();
 
   // extend currentHarmony's sounding whole notes
 #ifdef TRACING_IS_ENABLED
@@ -819,7 +813,7 @@ string msrHarmony::asString () const
 
   s << ", fHarmonyInversion: ";
   if (fHarmonyInversion == K_HARMONY_NO_INVERSION) {
-    s << "none";
+    s << "[NONE]";
   }
   else {
     s << fHarmonyInversion;
@@ -854,7 +848,7 @@ string msrHarmony::asString () const
   s <<
     ", fHarmoniesStaffNumber: ";
   if (fHarmoniesStaffNumber == msrStaff::K_NO_STAFF_NUMBER)
-    s << "none";
+    s << "[NONE]";
   else
     s << fHarmoniesStaffNumber;
 
@@ -869,7 +863,7 @@ string msrHarmony::asString () const
     s << fHarmonyFrame;
   }
   else {
-    s << "none";
+    s << "[NONE]";
   }
 
   // print the harmony note uplink
@@ -878,7 +872,7 @@ string msrHarmony::asString () const
     s << fHarmonyUpLinkToNote;
   }
   else {
-    s << "none";
+    s << "[NONE]";
   }
 
   s <<
@@ -897,7 +891,7 @@ void msrHarmony::print (ostream& os) const
 
   ++gIndenter;
 
-  const int fieldWidth = 33;
+  const int fieldWidth = 44;
 
   os << left <<
     setw (fieldWidth) <<
@@ -946,7 +940,7 @@ void msrHarmony::print (ostream& os) const
     setw (fieldWidth) <<
     "fHarmonyInversion" << " : ";
   if (fHarmonyInversion == K_HARMONY_NO_INVERSION) {
-    os << "none";
+    os << "[NONE]";
   }
   else {
     os << fHarmonyInversion;
@@ -982,7 +976,7 @@ void msrHarmony::print (ostream& os) const
   else {
     os <<
       " : " <<
-      "none" <<
+      "[NONE]" <<
       endl;
   }
 
@@ -991,7 +985,7 @@ void msrHarmony::print (ostream& os) const
     setw (fieldWidth) <<
     "fHarmoniesStaffNumber" << " : ";
   if (fHarmoniesStaffNumber == msrStaff::K_NO_STAFF_NUMBER) {
-    os << "none";
+    os << "[NONE]";
   }
   else {
     os << fHarmoniesStaffNumber;
@@ -1012,9 +1006,27 @@ void msrHarmony::print (ostream& os) const
     os << fHarmonyFrame;
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
+
+  // print the harmony measure number
+  os <<
+    setw (fieldWidth) <<
+    "fMeasureElementMeasureNumber" << " : " << fMeasureElementMeasureNumber <<
+    endl;
+
+  // print the harmony position in measure
+  os <<
+    setw (fieldWidth) <<
+    "fMeasureElementPositionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
+    endl;
+
+  // print the harmony bass position in voice
+  os <<
+    setw (fieldWidth) <<
+    "fMeasureElementPositionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
+    endl;
 
   // print the harmony note uplink
   os <<
@@ -1026,34 +1038,22 @@ void msrHarmony::print (ostream& os) const
       gTab << fHarmonyUpLinkToNote->asString ();
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
-
-  // print the harmony position in measure
-  os <<
-    setw (fieldWidth) <<
-    "fMeasureElementPositionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
-    endl;
-
-  // print the harmony bass position in voice
-  os <<
-    setw (fieldWidth) <<
-    "fMeasureElementPositionInVoice" << " : " << fMeasureElementPositionInVoice <<
-    endl;
 
   --gIndenter;
 
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrHarmony& elt)
+ostream& operator << (ostream& os, const S_msrHarmony& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

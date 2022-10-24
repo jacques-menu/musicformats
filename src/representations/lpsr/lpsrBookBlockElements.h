@@ -102,7 +102,7 @@ class EXP lpsrBookBlockElement : public lpsrElement
                           fBookBlockElementParallelMusicBlock;
 };
 typedef SMARTP<lpsrBookBlockElement> S_lpsrBookBlockElement;
-EXP ostream& operator<< (ostream& os, const S_lpsrBookBlockElement& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrBookBlockElement& elt);
 
 //______________________________________________________________________________
 class EXP lpsrScoreBlock : public lpsrBookBlockElement
@@ -171,7 +171,7 @@ class EXP lpsrScoreBlock : public lpsrBookBlockElement
     S_msrMidiTempo        fScoreBlockMidiTempo;
 };
 typedef SMARTP<lpsrScoreBlock> S_lpsrScoreBlock;
-EXP ostream& operator<< (ostream& os, const S_lpsrScoreBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrScoreBlock& elt);
 
 //______________________________________________________________________________
 class EXP lpsrBookPartBlock : public lpsrBookBlockElement
@@ -230,7 +230,7 @@ class EXP lpsrBookPartBlock : public lpsrBookBlockElement
     // ------------------------------------------------------
 };
 typedef SMARTP<lpsrBookPartBlock> S_lpsrBookPartBlock;
-EXP ostream& operator<< (ostream& os, const S_lpsrBookPartBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrBookPartBlock& elt);
 
 //______________________________________________________________________________
 class EXP lpsrBookBlock : public lpsrElement
@@ -325,7 +325,7 @@ class EXP lpsrBookBlock : public lpsrElement
                           fBookBlockElementsList;
 };
 typedef SMARTP<lpsrBookBlock> S_lpsrBookBlock;
-EXP ostream& operator<< (ostream& os, const S_lpsrBookBlock& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrBookBlock& elt);
 
 
 }

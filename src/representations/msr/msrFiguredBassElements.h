@@ -12,6 +12,11 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// PRE-declarations for class mutual dependencies
+class msrMeasure;
+typedef SMARTP<msrMeasure> S_msrMeasure;
+
+//______________________________________________________________________________
 class EXP msrBassFigure : public msrElement
 {
   public:
@@ -131,7 +136,7 @@ class EXP msrBassFigure : public msrElement
                           fFigureSuffixKind;
 };
 typedef SMARTP<msrBassFigure> S_msrBassFigure;
-EXP ostream& operator<< (ostream& os, const S_msrBassFigure& elt);
+EXP ostream& operator << (ostream& os, const S_msrBassFigure& elt);
 
 //______________________________________________________________________________
 class EXP msrFiguredBassElement : public msrMeasureElement
@@ -157,8 +162,8 @@ class EXP msrFiguredBassElement : public msrMeasureElement
 
     static SMARTP<msrFiguredBassElement> create (
                             int             inputLineNumber,
-                            const rational& figuredBassElementSoundingWholeNotes,
-                            const rational& figuredBassElementDisplayWholeNotes,
+                            const Rational& figuredBassElementSoundingWholeNotes,
+                            const Rational& figuredBassElementDisplayWholeNotes,
                             msrFiguredBassElementParenthesesKind
                                             figuredBassElementParenthesesKind,
                             msrTupletFactor figuredBassElementTupletFactor);
@@ -175,8 +180,8 @@ class EXP msrFiguredBassElement : public msrMeasureElement
 
                           msrFiguredBassElement (
                             int             inputLineNumber,
-                            const rational& figuredBassElementSoundingWholeNotes,
-                            const rational& figuredBassElementDisplayWholeNotes,
+                            const Rational& figuredBassElementSoundingWholeNotes,
+                            const Rational& figuredBassElementDisplayWholeNotes,
                             msrFiguredBassElementParenthesesKind
                                             figuredBassElementParenthesesKind,
                             msrTupletFactor figuredBassElementTupletFactor);
@@ -210,17 +215,29 @@ class EXP msrFiguredBassElement : public msrMeasureElement
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context) override;
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context) override
+                              {
+                                setFiguredBassElementPositionInMeasure (
+                                  measure,
+                                  positionInMeasure,
+                                  context);
+                              }
+
+    void                  setFiguredBassElementPositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
 
     void                  setFiguredBassDisplayWholeNotes (
-                            const rational& wholeNotes)
+                            const Rational& wholeNotes)
                               {
                                 fFiguredBassElementDisplayWholeNotes =
                                   wholeNotes;
                               }
 
-    rational              getFiguredBassDisplayWholeNotes () const
+    Rational              getFiguredBassDisplayWholeNotes () const
                               { return fFiguredBassElementDisplayWholeNotes; }
 
     msrFiguredBassElementParenthesesKind
@@ -274,7 +291,7 @@ class EXP msrFiguredBassElement : public msrMeasureElement
     S_msrNote             fFiguredBassElementUpLinkToNote;
     S_msrVoice            fFiguredBassElementUpLinkToVoice; // for use in figured bass voices JMI
 
-    rational              fFiguredBassElementDisplayWholeNotes;
+    Rational              fFiguredBassElementDisplayWholeNotes;
 
     msrFiguredBassElementParenthesesKind
                           fFiguredBassElementParenthesesKind;
@@ -284,7 +301,7 @@ class EXP msrFiguredBassElement : public msrMeasureElement
     msrTupletFactor       fFiguredBassElementTupletFactor;
 };
 typedef SMARTP<msrFiguredBassElement> S_msrFiguredBassElement;
-EXP ostream& operator<< (ostream& os, const S_msrFiguredBassElement& elt);
+EXP ostream& operator << (ostream& os, const S_msrFiguredBassElement& elt);
 
 
 }

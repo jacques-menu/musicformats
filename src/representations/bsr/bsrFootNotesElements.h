@@ -76,7 +76,7 @@ class EXP bsrFootNotesElement : public bsrElement
     S_bsrCellsList        fFootNotesElementCellsList;
 };
 typedef SMARTP<bsrFootNotesElement> S_bsrFootNotesElement;
-EXP ostream& operator<< (ostream& os, const S_bsrFootNotesElement& elt);
+EXP ostream& operator << (ostream& os, const S_bsrFootNotesElement& elt);
 
 
 }

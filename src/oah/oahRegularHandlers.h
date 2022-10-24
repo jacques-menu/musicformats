@@ -120,7 +120,7 @@ class EXP oahRegularHandler : public oahHandler
     S_oahHandler          fInsiderHandler;
 };
 typedef SMARTP<oahRegularHandler> S_oahRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_oahRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_oahRegularHandler& elt);
 
 
 }

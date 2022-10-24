@@ -1037,7 +1037,7 @@ void msdlParser::setCurrentOctaveEntryReference ()
         "'";
     }
     else {
-      gLogStream << "none";
+      gLogStream << "[NONE]";
     }
     gLogStream << endl;
   }
@@ -1387,7 +1387,7 @@ void msdlParser::parse ()
           endl;
       }
       else {
-        gLogStream << "none" << endl;
+        gLogStream << "[NONE]" << endl;
       }
 
       --gIndenter;

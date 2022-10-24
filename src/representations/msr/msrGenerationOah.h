@@ -124,7 +124,7 @@ class EXP msrGeneratorsOahGroup : public oahGroup
                           fGenerationAPIKindAtom;
 };
 typedef SMARTP<msrGeneratorsOahGroup> S_msrGeneratorsOahGroup;
-EXP ostream& operator<< (ostream& os, const S_msrGeneratorsOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_msrGeneratorsOahGroup& elt);
 
 EXP extern S_msrGeneratorsOahGroup gGlobalMsrGeneratorsOahGroup;
 

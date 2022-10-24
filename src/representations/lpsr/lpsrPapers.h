@@ -240,7 +240,7 @@ class EXP lpsrPaper : public lpsrElement
     string                fEvenFooterMarkup;
 };
 typedef SMARTP<lpsrPaper> S_lpsrPaper;
-EXP ostream& operator<< (ostream& os, const S_lpsrPaper& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrPaper& elt);
 
 
 }

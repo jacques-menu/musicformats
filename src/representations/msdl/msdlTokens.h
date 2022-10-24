@@ -152,7 +152,7 @@ enum class msdlTokenKind {
 string msdlTokenKindAsString (
   msdlTokenKind tokenKind);
 
-ostream& operator<< (ostream& os, msdlTokenKind& elt);
+ostream& operator << (ostream& os, msdlTokenKind& elt);
 
 string msdlTokenKindAsMsdlString (
   msdlTokenKind            tokenKind,
@@ -368,7 +368,7 @@ class msdlTokenKindsSet : public smartable
 
     set<msdlTokenKind>    fTokenKindsSet;
 };
-EXP ostream& operator<< (ostream& os, const msdlTokenKindsSet& elt);
+EXP ostream& operator << (ostream& os, const msdlTokenKindsSet& elt);
 
 EXP S_msdlTokenKindsSet operator+= (
   S_msdlTokenKindsSet aTokenKindsSet,
@@ -557,7 +557,7 @@ class EXP msdlTokenDescription : public smartable
     string                fString;
 };
 typedef SMARTP<msdlTokenDescription> S_msdlTokenDescription;
-EXP ostream& operator<< (ostream& os, const msdlTokenDescription& elt);
+EXP ostream& operator << (ostream& os, const msdlTokenDescription& elt);
 
 //________________________________________________________________________
 class EXP msdlToken : public smartable
@@ -671,7 +671,7 @@ class EXP msdlToken : public smartable
     int                   fTokenPositionInLine;
 };
 typedef SMARTP<msdlToken> S_msdlToken;
-EXP ostream& operator<< (ostream& os, const msdlToken& elt);
+EXP ostream& operator << (ostream& os, const msdlToken& elt);
 
 //________________________________________________________________________
 class EXP msdlTokensList : public smartable
@@ -730,7 +730,7 @@ class EXP msdlTokensList : public smartable
     list<msdlToken>       fTokensList;
 };
 typedef SMARTP<msdlTokensList> S_msdlTokensList;
-EXP ostream& operator<< (ostream& os, const S_msdlTokensList& elt);
+EXP ostream& operator << (ostream& os, const S_msdlTokensList& elt);
 
 
 }

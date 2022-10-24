@@ -31,7 +31,7 @@ using namespace MusicXML2;
 using namespace MusicFormats;
 
 //______________________________________________________________________________
-// pre-declaration
+// PRE-declarations for classes mutual dependencies
 class mfslDriver;
 
 //______________________________________________________________________________
@@ -103,7 +103,7 @@ class EXP mfslOptionsBlock : public smartable
     vector<S_oahOption>   fOptionsBlockOptionsVector;
 };
 typedef SMARTP<mfslOptionsBlock> S_mfslOptionsBlock;
-EXP ostream& operator<< (ostream& os, const S_mfslOptionsBlock& elt);
+EXP ostream& operator << (ostream& os, const S_mfslOptionsBlock& elt);
 
 //______________________________________________________________________________
 enum class mfslInputNameKind {
@@ -115,7 +115,7 @@ enum class mfslInputNameKind {
 string mfslInputNameKindAsString (
   mfslInputNameKind inputNameKind);
 
-ostream& operator<< (ostream& os, const mfslInputNameKind& elt);
+ostream& operator << (ostream& os, const mfslInputNameKind& elt);
 
 //______________________________________________________________________________
 class EXP mfslInput : public smartable
@@ -221,7 +221,7 @@ class EXP mfslInput : public smartable
                           fInputNamesToOptionsBlocksMap;
 };
 typedef SMARTP<mfslInput> S_mfslInput;
-EXP ostream& operator<< (ostream& os, const S_mfslInput& elt);
+EXP ostream& operator << (ostream& os, const S_mfslInput& elt);
 
 //______________________________________________________________________________
 class EXP mfslInputsTable : public smartable
@@ -292,7 +292,7 @@ class EXP mfslInputsTable : public smartable
                           fInputsMap;
 };
 typedef SMARTP<mfslInputsTable> S_mfslInputsTable;
-EXP ostream& operator<< (ostream& os, const S_mfslInputsTable& elt);
+EXP ostream& operator << (ostream& os, const S_mfslInputsTable& elt);
 
 //______________________________________________________________________________
 class EXP mfslCaseInputStatement : public smartable
@@ -370,7 +370,7 @@ class EXP mfslCaseInputStatement : public smartable
     set<string>           fCaseInputUnusedNames;
 };
 typedef SMARTP<mfslCaseInputStatement> S_mfslCaseInputStatement;
-EXP ostream& operator<< (ostream& os, const S_mfslCaseInputStatement& elt);
+EXP ostream& operator << (ostream& os, const S_mfslCaseInputStatement& elt);
 
 //______________________________________________________________________________
 enum class mfslChoiceLabelKind {
@@ -382,7 +382,7 @@ enum class mfslChoiceLabelKind {
 string mfslChoiceLabelKindAsString (
   mfslChoiceLabelKind choiceLabelKind);
 
-ostream& operator<< (ostream& os, const mfslChoiceLabelKind& elt);
+ostream& operator << (ostream& os, const mfslChoiceLabelKind& elt);
 
 //______________________________________________________________________________
 class EXP mfslChoice : public smartable
@@ -498,7 +498,7 @@ class EXP mfslChoice : public smartable
                           fChoiceLabelsToOptionsBlocksMap;
 };
 typedef SMARTP<mfslChoice> S_mfslChoice;
-EXP ostream& operator<< (ostream& os, const S_mfslChoice& elt);
+EXP ostream& operator << (ostream& os, const S_mfslChoice& elt);
 
 //______________________________________________________________________________
 class EXP mfslChoicesTable : public smartable
@@ -569,7 +569,7 @@ class EXP mfslChoicesTable : public smartable
                           fChoicesMap;
 };
 typedef SMARTP<mfslChoicesTable> S_mfslChoicesTable;
-EXP ostream& operator<< (ostream& os, const S_mfslChoicesTable& elt);
+EXP ostream& operator << (ostream& os, const S_mfslChoicesTable& elt);
 
 //______________________________________________________________________________
 class EXP mfslCaseChoiceStatement : public smartable
@@ -647,7 +647,7 @@ class EXP mfslCaseChoiceStatement : public smartable
     set<string>           fCaseUnusedLabels;
 };
 typedef SMARTP<mfslCaseChoiceStatement> S_mfslCaseChoiceStatement;
-EXP ostream& operator<< (ostream& os, const S_mfslCaseChoiceStatement& elt);
+EXP ostream& operator << (ostream& os, const S_mfslCaseChoiceStatement& elt);
 
 // // initialization
 // //______________________________________________________________________________

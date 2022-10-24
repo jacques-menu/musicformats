@@ -57,6 +57,12 @@ typedef SMARTP<msrSlide> S_msrSlide;
 class msrPedal;
 typedef SMARTP<msrPedal> S_msrPedal;
 
+class msrSegno;
+typedef SMARTP<msrSegno> S_msrSegno;
+
+class msrDalSegno;
+typedef SMARTP<msrDalSegno> S_msrDalSegno;
+
 //______________________________________________________________________________
 class EXP msrChord : public msrTupletElement
 {
@@ -64,8 +70,8 @@ class EXP msrChord : public msrTupletElement
 
     static SMARTP<msrChord> create (
                             int             inputLineNumber,
-                            const rational& chordSoundingWholeNotes,
-                            const rational& chordDisplayWholeNotes,
+                            const Rational& chordSoundingWholeNotes,
+                            const Rational& chordDisplayWholeNotes,
                             msrDurationKind chordGraphicDurationKind);
 
     // creation from MusicXML
@@ -81,8 +87,8 @@ class EXP msrChord : public msrTupletElement
 
                           msrChord (
                             int             inputLineNumber,
-                            const rational& chordSoundingWholeNotes,
-                            const rational& chordDisplayWholeNotes,
+                            const Rational& chordSoundingWholeNotes,
+                            const Rational& chordDisplayWholeNotes,
                             msrDurationKind chordGraphicDurationKind);
 
     virtual               ~msrChord ();
@@ -121,8 +127,20 @@ class EXP msrChord : public msrTupletElement
 
     // position in measure
     void                  setMeasureElementPositionInMeasure (
-                            const rational& positionInMeasure,
-                            const string&   context) override;
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context) override
+                              {
+                                setChordPositionInMeasure (
+                                  measure,
+                                  positionInMeasure,
+                                  context);
+                              }
+
+    void                  setChordPositionInMeasure (
+                            const S_msrMeasure measure,
+                            const Rational&    positionInMeasure,
+                            const string&      context);
 
     // chord kind
     void                  setChordKind (
@@ -134,9 +152,9 @@ class EXP msrChord : public msrTupletElement
 
      // whole notes
     void                  setChordDisplayWholeNotes (
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 
-    rational              getChordDisplayWholeNotes () const
+    Rational              getChordDisplayWholeNotes () const
                              { return fChordDisplayWholeNotes; }
 
     // graphic duration
@@ -347,7 +365,7 @@ class EXP msrChord : public msrTupletElement
     // positions in measures
     void                  setChordMembersPositionInMeasure (
                             S_msrMeasure    measure,
-                            const rational& positionInMeasure);
+                            const Rational& positionInMeasure);
 
   public:
 
@@ -473,8 +491,7 @@ class EXP msrChord : public msrTupletElement
 */
 
     // finalization
-    void                  finalizeChord (
-                            int inputLineNumber);
+    void                  finalizeChord (int inputLineNumber);
 
   public:
 
@@ -517,12 +534,12 @@ class EXP msrChord : public msrTupletElement
     msrChordInKind        fChordKind;
 
     // sounding whole notes
-    // no need for 'rational fChordSoundingWholeNotes;',
+    // no need for 'Rational fChordSoundingWholeNotes;',
     // since fChordNotesVector [0] contains this information,
     // as do all the other elements in this vector
 
     // display whole notes
-    rational              fChordDisplayWholeNotes;
+    Rational              fChordDisplayWholeNotes;
 
     // graphic duration is needed for grace notes,
     // since they don't have any note (sounding) duration
@@ -632,7 +649,7 @@ class EXP msrChord : public msrTupletElement
     S_msrFiguredBassElement      fChordFiguredBass;
 };
 typedef SMARTP<msrChord> S_msrChord;
-EXP ostream& operator<< (ostream& os, const S_msrChord& elt);
+EXP ostream& operator << (ostream& os, const S_msrChord& elt);
 
 //______________________________________________________________________________
 class EXP msrChordBeamLink : public msrElement
@@ -704,7 +721,7 @@ class EXP msrChordBeamLink : public msrElement
     S_msrBeam             fOriginalBeam;
 };
 typedef SMARTP<msrChordBeamLink> S_msrChordBeamLink;
-EXP ostream& operator<< (ostream& os, const S_msrChordBeamLink& elt);
+EXP ostream& operator << (ostream& os, const S_msrChordBeamLink& elt);
 
 //______________________________________________________________________________
 class EXP msrChordSlurLink : public msrElement
@@ -776,7 +793,7 @@ class EXP msrChordSlurLink : public msrElement
     S_msrSlur             fOriginalSlur;
 };
 typedef SMARTP<msrChordSlurLink> S_msrChordSlurLink;
-EXP ostream& operator<< (ostream& os, const S_msrChordSlurLink& elt);
+EXP ostream& operator << (ostream& os, const S_msrChordSlurLink& elt);
 
 //______________________________________________________________________________
 class EXP msrChordGraceNotesGroupLink : public msrElement
@@ -848,7 +865,7 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     S_msrGraceNotesGroup  fOriginalGraceNotesGroup;
 };
 typedef SMARTP<msrChordGraceNotesGroupLink> S_msrChordGraceNotesGroupLink;
-EXP ostream& operator<< (ostream& os, const S_msrChordGraceNotesGroupLink& elt);
+EXP ostream& operator << (ostream& os, const S_msrChordGraceNotesGroupLink& elt);
 
 
 }

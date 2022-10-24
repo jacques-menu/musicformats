@@ -94,7 +94,7 @@ class EXP msrStem : public msrElement
     msrStemKind           fStemKind;
 };
 typedef SMARTP<msrStem> S_msrStem;
-EXP ostream& operator<< (ostream& os, const S_msrStem& elt);
+EXP ostream& operator << (ostream& os, const S_msrStem& elt);
 
 
 } // namespace MusicFormats

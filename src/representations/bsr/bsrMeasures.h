@@ -117,7 +117,7 @@ class EXP bsrMeasure : public bsrLineContentsElement
                           fMeasureLineElementsList;
 };
 typedef SMARTP<bsrMeasure> S_bsrMeasure;
-EXP ostream& operator<< (ostream& os, const S_bsrMeasure& elt);
+EXP ostream& operator << (ostream& os, const S_bsrMeasure& elt);
 
 
 }

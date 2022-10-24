@@ -104,7 +104,7 @@ class EXP bsrBarLine : public bsrLineContentsElement
     S_bsrCellsList        fBarLineCellsList;
 };
 typedef SMARTP<bsrBarLine> S_bsrBarLine;
-EXP ostream& operator<< (ostream& os, const S_bsrBarLine& elt);
+EXP ostream& operator << (ostream& os, const S_bsrBarLine& elt);
 
 }
 

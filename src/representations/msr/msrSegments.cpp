@@ -98,10 +98,10 @@ void msrSegment::initializeSegment ()
 
 // JMI v0.9.63
 //  // segment shortest note duration
-//  fSegmentShortestNoteDuration = rational (INT_MAX, 1);
+//  fSegmentShortestNoteDuration = Rational (INT_MAX, 1);
 
 // segment shortest note tuplet factor
-//  fSegmentShortestNoteTupletFactor = rational (1, 1);
+//  fSegmentShortestNoteTupletFactor = Rational (1, 1);
 }
 
 void msrSegment::setSegmentFirstMeasure (
@@ -329,7 +329,7 @@ S_msrSegment msrSegment::createSegmentDeepClone (
 
 /* JMI
 void msrSegment::setSegmentShortestNoteDuration (
-  const rational& duration)
+  const Rational& duration)
 {
 #ifdef TRACING_IS_ENABLED
   if (
@@ -514,7 +514,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
         measureNumber,
         this);
 
-  // set measure end line number
+  // set measure end input line number JMI v0.9.66 to be done in appendMeasureToSegment() ???
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
     gLogStream <<
@@ -978,7 +978,7 @@ void msrSegment::appendTimeSignatureToSegmentClone (S_msrTimeSignature timeSigna
 
 void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
   int             inputLineNumber,
-  const rational& positionInMeasure)
+  const Rational& positionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -1636,7 +1636,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
 
 void msrSegment::padUpToPositionInMeasureInSegment (
   int             inputLineNumber,
-  const rational& wholeNotes)
+  const Rational& wholeNotes)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -1702,7 +1702,7 @@ void msrSegment::padUpToPositionInMeasureInSegment (
 
 void msrSegment::backupByWholeNotesStepLengthInSegment (
   int     inputLineNumber,
-  const rational&
+  const Rational&
           backupTargetMeasureElementPositionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
@@ -1736,7 +1736,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
 
 void msrSegment::appendPaddingNoteToSegment (
   int             inputLineNumber,
-  const rational& forwardStepLength)
+  const Rational& forwardStepLength)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -1774,7 +1774,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
     measure->getInputLineNumber ();
 
   string measureNumber =
-    measure->getMeasureElementMeasureNumber ();
+    measure->getMeasureNumber ();
 
   size_t segmentElementsListSize =
     fSegmentMeasuresFlatList.size ();
@@ -1782,7 +1782,7 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   string currentMeasureNumber =
     segmentElementsListSize == 0
       ? ""
-      : fSegmentLastMeasure->getMeasureElementMeasureNumber ();
+      : fSegmentLastMeasure->getMeasureNumber ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -1867,7 +1867,7 @@ void msrSegment::prependMeasureToSegment (S_msrMeasure measure)
     measure->getInputLineNumber ();
 
   string measureNumber =
-    measure->getMeasureElementMeasureNumber ();
+    measure->getMeasureNumber ();
 
   size_t segmentElementsListSize =
     fSegmentElementsList.size ();
@@ -1875,7 +1875,7 @@ void msrSegment::prependMeasureToSegment (S_msrMeasure measure)
   string currentMeasureNumber =
     segmentElementsListSize == 0
       ? ""
-      : fSegmentLastMeasure->getMeasureElementMeasureNumber ();
+      : fSegmentLastMeasure->getMeasureNumber ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasures ()) {
@@ -2056,7 +2056,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 
 void msrSegment::appendNoteToSegment (
   S_msrNote       note,
-  const rational& partCurrentPositionInMeasure)
+  const Rational& partCurrentPositionInMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -2851,13 +2851,13 @@ void msrSegment::printShort (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrSegment& elt)
+ostream& operator << (ostream& os, const S_msrSegment& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

@@ -124,7 +124,7 @@ class EXP msrFrameNote : public msrElement
     msrBarreTypeKind      fFrameNoteBarreTypeKind;
 };
 typedef SMARTP<msrFrameNote> S_msrFrameNote;
-EXP ostream& operator<< (ostream& os, const S_msrFrameNote& elt);
+EXP ostream& operator << (ostream& os, const S_msrFrameNote& elt);
 
 //______________________________________________________________________________
 class EXP msrBarre
@@ -279,7 +279,7 @@ class EXP msrFrame : public msrElement
     Bool                  fFrameContainsFingerings;
 };
 typedef SMARTP<msrFrame> S_msrFrame;
-EXP ostream& operator<< (ostream& os, const S_msrFrame& elt);
+EXP ostream& operator << (ostream& os, const S_msrFrame& elt);
 
 
 } // namespace MusicFormats

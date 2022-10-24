@@ -152,7 +152,7 @@ class EXP msrTechnical : public msrElement
 // JMI    msrTechnicalAccidentalMarkKind  fTechnicalAccidentalMarkKind;
 };
 typedef SMARTP<msrTechnical> S_msrTechnical;
-EXP ostream& operator<< (ostream& os, const S_msrTechnical& elt);
+EXP ostream& operator << (ostream& os, const S_msrTechnical& elt);
 
 //______________________________________________________________________________
 class EXP msrTechnicalWithInteger : public msrElement
@@ -259,7 +259,7 @@ class EXP msrTechnicalWithInteger : public msrElement
     msrPlacementKind      fTechnicalWithIntegerPlacementKind;
 };
 typedef SMARTP<msrTechnicalWithInteger> S_msrTechnicalWithInteger;
-EXP ostream& operator<< (ostream& os, const S_msrTechnicalWithInteger& elt);
+EXP ostream& operator << (ostream& os, const S_msrTechnicalWithInteger& elt);
 
 //______________________________________________________________________________
 class EXP msrTechnicalWithFloat : public msrElement
@@ -363,7 +363,7 @@ class EXP msrTechnicalWithFloat : public msrElement
     msrPlacementKind                fTechnicalWithFloatPlacementKind;
 };
 typedef SMARTP<msrTechnicalWithFloat> S_msrTechnicalWithFloat;
-EXP ostream& operator<< (ostream& os, const S_msrTechnicalWithFloat& elt);
+EXP ostream& operator << (ostream& os, const S_msrTechnicalWithFloat& elt);
 
 //______________________________________________________________________________
 class EXP msrTechnicalWithString : public msrElement
@@ -481,7 +481,7 @@ class EXP msrTechnicalWithString : public msrElement
     msrPlacementKind      fTechnicalWithStringPlacementKind;
 };
 typedef SMARTP<msrTechnicalWithString> S_msrTechnicalWithString;
-EXP ostream& operator<< (ostream& os, const S_msrTechnicalWithString& elt);
+EXP ostream& operator << (ostream& os, const S_msrTechnicalWithString& elt);
 
 
 } // namespace MusicFormats

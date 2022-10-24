@@ -194,7 +194,7 @@ class EXP lpsrHeader : public lpsrElement
     string                fLilypondTagline;
 };
 typedef SMARTP<lpsrHeader> S_lpsrHeader;
-EXP ostream& operator<< (ostream& os, const S_lpsrHeader& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrHeader& elt);
 
 
 }

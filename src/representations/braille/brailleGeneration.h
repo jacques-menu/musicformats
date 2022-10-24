@@ -28,7 +28,7 @@ enum class bsrUTFKind {
 string bsrUTFKindAsString (
   bsrUTFKind UTFKind);
 
-ostream& operator<< (ostream& os, const bsrUTFKind& elt);
+ostream& operator << (ostream& os, const bsrUTFKind& elt);
 
 enum class bsrByteOrderingKind {
   kByteOrderingNone,
@@ -38,7 +38,7 @@ enum class bsrByteOrderingKind {
 string bsrByteOrderingKindAsString (
   bsrByteOrderingKind byteOrderingKind);
 
-ostream& operator<< (ostream& os, const bsrByteOrderingKind& elt);
+ostream& operator << (ostream& os, const bsrByteOrderingKind& elt);
 
 //______________________________________________________________________________
 // Bytes Encoding Marks (BOM)
@@ -116,7 +116,7 @@ class EXP bsrBrailleGenerator : public smartable
     ostream&              fBrailleOutputStream;
 };
 typedef SMARTP<bsrBrailleGenerator> S_bsrBrailleGenerator;
-EXP ostream& operator<< (ostream& os, const S_bsrBrailleGenerator& elt);
+EXP ostream& operator << (ostream& os, const S_bsrBrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrAsciiBrailleGenerator : public bsrBrailleGenerator
@@ -169,7 +169,7 @@ class EXP bsrAsciiBrailleGenerator : public bsrBrailleGenerator
     // ------------------------------------------------------
 };
 typedef SMARTP<bsrAsciiBrailleGenerator> S_bsrAsciiBrailleGenerator;
-EXP ostream& operator<< (ostream& os, const S_bsrAsciiBrailleGenerator& elt);
+EXP ostream& operator << (ostream& os, const S_bsrAsciiBrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrUTF8BrailleGenerator : public bsrBrailleGenerator
@@ -229,7 +229,7 @@ class EXP bsrUTF8BrailleGenerator : public bsrBrailleGenerator
     bsrByteOrderingKind   fByteOrderingKind;
 };
 typedef SMARTP<bsrUTF8BrailleGenerator> S_bsrUTF8BrailleGenerator;
-EXP ostream& operator<< (ostream& os, const S_bsrUTF8BrailleGenerator& elt);
+EXP ostream& operator << (ostream& os, const S_bsrUTF8BrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
@@ -285,7 +285,7 @@ class EXP bsrUTF8DebugBrailleGenerator : public bsrUTF8BrailleGenerator
     // ------------------------------------------------------
 };
 typedef SMARTP<bsrUTF8DebugBrailleGenerator> S_bsrUTF8DebugBrailleGenerator;
-EXP ostream& operator<< (ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt);
+EXP ostream& operator << (ostream& os, const S_bsrUTF8DebugBrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrUTF16BigEndianBrailleGenerator : public bsrBrailleGenerator
@@ -345,7 +345,7 @@ class EXP bsrUTF16BigEndianBrailleGenerator : public bsrBrailleGenerator
     bsrByteOrderingKind   fByteOrderingKind;
 };
 typedef SMARTP<bsrUTF16BigEndianBrailleGenerator> S_bsrUTF16BigEndianBrailleGenerator;
-EXP ostream& operator<< (ostream& os, const S_bsrUTF16BigEndianBrailleGenerator& elt);
+EXP ostream& operator << (ostream& os, const S_bsrUTF16BigEndianBrailleGenerator& elt);
 
 //______________________________________________________________________________
 class EXP bsrUTF16SmallEndianBrailleGenerator : public bsrBrailleGenerator
@@ -405,7 +405,7 @@ class EXP bsrUTF16SmallEndianBrailleGenerator : public bsrBrailleGenerator
     bsrByteOrderingKind   fByteOrderingKind;
 };
 typedef SMARTP<bsrUTF16SmallEndianBrailleGenerator> S_bsrUTF16SmallEndianBrailleGenerator;
-EXP ostream& operator<< (ostream& os, const S_bsrUTF16SmallEndianBrailleGenerator& elt);
+EXP ostream& operator << (ostream& os, const S_bsrUTF16SmallEndianBrailleGenerator& elt);
 
 
 } // namespace MusicFormats

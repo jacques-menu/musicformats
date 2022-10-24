@@ -93,12 +93,12 @@ class EXP msrDivisions : public msrElement
 /* JMI
     string                wholeNotesAsMsrString (
                             int      inputLineNumber,
-                            const rational& wholeNotes,
+                            const Rational& wholeNotes,
                             int&     numberOfDotsNeeded);
 
     string                wholeNotesAsMsrString (
                             int      inputLineNumber,
-                            const rational& wholeNotes);
+                            const Rational& wholeNotes);
 */
     string                tupletDivisionsAsMsrString (
                             int inputLineNumber,
@@ -108,7 +108,7 @@ class EXP msrDivisions : public msrElement
 
     string                tupletWholeNotesAsMsrString (
                             int             inputLineNumber,
-                            const rational& wholeNotes,
+                            const Rational& wholeNotes,
                             int             actualNotes,
                             int             normalNotes);
 
@@ -147,7 +147,7 @@ class EXP msrDivisions : public msrElement
                           fDurationKindsToDivisions;
 };
 typedef SMARTP<msrDivisions> S_msrDivisions;
-EXP ostream& operator<< (ostream& os, const S_msrDivisions& elt);
+EXP ostream& operator << (ostream& os, const S_msrDivisions& elt);
 
 
 } // namespace MusicFormats

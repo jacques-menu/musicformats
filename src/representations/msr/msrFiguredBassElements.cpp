@@ -308,13 +308,13 @@ void msrBassFigure::print (ostream& os) const
 */
 }
 
-ostream& operator<< (ostream& os, const S_msrBassFigure& elt)
+ostream& operator << (ostream& os, const S_msrBassFigure& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;
@@ -330,8 +330,8 @@ S_msrFiguredBassElement msrFiguredBassElement::create (
     new msrFiguredBassElement (
       inputLineNumber,
 //    figuredBassElementUpLinkToPart,
-      rational (0, 1),           // figuredBassElementSoundingWholeNotes
-      rational (0, 1),           // figuredBassElementDisplayWholeNotes
+      Rational (0, 1),           // figuredBassElementSoundingWholeNotes
+      Rational (0, 1),           // figuredBassElementDisplayWholeNotes
       kFiguredBassElementParenthesesNo,
       msrTupletFactor (1, 1));
   assert (o != nullptr);
@@ -341,8 +341,8 @@ S_msrFiguredBassElement msrFiguredBassElement::create (
 
 S_msrFiguredBassElement msrFiguredBassElement::create (
   int             inputLineNumber,
-  const rational& figuredBassElementSoundingWholeNotes,
-  const rational& figuredBassElementDisplayWholeNotes,
+  const Rational& figuredBassElementSoundingWholeNotes,
+  const Rational& figuredBassElementDisplayWholeNotes,
   msrFiguredBassElementParenthesesKind
                   figuredBassElementParenthesesKind,
   msrTupletFactor figuredBassElementTupletFactor)
@@ -362,8 +362,8 @@ S_msrFiguredBassElement msrFiguredBassElement::create (
 
 msrFiguredBassElement::msrFiguredBassElement (
   int             inputLineNumber,
-  const rational& figuredBassElementSoundingWholeNotes,
-  const rational& figuredBassElementDisplayWholeNotes,
+  const Rational& figuredBassElementSoundingWholeNotes,
+  const Rational& figuredBassElementDisplayWholeNotes,
   msrFiguredBassElementParenthesesKind
                   figuredBassElementParenthesesKind,
   msrTupletFactor figuredBassElementTupletFactor)
@@ -383,8 +383,10 @@ msrFiguredBassElement::msrFiguredBassElement (
     figuredBassElementUpLinkToPart;
     */
 
-  fMeasureElementSoundingWholeNotes =
-    figuredBassElementSoundingWholeNotes;
+  doSetMeasureElementSoundingWholeNotes (
+    figuredBassElementSoundingWholeNotes,
+    "msrFiguredBassElement::msrFiguredBassElement()");
+
   fFiguredBassElementDisplayWholeNotes =
     figuredBassElementDisplayWholeNotes;
 
@@ -393,7 +395,7 @@ msrFiguredBassElement::msrFiguredBassElement (
 
   // a figured bass element is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeFiguredBassElementsInFiguredBassMeasure()
-  fMeasureElementPositionInMeasure = rational (0, 1);
+  fMeasureElementPositionInMeasure = Rational (0, 1);
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
@@ -476,9 +478,10 @@ S_msrFiguredBassElement msrFiguredBassElement::createFiguredBassElementDeepClone
   return figuredBassElementDeepClone;
 }
 
-void msrFiguredBassElement::setMeasureElementPositionInMeasure (
-  const rational& positionInMeasure,
-  const string&   context)
+void msrFiguredBassElement::setFiguredBassElementPositionInMeasure (
+  const S_msrMeasure measure,
+  const Rational&    positionInMeasure,
+  const string&      context)
 {
   // set the figured bass position in measure
 
@@ -486,13 +489,15 @@ void msrFiguredBassElement::setMeasureElementPositionInMeasure (
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Setting figured bass element's position in measure of " << asString () <<
-      " to '" <<
+      " to " <<
       positionInMeasure <<
-      "' (was '" <<
+      " (was " <<
       fMeasureElementPositionInMeasure <<
-      "') in measure '" <<
+      ") in measure " <<
+      measure->asShortString () <<
+      " (fMeasureElementMeasureNumber: " <<
       fMeasureElementMeasureNumber <<
-      "', context: \"" <<
+      "), context: \"" <<
       context <<
       "\"" <<
       endl;
@@ -509,23 +514,17 @@ void msrFiguredBassElement::setMeasureElementPositionInMeasure (
   fMeasureElementPositionInMeasure = positionInMeasure;
 
   // compute figured bass's position in voice
-  S_msrMeasure
-    measure =
-      fFiguredBassElementUpLinkToNote->
-        getNoteDirectUpLinkToMeasure ();
-
-  if (false) { // JMI CAFE
-  rational
-    positionInVoice =
+  if (false) { // JMI CAFE v0.9.66
+  Rational
+    positionFromBeginningOfVoice =
       measure->
-        getMeasurePositionInVoice ()
+        getMeasurePositionFromBeginningOfVoice ()
         +
       positionInMeasure;
-  positionInVoice.rationalise ();
 
   // set figured bass's position in voice
-  setMeasureElementPositionInVoice (
-    positionInVoice,
+  setMeasureElementPositionFromBeginningOfVoice (
+    positionFromBeginningOfVoice,
     context);
 }
 
@@ -536,7 +535,7 @@ void msrFiguredBassElement::setMeasureElementPositionInMeasure (
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionInVoice (
+    incrementCurrentPositionFromBeginningOfVoice (
       fFiguredBassElementUpLinkToNote->
         getMeasureElementSoundingWholeNotes ());
 }
@@ -687,7 +686,7 @@ string msrFiguredBassElement::asString () const
 
   // print the figured bass position in voice
   s <<
-    ", positionInVoice: " << fMeasureElementPositionInVoice;
+    ", positionFromBeginningOfVoice: " << fMeasureElementPositionFromBeginningOfVoice;
 
   s <<
     ", line " << fInputLineNumber <<
@@ -714,7 +713,7 @@ void msrFiguredBassElement::print (ostream& os) const
     os << fFiguredBassElementUpLinkToNote->asString ();
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -725,7 +724,7 @@ void msrFiguredBassElement::print (ostream& os) const
     os << fFiguredBassElementUpLinkToVoice->asString ();
   }
   else {
-    os << "none";
+    os << "[NONE]";
   }
   os << endl;
 
@@ -777,7 +776,7 @@ void msrFiguredBassElement::print (ostream& os) const
   // print the figured bass position in voice
   os <<
     setw (fieldWidth) <<
-    "positionInVoice" << " : " << fMeasureElementPositionInVoice <<
+    "positionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
     endl;
 
   --gIndenter;
@@ -785,13 +784,13 @@ void msrFiguredBassElement::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator<< (ostream& os, const S_msrFiguredBassElement& elt)
+ostream& operator << (ostream& os, const S_msrFiguredBassElement& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
 
   return os;

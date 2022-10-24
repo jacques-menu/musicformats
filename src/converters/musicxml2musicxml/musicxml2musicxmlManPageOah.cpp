@@ -174,13 +174,13 @@ void xml2xmlManPageGenerateAtom::printAtomWithVariableOptionsValues (
   // nothing to print here
 }
 
-ostream& operator<< (ostream& os, const S_xml2xmlManPageGenerateAtom& elt)
+ostream& operator << (ostream& os, const S_xml2xmlManPageGenerateAtom& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;
@@ -381,13 +381,13 @@ void xml2xmlManPageOahGroup::printManPageOahValues (int fieldWidth)
   --gIndenter;
 }
 
-ostream& operator<< (ostream& os, const S_xml2xmlManPageOahGroup& elt)
+ostream& operator << (ostream& os, const S_xml2xmlManPageOahGroup& elt)
 {
   if (elt) {
     elt->print (os);
   }
   else {
-    os << "*** NONE ***" << endl;
+    os << "[NONE]" << endl;
   }
   
   return os;

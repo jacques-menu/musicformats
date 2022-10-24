@@ -114,7 +114,7 @@ class EXP ischemeInterpreterInsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<ischemeInterpreterInsiderHandler> S_ischemeInterpreterInsiderHandler;
-EXP ostream& operator<< (ostream& os, const S_ischemeInterpreterInsiderHandler& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeInterpreterInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP ischemeInterpreterInsiderOahGroup : public oahGroup
@@ -188,7 +188,7 @@ class EXP ischemeInterpreterInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 };
 typedef SMARTP<ischemeInterpreterInsiderOahGroup> S_ischemeInterpreterInsiderOahGroup;
-EXP ostream& operator<< (ostream& os, const S_ischemeInterpreterInsiderOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_ischemeInterpreterInsiderOahGroup& elt);
 
 EXP extern S_ischemeInterpreterInsiderOahGroup gGlobalIschemeInterpreterInsiderOahGroup;
 

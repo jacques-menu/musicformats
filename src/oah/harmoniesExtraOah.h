@@ -96,7 +96,7 @@ class EXP extraShowAllHarmoniesStructuresAtom : public oahAtomStoringAValue
     //  JMI ???
 };
 typedef SMARTP<extraShowAllHarmoniesStructuresAtom> S_extraShowAllHarmoniesStructuresAtom;
-EXP ostream& operator<< (ostream& os, const S_extraShowAllHarmoniesStructuresAtom& elt);
+EXP ostream& operator << (ostream& os, const S_extraShowAllHarmoniesStructuresAtom& elt);
 
 //______________________________________________________________________________
 class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
@@ -179,7 +179,7 @@ class EXP extraShowAllHarmoniesContentsAtom : public oahAtomStoringAValue
     string&               fStringVariable;
 };
 typedef SMARTP<extraShowAllHarmoniesContentsAtom> S_extraShowAllHarmoniesContentsAtom;
-EXP ostream& operator<< (ostream& os, const S_extraShowAllHarmoniesContentsAtom& elt);
+EXP ostream& operator << (ostream& os, const S_extraShowAllHarmoniesContentsAtom& elt);
 
 //______________________________________________________________________________
 class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
@@ -259,7 +259,7 @@ class EXP extraShowHarmonyDetailsAtom : public oahAtomStoringAValue
     string&               fStringVariable;
 };
 typedef SMARTP<extraShowHarmonyDetailsAtom> S_extraShowHarmonyDetailsAtom;
-EXP ostream& operator<< (ostream& os, const S_extraShowHarmonyDetailsAtom& elt);
+EXP ostream& operator << (ostream& os, const S_extraShowHarmonyDetailsAtom& elt);
 
 //______________________________________________________________________________
 class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
@@ -339,7 +339,7 @@ class EXP extraShowHarmonyAnalysisAtom : public oahAtomStoringAValue
     string&               fStringVariable;
 };
 typedef SMARTP<extraShowHarmonyAnalysisAtom> S_extraShowHarmonyAnalysisAtom;
-EXP ostream& operator<< (ostream& os, const S_extraShowHarmonyAnalysisAtom& elt);
+EXP ostream& operator << (ostream& os, const S_extraShowHarmonyAnalysisAtom& elt);
 
 //______________________________________________________________________________
 class EXP harmoniesExtraOahGroup : public oahGroup
@@ -418,7 +418,7 @@ class EXP harmoniesExtraOahGroup : public oahGroup
     string                fHarmoniesRootAsString;
 };
 typedef SMARTP<harmoniesExtraOahGroup> S_harmoniesExtraOahGroup;
-EXP ostream& operator<< (ostream& os, const S_harmoniesExtraOahGroup& elt);
+EXP ostream& operator << (ostream& os, const S_harmoniesExtraOahGroup& elt);
 
 EXP extern S_harmoniesExtraOahGroup gGlobalHarmoniesExtraOahGroup;
 

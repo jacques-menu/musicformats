@@ -250,7 +250,7 @@ void mfOutputIndenter::print (ostream& os) const
   while (i-- > 0) os << fSpacer;
 }
 
-ostream& operator<< (ostream& os, const mfOutputIndenter& theIndenter) {
+ostream& operator << (ostream& os, const mfOutputIndenter& theIndenter) {
   theIndenter.print(os);
   return os;
 }

@@ -74,7 +74,7 @@ class EXP msrEyeGlasses : public msrMeasureElement
     // ------------------------------------------------------
 };
 typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;
-EXP ostream& operator<< (ostream& os, const S_msrEyeGlasses& elt);
+EXP ostream& operator << (ostream& os, const S_msrEyeGlasses& elt);
 
 
 } // namespace MusicFormats

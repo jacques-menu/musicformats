@@ -156,7 +156,7 @@ class EXP msdl2guidoRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdl2guidoRegularHandler> S_msdl2guidoRegularHandler;
-EXP ostream& operator<< (ostream& os, const S_msdl2guidoRegularHandler& elt);
+EXP ostream& operator << (ostream& os, const S_msdl2guidoRegularHandler& elt);
 
 
 }
