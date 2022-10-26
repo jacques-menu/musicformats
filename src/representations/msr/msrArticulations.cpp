@@ -195,7 +195,7 @@ string msrArticulation::asString () const
     ", " <<
     articulationPlacementKindAsString () <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

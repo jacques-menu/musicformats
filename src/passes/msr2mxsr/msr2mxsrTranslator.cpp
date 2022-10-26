@@ -10678,7 +10678,7 @@ Bool musicxmlOrder::operator() (Sxmlelement a, Sxmlelement b)
         fOutputStream <<
           "\\time " <<
           beatsNumbersVector [0] << // the only element
-          "/" <<
+          '/' <<
           timeSignatureItem->getTimeSignatureBeatValue () <<
           endl;
       }

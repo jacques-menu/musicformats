@@ -268,11 +268,11 @@ string wholeNotesAsLilypondString (
             " is not one of 1, 3, 7, 15, 31, 63 or 127" <<
        //     " is not one of 1, 3, 7, 15, 31, 63, 127, 255, 511 or 1023" <<
             ", whole notes duration " <<
-            numerator << "/" << denominator;
+            numerator << '/' << denominator;
 
           if (rationalHasBeenSimplified) {
             s <<
-              " (" << numerator << "/" << denominator << ")" <<
+              " (" << numerator << '/' << denominator << ")" <<
             endl;
           }
 
@@ -326,7 +326,7 @@ string wholeNotesAsLilypondString (
         1 <<
         "*" <<
         numerator <<
-        "/" <<
+        '/' <<
         denominator;
 
       result = s.str ();
@@ -341,11 +341,11 @@ string wholeNotesAsLilypondString (
         " is no power of two between 1 and 128" <<
    //     " is no power of 2 between 1 and 1024" <<
         ", whole notes duration " <<
-        numerator << "/" << denominator;
+        numerator << '/' << denominator;
 
 //       if (rationalHasBeenSimplified) {
 //         s <<
-//           " (" << numerator << "/" << denominator << ")" <<
+//           " (" << numerator << '/' << denominator << ")" <<
 //         endl;
 //       }
 
@@ -552,7 +552,7 @@ string wholeNotesAsLilypondString (
     }
     else {
       s <<
-        "*" << multiplyingFactor << "/" << 1; // ??? denominator;
+        "*" << multiplyingFactor << '/' << 1; // ??? denominator;
     }
     */
   }

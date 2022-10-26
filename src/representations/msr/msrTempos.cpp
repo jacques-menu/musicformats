@@ -1341,7 +1341,7 @@ string msrTempo::asString () const
     ", tempoParenthesizedKind: "  <<
     tempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1351,7 +1351,7 @@ string msrTempo::asShortStringForMeasuresSlices () const
   stringstream s;
 
   s <<
-    "[";
+    '[';
 //     ", tempoKind: " << tempoKindAsString (fTempoKind) <<
 //     ", tempoWordsList: ";
 //
@@ -1378,7 +1378,7 @@ string msrTempo::asShortStringForMeasuresSlices () const
 //     tempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
 //     ", line " << fInputLineNumber;
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }

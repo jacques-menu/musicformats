@@ -6313,7 +6313,7 @@ string msrMeasure::asShortString () const
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -6388,7 +6388,7 @@ string msrMeasure::asShortStringForMeasuresSlices () const
     --gIndenter;
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }
@@ -6424,7 +6424,7 @@ string msrMeasure::asString () const
     mfSingularOrPlural (
       fMeasureElementsList.size (), "element", "elements") <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

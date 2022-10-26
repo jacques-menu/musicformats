@@ -18445,7 +18445,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
     gLogStream <<
       "Creating a '" <<
       fCurrentNoteActualNotes <<
-      "/" <<
+      '/' <<
       fCurrentNoteNormalNotes <<
       "' tuplet with first note " <<
       firstNote->

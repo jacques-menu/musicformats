@@ -4,6 +4,9 @@
     "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.0">
   <!-- A very minimal MusicXML example -->
+  <work>
+    <work-title>Measure Rest With Harmony With Positive Offset</work-title>
+    </work>
   <part-list>
     <score-part id="P1">
       <part-name>Music</part-name>

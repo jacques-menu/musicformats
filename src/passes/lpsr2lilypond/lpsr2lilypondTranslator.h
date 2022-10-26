@@ -956,6 +956,11 @@ class EXP lpsr2lilypondTranslator :
     void                  generateCodeForSpannerAfterNote (
                             S_msrSpanner spanner);
 
+    // tuplets
+
+    string                tupletFactorAsLilypondString (
+                            const msrTupletFactor& tupletFactor);
+
     // grace notes
 
     Bool                  fOnGoingGraceNotesGroup;

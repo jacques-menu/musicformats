@@ -236,7 +236,7 @@ The name \code{OPTION} is used in \mfsl{mfslScanner.ll} prefixed by \code{yy::pa
 "-"{name} {
   if (drv.getTraceTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
-    ": option [" << yytext << "]" <<
+    ": option [" << yytext << ']' <<
     endl;
   }
   return yy::parser::make_OPTION (yytext, loc);
@@ -561,7 +561,7 @@ The names and the options are handled by:
 {name} {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
-    ": name [" << yytext << "]" <<
+    ": name [" << yytext << ']' <<
     endl;
   }
 
@@ -578,7 +578,7 @@ The names and the options are handled by:
 "-"{name} {
   if (drv.getTraceTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
-    ": option [" << yytext << "]" <<
+    ": option [" << yytext << ']' <<
     endl;
   }
   return yy::parser::make_OPTION (yytext, loc);

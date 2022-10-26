@@ -1149,7 +1149,7 @@ string msrBeatRepeat::asString () const
     ", " <<
     fetchBeatRepeatReplicasNumber () << " replicas" <<
     ")" <<
-    "]";
+    ']';
 
   return s.str ();
 }

@@ -2,12 +2,12 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 1.0 Partwise//EN"
                                 "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
-  <movement-title>All MusicXML chord names/types with &lt;root&gt;</movement-title>
+  <movement-title>Chord type</movement-title>
   <identification>
     <miscellaneous>
-      <miscellaneous-field name="description">All chord types defined in 
-          MusicXML. The staff will only contain one c' note (NO chord) for 
-          all of them, but the chord names should be properly 
+      <miscellaneous-field name="description">All chord types defined in
+          MusicXML. The staff will only contain one c' note (NO chord) for
+          all of them, but the chord names should be properly
           printed.</miscellaneous-field>
     </miscellaneous>
   </identification>

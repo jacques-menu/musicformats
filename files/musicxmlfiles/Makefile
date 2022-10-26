@@ -76,6 +76,7 @@ all:
 	@$(MAKE) pdflily
 
 clean:
+	@rm *.ly *.pdf *.midi
 	@[ ! -d lilypond ] || rm -r lilypond
 	@[ ! -d pdflily ]  || rm -r pdflily
 	@[ ! -d pnglilyv ] || rm -r pnglily

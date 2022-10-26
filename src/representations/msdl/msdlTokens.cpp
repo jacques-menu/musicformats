@@ -375,7 +375,7 @@ string msdlTokenKindAsMsdlString (
       result = "*";
       break;
     case msdlTokenKind::kTokenSlash:
-      result = "/";
+      result = '/';
       break;
     case msdlTokenKind::kTokenPercent:
       result = "%";
@@ -768,7 +768,7 @@ string msdlTokenKindsSet::asString () const
 {
   stringstream s;
 
-  s << "[";
+  s << '[';
 
   if (fTokenKindsSet.size ()) {
     set<msdlTokenKind>::const_iterator
@@ -791,7 +791,7 @@ string msdlTokenKindsSet::asString () const
     } // for
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }
@@ -1319,7 +1319,7 @@ string msdlTokenDescription::asString () const
       break;
   } // switch
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }
@@ -1352,7 +1352,7 @@ void msdlTokenDescription::print (ostream& os) const
       break;
   } // switch
 
-  os << "]";
+  os << ']';
 }
 
 ostream& operator << (ostream& os, const msdlTokenDescription& elt)
@@ -1501,7 +1501,7 @@ string msdlToken::asString () const
       s << "*";
       break;
     case msdlTokenKind::kTokenSlash:
-      s << "/";
+      s << '/';
       break;
     case msdlTokenKind::kTokenPercent:
       s << "%";
@@ -1690,7 +1690,7 @@ string msdlToken::asMsdlString (
       s << "*";
       break;
     case msdlTokenKind::kTokenSlash:
-      s << "/";
+      s << '/';
       break;
     case msdlTokenKind::kTokenPercent:
       s << "%";
@@ -1857,7 +1857,7 @@ void msdlToken::print (ostream& os) const
       os << "*";
       break;
     case msdlTokenKind::kTokenSlash:
-      os << "/";
+      os << '/';
       break;
     case msdlTokenKind::kTokenPercent:
       os << "%";

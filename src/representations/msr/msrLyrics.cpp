@@ -471,7 +471,7 @@ string msrSyllable::syllableWholeNotesAsMsrString () const
               noteDisplayWholeNotesAsMsrString () <<
             "*" <<
             fSyllableTupletFactor.getTupletNormalNotes () <<
-            "/" <<
+            '/' <<
             fSyllableTupletFactor.getTupletActualNotes ();
 
           result = s.str ();
@@ -617,7 +617,7 @@ void msrSyllable::writeTextsList (
   const list<string>& textsList,
   ostream&            os)
 {
-  os << "[";
+  os << '[';
 
   if (textsList.size ()) {
     list<string>::const_iterator
@@ -632,7 +632,7 @@ void msrSyllable::writeTextsList (
     } // for
   }
 
-  os << "]";
+  os << ']';
 }
 
 string msrSyllable::asString () const

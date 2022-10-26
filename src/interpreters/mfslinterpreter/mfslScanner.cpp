@@ -1440,7 +1440,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream <<
       "--> " << drv.getScannerLocation () <<
-      ": single quoted string [" << pStringBuffer << "]" <<
+      ": single quoted string [" << pStringBuffer << ']' <<
       endl;
   }
 
@@ -1510,7 +1510,7 @@ YY_RULE_SETUP
   if (drv.getDisplayTokens ()) {
     gLogStream <<
       "--> " << drv.getScannerLocation () <<
-      ": double quoted string [" << pStringBuffer << "]" <<
+      ": double quoted string [" << pStringBuffer << ']' <<
       endl;
   }
 
@@ -1726,7 +1726,7 @@ YY_RULE_SETUP
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
-    ": name [" << yytext << "]" <<
+    ": name [" << yytext << ']' <<
     endl;
   }
 
@@ -1745,7 +1745,7 @@ YY_RULE_SETUP
 {
   if (drv.getDisplayTokens ()) {
     gLogStream << "--> " << drv.getScannerLocation () <<
-    ": option [" << yytext << "]" <<
+    ": option [" << yytext << ']' <<
     endl;
   }
 

@@ -262,7 +262,7 @@ string msrClef::asString () const
     ", fClefKind: " << msrClefKindAsString (fClefKind) <<
     ", fClefStaffNumber: " << fClefStaffNumber <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -276,7 +276,7 @@ string msrClef::asShortStringForMeasuresSlices () const
     msrClefKindAsString (fClefKind) <<
 // JMI    ", fClefStaffNumber: " << fClefStaffNumber <<
 // JMI    ", " << fClefStaffNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

@@ -2547,7 +2547,7 @@ void msrNote::determineTupletMemberSoundingFromDisplayWholeNotes (
       " for note '" <<
       asShortString () <<
       ", tuplet factor is '" <<
-      actualNotes << "/" << normalNotes <<
+      actualNotes << '/' << normalNotes <<
       "', line " << fInputLineNumber <<
       endl;
   }
@@ -3902,7 +3902,7 @@ string msrNote::asShortStringWithRawWholeNotes () const
 {
   stringstream s;
 
-  s << "[";
+  s << '[';
 
   switch (fNoteKind) {
     case msrNoteKind::k_NoNote:
@@ -4118,7 +4118,7 @@ string msrNote::asShortStringWithRawWholeNotes () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -4127,7 +4127,7 @@ string msrNote::asShortString () const
 {
   stringstream s;
 
-  s << "[";
+  s << '[';
 
   switch (fNoteKind) {
     case msrNoteKind::k_NoNote:
@@ -4405,7 +4405,7 @@ string msrNote::asShortString () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -4414,7 +4414,7 @@ string msrNote::asMinimalString () const
 {
   stringstream s;
 
-  s << "[";
+  s << '[';
 
   switch (fNoteKind) {
     case msrNoteKind::k_NoNote:
@@ -4627,7 +4627,7 @@ string msrNote::asMinimalString () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return ""; // JMI KAKA
 
@@ -4707,7 +4707,7 @@ string msrNote::soundingNoteEssentialsAsString () const
     msrOctaveKindAsString (fNoteOctaveKind) <<
 //     ",++++ " << // JMI KAKA
     noteComplementsAsString () <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -4728,7 +4728,7 @@ string msrNote::soundingNoteEssentialsAsStringForMeasuresSlices () const // JMI 
   s <<
     ' ' <<
     msrOctaveKindAsString (fNoteOctaveKind) <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -4994,7 +4994,7 @@ string msrNote::asString () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -5003,7 +5003,7 @@ string msrNote::asShortStringForMeasuresSlices () const
 {
   stringstream s;
 
-  s << "[";
+  s << '[';
 
   switch (fNoteKind) {
     case msrNoteKind::k_NoNote:
@@ -5140,7 +5140,7 @@ string msrNote::asShortStringForMeasuresSlices () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

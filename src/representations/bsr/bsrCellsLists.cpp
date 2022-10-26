@@ -340,7 +340,7 @@ string bsrCellsList::asString () const
   }
 
   s <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -369,7 +369,7 @@ void bsrCellsList::print (ostream& os) const
   }
 
   os <<
-    "]";
+    ']';
 }
 
 ostream& operator << (ostream& os, const S_bsrCellsList& elt)

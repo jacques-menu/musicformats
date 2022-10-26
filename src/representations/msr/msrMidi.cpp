@@ -130,7 +130,7 @@ string msrMidiTempo::asString () const
     ", midiTempoDuration = \"" << fMidiTempoDuration << "\"" <<
     ", midiTempoPerSecond = " << fMidiTempoPerSecond <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

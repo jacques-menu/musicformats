@@ -185,7 +185,7 @@ string msrNoteEvent::asString () const
       "\"";
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }
@@ -273,7 +273,7 @@ string msrSimultaneousNotesChunk::asString () const
     } // for
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }
@@ -812,7 +812,7 @@ string msrMeasuresSlice::asString () const
     ", " <<
     mfSingularOrPlural (
       fSliceMeasuresVector.size (), "measure", "measures") <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -851,7 +851,7 @@ string msrMeasuresSlice::asShortString () const
   }
 
   s <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -891,7 +891,7 @@ string msrMeasuresSlice::asShortStringForMeasuresSlices () const
   }
 
   s <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1355,7 +1355,7 @@ string msrMeasuresSlicesSequence::asString () const
     ", " <<
     mfSingularOrPlural (
       fMeasuresSlicesVector.size (), "measure slice", "measures slices") <<
-    "]";
+    ']';
 
   return s.str ();
 }

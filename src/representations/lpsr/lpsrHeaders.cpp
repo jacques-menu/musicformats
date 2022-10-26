@@ -167,7 +167,7 @@ string lpsrHeader::asString () const
 //    ", movementNumber: \" " <<  fMovementNumber << "\"" <<
 //    ", movementTitle: \" " <<  fMovementTitle << "\"" <<
     ", ..." <<
-    "]";
+    ']';
 
   return s.str ();
 }

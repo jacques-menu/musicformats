@@ -269,7 +269,7 @@ string msrPageLayout::asString () const
   s <<
     "[PageLayout" <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -436,7 +436,7 @@ string msrSystemLayout::asString () const
   s <<
     "[SystemLayout" <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -588,7 +588,7 @@ string msrSystemDividers::asString () const
   s <<
     "[SystemDividers" <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -707,7 +707,7 @@ string msrStaffLayout::asString () const
     "[StaffLayout" <<
     ", staffDistance: " << fStaffDistance <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -826,7 +826,7 @@ string msrMeasureLayout::asString () const
     "[MeasureLayout" <<
     ", measureDistance: " << fMeasureDistance <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -980,7 +980,7 @@ string msrPrintLayout::asString () const
   s <<
     "[PrintLayout" <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1278,7 +1278,7 @@ string msrLineWidth::asString () const
     }
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1443,7 +1443,7 @@ string msrNoteSize::asString () const
     noteSizeTypeKindAsString (fNoteSizeTypeKind) <<
     ", noteSizeValue: " << fNoteSizeValue <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1599,7 +1599,7 @@ string msrDistance::asString () const
     distanceTypeKindAsString (fDistanceTypeKind) <<
     ", distanceValue: " << fDistanceValue <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1792,7 +1792,7 @@ string msrGlyph::asString () const
      ", glyphValue: " <<
     fGlyphValue <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1944,7 +1944,7 @@ string msrOtherAppearance::asString () const
     otherAppearanceTypeKindAsString (fOtherAppearanceTypeKind) <<
     ", otherAppearanceValue: " << fOtherAppearanceValue <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -2105,7 +2105,7 @@ string msrAppearance::asString () const
     ", otherAppearanceValue: " <<  fOtherAppearanceValue <<
     */
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

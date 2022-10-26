@@ -495,7 +495,7 @@ string bsrTempo::asDebugString () const
   } // switch
  // JMI   tempoKindAsDebugString (fMsrTempo->getTempoKind ());
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }

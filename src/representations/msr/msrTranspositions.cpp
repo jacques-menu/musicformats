@@ -156,7 +156,7 @@ string msrTransposition::asString () const
     ", fTranspositionOctaveChange = " << fTranspositionOctaveChange <<
     ", fTranspositionDouble = " << fTranspositionDouble <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

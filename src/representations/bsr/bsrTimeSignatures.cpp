@@ -234,7 +234,7 @@ string bsrTimeSignatureItem::asString () const
     case 1:
       s <<
         ", " <<
-        fTimeSignatureBeatsNumbersVector [0] << "/" << fTimeSignatureBeatValue;
+        fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
       break;
 
     default:
@@ -826,7 +826,7 @@ string bsrTimeSignature::asDebugString () const
   s <<
     "[TIME " <<
     timeKindAsDebugString (fTimeKind) <<
-    "]";
+    ']';
 
   return s.str ();
 }

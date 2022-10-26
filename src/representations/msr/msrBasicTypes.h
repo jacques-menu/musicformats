@@ -2136,6 +2136,8 @@ class EXP msrTupletFactor
                                   fTupletActualNotes == fTupletNormalNotes;
                               }
 
+    msrTupletFactor       inverse () const;
+
     Rational              asRational () const
                             {
                               return
@@ -2143,6 +2145,8 @@ class EXP msrTupletFactor
                                   fTupletActualNotes,
                                   fTupletNormalNotes);
                             }
+
+    string                asFractionString () const;
 
   public:
 

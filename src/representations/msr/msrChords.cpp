@@ -944,10 +944,10 @@ void msrChord::finalizeChord (
   }
 #endif
 
-  // we can now set the position in measures for all the chord members
-  setChordMembersPositionInMeasure (
-    fChordDirectUpLinkToMeasure,
-    fMeasureElementPositionInMeasure);
+  // we can now set the position in measures for all the chord members JMI v0.9.66
+//   setChordMembersPositionInMeasure (
+//     fChordDirectUpLinkToMeasure,
+//     fMeasureElementPositionInMeasure);
 }
 
 void msrChord::acceptIn (basevisitor* v)
@@ -1306,7 +1306,7 @@ void msrChord::applyTupletMemberDisplayFactorToChordMembers (
   if (gGlobalTracingOahGroup->getTraceTuplets ()) {
     gLogStream <<
       "Applying tuplet member sounding factor '" <<
-      actualNotes << "/" << normalNotes <<
+      actualNotes << '/' << normalNotes <<
       "' to the members of chord '" << asStringwithRawDivisions () <<
       "', line " << fInputLineNumber <<
       endl;
@@ -1342,7 +1342,7 @@ string msrChord::asStringwithRawDivisions () const
       /* JMI
         note->notePitchAsString () <<
         note->noteSoundingWholeNotesAsMsrString () <<
-        '[' << note->getNoteOctave () << "]"
+        '[' << note->getNoteOctave () << ']'
         */
 
         note->asShortStringWithRawWholeNotes ();
@@ -1384,7 +1384,7 @@ string msrChord::asString () const
         note->getNoteDisplayWholeNotes () <<
         ", octave: " <<
         msrOctaveKindAsString (note->getNoteOctaveKind ()) <<
-        "]";
+        ']';
 
       if (++i == iEnd) break;
       s << ' ';
@@ -3154,7 +3154,7 @@ string msrChordBeamLink::asShortString () const
     ", upLinkToChord \"" <<
     fUpLinkToChord->asShortString () <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -3170,7 +3170,7 @@ string msrChordBeamLink::asString () const
     ", upLinkToChord \"" <<
     fUpLinkToChord->asString () <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -3376,7 +3376,7 @@ string msrChordSlurLink::asShortString () const
     ", upLinkToChord \"" <<
     fUpLinkToChord->asShortString () <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -3392,7 +3392,7 @@ string msrChordSlurLink::asString () const
     ", upLinkToChord \"" <<
     fUpLinkToChord->asString () <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -3600,7 +3600,7 @@ string msrChordGraceNotesGroupLink::asShortString () const
     ", upLinkToChord \"" <<
     fUpLinkToChord->asShortString () <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -3616,7 +3616,7 @@ string msrChordGraceNotesGroupLink::asString () const
     ", upLinkToChord \"" <<
     fUpLinkToChord->asString () <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

@@ -841,7 +841,7 @@ mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
     for (string command : fCommandsList) {
       if (fDisplayToolAndInput) {
         gLogStream <<
-          "====> Running the tool with command: [" << command << "]" <<
+          "====> Running the tool with command: [" << command << ']' <<
           endl;
       }
 

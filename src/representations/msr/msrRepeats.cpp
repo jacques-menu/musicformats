@@ -369,7 +369,7 @@ string msrRepeatCommonPart::asString () const
     fRepeatCommonPartUpLinkToRepeat->
       asShortString () <<
     "', line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -757,7 +757,7 @@ string msrRepeatEnding::asString () const
     ", repeatEndingNumber: " << fRepeatEndingNumber <<
     ", repeatEndingInternalNumber: " << fRepeatEndingInternalNumber <<
     "', line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1763,7 +1763,7 @@ string msrRepeat::asString () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1969,7 +1969,7 @@ void msrRepeat::printShort (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator << (ostream& os, const S_msrRepeat& elt)

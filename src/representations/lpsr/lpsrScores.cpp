@@ -602,9 +602,9 @@ R"(
       extent
       grob)))
 
-#(add-bar-glyph-print-procedure "/" (make-custom-short-bar-line 0.1 0.1))
+#(add-bar-glyph-print-procedure '/' (make-custom-short-bar-line 0.1 0.1))
 
-#(define-bar-line "/" "/" #f #f)
+#(define-bar-line '/' '/' #f #f)
 )";
 
 

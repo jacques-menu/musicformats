@@ -199,7 +199,7 @@ string msrHumdrumScotKeyItem::asString () const
     ", keyOctaveKind" << ": " <<
     msrOctaveKindAsString (fKeyOctaveKind) <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -650,7 +650,7 @@ string msrKey::asString () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -660,7 +660,7 @@ string msrKey::asShortStringForMeasuresSlices () const
   stringstream s;
 
   s <<
-    "[";
+    '[';
 
   switch (fKeyKind) {
     case msrKeyKind::kKeyTraditional:
@@ -683,7 +683,7 @@ string msrKey::asShortStringForMeasuresSlices () const
 
   s <<
 // JMI    ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

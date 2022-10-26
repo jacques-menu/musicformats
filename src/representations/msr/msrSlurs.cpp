@@ -151,7 +151,7 @@ string msrSlur::asString () const
       fSlurPlacementKind) <<
 
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

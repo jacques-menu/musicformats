@@ -1147,7 +1147,7 @@ string msrMeasureRepeat::asString () const
     ", " <<
     fetchMeasureRepeatReplicasNumber () << " replicas" <<
     ")" <<
-    "]";
+    ']';
 
   return s.str ();
 }

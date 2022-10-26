@@ -123,7 +123,7 @@ string msrBeam::asString () const
     msrBeamKindAsString (fBeamKind) <<
     ", number: " << fBeamNumber <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

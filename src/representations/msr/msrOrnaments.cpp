@@ -178,7 +178,7 @@ string msrOrnament::asString () const
     msrPlacementKindAsString (fOrnamentPlacementKind) <<
     ", ornamentAccidentalKind: " <<
     msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
-    "]";
+    ']';
 
   return s.str ();
 }

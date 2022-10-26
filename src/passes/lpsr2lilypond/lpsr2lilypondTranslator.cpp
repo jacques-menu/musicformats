@@ -2457,21 +2457,21 @@ void lpsr2lilypondTranslator::generateCodeForNoteRegularInTuplet (
           getGenerateLpsrVisitingInformation ();
 
     if (traceNotes || generateMsrVisitingInformation) {
-    stringstream s;
+			stringstream s;
 
-    s <<
-      endl <<
-      "% --> generating code for noteRegularInTuplet " <<
-      note->asString () <<
-      ", line " << inputLineNumber <<
-      endl;
+			s <<
+				endl <<
+				"% --> generating code for noteRegularInTuplet " <<
+				note->asString () <<
+				", line " << inputLineNumber <<
+				endl;
 
-      if (traceNotes) {
-        gLogStream << s.str ();
-      }
+				if (traceNotes) {
+					gLogStream << s.str ();
+				}
 
-      if (generateMsrVisitingInformation) {
-        fLilypondCodeStream << s.str ();
+				if (generateMsrVisitingInformation) {
+					fLilypondCodeStream << s.str ();
       }
     }
   }
@@ -3952,7 +3952,7 @@ void lpsr2lilypondTranslator::generateOrnament (
             denominator
             -
             numerator <<
-          "/" <<
+          '/' <<
             denominator <<
           "\\turn ";
 
@@ -4400,6 +4400,20 @@ void lpsr2lilypondTranslator::generateCodeForSpannerAfterNote (
 }
 
 //________________________________________________________________________
+string lpsr2lilypondTranslator::tupletFactorAsLilypondString (
+	const msrTupletFactor& tupletFactor)
+{
+  stringstream s;
+
+  s <<
+    tupletFactor.getTupletActualNotes () <<
+		'/' <<
+		tupletFactor.getTupletNormalNotes ();
+
+  return s.str ();
+}
+
+//________________________________________________________________________
 string lpsr2lilypondTranslator::dynamicAsLilypondString (
   S_msrDynamic dynamic)
 {
@@ -4641,7 +4655,7 @@ string lpsr2lilypondTranslator::harmonyAsLilypondString (
         harmony->
           getHarmonyDisplayWholeNotes ()) <<
       "*" <<
-      Rational (1, 1) / harmonyTupletFactor.asRational ();
+      harmonyTupletFactor.inverse ().asFractionString ();
   }
 
   // generate harmony kind
@@ -4924,7 +4938,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
     msrQuarterTonesPitchKind::k_NoQuarterTonesPitch
   ) {
     s <<
-      "/" <<
+      '/' <<
       msrQuarterTonesPitchKindAsStringInLanguage (
         harmonyBassQuarterTonesPitchKind,
         gGlobalMsrOahGroup->
@@ -4959,7 +4973,7 @@ string lpsr2lilypondTranslator::figureAsLilypondString (
   // generate the bass figure number
   switch (figuredBassParenthesesKind) {
     case msrFiguredBassElement::kFiguredBassElementParenthesesYes:
-      s << "[";
+      s << '[';
       break;
     case msrFiguredBassElement::kFiguredBassElementParenthesesNo:
       break;
@@ -4970,7 +4984,7 @@ string lpsr2lilypondTranslator::figureAsLilypondString (
 
   switch (figuredBassParenthesesKind) {
     case msrFiguredBassElement::kFiguredBassElementParenthesesYes:
-      s << "]";
+      s << ']';
       break;
     case msrFiguredBassElement::kFiguredBassElementParenthesesNo:
       break;
@@ -5029,7 +5043,7 @@ string lpsr2lilypondTranslator::figureAsLilypondString (
       s << "souble sharp";
       break;
     case msrBassFigure::kSlashSuffix:
-      s << "/";
+      s << '/';
       break;
   } // switch
 
@@ -7714,7 +7728,7 @@ R"(\context {
   slashChordSeparator = \markup {
     % the \hspace commands simulate kerning
     \hspace #-.7
-    \fontsize #1 \lower #1.2 \rotate #-10 "/"
+    \fontsize #1 \lower #1.2 \rotate #-10 '/'
     \hspace #-.1
   }
   chordNoteNamer = #lower-extension
@@ -11830,7 +11844,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
     // generate the bass figure number
     switch (figuredBassParenthesesKind) {
       case msrFiguredBassElement::kFiguredBassElementParenthesesYes:
-        fLilypondCodeStream << "[";
+        fLilypondCodeStream << '[';
         break;
       case msrFiguredBassElement::kFiguredBassElementParenthesesNo:
         break;
@@ -11841,7 +11855,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
 
     switch (figuredBassParenthesesKind) {
       case msrFiguredBassElement::kFiguredBassElementParenthesesYes:
-        fLilypondCodeStream << "]";
+        fLilypondCodeStream << ']';
         break;
       case msrFiguredBassElement::kFiguredBassElementParenthesesNo:
         break;
@@ -11900,7 +11914,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
         fLilypondCodeStream << "souble sharp";
         break;
       case msrBassFigure::kSlashSuffix:
-        fLilypondCodeStream << "/";
+        fLilypondCodeStream << '/';
         break;
     } // switch
 
@@ -13921,7 +13935,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTimeSignature& elt)
           fLilypondCodeStream <<
             "\\time " <<
             beatsNumbersVector [0] << // the only element
-            "/" <<
+            '/' <<
             timeSignatureItem->getTimeSignatureBeatValue ();
         }
 
@@ -15241,7 +15255,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempoTuplet& elt)
   fLilypondCodeStream <<
     "\\tuplet " <<
     tempoTupletFactor.getTupletActualNotes () <<
-    "/" <<
+    '/' <<
     tempoTupletFactor.getTupletNormalNotes () << " { ";
 }
 
@@ -21364,7 +21378,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
 
   fLilypondCodeStream <<
     "\\tuplet " <<
-    elt->getTupletFactor ().asRational () <<
+	  tupletFactorAsLilypondString (elt->getTupletFactor ()) <<
     " {" <<
     endl;
 
@@ -21979,7 +21993,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
           fLilypondCodeStream << "\\bar \"'\" ";
           break;
         case msrBarLine::kBarLineStyleShort:
-          // \bar "/" is the custom short barLine
+          // \bar '/' is the custom short barLine
           fLilypondCodeStream << "\\bar \"/\" ";
           break;
           /* JMI

@@ -301,7 +301,7 @@ string msrDalSegno::asString () const
     ", staffNumber: " << fStaffNumber <<
     ", positionInMeasure: " << fMeasureElementPositionInMeasure <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
