@@ -1103,7 +1103,7 @@ string msrSemiTonesPitchAndOctave::asString () const
     msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
     ", octave: " <<
     msrOctaveKindAsString (fOctaveKind) <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -2188,7 +2188,7 @@ string wholeNotesAsMsrString (
         1 <<
         "*" <<
         numerator <<
-        "/" <<
+        '/' <<
         denominator;
 
       result = s.str ();
@@ -2203,11 +2203,11 @@ string wholeNotesAsMsrString (
         " is no power of two between 1 and 128" <<
    //     " is no power of 2 between 1 and 1024" <<
         ", whole notes duration " <<
-        numerator << "/" << denominator;
+        numerator << '/' << denominator;
 //
 //       if (rationalHasBeenSimplified) {
 //         s <<
-//           " (" << numerator << "/" << denominator << ")" <<
+//           " (" << numerator << '/' << denominator << ")" <<
 //         endl;
 //       }
 
@@ -2422,7 +2422,7 @@ string wholeNotesAsMsrString (
     }
     else {
       s <<
-        "*" << multiplyingFactor << "/" << 1; // ??? denominator;
+        "*" << multiplyingFactor << '/' << 1; // ??? denominator;
     }
     */
   }
@@ -2653,7 +2653,7 @@ string msrMoment::asString () const
     fWrittenPositionInMeseasure <<
     ", soundingRelativeOffset: " <<
     fSoundingRelativeOffset <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -2713,6 +2713,14 @@ msrTupletFactor::msrTupletFactor (
 msrTupletFactor::~msrTupletFactor ()
 {}
 
+msrTupletFactor msrTupletFactor::inverse () const
+{
+  msrTupletFactor result (
+    fTupletNormalNotes, fTupletActualNotes);
+
+  return result;
+}
+
 string msrTupletFactor::asString () const
 {
   stringstream s;
@@ -2721,7 +2729,16 @@ string msrTupletFactor::asString () const
     "[TupletFactor" <<
     ", tupletActualNotes: " << fTupletActualNotes <<
     ", tupletNormalNotes: " << fTupletNormalNotes <<
-    "]";
+    ']';
+
+  return s.str ();
+}
+
+string msrTupletFactor::asFractionString () const
+{
+  stringstream s;
+
+  s << fTupletActualNotes << '/' << fTupletNormalNotes;
 
   return s.str ();
 }
@@ -15842,7 +15859,7 @@ string msrMargin::asString () const
     fMarginLength.asString () <<
     ' ' <<
     msrMarginTypeKindAsString (fMarginTypeKind) <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -16055,7 +16072,7 @@ string msrMarginsGroup::asString () const
     ", rightMargin: " << fRightMargin->asString () <<
     ", topMargin: " << fTopMargin->asString () <<
     ", bottomMargin: " << fBottomMargin->asString () <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -19780,7 +19797,7 @@ string msrHarmonyInterval::asString () const
     msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
     ", fHarmonyIntervalRelativeOctave: " <<
     fHarmonyIntervalRelativeOctave <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -19790,11 +19807,11 @@ string msrHarmonyInterval::asShortString () const
   stringstream s;
 
   s <<
-    "[" <<
+    '[' <<
     msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
     ", rel.oct. " <<
     fHarmonyIntervalRelativeOctave <<
-    "]";
+    ']';
 
   return s.str ();
 }

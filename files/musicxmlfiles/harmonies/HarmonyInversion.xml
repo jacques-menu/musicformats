@@ -4,7 +4,7 @@
     "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise version="3.0">
   <work>
-    <work-title>Harmony inversion</work-title>
+    <work-title>Harmony Inversion</work-title>
     </work>
   <!-- A very minimal MusicXML example -->
   <part-list>

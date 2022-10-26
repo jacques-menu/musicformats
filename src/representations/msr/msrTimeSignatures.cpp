@@ -229,7 +229,7 @@ string msrTimeSignatureItem::asString () const
 
     case 1:
       s <<
-        fTimeSignatureBeatsNumbersVector [0] << "/" << fTimeSignatureBeatValue;
+        fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
       break;
 
     default:
@@ -281,7 +281,7 @@ string msrTimeSignatureItem::asShortStringForMeasuresSlices () const
 
     case 1:
       s <<
-        fTimeSignatureBeatsNumbersVector [0] << "/" << fTimeSignatureBeatValue;
+        fTimeSignatureBeatsNumbersVector [0] << '/' << fTimeSignatureBeatValue;
       break;
 
     default:
@@ -916,7 +916,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
       endl << endl <<
       "result1 = " <<
       result.getNumerator () <<
-      "/" <<
+      '/' <<
       result.getDenominator () <<
       endl << endl;
 */
@@ -933,7 +933,7 @@ Rational msrTimeSignature::wholeNotesDurationPerMeasure () const
         endl << endl <<
         "result2 = " <<
         result.getNumerator () <<
-        "/" <<
+        '/' <<
         result.getDenominator () <<
         endl << endl;
         */
@@ -1042,7 +1042,7 @@ string msrTimeSignature::asString () const
     }
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }
@@ -1074,7 +1074,7 @@ string msrTimeSignature::asShortStringForMeasuresSlices () const
   stringstream s;
 
   s <<
-    "[";
+    '[';
 
 /* JMI
     ", timeSignatureSymbolKind: " <<
@@ -1116,7 +1116,7 @@ string msrTimeSignature::asShortStringForMeasuresSlices () const
     }
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }

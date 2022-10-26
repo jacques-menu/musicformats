@@ -388,7 +388,7 @@ string msrCredit::asString () const
       s << ", ";
     } // for
 
-    s << "]";
+    s << ']';
   }
 
   else

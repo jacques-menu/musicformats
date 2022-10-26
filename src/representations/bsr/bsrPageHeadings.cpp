@@ -223,7 +223,7 @@ string bsrPageHeading::asDebugString () const
 
   s <<
     ", pageHeadingNumber: " << fPageHeadingNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

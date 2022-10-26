@@ -48,7 +48,7 @@ string mxmlelementAsString (Sxmlelement elem)
     ", elemType: " << elemType <<
     ", elemName: " << elemName <<
     ", elemAttributes.size ():" << elemAttributes.size () <<
-    "]";
+    ']';
 
   return s.str ();
 }

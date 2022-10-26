@@ -239,7 +239,7 @@ string bsrBarLine::asDebugString () const
   s <<
     "[BARLINE " <<
     barLineKindAsDebugString (fBarLineKind) <<
-    "]";
+    ']';
 
   return s.str ();
 }

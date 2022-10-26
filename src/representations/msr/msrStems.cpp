@@ -128,7 +128,7 @@ string msrStem::asString () const
     ", stemKind: " <<
     stemKindAsString (fStemKind) <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

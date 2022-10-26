@@ -347,7 +347,7 @@ string bsrKey::asDebugString () const
     s << "C major";
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }

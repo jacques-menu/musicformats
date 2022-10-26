@@ -321,7 +321,7 @@ string bsrClef::asDebugString () const
   s <<
     "CLEF " <<
     clefKindAsDebugString (fClefKind) <<
-    "]";
+    ']';
 
   return s.str ();
 }

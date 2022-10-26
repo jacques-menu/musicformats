@@ -877,7 +877,7 @@ string msrHarmony::asString () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

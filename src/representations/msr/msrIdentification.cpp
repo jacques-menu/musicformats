@@ -529,7 +529,7 @@ string msrIdentification::asString () const
     ", movementNumber: \" " <<  fIdentificationMovementNumber << "\"" <<
     ", movementTitle: \" " <<  fIdentificationMovementTitle << "\"" <<
     ", ..." <<
-    "]";
+    ']';
 
   return s.str ();
 }

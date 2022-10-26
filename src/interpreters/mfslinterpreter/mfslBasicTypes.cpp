@@ -81,7 +81,7 @@ string mfslOptionsBlock::asString () const
   s <<
     "mfslOptionsBlock [" <<
     "fOptionsBlockName: " << fOptionsBlockName <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -141,7 +141,7 @@ void mfslOptionsBlock::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator << (ostream& os, const S_mfslOptionsBlock& elt)
@@ -632,8 +632,8 @@ string mfslInput::asString () const
     "fInputName: " << fInputName <<
     ", " <<
 
-    "fInputName: [" << fInputName << "]" <<
-    "]";
+    "fInputName: [" << fInputName << ']' <<
+    ']';
 
   return s.str ();
 }
@@ -672,7 +672,7 @@ void mfslInput::displayInputNamesToOptionsBlocksMap (ostream& os) const
 //       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void mfslInput::print (ostream& os) const
@@ -715,7 +715,7 @@ void mfslInput::print (ostream& os) const
       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 
   size_t
     inputNamesToOptionsBlocksMapSize =
@@ -752,11 +752,11 @@ void mfslInput::print (ostream& os) const
 //       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator << (ostream& os, const S_mfslInput& elt)
@@ -917,7 +917,7 @@ string mfslInputsTable::asString () const
 
   s <<
     "mfslInputsTable [" <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -941,7 +941,7 @@ void mfslInputsTable::displayInputsMap (ostream& os) const // useless ??? JMI
     --gIndenter;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void mfslInputsTable::print (ostream& os) const
@@ -962,7 +962,7 @@ void mfslInputsTable::print (ostream& os) const
     --gIndenter;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator << (ostream& os, const S_mfslInputsTable& elt)
@@ -1490,8 +1490,8 @@ string mfslChoice::asString () const
     "fChoiceName: " << fChoiceName <<
     ", " <<
 
-    "fChoiceLabel: [" << fChoiceLabel << "]" <<
-    "]";
+    "fChoiceLabel: [" << fChoiceLabel << ']' <<
+    ']';
 
   return s.str ();
 }
@@ -1530,7 +1530,7 @@ void mfslChoice::displayChoiceLabelsToOptionsBlocksMap (ostream& os) const
 //       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void mfslChoice::print (ostream& os) const
@@ -1573,7 +1573,7 @@ void mfslChoice::print (ostream& os) const
       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 
   os << left <<
     setw (fieldWidth) <<
@@ -1615,11 +1615,11 @@ void mfslChoice::print (ostream& os) const
 //       }
     } // for
   }
-  os << "]" << endl;
+  os << ']' << endl;
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator << (ostream& os, const S_mfslChoice& elt)
@@ -1780,7 +1780,7 @@ string mfslChoicesTable::asString () const
 
   s <<
     "mfslChoicesTable [" <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -1804,7 +1804,7 @@ void mfslChoicesTable::displayChoicesMap (ostream& os) const // useless ??? JMI
     --gIndenter;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 void mfslChoicesTable::print (ostream& os) const
@@ -1825,7 +1825,7 @@ void mfslChoicesTable::print (ostream& os) const
     --gIndenter;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator << (ostream& os, const S_mfslChoicesTable& elt)
@@ -1870,7 +1870,7 @@ mfslCaseChoiceStatement::mfslCaseChoiceStatement (
       "====> Creating case statement" <<
       ", caseChoice: [" <<
       fCaseChoice->asString () <<
-      "]" <<
+      ']' <<
       ", line " << drv.getScannerLocation () <<
       endl;
   }
@@ -1894,7 +1894,7 @@ void mfslCaseChoiceStatement::registerCaseChoiceLabel (
       label <<
       "\" in case statement: [" <<
       asString () <<
-      "]" <<
+      ']' <<
       ", line " << drv.getScannerLocation () <<
       endl;
   }
@@ -1975,7 +1975,7 @@ string mfslCaseChoiceStatement::asString () const
   s <<
     "mfslCaseChoiceStatement [" <<
     fCaseChoice->asString () <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -2028,7 +2028,7 @@ void mfslCaseChoiceStatement::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator << (ostream& os, const S_mfslCaseChoiceStatement& elt)
@@ -2073,7 +2073,7 @@ mfslCaseInputStatement::mfslCaseInputStatement (
       "====> Creating case statement" <<
       ", caseInput: [" <<
       fCaseInputInput->asString () <<
-      "]" <<
+      ']' <<
       ", line " << drv.getScannerLocation () <<
       endl;
   }
@@ -2097,7 +2097,7 @@ void mfslCaseInputStatement::registerCaseInputName (
       name <<
       "\" in case statement: [" <<
       asString () <<
-      "]" <<
+      ']' <<
       ", line " << drv.getScannerLocation () <<
       endl;
   }
@@ -2178,7 +2178,7 @@ string mfslCaseInputStatement::asString () const
   s <<
     "mfslCaseInputStatement [" <<
     fCaseInputInput->asString () <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -2231,7 +2231,7 @@ void mfslCaseInputStatement::print (ostream& os) const
 
   --gIndenter;
 
-  os << "]" << endl;
+  os << ']' << endl;
 }
 
 ostream& operator << (ostream& os, const S_mfslCaseInputStatement& elt)

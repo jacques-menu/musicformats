@@ -667,7 +667,7 @@ string msrFiguredBassElement::asString () const
       if (++i == iEnd) break;
       s << ' ';
     } // for
-  s << "]";
+  s << ']';
   }
 
   // print the figured bass position in measure
@@ -690,7 +690,7 @@ string msrFiguredBassElement::asString () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

@@ -4133,7 +4133,7 @@ R"()",
 
   string delayedOrnamentsFractionDefaultValue =
     to_string (fDelayedOrnamentsFraction.getNumerator ()) +
-      "/" +
+      '/' +
     to_string (fDelayedOrnamentsFraction.getDenominator ());
 
   subGroup->

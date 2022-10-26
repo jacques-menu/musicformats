@@ -539,7 +539,7 @@ string msrGraceNotesGroup::asShortString () const
 
   s <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -568,7 +568,7 @@ string msrGraceNotesGroup::asString () const
     } // for
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }

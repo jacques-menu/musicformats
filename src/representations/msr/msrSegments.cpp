@@ -2635,7 +2635,7 @@ string msrSegment::asShortString () const
     "', voice: \"" <<
     fSegmentUpLinkToVoice->getVoiceName () <<
     "\"" <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -2678,10 +2678,10 @@ string msrSegment::asString () const
       } // for
     }
 
-    s << "]";
+    s << ']';
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }

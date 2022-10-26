@@ -257,7 +257,7 @@ char* mfCharStarCat (
       "], strlen (source): [" << strlen (source) <<
       "], source: [" << source <<
       "], destinationSize - strlen (destination) - 1: [" << destinationSize - strlen (destination) - 1 <<
-      "]";
+      ']';
 
     // sanity check
     mfAssert (
@@ -1690,7 +1690,7 @@ string mfStringSetAsString (
 {
   stringstream s;
 
-  s << "[";
+  s << '[';
 
   // append the set elements if any
   size_t stringSetSize =
@@ -1722,7 +1722,7 @@ string mfStringSetAsString (
     } // for
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }
@@ -1805,7 +1805,7 @@ string mfStringToStringMapAsString (
 {
   stringstream s;
 
-  s << "[";
+  s << '[';
 
   // append the set elements if any
   size_t stringToStringMapSize =
@@ -1842,7 +1842,7 @@ string mfStringToStringMapAsString (
     } // for
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }
@@ -1954,7 +1954,7 @@ string mfStringToStringMultiMapAsString (
 {
   stringstream s;
 
-  s << "[";
+  s << '[';
 
   // append the set elements if any
   size_t stringToStringMultiMapSize =
@@ -1991,7 +1991,7 @@ string mfStringToStringMultiMapAsString (
     } // for
   }
 
-  s << "]";
+  s << ']';
 
   return s.str ();
 }

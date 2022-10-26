@@ -5198,7 +5198,7 @@ void oahStringAtom::printAtomWithVariableOptionsValues (
     setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
-    '[' << fStringVariable << "]";
+    '[' << fStringVariable << ']';
 
   if (fSetByAnOption) { // JMIJMIJMI
     os <<
@@ -6447,7 +6447,7 @@ string oahNaturalNumbersSetElementAtom::asShortNamedOptionString () const
 
   s <<
     '-' << fShortName << ' ' <<
-    "[";
+    '[';
 
   set<int>::const_iterator
     iBegin = fNaturalNumbersSetVariable.begin (),
@@ -6461,7 +6461,7 @@ string oahNaturalNumbersSetElementAtom::asShortNamedOptionString () const
   } // for
 
   s <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -6472,7 +6472,7 @@ string oahNaturalNumbersSetElementAtom::asActualLongNamedOptionString () const
 
   s <<
     '-' << fLongName << ' ' <<
-    "[";
+    '[';
 
   set<int>::const_iterator
     iBegin = fNaturalNumbersSetVariable.begin (),
@@ -6486,7 +6486,7 @@ string oahNaturalNumbersSetElementAtom::asActualLongNamedOptionString () const
   } // for
 
   s <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -6709,7 +6709,7 @@ string oahRGBColorAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ' <<
     '[' <<
     fRGBColorVariable.asString () <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -6722,7 +6722,7 @@ string oahRGBColorAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ' <<
     '[' <<
     fRGBColorVariable.asString () <<
-    "]";
+    ']';
 
   return s.str ();
 }

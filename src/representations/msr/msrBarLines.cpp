@@ -495,7 +495,7 @@ string msrBarLine::asShortString () const
     ", " <<
     fBarLineTimes << " times" <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -537,7 +537,7 @@ string msrBarLine::asString () const
       fBarLineHasCodaKind) <<
 
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

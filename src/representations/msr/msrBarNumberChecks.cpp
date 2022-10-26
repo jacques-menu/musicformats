@@ -129,7 +129,7 @@ string msrBarNumberCheck::asString () const
     ", nextBarOriginalNumber = \"" << fNextBarOriginalNumber << "\"" <<
     ", nextBarPuristNumber = \"" << fNextBarPuristNumber << "\"" <<
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }

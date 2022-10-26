@@ -519,7 +519,7 @@ string oahOption::asString () const
   stringstream s;
 
   s <<
-    "oahOption [" << fOptionName << "]";
+    "oahOption [" << fOptionName << ']';
 
   if (fOptionValue.size ()) {
     s << " [";
@@ -7359,7 +7359,7 @@ void oahHandler::handleOptionPrefixName (
 
     for ( ; ; ) {
       gLogStream <<
-        '[' << (*i) << "]";
+        '[' << (*i) << ']';
       if (++i == iEnd) break;
       gLogStream <<
         ' ';

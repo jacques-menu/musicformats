@@ -401,7 +401,7 @@ string msrMultipleFullBarRests::asString () const
     ", " <<
 
     ", line " << fInputLineNumber <<
-    "]";
+    ']';
 
   return s.str ();
 }
@@ -513,7 +513,7 @@ void msrMultipleFullBarRests::print (ostream& os) const
     os << "empty" << endl;
   }
 
-  os << "]" << endl;
+  os << ']' << endl;
 
   --gIndenter;
 }

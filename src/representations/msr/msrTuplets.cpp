@@ -1050,7 +1050,7 @@ string msrTuplet::asString () const
     } // for
   }
 
-  s << "]]" << "]";
+  s << "]]" << ']';
 
   return s.str ();
 }
