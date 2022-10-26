@@ -41,7 +41,7 @@ alias skr="cd ${SCRIPTS_DIR}"
 BUILD_DIR=${MUSIC_FORMATS_DEV}/build
 alias build="cd ${BUILD_DIR}"
 
-INCLUDE_DIR=${SRC_DIR}/include
+INCLUDE_DIR=${MUSIC_FORMATS_DEV}/include
 alias inc="cd ${INCLUDE_DIR}"
 
 alias rmbuild='cd ${MUSIC_FORMATS_DEV}/build ; rm -r bin lib libdir; ls -sal'
