@@ -23,6 +23,7 @@
 #include "msrScores.h"
 #include "msrSegments.h"
 #include "msrSegnos.h"
+#include "msrDalSegnos.h"
 #include "msrStaves.h"
 #include "msrStavesDetails.h"
 #include "msrTimeSignatures.h"
@@ -74,8 +75,8 @@ typedef SMARTP<msrFrame> S_msrFrame;
 class msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 
-class msrFiguredBassElement;
-typedef SMARTP<msrFiguredBassElement> S_msrFiguredBassElement;
+class msrFiguredBass;
+typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 
 class msrTempo;
 typedef SMARTP<msrTempo> S_msrTempo;
@@ -393,8 +394,8 @@ class EXP msrVoice : public msrElement
     int                   getVoiceActualHarmoniesCounter () const
                               { return fVoiceActualHarmoniesCounter; }
 
-    int                   getVoiceActualFiguredBassElementsCounter () const
-                              { return fVoiceActualFiguredBassElementsCounter; }
+    int                   getVoiceActualFiguredBassesCounter () const
+                              { return fVoiceActualFiguredBassesCounter; }
 
     // has music been inserted in the voice?
 
@@ -496,13 +497,13 @@ class EXP msrVoice : public msrElement
 
     // backup and padding
 
-    void                  padUpToPositionInMeasureInVoice (
+    void                  padUpToMeasurePositionInVoice (
                             int             inputLineNumber,
-                            const Rational& wholeNotesPositionInMeasure);
+                            const Rational& wholeNotesMeasurePosition);
 
     void                  backupByWholeNotesStepLengthInVoice (
                             int             inputLineNumber,
-                            const Rational& backupTargetMeasureElementPositionInMeasure);
+                            const Rational& backupTargetMeasureElementMeasurePosition);
 
     // clef, key, time signature
 
@@ -519,7 +520,7 @@ class EXP msrVoice : public msrElement
 
     void                  insertHiddenMeasureAndBarLineInVoiceClone (
                             int             inputLineNumber,
-                            const Rational& positionInMeasure);
+                            const Rational& measurePosition);
 
     // notes
 
@@ -615,11 +616,11 @@ class EXP msrVoice : public msrElement
 
     // figured bass
 
-    void                  appendFiguredBassElementToVoice (
-                            S_msrFiguredBassElement figuredBassElement);
+    void                  appendFiguredBassToVoice (
+                            S_msrFiguredBass figuredBass);
 
-    void                  appendFiguredBassElementToVoiceClone (
-                            S_msrFiguredBassElement figuredBassElement);
+    void                  appendFiguredBassToVoiceClone (
+                            S_msrFiguredBass figuredBass);
 
     // frames
 
@@ -974,8 +975,8 @@ class EXP msrVoice : public msrElement
 
     // figured bass elements
 
-    void                  appendFiguredBassElementToFiguredBassVoice (
-                            S_msrFiguredBassElement figuredBassElement);
+    void                  appendFiguredBassToFiguredBassVoice (
+                            S_msrFiguredBass figuredBass);
 
     // repeats
 
@@ -1381,7 +1382,7 @@ class EXP msrVoice : public msrElement
     int                   fVoiceRestsCounter;
     int                   fVoiceSkipsCounter;
     int                   fVoiceActualHarmoniesCounter;
-    int                   fVoiceActualFiguredBassElementsCounter;
+    int                   fVoiceActualFiguredBassesCounter;
 
     // incomplete measures after repeats detection
     msrVoiceRepeatPhaseKind

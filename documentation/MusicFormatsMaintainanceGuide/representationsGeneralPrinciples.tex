@@ -94,7 +94,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
     newbornClone =
       msrTuplet::create (
         fInputLineNumber,
-        fMeasureElementMeasureNumber,
+        fetchMeasureElementMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
         fTupletLineShapeKind,
@@ -143,8 +143,10 @@ class EXP msrTimeSignature : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrTimeSignature> create (
-                            int                        inputLineNumber,
-                            msrTimeSignatureSymbolKind timeSignatureSymbolKind);
+                            int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
+                            msrTimeSignatureSymbolKind
+                                          timeSignatureSymbolKind);
 
     // creation from the applications
     // ------------------------------------------------------
@@ -167,20 +169,28 @@ class EXP msrTimeSignature : public msrMeasureElement
 The definitions in in \msr{msrTimeSignature.cpp} are:
 \begin{lstlisting}[language=CPlusPlus]
 S_msrTimeSignature msrTimeSignature::create (
-  int                        inputLineNumber,
-  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
+  int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
+  msrTimeSignatureSymbolKind
+                timeSignatureSymbolKind)
 {
   msrTimeSignature* o =
     new msrTimeSignature (
-      inputLineNumber, timeSignatureSymbolKind);
+      inputLineNumber,
+      upLinkToMeasure,
+      timeSignatureSymbolKind);
   assert (o != nullptr);
   return o;
 }
 
 msrTimeSignature::msrTimeSignature (
-  int                        inputLineNumber,
-  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
-    : msrMeasureElement (inputLineNumber)
+  int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
+  msrTimeSignatureSymbolKind
+                timeSignatureSymbolKind)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fTimeSignatureSymbolKind = timeSignatureSymbolKind;
 

@@ -113,7 +113,7 @@ template <typename T> class msrBrowser : public browser <T>
 In \libmusicxmlsamples{countnotes.cpp}, counting the notes in \mxml\ data needs only see {\tt S_note} nodes. Class {\tt countnotes} thus inherits only from a visitor for this type of node, and all the other node types are simply ignored.
 
 \VisitorMethod{countnotes}{visitStart} only has to increment the notes count:
-\begin{lstlisting}[language=CPlusPlus,caption={\libmusicxmlsamples{countnotes.cpp}}]
+\begin{lstlisting}[language=CPlusPlus,caption={{\tt countnotes.cpp}}]
 class countnotes :
 	public visitor<S_note>
 {
@@ -162,7 +162,7 @@ or, depending on the order in which the subelements of \musicXmlMarkup{scaling} 
 \end{lstlisting}
 
 In \mxsrToMsr{mxsr2msrTranslator.cpp}, visiting a \musicXmlMarkup{scaling} element is handled this way:
-\begin{lstlisting}[language=CPlusPlus,caption={Visiting \musicXmlMarkup{scaling}}]
+\begin{lstlisting}[language=CPlusPlus,caption={Visiting {\tt $<$scaling /$>$}}]
 void mxsr2msrTranslator::visitStart ( S_millimeters& elt )
 {
 #ifdef TRACING_IS_ENABLED

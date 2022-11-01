@@ -20,6 +20,7 @@ using namespace std;
 
 namespace MusicFormats
 {
+
 //______________________________________________________________________________
 enum class msdlTokenKind;
 

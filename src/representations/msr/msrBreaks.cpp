@@ -19,6 +19,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasures.h"
+
 #include "msrBreaks.h"
 
 #include "oahOah.h"
@@ -52,6 +54,7 @@ string userChosenLineBreakKindAsString (
 //______________________________________________________________________________
 S_msrLineBreak msrLineBreak::create (
   int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
   const string& nextBarNumber,
   msrUserChosenLineBreakKind
                 userChosenLineBreakKind)
@@ -59,6 +62,7 @@ S_msrLineBreak msrLineBreak::create (
   msrLineBreak* o =
     new msrLineBreak (
       inputLineNumber,
+      upLinkToMeasure,
       nextBarNumber,
       userChosenLineBreakKind);
   assert (o != nullptr);
@@ -67,10 +71,13 @@ S_msrLineBreak msrLineBreak::create (
 
 msrLineBreak::msrLineBreak (
   int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
   const string& nextBarNumber,
   msrUserChosenLineBreakKind
                 userChosenLineBreakKind)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fNextBarNumber = nextBarNumber;
 
@@ -167,7 +174,7 @@ ostream& operator << (ostream& os, const S_msrLineBreak& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -191,23 +198,28 @@ string userChosenPageBreakKindAsString (
 
 //______________________________________________________________________________
 S_msrPageBreak msrPageBreak::create (
-  int   inputLineNumber,
+  int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
   msrUserChosenPageBreakKind
-        userChosenPageBreakKind)
+                userChosenPageBreakKind)
 {
   msrPageBreak* o =
     new msrPageBreak (
       inputLineNumber,
+      upLinkToMeasure,
       userChosenPageBreakKind);
   assert (o != nullptr);
   return o;
 }
 
 msrPageBreak::msrPageBreak (
-  int   inputLineNumber,
+  int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
   msrUserChosenPageBreakKind
-        userChosenPageBreakKind)
-    : msrMeasureElement (inputLineNumber)
+                userChosenPageBreakKind)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePageBreaks ()) {
@@ -301,7 +313,7 @@ ostream& operator << (ostream& os, const S_msrPageBreak& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

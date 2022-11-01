@@ -30,10 +30,12 @@ class EXP msrBarCheck : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrBarCheck> create (
-                            int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     static SMARTP<msrBarCheck> createWithNextBarPuristNumber (
                             int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
                             const string& nextBarOriginalNumber,
                             int           nextBarPuristNumber);
 
@@ -43,10 +45,12 @@ class EXP msrBarCheck : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrBarCheck (
-                            int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
                           msrBarCheck (
                             int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
                             const string& nextBarOriginalNumber,
                             int           nextBarPuristNumber);
 

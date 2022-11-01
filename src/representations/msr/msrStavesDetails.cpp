@@ -21,6 +21,9 @@
 #endif
 
 #include "msrPitchesNames.h"
+
+#include "msrMeasures.h"
+
 #include "msrStavesDetails.h"
 
 #include "oahOah.h"
@@ -196,13 +199,14 @@ ostream& operator << (ostream& os, const S_msrStaffTuning& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrStaffDetails msrStaffDetails::create (
   int                 inputLineNumber,
+  S_msrMeasure        upLinkToMeasure,
   msrStaffTypeKind    staffTypeKind,
   msrShowFretsKind    showFretsKind,
   msrPrintObjectKind  printObjectKind,
@@ -211,6 +215,7 @@ S_msrStaffDetails msrStaffDetails::create (
   msrStaffDetails* o =
     new msrStaffDetails (
       inputLineNumber,
+      upLinkToMeasure,
       staffTypeKind,
       showFretsKind,
       printObjectKind,
@@ -221,11 +226,14 @@ S_msrStaffDetails msrStaffDetails::create (
 
 msrStaffDetails::msrStaffDetails (
   int                 inputLineNumber,
+  S_msrMeasure        upLinkToMeasure,
   msrStaffTypeKind    staffTypeKind,
   msrShowFretsKind    showFretsKind,
   msrPrintObjectKind  printObjectKind,
   msrPrintSpacingKind printSpacingKind)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fStaffTypeKind    = staffTypeKind;
 
@@ -431,7 +439,7 @@ void msrStaffDetails::print (ostream& os) const
   else {
     os << left <<
       setw (fieldWidth) <<
-      "staffTunings" << " : " << "empty" <<
+      "staffTunings" << " : " << "[EMPTY]" <<
       endl;
   }
 
@@ -462,7 +470,7 @@ ostream& operator << (ostream& os, const S_msrStaffDetails& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

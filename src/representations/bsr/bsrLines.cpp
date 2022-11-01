@@ -557,7 +557,7 @@ void bsrLine::print (ostream& os) const
     }
     else {
       os <<
-        " : " << "empty" <<
+        " : " << "[EMPTY]" <<
       endl;
     }
   }

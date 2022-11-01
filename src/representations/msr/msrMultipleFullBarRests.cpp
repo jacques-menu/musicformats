@@ -510,7 +510,7 @@ void msrMultipleFullBarRests::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   os << ']' << endl;

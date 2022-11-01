@@ -137,7 +137,7 @@ class EXP msr2mxsrTranslator :
 
   // figured bass
 
-  public visitor<S_msrFiguredBassElement>,
+  public visitor<S_msrFiguredBass>,
   public visitor<S_msrBassFigure>,
 
   // articulations
@@ -392,8 +392,8 @@ class EXP msr2mxsrTranslator :
 
     virtual void          visitStart (S_msrFrame& elt);
 
-    virtual void          visitStart (S_msrFiguredBassElement& elt);
-    virtual void          visitEnd   (S_msrFiguredBassElement& elt);
+    virtual void          visitStart (S_msrFiguredBass& elt);
+    virtual void          visitEnd   (S_msrFiguredBass& elt);
     virtual void          visitStart (S_msrBassFigure& elt);
 */
 
@@ -854,7 +854,7 @@ class EXP msr2mxsrTranslator :
     // backup and forward
     // ------------------------------------------------------
 
-    Rational                  fCurrentPositionInMeasure;
+    Rational                  fCurrentMeasurePosition;
 
     Rational                  fCurrentCumulatedSkipsDurations;
     int                       fCurrentCumulatedSkipsStaffNumber;

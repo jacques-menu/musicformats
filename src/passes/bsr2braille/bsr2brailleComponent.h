@@ -21,6 +21,7 @@ using namespace std;
 
 namespace MusicFormats
 {
+
 //______________________________________________________________________________
 S_mfcPassComponent EXP createBsr2brailleComponent ();
 

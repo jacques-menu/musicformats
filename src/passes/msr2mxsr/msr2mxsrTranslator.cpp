@@ -61,7 +61,7 @@ msr2mxsrTranslator::msr2mxsrTranslator (
   fVisitedMsrScore = visitedMsrScore;
 
   // backup and forward handling
-  fCurrentPositionInMeasure = Rational (0, 1);
+  fCurrentMeasurePosition = Rational (0, 1);
 
   fCurrentCumulatedSkipsDurations = Rational (0, 1);
   fCurrentCumulatedSkipsStaffNumber = -1;
@@ -621,7 +621,7 @@ void msr2mxsrTranslator::appendNoteToMeasure (
   fCurrentMeasureElement->push (note);
 
   // account for theMsrNote's whole notes duration in the measure
-  fCurrentPositionInMeasure +=
+  fCurrentMeasurePosition +=
     theMsrNote->
       getMeasureElementSoundingWholeNotes ();
 
@@ -3341,7 +3341,7 @@ void msr2mxsrTranslator::visitEnd (S_msrMeasure& elt)
   fCurrentMeasureElement = nullptr;
 
   // reset the current position in the measure
-  fCurrentPositionInMeasure = Rational (0, 1);
+  fCurrentMeasurePosition = Rational (0, 1);
 
   // reset the cumulated skip durations informations
   fCurrentCumulatedSkipsDurations = Rational (0, 1);
@@ -4912,23 +4912,23 @@ void msr2mxsrTranslator::appendABackupToMeasure (
 
   // fetch the backup duration divisions
   Rational
-    previousNoteMeasureElementPositionInMeasure =
-      fPreviousMSRNote->getMeasureElementPositionInMeasure (),
+    previousNoteMeasureElementMeasurePosition =
+      fPreviousMSRNote->getMeasureElementMeasurePosition (),
     previousNoteSoundingWholeNotes =
       fPreviousMSRNote->getMeasureElementSoundingWholeNotes (),
 
-    theMsrNoteMeasureElementPositionInMeasure =
-      fPreviousMSRNote->getMeasureElementPositionInMeasure (),
+    theMsrNoteMeasureElementMeasurePosition =
+      fPreviousMSRNote->getMeasureElementMeasurePosition (),
     theMsrNoteSoundingWholeNotes =
       theMsrNote->getMeasureElementSoundingWholeNotes ();
 
   Rational
     backupDuration =
-      previousNoteMeasureElementPositionInMeasure
+      previousNoteMeasureElementMeasurePosition
         +
       previousNoteSoundingWholeNotes
         -
-      theMsrNoteMeasureElementPositionInMeasure;
+      theMsrNoteMeasureElementMeasurePosition;
 
   int
     backupDurationDivisions =
@@ -4942,13 +4942,13 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       "Creating a backup element, theMsrNote = " <<
       theMsrNote->asShortString () <<
 
-      ", previousNoteMeasureElementPositionInMeasure: " <<
-      previousNoteMeasureElementPositionInMeasure <<
+      ", previousNoteMeasureElementMeasurePosition: " <<
+      previousNoteMeasureElementMeasurePosition <<
       ", previousNoteSoundingWholeNotes: " <<
       previousNoteSoundingWholeNotes <<
 
-      ", theMsrNoteMeasureElementPositionInMeasure: " <<
-      theMsrNoteMeasureElementPositionInMeasure <<
+      ", theMsrNoteMeasureElementMeasurePosition: " <<
+      theMsrNoteMeasureElementMeasurePosition <<
       ", theMsrNoteSoundingWholeNotes: " <<
       theMsrNoteSoundingWholeNotes <<
 
@@ -4980,13 +4980,13 @@ void msr2mxsrTranslator::appendABackupToMeasure (
       " ===== " <<
       "Backup" <<
 
-      ", previousNoteMeasureElementPositionInMeasure: " <<
-      previousNoteMeasureElementPositionInMeasure <<
+      ", previousNoteMeasureElementMeasurePosition: " <<
+      previousNoteMeasureElementMeasurePosition <<
       ", previousNoteSoundingWholeNotes: " <<
       previousNoteSoundingWholeNotes <<
 
-      ", theMsrNoteMeasureElementPositionInMeasure: " <<
-      theMsrNoteMeasureElementPositionInMeasure <<
+      ", theMsrNoteMeasureElementMeasurePosition: " <<
+      theMsrNoteMeasureElementMeasurePosition <<
       ", theMsrNoteSoundingWholeNotes: " <<
       theMsrNoteSoundingWholeNotes <<
 
@@ -5226,12 +5226,12 @@ fCurrentCumulatedSkipsVoiceNumber
           // a skip may have been created due to a <backup /> to a position
           // that is not at the beginning of the measure
           Rational
-            notePositionInMeasure =
-              theMsrNote->getMeasureElementPositionInMeasure ();
+            noteMeasurePosition =
+              theMsrNote->getMeasureElementMeasurePosition ();
 
           Rational
             positionAfterNoteInMeasure =
-              notePositionInMeasure +
+              noteMeasurePosition +
                 theMsrNote->getMeasureElementSoundingWholeNotes ();
 
 #ifdef TRACING_IS_ENABLED
@@ -5243,18 +5243,18 @@ fCurrentCumulatedSkipsVoiceNumber
             gLogStream <<
               "--> appendABackupOrForwardToMeasureIfNeeded(2), note = " <<
               theMsrNote->asShortString () <<
-              ", notePositionInMeasure: " << notePositionInMeasure <<
+              ", noteMeasurePosition: " << noteMeasurePosition <<
               ", positionAfterNoteInMeasure: " << positionAfterNoteInMeasure <<
-              ", fCurrentPositionInMeasure: " << fCurrentPositionInMeasure <<
+              ", fCurrentMeasurePosition: " << fCurrentMeasurePosition <<
               ", line " << inputLineNumber <<
               endl;
           }
 #endif
 
-          if (positionAfterNoteInMeasure < fCurrentPositionInMeasure) { // JMI TEST
+          if (positionAfterNoteInMeasure < fCurrentMeasurePosition) { // JMI TEST
             appendABackupToMeasure (theMsrNote);
           }
-          else if (positionAfterNoteInMeasure > fCurrentPositionInMeasure) {
+          else if (positionAfterNoteInMeasure > fCurrentMeasurePosition) {
             appendAForwardToMeasure (theMsrNote);
           }
         }
@@ -7361,8 +7361,8 @@ void msr2mxsrTranslator::appendMsrNoteToMesureIfRelevant (
             noteVoice->getVoiceUpLinkToStaff ()->getStaffNumber () <<
           ", voiceNumber: " <<
             noteVoice->getVoiceNumber () <<
-          ", measureElementPositionInMeasure: " <<
-            theMsrNote->getMeasureElementPositionInMeasure () <<
+          ", measureElementMeasurePosition: " <<
+            theMsrNote->getMeasureElementMeasurePosition () <<
           ", noteSoundingWholeNotes: " <<
             theMsrNote->getMeasureElementSoundingWholeNotes () <<
           ", line " << inputLineNumber <<
@@ -7981,12 +7981,12 @@ void msr2mxsrTranslator::visitStart (S_msrFrame& elt)
 }
 
 //________________________________________________________________________
-void msr2mxsrTranslator::visitStart (S_msrFiguredBassElement& elt)
+void msr2mxsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrFiguredBassElement '" <<
+      "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
@@ -7996,7 +7996,7 @@ void msr2mxsrTranslator::visitStart (S_msrFiguredBassElement& elt)
 #endif
 
   // create a figured bass new born clone
-  fCurrentFiguredBassElementClone =
+  fCurrentFiguredBassClone =
     elt->
       createMxmlFiguredBassNewbornClone (
         fCurrentVoiceClone);
@@ -8004,8 +8004,8 @@ void msr2mxsrTranslator::visitStart (S_msrFiguredBassElement& elt)
   if (fOnGoingNonGraceNote) {
     // append the figured bass to the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendFiguredBassElementToNoteFiguredBassElementsList (
-        fCurrentFiguredBassElementClone);
+      appendFiguredBassToNoteFiguredBassesList (
+        fCurrentFiguredBassClone);
 
     // don't append the figured bass to the part figured bass,  JMI ???
     // this will be done below
@@ -8015,14 +8015,14 @@ void msr2mxsrTranslator::visitStart (S_msrFiguredBassElement& elt)
     / *
     // register the figured bass in the part clone figured bass
     fCurrentPartClone->
-      appendFiguredBassElementToPartClone (
+      appendFiguredBassToPartClone (
         fCurrentVoiceClone,
-        fCurrentFiguredBassElementClone);
+        fCurrentFiguredBassClone);
         * /
     // append the figured bass to the current voice clone
     fCurrentVoiceClone->
-      appendFiguredBassElementToVoiceClone (
-        fCurrentFiguredBassElementClone);
+      appendFiguredBassToVoiceClone (
+        fCurrentFiguredBassClone);
   }
 
   else {
@@ -8054,17 +8054,17 @@ void msr2mxsrTranslator::visitStart (S_msrBassFigure& elt)
 #endif
 
   // append the bass figure to the current figured bass
-  fCurrentFiguredBassElementClone->
+  fCurrentFiguredBassClone->
     appendFigureToFiguredBass (
       elt);
 }
 
-void msr2mxsrTranslator::visitEnd (S_msrFiguredBassElement& elt)
+void msr2mxsrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrFiguredBassElement '" <<
+      "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
@@ -8072,7 +8072,7 @@ void msr2mxsrTranslator::visitEnd (S_msrFiguredBassElement& elt)
   }
 #endif
 
-  fCurrentFiguredBassElementClone = nullptr;
+  fCurrentFiguredBassClone = nullptr;
 }
 */
 

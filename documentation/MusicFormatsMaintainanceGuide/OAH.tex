@@ -81,7 +81,7 @@ The output of the help  goes to \standardOutput, so that the user can pipe it in
 \item partial help can be obtained, i.e. help about any group, subgroup or atom,
     showing the path in the hierarchy down to the corresponding option;
 
-\item there are various subclasses of \class{oahAtom} such as \class{oahIntegerAtom}, \class{oahBooleanAtom}
+\item there are various sub-classes of \class{oahAtom} such as \class{oahIntegerAtom}, \class{oahBooleanAtom}
     and \class{oahRationalAtom}, to control options values of common types;
 
 \item \class{oahThreeBooleansAtom}, for example, allows for three boolean settings
@@ -358,7 +358,7 @@ jacquesmenu@macmini > xml2ly -find lilypond-version
 
 
 % -------------------------------------------------------------------------
-\subsection{The {\tt oahAtomStoringAValue} subclasses}
+\subsection{The {\tt oahAtomStoringAValue} sub-classes}
 % -------------------------------------------------------------------------
 
 The classes derived from \className{oahAtomStoringAValue} are:
@@ -828,7 +828,7 @@ void mxsr2msrTranslator::handleStandaloneOrDoubleTremoloNoteOrGraceNoteOrRest (
       fPendingGraceNotesGroup =
         msrGraceNotesGroup::create (
           inputLineNumber,
-          msrGraceNotesGroup::kGraceNotesGroupBefore, // default value
+          msrGraceNotesGroupKind::kGraceNotesGroupBefore, // default value
           fCurrentGraceIsSlashed,
           fCurrentGraceIsBeamed,
           fCurrentMeasureNumber);

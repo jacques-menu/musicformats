@@ -78,7 +78,7 @@
   \SyllableOrd       = \StanzaOrd - 1 mm;
   %
   \HarmonyOrd       	       = \MeasureElementOrd - 0.5 mm;
-  \FiguredBassElementOrd    = \MeasureElementOrd - 1.5 mm;
+  \FiguredBassOrd    = \MeasureElementOrd - 1.5 mm;
   %
   \RepeatOrd       	       = \VoiceElementOrd - 0.75 mm;
   %
@@ -111,8 +111,8 @@
   \HarmonyToNoteExternalPointAbs = \leftColumnAbs - 1 mm;
   \HarmonyToNoteExternalPointOrd = \NoteOrd + 0;
   %
-  \FiguredBassElementToNoteExternalPointAbs = \leftColumnAbs - 0.5 mm;
-  \FiguredBassElementToNoteExternalPointOrd = \NoteOrd + 0.5 mm;
+  \FiguredBassToNoteExternalPointAbs = \leftColumnAbs - 0.5 mm;
+  \FiguredBassToNoteExternalPointOrd = \NoteOrd + 0.5 mm;
   %
 	\PartGroupToPartGroupExternalPointAbs = \PartGroupOrd - 0.25 mm;
 	%
@@ -166,7 +166,7 @@
 
 \coordinate (Stanza)           at (\leftColumnAbs,\StanzaOrd);
 
-\coordinate (FiguredBassElement)      at (\leftColumnAbs,\FiguredBassElementOrd);
+\coordinate (FiguredBass)      at (\leftColumnAbs,\FiguredBassOrd);
 \coordinate (Harmony)          at (\leftColumnAbs,\HarmonyOrd);
 
 \coordinate (Syllable)         at (\leftColumnAbs,\SyllableOrd);
@@ -193,7 +193,7 @@
 
 \coordinate (HarmonyToNoteExternalPoint)        at (\HarmonyToNoteExternalPointAbs,\HarmonyToNoteExternalPointOrd);
 
-\coordinate (FiguredBassElementToNoteExternalPoint)    at (\FiguredBassElementToNoteExternalPointAbs,\FiguredBassElementToNoteExternalPointOrd);
+\coordinate (FiguredBassToNoteExternalPoint)    at (\FiguredBassToNoteExternalPointAbs,\FiguredBassToNoteExternalPointOrd);
 
 \coordinate (TupletToTupletExternalPoint)       at (\TupletToTupletExternalPointAbs,\TupletOrd);
 
@@ -457,23 +457,23 @@
 
 
 
-% FiguredBassElement
+% FiguredBass
 % ------------------------------------------------
 \node [fill=\PrimaryRectanglesBackgroundColor]
-  (FiguredBassElement) at (FiguredBassElement) {\texttt {\textbf {FiguredBassElement}}};
+  (FiguredBass) at (FiguredBass) {\texttt {\textbf {FiguredBass}}};
 
 \draw [->, thick, \baseClassArcsColor]
-	(FiguredBassElement) ..
+	(FiguredBass) ..
 	controls +(15:6 cm) and +(210:5 cm) ..
   (MeasureElement);
 
 \draw [->, thick, \usedByClassArcsColor]
-	(FiguredBassElement) ..
+	(FiguredBass) ..
 	controls +(210:5 cm) and +(130:3 cm) ..
-  (FiguredBassElementToNoteExternalPoint);
+  (FiguredBassToNoteExternalPoint);
 
 \draw [->, thick, \usedByClassArcsColor]
-	(FiguredBassElementToNoteExternalPoint) ..
+	(FiguredBassToNoteExternalPoint) ..
 	controls +(310:6 cm) and +(210:3 cm) ..
   (Note);
 

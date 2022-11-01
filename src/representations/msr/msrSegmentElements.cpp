@@ -52,7 +52,7 @@ msrSegmentElement::msrSegmentElement (
 
 //   fSegmentElementMeasureNumber = K_NO_MEASURE_NUMBER;
 
-//   fSegmentElementPositionInMeasure = msrMoment::K_NO_POSITION;
+//   fSegmentElementMeasurePosition = msrMoment::K_NO_POSITION;
 //   fSegmentElementPositionFromBeginningOfVoice   = msrMoment::K_NO_POSITION;
 }
 
@@ -87,8 +87,8 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   fSegmentElementSoundingWholeNotes = wholeNotes;
 }
 
-// void msrSegmentElement::setSegmentElementPositionInMeasure (
-//   const Rational& positionInMeasure,
+// void msrSegmentElement::setSegmentElementMeasurePosition (
+//   const Rational& measurePosition,
 //   const string&   context)
 // {
 // #ifdef TRACING_IS_ENABLED
@@ -96,9 +96,9 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //     gLogStream <<
 //       "Setting measure element position in measure of " <<
 //       asString () <<
-//       " to '" << positionInMeasure <<
+//       " to '" << measurePosition <<
 //       "' (was '" <<
-//       fSegmentElementPositionInMeasure <<
+//       fSegmentElementMeasurePosition <<
 //       "') " <<
 // //       " in measure '" <<
 // //       fSegmentElementMeasureNumber <<
@@ -112,11 +112,11 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 ////   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     positionInMeasure != msrMoment::K_NO_POSITION,
-//     "positionInMeasure == msrMoment::K_NO_POSITION");
+//     measurePosition != msrMoment::K_NO_POSITION,
+//     "measurePosition == msrMoment::K_NO_POSITION");
 // */
 //
-//   fSegmentElementPositionInMeasure = positionInMeasure;
+//   fSegmentElementMeasurePosition = measurePosition;
 // }
 //
 // void msrSegmentElement::setSegmentElementPositionFromBeginningOfVoice (
@@ -259,14 +259,14 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 // #endif
 // }
 //
-// bool msrSegmentElement::compareSegmentElementsByIncreasingPositionInMeasure (
+// bool msrSegmentElement::compareSegmentElementsByIncreasingMeasurePosition (
 //   const SMARTP<msrSegmentElement>& first,
 //   const SMARTP<msrSegmentElement>& second)
 // {
 //   return
-//     first->getSegmentElementPositionInMeasure ()
+//     first->getSegmentElementMeasurePosition ()
 //       <
-//     second->getSegmentElementPositionInMeasure ();
+//     second->getSegmentElementMeasurePosition ();
 // }
 
 void msrSegmentElement::acceptIn (basevisitor* v)

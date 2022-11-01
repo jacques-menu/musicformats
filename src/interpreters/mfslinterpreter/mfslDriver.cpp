@@ -339,7 +339,7 @@ void mfslDriver::displayOptionsBlocksStack (
   }
 
   else {
-    gLogStream << "empty" << endl;
+    gLogStream << "[EMPTY]" << endl;
   }
 }
 
@@ -419,7 +419,7 @@ void mfslDriver::displayCaseChoiceStatementsStack (
   }
 
   else {
-    gLogStream << "empty" << endl;
+    gLogStream << "[EMPTY]" << endl;
   }
 }
 
@@ -499,7 +499,7 @@ void mfslDriver::displayCaseInputStatementsStack (
   }
 
   else {
-    gLogStream << "empty" << endl;
+    gLogStream << "[EMPTY]" << endl;
   }
 }
 

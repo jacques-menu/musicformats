@@ -527,7 +527,7 @@ void msrVoice::initializeVoice (
   fVoiceRestsCounter               = 0;
   fVoiceSkipsCounter               = 0;
   fVoiceActualHarmoniesCounter     = 0;
-  fVoiceActualFiguredBassElementsCounter = 0;
+  fVoiceActualFiguredBassesCounter = 0;
 
   // regular measure ends detection
   fWholeNotesSinceLastRegularMeasureEnd = Rational (0, 1);
@@ -748,8 +748,8 @@ S_msrVoice msrVoice::createVoiceDeepClone (
   voiceDeepClone->fVoiceActualHarmoniesCounter =
     fVoiceActualHarmoniesCounter;
 
-  voiceDeepClone->fVoiceActualFiguredBassElementsCounter =
-    fVoiceActualFiguredBassElementsCounter;
+  voiceDeepClone->fVoiceActualFiguredBassesCounter =
+    fVoiceActualFiguredBassesCounter;
 
   // measures
   voiceDeepClone->fVoiceCurrentMeasureNumber =
@@ -1881,13 +1881,13 @@ void msrVoice::appendTimeSignatureToVoiceClone (S_msrTimeSignature timeSignature
 
 void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
   int             inputLineNumber,
-  const Rational& positionInMeasure)
+  const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
-      positionInMeasure <<
+      measurePosition <<
       "' to voice clone \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       endl;
@@ -1900,7 +1900,7 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
   fVoiceLastSegment->
     insertHiddenMeasureAndBarLineInSegmentClone (
       inputLineNumber,
-      positionInMeasure);
+      measurePosition);
 
   --gIndenter;
 }
@@ -2227,16 +2227,16 @@ void msrVoice::appendHarmonyToHarmoniesVoice (
   --gIndenter;
 }
 
-void msrVoice::appendFiguredBassElementToFiguredBassVoice (
-  S_msrFiguredBassElement figuredBassElement)
+void msrVoice::appendFiguredBassToFiguredBassVoice (
+  S_msrFiguredBass figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
-    figuredBassElement->getInputLineNumber ();
+    figuredBass->getInputLineNumber ();
 
   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
     gLogStream <<
-      "Appending figured bass element " << figuredBassElement->asString () <<
+      "Appending figured bass element " << figuredBass->asString () <<
       " to figured bass voice \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       endl;
@@ -2245,12 +2245,12 @@ void msrVoice::appendFiguredBassElementToFiguredBassVoice (
 
   ++gIndenter;
 
-  // append the figuredBassElement to the voice last segment
+  // append the figuredBass to the voice last segment
   fVoiceLastSegment->
-    appendFiguredBassElementToSegment (figuredBassElement);
+    appendFiguredBassToSegment (figuredBass);
 
   // register harmony
-  ++fVoiceActualFiguredBassElementsCounter;
+  ++fVoiceActualFiguredBassesCounter;
   fMusicHasBeenInsertedInVoice = true;
 
   --gIndenter;
@@ -2310,16 +2310,16 @@ void msrVoice::appendHarmonyToVoiceClone (S_msrHarmony harmony)
   --gIndenter;
 }
 
-void msrVoice::appendFiguredBassElementToVoice (
-  S_msrFiguredBassElement figuredBassElement)
+void msrVoice::appendFiguredBassToVoice (
+  S_msrFiguredBass figuredBass)
 {
   int inputLineNumber =
-    figuredBassElement->getInputLineNumber ();
+    figuredBass->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
     gLogStream <<
-      "Appending figured bass element " << figuredBassElement->asString () <<
+      "Appending figured bass element " << figuredBass->asString () <<
       " to voice \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       endl;
@@ -2331,8 +2331,8 @@ void msrVoice::appendFiguredBassElementToVoice (
   // sanity check
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindFiguredBass:
-      appendFiguredBassElementToFiguredBassVoice (
-        figuredBassElement);
+      appendFiguredBassToFiguredBassVoice (
+        figuredBass);
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
@@ -2362,16 +2362,16 @@ void msrVoice::appendFiguredBassElementToVoice (
   --gIndenter;
 }
 
-void msrVoice::appendFiguredBassElementToVoiceClone (
-  S_msrFiguredBassElement figuredBassElement)
+void msrVoice::appendFiguredBassToVoiceClone (
+  S_msrFiguredBass figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
-    figuredBassElement->getInputLineNumber ();
+    figuredBass->getInputLineNumber ();
 
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
     gLogStream <<
-      "Appending figured bass element " << figuredBassElement->asString () <<
+      "Appending figured bass element " << figuredBass->asString () <<
       " to voice clone \"" << getVoiceName () << "\"" <<
       ", line " << inputLineNumber <<
       endl;
@@ -2383,10 +2383,10 @@ void msrVoice::appendFiguredBassElementToVoiceClone (
   switch (fVoiceKind) {
     case msrVoiceKind::kVoiceKindFiguredBass:
       fVoiceLastSegment->
-        appendFiguredBassElementToSegmentClone (figuredBassElement);
+        appendFiguredBassToSegmentClone (figuredBass);
 
       // register figured bass
-      ++fVoiceActualFiguredBassElementsCounter;
+      ++fVoiceActualFiguredBassesCounter;
       fMusicHasBeenInsertedInVoice = true;
       break;
 
@@ -2407,7 +2407,7 @@ void msrVoice::appendFiguredBassElementToVoiceClone (
 
         msrInternalError (
           gGlobalServiceRunData->getInputSourceName (),
-          figuredBassElement->getInputLineNumber (),
+          figuredBass->getInputLineNumber (),
           __FILE__, __LINE__,
           s.str ());
       }
@@ -2417,15 +2417,15 @@ void msrVoice::appendFiguredBassElementToVoiceClone (
   --gIndenter;
 }
 
-void msrVoice::padUpToPositionInMeasureInVoice (
+void msrVoice::padUpToMeasurePositionInVoice (
   int             inputLineNumber,
-  const Rational& wholeNotesPositionInMeasure)
+  const Rational& wholeNotesMeasurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Padding up to position in measure '" <<
-      wholeNotesPositionInMeasure <<
+      wholeNotesMeasurePosition <<
       "' whole notes in voice \"" <<
       getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -2443,9 +2443,9 @@ void msrVoice::padUpToPositionInMeasureInVoice (
 
   // pad up the voice's last segment
   fVoiceLastSegment->
-    padUpToPositionInMeasureInSegment (
+    padUpToMeasurePositionInSegment (
       inputLineNumber,
-      wholeNotesPositionInMeasure);
+      wholeNotesMeasurePosition);
 
   // pad up the voice's stanzas // JMI ???
   if (fVoiceStanzasMap.size ()) {
@@ -2455,7 +2455,7 @@ void msrVoice::padUpToPositionInMeasureInVoice (
       stanza->
         padUpToCurrentMeasureWholeNotesDurationInStanza (
           inputLineNumber,
-          wholeNotesPositionInMeasure);
+          wholeNotesMeasurePosition);
     } // for
   }
 
@@ -2464,13 +2464,13 @@ void msrVoice::padUpToPositionInMeasureInVoice (
 
 void msrVoice::backupByWholeNotesStepLengthInVoice (
   int             inputLineNumber,
-  const Rational& backupTargetMeasureElementPositionInMeasure)
+  const Rational& backupTargetMeasureElementMeasurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Backup by a '" <<
-      backupTargetMeasureElementPositionInMeasure <<
+      backupTargetMeasureElementMeasurePosition <<
       "' whole notes step length in voice \"" <<
       getVoiceName () <<
       "\", line " << inputLineNumber <<
@@ -2490,7 +2490,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   fVoiceLastSegment->
     backupByWholeNotesStepLengthInSegment (
       inputLineNumber,
-      backupTargetMeasureElementPositionInMeasure);
+      backupTargetMeasureElementMeasurePosition);
 
   --gIndenter;
 }
@@ -2523,7 +2523,7 @@ void msrVoice::appendPaddingNoteToVoice (
   // account for padding note's duration in staff
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartCurrentPositionInMeasure (
+      incrementPartCurrentMeasurePosition (
         inputLineNumber,
         forwardStepLength);
 
@@ -2744,9 +2744,9 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
 
   // fetch the part current position in measure
   Rational
-    partCurrentPositionInMeasure =
+    partCurrentMeasurePosition =
       part->
-        getPartCurrentPositionInMeasure ();
+        getPartCurrentMeasurePosition ();
 
   if (! fVoiceLastSegment) {
     stringstream s;
@@ -2773,7 +2773,7 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
   fVoiceLastSegment->
     appendNoteToSegment (
       note,
-      partCurrentPositionInMeasure);
+      partCurrentMeasurePosition);
 
   // is this note the shortest one in this voice?
   this->
@@ -2785,7 +2785,7 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
 
   // account for note's duration in staff
   part->
-    incrementPartCurrentPositionInMeasure (
+    incrementPartCurrentMeasurePosition (
       inputLineNumber,
       note->getMeasureElementSoundingWholeNotes ());
 
@@ -2871,24 +2871,24 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
   }
 
   // are there figured bass elements attached to this note?
-  const list<S_msrFiguredBassElement>&
-    noteFiguredBassElementsList =
+  const list<S_msrFiguredBass>&
+    noteFiguredBassesList =
       note->
-        getNoteFiguredBassElementsList ();
+        getNoteFiguredBassesList ();
 
-  if (noteFiguredBassElementsList.size ()) {
+  if (noteFiguredBassesList.size ()) {
     // get the current part's figured bass voice
     S_msrVoice
       partFiguredBassVoice =
         part->
           getPartFiguredBassVoice ();
 
-    list<S_msrFiguredBassElement>::const_iterator i;
-    for (S_msrFiguredBassElement figuredBassElement : noteFiguredBassElementsList) {
+    list<S_msrFiguredBass>::const_iterator i;
+    for (S_msrFiguredBass figuredBass : noteFiguredBassesList) {
       // append the figured bass element to the part figured bass voice
       partFiguredBassVoice->
-        appendFiguredBassElementToVoice (
-          figuredBassElement);
+        appendFiguredBassToVoice (
+          figuredBass);
     } // for
   }
 
@@ -3022,7 +3022,7 @@ void msrVoice::appendChordToVoice (S_msrChord chord)
   // account for chord duration in the part current position in measure
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartCurrentPositionInMeasure (
+      incrementPartCurrentMeasurePosition (
         chord->getInputLineNumber (),
         chord->getMeasureElementSoundingWholeNotes ());
 
@@ -3088,7 +3088,7 @@ void msrVoice::appendTupletToVoice (S_msrTuplet tuplet)
   // account for tuplet duration in the part's current position in measure
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      incrementPartCurrentPositionInMeasure (
+      incrementPartCurrentMeasurePosition (
         tuplet->getInputLineNumber (),
         tuplet->getMeasureElementSoundingWholeNotes ());
 
@@ -3735,7 +3735,7 @@ void msrVoice::displayVoiceMeasureRepeatAndVoice (
 //   }
 //   else {
 //     os <<
-//       " : " << "empty";
+//       " : " << "[EMPTY]";
 //   }
 //   os << endl;
 //
@@ -3782,7 +3782,7 @@ void msrVoice::displayVoiceMeasuresFlatList (
         voiceMeasuresFlatListSize, "element", "elements");
   }
   else {
-    gLogStream << "empty";
+    gLogStream << "[EMPTY]";
   }
   gLogStream << endl;
 
@@ -7132,12 +7132,12 @@ void msrVoice::addEmptyMeasuresToVoice (
     setNoteOccupiesAFullMeasure ();
 
   // append it to emptyMeasure
-  Rational partCurrentPositionInMeasure; // needs to be supplied
+  Rational partCurrentMeasurePosition; // needs to be supplied
 
   emptyMeasure->
     appendNoteToMeasure (
       wholeMeasureRestNote,
-      partCurrentPositionInMeasure);
+      partCurrentMeasurePosition);
 
   // append emptyMeasure to the voice last segment
 #ifdef TRACING_IS_ENABLED
@@ -9519,7 +9519,7 @@ void msrVoice::removeNoteFromVoice (
   // update the part current position in measure
   fVoiceUpLinkToStaff->
     getStaffUpLinkToPart ()->
-      decrementPartCurrentPositionInMeasure (
+      decrementPartCurrentMeasurePosition (
         inputLineNumber,
         note->
           getMeasureElementSoundingWholeNotes ());
@@ -10414,7 +10414,7 @@ void msrVoice::print (ostream& os) const
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<
     mfSingularOrPlural (
-      fVoiceActualFiguredBassElementsCounter, "figured bass", "figured bass elements") <<
+      fVoiceActualFiguredBassesCounter, "figured bass", "figured bass elements") <<
      ", " <<
     mfSingularOrPlural (
       fVoiceActualNotesCounter, "actual note", "actual notes") <<
@@ -10699,7 +10699,7 @@ void msrVoice::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   os << endl;
@@ -10746,7 +10746,7 @@ void msrVoice::print (ostream& os) const
   }
   else {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
 
@@ -10803,7 +10803,7 @@ void msrVoice::printShort (ostream& os) const
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<
     mfSingularOrPlural (
-      fVoiceActualFiguredBassElementsCounter, "figured bass", "figured bass elements") <<
+      fVoiceActualFiguredBassesCounter, "figured bass", "figured bass elements") <<
      ", " <<
     mfSingularOrPlural (
       fVoiceActualNotesCounter, "actual note", "actual notes") <<
@@ -10835,7 +10835,7 @@ void msrVoice::printShort (ostream& os) const
     os << " : " <<  voiceInitialElementsListSize << " elements";
   }
   else {
-    os << " : " << "empty";
+    os << " : " << "[EMPTY]";
   }
 
   if (voiceInitialElementsListSize) {

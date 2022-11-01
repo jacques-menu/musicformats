@@ -71,11 +71,11 @@
 
 #include "msrOctaveShifts.h"
 
-#include "msrGraceNotes.h"
+#include "msrGraceNotesGroups.h"
 #include "msrAfterGraceNotes.h"
 
 #include "msrHarmonies.h"
-#include "msrFiguredBassElements.h"
+#include "msrFiguredBasses.h"
 
 #include "msrGlissandos.h"
 

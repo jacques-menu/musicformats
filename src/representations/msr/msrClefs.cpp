@@ -34,22 +34,29 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrClef msrClef::create (
-  int         inputLineNumber,
-  msrClefKind clefKind,
-  int         clefStaffNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  msrClefKind  clefKind,
+  int          clefStaffNumber)
 {
   msrClef* o =
     new msrClef (
-      inputLineNumber, clefKind, clefStaffNumber);
+      inputLineNumber,
+      upLinkToMeasure,
+      clefKind,
+      clefStaffNumber);
   assert (o != nullptr);
   return o;
 }
 
 msrClef::msrClef (
-  int         inputLineNumber,
-  msrClefKind clefKind,
-  int         clefStaffNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  msrClefKind  clefKind,
+  int          clefStaffNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fClefKind        = clefKind;
   fClefStaffNumber = clefStaffNumber;
@@ -61,6 +68,7 @@ msrClef::~msrClef ()
 //________________________________________________________________________
 S_msrClef msrClef::createClefFromString (
   int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
   const string& clefString,
   int           clefLineNumber)
 {
@@ -163,6 +171,7 @@ S_msrClef msrClef::createClefFromString (
   result =
     msrClef::create (
       inputLineNumber,
+      upLinkToMeasure,
       clefKind,
       clefLineNumber);
 
@@ -294,7 +303,7 @@ ostream& operator << (ostream& os, const S_msrClef& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

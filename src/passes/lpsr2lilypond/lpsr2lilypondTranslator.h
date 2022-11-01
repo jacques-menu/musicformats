@@ -203,7 +203,7 @@ class EXP lpsr2lilypondTranslator :
 
   // figured bass
 
-  public visitor<S_msrFiguredBassElement>,
+  public visitor<S_msrFiguredBass>,
   public visitor<S_msrBassFigure>,
 
   public visitor<S_msrSegment>,
@@ -518,8 +518,8 @@ class EXP lpsr2lilypondTranslator :
     virtual void          visitStart (S_msrFrame& elt);
 
     // figured bass
-    virtual void          visitStart (S_msrFiguredBassElement& elt);
-    virtual void          visitEnd   (S_msrFiguredBassElement& elt);
+    virtual void          visitStart (S_msrFiguredBass& elt);
+    virtual void          visitEnd   (S_msrFiguredBass& elt);
     virtual void          visitStart (S_msrBassFigure& elt);
 
     virtual void          visitStart (S_msrSegment& elt);
@@ -753,7 +753,7 @@ class EXP lpsr2lilypondTranslator :
     // JMI
 
     // comments
-    void                  generateInputLineNumberAndOrPositionInMeasureAsAComment (
+    void                  generateInputLineNumberAndOrMeasurePositionAsAComment (
                             S_msrMeasureElement measureElement);
 
     // markups
@@ -1016,10 +1016,10 @@ class EXP lpsr2lilypondTranslator :
 
     string                figureAsLilypondString (
                             S_msrBassFigure bassFigure);
-    string                figuredBassElementAsLilypondString (
-                            S_msrFiguredBassElement figuredBassElement);
+    string                figuredBassAsLilypondString (
+                            S_msrFiguredBass figuredBass);
 
-    S_msrFiguredBassElement
+    S_msrFiguredBass
                           fCurrentFiguredBass;
     size_t                fCurrentFiguredBassFiguresCounter;
 

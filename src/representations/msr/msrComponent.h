@@ -19,6 +19,7 @@
 
 namespace MusicFormats
 {
+
 //______________________________________________________________________________
 S_mfcRepresentationComponent EXP createMsrRepresentationComponent ();
 

@@ -404,7 +404,7 @@ void msrRepeatCommonPart::print (ostream& os) const
       ")";
   }
   else {
-    os << "empty";
+    os << "[EMPTY]";
   }
   os << endl;
 
@@ -468,7 +468,7 @@ void msrRepeatCommonPart::printShort (ostream& os) const
       ")";
   }
   else {
-    os << "empty";
+    os << "[EMPTY]";
   }
   os << endl;
 
@@ -814,7 +814,7 @@ void msrRepeatEnding::print (ostream& os) const
       ")";
   }
   else {
-    os << "empty";
+    os << "[EMPTY]";
   }
   os << endl;
 

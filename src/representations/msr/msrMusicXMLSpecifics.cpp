@@ -349,7 +349,7 @@ ostream& operator << (ostream& os, const S_msrPageLayout& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -508,7 +508,7 @@ ostream& operator << (ostream& os, const S_msrSystemLayout& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -624,7 +624,7 @@ ostream& operator << (ostream& os, const S_msrSystemDividers& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -748,7 +748,7 @@ ostream& operator << (ostream& os, const S_msrStaffLayout& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -858,24 +858,29 @@ ostream& operator << (ostream& os, const S_msrMeasureLayout& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrPrintLayout msrPrintLayout::create (
-  int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
   msrPrintLayout* o =
     new msrPrintLayout (
-      inputLineNumber);
+      inputLineNumber,
+      upLinkToMeasure);
   assert (o != nullptr);
   return o;
 }
 
 msrPrintLayout::msrPrintLayout (
-  int inputLineNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePrintLayouts ()) {
@@ -1103,7 +1108,7 @@ ostream& operator << (ostream& os, const S_msrPrintLayout& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1323,7 +1328,7 @@ ostream& operator << (ostream& os, const S_msrLineWidth& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1482,7 +1487,7 @@ ostream& operator << (ostream& os, const S_msrNoteSize& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1638,7 +1643,7 @@ ostream& operator << (ostream& os, const S_msrDistance& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1833,7 +1838,7 @@ ostream& operator << (ostream& os, const S_msrGlyph& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1983,7 +1988,7 @@ ostream& operator << (ostream& os, const S_msrOtherAppearance& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -2274,7 +2279,7 @@ ostream& operator << (ostream& os, const S_msrAppearance& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -373,6 +373,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
       appendClefToMeasure (
         msrClef::create (
           __LINE__,
+          measure1,
           msrClefKind::kClefTreble,
           1));
 
@@ -382,6 +383,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -1051,7 +1053,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheFunctionsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 }
 
@@ -1093,6 +1096,7 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -1332,7 +1336,8 @@ void Mikrokosmos3WanderingGenerator::populateUpperVoice1WithTheStringsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 */
 }
@@ -1364,6 +1369,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
       appendClefToMeasure (
         msrClef::create (
           __LINE__,
+          measure1,
           msrClefKind::kClefBass,
           2));
 
@@ -1373,6 +1379,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -1856,7 +1863,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheFunctionsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 }
 
@@ -1897,6 +1905,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -2110,7 +2119,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice2WithTheStringsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 */
 }
@@ -2142,6 +2152,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
       appendClefToMeasure (
         msrClef::create (
           __LINE__,
+          measure1,
           msrClefKind::kClefBass,
           2));
 
@@ -2151,6 +2162,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -2332,7 +2344,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheFunctionsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 }
 
@@ -2363,6 +2376,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
       appendClefToMeasure (
         msrClef::createClefFromString (
           __LINE__,
+          measure1,
           "bass",
           2));
 
@@ -2372,6 +2386,7 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -2521,7 +2536,8 @@ void Mikrokosmos3WanderingGenerator::populateLowerVoice1WithTheStringsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 }
 

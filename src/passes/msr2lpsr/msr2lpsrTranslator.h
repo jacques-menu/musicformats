@@ -114,7 +114,7 @@ class EXP msr2lpsrTranslator :
 
   // figured bass
 
-  public visitor<S_msrFiguredBassElement>,
+  public visitor<S_msrFiguredBass>,
   public visitor<S_msrBassFigure>,
 
   // measures
@@ -342,8 +342,8 @@ class EXP msr2lpsrTranslator :
 
     virtual void          visitStart (S_msrFrame& elt);
 
-    virtual void          visitStart (S_msrFiguredBassElement& elt);
-    virtual void          visitEnd   (S_msrFiguredBassElement& elt);
+    virtual void          visitStart (S_msrFiguredBass& elt);
+    virtual void          visitEnd   (S_msrFiguredBass& elt);
     virtual void          visitStart (S_msrBassFigure& elt);
 
     virtual void          visitStart (S_msrMeasure& elt);
@@ -653,7 +653,7 @@ class EXP msr2lpsrTranslator :
     // figured bass
     // ------------------------------------------------------
     Bool                      fOnGoingFiguredBassVoice;
-    S_msrFiguredBassElement   fCurrentFiguredBassElementClone;
+    S_msrFiguredBass   fCurrentFiguredBassClone;
 
 
     // segments

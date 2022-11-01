@@ -23,21 +23,20 @@ class msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
+// data types
+
+enum class msrHarmonyDegreeTypeKind {
+  kHarmonyDegreeTypeAdd,
+  kHarmonyDegreeTypeAlter,
+  kHarmonyDegreeTypeSubstract
+};
+
+string harmonyDegreeTypeKindAsString (
+  msrHarmonyDegreeTypeKind harmonyDegreeTypeKind);
+
 class EXP msrHarmonyDegree : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrHarmonyDegreeTypeKind {
-      kHarmonyDegreeTypeAdd,
-      kHarmonyDegreeTypeAlter,
-      kHarmonyDegreeTypeSubstract
-    };
-
-    static string harmonyDegreeTypeKindAsString (
-      msrHarmonyDegreeTypeKind harmonyDegreeTypeKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -137,6 +136,7 @@ class EXP msrHarmony : public msrMeasureElement
 
     static SMARTP<msrHarmony> createWithoutVoiceUplink (
                             int                      inputLineNumber,
+                            S_msrMeasure             upLinkToMeasure,
                             // no harmoniesUpLinkToVoice yet
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
@@ -160,6 +160,7 @@ class EXP msrHarmony : public msrMeasureElement
 
     static SMARTP<msrHarmony> createWithVoiceUplink (
                             int                      inputLineNumber,
+                            S_msrMeasure             upLinkToMeasure,
                             S_msrVoice               harmoniesUpLinkToVoice,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
@@ -212,20 +213,20 @@ class EXP msrHarmony : public msrMeasureElement
                              { return fHarmoniesUpLinkToVoice; }
 
     // position in measure
-    void                  setMeasureElementPositionInMeasure (
+    void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context) override
                               {
-                                setHarmonyPositionInMeasure (
+                                setHarmonyMeasurePosition (
                                   measure,
-                                  positionInMeasure,
+                                  measurePosition,
                                   context);
                               }
 
-    void                  setHarmonyPositionInMeasure (
+    void                  setHarmonyMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context);
 
     // whole notes

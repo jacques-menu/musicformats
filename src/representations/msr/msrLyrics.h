@@ -65,6 +65,7 @@ class EXP msrSyllable : public msrMeasureElement
 
     static SMARTP<msrSyllable> create (
                             int                   inputLineNumber,
+                            S_msrMeasure          upLinkToMeasure,
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
                             const string&         syllableStanzaNumber,
@@ -74,6 +75,7 @@ class EXP msrSyllable : public msrMeasureElement
 
     static SMARTP<msrSyllable> createWithNextMeasurePuristNumber (
                             int                   inputLineNumber,
+                            S_msrMeasure          upLinkToMeasure,
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
                             const string&         syllableStanzaNumber,
@@ -133,20 +135,20 @@ class EXP msrSyllable : public msrMeasureElement
                               { return fSyllableUpLinkToStanza; }
 
     // position in measure
-    void                  setMeasureElementPositionInMeasure (
+    void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context) override
                               {
-                                setSyllablePositionInMeasure (
+                                setSyllableMeasurePosition (
                                   measure,
-                                  positionInMeasure,
+                                  measurePosition,
                                   context);
                               }
 
-    void                  setSyllablePositionInMeasure (
+    void                  setSyllableMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context);
 
     // syllable kind

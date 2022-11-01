@@ -145,7 +145,7 @@ void lpsrBookBlockElement::browseData (basevisitor* v)
 
 void lpsrBookBlockElement::print (ostream& os) const
 {
-  // will never be called since it is overridden in subclasses
+  // will never be called since it is overridden in sub-classes
 }
 
 ostream& operator << (ostream& os, const S_lpsrBookBlockElement& scr)

@@ -39,6 +39,7 @@ class EXP msrLineBreak : public msrMeasureElement
 
     static SMARTP<msrLineBreak> create (
                             int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
                             const string& nextBarNumber,
                             msrUserChosenLineBreakKind
                                           userChosenLineBreakKind);
@@ -50,6 +51,7 @@ class EXP msrLineBreak : public msrMeasureElement
 
                           msrLineBreak (
                             int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
                             const string& nextBarNumber,
                             msrUserChosenLineBreakKind
                                           userChosenLineBreakKind);
@@ -124,9 +126,10 @@ class EXP msrPageBreak : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrPageBreak> create (
-                            int   inputLineNumber,
+                            int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
                             msrUserChosenPageBreakKind
-                                  userChosenPageBreakKind);
+                                          userChosenPageBreakKind);
 
   protected:
 
@@ -134,9 +137,10 @@ class EXP msrPageBreak : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrPageBreak (
-                            int   inputLineNumber,
+                            int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
                             msrUserChosenPageBreakKind
-                                  userChosenPageBreakKind);
+                                          userChosenPageBreakKind);
 
     virtual               ~msrPageBreak ();
 

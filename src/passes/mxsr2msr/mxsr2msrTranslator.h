@@ -1317,7 +1317,7 @@ class EXP mxsr2msrTranslator :
                                 S_msrNote  newNote,
                                 S_msrVoice voiceToInsertInto);
 
-    void                      attachPendingFiguredBassElementsToNote (
+    void                      attachPendingFiguredBassesToNote (
                                 int        inputLineNumber,
                                 S_msrNote  newNote,
                                 S_msrVoice voiceToInsertInto);
@@ -1710,7 +1710,7 @@ class EXP mxsr2msrTranslator :
 
     msrDiatonicPitchKind      fCurrentHarmonyBassDiatonicPitchKind;
     msrAlterationKind         fCurrentHarmonyBassAlterationKind;
-    msrHarmonyDegree::msrHarmonyDegreeTypeKind
+    msrHarmonyDegreeTypeKind
                               fCurrentHarmonyDegreeTypeKind;
 
     list<S_msrHarmonyDegree>  fCurrentHarmonyDegreesList;
@@ -1732,9 +1732,9 @@ class EXP mxsr2msrTranslator :
     // ------------------------------------------------------
 
     int                       fFiguredBassVoicesCounter;
-    list<S_msrFiguredBassElement>
-                              fPendingFiguredBassElementsList;
-    void                      handlePendingFiguredBassElements (
+    list<S_msrFiguredBass>
+                              fPendingFiguredBassesList;
+    void                      handlePendingFiguredBasses (
                                 S_msrNote  newNote,
                                 S_msrVoice voiceToInsertInto);
 
@@ -1742,16 +1742,14 @@ class EXP mxsr2msrTranslator :
 
     int                       fCurrentFiguredBassInputLineNumber;
 
-    msrBassFigure::msrBassFigurePrefixKind
-                              fCurrentFigurePrefixKind;
+    msrBassFigurePrefixKind   fCurrentFigurePrefixKind;
     int                       fCurrentFigureNumber;
-    msrBassFigure::msrBassFigureSuffixKind
-                              fCurrentFigureSuffixKind;
+    msrBassFigureSuffixKind   fCurrentFigureSuffixKind;
 
     Rational                  fCurrentFiguredBassSoundingWholeNotes;
     Rational                  fCurrentFiguredBassDisplayWholeNotes;
 
-    msrFiguredBassElement::msrFiguredBassElementParenthesesKind
+    msrFiguredBassParenthesesKind
                               fCurrentFiguredBassParenthesesKind;
 
     list<S_msrBassFigure>     fPendingFiguredBassFiguresList;
@@ -2272,16 +2270,11 @@ class EXP mxsr2msrTranslator :
     string                    fCurrentTupletNormalType;
     int                       fCurrentTupletNormalDotsNumber;
 
-    msrTuplet::msrTupletTypeKind
-                              fCurrentTupletTypeKind;
-    msrTuplet::msrTupletLineShapeKind
-                              fCurrentTupletLineShapeKind;
-    msrTuplet::msrTupletBracketKind
-                              fCurrentTupletBracketKind;
-    msrTuplet::msrTupletShowNumberKind
-                              fCurrentTupletShowNumberKind;
-    msrTuplet::msrTupletShowTypeKind
-                              fCurrentTupletShowTypeKind;
+    msrTupletTypeKind         fCurrentTupletTypeKind;
+    msrTupletLineShapeKind    fCurrentTupletLineShapeKind;
+    msrTupletBracketKind      fCurrentTupletBracketKind;
+    msrTupletShowNumberKind   fCurrentTupletShowNumberKind;
+    msrTupletShowTypeKind     fCurrentTupletShowTypeKind;
     int                       fCurrentTempoTupletNumber;
 
     Bool                      fCurrentNoteBelongsToATuplet;

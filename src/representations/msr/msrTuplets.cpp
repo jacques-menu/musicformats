@@ -24,6 +24,8 @@
 
 #include "mfStringsHandling.h"
 
+#include "msrMeasures.h"
+
 #include "msrTuplets.h"
 
 #include "oahOah.h"
@@ -41,6 +43,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
+  S_msrMeasure            upLinkToMeasure,
   const string&           tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
@@ -54,6 +57,7 @@ S_msrTuplet msrTuplet::create (
   msrTuplet* o =
     new msrTuplet (
       inputLineNumber,
+      upLinkToMeasure,
       tupletMeasureNumber,
       tupletNumber,
       tupletBracketKind,
@@ -69,6 +73,7 @@ S_msrTuplet msrTuplet::create (
 
 msrTuplet::msrTuplet (
   int                     inputLineNumber,
+  S_msrMeasure            upLinkToMeasure,
   const string&           tupletMeasureNumber,
   int                     tupletNumber,
   msrTupletBracketKind    tupletBracketKind,
@@ -78,7 +83,9 @@ msrTuplet::msrTuplet (
   msrTupletFactor         tupletFactor,
   const Rational&         memberNotesSoundingWholeNotes,
   const Rational&         memberNotesDisplayWholeNotes)
-    : msrTupletElement (inputLineNumber)
+    : msrTupletElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fTupletKind = msrTupletInKind::k_NoTupletIn;
 
@@ -133,7 +140,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
     newbornClone =
       msrTuplet::create (
         fInputLineNumber,
-        fMeasureElementMeasureNumber,
+        fetchMeasureElementMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
         fTupletLineShapeKind,
@@ -150,19 +157,19 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   newbornClone->fTupletDisplayWholeNotes =
     fTupletDisplayWholeNotes;
 
-  newbornClone->fMeasureElementMeasureNumber =
-    fMeasureElementMeasureNumber;
+  newbornClone->fetchMeasureElementMeasureNumber () =
+    fetchMeasureElementMeasureNumber ();
 
-  newbornClone->fMeasureElementPositionInMeasure =
-    fMeasureElementPositionInMeasure;
+  newbornClone->fMeasureElementMeasurePosition =
+    fMeasureElementMeasurePosition;
 */
 
   return newbornClone;
 }
 
-void msrTuplet::setTupletPositionInMeasure (
+void msrTuplet::setTupletMeasurePosition (
   const S_msrMeasure measure,
-  const Rational&    positionInMeasure,
+  const Rational&    measurePosition,
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -170,13 +177,13 @@ void msrTuplet::setTupletPositionInMeasure (
     gLogStream <<
       "Setting tuplet's position in measure of " << asString () <<
       " to " <<
-      positionInMeasure <<
+      measurePosition <<
       " (was " <<
-      fMeasureElementPositionInMeasure <<
+      fMeasureElementMeasurePosition <<
       ") in measure " <<
       measure->asShortString () <<
-      " (fMeasureElementMeasureNumber: " <<
-      fMeasureElementMeasureNumber <<
+      " (measureElementMeasureNumber: " <<
+      fetchMeasureElementMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -187,11 +194,11 @@ void msrTuplet::setTupletPositionInMeasure (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != msrMoment::K_NO_POSITION,
-    "positionInMeasure == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
 
   // set time signature's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
+  fMeasureElementMeasurePosition = measurePosition;
 }
 
 S_msrMeasure msrTuplet::fetchTupletUpLinkToMeasure () const
@@ -238,25 +245,25 @@ S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
   return result;
 }
 
-string msrTuplet::tupletTypeKindAsString (
+string tupletTypeKindAsString (
   msrTupletTypeKind tupletTypeKind)
 {
   string result;
 
   switch (tupletTypeKind) {
-    case msrTuplet::kTupletTypeNone:
+    case msrTupletTypeKind::kTupletTypeNone:
       result = "kTupletTypeNone";
       break;
-    case msrTuplet::kTupletTypeStart:
+    case msrTupletTypeKind::kTupletTypeStart:
       result = "kTupletTypeStart";
       break;
-    case msrTuplet::kTupletTypeContinue:
+    case msrTupletTypeKind::kTupletTypeContinue:
       result = "kTupletTypeContinue";
       break;
-    case msrTuplet::kTupletTypeStop:
+    case msrTupletTypeKind::kTupletTypeStop:
       result = "kTupletTypeStop";
       break;
-    case msrTuplet::kTupletTypeStartAndStopInARow:
+    case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
       result = "kTupletTypeStartAndStopInARow";
       break;
   } // switch
@@ -264,16 +271,16 @@ string msrTuplet::tupletTypeKindAsString (
   return result;
 }
 
-string msrTuplet::tupletBracketKindAsString (
+string tupletBracketKindAsString (
   msrTupletBracketKind tupletBracketKind)
 {
   string result;
 
   switch (tupletBracketKind) {
-    case msrTuplet::kTupletBracketYes:
+    case msrTupletBracketKind::kTupletBracketYes:
       result = "kTupletBracketYes";
       break;
-    case msrTuplet::kTupletBracketNo:
+    case msrTupletBracketKind::kTupletBracketNo:
       result = "kTupletBracketNo";
       break;
   } // switch
@@ -281,16 +288,16 @@ string msrTuplet::tupletBracketKindAsString (
   return result;
 }
 
-string msrTuplet::tupletLineShapeKindAsString (
+string tupletLineShapeKindAsString (
   msrTupletLineShapeKind tupletLineShapeKind)
 {
   string result;
 
   switch (tupletLineShapeKind) {
-    case msrTuplet::kTupletLineShapeStraight:
+    case msrTupletLineShapeKind::kTupletLineShapeStraight:
       result = "kTupletLineShapeStraight";
       break;
-    case msrTuplet::kTupletLineShapeCurved:
+    case msrTupletLineShapeKind::kTupletLineShapeCurved:
       result = "kTupletLineShapeCurved";
       break;
   } // switch
@@ -298,19 +305,19 @@ string msrTuplet::tupletLineShapeKindAsString (
   return result;
 }
 
-string msrTuplet::tupletShowNumberKindAsString (
+string tupletShowNumberKindAsString (
   msrTupletShowNumberKind tupletShowNumberKind)
 {
   string result;
 
   switch (tupletShowNumberKind) {
-    case msrTuplet::kTupletShowNumberActual:
+    case msrTupletShowNumberKind::kTupletShowNumberActual:
       result = "kTupletShowNumberActual";
       break;
-    case msrTuplet::kTupletShowNumberBoth:
+    case msrTupletShowNumberKind::kTupletShowNumberBoth:
       result = "kTupletShowNumberBoth";
       break;
-    case msrTuplet::kTupletShowNumberNone:
+    case msrTupletShowNumberKind::kTupletShowNumberNone:
       result = "kTupletShowNumberNone";
       break;
   } // switch
@@ -318,19 +325,19 @@ string msrTuplet::tupletShowNumberKindAsString (
   return result;
 }
 
-string msrTuplet::tupletShowTypeKindAsString (
+string tupletShowTypeKindAsString (
   msrTupletShowTypeKind tupletShowTypeKind)
 {
   string result;
 
   switch (tupletShowTypeKind) {
-    case msrTuplet::kTupletShowTypeActual:
+    case msrTupletShowTypeKind::kTupletShowTypeActual:
       result = "kTupletShowTypeActual";
       break;
-    case msrTuplet::kTupletShowTypeBoth:
+    case msrTupletShowTypeKind::kTupletShowTypeBoth:
       result = "kTupletShowTypeBoth";
       break;
-    case msrTuplet::kTupletShowTypeNone:
+    case msrTupletShowTypeKind::kTupletShowTypeNone:
       result = "kTupletShowTypeNone";
       break;
   } // switch
@@ -443,7 +450,7 @@ void msrTuplet::appendChordToTuplet (S_msrChord chord)
 /* too early JMI
   // populate chord's measure number
   chord->setChordMeasureNumber (
-    fMeasureElementMeasureNumber);
+    fetchMeasureElementMeasureNumber ());
 */
 }
 
@@ -739,7 +746,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
 
 Rational msrTuplet::setTupletMembersPositionsInMeasure (
   S_msrMeasure    measure,
-  const Rational& positionInMeasure)
+  const Rational& measurePosition)
   // returns the position in measure after the tuplet
 {
 #ifdef TRACING_IS_ENABLED
@@ -747,7 +754,7 @@ Rational msrTuplet::setTupletMembersPositionsInMeasure (
     gLogStream <<
       "Setting tuplet members positions in measure of " << asString () <<
       " to '" <<
-      positionInMeasure <<
+      measurePosition <<
       "'" <<
       endl;
   }
@@ -759,11 +766,11 @@ Rational msrTuplet::setTupletMembersPositionsInMeasure (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != msrMoment::K_NO_POSITION,
-    "positionInMeasure == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
 
   // set tuplet's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
+  fMeasureElementMeasurePosition = measurePosition;
 
 if (false) { // JMI
   // compute tuplet's position in voice
@@ -771,16 +778,16 @@ if (false) { // JMI
      positionFromBeginningOfVoice =
       fTupletDirectUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
         +
-      positionInMeasure;
+      measurePosition;
 
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != msrMoment::K_NO_POSITION,
-    "positionInMeasure == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
 
   // set tuplet's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
+  fMeasureElementMeasurePosition = measurePosition;
 
   // update current position in voice
   S_msrVoice
@@ -794,7 +801,7 @@ if (false) { // JMI
 }
 
   // current position
-  Rational currentPosition = positionInMeasure;
+  Rational currentPosition = measurePosition;
 
   // compute position in measure for the tuplets elements
   for (
@@ -813,7 +820,7 @@ if (false) { // JMI
           measure);
 
       note->
-        setNotePositionInMeasure (
+        setNoteMeasurePosition (
           measure,
           currentPosition,
           "msrTuplet::setTupletMembersPositionsInMeasure()");
@@ -828,7 +835,7 @@ if (false) { // JMI
     ) {
       // chord
       chord->
-        setChordMembersPositionInMeasure (
+        setChordMembersMeasurePosition (
           measure,
           currentPosition);
 
@@ -843,7 +850,7 @@ if (false) { // JMI
       // nested tuplet
 //       currentPosition =
 //         tuplet->
-//           setTupletPositionInMeasure ( // a function JMI ??? v0.9.66
+//           setTupletMeasurePosition ( // a function JMI ??? v0.9.66
 //             measure,
 //             currentPosition);
 
@@ -923,7 +930,7 @@ void msrTuplet::finalizeTuplet (
 / * JMI v0.9.66
   // we can now set the position in measure for all the tuplet members
   setTupletMembersPositionsInMeasure (
-    fMeasureElementPositionInMeasure);
+    fMeasureElementMeasurePosition);
   * /
 }
 */
@@ -996,14 +1003,14 @@ string msrTuplet::asString () const
     ' ' << fMeasureElementSoundingWholeNotes << " tupletSoundingWholeNotes" <<
     ", measure ' " <<
     ", line " << fInputLineNumber <<
-    fMeasureElementMeasureNumber <<
+    fetchMeasureElementMeasureNumber () <<
     "':";
 
-  if (fMeasureElementPositionInMeasure.getNumerator () < 0) {
+  if (fMeasureElementMeasurePosition.getNumerator () < 0) {
     s << "?";
   }
   else {
-    s << fMeasureElementPositionInMeasure;
+    s << fMeasureElementMeasurePosition;
   }
 
   s << "[[";
@@ -1070,7 +1077,7 @@ void msrTuplet::print (ostream& os) const
     fMeasureElementSoundingWholeNotes << " sounding, " <<
     fTupletDisplayWholeNotes << " displayed" <<
     ", meas " <<
-    fMeasureElementMeasureNumber <<
+    fetchMeasureElementMeasureNumber () <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -1120,11 +1127,11 @@ void msrTuplet::print (ostream& os) const
 
     setw (fieldWidth) <<
     "fTupletMeasureNumber" << " : " <<
-    fMeasureElementMeasureNumber <<
+    fetchMeasureElementMeasureNumber () <<
     endl <<
     setw (fieldWidth) <<
-    "fPositionInMeasure" << " : " <<
-    fMeasureElementPositionInMeasure <<
+    "fMeasurePosition" << " : " <<
+    fMeasureElementMeasurePosition <<
     endl <<
     setw (fieldWidth) <<
     "fPositionFromBeginningOfVoice" << " : " <<
@@ -1135,11 +1142,11 @@ void msrTuplet::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "(position in measure" << " : ";
-  if (fMeasureElementPositionInMeasure.getNumerator () < 0) {
+  if (fMeasureElementMeasurePosition.getNumerator () < 0) {
     os << "???)";
   }
   else {
-    os << fMeasureElementPositionInMeasure << ")";
+    os << fMeasureElementMeasurePosition << ")";
   }
   os << endl;
     */
@@ -1212,7 +1219,7 @@ void msrTuplet::printShort (ostream& os)
     fMeasureElementSoundingWholeNotes << " sounding, " <<
     fTupletDisplayWholeNotes << " displayed" <<
     ", meas " <<
-    fMeasureElementMeasureNumber <<
+    fetchMeasureElementMeasureNumber () <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -1265,26 +1272,26 @@ void msrTuplet::printShort (ostream& os)
 
     setw (fieldWidth) <<
     "fTupletMeasureNumber" << " : " <<
-    fMeasureElementMeasureNumber <<
+    fetchMeasureElementMeasureNumber () <<
     endl <<
     setw (fieldWidth) <<
-    "fMeasureElementPositionInMeasure" << " : " <<
-    fMeasureElementPositionInMeasure <<
-    endl <<
-    setw (fieldWidth) <<
-    "fMeasureElementPositionFromBeginningOfVoice" << " : " <<
-    fMeasureElementPositionFromBeginningOfVoice <<
+    "fMeasureElementMeasurePosition" << " : " <<
+    fMeasureElementMeasurePosition <<
+//     endl <<
+//     setw (fieldWidth) <<
+//     "fMeasureElementPositionFromBeginningOfVoice" << " : " <<
+//     fMeasureElementPositionFromBeginningOfVoice <<
     endl << endl;
 
 /* JMI ???
   os << left <<
     setw (fieldWidth) <<
     "(position in measure" << " : ";
-  if (fMeasureElementPositionInMeasure.getNumerator () < 0) {
+  if (fMeasureElementMeasurePosition.getNumerator () < 0) {
     os << "???)";
   }
   else {
-    os << fMeasureElementPositionInMeasure << ")";
+    os << fMeasureElementMeasurePosition << ")";
   }
   os << endl;
     */

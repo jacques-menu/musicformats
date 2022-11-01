@@ -550,7 +550,7 @@ void lilypondTransposePartNameAtom::print (ostream& os) const
     endl;
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     map<string, S_msrSemiTonesPitchAndOctave>::const_iterator
@@ -585,7 +585,7 @@ void lilypondTransposePartNameAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {
@@ -906,7 +906,7 @@ void lilypondTransposePartIDAtom::print (ostream& os) const
     endl;
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     map<string, S_msrSemiTonesPitchAndOctave>::const_iterator
@@ -941,7 +941,7 @@ void lilypondTransposePartIDAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringToMsrSemiTonesPitchAndOctaveMapVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {
@@ -2290,7 +2290,7 @@ void lilypondChordsDisplayAtom::printAtomWithVariableOptionsValues (
     --gIndenter;
   }
   else {
-    os << "empty";
+    os << "[EMPTY]";
   }
   os << endl;
 }
@@ -5096,7 +5096,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
     setw (valueFieldWidth) << "fPartIDsTranspositionMap" << " : ";
 
   if (! fPartIDsTranspositionMap.size ()) {
-    gLogStream << "empty";
+    gLogStream << "[EMPTY]";
   }
   else {
     for (
@@ -5341,7 +5341,7 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
   os << left <<
     setw (valueFieldWidth) << "boxAroundBarNumberSet" << " : ";
   if (! fBoxAroundBarNumberSet.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     set<int>::const_iterator
@@ -5948,7 +5948,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   gLogStream << left <<
     setw (fieldWidth) << "fResetMeasureElementMeasureNumberMap" << " : ";
   if (! fResetMeasureElementMeasureNumberMap.size ()) {
-    gLogStream << "empty";
+    gLogStream << "[EMPTY]";
   }
   else {
     map<string, int>::const_iterator
@@ -5966,7 +5966,7 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
   gLogStream << left <<
     setw (fieldWidth) << "fBoxAroundBarNumberSet" << " : ";
   if (! fBoxAroundBarNumberSet.size ()) {
-    gLogStream << "empty";
+    gLogStream << "[EMPTY]";
   }
   else {
     set<int>::const_iterator
@@ -6460,7 +6460,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::print (ostream& os) const
     endl;
 
   if (! fStringSetVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     map<string, int>::const_iterator
@@ -6490,7 +6490,7 @@ void lilypondBreakPageAfterMeasureNumberAtom::printAtomWithVariableOptionsValues
 
   if (! fStringSetVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {

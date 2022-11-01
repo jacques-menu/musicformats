@@ -1681,14 +1681,14 @@ jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r compare * | grep '\.h'
 oah/oahBasicTypes.h:    const multiset<S_oahElement, compareOahElements>&
 oah/oahBasicTypes.h:    multiset<S_oahElement, compareOahElements>
 oah/oahElements.h:struct compareOahElements {
-formats/msr/msrParts.h:    static bool           compareStavesToHaveFiguredBassElementsBelowCorrespondingPart (
-formats/msr/msrNotes.h:    static bool           compareNotesByIncreasingPositionInMeasure (
-formats/msr/msrMeasureElements.h:    static bool           compareMeasureElementsByIncreasingPositionInMeasure (
+formats/msr/msrParts.h:    static bool           compareStavesToHaveFiguredBassesBelowCorrespondingPart (
+formats/msr/msrNotes.h:    static bool           compareNotesByIncreasingMeasurePosition (
+formats/msr/msrMeasureElements.h:    static bool           compareMeasureElementsByIncreasingMeasurePosition (
 formats/msr/msrStaves.h:    static bool           compareVoicesByIncreasingNumber (
 formats/msr/msrStaves.h:    static bool           compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
-formats/msr/msrStaves.h:    static bool           compareVoicesToHaveFiguredBassElementsBelowCorrespondingVoice (
-formats/msr/msrMeasuresSlices.h:    static bool           compareNotesEventsByIncreasingPositionInMeasure (
-formats/msr/msrMeasuresSlices.h:    static bool           compareSimultaneousNotesChunksByIncreasingPositionInMeasure (
+formats/msr/msrStaves.h:    static bool           compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
+formats/msr/msrMeasuresSlices.h:    static bool           compareNotesEventsByIncreasingMeasurePosition (
+formats/msr/msrMeasuresSlices.h:    static bool           compareSimultaneousNotesChunksByIncreasingMeasurePosition (
 formats/lpsr/lpsrParts.h:    static bool           compareElementsToHaveHarmoniesAboveCorrespondingStaff (
 formats/lpsr/lpsrParts.h:    static bool           compareStaffBlockWithOtherElement (
 formats/lpsr/lpsrParts.h:    static bool           compareChordNamesContextWithOtherElement (
@@ -1697,7 +1697,7 @@ utilities/mfutilities.h:    // compare indentation value
 
 An example is:
 \begin{lstlisting}[language=Terminal]
-bool msrPart::compareStavesToHaveFiguredBassElementsBelowCorrespondingPart (
+bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
   const S_msrStaff& first,
   const S_msrStaff& second)
 {

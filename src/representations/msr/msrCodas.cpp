@@ -58,13 +58,15 @@ ostream& operator << (ostream& os, const msrCodaKind& elt)
 
 //______________________________________________________________________________
 S_msrCoda msrCoda::create (
-  int         inputLineNumber,
-  int         staffNumber,
-  msrCodaKind codaKind)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  int          staffNumber,
+  msrCodaKind  codaKind)
 {
   msrCoda* o =
     new msrCoda (
       inputLineNumber,
+      upLinkToMeasure,
       staffNumber,
       codaKind);
   assert (o != nullptr);
@@ -72,10 +74,13 @@ S_msrCoda msrCoda::create (
 }
 
 msrCoda::msrCoda (
-  int         inputLineNumber,
-  int         staffNumber,
-  msrCodaKind codaKind)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  int          staffNumber,
+  msrCodaKind  codaKind)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fStaffNumber = staffNumber;
 
@@ -158,7 +163,7 @@ ostream& operator << (ostream& os, const S_msrCoda& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

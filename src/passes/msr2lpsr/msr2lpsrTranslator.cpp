@@ -653,7 +653,7 @@ void msr2lpsrTranslator::displayPartHiddenMeasureAndBarLineDescrList ()
     --gIndenter;
   }
   else {
-    gLogStream << "empty" << endl;
+    gLogStream << "[EMPTY]" << endl;
   }
 }
 
@@ -737,7 +737,7 @@ void msr2lpsrTranslator::handlePartHiddenMeasureAndBarLineDescrList ()
       fCurrentPartClone->
         insertHiddenMeasureAndBarLineInPartClone (
           hiddenMeasureAndBarLineDescr->getInputLineNumber (),
-          dalSegno->getMeasureElementPositionInMeasure ());
+          dalSegno->getMeasureElementMeasurePosition ());
 
       if (++i == iEnd) break;
     } // for
@@ -2568,12 +2568,12 @@ void msr2lpsrTranslator::visitStart (S_msrFrame& elt)
 }
 
 //________________________________________________________________________
-void msr2lpsrTranslator::visitStart (S_msrFiguredBassElement& elt)
+void msr2lpsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrFiguredBassElement '" <<
+      "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", fOnGoingFiguredBassVoice = " << fOnGoingFiguredBassVoice <<
@@ -2583,16 +2583,16 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBassElement& elt)
 #endif
 
   // create a figured bass new born clone
-  fCurrentFiguredBassElementClone =
+  fCurrentFiguredBassClone =
     elt->
-      createFiguredBassElementNewbornClone (
+      createFiguredBassNewbornClone (
         fCurrentVoiceClone);
 
   if (fOnGoingNonGraceNote) {
     // append the figured bass to the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendFiguredBassElementToNoteFiguredBassElementsList (
-        fCurrentFiguredBassElementClone);
+      appendFiguredBassToNoteFiguredBassesList (
+        fCurrentFiguredBassClone);
 
     // don't append the figured bass to the part figured bass,  JMI ???
     // this will be done below
@@ -2601,21 +2601,21 @@ void msr2lpsrTranslator::visitStart (S_msrFiguredBassElement& elt)
   else if (fOnGoingChord) {
     // register the figured bass element clone in the current chord clone
     fCurrentChordClone->
-      setChordFiguredBass (fCurrentFiguredBassElementClone); // JMI
+      setChordFiguredBass (fCurrentFiguredBassClone); // JMI
   }
 
   else if (fOnGoingFiguredBassVoice) { // JMI
     /*
     // register the figured bass in the part clone figured bass
     fCurrentPartClone->
-      appendFiguredBassElementToPartClone (
+      appendFiguredBassToPartClone (
         fCurrentVoiceClone,
-        fCurrentFiguredBassElementClone);
+        fCurrentFiguredBassClone);
         */
     // append the figured bass to the current voice clone
     fCurrentVoiceClone->
-      appendFiguredBassElementToVoiceClone (
-        fCurrentFiguredBassElementClone);
+      appendFiguredBassToVoiceClone (
+        fCurrentFiguredBassClone);
   }
 
   else {
@@ -2648,17 +2648,17 @@ void msr2lpsrTranslator::visitStart (S_msrBassFigure& elt)
 #endif
 
   // append the bass figure to the current figured bass
-  fCurrentFiguredBassElementClone->
+  fCurrentFiguredBassClone->
     appendFigureToFiguredBass (
       elt);
 }
 
-void msr2lpsrTranslator::visitEnd (S_msrFiguredBassElement& elt)
+void msr2lpsrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrFiguredBassElement '" <<
+      "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
@@ -2666,7 +2666,7 @@ void msr2lpsrTranslator::visitEnd (S_msrFiguredBassElement& elt)
   }
 #endif
 
-  fCurrentFiguredBassElementClone = nullptr;
+  fCurrentFiguredBassClone = nullptr;
 }
 
 //________________________________________________________________________
@@ -3015,6 +3015,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
     fLastBarCheck =
       msrBarCheck::createWithNextBarPuristNumber (
         inputLineNumber,
+        fCurrentMeasureClone,
         nextMeasureNumber,
         voiceCurrentMeasurePuristNumber);
 
@@ -3028,6 +3029,7 @@ void msr2lpsrTranslator::visitEnd (S_msrMeasure& elt)
       barNumberCheck_ =
         msrBarNumberCheck::create (
           inputLineNumber,
+					fCurrentMeasureClone,
           nextMeasureNumber,
           voiceCurrentMeasurePuristNumber);
 
@@ -3391,6 +3393,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
       rehearsalMark =
         msrRehearsalMark::create (
           elt->getInputLineNumber (),
+					fCurrentMeasureClone,
           msrRehearsalMark::kNone,
           elt->tempoWordsListAsString (" "), //JMI ???
           elt->getTempoPlacementKind ());
@@ -4358,6 +4361,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
         tempo =
           msrTempo::createTempoWordsOnly (
             inputLineNumber,
+		        fCurrentMeasureClone,
             elt,
             msrTempo::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
@@ -4387,6 +4391,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
         rehearsalMark =
           msrRehearsalMark::create (
             inputLineNumber,
+						fCurrentMeasureClone,
             msrRehearsalMark::kNone,
             elt->getWordsContents (),
             elt->getWordsPlacementKind ()); // above ??? JMI
@@ -4844,12 +4849,12 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 /*
     if (fOnGoingChord) {
       switch (elt->getGraceNotesGroupKind ()) {
-        case msrGraceNotesGroup::kGraceNotesGroupBefore:
+        case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
           fCurrentChordClone->
             setChordGraceNotesGroupBefore (
               fCurrentGraceNotesGroupClone);
           break;
-        case msrGraceNotesGroup::kGraceNotesGroupAfter:
+        case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
           fCurrentChordClone->
             setChordGraceNotesGroupAfter (
               fCurrentGraceNotesGroupClone);
@@ -4861,13 +4866,13 @@ void msr2lpsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
 
     if (fOnGoingNotesStack.size ()) {
       switch (elt->getGraceNotesGroupKind ()) {
-        case msrGraceNotesGroup::kGraceNotesGroupBefore:
+        case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
       //    fCurrentNonGraceNoteClone-> JMI
           fOnGoingNotesStack.front ()->
             setNoteGraceNotesGroupBefore (
               fCurrentGraceNotesGroupClone);
           break;
-        case msrGraceNotesGroup::kGraceNotesGroupAfter:
+        case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
       //    fCurrentNonGraceNoteClone-> JMI
           fOnGoingNotesStack.front ()->
             setNoteGraceNotesGroupAfter (
@@ -5124,13 +5129,13 @@ void msr2lpsrTranslator::visitStart (S_msrChordGraceNotesGroupLink& elt)
           fCurrentChordClone);
 
     switch (originalGraceNotesGroup->getGraceNotesGroupKind ()) {
-      case msrGraceNotesGroup::kGraceNotesGroupBefore:
+      case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
         fCurrentChordClone->
           setChordGraceNotesGroupLinkBefore (
             inputLineNumber,
             chordChordGraceNotesGroupLink);
         break;
-      case msrGraceNotesGroup::kGraceNotesGroupAfter:
+      case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
         fCurrentChordClone->
           setChordGraceNotesGroupLinkAfter (
             inputLineNumber,
@@ -6136,9 +6141,9 @@ void msr2lpsrTranslator::visitStart (S_msrTuplet& elt)
   fTupletClonesStack.push (tupletClone);
 
   switch (elt->getTupletLineShapeKind ()) {
-    case msrTuplet::kTupletLineShapeStraight:
+    case msrTupletLineShapeKind::kTupletLineShapeStraight:
       break;
-    case msrTuplet::kTupletLineShapeCurved:
+    case msrTupletLineShapeKind::kTupletLineShapeCurved:
       fResultingLpsr->
         // this score needs the 'tuplets curved brackets' Scheme function
         setTupletsCurvedBracketsSchemeFunctionIsNeeded ();
@@ -6347,7 +6352,7 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
     hiddenMeasureAndBarLineDescr =
       msrHiddenMeasureAndBarLineDescr::create (
         inputLineNumber,
-        positionInMeasure);
+        measurePosition);
 */
 
   // register it in the hidden measure and barLine descr list
@@ -6360,7 +6365,7 @@ void msr2lpsrTranslator::visitStart (S_msrDalSegno& elt)
   fCurrentPartClone->
     insertHiddenMeasureAndBarLineInPartClone (
       inputLineNumber,
-      elt->getMeasureElementPositionInMeasure ());
+      elt->getMeasureElementMeasurePosition ());
      // */
 }
 

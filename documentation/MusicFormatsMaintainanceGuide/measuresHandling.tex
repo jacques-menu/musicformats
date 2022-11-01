@@ -30,7 +30,7 @@ Measures are presented at \sectionRef{Measures}.
 \section{Voice elements}
 % -------------------------------------------------------------------------
 
-The \class{msrVoiceElement} subclasses instances in {\tt fVoiceInitialElementsList} can be of types:
+The \class{msrVoiceElement} sub-classes instances in {\tt fVoiceInitialElementsList} can be of types:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grep 'public msrVoiceElement' formats/msr/*.h
 formats/msr/msrBeatRepeats.h:class EXP msrBeatRepeat : public msrVoiceElement
@@ -59,7 +59,7 @@ Class {\tt } contains a list of mesure elements:
 \section{Measure elements}
 % -------------------------------------------------------------------------
 
-The \class{msrMeasureElements} subclasses instances in {\tt } can be of types:
+The \class{msrMeasureElements} sub-classes instances in {\tt } can be of types:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src/formats/msr > grep 'public msrMeasureElement' *.h
 msrBarChecks.h:class EXP msrBarCheck : public msrMeasureElement
@@ -71,7 +71,7 @@ msrClefs.h:class EXP msrClef : public msrMeasureElement
 msrCodas.h:class EXP msrCoda : public msrMeasureElement
 msrDoubleTremolos.h:class EXP msrDoubleTremolo : public msrMeasureElement
 msrEyeGlasses.h:class EXP msrEyeGlasses : public msrMeasureElement
-msrFiguredBassElements.h:class EXP msrFiguredBassElement : public msrMeasureElement
+msrFiguredBasses.h:class EXP msrFiguredBass : public msrMeasureElement
 msrHarmonies.h:class EXP msrHarmony : public msrMeasureElement
 msrHiddenMeasureAndBarLines.h:class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
 msrInstruments.h:class EXP msrScordatura : public msrMeasureElement
@@ -85,7 +85,7 @@ msrLyrics.h:class EXP msrSyllable : public msrMeasureElement
 msrMusicXMLSpecifics.h:class EXP msrPrintLayout : public msrMeasureElement
 msrRehearsalMarks.h:class EXP msrRehearsalMark : public msrMeasureElement
 msrSegnos.h:class EXP msrSegno : public msrMeasureElement
-msrSegnos.h:class EXP msrDalSegno : public msrMeasureElement
+msrDalSegnos.h:class EXP msrDalSegno : public msrMeasureElement
 msrStavesDetails.h:class EXP msrStaffDetails : public msrMeasureElement
 msrTempos.h:class EXP msrTempo : public msrMeasureElement
 msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElement
@@ -127,11 +127,11 @@ void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
   // set elem's measure number
   elem->
     setMeasureNumber (
-      fMeasureElementMeasureNumber);
+      fetchMeasureElementMeasureNumber ());
 
   // set elem's position in measure
   elem->
-    setMeasureElementPositionInMeasure (
+    setMeasureElementMeasurePosition (
       this,
       fCurrentMeasureWholeNotesDuration,
       "appendElementToMeasure()");
@@ -176,7 +176,7 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
   // set harmony's measure number
   harmony->
     setMeasureNumber (
-      fMeasureElementMeasureNumber);
+      fetchMeasureElementMeasureNumber ());
 
   // append the harmony to the measure elements list
   // DON'T call 'appendElementToMeasure (harmony)':

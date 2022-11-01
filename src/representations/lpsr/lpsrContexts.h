@@ -34,7 +34,7 @@ class EXP lpsrContext : public lpsrElement
     // ------------------------------------------------------
 
     enum lpsrContextTypeKind {
-      kChordNames, kFiguredBassElement
+      kChordNames, kFiguredBass
     };
 
     static string contextTypeKindAsString (

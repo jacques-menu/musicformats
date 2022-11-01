@@ -24,6 +24,8 @@
 
 #include "mfServiceRunData.h"
 
+#include "msrMeasures.h"
+
 #include "msrInstruments.h"
 
 #include "oahOah.h"
@@ -156,24 +158,29 @@ ostream& operator << (ostream& os, const S_msrStringTuning& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrScordatura msrScordatura::create (
-  int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
   msrScordatura* o =
     new msrScordatura (
-      inputLineNumber);
+      inputLineNumber.
+      upLinkToMeasure);
   assert (o != nullptr);
   return o;
 }
 
 msrScordatura::msrScordatura (
-  int inputLineNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {}
 
 msrScordatura::~msrScordatura ()
@@ -274,31 +281,36 @@ ostream& operator << (ostream& os, const S_msrScordatura& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrAccordionRegistration msrAccordionRegistration::create (
-  int inputLineNumber,
-  int highDotsNumber,
-  int middleDotsNumber,
-  int lowDotsNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  int          highDotsNumber,
+  int          middleDotsNumber,
+  int          lowDotsNumber)
 {
   msrAccordionRegistration* o =
     new msrAccordionRegistration (
-      inputLineNumber,
+      inputLineNumber.
+      upLinkToMeasure,
       highDotsNumber, middleDotsNumber, lowDotsNumber);
   assert (o != nullptr);
   return o;
 }
 
 msrAccordionRegistration::msrAccordionRegistration (
-  int inputLineNumber,
-  int highDotsNumber,
-  int middleDotsNumber,
-  int lowDotsNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  int          highDotsNumber,
+  int          middleDotsNumber,
+  int          lowDotsNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fHighDotsNumber   = highDotsNumber;
   fMiddleDotsNumber = middleDotsNumber;
@@ -386,24 +398,29 @@ ostream& operator << (ostream& os, const S_msrAccordionRegistration& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
-  int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
   msrHarpPedalsTuning* o =
     new msrHarpPedalsTuning (
-      inputLineNumber);
+      inputLineNumber.
+      upLinkToMeasure);
   assert (o != nullptr);
   return o;
 }
 
 msrHarpPedalsTuning::msrHarpPedalsTuning (
-  int inputLineNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {}
 
 msrHarpPedalsTuning::~msrHarpPedalsTuning ()
@@ -555,7 +572,7 @@ string msrHarpPedalsTuning::asString () const
 
   else {
     s <<
-      "empty";
+      "[EMPTY]";
   }
 
   return s.str ();
@@ -609,13 +626,14 @@ ostream& operator << (ostream& os, const S_msrHarpPedalsTuning& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrPedal msrPedal::create (
   int              inputLineNumber,
+  S_msrMeasure     upLinkToMeasure,
   msrPedalTypeKind pedalTypeKind,
   msrPedalLineKind pedalLineKind,
   msrPedalSignKind pedalSignKind)
@@ -623,6 +641,7 @@ S_msrPedal msrPedal::create (
   msrPedal* o =
     new msrPedal (
       inputLineNumber,
+      upLinkToMeasure,
       pedalTypeKind, pedalLineKind, pedalSignKind);
   assert (o != nullptr);
   return o;
@@ -630,10 +649,13 @@ S_msrPedal msrPedal::create (
 
 msrPedal::msrPedal (
   int              inputLineNumber,
+  S_msrMeasure     upLinkToMeasure,
   msrPedalTypeKind pedalTypeKind,
   msrPedalLineKind pedalLineKind,
   msrPedalSignKind pedalSignKind)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fPedalTypeKind = pedalTypeKind;
   fPedalLineKind = pedalLineKind;
@@ -769,24 +791,29 @@ ostream& operator << (ostream& os, const S_msrPedal& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrDamp msrDamp::create (
-  int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
   msrDamp* o =
     new msrDamp (
-      inputLineNumber);
+      inputLineNumber,
+      upLinkToMeasure);
   assert (o != nullptr);
   return o;
 }
 
 msrDamp::msrDamp (
-  int inputLineNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {}
 
 msrDamp::~msrDamp ()
@@ -855,24 +882,29 @@ ostream& operator << (ostream& os, const S_msrDamp& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrDampAll msrDampAll::create (
-  int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
   msrDampAll* o =
     new msrDampAll (
-      inputLineNumber);
+      inputLineNumber,
+      upLinkToMeasure);
   assert (o != nullptr);
   return o;
 }
 
 msrDampAll::msrDampAll (
-  int inputLineNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {}
 
 msrDampAll::~msrDampAll ()
@@ -941,7 +973,7 @@ ostream& operator << (ostream& os, const S_msrDampAll& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

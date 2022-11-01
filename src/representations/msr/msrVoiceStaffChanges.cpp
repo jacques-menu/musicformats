@@ -16,14 +16,11 @@
   #include "tracingOah.h"
 #endif
 
-
-
 #include "msrVoiceStaffChanges.h"
 
 #include "oahOah.h"
 
 #include "msrOah.h"
-
 
 
 using namespace std;
@@ -33,20 +30,26 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrVoiceStaffChange msrVoiceStaffChange::create (
-  int        inputLineNumber,
-  S_msrStaff staffToChangeTo)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  S_msrStaff   staffToChangeTo)
 {
   msrVoiceStaffChange* o =
     new msrVoiceStaffChange (
-      inputLineNumber, staffToChangeTo);
+      inputLineNumber,
+      upLinkToMeasure,
+      staffToChangeTo);
   assert (o != nullptr);
   return o;
 }
 
 msrVoiceStaffChange::msrVoiceStaffChange (
-  int        inputLineNumber,
-  S_msrStaff staffToChangeTo)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  S_msrStaff   staffToChangeTo)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fStaffToChangeTo = staffToChangeTo;
 }
@@ -148,7 +151,7 @@ ostream& operator << (ostream& os, const S_msrVoiceStaffChange& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

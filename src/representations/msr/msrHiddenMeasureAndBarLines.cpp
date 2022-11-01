@@ -34,7 +34,8 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
-  int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -53,8 +54,11 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 }
 
 msrHiddenMeasureAndBarLine::msrHiddenMeasureAndBarLine (
-  int inputLineNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {}
 
 msrHiddenMeasureAndBarLine::~msrHiddenMeasureAndBarLine ()
@@ -113,7 +117,7 @@ string msrHiddenMeasureAndBarLine::asString () const
 
   s <<
     "HiddenMeasureAndBarLine" <<
-    ", positionInMeasure: " << fMeasureElementPositionInMeasure <<
+    ", measurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber;
 
   return s.str ();
@@ -132,7 +136,7 @@ ostream& operator << (ostream& os, const S_msrHiddenMeasureAndBarLine& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

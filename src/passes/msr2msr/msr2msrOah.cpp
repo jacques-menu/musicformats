@@ -197,7 +197,7 @@ string msrIgnorePartAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     set<string>::const_iterator
@@ -222,7 +222,7 @@ string msrIgnorePartAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     set<string>::const_iterator
@@ -261,7 +261,7 @@ void msrIgnorePartAtom::print (ostream& os) const
     endl;
 
   if (! fStringSetVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     set<string>::const_iterator
@@ -291,7 +291,7 @@ void msrIgnorePartAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringSetVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {
@@ -490,7 +490,7 @@ string msrKeepPartAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     set<string>::const_iterator
@@ -515,7 +515,7 @@ string msrKeepPartAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     set<string>::const_iterator
@@ -554,7 +554,7 @@ void msrKeepPartAtom::print (ostream& os) const
     endl;
 
   if (! fStringSetVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     set<string>::const_iterator
@@ -584,7 +584,7 @@ void msrKeepPartAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringSetVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {

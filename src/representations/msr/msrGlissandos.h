@@ -73,14 +73,6 @@ class EXP msrGlissando : public msrElement
     string                getGlissandoTextValue () const
                               { return fGlissandoTextValue; }
 
-    // measure upLink
-    void                  setGlissandoUpLinkToMeasure (
-                            const S_msrMeasure& measure)
-                              { fGlissandoUpLinkToMeasure = measure; }
-
-    S_msrMeasure          getGlissandoUpLinkToMeasure () const
-                              { return fGlissandoUpLinkToMeasure; }
-
   public:
 
     // public services
@@ -109,9 +101,6 @@ class EXP msrGlissando : public msrElement
 
     // private fields
     // ------------------------------------------------------
-
-    // upLink
-    S_msrMeasure          fGlissandoUpLinkToMeasure;
 
     int                   fGlissandoNumber;
 

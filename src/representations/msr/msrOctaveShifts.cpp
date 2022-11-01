@@ -24,6 +24,8 @@
 
 #include "msrOah.h"
 
+#include "msrMeasures.h"
+
 #include "msrOctaveShifts.h"
 
 
@@ -35,21 +37,28 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrOctaveShift msrOctaveShift::create (
   int                inputLineNumber,
+  S_msrMeasure       upLinkToMeasure,
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)
 {
   msrOctaveShift* o =
     new msrOctaveShift (
-      inputLineNumber, octaveShiftKind, octaveShiftSize);
+      inputLineNumber,
+      upLinkToMeasure,
+      octaveShiftKind,
+      octaveShiftSize);
   assert (o != nullptr);
   return o;
 }
 
 msrOctaveShift::msrOctaveShift (
   int                inputLineNumber,
+  S_msrMeasure       upLinkToMeasure,
   msrOctaveShiftKind octaveShiftKind,
   int                octaveShiftSize)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fOctaveShiftKind = octaveShiftKind;
 
@@ -166,7 +175,7 @@ ostream& operator << (ostream& os, const S_msrOctaveShift& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -39,6 +39,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     static SMARTP<msrDoubleTremolo> create (
                             int                  inputLineNumber,
+                            S_msrMeasure         upLinkToMeasure,
                             msrDoubleTremoloKind doubleTremoloKind,
                             msrTremoloTypeKind   doubleTremoloTypeKind,
                             int                  doubleTremoloMarksNumber,
@@ -56,6 +57,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
                           msrDoubleTremolo (
                             int                  inputLineNumber,
+                            S_msrMeasure         upLinkToMeasure,
                             msrDoubleTremoloKind doubleTremoloKind,
                             msrTremoloTypeKind   doubleTremoloTypeKind,
                             int                  doubleTremoloMarksNumber,
@@ -68,30 +70,21 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    // uplink
-
-    void                  setDoubleTremoloUpLinkToMeasure (
-                            S_msrMeasure measure)
-                              { fDoubleTremoloUpLinkToMeasure = measure; }
-
-    S_msrMeasure          getDoubleTremoloUpLinkToMeasure () const
-                              { return fDoubleTremoloUpLinkToMeasure; }
-
     // position in measure
-    void                  setMeasureElementPositionInMeasure (
+    void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context) override
                               {
-                                setDoubleTremoloPositionInMeasure (
+                                setDoubleTremoloMeasurePosition (
                                   measure,
-                                  positionInMeasure,
+                                  measurePosition,
                                   context);
                               }
 
-    void                  setDoubleTremoloPositionInMeasure (
+    void                  setDoubleTremoloMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context);
 
     // double tremolo kind
@@ -187,8 +180,8 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // tremolo first note
 
-    void                  setDoubleTremoloFirstNotePositionInMeasure (
-                            const Rational& positionInMeasure); // v0.9.66 PIM
+    void                  setDoubleTremoloFirstNoteMeasurePosition (
+                            const Rational& measurePosition); // v0.9.66 PIM
 
     void                  setDoubleTremoloFirstNoteMeasureNumber (
                             const string& measureNumber);
@@ -219,9 +212,6 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // private fields
     // ------------------------------------------------------
-
-    // uplink
-    S_msrMeasure          fDoubleTremoloUpLinkToMeasure;
 
     // sounding whole notes JMI
     // the same as the displayed divisions of both members

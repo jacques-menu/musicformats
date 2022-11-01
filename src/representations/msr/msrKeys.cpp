@@ -29,6 +29,8 @@
 
 #include "msrPitchesNames.h"
 
+#include "msrMeasures.h"
+
 #include "msrKeys.h"
 
 #include "oahOah.h"
@@ -234,13 +236,14 @@ ostream& operator << (ostream& os, const S_msrHumdrumScotKeyItem& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
 //______________________________________________________________________________
 S_msrKey msrKey::createTraditional (
   int                      inputLineNumber,
+  S_msrMeasure             upLinkToMeasure,
   msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
   int                      keyCancel)
@@ -248,6 +251,7 @@ S_msrKey msrKey::createTraditional (
   msrKey* o =
     new msrKey (
       inputLineNumber,
+      upLinkToMeasure,
       keyTonicQuarterTonesPitchKind, modeKind,
       keyCancel);
   assert (o != nullptr);
@@ -268,10 +272,13 @@ S_msrKey msrKey::createHumdrumScot (
 
 msrKey::msrKey ( // for traditional keys
   int                      inputLineNumber,
+  S_msrMeasure             upLinkToMeasure,
   msrQuarterTonesPitchKind keyTonicQuarterTonesPitchKind,
   msrModeKind              modeKind,
   int                      keyCancel)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   // this is a traditional key
   fKeyKind = msrKeyKind::kKeyTraditional;
@@ -334,7 +341,9 @@ msrKey::msrKey ( // for traditional keys
 
 msrKey::msrKey ( // for Humdrum/Scot keys
   int                  inputLineNumber)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   // this is a Humdrum/Scot key
   fKeyKind = msrKeyKind::kKeyHumdrumScot;
@@ -757,7 +766,7 @@ ostream& operator << (ostream& os, const S_msrKey& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

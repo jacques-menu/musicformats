@@ -28,14 +28,16 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrRehearsalMark msrRehearsalMark::create (
-  int              inputLineNumber,
+  int                  inputLineNumber,
+  S_msrMeasure         upLinkToMeasure,
   msrRehearsalMarkKind rehearsalKind,
-  const string&    rehearsalText,
-  msrPlacementKind rehearsalPlacementKind)
+  const string&        rehearsalText,
+  msrPlacementKind     rehearsalPlacementKind)
 {
   msrRehearsalMark* o =
     new msrRehearsalMark (
       inputLineNumber,
+      upLinkToMeasure,
       rehearsalKind,
       rehearsalText,
       rehearsalPlacementKind);
@@ -44,11 +46,14 @@ S_msrRehearsalMark msrRehearsalMark::create (
 }
 
 msrRehearsalMark::msrRehearsalMark (
-  int              inputLineNumber,
+  int                  inputLineNumber,
+  S_msrMeasure         upLinkToMeasure,
   msrRehearsalMarkKind rehearsalKind,
-  const string&    rehearsalText,
-  msrPlacementKind rehearsalPlacementKind)
-    : msrMeasureElement (inputLineNumber)
+  const string&        rehearsalText,
+  msrPlacementKind     rehearsalPlacementKind)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fRehearsalMarkKind = rehearsalKind;
 
@@ -158,7 +163,7 @@ ostream& operator << (ostream& os, const S_msrRehearsalMark& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

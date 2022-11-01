@@ -12,8 +12,6 @@
 #ifndef ___msrSegnos___
 #define ___msrSegnos___
 
-// #include "msrMeasureElements.h"
-
 #include "msrMeasures.h"
 
 
@@ -29,8 +27,9 @@ class EXP msrSegno : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrSegno> create (
-                            int  inputLineNumber,
-                            int  staffNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            int          staffNumber);
 
   protected:
 
@@ -38,8 +37,9 @@ class EXP msrSegno : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrSegno (
-                            int inputLineNumber,
-                            int staffNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            int          staffNumber);
 
     virtual               ~msrSegno ();
 
@@ -84,116 +84,6 @@ class EXP msrSegno : public msrMeasureElement
 };
 typedef SMARTP<msrSegno> S_msrSegno;
 EXP ostream& operator << (ostream& os, const S_msrSegno& elt);
-
-//______________________________________________________________________________
-enum class msrDalSegnoKind {
-  kDalSegnoNone,
-  kDalSegno, kDalSegnoAlFine, kDalSegnoAlCoda
-};
-
-string dalSegnoKindAsString (
-  msrDalSegnoKind dalSegnoKind);
-
-ostream& operator << (ostream& os,const msrDalSegnoKind& elt);
-
-//______________________________________________________________________________
-class EXP msrDalSegno : public msrMeasureElement
-{
-  public:
-
-  public:
-
-    // creation from MusicXML
-    // ------------------------------------------------------
-
-    static SMARTP<msrDalSegno> create (
-                            int             inputLineNumber,
-                            msrDalSegnoKind dalSegnoKind,
-                            const string&   dalSegnoString,
-                            int             staffNumber);
-
-  protected:
-
-    // constructors/destructor
-    // ------------------------------------------------------
-
-                          msrDalSegno (
-                            int             inputLineNumber,
-                            msrDalSegnoKind dalSegnoKind,
-                            const string&   dalSegnoString,
-                            int             staffNumber);
-
-    virtual               ~msrDalSegno ();
-
-  public:
-
-    // set and get
-    // ------------------------------------------------------
-
-    msrDalSegnoKind       getDalSegnoKind () const
-                              { return fDalSegnoKind; }
-
-    string                getDalSegnoString () const
-                              { return fDalSegnoString; }
-
-    int                   getStaffNumber () const
-                              { return fStaffNumber; }
-
-    // position in measure
-    void                  setMeasureElementPositionInMeasure (
-                            const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
-                            const string&      context) override
-                              {
-                                setDalSegnoPositionInMeasure (
-                                  measure,
-                                  positionInMeasure,
-                                  context);
-                              }
-
-    void                  setDalSegnoPositionInMeasure (
-                            const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
-                            const string&      context);
-
-  public:
-
-    // public services
-    // ------------------------------------------------------
-
-  public:
-
-    // visitors
-    // ------------------------------------------------------
-
-    void                  acceptIn  (basevisitor* v) override;
-    void                  acceptOut (basevisitor* v) override;
-
-    void                  browseData (basevisitor* v) override;
-
-  public:
-
-    // print
-    // ------------------------------------------------------
-
-    string                asString () const override;
-
-    void                  print (ostream& os) const override;
-
-  private:
-
-    // private fields
-    // ------------------------------------------------------
-
-
-      msrDalSegnoKind     fDalSegnoKind;
-
-      string              fDalSegnoString;
-
-      int                 fStaffNumber;
-};
-typedef SMARTP<msrDalSegno> S_msrDalSegno;
-EXP ostream& operator << (ostream& os, const S_msrDalSegno& elt);
 
 
 }

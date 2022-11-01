@@ -82,7 +82,7 @@ class EXP tracingOahGroup : public oahGroup
 
     void                  initializeHarmoniestracingOah ();
 
-    void                  initializeFiguredBassElementstracingOah ();
+    void                  initializeFiguredBassestracingOah ();
 
     void                  initializeSpannerstracingOah ();
 

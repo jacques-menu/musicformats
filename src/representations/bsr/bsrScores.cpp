@@ -290,7 +290,7 @@ void bsrScore::printShort (ostream& os) const
     else {
       os <<
         " : " <<
-         "empty" <<
+         "[EMPTY]" <<
       endl;
     }
   }

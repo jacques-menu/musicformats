@@ -937,7 +937,7 @@ void msrStaff::registerVoiceByItsNumber (
       // the corresponding voice
       if (fStaffAllVoicesList.size ()) {
         fStaffAllVoicesList.sort (
-          compareVoicesToHaveFiguredBassElementsBelowCorrespondingVoice);
+          compareVoicesToHaveFiguredBassesBelowCorrespondingVoice);
       }
       break;
   } // switch
@@ -1856,13 +1856,13 @@ void msrStaff::appendPageBreakToStaff (S_msrPageBreak pageBreak)
 
 void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
   int             inputLineNumber,
-  const Rational& positionInMeasure)
+  const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
-      positionInMeasure <<
+      measurePosition <<
       "' in staff clone \"" <<
       fStaffName <<
       "\" in part " <<
@@ -1879,7 +1879,7 @@ void msrStaff::insertHiddenMeasureAndBarLineInStaffClone (
     voice->
       insertHiddenMeasureAndBarLineInVoiceClone (
         inputLineNumber,
-        positionInMeasure);
+        measurePosition);
   } // for
 
   --gIndenter;
@@ -2611,7 +2611,7 @@ bool msrStaff::compareVoicesToHaveHarmoniesAboveCorrespondingVoice (
   */
 }
 
-bool msrStaff::compareVoicesToHaveFiguredBassElementsBelowCorrespondingVoice (
+bool msrStaff::compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
   const S_msrVoice& first,
   const S_msrVoice& second)
 {
@@ -3184,7 +3184,7 @@ void msrStaff::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   // print the staff 'regular voices' list
@@ -3229,7 +3229,7 @@ void msrStaff::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   os << endl;
@@ -3276,7 +3276,7 @@ void msrStaff::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   // print the staff 'voice numbers to regular voices' map
@@ -3322,7 +3322,7 @@ void msrStaff::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   os << endl;
@@ -3381,7 +3381,7 @@ void msrStaff::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   os << endl;

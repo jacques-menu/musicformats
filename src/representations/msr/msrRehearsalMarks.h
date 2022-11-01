@@ -39,10 +39,11 @@ class EXP msrRehearsalMark : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrRehearsalMark> create (
-                            int              inputLineNumber,
+                            int                  inputLineNumber,
+                            S_msrMeasure         upLinkToMeasure,
                             msrRehearsalMarkKind rehearsalKind,
-                            const string&    rehearsalText,
-                            msrPlacementKind rehearsalPlacementKind);
+                            const string&        rehearsalText,
+                            msrPlacementKind     rehearsalPlacementKind);
 
   protected:
 
@@ -50,10 +51,11 @@ class EXP msrRehearsalMark : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrRehearsalMark (
-                            int              inputLineNumber,
+                            int                  inputLineNumber,
+                            S_msrMeasure         upLinkToMeasure,
                             msrRehearsalMarkKind rehearsalKind,
-                            const string&    rehearsalText,
-                            msrPlacementKind rehearsalPlacementKind);
+                            const string&        rehearsalText,
+                            msrPlacementKind     rehearsalPlacementKind);
 
     virtual               ~msrRehearsalMark ();
 

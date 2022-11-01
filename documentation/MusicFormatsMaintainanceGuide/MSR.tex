@@ -284,7 +284,7 @@ enum class msrNoteEventKind {
 
 \Class{msrNoteEvent} contains:
 \begin{lstlisting}[language=CPlusPlus]
-    rational              fNoteEventPositionInMeasure;
+    rational              fNoteEventMeasurePosition;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 
@@ -400,7 +400,7 @@ ostream& operator << (ostream& os, const S_msrElement& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 \end{lstlisting}
@@ -1102,9 +1102,9 @@ The background colors are used as follows:
 
 The arrows colors have the following meaning:
 \begin{itemize}
-\item \textcolor{red}{red}: a link from a class to its base class. For example, \class{msrPart} is derived from \class{msrPartGroupElement};
+\item \textcolor{red}{red}: a link from a class to its base class. For example, \class{msrPart} is derived from \class{msrPartGroupElement}, \class{msrPartGroup} is derived from \class{msrPartGroupElement}, and \class{msrChord} is derived from \class{msrTupletElement};
 
-\item \textcolor{blue}{blue}: a link from a class to another that uses smart pointers to one or more instances of the former. For example, an \class{msrTuplet} may be an element of an \class{msrGraceNotesGroup}.
+\item \textcolor{blue}{blue}: one or more fields of a class are smart pointers to instances of another. For example, an \class{msrChords} instance may be an element of a \class{msrGraceNotesGroup} instance.
 \end{itemize}
 
 When not shown for clarity, the common base class of all these classes is \class{msrElement}, that contains an integer input line number.
@@ -1438,7 +1438,7 @@ msrClefs.h:class EXP msrClef : public msrMeasureElement
 msrCodas.h:class EXP msrCoda : public msrMeasureElement
 msrDoubleTremolos.h:class EXP msrDoubleTremolo : public msrMeasureElement
 msrEyeGlasses.h:class EXP msrEyeGlasses : public msrMeasureElement
-msrFiguredBassElements.h:class EXP msrFiguredBassElement : public msrMeasureElement
+msrFiguredBasses.h:class EXP msrFiguredBass : public msrMeasureElement
 msrHarmonies.h:class EXP msrHarmony : public msrMeasureElement
 msrHiddenMeasureAndBarLines.h:class EXP msrHiddenMeasureAndBarLine : public msrMeasureElement
 msrInstruments.h:class EXP msrScordatura : public msrMeasureElement
@@ -1452,7 +1452,7 @@ msrLyrics.h:class EXP msrSyllable : public msrMeasureElement
 msrMusicXMLSpecifics.h:class EXP msrPrintLayout : public msrMeasureElement
 msrRehearsalMarks.h:class EXP msrRehearsalMark : public msrMeasureElement
 msrSegnos.h:class EXP msrSegno : public msrMeasureElement
-msrSegnos.h:class EXP msrDalSegno : public msrMeasureElement
+msrDalSegnos.h:class EXP msrDalSegno : public msrMeasureElement
 msrStavesDetails.h:class EXP msrStaffDetails : public msrMeasureElement
 msrTempos.h:class EXP msrTempo : public msrMeasureElement
 msrTimeSignatures.h:class EXP msrTimeSignature : public msrMeasureElement
@@ -2072,7 +2072,7 @@ In \mxml, harmonies and figured bass occur at the measure level:
       </note>
 \end{lstlisting}
 
-In MSR, the instances of \class{msrHarmony} and \class{msrFiguredBassElement} are present twice:
+In MSR, the instances of \class{msrHarmony} and \class{msrFiguredBass} are present twice:
 \begin{itemize}
 \item each \class{msrNote} instance contains the harmonies and figured bass attached to it:
 \begin{lstlisting}[language=CPlusPlus]
@@ -2093,8 +2093,8 @@ class EXP msrNote : public msrTupletElement
     // figured bass
     // ------------------------------------------------------
 
-    list<S_msrFiguredBassElement>
-                          fNoteFiguredBassElementsList;
+    list<S_msrFiguredBass>
+                          fNoteFiguredBassesList;
 
 	// ... ... ...
 };
@@ -2136,7 +2136,7 @@ Harmonies handling is presented at \sectionRef{Harmonies handling}.
 
 
 % -------------------------------------------------------------------------
-\section{Figured bass elements}\label{Figured bass elements}
+\section{Figured bass}\label{Figured bass}
 % -------------------------------------------------------------------------
 
 Figured bass elements handling is presented at \sectionRef{Figured bass elements handling}.

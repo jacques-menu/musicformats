@@ -124,6 +124,7 @@ class EXP msrBarLine : public msrMeasureElement
 
     static SMARTP<msrBarLine> create (
                             int                           inputLineNumber,
+                            S_msrMeasure                  upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
@@ -139,10 +140,12 @@ class EXP msrBarLine : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrBarLine> createFinalBarLine (
-                            int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     static SMARTP<msrBarLine> createDoubleBarLine (
-                            int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
   protected:
 
@@ -151,6 +154,7 @@ class EXP msrBarLine : public msrMeasureElement
 
                           msrBarLine (
                             int                           inputLineNumber,
+                            S_msrMeasure                  upLinkToMeasure,
                             msrBarLineLocationKind        barLineLocationKind,
                             msrBarLineStyleKind           barLineStyleKind,
                             msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,

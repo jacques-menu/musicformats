@@ -5,7 +5,7 @@
 #include "msrDynamics.h"
 #include "msrElements.h"
 #include "msrGlissandos.h"
-#include "msrGraceNotes.h"
+#include "msrGraceNotesGroups.h"
 #include "msrHarmonies.h"
 #include "msrInstruments.h"
 #include "msrLigatures.h"
@@ -14,6 +14,7 @@
 #include "msrOrnaments.h"
 #include "msrScores.h"
 #include "msrSegnos.h"
+#include "msrDalSegnos.h"
 #include "msrSingleTremolos.h"
 #include "msrSlashes.h"
 #include "msrSlides.h"
@@ -30,8 +31,8 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrFiguredBassElement;
-typedef SMARTP<msrFiguredBassElement> S_msrFiguredBassElement;
+class msrFiguredBass;
+typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 
 class msrChordSlurLink;
 typedef SMARTP<msrChordSlurLink> S_msrChordSlurLink;
@@ -98,14 +99,6 @@ class EXP msrChord : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-    // measure upLink
-    void                  setChordDirectUpLinkToMeasure (
-                            const S_msrMeasure& measure)
-                              { fChordDirectUpLinkToMeasure = measure; }
-
-    S_msrMeasure          getChordDirectUpLinkToMeasure () const
-                            { return fChordDirectUpLinkToMeasure; }
-
     // tuplet upLink
     void                  setChordDirectUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
@@ -126,20 +119,20 @@ class EXP msrChord : public msrTupletElement
                             { return fChordDirectUpLinkToGraceNotesGroup; }
 
     // position in measure
-    void                  setMeasureElementPositionInMeasure (
+    void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context) override
                               {
-                                setChordPositionInMeasure (
+                                setChordMeasurePosition (
                                   measure,
-                                  positionInMeasure,
+                                  measurePosition,
                                   context);
                               }
 
-    void                  setChordPositionInMeasure (
+    void                  setChordMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context);
 
     // chord kind
@@ -347,10 +340,10 @@ class EXP msrChord : public msrTupletElement
 
     // figured bass
     void                  setChordFiguredBass (
-                            S_msrFiguredBassElement figuredBassElement)
-                              { fChordFiguredBass = figuredBassElement; }
+                            S_msrFiguredBass figuredBass)
+                              { fChordFiguredBass = figuredBass; }
 
-    const S_msrFiguredBassElement&
+    const S_msrFiguredBass&
                           getChordFiguredBass () const
                               { return fChordFiguredBass; }
 
@@ -363,9 +356,9 @@ class EXP msrChord : public msrTupletElement
                             { return fChordOctaveShift; }
 
     // positions in measures
-    void                  setChordMembersPositionInMeasure (
+    void                  setChordMembersMeasurePosition (
                             S_msrMeasure    measure,
-                            const Rational& positionInMeasure);
+                            const Rational& measurePosition);
 
   public:
 
@@ -522,9 +515,6 @@ class EXP msrChord : public msrTupletElement
     // private fields
     // ------------------------------------------------------
 
-    // measure upLink
-    S_msrMeasure          fChordDirectUpLinkToMeasure;
-
     // tuplet uplink
     S_msrTuplet           fChordDirectUpLinkToTuplet;
 
@@ -646,7 +636,7 @@ class EXP msrChord : public msrTupletElement
     list<S_msrHarmony>    fChordHarmoniesList;
 
     // figured bass
-    S_msrFiguredBassElement      fChordFiguredBass;
+    S_msrFiguredBass      fChordFiguredBass;
 };
 typedef SMARTP<msrChord> S_msrChord;
 EXP ostream& operator << (ostream& os, const S_msrChord& elt);

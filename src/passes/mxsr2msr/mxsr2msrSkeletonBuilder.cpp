@@ -3911,7 +3911,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_note& elt)
 
   // are there figured bass attached to the current note?
   if (fThereAreFiguredBassToBeAttachedToCurrentNote) {
-    if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBassElements ()) {
+    if (gGlobalMxsr2msrOahGroup->getIgnoreFiguredBasses ()) {
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
         gLogStream <<

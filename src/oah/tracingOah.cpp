@@ -857,7 +857,7 @@ R"()",
   // the 'harmonies and figured bass elements' multiplex booleans atom
 
   S_oahCommonPrefixBooleansAtom
-    harmoniesAndFiguredBassElementsMultiplexBooleansAtom =
+    harmoniesAndFiguredBassesMultiplexBooleansAtom =
       oahCommonPrefixBooleansAtom::create (
         "tihafb", "trace-in-harmonies-and-figured-bass",
         "Trace SHORT_NAME/LONG_NAME in harmonies and figured bass elements.",
@@ -868,7 +868,7 @@ R"()",
 
   subGroup->
     appendAtomToSubGroup (
-      harmoniesAndFiguredBassElementsMultiplexBooleansAtom);
+      harmoniesAndFiguredBassesMultiplexBooleansAtom);
 */
 
   // harmonies
@@ -914,7 +914,7 @@ R"(<harmony/> in MusicXML, \chordmode in LilyPond)",
       traceExtraHarmoniesAtom);
 }
 
-void tracingOahGroup::initializeFiguredBassElementstracingOah ()
+void tracingOahGroup::initializeFiguredBassestracingOah ()
 {
   S_oahSubGroup
     subGroup =
@@ -2397,7 +2397,7 @@ void tracingOahGroup::initializeTracingOahGroup ()
   initializeHarmoniestracingOah ();
 
   // figured bass elements
-  initializeFiguredBassElementstracingOah ();
+  initializeFiguredBassestracingOah ();
 
   // spanners
   initializeSpannerstracingOah ();

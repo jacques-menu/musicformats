@@ -20,8 +20,6 @@
 
 #include "mfAssert.h"
 
-// #include "msrMeasureElements.h"
-
 #include "msrMeasures.h"
 
 #include "oahOah.h"
@@ -41,23 +39,37 @@ const string   msrMeasureElement::K_NO_MEASURE_NUMBER = "K_NO_MEASURE_NUMBER";
 const Rational msrMeasureElement::K_NO_WHOLE_NOTES (-444444, 1);
 
 msrMeasureElement::msrMeasureElement (
-  int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
     : msrElement (inputLineNumber),
       fMeasureElementMomentInMeasure (
         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
       fMeasureElementMomentFromBeginningOfVoice (
         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
 {
+  fMeasureElementUpLinkToMeasure = upLinkToMeasure;
+
   fMeasureElementSoundingWholeNotes = Rational (0, 1),
 
-  fMeasureElementMeasureNumber = K_NO_MEASURE_NUMBER;
+  fetchMeasureElementMeasureNumber () = K_NO_MEASURE_NUMBER;
 
-  fMeasureElementPositionInMeasure = msrMoment::K_NO_POSITION;
+  fMeasureElementMeasurePosition = msrMoment::K_NO_POSITION;
   fMeasureElementPositionFromBeginningOfVoice   = msrMoment::K_NO_POSITION;
 }
 
 msrMeasureElement::~msrMeasureElement ()
 {}
+
+void msrMeasureElement::setMeasureElementUpLinkToMeasure (
+  S_msrMeasure measure)
+{
+  fMeasureElementUpLinkToMeasure = measure;
+}
+
+S_msrMeasure msrMeasureElement::getMeasureElementUpLinkToMeasure () const
+{
+  return fMeasureElementUpLinkToMeasure;
+}
 
 void msrMeasureElement::setMeasureElementSoundingWholeNotes (
   const Rational& wholeNotes,
@@ -81,7 +93,7 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
       asString () <<
       " to 'WHOLE_NOTES " << wholeNotes << // JMI v0.9.66
       "' in measure '" <<
-      fMeasureElementMeasureNumber <<
+      fetchMeasureElementMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -100,9 +112,9 @@ void msrMeasureElement::doSetMeasureElementSoundingWholeNotes (
   fMeasureElementSoundingWholeNotes = wholeNotes;
 }
 
-void msrMeasureElement::setMeasureElementPositionInMeasure (
+void msrMeasureElement::setMeasureElementMeasurePosition (
   const S_msrMeasure measure,
-  const Rational&    positionInMeasure,
+  const Rational&    measurePosition,
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -111,13 +123,13 @@ void msrMeasureElement::setMeasureElementPositionInMeasure (
     gLogStream <<
       "Setting measure element position in measure of " <<
       asString () <<
-      " to '" << positionInMeasure <<
+      " to '" << measurePosition <<
       "' (was '" <<
-      fMeasureElementPositionInMeasure <<
+      fMeasureElementMeasurePosition <<
       "') in measure " <<
       measure->asShortString () <<
-      " (fMeasureElementMeasureNumber: " <<
-      fMeasureElementMeasureNumber <<
+      " (measureElementMeasureNumber: " <<
+      fetchMeasureElementMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -128,11 +140,11 @@ void msrMeasureElement::setMeasureElementPositionInMeasure (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != msrMoment::K_NO_POSITION,
-    "positionInMeasure == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
 
   // set measure element's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
+  fMeasureElementMeasurePosition = measurePosition;
 }
 
 void msrMeasureElement::setMeasureElementPositionFromBeginningOfVoice (
@@ -146,7 +158,7 @@ void msrMeasureElement::setMeasureElementPositionFromBeginningOfVoice (
       asString () <<
       " to '" << positionFromBeginningOfVoice <<
       "' in measure '" <<
-      fMeasureElementMeasureNumber <<
+      fetchMeasureElementMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -168,7 +180,7 @@ void msrMeasureElement::setMeasureElementPositionFromBeginningOfVoice (
       asString () <<
       " to '" << positionFromBeginningOfVoice <<
       "' in measure '" <<
-      fMeasureElementMeasureNumber <<
+      fetchMeasureElementMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -194,8 +206,8 @@ void msrMeasureElement::setMeasureElementMomentInMeasure (
 //       "') " <<
 //       in measure " << JMI v0.9.66
 //       measure->asShortString () <<
-      "), fMeasureElementMeasureNumber: " <<
-      fMeasureElementMeasureNumber <<
+      "), measureElementMeasureNumber: " <<
+      fetchMeasureElementMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -217,7 +229,7 @@ void msrMeasureElement::setMeasureElementMomentFromBeginningOfVoice (
       asString () <<
       " to '" << momentFromBeginningOfVoice <<
       "' in measure '" <<
-      fMeasureElementMeasureNumber <<
+      fetchMeasureElementMeasureNumber () <<
       "', context: \"" <<
       context <<
       "\"" <<
@@ -234,15 +246,28 @@ void msrMeasureElement::setMeasureElementMomentFromBeginningOfVoice (
   fMeasureElementMomentFromBeginningOfVoice = momentFromBeginningOfVoice;
 }
 
-bool msrMeasureElement::compareMeasureElementsByIncreasingPositionInMeasure (
+string msrMeasureElement::fetchMeasureElementMeasureNumber () const
+{
+  // sanity check
+  mfAssert (
+    __FILE__, __LINE__,
+    fMeasureElementUpLinkToMeasure != nullptr,
+    "fMeasureElementUpLinkToMeasure is null");
+
+  return
+    fMeasureElementUpLinkToMeasure->
+      getMeasureNumber ();
+}
+
+bool msrMeasureElement::compareMeasureElementsByIncreasingMeasurePosition (
   const SMARTP<msrMeasureElement>& first,
   const SMARTP<msrMeasureElement>& second)
 {
   return
     bool (
-      first->getMeasureElementPositionInMeasure ()
+      first->getMeasureElementMeasurePosition ()
         <
-      second->getMeasureElementPositionInMeasure ()
+      second->getMeasureElementMeasurePosition ()
     );
 }
 

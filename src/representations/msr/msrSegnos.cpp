@@ -34,21 +34,26 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrSegno msrSegno::create (
-  int inputLineNumber,
-  int staffNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  int          staffNumber)
 {
   msrSegno* o =
     new msrSegno (
       inputLineNumber,
+      upLinkToMeasure,
       staffNumber);
   assert (o != nullptr);
   return o;
 }
 
 msrSegno::msrSegno (
-  int inputLineNumber,
-  int staffNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  int          staffNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fStaffNumber = staffNumber;
 }
@@ -121,227 +126,6 @@ void msrSegno::print (ostream& os) const
 }
 
 ostream& operator << (ostream& os, const S_msrSegno& elt)
-{
-  if (elt) {
-    elt->print (os);
-  }
-  else {
-    os << "[NONE]" << endl;
-  }
-
-  return os;
-}
-
-//______________________________________________________________________________
-string dalSegnoKindAsString (
-  msrDalSegnoKind dalSegnoKind)
-{
-  string result;
-
-  switch (dalSegnoKind) {
-    case msrDalSegnoKind::kDalSegnoNone:
-      result = "kDalSegnoNone";
-      break;
-    case msrDalSegnoKind::kDalSegno:
-      result = "kDalSegno";
-      break;
-    case msrDalSegnoKind::kDalSegnoAlFine:
-      result = "kDalSegnoAlFine";
-      break;
-    case msrDalSegnoKind::kDalSegnoAlCoda:
-      result = "kDalSegnoAlCoda";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrDalSegnoKind& elt)
-{
-  os << dalSegnoKindAsString (elt);
-  return os;
-}
-
-//______________________________________________________________________________
-S_msrDalSegno msrDalSegno::create (
-  int             inputLineNumber,
-  msrDalSegnoKind dalSegnoKind,
-  const string&   dalSegnoString,
-  int             staffNumber)
-{
-  msrDalSegno* o =
-    new msrDalSegno (
-      inputLineNumber,
-      dalSegnoKind,
-      dalSegnoString,
-      staffNumber);
-  assert (o != nullptr);
-  return o;
-}
-
-msrDalSegno::msrDalSegno (
-  int             inputLineNumber,
-  msrDalSegnoKind dalSegnoKind,
-  const string&   dalSegnoString,
-  int             staffNumber)
-    : msrMeasureElement (inputLineNumber)
-{
-  fDalSegnoKind = dalSegnoKind;
-
-  fDalSegnoString = dalSegnoString;
-
-  fStaffNumber = staffNumber;
-}
-
-msrDalSegno::~msrDalSegno ()
-{}
-
-void msrDalSegno::setDalSegnoPositionInMeasure (
-  const S_msrMeasure measure,
-  const Rational&    positionInMeasure,
-  const string&      context)
-{
-  // set the dal segno position in measure
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
-    gLogStream <<
-      "Setting dal segno's position in measure of " << asString () <<
-      " to '" <<
-      positionInMeasure <<
-      endl;
-  }
-#endif
-
-  // set harmony's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
-
-/* JMI
-  if (false) { // JMI v0.9.66
-  // compute dal segno's position in voice
-  Rational
-     positionFromBeginningOfVoice =
-       segnoUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
-        +
-      positionInMeasure;
-
-  // set dal segno's position in voice
-  setMeasureElementPositionFromBeginningOfVoice (
-    positionFromBeginningOfVoice,
-    context);
-
-  // update current position in voice
-  S_msrVoice
-    voice =
-      measure->
-        fetchMeasureUpLinkToVoice ();
-
-  voice->
-    incrementCurrentPositionFromBeginningOfVoice (
-      fdal segnoNotesVector [0]->getMeasureElementSoundingWholeNotes ());
-}
-      */
-}
-
-void msrDalSegno::acceptIn (basevisitor* v)
-{
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
-      "% ==> msrDalSegno::acceptIn ()" <<
-      endl;
-  }
-
-  if (visitor<S_msrDalSegno>*
-    p =
-      dynamic_cast<visitor<S_msrDalSegno>*> (v)) {
-        S_msrDalSegno elem = this;
-
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
-            "% ==> Launching msrDalSegno::visitStart ()" <<
-            endl;
-        }
-        p->visitStart (elem);
-  }
-}
-
-void msrDalSegno::acceptOut (basevisitor* v)
-{
-  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-    gLogStream <<
-      "% ==> msrDalSegno::acceptOut ()" <<
-      endl;
-  }
-
-  if (visitor<S_msrDalSegno>*
-    p =
-      dynamic_cast<visitor<S_msrDalSegno>*> (v)) {
-        S_msrDalSegno elem = this;
-
-        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
-          gLogStream <<
-            "% ==> Launching msrDalSegno::visitEnd ()" <<
-            endl;
-        }
-        p->visitEnd (elem);
-  }
-}
-
-void msrDalSegno::browseData (basevisitor* v)
-{}
-
-string msrDalSegno::asString () const
-{
-  stringstream s;
-
-  s <<
-    "[DalSegno" <<
-    ", dalSegnoKind: " << dalSegnoKindAsString (fDalSegnoKind) <<
-    ", dalSegnoString: \"" << fDalSegnoString << "\"" <<
-    ", staffNumber: " << fStaffNumber <<
-    ", positionInMeasure: " << fMeasureElementPositionInMeasure <<
-    ", line " << fInputLineNumber <<
-    ']';
-
-  return s.str ();
-}
-
-void msrDalSegno::print (ostream& os) const
-{
-  os <<
-    "[DalSegno" <<
-    endl;
-
-  ++gIndenter;
-
-  const int fieldWidth = 17;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "dalSegnoKind" << " : " << dalSegnoKindAsString (fDalSegnoKind) <<
-    endl <<
-    setw (fieldWidth) <<
-    "dalSegnoString" << " : \"" << fDalSegnoString << "\"" <<
-    endl <<
-    setw (fieldWidth) <<
-    "staffNumber" << " : " << fStaffNumber <<
-    endl <<
-    setw (fieldWidth) <<
-    "positionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
-    endl <<
-    setw (fieldWidth) <<
-    "positionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
-    endl <<
-    setw (fieldWidth) <<
-    "line" << " : " << fInputLineNumber <<
-    endl;
-
-  --gIndenter;
-
-  os << ']' << endl;
-}
-
-ostream& operator << (ostream& os, const S_msrDalSegno& elt)
 {
   if (elt) {
     elt->print (os);

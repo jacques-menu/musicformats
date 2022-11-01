@@ -269,7 +269,7 @@ string msrReplaceClefAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fClefKindToClefKindMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<msrClefKind, msrClefKind>::const_iterator
@@ -297,7 +297,7 @@ string msrReplaceClefAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (! fClefKindToClefKindMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<msrClefKind, msrClefKind>::const_iterator
@@ -339,7 +339,7 @@ void msrReplaceClefAtom::print (ostream& os) const
     endl;
 
   if (! fClefKindToClefKindMapVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     map<msrClefKind, msrClefKind>::const_iterator
@@ -371,7 +371,7 @@ void msrReplaceClefAtom::printAtomWithVariableOptionsValues (
 
   if (! fClefKindToClefKindMapVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {
@@ -1061,8 +1061,8 @@ R"(Ignore harmonies in MusicXML data.)",
       oahBooleanAtom::create (
         "ignore-musicxml-figured-bass", "imxmlfigbass",
 R"(Ignore figured bass elements in MusicXML data.)",
-        "fIgnoreFiguredBassElements",
-        fIgnoreFiguredBassElements));
+        "fIgnoreFiguredBasses",
+        fIgnoreFiguredBasses));
 
   // slash all grace notes
   // --------------------------------------
@@ -2378,8 +2378,8 @@ void mxsr2msrOahGroup::printMxsr2msrValues (int valueFieldWidth)
   ++gIndenter;
 
   gLogStream << left <<
-    setw (valueFieldWidth) << "fIgnoreFiguredBassElements" << " : " <<
-    fIgnoreFiguredBassElements <<
+    setw (valueFieldWidth) << "fIgnoreFiguredBasses" << " : " <<
+    fIgnoreFiguredBasses <<
     endl;
 
   --gIndenter;

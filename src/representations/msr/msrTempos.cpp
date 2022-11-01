@@ -383,8 +383,8 @@ void msrTempoTuplet::addTempoTupletToTempoTuplet (S_msrTempoTuplet tempoTuplet)
     fTempoTupletMeasureNumber);
 
   // populate tempoTuplet's position in measure
-  tempoTuplet->setTempoTupletPositionInMeasure (
-    fTempoTupletPositionInMeasure);
+  tempoTuplet->setTempoTupletMeasurePosition (
+    fTempoTupletMeasurePosition);
     * /
 }
 
@@ -635,11 +635,11 @@ string msrTempoTuplet::asString () const
     fTempoTupletMeasureNumber <<
     "':";
 
-  if (fTempoTupletPositionInMeasure.getNumerator () < 0) {
+  if (fTempoTupletMeasurePosition.getNumerator () < 0) {
     s << "?";
   }
   else {
-    s << fTempoTupletPositionInMeasure;
+    s << fTempoTupletMeasurePosition;
   }
 
   s << "[[";
@@ -728,11 +728,11 @@ void msrTempoTuplet::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "(position in measure" << " : ";
-  if (fTempoTupletPositionInMeasure.getNumerator () < 0) {
+  if (fTempoTupletMeasurePosition.getNumerator () < 0) {
     os << "???)";
   }
   else {
-    os << fTempoTupletPositionInMeasure << ")";
+    os << fTempoTupletMeasurePosition << ")";
   }
   os << endl;
     */
@@ -757,7 +757,7 @@ void msrTempoTuplet::print (ostream& os) const
     }
   else {
     os << left <<
-      " : " << "empty" <<
+      " : " << "[EMPTY]" <<
       endl;
   }
 
@@ -975,6 +975,7 @@ ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipshipElements
 //______________________________________________________________________________
 S_msrTempo msrTempo::createTempoWordsOnly (
   int               inputLineNumber,
+  S_msrMeasure      upLinkToMeasure,
   S_msrWords        tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -983,6 +984,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
   msrTempo* o =
     new msrTempo (
       inputLineNumber,
+      upLinkToMeasure,
       tempoWords,
       tempoParenthesizedKind,
       tempoPlacementKind);
@@ -993,6 +995,7 @@ S_msrTempo msrTempo::createTempoWordsOnly (
 
 S_msrTempo msrTempo::createTempoPerMinute (
   int               inputLineNumber,
+  S_msrMeasure      upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   string            tempoPerMinute,
   msrTempoParenthesizedKind
@@ -1002,6 +1005,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
   msrTempo* o =
     new msrTempo (
       inputLineNumber,
+      upLinkToMeasure,
       tempoBeatUnit,
       tempoPerMinute,
       tempoParenthesizedKind,
@@ -1012,6 +1016,7 @@ S_msrTempo msrTempo::createTempoPerMinute (
 
 S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   int               inputLineNumber,
+  S_msrMeasure      upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   msrDottedDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
@@ -1021,6 +1026,7 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
   msrTempo* o =
     new msrTempo (
       inputLineNumber,
+      upLinkToMeasure,
       tempoBeatUnit,
       tempoEquivalentBeatUnit,
       tempoParenthesizedKind,
@@ -1031,6 +1037,7 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
 
 S_msrTempo msrTempo::createTempoNotesRelationship (
   int               inputLineNumber,
+  S_msrMeasure      upLinkToMeasure,
   S_msrTempoNotesRelationshipshipElements
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
@@ -1044,6 +1051,7 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
   msrTempo* o =
     new msrTempo (
       inputLineNumber,
+      upLinkToMeasure,
       tempoNotesRelationshipLeftElements,
       tempoNotesRelationshipKind,
       tempoNotesRelationshipRightElements,
@@ -1055,11 +1063,14 @@ S_msrTempo msrTempo::createTempoNotesRelationship (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
+  S_msrMeasure      upLinkToMeasure,
   S_msrWords        tempoWords,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElement (inputLineNumber),
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure),
       fTempoBeatUnit (),
       fTempoEquivalentBeatUnit ()
 {
@@ -1084,12 +1095,15 @@ msrTempo::msrTempo (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
+  S_msrMeasure      upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   string            tempoPerMinute,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElement (inputLineNumber),
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure),
       fTempoBeatUnit (tempoBeatUnit),
       fTempoEquivalentBeatUnit ()
 {
@@ -1106,12 +1120,15 @@ msrTempo::msrTempo (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
+  S_msrMeasure      upLinkToMeasure,
   msrDottedDuration tempoBeatUnit,
   msrDottedDuration tempoEquivalentBeatUnit,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElement (inputLineNumber),
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure),
       fTempoBeatUnit (tempoBeatUnit),
       fTempoEquivalentBeatUnit (tempoEquivalentBeatUnit)
 {
@@ -1128,6 +1145,7 @@ msrTempo::msrTempo (
 
 msrTempo::msrTempo (
   int               inputLineNumber,
+  S_msrMeasure      upLinkToMeasure,
   S_msrTempoNotesRelationshipshipElements
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
@@ -1137,7 +1155,9 @@ msrTempo::msrTempo (
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
   msrPlacementKind  tempoPlacementKind)
-    : msrMeasureElement (inputLineNumber),
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure),
       fTempoBeatUnit (),
       fTempoEquivalentBeatUnit ()
 {
@@ -1422,7 +1442,7 @@ void msrTempo::print (ostream& os) const
   }
   else {
     os <<
-      " : " << "empty" <<
+      " : " << "[EMPTY]" <<
       endl;
   }
 

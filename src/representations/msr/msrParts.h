@@ -10,6 +10,7 @@
 #include "msrMultipleFullBarRests.h"
 #include "msrRehearsalMarks.h"
 #include "msrSegnos.h"
+#include "msrDalSegnos.h"
 #include "msrStaves.h"
 #include "msrStavesDetails.h"
 #include "msrTempos.h"
@@ -33,8 +34,8 @@ typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
 class msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 
-class msrFiguredBassElement;
-typedef SMARTP<msrFiguredBassElement> S_msrFiguredBassElement;
+class msrFiguredBass;
+typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 
 class msrGraceNotesGroup;
 typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
@@ -228,19 +229,19 @@ class EXP msrPart : public msrPartGroupElement
 
     // staff position in measure
 
-    void                  setPartCurrentPositionInMeasure (
+    void                  setPartCurrentMeasurePosition (
                             int             inputLineNumber,
-                            const Rational& positionInMeasure);
+                            const Rational& measurePosition);
 
-    void                  incrementPartCurrentPositionInMeasure (
+    void                  incrementPartCurrentMeasurePosition (
                             int             inputLineNumber,
                             const Rational& duration);
-    void                  decrementPartCurrentPositionInMeasure (
+    void                  decrementPartCurrentMeasurePosition (
                             int             inputLineNumber,
                             const Rational& duration);
 
-    Rational              getPartCurrentPositionInMeasure () const
-                              { return fPartCurrentPositionInMeasure; }
+    Rational              getPartCurrentMeasurePosition () const
+                              { return fPartCurrentMeasurePosition; }
 
     // part shortest note
 
@@ -347,7 +348,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  insertHiddenMeasureAndBarLineInPartClone (
                             int             inputLineNumber,
-                            const Rational& positionInMeasure);
+                            const Rational& measurePosition);
 
     // breaks
 
@@ -462,13 +463,13 @@ class EXP msrPart : public msrPartGroupElement
                             int           inputLineNumber,
                             const string& currentMeasureNumber);
 
-    void                  appendFiguredBassElementToPart (
+    void                  appendFiguredBassToPart (
                             S_msrVoice             figuredBassSupplierVoice,
-                           S_msrFiguredBassElement figuredBassElement);
+                           S_msrFiguredBass figuredBass);
 
-    void                  appendFiguredBassElementToPartClone (
+    void                  appendFiguredBassToPartClone (
                             S_msrVoice              figuredBassSupplierVoice,
-                            S_msrFiguredBassElement figuredBassElement);
+                            S_msrFiguredBass figuredBass);
 
     // scordaturas
 
@@ -703,7 +704,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // figured bass
 
-    static bool           compareStavesToHaveFiguredBassElementsBelowCorrespondingPart (
+    static bool           compareStavesToHaveFiguredBassesBelowCorrespondingPart (
                             const S_msrStaff& first,
                             const S_msrStaff& second);
 
@@ -718,7 +719,7 @@ class EXP msrPart : public msrPartGroupElement
 
     // position in measure
 
-    Rational              fPartCurrentPositionInMeasure;
+    Rational              fPartCurrentMeasurePosition;
 };
 typedef SMARTP<msrPart> S_msrPart;
 EXP ostream& operator << (ostream& os, const S_msrPart& elt);

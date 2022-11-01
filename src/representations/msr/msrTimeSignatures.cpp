@@ -33,6 +33,8 @@
 
 #include "oahEarlyOptions.h"
 
+#include "msrMeasures.h"
+
 #include "msrTimeSignatures.h"
 
 #include "oahOah.h"
@@ -209,7 +211,7 @@ string msrTimeSignatureItem::asString () const
   stringstream s;
 
   s <<
-    "TimeSignatureItem ";
+    "[TimeSignatureItem ";
 
   size_t vectorSize =
     fTimeSignatureBeatsNumbersVector.size ();
@@ -251,7 +253,8 @@ string msrTimeSignatureItem::asString () const
   } // switch
 
   s <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -329,20 +332,28 @@ ostream& operator << (ostream& os, const S_msrTimeSignatureItem& elt)
 
 //______________________________________________________________________________
 S_msrTimeSignature msrTimeSignature::create (
-  int                        inputLineNumber,
-  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
+  int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
+  msrTimeSignatureSymbolKind
+                timeSignatureSymbolKind)
 {
   msrTimeSignature* o =
     new msrTimeSignature (
-      inputLineNumber, timeSignatureSymbolKind);
+      inputLineNumber,
+      upLinkToMeasure,
+      timeSignatureSymbolKind);
   assert (o != nullptr);
   return o;
 }
 
 msrTimeSignature::msrTimeSignature (
-  int                        inputLineNumber,
-  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
-    : msrMeasureElement (inputLineNumber)
+  int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
+  msrTimeSignatureSymbolKind
+                timeSignatureSymbolKind)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fTimeSignatureSymbolKind = timeSignatureSymbolKind;
 
@@ -824,9 +835,9 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
 msrTimeSignature::~msrTimeSignature ()
 {}
 
-void msrTimeSignature::setTimeSignaturePositionInMeasure (
+void msrTimeSignature::setTimeSignatureMeasurePosition (
   const S_msrMeasure measure,
-  const Rational&    positionInMeasure,
+  const Rational&    measurePosition,
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -835,13 +846,13 @@ void msrTimeSignature::setTimeSignaturePositionInMeasure (
       "Setting time signature's position in measure of " <<
       asString () <<
       " to " <<
-      positionInMeasure <<
+      measurePosition <<
       " (was " <<
-      fMeasureElementPositionInMeasure <<
+      fMeasureElementMeasurePosition <<
       ") in measure " <<
       measure->asShortString () <<
-      " (fMeasureElementMeasureNumber: " <<
-      fMeasureElementMeasureNumber <<
+      " (measureElementMeasureNumber: " <<
+      fetchMeasureElementMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -852,11 +863,11 @@ void msrTimeSignature::setTimeSignaturePositionInMeasure (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != msrMoment::K_NO_POSITION,
-    "positionInMeasure == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
 
   // set time signature's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
+  fMeasureElementMeasurePosition = measurePosition;
 }
 
 void msrTimeSignature::appendTimeSignatureItem (

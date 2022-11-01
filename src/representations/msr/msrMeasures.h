@@ -9,7 +9,7 @@
 #include "msrBreaks.h"
 #include "msrDoubleTremolos.h"
 #include "msrEyeGlasses.h"
-#include "msrFiguredBassElements.h"
+#include "msrFiguredBasses.h"
 #include "msrHarmonies.h"
 #include "msrMusicXMLSpecifics.h"
 #include "msrParts.h"
@@ -28,6 +28,7 @@
 
 namespace MusicFormats
 {
+
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
 class msrMeasureElement;
@@ -342,13 +343,13 @@ class EXP msrMeasure : public msrSegmentElement
                             const Rational& duration,
                             S_msrVoice      voice);
 
-    void                  padUpToPositionInMeasureInMeasure (
+    void                  padUpToMeasurePositionInMeasure (
                             int             inputLineNumber,
                             const Rational& wholeNotes);
 
     void                  backupByWholeNotesStepLengthInMeasure (
                             int             inputLineNumber,
-                            const Rational& backupTargetMeasureElementPositionInMeasure);
+                            const Rational& backupTargetMeasureElementMeasurePosition);
 
     void                  appendPaddingSkipNoteToMeasure (
                             int             inputLineNumber,
@@ -383,7 +384,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  insertHiddenMeasureAndBarLineInMeasureClone (
                             int             inputLineNumber,
-                            const Rational& positionInMeasure);
+                            const Rational& measurePosition);
 
     // transposition
 
@@ -454,7 +455,7 @@ class EXP msrMeasure : public msrSegmentElement
 
     void                  appendNoteToMeasure (
                             S_msrNote       note,
-                            const Rational& partCurrentPositionInMeasure);
+                            const Rational& partCurrentMeasurePosition);
 
     void                  appendNoteOrPaddingToMeasure (
                             S_msrNote note);
@@ -500,11 +501,11 @@ class EXP msrMeasure : public msrSegmentElement
 
     // figured bass
 
-    void                  appendFiguredBassElementToMeasure (
-                            S_msrFiguredBassElement figuredBassElement);
+    void                  appendFiguredBassToMeasure (
+                            S_msrFiguredBass figuredBass);
 
-    void                  appendFiguredBassElementToMeasureClone (
-                            S_msrFiguredBassElement figuredBassElement);
+    void                  appendFiguredBassToMeasureClone (
+                            S_msrFiguredBass figuredBass);
 
     // grace notes
 
@@ -586,13 +587,13 @@ class EXP msrMeasure : public msrSegmentElement
                             msrMeasureRepeatContextKind
                                     measureRepeatContextKind);
 
-    void                  padUpToPositionInMeasure (
+    void                  padUpToMeasurePosition (
                             int             inputLineNumber,
-                            const Rational& positionInMeasureToPadUpTo);
+                            const Rational& measurePositionToPadUpTo);
 
     void                  padUpToPositionAtTheEndOfTheMeasure (
                             int             inputLineNumber,
-                            const Rational& positionInMeasureToPadUpTo);
+                            const Rational& measurePositionToPadUpTo);
 
     void                  finalizeMeasure (
                             int                         inputLineNumber,
@@ -793,30 +794,30 @@ class EXP msrMeasure : public msrSegmentElement
                             const string& context);
 
     // figurd bass
-    void                  handleFirstFiguredBassElementInFiguredBassMeasure (
+    void                  handleFirstFiguredBassInFiguredBassMeasure (
                             int          inputLineNumber,
                             S_msrVoice   voice,
                             list<S_msrMeasureElement>::iterator&
                                          i,
-                            S_msrFiguredBassElement previousFiguredBass,
-                            S_msrFiguredBassElement currentFiguredBass,
-                            const Rational&         currentFiguredBassPositionInMeasure);
+                            S_msrFiguredBass previousFiguredBass,
+                            S_msrFiguredBass currentFiguredBass,
+                            const Rational&         currentFiguredBassMeasurePosition);
 
-    void                  handleSubsequentFiguredBassElementInFiguredBassMeasure (
+    void                  handleSubsequentFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
                             S_msrVoice              voice,
                             list<S_msrMeasureElement>::iterator&
                                                     i,
-                            S_msrFiguredBassElement previousFiguredBass,
-                            S_msrFiguredBassElement currentFiguredBass,
-                            const Rational&         currentFiguredBassPositionInMeasure);
+                            S_msrFiguredBass previousFiguredBass,
+                            S_msrFiguredBass currentFiguredBass,
+                            const Rational&         currentFiguredBassMeasurePosition);
 
-    void                  postHandleCurrentFiguredBassElementInFiguredBassMeasure (
+    void                  postHandleCurrentFiguredBassInFiguredBassMeasure (
                             int                     inputLineNumber,
                             S_msrVoice              voice,
-                            S_msrFiguredBassElement currentFiguredBass);
+                            S_msrFiguredBass currentFiguredBass);
 
-    void                  finalizeFiguredBassElementsInFiguredBassMeasure (
+    void                  finalizeFiguredBassesInFiguredBassMeasure (
                             int           inputLineNumber,
                             const string& context);
 
@@ -834,9 +835,9 @@ class EXP msrMeasure : public msrSegmentElement
     void                  appendElementAtTheEndOfMeasure (
                             S_msrMeasureElement elem);
 
-    void                  insertElementAtPositionInMeasure (
+    void                  insertElementAtMeasurePosition (
                             int                 inputLineNumber,
-                            const Rational&     positionInMeasure,
+                            const Rational&     measurePosition,
                             S_msrMeasureElement elem);
 
     void                  printMeasurePendingMeasureElementsList ();
