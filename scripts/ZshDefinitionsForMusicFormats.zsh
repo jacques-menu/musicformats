@@ -843,12 +843,15 @@ function addScripts ()
 
 function addInclude ()
 {
+	echo "--> INCLUDE_DIR: ${INCLUDE_DIR}"
+
 	rm -rf ${INCLUDE_DIR}
 	mkdir -p ${INCLUDE_DIR}
 
-	cd ${MUSIC_FORMATS_DEV}
+	cd ${SRC_DIR}
 
 	rsync -R **/*.h include
+	mv include ..
 
   git add ${INCLUDE_DIR}/*
 }

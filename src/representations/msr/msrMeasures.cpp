@@ -171,15 +171,15 @@ void msrMeasure::initializeMeasure ()
     Rational (0, 1));
 
   // position in voice
-  fMeasurePositionFromBeginningOfVoice =
+  fMeasureVoicePosition =
     fMeasureUpLinkToSegment->
       getSegmentUpLinkToVoice ()->
-        getCurrentPositionFromBeginningOfVoice ();
+        getCurrentVoicePosition ();
 
-  fMeasureMomentFromBeginningOfVoice =
+  fMeasureVoiceMoment =
     fMeasureUpLinkToSegment->
       getSegmentUpLinkToVoice ()->
-        getCurrentMomentFromBeginningOfVoice ();
+        getCurrentVoiceMoment ();
 
   // measure finalization
   fMeasureHasBeenFinalized = false;
@@ -887,7 +887,7 @@ void msrMeasure::setMeasurePuristNumber (
   fMeasurePuristNumber = measurePuristNumber;
 }
 
-// void msrMeasure::incrementMeasurePositionFromBeginningOfVoice (
+// void msrMeasure::incrementMeasureVoicePosition (
 // Rational wholeNotesDelta)
 // {
 // #ifdef TRACING_IS_ENABLED
@@ -904,7 +904,7 @@ void msrMeasure::setMeasurePuristNumber (
 //     }
 // #endif
 //
-//   fMeasurePositionFromBeginningOfVoice += wholeNotesDelta;
+//   fMeasureVoicePosition += wholeNotesDelta;
 // }
 
 void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
@@ -931,8 +931,9 @@ void msrMeasure::appendElementToMeasure (S_msrMeasureElement elem)
 
   // set elem's measure number
   elem->
-    setMeasureElementMeasureNumber (
-      fMeasureNumber);
+    getMeasureElementUpLinkToMeasure ()->
+      setMeasureNumber (
+        fMeasureNumber);
 
   // set elem's position in measure
   elem->
@@ -978,8 +979,9 @@ void msrMeasure::insertElementInMeasureBeforeIterator (
 
   // set elem's measure number
   elem->
-    setMeasureElementMeasureNumber (
-      fMeasureNumber);
+    getMeasureElementUpLinkToMeasure ()->
+      setMeasureNumber (
+        fMeasureNumber);
 
   // set elem's position in measure
   elem->
@@ -1195,7 +1197,7 @@ void msrMeasure::insertElementAtMeasurePosition (
   S_msrMeasureElement elem)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Inserting element " <<
       elem->asShortString () <<
@@ -1294,8 +1296,9 @@ void msrMeasure::insertElementAtMeasurePosition (
 
   // set elem's measure number
   elem->
-    setMeasureElementMeasureNumber (
-      fMeasureNumber);
+    getMeasureElementUpLinkToMeasure ()->
+      setMeasureNumber (
+        fMeasureNumber);
 
   // set elem's position in measure
   elem->
@@ -1395,7 +1398,7 @@ void msrMeasure::setCurrentMeasureWholeNotesDuration (
   if (
     gGlobalTracingOahGroup->getTraceWholeNotes ()
       ||
-    gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+    gGlobalTracingOahGroup->getTraceMeasurePositions ()
   ) {
     gLogStream <<
       "Setting current whole notes duration of measure " <<
@@ -1446,7 +1449,7 @@ if (false) // JMI
       fCurrentMeasureWholeNotesDuration + wholeNotesDelta;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Incrementing current whole notes duration of measure " <<
       this->asShortString ()<<
@@ -1782,7 +1785,8 @@ void msrMeasure::insertHiddenMeasureAndBarLineInMeasureClone (
   S_msrHiddenMeasureAndBarLine
     hiddenMeasureAndBarLine =
       msrHiddenMeasureAndBarLine::create (
-        inputLineNumber);
+        inputLineNumber,
+        nullptr); // will be set when hidden measure and barline is appended to a measure JMI v0.9.66 PIM
 
 /* JMI BLARK
   // insert it in the measure elements list
@@ -2013,8 +2017,9 @@ void msrMeasure::appendBarLineToMeasure (S_msrBarLine barLine)
 
   // register barLine's measure number
   barLine->
-    setMeasureElementMeasureNumber (
-      fMeasureNumber);
+    getMeasureElementUpLinkToMeasure ()->
+      setMeasureNumber (
+        fMeasureNumber);
 
   // set barLine's position in measure if relevant
   switch (voice->getVoiceKind ()) {
@@ -2117,7 +2122,7 @@ void msrMeasure::appendNoteToMeasure (
   if (
     gGlobalTracingOahGroup->getTraceNotes ()
       ||
-    gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+    gGlobalTracingOahGroup->getTraceMeasurePositions ()
   ) {
     gLogStream <<
       "Appending note " << note->asShortString () <<
@@ -2221,7 +2226,7 @@ void msrMeasure::appendNoteToMeasure (
 
   if (noteGraceNotesGroupBefore) {
     noteGraceNotesGroupBefore->
-      setGraceNotesGroupElementsPositionsInMeasure (
+      setGraceNotesGroupElementsMeasurePositions (
         this,
         note->getMeasureElementMeasurePosition ());
   }
@@ -2234,7 +2239,7 @@ void msrMeasure::appendNoteToMeasure (
 
   if (noteGraceNotesGroupAfter) {
     noteGraceNotesGroupAfter->
-      setGraceNotesGroupElementsPositionsInMeasure (
+      setGraceNotesGroupElementsMeasurePositions (
         this,
         note->getMeasureElementMeasurePosition ()
          +
@@ -2282,12 +2287,13 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
 
   // populate measure upLink
   note->
-    setNoteDirectUpLinkToMeasure (this);
+    setMeasureElementUpLinkToMeasure (this);
 
   // set note's measure number
   note->
-    setMeasureElementMeasureNumber (
-      fMeasureNumber);
+    getMeasureElementUpLinkToMeasure ()->
+      setMeasureNumber (
+        fMeasureNumber);
 
   // set the note's position in measure,
   // this can lead to set the position in measure of the harmonies
@@ -2367,7 +2373,7 @@ void msrMeasure::accountForTupletMemberNoteDurationInMeasure (
   if (
     gGlobalTracingOahGroup->getTraceNotes ()
       ||
-    gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+    gGlobalTracingOahGroup->getTraceMeasurePositions ()
   ) {
     gLogStream <<
       "Accounting for the duration of tuplet member note " <<
@@ -2410,7 +2416,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (S_msrNote note)
     note->getInputLineNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Appending padding note " << note->asString () <<
       " at the end of measure " <<
@@ -2429,7 +2435,7 @@ void msrMeasure::appendPaddingNoteAtTheEndOfMeasure (S_msrNote note)
 
   // populate measure upLink
   note->
-    setNoteDirectUpLinkToMeasure (this);
+    setMeasureElementUpLinkToMeasure (this);
 
   // append the note at the end of the measure
   appendElementAtTheEndOfMeasure (note);
@@ -2511,7 +2517,7 @@ void msrMeasure::appendNoteToMeasureClone (S_msrNote note)
 
     // populate measure upLink
     note->
-      setNoteDirectUpLinkToMeasure (this);
+      setMeasureElementUpLinkToMeasure (this);
 
     // append the note to the measure elements list
   // JMI  // only now to make it possible to remove it afterwards
@@ -2624,7 +2630,7 @@ void msrMeasure::appendChordToMeasure (S_msrChord chord)
     chord->getInputLineNumber ();
 
   // populate measure upLink
-  chord->setChordDirectUpLinkToMeasure (this);
+  chord->setMeasureElementUpLinkToMeasure (this);
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChords ()) {
@@ -2707,7 +2713,7 @@ void msrMeasure::appendTupletToMeasure (S_msrTuplet tuplet)
       "msrMeasure::appendTupletToMeasure (S_msrChord chord)");
 
   // populate measure upLink
-  tuplet->setTupletDirectUpLinkToMeasure (this);
+  tuplet->setMeasureElementUpLinkToMeasure (this);
 
   // append the tuplet to the measure elements list
   appendElementToMeasure (tuplet);
@@ -2749,8 +2755,9 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
 
   // set harmony's measure number
   harmony->
-    setMeasureElementMeasureNumber (
-      fMeasureNumber);
+    getMeasureElementUpLinkToMeasure ()->
+      setMeasureNumber (
+        fMeasureNumber);
 
   // set the harmony's position in measure, right now
   harmony->
@@ -2810,8 +2817,9 @@ void msrMeasure::appendHarmonyToMeasureClone (S_msrHarmony harmony)
 
   // set harmony's measure number
   harmony->
-    setMeasureElementMeasureNumber (
-      fMeasureNumber);
+    getMeasureElementUpLinkToMeasure ()->
+      setMeasureNumber (
+        fMeasureNumber);
 
   // set the harmony's position in measure NO JMI v0.9.66
 //   harmony->
@@ -2870,8 +2878,9 @@ void msrMeasure::appendFiguredBassToMeasure (
 
   // set figuredBass's measure number
   figuredBass->
-    setMeasureElementMeasureNumber (
-      fMeasureNumber);
+    getMeasureElementUpLinkToMeasure ()->
+      setMeasureNumber (
+        fMeasureNumber);
 
   // set the figuredBass's position in measure
   figuredBass->
@@ -2969,7 +2978,7 @@ S_msrNote msrMeasure::createPaddingSkipNoteForVoice (
 {
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+    gGlobalTracingOahGroup->getTraceMeasurePositions ()
       ||
     gGlobalTracingOahGroup->getTraceVoices ()
   ) {
@@ -3016,7 +3025,7 @@ void msrMeasure::padUpToMeasurePositionInMeasure (
         getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) { // JMI
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) { // JMI
     this->print (gLogStream);
 
     gLogStream <<
@@ -3154,7 +3163,7 @@ void msrMeasure::backupByWholeNotesStepLengthInMeasure ( // JMI USELESS ???
 
 #ifdef TRACING_IS_ENABLED
   if (
-    gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+    gGlobalTracingOahGroup->getTraceMeasurePositions ()
       ||
     gGlobalTracingOahGroup->getTraceWholeNotes ()
   ) {
@@ -3194,7 +3203,7 @@ void msrMeasure::appendPaddingSkipNoteToMeasure (
   const Rational& forwardStepLength)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Appending padding skip note" <<
       ", forwardStepLength: " <<
@@ -3901,7 +3910,7 @@ void msrMeasure::padUpToMeasurePosition (
         getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Padding up to position '" <<
       measurePositionToPadUpTo <<
@@ -3933,7 +3942,7 @@ void msrMeasure::padUpToMeasurePosition (
         measurePositionToPadUpTo - fCurrentMeasureWholeNotesDuration;
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
        "Creating a padding note for measure debug number " <<
        fMeasureDebugNumber <<
@@ -3956,7 +3965,7 @@ void msrMeasure::padUpToMeasurePosition (
           measureVoice);
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
        "Appending padding note " << paddingNote->asString () <<
        " (" << missingDuration << " whole notes)" <<
@@ -3998,7 +4007,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         getSegmentUpLinkToVoice ();
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Padding up from position " <<
       fCurrentMeasureWholeNotesDuration <<
@@ -4032,7 +4041,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
         measurePositionToPadUpTo - fCurrentMeasureWholeNotesDuration;
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
         "Creating a padding note" <<
         ", missingDuration: " << missingDuration <<
@@ -4066,7 +4075,7 @@ void msrMeasure::padUpToPositionAtTheEndOfTheMeasure (
           measureVoice);
 
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+    if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
       gLogStream <<
        "Appending padding note " << paddingNote->asString () <<
        " (" << missingDuration << " whole notes)" <<
@@ -4415,7 +4424,7 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
   // compute the positions in measure delta
   // between previousHarmony and currentHarmony
   Rational
-    positionsInMeasureDelta =
+    measurePositionsDelta =
       currentHarmonyMeasurePosition
         -
       measurePositionFollowingPreviousHarmony;
@@ -4443,8 +4452,8 @@ void msrMeasure::handleSubsequentHarmonyInHarmoniesMeasure (
       currentHarmonyMeasurePosition <<
       ", measurePositionFollowingPreviousHarmony: " <<
       measurePositionFollowingPreviousHarmony <<
-      ", positionsInMeasureDelta: " <<
-      positionsInMeasureDelta <<
+      ", measurePositionsDelta: " <<
+      measurePositionsDelta <<
       endl;
   }
 #endif
@@ -5033,7 +5042,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
 
   // compute the positions in measure delta
   Rational
-    positionsInMeasureDelta =
+    measurePositionsDelta =
       currentFiguredBassMeasurePosition
         -
       measurePositionFollowingPreviousFiguredBass;
@@ -5061,20 +5070,20 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       currentFiguredBassMeasurePosition <<
       ", measurePositionFollowingPreviousFiguredBass: " <<
       measurePositionFollowingPreviousFiguredBass <<
-      ", positionsInMeasureDelta: " <<
-      positionsInMeasureDelta <<
+      ", measurePositionsDelta: " <<
+      measurePositionsDelta <<
       endl;
   }
 #endif
 
   // is a padding skip note needed?
-  if (positionsInMeasureDelta.getNumerator () > 0) {
+  if (measurePositionsDelta.getNumerator () > 0) {
     // create a padding skip note
     S_msrNote
       skipNote =
         createPaddingSkipNoteForVoice (
           inputLineNumber,
-          positionsInMeasureDelta,
+          measurePositionsDelta,
           voice);
 
     // set its position in measure
@@ -5106,7 +5115,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       skipNote);
   }
 
-  else if (positionsInMeasureDelta.getNumerator () < 0) {
+  else if (measurePositionsDelta.getNumerator () < 0) {
     // the two harmonies overlap in time
     stringstream s;
 
@@ -5126,7 +5135,7 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
       reducedSoundingWholeNotes =
         previousFiguredBassSoundingWholeNotes
           + // the delta is negative
-        positionsInMeasureDelta;
+        measurePositionsDelta;
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
@@ -5855,9 +5864,9 @@ void msrMeasure::finalizeMeasure (
 
     // position in voice
     Rational
-      positionFromBeginningOfVoice =
+      voicePosition =
         fetchMeasureUpLinkToVoice ()->
-          getCurrentPositionFromBeginningOfVoice ();
+          getCurrentVoicePosition ();
 
     // delegate position measure assignment to the elements in the measure
     for (
@@ -5868,8 +5877,8 @@ void msrMeasure::finalizeMeasure (
       S_msrMeasureElement measureElement = (*i);
 
       measureElement->
-        setMeasureElementPositionFromBeginningOfVoice (
-          positionFromBeginningOfVoice,
+        setMeasureElementVoicePosition (
+          voicePosition,
           "finalizeMeasure()");
     } // for
 
@@ -6094,9 +6103,9 @@ void msrMeasure::finalizeMeasureClone (
 
   // position in voice
   Rational
-    positionFromBeginningOfVoice =
+    voicePosition =
       fetchMeasureUpLinkToVoice ()->
-        getCurrentPositionFromBeginningOfVoice ();
+        getCurrentVoicePosition ();
 
   // delegate position measure assignment to the elements in the measure
   for (
@@ -6107,8 +6116,8 @@ void msrMeasure::finalizeMeasureClone (
     S_msrMeasureElement measureElement = (*i);
 
     measureElement->
-      setMeasureElementPositionFromBeginningOfVoice (
-        positionFromBeginningOfVoice,
+      setMeasureElementVoicePosition (
+        voicePosition,
         "finalizeMeasure()");
   } // for
 
@@ -6631,12 +6640,12 @@ void msrMeasure::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fMeasurePositionFromBeginningOfVoice" << " : " <<
-    fMeasurePositionFromBeginningOfVoice <<
+    "fMeasureVoicePosition" << " : " <<
+    fMeasureVoicePosition <<
     endl <<
     setw (fieldWidth) <<
-    "fMeasureMomentFromBeginningOfVoice" << " : " <<
-    fMeasureMomentFromBeginningOfVoice.asString () <<
+    "fMeasureVoiceMoment" << " : " <<
+    fMeasureVoiceMoment.asString () <<
     endl <<
 
     setw (fieldWidth) <<
@@ -6823,18 +6832,18 @@ ostream& operator << (ostream& os, const S_msrMeasure& elt)
 }
 
 /*
-//   if (positionsInMeasureDelta.getNumerator () > 0) {
+//   if (measurePositionsDelta.getNumerator () > 0) {
 //     // there is at least one note between
 //   }
 
 //   // is a padding skip note needed?
-//   if (positionsInMeasureDelta.getNumerator () > 0) {
+//   if (measurePositionsDelta.getNumerator () > 0) {
 //     // create a padding skip note
 //     S_msrNote
 //       skipNote =
 //         createPaddingSkipNoteForVoice (
 //           inputLineNumber,
-//           positionsInMeasureDelta,
+//           measurePositionsDelta,
 //           voice);
 //
 //     // set its position in measure
@@ -6866,7 +6875,7 @@ ostream& operator << (ostream& os, const S_msrMeasure& elt)
 //       skipNote);
 //   }
 //
-//   else if (positionsInMeasureDelta.getNumerator () < 0) {
+//   else if (measurePositionsDelta.getNumerator () < 0) {
 //     // the two harmonies overlap in time
 //     stringstream s;
 //
@@ -6886,7 +6895,7 @@ ostream& operator << (ostream& os, const S_msrMeasure& elt)
 //       reducedSoundingWholeNotes =
 //         previousHarmonySoundingWholeNotes
 //           + // the delta is negative
-//         positionsInMeasureDelta;
+//         measurePositionsDelta;
 //
 // #ifdef TRACING_IS_ENABLED
 //     if (gGlobalTracingOahGroup->getTraceHarmonies ()) {

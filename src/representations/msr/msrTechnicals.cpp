@@ -116,7 +116,7 @@ string msrTechnical::technicalKindAsString () const
 string msrTechnical::technicalPlacementKindAsString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fTechnicalPlacementKind);
 }
 
@@ -191,7 +191,7 @@ void msrTechnical::browseData (basevisitor* v)
 string msrTechnical::asString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fTechnicalPlacementKind);
 }
 
@@ -273,7 +273,7 @@ string msrTechnicalWithInteger::technicalWithIntegerKindAsString () const
 string msrTechnicalWithInteger::technicalWithIntegerPlacementKindAsString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fTechnicalWithIntegerPlacementKind);
 }
 
@@ -429,7 +429,7 @@ string msrTechnicalWithFloat::technicalWithFloatKindAsString () const
 string msrTechnicalWithFloat::technicalWithFloatPlacementKindAsString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fTechnicalWithFloatPlacementKind);
 }
 
@@ -612,7 +612,7 @@ string msrTechnicalWithString::technicalWithStringTypeKindAsString () const
 string msrTechnicalWithString::technicalWithStringPlacementKindAsString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fTechnicalWithStringPlacementKind);
 }
 

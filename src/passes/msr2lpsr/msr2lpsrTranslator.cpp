@@ -1837,7 +1837,7 @@ void msr2lpsrTranslator::visitEnd (S_msrPart& elt)
 
   // handle the hidden measure and barLine elements
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     displayPartHiddenMeasureAndBarLineDescrList ();
   }
 #endif
@@ -3921,7 +3921,7 @@ void msr2lpsrTranslator::visitStart (S_msrOrnament& elt)
 
 
   switch (elt->getOrnamentKind ()) {
-    case msrOrnament::kOrnamentSchleifer:
+    case msrOrnamentKind::kOrnamentSchleifer:
       // this score needs the 'schleifer' Scheme function
       fResultingLpsr->
         setSchleiferSchemeFunctionIsNeeded ();
@@ -5693,7 +5693,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 
 /* JMI
   // handle melisma
-  msrSyllable::msrSyllableExtendKind
+  msrSyllableExtendKind
     noteSyllableExtendKind =
       elt->getNoteSyllableExtendKind ();
 

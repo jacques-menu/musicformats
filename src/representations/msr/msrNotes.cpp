@@ -48,6 +48,8 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrNote msrNote::create (
   int                        inputLineNumber,
+  S_msrMeasure               upLinkToMeasure,
+
   const string&              noteMeasureNumber,
 
   msrNoteKind                noteKind,
@@ -65,17 +67,19 @@ S_msrNote msrNote::create (
   msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
   msrOctaveKind              noteDisplayOctaveKind,
 
-  msrNoteIsACueNoteKind      noteIsACueNoteKind,
+  msrNoteIsACueNoteKind      msrNoteIsACueNoteKind,
 
   msrPrintObjectKind         notePrintObjectKind,
 
   msrNoteHeadKind            noteHeadKind,
-  msrNoteHeadFilledKind      noteHeadFilledKind,
-  msrNoteHeadParenthesesKind noteHeadParenthesesKind)
+  msrNoteHeadFilledKind      msrNoteHeadFilledKind,
+  msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind)
 {
   msrNote * o =
     new msrNote (
       inputLineNumber,
+      upLinkToMeasure,
+
       noteMeasureNumber,
 
       noteKind,
@@ -93,13 +97,13 @@ S_msrNote msrNote::create (
       noteQuarterTonesDisplayPitchKind,
       noteDisplayOctaveKind,
 
-      noteIsACueNoteKind,
+      msrNoteIsACueNoteKind,
 
       notePrintObjectKind,
 
       noteHeadKind,
-      noteHeadFilledKind,
-      noteHeadParenthesesKind);
+      msrNoteHeadFilledKind,
+      msrNoteHeadParenthesesKind);
   assert (o != nullptr);
 
   return o;
@@ -107,6 +111,8 @@ S_msrNote msrNote::create (
 
 msrNote::msrNote (
   int                        inputLineNumber,
+  S_msrMeasure               upLinkToMeasure,
+
   const string&              noteMeasureNumber,
 
   msrNoteKind                noteKind,
@@ -124,14 +130,16 @@ msrNote::msrNote (
   msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
   msrOctaveKind              noteDisplayOctaveKind,
 
-  msrNoteIsACueNoteKind      noteIsACueNoteKind,
+  msrNoteIsACueNoteKind      msrNoteIsACueNoteKind,
 
   msrPrintObjectKind         notePrintObjectKind,
 
   msrNoteHeadKind            noteHeadKind,
-  msrNoteHeadFilledKind      noteHeadFilledKind,
-  msrNoteHeadParenthesesKind noteHeadParenthesesKind)
-  : msrTupletElement (inputLineNumber),
+  msrNoteHeadFilledKind      msrNoteHeadFilledKind,
+  msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind)
+  : msrTupletElement (
+      inputLineNumber,
+      upLinkToMeasure),
     fNoteAlphaRGBColor ("", "")
 {
   fetchMeasureElementMeasureNumber () = noteMeasureNumber;
@@ -151,13 +159,13 @@ msrNote::msrNote (
   fNoteQuarterTonesDisplayPitchKind = noteQuarterTonesDisplayPitchKind;
   fNoteDisplayOctaveKind            = noteDisplayOctaveKind;
 
-  fNoteIsACueNoteKind   = noteIsACueNoteKind;
+  fNoteIsACueNoteKind   = msrNoteIsACueNoteKind;
 
   fNotePrintObjectKind = notePrintObjectKind;
 
   fNoteHeadKind            = noteHeadKind;
-  fNoteHeadFilledKind      = noteHeadFilledKind;
-  fNoteHeadParenthesesKind = noteHeadParenthesesKind;
+  fNoteHeadFilledKind      = msrNoteHeadFilledKind;
+  fNoteHeadParenthesesKind = msrNoteHeadParenthesesKind;
 
   fNoteDisplayWholeNotes  = noteDisplayWholeNotes;
 
@@ -297,7 +305,7 @@ void msrNote::initializeNote ()
       left <<
         setw (fieldWidth) <<
         "fNoteHeadKind" << " = " <<
-         msrNoteHeadKindAsString (fNoteHeadKind) <<
+         noteHeadKindAsString (fNoteHeadKind) <<
         endl <<
       left <<
         setw (fieldWidth) <<
@@ -377,14 +385,14 @@ S_msrMeasure msrNote::fetchNoteUpLinkToMeasure () const
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteUnpitchedInMeasure:
-      result = fNoteDirectUpLinkToMeasure;
+      result = fMeasureElementUpLinkToMeasure;
       break;
 
     case msrNoteKind::kNoteRegularInChord:
       if (fNoteDirectUpLinkToChord) {
         result =
           fNoteDirectUpLinkToChord->
-            getChordDirectUpLinkToMeasure ();
+            getMeasureElementUpLinkToMeasure ();
       }
       break;
 
@@ -394,7 +402,7 @@ S_msrMeasure msrNote::fetchNoteUpLinkToMeasure () const
       if (fNoteDirectUpLinkToTuplet) {
         result =
           fNoteDirectUpLinkToTuplet->
-            getTupletDirectUpLinkToMeasure ();
+            getMeasureElementUpLinkToMeasure ();
       }
       break;
 
@@ -452,7 +460,7 @@ S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
       /* JMI
         result =
           fNoteDirectUpLinkToTuplet->
-            getTupletDirectUpLinkToMeasure ()->
+            getMeasureElementUpLinkToMeasure ()->
               fetchMeasureUpLinkToVoice ();
       */
       }
@@ -510,9 +518,9 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteRegularInChord:
-      if (fNoteDirectUpLinkToMeasure) {
+      if (fMeasureElementUpLinkToMeasure) {
         result =
-          fNoteDirectUpLinkToMeasure->
+          fMeasureElementUpLinkToMeasure->
             fetchMeasureUpLinkToVoice ();
       }
       break;
@@ -526,7 +534,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
         S_msrMeasure
           tupletDirectUpLinkToMeasure =
             fNoteDirectUpLinkToTuplet->
-              getTupletDirectUpLinkToMeasure ();
+              getMeasureElementUpLinkToMeasure ();
 
         if (tupletDirectUpLinkToMeasure) {
           result =
@@ -571,9 +579,9 @@ S_msrStaff msrNote::fetchUpLinkToNoteToStaff () const
 {
   S_msrStaff result;
 
-  if (fNoteDirectUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     result =
-      fNoteDirectUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToStaff ();
   }
 
@@ -584,9 +592,9 @@ S_msrPart msrNote::fetchUpLinkToNoteToPart () const
 {
   S_msrPart result;
 
-  if (fNoteDirectUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     result =
-      fNoteDirectUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToPart ();
   }
 
@@ -597,9 +605,9 @@ S_msrPartGroup msrNote::fetchNoteUpLinkToPartGroup () const
 {
   S_msrPartGroup result;
 
-  if (fNoteDirectUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     result =
-      fNoteDirectUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToPartGroup ();
   }
 
@@ -610,9 +618,9 @@ S_msrScore msrNote::fetchUpLinkToNoteToScore () const
 {
   S_msrScore result;
 
-  if (fNoteDirectUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     result =
-      fNoteDirectUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToScore ();
   }
 
@@ -668,6 +676,8 @@ S_msrNote msrNote::createNoteNewbornClone (
     newbornClone =
       msrNote::create (
         fInputLineNumber,
+        nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
         fetchMeasureElementMeasureNumber (),
 
         fNoteKind,
@@ -870,6 +880,8 @@ S_msrNote msrNote::createNoteDeepClone (
     noteDeepClone =
       msrNote::create (
         fInputLineNumber,
+        nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
         fetchMeasureElementMeasureNumber (),
 
         fNoteKind,
@@ -1287,8 +1299,8 @@ S_msrNote msrNote::createNoteDeepClone (
     fMeasureElementMeasurePosition =
       fMeasureElementMeasurePosition;
   noteDeepClone->
-    fMeasureElementPositionFromBeginningOfVoice =
-      fMeasureElementPositionFromBeginningOfVoice;
+    fMeasureElementVoicePosition =
+      fMeasureElementVoicePosition;
 
   noteDeepClone->
     fNoteOccupiesAFullMeasure =
@@ -1355,6 +1367,8 @@ S_msrNote msrNote::createRestNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
+      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
       noteMeasureNumber,
 
       msrNoteKind::kNoteRestInMeasure, // noteKind
@@ -1372,7 +1386,7 @@ S_msrNote msrNote::createRestNote (
       msrQuarterTonesPitchKind::k_NoQuarterTonesPitch, // noteDisplayQuarterTonesPitch
       msrOctaveKind::k_NoOctave, // noteDisplayOctave,
 
-      msrNote::kNoteIsACueNoteNo,
+      msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
@@ -1404,6 +1418,8 @@ S_msrNote msrNote::createSkipNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
+      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
       noteMeasureNumber,
 
       msrNoteKind::kNoteSkipInMeasure, // noteKind
@@ -1421,7 +1437,7 @@ S_msrNote msrNote::createSkipNote (
       msrQuarterTonesPitchKind::k_NoQuarterTonesPitch, // noteDisplayQuarterTonesPitch
       msrOctaveKind::k_NoOctave, // noteDisplayOctave,
 
-      msrNote::kNoteIsACueNoteNo,
+      msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
@@ -1431,7 +1447,7 @@ S_msrNote msrNote::createSkipNote (
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSkipNotes () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceSkipNotes () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Creating skip note " <<
       o->asString () <<
@@ -1453,6 +1469,8 @@ S_msrNote msrNote::createGraceSkipNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
+      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
       noteMeasureNumber,
 
       msrNoteKind::kNoteSkipInGraceNotesGroup, // noteKind
@@ -1470,7 +1488,7 @@ S_msrNote msrNote::createGraceSkipNote (
       msrQuarterTonesPitchKind::k_NoQuarterTonesPitch, // noteDisplayQuarterTonesPitch
       msrOctaveKind::k_NoOctave, // noteDisplayOctave,
 
-      msrNote::kNoteIsACueNoteNo,
+      msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
@@ -1480,7 +1498,7 @@ S_msrNote msrNote::createGraceSkipNote (
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceSkipNotes () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceSkipNotes () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Creating grace skip note " <<
       o->asString () <<
@@ -1504,6 +1522,8 @@ S_msrNote msrNote::createRestNoteWithOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
+      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
       noteMeasureNumber,
 
       msrNoteKind::kNoteRestInMeasure, // noteKind
@@ -1521,7 +1541,7 @@ S_msrNote msrNote::createRestNoteWithOctave (
       msrQuarterTonesPitchKind::kQTP_Rest,  // noteQuarterTonesDisplayPitchKind
       msrOctaveKind::k_NoOctave,  // noteDisplayOctaveKind
 
-      msrNote::kNoteIsACueNoteNo,
+      msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
@@ -1555,6 +1575,8 @@ S_msrNote msrNote::createSkipNoteWithOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
+      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
       noteMeasureNumber,
 
       msrNoteKind::kNoteSkipInMeasure, // noteKind
@@ -1572,7 +1594,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
       msrQuarterTonesPitchKind::kQTP_Skip,  // noteQuarterTonesDisplayPitchKind
       noteOctave,
 
-      msrNote::kNoteIsACueNoteNo,
+      msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
@@ -1607,6 +1629,8 @@ S_msrNote msrNote::createRegularNote (
   msrNote * o =
     new msrNote (
       inputLineNumber,
+      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
       noteMeasureNumber,
 
       msrNoteKind::kNoteRegularInMeasure, // noteKind
@@ -1624,7 +1648,7 @@ S_msrNote msrNote::createRegularNote (
       quarterTonesPitchKind,
       noteOctaveKind, // JMI ???
 
-      msrNote::kNoteIsACueNoteNo,
+      msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
@@ -2118,6 +2142,8 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
   msrNote * o =
     new msrNote (
       inputLineNumber,
+      nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
       K_NO_MEASURE_NUMBER, // JMI ???
 
       msrNoteKind::kNoteRegularInMeasure, // noteKind
@@ -2138,7 +2164,7 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
       msrQuarterTonesPitchKind::k_NoQuarterTonesPitch, // noteDisplayQuarterTonesPitch
       msrOctaveKind::k_NoOctave, // noteDisplayOctave,
 
-      msrNote::kNoteIsACueNoteNo,
+      msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
@@ -2169,7 +2195,7 @@ void msrNote::setNoteMeasurePosition (
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting note's position in measure of " << asString () <<
       " to " <<
@@ -2203,29 +2229,29 @@ void msrNote::setNoteMeasurePosition (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    fNoteDirectUpLinkToMeasure != nullptr,
-    "fNoteDirectUpLinkToMeasure is null");
+    fMeasureElementUpLinkToMeasure != nullptr,
+    "fMeasureElementUpLinkToMeasure is null");
 
   // compute note's position in voice
   Rational
-     positionFromBeginningOfVoice =
-      fNoteDirectUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
+     voicePosition =
+      fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
         +
       measurePosition;
 
   // set note's position in voice
-  msrMeasureElement::setMeasureElementPositionFromBeginningOfVoice (
-    positionFromBeginningOfVoice,
+  msrMeasureElement::setMeasureElementVoicePosition (
+    voicePosition,
     context);
 
   // update current position in voice
   S_msrVoice
     voice =
-      fNoteDirectUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionFromBeginningOfVoice (
+    incrementCurrentVoicePosition (
       fMeasureElementSoundingWholeNotes);
 
   // are there harmonies attached to this note?
@@ -2311,88 +2337,88 @@ string msrNote::noteDisplayWholeNotesAsMsrString () const
   return result;
 }
 
-string msrNote::msrNoteHeadKindAsString (
+string noteHeadKindAsString (
   msrNoteHeadKind noteHeadKind)
 {
   string result;
 
   switch (noteHeadKind) {
-    case msrNote::kNoteHeadSlash:
+    case msrNoteHeadKind::kNoteHeadSlash:
       result = "kNoteHeadSlash";
       break;
-    case msrNote::kNoteHeadTriangle:
+    case msrNoteHeadKind::kNoteHeadTriangle:
       result = "kNoteHeadTriangle";
       break;
-    case msrNote::kNoteHeadDiamond:
+    case msrNoteHeadKind::kNoteHeadDiamond:
       result = "kNoteHeadDiamond";
       break;
-    case msrNote::kNoteHeadSquare:
+    case msrNoteHeadKind::kNoteHeadSquare:
       result = "kNoteHeadSquare";
       break;
-    case msrNote::kNoteHeadCross:
+    case msrNoteHeadKind::kNoteHeadCross:
       result = "kNoteHeadCross";
       break;
-    case msrNote::kNoteHeadX:
+    case msrNoteHeadKind::kNoteHeadX:
       result = "kNoteHeadX";
       break;
-    case msrNote::kNoteHeadCircleX:
+    case msrNoteHeadKind::kNoteHeadCircleX:
       result = "kNoteHeadCircleX";
       break;
-    case msrNote::kNoteHeadInvertedTriangle:
+    case msrNoteHeadKind::kNoteHeadInvertedTriangle:
       result = "kNoteHeadInvertedTriangle";
       break;
-    case msrNote::kNoteHeadArrowDown:
+    case msrNoteHeadKind::kNoteHeadArrowDown:
       result = "kNoteHeadArrowDown";
       break;
-    case msrNote::kNoteHeadArrowUp:
+    case msrNoteHeadKind::kNoteHeadArrowUp:
       result = "kNoteHeadArrowUp";
       break;
-    case msrNote::kNoteHeadSlashed:
+    case msrNoteHeadKind::kNoteHeadSlashed:
       result = "kNoteHeadSlashed";
       break;
-    case msrNote::kNoteHeadBackSlashed:
+    case msrNoteHeadKind::kNoteHeadBackSlashed:
       result = "kNoteHeadBackSlashed";
       break;
-    case msrNote::kNoteHeadNormal:
+    case msrNoteHeadKind::kNoteHeadNormal:
       result = "kNoteHeadNormal";
       break;
-    case msrNote::kNoteHeadCluster:
+    case msrNoteHeadKind::kNoteHeadCluster:
       result = "kNoteHeadCluster";
       break;
-    case msrNote::kNoteHeadCircleDot:
+    case msrNoteHeadKind::kNoteHeadCircleDot:
       result = "kNoteHeadCircleDot";
       break;
-    case msrNote::kNoteHeadLeftTriangle:
+    case msrNoteHeadKind::kNoteHeadLeftTriangle:
       result = "kNoteHeadLeftTriangle";
       break;
-    case msrNote::kNoteHeadRectangle:
+    case msrNoteHeadKind::kNoteHeadRectangle:
       result = "kNoteHeadRectangle";
       break;
-    case msrNote::kNoteHeadNone:
+    case msrNoteHeadKind::kNoteHeadNone:
       result = "kNoteHeadNone";
       break;
-    case msrNote::kNoteHeadDo:
+    case msrNoteHeadKind::kNoteHeadDo:
       result = "kNoteHeadDo";
       break;
-    case msrNote::kNoteHeadRe:
+    case msrNoteHeadKind::kNoteHeadRe:
       result = "kNoteHeadRe";
       break;
-    case msrNote::kNoteHeadMi:
+    case msrNoteHeadKind::kNoteHeadMi:
       result = "kNoteHeadMi";
       break;
-    case msrNote::kNoteHeadFa:
+    case msrNoteHeadKind::kNoteHeadFa:
       result = "kNoteHeadFa";
       break;
-    case msrNote::kNoteHeadFaUp:
+    case msrNoteHeadKind::kNoteHeadFaUp:
       result = "kNoteHeadFaUp";
       break;
-    case msrNote::kNoteHeadSo:
+    case msrNoteHeadKind::kNoteHeadSo:
       result = "kNoteHeadSo";
       break;
-    case msrNote::kNoteHeadLa:
+    case msrNoteHeadKind::kNoteHeadLa:
       result = "kNoteHeadLa";
       break;
-    case msrNote::kNoteHeadTi:
+    case msrNoteHeadKind::kNoteHeadTi:
       result = "kNoteHeadTi";
       break;
   } // switch
@@ -2400,16 +2426,16 @@ string msrNote::msrNoteHeadKindAsString (
   return result;
 }
 
-string msrNote::noteHeadFilledKindAsString (
-  msrNoteHeadFilledKind noteHeadFilledKind)
+string noteHeadFilledKindAsString (
+  msrNoteHeadFilledKind msrNoteHeadFilledKind)
 {
   string result;
 
-  switch (noteHeadFilledKind) {
-    case msrNote::kNoteHeadFilledYes:
+  switch (msrNoteHeadFilledKind) {
+    case msrNoteHeadFilledKind::kNoteHeadFilledYes:
       result = "kNoteHeadFilledYes";
       break;
-    case msrNote::kNoteHeadFilledNo:
+    case msrNoteHeadFilledKind::kNoteHeadFilledNo:
       result = "kNoteHeadFilledNo";
       break;
   } // switch
@@ -2417,16 +2443,16 @@ string msrNote::noteHeadFilledKindAsString (
   return result;
 }
 
-string msrNote::noteHeadParenthesesKindAsString (
-  msrNoteHeadParenthesesKind noteHeadParenthesesKind)
+string noteHeadParenthesesKindAsString (
+  msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind)
 {
   string result;
 
-  switch (noteHeadParenthesesKind) {
-    case msrNote::kNoteHeadParenthesesYes:
+  switch (msrNoteHeadParenthesesKind) {
+    case msrNoteHeadParenthesesKind::kNoteHeadParenthesesYes:
       result = "kNoteHeadParenthesesYes";
       break;
-    case msrNote::kNoteHeadParenthesesNo:
+    case msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo:
       result = "kNoteHeadParenthesesNo";
       break;
   } // switch
@@ -2434,16 +2460,16 @@ string msrNote::noteHeadParenthesesKindAsString (
   return result;
 }
 
-string msrNote::noteIsACuemsrNoteKindAsString (
-  msrNoteIsACueNoteKind noteIsACueNoteKind)
+string noteIsACuemsrNoteKindAsString (
+  msrNoteIsACueNoteKind msrNoteIsACueNoteKind)
 {
   string result;
 
-  switch (noteIsACueNoteKind) {
-    case msrNote::kNoteIsACueNoteYes:
+  switch (msrNoteIsACueNoteKind) {
+    case msrNoteIsACueNoteKind::kNoteIsACueNoteYes:
       result = "kNoteIsACueNoteYes";
       break;
-    case msrNote::kNoteIsACueNoteNo:
+    case msrNoteIsACueNoteKind::kNoteIsACueNoteNo:
       result = "kNoteIsACueNoteNo";
       break;
   } // switch
@@ -2724,21 +2750,21 @@ void msrNote::appendOrnamentToNote (S_msrOrnament ornament)
   fNoteOrnaments.push_back (ornament);
 
   switch (ornament->getOrnamentKind ()) {
-    case msrOrnament::kOrnamentTrill:
+    case msrOrnamentKind::kOrnamentTrill:
       fNoteTrillOrnament = ornament;
       break;
 
 /* JMI
-    case msrOrnament::kOrnamentDashes:
+    case msrOrnamentKind::kOrnamentDashes:
       fNoteDashesOrnament = ornament;
       break;
 */
 
-    case msrOrnament::kOrnamentDelayedTurn:
+    case msrOrnamentKind::kOrnamentDelayedTurn:
       fNoteDelayedTurnOrnament = ornament;
       break;
 
-    case msrOrnament::kOrnamentDelayedInvertedTurn:
+    case msrOrnamentKind::kOrnamentDelayedInvertedTurn:
       fNoteDelayedInvertedTurnOrnament = ornament;
       break;
 
@@ -3102,16 +3128,16 @@ void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
 }
 
 // this 'override' NOT NEEXDED??? JMI v0.9.66
-// void msrNote::setMeasureElementPositionFromBeginningOfVoice (
-//   Rational&     positionFromBeginningOfVoice,
+// void msrNote::setMeasureElementVoicePosition (
+//   Rational&     voicePosition,
 //   const string& context)
 // {
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Assigning note position in voice of " <<
 //       asString () <<
-//       " to '" << positionFromBeginningOfVoice <<
+//       " to '" << voicePosition <<
 //       "' in measure '" <<
 //       fetchMeasureElementMeasureNumber () <<
 //       "', context: \"" <<
@@ -3124,16 +3150,16 @@ void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     positionFromBeginningOfVoice != msrMoment::K_NO_POSITION,
-//     "positionFromBeginningOfVoice == msrMoment::K_NO_POSITION");
+//     voicePosition != msrMoment::K_NO_POSITION,
+//     "voicePosition == msrMoment::K_NO_POSITION");
 //
 //   // set measure element position in voice
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Setting note position in voice of " <<
 //       asString () <<
-//       " to '" << positionFromBeginningOfVoice <<
+//       " to '" << voicePosition <<
 //       "' in measure '" <<
 //       fetchMeasureElementMeasureNumber () <<
 //       "', context: \"" <<
@@ -3143,17 +3169,17 @@ void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
 //   }
 // #endif
 //
-//   fMeasureElementPositionFromBeginningOfVoice = positionFromBeginningOfVoice;
+//   fMeasureElementVoicePosition = voicePosition;
 //
-//   // account for it in positionFromBeginningOfVoice
-//   positionFromBeginningOfVoice +=
+//   // account for it in voicePosition
+//   voicePosition +=
 //     fMeasureElementSoundingWholeNotes;
 //
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Position in voice becomes " <<
-//       positionFromBeginningOfVoice <<
+//       voicePosition <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3756,7 +3782,7 @@ void msrNote::browseData (basevisitor* v)
     // fetch the score
     S_msrScore
       score =
-        fNoteDirectUpLinkToMeasure->
+        fMeasureElementUpLinkToMeasure->
           fetchMeasureUpLinkToScore ();
 
     if (score) {
@@ -4927,8 +4953,8 @@ string msrNote::asString () const
   s << fMeasureElementMeasurePosition;
 
   s <<
-    ", positionFromBeginningOfVoice: " <<
-    fMeasureElementPositionFromBeginningOfVoice;
+    ", voicePosition: " <<
+    fMeasureElementVoicePosition;
 */
 
   if (fNoteOccupiesAFullMeasure) {
@@ -5290,8 +5316,8 @@ void msrNote::print (ostream& os) const
   os << fMeasureElementMeasurePosition;
 
   os <<
-    ", positionFromBeginningOfVoice: " <<
-    fMeasureElementPositionFromBeginningOfVoice;
+    ", voicePosition: " <<
+    fMeasureElementVoicePosition;
 */
 
   const int fieldWidth = 44;
@@ -5506,29 +5532,29 @@ void msrNote::print (ostream& os) const
   // print position from beginning of voice
 //   os << left <<
 //     setw (fieldWidth) <<
-//     "fMeasureElementPositionFromBeginningOfVoice" << " : " <<
-//     fMeasureElementPositionFromBeginningOfVoice <<
+//     "fMeasureElementVoicePosition" << " : " <<
+//     fMeasureElementVoicePosition <<
 //     endl <<
 //     setw (fieldWidth) <<
-//     "fMeasureElementMomentFromBeginningOfVoice" << " : " <<
+//     "fMeasureElementVoiceMoment" << " : " <<
 //     endl;
 //   ++gIndenter;
 //   os <<
-//     fMeasureElementMomentFromBeginningOfVoice;
+//     fMeasureElementVoiceMoment;
 //   --gIndenter;
 
   // print note measure uplink
   os <<
     setw (fieldWidth) <<
-    "fNoteDirectUpLinkToMeasure" << " : ";
+    "fMeasureElementUpLinkToMeasure" << " : ";
 
-  if (fNoteDirectUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     os << endl;
 
     ++gIndenter;
 
     os <<
-      fNoteDirectUpLinkToMeasure->asShortString () <<
+      fMeasureElementUpLinkToMeasure->asShortString () <<
       endl;
 
     --gIndenter;
@@ -5662,9 +5688,9 @@ void msrNote::print (ostream& os) const
   // may be unknown if there is no time signature
   Rational
     measureFullLength =
-      fNoteDirectUpLinkToMeasure
+      fMeasureElementUpLinkToMeasure
         ?
-          fNoteDirectUpLinkToMeasure->
+          fMeasureElementUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
         : Rational (0, 1); // JMI KAKA
 
@@ -5738,7 +5764,7 @@ void msrNote::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fNoteHeadKind" << " : " <<
-    msrNoteHeadKindAsString (
+    noteHeadKindAsString (
       fNoteHeadKind) <<
     endl <<
     setw (fieldWidth) <<
@@ -6933,8 +6959,8 @@ void msrNote::print (ostream& os) const
 
 /* JMI KAKA
       os <<
-        syllable->syllableKindAsString () <<
-          syllable->syllableExtendKindAsString () <<
+        syllableKindAsString (syllable->getSyllableKind ()) <<
+          syllableExtendKindAsString (syllable->getSyllableExtendKind ()) <<
         " : ";
 
       msrSyllable::writeTextsList (
@@ -7011,8 +7037,8 @@ void msrNote::printShort (ostream& os) const
   // print position from beginning of voice
 //   os << left <<
 //     setw (fieldWidth) <<
-//     "fMeasureElementPositionFromBeginningOfVoice" << " : " <<
-//     fMeasureElementPositionFromBeginningOfVoice <<
+//     "fMeasureElementVoicePosition" << " : " <<
+//     fMeasureElementVoicePosition <<
 //     endl;
 
   // print sounding and displayed whole notes

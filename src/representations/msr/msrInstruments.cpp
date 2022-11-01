@@ -169,7 +169,7 @@ S_msrScordatura msrScordatura::create (
 {
   msrScordatura* o =
     new msrScordatura (
-      inputLineNumber.
+      inputLineNumber,
       upLinkToMeasure);
   assert (o != nullptr);
   return o;
@@ -295,7 +295,7 @@ S_msrAccordionRegistration msrAccordionRegistration::create (
 {
   msrAccordionRegistration* o =
     new msrAccordionRegistration (
-      inputLineNumber.
+      inputLineNumber,
       upLinkToMeasure,
       highDotsNumber, middleDotsNumber, lowDotsNumber);
   assert (o != nullptr);
@@ -409,7 +409,7 @@ S_msrHarpPedalsTuning msrHarpPedalsTuning::create (
 {
   msrHarpPedalsTuning* o =
     new msrHarpPedalsTuning (
-      inputLineNumber.
+      inputLineNumber,
       upLinkToMeasure);
   assert (o != nullptr);
   return o;

@@ -133,7 +133,7 @@ void msrDynamic::print (ostream& os) const
     "Dynamics " <<
     msrDynamicKindAsString (fDynamicKind) <<
     ", dynamicPlacementKind: " <<
-    msrPlacementKindAsString (fDynamicPlacementKind) <<
+    placementKindAsString (fDynamicPlacementKind) <<
     ", line " << fInputLineNumber <<
     endl;
 }
@@ -236,7 +236,7 @@ string msrOtherDynamic::asString () const
     ", otherDynamicString: " <<
     fOtherDynamicsString <<
     ", otherDynamicPlacementKind: " <<
-    msrPlacementKindAsString (fOtherDynamicPlacementKind) <<
+    placementKindAsString (fOtherDynamicPlacementKind) <<
     "', line " << fInputLineNumber;
 
   return s.str ();
@@ -536,7 +536,7 @@ void msrWedge::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     "wedgePlacementKind" << " : " <<
-    msrPlacementKindAsString (
+    placementKindAsString (
       fWedgePlacementKind) <<
     endl;
 

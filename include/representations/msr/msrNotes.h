@@ -39,58 +39,59 @@ class msrGlissando;
 typedef SMARTP<msrGlissando> S_msrGlissando;
 
 //______________________________________________________________________________
+// data types
+
+enum msrNoteHeadKind {
+  kNoteHeadSlash,
+  kNoteHeadTriangle, kNoteHeadDiamond, kNoteHeadSquare,
+  kNoteHeadCross,kNoteHeadX,
+  kNoteHeadCircleX, kNoteHeadInvertedTriangle,
+  kNoteHeadArrowDown, kNoteHeadArrowUp,
+  kNoteHeadSlashed, kNoteHeadBackSlashed,
+  kNoteHeadNormal, kNoteHeadCluster,
+  kNoteHeadCircleDot,
+  kNoteHeadLeftTriangle,
+  kNoteHeadRectangle,
+  kNoteHeadNone,
+  kNoteHeadDo, kNoteHeadRe, kNoteHeadMi, kNoteHeadFa, kNoteHeadFaUp,
+  kNoteHeadSo, kNoteHeadLa, kNoteHeadTi
+};
+
+string noteHeadKindAsString (
+  msrNoteHeadKind noteHeadKind);
+
+enum msrNoteHeadFilledKind {
+  kNoteHeadFilledYes, kNoteHeadFilledNo
+};
+
+string noteHeadFilledKindAsString (
+  msrNoteHeadFilledKind msrNoteHeadFilledKind);
+
+enum msrNoteHeadParenthesesKind {
+  kNoteHeadParenthesesYes, kNoteHeadParenthesesNo
+};
+
+string noteHeadParenthesesKindAsString (
+  msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind);
+
+enum msrNoteIsACueNoteKind {
+  kNoteIsACueNoteYes, kNoteIsACueNoteNo
+};
+
+string noteIsACuemsrNoteKindAsString (
+  msrNoteIsACueNoteKind msrNoteIsACueNoteKind);
+
 class EXP msrNote : public msrTupletElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrNoteHeadKind {
-      kNoteHeadSlash,
-      kNoteHeadTriangle, kNoteHeadDiamond, kNoteHeadSquare,
-      kNoteHeadCross,kNoteHeadX,
-      kNoteHeadCircleX, kNoteHeadInvertedTriangle,
-      kNoteHeadArrowDown, kNoteHeadArrowUp,
-      kNoteHeadSlashed, kNoteHeadBackSlashed,
-      kNoteHeadNormal, kNoteHeadCluster,
-      kNoteHeadCircleDot,
-      kNoteHeadLeftTriangle,
-      kNoteHeadRectangle,
-      kNoteHeadNone,
-      kNoteHeadDo, kNoteHeadRe, kNoteHeadMi, kNoteHeadFa, kNoteHeadFaUp,
-      kNoteHeadSo, kNoteHeadLa, kNoteHeadTi
-    };
-
-    static string msrNoteHeadKindAsString (
-      msrNoteHeadKind noteHeadKind);
-
-    enum msrNoteHeadFilledKind {
-      kNoteHeadFilledYes, kNoteHeadFilledNo
-    };
-
-    static string noteHeadFilledKindAsString (
-      msrNoteHeadFilledKind noteHeadFilledKind);
-
-    enum msrNoteHeadParenthesesKind {
-      kNoteHeadParenthesesYes, kNoteHeadParenthesesNo
-    };
-
-    static string noteHeadParenthesesKindAsString (
-      msrNoteHeadParenthesesKind noteHeadParenthesesKind);
-
-    enum msrNoteIsACueNoteKind {
-      kNoteIsACueNoteYes, kNoteIsACueNoteNo
-    };
-
-    static string noteIsACuemsrNoteKindAsString (
-      msrNoteIsACueNoteKind noteIsACueNoteKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
 
     static SMARTP<msrNote> create (
                             int                        inputLineNumber,
+                            S_msrMeasure               upLinkToMeasure,
+
                             const string&              noteMeasureNumber,
 
                             msrNoteKind                noteKind,
@@ -108,13 +109,13 @@ class EXP msrNote : public msrTupletElement
                             msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
                             msrOctaveKind              noteDisplayOctaveKind,
 
-                            msrNoteIsACueNoteKind      noteIsACueNoteKind,
+                            msrNoteIsACueNoteKind      msrNoteIsACueNoteKind,
 
                             msrPrintObjectKind         notePrintObjectKind,
 
                             msrNoteHeadKind            noteHeadKind,
-                            msrNoteHeadFilledKind      noteHeadFilledKind,
-                            msrNoteHeadParenthesesKind noteHeadParenthesesKind);
+                            msrNoteHeadFilledKind      msrNoteHeadFilledKind,
+                            msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind);
 
     SMARTP<msrNote> createNoteNewbornClone (
                             S_msrPart containingPart);
@@ -156,7 +157,6 @@ class EXP msrNote : public msrTupletElement
                             int             dotsNumber);
 
     static SMARTP<msrNote> createGraceSkipNote (
-                            // above with MusicXML??? JMI
                             int             inputLineNumber,
                             const string&   noteMeasureNumber,
                             const Rational& soundingWholeNotes,
@@ -201,6 +201,8 @@ class EXP msrNote : public msrTupletElement
 
                           msrNote (
                             int                        inputLineNumber,
+                            S_msrMeasure               upLinkToMeasure,
+
                             const string&              noteMeasureNumber,
 
                             msrNoteKind                noteKind,
@@ -218,13 +220,13 @@ class EXP msrNote : public msrTupletElement
                             msrQuarterTonesPitchKind   noteQuarterTonesDisplayPitchKind,
                             msrOctaveKind              noteDisplayOctaveKind,
 
-                            msrNoteIsACueNoteKind      noteIsACueNoteKind,
+                            msrNoteIsACueNoteKind      msrNoteIsACueNoteKind,
 
                             msrPrintObjectKind         notePrintObjectKind,
 
                             msrNoteHeadKind            noteHeadKind,
-                            msrNoteHeadFilledKind      noteHeadFilledKind,
-                            msrNoteHeadParenthesesKind noteHeadParenthesesKind);
+                            msrNoteHeadFilledKind      msrNoteHeadFilledKind,
+                            msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind);
 
     virtual               ~msrNote ();
 
@@ -318,18 +320,18 @@ class EXP msrNote : public msrTupletElement
 
     void                  setNoteHeadFilledKind (
                             msrNoteHeadFilledKind
-                              noteHeadFilledKind)
-                              { fNoteHeadFilledKind = noteHeadFilledKind; }
+                              msrNoteHeadFilledKind)
+                              { fNoteHeadFilledKind = msrNoteHeadFilledKind; }
 
     msrNoteHeadFilledKind getNoteHeadFilledKind () const
                               { return fNoteHeadFilledKind; }
 
     void                  setNoteHeadParenthesesKind (
                             msrNoteHeadParenthesesKind
-                              noteHeadParenthesesKind)
+                              msrNoteHeadParenthesesKind)
                               {
                                 fNoteHeadParenthesesKind =
-                                  noteHeadParenthesesKind;
+                                  msrNoteHeadParenthesesKind;
                               }
 
     msrNoteHeadParenthesesKind
@@ -438,8 +440,8 @@ class EXP msrNote : public msrTupletElement
 
     // cue note?
     void                  setNoteIsACueNoteKind (
-                            msrNoteIsACueNoteKind noteIsACueNoteKind)
-                              { fNoteIsACueNoteKind = noteIsACueNoteKind; }
+                            msrNoteIsACueNoteKind msrNoteIsACueNoteKind)
+                              { fNoteIsACueNoteKind = msrNoteIsACueNoteKind; }
 
     msrNoteIsACueNoteKind getNoteIsACueNoteKind () const
                               { return fNoteIsACueNoteKind; }

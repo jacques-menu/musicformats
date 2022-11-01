@@ -24,6 +24,8 @@
 
 #include "msrOah.h"
 
+#include "msrMeasures.h"
+
 #include "msrCodas.h"
 
 

@@ -171,7 +171,7 @@ string msrSpanner::spannerKindAsString () const
 string msrSpanner::spannerPlacementKindAsString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fSpannerPlacementKind);
 }
 

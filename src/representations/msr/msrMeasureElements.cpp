@@ -41,11 +41,11 @@ const Rational msrMeasureElement::K_NO_WHOLE_NOTES (-444444, 1);
 msrMeasureElement::msrMeasureElement (
   int          inputLineNumber,
   S_msrMeasure upLinkToMeasure)
-    : msrElement (inputLineNumber),
-      fMeasureElementMomentInMeasure (
-        msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
-      fMeasureElementMomentFromBeginningOfVoice (
-        msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
+    : msrElement (inputLineNumber)
+//       fMeasureElementMeasureMoment (
+//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
+//       fMeasureElementVoiceMoment (
+//         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
 {
   fMeasureElementUpLinkToMeasure = upLinkToMeasure;
 
@@ -54,7 +54,7 @@ msrMeasureElement::msrMeasureElement (
   fetchMeasureElementMeasureNumber () = K_NO_MEASURE_NUMBER;
 
   fMeasureElementMeasurePosition = msrMoment::K_NO_POSITION;
-  fMeasureElementPositionFromBeginningOfVoice   = msrMoment::K_NO_POSITION;
+  fMeasureElementVoicePosition   = msrMoment::K_NO_POSITION;
 }
 
 msrMeasureElement::~msrMeasureElement ()
@@ -118,7 +118,7 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 
     gLogStream <<
       "Setting measure element position in measure of " <<
@@ -147,16 +147,16 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
   fMeasureElementMeasurePosition = measurePosition;
 }
 
-void msrMeasureElement::setMeasureElementPositionFromBeginningOfVoice (
-  const Rational& positionFromBeginningOfVoice,
+void msrMeasureElement::setMeasureElementVoicePosition (
+  const Rational& voicePosition,
   const string&   context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting measure element position in voice of " <<
       asString () <<
-      " to '" << positionFromBeginningOfVoice <<
+      " to '" << voicePosition <<
       "' in measure '" <<
       fetchMeasureElementMeasureNumber () <<
       "', context: \"" <<
@@ -169,16 +169,16 @@ void msrMeasureElement::setMeasureElementPositionFromBeginningOfVoice (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionFromBeginningOfVoice != msrMoment::K_NO_POSITION,
-    "positionFromBeginningOfVoice == msrMoment::K_NO_POSITION");
+    voicePosition != msrMoment::K_NO_POSITION,
+    "voicePosition == msrMoment::K_NO_POSITION");
 
   // set measure element position in voice
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting measure element position in voice of " <<
       asString () <<
-      " to '" << positionFromBeginningOfVoice <<
+      " to '" << voicePosition <<
       "' in measure '" <<
       fetchMeasureElementMeasureNumber () <<
       "', context: \"" <<
@@ -188,63 +188,63 @@ void msrMeasureElement::setMeasureElementPositionFromBeginningOfVoice (
   }
 #endif
 
-  fMeasureElementPositionFromBeginningOfVoice = positionFromBeginningOfVoice;
+  fMeasureElementVoicePosition = voicePosition;
 }
 
-void msrMeasureElement::setMeasureElementMomentInMeasure (
-  const msrMoment& momentInMeasure,
-  const string&    context)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
-    gLogStream <<
-      "Setting measure element moment in measure of " <<
-      asString () <<
-      " to '" << momentInMeasure <<
-      "' (was '" <<
-      fMeasureElementMomentInMeasure.asString () <<
-//       "') " <<
-//       in measure " << JMI v0.9.66
-//       measure->asShortString () <<
-      "), measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      endl;
-  }
-#endif
-
-  fMeasureElementMomentInMeasure = momentInMeasure;
-}
-
-void msrMeasureElement::setMeasureElementMomentFromBeginningOfVoice (
-  const msrMoment& momentFromBeginningOfVoice,
-  const string&    context)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
-    gLogStream <<
-      "Setting measure element moment in voice of " <<
-      asString () <<
-      " to '" << momentFromBeginningOfVoice <<
-      "' in measure '" <<
-      fetchMeasureElementMeasureNumber () <<
-      "', context: \"" <<
-      context <<
-      "\"" <<
-      endl;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    momentFromBeginningOfVoice != msrMoment::K_NO_MOMENT,
-    "momentFromBeginningOfVoice == msrMoment::K_NO_MOMENT");
-
-  fMeasureElementMomentFromBeginningOfVoice = momentFromBeginningOfVoice;
-}
+// void msrMeasureElement::setMeasureElementMeasureMoment (
+//   const msrMoment& measureMoment,
+//   const string&    context)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
+//     gLogStream <<
+//       "Setting measure element moment in measure of " <<
+//       asString () <<
+//       " to '" << measureMoment <<
+//       "' (was '" <<
+//       fMeasureElementMeasureMoment.asString () <<
+// //       "') " <<
+// //       in measure " << JMI v0.9.66
+// //       measure->asShortString () <<
+//       "), measureElementMeasureNumber: " <<
+//       fetchMeasureElementMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"" <<
+//       endl;
+//   }
+// #endif
+//
+//   fMeasureElementMeasureMoment = measureMoment;
+// }
+//
+// void msrMeasureElement::setMeasureElementVoiceMoment (
+//   const msrMoment& voiceMoment,
+//   const string&    context)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMomentsInMeasures ()) {
+//     gLogStream <<
+//       "Setting measure element moment in voice of " <<
+//       asString () <<
+//       " to '" << voiceMoment <<
+//       "' in measure '" <<
+//       fetchMeasureElementMeasureNumber () <<
+//       "', context: \"" <<
+//       context <<
+//       "\"" <<
+//       endl;
+//   }
+// #endif
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     voiceMoment != msrMoment::K_NO_MOMENT,
+//     "voiceMoment == msrMoment::K_NO_MOMENT");
+//
+//   fMeasureElementVoiceMoment = voiceMoment;
+// }
 
 string msrMeasureElement::fetchMeasureElementMeasureNumber () const
 {

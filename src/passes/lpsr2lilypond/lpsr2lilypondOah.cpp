@@ -3674,8 +3674,8 @@ its position in the measure.
 This is useful when debugging EXECUTABLE.)",
           regex ("EXECUTABLE"),
           gGlobalOahOahGroup->getOahOahGroupServiceName ()),
-        "fGeneratePositionsInMeasures",
-        fGeneratePositionsInMeasures));
+        "fGenerateMeasurePositions",
+        fGenerateMeasurePositions));
 
   // generate moments in measures
   // --------------------------------------
@@ -5287,8 +5287,8 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
       fOriginalMeasureNumbers <<
       endl <<
 
-    setw (valueFieldWidth) << "fGeneratePositionsInMeasures" << " : " <<
-      fGeneratePositionsInMeasures <<
+    setw (valueFieldWidth) << "fGenerateMeasurePositions" << " : " <<
+      fGenerateMeasurePositions <<
       endl <<
 
     setw (valueFieldWidth) << "fGenerateMomentsInMeasures" << " : " <<
@@ -5914,8 +5914,8 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
       fOriginalMeasureNumbers <<
       endl <<
 
-    setw (fieldWidth) << "fGeneratePositionsInMeasures" << " : " <<
-      fGeneratePositionsInMeasures <<
+    setw (fieldWidth) << "fGenerateMeasurePositions" << " : " <<
+      fGenerateMeasurePositions <<
       endl <<
 
     setw (fieldWidth) << "fGenerateMomentsInMeasures" << " : " <<

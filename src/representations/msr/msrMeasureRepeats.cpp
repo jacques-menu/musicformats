@@ -41,28 +41,28 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrMeasureRepeatElement msrMeasureRepeatElement::create (
   int                 inputLineNumber,
-  S_msrMeasureRepeat UpLinkToMeasureRepeat)
+  S_msrMeasureRepeat upLinkToMeasureRepeat)
 {
   msrMeasureRepeatElement* o =
     new msrMeasureRepeatElement (
       inputLineNumber,
-      UpLinkToMeasureRepeat);
+      upLinkToMeasureRepeat);
   assert (o != nullptr);
   return o;
 }
 
 msrMeasureRepeatElement::msrMeasureRepeatElement (
   int                 inputLineNumber,
-  S_msrMeasureRepeat UpLinkToMeasureRepeat)
+  S_msrMeasureRepeat upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    UpLinkToMeasureRepeat != nullptr,
-    "UpLinkToMeasureRepeat is null");
+    upLinkToMeasureRepeat != nullptr,
+    "upLinkToMeasureRepeat is null");
 
-  fMeasureRepeatElementUpLinkToMeasureRepeat = UpLinkToMeasureRepeat;
+  fMeasureRepeatElementUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
 }
 
 msrMeasureRepeatElement::~msrMeasureRepeatElement ()
@@ -431,28 +431,28 @@ ostream& operator << (ostream& os, const S_msrMeasureRepeatElement& elt)
 //______________________________________________________________________________
 S_msrMeasureRepeatPattern msrMeasureRepeatPattern::create (
   int                 inputLineNumber,
-  S_msrMeasureRepeat UpLinkToMeasureRepeat)
+  S_msrMeasureRepeat upLinkToMeasureRepeat)
 {
   msrMeasureRepeatPattern* o =
     new msrMeasureRepeatPattern (
       inputLineNumber,
-      UpLinkToMeasureRepeat);
+      upLinkToMeasureRepeat);
   assert (o != nullptr);
   return o;
 }
 
 msrMeasureRepeatPattern::msrMeasureRepeatPattern (
   int                 inputLineNumber,
-  S_msrMeasureRepeat UpLinkToMeasureRepeat)
+  S_msrMeasureRepeat upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    UpLinkToMeasureRepeat != nullptr,
-    "UpLinkToMeasureRepeat is null");
+    upLinkToMeasureRepeat != nullptr,
+    "upLinkToMeasureRepeat is null");
 
-  fUpLinkToMeasureRepeat = UpLinkToMeasureRepeat;
+  fUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
 }
 
 msrMeasureRepeatPattern::~msrMeasureRepeatPattern ()
@@ -626,28 +626,28 @@ ostream& operator << (ostream& os, const S_msrMeasureRepeatPattern& elt)
 //______________________________________________________________________________
 S_msrMeasureRepeatReplicas msrMeasureRepeatReplicas::create (
   int                 inputLineNumber,
-  S_msrMeasureRepeat UpLinkToMeasureRepeat)
+  S_msrMeasureRepeat upLinkToMeasureRepeat)
 {
   msrMeasureRepeatReplicas* o =
     new msrMeasureRepeatReplicas (
       inputLineNumber,
-      UpLinkToMeasureRepeat);
+      upLinkToMeasureRepeat);
   assert (o != nullptr);
   return o;
 }
 
 msrMeasureRepeatReplicas::msrMeasureRepeatReplicas (
   int                 inputLineNumber,
-  S_msrMeasureRepeat UpLinkToMeasureRepeat)
+  S_msrMeasureRepeat upLinkToMeasureRepeat)
     : msrElement (inputLineNumber)
 {
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    UpLinkToMeasureRepeat != nullptr,
-    "UpLinkToMeasureRepeat is null");
+    upLinkToMeasureRepeat != nullptr,
+    "upLinkToMeasureRepeat is null");
 
-  fUpLinkToMeasureRepeat = UpLinkToMeasureRepeat;
+  fUpLinkToMeasureRepeat = upLinkToMeasureRepeat;
 }
 
 msrMeasureRepeatReplicas::~msrMeasureRepeatReplicas ()

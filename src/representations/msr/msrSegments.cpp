@@ -981,7 +981,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
   const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<
@@ -1639,7 +1639,7 @@ void msrSegment::padUpToMeasurePositionInSegment (
   const Rational& wholeNotes)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Padding up to current whole notes '" << wholeNotes <<
       "' in segment '" <<

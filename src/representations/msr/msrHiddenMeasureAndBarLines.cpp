@@ -24,6 +24,8 @@
 
 #include "msrOah.h"
 
+#include "msrMeasures.h"
+
 #include "msrHiddenMeasureAndBarLines.h"
 
 
@@ -38,7 +40,7 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
   S_msrMeasure upLinkToMeasure)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Creating hiddenMeasureAndBarLine" <<
       ", line " << inputLineNumber <<
@@ -48,7 +50,8 @@ S_msrHiddenMeasureAndBarLine msrHiddenMeasureAndBarLine::create (
 
   msrHiddenMeasureAndBarLine* o =
     new msrHiddenMeasureAndBarLine (
-      inputLineNumber);
+      inputLineNumber,
+      upLinkToMeasure);
   assert (o != nullptr);
   return o;
 }

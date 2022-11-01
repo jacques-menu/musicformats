@@ -5350,56 +5350,52 @@ void msr2mxsrTranslator:: appendNoteOrnaments (
       theMsrNote->getNoteOrnaments () ;
 
   if (noteOrnaments.size ()) {
-    list<S_msrOrnament>::const_iterator i;
-
-    for (i=noteOrnaments.begin (); i!=noteOrnaments.end (); ++i) {
-      S_msrOrnament ornament = (*i);
-
-      msrOrnament::msrOrnamentKind
+    for (S_msrOrnament ornament : noteOrnaments) {
+      msrOrnamentKind
         ornamentKind =
           ornament->getOrnamentKind ();
 
-      int ornamentType = kComment; // JMI
+      int ornamentType = kComment; // JMI ??? v0.9.66
 
       switch (ornamentKind) {
-        case msrOrnament::kOrnamentTrill:
+        case msrOrnamentKind::kOrnamentTrill:
           ornamentType = k_trill_mark;
           break;
-        case msrOrnament::kOrnamentTurn:
+        case msrOrnamentKind::kOrnamentTurn:
           ornamentType = k_turn;
           break;
-        case msrOrnament::kOrnamentInvertedTurn:
+        case msrOrnamentKind::kOrnamentInvertedTurn:
           ornamentType = k_inverted_turn;
           break;
-        case msrOrnament::kOrnamentDelayedTurn:
+        case msrOrnamentKind::kOrnamentDelayedTurn:
           ornamentType = k_delayed_turn;
           break;
-        case msrOrnament::kOrnamentDelayedInvertedTurn:
+        case msrOrnamentKind::kOrnamentDelayedInvertedTurn:
           ornamentType = k_delayed_inverted_turn;
           break;
-        case msrOrnament::kOrnamentVerticalTurn:
+        case msrOrnamentKind::kOrnamentVerticalTurn:
           ornamentType = k_vertical_turn;
           break;
-        case msrOrnament::kOrnamentMordent:
+        case msrOrnamentKind::kOrnamentMordent:
           ornamentType = k_mordent;
           break;
-        case msrOrnament::kOrnamentInvertedMordent:
+        case msrOrnamentKind::kOrnamentInvertedMordent:
           ornamentType = k_inverted_mordent;
           break;
-        case msrOrnament::kOrnamentSchleifer:
+        case msrOrnamentKind::kOrnamentSchleifer:
           ornamentType = k_schleifer;
           break;
-        case msrOrnament::kOrnamentShake:
+        case msrOrnamentKind::kOrnamentShake:
           ornamentType = k_shake;
           break;
-        case msrOrnament::kOrnamentAccidentalKind:
+        case msrOrnamentKind::kOrnamentAccidentalKind:
           ornamentType = k_accidental_mark;
           break;
       } // switch
 
       // append the note ornament element to the current note element
       switch (ornamentKind) {
-        case msrOrnament::kOrnamentAccidentalKind:
+        case msrOrnamentKind::kOrnamentAccidentalKind:
           {
             Sxmlelement ornamentElement =
               createMxmlelement (
@@ -6643,42 +6639,42 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
       string syllabicString;
 
       switch ( syllable->getSyllableKind ()) {
-        case msrSyllable::kSyllableNone:
+        case msrSyllableKind::kSyllableNone:
           // should not occur
           break;
 
-        case msrSyllable::kSyllableSingle:
+        case msrSyllableKind::kSyllableSingle:
           doCreateALyricElement = true;
           syllabicString = "single";
           break;
 
-        case msrSyllable::kSyllableBegin:
+        case msrSyllableKind::kSyllableBegin:
           doCreateALyricElement = true;
           syllabicString = "begin";
           break;
-        case msrSyllable::kSyllableMiddle:
+        case msrSyllableKind::kSyllableMiddle:
           doCreateALyricElement = true;
           syllabicString = "middle";
           break;
-        case msrSyllable::kSyllableEnd:
+        case msrSyllableKind::kSyllableEnd:
           doCreateALyricElement = true;
           syllabicString = "end";
           break;
 
-        case msrSyllable::kSyllableOnRestNote:
+        case msrSyllableKind::kSyllableOnRestNote:
           break;
 
-        case msrSyllable::kSyllableSkipRestNote:
+        case msrSyllableKind::kSyllableSkipRestNote:
           break;
-        case msrSyllable::kSyllableSkipNonRestNote:
-          break;
-
-        case msrSyllable::kSyllableMeasureEnd:
+        case msrSyllableKind::kSyllableSkipNonRestNote:
           break;
 
-        case msrSyllable::kSyllableLineBreak:
+        case msrSyllableKind::kSyllableMeasureEnd:
           break;
-        case msrSyllable::kSyllablePageBreak:
+
+        case msrSyllableKind::kSyllableLineBreak:
+          break;
+        case msrSyllableKind::kSyllablePageBreak:
           break;
       } // switch
 
@@ -6719,21 +6715,21 @@ void msr2mxsrTranslator:: appendNoteLyricsToNote (
         Bool   doCreateAnExtendElement (true);
 
         switch (syllable->getSyllableExtendKind ()) {
-          case msrSyllable::kSyllableExtendNone:
+          case msrSyllableExtendKind::kSyllableExtendNone:
           doCreateAnExtendElement = false;
             break;
-          case msrSyllable::kSyllableExtendEmpty:
+          case msrSyllableExtendKind::kSyllableExtendEmpty:
             break;
-          case msrSyllable::kSyllableExtendSingle:
+          case msrSyllableExtendKind::kSyllableExtendSingle:
             extendTypeString = "single";
             break;
-          case msrSyllable::kSyllableExtendStart:
+          case msrSyllableExtendKind::kSyllableExtendStart:
             extendTypeString = "start";
             break;
-          case msrSyllable::kSyllableExtendContinue:
+          case msrSyllableExtendKind::kSyllableExtendContinue:
             extendTypeString = "continue";
             break;
-          case msrSyllable::kSyllableExtendStop:
+          case msrSyllableExtendKind::kSyllableExtendStop:
             extendTypeString = "stop";
             break;
         } // switch

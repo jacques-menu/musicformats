@@ -111,6 +111,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
     newbornClone =
       msrDoubleTremolo::create (
         fInputLineNumber,
+        nullptr, // will be set when double tremolo is appended to a measure JMI v0.9.66 PIM
         fDoubleTremoloKind,
         fDoubleTremoloTypeKind,
         fDoubleTremoloMarksNumber,
@@ -145,7 +146,7 @@ void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     ++gIndenter;
 
     gLogStream <<
@@ -191,14 +192,14 @@ void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
 //   if (false) { // JMI
 //   // compute double tremolo's position in voice
 //   Rational
-//      positionFromBeginningOfVoice =
-//       fDoubleTremoloUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
+//      voicePosition =
+//       fDoubleTremoloUpLinkToMeasure->getMeasureVoicePosition ()
 //         +
 //       measurePosition;
 //
 //   // set double tremolo's position in voice
-//   setMeasureElementPositionFromBeginningOfVoice (
-//     positionFromBeginningOfVoice,
+//   setMeasureElementVoicePosition (
+//     voicePosition,
 //     context);
 // }
 //
@@ -217,7 +218,7 @@ void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
 //             dynamic_cast<msrNote*>(&(*fDoubleTremoloFirstElement))
 //       ) {
 //         voice->
-//           incrementCurrentPositionFromBeginningOfVoice (
+//           incrementCurrentVoicePosition (
 //             note->
 //               getMeasureElementSoundingWholeNotes ());
 //       }
@@ -237,7 +238,7 @@ void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
 //             dynamic_cast<msrChord*>(&(*fDoubleTremoloFirstElement))
 //       ) {
 //         voice->
-//           incrementCurrentPositionFromBeginningOfVoice (
+//           incrementCurrentVoicePosition (
 //             chord->
 //               getMeasureElementSoundingWholeNotes ());
 //       }
@@ -657,7 +658,7 @@ string msrDoubleTremolo::msrDoubleTremoloKindAsString (
 string msrDoubleTremolo::doubleTremoloPlacementKindAsString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fDoubleTremoloPlacementKind);
 }
 

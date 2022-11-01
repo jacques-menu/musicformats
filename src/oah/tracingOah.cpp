@@ -1654,19 +1654,19 @@ R"(Measures details)",
   // positions in measures
 
   S_oahTwoBooleansAtom
-    tracePositionsInMeasuresBooleanAtom =
+    traceMeasurePositionsBooleanAtom =
       oahTwoBooleansAtom::create (
         "trace-positions-in-measures", "tpim",
 R"(Positions in measures)",
-        "fTracePositionsInMeasures",
-        fTracePositionsInMeasures,
+        "fTraceMeasurePositions",
+        fTraceMeasurePositions,
         fTracePassesBooleanAtom);
   subGroup->
     appendAtomToSubGroup (
-      tracePositionsInMeasuresBooleanAtom);
+      traceMeasurePositionsBooleanAtom);
   measuresMultiplexBooleansAtom->
     addBooleanAtom (
-      tracePositionsInMeasuresBooleanAtom);
+      traceMeasurePositionsBooleanAtom);
 
   // moments in measures
 
@@ -2584,8 +2584,8 @@ void tracingOahGroup::printtracingOahValues (int fieldWidth)
     setw (fieldWidth) << "fTtraceMeasuresDetails" << " : " <<
     fTraceMeasuresDetails <<
     endl <<
-    setw (fieldWidth) << "fTtracePositionsInMeasures" << " : " <<
-    fTracePositionsInMeasures <<
+    setw (fieldWidth) << "fTtraceMeasurePositions" << " : " <<
+    fTraceMeasurePositions <<
     endl;
 
   gLogStream << left <<

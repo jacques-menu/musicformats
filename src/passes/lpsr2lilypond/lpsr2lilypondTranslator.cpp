@@ -1581,89 +1581,89 @@ void lpsr2lilypondTranslator::generateNoteHead (
   S_msrNote note)
 {
   if (! note->fetchNoteIsARest ()) { // JMI ???
-    msrNote::msrNoteHeadKind
+    msrNoteHeadKind
       noteHeadKind =
         note->getNoteHeadKind ();
 
     // these tweaks should occur right before the note itself
     switch (noteHeadKind) {
-      case msrNote::kNoteHeadSlash:
+      case msrNoteHeadKind::kNoteHeadSlash:
         fLilypondCodeStream << "\\tweak style #'slash ";
         break;
-      case msrNote::kNoteHeadTriangle:
+      case msrNoteHeadKind::kNoteHeadTriangle:
         fLilypondCodeStream << "\\tweak style #'triangle ";
         break;
-      case msrNote::kNoteHeadDiamond:
+      case msrNoteHeadKind::kNoteHeadDiamond:
    // JMI     fLilypondCodeStream << "\\tweak style #'diamond ";
         fLilypondCodeStream << "\\harmonic ";
         break;
-      case msrNote::kNoteHeadSquare:
+      case msrNoteHeadKind::kNoteHeadSquare:
         fLilypondCodeStream << "\\tweak style #'la ";
         break;
-      case msrNote::kNoteHeadCross:
+      case msrNoteHeadKind::kNoteHeadCross:
         fLilypondCodeStream << "\\tweak style #'cross ";
         break;
-      case msrNote::kNoteHeadX:
+      case msrNoteHeadKind::kNoteHeadX:
         fLilypondCodeStream << "\\tweak style #'cross %{ x %} ";
         break;
-      case msrNote::kNoteHeadCircleX:
+      case msrNoteHeadKind::kNoteHeadCircleX:
         fLilypondCodeStream << "\\tweak style #'xcircle ";
         break;
-      case msrNote::kNoteHeadInvertedTriangle:
+      case msrNoteHeadKind::kNoteHeadInvertedTriangle:
         fLilypondCodeStream << "%{ kNoteHeadInvertedTriangle %} ";
         break;
-      case msrNote::kNoteHeadArrowDown:
+      case msrNoteHeadKind::kNoteHeadArrowDown:
         fLilypondCodeStream << "%{ kNoteHeadArrowDown %} ";
         break;
-      case msrNote::kNoteHeadArrowUp:
+      case msrNoteHeadKind::kNoteHeadArrowUp:
         fLilypondCodeStream << "%{ kNoteHeadArrowUp %} ";
         break;
-      case msrNote::kNoteHeadSlashed:
+      case msrNoteHeadKind::kNoteHeadSlashed:
         fLilypondCodeStream << "%{ kNoteHeadSlashed %} ";
         break;
-      case msrNote::kNoteHeadBackSlashed:
+      case msrNoteHeadKind::kNoteHeadBackSlashed:
         fLilypondCodeStream << "%{ kNoteHeadBackSlashed %} ";
         break;
-      case msrNote::kNoteHeadNormal:
+      case msrNoteHeadKind::kNoteHeadNormal:
    // JMI     fLilypondCodeStream << "%{ kNoteHeadNormal %} ";
         break;
-      case msrNote::kNoteHeadCluster:
+      case msrNoteHeadKind::kNoteHeadCluster:
         fLilypondCodeStream << "%{ kNoteHeadCluster %} ";
         break;
-      case msrNote::kNoteHeadCircleDot:
+      case msrNoteHeadKind::kNoteHeadCircleDot:
         fLilypondCodeStream << "%{ kNoteHeadCircleDot %} ";
         break;
-      case msrNote::kNoteHeadLeftTriangle:
+      case msrNoteHeadKind::kNoteHeadLeftTriangle:
         fLilypondCodeStream << "%{ kNoteHeadLeftTriangle %} ";
         break;
-      case msrNote::kNoteHeadRectangle:
+      case msrNoteHeadKind::kNoteHeadRectangle:
         fLilypondCodeStream << "%{ kNoteHeadRectangle %} ";
         break;
-      case msrNote::kNoteHeadNone:
+      case msrNoteHeadKind::kNoteHeadNone:
         fLilypondCodeStream << "\\once\\omit NoteHead ";
         break;
-      case msrNote::kNoteHeadDo:
+      case msrNoteHeadKind::kNoteHeadDo:
         fLilypondCodeStream << "\\tweak style #'do ";
         break;
-      case msrNote::kNoteHeadRe:
+      case msrNoteHeadKind::kNoteHeadRe:
         fLilypondCodeStream << "\\tweak style #'re ";
         break;
-      case msrNote::kNoteHeadMi:
+      case msrNoteHeadKind::kNoteHeadMi:
         fLilypondCodeStream << "\\tweak style #'mi ";
         break;
-      case msrNote::kNoteHeadFa:
+      case msrNoteHeadKind::kNoteHeadFa:
         fLilypondCodeStream << "\\tweak style #'fa ";
         break;
-      case msrNote::kNoteHeadFaUp:
+      case msrNoteHeadKind::kNoteHeadFaUp:
         fLilypondCodeStream << "\\tweak style #'triangle ";
         break;
-      case msrNote::kNoteHeadSo:
+      case msrNoteHeadKind::kNoteHeadSo:
         fLilypondCodeStream << "\\tweak style #'sol ";
         break;
-      case msrNote::kNoteHeadLa:
+      case msrNoteHeadKind::kNoteHeadLa:
         fLilypondCodeStream << "\\tweak style #'la ";
         break;
-      case msrNote::kNoteHeadTi:
+      case msrNoteHeadKind::kNoteHeadTi:
         fLilypondCodeStream << "\\tweak style #'ti ";
         break;
     } // switch
@@ -2237,7 +2237,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInMeasure (
   }
 #endif
 
-  if (gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
     // generate the rest name to help pin-point bugs
     fLilypondCodeStream << "r";
   }
@@ -2791,7 +2791,7 @@ void lpsr2lilypondTranslator::generateCodeForNoteSkipInGraceNotesGroup (
 #endif
 
   // generate the note name
-  if (gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
     // generate the rest name to help pin-point bugs
     fLilypondCodeStream << "r";
   }
@@ -3900,7 +3900,7 @@ void lpsr2lilypondTranslator::generateOrnament (
         noteSoundingWholeNotesAsMsrString ();
 
   switch (ornament->getOrnamentKind ()) {
-    case msrOrnament::kOrnamentTrill:
+    case msrOrnamentKind::kOrnamentTrill:
       if (! ornamentUpLinkToNote->getNoteWavyLineSpannerStart ()) {
         fLilypondCodeStream <<
           "\\trill ";
@@ -3912,7 +3912,7 @@ void lpsr2lilypondTranslator::generateOrnament (
       break;
 
 /* JMI
-    case msrOrnament::kOrnamentDashes:
+    case msrOrnamentKind::kOrnamentDashes:
       if (! ornamentUpLinkToNote->getNoteWavyLineSpannerStart ()) {
         fLilypondCodeStream <<
           "%{ \\dashes %} ";
@@ -3920,17 +3920,17 @@ void lpsr2lilypondTranslator::generateOrnament (
       break;
 */
 
-    case msrOrnament::kOrnamentTurn:
+    case msrOrnamentKind::kOrnamentTurn:
       fLilypondCodeStream <<
         "\\turn ";
       break;
 
-    case msrOrnament::kOrnamentInvertedTurn:
+    case msrOrnamentKind::kOrnamentInvertedTurn:
       fLilypondCodeStream <<
         "\\reverseturn ";
       break;
 
-    case msrOrnament::kOrnamentDelayedTurn:
+    case msrOrnamentKind::kOrnamentDelayedTurn:
       {
         // c2*2/3  s2*1/3\turn
         Rational
@@ -3976,7 +3976,7 @@ void lpsr2lilypondTranslator::generateOrnament (
       }
       break;
 
-    case msrOrnament::kOrnamentDelayedInvertedTurn:
+    case msrOrnamentKind::kOrnamentDelayedInvertedTurn:
       {
 /* JMI
         fLilypondCodeStream <<
@@ -4013,7 +4013,7 @@ void lpsr2lilypondTranslator::generateOrnament (
       }
       break;
 
-    case msrOrnament::kOrnamentVerticalTurn:
+    case msrOrnamentKind::kOrnamentVerticalTurn:
       fLilypondCodeStream <<
         "^\\markup { \\rotate #90 \\musicglyph #\"scripts.turn\" } ";
           /* JMI
@@ -4030,27 +4030,27 @@ void lpsr2lilypondTranslator::generateOrnament (
         */
       break;
 
-    case msrOrnament::kOrnamentMordent:
+    case msrOrnamentKind::kOrnamentMordent:
       fLilypondCodeStream <<
         "\\mordent ";
       break;
 
-    case msrOrnament::kOrnamentInvertedMordent:
+    case msrOrnamentKind::kOrnamentInvertedMordent:
       fLilypondCodeStream <<
         "\\prall ";
       break;
       \
-    case msrOrnament::kOrnamentSchleifer:
+    case msrOrnamentKind::kOrnamentSchleifer:
       fLilypondCodeStream <<
         "\\schleifer ";
       break;
 
-    case msrOrnament::kOrnamentShake:
+    case msrOrnamentKind::kOrnamentShake:
       fLilypondCodeStream <<
         "%{ \\shake??? %} ";
       break;
 
-    case msrOrnament::kOrnamentAccidentalKind:
+    case msrOrnamentKind::kOrnamentAccidentalKind:
       switch (ornament->getOrnamentPlacementKind ()) {
         case msrPlacementKind::k_NoPlacement:
           fLilypondCodeStream << "-";
@@ -5295,7 +5295,7 @@ void lpsr2lilypondTranslator::generateInputLineNumberAndOrMeasurePositionAsAComm
       "line " << measureElement->getInputLineNumber () << ' ';
   }
 
-  if (gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()) {
+  if (gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()) {
     // generate the position in measure as a comment
     fLilypondCodeStream <<
       "pim: " <<
@@ -11590,7 +11590,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
   if (
     gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
       ||
-    gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
+    gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
   ) {
     generateInputLineNumberAndOrMeasurePositionAsAComment (
       elt);
@@ -11666,7 +11666,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
     if (
       gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
         ||
-      gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
+      gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
     ) {
       generateInputLineNumberAndOrMeasurePositionAsAComment (
         elt);
@@ -11788,7 +11788,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
     if (
       gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
         ||
-      gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
+      gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
     ) {
       generateInputLineNumberAndOrMeasurePositionAsAComment (
         fCurrentFiguredBass);
@@ -13023,10 +13023,10 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
   ) {
     if (fGenerateCodeForOngoingNonEmptyStanza) {
       switch (elt->getSyllableKind ()) {
-        case msrSyllable::kSyllableNone: // JMI
+        case msrSyllableKind::kSyllableNone: // JMI
           break;
 
-        case msrSyllable::kSyllableSingle:
+        case msrSyllableKind::kSyllableSingle:
           writeTextsListAsLilypondString (
             elt->getSyllableTextsList (),
             fLilypondCodeStream);
@@ -13052,7 +13052,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableBegin:
+        case msrSyllableKind::kSyllableBegin:
           writeTextsListAsLilypondString (
             elt->getSyllableTextsList (),
             fLilypondCodeStream);
@@ -13078,7 +13078,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableMiddle:
+        case msrSyllableKind::kSyllableMiddle:
           writeTextsListAsLilypondString (
             elt->getSyllableTextsList (),
             fLilypondCodeStream);
@@ -13104,7 +13104,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableEnd:
+        case msrSyllableKind::kSyllableEnd:
           writeTextsListAsLilypondString (
             elt->getSyllableTextsList (),
             fLilypondCodeStream);
@@ -13130,7 +13130,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableOnRestNote:
+        case msrSyllableKind::kSyllableOnRestNote:
           // generate the syllable in lyrics for rests with syllables
           writeTextsListAsLilypondString (
             elt->getSyllableTextsList (),
@@ -13146,7 +13146,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableSkipRestNote:
+        case msrSyllableKind::kSyllableSkipRestNote:
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsDurationsKind ()) {
             case lpsrLyricsDurationsKind::kLyricsDurationsImplicit:
               // LilyPond ignores the skip durations when \lyricsto is used
@@ -13174,7 +13174,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           } // switch
           break;
 
-        case msrSyllable::kSyllableSkipNonRestNote:
+        case msrSyllableKind::kSyllableSkipNonRestNote:
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsDurationsKind ()) {
             case lpsrLyricsDurationsKind::kLyricsDurationsImplicit:
               // LilyPond ignores the skip durations when \lyricsto is used
@@ -13204,7 +13204,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
           } // switch
           break;
 
-        case msrSyllable::kSyllableMeasureEnd:
+        case msrSyllableKind::kSyllableMeasureEnd:
       // JMI      "| " <<
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
             // generate information and line number as a comment
@@ -13223,7 +13223,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
       // JMI    fLilypondCodeStream << endl;
           break;
 
-        case msrSyllable::kSyllableLineBreak:
+        case msrSyllableKind::kSyllableLineBreak:
           // generate information and line number as a comment
           fLilypondCodeStream <<
             "%{ syllableLineBreak, line " <<
@@ -13234,7 +13234,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
             endl;
           break;
 
-        case msrSyllable::kSyllablePageBreak:
+        case msrSyllableKind::kSyllablePageBreak:
           // generate information and line number as a comment
           fLilypondCodeStream <<
             "%{ kSyllablePageBreak, line " <<
@@ -13245,7 +13245,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
       } // switch
 
       switch (elt->getSyllableExtendKind ()) {
-        case msrSyllable::kSyllableExtendNone:
+        case msrSyllableExtendKind::kSyllableExtendNone:
 #ifdef TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
@@ -13254,7 +13254,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableExtendEmpty:
+        case msrSyllableExtendKind::kSyllableExtendEmpty:
 #ifdef TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
@@ -13263,7 +13263,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableExtendSingle:
+        case msrSyllableExtendKind::kSyllableExtendSingle:
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsDurationsKind ()) {
             case lpsrLyricsDurationsKind::kLyricsDurationsImplicit:
               // generate a lyric extender, i.e. a melisma, after this syllable
@@ -13284,7 +13284,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableExtendStart:
+        case msrSyllableExtendKind::kSyllableExtendStart:
           switch (gGlobalLpsr2lilypondOahGroup->getLyricsDurationsKind ()) {
             case lpsrLyricsDurationsKind::kLyricsDurationsImplicit:
               // generate a lyric extender, i.e. a melisma, after this syllable
@@ -13305,7 +13305,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableExtendContinue:
+        case msrSyllableExtendKind::kSyllableExtendContinue:
 #ifdef TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
@@ -13314,7 +13314,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
 #endif
           break;
 
-        case msrSyllable::kSyllableExtendStop:
+        case msrSyllableExtendKind::kSyllableExtendStop:
 #ifdef TRACING_IS_ENABLED
           if (gGlobalTracingOahGroup->getTraceLyrics ()) {
             fLilypondCodeStream <<
@@ -13328,7 +13328,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
     if (
       gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
         ||
-      gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
+      gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
     ) {
       generateInputLineNumberAndOrMeasurePositionAsAComment (
         elt);
@@ -17252,7 +17252,7 @@ slash = \tweak Flag.stroke-style grace \etc
           if ( // JMI
             gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
               ||
-            gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
+            gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
           ) {
             generateInputLineNumberAndOrMeasurePositionAsAComment (
               graceNotesGroupNote);
@@ -18183,15 +18183,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
   }
 
   // should the note be parenthesized?
-  msrNote::msrNoteHeadParenthesesKind
+  msrNoteHeadParenthesesKind
     noteHeadParenthesesKind =
       elt->getNoteHeadParenthesesKind ();
 
   switch (noteHeadParenthesesKind) {
-    case msrNote::kNoteHeadParenthesesYes:
+    case msrNoteHeadParenthesesKind::kNoteHeadParenthesesYes:
       fLilypondCodeStream << "\\parenthesize ";
       break;
-    case msrNote::kNoteHeadParenthesesNo:
+    case msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo:
       break;
   } // switch
 
@@ -18206,11 +18206,11 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
 
   // is the note a cue note?
   switch (elt->getNoteIsACueNoteKind ()) {
-    case msrNote::kNoteIsACueNoteYes:
+    case msrNoteIsACueNoteKind::kNoteIsACueNoteYes:
       fLilypondCodeStream <<
         "\\once \\override NoteHead.font-size = -3 ";
       break;
-    case msrNote::kNoteIsACueNoteNo:
+    case msrNoteIsACueNoteKind::kNoteIsACueNoteNo:
       break;
   } // switch
 
@@ -18274,7 +18274,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
   if (
     gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
       ||
-    gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
+    gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
   ) {
     generateInputLineNumberAndOrMeasurePositionAsAComment (
       elt);

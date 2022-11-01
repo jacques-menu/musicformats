@@ -1321,10 +1321,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getOriginalMeasureNumbers () const
                               { return fOriginalMeasureNumbers; }
 
-    void                  setGeneratePositionsInMeasures ()
-                              { fGeneratePositionsInMeasures = true; }
-    Bool                  getGeneratePositionsInMeasures () const
-                              { return fGeneratePositionsInMeasures; }
+    void                  setGenerateMeasurePositions ()
+                              { fGenerateMeasurePositions = true; }
+    Bool                  getGenerateMeasurePositions () const
+                              { return fGenerateMeasurePositions; }
 
     void                  setGenerateMomentsInMeasures ()
                               { fGenerateMomentsInMeasures = true; }
@@ -1995,7 +1995,7 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fOriginalMeasureNumbers;
 
-    Bool                  fGeneratePositionsInMeasures;
+    Bool                  fGenerateMeasurePositions;
     Bool                  fGenerateMomentsInMeasures;
 
     // for MusicXML's <note print-object="no">

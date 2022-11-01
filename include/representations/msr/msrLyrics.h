@@ -25,40 +25,38 @@ class msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
+// data types
+
+// we want to end the line in the LilyPond code at a break
+enum msrSyllableKind {
+  kSyllableNone,
+  kSyllableSingle,
+  kSyllableBegin, kSyllableMiddle, kSyllableEnd,
+
+  kSyllableOnRestNote,
+  kSyllableSkipRestNote,
+  kSyllableSkipNonRestNote,
+
+  kSyllableMeasureEnd,
+  kSyllableLineBreak, kSyllablePageBreak
+};
+
+string syllableKindAsString (
+  msrSyllableKind syllableKind);
+
+enum msrSyllableExtendKind {
+  kSyllableExtendNone,
+  kSyllableExtendEmpty,
+  kSyllableExtendSingle,
+  kSyllableExtendStart, kSyllableExtendContinue, kSyllableExtendStop
+};
+
+string syllableExtendKindAsString (
+  msrSyllableExtendKind syllableExtendKind);
+
 class EXP msrSyllable : public msrMeasureElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    // we want to end the line in the LilyPond code at a break
-    enum msrSyllableKind {
-      kSyllableNone,
-      kSyllableSingle,
-      kSyllableBegin, kSyllableMiddle, kSyllableEnd,
-
-      kSyllableOnRestNote,
-      kSyllableSkipRestNote,
-      kSyllableSkipNonRestNote,
-
-      kSyllableMeasureEnd,
-      kSyllableLineBreak, kSyllablePageBreak
-    };
-
-    static string syllableKindAsString (
-      msrSyllableKind syllableKind);
-
-    enum msrSyllableExtendKind {
-      kSyllableExtendNone,
-      kSyllableExtendEmpty,
-      kSyllableExtendSingle,
-      kSyllableExtendStart, kSyllableExtendContinue, kSyllableExtendStop
-    };
-
-    static string syllableExtendKindAsString (
-      msrSyllableExtendKind syllableExtendKind);
-
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -71,9 +69,15 @@ class EXP msrSyllable : public msrMeasureElement
                             const string&         syllableStanzaNumber,
                             const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           SyllableUpLinkToStanza);
+                            S_msrStanza           syllableUpLinkToStanza);
 
-    static SMARTP<msrSyllable> createWithNextMeasurePuristNumber (
+    SMARTP<msrSyllable> createSyllableNewbornClone (
+                            S_msrPart containingPart); // JMI
+
+    SMARTP<msrSyllable> createSyllableDeepClone (
+                            S_msrPart containingPart);
+
+    static SMARTP<msrSyllable> createWithNextMeasurePuristNumber ( // JMI superflous??? v0.9.66
                             int                   inputLineNumber,
                             S_msrMeasure          upLinkToMeasure,
                             msrSyllableKind       syllableKind,
@@ -81,14 +85,8 @@ class EXP msrSyllable : public msrMeasureElement
                             const string&         syllableStanzaNumber,
                             const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           SyllableUpLinkToStanza,
+                            S_msrStanza           syllableUpLinkToStanza,
                             int                   syllableNextMeasurePuristNumber);
-
-    SMARTP<msrSyllable> createSyllableNewbornClone (
-                            S_msrPart containingPart); // JMI
-
-    SMARTP<msrSyllable> createSyllableDeepClone (
-                            S_msrPart containingPart);
 
   protected:
 
@@ -97,22 +95,13 @@ class EXP msrSyllable : public msrMeasureElement
 
                           msrSyllable (
                             int                   inputLineNumber,
+                            S_msrMeasure          upLinkToMeasure,
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
                             const string&         syllableStanzaNumber,
                             const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           SyllableUpLinkToStanza);
-
-                          msrSyllable (
-                            int                   inputLineNumber,
-                            msrSyllableKind       syllableKind,
-                            msrSyllableExtendKind syllableExtendKind,
-                            const string&         syllableStanzaNumber,
-                            const Rational&       syllableWholeNotes,
-                            msrTupletFactor       syllableTupletFactor,
-                            S_msrStanza           SyllableUpLinkToStanza,
-                            int                   syllableNextMeasurePuristNumber);
+                            S_msrStanza           syllableUpLinkToStanza);
 
     virtual               ~msrSyllable ();
 
@@ -177,11 +166,7 @@ class EXP msrSyllable : public msrMeasureElement
 
     // syllable next measure purist number
     void                  setSyllableNextMeasurePuristNumber (
-                            int puristMeasureNumber)
-                              {
-                                fSyllableNextMeasurePuristNumber =
-                                  puristMeasureNumber;
-                              }
+                            int puristMeasureNumber);
 
     int                   getSyllableNextMeasurePuristNumber () const
                               { return fSyllableNextMeasurePuristNumber; }
@@ -214,10 +199,6 @@ class EXP msrSyllable : public msrMeasureElement
     string                syllableUpLinkToNoteAsString () const;
 
     string                syllableWholeNotesAsMsrString () const;
-
-    string                syllableKindAsString () const;
-
-    string                syllableExtendKindAsString () const;
 
     string                syllableTextsListAsString () const;
 
@@ -358,8 +339,7 @@ class EXP msrStanza : public msrElement
 
     S_msrSyllable         appendMelismaSyllableToStanza (
                             int             inputLineNumber,
-                            msrSyllable::msrSyllableKind
-                                            syllableKind,
+                            msrSyllableKind syllableKind,
                             const Rational& wholeNote);
 
 /* JMI

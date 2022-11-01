@@ -85,26 +85,26 @@ class EXP msrMeasureElement : public msrElement
     Rational              getMeasureElementMeasurePosition () const
                               { return fMeasureElementMeasurePosition; }
 
-    void                  setMeasureElementPositionFromBeginningOfVoice (
-                            const Rational& positionFromBeginningOfVoice,
+    void                  setMeasureElementVoicePosition (
+                            const Rational& voicePosition,
                             const string&   context);
 
-    Rational              getMeasureElementPositionFromBeginningOfVoice () const
-                              { return fMeasureElementPositionFromBeginningOfVoice; }
+    Rational              getMeasureElementVoicePosition () const
+                              { return fMeasureElementVoicePosition; }
 
-//     void                  setMeasureElementMomentInMeasure (
-//                             const msrMoment& momentInMeasure,
+//     void                  setMeasureElementMeasureMoment (
+//                             const msrMoment& measureMoment,
 //                             const string&    context);
 //
-//     const msrMoment&      getMeasureElementMomentInMeasure () const
-//                               { return fMeasureElementMomentInMeasure; }
+//     const msrMoment&      getMeasureElementMeasureMoment () const
+//                               { return fMeasureElementMeasureMoment; }
 //
-//     void                  setMeasureElementMomentFromBeginningOfVoice (
-//                             const msrMoment& momentFromBeginningOfVoice,
+//     void                  setMeasureElementVoiceMoment (
+//                             const msrMoment& voiceMoment,
 //                             const string&    context);
 //
-//     const msrMoment&      getMeasureElementMomentFromBeginningOfVoice () const
-//                               { return fMeasureElementMomentFromBeginningOfVoice; }
+//     const msrMoment&      getMeasureElementVoiceMoment () const
+//                               { return fMeasureElementVoiceMoment; }
 
   public:
 
@@ -117,8 +117,8 @@ class EXP msrMeasureElement : public msrElement
                             const SMARTP<msrMeasureElement>& first,
                             const SMARTP<msrMeasureElement>& second);
 
-//     virtual void          assignMeasureElementPositionFromBeginningOfVoice ( // JMI v0.9.66 REMOVE
-//                             Rational&     positionFromBeginningOfVoice,
+//     virtual void          assignMeasureElementVoicePosition ( // JMI v0.9.66 REMOVE
+//                             Rational&     voicePosition,
 //                             const string& context);
 
   public:
@@ -162,10 +162,10 @@ class EXP msrMeasureElement : public msrElement
     Rational              fMeasureElementSoundingWholeNotes;
 
     Rational              fMeasureElementMeasurePosition;
-    Rational              fMeasureElementPositionFromBeginningOfVoice;
+    Rational              fMeasureElementVoicePosition;
 
-//     msrMoment             fMeasureElementMomentInMeasure;
-//     msrMoment             fMeasureElementMomentFromBeginningOfVoice;
+//     msrMoment             fMeasureElementMeasureMoment;
+//     msrMoment             fMeasureElementVoiceMoment;
 };
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 EXP ostream& operator << (ostream& os, const S_msrMeasureElement& elt);

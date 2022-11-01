@@ -14,6 +14,8 @@
 
 #include "visitor.h"
 
+#include "msrMeasures.h"
+
 #include "msrRehearsalMarks.h"
 
 #include "oahOah.h"
@@ -151,7 +153,7 @@ void msrRehearsalMark::print (ostream& os) const
     " kind: " <<
     rehearsalKindAsString (fRehearsalMarkKind) <<
     " rehearsalPlacementKind: " <<
-    msrPlacementKindAsString (fRehearsalMarkPlacementKind) <<
+    placementKindAsString (fRehearsalMarkPlacementKind) <<
     endl;
 }
 

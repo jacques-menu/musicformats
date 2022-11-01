@@ -148,7 +148,7 @@ class EXP msrTuplet : public msrTupletElement
                             const string&      context);
 
     // members positions in measures
-    Rational              setTupletMembersPositionsInMeasure (
+    Rational              setTupletMembersMeasurePositions (
                             S_msrMeasure    measure,
                             const Rational& measurePosition);
                               // returns the position after the tuplet JMI ??? v0.9.66 SUPERFLOUS ???

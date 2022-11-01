@@ -5083,7 +5083,7 @@ void msr2bsrTranslator::visitEnd (S_msrNote& elt)
 
 / * JMI
   // handle melisma
-  msrSyllable::msrSyllableExtendKind
+  msrSyllableExtendKind
     noteSyllableExtendKind =
       elt->getNoteSyllableExtendKind ();
 

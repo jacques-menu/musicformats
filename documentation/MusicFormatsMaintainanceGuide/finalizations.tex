@@ -457,9 +457,9 @@ void msrMeasure::finalizeMeasure (
 
     // position in voice
     rational
-      positionFromBeginningOfVoice =
+      voicePosition =
         fetchMeasureUpLinkToVoice ()->
-          getCurrentPositionFromBeginningOfVoice ();
+          getCurrentVoicePosition ();
 
     // assign measure' elements position in measure
     for (
@@ -470,8 +470,8 @@ void msrMeasure::finalizeMeasure (
       S_msrMeasureElement measureElement = (*i);
 
       measureElement->
-        setMeasureElementPositionFromBeginningOfVoice (
-          positionFromBeginningOfVoice,
+        setMeasureElementVoicePosition (
+          voicePosition,
           "finalizeMeasure()");
     } // for
 

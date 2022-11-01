@@ -1660,16 +1660,12 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fOnGoingLyric;
     string                    fCurrentSyllabic;
-    msrSyllable::msrSyllableKind
-                              fCurrentSyllableKind;
-    msrSyllable::msrSyllableKind
-                              fFirstSyllableInSlurKind;
-    msrSyllable::msrSyllableKind
-                              fFirstSyllableInLigatureKind;
+    msrSyllableKind           fCurrentSyllableKind;
+    msrSyllableKind           fFirstSyllableInSlurKind;
+    msrSyllableKind           fFirstSyllableInLigatureKind;
     list<string>              fCurrentLyricTextsList;
 
-    msrSyllable::msrSyllableExtendKind
-                              fCurrentSyllableExtendKind;
+    msrSyllableExtendKind     fCurrentSyllableExtendKind;
     Bool                      fOnGoingSyllableExtend;
 
     string                    fCurrentStanzaNumber;
@@ -1872,10 +1868,9 @@ class EXP mxsr2msrTranslator :
     msrPrintObjectKind        fCurrentNotePrintObjectKind;
 
     // note heads
-    msrNote::msrNoteHeadKind  fCurrentNoteHeadKind;
-    msrNote::msrNoteHeadFilledKind
-                              fCurrentNoteHeadFilledKind;
-    msrNote::msrNoteHeadParenthesesKind
+    msrNoteHeadKind  			  	fCurrentNoteHeadKind;
+    msrNoteHeadFilledKind     fCurrentNoteHeadFilledKind;
+    msrNoteHeadParenthesesKind
                               fCurrentNoteHeadParenthesesKind;
 
     // accidentals
@@ -1920,8 +1915,7 @@ class EXP mxsr2msrTranslator :
     Bool                      fCurrentNoteIsUnpitched;
 
     // cue notes
-    msrNote::msrNoteIsACueNoteKind
-                              fCurrentNoteIsACueNoteKind;
+    msrNoteIsACueNoteKind     fCurrentNoteIsACueNoteKind;
 
     // grace notes
     Bool                      fCurrentNoteIsAGraceNote;

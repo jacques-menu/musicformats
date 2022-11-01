@@ -863,7 +863,7 @@ void msr2msrTranslator::visitEnd (S_msrPart& elt)
 
   // handle the hidden measure and barLine elements
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     displayPartHiddenMeasureAndBarLineDescrList ();
   }
 #endif
@@ -4397,7 +4397,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
 /* JMI
   // handle melisma
-  msrSyllable::msrSyllableExtendKind
+  msrSyllableExtendKind
     noteSyllableExtendKind =
       elt->getNoteSyllableExtendKind ();
 

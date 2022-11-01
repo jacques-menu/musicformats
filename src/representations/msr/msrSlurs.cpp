@@ -147,7 +147,7 @@ string msrSlur::asString () const
       fSlurLineTypeKind) <<
 
     ", slurPlacementKind: " <<
-    msrPlacementKindAsString (
+    placementKindAsString (
       fSlurPlacementKind) <<
 
     ", line " << fInputLineNumber <<

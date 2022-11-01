@@ -208,11 +208,11 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
       S_msrNote
         skip =
           msrNote::createGraceSkipNote (
-            note->            getInputLineNumber (),
-            note->            getMeasureNumber (),
-            note->            getMeasureElementSoundingWholeNotes (), // 0/1 JMI
-            note->            getNoteDisplayWholeNotes (),
-            note->            getNoteDotsNumber ());
+            note->getInputLineNumber (),
+            note->fetchMeasureElementMeasureNumber (),
+            note->getMeasureElementSoundingWholeNotes (), // 0/1 JMI
+            note->getNoteDisplayWholeNotes (),
+            note->getNoteDotsNumber ());
 
       // append it to the grace notes
       clone->
@@ -231,11 +231,11 @@ S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
       S_msrNote
         skip =
           msrNote::createGraceSkipNote (
-            chordFirstNote->  getInputLineNumber (),
-            chordFirstNote->  getMeasureNumber (),
-            chordFirstNote->  getMeasureElementSoundingWholeNotes (), // 0/1 JMI
-            chordFirstNote->  getNoteDisplayWholeNotes (),
-            chordFirstNote->  getNoteDotsNumber ());
+            chordFirstNote->getInputLineNumber (),
+            chordFirstNote->fetchMeasureElementMeasureNumber (),
+            chordFirstNote->getMeasureElementSoundingWholeNotes (), // 0/1 JMI
+            chordFirstNote->getNoteDisplayWholeNotes (),
+            chordFirstNote->getNoteDotsNumber ());
 
       // append it to the grace notes
       clone->
@@ -368,12 +368,12 @@ S_msrNote msrGraceNotesGroup::removeLastNoteFromGraceNotesGroup (
   return result;
 }
 
-void msrGraceNotesGroup::setGraceNotesGroupElementsPositionsInMeasure (
+void msrGraceNotesGroup::setGraceNotesGroupElementsMeasurePositions (
   S_msrMeasure        measure,
   const Rational&     measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting grace notes group elements' positions in measure of " << asString () <<
       " to '" <<
@@ -394,14 +394,14 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionsInMeasure (
   if (false) { // JMI
   // compute chord's position in voice
   Rational
-     positionFromBeginningOfVoice =
-      fChordDirectUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
+     voicePosition =
+      fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
         +
       measurePosition;
 
   // set chord's position in voice
-  setMeasureElementPositionFromBeginningOfVoice (
-    positionFromBeginningOfVoice,
+  setMeasureElementVoicePosition (
+    voicePosition,
     context);
 
   // update current position in voice
@@ -411,7 +411,7 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionsInMeasure (
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionFromBeginningOfVoice (
+    incrementCurrentVoicePosition (
       fChordNotesVector [0]->getMeasureElementSoundingWholeNotes ());
 }
 */
@@ -422,17 +422,17 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionsInMeasure (
   if (false) { // JMI
     // compute chord's position in voice
     Rational
-       positionFromBeginningOfVoice =
+       voicePosition =
         fGraceNotesGroupUpLinkToNote->
           getMeasureElementUpLinkToMeasure ()->
-            getMeasurePositionFromBeginningOfVoice ()
+            getMeasureVoicePosition ()
           +
         measurePosition;
 }
 */
 
     string context =
-      "setGraceNotesGroupElementsPositionsInMeasure()";
+      "setGraceNotesGroupElementsMeasurePositions()";
 
     for (S_msrMeasureElement measureElement : fGraceNotesGroupElementsList) {
       // set measure element's position in measure
@@ -446,8 +446,8 @@ void msrGraceNotesGroup::setGraceNotesGroupElementsPositionsInMeasure (
       // set measure element's position in measure
   if (false) { // JMI
       measureElement->
-        setMeasureElementPositionFromBeginningOfVoice (
-          positionFromBeginningOfVoice,
+        setMeasureElementVoicePosition (
+          voicePosition,
           context);
 }
 */

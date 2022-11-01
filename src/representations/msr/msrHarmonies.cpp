@@ -280,7 +280,7 @@ ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt)
 }
 
 //______________________________________________________________________________
-S_msrHarmony msrHarmony::createWithoutVoiceUplink (
+S_msrHarmony msrHarmony::create (
   int                      inputLineNumber,
   S_msrMeasure             upLinkToMeasure,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
@@ -298,42 +298,6 @@ S_msrHarmony msrHarmony::createWithoutVoiceUplink (
     new msrHarmony (
       inputLineNumber,
       upLinkToMeasure,
-      nullptr, // will be set afterwards
-      harmonyRootQuarterTonesPitchKind,
-      harmonyKind,
-      harmonyKindText,
-      harmonyInversion,
-      harmonyBassQuarterTonesPitchKind,
-      harmonySoundingWholeNotes,
-      harmonyDisplayWholeNotes,
-      harmoniesStaffNumber,
-      harmonyTupletFactor,
-      harmonyWholeNotesOffset);
-  assert (o != nullptr);
-
-  return o;
-}
-
-S_msrHarmony msrHarmony::createWithVoiceUplink (
-  int                      inputLineNumber,
-  S_msrMeasure             upLinkToMeasure,
-  S_msrVoice               harmoniesUpLinkToVoice,
-  msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
-  msrHarmonyKind           harmonyKind,
-  const string&            harmonyKindText,
-  int                      harmonyInversion,
-  msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-  const Rational&          harmonySoundingWholeNotes,
-  const Rational&          harmonyDisplayWholeNotes,
-  int                      harmoniesStaffNumber,
-  msrTupletFactor          harmonyTupletFactor,
-  const Rational&          harmonyWholeNotesOffset)
-{
-  msrHarmony* o =
-    new msrHarmony (
-      inputLineNumber,
-      upLinkToMeasure,
-      harmoniesUpLinkToVoice,
       harmonyRootQuarterTonesPitchKind,
       harmonyKind,
       harmonyKindText,
@@ -352,7 +316,6 @@ S_msrHarmony msrHarmony::createWithVoiceUplink (
 msrHarmony::msrHarmony (
   int                      inputLineNumber,
   S_msrMeasure             upLinkToMeasure,
-  S_msrVoice               harmoniesUpLinkToVoice,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
   const string&            harmonyKindText,
@@ -369,18 +332,6 @@ msrHarmony::msrHarmony (
       fHarmonyTupletFactor (
         harmonyTupletFactor)
 {
-  /* JMI
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    harmoniesUpLinkToVoice != nullptr,
-     "harmoniesUpLinkToVoice is null");
-     */
-
-  // set harmony's voice upLink
-  fHarmoniesUpLinkToVoice =
-    harmoniesUpLinkToVoice;
-
   fHarmonyRootQuarterTonesPitchKind =
     harmonyRootQuarterTonesPitchKind;
 
@@ -502,9 +453,9 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
 
   S_msrHarmony
     newbornClone =
-      msrHarmony::createWithVoiceUplink (
+      msrHarmony::create (
         fInputLineNumber,
-        containingVoice,
+        nullptr, // will be set when harmony is appended to a measure JMI v0.9.66 PIM
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind,
         fHarmonyKindText,
@@ -515,6 +466,9 @@ S_msrHarmony msrHarmony::createHarmonyNewbornClone (
         fHarmoniesStaffNumber,
         fHarmonyTupletFactor,
         fHarmonyWholeNotesOffset);
+
+  newbornClone->setHarmoniesUpLinkToVoice (
+    containingVoice);
 
   // frame JMI ???
   newbornClone->fHarmonyFrame =
@@ -544,9 +498,9 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
 
   S_msrHarmony
     harmonyDeepClone =
-      msrHarmony::createWithVoiceUplink (
+      msrHarmony::create (
         fInputLineNumber,
-        containingVoice,
+        nullptr, // will be set when harmony is appended to a measure JMI v0.9.66 PIM
         fHarmonyRootQuarterTonesPitchKind,
         fHarmonyKind, fHarmonyKindText,
         fHarmonyInversion,
@@ -557,6 +511,11 @@ S_msrHarmony msrHarmony::createHarmonyDeepClone (
         fHarmoniesStaffNumber,
         fHarmonyTupletFactor,
         fHarmonyWholeNotesOffset);
+
+  harmonyDeepClone->setHarmoniesUpLinkToVoice (
+    containingVoice);
+
+  // JMI popoulate! v0.9.66
 
   return harmonyDeepClone;
 }
@@ -622,7 +581,7 @@ void msrHarmony::setHarmonyMeasurePosition (
       fHarmonyWholeNotesOffset;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting harmony's position in measure of " << asString () <<
       " to " <<
@@ -650,9 +609,9 @@ void msrHarmony::setHarmonyMeasurePosition (
 
   // compute harmony's position in voice
   Rational
-    positionFromBeginningOfVoice =
+    voicePosition =
       measure->
-        getMeasurePositionFromBeginningOfVoice ()
+        getMeasureVoicePosition ()
         +
       actualMeasurePosition;
 
@@ -672,7 +631,7 @@ void msrHarmony::setHarmonyMeasurePosition (
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionFromBeginningOfVoice (
+    incrementCurrentVoicePosition (
       fHarmonyUpLinkToNote->
         getMeasureElementSoundingWholeNotes ());
 }
@@ -1033,7 +992,7 @@ void msrHarmony::print (ostream& os) const
   // print the harmony bass position in voice
 //   os <<
 //     setw (fieldWidth) <<
-//     "fMeasureElementPositionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
+//     "fMeasureElementVoicePosition" << " : " << fMeasureElementVoicePosition <<
 //     endl;
 
   // print the harmony note uplink

@@ -109,7 +109,7 @@ void msrDalSegno::setDalSegnoMeasurePosition (
   // set the dal segno position in measure
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting dal segno's position in measure of " << asString () <<
       " to '" <<
@@ -125,14 +125,14 @@ void msrDalSegno::setDalSegnoMeasurePosition (
   if (false) { // JMI v0.9.66
   // compute dal segno's position in voice
   Rational
-     positionFromBeginningOfVoice =
-       segnoUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
+     voicePosition =
+       segnoUpLinkToMeasure->getMeasureVoicePosition ()
         +
       measurePosition;
 
   // set dal segno's position in voice
-  setMeasureElementPositionFromBeginningOfVoice (
-    positionFromBeginningOfVoice,
+  setMeasureElementVoicePosition (
+    voicePosition,
     context);
 
   // update current position in voice
@@ -142,7 +142,7 @@ void msrDalSegno::setDalSegnoMeasurePosition (
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionFromBeginningOfVoice (
+    incrementCurrentVoicePosition (
       fdal segnoNotesVector [0]->getMeasureElementSoundingWholeNotes ());
 }
       */
@@ -235,7 +235,7 @@ void msrDalSegno::print (ostream& os) const
     "measurePosition" << " : " << fMeasureElementMeasurePosition <<
     endl <<
 //     setw (fieldWidth) <<
-//     "positionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
+//     "voicePosition" << " : " << fMeasureElementVoicePosition <<
 //     endl <<
     setw (fieldWidth) <<
     "line" << " : " << fInputLineNumber <<

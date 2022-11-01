@@ -71,6 +71,7 @@ class EXP msrChord : public msrTupletElement
 
     static SMARTP<msrChord> create (
                             int             inputLineNumber,
+                            S_msrMeasure    upLinkToMeasure,
                             const Rational& chordSoundingWholeNotes,
                             const Rational& chordDisplayWholeNotes,
                             msrDurationKind chordGraphicDurationKind);
@@ -88,6 +89,7 @@ class EXP msrChord : public msrTupletElement
 
                           msrChord (
                             int             inputLineNumber,
+                            S_msrMeasure    upLinkToMeasure,
                             const Rational& chordSoundingWholeNotes,
                             const Rational& chordDisplayWholeNotes,
                             msrDurationKind chordGraphicDurationKind);

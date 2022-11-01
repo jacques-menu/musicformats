@@ -200,11 +200,11 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 
   fCurrentSyllabic = "";
 
-  fCurrentSyllableKind       = msrSyllable::kSyllableNone;
-  fCurrentSyllableExtendKind = msrSyllable::kSyllableExtendNone;
+  fCurrentSyllableKind       = msrSyllableKind::kSyllableNone;
+  fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtendNone;
 
-  fFirstSyllableInSlurKind     = msrSyllable::kSyllableNone;
-  fFirstSyllableInLigatureKind = msrSyllable::kSyllableNone;
+  fFirstSyllableInSlurKind     = msrSyllableKind::kSyllableNone;
+  fFirstSyllableInLigatureKind = msrSyllableKind::kSyllableNone;
 
   // harmonies handling
   fHarmoniesVoicesCounter = 0;
@@ -264,9 +264,9 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentNotePrintObjectKind = msrPrintObjectKind::kPrintObjectNone;
 
   // note head
-  fCurrentNoteHeadKind = msrNote::kNoteHeadNormal;
-  fCurrentNoteHeadFilledKind = msrNote::kNoteHeadFilledYes;
-  fCurrentNoteHeadParenthesesKind = msrNote::kNoteHeadParenthesesNo;
+  fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadNormal;
+  fCurrentNoteHeadFilledKind = msrNoteHeadFilledKind::kNoteHeadFilledYes;
+  fCurrentNoteHeadParenthesesKind = msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo;
 
   // technicals handling
   fBendAlterValue = -39.3f;
@@ -351,7 +351,7 @@ void mxsr2msrTranslator::initializeNoteData ()
 
   // cue notes
 
-  fCurrentNoteIsACueNoteKind = msrNote::kNoteIsACueNoteNo;
+  fCurrentNoteIsACueNoteKind = msrNoteIsACueNoteKind::kNoteIsACueNoteNo;
 
   // accidentals
 
@@ -2908,7 +2908,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
     clef =
       msrClef::create (
         inputLineNumber,
-        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+        nullptr, // will be set when clef is appended to a measure JMI v0.9.66 PIM
         clefKind,
         fCurrentClefStaffNumber);
 
@@ -3407,7 +3407,7 @@ S_msrKey mxsr2msrTranslator::handleTraditionalKey (
     key =
       msrKey::createTraditional (
         inputLineNumber,
-        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+        nullptr, // will be set when key is appended to a measure JMI v0.9.66 PIM
         keyTonicPitchKind,
         fCurrentModeKind,
         fCurrentKeyCancelFifths);
@@ -3431,7 +3431,8 @@ S_msrKey mxsr2msrTranslator::handleHumdrumScotKey (
   S_msrKey
     key =
       msrKey::createHumdrumScot (
-        inputLineNumber);
+        inputLineNumber,
+				nullptr); // will be set when key is appended to a measure JMI v0.9.66 PIM
 
   // populate the key with the Humdrum/Scot items
   if (fCurrentHumdrumScotKeyItemsVector.size ()) {
@@ -3776,7 +3777,7 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
   fCurrentTimeSignature =
     msrTimeSignature::create (
       inputLineNumber,
-			nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+			nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
       fCurrentTimeSignatureSymbolKind);
 
   // populate the time with the time signature items
@@ -4143,7 +4144,7 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
     transposition =
       msrTransposition::create (
         inputLineNumber,
-        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+        nullptr, // will be set when transposition is appended to a measure JMI v0.9.66 PIM
         fCurrentTransposeDiatonic,
         fCurrentTransposeChromatic,
         fCurrentTransposeOctaveChange,
@@ -4427,7 +4428,7 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
       fCurrentMetronomeTempo =
         msrTempo::createTempoPerMinute (
           inputLineNumber,
-	        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+	        nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
           msrDottedDuration (
             msrDurationKind::kQuarter,
             0),       // JMI could be different???
@@ -4562,7 +4563,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
     octaveShift =
       msrOctaveShift::create (
         inputLineNumber,
-        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+        nullptr, // will be set when octave shift is appended to a measure JMI v0.9.66 PIM
         octaveShiftKind,
         octaveShiftSize);
 
@@ -4803,7 +4804,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         tempo =
           msrTempo::createTempoWordsOnly (
             inputLineNumber,
-		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+		        nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
             words,
             msrTempo::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
@@ -4841,7 +4842,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         rehearsalMark =
           msrRehearsalMark::create (
             inputLineNumber,
-		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+		        nullptr, // will be set when rehearsal mark is appended to a measure JMI v0.9.66 PIM
             msrRehearsalMark::kNone, // JMI allow for other values???
             wordsValue,
             fCurrentDirectionPlacementKind);
@@ -4879,7 +4880,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         segno =
           msrSegno::create (
             inputLineNumber,
-		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+		        nullptr, // will be set when segno is appended to a measure JMI v0.9.66 PIM
             fCurrentDirectionStaffNumber);
 
 #ifdef TRACING_IS_ENABLED
@@ -4915,7 +4916,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         dalSegno =
           msrDalSegno::create (
             inputLineNumber,
-		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+		        nullptr, // will be set when dal segno is appended to a measure JMI v0.9.66 PIM
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -4954,7 +4955,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         dalSegno =
           msrDalSegno::create (
             inputLineNumber,
-		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+		        nullptr, // will be set when dal segno is appended to a measure JMI v0.9.66 PIM
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -4993,7 +4994,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         dalSegno =
           msrDalSegno::create (
             inputLineNumber,
-		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+		        nullptr, // will be set when segno is appended to a measure JMI v0.9.66 PIM
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -5032,7 +5033,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         coda =
           msrCoda::create (
             inputLineNumber,
-		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+		        nullptr, // will be set when coda is appended to a measure JMI v0.9.66 PIM
             fCurrentDirectionStaffNumber,
             msrCodaKind::kCodaFirst);
 
@@ -5071,7 +5072,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         coda =
           msrCoda::create (
             inputLineNumber,
-		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+		        nullptr, // will be set when coda is appended to a measure JMI v0.9.66 PIM
 						fCurrentDirectionStaffNumber,
             msrCodaKind::kCodaSecond);
 
@@ -5200,7 +5201,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         gLogStream <<
           "Creating words \"" << wordsValue << "\"" <<
           ", placement = \"" <<
-          msrPlacementKindAsString (
+          placementKindAsString (
             fCurrentDirectionPlacementKind) <<
           "\"" <<
           ", line " << inputLineNumber <<
@@ -5375,7 +5376,7 @@ void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
       accordionRegistration =
         msrAccordionRegistration::create (
           inputLineNumber,
-					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+					nullptr, // will be set when accordion registration is appended to a measure JMI v0.9.66 PIM
           fCurrentAccordionHigh,
           fCurrentAccordionMiddle,
           fCurrentAccordionLow);
@@ -6129,7 +6130,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
         fCurrentMetronomeTempo =
           msrTempo::createTempoPerMinute (
             inputLineNumber,
-						nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+						nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
             beatUnits,
             fCurrentMetrenomePerMinute,
             fCurrentMetronomeParenthesedKind,
@@ -6146,7 +6147,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
         fCurrentMetronomeTempo =
           msrTempo::createTempoBeatUnitEquivalent (
             inputLineNumber,
-						nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+						nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
             beatUnits,
             fCurrentMetronomeBeatUnitsVector [1],
             fCurrentMetronomeParenthesedKind,
@@ -6158,7 +6159,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       fCurrentMetronomeTempo =
         msrTempo::createTempoNotesRelationship (
           inputLineNumber,
-					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+					nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
           fCurrentMetronomeRelationLeftElements,
           fCurrentMetrenomeRelationKind, // msrTempo::kTempoNotesRelationshipEquals here
           fCurrentMetronomeRelationRightElements,
@@ -6485,7 +6486,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
   fCurrentStaffDetails =
     msrStaffDetails::create (
       inputLineNumber,
-			nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+			nullptr, // will be set when staff details is appended to a measure JMI v0.9.66 PIM
       fCurrentStaffTypeKind,
       fCurrentShowFretsKind,
       fCurrentPrintObjectKind,
@@ -8035,19 +8036,19 @@ void mxsr2msrTranslator::visitStart (S_syllabic& elt)
 
   fCurrentSyllabic = elt->getValue();
 
-  fCurrentSyllableKind       = msrSyllable::kSyllableNone;
+  fCurrentSyllableKind       = msrSyllableKind::kSyllableNone;
 
   if      (fCurrentSyllabic == "single") {
-    fCurrentSyllableKind = msrSyllable::kSyllableSingle;
+    fCurrentSyllableKind = msrSyllableKind::kSyllableSingle;
   }
   else if (fCurrentSyllabic == "begin") {
-    fCurrentSyllableKind = msrSyllable::kSyllableBegin;
+    fCurrentSyllableKind = msrSyllableKind::kSyllableBegin;
   }
   else if (fCurrentSyllabic == "middle") {
-    fCurrentSyllableKind = msrSyllable::kSyllableMiddle;
+    fCurrentSyllableKind = msrSyllableKind::kSyllableMiddle;
   }
   else if (fCurrentSyllabic == "end") {
-    fCurrentSyllableKind = msrSyllable::kSyllableEnd;
+    fCurrentSyllableKind = msrSyllableKind::kSyllableEnd;
   }
   else {
     stringstream s;
@@ -8135,7 +8136,7 @@ void mxsr2msrTranslator::visitStart (S_text& elt)
 #endif
 
   // a <text/> markup puts an end to the effect of <extend/>
-  fCurrentSyllableExtendKind = msrSyllable::kSyllableExtendNone;
+  fCurrentSyllableExtendKind = msrSyllableExtendKind::kSyllableExtendNone;
 }
 
 void mxsr2msrTranslator::visitStart (S_elision& elt)
@@ -8183,19 +8184,19 @@ void mxsr2msrTranslator::visitStart (S_extend& elt)
   // extend
   if (fOnGoingLyric) {
     fCurrentSyllableExtendKind =
-      msrSyllable::kSyllableExtendEmpty; // default value
+      msrSyllableExtendKind::kSyllableExtendEmpty; // default value
 
     if      (extendType == "start") {
       fCurrentSyllableExtendKind =
-        msrSyllable::kSyllableExtendStart;
+        msrSyllableExtendKind::kSyllableExtendStart;
     }
     else if (extendType == "continue") {
       fCurrentSyllableExtendKind =
-        msrSyllable::kSyllableExtendContinue;
+        msrSyllableExtendKind::kSyllableExtendContinue;
     }
     else if (extendType == "stop") {
       fCurrentSyllableExtendKind =
-        msrSyllable::kSyllableExtendStop;
+        msrSyllableExtendKind::kSyllableExtendStop;
     }
     else {
       if (extendType.size ()) {
@@ -8237,7 +8238,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
   }
 #endif
 
-  if (fCurrentSyllableKind == msrSyllable::kSyllableNone) {
+  if (fCurrentSyllableKind == msrSyllableKind::kSyllableNone) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
       // syllabic is not mandatory, thus:
@@ -8253,7 +8254,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     }
 #endif
 
-    fCurrentSyllableKind = msrSyllable::kSyllableSingle;
+    fCurrentSyllableKind = msrSyllableKind::kSyllableSingle;
   }
 
   if (fCurrentNoteIsARest) {
@@ -8281,12 +8282,12 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     if (fCurrentLyricTextsList.size ()) {
       // register a skip in lyrics for rests with syllables
       fCurrentSyllableKind =
-        msrSyllable::kSyllableOnRestNote;
+        msrSyllableKind::kSyllableOnRestNote;
     }
     else {
       // don't register a skip in lyrics for rests without syllables
       fCurrentSyllableKind =
-        msrSyllable::kSyllableSkipRestNote;
+        msrSyllableKind::kSyllableSkipRestNote;
     }
   }
 
@@ -8294,7 +8295,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
   if (gGlobalTracingOahGroup->getTraceLyricsDetails ()) {
     gLogStream <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
-      msrSyllable::syllableKindAsString (fCurrentSyllableKind) <<
+      syllableKindAsString (fCurrentSyllableKind) <<
       ", line " << inputLineNumber <<
       ", with:" <<
       endl;
@@ -8334,7 +8335,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         endl <<
         setw (fieldWidth) <<
         "fCurrentSyllableExtendKind" << " = " <<
-        msrSyllable::syllableExtendKindAsString (
+        syllableExtendKindAsString (
           fCurrentSyllableExtendKind) <<
         endl <<
         setw (fieldWidth) <<
@@ -8391,7 +8392,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       gLogStream << left <<
         setw (fieldWidth) <<
         "fFirstSyllableInSlurKind" << " = \"" <<
-        msrSyllable::syllableKindAsString (
+        syllableKindAsString (
           fFirstSyllableInSlurKind) <<
         "\"" <<
         endl;
@@ -8399,7 +8400,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       gLogStream << left <<
         setw (fieldWidth) <<
         "fFirstSyllableInLigatureKind" << " = \"" <<
-        msrSyllable::syllableKindAsString (
+        syllableKindAsString (
           fFirstSyllableInLigatureKind) <<
         "\"" <<
       endl;
@@ -8407,7 +8408,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       gLogStream << left <<
         setw (fieldWidth) <<
         "fCurrentSyllableKind" << " = \"" <<
-        msrSyllable::syllableKindAsString (
+        syllableKindAsString (
           fCurrentSyllableKind) <<
         "\"" <<
       endl;
@@ -8423,7 +8424,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
-      msrSyllable::syllableKindAsString (fCurrentSyllableKind) <<
+      syllableKindAsString (fCurrentSyllableKind) <<
       ", line = " << inputLineNumber <<
       ", with:" <<
       endl;
@@ -8488,7 +8489,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
       gLogStream <<
         "Creating a syllable '" <<
-        msrSyllable::syllableKindAsString (
+        syllableKindAsString (
           fCurrentSyllableKind) <<
         "\", fCurrentLyricTextsList = \"";
 
@@ -8504,7 +8505,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
          fCurrentNoteDisplayWholeNotesFromType <<
         ", display from type" <<
         ", syllabic = \"" <<
-        msrSyllable::syllableKindAsString (
+        syllableKindAsString (
           fCurrentSyllableKind) << "\"" <<
         ", in stanza " << stanza->getStanzaName () <<
         ", line " << inputLineNumber <<
@@ -8517,7 +8518,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       syllable =
         msrSyllable::create (
           inputLineNumber,
-					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+					nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
           fCurrentSyllableKind,
           fCurrentSyllableExtendKind,
           fCurrentStanzaNumber,
@@ -9122,7 +9123,7 @@ Staff spacing between multiple staves is measured in
   fCurrentPrintLayout =
      msrPrintLayout::create (
       inputLineNumber,
-			nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
+			nullptr); // will be set when print layout is appended to a measure JMI v0.9.66 PIM
 
   // handle 'staff-spacing' if present
 
@@ -9161,7 +9162,7 @@ Staff spacing between multiple staves is measured in
         lineBreak =
           msrLineBreak::create (
             inputLineNumber,
-						nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+						nullptr, // will be set when line break is appended to a measure JMI v0.9.66 PIM
             fCurrentMeasureNumber,
             msrUserChosenLineBreakKind::kUserChosenLineBreakNo);
 
@@ -9209,7 +9210,7 @@ Staff spacing between multiple staves is measured in
           pageBreak =
             msrPageBreak::create (
               inputLineNumber,
-							nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+							nullptr, // will be set when page break is appended to a measure JMI v0.9.66 PIM
               msrUserChosenPageBreakKind::kUserChosenPageBreakNo);
 
         // append it to the pending page breaks
@@ -9466,7 +9467,7 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
       segno =
         msrSegno::create (
           inputLineNumber,
-					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+					nullptr, // will be set when segno is appended to a measure JMI v0.9.66 PIM
           fCurrentDirectionStaffNumber);
 
     // append it to the pending segnos list
@@ -9539,7 +9540,7 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
       coda =
         msrCoda::create (
           inputLineNumber,
-					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+					nullptr, // will be set when coda is appended to a measure JMI v0.9.66 PIM
           fCurrentDirectionStaffNumber,
           codaKind);
 
@@ -9585,7 +9586,7 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
       eyeGlasses =
         msrEyeGlasses::create (
           inputLineNumber,
-					nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
+					nullptr); // will be set when eye glasses is appended to a measure JMI v0.9.66 PIM
 
     // append it to the pending eyeglasses list
     fPendingEyeGlassesList.push_back (eyeGlasses);
@@ -9711,7 +9712,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
     pedal =
       msrPedal::create (
         inputLineNumber,
-				nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+				nullptr, // will be set when pedal is appended to a measure JMI v0.9.66 PIM
         pedalTypeKind,
         pedalLineKind,
         pedalSignKind);
@@ -9939,7 +9940,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
     barLine =
       msrBarLine::create (
         inputLineNumber,
-				nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+				nullptr, // will be set when barline is appended to a measure JMI v0.9.66 PIM
         fCurrentBarLineLocationKind,
         fCurrentBarLineStyleKind,
         fCurrentBarLineRepeatDirectionKind,
@@ -10289,9 +10290,9 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // note head
 
-  fCurrentNoteHeadKind = msrNote::kNoteHeadNormal;
-  fCurrentNoteHeadFilledKind = msrNote::kNoteHeadFilledYes;
-  fCurrentNoteHeadParenthesesKind = msrNote::kNoteHeadParenthesesNo;
+  fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadNormal;
+  fCurrentNoteHeadFilledKind = msrNoteHeadFilledKind::kNoteHeadFilledYes;
+  fCurrentNoteHeadParenthesesKind = msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo;
 
   // assuming staff number 1, unless S_staff states otherwise afterwards
   fCurrentMusicXMLStaffNumber = 1; // JMI
@@ -10316,15 +10317,15 @@ Controls whether or not spacing is left for an invisible note or object. It is u
   fCurrentSyllabic = "";
   // don't forget about fCurrentLyricTextsList here,
   // this will be done in visitStart (S_syllabic& )
-  fCurrentSyllableKind = msrSyllable::kSyllableNone;
+  fCurrentSyllableKind = msrSyllableKind::kSyllableNone;
 
   if (fOnGoingSyllableExtend) {
     fCurrentSyllableExtendKind =
-      msrSyllable::kSyllableExtendContinue; // it may be absent
+      msrSyllableExtendKind::kSyllableExtendContinue; // it may be absent
   }
   else {
     fCurrentSyllableExtendKind =
-      msrSyllable::kSyllableExtendNone;
+      msrSyllableExtendKind::kSyllableExtendNone;
   }
 
   // stems
@@ -10781,57 +10782,57 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
     string noteHead = elt->getValue();
 
     if      (noteHead == "slash") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadSlash; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadSlash; }
     else if (noteHead == "triangle") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadTriangle; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadTriangle; }
     else if (noteHead == "diamond")   {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadDiamond; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadDiamond; }
     else if (noteHead == "square") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadSquare; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadSquare; }
     else if (noteHead == "cross") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadCross; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadCross; }
     else if (noteHead == "x") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadX; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadX; }
     else if (noteHead == "circle-x") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadCircleX; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadCircleX; }
     else if (noteHead == "inverted triangle") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadInvertedTriangle; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadInvertedTriangle; }
     else if (noteHead == "arrow down") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadArrowDown; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadArrowDown; }
     else if (noteHead == "arrow up") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadArrowUp; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadArrowUp; }
     else if (noteHead == "slashed") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadSlashed; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadSlashed; }
     else if (noteHead == "back slashed") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadBackSlashed; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadBackSlashed; }
     else if (noteHead == "normal") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadNormal; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadNormal; }
     else if (noteHead == "cluster") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadCluster; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadCluster; }
     else if (noteHead == "circle dot") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadCircleDot; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadCircleDot; }
     else if (noteHead == "left triangle") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadLeftTriangle; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadLeftTriangle; }
     else if (noteHead == "rectangle") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadRectangle; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadRectangle; }
     else if (noteHead == "[NONE]") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadNone; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadNone; }
     else if (noteHead == "do") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadDo; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadDo; }
     else if (noteHead == "re") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadRe; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadRe; }
     else if (noteHead == "mi") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadMi; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadMi; }
     else if (noteHead == "fa") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadFa; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadFa; }
     else if (noteHead == "fa up") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadFaUp; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadFaUp; }
     else if (noteHead == "so") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadSo; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadSo; }
     else if (noteHead == "la") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadLa; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadLa; }
     else if (noteHead == "ti") {
-      fCurrentNoteHeadKind = msrNote::kNoteHeadTi; }
+      fCurrentNoteHeadKind = msrNoteHeadKind::kNoteHeadTi; }
     else {
       stringstream s;
 
@@ -10853,9 +10854,9 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
     string noteHeadFilled = elt->getAttributeValue ("filled");
 
     if      (noteHeadFilled == "yes")
-      fCurrentNoteHeadFilledKind = msrNote::kNoteHeadFilledYes;
+      fCurrentNoteHeadFilledKind = msrNoteHeadFilledKind::kNoteHeadFilledYes;
     else if (noteHeadFilled == "no")
-      fCurrentNoteHeadFilledKind = msrNote::kNoteHeadFilledNo;
+      fCurrentNoteHeadFilledKind = msrNoteHeadFilledKind::kNoteHeadFilledNo;
     else {
       if (noteHeadFilled.size ()) {
         stringstream s;
@@ -10879,9 +10880,9 @@ void mxsr2msrTranslator::visitStart (S_notehead& elt)
     string noteHeadParentheses = elt->getAttributeValue ("parentheses");
 
     if      (noteHeadParentheses == "yes")
-      fCurrentNoteHeadParenthesesKind = msrNote::kNoteHeadParenthesesYes;
+      fCurrentNoteHeadParenthesesKind = msrNoteHeadParenthesesKind::kNoteHeadParenthesesYes;
     else if (noteHeadParentheses == "no")
-      fCurrentNoteHeadParenthesesKind = msrNote::kNoteHeadParenthesesNo;
+      fCurrentNoteHeadParenthesesKind = msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo;
     else {
       if (noteHeadParentheses.size ()) {
         stringstream s;
@@ -13736,7 +13737,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
           mfSingularOrPlural (
             tremoloMarksNumber, "mark", "marks") <<
           ", placement : " <<
-          msrPlacementKindAsString (
+          placementKindAsString (
             singleTremoloPlacementKind) <<
           endl;
       }
@@ -13770,7 +13771,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
             mfSingularOrPlural (
               tremoloMarksNumber, "mark", "marks") <<
             ", placement : " <<
-            msrPlacementKindAsString (
+            placementKindAsString (
               doubleTremoloPlacementKind) <<
             endl;
         }
@@ -13779,7 +13780,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
         fCurrentDoubleTremolo =
           msrDoubleTremolo::create (
             inputLineNumber,
-						nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+						nullptr, // will be set when double tremolo is appended to a measure JMI v0.9.66 PIM
             msrDoubleTremolo::kNotesDoubleTremolo,
             msrTremoloTypeKind::kTremoloTypeStart,
             tremoloMarksNumber,
@@ -13864,7 +13865,7 @@ void mxsr2msrTranslator::visitStart (S_trill_mark& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentTrill,
+        msrOrnamentKind::kOrnamentTrill,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14087,7 +14088,7 @@ void mxsr2msrTranslator::visitStart (S_turn& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentTurn,
+        msrOrnamentKind::kOrnamentTurn,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14124,7 +14125,7 @@ void mxsr2msrTranslator::visitStart (S_inverted_turn& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentInvertedTurn,
+        msrOrnamentKind::kOrnamentInvertedTurn,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14161,7 +14162,7 @@ void mxsr2msrTranslator::visitStart (S_delayed_turn& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentDelayedTurn,
+        msrOrnamentKind::kOrnamentDelayedTurn,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14198,7 +14199,7 @@ void mxsr2msrTranslator::visitStart (S_delayed_inverted_turn& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentDelayedInvertedTurn,
+        msrOrnamentKind::kOrnamentDelayedInvertedTurn,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14235,7 +14236,7 @@ void mxsr2msrTranslator::visitStart (S_vertical_turn& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentVerticalTurn,
+        msrOrnamentKind::kOrnamentVerticalTurn,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14272,7 +14273,7 @@ void mxsr2msrTranslator::visitStart (S_mordent& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentMordent,
+        msrOrnamentKind::kOrnamentMordent,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14309,7 +14310,7 @@ void mxsr2msrTranslator::visitStart (S_inverted_mordent& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentInvertedMordent,
+        msrOrnamentKind::kOrnamentInvertedMordent,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14346,7 +14347,7 @@ void mxsr2msrTranslator::visitStart (S_schleifer& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentSchleifer,
+        msrOrnamentKind::kOrnamentSchleifer,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14383,7 +14384,7 @@ void mxsr2msrTranslator::visitStart (S_shake& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentShake,
+        msrOrnamentKind::kOrnamentShake,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreOrnaments ()) {
@@ -14592,7 +14593,7 @@ void mxsr2msrTranslator::visitStart (S_accidental_mark& elt)
     ornament =
       msrOrnament::create (
         inputLineNumber,
-        msrOrnament::kOrnamentAccidentalKind,
+        msrOrnamentKind::kOrnamentAccidentalKind,
         placementKind);
 
   ornament->
@@ -15915,7 +15916,7 @@ void mxsr2msrTranslator::visitStart (S_cue& elt)
   }
 #endif
 
-  fCurrentNoteIsACueNoteKind = msrNote::kNoteIsACueNoteYes;
+  fCurrentNoteIsACueNoteKind = msrNoteIsACueNoteKind::kNoteIsACueNoteYes;
 }
 
 //______________________________________________________________________________
@@ -17077,6 +17078,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
     chord =
       msrChord::create (
         firstNoteInputLineNumber,
+				nullptr, // will be set when chord is appended to a measure JMI v0.9.66 PIM
         chordFirstNote->getMeasureElementSoundingWholeNotes (),
         chordFirstNote->getNoteDisplayWholeNotes (),
         chordFirstNote->getNoteGraphicDurationKind ());
@@ -17490,18 +17492,12 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
       note->
         getNoteOrnaments ();
 
-  list<S_msrOrnament>::const_iterator i;
-  for (
-    i=noteOrnaments.begin ();
-    i!=noteOrnaments.end ();
-    ++i
-  ) {
-
+  for (S_msrOrnament ornament : noteOrnaments) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceOrnaments ()) {
       gLogStream <<
         "Copying ornament '" <<
-        (*i)->ornamentKindAsString () <<
+        ornamentKindAsString (ornament->getOrnamentKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         endl;
@@ -17509,7 +17505,7 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
 #endif
 
     chord->
-      appendOrnamentToChord ((*i));
+      appendOrnamentToChord (ornament);
   } // for
 }
 
@@ -18496,7 +18492,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
     tuplet =
       msrTuplet::create (
         firstNoteInputLineNumber,
-				nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+				nullptr, // will be set when tuplet is appended to a measure JMI v0.9.66 PIM
         fCurrentMeasureNumber,
         fCurrentTupletNumber,
         fCurrentTupletBracketKind,
@@ -18943,21 +18939,21 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
 
     while (fCurrentOrnamentsList.size ()) {
       S_msrOrnament
-        orn =
+        ornament =
           fCurrentOrnamentsList.front();
 
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
         gLogStream <<
           "Attaching ornament '" <<
-          orn->ornamentKindAsString () <<
+          ornamentKindAsString (ornament->getOrnamentKind ()) <<
           "' to note " << note->asString () <<
           endl;
       }
 #endif
 
       note->
-        appendOrnamentToNote (orn);
+        appendOrnamentToNote (ornament);
 
       // forget about this ornament
       fCurrentOrnamentsList.pop_front();
@@ -20553,8 +20549,8 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
                   syllable =
                     msrSyllable::create (
                       inputLineNumber,
-                      msrSyllable::kSyllableSkipRest,
-                      msrSyllable::kSyllableExtendNone, // fCurrentSyllableExtendKind, // JMI
+                      msrSyllableKind::kSyllableSkipRest,
+                      msrSyllableExtendKind::kSyllableExtendNone, // fCurrentSyllableExtendKind, // JMI
                       fCurrentStanzaNumber,
                       fCurrentNoteSoundingWholeNotesFromDuration,
                       stanza);
@@ -20668,8 +20664,8 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
                   syllable =
                     msrSyllable::create (
                       inputLineNumber,
-                      msrSyllable::kSyllableSkipRest,
-                      msrSyllable::kSyllableExtendNone, // fCurrentSyllableExtendKind, // JMI
+                      msrSyllableKind::kSyllableSkipRest,
+                      msrSyllableExtendKind::kSyllableExtendNone, // fCurrentSyllableExtendKind, // JMI
                       fCurrentStanzaNumber,
                       fCurrentNoteSoundingWholeNotesFromDuration,
                       stanza);
@@ -21114,6 +21110,8 @@ S_msrNote mxsr2msrTranslator::createNote (
     newNote =
       msrNote::create (
         inputLineNumber,
+        nullptr, // will be set when note is appended to a measure JMI v0.9.66 PIM
+
         fCurrentMeasureNumber,
 
         msrNoteKind::k_NoNote,
@@ -21447,7 +21445,7 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
         voiceStaffChange =
           msrVoiceStaffChange::create (
             inputLineNumber,
-		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+		        nullptr, // will be set when staff change is appended to a measure JMI v0.9.66 PIM
             staffToChangeTo);
 
   /* JMI
@@ -22595,7 +22593,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
     case msrSlurTypeKind::kSlurTypeRegularStop:
     case msrSlurTypeKind::kSlurTypePhrasingStop:
-      fFirstSyllableInSlurKind = msrSyllable::kSyllableNone;
+      fFirstSyllableInSlurKind = msrSyllableKind::kSyllableNone;
       break;
     case msrSlurTypeKind::k_NoSlur:
       ;
@@ -22609,7 +22607,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
     case msrLigature::kLigatureContinue:
       break;
     case msrLigature::kLigatureStop:
-      fFirstSyllableInLigatureKind = msrSyllable::kSyllableNone;
+      fFirstSyllableInLigatureKind = msrSyllableKind::kSyllableNone;
       break;
     default:
       ;
@@ -22651,7 +22649,7 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
       endl <<
       setw (fieldWidth) <<
       "fCurrentSyllableExtendKind" << "" << " = " <<
-      msrSyllable::syllableExtendKindAsString (
+      syllableExtendKindAsString (
         fCurrentSyllableExtendKind) <<
       endl <<
       setw (fieldWidth) <<
@@ -22727,20 +22725,20 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
       ! fCurrentNoteHasLyrics;
 
     switch (fCurrentSyllableExtendKind) {
-      case msrSyllable::kSyllableExtendNone:
+      case msrSyllableExtendKind::kSyllableExtendNone:
   //      doCreateASkipSyllable = true; // JMI
         break;
-      case msrSyllable::kSyllableExtendEmpty:
+      case msrSyllableExtendKind::kSyllableExtendEmpty:
   //      doCreateASkipSyllable = true; // JMI
         break;
-      case msrSyllable::kSyllableExtendSingle:
+      case msrSyllableExtendKind::kSyllableExtendSingle:
         break;
-      case msrSyllable::kSyllableExtendStart:
+      case msrSyllableExtendKind::kSyllableExtendStart:
         break;
-      case msrSyllable::kSyllableExtendContinue:
+      case msrSyllableExtendKind::kSyllableExtendContinue:
  //       doCreateASkipSyllable = true; // JMI
         break;
-      case msrSyllable::kSyllableExtendStop:
+      case msrSyllableExtendKind::kSyllableExtendStop:
         break;
     } // switch
 
@@ -22762,18 +22760,18 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
           S_msrStanza stanza = (*i).second;
 
           //choose the syllable kind
-          msrSyllable::msrSyllableKind
+          msrSyllableKind
             syllableKind =
             fCurrentNoteIsARest
-              ? msrSyllable::kSyllableSkipRestNote
-              : msrSyllable::kSyllableSkipNonRestNote;
+              ? msrSyllableKind::kSyllableSkipRestNote
+              : msrSyllableKind::kSyllableSkipNonRestNote;
 
           // create a skip syllable
           S_msrSyllable
             syllable =
               msrSyllable::create (
                 inputLineNumber,
-				        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+				        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
                 syllableKind,
                 fCurrentSyllableExtendKind,
                 fCurrentStanzaNumber,
@@ -22802,23 +22800,23 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
 
   // take care of ongoing extends
   switch (fCurrentSyllableExtendKind) {
-    case msrSyllable::kSyllableExtendNone:
+    case msrSyllableExtendKind::kSyllableExtendNone:
       break;
-    case msrSyllable::kSyllableExtendEmpty: // JMI ???
+    case msrSyllableExtendKind::kSyllableExtendEmpty: // JMI ???
       break;
-    case msrSyllable::kSyllableExtendSingle:
+    case msrSyllableExtendKind::kSyllableExtendSingle:
       fOnGoingSyllableExtend = true;
       break;
-    case msrSyllable::kSyllableExtendStart:
+    case msrSyllableExtendKind::kSyllableExtendStart:
       fOnGoingSyllableExtend = true;
       break;
-    case msrSyllable::kSyllableExtendContinue:
+    case msrSyllableExtendKind::kSyllableExtendContinue:
       mfAssert (
         __FILE__, __LINE__,
         fOnGoingSyllableExtend,
         "fOnGoingSyllableExtend is false");
       break;
-    case msrSyllable::kSyllableExtendStop:
+    case msrSyllableExtendKind::kSyllableExtendStop:
       fOnGoingSyllableExtend = false;
       break;
   } // switch
@@ -24514,7 +24512,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
     rehearsalMark =
       msrRehearsalMark::create (
         inputLineNumber,
-        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+        nullptr, // will be set when rehearsal mark is appended to a measure JMI v0.9.66 PIM
         rehearsalKind,
         rehearsalValue,
         fCurrentDirectionPlacementKind);
@@ -25267,9 +25265,9 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
 
     S_msrHarmony
       harmony =
-        msrHarmony::createWithoutVoiceUplink (
+        msrHarmony::create (
           fCurrentHarmonyInputLineNumber,
-	        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+	        nullptr, // will be set when harmony is appended to a measure JMI v0.9.66 PIM
 
           fCurrentHarmonyRootQuarterTonesPitchKind,
 
@@ -25882,7 +25880,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
     figuredBass =
       msrFiguredBass::create (
         inputLineNumber,
-        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+        nullptr, // will be set when figured bass is appended to a measure JMI v0.9.66 PIM
         fCurrentFiguredBassSoundingWholeNotes,
         fCurrentFiguredBassDisplayWholeNotes,
         fCurrentFiguredBassParenthesesKind,
@@ -26001,7 +25999,7 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
   fCurrentHarpPedalsTuning =
     msrHarpPedalsTuning::create (
       inputLineNumber,
-			nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
+			nullptr); // will be set when harp pedals tuning is appended to a measure JMI v0.9.66 PIM
 
 
   // add it to the current part
@@ -26160,7 +26158,7 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
       damp =
         msrDamp::create (
 					inputLineNumber,
-					nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
+					nullptr); // will be set when damp is appended to a measure JMI v0.9.66 PIM
 
     // append it to the pending damps list
     fPendingDampsList.push_back (damp);
@@ -26195,7 +26193,7 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
       dampAll =
         msrDampAll::create (
 					inputLineNumber,
-					nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
+					nullptr); // will be set when damp all is appended to a measure JMI v0.9.66 PIM
 
     // append it to the pending damp alls list
     fPendingDampAllsList.push_back (dampAll);
@@ -26338,7 +26336,7 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
   fCurrentScordatura =
     msrScordatura::create (
 			inputLineNumber,
-			nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
+			nullptr); // will be set when scordatura is appended to a measure JMI v0.9.66 PIM
 }
 
 void mxsr2msrTranslator::visitStart (S_accord& elt)

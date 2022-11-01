@@ -169,21 +169,6 @@ S_msrVoice msrPart::createPartHarmoniesVoice (
 
 
 % -------------------------------------------------------------------------
-\section{Harmonies creation}
-% -------------------------------------------------------------------------
-
-There are several methods for harmonies creation:%%%JMI
-\begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src > grep create formats/msr/msrHarmonies.h
-    static SMARTP<msrHarmonyDegree> create (
-    static SMARTP<msrHarmony> createWithoutVoiceUplink (
-    SMARTP<msrHarmony> createHarmonyNewbornClone (
-//     SMARTP<msrHarmony> createHarmonyDeepClone ( // JMI ???
-    static SMARTP<msrHarmony> createWithVoiceUplink (
-\end{lstlisting}
-
-
-% -------------------------------------------------------------------------
 \section{Translating harmonies from MXSR to MSR}
 % -------------------------------------------------------------------------
 
@@ -333,7 +318,7 @@ void mxsr2msrTranslator::visitStart ( S_harmony& elt )
 % -------------------------------------------------------------------------
 
 Upon the second visit of \smartPointerType{S_harmony}, a \class{msrHarmony} instance is created, populated and appended to \fieldName{mxsr2msrTranslator}{fPendingHarmoniesList}.\\
-The voice uplink will be set later, hence the use of \method{msrHarmony}{createWithoutVoiceUplink}:
+The voice uplink will be set later, hence the use of \method{msrHarmony}{create}:
 \begin{lstlisting}[language=CPlusPlus]
 void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 {
@@ -365,7 +350,7 @@ void mxsr2msrTranslator::visitEnd ( S_harmony& elt )
 
     S_msrHarmony
       harmony =
-        msrHarmony::createWithoutVoiceUplink (
+        msrHarmony::create (
           fCurrentHarmonyInputLineNumber,
           // no harmoniesUpLinkToVoice yet
 
@@ -981,7 +966,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
     if (
       gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()
         ||
-      gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
+      gGlobalLpsr2lilypondOahGroup->getGenerateMeasurePositions ()
     ) {
       generateInputLineNumberAndOrMeasurePositionAsAComment (
         elt);

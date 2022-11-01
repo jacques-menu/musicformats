@@ -140,6 +140,7 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
     newbornClone =
       msrTuplet::create (
         fInputLineNumber,
+        nullptr, // will be set when tuplet is appended to a measure JMI v0.9.66 PIM
         fetchMeasureElementMeasureNumber (),
         fTupletNumber,
         fTupletBracketKind,
@@ -173,7 +174,7 @@ void msrTuplet::setTupletMeasurePosition (
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting tuplet's position in measure of " << asString () <<
       " to " <<
@@ -210,7 +211,7 @@ S_msrMeasure msrTuplet::fetchTupletUpLinkToMeasure () const
       break;
 
     case msrTupletInKind::kTupletInMeasure:
-      result = fTupletDirectUpLinkToMeasure;
+      result = fMeasureElementUpLinkToMeasure;
       break;
 
     case msrTupletInKind::kTupletInTuplet:
@@ -379,7 +380,7 @@ void msrTuplet::appendNoteToTuplet (
 
   // register note's measure upLink // JMI ???
   note->
-    setNoteDirectUpLinkToMeasure (fTupletDirectUpLinkToMeasure);
+    setMeasureElementUpLinkToMeasure (fMeasureElementUpLinkToMeasure);
 
   // account for note duration in tuplet duration
   fMeasureElementSoundingWholeNotes +=
@@ -630,7 +631,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
       note <<
       " from tuplet " << asString () <<
       " in voice \"" <<
-      fTupletDirectUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"," <<
@@ -650,7 +651,7 @@ S_msrNote msrTuplet::removeFirstNoteFromTuplet (
     s <<
       "cannot remove the first note of an empty tuplet " <<
       " in voice \"" <<
-      fTupletDirectUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"";
@@ -718,7 +719,7 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
     s <<
       "cannot remove the last note of an empty tuplet " <<
       " in voice \"" <<
-      fTupletDirectUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ()->
           getVoiceName () <<
       "\"";
@@ -744,13 +745,13 @@ S_msrNote msrTuplet::removeLastNoteFromTuplet (
   return result;
 }
 
-Rational msrTuplet::setTupletMembersPositionsInMeasure (
+Rational msrTuplet::setTupletMembersMeasurePositions (
   S_msrMeasure    measure,
   const Rational& measurePosition)
   // returns the position in measure after the tuplet
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting tuplet members positions in measure of " << asString () <<
       " to '" <<
@@ -761,7 +762,7 @@ Rational msrTuplet::setTupletMembersPositionsInMeasure (
 #endif
 
   string context = // JMI v0.9.66
-    "setTupletMembersPositionsInMeasure()";
+    "setTupletMembersMeasurePositions()";
 
   // sanity check
   mfAssert (
@@ -775,8 +776,8 @@ Rational msrTuplet::setTupletMembersPositionsInMeasure (
 if (false) { // JMI
   // compute tuplet's position in voice
   Rational
-     positionFromBeginningOfVoice =
-      fTupletDirectUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
+     voicePosition =
+      fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
         +
       measurePosition;
 
@@ -792,11 +793,11 @@ if (false) { // JMI
   // update current position in voice
   S_msrVoice
     voice =
-      fTupletDirectUpLinkToMeasure->
+      fMeasureElementUpLinkToMeasure->
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionFromBeginningOfVoice (
+    incrementCurrentVoicePosition (
       fMeasureElementSoundingWholeNotes);
 }
 
@@ -816,14 +817,14 @@ if (false) { // JMI
     ) {
       // note
       note->
-        setNoteDirectUpLinkToMeasure (
+        setMeasureElementUpLinkToMeasure (
           measure);
 
       note->
         setNoteMeasurePosition (
           measure,
           currentPosition,
-          "msrTuplet::setTupletMembersPositionsInMeasure()");
+          "msrTuplet::setTupletMembersMeasurePositions()");
 
       currentPosition +=
         note->
@@ -929,7 +930,7 @@ void msrTuplet::finalizeTuplet (
 
 / * JMI v0.9.66
   // we can now set the position in measure for all the tuplet members
-  setTupletMembersPositionsInMeasure (
+  setTupletMembersMeasurePositions (
     fMeasureElementMeasurePosition);
   * /
 }
@@ -1134,8 +1135,8 @@ void msrTuplet::print (ostream& os) const
     fMeasureElementMeasurePosition <<
     endl <<
     setw (fieldWidth) <<
-    "fPositionFromBeginningOfVoice" << " : " <<
-    fMeasureElementPositionFromBeginningOfVoice <<
+    "fVoicePosition" << " : " <<
+    fMeasureElementVoicePosition <<
     endl << endl;
 
 /* JMI ???
@@ -1173,10 +1174,10 @@ void msrTuplet::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fTupletDirectUpLinkToMeasure" << " : ";
-  if (fTupletDirectUpLinkToMeasure) {
+    "fMeasureElementUpLinkToMeasure" << " : ";
+  if (fMeasureElementUpLinkToMeasure) {
     os <<
-      fTupletDirectUpLinkToMeasure->asShortString ();
+      fMeasureElementUpLinkToMeasure->asShortString ();
   }
   else {
     os << "[NONE]";
@@ -1279,8 +1280,8 @@ void msrTuplet::printShort (ostream& os)
     fMeasureElementMeasurePosition <<
 //     endl <<
 //     setw (fieldWidth) <<
-//     "fMeasureElementPositionFromBeginningOfVoice" << " : " <<
-//     fMeasureElementPositionFromBeginningOfVoice <<
+//     "fMeasureElementVoicePosition" << " : " <<
+//     fMeasureElementVoicePosition <<
     endl << endl;
 
 /* JMI ???
@@ -1326,10 +1327,10 @@ void msrTuplet::printShort (ostream& os)
 
   os << left <<
     setw (fieldWidth) <<
-    "fTupletDirectUpLinkToMeasure" << " : ";
-  if (fTupletDirectUpLinkToMeasure) {
+    "fMeasureElementUpLinkToMeasure" << " : ";
+  if (fMeasureElementUpLinkToMeasure) {
     os <<
-      fTupletDirectUpLinkToMeasure->asShortString ();
+      fMeasureElementUpLinkToMeasure->asShortString ();
   }
   else {
     os << "[NONE]";

@@ -134,7 +134,7 @@ string msrArticulation::articulationKindAsString () const
 string msrArticulation::articulationPlacementKindAsString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fArticulationPlacementKind);
 }
 

@@ -33,7 +33,7 @@ class EXP msrBarCheck : public msrMeasureElement
                             int          inputLineNumber,
                             S_msrMeasure upLinkToMeasure);
 
-    static SMARTP<msrBarCheck> createWithNextBarPuristNumber (
+    static SMARTP<msrBarCheck> createWithNextBarPuristNumber ( // JMI superflous??? v0.9.66
                             int           inputLineNumber,
                             S_msrMeasure  upLinkToMeasure,
                             const string& nextBarOriginalNumber,

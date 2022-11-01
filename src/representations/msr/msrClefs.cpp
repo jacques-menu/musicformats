@@ -20,6 +20,8 @@
 
 #include "msrWae.h"
 
+#include "msrMeasures.h"
+
 #include "msrClefs.h"
 
 #include "oahOah.h"
