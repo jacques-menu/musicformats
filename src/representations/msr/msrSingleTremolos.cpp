@@ -56,7 +56,7 @@ msrSingleTremolo::~msrSingleTremolo ()
 string msrSingleTremolo::singleTremoloPlacementKindAsString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fSingleTremoloPlacementKind);
 }
 
@@ -133,7 +133,7 @@ ostream& operator << (ostream& os, const S_msrSingleTremolo& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

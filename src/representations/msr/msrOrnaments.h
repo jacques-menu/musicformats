@@ -13,25 +13,24 @@ class msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
+// data types
+
+enum msrOrnamentKind {
+  kOrnamentTrill, // JMI kOrnamentDashes,
+  kOrnamentTurn, kOrnamentInvertedTurn, kOrnamentDelayedTurn,
+  kOrnamentDelayedInvertedTurn, kOrnamentVerticalTurn,
+  kOrnamentMordent, kOrnamentInvertedMordent,
+  kOrnamentSchleifer,
+  kOrnamentShake,
+  kOrnamentAccidentalKind
+};
+
+string ornamentKindAsString (
+  msrOrnamentKind ornamentKind);
+
 class EXP msrOrnament : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrOrnamentKind {
-      kOrnamentTrill, // JMI kOrnamentDashes,
-      kOrnamentTurn, kOrnamentInvertedTurn, kOrnamentDelayedTurn,
-      kOrnamentDelayedInvertedTurn, kOrnamentVerticalTurn,
-      kOrnamentMordent, kOrnamentInvertedMordent,
-      kOrnamentSchleifer,
-      kOrnamentShake,
-      kOrnamentAccidentalKind
-    };
-
-    static string ornamentKindAsString (
-      msrOrnamentKind ornamentKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -93,12 +92,6 @@ class EXP msrOrnament : public msrElement
 
     // public services
     // ------------------------------------------------------
-
-    string                ornamentKindAsString () const;
-
-    string                ornamentPlacementKindAsString () const;
-
-    string                ornamentAccidentalKindAsString () const;
 
   public:
 

@@ -330,7 +330,7 @@ void msrPart::setPartCurrentMeasurePosition (
   const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting part current position in measure to " <<
       measurePosition <<
@@ -368,7 +368,7 @@ void msrPart::incrementPartCurrentMeasurePosition (
   fPartCurrentMeasurePosition += duration;
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Incrementing part current position in measure by " <<
       duration <<
@@ -386,7 +386,7 @@ void msrPart::decrementPartCurrentMeasurePosition (
   const Rational& duration)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Decrementing part current position in measure by " <<
       duration <<
@@ -418,7 +418,7 @@ void msrPart::decrementPartCurrentMeasurePosition (
   }
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "The new part current position in measure is " <<
       fPartCurrentMeasurePosition <<
@@ -798,7 +798,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
   if (
     gGlobalTracingOahGroup->getTraceMeasures ()
       ||
-    gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+    gGlobalTracingOahGroup->getTraceMeasurePositions ()
   ) {
     gLogStream <<
       "===> fPartMeasuresWholeNotesDurationsVector contents: " <<
@@ -831,7 +831,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
     if (
       gGlobalTracingOahGroup->getTraceMeasures ()
         ||
-      gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+      gGlobalTracingOahGroup->getTraceMeasurePositions ()
     ) {
       gLogStream <<
         "The measure with ordinal number " <<
@@ -856,7 +856,7 @@ void msrPart::registerOrdinalMeasureNumberWholeNotesDuration (
     if (
       gGlobalTracingOahGroup->getTraceMeasures ()
         ||
-      gGlobalTracingOahGroup->getTracePositionsInMeasures ()
+      gGlobalTracingOahGroup->getTraceMeasurePositions ()
     ) {
       gLogStream <<
         "The measure with ordinal number " <<
@@ -1110,7 +1110,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
   const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<

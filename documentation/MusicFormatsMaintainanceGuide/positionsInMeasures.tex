@@ -26,10 +26,10 @@ class EXP msrMeasureElement : public msrElement
     string                fetchMeasureElementMeasureNumber ();
 
     rational              fMeasureElementMeasurePosition;
-    rational              fMeasureElementPositionFromBeginningOfVoice;
+    rational              fMeasureElementVoicePosition;
 
-    msrMoment             fMeasureElementMomentInMeasure;
-    msrMoment             fMeasureElementMomentFromBeginningOfVoice;
+    msrMoment             fMeasureElementMeasureMoment;
+    msrMoment             fMeasureElementVoiceMoment;
 };
 \end{lstlisting}
 

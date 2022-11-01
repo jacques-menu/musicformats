@@ -205,7 +205,7 @@ string msrLigature::asString () const
       fLigatureLineTypeKind) <<
 
     "ligaturePlacementKind" << " : " <<
-    msrPlacementKindAsString (
+    placementKindAsString (
       fLigaturePlacementKind) <<
 
     ", line " << fInputLineNumber <<
@@ -238,7 +238,7 @@ void msrLigature::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     "ligaturePlacementKind" << " : " <<
-    msrPlacementKindAsString (
+    placementKindAsString (
       fLigaturePlacementKind) <<
     endl;
 

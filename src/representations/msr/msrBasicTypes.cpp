@@ -16739,7 +16739,7 @@ msrPlacementKind msrPlacementKindFromString (
   return result;
 }
 
-string msrPlacementKindAsString (
+string placementKindAsString (
   msrPlacementKind placementKind)
 {
   string result;
@@ -16765,7 +16765,7 @@ string msrPlacementKindAsString (
 
 ostream& operator << (ostream& os, const msrPlacementKind& elt)
 {
-  os << msrPlacementKindAsString (elt);
+  os << placementKindAsString (elt);
   return os;
 }
 

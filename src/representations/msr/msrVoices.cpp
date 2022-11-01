@@ -545,8 +545,8 @@ void msrVoice::initializeVoice (
   fVoiceContainsMeasureRepeats = false;
 
     // position in voice
-  fCurrentPositionFromBeginningOfVoice = Rational (0, 1);
-  fCurrentMomentFromBeginningOfVoice = msrMoment (Rational (0,1), Rational (0,1));
+  fCurrentVoicePosition = Rational (0, 1);
+  fCurrentVoiceMoment = msrMoment (Rational (0,1), Rational (0,1));
 
   // voice finalization
   fVoiceHasBeenFinalized = false;
@@ -1884,7 +1884,7 @@ void msrVoice::insertHiddenMeasureAndBarLineInVoiceClone (
   const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
       measurePosition <<
@@ -2422,7 +2422,7 @@ void msrVoice::padUpToMeasurePositionInVoice (
   const Rational& wholeNotesMeasurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Padding up to position in measure '" <<
       wholeNotesMeasurePosition <<
@@ -2467,7 +2467,7 @@ void msrVoice::backupByWholeNotesStepLengthInVoice (
   const Rational& backupTargetMeasureElementMeasurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Backup by a '" <<
       backupTargetMeasureElementMeasurePosition <<
@@ -10567,11 +10567,11 @@ void msrVoice::print (ostream& os) const
     endl;
 
   os << left <<
-    setw (fieldWidth) << "fCurrentPositionFromBeginningOfVoice" << " : " <<
-    fCurrentPositionFromBeginningOfVoice <<
+    setw (fieldWidth) << "fCurrentVoicePosition" << " : " <<
+    fCurrentVoicePosition <<
     endl <<
-    setw (fieldWidth) << "fCurrentMomentFromBeginningOfVoice" << " : " <<
-    fCurrentMomentFromBeginningOfVoice;
+    setw (fieldWidth) << "fCurrentVoiceMoment" << " : " <<
+    fCurrentVoiceMoment;
 
   os << left <<
     setw (fieldWidth) << "fMusicHasBeenInsertedInVoice" << " : " <<

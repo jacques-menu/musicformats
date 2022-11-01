@@ -236,8 +236,8 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  getTraceMeasuresDetails () const
                               { return fTraceMeasuresDetails; }
 
-    Bool                  getTracePositionsInMeasures () const
-                              { return fTracePositionsInMeasures; }
+    Bool                  getTraceMeasurePositions () const
+                              { return fTraceMeasurePositions; }
     Bool                  getTraceMomentsInMeasures () const
                               { return fTraceMomentsInMeasures; }
 
@@ -823,7 +823,7 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  fTraceMeasures;
     Bool                  fTraceMeasuresDetails;
 
-    Bool                  fTracePositionsInMeasures;
+    Bool                  fTraceMeasurePositions;
     Bool                  fTraceMomentsInMeasures;
 
     set<int>              fTraceDetailedMeasureNumbersSet;

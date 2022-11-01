@@ -60,7 +60,7 @@ S_bsrLine bsrPageElement::getUpLinkToBsrLine () const
 {
   S_msrVoice result;
 
-  if (fNoteDirectUpLinkToMeasure) {
+  if (fMeasureElementUpLinkToMeasure) {
     result =
   return fUpLinkToBsrLine;
   }

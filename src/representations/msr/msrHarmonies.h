@@ -134,10 +134,9 @@ class EXP msrHarmony : public msrMeasureElement
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<msrHarmony> createWithoutVoiceUplink (
+    static SMARTP<msrHarmony> create (
                             int                      inputLineNumber,
                             S_msrMeasure             upLinkToMeasure,
-                            // no harmoniesUpLinkToVoice yet
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
                             const string&            harmonyKindText,
@@ -155,24 +154,6 @@ class EXP msrHarmony : public msrMeasureElement
     SMARTP<msrHarmony> createHarmonyDeepClone ( // JMI ???
                             S_msrVoice containingVoice);
 
-    // applications API
-    // ------------------------------------------------------
-
-    static SMARTP<msrHarmony> createWithVoiceUplink (
-                            int                      inputLineNumber,
-                            S_msrMeasure             upLinkToMeasure,
-                            S_msrVoice               harmoniesUpLinkToVoice,
-                            msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
-                            msrHarmonyKind           harmonyKind,
-                            const string&            harmonyKindText,
-                            int                      harmonyInversion,
-                            msrQuarterTonesPitchKind harmonyBassQuarterTonesPitchKind,
-                            const Rational&          harmonySoundingWholeNotes,
-                            const Rational&          harmonyDisplayWholeNotes,
-                            int                      harmoniesStaffNumber,
-                            msrTupletFactor          harmonyTupletFactor,
-                            const Rational&          harmonyWholeNotesOffset);
-
   protected:
 
     // constructors/destructor
@@ -180,7 +161,7 @@ class EXP msrHarmony : public msrMeasureElement
 
                           msrHarmony (
                             int                      inputLineNumber,
-                            S_msrVoice               harmoniesUpLinkToVoice,
+                            S_msrMeasure             upLinkToMeasure,
                             msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
                             msrHarmonyKind           harmonyKind,
                             const string&            harmonyKindText,

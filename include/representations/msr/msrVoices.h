@@ -920,17 +920,17 @@ class EXP msrVoice : public msrElement
 
     // position in voice
 
-    void                  incrementCurrentPositionFromBeginningOfVoice (
+    void                  incrementCurrentVoicePosition (
                             const Rational& delta)
                               {
-                                fCurrentPositionFromBeginningOfVoice += delta;
+                                fCurrentVoicePosition += delta;
                               }
 
-    Rational              getCurrentPositionFromBeginningOfVoice () const
-                              { return fCurrentPositionFromBeginningOfVoice; }
+    Rational              getCurrentVoicePosition () const
+                              { return fCurrentVoicePosition; }
 
-    const msrMoment&      getCurrentMomentFromBeginningOfVoice () const
-                              { return fCurrentMomentFromBeginningOfVoice; }
+    const msrMoment&      getCurrentVoiceMoment () const
+                              { return fCurrentVoiceMoment; }
 
     // beams begin, continue and end check
 
@@ -1447,8 +1447,8 @@ class EXP msrVoice : public msrElement
 
     // current position in voice
 
-    Rational              fCurrentPositionFromBeginningOfVoice;
-    msrMoment             fCurrentMomentFromBeginningOfVoice;
+    Rational              fCurrentVoicePosition;
+    msrMoment             fCurrentVoiceMoment;
 
     // voice finalization
 

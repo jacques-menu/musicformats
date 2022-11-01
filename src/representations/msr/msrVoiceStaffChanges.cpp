@@ -16,6 +16,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasures.h"
+
 #include "msrVoiceStaffChanges.h"
 
 #include "oahOah.h"
@@ -73,6 +75,7 @@ S_msrVoiceStaffChange msrVoiceStaffChange::createStaffChangeNewbornClone ()
     newbornClone =
       msrVoiceStaffChange::create (
         fInputLineNumber,
+        nullptr, // will be set when voice staff change is appended to a measure JMI v0.9.66 PIM
         fStaffToChangeTo);
 
   return newbornClone;

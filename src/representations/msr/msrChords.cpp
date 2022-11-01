@@ -45,6 +45,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrChord msrChord::create (
   int             inputLineNumber,
+  S_msrMeasure    upLinkToMeasure,
   const Rational& chordSoundingWholeNotes,
   const Rational& chordDisplayWholeNotes,
   msrDurationKind chordGraphicDurationKind)
@@ -64,6 +65,7 @@ S_msrChord msrChord::create (
   msrChord* o =
     new msrChord (
       inputLineNumber,
+      upLinkToMeasure,
       chordSoundingWholeNotes, chordDisplayWholeNotes,
       chordGraphicDurationKind);
   assert (o != nullptr);
@@ -73,10 +75,13 @@ S_msrChord msrChord::create (
 
 msrChord::msrChord (
   int             inputLineNumber,
+  S_msrMeasure    upLinkToMeasure,
   const Rational& chordSoundingWholeNotes,
   const Rational& chordDisplayWholeNotes,
   msrDurationKind chordGraphicDurationKind)
-    : msrTupletElement (inputLineNumber)
+    : msrTupletElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fChordKind = msrChordInKind::k_NoChordIn;
 
@@ -118,7 +123,7 @@ S_msrChord msrChord::createChordNewbornClone (
     newbornClone =
       msrChord::create (
         fInputLineNumber,
-  // JMI      fChordSoundingWholeNotes,
+				nullptr, // will be set when chord is appended to a measure JMI v0.9.66 PIM
         fMeasureElementSoundingWholeNotes,
         fChordDisplayWholeNotes,
         fChordGraphicDurationKind);
@@ -146,7 +151,7 @@ void msrChord::setChordMeasurePosition (
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting chord's position in measure of " <<
       asString () <<
@@ -185,7 +190,7 @@ S_msrMeasure msrChord::fetchChordUpLinkToMeasure () const
       break;
 
     case msrChordInKind::kChordInMeasure:
-      result = fChordDirectUpLinkToMeasure;
+      result = fMeasureElementUpLinkToMeasure;
       break;
 
     case msrChordInKind::kChordInTuplet:
@@ -341,7 +346,7 @@ void msrChord::setChordMembersMeasurePosition (
    const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting chord members positions in measure of " << asString () <<
       " to '" <<
@@ -362,14 +367,15 @@ void msrChord::setChordMembersMeasurePosition (
   if (false) { // JMI CAFE
   // compute chord's position in voice
   Rational
-     positionFromBeginningOfVoice =
-      fChordDirectUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
+     voicePosition =
+      fMeasureElementUpLinkToMeasure->
+        getMeasureVoicePosition ()
         +
       measurePosition;
 
   // set chord's position in voice
-  setMeasureElementPositionFromBeginningOfVoice (
-    positionFromBeginningOfVoice,
+  setMeasureElementVoicePosition (
+    voicePosition,
     context);
 
   // update current position in voice
@@ -379,8 +385,9 @@ void msrChord::setChordMembersMeasurePosition (
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionFromBeginningOfVoice (
-      fChordNotesVector [0]->getMeasureElementSoundingWholeNotes ());
+    incrementCurrentVoicePosition (
+      fChordNotesVector [0]->
+        getMeasureElementSoundingWholeNotes ());
 }
 
   // set the chord's elements' position in measure
@@ -388,7 +395,7 @@ void msrChord::setChordMembersMeasurePosition (
     for (S_msrNote note : fChordNotesVector) {
       // set note's measure uplink
       note->
-        setNoteDirectUpLinkToMeasure (
+        setMeasureElementUpLinkToMeasure (
           measure);
 
       // set note's position in measure
@@ -400,8 +407,8 @@ void msrChord::setChordMembersMeasurePosition (
 
 //    JMI   set note's position in voice v0.9.66
 //       note->
-//         setMeasureElementPositionFromBeginningOfVoice (
-//           positionFromBeginningOfVoice,
+//         setMeasureElementVoicePosition (
+//           voicePosition,
 //           context); // they all share the same one
     } // for
   }
@@ -445,8 +452,8 @@ void msrChord::addFirstNoteToChord (
 /* JMI too early v0.9.66
   // register note's measure upLink
   note->
-    setNoteDirectUpLinkToMeasure (
-      fChordDirectUpLinkToMeasure);
+    setMeasureElementUpLinkToMeasure (
+      fMeasureElementUpLinkToMeasure);
 */
 
   // mark note as belonging to a chord
@@ -758,18 +765,14 @@ void msrChord::appendTechnicalWithStringToChord (
 
 void msrChord::appendOrnamentToChord (S_msrOrnament orn)
 {
-  msrOrnament::msrOrnamentKind
+  msrOrnamentKind
     ornamentKind =
       orn->
         getOrnamentKind ();
 
   // don't append the same ornament several times
-  for (
-    list<S_msrOrnament>::const_iterator i = fChordOrnaments.begin ();
-    i!=fChordOrnaments.end ();
-    ++i
-  ) {
-      if ((*i)->getOrnamentKind () == ornamentKind)
+  for (S_msrOrnament ornament : fChordOrnaments) {
+      if (ornament->getOrnamentKind () == ornamentKind)
         return;
   } // for
 
@@ -777,7 +780,7 @@ void msrChord::appendOrnamentToChord (S_msrOrnament orn)
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending ornament '" <<
-      orn->ornamentKindAsString () <<
+      ornamentKindAsString (orn->getOrnamentKind ()) <<
       "' to chord" <<
       endl;
   }
@@ -794,13 +797,9 @@ void msrChord::appendGlissandoToChord (S_msrGlissando gliss)
         getGlissandoTypeKind ();
 
   // don't append the same slissando several times
-  for (
-    list<S_msrGlissando>::const_iterator i = fChordGlissandos.begin ();
-    i!=fChordGlissandos.end ();
-    ++i
-  ) {
-      if ((*i)->getGlissandoTypeKind () == glissandoTypeKind)
-        return;
+  for (S_msrGlissando glissando : fChordGlissandos) {
+    if (glissando->getGlissandoTypeKind () == glissandoTypeKind)
+      return;
   } // for
 
 #ifdef TRACING_IS_ENABLED
@@ -948,7 +947,7 @@ void msrChord::finalizeChord (
 
   // we can now set the position in measures for all the chord members JMI v0.9.66
 //   setChordMembersMeasurePosition (
-//     fChordDirectUpLinkToMeasure,
+//     fMeasureElementUpLinkToMeasure,
 //     fMeasureElementMeasurePosition);
 }
 
@@ -1440,9 +1439,9 @@ void msrChord::print (ostream& os) const
 {
   Rational
     chordMeasureFullLength =
-      fChordDirectUpLinkToMeasure
+      fMeasureElementUpLinkToMeasure
         ?
-          fChordDirectUpLinkToMeasure->
+          fMeasureElementUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
         : Rational (0, 1); // JMI
 
@@ -1473,7 +1472,7 @@ void msrChord::print (ostream& os) const
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
     endl <<
 //     setw (fieldWidth) <<
-//     "fMeasureElementPositionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
+//     "fMeasureElementVoicePosition" << " : " << fMeasureElementVoicePosition <<
 //     endl <<
     setw (fieldWidth) <<
     "chordMeasureFullLength" << " : " << chordMeasureFullLength <<
@@ -1481,10 +1480,10 @@ void msrChord::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "fChordDirectUpLinkToMeasure" << " : ";
+    "fMeasureElementUpLinkToMeasure" << " : ";
   if (fChordDirectUpLinkToTuplet) {
     os <<
-      fChordDirectUpLinkToMeasure->asShortString ();
+      fMeasureElementUpLinkToMeasure->asShortString ();
   }
   else {
     os << "[NONE]";
@@ -1510,7 +1509,7 @@ void msrChord::print (ostream& os) const
     endl;
 
   // print simplified position in measure if relevant
-// JMI  if (fChordDirectUpLinkToMeasure) {
+// JMI  if (fMeasureElementUpLinkToMeasure) {
     // the chord measure upLink may not have been set yet
     Rational
       chordPositionBis =
@@ -2243,9 +2242,9 @@ void msrChord::printShort (ostream& os) const
 {
   Rational
     chordMeasureFullLength =
-      fChordDirectUpLinkToMeasure
+      fMeasureElementUpLinkToMeasure
         ?
-          fChordDirectUpLinkToMeasure->
+          fMeasureElementUpLinkToMeasure->
             getFullMeasureWholeNotesDuration ()
         : Rational (0, 1); // JMI
 
@@ -2276,7 +2275,7 @@ void msrChord::printShort (ostream& os) const
     "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
     endl <<
 //     setw (fieldWidth) <<
-//     "fMeasureElementPositionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
+//     "fMeasureElementVoicePosition" << " : " << fMeasureElementVoicePosition <<
 //     endl <<
     setw (fieldWidth) <<
     "chordMeasureFullLength" << " : " << chordMeasureFullLength <<

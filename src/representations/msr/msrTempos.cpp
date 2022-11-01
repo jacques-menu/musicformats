@@ -1523,7 +1523,7 @@ void msrTempo::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fTempoPlacementKind" << " : " <<
-    msrPlacementKindAsString (
+    placementKindAsString (
       fTempoPlacementKind) <<
     endl;
 

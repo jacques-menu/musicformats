@@ -282,21 +282,21 @@ class EXP msrMeasure : public msrSegmentElement
 
     // position in voice
 
-    void                  setMeasurePositionFromBeginningOfVoice (
+    void                  setMeasureVoicePosition (
                             const Rational& value)
-                              { fMeasurePositionFromBeginningOfVoice = value; }
-//     void                  incrementMeasurePositionFromBeginningOfVoice (
+                              { fMeasureVoicePosition = value; }
+//     void                  incrementMeasureVoicePosition (
 //                             const Rational& wholeNotesDelta);
 
-    Rational              getMeasurePositionFromBeginningOfVoice () const
-                              { return fMeasurePositionFromBeginningOfVoice; }
+    Rational              getMeasureVoicePosition () const
+                              { return fMeasureVoicePosition; }
 
-    void                  setMeasureMomentFromBeginningOfVoice (
+    void                  setMeasureVoiceMoment (
                             msrMoment value)
-                              { fMeasureMomentFromBeginningOfVoice = value; }
+                              { fMeasureVoiceMoment = value; }
 
-    const msrMoment&      getMeasureMomentFromBeginningOfVoice () const
-                              { return fMeasureMomentFromBeginningOfVoice; }
+    const msrMoment&      getMeasureVoiceMoment () const
+                              { return fMeasureVoiceMoment; }
 
     // notes flat list
 
@@ -753,8 +753,8 @@ class EXP msrMeasure : public msrSegmentElement
                           fMeasureRepeatContextKind;
 
     // position in voice
-    Rational              fMeasurePositionFromBeginningOfVoice;
-    msrMoment             fMeasureMomentFromBeginningOfVoice;
+    Rational              fMeasureVoicePosition;
+    msrMoment             fMeasureVoiceMoment;
 
     // notes flat list
     // this is used to identify solo notes and rests in measures slices

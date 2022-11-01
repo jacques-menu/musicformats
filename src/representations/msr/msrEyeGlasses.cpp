@@ -24,6 +24,8 @@
 
 #include "msrOah.h"
 
+#include "msrMeasures.h"
+
 #include "msrEyeGlasses.h"
 
 
@@ -39,7 +41,8 @@ S_msrEyeGlasses msrEyeGlasses::create (
 {
   msrEyeGlasses* o =
     new msrEyeGlasses (
-      inputLineNumber);
+      inputLineNumber,
+      upLinkToMeasure);
   assert (o != nullptr);
   return o;
 }

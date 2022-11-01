@@ -1865,7 +1865,7 @@ enum class msrPlacementKind {
   kPlacementAbove, kPlacementBelow
 };
 
-string msrPlacementKindAsString (
+string placementKindAsString (
   msrPlacementKind placementKind);
 
 ostream& operator << (ostream& os, msrPlacementKind& elt);

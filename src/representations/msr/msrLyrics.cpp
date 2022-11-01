@@ -51,7 +51,7 @@ S_msrSyllable msrSyllable::create (
   const string&         syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           SyllableUpLinkToStanza)
+  S_msrStanza           syllableUpLinkToStanza)
 {
   msrSyllable* o =
     new msrSyllable (
@@ -62,7 +62,7 @@ S_msrSyllable msrSyllable::create (
       syllableStanzaNumber,
       syllableWholeNotes,
       syllableTupletFactor,
-      SyllableUpLinkToStanza);
+      syllableUpLinkToStanza);
   assert (o != nullptr);
 
   return o;
@@ -76,11 +76,11 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
   const string&         syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           SyllableUpLinkToStanza,
+  S_msrStanza           syllableUpLinkToStanza,
   int                   syllableNextMeasurePuristNumber)
 {
   msrSyllable* o =
-    new msrSyllable (
+    msrSyllable::create (
       inputLineNumber,
       upLinkToMeasure,
       syllableKind,
@@ -88,9 +88,12 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
       syllableStanzaNumber,
       syllableWholeNotes,
       syllableTupletFactor,
-      SyllableUpLinkToStanza,
-      syllableNextMeasurePuristNumber);
+      syllableUpLinkToStanza);
   assert (o != nullptr);
+
+  o->
+    setSyllableNextMeasurePuristNumber (
+      syllableNextMeasurePuristNumber);
 
   return o;
 }
@@ -103,7 +106,7 @@ msrSyllable::msrSyllable (
   const string&         syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           SyllableUpLinkToStanza)
+  S_msrStanza           syllableUpLinkToStanza)
     : msrMeasureElement (
         inputLineNumber,
         upLinkToMeasure)
@@ -111,12 +114,12 @@ msrSyllable::msrSyllable (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    SyllableUpLinkToStanza != nullptr,
-    "SyllableUpLinkToStanza is null");
+    syllableUpLinkToStanza != nullptr,
+    "syllableUpLinkToStanza is null");
 
   // set syllable's stanza upLink
   fSyllableUpLinkToStanza =
-    SyllableUpLinkToStanza;
+    syllableUpLinkToStanza;
 
   fSyllableKind = syllableKind;
 
@@ -148,58 +151,6 @@ msrSyllable::msrSyllable (
 #endif
 }
 
-msrSyllable::msrSyllable (
-  int                   inputLineNumber,
-  msrSyllableKind       syllableKind,
-  msrSyllableExtendKind syllableExtendKind,
-  const string&         syllableStanzaNumber,
-  const Rational&       syllableWholeNotes,
-  msrTupletFactor       syllableTupletFactor,
-  S_msrStanza           SyllableUpLinkToStanza,
-  int                   syllableNextMeasurePuristNumber)
-    : msrSyllable (
-        inputLineNumber,
-        syllableKind,
-        syllableExtendKind,
-        syllableStanzaNumber,
-        syllableWholeNotes,
-        syllableTupletFactor,
-        SyllableUpLinkToStanza)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
-    gLogStream <<
-      "Setting syllable next measure purist number to " <<
-      fSyllableNextMeasurePuristNumber <<
-      endl;
-  }
-#endif
-
-  switch (fSyllableKind) {
-    case msrSyllable::kSyllableNone:
-    case msrSyllable::kSyllableSingle:
-    case msrSyllable::kSyllableBegin:
-    case msrSyllable::kSyllableMiddle:
-    case msrSyllable::kSyllableEnd:
-    case msrSyllable::kSyllableOnRestNote:
-    case msrSyllable::kSyllableSkipRestNote:
-    case msrSyllable::kSyllableSkipNonRestNote:
-    case msrSyllable::kSyllableMeasureEnd:
-      msrInternalError (
-        gGlobalServiceRunData->getInputSourceName (),
-        fInputLineNumber,
-        __FILE__, __LINE__,
-        "syllable with next measure purist number is no line nor page break");
-      break;
-
-    case msrSyllable::kSyllableLineBreak:
-    case msrSyllable::kSyllablePageBreak:
-      break;
-  } // switch
-
-  fSyllableNextMeasurePuristNumber = syllableNextMeasurePuristNumber;
-}
-
 msrSyllable::~msrSyllable ()
 {}
 
@@ -226,6 +177,7 @@ S_msrSyllable msrSyllable::createSyllableNewbornClone (
     newbornClone =
       msrSyllable::create (
         fInputLineNumber,
+        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
         fSyllableKind,
         fSyllableExtendKind,
         fSyllableStanzaNumber,
@@ -276,6 +228,7 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
     syllableDeepClone =
       msrSyllable::create (
         fInputLineNumber,
+        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
         fSyllableKind,
         fSyllableExtendKind,
         fSyllableStanzaNumber,
@@ -303,13 +256,60 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   return syllableDeepClone;
 }
 
+void msrSyllable:: setSyllableNextMeasurePuristNumber (
+  int puristMeasureNumber)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceLyrics ()) {
+    gLogStream <<
+      "Setting syllable next measure purist number to " <<
+      fSyllableNextMeasurePuristNumber <<
+      endl;
+  }
+#endif
+
+  switch (fSyllableKind) {
+    case msrSyllableKind::kSyllableNone:
+    case msrSyllableKind::kSyllableSingle:
+    case msrSyllableKind::kSyllableBegin:
+    case msrSyllableKind::kSyllableMiddle:
+    case msrSyllableKind::kSyllableEnd:
+    case msrSyllableKind::kSyllableOnRestNote:
+    case msrSyllableKind::kSyllableSkipRestNote:
+    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableMeasureEnd:
+      {
+        stringstream s;
+
+        s <<
+          "syllable with next measure purist number '" <<
+          puristMeasureNumber <<
+          "' is no line nor page break"; // JMI v0.9.66
+
+        msrInternalError (
+          gGlobalServiceRunData->getInputSourceName (),
+          fInputLineNumber,
+          __FILE__, __LINE__,
+          s.str ());
+      }
+      break;
+
+    case msrSyllableKind::kSyllableLineBreak:
+    case msrSyllableKind::kSyllablePageBreak:
+      break;
+  } // switch
+
+  fSyllableNextMeasurePuristNumber =
+    puristMeasureNumber;
+}
+
 void msrSyllable::setSyllableMeasurePosition (
   const S_msrMeasure measure,
   const Rational&    measurePosition,
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting syllable's position in measure of " << asString () <<
       " to " <<
@@ -499,49 +499,49 @@ string msrSyllable::syllableWholeNotesAsMsrString () const
   return result;
 }
 
-string msrSyllable::syllableKindAsString (
+string syllableKindAsString (
   msrSyllableKind syllableKind)
 {
   string result;
 
   switch (syllableKind) {
-    case msrSyllable::kSyllableNone:
+    case msrSyllableKind::kSyllableNone:
       result = "kSyllableNone";
       break;
 
-    case msrSyllable::kSyllableSingle:
+    case msrSyllableKind::kSyllableSingle:
       result = "kSyllableSingle";
       break;
 
-    case msrSyllable::kSyllableBegin:
+    case msrSyllableKind::kSyllableBegin:
       result = "kSyllableBegin";
       break;
-    case msrSyllable::kSyllableMiddle:
+    case msrSyllableKind::kSyllableMiddle:
       result = "kSyllableMiddle";
       break;
-    case msrSyllable::kSyllableEnd:
+    case msrSyllableKind::kSyllableEnd:
       result = "kSyllableEnd";
       break;
 
-    case msrSyllable::kSyllableOnRestNote:
+    case msrSyllableKind::kSyllableOnRestNote:
       result = "kSyllableOnRestNote";
       break;
 
-    case msrSyllable::kSyllableSkipRestNote:
+    case msrSyllableKind::kSyllableSkipRestNote:
       result = "kSyllableSkipRestNote";
       break;
-    case msrSyllable::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableSkipNonRestNote:
       result = "kSyllableSkipNonRestNote";
       break;
 
-    case msrSyllable::kSyllableMeasureEnd:
+    case msrSyllableKind::kSyllableMeasureEnd:
       result = "kSyllableMeasureEnd";
       break;
 
-    case msrSyllable::kSyllableLineBreak:
+    case msrSyllableKind::kSyllableLineBreak:
       result = "kSyllableLineBreak";
       break;
-    case msrSyllable::kSyllablePageBreak:
+    case msrSyllableKind::kSyllablePageBreak:
       result = "kSyllablePageBreak";
       break;
   } // switch
@@ -549,43 +549,33 @@ string msrSyllable::syllableKindAsString (
   return result;
 }
 
-string msrSyllable::syllableKindAsString () const
-{
-  return syllableKindAsString (fSyllableKind);
-}
-
-string msrSyllable::syllableExtendKindAsString (
+string syllableExtendKindAsString (
   msrSyllableExtendKind syllableExtendKind)
 {
   string result;
 
   switch (syllableExtendKind) {
-    case msrSyllable::kSyllableExtendNone:
+    case msrSyllableExtendKind::kSyllableExtendNone:
       result = "kSyllableExtendNone";
       break;
-    case msrSyllable::kSyllableExtendEmpty:
+    case msrSyllableExtendKind::kSyllableExtendEmpty:
       result = "kSyllableExtendEmpty";
       break;
-    case msrSyllable::kSyllableExtendSingle:
+    case msrSyllableExtendKind::kSyllableExtendSingle:
       result = "kSyllableExtendSingle";
       break;
-    case msrSyllable::kSyllableExtendStart:
+    case msrSyllableExtendKind::kSyllableExtendStart:
       result = "kSyllableExtendStart";
       break;
-    case msrSyllable::kSyllableExtendContinue:
+    case msrSyllableExtendKind::kSyllableExtendContinue:
       result = "kSyllableExtendContinue";
       break;
-    case msrSyllable::kSyllableExtendStop:
+    case msrSyllableExtendKind::kSyllableExtendStop:
       result = "kSyllableExtendStop";
       break;
   } // switch
 
   return result;
-}
-
-string msrSyllable::syllableExtendKindAsString () const
-{
-  return syllableExtendKindAsString (fSyllableExtendKind);
 }
 
 string msrSyllable::syllableUpLinkToNoteAsString () const
@@ -650,7 +640,7 @@ string msrSyllable::asString () const
 
   s <<
     "Syllable '" <<
-    syllableKindAsString () <<
+    syllableKindAsString (fSyllableKind) <<
     "', syllableExtendKind: " <<
       syllableExtendKindAsString (fSyllableExtendKind) <<
     ", fSyllableStanzaNumber: \"" << fSyllableStanzaNumber << "\"" <<
@@ -669,7 +659,7 @@ string msrSyllable::asString () const
     syllableUpLinkToNoteAsString ();
 
   switch (fSyllableKind) {
-    case msrSyllable::kSyllableNone:
+    case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
@@ -677,16 +667,16 @@ string msrSyllable::asString () const
         "syllable type has not been set");
       break;
 
-    case msrSyllable::kSyllableSingle:
-    case msrSyllable::kSyllableBegin:
-    case msrSyllable::kSyllableMiddle:
-    case msrSyllable::kSyllableEnd:
-    case msrSyllable::kSyllableOnRestNote:
-    case msrSyllable::kSyllableSkipRestNote:
-    case msrSyllable::kSyllableSkipNonRestNote:
-    case msrSyllable::kSyllableMeasureEnd:
-    case msrSyllable::kSyllableLineBreak:
-    case msrSyllable::kSyllablePageBreak:
+    case msrSyllableKind::kSyllableSingle:
+    case msrSyllableKind::kSyllableBegin:
+    case msrSyllableKind::kSyllableMiddle:
+    case msrSyllableKind::kSyllableEnd:
+    case msrSyllableKind::kSyllableOnRestNote:
+    case msrSyllableKind::kSyllableSkipRestNote:
+    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableMeasureEnd:
+    case msrSyllableKind::kSyllableLineBreak:
+    case msrSyllableKind::kSyllablePageBreak:
       break;
   } // switch
 
@@ -718,7 +708,7 @@ void msrSyllable::print (ostream& os) const
   os <<
     "[Syllable" <<
     ", syllableKind: " <<
-    syllableKindAsString () <<
+    syllableKindAsString (fSyllableKind) <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -772,12 +762,12 @@ void msrSyllable::print (ostream& os) const
     syllableUpLinkToNoteAsString () <<
     endl <<
     setw (fieldWidth) <<
-    "SyllableUpLinkToStanza" << " : " <<
+    "syllableUpLinkToStanza" << " : " <<
     fSyllableUpLinkToStanza->getStanzaName () <<
     endl;
 
   switch (fSyllableKind) { // JMI
-    case msrSyllable::kSyllableNone:
+    case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
@@ -785,16 +775,16 @@ void msrSyllable::print (ostream& os) const
         "syllable type has not been set");
       break;
 
-    case msrSyllable::kSyllableSingle:
-    case msrSyllable::kSyllableBegin:
-    case msrSyllable::kSyllableMiddle:
-    case msrSyllable::kSyllableEnd:
-    case msrSyllable::kSyllableOnRestNote:
-    case msrSyllable::kSyllableSkipRestNote:
-    case msrSyllable::kSyllableSkipNonRestNote:
-    case msrSyllable::kSyllableMeasureEnd:
-    case msrSyllable::kSyllableLineBreak:
-    case msrSyllable::kSyllablePageBreak:
+    case msrSyllableKind::kSyllableSingle:
+    case msrSyllableKind::kSyllableBegin:
+    case msrSyllableKind::kSyllableMiddle:
+    case msrSyllableKind::kSyllableEnd:
+    case msrSyllableKind::kSyllableOnRestNote:
+    case msrSyllableKind::kSyllableSkipRestNote:
+    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableMeasureEnd:
+    case msrSyllableKind::kSyllableLineBreak:
+    case msrSyllableKind::kSyllablePageBreak:
       break;
   } // switch
   os << endl;
@@ -1009,24 +999,24 @@ void msrStanza::appendSyllableToStanza (
   // does this stanza contain text?
   switch (syllable->getSyllableKind ()) {
 
-    case msrSyllable::kSyllableSingle:
-    case msrSyllable::kSyllableBegin:
-    case msrSyllable::kSyllableMiddle:
-    case msrSyllable::kSyllableEnd:
+    case msrSyllableKind::kSyllableSingle:
+    case msrSyllableKind::kSyllableBegin:
+    case msrSyllableKind::kSyllableMiddle:
+    case msrSyllableKind::kSyllableEnd:
       // only now, in case addSyllableToStanza () is called
       // from LPSR for example
       fStanzaTextPresent = true;
       break;
 
-    case msrSyllable::kSyllableOnRestNote:
-    case msrSyllable::kSyllableSkipRestNote:
-    case msrSyllable::kSyllableSkipNonRestNote:
-    case msrSyllable::kSyllableMeasureEnd:
-    case msrSyllable::kSyllableLineBreak:
-    case msrSyllable::kSyllablePageBreak:
+    case msrSyllableKind::kSyllableOnRestNote:
+    case msrSyllableKind::kSyllableSkipRestNote:
+    case msrSyllableKind::kSyllableSkipNonRestNote:
+    case msrSyllableKind::kSyllableMeasureEnd:
+    case msrSyllableKind::kSyllableLineBreak:
+    case msrSyllableKind::kSyllablePageBreak:
       break;
 
-    case msrSyllable::kSyllableNone:
+    case msrSyllableKind::kSyllableNone:
       msrInternalError (
         gGlobalServiceRunData->getInputSourceName (),
         fInputLineNumber,
@@ -1070,8 +1060,9 @@ S_msrSyllable msrStanza::appendRestSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        msrSyllable::kSyllableSkipRestNote,
-        msrSyllable::kSyllableExtendNone,
+        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        msrSyllableKind::kSyllableSkipRestNote,
+        msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
         wholeNotes,
         msrTupletFactor (),
@@ -1108,8 +1099,9 @@ S_msrSyllable msrStanza::appendSkipSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        msrSyllable::kSyllableSkipRestNote,
-        msrSyllable::kSyllableExtendNone,
+        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        msrSyllableKind::kSyllableSkipRestNote,
+        msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
         wholeNotes,
         msrTupletFactor (),
@@ -1144,8 +1136,9 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
-        msrSyllable::kSyllableMeasureEnd,
-        msrSyllable::kSyllableExtendNone,
+        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        msrSyllableKind::kSyllableMeasureEnd,
+        msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
         0, // wholeNotes
         msrTupletFactor (),
@@ -1165,15 +1158,14 @@ S_msrSyllable msrStanza::appendMeasureEndSyllableToStanza (
 
 S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
   int             inputLineNumber,
-  msrSyllable::msrSyllableKind
-                  syllableKind,
+  msrSyllableKind syllableKind,
   const Rational& wholeNotes)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending '" <<
-      msrSyllable::syllableKindAsString (syllableKind) <<
+      syllableKindAsString (syllableKind) <<
       "' syllable" <<
       " to stanza " << getStanzaName () <<
       ", whole notes = " << wholeNotes <<
@@ -1189,8 +1181,9 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
     syllable =
       msrSyllable::create (
         inputLineNumber,
+        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
         syllableKind,
-        msrSyllable::kSyllableExtendNone,
+        msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
         wholeNotes,
         msrTupletFactor (),
@@ -1225,15 +1218,19 @@ S_msrSyllable msrStanza::appendLineBreakSyllableToStanza (
   // create line break syllable
   S_msrSyllable
     syllable =
-      msrSyllable::createWithNextMeasurePuristNumber (
+      msrSyllable::create (
         inputLineNumber,
-        msrSyllable::kSyllableLineBreak,
-        msrSyllable::kSyllableExtendNone,
+        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        msrSyllableKind::kSyllableLineBreak,
+        msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
         0, // whole notes
         msrTupletFactor (),
-        this,
-        nextMeasurePuristNumber);
+        this);
+
+  syllable->
+    setSyllableNextMeasurePuristNumber (
+      nextMeasurePuristNumber);
 
   // append syllable to this stanza
   appendSyllableToStanza (syllable);
@@ -1264,15 +1261,19 @@ S_msrSyllable msrStanza::appendPageBreakSyllableToStanza (
   // create page break syllable
   S_msrSyllable
     syllable =
-      msrSyllable::createWithNextMeasurePuristNumber (
+      msrSyllable::create (
         inputLineNumber,
-        msrSyllable::kSyllablePageBreak,
-        msrSyllable::kSyllableExtendNone,
+        nullptr, // will be set when syllable is appended to a measure JMI v0.9.66 PIM
+        msrSyllableKind::kSyllablePageBreak,
+        msrSyllableExtendKind::kSyllableExtendNone,
         fStanzaNumber,
         0, // whole notes
         msrTupletFactor (),
-        this,
-        nextMeasurePuristNumber);
+        this);
+
+  syllable->
+    setSyllableNextMeasurePuristNumber (
+      nextMeasurePuristNumber);
 
   // append syllable to this stanza
   appendSyllableToStanza (syllable);

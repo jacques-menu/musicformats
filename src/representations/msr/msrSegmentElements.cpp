@@ -43,9 +43,9 @@ const Rational msrSegmentElement::K_NO_WHOLE_NOTES (-444444, 1);
 msrSegmentElement::msrSegmentElement (
   int inputLineNumber)
     : msrElement (inputLineNumber)
-//       fSegmentElementMomentInMeasure (
+//       fSegmentElementMeasureMoment (
 //         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION),
-//       fSegmentElementMomentFromBeginningOfVoice (
+//       fSegmentElementVoiceMoment (
 //         msrMoment::K_NO_POSITION, msrMoment::K_NO_POSITION)
 {
   fSegmentElementSoundingWholeNotes = Rational (0, 1);
@@ -53,7 +53,7 @@ msrSegmentElement::msrSegmentElement (
 //   fSegmentElementMeasureNumber = K_NO_MEASURE_NUMBER;
 
 //   fSegmentElementMeasurePosition = msrMoment::K_NO_POSITION;
-//   fSegmentElementPositionFromBeginningOfVoice   = msrMoment::K_NO_POSITION;
+//   fSegmentElementVoicePosition   = msrMoment::K_NO_POSITION;
 }
 
 msrSegmentElement::~msrSegmentElement ()
@@ -64,7 +64,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
   const string&   context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting measure element sounding whole notes of " <<
       asString () <<
@@ -92,7 +92,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //   const string&   context)
 // {
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Setting measure element position in measure of " <<
 //       asString () <<
@@ -119,16 +119,16 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //   fSegmentElementMeasurePosition = measurePosition;
 // }
 //
-// void msrSegmentElement::setSegmentElementPositionFromBeginningOfVoice (
-//   const Rational& positionFromBeginningOfVoice,
+// void msrSegmentElement::setSegmentElementVoicePosition (
+//   const Rational& voicePosition,
 //   const string&   context)
 // {
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Setting measure element position in voice of " <<
 //       asString () <<
-//       " to '" << positionFromBeginningOfVoice <<
+//       " to '" << voicePosition <<
 // //       "' in measure '" <<
 // //       fSegmentElementMeasureNumber <<
 //       "', context: \"" <<
@@ -141,14 +141,14 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     positionFromBeginningOfVoice != msrMoment::K_NO_POSITION,
-//     "positionFromBeginningOfVoice == msrMoment::K_NO_POSITION");
+//     voicePosition != msrMoment::K_NO_POSITION,
+//     "voicePosition == msrMoment::K_NO_POSITION");
 //
-//   fSegmentElementPositionFromBeginningOfVoice = positionFromBeginningOfVoice;
+//   fSegmentElementVoicePosition = voicePosition;
 // }
 //
-// void msrSegmentElement::setSegmentElementMomentInMeasure (
-//   const msrMoment& momentInMeasure,
+// void msrSegmentElement::setSegmentElementMeasureMoment (
+//   const msrMoment& measureMoment,
 //   const string&    context)
 // {
 // #ifdef TRACING_IS_ENABLED
@@ -156,9 +156,9 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //     gLogStream <<
 //       "Setting measure element moment in measure of " <<
 //       asString () <<
-//       " to '" << momentInMeasure <<
+//       " to '" << measureMoment <<
 //       "' (was '" <<
-//       fSegmentElementMomentInMeasure.asString () <<
+//       fSegmentElementMeasureMoment.asString () <<
 // //       "') in measure '" <<
 // //       fSegmentElementMeasureNumber <<
 //       "', context: \"" <<
@@ -168,11 +168,11 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //   }
 // #endif
 //
-//   fSegmentElementMomentInMeasure = momentInMeasure;
+//   fSegmentElementMeasureMoment = measureMoment;
 // }
 //
-// void msrSegmentElement::setSegmentElementMomentFromBeginningOfVoice (
-//   const msrMoment& momentFromBeginningOfVoice,
+// void msrSegmentElement::setSegmentElementVoiceMoment (
+//   const msrMoment& voiceMoment,
 //   const string&    context)
 // {
 // #ifdef TRACING_IS_ENABLED
@@ -180,7 +180,7 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //     gLogStream <<
 //       "Setting measure element moment in voice of " <<
 //       asString () <<
-//       " to '" << momentFromBeginningOfVoice <<
+//       " to '" << voiceMoment <<
 // //       "' in measure '" <<
 // //       fSegmentElementMeasureNumber <<
 //       "', context: \"" <<
@@ -193,22 +193,22 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     momentFromBeginningOfVoice != msrMoment::K_NO_MOMENT,
-//     "momentFromBeginningOfVoice == msrMoment::K_NO_MOMENT");
+//     voiceMoment != msrMoment::K_NO_MOMENT,
+//     "voiceMoment == msrMoment::K_NO_MOMENT");
 //
-//   fSegmentElementMomentFromBeginningOfVoice = momentFromBeginningOfVoice;
+//   fSegmentElementVoiceMoment = voiceMoment;
 // }
 //
-// void msrSegmentElement::assignSegmentElementPositionFromBeginningOfVoice (
-//   Rational&     positionFromBeginningOfVoice,
+// void msrSegmentElement::assignSegmentElementVoicePosition (
+//   Rational&     voicePosition,
 //   const string& context)
 // {
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Assigning measure element position in voice of " <<
 //       asString () <<
-//       " to '" << positionFromBeginningOfVoice <<
+//       " to '" << voicePosition <<
 // //       "' in measure '" <<
 // //       fSegmentElementMeasureNumber <<
 //       "', context: \"" <<
@@ -221,16 +221,16 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //   // sanity check
 //   mfAssert (
 //     __FILE__, __LINE__,
-//     positionFromBeginningOfVoice != msrMoment::K_NO_POSITION,
-//     "positionFromBeginningOfVoice == msrMoment::K_NO_POSITION");
+//     voicePosition != msrMoment::K_NO_POSITION,
+//     "voicePosition == msrMoment::K_NO_POSITION");
 //
 //   // set measure element position in voice
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Setting measure element position in voice of " <<
 //       asString () <<
-//       " to '" << positionFromBeginningOfVoice <<
+//       " to '" << voicePosition <<
 // //       "' in measure '" <<
 // //       fSegmentElementMeasureNumber <<
 //       "', context: \"" <<
@@ -240,17 +240,17 @@ void msrSegmentElement::setSegmentElementSoundingWholeNotes (
 //   }
 // #endif
 //
-//   fSegmentElementPositionFromBeginningOfVoice = positionFromBeginningOfVoice;
+//   fSegmentElementVoicePosition = voicePosition;
 //
-//   // account for it in positionFromBeginningOfVoice
-//   positionFromBeginningOfVoice +=
+//   // account for it in voicePosition
+//   voicePosition +=
 //     fSegmentElementSoundingWholeNotes;
 //
 // #ifdef TRACING_IS_ENABLED
-//   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
 //     gLogStream <<
 //       "Position in voice becomes " <<
-//       positionFromBeginningOfVoice <<
+//       voicePosition <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<

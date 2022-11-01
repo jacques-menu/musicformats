@@ -31,7 +31,7 @@ class EXP msrMeasureRepeatPattern : public msrElement
 
     static SMARTP<msrMeasureRepeatPattern> create (
                             int                 inputLineNumber,
-                            S_msrMeasureRepeat UpLinkToMeasureRepeat);
+                            S_msrMeasureRepeat upLinkToMeasureRepeat);
 
     SMARTP<msrMeasureRepeatPattern> createMeasureRepeatPatternNewbornClone (
       S_msrVoice containingVoice);
@@ -46,7 +46,7 @@ class EXP msrMeasureRepeatPattern : public msrElement
 
                           msrMeasureRepeatPattern (
                             int                 inputLineNumber,
-                            S_msrMeasureRepeat UpLinkToMeasureRepeat);
+                            S_msrMeasureRepeat upLinkToMeasureRepeat);
 
     virtual               ~msrMeasureRepeatPattern ();
 
@@ -119,7 +119,7 @@ class EXP msrMeasureRepeatReplicas : public msrElement
 
     static SMARTP<msrMeasureRepeatReplicas> create (
                             int                 inputLineNumber,
-                            S_msrMeasureRepeat UpLinkToMeasureRepeat);
+                            S_msrMeasureRepeat upLinkToMeasureRepeat);
 
     SMARTP<msrMeasureRepeatReplicas> createMeasureRepeatReplicasNewbornClone (
                             S_msrVoice containingVoice);
@@ -134,7 +134,7 @@ class EXP msrMeasureRepeatReplicas : public msrElement
 
                           msrMeasureRepeatReplicas (
                             int                 inputLineNumber,
-                            S_msrMeasureRepeat UpLinkToMeasureRepeat);
+                            S_msrMeasureRepeat upLinkToMeasureRepeat);
 
     virtual               ~msrMeasureRepeatReplicas ();
 
@@ -384,7 +384,7 @@ class EXP msrMeasureRepeatElement : public msrElement
 
     static SMARTP<msrMeasureRepeatElement> create (
                             int                 inputLineNumber,
-                            S_msrMeasureRepeat UpLinkToMeasureRepeat);
+                            S_msrMeasureRepeat upLinkToMeasureRepeat);
 
   protected:
 
@@ -393,7 +393,7 @@ class EXP msrMeasureRepeatElement : public msrElement
 
                           msrMeasureRepeatElement (
                             int                 inputLineNumber,
-                            S_msrMeasureRepeat UpLinkToMeasureRepeat);
+                            S_msrMeasureRepeat upLinkToMeasureRepeat);
 
     virtual               ~msrMeasureRepeatElement ();
 

@@ -400,6 +400,7 @@ S_msrTimeSignature msrTimeSignature::createTwoEightsTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -429,6 +430,7 @@ S_msrTimeSignature msrTimeSignature::createThreeEightsTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -458,6 +460,7 @@ S_msrTimeSignature msrTimeSignature::createSixEightsTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -487,6 +490,7 @@ S_msrTimeSignature msrTimeSignature::createTwoQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -516,6 +520,7 @@ S_msrTimeSignature msrTimeSignature::createThreeQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -545,6 +550,7 @@ S_msrTimeSignature msrTimeSignature::createFourQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -574,6 +580,7 @@ S_msrTimeSignature msrTimeSignature::createFiveQuartersTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -603,6 +610,7 @@ S_msrTimeSignature msrTimeSignature::createTwoHalvesTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -632,6 +640,7 @@ S_msrTimeSignature msrTimeSignature::createThreeHalvesTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -661,6 +670,7 @@ S_msrTimeSignature msrTimeSignature::createFourHalvesTime (
     timeSignature =
       msrTimeSignature::create (
         inputLineNumber,
+        nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
         msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -808,10 +818,11 @@ S_msrTimeSignature msrTimeSignature::createTimeFromString (
   }
 #endif
 
-  // create the time
+  // create the time signature
   result =
     msrTimeSignature::create (
       inputLineNumber,
+      nullptr, // will be set when time signature is appended to a measure JMI v0.9.66 PIM
       msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone);
 
   // create a four quarters time signature item
@@ -841,7 +852,7 @@ void msrTimeSignature::setTimeSignatureMeasurePosition (
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting time signature's position in measure of " <<
       asString () <<

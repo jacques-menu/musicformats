@@ -77,26 +77,26 @@ class EXP msrSegmentElement : public msrElement
 //     Rational              getSegmentElementMeasurePosition () const
 //                               { return fSegmentElementMeasurePosition; }
 //
-//     void                  setSegmentElementPositionFromBeginningOfVoice (
-//                             const Rational& positionFromBeginningOfVoice,
+//     void                  setSegmentElementVoicePosition (
+//                             const Rational& voicePosition,
 //                             const string&   context);
 //
-//     Rational              getSegmentElementPositionFromBeginningOfVoice () const
-//                               { return fSegmentElementPositionFromBeginningOfVoice; }
+//     Rational              getSegmentElementVoicePosition () const
+//                               { return fSegmentElementVoicePosition; }
 //
-//     void                  setSegmentElementMomentInMeasure (
-//                             const msrMoment& momentInMeasure,
+//     void                  setSegmentElementMeasureMoment (
+//                             const msrMoment& measureMoment,
 //                             const string&    context);
 //
-//     const msrMoment&      getSegmentElementMomentInMeasure () const
-//                               { return fSegmentElementMomentInMeasure; }
+//     const msrMoment&      getSegmentElementMeasureMoment () const
+//                               { return fSegmentElementMeasureMoment; }
 //
-//     void                  setSegmentElementMomentFromBeginningOfVoice (
-//                             const msrMoment& momentFromBeginningOfVoice,
+//     void                  setSegmentElementVoiceMoment (
+//                             const msrMoment& voiceMoment,
 //                             const string&    context);
 //
-//     const msrMoment&      getSegmentElementMomentFromBeginningOfVoice () const
-//                               { return fSegmentElementMomentFromBeginningOfVoice; }
+//     const msrMoment&      getSegmentElementVoiceMoment () const
+//                               { return fSegmentElementVoiceMoment; }
 
   public:
 
@@ -110,8 +110,8 @@ class EXP msrSegmentElement : public msrElement
 //                             const SMARTP<msrSegmentElement>& first,
 //                             const SMARTP<msrSegmentElement>& second);
 //
-//     virtual void          assignSegmentElementPositionFromBeginningOfVoice (
-//                             Rational&     positionFromBeginningOfVoice,
+//     virtual void          assignSegmentElementVoicePosition (
+//                             Rational&     voicePosition,
 //                             const string& context);
 
   public:
@@ -152,10 +152,10 @@ class EXP msrSegmentElement : public msrElement
 //     string                fSegmentElementMeasureNumber;
 //
 //     Rational              fSegmentElementMeasurePosition;
-//     Rational              fSegmentElementPositionFromBeginningOfVoice;
+//     Rational              fSegmentElementVoicePosition;
 //
-//     msrMoment             fSegmentElementMomentInMeasure;
-//     msrMoment             fSegmentElementMomentFromBeginningOfVoice;
+//     msrMoment             fSegmentElementMeasureMoment;
+//     msrMoment             fSegmentElementVoiceMoment;
 };
 typedef SMARTP<msrSegmentElement> S_msrSegmentElement;
 EXP ostream& operator << (ostream& os, const S_msrSegmentElement& elt);

@@ -99,72 +99,53 @@ void msrOrnament::acceptOut (basevisitor* v)
 void msrOrnament::browseData (basevisitor* v)
 {}
 
-string msrOrnament::ornamentKindAsString (
+string ornamentKindAsString (
   msrOrnamentKind ornamentKind)
 {
   string result;
 
   switch (ornamentKind) {
-    case msrOrnament::kOrnamentTrill:
+    case msrOrnamentKind::kOrnamentTrill:
       result = "kOrnamentTrill";
       break;
       /* JMI
-    case msrOrnament::kOrnamentDashes:
+    case msrOrnamentKind::kOrnamentDashes:
       result = "kOrnamentDashes";
       break;
       */
-    case msrOrnament::kOrnamentTurn:
+    case msrOrnamentKind::kOrnamentTurn:
       result = "kOrnamentTurn";
       break;
-    case msrOrnament::kOrnamentInvertedTurn:
+    case msrOrnamentKind::kOrnamentInvertedTurn:
       result = "kOrnamentInvertedTurn";
       break;
-    case msrOrnament::kOrnamentDelayedTurn:
+    case msrOrnamentKind::kOrnamentDelayedTurn:
       result = "kOrnamentDelayedTurn";
       break;
-    case msrOrnament::kOrnamentDelayedInvertedTurn:
+    case msrOrnamentKind::kOrnamentDelayedInvertedTurn:
       result = "kOrnamentDelayedInvertedTurn";
       break;
-    case msrOrnament::kOrnamentVerticalTurn:
+    case msrOrnamentKind::kOrnamentVerticalTurn:
       result = "kOrnamentVerticalTurn";
       break;
-    case msrOrnament::kOrnamentMordent:
+    case msrOrnamentKind::kOrnamentMordent:
       result = "kOrnamentMordent";
       break;
-    case msrOrnament::kOrnamentInvertedMordent:
+    case msrOrnamentKind::kOrnamentInvertedMordent:
       result = "kOrnamentInvertedMordent";
       break;
-    case msrOrnament::kOrnamentSchleifer:
+    case msrOrnamentKind::kOrnamentSchleifer:
       result = "kOrnamentSchleifer";
       break;
-    case msrOrnament::kOrnamentShake:
+    case msrOrnamentKind::kOrnamentShake:
       result = "kOrnamentShake";
       break;
-    case msrOrnament::kOrnamentAccidentalKind:
+    case msrOrnamentKind::kOrnamentAccidentalKind:
       result = "kOrnamentAccidentalKind";
       break;
   } // switch
 
   return result;
-}
-
-string msrOrnament::ornamentKindAsString () const
-{
-  return ornamentKindAsString (fOrnamentKind);
-}
-
-string msrOrnament::ornamentPlacementKindAsString () const
-{
-   return
-    msrPlacementKindAsString (
-      fOrnamentPlacementKind);
-}
-
-string msrOrnament::ornamentAccidentalKindAsString () const
-{
-  return
-    msrAccidentalKindAsString (
-      fOrnamentAccidentalKind);
 }
 
 string msrOrnament::asString () const
@@ -173,10 +154,10 @@ string msrOrnament::asString () const
 
   s <<
     "[Ornament" <<
-    ", ornamentKind: " << ornamentKindAsString () <<
-    ", ornamentPlacementKind: " <<
-    msrPlacementKindAsString (fOrnamentPlacementKind) <<
-    ", ornamentAccidentalKind: " <<
+    ", fOrnamentPlacementKind: " << placementKindAsString (fOrnamentPlacementKind)  <<
+    ", fOrnamentPlacementKind: " <<
+    placementKindAsString (fOrnamentPlacementKind) <<
+    ", fOrnamentAccidentalKind: " <<
     msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
     ']';
 
@@ -188,7 +169,7 @@ void msrOrnament::print (ostream& os) const
 {
   os <<
     "[Ornament" <<
-    ", " << ornamentKindAsString () <<
+    ", " << placementKindAsString (fOrnamentPlacementKind)  <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -198,15 +179,15 @@ void msrOrnament::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "ornamentPlacementKind" << " : " <<
-    ornamentPlacementKindAsString () <<
+    "fOrnamentPlacementKind" << " : " <<
+    placementKindAsString (fOrnamentPlacementKind) <<
     endl <<
     setw (fieldWidth) <<
-    "ornamentAccidentalKind" << " : " <<
-    ornamentAccidentalKindAsString () <<
+    "fOrnamentAccidentalKind" << " : " <<
+    msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
     endl <<
     setw (fieldWidth) <<
-    "ornamentUpLinkToNote" << " : " <<
+    "fOrnamentUpLinkToNote" << " : " <<
     fOrnamentUpLinkToNote->asShortString () <<
     endl;
 

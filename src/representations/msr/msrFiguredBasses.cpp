@@ -322,14 +322,13 @@ ostream& operator << (ostream& os, const S_msrBassFigure& elt)
 
 //______________________________________________________________________________
 S_msrFiguredBass msrFiguredBass::create (
-  // no figuredBassUpLinkToVoice yet
-  int inputLineNumber) // ,
-// JMI  S_msrPart figuredBassUpLinkToPart)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
   msrFiguredBass* o =
     new msrFiguredBass (
       inputLineNumber,
-//    figuredBassUpLinkToPart,
+      upLinkToMeasure,
       Rational (0, 1),           // figuredBassSoundingWholeNotes
       Rational (0, 1),           // figuredBassDisplayWholeNotes
       kFiguredBassParenthesesNo,
@@ -351,8 +350,7 @@ S_msrFiguredBass msrFiguredBass::create (
   msrFiguredBass* o =
     new msrFiguredBass (
       inputLineNumber,
-      upLinkToMeasure.
- //     figuredBassUpLinkToPart, JMI v0.9.66
+      upLinkToMeasure,
       figuredBassSoundingWholeNotes,
       figuredBassDisplayWholeNotes,
       figuredBassParenthesesKind,
@@ -438,8 +436,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassNewbornClone (
     newbornClone =
       msrFiguredBass::create (
         fInputLineNumber,
- //       containingPart,
-// JMI        fFiguredBassSoundingWholeNotes,
+        nullptr, // will be set when figured bass is appended to a measure JMI v0.9.66 PIM
         fMeasureElementSoundingWholeNotes,
         fFiguredBassDisplayWholeNotes,
         fFiguredBassParenthesesKind,
@@ -473,8 +470,7 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
     figuredBassDeepClone =
       msrFiguredBass::create (
         fInputLineNumber,
-   //     containingPart,
-// JMI        fFiguredBassSoundingWholeNotes,
+        nullptr, // will be set when figured bass is appended to a measure JMI v0.9.66 PIM
         fMeasureElementSoundingWholeNotes,
         fFiguredBassDisplayWholeNotes,
         fFiguredBassParenthesesKind,
@@ -491,7 +487,7 @@ void msrFiguredBass::setFiguredBassMeasurePosition (
   // set the figured bass position in measure
 
 #ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
+  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
     gLogStream <<
       "Setting figured bass element's position in measure of " << asString () <<
       " to " <<
@@ -521,15 +517,15 @@ void msrFiguredBass::setFiguredBassMeasurePosition (
   // compute figured bass's position in voice
   if (false) { // JMI CAFE v0.9.66
   Rational
-    positionFromBeginningOfVoice =
+    voicePosition =
       measure->
-        getMeasurePositionFromBeginningOfVoice ()
+        getMeasureVoicePosition ()
         +
       measurePosition;
 
   // set figured bass's position in voice
-  setMeasureElementPositionFromBeginningOfVoice (
-    positionFromBeginningOfVoice,
+  setMeasureElementVoicePosition (
+    voicePosition,
     context);
 }
 
@@ -540,7 +536,7 @@ void msrFiguredBass::setFiguredBassMeasurePosition (
         fetchMeasureUpLinkToVoice ();
 
   voice->
-    incrementCurrentPositionFromBeginningOfVoice (
+    incrementCurrentVoicePosition (
       fFiguredBassUpLinkToNote->
         getMeasureElementSoundingWholeNotes ());
 }
@@ -686,7 +682,7 @@ string msrFiguredBass::asString () const
 
   // print the figured bass position in voice
 //   s <<
-//     ", positionFromBeginningOfVoice: " << fMeasureElementPositionFromBeginningOfVoice;
+//     ", voicePosition: " << fMeasureElementVoicePosition;
 
   s <<
     ", line " << fInputLineNumber <<
@@ -776,7 +772,7 @@ void msrFiguredBass::print (ostream& os) const
 //   // print the figured bass position in voice
 //   os <<
 //     setw (fieldWidth) <<
-//     "fMeasureElementPositionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
+//     "fMeasureElementVoicePosition" << " : " << fMeasureElementVoicePosition <<
 //     endl;
 
   --gIndenter;

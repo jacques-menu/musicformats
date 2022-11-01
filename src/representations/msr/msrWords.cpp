@@ -143,7 +143,7 @@ void msrWords::browseData (basevisitor* v)
 string msrWords::wordsPlacementKindAsString () const
 {
   return
-    msrPlacementKindAsString (
+    placementKindAsString (
       fWordsPlacementKind);
 }
 
@@ -190,7 +190,7 @@ string msrWords::asString () const
     ", line " << fInputLineNumber <<
     ' ' <<
     fWordsContents << ", placement = " <<
-    msrPlacementKindAsString (fWordsPlacementKind);
+    placementKindAsString (fWordsPlacementKind);
 
   return s.str ();
 }
@@ -215,7 +215,7 @@ void msrWords::print (ostream& os) const
 
     setw (fieldWidth) <<
     "placement" << " : " <<
-    msrPlacementKindAsString (fWordsPlacementKind) <<
+    placementKindAsString (fWordsPlacementKind) <<
     endl <<
 
     setw (fieldWidth) <<
