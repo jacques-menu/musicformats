@@ -21,6 +21,7 @@ using namespace std;
 
 namespace MusicFormats
 {
+
 //______________________________________________________________________________
 EXP S_mfcConverterComponent createMusicxml2guidoConverterComponent ();
 

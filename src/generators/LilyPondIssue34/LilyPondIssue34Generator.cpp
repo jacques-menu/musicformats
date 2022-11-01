@@ -372,6 +372,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       appendClefToMeasure (
         msrClef::create (
           __LINE__,
+          measure1,
           msrClefKind::kClefTreble,
           1));
 
@@ -381,6 +382,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -1050,7 +1052,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 }
 
@@ -1331,7 +1334,8 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheStringsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 */
 }
@@ -1363,6 +1367,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       appendClefToMeasure (
         msrClef::create (
           __LINE__,
+          measure1,
           msrClefKind::kClefBass,
           2));
 
@@ -1372,6 +1377,7 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -1855,7 +1861,8 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheFunctionsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 }
 
@@ -2109,7 +2116,8 @@ void LilyPondIssue34Generator::populateLowerVoice2WithTheStringsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 */
 }
@@ -2141,6 +2149,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
       appendClefToMeasure (
         msrClef::create (
           __LINE__,
+          measure1,
           msrClefKind::kClefBass,
           2));
 
@@ -2150,6 +2159,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -2331,7 +2341,8 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheFunctionsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 }
 
@@ -2362,6 +2373,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
       appendClefToMeasure (
         msrClef::createClefFromString (
           __LINE__,
+          measure1,
           "bass",
           2));
 
@@ -2371,6 +2383,7 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
       appendKeyToMeasure (
         msrKey::createTraditional (
           __LINE__,
+          measure1,
           msrQuarterTonesPitchKind::kQTP_C_Natural,
           msrModeKind::kModeMajor,
           0)); // keyCancel JMI
@@ -2520,7 +2533,8 @@ void LilyPondIssue34Generator::populateLowerVoice1WithTheStringsAPI (
     measure5->
       appendBarLineToMeasure (
         msrBarLine::createFinalBarLine (
-          __LINE__));
+          __LINE__,
+          measure5));
   }
 }
 

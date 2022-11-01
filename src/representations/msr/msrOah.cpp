@@ -505,7 +505,7 @@ string msrRenamePartAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<string, string>::const_iterator
@@ -530,7 +530,7 @@ string msrRenamePartAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<string, string>::const_iterator
@@ -569,7 +569,7 @@ void msrRenamePartAtom::print (ostream& os) const
     endl;
 
   if (! fStringToStringMapVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     map<string, string>::const_iterator
@@ -598,7 +598,7 @@ void msrRenamePartAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringToStringMapVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {

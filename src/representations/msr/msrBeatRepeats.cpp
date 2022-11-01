@@ -329,7 +329,7 @@ void msrBeatRepeatElement::print (ostream& os) const
       ")";
   }
   else {
-    os << "empty";
+    os << "[EMPTY]";
   }
   os << endl;
 
@@ -388,7 +388,7 @@ void msrBeatRepeatElement::printShort (ostream& os)
       ")";
   }
   else {
-    os << "empty";
+    os << "[EMPTY]";
   }
   os << endl;
 

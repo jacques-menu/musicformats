@@ -117,7 +117,7 @@ string lpsrContext::contextTypeKindAsString (
     case lpsrContext::kChordNames:
       result = "ChordNames";
       break;
-    case lpsrContext::kFiguredBassElement:
+    case lpsrContext::kFiguredBass:
       result = "FiguredBass";
       break;
   } // switch
@@ -377,7 +377,7 @@ lpsrFiguredBassContext::lpsrFiguredBassContext (
     : lpsrContext (
       inputLineNumber,
       contextExistingKind,
-      lpsrContext::kFiguredBassElement,
+      lpsrContext::kFiguredBass,
       contextName)
 {
   fContextExistingKind = contextExistingKind;
@@ -497,7 +497,7 @@ void lpsrFiguredBassContext::print (ostream& os) const
   }
   else {
     os <<
-      " : " << "empty" <<
+      " : " << "[EMPTY]" <<
     endl;
   }
 

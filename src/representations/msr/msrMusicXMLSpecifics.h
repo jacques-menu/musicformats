@@ -582,7 +582,8 @@ class EXP msrPrintLayout : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrPrintLayout> create (
-                            int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
   protected:
 
@@ -590,7 +591,8 @@ class EXP msrPrintLayout : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrPrintLayout (
-                            int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     virtual               ~msrPrintLayout ();
 

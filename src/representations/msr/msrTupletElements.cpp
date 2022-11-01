@@ -23,8 +23,11 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 msrTupletElement::msrTupletElement (
-  int inputLineNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fPositionInTuplet = -1;
 }
@@ -40,7 +43,7 @@ ostream& operator << (ostream& os, const S_msrTupletElement& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

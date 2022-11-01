@@ -26,6 +26,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasures.h"
+
 #include "msrDoubleTremolos.h"
 
 #include "oahOah.h"
@@ -43,6 +45,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrDoubleTremolo msrDoubleTremolo::create (
   int                  inputLineNumber,
+  S_msrMeasure         upLinkToMeasure,
   msrDoubleTremoloKind doubleTremoloKind,
   msrTremoloTypeKind   doubleTremoloTypeKind,
   int                  doubleTremoloMarksNumber,
@@ -51,6 +54,7 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
   msrDoubleTremolo* o =
     new msrDoubleTremolo (
       inputLineNumber,
+      upLinkToMeasure,
       doubleTremoloKind,
       doubleTremoloTypeKind,
       doubleTremoloMarksNumber,
@@ -61,11 +65,14 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
 
 msrDoubleTremolo::msrDoubleTremolo (
   int                  inputLineNumber,
+  S_msrMeasure         upLinkToMeasure,
   msrDoubleTremoloKind doubleTremoloKind,
   msrTremoloTypeKind   doubleTremoloTypeKind,
   int                  doubleTremoloMarksNumber,
   msrPlacementKind     doubleTremoloPlacementKind)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fDoubleTremoloKind          = doubleTremoloKind;
   fDoubleTremoloTypeKind      = doubleTremoloTypeKind;
@@ -132,9 +139,9 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
 msrDoubleTremolo::~msrDoubleTremolo ()
 {}
 
-void msrDoubleTremolo::setDoubleTremoloPositionInMeasure (
+void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
   const S_msrMeasure measure,
-  const Rational&    positionInMeasure,
+  const Rational&    measurePosition,
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -145,13 +152,13 @@ void msrDoubleTremolo::setDoubleTremoloPositionInMeasure (
       "Setting measure element position in measure of double tremolo " <<
       asString () <<
       " to " <<
-      positionInMeasure <<
+      measurePosition <<
       " (was " <<
-      fMeasureElementPositionInMeasure <<
+      fMeasureElementMeasurePosition <<
       ") in measure " <<
       measure->asShortString () <<
-      " (fMeasureElementMeasureNumber: " <<
-      fMeasureElementMeasureNumber <<
+      " (measureElementMeasureNumber: " <<
+      fetchMeasureElementMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -164,21 +171,21 @@ void msrDoubleTremolo::setDoubleTremoloPositionInMeasure (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != msrMoment::K_NO_POSITION,
-    "positionInMeasure == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
 
   // set double tremolo's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
+  fMeasureElementMeasurePosition = measurePosition;
 }
 
-// void msrDoubleTremolo::setDoubleTremoloPositionInMeasure ( ??? JMI v0.9.66
-//   const Rational& positionInMeasure)
+// void msrDoubleTremolo::setDoubleTremoloMeasurePosition ( ??? JMI v0.9.66
+//   const Rational& measurePosition)
 // {
 //   string context =
-//     "setDoubleTremoloPositionInMeasure()";
+//     "setDoubleTremoloMeasurePosition()";
 //
-//   setDoubleTremoloPositionInMeasure ( // JMI v0.9.66 CLEAN THAT!!!
-//     positionInMeasure,
+//   setDoubleTremoloMeasurePosition ( // JMI v0.9.66 CLEAN THAT!!!
+//     measurePosition,
 //     context);
 //
 //   if (false) { // JMI
@@ -187,7 +194,7 @@ void msrDoubleTremolo::setDoubleTremoloPositionInMeasure (
 //      positionFromBeginningOfVoice =
 //       fDoubleTremoloUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
 //         +
-//       positionInMeasure;
+//       measurePosition;
 //
 //   // set double tremolo's position in voice
 //   setMeasureElementPositionFromBeginningOfVoice (
@@ -568,7 +575,7 @@ void msrDoubleTremolo::setDoubleTremoloChordSecondElement (S_msrChord chord)
 void msrDoubleTremolo::setDoubleTremoloMeasureNumber (
   const string& measureNumber)
 {
-  fMeasureElementMeasureNumber =  measureNumber;
+  fetchMeasureElementMeasureNumber () =  measureNumber;
 }
 
 void msrDoubleTremolo::acceptIn (basevisitor* v)

@@ -228,7 +228,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentFiguredBassSoundingWholeNotes = Rational (0, 1);
   fCurrentFiguredBassDisplayWholeNotes  = Rational (0, 1);
   fCurrentFiguredBassParenthesesKind =
-    msrFiguredBassElement::kFiguredBassElementParenthesesNo; // default value
+    msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo; // default value
   fCurrentFigureNumber                  = -1;
 
   // frames handling
@@ -2908,6 +2908,7 @@ void mxsr2msrTranslator::visitEnd (S_clef& elt)
     clef =
       msrClef::create (
         inputLineNumber,
+        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
         clefKind,
         fCurrentClefStaffNumber);
 
@@ -3406,6 +3407,7 @@ S_msrKey mxsr2msrTranslator::handleTraditionalKey (
     key =
       msrKey::createTraditional (
         inputLineNumber,
+        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
         keyTonicPitchKind,
         fCurrentModeKind,
         fCurrentKeyCancelFifths);
@@ -3774,6 +3776,7 @@ void mxsr2msrTranslator::visitEnd (S_time& elt)
   fCurrentTimeSignature =
     msrTimeSignature::create (
       inputLineNumber,
+			nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
       fCurrentTimeSignatureSymbolKind);
 
   // populate the time with the time signature items
@@ -4140,6 +4143,7 @@ void mxsr2msrTranslator::visitEnd (S_transpose& elt)
     transposition =
       msrTransposition::create (
         inputLineNumber,
+        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
         fCurrentTransposeDiatonic,
         fCurrentTransposeChromatic,
         fCurrentTransposeOctaveChange,
@@ -4423,6 +4427,7 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
       fCurrentMetronomeTempo =
         msrTempo::createTempoPerMinute (
           inputLineNumber,
+	        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
           msrDottedDuration (
             msrDurationKind::kQuarter,
             0),       // JMI could be different???
@@ -4557,6 +4562,7 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
     octaveShift =
       msrOctaveShift::create (
         inputLineNumber,
+        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
         octaveShiftKind,
         octaveShiftSize);
 
@@ -4797,6 +4803,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         tempo =
           msrTempo::createTempoWordsOnly (
             inputLineNumber,
+		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             words,
             msrTempo::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
@@ -4834,6 +4841,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         rehearsalMark =
           msrRehearsalMark::create (
             inputLineNumber,
+		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             msrRehearsalMark::kNone, // JMI allow for other values???
             wordsValue,
             fCurrentDirectionPlacementKind);
@@ -4871,6 +4879,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         segno =
           msrSegno::create (
             inputLineNumber,
+		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             fCurrentDirectionStaffNumber);
 
 #ifdef TRACING_IS_ENABLED
@@ -4906,6 +4915,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         dalSegno =
           msrDalSegno::create (
             inputLineNumber,
+		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -4944,6 +4954,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         dalSegno =
           msrDalSegno::create (
             inputLineNumber,
+		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -4982,6 +4993,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         dalSegno =
           msrDalSegno::create (
             inputLineNumber,
+		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             msrDalSegnoKind::kDalSegno,
             wordsValue,
             fCurrentDirectionStaffNumber);
@@ -5020,6 +5032,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         coda =
           msrCoda::create (
             inputLineNumber,
+		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             fCurrentDirectionStaffNumber,
             msrCodaKind::kCodaFirst);
 
@@ -5058,7 +5071,8 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         coda =
           msrCoda::create (
             inputLineNumber,
-            fCurrentDirectionStaffNumber,
+		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
+						fCurrentDirectionStaffNumber,
             msrCodaKind::kCodaSecond);
 
 #ifdef TRACING_IS_ENABLED
@@ -5361,6 +5375,7 @@ void mxsr2msrTranslator::visitEnd (S_accordion_registration& elt)
       accordionRegistration =
         msrAccordionRegistration::create (
           inputLineNumber,
+					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
           fCurrentAccordionHigh,
           fCurrentAccordionMiddle,
           fCurrentAccordionLow);
@@ -6114,6 +6129,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
         fCurrentMetronomeTempo =
           msrTempo::createTempoPerMinute (
             inputLineNumber,
+						nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             beatUnits,
             fCurrentMetrenomePerMinute,
             fCurrentMetronomeParenthesedKind,
@@ -6130,6 +6146,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
         fCurrentMetronomeTempo =
           msrTempo::createTempoBeatUnitEquivalent (
             inputLineNumber,
+						nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             beatUnits,
             fCurrentMetronomeBeatUnitsVector [1],
             fCurrentMetronomeParenthesedKind,
@@ -6141,6 +6158,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       fCurrentMetronomeTempo =
         msrTempo::createTempoNotesRelationship (
           inputLineNumber,
+					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
           fCurrentMetronomeRelationLeftElements,
           fCurrentMetrenomeRelationKind, // msrTempo::kTempoNotesRelationshipEquals here
           fCurrentMetronomeRelationRightElements,
@@ -6467,6 +6485,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
   fCurrentStaffDetails =
     msrStaffDetails::create (
       inputLineNumber,
+			nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
       fCurrentStaffTypeKind,
       fCurrentShowFretsKind,
       fCurrentPrintObjectKind,
@@ -8498,6 +8517,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       syllable =
         msrSyllable::create (
           inputLineNumber,
+					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
           fCurrentSyllableKind,
           fCurrentSyllableExtendKind,
           fCurrentStanzaNumber,
@@ -8797,7 +8817,7 @@ void mxsr2msrTranslator::visitEnd (S_measure& elt)
     // set the pending grace notes group's kind to 'after'
     fPendingGraceNotesGroup->
       setGraceNotesGroupKind (
-        msrGraceNotesGroup::kGraceNotesGroupAfter);
+        msrGraceNotesGroupKind::kGraceNotesGroupAfter);
 
     // attach it to the note
     noteToAttachTo->
@@ -9100,8 +9120,9 @@ Staff spacing between multiple staves is measured in
 
   // create a print layout
   fCurrentPrintLayout =
-    msrPrintLayout::create (
-      inputLineNumber);
+     msrPrintLayout::create (
+      inputLineNumber,
+			nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
 
   // handle 'staff-spacing' if present
 
@@ -9140,6 +9161,7 @@ Staff spacing between multiple staves is measured in
         lineBreak =
           msrLineBreak::create (
             inputLineNumber,
+						nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             fCurrentMeasureNumber,
             msrUserChosenLineBreakKind::kUserChosenLineBreakNo);
 
@@ -9187,6 +9209,7 @@ Staff spacing between multiple staves is measured in
           pageBreak =
             msrPageBreak::create (
               inputLineNumber,
+							nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
               msrUserChosenPageBreakKind::kUserChosenPageBreakNo);
 
         // append it to the pending page breaks
@@ -9443,6 +9466,7 @@ void mxsr2msrTranslator::visitStart (S_segno& elt)
       segno =
         msrSegno::create (
           inputLineNumber,
+					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
           fCurrentDirectionStaffNumber);
 
     // append it to the pending segnos list
@@ -9515,6 +9539,7 @@ void mxsr2msrTranslator::visitStart (S_coda& elt)
       coda =
         msrCoda::create (
           inputLineNumber,
+					nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
           fCurrentDirectionStaffNumber,
           codaKind);
 
@@ -9559,7 +9584,8 @@ void mxsr2msrTranslator::visitStart (S_eyeglasses& elt)
     S_msrEyeGlasses
       eyeGlasses =
         msrEyeGlasses::create (
-          inputLineNumber);
+          inputLineNumber,
+					nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
 
     // append it to the pending eyeglasses list
     fPendingEyeGlassesList.push_back (eyeGlasses);
@@ -9685,6 +9711,7 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
     pedal =
       msrPedal::create (
         inputLineNumber,
+				nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
         pedalTypeKind,
         pedalLineKind,
         pedalSignKind);
@@ -9912,6 +9939,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
     barLine =
       msrBarLine::create (
         inputLineNumber,
+				nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
         fCurrentBarLineLocationKind,
         fCurrentBarLineStyleKind,
         fCurrentBarLineRepeatDirectionKind,
@@ -13751,6 +13779,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
         fCurrentDoubleTremolo =
           msrDoubleTremolo::create (
             inputLineNumber,
+						nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             msrDoubleTremolo::kNotesDoubleTremolo,
             msrTremoloTypeKind::kTremoloTypeStart,
             tremoloMarksNumber,
@@ -16219,12 +16248,12 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   {
     string tupletBracket = elt->getAttributeValue ("bracket");
 
-    fCurrentTupletBracketKind = msrTuplet::kTupletBracketYes; // option ??? JMI
+    fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketYes; // option ??? JMI
 
     if      (tupletBracket == "yes")
-      fCurrentTupletBracketKind = msrTuplet::kTupletBracketYes;
+      fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketYes;
     else if (tupletBracket == "no")
-      fCurrentTupletBracketKind = msrTuplet::kTupletBracketNo;
+      fCurrentTupletBracketKind = msrTupletBracketKind::kTupletBracketNo;
     else {
       if (tupletBracket.size ()) {
         stringstream s;
@@ -16264,12 +16293,12 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     string tupletLineShape = elt->getAttributeValue ("line-shape");
 
     fCurrentTupletLineShapeKind =
-      msrTuplet::kTupletLineShapeStraight; // default value
+      msrTupletLineShapeKind::kTupletLineShapeStraight; // default value
 
     if      (tupletLineShape == "straight")
-      fCurrentTupletLineShapeKind = msrTuplet::kTupletLineShapeStraight;
+      fCurrentTupletLineShapeKind = msrTupletLineShapeKind::kTupletLineShapeStraight;
     else if (tupletLineShape == "curved")
-      fCurrentTupletLineShapeKind = msrTuplet::kTupletLineShapeCurved;
+      fCurrentTupletLineShapeKind = msrTupletLineShapeKind::kTupletLineShapeCurved;
     else {
       if (tupletLineShape.size ()) {
         stringstream s;
@@ -16292,10 +16321,10 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   {
     string tupletType = elt->getAttributeValue ("type");
 
-    msrTuplet::msrTupletTypeKind
+    msrTupletTypeKind
       previousTupletTypeKind = fCurrentTupletTypeKind;
 
-    fCurrentTupletTypeKind = msrTuplet::kTupletTypeNone;
+    fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeNone;
 
     if      (tupletType == "start") {
 #ifdef TRACING_IS_ENABLED
@@ -16307,7 +16336,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       }
 #endif
 
-      fCurrentTupletTypeKind = msrTuplet::kTupletTypeStart;
+      fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStart;
     }
     else if (tupletType == "continue") {
 #ifdef TRACING_IS_ENABLED
@@ -16319,16 +16348,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       }
 #endif
 
-      fCurrentTupletTypeKind = msrTuplet::kTupletTypeContinue;
+      fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeContinue;
     }
     else if (tupletType == "stop") {
       if (
         fPreviousTupletNumber == fCurrentTupletNumber
           &&
         (
-          previousTupletTypeKind == msrTuplet::kTupletTypeStart
+          previousTupletTypeKind == msrTupletTypeKind::kTupletTypeStart
   // JMI          ||
-    //      previousTupletTypeKind == msrTuplet::kTupletTypeContinue
+    //      previousTupletTypeKind == msrTupletTypeKind::kTupletTypeContinue
         )
       ) {
         // this is a tuplet stop right after a tuplet start
@@ -16344,7 +16373,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
         }
 #endif
 
-        fCurrentTupletTypeKind = msrTuplet::kTupletTypeStartAndStopInARow;
+        fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStartAndStopInARow;
       }
       else {
         // this is a 'regular' tuplet stop
@@ -16357,7 +16386,7 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
         }
 #endif
 
-        fCurrentTupletTypeKind = msrTuplet::kTupletTypeStop;
+        fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStop;
       }
     }
     else {
@@ -16381,16 +16410,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
     string tupletShowNumber = elt->getAttributeValue ("show-number");
 
     fCurrentTupletShowNumberKind =
-      msrTuplet::kTupletShowNumberActual; // default value
+      msrTupletShowNumberKind::kTupletShowNumberActual; // default value
 
     if      (tupletShowNumber == "actual") {
-      fCurrentTupletShowNumberKind = msrTuplet::kTupletShowNumberActual;
+      fCurrentTupletShowNumberKind = msrTupletShowNumberKind::kTupletShowNumberActual;
     }
     else if (tupletShowNumber == "both") {
-      fCurrentTupletShowNumberKind = msrTuplet::kTupletShowNumberBoth;
+      fCurrentTupletShowNumberKind = msrTupletShowNumberKind::kTupletShowNumberBoth;
     }
     else if (tupletShowNumber == "[NONE]") {
-      fCurrentTupletShowNumberKind = msrTuplet::kTupletShowNumberNone;
+      fCurrentTupletShowNumberKind = msrTupletShowNumberKind::kTupletShowNumberNone;
     }
     else {
       if (tupletShowNumber.size ()) {
@@ -16408,16 +16437,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
   {
     string tupletShowType = elt->getAttributeValue ("show-type");
 
-    fCurrentTupletShowTypeKind = msrTuplet::kTupletShowTypeNone; // default value
+    fCurrentTupletShowTypeKind = msrTupletShowTypeKind::kTupletShowTypeNone; // default value
 
     if      (tupletShowType == "actual") {
-      fCurrentTupletShowTypeKind = msrTuplet::kTupletShowTypeActual;
+      fCurrentTupletShowTypeKind = msrTupletShowTypeKind::kTupletShowTypeActual;
     }
     else if (tupletShowType == "both") {
-      fCurrentTupletShowTypeKind = msrTuplet::kTupletShowTypeBoth;
+      fCurrentTupletShowTypeKind = msrTupletShowTypeKind::kTupletShowTypeBoth;
     }
     else if (tupletShowType == "[NONE]") {
-      fCurrentTupletShowTypeKind = msrTuplet::kTupletShowTypeNone;
+      fCurrentTupletShowTypeKind = msrTupletShowTypeKind::kTupletShowTypeNone;
     }
     else {
       if (tupletShowType.size ()) {
@@ -16436,16 +16465,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       "fCurrentTupletNumber: " <<
       fCurrentTupletNumber <<
       ", fCurrentTupletTypeKind: " <<
-      msrTuplet::tupletTypeKindAsString (
+      tupletTypeKindAsString (
         fCurrentTupletTypeKind) <<
       ", fCurrentTupletBracketKind: " <<
-      msrTuplet::tupletBracketKindAsString (
+      tupletBracketKindAsString (
         fCurrentTupletBracketKind) <<
       ", fCurrentTupletShowNumberKind: " <<
-      msrTuplet::tupletShowNumberKindAsString (
+      tupletShowNumberKindAsString (
         fCurrentTupletShowNumberKind) <<
       ", fCurrentTupletShowTypeKind: " <<
-      msrTuplet::tupletShowTypeKindAsString (
+      tupletShowTypeKindAsString (
         fCurrentTupletShowTypeKind) <<
       endl;
   }
@@ -17081,7 +17110,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
   S_msrMeasure
     chordFirstNoteDirectUpLinkToMeasure =
       chordFirstNote->
-        getNoteDirectUpLinkToMeasure ();
+        getMeasureElementUpLinkToMeasure ();
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceChordsDetails ()) {
@@ -17093,7 +17122,7 @@ S_msrChord mxsr2msrTranslator::createChordFromItsFirstNote (
       endl <<
       "+++++++++++++++++" <<
       endl << endl <<
-      "++++++++++++++++ chordFirstNote->getNoteDirectUpLinkToMeasure () =";
+      "++++++++++++++++ chordFirstNote->getMeasureElementUpLinkToMeasure () =";
 
     if (chordFirstNoteDirectUpLinkToMeasure) {
       gLogStream <<
@@ -18467,6 +18496,7 @@ void mxsr2msrTranslator::createTupletWithItsFirstNoteAndPushItToTupletsStack (
     tuplet =
       msrTuplet::create (
         firstNoteInputLineNumber,
+				nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
         fCurrentMeasureNumber,
         fCurrentTupletNumber,
         fCurrentTupletBracketKind,
@@ -20178,7 +20208,7 @@ void mxsr2msrTranslator::attachPendingLigaturesToNote (
 //         S_msrMeasure
 //           noteMeasure =
 //             note->
-//               getNoteDirectUpLinkToMeasure ();
+//               getMeasureElementUpLinkToMeasure ();
 //
 //         // sanity check
 //         mfAssert (
@@ -21266,12 +21296,12 @@ void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
 
     // attach the current grace notes to this note
     switch (fPendingGraceNotesGroup->getGraceNotesGroupKind ()) {
-      case msrGraceNotesGroup::kGraceNotesGroupBefore:
+      case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
         newNote->
           setNoteGraceNotesGroupBefore (
             fPendingGraceNotesGroup);
         break;
-      case msrGraceNotesGroup::kGraceNotesGroupAfter:
+      case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
         newNote->
           setNoteGraceNotesGroupAfter (
             fPendingGraceNotesGroup);
@@ -21314,22 +21344,22 @@ void mxsr2msrTranslator::populateNoteAfterNoteItselfIsHandled (
   }
 
   // handle the pending figured bass elements if any
-  if (fPendingFiguredBassElementsList.size ()) {
+  if (fPendingFiguredBassesList.size ()) {
     // get voice to insert figured bass elements into
     S_msrVoice
-      voiceToInsertFiguredBassElementsInto =
+      voiceToInsertFiguredBassesInto =
         fCurrentPart->
           getPartFiguredBassVoice ();
 
     // sanity check
     mfAssert (
       __FILE__, __LINE__,
-      voiceToInsertFiguredBassElementsInto != nullptr,
-      "voiceToInsertFiguredBassElementsInto is null");
+      voiceToInsertFiguredBassesInto != nullptr,
+      "voiceToInsertFiguredBassesInto is null");
 
-    handlePendingFiguredBassElements (
+    handlePendingFiguredBasses (
       newNote,
-      voiceToInsertFiguredBassElementsInto);
+      voiceToInsertFiguredBassesInto);
 
     // reset figured bass counter
     fFiguredBassVoicesCounter = 0;
@@ -21417,6 +21447,7 @@ void mxsr2msrTranslator::createAStaffChangeIfNecessary (
         voiceStaffChange =
           msrVoiceStaffChange::create (
             inputLineNumber,
+		        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
             staffToChangeTo);
 
   /* JMI
@@ -21632,7 +21663,7 @@ void mxsr2msrTranslator::attachPendingGraceNotesGroupToNoteIfRelevant (
       // set the pending grace notes group's kind to 'after'
       fPendingGraceNotesGroup->
         setGraceNotesGroupKind (
-          msrGraceNotesGroup::kGraceNotesGroupAfter);
+          msrGraceNotesGroupKind::kGraceNotesGroupAfter);
 
       // attach it to fCurrentNonGraceNote
       fCurrentNonGraceNote->
@@ -22097,14 +22128,14 @@ void mxsr2msrTranslator::handlePendingHarmonies (
 }
 
 //______________________________________________________________________________
-void mxsr2msrTranslator::handlePendingFiguredBassElements (
+void mxsr2msrTranslator::handlePendingFiguredBasses (
   S_msrNote  newNote,
   S_msrVoice voiceToInsertInto)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBassDetails ()) {
     gLogStream <<
-      "handlePendingFiguredBassElements(), newNote: " <<
+      "handlePendingFiguredBasses(), newNote: " <<
       endl;
     ++gIndenter;
     gLogStream <<
@@ -22122,10 +22153,10 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
       newNote->
         getNoteDisplayWholeNotes ();
 
-  while (fPendingFiguredBassElementsList.size ()) { // recompute at each iteration
-    S_msrFiguredBassElement
-      figuredBassElement =
-        fPendingFiguredBassElementsList.front ();
+  while (fPendingFiguredBassesList.size ()) { // recompute at each iteration
+    S_msrFiguredBass
+      figuredBass =
+        fPendingFiguredBassesList.front ();
 
     /*
        MusicXML figured bass elements don't have a duration,
@@ -22142,31 +22173,31 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
     */
 
     // set the figured bass element's sounding whole notes
-    figuredBassElement->
+    figuredBass->
       setMeasureElementSoundingWholeNotes (
         newNoteSoundingWholeNotes,
-        "handlePendingFiguredBassElements()");
+        "handlePendingFiguredBasses()");
 
     // set the figured bass element's display whole notes JMI useless???
-    figuredBassElement->
+    figuredBass->
       setFiguredBassDisplayWholeNotes (
         newNoteDisplayWholeNotes);
 
     // set the figured bass element's tuplet factor
-    figuredBassElement->
+    figuredBass->
       setFiguredBassTupletFactor (
         msrTupletFactor (
           fCurrentNoteActualNotes,
           fCurrentNoteNormalNotes));
 
     // register this note as the figured bass element note upLink
-    figuredBassElement->
-      setFiguredBassElementUpLinkToNote (newNote);
+    figuredBass->
+      setFiguredBassUpLinkToNote (newNote);
 
     // append the figured bass to newNote's figured bass elements list
     newNote->
-      appendFiguredBassElementToNoteFiguredBassElementsList (
-        figuredBassElement);
+      appendFiguredBassToNoteFiguredBassesList (
+        figuredBass);
 
 //* JMI
     // get the figured bass voice for the current voice
@@ -22183,23 +22214,23 @@ void mxsr2msrTranslator::handlePendingFiguredBassElements (
       partFiguredBassVoice != nullptr,
       "partFiguredBassVoice is null");
 
-    // set the figuredBassElement's voice upLink
+    // set the figuredBass's voice upLink
     // only now that we know which figured bass voice will contain it
-    figuredBassElement->
-      setFiguredBassElementUpLinkToVoice (
+    figuredBass->
+      setFiguredBassUpLinkToVoice (
         partFiguredBassVoice);
 
     // append the figured bass to the figured bass voice for the current voice
     partFiguredBassVoice->
-      appendFiguredBassElementToVoice (
-        figuredBassElement);
+      appendFiguredBassToVoice (
+        figuredBass);
 //*/
 
     // don't append the figured bass to the part figured bass voice
     // before the note itself has been appended to the voice
 
     // remove the figured bass from the list
-    fPendingFiguredBassElementsList.pop_front ();
+    fPendingFiguredBassesList.pop_front ();
   } // while
 }
 
@@ -22372,7 +22403,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
       fPendingGraceNotesGroup =
         msrGraceNotesGroup::create (
           inputLineNumber,
-          msrGraceNotesGroup::kGraceNotesGroupBefore, // default value
+          msrGraceNotesGroupKind::kGraceNotesGroupBefore, // default value
           fCurrentGraceIsSlashed,
           fCurrentGraceIsBeamed,
           fCurrentMeasureNumber);
@@ -22742,6 +22773,7 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
             syllable =
               msrSyllable::create (
                 inputLineNumber,
+				        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
                 syllableKind,
                 fCurrentSyllableExtendKind,
                 fCurrentStanzaNumber,
@@ -23324,7 +23356,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
   }
 
   switch (fCurrentTupletTypeKind) {
-    case msrTuplet::kTupletTypeStart:
+    case msrTupletTypeKind::kTupletTypeStart:
       {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
@@ -23370,11 +23402,11 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
         // swith to continuation mode
         // this is handy in case the forthcoming tuplet members
         // are not explictly of the "continue" type
-        fCurrentTupletTypeKind = msrTuplet::kTupletTypeContinue;
+        fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeContinue;
       }
       break;
 
-    case msrTuplet::kTupletTypeContinue:
+    case msrTupletTypeKind::kTupletTypeContinue:
       {
         if (fTupletsStack.size ()) {
           S_msrTuplet
@@ -23445,7 +23477,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       }
       break;
 
-    case msrTuplet::kTupletTypeStop:
+    case msrTupletTypeKind::kTupletTypeStop:
       {
         switch (fTupletsStack.size ()) {
           case 0:
@@ -23635,7 +23667,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       }
       break;
 
-    case msrTuplet::kTupletTypeStartAndStopInARow:
+    case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
       {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTuplets ()) {
@@ -23649,7 +23681,7 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
 #endif
 
         if (fCurrentSingleTremolo) {
-          fCurrentTupletTypeKind = msrTuplet::kTupletTypeStartAndStopInARow;
+          fCurrentTupletTypeKind = msrTupletTypeKind::kTupletTypeStartAndStopInARow;
         }
         else {
           stringstream s;
@@ -23678,14 +23710,14 @@ void mxsr2msrTranslator::handleNoteBelongingToATuplet (
       }
       break;
 
-    case msrTuplet::kTupletTypeNone:
+    case msrTupletTypeKind::kTupletTypeNone:
       break;
   } // switch
 
 /* JMI ???
   // forget about this tuplet type, needed for nested tuplets
   fCurrentTupletTypeKind =
-    msrTuplet::kTupletTypeNone;
+    msrTupletTypeKind::kTupletTypeNone;
     */
 }
 
@@ -24182,7 +24214,7 @@ void mxsr2msrTranslator::handleRepeatStart (
       ", measure '" <<
         barLine->getBarLineMeasureNumber () <<
       "', position " <<
-      barLine->getBarLinePositionInMeasure () <<
+      barLine->getBarLineMeasurePosition () <<
       */
       ", line " << inputLineNumber <<
       endl;
@@ -24482,6 +24514,7 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
     rehearsalMark =
       msrRehearsalMark::create (
         inputLineNumber,
+        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
         rehearsalKind,
         rehearsalValue,
         fCurrentDirectionPlacementKind);
@@ -25038,15 +25071,15 @@ void mxsr2msrTranslator::visitStart (S_degree_type& elt)
   // check harmony degree type
   if      (degreeType == "add")
     fCurrentHarmonyDegreeTypeKind =
-      msrHarmonyDegree::kHarmonyDegreeTypeAdd;
+      msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd;
 
   else if (degreeType == "alter")
     fCurrentHarmonyDegreeTypeKind =
-      msrHarmonyDegree::kHarmonyDegreeTypeAlter;
+      msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAlter;
 
   else if (degreeType == "subtract")
     fCurrentHarmonyDegreeTypeKind =
-      msrHarmonyDegree::kHarmonyDegreeTypeSubstract;
+      msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeSubstract;
 
   else {
       mxsr2msrError (
@@ -25236,7 +25269,7 @@ void mxsr2msrTranslator::visitEnd (S_harmony& elt)
       harmony =
         msrHarmony::createWithoutVoiceUplink (
           fCurrentHarmonyInputLineNumber,
-          // no harmoniesUpLinkToVoice yet
+	        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
 
           fCurrentHarmonyRootQuarterTonesPitchKind,
 
@@ -25594,16 +25627,16 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
   string parentheses = elt->getAttributeValue ("parentheses");
 
   fCurrentFiguredBassParenthesesKind =
-    msrFiguredBassElement::kFiguredBassElementParenthesesNo; // default value
+    msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo; // default value
 
   if (parentheses.size ()) {
     if (parentheses == "yes")
       fCurrentFiguredBassParenthesesKind =
-        msrFiguredBassElement::kFiguredBassElementParenthesesYes;
+        msrFiguredBassParenthesesKind::kFiguredBassParenthesesYes;
 
     else if (parentheses == "no")
      fCurrentFiguredBassParenthesesKind =
-        msrFiguredBassElement::kFiguredBassElementParenthesesNo;
+        msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo;
 
     else {
       stringstream s;
@@ -25624,8 +25657,8 @@ void mxsr2msrTranslator::visitStart (S_figured_bass& elt)
 
   fCurrentFigureNumber = -1;
 
-  fCurrentFigurePrefixKind = msrBassFigure::k_NoFigurePrefix;
-  fCurrentFigureSuffixKind = msrBassFigure::k_NoFigureSuffix;
+  fCurrentFigurePrefixKind = msrBassFigurePrefixKind::k_NoBassFigurePrefix;
+  fCurrentFigureSuffixKind = msrBassFigureSuffixKind::k_NoBassFigureSuffix;
 
   fCurrentFiguredBassSoundingWholeNotes = Rational (0, 1);
   fCurrentFiguredBassDisplayWholeNotes  = Rational (0, 1);
@@ -25662,28 +25695,28 @@ void mxsr2msrTranslator::visitStart (S_prefix& elt)
   string prefix =
     elt->getValue ();
 
-  fCurrentFigurePrefixKind = msrBassFigure::k_NoFigurePrefix;
+  fCurrentFigurePrefixKind = msrBassFigurePrefixKind::k_NoBassFigurePrefix;
 
   if      (prefix == "double-flat")
-    fCurrentFigurePrefixKind = msrBassFigure::kDoubleFlatPrefix;
+    fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kPrefixDoubleFlat;
 
   else if (prefix == "flat")
-    fCurrentFigurePrefixKind = msrBassFigure::kFlatPrefix;
+    fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kPrefixFlat;
 
   else if (prefix == "flat-flat")
-    fCurrentFigurePrefixKind = msrBassFigure::kFlatFlatPrefix;
+    fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kPrefixFlatFlat;
 
   else if (prefix == "natural")
-    fCurrentFigurePrefixKind = msrBassFigure::kNaturalPrefix;
+    fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kPrefixNatural;
 
   else if (prefix == "sharp-sharp")
-    fCurrentFigurePrefixKind = msrBassFigure::kSharpSharpPrefix;
+    fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kPrefixSharpSharp;
 
   else if (prefix == "sharp")
-    fCurrentFigurePrefixKind = msrBassFigure::kSharpPrefix;
+    fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kPrefixSharp;
 
   else if (prefix == "double-sharp")
-    fCurrentFigurePrefixKind = msrBassFigure::kDoubleSharpPrefix;
+    fCurrentFigurePrefixKind = msrBassFigurePrefixKind::kPrefixDoubleSharp;
 
   else if (prefix.size ()) {
     stringstream s;
@@ -25748,31 +25781,31 @@ void mxsr2msrTranslator::visitStart (S_suffix& elt)
   string suffix =
     elt->getValue ();
 
-  fCurrentFigureSuffixKind = msrBassFigure::k_NoFigureSuffix;
+  fCurrentFigureSuffixKind = msrBassFigureSuffixKind::k_NoBassFigureSuffix;
 
   if      (suffix == "double-flat")
-    fCurrentFigureSuffixKind = msrBassFigure::kDoubleFlatSuffix;
+    fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kSuffixDoubleFlat;
 
   else if (suffix == "flat")
-    fCurrentFigureSuffixKind = msrBassFigure::kFlatSuffix;
+    fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kSuffixFlat;
 
   else if (suffix == "flat-flat")
-    fCurrentFigureSuffixKind = msrBassFigure::kFlatFlatSuffix;
+    fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kSuffixFlatFlat;
 
   else if (suffix == "natural")
-    fCurrentFigureSuffixKind = msrBassFigure::kNaturalSuffix;
+    fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kSuffixNatural;
 
   else if (suffix == "sharp-sharp")
-    fCurrentFigureSuffixKind = msrBassFigure::kSharpSharpSuffix;
+    fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kSuffixSharpSharp;
 
   else if (suffix == "sharp")
-    fCurrentFigureSuffixKind = msrBassFigure::kSharpSuffix;
+    fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kSuffixSharp;
 
   else if (suffix == "double-sharp")
-    fCurrentFigureSuffixKind = msrBassFigure::kDoubleSharpSuffix;
+    fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kSuffixDoubleSharp;
 
   else if (suffix == "slash")
-    fCurrentFigureSuffixKind = msrBassFigure::kSlashSuffix;
+    fCurrentFigureSuffixKind = msrBassFigureSuffixKind::kSuffixSlash;
 
   else if (suffix.size ()) {
     stringstream s;
@@ -25845,11 +25878,11 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
   // create the figured bass element
   // if the sounding whole notes is 0/1 (no <duration /> was found), JMI ???
   // it will be set to the next note's sounding whole notes later
-  S_msrFiguredBassElement
-    figuredBassElement =
-      msrFiguredBassElement::create (
+  S_msrFiguredBass
+    figuredBass =
+      msrFiguredBass::create (
         inputLineNumber,
-  // JMI      fCurrentPart,
+        nullptr, // will be set when clef is append to a measure JMI v0.9.66 PIM
         fCurrentFiguredBassSoundingWholeNotes,
         fCurrentFiguredBassDisplayWholeNotes,
         fCurrentFiguredBassParenthesesKind,
@@ -25865,7 +25898,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
   else {
     // append the pending figures to the figured bass element
     for (S_msrBassFigure bassFigure : fPendingFiguredBassFiguresList) {
-      figuredBassElement->
+      figuredBass->
         appendFigureToFiguredBass (bassFigure);
     } // for
 
@@ -25873,7 +25906,7 @@ void mxsr2msrTranslator::visitEnd (S_figured_bass& elt)
     fPendingFiguredBassFiguresList.clear ();
 
     // append the figured bass element to the pending figured bass elements list
-    fPendingFiguredBassElementsList.push_back (figuredBassElement);
+    fPendingFiguredBassesList.push_back (figuredBass);
   }
 
   fOnGoingFiguredBass = false;
@@ -25967,7 +26000,8 @@ void mxsr2msrTranslator::visitStart (S_harp_pedals& elt)
 
   fCurrentHarpPedalsTuning =
     msrHarpPedalsTuning::create (
-      inputLineNumber);
+      inputLineNumber,
+			nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
 
 
   // add it to the current part
@@ -26125,7 +26159,8 @@ void mxsr2msrTranslator::visitStart( S_damp& elt)
     S_msrDamp
       damp =
         msrDamp::create (
-          inputLineNumber);
+					inputLineNumber,
+					nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
 
     // append it to the pending damps list
     fPendingDampsList.push_back (damp);
@@ -26159,7 +26194,8 @@ void mxsr2msrTranslator::visitStart( S_damp_all& elt)
     S_msrDampAll
       dampAll =
         msrDampAll::create (
-          inputLineNumber);
+					inputLineNumber,
+					nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
 
     // append it to the pending damp alls list
     fPendingDampAllsList.push_back (dampAll);
@@ -26301,7 +26337,8 @@ void mxsr2msrTranslator::visitStart (S_scordatura& elt)
 
   fCurrentScordatura =
     msrScordatura::create (
-      inputLineNumber);
+			inputLineNumber,
+			nullptr); // will be set when clef is append to a measure JMI v0.9.66 PIM
 }
 
 void mxsr2msrTranslator::visitStart (S_accord& elt)
@@ -26493,9 +26530,9 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
     // create the figured bass
     // if the sounding whole notes is 0/1 (no <duration /> was found),
     // it will be set to the next note's sounding whole notes later
-    S_msrFiguredBassElement
-      figuredBassElement =
-        msrFiguredBassElement::create (
+    S_msrFiguredBass
+      figuredBass =
+        msrFiguredBass::create (
           inputLineNumber,
           fCurrentPart,
           fCurrentFiguredBassSoundingWholeNotes,
@@ -26508,7 +26545,7 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
         i!=fPendingFiguredBassFiguresList.end ();
         ++i
       ) {
-        figuredBassElement->
+        figuredBass->
           appendFigureToFiguredBass ((*i));
       } // for
 
@@ -26517,9 +26554,9 @@ void mxsr2msrTranslator::visitStart (S_midi_instrument& elt)
 
     // append the figured bass to the current part
     fCurrentPart->
-      appendFiguredBassElementToPart (
+      appendFiguredBassToPart (
         voiceToInsertInto,
-        figuredBassElement);
+        figuredBass);
     */
 
 /*

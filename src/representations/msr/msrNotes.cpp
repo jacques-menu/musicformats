@@ -134,7 +134,7 @@ msrNote::msrNote (
   : msrTupletElement (inputLineNumber),
     fNoteAlphaRGBColor ("", "")
 {
-  fMeasureElementMeasureNumber = noteMeasureNumber;
+  fetchMeasureElementMeasureNumber () = noteMeasureNumber;
 
   // basic note description
   fNoteKind = noteKind;
@@ -668,7 +668,7 @@ S_msrNote msrNote::createNoteNewbornClone (
     newbornClone =
       msrNote::create (
         fInputLineNumber,
-        fMeasureElementMeasureNumber,
+        fetchMeasureElementMeasureNumber (),
 
         fNoteKind,
 
@@ -838,15 +838,6 @@ S_msrNote msrNote::createNoteNewbornClone (
   newbornClone->fNoteSoloNoteOrRestInStaffKind =
     fNoteSoloNoteOrRestInStaffKind;
 
-  // upLinks
-  // ------------------------------------------------------
-
-  /* JMI
-    S_msrTuplet           fNoteDirectUpLinkToTuplet;
-
-    S_msrMeasure          fNoteDirectUpLinkToMeasure;
-*/
-
   return newbornClone;
 }
 
@@ -879,7 +870,7 @@ S_msrNote msrNote::createNoteDeepClone (
     noteDeepClone =
       msrNote::create (
         fInputLineNumber,
-        fMeasureElementMeasureNumber,
+        fetchMeasureElementMeasureNumber (),
 
         fNoteKind,
 
@@ -1283,18 +1274,18 @@ S_msrNote msrNote::createNoteDeepClone (
   // figured bass elements
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteFiguredBassElementsList = // JMI ???
-    fNoteFiguredBassElementsList;
+  noteDeepClone->fNoteFiguredBassesList = // JMI ???
+    fNoteFiguredBassesList;
 
   // note measure information
   // ------------------------------------------------------
 
   noteDeepClone->
-    fMeasureElementMeasureNumber =
-      fMeasureElementMeasureNumber;
+    fetchMeasureElementMeasureNumber () =
+      fetchMeasureElementMeasureNumber ();
   noteDeepClone->
-    fMeasureElementPositionInMeasure =
-      fMeasureElementPositionInMeasure;
+    fMeasureElementMeasurePosition =
+      fMeasureElementMeasurePosition;
   noteDeepClone->
     fMeasureElementPositionFromBeginningOfVoice =
       fMeasureElementPositionFromBeginningOfVoice;
@@ -1350,20 +1341,6 @@ S_msrNote msrNote::createNoteDeepClone (
     fNoteSoloNoteOrRestInVoiceKind;
   noteDeepClone->fNoteSoloNoteOrRestInStaffKind =
     fNoteSoloNoteOrRestInStaffKind;
-
-  // upLinks
-  // ------------------------------------------------------
-
-  /* JMI
-
-    S_msrTuplet           fNoteDirectUpLinkToChord;
-
-    S_msrGraceNotesGroup  fNoteDirectUpLinkToGraceNoteGroup;
-
-    S_msrTuplet           fNoteDirectUpLinkToTuplet;
-
-    S_msrMeasure          fNoteDirectUpLinkToMeasure;
-*/
 
   return noteDeepClone;
 }
@@ -2186,9 +2163,9 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 }
 
 //________________________________________________________________________
-void msrNote::setNotePositionInMeasure (
+void msrNote::setNoteMeasurePosition (
   const S_msrMeasure measure,
-  const Rational&    positionInMeasure,
+  const Rational&    measurePosition,
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -2196,13 +2173,13 @@ void msrNote::setNotePositionInMeasure (
     gLogStream <<
       "Setting note's position in measure of " << asString () <<
       " to " <<
-      positionInMeasure <<
+      measurePosition <<
       " (was " <<
-      fMeasureElementPositionInMeasure <<
+      fMeasureElementMeasurePosition <<
       ") in measure " <<
       measure->asShortString () <<
-      " (fMeasureElementMeasureNumber: " <<
-      fMeasureElementMeasureNumber <<
+      " (measureElementMeasureNumber: " <<
+      fetchMeasureElementMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -2213,15 +2190,15 @@ void msrNote::setNotePositionInMeasure (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != msrMoment::K_NO_POSITION,
-    "positionInMeasure == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
 
   // set note's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
+  fMeasureElementMeasurePosition = measurePosition;
 
-  gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
-  print (gLogStream);
-  gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+//   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+//   print (gLogStream); // JMI v0.9.66
+//   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
 
   // sanity check
   mfAssert (
@@ -2234,7 +2211,7 @@ void msrNote::setNotePositionInMeasure (
      positionFromBeginningOfVoice =
       fNoteDirectUpLinkToMeasure->getMeasurePositionFromBeginningOfVoice ()
         +
-      positionInMeasure;
+      measurePosition;
 
   // set note's position in voice
   msrMeasureElement::setMeasureElementPositionFromBeginningOfVoice (
@@ -2264,23 +2241,23 @@ void msrNote::setNotePositionInMeasure (
     for (S_msrHarmony harmony : fNoteHarmoniesList) {
       // set the harmony position in measure, taking it's offset into account
       harmony->
-        setHarmonyPositionInMeasure (
+        setHarmonyMeasurePosition (
           measure,
-          positionInMeasure,
-          "msrNote::setNotePositionInMeasure()");
+          measurePosition,
+          "msrNote::setNoteMeasurePosition()");
     } // for
   }
 
   // are there figured bass elements attached to this note?
-  if (fNoteFiguredBassElementsList.size ()) {
-    list<S_msrFiguredBassElement>::const_iterator i;
-    for (S_msrFiguredBassElement figuredBassElement : fNoteFiguredBassElementsList) {
+  if (fNoteFiguredBassesList.size ()) {
+    list<S_msrFiguredBass>::const_iterator i;
+    for (S_msrFiguredBass figuredBass : fNoteFiguredBassesList) {
       // set the figured bass element position in measure
-      figuredBassElement->
-        setFiguredBassElementPositionInMeasure (
+      figuredBass->
+        setFiguredBassMeasurePosition (
           measure,
-          positionInMeasure,
-          "msrNote::setNotePositionInMeasure()");
+          measurePosition,
+          "msrNote::setNoteMeasurePosition()");
     } // for
   }
 
@@ -2289,10 +2266,10 @@ void msrNote::setNotePositionInMeasure (
     for (S_msrDalSegno dalSegno : fNoteDalSegnos) {
       // set the dal segno position in measure
       dalSegno->
-        setDalSegnoPositionInMeasure (
+        setDalSegnoMeasurePosition (
           measure,
-          positionInMeasure,
-          "msrNote::setNotePositionInMeasure()");
+          measurePosition,
+          "msrNote::setNoteMeasurePosition()");
     } // for
   }
 }
@@ -3136,7 +3113,7 @@ void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
 //       asString () <<
 //       " to '" << positionFromBeginningOfVoice <<
 //       "' in measure '" <<
-//       fMeasureElementMeasureNumber <<
+//       fetchMeasureElementMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3158,7 +3135,7 @@ void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
 //       asString () <<
 //       " to '" << positionFromBeginningOfVoice <<
 //       "' in measure '" <<
-//       fMeasureElementMeasureNumber <<
+//       fetchMeasureElementMeasureNumber () <<
 //       "', context: \"" <<
 //       context <<
 //       "\"" <<
@@ -3185,15 +3162,15 @@ void msrNote::appendScordaturaToNote (S_msrScordatura scordatura)
 // #endif
 // }
 
-bool msrNote::compareNotesByIncreasingPositionInMeasure (
+bool msrNote::compareNotesByIncreasingMeasurePosition (
   const SMARTP<msrNote>& first,
   const SMARTP<msrNote>& second)
 {
   return
     bool (
-      first->getMeasureElementPositionInMeasure ()
+      first->getMeasureElementMeasurePosition ()
         <
-      second->getMeasureElementPositionInMeasure ()
+      second->getMeasureElementMeasurePosition ()
     );
 }
 
@@ -3282,14 +3259,14 @@ void msrNote::appendHarmonyToNoteHarmoniesList (S_msrHarmony harmony)
   fNoteHarmoniesList.push_back (harmony);
 }
 
-void msrNote::appendFiguredBassElementToNoteFiguredBassElementsList (
-  S_msrFiguredBassElement figuredBassElement)
+void msrNote::appendFiguredBassToNoteFiguredBassesList (
+  S_msrFiguredBass figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
     gLogStream <<
       "Append figured bass " <<
-      figuredBassElement->asString () <<
+      figuredBass->asString () <<
       " to the figured bass elements list of " <<
       asString () <<
       ", line " << fInputLineNumber <<
@@ -3299,11 +3276,11 @@ void msrNote::appendFiguredBassElementToNoteFiguredBassElementsList (
 
   // update the figured bass whole notes if it belongs to a tuplet ??? utf8.xml
 
-  fNoteFiguredBassElementsList.push_back (figuredBassElement);
+  fNoteFiguredBassesList.push_back (figuredBass);
 
-  // register this note as the figuredBassElement upLink
-  figuredBassElement->
-    setFiguredBassElementUpLinkToNote (this);
+  // register this note as the figuredBass upLink
+  figuredBass->
+    setFiguredBassUpLinkToNote (this);
 }
 
 void msrNote::acceptIn (basevisitor* v)
@@ -3751,13 +3728,13 @@ void msrNote::browseData (basevisitor* v)
   }
 
   // browse the figured bass elements if any
-  if (fNoteFiguredBassElementsList.size ()) {
-    list<S_msrFiguredBassElement>::const_iterator i;
+  if (fNoteFiguredBassesList.size ()) {
+    list<S_msrFiguredBass>::const_iterator i;
     for (
-      i=fNoteFiguredBassElementsList.begin (); i!=fNoteFiguredBassElementsList.end (); ++i
+      i=fNoteFiguredBassesList.begin (); i!=fNoteFiguredBassesList.end (); ++i
     ) {
       // browse the figured bass
-      msrBrowser<msrFiguredBassElement> browser (v);
+      msrBrowser<msrFiguredBass> browser (v);
       browser.browse (*(*i));
     } // for
   }
@@ -4672,12 +4649,12 @@ string msrNote::noteComplementsAsString () const
   }
 
   s <<
-    ", fMeasureElementMeasureNumber: ";
-  if (fMeasureElementMeasureNumber == K_NO_MEASURE_NUMBER) {
+    ", measureElementMeasureNumber: ";
+  if (fetchMeasureElementMeasureNumber () == K_NO_MEASURE_NUMBER) {
     s << "*unknown*";
   }
   else {
-    s << fMeasureElementMeasureNumber;
+    s << fetchMeasureElementMeasureNumber ();
   }
 
   return s.str ();
@@ -4739,7 +4716,7 @@ string msrNote::asShortStringForTimeView () const
 
   s <<
     "@:" <<
-    fMeasureElementPositionInMeasure <<
+    fMeasureElementMeasurePosition <<
     ' ' <<
     asShortStringForMeasuresSlices ();
 
@@ -4938,16 +4915,16 @@ string msrNote::asString () const
 
 /* JMI
   s << left <<
-    ", positionInMeasure: ";
+    ", measurePosition: ";
     / * JMI
-  if (fMeasureElementPositionInMeasure == msrMoment::K_NO_POSITION_MEASURE_NUMBER) {
-    s << "unknown (" << fMeasureElementPositionInMeasure << ")";
+  if (fMeasureElementMeasurePosition == msrMoment::K_NO_POSITION_MEASURE_NUMBER) {
+    s << "unknown (" << fMeasureElementMeasurePosition << ")";
   }
   else {
-    s << fMeasureElementPositionInMeasure;
+    s << fMeasureElementMeasurePosition;
   }
   * /
-  s << fMeasureElementPositionInMeasure;
+  s << fMeasureElementMeasurePosition;
 
   s <<
     ", positionFromBeginningOfVoice: " <<
@@ -5301,16 +5278,16 @@ void msrNote::print (ostream& os) const
 
 /* JMI
   os << left <<
-    ", positionInMeasure: ";
+    ", measurePosition: ";
     / * JMI
-  if (fMeasureElementPositionInMeasure == msrMoment::K_NO_POSITION_MEASURE_NUMBER) {
-    os << "unknown (" << fMeasureElementPositionInMeasure << ")";
+  if (fMeasureElementMeasurePosition == msrMoment::K_NO_POSITION_MEASURE_NUMBER) {
+    os << "unknown (" << fMeasureElementMeasurePosition << ")";
   }
   else {
-    os << fMeasureElementPositionInMeasure;
+    os << fMeasureElementMeasurePosition;
   }
   * /
-  os << fMeasureElementPositionInMeasure;
+  os << fMeasureElementMeasurePosition;
 
   os <<
     ", positionFromBeginningOfVoice: " <<
@@ -5494,20 +5471,20 @@ void msrNote::print (ostream& os) const
   // print measure number
   os << left <<
     setw (fieldWidth) <<
-    "fMeasureElementMeasureNumber" << " : ";
-  if (fMeasureElementMeasureNumber == K_NO_MEASURE_NUMBER) {
+    "measureElementMeasureNumber" << " : ";
+  if (fetchMeasureElementMeasureNumber () == K_NO_MEASURE_NUMBER) {
     os <<
       "unknown";
   }
-  else if (fMeasureElementMeasureNumber.size ()) {
+  else if (fetchMeasureElementMeasureNumber ().size ()) {
     os <<
-      fMeasureElementMeasureNumber;
+      fetchMeasureElementMeasureNumber ();
   }
   else {
     stringstream s;
 
     s <<
-      "fMeasureElementMeasureNumber is empty in note " <<
+      "fetchMeasureElementMeasureNumber () is empty in note " <<
       this->asString () <<
       "'";
 
@@ -5522,23 +5499,23 @@ void msrNote::print (ostream& os) const
   // print position in measure
   os << left <<
     setw (fieldWidth) <<
-    "fMeasureElementPositionInMeasure" << " : " <<
-    fMeasureElementPositionInMeasure <<
+    "fMeasureElementMeasurePosition" << " : " <<
+    fMeasureElementMeasurePosition <<
     endl;
 
-  // print position in voice
-  os << left <<
-    setw (fieldWidth) <<
-    "fMeasureElementPositionFromBeginningOfVoice" << " : " <<
-    fMeasureElementPositionFromBeginningOfVoice <<
-    endl <<
-    setw (fieldWidth) <<
-    "fMeasureElementMomentFromBeginningOfVoice" << " : " <<
-    endl;
-  ++gIndenter;
-  os <<
-    fMeasureElementMomentFromBeginningOfVoice;
-  --gIndenter;
+  // print position from beginning of voice
+//   os << left <<
+//     setw (fieldWidth) <<
+//     "fMeasureElementPositionFromBeginningOfVoice" << " : " <<
+//     fMeasureElementPositionFromBeginningOfVoice <<
+//     endl <<
+//     setw (fieldWidth) <<
+//     "fMeasureElementMomentFromBeginningOfVoice" << " : " <<
+//     endl;
+//   ++gIndenter;
+//   os <<
+//     fMeasureElementMomentFromBeginningOfVoice;
+//   --gIndenter;
 
   // print note measure uplink
   os <<
@@ -6907,21 +6884,21 @@ void msrNote::print (ostream& os) const
   // print the figured bass elements associated to this note if any
   os <<
     setw (fieldWidth) <<
-    "fNoteFiguredBassElementsList";
-  if (fNoteFiguredBassElementsList.size ()) {
+    "fNoteFiguredBassesList";
+  if (fNoteFiguredBassesList.size ()) {
     os << endl;
 
     ++gIndenter;
 
-    list<S_msrFiguredBassElement>::const_iterator
-      iBegin = fNoteFiguredBassElementsList.begin (),
-      iEnd   = fNoteFiguredBassElementsList.end (),
+    list<S_msrFiguredBass>::const_iterator
+      iBegin = fNoteFiguredBassesList.begin (),
+      iEnd   = fNoteFiguredBassesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      S_msrFiguredBassElement
-        figuredBassElement = (*i);
+      S_msrFiguredBass
+        figuredBass = (*i);
 
-      os << figuredBassElement;
+      os << figuredBass;
 
       if (++i == iEnd) break;
       // no endl here
@@ -7027,16 +7004,16 @@ void msrNote::printShort (ostream& os) const
   // print position in measure
   os << left <<
     setw (fieldWidth) <<
-    "fMeasureElementPositionInMeasure" << " : " <<
-    fMeasureElementPositionInMeasure <<
+    "fMeasureElementMeasurePosition" << " : " <<
+    fMeasureElementMeasurePosition <<
     endl;
 
-  // print position in voice
-  os << left <<
-    setw (fieldWidth) <<
-    "fMeasureElementPositionFromBeginningOfVoice" << " : " <<
-    fMeasureElementPositionFromBeginningOfVoice <<
-    endl;
+  // print position from beginning of voice
+//   os << left <<
+//     setw (fieldWidth) <<
+//     "fMeasureElementPositionFromBeginningOfVoice" << " : " <<
+//     fMeasureElementPositionFromBeginningOfVoice <<
+//     endl;
 
   // print sounding and displayed whole notes
   switch (fNoteKind) {
@@ -7752,23 +7729,23 @@ void msrNote::printShort (ostream& os) const
   }
 
   // print the figured bass elements associated to this note if any
-  if (fNoteFiguredBassElementsList.size ()) {
+  if (fNoteFiguredBassesList.size ()) {
     os <<
       setw (fieldWidth) <<
-      "fNoteFiguredBassElementsList";
+      "fNoteFiguredBassesList";
       os << endl;
 
     ++gIndenter;
 
-    list<S_msrFiguredBassElement>::const_iterator
-      iBegin = fNoteFiguredBassElementsList.begin (),
-      iEnd   = fNoteFiguredBassElementsList.end (),
+    list<S_msrFiguredBass>::const_iterator
+      iBegin = fNoteFiguredBassesList.begin (),
+      iEnd   = fNoteFiguredBassesList.end (),
       i      = iBegin;
     for ( ; ; ) {
-      S_msrFiguredBassElement
-        figuredBassElement = (*i);
+      S_msrFiguredBass
+        figuredBass = (*i);
 
-      os << figuredBassElement;
+      os << figuredBass;
 
       if (++i == iEnd) break;
       // no endl here

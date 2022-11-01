@@ -76,7 +76,7 @@ oahRegularHandler::oahRegularHandler (
 
   fInsiderHandler = insiderOahHandler;
 
-  // initializeOahRegularHandler() should be called in subclasses
+  // initializeOahRegularHandler() should be called in sub-classes
   // after the corresponding constructor has been executed,
   // because it uses oahRegularHandler's pure virtual methods
 }
@@ -102,7 +102,7 @@ void oahRegularHandler::initializeOahRegularHandler ()
       getHandlerPrefixesMap ();
 
   // createRegularHandlerGroups() is executed
-  // in the subclasses for code homogeneity
+  // in the sub-classes for code homogeneity
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {

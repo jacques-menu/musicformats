@@ -129,15 +129,17 @@ class EXP msrScordatura : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrScordatura> create (
-      int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-    msrScordatura (
-      int inputLineNumber);
+                          msrScordatura (
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     virtual               ~msrScordatura ();
 
@@ -195,21 +197,23 @@ class EXP msrAccordionRegistration : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrAccordionRegistration> create (
-      int inputLineNumber,
-      int highDotsNumber,
-      int middleDotsNumber,
-      int lowDotsNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            int          highDotsNumber,
+                            int          middleDotsNumber,
+                            int          lowDotsNumber);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-    msrAccordionRegistration (
-      int inputLineNumber,
-      int highDotsNumber,
-      int middleDotsNumber,
-      int lowDotsNumber);
+                          msrAccordionRegistration (
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            int          highDotsNumber,
+                            int          middleDotsNumber,
+                            int          lowDotsNumber);
 
     virtual               ~msrAccordionRegistration ();
 
@@ -275,7 +279,8 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrHarpPedalsTuning> create (
-      int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     SMARTP<msrHarpPedalsTuning> createHarpPedalsTuningNewbornClone ();
 
@@ -286,8 +291,9 @@ class EXP msrHarpPedalsTuning : public msrMeasureElement
     // constructors/destructor
     // ------------------------------------------------------
 
-    msrHarpPedalsTuning (
-      int inputLineNumber);
+                          msrHarpPedalsTuning (
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     ~ msrHarpPedalsTuning ();
 
@@ -373,22 +379,24 @@ class EXP msrPedal : public msrMeasureElement
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<msrPedal> create (
-      int              inputLineNumber,
-      msrPedalTypeKind pedalTypeKind,
-      msrPedalLineKind pedalLineKind,
-      msrPedalSignKind pedalSignKind);
+                          static SMARTP<msrPedal> create (
+                            int              inputLineNumber,
+                            S_msrMeasure     upLinkToMeasure,
+                            msrPedalTypeKind pedalTypeKind,
+                            msrPedalLineKind pedalLineKind,
+                            msrPedalSignKind pedalSignKind);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-    msrPedal (
-      int              inputLineNumber,
-      msrPedalTypeKind pedalTypeKind,
-      msrPedalLineKind pedalLineKind,
-      msrPedalSignKind pedalSignKind);
+                          msrPedal (
+                            int              inputLineNumber,
+                            S_msrMeasure     upLinkToMeasure,
+                            msrPedalTypeKind pedalTypeKind,
+                            msrPedalLineKind pedalLineKind,
+                            msrPedalSignKind pedalSignKind);
 
     virtual               ~msrPedal ();
 
@@ -455,15 +463,17 @@ class EXP msrDamp : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrDamp> create (
-      int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-    msrDamp (
-      int inputLineNumber);
+                          msrDamp (
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     virtual               ~msrDamp ();
 
@@ -511,15 +521,17 @@ class EXP msrDampAll : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrDampAll> create (
-      int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-    msrDampAll (
-      int inputLineNumber);
+                          msrDampAll (
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     virtual               ~msrDampAll ();
 

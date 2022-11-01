@@ -1,0 +1,130 @@
+% MusicFormats maintainance guide
+% Jacques Menu, 2021-2022
+
+\documentclass[11pt,a4paper]{report}
+
+
+% -------------------------------------------------------------------------
+% import common LaTeX settings
+% -------------------------------------------------------------------------
+
+\usepackage{import}
+
+\subimport{../CommonLaTeXFiles}{LaTeXCommonSettings.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXDivisionsCommands.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXIndexing.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXFontsAndColors.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXReferencing.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXBoxes.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXGraphicsAndPictures.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXMusicFormatsCommands.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXMusicFormatsFilesAndFolders.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXMusicFormatsNames.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXShortcuts.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXListings.tex}
+
+\subimport{../CommonLaTeXFiles}{LaTeXTablesAndLists.tex}
+
+
+% -------------------------------------------------------------------------
+% indexing (specific to this document)
+% -------------------------------------------------------------------------
+
+
+% -------------------------------------------------------------------------
+\begin{document}
+% -------------------------------------------------------------------------
+
+\useFirstPageHeadersAndFooters
+
+% defeat headwidth not being equal to \textwidth %%%JMI should not be necessary ???
+\setlength{\headwidth}{\textwidth}
+
+% use the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
+
+
+\begin{titlepage}
+  \begin{center}
+    \vspace*{2cm}
+
+    \textbf{
+      \LARGE{\mf\ figures} \\[10pt]
+			\Large{\url{https://github.com/jacques-menu/musicformats}}
+			}
+
+    \vspace{0.25cm}
+
+    \large{
+    	\input{../../MusicFormatsVersionNumber.txt}%
+			-- %
+    	\input{../../MusicFormatsVersionDate.txt}
+		}
+
+    \vspace{0.75cm}
+
+    \large{\textbf{Jacques Menu}}
+
+  \end{center}
+
+  \vspace{1cm}
+
+This document contains the main figures describing \mf.
+It is part of the \mf\ documentation, to be found at\\
+\url{https://github.com/jacques-menu/musicformats/tree/dev/documentation}.
+
+Contents:
+\begin{itemize}
+\item \quotedFigureRef{The MusicFormats architecture}
+
+\item \quotedFigureRef{The MSR classes hierarchy}
+
+\item \quotedFigureRef{The OAH classes hierarchy}
+\end{itemize}
+
+\end{titlepage}
+
+{
+	% reduce font size for tables and lists
+	\small
+
+	% reduce vertical size of tables and lists
+  \setlength {\parskip} {0.3ex plus \baselineskip minus 2pt}
+
+%  \listoffigures
+
+}
+
+
+% now we can switch to the regular headers and footers
+\useRegularPagesHeadersAndFooters
+
+\subimport{../CommonLaTeXFiles}{MusicFormatsArchitecturePicture}
+
+\subimport{../CommonLaTeXFiles}{MSRClassesHierarchyPicture}
+
+\subimport{../CommonLaTeXFiles}{OAHClassesHierarchyPicture}
+
+
+% -------------------------------------------------------------------------
+% postamble
+% -------------------------------------------------------------------------
+
+% back to the lists fancyhead headers and footers
+\useListsPagesHeadersAndFooters
+
+
+% -------------------------------------------------------------------------
+\end{document}
+% -------------------------------------------------------------------------

@@ -142,6 +142,7 @@ class EXP msrStaffDetails : public msrMeasureElement
 
     static SMARTP<msrStaffDetails> create (
                             int                 inputLineNumber,
+                            S_msrMeasure        upLinkToMeasure,
                             msrStaffTypeKind    staffTypeKind,
                             msrShowFretsKind    showFretsKind,
                             msrPrintObjectKind  printObjectKind,
@@ -154,6 +155,7 @@ class EXP msrStaffDetails : public msrMeasureElement
 
                           msrStaffDetails (
                             int                 inputLineNumber,
+                            S_msrMeasure        upLinkToMeasure,
                             msrStaffTypeKind    staffTypeKind,
                             msrShowFretsKind    showFretsKind,
                             msrPrintObjectKind  printObjectKind,

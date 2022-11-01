@@ -2841,12 +2841,12 @@ void msr2bsrTranslator::visitStart (S_msrFrame& elt)
 }
 
 //________________________________________________________________________
-void msr2bsrTranslator::visitStart (S_msrFiguredBassElement& elt)
+void msr2bsrTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> Start visiting msrFiguredBassElement '" <<
+      "--> Start visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
@@ -2857,13 +2857,13 @@ void msr2bsrTranslator::visitStart (S_msrFiguredBassElement& elt)
   // create a deep clone of the figured bass
   fCurrentFiguredBass =
     elt->
-      createFiguredBassElementDeepClone (
+      createFiguredBassDeepClone (
         fCurrentPartClone);
 
   if (fOnGoingNote) {
     // append the figured bass to the current non-grace note clone
     fCurrentNonGraceNoteClone->
-      appendFiguredBassElementToNoteFiguredBassElementsList (fCurrentFiguredBassElementClone);
+      appendFiguredBassToNoteFiguredBassesList (fCurrentFiguredBassClone);
 
     // don't append the figured bass to the part figured bass,  JMI ???
     // this will be done below
@@ -2878,7 +2878,7 @@ void msr2bsrTranslator::visitStart (S_msrFiguredBassElement& elt)
   else if (fOnGoingFiguredBassVoice) { // JMI
     // register the figured bass in the part clone figured bass
     fCurrentPartClone->
-      appendFiguredBassElementToPartClone (
+      appendFiguredBassToPartClone (
         fCurrentVoiceClone,
         fCurrentFiguredBass);
   }
@@ -2903,12 +2903,12 @@ void msr2bsrTranslator::visitStart (S_msrBassFigure& elt)
       elt);
 }
 
-void msr2bsrTranslator::visitEnd (S_msrFiguredBassElement& elt)
+void msr2bsrTranslator::visitEnd (S_msrFiguredBass& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "--> End visiting msrFiguredBassElement '" <<
+      "--> End visiting msrFiguredBass '" <<
       elt->asString () <<
       "'" <<
       ", line " << elt->getInputLineNumber () <<
@@ -4255,12 +4255,12 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
    // { // JMI
 
     switch (elt->getGraceNotesGroupKind ()) {
-      case msrGraceNotesGroup::kGraceNotesGroupBefore:
+      case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
         fCurrentNonGraceNoteClone->
           setNoteGraceNotesGroupBefore (
             fCurrentGraceNotesGroupClone);
         break;
-      case msrGraceNotesGroup::kGraceNotesGroupAfter:
+      case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
         fCurrentNonGraceNoteClone->
           setNoteGraceNotesGroupAfter (
             fCurrentGraceNotesGroupClone);
@@ -5384,8 +5384,8 @@ void msr2bsrTranslator::visitStart (S_msrTuplet& elt)
   fTupletClonesStack.push (tupletClone);
 
   switch (elt->getTupletLineShapeKind ()) {
-    case msrTuplet::kTupletLineShapeStraight:
-    case msrTuplet::kTupletLineShapeCurved:
+    case msrTupletLineShapeKind::kTupletLineShapeStraight:
+    case msrTupletLineShapeKind::kTupletLineShapeCurved:
       fResultingBsr->
         // this score needs the 'tuplets curved brackets' Scheme function
         setTupletsCurvedBracketsSchemeFunctionIsNeeded ();

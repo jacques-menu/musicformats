@@ -13,6 +13,7 @@
 #define ___mxsr2msrOah___
 
 #include "msrSegnos.h"
+#include "msrDalSegnos.h"
 
 #include "msrBasicTypes.h"
 
@@ -414,8 +415,8 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // figured bass
     // --------------------------------------
 
-    Bool                  getIgnoreFiguredBassElements () const
-                              { return fIgnoreFiguredBassElements; }
+    Bool                  getIgnoreFiguredBasses () const
+                              { return fIgnoreFiguredBasses; }
 
     // dynamics and wedges
     // --------------------------------------
@@ -750,7 +751,7 @@ class EXP mxsr2msrOahGroup : public oahGroup
     // figured bass
     // --------------------------------------
 
-    Bool                  fIgnoreFiguredBassElements;
+    Bool                  fIgnoreFiguredBasses;
 
     // dynamics and wedges
     // --------------------------------------

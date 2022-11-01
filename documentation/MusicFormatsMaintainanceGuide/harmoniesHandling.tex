@@ -983,7 +983,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         ||
       gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
     ) {
-      generateInputLineNumberAndOrPositionInMeasureAsAComment (
+      generateInputLineNumberAndOrMeasurePositionAsAComment (
         elt);
     }
   }

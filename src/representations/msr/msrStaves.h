@@ -211,7 +211,7 @@ class EXP msrStaff : public msrElement
 
     void                  insertHiddenMeasureAndBarLineInStaffClone (
                             int             inputLineNumber,
-                            const Rational& positionInMeasure);
+                            const Rational& measurePosition);
 
     // transposition
 
@@ -529,7 +529,7 @@ class EXP msrStaff : public msrElement
                             const S_msrVoice& first,
                             const S_msrVoice& second);
 
-    static bool           compareVoicesToHaveFiguredBassElementsBelowCorrespondingVoice (
+    static bool           compareVoicesToHaveFiguredBassesBelowCorrespondingVoice (
                             const S_msrVoice& first,
                             const S_msrVoice& second);
 

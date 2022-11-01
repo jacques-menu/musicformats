@@ -3457,7 +3457,7 @@ void oahCombinedBooleansAtom::print (ostream& os) const
 
   if (! fBooleanAtomsList.size ()) {
     os <<
-      "empty";
+      "[EMPTY]";
   }
 
   else {
@@ -4044,7 +4044,7 @@ void oahCommonPrefixBooleansAtom::print (ostream& os) const
     "fBooleanAtomsList" << " : ";
 
   if (! fBooleanAtomsList.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     os << endl;
@@ -5499,7 +5499,7 @@ void oahFactorizedStringAtom::print (ostream& os) const
     "fStringAtomsList" << " : ";
 
   if (! fStringAtomsList.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
 
   else {
@@ -6511,7 +6511,7 @@ void oahNaturalNumbersSetElementAtom::print (ostream& os) const
 
   if (! fNaturalNumbersSetVariable.size ()) {
     os <<
-      "empty";
+      "[EMPTY]";
   }
 
   else {
@@ -6549,7 +6549,7 @@ void oahNaturalNumbersSetElementAtom::printAtomWithVariableOptionsValues (
 
   if (! fNaturalNumbersSetVariable.size ()) {
     os <<
-      "empty";
+      "[EMPTY]";
   }
 
   else {
@@ -6973,7 +6973,7 @@ string oahIntSetElementAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fIntSetVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     set<int>::const_iterator
@@ -6998,7 +6998,7 @@ string oahIntSetElementAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (! fIntSetVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     set<int>::const_iterator
@@ -7034,7 +7034,7 @@ void oahIntSetElementAtom::print (ostream& os) const
     endl;
 
   if (! fIntSetVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     set<int>::const_iterator
@@ -7064,7 +7064,7 @@ void oahIntSetElementAtom::printAtomWithVariableOptionsValues (
 
   if (! fIntSetVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {
@@ -7261,7 +7261,7 @@ string oahStringSetElementAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     set<string>::const_iterator
@@ -7286,7 +7286,7 @@ string oahStringSetElementAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (! fStringSetVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     set<string>::const_iterator
@@ -7322,7 +7322,7 @@ void oahStringSetElementAtom::print (ostream& os) const
     endl;
 
   if (! fStringSetVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     set<string>::const_iterator
@@ -7351,7 +7351,7 @@ void oahStringSetElementAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringSetVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {
@@ -7604,7 +7604,7 @@ string oahStringToIntMapElementAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fStringToIntMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<string, int>::const_iterator
@@ -7629,7 +7629,7 @@ string oahStringToIntMapElementAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (! fStringToIntMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<string, int>::const_iterator
@@ -7665,7 +7665,7 @@ void oahStringToIntMapElementAtom::print (ostream& os) const
     endl;
 
   if (! fStringToIntMapVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     map<string, int>::const_iterator
@@ -7695,7 +7695,7 @@ void oahStringToIntMapElementAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringToIntMapVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {
@@ -7948,7 +7948,7 @@ string oahStringToStringMapElementAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<string, string>::const_iterator
@@ -7973,7 +7973,7 @@ string oahStringToStringMapElementAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<string, string>::const_iterator
@@ -8008,7 +8008,7 @@ void oahStringToStringMapElementAtom::print (ostream& os) const
     "fStringToStringMapVariable" << " : ";
 
   if (! fStringToStringMapVariable.size ()) {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
   else {
     os << endl;
@@ -8044,7 +8044,7 @@ void oahStringToStringMapElementAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringToStringMapVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {
@@ -8297,7 +8297,7 @@ string oahStringToStringMultiMapElementAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fStringToStringMultiMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     multimap<string, string>::const_iterator
@@ -8322,7 +8322,7 @@ string oahStringToStringMultiMapElementAtom::asActualLongNamedOptionString () co
     '-' << fLongName << ' ';
 
   if (! fStringToStringMultiMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     multimap<string, string>::const_iterator
@@ -8357,7 +8357,7 @@ void oahStringToStringMultiMapElementAtom::print (ostream& os) const
     "fStringToStringMultiMapVariable" << " : ";
 
   if (! fStringToStringMultiMapVariable.size ()) {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
   else {
     os << endl;
@@ -8393,7 +8393,7 @@ void oahStringToStringMultiMapElementAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringToStringMultiMapVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {

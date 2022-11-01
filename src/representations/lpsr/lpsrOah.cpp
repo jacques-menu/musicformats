@@ -742,7 +742,7 @@ string lpsrStaffInstrumentNameAtom::asShortNamedOptionString () const
     '-' << fShortName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<string, string>::const_iterator
@@ -767,7 +767,7 @@ string lpsrStaffInstrumentNameAtom::asActualLongNamedOptionString () const
     '-' << fLongName << ' ';
 
   if (! fStringToStringMapVariable.size ()) {
-    s << "empty";
+    s << "[EMPTY]";
   }
   else {
     map<string, string>::const_iterator
@@ -806,7 +806,7 @@ void lpsrStaffInstrumentNameAtom::print (ostream& os) const
     endl;
 
   if (! fStringToStringMapVariable.size ()) {
-    os << "empty";
+    os << "[EMPTY]";
   }
   else {
     map<string, string>::const_iterator
@@ -835,7 +835,7 @@ void lpsrStaffInstrumentNameAtom::printAtomWithVariableOptionsValues (
 
   if (! fStringToStringMapVariable.size ()) {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
   else {
@@ -1090,7 +1090,7 @@ void lpsrTransposeAtom::printAtomWithVariableOptionsValues (
   }
   else {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
 }
@@ -2214,7 +2214,7 @@ void lpsrOahGroup::printLpsrOahValues (int fieldWidth)
     fetchNamesBetweenQuotes () <<
     " :";
   if (! fAddEmptyMeasuresStringToIntMap.size ()) {
-    gLogStream << "empty";
+    gLogStream << "[EMPTY]";
   }
   else {
     map<string, int>::const_iterator

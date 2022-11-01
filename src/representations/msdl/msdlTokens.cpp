@@ -2017,7 +2017,7 @@ void msdlTokensList::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   --gIndenter;

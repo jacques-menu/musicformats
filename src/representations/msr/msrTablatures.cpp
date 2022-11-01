@@ -472,7 +472,7 @@ void msrFrame::print (ostream& os) const
   }
   else {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
 
@@ -521,7 +521,7 @@ void msrFrame::print (ostream& os) const
   }
   else {
     os <<
-      "empty" <<
+      "[EMPTY]" <<
       endl;
   }
 

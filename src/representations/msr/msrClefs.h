@@ -31,15 +31,17 @@ class EXP msrClef : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrClef> create (
-                            int         inputLineNumber,
-                            msrClefKind clefKind,
-                            int         clefStaffNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            msrClefKind  clefKind,
+                            int          clefStaffNumber);
 
     // creation from the applications
     // ------------------------------------------------------
 
     static SMARTP<msrClef> createClefFromString (
                             int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
                             const string& clefString,
                             int           clefLineNumber);
 
@@ -49,9 +51,10 @@ class EXP msrClef : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrClef (
-                            int         inputLineNumber,
-                            msrClefKind clefKind,
-                            int         clefStaffNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            msrClefKind  clefKind,
+                            int          clefStaffNumber);
 
     virtual               ~msrClef ();
 

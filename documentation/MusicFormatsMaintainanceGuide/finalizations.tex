@@ -209,7 +209,7 @@ void msrPart::finalizePart (
   else {
     // sort the staves to have harmonies above and figured bass below the part
     fPartAllStavesList.sort (
-      compareStavesToHaveFiguredBassElementsBelowCorrespondingPart);
+      compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
     // finalize the staves
     for (
@@ -827,7 +827,7 @@ void msrMeasure::finalizeFiguredBassMeasure (
            fMeasureOrdinalNumberInVoice - 1 ];
 
   // handle the figured bass elements in this measure
-  finalizeFiguredBassElementsInFiguredBassMeasure (
+  finalizeFiguredBassesInFiguredBassMeasure (
     inputLineNumber,
     context);
 

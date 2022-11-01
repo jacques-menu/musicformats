@@ -39,7 +39,8 @@ class EXP msrTupletElement : public msrMeasureElement
   protected:
 
                           msrTupletElement (
-                            int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     virtual               ~msrTupletElement ();
 

@@ -20,6 +20,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasures.h"
+
 #include "msrBarNumberChecks.h"
 
 #include "oahOah.h"
@@ -35,12 +37,14 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrBarNumberCheck msrBarNumberCheck::create (
   int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
   const string& nextBarOriginalNumber,
   int           nextBarPuristNumber)
 {
   msrBarNumberCheck* o =
     new msrBarNumberCheck (
       inputLineNumber,
+      upLinkToMeasure,
       nextBarOriginalNumber,
       nextBarPuristNumber);
   assert (o != nullptr);
@@ -49,9 +53,12 @@ S_msrBarNumberCheck msrBarNumberCheck::create (
 
 msrBarNumberCheck::msrBarNumberCheck (
   int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
   const string& nextBarOriginalNumber,
   int           nextBarPuristNumber)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fNextBarOriginalNumber = nextBarOriginalNumber;
   fNextBarPuristNumber   = nextBarPuristNumber;
@@ -147,7 +154,7 @@ ostream& operator << (ostream& os, const S_msrBarNumberCheck& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -76,10 +76,10 @@ all:
 	@$(MAKE) pdflily
 
 clean:
-	@rm *.ly *.pdf *.midi
 	@[ ! -d lilypond ] || rm -r lilypond
 	@[ ! -d pdflily ]  || rm -r pdflily
 	@[ ! -d pnglilyv ] || rm -r pnglily
+	rm *.ly *.pdf *.midi
 
 help:
 	@echo "Makefile for converting MusicXML files to LilyPond scores."

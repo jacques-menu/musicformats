@@ -147,7 +147,7 @@ void msrPart::initializePart ()
   fPartContainsMultipleFullBarRests = false;
 
   // current position in measure
-  fPartCurrentPositionInMeasure = Rational (0, 1);
+  fPartCurrentMeasurePosition = Rational (0, 1);
 
   // part shortest note duration
   fPartShortestNoteDuration = Rational (INT_MAX, 1);
@@ -325,27 +325,27 @@ void msrPart::registerStaffInPart (
   } // switch
 }
 
-void msrPart::setPartCurrentPositionInMeasure (
+void msrPart::setPartCurrentMeasurePosition (
   int             inputLineNumber,
-  const Rational& positionInMeasure)
+  const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Setting part current position in measure to " <<
-      positionInMeasure <<
+      measurePosition <<
       " in part " <<
       getPartCombinedName () <<
       endl;
   }
 #endif
 
-  if (positionInMeasure.getNumerator () < 0) {
+  if (measurePosition.getNumerator () < 0) {
     stringstream s;
 
     s <<
       "cannot set part current position in measure to " <<
-      positionInMeasure <<
+      measurePosition <<
       " in part " <<
       getPartCombinedName () <<
       " since it is negative";
@@ -357,15 +357,15 @@ void msrPart::setPartCurrentPositionInMeasure (
       s.str ());
   }
 
-  fPartCurrentPositionInMeasure =
-    positionInMeasure;
+  fPartCurrentMeasurePosition =
+    measurePosition;
 }
 
-void msrPart::incrementPartCurrentPositionInMeasure (
+void msrPart::incrementPartCurrentMeasurePosition (
   int             inputLineNumber,
   const Rational& duration)
 {
-  fPartCurrentPositionInMeasure += duration;
+  fPartCurrentMeasurePosition += duration;
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
@@ -375,13 +375,13 @@ void msrPart::incrementPartCurrentPositionInMeasure (
       " in part " <<
       getPartCombinedName () <<
       ", thus setting it to " <<
-      fPartCurrentPositionInMeasure <<
+      fPartCurrentMeasurePosition <<
       endl;
   }
 #endif
 }
 
-void msrPart::decrementPartCurrentPositionInMeasure (
+void msrPart::decrementPartCurrentMeasurePosition (
   int             inputLineNumber,
   const Rational& duration)
 {
@@ -396,9 +396,9 @@ void msrPart::decrementPartCurrentPositionInMeasure (
   }
 #endif
 
-  fPartCurrentPositionInMeasure -= duration;
+  fPartCurrentMeasurePosition -= duration;
 
-  if (fPartCurrentPositionInMeasure.getNumerator () < 0) {
+  if (fPartCurrentMeasurePosition.getNumerator () < 0) {
     stringstream s;
 
     s <<
@@ -407,7 +407,7 @@ void msrPart::decrementPartCurrentPositionInMeasure (
       " in part " <<
       getPartCombinedName () <<
       " since that sets it to " <<
-      fPartCurrentPositionInMeasure <<
+      fPartCurrentMeasurePosition <<
       ", which is negative ";
 
     msrInternalError (
@@ -421,7 +421,7 @@ void msrPart::decrementPartCurrentPositionInMeasure (
   if (gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "The new part current position in measure is " <<
-      fPartCurrentPositionInMeasure <<
+      fPartCurrentMeasurePosition <<
       " in part " <<
       getPartCombinedName () <<
       endl;
@@ -1107,13 +1107,13 @@ void msrPart::appendPageBreakToPart (S_msrPageBreak pageBreak)
 
 void msrPart::insertHiddenMeasureAndBarLineInPartClone (
   int             inputLineNumber,
-  const Rational& positionInMeasure)
+  const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
-      positionInMeasure <<
+      measurePosition <<
       "' in part clone " << getPartCombinedName () <<
       ", line " << inputLineNumber <<
       endl;
@@ -1127,7 +1127,7 @@ void msrPart::insertHiddenMeasureAndBarLineInPartClone (
     staff->
       insertHiddenMeasureAndBarLineInStaffClone (
         inputLineNumber,
-        positionInMeasure);
+        measurePosition);
   } // for
 
   --gIndenter;
@@ -1879,12 +1879,12 @@ S_msrVoice msrPart::createPartFiguredBassVoice (
   return fPartFiguredBassVoice;
 }
 
-void msrPart::appendFiguredBassElementToPart (
+void msrPart::appendFiguredBassToPart (
   S_msrVoice              figuredBassSupplierVoice,
-  S_msrFiguredBassElement figuredBassElement)
+  S_msrFiguredBass figuredBass)
 {
   int inputLineNumber =
-    figuredBassElement->getInputLineNumber ();
+    figuredBass->getInputLineNumber ();
 
   ++gIndenter;
 
@@ -1895,7 +1895,7 @@ void msrPart::appendFiguredBassElementToPart (
       if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
         gLogStream <<
           "Appending figured bass " <<
-          figuredBassElement->asString () <<
+          figuredBass->asString () <<
           " to part " <<
           getPartCombinedName () <<
           ", line " << inputLineNumber <<
@@ -1904,7 +1904,7 @@ void msrPart::appendFiguredBassElementToPart (
 #endif
 
       fPartFiguredBassVoice->
-        appendFiguredBassElementToVoice (figuredBassElement);
+        appendFiguredBassToVoice (figuredBass);
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
@@ -1935,12 +1935,12 @@ void msrPart::appendFiguredBassElementToPart (
   --gIndenter;
 }
 
-void msrPart::appendFiguredBassElementToPartClone (
+void msrPart::appendFiguredBassToPartClone (
   S_msrVoice              figuredBassSupplierVoice,
-  S_msrFiguredBassElement figuredBassElement)
+  S_msrFiguredBass figuredBass)
 {
   int inputLineNumber =
-    figuredBassElement->getInputLineNumber ();
+    figuredBass->getInputLineNumber ();
 
   ++gIndenter;
 
@@ -1951,7 +1951,7 @@ void msrPart::appendFiguredBassElementToPartClone (
       if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
         gLogStream <<
           "Appending figured bass " <<
-          figuredBassElement->asString () <<
+          figuredBass->asString () <<
           " to part clone " <<
           getPartCombinedName () <<
           ", line " << inputLineNumber <<
@@ -1960,7 +1960,7 @@ void msrPart::appendFiguredBassElementToPartClone (
 #endif
 
       fPartFiguredBassVoice->
-        appendFiguredBassElementToVoiceClone (figuredBassElement);
+        appendFiguredBassToVoiceClone (figuredBass);
       break;
 
     case msrVoiceKind::kVoiceKindDynamics:
@@ -2105,7 +2105,7 @@ void msrPart::handleBackupInPart (
   const Rational& backupStepLength)
 {
   // account for backup in part
-  decrementPartCurrentPositionInMeasure (
+  decrementPartCurrentMeasurePosition (
     inputLineNumber,
     backupStepLength);
 }
@@ -2126,7 +2126,7 @@ void msrPart::finalizeLastAppendedMeasureInPart (
   ++gIndenter;
 
   // reset current position in measure
-  fPartCurrentPositionInMeasure = Rational (0, 1);
+  fPartCurrentMeasurePosition = Rational (0, 1);
 
   // finalize current measure in all staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -2172,7 +2172,7 @@ void msrPart::setPartInstrumentNamesMaxLengthes ()
   }
 }
 
-bool msrPart::compareStavesToHaveFiguredBassElementsBelowCorrespondingPart (
+bool msrPart::compareStavesToHaveFiguredBassesBelowCorrespondingPart (
   const S_msrStaff& first,
   const S_msrStaff& second)
 {
@@ -2228,7 +2228,7 @@ void msrPart::finalizePart (
     // sort the staves to have harmonies above and
     // figured bass below the part
     fPartAllStavesList.sort (
-      compareStavesToHaveFiguredBassElementsBelowCorrespondingPart);
+      compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
     // finalize all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -2264,7 +2264,7 @@ void msrPart::finalizePartClone (
 // JMI CAFE ???
     // sort the staves to have harmonies above and figured bass below the part
     fPartAllStavesList.sort (
-      compareStavesToHaveFiguredBassElementsBelowCorrespondingPart);
+      compareStavesToHaveFiguredBassesBelowCorrespondingPart);
 
     // finalize all the staves
   for (S_msrStaff staff : fPartAllStavesList) {
@@ -2548,7 +2548,7 @@ void msrPart::printPartMeasuresWholeNotesDurationsVector (
     "fPartMeasuresWholeNotesDurationsVector" << " : " ;
 
   if (fPartNumberOfMeasures == 0) {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
   else {
     os << endl;
@@ -2653,8 +2653,8 @@ void msrPart::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fPartCurrentPositionInMeasure" << " : " <<
-    fPartCurrentPositionInMeasure <<
+    "fPartCurrentMeasurePosition" << " : " <<
+    fPartCurrentMeasurePosition <<
     endl <<
 
     setw (fieldWidth) <<
@@ -2854,7 +2854,7 @@ void msrPart::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   // print part part all voices
@@ -2876,7 +2876,7 @@ void msrPart::print (ostream& os) const
     --gIndenter;
   }
   else {
-    os << "empty" << endl;
+    os << "[EMPTY]" << endl;
   }
 
   os << endl;
@@ -3232,8 +3232,8 @@ void msrPart::printSummary (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fPartCurrentPositionInMeasure" << " : " <<
-    fPartCurrentPositionInMeasure <<
+    "fPartCurrentMeasurePosition" << " : " <<
+    fPartCurrentMeasurePosition <<
     endl;
 
   // print all the staves

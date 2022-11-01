@@ -215,7 +215,7 @@ string bsrTimeSignatureItem::asString () const
     fTimeSignatureBeatsNumbersVector.size ();
 
   s <<
-    "TimeSignatureItem " <<
+    "[TimeSignatureItem " <<
     ", " <<
     mfSingularOrPlural (
       timeSignatureBeatsNumbersVectorSize, "timeSignatureBeatNumber", "timeSignatureBeatNumbers");
@@ -256,7 +256,8 @@ string bsrTimeSignatureItem::asString () const
   } // switch
 
   s <<
-    ", line " << fInputLineNumber;
+    ", line " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -274,7 +275,7 @@ ostream& operator << (ostream& os, const S_bsrTimeSignatureItem& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -900,7 +901,7 @@ ostream& operator << (ostream& os, const S_bsrTimeSignature& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

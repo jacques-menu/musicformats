@@ -2011,11 +2011,11 @@ class EXP msrMoment
                           msrMoment ();
 
                           msrMoment (
-                            const Rational& writtenPositionInMeasure,
+                            const Rational& writtenMeasurePosition,
                             const Rational& soundingRelativeOffset);
 
                           msrMoment (
-                            const Rational& writtenPositionInMeasure);
+                            const Rational& writtenMeasurePosition);
 
     virtual               ~msrMoment ();
 

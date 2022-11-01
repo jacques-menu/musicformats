@@ -5,7 +5,7 @@
 \chapter{Positions in measures}
 % -------------------------------------------------------------------------
 
-Positions in measures is stored in \field{msrMeasureElement}{fMeasureElementPositionInMeasure} in \class{msrMeasureElement}, defined in \msrBoth{msrMeasureElement}:
+Positions in measures is stored in \field{msrMeasureElement}{fMeasureElementMeasurePosition} in \class{msrMeasureElement}, defined in \msrBoth{msrMeasureElement}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP msrMeasureElement : public msrElement
 {
@@ -23,9 +23,9 @@ class EXP msrMeasureElement : public msrElement
 
     rational              fMeasureElementSoundingWholeNotes;
 
-    string                fMeasureElementMeasureNumber;
+    string                fetchMeasureElementMeasureNumber ();
 
-    rational              fMeasureElementPositionInMeasure;
+    rational              fMeasureElementMeasurePosition;
     rational              fMeasureElementPositionFromBeginningOfVoice;
 
     msrMoment             fMeasureElementMomentInMeasure;

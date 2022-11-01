@@ -14,7 +14,6 @@
 
 #include "msrBasicTypes.h"
 
-// #include "msrMeasureElements.h"
 #include "msrMeasures.h"
 
 
@@ -114,8 +113,10 @@ class EXP msrTimeSignature : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrTimeSignature> create (
-                            int                        inputLineNumber,
-                            msrTimeSignatureSymbolKind timeSignatureSymbolKind);
+                            int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
+                            msrTimeSignatureSymbolKind
+                                          timeSignatureSymbolKind);
 
     // creation from the applications
     // ------------------------------------------------------
@@ -163,8 +164,10 @@ class EXP msrTimeSignature : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrTimeSignature (
-                            int                        inputLineNumber,
-                            msrTimeSignatureSymbolKind timeSignatureSymbolKind);
+                            int           inputLineNumber,
+                            S_msrMeasure  upLinkToMeasure,
+                            msrTimeSignatureSymbolKind
+                                          timeSignatureSymbolKind);
 
     virtual               ~msrTimeSignature ();
 
@@ -174,20 +177,20 @@ class EXP msrTimeSignature : public msrMeasureElement
     // ------------------------------------------------------
 
     // position in measure
-    void                  setMeasureElementPositionInMeasure (
+    void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context) override
                               {
-                                setTimeSignaturePositionInMeasure (
+                                setTimeSignatureMeasurePosition (
                                   measure,
-                                  positionInMeasure,
+                                  measurePosition,
                                   context);
                               }
 
-    void                  setTimeSignaturePositionInMeasure (
+    void                  setTimeSignatureMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context);
 
     msrTimeSignatureSymbolKind

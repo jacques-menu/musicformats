@@ -10,6 +10,7 @@
 #include "msrMultipleFullBarRests.h"
 #include "msrRehearsalMarks.h"
 #include "msrSegnos.h"
+#include "msrDalSegnos.h"
 #include "msrSegmentElements.h"
 #include "msrStaves.h"
 #include "msrTablatures.h"
@@ -60,8 +61,8 @@ typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
 class msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 
-class msrFiguredBassElement;
-typedef SMARTP<msrFiguredBassElement> S_msrFiguredBassElement;
+class msrFiguredBass;
+typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 
 class msrVoiceStaffChange;
 typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
@@ -191,14 +192,14 @@ class EXP msrSegment : public msrVoiceElement
 
     // backup and padding
 
-    void                  padUpToPositionInMeasureInSegment (
+    void                  padUpToMeasurePositionInSegment (
                             int             inputLineNumber,
                             const Rational& wholeNotes);
 
     void                  backupByWholeNotesStepLengthInSegment (
                             int     inputLineNumber,
                             const Rational&
-                                    backupTargetMeasureElementPositionInMeasure);
+                                    backupTargetMeasureElementMeasurePosition);
 
     void                  appendPaddingNoteToSegment (
                             int             inputLineNumber,
@@ -246,7 +247,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  insertHiddenMeasureAndBarLineInSegmentClone (
                             int             inputLineNumber,
-                            const Rational& positionInMeasure);
+                            const Rational& measurePosition);
 
     // transposition
 
@@ -307,11 +308,11 @@ class EXP msrSegment : public msrVoiceElement
 
     // figured bass
 
-    void                  appendFiguredBassElementToSegment (
-                            S_msrFiguredBassElement figuredBassElement);
+    void                  appendFiguredBassToSegment (
+                            S_msrFiguredBass figuredBass);
 
-    void                  appendFiguredBassElementToSegmentClone (
-                            S_msrFiguredBassElement figuredBassElement);
+    void                  appendFiguredBassToSegmentClone (
+                            S_msrFiguredBass figuredBass);
 
     // staff change
 
@@ -322,7 +323,7 @@ class EXP msrSegment : public msrVoiceElement
 
     void                  appendNoteToSegment (
                             S_msrNote       note,
-                            const Rational& partCurrentPositionInMeasure);
+                            const Rational& partCurrentMeasurePosition);
 
     void                  appendNoteToSegmentClone (S_msrNote note);
 

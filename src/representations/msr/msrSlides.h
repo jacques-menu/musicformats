@@ -73,14 +73,6 @@ class EXP msrSlide : public msrElement
     string                getSlideTextValue () const
                               { return fSlideTextValue; }
 
-    // measure upLink
-    void                  setSlideUpLinkToMeasure (
-                            const S_msrMeasure& measure)
-                              { fSlideUpLinkToMeasure = measure; }
-
-    S_msrMeasure          getSlideUpLinkToMeasure () const
-                              { return fSlideUpLinkToMeasure; }
-
   public:
 
     // public services
@@ -109,9 +101,6 @@ class EXP msrSlide : public msrElement
 
     // private fields
     // ------------------------------------------------------
-
-    // upLink
-    S_msrMeasure          fSlideUpLinkToMeasure;
 
     int                   fSlideNumber;
 

@@ -7,9 +7,9 @@
 #include "msrBeams.h"
 #include "msrChords.h"
 #include "msrEyeGlasses.h"
-#include "msrFiguredBassElements.h"
+#include "msrFiguredBasses.h"
 #include "msrGlissandos.h"
-#include "msrGraceNotes.h"
+#include "msrGraceNotesGroups.h"
 #include "msrHarmonies.h"
 #include "msrLigatures.h"
 #include "msrLyrics.h"
@@ -240,14 +240,6 @@ class EXP msrNote : public msrTupletElement
     // set and get
     // ------------------------------------------------------
 
-    // measure upLink
-    void                  setNoteDirectUpLinkToMeasure (
-                            const S_msrMeasure& measure)
-                              { fNoteDirectUpLinkToMeasure = measure; }
-
-    S_msrMeasure          getNoteDirectUpLinkToMeasure () const
-                              { return fNoteDirectUpLinkToMeasure; }
-
     // chord upLink
     void                  setNoteDirectUpLinkToChord (
                             const S_msrChord& chord)
@@ -273,20 +265,20 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteDirectUpLinkToTuplet; }
 
     // position in measure
-    void                  setMeasureElementPositionInMeasure (
+    void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context) override
                               {
-                                setNotePositionInMeasure (
+                                setNoteMeasurePosition (
                                   measure,
-                                  positionInMeasure,
+                                  measurePosition,
                                   context);
                               }
 
-    void                  setNotePositionInMeasure (
+    void                  setNoteMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context);
 
     // note kind
@@ -495,12 +487,12 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteHarmoniesList; }
 
     // figured bass
-    void                  appendFiguredBassElementToNoteFiguredBassElementsList (
-                            S_msrFiguredBassElement figuredBassElement);
+    void                  appendFiguredBassToNoteFiguredBassesList (
+                            S_msrFiguredBass figuredBass);
 
-    const list<S_msrFiguredBassElement>&
-                          getNoteFiguredBassElementsList () const
-                              { return fNoteFiguredBassElementsList; }
+    const list<S_msrFiguredBass>&
+                          getNoteFiguredBassesList () const
+                              { return fNoteFiguredBassesList; }
 
     // note lyrics
     // -------------------------------
@@ -900,7 +892,7 @@ class EXP msrNote : public msrTupletElement
     // scordaturas
     void                  appendScordaturaToNote (S_msrScordatura scordatura);
 
-    static bool           compareNotesByIncreasingPositionInMeasure (
+    static bool           compareNotesByIncreasingMeasurePosition (
                             const SMARTP<msrNote>& first,
                             const SMARTP<msrNote>& second);
 
@@ -998,8 +990,6 @@ class EXP msrNote : public msrTupletElement
     S_msrGraceNotesGroup  fNoteDirectUpLinkToGraceNotesGroup;
 
     S_msrTuplet           fNoteDirectUpLinkToTuplet;
-
-    S_msrMeasure          fNoteDirectUpLinkToMeasure;
 
     // basic note description
     // ------------------------------------------------------
@@ -1234,8 +1224,8 @@ class EXP msrNote : public msrTupletElement
     // figured bass
     // ------------------------------------------------------
 
-    list<S_msrFiguredBassElement>
-                          fNoteFiguredBassElementsList;
+    list<S_msrFiguredBass>
+                          fNoteFiguredBassesList;
 
     // note redundant information (for speed)
     // ------------------------------------------------------

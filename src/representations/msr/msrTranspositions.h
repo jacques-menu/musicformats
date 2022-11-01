@@ -31,11 +31,12 @@ class EXP msrTransposition : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrTransposition> create (
-                            int  inputLineNumber,
-                            int  transposeDiatonic,
-                            int  transposeChromatic,
-                            int  transposeOctaveChange,
-                            Bool transposeDouble);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            int          transposeDiatonic,
+                            int          transposeChromatic,
+                            int          transposeOctaveChange,
+                            Bool         transposeDouble);
 
   protected:
 
@@ -43,11 +44,12 @@ class EXP msrTransposition : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrTransposition (
-                            int  inputLineNumber,
-                            int  transposeDiatonic,
-                            int  transposeChromatic,
-                            int  transposeOctaveChange,
-                            Bool transposeDouble);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            int          transposeDiatonic,
+                            int          transposeChromatic,
+                            int          transposeOctaveChange,
+                            Bool         transposeDouble);
 
     virtual               ~msrTransposition ();
 

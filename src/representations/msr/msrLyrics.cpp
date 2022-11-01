@@ -26,6 +26,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasures.h"
+
 #include "msrLyrics.h"
 
 #include "oahOah.h"
@@ -43,6 +45,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrSyllable msrSyllable::create (
   int                   inputLineNumber,
+  S_msrMeasure          upLinkToMeasure,
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
   const string&         syllableStanzaNumber,
@@ -53,6 +56,7 @@ S_msrSyllable msrSyllable::create (
   msrSyllable* o =
     new msrSyllable (
       inputLineNumber,
+      upLinkToMeasure,
       syllableKind,
       syllableExtendKind,
       syllableStanzaNumber,
@@ -66,6 +70,7 @@ S_msrSyllable msrSyllable::create (
 
 S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
   int                   inputLineNumber,
+  S_msrMeasure          upLinkToMeasure,
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
   const string&         syllableStanzaNumber,
@@ -77,6 +82,7 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
   msrSyllable* o =
     new msrSyllable (
       inputLineNumber,
+      upLinkToMeasure,
       syllableKind,
       syllableExtendKind,
       syllableStanzaNumber,
@@ -91,13 +97,16 @@ S_msrSyllable msrSyllable::createWithNextMeasurePuristNumber (
 
 msrSyllable::msrSyllable (
   int                   inputLineNumber,
+  S_msrMeasure          upLinkToMeasure,
   msrSyllableKind       syllableKind,
   msrSyllableExtendKind syllableExtendKind,
   const string&         syllableStanzaNumber,
   const Rational&       syllableWholeNotes,
   msrTupletFactor       syllableTupletFactor,
   S_msrStanza           SyllableUpLinkToStanza)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   // sanity check
   mfAssert (
@@ -294,9 +303,9 @@ S_msrSyllable msrSyllable::createSyllableDeepClone (
   return syllableDeepClone;
 }
 
-void msrSyllable::setSyllablePositionInMeasure (
+void msrSyllable::setSyllableMeasurePosition (
   const S_msrMeasure measure,
-  const Rational&    positionInMeasure,
+  const Rational&    measurePosition,
   const string&      context)
 {
 #ifdef TRACING_IS_ENABLED
@@ -304,13 +313,13 @@ void msrSyllable::setSyllablePositionInMeasure (
     gLogStream <<
       "Setting syllable's position in measure of " << asString () <<
       " to " <<
-      positionInMeasure <<
+      measurePosition <<
       " (was " <<
-      fMeasureElementPositionInMeasure <<
+      fMeasureElementMeasurePosition <<
       ") in measure " <<
       measure->asShortString () <<
-      " (fMeasureElementMeasureNumber: " <<
-      fMeasureElementMeasureNumber <<
+      " (measureElementMeasureNumber: " <<
+      fetchMeasureElementMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -321,11 +330,11 @@ void msrSyllable::setSyllablePositionInMeasure (
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != msrMoment::K_NO_POSITION,
-    "positionInMeasure == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
 
   // set syllable's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
+  fMeasureElementMeasurePosition = measurePosition;
 }
 
 void msrSyllable::appendLyricTextToSyllable (const string& text)

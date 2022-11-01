@@ -62,20 +62,20 @@ class EXP msrSegmentElement : public msrElement
                               { return fSegmentElementSoundingWholeNotes; }
 
 //     void                  setSegmentElementMeasureNumber (
-//                             const string& positionInMeasure)
+//                             const string& measurePosition)
 //                               {
-//                                 fSegmentElementMeasureNumber = positionInMeasure;
+//                                 fSegmentElementMeasureNumber = measurePosition;
 //                               }
 //
 //     string                getSegmentElementMeasureNumber () const
 //                               { return fSegmentElementMeasureNumber; }
 //
-//     void                  setSegmentElementPositionInMeasure (
-//                             const Rational& positionInMeasure,
+//     void                  setSegmentElementMeasurePosition (
+//                             const Rational& measurePosition,
 //                             const string&   context); // v0.9.66 PIM
 //
-//     Rational              getSegmentElementPositionInMeasure () const
-//                               { return fSegmentElementPositionInMeasure; }
+//     Rational              getSegmentElementMeasurePosition () const
+//                               { return fSegmentElementMeasurePosition; }
 //
 //     void                  setSegmentElementPositionFromBeginningOfVoice (
 //                             const Rational& positionFromBeginningOfVoice,
@@ -106,7 +106,7 @@ class EXP msrSegmentElement : public msrElement
     virtual void          appendMeasureElementToSegmentElement (
                             S_msrMeasureElement elem) = 0;
 
-//     static bool           compareSegmentElementsByIncreasingPositionInMeasure (
+//     static bool           compareSegmentElementsByIncreasingMeasurePosition (
 //                             const SMARTP<msrSegmentElement>& first,
 //                             const SMARTP<msrSegmentElement>& second);
 //
@@ -151,7 +151,7 @@ class EXP msrSegmentElement : public msrElement
 
 //     string                fSegmentElementMeasureNumber;
 //
-//     Rational              fSegmentElementPositionInMeasure;
+//     Rational              fSegmentElementMeasurePosition;
 //     Rational              fSegmentElementPositionFromBeginningOfVoice;
 //
 //     msrMoment             fSegmentElementMomentInMeasure;

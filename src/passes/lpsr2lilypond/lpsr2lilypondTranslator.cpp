@@ -4849,14 +4849,14 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
           harmonyDegree->
             getHarmonyDegreeAlterationKind ();
 
-      msrHarmonyDegree::msrHarmonyDegreeTypeKind
+      msrHarmonyDegreeTypeKind
         harmonyDegreeTypeKind =
           harmonyDegree->
             getHarmonyDegreeTypeKind ();
 
       // generate the harmony degree
       switch (harmonyDegreeTypeKind) {
-        case msrHarmonyDegree::kHarmonyDegreeTypeAdd:
+        case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd:
           s <<
       // JMI ???      "." <<
             harmonyDegreeValue <<
@@ -4864,7 +4864,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
               harmonyDegreeAlterationKind);
           break;
 
-        case msrHarmonyDegree::kHarmonyDegreeTypeAlter:
+        case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAlter:
           s <<
             "." <<
             harmonyDegreeValue <<
@@ -4872,7 +4872,7 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
               harmonyDegreeAlterationKind);
           break;
 
-        case msrHarmonyDegree::kHarmonyDegreeTypeSubstract:
+        case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeSubstract:
           thereAreDegreesToBeRemoved = true;
           break;
       } // switch
@@ -4903,18 +4903,18 @@ in all of them, the C and A# in theory want to fan out to B (the dominant).  Thi
             harmonyDegree->
               getHarmonyDegreeAlterationKind ();
 
-        msrHarmonyDegree::msrHarmonyDegreeTypeKind
+        msrHarmonyDegreeTypeKind
           harmonyDegreeTypeKind =
             harmonyDegree->
               getHarmonyDegreeTypeKind ();
 
         // generate the harmony degree
         switch (harmonyDegreeTypeKind) {
-          case msrHarmonyDegree::kHarmonyDegreeTypeAdd:
-          case msrHarmonyDegree::kHarmonyDegreeTypeAlter:
+          case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd:
+          case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAlter:
             break;
 
-          case msrHarmonyDegree::kHarmonyDegreeTypeSubstract:
+          case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeSubstract:
    // JMI         if (counter > 1) {}
           s <<
             harmonyDegreeValue <<
@@ -4965,17 +4965,17 @@ string lpsr2lilypondTranslator::figureAsLilypondString (
   ++fCurrentFiguredBassFiguresCounter;
 
   // is the figured bass parenthesized?
-  msrFiguredBassElement::msrFiguredBassElementParenthesesKind
+  msrFiguredBassParenthesesKind
     figuredBassParenthesesKind =
       fCurrentFiguredBass->
         getFiguredBassParenthesesKind ();
 
   // generate the bass figure number
   switch (figuredBassParenthesesKind) {
-    case msrFiguredBassElement::kFiguredBassElementParenthesesYes:
+    case msrFiguredBassParenthesesKind::kFiguredBassParenthesesYes:
       s << '[';
       break;
-    case msrFiguredBassElement::kFiguredBassElementParenthesesNo:
+    case msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo:
       break;
   } // switch
 
@@ -4983,66 +4983,66 @@ string lpsr2lilypondTranslator::figureAsLilypondString (
     bassFigure->getFigureNumber ();
 
   switch (figuredBassParenthesesKind) {
-    case msrFiguredBassElement::kFiguredBassElementParenthesesYes:
+    case msrFiguredBassParenthesesKind::kFiguredBassParenthesesYes:
       s << ']';
       break;
-    case msrFiguredBassElement::kFiguredBassElementParenthesesNo:
+    case msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo:
       break;
   } // switch
 
   // handle the bass figure prefix
   switch (bassFigure->getFigurePrefixKind ()) {
-    case msrBassFigure::k_NoFigurePrefix:
+    case msrBassFigurePrefixKind::k_NoBassFigurePrefix:
       break;
-    case msrBassFigure::kDoubleFlatPrefix:
+    case msrBassFigurePrefixKind::kPrefixDoubleFlat:
       s << "--";
       break;
-    case msrBassFigure::kFlatPrefix:
+    case msrBassFigurePrefixKind::kPrefixFlat:
       s << "-";
       break;
-    case msrBassFigure::kFlatFlatPrefix:
+    case msrBassFigurePrefixKind::kPrefixFlatFlat:
       s << "flat flat";
       break;
-    case msrBassFigure::kNaturalPrefix:
+    case msrBassFigurePrefixKind::kPrefixNatural:
       s << "!";
       break;
-    case msrBassFigure::kSharpSharpPrefix:
+    case msrBassFigurePrefixKind::kPrefixSharpSharp:
       s << "sharp sharp";
       break;
-    case msrBassFigure::kSharpPrefix:
+    case msrBassFigurePrefixKind::kPrefixSharp:
       s << "+";
       break;
-    case msrBassFigure::kDoubleSharpPrefix:
+    case msrBassFigurePrefixKind::kPrefixDoubleSharp:
       s << "++";
       break;
   } // switch
 
   // handle the bass figure suffix
   switch (bassFigure->getFigureSuffixKind ()) {
-    case msrBassFigure::k_NoFigureSuffix:
+    case msrBassFigureSuffixKind::k_NoBassFigureSuffix:
       break;
-    case msrBassFigure::kDoubleFlatSuffix:
+    case msrBassFigureSuffixKind::kSuffixDoubleFlat:
       s << "double flat";
       break;
-    case msrBassFigure::kFlatSuffix:
+    case msrBassFigureSuffixKind::kSuffixFlat:
       s << "flat";
       break;
-    case msrBassFigure::kFlatFlatSuffix:
+    case msrBassFigureSuffixKind::kSuffixFlatFlat:
       s << "flat flat";
       break;
-    case msrBassFigure::kNaturalSuffix:
+    case msrBassFigureSuffixKind::kSuffixNatural:
       s << "natural";
       break;
-    case msrBassFigure::kSharpSharpSuffix:
+    case msrBassFigureSuffixKind::kSuffixSharpSharp:
       s << "sharp sharp";
       break;
-    case msrBassFigure::kSharpSuffix:
+    case msrBassFigureSuffixKind::kSuffixSharp:
       s << "sharp";
       break;
-    case msrBassFigure::kDoubleSharpSuffix:
+    case msrBassFigureSuffixKind::kSuffixDoubleSharp:
       s << "souble sharp";
       break;
-    case msrBassFigure::kSlashSuffix:
+    case msrBassFigureSuffixKind::kSuffixSlash:
       s << '/';
       break;
   } // switch
@@ -5059,11 +5059,11 @@ string lpsr2lilypondTranslator::figureAsLilypondString (
   return s.str ();
 }
 
-string lpsr2lilypondTranslator::figuredBassElementAsLilypondString (
-  S_msrFiguredBassElement figuredBassElement)
+string lpsr2lilypondTranslator::figuredBassAsLilypondString (
+  S_msrFiguredBass figuredBass)
 {
   int inputLineNumber =
-    figuredBassElement->getInputLineNumber ();
+    figuredBass->getInputLineNumber ();
 
   stringstream s;
 
@@ -5071,7 +5071,7 @@ string lpsr2lilypondTranslator::figuredBassElementAsLilypondString (
 
   const list<S_msrBassFigure>&
     figuredBassFiguresList =
-      figuredBassElement->
+      figuredBass->
         getFiguredBassFiguresList ();
 
   if (figuredBassFiguresList.size ()) {
@@ -5092,14 +5092,14 @@ string lpsr2lilypondTranslator::figuredBassElementAsLilypondString (
   // generate figured bass element duration
   msrTupletFactor
     figuredBassTupletFactor =
-      figuredBassElement->getFiguredBassTupletFactor ();
+      figuredBass->getFiguredBassTupletFactor ();
 
   if (figuredBassTupletFactor.isEqualToOne ()) { // JMI ???
     // use figured bass element sounding whole notes
     s <<
       durationAsLilypondString (
         inputLineNumber,
-        figuredBassElement->
+        figuredBass->
           getMeasureElementSoundingWholeNotes ());
   }
   else {
@@ -5107,7 +5107,7 @@ string lpsr2lilypondTranslator::figuredBassElementAsLilypondString (
     s <<
       durationAsLilypondString (
         inputLineNumber,
-        figuredBassElement->
+        figuredBass->
           getFiguredBassDisplayWholeNotes ()) <<
       "*" <<
       figuredBassTupletFactor.asRational ();
@@ -5283,7 +5283,7 @@ string lpsr2lilypondTranslator::frameAsLilypondString (
   return s.str ();
 }
 
-void lpsr2lilypondTranslator::generateInputLineNumberAndOrPositionInMeasureAsAComment (
+void lpsr2lilypondTranslator::generateInputLineNumberAndOrMeasurePositionAsAComment (
   S_msrMeasureElement measureElement)
 {
   fLilypondCodeStream <<
@@ -5299,7 +5299,7 @@ void lpsr2lilypondTranslator::generateInputLineNumberAndOrPositionInMeasureAsACo
     // generate the position in measure as a comment
     fLilypondCodeStream <<
       "pim: " <<
-      measureElement->getMeasureElementPositionInMeasure () <<
+      measureElement->getMeasureElementMeasurePosition () <<
       ' ';
   }
 
@@ -11592,7 +11592,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrVoiceStaffChange& elt)
       ||
     gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
   ) {
-    generateInputLineNumberAndOrPositionInMeasureAsAComment (
+    generateInputLineNumberAndOrMeasurePositionAsAComment (
       elt);
   }
 
@@ -11668,7 +11668,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrHarmony& elt)
         ||
       gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
     ) {
-      generateInputLineNumberAndOrPositionInMeasureAsAComment (
+      generateInputLineNumberAndOrMeasurePositionAsAComment (
         elt);
     }
   }
@@ -11723,7 +11723,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFrame& elt)
 }
 
 //________________________________________________________________________
-void lpsr2lilypondTranslator::visitStart (S_msrFiguredBassElement& elt)
+void lpsr2lilypondTranslator::visitStart (S_msrFiguredBass& elt)
 {
 #ifdef TRACING_IS_ENABLED
   {
@@ -11739,7 +11739,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBassElement& elt)
       stringstream s;
 
       s <<
-        "% --> Start visiting msrFiguredBassElement '" <<
+        "% --> Start visiting msrFiguredBass '" <<
         elt->asString () <<
         "'" <<
         ", fOnGoingNotesStack.size () = " <<
@@ -11768,7 +11768,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBassElement& elt)
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
       fLilypondCodeStream <<
-        "%{ fOnGoingNotesStack.size () S_msrFiguredBassElement JMI " <<
+        "%{ fOnGoingNotesStack.size () S_msrFiguredBass JMI " <<
         fCurrentFiguredBass->asString () <<
         " %}" <<
         endl;
@@ -11781,7 +11781,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBassElement& elt)
 
   else if (fOnGoingFiguredBassVoice) {
     fLilypondCodeStream <<
-      figuredBassElementAsLilypondString (elt) <<
+      figuredBassAsLilypondString (elt) <<
       ' ';
 
     // generate the input line number as comment if relevant
@@ -11790,7 +11790,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrFiguredBassElement& elt)
         ||
       gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
     ) {
-      generateInputLineNumberAndOrPositionInMeasureAsAComment (
+      generateInputLineNumberAndOrMeasurePositionAsAComment (
         fCurrentFiguredBass);
     }
   }
@@ -11836,17 +11836,17 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
     ++fCurrentFiguredBassFiguresCounter;
 
     // is the figured bass parenthesized?
-    msrFiguredBassElement::msrFiguredBassElementParenthesesKind
+    msrFiguredBassParenthesesKind
       figuredBassParenthesesKind =
         fCurrentFiguredBass->
           getFiguredBassParenthesesKind ();
 
     // generate the bass figure number
     switch (figuredBassParenthesesKind) {
-      case msrFiguredBassElement::kFiguredBassElementParenthesesYes:
+      case msrFiguredBassParenthesesKind::kFiguredBassParenthesesYes:
         fLilypondCodeStream << '[';
         break;
-      case msrFiguredBassElement::kFiguredBassElementParenthesesNo:
+      case msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo:
         break;
     } // switch
 
@@ -11854,66 +11854,66 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
       elt->getFigureNumber ();
 
     switch (figuredBassParenthesesKind) {
-      case msrFiguredBassElement::kFiguredBassElementParenthesesYes:
+      case msrFiguredBassParenthesesKind::kFiguredBassParenthesesYes:
         fLilypondCodeStream << ']';
         break;
-      case msrFiguredBassElement::kFiguredBassElementParenthesesNo:
+      case msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo:
         break;
     } // switch
 
     // handle the bass figure prefix
     switch (elt->getFigurePrefixKind ()) {
-      case msrBassFigure::k_NoFigurePrefix:
+      case msrBassFigurePrefixKind::k_NoBassFigurePrefix:
         break;
-      case msrBassFigure::kDoubleFlatPrefix:
+      case msrBassFigurePrefixKind::kPrefixDoubleFlat:
         fLilypondCodeStream << "--";
         break;
-      case msrBassFigure::kFlatPrefix:
+      case msrBassFigurePrefixKind::kPrefixFlat:
         fLilypondCodeStream << "-";
         break;
-      case msrBassFigure::kFlatFlatPrefix:
+      case msrBassFigurePrefixKind::kPrefixFlatFlat:
         fLilypondCodeStream << "flat flat";
         break;
-      case msrBassFigure::kNaturalPrefix:
+      case msrBassFigurePrefixKind::kPrefixNatural:
         fLilypondCodeStream << "!";
         break;
-      case msrBassFigure::kSharpSharpPrefix:
+      case msrBassFigurePrefixKind::kPrefixSharpSharp:
         fLilypondCodeStream << "sharp sharp";
         break;
-      case msrBassFigure::kSharpPrefix:
+      case msrBassFigurePrefixKind::kPrefixSharp:
         fLilypondCodeStream << "+";
         break;
-      case msrBassFigure::kDoubleSharpPrefix:
+      case msrBassFigurePrefixKind::kPrefixDoubleSharp:
         fLilypondCodeStream << "++";
         break;
     } // switch
 
     // handle the bass figure suffix
     switch (elt->getFigureSuffixKind ()) {
-      case msrBassFigure::k_NoFigureSuffix:
+      case msrBassFigureSuffixKind::k_NoBassFigureSuffix:
         break;
-      case msrBassFigure::kDoubleFlatSuffix:
+      case msrBassFigureSuffixKind::kSuffixDoubleFlat:
         fLilypondCodeStream << "double flat";
         break;
-      case msrBassFigure::kFlatSuffix:
+      case msrBassFigureSuffixKind::kSuffixFlat:
         fLilypondCodeStream << "flat";
         break;
-      case msrBassFigure::kFlatFlatSuffix:
+      case msrBassFigureSuffixKind::kSuffixFlatFlat:
         fLilypondCodeStream << "flat flat";
         break;
-      case msrBassFigure::kNaturalSuffix:
+      case msrBassFigureSuffixKind::kSuffixNatural:
         fLilypondCodeStream << "natural";
         break;
-      case msrBassFigure::kSharpSharpSuffix:
+      case msrBassFigureSuffixKind::kSuffixSharpSharp:
         fLilypondCodeStream << "sharp sharp";
         break;
-      case msrBassFigure::kSharpSuffix:
+      case msrBassFigureSuffixKind::kSuffixSharp:
         fLilypondCodeStream << "sharp";
         break;
-      case msrBassFigure::kDoubleSharpSuffix:
+      case msrBassFigureSuffixKind::kSuffixDoubleSharp:
         fLilypondCodeStream << "souble sharp";
         break;
-      case msrBassFigure::kSlashSuffix:
+      case msrBassFigureSuffixKind::kSuffixSlash:
         fLilypondCodeStream << '/';
         break;
     } // switch
@@ -11930,7 +11930,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBassFigure& elt)
   */
 }
 
-void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBassElement& elt)
+void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBass& elt)
 {
 #ifdef TRACING_IS_ENABLED
   int inputLineNumber =
@@ -11949,7 +11949,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrFiguredBassElement& elt)
       stringstream s;
 
       s <<
-        "% --> End visiting msrFiguredBassElement '" <<
+        "% --> End visiting msrFiguredBass '" <<
         elt->asString () <<
         "'" <<
         ", line " << inputLineNumber <<
@@ -13330,7 +13330,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrSyllable& elt)
         ||
       gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
     ) {
-      generateInputLineNumberAndOrPositionInMeasureAsAComment (
+      generateInputLineNumberAndOrMeasurePositionAsAComment (
         elt);
       }
     }
@@ -17129,7 +17129,7 @@ void lpsr2lilypondTranslator::generateGraceNotesGroup (
   Bool doGenerateASlurIfPresent (false);
 
   switch (graceNotesGroup->getGraceNotesGroupKind ()) {
-    case msrGraceNotesGroup::kGraceNotesGroupBefore:
+    case msrGraceNotesGroupKind::kGraceNotesGroupBefore:
       if (graceNotesGroup->getGraceNotesGroupIsSlashed ()) {
         if (graceNotesGroup->getGraceNotesGroupIsTied ()) {
           fLilypondCodeStream <<
@@ -17195,7 +17195,7 @@ slash = \tweak Flag.stroke-style grace \etc
       }
       break;
 
-    case msrGraceNotesGroup::kGraceNotesGroupAfter:
+    case msrGraceNotesGroupKind::kGraceNotesGroupAfter:
       // don't generate anything here
       break;
   } // switch
@@ -17254,7 +17254,7 @@ slash = \tweak Flag.stroke-style grace \etc
               ||
             gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
           ) {
-            generateInputLineNumberAndOrPositionInMeasureAsAComment (
+            generateInputLineNumberAndOrMeasurePositionAsAComment (
               graceNotesGroupNote);
           }
 
@@ -18276,7 +18276,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       ||
     gGlobalLpsr2lilypondOahGroup->getGeneratePositionsInMeasures ()
   ) {
-    generateInputLineNumberAndOrPositionInMeasureAsAComment (
+    generateInputLineNumberAndOrMeasurePositionAsAComment (
       elt);
   }
 }
@@ -21274,19 +21274,19 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   }
 
   // get bracket kind
-  msrTuplet::msrTupletBracketKind
+  msrTupletBracketKind
     tupletBracketKind =
       elt->getTupletBracketKind ();
 
   switch (tupletBracketKind) {
-    case msrTuplet::kTupletBracketYes:
+    case msrTupletBracketKind::kTupletBracketYes:
     /* JMI
       fLilypondCodeStream <<
         "%{kTupletBracketYes%}" <<
         endl;
         */
       break;
-    case msrTuplet::kTupletBracketNo:
+    case msrTupletBracketKind::kTupletBracketNo:
       fLilypondCodeStream <<
         "\\once \\omit TupletBracket" <<
         endl;
@@ -21294,14 +21294,14 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   } // switch
 
   // get line shape kind
-  msrTuplet::msrTupletLineShapeKind
+  msrTupletLineShapeKind
     tupletLineShapeKind =
       elt->getTupletLineShapeKind ();
 
   switch (tupletLineShapeKind) {
-    case msrTuplet::kTupletLineShapeStraight:
+    case msrTupletLineShapeKind::kTupletLineShapeStraight:
       break;
-    case msrTuplet::kTupletLineShapeCurved:
+    case msrTupletLineShapeKind::kTupletLineShapeCurved:
       fLilypondCodeStream <<
         "\\temporary \\tupletsCurvedBrackets" <<
         endl;
@@ -21309,24 +21309,24 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   } // switch
 
   // get show number kind
-  msrTuplet::msrTupletShowNumberKind
+  msrTupletShowNumberKind
     tupletShowNumberKind =
       elt->getTupletShowNumberKind ();
 
   switch (tupletShowNumberKind) {
-    case msrTuplet::kTupletShowNumberActual:
+    case msrTupletShowNumberKind::kTupletShowNumberActual:
     /* JMI
       fLilypondCodeStream <<
         "%{tupletShowNumberActual%}" <<
         endl;
         */
       break;
-    case msrTuplet::kTupletShowNumberBoth:
+    case msrTupletShowNumberKind::kTupletShowNumberBoth:
       fLilypondCodeStream <<
         "\\once \\override TupletNumber.text = #tuplet-number::calc-fraction-text" <<
         endl;
       break;
-    case msrTuplet::kTupletShowNumberNone:
+    case msrTupletShowNumberKind::kTupletShowNumberNone:
       fLilypondCodeStream <<
         "\\once \\omit TupletNumber" <<
         endl;
@@ -21334,7 +21334,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
   } // switch
 
   // get show type kind
-  msrTuplet::msrTupletShowTypeKind
+  msrTupletShowTypeKind
     tupletShowTypeKind =
       elt->getTupletShowTypeKind ();
 
@@ -21343,7 +21343,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
       elt->getMemberNotesDisplayWholeNotes ();
 
   switch (tupletShowTypeKind) {
-    case msrTuplet::kTupletShowTypeActual:
+    case msrTupletShowTypeKind::kTupletShowTypeActual:
       fLilypondCodeStream <<
      // JMI ???   "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-fraction-text \"" <<
         "\\once \\override TupletNumber.text = #(tuplet-number::append-note-wrapper tuplet-number::calc-denominator-text \"" <<
@@ -21353,7 +21353,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
         "\")" <<
         endl;
       break;
-    case msrTuplet::kTupletShowTypeBoth:
+    case msrTupletShowTypeKind::kTupletShowTypeBoth:
       fLilypondCodeStream <<
         "\\once \\override TupletNumber.text = #(tuplet-number::fraction-with-notes" <<
         " #{ " <<
@@ -21367,7 +21367,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrTuplet& elt)
         " #})" <<
         endl;
       break;
-    case msrTuplet::kTupletShowTypeNone:
+    case msrTupletShowTypeKind::kTupletShowTypeNone:
     /* JMI
       fLilypondCodeStream <<
         "%{tupletShowTypeNone%}" <<
@@ -21434,14 +21434,14 @@ void lpsr2lilypondTranslator::visitEnd (S_msrTuplet& elt)
     endl;
 
   // get line shape kind
-  msrTuplet::msrTupletLineShapeKind
+  msrTupletLineShapeKind
     tupletLineShapeKind =
       elt->getTupletLineShapeKind ();
 
   switch (tupletLineShapeKind) {
-    case msrTuplet::kTupletLineShapeStraight:
+    case msrTupletLineShapeKind::kTupletLineShapeStraight:
       break;
-    case msrTuplet::kTupletLineShapeCurved:
+    case msrTupletLineShapeKind::kTupletLineShapeCurved:
       fLilypondCodeStream <<
         "\\undo \\tupletsCurvedBrackets" <<
         endl;

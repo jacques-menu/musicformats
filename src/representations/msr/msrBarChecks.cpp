@@ -20,6 +20,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrMeasures.h"
+
 #include "msrBarChecks.h"
 
 #include "oahOah.h"
@@ -34,23 +36,27 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrBarCheck msrBarCheck::create (
-  int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
   msrBarCheck* o =
     new msrBarCheck (
-      inputLineNumber);
+      inputLineNumber,
+      upLinkToMeasure);
   assert (o != nullptr);
   return o;
 }
 
 S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber (
   int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
   const string& nextBarOriginalNumber,
   int           nextBarPuristNumber)
 {
   msrBarCheck* o =
     new msrBarCheck (
       inputLineNumber,
+      upLinkToMeasure,
       nextBarOriginalNumber,
       nextBarPuristNumber);
   assert (o != nullptr);
@@ -58,8 +64,11 @@ S_msrBarCheck msrBarCheck::createWithNextBarPuristNumber (
 }
 
 msrBarCheck::msrBarCheck (
-  int inputLineNumber)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceMeasuresNumbers ()) {
@@ -72,9 +81,12 @@ msrBarCheck::msrBarCheck (
 
 msrBarCheck::msrBarCheck (
   int           inputLineNumber,
+  S_msrMeasure  upLinkToMeasure,
   const string& nextBarOriginalNumber,
   int           nextBarPuristNumber)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fNextBarOriginalNumber = nextBarOriginalNumber;
   fNextBarPuristNumber   = nextBarPuristNumber;
@@ -185,7 +197,7 @@ ostream& operator << (ostream& os, const S_msrBarCheck& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

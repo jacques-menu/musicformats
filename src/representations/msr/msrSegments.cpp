@@ -978,13 +978,13 @@ void msrSegment::appendTimeSignatureToSegmentClone (S_msrTimeSignature timeSigna
 
 void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
   int             inputLineNumber,
-  const Rational& positionInMeasure)
+  const Rational& measurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceDalSegnos () || gGlobalTracingOahGroup->getTracePositionsInMeasures ()) {
     gLogStream <<
       "Inserting hidden measure and barLine at position " <<
-      positionInMeasure <<
+      measurePosition <<
       "to segment clone " << asString () <<
       ", in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1004,7 +1004,7 @@ void msrSegment::insertHiddenMeasureAndBarLineInSegmentClone (
   fSegmentLastMeasure->
     insertHiddenMeasureAndBarLineInMeasureClone (
       inputLineNumber,
-      positionInMeasure);
+      measurePosition);
 
   --gIndenter;
 }
@@ -1062,14 +1062,14 @@ void msrSegment::appendHarmonyToSegmentClone (S_msrHarmony harmony)
     appendHarmonyToMeasureClone (harmony);
 }
 
-void msrSegment::appendFiguredBassElementToSegment (
-  S_msrFiguredBassElement figuredBassElement)
+void msrSegment::appendFiguredBassToSegment (
+  S_msrFiguredBass figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
     gLogStream <<
       "Appending figured bass " <<
-      figuredBassElement->asString () <<
+      figuredBass->asString () <<
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1079,7 +1079,7 @@ void msrSegment::appendFiguredBassElementToSegment (
 #endif
 
   int inputLineNumber =
-    figuredBassElement->getInputLineNumber ();
+    figuredBass->getInputLineNumber ();
 
   ++gIndenter;
 
@@ -1087,22 +1087,22 @@ void msrSegment::appendFiguredBassElementToSegment (
   assertSegmentLastMeasureIsNotNull (
     inputLineNumber);
 
-  // append figuredBassElement to this segment
+  // append figuredBass to this segment
   fSegmentLastMeasure->
-    appendFiguredBassElementToMeasure (
-      figuredBassElement);
+    appendFiguredBassToMeasure (
+      figuredBass);
 
   --gIndenter;
 }
 
-void msrSegment::appendFiguredBassElementToSegmentClone (
-  S_msrFiguredBassElement figuredBassElement)
+void msrSegment::appendFiguredBassToSegmentClone (
+  S_msrFiguredBass figuredBass)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceFiguredBass ()) {
     gLogStream <<
       "Appending figured bass " <<
-      figuredBassElement->asString () <<
+      figuredBass->asString () <<
       " to segment clone " << asString () <<
       "' in voice clone \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1113,11 +1113,11 @@ void msrSegment::appendFiguredBassElementToSegmentClone (
 
   // sanity check
   assertSegmentLastMeasureIsNotNull (
-    figuredBassElement->getInputLineNumber ());
+    figuredBass->getInputLineNumber ());
 
   // append it to this segment
   fSegmentLastMeasure->
-    appendFiguredBassElementToMeasure (figuredBassElement);
+    appendFiguredBassToMeasure (figuredBass);
 }
 
 void msrSegment::appendSegnoToSegment (S_msrSegno segno)
@@ -1634,7 +1634,7 @@ void msrSegment::appendHarpPedalsTuningToSegment (
   --gIndenter;
 }
 
-void msrSegment::padUpToPositionInMeasureInSegment (
+void msrSegment::padUpToMeasurePositionInSegment (
   int             inputLineNumber,
   const Rational& wholeNotes)
 {
@@ -1694,7 +1694,7 @@ void msrSegment::padUpToPositionInMeasureInSegment (
   if (fSegmentMeasuresFlatList.size ()) { // JMI BOFBOF
     // pad last measure up to to this actual wholes notes
     fSegmentLastMeasure->
-      padUpToPositionInMeasureInMeasure (
+      padUpToMeasurePositionInMeasure (
         inputLineNumber,
         wholeNotes);
   }
@@ -1703,7 +1703,7 @@ void msrSegment::padUpToPositionInMeasureInSegment (
 void msrSegment::backupByWholeNotesStepLengthInSegment (
   int     inputLineNumber,
   const Rational&
-          backupTargetMeasureElementPositionInMeasure)
+          backupTargetMeasureElementMeasurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (
@@ -1713,7 +1713,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
   ) {
     gLogStream <<
       "Backup by a '" <<
-      backupTargetMeasureElementPositionInMeasure <<
+      backupTargetMeasureElementMeasurePosition <<
       "' whole notes step length in segment '" <<
       fSegmentAbsoluteNumber <<
       ", segmentDebugNumber: '" <<
@@ -1730,7 +1730,7 @@ void msrSegment::backupByWholeNotesStepLengthInSegment (
     fSegmentLastMeasure->
       backupByWholeNotesStepLengthInMeasure (
         inputLineNumber,
-        backupTargetMeasureElementPositionInMeasure);
+        backupTargetMeasureElementMeasurePosition);
   }
 }
 
@@ -2056,7 +2056,7 @@ void msrSegment::appendVoiceStaffChangeToSegment (
 
 void msrSegment::appendNoteToSegment (
   S_msrNote       note,
-  const Rational& partCurrentPositionInMeasure)
+  const Rational& partCurrentMeasurePosition)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -2075,7 +2075,7 @@ void msrSegment::appendNoteToSegment (
   fSegmentLastMeasure->
     appendNoteToMeasure (
       note,
-      partCurrentPositionInMeasure);
+      partCurrentMeasurePosition);
 }
 
 void msrSegment::appendNoteToSegmentClone (S_msrNote note)
@@ -2783,7 +2783,7 @@ void msrSegment::print (ostream& os) const
   if (! fSegmentElementsList.size ()) {
     os <<
       setw (fieldWidth) <<
-      "fSegmentElementsList" << " : " << "empty" <<
+      "fSegmentElementsList" << " : " << "[EMPTY]" <<
       endl;
   }
 
@@ -2827,7 +2827,7 @@ void msrSegment::printShort (ostream& os) const
   if (! fSegmentElementsList.size ()) {
     os <<
       setw (fieldWidth) <<
-      "fSegmentElementsList" << " : " << "empty" <<
+      "fSegmentElementsList" << " : " << "[EMPTY]" <<
       endl;
   }
 

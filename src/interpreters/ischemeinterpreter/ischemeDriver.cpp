@@ -339,7 +339,7 @@ void ischemeDriver::displayOptionsBlocksStack (
   }
 
   else {
-    gLogStream << "empty" << endl;
+    gLogStream << "[EMPTY]" << endl;
   }
 }
 
@@ -419,7 +419,7 @@ void ischemeDriver::displayCaseChoiceStatementsStack (
   }
 
   else {
-    gLogStream << "empty" << endl;
+    gLogStream << "[EMPTY]" << endl;
   }
 }
 
@@ -499,7 +499,7 @@ void ischemeDriver::displayCaseInputStatementsStack (
   }
 
   else {
-    gLogStream << "empty" << endl;
+    gLogStream << "[EMPTY]" << endl;
   }
 }
 

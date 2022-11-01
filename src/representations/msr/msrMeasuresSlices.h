@@ -43,7 +43,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrNoteEvent> create (
-                            const Rational&  noteEventPositionInMeasure,
+                            const Rational&  noteEventMeasurePosition,
                             S_msrNote        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -53,7 +53,7 @@ class msrNoteEvent : public smartable
     // ------------------------------------------------------
 
                           msrNoteEvent (
-                            const Rational&  noteEventPositionInMeasure,
+                            const Rational&  noteEventMeasurePosition,
                             S_msrNote        noteEventNote,
                             msrNoteEventKind noteEventKind);
 
@@ -64,8 +64,8 @@ class msrNoteEvent : public smartable
     // set and get
     // ------------------------------------------------------
 
-    Rational              getNoteEventPositionInMeasure () const
-                              { return fNoteEventPositionInMeasure; }
+    Rational              getNoteEventMeasurePosition () const
+                              { return fNoteEventMeasurePosition; }
 
     S_msrNote             getNoteEventNote () const
                               { return fNoteEventNote; }
@@ -78,7 +78,7 @@ class msrNoteEvent : public smartable
     // public services
     // ------------------------------------------------------
 
-    static bool           compareNotesEventsByIncreasingPositionInMeasure (
+    static bool           compareNotesEventsByIncreasingMeasurePosition (
                             const SMARTP<msrNoteEvent>& first,
                             const SMARTP<msrNoteEvent>& second);
 
@@ -96,7 +96,7 @@ class msrNoteEvent : public smartable
     // private fields
     // ------------------------------------------------------
 
-    Rational              fNoteEventPositionInMeasure;
+    Rational              fNoteEventMeasurePosition;
     S_msrNote             fNoteEventNote;
     msrNoteEventKind      fNoteEventKind;
 };
@@ -112,7 +112,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
       static SMARTP<msrSimultaneousNotesChunk> create (
-                            const Rational& chunkPositionInMeasure);
+                            const Rational& chunkMeasurePosition);
 
   protected:
 
@@ -120,7 +120,7 @@ class msrSimultaneousNotesChunk : public smartable
     // ------------------------------------------------------
 
                           msrSimultaneousNotesChunk (
-                            const Rational& chunkPositionInMeasure);
+                            const Rational& chunkMeasurePosition);
 
     virtual               ~msrSimultaneousNotesChunk ();
 
@@ -129,8 +129,8 @@ class msrSimultaneousNotesChunk : public smartable
     // set and get
     // ------------------------------------------------------
 
-    Rational              getChunkPositionInMeasure () const
-                              { return fChunkPositionInMeasure; }
+    Rational              getChunkMeasurePosition () const
+                              { return fChunkMeasurePosition; }
 
     const list<S_msrNote>&
                           getChunkNotesList () const
@@ -149,7 +149,7 @@ class msrSimultaneousNotesChunk : public smartable
                             S_msrNote note)
                               { fChunkNotesList.push_back (note); }
 
-    static bool           compareSimultaneousNotesChunksByIncreasingPositionInMeasure (
+    static bool           compareSimultaneousNotesChunksByIncreasingMeasurePosition (
                             const SMARTP<msrNoteEvent>& first,
                             const SMARTP<msrNoteEvent>& second);
 
@@ -167,7 +167,7 @@ class msrSimultaneousNotesChunk : public smartable
     // private fields
     // ------------------------------------------------------
 
-    Rational              fChunkPositionInMeasure;
+    Rational              fChunkMeasurePosition;
     list<S_msrNote>       fChunkNotesList;
     Rational              fChunkWholeNotes;
 };

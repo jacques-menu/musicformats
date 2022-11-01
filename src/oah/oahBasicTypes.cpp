@@ -1619,7 +1619,7 @@ void oahAtomExpectingAValue::applyAtomWithDefaultValue (ostream& os)
   s <<
     "Applying atom expecting a value '" <<
     fetchNames () <<
-    "' with a default value is possible only in oahAtomExpectingAValue subclasses";
+    "' with a default value is possible only in oahAtomExpectingAValue sub-classes";
 
   oahInternalError (s.str ());
 }
@@ -4457,7 +4457,7 @@ void oahHandler::initializeHandler ()
 #endif
 
   // DON'T create the fHandlerMultiComponent,
-  // this will be done in the subclasses' initializeHandlerMultiComponent ()
+  // this will be done in the sub-classes' initializeHandlerMultiComponent ()
 
   // launch command
   fLaunchCommandAsSupplied =

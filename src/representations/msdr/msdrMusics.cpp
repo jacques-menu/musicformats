@@ -233,7 +233,7 @@ void msdrMusic::print (ostream& os) const
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<
     mfSingularOrPlural (
-      fVoiceActualFiguredBassElementsCounter, "figured bass", "figured bass elements") <<
+      fVoiceActualFiguredBassesCounter, "figured bass", "figured bass elements") <<
      ", " <<
     mfSingularOrPlural (
       fVoiceActualNotesCounter, "actual note", "actual notes") <<
@@ -316,7 +316,7 @@ void msdrMusic::printShort (ostream& os) const
       fVoiceActualHarmoniesCounter, "harmony", "harmonies") <<
      ", " <<
     mfSingularOrPlural (
-      fVoiceActualFiguredBassElementsCounter, "figured bass", "figured bass elements") <<
+      fVoiceActualFiguredBassesCounter, "figured bass", "figured bass elements") <<
      ", " <<
     mfSingularOrPlural (
       fVoiceActualNotesCounter, "actual note", "actual notes") <<
@@ -348,7 +348,7 @@ void msdrMusic::printShort (ostream& os) const
   }
   else {
     os <<
-      " : " << "empty";
+      " : " << "[EMPTY]";
   }
   os << endl;
 

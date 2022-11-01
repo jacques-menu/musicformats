@@ -1,14 +1,15 @@
 #ifndef ___msrTuplets___
 #define ___msrTuplets___
 
-#include "msrFiguredBassElements.h"
-#include "msrGraceNotes.h"
+#include "msrFiguredBasses.h"
+#include "msrGraceNotesGroups.h"
 #include "msrMeasures.h"
 #include "msrTupletElements.h"
 
 
 namespace MusicFormats
 {
+
 //______________________________________________________________________________
 class msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
@@ -25,55 +26,55 @@ class msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
 
 //______________________________________________________________________________
+// data types
+
+enum class msrTupletTypeKind {
+  kTupletTypeNone,
+  kTupletTypeStart, kTupletTypeContinue, kTupletTypeStop,
+  kTupletTypeStartAndStopInARow
+};
+
+string tupletTypeKindAsString (
+  msrTupletTypeKind tupletTypeKind);
+
+enum class msrTupletBracketKind {
+  kTupletBracketYes, kTupletBracketNo
+};
+
+string tupletBracketKindAsString (
+  msrTupletBracketKind tupletBracketKind);
+
+enum class msrTupletLineShapeKind {
+  kTupletLineShapeStraight, kTupletLineShapeCurved
+};
+
+string tupletLineShapeKindAsString (
+  msrTupletLineShapeKind tupletLineShapeKind);
+
+enum class msrTupletShowNumberKind {
+  kTupletShowNumberActual, kTupletShowNumberBoth, kTupletShowNumberNone
+};
+
+string tupletShowNumberKindAsString (
+  msrTupletShowNumberKind tupletShowNumberKind);
+
+enum class msrTupletShowTypeKind {
+  kTupletShowTypeActual, kTupletShowTypeBoth, kTupletShowTypeNone
+};
+
+string tupletShowTypeKindAsString (
+  msrTupletShowTypeKind tupletShowTypeKind);
+
 class EXP msrTuplet : public msrTupletElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrTupletTypeKind {
-      kTupletTypeNone,
-      kTupletTypeStart, kTupletTypeContinue, kTupletTypeStop,
-      kTupletTypeStartAndStopInARow
-    };
-
-    static string tupletTypeKindAsString (
-      msrTupletTypeKind tupletTypeKind);
-
-    enum msrTupletBracketKind {
-      kTupletBracketYes, kTupletBracketNo
-    };
-
-    static string tupletBracketKindAsString (
-      msrTupletBracketKind tupletBracketKind);
-
-    enum msrTupletLineShapeKind {
-      kTupletLineShapeStraight, kTupletLineShapeCurved
-    };
-
-    static string tupletLineShapeKindAsString (
-      msrTupletLineShapeKind tupletLineShapeKind);
-
-    enum msrTupletShowNumberKind {
-      kTupletShowNumberActual, kTupletShowNumberBoth, kTupletShowNumberNone
-    };
-
-    static string tupletShowNumberKindAsString (
-      msrTupletShowNumberKind tupletShowNumberKind);
-
-    enum msrTupletShowTypeKind {
-      kTupletShowTypeActual, kTupletShowTypeBoth, kTupletShowTypeNone
-    };
-
-    static string tupletShowTypeKindAsString (
-      msrTupletShowTypeKind tupletShowTypeKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
 
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
+                            S_msrMeasure            upLinkToMeasure,
                             const string&           tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
@@ -95,6 +96,7 @@ class EXP msrTuplet : public msrTupletElement
 
                           msrTuplet (
                             int                     inputLineNumber,
+                            S_msrMeasure            upLinkToMeasure,
                             const string&           tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
@@ -120,14 +122,6 @@ class EXP msrTuplet : public msrTupletElement
     msrTupletInKind       getTupletKind () const
                               { return fTupletKind; }
 
-    // measure upLink
-    void                  setTupletDirectUpLinkToMeasure (
-                            const S_msrMeasure& measure)
-                              { fTupletDirectUpLinkToMeasure = measure; }
-
-    S_msrMeasure          getTupletDirectUpLinkToMeasure () const
-                              { return fTupletDirectUpLinkToMeasure; }
-
     // tuplet uplink
     void                  setTupletDirectUpLinkToTuplet (
                             const S_msrTuplet& tuplet)
@@ -137,26 +131,26 @@ class EXP msrTuplet : public msrTupletElement
                               { return fTupletDirectUpLinkToTuplet; }
 
     // position in measure
-    void                  setMeasureElementPositionInMeasure (
+    void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context) override
                               {
-                                setTupletPositionInMeasure (
+                                setTupletMeasurePosition (
                                   measure,
-                                  positionInMeasure,
+                                  measurePosition,
                                   context);
                               }
 
-    void                  setTupletPositionInMeasure (
+    void                  setTupletMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context);
 
     // members positions in measures
     Rational              setTupletMembersPositionsInMeasure (
                             S_msrMeasure    measure,
-                            const Rational& positionInMeasure);
+                            const Rational& measurePosition);
                               // returns the position after the tuplet JMI ??? v0.9.66 SUPERFLOUS ???
 
     // number
@@ -264,9 +258,6 @@ class EXP msrTuplet : public msrTupletElement
     // ------------------------------------------------------
 
     msrTupletInKind       fTupletKind;
-
-    // measure upLink
-    S_msrMeasure          fTupletDirectUpLinkToMeasure;
 
     // tuplet uplink
     S_msrTuplet           fTupletDirectUpLinkToTuplet;

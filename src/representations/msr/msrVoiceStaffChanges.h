@@ -32,8 +32,9 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
     // ------------------------------------------------------
 
     static SMARTP<msrVoiceStaffChange> create (
-                            int        inputLineNumber,
-                            S_msrStaff staffToChangeTo);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            S_msrStaff   staffToChangeTo);
 
     SMARTP<msrVoiceStaffChange> createStaffChangeNewbornClone ();
 
@@ -43,8 +44,9 @@ class EXP msrVoiceStaffChange : public msrMeasureElement
     // ------------------------------------------------------
 
                           msrVoiceStaffChange (
-                            int        inputLineNumber,
-                            S_msrStaff staffToChangeTo);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure,
+                            S_msrStaff   staffToChangeTo);
 
     virtual               ~msrVoiceStaffChange ();
 

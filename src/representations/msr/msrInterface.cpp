@@ -481,6 +481,7 @@ S_msrMeasure createMeasureInVoice (
       appendClefToMeasure (
         msrClef::create (
           __LINE__,
+          ???measure???,
           msrClefKind::kClefTreble,
           1));
 

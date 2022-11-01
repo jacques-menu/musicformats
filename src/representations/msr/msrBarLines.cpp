@@ -22,6 +22,8 @@
 
 #include "mfStringsHandling.h"
 
+#include "msrMeasures.h"
+
 #include "msrBarLines.h"
 
 #include "oahOah.h"
@@ -37,6 +39,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 S_msrBarLine msrBarLine::create (
   int                           inputLineNumber,
+  S_msrMeasure                  upLinkToMeasure,
   msrBarLineLocationKind        barLineLocationKind,
   msrBarLineStyleKind           barLineStyleKind,
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
@@ -51,6 +54,7 @@ S_msrBarLine msrBarLine::create (
   msrBarLine* o =
     new msrBarLine (
       inputLineNumber,
+      upLinkToMeasure,
       barLineLocationKind,
       barLineStyleKind,
       barLineRepeatDirectionKind,
@@ -67,6 +71,7 @@ S_msrBarLine msrBarLine::create (
 
 msrBarLine::msrBarLine (
   int                           inputLineNumber,
+  S_msrMeasure                  upLinkToMeasure,
   msrBarLineLocationKind        barLineLocationKind,
   msrBarLineStyleKind           barLineStyleKind,
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind,
@@ -77,7 +82,9 @@ msrBarLine::msrBarLine (
   msrBarLineHasSegnoKind        barLineHasSegnoKind,
   msrBarLineHasCodaKind         barLineHasCodaKind,
   msrBarLineRepeatWingedKind    barLineRepeatWingedKind)
-    : msrMeasureElement (inputLineNumber)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fLocationKind        = barLineLocationKind;
 
@@ -108,11 +115,13 @@ msrBarLine::~msrBarLine ()
 {}
 
 S_msrBarLine msrBarLine::createFinalBarLine (
-int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
   return
     msrBarLine::create (
       inputLineNumber,
+      upLinkToMeasure,
       kBarLineLocationRight,
       kBarLineStyleLightHeavy,
       kBarLineRepeatDirectionNone,
@@ -126,11 +135,13 @@ int inputLineNumber)
 }
 
 S_msrBarLine msrBarLine::createDoubleBarLine (
-int inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure)
 {
   return
     msrBarLine::create (
       inputLineNumber,
+      upLinkToMeasure,
       kBarLineLocationRight,
       kBarLineStyleLightLight,
       kBarLineRepeatDirectionNone,
@@ -467,8 +478,8 @@ string msrBarLine::asShortString () const
   s <<
     "[BarLine " <<
     barLineCategoryKindAsString (fBarLineCategoryKind) <<
-    ", measureNumber " << fMeasureElementMeasureNumber <<
-    ", positionInMeasure " << fMeasureElementPositionInMeasure <<
+    ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
+    ", fMeasureElementMeasurePosition " << fMeasureElementMeasurePosition <<
 
 /* JMI
     ", " <<
@@ -507,8 +518,8 @@ string msrBarLine::asString () const
   s <<
     "[BarLine " <<
     barLineCategoryKindAsString (fBarLineCategoryKind) <<
-    ", measureNumber " << fMeasureElementMeasureNumber <<
-    ", positionInMeasure " << fMeasureElementPositionInMeasure <<
+    ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
+    ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
 
     ", " <<
     barLineLocationKindAsString (fLocationKind) <<
@@ -526,7 +537,7 @@ string msrBarLine::asString () const
     ", " <<
     endingNumbersListAsString () <<
 
-    ", barLineTimes: \"" <<
+    ", fBarLineTimes: \"" <<
     fBarLineTimes << "\" times" <<
 
     ", " <<
@@ -549,8 +560,8 @@ void msrBarLine::print (ostream& os) const
     ", fBarLineCategoryKind: " <<
     barLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    ", fMeasureElementMeasureNumber: " << fMeasureElementMeasureNumber <<
-    ", fMeasureElementPositionInMeasure: " << fMeasureElementPositionInMeasure <<
+    ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
+    ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -617,8 +628,8 @@ void msrBarLine::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fMeasureElementMeasureNumber" << " : " <<
-    fMeasureElementMeasureNumber <<
+    "measureElementMeasureNumber" << " : " <<
+    fetchMeasureElementMeasureNumber () <<
     endl;
 
   --gIndenter;
@@ -635,8 +646,8 @@ void msrBarLine::printShort (ostream& os) const
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
     barLineCategoryKindAsString (
       fBarLineCategoryKind) <<
-    ", fMeasureElementMeasureNumber: " << fMeasureElementMeasureNumber <<
-    ", fMeasureElementPositionInMeasure: " << fMeasureElementPositionInMeasure <<
+    ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
+    ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
     ", line " << fInputLineNumber <<
     ']' <<
     endl;

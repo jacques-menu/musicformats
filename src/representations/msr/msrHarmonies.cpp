@@ -26,6 +26,8 @@
 
 #include "msrPitchesNames.h"
 
+#include "msrMeasures.h"
+
 #include "msrHarmonies.h"
 
 #include "oahOah.h"
@@ -204,20 +206,20 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
 void msrHarmonyDegree::browseData (basevisitor* v)
 {}
 
-string msrHarmonyDegree::harmonyDegreeTypeKindAsString (
+string harmonyDegreeTypeKindAsString (
   msrHarmonyDegreeTypeKind harmonyDegreeTypeKind)
 {
   string result;
 
   switch (harmonyDegreeTypeKind) {
-    case msrHarmonyDegree::kHarmonyDegreeTypeAdd:
-      result = "harmonyDegreeTypeAdd";
+    case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd:
+      result = "kHarmonyDegreeTypeAdd";
       break;
-    case msrHarmonyDegree::kHarmonyDegreeTypeAlter:
-      result = "harmonyDegreeTypeAlter";
+    case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAlter:
+      result = "kHarmonyDegreeTypeAlter";
       break;
-    case msrHarmonyDegree::kHarmonyDegreeTypeSubstract:
-      result = "harmonyDegreeTypeSubstract";
+    case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeSubstract:
+      result = "kHarmonyDegreeTypeSubstract";
       break;
   } // switch
 
@@ -229,14 +231,14 @@ string msrHarmonyDegree::harmonyDegreeKindAsShortString () const
   string result;
 
   switch (fHarmonyDegreeTypeKind) {
-    case msrHarmonyDegree::kHarmonyDegreeTypeAdd:
-      result = "degreeAdd";
+    case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAdd:
+      result = "kHarmonyDegreeTypeAdd";
       break;
-    case msrHarmonyDegree::kHarmonyDegreeTypeAlter:
-      result = "degreeAlter";
+    case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeAlter:
+      result = "kHarmonyDegreeTypeAlter";
       break;
-    case msrHarmonyDegree::kHarmonyDegreeTypeSubstract:
-      result = "degreeSubtract";
+    case msrHarmonyDegreeTypeKind::kHarmonyDegreeTypeSubstract:
+      result = "kHarmonyDegreeTypeSubstract";
       break;
   } // switch
 
@@ -248,13 +250,14 @@ string msrHarmonyDegree::asString () const
   stringstream s;
 
   s <<
-    "HarmonyDegree" <<
+    "[HarmonyDegree" <<
     ", type: " << harmonyDegreeKindAsShortString () <<
     ", value: " << fHarmonyDegreeValue <<
     ", alteration: " <<
     msrAlterationKindAsString (
       fHarmonyDegreeAlterationKind) <<
-    ", line: " << fInputLineNumber;
+    ", line: " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -279,7 +282,7 @@ ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt)
 //______________________________________________________________________________
 S_msrHarmony msrHarmony::createWithoutVoiceUplink (
   int                      inputLineNumber,
-  // no harmoniesUpLinkToVoice yet
+  S_msrMeasure             upLinkToMeasure,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
   const string&            harmonyKindText,
@@ -294,6 +297,7 @@ S_msrHarmony msrHarmony::createWithoutVoiceUplink (
   msrHarmony* o =
     new msrHarmony (
       inputLineNumber,
+      upLinkToMeasure,
       nullptr, // will be set afterwards
       harmonyRootQuarterTonesPitchKind,
       harmonyKind,
@@ -312,6 +316,7 @@ S_msrHarmony msrHarmony::createWithoutVoiceUplink (
 
 S_msrHarmony msrHarmony::createWithVoiceUplink (
   int                      inputLineNumber,
+  S_msrMeasure             upLinkToMeasure,
   S_msrVoice               harmoniesUpLinkToVoice,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
@@ -327,6 +332,7 @@ S_msrHarmony msrHarmony::createWithVoiceUplink (
   msrHarmony* o =
     new msrHarmony (
       inputLineNumber,
+      upLinkToMeasure,
       harmoniesUpLinkToVoice,
       harmonyRootQuarterTonesPitchKind,
       harmonyKind,
@@ -345,6 +351,7 @@ S_msrHarmony msrHarmony::createWithVoiceUplink (
 
 msrHarmony::msrHarmony (
   int                      inputLineNumber,
+  S_msrMeasure             upLinkToMeasure,
   S_msrVoice               harmoniesUpLinkToVoice,
   msrQuarterTonesPitchKind harmonyRootQuarterTonesPitchKind,
   msrHarmonyKind           harmonyKind,
@@ -357,7 +364,8 @@ msrHarmony::msrHarmony (
   msrTupletFactor          harmonyTupletFactor,
   const Rational&          harmonyWholeNotesOffset)
     : msrMeasureElement (
-        inputLineNumber),
+        inputLineNumber,
+        upLinkToMeasure),
       fHarmonyTupletFactor (
         harmonyTupletFactor)
 {
@@ -393,7 +401,7 @@ msrHarmony::msrHarmony (
 
   // a harmony is considered to be at the beginning of the measure
   // until this is computed in msrMeasure::finalizeHarmonyInHarmoniesMeasure()
-  fMeasureElementPositionInMeasure = Rational (0, 1);
+  fMeasureElementMeasurePosition = Rational (0, 1);
 
   fHarmoniesStaffNumber = harmoniesStaffNumber;
 
@@ -591,9 +599,9 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
   fHarmonyUpLinkToNote = note;
 }
 
-void msrHarmony::setHarmonyPositionInMeasure (
+void msrHarmony::setHarmonyMeasurePosition (
   const S_msrMeasure measure,
-  const Rational&    positionInMeasure,
+  const Rational&    measurePosition,
   const string&      context)
 {
   // set the harmony position in measure, taking it's offset into account
@@ -602,14 +610,14 @@ void msrHarmony::setHarmonyPositionInMeasure (
   mfAssert (
     __FILE__, __LINE__,
     measure != nullptr,
-     "setHarmonyPositionInMeasure(): measure is null");
+     "setHarmonyMeasurePosition(): measure is null");
 
-  // the offset can be negative, so we merely add it to positionInMeasure
-  // to obtain the harmony's actual positionInMeasure
+  // the offset can be negative, so we merely add it to measurePosition
+  // to obtain the harmony's actual measurePosition
   // this overwrites it with the same value if fHarmonyWholeNotesOffset is null JMI ???
   Rational
-    actualPositionInMeasure =
-      positionInMeasure
+    actualMeasurePosition =
+      measurePosition
         +
       fHarmonyWholeNotesOffset;
 
@@ -618,13 +626,13 @@ void msrHarmony::setHarmonyPositionInMeasure (
     gLogStream <<
       "Setting harmony's position in measure of " << asString () <<
       " to " <<
-      positionInMeasure <<
+      measurePosition <<
       " (was " <<
-      fMeasureElementPositionInMeasure <<
+      fMeasureElementMeasurePosition <<
       ") in measure " <<
       measure->asShortString () <<
-      " (fMeasureElementMeasureNumber: " <<
-      fMeasureElementMeasureNumber <<
+      " (measureElementMeasureNumber: " <<
+      fetchMeasureElementMeasureNumber () <<
       "), context: \"" <<
       context <<
       "\"" <<
@@ -646,16 +654,16 @@ void msrHarmony::setHarmonyPositionInMeasure (
       measure->
         getMeasurePositionFromBeginningOfVoice ()
         +
-      actualPositionInMeasure;
+      actualMeasurePosition;
 
   // sanity check
   mfAssert (
     __FILE__, __LINE__,
-    positionInMeasure != msrMoment::K_NO_POSITION,
-    "positionInMeasure == msrMoment::K_NO_POSITION");
+    measurePosition != msrMoment::K_NO_POSITION,
+    "measurePosition == msrMoment::K_NO_POSITION");
 
   // set harmony's position in measure
-  fMeasureElementPositionInMeasure = positionInMeasure;
+  fMeasureElementMeasurePosition = measurePosition;
 
   // update current position in voice
   S_msrVoice
@@ -805,8 +813,8 @@ string msrHarmony::asString () const
 
     ", fHarmonyWholeNotesOffset: " <<
     fHarmonyWholeNotesOffset <<
-    ", fMeasureElementPositionInMeasure: " <<
-    fMeasureElementPositionInMeasure <<
+    ", fMeasureElementMeasurePosition: " <<
+    fMeasureElementMeasurePosition <<
 
     ", fHarmonyKindText: \"" <<
     fHarmonyKindText << "\"";
@@ -1013,20 +1021,20 @@ void msrHarmony::print (ostream& os) const
   // print the harmony measure number
   os <<
     setw (fieldWidth) <<
-    "fMeasureElementMeasureNumber" << " : " << fMeasureElementMeasureNumber <<
+    "measureElementMeasureNumber" << " : " << fetchMeasureElementMeasureNumber () <<
     endl;
 
   // print the harmony position in measure
   os <<
     setw (fieldWidth) <<
-    "fMeasureElementPositionInMeasure" << " : " << fMeasureElementPositionInMeasure <<
+    "fMeasureElementMeasurePosition" << " : " << fMeasureElementMeasurePosition <<
     endl;
 
   // print the harmony bass position in voice
-  os <<
-    setw (fieldWidth) <<
-    "fMeasureElementPositionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
-    endl;
+//   os <<
+//     setw (fieldWidth) <<
+//     "fMeasureElementPositionFromBeginningOfVoice" << " : " << fMeasureElementPositionFromBeginningOfVoice <<
+//     endl;
 
   // print the harmony note uplink
   os <<

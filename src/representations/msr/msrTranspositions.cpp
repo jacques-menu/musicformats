@@ -34,15 +34,17 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 S_msrTransposition msrTransposition::create (
-  int  inputLineNumber,
-  int  transposeDiatonic,
-  int  transposeChromatic,
-  int  transposeOctaveChange,
-  Bool transposeDouble)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  int          transposeDiatonic,
+  int          transposeChromatic,
+  int          transposeOctaveChange,
+  Bool         transposeDouble)
 {
   msrTransposition* o =
     new msrTransposition (
       inputLineNumber,
+      upLinkToMeasure,
       transposeDiatonic,
       transposeChromatic,
       transposeOctaveChange,
@@ -52,12 +54,15 @@ S_msrTransposition msrTransposition::create (
 }
 
 msrTransposition::msrTransposition (
-  int  inputLineNumber,
-  int  transposeDiatonic,
-  int  transposeChromatic,
-  int  transposeOctaveChange,
-  Bool transposeDouble)
-    : msrMeasureElement (inputLineNumber)
+  int          inputLineNumber,
+  S_msrMeasure upLinkToMeasure,
+  int          transposeDiatonic,
+  int          transposeChromatic,
+  int          transposeOctaveChange,
+  Bool         transposeDouble)
+    : msrMeasureElement (
+        inputLineNumber,
+        upLinkToMeasure)
 {
   fTranspositionDiatonic     = transposeDiatonic;
   fTranspositionChromatic    = transposeChromatic;
@@ -199,7 +204,7 @@ ostream& operator << (ostream& os, const S_msrTransposition& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

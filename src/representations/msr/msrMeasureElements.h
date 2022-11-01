@@ -19,6 +19,7 @@
 
 namespace MusicFormats
 {
+
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
 class msrMeasure;
@@ -47,7 +48,8 @@ class EXP msrMeasureElement : public msrElement
     // ------------------------------------------------------
 
                           msrMeasureElement (
-                            int inputLineNumber);
+                            int          inputLineNumber,
+                            S_msrMeasure upLinkToMeasure);
 
     virtual               ~msrMeasureElement ();
 
@@ -56,21 +58,17 @@ class EXP msrMeasureElement : public msrElement
     // set and get
     // ------------------------------------------------------
 
+    void                  setMeasureElementUpLinkToMeasure (
+                            S_msrMeasure measure);
+
+    S_msrMeasure          getMeasureElementUpLinkToMeasure () const;
+
     void                  setMeasureElementSoundingWholeNotes (
                             const Rational& wholeNotes,
                             const string&   context);
 
     Rational              getMeasureElementSoundingWholeNotes () const
                               { return fMeasureElementSoundingWholeNotes; }
-
-    void                  setMeasureElementMeasureNumber (
-                            const string& positionInMeasure)
-                              {
-                                fMeasureElementMeasureNumber = positionInMeasure;
-                              }
-
-    string                getMeasureNumber () const
-                              { return fMeasureElementMeasureNumber; }
 
     // this method is overridden in sub-classes such as those for
     // time signatures, harmonies and figured bass elements,
@@ -79,13 +77,13 @@ class EXP msrMeasureElement : public msrElement
     // the overrides call a class-specific method that can be called directly,
     // such occurrence are more explicit when debugging
     // the computations of positions in measures
-    virtual void          setMeasureElementPositionInMeasure (
+    virtual void          setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
-                            const Rational&    positionInMeasure,
+                            const Rational&    measurePosition,
                             const string&      context);
 
-    Rational              getMeasureElementPositionInMeasure () const
-                              { return fMeasureElementPositionInMeasure; }
+    Rational              getMeasureElementMeasurePosition () const
+                              { return fMeasureElementMeasurePosition; }
 
     void                  setMeasureElementPositionFromBeginningOfVoice (
                             const Rational& positionFromBeginningOfVoice,
@@ -94,26 +92,28 @@ class EXP msrMeasureElement : public msrElement
     Rational              getMeasureElementPositionFromBeginningOfVoice () const
                               { return fMeasureElementPositionFromBeginningOfVoice; }
 
-    void                  setMeasureElementMomentInMeasure (
-                            const msrMoment& momentInMeasure,
-                            const string&    context);
-
-    const msrMoment&      getMeasureElementMomentInMeasure () const
-                              { return fMeasureElementMomentInMeasure; }
-
-    void                  setMeasureElementMomentFromBeginningOfVoice (
-                            const msrMoment& momentFromBeginningOfVoice,
-                            const string&    context);
-
-    const msrMoment&      getMeasureElementMomentFromBeginningOfVoice () const
-                              { return fMeasureElementMomentFromBeginningOfVoice; }
+//     void                  setMeasureElementMomentInMeasure (
+//                             const msrMoment& momentInMeasure,
+//                             const string&    context);
+//
+//     const msrMoment&      getMeasureElementMomentInMeasure () const
+//                               { return fMeasureElementMomentInMeasure; }
+//
+//     void                  setMeasureElementMomentFromBeginningOfVoice (
+//                             const msrMoment& momentFromBeginningOfVoice,
+//                             const string&    context);
+//
+//     const msrMoment&      getMeasureElementMomentFromBeginningOfVoice () const
+//                               { return fMeasureElementMomentFromBeginningOfVoice; }
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    static bool           compareMeasureElementsByIncreasingPositionInMeasure (
+    string                fetchMeasureElementMeasureNumber () const;
+
+    static bool           compareMeasureElementsByIncreasingMeasurePosition (
                             const SMARTP<msrMeasureElement>& first,
                             const SMARTP<msrMeasureElement>& second);
 
@@ -157,20 +157,15 @@ class EXP msrMeasureElement : public msrElement
     // protected fields
     // ------------------------------------------------------
 
-    /*
-      The measure uplink is declared in the sub-classes,
-      to allow for separate *.h files, C++ constraint
-    */
+    S_msrMeasure          fMeasureElementUpLinkToMeasure;
 
     Rational              fMeasureElementSoundingWholeNotes;
 
-    string                fMeasureElementMeasureNumber;
-
-    Rational              fMeasureElementPositionInMeasure;
+    Rational              fMeasureElementMeasurePosition;
     Rational              fMeasureElementPositionFromBeginningOfVoice;
 
-    msrMoment             fMeasureElementMomentInMeasure;
-    msrMoment             fMeasureElementMomentFromBeginningOfVoice;
+//     msrMoment             fMeasureElementMomentInMeasure;
+//     msrMoment             fMeasureElementMomentFromBeginningOfVoice;
 };
 typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 EXP ostream& operator << (ostream& os, const S_msrMeasureElement& elt);
