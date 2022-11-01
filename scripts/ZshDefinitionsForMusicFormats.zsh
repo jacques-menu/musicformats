@@ -205,7 +205,7 @@ function m2lf ()
 # build it
 #----------------------------------------------
 
-alias rmcache="rm ${BUILD_DIR}/libdir/CMakeCache.txt"
+alias rmcache="cd ${BUILD_DIR}/libdir ; rm *"
 
 #alias rmmakefiles="sudo rm -rf ./libdir/CMakeFiles"
 alias rmmakefiles="rm -rf ./libdir/CMakeFiles"
@@ -846,7 +846,7 @@ function addInclude ()
 	rm -rf ${INCLUDE_DIR}
 	mkdir -p ${INCLUDE_DIR}
 
-	cd ${SRC_DIR}
+	cd ${MUSIC_FORMATS_DEV}
 
 	rsync -R **/*.h include
 
