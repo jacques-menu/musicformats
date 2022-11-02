@@ -23,7 +23,10 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
       - name: Get latest CMake and ninja
         uses: lukka/get-cmake@latest
@@ -32,7 +35,7 @@ jobs:
         run: make -C build
 
       - name: Upload libraries and executables for Windows
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: musicformats-windows-version
           path: |
@@ -44,3 +47,5 @@ jobs:
             #build/libdir
             documentation/IntroductionToMusicXML/IntroductionToMusicXML.pdf
             documentation/MusicFormatsUserGuide/MusicFormatsUserGuide.pdf
+            documentation/MusicFormatsFigures/MusicFormatsFigures.pdf
+            documentation/MusicFormatsMaintainanceGuide/MusicFormatsMaintainanceGuide.pdf
