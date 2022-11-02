@@ -23,22 +23,23 @@ MY_WORK_DIR=${HOME}
 
 MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
 # echo
-# echo "========> MUSIC_FORMATS_DEV = ${MUSIC_FORMATS_DEV}"
+# echo "==> MUSIC_FORMATS_DEV = ${MUSIC_FORMATS_DEV}"
 # echo
 
 
 # Write all output to logfile
 # -----------------------------------------
 
-	SCRIPT_BASE_NAME="$(basename ${0})"
-	LOGFILE_NAME=${SCRIPT_BASE_NAME/%.zsh/.zsh.log}
-	LOGFILE=${MUSIC_FORMATS_DEV}/${LOGFILE_NAME}
-# 	echo
-# 	echo "========> $0: 0 = ${0}"
-# 	echo "========> $0: SCRIPT_BASE_NAME = ${SCRIPT_BASE_NAME}"
-# 	echo "========> $0: LOGFILE_NAME = ${LOGFILE_NAME}"
-# 	echo "========> $0: LOGFILE = ${LOGFILE}"
-# 	echo
+SCRIPT_BASE_NAME="$(basename ${0})"
+
+LOGFILE_NAME=${SCRIPT_BASE_NAME/%.zsh/.zsh.log}
+LOGFILE=${MUSIC_FORMATS_DEV}/build/${LOGFILE_NAME}
+echo
+# echo "==> $0: 0 = ${0}"
+echo "==> $0: SCRIPT_BASE_NAME = ${SCRIPT_BASE_NAME}"
+echo "==> $0: LOGFILE_NAME     = ${LOGFILE_NAME}"
+echo "==> $0: LOGFILE          = ${LOGFILE}"
+echo
 
 exec > ${LOGFILE} 2>&1
 
