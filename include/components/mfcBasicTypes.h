@@ -265,7 +265,7 @@ string componenKindAsString (
 ostream& operator << (ostream& os, mfcComponenKind& elt);
 
 //______________________________________________________________________________
-class EXP mfcComponentDescr : public smartable
+class EXP mfcComponent : public smartable
 {
 /* this class is purely virtual
   public:
@@ -273,7 +273,7 @@ class EXP mfcComponentDescr : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<mfcComponentDescr> create (
+    static SMARTP<mfcComponent> create (
                             const string&   componentName,
                             mfcComponenKind componenKind);
 */
@@ -283,11 +283,11 @@ class EXP mfcComponentDescr : public smartable
     // constructors/destructor
     // ------------------------------------------------------
 
-                          mfcComponentDescr (
+                          mfcComponent (
                             const string&   componentName,
                             mfcComponenKind componenKind);
 
-    virtual               ~mfcComponentDescr ();
+    virtual               ~mfcComponent ();
 
   public:
 
@@ -350,11 +350,11 @@ class EXP mfcComponentDescr : public smartable
 
     S_mfcVersionsHistory  fVersionsHistory;
 };
-typedef SMARTP<mfcComponentDescr> S_mfcComponentDescr;
-EXP ostream& operator << (ostream& os, const S_mfcComponentDescr& elt);
+typedef SMARTP<mfcComponent> S_mfcComponent;
+EXP ostream& operator << (ostream& os, const S_mfcComponent& elt);
 
 //______________________________________________________________________________
-class EXP mfcOahComponent : public mfcComponentDescr
+class EXP mfcOahComponent : public mfcComponent
 {
   public:
 
@@ -378,7 +378,7 @@ typedef SMARTP<mfcOahComponent> S_mfcOahComponent;
 EXP ostream& operator << (ostream& os, const S_mfcOahComponent& elt);
 
 //______________________________________________________________________________
-class EXP mfcRepresentationComponent : public mfcComponentDescr
+class EXP mfcRepresentationComponent : public mfcComponent
 {
   public:
 
@@ -402,7 +402,7 @@ typedef SMARTP<mfcRepresentationComponent> S_mfcRepresentationComponent;
 EXP ostream& operator << (ostream& os, const S_mfcRepresentationComponent& elt);
 
 //______________________________________________________________________________
-class EXP mfcPassComponent : public mfcComponentDescr
+class EXP mfcPassComponent : public mfcComponent
 {
   public:
 
@@ -447,7 +447,7 @@ string componentEntropicityKindAsString (
 ostream& operator << (ostream& os, mfcMultiComponentEntropicityKind& elt);
 
 //______________________________________________________________________________
-class EXP mfcMultiComponent : public mfcComponentDescr
+class EXP mfcMultiComponent : public mfcComponent
 {
 /* this class is purely virtual
   public:

@@ -114,7 +114,7 @@ int main (int argc, char* argv[])
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      serviceName << " main()" <<
+      serviceName << " xml2gmn()" <<
       ", insiderOption: " << insiderOption <<
       endl;
   }
