@@ -13,7 +13,7 @@ MY_WORK_DIR=${HOME}
 
 MUSIC_FORMATS_DEV=${MY_WORK_DIR}/musicformats-git-dev
 # echo
-# echo "========> MUSIC_FORMATS_DEV = ${MUSIC_FORMATS_DEV}"
+# echo "==> MUSIC_FORMATS_DEV = ${MUSIC_FORMATS_DEV}"
 # echo
 
 alias mfdev="cd ${MUSIC_FORMATS_DEV}"
@@ -49,8 +49,10 @@ alias rmbuild='cd ${MUSIC_FORMATS_DEV}/build ; rm -r bin lib libdir; ls -sal'
 FILES_DIR=${MUSIC_FORMATS_DEV}/files
 DOC_DIR=${MUSIC_FORMATS_DEV}/documentation
 
-CLI_SAMPLES_DIR=${MUSIC_FORMATS_DEV}/src/clisamples
+SERVICES_DIR=${MUSIC_FORMATS_DEV}/src/services
+
 LXML_SAMPLES_DIR=${LXML_DIR}/samples
+CLI_SAMPLES_DIR=${MUSIC_FORMATS_DEV}/src/clisamples
 
 FILES_DIR=${MUSIC_FORMATS_DEV}/files
 MXML_FILES_DIR=${FILES_DIR}/musicxmlfiles
@@ -74,6 +76,8 @@ alias intro="cd ${DOC_DIR}/IntroductionToMusicXML"
 
 alias clis="cd ${CLI_SAMPLES_DIR}"
 alias lxmlsamp="cd ${LXML_SAMPLES_DIR}"
+
+alias serv="cd ${SERVICES_DIR}"
 
 
 # choosing the MacOS version
@@ -214,16 +218,18 @@ function bit ()
 {
 #   set -x
   SCRIPT_NAME=BuildMusicFormats.zsh
+  SCRIPT=${SCRIPTS_DIR}/${SCRIPT_NAME}
 
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT_NAME}.log
-# 	echo
-# 	echo "========> LOGFILE = ${LOGFILE}"
-# 	echo
+  LOGFILE_NAME=${SCRIPT_NAME}.log
+  LOGFILE=${BUILD_DIR}/${LOGFILE_NAME}
+	echo
+	echo "==> LOGFILE = ${LOGFILE}"
+	echo
 
 	# execute the SCRIPT
 
-	echo "--> Executing ${SCRIPTS_DIR}/${SCRIPT_NAME}"
-  zsh ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
+	echo "--> Executing ${SCRIPT}"
+  zsh ${SCRIPT} $@
 
 	# filter out log results
 
@@ -250,27 +256,6 @@ function bit ()
 alias cmakall='pushd . ; cd ${BUILD_DIR}/libdir; cmake .. -DALL=on -DAPPLEDEBUG=on ; popd'
 #cmake .. -DLILY=on -DBRAILLE=on
 
-
-# clean it
-#----------------------------------------------
-
-function cit () ###JMI
-{
-#  set -x
-  SCRIPT=${SCRIPTS_DIR}/Clean_libmusicformats.zsh
-
-  LOGFILE=${MUSIC_FORMATS_DEV}/${SCRIPT}.log
-	echo
-	echo "========> LOGFILE = ${LOGFILE}"
-	echo
-
-  ${SCRIPTS_DIR}/${SCRIPT_NAME} $@
-
-  echo
-
-  ls -saltr ${BUILD_DIR}
-#  set +x
-}
 
 # version number
 #----------------------------------------------

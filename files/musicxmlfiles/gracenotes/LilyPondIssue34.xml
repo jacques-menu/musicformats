@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 1.0 Partwise//EN" 
+<!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 1.0 Partwise//EN"
       "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
     <work-number>K. 331</work-number>
-    <work-title>Piano Sonata in A Major</work-title>
+    <work-title>LilyPond Issue #34</work-title>
   </work>
   <identification>
     <creator type="composer">Wolfgang Amadeus Mozart</creator>

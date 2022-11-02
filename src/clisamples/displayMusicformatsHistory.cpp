@@ -1,8 +1,7 @@
 /*
 
-  Copyright (C) 2003-2008  Grame
-  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
-  research@grame.fr
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
 
   This file is provided as an example of the MusicXML Library use.
 */

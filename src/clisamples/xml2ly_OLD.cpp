@@ -1,7 +1,8 @@
 /*
 
-  MusicFormats Library
-  Copyright (C) Jacques Menu 2016-2022
+  Copyright (C) 2003-2008  Grame
+  Grame Research Laboratory, 9 rue du Garet, 69001 Lyon - France
+  research@grame.fr
 
   This file is provided as an example of the MusicXML Library use.
 */
@@ -15,6 +16,7 @@
 #endif
 
 #include "mfServiceRunData.h"
+#include "mfBool.h"
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
 
@@ -32,17 +34,19 @@
 #include "waeOah.h"
 #include "displayOah.h"
 
+#include "oahBasicTypes.h" // for testIncludeOptionsFromFile()
 #include "oahEarlyOptions.h"
 
 #include "msr.h"
+#include "lpsr.h"
 
 #include "mfcLibraryComponent.h"
-#include "musicxml2guidoComponent.h"
+#include "musicxml2lilypondComponent.h"
 
-#include "musicxml2guidoInsiderHandler.h"
-#include "musicxml2guidoRegularHandler.h"
+#include "musicxml2lilypondInsiderHandler.h"
+#include "musicxml2lilypondRegularHandler.h"
 
-#include "musicxml2guidoInterface.h"
+#include "musicxml2lilypondInterface.h"
 
 #include "mfcLibraryComponent.h"
 
@@ -81,22 +85,65 @@ static void catchSignals ()  {}
 #endif
 
 //_______________________________________________________________________________
+// #include <unistd.h>
+// #include <signal.h>
+// #include <sys/resource.h>
+// #include <stdio.h>
+
+void allowCoreDumps ()
+{
+//   pid_t pid = getpid();
+//
+//   struct rlimit l;
+//   int ret = getrlimit(RLIMIT_CORE, &l);
+//
+//   printf ("--> getrlimit returned %d\n", ret);
+//   printf ("--> rlim_cur = %llu\n", l.rlim_cur);
+//   printf ("--> rlim_max = %llu\n", l.rlim_max);
+//
+//   l.rlim_cur = l.rlim_max;
+//   printf ("--> setrlimit returned %d\n", setrlimit(RLIMIT_CORE, &l));
+//
+//   bool killMyself = false;
+//
+//   if (killMyself) {
+//     printf ("Time to kill myself\n");
+//     kill (pid, SIGBUS);
+//   }
+}
+
+//_______________________________________________________________________________
 int main (int argc, char* argv[])
 {
   // setup signals catching
   // ------------------------------------------------------
 
-  catchSignals ();
+// JMI  catchSignals ();
 
-  // fetch service name
+  // core dumps
+  // ------------------------------------------------------
+
+  allowCoreDumps ();
+
+  // the service name
   // ------------------------------------------------------
 
   string serviceName = argv [0];
 
-  // create the global log indented output stream
+  // create the global output and log indented streams
   // ------------------------------------------------------
 
   createTheGlobalIndentedOstreams (cout, cerr);
+
+// JMI  msrMoment::testMsrMomentComparisons (cerr); // BLARK CLAR
+
+// JMI testBool ();
+
+// JMI  testIncludeOptionsFromFile ();
+
+//   gLogStream <<
+//     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<
+//     endl;
 
   // apply early options if any
   // ------------------------------------------------------
@@ -126,26 +173,30 @@ int main (int argc, char* argv[])
   S_oahHandler handler;
 
   try {
-    // create an xml2gmn insider OAH handler
+    // create an xml2ly insider OAH handler
     // ------------------------------------------------------
 
-    S_xml2gmnInsiderHandler
+    S_xml2lyInsiderHandler
       insiderOahHandler =
-        xml2gmnInsiderHandler::create (
+        xml2lyInsiderHandler::create (
           serviceName,
-          serviceName + " insider OAH handler with argc/argv");
+          serviceName + " insider OAH handler with argc/argv",
+          oahHandlerUsedThruKind::kHandlerUsedThruArgcArgv);
 
     // the OAH handler to be used, a regular handler is the default
     // ------------------------------------------------------
 
+    Bool insiderOption =
+      gGlobalOahEarlyOptions.getEarlyInsiderOption ();
+
     if (insiderOption) {
-      // use the insider xml2gmn OAH handler
+      // use the insider xml2ly OAH handler
       handler = insiderOahHandler;
     }
     else {
-      // create a regular xml2gmn OAH handler
+      // create a regular xml2ly OAH handler
       handler =
-        xml2gmnRegularHandler::create (
+        xml2lyRegularHandler::create (
           serviceName,
           serviceName + " regular OAH handler with argc/argv",
           insiderOahHandler);
@@ -158,10 +209,8 @@ int main (int argc, char* argv[])
       mfServiceRunData::create (
         serviceName);
 
-    // handle the command line options and arguments
-    // ------------------------------------------------------
-
     // handle the options and arguments from argc/argv
+    // ------------------------------------------------------
     oahElementHelpOnlyKind
       helpOnlyKind =
         handler->
@@ -189,6 +238,8 @@ int main (int argc, char* argv[])
   }
 
   // check indentation
+  // ------------------------------------------------------
+
   if (gIndenter != 0) {
     gLogStream <<
       "### " <<
@@ -203,6 +254,8 @@ int main (int argc, char* argv[])
 
   // let's go ahead
   // ------------------------------------------------------
+
+//   testRational ();
 
   string
     inputSourceName =
@@ -242,7 +295,8 @@ int main (int argc, char* argv[])
         " needs an input file name. " <<
         handler->getHandlerUsage ();
 
-      oahError (s.str ());
+      oahWarning (s.str ());
+//       oahError (s.str ()); JMI
     }
   }
 
@@ -282,7 +336,7 @@ int main (int argc, char* argv[])
     }
 
     gLogStream <<
-      " back to MusicXML" <<
+      " to LilyPond" <<
       endl;
 
     gLogStream <<
@@ -324,7 +378,7 @@ int main (int argc, char* argv[])
     --gIndenter;
 
     gLogStream <<
-      "MusicXML code will be written to ";
+      "LilyPond code will be written to ";
     if (outputFileNameSize) {
       gLogStream <<
         outputFileName;
@@ -348,18 +402,6 @@ int main (int argc, char* argv[])
   }
 #endif
 
-  // sanity check // in xml2gmnInsiderOahGroup ??? JMI
-  // ------------------------------------------------------
-
-  if (inputSourceName.size () > 0 && inputSourceName == outputFileName) { // JMI
-    stringstream s;
-
-    s <<
-      "\"" << inputSourceName << "\" is both the input and output file name";
-
-    oahError (s.str ());
-  }
-
   // do the conversion
   // ------------------------------------------------------
 
@@ -369,13 +411,13 @@ int main (int argc, char* argv[])
     if (inputSourceName == "-") {
       // MusicXML data comes from standard input
 #ifdef TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
+      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
         gLogStream << "Reading standard input" << endl;
       }
 #endif
 
       err =
-        convertMusicxmlFd2guidoWithHandler (
+        convertMusicxmlFd2lilypondWithHandler (
           stdin,
           gOutputStream,
           gLogStream,
@@ -385,13 +427,17 @@ int main (int argc, char* argv[])
     else {
       // MusicXML data comes from a file
 #ifdef TRACING_IS_ENABLED
-      if (gGlobalOahEarlyOptions.getEarlyTracePasses ()) {
-        gLogStream << "Reading file \"" << inputSourceName << "\"" << endl;
+      if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
+        gLogStream <<
+          "Reading file \"" <<
+          inputSourceName <<
+          "\"" <<
+          endl;
       }
 #endif
 
       err =
-        convertMusicxmlFile2guidoWithHandler (
+        convertMusicxmlFile2lilypondWithHandler (
           inputSourceName.c_str(),
           gOutputStream,
           gLogStream,
@@ -438,7 +484,7 @@ int main (int argc, char* argv[])
 
   if (err != mfMusicformatsError::k_NoError) {
     gLogStream <<
-      "### Conversion from MusicXML back to MusicXML failed ###" <<
+      "### Conversion from MusicXML to LilyPond failed ###" <<
       endl;
 
     return 1;
