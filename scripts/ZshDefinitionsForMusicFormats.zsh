@@ -41,7 +41,8 @@ alias skr="cd ${SCRIPTS_DIR}"
 BUILD_DIR=${MUSIC_FORMATS_DEV}/build
 alias build="cd ${BUILD_DIR}"
 
-INCLUDE_DIR=${MUSIC_FORMATS_DEV}/include
+INCLUDE_DIR_NAME=include
+INCLUDE_DIR=${MUSIC_FORMATS_DEV}/${INCLUDE_DIR_NAME}
 alias inc="cd ${INCLUDE_DIR}"
 
 alias rmbuild='cd ${MUSIC_FORMATS_DEV}/build ; rm -r bin lib libdir; ls -sal'
@@ -828,6 +829,7 @@ function addScripts ()
 
 function addInclude ()
 {
+	set -x
 	echo "--> INCLUDE_DIR: ${INCLUDE_DIR}"
 
 	rm -rf ${INCLUDE_DIR}
@@ -835,10 +837,12 @@ function addInclude ()
 
 	cd ${SRC_DIR}
 
-	rsync -R **/*.h include
-	mv include ..
+	rsync -R **/*.h ${INCLUDE_DIR_NAME}
 
-  git add ${INCLUDE_DIR}/*
+	mv ${INCLUDE_DIR_NAME} ..
+
+  git add ../${INCLUDE_DIR_NAME}/*
+  set +x
 }
 
 function addDoc ()

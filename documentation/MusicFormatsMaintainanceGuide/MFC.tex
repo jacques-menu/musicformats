@@ -142,9 +142,9 @@ enum class mfcComponenKind {
 };
 \end{lstlisting}
 
-The \purelyVirtualClass{mfcComponentDescr} is a superclass to the ones describing formats, passes, generators, converters and the \mf\ library itself:
+The \purelyVirtualClass{mfcComponent} is a superclass to the ones describing formats, passes, generators, converters and the \mf\ library itself:
 \begin{lstlisting}[language=CPlusPlus]
-class mfcComponentDescr : public smartable
+class mfcComponent : public smartable
 {
 	// ... ... ...
 
@@ -214,7 +214,7 @@ Representations and passes have a single, linear history, whereas the generators
 
 \end{itemize}
 
-Multi-components have their own history, hence field \method{mfcComponentDescr}{printOwnHistory}.
+Multi-components have their own history, hence field \method{mfcComponent}{printOwnHistory}.
 \Class{mfcMultiComponent} is described below.
 
 
@@ -224,7 +224,7 @@ Multi-components have their own history, hence field \method{mfcComponentDescr}{
 
 \Class{mfcMultiComponent} contains lists of the formats and passes used:
 \begin{lstlisting}[language=CPlusPlus]
-class mfcMultiComponent : public mfcComponentDescr
+class mfcMultiComponent : public mfcComponent
 {
 	// ... ... ...
 

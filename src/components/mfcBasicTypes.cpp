@@ -902,21 +902,21 @@ string componenKindAsString (
 
 //______________________________________________________________________________
 /* this class is purely virtual
-S_mfcComponentDescr mfcComponentDescr::create (
+S_mfcComponent mfcComponent::create (
   const string&   componentName,
   mfcComponenKind componenKind)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
-      "Creating mfcComponentDescr" <<
+      "Creating mfcComponent" <<
       ", componentName: " << componentName <<
       endl;
   }
 #endif
 
-  mfcComponentDescr* o =
-    new mfcComponentDescr (
+  mfcComponent* o =
+    new mfcComponent (
       componentName,
       componenKind);
   assert (o != nullptr);
@@ -924,14 +924,14 @@ S_mfcComponentDescr mfcComponentDescr::create (
 }
 */
 
-mfcComponentDescr::mfcComponentDescr (
+mfcComponent::mfcComponent (
   const string&   componentName,
   mfcComponenKind componenKind)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTraceComponents ()) {
     gLogStream <<
-      "Constructing mfcComponentDescr \"" <<
+      "Constructing mfcComponent \"" <<
       componentName <<
       "\"" <<
       endl;
@@ -945,10 +945,10 @@ mfcComponentDescr::mfcComponentDescr (
   fVersionsHistory = mfcVersionsHistory::create ();
 }
 
-mfcComponentDescr::~mfcComponentDescr ()
+mfcComponent::~mfcComponent ()
 {}
 
-void mfcComponentDescr::appendVersionDescrToComponent (
+void mfcComponent::appendVersionDescrToComponent (
   S_mfcVersionDescr versionDescr)
 {
 #ifdef TRACING_IS_ENABLED
@@ -968,7 +968,7 @@ void mfcComponentDescr::appendVersionDescrToComponent (
     appendVersionDescrToHistory (versionDescr);
 }
 
-string mfcComponentDescr::asString () const
+string mfcComponent::asString () const
 {
   stringstream s;
 
@@ -993,7 +993,7 @@ string mfcComponentDescr::asString () const
   return s.str ();
 }
 
-string mfcComponentDescr::mostRecentVersionNumberAndDateAsString () const
+string mfcComponent::mostRecentVersionNumberAndDateAsString () const
 {
   stringstream s;
 
@@ -1013,13 +1013,13 @@ string mfcComponentDescr::mostRecentVersionNumberAndDateAsString () const
   return s.str ();
 }
 
-void mfcComponentDescr::print (ostream& os) const
+void mfcComponent::print (ostream& os) const
 {
 
   os << asString () << endl;
 }
 
-void mfcComponentDescr::printOwnHistory (ostream&  os) const
+void mfcComponent::printOwnHistory (ostream&  os) const
 {
   os <<
     "Own history:" <<
@@ -1030,7 +1030,7 @@ void mfcComponentDescr::printOwnHistory (ostream&  os) const
   --gIndenter;
 }
 
-void mfcComponentDescr::printVersion (ostream& os) const
+void mfcComponent::printVersion (ostream& os) const
 {
   S_mfcVersionDescr
     componentMostRecentVersion =
@@ -1045,12 +1045,12 @@ void mfcComponentDescr::printVersion (ostream& os) const
     endl;
 }
 
-void mfcComponentDescr::printHistory (ostream&  os) const
+void mfcComponent::printHistory (ostream&  os) const
 {
   fVersionsHistory->print (os);
 }
 
-ostream& operator << (ostream& os, const S_mfcComponentDescr& elt)
+ostream& operator << (ostream& os, const S_mfcComponent& elt)
 {
   if (elt) {
     elt->print (os);
@@ -1084,7 +1084,7 @@ S_mfcOahComponent mfcOahComponent::create (
 
 mfcOahComponent::mfcOahComponent (
   const string& formatName)
-  : mfcComponentDescr (
+  : mfcComponent (
       formatName,
       mfcComponenKind::kComponentRepresentation)
 {
@@ -1136,7 +1136,7 @@ S_mfcRepresentationComponent mfcRepresentationComponent::create (
 
 mfcRepresentationComponent::mfcRepresentationComponent (
   const string& formatName)
-  : mfcComponentDescr (
+  : mfcComponent (
       formatName,
       mfcComponenKind::kComponentRepresentation)
 {
@@ -1188,7 +1188,7 @@ S_mfcPassComponent mfcPassComponent::create (
 
 mfcPassComponent::mfcPassComponent (
   const string& passName)
-  : mfcComponentDescr (
+  : mfcComponent (
       passName,
       mfcComponenKind::kComponentPass)
 {
@@ -1255,7 +1255,7 @@ string componentEntropicityKindAsString (
 
 //______________________________________________________________________________
 /* this class is purely virtual
-S_mfcMultiComponent mfcMultiComponent::create (
+S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
   const string&   multiComponentName,
   mfcComponenKind componenKind,
   mfcMultiComponentEntropicityKind
@@ -1290,7 +1290,7 @@ mfcMultiComponent::mfcMultiComponent (
                   componentEntropicityKind,
   mfcMultiComponentUsedFromTheCLIKind
                   componentUsedFromTheCLIKind)
-  : mfcComponentDescr (
+  : mfcComponent (
       multiComponentName,
       componenKind)
 {

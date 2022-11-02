@@ -113,7 +113,9 @@ void allowCoreDumps ()
 }
 
 //_______________________________________________________________________________
-int main (int argc, char* argv[])
+int xml2ly (
+  int   argc,
+  char* argv[])
 {
   // setup signals catching
   // ------------------------------------------------------
@@ -161,7 +163,7 @@ int main (int argc, char* argv[])
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
     gLogStream <<
-      serviceName << " main()" <<
+      serviceName << " xml2ly()" <<
       ", insiderOption: " << insiderOption <<
       endl;
   }
@@ -491,4 +493,10 @@ int main (int argc, char* argv[])
   }
 
   return 0;
+}
+
+//_______________________________________________________________________________
+int main (int argc, char* argv[])
+{
+  return xml2ly (argc, argv);
 }
