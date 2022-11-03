@@ -476,18 +476,18 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
   ++gIndenter;
 
   // determine new measure 'first in segment' kind
-  msrMeasure::msrMeasureFirstInSegmentKind
+  msrMeasureFirstInSegmentKind
     measureFirstInSegmentKind;
 
   if (fSegmentElementsList.size () == 0) {
     // this is the first measure in the segment
     measureFirstInSegmentKind =
-      msrMeasure::kMeasureFirstInSegmentKindYes;
+      msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindYes;
   }
   else {
     // this is not the first measure in the segment
     measureFirstInSegmentKind =
-      msrMeasure::kMeasureFirstInSegmentKindNo;
+      msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindNo;
   }
 
   // create a measure
@@ -500,7 +500,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", measureFirstInSegmentKind: " <<
-      msrMeasure::measureFirstInSegmentKindAsString (
+      measureFirstInSegmentKindAsString (
         measureFirstInSegmentKind) <<
       ", line " << inputLineNumber <<
       endl;
@@ -1829,14 +1829,14 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   if (! fSegmentFirstMeasure) {
     measure->
       setMeasureFirstInSegmentKind (
-        msrMeasure::kMeasureFirstInSegmentKindYes);
+        msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindYes);
 
     setSegmentFirstMeasure (measure);
   }
   else {
     measure->
       setMeasureFirstInSegmentKind (
-        msrMeasure::kMeasureFirstInSegmentKindNo);
+        msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindNo);
   }
 
   // is measure the first one it the voice?
@@ -2552,7 +2552,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
     measure->
       finalizeMeasure (
         inputLineNumber,
-        msrMeasure::kMeasureRepeatContextKindNone,
+        msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone,
         "finalizeAllTheMeasuresOfSegment()");
   } // for
 }

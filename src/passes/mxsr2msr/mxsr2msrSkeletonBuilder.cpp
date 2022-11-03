@@ -1006,7 +1006,7 @@ void mxsr2msrSkeletonBuilder::handlePartGroupStart (
         fCurrentPartGroupAbbreviation,
         fCurrentPartGroupSymbolKind,
         fCurrentPartGroupSymbolDefaultX,
-        msrPartGroup::kPartGroupImplicitNo,
+        msrPartGroupImplicitKind::kPartGroupImplicitNo,
         fCurrentPartGroupBarLineKind,
         nullptr, // partGroupUpLinkToPartGroup will be set upon 'stop'
         fMsrScore);
@@ -2808,7 +2808,7 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
       fCurrentPartGroupNameDisplayText = "";
       fCurrentPartGroupAccidentalText = "";
       fCurrentPartGroupAbbreviation = "";
-      fCurrentPartGroupSymbolKind = msrPartGroup::kPartGroupSymbolNone;
+      fCurrentPartGroupSymbolKind = msrPartGroupSymbolKind::kPartGroupSymbolNone;
       fCurrentPartGroupSymbolDefaultX = INT_MIN;
       fCurrentPartGroupBarLineKind = msrPartGroupBarLineKind::kPartGroupBarLineYes;
       break;
@@ -2954,22 +2954,22 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_symbol& elt)
   string groupSymbol = elt->getValue ();
 
   fCurrentPartGroupSymbolKind =
-    msrPartGroup::kPartGroupSymbolNone; // default value
+    msrPartGroupSymbolKind::kPartGroupSymbolNone; // default value
 
   if      (groupSymbol == "brace")
-    fCurrentPartGroupSymbolKind = msrPartGroup::kPartGroupSymbolBrace;
+    fCurrentPartGroupSymbolKind = msrPartGroupSymbolKind::kPartGroupSymbolBrace;
 
   else if (groupSymbol == "bracket")
-    fCurrentPartGroupSymbolKind = msrPartGroup::kPartGroupSymbolBracket;
+    fCurrentPartGroupSymbolKind = msrPartGroupSymbolKind::kPartGroupSymbolBracket;
 
   else if (groupSymbol == "line")
-    fCurrentPartGroupSymbolKind = msrPartGroup::kPartGroupSymbolLine;
+    fCurrentPartGroupSymbolKind = msrPartGroupSymbolKind::kPartGroupSymbolLine;
 
   else if (groupSymbol == "square")
-    fCurrentPartGroupSymbolKind = msrPartGroup::kPartGroupSymbolSquare;
+    fCurrentPartGroupSymbolKind = msrPartGroupSymbolKind::kPartGroupSymbolSquare;
 
   else if (groupSymbol == "[NONE]")
-    fCurrentPartGroupSymbolKind = msrPartGroup::kPartGroupSymbolNone;
+    fCurrentPartGroupSymbolKind = msrPartGroupSymbolKind::kPartGroupSymbolNone;
 
   else {
     if (groupSymbol.size ()) {
@@ -3047,7 +3047,7 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
       "Handling part group '" <<
       fCurrentPartGroupNumber <<
       "', type: \"" <<
-      msrPartGroup::partGroupTypeKindAsString (
+      partGroupTypeKindAsString (
         fCurrentPartGroupTypeKind) << "\""  <<
       ", fCurrentPartsPosition = " << fCurrentPartsPosition <<
       ", line " << inputLineNumber <<

@@ -1,8 +1,6 @@
 #ifndef ___msrMeasures___
 #define ___msrMeasures___
 
-#include "msrElements.h"
-
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
 #include "msrBarNumberChecks.h"
@@ -24,54 +22,55 @@
 #include "msrTuplets.h"
 #include "msrVoices.h"
 
+#include "msrMeasureElements.h"
+
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class msrMeasureElement;
-typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
+// class msrMeasureElement;
+// typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 
 //______________________________________________________________________________
+  // data types
+
+enum msrMeasureFirstInSegmentKind {
+  kMeasureFirstInSegmentKindUnknown,
+  kMeasureFirstInSegmentKindYes,
+  kMeasureFirstInSegmentKindNo
+};
+
+string measureFirstInSegmentKindAsString (
+  msrMeasureFirstInSegmentKind measureFirstInSegmentKind);
+
+enum msrMeasureRepeatContextKind {
+  kMeasureRepeatContextKindUnknown,
+  kMeasureRepeatContextKindNone,
+  kMeasureRepeatContextKindCommonPartLastMeasure,
+  kMeasureRepeatContextKindHookedEndingLastMeasure,
+  kMeasureRepeatContextKindHooklessEndingLastMeasure,
+  kMeasureRepeatContextKindNextMeasureAfterCommonPart,
+  kMeasureRepeatContextKindNextMeasureAfterHookedEnding,
+  kMeasureRepeatContextKindNextMeasureAfterHooklessEnding
+};
+
+string measureRepeatContextKindAsString (
+  msrMeasureRepeatContextKind measureRepeatContextKind);
+
+enum msrMeasureEndRegularKind {
+  kMeasureEndRegularKindUnknown,
+  kMeasureEndRegularKindYes,
+  kMeasureEndRegularKindNo
+};
+
+string measureEndRegularKindAsString (
+  msrMeasureEndRegularKind measureEndRegularKind);
+
 class EXP msrMeasure : public msrSegmentElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrMeasureFirstInSegmentKind {
-      kMeasureFirstInSegmentKindUnknown,
-      kMeasureFirstInSegmentKindYes,
-      kMeasureFirstInSegmentKindNo
-    };
-
-    static string measureFirstInSegmentKindAsString (
-      msrMeasureFirstInSegmentKind measureFirstInSegmentKind);
-
-    enum msrMeasureRepeatContextKind {
-      kMeasureRepeatContextKindUnknown,
-      kMeasureRepeatContextKindNone,
-      kMeasureRepeatContextKindCommonPartLastMeasure,
-      kMeasureRepeatContextKindHookedEndingLastMeasure,
-      kMeasureRepeatContextKindHooklessEndingLastMeasure,
-      kMeasureRepeatContextKindNextMeasureAfterCommonPart,
-      kMeasureRepeatContextKindNextMeasureAfterHookedEnding,
-      kMeasureRepeatContextKindNextMeasureAfterHooklessEnding
-    };
-
-    static string measureRepeatContextKindAsString (
-      msrMeasureRepeatContextKind measureRepeatContextKind);
-
-    enum msrMeasureEndRegularKind {
-      kMeasureEndRegularKindUnknown,
-      kMeasureEndRegularKindYes,
-      kMeasureEndRegularKindNo
-    };
-
-    static string measureEndRegularKindAsString (
-      msrMeasureEndRegularKind measureEndRegularKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

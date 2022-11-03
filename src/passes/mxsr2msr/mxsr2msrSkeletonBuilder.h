@@ -442,8 +442,7 @@ class EXP mxsr2msrSkeletonBuilder :
 
     string                    fCurrentPartGroupAccidentalText;
     msrPartGroupSymbolKind    fCurrentPartGroupSymbolKind;
-    msrPartGroup::msrPartGroupBarLineKind
-                              fCurrentPartGroupBarLineKind;
+    msrPartGroupBarLineKind   fCurrentPartGroupBarLineKind;
     int                       fCurrentPartGroupSymbolDefaultX;
 
     // an implicit part group has to be created to contain everything,

@@ -2411,11 +2411,11 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
 #endif
 
   switch (elt->getPartGroupImplicitKind ()) {
-    case msrPartGroup::kPartGroupImplicitYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitYes:
       // this is an MSR concept, ignore this part group
       break;
 
-    case msrPartGroup::kPartGroupImplicitNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitNo:
       {
         if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create a start comment
@@ -2447,18 +2447,18 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
         string groupSymbolString;
 
         switch (elt->getPartGroupSymbolKind ()) {
-          case msrPartGroup::kPartGroupSymbolNone:
+          case msrPartGroupSymbolKind::kPartGroupSymbolNone:
             break;
-          case msrPartGroup::kPartGroupSymbolBrace:
+          case msrPartGroupSymbolKind::kPartGroupSymbolBrace:
             groupSymbolString = "brace";
             break;
-          case msrPartGroup::kPartGroupSymbolBracket:
+          case msrPartGroupSymbolKind::kPartGroupSymbolBracket:
             groupSymbolString = "bracket";
             break;
-          case msrPartGroup::kPartGroupSymbolLine:
+          case msrPartGroupSymbolKind::kPartGroupSymbolLine:
             groupSymbolString = "line";
             break;
-          case msrPartGroup::kPartGroupSymbolSquare:
+          case msrPartGroupSymbolKind::kPartGroupSymbolSquare:
             groupSymbolString = "square";
             break;
         } // switch
@@ -2548,11 +2548,11 @@ void msr2mxsrTranslator::visitEnd (S_msrPartGroup& elt)
 #endif
 
   switch (elt->getPartGroupImplicitKind ()) {
-    case msrPartGroup::kPartGroupImplicitYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitYes:
       // this is an MSR concept, ignore this part group
       break;
 
-    case msrPartGroup::kPartGroupImplicitNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitNo:
       {
         if (gGlobalMsr2mxsrOahGroup->getMusicXMLComments ()) {
           // create an end comment

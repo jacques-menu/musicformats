@@ -300,13 +300,6 @@ class EXP msrPartGroup : public msrPartGroupElement
     // print
     // ------------------------------------------------------
 
-    string                partGroupSymbolKindAsString () const
-                              {
-                                return
-                                  partGroupSymbolKindAsString (
-                                    fPartGroupSymbolKind);
-                              }
-
     void                  printPartGroupElementsList (
                             int      inputLineNumber,
                             ostream& os) const;
