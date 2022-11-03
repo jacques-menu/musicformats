@@ -17,7 +17,7 @@ Before presenting the \mf\ library in detail, let's get an idea of what it has t
 
 In computer science, the simplest example one can write with a language is often named 'Hello World'. \mf\ abides to this rule, suppling \gitmxmlfile{basic/HelloWorld.xml}:
 \begin{lstlisting}[language=MusicXML]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/HelloWorld.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat basic/HelloWorld.xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
     "-//Recordare//DTD MusicXML 3.0 Partwise//EN"
@@ -74,7 +74,7 @@ By default, the \standardOutput\ and \standardError\ are directed to the termina
 
 Let's consider the case of \gitmxmlfile{basic/UnknownMaintainerIdentification.xml}:
 \begin{lstlisting}[language=Lilypond]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/UnknownMaintainerIdentification.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/UnknownMaintainerIdentification.xml
 *** MusicXML warning *** basic/UnknownMaintainerIdentification.xml:11: creator type "maintainer" is unknown
 \version "2.22.0"
 
@@ -160,12 +160,12 @@ This behaviour can be changed using the shell's redirection operators:
 
 Thus, after executing:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/UnknownMaintainerIdentification.xml > output.ly 2> error.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/UnknownMaintainerIdentification.xml > output.ly 2> error.txt
 \end{lstlisting}
 
 \fileName{output.ly} contains the \lily\ code produced, and \fileName{error.txt} contains:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat error.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat error.txt
 *** MusicXML warning *** basic/UnknownMaintainerIdentification.xml:11: creator type "maintainer" is unknown
 Warning message(s) were issued for input line 11
 \end{lstlisting}
@@ -177,7 +177,7 @@ Warning message(s) were issued for input line 11
 
 Using \xmlToLy\ as in the previous section is somewhat limited. This command:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/MinimalScore.xml > MinimalScore.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/MinimalScore.xml > MinimalScore.ly
 \end{lstlisting}
 
 leads to this score:\\
@@ -185,7 +185,7 @@ leads to this score:\\
 
 What if we want to change the title in the \lily\ output? This is where options come into play. One of them is \option{query}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -query title
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -query title
 --- Help for atom "title" in subgroup "Header"
     -title STRING
           Set 'title' to STRING in the LilyPond code \header.
@@ -193,7 +193,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -query 
 
 Using it this way:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/MinimalScore.xml -title "U. N. Known" > MinimalScore.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/MinimalScore.xml -title "U. N. Known" > MinimalScore.ly
 \end{lstlisting}
 
 produces that score:\\
@@ -227,7 +227,7 @@ The passes involved in a conversion can be seen with suitable %%%JMI
 %}{cpu}
 options:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -auto-output-file-name -trace-passes -display-cpu-usage basic/Anacrusis.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -auto-output-file-name -trace-passes -display-cpu-usage basic/Anacrusis.xml
 
 %--------------------------------------------------------------
   Handle the options and arguments from argc/argv

@@ -16,13 +16,15 @@
 
 #include "msrBasicTypes.h"
 
+// #include "msrMeasures.h"
+
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class EXP msrMeasure;
+class msrMeasure;
 typedef SMARTP<msrMeasure> S_msrMeasure;
 
 //______________________________________________________________________________

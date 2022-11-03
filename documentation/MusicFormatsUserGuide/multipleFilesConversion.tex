@@ -12,7 +12,7 @@ On \MacOS\ and \Linux, converting all the \mxml\ files in a given folder can be 
 
 The \mfFiles{musicxmlfiles/clefs} sub-folder initial contents is:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/clefs > ls -sal
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/clefs > ls -sal
 total 64
  0 drwxr-xr-x    5 jacquesmenu  staff    160 Feb 26 00:18 .
  0 drwxr-xr-x  108 jacquesmenu  staff   3456 Feb 25 07:46 ..
@@ -23,12 +23,12 @@ total 64
 
 \xmlToLy\ can be applied to all the \mxml\ files in this folder with:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/clefs > find . -name "*.xml" -exec xml2ly {} -auto-output-file-name \;
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/clefs > find . -name "*.xml" -exec xml2ly {} -auto-output-file-name \;
 \end{lstlisting}
 
 The contents of the sub-folder now contains the following:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/clefs > ls -sal
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/clefs > ls -sal
 total 80
  0 drwxr-xr-x    7 jacquesmenu  staff    224 Feb 26 00:19 .
  0 drwxr-xr-x  108 jacquesmenu  staff   3456 Feb 25 07:46 ..
@@ -51,15 +51,15 @@ To convert all the \mxml\ files in a sub-folder of \mfFiles{musicxmlfiles}, one 
 \begin{itemize}
 \item \code{cd} to this sub-folder;
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cd keys/
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/keys >
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cd keys/
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys >
 \end{lstlisting}
 
 \item create a {\it \symbolicLink} to this \Makefile\ in the given sub-folder -- this is to be done only once:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/keys > ln -s ../Makefile
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > ln -s ../Makefile
 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/keys > ls -sal
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > ls -sal
 total 24
  0 drwxr-xr-x    5 jacquesmenu  staff   160 Feb 25 14:12 .
  0 drwxr-xr-x  108 jacquesmenu  staff  3456 Feb 25 07:46 ..
@@ -77,7 +77,7 @@ That also ensures that any change to the \Makefile\ in \libFiles{musicxmlfiles} 
 %\filbreak
 This \Makefile\ can provide help about its use:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/keys > make help
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > make help
 Makefile for converting MusicXML files to LilyPond scores.
 Supplied as part of the MusicFormats library, thanks to Dom Fober for providing it.
 Output files are written in sub-folders of the current folder.
@@ -107,7 +107,7 @@ Make variables:
 
 The conversion using the 'lily' default target can be achieved by:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/keys > make
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > make
 XML2LY   = xml2ly
 OPTIONS  = -q
 LILYPOND = /Applications/LilyPond/lilypond-2.23.6/bin/lilypond
@@ -130,7 +130,7 @@ Contents of pdflily sub-folder:
 
 The resulting sub-folder contents is:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/keys > ls -salR
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > ls -salR
 total 24
  0 drwxr-xr-x    7 jacquesmenu  staff   224 Feb 25 15:42 .
  0 drwxr-xr-x  108 jacquesmenu  staff  3456 Feb 25 07:46 ..
@@ -156,9 +156,9 @@ total 96
 
 The sub-folder can be cleaned-up with:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/keys > make clean
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > make clean
 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/keys > ls -sal
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/keys > ls -sal
 total 24
  0 drwxr-xr-x    5 jacquesmenu  staff   160 Feb 25 15:45 .
  0 drwxr-xr-x  108 jacquesmenu  staff  3456 Feb 25 07:46 ..

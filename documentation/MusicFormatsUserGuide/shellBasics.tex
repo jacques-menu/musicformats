@@ -25,7 +25,7 @@ jacquesmenu@macmini: ~ >
 
 \item the other one displays the \currentWorkingDirectory: it is used when the latter has to be set at a specific value for the command:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > 
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > 
 \end{lstlisting}
 
 \end{itemize}
@@ -124,7 +124,7 @@ DESCRIPTION
 
 One can submit several commands in a single line,  separating them with a \code{;}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cd Clefs; ls -sal
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cd Clefs; ls -sal
 total 88
  0 drwxr-xr-x    8 jacquesmenu  staff    256 Feb 26 09:03 .
  0 drwxr-xr-x  108 jacquesmenu  staff   3456 Feb 25 07:46 ..
@@ -134,7 +134,7 @@ total 88
  8 -rw-r--r--    1 jacquesmenu  staff   1662 Apr 22  2021 ClefChanges.xml
  8 -rw-r--r--    1 jacquesmenu  staff   3045 Feb 26 00:19 Clefs.ly
 24 -rw-r--r--@   1 jacquesmenu  staff   9120 Jan  2 17:02 Clefs.xml
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/Clefs > 
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/Clefs > 
 \end{lstlisting}
 
 This is handy for interactive use, which avoids the use of multi-line commands, presented at \sectionRef{Multi-line commands}.
@@ -181,11 +181,11 @@ can't open file Nice file.xml
 
 Note that if a quote or double quote is part of word, the word should be inclosed by the other such:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -find "tuplet's"
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -find "tuplet's"
 0 occurrence of string "tuplet's" has been found
 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -find 'tuplet"s'
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > 
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -find 'tuplet"s'
 0 occurrence of string "tuplet"s" has been found
 \end{lstlisting}
 
@@ -237,8 +237,8 @@ jacquesmenu@macmini: ~/musicformats-git-dev/documentation > pwd
 
 Here is an example combining quotes and \doubleQuotes:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > DOC_DIR=documentation
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > echo "DOC_DIR's value is: ${DOC_DIR}"
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > DOC_DIR=documentation
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > echo "DOC_DIR's value is: ${DOC_DIR}"
 DOC_DIR's value is: documentation
 \end{lstlisting}
 
@@ -374,21 +374,21 @@ The \code{for} command is analoguous to the same in programming languages, with 
 
 For example, \mf\ comes with some \mxml\ files whose name contains '\code{Stanza}':
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/lyrics > for FILE in $(ls *Stanza*.xml); do echo ${FILE}; done
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/lyrics > for FILE in $(ls *Stanza*.xml); do echo ${FILE}; done
 MultipleStanzas.xml
 StanzaMaster.xml
 \end{lstlisting}
 
 They can be converted to \lily\ with this \code{for} command. Note the use of \code{\$(ls *Stanza*.xml)} to execute the \code{ls} command to obtain the files names to be handled:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/lyrics > for FILE in $(ls *Stanza*.xml); do echo "---> converting ${FILE} to LilyPond"; xml2ly -auto-output-file-name ${FILE}; done
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/lyrics > for FILE in $(ls *Stanza*.xml); do echo "---> converting ${FILE} to LilyPond"; xml2ly -auto-output-file-name ${FILE}; done
 ---> converting MultipleStanzas.xml to LilyPond
 ---> converting StanzaMaster.xml to LilyPond
 \end{lstlisting}
 
 The resulting files are:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/lyrics > ls -sal *Stanza*.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/lyrics > ls -sal *Stanza*.ly
 8 -rw-r--r--  1 jacquesmenu  staff  3659 Feb 26 10:38 MultipleStanzas.ly
 8 -rw-r--r--  1 jacquesmenu  staff  2236 Feb 26 10:38 StanzaMaster.ly
 \end{lstlisting}
@@ -402,7 +402,7 @@ Such long \code{for} commands are not easy to type as a single line interactivel
 
 The \code{find} command looks for files in directory satisfying some criterion. One of them is a name pattern:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > find . -name *Mozart*.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > find . -name *Mozart*.xml
 ./xmlsamples3.1/MozartTrio.xml
 ./challenging/MozartPianoSonata.xml
 ./multistaff/MozartAnChloeK524Sample.xml
@@ -414,7 +414,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > find . -name *
 
 Each file found in turn is designated by '\code{\{\}}', and the command must be terminated by '\code{\textbackslash};':
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > find . -name *Mozart*.xml -exec ls -sal {} \;
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > find . -name *Mozart*.xml -exec ls -sal {} \;
 184 -rw-r--r--  1 jacquesmenu  staff  92127 Apr 22  2021 ./xmlsamples3.1/MozartTrio.xml
 56 -rw-r--r--@ 1 jacquesmenu  staff  25664 Apr 22  2021 ./challenging/MozartPianoSonata.xml
 152 -rw-r--r--  1 jacquesmenu  staff  76231 Apr 22  2021 ./multistaff/MozartAnChloeK524Sample.xml

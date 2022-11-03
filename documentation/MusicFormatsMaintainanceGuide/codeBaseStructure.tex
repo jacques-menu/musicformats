@@ -24,7 +24,7 @@ The code base of the \mf\ library contains:
 \section{The {\tt libmusicxml} folder}
 % -------------------------------------------------------------------------
 
-This folder contains a version of Grame's \libmusicxml\ library, available at \url{https://github.com/grame-cncm/libmusicxml}. It is used by \mf, to avoid the need for installing it separately. 
+This folder contains a version of Grame's \libmusicxml\ library, available at \url{https://github.com/grame-cncm/libmusicxml}. It is used by \mf, to avoid the need for installing it separately.
 
 The only possible annoyance when installing both libraries is that the executables in \fileName{libmusicxml/build/bin} such as \fileName{countnotes} and \fileName{xml2guido} are installed twice: choosing which one to use can be handled in the {\tt \$\textbraceleft PATH\textbraceright} and {\tt \$\textbraceleft LD_LIBRARY_PATH\textbraceright} environment variables or their equivalent.
 
@@ -82,10 +82,10 @@ jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > se
 
 Then use it to create the C++ files containing the constants and types to be used by \mxsrRepr, such as \code{k_accidental}, \code{S_accidental}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > make -f Makefile_4.0 
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > make -f Makefile_4.0
 grep "<xs:element" 4.0/musicxml.xsd | sed -e 's/^.*name="//' | sed -e 's/"..*//' | sort -u > elements.txt
-../src/elements/templates/elements.bash elements.txt ../src/elements/templates constants > elements.h   || rm -f elements.h 
-../src/elements/templates/elements.bash elements.txt ../src/elements/templates types > typedefs.h   || rm -f typedefs.h 
+../src/elements/templates/elements.bash elements.txt ../src/elements/templates constants > elements.h   || rm -f elements.h
+../src/elements/templates/elements.bash elements.txt ../src/elements/templates types > typedefs.h   || rm -f typedefs.h
 ../src/elements/templates/elements.bash elements.txt ../src/elements/templates map > factory.cpp || rm -f factory.cpp
 \end{lstlisting}
 
@@ -117,13 +117,13 @@ fMap["accidental"] 	= new newElementFunctor<k_accidental>;
 
 Finally, copy the new C++ files to the \elementsFolder\ folder:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > cp -p elements.h factory.cpp typedefs.h ../src/elements 
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/schema > cp -p elements.h factory.cpp typedefs.h ../src/elements
 \end{lstlisting}
 
 Now, rebuild \mf, for it to use the new \mxml\ DTD:
 /libdir/CMakeCache.txt
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/build > rm libdir/CMakeCache.txt 
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/build > rm libdir/CMakeCache.txt
 jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/build > make
 \end{lstlisting}
 
@@ -146,11 +146,11 @@ In that case, the corresponding constants can be found in \fileName{elements.h},
 \begin{lstlisting}[language=TerminalSmall]
 jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n kNoElement elements.h
 26:	kNoElement,
-jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_notations elements.h 
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_notations elements.h
 267:	k_notations,
 jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_other_notation elements.h
 292:	k_other_notation,
-jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_part_name elements.h 
+jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_part_name elements.h
 310:	k_part_name,
 311:	k_part_name_display,
 jacquesmenu@mac-mini-de-jacques-1:~/musicformats-git-dev/libmusicxml/src/elements > grep -n k_bass elements.h
@@ -168,12 +168,12 @@ The first 4 error messages above mean that the corresponding \methodName{visitSt
 %  public visitor<S_notations>,
 %\end{lstlisting}
 
-The following methods definitions are thus missing: 
+The following methods definitions are thus missing:
 \begin{itemize}
 \item  \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_notations\& elt)}
 \item  \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_other_notation\& elt)}
  \item \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_part_name\& elt)}
-\item  \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_bass\& elt)} 
+\item  \methodWithParameters{mxsr2msrTranslator}{visitStart ( S_bass\& elt)}
 \end{itemize}
 
 \Type{S_part_name} is there by mistake (some typing was done before the upgrade to 4.0), since it is handled in \class{mxsr2msrSkeletonBuilder}, and the other 3 are new in \mxml\ 4.0.
@@ -193,17 +193,19 @@ The following methods definitions are thus missing:
 
 This folder contains \fileName{LaTeXCommonSettings.tex}, included by the various \LaTeX\ documents whose code is in the respective folders, together with the PDF files:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/documentation > ll
-total 56
- 0 drwxr-xr-x    9 jacquesmenu  staff    288 Jan  4 17:23:41 2022 ./
- 0 drwxr-xr-x   37 jacquesmenu  staff   1184 Dec 29 08:09:43 2021 ../
-48 -rw-r--r--@   1 jacquesmenu  staff  22532 Jan  4 17:23:00 2022 .DS_Store
- 8 -rw-r--r--    1 jacquesmenu  staff     42 Apr 22 15:48:42 2021 .gitignore
- 0 drwxr-xr-x   38 jacquesmenu  staff   1216 Dec 26 08:49:24 2021 IntroductionToMusicXML/
- 0 drwxr-xr-x  119 jacquesmenu  staff   3808 Jan  4 17:19:38 2022 MusicFormatsMaintainanceGuide/
- 0 drwxr-xr-x   49 jacquesmenu  staff   1568 Jan  4 17:04:10 2022 MusicFormatsUserGuide/
- 0 drwxr-xr-x    9 jacquesmenu  staff    288 Jan  4 17:23:41 2022 CommonLaTeXFiles/
- 0 drwxr-xr-x    6 jacquesmenu  staff    192 Apr 22 15:48:43 2021 presentation/
+jacquesmenu@macmini:~/musicformats-git-dev/documentation > ll
+total 32
+ 0 drwxr-xr-x   11 jacquesmenu  staff    352 Nov  3 09:59:31 2022 ./
+ 0 drwxr-xr-x   34 jacquesmenu  staff   1088 Nov  3 16:17:01 2022 ../
+32 -rw-r--r--@   1 jacquesmenu  staff  14340 Nov  3 14:15:54 2022 .DS_Store
+ 0 drwxr-xr-x   25 jacquesmenu  staff    800 Nov  3 09:57:22 2022 CommonLaTeXFiles/
+ 0 drwxr-xr-x   32 jacquesmenu  staff   1024 Jun 28 20:52:12 2022 IntroductionToMusicXML/
+ 0 drwxr-xr-x   48 jacquesmenu  staff   1536 Nov  1 14:24:27 2022 MusicFormatsAPIGuide/
+ 0 drwxr-xr-x    9 jacquesmenu  staff    288 Nov  3 09:47:22 2022 MusicFormatsFigures/
+ 0 drwxr-xr-x  106 jacquesmenu  staff   3392 Nov  3 10:58:57 2022 MusicFormatsMaintainanceGuide/
+ 0 drwxr-xr-x   55 jacquesmenu  staff   1760 Nov  1 14:24:15 2022 MusicFormatsUserGuide/
+ 0 drwxr-xr-x   46 jacquesmenu  staff   1472 Aug 31 11:09:53 2022 graphics/
+ 0 drwxr-xr-x    5 jacquesmenu  staff    160 Jun 28 20:52:12 2022 libmusicxml2Presentation/
 \end{lstlisting}
 
 \fileName{common} contains a set of files used by the various documents and various stuff:
@@ -223,14 +225,13 @@ total 776
 
 The \fileName{presentation} sub-folder contains the documentation of the \libmusicxml\ library, written by \fober:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/documentation/presentation > ll
-total 504
-  0 drwxr-xr-x  6 jacquesmenu  staff     192 Apr 22 15:48:43 2021 ./
-  0 drwxr-xr-x  9 jacquesmenu  staff     288 Jan  4 17:23:41 2022 ../
-  0 drwxr-xr-x  6 jacquesmenu  staff     192 Apr 22 15:48:43 2021 imgs/
- 88 -rw-r--r--  1 jacquesmenu  staff   41534 Apr 22 15:48:43 2021 libmusicxml2.odg
-392 -rw-r--r--  1 jacquesmenu  staff  200524 Apr 22 15:48:43 2021 libmusicxml2.pdf
- 24 -rw-r--r--@ 1 jacquesmenu  staff   11003 Oct 15 18:48:11 2021 libmusicxml2.tex
+jacquesmenu@macmini:~/musicformats-git-dev/documentation/libmusicxml2Presentation > ll
+total 416
+  0 drwxr-xr-x   5 jacquesmenu  staff     160 Jun 28 20:52:12 2022 ./
+  0 drwxr-xr-x  11 jacquesmenu  staff     352 Nov  3 09:59:31 2022 ../
+  0 drwxr-xr-x   6 jacquesmenu  staff     192 Jun 28 20:52:12 2022 imgs/
+392 -rw-r--r--@  1 jacquesmenu  staff  200524 Jun 28 20:52:12 2022 libmusicxml2.pdf
+ 24 -rw-r--r--   1 jacquesmenu  staff   11017 Jun 28 20:52:12 2022 libmusicxml2.tex
 \end{lstlisting}
 
 
@@ -238,7 +239,7 @@ total 504
 \section{The {\tt schemas} folder}
 % -------------------------------------------------------------------------
 
-This folder contains the definitions used to create the classes definitions to analyze textual data in the \mxml, \mei\ and \bmml\ formats. 
+This folder contains the definitions used to create the classes definitions to analyze textual data in the \mxml, \mei\ and \bmml\ formats.
 
 In the \fileName{scripts} folder, \fileName{elements.bash} compiles the definitions of MusicXML markups into the C++ code files containing the corresponding C++ classes:
 \begin{lstlisting}[language=Terminal]

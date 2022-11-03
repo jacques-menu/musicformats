@@ -6,7 +6,7 @@
 
 In computer science, the simplest example one can write with a language is often named 'Hello World'. \mf\ abides to this rule, suppling \gitmxmlfile{basic/HelloWorld.xml}:
 \begin{lstlisting}[language=MusicXML]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/HelloWorld.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat basic/HelloWorld.xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC
     "-//Recordare//DTD MusicXML 3.0 Partwise//EN"
@@ -63,7 +63,7 @@ By default, \standardInput\ and \standardOutput\ are directed to the terminal in
 
 Let's consider the case of \gitmxmlfile{basic/UnknownMaintainerIdentification.xml}:
 \begin{lstlisting}[language=Lilypond]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/UnknownMaintainerIdentification.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/UnknownMaintainerIdentification.xml
 *** MusicXML warning *** basic/UnknownMaintainerIdentification.xml:11: creator type "maintainer" is unknown
 \version "2.22.0"
 
@@ -149,12 +149,12 @@ This behaviour can be changed using the shell's redirection operators:
 
 Thus, after executing:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/UnknownMaintainerIdentification.xml > output.ly 2> error.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/UnknownMaintainerIdentification.xml > output.ly 2> error.txt
 \end{lstlisting}
 
 \fileName{output.ly} contains the \lily\ code produced, and \fileName{error.txt} contains:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat error.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat error.txt
 *** MusicXML warning *** basic/UnknownMaintainerIdentification.xml:11: creator type "maintainer" is unknown
 Warning message(s) were issued for input line 11
 \end{lstlisting}
@@ -166,7 +166,7 @@ Warning message(s) were issued for input line 11
 
 Using \xmlToLy\ as in the previous section is somewhat limited. This command:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/MinimalScore.xml > MinimalScore.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/MinimalScore.xml > MinimalScore.ly
 \end{lstlisting}
 
 leads to this score:\\
@@ -184,7 +184,7 @@ jacquesmenu@macmini > xml2ly -query global-staff-size
 
 Then:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/MinimalScore.xml -global-staff-size 40 > MinimalScore.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/MinimalScore.xml -global-staff-size 40 > MinimalScore.ly
 \end{lstlisting}
 
 produces that score:\\

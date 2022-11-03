@@ -776,7 +776,7 @@ Apart from the version and history options, such current version numbers may be 
 
 \OptionBoth{version}{v} displays the versions of generators and converters:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxml > xml2xml -version
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2xml -version
 Command line version of musicxml2musicxml converter v0.9.51 (October 12 2021)
 
 Representations versions:
@@ -798,7 +798,7 @@ Passes versions:
 
 \OptionBoth{history}{hist} display the versions history of generators and converters:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxml > xml2gmn -history
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2gmn -history
 Command line version of musicxml2guido converter v0.9.51 (October 12 2021)
 
 Own history:
@@ -917,7 +917,7 @@ The situation is analog for histories with \methodName{printVersion} replaced by
 
 When creating \lily\ output, the current version number of the converter used is indicated as a comment when the \optionBoth{lilypond-generation-infos}{lpgi} option is used:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxml > xml2ly --lilypond-generation-infos basic/HelloWorld.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2ly --lilypond-generation-infos basic/HelloWorld.xml
 \version "2.22.0"
 
 % Pick your choice from the next two lines as needed
@@ -1019,7 +1019,7 @@ lpsrScore::lpsrScore (
 
 Another case is that of the generation of \mxml\ output:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxml > xml2xml -musicxml-generation-infos basic/HelloWorld.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2xml -musicxml-generation-infos basic/HelloWorld.xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN"
 			"http://www.musicxml.org/dtds/partwise.dtd">
