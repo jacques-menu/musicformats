@@ -35,6 +35,39 @@ class msrMeasuresSlicesSequence;
 typedef SMARTP<msrMeasuresSlicesSequence> S_msrMeasuresSlicesSequence;
 
 //______________________________________________________________________________
+// data types
+
+enum class msrPartGroupImplicitKind { // an MSR concept, not present in MusicXML
+    kPartGroupImplicitYes, kPartGroupImplicitNo
+  };
+
+string partGroupImplicitKindAsString (
+  msrPartGroupImplicitKind partGroupImplicitKind);
+
+enum class msrPartGroupTypeKind {
+  kPartGroupTypeNone,
+  kPartGroupTypeStart, kPartGroupTypeStop
+};
+
+string partGroupTypeKindAsString (
+  msrPartGroupTypeKind partGroupTypeKind);
+
+enum class msrPartGroupSymbolKind {
+  kPartGroupSymbolNone,
+  kPartGroupSymbolBrace, kPartGroupSymbolBracket,
+  kPartGroupSymbolLine, kPartGroupSymbolSquare
+};
+
+string partGroupSymbolKindAsString (
+  msrPartGroupSymbolKind partGroupSymbolKind);
+
+enum class msrPartGroupBarLineKind {
+  kPartGroupBarLineYes, kPartGroupBarLineNo
+};
+
+string partGroupBarLineKindAsString (
+  msrPartGroupBarLineKind partGroupBarLineKind);
+
 class EXP msrPartGroup : public msrPartGroupElement
 {
 /*
@@ -50,42 +83,6 @@ class EXP msrPartGroup : public msrPartGroupElement
   <group-barLine>yes</group-barLine>
   </part-group>
 */
-
-  public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrPartGroupImplicitKind { // an MSR concept, not present in MusicXML
-        kPartGroupImplicitYes, kPartGroupImplicitNo
-      };
-
-    static string partGroupImplicitKindAsString (
-      msrPartGroupImplicitKind partGroupImplicitKind);
-
-    enum msrPartGroupTypeKind {
-      kPartGroupTypeNone,
-      kPartGroupTypeStart, kPartGroupTypeStop
-    };
-
-    static string partGroupTypeKindAsString (
-      msrPartGroupTypeKind partGroupTypeKind);
-
-    enum msrPartGroupSymbolKind {
-      kPartGroupSymbolNone,
-      kPartGroupSymbolBrace, kPartGroupSymbolBracket,
-      kPartGroupSymbolLine, kPartGroupSymbolSquare
-    };
-
-    static string partGroupSymbolKindAsString (
-      msrPartGroupSymbolKind partGroupSymbolKind);
-
-    enum msrPartGroupBarLineKind {
-      kPartGroupBarLineYes, kPartGroupBarLineNo
-    };
-
-    static string partGroupBarLineKindAsString (
-      msrPartGroupBarLineKind partGroupBarLineKind);
 
   public:
 
@@ -317,10 +314,6 @@ class EXP msrPartGroup : public msrPartGroupElement
     void                  printPartGroupElementsListShort (
                             int      inputLineNumber,
                             ostream& os) const;
-
-    string                partGroupImplicitKindAsString () const;
-
-    string                partGroupBarLineKindAsString () const;
 
     string                asString () const override;
 

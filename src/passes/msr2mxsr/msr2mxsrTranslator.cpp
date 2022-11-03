@@ -2500,10 +2500,10 @@ void msr2mxsrTranslator::visitStart (S_msrPartGroup& elt)
         string groupBarLineString;
 
         switch (elt->getPartGroupBarLineKind ()) {
-          case msrPartGroup::kPartGroupBarLineYes:
+          case msrPartGroupBarLineKind::kPartGroupBarLineYes:
             groupBarLineString = "yes";
             break;
-          case msrPartGroup::kPartGroupBarLineNo:
+          case msrPartGroupBarLineKind::kPartGroupBarLineNo:
             groupBarLineString = "no";
             break;
         } // switch
@@ -10553,8 +10553,6 @@ class musicxmlOrder
       map<int,int>& order, Sxmlelement container);
 
     virtual  ~musicxmlOrder ();
-
-  public:
 
   public:
 

@@ -3417,7 +3417,7 @@ S_msrMeasure msrVoice::fetchVoiceLastMeasure (
   return result;
 }
 
-S_msrMeasureElement msrVoice::fetchVoiceLastElement (
+S_msrMeasureElement msrVoice::fetchVoiceLastMeasureElement (
   int inputLineNumber) const
 {
   S_msrMeasureElement result;

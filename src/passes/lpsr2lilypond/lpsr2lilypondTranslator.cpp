@@ -8299,12 +8299,12 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
 // JMI  fLilypondCodeStream << endl << endl << partGroup << endl << endl;
 
-  msrPartGroup::msrPartGroupImplicitKind
+  msrPartGroupImplicitKind
     partGroupImplicitKind =
       partGroup->
         getPartGroupImplicitKind ();
 
-  msrPartGroup::msrPartGroupSymbolKind
+  msrPartGroupSymbolKind
     partGroupSymbolKind =
       partGroup->
         getPartGroupSymbolKind ();
@@ -8348,11 +8348,11 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
         case msrPartGroup::kPartGroupSymbolBrace: // JMI
           switch (partGroupBarLineKind) {
-            case msrPartGroup::kPartGroupBarLineYes:
+            case msrPartGroupBarLineKind::kPartGroupBarLineYes:
               fLilypondCodeStream <<
                 "\\new PianoStaff";
               break;
-            case msrPartGroup::kPartGroupBarLineNo:
+            case msrPartGroupBarLineKind::kPartGroupBarLineNo:
               fLilypondCodeStream <<
                 "\\new GrandStaff";
               break;
@@ -8361,11 +8361,11 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
 
         case msrPartGroup::kPartGroupSymbolBracket:
           switch (partGroupBarLineKind) {
-            case msrPartGroup::kPartGroupBarLineYes:
+            case msrPartGroupBarLineKind::kPartGroupBarLineYes:
               fLilypondCodeStream <<
                 "\\new StaffGroup";
               break;
-            case msrPartGroup::kPartGroupBarLineNo:
+            case msrPartGroupBarLineKind::kPartGroupBarLineNo:
               fLilypondCodeStream <<
                 "\\new ChoirStaff";
               break;
