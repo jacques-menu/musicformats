@@ -1,0 +1,413 @@
+% -------------------------------------------------------------------------
+% short-cuts
+% -------------------------------------------------------------------------
+
+\newcommand{\OS}{operating system\index[Main]{operating system}}
+
+\newcommand{\CPlusplus}{C++17\index[Main]{C++17}} % CPlusPlus is already defined
+
+\newcommand{\MacOS}{Mac OS\texttrademark\index[Main]{Mac OS\texttrademark}}
+\newcommand{\xcode}{Xcode\index[Main]{Xcode}}
+\newcommand{\macports}{MacPorts\index[Main]{MacPorts}}
+
+\newcommand{\Ubuntu}{Ubuntu\index[Main]{Ubuntu}}
+\newcommand{\Linux}{Linux\index[Main]{Linux}}
+\newcommand{\Windows}{Windows\texttrademark\index[Main]{Windows\texttrademark}}
+\newcommand{\Unix}{Unix\index[Main]{Unix}}
+
+\newcommand{\Gatekeeper}{Gatekeeper\index[Main]{Gatekeeper}}
+\newcommand{\quarantine}{quarantine\index[Main]{quarantine}}
+
+\newcommand{\CLI}{command line\index[Main]{command line}}
+\newcommand{\shell}{shell\index[Main]{shell}}
+\newcommand{\bash}{Bash\index[Main]{Bash}}
+\newcommand{\zsh}{Z shell\index[Main]{Z shell}}
+\newcommand{\fspath}{path\index[Main]{path}}
+\newcommand{\environment}{environment\index[Main]{environment}}
+\newcommand{\environmentVariable}{environment variable\index[Main]{environment!variable}}
+\newcommand{\currentWorkingDirectory}{current working directory\index[Main]{current working directory}}
+
+\newcommand{\GUI}{GUI\index[Main]{GUI}}
+
+\newcommand{\API}{API\index[Main]{API}}
+
+\newcommand{\Web}{Web\index[Main]{Web}}
+
+\newcommand{\texshop}{TeXShop\index[Main]{TeXShop}}
+
+\newcommand{\fresco}{fresco\index[Main]{fresco}}
+
+\newcommand{\git}{git\index[Main]{git}}
+\newcommand{\github}{GitHub\index[Main]{GitHub}}
+\newcommand{\repo}{repository\index[Main]{repository}}
+\newcommand{\zip}{Zip\index[Main]{Zip}}
+
+\newcommand{\make}{{\tt make}\index[Main]{{\tt make}}}
+\newcommand{\Makefile}{{\tt Makefile}\index[Main]{{\tt Makefile}}}
+
+\newcommand{\symbolicLink}{symbolic link}\index[Main]{symbolic link}
+
+\newcommand{\cmake}{{\tt cmake}\index[Main]{{\tt cmake}}}
+\newcommand{\cache}{cache\index[Main]{cache}}
+
+\newcommand{\standardInput}{standard input\index[Main]{standard input}}
+\newcommand{\standardOutput}{standard output\index[Main]{standard output}}
+\newcommand{\standardError}{standard error\index[Main]{standard error}}
+
+\newcommand{\inputRedirection}{input redirection\index[Main]{input redirection}}
+\newcommand{\outputRedirection}{output redirection\index[Main]{output redirection}}
+\newcommand{\pipe}{pipe\index[Main]{pipe}}
+
+\newcommand{\argcargv}{
+{\tt argc}/{\tt argv}\index[Main]{argc/argv}\index[ConstantsFunctionsAndVariables]{argc/argv}%
+}
+
+\newcommand{\branch}{branch\index[Main]{branch}}
+\newcommand{\default}{default\index[Main]{default}}
+\newcommand{\master}{master\index[Main]{master}}
+\newcommand{\masterBranch}{master branch\index[Main]{master branch}}
+\newcommand{\frozen}{frozen\index[Main]{frozen}}
+\newcommand{\version}{version\index[Main]{version}}
+
+\newcommand{\readyToUseVersion}{ready-to-use version\index[Main]{ready-to-use version}}
+
+\newcommand{\quotes}{quotes\index[Main]{quotes}}
+\newcommand{\Quotes}{Quotes\index[Main]{Quotes}}
+
+\newcommand{\doubleQuotes}{double quotes\index[Main]{double quotes}}
+\newcommand{\DoubleQuotes}{Double quotes\index[Main]{Double quotes}}
+
+\newcommand{\denorm}{denormalization\index[Main]{denormalization}}
+
+\newcommand{\format}{format\index[Main]{format}}
+\newcommand{\Format}{Format\index[Main]{Format}}
+
+\newcommand{\component}{component\index[Main]{component}}
+\newcommand{\Component}{Component\index[Main]{Component}}
+
+\newcommand{\tool}{tool\index[Main]{tool}}
+\newcommand{\Tool}{Tool\index[Main]{Tool}}
+
+\newcommand{\mfslExec}{{\tt mfsl}\index[Main]{{\tt mfsl}}}
+
+\newcommand{\choice}{choice\index[Main]{choice}}
+\newcommand{\coiceLabel}{label\index[Main]{label}}
+\newcommand{\select}{select\index[Main]{select}}
+\newcommand{\every}{select\index[Main]{select}}
+
+\newcommand{\representation}{representation\index[Main]{representation}}
+\newcommand{\Representation}{Representation\index[Main]{Representation}}
+
+\newcommand{\pass}{pass\index[Main]{pass}}
+\newcommand{\Pass}{Pass\index[Main]{Pass}}
+
+\newcommand{\multiPass}{multi-pass\index[Main]{multi-pass}}
+\newcommand{\MultiPass}{Multi-pass\index[Main]{Multi-pass}}
+
+\newcommand{\converter}{converter\index[Main]{converter}}
+\newcommand{\Converter}{Converter\index[Main]{Converter}}
+
+\newcommand{\generator}{generator\index[Main]{generator}}
+\newcommand{\Generator}{Generator\index[Main]{Generator}}
+
+\newcommand{\service}{service\index[Main]{service}}
+\newcommand{\Service}{Service\index[Main]{Service}}
+
+\newcommand{\earlyOption}{early option\index[Main]{early option}}
+\newcommand{\EarlyOption}{Early option\index[Main]{Early option}}
+
+\newcommand{\insider}{insider\index[Main]{insider}}
+\newcommand{\Insider}{Insider\index[Main]{Insider}}
+\newcommand{\regular}{regular\index[Main]{regular}}
+\newcommand{\Regular}{Regular\index[Main]{Regular}}
+
+\newcommand{\initialization}{initialization\index[Main]{initialization}}
+\newcommand{\Initialization}{Initialization\index[Main]{Initialization}}
+
+\newcommand{\cascade}{cascade\index[Main]{cascade}}
+\newcommand{\cascading}{cascading\index[Main]{cascading}}
+\newcommand{\Cascading}{Cascading\index[Main]{Cascading}}
+\newcommand{\cascaded}{cascaded\index[Main]{cascaded}}
+\newcommand{\Cascaded}{Cascaded\index[Main]{Cascaded}}
+
+\newcommand{\braille}{Braille\index[Main]{Braille}}
+
+\newcommand{\pim}{position in measure\index[Main]{position in measure}}
+
+% capitalizing
+%\newcommand{\Hafb}{\xmakefirstuc{\hafb}} % % only the first character in upper case
+%\MakeUppercase{\hafb} % all the characters
+
+\newcommand{\drawing}{%
+{\tt drawing}\index[Main]{drawing}%
+}
+\newcommand{\drawn}{%
+{\it drawn}\index[Main]{drawn}%
+}
+
+\newcommand{\swing}{%
+{\it swing}\index[Main]{swing}%
+}
+\newcommand{\phrase}{%
+{\it phrasé}\index[Main]{phrasé}%
+}
+
+\newcommand{\musicXmlMarkup}[1]{%
+{\tt <#1/>}\index[Main]{{\tt $<$#1 /$>$}}\index[MusicXML]{{\tt #1 $<$/$>$}}%
+}
+\newcommand{\musicXmlAttribute}[1]{%
+{\tt "#1"}\index[Main]{{\tt $<$#1 /$>$}}\index[MusicXML]{{\tt #1 ""}}%
+}
+
+\newcommand{\directory}[1]{%
+\directory {\tt #1/}\index[Main]{{\tt #1}}\index[Files]{{\tt #1/}}%
+}
+\newcommand{\Directory}[1]{%
+Directory {\tt #1/}\index[Main]{{\tt #1}}\index[Files]{{\tt #1/}}%
+}
+
+\newcommand{\directoryName}[1]{%
+{\tt #1/}\index[Main]{{\tt #1}}\index[Files]{{\tt #1/}}%
+}
+\newcommand{\DirectoryName}[1]{%
+{\tt #1/}\index[Main]{{\tt #1}}\index[Files]{{\tt #1/}}%
+}
+
+\newcommand{\file}[1]{%
+file {\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+\newcommand{\File}[1]{%
+File {\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+
+\newcommand{\fileName}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[Files]{{\tt #1}}%
+}
+\newcommand{\fileNameBoth}[1]{%
+{\textcolor{brown}{\tt *#1.h/.cpp}}\index[Main]{#1.h/.cpp@{{tt *#1.h/.cpp}}}\index[Files]{#1.h/.cpp@{{tt *#1.h/.cpp}}}%
+}
+
+\newcommand{\starFileName}[1]{%
+{\tt #1}\index[Main]{#1@{\tt #1}}\index[Files]{#1@{\tt #1}}%
+}
+\newcommand{\starFileNameBoth}[1]{%
+{\textcolor{brown}{\tt *#1.h/.cpp}}\index[Main]{#1.h/.cpp@{{tt *#1.h/.cpp}}}\index[Files]{#1.h/.cpp@{{tt *#1.h/.cpp}}}%
+}
+
+\newcommand{\type}[1]{%
+type {\tt #1}\index[Main]{{\tt #1}}\index[Main]{type}\index[Types]{{\tt #1}}%
+}
+\newcommand{\Type}[1]{%
+Type {\tt #1}\index[Main]{{\tt #1}}\index[Main]{type}\index[Types]{{\tt #1}}%
+}
+
+\newcommand{\enumType}[1]{%
+enumeration type {\tt #1}\index[Main]{{\tt #1}}\index[Main]{enumeration type}\index[Types]{{\tt #1}}%
+}
+\newcommand{\EnumType}[1]{%
+Enumeration type {\tt #1}\index[Main]{{\tt #1}}\index[Main]{enumeration type}\index[Types]{{\tt #1}}%
+}
+
+\newcommand{\onOff}[1]{%
+on/off {\tt #1}\index[Main]{{\tt #1}}\index[Main]{on/off}\index[Types]{{\tt #1}}%
+}
+\newcommand{\OnOff}[1]{%
+On/off {\tt #1}\index[Main]{{\tt #1}}\index[Main]{On/off}\index[Types]{{\tt #1}}%
+}
+
+\newcommand{\class}[1]{%
+class {\tt #1}\index[Main]{{\tt #1}}\index[Types]{{\tt #1}}%
+}
+\newcommand{\Class}[1]{%
+Class {\tt #1}\index[Main]{{\tt #1}}\index[Types]{{\tt #1}}%
+}
+\newcommand{\className}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[Types]{{\tt #1}}%
+}
+
+\newcommand{\purelyVirtualClass}[1]{%
+purely virtual class {\tt #1}\index[Main]{{\tt #1}}\index[Types]{{\tt #1}}%
+}
+\newcommand{\PurelyVirtualClass}[1]{%
+Purely virtual class {\tt #1}\index[Main]{{\tt #1}}\index[Types]{{\tt #1}}%
+}
+\newcommand{\purelyVirtualClasses}[1]{%
+purely virtual classes {\tt #1}\index[Main]{{\tt #1}}\index[Types]{{\tt #1}}%
+}
+\newcommand{\PurelyVirtualClasses}[1]{%
+Purely virtual classes {\tt #1}\index[Main]{{\tt #1}}\index[Types]{{\tt #1}}%
+}
+
+\newcommand{\smart}{smart pointer\index[Main]{smart pointer}}
+\newcommand{\smartPointerType}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[Types]{{\tt #1}}
+}
+\newcommand{\smartPointerTypeIndex}[1]{%
+\index[Main]{{\tt #1}}\index[Types]{{\tt #1}}
+}
+
+\newcommand{\constant}[2]{%
+constant {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[ConstantsFunctionsAndVariables]{{\tt #2}}%
+}
+\newcommand{\Constant}[2]{%
+Constant {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[ConstantsFunctionsAndVariables]{{\tt #2}}%
+}
+\newcommand{\constantName}[2]{%
+{\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[ConstantsFunctionsAndVariables]{{\tt #2}}%
+}
+\newcommand{\anonymousEnumConstantName}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[Main]{{\tt #1}}\index[ConstantsFunctionsAndVariables]{{\tt #1}}%
+}
+
+\newcommand{\functionPrivateVariable}[1]{%
+function private variable {\tt #1}\index[Main]{{\tt #1}}\index[ConstantsFunctionsAndVariables]{{\tt #1}}%
+}
+\newcommand{\FunctionPrivateVariable}[1]{%
+Function private variable {\tt #1}\index[Main]{{\tt #1}}\index[ConstantsFunctionsAndVariables]{{\tt #1}}%
+}
+
+\newcommand{\globalVariable}[1]{%
+global variable {\tt #1}\index[Main]{{\tt #1}}\index[ConstantsFunctionsAndVariables]{{\tt #1}}%
+}
+\newcommand{\GlobalVariable}[1]{%
+Global variable {\tt #1}\index[Main]{{\tt #1}}\index[ConstantsFunctionsAndVariables]{{\tt #1}}%
+}
+
+\newcommand{\constructor}[1]{%
+constructor {\tt #1::#1~()}\index[Main]{{\tt #1}!{\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #1}~()}%
+}
+\newcommand{\Constructor}[1]{%
+Constructor {\tt #1::#1~()}\index[Main]{{\tt #1}!{\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #1}~()}%
+}
+\newcommand{\constructorName}[1]{%
+{\tt #1::#1~()}\index[Main]{{\tt #1}!{\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #1}~()}%
+}
+
+\newcommand{\field}[2]{%
+field {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
+}
+\newcommand{\Field}[2]{%
+Field {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
+}
+\newcommand{\fieldIndex}[2]{%
+\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}% 
+}
+
+\newcommand{\method}[2]{%
+method {\tt #1::#2~()}\index[Main]{{\tt #1}!{\tt #2}~()}\index[Main]{{\tt #2}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #2}~()}%
+}
+\newcommand{\Method}[2]{%
+Method {\tt #1::#2~()}\index[Main]{{\tt #1}!{\tt #2}~()}\index[Main]{{\tt #2}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #2}~()}%
+}
+\newcommand{\methodWithParameters}[2]{%
+method {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}~()}\index[Main]{{\tt #2}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
+}
+\newcommand{\MethodWithParameters}[2]{%
+Method {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}~()}\index[Main]{{\tt #2}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
+}
+
+\newcommand{\starMethodNameTwo}[2]{%
+{\tt *#1::#2~()}\index[Main]{#1@{\tt #1}!{\tt #2}~()}\index[Main]{#1@{\tt #2}~()}\index[MethodsAndFields]{{\tt #1}!{\tt #2}~()}%
+}
+
+\newcommand{\methodName}[1]{%
+{\tt #1~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+\newcommand{\starMethodName}[1]{%
+{\tt *#1~()}\index[Main]{#1~()@{\tt *#1}}\index[MethodsAndFields]{*#1~()@{\tt *#1~()}}%
+}
+
+\newcommand{\visitorMethod}[2]{%
+visitor method {\tt #1::#2}\index[Main]{{\tt #1}!{\tt #2}}\index[Main]{{\tt #2}}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
+}
+\newcommand{\VisitorMethod}[2]{%
+vVsitor method {\tt #1::#2}\index[Main]{{\tt #1}!#2}\index[Main]{{\tt #2}}\index[MethodsAndFields]{{\tt #1}!{\tt #2}}%
+}
+
+\newcommand{\classMethod}[1]{%
+class method {\tt #1~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+\newcommand{\classMethods}[1]{%
+class methods {\tt {\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+
+\newcommand{\regularMethod}[1]{%
+regular method {\tt {\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+\newcommand{\regularMethods}[1]{%
+regular methods {\tt {\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+
+\newcommand{\virtualMethod}[1]{%
+virtual method {\tt {\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+\newcommand{\virtualMethods}[1]{%
+virtual methods {\tt {\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+
+\newcommand{\purelyVirtualMethod}[1]{%
+purely virtual method {\tt {\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+\newcommand{\purelyVirtualMethods}[1]{%
+purely virtual methods {\tt {\tt #1}~()}\index[Main]{{\tt #1}~()}\index[MethodsAndFields]{{\tt #1}~()}%
+}
+
+\newcommand{\fieldName}[1]{%
+{\tt #1}\index[Main]{{\tt #1}}\index[MethodsAndFields]{{\tt #1}}%
+}
+\newcommand{\starFieldName}[1]{%
+{\tt *#1}\index[Main]{#1@{\tt *#1}}\index[MethodsAndFields]{*#1@{\tt *#1}}%
+}
+
+\newcommand{\function}[1]{%
+function {\tt #1~()}\index[Main]{{\tt #1}~()}\index[ConstantsFunctionsAndVariables]{{\tt #1}~()}%
+}
+\newcommand{\Function}[1]{%
+Functions {\tt #1~()}\index[Main]{{\tt #1}~()}\index[ConstantsFunctionsAndVariables]{{\tt #1}~()}%
+}
+
+\newcommand{\functionName}[1]{%
+{\tt #1~()}\index[Main]{{\tt #1}~()}\index[ConstantsFunctionsAndVariables]{{\tt #1}~()}%
+}
+
+\newcommand{\functions}{%
+functions\index[Main]{functions}%
+}
+
+\newcommand{\mainFunction}{%
+{\tt main ()}\index[Main]{main ()}\index[Files]{main ()}%
+}
+
+\newcommand{\interfaceFunction}[1]{%
+interface function {\tt #1~()}\index[Main]{{\tt #1}~()}\index[ConstantsFunctionsAndVariables]{{\tt #1}~()}%
+}
+\newcommand{\InterfaceFunction}[1]{%
+Interface function {\tt #1~()}\index[Main]{{\tt #1}~()}\index[ConstantsFunctionsAndVariables]{{\tt #1}~()}%
+}
+
+\usepackage{stringstrings}
+
+\newcommand{\option}[1]{%
+%option {\tt-#1}'\index[Main]{\tt #1}\index[Options]{{\tt \gobblechar[v]{#1}}@#1}%
+option {\tt -#1}\index[Main]{\tt -#1}\index[Options]{\tt -#1}%
+}
+\newcommand{\Option}[1]{%
+Option {\tt -#1}\index[Main]{\tt -#1}\index[Options]{\tt -#1}%
+}
+\newcommand{\optionName}[1]{%
+%option {\tt-#1}'\index[Main]{\tt #1}\index[Options]{{\tt \gobblechar[v]{#1}}@#1}%
+{\tt -#1}\index[Main]{\tt -#1}\index[Options]{\tt -#1}%
+}
+
+\newcommand{\optionBoth}[2]{%
+%option {\tt -#1, -#2}\index[Main]{\tt -#1, -#2}\index[Options]{{\tt \gobblechar[v]{#1}}@#1}%
+option {\tt -#1, -#2}\index[Main]{\tt -#1, -#2}\index[Options]{\tt -#1, -#2}%
+}
+\newcommand{\OptionBoth}[2]{%
+Option {\tt -#1, -#2}\index[Main]{\tt -#1, -#2}\index[Options]{\tt -#1, -#2}%
+}
+\newcommand{\optionNameBoth}[2]{%
+{\tt -#1, -#2}\index[Main]{\tt -#1, -#2}\index[Options]{\tt -#1, -#2}%
+}
+
+
