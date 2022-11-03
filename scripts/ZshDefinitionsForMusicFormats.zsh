@@ -406,7 +406,7 @@ function grt ()
 # validation
 #----------------------------------------------
 
-# create a symbolic link to files/musicxmlfiles/Makefile in the subdirectories,
+# create a symbolic link to musicxmlfiles/Makefile in the subdirectories,
 # then 'make'
 
 alias maki='clear; make clean; make -i'
@@ -847,7 +847,7 @@ function addInclude ()
 
 function addDoc ()
 {
-  git add ${DOC_DIR}/presentation/*.pdf  # libmusicxml2
+  git add ${DOC_DIR}/libmusicxml2Presentation/*.pdf  # libmusicxml2
 
   git add ${DOC_DIR}/*/*.tex
   git add ${DOC_DIR}/*/*.ist
@@ -859,20 +859,20 @@ function addDoc ()
 
 function addFxml ()
 {
-  git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.xml
-  git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*/*.txt
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/*.xml
+  git add -f ${MUSIC_FORMATS_DEV}/musicxmlfiles/*/*.txt
 
-  git add -f ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/Makefile
+  git add -f ${MUSIC_FORMATS_DEV}/musicxmlfiles/Makefile
 
-  git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*.bash
-  git add    ${MUSIC_FORMATS_DEV}/files/musicxmlfiles/*.mfsl
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.bash
+  git add    ${MUSIC_FORMATS_DEV}/musicxmlfiles/*.mfsl
 }
 
 function addFmfsl ()
 {
-  git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.mfsl
-  git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.xml
-  git add    ${MUSIC_FORMATS_DEV}/files/mfslfiles/*.bash
+  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.mfsl
+  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.xml
+  git add    ${MUSIC_FORMATS_DEV}/mfslfiles/*.bash
 }
 
 function addReleases ()

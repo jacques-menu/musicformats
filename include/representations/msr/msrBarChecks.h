@@ -22,6 +22,14 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// PRE-declarations for classes mutual dependencies
+class msrMeasure;
+typedef SMARTP<msrMeasure> S_msrMeasure;
+
+class msrMeasureElement;
+typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
+
+//______________________________________________________________________________
 class EXP msrBarCheck : public msrMeasureElement
 {
   public:

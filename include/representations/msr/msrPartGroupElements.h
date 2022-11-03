@@ -12,7 +12,9 @@
 #ifndef ___msrPartGroupElements___
 #define ___msrPartGroupElements___
 
-#include "msrMeasureElements.h"
+#include "msrElements.h"
+
+// #include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -65,10 +67,11 @@ class EXP msrPartGroupElement : public msrElement
     // private fields
     // ------------------------------------------------------
 
-  /*
-    The part group uplink is declared in the sub-classes,
-    to allow for separate *.h files, C++ constraint
-  */
+    /*
+      The part group uplink is declared in the sub-classes,
+      i.e. msrPart and msrPartGroup,
+      to allow for separate *.h files, C++ constraint
+    */
 };
 typedef SMARTP<msrPartGroupElement> S_msrPartGroupElement;
 EXP ostream& operator << (ostream& os, const S_msrPartGroupElement& elt);

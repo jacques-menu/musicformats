@@ -82,7 +82,7 @@ From that:
 
 The \mfslfiles{minimal.mfsl} \script\ illustrates two basic features of \mfslLang:
 \begin{lstlisting}[language=MFSL]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat minimal.mfsl
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat minimal.mfsl
 #!/Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
 
 # This is a comment (for human readers), from '#' to the end of line
@@ -141,27 +141,27 @@ This first line of an \mfslLang\ \script\ is the so-called \MainIt{shebang}. It 
 
 This can be done in the \OS\ file system \GUI, or using the \code{chmod} command or equivalent in a terminal:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > chmod +x minimal.mfsl
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > chmod +x minimal.mfsl
 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal minimal.mfsl
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ls -sal minimal.mfsl
 8 -rwxr-xr-x@ 1 jacquesmenu  staff  1488 Mar 26 18:20 minimal.mfsl
 \end{lstlisting}
 
 The \mfslInterp\ has the \optionNameBoth{no-launch}{nol} option to display the essential information found in the script and quit without actually running the tool:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -query no-launch
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -query no-launch
 --- Help for atom "no-launch" in subgroup "MFSL"
     -no-launch, -nol
           Analyze the MFSL script, but don't launch the tool actually.
           This is useful to check the options gathered by the MFSL interpreter,
           and what command(s) would be launched.
           This option implies the '-display-tool-and-input, -ttai' option.
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles >
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles >
 \end{lstlisting}
 
 The \optionNameBoth{display-tool-and-input}{dtai} option itself has this effect:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -query display-tool-and-input
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -query display-tool-and-input
 --- Help for atom "display-tool-and-input" in subgroup "MFSL"
     -display-tool-and-input, -dtai
           Write MFSL tool and input analysis activity to standard output.
@@ -169,7 +169,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -query displa
 
 When running the \mfslfiles{minimal.mfsl} \script\ from the \CLI\ with \optionBoth{no-launch}{nol}, we get:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.mfsl -no-launch
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ./minimal.mfsl -no-launch
 ====> The known tools names are: ["msdlconverter", "xml2brl", "xml2gmn", "xml2ly" and "xml2xml"]
 ====> tool: xml2ly
 ====> input: Hymn121.xml
@@ -181,9 +181,9 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.mfsl -no
 
 Launching it without this options gives the following. The output of the \mfslInterp\ goes to standard output by defaut, so we redirect that to file \mfslfiles{Minimal.ly}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.mfsl > Minimal.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ./minimal.mfsl > Minimal.ly
 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal Minimal.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ls -sal Minimal.ly
 24 -rw-r--r--  1 jacquesmenu  staff  11772 Mar 28 09:44 Minimal.ly
 \end{lstlisting}
 
@@ -209,7 +209,7 @@ As is traditional when using interpreters from the \CLI, the \mfslInterp\ \mfslE
 
 If that is done in a terminal, a \code{Ctrl-d} (control key held when typing the {\tt d}) should be typed after the input, to indicate the end of it, such as:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl
 tool : xml2ly ;
 input : "HelloWorld.xml" ;
 
@@ -233,7 +233,7 @@ Total (sec)  Mandatory  Optional
 -----------  ---------  ---------
 0.04586      0.04586    0.00000
 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal HelloWorld.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ls -sal HelloWorld.ly
 8 -rw-r--r--@ 1 jacquesmenu  staff  1221 Mar 28 07:48 HelloWorld.ly
 \end{lstlisting}
 
@@ -277,7 +277,7 @@ The \mfslInterp\ has its own options, which can be displayed by \optionBoth{help
 
 The specific options are placed in two groups. The first one, seen with \optionBoth{help-user}{hu}, is for regular users:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -help-user
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -help-user
 --- Help for subgroup "MFSL" in group "MFSL group" ---
   MFSL group (-help-mfsl-user-group, -hmfsl-user-group):
   --------------------------
@@ -303,7 +303,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -help-user
 
 The second group, diplayed by \optionBoth{help-maintainer}{hm}, if for the curious and the maintainers of \mf:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > mfsl -help-maintainer
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > mfsl -help-maintainer
 --- Help for subgroup "MFSL" in group "MFSL group" ---
   MFSL group (-help-mfsl-maintainance-group, -hmfsl--maintainance-group):
   --------------------------
@@ -339,7 +339,7 @@ Let us now use options to produce a bass score from this file. This is done by:
 
 The \mfslfiles{Hymn121ForBass.mfsl} script contains enhancement options that we will keep commented for the time being:
 \begin{lstlisting}[language=MFSL]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForBass.mfsl
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat Hymn121ForBass.mfsl
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
 
 ###
@@ -407,7 +407,7 @@ input : "Hymn121.xml" ;
 
 Let us run this script with:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./Hymn121ForBass.mfsl
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ./Hymn121ForBass.mfsl
   The options values for xml2ly are:
     Files group (-help-files-group, -hfiles-group), 1 atom chosen:
     --------------------------
@@ -436,7 +436,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./Hymn121ForBass.m
       Output (-help-output, -houtput), 1 atom chosen:
         fXml2lyInfos                                    : true, set by user
 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal Hymn121_Bass.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ls -sal Hymn121_Bass.ly
 16 -rw-r--r--@ 1 jacquesmenu  staff  4586 Apr  5 11:18 Hymn121_Bass.ly
 \end{lstlisting}
 
@@ -488,7 +488,7 @@ jacquesmenu@macmini > xml2ly -query ignore-musicxml-lyrics
 
 These options can be applied by uncommenting them in \mfslfiles{Hymn121ForBass.mfsl}. The differences between the two are:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > diff Hymn121ForBass.mfsl Hymn121ForBassEnhanced.mfsl
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > diff Hymn121ForBass.mfsl Hymn121ForBassEnhanced.mfsl
 35c35
 <   -output-file-name "Hymn121_Bass.ly"
 ---
@@ -536,7 +536,7 @@ The actual selection works this way:
 
 The \mfslfiles{Hymn121ForVocalSATBQuartet.mfsl} \script\ contains:
 \begin{lstlisting}[language=MFSL]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat Hymn121ForVocalSATBQuartet.mfsl
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat Hymn121ForVocalSATBQuartet.mfsl
 #!//Users/jacquesmenu/musicformats-git-dev/build/bin/mfsl
 
 ###
@@ -755,7 +755,7 @@ With:
 
 we get all these \lily\ files:
 \begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -sal Hymn121_SATB_*.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ls -sal Hymn121_SATB_*.ly
  8 -rw-r--r--@ 1 jacquesmenu  staff   3964 Apr  6 21:39 Hymn121_SATB_alto.ly
  8 -rw-r--r--@ 1 jacquesmenu  staff   3881 Apr  6 21:39 Hymn121_SATB_bass.ly
  8 -rw-r--r--@ 1 jacquesmenu  staff   3931 Apr  6 21:39 Hymn121_SATB_soprano.ly
@@ -777,7 +777,7 @@ The \mfslInterp\ is a regular executable application, and as such, it can be use
 
 This author uses for exemple \mfslfiles{minimal.bash}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > cat minimal.bash
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > cat minimal.bash
 #!/bin/bash
 
 set -x
@@ -801,7 +801,7 @@ The \code{set} \bash\ commands toggle an echo of the commands on and off.
 
 The trace produced when running this script is:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ./minimal.bash
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ./minimal.bash
 + MINIMAL_LY=Minimal.ly
 + ./minimal.mfsl
 + ls -sal Minimal.ly
@@ -926,7 +926,7 @@ case SCORE :
 
 \mfslfiles{Hymn121ForHarmonyBand.mfsl} can be used to obtain all these \lily\ files:
 \begin{lstlisting}[language=TerminalSmall]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/mfslfiles > ls -l Hymn121_harmony_*.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/mfslfiles > ls -l Hymn121_harmony_*.ly
 -rw-r--r--@ 1 jacquesmenu  staff  9765 Apr  6 18:04 Hymn121_band_director.ly
 -rw-r--r--@ 1 jacquesmenu  staff  3366 Apr  6 18:04 Hymn121_band_part1_C_instruments.ly
 -rw-r--r--@ 1 jacquesmenu  staff  3627 Apr  6 18:04 Hymn121_band_part2_Bb_instruments.ly

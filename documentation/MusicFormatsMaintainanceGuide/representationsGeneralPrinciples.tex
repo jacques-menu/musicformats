@@ -325,7 +325,7 @@ void msr2msrTranslator::visitEnd (S_msrIdentification& elt)
 Forgetting to define those \methodName{visit*} methods causes \MainIt{no error message whatsoever}: the corresponding elements are just not handled by the visitor.\\
 The visitors trace options are useful to detect such cases:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxml > xml2ly -find visitors
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2ly -find visitors
 3 occurrences of string "visitors" have been found:
    1:
     -tmxmltvis, -trace-mxsr-visitors

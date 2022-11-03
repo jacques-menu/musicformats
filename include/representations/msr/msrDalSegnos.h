@@ -34,8 +34,6 @@ class EXP msrDalSegno : public msrMeasureElement
 {
   public:
 
-  public:
-
     // creation from MusicXML
     // ------------------------------------------------------
 

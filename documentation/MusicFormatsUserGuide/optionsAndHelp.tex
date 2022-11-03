@@ -871,7 +871,7 @@ Note that the current \mf\ services can take at most one argument, that can be e
 
 A file that be included with the option sample is \gitmxmlfile{basic/AnacrusisOptionsAndArguments.txt}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/AnacrusisOptionsAndArguments.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat basic/AnacrusisOptionsAndArguments.txt
 # some options
 
   # output file
@@ -894,7 +894,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Anac
 
 Including this file with \xmlToLy\ gives:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -include basic/AnacrusisOptionsAndArguments.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -include basic/AnacrusisOptionsAndArguments.txt
 Timing information:
 
 Activity  Description                                             Kind       CPU (sec)
@@ -912,7 +912,7 @@ Total (sec)  Mandatory  Optional
 -----------  ---------  ---------
 0.03766      0.03766    0.00000
 
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > ls -sal Anacrusis.ly
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > ls -sal Anacrusis.ly
 8 -rw-r--r--@ 1 jacquesmenu  staff  1553 Feb  9 09:44 Anacrusis.ly
 \end{lstlisting}
 
@@ -930,7 +930,7 @@ In included files, these values are merely extracted from a line, and taken verb
 
 For example, \gitmxmlfile{basic/QuotingInIncludedOptionsFiles.txt} contains:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/basic > cat QuotingInIncludedOptionsFiles.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/basic > cat QuotingInIncludedOptionsFiles.txt
 # contents
   -title This year's title
   -subtitle 'Last year's quoted multi-word subtitle'
@@ -948,7 +948,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/basic > cat Quot
 
 Including this file and displaying the options values, we get:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles/basic > xml2ly -include QuotingInIncludedOptionsFiles.txt HelloWorld.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles/basic > xml2ly -include QuotingInIncludedOptionsFiles.txt HelloWorld.xml
   The options values for xml2ly are:
     Files group (-help-files-group, -hfiles-group), 1 atom chosen:
     --------------------------
@@ -984,7 +984,7 @@ Note, however, that \earlyOption s are detected \MainIt{before} the files inclus
 
 For example, \gitmxmlfile{basic/HelloWorldOptionsAndArguments_1.txt} contains:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/HelloWorldOptionsAndArguments_1.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat basic/HelloWorldOptionsAndArguments_1.txt
 # output file
  -auto-output-file-name
 
@@ -1008,7 +1008,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Hell
 
 The included \gitmxmlfile{basic/HelloWorldOptionsAndArguments_2.txt} file contains:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/HelloWorldOptionsAndArguments_2.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat basic/HelloWorldOptionsAndArguments_2.txt
 # non-musical
   -subsubtitle "Subsubtitle from HelloWorldOptionsAndArguments_2.txt"
 
@@ -1018,7 +1018,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Hell
 
 Including \gitmxmlfile{basic/HelloWorldOptionsAndArguments_1.txt}, we get:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -include basic/HelloWorldOptionsAndArguments_1.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -include basic/HelloWorldOptionsAndArguments_1.txt
 Timing information:
 
 Activity  Description                                             Kind       CPU (sec)
@@ -1051,7 +1051,7 @@ There are resources limitations on the machines \mf\ is used on, and we should p
 
 Let us uncomment the \optionName{include}{inc} option in \gitmxmlfile{basic/HelloWorldOptionsAndArguments_2.txt}, leading to:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/HelloWorldOptionsAndArguments_2.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat basic/HelloWorldOptionsAndArguments_2.txt
 # non-musical
   -subsubtitle "Subsubtitle from HelloWorldOptionsAndArguments_2.txt"
 
@@ -1061,7 +1061,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Hell
 
 Now we get:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly -include basic/HelloWorldOptionsAndArguments_1.txt
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly -include basic/HelloWorldOptionsAndArguments_1.txt
                         Including file [basic/HelloWorldOptionsAndArguments_1.txt]: more than 10 include levels, quitting
                         The include file names stack contains 10 elements:
                            1: [basic/HelloWorldOptionsAndArguments_2.txt]

@@ -11,7 +11,7 @@
 
 \xmlToLy\ can be used to produce scores in the \jianpu\ format, in which the notes piches are numbers relative to the scale instead of graphic elements:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly basic/Anacrusis.xml -output-file-name Anacrusis_Jianpu.ly -jianpu -title "Anacrusis score in Jianpu format"
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly basic/Anacrusis.xml -output-file-name Anacrusis_Jianpu.ly -jianpu -title "Anacrusis score in Jianpu format"
 \end{lstlisting}
 
 This option needs lilypond-Jianpu to be accessible to LilyPond. This is available at \url{https://github.com/nybbs2003/lilypond-Jianpu/jianpu10a.ly}.
@@ -47,7 +47,7 @@ The \code{o*} indicate the octave, and notes pitches and rests use \lily\ syntax
 \mf's \xmlToGmn\ is a \multiPass\ converter when \xmlToGuido\, a part of \libmusicxml, has two passes and only usea a \mxsrRepr\ representation.
 
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2gmn basic/Anacrusis.xml 
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2gmn basic/Anacrusis.xml 
 {[ \staff<1> \set<autoHideTiedAccidentals="on"> \title<""> \auto<autoInstrPos="on"> \instr<"Voice"> \barFormat<style= "system", range="1"> \bar<hidden="true"> \key<0> \meter<"3/4", autoMeasuresNum="system"> \stemsUp \beamBegin:1 g/8 \stemsUp g/8 \beamEnd:1 \bar<hidden="true"> \stemsUp \beamsOff a/4 \stemsUp \beamsOff g/4 \stemsDown \beamsOff c2/4 \bar<hidden="true"> \stemsDown \beamsOff c/2 _/4 ]
   }
 \end{lstlisting}
@@ -62,7 +62,7 @@ This can be viewed and edited on \fober 's \url{https://guidoeditor.grame.fr/#}:
 
 \xmlToXml\ is meant for applying transformations to \mxml\ data. For example, \gitmxmlfile{basic/Anacrusis.xml} contains:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Anacrusis.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat basic/Anacrusis.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
@@ -77,12 +77,12 @@ jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat basic/Anac
 
 We can obtain another \mxml\ file with this command, changing the work title, adding a work number and using an alto clef instead of a treble clef:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2xml basic/Anacrusis.xml -output-file-name Anacrusis_From_xml2xml.xml -msr-replace-clef treble=alto -work-title "Anacrusis from xml2ml with alto clef" -work-number 317
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2xml basic/Anacrusis.xml -output-file-name Anacrusis_From_xml2xml.xml -msr-replace-clef treble=alto -work-title "Anacrusis from xml2ml with alto clef" -work-number 317
 \end{lstlisting}
 
 The resulting file \fileName{Anacrusis_From_xml2xml.xml} contains:
 \begin{lstlisting}[language=MusicXML]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > cat Anacrusis_From_xml2xml.xml
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > cat Anacrusis_From_xml2xml.xml
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 3.1 Partwise//EN"
 			"http://www.musicxml.org/dtds/partwise.dtd">
@@ -125,7 +125,7 @@ from "basic/Anacrusis.xml"
 
 Let's convert this to \lily\ with \xmlToLy\ into \fileName{Anacrusis_From_xml2xml.ly}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/files/musicxmlfiles > xml2ly Anacrusis_From_xml2xml.xml -auto-output-file-name
+jacquesmenu@macmini: ~/musicformats-git-dev/musicxmlfiles > xml2ly Anacrusis_From_xml2xml.xml -auto-output-file-name
 \end{lstlisting}
 
 The resulting score is:\\

@@ -245,7 +245,7 @@ string uncompressMXLFile (
 #endif
 
         /*
-        user@lilydev: ~/libmusicxml-git/files/musicxml > unzip -l UnofficialTestSuite/90a-Compressed-MusicXML.mxl
+        user@lilydev: ~/libmusicxml-git/musicxml > unzip -l UnofficialTestSuite/90a-Compressed-MusicXML.mxl
         Archive:  UnofficialTestSuite/90a-Compressed-MusicXML.mxl
           Length      Date    Time    Name
         ---------  ---------- -----   ----
