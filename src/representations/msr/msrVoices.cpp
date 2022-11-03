@@ -4439,7 +4439,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
           lastMeasureInLastSegment->
             finalizeMeasure (
               inputLineNumber,
-              msrMeasure::kMeasureRepeatContextKindNone,
+              msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone,
               "handleVoiceLevelRepeatStart() 3");
 */
           // append last segment to initial voice elements list
@@ -4473,7 +4473,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
         /* JMI
           // set it as created before a repeat
           voiceLastMeasure->
-            setMeasureCreatedForARepeatKind (
+            setMeasureCreatedForARepeatKind ( // JMI v0.9.66
               msrMeasure::kMeasureCreatedForARepeatBefore);
               */
         }
@@ -4755,7 +4755,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
   voiceLastSegmentLastMeasure->
     finalizeMeasure (
       inputLineNumber,
-      msrMeasure::kMeasureRepeatContextKindCommonPartLastMeasure,
+      msrMeasureRepeatContextKind::kMeasureRepeatContextKindCommonPartLastMeasure,
       "handleVoiceLevelRepeatEndWithoutStart() 3"
       );
 */
@@ -5167,7 +5167,7 @@ void msrVoice::handleNestedRepeatEndInVoice (
   /* JMI
     // set it as created after a repeat
     voiceLastMeasure->
-      setMeasureCreatedForARepeatKind (
+      setMeasureCreatedForARepeatKind ( // JMI v0.9.66
         msrMeasure::kMeasureCreatedForARepeatAfter);
         */
   }
@@ -9609,9 +9609,9 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
     "fVoiceLastAppendedMeasure is null");
 
   // finalize fVoiceLastAppendedMeasure
-  msrMeasure::msrMeasureRepeatContextKind
+  msrMeasureRepeatContextKind
     measureRepeatContextKind =
-      msrMeasure::kMeasureRepeatContextKindNone;
+      msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone;
 
   fVoiceLastAppendedMeasure->
     finalizeMeasure (
@@ -10032,7 +10032,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
     measure->
       finalizeMeasure (
         inputLineNumber,
-        msrMeasure::kMeasureRepeatContextKindNone,
+        msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone,
         "finalizeVoiceAndAllItsMeasures()");
   } // for
 }

@@ -297,7 +297,7 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
 
     setw (fieldWidth) <<
     "partGroupSymbolKind" << " : " <<
-    msrPartGroup::partGroupSymbolKindAsString (
+    partGroupSymbolKindAsString (
       elt->getPartGroupSymbolKind  ()) <<
     endl <<
 
@@ -308,7 +308,7 @@ void msr2summaryVisitor::visitStart (S_msrPartGroup& elt)
 
     setw (fieldWidth) <<
     "partGroupBarLine" << " : \"" <<
-    msrPartGroup::partGroupBarLineKindAsString (
+    partGroupBarLineKindAsString (
       elt->getPartGroupBarLineKind ()) <<
     "\"" <<
     endl <<

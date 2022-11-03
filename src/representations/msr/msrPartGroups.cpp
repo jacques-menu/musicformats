@@ -96,9 +96,9 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
       partGroupNameDisplayText,
       partGroupAccidentalText,
       partGroupAbbreviation,
-      msrPartGroup::kPartGroupSymbolNone, // partGroupSymbolKind
+      msrPartGroupSymbolKind::kPartGroupSymbolNone, // partGroupSymbolKind
       0,                                  // partGroupSymbolDefaultX,
-      msrPartGroup::kPartGroupImplicitYes,
+      msrPartGroupImplicitKind::kPartGroupImplicitYes,
       partGroupBarLineKind,
       nullptr,                            // partGroupUpLinkToPartGroup,
                                           // will be set below
@@ -1063,10 +1063,10 @@ string partGroupImplicitKindAsString (
   string result;
 
   switch (partGroupImplicitKind) {
-    case msrPartGroup::kPartGroupImplicitYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitYes:
       result = "kPartGroupImplicitYes";
       break;
-    case msrPartGroup::kPartGroupImplicitNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitNo:
       result = "kPartGroupImplicitNo";
       break;
   } // switch
@@ -1094,37 +1094,25 @@ string partGroupTypeKindAsString (
   return result;
 }
 
-string asString () const
-{
-  stringstream s;
-
-  s <<
-    "PartGroup \"" <<
-    getPartGroupCombinedName () <<
-    "\", line " << fInputLineNumber;
-
-  return s.str ();
-}
-
 string partGroupSymbolKindAsString (
   msrPartGroupSymbolKind partGroupSymbolKind)
 {
   string result;
 
   switch (partGroupSymbolKind) {
-    case msrPartGroup::kPartGroupSymbolNone:
+    case msrPartGroupSymbolKind::kPartGroupSymbolNone:
       result = "kPartGroupSymbolNone";
       break;
-    case msrPartGroup::kPartGroupSymbolBrace:
+    case msrPartGroupSymbolKind::kPartGroupSymbolBrace:
       result = "kPartGroupSymbolBrace";
       break;
-    case msrPartGroup::kPartGroupSymbolBracket:
+    case msrPartGroupSymbolKind::kPartGroupSymbolBracket:
       result = "kPartGroupSymbolBracket";
       break;
-    case msrPartGroup::kPartGroupSymbolLine:
+    case msrPartGroupSymbolKind::kPartGroupSymbolLine:
       result = "kPartGroupSymbolLine";
       break;
-    case msrPartGroup::kPartGroupSymbolSquare:
+    case msrPartGroupSymbolKind::kPartGroupSymbolSquare:
       result = "kPartGroupSymbolSquare";
       break;
   } // switch
@@ -1132,7 +1120,7 @@ string partGroupSymbolKindAsString (
   return result;
 }
 
-string msrPartGroup::partGroupBarLineKindAsString (
+string partGroupBarLineKindAsString (
   msrPartGroupBarLineKind partGroupBarLineKind)
 {
   string result;
@@ -1147,6 +1135,18 @@ string msrPartGroup::partGroupBarLineKindAsString (
   } // switch
 
   return result;
+}
+
+string msrPartGroup::asString () const
+{
+  stringstream s;
+
+  s <<
+    "PartGroup \"" <<
+    getPartGroupCombinedName () <<
+    "\", line " << fInputLineNumber;
+
+  return s.str ();
 }
 
 void msrPartGroup::print (ostream& os) const

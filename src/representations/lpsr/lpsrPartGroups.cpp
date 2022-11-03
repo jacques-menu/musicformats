@@ -132,7 +132,9 @@ void lpsrPartGroupBlock::print (ostream& os) const
     endl <<
     "PartGroupBlock for partGroup \"" <<
     fPartGroup->getPartGroupCombinedName () <<
-    "\", " << fPartGroup->partGroupSymbolKindAsString () <<
+    "\", " <<
+    partGroupSymbolKindAsString (
+      fPartGroup->getPartGroupSymbolKind ()) <<
     ", " <<
     mfSingularOrPlural (
       fPartGroupBlockElements.size (), "element", "elements") <<

@@ -1481,18 +1481,18 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
   ++gIndenter;
 
   // determine new measure 'first in segment' kind
-  msrMeasure::msrMeasureFirstInSegmentKind
+  msrMeasureFirstInSegmentKind
     measureFirstInSegmentKind;
 
   if (fSegmentElementsList.size () == 0) {
     // this is the first measure in the segment
     measureFirstInSegmentKind =
-      msrMeasure::kMeasureFirstInSegmentKindYes;
+      msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindYes;
   }
   else {
     // this is not the first measure in the segment
     measureFirstInSegmentKind =
-      msrMeasure::kMeasureFirstInSegmentKindNo;
+      msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindNo;
   }
 
   // create a measure

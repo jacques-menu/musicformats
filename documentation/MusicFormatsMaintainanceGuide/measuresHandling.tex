@@ -317,12 +317,12 @@ void msrSegment::appendMeasureToSegment (S_msrMeasure measure)
   if (segmentElementsListSize == 0) {
     measure->
       setMeasureFirstInSegmentKind (
-        msrMeasure::kMeasureFirstInSegmentKindYes);
+        msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindYes);
   }
   else {
     measure->
       setMeasureFirstInSegmentKind (
-        msrMeasure::kMeasureFirstInSegmentKindNo);
+        msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindNo);
   }
 
   // is measure the first one it the voice?

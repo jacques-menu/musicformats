@@ -1771,12 +1771,12 @@ void msr2msrTranslator::visitEnd (S_msrMeasure& elt)
     case msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding:
       // generate a bar check if relevant
       switch (elt-> getMeasureEndRegularKind ()) {
-        case msrMeasure::kMeasureEndRegularKindUnknown:
+        case msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown:
           break;
-        case msrMeasure::kMeasureEndRegularKindYes:
+        case msrMeasureEndRegularKind::kMeasureEndRegularKindYes:
           doCreateABarCheck = true;
           break;
-        case msrMeasure::kMeasureEndRegularKindNo:
+        case msrMeasureEndRegularKind::kMeasureEndRegularKindNo:
           break;
       } // switch
       break;

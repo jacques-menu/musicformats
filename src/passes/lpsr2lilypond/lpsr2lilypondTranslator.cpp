@@ -8309,7 +8309,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       partGroup->
         getPartGroupSymbolKind ();
 
-  msrPartGroup::msrPartGroupBarLineKind
+  msrPartGroupBarLineKind
     partGroupBarLineKind =
       partGroup->
         getPartGroupBarLineKind ();
@@ -8330,23 +8330,23 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
   // LPNR, page 567 jMI ???
 
   switch (partGroupImplicitKind) {
-    case msrPartGroup::kPartGroupImplicitYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitYes:
       // don't generate code for an implicit top-most part group block
       break;
 
-    case msrPartGroup::kPartGroupImplicitNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitNo:
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream << left <<
           setw (commentFieldWidth);
       }
 
       switch (partGroupSymbolKind) {
-        case msrPartGroup::kPartGroupSymbolNone:
+        case msrPartGroupSymbolKind::kPartGroupSymbolNone:
           fLilypondCodeStream <<
             "\\new StaffGroup";
           break;
 
-        case msrPartGroup::kPartGroupSymbolBrace: // JMI
+        case msrPartGroupSymbolKind::kPartGroupSymbolBrace: // JMI
           switch (partGroupBarLineKind) {
             case msrPartGroupBarLineKind::kPartGroupBarLineYes:
               fLilypondCodeStream <<
@@ -8359,7 +8359,7 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           } // switch
           break;
 
-        case msrPartGroup::kPartGroupSymbolBracket:
+        case msrPartGroupSymbolKind::kPartGroupSymbolBracket:
           switch (partGroupBarLineKind) {
             case msrPartGroupBarLineKind::kPartGroupBarLineYes:
               fLilypondCodeStream <<
@@ -8372,12 +8372,12 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
           } // switch
           break;
 
-        case msrPartGroup::kPartGroupSymbolLine:
+        case msrPartGroupSymbolKind::kPartGroupSymbolLine:
           fLilypondCodeStream <<
             "\\new StaffGroup";
           break;
 
-        case msrPartGroup::kPartGroupSymbolSquare:
+        case msrPartGroupSymbolKind::kPartGroupSymbolSquare:
           fLilypondCodeStream <<
             "\\new StaffGroup";
           break;
@@ -8410,9 +8410,9 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       // generate the '\with' block
       // if the part group is not implicit
       switch (partGroupImplicitKind) {
-        case msrPartGroup::kPartGroupImplicitYes:
+        case msrPartGroupImplicitKind::kPartGroupImplicitYes:
           break;
-        case msrPartGroup::kPartGroupImplicitNo:
+        case msrPartGroupImplicitKind::kPartGroupImplicitNo:
           if (partGroupName.size ()) {
             doGenerateAWithBlock = true;
           }
@@ -8422,20 +8422,20 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       // generate the '\with' block
       // if the part group symbol is a line or square
       switch (partGroupSymbolKind) {
-        case msrPartGroup::kPartGroupSymbolNone:
+        case msrPartGroupSymbolKind::kPartGroupSymbolNone:
           break;
 
-        case msrPartGroup::kPartGroupSymbolBrace: // JMI
+        case msrPartGroupSymbolKind::kPartGroupSymbolBrace: // JMI
           break;
 
-        case msrPartGroup::kPartGroupSymbolBracket:
+        case msrPartGroupSymbolKind::kPartGroupSymbolBracket:
           break;
 
-        case msrPartGroup::kPartGroupSymbolLine:
+        case msrPartGroupSymbolKind::kPartGroupSymbolLine:
           doGenerateAWithBlock = true;
           break;
 
-        case msrPartGroup::kPartGroupSymbolSquare:
+        case msrPartGroupSymbolKind::kPartGroupSymbolSquare:
           doGenerateAWithBlock = true;
           break;
       } // switch
@@ -8465,10 +8465,10 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
       }
 
       switch (partGroupSymbolKind) {
-        case msrPartGroup::kPartGroupSymbolNone:
+        case msrPartGroupSymbolKind::kPartGroupSymbolNone:
           break;
 
-        case msrPartGroup::kPartGroupSymbolBrace: // JMI
+        case msrPartGroupSymbolKind::kPartGroupSymbolBrace: // JMI
           /*
            *
            * check whether individual part have instrument names JMI
@@ -8482,16 +8482,16 @@ void lpsr2lilypondTranslator::visitStart (S_lpsrPartGroupBlock& elt)
               */
           break;
 
-        case msrPartGroup::kPartGroupSymbolBracket:
+        case msrPartGroupSymbolKind::kPartGroupSymbolBracket:
           break;
 
-        case msrPartGroup::kPartGroupSymbolLine:
+        case msrPartGroupSymbolKind::kPartGroupSymbolLine:
           fLilypondCodeStream <<
             "systemStartDelimiter = #'SystemStartBar" <<
             endl;
           break;
 
-        case msrPartGroup::kPartGroupSymbolSquare:
+        case msrPartGroupSymbolKind::kPartGroupSymbolSquare:
           fLilypondCodeStream <<
             "systemStartDelimiter = #'SystemStartSquare" <<
             endl;
@@ -8585,11 +8585,11 @@ void lpsr2lilypondTranslator::visitEnd (S_lpsrPartGroupBlock& elt)
   }
 
   switch (partGroup->getPartGroupImplicitKind ()) {
-    case msrPartGroup::kPartGroupImplicitYes:
+    case msrPartGroupImplicitKind::kPartGroupImplicitYes:
       // don't generate code for an implicit top-most part group block
       break;
 
-    case msrPartGroup::kPartGroupImplicitNo:
+    case msrPartGroupImplicitKind::kPartGroupImplicitNo:
       if (gGlobalLpsr2lilypondOahGroup->getLilypondComments ()) {
         fLilypondCodeStream << left <<
           setw (commentFieldWidth) << ">>" <<
@@ -12113,7 +12113,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       elt->getMeasurePuristNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  msrMeasure::msrMeasureEndRegularKind
+  msrMeasureEndRegularKind
     measureEndRegularKind =
       elt-> getMeasureEndRegularKind ();
 #endif
@@ -12137,7 +12137,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
         "', " <<
         msrMeasureKindAsString (measureKind) <<
         ", " <<
-        msrMeasure::measureEndRegularKindAsString (
+        measureEndRegularKindAsString (
           measureEndRegularKind) <<
         ", measurePuristNumber = '" <<
         measurePuristNumber <<
@@ -12260,7 +12260,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrMeasure& elt)
       endl <<
       "% <!--=== measure '" << measureNumber <<
       "' start, " <<
-      msrMeasure::measureEndRegularKindAsString (
+      measureEndRegularKindAsString (
         measureEndRegularKind) <<
       ", measurePuristNumber = '" <<
       measurePuristNumber <<
@@ -12627,7 +12627,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       elt->getMeasurePuristNumber ();
 
 #ifdef TRACING_IS_ENABLED
-  msrMeasure::msrMeasureEndRegularKind
+  msrMeasureEndRegularKind
     measureEndRegularKind =
       elt-> getMeasureEndRegularKind ();
 #endif
@@ -12651,7 +12651,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
         "', " <<
         msrMeasureKindAsString (measureKind) <<
         ", " <<
-        msrMeasure::measureEndRegularKindAsString (
+        measureEndRegularKindAsString (
           measureEndRegularKind) <<
         ", measurePuristNumber = '" <<
         measurePuristNumber <<
@@ -12677,7 +12677,7 @@ void lpsr2lilypondTranslator::visitEnd (S_msrMeasure& elt)
       endl <<
       "% <!--=== measure '" << measureNumber <<
       "' end, " <<
-      msrMeasure::measureEndRegularKindAsString (
+      measureEndRegularKindAsString (
         measureEndRegularKind) <<
      "' end, measurePuristNumber = '" << measurePuristNumber << "'" <<
       ", onGoingMultipleFullBarRests = '" <<
