@@ -432,7 +432,7 @@ class EXP mxsr2msrSkeletonBuilder :
     // ------------------------------------------------------
 
     int                       fCurrentPartGroupNumber;
-    msrPartGroup::msrPartGroupTypeKind
+    msrPartGroupTypeKind
                               fCurrentPartGroupTypeKind;
     string                    fCurrentPartGroupName;
     string                    fCurrentPartGroupAbbreviation;
@@ -441,8 +441,7 @@ class EXP mxsr2msrSkeletonBuilder :
     string                    fCurrentPartGroupNameDisplayText;
 
     string                    fCurrentPartGroupAccidentalText;
-    msrPartGroup::msrPartGroupSymbolKind
-                              fCurrentPartGroupSymbolKind;
+    msrPartGroupSymbolKind    fCurrentPartGroupSymbolKind;
     msrPartGroup::msrPartGroupBarLineKind
                               fCurrentPartGroupBarLineKind;
     int                       fCurrentPartGroupSymbolDefaultX;

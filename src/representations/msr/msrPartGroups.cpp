@@ -380,7 +380,8 @@ string msrPartGroup::getPartGroupCombinedNameWithoutEndOfLines () const
   s <<
     "\"" <<
     ", fPartGroupImplicitKind: " <<
-    partGroupImplicitKindAsString ();
+    partGroupImplicitKindAsString (
+      fPartGroupImplicitKind);
 
   return s.str ();
 }
@@ -1056,7 +1057,7 @@ void msrPartGroup::browseData (basevisitor* v)
   }
 }
 
-string msrPartGroup::partGroupImplicitKindAsString (
+string partGroupImplicitKindAsString (
   msrPartGroupImplicitKind partGroupImplicitKind)
 {
   string result;
@@ -1073,26 +1074,19 @@ string msrPartGroup::partGroupImplicitKindAsString (
   return result;
 }
 
-string msrPartGroup::partGroupImplicitKindAsString () const
-{
-  return
-    partGroupImplicitKindAsString (
-      fPartGroupImplicitKind);
-}
-
-string msrPartGroup::partGroupTypeKindAsString (
+string partGroupTypeKindAsString (
   msrPartGroupTypeKind partGroupTypeKind)
 {
   string result;
 
   switch (partGroupTypeKind) {
-    case msrPartGroup::kPartGroupTypeNone:
+    case msrPartGroupTypeKind::kPartGroupTypeNone:
       result = "kPartGroupTypeNone";
       break;
-    case msrPartGroup::kPartGroupTypeStart:
+    case msrPartGroupTypeKind::kPartGroupTypeStart:
       result = "kPartGroupTypeStart";
       break;
-    case msrPartGroup::kPartGroupTypeStop:
+    case msrPartGroupTypeKind::kPartGroupTypeStop:
       result = "kPartGroupTypeStop";
       break;
   } // switch
@@ -1100,14 +1094,7 @@ string msrPartGroup::partGroupTypeKindAsString (
   return result;
 }
 
-string msrPartGroup::partGroupBarLineKindAsString () const
-{
-  return
-    partGroupBarLineKindAsString (
-      fPartGroupBarLineKind);
-}
-
-string msrPartGroup::asString () const
+string asString () const
 {
   stringstream s;
 
@@ -1119,7 +1106,7 @@ string msrPartGroup::asString () const
   return s.str ();
 }
 
-string msrPartGroup::partGroupSymbolKindAsString (
+string partGroupSymbolKindAsString (
   msrPartGroupSymbolKind partGroupSymbolKind)
 {
   string result;
@@ -1151,10 +1138,10 @@ string msrPartGroup::partGroupBarLineKindAsString (
   string result;
 
   switch (partGroupBarLineKind) {
-    case msrPartGroup::kPartGroupBarLineYes:
+    case msrPartGroupBarLineKind::kPartGroupBarLineYes:
       result = "kPartGroupBarLineYes";
       break;
-    case msrPartGroup::kPartGroupBarLineNo:
+    case msrPartGroupBarLineKind::kPartGroupBarLineNo:
       result = "kPartGroupBarLineNo";
       break;
   } // switch

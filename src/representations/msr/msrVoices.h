@@ -715,7 +715,7 @@ class EXP msrVoice : public msrElement
 
     // last element in voice
 
-    S_msrMeasureElement   fetchVoiceLastElement ( // JMI ???
+    S_msrMeasureElement   fetchVoiceLastMeasureElement ( // JMI ??? v0.9.66
                             int inputLineNumber) const;
 
     // removing elements from voice

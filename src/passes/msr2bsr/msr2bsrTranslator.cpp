@@ -4491,7 +4491,7 @@ void msr2bsrTranslator::visitStart (S_msrGraceNotesGroup& elt)
       // fetch the voice last element
       fCurrentAfterGraceNotesGroupElement =
         fCurrentVoiceClone->
-          fetchVoiceLastElement (inputLineNumber);
+          fetchVoiceLastMeasureElement (inputLineNumber);
 
       // create the after grace notes
 #ifdef TRACING_IS_ENABLED

@@ -1188,7 +1188,7 @@ void mxsr2msrSkeletonBuilder::createImplicitPartGroup ()
       "",                   // PartGroupNameDisplayText
       "",                   // partGroupAccidentalText
       "Impl. PG",           // partGroupAbbreviation
-      msrPartGroup::kPartGroupBarLineYes,
+      msrPartGroupBarLineKind::kPartGroupBarLineYes,
       fMsrScore);
 
   // append it to the MSR score
@@ -2767,12 +2767,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
 
   string partGroupType = elt->getAttributeValue ("type");
 
-  fCurrentPartGroupTypeKind = msrPartGroup::kPartGroupTypeNone;
+  fCurrentPartGroupTypeKind = msrPartGroupTypeKind::kPartGroupTypeNone;
 
   if      (partGroupType == "start")
-    fCurrentPartGroupTypeKind = msrPartGroup::kPartGroupTypeStart;
+    fCurrentPartGroupTypeKind = msrPartGroupTypeKind::kPartGroupTypeStart;
   else if (partGroupType == "stop")
-    fCurrentPartGroupTypeKind = msrPartGroup::kPartGroupTypeStop;
+    fCurrentPartGroupTypeKind = msrPartGroupTypeKind::kPartGroupTypeStop;
   else {
     stringstream s;
 
@@ -2799,21 +2799,21 @@ void mxsr2msrSkeletonBuilder::visitStart (S_part_group& elt)
   // handle part group type
 
   switch (fCurrentPartGroupTypeKind) {
-    case msrPartGroup::kPartGroupTypeNone:
+    case msrPartGroupTypeKind::kPartGroupTypeNone:
       // should not occur
       break;
 
-    case msrPartGroup::kPartGroupTypeStart:
+    case msrPartGroupTypeKind::kPartGroupTypeStart:
       fCurrentPartGroupName = "";
       fCurrentPartGroupNameDisplayText = "";
       fCurrentPartGroupAccidentalText = "";
       fCurrentPartGroupAbbreviation = "";
       fCurrentPartGroupSymbolKind = msrPartGroup::kPartGroupSymbolNone;
       fCurrentPartGroupSymbolDefaultX = INT_MIN;
-      fCurrentPartGroupBarLineKind = msrPartGroup::kPartGroupBarLineYes;
+      fCurrentPartGroupBarLineKind = msrPartGroupBarLineKind::kPartGroupBarLineYes;
       break;
 
-    case msrPartGroup::kPartGroupTypeStop:
+    case msrPartGroupTypeKind::kPartGroupTypeStop:
       break;
   } // switch
 }
@@ -3009,9 +3009,9 @@ void mxsr2msrSkeletonBuilder::visitStart (S_group_barline& elt)
 
   // check part group barLine
   if      (groupBarLine == "yes")
-    fCurrentPartGroupBarLineKind = msrPartGroup::kPartGroupBarLineYes;
+    fCurrentPartGroupBarLineKind = msrPartGroupBarLineKind::kPartGroupBarLineYes;
   else if (groupBarLine == "no")
-    fCurrentPartGroupBarLineKind = msrPartGroup::kPartGroupBarLineNo;
+    fCurrentPartGroupBarLineKind = msrPartGroupBarLineKind::kPartGroupBarLineNo;
   else {
     stringstream s;
 
@@ -3060,19 +3060,19 @@ void mxsr2msrSkeletonBuilder::visitEnd (S_part_group& elt)
   // handle part group type
   switch (fCurrentPartGroupTypeKind) {
 
-    case msrPartGroup::kPartGroupTypeStart:
+    case msrPartGroupTypeKind::kPartGroupTypeStart:
       // handle the part group start
       handlePartGroupStart (
         inputLineNumber);
       break;
 
-    case msrPartGroup::kPartGroupTypeStop:
+    case msrPartGroupTypeKind::kPartGroupTypeStop:
       // handle the part group stop
       handlePartGroupStop (
         inputLineNumber);
       break;
 
-    case msrPartGroup::kPartGroupTypeNone:
+    case msrPartGroupTypeKind::kPartGroupTypeNone:
       // should not occur
       break;
   } // switch

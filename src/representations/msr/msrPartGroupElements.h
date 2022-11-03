@@ -65,10 +65,10 @@ class EXP msrPartGroupElement : public msrElement
     // private fields
     // ------------------------------------------------------
 
-  /*
-    The part group uplink is declared in the sub-classes,
-    to allow for separate *.h files, C++ constraint
-  */
+    /*
+      The part group uplink is declared in the sub-classes,
+      to allow for separate *.h files, C++ constraint
+    */
 };
 typedef SMARTP<msrPartGroupElement> S_msrPartGroupElement;
 EXP ostream& operator << (ostream& os, const S_msrPartGroupElement& elt);

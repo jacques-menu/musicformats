@@ -190,6 +190,8 @@ void msrTransposition::print (ostream& os) const
 }
 \end{lstlisting}
 
+Note that the new value of \code{gIndenter} after \code{++gIndenter} and \code{--gIndenter} is taken into account only at the {\it next} end-of-line -- the output of lines 5 to 8 above is indented one level less that the various field values output afterwards.
+
 There can be indentation issues, in which the user gets messages like:
 \begin{lstlisting}[language=Terminal]
 % ### Indentation has become negative: -1
