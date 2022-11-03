@@ -1,0 +1,35 @@
+% -------------------------------------------------------------------------
+% fonts
+% -------------------------------------------------------------------------
+
+\newfont\pnt{pzdr at 24.88pt}
+\newcommand{\hand}[1]{
+  \makebox[0pt][r]{
+  	\textcolor{bordeaux}{\raisebox{-.5ex}{\pnt\symbol{'345}}}\hspace{1em}
+	}%
+	\hfill%
+	{%
+	  \setlength{\fboxsep}{2ex}%
+	  \colorbox{white}{
+	  	\parbox{.8\textwidth}{\textcolor{bordeaux}{\textbf{#1}}}
+	  }
+		\hfill
+	}
+}
+
+
+% -------------------------------------------------------------------------
+% colors
+% -------------------------------------------------------------------------
+
+\usepackage{color}
+\definecolor{verylightgray}{gray}{.9}
+\definecolor{lightgray}{gray}{.8}
+\definecolor{gray}{gray}{.7}
+\definecolor{brown}{rgb}{0.74, 0.30, 0.12}
+\definecolor{orange}{rgb}{1, 0.50, 0}
+\definecolor{darkgreen}{rgb}{0, 0.9, 0}
+\definecolor{lightblue}{rgb}{0.5, 0.5, 1}
+\definecolor{bordeaux}{cmyk}{0, 0.735, 0.270, 0.257}
+
+
