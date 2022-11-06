@@ -95,7 +95,7 @@ S_bsrCellsList bsrPageHeading::buildCellsList () const
     bsrNumber::create (
       fInputLineNumber,
       fPageHeadingNumber,
-      bsrNumber::kNumberSignIsNeededYes)->
+      bsrNumberSignIsNeededKind::kNumberSignIsNeededYes)->
         fetchCellsList ());
 
   // append 1 space to result

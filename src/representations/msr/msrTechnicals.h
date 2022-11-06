@@ -21,42 +21,46 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class msrTechnicalKind {
+  kArrow, // rich JMI
+  kDoubleTongue,
+  kDownBow,
+  kFingernails,
+  kHarmonic,
+  kHeel,
+  kHole, // rich JMI ??? v0.9.66
+  kOpenString,
+  kSnapPizzicato,
+  kStopped,
+  kTap,
+  kThumbPosition,
+  kToe,
+  kTripleTongue,
+  kUpBow
+};
+
+string msrTechnicalKindAsString (
+  msrTechnicalKind technicalKind);
+
+ostream& operator << (ostream& os, const msrTechnicalKind& elt);
+
+/* JMI v0.9.66
+enum class msrTechnicalAccidentalMarkKind {
+  msrAlterationKind::kAlterationNatural, msrAlterationKind::kAlterationSharp, msrAlterationKind::kAlterationFlat
+};
+
+string technicalAccidentalMarkKindAsString (
+  msrTechnicalAccidentalMarkKind technicalAccidentalMarkKind);
+
+ostream& operator << (ostream& os, const msrTechnicalAccidentalMarkKind& elt);
+
+*/
+
 class EXP msrTechnical : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrTechnicalKind {
-      kArrow, // rich JMI
-      kDoubleTongue,
-      kDownBow,
-      kFingernails,
-      kHarmonic,
-      kHeel,
-      kHole, // rich JMI
-      kOpenString,
-      kSnapPizzicato,
-      kStopped,
-      kTap,
-      kThumbPosition,
-      kToe,
-      kTripleTongue,
-      kUpBow
-    };
-
-    static string technicalKindAsString (
-      msrTechnicalKind technicalKind);
-
-/* JMI
-    enum msrTechnicalAccidentalMarkKind {
-      msrAlterationKind::kAlterationNatural, msrAlterationKind::kAlterationSharp, msrAlterationKind::kAlterationFlat
-    };
-
-    static string technicalAccidentalMarkKindAsString (
-      msrTechnicalAccidentalMarkKind technicalAccidentalMarkKind);
-  */
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -96,7 +100,7 @@ class EXP msrTechnical : public msrElement
     msrPlacementKind      getTechnicalPlacementKind () const
                               { return fTechnicalPlacementKind; }
 
-        /* JMI
+/* JMI
     void                  setTechnicalAccidentalMarkKind (
                             msrTechnicalAccidentalMarkKind
                               technicalAccidentalMarkKind)
@@ -115,13 +119,7 @@ class EXP msrTechnical : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                technicalKindAsString () const;
-
     string                technicalPlacementKindAsString () const;
-
-    string                technicalAccidentalMarkKindAsString () const;
-
-    string                asString () const override;
 
   public:
 
@@ -137,6 +135,8 @@ class EXP msrTechnical : public msrElement
 
     // print
     // ------------------------------------------------------
+
+    string                asString () const override;
 
     void                  print (ostream& os) const override;
 
@@ -155,21 +155,22 @@ typedef SMARTP<msrTechnical> S_msrTechnical;
 EXP ostream& operator << (ostream& os, const S_msrTechnical& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrTechnicalWithIntegerKind {
+  kFingering,
+  kFret,
+  kString
+};
+
+string msrTechnicalWithIntegerKindAsString (
+  msrTechnicalWithIntegerKind technicalWithIntegerKind);
+
+ostream& operator << (ostream& os, const msrTechnicalWithIntegerKind& elt);
+
 class EXP msrTechnicalWithInteger : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrTechnicalWithIntegerKind {
-      kFingering,
-      kFret,
-      kString
-    };
-
-    static string technicalWithIntegerKindAsString (
-      msrTechnicalWithIntegerKind technicalWithIntegerKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -221,13 +222,7 @@ class EXP msrTechnicalWithInteger : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                technicalWithIntegerKindAsString () const;
-
     string                technicalWithIntegerPlacementKindAsString () const;
-
-    string                technicalWithIntegerAccidentalMarkKindAsString () const;
-
-    string                asString () const override;
 
   public:
 
@@ -243,6 +238,8 @@ class EXP msrTechnicalWithInteger : public msrElement
 
     // print
     // ------------------------------------------------------
+
+    string                asString () const override;
 
     void                  print (ostream& os) const override;
 
@@ -262,19 +259,20 @@ typedef SMARTP<msrTechnicalWithInteger> S_msrTechnicalWithInteger;
 EXP ostream& operator << (ostream& os, const S_msrTechnicalWithInteger& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrTechnicalWithFloatKind {
+  kTechnicalWithFloatBend
+};
+
+string msrTechnicalWithFloatKindAsString (
+  msrTechnicalWithFloatKind technicalWithFloatKind);
+
+ostream& operator << (ostream& os, const msrTechnicalWithFloatKind& elt);
+
 class EXP msrTechnicalWithFloat : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrTechnicalWithFloatKind {
-      kBend
-    };
-
-    static string technicalWithFloatKindAsString (
-      msrTechnicalWithFloatKind technicalWithFloatKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -326,13 +324,7 @@ class EXP msrTechnicalWithFloat : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                technicalWithFloatKindAsString () const;
-
-    string                technicalWithFloatPlacementKindAsString () const;
-
     string                technicalWithFloatAccidentalMarkKindAsString () const;
-
-    string                asString () const override;
 
   public:
 
@@ -349,6 +341,8 @@ class EXP msrTechnicalWithFloat : public msrElement
     // print
     // ------------------------------------------------------
 
+    string                asString () const override;
+
     void                  print (ostream& os) const override;
 
   private:
@@ -356,33 +350,35 @@ class EXP msrTechnicalWithFloat : public msrElement
     // private fields
     // ------------------------------------------------------
 
-    msrTechnicalWithFloatKind       fTechnicalWithFloatKind;
+    msrTechnicalWithFloatKind
+                          fTechnicalWithFloatKind;
 
-    float                           fTechnicalWithFloatValue;
+    float                 fTechnicalWithFloatValue;
 
-    msrPlacementKind                fTechnicalWithFloatPlacementKind;
+    msrPlacementKind      fTechnicalWithFloatPlacementKind;
 };
 typedef SMARTP<msrTechnicalWithFloat> S_msrTechnicalWithFloat;
 EXP ostream& operator << (ostream& os, const S_msrTechnicalWithFloat& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrTechnicalWithStringKind {
+  kHammerOn,
+  kHandbell,
+  kOtherTechnical,
+  kPluck,
+  kPullOff
+};
+
+string msrTechnicalWithStringKindAsString (
+  msrTechnicalWithStringKind technicalWithStringKind);
+
+ostream& operator << (ostream& os, const msrTechnicalWithStringKind& elt);
+
 class EXP msrTechnicalWithString : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrTechnicalWithStringKind {
-      kHammerOn,
-      kHandbell,
-      kOtherTechnical,
-      kPluck,
-      kPullOff
-    };
-
-    static string technicalWithStringKindAsString (
-      msrTechnicalWithStringKind technicalWithStringKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -439,15 +435,7 @@ class EXP msrTechnicalWithString : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                technicalWithStringKindAsString () const;
-
-    string                technicalWithStringTypeKindAsString () const;
-
     string                technicalWithStringPlacementKindAsString () const;
-
-    string                technicalWithStringAccidentalMarkKindAsString () const;
-
-    string                asString () const override;
 
   public:
 
@@ -463,6 +451,8 @@ class EXP msrTechnicalWithString : public msrElement
 
     // print
     // ------------------------------------------------------
+
+    string                asString () const override;
 
     void                  print (ostream& os) const override;
 

@@ -30,7 +30,7 @@ class EXP msrBarLine : public msrMeasureElement
     // ------------------------------------------------------
 
     // location
-    enum msrBarLineLocationKind {
+    enum class msrBarLineLocationKind {
       kBarLineLocationNone,
 
       kBarLineLocationLeft,
@@ -38,11 +38,11 @@ class EXP msrBarLine : public msrMeasureElement
       kBarLineLocationRight // by default
     };
 
-    static string barLineLocationKindAsString (
+    string barLineLocationKindAsString (
       msrBarLineLocationKind barLineLocationKind);
 
     // style
-    enum msrBarLineStyleKind {
+    enum class msrBarLineStyleKind {
       kBarLineStyleNone,
 
       kBarLineStyleRegular,  // by default
@@ -53,20 +53,20 @@ class EXP msrBarLine : public msrMeasureElement
       kBarLineStyleTick, kBarLineStyleShort
     };
 
-    static string barLineStyleKindAsString (
+    string barLineStyleKindAsString (
       msrBarLineStyleKind barLineStyleKind);
 
     // repeat direction
-    enum msrBarLineRepeatDirectionKind {
+    enum class msrBarLineRepeatDirectionKind {
       kBarLineRepeatDirectionNone,
       kBarLineRepeatDirectionForward, kBarLineRepeatDirectionBackward
     };
 
-    static string barLineRepeatDirectionKindAsString (
+    string barLineRepeatDirectionKindAsString (
       msrBarLineRepeatDirectionKind barLineRepeatDirectionKind);
 
     // ending type
-    enum msrBarLineEndingTypeKind {
+    enum class msrBarLineEndingTypeKind {
       kBarLineEndingNone,
 
       kBarLineEndingTypeStart,
@@ -74,11 +74,11 @@ class EXP msrBarLine : public msrMeasureElement
       kBarLineEndingTypeDiscontinue
     };
 
-    static string barLineEndingTypeKindAsString (
+    string barLineEndingTypeKindAsString (
       msrBarLineEndingTypeKind barLineEndingTypeKind);
 
     // category
-    enum msrBarLineCategoryKind {
+    enum class msrBarLineCategoryKind {
       k_NoBarLineCategory,
 
       kBarLineCategoryStandalone,
@@ -89,34 +89,34 @@ class EXP msrBarLine : public msrMeasureElement
       kBarLineCategoryHooklessEndingStart, kBarLineCategoryHooklessEndingEnd
     };
 
-    static string barLineCategoryKindAsString (
+    string barLineCategoryKindAsString (
       msrBarLineCategoryKind barLineCategoryKind);
 
     // segno
-    enum msrBarLineHasSegnoKind {
+    enum class msrBarLineHasSegnoKind {
       kBarLineHasSegnoYes, kBarLineHasSegnoNo
     };
 
-    static string barLineHasSegnoKindAsString (
+    string barLineHasSegnoKindAsString (
       msrBarLineHasSegnoKind barLineHasSegnoKind);
 
     // coda
-    enum msrBarLineHasCodaKind {
+    enum class msrBarLineHasCodaKind {
       kBarLineHasCodaYes, kBarLineHasCodaNo
     };
 
-    static string barLineHasCodaKindAsString (
+    string barLineHasCodaKindAsString (
       msrBarLineHasCodaKind barLineHasCodaKind);
 
     // repeat winged
-    enum msrBarLineRepeatWingedKind {
+    enum class msrBarLineRepeatWingedKind {
       kBarLineRepeatWingedNone,
 
       kBarLineRepeatWingedStraight, kBarLineRepeatWingedCurved,
       kBarLineRepeatWingedDoubleStraight, kBarLineRepeatWingedDoubleCurved
     };
 
-    static string barLineRepeatWingedKindAsString (
+    string barLineRepeatWingedKindAsString (
       msrBarLineRepeatWingedKind barLineRepeatWingedKind);
 
     // creation from MusicXML

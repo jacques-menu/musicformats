@@ -19,7 +19,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-template <typename T> class lpsrBrowser : public browser<T>
+template <typename T> class   lpsrBrowser : public browser<T>
 {
   public:
 

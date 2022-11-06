@@ -71,7 +71,7 @@ void displayBsrScoreShort (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     "Display the BSR as text, short version",
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 }
@@ -116,7 +116,7 @@ void displayBsrScoreFull (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     "Display the BSR as text, full version",
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 }

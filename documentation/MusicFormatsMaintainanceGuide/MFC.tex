@@ -13,7 +13,7 @@
 
 The basic data structure is \class{mfcVersionNumber}:
 \begin{lstlisting}[language=CPlusPlus]
-class mfcVersionNumber: public smartable
+class   mfcVersionNumber: public smartable
 {
 	// ... ... ...
 
@@ -62,7 +62,7 @@ class mfcVersionNumber: public smartable
 
 Each component version is described by a \class{mfcVersionDescr} instance:
 \begin{lstlisting}[language=CPlusPlus]
-class mfcVersionDescr : public smartable
+class   mfcVersionDescr : public smartable
 {
 	// ... ... ...
 
@@ -84,7 +84,7 @@ class mfcVersionDescr : public smartable
 
 An instance of \className{mfcVersionsHistory} is essentially a list of \className{mfcVersionsHistory} instances:
 \begin{lstlisting}[language=CPlusPlus]
-class mfcVersionsHistory : public smartable
+class   mfcVersionsHistory : public smartable
 {
 	// ... ... ...
 
@@ -142,9 +142,9 @@ enum class mfcComponenKind {
 };
 \end{lstlisting}
 
-The \purelyVirtualClass{mfcComponent} is a superclass to the ones describing formats, passes, generators, converters and the \mf\ library itself:
+The \purelyVirtualClass{mfcComponent} is a superclass  to the ones describing formats, passes, generators, converters and the \mf\ library itself:
 \begin{lstlisting}[language=CPlusPlus]
-class mfcComponent : public smartable
+class   mfcComponent : public smartable
 {
 	// ... ... ...
 
@@ -203,7 +203,7 @@ Representations and passes have a single, linear history, whereas the generators
 \begin{itemize}
 \item \class{mfcRepresentationComponent} for formats;
 \item \class{mfcPassComponent} for passes;
-\item \purelyVirtualClass{mfcMultiComponent} for the generators, converters and \mf\ library, itself the superclass of:
+\item \purelyVirtualClass{mfcMultiComponent} for the generators, converters and \mf\ library, itself the superclass  of:
 
 
 \begin{itemize}
@@ -224,7 +224,7 @@ Multi-components have their own history, hence field \method{mfcComponent}{print
 
 \Class{mfcMultiComponent} contains lists of the formats and passes used:
 \begin{lstlisting}[language=CPlusPlus]
-class mfcMultiComponent : public mfcComponent
+class   mfcMultiComponent : public mfcComponent
 {
 	// ... ... ...
 
@@ -570,7 +570,7 @@ S_mfcLibraryComponent EXP createLibraryComponent ()
           mfcVersionNumber::createFromString ("0.9.53"),
           "October 22, 2021",
           list<string> {
-            "Replaced bool by class Bool in variables and fields",
+            "Replaced bool by class   Bool in variables and fields",
             "Created MFC (MusicFormats components)"
           }
       ));
@@ -716,7 +716,7 @@ Usage: xml2xml [[option]* [MusicXMLFile|-] [[option]*
 
 The overriden \methodName{initializeHandlerMultiComponent} methods merely get the atom or compound versions to assign it to \field{oahHandler}{fHandlerMultiComponent}.
 
-For example, for \fileName{Mikrokosmos3Wandering}, the compound versions is simply set in the corresponding \insider\ class \className{Mikrokosmos3WanderingInsiderHandler}:
+For example, for \fileName{Mikrokosmos3Wandering}, the compound versions is simply set in the corresponding \insider\ class   \className{Mikrokosmos3WanderingInsiderHandler}:
 \begin{lstlisting}[language=CPlusPlus]
 void Mikrokosmos3WanderingInsiderHandler::initializeHandlerMultiComponent ()
 {
@@ -1002,7 +1002,7 @@ lpsrScore::lpsrScore (
         lpsrComment::create (
           inputLineNumber,
           s.str (),
-          lpsrComment::kGapAfterwardsNo);
+          lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
     }
 
 	 	// ... ... ... ...

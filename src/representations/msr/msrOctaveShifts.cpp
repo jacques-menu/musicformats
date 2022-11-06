@@ -115,29 +115,36 @@ void msrOctaveShift::acceptOut (basevisitor* v)
 void msrOctaveShift::browseData (basevisitor* v)
 {}
 
-string msrOctaveShift::octaveShiftKindAsString () const
+string msrOctaveShiftKindAsString (
+  msrOctaveShiftKind octaveShiftKind) const
 {
   string result;
 
-  switch (fOctaveShiftKind) {
-    case msrOctaveShift::kOctaveShiftNone:
-      result = "octaveShiftNone";
+  switch (octaveShiftKind) {
+    case msrOctaveShiftKind::kOctaveShiftNone:
+      result = "kOctaveShiftNone";
       break;
-    case msrOctaveShift::kOctaveShiftUp:
-      result = "octaveShiftUp";
+    case msrOctaveShiftKind::kOctaveShiftUp:
+      result = "kOctaveShiftUp";
       break;
-    case msrOctaveShift::kOctaveShiftDown:
-      result = "octaveShiftDown";
+    case msrOctaveShiftKind::kOctaveShiftDown:
+      result = "kOctaveShiftDown";
       break;
-    case msrOctaveShift::kOctaveShiftStop:
-      result = "octaveShiftStop";
+    case msrOctaveShiftKind::kOctaveShiftStop:
+      result = "kOctaveShiftStop";
       break;
-    case msrOctaveShift::kOctaveShiftContinue:
-      result = "octaveShiftContinue";
+    case msrOctaveShiftKind::kOctaveShiftContinue:
+      result = "kOctaveShiftContinue";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrOctaveShiftKind& elt)
+{
+  os << msrOctaveShiftKindAsString (elt);
+  return os;
 }
 
 string msrOctaveShift::asString () const
@@ -147,24 +154,17 @@ string msrOctaveShift::asString () const
   stringstream s;
 
   s <<
-    "OctaveShift" <<
-    ", kind: " << octaveShiftKindAsString () <<
-    ", size: " << fOctaveShiftSize;
+    "[OctaveShift" <<
+    ", fOctaveShiftKind: " << fOctaveShiftKind <<
+    ", fOctaveShiftSize: " << fOctaveShiftSize <<
+    ']';
 
   return s.str ();
 }
 
 void msrOctaveShift::print (ostream& os) const
 {
-  ++gIndenter;
-
-  os <<
-    "OctaveShift" <<
-    ", kind: " << octaveShiftKindAsString () <<
-    ", size: " << fOctaveShiftSize <<
-    endl;
-
-  --gIndenter;
+  os << asString () << endl;
 }
 
 ostream& operator << (ostream& os, const S_msrOctaveShift& elt)

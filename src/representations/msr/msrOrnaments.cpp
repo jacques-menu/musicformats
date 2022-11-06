@@ -99,7 +99,7 @@ void msrOrnament::acceptOut (basevisitor* v)
 void msrOrnament::browseData (basevisitor* v)
 {}
 
-string ornamentKindAsString (
+string msrOrnamentKindAsString (
   msrOrnamentKind ornamentKind)
 {
   string result;
@@ -148,15 +148,21 @@ string ornamentKindAsString (
   return result;
 }
 
+ostream& operator << (ostream& os, const msrOrnamentKind& elt)
+{
+  os << msrOrnamentKindAsString (elt);
+  return os;
+}
+
 string msrOrnament::asString () const
 {
   stringstream s;
 
   s <<
     "[Ornament" <<
-    ", fOrnamentPlacementKind: " << placementKindAsString (fOrnamentPlacementKind)  <<
+    ", fOrnamentPlacementKind: " << msrPlacementKindAsString (fOrnamentPlacementKind)  <<
     ", fOrnamentPlacementKind: " <<
-    placementKindAsString (fOrnamentPlacementKind) <<
+    msrPlacementKindAsString (fOrnamentPlacementKind) <<
     ", fOrnamentAccidentalKind: " <<
     msrAccidentalKindAsString (fOrnamentAccidentalKind) <<
     ']';
@@ -169,7 +175,7 @@ void msrOrnament::print (ostream& os) const
 {
   os <<
     "[Ornament" <<
-    ", " << placementKindAsString (fOrnamentPlacementKind)  <<
+    ", " << msrPlacementKindAsString (fOrnamentPlacementKind)  <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -180,7 +186,7 @@ void msrOrnament::print (ostream& os) const
   os <<
     setw (fieldWidth) <<
     "fOrnamentPlacementKind" << " : " <<
-    placementKindAsString (fOrnamentPlacementKind) <<
+    msrPlacementKindAsString (fOrnamentPlacementKind) <<
     endl <<
     setw (fieldWidth) <<
     "fOrnamentAccidentalKind" << " : " <<

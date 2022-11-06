@@ -165,7 +165,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   // is originalClefName in the replace clef map?
   msrClefKind
     originalClefKind =
-      clefKindFromString (
+      msrClefKindFromString (
         K_NO_INPUT_LINE_NUMBER,
         originalClefName);
 
@@ -189,7 +189,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   else {
     msrClefKind
       destinationClefKind =
-        clefKindFromString (
+        msrClefKindFromString (
           K_NO_INPUT_LINE_NUMBER,
           destinationClefName);
 

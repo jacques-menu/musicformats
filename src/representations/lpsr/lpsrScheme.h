@@ -25,29 +25,32 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class lpsrCommentedKind {
+  kCommentedYes, kCommentedNo
+};
+
+string lpsrCommentedKindAsString (
+  lpsrCommentedKind commentedKind);
+
+ostream& operator << (ostream& os, const lpsrCommentedKind& elt);
+
+enum class lpsrEndOfLineKind {
+  kEndOfLineNone, kEndOfLineOnce, kEndOfLineTwice
+};
+
+string lpsrEndOfLineKindAsString (
+  lpsrEndOfLineKind endOfLineKind);
+
+ostream& operator << (ostream& os, const lpsrEndOfLineKind& elt);
+
+string const g_SchemeVariableNoUnit;
+string const g_SchemeVariableNoComment;
+
 class EXP lpsrSchemeVariable : public lpsrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum lpsrCommentedKind {
-      kCommentedYes, kCommentedNo
-    };
-
-    static string commentedKindAsString (
-      lpsrCommentedKind commentedKind);
-
-    enum lpsrEndlKind {
-      kEndlNone, kEndlOnce, kEndlTwice
-    };
-
-    static string endlKindAsString (
-      lpsrEndlKind endlKind);
-
-    static string const g_SchemeVariableNoUnit;
-    static string const g_SchemeVariableNoComment;
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -58,7 +61,7 @@ class EXP lpsrSchemeVariable : public lpsrElement
                             const string&     variableName,
                             const string&     value,
                             const string&     comment,
-                            lpsrEndlKind      endlKind);
+                            lpsrEndOfLineKind endOfLineKind);
 
   protected:
 
@@ -71,7 +74,7 @@ class EXP lpsrSchemeVariable : public lpsrElement
                             const string&     variableName,
                             const string&     value,
                             const string&     comment,
-                            lpsrEndlKind      endlKind);
+                            lpsrEndOfLineKind endOfLineKind);
 
     virtual               ~lpsrSchemeVariable ();
 
@@ -92,8 +95,8 @@ class EXP lpsrSchemeVariable : public lpsrElement
     string                getComment  () const
                               { return fComment; }
 
-    lpsrEndlKind          getEndlKind () const
-                              { return fEndlKind; }
+    lpsrEndOfLineKind          getEndOfLineKind () const
+                              { return fEndOfLineKind; }
 
   public:
 
@@ -129,7 +132,7 @@ class EXP lpsrSchemeVariable : public lpsrElement
 
     string                fComment;
 
-    lpsrEndlKind          fEndlKind;
+    lpsrEndOfLineKind          fEndOfLineKind;
 
 };
 typedef SMARTP<lpsrSchemeVariable> S_lpsrSchemeVariable;

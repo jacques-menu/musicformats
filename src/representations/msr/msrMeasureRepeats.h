@@ -12,13 +12,13 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class msrMeasureRepeat;
+class   msrMeasureRepeat;
 typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
 
-class msrVoice;
+class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
 
-class msrSegment;
+class   msrSegment;
 typedef SMARTP<msrSegment> S_msrSegment;
 
 //______________________________________________________________________________
@@ -206,22 +206,22 @@ class EXP msrMeasureRepeat : public msrSegmentElement
     // data types
     // ------------------------------------------------------
 
-    enum msrMeasureRepeatKind {
+    enum class msrMeasureRepeatKind {
       k_NoMeasureRepeat,
       kStartMeasureRepeat, kStopMeasureRepeat
     };
 
-    static string measureRepeatKindAsString (
+    string measureRepeatKindAsString (
       msrMeasureRepeatKind measureRepeatKind);
 
-    enum msrMeasureRepeatBuildPhaseKind {
+    enum class msrMeasureRepeatBuildPhaseKind {
       kMeasureRepeatBuildPhaseJustCreated,
       kMeasureRepeatBuildPhaseInPattern,
       kMeasureRepeatBuildPhaseInReplicas,
       kMeasureRepeatBuildPhaseCompleted
     };
 
-    static string measureRepeatBuildPhaseKindAsString (
+    string measureRepeatBuildPhaseKindAsString (
       msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind);
 
     // creation from MusicXML

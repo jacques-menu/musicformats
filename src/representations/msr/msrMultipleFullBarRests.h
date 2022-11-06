@@ -10,7 +10,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrSegment;
+class   msrSegment;
 typedef SMARTP<msrSegment> S_msrSegment;
 
 //______________________________________________________________________________
@@ -21,12 +21,12 @@ class EXP msrMultipleFullBarRests : public msrSegmentElement
     // data types
     // ------------------------------------------------------
 
-    enum msrMultipleFullBarRestsKind { // unused ??? JMI
+    enum class msrMultipleFullBarRestsKind { // unused ??? JMI
       k_NoMultipleFullBarRests,
       kStartMultipleFullBarRests, kStopMultipleFullBarRests
     };
 
-    static string multipleFullBarRestsKindAsString (
+    string multipleFullBarRestsKindAsString (
       msrMultipleFullBarRestsKind multipleFullBarRestsKind);
 
     // creation from MusicXML

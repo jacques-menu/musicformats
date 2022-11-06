@@ -41,7 +41,7 @@ enum class oahElementValueKind {
   kElementValueOptional   // i.e. -name-help, -name-help=cpu
 };
 
-string elementValueKindAsString (
+string oahElementValueKindAsString (
   oahElementValueKind elementValueKind);
 
 ostream& operator << (ostream& os, oahElementValueKind& elt);
@@ -53,7 +53,7 @@ enum class oahElementVisibilityKind {
   kElementVisibilityHidden
 };
 
-string elementVisibilityKindAsString (
+string oahElementVisibilityKindAsString (
   oahElementVisibilityKind elementVisibilityKind);
 
 ostream& operator << (ostream& os, oahElementVisibilityKind& elt);
@@ -63,7 +63,7 @@ enum class oahElementHelpOnlyKind {
   kElementHelpOnlyNo
 };
 
-string elementHelpOnlyKindAsString (
+string oahElementHelpOnlyKindAsString (
   oahElementHelpOnlyKind elementHelpOnlyKind);
 
 ostream& operator << (ostream& os, oahElementHelpOnlyKind& elt);
@@ -78,7 +78,7 @@ ostream& operator << (ostream& os, oahElementHelpOnlyKind& elt);
     - first is the string that has been found
     - second is the description of the oahElement in which it has been found
 */
-class oahFindStringMatch : public smartable
+class   oahFindStringMatch : public smartable
 {
   public:
 
@@ -153,7 +153,7 @@ class EXP oahFindableElement : public smartable
     // creation from MusicXML
     // ------------------------------------------------------
 
-/* this class is purely virtual
+/* this class   is purely virtual
     static SMARTP<oahFindableElement> create ();
 */
 
@@ -208,14 +208,14 @@ EXP ostream& operator << (ostream& os, const oahFindableElement& elt);
 */
 
 // PRE-declarations for classes mutual dependencies
-class oahElement;
+class   oahElement;
 typedef SMARTP<oahElement> S_oahElement;
 
 class EXP oahElement : public oahFindableElement
 {
   public:
 
-/* this class is purely virtual
+/* this class   is purely virtual
     // creation
     // ------------------------------------------------------
 
@@ -389,7 +389,7 @@ EXP ostream& operator << (ostream& os, const oahElement& elt);
 /*
 Because the set needs a comparison functor to work with. If you don't specify one, it will make a default-constructed one. In this case, since you're using a function-pointer type, the default-constructed one will be a null pointer, which can't be called; so instead, you have to provide the correct function pointer at run time.
 
-A better approach might be to use a function class type (a.k.a. functor type); then the function call can be resolved at compile time, and a default-constructed object will do the right thing.
+A better approach might be to use a function class   type (a.k.a. functor type); then the function call can be resolved at compile time, and a default-constructed object will do the right thing.
 */
 
 struct compareOahElements {

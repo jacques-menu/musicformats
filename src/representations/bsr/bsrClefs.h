@@ -9,33 +9,34 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class bsrClefKind {
+  kClefKindNone,
+
+  kClefKindGTreble,
+  kClefKindFBass,
+  kClefKindCAlto,
+  kClefKindGSoprano, // first line, french violin
+  kClefKindCBaritone,
+  kClefKindCTenor,
+  kClefKindGOttavaAlta,
+  kClefKindGOttavaBassa,
+  kClefKindModifiedBassForRightHandPart,
+  kClefKindModifiedTrebleForLeftHandPart
+};
+
+string bsrClefKindAsString (
+  bsrClefKind clefKind);
+
+string bsrClefKindAsDebugString (
+  bsrClefKind clefKind);
+
+ostream& operator << (ostream& os, const bsrClefKind& elt);
+
 class EXP bsrClef : public bsrLineContentsElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum bsrClefKind {
-      kClefKindNone,
-
-      kClefKindGTreble,
-      kClefKindFBass,
-      kClefKindCAlto,
-      kClefKindGSoprano, // first line, french violin
-      kClefKindCBaritone,
-      kClefKindCTenor,
-      kClefKindGOttavaAlta,
-      kClefKindGOttavaBassa,
-      kClefKindModifiedBassForRightHandPart,
-      kClefKindModifiedTrebleForLeftHandPart
-    };
-
-    static string msrClefKindAsString (
-      bsrClefKind clefKind);
-
-    static string clefKindAsDebugString (
-      bsrClefKind clefKind);
 
     // creation
     // ------------------------------------------------------

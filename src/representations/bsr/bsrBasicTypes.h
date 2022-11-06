@@ -739,7 +739,7 @@ char \X7F (   4567 )  # 127  ^?  delete
 
 //______________________________________________________________________________
 /*
-enum bsrCellKind2 {
+enum class bsrCellKind2 {
   // lower decimal digits
   kCellLower1, // bsrCellKind::kDots2,
   kCellLower2, // bsrCellKind::kDots23,

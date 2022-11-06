@@ -408,7 +408,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                     bsrNumber::create (
                       fInputLineNumber,
                       beatsNumberToBeUsed,
-                      bsrNumber::kNumberSignIsNeededYes);
+                      bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
                 // append it to result
                 result->appendCellsListToCellsList (
@@ -587,7 +587,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                     bsrNumber::create (
                       fInputLineNumber,
                       timeSignatureBeatsNumbersVector [0],
-                      bsrNumber::kNumberSignIsNeededYes);
+                      bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
                 // append it to result
                 result->appendCellsListToCellsList (

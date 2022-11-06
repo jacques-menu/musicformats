@@ -25,7 +25,7 @@ namespace MusicFormats
 /*
   Various elements can found in segments,
   i.e. measures and some kind of repeated measures,
-  hence class msrSegmentElement
+  hence class   msrSegmentElement
 */
 
 class EXP msrSegmentElement : public msrElement

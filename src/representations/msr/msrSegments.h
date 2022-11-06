@@ -22,58 +22,58 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrStaff;
+class   msrStaff;
 typedef SMARTP<msrStaff> S_msrStaff;
 
-class msrPart;
+class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;
 
-class msrPartGroup;
+class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 
-class msrScore;
+class   msrScore;
 typedef SMARTP<msrScore> S_msrScore;
 
-class msrPart;
+class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;
 
-class msrPrintLayout;
+class   msrPrintLayout;
 typedef SMARTP<msrPrintLayout> S_msrPrintLayout;
 
-class msrTimeSignature;
+class   msrTimeSignature;
 typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
 
-class msrChord;
+class   msrChord;
 typedef SMARTP<msrChord> S_msrChord;
 
-class msrTuplet;
+class   msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
 
-class msrTransposition;
+class   msrTransposition;
 typedef SMARTP<msrTransposition> S_msrTransposition;
 
-class msrStaffDetails;
+class   msrStaffDetails;
 typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
 
-class msrOctaveShift;
+class   msrOctaveShift;
 typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
 
-class msrHarmony;
+class   msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 
-class msrFiguredBass;
+class   msrFiguredBass;
 typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 
-class msrVoiceStaffChange;
+class   msrVoiceStaffChange;
 typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
 
-class msrVoice;
+class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
 
-class msrDoubleTremolo;
+class   msrDoubleTremolo;
 typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
 
-class msrSegno;
+class   msrSegno;
 typedef SMARTP<msrSegno> S_msrSegno;
 
 //______________________________________________________________________________

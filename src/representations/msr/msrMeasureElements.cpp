@@ -51,8 +51,6 @@ msrMeasureElement::msrMeasureElement (
 
   fMeasureElementSoundingWholeNotes = Rational (0, 1),
 
-  fetchMeasureElementMeasureNumber () = K_NO_MEASURE_NUMBER;
-
   fMeasureElementMeasurePosition = msrMoment::K_NO_POSITION;
   fMeasureElementVoicePosition   = msrMoment::K_NO_POSITION;
 }

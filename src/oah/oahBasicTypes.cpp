@@ -399,7 +399,7 @@ EXP void displayStringPairVector (
 // }
 
 //______________________________________________________________________________
-string optionOrArgumentKindAsString (
+string oahOptionOrArgumentKindAsString (
   oahOptionOrArgumentKind optionOrArgumentKind)
 {
   string result;
@@ -458,7 +458,7 @@ void oahOptionOrArgument::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fOptionOrArgumentKind" << " : " <<
-    optionOrArgumentKindAsString (
+    oahOptionOrArgumentKindAsString (
       fOptionOrArgumentKind) <<
     endl <<
 
@@ -1203,7 +1203,7 @@ ostream& operator << (ostream& os, const S_oahPrefix& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_oahAtom oahAtom::create (
   const string&       longName,
   const string&       shortName,
@@ -1434,7 +1434,7 @@ void oahAtom::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) << "elementHelpOnlyKind" << " : " <<
-    elementHelpOnlyKindAsString (fElementHelpOnlyKind) <<
+    oahElementHelpOnlyKindAsString (fElementHelpOnlyKind) <<
     endl;
 
   --gIndenter;
@@ -1507,7 +1507,7 @@ ostream& operator << (ostream& os, const S_oahAtom& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_oahAtomExpectingAValue oahAtomExpectingAValue::create (
   const string& longName,
   const string& shortName,
@@ -1668,7 +1668,7 @@ ostream& operator << (ostream& os, const S_oahAtomExpectingAValue& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_oahAtomImplicitlyStoringAValue oahAtomImplicitlyStoringAValue::create (
   const string& longName,
   const string& shortName,
@@ -1895,7 +1895,7 @@ ostream& operator << (ostream& os, const S_oahAtomImplicitlyStoringAValue& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_oahAtomStoringAValue oahAtomStoringAValue::create (
   const string& longName,
   const string& shortName,
@@ -2123,7 +2123,7 @@ ostream& operator << (ostream& os, const S_oahAtomStoringAValue& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_oahPureHelpAtomWithoutAValue oahPureHelpAtomWithoutAValue::create (
   const string& longName,
   const string& shortName,
@@ -2260,7 +2260,7 @@ ostream& operator << (ostream& os, const S_oahPureHelpAtomWithoutAValue& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_oahPureHelpAtomExpectingAValue oahPureHelpAtomExpectingAValue::create (
   const string& longName,
   const string& shortName,
@@ -2765,7 +2765,7 @@ void oahSubGroup::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "elementVisibilityKind" << " : " <<
-      elementVisibilityKindAsString (
+      oahElementVisibilityKindAsString (
         fElementVisibilityKind) <<
     endl << endl;
 
@@ -4402,7 +4402,7 @@ int oahHandler::pIncludeFilesMaximumLevel = 10;
 
 // int            getIncludeFilesMaximumLevel ();
 
-/* this class is purely virtual
+/* this class   is purely virtual
 S_oahHandler oahHandler::create (
 	const string& serviceName,
 	const string& handlerHeader,
@@ -6958,7 +6958,7 @@ void oahHandler::checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
       oahOptionalValuesStyleKindAsString (
         fHandlerOptionalValuesStyleKind) <<
       ", fElementValueKind: " <<
-      elementValueKindAsString (
+      oahElementValueKindAsString (
         fElementValueKind) <<
       endl;
   }
@@ -8094,7 +8094,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "Result oahElementHelpOnlyKind: " <<
-      elementHelpOnlyKindAsString (result) <<
+      oahElementHelpOnlyKindAsString (result) <<
       endl;
   }
 #endif
@@ -8105,7 +8105,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsFromOptionsAndArguments (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     optionsPassDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
@@ -8200,7 +8200,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
   if (gGlobalOahEarlyOptions.getEarlyTracingOahDetails ()) {
     gLogStream <<
       "result oahElementHelpOnlyKind: " <<
-      elementHelpOnlyKindAsString (result) <<
+      oahElementHelpOnlyKindAsString (result) <<
       endl;
   }
 #endif
@@ -8211,7 +8211,7 @@ oahElementHelpOnlyKind oahHandler::handleOptionsAndArgumentsFromArgcArgv (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     optionsAndArgumentsPassDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
@@ -8569,7 +8569,7 @@ oahElementHelpOnlyKind oahHandler::applyOptionsFromElementUsesList ()
 
         gLogStream <<
           "Its atomValueExpectedKind is '" <<
-          elementValueKindAsString (atomValueExpectedKind) <<
+          oahElementValueKindAsString (atomValueExpectedKind) <<
           "'" <<
           endl;
   }

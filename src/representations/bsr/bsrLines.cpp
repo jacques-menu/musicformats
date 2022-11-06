@@ -115,14 +115,14 @@ void bsrLine::appendLineElementToLine (S_bsrLineContentsElement lineElement)
     lineContentsToAppendTo =
       bsrLineContents::create (
         lineElement->getInputLineNumber (),
-        bsrLineContents::kLineContentsRegular);
+        bsrLineContentsKind::kLineContentsRegular);
 
     // set lineElement's spacesAfter value if needed
     switch (lineContentsToAppendTo->getLineContentsKind ()) {
-      case bsrLineContents::kLineContentsRegular:
+      case bsrLineContentsKind::kLineContentsRegular:
         // leave it as 0
         break;
-      case bsrLineContents::kLineContentsContinuation:
+      case bsrLineContentsKind::kLineContentsContinuation:
     // JMI    lineElement->setSpacesBefore (2);
         break;
     } // switch
@@ -162,7 +162,7 @@ void bsrLine::insertElementBeforeLastElementOfLine (
     lineContentsToAppendTo =
       bsrLineContents::create (
         lineElement->getInputLineNumber (),
-        bsrLineContents::kLineContentsRegular);
+        bsrLineContentsKind::kLineContentsRegular);
 
     // append it to the line contents list
     fLineContentsList.push_back (lineContentsToAppendTo);
@@ -291,14 +291,14 @@ void bsrLine::appendLineElementToLastMeasureOfLine (
     lineContentsToAppendTo =
       bsrLineContents::create (
         lineElement->getInputLineNumber (),
-        bsrLineContents::kLineContentsRegular);
+        bsrLineContentsKind::kLineContentsRegular);
 
     // set lineElement's spacesAfter value if needed
     switch (lineContentsToAppendTo->getLineContentsKind ()) {
-      case bsrLineContents::kLineContentsRegular:
+      case bsrLineContentsKind::kLineContentsRegular:
         // leave it as 0
         break;
-      case bsrLineContents::kLineContentsContinuation:
+      case bsrLineContentsKind::kLineContentsContinuation:
     // JMI    lineElement->setSpacesBefore (2);
         break;
     } // switch
@@ -357,7 +357,7 @@ S_bsrCellsList bsrLine::buildLineNumberCellsList () const
         bsrNumber::create (
           fInputLineNumber,
           fPrintLineNumber,
-          bsrNumber::kNumberSignIsNeededYes);
+          bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
     // append it to result
     result->
@@ -372,7 +372,7 @@ S_bsrCellsList bsrLine::buildLineNumberCellsList () const
           bsrNumber::create (
             fInputLineNumber,
             fBrailleLineNumber,
-            bsrNumber::kNumberSignIsNeededYes);
+            bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
       // append it to result
       result->

@@ -30,7 +30,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string noteOctaveKindAsString (
+string bsrNoteOctaveKindAsString (
   bsrNoteOctaveKind noteOctaveKind)
 {
   string result;
@@ -51,7 +51,7 @@ string noteOctaveKindAsString (
   return result;
 }
 
-string noteOctaveKindAsDebugString (
+string bsrNoteOctaveKindAsDebugString (
   bsrNoteOctaveKind noteOctaveKind)
 {
   string result;
@@ -70,6 +70,12 @@ string noteOctaveKindAsDebugString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const bsrNoteOctaveKind& elt)
+{
+  os << bsrNoteOctaveKindAsString (elt);
+  return os;
 }
 
 S_bsrCellsList noteOctaveKindAsCellsList (
@@ -457,7 +463,7 @@ S_bsrCellsList noteValueKindAsCellsList (
   return result;
 }
 
-bsrNoteValueSizeKind noteValueSizeKindFromNoteValueKind (
+bsrNoteValueSizeKind bsrNoteValueSizeKindFromNoteValueKind (
   bsrNoteValueKind noteValueKind)
 {
   bsrNoteValueSizeKind
@@ -818,7 +824,7 @@ S_bsrCellsList bsrNote::buildCellsList () const
     result->appendCellsListToCellsList (
       noteValueSizeKindAsCellsList (
         fInputLineNumber,
-        noteValueSizeKindFromNoteValueKind (
+        bsrNoteValueSizeKindFromNoteValueKind (
           fNoteValueKind)));
   }
 
@@ -913,7 +919,7 @@ void bsrNote::acceptOut (basevisitor* v)
 void bsrNote::browseData (basevisitor* v)
 {}
 
-string noteValueKindAsString (
+string bsrNoteValueKindAsString (
   bsrNoteValueKind noteValueKind)
 {
   string result;
@@ -1013,7 +1019,7 @@ string noteValueKindAsString (
   return result;
 }
 
-string noteValueKindAsDebugString (
+string bsrNoteValueKindAsDebugString (
   bsrNoteValueKind noteValueKind)
 {
   string result;
@@ -1113,7 +1119,13 @@ string noteValueKindAsDebugString (
   return result;
 }
 
-string noteValueSizeKindAsString (
+ostream& operator << (ostream& os, const bsrNoteValueKind& elt)
+{
+  os << bsrNoteValueKindAsString (elt);
+  return os;
+}
+
+string bsrNoteValueSizeKindAsString (
   bsrNoteValueSizeKind noteValueSizeKind)
 {
   string result;
@@ -1133,7 +1145,13 @@ string noteValueSizeKindAsString (
   return result;
 }
 
-string noteOctaveIsNeededAsString (
+ostream& operator << (ostream& os, const bsrNoteValueSizeKind& elt)
+{
+  os << bsrNoteValueSizeKindAsString (elt);
+  return os;
+}
+
+string bsrNoteOctaveIsNeededAsString (
   bsrNoteOctaveIsNeeded noteOctaveIsNeeded)
 {
   string result;
@@ -1150,7 +1168,13 @@ string noteOctaveIsNeededAsString (
   return result;
 }
 
-string msrAccidentalKindAsString (
+ostream& operator << (ostream& os, const bsrNoteOctaveIsNeeded& elt)
+{
+  os << bsrNoteOctaveIsNeededAsString (elt);
+  return os;
+}
+
+string bsrAccidentalKindAsString (
   bsrAccidentalKind accidentalKind)
 {
   string result;
@@ -1196,7 +1220,7 @@ string msrAccidentalKindAsString (
   return result;
 }
 
-string bsrNote::accidentalKindAsDebugString (
+string bsrAccidentalKindAsDebugString (
   bsrAccidentalKind accidentalKind)
 {
   string result;
@@ -1242,26 +1266,27 @@ string bsrNote::accidentalKindAsDebugString (
   return result;
 }
 
+ostream& operator << (ostream& os, const bsrAccidentalKind& elt)
+{
+  os << bsrAccidentalKindAsString (elt);
+  return os;
+}
+
 string bsrNote::asString () const
 {
   stringstream s;
 
   s <<
     "Note" <<
-    ", noteValue: " <<
-    noteValueKindAsString (fNoteValueKind) <<
-    ", noteDotsNumber: " << fNoteDotsNumber <<
-    ", noteOctaveKind: " <<
-    noteOctaveKindAsString (fNoteOctaveKind) <<
-    ", noteValueSizeIsNeeded: " <<
-    fNoteValueSizeIsNeeded <<
-    ", noteOctaveIsNeeded: " <<
-    noteOctaveIsNeededAsString (fNoteOctaveIsNeeded) <<
-    ", msrAccidentalKindAsString: " <<
-    msrAccidentalKindAsString (fAccidentalKind) <<
+    ", fNoteValueKind: " << fNoteValueKind <<
+    ", fNoteDotsNumber: " << fNoteDotsNumber <<
+    ", fNoteOctaveKind: " << fNoteOctaveKind <<
+    ", fNoteValueSizeIsNeeded: " << fNoteValueSizeIsNeeded <<
+    ", fNoteOctaveIsNeeded: " << fNoteOctaveIsNeeded <<
+    ", fAccidentalKind: " << fAccidentalKind <<
     ", cellsList (): " <<
     buildCellsList ()->asShortString () <<
-    ", spacesBefore: " << fSpacesBefore <<
+    ", fSpacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
   return s.str ();
@@ -1273,20 +1298,15 @@ string bsrNote::asShortString () const // finalize this JMI
 
   s <<
     "Note" <<
-    ", noteValue: " <<
-    noteValueKindAsString (fNoteValueKind) <<
-    ", noteDotsNumber: " << fNoteDotsNumber <<
-    ", noteOctaveKind: " <<
-    noteOctaveKindAsString (fNoteOctaveKind) <<
-    ", noteValueSizeIsNeeded: " <<
-    fNoteValueSizeIsNeeded <<
-    ", noteOctaveIsNeeded: " <<
-    noteOctaveIsNeededAsString (fNoteOctaveIsNeeded) <<
-    ", msrAccidentalKindAsString: " <<
-    msrAccidentalKindAsString (fAccidentalKind) <<
+    ", fNoteValueKind: " << fNoteValueKind <<
+    ", fNoteDotsNumber: " << fNoteDotsNumber <<
+    ", fNoteOctaveKind: " << fNoteOctaveKind <<
+    ", fNoteValueSizeIsNeeded: " <<fNoteValueSizeIsNeeded <<
+    ", fNoteOctaveIsNeeded: " <<fNoteOctaveIsNeeded <<
+    ", fAccidentalKind: " <<fAccidentalKind <<
     ", cellsList (): " <<
     buildCellsList ()->asShortString () <<
-    ", spacesBefore: " << fSpacesBefore <<
+    ", fSpacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
 
   return s.str ();
@@ -1299,15 +1319,15 @@ string bsrNote::asDebugString () const
   switch (fNoteOctaveIsNeeded) {
     case bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededYes:
       s <<
-        noteOctaveKindAsDebugString (fNoteOctaveKind);
+        bsrNoteOctaveKindAsDebugString (fNoteOctaveKind);
       break;
     case bsrNoteOctaveIsNeeded::kNoteOctaveIsNeededNo:
       break;
   } // switch
 
   s <<
-    noteValueKindAsDebugString (fNoteValueKind) <<
-    accidentalKindAsDebugString (fAccidentalKind);
+    bsrNoteValueKindAsDebugString (fNoteValueKind) <<
+    bsrAccidentalKindAsDebugString (fAccidentalKind);
 
   for (int i = 1; i <= fNoteDotsNumber; ++i) {
     s << ".";
@@ -1329,34 +1349,29 @@ void bsrNote::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "noteValue" << " : " <<
-    noteValueKindAsString (fNoteValueKind) <<
+    "fNoteValueKind" << " : " << fNoteValueKind <<
     endl <<
     setw (fieldWidth) <<
-    "noteDotsNumber" << " : " << fNoteDotsNumber <<
+    "fNoteDotsNumber" << " : " << fNoteDotsNumber <<
     endl <<
     setw (fieldWidth) <<
-    "noteOctaveKind" << " : " <<
-    noteOctaveKindAsString (fNoteOctaveKind) <<
+    "fNoteOctaveKind" << " : " <<  fNoteOctaveKind <<
     endl <<
     setw (fieldWidth) <<
-    "noteValueSizeIsNeeded" << " : " <<
-    fNoteValueSizeIsNeeded <<
+    "fNoteValueSizeIsNeeded" << " : " << fNoteValueSizeIsNeeded <<
     endl <<
     setw (fieldWidth) <<
-    "noteOctaveIsNeeded" << " : " <<
-    noteOctaveIsNeededAsString (fNoteOctaveIsNeeded) <<
+    "fNoteOctaveIsNeeded" << " : " << fNoteOctaveIsNeeded <<
     endl <<
     setw (fieldWidth) <<
-    "accidentalKind" << " : " <<
-    msrAccidentalKindAsString (fAccidentalKind) <<
+    "fAccidentalKind" << " : " << fAccidentalKind <<
     endl <<
     setw (fieldWidth) <<
     "cellsList" << " : " <<
     buildCellsList ()->asShortString () <<
     endl <<
     setw (fieldWidth) <<
-    "spacesBefore" << " : " << fSpacesBefore <<
+    "fSpacesBefore" << " : " << fSpacesBefore <<
     endl;
 
   --gIndenter;
@@ -1370,7 +1385,7 @@ ostream& operator << (ostream& os, const S_bsrNote& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

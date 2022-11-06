@@ -23,7 +23,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 /*
   Parts and part groups can be found in part groups,
-  hence class msrPartGroupElement
+  hence class   msrPartGroupElement
 */
 
 class EXP msrPartGroupElement : public msrElement
@@ -37,7 +37,7 @@ class EXP msrPartGroupElement : public msrElement
     // creation from MusicXML
     // ------------------------------------------------------
 
-/* this class is purely virtual
+/* this class   is purely virtual
     static SMARTP<msrPartGroupElement> create (
                             int inputLineNumber);
 */

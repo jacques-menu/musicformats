@@ -43,11 +43,11 @@ class EXP mfTimingItemsList {
 
     // add an item
     void                  appendTimingItem (
-                            string                     activity,
-                            string                     description,
-                            mfTimingItem::timingItemKind kind,
-                            clock_t                    startClock,
-                            clock_t                    endClock);
+                            string           activity,
+                            string           description,
+                            mfTimingItemKind kind,
+                            clock_t          startClock,
+                            clock_t          endClock);
 
 	// ... ... ...
 }
@@ -117,7 +117,7 @@ S_lpsrScore translateMsrToLpsr (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 \end{lstlisting}

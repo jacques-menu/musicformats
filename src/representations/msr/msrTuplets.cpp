@@ -246,7 +246,7 @@ S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
   return result;
 }
 
-string tupletTypeKindAsString (
+string msrTupletTypeKindAsString (
   msrTupletTypeKind tupletTypeKind)
 {
   string result;
@@ -272,7 +272,13 @@ string tupletTypeKindAsString (
   return result;
 }
 
-string tupletBracketKindAsString (
+ostream& operator << (ostream& os, const msrTupletTypeKind& elt)
+{
+  os << msrTupletTypeKindAsString (elt);
+  return os;
+}
+
+string msrTupletBracketKindAsString (
   msrTupletBracketKind tupletBracketKind)
 {
   string result;
@@ -289,7 +295,13 @@ string tupletBracketKindAsString (
   return result;
 }
 
-string tupletLineShapeKindAsString (
+ostream& operator << (ostream& os, const msrTupletBracketKind& elt)
+{
+  os << msrTupletBracketKindAsString (elt);
+  return os;
+}
+
+string msrTupletLineShapeKindAsString (
   msrTupletLineShapeKind tupletLineShapeKind)
 {
   string result;
@@ -306,7 +318,13 @@ string tupletLineShapeKindAsString (
   return result;
 }
 
-string tupletShowNumberKindAsString (
+ostream& operator << (ostream& os, const msrTupletLineShapeKind& elt)
+{
+  os << msrTupletLineShapeKindAsString (elt);
+  return os;
+}
+
+string msrTupletShowNumberKindAsString (
   msrTupletShowNumberKind tupletShowNumberKind)
 {
   string result;
@@ -326,7 +344,13 @@ string tupletShowNumberKindAsString (
   return result;
 }
 
-string tupletShowTypeKindAsString (
+ostream& operator << (ostream& os, const msrTupletShowNumberKind& elt)
+{
+  os << msrTupletShowNumberKindAsString (elt);
+  return os;
+}
+
+string msrTupletShowTypeKindAsString (
   msrTupletShowTypeKind tupletShowTypeKind)
 {
   string result;
@@ -344,6 +368,12 @@ string tupletShowTypeKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrTupletShowTypeKind& elt)
+{
+  os << msrTupletShowTypeKindAsString (elt);
+  return os;
 }
 
 void msrTuplet::appendNoteToTuplet (
@@ -1089,22 +1119,22 @@ void msrTuplet::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fTupletBracketKind" << " : " <<
-    tupletBracketKindAsString (
+    msrTupletBracketKindAsString (
       fTupletBracketKind) <<
     endl <<
     setw (fieldWidth) <<
     "fTupletLineShapeKind" << " : " <<
-    tupletLineShapeKindAsString (
+    msrTupletLineShapeKindAsString (
       fTupletLineShapeKind) <<
     endl <<
     setw (fieldWidth) <<
     "fTupletShowNumberKind" << " : " <<
-    tupletShowNumberKindAsString (
+    msrTupletShowNumberKindAsString (
       fTupletShowNumberKind) <<
     endl <<
     setw (fieldWidth) <<
     "fTupletShowTypeKind" << " : " <<
-    tupletShowTypeKindAsString (
+    msrTupletShowTypeKindAsString (
       fTupletShowTypeKind) <<
     endl <<
 
@@ -1232,22 +1262,22 @@ void msrTuplet::printShort (ostream& os)
   os << left <<
     setw (fieldWidth) <<
     "fTupletBracketKind" << " : " <<
-    tupletBracketKindAsString (
+    msrTupletBracketKindAsString (
       fTupletBracketKind) <<
     endl <<
     setw (fieldWidth) <<
     "fTupletLineShapeKind" << " : " <<
-    tupletLineShapeKindAsString (
+    msrTupletLineShapeKindAsString (
       fTupletLineShapeKind) <<
     endl <<
     setw (fieldWidth) <<
     "fTupletShowNumberKind" << " : " <<
-    tupletShowNumberKindAsString (
+    msrTupletShowNumberKindAsString (
       fTupletShowNumberKind) <<
     endl <<
     setw (fieldWidth) <<
     "fTupletShowTypeKind" << " : " <<
-    tupletShowTypeKindAsString (
+    msrTupletShowTypeKindAsString (
       fTupletShowTypeKind) <<
     endl <<
 */

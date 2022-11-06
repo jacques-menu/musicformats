@@ -11,11 +11,11 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class bsrTimeSignatureItem;
+class   bsrTimeSignatureItem;
 typedef SMARTP<bsrTimeSignatureItem> S_bsrTimeSignatureItem;
 
 // PRE-declarations for classes mutual dependencies
-class bsrTimeSignature;
+class   bsrTimeSignature;
 typedef SMARTP<bsrTimeSignature> S_bsrTimeSignature;
 
 //______________________________________________________________________________
@@ -101,7 +101,7 @@ class EXP bsrTimeSignature : public bsrLineContentsElement
     // data types
     // ------------------------------------------------------
 
-    enum bsrTimeSignatureKind {
+    enum class bsrTimeSignatureKind {
       kTimeNone,
       kTimeCommon,
       kTimeCut,
@@ -112,10 +112,10 @@ class EXP bsrTimeSignature : public bsrLineContentsElement
       kTimeSenzaMisura
     };
 
-    static string timeKindAsString (
+    string timeKindAsString (
       bsrTimeSignatureKind timeKind);
 
-    static string timeKindAsDebugString (
+    string timeKindAsDebugString (
       bsrTimeSignatureKind timeKind);
 
   public:

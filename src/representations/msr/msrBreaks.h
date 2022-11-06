@@ -25,7 +25,7 @@ enum class msrUserChosenLineBreakKind {
   kUserChosenLineBreakNo
 };
 
-string userChosenLineBreakKindAsString (
+string msrUserChosenLineBreakKindAsString (
   msrUserChosenLineBreakKind userChosenLineBreakKind);
 
 ostream& operator << (ostream& os, msrUserChosenLineBreakKind& elt);
@@ -113,7 +113,7 @@ enum class msrUserChosenPageBreakKind {
   kUserChosenPageBreakNo
 };
 
-string userChosenPageBreakKindAsString (
+string msrUserChosenPageBreakKindAsString (
   msrUserChosenPageBreakKind userChosenPageBreakKind);
 
 ostream& operator << (ostream& os, msrUserChosenPageBreakKind& elt);

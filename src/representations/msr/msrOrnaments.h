@@ -9,13 +9,13 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrNote;
+class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
 // data types
 
-enum msrOrnamentKind {
+enum class msrOrnamentKind {
   kOrnamentTrill, // JMI kOrnamentDashes,
   kOrnamentTurn, kOrnamentInvertedTurn, kOrnamentDelayedTurn,
   kOrnamentDelayedInvertedTurn, kOrnamentVerticalTurn,
@@ -25,8 +25,10 @@ enum msrOrnamentKind {
   kOrnamentAccidentalKind
 };
 
-string ornamentKindAsString (
+string msrOrnamentKindAsString (
   msrOrnamentKind ornamentKind);
+
+ostream& operator << (ostream& os, const msrOrnamentKind& elt);
 
 class EXP msrOrnament : public msrElement
 {

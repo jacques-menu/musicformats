@@ -23,12 +23,12 @@ enum class bsrNoteOctaveKind {
   kNoteOctaveAbove7
 };
 
-extern string noteOctaveKindAsString (
+extern string bsrNoteOctaveKindAsString (
   bsrNoteOctaveKind noteOctaveKind);
 
-ostream& operator << (ostream& os, bsrTextsLanguageKind& elt);
+ostream& operator << (ostream& os, bsrNoteOctaveKind& elt);
 
-extern string noteOctaveKindAsDebugString (
+extern string bsrNoteOctaveKindAsDebugString (
   bsrNoteOctaveKind noteOctaveKind);
 
 extern S_bsrCellsList noteOctaveKindAsCellsList (
@@ -128,12 +128,12 @@ enum class bsrNoteValueKind {
   kNoteValueB256th
 };
 
-string noteValueKindAsString (
+string bsrNoteValueKindAsString (
   bsrNoteValueKind noteValueKind);
 
 ostream& operator << (ostream& os, bsrNoteValueKind& elt);
 
-string noteValueKindAsDebugString (
+string bsrNoteValueKindAsDebugString (
   bsrNoteValueKind noteValueKind);
 
 S_bsrCellsList noteValueKindAsCellsList (
@@ -146,12 +146,12 @@ enum class bsrNoteValueSizeKind {
   kNoteValueSizeSmaller
 };
 
-string noteValueSizeKindAsString (
+string bsrNoteValueSizeKindAsString (
   bsrNoteValueSizeKind noteValueSizeKind);
 
 ostream& operator << (ostream& os, bsrNoteValueSizeKind& elt);
 
-bsrNoteValueSizeKind noteValueSizeKindFromNoteValueKind (
+bsrNoteValueSizeKind bsrNoteValueSizeKindFromNoteValueKind (
   bsrNoteValueKind noteValueKind);
 
 S_bsrCellsList noteValueSizeKindAsCellsList (
@@ -162,7 +162,7 @@ enum class bsrNoteOctaveIsNeeded {
   kNoteOctaveIsNeededYes, kNoteOctaveIsNeededNo
 };
 
-string noteOctaveIsNeededAsString (
+string bsrNoteOctaveIsNeededAsString (
   bsrNoteOctaveIsNeeded noteOctaveIsNeeded);
 
 ostream& operator << (ostream& os, bsrNoteOctaveIsNeeded& elt);
@@ -175,7 +175,10 @@ enum class bsrAccidentalKind {
   kAccidentalThreeQuarterSharp, kAccidentalThreeQuarterFlat
 };
 
-string msrAccidentalKindAsString (
+string bsrAccidentalKindAsString (
+  bsrAccidentalKind accidentalKind);
+
+string bsrAccidentalKindAsDebugString (
   bsrAccidentalKind accidentalKind);
 
 ostream& operator << (ostream& os, bsrAccidentalKind& elt);
@@ -187,9 +190,6 @@ class EXP bsrNote : public bsrLineContentsElement
 
     // data types
     // ------------------------------------------------------
-
-    static string accidentalKindAsDebugString (
-      bsrAccidentalKind accidentalKind);
 
     static S_bsrCellsList accidentalKindAsCellsList (
                             int               inputLineNumber,

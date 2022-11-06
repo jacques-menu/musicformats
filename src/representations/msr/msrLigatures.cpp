@@ -136,47 +136,53 @@ void msrLigature::acceptOut (basevisitor* v)
 void msrLigature::browseData (basevisitor* v)
 {}
 
-string msrLigature::ligatureKindAsString (
+string msrLigature::msrLigatureKindAsString (
   msrLigatureKind ligatureKind)
 {
-  stringstream s;
+  string result;
 
   switch (ligatureKind) {
-    case msrLigature::kLigatureStart:
-      s << "ligatureStart";
+    case msrLigatureKind::kLigatureStart:
+      result = "kLigatureStart";
       break;
-    case msrLigature::kLigatureContinue:
-      s << "ligatureContinue";
+    case msrLigatureKind::kLigatureContinue:
+      result = "kLigatureContinue";
       break;
-    case msrLigature::kLigatureStop:
-      s << "ligatureStop";
+    case msrLigatureKind::kLigatureStop:
+      result = "kLigatureStop";
       break;
     case kLigatureNone:
-      s << "ligatureNone";
+      result = "kLigatureNone";
   } // switch
 
-  return s.str ();
+  return result;
 }
 
-string msrLigature::ligatureLineEndKindAsString (
+ostream& operator << (ostream& os, const msrLigatureKind& elt)
+{
+  os << msrLigatureKindAsString (elt);
+  return os;
+}
+
+string msrLigature::msrLigatureLineEndKindAsString (
   msrLigatureLineEndKind ligatureLineEndKind)
 {
   stringstream s;
 
   switch (ligatureLineEndKind) {
-    case msrLigature::kLigatureLineEndUp:
+    case msrLigatureKind::kLigatureLineEndUp:
       s << "ligatureLineEndUp";
       break;
-    case msrLigature::kLigatureLineEndDown:
+    case msrLigatureKind::kLigatureLineEndDown:
       s << "ligatureLineEndDown";
       break;
-    case msrLigature::kLigatureLineEndBoth:
+    case msrLigatureKind::kLigatureLineEndBoth:
       s << "ligatureLineEndBoth";
       break;
-    case msrLigature::kLigatureLineEndArrow:
+    case msrLigatureKind::kLigatureLineEndArrow:
       s << "ligatureLineEndArrow";
       break;
-    case msrLigature::kLigatureLineEndNone:
+    case msrLigatureKind::kLigatureLineEndNone:
       s << "ligatureLineEndNone";
       break;
   } // switch
@@ -184,9 +190,15 @@ string msrLigature::ligatureLineEndKindAsString (
   return s.str ();
 }
 
-string msrLigature::ligatureKindAsString () const
+ostream& operator << (ostream& os, const msrLigatureLineEndKind& elt)
 {
-  return ligatureKindAsString (fLigatureKind);
+  os << msrLigatureLineEndKindAsString (elt);
+  return os;
+}
+
+string msrLigature::msrLigatureKindAsString () const
+{
+  return msrLigatureKindAsString (fLigatureKind);
 }
 
 string msrLigature::asString () const
@@ -194,20 +206,10 @@ string msrLigature::asString () const
   stringstream s;
 
   s <<
-    "[Ligature " << ligatureKindAsString () <<
-
-    "ligatureLineEndKind" << " : " <<
-    ligatureLineEndKindAsString (
-      fLigatureLineEndKind) <<
-
-    "ligatureLineTypeKind" << " : " <<
-    msrLineTypeKindAsString (
-      fLigatureLineTypeKind) <<
-
-    "ligaturePlacementKind" << " : " <<
-    placementKindAsString (
-      fLigaturePlacementKind) <<
-
+    "[Ligature " << msrLigatureKindAsString () <<
+    "fLigatureLineEndKind" << " : " << fLigatureLineEndKind <<
+    "fLigatureLineTypeKind" << " : " << fLigatureLineTypeKind) <<
+    "fLigaturePlacementKind" << " : " << fLigaturePlacementKind) <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -217,7 +219,7 @@ string msrLigature::asString () const
 void msrLigature::print (ostream& os) const
 {
   os <<
-    "[Ligature " << ligatureKindAsString () <<
+    "[Ligature " << msrLigatureKindAsString () <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -228,7 +230,7 @@ void msrLigature::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "ligatureLineEndKind" << " : " <<
-    ligatureLineEndKindAsString (
+    msrLigatureLineEndKindAsString (
       fLigatureLineEndKind) <<
     endl <<
     setw (fieldWidth) <<
@@ -238,7 +240,7 @@ void msrLigature::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     "ligaturePlacementKind" << " : " <<
-    placementKindAsString (
+    msrPlacementKindAsString (
       fLigaturePlacementKind) <<
     endl;
 
@@ -255,7 +257,7 @@ ostream& operator << (ostream& os, const S_msrLigature& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

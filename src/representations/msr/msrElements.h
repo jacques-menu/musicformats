@@ -27,7 +27,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrPathToVoice;
+class   msrPathToVoice;
 typedef SMARTP<msrPathToVoice> S_msrPathToVoice;
 
 //______________________________________________________________________________

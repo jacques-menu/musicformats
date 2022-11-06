@@ -651,8 +651,8 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
 
   // let's go
 
-  bsrBarLine::bsrBarLineKind
-    bBarLineKind = bsrBarLine::kBarLineKindNone;
+  bsrBarLineKind
+    bBarLineKind = bsrBarLineKind::kBarLineKindNone;
 
   switch (mBarLineStyleKind) {
     case msrBarLine::kBarLineStyleNone:
@@ -660,18 +660,18 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
     case msrBarLine::kBarLineStyleRegular:
       break;
     case msrBarLine::kBarLineStyleDotted:
-      bBarLineKind = bsrBarLine::kBarLineKindSpecial;
+      bBarLineKind = bsrBarLineKind::kBarLineKindSpecial;
       break;
     case msrBarLine::kBarLineStyleDashed:
-      bBarLineKind = bsrBarLine::kBarLineKindSpecial;
+      bBarLineKind = bsrBarLineKind::kBarLineKindSpecial;
       break;
     case msrBarLine::kBarLineStyleHeavy:
       break;
     case msrBarLine::kBarLineStyleLightLight:
-      bBarLineKind = bsrBarLine::kBarLineKindSectionalDouble;
+      bBarLineKind = bsrBarLineKind::kBarLineKindSectionalDouble;
       break;
     case msrBarLine::kBarLineStyleLightHeavy:
-      bBarLineKind = bsrBarLine::kBarLineKindFinalDouble;
+      bBarLineKind = bsrBarLineKind::kBarLineKindFinalDouble;
       break;
     case msrBarLine::kBarLineStyleHeavyLight:
       break;
@@ -683,7 +683,7 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
       break;
   } // switch
 
-  if (bBarLineKind == bsrBarLine::kBarLineKindNone) {
+  if (bBarLineKind == bsrBarLineKind::kBarLineKindNone) {
     stringstream s;
 
     s <<
@@ -776,7 +776,7 @@ void msr2bsrTranslator::visitStart (S_msrClef& elt)
 #endif
 
   if (gGlobalMsr2bsrOahGroup->getIncludeClefs ()) {
-    bsrClef::bsrClefKind bClefKind = bsrClef::kClefKindNone;
+    bsrClefKind bClefKind = bsrClefKind::kClefKindNone;
 
   /* JMI
           kClefModifiedBassForRightHandPartKind,
@@ -787,39 +787,39 @@ void msr2bsrTranslator::visitStart (S_msrClef& elt)
 
     switch (mClefKind) {
       case msrClefKind::k_NoClef:
-        bClefKind = bsrClef::kClefKindNone;
+        bClefKind = bsrClefKind::kClefKindNone;
         break;
       case msrClefKind::kClefTreble:
-        bClefKind = bsrClef::kClefKindGTreble;
+        bClefKind = bsrClefKind::kClefKindGTreble;
         break;
       case msrClefKind::kClefSoprano:
-        bClefKind = bsrClef::kClefKindGSoprano;
+        bClefKind = bsrClefKind::kClefKindGSoprano;
         break;
       case msrClefKind::kClefMezzoSoprano:
-        bClefKind = bsrClef::kClefKindGSoprano; // JMI ???
+        bClefKind = bsrClefKind::kClefKindGSoprano; // JMI ???
         break;
       case msrClefKind::kClefAlto:
-        bClefKind = bsrClef::kClefKindCAlto;
+        bClefKind = bsrClefKind::kClefKindCAlto;
         break;
       case msrClefKind::kClefTenor:
-        bClefKind = bsrClef::kClefKindCTenor;
+        bClefKind = bsrClefKind::kClefKindCTenor;
         break;
       case msrClefKind::kClefBaritone:
-        bClefKind = bsrClef::kClefKindCBaritone;
+        bClefKind = bsrClefKind::kClefKindCBaritone;
         break;
       case msrClefKind::kClefBass:
-        bClefKind = bsrClef::kClefKindFBass;
+        bClefKind = bsrClefKind::kClefKindFBass;
         break;
       case msrClefKind::kClefTrebleLine1:
-        bClefKind = bsrClef::kClefKindGSoprano;
+        bClefKind = bsrClefKind::kClefKindGSoprano;
         break;
       case msrClefKind::kClefTrebleMinus15:
         break;
       case msrClefKind::kClefTrebleMinus8:
-        bClefKind = bsrClef::kClefKindGOttavaBassa; // JMI permute???
+        bClefKind = bsrClefKind::kClefKindGOttavaBassa; // JMI permute???
         break;
       case msrClefKind::kClefTreblePlus8:
-        bClefKind = bsrClef::kClefKindGOttavaAlta; // JMI permute???
+        bClefKind = bsrClefKind::kClefKindGOttavaAlta; // JMI permute???
         break;
       case msrClefKind::kClefTreblePlus15:
         break;
@@ -847,7 +847,7 @@ void msr2bsrTranslator::visitStart (S_msrClef& elt)
         break;
     } // switch
 
-    if (bClefKind == bsrClef::kClefKindNone) {
+    if (bClefKind == bsrClefKind::kClefKindNone) {
       stringstream s;
 
       s <<
@@ -2472,7 +2472,7 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
   // determine the note value size kind
   bsrNoteValueSizeKind
     noteValueSizeKind =
-      noteValueSizeKindFromNoteValueKind (
+      bsrNoteValueSizeKindFromNoteValueKind (
         noteValueKind);
 
   // is a note value sign needed?
@@ -2480,11 +2480,11 @@ void msr2bsrTranslator::createBsrForNote (S_msrNote note)
   if (gGlobalTracingOahGroup->getTraceNotesDetails ()) {
     gLogStream <<
       "--> fCurrentNoteValueSizeKind = " <<
-      noteValueSizeKindAsString (fCurrentNoteValueSizeKind) <<
+      bsrNoteValueSizeKindAsString (fCurrentNoteValueSizeKind) <<
       ", noteValueSizeKind = " <<
-      noteValueSizeKindAsString (noteValueSizeKind) <<
+      bsrNoteValueSizeKindAsString (noteValueSizeKind) <<
       ", noteOctaveIsNeeded = " <<
-      noteOctaveIsNeededAsString (noteOctaveIsNeeded) <<
+      bsrNoteOctaveIsNeededAsString (noteOctaveIsNeeded) <<
       ", line " << inputLineNumber <<
       endl;
   }
@@ -3568,41 +3568,41 @@ void msr2bsrTranslator::visitStart (S_msrTechnical& elt)
 
   // doest the score need the 'tongue' function?
   switch (elt->getTechnicalKind ()) {
-    case msrTechnical::kArrow:
+    case msrTechnicalKind::kArrow:
       break;
-    case msrTechnical::kDoubleTongue:
+    case msrTechnicalKind::kDoubleTongue:
       fResultingBsr->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnical::kDownBow:
+    case msrTechnicalKind::kDownBow:
       break;
-    case msrTechnical::kFingernails:
+    case msrTechnicalKind::kFingernails:
       break;
-    case msrTechnical::kHarmonic:
+    case msrTechnicalKind::kHarmonic:
       break;
-    case msrTechnical::kHeel:
+    case msrTechnicalKind::kHeel:
       break;
-    case msrTechnical::kHole:
+    case msrTechnicalKind::kHole:
       break;
-    case msrTechnical::kOpenString:
+    case msrTechnicalKind::kOpenString:
       break;
-    case msrTechnical::kSnapPizzicato:
+    case msrTechnicalKind::kSnapPizzicato:
       break;
-    case msrTechnical::kStopped:
+    case msrTechnicalKind::kStopped:
       break;
-    case msrTechnical::kTap:
+    case msrTechnicalKind::kTap:
       break;
-    case msrTechnical::kThumbPosition:
+    case msrTechnicalKind::kThumbPosition:
       break;
-    case msrTechnical::kToe:
+    case msrTechnicalKind::kToe:
       break;
-    case msrTechnical::kTripleTongue:
+    case msrTechnicalKind::kTripleTongue:
       fResultingBsr->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnical::kUpBow:
+    case msrTechnicalKind::kUpBow:
       break;
   } // switch
 }
@@ -3709,8 +3709,8 @@ void msr2bsrTranslator::visitStart (S_msrTechnicalWithString& elt)
   }
 
   switch (elt->getTechnicalWithStringKind ()) {
-    case msrTechnicalWithString::kHammerOn:
-    case msrTechnicalWithString::kPullOff:
+    case msrTechnicalWithStringKind::kHammerOn:
+    case msrTechnicalWithStringKind::kPullOff:
       // this score needs the 'after' Scheme function
       fResultingBsr->
         setAfterSchemeFunctionIsNeeded ();

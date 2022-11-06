@@ -344,7 +344,7 @@ msrQuarterTonesPitchKind msrSemiTonesPitchKindAsQuarterTonesPitchKind (
     grace notes groups (before and after the note).
 
   Attempting to use classes to describe this graph would be a nightmare:
-  we thus use enum types and uplinks to handles the variants.
+  we thus use enum class types and uplinks to handles the variants.
 */
 
 enum class msrNoteKind {
@@ -401,7 +401,7 @@ enum class msrSoloNoteOrRestInVoiceKind {
   kSoloNoteOrRestInVoiceNo
 };
 
-string soloNoteOrRestInVoiceKindAsString (
+string msrSoloNoteOrRestInVoiceKindAsString (
   msrSoloNoteOrRestInVoiceKind soloNoteOrRestInVoiceKind);
 
 ostream& operator << (ostream& os, const msrSoloNoteOrRestInVoiceKind& elt);
@@ -698,7 +698,7 @@ string msrClefKindAsString (
 
 ostream& operator << (ostream& os, const msrClefKind& elt);
 
-EXP msrClefKind clefKindFromString (
+EXP msrClefKind msrClefKindFromString (
   int           inputLineNumber,
   const string& clefString);
 
@@ -889,11 +889,11 @@ void initializeHarmonyKinds ();
 
 //________________________________________________________________________
 template< typename T >
-class EnumTrueHarmonies
+class   EnumTrueHarmonies
 {
   public:
 
-    class Iterator
+    class   Iterator
     {
       public:
 
@@ -1798,7 +1798,6 @@ msrJustifyKind msrJustifyKindFromString (
   int           inputLineNumber,
   const string& justifyString);
 
-// -----
 enum class msrHorizontalAlignmentKind {
   kHorizontalAlignmentNone,
   kHorizontalAlignmentLeft, kHorizontalAlignmentCenter, kHorizontalAlignmentRight
@@ -1813,7 +1812,6 @@ msrHorizontalAlignmentKind msrHorizontalAlignmentKindFromString (
   int           inputLineNumber,
   const string& horizontalAlignString);
 
-// -----
 enum class msrVerticalAlignmentKind {
   kVerticalAlignmentNone,
   kVerticalAlignmentTop, kVerticalAlignmentMiddle, kVerticalAlignmentBottom
@@ -1865,7 +1863,7 @@ enum class msrPlacementKind {
   kPlacementAbove, kPlacementBelow
 };
 
-string placementKindAsString (
+string msrPlacementKindAsString (
   msrPlacementKind placementKind);
 
 ostream& operator << (ostream& os, msrPlacementKind& elt);
@@ -2180,7 +2178,7 @@ EXP ostream& operator << (ostream& os, const msrTupletFactor& elt);
 
 // harmonies intervals
 //______________________________________________________________________________
-class msrHarmonyInterval;
+class   msrHarmonyInterval;
 typedef SMARTP<msrHarmonyInterval> S_msrHarmonyInterval;
 
 class EXP msrHarmonyInterval : public smartable
@@ -2290,7 +2288,7 @@ EXP ostream& operator << (ostream& os, const S_msrHarmonyInterval& elt);
 
 // harmonies structure
 //______________________________________________________________________________
-class msrHarmonyStructure;
+class   msrHarmonyStructure;
 typedef SMARTP<msrHarmonyStructure> S_msrHarmonyStructure;
 
 class EXP msrHarmonyStructure : public smartable

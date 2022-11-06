@@ -3367,22 +3367,22 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
 #endif
 
   switch (elt->getTempoKind ()) {
-    case msrTempo::k_NoTempoKind:
+    case msrTempoKind::k_NoTempoKind:
       break;
 
-    case msrTempo::kTempoBeatUnitsWordsOnly:
+    case msrTempoKind::kTempoBeatUnitsWordsOnly:
       break;
 
-    case msrTempo::kTempoBeatUnitsPerMinute:
+    case msrTempoKind::kTempoBeatUnitsPerMinute:
       break;
 
-    case msrTempo::kTempoBeatUnitsEquivalence:
+    case msrTempoKind::kTempoBeatUnitsEquivalence:
       break;
 
-    case msrTempo::kTempoNotesRelationship:
+    case msrTempoKind::kTempoNotesRelationship:
       fResultingLpsr->
         // this score needs the 'tempo relationship' Scheme function
-        setTempoNotesRelationshipshipSchemeFunctionIsNeeded ();
+        setTempoNotesRelationshipSchemeFunctionIsNeeded ();
       break;
   } // switch
 
@@ -3497,7 +3497,7 @@ void msr2lpsrTranslator::visitStart (S_msrArticulation& elt)
   }
 
   switch (elt->getArticulationKind ()) {
-    case msrArticulation::kScoop:
+    case msrArticulationKind::kArticulationScoop:
       // this score needs the 'scoop' stencils
       fResultingLpsr->
         setScoopSchemeFunctionIsNeeded ();
@@ -3671,41 +3671,41 @@ void msr2lpsrTranslator::visitStart (S_msrTechnical& elt)
 
   // doest the score need the 'tongue' function?
   switch (elt->getTechnicalKind ()) {
-    case msrTechnical::kArrow:
+    case msrTechnicalKind::kArrow:
       break;
-    case msrTechnical::kDoubleTongue:
+    case msrTechnicalKind::kDoubleTongue:
       fResultingLpsr->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnical::kDownBow:
+    case msrTechnicalKind::kDownBow:
       break;
-    case msrTechnical::kFingernails:
+    case msrTechnicalKind::kFingernails:
       break;
-    case msrTechnical::kHarmonic:
+    case msrTechnicalKind::kHarmonic:
       break;
-    case msrTechnical::kHeel:
+    case msrTechnicalKind::kHeel:
       break;
-    case msrTechnical::kHole:
+    case msrTechnicalKind::kHole:
       break;
-    case msrTechnical::kOpenString:
+    case msrTechnicalKind::kOpenString:
       break;
-    case msrTechnical::kSnapPizzicato:
+    case msrTechnicalKind::kSnapPizzicato:
       break;
-    case msrTechnical::kStopped:
+    case msrTechnicalKind::kStopped:
       break;
-    case msrTechnical::kTap:
+    case msrTechnicalKind::kTap:
       break;
-    case msrTechnical::kThumbPosition:
+    case msrTechnicalKind::kThumbPosition:
       break;
-    case msrTechnical::kToe:
+    case msrTechnicalKind::kToe:
       break;
-    case msrTechnical::kTripleTongue:
+    case msrTechnicalKind::kTripleTongue:
       fResultingLpsr->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnical::kUpBow:
+    case msrTechnicalKind::kUpBow:
       break;
   } // switch
 }
@@ -3854,8 +3854,8 @@ void msr2lpsrTranslator::visitStart (S_msrTechnicalWithString& elt)
   }
 
   switch (elt->getTechnicalWithStringKind ()) {
-    case msrTechnicalWithString::kHammerOn:
-    case msrTechnicalWithString::kPullOff:
+    case msrTechnicalWithStringKind::kHammerOn:
+    case msrTechnicalWithStringKind::kPullOff:
       // this score needs the 'after' Scheme function
       fResultingLpsr->
         setAfterSchemeFunctionIsNeeded ();
@@ -4363,7 +4363,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
             inputLineNumber,
 		        fCurrentMeasureClone,
             elt,
-            msrTempo::kTempoParenthesizedNo,    // JMI
+            msrTempoParenthesizedKind::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
 
 #ifdef TRACING_IS_ENABLED

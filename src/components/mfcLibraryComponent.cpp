@@ -220,7 +220,7 @@ S_mfcLibraryComponent createLibraryComponent ()
           mfcVersionNumber::createFromString ("0.9.53"),
           "October 22, 2021",
           list<string> {
-            "Replaced bool by class Bool in variables and fields",
+            "Replaced bool by class   Bool in variables and fields",
             "Created MFC (MusicFormats components)"
           }
       ));
@@ -279,7 +279,7 @@ S_mfcLibraryComponent createLibraryComponent ()
             "Finalized the OAH documentation and macros handling",
             "Fixed an issue in options and argumentss handling",
             "Fixed generated output options handling in Mikrokosmos3Wandering and LilyPondIssue34",
-            "Finalized the class names in oahAtomsCollection.h/.cpp",
+            "Finalized the class   names in oahAtomsCollection.h/.cpp",
             "Moved from compiler writing terminology to more musicians-friendly terms"
           }
       ));

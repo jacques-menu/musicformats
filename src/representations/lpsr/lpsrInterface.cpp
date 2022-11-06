@@ -74,7 +74,7 @@ void displayLpsrScoreShort (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     "Display the LPSR as text, short version",
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 }
@@ -119,7 +119,7 @@ void displayLpsrScoreFull (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     "Display the LPSR as text, full version",
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 }

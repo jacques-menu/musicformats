@@ -3110,7 +3110,7 @@ void msr2msrTranslator::visitStart (S_msrWords& elt)
 //           msrTempo::createTempoWordsOnly (
 //             inputLineNumber,
 //             elt,
-//             msrTempo::kTempoParenthesizedNo,    // JMI
+//             msrTempoParenthesizedKind::kTempoParenthesizedNo,    // JMI
 //             msrPlacementKind::kPlacementAbove); // JMI
 //
 // #ifdef TRACING_IS_ENABLED

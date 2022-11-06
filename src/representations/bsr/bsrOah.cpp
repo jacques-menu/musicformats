@@ -44,15 +44,21 @@ string bsrFacSimileKindAsString (
   string result;
 
   switch (facSimileKind) {
-    case kFacSimileYes:
+    case bsrFacSimileKind::kFacSimileYes:
       result = "facSimileYes";
       break;
-    case kFacSimileNo:
+    case bsrFacSimileKind::kFacSimileNo:
       result = "facSimileNo";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const bsrFacSimileKind& elt)
+{
+  os << bsrFacSimileKindAsString (elt);
+  return os;
 }
 
 //______________________________________________________________________________

@@ -42,11 +42,11 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 Sxmlelement translateMsrToMxsr (
-  const S_msrScore           theMsrScore,
-  S_msrOahGroup              msrOpts,
-  string                     passNumber,
-  string                     passDescription,
-  mfTimingItem::timingItemKind timingItemKind)
+  const S_msrScore theMsrScore,
+  S_msrOahGroup    msrOpts,
+  string           passNumber,
+  string           passDescription,
+  mfTimingItemKind mfTimingItemKind)
 {
   // sanity check
   mfAssert (
@@ -90,7 +90,7 @@ Sxmlelement translateMsrToMxsr (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 

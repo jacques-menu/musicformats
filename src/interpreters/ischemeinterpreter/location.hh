@@ -57,7 +57,7 @@ namespace iscm {
 #line 58 "location.hh"
 
   /// A point in a source file.
-  class position
+  class   position
   {
   public:
     /// Type for file name.
@@ -162,7 +162,7 @@ namespace iscm {
   }
 
   /// Two points in a source file.
-  class location
+  class   location
   {
   public:
     /// Type for file name.

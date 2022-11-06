@@ -80,10 +80,10 @@ struct lpsrRepeatDescr : public smartable
     // public services
     // ------------------------------------------------------
 
-    string                repeatDescrAsString ();
-
     // print
     // ------------------------------------------------------
+
+    string                asString ();
 
     virtual void          print (ostream& os);
 
@@ -103,6 +103,11 @@ typedef SMARTP<lpsrRepeatDescr> S_lpsrRepeatDescr;
 EXP ostream& operator << (ostream& os, S_lpsrRepeatDescr& elt);
 
 //________________________________________________________________________
+enum class lilypondMarkupColumnKind { // JMI v0.9.66
+  kMarkupColumnKindLeftAligned,
+  kMarkupColumnKindLeftACentered
+};
+
 class EXP lpsr2lilypondTranslator :
 
   // LPSR
@@ -237,7 +242,7 @@ class EXP lpsr2lilypondTranslator :
   // tempo
 
   public visitor<S_msrTempo>,
-  public visitor<S_msrTempoNotesRelationshipshipElements>,
+  public visitor<S_msrTempoNotesRelationshipElements>,
   public visitor<S_msrTempoNote>,
   public visitor<S_msrTempoTuplet>,
 
@@ -557,8 +562,8 @@ class EXP lpsr2lilypondTranslator :
     // tempo
     virtual void          visitStart (S_msrTempo& elt);
     virtual void          visitEnd   (S_msrTempo& elt);
-    virtual void          visitStart (S_msrTempoNotesRelationshipshipElements& elt);
-    virtual void          visitEnd   (S_msrTempoNotesRelationshipshipElements& elt);
+    virtual void          visitStart (S_msrTempoNotesRelationshipElements& elt);
+    virtual void          visitEnd   (S_msrTempoNotesRelationshipElements& elt);
     virtual void          visitStart (S_msrTempoNote& elt);
     virtual void          visitStart (S_msrTempoTuplet& elt);
     virtual void          visitEnd   (S_msrTempoTuplet& elt);
@@ -758,17 +763,12 @@ class EXP lpsr2lilypondTranslator :
 
     // markups
 
-    enum markupColumnKind { // JMI
-      markupColumnKindLeftAligned,
-      markupColumnKindLeftACentered
-    };
-
     string                generateAColumnForMarkup (
                             const string&    theString,
-                            markupColumnKind columnKind);
+                            lilypondMarkupColumnKind columnKind);
     string                generateMultilineMarkup (
                             const string&    theString,
-                            markupColumnKind columnKind);
+                            lilypondMarkupColumnKind columnKind);
 
     // octaves
 
@@ -900,10 +900,10 @@ class EXP lpsr2lilypondTranslator :
     // stems
 
     // the LilyPond \stem* commands have a persistent effect, hence:
-    msrStem::msrStemKind  fCurrentStemKind;
+    msrStemKind  fCurrentStemKind;
 
     string                stemAsLilypondString (
-                            msrStem::msrStemKind stemKind);
+                            msrStemKind stemKind);
 
     void                  generateStemIfNeededAndUpdateCurrentStemKind (
                             S_msrStem stem);

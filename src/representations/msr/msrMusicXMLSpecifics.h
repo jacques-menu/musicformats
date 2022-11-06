@@ -719,7 +719,7 @@ class EXP msrLineWidth : public msrElement
     // data types
     // ------------------------------------------------------
 
-    enum msrLineWidthTypeKind {
+    enum class msrLineWidthTypeKind {
       k_NoLineWidthTypeKind,
       kBeamLineWidth, kBracketLineWidth, kDashesLineWidth,
       kEnclosureLineWidth,
@@ -735,7 +735,7 @@ class EXP msrLineWidth : public msrElement
       kWedgeLineWidth
     };
 
-    static string lineWidthTypeKindAsString (
+    string lineWidthTypeKindAsString (
       msrLineWidthTypeKind lineWidthTypeKind);
 
   public:
@@ -806,12 +806,12 @@ class EXP msrNoteSize : public msrElement
     // data types
     // ------------------------------------------------------
 
-    enum msrNoteSizeTypeKind {
+    enum class msrNoteSizeTypeKind {
       k_NoNoteSizeTypeKind,
       kCueNoteSize, kGraceNoteSize, kLargeNoteSize
     };
 
-    static string noteSizeTypeKindAsString (
+    string noteSizeTypeKindAsString (
       msrNoteSizeTypeKind noteSizeTypeKind);
 
   public:
@@ -883,12 +883,12 @@ class EXP msrDistance : public msrElement
     // data types
     // ------------------------------------------------------
 
-    enum msrDistanceTypeKind {
+    enum class msrDistanceTypeKind {
       k_NoDistanceTypeKind,
       kHyphenDistance, kBeamDistance
     };
 
-    static string distanceTypeKindAsString (
+    string distanceTypeKindAsString (
       msrDistanceTypeKind distanceTypeKind);
 
   public:
@@ -959,7 +959,7 @@ class EXP msrGlyph : public msrElement
     // data types
     // ------------------------------------------------------
 
-    enum msrGlyphTypeKind {
+    enum class msrGlyphTypeKind {
       k_NoGlyphTypeKind,
       kQuarterRestGlyph,
       kGClefOttavaBassaGlyph,
@@ -972,7 +972,7 @@ class EXP msrGlyph : public msrElement
       kOctaveShiftContinue22Glyph
     };
 
-    static string glyphTypeKindAsString (
+    string glyphTypeKindAsString (
       msrGlyphTypeKind GlyphTypeKind);
 
   public:
@@ -1043,11 +1043,11 @@ class EXP msrOtherAppearance : public msrElement
     // data types
     // ------------------------------------------------------
 
-    enum msrOtherAppearanceTypeKind { // JMI which values???
+    enum class msrOtherAppearanceTypeKind { // JMI which values???
       k_NoOtherAppearanceTypeKind
     };
 
-    static string otherAppearanceTypeKindAsString (
+    string otherAppearanceTypeKindAsString (
       msrOtherAppearanceTypeKind otherAppearanceTypeKind);
 
   public:

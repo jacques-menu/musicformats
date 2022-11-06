@@ -23,7 +23,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrStanza;
+class   msrStanza;
 typedef SMARTP<msrStanza> S_msrStanza;
 
 //______________________________________________________________________________

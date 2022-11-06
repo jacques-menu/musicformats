@@ -27,7 +27,7 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-class msdlParser : public smartable
+class   msdlParser : public smartable
 {
   public:
 

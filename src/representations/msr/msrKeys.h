@@ -22,7 +22,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrHumdrumScotKeyItem;
+class   msrHumdrumScotKeyItem;
 typedef SMARTP<msrHumdrumScotKeyItem> S_msrHumdrumScotKeyItem;
 
 //______________________________________________________________________________
@@ -110,7 +110,7 @@ typedef SMARTP<msrHumdrumScotKeyItem> S_msrHumdrumScotKeyItem;
 EXP ostream& operator << (ostream& os, const S_msrHumdrumScotKeyItem& elt);
 
 //______________________________________________________________________________
-class msrKey;
+class   msrKey;
 typedef SMARTP<msrKey> S_msrKey;
 
 class EXP msrKey : public msrMeasureElement

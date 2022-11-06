@@ -33,7 +33,7 @@ namespace MusicFormats
 // //______________________________________________________________________________
 // class EXP mfMultiLineString
 // /*
-//   this class encapsulates a 'bool' value to guarantee it is initialized
+//   this class   encapsulates a 'bool' value to guarantee it is initialized
 // */
 // {
 //   public:

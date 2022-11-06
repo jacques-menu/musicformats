@@ -20,7 +20,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrClef;
+class   msrClef;
 typedef SMARTP<msrClef> S_msrClef;
 
 class EXP msrClef : public msrMeasureElement

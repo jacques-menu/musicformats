@@ -45,7 +45,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string voiceRepeatPhaseKindAsString (
+string msrVoiceRepeatPhaseKindAsString (
   msrVoiceRepeatPhaseKind
     afterRepeatComponentPhaseKind)
 {
@@ -69,7 +69,7 @@ string voiceRepeatPhaseKindAsString (
   return result;
 }
 
-string voiceFinalizationStatusKindAsString (
+string msrVoiceFinalizationStatusKindAsString (
   msrVoiceFinalizationStatusKind voiceFinalizationStatusKind)
 {
   string result;
@@ -86,7 +86,7 @@ string voiceFinalizationStatusKindAsString (
   return result;
 }
 
-string voiceFinalizationStatusKindAsString (
+string msrVoiceFinalizationStatusKindAsString (
   msrVoiceCreateInitialLastSegmentKind voiceCreateInitialLastSegmentKind)
 {
   string result;
@@ -128,15 +128,17 @@ msrRepeatDescr::msrRepeatDescr (
 msrRepeatDescr::~msrRepeatDescr ()
 {}
 
-string msrRepeatDescr::repeatDescrAsString () const
+string msrRepeatDescr::asString () const
 {
   stringstream s;
 
   s <<
-    "fRepeatDescrRepeat = '" <<
+    "[msrRepeatDescr" <<
+    ", fRepeatDescrRepeat: " <<
     fRepeatDescrRepeat->asShortString () <<
-    "', fRepeatDescrStartInputLineNumber = " <<
-    fRepeatDescrStartInputLineNumber;
+    ", fRepeatDescrStartInputLineNumber: " <<
+    fRepeatDescrStartInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -1201,7 +1203,7 @@ void msrVoice::setCurrentVoiceRepeatPhaseKind (
   if (gGlobalTracingOahGroup->getTraceRepeats ()) {
     gLogStream <<
       "Setting voice current after repeat component phase kind to '" <<
-      voiceRepeatPhaseKindAsString (
+      msrVoiceRepeatPhaseKindAsString (
         afterRepeatComponentPhaseKind) <<
  // JMI     "' (" << context << ")" <<
       " in voice \"" << getVoiceName () << "\"" <<
@@ -2608,7 +2610,7 @@ void msrVoice::appendOctaveShiftToVoice (
   if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
     gLogStream <<
       "Appending octave shift '" <<
-      octaveShift->octaveShiftKindAsString () <<
+      octaveShift->msrOctaveShiftKindAsString () <<
       "', size: " << octaveShift->getOctaveShiftSize () <<
       "' to voice \"" << getVoiceName () << "\"" <<
       endl;
@@ -10471,7 +10473,7 @@ void msrVoice::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fCurrentVoiceRepeatPhaseKind" << " : " <<
-    voiceRepeatPhaseKindAsString (
+    msrVoiceRepeatPhaseKindAsString (
       fCurrentVoiceRepeatPhaseKind) <<
     endl;
 

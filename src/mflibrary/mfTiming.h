@@ -27,16 +27,20 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum mfTimingItemKind {
+  kMandatory, kOptional
+};
+
+string mfTimingItemKindAsString (
+  mfTimingItemKind imingItemKind);
+
+ostream& operator << (ostream& os, const mfTimingItemKind& elt);
+
 class EXP mfTimingItem : public smartable
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum timingItemKind {
-      kMandatory, kOptional
-    };
 
     // constructors/destructor
     // ------------------------------------------------------
@@ -44,14 +48,14 @@ class EXP mfTimingItem : public smartable
     static SMARTP<mfTimingItem> createTimingItem (
       const string&  activity,
       const string&  description,
-      timingItemKind kind,
+      mfTimingItemKind kind,
       clock_t        startClock,
       clock_t        endClock);
 
     mfTimingItem (
       const string&  activity,
       const string&  description,
-      timingItemKind kind,
+      mfTimingItemKind kind,
       clock_t        startClock,
       clock_t        endClock);
 
@@ -60,7 +64,7 @@ class EXP mfTimingItem : public smartable
     // set and get
     // ------------------------------------------------------
 
-    timingItemKind        getKind () const
+    mfTimingItemKind     getKind () const
                               { return fKind; }
 
     string                getActivity () const
@@ -78,7 +82,7 @@ class EXP mfTimingItem : public smartable
     // private fields
     // ------------------------------------------------------
 
-    timingItemKind        fKind;
+    mfTimingItemKind     fKind;
 
     string                fActivity;
     string                fDescription;
@@ -104,7 +108,8 @@ class EXP mfTimingItemsList {
     // global variable for general use
     // ------------------------------------------------------
 
-    static mfTimingItemsList         gGlobalTimingItemsList;
+    static mfTimingItemsList
+                          gGlobalTimingItemsList;
 
   public:
 
@@ -113,11 +118,11 @@ class EXP mfTimingItemsList {
 
     // add an item
     void                  appendTimingItem (
-                            const string&              activity,
-                            const string&              description,
-                            mfTimingItem::timingItemKind kind,
-                            clock_t                    startClock,
-                            clock_t                    endClock);
+                            const string&     activity,
+                            const string&     description,
+                            mfTimingItemKind kind,
+                            clock_t           startClock,
+                            clock_t            endClock);
 
   public:
 

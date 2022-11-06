@@ -116,13 +116,13 @@ class EXP msrScordatura : public msrMeasureElement
     // data types
     // ------------------------------------------------------
 
-    enum msrScordaturaKind {
+    enum class msrScordaturaKind {
       kScordaturaNone,
       kScordaturaUp, kScordaturaDown,
       kScordaturaStop, kScordaturaContinue
     };
 
-    static string scordaturaKindAsString (
+    string scordaturaKindAsString (
       msrScordaturaKind scordaturaKind);
 
     // creation from MusicXML
@@ -347,34 +347,40 @@ typedef SMARTP<msrHarpPedalsTuning> S_msrHarpPedalsTuning;
 EXP ostream& operator << (ostream& os, const S_msrHarpPedalsTuning& elt);
 
 //______________________________________________________________________________
+// data types
+
+
+enum class msrPedalTypeKind {
+  k_NoPedalType,
+  kPedalStart, kPedalContinue, kPedalChange, kPedalStop
+};
+
+string msrPedalTypeKindAsString (
+  msrPedalTypeKind pedalTypeKind);
+
+ostream& operator << (ostream& os, const msrPedalTypeKind& elt);
+
+enum class msrPedalLineKind {
+  kPedalLineYes, kPedalLineNo
+};
+
+string msrPedalLineKindAsString (
+  msrPedalLineKind pedalLineKind);
+
+ostream& operator << (ostream& os, const msrPedalLineKind& elt);
+
+enum class msrPedalSignKind {
+  kPedalSignYes, kPedalSignNo
+};
+
+string msrPedalSignKindAsString (
+  msrPedalSignKind pedalSignKind);
+
+ostream& operator << (ostream& os, const msrPedalSignKind& elt);
+
 class EXP msrPedal : public msrMeasureElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrPedalTypeKind {
-      k_NoPedalType,
-      kPedalStart, kPedalContinue, kPedalChange, kPedalStop
-    };
-
-    static string pedalTypeKindAsString (
-      msrPedalTypeKind pedalTypeKind);
-
-    enum msrPedalLineKind {
-      kPedalLineYes, kPedalLineNo
-    };
-
-    static string pedalLineKindAsString (
-      msrPedalLineKind pedalLineKind);
-
-    enum msrPedalSignKind {
-      kPedalSignYes, kPedalSignNo
-    };
-
-    static string pedalSignKindAsString (
-      msrPedalSignKind pedalSignKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

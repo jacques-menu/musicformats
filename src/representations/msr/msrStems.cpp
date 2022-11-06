@@ -96,23 +96,23 @@ void msrStem::acceptOut (basevisitor* v)
 void msrStem::browseData (basevisitor* v)
 {}
 
-string msrStem::stemKindAsString (
+string msrStemKindAsString (
   msrStemKind stemKind)
 {
   string result;
 
   switch (stemKind) {
-    case msrStem::kStemNeutral:
-      result = "stemNeutral";
+    case msrStemKind::kStemNeutral:
+      result = "kStemNeutral";
       break;
-    case msrStem::kStemUp:
-      result = "stemUp";
+    case msrStemKind::kStemUp:
+      result = "kStemUp";
       break;
-    case msrStem::kStemDown:
-      result = "stemDown";
+    case msrStemKind::kStemDown:
+      result = "kStemDown";
       break;
-    case msrStem::kStemDouble:
-      result = "stemDouble";
+    case msrStemKind::kStemDouble:
+      result = "kStemDouble";
       break;
   } // switch
 
@@ -125,8 +125,8 @@ string msrStem::asString () const
 
   s <<
     "[Stem" <<
-    ", stemKind: " <<
-    stemKindAsString (fStemKind) <<
+    ", fStemKind: " <<
+    msrStemKindAsString (fStemKind) <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -146,7 +146,7 @@ ostream& operator << (ostream& os, const S_msrStem& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

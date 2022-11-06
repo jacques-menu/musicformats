@@ -281,19 +281,19 @@ void msrNote::initializeNote ()
       left <<
         setw (fieldWidth) <<
         "fNoteOctaveKind" << " = " <<
-        msrOctaveKindAsString (fNoteOctaveKind) <<
+        fNoteOctaveKind <<
         endl <<
 
       left <<
         setw (fieldWidth) <<
         "fNoteDisplayOctaveKind" << " = " <<
-        msrOctaveKindAsString (fNoteDisplayOctaveKind) <<
+        fNoteDisplayOctaveKind <<
         endl <<
 
       left <<
         setw (fieldWidth) <<
         "fNoteIsACueNoteKind" << " = " <<
-         noteIsACuemsrNoteKindAsString (fNoteIsACueNoteKind) <<
+         fNoteIsACueNoteKind <<
         endl <<
 
       left <<
@@ -305,36 +305,33 @@ void msrNote::initializeNote ()
       left <<
         setw (fieldWidth) <<
         "fNoteHeadKind" << " = " <<
-         noteHeadKindAsString (fNoteHeadKind) <<
+         fNoteHeadKind <<
         endl <<
       left <<
         setw (fieldWidth) <<
         "fNoteHeadFilledKind" << " = " <<
-         noteHeadFilledKindAsString (fNoteHeadFilledKind) <<
+         fNoteHeadFilledKind <<
         endl <<
       left <<
         setw (fieldWidth) <<
         "fNoteHeadParenthesesKind" << " = " <<
-         noteHeadParenthesesKindAsString (fNoteHeadParenthesesKind) <<
+         fNoteHeadParenthesesKind <<
         endl <<
 
       left <<
         setw (fieldWidth) <<
         "fNoteAccidentalKind" << " = " <<
-        msrAccidentalKindAsString (
-          fNoteAccidentalKind) <<
+        fNoteAccidentalKind <<
         endl <<
       left <<
         setw (fieldWidth) <<
         "fNoteEditorialAccidentalKind" << " = " <<
-        msrEditorialAccidentalKindAsString (
-          fNoteEditorialAccidentalKind) <<
+        fNoteEditorialAccidentalKind <<
         endl <<
       left <<
         setw (fieldWidth) <<
         "fNoteCautionaryAccidentalKind" << " = " <<
-        msrCautionaryAccidentalKindAsString (
-          fNoteCautionaryAccidentalKind) <<
+        fNoteCautionaryAccidentalKind <<
         endl <<
 
       left <<
@@ -1390,9 +1387,9 @@ S_msrNote msrNote::createRestNote (
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
-      kNoteHeadNormal, // JMI
-      kNoteHeadFilledYes, // JMI
-      kNoteHeadParenthesesNo); // JMI
+      msrNoteHeadKind::kNoteHeadNormal, // JMI
+      msrNoteHeadFilledKind::kNoteHeadFilledYes, // JMI
+      msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
@@ -1441,9 +1438,9 @@ S_msrNote msrNote::createSkipNote (
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
-      kNoteHeadNormal, // JMI
-      kNoteHeadFilledYes, // JMI
-      kNoteHeadParenthesesNo); // JMI
+      msrNoteHeadKind::kNoteHeadNormal, // JMI
+      msrNoteHeadFilledKind::kNoteHeadFilledYes, // JMI
+      msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
@@ -1492,9 +1489,9 @@ S_msrNote msrNote::createGraceSkipNote (
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
-      kNoteHeadNormal, // JMI
-      kNoteHeadFilledYes, // JMI
-      kNoteHeadParenthesesNo); // JMI
+      msrNoteHeadKind::kNoteHeadNormal, // JMI
+      msrNoteHeadFilledKind::kNoteHeadFilledYes, // JMI
+      msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
@@ -1545,9 +1542,9 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
-      kNoteHeadNormal, // JMI
-      kNoteHeadFilledYes, // JMI
-      kNoteHeadParenthesesNo); // JMI
+      msrNoteHeadKind::kNoteHeadNormal, // JMI
+      msrNoteHeadFilledKind::kNoteHeadFilledYes, // JMI
+      msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
@@ -1598,9 +1595,9 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
-      kNoteHeadNormal, // JMI
-      kNoteHeadFilledYes, // JMI
-      kNoteHeadParenthesesNo); // JMI
+      msrNoteHeadKind::kNoteHeadNormal, // JMI
+      msrNoteHeadFilledKind::kNoteHeadFilledYes, // JMI
+      msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
@@ -1652,9 +1649,9 @@ S_msrNote msrNote::createRegularNote (
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
-      kNoteHeadNormal, // JMI
-      kNoteHeadFilledYes, // JMI
-      kNoteHeadParenthesesNo); // JMI
+      msrNoteHeadKind::kNoteHeadNormal, // JMI
+      msrNoteHeadFilledKind::kNoteHeadFilledYes, // JMI
+      msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
@@ -2168,9 +2165,9 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 
       msrPrintObjectKind::kPrintObjectYes, // default value
 
-      kNoteHeadNormal, // JMI
-      kNoteHeadFilledYes, // JMI
-      kNoteHeadParenthesesNo); // JMI
+      msrNoteHeadKind::kNoteHeadNormal, // JMI
+      msrNoteHeadFilledKind::kNoteHeadFilledYes, // JMI
+      msrNoteHeadParenthesesKind::kNoteHeadParenthesesNo); // JMI
   assert (o != nullptr);
 
 #ifdef TRACING_IS_ENABLED
@@ -2337,7 +2334,7 @@ string msrNote::noteDisplayWholeNotesAsMsrString () const
   return result;
 }
 
-string noteHeadKindAsString (
+string msrNoteHeadKindAsString (
   msrNoteHeadKind noteHeadKind)
 {
   string result;
@@ -2380,7 +2377,7 @@ string noteHeadKindAsString (
       result = "kNoteHeadBackSlashed";
       break;
     case msrNoteHeadKind::kNoteHeadNormal:
-      result = "kNoteHeadNormal";
+      result = "msrNoteHeadKind::kNoteHeadNormal";
       break;
     case msrNoteHeadKind::kNoteHeadCluster:
       result = "kNoteHeadCluster";
@@ -2426,7 +2423,13 @@ string noteHeadKindAsString (
   return result;
 }
 
-string noteHeadFilledKindAsString (
+ostream& operator << (ostream& os, const msrNoteHeadKind& elt)
+{
+  os << msrNoteHeadKindAsString (elt);
+  return os;
+}
+
+string msrNoteHeadFilledKindAsString (
   msrNoteHeadFilledKind msrNoteHeadFilledKind)
 {
   string result;
@@ -2443,7 +2446,13 @@ string noteHeadFilledKindAsString (
   return result;
 }
 
-string noteHeadParenthesesKindAsString (
+ostream& operator << (ostream& os, const msrNoteHeadFilledKind& elt)
+{
+  os << msrNoteHeadFilledKindAsString (elt);
+  return os;
+}
+
+string msrNoteHeadParenthesesKindAsString (
   msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind)
 {
   string result;
@@ -2460,7 +2469,13 @@ string noteHeadParenthesesKindAsString (
   return result;
 }
 
-string noteIsACuemsrNoteKindAsString (
+ostream& operator << (ostream& os, const msrNoteHeadParenthesesKind& elt)
+{
+  os << msrNoteHeadParenthesesKindAsString (elt);
+  return os;
+}
+
+string msrNoteIsACueNoteKindAsString (
   msrNoteIsACueNoteKind msrNoteIsACueNoteKind)
 {
   string result;
@@ -2475,6 +2490,12 @@ string noteIsACuemsrNoteKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrNoteIsACueNoteKind& elt)
+{
+  os << msrNoteIsACueNoteKindAsString (elt);
+  return os;
 }
 
 msrDiatonicPitchKind msrNote::noteDiatonicPitchKind (
@@ -2498,7 +2519,7 @@ void msrNote::setNoteStem (S_msrStem stem)
   fNoteStem = stem;
 
   // mark note as stemless if relevant
-  if (stem->getStemKind () == msrStem::kStemNeutral)
+  if (stem->getStemKind () == msrStemKind::kStemNeutral)
     fNoteIsStemless = true;
 }
 
@@ -2622,7 +2643,7 @@ void msrNote::appendSpannerToNote (S_msrSpanner spanner)
   if (gGlobalTracingOahGroup->getTraceSpanners ()) {
     gLogStream <<
       "Appending spanner '" <<
-      spanner->spannerKindAsString () <<
+      msrSpannerKindAsString (spanner->getSpannerKindAsString ()) <<
       "' to note " <<
       asString () <<
       endl;
@@ -2631,10 +2652,10 @@ void msrNote::appendSpannerToNote (S_msrSpanner spanner)
 
   // register note has having a wavy line start
   switch (spanner->getSpannerKind ()) {
-    case msrSpanner::kSpannerDashes:
+    case msrSpannerKind::kSpannerDashes:
       break;
 
-    case msrSpanner::kSpannerWavyLine:
+    case msrSpannerKind::kSpannerWavyLine:
       switch (spanner->getSpannerTypeKind ()) {
         case msrSpannerTypeKind::kSpannerTypeStart:
           fNoteWavyLineSpannerStart = spanner;
@@ -2947,9 +2968,9 @@ void msrNote::appendLigatureToNote (S_msrLigature ligature)
 
   if (fNoteLigatures.size ()) {
     if (
-      fNoteLigatures.back ()->getLigatureKind () == msrLigature::kLigatureStart
+      fNoteLigatures.back ()->getLigatureKind () == msrLigatureKind::kLigatureStart
         &&
-      ligature->getLigatureKind () == msrLigature::kLigatureStop
+      ligature->getLigatureKind () == msrLigatureKind::kLigatureStop
         &&
       fNoteLigatures.back ()->getLigatureNumber () == ligature->getLigatureNumber ()
       ) {
@@ -4993,7 +5014,7 @@ string msrNote::asString () const
   }
 
   s <<
-    ", " << noteIsACuemsrNoteKindAsString (fNoteIsACueNoteKind);
+    ", " << msrNoteIsACueNoteKindAsString (fNoteIsACueNoteKind);
 
   s <<
     ", line " << fInputLineNumber <<
@@ -5325,7 +5346,7 @@ void msrNote::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fNoteIsACueNoteKind" << " : " <<
-    fNoteIsACueNoteKind <<
+    msrNoteIsACueNoteKindAsString (fNoteIsACueNoteKind) <<
     endl;
 
   os << left <<
@@ -5365,7 +5386,7 @@ void msrNote::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fNoteHeadParenthesesKind" << " : " <<
-    fNoteHeadParenthesesKind <<
+    msrNoteHeadParenthesesKindAsString (fNoteHeadParenthesesKind) <<
     endl;
 
   os << left <<
@@ -5489,7 +5510,7 @@ void msrNote::print (ostream& os) const
   os <<
     setw (fieldWidth) <<
     "fNoteIsACueNoteKind" << " : " <<
-    fNoteIsACueNoteKind <<
+    msrNoteIsACueNoteKindAsString (fNoteIsACueNoteKind) <<
     endl;
 
 //  ++gIndenter;
@@ -5764,18 +5785,15 @@ void msrNote::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fNoteHeadKind" << " : " <<
-    noteHeadKindAsString (
-      fNoteHeadKind) <<
+    fNoteHeadKind <<
     endl <<
     setw (fieldWidth) <<
     "fNoteHeadFilledKind" << " : " <<
-    noteHeadFilledKindAsString (
-      fNoteHeadFilledKind) <<
+    fNoteHeadFilledKind <<
     endl <<
     setw (fieldWidth) <<
     "fNoteHeadParenthesesKind" << " : " <<
-    noteHeadParenthesesKindAsString (
-      fNoteHeadParenthesesKind) <<
+    fNoteHeadParenthesesKind <<
     endl;
 
   // accidentals
@@ -5789,20 +5807,18 @@ void msrNote::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fNoteEditorialAccidentalKind" << " : " <<
-    msrEditorialAccidentalKindAsString (
-      fNoteEditorialAccidentalKind) <<
+    fNoteEditorialAccidentalKind <<
     endl <<
     setw (fieldWidth) <<
     "fNoteCautionaryAccidentalKind" << " : " <<
-    msrCautionaryAccidentalKindAsString (
-      fNoteCautionaryAccidentalKind) <<
+    fNoteCautionaryAccidentalKind <<
     endl;
 
   // cue note???
   os << left <<
     setw (fieldWidth) <<
     "fNoteIsACueNoteKind" << " : " <<
-    noteIsACuemsrNoteKindAsString (fNoteIsACueNoteKind) <<
+    fNoteIsACueNoteKind <<
     endl;
 
   // short cuts for efficiency
@@ -6959,8 +6975,8 @@ void msrNote::print (ostream& os) const
 
 /* JMI KAKA
       os <<
-        syllableKindAsString (syllable->getSyllableKind ()) <<
-          syllableExtendKindAsString (syllable->getSyllableExtendKind ()) <<
+        msrSyllableKindAsString (syllable->getSyllableKind ()) <<
+          msrSyllableExtendKindAsString (syllable->getSyllableExtendKind ()) <<
         " : ";
 
       msrSyllable::writeTextsList (

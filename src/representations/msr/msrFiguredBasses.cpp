@@ -154,7 +154,7 @@ S_msrBassFigure msrBassFigure::createFigureDeepClone (
   return figureDeepClone;
 }
 
-string figurePrefixKindAsString (
+string msrBassFigurePrefixKindAsString (
   msrBassFigurePrefixKind figurePrefixKind)
 {
   string result;
@@ -189,7 +189,13 @@ string figurePrefixKindAsString (
   return result;
 }
 
-string figureSuffixKindAsString (
+ostream& operator << (ostream& os, const msrBassFigurePrefixKind& elt)
+{
+  os << msrBassFigurePrefixKindAsString (elt);
+  return os;
+}
+
+string msrBassFigureSuffixKindAsString (
   msrBassFigureSuffixKind figureSuffixKind)
 {
   string result;
@@ -225,6 +231,12 @@ string figureSuffixKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrBassFigureSuffixKind& elt)
+{
+  os << msrBassFigureSuffixKindAsString (elt);
+  return os;
 }
 
 void msrBassFigure::acceptIn (basevisitor* v)
@@ -282,10 +294,10 @@ string msrBassFigure::asString () const
     "[BassFigure" <<
     " '" << fFigureNumber <<
     "', prefix: " <<
-    figurePrefixKindAsString (
+    msrBassFigurePrefixKindAsString (
       fFigurePrefixKind) <<
     ", suffix: " <<
-    figureSuffixKindAsString (
+    msrBassFigureSuffixKindAsString (
       fFigureSuffixKind) <<
     ", line " << fInputLineNumber <<
     ']';
@@ -331,7 +343,7 @@ S_msrFiguredBass msrFiguredBass::create (
       upLinkToMeasure,
       Rational (0, 1),           // figuredBassSoundingWholeNotes
       Rational (0, 1),           // figuredBassDisplayWholeNotes
-      kFiguredBassParenthesesNo,
+      msrFiguredBassParenthesesKind::kFiguredBassParenthesesNo,
       msrTupletFactor (1, 1));
   assert (o != nullptr);
 
@@ -611,7 +623,7 @@ void msrFiguredBass::browseData (basevisitor* v)
   } // for
 }
 
-string figuredBassParenthesesKindAsString (
+string msrFiguredBassParenthesesKindAsString (
   msrFiguredBassParenthesesKind figuredBassParenthesesKind)
 {
   string result;
@@ -644,7 +656,7 @@ string msrFiguredBass::asString () const
       fFiguredBassDisplayWholeNotes) <<
 
     ", fFiguredBassParenthesesKind: " <<
-    figuredBassParenthesesKindAsString (
+    msrFiguredBassParenthesesKindAsString (
       fFiguredBassParenthesesKind) <<
 
     ", fFiguredBassTupletFactor: " <<
@@ -737,7 +749,7 @@ void msrFiguredBass::print (ostream& os) const
 
     setw (fieldWidth) <<
     "fFiguredBassParenthesesKind" << " : " <<
-    figuredBassParenthesesKindAsString (
+    msrFiguredBassParenthesesKindAsString (
       fFiguredBassParenthesesKind) <<
     endl <<
 

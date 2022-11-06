@@ -576,7 +576,7 @@ SXMLFile createSXMLFileFromFile (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
@@ -643,7 +643,7 @@ SXMLFile createSXMLFileFromFd (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
@@ -695,7 +695,7 @@ SXMLFile createSXMLFileFromString (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
@@ -799,7 +799,7 @@ EXP Sxmlelement musicxmlFile2mxsr ( // JMI UNUSED SAX ???
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
@@ -918,7 +918,7 @@ EXP Sxmlelement musicxmlFd2mxsr ( // JMI UNUSED SAX ???
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
@@ -976,7 +976,7 @@ EXP Sxmlelement musicxmlString2mxsr ( // JMI UNUSED SAX ???
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 

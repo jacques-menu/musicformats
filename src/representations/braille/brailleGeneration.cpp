@@ -108,7 +108,7 @@ ostream& operator << (ostream& os, const bsrCellKind cell)
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_bsrBrailleGenerator bsrBrailleGenerator::create (
   bsrByteOrderingKind byteOrderingKind,
   ostream&            brailleOutputStream)

@@ -76,70 +76,70 @@ S_bsrCellsList bsrClef::buildCellsList () const
         fInputLineNumber);
 
   switch (fClefKind) {
-    case kClefKindNone:
+    case bsrClefKind::kClefKindNone:
       result =
         bsrCellsList::create (
           fInputLineNumber);
       break;
 
-    case kClefKindGTreble:
+    case bsrClefKind::kClefKindGTreble:
       result =
         bsrCellsList::create (
           fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots34, bsrCellKind::kDots123);
       break;
-    case kClefKindFBass:
+    case bsrClefKind::kClefKindFBass:
       result =
         bsrCellsList::create (
           fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots3456, bsrCellKind::kDots123);
       break;
-    case kClefKindCAlto:
+    case bsrClefKind::kClefKindCAlto:
       result =
         bsrCellsList::create (
           fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots346, bsrCellKind::kDots123);
       break;
 
-    case kClefKindGSoprano:
+    case bsrClefKind::kClefKindGSoprano:
       result =
         bsrCellsList::create (
           fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots34, bsrCellKind::kDots4, bsrCellKind::kDots123);
       break;
-    case kClefKindCBaritone:
+    case bsrClefKind::kClefKindCBaritone:
       result =
         bsrCellsList::create (
           fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots3456, bsrCellKind::kDots456, bsrCellKind::kDots123);
       break;
-    case kClefKindCTenor:
+    case bsrClefKind::kClefKindCTenor:
       result =
         bsrCellsList::create (
           fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots346, bsrCellKind::kDots5, bsrCellKind::kDots123);
       break;
 
-    case kClefKindGOttavaAlta:
+    case bsrClefKind::kClefKindGOttavaAlta:
       result =
         bsrCellsList::create (
           fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots34, bsrCellKind::kDots123, bsrCellKind::kDots3456, bsrCellKind::kDots125);
       break;
-    case kClefKindGOttavaBassa:
+    case bsrClefKind::kClefKindGOttavaBassa:
       result =
         bsrCellsList::create (
           fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots34, bsrCellKind::kDots123, bsrCellKind::kDots3456, bsrCellKind::kDots236);
       break;
 
-    case kClefKindModifiedBassForRightHandPart:
+    case bsrClefKind::kClefKindModifiedBassForRightHandPart:
       result =
         bsrCellsList::create (
           fInputLineNumber,
           bsrCellKind::kDots345, bsrCellKind::kDots3456, bsrCellKind::kDots13);
       break;
-    case kClefKindModifiedTrebleForLeftHandPart:
+    case bsrClefKind::kClefKindModifiedTrebleForLeftHandPart:
       result =
         bsrCellsList::create (
           fInputLineNumber,
@@ -211,87 +211,87 @@ void bsrClef::browseData (basevisitor* v)
 {}
 
 
-string bsrClef::msrClefKindAsString (
+string bsrClefKindAsString (
   bsrClefKind clefKind)
 {
   string result;
 
   switch (clefKind) {
-    case bsrClef::kClefKindNone:
-      result = "***clefNone***";
+    case bsrClefKind::kClefKindNone:
+      result = "***kClefKindNone***";
       break;
-    case bsrClef::kClefKindGTreble:
-      result = "clefGTreble";
+    case bsrClefKind::kClefKindGTreble:
+      result = "kClefKindGTreble";
       break;
-    case bsrClef::kClefKindFBass:
-      result = "clefFBass";
+    case bsrClefKind::kClefKindFBass:
+      result = "kClefKindFBass";
       break;
-    case bsrClef::kClefKindCAlto:
-      result = "clefCAlto";
+    case bsrClefKind::kClefKindCAlto:
+      result = "kClefKindCAlto";
       break;
-    case bsrClef::kClefKindGSoprano:
-      result = "clefGSoprano";
+    case bsrClefKind::kClefKindGSoprano:
+      result = "kClefKindGSoprano";
       break;
-    case bsrClef::kClefKindCBaritone:
-      result = "clefFBaritone";
+    case bsrClefKind::kClefKindCBaritone:
+      result = "kClefKindCBaritone";
       break;
-    case bsrClef::kClefKindCTenor:
-      result = "clefCTenor";
+    case bsrClefKind::kClefKindCTenor:
+      result = "kClefKindCTenor";
       break;
-    case bsrClef::kClefKindGOttavaAlta:
-      result = "clefGOttavaAlta";
+    case bsrClefKind::kClefKindGOttavaAlta:
+      result = "kClefKindGOttavaAlta";
       break;
-    case bsrClef::kClefKindGOttavaBassa:
-      result = "clefGOttavaBassa";
+    case bsrClefKind::kClefKindGOttavaBassa:
+      result = "kClefKindGOttavaBassa";
       break;
-    case bsrClef::kClefKindModifiedBassForRightHandPart:
-      result = "clefModifiedBassForRightHandPart";
+    case bsrClefKind::kClefKindModifiedBassForRightHandPart:
+      result = "kClefKindModifiedBassForRightHandPart";
       break;
-    case bsrClef::kClefKindModifiedTrebleForLeftHandPart:
-      result = "clefModifiedTrebleForLeftHandPart";
+    case bsrClefKind::kClefKindModifiedTrebleForLeftHandPart:
+      result = "kClefKindModifiedTrebleForLeftHandPart";
       break;
   } // switch
 
   return result;
 }
 
-string bsrClef::clefKindAsDebugString (
+string bsrClefKindAsDebugString (
   bsrClefKind clefKind)
 {
   string result;
 
   switch (clefKind) {
-    case bsrClef::kClefKindNone:
+    case bsrClefKind::kClefKindNone:
       result = "_";
       break;
-    case bsrClef::kClefKindGTreble:
+    case bsrClefKind::kClefKindGTreble:
       result = "g2";
       break;
-    case bsrClef::kClefKindFBass:
+    case bsrClefKind::kClefKindFBass:
       result = "f4";
       break;
-    case bsrClef::kClefKindCAlto:
+    case bsrClefKind::kClefKindCAlto:
       result = "u3";
       break;
-    case bsrClef::kClefKindGSoprano:
+    case bsrClefKind::kClefKindGSoprano:
       result = "g1";
       break;
-    case bsrClef::kClefKindCBaritone:
+    case bsrClefKind::kClefKindCBaritone:
       result = "u5";
       break;
-    case bsrClef::kClefKindCTenor:
+    case bsrClefKind::kClefKindCTenor:
       result = "u4";
       break;
-    case bsrClef::kClefKindGOttavaAlta:
+    case bsrClefKind::kClefKindGOttavaAlta:
       result = "g8a";
       break;
-    case bsrClef::kClefKindGOttavaBassa:
+    case bsrClefKind::kClefKindGOttavaBassa:
       result = "g8b";
       break;
-    case bsrClef::kClefKindModifiedBassForRightHandPart:
+    case bsrClefKind::kClefKindModifiedBassForRightHandPart:
       result = "rh";
       break;
-    case bsrClef::kClefKindModifiedTrebleForLeftHandPart:
+    case bsrClefKind::kClefKindModifiedTrebleForLeftHandPart:
       result = "lh";
       break;
   } // switch
@@ -299,17 +299,23 @@ string bsrClef::clefKindAsDebugString (
   return result;
 }
 
+ostream& operator << (ostream& os, const bsrClefKind& elt)
+{
+  os << bsrClefKindAsString (elt);
+  return os;
+}
+
 string bsrClef::asString () const
 {
   stringstream s;
 
   s <<
-    "Clef" <<
-    ", clefKind: " <<
-    msrClefKindAsString (fClefKind) <<
-    "clefCellsList: " << fClefCellsList <<
-    ", spacesBefore: " << fSpacesBefore <<
-    ", line " << fInputLineNumber;
+    "[Clef" <<
+    ", fClefKind: " << fClefKind <<
+    "fClefCellsList: " << fClefCellsList <<
+    ", fSpacesBefore: " << fSpacesBefore <<
+    ", line " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -320,7 +326,7 @@ string bsrClef::asDebugString () const
 
   s <<
     "CLEF " <<
-    clefKindAsDebugString (fClefKind) <<
+    bsrClefKindAsDebugString (fClefKind) <<
     ']';
 
   return s.str ();
@@ -339,14 +345,13 @@ void bsrClef::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "clefKind" << " : " <<
-    msrClefKindAsString (fClefKind) <<
+    "fClefKind" << " : " << fClefKind <<
     endl <<
     setw (fieldWidth) <<
-    "clefCellsList" << " : " << fClefCellsList <<
+    "fClefCellsList" << " : " << fClefCellsList <<
     endl <<
     setw (fieldWidth) <<
-    "spacesBefore" << " : " << fSpacesBefore <<
+    "fSpacesBefore" << " : " << fSpacesBefore <<
     endl;
 
   --gIndenter;
@@ -360,7 +365,7 @@ ostream& operator << (ostream& os, const S_bsrClef& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

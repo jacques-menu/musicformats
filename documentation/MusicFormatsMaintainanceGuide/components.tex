@@ -358,7 +358,7 @@ total 32
 
 When a \mf\ \service\ is \MainIt{run} from the \CLI\ or through an \API\ function, an instance of \class{mfServiceRunData} is created.
 
-This class is defined in \mflibraryBoth{mfServiceRunData} to hold data specific to the run. They are global data, but don't belong to the regular, invariant data contained in the library, such as the notes pitches in various languages: %%%JMI
+This class   is defined in \mflibraryBoth{mfServiceRunData} to hold data specific to the run. They are global data, but don't belong to the regular, invariant data contained in the library, such as the notes pitches in various languages: %%%JMI
 \begin{lstlisting}[language=CPlusPlus]
 class EXP mfServiceRunData : public smartable
 {
@@ -512,7 +512,7 @@ lpsrScore::lpsrScore (
         lpsrComment::create (
           inputLineNumber,
           s.str (),
-          lpsrComment::kGapAfterwardsYes);
+          lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes);
     }
 	}
 

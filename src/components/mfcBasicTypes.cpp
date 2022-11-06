@@ -874,7 +874,7 @@ ostream& operator << (ostream& os, const S_mfcVersionsHistory& elt)
 }
 
 //______________________________________________________________________________
-string componenKindAsString (
+string mfcComponenKindAsString (
   mfcComponenKind componenKind)
 {
   string result;
@@ -901,7 +901,7 @@ string componenKindAsString (
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_mfcComponent mfcComponent::create (
   const string&   componentName,
   mfcComponenKind componenKind)
@@ -957,7 +957,7 @@ void mfcComponent::appendVersionDescrToComponent (
       "Appending version " <<
       versionDescr <<
       " to " <<
-      componenKindAsString (fComponenKind) <<
+      mfcComponenKindAsString (fComponenKind) <<
       ' ' <<
       fComponentName <<
       endl;
@@ -979,7 +979,7 @@ string mfcComponent::asString () const
   s <<
     fComponentName <<
     ' ' <<
-    componenKindAsString (fComponenKind) <<
+    mfcComponenKindAsString (fComponenKind) <<
     ' ' <<
     componentMostRecentVersion->
       getVersionNumber ()->
@@ -1039,7 +1039,7 @@ void mfcComponent::printVersion (ostream& os) const
   os <<
     fComponentName <<
     ' ' <<
-    componenKindAsString (fComponenKind) <<
+    mfcComponenKindAsString (fComponenKind) <<
     ' ' <<
     getGlobalMusicFormatsVersionNumberAndDate () <<
     endl;
@@ -1219,7 +1219,7 @@ ostream& operator << (ostream& os, const S_mfcPassComponent& elt)
 }
 
 //______________________________________________________________________________
-string componentUsedFromTheCLIKindAsString (
+string mfcComponentUsedFromTheCLIKindAsString (
   mfcMultiComponentUsedFromTheCLIKind componentUsedFromTheCLIKind)
 {
   string result;
@@ -1236,7 +1236,7 @@ string componentUsedFromTheCLIKindAsString (
   return result;
 }
 
-string componentEntropicityKindAsString (
+string mfcComponentEntropicityKindAsString (
   mfcMultiComponentEntropicityKind componentEntropicityKind)
 {
   string result;
@@ -1254,7 +1254,7 @@ string componentEntropicityKindAsString (
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_mfcMultiComponent mfcMultiComponent::create ( JMI v0.9.66
   const string&   multiComponentName,
   mfcComponenKind componenKind,
@@ -1327,7 +1327,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
       " to " <<
       fComponentName <<
       ' ' <<
-      componenKindAsString (fComponenKind) <<
+      mfcComponenKindAsString (fComponenKind) <<
       ' ' <<
       "\"" <<
       endl;
@@ -1362,7 +1362,7 @@ void mfcMultiComponent::appendRepresentationToMultiComponent (
             "Versions numbering inconsistency: multi component " <<
             fComponentName <<
             ' ' <<
-            componenKindAsString (fComponenKind) <<
+            mfcComponenKindAsString (fComponenKind) <<
             " has version number " <<
             multiComponentMostRecentVersionNumber->asString () <<
             " while " <<
@@ -1423,7 +1423,7 @@ void mfcMultiComponent::appendPassToMultiComponent (
             "Versions numbering inconsistency: multi component " <<
             fComponentName <<
             ' ' <<
-            componenKindAsString (fComponenKind) <<
+            mfcComponenKindAsString (fComponenKind) <<
             " has version number " <<
             multiComponentMostRecentVersionNumber->asString () <<
             " while " <<
@@ -1673,7 +1673,7 @@ void mfcMultiComponent::print (ostream& os) const
         "Command line version of " <<
         fComponentName <<
         ' ' <<
-        componenKindAsString (fComponenKind) <<
+        mfcComponenKindAsString (fComponenKind) <<
         ' ';
       break;
 
@@ -1681,7 +1681,7 @@ void mfcMultiComponent::print (ostream& os) const
       os <<
         fComponentName <<
         ' ' <<
-        componenKindAsString (fComponenKind) <<
+        mfcComponenKindAsString (fComponenKind) <<
         " API version ";
       break;
   } // switch
@@ -1763,7 +1763,7 @@ void mfcMultiComponent::printVersionShort (ostream& os) const
         "Command line version of " <<
         fComponentName <<
         ' ' <<
-        componenKindAsString (fComponenKind) <<
+        mfcComponenKindAsString (fComponenKind) <<
         ' ';
       break;
 
@@ -1771,7 +1771,7 @@ void mfcMultiComponent::printVersionShort (ostream& os) const
       os <<
         fComponentName <<
         ' ' <<
-        componenKindAsString (fComponenKind) <<
+        mfcComponenKindAsString (fComponenKind) <<
       " API version ";
       break;
   } // switch
@@ -1789,7 +1789,7 @@ void mfcMultiComponent::printVersionFull (ostream& os) const
         "Command line version of " <<
         fComponentName <<
         ' ' <<
-        componenKindAsString (fComponenKind) <<
+        mfcComponenKindAsString (fComponenKind) <<
         ' ';
       break;
 
@@ -1797,7 +1797,7 @@ void mfcMultiComponent::printVersionFull (ostream& os) const
       os <<
         fComponentName <<
         ' ' <<
-        componenKindAsString (fComponenKind) <<
+        mfcComponenKindAsString (fComponenKind) <<
         " API version ";
       break;
   } // switch
@@ -1827,7 +1827,7 @@ void mfcMultiComponent::printHistory (ostream&  os) const
         "Command line version of " <<
         fComponentName <<
         ' ' <<
-        componenKindAsString (fComponenKind) <<
+        mfcComponenKindAsString (fComponenKind) <<
         ' ';
       break;
 
@@ -1835,7 +1835,7 @@ void mfcMultiComponent::printHistory (ostream&  os) const
       os <<
         fComponentName <<
         ' ' <<
-        componenKindAsString (fComponenKind) <<
+        mfcComponenKindAsString (fComponenKind) <<
       " API version ";
       break;
   } // switch
@@ -2062,7 +2062,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
       " to " <<
       fComponentName <<
       ' ' <<
-      componenKindAsString (fComponenKind) <<
+      mfcComponenKindAsString (fComponenKind) <<
       ' ' <<
       "\"" <<
       endl;
@@ -2097,7 +2097,7 @@ void mfcLibraryComponent::appendConverterToMultiComponent (
             "Versions numbering inconsistency: multi component " <<
             fComponentName <<
             ' ' <<
-            componenKindAsString (fComponenKind) <<
+            mfcComponenKindAsString (fComponenKind) <<
             " has version number " <<
             multiComponentMostRecentVersionNumber->asString () <<
             " while " <<

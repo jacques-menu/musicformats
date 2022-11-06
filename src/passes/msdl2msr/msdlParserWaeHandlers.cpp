@@ -33,7 +33,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_msdlParserWaeHandler msdlParserWaeHandler::create ()
 {
   msdlParserWaeHandler* o =

@@ -561,7 +561,7 @@ void msrChord::appendDalSegnoToChord (S_msrDalSegno dalSegno)
 
 void msrChord::appendArticulationToChord (S_msrArticulation art)
 {
-  msrArticulation::msrArticulationKind
+  msrArticulationKind
     articulationKind =
       art->
         getArticulationKind ();
@@ -580,7 +580,7 @@ void msrChord::appendArticulationToChord (S_msrArticulation art)
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
     gLogStream <<
       "Appending articulation '" <<
-      art->articulationKindAsString () <<
+      art->msrArticulationKindAsString () <<
       "' to chord" <<
       endl;
   }
@@ -597,12 +597,8 @@ void msrChord::appendSpannerToChord (S_msrSpanner span)
         getSpannerKind ();
 
   // don't append the same spanner several times
-  for (
-    list<S_msrSpanner>::const_iterator i = fChordSpanners.begin ();
-    i!=fChordSpanners.end ();
-    ++i
-  ) {
-      if ((*i)->getSpannerKind () == spannerKind)
+  for (S_msrSpanner spanner : noteSpanners) {
+      if (spanner->getSpannerKind () == spannerKind)
         return;
   } // for
 
@@ -610,7 +606,7 @@ void msrChord::appendSpannerToChord (S_msrSpanner span)
   if (gGlobalTracingOahGroup->getTraceSpanners ()) {
     gLogStream <<
       "Appending spanner '" <<
-      span->spannerKindAsString () <<
+      spanner->msrSpannerKindAsString () <<
       "' to chord '" <<
       asString () <<
       "'" <<
@@ -618,7 +614,7 @@ void msrChord::appendSpannerToChord (S_msrSpanner span)
   }
 #endif
 
-  fChordSpanners.push_back (span);
+  fChordSpanners.push_back (spanner);
 }
 
 void msrChord::setChordSingleTremolo (S_msrSingleTremolo trem)
@@ -780,7 +776,7 @@ void msrChord::appendOrnamentToChord (S_msrOrnament orn)
   if (gGlobalTracingOahGroup->getTraceChords ()) {
     gLogStream <<
       "Appending ornament '" <<
-      ornamentKindAsString (orn->getOrnamentKind ()) <<
+      msrOrnamentKindAsString (orn->getOrnamentKind ()) <<
       "' to chord" <<
       endl;
   }

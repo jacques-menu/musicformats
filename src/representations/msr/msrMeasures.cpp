@@ -120,7 +120,8 @@ void msrMeasure::initializeMeasure ()
   fMeasureKind = msrMeasureKind::kMeasureKindUnknown;
 
   // measure 'first in segment' kind
-  fMeasureFirstInSegmentKind = kMeasureFirstInSegmentKindUnknown;
+  fMeasureFirstInSegmentKind =
+    msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindUnknown;
 
   // measure 'first in voice'
   fMeasureFirstInVoice = false; // default value
@@ -160,7 +161,8 @@ void msrMeasure::initializeMeasure ()
   fMeasureContainsMusic = false;
 
   // regular measure ends detection
-  fMeasureEndRegularKind = kMeasureEndRegularKindUnknown;
+  fMeasureEndRegularKind =
+    msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown;
 
   // repeat context
   fMeasureRepeatContextKind = msrMeasureRepeatContextKind::kMeasureRepeatContextKindUnknown;
@@ -771,7 +773,7 @@ void msrMeasure::setMeasureEndRegularKind (
         "Setting regular kind of measure '" <<
         fMeasureNumber <<
         "' to '" <<
-        measureEndRegularKindAsString (measureEndRegularKind) <<
+        msrMeasureEndRegularKindAsString (measureEndRegularKind) <<
         "' in segment " <<
         fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
@@ -796,7 +798,7 @@ void msrMeasure::setMeasureRepeatContextKind (
         "Setting repeat context kind of measure '" <<
         fMeasureNumber <<
         "' to '" <<
-        measureRepeatContextKindAsString (measureRepeatContextKind) <<
+        msrMeasureRepeatContextKindAsString (measureRepeatContextKind) <<
         "' in segment " <<
         fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
@@ -3593,7 +3595,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
       ", newWholeNotesSinceLastRegularMeasureEnd: " <<
       newWholeNotesSinceLastRegularMeasureEnd <<
       ", currentVoiceRepeatPhaseKind: " <<
-      voiceRepeatPhaseKindAsString (
+      msrVoiceRepeatPhaseKindAsString (
         currentVoiceRepeatPhaseKind) <<
     "' in voice \"" << voice->getVoiceName () <<
     ", line " << inputLineNumber <<
@@ -3681,13 +3683,15 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
     // this is a regular measure
 
     // this is a regular measure end
-    setMeasureEndRegularKind (kMeasureEndRegularKindYes);
+    setMeasureEndRegularKind (
+            msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
 
     // set it's measure kind
     setMeasureKind (msrMeasureKind::kMeasureKindRegular);
 
     // this is a regular measure end
-    setMeasureEndRegularKind (kMeasureEndRegularKindYes);
+    setMeasureEndRegularKind (
+            msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
 
     // increment voice's current measure purist number
     voice->
@@ -3726,7 +3730,8 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         setMeasureKind (msrMeasureKind::kMeasureKindAnacrusis);
 
         // this is a regular measure end
-        setMeasureEndRegularKind (kMeasureEndRegularKindYes);
+        setMeasureEndRegularKind (
+            msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
 
         // fix measure purist number
         setMeasurePuristNumber (0);
@@ -3741,7 +3746,8 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
           newWholeNotesSinceLastRegularMeasureEnd == fFullMeasureWholeNotesDuration
         ) {
           // this is a regular measure end
-          setMeasureEndRegularKind (kMeasureEndRegularKindYes);
+          setMeasureEndRegularKind (
+            msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
 
           // increment voice's current measure purist number
           voice->
@@ -3757,7 +3763,8 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         }
         else {
           // this is no regular measure end
-          setMeasureEndRegularKind (kMeasureEndRegularKindNo);
+          setMeasureEndRegularKind (
+            msrMeasureEndRegularKind::kMeasureEndRegularKindNo);
         }
 
         // set measure's kind according to measureRepeatContextKind
@@ -3854,7 +3861,8 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
       setMeasureKind (msrMeasureKind::kMeasureKindOvercomplete);
 
       // this is a regular measure end
-      setMeasureEndRegularKind (kMeasureEndRegularKindYes);
+      setMeasureEndRegularKind (
+        msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
 
       // increment voice's current measure purist number
       voice->
@@ -6205,7 +6213,7 @@ void msrMeasure::browseData (basevisitor* v)
   }
 }
 
-string measureFirstInSegmentKindAsString (
+string msrMeasureFirstInSegmentKindAsString (
     msrMeasureFirstInSegmentKind measureFirstInSegmentKind)
 {
   string result;
@@ -6225,7 +6233,7 @@ string measureFirstInSegmentKindAsString (
   return result;
 }
 
-string measureRepeatContextKindAsString (
+string msrMeasureRepeatContextKindAsString (
   msrMeasureRepeatContextKind measureRepeatContextKind)
 {
   string result;
@@ -6260,7 +6268,7 @@ string measureRepeatContextKindAsString (
   return result;
 }
 
-string measureEndRegularKindAsString (
+string msrMeasureEndRegularKindAsString (
     msrMeasureEndRegularKind measureEndRegularKind)
 {
   string result;
@@ -6508,12 +6516,12 @@ void msrMeasure::print (ostream& os) const
 
     setw (fieldWidth) <<
     "fMeasureEndRegularKind" << " : " <<
-    measureEndRegularKindAsString (
+    msrMeasureEndRegularKindAsString (
       fMeasureEndRegularKind) <<
     endl <<
     setw (fieldWidth) <<
     "fMeasureRepeatContextKind" << " : " <<
-    measureRepeatContextKindAsString (
+    msrMeasureRepeatContextKindAsString (
       fMeasureRepeatContextKind) <<
     endl <<
 
@@ -6523,7 +6531,7 @@ void msrMeasure::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     "fMeasureFirstInSegmentKind" << " : " <<
-    measureFirstInSegmentKindAsString (
+    msrMeasureFirstInSegmentKindAsString (
       fMeasureFirstInSegmentKind) <<
     endl <<
 

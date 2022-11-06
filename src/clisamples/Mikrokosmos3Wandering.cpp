@@ -515,7 +515,7 @@ int main (int argc, char*  argv[])
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "Pass 1",
     "Create the MSR score",
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 

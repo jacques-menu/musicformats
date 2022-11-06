@@ -8,19 +8,19 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrPartGroup;
+class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 
-class msrPart;
+class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;
 
-class msrStaff;
+class   msrStaff;
 typedef SMARTP<msrStaff> S_msrStaff;
 
-class msrRepeat;
+class   msrRepeat;
 typedef SMARTP<msrRepeat> S_msrRepeat;
 
-class msrRepeatEnding;
+class   msrRepeatEnding;
 typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
 
 //______________________________________________________________________________

@@ -34,18 +34,18 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations for class mutual dependencies
+// PRE-declarations for class   mutual dependencies
 
-class oahAtom;
+class   oahAtom;
 typedef SMARTP<oahAtom> S_oahAtom;
 
-class oahSubGroup;
+class   oahSubGroup;
 typedef SMARTP<oahSubGroup> S_oahSubGroup;
 
-class oahGroup;
+class   oahGroup;
 typedef SMARTP<oahGroup> S_oahGroup;
 
-class oahHandler;
+class   oahHandler;
 typedef SMARTP<oahHandler> S_oahHandler;
 
 //______________________________________________________________________________
@@ -54,7 +54,7 @@ enum class oahOptionOrArgumentKind {
   kArgument
 };
 
-string optionOrArgumentKindAsString (
+string oahOptionOrArgumentKindAsString (
   oahOptionOrArgumentKind optionOrArgumentKind );
 
 ostream& operator << (ostream& os, oahOptionOrArgumentKind& elt);
@@ -67,7 +67,7 @@ ostream& operator << (ostream& os, oahOptionOrArgumentKind& elt);
     - first is the name of the option, such as '-x'
     - second is the value of the option
 */
-class oahOptionOrArgument : public smartable
+class   oahOptionOrArgument : public smartable
 {
   public:
 
@@ -467,7 +467,7 @@ EXP ostream& operator << (ostream& os, const S_oahPrefix& elt);
 //______________________________________________________________________________
 /*
   a common ancestor for all atom classes,
-  this class contains  only an uplink to the containing subgroup
+  this class   contains  only an uplink to the containing subgroup
 */
 class EXP oahAtom : public oahElement
 {
@@ -476,7 +476,7 @@ class EXP oahAtom : public oahElement
     // creation
     // ------------------------------------------------------
 
-/* this class is purely virtual
+/* this class   is purely virtual
     static SMARTP<oahAtom> create (
                             const string&       longName,
                             const string&       shortName,
@@ -592,7 +592,7 @@ class EXP oahAtomExpectingAValue : public oahAtom
 
     // creation
     // ------------------------------------------------------
-/* this class is purely virtual
+/* this class   is purely virtual
     static SMARTP<oahAtomExpectingAValue> create (
                             const string& longName,
                             const string& shortName,
@@ -670,7 +670,7 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
 
     // creation
     // ------------------------------------------------------
-/* this class is purely virtual
+/* this class   is purely virtual
     static SMARTP<oahAtomImplicitlyStoringAValue> create (
                             const string& longName,
                             const string& shortName,
@@ -761,7 +761,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
 
     // creation
     // ------------------------------------------------------
-/* this class is purely virtual
+/* this class   is purely virtual
     static SMARTP<oahAtomStoringAValue> create (
                             const string& longName,
                             const string& shortName,
@@ -851,7 +851,7 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // creation
     // ------------------------------------------------------
 
-/* this class is purely virtual
+/* this class   is purely virtual
     static SMARTP<oahPureHelpAtomWithoutAValue> create (
                             const string& longName,
                             const string& shortName,
@@ -921,7 +921,7 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // creation
     // ------------------------------------------------------
 
-/* this class is purely virtual
+/* this class   is purely virtual
     static SMARTP<oahPureHelpAtomExpectingAValue> create (
                             const string& longName,
                             const string& shortName,
@@ -1402,7 +1402,7 @@ class EXP oahHandler : public oahFindableElement
     // creation
     // ------------------------------------------------------
 
-/* this class is purely virtual
+/* this class   is purely virtual
     static SMARTP<oahHandler> create (
                             const string& serviceName,
                             const string& handlerHeader,

@@ -130,7 +130,7 @@ void displayMsrScoreShort (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     passDescription,
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 
@@ -187,7 +187,7 @@ void displayMsrScoreFull (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     passDescription,
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 
@@ -255,7 +255,7 @@ void displayMsrScoreSummary (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     passDescription,
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 }
@@ -306,7 +306,7 @@ void displayMsrScoreNames (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     passDescription,
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 }
@@ -346,7 +346,7 @@ void displayMsrScoreSlices (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     passDescription,
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 

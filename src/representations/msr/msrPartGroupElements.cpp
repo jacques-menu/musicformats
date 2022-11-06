@@ -24,14 +24,14 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrPart;
+class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;
 
-class msrPartGroup;
+class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_msrPartGroupElement msrPartGroupElement::create (
   int inputLineNumber)
 {

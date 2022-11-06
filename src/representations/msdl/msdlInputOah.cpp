@@ -581,7 +581,7 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
   gLogStream <<
     "The tokens in language \"" <<
     msdlKeywordsLanguageKindAsString (keywordsLanguageKind) <<
-    "\" are (<...> denotes a class of tokens): " <<
+    "\" are (<...> denotes a class   of tokens): " <<
     endl;
 
   ++gIndenter;

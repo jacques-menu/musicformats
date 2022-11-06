@@ -48,31 +48,31 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string tempoKindAsDebugString (
-  msrTempo::msrTempoKind tempoKind)
-{
-  string result;
-
-  switch (tempoKind) {
-    case msrTempo::k_NoTempoKind:
-      result = "_";
-      break;
-    case msrTempo::kTempoBeatUnitsWordsOnly:
-      result = "WordsOnly";
-      break;
-    case msrTempo::kTempoBeatUnitsPerMinute:
-      result = "PerMinute";
-      break;
-    case msrTempo::kTempoBeatUnitsEquivalence:
-      result = "Equivalence";
-      break;
-    case msrTempo::kTempoNotesRelationship:
-      result = "NotesRelationShip";
-      break;
-  } // switch
-
-  return result;
-}
+// string tempoKindAsDebugString ( // JMI v0.9.66
+//   msrTempo::msrTempoKind tempoKind)
+// {
+//   string result;
+//
+//   switch (tempoKind) {
+//     case msrTempoKind::k_NoTempoKind:
+//       result = "_";
+//       break;
+//     case msrTempoKind::kTempoBeatUnitsWordsOnly:
+//       result = "WordsOnly";
+//       break;
+//     case msrTempoKind::kTempoBeatUnitsPerMinute:
+//       result = "PerMinute";
+//       break;
+//     case msrTempoKind::kTempoBeatUnitsEquivalence:
+//       result = "Equivalence";
+//       break;
+//     case msrTempoKind::kTempoNotesRelationship:
+//       result = "NotesRelationShip";
+//       break;
+//   } // switch
+//
+//   return result;
+// }
 
 //______________________________________________________________________________
 S_bsrTempo bsrTempo::create (
@@ -108,13 +108,13 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
   if (! gGlobalMsr2bsrOahGroup->getNoTempos ()) {
     switch (fMsrTempo->getTempoKind ()) {
-      case msrTempo::k_NoTempoKind:
+      case msrTempoKind::k_NoTempoKind:
         break;
 
-      case msrTempo::kTempoBeatUnitsWordsOnly:
+      case msrTempoKind::kTempoBeatUnitsWordsOnly:
         break;
 
-      case msrTempo::kTempoBeatUnitsPerMinute:
+      case msrTempoKind::kTempoBeatUnitsPerMinute:
         {
           // fetch MSR tempo attributes
           const list<S_msrWords>&
@@ -343,7 +343,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
               bsrNumber::create (
                 fInputLineNumber,
                 perMinuteMin,
-                bsrNumber::kNumberSignIsNeededYes);
+                bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
           // append its cells to result
           result->
@@ -362,7 +362,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
                 bsrNumber::create (
                   fInputLineNumber,
                   perMinuteMax,
-                  bsrNumber::kNumberSignIsNeededYes);
+                  bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
             // append its cells to result
             result->
@@ -372,10 +372,10 @@ S_bsrCellsList bsrTempo::buildCellsList () const
         }
         break;
 
-      case msrTempo::kTempoBeatUnitsEquivalence:
+      case msrTempoKind::kTempoBeatUnitsEquivalence:
         break;
 
-      case msrTempo::kTempoNotesRelationship:
+      case msrTempoKind::kTempoNotesRelationship:
         break;
     } // switch
   }
@@ -450,7 +450,7 @@ string bsrTempo::asString () const
   s <<
     "Tempo" <<
     ", tempoKind: " <<
-    msrTempo::tempoKindAsString (fMsrTempo->getTempoKind ()) <<
+    msrTempo::msrTempoKindAsString (fMsrTempo->getTempoKind ()) <<
     ", tempoCellsList: " <<
     fTempoCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
@@ -467,13 +467,13 @@ string bsrTempo::asDebugString () const
     "[TEMPO ";
 
   switch (fMsrTempo->getTempoKind ()) {
-    case msrTempo::k_NoTempoKind:
+    case msrTempoKind::k_NoTempoKind:
       s << "_";
       break;
-    case msrTempo::kTempoBeatUnitsWordsOnly:
+    case msrTempoKind::kTempoBeatUnitsWordsOnly:
       s << "WordsOnly";
       break;
-    case msrTempo::kTempoBeatUnitsPerMinute:
+    case msrTempoKind::kTempoBeatUnitsPerMinute:
       {
         msrDottedDuration
           tempoBeatUnit =
@@ -486,14 +486,13 @@ string bsrTempo::asDebugString () const
           "/mn";
       }
       break;
-    case msrTempo::kTempoBeatUnitsEquivalence:
+    case msrTempoKind::kTempoBeatUnitsEquivalence:
       s << "Equivalence";
       break;
-    case msrTempo::kTempoNotesRelationship:
+    case msrTempoKind::kTempoNotesRelationship:
       s << "NotesRelationShip";
       break;
   } // switch
- // JMI   tempoKindAsDebugString (fMsrTempo->getTempoKind ());
 
   s << ']';
 
@@ -514,7 +513,7 @@ void bsrTempo::print (ostream& os) const
   os <<
     setw (fieldWidth) <<
     "tempoKind" << " : " <<
-    msrTempo::tempoKindAsString (fMsrTempo->getTempoKind ()) <<
+    msrTempo::msrTempoKindAsString (fMsrTempo->getTempoKind ()) <<
     endl <<
     setw (fieldWidth) <<
     "tempoCellsList" << " : " <<
@@ -535,7 +534,7 @@ ostream& operator << (ostream& os, const S_bsrTempo& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

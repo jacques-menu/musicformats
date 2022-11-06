@@ -121,7 +121,7 @@ EXP mfMusicformatsError msrScore2musicxmlWithHandler (
         gGlobalMsrOahGroup,
         passNumber2,
         passDescription2,
-        mfTimingItem::kMandatory);
+        mfTimingItemKind::kMandatory);
   }
   catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutputStream);

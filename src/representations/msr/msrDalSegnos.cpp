@@ -33,7 +33,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string dalSegnoKindAsString (
+string msrDalSegnoKindAsString (
   msrDalSegnoKind dalSegnoKind)
 {
   string result;
@@ -58,7 +58,7 @@ string dalSegnoKindAsString (
 
 ostream& operator << (ostream& os, const msrDalSegnoKind& elt)
 {
-  os << dalSegnoKindAsString (elt);
+  os << msrDalSegnoKindAsString (elt);
   return os;
 }
 
@@ -201,7 +201,7 @@ string msrDalSegno::asString () const
 
   s <<
     "[DalSegno" <<
-    ", dalSegnoKind: " << dalSegnoKindAsString (fDalSegnoKind) <<
+    ", dalSegnoKind: " << msrDalSegnoKindAsString (fDalSegnoKind) <<
     ", dalSegnoString: \"" << fDalSegnoString << "\"" <<
     ", staffNumber: " << fStaffNumber <<
     ", measurePosition: " << fMeasureElementMeasurePosition <<
@@ -223,7 +223,7 @@ void msrDalSegno::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "dalSegnoKind" << " : " << dalSegnoKindAsString (fDalSegnoKind) <<
+    "dalSegnoKind" << " : " << msrDalSegnoKindAsString (fDalSegnoKind) <<
     endl <<
     setw (fieldWidth) <<
     "dalSegnoString" << " : \"" << fDalSegnoString << "\"" <<

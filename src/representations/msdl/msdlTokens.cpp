@@ -290,6 +290,12 @@ string msdlTokenDescriptionKindAsString (
   return result;
 }
 
+ostream& operator << (ostream& os, const msdlTokenDescriptionKind& elt)
+{
+  os << msdlTokenDescriptionKindAsString (elt);
+  return os;
+}
+
 string msdlTokenKindAsMsdlString (
   msdlTokenKind            tokenKind,
   msdlKeywordsLanguageKind languageKind)
@@ -1294,7 +1300,7 @@ string msdlTokenDescription::asString () const
   s <<
     "[MSDL tokenDescription" <<
     ", tokenDescriptionKind = " <<
-    msdlTokenDescriptionKindAsString (fTokenDescriptionKind) <<
+    fTokenDescriptionKind <<
     ": ";
 
   switch (fTokenDescriptionKind) {
@@ -1327,7 +1333,7 @@ string msdlTokenDescription::asString () const
 void msdlTokenDescription::print (ostream& os) const
 {
   os <<
-    msdlTokenDescriptionKindAsString (fTokenDescriptionKind) <<
+    fTokenDescriptionKind <<
     ": ";
 
   switch (fTokenDescriptionKind) {

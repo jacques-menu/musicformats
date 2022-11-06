@@ -34,7 +34,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string userChosenLineBreakKindAsString (
+string msrUserChosenLineBreakKindAsString (
   msrUserChosenLineBreakKind userChosenLineBreakKind)
 {
   string result;
@@ -88,7 +88,7 @@ msrLineBreak::msrLineBreak (
     gLogStream <<
       "Constructing a break before measure " << fNextBarNumber <<
       ", fUserChosenLineBreakKind: " <<
-      userChosenLineBreakKindAsString (
+      msrUserChosenLineBreakKindAsString (
         fUserChosenLineBreakKind) <<
       ", line " << inputLineNumber <<
       endl;
@@ -154,7 +154,7 @@ string msrLineBreak::asString () const
     "LineBreak" <<
     ", nextBarNumber = \"" << fNextBarNumber << "\"" <<
     ", fUserChosenLineBreakKind: " <<
-    userChosenLineBreakKindAsString (
+    msrUserChosenLineBreakKindAsString (
       fUserChosenLineBreakKind) <<
     ", line " << fInputLineNumber;
 
@@ -179,7 +179,7 @@ ostream& operator << (ostream& os, const S_msrLineBreak& elt)
 }
 
 //______________________________________________________________________________
-string userChosenPageBreakKindAsString (
+string msrUserChosenPageBreakKindAsString (
   msrUserChosenPageBreakKind userChosenPageBreakKind)
 {
   string result;
@@ -226,7 +226,7 @@ msrPageBreak::msrPageBreak (
     gLogStream <<
       "Constructing a page break" <<
       ", fUserChosenPageBreakKind: " <<
-      userChosenPageBreakKindAsString (
+      msrUserChosenPageBreakKindAsString (
         fUserChosenPageBreakKind) <<
       ", line " << inputLineNumber <<
       endl;
@@ -293,7 +293,7 @@ string msrPageBreak::asString () const
   s <<
     "PageBreak" <<
     ", fUserChosenPageBreakKind: " <<
-    userChosenPageBreakKindAsString (
+    msrUserChosenPageBreakKindAsString (
       fUserChosenPageBreakKind) <<
     ", line " << fInputLineNumber;
 

@@ -31,11 +31,11 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 EXP Sxmlelement translateMsrToMxsr (
-  const S_msrScore           theMsrScore,
-  S_msrOahGroup              msrOpts,
-  string                     passNumber,
-  string                     passDescription,
-  mfTimingItem::timingItemKind timingItemKind);
+  const S_msrScore theMsrScore,
+  S_msrOahGroup    msrOpts,
+  string           passNumber,
+  string           passDescription,
+  mfTimingItemKind mfTimingItemKind);
 
 
 } // namespace MusicFormats

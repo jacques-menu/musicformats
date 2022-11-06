@@ -92,20 +92,20 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
   return newbornClone;
 }
 
-string msrGlissando::glissandoTypeKindAsString (
+string msrGlissando::msrGlissandoTypeKindAsString (
   msrGlissandoTypeKind glissandoTypeKind)
 {
   string result;
 
   switch (glissandoTypeKind) {
-    case msrGlissando::kGlissandoTypeNone:
-      result = "glissandoTypeNone";
+    case msrGlissandoTypeKind::kGlissandoTypeNone:
+      result = "kGlissandoTypeNone";
       break;
-    case msrGlissando::kGlissandoTypeStart:
-      result = "glissandoTypeStart";
+    case msrGlissandoTypeKind::kGlissandoTypeStart:
+      result = "kGlissandoTypeStart";
       break;
-    case msrGlissando::kGlissandoTypeStop:
-      result = "glissandoTypeStop";
+    case msrGlissandoTypeKind::kGlissandoTypeStop:
+      result = "kGlissandoTypeStop";
       break;
   } // switch
 
@@ -164,14 +164,13 @@ string msrGlissando::asString () const
   stringstream s;
 
   s <<
-    "Glissando" <<
+    "[Glissando" <<
     ", fGlissandoNumber " << fGlissandoNumber <<
-    ", " << glissandoTypeKindAsString (
-      fGlissandoTypeKind) <<
-    ", " << msrLineTypeKindAsString (
-      fGlissandoLineTypeKind) <<
-    ", \"" << fGlissandoTextValue <<
-    "\", line " << fInputLineNumber;
+    ", fGlissandoTypeKind: " << fGlissandoTypeKind <<
+    ", fGlissandoLineTypeKind: " << fGlissandoLineTypeKind <<
+    ", fGlissandoTextValue: \"" << fGlissandoTextValue << "\"" <<
+    ", line " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -189,23 +188,16 @@ void msrGlissando::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "glissandoNumber " <<
-    fGlissandoNumber <<
+    "fGlissandoNumber: " << fGlissandoNumber <<
     endl <<
     setw (fieldWidth) <<
-    "glissandoTypeKind" <<
-    glissandoTypeKindAsString (
-      fGlissandoTypeKind) <<
+    "fGlissandoTypeKind: " <<  fGlissandoTypeKind <<
     endl <<
     setw (fieldWidth) <<
-    "glissandoLineTypeKind" <<
-    msrLineTypeKindAsString (
-      fGlissandoLineTypeKind) <<
+    "fGlissandoLineTypeKind: " << fGlissandoLineTypeKind <<
     endl <<
     setw (fieldWidth) <<
-    "fGlissandoTextValue" << " : \"" <<
-    fGlissandoTextValue <<
-     "\"" <<
+    "fGlissandoTextValue: \"" << fGlissandoTextValue << "\"" <<
     endl;
 
   --gIndenter;
@@ -221,7 +213,7 @@ ostream& operator << (ostream& os, const S_msrGlissando& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

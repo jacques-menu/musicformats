@@ -10081,7 +10081,7 @@ msrIntervalKind intervalBetweenSemiTonesPitches (
 
   // order the semitones pitches so that
   // workSemiTonesPitch1 is greater or equal to workSemiTonesPitch2
-  // according to the enum type
+  // according to the enum class type
   Bool invertInterval (false);
 
   if (semiTonesPitch1 < semiTonesPitch2) {
@@ -10977,7 +10977,7 @@ ostream& operator << (ostream& os, const msrClefKind& elt)
   return os;
 }
 
-msrClefKind clefKindFromString (
+msrClefKind msrClefKindFromString (
   int           inputLineNumber,
   const string& clefString)
 {
@@ -16739,7 +16739,7 @@ msrPlacementKind msrPlacementKindFromString (
   return result;
 }
 
-string placementKindAsString (
+string msrPlacementKindAsString (
   msrPlacementKind placementKind)
 {
   string result;
@@ -16765,7 +16765,7 @@ string placementKindAsString (
 
 ostream& operator << (ostream& os, const msrPlacementKind& elt)
 {
-  os << placementKindAsString (elt);
+  os << msrPlacementKindAsString (elt);
   return os;
 }
 
@@ -17363,7 +17363,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
 
   // order the intervals so that
   // intervalKind1 is greater or equal to intervalKind2
-  // according to the enum type
+  // according to the enum class type
   Bool invertInterval (false);
 
   if (intervalKind1 < intervalKind2) {
@@ -18627,7 +18627,7 @@ S_msrHarmonyInterval msrHarmonyInterval::intervalSum (
 
   // order the intervals so that
   // intervalKind1 is greater or equal to intervalKind2
-  // according to the enum type
+  // according to the enum class type
   Bool invertInterval (false);
 
   if (intervalKind1 < intervalKind2) {
@@ -22371,9 +22371,10 @@ string msrAlphaRGBColor::asString () const
 {
   stringstream s;
 
-  s << "[AlphaRGBColor: " <<
-    "colorRGB: \"" << fColorRGB <<
-    "\", colorAlpha: \"" << fColorAlpha <<
+  s <<
+    "[AlphaRGBColor" <<
+    ", fColorRGB: \"" << fColorRGB <<
+    "\", fColorAlpha: \"" << fColorAlpha <<
     "\"]";
 
   return s.str ();

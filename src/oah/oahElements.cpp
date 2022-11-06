@@ -37,7 +37,7 @@ const int K_OAH_ELEMENTS_INDENTER_OFFSET = 3;
 const int K_OAH_FIELD_WIDTH = 40;
 
 //______________________________________________________________________________
-string elementValueKindAsString (
+string oahElementValueKindAsString (
   oahElementValueKind elementValueKind)
 {
   string result;
@@ -63,7 +63,7 @@ string elementValueKindAsString (
   return result;
 }
 
-string elementVisibilityKindAsString (
+string oahElementVisibilityKindAsString (
   oahElementVisibilityKind elementVisibilityKind)
 {
   string result;
@@ -89,7 +89,7 @@ string elementVisibilityKindAsString (
   return result;
 }
 
-string elementHelpOnlyKindAsString (
+string oahElementHelpOnlyKindAsString (
   oahElementHelpOnlyKind elementHelpOnlyKind)
 {
   string result;
@@ -192,7 +192,7 @@ ostream& operator << (ostream& os, const oahFindStringMatch* elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_oahFindableElement oahFindableElement::create ()
 {
   oahFindableElement* o =
@@ -232,7 +232,7 @@ ostream& operator << (ostream& os, const oahFindableElement& elt)
 }
 
 //______________________________________________________________________________
-/* this class is purely virtual
+/* this class   is purely virtual
 S_oahElement oahElement::create (
   const string&            longName,
   const string&            shortName,
@@ -633,17 +633,17 @@ void oahElement::printOahElementEssentials (
 
     setw (fieldWidth) <<
     "fElementValueKind" << " : " <<
-    elementValueKindAsString (fElementValueKind) <<
+    oahElementValueKindAsString (fElementValueKind) <<
     endl <<
 
     setw (fieldWidth) <<
     "fElementHelpOnlyKind" << " : " <<
-    elementHelpOnlyKindAsString (fElementHelpOnlyKind) <<
+    oahElementHelpOnlyKindAsString (fElementHelpOnlyKind) <<
     endl <<
 
     setw (fieldWidth) <<
     "fElementVisibilityKind" << " : " <<
-    elementVisibilityKindAsString (fElementVisibilityKind) <<
+    oahElementVisibilityKindAsString (fElementVisibilityKind) <<
     endl <<
 
     setw (fieldWidth) <<
@@ -799,11 +799,11 @@ string oahElementUse::asString () const
     ", fNameUsed: \"" << fNameUsed << "\"" <<
     ", fValueUsed: \"" << fValueUsed << "\"" <<
     ", elementValueKind: " <<
-    elementValueKindAsString (fElementUsed->getElementValueKind ()) <<
+    oahElementValueKindAsString (fElementUsed->getElementValueKind ()) <<
     ", oahElementHelpOnlyKind: " <<
-    elementHelpOnlyKindAsString (fElementUsed->getElementHelpOnlyKind ()) <<
+    oahElementHelpOnlyKindAsString (fElementUsed->getElementHelpOnlyKind ()) <<
     ", elementVisibilityKind: " <<
-    elementVisibilityKindAsString (fElementUsed->getElementVisibilityKind ()) <<
+    oahElementVisibilityKindAsString (fElementUsed->getElementVisibilityKind ()) <<
     ", multipleOccurrencesAllowed: " <<
     fElementUsed->getMultipleOccurrencesAllowed ();
 

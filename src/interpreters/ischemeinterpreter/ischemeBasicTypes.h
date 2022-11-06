@@ -32,7 +32,7 @@ using namespace MusicFormats;
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class ischemeDriver;
+class   ischemeDriver;
 
 //______________________________________________________________________________
 class EXP ischemeOptionsBlock : public smartable

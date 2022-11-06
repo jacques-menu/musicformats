@@ -56,7 +56,7 @@ msrSingleTremolo::~msrSingleTremolo ()
 string msrSingleTremolo::singleTremoloPlacementKindAsString () const
 {
   return
-    placementKindAsString (
+    msrPlacementKindAsString (
       fSingleTremoloPlacementKind);
 }
 

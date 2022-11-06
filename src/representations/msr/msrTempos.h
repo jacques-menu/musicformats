@@ -102,36 +102,41 @@ typedef SMARTP<msrTempoNote> S_msrTempoNote;
 EXP ostream& operator << (ostream& os, const S_msrTempoNote& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrTempoTupletTypeKind {
+  kTempoTupletTypeNone,
+  kTempoTupletTypeStart, kTempoTupletTypeStop
+};
+
+string msrTempoTupletTypeKindAsString (
+  msrTempoTupletTypeKind tempoTupletTypeKind);
+
+ostream& operator << (ostream& os, const msrTempoTupletTypeKind& elt);
+
+enum class msrTempoTupletBracketKind {
+  kTempoTupletBracketYes, kTempoTupletBracketNo
+};
+
+string msrTempoTupletBracketKindAsString (
+  msrTempoTupletBracketKind tempoTupletBracketKind);
+
+ostream& operator << (ostream& os, const msrTempoTupletBracketKind& elt);
+
+enum class msrTempoTupletShowNumberKind {
+  kTempoTupletShowNumberActual,
+  kTempoTupletShowNumberBoth,
+  kTempoTupletShowNumberNone
+};
+
+string msrTempoTupletShowNumberKindAsString (
+  msrTempoTupletShowNumberKind tempoTupletShowNumberKind);
+
+ostream& operator << (ostream& os, const msrTempoTupletShowNumberKind& elt);
+
 class EXP msrTempoTuplet : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrTempoTupletTypeKind {
-      kTempoTupletTypeNone,
-      kTempoTupletTypeStart, kTempoTupletTypeStop
-    };
-
-    static string tempoTupletTypeKindAsString (
-      msrTempoTupletTypeKind tempoTupletTypeKind);
-
-    enum msrTempoTupletBracketKind {
-      kTempoTupletBracketYes, kTempoTupletBracketNo
-    };
-
-    static string tempoTupletBracketKindAsString (
-      msrTempoTupletBracketKind tempoTupletBracketKind);
-
-    enum msrTempoTupletShowNumberKind {
-      kTempoTupletShowNumberActual,
-      kTempoTupletShowNumberBoth,
-      kTempoTupletShowNumberNone
-    };
-
-    static string tempoTupletShowNumberKindAsString (
-      msrTempoTupletShowNumberKind tempoTupletShowNumberKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -256,54 +261,56 @@ typedef SMARTP<msrTempoTuplet> S_msrTempoTuplet;
 EXP ostream& operator << (ostream& os, const S_msrTempoTuplet& elt);
 
 //______________________________________________________________________________
-class EXP msrTempoNotesRelationshipshipElements : public msrElement
+// data types
+
+enum class msrTempoNotesRelationshipElementsKind {
+  kTempoNotesRelationshipElementsLeft,
+  kTempoNotesRelationshipElementsRight
+};
+
+string msrTempoNotesRelationshipElementsKindAsString (
+  msrTempoNotesRelationshipElementsKind tempoNotesRelationshipElementsKind);
+
+ostream& operator << (ostream& os, const msrTempoNotesRelationshipElementsKind& elt);
+
+class EXP msrTempoNotesRelationshipElements : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrTempoNotesRelationshipshipElementsKind {
-      kTempoNotesRelationshipshipElementsLeft,
-      kTempoNotesRelationshipshipElementsRight
-    };
-
-    static string tempoNotesRelationshipshipElementsKindAsString (
-      msrTempoNotesRelationshipshipElementsKind tempoNotesRelationshipshipElementsKind);
 
   public:
 
     // creation from MusicXML
     // ------------------------------------------------------
 
-    static SMARTP<msrTempoNotesRelationshipshipElements> create (
+    static SMARTP<msrTempoNotesRelationshipElements> create (
       int      inputLineNumber,
-      msrTempoNotesRelationshipshipElementsKind
-               tempoNotesRelationshipshipElementsKind);
+      msrTempoNotesRelationshipElementsKind
+               tempoNotesRelationshipElementsKind);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-    msrTempoNotesRelationshipshipElements (
+    msrTempoNotesRelationshipElements (
       int      inputLineNumber,
-      msrTempoNotesRelationshipshipElementsKind
-               tempoNotesRelationshipshipElementsKind);
+      msrTempoNotesRelationshipElementsKind
+               tempoNotesRelationshipElementsKind);
 
-    virtual               ~msrTempoNotesRelationshipshipElements ();
+    virtual               ~msrTempoNotesRelationshipElements ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    Rational              getTempoNotesRelationshipshipElementsKind () const
-                              { return fTempoNotesRelationshipshipElementsKind; }
+    msrTempoNotesRelationshipElementsKind
+                          getTempoNotesRelationshipElementsKind () const
+                              { return fTempoNotesRelationshipElementsKind; }
 
     const list<S_msrElement>&
-                          getTempoNotesRelationshipshipElementsList () const
-                              { return fTempoNotesRelationshipshipElementsList; }
+                          getTempoNotesRelationshipElementsList () const
+                              { return fTempoNotesRelationshipElementsList; }
 
   public:
 
@@ -312,7 +319,7 @@ class EXP msrTempoNotesRelationshipshipElements : public msrElement
 
     string                asString () const override;
 
-    void                  addElementToTempoNotesRelationshipshipElements (
+    void                  addElementToTempoNotesRelationshipElements (
                             S_msrElement element);
 
   public:
@@ -334,46 +341,51 @@ class EXP msrTempoNotesRelationshipshipElements : public msrElement
 
   private:
 
-    msrTempoNotesRelationshipshipElementsKind
-                          fTempoNotesRelationshipshipElementsKind;
+    msrTempoNotesRelationshipElementsKind
+                          fTempoNotesRelationshipElementsKind;
 
-    list<S_msrElement>    fTempoNotesRelationshipshipElementsList;
+    list<S_msrElement>    fTempoNotesRelationshipElementsList;
 };
-typedef SMARTP<msrTempoNotesRelationshipshipElements> S_msrTempoNotesRelationshipshipElements;
-EXP ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipshipElements& elt);
+typedef SMARTP<msrTempoNotesRelationshipElements> S_msrTempoNotesRelationshipElements;
+EXP ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipElements& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrTempoKind {
+  k_NoTempoKind,
+  kTempoBeatUnitsWordsOnly,
+  kTempoBeatUnitsPerMinute,
+  kTempoBeatUnitsEquivalence,
+  kTempoNotesRelationship
+};
+
+string msrTempoKindAsString (
+  msrTempoKind tempoKind);
+
+ostream& operator << (ostream& os, const msrTempoKind& elt);
+
+enum class msrTempoParenthesizedKind {
+  kTempoParenthesizedYes, kTempoParenthesizedNo
+};
+
+string msrTempoParenthesizedKindAsString (
+  msrTempoParenthesizedKind tempoParenthesizedKind);
+
+ostream& operator << (ostream& os, const msrTempoParenthesizedKind& elt);
+
+enum class msrTempoNotesRelationshipKind {
+  kTempoNotesRelationshipNone, kTempoNotesRelationshipEquals
+};
+
+string msrTempoNotesRelationshipKindAsString (
+  msrTempoNotesRelationshipKind tempoNotesRelationshipKind);
+
+ostream& operator << (ostream& os, const msrTempoNotesRelationshipKind& elt);
+
 class EXP msrTempo : public msrMeasureElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrTempoKind {
-      k_NoTempoKind,
-      kTempoBeatUnitsWordsOnly,
-      kTempoBeatUnitsPerMinute,
-      kTempoBeatUnitsEquivalence,
-      kTempoNotesRelationship
-    };
-
-    static string tempoKindAsString (
-      msrTempoKind tempoKind);
-
-    enum msrTempoParenthesizedKind {
-      kTempoParenthesizedYes, kTempoParenthesizedNo
-    };
-
-    static string tempoParenthesizedKindAsString (
-      msrTempoParenthesizedKind tempoParenthesizedKind);
-
-    enum msrTempoNotesRelationshipKind {
-      kTempoNotesRelationshipNone, kTempoNotesRelationshipEquals
-    };
-
-    static string tempoNotesRelationshipKindAsString (
-      msrTempoNotesRelationshipKind tempoNotesRelationshipKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -407,11 +419,11 @@ class EXP msrTempo : public msrMeasureElement
     static SMARTP<msrTempo> createTempoNotesRelationship (
                             int               inputLineNumber,
                             S_msrMeasure      upLinkToMeasure,
-                            S_msrTempoNotesRelationshipshipElements
+                            S_msrTempoNotesRelationshipElements
                                               tempoNotesRelationshipLeftElements,
                             msrTempoNotesRelationshipKind
                                               tempoNotesRelationshipKind,
-                            S_msrTempoNotesRelationshipshipElements
+                            S_msrTempoNotesRelationshipElements
                                               tempoNotesRelationshipRightElements,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
@@ -451,11 +463,11 @@ class EXP msrTempo : public msrMeasureElement
                           msrTempo (
                             int               inputLineNumber,
                             S_msrMeasure      upLinkToMeasure,
-                            S_msrTempoNotesRelationshipshipElements
+                            S_msrTempoNotesRelationshipElements
                                               tempoNotesRelationshipLeftElements,
                             msrTempoNotesRelationshipKind
                                               tempoNotesRelationshipKind,
-                            S_msrTempoNotesRelationshipshipElements
+                            S_msrTempoNotesRelationshipElements
                                               tempoNotesRelationshipRightElements,
                             msrTempoParenthesizedKind
                                               tempoParenthesizedKind,
@@ -486,7 +498,7 @@ class EXP msrTempo : public msrMeasureElement
                           getTempoEquivalentBeatUnit () const
                               { return fTempoEquivalentBeatUnit; }
 
-    S_msrTempoNotesRelationshipshipElements
+    S_msrTempoNotesRelationshipElements
                           getTempoNotesRelationshipLeftElements () const
                               { return fTempoNotesRelationshipLeftElements; }
 
@@ -497,7 +509,7 @@ class EXP msrTempo : public msrMeasureElement
     msrTempoNotesRelationshipKind  getTempoNotesRelationshipKind () const
                               { return fTempoNotesRelationshipKind; }
 
-    S_msrTempoNotesRelationshipshipElements
+    S_msrTempoNotesRelationshipElements
                           getTempoNotesRelationshipRightElements () const
                               { return fTempoNotesRelationshipRightElements; }
 
@@ -572,10 +584,10 @@ class EXP msrTempo : public msrMeasureElement
 
     // kTempoNotesRelationship
 
-    S_msrTempoNotesRelationshipshipElements
+    S_msrTempoNotesRelationshipElements
                           fTempoNotesRelationshipLeftElements;
     msrTempoNotesRelationshipKind  fTempoNotesRelationshipKind;
-    S_msrTempoNotesRelationshipshipElements
+    S_msrTempoNotesRelationshipElements
                           fTempoNotesRelationshipRightElements;
 };
 typedef SMARTP<msrTempo> S_msrTempo;

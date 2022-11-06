@@ -18,7 +18,7 @@ The tough part is to handle \mxml\ \musicXmlMarkup{barLine} markups, since they 
 Recognizing the structure of repeat relies on the attributes of the barLines. The following \enumType s are defined in \msr{msrBarLines.h} local to \class{msrBarLine}:
 \begin{lstlisting}[language=CPlusPlus]
     // location
-    enum msrBarLineLocationKind {
+    enum class msrBarLineLocationKind {
       kBarLineLocationNone,
 
       kBarLineLocationLeft,
@@ -29,7 +29,7 @@ Recognizing the structure of repeat relies on the attributes of the barLines. Th
 
 \begin{lstlisting}[language=CPlusPlus]
     // style
-    enum msrBarLineStyleKind {
+    enum class msrBarLineStyleKind {
       kBarLineStyleNone,
 
       kBarLineStyleRegular,  // by default
@@ -43,7 +43,7 @@ Recognizing the structure of repeat relies on the attributes of the barLines. Th
 
 \begin{lstlisting}[language=CPlusPlus]
     // repeat direction
-    enum msrBarLineRepeatDirectionKind {
+    enum class msrBarLineRepeatDirectionKind {
       kBarLineRepeatDirectionNone,
       kBarLineRepeatDirectionForward, kBarLineRepeatDirectionBackward
     };
@@ -51,7 +51,7 @@ Recognizing the structure of repeat relies on the attributes of the barLines. Th
 
 \begin{lstlisting}[language=CPlusPlus]
     // ending type
-    enum msrBarLineEndingTypeKind {
+    enum class msrBarLineEndingTypeKind {
       kBarLineEndingNone,
 
       kBarLineEndingTypeStart,
@@ -62,7 +62,7 @@ Recognizing the structure of repeat relies on the attributes of the barLines. Th
 
 \begin{lstlisting}[language=CPlusPlus]
     // category
-    enum msrBarLineCategoryKind {
+    enum class msrBarLineCategoryKind {
       k_NoBarLineCategory,
 
       kBarLineCategoryStandalone,
@@ -76,14 +76,14 @@ Recognizing the structure of repeat relies on the attributes of the barLines. Th
 
 \begin{lstlisting}[language=CPlusPlus]
     // segno
-    enum msrBarLineHasSegnoKind {
+    enum class msrBarLineHasSegnoKind {
       kBarLineHasSegnoYes, kBarLineHasSegnoNo
     };
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
     // coda
-    enum msrBarLineHasCodaKind {
+    enum class msrBarLineHasCodaKind {
       kBarLineHasCodaYes, kBarLineHasCodaNo
     };
 
@@ -91,7 +91,7 @@ Recognizing the structure of repeat relies on the attributes of the barLines. Th
 
 \begin{lstlisting}[language=CPlusPlus]
     // repeat winged
-    enum msrBarLineRepeatWingedKind {
+    enum class msrBarLineRepeatWingedKind {
       kBarLineRepeatWingedNone,
 
       kBarLineRepeatWingedStraight, kBarLineRepeatWingedCurved,

@@ -11,19 +11,19 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrChord;
+class   msrChord;
 typedef SMARTP<msrChord> S_msrChord;
 
-class msrTuplet;
+class   msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
 
-class msrMeasure;
+class   msrMeasure;
 typedef SMARTP<msrMeasure> S_msrMeasure;
 
-class msrPart;
+class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;
 
-class msrNote;
+class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
@@ -34,8 +34,10 @@ enum class msrGraceNotesGroupKind {
   kGraceNotesGroupAfter
 };
 
-string graceNotesGroupKindAsString (
+string msrGraceNotesGroupKindAsString (
   msrGraceNotesGroupKind graceNotesGroupKind);
+
+ostream& operator << (ostream& os, const msrGraceNotesGroupKind& elt);
 
 class EXP msrGraceNotesGroup : public msrElement
 {
