@@ -32,7 +32,7 @@ using namespace MusicFormats;
 
 //______________________________________________________________________________
 // Conducting the whole scanning and parsing of MFSL
-class mfslDriver
+class   mfslDriver
 {
   public:
 

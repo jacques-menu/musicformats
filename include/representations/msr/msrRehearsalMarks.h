@@ -27,12 +27,12 @@ class EXP msrRehearsalMark : public msrMeasureElement
     // data types
     // ------------------------------------------------------
 
-    enum msrRehearsalMarkKind {
+    enum class msrRehearsalMarkKind {
       kNone,
       kRectangle, kOval, kCircle, kBracket, kTriangle, kDiamond
     };
 
-    static string rehearsalKindAsString (
+    string rehearsalKindAsString (
       msrRehearsalMarkKind rehearsalKind);
 
     // creation from MusicXML

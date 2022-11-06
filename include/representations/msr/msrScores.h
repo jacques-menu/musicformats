@@ -37,13 +37,13 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrPart;
+class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;
 
-class msrPartGroup;
+class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 
-class msrVoice;
+class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
 
 //______________________________________________________________________________

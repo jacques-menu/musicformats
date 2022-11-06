@@ -11,18 +11,18 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrVoice;
+class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
 
-class msrNote;
+class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
-class msrChord;
+class   msrChord;
 typedef SMARTP<msrChord> S_msrChord;
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class msrTuplet;
+class   msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
 
 //______________________________________________________________________________
@@ -34,36 +34,46 @@ enum class msrTupletTypeKind {
   kTupletTypeStartAndStopInARow
 };
 
-string tupletTypeKindAsString (
+string msrTupletTypeKindAsString (
   msrTupletTypeKind tupletTypeKind);
+
+ostream& operator << (ostream& os, const msrTupletTypeKind& elt);
 
 enum class msrTupletBracketKind {
   kTupletBracketYes, kTupletBracketNo
 };
 
-string tupletBracketKindAsString (
+string msrTupletBracketKindAsString (
   msrTupletBracketKind tupletBracketKind);
+
+ostream& operator << (ostream& os, const msrTupletBracketKind& elt);
 
 enum class msrTupletLineShapeKind {
   kTupletLineShapeStraight, kTupletLineShapeCurved
 };
 
-string tupletLineShapeKindAsString (
+string msrTupletLineShapeKindAsString (
   msrTupletLineShapeKind tupletLineShapeKind);
+
+ostream& operator << (ostream& os, const msrTupletLineShapeKind& elt);
 
 enum class msrTupletShowNumberKind {
   kTupletShowNumberActual, kTupletShowNumberBoth, kTupletShowNumberNone
 };
 
-string tupletShowNumberKindAsString (
+string msrTupletShowNumberKindAsString (
   msrTupletShowNumberKind tupletShowNumberKind);
+
+ostream& operator << (ostream& os, const msrTupletShowNumberKind& elt);
 
 enum class msrTupletShowTypeKind {
   kTupletShowTypeActual, kTupletShowTypeBoth, kTupletShowTypeNone
 };
 
-string tupletShowTypeKindAsString (
+string msrTupletShowTypeKindAsString (
   msrTupletShowTypeKind tupletShowTypeKind);
+
+ostream& operator << (ostream& os, const msrTupletShowTypeKind& elt);
 
 class EXP msrTuplet : public msrTupletElement
 {

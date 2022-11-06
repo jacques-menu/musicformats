@@ -106,36 +106,41 @@ typedef SMARTP<msrStaffTuning> S_msrStaffTuning;
 EXP ostream& operator << (ostream& os, const S_msrStaffTuning& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrStaffTypeKind {
+  kStaffTypeRegular,
+  kStaffTypeOssia, kStaffTypeCue, kStaffTypeEditorial,
+  kStaffTypeAlternate
+};
+
+string msrStaffTypeKindAsString (
+  msrStaffTypeKind staffTypeKind);
+
+ostream& operator << (ostream& os, const msrStaffTypeKind& elt);
+
+enum class msrShowFretsKind {
+  kShowFretsNumbers, kShowFretsLetters
+};
+
+string msrShowFretsKindAsString (
+  msrShowFretsKind showFretsKind);
+
+ostream& operator << (ostream& os, const msrShowFretsKind& elt);
+
+enum class msrPrintSpacingKind {
+  kPrintSpacingYes, kPrintSpacingNo
+};
+
+string msrPrintSpacingKindAsString (
+  msrPrintSpacingKind printSpacingKind);
+
+ostream& operator << (ostream& os, const msrPrintSpacingKind& elt);
+
 class EXP msrStaffDetails : public msrMeasureElement
 {
   public:
 
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrStaffTypeKind {
-      kRegularStaffType,
-      kOssiaStaffType, kCueStaffType, kEditorialStaffType,
-      kAlternateStaffType
-    };
-
-    static string staffTypeKindAsString (
-      msrStaffTypeKind staffTypeKind);
-
-    enum msrShowFretsKind {
-      kShowFretsNumbers, kShowFretsLetters
-    };
-
-    static string showFretsKindAsString (
-      msrShowFretsKind showFretsKind);
-
-    enum msrPrintSpacingKind {
-      kPrintSpacingYes, kPrintSpacingNo
-    };
-
-    static string printSpacingKindAsString (
-      msrPrintSpacingKind printSpacingKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

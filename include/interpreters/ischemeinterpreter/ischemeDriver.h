@@ -32,7 +32,7 @@ using namespace MusicFormats;
 
 //______________________________________________________________________________
 // Conducting the whole scanning and parsing of iScheme
-class ischemeDriver
+class   ischemeDriver
 {
   public:
 

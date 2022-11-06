@@ -8,25 +8,26 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class bsrBarLineKind {
+  kBarLineKindNone,
+  kBarLineKindSpecial, // for dotted or dashed barLines
+  kBarLineKindUnusual, // irregular spacing, ...
+  kBarLineKindFinalDouble, kBarLineKindSectionalDouble
+};
+
+string bsrBarLineKindAsString (
+  bsrBarLineKind barLineKind);
+
+string bsrBarLineKindAsDebugString (
+  bsrBarLineKind barLineKind);
+
+ostream& operator << (ostream& os, const bsrBarLineKind& elt);
+
 class EXP bsrBarLine : public bsrLineContentsElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum bsrBarLineKind {
-      kBarLineKindNone,
-      kBarLineKindSpecial, // for dotted or dashed barLines
-      kBarLineKindUnusual, // irregular spacing, ...
-      kBarLineKindFinalDouble, kBarLineKindSectionalDouble
-    };
-
-    static string barLineKindAsString (
-      bsrBarLineKind barLineKind);
-
-    static string barLineKindAsDebugString (
-      bsrBarLineKind barLineKind);
 
     // creation
     // ------------------------------------------------------
@@ -69,7 +70,7 @@ class EXP bsrBarLine : public bsrLineContentsElement
     // private services
     // ------------------------------------------------------
 
-    S_bsrCellsList        barLineKindAsCellsList ();
+    S_bsrCellsList        bsrBarLineKindAsCellsList ();
 
     S_bsrCellsList        buildCellsList () const;
 

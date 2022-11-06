@@ -26,26 +26,29 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class lpsrContextTypeKind {
+  kChordNames, kFiguredBass
+};
+
+string lpsrContextTypeKindAsString (
+  lpsrContextTypeKind contextTypeKind);
+
+ostream& operator << (ostream& os, const lpsrContextTypeKind& elt);
+
+enum class lpsrContextExistingKind {
+  kExistingContextYes, kExistingContextNo
+};
+
+string lpsrContextExistingKindAsString (
+  lpsrContextExistingKind contextExistingKind);
+
+ostream& operator << (ostream& os, const lpsrContextExistingKind& elt);
+
 class EXP lpsrContext : public lpsrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum lpsrContextTypeKind {
-      kChordNames, kFiguredBass
-    };
-
-    static string contextTypeKindAsString (
-      lpsrContextTypeKind contextTypeKind);
-
-    enum lpsrContextExistingKind {
-      kExistingContextYes, kExistingContextNo
-    };
-
-    static string contextExistingKindAsString (
-      lpsrContextExistingKind contextExistingKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -104,17 +107,17 @@ class EXP lpsrContext : public lpsrElement
     // print
     // ------------------------------------------------------
 
-    string                getContextTypeKindAsString () const
+    string                getlpsrContextTypeKindAsString () const
                               {
                                 return
-                                  contextTypeKindAsString (
+                                  lpsrContextTypeKindAsString (
                                     fContextTypeKind);
                               }
 
-    string                getContextExistingKindAsString () const
+    string                getlpsrContextExistingKindAsString () const
                               {
                                 return
-                                  contextExistingKindAsString (
+                                  lpsrContextExistingKindAsString (
                                     fContextExistingKind);
                               }
 

@@ -175,7 +175,7 @@ enum class msrCrescDecrescKind {
   kCrescDecrescCrescendo, kCrescDecrescDecrescendo
 };
 
-string crescDecrescKindAsString (
+string msrCrescDecrescKindAsString (
   msrCrescDecrescKind crescDecrescKind);
 
 ostream& operator << (ostream& os,const msrCrescDecrescKind& elt);
@@ -249,7 +249,7 @@ enum class msrWedgeKind {
   kWedgeCrescendo, kWedgeDecrescendo, kWedgeStop
 };
 
-string wedgeKindAsString (
+string msrWedgeKindAsString (
   msrWedgeKind wedgeKind);
 
 ostream& operator << (ostream& os,const msrWedgeKind& elt);
@@ -258,7 +258,7 @@ enum class msrWedgeNienteKind {
   kWedgeNienteYes, kWedgeNienteNo
 };
 
-string wedgeNienteKindAsString (
+string msrWedgeNienteKindAsString (
   msrWedgeNienteKind wedgeNienteKind);
 
 ostream& operator << (ostream& os,const msrWedgeNienteKind& elt);

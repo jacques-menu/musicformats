@@ -31,11 +31,11 @@ class EXP lpsrParallelMusicBLock : public lpsrElement
     // data types
     // ------------------------------------------------------
 
-    enum lpsrElementsSeparatorKind {
+    enum class lpsrElementsSeparatorKind {
       kEndOfLine, kSpace
     };
 
-    static string elementsSeparatorKindAsString (
+    string elementsSeparatorKindAsString (
       lpsrElementsSeparatorKind elementsSeparatorKind);
 
     // creation from MusicXML

@@ -29,11 +29,11 @@ class EXP bsrParallel : public bsrElement
     // data types
     // ------------------------------------------------------
 
-    enum bsrParallelLayoutKind {
+    enum class bsrParallelLayoutKind {
         kParallelLayoutBarOverBarKind,
         kParallelLayoutLineOverLineKind };
 
-    static string parallelLayoutKindAsString (
+    string parallelLayoutKindAsString (
       bsrParallelLayoutKind parallelLayoutKind);
 
     // creation

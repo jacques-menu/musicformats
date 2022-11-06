@@ -21,29 +21,29 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class msrArticulationKind {
+  k_NoArticulation,
+  kArticulationAccent, kArticulationBreathMark, kArticulationCaesura,
+  kArticulationSpiccato,
+  kArticulationStaccato, kArticulationStaccatissimo,
+  kArticulationStress, kArticulationUnstress,
+  kArticulationDetachedLegato,
+  kArticulationStrongAccent, kArticulationTenuto,
+  kArticulationFermata, // barLine ??? JMI v0.9.66
+  kArticulationArpeggiato, kArticulationNonArpeggiato,
+  kArticulationDoit, kArticulationFalloff, kArticulationPlop, kArticulationScoop
+};
+
+string msrArticulationKindAsString (
+  msrArticulationKind articulationKind);
+
+ostream& operator << (ostream& os, const msrArticulationKind& elt);
+
 class EXP msrArticulation : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrArticulationKind {
-      k_NoArticulation,
-
-      kAccent, kBreathMark, kCaesura,
-      kSpiccato,
-      kStaccato, kStaccatissimo,
-      kStress, kUnstress,
-      kDetachedLegato,
-      kStrongAccent, kTenuto,
-      kFermata, // barLine ??? JMI
-      kArpeggiato, kNonArpeggiato,
-      kDoit, kFalloff, kPlop, kScoop
-    };
-
-    static string articulationKindAsString (
-      msrArticulationKind articulationKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -81,8 +81,6 @@ class EXP msrArticulation : public msrElement
     // public services
     // ------------------------------------------------------
 
-    virtual string        articulationKindAsString () const;
-
     virtual string        articulationPlacementKindAsString () const;
 
   public:
@@ -117,27 +115,30 @@ typedef SMARTP<msrArticulation> S_msrArticulation;
 EXP ostream& operator << (ostream& os, const S_msrArticulation& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrFermataKind {
+  kArticulationFermataNormal, kArticulationFermataAngled, kArticulationFermataSquare
+};
+
+string msrFermataKindAsString (
+  msrFermataKind fermataKind);
+
+ostream& operator << (ostream& os, const msrFermataKind& elt);
+
+enum class msrFermataTypeKind {
+  kArticulationFermataTypeNone,
+  kArticulationFermataTypeUpright, kArticulationFermataTypeInverted
+};
+
+string msrFermataTypeKindAsString (
+  msrFermataTypeKind fermataTypeKind);
+
+ostream& operator << (ostream& os, const msrFermataTypeKind& elt);
+
 class EXP msrFermata : public msrArticulation
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrFermataKind {
-        kNormalFermataKind, kAngledFermataKind, kSquareFermataKind
-      };
-
-    static string fermataKindAsString (
-      msrFermataKind fermataKind);
-
-    enum msrFermataTypeKind {
-      kFermataTypeNone,
-      kFermataTypeUpright, kFermataTypeInverted
-    };
-
-    static string fermataTypeKindAsString (
-      msrFermataTypeKind fermataTypeKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -175,8 +176,6 @@ class EXP msrFermata : public msrArticulation
     // public services
     // ------------------------------------------------------
 
-    string                asString () const override;
-
   public:
 
     // visitors
@@ -191,6 +190,8 @@ class EXP msrFermata : public msrArticulation
 
     // print
     // ------------------------------------------------------
+
+    string                asString () const override;
 
     void                  print (ostream& os) const override;
 
@@ -266,6 +267,8 @@ class EXP msrArpeggiato : public msrArticulation
     // print
     // ------------------------------------------------------
 
+    string                asString () const override;
+
     void                  print (ostream& os) const override;
 
   private:
@@ -288,12 +291,12 @@ class EXP msrNonArpeggiato : public msrArticulation
     // data types
     // ------------------------------------------------------
 
-    enum msrNonArpeggiatoTypeKind {
-      kNonArpeggiatoTypeNone,
-      kNonArpeggiatoTypeTop, kNonArpeggiatoTypeBottom
+    enum class msrNonArpeggiatoTypeKind {
+      kArticulationNonArpeggiatoTypeNone,
+      kArticulationNonArpeggiatoTypeTop, kArticulationNonArpeggiatoTypeBottom
     };
 
-    static string nonArpeggiatoTypeKindAsString (
+    string nonArpeggiatoTypeKindAsString (
       msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind);
 
     // creation from MusicXML
@@ -351,6 +354,8 @@ class EXP msrNonArpeggiato : public msrArticulation
 
     // print
     // ------------------------------------------------------
+
+    string                asString () const override;
 
     void                  print (ostream& os) const override;
 

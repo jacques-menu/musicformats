@@ -12,8 +12,8 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations for class mutual dependencies
-class msrMeasure;
+// PRE-declarations for class   mutual dependencies
+class   msrMeasure;
 typedef SMARTP<msrMeasure> S_msrMeasure;
 
 //______________________________________________________________________________
@@ -25,10 +25,12 @@ enum class msrBassFigurePrefixKind {
   kPrefixSharpSharp, kPrefixSharp, kPrefixDoubleSharp
 };
 
-string figurePrefixKindAsString (
+string msrBassFigurePrefixKindAsString (
   msrBassFigurePrefixKind figurePrefixKind);
 
-enum msrBassFigureSuffixKind {
+ostream& operator << (ostream& os,const msrBassFigurePrefixKind& elt);
+
+enum class msrBassFigureSuffixKind {
   k_NoBassFigureSuffix,
   kSuffixDoubleFlat, kSuffixFlat, kSuffixFlatFlat,
   kSuffixNatural,
@@ -36,8 +38,10 @@ enum msrBassFigureSuffixKind {
   kSuffixSlash
 };
 
-string figureSuffixKindAsString (
+string msrBassFigureSuffixKindAsString (
   msrBassFigureSuffixKind figureSuffixKind);
+
+ostream& operator << (ostream& os,const msrBassFigureSuffixKind& elt);
 
 class EXP msrBassFigure : public msrElement
 {
@@ -136,13 +140,14 @@ EXP ostream& operator << (ostream& os, const S_msrBassFigure& elt);
 //______________________________________________________________________________
 // data types
 
-enum msrFiguredBassParenthesesKind {
+enum class msrFiguredBassParenthesesKind {
   kFiguredBassParenthesesYes, kFiguredBassParenthesesNo
 };
 
-string figuredBassParenthesesKindAsString (
-  msrFiguredBassParenthesesKind
-    figuredBassParenthesesKind);
+string msrFiguredBassParenthesesKindAsString (
+  msrFiguredBassParenthesesKind figuredBassParenthesesKind);
+
+ostream& operator << (ostream& os, const msrFiguredBassParenthesesKind& elt);
 
 class EXP msrFiguredBass : public msrMeasureElement
 {

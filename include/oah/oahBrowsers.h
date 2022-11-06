@@ -21,7 +21,7 @@ namespace MusicFormats
 {
 /* JMI
 //______________________________________________________________________________
-template <typename T> class oahBrowser : public browser<T>
+template <typename T> class   oahBrowser : public browser<T>
 {
   protected:
 
@@ -52,7 +52,7 @@ template <typename T> class oahBrowser : public browser<T>
 };
 */
 
-template <typename T> class oahBrowser : public browser <T>
+template <typename T> class   oahBrowser : public browser <T>
 {
   public:
 

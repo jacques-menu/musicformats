@@ -21,10 +21,10 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrTimeSignatureItem;
+class   msrTimeSignatureItem;
 typedef SMARTP<msrTimeSignatureItem> S_msrTimeSignatureItem;
 
-class msrTimeSignature;
+class   msrTimeSignature;
 typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
 
 //______________________________________________________________________________

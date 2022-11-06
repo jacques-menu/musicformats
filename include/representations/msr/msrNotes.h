@@ -35,13 +35,13 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrGlissando;
+class   msrGlissando;
 typedef SMARTP<msrGlissando> S_msrGlissando;
 
 //______________________________________________________________________________
 // data types
 
-enum msrNoteHeadKind {
+enum class msrNoteHeadKind {
   kNoteHeadSlash,
   kNoteHeadTriangle, kNoteHeadDiamond, kNoteHeadSquare,
   kNoteHeadCross,kNoteHeadX,
@@ -57,29 +57,37 @@ enum msrNoteHeadKind {
   kNoteHeadSo, kNoteHeadLa, kNoteHeadTi
 };
 
-string noteHeadKindAsString (
+string msrNoteHeadKindAsString (
   msrNoteHeadKind noteHeadKind);
 
-enum msrNoteHeadFilledKind {
+ostream& operator << (ostream& os, const msrNoteHeadKind& elt);
+
+enum class msrNoteHeadFilledKind {
   kNoteHeadFilledYes, kNoteHeadFilledNo
 };
 
-string noteHeadFilledKindAsString (
+string msrNoteHeadFilledKindAsString (
   msrNoteHeadFilledKind msrNoteHeadFilledKind);
 
-enum msrNoteHeadParenthesesKind {
+ostream& operator << (ostream& os, const msrNoteHeadFilledKind& elt);
+
+enum class msrNoteHeadParenthesesKind {
   kNoteHeadParenthesesYes, kNoteHeadParenthesesNo
 };
 
-string noteHeadParenthesesKindAsString (
+string msrNoteHeadParenthesesKindAsString (
   msrNoteHeadParenthesesKind msrNoteHeadParenthesesKind);
 
-enum msrNoteIsACueNoteKind {
+ostream& operator << (ostream& os, const msrNoteHeadParenthesesKind& elt);
+
+enum class msrNoteIsACueNoteKind {
   kNoteIsACueNoteYes, kNoteIsACueNoteNo
 };
 
-string noteIsACuemsrNoteKindAsString (
+string msrNoteIsACueNoteKindAsString (
   msrNoteIsACueNoteKind msrNoteIsACueNoteKind);
+
+ostream& operator << (ostream& os, const msrNoteIsACueNoteKind& elt);
 
 class EXP msrNote : public msrTupletElement
 {
@@ -919,7 +927,7 @@ class EXP msrNote : public msrTupletElement
     string                noteDisplayPitchKindAsString () const;
 
     // octave kind
-    string                noteOctaveKindAsString () const
+    string                bsrNoteOctaveKindAsString () const
                               {
                                 return
                                   msrOctaveKindAsString (fNoteOctaveKind);

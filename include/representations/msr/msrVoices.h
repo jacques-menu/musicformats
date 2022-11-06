@@ -36,64 +36,64 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrStaff;
+class   msrStaff;
 typedef SMARTP<msrStaff> S_msrStaff;
 
-class msrMultipleFullBarRests;
+class   msrMultipleFullBarRests;
 typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
 
-class msrVoiceStaffChange;
+class   msrVoiceStaffChange;
 typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
 
-class msrBeatRepeat;
+class   msrBeatRepeat;
 typedef SMARTP<msrBeatRepeat> S_msrBeatRepeat;
 
-class msrMeasureRepeat;
+class   msrMeasureRepeat;
 typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
 
-class msrRepeatCommonPart;
+class   msrRepeatCommonPart;
 typedef SMARTP<msrRepeatCommonPart> S_msrRepeatCommonPart;
 
-class msrRepeat;
+class   msrRepeat;
 typedef SMARTP<msrRepeat> S_msrRepeat;
 
-class msrRepeatEnding;
+class   msrRepeatEnding;
 typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
 
-class msrRepeatDescr;
+class   msrRepeatDescr;
 typedef SMARTP<msrRepeatDescr> S_msrRepeatDescr;
 
-class msrDoubleTremolo;
+class   msrDoubleTremolo;
 typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
 
-class msrGraceNotesGroup;
+class   msrGraceNotesGroup;
 typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
 
-class msrFrame;
+class   msrFrame;
 typedef SMARTP<msrFrame> S_msrFrame;
 
-class msrHarmony;
+class   msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 
-class msrFiguredBass;
+class   msrFiguredBass;
 typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 
-class msrTempo;
+class   msrTempo;
 typedef SMARTP<msrTempo> S_msrTempo;
 
-class msrRehearsalMark;
+class   msrRehearsalMark;
 typedef SMARTP<msrRehearsalMark> S_msrRehearsalMark;
 
-class msrLineBreak;
+class   msrLineBreak;
 typedef SMARTP<msrLineBreak> S_msrLineBreak;
 
-class msrPageBreak;
+class   msrPageBreak;
 typedef SMARTP<msrPageBreak> S_msrPageBreak;
 
-class msrStanza;
+class   msrStanza;
 typedef SMARTP<msrStanza> S_msrStanza;
 
-class msrSyllable;
+class   msrSyllable;
 typedef SMARTP<msrSyllable> S_msrSyllable;
 
 //______________________________________________________________________________
@@ -108,17 +108,17 @@ enum class msrVoiceRepeatPhaseKind {
   kVoiceRepeatPhaseAfterHooklessEnding
 };
 
-extern string voiceRepeatPhaseKindAsString (
+extern string msrVoiceRepeatPhaseKindAsString (
   msrVoiceRepeatPhaseKind afterRepeatComponentPhaseKind);
 
 ostream& operator << (ostream& os, msrVoiceRepeatPhaseKind& elt);
 
-enum class msrVoiceFinalizationStatusKind { // JMI ???
+enum class msrVoiceFinalizationStatusKind { // JMI ??? v0.9.66
   kKeepVoice,
   kEraseVoice
 };
 
-extern string voiceFinalizationStatusKindAsString (
+extern string msrVoiceFinalizationStatusKindAsString (
   msrVoiceFinalizationStatusKind voiceFinalizationStatusKind);
 
 ostream& operator << (ostream& os, msrVoiceFinalizationStatusKind& elt);
@@ -128,7 +128,7 @@ enum class msrVoiceCreateInitialLastSegmentKind {
   kCreateInitialLastSegmentNo
 };
 
-extern string voiceFinalizationStatusKindAsString (
+extern string msrVoiceFinalizationStatusKindAsString (
   msrVoiceCreateInitialLastSegmentKind voiceCreateInitialLastSegmentKind);
 
 ostream& operator << (ostream& os, msrVoiceCreateInitialLastSegmentKind& elt);
@@ -182,10 +182,10 @@ class EXP msrRepeatDescr : public smartable
     // public services
     // ------------------------------------------------------
 
-    string                repeatDescrAsString () const;
-
     // print
     // ------------------------------------------------------
+
+    string                asString () const;
 
     virtual void          print (ostream& os) const;
 

@@ -30,22 +30,24 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-// class msrMeasureElement;
+// class   msrMeasureElement;
 // typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 
 //______________________________________________________________________________
   // data types
 
-enum msrMeasureFirstInSegmentKind {
+enum class msrMeasureFirstInSegmentKind {
   kMeasureFirstInSegmentKindUnknown,
   kMeasureFirstInSegmentKindYes,
   kMeasureFirstInSegmentKindNo
 };
 
-string measureFirstInSegmentKindAsString (
+string msrMeasureFirstInSegmentKindAsString (
   msrMeasureFirstInSegmentKind measureFirstInSegmentKind);
 
-enum msrMeasureRepeatContextKind {
+ostream& operator << (ostream& os, const msrMeasureFirstInSegmentKind& elt);
+
+enum class msrMeasureRepeatContextKind {
   kMeasureRepeatContextKindUnknown,
   kMeasureRepeatContextKindNone,
   kMeasureRepeatContextKindCommonPartLastMeasure,
@@ -56,17 +58,21 @@ enum msrMeasureRepeatContextKind {
   kMeasureRepeatContextKindNextMeasureAfterHooklessEnding
 };
 
-string measureRepeatContextKindAsString (
+string msrMeasureRepeatContextKindAsString (
   msrMeasureRepeatContextKind measureRepeatContextKind);
 
-enum msrMeasureEndRegularKind {
+ostream& operator << (ostream& os, const msrMeasureRepeatContextKind& elt);
+
+enum class msrMeasureEndRegularKind {
   kMeasureEndRegularKindUnknown,
   kMeasureEndRegularKindYes,
   kMeasureEndRegularKindNo
 };
 
-string measureEndRegularKindAsString (
+string msrMeasureEndRegularKindAsString (
   msrMeasureEndRegularKind measureEndRegularKind);
+
+ostream& operator << (ostream& os, const msrMeasureEndRegularKind& elt);
 
 class EXP msrMeasure : public msrSegmentElement
 {

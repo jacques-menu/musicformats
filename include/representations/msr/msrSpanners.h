@@ -9,28 +9,29 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrNote;
+class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
 // pre-declaration for two-way sideLinks
-class msrSpanner;
+class   msrSpanner;
 typedef SMARTP<msrSpanner> S_msrSpanner;
 
 //______________________________________________________________________________
+enum class msrSpannerKind {
+  kSpannerDashes, kSpannerWavyLine
+};
+
+string msrSpannerKindAsString (
+  msrSpannerKind spannerKind);
+
+ostream& operator << (ostream& os, const msrSpannerKind& elt);
+
 class EXP msrSpanner : public msrElement
 {
   public:
 
     // data types
-    // ------------------------------------------------------
-
-    enum msrSpannerKind {
-      kSpannerDashes, kSpannerWavyLine
-    };
-
-    static string spannerKindAsString (
-      msrSpannerKind spannerKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -141,12 +142,6 @@ class EXP msrSpanner : public msrElement
 
     // print
     // ------------------------------------------------------
-
-    string                spannerKindAsString () const;
-
-    string                spannerTypeKindAsString () const;
-
-    string                spannerPlacementKindAsString () const;
 
     string                asShortString () const override;
 
