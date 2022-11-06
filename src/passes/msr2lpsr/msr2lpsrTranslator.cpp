@@ -2198,7 +2198,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             chordNamesContext =
               lpsrChordNamesContext::create (
                 inputLineNumber,
-                lpsrContext::kExistingContextYes,
+                lpsrContextExistingKind::kExistingContextYes,
                 voiceName,
 // JMI                fCurrentVoiceOriginal->getHarmoniesVoiceRegularVoiceBackwardLink ());
                 fCurrentVoiceOriginal);
@@ -2260,7 +2260,7 @@ void msr2lpsrTranslator::visitStart (S_msrVoice& elt)
             figuredBassContext =
               lpsrFiguredBassContext::create (
                 inputLineNumber,
-                lpsrContext::kExistingContextYes,
+                lpsrContextExistingKind::kExistingContextYes,
                 voiceName,
                 fCurrentVoiceOriginal-> getVoiceUpLinkToStaff ());
 
@@ -3394,7 +3394,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
         msrRehearsalMark::create (
           elt->getInputLineNumber (),
 					fCurrentMeasureClone,
-          msrRehearsalMark::kNone,
+          msrRehearsalMarkKind::kRehearsalMarkNone,
           elt->tempoWordsListAsString (" "), //JMI ???
           elt->getTempoPlacementKind ());
 
@@ -4392,7 +4392,7 @@ void msr2lpsrTranslator::visitStart (S_msrWords& elt)
           msrRehearsalMark::create (
             inputLineNumber,
 						fCurrentMeasureClone,
-            msrRehearsalMark::kNone,
+            msrRehearsalMarkKind::kRehearsalMarkNone,
             elt->getWordsContents (),
             elt->getWordsPlacementKind ()); // above ??? JMI
 
@@ -7068,7 +7068,7 @@ void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Handling '" <<
-      msrBarLine::barLineCategoryKindAsString (
+      msrBarLineCategoryKindAsString (
         elt->getBarLineCategory ()) <<
       "' in voice \"" <<
       fCurrentVoiceClone->getVoiceName () << "\"" <<
@@ -7077,33 +7077,33 @@ void msr2lpsrTranslator::visitStart (S_msrBarLine& elt)
 #endif
 
   switch (elt->getBarLineStyleKind ()) {
-    case msrBarLine::kBarLineStyleNone:
+    case msrBarLineStyleKind::kBarLineStyleNone:
       break;
-    case msrBarLine::kBarLineStyleRegular:
+    case msrBarLineStyleKind::kBarLineStyleRegular:
       break;
-    case msrBarLine::kBarLineStyleDotted:
+    case msrBarLineStyleKind::kBarLineStyleDotted:
       break;
-    case msrBarLine::kBarLineStyleDashed:
+    case msrBarLineStyleKind::kBarLineStyleDashed:
       break;
-    case msrBarLine::kBarLineStyleHeavy:
+    case msrBarLineStyleKind::kBarLineStyleHeavy:
       break;
-    case msrBarLine::kBarLineStyleLightLight:
+    case msrBarLineStyleKind::kBarLineStyleLightLight:
       break;
-    case msrBarLine::kBarLineStyleLightHeavy:
+    case msrBarLineStyleKind::kBarLineStyleLightHeavy:
       break;
-    case msrBarLine::kBarLineStyleHeavyLight:
+    case msrBarLineStyleKind::kBarLineStyleHeavyLight:
       break;
-    case msrBarLine::kBarLineStyleHeavyHeavy:
+    case msrBarLineStyleKind::kBarLineStyleHeavyHeavy:
       break;
-    case msrBarLine::kBarLineStyleTick:
+    case msrBarLineStyleKind::kBarLineStyleTick:
       break;
-    case msrBarLine::kBarLineStyleShort:
+    case msrBarLineStyleKind::kBarLineStyleShort:
       fResultingLpsr->
         // this score needs the 'custom short barLine' Scheme function
         setCustomShortBarLineSchemeFunctionIsNeeded ();
       break;
       /* JMI
-    case msrBarLine::kBarLineStyleNone:
+    case msrBarLineStyleKind::kBarLineStyleNone:
       break;
       */
   } // switch

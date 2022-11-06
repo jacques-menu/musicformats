@@ -94,29 +94,30 @@ typedef SMARTP<bsrTimeSignatureItem> S_bsrTimeSignatureItem;
 EXP ostream& operator << (ostream& os, const S_bsrTimeSignatureItem& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class bsrTimeSignatureKind {
+  kTimeSignatureNone,
+  kTimeSignatureCommon,
+  kTimeSignatureCut,
+  kTimeSignatureNumerical, // JMI
+  kTimeSignatureNote,
+  kTimeSignatureDottedNote,
+  kTimeSignatureSingleNumber,
+  kTimeSignatureSenzaMisura
+};
+
+string bsrTimeSignatureKindAsString (
+  bsrTimeSignatureKind timeKind);
+
+string timeKindAsDebugString (
+  bsrTimeSignatureKind timeKind);
+
+ostream& operator << (ostream& os, const bsrTimeSignatureKind& elt);
+
 class EXP bsrTimeSignature : public bsrLineContentsElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class bsrTimeSignatureKind {
-      kTimeNone,
-      kTimeCommon,
-      kTimeCut,
-      kTimeNumerical, // JMI
-      kTimeNote,
-      kTimeDottedNote,
-      kTimeSingleNumber,
-      kTimeSenzaMisura
-    };
-
-    string timeKindAsString (
-      bsrTimeSignatureKind timeKind);
-
-    string timeKindAsDebugString (
-      bsrTimeSignatureKind timeKind);
 
   public:
 

@@ -637,7 +637,7 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Handling '" <<
-      msrBarLine::barLineCategoryKindAsString (
+      msrBarLineCategoryKindAsString (
         elt->getBarLineCategory ()) <<
       endl;
   }
@@ -645,7 +645,7 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
 
   // get the MSR barLine attributes
 
-  msrBarLine::msrBarLineStyleKind
+  msrBarLineStyleKind
     mBarLineStyleKind =
       elt->getBarLineStyleKind ();
 
@@ -655,31 +655,31 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
     bBarLineKind = bsrBarLineKind::kBarLineKindNone;
 
   switch (mBarLineStyleKind) {
-    case msrBarLine::kBarLineStyleNone:
+    case msrBarLineStyleKind::kBarLineStyleNone:
       break;
-    case msrBarLine::kBarLineStyleRegular:
+    case msrBarLineStyleKind::kBarLineStyleRegular:
       break;
-    case msrBarLine::kBarLineStyleDotted:
+    case msrBarLineStyleKind::kBarLineStyleDotted:
       bBarLineKind = bsrBarLineKind::kBarLineKindSpecial;
       break;
-    case msrBarLine::kBarLineStyleDashed:
+    case msrBarLineStyleKind::kBarLineStyleDashed:
       bBarLineKind = bsrBarLineKind::kBarLineKindSpecial;
       break;
-    case msrBarLine::kBarLineStyleHeavy:
+    case msrBarLineStyleKind::kBarLineStyleHeavy:
       break;
-    case msrBarLine::kBarLineStyleLightLight:
+    case msrBarLineStyleKind::kBarLineStyleLightLight:
       bBarLineKind = bsrBarLineKind::kBarLineKindSectionalDouble;
       break;
-    case msrBarLine::kBarLineStyleLightHeavy:
+    case msrBarLineStyleKind::kBarLineStyleLightHeavy:
       bBarLineKind = bsrBarLineKind::kBarLineKindFinalDouble;
       break;
-    case msrBarLine::kBarLineStyleHeavyLight:
+    case msrBarLineStyleKind::kBarLineStyleHeavyLight:
       break;
-    case msrBarLine::kBarLineStyleHeavyHeavy:
+    case msrBarLineStyleKind::kBarLineStyleHeavyHeavy:
       break;
-    case msrBarLine::kBarLineStyleTick:
+    case msrBarLineStyleKind::kBarLineStyleTick:
       break;
-    case msrBarLine::kBarLineStyleShort:
+    case msrBarLineStyleKind::kBarLineStyleShort:
       break;
   } // switch
 
@@ -688,7 +688,7 @@ void msr2bsrTranslator::visitStart (S_msrBarLine& elt)
 
     s <<
       "MSR barLine kind '" <<
-      msrBarLine::barLineStyleKindAsString (mBarLineStyleKind) <<
+      msrBarLineStyleKindAsString (mBarLineStyleKind) <<
       "' is not supported in Braille";
 
     notSupportedMessage (
@@ -1478,32 +1478,32 @@ void msr2bsrTranslator::visitStart (S_msrTimeSignature& elt)
 
   // let's go
 
-  bsrTimeSignature::bsrTimeSignatureKind bTimeKind = bsrTimeSignature::kTimeNone;
+  bsrTimeSignatureKind bTimeKind = bsrTimeSignatureKind::kTimeSignatureNone;
 
   switch (mTimeSignatureSymbolKind) {
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
-      bTimeKind = bsrTimeSignature::kTimeNone;
+      bTimeKind = bsrTimeSignatureKind::kTimeSignatureNone;
 
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCommon:
-      bTimeKind = bsrTimeSignature::kTimeCommon;
+      bTimeKind = bsrTimeSignatureKind::kTimeSignatureCommon;
       break;
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCut:
-      bTimeKind = bsrTimeSignature::kTimeCut;
+      bTimeKind = bsrTimeSignatureKind::kTimeSignatureCut;
       break;
 
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNote:
-      bTimeKind = bsrTimeSignature::kTimeNote;
+      bTimeKind = bsrTimeSignatureKind::kTimeSignatureNote;
       break;
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolDottedNote:
-      bTimeKind = bsrTimeSignature::kTimeDottedNote;
+      bTimeKind = bsrTimeSignatureKind::kTimeSignatureDottedNote;
       break;
 
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSingleNumber:
-      bTimeKind = bsrTimeSignature::kTimeSingleNumber;
+      bTimeKind = bsrTimeSignatureKind::kTimeSignatureSingleNumber;
       break;
 
     case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
-      bTimeKind = bsrTimeSignature::kTimeSenzaMisura;
+      bTimeKind = bsrTimeSignatureKind::kTimeSignatureSenzaMisura;
       break;
     break;
   } // switch

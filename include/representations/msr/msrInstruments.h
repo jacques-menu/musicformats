@@ -352,7 +352,7 @@ EXP ostream& operator << (ostream& os, const S_msrHarpPedalsTuning& elt);
 
 enum class msrPedalTypeKind {
   k_NoPedalType,
-  kPedalStart, kPedalContinue, kPedalChange, kPedalStop
+  kPedalTypeStart, kPedalTypeContinue, kPedalTypeChange, kPedalTypeStop
 };
 
 string msrPedalTypeKindAsString (

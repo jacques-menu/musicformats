@@ -638,8 +638,8 @@ void msrDoubleTremolo::browseData (basevisitor* v)
   }
 }
 
-string msrDoubleTremolo::msrDoubleTremoloKindAsString (
-  msrDoubleTremolo::msrDoubleTremoloKind doubleTremolotKind)
+string msrDoubleTremoloKindAsString (
+  msrDoubleTremoloKind doubleTremolotKind)
 {
   string result;
 
@@ -655,6 +655,12 @@ string msrDoubleTremolo::msrDoubleTremoloKindAsString (
   return result;
 }
 
+ostream& operator << (ostream& os, const msrDoubleTremoloKind& elt)
+{
+  os << msrDoubleTremoloKindAsString (elt);
+  return os;
+}
+
 string msrDoubleTremolo::doubleTremoloPlacementKindAsString () const
 {
   return
@@ -667,13 +673,14 @@ string msrDoubleTremolo::asShortString () const
   stringstream s;
 
   s <<
-    "DoubleTremolo" <<
-    ", " << msrTremoloTypeKindAsString (fDoubleTremoloTypeKind) <<
-    ", line " << fInputLineNumber <<
-    ", " <<
+    "[DoubleTremolo" <<
+    ", fDoubleTremoloTypeKind: " << fDoubleTremoloTypeKind <<
+    ", fDoubleTremoloMarksNumber: " <<
     mfSingularOrPlural (
       fDoubleTremoloMarksNumber, "mark", "marks") <<
-    ", placement" << " = " << doubleTremoloPlacementKindAsString ();
+    ", placement: " << doubleTremoloPlacementKindAsString () <<
+    ", line " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -683,12 +690,12 @@ string msrDoubleTremolo::asString () const
   stringstream s;
 
   s <<
-    "DoubleTremolo " <<
-    ", " << msrTremoloTypeKindAsString (fDoubleTremoloTypeKind) <<
-    ", line " << fInputLineNumber <<
-    fDoubleTremoloMarksNumber << " marks" <<
-    ", placement" << " = " << doubleTremoloPlacementKindAsString () <<
-    ", " << fDoubleTremoloSoundingWholeNotes << " sounding whole notes";
+    "[DoubleTremolo " <<
+    ", fDoubleTremoloTypeKind: " << fDoubleTremoloTypeKind <<
+    ", fDoubleTremoloMarksNumber: " <<fDoubleTremoloMarksNumber <<
+    ", placement: " << doubleTremoloPlacementKindAsString () <<
+    ",fDoubleTremoloSoundingWholeNotes: " << fDoubleTremoloSoundingWholeNotes <<
+    ", line " << fInputLineNumber;
 
   if (fDoubleTremoloFirstElement) { // it may not be set yet
     s <<
@@ -771,6 +778,8 @@ string msrDoubleTremolo::asString () const
         break;
     } // switch
   }
+
+  s << ']';
 
   return s.str ();
 }

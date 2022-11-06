@@ -22,102 +22,117 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+// location
+enum class msrBarLineLocationKind {
+  kBarLineLocationNone,
+
+  kBarLineLocationLeft,
+  kBarLineLocationMiddle,
+  kBarLineLocationRight // by default
+};
+
+string msrBarLineLocationKindAsString (
+  msrBarLineLocationKind barLineLocationKind);
+
+ostream& operator << (ostream& os, const msrBarLineLocationKind& elt);
+
+// style
+enum class msrBarLineStyleKind {
+  kBarLineStyleNone,
+
+  kBarLineStyleRegular,  // by default
+
+  kBarLineStyleDotted, kBarLineStyleDashed, kBarLineStyleHeavy,
+  kBarLineStyleLightLight, kBarLineStyleLightHeavy,
+  kBarLineStyleHeavyLight, kBarLineStyleHeavyHeavy,
+  kBarLineStyleTick, kBarLineStyleShort
+};
+
+string msrBarLineStyleKindAsString (
+  msrBarLineStyleKind barLineStyleKind);
+
+ostream& operator << (ostream& os, const msrBarLineStyleKind& elt);
+
+// repeat direction
+enum class msrBarLineRepeatDirectionKind {
+  kBarLineRepeatDirectionNone,
+  kBarLineRepeatDirectionForward, kBarLineRepeatDirectionBackward
+};
+
+string msrBarLineRepeatDirectionKindAsString (
+  msrBarLineRepeatDirectionKind barLineRepeatDirectionKind);
+
+ostream& operator << (ostream& os, const msrBarLineRepeatDirectionKind& elt);
+
+// ending type
+enum class msrBarLineEndingTypeKind {
+  kBarLineEndingNone,
+
+  kBarLineEndingTypeStart,
+  kBarLineEndingTypeStop,
+  kBarLineEndingTypeDiscontinue
+};
+
+string msrBarLineEndingTypeKindAsString (
+  msrBarLineEndingTypeKind barLineEndingTypeKind);
+
+ostream& operator << (ostream& os, const msrBarLineEndingTypeKind& elt);
+
+// category
+enum class msrBarLineCategoryKind {
+  k_NoBarLineCategory,
+
+  kBarLineCategoryStandalone,
+
+  kBarLineCategoryRepeatStart, kBarLineCategoryRepeatEnd,
+
+  kBarLineCategoryHookedEndingStart, kBarLineCategoryHookedEndingEnd,
+  kBarLineCategoryHooklessEndingStart, kBarLineCategoryHooklessEndingEnd
+};
+
+string msrBarLineCategoryKindAsString (
+  msrBarLineCategoryKind barLineCategoryKind);
+
+ostream& operator << (ostream& os, const msrBarLineCategoryKind& elt);
+
+// segno
+enum class msrBarLineHasSegnoKind {
+  kBarLineHasSegnoYes, kBarLineHasSegnoNo
+};
+
+string msrBarLineHasSegnoKindAsString (
+  msrBarLineHasSegnoKind barLineHasSegnoKind);
+
+ostream& operator << (ostream& os, const msrBarLineHasSegnoKind& elt);
+
+// coda
+enum class msrBarLineHasCodaKind {
+  kBarLineHasCodaYes, kBarLineHasCodaNo
+};
+
+string msrBarLineHasCodaKindAsString (
+  msrBarLineHasCodaKind barLineHasCodaKind);
+
+ostream& operator << (ostream& os, const msrBarLineHasCodaKind& elt);
+
+// repeat winged
+enum class msrBarLineRepeatWingedKind {
+  kBarLineRepeatWingedNone,
+
+  kBarLineRepeatWingedStraight, kBarLineRepeatWingedCurved,
+  kBarLineRepeatWingedDoubleStraight, kBarLineRepeatWingedDoubleCurved
+};
+
+string msrBarLineRepeatWingedKindAsString (
+  msrBarLineRepeatWingedKind barLineRepeatWingedKind);
+
+ostream& operator << (ostream& os, const msrBarLineRepeatWingedKind& elt);
+
 class EXP msrBarLine : public msrMeasureElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    // location
-    enum class msrBarLineLocationKind {
-      kBarLineLocationNone,
-
-      kBarLineLocationLeft,
-      kBarLineLocationMiddle,
-      kBarLineLocationRight // by default
-    };
-
-    string barLineLocationKindAsString (
-      msrBarLineLocationKind barLineLocationKind);
-
-    // style
-    enum class msrBarLineStyleKind {
-      kBarLineStyleNone,
-
-      kBarLineStyleRegular,  // by default
-
-      kBarLineStyleDotted, kBarLineStyleDashed, kBarLineStyleHeavy,
-      kBarLineStyleLightLight, kBarLineStyleLightHeavy,
-      kBarLineStyleHeavyLight, kBarLineStyleHeavyHeavy,
-      kBarLineStyleTick, kBarLineStyleShort
-    };
-
-    string barLineStyleKindAsString (
-      msrBarLineStyleKind barLineStyleKind);
-
-    // repeat direction
-    enum class msrBarLineRepeatDirectionKind {
-      kBarLineRepeatDirectionNone,
-      kBarLineRepeatDirectionForward, kBarLineRepeatDirectionBackward
-    };
-
-    string barLineRepeatDirectionKindAsString (
-      msrBarLineRepeatDirectionKind barLineRepeatDirectionKind);
-
-    // ending type
-    enum class msrBarLineEndingTypeKind {
-      kBarLineEndingNone,
-
-      kBarLineEndingTypeStart,
-      kBarLineEndingTypeStop,
-      kBarLineEndingTypeDiscontinue
-    };
-
-    string barLineEndingTypeKindAsString (
-      msrBarLineEndingTypeKind barLineEndingTypeKind);
-
-    // category
-    enum class msrBarLineCategoryKind {
-      k_NoBarLineCategory,
-
-      kBarLineCategoryStandalone,
-
-      kBarLineCategoryRepeatStart, kBarLineCategoryRepeatEnd,
-
-      kBarLineCategoryHookedEndingStart, kBarLineCategoryHookedEndingEnd,
-      kBarLineCategoryHooklessEndingStart, kBarLineCategoryHooklessEndingEnd
-    };
-
-    string barLineCategoryKindAsString (
-      msrBarLineCategoryKind barLineCategoryKind);
-
-    // segno
-    enum class msrBarLineHasSegnoKind {
-      kBarLineHasSegnoYes, kBarLineHasSegnoNo
-    };
-
-    string barLineHasSegnoKindAsString (
-      msrBarLineHasSegnoKind barLineHasSegnoKind);
-
-    // coda
-    enum class msrBarLineHasCodaKind {
-      kBarLineHasCodaYes, kBarLineHasCodaNo
-    };
-
-    string barLineHasCodaKindAsString (
-      msrBarLineHasCodaKind barLineHasCodaKind);
-
-    // repeat winged
-    enum class msrBarLineRepeatWingedKind {
-      kBarLineRepeatWingedNone,
-
-      kBarLineRepeatWingedStraight, kBarLineRepeatWingedCurved,
-      kBarLineRepeatWingedDoubleStraight, kBarLineRepeatWingedDoubleCurved
-    };
-
-    string barLineRepeatWingedKindAsString (
-      msrBarLineRepeatWingedKind barLineRepeatWingedKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

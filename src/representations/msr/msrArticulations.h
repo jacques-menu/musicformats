@@ -284,20 +284,21 @@ typedef SMARTP<msrArpeggiato> S_msrArpeggiato;
 EXP ostream& operator << (ostream& os, const S_msrArpeggiato& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrNonArpeggiatoTypeKind {
+  kArticulationNonArpeggiatoTypeNone,
+  kArticulationNonArpeggiatoTypeTop, kArticulationNonArpeggiatoTypeBottom
+};
+
+string msrNonArpeggiatoTypeKindAsString (
+  msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind);
+
+ostream& operator << (ostream& os, const msrNonArpeggiatoTypeKind& elt);
+
 class EXP msrNonArpeggiato : public msrArticulation
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrNonArpeggiatoTypeKind {
-      kArticulationNonArpeggiatoTypeNone,
-      kArticulationNonArpeggiatoTypeTop, kArticulationNonArpeggiatoTypeBottom
-    };
-
-    string nonArpeggiatoTypeKindAsString (
-      msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -338,7 +339,7 @@ class EXP msrNonArpeggiato : public msrArticulation
     // public services
     // ------------------------------------------------------
 
-    virtual string        nonArpeggiatoTypeKindAsString () const;
+    virtual string        msrNonArpeggiatoTypeKindAsString () const;
 
   public:
 

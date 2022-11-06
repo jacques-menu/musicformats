@@ -1195,7 +1195,7 @@ void msrLineWidth::acceptOut (basevisitor* v)
 void msrLineWidth::browseData (basevisitor* v)
 {}
 
-string msrLineWidth::lineWidthTypeKindAsString (
+string msrLineWidth::msrLineWidthTypeKindAsString (
   msrLineWidthTypeKind lineWidthTypeKind)
 {
   string result;
@@ -1204,66 +1204,72 @@ string msrLineWidth::lineWidthTypeKindAsString (
     case msrLineWidth::k_NoLineWidthTypeKind:
       result = "k_NoLineWidthTypeKind";
       break;
-    case msrLineWidth::kBeamLineWidth:
-      result = "kBeamLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeBeam:
+      result = "kLineWidthTypeBeam";
       break;
-    case msrLineWidth::kBracketLineWidth:
-      result = "kBracketLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeBracket:
+      result = "kLineWidthTypeBracket";
       break;
-    case msrLineWidth::kDashesLineWidth:
-      result = "kDashesLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeDashes:
+      result = "kLineWidthTypeDashes";
       break;
-    case msrLineWidth::kEnclosureLineWidth:
-      result = "kEnclosureLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeEnclosure:
+      result = "kLineWidthTypeEnclosure";
       break;
-    case msrLineWidth::kEndingLineWidth:
-      result = "kEndingLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeEnding:
+      result = "kLineWidthTypeEnding";
       break;
-    case msrLineWidth::kExtendLineWidth:
-      result = "kExtendLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeExtend:
+      result = "kLineWidthTypeExtend";
       break;
-    case msrLineWidth::kHeavyBarLineLineWidth:
-      result = "kHeavyBarLineLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeHeavyBarLine:
+      result = "kLineWidthTypeHeavyBarLine";
       break;
-    case msrLineWidth::kLegerLineWidth:
-      result = "kLegerLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeHeavyLeger:
+      result = "kLineWidthTypeHeavyLeger";
       break;
-    case msrLineWidth::kLightBarLineLineWidthLineWidth:
-      result = "kLightBarLineLineWidthLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeLightBarLine:
+      result = "kLineWidthTypeLightBarLine";
       break;
-    case msrLineWidth::kOctaveShiftLineWidth:
-      result = "kOctaveShiftLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeOctaveShift:
+      result = "kLineWidthTypeOctaveShift";
       break;
-    case msrLineWidth::kPedalLineWidth:
-      result = "kPedalLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypePedal:
+      result = "kLineWidthTypePedal";
       break;
-    case msrLineWidth::kSlurMiddleLineWidth:
-      result = "kSlurMiddleLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeSlurMiddle:
+      result = "kLineWidthTypeSlurMiddle";
       break;
-    case msrLineWidth::kSlurTipLineWidth:
-      result = "kSlurTipLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeSlurTip:
+      result = "kLineWidthTypeSlurTip";
       break;
-    case msrLineWidth::kStaffLineWidth:
-      result = "kStaffLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeStaff:
+      result = "kLineWidthTypeStaff";
       break;
-    case msrLineWidth::kStemLineWidthLineWidth:
-      result = "kStemLineWidthLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeStem:
+      result = "kLineWidthTypeStem";
       break;
-    case msrLineWidth::kTieMiddleLineWidth:
-      result = "kTieMiddleLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeTieMiddle:
+      result = "kLineWidthTypeTieMiddle";
       break;
-    case msrLineWidth::kTieTipLineWidth:
-      result = "kTieTipLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeTieTip:
+      result = "kLineWidthTypeTieTip";
       break;
-    case msrLineWidth::kTupletBracketLineWidth:
-      result = "kTupletBracketLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeTupletBracket:
+      result = "kLineWidthTypeTupletBracket";
       break;
-    case msrLineWidth::kWedgeLineWidth:
-      result = "kWedgeLineWidth";
+    case msrLineWidthTypeKind::kLineWidthTypeWedge:
+      result = "kLineWidthTypeWedge";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrLineWidthTypeKind& elt)
+{
+  os << msrLineWidthTypeKindAsString (elt);
+  return os;
 }
 
 string msrLineWidth::asString () const
@@ -1273,7 +1279,7 @@ string msrLineWidth::asString () const
   s <<
     "[LineWidth" <<
     ", fLineWidthTypeKind: " <<
-    lineWidthTypeKindAsString (fLineWidthTypeKind) <<
+    msrLineWidthTypeKindAsString (fLineWidthTypeKind) <<
      ", lineWidthValue: ";
     if (fLineWidthValue) {
       s << fLineWidthValue->asString();
@@ -1302,7 +1308,7 @@ void msrLineWidth::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "lineWidthTypeKind" << " : " <<
-    lineWidthTypeKindAsString (fLineWidthTypeKind) <<
+    msrLineWidthTypeKindAsString (fLineWidthTypeKind) <<
     endl <<
 
     setw (fieldWidth) <<

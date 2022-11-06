@@ -24,19 +24,20 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class lpsrElementsSeparatorKind {
+  kElementsSeparatorEndOfLine, kElementsSeparatorSpace
+};
+
+string lpsrEelementsSeparatorKindAsString (
+  lpsrElementsSeparatorKind elementsSeparatorKind);
+
+ostream& operator << (ostream& os, const lpsrElementsSeparatorKind& elt);
+
 class EXP lpsrParallelMusicBLock : public lpsrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class lpsrElementsSeparatorKind {
-      kEndOfLine, kSpace
-    };
-
-    string elementsSeparatorKindAsString (
-      lpsrElementsSeparatorKind elementsSeparatorKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

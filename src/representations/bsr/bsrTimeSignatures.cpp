@@ -339,24 +339,24 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
       bsrCellsList::create (fInputLineNumber);
 
   switch (fTimeKind) {
-    case bsrTimeSignature::kTimeNone:
+    case bsrTimeSignatureKind::kTimeSignatureNone:
       break;
 
-    case bsrTimeSignature::kTimeCommon:
+    case bsrTimeSignatureKind::kTimeSignatureCommon:
       result->appendCellKindToCellsList (kCellNumberSign);
       result->appendCellKindToCellsList (kCell4);
       result->appendCellKindToCellsList (kCellLower4);
       break;
 
-    case bsrTimeSignature::kTimeCut:
+    case bsrTimeSignatureKind::kTimeSignatureCut:
       result->appendCellKindToCellsList (kCellNumberSign);
       result->appendCellKindToCellsList (kCell2);
       result->appendCellKindToCellsList (kCellLower2);
       break;
 
-    case bsrTimeSignature::kTimeNumerical: // JMI ???
-    case bsrTimeSignature::kTimeNote:
-    case bsrTimeSignature::kTimeDottedNote:
+    case bsrTimeSignatureKind::kTimeSignatureNumerical: // JMI ???
+    case bsrTimeSignatureKind::kTimeSignatureNote:
+    case bsrTimeSignatureKind::kTimeSignatureDottedNote:
       {
         if (fTimeSignatureItemsVector.size ()) {
           vector<S_bsrTimeSignatureItem>::const_iterator
@@ -393,9 +393,9 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 int beatsNumberToBeUsed = timeSignatureBeatsNumbersVector [0];
 
                 switch (fTimeKind) {
-                  case bsrTimeSignature::kTimeNote:
+                  case bsrTimeSignatureKind::kTimeSignatureNote:
                     break;
-                  case bsrTimeSignature::kTimeDottedNote:
+                  case bsrTimeSignatureKind::kTimeSignatureDottedNote:
                     beatsNumberToBeUsed /= 3;
                     break;
                   default:
@@ -429,9 +429,9 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
                 int beatValueToBeUsed = theBsrTimeSignatureBeatValue;
 
                 switch (fTimeKind) {
-                  case bsrTimeSignature::kTimeNote:
+                  case bsrTimeSignatureKind::kTimeSignatureNote:
                     break;
-                  case bsrTimeSignature::kTimeDottedNote:
+                  case bsrTimeSignatureKind::kTimeSignatureDottedNote:
                     beatValueToBeUsed /= 2;
                     break;
                   default:
@@ -512,9 +512,9 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
 
                 // append a dot to the beat number if needed
                 switch (fTimeKind) {
-                  case bsrTimeSignature::kTimeNote:
+                  case bsrTimeSignatureKind::kTimeSignatureNote:
                     break;
-                  case bsrTimeSignature::kTimeDottedNote:
+                  case bsrTimeSignatureKind::kTimeSignatureDottedNote:
                     result->appendCellKindToCellsList (
                       kCellAugmentationDot);
                     break;
@@ -548,7 +548,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
       }
       break;
 
-    case bsrTimeSignature::kTimeSingleNumber:
+    case bsrTimeSignatureKind::kTimeSignatureSingleNumber:
       {
         if (fTimeSignatureItemsVector.size ()) {
           vector<S_bsrTimeSignatureItem>::const_iterator
@@ -665,7 +665,7 @@ S_bsrCellsList bsrTimeSignature::buildCellsList () const
       }
       break;
 
-    case bsrTimeSignature::kTimeSenzaMisura:
+    case bsrTimeSignatureKind::kTimeSignatureSenzaMisura:
       break;
   } // switch
 
@@ -733,36 +733,36 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
 void bsrTimeSignature::browseData (basevisitor* v)
 {}
 
-string bsrTimeSignature::timeKindAsString (
+string bsrTimeSignatureKindAsString (
   bsrTimeSignatureKind timeKind)
 {
   string result;
 
   switch (timeKind) {
-    case bsrTimeSignature::kTimeNone:
-      result = "timeNone";
+    case bsrTimeSignatureKind::kTimeSignatureNone:
+      result = "kTimeNone";
       break;
 
-    case bsrTimeSignature::kTimeCommon:
-      result = "timeCommon";
+    case bsrTimeSignatureKind::kTimeSignatureCommon:
+      result = "kTimeCommon";
       break;
-    case bsrTimeSignature::kTimeCut:
-      result = "timeCut";
+    case bsrTimeSignatureKind::kTimeSignatureCut:
+      result = "kTimeCut";
       break;
-    case bsrTimeSignature::kTimeNumerical:
-      result = "timeNumerical";
+    case bsrTimeSignatureKind::kTimeSignatureNumerical:
+      result = "kTimeNumerical";
       break;
-    case bsrTimeSignature::kTimeNote:
-      result = "timeNote";
+    case bsrTimeSignatureKind::kTimeSignatureNote:
+      result = "kTimeNote";
       break;
-    case bsrTimeSignature::kTimeDottedNote:
-      result = "timeDottedNote";
+    case bsrTimeSignatureKind::kTimeSignatureDottedNote:
+      result = "kTimeNote";
       break;
-    case bsrTimeSignature::kTimeSingleNumber:
-      result = "timeSingleNumber";
+    case bsrTimeSignatureKind::kTimeSignatureSingleNumber:
+      result = "kTimeSingleNumber";
       break;
-    case bsrTimeSignature::kTimeSenzaMisura:
-      result = "timeSenzaMisura";
+    case bsrTimeSignatureKind::kTimeSignatureSenzaMisura:
+      result = "kTimeSenzaMisura";
       break;
   } // switch
 
@@ -775,29 +775,29 @@ string bsrTimeSignature::timeKindAsDebugString (
   string result;
 
   switch (timeKind) {
-    case bsrTimeSignature::kTimeNone:
+    case bsrTimeSignatureKind::kTimeSignatureNone:
       result = "_";
       break;
 
-    case bsrTimeSignature::kTimeCommon:
+    case bsrTimeSignatureKind::kTimeSignatureCommon:
       result = "C";
       break;
-    case bsrTimeSignature::kTimeCut:
+    case bsrTimeSignatureKind::kTimeSignatureCut:
       result = "C/";
       break;
-    case bsrTimeSignature::kTimeNumerical:
+    case bsrTimeSignatureKind::kTimeSignatureNumerical:
       result = "Num";
       break;
-    case bsrTimeSignature::kTimeNote:
+    case bsrTimeSignatureKind::kTimeSignatureNote:
       result = "Note";
       break;
-    case bsrTimeSignature::kTimeDottedNote:
+    case bsrTimeSignatureKind::kTimeSignatureDottedNote:
       result = "DottedNote";
       break;
-    case bsrTimeSignature::kTimeSingleNumber:
+    case bsrTimeSignatureKind::kTimeSignatureSingleNumber:
       result = "SingleNumber";
       break;
-    case bsrTimeSignature::kTimeSenzaMisura:
+    case bsrTimeSignatureKind::kTimeSignatureSenzaMisura:
       result = "SenzaMisura";
       break;
   } // switch
@@ -812,7 +812,7 @@ string bsrTimeSignature::asString () const
   s <<
     "Time" <<
     ", timeKind " << " : " <<
-    timeKindAsString (fTimeKind) <<
+    bsrTimeSignatureKindAsString (fTimeKind) <<
     ", timeCellsList: " << fetchCellsList ()->asString () <<
     ", spacesBefore: " << fSpacesBefore <<
     ", line " << fInputLineNumber;
@@ -852,7 +852,7 @@ void bsrTimeSignature::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "timeKind " << " : " <<
-    timeKindAsString (fTimeKind) <<
+    bsrTimeSignatureKindAsString (fTimeKind) <<
     endl <<
     setw (fieldWidth) <<
     "timeSignatureItemsVector" << " : ";

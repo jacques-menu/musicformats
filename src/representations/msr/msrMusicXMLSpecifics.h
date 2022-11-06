@@ -712,31 +712,32 @@ typedef SMARTP<msrPrintLayout> S_msrPrintLayout;
 EXP ostream& operator << (ostream& os, const S_msrPrintLayout& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrLineWidthTypeKind {
+  k_NoLineWidthTypeKind,
+  kLineWidthTypeBeam, kLineWidthTypeBracket, kLineWidthTypeDashes,
+  kLineWidthTypeEnclosure,
+  kLineWidthTypeEnding,
+  kLineWidthTypeExtend,
+  kLineWidthTypeHeavyBarLine, kLineWidthTypeHeavyLeger, kLineWidthTypeLightBarLine,
+  kLineWidthTypeOctaveShift,
+  kLineWidthTypePedal,
+  kLineWidthTypeSlurMiddle, kLineWidthTypeSlurTip,
+  kLineWidthTypeStaff, kLineWidthTypeStem,
+  kLineWidthTypeTieMiddle, kLineWidthTypeTieTip,
+  kLineWidthTypeTupletBracket,
+  kLineWidthTypeWedge
+};
+
+string msrLineWidthTypeKindAsString (
+  msrLineWidthTypeKind lineWidthTypeKind);
+
+ostream& operator << (ostream& os, const msrLineWidthTypeKind& elt);
+
 class EXP msrLineWidth : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrLineWidthTypeKind {
-      k_NoLineWidthTypeKind,
-      kBeamLineWidth, kBracketLineWidth, kDashesLineWidth,
-      kEnclosureLineWidth,
-      kEndingLineWidth,
-      kExtendLineWidth,
-      kHeavyBarLineLineWidth, kLegerLineWidth, kLightBarLineLineWidthLineWidth,
-      kOctaveShiftLineWidth,
-      kPedalLineWidth,
-      kSlurMiddleLineWidth, kSlurTipLineWidth,
-      kStaffLineWidth, kStemLineWidthLineWidth,
-      kTieMiddleLineWidth, kTieTipLineWidth,
-      kTupletBracketLineWidth,
-      kWedgeLineWidth
-    };
-
-    string lineWidthTypeKindAsString (
-      msrLineWidthTypeKind lineWidthTypeKind);
 
   public:
 

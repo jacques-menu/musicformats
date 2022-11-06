@@ -22,19 +22,20 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class bsrParallelLayoutKind {
+    kParallelLayoutBarOverBarKind,
+    kParallelLayoutLineOverLineKind };
+
+string bsrParallelLayoutKindAsString (
+  bsrParallelLayoutKind parallelLayoutKind);
+
+ostream& operator << (ostream& os, const bsrParallelLayoutKind& elt);
+
 class EXP bsrParallel : public bsrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class bsrParallelLayoutKind {
-        kParallelLayoutBarOverBarKind,
-        kParallelLayoutLineOverLineKind };
-
-    string parallelLayoutKindAsString (
-      bsrParallelLayoutKind parallelLayoutKind);
 
     // creation
     // ------------------------------------------------------

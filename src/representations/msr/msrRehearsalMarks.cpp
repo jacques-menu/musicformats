@@ -114,31 +114,31 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
 void msrRehearsalMark::browseData (basevisitor* v)
 {}
 
-string msrRehearsalMark::rehearsalKindAsString (
+string msrRehearsalMark::msrRrehearsalKindAsString (
   msrRehearsalMarkKind rehearsalKind)
 {
   string result;
 
   switch (rehearsalKind) {
-    case msrRehearsalMark::kNone:
+    case msrRehearsalMarkKind::kRehearsalMarkRehearsalMarkNone:
       result = "kNone";
       break;
-    case msrRehearsalMark::kRectangle:
+    case msrRehearsalMarkKind::kRehearsalMarkRectangle:
       result = "kRectangle";
       break;
-    case msrRehearsalMark::kOval:
+    case msrRehearsalMarkKind::kRehearsalMarkOval:
       result = "kOval";
       break;
-    case msrRehearsalMark::kCircle:
+    case msrRehearsalMarkKind::kRehearsalMarkCircle:
       result = "kCircle";
       break;
-    case msrRehearsalMark::kBracket:
+    case msrRehearsalMarkKind::kRehearsalMarkBracket:
       result = "kBracket";
       break;
-    case msrRehearsalMark::kTriangle:
+    case msrRehearsalMarkKind::kRehearsalMarkTriangle:
       result = "kTriangle";
       break;
-    case msrRehearsalMark::kDiamond:
+    case msrRehearsalMarkKind::kRehearsalMarkDiamond:
       result = "kDiamond";
       break;
   } // switch
@@ -146,15 +146,29 @@ string msrRehearsalMark::rehearsalKindAsString (
   return result;
 }
 
+ostream& operator << (ostream& os, const msrRehearsalMarkKind& elt)
+{
+  os << msrRrehearsalKindAsString (elt);
+  return os;
+}
+
+string msrRehearsalMark::asString () const
+{
+  stringstream s;
+
+  s <<
+    "[RehearsalMark" <<
+    ", fRehearsalMarkText:" << fRehearsalMarkText <<
+    " fRehearsalMarkKind: " << fRehearsalMarkKind <<
+    " rehearsalPlacementKind: " << fRehearsalMarkPlacementKind) <<
+    ']';
+
+  return s.str ();
+}
+
 void msrRehearsalMark::print (ostream& os) const
 {
-  os <<
-    "RehearsalMark" << ' ' << fRehearsalMarkText <<
-    " kind: " <<
-    rehearsalKindAsString (fRehearsalMarkKind) <<
-    " rehearsalPlacementKind: " <<
-    msrPlacementKindAsString (fRehearsalMarkPlacementKind) <<
-    endl;
+  os << asString () << endl;
 }
 
 ostream& operator << (ostream& os, const S_msrRehearsalMark& elt)
