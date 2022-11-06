@@ -225,7 +225,7 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
         gGlobalMsrOahGroup,
         "Pass 4",
         "Convert the second MSR into an MXSR",
-        mfTimingItem::kMandatory);
+        mfTimingItemKind::kMandatory);
   }
   catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutputStream);

@@ -31,12 +31,12 @@ class EXP msrFrameNote : public msrElement
     // data types
     // ------------------------------------------------------
 
-    enum msrBarreTypeKind {
+    enum class msrBarreTypeKind {
       kBarreTypeNone,
       kBarreTypeStart, kBarreTypeStop
     };
 
-    static string barreTypeKindAsString (
+    string barreTypeKindAsString (
       msrBarreTypeKind barreTypeKind);
 
 /*

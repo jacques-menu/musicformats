@@ -129,13 +129,13 @@ S_bsrCellsList bsrNumber::buildCellsList () const
 
   // append number sign if needed
   switch (fNumberSignIsNeededKind) {
-    case bsrNumber::kNumberSignIsNeededYes:
+    case bsrNumberSignIsNeededKind::kNumberSignIsNeededYes:
       result->appendCellsListToCellsList (
         bsrCellsList::create (
           fInputLineNumber,
           kCellNumberSign));
       break;
-    case bsrNumber::kNumberSignIsNeededNo:
+    case bsrNumberSignIsNeededKind::kNumberSignIsNeededNo:
       break;
   } // switch
 
@@ -206,21 +206,27 @@ void bsrNumber::acceptOut (basevisitor* v)
 void bsrNumber::browseData (basevisitor* v)
 {}
 
-string bsrNumber::numberSignIsNeededKindAsString (
+string bsrNumberSignIsNeededKindAsString (
   bsrNumberSignIsNeededKind numberSignIsNeededKind)
 {
   string result;
 
   switch (numberSignIsNeededKind) {
-    case bsrNumber::kNumberSignIsNeededYes:
+    case bsrNumberSignIsNeededKind::kNumberSignIsNeededYes:
       result = "numberSignIsNeededYes";
       break;
-    case bsrNumber::kNumberSignIsNeededNo:
+    case bsrNumberSignIsNeededKind::kNumberSignIsNeededNo:
       result = "numberSignIsNeededNo";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const bsrNumberSignIsNeededKind& elt)
+{
+  os << bsrNumberSignIsNeededKindAsString (elt);
+  return os;
 }
 
 string bsrNumber::asString () const
@@ -231,7 +237,7 @@ string bsrNumber::asString () const
     "Number" <<
     ", numberValue: " << fNumberValue <<
     ", numberSignIsNeeded: " <<
-    numberSignIsNeededKindAsString (
+    bsrNumberSignIsNeededKindAsString (
       fNumberSignIsNeededKind) <<
     ", numberCellsList: " <<
     fNumberCellsList->asShortString () <<
@@ -249,7 +255,7 @@ string bsrNumber::asDebugString () const
     "N" << // JMI
     fNumberValue <<
     ", numberSignIsNeeded: " <<
-    numberSignIsNeededKindAsString (
+    bsrNumberSignIsNeededKindAsString (
       fNumberSignIsNeededKind) <<
     ", spacesBefore: " << fSpacesBefore;
 
@@ -273,7 +279,7 @@ void bsrNumber::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     ", numberSignIsNeeded" << " : " <<
-    numberSignIsNeededKindAsString (
+    bsrNumberSignIsNeededKindAsString (
       fNumberSignIsNeededKind) <<
     setw (fieldWidth) <<
     ", numberCellsList" << " : " <<
@@ -294,7 +300,7 @@ ostream& operator << (ostream& os, const S_bsrNumber& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

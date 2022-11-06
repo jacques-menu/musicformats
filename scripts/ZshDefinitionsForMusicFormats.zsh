@@ -47,7 +47,6 @@ alias inc="cd ${INCLUDE_DIR}"
 
 alias rmbuild='cd ${MUSIC_FORMATS_DEV}/build ; rm -r bin lib libdir; ls -sal'
 
-FILES_DIR=${MUSIC_FORMATS_DEV}/files
 DOC_DIR=${MUSIC_FORMATS_DEV}/documentation
 
 SERVICES_DIR=${MUSIC_FORMATS_DEV}/src/services
@@ -55,8 +54,7 @@ SERVICES_DIR=${MUSIC_FORMATS_DEV}/src/services
 LXML_SAMPLES_DIR=${LXML_DIR}/samples
 CLI_SAMPLES_DIR=${MUSIC_FORMATS_DEV}/src/clisamples
 
-FILES_DIR=${MUSIC_FORMATS_DEV}/files
-MXML_FILES_DIR=${FILES_DIR}/musicxmlfiles
+MXML_FILES_DIR=${MUSIC_FORMATS_DEV}/musicxmlfiles
 
 export PATH=${MUSIC_FORMATS_DEV}/build/bin:$PATH
 
@@ -132,11 +130,11 @@ alias b2015="cd ${MXML_FILES_DIR}/2015_bana_braille"
 
 alias igno="cd ${MXML_FILES_DIR}/lilypond-ignored"
 
-alias fmfsl="cd ${FILES_DIR}/mfslfiles"
+alias fmfsl="cd ${MUSIC_FORMATS_DEV}/mfslfiles"
 
-alias fmsdl="cd ${FILES_DIR}/msdlfiles"
-alias fbmml="cd ${FILES_DIR}/bmmlfiles"
-alias fmei="cd ${FILES_DIR}/meifiles"
+alias fmsdl="cd ${MUSIC_FORMATS_DEV}/msdlfiles"
+alias fbmml="cd ${MUSIC_FORMATS_DEV}/bmmlfiles"
+alias fmei="cd ${MUSIC_FORMATS_DEV}/meifiles"
 
 alias msdr="cd ${SRC_DIR}/representations/msdr"
 alias msdm="cd ${SRC_DIR}/translators/msdl2msr"
@@ -223,13 +221,13 @@ function bit ()
 
   LOGFILE_NAME=${SCRIPT_NAME}.log
   LOGFILE=${BUILD_DIR}/${LOGFILE_NAME}
-	echo
-	echo "==> LOGFILE = ${LOGFILE}"
-	echo
+# 	echo
+# 	echo "==> LOGFILE = ${LOGFILE}"
+# 	echo
 
 	# execute the SCRIPT
 
-	echo "--> Executing ${SCRIPT}"
+# 	echo "--> Executing ${SCRIPT}"
   zsh ${SCRIPT} $@
 
 	# filter out log results

@@ -58,65 +58,71 @@ msrTechnical::msrTechnical (
 msrTechnical::~msrTechnical ()
 {}
 
-string msrTechnical::technicalKindAsString () const
+string msrTechnical::msrTechnicalKindAsString () const
 {
   string result;
 
   switch (fTechnicalKind) {
     case msrTechnical::kArrow:
-      result = "Arrow";
+      result = "kArrow";
       break;
     case msrTechnical::kDoubleTongue:
-      result = "DoubleTongue";
+      result = "kDoubleTongue";
       break;
     case msrTechnical::kDownBow:
-      result = "DownBow";
+      result = "kDownBow";
       break;
     case msrTechnical::kFingernails:
-      result = "Fingernails";
+      result = "kFingernails";
       break;
     case msrTechnical::kHarmonic:
-      result = "Harmonic";
+      result = "kHarmonic";
       break;
     case msrTechnical::kHeel:
-      result = "Heel";
+      result = "kHeel";
       break;
     case msrTechnical::kHole:
-      result = "Hole";
+      result = "kHole";
       break;
     case msrTechnical::kOpenString:
-      result = "OpenString";
+      result = "kOpenString";
       break;
     case msrTechnical::kSnapPizzicato:
-      result = "SnapPizzicato";
+      result = "kSnapPizzicato";
       break;
     case msrTechnical::kStopped:
-      result = "Stopped";
+      result = "kStopped";
       break;
     case msrTechnical::kTap:
-      result = "Tap";
+      result = "kTap";
       break;
     case msrTechnical::kThumbPosition:
-      result = "ThumbPosition";
+      result = "kThumbPosition";
       break;
     case msrTechnical::kToe:
-      result = "Toe";
+      result = "kToe";
       break;
     case msrTechnical::kTripleTongue:
-      result = "TripleTongue";
+      result = "kTripleTongue";
       break;
     case msrTechnical::kUpBow:
-      result = "UpBow";
+      result = "kUpBow";
       break;
   } // switch
 
   return result;
 }
 
+ostream& operator << (ostream& os, const msrSyllableKind& elt)
+{
+  os << msrSyllableKindAsString (elt);
+  return os;
+}
+
 string msrTechnical::technicalPlacementKindAsString () const
 {
   return
-    placementKindAsString (
+    msrPlacementKindAsString (
       fTechnicalPlacementKind);
 }
 
@@ -191,7 +197,7 @@ void msrTechnical::browseData (basevisitor* v)
 string msrTechnical::asString () const
 {
   return
-    placementKindAsString (
+    msrPlacementKindAsString (
       fTechnicalPlacementKind);
 }
 
@@ -213,7 +219,7 @@ ostream& operator << (ostream& os, const S_msrTechnical& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -251,29 +257,36 @@ msrTechnicalWithInteger::msrTechnicalWithInteger (
 msrTechnicalWithInteger::~msrTechnicalWithInteger ()
 {}
 
-string msrTechnicalWithInteger::technicalWithIntegerKindAsString () const
+string msrTechnicalWithIntegerKindAsString (
+  msrTechnicalWithIntegerKind technicalWithIntegerKind) const
 {
   string result;
 
-  switch (fTechnicalWithIntegerKind) {
-    case msrTechnicalWithInteger::kFingering:
-      result = "fingering";
+  switch (technicalWithIntegerKind) {
+    case msrTechnicalWithIntegerKind::kFingering:
+      result = "kFingering";
       break;
-    case msrTechnicalWithInteger::kFret:
-      result = "fret";
+    case msrTechnicalWithIntegerKind::kFret:
+      result = "kFret";
       break;
-    case msrTechnicalWithInteger::kString:
-      result = "string";
+    case msrTechnicalWithIntegerKind::kString:
+      result = "kString";
       break;
   } // switch
 
   return result;
 }
 
+ostream& operator << (ostream& os, const msrSyllableKind& elt)
+{
+  os << msrSyllableKindAsString (elt);
+  return os;
+}
+
 string msrTechnicalWithInteger::technicalWithIntegerPlacementKindAsString () const
 {
   return
-    placementKindAsString (
+    msrPlacementKindAsString (
       fTechnicalWithIntegerPlacementKind);
 }
 
@@ -329,11 +342,13 @@ string msrTechnicalWithInteger::asString () const
   stringstream s;
 
   s <<
-    technicalWithIntegerKindAsString () <<
-    ", value '" <<
+    "[TechnicalWithInteger"
+    msrTechnicalWithIntegerKindAsString () <<
+    ", fTechnicalWithIntegerValue: '" <<
     fTechnicalWithIntegerValue <<
     "', placement " <<
-    technicalWithIntegerPlacementKindAsString ();
+    technicalWithIntegerPlacementKindAsString () <<
+    ']';
 
   return s.str ();
 }
@@ -342,7 +357,7 @@ void msrTechnicalWithInteger::print (ostream& os) const
 {
   os <<
     "TechnicalWithInteger" <<
-    ", " << technicalWithIntegerKindAsString () <<
+    ", " << msrTechnicalWithIntegerKindAsString () <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -375,7 +390,7 @@ ostream& operator << (ostream& os, const S_msrTechnicalWithInteger& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -413,12 +428,12 @@ msrTechnicalWithFloat::msrTechnicalWithFloat (
 msrTechnicalWithFloat::~msrTechnicalWithFloat ()
 {}
 
-string msrTechnicalWithFloat::technicalWithFloatKindAsString () const
+string msrTechnicalWithFloat::msrTechnicalWithFloatKindAsString () const
 {
   string result;
 
   switch (fTechnicalWithFloatKind) {
-    case msrTechnicalWithFloat::kBend:
+    case msrTechnicalWithFloatKind::kTechnicalWithFloatBend:
       result = "bend";
       break;
   } // switch
@@ -429,7 +444,7 @@ string msrTechnicalWithFloat::technicalWithFloatKindAsString () const
 string msrTechnicalWithFloat::technicalWithFloatPlacementKindAsString () const
 {
   return
-    placementKindAsString (
+    msrPlacementKindAsString (
       fTechnicalWithFloatPlacementKind);
 }
 
@@ -485,7 +500,7 @@ string msrTechnicalWithFloat::asString () const
   stringstream s;
 
   s <<
-    technicalWithFloatKindAsString () <<
+    msrTechnicalWithFloatKindAsString () <<
     ", value '" <<
     fTechnicalWithFloatValue <<
     "', placement " <<
@@ -498,7 +513,7 @@ void msrTechnicalWithFloat::print (ostream& os) const
 {
   os <<
     "TechnicalWithFloat" <<
-    ", " << technicalWithFloatKindAsString () <<
+    ", " << msrTechnicalWithFloatKindAsString () <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -531,7 +546,7 @@ ostream& operator << (ostream& os, const S_msrTechnicalWithFloat& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -574,24 +589,24 @@ msrTechnicalWithString::msrTechnicalWithString (
 msrTechnicalWithString::~msrTechnicalWithString ()
 {}
 
-string msrTechnicalWithString::technicalWithStringKindAsString () const
+string msrTechnicalWithString::msrTechnicalWithStringKindAsString () const
 {
   string result;
 
   switch (fTechnicalWithStringKind) {
-    case msrTechnicalWithString::kHammerOn:
+    case msrTechnicalWithStringKind::kHammerOn:
       result = "HammerOn";
       break;
-    case msrTechnicalWithString::kHandbell:
+    case msrTechnicalWithStringKind::kHandbell:
       result = "Handbell";
       break;
-    case msrTechnicalWithString::kOtherTechnical:
+    case msrTechnicalWithStringKind::kOtherTechnical:
       result = "OtherTechnical";
       break;
-    case msrTechnicalWithString::kPluck:
+    case msrTechnicalWithStringKind::kPluck:
       result = "Pluck";
       break;
-    case msrTechnicalWithString::kPullOff:
+    case msrTechnicalWithStringKind::kPullOff:
       result = "PullOff";
       break;
   } // switch
@@ -612,7 +627,7 @@ string msrTechnicalWithString::technicalWithStringTypeKindAsString () const
 string msrTechnicalWithString::technicalWithStringPlacementKindAsString () const
 {
   return
-    placementKindAsString (
+    msrPlacementKindAsString (
       fTechnicalWithStringPlacementKind);
 }
 
@@ -668,7 +683,7 @@ string msrTechnicalWithString::asString () const
   stringstream s;
 
   s <<
-    technicalWithStringKindAsString () <<
+    msrTechnicalWithStringKindAsString () <<
     ", " << technicalWithStringTypeKindAsString () <<
     ", value \"" <<
     fTechnicalWithStringValue <<
@@ -682,7 +697,7 @@ void msrTechnicalWithString::print (ostream& os) const
 {
   os <<
     "TechnicalWithString" <<
-    ", " << technicalWithStringKindAsString () <<
+    ", " << msrTechnicalWithStringKindAsString () <<
     ", " << technicalWithStringTypeKindAsString () <<
     ", line " << fInputLineNumber <<
     endl;
@@ -717,7 +732,7 @@ ostream& operator << (ostream& os, const S_msrTechnicalWithString& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

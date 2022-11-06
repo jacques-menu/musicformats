@@ -206,7 +206,7 @@ void msrHarmonyDegree::acceptOut (basevisitor* v)
 void msrHarmonyDegree::browseData (basevisitor* v)
 {}
 
-string harmonyDegreeTypeKindAsString (
+string msrHarmonyDegreeTypeKindAsString (
   msrHarmonyDegreeTypeKind harmonyDegreeTypeKind)
 {
   string result;

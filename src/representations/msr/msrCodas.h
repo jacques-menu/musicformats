@@ -24,7 +24,7 @@ enum class msrCodaKind {
   kCodaSecond
 };
 
-string codaKindAsString (
+string msrCodaKindAsString (
   msrCodaKind codaKind);
 
 ostream& operator << (ostream& os,const msrCodaKind& elt);

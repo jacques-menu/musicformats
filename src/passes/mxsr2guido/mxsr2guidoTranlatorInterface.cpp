@@ -185,7 +185,7 @@ void translateMxsrToGuido (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 }

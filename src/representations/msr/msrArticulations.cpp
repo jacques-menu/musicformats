@@ -55,86 +55,92 @@ msrArticulation::msrArticulation (
 msrArticulation::~msrArticulation ()
 {}
 
-string msrArticulation::articulationKindAsString (
+string msrArticulationKindAsString (
   msrArticulationKind articulationKind)
 {
   string result;
 
   switch (articulationKind) {
-    case msrArticulation::k_NoArticulation:
-      result = "noArticulation";
+    case msrArticulationKind::k_NoArticulation:
+      result = "k_NoArticulation";
       break;
 
-    case msrArticulation::kAccent:
-      result = "accent";
+    case msrArticulationKind::kArticulationAccent:
+      result = "kArticulationAccent";
       break;
-    case msrArticulation::kBreathMark:
-      result = "breathMark";
+    case msrArticulationKind::kArticulationBreathMark:
+      result = "kArticulationBreathMark";
       break;
-    case msrArticulation::kCaesura:
-      result = "caesura";
+    case msrArticulationKind::kArticulationCaesura:
+      result = "kArticulationCaesura";
       break;
-    case msrArticulation::kSpiccato:
-      result = "spiccato";
+    case msrArticulationKind::kArticulationSpiccato:
+      result = "kArticulationSpiccato";
       break;
-    case msrArticulation::kStaccato:
-      result = "staccato";
+    case msrArticulationKind::kArticulationStaccato:
+      result = "kArticulationStaccato";
       break;
-    case msrArticulation::kStaccatissimo:
-      result = "staccatissimo";
+    case msrArticulationKind::kArticulationStaccatissimo:
+      result = "kArticulationStaccatissimo";
       break;
-    case msrArticulation::kStress:
-      result = "stress";
+    case msrArticulationKind::kArticulationStress:
+      result = "kArticulationStress";
       break;
-    case msrArticulation::kUnstress:
-      result = "unstress";
+    case msrArticulationKind::kArticulationUnstress:
+      result = "kArticulationUnstress";
       break;
-    case msrArticulation::kDetachedLegato:
-      result = "detachedLegato";
+    case msrArticulationKind::kArticulationDetachedLegato:
+      result = "kArticulationDetachedLegato";
       break;
-    case msrArticulation::kStrongAccent:
-      result = "strongAccent";
+    case msrArticulationKind::kArticulationStrongAccent:
+      result = "kArticulationStrongAccent";
       break;
-    case msrArticulation::kTenuto:
-      result = "tenuto";
+    case msrArticulationKind::kArticulationTenuto:
+      result = "kArticulationTenuto";
       break;
-    case msrArticulation::kFermata:
-      result = "fermata";
+    case msrArticulationKind::kArticulationFermata:
+      result = "kArticulationFermata";
       break;
-    case msrArticulation::kArpeggiato:
-      result = "arpeggiato";
+    case msrArticulationKind::kArticulationArpeggiato:
+      result = "kArticulationArpeggiato";
       break;
-    case msrArticulation::kNonArpeggiato:
-      result = "nonArpeggiato";
+    case msrArticulationKind::kArticulationNonArpeggiato:
+      result = "kArticulationNonArpeggiato";
       break;
-    case msrArticulation::kDoit:
-      result = "doit";
+    case msrArticulationKind::kArticulationDoit:
+      result = "kArticulationDoit";
       break;
-    case msrArticulation::kFalloff:
-      result = "falloff";
+    case msrArticulationKind::kArticulationFalloff:
+      result = "kArticulationFalloff";
       break;
-    case msrArticulation::kPlop:
-      result = "plop";
+    case msrArticulationKind::kArticulationPlop:
+      result = "kArticulationPlop";
       break;
-    case msrArticulation::kScoop:
-      result = "scoop";
+    case msrArticulationKind::kArticulationScoop:
+      result = "kArticulationScoop";
       break;
   } // switch
 
   return result;
 }
 
-string msrArticulation::articulationKindAsString () const
+ostream& operator << (ostream& os, const msrArticulationKind& elt)
+{
+  os << msrArticulationKindAsString (elt);
+  return os;
+}
+
+string msrArticulation::msrArticulationKindAsString () const
 {
   return
-    articulationKindAsString (
+    msrArticulationKindAsString (
       fArticulationKind);
 }
 
 string msrArticulation::articulationPlacementKindAsString () const
 {
   return
-    placementKindAsString (
+    msrPlacementKindAsString (
       fArticulationPlacementKind);
 }
 
@@ -191,7 +197,7 @@ string msrArticulation::asString () const
 
   s <<
     "[Articulation " <<
-    articulationKindAsString () <<
+    msrArticulationKindAsString () <<
     ", " <<
     articulationPlacementKindAsString () <<
     ", line " << fInputLineNumber <<
@@ -213,7 +219,7 @@ ostream& operator << (ostream& os, const S_msrArticulation& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -238,7 +244,7 @@ msrFermata::msrFermata (
     msrFermataTypeKind fermataTypeKind)
     : msrArticulation (
       inputLineNumber,
-      msrArticulation::kFermata,
+      msrArticulationKind::kArticulationFermata,
       msrPlacementKind::k_NoPlacement) // temporary, JMI TEMP
 {
   fFermataKind = fermataKind;
@@ -295,44 +301,56 @@ void msrFermata::acceptOut (basevisitor* v)
 void msrFermata::browseData (basevisitor* v)
 {}
 
-string msrFermata::fermataKindAsString (
+string msrFermata::msrFermataKindAsString (
   msrFermataKind fermataKind)
 {
   string result;
 
   switch (fermataKind) {
-    case msrFermata::kNormalFermataKind:
-      result = "fermata kind: normal";
+    case msrFermataKind::kArticulationFermataNormal:
+      result = "kArticulationFermataNormal";
       break;
-    case msrFermata::kAngledFermataKind:
-      result = "fermata kind: angled";
+    case msrFermataKind::kArticulationFermataAngled:
+      result = "kArticulationFermataAngled";
       break;
-    case msrFermata::kSquareFermataKind:
-      result = "fermata kind: square";
+    case msrFermataKind::kArticulationFermataSquare:
+      result = "kArticulationFermataSquare";
       break;
   } // switch
 
   return result;
 }
 
-string msrFermata::fermataTypeKindAsString (
+ostream& operator << (ostream& os, const msrFermataKind& elt)
+{
+  os << msrFermataKindAsString (elt);
+  return os;
+}
+
+string msrFermata::msrFermataTypeKindAsString (
   msrFermataTypeKind fermataTypeKind)
 {
   string result;
 
   switch (fermataTypeKind) {
-    case msrFermata::kFermataTypeNone:
-      result = "fermataTypeNone";
+    case msrFermataTypeKind::kArticulationFermataTypeNone:
+      result = "kArticulationFermataTypeNone";
       break;
-    case msrFermata::kFermataTypeUpright:
-      result = "fermataTypeUpright";
+    case msrFermataTypeKind::kArticulationFermataTypeUpright:
+      result = "kArticulationFermataTypeUpright";
       break;
-    case msrFermata::kFermataTypeInverted:
-      result = "fermataTypeInverted";
+    case msrFermataTypeKind::kArticulationFermataTypeInverted:
+      result = "kArticulationFermataTypeInverted";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrFermataTypeKind& elt)
+{
+  os << msrFermataTypeKindAsString (elt);
+  return os;
 }
 
 string msrFermata::asString () const
@@ -340,12 +358,13 @@ string msrFermata::asString () const
   stringstream s;
 
   s <<
-    "Fermata" <<
+    "[Fermata" <<
     ", " <<
-    fermataKindAsString (fFermataKind) <<
+    msrFermataKindAsString (fFermataKind) <<
     ", " <<
-    fermataTypeKindAsString (fFermataTypeKind) <<
-    ", line " << fInputLineNumber;
+    msrFermataTypeKindAsString (fFermataTypeKind) <<
+    ", line " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -363,7 +382,7 @@ ostream& operator << (ostream& os, const S_msrFermata& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -391,7 +410,7 @@ msrArpeggiato::msrArpeggiato (
   int              arpeggiatoNumber)
     : msrArticulation (
       inputLineNumber,
-      kArpeggiato,
+      kArticulationArpeggiato,
       arpeggiatoPlacementKind)
 {
   fArpeggiatoDirectionKind = arpeggiatoDirectionKind;
@@ -455,11 +474,13 @@ void msrArpeggiato::acceptOut (basevisitor* v)
 void msrArpeggiato::browseData (basevisitor* v)
 {}
 
-void msrArpeggiato::print (ostream& os) const
+string msrArpeggiato::asString () const
 {
-  os <<
-    "Arpeggiato " <<
-    articulationKindAsString () <<
+  stringstream s;
+
+  s <<
+    "[Arpeggiato " <<
+    msrArticulationKindAsString () <<
     ", " <<
     articulationPlacementKindAsString () <<
     ", " <<
@@ -467,7 +488,14 @@ void msrArpeggiato::print (ostream& os) const
     ", number: " <<
     fArpeggiatoNumber <<
     ", line " << fInputLineNumber <<
-    endl;
+    ']';
+
+  return s.str ();
+}
+
+void msrArpeggiato::print (ostream& os) const
+{
+  os << asString () << endl;
 }
 
 ostream& operator << (ostream& os, const S_msrArpeggiato& elt)
@@ -478,7 +506,7 @@ ostream& operator << (ostream& os, const S_msrArpeggiato& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -506,7 +534,7 @@ msrNonArpeggiato::msrNonArpeggiato (
   int                      nonArpeggiatoNumber)
     : msrArticulation (
       inputLineNumber,
-      kNonArpeggiato,
+      kArticulationNonArpeggiato,
       nonArpeggiatoPlacementKind)
 {
   fNonArpeggiatoTypeKind = nonArpeggiatoTypeKind;
@@ -523,13 +551,13 @@ string msrNonArpeggiato::nonArpeggiatoTypeKindAsString (
   string result;
 
   switch (nonArpeggiatoTypeKind) {
-    case msrNonArpeggiato::kNonArpeggiatoTypeNone:
+    case msrNonArpeggiato::kArticulationNonArpeggiatoTypeNone:
       result = "nonArpeggiatoTypeNone";
       break;
-    case msrNonArpeggiato::kNonArpeggiatoTypeTop:
+    case msrNonArpeggiato::kArticulationNonArpeggiatoTypeTop:
       result = "nonArpeggiatoTypeTop";
       break;
-    case msrNonArpeggiato::kNonArpeggiatoTypeBottom:
+    case msrNonArpeggiato::kArticulationNonArpeggiatoTypeBottom:
       result = "nonArpeggiatoTypeBottom";
       break;
   } // switch
@@ -590,11 +618,13 @@ void msrNonArpeggiato::acceptOut (basevisitor* v)
 void msrNonArpeggiato::browseData (basevisitor* v)
 {}
 
-void msrNonArpeggiato::print (ostream& os) const
+string msrNonArpeggiato::asString () const
 {
-  os <<
+  stringstream s;
+
+  s <<
     "NonArpeggiato " <<
-    articulationKindAsString () <<
+    msrArticulationKindAsString () <<
     ", " <<
     articulationPlacementKindAsString () <<
     ", " <<
@@ -602,7 +632,14 @@ void msrNonArpeggiato::print (ostream& os) const
     ", number: " <<
     fNonArpeggiatoNumber <<
     ", line " << fInputLineNumber <<
-    endl;
+    ']';
+
+  return s.str ();
+}
+
+void msrNonArpeggiato::print (ostream& os) const
+{
+  os << asString () << endl;
 }
 
 ostream& operator << (ostream& os, const S_msrNonArpeggiato& elt)
@@ -613,7 +650,7 @@ ostream& operator << (ostream& os, const S_msrNonArpeggiato& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

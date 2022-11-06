@@ -21,19 +21,20 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class lpsrCommentGapAfterwardsKind {
+  kCommentGapAfterwardsYes, kCommentGapAfterwardsNo
+};
+
+string lpsrCommentGapAfterwardsKindAsString (
+  lpsrCommentGapAfterwardsKind commentGapAfterwardsKind);
+
+ostream& operator << (ostream& os, const lpsrCommentGapAfterwardsKind& elt);
+
 class EXP lpsrComment : public lpsrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum lpsrCommentGapKind {
-      kGapAfterwardsYes, kGapAfterwardsNo
-    };
-
-    static string commentGapKindAsString (
-      lpsrCommentGapKind commentGapKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -41,7 +42,8 @@ class EXP lpsrComment : public lpsrElement
     static SMARTP<lpsrComment> create (
                             int                inputLineNumber,
                             const string&      contents,
-                            lpsrCommentGapKind commentGapKind = kGapAfterwardsNo);
+                            lpsrCommentGapAfterwardsKind commentGapAfterwardsKind =
+                                                 lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
 
   protected:
 
@@ -51,7 +53,8 @@ class EXP lpsrComment : public lpsrElement
                           lpsrComment (
                             int                inputLineNumber,
                             const string&      contents,
-                            lpsrCommentGapKind commentGapKind = kGapAfterwardsNo);
+                            lpsrCommentGapAfterwardsKind commentGapAfterwardsKind =
+                                                 lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo);
 
     virtual               ~lpsrComment ();
 
@@ -63,7 +66,7 @@ class EXP lpsrComment : public lpsrElement
     string                getContents () const
                               { return fContents; }
 
-    lpsrCommentGapKind    getCommentGapKind  () const
+    lpsrCommentGapAfterwardsKind    getCommentGapKind  () const
                               { return fCommentGapKind; }
 
   public:
@@ -94,7 +97,7 @@ class EXP lpsrComment : public lpsrElement
     // ------------------------------------------------------
 
     string              fContents;
-    lpsrCommentGapKind  fCommentGapKind;
+    lpsrCommentGapAfterwardsKind  fCommentGapKind;
 };
 typedef SMARTP<lpsrComment> S_lpsrComment;
 EXP ostream& operator << (ostream& os, const S_lpsrComment& elt);

@@ -137,42 +137,27 @@ void msrSpanner::acceptOut (basevisitor* v)
 void msrSpanner::browseData (basevisitor* v)
 {}
 
-string msrSpanner::spannerKindAsString (
+string msrSpanner::msrSpannerKindAsString (
   msrSpannerKind spannerKind)
 {
   string result;
 
   switch (spannerKind) {
-    case msrSpanner::kSpannerDashes:
-      result = "spannerDashes";
+    case msrSpannerKind::kSpannerDashes:
+      result = "kSpannerDashes";
       break;
-    case msrSpanner::kSpannerWavyLine:
-      result = "spannerWavyLine";
+    case msrSpannerKind::kSpannerWavyLine:
+      result = "kSpannerWavyLine";
       break;
   } // switch
 
   return result;
 }
 
-string msrSpanner::spannerTypeKindAsString () const
+ostream& operator << (ostream& os, const msrSpannerKind& elt)
 {
-  return
-    msrSpannerTypeKindAsString (
-      fSpannerTypeKind);
-}
-
-string msrSpanner::spannerKindAsString () const
-{
-  return
-    spannerKindAsString (
-      fSpannerKind);
-}
-
-string msrSpanner::spannerPlacementKindAsString () const
-{
-  return
-    placementKindAsString (
-      fSpannerPlacementKind);
+  os << msrSpannerKindAsString (elt);
+  return os;
 }
 
 string msrSpanner::asShortString () const
@@ -180,14 +165,13 @@ string msrSpanner::asShortString () const
   stringstream s;
 
   s <<
-    "Spanner" <<
-    ", spannerNumber = " << fSpannerNumber <<
-    ", " << spannerKindAsString () <<
+    "[Spanner" <<
+    ", fSpannerNumber: " << fSpannerNumber <<
+    ", fSpannerKind: " << fSpannerKind <<
+    ", fSpannerPlacementKind: " << fSpannerPlacementKind <<
+    ", fSpannerTypeKind: " << fSpannerTypeKind <<
     ", line " << fInputLineNumber <<
-    ", spannerPlacementKind" << " : " <<
-    spannerPlacementKindAsString () <<
-    ", spannerTypeKind" << " : " <<
-    spannerTypeKindAsString ();
+    ']';
 
   return s.str ();
 }
@@ -196,8 +180,8 @@ void msrSpanner::print (ostream& os) const
 {
   os <<
     "[Spanner" <<
-    ", spannerNumber = " << fSpannerNumber <<
-    ", " << spannerKindAsString () <<
+    ", fSpannerNumber = " << fSpannerNumber <<
+    ", fSpannerKind: " << fSpannerKind <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -212,7 +196,7 @@ void msrSpanner::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     "spannerTypeKind" << " : " <<
-    spannerTypeKindAsString () <<
+    fSpannerTypeKind <<
     endl <<
     setw (fieldWidth) <<
     "spannerUpLinkToNote" << " : " <<

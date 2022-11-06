@@ -123,7 +123,7 @@ mfMusicformatsError convertMsdlStream2lilypondWithHandler (
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
       "Pass 1",
       "Create the first MSR from the MSDL input",
-      mfTimingItem::kMandatory,
+      mfTimingItemKind::kMandatory,
       startClock,
       endClock);
 

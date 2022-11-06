@@ -13,13 +13,13 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class msrHarmony;
+class   msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 
-class msrVoice;
+class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
 
-class msrNote;
+class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
@@ -31,8 +31,10 @@ enum class msrHarmonyDegreeTypeKind {
   kHarmonyDegreeTypeSubstract
 };
 
-string harmonyDegreeTypeKindAsString (
+string msrHarmonyDegreeTypeKindAsString (
   msrHarmonyDegreeTypeKind harmonyDegreeTypeKind);
+
+ostream& operator << (ostream& os, const msrHarmonyDegreeTypeKind& elt);
 
 class EXP msrHarmonyDegree : public msrElement
 {

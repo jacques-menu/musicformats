@@ -155,7 +155,7 @@ S_msrClef msrClef::createClefFromString (
   // compute the clefKind from the clefName
   msrClefKind
     clefKind =
-      clefKindFromString (
+      msrClefKindFromString (
         inputLineNumber,
         clefName);
 

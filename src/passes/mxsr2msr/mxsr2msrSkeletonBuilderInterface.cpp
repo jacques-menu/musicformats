@@ -108,7 +108,7 @@ S_msrScore translateMxsrToMsrSkeleton (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
@@ -180,7 +180,7 @@ void displayMsrScoreSkeleton (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     "",
     "Display the MSR skeleton as text",
-    mfTimingItem::kOptional,
+    mfTimingItemKind::kOptional,
     startClock,
     endClock);
 }

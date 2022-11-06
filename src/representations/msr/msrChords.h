@@ -31,37 +31,37 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrFiguredBass;
+class   msrFiguredBass;
 typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 
-class msrChordSlurLink;
+class   msrChordSlurLink;
 typedef SMARTP<msrChordSlurLink> S_msrChordSlurLink;
 
-class msrChordBeamLink;
+class   msrChordBeamLink;
 typedef SMARTP<msrChordBeamLink> S_msrChordBeamLink;
 
-class msrChordGraceNotesGroupLink;
+class   msrChordGraceNotesGroupLink;
 typedef SMARTP<msrChordGraceNotesGroupLink> S_msrChordGraceNotesGroupLink;
 
-class msrNote;
+class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
-class msrOrnament;
+class   msrOrnament;
 typedef SMARTP<msrOrnament> S_msrOrnament;
 
-class msrGlissando;
+class   msrGlissando;
 typedef SMARTP<msrGlissando> S_msrGlissando;
 
-class msrSlide;
+class   msrSlide;
 typedef SMARTP<msrSlide> S_msrSlide;
 
-class msrPedal;
+class   msrPedal;
 typedef SMARTP<msrPedal> S_msrPedal;
 
-class msrSegno;
+class   msrSegno;
 typedef SMARTP<msrSegno> S_msrSegno;
 
-class msrDalSegno;
+class   msrDalSegno;
 typedef SMARTP<msrDalSegno> S_msrDalSegno;
 
 //______________________________________________________________________________

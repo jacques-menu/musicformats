@@ -21,11 +21,11 @@ namespace MusicFormats
   https://stackoverflow.com/questions/8498300/allow-for-range-based-for-with-enum-classes
 */
 template< typename T >
-class mfEnumAll
+class   mfEnumAll
 {
   public:
 
-    class Iterator
+    class   Iterator
     {
       public:
 

@@ -658,7 +658,7 @@ string msrDoubleTremolo::msrDoubleTremoloKindAsString (
 string msrDoubleTremolo::doubleTremoloPlacementKindAsString () const
 {
   return
-    placementKindAsString (
+    msrPlacementKindAsString (
       fDoubleTremoloPlacementKind);
 }
 

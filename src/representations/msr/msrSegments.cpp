@@ -500,7 +500,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", measureFirstInSegmentKind: " <<
-      measureFirstInSegmentKindAsString (
+      msrMeasureFirstInSegmentKindAsString (
         measureFirstInSegmentKind) <<
       ", line " << inputLineNumber <<
       endl;
@@ -1521,7 +1521,7 @@ void msrSegment::appendOctaveShiftToSegment (
   if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
     gLogStream <<
       "Appending octave shift '" <<
-      octaveShift->octaveShiftKindAsString () <<
+      octaveShift->msrOctaveShiftKindAsString () <<
       "' to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1550,7 +1550,7 @@ void msrSegment::appendScordaturaToSegment (
   if (gGlobalTracingOahGroup->getTraceScordaturas ()) {
     gLogStream <<
       "Appending scordatura XXX " <<
-  // JMI ???    scordatura->octaveShiftKindAsString () <<
+  // JMI ???    scordatura->msrOctaveShiftKindAsString () <<
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<

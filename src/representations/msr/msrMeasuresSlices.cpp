@@ -38,7 +38,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string noteEventKindAsString (
+string msrNoteEventKindAsString (
   msrNoteEventKind noteEventKind)
 {
   string result;

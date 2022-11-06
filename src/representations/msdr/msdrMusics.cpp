@@ -290,7 +290,7 @@ void msdrMusic::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fCurrentVoiceRepeatPhaseKind" << " : " <<
-    voiceRepeatPhaseKindAsString (
+    msrVoiceRepeatPhaseKindAsString (
       fCurrentVoiceRepeatPhaseKind) <<
     endl;
 

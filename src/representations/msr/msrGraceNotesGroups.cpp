@@ -140,7 +140,7 @@ S_msrPart msrGraceNotesGroup::fetchGraceNotesGroupUpLinkToPart () const
   return result;
 }
 
-string graceNotesGroupKindAsString (
+string msrGraceNotesGroupKindAsString (
   msrGraceNotesGroupKind graceNotesGroupKind)
 {
   string result;
@@ -155,6 +155,12 @@ string graceNotesGroupKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrGraceNotesGroupKind& elt)
+{
+  os << msrGraceNotesGroupKindAsString (elt);
+  return os;
 }
 
 S_msrGraceNotesGroup msrGraceNotesGroup::createSkipGraceNotesGroupClone ()
@@ -521,7 +527,7 @@ string msrGraceNotesGroup::asShortString () const
   s <<
     "[GraceNotesGroup" <<
     ", graceNotesGroupKind: " <<
-    graceNotesGroupKindAsString (fGraceNotesGroupKind) <<
+    msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
     ", graceNotesGroupMeasureNumber: \"" << fGraceNotesGroupMeasureNumber <<
     "\", ";
 
@@ -551,7 +557,7 @@ string msrGraceNotesGroup::asString () const
   s <<
     "[GraceNotesGroup" <<
     ", graceNotesGroupKind: " <<
-    graceNotesGroupKindAsString (fGraceNotesGroupKind) <<
+    msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
     ", graceNotesGroupMeasureNumber: \"" << fGraceNotesGroupMeasureNumber <<
     "\", line " << fInputLineNumber <<
     ", ";
@@ -578,7 +584,7 @@ void msrGraceNotesGroup::print (ostream& os) const
   os <<
     "[GraceNotesGroup" <<
     ", graceNotesGroupKind: " <<
-    graceNotesGroupKindAsString (fGraceNotesGroupKind) <<
+    msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
     ", line " << fInputLineNumber <<
     ", " <<
     mfSingularOrPlural (
@@ -668,7 +674,7 @@ void msrGraceNotesGroup::printShort (ostream& os) const
   os <<
     "GraceNotesGroup" <<
     ", graceNotesGroupKind: " <<
-    graceNotesGroupKindAsString (fGraceNotesGroupKind) <<
+    msrGraceNotesGroupKindAsString (fGraceNotesGroupKind) <<
     ", line " << fInputLineNumber <<
     ", " <<
     mfSingularOrPlural (

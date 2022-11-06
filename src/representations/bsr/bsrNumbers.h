@@ -9,19 +9,20 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class bsrNumberSignIsNeededKind {
+  kNumberSignIsNeededYes, kNumberSignIsNeededNo
+};
+
+string bsrNumberSignIsNeededKindAsString (
+  bsrNumberSignIsNeededKind numberSignIsNeededKind);
+
+ostream& operator << (ostream& os, const bsrNumberSignIsNeededKind& elt);
+
 class EXP bsrNumber : public bsrLineContentsElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum bsrNumberSignIsNeededKind {
-      kNumberSignIsNeededYes, kNumberSignIsNeededNo
-    };
-
-    static string numberSignIsNeededKindAsString (
-      bsrNumberSignIsNeededKind numberSignIsNeededKind);
 
     // creation
     // ------------------------------------------------------

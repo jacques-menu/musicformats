@@ -114,7 +114,7 @@ FR - Lyon
 		\item supports the MusicXML format version 2,
 		\item easy to upgrade to new versions of the MusicXML format from the DTDs,
 		\item adheres strictly to the MusicXML DTDs: each element has a corresponding C++ class,
-		\item designed using a single homogeneous \texttt{xmlelement} class and automatic
+		\item designed using a single homogeneous \texttt{xmlelement} class   and automatic
 		typing using templates,
 		\item provides STL iterators to browse the memory representation,
 		\item is \alert{not compatible} with libmusicxml version 1.xx.
@@ -142,7 +142,7 @@ FR - Lyon
 %________________________________________________________________________
 \chapter{Inside the new library}
 %________________________________________________________________________
-\section{Class design}
+\section{class   design}
 \begin{frame}
 	\frametitle{Memory representation}
 	\begin{columns}
@@ -246,7 +246,7 @@ FR - Lyon
 		\begin{column}[c]{65mm}
 		\begin{block}<1->{Count using a visitor}
 \begin{lstlisting}
-class countnotes : public visitor<S_note>
+class   countnotes : public visitor<S_note>
 {
     public:
     int fCount;

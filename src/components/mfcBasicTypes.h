@@ -259,7 +259,7 @@ enum class mfcComponenKind {
   kComponentLibrary
 };
 
-string componenKindAsString (
+string mfcComponenKindAsString (
   mfcComponenKind componenKind);
 
 ostream& operator << (ostream& os, mfcComponenKind& elt);
@@ -267,7 +267,7 @@ ostream& operator << (ostream& os, mfcComponenKind& elt);
 //______________________________________________________________________________
 class EXP mfcComponent : public smartable
 {
-/* this class is purely virtual
+/* this class   is purely virtual
   public:
 
     // creation
@@ -431,7 +431,7 @@ enum class mfcMultiComponentUsedFromTheCLIKind {
   kComponentUsedFromTheCLINo
 };
 
-string componentUsedFromTheCLIKindAsString (
+string mfcComponentUsedFromTheCLIKindAsString (
   mfcMultiComponentUsedFromTheCLIKind componentUsedFromTheCLIKind);
 
 ostream& operator << (ostream& os, mfcMultiComponentUsedFromTheCLIKind& elt);
@@ -441,7 +441,7 @@ enum class mfcMultiComponentEntropicityKind {
   kComponentEntropicityNo
 };
 
-string componentEntropicityKindAsString (
+string mfcComponentEntropicityKindAsString (
   mfcMultiComponentEntropicityKind componentEntropicityKind);
 
 ostream& operator << (ostream& os, mfcMultiComponentEntropicityKind& elt);
@@ -449,7 +449,7 @@ ostream& operator << (ostream& os, mfcMultiComponentEntropicityKind& elt);
 //______________________________________________________________________________
 class EXP mfcMultiComponent : public mfcComponent
 {
-/* this class is purely virtual
+/* this class   is purely virtual
   public:
 
     // creation

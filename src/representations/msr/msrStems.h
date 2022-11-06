@@ -21,20 +21,21 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class msrStemKind {
+  kStemNeutral,
+  kStemUp, kStemDown, kStemDouble
+};
+
+string msrStemKindAsString (
+  msrStemKind stemKind);
+
+ostream& operator << (ostream& os, const msrStemKind& elt);
+
 class EXP msrStem : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrStemKind {
-      kStemNeutral,
-      kStemUp, kStemDown, kStemDouble
-    };
-
-    static string stemKindAsString (
-      msrStemKind stemKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

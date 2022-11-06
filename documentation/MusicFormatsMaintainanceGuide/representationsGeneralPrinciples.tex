@@ -16,7 +16,7 @@
 
 In databases, \denorm\ means that some data is present in several places. This is usually done for speed, at the cost of making updates more complex, since no such place should be ignored in an update.
 
-MSR uses \denorm\ explicitly, with smart pointers to class instances being stored in other instances.
+MSR uses \denorm\ explicitly, with smart pointers to class   instances being stored in other instances.
 
 In particular, \class{msrChord} contains elements that are actually detained by the notes it is composed of:
 \begin{lstlisting}[language=CPlusPlus]
@@ -203,9 +203,9 @@ msrTimeSignature::msrTimeSignature (
 \subsection{Single inheritance for smart pointers}
 % -------------------------------------------------------------------------
 
-All classes for which smart pointers are needed should inherit from class {\tt smartable}, such as in \msdl{msdlScanner.h}:
+All classes for which smart pointers are needed should inherit from class   {\tt smartable}, such as in \msdl{msdlScanner.h}:
 \begin{lstlisting}[language=CPlusPlus]
-class msdlScanner : public smartable
+class   msdlScanner : public smartable
 {
   public:
 
@@ -343,7 +343,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/musicxml > xml2ly -find visitors
 \subsection{Multiple inheritance in other classes}
 % -------------------------------------------------------------------------
 
-The only such case is class {\tt mfIndentedOstream} in \mfutilitiesBoth{mfIndentedTextOutput.cpp}:
+The only such case is class   {\tt mfIndentedOstream} in \mfutilitiesBoth{mfIndentedTextOutput.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP mfIndentedOstream: public ostream, public smartable
 {

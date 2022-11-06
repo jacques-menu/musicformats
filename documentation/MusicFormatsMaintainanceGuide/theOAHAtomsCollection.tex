@@ -6,7 +6,7 @@
 
 These handly general-purpose OAH atoms are used in \mf\ itself. They are defined in \oahBoth{oahAtomsCollection}:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src/oah > grep class oahAtomsCollection.h
+jacquesmenu@macmini: ~/musicformats-git-dev/src/oah > grep class   oahAtomsCollection.h
 class EXP oahAtomAlias : public oahAtom
 class EXP oahMacroAtom : public oahAtom
 class EXP oahOptionsUsageAtom : public oahPureHelpAtomWithoutAValue
@@ -47,7 +47,7 @@ class EXP oahFindStringAtom : public oahPureHelpAtomExpectingAValue
 \section{OAH macro atoms}
 % -------------------------------------------------------------------------
 
-A OAH macro atom is a combination, a list of several options under a single name. The \className{oahMacroAtom} class is defined in \oahBoth{oahAtomsCollection}:
+A OAH macro atom is a combination, a list of several options under a single name. The \className{oahMacroAtom} class   is defined in \oahBoth{oahAtomsCollection}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP oahMacroAtom : public oahAtom
 {
@@ -258,7 +258,7 @@ all contain an alias for an \class{msrOctaveEntryVariable} variable:
                           fOctaveEntryKindVariable;
 \end{lstlisting}
 
-The {\tt fOctaveEntryVariable} filed of class {\tt lpsr2lilypondOahGroup} shared be all three options atoms is:
+The {\tt fOctaveEntryVariable} filed of class   {\tt lpsr2lilypondOahGroup} shared be all three options atoms is:
 \begin{lstlisting}[language=CPlusPlus]
     // notes
     // --------------------------------------

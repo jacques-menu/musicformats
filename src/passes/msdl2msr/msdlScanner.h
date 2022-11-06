@@ -37,7 +37,7 @@ string msdlIgnoreSeparatorTokensKindAsString (
 ostream& operator << (ostream& os, msdlIgnoreSeparatorTokensKind& elt);
 
 //________________________________________________________________________
-class msdlScanner : public smartable
+class   msdlScanner : public smartable
 {
   public:
 

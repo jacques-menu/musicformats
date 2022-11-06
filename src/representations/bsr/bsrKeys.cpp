@@ -186,7 +186,7 @@ S_bsrCellsList bsrKey::buildCellsList () const
             bsrNumber::create (
               fInputLineNumber,
               fNumberOfAlterations,
-              bsrNumber::kNumberSignIsNeededYes);
+              bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
         // append it to result
         result->appendCellsListToCellsList (

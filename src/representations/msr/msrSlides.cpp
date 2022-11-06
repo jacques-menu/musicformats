@@ -96,13 +96,13 @@ string msrSlide::slideTypeKindAsString (
   string result;
 
   switch (slideTypeKind) {
-    case msrSlide::kSlideTypeNone:
+    case msrSlideTypeKind::kSlideTypeNone:
       result = "slideTypeNone";
       break;
-    case msrSlide::kSlideTypeStart:
+    case msrSlideTypeKind::kSlideTypeStart:
       result = "slideTypeStart";
       break;
-    case msrSlide::kSlideTypeStop:
+    case msrSlideTypeKind::kSlideTypeStop:
       result = "slideTypeStop";
       break;
   } // switch

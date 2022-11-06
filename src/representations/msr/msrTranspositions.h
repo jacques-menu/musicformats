@@ -20,7 +20,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrTransposition;
+class   msrTransposition;
 typedef SMARTP<msrTransposition> S_msrTransposition;
 
 class EXP msrTransposition : public msrMeasureElement

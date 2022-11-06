@@ -19,19 +19,19 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrVoice;
+class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
 
-class msrPart;
+class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;
 
-class msrPartGroup;
+class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 
-class msrScore;
+class   msrScore;
 typedef SMARTP<msrScore> S_msrScore;
 
-class msrMeasuresSlicesSequence;
+class   msrMeasuresSlicesSequence;
 typedef SMARTP<msrMeasuresSlicesSequence> S_msrMeasuresSlicesSequence;
 
 //______________________________________________________________________________
@@ -39,18 +39,22 @@ typedef SMARTP<msrMeasuresSlicesSequence> S_msrMeasuresSlicesSequence;
 
 enum class msrPartGroupImplicitKind { // an MSR concept, not present in MusicXML
     kPartGroupImplicitYes, kPartGroupImplicitNo
-  };
+};
 
-string partGroupImplicitKindAsString (
+string msrPartGroupImplicitKindAsString (
   msrPartGroupImplicitKind partGroupImplicitKind);
+
+ostream& operator << (ostream& os, const msrPartGroupImplicitKind& elt);
 
 enum class msrPartGroupTypeKind {
   kPartGroupTypeNone,
   kPartGroupTypeStart, kPartGroupTypeStop
 };
 
-string partGroupTypeKindAsString (
+string msrPartGroupTypeKindAsString (
   msrPartGroupTypeKind partGroupTypeKind);
+
+ostream& operator << (ostream& os, const msrPartGroupTypeKind& elt);
 
 enum class msrPartGroupSymbolKind {
   kPartGroupSymbolNone,
@@ -58,15 +62,19 @@ enum class msrPartGroupSymbolKind {
   kPartGroupSymbolLine, kPartGroupSymbolSquare
 };
 
-string partGroupSymbolKindAsString (
+string msrPartGroupSymbolKindAsString (
   msrPartGroupSymbolKind partGroupSymbolKind);
+
+ostream& operator << (ostream& os, const msrPartGroupSymbolKind& elt);
 
 enum class msrPartGroupBarLineKind {
   kPartGroupBarLineYes, kPartGroupBarLineNo
 };
 
-string partGroupBarLineKindAsString (
+string msrPartGroupBarLineKindAsString (
   msrPartGroupBarLineKind partGroupBarLineKind);
+
+ostream& operator << (ostream& os, const msrPartGroupBarLineKind& elt);
 
 class EXP msrPartGroup : public msrPartGroupElement
 {

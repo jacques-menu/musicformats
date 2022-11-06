@@ -88,7 +88,7 @@ void translateLpsrToLilypond (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 

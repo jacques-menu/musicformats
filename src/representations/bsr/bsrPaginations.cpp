@@ -80,7 +80,7 @@ S_bsrCellsList bsrPagination::buildCellsList () const
       bsrNumber::create (
         fInputLineNumber,
         fPrintPageNumber,
-        bsrNumber::kNumberSignIsNeededYes);
+        bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
   // append it to result
   result->appendCellsListToCellsList (
@@ -92,7 +92,7 @@ S_bsrCellsList bsrPagination::buildCellsList () const
       bsrNumber::create (
         fInputLineNumber,
         fPrintPageNumber,
-        bsrNumber::kNumberSignIsNeededYes);
+        bsrNumberSignIsNeededKind::kNumberSignIsNeededYes);
 
   // append it to result
   result->appendCellsListToCellsList (

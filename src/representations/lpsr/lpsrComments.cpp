@@ -31,11 +31,11 @@ namespace MusicFormats
 S_lpsrComment lpsrComment::create (
   int                inputLineNumber,
   const string&      contents,
-  lpsrCommentGapKind commentGapKind)
+  lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
 {
   lpsrComment* o = new
     lpsrComment (
-      inputLineNumber, contents, commentGapKind);
+      inputLineNumber, contents, commentGapAfterwardsKind);
   assert (o != nullptr);
   return o;
 }
@@ -43,11 +43,11 @@ S_lpsrComment lpsrComment::create (
 lpsrComment::lpsrComment (
   int                inputLineNumber,
   const string&      contents,
-  lpsrCommentGapKind commentGapKind)
+  lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
     : lpsrElement (inputLineNumber)
 {
   fContents       = contents;
-  fCommentGapKind = commentGapKind;
+  fCommentGapKind = commentGapAfterwardsKind;
 }
 
 lpsrComment::~lpsrComment ()
@@ -108,21 +108,27 @@ void lpsrComment::acceptOut (basevisitor* v)
 void lpsrComment::browseData (basevisitor* v)
 {}
 
-string lpsrComment::commentGapKindAsString (
-  lpsrCommentGapKind commentGapKind)
+string lpsrComment::lpsrCommentGapAfterwardsKindAsString (
+  lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
 {
   string result;
 
-  switch (commentGapKind) {
-    case lpsrComment::kGapAfterwardsYes:
-      result = "kGapAfterwardsYes";
+  switch (commentGapAfterwardsKind) {
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes:
+      result = "kCommentGapAfterwardsYes";
     break;
-    case lpsrComment::kGapAfterwardsNo:
-      result = "kGapAfterwardsNo";
+    case lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo:
+      result = "kCommentGapAfterwardsNo";
     break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const lpsrCommentGapAfterwardsKind& elt)
+{
+  os << lpsrCommentGapAfterwardsKindAsString (elt);
+  return os;
 }
 
 void lpsrComment::print (ostream& os) const
@@ -137,7 +143,7 @@ void lpsrComment::print (ostream& os) const
     "% " << fContents <<
     endl;
 
-  if (fCommentGapKind == kGapAfterwardsYes)
+  if (fCommentGapKind == kCommentGapAfterwardsYes)
     os << endl;
 
   --gIndenter;
@@ -151,7 +157,7 @@ ostream& operator << (ostream& os, const S_lpsrComment& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

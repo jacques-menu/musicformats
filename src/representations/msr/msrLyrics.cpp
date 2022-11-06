@@ -499,7 +499,7 @@ string msrSyllable::syllableWholeNotesAsMsrString () const
   return result;
 }
 
-string syllableKindAsString (
+string msrSyllableKindAsString (
   msrSyllableKind syllableKind)
 {
   string result;
@@ -549,7 +549,13 @@ string syllableKindAsString (
   return result;
 }
 
-string syllableExtendKindAsString (
+ostream& operator << (ostream& os, const msrSyllableKind& elt)
+{
+  os << msrSyllableKindAsString (elt);
+  return os;
+}
+
+string msrSyllableExtendKindAsString (
   msrSyllableExtendKind syllableExtendKind)
 {
   string result;
@@ -576,6 +582,12 @@ string syllableExtendKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrSyllableExtendKind& elt)
+{
+  os << msrSyllableExtendKindAsString (elt);
+  return os;
 }
 
 string msrSyllable::syllableUpLinkToNoteAsString () const
@@ -640,9 +652,9 @@ string msrSyllable::asString () const
 
   s <<
     "Syllable '" <<
-    syllableKindAsString (fSyllableKind) <<
+    fSyllableKind <<
     "', syllableExtendKind: " <<
-      syllableExtendKindAsString (fSyllableExtendKind) <<
+      fSyllableExtendKind <<
     ", fSyllableStanzaNumber: \"" << fSyllableStanzaNumber << "\"" <<
     ", fSyllableWholeNotes: " << fSyllableWholeNotes <<
     ", fSyllableTupletFactor: " << fSyllableTupletFactor <<
@@ -708,7 +720,7 @@ void msrSyllable::print (ostream& os) const
   os <<
     "[Syllable" <<
     ", syllableKind: " <<
-    syllableKindAsString (fSyllableKind) <<
+    msrSyllableKindAsString (fSyllableKind) <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -728,11 +740,11 @@ void msrSyllable::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "syllableKind" << " : " <<
-    syllableKindAsString (fSyllableKind) <<
+    msrSyllableKindAsString (fSyllableKind) <<
     endl <<
     setw (fieldWidth) <<
     "syllableExtendKind" << " : " <<
-    syllableExtendKindAsString (
+    msrSyllableExtendKindAsString (
       fSyllableExtendKind) <<
     endl <<
 
@@ -1165,7 +1177,7 @@ S_msrSyllable msrStanza::appendMelismaSyllableToStanza (
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "Appending '" <<
-      syllableKindAsString (syllableKind) <<
+      msrSyllableKindAsString (syllableKind) <<
       "' syllable" <<
       " to stanza " << getStanzaName () <<
       ", whole notes = " << wholeNotes <<

@@ -4230,7 +4230,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
   msrDottedDuration tempoBeatUnit  = elt->getTempoBeatUnit ();
   string            tempoPerMinute = elt->getTempoPerMinute ();
 
-  msrTempo::msrTempoParenthesizedKind
+  msrTempoParenthesizedKind
     tempoParenthesizedKind =
       elt->getTempoParenthesizedKind ();
 
@@ -4239,10 +4239,10 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
       elt->getTempoPlacementKind ();
 
   switch (elt->getTempoKind ()) {
-    case msrTempo::k_NoTempoKind:
+    case msrTempoKind::k_NoTempoKind:
       break;
 
-    case msrTempo::kTempoBeatUnitsWordsOnly:
+    case msrTempoKind::kTempoBeatUnitsWordsOnly:
       {
     /*
         fOutputStream <<
@@ -4273,9 +4273,9 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         }
       break;
 
-    case msrTempo::kTempoBeatUnitsPerMinute:
+    case msrTempoKind::kTempoBeatUnitsPerMinute:
       switch (tempoParenthesizedKind) {
-        case msrTempo::kTempoParenthesizedYes:
+        case msrTempoParenthesizedKind::kTempoParenthesizedYes:
           {
           // create the metronome element
           Sxmlelement metronomeElement = createMxmlelement (k_metronome, "");
@@ -4329,7 +4329,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         }
         break;
 
-      case msrTempo::kTempoParenthesizedNo:
+      case msrTempoParenthesizedKind::kTempoParenthesizedNo:
         {
           // create the metronome element
           Sxmlelement metronomeElement = createMxmlelement (k_metronome, "");
@@ -4382,7 +4382,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         } // switch
       break;
 
-    case msrTempo::kTempoBeatUnitsEquivalence:
+    case msrTempoKind::kTempoBeatUnitsEquivalence:
       {
     /*
       fOutputStream <<
@@ -4421,12 +4421,12 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
       ++gIndenter;
 
       switch (tempoParenthesizedKind) {
-        case msrTempo::kTempoParenthesizedYes:
+        case msrTempoParenthesizedKind::kTempoParenthesizedYes:
           fOutputStream <<
             '(' <<
             endl;
           break;
-        case msrTempo::kTempoParenthesizedNo:
+        case msrTempoParenthesizedKind::kTempoParenthesizedNo:
           break;
       } // switch
 
@@ -4490,12 +4490,12 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
       --gIndenter;
 
       switch (tempoParenthesizedKind) {
-        case msrTempo::kTempoParenthesizedYes:
+        case msrTempoParenthesizedKind::kTempoParenthesizedYes:
           fOutputStream <<
             ")" <<
             endl;
           break;
-        case msrTempo::kTempoParenthesizedNo:
+        case msrTempoParenthesizedKind::kTempoParenthesizedNo:
           break;
       } // switch
 
@@ -4514,11 +4514,11 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         }
       break;
 
-    case msrTempo::kTempoNotesRelationship:
+    case msrTempoKind::kTempoNotesRelationship:
       {
     /*
       fOutputStream <<
-        "\\tempoNotesRelationshipship #\"";
+        "\\tempoNotesRelationship #\"";
 
       if (tempoWordsListSize) {
         list<S_msrWords>::const_iterator
@@ -4545,11 +4545,11 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         "\"";
 
       switch (tempoParenthesizedKind) {
-        case msrTempo::kTempoParenthesizedYes:
+        case msrTempoParenthesizedKind::kTempoParenthesizedYes:
           fOutputStream <<
             " ##t";
           break;
-        case msrTempo::kTempoParenthesizedNo:
+        case msrTempoParenthesizedKind::kTempoParenthesizedNo:
           fOutputStream <<
             " ##f";
           break;
@@ -5471,49 +5471,49 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
       int technicalType = kComment; // JMI
 
       switch (technicalKind) {
-        case msrTechnical::kArrow:
+        case msrTechnicalKind::kArrow:
           technicalType = k_arrow;
           break;
-        case msrTechnical::kDoubleTongue:
+        case msrTechnicalKind::kDoubleTongue:
           technicalType = k_double_tongue;
           break;
-        case msrTechnical::kDownBow:
+        case msrTechnicalKind::kDownBow:
           technicalType = k_down_bow;
           break;
-        case msrTechnical::kFingernails:
+        case msrTechnicalKind::kFingernails:
           technicalType = k_fingernails;
           break;
-        case msrTechnical::kHarmonic:
+        case msrTechnicalKind::kHarmonic:
           technicalType = k_harmonic;
           break;
-        case msrTechnical::kHeel:
+        case msrTechnicalKind::kHeel:
           technicalType = k_heel;
           break;
-        case msrTechnical::kHole:
+        case msrTechnicalKind::kHole:
           technicalType = k_hole;
           break;
-        case msrTechnical::kOpenString:
+        case msrTechnicalKind::kOpenString:
           technicalType = k_open_string;
           break;
-        case msrTechnical::kSnapPizzicato:
+        case msrTechnicalKind::kSnapPizzicato:
           technicalType = k_snap_pizzicato;
           break;
-        case msrTechnical::kStopped:
+        case msrTechnicalKind::kStopped:
           technicalType = k_stopped;
           break;
-        case msrTechnical::kTap:
+        case msrTechnicalKind::kTap:
           technicalType = k_tap;
           break;
-        case msrTechnical::kThumbPosition:
+        case msrTechnicalKind::kThumbPosition:
           technicalType = k_thumb_position;
           break;
-        case msrTechnical::kToe:
+        case msrTechnicalKind::kToe:
           technicalType = k_toe;
           break;
-        case msrTechnical::kTripleTongue:
+        case msrTechnicalKind::kTripleTongue:
           technicalType = k_triple_tongue;
           break;
-        case msrTechnical::kUpBow:
+        case msrTechnicalKind::kUpBow:
           technicalType = k_up_bow;
           break;
       } // switch
@@ -5575,13 +5575,13 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
       int technicalWithIntegerType = kComment; // JMI
 
       switch (technicalWithIntegerKind) {
-        case msrTechnicalWithInteger::kFingering:
+        case msrTechnicalWithIntegerKind::kFingering:
           technicalWithIntegerType = k_fingering;
           break;
-        case msrTechnicalWithInteger::kFret:
+        case msrTechnicalWithIntegerKind::kFret:
           technicalWithIntegerType = k_fret;
           break;
-        case msrTechnicalWithInteger::kString:
+        case msrTechnicalWithIntegerKind::kString:
           technicalWithIntegerType = k_string;
           break;
       } // switch
@@ -5653,7 +5653,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
       int technicalWithFloatType = kComment; // JMI
 
       switch (technicalWithFloatKind) {
-        case msrTechnicalWithFloat::kBend:
+        case msrTechnicalWithFloatKind::kTechnicalWithFloatBend:
           technicalWithFloatType = k_bend;
           break;
       } // switch
@@ -5722,19 +5722,19 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
       int technicalWithStringType = kComment; // JMI
 
       switch (technicalWithStringKind) {
-        case msrTechnicalWithString::kHammerOn:
+        case msrTechnicalWithStringKind::kHammerOn:
           technicalWithStringType = k_hammer_on;
           break;
-        case msrTechnicalWithString::kHandbell:
+        case msrTechnicalWithStringKind::kHandbell:
           technicalWithStringType = k_handbell;
           break;
-        case msrTechnicalWithString::kOtherTechnical:
+        case msrTechnicalWithStringKind::kOtherTechnical:
           technicalWithStringType = k_other_technical;
           break;
-        case msrTechnicalWithString::kPluck:
+        case msrTechnicalWithStringKind::kPluck:
           technicalWithStringType = k_pluck;
           break;
-        case msrTechnicalWithString::kPullOff:
+        case msrTechnicalWithStringKind::kPullOff:
           technicalWithStringType = k_pull_off;
           break;
       } // switch
@@ -5777,7 +5777,7 @@ void msr2mxsrTranslator:: appendNoteArticulations (
     for (i=noteArticulations.begin (); i!=noteArticulations.end (); ++i) {
       S_msrArticulation articulation = (*i);
 
-      msrArticulation::msrArticulationKind
+      msrArticulationKind
         articulationKind =
           articulation->getArticulationKind ();
 
@@ -5792,62 +5792,62 @@ void msr2mxsrTranslator:: appendNoteArticulations (
     */
 
       switch (articulationKind) {
-        case msrArticulation::k_NoArticulation:
+        case msrArticulationKind::k_NoArticulation:
           // JMI ???
           break;
 
-        case msrArticulation::kAccent:
+        case msrArticulationKind::kArticulationAccent:
           articulationType = k_accent;
           break;
-        case msrArticulation::kBreathMark:
+        case msrArticulationKind::kArticulationBreathMark:
           articulationType = k_breath_mark;
           break;
-        case msrArticulation::kCaesura:
+        case msrArticulationKind::kArticulationCaesura:
           articulationType = k_caesura;
           break;
-        case msrArticulation::kSpiccato:
+        case msrArticulationKind::kArticulationSpiccato:
           articulationType = k_spiccato;
           break;
-        case msrArticulation::kStaccato:
+        case msrArticulationKind::kArticulationStaccato:
           articulationType = k_staccato;
           break;
-        case msrArticulation::kStaccatissimo:
+        case msrArticulationKind::kArticulationStaccatissimo:
           articulationType = k_staccatissimo;
           break;
-        case msrArticulation::kStress:
+        case msrArticulationKind::kArticulationStress:
           articulationType = k_stress;
           break;
-        case msrArticulation::kUnstress:
+        case msrArticulationKind::kArticulationUnstress:
           articulationType = k_unstress;
           break;
-        case msrArticulation::kDetachedLegato:
+        case msrArticulationKind::kArticulationDetachedLegato:
           articulationType = k_detached_legato;
           break;
-        case msrArticulation::kStrongAccent:
+        case msrArticulationKind::kArticulationStrongAccent:
           articulationType = k_strong_accent;
           break;
-        case msrArticulation::kTenuto:
+        case msrArticulationKind::kArticulationTenuto:
           articulationType = k_tenuto;
           break;
-        case msrArticulation::kFermata:
+        case msrArticulationKind::kArticulationFermata:
           articulationType = k_fermata;
           break;
-        case msrArticulation::kArpeggiato:
+        case msrArticulationKind::kArticulationArpeggiato:
           articulationType = k_arpeggiate;
           break;
-        case msrArticulation::kNonArpeggiato:
+        case msrArticulationKind::kArticulationNonArpeggiato:
           articulationType = k_non_arpeggiate;
           break;
-        case msrArticulation::kDoit:
+        case msrArticulationKind::kArticulationDoit:
           articulationType = k_doit;
           break;
-        case msrArticulation::kFalloff:
+        case msrArticulationKind::kArticulationFalloff:
           articulationType = k_falloff;
           break;
-        case msrArticulation::kPlop:
+        case msrArticulationKind::kArticulationPlop:
           articulationType = k_plop;
           break;
-        case msrArticulation::kScoop:
+        case msrArticulationKind::kArticulationScoop:
           articulationType = k_scoop;
           break;
       } // switch
@@ -5857,33 +5857,33 @@ void msr2mxsrTranslator:: appendNoteArticulations (
 
       // append it to the current note notations articulations element
       switch (articulationKind) {
-        case msrArticulation::k_NoArticulation:
+        case msrArticulationKind::k_NoArticulation:
           // JMI ???
           break;
 
-        case msrArticulation::kAccent:
-        case msrArticulation::kBreathMark:
-        case msrArticulation::kCaesura:
-        case msrArticulation::kSpiccato:
-        case msrArticulation::kStaccato:
-        case msrArticulation::kStaccatissimo:
-        case msrArticulation::kStress:
-        case msrArticulation::kUnstress:
-        case msrArticulation::kDetachedLegato:
-        case msrArticulation::kStrongAccent:
-        case msrArticulation::kTenuto:
-        case msrArticulation::kDoit:
-        case msrArticulation::kFalloff:
-        case msrArticulation::kPlop:
-        case msrArticulation::kScoop:
-        case msrArticulation::kFermata:
+        case msrArticulationKind::kArticulationAccent:
+        case msrArticulationKind::kArticulationBreathMark:
+        case msrArticulationKind::kArticulationCaesura:
+        case msrArticulationKind::kArticulationSpiccato:
+        case msrArticulationKind::kArticulationStaccato:
+        case msrArticulationKind::kArticulationStaccatissimo:
+        case msrArticulationKind::kArticulationStress:
+        case msrArticulationKind::kArticulationUnstress:
+        case msrArticulationKind::kArticulationDetachedLegato:
+        case msrArticulationKind::kArticulationStrongAccent:
+        case msrArticulationKind::kArticulationTenuto:
+        case msrArticulationKind::kArticulationDoit:
+        case msrArticulationKind::kArticulationFalloff:
+        case msrArticulationKind::kArticulationPlop:
+        case msrArticulationKind::kArticulationScoop:
+        case msrArticulationKind::kArticulationFermata:
           appendToNoteNotationsArticulations (
             articulationElement,
             articulation->getArticulationPlacementKind ());
           break;
 
-        case msrArticulation::kArpeggiato:
-        case msrArticulation::kNonArpeggiato:
+        case msrArticulationKind::kArticulationArpeggiato:
+        case msrArticulationKind::kArticulationNonArpeggiato:
           appendToNoteNotationsArticulations (
             articulationElement,
             articulation->getArticulationPlacementKind ());
@@ -6176,11 +6176,11 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
         Sxmlelement containingElement;
 
         switch (spannerKind) {
-          case msrSpanner::kSpannerDashes:
+          case msrSpannerKind::kSpannerDashes:
             // dashes go into the measure direction element
             spannerType = k_dashes;
             break;
-          case msrSpanner::kSpannerWavyLine:
+          case msrSpannerKind::kSpannerWavyLine:
             // wavy lines go into the note notations ornaments
             spannerType = k_wavy_line;
             break;
@@ -6208,13 +6208,13 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
         }
 
         switch (spannerKind) {
-          case msrSpanner::kSpannerDashes:
+          case msrSpannerKind::kSpannerDashes:
             // dashes go into the measure direction element
             appendToMeasureDirection (
               spannerElement,
               spanner->getSpannerPlacementKind ());
             break;
-          case msrSpanner::kSpannerWavyLine:
+          case msrSpannerKind::kSpannerWavyLine:
             // wavy lines go into the note notations ornaments
             appendToNoteNotationsOrnaments (
               spannerElement,
@@ -6280,11 +6280,11 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
         Sxmlelement containingElement;
 
         switch (spannerKind) {
-          case msrSpanner::kSpannerDashes:
+          case msrSpannerKind::kSpannerDashes:
             // dashes go into the measure direction element
             spannerType = k_dashes;
             break;
-          case msrSpanner::kSpannerWavyLine:
+          case msrSpannerKind::kSpannerWavyLine:
             // wavy lines go into the note notations ornaments
             spannerType = k_wavy_line;
             break;
@@ -6312,13 +6312,13 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
         }
 
         switch (spannerKind) {
-          case msrSpanner::kSpannerDashes:
+          case msrSpannerKind::kSpannerDashes:
             // dashes go into the measure direction element
             appendToMeasureDirection (
               spannerElement,
               spanner->getSpannerPlacementKind ());
             break;
-          case msrSpanner::kSpannerWavyLine:
+          case msrSpannerKind::kSpannerWavyLine:
             // wavy lines go into the note notations ornaments
             appendToNoteNotationsOrnaments (
               spannerElement,
@@ -6346,22 +6346,22 @@ void msr2mxsrTranslator:: appendStemToNote (
   S_msrStem stem = theMsrNote->getNoteStem ();
 
   if (stem) {
-    msrStem::msrStemKind
+    msrStemKind
       stemKind = stem->getStemKind ();
 
     string stemString;
 
     switch (stemKind) {
-      case msrStem::kStemNeutral:
+      case msrStemKind::kStemNeutral:
         stemString = "[NONE]";
         break;
-      case msrStem::kStemUp:
+      case msrStemKind::kStemUp:
         stemString = "up";
         break;
-      case msrStem::kStemDown:
+      case msrStemKind::kStemDown:
         stemString = "down";
         break;
-      case msrStem::kStemDouble:
+      case msrStemKind::kStemDouble:
         stemString = "double";
         break;
     } // switch
@@ -8466,41 +8466,41 @@ void msr2mxsrTranslator::visitStart (S_msrTechnical& elt)
 
   // doest the score need the 'tongue' function?
   switch (elt->getTechnicalKind ()) {
-    case msrTechnical::kArrow:
+    case msrTechnicalKind::kArrow:
       break;
-    case msrTechnical::kDoubleTongue:
+    case msrTechnicalKind::kDoubleTongue:
       fResultingMusicxmlelement->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnical::kDownBow:
+    case msrTechnicalKind::kDownBow:
       break;
-    case msrTechnical::kFingernails:
+    case msrTechnicalKind::kFingernails:
       break;
-    case msrTechnical::kHarmonic:
+    case msrTechnicalKind::kHarmonic:
       break;
-    case msrTechnical::kHeel:
+    case msrTechnicalKind::kHeel:
       break;
-    case msrTechnical::kHole:
+    case msrTechnicalKind::kHole:
       break;
-    case msrTechnical::kOpenString:
+    case msrTechnicalKind::kOpenString:
       break;
-    case msrTechnical::kSnapPizzicato:
+    case msrTechnicalKind::kSnapPizzicato:
       break;
-    case msrTechnical::kStopped:
+    case msrTechnicalKind::kStopped:
       break;
-    case msrTechnical::kTap:
+    case msrTechnicalKind::kTap:
       break;
-    case msrTechnical::kThumbPosition:
+    case msrTechnicalKind::kThumbPosition:
       break;
-    case msrTechnical::kToe:
+    case msrTechnicalKind::kToe:
       break;
-    case msrTechnical::kTripleTongue:
+    case msrTechnicalKind::kTripleTongue:
       fResultingMusicxmlelement->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnical::kUpBow:
+    case msrTechnicalKind::kUpBow:
       break;
   } // switch
 }
@@ -8646,8 +8646,8 @@ void msr2mxsrTranslator::visitStart (S_msrTechnicalWithString& elt)
   }
 
   switch (elt->getTechnicalWithStringKind ()) {
-    case msrTechnicalWithString::kHammerOn:
-    case msrTechnicalWithString::kPullOff:
+    case msrTechnicalWithStringKind::kHammerOn:
+    case msrTechnicalWithStringKind::kPullOff:
       // this score needs the 'after' Scheme function
       fResultingMusicxmlelement->
         setAfterSchemeFunctionIsNeeded ();
@@ -10541,8 +10541,8 @@ void msr2mxsrTranslator::displayCurrentOnGoingValues ()
 
 /* JMI
 //________________________________________________________________________
-// a comparison class to sort elements
-class musicxmlOrder
+// a comparison class   to sort elements
+class   musicxmlOrder
 {
   public:
 

@@ -22,6 +22,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// pre-declaration
 enum class msdlTokenKind;
 
 // the MSDL keywords languages

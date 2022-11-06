@@ -75,26 +75,26 @@ S_bsrCellsList bsrBarLine::buildCellsList () const
         fInputLineNumber);
 
   switch (fBarLineKind) {
-    case bsrBarLine::kBarLineKindNone:
+    case bsrBarLineKind::kBarLineKindNone:
       break;
-    case bsrBarLine::kBarLineKindSpecial:
+    case bsrBarLineKind::kBarLineKindSpecial:
       result->
         appendCellKindToCellsList (
           bsrCellKind::kDots13);
       break;
-    case bsrBarLine::kBarLineKindUnusual:
+    case bsrBarLineKind::kBarLineKindUnusual:
       result->
         appendCellKindToCellsList (
           bsrCellKind::kDots123);
       break;
-    case bsrBarLine::kBarLineKindFinalDouble:
+    case bsrBarLineKind::kBarLineKindFinalDouble:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
             fInputLineNumber,
             bsrCellKind::kDots126, bsrCellKind::kDots13));
       break;
-    case bsrBarLine::kBarLineKindSectionalDouble:
+    case bsrBarLineKind::kBarLineKindSectionalDouble:
       result->
         appendCellsListToCellsList (
           bsrCellsList::create (
@@ -166,52 +166,52 @@ void bsrBarLine::acceptOut (basevisitor* v)
 void bsrBarLine::browseData (basevisitor* v)
 {}
 
-string bsrBarLine::barLineKindAsString (
+string bsrBarLineKindAsString (
   bsrBarLineKind barLineKind)
 {
   string result;
 
   switch (barLineKind) {
-    case bsrBarLine::kBarLineKindNone:
-      result = "barLineKindNone";
+    case bsrBarLineKind::kBarLineKindNone:
+      result = "kBarLineKindNone";
       break;
-    case bsrBarLine::kBarLineKindSpecial:
-      result = "barLineKindSpecial";
+    case bsrBarLineKind::kBarLineKindSpecial:
+      result = "kBarLineKindSpecial";
       break;
-    case bsrBarLine::kBarLineKindUnusual:
-      result = "barLineKindUnusual";
+    case bsrBarLineKind::kBarLineKindUnusual:
+      result = "kBarLineKindUnusual";
       break;
-    case bsrBarLine::kBarLineKindFinalDouble:
-      result = "barLineKindFinalDouble";
+    case bsrBarLineKind::kBarLineKindFinalDouble:
+      result = "kBarLineKindFinalDouble";
       break;
-    case bsrBarLine::kBarLineKindSectionalDouble:
-      result = "barLineKindSectionalDouble";
+    case bsrBarLineKind::kBarLineKindSectionalDouble:
+      result = "kBarLineKindSectionalDouble";
       break;
   } // switch
 
   return result;
 }
 
-string bsrBarLine::barLineKindAsDebugString (
+string bsrBarLineKindAsDebugString ( // JMI of little use??? v0.9.66
   bsrBarLineKind barLineKind)
 {
   string result;
 
   switch (barLineKind) {
-    case bsrBarLine::kBarLineKindNone:
-      result = "***None***";
+    case bsrBarLineKind::kBarLineKindNone:
+      result = "***kBarLineKindNone***";
       break;
-    case bsrBarLine::kBarLineKindSpecial:
-      result = "Special";
+    case bsrBarLineKind::kBarLineKindSpecial:
+      result = "kBarLineKindSpecial";
       break;
-    case bsrBarLine::kBarLineKindUnusual:
-      result = "Unusual";
+    case bsrBarLineKind::kBarLineKindUnusual:
+      result = "kBarLineKindUnusual";
       break;
-    case bsrBarLine::kBarLineKindFinalDouble:
-      result = "FinalDouble";
+    case bsrBarLineKind::kBarLineKindFinalDouble:
+      result = "kBarLineKindFinalDouble";
       break;
-    case bsrBarLine::kBarLineKindSectionalDouble:
-      result = "||"; // L'\u2016' ??? JMI
+    case bsrBarLineKind::kBarLineKindSectionalDouble:
+      result = "||"; // L'\u2016' ??? JMI v0.9.66
 //      result = L'\u1D101';
       break;
   } // switch
@@ -225,7 +225,7 @@ string bsrBarLine::asString () const
 
   s <<
     "BarLine" <<
-    ", " << barLineKindAsString (fBarLineKind) <<
+    ", " << bsrBarLineKindAsString (fBarLineKind) <<
     ", barLineCellsList: " << fBarLineCellsList->asShortString () <<
     ", line " << fInputLineNumber;
 
@@ -238,10 +238,16 @@ string bsrBarLine::asDebugString () const
 
   s <<
     "[BARLINE " <<
-    barLineKindAsDebugString (fBarLineKind) <<
+    bsrBarLineKindAsDebugString (fBarLineKind) <<
     ']';
 
   return s.str ();
+}
+
+ostream& operator << (ostream& os, const bsrBarLineKind& elt)
+{
+  os << bsrBarLineKindAsDebugString (elt);
+  return os;
 }
 
 void bsrBarLine::print (ostream& os) const
@@ -257,7 +263,7 @@ void bsrBarLine::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "barLineKind" << " : " << barLineKindAsString (fBarLineKind) <<
+    "barLineKind" << " : " << bsrBarLineKindAsString (fBarLineKind) <<
     endl <<
     setw (fieldWidth) <<
     "barLineCellsList" << " : " << fBarLineCellsList->asShortString () <<
@@ -274,7 +280,7 @@ ostream& operator << (ostream& os, const S_bsrBarLine& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

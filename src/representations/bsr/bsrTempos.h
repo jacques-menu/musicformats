@@ -11,8 +11,8 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string tempoKindAsDebugString (
-  msrTempo::msrTempoKind tempoKind);
+// string tempoKindAsDebugString ( // JMI v0.9.66
+//   msrTempo::msrTempoKind tempoKind);
 
 //______________________________________________________________________________
 const bsrCellKind

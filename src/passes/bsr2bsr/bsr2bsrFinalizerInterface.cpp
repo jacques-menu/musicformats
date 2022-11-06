@@ -92,7 +92,7 @@ S_bsrScore translateBsrToFinalizedBsr (
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
       passNumber,
       passDescription,
-      mfTimingItem::kMandatory,
+      mfTimingItemKind::kMandatory,
       startClock,
       endClock);
 

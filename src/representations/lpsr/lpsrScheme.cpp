@@ -36,12 +36,12 @@ S_lpsrSchemeVariable lpsrSchemeVariable::create (
   const string&     variableName,
   const string&     value,
   const string&     comment,
-  lpsrEndlKind      endlKind)
+  lpsrEndOfLineKind endOfLineKind)
 {
   lpsrSchemeVariable* o =
     new lpsrSchemeVariable (
       inputLineNumber,
-      commentedKind, variableName, value, comment, endlKind);
+      commentedKind, variableName, value, comment, endOfLineKind);
   assert (o != nullptr);
   return o;
 }
@@ -52,7 +52,7 @@ lpsrSchemeVariable::lpsrSchemeVariable (
   const string&     variableName,
   const string&     value,
   const string&     comment,
-  lpsrEndlKind      endlKind)
+  lpsrEndOfLineKind endOfLineKind)
     : lpsrElement (inputLineNumber)
 {
   fCommentedKind = commentedKind;
@@ -62,7 +62,7 @@ lpsrSchemeVariable::lpsrSchemeVariable (
 
   fComment       = comment;
 
-  fEndlKind      = endlKind;
+  fEndOfLineKind      = endOfLineKind;
 }
 
 lpsrSchemeVariable::~lpsrSchemeVariable ()
@@ -123,37 +123,37 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
 void lpsrSchemeVariable::browseData (basevisitor* v)
 {}
 
-string lpsrSchemeVariable::commentedKindAsString (
+string lpsrSchemeVariable::lpsrCommentedKindAsString (
   lpsrCommentedKind commentedKind)
 {
   string result;
 
   switch (commentedKind) {
-    case lpsrSchemeVariable::kCommentedYes:
-      result = "commentedYes";
+    case lpsrCommentedKind::kCommentedYes:
+      result = "kCommentedYes";
       break;
-    case lpsrSchemeVariable::kCommentedNo:
-      result = "commentedNo";
+    case lpsrCommentedKind::kCommentedNo:
+      result = "kCommentedNo";
       break;
   } // switch
 
   return result;
 }
 
-string lpsrSchemeVariable::endlKindAsString (
-  lpsrEndlKind endlKind)
+string lpsrSchemeVariable::lpsrEndOfLineKindAsString (
+  lpsrEndOfLineKind endOfLineKind)
 {
   string result;
 
-  switch (endlKind) {
-    case lpsrSchemeVariable::kEndlOnce:
-      result = "endlOnce";
+  switch (endOfLineKind) {
+    case lpsrEndOfLineKind::kEndOfLineOnce:
+      result = "kEndOfLineOnce";
       break;
-    case lpsrSchemeVariable::kEndlTwice:
-      result = "endlTwice";
+    case lpsrEndOfLineKind::kEndOfLineTwice:
+      result = "kEndOfLineTwice";
       break;
-    case lpsrSchemeVariable::kEndlNone:
-      result = "endlNone";
+    case lpsrEndOfLineKind::kEndOfLineNone:
+      result = "kEndOfLineNone";
       break;
   } // switch
 
@@ -163,7 +163,7 @@ string lpsrSchemeVariable::endlKindAsString (
 void lpsrSchemeVariable::print (ostream& os) const
 {
   os <<
-    "SchemeVariable" <<
+    "[SchemeVariable" <<
     endl;
 
   ++gIndenter;
@@ -195,8 +195,8 @@ void lpsrSchemeVariable::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "commentedKind" << " : " <<
-    commentedKindAsString (fCommentedKind) <<
+    "fCommentedKind" << " : " <<
+    fCommentedKind <<
     endl <<
 
   // backSlashKindAsString ??? JMI
@@ -204,9 +204,10 @@ void lpsrSchemeVariable::print (ostream& os) const
   // quotesKindAsString ??? JMI
 
     setw (fieldWidth) <<
-    "endlKind" << " : " <<
-    endlKindAsString (fEndlKind) <<
-    endl;
+    "fEndOfLineKind" << " : " <<
+    lpsrEndOfLineKindAsString (fEndOfLineKind) <<
+    endl <<
+    ']';
 
   --gIndenter;
 }
@@ -312,11 +313,11 @@ void lpsrSchemeFunction::print (ostream& os) const
 
   // print resulting strings
   os <<
-    "function name : \"" << fFunctionName << "\"" <<
+    "fFunctionName: \"" << fFunctionName << "\"" <<
     endl <<
-    "function description: \"" << fFunctionDescription << "\"" <<
+    "fFunctionDescription: \"" << fFunctionDescription << "\"" <<
     endl <<
-    "function code: \"" << fFunctionCode << "\"" <<
+    "fFunctionCode: \"" << fFunctionCode << "\"" <<
     endl;
 
   --gIndenter;

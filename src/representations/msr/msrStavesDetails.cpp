@@ -145,15 +145,16 @@ string msrStaffTuning::asString () const
   stringstream s;
 
   s <<
-    "StaffTuning" <<
-    ", line " << fStaffTuningLineNumber <<
-    ", " <<
+    "[StaffTuning" <<
+    ", fStaffTuningQuarterTonesPitchKind: " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fStaffTuningQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
-    ", octave " <<
-    msrOctaveKindAsString (fStaffTuningOctaveKind);
+    ", fStaffTuningOctaveKind: " <<
+    fStaffTuningOctaveKind <<
+    ", line " << fStaffTuningLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -171,19 +172,19 @@ void msrStaffTuning::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "staffTuningLineNumber" << " : " <<
+    "fStaffTuningLineNumber" << " : " <<
     fStaffTuningLineNumber <<
     endl <<
     setw (fieldWidth) <<
-    "staffTuningQuarterTonesPitch" << " : " <<
+    "fStaffTuningQuarterTonesPitchKind" << " : " <<
     msrQuarterTonesPitchKindAsStringInLanguage (
       fStaffTuningQuarterTonesPitchKind,
       gGlobalMsrOahGroup->
         getMsrQuarterTonesPitchesLanguageKind ()) <<
     endl <<
     setw (fieldWidth) <<
-    "staffTuningOctaveKind" << " : " <<
-    msrOctaveKindAsString (fStaffTuningOctaveKind) <<
+    "fStaffTuningOctaveKind" << " : " <<
+    fStaffTuningOctaveKind <<
     endl;
 
   --gIndenter;
@@ -307,64 +308,82 @@ void msrStaffDetails::browseData (basevisitor* v)
   }
 }
 
-string msrStaffDetails::staffTypeKindAsString (
+string msrStaffDetails::msrStaffTypeKindAsString (
   msrStaffTypeKind staffTypeKind)
 {
   string result;
 
   switch (staffTypeKind) {
-    case msrStaffDetails::kRegularStaffType:
-      result = "regularStaffType";
+    case msrStaffDetails::kStaffTypeRegular:
+      result = "kStaffTypeRegular";
       break;
-    case msrStaffDetails::kOssiaStaffType:
-      result = "ossiaStaffType";
+    case msrStaffDetails::kStaffTypeOssia:
+      result = "kStaffTypeOssia";
       break;
-    case msrStaffDetails::kCueStaffType:
-      result = "cueStaffType";
+    case msrStaffDetails::kStaffTypeCue:
+      result = "kStaffTypeCue";
       break;
-    case msrStaffDetails::kEditorialStaffType:
-      result = "editorialStaffType";
+    case msrStaffDetails::kStaffTypeEditorial:
+      result = "kStaffTypeEditorial";
       break;
-    case msrStaffDetails::kAlternateStaffType:
-      result = "alternateStaffType";
+    case msrStaffDetails::kStaffTypeAlternate:
+      result = "kStaffTypeAlternate";
       break;
   } // switch
 
   return result;
 }
 
-string msrStaffDetails::showFretsKindAsString (
+ostream& operator << (ostream& os, const msrStaffTypeKind& elt)
+{
+  os << msrStaffTypeKindAsString (elt);
+  return os;
+}
+
+string msrStaffDetails::msrShowFretsKindAsString (
   msrShowFretsKind showFretsKind)
 {
   string result;
 
   switch (showFretsKind) {
-    case msrStaffDetails::kShowFretsNumbers:
-      result = "showFretsNumbers";
+    case msrShowFretsKind::kShowFretsNumbers:
+      result = "kShowFretsNumbers";
       break;
-    case msrStaffDetails::kShowFretsLetters:
-      result = "showFretsLetters";
+    case msrShowFretsKind::kShowFretsLetters:
+      result = "kShowFretsLetters";
       break;
   } // switch
 
   return result;
 }
 
-string msrStaffDetails::printSpacingKindAsString (
+ostream& operator << (ostream& os, const msrShowFretsKind& elt)
+{
+  os << msrShowFretsKindAsString (elt);
+  return os;
+}
+
+string msrStaffDetails::msrPrintSpacingKindAsString (
   msrPrintSpacingKind printSpacingKind)
 {
   string result;
 
   switch (printSpacingKind) {
     case msrStaffDetails::kPrintSpacingYes:
-      result = "printSpacingYes";
+      result = "kPrintSpacingYes";
       break;
     case msrStaffDetails::kPrintSpacingNo:
-      result = "printSpacingNo";
+      result = "kPrintSpacingNo";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrPrintSpacingKind& elt)
+{
+  os << msrPrintSpacingKindAsString (elt);
+  return os;
 }
 
 string msrStaffDetails::asShortString () const
@@ -372,26 +391,23 @@ string msrStaffDetails::asShortString () const
   stringstream s;
 
   s <<
-    "StaffDetails" <<
-    ", staffTypeKind" <<
-    staffTypeKindAsString (fStaffTypeKind) <<
-    ", line " << fInputLineNumber <<
-    endl;
+    "[StaffDetails" <<
+    ", fStaffTypeKind: " <<
+    fStaffTypeKind <<
+    ", line " << fInputLineNumber;
 
   // print the staff lines number
-  s << ", staffLinesNumber: " << fStaffLinesNumber;
+  s << ", fStaffLinesNumber: " << fStaffLinesNumber;
 
   // print the staff tunings if any
   s <<
-    ", StaffTunings: " << fStaffTuningsList.size ();
+    ", fStaffTuningsList: " << fStaffTuningsList.size ();
 
   s <<
-    ", showFretsKind = " <<
-    showFretsKindAsString (fShowFretsKind) <<
-    ", printObjectKind = " <<
-    msrPrintObjectKindAsString (fPrintObjectKind) <<
-    ", printSpacingKind = " <<
-    printSpacingKindAsString (fPrintSpacingKind);
+    ", fShowFretsKind: " << fShowFretsKind <<
+    ", fPrintObjectKind: " << fPrintObjectKind <<
+    ", fPrintSpacingKind: " << fPrintSpacingKind <<
+    ']';
 
   return s.str ();
 }
@@ -410,7 +426,7 @@ void msrStaffDetails::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "staffTypeKind" << " : " <<
-    staffTypeKindAsString (fStaffTypeKind) <<
+    msrStaffTypeKindAsString (fStaffTypeKind) <<
     endl <<
     setw (fieldWidth) <<
     "staffLinesNumber" << " : " << fStaffLinesNumber <<
@@ -446,7 +462,7 @@ void msrStaffDetails::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "showFretsKind" << " : " <<
-    showFretsKindAsString (fShowFretsKind) <<
+    msrShowFretsKindAsString (fShowFretsKind) <<
     endl <<
     setw (fieldWidth) <<
     "printObjectKind" << " : " <<
@@ -454,7 +470,7 @@ void msrStaffDetails::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     "printSpacingKind" << " : " <<
-    printSpacingKindAsString (fPrintSpacingKind) <<
+    msrPrintSpacingKindAsString (fPrintSpacingKind) <<
     endl;
 
   --gIndenter;

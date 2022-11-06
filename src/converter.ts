@@ -12,7 +12,7 @@ interface UrlOption  { option: string; value: string; }
 //----------------------------------------------------------------------------
 // this is the editor part, currently using CodeMirror
 //----------------------------------------------------------------------------
-class XMLConverter {
+class   XMLConverter {
 
   private fFileName = "";
   private fMode: string;

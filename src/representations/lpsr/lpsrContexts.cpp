@@ -108,7 +108,7 @@ void lpsrContext::acceptOut (basevisitor* v)
 void lpsrContext::browseData (basevisitor* v)
 {}
 
-string lpsrContext::contextTypeKindAsString (
+string lpsrContext::lpsrContextTypeKindAsString (
   lpsrContextTypeKind contextTypeKind)
 {
   string result;
@@ -125,7 +125,7 @@ string lpsrContext::contextTypeKindAsString (
   return result;
 }
 
-string lpsrContext::contextExistingKindAsString (
+string lpsrContext::lpsrContextExistingKindAsString (
   lpsrContextExistingKind contextExistingKind)
 {
   string result;
@@ -145,12 +145,11 @@ string lpsrContext::contextExistingKindAsString (
 void lpsrContext::print (ostream& os) const
 {
   os <<
-    "Context, \"" <<
-    contextTypeKindAsString (
-      fContextTypeKind) <<
+    "[ontext, \"" <<
+    fContextTypeKind <<
     "\"" <<
     ", existing kind: " <<
-    contextExistingKindAsString (
+    lpsrContextExistingKindAsString (
       fContextExistingKind);
 
   if (fContextName.size ()) {
@@ -286,8 +285,7 @@ void lpsrChordNamesContext::print (ostream& os) const
   os <<
   /* JMI
     "ChordNamesContext, \"" <<
-    contextTypeKindAsString (
-      fContextTypeKind) <<
+    fContextTypeKind <<
     "\"" <<
     */
     "ChordNamesContext" <<
@@ -300,7 +298,7 @@ void lpsrChordNamesContext::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "contextExistingKind" << " : " <<
-    contextExistingKindAsString (
+    lpsrContextExistingKindAsString (
       fContextExistingKind) <<
     endl <<
     setw (fieldWidth) <<
@@ -348,7 +346,7 @@ ostream& operator << (ostream& os, const S_lpsrChordNamesContext& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -450,8 +448,7 @@ void lpsrFiguredBassContext::print (ostream& os) const
   os <<
   /* JMI
     "FiguredBassContext, \"" <<
-    contextTypeKindAsString (
-      fContextTypeKind) <<
+    fContextTypeKind <<
     "\"" <<
     */
     "FiguredBassContext" <<
@@ -464,7 +461,7 @@ void lpsrFiguredBassContext::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fContextExistingKind" << " : " <<
-    contextExistingKindAsString (
+    lpsrContextExistingKindAsString (
       fContextExistingKind) <<
     endl <<
     setw (fieldWidth) <<
@@ -512,7 +509,7 @@ ostream& operator << (ostream& os, const S_lpsrFiguredBassContext& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

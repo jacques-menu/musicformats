@@ -12,23 +12,23 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class msrStanza;
+class   msrStanza;
 typedef SMARTP<msrStanza> S_msrStanza;
 
-class msrPart;
+class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;
 
-class msrVoice;
+class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
 
-class msrNote;
+class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
 // data types
 
 // we want to end the line in the LilyPond code at a break
-enum msrSyllableKind {
+enum class msrSyllableKind {
   kSyllableNone,
   kSyllableSingle,
   kSyllableBegin, kSyllableMiddle, kSyllableEnd,
@@ -41,18 +41,22 @@ enum msrSyllableKind {
   kSyllableLineBreak, kSyllablePageBreak
 };
 
-string syllableKindAsString (
+string msrSyllableKindAsString (
   msrSyllableKind syllableKind);
 
-enum msrSyllableExtendKind {
+ostream& operator << (ostream& os, const msrSyllableKind& elt);
+
+enum class msrSyllableExtendKind {
   kSyllableExtendNone,
   kSyllableExtendEmpty,
   kSyllableExtendSingle,
   kSyllableExtendStart, kSyllableExtendContinue, kSyllableExtendStop
 };
 
-string syllableExtendKindAsString (
+string msrSyllableExtendKindAsString (
   msrSyllableExtendKind syllableExtendKind);
+
+ostream& operator << (ostream& os, const msrSyllableExtendKind& elt);
 
 class EXP msrSyllable : public msrMeasureElement
 {

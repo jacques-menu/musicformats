@@ -265,21 +265,27 @@ void bsrLineContents::browseData (basevisitor* v)
   } // for
 }
 
-string bsrLineContents::lineContentsKindAsString (
+string bsrLineContentsKindAsString (
   bsrLineContentsKind lineContentsKind)
 {
   string result;
 
   switch (lineContentsKind) {
-    case bsrLineContents::kLineContentsRegular:
-      result = "lineContentsRegular";
+    case bsrLineContentsKind::kLineContentsRegular:
+      result = "kLineContentsRegular";
       break;
-    case bsrLineContents::kLineContentsContinuation:
-      result = "lineContentsContinuation";
+    case bsrLineContentsKind::kLineContentsContinuation:
+      result = "kLineContentsContinuation";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const bsrLineContentsKind& elt)
+{
+  os << bsrLineContentsKindAsString (elt);
+  return os;
 }
 
 string bsrLineContents::asShortString () const
@@ -294,7 +300,7 @@ string bsrLineContents::asShortString () const
   s <<
    "LineContents" <<
     ", lineContentsKind: " <<
-    lineContentsKindAsString (fLineContentsKind) <<
+    bsrLineContentsKindAsString (fLineContentsKind) <<
     ", " <<
     mfSingularOrPlural (
       fLineContentsLineElementsList.size (), "lineElement", "lineElements");
@@ -316,7 +322,7 @@ void bsrLineContents::print (ostream& os) const
   os <<
     "LineContents" <<
     ", lineContentsKind: " <<
-    lineContentsKindAsString (fLineContentsKind) <<
+    bsrLineContentsKindAsString (fLineContentsKind) <<
     ", " <<
     mfSingularOrPlural (
       lineElementsListSize, "lineElement", "lineElements") <<
@@ -398,7 +404,7 @@ ostream& operator << (ostream& os, const S_bsrLineContents& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

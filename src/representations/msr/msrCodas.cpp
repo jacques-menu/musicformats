@@ -35,7 +35,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string codaKindAsString (
+string msrCodaKindAsString (
   msrCodaKind codaKind)
 {
   string result;
@@ -54,7 +54,7 @@ string codaKindAsString (
 
 ostream& operator << (ostream& os, const msrCodaKind& elt)
 {
-  os << codaKindAsString (elt);
+  os << msrCodaKindAsString (elt);
   return os;
 }
 
@@ -146,7 +146,7 @@ string msrCoda::asString () const
   s <<
     "Coda" <<
     ", staffNumber: " << fStaffNumber <<
-    ", codaKind: " << codaKindAsString (fCodaKind) <<
+    ", codaKind: " << msrCodaKindAsString (fCodaKind) <<
     ", line " << fInputLineNumber;
 
   return s.str ();

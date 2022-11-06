@@ -149,7 +149,7 @@ lpsrScore::lpsrScore (
         lpsrComment::create (
           inputLineNumber,
           s.str (),
-          lpsrComment::kGapAfterwardsYes);
+          lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes);
     }
 
     // create the 'conversion date' comment
@@ -164,7 +164,7 @@ lpsrScore::lpsrScore (
         lpsrComment::create (
           inputLineNumber,
           s.str (),
-          lpsrComment::kGapAfterwardsYes);
+          lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes);
     }
 
     // create the 'conversion command' comments
@@ -210,8 +210,8 @@ lpsrScore::lpsrScore (
           inputLineNumber,
           s.str (),
           longAndSuppliedOptionsDiffer || shortAndSuppliedOptionsDiffer
-            ? lpsrComment::kGapAfterwardsNo
-            : lpsrComment::kGapAfterwardsYes);
+            ? lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo
+            : lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes);
     }
 
     // create the 'conversion command with long options names' comment if relevant
@@ -230,8 +230,8 @@ lpsrScore::lpsrScore (
           inputLineNumber,
           s.str (),
           shortAndSuppliedOptionsDiffer
-            ? lpsrComment::kGapAfterwardsNo
-            : lpsrComment::kGapAfterwardsYes);
+            ? lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsNo
+            : lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes);
     }
 
     // create the 'conversion command with short options names' comment if relevant
@@ -250,7 +250,7 @@ lpsrScore::lpsrScore (
         lpsrComment::create (
           inputLineNumber,
           s.str (),
-          lpsrComment::kGapAfterwardsYes);
+          lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes);
     }
   }
 
@@ -957,20 +957,20 @@ after =
     schemeFunction;
 }
 
-void lpsrScore::setTempoNotesRelationshipshipSchemeFunctionIsNeeded ()
+void lpsrScore::setTempoNotesRelationshipSchemeFunctionIsNeeded ()
 {
-  if (! fTempoNotesRelationshipshipSchemeFunctionIsNeeded) {
-    addTempoNotesRelationshipshipSchemeFunctionToScore ();
+  if (! fTempoNotesRelationshipSchemeFunctionIsNeeded) {
+    addTempoNotesRelationshipSchemeFunctionToScore ();
 
-    fTempoNotesRelationshipshipSchemeFunctionIsNeeded = true;
+    fTempoNotesRelationshipSchemeFunctionIsNeeded = true;
   }
 }
 
-void lpsrScore::addTempoNotesRelationshipshipSchemeFunctionToScore ()
+void lpsrScore::addTempoNotesRelationshipSchemeFunctionToScore ()
 {
   string
     schemeFunctionName =
-      "tempoNotesRelationshipship",
+      "tempoNotesRelationship",
 
     schemeFunctionDescription =
 R"(
@@ -982,9 +982,9 @@ R"(
     schemeFunctionCode =
       // add ! before ( and after ) since the code contains )"
 R"!(
-tempoNotesRelationshipshipStaffReduce = #-3
+tempoNotesRelationshipStaffReduce = #-3
 
-tempoNotesRelationshipship =
+tempoNotesRelationship =
 #(define-music-function (parser location label parenthesized musicI musicII)
    (string? boolean? ly:music? ly:music?)
    (let* (
@@ -1004,8 +1004,8 @@ tempoNotesRelationshipship =
            \score {
              \new Staff \with {
                % reduce the font size a la cue
-               fontSize = #tempoNotesRelationshipshipStaffReduce
-               \override StaffSymbol.staff-space = #(magstep tempoNotesRelationshipshipStaffReduce)
+               fontSize = #tempoNotesRelationshipStaffReduce
+               \override StaffSymbol.staff-space = #(magstep tempoNotesRelationshipStaffReduce)
                % hide the staff lines
                \override StaffSymbol.line-count = #0
                % align horizontally
@@ -1424,7 +1424,7 @@ voiceFour = #(make-self-telling-voice-props-set 3)
        (lambda (music)
          (define (get . args)
            (apply ly:music-property music args))
-         ; No event class specific to PropertySet?
+         ; No event class   specific to PropertySet?
          (case (ly:music-property music 'name)
            ((PropertySet)
             (ly:context-set-property! context
@@ -2941,8 +2941,8 @@ void lpsrScore::printFull (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "fTempoNotesRelationshipshipSchemeFunctionIsNeeded" << " : " <<
-    fTempoNotesRelationshipshipSchemeFunctionIsNeeded <<
+    "fTempoNotesRelationshipSchemeFunctionIsNeeded" << " : " <<
+    fTempoNotesRelationshipSchemeFunctionIsNeeded <<
     endl <<
 
     setw (fieldWidth) <<

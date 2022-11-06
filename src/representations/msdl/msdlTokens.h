@@ -167,11 +167,11 @@ string existingTokensInLanguage (
 
 //________________________________________________________________________
 template< typename T >
-class EnumNonSeparators
+class   EnumNonSeparators
 {
   public:
 
-    class Iterator
+    class   Iterator
     {
       public:
 
@@ -208,11 +208,11 @@ typename EnumNonSeparators<T>::Iterator end (EnumNonSeparators<T>)
 
 //________________________________________________________________________
 template< typename T >
-class EnumLanguageIndependent
+class   EnumLanguageIndependent
 {
   public:
 
-    class Iterator
+    class   Iterator
     {
       public:
 
@@ -249,11 +249,11 @@ typename EnumLanguageIndependent<T>::Iterator end (EnumLanguageIndependent<T>)
 
 //________________________________________________________________________
 template< typename T >
-class EnumLanguageDependent
+class   EnumLanguageDependent
 {
   public:
 
-    class Iterator
+    class   Iterator
     {
       public:
 
@@ -289,10 +289,10 @@ typename EnumLanguageDependent<T>::Iterator end (EnumLanguageDependent<T>)
 }
 
 //________________________________________________________________________
-class msdlTokenKindsSet;
+class   msdlTokenKindsSet;
 typedef SMARTP<msdlTokenKindsSet> S_msdlTokenKindsSet;
 
-class msdlTokenKindsSet : public smartable
+class   msdlTokenKindsSet : public smartable
 {
   public:
 
@@ -412,7 +412,7 @@ EXP S_msdlTokenKindsSet operator- (
 #include <sstream>           // std::stringstream
 #include <initializer_list>  // std::initializer_list
 
-struct myclass {
+struct myclass  {
   std::string str;
   myclass(std::initializer_list<int> args) {
     std::stringstream ss;
@@ -424,7 +424,7 @@ struct myclass {
 
 int main ()
 {
-  myclass myobject {10, 20, 30};
+  myclass  myobject {10, 20, 30};
   std::cout << "myobject contains:" << myobject.str << '\n';
   return 0;
 }
@@ -457,6 +457,8 @@ enum class msdlTokenDescriptionKind {
 
 string msdlTokenDescriptionKindAsString (
   msdlTokenDescriptionKind tokenDescriptionKind);
+
+ostream& operator << (ostream& os, const msdlTokenDescriptionKind& elt);
 
 //________________________________________________________________________
 class EXP msdlTokenDescription : public smartable

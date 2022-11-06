@@ -15,13 +15,13 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 /*
-class bsrKey;
+class   bsrKey;
 typedef SMARTP<bsrKey> S_bsrKey;
 
-class bsrTimeSignature;
+class   bsrTimeSignature;
 typedef SMARTP<bsrTimeSignature> S_bsrTimeSignature;
 
-class bsrTempo;
+class   bsrTempo;
 typedef SMARTP<bsrTempo> S_bsrTempo;
 */
 

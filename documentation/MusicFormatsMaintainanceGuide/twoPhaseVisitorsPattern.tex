@@ -25,7 +25,7 @@ Visiting a node in a data structure is done in this order:
 The first can be used to prepare data needed for the node contents visit, for example.
 Then the second phase can used such data, if relevant, as well as data created by the node contents visit, do consolidate the whole.
 
-A visitor class should:
+A visitor class   should:
 \begin{itemize}
 \item inherit from {\tt basevisitor};
 \item inherit from the smart pointer classes it visits;
@@ -34,14 +34,14 @@ A visitor class should:
 
 {\tt basevisitor} is defined in \visitors{basevisitor.h}, and contains nothing:
 \begin{lstlisting}[language=CPlusPlus]
-class basevisitor
+class   basevisitor
 {
 	public:
 		virtual ~basevisitor() {}
 };
 \end{lstlisting}
 
-It is used as the base class of all visitors in \methodName{browsedata} methods:
+It is used as the base class   of all visitors in \methodName{browsedata} methods:
 \begin{lstlisting}[language=CPlusPlus]
 void msrWords::acceptIn (basevisitor* v)
 {
@@ -76,7 +76,7 @@ There are several such classes, all with the same specification as the one in\\
 For example, in \msr{msrElements.h}, there is:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
-template <typename T> class msrBrowser : public browser <T>
+template <typename T> class   msrBrowser : public browser <T>
 {
   public:
 
@@ -110,11 +110,11 @@ template <typename T> class msrBrowser : public browser <T>
 \section{A first example: counting notes in MusicMXL data}
 % -------------------------------------------------------------------------
 
-In \libmusicxmlsamples{countnotes.cpp}, counting the notes in \mxml\ data needs only see {\tt S_note} nodes. Class {\tt countnotes} thus inherits only from a visitor for this type of node, and all the other node types are simply ignored.
+In \libmusicxmlsamples{countnotes.cpp}, counting the notes in \mxml\ data needs only see {\tt S_note} nodes. class   {\tt countnotes} thus inherits only from a visitor for this type of node, and all the other node types are simply ignored.
 
 \VisitorMethod{countnotes}{visitStart} only has to increment the notes count:
 \begin{lstlisting}[language=CPlusPlus,caption={{\tt countnotes.cpp}}]
-class countnotes :
+class   countnotes :
 	public visitor<S_note>
 {
 	public:
@@ -251,7 +251,7 @@ void msrDoubleTremolo::browseData (basevisitor* v)
 }
 \end{lstlisting}
 
-Since this order is set in the \methodName{browsedata} methods, it cannot be influenced by the visitors of the corresponding class instances.
+Since this order is set in the \methodName{browsedata} methods, it cannot be influenced by the visitors of the corresponding class   instances.
 
 There are cases where the data should be sorted prior to being browsed, such as the staves in parts: this ensures that they are browsed in this order: harmonies staff, other staves, figured bass staff.
 
@@ -260,7 +260,7 @@ There are cases where the data should be sorted prior to being browsed, such as 
 \section{Selectively inhibiting data browsing}
 % -------------------------------------------------------------------------
 
-In some cases, it is desirable not to browse part of the data. This is the case when a given class contains non-normalized data, i.e. data that occurs elsewhere and will be browsed in another class instance.
+In some cases, it is desirable not to browse part of the data. This is the case when a given class   contains non-normalized data, i.e. data that occurs elsewhere and will be browsed in another class   instance.
 
 For example, \class{msrMultipleFullBarRests} contains \class{msrMeasure} instances. \class{msrScore} contains:
 \begin{lstlisting}[language=CPlusPlus]

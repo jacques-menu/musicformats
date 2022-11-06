@@ -104,7 +104,7 @@ S_msrScore translateMsrToMsr (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 
@@ -231,7 +231,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
     passNumber,
     passDescription,
-    mfTimingItem::kMandatory,
+    mfTimingItemKind::kMandatory,
     startClock,
     endClock);
 

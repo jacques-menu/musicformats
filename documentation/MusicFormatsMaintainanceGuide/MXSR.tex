@@ -61,14 +61,14 @@ An exemple is:
 
 These two classes are defined in \elementsBoth{xml}:
 \begin{lstlisting}[language=CPlusPlus]
-class xmlelement;
-class xmlattribute;
+class   xmlelement;
+class   xmlattribute;
 
 typedef SMARTP<xmlattribute> 	Sxmlattribute;
 typedef SMARTP<xmlelement> 		Sxmlelement;
 \end{lstlisting}
 
-Class {\tt xmlattribute} contains:
+class   {\tt xmlattribute} contains:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
 class EXP xmlattribute : public smartable {
@@ -87,7 +87,7 @@ class EXP xmlattribute : public smartable {
 		operator float () const;
 \end{lstlisting}
 
-Class {\tt xmlelement} contains:
+class   {\tt xmlelement} contains:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP xmlelement : public ctree<xmlelement>, public visitable
 {
@@ -153,7 +153,7 @@ jacquesmenu@macmini: ~/musicformats-git-dev/libmusicxml/dtds/3.1/schema > ls -sa
 
 The first result of running \templates{elements.bash} is an anonymous \enumType\ defined in \elements{elements.h}:
 \begin{lstlisting}[language=CPlusPlus]
-enum {
+enum class {
 	kNoElement,
 	kComment,
 	kProcessingInstruction,
@@ -180,7 +180,7 @@ The constants {\tt kNoElement}, {\tt kComment} and {\tt kProcessingInstruction} 
 
 All the \mxml\ classes are instantiated from the {\tt musicxml} template class, defined in \elements{types.h}. This is where {\tt fType} gets its value:
 \begin{lstlisting}[language=CPlusPlus]
-template <int elt> class musicxml : public xmlelement
+template <int elt> class   musicxml : public xmlelement
 {
   protected:
     musicxml (int inputLineNumber) : xmlelement (inputLineNumber)	{ fType = elt; }
@@ -248,10 +248,10 @@ factory::factory()
 }
 \end{lstlisting}
 
-Class {\tt newElementFunctor} is defined in {\tt } to provide call operator as:
+class   {\tt newElementFunctor} is defined in {\tt } to provide call operator as:
 \begin{lstlisting}[language=CPlusPlus]
 template<int elt>
-class newElementFunctor : public functor<Sxmlelement>
+class   newElementFunctor : public functor<Sxmlelement>
 {
   public:
 

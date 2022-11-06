@@ -21,7 +21,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 /*
   Parts and part groups can be found in part groups,
-  hence class msrBookElement
+  hence class   msrBookElement
 */
 
 class EXP msrBookElement : public msrElement

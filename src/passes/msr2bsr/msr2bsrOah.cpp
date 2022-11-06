@@ -142,7 +142,7 @@ when Braille creates the score.)",
 
   // facsimile
 
-  fFacSimileKind = kFacSimileNo;
+  fFacSimileKind = bsrFacSimileKind::kFacSimileNo;
 
   subGroup->
     appendAtomToSubGroup (
@@ -312,7 +312,7 @@ ostream& operator << (ostream& os, const S_msr2bsrOahGroup& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

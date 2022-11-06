@@ -12,13 +12,13 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class msrBeatRepeat;
+class   msrBeatRepeat;
 typedef SMARTP<msrBeatRepeat> S_msrBeatRepeat;
 
-class msrVoice;
+class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
 
-class msrSegment;
+class   msrSegment;
 typedef SMARTP<msrSegment> S_msrSegment;
 
 //______________________________________________________________________________
@@ -206,22 +206,22 @@ class EXP msrBeatRepeat : public msrSegmentElement
     // data types
     // ------------------------------------------------------
 
-    enum msrBeatRepeatKind {
+    enum class msrBeatRepeatKind {
       k_NoBeatRepeat,
       kStartBeatRepeat, kStopBeatRepeat
     };
 
-    static string beatRepeatKindAsString (
+    string beatRepeatKindAsString (
       msrBeatRepeatKind beatRepeatKind);
 
-    enum msrBeatRepeatBuildPhaseKind {
+    enum class msrBeatRepeatBuildPhaseKind {
       kBeatRepeatBuildPhaseJustCreated,
       kBeatRepeatBuildPhaseInPattern,
       kBeatRepeatBuildPhaseInReplicas,
       kBeatRepeatBuildPhaseCompleted
     };
 
-    static string beatRepeatBuildPhaseKindAsString (
+    string beatRepeatBuildPhaseKindAsString (
       msrBeatRepeatBuildPhaseKind beatRepeatBuildPhaseKind);
 
     // creation from MusicXML

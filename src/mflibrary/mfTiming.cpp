@@ -21,12 +21,36 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string mfTimingItemKindAsString (
+  mfTimingItemKind imingItemKind)
+{
+  string result;
+
+  switch (imingItemKind) {
+    case mfTimingItemKind::kMandatory:
+      result = "kMandatory";
+      break;
+    case mfTimingItemKind::kOptional:
+      result = "kOptional";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const mfTimingItemKind& elt)
+{
+  os << mfTimingItemKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 mfTimingItemsList mfTimingItemsList::gGlobalTimingItemsList;
 
 S_timingItem mfTimingItem::createTimingItem (
   const string&  activity,
   const string&  description,
-  timingItemKind kind,
+  mfTimingItemKind kind,
   clock_t        startClock,
   clock_t        endClock)
 {
@@ -43,7 +67,7 @@ S_timingItem mfTimingItem::createTimingItem (
 mfTimingItem::mfTimingItem (
   const string&  activity,
   const string&  description,
-  timingItemKind kind,
+  mfTimingItemKind kind,
   clock_t        startClock,
   clock_t        endClock)
 {
@@ -60,13 +84,12 @@ mfTimingItemsList::mfTimingItemsList ()
 mfTimingItemsList::~mfTimingItemsList ()
 {}
 
-
 void mfTimingItemsList::appendTimingItem (
-  const string&              activity,
-  const string&              description,
-  mfTimingItem::timingItemKind kind,
-  clock_t                    startClock,
-  clock_t                    endClock)
+  const string&     activity,
+  const string&     description,
+  mfTimingItemKind kind,
+  clock_t           startClock,
+  clock_t            endClock)
 {
   S_timingItem
     mfTimingItem =
@@ -122,11 +145,11 @@ void mfTimingItemsList::doPrint (ostream& os) const
       setw (descriptionWidth) << theTimingItem->getDescription () << "  ";
 
     switch (theTimingItem->getKind ()) {
-      case mfTimingItem::kMandatory:
+      case mfTimingItemKind::kMandatory:
         totalMandatoryClock += timingItemClock;
         os << setw (kindWidth) << "mandatory";
         break;
-      case mfTimingItem::kOptional:
+      case mfTimingItemKind::kOptional:
         totalOptionalClock += timingItemClock;
         os << setw (kindWidth) << "optional";
         break;

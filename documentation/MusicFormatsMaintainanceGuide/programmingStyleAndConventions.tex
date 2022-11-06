@@ -37,7 +37,7 @@ total 200
  8 -rw-r--r--@  1 jacquesmenu  staff   3726 Oct  8 08:21:09 2021 mfTiming.h
 \end{lstlisting}
 
-The files {\tt *Elements.h/.cpp} contain base classes to variants, such as \lpsrBoth{lpsrElements}, whose {\tt lpsrElement} class is used in a number of other files:
+The files {\tt *Elements.h/.cpp} contain base classes to variants, such as \lpsrBoth{lpsrElements}, whose {\tt lpsrElement} class   is used in a number of other files:
 \begin{lstlisting}[language=Terminal]
 jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r 'public lpsrElement' *
 formats/lpsr/lpsrStaves.h:29:class EXP lpsrNewStaffgroupBlock : public lpsrElement
@@ -204,11 +204,11 @@ The few uses of {\tt auto} declarations are in range-based {\tt for} loops over 
 \Class{mfEnumAll} is defined in \mfutilities{mfEnumAll.h} as:
 \begin{lstlisting}[language=CPlusPlus]
 template< typename T >
-class mfEnumAll
+class   mfEnumAll
 {
   public:
 
-    class Iterator
+    class   Iterator
     {
       public:
 
@@ -282,13 +282,13 @@ EXP S_mxsrOahGroup createGlobalMxsrOahGroup ();
 
 \libmusicxml\ provides what \fober\ named smart pointers, because:
 \begin{itemize}
-\item a smart pointer is an instance of a class that contains the actual pointer in the usual C++ sense;
+\item a smart pointer is an instance of a class   that contains the actual pointer in the usual C++ sense;
 \item the actual pointer is guaranteed to be initialized to {\tt nullptr};
 \item garbage collection is implicit, using reference counts.
 \end{itemize}
 The definitions are in \lib{smartpointer.h}.
 
-The reference counting is done in class {\tt smartable}:
+The reference counting is done in class   {\tt smartable}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP smartable {
 	private:
@@ -309,8 +309,8 @@ class EXP smartable {
 		smartable& operator=(const smartable&) { return *this; }
 };
 
-A smart pointer type is created with template class {\tt SMARTP}, for example:
-template<class T> class SMARTP {
+A smart pointer type is created with template class   {\tt SMARTP}, for example:
+template<class   T> class   SMARTP {
 class EXP msrElement : public smartable
 {
 	// ... ... ...
@@ -325,7 +325,7 @@ Smart pointer type name belonging to \fober's work can be told from those of \mf
 \item in \mf, they start with '{\tt S_}', such as {\tt S_oahHandler}.
 \end{itemize}
 
-Inheriting from class {\tt smartable} is used to create smart pointer types, as in \wae{waeHandlers.h}:
+Inheriting from class   {\tt smartable} is used to create smart pointer types, as in \wae{waeHandlers.h}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP waeHandler : public smartable
 {
@@ -394,11 +394,11 @@ Indentation is done by two spaces, avoiding TAB characters.
 In {\tt *.h} files, the classes declarations contain all of part of the following:
 \begin{itemize}
 \item public data types, usually \enumType s, if any;
-\item public static class \methodName{create*} methods, except for pure virtual classes, in which case they are commented out;
+\item public static class   \methodName{create*} methods, except for pure virtual classes, in which case they are commented out;
 \item constructors ad destructor;
 \item public \methodName{set*} and \methodName{get*} methods;
 \item public services if any;
-\item public visiting methods, i.e. \methodName{acceptIn}, \methodName{acceptOut} and \methodName{browseData}, if the class contains browsable data such as STL lists, vectors, maps and sets;
+\item public visiting methods, i.e. \methodName{acceptIn}, \methodName{acceptOut} and \methodName{browseData}, if the class   contains browsable data such as STL lists, vectors, maps and sets;
 \item public print methods, such as \methodName{asString} and \methodName{print};
 \item private methods if any;
 \item private fields.
@@ -406,9 +406,9 @@ In {\tt *.h} files, the classes declarations contain all of part of the followin
 \item private work fields.
 \end{itemize}
 
-A work method is used internally by the class, while a work field is one that evolves as the class contents is populated.
+A work method is used internally by the class, while a work field is one that evolves as the class   contents is populated.
 
-Most class declarations are followed by a smart pointer type and a {\tt operator <<}, such as:
+Most class   declarations are followed by a smart pointer type and a {\tt operator <<}, such as:
 \begin{lstlisting}[language=CPlusPlus]
 typedef SMARTP<msrHarmonyDegree> S_msrHarmonyDegree;
 EXP ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt);
@@ -466,7 +466,7 @@ or
     map<string, Sxmlelement>  fPartMeasureNumbersToElementsMap;
 \end{lstlisting}
 
-All \methodName{create*} methods create class instances, and are paired with an explicit constructor with the same parameters:
+All \methodName{create*} methods create class   instances, and are paired with an explicit constructor with the same parameters:
 \begin{lstlisting}[language=CPlusPlus]
     // creation from MusicXML
     // ------------------------------------------------------
@@ -639,10 +639,10 @@ void mxsr2msrTranslator::visitEnd ( S_accordion_registration& elt )
 __declspec(dllexport) void __cdecl Function1(void);
 \end{lstlisting}
 
-\item to export all of the public data members and member functions in a class, the keyword must appear to the left of the class name as follows:
+\item to export all of the public data members and member functions in a class, the keyword must appear to the left of the class   name as follows:
 \begin{lstlisting}[language=CPlusPlus]
-class __declspec(dllexport) CExampleExport : public CObject
-{ ... class definition ... };
+class   __declspec(dllexport) CExampleExport : public CObject
+{ ... class   definition ... };
 \end{lstlisting}
 
 \end{itemize}
@@ -728,7 +728,7 @@ The passes and converters in \mf\ convert formats of scores from one format to a
     int                   fInputLineNumber;
 \end{lstlisting}
 
-An input line number in the {\tt xmlelement} class is the only thing that has had to be added to \libmusicxml\ for the needs of \mf.
+An input line number in the {\tt xmlelement} class   is the only thing that has had to be added to \libmusicxml\ for the needs of \mf.
 
 Also, many methods contain an {\tt int inputLineNumber} parameter, which is always the first one:
 \begin{lstlisting}[language=CPlusPlus]
@@ -787,7 +787,7 @@ This helps locating such occurrences in the debug process.
 
 They are used for:
 \begin{itemize}
-\item classes methods such as \method{msrTie}{create}, \method{msrTempo}{createTempoPerMinute} and \method{msrTemp}{tempoKindAsString};
+\item classes methods such as \method{msrTie}{create}, \method{msrTempo}{createTempoPerMinute} and \method{msrTemp}{msrTempoKindAsString};
 
 \item classes constant fields such as \constant{msrStanza}{K_NO_STANZA_NUMBER}, to be prefered to C-style {\tt \#define} preprocessor specifications for type safety;
 
@@ -843,7 +843,7 @@ Enumeration constants in the form {\tt k_No*} are used to indicate a value that 
 An enumeration constant may end in '{\tt None}', meaning that {\tt "[NONE]"} is actually a possible value for the corresponding type:
 \begin{lstlisting}[language=CPlusPlus]
     // repeat winged
-    enum msrBarLineRepeatWingedKind {
+    enum class msrBarLineRepeatWingedKind {
       kBarLineRepeatWingedNone,
 
       kBarLineRepeatWingedStraight, kBarLineRepeatWingedCurved,
@@ -1095,18 +1095,18 @@ enum class msrHarmonyKind {
 };
 \end{lstlisting}
 
-Class {\tt mfEnumAll} is defined in \mfutilities{mfEnumAll.h}:
+class   {\tt mfEnumAll} is defined in \mfutilities{mfEnumAll.h}:
 \begin{lstlisting}[language=CPlusPlus]
 //______________________________________________________________________________
 /*
   https://stackoverflow.com/questions/8498300/allow-for-range-based-for-with-enum-classes
 */
 template< typename T >
-class mfEnumAll
+class   mfEnumAll
 {
   public:
 
-    class Iterator
+    class   Iterator
     {
       public:
 
@@ -1182,12 +1182,12 @@ The {\tt mfEnumAll} template class, defined in \mfutilities{mfEnumAll.h} can the
 
 All such \class{Enum*} classes in \mf\ are:
 \begin{lstlisting}[language=Terminal]
-jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r 'class Enum' *
-formats/msdl/msdlTokens.h:class EnumNonSeparators
-formats/msdl/msdlTokens.h:class EnumLanguageIndependent
-formats/msdl/msdlTokens.h:class EnumLanguageDependent
-formats/msr/msrBasicTypes.h:class EnumTrueHarmonies
-utilities/mfutilities.h:class mfEnumAll
+jacquesmenu@macmini: ~/musicformats-git-dev/src > grep -r 'class   Enum' *
+formats/msdl/msdlTokens.h:class   EnumNonSeparators
+formats/msdl/msdlTokens.h:class   EnumLanguageIndependent
+formats/msdl/msdlTokens.h:class   EnumLanguageDependent
+formats/msr/msrBasicTypes.h:class   EnumTrueHarmonies
+utilities/mfutilities.h:class   mfEnumAll
 \end{lstlisting}
 
 For example \class{EnumTrueHarmonies}, that relies on \constant{msrHarmonyKind}{TrueHarmoniesFirst} and\\
@@ -1224,7 +1224,7 @@ void msrHarmonyStructure::printAllHarmoniesStructures (ostream& os)
 % -------------------------------------------------------------------------
 
 \mf\ uses rationals for notes sounding and display whole notes and positions in measures, among others.
-Class {\tt rational} is defined by \libmusicxml\ in \libBoth{rational}:
+class   {\tt rational} is defined by \libmusicxml\ in \libBoth{rational}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP rational {
 
@@ -1257,7 +1257,7 @@ The guide lines for \mf\ in this matter are:
 \begin{itemize}
 \item smart pointers are initialized to {\tt nullptr} in the \class{SMARTP} constructor (they're smart after all), defined by \libmusicxml\ in \lib{smartpointer.h}:
 \begin{lstlisting}[language=CPlusPlus]
-template<class T> class SMARTP {
+template<class   T> class   SMARTP {
 	private:
 		//! the actual pointer to the class
 		T* fSmartPtr;
@@ -1269,7 +1269,7 @@ template<class T> class SMARTP {
 	// ... ... ...
 \end{lstlisting}
 
-\item all variables and classes fields of non-class types, such as {\tt int}, {\tt float} and \enumType s, are to be initialized explicitly;
+\item all variables and classes fields of non-class   types, such as {\tt int}, {\tt float} and \enumType s, are to be initialized explicitly;
 
 \item \mf\ functions\index{functions} and methods parameters never have default values: overloading is used instead.
 \end{itemize}
@@ -1311,11 +1311,11 @@ One case is that of \class{msrTempo} in \msrBoth{msrTempos}, because calls to th
 
     static SMARTP<msrTempo> createTempoNotesRelationship (
       int               inputLineNumber,
-      S_msrTempoNotesRelationshipshipElements
+      S_msrTempoNotesRelationshipElements
                         tempoNotesRelationshipLeftElements,
       msrTempoNotesRelationshipKind
                         tempoNotesRelationshipKind,
-      S_msrTempoNotesRelationshipshipElements
+      S_msrTempoNotesRelationshipElements
                         tempoNotesRelationshipRightElements,
       msrTempoParenthesizedKind
                         tempoParenthesizedKind,
@@ -1384,7 +1384,7 @@ S_msrStaff msrSegment::fetchSegmentUpLinkToStaff () const
 }
 \end{lstlisting}
 
-Some methods exist in two versions, the second one with a \code{NonConst} suffix in the name. This can be the case if a private class field is to be modified outside the class, or if there are specific needs.
+Some methods exist in two versions, the second one with a \code{NonConst} suffix in the name. This can be the case if a private class   field is to be modified outside the class, or if there are specific needs.
 
 This happens for example in \msrBoth{mfslNotes}:
 \begin{lstlisting}[language=CPlusPlus]
@@ -1499,7 +1499,7 @@ msrPlacementKind msrPlacementKindFromString (
 \end{lstlisting}
 
 \begin{lstlisting}[language=CPlusPlus]
-string placementKindAsString (
+string msrPlacementKindAsString (
   msrPlacementKind placementKind)
 {
   string result;
@@ -1735,7 +1735,7 @@ In some cases, two classes have to know about each other, such as \className{msr
 
 Handling such a \Main{mutual dependency} in C++ is rather easy if both classes are declared in one and the same \code{.h} file, with a \Main{pre-declaration} of one of them before the other one is declared, such as:
 \begin{lstlisting}[language=CPlusPlus]
-class msrPartGroup;
+class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 \end{lstlisting}
 
@@ -1752,7 +1752,7 @@ In the case of part groups, \msr{msrPartGroups.h} contains:
 
 // ... ... ...
 
-class msrPartGroup;
+class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 
 // ... ... ...
@@ -1786,7 +1786,7 @@ Then, \msr{msrPartGroupsElements.h} contains:
 \begin{lstlisting}[language=CPlusPlus]
 /*
   Parts and part groups can be found in part groups,
-  hence class msrPartGroupElement
+  hence class   msrPartGroupElement
 */
 
 class EXP msrPartGroupElement : public msrElement
@@ -1884,7 +1884,7 @@ This is the case of notes, chords, tuplets and grace notes groups:
 \item a double tremolo is standalone in a measure.
 \end{itemize}
 
-\Class{msrDoubleTremolo} is a sub-class of \className{msrMeasureElement}.
+\Class{msrDoubleTremolo} is a sub-class   of \className{msrMeasureElement}.
 
 Regarding classes \className{msrNote}, \className{msrChord} and \className{msrTuplet}:
 \begin{itemize}
@@ -1897,7 +1897,7 @@ This leads to the following hierarchy:
 \begin{itemize}
 \item \className{msrNote}, \className{msrChord} and \className{msrTuplet} are direct sub-classes of \class{msrTupletElement}
 
-\item \class{msrTupletElement} is a direct sub-class of \className{msrMeasureElement}.
+\item \class{msrTupletElement} is a direct sub-class   of \className{msrMeasureElement}.
 \end{itemize}
 
 This rather complex situation is depicted at the bottom of \figureRef{The MSR classes hierarchy}.
@@ -1914,11 +1914,11 @@ There are currently few templates in the \mf\ code base, namely:
 \item some exist for enumeration types, such as:
 \begin{lstlisting}[language=CPlusPlus]
 template< typename T >
-class EnumNonSeparators
+class   EnumNonSeparators
 {
   public:
 
-    class Iterator
+    class   Iterator
     {
       public:
 

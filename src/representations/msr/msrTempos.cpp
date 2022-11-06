@@ -264,7 +264,7 @@ msrTempoTuplet::msrTempoTuplet (
 msrTempoTuplet::~msrTempoTuplet ()
 {}
 
-string msrTempoTuplet::tempoTupletTypeKindAsString (
+string msrTempoTuplet::msrTempoTupletTypeKindAsString (
   msrTempoTupletTypeKind tempoTupletTypeKind)
 {
   string result;
@@ -284,7 +284,13 @@ string msrTempoTuplet::tempoTupletTypeKindAsString (
   return result;
 }
 
-string msrTempoTuplet::tempoTupletBracketKindAsString (
+ostream& operator << (ostream& os, const msrTempoTupletTypeKind& elt)
+{
+  os << msrTempoTupletTypeKindAsString (elt);
+  return os;
+}
+
+string msrTempoTuplet::msrTempoTupletBracketKindAsString (
   msrTempoTupletBracketKind tempoTupletBracketKind)
 {
   string result;
@@ -301,7 +307,13 @@ string msrTempoTuplet::tempoTupletBracketKindAsString (
   return result;
 }
 
-string msrTempoTuplet::tempoTupletShowNumberKindAsString (
+ostream& operator << (ostream& os, const msrTempoTupletBracketKind& elt)
+{
+  os << msrTempoTupletBracketKindAsString (elt);
+  return os;
+}
+
+string msrTempoTuplet::msrTempoTupletShowNumberKindAsString (
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind)
 {
   string result;
@@ -319,6 +331,12 @@ string msrTempoTuplet::tempoTupletShowNumberKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrTempoTupletShowNumberKind& elt)
+{
+  os << msrTempoTupletShowNumberKindAsString (elt);
+  return os;
 }
 
 void msrTempoTuplet::addTempoNoteToTempoTuplet (S_msrTempoNote tempoNote)
@@ -711,12 +729,12 @@ void msrTempoTuplet::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "TempoTupletBracketKind" << " : " <<
-    tempoTupletBracketKindAsString (
+    msrTempoTupletBracketKindAsString (
       fTempoTupletBracketKind) <<
     endl <<
     setw (fieldWidth) <<
     "TempoTupletShowNumberKind" << " : " <<
-    tempoTupletShowNumberKindAsString (
+    msrTempoTupletShowNumberKindAsString (
       fTempoTupletShowNumberKind) <<
     endl <<
     setw (fieldWidth) <<
@@ -779,33 +797,33 @@ ostream& operator << (ostream& os, const S_msrTempoTuplet& elt)
 }
 
 //______________________________________________________________________________
-S_msrTempoNotesRelationshipshipElements msrTempoNotesRelationshipshipElements::create (
+S_msrTempoNotesRelationshipElements msrTempoNotesRelationshipElements::create (
   int      inputLineNumber,
-  msrTempoNotesRelationshipshipElementsKind
-           tempoNotesRelationshipshipElementsKind)
+  msrTempoNotesRelationshipElementsKind
+           tempoNotesRelationshipElementsKind)
 {
-  msrTempoNotesRelationshipshipElements * o =
-    new msrTempoNotesRelationshipshipElements (
+  msrTempoNotesRelationshipElements * o =
+    new msrTempoNotesRelationshipElements (
       inputLineNumber,
-      tempoNotesRelationshipshipElementsKind);
+      tempoNotesRelationshipElementsKind);
   assert (o != nullptr);
 
   return o;
 }
 
-msrTempoNotesRelationshipshipElements::msrTempoNotesRelationshipshipElements (
+msrTempoNotesRelationshipElements::msrTempoNotesRelationshipElements (
   int      inputLineNumber,
-  msrTempoNotesRelationshipshipElementsKind
-           tempoNotesRelationshipshipElementsKind)
+  msrTempoNotesRelationshipElementsKind
+           tempoNotesRelationshipElementsKind)
     : msrElement (inputLineNumber)
 {
-  fTempoNotesRelationshipshipElementsKind = tempoNotesRelationshipshipElementsKind;
+  fTempoNotesRelationshipElementsKind = tempoNotesRelationshipElementsKind;
 }
 
-msrTempoNotesRelationshipshipElements::~msrTempoNotesRelationshipshipElements ()
+msrTempoNotesRelationshipElements::~msrTempoNotesRelationshipElements ()
 {}
 
-void msrTempoNotesRelationshipshipElements::addElementToTempoNotesRelationshipshipElements (
+void msrTempoNotesRelationshipElements::addElementToTempoNotesRelationshipElements (
   S_msrElement element)
 {
 #ifdef TRACING_IS_ENABLED
@@ -818,61 +836,61 @@ void msrTempoNotesRelationshipshipElements::addElementToTempoNotesRelationshipsh
   }
 #endif
 
-  fTempoNotesRelationshipshipElementsList.push_back (element);
+  fTempoNotesRelationshipElementsList.push_back (element);
 }
 
-void msrTempoNotesRelationshipshipElements::acceptIn (basevisitor* v)
+void msrTempoNotesRelationshipElements::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "% ==> msrTempoNotesRelationshipshipElements::acceptIn ()" <<
+      "% ==> msrTempoNotesRelationshipElements::acceptIn ()" <<
       endl;
   }
 
-  if (visitor<S_msrTempoNotesRelationshipshipElements>*
+  if (visitor<S_msrTempoNotesRelationshipElements>*
     p =
-      dynamic_cast<visitor<S_msrTempoNotesRelationshipshipElements>*> (v)) {
-        S_msrTempoNotesRelationshipshipElements elem = this;
+      dynamic_cast<visitor<S_msrTempoNotesRelationshipElements>*> (v)) {
+        S_msrTempoNotesRelationshipElements elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
-            "% ==> Launching msrTempoNotesRelationshipshipElements::visitStart ()" <<
+            "% ==> Launching msrTempoNotesRelationshipElements::visitStart ()" <<
             endl;
         }
         p->visitStart (elem);
   }
 }
 
-void msrTempoNotesRelationshipshipElements::acceptOut (basevisitor* v)
+void msrTempoNotesRelationshipElements::acceptOut (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
     gLogStream <<
-      "% ==> msrTempoNotesRelationshipshipElements::acceptOut ()" <<
+      "% ==> msrTempoNotesRelationshipElements::acceptOut ()" <<
       endl;
   }
 
-  if (visitor<S_msrTempoNotesRelationshipshipElements>*
+  if (visitor<S_msrTempoNotesRelationshipElements>*
     p =
-      dynamic_cast<visitor<S_msrTempoNotesRelationshipshipElements>*> (v)) {
-        S_msrTempoNotesRelationshipshipElements elem = this;
+      dynamic_cast<visitor<S_msrTempoNotesRelationshipElements>*> (v)) {
+        S_msrTempoNotesRelationshipElements elem = this;
 
         if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
           gLogStream <<
-            "% ==> Launching msrTempoNotesRelationshipshipElements::visitEnd ()" <<
+            "% ==> Launching msrTempoNotesRelationshipElements::visitEnd ()" <<
             endl;
         }
         p->visitEnd (elem);
   }
 }
 
-void msrTempoNotesRelationshipshipElements::browseData (basevisitor* v)
+void msrTempoNotesRelationshipElements::browseData (basevisitor* v)
 {
   // browse the elements list
-  if (fTempoNotesRelationshipshipElementsList.size ()) {
+  if (fTempoNotesRelationshipElementsList.size ()) {
     for (
       list<S_msrElement>::const_iterator i =
-        fTempoNotesRelationshipshipElementsList.begin ();
-      i != fTempoNotesRelationshipshipElementsList.end ();
+        fTempoNotesRelationshipElementsList.begin ();
+      i != fTempoNotesRelationshipElementsList.end ();
       ++i
   ) {
       // browse the element
@@ -882,63 +900,69 @@ void msrTempoNotesRelationshipshipElements::browseData (basevisitor* v)
   }
 }
 
-string msrTempoNotesRelationshipshipElements::asString () const
+string msrTempoNotesRelationshipElements::asString () const
 {
   stringstream s;
 
   s <<
-    "TempoNotesRelationshipshipElements" <<
-    ", fTempoNotesRelationshipshipElementsKind = " << fTempoNotesRelationshipshipElementsKind;
+    "TempoNotesRelationshipElements" <<
+    ", fTempoNotesRelationshipElementsKind = " << fTempoNotesRelationshipElementsKind;
 
   return s.str ();
 }
 
-string msrTempoNotesRelationshipshipElements::tempoNotesRelationshipshipElementsKindAsString (
-  msrTempoNotesRelationshipshipElementsKind tempoNotesRelationshipshipElementsKind)
+string msrTempoNotesRelationshipElementsKindAsString (
+  msrTempoNotesRelationshipElementsKind tempoNotesRelationshipElementsKind)
 {
   string result;
 
-  switch (tempoNotesRelationshipshipElementsKind) {
-    case msrTempoNotesRelationshipshipElements::kTempoNotesRelationshipshipElementsLeft:
-      result = "tempoNotesRelationshipshipElementsLeft";
+  switch (tempoNotesRelationshipElementsKind) {
+    case msrTempoNotesRelationshipElements::kTempoNotesRelationshipElementsLeft:
+      result = "tempoNotesRelationshipElementsLeft";
       break;
-    case msrTempoNotesRelationshipshipElements::kTempoNotesRelationshipshipElementsRight:
-      result = "tempoNotesRelationshipshipElementsRight";
+    case msrTempoNotesRelationshipElements::kTempoNotesRelationshipElementsRight:
+      result = "tempoNotesRelationshipElementsRight";
       break;
   } // switch
 
   return result;
 }
 
-void msrTempoNotesRelationshipshipElements::print (ostream& os) const
+ostream& operator << (ostream& os, const msrTempoNotesRelationshipElementsKind& elt)
+{
+  os << msrTempoNotesRelationshipElementsKindAsString (elt);
+  return os;
+}
+
+void msrTempoNotesRelationshipElements::print (ostream& os) const
 {
   os <<
-    "[TempoNotesRelationshipshipElements" <<
+    "[TempoNotesRelationshipElements" <<
     ", line " << fInputLineNumber <<
     endl;
 
   ++gIndenter;
 
   os <<
-    "tempoNotesRelationshipshipElementsKindAsString : " <<
-    tempoNotesRelationshipshipElementsKindAsString (
-      fTempoNotesRelationshipshipElementsKind) <<
+    "msrTempoNotesRelationshipElementsKindAsString : " <<
+    msrTempoNotesRelationshipElementsKindAsString (
+      fTempoNotesRelationshipElementsKind) <<
     endl;
 
   const int fieldWidth = 26;
 
   os << left <<
     setw (fieldWidth) <<
-    "tempoNotesRelationshipshipElementsList";
+    "tempoNotesRelationshipElementsList";
 
-    if (fTempoNotesRelationshipshipElementsList.size ()) {
+    if (fTempoNotesRelationshipElementsList.size ()) {
       ++gIndenter;
 
       os << endl;
 
       list<S_msrElement>::const_iterator
-        iBegin = fTempoNotesRelationshipshipElementsList.begin (),
-        iEnd   = fTempoNotesRelationshipshipElementsList.end (),
+        iBegin = fTempoNotesRelationshipElementsList.begin (),
+        iEnd   = fTempoNotesRelationshipElementsList.end (),
         i      = iBegin;
 
       for ( ; ; ) {
@@ -960,7 +984,7 @@ void msrTempoNotesRelationshipshipElements::print (ostream& os) const
   os << ']' << endl;
 }
 
-ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipshipElements& elt)
+ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipElements& elt)
 {
   if (elt) {
     elt->print (os);
@@ -1038,11 +1062,11 @@ S_msrTempo msrTempo::createTempoBeatUnitEquivalent (
 S_msrTempo msrTempo::createTempoNotesRelationship (
   int               inputLineNumber,
   S_msrMeasure      upLinkToMeasure,
-  S_msrTempoNotesRelationshipshipElements
+  S_msrTempoNotesRelationshipElements
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
                     tempoNotesRelationshipKind,
-  S_msrTempoNotesRelationshipshipElements
+  S_msrTempoNotesRelationshipElements
                     tempoNotesRelationshipRightElements,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1146,11 +1170,11 @@ msrTempo::msrTempo (
 msrTempo::msrTempo (
   int               inputLineNumber,
   S_msrMeasure      upLinkToMeasure,
-  S_msrTempoNotesRelationshipshipElements
+  S_msrTempoNotesRelationshipElements
                     tempoNotesRelationshipLeftElements,
   msrTempoNotesRelationshipKind
                     tempoNotesRelationshipKind,
-  S_msrTempoNotesRelationshipshipElements
+  S_msrTempoNotesRelationshipElements
                     tempoNotesRelationshipRightElements,
   msrTempoParenthesizedKind
                     tempoParenthesizedKind,
@@ -1224,29 +1248,29 @@ void msrTempo::acceptOut (basevisitor* v)
 void msrTempo::browseData (basevisitor* v)
 {
   switch (fTempoKind) {
-    case msrTempo::k_NoTempoKind:
+    case msrTempoKind::k_NoTempoKind:
       break;
 
-    case msrTempo::kTempoBeatUnitsWordsOnly:
+    case msrTempoKind::kTempoBeatUnitsWordsOnly:
       break;
 
-    case msrTempo::kTempoBeatUnitsPerMinute:
+    case msrTempoKind::kTempoBeatUnitsPerMinute:
       break;
 
-    case msrTempo::kTempoBeatUnitsEquivalence:
+    case msrTempoKind::kTempoBeatUnitsEquivalence:
       break;
 
-    case msrTempo::kTempoNotesRelationship:
+    case msrTempoKind::kTempoNotesRelationship:
       {
         // browse the left elements
         if (fTempoNotesRelationshipLeftElements) {
-          msrBrowser<msrTempoNotesRelationshipshipElements> browser (v);
+          msrBrowser<msrTempoNotesRelationshipElements> browser (v);
           browser.browse (*fTempoNotesRelationshipLeftElements);
         }
 
         // browse the right elements
         if (fTempoNotesRelationshipRightElements) {
-          msrBrowser<msrTempoNotesRelationshipshipElements> browser (v);
+          msrBrowser<msrTempoNotesRelationshipElements> browser (v);
           browser.browse (*fTempoNotesRelationshipRightElements);
         }
       }
@@ -1254,25 +1278,25 @@ void msrTempo::browseData (basevisitor* v)
   } // switch
 }
 
-string msrTempo::tempoKindAsString (
+string msrTempo::msrTempoKindAsString (
   msrTempoKind tempoKind)
 {
   string result;
 
   switch (tempoKind) {
-    case msrTempo::k_NoTempoKind:
+    case msrTempoKind::k_NoTempoKind:
       result = "k_NoTempoKind???";
       break;
-    case msrTempo::kTempoBeatUnitsWordsOnly:
+    case msrTempoKind::kTempoBeatUnitsWordsOnly:
       result = "kTempoBeatUnitsWordsOnly";
       break;
-    case msrTempo::kTempoBeatUnitsPerMinute:
+    case msrTempoKind::kTempoBeatUnitsPerMinute:
       result = "kTempoBeatUnitsPerMinute";
       break;
-    case msrTempo::kTempoBeatUnitsEquivalence:
+    case msrTempoKind::kTempoBeatUnitsEquivalence:
       result = "kTempoBeatUnitsEquivalence";
       break;
-    case msrTempo::kTempoNotesRelationship:
+    case msrTempoKind::kTempoNotesRelationship:
       result = "kTempoNotesRelationship";
       break;
   } // switch
@@ -1280,16 +1304,22 @@ string msrTempo::tempoKindAsString (
   return result;
 }
 
-string msrTempo::tempoParenthesizedKindAsString (
+ostream& operator << (ostream& os, const msrTempoKind& elt)
+{
+  os << msrTempoKindAsString (elt);
+  return os;
+}
+
+string msrTempoParenthesizedKindAsString (
   msrTempoParenthesizedKind tempoParenthesizedKind)
 {
   string result;
 
   switch (tempoParenthesizedKind) {
-    case msrTempo::kTempoParenthesizedYes:
+    case msrTempoParenthesizedKind::kTempoParenthesizedYes:
       result = "kTempoParenthesizedYes";
       break;
-    case msrTempo::kTempoParenthesizedNo:
+    case msrTempoParenthesizedKind::kTempoParenthesizedNo:
       result = "kTempoParenthesizedNo";
       break;
   } // switch
@@ -1297,21 +1327,33 @@ string msrTempo::tempoParenthesizedKindAsString (
   return result;
 }
 
-string msrTempo::tempoNotesRelationshipKindAsString (
+ostream& operator << (ostream& os, const msrTempoParenthesizedKind& elt)
+{
+  os << msrTempoParenthesizedKindAsString (elt);
+  return os;
+}
+
+string msrTempoNotesRelationshipKindAsString (
   msrTempoNotesRelationshipKind tempoNotesRelationshipKind)
 {
   string result;
 
   switch (tempoNotesRelationshipKind) {
-    case msrTempo::kTempoNotesRelationshipEquals:
+    case msrTempoKind::kTempoNotesRelationshipEquals:
       result = "kTempoNotesRelationshipEquals";
       break;
-    case msrTempo::kTempoNotesRelationshipNone:
+    case msrTempoKind::kTempoNotesRelationshipNone:
       result = "kTempoNotesRelationshipNone";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrTempoNotesRelationshipKind& elt)
+{
+  os << msrTempoNotesRelationshipKindAsString (elt);
+  return os;
 }
 
 string msrTempo::tempoWordsListAsString (const string& separator) const
@@ -1337,8 +1379,8 @@ string msrTempo::asString () const
 
   s <<
     "[Tempo" <<
-    ", tempoKind: " << tempoKindAsString (fTempoKind) <<
-    ", tempoWordsList: ";
+    ", fTempoKind: " << fTempoKind <<
+    ", fTempoWordsList: ";
 
   if (fTempoWordsList.size ()) {
     list<S_msrWords>::const_iterator
@@ -1356,10 +1398,9 @@ string msrTempo::asString () const
   }
 
   s <<
-    ", tempoBeatUnit: " << fTempoBeatUnit.asString () <<
-    ", tempoPerMinute: " << fTempoPerMinute <<
-    ", tempoParenthesizedKind: "  <<
-    tempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
+    ", fTempoBeatUnit: " << fTempoBeatUnit.asString () <<
+    ", fTempoPerMinute: " << fTempoPerMinute <<
+    ", fTempoParenthesizedKind: " << fTempoParenthesizedKind <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -1372,7 +1413,7 @@ string msrTempo::asShortStringForMeasuresSlices () const
 
   s <<
     '[';
-//     ", tempoKind: " << tempoKindAsString (fTempoKind) <<
+//     ", tempoKind: " << msrTempoKindAsString (fTempoKind) <<
 //     ", tempoWordsList: ";
 //
 //   if (fTempoWordsList.size ()) {
@@ -1395,7 +1436,7 @@ string msrTempo::asShortStringForMeasuresSlices () const
     " = " <<
     fTempoPerMinute;
 //     ", tempoParenthesizedKind: "  <<
-//     tempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
+//     msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
 //     ", line " << fInputLineNumber;
 
   s << ']';
@@ -1416,7 +1457,7 @@ void msrTempo::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-   "fTempoKind" << " : " << tempoKindAsString (fTempoKind) <<
+   "fTempoKind" << " : " << msrTempoKindAsString (fTempoKind) <<
     endl;
 
   os << left <<
@@ -1470,7 +1511,7 @@ void msrTempo::print (ostream& os) const
 
     setw (fieldWidth) <<
     "tempoParenthesizedKind"  << " : " <<
-    tempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
+    msrTempoParenthesizedKindAsString (fTempoParenthesizedKind) <<
     endl;
 
   os << left <<
@@ -1496,7 +1537,7 @@ void msrTempo::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fTempoNotesRelationshipKind" << " : " <<
-    tempoNotesRelationshipKindAsString (
+    msrTempoNotesRelationshipKindAsString (
       fTempoNotesRelationshipKind) <<
     endl;
 
@@ -1523,7 +1564,7 @@ void msrTempo::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fTempoPlacementKind" << " : " <<
-    placementKindAsString (
+    msrPlacementKindAsString (
       fTempoPlacementKind) <<
     endl;
 

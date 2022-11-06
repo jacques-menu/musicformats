@@ -380,7 +380,7 @@ string msrPartGroup::getPartGroupCombinedNameWithoutEndOfLines () const
   s <<
     "\"" <<
     ", fPartGroupImplicitKind: " <<
-    partGroupImplicitKindAsString (
+    msrPartGroupImplicitKindAsString (
       fPartGroupImplicitKind);
 
   return s.str ();
@@ -1057,7 +1057,7 @@ void msrPartGroup::browseData (basevisitor* v)
   }
 }
 
-string partGroupImplicitKindAsString (
+string msrPartGroupImplicitKindAsString (
   msrPartGroupImplicitKind partGroupImplicitKind)
 {
   string result;
@@ -1074,7 +1074,13 @@ string partGroupImplicitKindAsString (
   return result;
 }
 
-string partGroupTypeKindAsString (
+ostream& operator << (ostream& os, const msrPartGroupImplicitKind& elt)
+{
+  os << msrPartGroupImplicitKindAsString (elt);
+  return os;
+}
+
+string msrPartGroupTypeKindAsString (
   msrPartGroupTypeKind partGroupTypeKind)
 {
   string result;
@@ -1094,7 +1100,13 @@ string partGroupTypeKindAsString (
   return result;
 }
 
-string partGroupSymbolKindAsString (
+ostream& operator << (ostream& os, const msrPartGroupTypeKind& elt)
+{
+  os << msrPartGroupTypeKindAsString (elt);
+  return os;
+}
+
+string msrPartGroupSymbolKindAsString (
   msrPartGroupSymbolKind partGroupSymbolKind)
 {
   string result;
@@ -1120,7 +1132,13 @@ string partGroupSymbolKindAsString (
   return result;
 }
 
-string partGroupBarLineKindAsString (
+ostream& operator << (ostream& os, const msrPartGroupSymbolKind& elt)
+{
+  os << msrPartGroupSymbolKindAsString (elt);
+  return os;
+}
+
+string msrPartGroupBarLineKindAsString (
   msrPartGroupBarLineKind partGroupBarLineKind)
 {
   string result;
@@ -1135,6 +1153,12 @@ string partGroupBarLineKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrPartGroupBarLineKind& elt)
+{
+  os << msrPartGroupBarLineKindAsString (elt);
+  return os;
 }
 
 string msrPartGroup::asString () const
@@ -1208,21 +1232,21 @@ void msrPartGroup::print (ostream& os) const
       endl <<
     setw (fieldWidth) <<
     "fPartGroupSymbolKind" << " : " <<
-    partGroupSymbolKindAsString (
+    msrPartGroupSymbolKindAsString (
       fPartGroupSymbolKind) <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
     "fPartGroupImplicitKind" << " : " <<
-    partGroupImplicitKindAsString (
+    msrPartGroupImplicitKindAsString (
       fPartGroupImplicitKind) <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
     "fPartGroupBarLineKind" << " : " <<
-    partGroupBarLineKindAsString (
+    msrPartGroupBarLineKindAsString (
       fPartGroupBarLineKind) <<
     endl;
 
@@ -1334,20 +1358,20 @@ void msrPartGroup::printSummary (ostream& os) const
       endl <<
     setw (fieldWidth) <<
     "fPartGroupSymbolKind" << " : \"" <<
-    partGroupSymbolKindAsString (
+    msrPartGroupSymbolKindAsString (
       fPartGroupSymbolKind) <<
     "\"" <<
     endl <<
 
     setw (fieldWidth) <<
     "fPartGroupImplicit" << " : " <<
-    partGroupImplicitKindAsString (
+    msrPartGroupImplicitKindAsString (
       fPartGroupImplicitKind) <<
     endl <<
 
     setw (fieldWidth) <<
     "fPartGroupBarLine" << " : " <<
-    partGroupBarLineKindAsString (
+    msrPartGroupBarLineKindAsString (
       fPartGroupBarLineKind) <<
     endl;
 

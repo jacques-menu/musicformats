@@ -133,7 +133,7 @@ void msrDynamic::print (ostream& os) const
     "Dynamics " <<
     msrDynamicKindAsString (fDynamicKind) <<
     ", dynamicPlacementKind: " <<
-    placementKindAsString (fDynamicPlacementKind) <<
+    msrPlacementKindAsString (fDynamicPlacementKind) <<
     ", line " << fInputLineNumber <<
     endl;
 }
@@ -236,7 +236,7 @@ string msrOtherDynamic::asString () const
     ", otherDynamicString: " <<
     fOtherDynamicsString <<
     ", otherDynamicPlacementKind: " <<
-    placementKindAsString (fOtherDynamicPlacementKind) <<
+    msrPlacementKindAsString (fOtherDynamicPlacementKind) <<
     "', line " << fInputLineNumber;
 
   return s.str ();
@@ -260,7 +260,7 @@ ostream& operator << (ostream& os, const S_msrOtherDynamic& elt)
 }
 
 //______________________________________________________________________________
-string crescDecrescKindAsString (
+string msrCrescDecrescKindAsString (
   msrCrescDecrescKind crescDecrescKind)
 {
   string result;
@@ -279,7 +279,7 @@ string crescDecrescKindAsString (
 
 ostream& operator << (ostream& os, const msrCrescDecrescKind& elt)
 {
-  os << crescDecrescKindAsString (elt);
+  os << msrCrescDecrescKindAsString (elt);
   return os;
 }
 
@@ -377,7 +377,7 @@ ostream& operator << (ostream& os, const S_msrCrescDecresc& elt)
 }
 
 //______________________________________________________________________________
-string wedgeKindAsString (
+string msrWedgeKindAsString (
   msrWedgeKind wedgeKind)
 {
   string result;
@@ -402,11 +402,11 @@ string wedgeKindAsString (
 
 ostream& operator << (ostream& os, const msrWedgeKind& elt)
 {
-  os << wedgeKindAsString (elt);
+  os << msrWedgeKindAsString (elt);
   return os;
 }
 
-string wedgeNienteKindAsString (
+string msrWedgeNienteKindAsString (
   msrWedgeNienteKind wedgeNienteKind)
 {
   string result;
@@ -425,7 +425,7 @@ string wedgeNienteKindAsString (
 
 ostream& operator << (ostream& os, const msrWedgeNienteKind& elt)
 {
-  os << wedgeNienteKindAsString (elt);
+  os << msrWedgeNienteKindAsString (elt);
   return os;
 }
 
@@ -526,7 +526,7 @@ void msrWedge::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "wedgeNienteKind" << " : " <<
-    wedgeNienteKindAsString (
+    msrWedgeNienteKindAsString (
       fWedgeNienteKind) <<
     endl <<
     setw (fieldWidth) <<
@@ -536,7 +536,7 @@ void msrWedge::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     "wedgePlacementKind" << " : " <<
-    placementKindAsString (
+    msrPlacementKindAsString (
       fWedgePlacementKind) <<
     endl;
 

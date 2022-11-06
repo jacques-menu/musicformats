@@ -46,7 +46,7 @@ using namespace MusicFormats;
 %code requires {
   # include <string>
 
-  class ischemeDriver;
+  class   ischemeDriver;
 }
 
 // the parsing context

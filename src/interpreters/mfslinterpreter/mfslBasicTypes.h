@@ -32,7 +32,7 @@ using namespace MusicFormats;
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class mfslDriver;
+class   mfslDriver;
 
 //______________________________________________________________________________
 class EXP mfslOptionsBlock : public smartable

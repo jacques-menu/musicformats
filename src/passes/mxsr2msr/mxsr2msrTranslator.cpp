@@ -95,10 +95,10 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fStaffDetailsStaffNumber = msrStaff::K_NO_STAFF_NUMBER;
 
   fCurrentStaffTypeKind =
-    msrStaffDetails::kRegularStaffType;
+    msrStaffDetails::kStaffTypeRegular;
 
   fCurrentShowFretsKind =
-    msrStaffDetails::kShowFretsNumbers; // default value
+    msrShowFretsKind::kShowFretsNumbers; // default value
 
   fCurrentPrintObjectKind =
     msrPrintObjectKind::kPrintObjectYes; // default value
@@ -181,10 +181,10 @@ mxsr2msrTranslator::mxsr2msrTranslator (
 
   // metronome handling
   fCurrentMetrenomePerMinute = "";
-  fCurrentMetronomeParenthesedKind = msrTempo::kTempoParenthesizedNo;
+  fCurrentMetronomeParenthesedKind = msrTempoParenthesizedKind::kTempoParenthesizedNo;
 
   fCurrentMetrenomeDotsNumber = 0;
-  fCurrentMetrenomeRelationKind = msrTempo::kTempoNotesRelationshipNone;
+  fCurrentMetrenomeRelationKind = msrTempoKind::kTempoNotesRelationshipNone;
   fCurrentMetronomeDurationKind = msrDurationKind::k_NoDuration;
   fCurrentMetronomeBeamValue = "";
 
@@ -4433,7 +4433,7 @@ void mxsr2msrTranslator::visitStart (S_sound& elt)
             msrDurationKind::kQuarter,
             0),       // JMI could be different???
           tempoString,
-          msrTempo::kTempoParenthesizedNo,
+          msrTempoParenthesizedKind::kTempoParenthesizedNo,
           msrPlacementKind::kPlacementBelow);
     }
   }
@@ -4532,17 +4532,17 @@ void mxsr2msrTranslator::visitStart (S_octave_shift& elt)
 
   string type = elt->getAttributeValue ("type");
 
-  msrOctaveShift::msrOctaveShiftKind
-    octaveShiftKind = msrOctaveShift::kOctaveShiftNone;
+  msrOctaveShiftKind
+    octaveShiftKind = msrOctaveShiftKind::kOctaveShiftNone;
 
   if      (type == "up")
-    octaveShiftKind = msrOctaveShift::kOctaveShiftUp;
+    octaveShiftKind = msrOctaveShiftKind::kOctaveShiftUp;
   else if (type == "down")
-    octaveShiftKind = msrOctaveShift::kOctaveShiftDown;
+    octaveShiftKind = msrOctaveShiftKind::kOctaveShiftDown;
   else if (type == "stop")
-    octaveShiftKind = msrOctaveShift::kOctaveShiftStop;
+    octaveShiftKind = msrOctaveShiftKind::kOctaveShiftStop;
   else if (type == "continue")
-    octaveShiftKind = msrOctaveShift::kOctaveShiftContinue;
+    octaveShiftKind = msrOctaveShiftKind::kOctaveShiftContinue;
 
   else {
     stringstream s;
@@ -4806,7 +4806,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
             inputLineNumber,
 		        nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
             words,
-            msrTempo::kTempoParenthesizedNo,    // JMI
+            msrTempoParenthesizedKind::kTempoParenthesizedNo,    // JMI
             msrPlacementKind::kPlacementAbove); // JMI
 
 #ifdef TRACING_IS_ENABLED
@@ -5201,7 +5201,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
         gLogStream <<
           "Creating words \"" << wordsValue << "\"" <<
           ", placement = \"" <<
-          placementKindAsString (
+          msrPlacementKindAsString (
             fCurrentDirectionPlacementKind) <<
           "\"" <<
           ", line " << inputLineNumber <<
@@ -5409,9 +5409,11 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
 
   if (parentheses.size ()) {
     if (parentheses == "yes")
-      fCurrentMetronomeParenthesedKind = msrTempo::kTempoParenthesizedYes;
+      fCurrentMetronomeParenthesedKind =
+      	msrTempoParenthesizedKind::kTempoParenthesizedYes;
     else if (parentheses == "no")
-      fCurrentMetronomeParenthesedKind = msrTempo::kTempoParenthesizedNo;
+      fCurrentMetronomeParenthesedKind =
+      	msrTempoParenthesizedKind::kTempoParenthesizedNo;
     else {
       stringstream s;
 
@@ -5444,7 +5446,7 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
   fCurrentMetrenomePerMinute = "";
 
   fCurrentMetrenomeDotsNumber = 0;
-  fCurrentMetrenomeRelationKind = msrTempo::kTempoNotesRelationshipNone;
+  fCurrentMetrenomeRelationKind = msrTempoKind::kTempoNotesRelationshipNone;
   fCurrentMetronomeDurationKind = msrDurationKind::k_NoDuration;
   fCurrentMetronomeBeamValue = "";
 
@@ -5771,19 +5773,19 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
   else {
     // register stand-alone metronome note
 
-    if (fCurrentMetrenomeRelationKind == msrTempo::kTempoNotesRelationshipNone) {
+    if (fCurrentMetrenomeRelationKind == msrTempoKind::kTempoNotesRelationshipNone) {
       // this metronome note belongs to the left elements list
 
       if (! fCurrentMetronomeRelationLeftElements) {
         // create the relation left elements
         fCurrentMetronomeRelationLeftElements =
-          msrTempoNotesRelationshipshipElements::create (
+          msrTempoNotesRelationshipElements::create (
             inputLineNumber,
-            msrTempoNotesRelationshipshipElements::kTempoNotesRelationshipshipElementsLeft);
+            msrTempoNotesRelationshipElements::kTempoNotesRelationshipElementsLeft);
       }
 
       fCurrentMetronomeRelationLeftElements->
-        addElementToTempoNotesRelationshipshipElements (
+        addElementToTempoNotesRelationshipElements (
           tempoNote);
     }
     else {
@@ -5792,13 +5794,13 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
       if (! fCurrentMetronomeRelationRightElements) {
         // create the relation right elements
         fCurrentMetronomeRelationRightElements =
-          msrTempoNotesRelationshipshipElements::create (
+          msrTempoNotesRelationshipElements::create (
             inputLineNumber,
-            msrTempoNotesRelationshipshipElements::kTempoNotesRelationshipshipElementsRight);
+            msrTempoNotesRelationshipElements::kTempoNotesRelationshipElementsRight);
       }
 
       fCurrentMetronomeRelationRightElements->
-        addElementToTempoNotesRelationshipshipElements (
+        addElementToTempoNotesRelationshipElements (
           tempoNote);
     }
   }
@@ -5822,10 +5824,10 @@ void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
 
   string metrenomeRelation = elt->getValue ();
 
-  fCurrentMetrenomeRelationKind = msrTempo::kTempoNotesRelationshipNone;
+  fCurrentMetrenomeRelationKind = msrTempoKind::kTempoNotesRelationshipNone;
 
   if (metrenomeRelation == "equals") {
-    fCurrentMetrenomeRelationKind = msrTempo::kTempoNotesRelationshipEquals;
+    fCurrentMetrenomeRelationKind = msrTempoKind::kTempoNotesRelationshipEquals;
   }
   else {
     stringstream s;
@@ -5962,13 +5964,13 @@ void mxsr2msrTranslator::visitStart (S_metronome_tuplet& elt)
   if (gGlobalTracingOahGroup->getTraceTempos ()) {
     gLogStream <<
       "fCurrentTempoTupletTypeKind: " <<
-      msrTempoTuplet::tempoTupletTypeKindAsString (
+      msrTempoTuplet::msrTempoTupletTypeKindAsString (
         fCurrentTempoTupletTypeKind) <<
       "fCurrentTempoTupletBracketKind: " <<
-      msrTempoTuplet::tempoTupletBracketKindAsString (
+      msrTempoTuplet::msrTempoTupletBracketKindAsString (
         fCurrentTempoTupletBracketKind) <<
       "fCurrentTempoTupletShowNumberKind: " <<
-      msrTempoTuplet::tempoTupletShowNumberKindAsString (
+      msrTempoTuplet::msrTempoTupletShowNumberKindAsString (
         fCurrentTempoTupletShowNumberKind) <<
       endl;
   }
@@ -6023,19 +6025,19 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
           fCurrentMetronomeNoteWholeNotesFromMetronomeType);
 
       // register the metronome tuplet
-      if (fCurrentMetrenomeRelationKind == msrTempo::kTempoNotesRelationshipNone) {
+      if (fCurrentMetrenomeRelationKind == msrTempoKind::kTempoNotesRelationshipNone) {
         // this metronome tuplet belongs to the left elements list
 
         if (! fCurrentMetronomeRelationLeftElements) {
           // create the relation left elements
           fCurrentMetronomeRelationLeftElements =
-            msrTempoNotesRelationshipshipElements::create (
+            msrTempoNotesRelationshipElements::create (
               inputLineNumber,
-              msrTempoNotesRelationshipshipElements::kTempoNotesRelationshipshipElementsLeft);
+              msrTempoNotesRelationshipElements::kTempoNotesRelationshipElementsLeft);
         }
 
         fCurrentMetronomeRelationLeftElements->
-          addElementToTempoNotesRelationshipshipElements (
+          addElementToTempoNotesRelationshipElements (
             fCurrentMetronomeTuplet);
       }
       else {
@@ -6044,13 +6046,13 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
         if (! fCurrentMetronomeRelationRightElements) {
           // create the relation right elements
           fCurrentMetronomeRelationRightElements =
-            msrTempoNotesRelationshipshipElements::create (
+            msrTempoNotesRelationshipElements::create (
               inputLineNumber,
-              msrTempoNotesRelationshipshipElements::kTempoNotesRelationshipshipElementsRight);
+              msrTempoNotesRelationshipElements::kTempoNotesRelationshipElementsRight);
         }
 
         fCurrentMetronomeRelationRightElements->
-          addElementToTempoNotesRelationshipshipElements (
+          addElementToTempoNotesRelationshipElements (
             fCurrentMetronomeTuplet);
       }
       break;
@@ -6081,24 +6083,24 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
   // fCurrentMetronomeParenthesedKind ??? JMI
 
   // determine tempo kind
-  msrTempo::msrTempoKind tempoKind = msrTempo::k_NoTempoKind;
+  msrTempo::msrTempoKind tempoKind = msrTempoKind::k_NoTempoKind;
 
   int  beatUnitsSize    = fCurrentMetronomeBeatUnitsVector.size ();
   Bool perMinutePresent = fCurrentMetrenomePerMinute.size () > 0;
 
   if (beatUnitsSize == 1 && perMinutePresent) {
-    tempoKind = msrTempo::kTempoBeatUnitsPerMinute;
+    tempoKind = msrTempoKind::kTempoBeatUnitsPerMinute;
   }
   else if (beatUnitsSize == 2 && ! perMinutePresent) {
-    tempoKind = msrTempo::kTempoBeatUnitsEquivalence;
+    tempoKind = msrTempoKind::kTempoBeatUnitsEquivalence;
   }
   else if (
-    fCurrentMetrenomeRelationKind != msrTempo::kTempoNotesRelationshipNone
+    fCurrentMetrenomeRelationKind != msrTempoKind::kTempoNotesRelationshipNone
   ) {
-    tempoKind = msrTempo::kTempoNotesRelationship;
+    tempoKind = msrTempoKind::kTempoNotesRelationship;
   }
 
-  if (tempoKind == msrTempo::k_NoTempoKind) {
+  if (tempoKind == msrTempoKind::k_NoTempoKind) {
       stringstream s;
 
       s <<
@@ -6115,13 +6117,13 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
 
   // create the tempo
   switch (tempoKind) {
-    case msrTempo::k_NoTempoKind:
+    case msrTempoKind::k_NoTempoKind:
       break;
 
-    case msrTempo::kTempoBeatUnitsWordsOnly:
+    case msrTempoKind::kTempoBeatUnitsWordsOnly:
       break;
 
-    case msrTempo::kTempoBeatUnitsPerMinute:
+    case msrTempoKind::kTempoBeatUnitsPerMinute:
       {
         msrDottedDuration
           beatUnits =
@@ -6138,7 +6140,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
         }
       break;
 
-    case msrTempo::kTempoBeatUnitsEquivalence:
+    case msrTempoKind::kTempoBeatUnitsEquivalence:
       {
         msrDottedDuration
           beatUnits =
@@ -6155,13 +6157,13 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       }
       break;
 
-    case msrTempo::kTempoNotesRelationship:
+    case msrTempoKind::kTempoNotesRelationship:
       fCurrentMetronomeTempo =
         msrTempo::createTempoNotesRelationship (
           inputLineNumber,
 					nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
           fCurrentMetronomeRelationLeftElements,
-          fCurrentMetrenomeRelationKind, // msrTempo::kTempoNotesRelationshipEquals here
+          fCurrentMetrenomeRelationKind, // msrTempoKind::kTempoNotesRelationshipEquals here
           fCurrentMetronomeRelationRightElements,
           fCurrentMetronomeParenthesedKind,
           fCurrentDirectionPlacementKind);
@@ -6388,18 +6390,18 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
     string showFrets = elt->getAttributeValue ("show-frets");
 
     fCurrentShowFretsKind =
-      msrStaffDetails::kShowFretsNumbers; // default value
+      msrShowFretsKind::kShowFretsNumbers; // default value
 
     if      (showFrets == "numbers") {
 
       fCurrentShowFretsKind =
-        msrStaffDetails::kShowFretsNumbers;
+        msrShowFretsKind::kShowFretsNumbers;
 
     }
     else if (showFrets == "letters") {
 
       fCurrentShowFretsKind =
-        msrStaffDetails::kShowFretsLetters;
+        msrShowFretsKind::kShowFretsLetters;
 
     }
     else {
@@ -6471,7 +6473,7 @@ void mxsr2msrTranslator::visitStart (S_staff_details& elt)
 #endif
 
   fCurrentStaffTypeKind =
-    msrStaffDetails::kRegularStaffType;
+    msrStaffDetails::kStaffTypeRegular;
 
   fCurrentStaffTuningAlterationKind = msrAlterationKind::k_NoAlteration;
   fCurrentStaffTuningOctaveKind     = msrOctaveKind::k_NoOctave;
@@ -6514,31 +6516,31 @@ void mxsr2msrTranslator::visitStart (S_staff_type& elt)
   if      (staffType == "ossia") {
 
     fCurrentStaffTypeKind =
-      msrStaffDetails::kOssiaStaffType;
+      msrStaffDetails::kStaffTypeOssia;
 
   }
   else if (staffType == "cue") {
 
     fCurrentStaffTypeKind =
-      msrStaffDetails::kCueStaffType;
+      msrStaffDetails::kStaffTypeCue;
 
   }
   else if (staffType == "editorial") {
 
     fCurrentStaffTypeKind =
-      msrStaffDetails::kEditorialStaffType;
+      msrStaffDetails::kStaffTypeEditorial;
 
   }
   else if (staffType == "regular") {
 
     fCurrentStaffTypeKind =
-      msrStaffDetails::kRegularStaffType;
+      msrStaffDetails::kStaffTypeRegular;
 
   }
   else if (staffType == "alternate") {
 
     fCurrentStaffTypeKind =
-      msrStaffDetails::kAlternateStaffType;
+      msrStaffDetails::kStaffTypeAlternate;
 
   }
   else {
@@ -7525,17 +7527,17 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
   string ligatureType =
     elt->getAttributeValue ("type");
 
-  fCurrentLigatureKind = msrLigature::kLigatureNone;
+  fCurrentLigatureKind = msrLigatureKind::kLigatureNone;
 
   if      (ligatureType == "start") {
-    fCurrentLigatureKind = msrLigature::kLigatureStart;
+    fCurrentLigatureKind = msrLigatureKind::kLigatureStart;
     fOnGoingLigature = true;
   }
   else if (ligatureType == "continue") {
-    fCurrentLigatureKind = msrLigature::kLigatureContinue;
+    fCurrentLigatureKind = msrLigatureKind::kLigatureContinue;
   }
   else if (ligatureType == "stop") {
-    fCurrentLigatureKind = msrLigature::kLigatureStop;
+    fCurrentLigatureKind = msrLigatureKind::kLigatureStop;
     fOnGoingLigature = false;
   }
   else {
@@ -7564,22 +7566,22 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
   string ligatureLineEndValue = elt->getAttributeValue ("line-end");
 
   msrLigature::msrLigatureLineEndKind
-    ligatureLineEndKind = msrLigature::kLigatureLineEndNone;
+    ligatureLineEndKind = msrLigatureKind::kLigatureLineEndNone;
 
   if      (ligatureLineEndValue == "up") {
-    ligatureLineEndKind = msrLigature::kLigatureLineEndUp;
+    ligatureLineEndKind = msrLigatureKind::kLigatureLineEndUp;
   }
   else if (ligatureLineEndValue == "down") {
-    ligatureLineEndKind = msrLigature::kLigatureLineEndDown;
+    ligatureLineEndKind = msrLigatureKind::kLigatureLineEndDown;
   }
   else if (ligatureLineEndValue == "both") {
-    ligatureLineEndKind = msrLigature::kLigatureLineEndBoth;
+    ligatureLineEndKind = msrLigatureKind::kLigatureLineEndBoth;
   }
   else if (ligatureLineEndValue == "arrow") {
-    ligatureLineEndKind = msrLigature::kLigatureLineEndArrow;
+    ligatureLineEndKind = msrLigatureKind::kLigatureLineEndArrow;
   }
   else if (ligatureLineEndValue == "[NONE]") {
-    ligatureLineEndKind = msrLigature::kLigatureLineEndNone;
+    ligatureLineEndKind = msrLigatureKind::kLigatureLineEndNone;
   }
   else {
     if (ligatureLineEndValue.size ()) {
@@ -7644,7 +7646,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
   fPendingLigaturesList.push_back (ligature);
 
   switch (fCurrentLigatureKind) {
-    case msrLigature::kLigatureStart:
+    case msrLigatureKind::kLigatureStart:
       // remember this ligature spanner start
       switch (fCurrentDirectionPlacementKind) {
         case msrPlacementKind::k_NoPlacement:
@@ -7678,7 +7680,7 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
       } // switch
       break;
 
-    case msrLigature::kLigatureStop:
+    case msrLigatureKind::kLigatureStop:
       // set spanner two-way sideLinks
       // between both ends of the ligature spanner
 
@@ -7778,11 +7780,11 @@ void mxsr2msrTranslator::visitStart (S_bracket& elt)
       } // switch
       break;
 
-    case msrLigature::kLigatureContinue:
+    case msrLigatureKind::kLigatureContinue:
       // JMI ???
       break;
 
-    case msrLigature::kLigatureNone:
+    case msrLigatureKind::kLigatureNone:
       // JMI ???
       break;
   } // switch
@@ -8295,7 +8297,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
   if (gGlobalTracingOahGroup->getTraceLyricsDetails ()) {
     gLogStream <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
-      syllableKindAsString (fCurrentSyllableKind) <<
+      msrSyllableKindAsString (fCurrentSyllableKind) <<
       ", line " << inputLineNumber <<
       ", with:" <<
       endl;
@@ -8335,7 +8337,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
         endl <<
         setw (fieldWidth) <<
         "fCurrentSyllableExtendKind" << " = " <<
-        syllableExtendKindAsString (
+        msrSyllableExtendKindAsString (
           fCurrentSyllableExtendKind) <<
         endl <<
         setw (fieldWidth) <<
@@ -8364,7 +8366,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       gLogStream << left <<
         setw (fieldWidth) <<
         "fCurrentLigatureKind" << " = \"" <<
-        msrLigature::ligatureKindAsString (
+        msrLigature::msrLigatureKindAsString (
           fCurrentLigatureKind) <<
         "\"" <<
         endl;
@@ -8392,7 +8394,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       gLogStream << left <<
         setw (fieldWidth) <<
         "fFirstSyllableInSlurKind" << " = \"" <<
-        syllableKindAsString (
+        msrSyllableKindAsString (
           fFirstSyllableInSlurKind) <<
         "\"" <<
         endl;
@@ -8400,7 +8402,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       gLogStream << left <<
         setw (fieldWidth) <<
         "fFirstSyllableInLigatureKind" << " = \"" <<
-        syllableKindAsString (
+        msrSyllableKindAsString (
           fFirstSyllableInLigatureKind) <<
         "\"" <<
       endl;
@@ -8408,7 +8410,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
       gLogStream << left <<
         setw (fieldWidth) <<
         "fCurrentSyllableKind" << " = \"" <<
-        syllableKindAsString (
+        msrSyllableKindAsString (
           fCurrentSyllableKind) <<
         "\"" <<
       endl;
@@ -8424,7 +8426,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
   if (gGlobalTracingOahGroup->getTraceLyrics ()) {
     gLogStream <<
       "==> visitEnd (S_lyric&), fCurrentSyllableKind: " <<
-      syllableKindAsString (fCurrentSyllableKind) <<
+      msrSyllableKindAsString (fCurrentSyllableKind) <<
       ", line = " << inputLineNumber <<
       ", with:" <<
       endl;
@@ -8489,7 +8491,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
     if (gGlobalTracingOahGroup->getTraceLyrics ()) {
       gLogStream <<
         "Creating a syllable '" <<
-        syllableKindAsString (
+        msrSyllableKindAsString (
           fCurrentSyllableKind) <<
         "\", fCurrentLyricTextsList = \"";
 
@@ -8505,7 +8507,7 @@ void mxsr2msrTranslator::visitEnd (S_lyric& elt)
          fCurrentNoteDisplayWholeNotesFromType <<
         ", display from type" <<
         ", syllabic = \"" <<
-        syllableKindAsString (
+        msrSyllableKindAsString (
           fCurrentSyllableKind) << "\"" <<
         ", in stanza " << stanza->getStanzaName () <<
         ", line " << inputLineNumber <<
@@ -10348,7 +10350,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // ligatures
 
-  fCurrentLigatureKind = msrLigature::kLigatureNone;
+  fCurrentLigatureKind = msrLigatureKind::kLigatureNone;
 
   // print-object
 
@@ -11109,19 +11111,19 @@ void mxsr2msrTranslator::visitStart (S_stem& elt)
   string        stem = elt->getValue();
 
   // kind
-  msrStem::msrStemKind stemKind = msrStem::kStemNeutral;
+  msrStemKind stemKind = msrStemKind::kStemNeutral;
 
   if      (stem == "up")
-    stemKind = msrStem::kStemUp;
+    stemKind = msrStemKind::kStemUp;
 
   else if (stem == "down")
-    stemKind = msrStem::kStemDown;
+    stemKind = msrStemKind::kStemDown;
 
   else if (stem == "[NONE]")
-    stemKind = msrStem::kStemNeutral;
+    stemKind = msrStemKind::kStemNeutral;
 
   else if (stem == "double")
-    stemKind = msrStem::kStemDouble;
+    stemKind = msrStemKind::kStemDouble;
 
   else {
     stringstream s;
@@ -11706,7 +11708,7 @@ void mxsr2msrTranslator::visitStart (S_accent& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kAccent,
+        msrArticulationKind::kArticulationAccent,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -11743,7 +11745,7 @@ void mxsr2msrTranslator::visitStart (S_breath_mark& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kBreathMark,
+        msrArticulationKind::kArticulationBreathMark,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -11780,7 +11782,7 @@ void mxsr2msrTranslator::visitStart (S_caesura& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kCaesura,
+        msrArticulationKind::kArticulationCaesura,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -11817,7 +11819,7 @@ void mxsr2msrTranslator::visitStart (S_spiccato& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kSpiccato,
+        msrArticulationKind::kArticulationSpiccato,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -11854,7 +11856,7 @@ void mxsr2msrTranslator::visitStart (S_staccato& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kStaccato,
+        msrArticulationKind::kArticulationStaccato,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -11891,7 +11893,7 @@ void mxsr2msrTranslator::visitStart (S_staccatissimo& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kStaccatissimo,
+        msrArticulationKind::kArticulationStaccatissimo,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -11928,7 +11930,7 @@ void mxsr2msrTranslator::visitStart (S_stress& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kStress,
+        msrArticulationKind::kArticulationStress,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -11965,7 +11967,7 @@ void mxsr2msrTranslator::visitStart (S_unstress& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kUnstress,
+        msrArticulationKind::kArticulationUnstress,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -12002,7 +12004,7 @@ void mxsr2msrTranslator::visitStart (S_detached_legato& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kDetachedLegato,
+        msrArticulationKind::kArticulationDetachedLegato,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -12040,7 +12042,7 @@ void mxsr2msrTranslator::visitStart (S_strong_accent& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kStrongAccent,
+        msrArticulationKind::kArticulationStrongAccent,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -12079,7 +12081,7 @@ void mxsr2msrTranslator::visitStart (S_tenuto& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kTenuto,
+        msrArticulationKind::kArticulationTenuto,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -12116,7 +12118,7 @@ void mxsr2msrTranslator::visitStart (S_doit& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kDoit,
+        msrArticulationKind::kArticulationDoit,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -12153,7 +12155,7 @@ void mxsr2msrTranslator::visitStart (S_falloff& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kFalloff,
+        msrArticulationKind::kArticulationFalloff,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -12190,7 +12192,7 @@ void mxsr2msrTranslator::visitStart (S_plop& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kPlop,
+        msrArticulationKind::kArticulationPlop,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -12227,7 +12229,7 @@ void mxsr2msrTranslator::visitStart (S_scoop& elt)
     articulation =
       msrArticulation::create (
         inputLineNumber,
-        msrArticulation::kScoop,
+        msrArticulationKind::kArticulationScoop,
         placementKind);
 
   if (! gGlobalMxsr2msrOahGroup->getIgnoreArticulations ()) {
@@ -12348,14 +12350,14 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
 
   msrNonArpeggiato::msrNonArpeggiatoTypeKind
     nonArpeggiatoTypeKind =
-      msrNonArpeggiato::kNonArpeggiatoTypeNone; // default value
+      msrNonArpeggiato::kArticulationNonArpeggiatoTypeNone; // default value
 
   if      (typeString == "top")
     nonArpeggiatoTypeKind =
-      msrNonArpeggiato::kNonArpeggiatoTypeTop;
+      msrNonArpeggiato::kArticulationNonArpeggiatoTypeTop;
   else if (typeString == "bottom")
     nonArpeggiatoTypeKind =
-      msrNonArpeggiato::kNonArpeggiatoTypeBottom;
+      msrNonArpeggiato::kArticulationNonArpeggiatoTypeBottom;
   else {
     if (typeString.size ()) {
 
@@ -12449,7 +12451,7 @@ void mxsr2msrTranslator::visitStart (S_arrow& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kArrow,
+        msrTechnicalKind::kArrow,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -12510,7 +12512,7 @@ void mxsr2msrTranslator::visitEnd (S_bend& elt)
     technicalWithFloat =
       msrTechnicalWithFloat::create (
         inputLineNumber,
-        msrTechnicalWithFloat::kBend,
+        msrTechnicalWithFloatKind::kTechnicalWithFloatBend,
         fBendAlterValue,
         placementKind);
 
@@ -12620,7 +12622,7 @@ void mxsr2msrTranslator::visitStart (S_fingering& elt)
       technicalWithInteger =
         msrTechnicalWithInteger::create (
           inputLineNumber,
-          msrTechnicalWithInteger::kFingering,
+          msrTechnicalWithIntegerKind::kFingering,
           fingeringValue,
           placementKind);
 
@@ -12713,7 +12715,7 @@ void mxsr2msrTranslator::visitStart (S_fret& elt)
       technicalWithInteger =
         msrTechnicalWithInteger::create (
           inputLineNumber,
-          msrTechnicalWithInteger::kFret,
+          msrTechnicalWithIntegerKind::kFret,
           fretValue,
           fretPlacementKind);
 
@@ -12797,7 +12799,7 @@ void mxsr2msrTranslator::visitStart (S_hammer_on& elt)
     technicalWithString =
       msrTechnicalWithString::create (
         inputLineNumber,
-        msrTechnicalWithString::kHammerOn,
+        msrTechnicalWithStringKind::kHammerOn,
         hammerOnTechnicalTypeKind,
         hammerOnValue,
         placementKind);
@@ -12836,7 +12838,7 @@ void mxsr2msrTranslator::visitStart (S_handbell& elt)
     technicalWithString =
       msrTechnicalWithString::create (
         inputLineNumber,
-        msrTechnicalWithString::kHandbell,
+        msrTechnicalWithStringKind::kHandbell,
         msrTechnicalTypeKind::k_NoTechnicalType,
         handBellValue,
         placementKind);
@@ -13026,7 +13028,7 @@ void mxsr2msrTranslator::visitStart (S_other_technical& elt)
     technicalWithString =
       msrTechnicalWithString::create (
         inputLineNumber,
-        msrTechnicalWithString::kOtherTechnical,
+        msrTechnicalWithStringKind::kOtherTechnical,
         msrTechnicalTypeKind::k_NoTechnicalType,
         otherTechnicalValue,
         placementKind);
@@ -13065,7 +13067,7 @@ void mxsr2msrTranslator::visitStart (S_pluck& elt)
     technicalWithString =
       msrTechnicalWithString::create (
         inputLineNumber,
-        msrTechnicalWithString::kPluck,
+        msrTechnicalWithStringKind::kPluck,
         msrTechnicalTypeKind::k_NoTechnicalType,
         pluckValue,
         placementKind);
@@ -13130,7 +13132,7 @@ void mxsr2msrTranslator::visitStart (S_pull_off& elt)
     technicalWithString =
       msrTechnicalWithString::create (
         inputLineNumber,
-        msrTechnicalWithString::kPullOff,
+        msrTechnicalWithStringKind::kPullOff,
         pullOffTechnicalTypeKind,
         pullOffValue,
         placementKind);
@@ -13270,7 +13272,7 @@ void mxsr2msrTranslator::visitStart (S_string& elt)
       technicalWithInteger =
         msrTechnicalWithInteger::create (
           inputLineNumber,
-          msrTechnicalWithInteger::kString,
+          msrTechnicalWithIntegerKind::kString,
           stringIntegerValue,
           placementKind);
 
@@ -13493,16 +13495,16 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 
   msrFermata::msrFermataKind
     fermataKind =
-      msrFermata::kNormalFermataKind; // default value
+      msrFermataKind::kArticulationFermataNormal; // default value
 
   if      (fermataTextValue == "normal")
-    fermataKind = msrFermata::kNormalFermataKind;
+    fermataKind = msrFermataKind::kArticulationFermataNormal;
 
   else if (fermataTextValue == "angled")
-    fermataKind = msrFermata::kAngledFermataKind;
+    fermataKind = msrFermataKind::kArticulationFermataAngled;
 
   else if (fermataTextValue == "square")
-    fermataKind = msrFermata::kSquareFermataKind;
+    fermataKind = msrFermataKind::kArticulationFermataSquare;
 
   else {
     if (fermataTextValue.size ()) {
@@ -13526,13 +13528,13 @@ void mxsr2msrTranslator::visitStart (S_fermata& elt)
 
   msrFermata::msrFermataTypeKind
     fermataTypeKind =
-      msrFermata::kFermataTypeNone; // default value
+      msrFermataTypeKind::kArticulationFermataTypeNone; // default value
 
   if      (fermataTypeValue == "upright")
-    fermataTypeKind = msrFermata::kFermataTypeUpright;
+    fermataTypeKind = msrFermataTypeKind::kArticulationFermataTypeUpright;
 
   else if (fermataTypeValue == "inverted")
-    fermataTypeKind = msrFermata::kFermataTypeInverted;
+    fermataTypeKind = msrFermataTypeKind::kArticulationFermataTypeInverted;
 
   else {
     if (fermataTypeValue.size ()) {
@@ -13737,7 +13739,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
           mfSingularOrPlural (
             tremoloMarksNumber, "mark", "marks") <<
           ", placement : " <<
-          placementKindAsString (
+          msrPlacementKindAsString (
             singleTremoloPlacementKind) <<
           endl;
       }
@@ -13771,7 +13773,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
             mfSingularOrPlural (
               tremoloMarksNumber, "mark", "marks") <<
             ", placement : " <<
-            placementKindAsString (
+            msrPlacementKindAsString (
               doubleTremoloPlacementKind) <<
             endl;
         }
@@ -13939,7 +13941,7 @@ void mxsr2msrTranslator::visitStart (S_dashes& elt)
       msrSpanner::create (
         inputLineNumber,
         dashesNumber,
-        msrSpanner::kSpannerDashes,
+        msrSpannerKind::kSpannerDashes,
         fDashesSpannerTypeKind,
         placementKind,
         nullptr); // will be set later REMOVE??? JMI
@@ -14011,7 +14013,7 @@ void mxsr2msrTranslator::visitStart (S_wavy_line& elt)
       msrSpanner::create (
         inputLineNumber,
         wavyLineNumber,
-        msrSpanner::kSpannerWavyLine,
+        msrSpannerKind::kSpannerWavyLine,
         fWavyLineSpannerTypeKind,
         placementKind,
         nullptr); // will be set later REMOVE??? JMI
@@ -16466,16 +16468,16 @@ void mxsr2msrTranslator::visitStart (S_tuplet& elt)
       "fCurrentTupletNumber: " <<
       fCurrentTupletNumber <<
       ", fCurrentTupletTypeKind: " <<
-      tupletTypeKindAsString (
+      msrTupletTypeKindAsString (
         fCurrentTupletTypeKind) <<
       ", fCurrentTupletBracketKind: " <<
-      tupletBracketKindAsString (
+      msrTupletBracketKindAsString (
         fCurrentTupletBracketKind) <<
       ", fCurrentTupletShowNumberKind: " <<
-      tupletShowNumberKindAsString (
+      msrTupletShowNumberKindAsString (
         fCurrentTupletShowNumberKind) <<
       ", fCurrentTupletShowTypeKind: " <<
-      tupletShowTypeKindAsString (
+      msrTupletShowTypeKindAsString (
         fCurrentTupletShowTypeKind) <<
       endl;
   }
@@ -16684,12 +16686,12 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
   string glissandoType = elt->getAttributeValue ("type");
 
   msrGlissando::msrGlissandoTypeKind
-    glissandoTypeKind = msrGlissando::kGlissandoTypeNone;
+    glissandoTypeKind = msrGlissandoTypeKind::kGlissandoTypeNone;
 
   if      (glissandoType == "start")
-    glissandoTypeKind = msrGlissando::kGlissandoTypeStart;
+    glissandoTypeKind = msrGlissandoTypeKind::kGlissandoTypeStart;
   else if (glissandoType == "stop")
-    glissandoTypeKind = msrGlissando::kGlissandoTypeStop;
+    glissandoTypeKind = msrGlissandoTypeKind::kGlissandoTypeStop;
   else {
     stringstream s;
 
@@ -16740,7 +16742,7 @@ void mxsr2msrTranslator::visitStart (S_glissando& elt)
       "glissandoNumber: " <<
       glissandoNumber <<
       "glissandoType: " <<
-      msrGlissando::glissandoTypeKindAsString (
+      msrGlissando::msrGlissandoTypeKindAsString (
         glissandoTypeKind) <<
       "glissandoLineType: " <<
       msrLineTypeKindAsString (
@@ -16802,12 +16804,12 @@ void mxsr2msrTranslator::visitStart (S_slide& elt)
   string slideType = elt->getAttributeValue ("type");
 
   msrSlide::msrSlideTypeKind
-    slideTypeKind = msrSlide::kSlideTypeNone;
+    slideTypeKind = msrSlideTypeKind::kSlideTypeNone;
 
   if      (slideType == "start")
-    slideTypeKind = msrSlide::kSlideTypeStart;
+    slideTypeKind = msrSlideTypeKind::kSlideTypeStart;
   else if (slideType == "stop")
-    slideTypeKind = msrSlide::kSlideTypeStop;
+    slideTypeKind = msrSlideTypeKind::kSlideTypeStop;
   else {
     stringstream s;
 
@@ -17338,7 +17340,7 @@ void mxsr2msrTranslator::copyNoteArticulationsToChord (
     if (gGlobalTracingOahGroup->getTraceArticulations ()) {
       gLogStream <<
         "Copying articulation '" <<
-        (*i)->articulationKindAsString () <<
+        (*i)->msrArticulationKindAsString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         endl;
@@ -17371,7 +17373,7 @@ void mxsr2msrTranslator::copyNoteTechnicalsToChord (
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
       "Copying technical '" <<
-      (*i)->technicalKindAsString () <<
+      (*i)->msrTechnicalKindAsString () <<
       "' from note " << note->asString () <<
       " to chord" <<
       endl;
@@ -17404,7 +17406,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithIntegersToChord (
   if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
     gLogStream <<
       "Copying technical '" <<
-      (*i)->technicalWithIntegerKindAsString () <<
+      (*i)->msrTechnicalWithIntegerKindAsString () <<
       "' from note " << note->asString () <<
       " to chord" <<
       endl;
@@ -17437,7 +17439,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithFloatsToChord (
     if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
       gLogStream <<
         "Copying technical '" <<
-        (*i)->technicalWithFloatKindAsString () <<
+        (*i)->msrTechnicalWithFloatKindAsString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         endl;
@@ -17470,7 +17472,7 @@ void mxsr2msrTranslator::copyNoteTechnicalWithStringsToChord (
     if (gGlobalTracingOahGroup->getTraceTechnicals ()) {
       gLogStream <<
         "Copying technical '" <<
-        (*i)->technicalWithStringKindAsString () <<
+        (*i)->msrTechnicalWithStringKindAsString () <<
         "' from note " << note->asString () <<
         " to chord" <<
         endl;
@@ -17497,7 +17499,7 @@ void mxsr2msrTranslator::copyNoteOrnamentsToChord (
     if (gGlobalTracingOahGroup->getTraceOrnaments ()) {
       gLogStream <<
         "Copying ornament '" <<
-        ornamentKindAsString (ornament->getOrnamentKind ()) <<
+        msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         endl;
@@ -17520,18 +17522,12 @@ void mxsr2msrTranslator::copyNoteSpannersToChord (
       note->
         getNoteSpanners ();
 
-  list<S_msrSpanner>::const_iterator i;
-  for (
-    i=noteSpanners.begin ();
-    i!=noteSpanners.end ();
-    ++i
-  ) {
-
+  for (S_msrSpanner spanner : noteSpanners) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceSpanners ()) {
       gLogStream <<
         "Copying spanner '" <<
-        (*i)->spannerKindAsString () <<
+        msrSpannerKindAsString (spanner->getSpannerKindAsString ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         endl;
@@ -17539,7 +17535,7 @@ void mxsr2msrTranslator::copyNoteSpannersToChord (
 #endif
 
     chord->
-      appendSpannerToChord ((*i));
+      appendSpannerToChord (spanner);
   } // for
 }
 
@@ -17963,18 +17959,12 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
       note->
         getNoteLigatures ();
 
-  list<S_msrLigature>::const_iterator i;
-  for (
-    i=noteLigatures.begin ();
-    i!=noteLigatures.end ();
-    ++i
-  ) {
-
+  for (S_msrLigature ligature : noteLigatures) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTraceLigatures ()) {
       gLogStream <<
         "Copying ligature '" <<
-        (*i)->ligatureKindAsString () <<
+        msrLigatureKindAsString (ligature->getLigatureKindAsString ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         endl;
@@ -17982,7 +17972,7 @@ void mxsr2msrTranslator::copyNoteLigaturesToChord (
 #endif
 
     chord->
-      appendLigatureToChord ((*i));
+      appendLigatureToChord (ligature);
   } // for
 }
 
@@ -18077,7 +18067,7 @@ void mxsr2msrTranslator::copyNoteWedgesToChord (
     if (gGlobalTracingOahGroup->getTraceWedges ()) {
       gLogStream <<
         "Copying wedges '" <<
-        wedgeKindAsString (wedge->getWedgeKind ()) <<
+        msrWedgeKindAsString (wedge->getWedgeKind ()) <<
         "' from note " << note->asString () <<
         " to chord" <<
         endl;
@@ -18746,7 +18736,7 @@ void mxsr2msrTranslator::attachCurrentArticulationsToNote (
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
         gLogStream <<
           "Attaching articulation '" <<
-          art->articulationKindAsString () <<
+          art->msrArticulationKindAsString () <<
           "' to note " << note->asString () <<
           endl;
       }
@@ -18946,7 +18936,7 @@ void mxsr2msrTranslator::attachCurrentOrnamentsToNote (
       if (gGlobalTracingOahGroup->getTraceNotes ()) {
         gLogStream <<
           "Attaching ornament '" <<
-          ornamentKindAsString (ornament->getOrnamentKind ()) <<
+          msrOrnamentKindAsString (ornament->getOrnamentKind ()) <<
           "' to note " << note->asString () <<
           endl;
       }
@@ -18988,7 +18978,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
           fCurrentSpannersList.front();
 
       switch (spanner->getSpannerKind ()) {
-        case msrSpanner::kSpannerDashes: // JMI
+        case msrSpannerKind::kSpannerDashes: // JMI
           switch (spanner->getSpannerTypeKind ()) {
             case msrSpannerTypeKind::kSpannerTypeStart:
               spannerStopMetForThisNote = true;
@@ -19005,7 +18995,7 @@ void mxsr2msrTranslator::attachCurrentSpannersToNote (
           } // switch
           break;
 
-        case msrSpanner::kSpannerWavyLine:
+        case msrSpannerKind::kSpannerWavyLine:
           switch (spanner->getSpannerTypeKind ()) {
             case msrSpannerTypeKind::kSpannerTypeStart:
               spannerStopMetForThisNote = true;
@@ -20486,11 +20476,11 @@ void mxsr2msrTranslator::attachPendingGlissandosToNote (
 
       // take care of no lyrics on kGlissandoTypeStop
       switch (glissando->getGlissandoTypeKind ()) {
-        case msrGlissando::kGlissandoTypeNone:
-        case msrGlissando::kGlissandoTypeStart:
+        case msrGlissandoTypeKind::kGlissandoTypeNone:
+        case msrGlissandoTypeKind::kGlissandoTypeStart:
           break;
 
-        case msrGlissando::kGlissandoTypeStop:
+        case msrGlissandoTypeKind::kGlissandoTypeStop:
           int inputLineNumber =
             glissando->getInputLineNumber ();
 
@@ -20601,11 +20591,11 @@ void mxsr2msrTranslator::attachPendingSlidesToNote (
 
       // take care of no lyrics on kSlideTypeStop
       switch (slide->getSlideTypeKind ()) {
-        case msrSlide::kSlideTypeNone:
-        case msrSlide::kSlideTypeStart:
+        case msrSlideTypeKind::kSlideTypeNone:
+        case msrSlideTypeKind::kSlideTypeStart:
           break;
 
-        case msrSlide::kSlideTypeStop:
+        case msrSlideTypeKind::kSlideTypeStop:
           int inputLineNumber =
             slide->getInputLineNumber ();
 
@@ -22601,12 +22591,12 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 
   // take care of ligatures JMI ???
   switch (fCurrentLigatureKind) {
-    case msrLigature::kLigatureStart:
+    case msrLigatureKind::kLigatureStart:
       fFirstSyllableInLigatureKind = fCurrentSyllableKind;
       break;
-    case msrLigature::kLigatureContinue:
+    case msrLigatureKind::kLigatureContinue:
       break;
-    case msrLigature::kLigatureStop:
+    case msrLigatureKind::kLigatureStop:
       fFirstSyllableInLigatureKind = msrSyllableKind::kSyllableNone;
       break;
     default:
@@ -22649,7 +22639,7 @@ void mxsr2msrTranslator::handleLyricsForNoteAfterNoteItselfIsHandled (
       endl <<
       setw (fieldWidth) <<
       "fCurrentSyllableExtendKind" << "" << " = " <<
-      syllableExtendKindAsString (
+      msrSyllableExtendKindAsString (
         fCurrentSyllableExtendKind) <<
       endl <<
       setw (fieldWidth) <<
@@ -26700,7 +26690,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //       msrTempo::createTempoWordsOnly (
 //         inputLineNumber,
 //         words,
-//         msrTempo::kTempoParenthesizedNo,    // JMI
+//         msrTempoParenthesizedKind::kTempoParenthesizedNo,    // JMI
 //         msrPlacementKind::kPlacementAbove); // JMI
 //
 // #ifdef TRACING_IS_ENABLED

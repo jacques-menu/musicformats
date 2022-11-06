@@ -46,7 +46,7 @@ using namespace MusicFormats;
 %code requires {
   #include <string>
 
-  class mfslDriver;
+  class   mfslDriver;
 }
 
 // the parsing context

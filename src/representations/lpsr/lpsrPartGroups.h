@@ -21,7 +21,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class lpsrPartGroupBlock;
+class   lpsrPartGroupBlock;
 typedef SMARTP<lpsrPartGroupBlock> S_lpsrPartGroupBlock;
 
 //______________________________________________________________________________

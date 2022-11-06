@@ -712,67 +712,88 @@ void msrPedal::acceptOut (basevisitor* v)
 void msrPedal::browseData (basevisitor* v)
 {}
 
-string msrPedal::pedalTypeAsString () const
+string msrPedalTypeKindAsString (
+  msrPedalTypeKind pedalTypeKind)
 {
   string result;
 
-  switch (fPedalTypeKind) {
+  switch (pedalTypeKind) {
     case k_NoPedalType:
-      result = "noPedalType";
+      result = "k_NoPedalType";
       break;
     case kPedalStart:
-      result = "pedalStart";
+      result = "kPedalStart";
       break;
     case kPedalContinue:
-      result = "pedalContinue";
+      result = "kPedalContinue";
       break;
     case kPedalChange:
-      result = "pedalChange";
+      result = "kPedalChange";
       break;
     case kPedalStop:
-      result = "pedalStop";
+      result = "kPedalStop";
       break;
   } // switch
 
   return result;
 }
 
-string msrPedal::pedalLineAsString () const
+ostream& operator << (ostream& os, const msrPedalTypeKind& elt)
+{
+  os << msrPedalTypeKindAsString (elt);
+  return os;
+}
+
+string msrPedalLineKindAsString (
+  msrPedalLineKind pedalLineKind)
 {
   string result;
 
-  switch (fPedalLineKind) {
+  switch (pedalLineKind) {
     case msrPedal::kPedalLineYes:
-      result = "pedalLineYes";
+      result = "kPedalLineYes";
       break;
     case msrPedal::kPedalLineNo:
-      result = "pedalLineNo";
+      result = "kPedalLineNo";
       break;
   } // switch
 
   return result;
 }
 
-string msrPedal::pedalSignAsString () const
+ostream& operator << (ostream& os, const msrPedalLineKind& elt)
+{
+  os << msrPedalLineKindAsString (elt);
+  return os;
+}
+
+string msrPedalSignKindAsString (
+  msrPedalSignKind pedalSignKind)
 {
   string result;
 
-  switch (fPedalSignKind) {
+  switch (pedalSignKind) {
     case msrPedal::kPedalSignYes:
-      result = "pedalSignYes";
+      result = "kPedalSignYes";
       break;
     case msrPedal::kPedalSignNo:
-      result = "pedalSignNo";
+      result = "kPedalSignNo";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrPedalSignKind& elt)
+{
+  os << msrPedalSignKindAsString (elt);
+  return os;
 }
 
 void msrPedal::print (ostream& os) const
 {
   os <<
-    "Pedal" <<
+    "[Pedal" <<
     ", pedalType: " <<
     pedalTypeAsString () <<
     ", pedalLine: " <<
@@ -780,6 +801,7 @@ void msrPedal::print (ostream& os) const
     ", pedalSign: " <<
     pedalSignAsString () <<
     ", line " << fInputLineNumber <<
+    ']' <<
     endl;
 }
 

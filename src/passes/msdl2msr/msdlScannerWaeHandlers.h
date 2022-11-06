@@ -23,7 +23,7 @@ namespace MusicFormats
 //________________________________________________________________________
 class EXP msdlScannerWaeHandler : public waeHandler
 {
-/* this class is purely virtual
+/* this class   is purely virtual
   public:
 
     // creation

@@ -768,7 +768,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
           msrSpanner::create (
             __LINE__,
             1, // spannerNumber
-            msrSpanner::kSpannerDashes,
+            msrSpannerKind::kSpannerDashes,
             msrSpannerTypeKind::kSpannerTypeStart,
             msrPlacementKind::kPlacementAbove,
             note1);
@@ -1037,7 +1037,7 @@ void LilyPondIssue34Generator::populateUpperVoice1WithTheFunctionsAPI (
           msrSpanner::create (
             __LINE__,
             1, // spannerNumber
-            msrSpanner::kSpannerDashes,
+            msrSpannerKind::kSpannerDashes,
             msrSpannerTypeKind::kSpannerTypeStop,
             msrPlacementKind::kPlacementAbove,
             note1));

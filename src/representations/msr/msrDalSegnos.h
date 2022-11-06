@@ -24,7 +24,7 @@ enum class msrDalSegnoKind {
   kDalSegno, kDalSegnoAlFine, kDalSegnoAlCoda
 };
 
-string dalSegnoKindAsString (
+string msrDalSegnoKindAsString (
   msrDalSegnoKind dalSegnoKind);
 
 ostream& operator << (ostream& os,const msrDalSegnoKind& elt);

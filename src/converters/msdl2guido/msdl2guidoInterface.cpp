@@ -124,7 +124,7 @@ mfMusicformatsError convertMsdlStream2guidoWithHandler (
     mfTimingItemsList::gGlobalTimingItemsList.appendTimingItem (
       "Pass 1",
       "Create the MSR score from the MSDL input",
-      mfTimingItem::kMandatory,
+      mfTimingItemKind::kMandatory,
       startClock,
       endClock);
 
@@ -202,7 +202,7 @@ mfMusicformatsError convertMsdlStream2guidoWithHandler (
         gGlobalMsrOahGroup,
         "Pass 3",
         "Convert the second MSR into an MXSR",
-        mfTimingItem::kMandatory);
+        mfTimingItemKind::kMandatory);
   }
   catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutputStream);
