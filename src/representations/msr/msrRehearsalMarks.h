@@ -20,20 +20,26 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class msrRehearsalMarkKind {
+  kRehearsalMarkNone,
+  kRehearsalMarkRectangle,
+  kRehearsalMarkOval,
+  kRehearsalMarkCircle,
+  kRehearsalMarkBracket,
+  kRehearsalMarkTriangle,
+  kRehearsalMarkDiamond
+};
+
+string msrRrehearsalKindAsString (
+  msrRehearsalMarkKind rehearsalKind);
+
+ostream& operator << (ostream& os, const msrRehearsalMarkKind& elt);
+
 class EXP msrRehearsalMark : public msrMeasureElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrRehearsalMarkKind {
-      kNone,
-      kRectangle, kOval, kCircle, kBracket, kTriangle, kDiamond
-    };
-
-    string rehearsalKindAsString (
-      msrRehearsalMarkKind rehearsalKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -92,6 +98,8 @@ class EXP msrRehearsalMark : public msrMeasureElement
 
     // print
     // ------------------------------------------------------
+
+    string                asString () const override;
 
     void                  print (ostream& os) const override;
 

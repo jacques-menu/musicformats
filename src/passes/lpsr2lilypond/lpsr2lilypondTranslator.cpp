@@ -20002,7 +20002,7 @@ void lpsr2lilypondTranslator::generateCodeForOctaveShiftBeforeNote (
     case msrOctaveShiftKind::kOctaveShiftStop:
       break;
 
-    case msrOctaveShift::kOctaveShiftContinue:
+    case msrOctaveShiftKind::kOctaveShiftContinue:
       break;
   } // switch
 }
@@ -20286,13 +20286,13 @@ void lpsr2lilypondTranslator::generateCodeRightBeforeChordContents (
           "\\arpeggioBracket";
 
         switch (nonArpeggiato->getNonArpeggiatoTypeKind ()) {
-          case msrNonArpeggiato::kArticulationNonArpeggiatoTypeNone:
+          case msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeNone:
             fLilypondCodeStream << " %{ \\kArticulationNonArpeggiatoTypeNone??? %}";
             break;
-          case msrNonArpeggiato::kArticulationNonArpeggiatoTypeTop:
+          case msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeTop:
             fLilypondCodeStream << " %{ \\kArticulationNonArpeggiatoTypeTop??? %}";
             break;
-          case msrNonArpeggiato::kArticulationNonArpeggiatoTypeBottom:
+          case msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeBottom:
             fLilypondCodeStream << " %{ \\kArticulationNonArpeggiatoTypeBottom??? %}";
             break;
         } // switch
@@ -21816,7 +21816,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
   fLilypondCodeStream << endl;
 
   switch (elt->getPedalTypeKind ()) {
-    case msrPedal::k_NoPedalType:
+    case msrPedalTypeKind::k_NoPedalType:
       {
         // should not occur
         stringstream s;
@@ -21833,19 +21833,19 @@ void lpsr2lilypondTranslator::visitStart (S_msrPedal& elt)
           s.str ());
       }
       break;
-    case msrPedal::kPedalStart:
+    case msrPedalTypeKind::kPedalTypeStart:
       fLilypondCodeStream <<
         "\\sustainOn";
       break;
-    case msrPedal::kPedalContinue:
+    case msrPedalTypeKind::kPedalTypeContinue:
       fLilypondCodeStream <<
         "\\sustainOff\\sustainOn"; // JMI
       break;
-    case msrPedal::kPedalChange:
+    case msrPedalTypeKind::kPedalTypeChange:
       fLilypondCodeStream <<
         "\\sustainOff\\sustainOn";
       break;
-    case msrPedal::kPedalStop:
+    case msrPedalTypeKind::kPedalTypeStop:
       fLilypondCodeStream <<
         "\\sustainOff";
       break;
@@ -21961,45 +21961,45 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
     elt->getInputLineNumber ();
 
   switch (elt->getBarLineCategory ()) {
-    case msrBarLine::kBarLineCategoryStandalone:
+    case msrBarLineCategoryKind::kBarLineCategoryStandalone:
       switch (elt->getBarLineStyleKind ()) {
-        case msrBarLine::kBarLineStyleNone:
+        case msrBarLineStyleKind::kBarLineStyleNone:
           break;
-        case msrBarLine::kBarLineStyleRegular:
+        case msrBarLineStyleKind::kBarLineStyleRegular:
           fLilypondCodeStream << "\\bar \"|\" ";
           break;
-        case msrBarLine::kBarLineStyleDotted:
+        case msrBarLineStyleKind::kBarLineStyleDotted:
           fLilypondCodeStream << "\\bar \";\" ";
           break;
-        case msrBarLine::kBarLineStyleDashed:
+        case msrBarLineStyleKind::kBarLineStyleDashed:
           fLilypondCodeStream << "\\bar \"!\" ";
           break;
-        case msrBarLine::kBarLineStyleHeavy:
+        case msrBarLineStyleKind::kBarLineStyleHeavy:
           fLilypondCodeStream << "\\bar \".\" ";
           break;
-        case msrBarLine::kBarLineStyleLightLight:
+        case msrBarLineStyleKind::kBarLineStyleLightLight:
           fLilypondCodeStream << "\\bar \"||\" ";
           break;
-        case msrBarLine::kBarLineStyleLightHeavy:
+        case msrBarLineStyleKind::kBarLineStyleLightHeavy:
           fLilypondCodeStream <<
             endl <<
             "\\bar \"|.\" ";
           break;
-        case msrBarLine::kBarLineStyleHeavyLight:
+        case msrBarLineStyleKind::kBarLineStyleHeavyLight:
           fLilypondCodeStream << "\\bar \".|\" ";
           break;
-        case msrBarLine::kBarLineStyleHeavyHeavy:
+        case msrBarLineStyleKind::kBarLineStyleHeavyHeavy:
           fLilypondCodeStream << "\\bar \"..\" ";
           break;
-        case msrBarLine::kBarLineStyleTick:
+        case msrBarLineStyleKind::kBarLineStyleTick:
           fLilypondCodeStream << "\\bar \"'\" ";
           break;
-        case msrBarLine::kBarLineStyleShort:
+        case msrBarLineStyleKind::kBarLineStyleShort:
           // \bar '/' is the custom short barLine
           fLilypondCodeStream << "\\bar \"/\" ";
           break;
           /* JMI
-        case msrBarLine::kBarLineStyleNone:
+        case msrBarLineStyleKind::kBarLineStyleNone:
           fLilypondCodeStream << "\\bar \"\" ";
           break;
           */
@@ -22040,7 +22040,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
 */
       break;
 
-    case msrBarLine::kBarLineCategoryRepeatStart:
+    case msrBarLineCategoryKind::kBarLineCategoryRepeatStart:
       if (gGlobalLpsr2lilypondOahGroup->getKeepRepeatBarLines ()) {
       /*
         if (gGlobalLpsr2lilypondOahGroup->getRepeatBrackets ()) {
@@ -22068,7 +22068,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
       }
       break;
 
-    case msrBarLine::kBarLineCategoryRepeatEnd:
+    case msrBarLineCategoryKind::kBarLineCategoryRepeatEnd:
       if (gGlobalLpsr2lilypondOahGroup->getKeepRepeatBarLines ()) {
         if (gGlobalLpsr2lilypondOahGroup->getRepeatBrackets ()) {
           if (fRepeatDescrsStack.size ()) {
@@ -22096,15 +22096,15 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
       }
       break;
 
-    case msrBarLine::kBarLineCategoryHookedEndingStart:
-    case msrBarLine::kBarLineCategoryHookedEndingEnd:
-    case msrBarLine::kBarLineCategoryHooklessEndingStart:
-    case msrBarLine::kBarLineCategoryHooklessEndingEnd:
+    case msrBarLineCategoryKind::kBarLineCategoryHookedEndingStart:
+    case msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd:
+    case msrBarLineCategoryKind::kBarLineCategoryHooklessEndingStart:
+    case msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd:
       // should not occur, since
       // LilyPond will take care of displaying the repeat
       break;
 
-    case msrBarLine::k_NoBarLineCategory:
+    case msrBarLineCategoryKind::k_NoBarLineCategory:
       {
         stringstream s;
 
@@ -23089,31 +23089,31 @@ void lpsr2lilypondTranslator::visitStart (S_msrRehearsalMark& elt)
     "\\mark\\markup { ";
 
   switch (elt->getRehearsalMarkKind ()) {
-    case msrRehearsalMark::kNone:
+    case msrRehearsalMarkKind::kRehearsalMarkNone:
       fLilypondCodeStream <<
         "\\box"; // default value
       break;
-    case msrRehearsalMark::kRectangle:
+    case msrRehearsalMarkKind::kRehearsalMarkRectangle:
       fLilypondCodeStream <<
         "\\box";
       break;
-    case msrRehearsalMark::kOval:
+    case msrRehearsalMarkKind::kRehearsalMarkOval:
       fLilypondCodeStream <<
         "\\oval";
       break;
-    case msrRehearsalMark::kCircle:
+    case msrRehearsalMarkKind::kRehearsalMarkCircle:
       fLilypondCodeStream <<
         "\\circle";
       break;
-    case msrRehearsalMark::kBracket:
+    case msrRehearsalMarkKind::kRehearsalMarkBracket:
       fLilypondCodeStream <<
         "\\bracket";
       break;
-    case msrRehearsalMark::kTriangle:
+    case msrRehearsalMarkKind::kRehearsalMarkTriangle:
       fLilypondCodeStream <<
         "%{ \\triangle??? %}";
       break;
-    case msrRehearsalMark::kDiamond:
+    case msrRehearsalMarkKind::kRehearsalMarkDiamond:
       fLilypondCodeStream <<
         "%{ \\diamond??? %}";
       break;

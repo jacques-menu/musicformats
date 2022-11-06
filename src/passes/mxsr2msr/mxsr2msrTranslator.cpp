@@ -246,7 +246,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentBarLineHasCodaKind  = msrBarLine::kBarLineHasCodaNo;
 
   fCurrentBarLineLocationKind        = msrBarLine::kBarLineLocationNone;
-  fCurrentBarLineStyleKind           = msrBarLine::kBarLineStyleNone;
+  fCurrentBarLineStyleKind           = msrBarLineStyleKind::kBarLineStyleNone;
   fCurrentBarLineEndingTypeKind      = msrBarLine::kBarLineEndingNone;
   fCurrentBarLineRepeatDirectionKind = msrBarLine::kBarLineRepeatDirectionNone;
   fCurrentBarLineRepeatWingedKind    = msrBarLine::kBarLineRepeatWingedNone;
@@ -1751,43 +1751,43 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
           msrLineWidth::k_NoLineWidthTypeKind;
 
       if      (lineWidthTypeString == "beam")
-        lineWidthTypeKind = msrLineWidth::kBeamLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeBeam;
       else if (lineWidthTypeString == "bracket")
-        lineWidthTypeKind = msrLineWidth::kBracketLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeBracket;
       else if (lineWidthTypeString == "dashes")
-        lineWidthTypeKind = msrLineWidth::kDashesLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeDashes;
       else if (lineWidthTypeString == "enclosure")
-        lineWidthTypeKind = msrLineWidth::kEnclosureLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeEnclosure;
       else if (lineWidthTypeString == "ending")
-        lineWidthTypeKind = msrLineWidth::kEndingLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeEnding;
       else if (lineWidthTypeString == "extend")
-        lineWidthTypeKind = msrLineWidth::kExtendLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeExtend;
       else if (lineWidthTypeString == "heavy barline")
-        lineWidthTypeKind = msrLineWidth::kHeavyBarLineLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeHeavyBarLine;
       else if (lineWidthTypeString == "leger")
-        lineWidthTypeKind = msrLineWidth::kLegerLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeHeavyLeger;
       else if (lineWidthTypeString == "light barline")
-        lineWidthTypeKind = msrLineWidth::kLightBarLineLineWidthLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeLightBarLine;
       else if (lineWidthTypeString == "octave shift")
-        lineWidthTypeKind = msrLineWidth::kOctaveShiftLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeOctaveShift;
       else if (lineWidthTypeString == "pedal")
-        lineWidthTypeKind = msrLineWidth::kPedalLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypePedal;
       else if (lineWidthTypeString == "slur middle")
-        lineWidthTypeKind = msrLineWidth::kSlurMiddleLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeSlurMiddle;
       else if (lineWidthTypeString == "slur tip")
-        lineWidthTypeKind = msrLineWidth::kSlurTipLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeSlurTip;
       else if (lineWidthTypeString == "staff")
-        lineWidthTypeKind = msrLineWidth::kStaffLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeStaff;
       else if (lineWidthTypeString == "stem")
-        lineWidthTypeKind = msrLineWidth::kStemLineWidthLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeStem;
       else if (lineWidthTypeString == "tie middle")
-        lineWidthTypeKind = msrLineWidth::kTieMiddleLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeTieMiddle;
       else if (lineWidthTypeString == "tie tip")
-        lineWidthTypeKind = msrLineWidth::kTieTipLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeTieTip;
       else if (lineWidthTypeString == "tuplet bracket")
-        lineWidthTypeKind = msrLineWidth::kTupletBracketLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeTupletBracket;
       else if (lineWidthTypeString == "wedge")
-        lineWidthTypeKind = msrLineWidth::kWedgeLineWidth;
+        lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeWedge;
 
       else {
         stringstream s;
@@ -4843,7 +4843,7 @@ void mxsr2msrTranslator::visitStart (S_words& elt)
           msrRehearsalMark::create (
             inputLineNumber,
 		        nullptr, // will be set when rehearsal mark is appended to a measure JMI v0.9.66 PIM
-            msrRehearsalMark::kNone, // JMI allow for other values???
+            msrRehearsalMarkKind::kRehearsalMarkNone, // JMI allow for other values???
             wordsValue,
             fCurrentDirectionPlacementKind);
 
@@ -9326,7 +9326,7 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
   fCurrentBarLineHasCodaKind  = msrBarLine::kBarLineHasCodaNo;
 
   fCurrentBarLineLocationKind        = msrBarLine::kBarLineLocationNone;
-  fCurrentBarLineStyleKind           = msrBarLine::kBarLineStyleNone;
+  fCurrentBarLineStyleKind           = msrBarLineStyleKind::kBarLineStyleNone;
   fCurrentBarLineEndingTypeKind      = msrBarLine::kBarLineEndingNone;
   fCurrentBarLineRepeatDirectionKind = msrBarLine::kBarLineRepeatDirectionNone;
   fCurrentBarLineRepeatWingedKind    = msrBarLine::kBarLineRepeatWingedNone;
@@ -9391,51 +9391,51 @@ void mxsr2msrTranslator::visitStart (S_bar_style& elt)
   string barStyle = elt->getValue();
 
   fCurrentBarLineStyleKind =
-    msrBarLine::kBarLineStyleNone; // default value
+    msrBarLineStyleKind::kBarLineStyleNone; // default value
 
   if      (barStyle == "regular") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleRegular;
+      msrBarLineStyleKind::kBarLineStyleRegular;
   }
   else if (barStyle == "dotted") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleDotted;
+      msrBarLineStyleKind::kBarLineStyleDotted;
   }
   else if (barStyle == "dashed") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleDashed;
+      msrBarLineStyleKind::kBarLineStyleDashed;
   }
   else if (barStyle == "heavy") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleHeavy;
+      msrBarLineStyleKind::kBarLineStyleHeavy;
   }
   else if (barStyle == "light-light") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleLightLight;
+      msrBarLineStyleKind::kBarLineStyleLightLight;
   }
   else if (barStyle == "light-heavy") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleLightHeavy;
+      msrBarLineStyleKind::kBarLineStyleLightHeavy;
   }
   else if (barStyle == "heavy-light") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleHeavyLight;
+      msrBarLineStyleKind::kBarLineStyleHeavyLight;
   }
   else if (barStyle == "heavy-heavy") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleHeavyHeavy;
+      msrBarLineStyleKind::kBarLineStyleHeavyHeavy;
   }
   else if (barStyle == "tick") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleTick;
+      msrBarLineStyleKind::kBarLineStyleTick;
   }
   else if (barStyle == "short") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleShort;
+      msrBarLineStyleKind::kBarLineStyleShort;
   }
   else if (barStyle == "[NONE]") {
     fCurrentBarLineStyleKind =
-      msrBarLine::kBarLineStyleNone;
+      msrBarLineStyleKind::kBarLineStyleNone;
   }
   else {
     mxsr2msrError (
@@ -9625,19 +9625,19 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
 
   string type = elt->getAttributeValue ("type");
 
-  msrPedal::msrPedalTypeKind pedalTypeKind = msrPedal::k_NoPedalType;
+  msrPedal::msrPedalTypeKind pedalTypeKind = msrPedalTypeKind::k_NoPedalType;
 
   if       (type == "start") {
-    pedalTypeKind = msrPedal::kPedalStart;
+    pedalTypeKind = msrPedalTypeKind::kPedalTypeStart;
   }
   else  if (type == "continue") {
-    pedalTypeKind = msrPedal::kPedalContinue;
+    pedalTypeKind = msrPedalTypeKind::kPedalTypeContinue;
   }
   else  if (type == "change") {
-    pedalTypeKind = msrPedal::kPedalChange;
+    pedalTypeKind = msrPedalTypeKind::kPedalTypeChange;
   }
   else  if (type == "stop") {
-    pedalTypeKind = msrPedal::kPedalStop;
+    pedalTypeKind = msrPedalTypeKind::kPedalTypeStop;
   }
   else {
     stringstream s;
@@ -9655,13 +9655,13 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
 
   string line = elt->getAttributeValue ("line");
 
-  msrPedal::msrPedalLineKind pedalLineKind = msrPedal::kPedalLineNo;
+  msrPedal::msrPedalLineKind pedalLineKind = msrPedalTypeKind::kPedalLineNo;
 
   if       (line == "yes") {
-    pedalLineKind = msrPedal::kPedalLineYes;
+    pedalLineKind = msrPedalTypeKind::kPedalLineYes;
   }
   else  if (line == "no") {
-    pedalLineKind = msrPedal::kPedalLineNo;
+    pedalLineKind = msrPedalTypeKind::kPedalLineNo;
   }
   else {
     if (line.size ()) {
@@ -9685,13 +9685,13 @@ void mxsr2msrTranslator::visitStart (S_pedal& elt)
 
   msrPedal::msrPedalSignKind
     pedalSignKind =
-      msrPedal::kPedalSignNo;
+      msrPedalTypeKind::kPedalSignNo;
 
   if       (sign == "yes") {
-    pedalSignKind = msrPedal::kPedalSignYes;
+    pedalSignKind = msrPedalTypeKind::kPedalSignYes;
   }
   else  if (sign == "no") {
-    pedalSignKind = msrPedal::kPedalSignNo;
+    pedalSignKind = msrPedalTypeKind::kPedalSignNo;
   }
   else {
     if (sign.size ()) {
@@ -9949,7 +9949,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         fCurrentBarLineEndingTypeKind,
         fCurrentBarLineEndingNumber,
         fCurrentBarLineTimes,
-        msrBarLine::k_NoBarLineCategory, // will be set afterwards
+        msrBarLineCategoryKind::k_NoBarLineCategory, // will be set afterwards
         fCurrentBarLineHasSegnoKind,
         fCurrentBarLineHasCodaKind,
         fCurrentBarLineRepeatWingedKind);
@@ -10020,7 +10020,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         // set the barLine category
         barLine->
           setBarLineCategory (
-            msrBarLine::kBarLineCategoryRepeatStart);
+            msrBarLineCategoryKind::kBarLineCategoryRepeatStart);
 
         // handle the repeat start
         handleRepeatStart (barLine);
@@ -10045,12 +10045,12 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
           // set current barLine ending start category
           fCurrentRepeatEndingStartBarLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryHookedEndingStart);
+              msrBarLineCategoryKind::kBarLineCategoryHookedEndingStart);
 
           // set this barLine's category
           barLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryHookedEndingEnd);
+              msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd);
 
           // handle the repeat hooked ending end
           handleRepeatHookedEndingEnd (barLine);
@@ -10069,7 +10069,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
           // set this barLine's category
           barLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryRepeatEnd);
+              msrBarLineCategoryKind::kBarLineCategoryRepeatEnd);
 
           // handle the repeat end
           handleRepeatEnd (barLine);
@@ -10087,12 +10087,12 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
           // set current barLine ending start category
           fCurrentRepeatEndingStartBarLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryHooklessEndingStart);
+              msrBarLineCategoryKind::kBarLineCategoryHooklessEndingStart);
 
           // set this barLine's category
           barLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryHooklessEndingEnd);
+              msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd);
 
           // handle the repeat hookless ending end
           handleRepeatHooklessEndingEnd (barLine);
@@ -10109,19 +10109,19 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
   // set the barLine category to stand alone if not yet handled
   if (! barLineHasBeenHandled) {
     switch (fCurrentBarLineStyleKind) {
-      case msrBarLine::kBarLineStyleRegular:
-      case msrBarLine::kBarLineStyleDotted:
-      case msrBarLine::kBarLineStyleDashed:
-      case msrBarLine::kBarLineStyleHeavy:
-      case msrBarLine::kBarLineStyleLightLight:
-      case msrBarLine::kBarLineStyleLightHeavy:
-      case msrBarLine::kBarLineStyleHeavyLight:
-      case msrBarLine::kBarLineStyleHeavyHeavy:
-      case msrBarLine::kBarLineStyleTick:
-      case msrBarLine::kBarLineStyleShort:
+      case msrBarLineStyleKind::kBarLineStyleRegular:
+      case msrBarLineStyleKind::kBarLineStyleDotted:
+      case msrBarLineStyleKind::kBarLineStyleDashed:
+      case msrBarLineStyleKind::kBarLineStyleHeavy:
+      case msrBarLineStyleKind::kBarLineStyleLightLight:
+      case msrBarLineStyleKind::kBarLineStyleLightHeavy:
+      case msrBarLineStyleKind::kBarLineStyleHeavyLight:
+      case msrBarLineStyleKind::kBarLineStyleHeavyHeavy:
+      case msrBarLineStyleKind::kBarLineStyleTick:
+      case msrBarLineStyleKind::kBarLineStyleShort:
         barLine->
           setBarLineCategory (
-            msrBarLine::kBarLineCategoryStandalone);
+            msrBarLineCategoryKind::kBarLineCategoryStandalone);
 
         // append the bar line to the current part
   #ifdef TRACING_IS_ENABLED
@@ -10147,7 +10147,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         barLineHasBeenHandled = true;
         break;
 
-      case msrBarLine::kBarLineStyleNone:
+      case msrBarLineStyleKind::kBarLineStyleNone:
         stringstream s;
 
         s <<
@@ -10181,7 +10181,7 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
 /* JMI
   // sanity check
   switch (barLine->getBarLineCategory ()) {
-    case msrBarLine::k_NoBarLineCategory:
+    case msrBarLineCategoryKind::k_NoBarLineCategory:
       {
         stringstream s;
 
@@ -10197,13 +10197,13 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
         s.str ());
       }
       break;
-    case msrBarLine::kBarLineCategoryStandalone:
-    case msrBarLine::kBarLineCategoryRepeatStart:
-    case msrBarLine::kBarLineCategoryRepeatEnd:
-    case msrBarLine::kBarLineCategoryHookedEndingStart:
-    case msrBarLine::kBarLineCategoryHookedEndingEnd:
-    case msrBarLine::kBarLineCategoryHooklessEndingStart:
-    case msrBarLine::kBarLineCategoryHooklessEndingEnd:
+    case msrBarLineCategoryKind::kBarLineCategoryStandalone:
+    case msrBarLineCategoryKind::kBarLineCategoryRepeatStart:
+    case msrBarLineCategoryKind::kBarLineCategoryRepeatEnd:
+    case msrBarLineCategoryKind::kBarLineCategoryHookedEndingStart:
+    case msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd:
+    case msrBarLineCategoryKind::kBarLineCategoryHooklessEndingStart:
+    case msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd:
       break;
   } // switch
 */
@@ -12350,14 +12350,14 @@ void mxsr2msrTranslator::visitStart (S_non_arpeggiate& elt)
 
   msrNonArpeggiato::msrNonArpeggiatoTypeKind
     nonArpeggiatoTypeKind =
-      msrNonArpeggiato::kArticulationNonArpeggiatoTypeNone; // default value
+      msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeNone; // default value
 
   if      (typeString == "top")
     nonArpeggiatoTypeKind =
-      msrNonArpeggiato::kArticulationNonArpeggiatoTypeTop;
+      msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeTop;
   else if (typeString == "bottom")
     nonArpeggiatoTypeKind =
-      msrNonArpeggiato::kArticulationNonArpeggiatoTypeBottom;
+      msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeBottom;
   else {
     if (typeString.size ()) {
 
@@ -24449,28 +24449,28 @@ void mxsr2msrTranslator::visitStart (S_rehearsal& elt)
 
   msrRehearsalMark::msrRehearsalMarkKind
     rehearsalKind =
-      msrRehearsalMark::kNone; // default value
+      msrRehearsalMarkKind::kRehearsalMarkNone; // default value
 
   if      (rehearsalEnclosure == "[NONE]") {
-    rehearsalKind = msrRehearsalMark::kNone;
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkNone;
   }
   else if (rehearsalEnclosure == "rectangle") {
-    rehearsalKind = msrRehearsalMark::kRectangle;
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkRectangle;
   }
   else if (rehearsalEnclosure == "oval") {
-    rehearsalKind = msrRehearsalMark::kOval;
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkOval;
   }
   else if (rehearsalEnclosure == "circle") {
-    rehearsalKind = msrRehearsalMark::kCircle;
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkCircle;
   }
   else if (rehearsalEnclosure == "bracket") {
-    rehearsalKind = msrRehearsalMark::kBracket;
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkBracket;
   }
   else if (rehearsalEnclosure == "triangle") {
-    rehearsalKind = msrRehearsalMark::kTriangle;
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkTriangle;
   }
   else if (rehearsalEnclosure == "diamond") {
-    rehearsalKind = msrRehearsalMark::kDiamond;
+    rehearsalKind = msrRehearsalMarkKind::kRehearsalMarkDiamond;
   }
   else {
     if (rehearsalEnclosure.size ()) {
@@ -26722,7 +26722,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //         rehearsalMark =
 //           msrRehearsalMark::create (
 //             inputLineNumber,
-//             msrRehearsalMark::kNone, // JMI allow for other values???
+//             msrRehearsalMarkKind::kRehearsalMarkNone, // JMI allow for other values???
 //             wordsValue,
 //             fCurrentDirectionPlacementKind);
 //
@@ -26756,7 +26756,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //         rehearsalMark =
 //           msrRehearsalMark::create (
 //             inputLineNumber,
-//             msrRehearsalMark::kNone, // JMI allow for other values???
+//             msrRehearsalMarkKind::kRehearsalMarkNone, // JMI allow for other values???
 //             wordsValue,
 //             fCurrentDirectionPlacementKind);
 //
@@ -26787,7 +26787,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //     rehearsalMark =
 //       msrRehearsalMark::create (
 //         inputLineNumber,
-//         msrRehearsalMark::kNone, // JMI allow for other values???
+//         msrRehearsalMarkKind::kRehearsalMarkNone, // JMI allow for other values???
 //         wordsValue,
 //         fCurrentDirectionPlacementKind);
 //
@@ -26821,7 +26821,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //     rehearsalMark =
 //       msrRehearsalMark::create (
 //         inputLineNumber,
-//         msrRehearsalMark::kNone, // JMI allow for other values???
+//         msrRehearsalMarkKind::kRehearsalMarkNone, // JMI allow for other values???
 //         wordsValue,
 //         fCurrentDirectionPlacementKind);
 //
@@ -26854,7 +26854,7 @@ The discontinue value is typically used for the last ending in a set, where ther
 //         rehearsalMark =
 //           msrRehearsalMark::create (
 //             inputLineNumber,
-//             msrRehearsalMark::kNone, // JMI allow for other values???
+//             msrRehearsalMarkKind::kRehearsalMarkNone, // JMI allow for other values???
 //             wordsValue,
 //             fCurrentDirectionPlacementKind);
 //

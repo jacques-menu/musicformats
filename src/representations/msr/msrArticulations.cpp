@@ -545,30 +545,30 @@ msrNonArpeggiato::msrNonArpeggiato (
 msrNonArpeggiato::~msrNonArpeggiato ()
 {}
 
-string msrNonArpeggiato::nonArpeggiatoTypeKindAsString (
+string msrNonArpeggiato::msrNonArpeggiatoTypeKindAsString (
   msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind)
 {
   string result;
 
   switch (nonArpeggiatoTypeKind) {
-    case msrNonArpeggiato::kArticulationNonArpeggiatoTypeNone:
-      result = "nonArpeggiatoTypeNone";
+    case msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeNone:
+      result = "kArticulationNonArpeggiatoTypeNone";
       break;
-    case msrNonArpeggiato::kArticulationNonArpeggiatoTypeTop:
-      result = "nonArpeggiatoTypeTop";
+    case msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeTop:
+      result = "kArticulationNonArpeggiatoTypeTop";
       break;
-    case msrNonArpeggiato::kArticulationNonArpeggiatoTypeBottom:
-      result = "nonArpeggiatoTypeBottom";
+    case msrNonArpeggiatoTypeKind::kArticulationNonArpeggiatoTypeBottom:
+      result = "kArticulationNonArpeggiatoTypeBottom";
       break;
   } // switch
 
   return result;
 }
 
-string msrNonArpeggiato::nonArpeggiatoTypeKindAsString () const
+ostream& operator << (ostream& os, const msrNonArpeggiatoTypeKind& elt)
 {
-  return
-    nonArpeggiatoTypeKindAsString (fNonArpeggiatoTypeKind);
+  os << msrNonArpeggiatoTypeKindAsString (elt);
+  return os;
 }
 
 void msrNonArpeggiato::acceptIn (basevisitor* v)
@@ -628,7 +628,7 @@ string msrNonArpeggiato::asString () const
     ", " <<
     articulationPlacementKindAsString () <<
     ", " <<
-    nonArpeggiatoTypeKindAsString () <<
+    msrNonArpeggiatoTypeKindAsString () <<
     ", number: " <<
     fNonArpeggiatoNumber <<
     ", line " << fInputLineNumber <<

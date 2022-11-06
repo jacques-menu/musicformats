@@ -721,17 +721,17 @@ string msrPedalTypeKindAsString (
     case k_NoPedalType:
       result = "k_NoPedalType";
       break;
-    case kPedalStart:
-      result = "kPedalStart";
+    case kPedalTypeStart:
+      result = "kPedalTypeStart";
       break;
-    case kPedalContinue:
-      result = "kPedalContinue";
+    case kPedalTypeContinue:
+      result = "kPedalTypeContinue";
       break;
-    case kPedalChange:
-      result = "kPedalChange";
+    case kPedalTypeChange:
+      result = "kPedalTypeChange";
       break;
-    case kPedalStop:
-      result = "kPedalStop";
+    case kPedalTypeStop:
+      result = "kPedalTypeStop";
       break;
   } // switch
 
@@ -750,10 +750,10 @@ string msrPedalLineKindAsString (
   string result;
 
   switch (pedalLineKind) {
-    case msrPedal::kPedalLineYes:
+    case msrPedalTypeKind::kPedalLineYes:
       result = "kPedalLineYes";
       break;
-    case msrPedal::kPedalLineNo:
+    case msrPedalTypeKind::kPedalLineNo:
       result = "kPedalLineNo";
       break;
   } // switch
@@ -773,10 +773,10 @@ string msrPedalSignKindAsString (
   string result;
 
   switch (pedalSignKind) {
-    case msrPedal::kPedalSignYes:
+    case msrPedalTypeKind::kPedalSignYes:
       result = "kPedalSignYes";
       break;
-    case msrPedal::kPedalSignNo:
+    case msrPedalTypeKind::kPedalSignNo:
       result = "kPedalSignNo";
       break;
   } // switch

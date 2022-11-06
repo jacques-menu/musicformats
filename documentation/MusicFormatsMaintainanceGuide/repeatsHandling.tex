@@ -162,7 +162,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         fCurrentBarLineEndingTypeKind,
         fCurrentBarLineEndingNumber,
         fCurrentBarLineTimes,
-        msrBarLine::k_NoBarLineCategory, // will be set afterwards
+        msrBarLineCategoryKind::k_NoBarLineCategory, // will be set afterwards
         fCurrentBarLineHasSegnoKind,
         fCurrentBarLineHasCodaKind,
         fCurrentBarLineRepeatWingedKind);
@@ -219,7 +219,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         // set the barLine category
         barLine->
           setBarLineCategory (
-            msrBarLine::kBarLineCategoryRepeatStart);
+            msrBarLineCategoryKind::kBarLineCategoryRepeatStart);
 
         // handle the repeat start
         handleRepeatStart (barLine);
@@ -244,12 +244,12 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
           // set current barLine ending start category
           fCurrentRepeatEndingStartBarLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryHookedEndingStart);
+              msrBarLineCategoryKind::kBarLineCategoryHookedEndingStart);
 
           // set this barLine's category
           barLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryHookedEndingEnd);
+              msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd);
 
           // handle the repeat hooked ending end
           handleRepeatHookedEndingEnd (barLine);
@@ -268,7 +268,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
           // set this barLine's category
           barLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryRepeatEnd);
+              msrBarLineCategoryKind::kBarLineCategoryRepeatEnd);
 
           // handle the repeat end
           handleRepeatEnd (barLine);
@@ -286,12 +286,12 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
           // set current barLine ending start category
           fCurrentRepeatEndingStartBarLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryHooklessEndingStart);
+              msrBarLineCategoryKind::kBarLineCategoryHooklessEndingStart);
 
           // set this barLine's category
           barLine->
             setBarLineCategory (
-              msrBarLine::kBarLineCategoryHooklessEndingEnd);
+              msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd);
 
           // handle the repeat hookless ending end
           handleRepeatHooklessEndingEnd (barLine);
@@ -308,19 +308,19 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
   // set the barLine category to stand alone if not yet handled
   if (! barLineHasBeenHandled) {
     switch (fCurrentBarLineStyleKind) {
-      case msrBarLine::kBarLineStyleRegular:
-      case msrBarLine::kBarLineStyleDotted:
-      case msrBarLine::kBarLineStyleDashed:
-      case msrBarLine::kBarLineStyleHeavy:
-      case msrBarLine::kBarLineStyleLightLight:
-      case msrBarLine::kBarLineStyleLightHeavy:
-      case msrBarLine::kBarLineStyleHeavyLight:
-      case msrBarLine::kBarLineStyleHeavyHeavy:
-      case msrBarLine::kBarLineStyleTick:
-      case msrBarLine::kBarLineStyleShort:
+      case msrBarLineStyleKind::kBarLineStyleRegular:
+      case msrBarLineStyleKind::kBarLineStyleDotted:
+      case msrBarLineStyleKind::kBarLineStyleDashed:
+      case msrBarLineStyleKind::kBarLineStyleHeavy:
+      case msrBarLineStyleKind::kBarLineStyleLightLight:
+      case msrBarLineStyleKind::kBarLineStyleLightHeavy:
+      case msrBarLineStyleKind::kBarLineStyleHeavyLight:
+      case msrBarLineStyleKind::kBarLineStyleHeavyHeavy:
+      case msrBarLineStyleKind::kBarLineStyleTick:
+      case msrBarLineStyleKind::kBarLineStyleShort:
         barLine->
           setBarLineCategory (
-            msrBarLine::kBarLineCategoryStandalone);
+            msrBarLineCategoryKind::kBarLineCategoryStandalone);
 
         // append the bar line to the current part
 				// ... ... ...
@@ -331,7 +331,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         barLineHasBeenHandled = true;
         break;
 
-      case msrBarLine::kBarLineStyleNone:
+      case msrBarLineStyleKind::kBarLineStyleNone:
         stringstream s;
 
         s <<

@@ -163,7 +163,7 @@ void msrBarLine::setBarLineCategory (
             "Setting barLine category of " <<
             this->asString () <<
             " to '" <<
-            barLineCategoryKindAsString (barLineCategoryKind) <<
+            msrBarLineCategoryKindAsString (barLineCategoryKind) <<
             "'" <<
             endl;
         }
@@ -247,7 +247,7 @@ void msrBarLine::acceptOut (basevisitor* v)
 void msrBarLine::browseData (basevisitor* v)
 {}
 
-string msrBarLine::barLineLocationKindAsString (
+string msrBarLineLocationKindAsString (
   msrBarLineLocationKind barLineLocationKind)
 {
   string result;
@@ -270,34 +270,40 @@ string msrBarLine::barLineLocationKindAsString (
   return result;
 }
 
-string msrBarLine::barLineCategoryKindAsString (
+ostream& operator << (ostream& os, const msrBarLineLocationKind& elt)
+{
+  os << msrBarLineLocationKindAsString (elt);
+  return os;
+}
+
+string msrBarLineCategoryKindAsString (
   msrBarLineCategoryKind barLineCategoryKind)
 {
   string result;
 
   switch (barLineCategoryKind) {
-    case msrBarLine::k_NoBarLineCategory:
+    case msrBarLineCategoryKind::k_NoBarLineCategory:
       result = "k_NoBarLineCategory";
       break;
-    case msrBarLine::kBarLineCategoryStandalone:
+    case msrBarLineCategoryKind::kBarLineCategoryStandalone:
       result = "kBarLineCategoryStandalone";
       break;
-    case msrBarLine::kBarLineCategoryRepeatStart:
+    case msrBarLineCategoryKind::kBarLineCategoryRepeatStart:
       result = "kBarLineCategoryRepeatStart";
       break;
-    case msrBarLine::kBarLineCategoryRepeatEnd:
+    case msrBarLineCategoryKind::kBarLineCategoryRepeatEnd:
       result = "kBarLineCategoryRepeatEnd";
       break;
-    case msrBarLine::kBarLineCategoryHookedEndingStart:
+    case msrBarLineCategoryKind::kBarLineCategoryHookedEndingStart:
       result = "kBarLineCategoryHookedEndingStart";
       break;
-    case msrBarLine::kBarLineCategoryHookedEndingEnd:
+    case msrBarLineCategoryKind::kBarLineCategoryHookedEndingEnd:
       result = "kBarLineCategoryHookedEndingEnd";
       break;
-    case msrBarLine::kBarLineCategoryHooklessEndingStart:
+    case msrBarLineCategoryKind::kBarLineCategoryHooklessEndingStart:
       result = "kBarLineCategoryHooklessEndingStart";
       break;
-    case msrBarLine::kBarLineCategoryHooklessEndingEnd:
+    case msrBarLineCategoryKind::kBarLineCategoryHooklessEndingEnd:
       result = "kBarLineCategoryHooklessEndingEnd";
       break;
   } // switch
@@ -305,7 +311,13 @@ string msrBarLine::barLineCategoryKindAsString (
   return result;
 }
 
-string msrBarLine::barLineHasSegnoKindAsString (
+ostream& operator << (ostream& os, const msrBarLineCategoryKind& elt)
+{
+  os << msrBarLineCategoryKindAsString (elt);
+  return os;
+}
+
+string msrBarLineHasSegnoKindAsString (
   msrBarLineHasSegnoKind barLineHasSegnoKind)
 {
   string result;
@@ -322,7 +334,13 @@ string msrBarLine::barLineHasSegnoKindAsString (
   return result;
 }
 
-string msrBarLine::barLineHasCodaKindAsString (
+ostream& operator << (ostream& os, const msrBarLineHasSegnoKind& elt)
+{
+  os << msrBarLineHasSegnoKindAsString (elt);
+  return os;
+}
+
+string msrBarLineHasCodaKindAsString (
   msrBarLineHasCodaKind barLineHasCodaKind)
 {
   string result;
@@ -339,43 +357,49 @@ string msrBarLine::barLineHasCodaKindAsString (
   return result;
 }
 
-string msrBarLine::barLineStyleKindAsString (
+ostream& operator << (ostream& os, const msrBarLineHasCodaKind& elt)
+{
+  os << msrBarLineHasCodaKindAsString (elt);
+  return os;
+}
+
+string msrBarLineStyleKindAsString (
   msrBarLineStyleKind barLineStyleKind)
 {
   string result;
 
   switch (barLineStyleKind) {
-    case msrBarLine::kBarLineStyleNone:
+    case msrBarLineStyleKind::kBarLineStyleNone:
       result = "kBarLineStyleNone";
       break;
-    case msrBarLine::kBarLineStyleRegular:
+    case msrBarLineStyleKind::kBarLineStyleRegular:
       result = "kBarLineStyleRegular";
       break;
-    case msrBarLine::kBarLineStyleDotted:
+    case msrBarLineStyleKind::kBarLineStyleDotted:
       result = "kBarLineStyleDotted";
       break;
-    case msrBarLine::kBarLineStyleDashed:
+    case msrBarLineStyleKind::kBarLineStyleDashed:
       result = "kBarLineStyleDashed";
       break;
-    case msrBarLine::kBarLineStyleHeavy:
+    case msrBarLineStyleKind::kBarLineStyleHeavy:
       result = "kBarLineStyleHeavy";
       break;
-    case msrBarLine::kBarLineStyleLightLight:
+    case msrBarLineStyleKind::kBarLineStyleLightLight:
       result = "kBarLineStyleLightLight";
       break;
-    case msrBarLine::kBarLineStyleLightHeavy:
+    case msrBarLineStyleKind::kBarLineStyleLightHeavy:
       result = "kBarLineStyleLightHeavy";
       break;
-    case msrBarLine::kBarLineStyleHeavyLight:
+    case msrBarLineStyleKind::kBarLineStyleHeavyLight:
       result = "kBarLineStyleHeavyLight";
       break;
-    case msrBarLine::kBarLineStyleHeavyHeavy:
+    case msrBarLineStyleKind::kBarLineStyleHeavyHeavy:
       result = "kBarLineStyleHeavyHeavy";
       break;
-    case msrBarLine::kBarLineStyleTick:
+    case msrBarLineStyleKind::kBarLineStyleTick:
       result = "kBarLineStyleTick";
       break;
-    case msrBarLine::kBarLineStyleShort:
+    case msrBarLineStyleKind::kBarLineStyleShort:
       result = "kBarLineStyleShort";
       break;
   } // switch
@@ -383,7 +407,13 @@ string msrBarLine::barLineStyleKindAsString (
   return result;
 }
 
-string msrBarLine::barLineEndingTypeKindAsString (
+ostream& operator << (ostream& os, const msrBarLineStyleKind& elt)
+{
+  os << msrBarLineStyleKindAsString (elt);
+  return os;
+}
+
+string msrBarLineEndingTypeKindAsString (
   msrBarLineEndingTypeKind barLineEndingTypeKind)
 {
   string result;
@@ -406,7 +436,13 @@ string msrBarLine::barLineEndingTypeKindAsString (
   return result;
 }
 
-string msrBarLine::barLineRepeatDirectionKindAsString (
+ostream& operator << (ostream& os, const msrBarLineEndingTypeKind& elt)
+{
+  os << msrBarLineEndingTypeKindAsString (elt);
+  return os;
+}
+
+string msrBarLineRepeatDirectionKindAsString (
   msrBarLineRepeatDirectionKind barLineRepeatDirectionKind)
 {
   string result;
@@ -426,7 +462,13 @@ string msrBarLine::barLineRepeatDirectionKindAsString (
   return result;
 }
 
-string msrBarLine::barLineRepeatWingedKindAsString (
+ostream& operator << (ostream& os, const msrBarLineRepeatDirectionKind& elt)
+{
+  os << msrBarLineRepeatDirectionKindAsString (elt);
+  return os;
+}
+
+string msrBarLineRepeatWingedKindAsString (
   msrBarLineRepeatWingedKind barLineRepeatWingedKind)
 {
   string result;
@@ -450,6 +492,12 @@ string msrBarLine::barLineRepeatWingedKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrBarLineRepeatWingedKind& elt)
+{
+  os << msrBarLineRepeatWingedKindAsString (elt);
+  return os;
 }
 
 string msrBarLine::endingNumbersListAsString () const
@@ -477,31 +525,31 @@ string msrBarLine::asShortString () const
 
   s <<
     "[BarLine " <<
-    barLineCategoryKindAsString (fBarLineCategoryKind) <<
+    msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
     ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
     ", fMeasureElementMeasurePosition " << fMeasureElementMeasurePosition <<
 
 /* JMI
     ", " <<
-    barLineHasSegnoKindAsString (
+    msrBarLineHasSegnoKindAsString (
       fBarLineHasSegnoKind) <<
     ", " <<
-    barLineHasCodaKindAsString (
+    msrBarLineHasCodaKindAsString (
       fBarLineHasCodaKind) <<
 
     ", " <<
-    barLineLocationKindAsString (fLocationKind) <<
+    msrBarLineLocationKindAsString (fLocationKind) <<
     ", " <<
-    barLineStyleKindAsString (fStyleKind) <<
+    msrBarLineStyleKindAsString (fStyleKind) <<
     ", " <<
-    barLineEndingTypeKindAsString (fEndingTypeKind) <<
+    msrBarLineEndingTypeKindAsString (fEndingTypeKind) <<
     ", " <<
     endingNumbersListAsString () <<
 
     ", " <<
-    barLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
+    msrBarLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
     ", " <<
-    barLineRepeatWingedKindAsString (fRepeatWingedKind) <<
+    msrBarLineRepeatWingedKindAsString (fRepeatWingedKind) <<
     */
     ", " <<
     fBarLineTimes << " times" <<
@@ -517,23 +565,23 @@ string msrBarLine::asString () const
 
   s <<
     "[BarLine " <<
-    barLineCategoryKindAsString (fBarLineCategoryKind) <<
+    msrBarLineCategoryKindAsString (fBarLineCategoryKind) <<
     ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
 
     ", " <<
-    barLineLocationKindAsString (fLocationKind) <<
+    msrBarLineLocationKindAsString (fLocationKind) <<
     ", " <<
-    barLineStyleKindAsString (fStyleKind) <<
+    msrBarLineStyleKindAsString (fStyleKind) <<
 
     ", " <<
-    barLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
+    msrBarLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
 
     ", " <<
-    barLineRepeatWingedKindAsString (fRepeatWingedKind) <<
+    msrBarLineRepeatWingedKindAsString (fRepeatWingedKind) <<
 
     ", " <<
-    barLineEndingTypeKindAsString (fEndingTypeKind) <<
+    msrBarLineEndingTypeKindAsString (fEndingTypeKind) <<
     ", " <<
     endingNumbersListAsString () <<
 
@@ -541,10 +589,10 @@ string msrBarLine::asString () const
     fBarLineTimes << "\" times" <<
 
     ", " <<
-    barLineHasSegnoKindAsString (
+    msrBarLineHasSegnoKindAsString (
       fBarLineHasSegnoKind) <<
     ", " <<
-    barLineHasCodaKindAsString (
+    msrBarLineHasCodaKindAsString (
       fBarLineHasCodaKind) <<
 
     ", line " << fInputLineNumber <<
@@ -558,7 +606,7 @@ void msrBarLine::print (ostream& os) const
   os <<
     "[BarLine" <<
     ", fBarLineCategoryKind: " <<
-    barLineCategoryKindAsString (
+    msrBarLineCategoryKindAsString (
       fBarLineCategoryKind) <<
     ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<
@@ -572,26 +620,26 @@ void msrBarLine::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
     "fLocationKind" << " : " <<
-    barLineLocationKindAsString (fLocationKind) <<
+    msrBarLineLocationKindAsString (fLocationKind) <<
     endl <<
     setw (fieldWidth) <<
     "fStyleKind" << " : " <<
-    barLineStyleKindAsString (fStyleKind) <<
+    msrBarLineStyleKindAsString (fStyleKind) <<
     endl <<
 
     setw (fieldWidth) <<
     "fRepeatDirectionKind" << " : " <<
-    barLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
+    msrBarLineRepeatDirectionKindAsString (fRepeatDirectionKind) <<
     endl <<
 
     setw (fieldWidth) <<
     "fRepeatWingedKind" << " : " <<
-    barLineRepeatWingedKindAsString (fRepeatWingedKind) <<
+    msrBarLineRepeatWingedKindAsString (fRepeatWingedKind) <<
     endl <<
 
     setw (fieldWidth) <<
     "fEndingTypeKind" << " : " <<
-    barLineEndingTypeKindAsString (fEndingTypeKind) <<
+    msrBarLineEndingTypeKindAsString (fEndingTypeKind) <<
     endl <<
     setw (fieldWidth) <<
     "fEndingNumber" << " : " <<
@@ -606,19 +654,19 @@ void msrBarLine::print (ostream& os) const
 /* JMI
     setw (fieldWidth) <<
     "fBarLineCategoryKind" << " : " <<
-    barLineCategoryKindAsString (
+    msrBarLineCategoryKindAsString (
       fBarLineCategoryKind) <<
     endl <<
 */
 
     setw (fieldWidth) <<
     "fBarLineHasSegnoKind" << " : " <<
-    barLineHasSegnoKindAsString (
+    msrBarLineHasSegnoKindAsString (
       fBarLineHasSegnoKind) <<
     endl <<
     setw (fieldWidth) <<
     "fBarLineHasCodaKind" << " : " <<
-    barLineHasCodaKindAsString (
+    msrBarLineHasCodaKindAsString (
       fBarLineHasCodaKind) <<
     endl <<
 
@@ -644,7 +692,7 @@ void msrBarLine::printShort (ostream& os) const
   os <<
     "[BarLine" <<
     ", fBarLineCategoryKind: " << fBarLineCategoryKind <<
-    barLineCategoryKindAsString (
+    msrBarLineCategoryKindAsString (
       fBarLineCategoryKind) <<
     ", measureElementMeasureNumber: " << fetchMeasureElementMeasureNumber () <<
     ", fMeasureElementMeasurePosition: " << fMeasureElementMeasurePosition <<

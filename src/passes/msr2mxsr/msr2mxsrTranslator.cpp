@@ -1790,61 +1790,61 @@ void msr2mxsrTranslator::populateAppearanceLineWidths (
       case msrLineWidth::k_NoLineWidthTypeKind:
         lineWidthTypeString = "k_NoLineWidthTypeKind";
         break;
-      case msrLineWidth::kBeamLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeBeam:
         lineWidthTypeString = "beam";
         break;
-      case msrLineWidth::kBracketLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeBracket:
         lineWidthTypeString = "bracket";
         break;
-      case msrLineWidth::kDashesLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeDashes:
         lineWidthTypeString = "dashes";
         break;
-      case msrLineWidth::kEnclosureLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeEnclosure:
         lineWidthTypeString = "enclosure";
         break;
-      case msrLineWidth::kEndingLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeEnding:
         lineWidthTypeString = "ending";
         break;
-      case msrLineWidth::kExtendLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeExtend:
         lineWidthTypeString = "extend";
         break;
-      case msrLineWidth::kHeavyBarLineLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeHeavyBarLine:
         lineWidthTypeString = "heavy barline";
         break;
-      case msrLineWidth::kLegerLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeHeavyLeger:
         lineWidthTypeString = "leger";
         break;
-      case msrLineWidth::kLightBarLineLineWidthLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeLightBarLine:
         lineWidthTypeString = "light barline";
         break;
-      case msrLineWidth::kOctaveShiftLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeOctaveShift:
         lineWidthTypeString = "octave shift";
         break;
-      case msrLineWidth::kPedalLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypePedal:
         lineWidthTypeString = "pedal";
         break;
-      case msrLineWidth::kSlurMiddleLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeSlurMiddle:
         lineWidthTypeString = "slur middle";
         break;
-      case msrLineWidth::kSlurTipLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeSlurTip:
         lineWidthTypeString = "slur tip";
         break;
-      case msrLineWidth::kStaffLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeStaff:
         lineWidthTypeString = "staff";
         break;
-      case msrLineWidth::kStemLineWidthLineWidth: // better name ???
+      case msrLineWidthTypeKind::kLineWidthTypeStem:
         lineWidthTypeString = "stem";
         break;
-      case msrLineWidth::kTieMiddleLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeTieMiddle:
         lineWidthTypeString = "tie middle";
         break;
-      case msrLineWidth::kTieTipLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeTieTip:
         lineWidthTypeString = "tie tip";
         break;
-      case msrLineWidth::kTupletBracketLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeTupletBracket:
         lineWidthTypeString = "tuplet bracket";
         break;
-      case msrLineWidth::kWedgeLineWidth:
+      case msrLineWidthTypeKind::kLineWidthTypeWedge:
         lineWidthTypeString = "wedge";
         break;
     } // switch
@@ -7633,36 +7633,36 @@ void msr2mxsrTranslator::visitStart (S_msrBarLine& elt)
   string barLStyleString;
 
   switch (elt->getBarLineStyleKind ()) {
-    case msrBarLine::kBarLineStyleNone:
+    case msrBarLineStyleKind::kBarLineStyleNone:
       break;
-    case msrBarLine::kBarLineStyleRegular:
+    case msrBarLineStyleKind::kBarLineStyleRegular:
       barLStyleString = "regular";
       break;
-    case msrBarLine::kBarLineStyleDotted:
+    case msrBarLineStyleKind::kBarLineStyleDotted:
       barLStyleString = "dotted";
       break;
-    case msrBarLine::kBarLineStyleDashed:
+    case msrBarLineStyleKind::kBarLineStyleDashed:
       barLStyleString = "dashed";
       break;
-    case msrBarLine::kBarLineStyleHeavy:
+    case msrBarLineStyleKind::kBarLineStyleHeavy:
       barLStyleString = "heavy";
       break;
-    case msrBarLine::kBarLineStyleLightLight:
+    case msrBarLineStyleKind::kBarLineStyleLightLight:
       barLStyleString = "light-light";
       break;
-    case msrBarLine::kBarLineStyleLightHeavy:
+    case msrBarLineStyleKind::kBarLineStyleLightHeavy:
       barLStyleString = "light-heavy";
       break;
-    case msrBarLine::kBarLineStyleHeavyLight:
+    case msrBarLineStyleKind::kBarLineStyleHeavyLight:
       barLStyleString = "heavy-light";
       break;
-    case msrBarLine::kBarLineStyleHeavyHeavy:
+    case msrBarLineStyleKind::kBarLineStyleHeavyHeavy:
       barLStyleString = "heavy-heavy";
       break;
-    case msrBarLine::kBarLineStyleTick:
+    case msrBarLineStyleKind::kBarLineStyleTick:
       barLStyleString = "tick";
       break;
-    case msrBarLine::kBarLineStyleShort:
+    case msrBarLineStyleKind::kBarLineStyleShort:
       barLStyleString = "short";
       break;
   } // switch
@@ -9087,7 +9087,7 @@ void msr2mxsrTranslator::visitStart (S_msrWords& elt)
         rehearsalMark =
           msrRehearsalMark::create (
             inputLineNumber,
-            msrRehearsalMark::kNone,
+            msrRehearsalMarkKind::kRehearsalMarkNone,
             elt->getWordsContents (),
             elt->getWordsPlacementKind ()); // above ??? JMI
 

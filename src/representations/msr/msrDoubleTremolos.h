@@ -20,19 +20,20 @@ class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
+// data types
+
+enum class msrDoubleTremoloKind {
+  kNotesDoubleTremolo, kChordsDoubleTremolo
+};
+
+string msrDoubleTremoloKindAsString (
+  msrDoubleTremoloKind doubleTremolotKind);
+
+ostream& operator << (ostream& os, const msrDoubleTremoloKind& elt);
+
 class EXP msrDoubleTremolo : public msrMeasureElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrDoubleTremoloKind {
-      kNotesDoubleTremolo, kChordsDoubleTremolo
-    };
-
-    string msrDoubleTremoloKindAsString (
-      msrDoubleTremoloKind doubleTremolotKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

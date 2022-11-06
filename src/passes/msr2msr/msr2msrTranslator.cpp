@@ -2244,7 +2244,7 @@ void msr2msrTranslator::visitStart (S_msrTempo& elt)
 //       rehearsalMark =
 //         msrRehearsalMark::create (
 //           elt->getInputLineNumber (),
-//           msrRehearsalMark::kNone,
+//           msrRehearsalMarkKind::kRehearsalMarkNone,
 //           elt->tempoWordsListAsString (" "), //JMI ???
 //           elt->getTempoPlacementKind ());
 //
@@ -5739,7 +5739,7 @@ void msr2msrTranslator::visitStart (S_msrBarLine& elt)
   if (gGlobalTracingOahGroup->getTraceBarLines ()) {
     gLogStream <<
       "Handling '" <<
-      msrBarLine::barLineCategoryKindAsString (
+      msrBarLineCategoryKindAsString (
         elt->getBarLineCategory ()) <<
       "' in voice \"" <<
       fCurrentVoiceClone->getVoiceName () << "\"" <<
@@ -5856,7 +5856,7 @@ void msr2msrTranslator::prependSkipGraceNotesGroupToPartOtherVoices (
 //         rehearsalMark =
 //           msrRehearsalMark::create (
 //             inputLineNumber,
-//             msrRehearsalMark::kNone,
+//             msrRehearsalMarkKind::kRehearsalMarkNone,
 //             elt->getWordsContents (),
 //             elt->getWordsPlacementKind ()); // above ??? JMI
 //

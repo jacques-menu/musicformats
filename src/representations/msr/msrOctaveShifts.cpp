@@ -149,8 +149,6 @@ ostream& operator << (ostream& os, const msrOctaveShiftKind& elt)
 
 string msrOctaveShift::asString () const
 {
-  string result;
-
   stringstream s;
 
   s <<

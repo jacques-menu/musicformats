@@ -3029,9 +3029,9 @@ void msrNote::appendPedalToNote (S_msrPedal pedal)
 
   if (fNotePedals.size ()) {
     if (
-      fNotePedals.back ()->getPedalTypeKind () == msrPedal::kPedalStart
+      fNotePedals.back ()->getPedalTypeKind () == msrPedalTypeKind::kPedalStart
         &&
-      pedal->getPedalTypeKind () == msrPedal::kPedalStop
+      pedal->getPedalTypeKind () == msrPedalTypeKind::kPedalStop
     ) {
       // it may happen that a given note has a 'pedal start'
       // and a 'pedal stop' in sequence, ignore both            // JMI ???

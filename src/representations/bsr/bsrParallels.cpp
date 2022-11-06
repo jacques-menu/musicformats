@@ -111,32 +111,35 @@ void bsrParallel::acceptOut (basevisitor* v)
 
 void bsrParallel::browseData (basevisitor* v)
 {
-  for (
-    list<S_bsrElement>::const_iterator i = fParallelElementsList.begin ();
-    i != fParallelElementsList.end ();
-    ++i ) {
+  for (S_bsrElement element : fParallelElementsList) {
     // browse the element
     bsrBrowser<bsrElement> browser (v);
-    browser.browse (*(*i));
+    browser.browse (*element);
   } // for
 
 }
 
-string bsrParallel::parallelLayoutKindAsString (
+string bsrParallelLayoutKindAsString (
   bsrParallelLayoutKind parallelLayoutKind)
 {
   string result;
 
   switch (parallelLayoutKind) {
     case bsrParallel::kParallelLayoutBarOverBarKind:
-      result = "parallelLayoutBarOverBarKind";
+      result = "kParallelLayoutBarOverBarKind";
       break;
     case bsrParallel::kParallelLayoutLineOverLineKind:
-      result = "parallelLayoutLineOverLineKind";
+      result = "kParallelLayoutLineOverLineKind";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const bsrParallelLayoutKind& elt)
+{
+  os << bsrParallelLayoutKindAsString (elt);
+  return os;
 }
 
 void bsrParallel::print (ostream& os) const
@@ -201,7 +204,7 @@ ostream& operator << (ostream& os, const S_bsrParallel& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

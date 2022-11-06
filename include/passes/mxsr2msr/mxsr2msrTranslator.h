@@ -1785,7 +1785,7 @@ class EXP mxsr2msrTranslator :
 
     msrBarLine::msrBarLineLocationKind
                               fCurrentBarLineLocationKind;
-    msrBarLine::msrBarLineStyleKind
+    msrBarLineStyleKind
                               fCurrentBarLineStyleKind;
     msrBarLine::msrBarLineEndingTypeKind
                               fCurrentBarLineEndingTypeKind;
