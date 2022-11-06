@@ -114,16 +114,16 @@ void mxsr2msrTranslator::visitStart ( S_barline& elt )
         elt->getAttributeValue ("location");
 
     fCurrentBarLineLocationKind =
-      msrBarLine::kBarLineLocationRight; // by default
+      msrBarLineLocationKind::kBarLineLocationRight; // by default
 
     if       (location == "left") {
-      fCurrentBarLineLocationKind = msrBarLine::kBarLineLocationLeft;
+      fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationLeft;
     }
     else  if (location == "middle") {
-      fCurrentBarLineLocationKind = msrBarLine::kBarLineLocationMiddle;
+      fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationMiddle;
     }
     else if  (location == "right") {
-      fCurrentBarLineLocationKind = msrBarLine::kBarLineLocationRight;
+      fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationRight;
     }
     else {
       stringstream s;
@@ -178,11 +178,11 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
   Bool barLineHasBeenHandled = false;
 
   switch (fCurrentBarLineLocationKind) {
-    case msrBarLine::kBarLineLocationNone:
+    case msrBarLineLocationKind::kBarLineLocationNone:
       // should not occur
       break;
 
-    case msrBarLine::kBarLineLocationLeft:
+    case msrBarLineLocationKind::kBarLineLocationLeft:
       if (
         fCurrentBarLineEndingTypeKind
           ==
@@ -228,11 +228,11 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
       }
       break;
 
-    case msrBarLine::kBarLineLocationMiddle:
+    case msrBarLineLocationKind::kBarLineLocationMiddle:
       // JMI ???
       break;
 
-    case msrBarLine::kBarLineLocationRight:
+    case msrBarLineLocationKind::kBarLineLocationRight:
       {
         if (
           fCurrentBarLineEndingTypeKind == msrBarLine::kBarLineEndingTypeStop

@@ -787,7 +787,7 @@ This helps locating such occurrences in the debug process.
 
 They are used for:
 \begin{itemize}
-\item classes methods such as \method{msrTie}{create}, \method{msrTempo}{createTempoPerMinute} and \method{msrTemp}{msrTempoKindAsString};
+\item classes methods such as \method{msrTie}{create}, \method{msrTempo}{createTempoPerMinute} and \method{msrTemp}{msrTempoKBeatUnitsKindAsString};
 
 \item classes constant fields such as \constant{msrStanza}{K_NO_STANZA_NUMBER}, to be prefered to C-style {\tt \#define} preprocessor specifications for type safety;
 
@@ -860,28 +860,28 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
     string winged = elt->getAttributeValue ("winged");
 
     fCurrentBarLineRepeatWingedKind =
-      msrBarLine::kBarLineRepeatWingedNone; // default value
+      msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone; // default value
 
     if (winged.size ()) {
       if       (winged == "[NONE]") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedNone;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone;
       }
       else if (winged == "straight") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedStraight;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedStraight;
       }
       else  if (winged == "curved") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedCurved;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedCurved;
       }
       else  if (winged == "double-straight") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedDoubleStraight;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleStraight;
       }
       else  if (winged == "double-curved") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedDoubleCurved;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleCurved;
       }
       else {
         stringstream s;

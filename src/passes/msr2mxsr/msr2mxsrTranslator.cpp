@@ -1767,7 +1767,7 @@ void msr2mxsrTranslator::populateAppearanceLineWidths (
     S_msrLineWidth lineWidth = (*i);
 
     // get line width type
-    msrLineWidth::msrLineWidthTypeKind
+    msrLineWidthTypeKind
       lineWidthTypeKind =
         lineWidth->getLineWidthTypeKind ();
 
@@ -1787,8 +1787,8 @@ void msr2mxsrTranslator::populateAppearanceLineWidths (
     string lineWidthTypeString;
 
     switch (lineWidthTypeKind) {
-      case msrLineWidth::k_NoLineWidthTypeKind:
-        lineWidthTypeString = "k_NoLineWidthTypeKind";
+      case msrLineWidthTypeKind::k_NoLineWidthType:
+        lineWidthTypeString = "k_NoLineWidthType";
         break;
       case msrLineWidthTypeKind::kLineWidthTypeBeam:
         lineWidthTypeString = "beam";
@@ -1870,7 +1870,7 @@ void msr2mxsrTranslator::populateAppearanceNoteSizes (
     S_msrNoteSize noteSize = (*i);
 
     // get note size type
-    msrNoteSize::msrNoteSizeTypeKind
+    msrNoteSizeTypeKind
       noteSizeTypeKind =
         noteSize->getNoteSizeTypeKind ();
 
@@ -1890,16 +1890,16 @@ void msr2mxsrTranslator::populateAppearanceNoteSizes (
     string noteSizeTypeString;
 
     switch (noteSizeTypeKind) {
-      case msrNoteSize::k_NoNoteSizeTypeKind:
-        noteSizeTypeString = "msrNoteKind::k_NoNoteSizeTypeKind";
+      case msrNoteSizeTypeKind::k_NoNoteSizeType:
+        noteSizeTypeString = "msrNoteKind::k_NoNoteSizeType";
         break;
-      case msrNoteSize::kCueNoteSize:
+      case msrNoteSizeTypeKind::kNoteSizeTypeCue:
         noteSizeTypeString = "cue";
         break;
-      case msrNoteSize::kGraceNoteSize:
+      case msrNoteSizeTypeKind::kNoteSizeTypeGrace:
         noteSizeTypeString = "grace";
         break;
-      case msrNoteSize::kLargeNoteSize:
+      case msrNoteSizeTypeKind::kNoteSizeTypeLarge:
         noteSizeTypeString = "large";
         break;
     } // switch
@@ -1925,7 +1925,7 @@ void msr2mxsrTranslator::populateAppearanceDistances (
     S_msrDistance distance = (*i);
 
     // get line width type
-    msrDistance::msrDistanceTypeKind
+    msrDistanceTypeKind
       distanceTypeKind =
         distance->getDistanceTypeKind ();
 
@@ -1945,13 +1945,13 @@ void msr2mxsrTranslator::populateAppearanceDistances (
     string distanceTypeString;
 
     switch (distanceTypeKind) {
-      case msrDistance::k_NoDistanceTypeKind:
-        distanceTypeString = "k_NoDistanceTypeKind";
+      case msrDistanceTypeKind::k_NoDistanceType:
+        distanceTypeString = "k_NoDistanceType";
         break;
-      case msrDistance::kHyphenDistance:
+      case msrDistanceTypeKind::kDistanceTypeHyphen:
         distanceTypeString = "hyphen";
         break;
-      case msrDistance::kBeamDistance:
+      case msrDistanceTypeKind::kDistanceTypeBeam:
         distanceTypeString = "beam";
         break;
     } // switch
@@ -1977,7 +1977,7 @@ void msr2mxsrTranslator::populateAppearanceGlyphs (
     S_msrGlyph glyph = (*i);
 
     // get line width type
-    msrGlyph::msrGlyphTypeKind
+    msrGlyphTypeKind
       glyphTypeKind =
         glyph->getGlyphTypeKind ();
 
@@ -1997,49 +1997,49 @@ void msr2mxsrTranslator::populateAppearanceGlyphs (
     string glyphTypeString;
 
     switch (glyphTypeKind) {
-      case msrGlyph::k_NoGlyphTypeKind:
-        glyphTypeString = "k_NoGlyphTypeKind";
+      case msrGlyphTypeKind::k_NoGlyphType:
+        glyphTypeString = "k_NoGlyphType";
         break;
-      case msrGlyph::kQuarterRestGlyph:
+      case msrGlyphTypeKind::kGlyphTypeQuarterRest:
         glyphTypeString = "quarter-rest";
         break;
-      case msrGlyph::kGClefOttavaBassaGlyph:
+      case msrGlyphTypeKind::kGlyphTypeGClefOttavaBassa:
         glyphTypeString = "g-clef-ottava-bassa";
         break;
-      case msrGlyph::kCClefGlyph:
+      case msrGlyphTypeKind::kGlyphTypeCClef:
         glyphTypeString = "c-clef";
         break;
-      case msrGlyph::kFClefGlyph:
+      case msrGlyphTypeKind::kGlyphTypeFClef:
         glyphTypeString = "f-clef";
         break;
-      case msrGlyph::kClefPercussionGlyph:
+      case msrGlyphTypeKind::kGlyphTypePercussionClef:
         glyphTypeString = "percussion-clef";
         break;
-      case msrGlyph::kOctaveShiftUp8Glyph:
+      case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp8:
         glyphTypeString = "octave-shift-up-8";
         break;
-      case msrGlyph::kOctaveShiftDown8Glyph:
+      case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown8:
         glyphTypeString = "octave-shift-down-8";
         break;
-      case msrGlyph::kOctaveShiftContinue8Glyph:
+      case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue8:
         glyphTypeString = "octave-shift-continue-8";
         break;
-      case msrGlyph::kOctaveShiftDown15Glyph:
+      case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown15:
         glyphTypeString = "octave-shift-down-15";
         break;
-      case msrGlyph::kOctaveShiftUp15Glyph:
+      case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp15:
         glyphTypeString = "octave-shift-up-15";
         break;
-      case msrGlyph::kOctaveShiftContinue15Glyph:
+      case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue15:
         glyphTypeString = "octave-shift-continue-15";
         break;
-      case msrGlyph::kOctaveShiftDown22Glyph:
+      case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown22:
         glyphTypeString = "octave-shift-down-22";
         break;
-      case msrGlyph::kOctaveShiftUp22Glyph:
+      case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp22:
         glyphTypeString = "octave-shift-up-22";
         break;
-      case msrGlyph::kOctaveShiftContinue22Glyph:
+      case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue22:
         glyphTypeString = "octave-shift-continue-22";
         break;
     } // switch
@@ -2066,7 +2066,7 @@ void msr2mxsrTranslator::populateAppearanceOtherAppearances (
     S_msrOtherAppearance otherAppearance = (*i);
 
     // get line width type
-    msrOtherAppearance::msrOtherAppearanceTypeKind
+    msrOtherAppearanceTypeKind
       otherAppearanceTypeKind =
         otherAppearance->getOtherAppearanceTypeKind ();
 
@@ -2086,7 +2086,7 @@ void msr2mxsrTranslator::populateAppearanceOtherAppearances (
     string otherAppearanceTypeString;
 
     switch (otherAppearanceTypeKind) {
-      case msrOtherAppearance::k_NoOtherAppearanceTypeKind:
+      case msrOtherAppearanceTypeKind::k_NoOtherAppearanceTypeKind:
         otherAppearanceTypeString = "k_NoOtherAppearanceTypeKind";
         break;
     } // switch
@@ -4239,10 +4239,10 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
       elt->getTempoPlacementKind ();
 
   switch (elt->getTempoKind ()) {
-    case msrTempoKind::k_NoTempoKind:
+    case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
       break;
 
-    case msrTempoKind::kTempoBeatUnitsWordsOnly:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
       {
     /*
         fOutputStream <<
@@ -4273,7 +4273,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         }
       break;
 
-    case msrTempoKind::kTempoBeatUnitsPerMinute:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
       switch (tempoParenthesizedKind) {
         case msrTempoParenthesizedKind::kTempoParenthesizedYes:
           {
@@ -4382,7 +4382,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         } // switch
       break;
 
-    case msrTempoKind::kTempoBeatUnitsEquivalence:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsEquivalence:
       {
     /*
       fOutputStream <<
@@ -4514,7 +4514,7 @@ void msr2mxsrTranslator::visitStart (S_msrTempo& elt)
         }
       break;
 
-    case msrTempoKind::kTempoNotesRelationship:
+    case msrTempoKBeatUnitsKind::kTempoNotesRelationship:
       {
     /*
       fOutputStream <<
@@ -5464,56 +5464,56 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
       S_msrTechnical
         technical = (*i);
 
-      msrTechnical::msrTechnicalKind
+      msrTechnicalKind
         technicalKind =
           technical->getTechnicalKind ();
 
       int technicalType = kComment; // JMI
 
       switch (technicalKind) {
-        case msrTechnicalKind::kArrow:
+        case msrTechnicalKind::kTechnicalArrow:
           technicalType = k_arrow;
           break;
-        case msrTechnicalKind::kDoubleTongue:
+        case msrTechnicalKind::kTechnicalDoubleTongue:
           technicalType = k_double_tongue;
           break;
-        case msrTechnicalKind::kDownBow:
+        case msrTechnicalKind::kTechnicalDownBow:
           technicalType = k_down_bow;
           break;
-        case msrTechnicalKind::kFingernails:
+        case msrTechnicalKind::kTechnicalFingernails:
           technicalType = k_fingernails;
           break;
-        case msrTechnicalKind::kHarmonic:
+        case msrTechnicalKind::kTechnicalHarmonic:
           technicalType = k_harmonic;
           break;
-        case msrTechnicalKind::kHeel:
+        case msrTechnicalKind::kTechnicalHeel:
           technicalType = k_heel;
           break;
-        case msrTechnicalKind::kHole:
+        case msrTechnicalKind::kTechnicalHole:
           technicalType = k_hole;
           break;
-        case msrTechnicalKind::kOpenString:
+        case msrTechnicalKind::kTechnicalOpenString:
           technicalType = k_open_string;
           break;
-        case msrTechnicalKind::kSnapPizzicato:
+        case msrTechnicalKind::kTechnicalSnapPizzicato:
           technicalType = k_snap_pizzicato;
           break;
-        case msrTechnicalKind::kStopped:
+        case msrTechnicalKind::kTechnicalStopped:
           technicalType = k_stopped;
           break;
-        case msrTechnicalKind::kTap:
+        case msrTechnicalKind::kTechnicalTap:
           technicalType = k_tap;
           break;
         case msrTechnicalKind::kThumbPosition:
           technicalType = k_thumb_position;
           break;
-        case msrTechnicalKind::kToe:
+        case msrTechnicalKind::kTechnicalToe:
           technicalType = k_toe;
           break;
-        case msrTechnicalKind::kTripleTongue:
+        case msrTechnicalKind::kTechnicalTripleTongue:
           technicalType = k_triple_tongue;
           break;
-        case msrTechnicalKind::kUpBow:
+        case msrTechnicalKind::kTechnicalUpBow:
           technicalType = k_up_bow;
           break;
       } // switch
@@ -5568,7 +5568,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithIntegers (
       S_msrTechnicalWithInteger
         technicalWithInteger = (*i);
 
-      msrTechnicalWithInteger::msrTechnicalWithIntegerKind
+      msrTechnicalWithIntegerKind
         technicalWithIntegerKind =
           technicalWithInteger->getTechnicalWithIntegerKind ();
 
@@ -5646,7 +5646,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithFloats (
       S_msrTechnicalWithFloat
         technicalWithFloat = (*i);
 
-      msrTechnicalWithFloat::msrTechnicalWithFloatKind
+      msrTechnicalWithFloatKind
         technicalWithFloatKind =
           technicalWithFloat->getTechnicalWithFloatKind ();
 
@@ -5715,7 +5715,7 @@ void msr2mxsrTranslator:: appendNoteTechnicalWithStrings (
       S_msrTechnicalWithString
         technicalWithString = (*i);
 
-      msrTechnicalWithString::msrTechnicalWithStringKind
+      msrTechnicalWithStringKind
         technicalWithStringKind =
           technicalWithString->getTechnicalWithStringKind ();
 
@@ -6166,7 +6166,7 @@ void msr2mxsrTranslator:: appendNoteSpannersBeforeNote (
       } // switch
 
       if (doHandleSpanner) {
-        msrSpanner::msrSpannerKind // twice ??? JMI
+        msrSpannerKind // twice ??? JMI v0.9.66
           spannerKind =
             spanner->
               getSpannerKind ();
@@ -6271,7 +6271,7 @@ void msr2mxsrTranslator:: appendNoteSpannersAfterNote (
       } // switch
 
       if (doHandleSpanner) {
-        msrSpanner::msrSpannerKind
+        msrSpannerKind
           spannerKind =
             spanner->getSpannerKind ();
 
@@ -7675,22 +7675,22 @@ void msr2mxsrTranslator::visitStart (S_msrBarLine& elt)
     Sxmlelement barLineElement = createMxmlelement (k_barline, "");
 
     // set its "location" attribute if any
-    msrBarLine::msrBarLineLocationKind
+    msrBarLineLocationKind
       barLineLocationKind =
         elt->getLocationKind ();
 
     string barLineLocationString;
 
     switch (barLineLocationKind) {
-      case msrBarLine::kBarLineLocationNone:
+      case msrBarLineLocationKind::kBarLineLocationNone:
         break;
-      case msrBarLine::kBarLineLocationLeft:
+      case msrBarLineLocationKind::kBarLineLocationLeft:
         barLineLocationString = "left";
         break;
-      case msrBarLine::kBarLineLocationMiddle:
+      case msrBarLineLocationKind::kBarLineLocationMiddle:
         barLineLocationString = "middle";
         break;
-      case msrBarLine::kBarLineLocationRight:
+      case msrBarLineLocationKind::kBarLineLocationRight:
         barLineLocationString = "right";
         break;
     } // switch
@@ -8466,41 +8466,41 @@ void msr2mxsrTranslator::visitStart (S_msrTechnical& elt)
 
   // doest the score need the 'tongue' function?
   switch (elt->getTechnicalKind ()) {
-    case msrTechnicalKind::kArrow:
+    case msrTechnicalKind::kTechnicalArrow:
       break;
-    case msrTechnicalKind::kDoubleTongue:
+    case msrTechnicalKind::kTechnicalDoubleTongue:
       fResultingMusicxmlelement->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnicalKind::kDownBow:
+    case msrTechnicalKind::kTechnicalDownBow:
       break;
-    case msrTechnicalKind::kFingernails:
+    case msrTechnicalKind::kTechnicalFingernails:
       break;
-    case msrTechnicalKind::kHarmonic:
+    case msrTechnicalKind::kTechnicalHarmonic:
       break;
-    case msrTechnicalKind::kHeel:
+    case msrTechnicalKind::kTechnicalHeel:
       break;
-    case msrTechnicalKind::kHole:
+    case msrTechnicalKind::kTechnicalHole:
       break;
-    case msrTechnicalKind::kOpenString:
+    case msrTechnicalKind::kTechnicalOpenString:
       break;
-    case msrTechnicalKind::kSnapPizzicato:
+    case msrTechnicalKind::kTechnicalSnapPizzicato:
       break;
-    case msrTechnicalKind::kStopped:
+    case msrTechnicalKind::kTechnicalStopped:
       break;
-    case msrTechnicalKind::kTap:
+    case msrTechnicalKind::kTechnicalTap:
       break;
     case msrTechnicalKind::kThumbPosition:
       break;
-    case msrTechnicalKind::kToe:
+    case msrTechnicalKind::kTechnicalToe:
       break;
-    case msrTechnicalKind::kTripleTongue:
+    case msrTechnicalKind::kTechnicalTripleTongue:
       fResultingMusicxmlelement->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnicalKind::kUpBow:
+    case msrTechnicalKind::kTechnicalUpBow:
       break;
   } // switch
 }

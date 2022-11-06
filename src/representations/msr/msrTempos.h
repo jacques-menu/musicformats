@@ -352,18 +352,18 @@ EXP ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipElements
 //______________________________________________________________________________
 // data types
 
-enum class msrTempoKind {
-  k_NoTempoKind,
+enum class msrTempoKBeatUnitsKind {
+  k_NoTempoBeatUnits,
   kTempoBeatUnitsWordsOnly,
   kTempoBeatUnitsPerMinute,
   kTempoBeatUnitsEquivalence,
   kTempoNotesRelationship
 };
 
-string msrTempoKindAsString (
-  msrTempoKind tempoKind);
+string msrTempoKBeatUnitsKindAsString (
+  msrTempoKBeatUnitsKind tempoKind);
 
-ostream& operator << (ostream& os, const msrTempoKind& elt);
+ostream& operator << (ostream& os, const msrTempoKBeatUnitsKind& elt);
 
 enum class msrTempoParenthesizedKind {
   kTempoParenthesizedYes, kTempoParenthesizedNo
@@ -480,7 +480,7 @@ class EXP msrTempo : public msrMeasureElement
     // set and get
     // ------------------------------------------------------
 
-    msrTempoKind          getTempoKind () const
+    msrTempoKBeatUnitsKind          getTempoKind () const
                               { return fTempoKind; }
 
     const list<S_msrWords>&
@@ -561,7 +561,7 @@ class EXP msrTempo : public msrMeasureElement
 
     // commmon elements
 
-    msrTempoKind          fTempoKind;
+    msrTempoKBeatUnitsKind          fTempoKind;
 
     list<S_msrWords>      fTempoWordsList;
 

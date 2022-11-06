@@ -285,7 +285,7 @@ void msrPageLayout::print (ostream& os) const
   // page size
   os << left <<
     setw (fieldWidth) <<
-    "pageHeight" << " : ";
+    "fPageHeight" << " : ";
     if (fPageHeight) {
       os << fPageHeight;
     }
@@ -296,7 +296,7 @@ void msrPageLayout::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "pageWidth" << " : ";
+    "fPageWidth" << " : ";
     if (fPageWidth) {
       os << fPageWidth;
     }
@@ -308,7 +308,7 @@ void msrPageLayout::print (ostream& os) const
   // margins groups
   os << left <<
     setw (fieldWidth) <<
-    "oddMarginsGroup" << " : ";
+    "fOddMarginsGroup" << " : ";
     if (fOddMarginsGroup) {
       os << fOddMarginsGroup;
     }
@@ -318,7 +318,7 @@ void msrPageLayout::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "evenMarginsGroup" << " : ";
+    "fEvenMarginsGroup" << " : ";
     if (fEvenMarginsGroup) {
       os << fEvenMarginsGroup;
     }
@@ -328,7 +328,7 @@ void msrPageLayout::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "bothMarginsGroup" << " : ";
+    "fBothMarginsGroup" << " : ";
     if (fBothMarginsGroup) {
       os << fBothMarginsGroup;
     }
@@ -452,7 +452,7 @@ void msrSystemLayout::print (ostream& os) const
   // margins
   os << left <<
     setw (fieldWidth) <<
-    "leftMargin" << " : ";
+    "fLeftMargin" << " : ";
     if (fLeftMargin) {
       os << fLeftMargin;
     }
@@ -463,7 +463,7 @@ void msrSystemLayout::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "rightMargin" << " : ";
+    "fRightMargin" << " : ";
     if (fRightMargin) {
       os << fRightMargin;
     }
@@ -475,7 +475,7 @@ void msrSystemLayout::print (ostream& os) const
   // distances
   os << left <<
     setw (fieldWidth) <<
-    "systemDistance" << " : ";
+    "fSystemDistance" << " : ";
     if (fSystemDistance) {
       os << fSystemDistance;
     }
@@ -486,7 +486,7 @@ void msrSystemLayout::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "topSystemDistance" << " : ";
+    "fTopSystemDistance" << " : ";
     if (fTopSystemDistance) {
       os << fTopSystemDistance;
     }
@@ -603,12 +603,10 @@ void msrSystemDividers::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fLeftDivider" << " : " <<
-    fLeftDivider <<
+    "fLeftDivider" << " : " << fLeftDivider <<
     endl <<
     setw (fieldWidth) <<
-    "fRightDivider" << " : " <<
-    fRightDivider <<
+    "fRightDivider" << " : " << fRightDivider <<
     endl;
 
   --gIndenter;
@@ -705,7 +703,7 @@ string msrStaffLayout::asString () const
 
   s <<
     "[StaffLayout" <<
-    ", staffDistance: " << fStaffDistance <<
+    ", fStaffDistance: " << fStaffDistance <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -723,13 +721,13 @@ void msrStaffLayout::print (ostream& os) const
   // staff number
   os << left <<
     setw (fieldWidth) <<
-    "staffNumber" << " : " << fStaffNumber <<
+    "fStaffNumber" << " : " << fStaffNumber <<
     endl;
 
   // staff distance
   os << left <<
     setw (fieldWidth) <<
-    "staffDistance" << " : ";
+    "fStaffDistance" << " : ";
   if (fStaffDistance) {
     os << fStaffDistance;
   }
@@ -824,7 +822,7 @@ string msrMeasureLayout::asString () const
 
   s <<
     "[MeasureLayout" <<
-    ", measureDistance: " << fMeasureDistance <<
+    ", fMeasureDistance: " << fMeasureDistance <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -842,7 +840,7 @@ void msrMeasureLayout::print (ostream& os) const
   // measure distance
   os << left <<
     setw (fieldWidth) <<
-    "measureDistance" << " : " << fMeasureDistance <<
+    "fMeasureDistance" << " : " << fMeasureDistance <<
     endl;
 
   --gIndenter;
@@ -1003,7 +1001,7 @@ void msrPrintLayout::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "pageLayout" << " : ";
+    "fPageLayout" << " : ";
     if (fPageLayout) {
       os << fPageLayout;
     }
@@ -1013,7 +1011,7 @@ void msrPrintLayout::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "systemLayout" << " : ";
+    "fSystemLayout" << " : ";
     if (fSystemLayout) {
       os << fSystemLayout;
     }
@@ -1060,31 +1058,26 @@ void msrPrintLayout::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fStaffSpacing" << " : " <<
-    fStaffSpacing <<
+    "fStaffSpacing" << " : " << fStaffSpacing <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
-    "fNewSystem" << " : " <<
-    fNewSystem <<
+    "fNewSystem" << " : " << fNewSystem <<
     endl;
   os << left <<
     setw (fieldWidth) <<
-    "fNewPage" << " : " <<
-    fNewPage <<
+    "fNewPage" << " : " << fNewPage <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
-    "fBlankPage" << " : " <<
-    fBlankPage <<
+    "fBlankPage" << " : " << fBlankPage <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
-    "fPageNumber" << " : " <<
-    fPageNumber <<
+    "fPageNumber" << " : " << fPageNumber <<
     endl;
 
   --gIndenter;
@@ -1095,8 +1088,9 @@ void msrPrintLayout::print (ostream& os) const
 void msrPrintLayout::printShort (ostream& os) const
 {
   os <<
-    "PrintLayout" <<
+    "[PrintLayout" <<
     ", line " << fInputLineNumber <<
+    ']'
     endl;
 }
 
@@ -1195,14 +1189,14 @@ void msrLineWidth::acceptOut (basevisitor* v)
 void msrLineWidth::browseData (basevisitor* v)
 {}
 
-string msrLineWidth::msrLineWidthTypeKindAsString (
+string msrLineWidthTypeKindAsString (
   msrLineWidthTypeKind lineWidthTypeKind)
 {
   string result;
 
   switch (lineWidthTypeKind) {
-    case msrLineWidth::k_NoLineWidthTypeKind:
-      result = "k_NoLineWidthTypeKind";
+    case msrLineWidthTypeKind::k_NoLineWidthType:
+      result = "k_NoLineWidthType";
       break;
     case msrLineWidthTypeKind::kLineWidthTypeBeam:
       result = "kLineWidthTypeBeam";
@@ -1278,8 +1272,7 @@ string msrLineWidth::asString () const
 
   s <<
     "[LineWidth" <<
-    ", fLineWidthTypeKind: " <<
-    msrLineWidthTypeKindAsString (fLineWidthTypeKind) <<
+    ", fLineWidthTypeKind: " << fLineWidthTypeKind <<
      ", lineWidthValue: ";
     if (fLineWidthValue) {
       s << fLineWidthValue->asString();
@@ -1307,12 +1300,11 @@ void msrLineWidth::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "lineWidthTypeKind" << " : " <<
-    msrLineWidthTypeKindAsString (fLineWidthTypeKind) <<
+    "fLineWidthTypeKind" << " : " << fLineWidthTypeKind <<
     endl <<
 
     setw (fieldWidth) <<
-    "lineWidthValue" <<  " : ";
+    "fLineWidthValue" <<  " : ";
     if (fLineWidthValue) {
       os << fLineWidthValue;
     }
@@ -1421,27 +1413,33 @@ void msrNoteSize::acceptOut (basevisitor* v)
 void msrNoteSize::browseData (basevisitor* v)
 {}
 
-string msrNoteSize::noteSizeTypeKindAsString (
+string msrNoteSizeTypeKindAsString (
   msrNoteSizeTypeKind noteSizeTypeKind)
 {
   string result;
 
   switch (noteSizeTypeKind) {
-    case msrNoteSize::k_NoNoteSizeTypeKind:
-      result = "k_NoLineWidthTypeKind";
+    case msrNoteSizeTypeKind::k_NoNoteSizeType:
+      result = "k_NoNoteSizeType";
       break;
-    case msrNoteSize::kCueNoteSize:
-      result = "CueNoteSize";
+    case msrNoteSizeTypeKind::kNoteSizeTypeCue:
+      result = "kNoteSizeTypeCue";
       break;
-    case msrNoteSize::kGraceNoteSize:
-      result = "GraceNoteSize";
+    case msrNoteSizeTypeKind::kNoteSizeTypeGrace:
+      result = "kNoteSizeTypeGrace";
       break;
-    case msrNoteSize::kLargeNoteSize:
-      result = "LargeNoteSize";
+    case msrNoteSizeTypeKind::kNoteSizeTypeLarge:
+      result = "kNoteSizeTypeLarge";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrNoteSizeTypeKind& elt)
+{
+  os << msrNoteSizeTypeKindAsString (elt);
+  return os;
 }
 
 string msrNoteSize::asString () const
@@ -1450,9 +1448,8 @@ string msrNoteSize::asString () const
 
   s <<
     "[NoteSize" <<
-    ", noteSizeTypeKind: " <<
-    noteSizeTypeKindAsString (fNoteSizeTypeKind) <<
-    ", noteSizeValue: " << fNoteSizeValue <<
+    ", fNoteSizeTypeKind: " << fNoteSizeTypeKind <<
+    ", fNoteSizeValue: " << fNoteSizeValue <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -1472,12 +1469,11 @@ void msrNoteSize::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "noteSizeTypeKind" << " : " <<
-    noteSizeTypeKindAsString (fNoteSizeTypeKind) <<
+    "fNoteSizeTypeKind" << " : " << fNoteSizeTypeKind <<
     endl <<
 
     setw (fieldWidth) <<
-    "noteSizeValue" <<  " : " << fNoteSizeValue <<
+    "fNoteSizeValue" <<  " : " << fNoteSizeValue <<
     endl;
 
   --gIndenter;
@@ -1580,24 +1576,30 @@ void msrDistance::acceptOut (basevisitor* v)
 void msrDistance::browseData (basevisitor* v)
 {}
 
-string msrDistance::distanceTypeKindAsString (
+string msrDistanceTypeKindAsString (
   msrDistanceTypeKind distanceTypeKind)
 {
   string result;
 
   switch (distanceTypeKind) {
-    case msrDistance::k_NoDistanceTypeKind:
-      result = "k_NoDistanceTypeKind";
+    case msrDistanceTypeKind::k_NoDistanceType:
+      result = "k_NoDistanceType";
       break;
-    case msrDistance::kHyphenDistance:
-      result = "HyphenDistance";
+    case msrDistanceTypeKind::kDistanceTypeHyphen:
+      result = "kDistanceTypeHyphen";
       break;
-    case msrDistance::kBeamDistance:
-      result = "BeamDistance";
+    case msrDistanceTypeKind::kDistanceTypeBeam:
+      result = "kDistanceTypeBeam";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrDistanceTypeKind& elt)
+{
+  os << msrDistanceTypeKindAsString (elt);
+  return os;
 }
 
 string msrDistance::asString () const
@@ -1606,9 +1608,8 @@ string msrDistance::asString () const
 
   s <<
     "[Distance" <<
-    ", distanceTypeKind: " <<
-    distanceTypeKindAsString (fDistanceTypeKind) <<
-    ", distanceValue: " << fDistanceValue <<
+    ", fDistanceTypeKind: " << fDistanceTypeKind <<
+    ", fDistanceValue: " << fDistanceValue <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -1628,12 +1629,11 @@ void msrDistance::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "distanceTypeKind" << " : " <<
-    distanceTypeKindAsString (fDistanceTypeKind) <<
+    "fDistanceTypeKind" << " : " << fDistanceTypeKind <<
     endl <<
 
     setw (fieldWidth) <<
-    "distanceValue" <<  " : " << fDistanceValue <<
+    "fDistanceValue" <<  " : " << fDistanceValue <<
     endl;
 
   --gIndenter;
@@ -1736,60 +1736,66 @@ void msrGlyph::acceptOut (basevisitor* v)
 void msrGlyph::browseData (basevisitor* v)
 {}
 
-string msrGlyph::glyphTypeKindAsString (
+string msrGlyphTypeKindAsString (
   msrGlyphTypeKind glyphTypeKind)
 {
   string result;
 
   switch (glyphTypeKind) {
-    case msrGlyph::k_NoGlyphTypeKind:
-      result = "k_NoGlyphTypeKind";
+    case msrGlyphTypeKind::k_NoGlyphType:
+      result = "k_NoGlyphType";
       break;
-    case msrGlyph::kQuarterRestGlyph:
-      result = "kQuarterRestGlyph";
+    case msrGlyphTypeKind::kGlyphTypeQuarterRest:
+      result = "kGlyphTypeQuarterRest";
       break;
-    case msrGlyph::kGClefOttavaBassaGlyph:
-      result = "kGClefOttavaBassaGlyph";
+    case msrGlyphTypeKind::kGlyphTypeGClefOttavaBassa:
+      result = "kGlyphTypeGClefOttavaBassa";
       break;
-    case msrGlyph::kCClefGlyph:
-      result = "kCClefGlyph";
+    case msrGlyphTypeKind::kGlyphTypeCClef:
+      result = "kGlyphTypeCClef";
       break;
-    case msrGlyph::kFClefGlyph:
-      result = "kFClefGlyph";
+    case msrGlyphTypeKind::kGlyphTypeFClef:
+      result = "kGlyphTypeFClef";
       break;
-    case msrGlyph::kClefPercussionGlyph:
-      result = "msrClefKind::kClefPercussionGlyph";
+    case msrGlyphTypeKind::kGlyphTypePercussionClef:
+      result = "msrClefKind::kGlyphTypePercussionClef";
       break;
-    case msrGlyph::kOctaveShiftUp8Glyph:
-      result = "kOctaveShiftUp8Glyph";
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp8:
+      result = "kGlyphTypeOctaveShiftUp8";
       break;
-    case msrGlyph::kOctaveShiftDown8Glyph:
-      result = "kOctaveShiftDown8Glyph";
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown8:
+      result = "kGlyphTypeOctaveShiftDown8";
       break;
-    case msrGlyph::kOctaveShiftContinue8Glyph:
-      result = "kOctaveShiftContinue8Glyph";
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue8:
+      result = "kGlyphTypeOctaveShiftContinue8";
       break;
-    case msrGlyph::kOctaveShiftDown15Glyph:
-      result = "kOctaveShiftDown15Glyph";
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown15:
+      result = "kGlyphTypeOctaveShiftDown15";
       break;
-    case msrGlyph::kOctaveShiftUp15Glyph:
-      result = "kOctaveShiftUp15Glyph";
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp15:
+      result = "kGlyphTypeOctaveShiftUp15";
       break;
-    case msrGlyph::kOctaveShiftContinue15Glyph:
-      result = "kOctaveShiftContinue15Glyph";
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue15:
+      result = "kGlyphTypeOctaveShiftContinue15";
       break;
-    case msrGlyph::kOctaveShiftDown22Glyph:
-      result = "kOctaveShiftDown22Glyph";
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown22:
+      result = "kGlyphTypeOctaveShiftDown22";
       break;
-    case msrGlyph::kOctaveShiftUp22Glyph:
-      result = "kOctaveShiftUp22Glyph";
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp22:
+      result = "kGlyphTypeOctaveShiftUp22";
       break;
-    case msrGlyph::kOctaveShiftContinue22Glyph:
-      result = "kOctaveShiftContinue22Glyph";
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue22:
+      result = "kGlyphTypeOctaveShiftContinue22";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrGlyphTypeKind& elt)
+{
+  os << msrGlyphTypeKindAsString (elt);
+  return os;
 }
 
 string msrGlyph::asString () const
@@ -1798,10 +1804,8 @@ string msrGlyph::asString () const
 
   s <<
     "[Glyph" <<
-    ", glyphTypeKind: " <<
-    glyphTypeKindAsString (fGlyphTypeKind) <<
-     ", glyphValue: " <<
-    fGlyphValue <<
+    ", fGlyphTypeKind: " << fGlyphTypeKind <<
+     ", fGlyphValue: " << fGlyphValue <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -1821,14 +1825,11 @@ void msrGlyph::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "glyphTypeKind" << " : " <<
-    glyphTypeKindAsString (fGlyphTypeKind) <<
+    "glyphTypeKind" << " : " << fGlyphTypeKind <<
     endl <<
 
     setw (fieldWidth) <<
-    "glyphValue" <<  " : \"" <<
-    fGlyphValue <<
-    "\"" <<
+    "fGlyphValue" <<  " : \"" << fGlyphValue << "\"" <<
     endl;
 
   --gIndenter;
@@ -1931,13 +1932,13 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
 void msrOtherAppearance::browseData (basevisitor* v)
 {}
 
-string msrOtherAppearance::otherAppearanceTypeKindAsString (
+string msrOtherAppearanceTypeKindAsString (
   msrOtherAppearanceTypeKind otherAppearanceTypeKind)
 {
   string result;
 
   switch (otherAppearanceTypeKind) {
-    case msrOtherAppearance::k_NoOtherAppearanceTypeKind:
+    case msrOtherAppearanceTypeKind::k_NoOtherAppearanceTypeKind:
       result = "k_NoOtherAppearanceTypeKind";
       break;
   } // switch
@@ -1951,9 +1952,8 @@ string msrOtherAppearance::asString () const
 
   s <<
     "[OtherAppearance" <<
-    ", otherAppearanceTypeKind: " <<
-    otherAppearanceTypeKindAsString (fOtherAppearanceTypeKind) <<
-    ", otherAppearanceValue: " << fOtherAppearanceValue <<
+    ", otherAppearanceTypeKind: " << fOtherAppearanceTypeKind <<
+    ", fOtherAppearanceValue: " << fOtherAppearanceValue <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -1973,12 +1973,11 @@ void msrOtherAppearance::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "otherAppearanceTypeKind" << " : " <<
-    otherAppearanceTypeKindAsString (fOtherAppearanceTypeKind) <<
+    "fOtherAppearanceTypeKind" << " : " << fOtherAppearanceTypeKind) <<
     endl <<
 
     setw (fieldWidth) <<
-    "otherAppearanceValue" <<  " : " << fOtherAppearanceValue <<
+    "fOtherAppearanceValue" <<  " : " << fOtherAppearanceValue <<
     endl;
 
   --gIndenter;
@@ -2112,7 +2111,7 @@ string msrAppearance::asString () const
     "[Appearance" <<
     /*
     ", otherAppearanceTypeKind: " <<
-    otherAppearanceTypeKindAsString (fOtherAppearanceTypeKind) <<
+    msrOtherAppearanceTypeKindAsString (fOtherAppearanceTypeKind) <<
     ", otherAppearanceValue: " <<  fOtherAppearanceValue <<
     */
     ", line " << fInputLineNumber <<

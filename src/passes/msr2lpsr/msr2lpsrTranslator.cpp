@@ -3367,19 +3367,19 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
 #endif
 
   switch (elt->getTempoKind ()) {
-    case msrTempoKind::k_NoTempoKind:
+    case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
       break;
 
-    case msrTempoKind::kTempoBeatUnitsWordsOnly:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
       break;
 
-    case msrTempoKind::kTempoBeatUnitsPerMinute:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
       break;
 
-    case msrTempoKind::kTempoBeatUnitsEquivalence:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsEquivalence:
       break;
 
-    case msrTempoKind::kTempoNotesRelationship:
+    case msrTempoKBeatUnitsKind::kTempoNotesRelationship:
       fResultingLpsr->
         // this score needs the 'tempo relationship' Scheme function
         setTempoNotesRelationshipSchemeFunctionIsNeeded ();
@@ -3671,41 +3671,41 @@ void msr2lpsrTranslator::visitStart (S_msrTechnical& elt)
 
   // doest the score need the 'tongue' function?
   switch (elt->getTechnicalKind ()) {
-    case msrTechnicalKind::kArrow:
+    case msrTechnicalKind::kTechnicalArrow:
       break;
-    case msrTechnicalKind::kDoubleTongue:
+    case msrTechnicalKind::kTechnicalDoubleTongue:
       fResultingLpsr->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnicalKind::kDownBow:
+    case msrTechnicalKind::kTechnicalDownBow:
       break;
-    case msrTechnicalKind::kFingernails:
+    case msrTechnicalKind::kTechnicalFingernails:
       break;
-    case msrTechnicalKind::kHarmonic:
+    case msrTechnicalKind::kTechnicalHarmonic:
       break;
-    case msrTechnicalKind::kHeel:
+    case msrTechnicalKind::kTechnicalHeel:
       break;
-    case msrTechnicalKind::kHole:
+    case msrTechnicalKind::kTechnicalHole:
       break;
-    case msrTechnicalKind::kOpenString:
+    case msrTechnicalKind::kTechnicalOpenString:
       break;
-    case msrTechnicalKind::kSnapPizzicato:
+    case msrTechnicalKind::kTechnicalSnapPizzicato:
       break;
-    case msrTechnicalKind::kStopped:
+    case msrTechnicalKind::kTechnicalStopped:
       break;
-    case msrTechnicalKind::kTap:
+    case msrTechnicalKind::kTechnicalTap:
       break;
     case msrTechnicalKind::kThumbPosition:
       break;
-    case msrTechnicalKind::kToe:
+    case msrTechnicalKind::kTechnicalToe:
       break;
-    case msrTechnicalKind::kTripleTongue:
+    case msrTechnicalKind::kTechnicalTripleTongue:
       fResultingLpsr->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnicalKind::kUpBow:
+    case msrTechnicalKind::kTechnicalUpBow:
       break;
   } // switch
 }

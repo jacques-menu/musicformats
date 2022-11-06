@@ -58,64 +58,65 @@ msrTechnical::msrTechnical (
 msrTechnical::~msrTechnical ()
 {}
 
-string msrTechnical::msrTechnicalKindAsString () const
+string msrTechnicalKindAsString (
+  msrTechnicalKind technicalKind) const
 {
   string result;
 
-  switch (fTechnicalKind) {
-    case msrTechnical::kArrow:
-      result = "kArrow";
+  switch (technicalKind) {
+    case msrTechnical::kTechnicalArrow:
+      result = "kTechnicalArrow";
       break;
-    case msrTechnical::kDoubleTongue:
-      result = "kDoubleTongue";
+    case msrTechnical::kTechnicalDoubleTongue:
+      result = "kTechnicalDoubleTongue";
       break;
-    case msrTechnical::kDownBow:
-      result = "kDownBow";
+    case msrTechnical::kTechnicalDownBow:
+      result = "kTechnicalDownBow";
       break;
-    case msrTechnical::kFingernails:
-      result = "kFingernails";
+    case msrTechnical::kTechnicalFingernails:
+      result = "kTechnicalFingernails";
       break;
-    case msrTechnical::kHarmonic:
-      result = "kHarmonic";
+    case msrTechnical::kTechnicalHarmonic:
+      result = "kTechnicalHarmonic";
       break;
-    case msrTechnical::kHeel:
-      result = "kHeel";
+    case msrTechnical::kTechnicalHeel:
+      result = "kTechnicalHeel";
       break;
-    case msrTechnical::kHole:
-      result = "kHole";
+    case msrTechnical::kTechnicalHole:
+      result = "kTechnicalHole";
       break;
-    case msrTechnical::kOpenString:
-      result = "kOpenString";
+    case msrTechnical::kTechnicalOpenString:
+      result = "kTechnicalOpenString";
       break;
-    case msrTechnical::kSnapPizzicato:
-      result = "kSnapPizzicato";
+    case msrTechnical::kTechnicalSnapPizzicato:
+      result = "kTechnicalSnapPizzicato";
       break;
-    case msrTechnical::kStopped:
-      result = "kStopped";
+    case msrTechnical::kTechnicalStopped:
+      result = "kTechnicalStopped";
       break;
-    case msrTechnical::kTap:
-      result = "kTap";
+    case msrTechnical::kTechnicalTap:
+      result = "kTechnicalTap";
       break;
     case msrTechnical::kThumbPosition:
       result = "kThumbPosition";
       break;
-    case msrTechnical::kToe:
-      result = "kToe";
+    case msrTechnical::kTechnicalToe:
+      result = "kTechnicalToe";
       break;
-    case msrTechnical::kTripleTongue:
-      result = "kTripleTongue";
+    case msrTechnical::kTechnicalTripleTongue:
+      result = "kTechnicalTripleTongue";
       break;
-    case msrTechnical::kUpBow:
-      result = "kUpBow";
+    case msrTechnical::kTechnicalUpBow:
+      result = "kTechnicalUpBow";
       break;
   } // switch
 
   return result;
 }
 
-ostream& operator << (ostream& os, const msrSyllableKind& elt)
+ostream& operator << (ostream& os, const msrTechnicalKind& elt)
 {
-  os << msrSyllableKindAsString (elt);
+  os << msrTechnicalKindAsString (elt);
   return os;
 }
 
@@ -343,9 +344,8 @@ string msrTechnicalWithInteger::asString () const
 
   s <<
     "[TechnicalWithInteger"
-    msrTechnicalWithIntegerKindAsString () <<
-    ", fTechnicalWithIntegerValue: '" <<
-    fTechnicalWithIntegerValue <<
+    ", fTechnicalWithIntegerKindAsString: " << fTechnicalWithIntegerKindAsString <<
+    ", fTechnicalWithIntegerValue: '" <<  fTechnicalWithIntegerValue <<
     "', placement " <<
     technicalWithIntegerPlacementKindAsString () <<
     ']';
@@ -356,7 +356,7 @@ string msrTechnicalWithInteger::asString () const
 void msrTechnicalWithInteger::print (ostream& os) const
 {
   os <<
-    "TechnicalWithInteger" <<
+    "[TechnicalWithInteger" <<
     ", " << msrTechnicalWithIntegerKindAsString () <<
     ", line " << fInputLineNumber <<
     endl;
@@ -367,8 +367,7 @@ void msrTechnicalWithInteger::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "value" << " : " <<
-    fTechnicalWithIntegerValue <<
+    "fTechnicalWithIntegerValue" << " : " << fTechnicalWithIntegerValue <<
     endl <<
 
     setw (fieldWidth) <<
@@ -377,6 +376,10 @@ void msrTechnicalWithInteger::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
+    "', placement " << " : " <<
+    technicalWithIntegerPlacementKindAsString () <<
+    endl <<
+    ']' <<
     endl;
 
   --gIndenter;
@@ -428,7 +431,7 @@ msrTechnicalWithFloat::msrTechnicalWithFloat (
 msrTechnicalWithFloat::~msrTechnicalWithFloat ()
 {}
 
-string msrTechnicalWithFloat::msrTechnicalWithFloatKindAsString () const
+string msrTechnicalWithFloatKindAsString () const
 {
   string result;
 
@@ -500,10 +503,10 @@ string msrTechnicalWithFloat::asString () const
   stringstream s;
 
   s <<
-    msrTechnicalWithFloatKindAsString () <<
-    ", value '" <<
-    fTechnicalWithFloatValue <<
-    "', placement " <<
+    "TechnicalWithFloat" <<
+    ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
+    ", fTechnicalWithFloatValue :'" << fTechnicalWithFloatValue << '\'" <<
+    ", placement " <<
     technicalWithFloatPlacementKindAsString ();
 
   return s.str ();
@@ -512,8 +515,8 @@ string msrTechnicalWithFloat::asString () const
 void msrTechnicalWithFloat::print (ostream& os) const
 {
   os <<
-    "TechnicalWithFloat" <<
-    ", " << msrTechnicalWithFloatKindAsString () <<
+    "[TechnicalWithFloat" <<
+    ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -523,16 +526,15 @@ void msrTechnicalWithFloat::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "value" << " : " <<
-    fTechnicalWithFloatValue <<
+    "fTechnicalWithFloatValue" << " : " << fTechnicalWithFloatValue <<
     endl <<
 
     setw (fieldWidth) <<
     "placement" << " : " <<
     technicalWithFloatPlacementKindAsString () <<
     endl <<
-
-    setw (fieldWidth) <<
+    ']' <<
+    endl <<
     endl;
 
   --gIndenter;
@@ -589,25 +591,26 @@ msrTechnicalWithString::msrTechnicalWithString (
 msrTechnicalWithString::~msrTechnicalWithString ()
 {}
 
-string msrTechnicalWithString::msrTechnicalWithStringKindAsString () const
+string msrTechnicalWithStringKindAsString (
+  msrTechnicalWithStringKind technicalWithStringKind) const
 {
   string result;
 
-  switch (fTechnicalWithStringKind) {
+  switch (technicalWithStringKind) {
     case msrTechnicalWithStringKind::kHammerOn:
-      result = "HammerOn";
+      result = "kHammerOn";
       break;
     case msrTechnicalWithStringKind::kHandbell:
-      result = "Handbell";
+      result = "kHandbell";
       break;
     case msrTechnicalWithStringKind::kOtherTechnical:
-      result = "OtherTechnical";
+      result = "kOtherTechnical";
       break;
     case msrTechnicalWithStringKind::kPluck:
-      result = "Pluck";
+      result = "kPluck";
       break;
     case msrTechnicalWithStringKind::kPullOff:
-      result = "PullOff";
+      result = "kPullOff";
       break;
   } // switch
 
@@ -683,12 +686,13 @@ string msrTechnicalWithString::asString () const
   stringstream s;
 
   s <<
-    msrTechnicalWithStringKindAsString () <<
-    ", " << technicalWithStringTypeKindAsString () <<
-    ", value \"" <<
-    fTechnicalWithStringValue <<
-    "\", placement " <<
-    technicalWithStringPlacementKindAsString ();
+    "[TechnicalWithString" <<
+    ", fTechnicalWithStringKind: " << fTechnicalWithStringKind <<
+    ", fTechnicalWithStringTypeKind: " << fTechnicalWithStringTypeKind <<
+    ", fTechnicalWithStringValue: \"" << fTechnicalWithStringValue << "\"" <<
+    ", placement " <<
+    technicalWithStringPlacementKindAsString () <<
+    ", line " << fInputLineNumber <<
 
   return s.str ();
 }
@@ -696,9 +700,11 @@ string msrTechnicalWithString::asString () const
 void msrTechnicalWithString::print (ostream& os) const
 {
   os <<
-    "TechnicalWithString" <<
-    ", " << msrTechnicalWithStringKindAsString () <<
-    ", " << technicalWithStringTypeKindAsString () <<
+    ", fTechnicalWithStringKind: " << fTechnicalWithStringKind <<
+    ", fTechnicalWithStringTypeKind: " << fTechnicalWithStringTypeKind <<
+    ", fTechnicalWithStringValue: \"" << fTechnicalWithStringValue << "\"" <<
+    ", placement " <<
+    technicalWithStringPlacementKindAsString ();
     ", line " << fInputLineNumber <<
     endl;
 
@@ -708,9 +714,7 @@ void msrTechnicalWithString::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "value" << " : \"" <<
-    fTechnicalWithStringValue <<
-    "\"" <<
+    "fTechnicalWithStringValue" << " : \"" << fTechnicalWithStringValue << "\"" <<
     endl <<
 
     setw (fieldWidth) <<

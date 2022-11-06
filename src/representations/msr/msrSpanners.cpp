@@ -137,7 +137,7 @@ void msrSpanner::acceptOut (basevisitor* v)
 void msrSpanner::browseData (basevisitor* v)
 {}
 
-string msrSpanner::msrSpannerKindAsString (
+string msrSpannerKindAsString (
   msrSpannerKind spannerKind)
 {
   string result;

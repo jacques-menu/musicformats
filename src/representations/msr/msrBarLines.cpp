@@ -253,16 +253,16 @@ string msrBarLineLocationKindAsString (
   string result;
 
   switch (barLineLocationKind) {
-    case msrBarLine::kBarLineLocationNone:
+    case msrBarLineLocationKind::kBarLineLocationNone:
       result = "kBarLineLocationNone";
       break;
-    case msrBarLine::kBarLineLocationLeft:
+    case msrBarLineLocationKind::kBarLineLocationLeft:
       result = "kBarLineLocationLeft";
       break;
-    case msrBarLine::kBarLineLocationMiddle:
+    case msrBarLineLocationKind::kBarLineLocationMiddle:
       result = "kBarLineLocationMiddle";
       break;
-    case msrBarLine::kBarLineLocationRight:
+    case msrBarLineLocationKind::kBarLineLocationRight:
       result = "kBarLineLocationRight";
       break;
   } // switch
@@ -474,19 +474,19 @@ string msrBarLineRepeatWingedKindAsString (
   string result;
 
   switch (barLineRepeatWingedKind) {
-    case msrBarLine::kBarLineRepeatWingedNone:
+    case msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone:
       result = "kBarLineRepeatWingedNone";
       break;
-    case msrBarLine::kBarLineRepeatWingedStraight:
+    case msrBarLineRepeatWingedKind::kBarLineRepeatWingedStraight:
       result = "kBarLineRepeatWingedStraight";
       break;
-    case msrBarLine::kBarLineRepeatWingedCurved:
+    case msrBarLineRepeatWingedKind::kBarLineRepeatWingedCurved:
       result = "kBarLineRepeatWingedCurved";
       break;
-    case msrBarLine::kBarLineRepeatWingedDoubleStraight:
+    case msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleStraight:
       result = "kBarLineRepeatWingedDoubleStraight";
       break;
-    case msrBarLine::kBarLineRepeatWingedDoubleCurved:
+    case msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleCurved:
       result = "kBarLineRepeatWingedDoubleCurved";
       break;
   } // switch

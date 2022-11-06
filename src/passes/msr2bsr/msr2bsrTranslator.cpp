@@ -3568,41 +3568,41 @@ void msr2bsrTranslator::visitStart (S_msrTechnical& elt)
 
   // doest the score need the 'tongue' function?
   switch (elt->getTechnicalKind ()) {
-    case msrTechnicalKind::kArrow:
+    case msrTechnicalKind::kTechnicalArrow:
       break;
-    case msrTechnicalKind::kDoubleTongue:
+    case msrTechnicalKind::kTechnicalDoubleTongue:
       fResultingBsr->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnicalKind::kDownBow:
+    case msrTechnicalKind::kTechnicalDownBow:
       break;
-    case msrTechnicalKind::kFingernails:
+    case msrTechnicalKind::kTechnicalFingernails:
       break;
-    case msrTechnicalKind::kHarmonic:
+    case msrTechnicalKind::kTechnicalHarmonic:
       break;
-    case msrTechnicalKind::kHeel:
+    case msrTechnicalKind::kTechnicalHeel:
       break;
-    case msrTechnicalKind::kHole:
+    case msrTechnicalKind::kTechnicalHole:
       break;
-    case msrTechnicalKind::kOpenString:
+    case msrTechnicalKind::kTechnicalOpenString:
       break;
-    case msrTechnicalKind::kSnapPizzicato:
+    case msrTechnicalKind::kTechnicalSnapPizzicato:
       break;
-    case msrTechnicalKind::kStopped:
+    case msrTechnicalKind::kTechnicalStopped:
       break;
-    case msrTechnicalKind::kTap:
+    case msrTechnicalKind::kTechnicalTap:
       break;
     case msrTechnicalKind::kThumbPosition:
       break;
-    case msrTechnicalKind::kToe:
+    case msrTechnicalKind::kTechnicalToe:
       break;
-    case msrTechnicalKind::kTripleTongue:
+    case msrTechnicalKind::kTechnicalTripleTongue:
       fResultingBsr->
         // this score needs the 'tongue' Scheme function
         setTongueSchemeFunctionIsNeeded ();
       break;
-    case msrTechnicalKind::kUpBow:
+    case msrTechnicalKind::kTechnicalUpBow:
       break;
   } // switch
 }

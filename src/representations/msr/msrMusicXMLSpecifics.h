@@ -715,7 +715,7 @@ EXP ostream& operator << (ostream& os, const S_msrPrintLayout& elt);
 // data types
 
 enum class msrLineWidthTypeKind {
-  k_NoLineWidthTypeKind,
+  k_NoLineWidthType,
   kLineWidthTypeBeam, kLineWidthTypeBracket, kLineWidthTypeDashes,
   kLineWidthTypeEnclosure,
   kLineWidthTypeEnding,
@@ -800,20 +800,21 @@ typedef SMARTP<msrLineWidth> S_msrLineWidth;
 EXP ostream& operator << (ostream& os, const S_msrLineWidth& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrNoteSizeTypeKind {
+  k_NoNoteSizeType,
+  kNoteSizeTypeCue, kNoteSizeTypeGrace, kNoteSizeTypeLarge
+};
+
+string msrNoteSizeTypeKindAsString (
+  msrNoteSizeTypeKind noteSizeTypeKind);
+
+ostream& operator << (ostream& os, const msrNoteSizeTypeKind& elt);
+
 class EXP msrNoteSize : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrNoteSizeTypeKind {
-      k_NoNoteSizeTypeKind,
-      kCueNoteSize, kGraceNoteSize, kLargeNoteSize
-    };
-
-    string noteSizeTypeKindAsString (
-      msrNoteSizeTypeKind noteSizeTypeKind);
 
   public:
 
@@ -877,20 +878,21 @@ typedef SMARTP<msrNoteSize> S_msrNoteSize;
 EXP ostream& operator << (ostream& os, const S_msrNoteSize& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrDistanceTypeKind {
+  k_NoDistanceType,
+  kDistanceTypeHyphen, kDistanceTypeBeam
+};
+
+string msrDistanceTypeKindAsString (
+  msrDistanceTypeKind distanceTypeKind);
+
+ostream& operator << (ostream& os, const msrDistanceTypeKind& elt);
+
 class EXP msrDistance : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrDistanceTypeKind {
-      k_NoDistanceTypeKind,
-      kHyphenDistance, kBeamDistance
-    };
-
-    string distanceTypeKindAsString (
-      msrDistanceTypeKind distanceTypeKind);
 
   public:
 
@@ -953,28 +955,27 @@ typedef SMARTP<msrDistance> S_msrDistance;
 EXP ostream& operator << (ostream& os, const S_msrDistance& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrGlyphTypeKind {
+  k_NoGlyphType,
+  kGlyphTypeQuarterRest,
+  kGlyphTypeGClefOttavaBassa,
+  kGlyphTypeCClef, kGlyphTypeFClef,
+  kGlyphTypePercussionClef,
+  kGlyphTypeOctaveShiftUp8, kGlyphTypeOctaveShiftDown8, kGlyphTypeOctaveShiftContinue8,
+  kGlyphTypeOctaveShiftDown15, kGlyphTypeOctaveShiftUp15, kGlyphTypeOctaveShiftContinue15,
+  kGlyphTypeOctaveShiftDown22, kGlyphTypeOctaveShiftUp22, kGlyphTypeOctaveShiftContinue22
+};
+
+string msrGlyphTypeKindAsString (
+  msrGlyphTypeKind GlyphTypeKind);
+
+ostream& operator << (ostream& os, const msrGlyphTypeKind& elt);
+
 class EXP msrGlyph : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrGlyphTypeKind {
-      k_NoGlyphTypeKind,
-      kQuarterRestGlyph,
-      kGClefOttavaBassaGlyph,
-      kCClefGlyph, kFClefGlyph,
-      kClefPercussionGlyph,
-      kOctaveShiftUp8Glyph, kOctaveShiftDown8Glyph,
-      kOctaveShiftContinue8Glyph, kOctaveShiftDown15Glyph,
-      kOctaveShiftUp15Glyph, kOctaveShiftContinue15Glyph,
-      kOctaveShiftDown22Glyph, kOctaveShiftUp22Glyph,
-      kOctaveShiftContinue22Glyph
-    };
-
-    string glyphTypeKindAsString (
-      msrGlyphTypeKind GlyphTypeKind);
 
   public:
 
@@ -1037,19 +1038,20 @@ typedef SMARTP<msrGlyph> S_msrGlyph;
 EXP ostream& operator << (ostream& os, const S_msrGlyph& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrOtherAppearanceTypeKind { // JMI which values??? v0.9.62
+  k_NoOtherAppearanceTypeKind
+};
+
+string msrOtherAppearanceTypeKindAsString (
+  msrOtherAppearanceTypeKind otherAppearanceTypeKind);
+
+ostream& operator << (ostream& os, const msrOtherAppearanceTypeKind& elt);
+
 class EXP msrOtherAppearance : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrOtherAppearanceTypeKind { // JMI which values???
-      k_NoOtherAppearanceTypeKind
-    };
-
-    string otherAppearanceTypeKindAsString (
-      msrOtherAppearanceTypeKind otherAppearanceTypeKind);
 
   public:
 

@@ -89,19 +89,19 @@ msrFrameNote::msrFrameNote (
 msrFrameNote::~msrFrameNote ()
 {}
 
-string msrFrameNote::barreTypeKindAsString (
+string msrFrameNote::msrBarreTypeKindAsString (
   msrBarreTypeKind barreTypeKind)
 {
   string result;
 
   switch (barreTypeKind) {
-    case msrFrameNote::kBarreTypeNone:
+    case msrBarreTypeKind::kBarreTypeNone:
       result = "barreTypeNone";
       break;
-    case msrFrameNote::kBarreTypeStart:
+    case msrBarreTypeKind::kBarreTypeStart:
       result = "barreTypeStart";
       break;
-    case msrFrameNote::kBarreTypeStop:
+    case msrBarreTypeKind::kBarreTypeStop:
       result = "barreTypeStop";
       break;
   } // switch
@@ -109,19 +109,24 @@ string msrFrameNote::barreTypeKindAsString (
   return result;
 }
 
+ostream& operator << (ostream& os, const msrBarreTypeKind& elt)
+{
+  os << msrBarreTypeKindAsString (elt);
+  return os;
+}
+
 string msrFrameNote::asString () const
 {
   stringstream s;
 
   s <<
-    "FrameNote" <<
-    ", frameNoteStringNumber: " << fFrameNoteStringNumber <<
-    ", frameNoteFretNumber: " << fFrameNoteFretNumber <<
-    ", frameNoteFingering: " << fFrameNoteFingering <<
-    ", frameNoteBarreTypeKind: " <<
-    barreTypeKindAsString (
-      fFrameNoteBarreTypeKind) <<
-    ", line: " << fInputLineNumber;
+    "[FrameNote" <<
+    ", fFrameNoteStringNumber: " << fFrameNoteStringNumber <<
+    ", fFrameNoteFretNumber: " << fFrameNoteFretNumber <<
+    ", fFrameNoteFingering: " << fFrameNoteFingering <<
+    ", fFrameNoteBarreTypeKind: " << fFrameNoteBarreTypeKind <<
+    ", line: " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -186,18 +191,16 @@ void msrFrameNote::print (ostream& os) const
 
   os <<
     setw (fieldWidth) <<
-    "frameNoteStringNumber" << " : " << fFrameNoteStringNumber <<
+    "fFrameNoteStringNumber" << " : " << fFrameNoteStringNumber <<
     endl <<
     setw (fieldWidth) <<
-    "frameNoteFretNumber" << " : " << fFrameNoteFretNumber <<
+    "fFrameNoteFretNumber" << " : " << fFrameNoteFretNumber <<
     endl <<
     setw (fieldWidth) <<
-    "frameNoteFingering" << " : " << fFrameNoteFingering <<
+    "fFrameNoteFingering" << " : " << fFrameNoteFingering <<
     endl <<
     setw (fieldWidth) <<
-    "frameNoteBarreTypeKind" << " : " <<
-    barreTypeKindAsString (
-      fFrameNoteBarreTypeKind) <<
+    "fFrameNoteBarreTypeKind" << " : " << fFrameNoteBarreTypeKind <<
     endl;
 
   --gIndenter;
@@ -213,7 +216,7 @@ ostream& operator << (ostream& os, const S_msrFrameNote& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -273,15 +276,15 @@ void msrFrame::appendFrameNoteToFrame (
 
   // handle nested barre start/stop
   switch (frameNote->getFrameNoteBarreTypeKind ()) {
-    case msrFrameNote::kBarreTypeNone:
+    case msrBarreTypeKind::kBarreTypeNone:
       break;
 
-    case msrFrameNote::kBarreTypeStart:
+    case msrBarreTypeKind::kBarreTypeStart:
       fPendingBarreStartFrameNotes.push (
         frameNote);
       break;
 
-    case msrFrameNote::kBarreTypeStop:
+    case msrBarreTypeKind::kBarreTypeStop:
       {
         if (! fPendingBarreStartFrameNotes.size ()) {
           stringstream s;
@@ -437,16 +440,16 @@ void msrFrame::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "frameStringsNumber" << " = " << fFrameStringsNumber <<
+    "fFrameStringsNumber" << " = " << fFrameStringsNumber <<
     endl <<
     setw (fieldWidth) <<
-    "frameFretsNumber" << " = " << fFrameFretsNumber <<
+    "fFrameFretsNumber" << " = " << fFrameFretsNumber <<
     endl <<
     setw (fieldWidth) <<
-    "frameFirstFretNumber" << " = " << fFrameFirstFretNumber <<
+    "fFrameFirstFretNumber" << " = " << fFrameFirstFretNumber <<
     endl <<
     setw (fieldWidth) <<
-    "frameContainsFingerings" << " = " << fFrameContainsFingerings <<
+    "fFrameContainsFingerings" << " = " << fFrameContainsFingerings <<
     endl;
 
   // print frame notes if any
@@ -538,7 +541,7 @@ ostream& operator << (ostream& os, const S_msrFrame& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

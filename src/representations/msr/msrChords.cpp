@@ -591,7 +591,7 @@ void msrChord::appendArticulationToChord (S_msrArticulation art)
 
 void msrChord::appendSpannerToChord (S_msrSpanner span)
 {
-  msrSpanner::msrSpannerKind
+  msrSpannerKind
     spannerKind =
       span->
         getSpannerKind ();
@@ -634,8 +634,7 @@ void msrChord::setChordSingleTremolo (S_msrSingleTremolo trem)
 
 void msrChord::appendTechnicalToChord (S_msrTechnical tech)
 {
-  msrTechnical::msrTechnicalKind
-    technicalKind =
+  technicalKind =
       tech->
         getTechnicalKind ();
 
@@ -666,7 +665,7 @@ void msrChord::appendTechnicalToChord (S_msrTechnical tech)
 void msrChord::appendTechnicalWithIntegerToChord (
   S_msrTechnicalWithInteger tech)
 {
-  msrTechnicalWithInteger::msrTechnicalWithIntegerKind
+  msrTechnicalWithIntegerKind
     technicalWithIntegerKind =
       tech->
         getTechnicalWithIntegerKind ();
@@ -698,7 +697,7 @@ void msrChord::appendTechnicalWithIntegerToChord (
 void msrChord::appendTechnicalWithFloatToChord (
   S_msrTechnicalWithFloat tech)
 {
-  msrTechnicalWithFloat::msrTechnicalWithFloatKind
+  msrTechnicalWithFloatKind
     technicalWithFloatKind =
       tech->
         getTechnicalWithFloatKind ();
@@ -730,7 +729,7 @@ void msrChord::appendTechnicalWithFloatToChord (
 void msrChord::appendTechnicalWithStringToChord (
   S_msrTechnicalWithString tech)
 {
-  msrTechnicalWithString::msrTechnicalWithStringKind
+  msrTechnicalWithStringKind
     technicalWithStringKind =
       tech->
         getTechnicalWithStringKind ();
