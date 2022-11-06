@@ -25,7 +25,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class bsrCellsList;
+class   bsrCellsList;
 typedef SMARTP<bsrCellsList> S_bsrCellsList;
 
 //______________________________________________________________________________

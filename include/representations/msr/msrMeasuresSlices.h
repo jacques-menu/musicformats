@@ -29,13 +29,13 @@ enum class msrNoteEventKind {
   kNoteEventStop
 };
 
-string noteEventKindAsString (
+string msrNoteEventKindAsString (
   msrNoteEventKind noteEventKind);
 
 ostream& operator << (ostream& os, msrNoteEventKind& elt);
 
 //________________________________________________________________________
-class msrNoteEvent : public smartable
+class   msrNoteEvent : public smartable
 {
   public:
 
@@ -104,7 +104,7 @@ typedef SMARTP<msrNoteEvent> S_msrNoteEvent;
 EXP ostream& operator << (ostream& os, const S_msrNoteEvent& elt);
 
 //________________________________________________________________________
-class msrSimultaneousNotesChunk : public smartable
+class   msrSimultaneousNotesChunk : public smartable
 {
   public:
 
@@ -175,7 +175,7 @@ typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
 EXP ostream& operator << (ostream& os, const S_msrSimultaneousNotesChunk& elt);
 
 //______________________________________________________________________________
-class msrMeasuresSlice;
+class   msrMeasuresSlice;
 typedef SMARTP<msrMeasuresSlice> S_msrMeasuresSlice;
 
 class EXP msrMeasuresSlice : public smartable
@@ -294,7 +294,7 @@ class EXP msrMeasuresSlice : public smartable
 EXP ostream& operator << (ostream& os, const S_msrMeasuresSlice& elt);
 
 //______________________________________________________________________________
-class msrMeasuresSlicesSequence;
+class   msrMeasuresSlicesSequence;
 typedef SMARTP<msrMeasuresSlicesSequence> S_msrMeasuresSlicesSequence;
 
 class EXP msrMeasuresSlicesSequence : public smartable

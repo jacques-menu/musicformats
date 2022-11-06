@@ -152,12 +152,12 @@ class EXP lpsrScore : public lpsrElement
                               }
 
     // tempo relationships
-    void                  setTempoNotesRelationshipshipSchemeFunctionIsNeeded ();
+    void                  setTempoNotesRelationshipSchemeFunctionIsNeeded ();
 
-    Bool                  getTempoNotesRelationshipshipSchemeFunctionIsNeeded () const
+    Bool                  getTempoNotesRelationshipSchemeFunctionIsNeeded () const
                               {
                                 return
-                                  fTempoNotesRelationshipshipSchemeFunctionIsNeeded;
+                                  fTempoNotesRelationshipSchemeFunctionIsNeeded;
                               }
 
     // glissando with text
@@ -353,7 +353,7 @@ class EXP lpsrScore : public lpsrElement
 
     void                  addAfterSchemeFunctionToScore ();
 
-    void                  addTempoNotesRelationshipshipSchemeFunctionToScore ();
+    void                  addTempoNotesRelationshipSchemeFunctionToScore ();
 
     void                  addOtherDynamicSchemeFunctionToScore ();
 
@@ -477,7 +477,7 @@ class EXP lpsrScore : public lpsrElement
 
     Bool                  fAfterSchemeFunctionIsNeeded;
 
-    Bool                  fTempoNotesRelationshipshipSchemeFunctionIsNeeded;
+    Bool                  fTempoNotesRelationshipSchemeFunctionIsNeeded;
 
     Bool                  fGlissandoWithTextSchemeFunctionsIsNeeded;
 

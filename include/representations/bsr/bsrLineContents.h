@@ -12,24 +12,25 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class bsrLine;
+class   bsrLine;
 typedef SMARTP<bsrLine> S_bsrLine;
 
 //______________________________________________________________________________
+// data types
+
+enum class bsrLineContentsKind {
+  kLineContentsRegular,
+  kLineContentsContinuation
+};
+
+string bsrLineContentsKindAsString (
+  bsrLineContentsKind lineContentsKind);
+
+ostream& operator << (ostream& os, const bsrLineContentsKind& elt);
+
 class EXP bsrLineContents : public bsrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum bsrLineContentsKind {
-      kLineContentsRegular,
-      kLineContentsContinuation
-    };
-
-    static string lineContentsKindAsString (
-      bsrLineContentsKind lineContentsKind);
 
   public:
 

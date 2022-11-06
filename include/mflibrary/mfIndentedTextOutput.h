@@ -132,7 +132,7 @@ endl declaration:
   ostream& endl (ostream& os);
 
   basic template
-  template <class charT, class traits>
+  template <class   charT, class   traits>
   basic_ostream<charT,traits>& endl (basic_ostream<charT,traits>& os);
 
   Insert newline and flush

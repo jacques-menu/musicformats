@@ -19,7 +19,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class bsrLineContents;
+class   bsrLineContents;
 typedef SMARTP<bsrLineContents> S_bsrLineContents;
 
 //______________________________________________________________________________

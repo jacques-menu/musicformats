@@ -28,12 +28,14 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-enum bsrFacSimileKind {
+enum class bsrFacSimileKind {
   kFacSimileYes, kFacSimileNo
 };
 
 string bsrFacSimileKindAsString (
   bsrFacSimileKind facSimileKind);
+
+ostream& operator << (ostream& os, const bsrFacSimileKind& elt);
 
 //______________________________________________________________________________
 class EXP bsrFacSimileKindAtom : public oahAtomStoringAValue

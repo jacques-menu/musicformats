@@ -1518,8 +1518,7 @@ class EXP mxsr2msrTranslator :
 
     vector<msrDottedDuration> fCurrentMetronomeBeatUnitsVector;
     string                    fCurrentMetrenomePerMinute;
-    msrTempo::msrTempoParenthesizedKind
-                              fCurrentMetronomeParenthesedKind;
+    msrTempoParenthesizedKind fCurrentMetronomeParenthesedKind;
 
     int                       fCurrentMetrenomeDotsNumber;
     msrTempo::msrTempoNotesRelationshipKind
@@ -1550,9 +1549,9 @@ class EXP mxsr2msrTranslator :
     S_msrTempoTuplet          fCurrentMetronomeTuplet;
     Bool                      fOnGoingMetronomeTuplet;
 
-    S_msrTempoNotesRelationshipshipElements
+    S_msrTempoNotesRelationshipElements
                               fCurrentMetronomeRelationLeftElements;
-    S_msrTempoNotesRelationshipshipElements
+    S_msrTempoNotesRelationshipElements
                               fCurrentMetronomeRelationRightElements;
 
     S_msrTempo                fCurrentMetronomeTempo;

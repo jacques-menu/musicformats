@@ -10,13 +10,13 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrMeasure;
+class   msrMeasure;
 typedef SMARTP<msrMeasure> S_msrMeasure;
 
-class msrChord;
+class   msrChord;
 typedef SMARTP<msrChord> S_msrChord;
 
-class msrNote;
+class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
@@ -27,11 +27,11 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // data types
     // ------------------------------------------------------
 
-    enum msrDoubleTremoloKind {
+    enum class msrDoubleTremoloKind {
       kNotesDoubleTremolo, kChordsDoubleTremolo
     };
 
-    static string msrDoubleTremoloKindAsString (
+    string msrDoubleTremoloKindAsString (
       msrDoubleTremoloKind doubleTremolotKind);
 
     // creation from MusicXML

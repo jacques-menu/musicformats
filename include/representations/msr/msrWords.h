@@ -28,18 +28,18 @@ class EXP msrWords : public msrElement
     // data types
     // ------------------------------------------------------
 
-    enum msrWordsFontStyleKind {
+    enum class msrWordsFontStyleKind {
       kNormalStyle, KItalicStyle
     };
 
-    static string wordsFontStyleKindAsString (
+    string wordsFontStyleKindAsString (
       msrWordsFontStyleKind wordsFontStyleKind);
 
-    enum msrWordsFontWeightKind {
+    enum class msrWordsFontWeightKind {
       kNormalWeight, kBoldWeight
     };
 
-    static string msrWordsFontWeightKindAsString (
+    string msrWordsFontWeightKindAsString (
       msrWordsFontWeightKind wordsFontWeightKind);
 
     // creation from MusicXML

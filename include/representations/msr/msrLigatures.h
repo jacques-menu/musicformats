@@ -22,33 +22,36 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class msrLigature;
+class   msrLigature;
 typedef SMARTP<msrLigature> S_msrLigature;
 
 //______________________________________________________________________________
+// data types
+
+enum class msrLigatureKind {
+  kLigatureNone,
+  kLigatureStart, kLigatureContinue, kLigatureStop
+};
+
+string msrLigatureKindAsString (
+  msrLigatureKind ligatureKind);
+
+ostream& operator << (ostream& os, const msrLigatureKind& elt);
+
+enum class msrLigatureLineEndKind {
+  kLigatureLineEndNone,
+  kLigatureLineEndUp, kLigatureLineEndDown,
+  kLigatureLineEndBoth, kLigatureLineEndArrow
+};
+
+string msrLigatureLineEndKindAsString (
+  msrLigatureLineEndKind ligatureLineEndKind);
+
+ostream& operator << (ostream& os, const msrLigatureLineEndKind& elt);
+
 class EXP msrLigature : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrLigatureKind {
-      kLigatureNone,
-      kLigatureStart, kLigatureContinue, kLigatureStop
-    };
-
-    static string ligatureKindAsString (
-      msrLigatureKind ligatureKind);
-
-    enum msrLigatureLineEndKind {
-      kLigatureLineEndNone,
-      kLigatureLineEndUp, kLigatureLineEndDown,
-      kLigatureLineEndBoth, kLigatureLineEndArrow
-    };
-
-    static string ligatureLineEndKindAsString (
-      msrLigatureLineEndKind ligatureLineEndKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -127,8 +130,6 @@ class EXP msrLigature : public msrElement
 
     // print
     // ------------------------------------------------------
-
-    string                ligatureKindAsString () const;
 
     string                asString () const override;
 

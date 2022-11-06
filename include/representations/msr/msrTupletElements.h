@@ -23,7 +23,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 /*
   Notes, chords and tuplets can be found in tuplets,
-  hence class msrTupletElement
+  hence class   msrTupletElement
 */
 
 class EXP msrTupletElement : public msrMeasureElement

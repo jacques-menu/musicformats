@@ -9,24 +9,25 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrMeasure;
+class   msrMeasure;
 typedef SMARTP<msrMeasure> S_msrMeasure;
 
 //______________________________________________________________________________
+// data types
+
+enum class msrSlideTypeKind {
+  kSlideTypeNone,
+  kSlideTypeStart, kSlideTypeStop
+};
+
+string slideTypeKindAsString (
+  msrSlideTypeKind slideTypeKind);
+
+ostream& operator << (ostream& os, const msrSlideTypeKind& elt);
+
 class EXP msrSlide : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrSlideTypeKind {
-      kSlideTypeNone,
-      kSlideTypeStart, kSlideTypeStop
-    };
-
-    static string slideTypeKindAsString (
-      msrSlideTypeKind slideTypeKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

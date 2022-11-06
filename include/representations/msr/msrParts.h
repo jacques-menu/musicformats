@@ -22,22 +22,22 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class msrTimeSignature;
+class   msrTimeSignature;
 typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
 
-class msrStaff;
+class   msrStaff;
 typedef SMARTP<msrStaff> S_msrStaff;
 
-class msrStaffDetails;
+class   msrStaffDetails;
 typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
 
-class msrHarmony;
+class   msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 
-class msrFiguredBass;
+class   msrFiguredBass;
 typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 
-class msrGraceNotesGroup;
+class   msrGraceNotesGroup;
 typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
 
 //______________________________________________________________________________

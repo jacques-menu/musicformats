@@ -20,21 +20,22 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class msrOctaveShiftKind {
+  kOctaveShiftNone,
+  kOctaveShiftUp, kOctaveShiftDown,
+  kOctaveShiftStop, kOctaveShiftContinue
+};
+
+string msrOctaveShiftKindAsString (
+  msrOctaveShiftKind octaveShiftKind);
+
+ostream& operator << (ostream& os, const msrOctaveShiftKind& elt);
+
 class EXP msrOctaveShift : public msrMeasureElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum msrOctaveShiftKind {
-      kOctaveShiftNone,
-      kOctaveShiftUp, kOctaveShiftDown,
-      kOctaveShiftStop, kOctaveShiftContinue
-    };
-
-    static string octaveShiftKindAsString (
-      msrOctaveShiftKind octaveShiftKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -88,8 +89,6 @@ class EXP msrOctaveShift : public msrMeasureElement
 
     // print
     // ------------------------------------------------------
-
-    string                octaveShiftKindAsString () const;
 
     string                asString () const override;
 

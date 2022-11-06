@@ -49,7 +49,7 @@
 
   #include <string>
 
-  class mfslDriver;
+  class   mfslDriver;
 
 #line 55 "mfslParser.h"
 
@@ -205,7 +205,7 @@ namespace mfsl {
 
 
   /// A Bison parser.
-  class parser
+  class   parser
   {
   public:
 #ifdef MFSLSTYPE
@@ -219,7 +219,7 @@ namespace mfsl {
   /// Sort of a variant, but does not keep track of the nature
   /// of the stored data, since that knowledge is available
   /// via the current parser state.
-  class value_type
+  class   value_type
   {
   public:
     /// Type of *this.
@@ -1201,7 +1201,7 @@ switch (yykind)
 #endif
 
 
-    class context
+    class   context
     {
     public:
       context (const parser& yyparser, const symbol_type& yyla);
@@ -1391,7 +1391,7 @@ switch (yykind)
 
     /// A stack with random access from its top.
     template <typename T, typename S = std::vector<T> >
-    class stack
+    class   stack
     {
     public:
       // Hide our reversed order.
@@ -1476,7 +1476,7 @@ switch (yykind)
       }
 
       /// Present a slice of the top of a stack.
-      class slice
+      class   slice
       {
       public:
         slice (const stack& stack, index_type range) YY_NOEXCEPT
@@ -1514,7 +1514,7 @@ switch (yykind)
     stack_type yystack_;
     /// The stack for LAC.
     /// Logically, the yy_lac_stack's lifetime is confined to the function
-    /// yy_lac_check_. We just store it as a member of this class to hold
+    /// yy_lac_check_. We just store it as a member of this class   to hold
     /// on to the memory and to avoid frequent reallocations.
     /// Since yy_lac_check_ is const, this member must be mutable.
     mutable std::vector<state_type> yylac_stack_;
