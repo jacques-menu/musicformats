@@ -24,21 +24,21 @@ namespace MusicFormats
 // data types
 
 enum class msrTechnicalKind {
-  kArrow, // rich JMI
-  kDoubleTongue,
-  kDownBow,
-  kFingernails,
-  kHarmonic,
-  kHeel,
-  kHole, // rich JMI ??? v0.9.66
-  kOpenString,
-  kSnapPizzicato,
-  kStopped,
-  kTap,
+  kTechnicalArrow, // rich JMI
+  kTechnicalDoubleTongue,
+  kTechnicalDownBow,
+  kTechnicalFingernails,
+  kTechnicalHarmonic,
+  kTechnicalHeel,
+  kTechnicalHole, // rich JMI ??? v0.9.66
+  kTechnicalOpenString,
+  kTechnicalSnapPizzicato,
+  kTechnicalStopped,
+  kTechnicalTap,
   kThumbPosition,
-  kToe,
-  kTripleTongue,
-  kUpBow
+  kTechnicalToe,
+  kTechnicalTripleTongue,
+  kTechnicalUpBow
 };
 
 string msrTechnicalKindAsString (

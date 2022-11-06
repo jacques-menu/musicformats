@@ -184,7 +184,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentMetronomeParenthesedKind = msrTempoParenthesizedKind::kTempoParenthesizedNo;
 
   fCurrentMetrenomeDotsNumber = 0;
-  fCurrentMetrenomeRelationKind = msrTempoKind::kTempoNotesRelationshipNone;
+  fCurrentMetrenomeRelationKind = msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone;
   fCurrentMetronomeDurationKind = msrDurationKind::k_NoDuration;
   fCurrentMetronomeBeamValue = "";
 
@@ -238,18 +238,18 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fCurrentFrameNoteStringNumber = -1;
   fCurrentFrameNoteFretNumber = -1;
   fCurrentFrameNoteFingering = -1;
-  fCurrentFrameNoteBarreTypeKind = msrFrameNote::kBarreTypeNone;
+  fCurrentFrameNoteBarreTypeKind = msrBarreTypeKind::kBarreTypeNone;
 
   // barLine handling
   fCurrentBarLineEndingNumber    = ""; // may be "1, 2"
   fCurrentBarLineHasSegnoKind = msrBarLine::kBarLineHasSegnoNo;
   fCurrentBarLineHasCodaKind  = msrBarLine::kBarLineHasCodaNo;
 
-  fCurrentBarLineLocationKind        = msrBarLine::kBarLineLocationNone;
+  fCurrentBarLineLocationKind        = msrBarLineLocationKind::kBarLineLocationNone;
   fCurrentBarLineStyleKind           = msrBarLineStyleKind::kBarLineStyleNone;
   fCurrentBarLineEndingTypeKind      = msrBarLine::kBarLineEndingNone;
   fCurrentBarLineRepeatDirectionKind = msrBarLine::kBarLineRepeatDirectionNone;
-  fCurrentBarLineRepeatWingedKind    = msrBarLine::kBarLineRepeatWingedNone;
+  fCurrentBarLineRepeatWingedKind    = msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone;
 
   // repeats handling
   fRepeatEndCounter = 0;
@@ -1746,9 +1746,9 @@ void mxsr2msrTranslator::visitStart (S_line_width& elt)
     string lineWidthTypeString = elt->getAttributeValue ("type");
 
     if (lineWidthTypeString.size ()) {
-      msrLineWidth::msrLineWidthTypeKind
+      msrLineWidthTypeKind
         lineWidthTypeKind =
-          msrLineWidth::k_NoLineWidthTypeKind;
+          msrLineWidthTypeKind::k_NoLineWidthType;
 
       if      (lineWidthTypeString == "beam")
         lineWidthTypeKind = msrLineWidthTypeKind::kLineWidthTypeBeam;
@@ -1865,16 +1865,16 @@ void mxsr2msrTranslator::visitStart (S_note_size& elt)
     string noteSizeTypeString = elt->getAttributeValue ("type");
 
     if (noteSizeTypeString.size ()) {
-      msrNoteSize::msrNoteSizeTypeKind
+      msrNoteSizeTypeKind
         noteSizeTypeKind =
-          msrNoteSize::k_NoNoteSizeTypeKind;
+          msrNoteSizeTypeKind::k_NoNoteSizeType;
 
       if      (noteSizeTypeString == "cue")
-        noteSizeTypeKind = msrNoteSize::kCueNoteSize;
+        noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeCue;
       else if (noteSizeTypeString == "grace")
-        noteSizeTypeKind = msrNoteSize::kGraceNoteSize;
+        noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeGrace;
       else if (noteSizeTypeString == "large")
-        noteSizeTypeKind = msrNoteSize::kLargeNoteSize;
+        noteSizeTypeKind = msrNoteSizeTypeKind::kNoteSizeTypeLarge;
 
       else {
         stringstream s;
@@ -1950,14 +1950,14 @@ void mxsr2msrTranslator::visitStart (S_distance& elt)
     string distanceTypeString = elt->getAttributeValue ("type");
 
     if (distanceTypeString.size ()) {
-      msrDistance::msrDistanceTypeKind
+      msrDistanceTypeKind
         distanceTypeKind =
-          msrDistance::k_NoDistanceTypeKind;
+          msrDistanceTypeKind::k_NoDistanceType;
 
       if      (distanceTypeString == "hyphen")
-        distanceTypeKind = msrDistance::kHyphenDistance;
+        distanceTypeKind = msrDistanceTypeKind::kDistanceTypeHyphen;
       else if (distanceTypeString == "beam")
-        distanceTypeKind = msrDistance::kBeamDistance;
+        distanceTypeKind = msrDistanceTypeKind::kDistanceTypeBeam;
 
       else {
         stringstream s;
@@ -2034,38 +2034,38 @@ void mxsr2msrTranslator::visitStart (S_glyph& elt)
     string glyphTypeString = elt->getAttributeValue ("type");
 
     if (glyphTypeString.size ()) {
-      msrGlyph::msrGlyphTypeKind
+      msrGlyphTypeKind
         glyphTypeKind =
-          msrGlyph::k_NoGlyphTypeKind;
+          msrGlyphTypeKind::k_NoGlyphType;
 
       if      (glyphTypeString == "quarter-rest")
-        glyphTypeKind = msrGlyph::kQuarterRestGlyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeQuarterRest;
       else if (glyphTypeString == "g-clef-ottava-bassa")
-        glyphTypeKind = msrGlyph::kGClefOttavaBassaGlyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeGClefOttavaBassa;
       else if (glyphTypeString == "c-clef")
-        glyphTypeKind = msrGlyph::kCClefGlyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeCClef;
       else if (glyphTypeString == "f-clef")
-        glyphTypeKind = msrGlyph::kFClefGlyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeFClef;
       else if (glyphTypeString == "percussion-clef")
-        glyphTypeKind = msrGlyph::kClefPercussionGlyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypePercussionClef;
       else if (glyphTypeString == "octave-shift-up-8")
-        glyphTypeKind = msrGlyph::kOctaveShiftUp8Glyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftUp8;
       else if (glyphTypeString == "octave-shift-down-8")
-        glyphTypeKind = msrGlyph::kOctaveShiftDown8Glyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftDown8;
       else if (glyphTypeString == "octave-shift-continue-8")
-        glyphTypeKind = msrGlyph::kOctaveShiftContinue8Glyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue8;
       else if (glyphTypeString == "octave-shift-down-15")
-        glyphTypeKind = msrGlyph::kOctaveShiftDown15Glyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftDown15;
       else if (glyphTypeString == "octave-shift-up-15")
-        glyphTypeKind = msrGlyph::kOctaveShiftUp15Glyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftUp15;
       else if (glyphTypeString == "octave-shift-continue-15")
-        glyphTypeKind = msrGlyph::kOctaveShiftContinue15Glyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue15;
       else if (glyphTypeString == "octave-shift-down-22")
-        glyphTypeKind = msrGlyph::kOctaveShiftDown22Glyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftDown22;
       else if (glyphTypeString == "octave-shift-up-22")
-        glyphTypeKind = msrGlyph::kOctaveShiftUp22Glyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftUp22;
       else if (glyphTypeString == "octave-shift-continue-22")
-        glyphTypeKind = msrGlyph::kOctaveShiftContinue22Glyph;
+        glyphTypeKind = msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue22;
 
       else {
         stringstream s;
@@ -5446,7 +5446,7 @@ void mxsr2msrTranslator::visitStart (S_metronome& elt)
   fCurrentMetrenomePerMinute = "";
 
   fCurrentMetrenomeDotsNumber = 0;
-  fCurrentMetrenomeRelationKind = msrTempoKind::kTempoNotesRelationshipNone;
+  fCurrentMetrenomeRelationKind = msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone;
   fCurrentMetronomeDurationKind = msrDurationKind::k_NoDuration;
   fCurrentMetronomeBeamValue = "";
 
@@ -5773,7 +5773,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_note& elt)
   else {
     // register stand-alone metronome note
 
-    if (fCurrentMetrenomeRelationKind == msrTempoKind::kTempoNotesRelationshipNone) {
+    if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
       // this metronome note belongs to the left elements list
 
       if (! fCurrentMetronomeRelationLeftElements) {
@@ -5824,10 +5824,10 @@ void mxsr2msrTranslator::visitStart (S_metronome_relation& elt)
 
   string metrenomeRelation = elt->getValue ();
 
-  fCurrentMetrenomeRelationKind = msrTempoKind::kTempoNotesRelationshipNone;
+  fCurrentMetrenomeRelationKind = msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone;
 
   if (metrenomeRelation == "equals") {
-    fCurrentMetrenomeRelationKind = msrTempoKind::kTempoNotesRelationshipEquals;
+    fCurrentMetrenomeRelationKind = msrTempoNotesRelationshipKind::kTempoNotesRelationshipEquals;
   }
   else {
     stringstream s;
@@ -6025,7 +6025,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome_tuplet& elt)
           fCurrentMetronomeNoteWholeNotesFromMetronomeType);
 
       // register the metronome tuplet
-      if (fCurrentMetrenomeRelationKind == msrTempoKind::kTempoNotesRelationshipNone) {
+      if (fCurrentMetrenomeRelationKind == msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone) {
         // this metronome tuplet belongs to the left elements list
 
         if (! fCurrentMetronomeRelationLeftElements) {
@@ -6083,24 +6083,24 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
   // fCurrentMetronomeParenthesedKind ??? JMI
 
   // determine tempo kind
-  msrTempo::msrTempoKind tempoKind = msrTempoKind::k_NoTempoKind;
+  msrTempoKBeatUnitsKind tempoKind = msrTempoKBeatUnitsKind::k_NoTempoBeatUnits;
 
   int  beatUnitsSize    = fCurrentMetronomeBeatUnitsVector.size ();
   Bool perMinutePresent = fCurrentMetrenomePerMinute.size () > 0;
 
   if (beatUnitsSize == 1 && perMinutePresent) {
-    tempoKind = msrTempoKind::kTempoBeatUnitsPerMinute;
+    tempoKind = msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute;
   }
   else if (beatUnitsSize == 2 && ! perMinutePresent) {
-    tempoKind = msrTempoKind::kTempoBeatUnitsEquivalence;
+    tempoKind = msrTempoKBeatUnitsKind::kTempoBeatUnitsEquivalence;
   }
   else if (
-    fCurrentMetrenomeRelationKind != msrTempoKind::kTempoNotesRelationshipNone
+    fCurrentMetrenomeRelationKind != msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone
   ) {
-    tempoKind = msrTempoKind::kTempoNotesRelationship;
+    tempoKind = msrTempoKBeatUnitsKind::kTempoNotesRelationship;
   }
 
-  if (tempoKind == msrTempoKind::k_NoTempoKind) {
+  if (tempoKind == msrTempoKBeatUnitsKind::k_NoTempoBeatUnits) {
       stringstream s;
 
       s <<
@@ -6117,13 +6117,13 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
 
   // create the tempo
   switch (tempoKind) {
-    case msrTempoKind::k_NoTempoKind:
+    case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
       break;
 
-    case msrTempoKind::kTempoBeatUnitsWordsOnly:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
       break;
 
-    case msrTempoKind::kTempoBeatUnitsPerMinute:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
       {
         msrDottedDuration
           beatUnits =
@@ -6140,7 +6140,7 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
         }
       break;
 
-    case msrTempoKind::kTempoBeatUnitsEquivalence:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsEquivalence:
       {
         msrDottedDuration
           beatUnits =
@@ -6157,13 +6157,13 @@ void mxsr2msrTranslator::visitEnd (S_metronome& elt)
       }
       break;
 
-    case msrTempoKind::kTempoNotesRelationship:
+    case msrTempoKBeatUnitsKind::kTempoNotesRelationship:
       fCurrentMetronomeTempo =
         msrTempo::createTempoNotesRelationship (
           inputLineNumber,
 					nullptr, // will be set when tempo is appended to a measure JMI v0.9.66 PIM
           fCurrentMetronomeRelationLeftElements,
-          fCurrentMetrenomeRelationKind, // msrTempoKind::kTempoNotesRelationshipEquals here
+          fCurrentMetrenomeRelationKind, // msrTempoNotesRelationshipKind::kTempoNotesRelationshipEquals here
           fCurrentMetronomeRelationRightElements,
           fCurrentMetronomeParenthesedKind,
           fCurrentDirectionPlacementKind);
@@ -9325,11 +9325,11 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
   fCurrentBarLineHasSegnoKind = msrBarLine::kBarLineHasSegnoNo;
   fCurrentBarLineHasCodaKind  = msrBarLine::kBarLineHasCodaNo;
 
-  fCurrentBarLineLocationKind        = msrBarLine::kBarLineLocationNone;
+  fCurrentBarLineLocationKind        = msrBarLineLocationKind::kBarLineLocationNone;
   fCurrentBarLineStyleKind           = msrBarLineStyleKind::kBarLineStyleNone;
   fCurrentBarLineEndingTypeKind      = msrBarLine::kBarLineEndingNone;
   fCurrentBarLineRepeatDirectionKind = msrBarLine::kBarLineRepeatDirectionNone;
-  fCurrentBarLineRepeatWingedKind    = msrBarLine::kBarLineRepeatWingedNone;
+  fCurrentBarLineRepeatWingedKind    = msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone;
 
   fCurrentBarLineTimes = 2; // default value JMI ??? v0.9.64
 
@@ -9341,16 +9341,16 @@ void mxsr2msrTranslator::visitStart (S_barline& elt)
         elt->getAttributeValue ("location");
 
     fCurrentBarLineLocationKind =
-      msrBarLine::kBarLineLocationRight; // by default
+      msrBarLineLocationKind::kBarLineLocationRight; // by default
 
     if       (location == "left") {
-      fCurrentBarLineLocationKind = msrBarLine::kBarLineLocationLeft;
+      fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationLeft;
     }
     else  if (location == "middle") {
-      fCurrentBarLineLocationKind = msrBarLine::kBarLineLocationMiddle;
+      fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationMiddle;
     }
     else if  (location == "right") {
-      fCurrentBarLineLocationKind = msrBarLine::kBarLineLocationRight;
+      fCurrentBarLineLocationKind = msrBarLineLocationKind::kBarLineLocationRight;
     }
     else {
       stringstream s;
@@ -9867,28 +9867,28 @@ void mxsr2msrTranslator::visitStart (S_repeat& elt)
     string winged = elt->getAttributeValue ("winged");
 
     fCurrentBarLineRepeatWingedKind =
-      msrBarLine::kBarLineRepeatWingedNone; // default value
+      msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone; // default value
 
     if (winged.size ()) {
       if       (winged == "[NONE]") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedNone;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone;
       }
       else if (winged == "straight") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedStraight;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedStraight;
       }
       else  if (winged == "curved") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedCurved;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedCurved;
       }
       else  if (winged == "double-straight") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedDoubleStraight;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleStraight;
       }
       else  if (winged == "double-curved") {
         fCurrentBarLineRepeatWingedKind =
-          msrBarLine::kBarLineRepeatWingedDoubleCurved;
+          msrBarLineRepeatWingedKind::kBarLineRepeatWingedDoubleCurved;
       }
       else {
         stringstream s;
@@ -9979,11 +9979,11 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
   Bool barLineHasBeenHandled (false);
 
   switch (fCurrentBarLineLocationKind) {
-    case msrBarLine::kBarLineLocationNone:
+    case msrBarLineLocationKind::kBarLineLocationNone:
       // should not occur
       break;
 
-    case msrBarLine::kBarLineLocationLeft:
+    case msrBarLineLocationKind::kBarLineLocationLeft:
       if (
         fCurrentBarLineEndingTypeKind
           ==
@@ -10029,11 +10029,11 @@ void mxsr2msrTranslator::visitEnd (S_barline& elt)
       }
       break;
 
-    case msrBarLine::kBarLineLocationMiddle:
+    case msrBarLineLocationKind::kBarLineLocationMiddle:
       // JMI ???
       break;
 
-    case msrBarLine::kBarLineLocationRight:
+    case msrBarLineLocationKind::kBarLineLocationRight:
       {
         if (
           fCurrentBarLineEndingTypeKind == msrBarLine::kBarLineEndingTypeStop
@@ -12451,7 +12451,7 @@ void mxsr2msrTranslator::visitStart (S_arrow& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnicalKind::kArrow,
+        msrTechnicalKind::kTechnicalArrow,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -12549,7 +12549,7 @@ void mxsr2msrTranslator::visitStart (S_double_tongue& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kDoubleTongue,
+        msrTechnical::kTechnicalDoubleTongue,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -12584,7 +12584,7 @@ void mxsr2msrTranslator::visitStart (S_down_bow& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kDownBow,
+        msrTechnical::kTechnicalDownBow,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -12678,7 +12678,7 @@ void mxsr2msrTranslator::visitStart (S_fingernails& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kFingernails,
+        msrTechnical::kTechnicalFingernails,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -12886,7 +12886,7 @@ void mxsr2msrTranslator::visitStart (S_harmonic& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kHarmonic,
+        msrTechnical::kTechnicalHarmonic,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -12921,7 +12921,7 @@ void mxsr2msrTranslator::visitStart (S_heel& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kHeel,
+        msrTechnical::kTechnicalHeel,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -12956,7 +12956,7 @@ void mxsr2msrTranslator::visitStart (S_hole& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kHole,
+        msrTechnical::kTechnicalHole,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -12991,7 +12991,7 @@ void mxsr2msrTranslator::visitStart (S_open_string& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kOpenString,
+        msrTechnical::kTechnicalOpenString,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -13169,7 +13169,7 @@ void mxsr2msrTranslator::visitStart (S_snap_pizzicato& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kSnapPizzicato,
+        msrTechnical::kTechnicalSnapPizzicato,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -13204,7 +13204,7 @@ void mxsr2msrTranslator::visitStart (S_stopped& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kStopped,
+        msrTechnical::kTechnicalStopped,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -13328,7 +13328,7 @@ void mxsr2msrTranslator::visitStart (S_tap& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kTap,
+        msrTechnical::kTechnicalTap,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -13398,7 +13398,7 @@ void mxsr2msrTranslator::visitStart (S_toe& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kToe,
+        msrTechnical::kTechnicalToe,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -13433,7 +13433,7 @@ void mxsr2msrTranslator::visitStart (S_triple_tongue& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kTripleTongue,
+        msrTechnical::kTechnicalTripleTongue,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -13468,7 +13468,7 @@ void mxsr2msrTranslator::visitStart (S_up_bow& elt)
     technical =
       msrTechnical::create (
         inputLineNumber,
-        msrTechnical::kUpBow,
+        msrTechnical::kTechnicalUpBow,
         placementKind);
 
   fCurrentTechnicalsList.push_back (technical);
@@ -25477,7 +25477,7 @@ void mxsr2msrTranslator::visitStart (S_frame_note& elt)
   fCurrentFrameNoteStringNumber = -1;
   fCurrentFrameNoteFretNumber = -1;
   fCurrentFrameNoteFingering = -1;
-  fCurrentFrameNoteBarreTypeKind = msrFrameNote::kBarreTypeNone;
+  fCurrentFrameNoteBarreTypeKind = msrBarreTypeKind::kBarreTypeNone;
 
   fOnGoingFrameNote = true;
 }
@@ -25500,12 +25500,12 @@ void mxsr2msrTranslator::visitStart (S_barre& elt)
 
   string barreType = elt->getAttributeValue ("type");
 
-  fCurrentFrameNoteBarreTypeKind = msrFrameNote::kBarreTypeNone;
+  fCurrentFrameNoteBarreTypeKind = msrBarreTypeKind::kBarreTypeNone;
 
   if      (barreType == "start")
-    fCurrentFrameNoteBarreTypeKind = msrFrameNote::kBarreTypeStart;
+    fCurrentFrameNoteBarreTypeKind = msrBarreTypeKind::kBarreTypeStart;
   else if (barreType == "stop")
-    fCurrentFrameNoteBarreTypeKind = msrFrameNote::kBarreTypeStop;
+    fCurrentFrameNoteBarreTypeKind = msrBarreTypeKind::kBarreTypeStop;
   else {
     stringstream s;
 

@@ -723,7 +723,7 @@ enum class msrDurationKind {
 \section{Tempos}\label{Tempos}
 % -------------------------------------------------------------------------
 
-There are thus several kinds of tempos in \msrRepr, with variants represented by \enumType{msrTempoKind} in \msr{msrTempos.h}:
+There are thus several kinds of tempos in \msrRepr, with variants represented by \enumType{msrTempoKBeatUnitsKind} in \msr{msrTempos.h}:
 \begin{lstlisting}[language=CPlusPlus]
 class EXP msrTempo : public msrMeasureElement
 {
@@ -732,8 +732,8 @@ class EXP msrTempo : public msrMeasureElement
     // data types
     // ------------------------------------------------------
 
-    enum class msrTempoKind {
-      k_NoTempoKind,
+    enum class msrTempoKBeatUnitsKind {
+      k_NoTempoBeatUnits,
       kTempoBeatUnitsWordsOnly,
       kTempoBeatUnitsPerMinute,
       kTempoBeatUnitsEquivalence,
@@ -900,7 +900,7 @@ class EXP msrTempo : public msrMeasureElement
     // private fields
     // ------------------------------------------------------
 
-    msrTempoKind          fTempoKind;
+    msrTempoKBeatUnitsKind          fTempoKind;
 
     list<S_msrWords>      fTempoWordsList;
 

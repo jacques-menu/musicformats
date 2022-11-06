@@ -109,23 +109,23 @@ typedef SMARTP<msrStringTuning> S_msrStringTuning;
 EXP ostream& operator << (ostream& os, const S_msrStringTuning& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrScordaturaKind {
+  kScordaturaNone,
+  kScordaturaUp, kScordaturaDown,
+  kScordaturaStop, kScordaturaContinue
+};
+
+string msrScordaturaKindAsString (
+  msrScordaturaKind scordaturaKind);
+
+ostream& operator << (ostream& os, const msrScordaturaKind& elt);
+
 class EXP msrScordatura : public msrMeasureElement
 {
   public:
 
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrScordaturaKind {
-      kScordaturaNone,
-      kScordaturaUp, kScordaturaDown,
-      kScordaturaStop, kScordaturaContinue
-    };
-
-    string scordaturaKindAsString (
-      msrScordaturaKind scordaturaKind);
-
-    // creation from MusicXML
     // ------------------------------------------------------
 
     static SMARTP<msrScordatura> create (

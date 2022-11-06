@@ -3757,49 +3757,49 @@ string lpsr2lilypondTranslator::technicalAsLilypondString (
   string result;
 
   switch (technical->getTechnicalKind ()) {
-    case msrTechnicalKind::kArrow:
+    case msrTechnicalKind::kTechnicalArrow:
       result = "%{ \\Arrow??? %}";
       break;
-    case msrTechnicalKind::kDoubleTongue:
+    case msrTechnicalKind::kTechnicalDoubleTongue:
       result = "-\\tongue #2";
       break;
-    case msrTechnicalKind::kDownBow:
+    case msrTechnicalKind::kTechnicalDownBow:
       result = "\\downbow";
       break;
-    case msrTechnicalKind::kFingernails:
+    case msrTechnicalKind::kTechnicalFingernails:
       result = "%{ \\Fingernails??? %}";
       break;
-    case msrTechnicalKind::kHarmonic:
+    case msrTechnicalKind::kTechnicalHarmonic:
       result = "\\flageolet"; // JMI "\\once\\override Staff.NoteHead.style = #'harmonic-mixed";
       break;
-    case msrTechnicalKind::kHeel:
+    case msrTechnicalKind::kTechnicalHeel:
       result = "\\lheel"; // rheel??? JMI
       break;
-    case msrTechnicalKind::kHole:
+    case msrTechnicalKind::kTechnicalHole:
       result = "%{ \\Hole??? %}";
       break;
-    case msrTechnicalKind::kOpenString:
+    case msrTechnicalKind::kTechnicalOpenString:
       result = "\\open"; // halfopen ??? JMI
       break;
-    case msrTechnicalKind::kSnapPizzicato:
+    case msrTechnicalKind::kTechnicalSnapPizzicato:
       result = "\\snappizzicato";
       break;
-    case msrTechnicalKind::kStopped:
+    case msrTechnicalKind::kTechnicalStopped:
       result = "\\stopped"; // or -+ JMI
       break;
-    case msrTechnicalKind::kTap:
+    case msrTechnicalKind::kTechnicalTap:
       result = "%{ \\Tap??? %}";
       break;
     case msrTechnicalKind::kThumbPosition:
       result = "\\thumb";
       break;
-    case msrTechnicalKind::kToe:
+    case msrTechnicalKind::kTechnicalToe:
       result = "\\ltoe"; // rtoe ??? JMI
       break;
-    case msrTechnicalKind::kTripleTongue:
+    case msrTechnicalKind::kTechnicalTripleTongue:
       result = "-\\tongue #3";
       break;
-    case msrTechnicalKind::kUpBow:
+    case msrTechnicalKind::kTechnicalUpBow:
       result = "\\upbow";
       break;
   } // switch
@@ -14639,22 +14639,22 @@ void lpsr2lilypondTranslator::visitStart (S_msrTempo& elt)
     } // switch
 
   switch (elt->getTempoKind ()) {
-    case msrTempoKind::k_NoTempoKind:
+    case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
       break;
 
-    case msrTempoKind::kTempoBeatUnitsWordsOnly:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
       generateCodeForTempoBeatUnitsWordsOnly (elt);
       break;
 
-    case msrTempoKind::kTempoBeatUnitsPerMinute:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
       generateCodeForTempoBeatUnitsPerMinute (elt);
       break;
 
-    case msrTempoKind::kTempoBeatUnitsEquivalence:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnitsEquivalence:
       generateCodeForTempoBeatUnitsEquivalence (elt);
       break;
 
-    case msrTempoKind::kTempoNotesRelationship:
+    case msrTempoKBeatUnitsKind::kTempoNotesRelationship:
       generateCodeForTempoNotesRelationship (elt);
       break;
   } // switch
