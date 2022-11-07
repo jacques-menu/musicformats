@@ -505,7 +505,7 @@ ostream& operator << (ostream& os, const S_msrRepeatCommonPart& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -937,7 +937,7 @@ ostream& operator << (ostream& os, const S_msrRepeatEnding& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1608,21 +1608,27 @@ void msrRepeat::browseData (basevisitor* v)
   } // for
 }
 
-string msrRepeat::repeatExplicitStartKindAsString (
+string msrRepeat::msrRepeatExplicitStartKindAsString (
   msrRepeatExplicitStartKind repeatExplicitStartKind)
 {
   string result;
 
   switch (repeatExplicitStartKind) {
-    case msrRepeat::kRepeatExplicitStartNo:
+    case msrRepeatExplicitStartKind::kRepeatExplicitStartNo:
       result = "kRepeatExplicitStartNo";
       break;
-    case msrRepeat::kRepeatExplicitStartYes:
+    case msrRepeatExplicitStartKind::kRepeatExplicitStartYes:
       result = "kRepeatExplicitStartYes";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrRepeatExplicitStartKind& elt)
+{
+  os << msrRepeatExplicitStartKindAsString (elt);
+  return os;
 }
 
 string msrRepeat::repeatBuildPhaseKindAsString (
@@ -1656,7 +1662,7 @@ string msrRepeat::asShortString () const
     "Repeat" <<
     ", " << fRepeatTimes << " times" <<
    ", fRepeatExplicitStartKind: " <<
-    repeatExplicitStartKindAsString (
+    msrRepeatExplicitStartKindAsString (
       fRepeatExplicitStartKind);
 //     ", fCurrentRepeatBuildPhaseKind: " <<
 //     repeatBuildPhaseKindAsString (
@@ -1710,7 +1716,7 @@ string msrRepeat::asString () const
     "[Repeat" <<
     ", " << fRepeatTimes << " times" <<
    ", fRepeatExplicitStartKind:: " <<
-    repeatExplicitStartKindAsString (
+    msrRepeatExplicitStartKindAsString (
       fRepeatExplicitStartKind);
 //     ", fCurrentRepeatBuildPhaseKind: " <<
 //     repeatBuildPhaseKindAsString (
@@ -1805,7 +1811,7 @@ void msrRepeat::print (ostream& os) const
   os << left <<
     setw (fieldWidth) <<
    "fRepeatExplicitStartKind" << " : " <<
-    repeatExplicitStartKindAsString (
+    msrRepeatExplicitStartKindAsString (
       fRepeatExplicitStartKind) <<
     endl <<
     setw (fieldWidth) <<
@@ -1980,7 +1986,7 @@ ostream& operator << (ostream& os, const S_msrRepeat& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

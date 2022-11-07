@@ -314,19 +314,19 @@ string msrStaffDetails::msrStaffTypeKindAsString (
   string result;
 
   switch (staffTypeKind) {
-    case msrStaffDetails::kStaffTypeRegular:
+    case msrStaffTypeKind::kStaffTypeRegular:
       result = "kStaffTypeRegular";
       break;
-    case msrStaffDetails::kStaffTypeOssia:
+    case msrStaffTypeKind::kStaffTypeOssia:
       result = "kStaffTypeOssia";
       break;
-    case msrStaffDetails::kStaffTypeCue:
+    case msrStaffTypeKind::kStaffTypeCue:
       result = "kStaffTypeCue";
       break;
-    case msrStaffDetails::kStaffTypeEditorial:
+    case msrStaffTypeKind::kStaffTypeEditorial:
       result = "kStaffTypeEditorial";
       break;
-    case msrStaffDetails::kStaffTypeAlternate:
+    case msrStaffTypeKind::kStaffTypeAlternate:
       result = "kStaffTypeAlternate";
       break;
   } // switch
@@ -369,10 +369,10 @@ string msrStaffDetails::msrPrintSpacingKindAsString (
   string result;
 
   switch (printSpacingKind) {
-    case msrStaffDetails::kPrintSpacingYes:
+    case msrPrintSpacingKind::kPrintSpacingYes:
       result = "kPrintSpacingYes";
       break;
-    case msrStaffDetails::kPrintSpacingNo:
+    case msrPrintSpacingKind::kPrintSpacingNo:
       result = "kPrintSpacingNo";
       break;
   } // switch

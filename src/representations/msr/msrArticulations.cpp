@@ -130,12 +130,12 @@ ostream& operator << (ostream& os, const msrArticulationKind& elt)
   return os;
 }
 
-string msrArticulation::msrArticulationKindAsString () const
-{
-  return
-    msrArticulationKindAsString (
-      fArticulationKind);
-}
+// string msrArticulation::msrArticulationKindAsString () const JMI
+// {
+//   return
+//     msrArticulationKindAsString (
+//       fArticulationKind);
+// }
 
 string msrArticulation::articulationPlacementKindAsString () const
 {
@@ -226,13 +226,13 @@ ostream& operator << (ostream& os, const S_msrArticulation& elt)
 //______________________________________________________________________________
 S_msrFermata msrFermata::create (
   int                inputLineNumber,
-  msrFermataKind     fermataKind,
-  msrFermataTypeKind fermataTypeKind)
+  msrFermataShapeKind     fermataShapeKind,
+  msrArticulationFermataType fermataTypeKind)
 {
   msrFermata* o =
     new msrFermata (
       inputLineNumber,
-      fermataKind,
+      fermataShapeKind,
       fermataTypeKind);
   assert (o != nullptr);
   return o;
@@ -240,14 +240,14 @@ S_msrFermata msrFermata::create (
 
 msrFermata::msrFermata (
     int                inputLineNumber,
-    msrFermataKind     fermataKind,
-    msrFermataTypeKind fermataTypeKind)
+    msrFermataShapeKind     fermataShapeKind,
+    msrArticulationFermataType fermataTypeKind)
     : msrArticulation (
       inputLineNumber,
       msrArticulationKind::kArticulationFermata,
       msrPlacementKind::k_NoPlacement) // temporary, JMI TEMP
 {
-  fFermataKind = fermataKind;
+  fFermataKind = fermataShapeKind;
   fFermataTypeKind = fermataTypeKind;
 }
 
@@ -301,19 +301,19 @@ void msrFermata::acceptOut (basevisitor* v)
 void msrFermata::browseData (basevisitor* v)
 {}
 
-string msrFermata::msrFermataKindAsString (
-  msrFermataKind fermataKind)
+string msrFermataShapeKindAsString (
+  msrFermataShapeKind fermataShapeKind)
 {
   string result;
 
-  switch (fermataKind) {
-    case msrFermataKind::kArticulationFermataNormal:
+  switch (fermataShapeKind) {
+    case msrFermataShapeKind::kArticulationFermataNormal:
       result = "kArticulationFermataNormal";
       break;
-    case msrFermataKind::kArticulationFermataAngled:
+    case msrFermataShapeKind::kArticulationFermataAngled:
       result = "kArticulationFermataAngled";
       break;
-    case msrFermataKind::kArticulationFermataSquare:
+    case msrFermataShapeKind::kArticulationFermataSquare:
       result = "kArticulationFermataSquare";
       break;
   } // switch
@@ -321,25 +321,25 @@ string msrFermata::msrFermataKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrFermataKind& elt)
+ostream& operator << (ostream& os, const msrFermataShapeKind& elt)
 {
-  os << msrFermataKindAsString (elt);
+  os << msrFermataShapeKindAsString (elt);
   return os;
 }
 
-string msrFermata::msrFermataTypeKindAsString (
-  msrFermataTypeKind fermataTypeKind)
+string msrFermata::msrArticulationFermataTypeAsString (
+  msrArticulationFermataType fermataTypeKind)
 {
   string result;
 
   switch (fermataTypeKind) {
-    case msrFermataTypeKind::kArticulationFermataTypeNone:
+    case msrArticulationFermataType::kArticulationFermataTypeNone:
       result = "kArticulationFermataTypeNone";
       break;
-    case msrFermataTypeKind::kArticulationFermataTypeUpright:
+    case msrArticulationFermataType::kArticulationFermataTypeUpright:
       result = "kArticulationFermataTypeUpright";
       break;
-    case msrFermataTypeKind::kArticulationFermataTypeInverted:
+    case msrArticulationFermataType::kArticulationFermataTypeInverted:
       result = "kArticulationFermataTypeInverted";
       break;
   } // switch
@@ -347,9 +347,9 @@ string msrFermata::msrFermataTypeKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, const msrFermataTypeKind& elt)
+ostream& operator << (ostream& os, const msrArticulationFermataType& elt)
 {
-  os << msrFermataTypeKindAsString (elt);
+  os << msrArticulationFermataTypeAsString (elt);
   return os;
 }
 
@@ -360,9 +360,9 @@ string msrFermata::asString () const
   s <<
     "[Fermata" <<
     ", " <<
-    msrFermataKindAsString (fFermataKind) <<
+    msrFermataShapeKindAsString (fFermataKind) <<
     ", " <<
-    msrFermataTypeKindAsString (fFermataTypeKind) <<
+    msrArticulationFermataTypeAsString (fFermataTypeKind) <<
     ", line " << fInputLineNumber <<
     ']';
 

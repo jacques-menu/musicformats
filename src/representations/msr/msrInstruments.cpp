@@ -785,10 +785,10 @@ string msrPedalLineKindAsString (
   string result;
 
   switch (pedalLineKind) {
-    case msrPedalTypeKind::kPedalLineYes:
+    case msrPedalLineKind::kPedalLineYes:
       result = "kPedalLineYes";
       break;
-    case msrPedalTypeKind::kPedalLineNo:
+    case msrPedalLineKind::kPedalLineNo:
       result = "kPedalLineNo";
       break;
   } // switch
@@ -808,10 +808,10 @@ string msrPedalSignKindAsString (
   string result;
 
   switch (pedalSignKind) {
-    case msrPedalTypeKind::kPedalSignYes:
+    case msrPedalSignKind::kPedalSignYes:
       result = "kPedalSignYes";
       break;
-    case msrPedalTypeKind::kPedalSignNo:
+    case msrPedalSignKind::kPedalSignNo:
       result = "kPedalSignNo";
       break;
   } // switch

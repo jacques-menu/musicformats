@@ -25,8 +25,8 @@ namespace MusicFormats
 // data types
 
 enum class bsrParallelLayoutKind {
-    kParallelLayoutBarOverBarKind,
-    kParallelLayoutLineOverLineKind };
+    kParallelLayoutBarOverBar,
+    kParallelLayoutLineOverLine };
 
 string bsrParallelLayoutKindAsString (
   bsrParallelLayoutKind parallelLayoutKind);

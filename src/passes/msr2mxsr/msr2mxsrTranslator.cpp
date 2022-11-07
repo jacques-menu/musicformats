@@ -5504,7 +5504,7 @@ void msr2mxsrTranslator:: appendNoteTechnicals (
         case msrTechnicalKind::kTechnicalTap:
           technicalType = k_tap;
           break;
-        case msrTechnicalKind::kThumbPosition:
+        case msrTechnicalKind::kTechnicalThumbPosition:
           technicalType = k_thumb_position;
           break;
         case msrTechnicalKind::kTechnicalToe:
@@ -8491,7 +8491,7 @@ void msr2mxsrTranslator::visitStart (S_msrTechnical& elt)
       break;
     case msrTechnicalKind::kTechnicalTap:
       break;
-    case msrTechnicalKind::kThumbPosition:
+    case msrTechnicalKind::kTechnicalThumbPosition:
       break;
     case msrTechnicalKind::kTechnicalToe:
       break;

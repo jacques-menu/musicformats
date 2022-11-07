@@ -23,7 +23,7 @@ typedef SMARTP<msrNote> S_msrNote;
 // data types
 
 enum class msrDoubleTremoloKind {
-  kNotesDoubleTremolo, kChordsDoubleTremolo
+  kDoubleTremoloNotes, kDoubleTremoloChords
 };
 
 string msrDoubleTremoloKindAsString (

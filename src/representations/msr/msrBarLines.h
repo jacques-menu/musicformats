@@ -68,7 +68,7 @@ ostream& operator << (ostream& os, const msrBarLineRepeatDirectionKind& elt);
 
 // ending type
 enum class msrBarLineEndingTypeKind {
-  kBarLineEndingNone,
+  kBarLineEndingTypeNone,
 
   kBarLineEndingTypeStart,
   kBarLineEndingTypeStop,

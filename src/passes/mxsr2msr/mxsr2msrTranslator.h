@@ -26,7 +26,7 @@ namespace MusicFormats
 // data types
 
 enum class msrStaffChangeKind {
-	k_NoStaffChange,
+	kStaffChange_NO_,
 	kStaffChangeChordMemberNote,
 	kStaffChangeOtherNote
 };
@@ -42,8 +42,8 @@ string msrSyllableKindAsString (
   string result;
 
   switch (staffChangeKind) {
-    case msrStaffChangeKind::k_NoStaffChange:
-      result = "k_NoStaffChange";
+    case msrStaffChangeKind::kStaffChange_NO_:
+      result = "kStaffChange_NO_";
       break;
     case msrStaffChangeKind::kStaffChangeChordMemberNote:
       result = "kStaffChangeChordMemberNote";

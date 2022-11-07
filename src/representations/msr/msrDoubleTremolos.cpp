@@ -211,7 +211,7 @@ void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
 //
 //   // the two elements of a double tremolo are notes or chords
 //   switch (fDoubleTremoloKind) {
-//     case msrDoubleTremolo::kNotesDoubleTremolo:
+//     case msrDoubleTremoloKind::kDoubleTremoloNotes:
 //       if (
 //         S_msrNote
 //           note =
@@ -231,7 +231,7 @@ void msrDoubleTremolo::setDoubleTremoloMeasurePosition (
 //       }
 //       break;
 //
-//     case msrDoubleTremolo::kChordsDoubleTremolo:
+//     case msrDoubleTremoloKind::kDoubleTremoloChords:
 //       if (
 //         S_msrChord
 //           chord =
@@ -644,10 +644,10 @@ string msrDoubleTremoloKindAsString (
   string result;
 
   switch (doubleTremolotKind) {
-    case msrDoubleTremolo::kNotesDoubleTremolo:
+    case msrDoubleTremoloKind::kDoubleTremoloNotes:
       result = "Notes";
       break;
-    case msrDoubleTremolo::kChordsDoubleTremolo:
+    case msrDoubleTremoloKind::kDoubleTremoloChords:
       result = "Chords";
       break;
   } // switch
@@ -702,7 +702,7 @@ string msrDoubleTremolo::asString () const
       ", first element " << " = ";
 
     switch (fDoubleTremoloKind) {
-      case msrDoubleTremolo::kNotesDoubleTremolo:
+      case msrDoubleTremoloKind::kDoubleTremoloNotes:
         if (
           S_msrNote
             note =
@@ -719,7 +719,7 @@ string msrDoubleTremolo::asString () const
         }
         break;
 
-      case msrDoubleTremolo::kChordsDoubleTremolo:
+      case msrDoubleTremoloKind::kDoubleTremoloChords:
         if (
           S_msrChord
             chord =
@@ -743,7 +743,7 @@ string msrDoubleTremolo::asString () const
       ", second element " << " = ";
 
     switch (fDoubleTremoloKind) {
-      case msrDoubleTremolo::kNotesDoubleTremolo:
+      case msrDoubleTremoloKind::kDoubleTremoloNotes:
         if (
           S_msrNote
             note =
@@ -760,7 +760,7 @@ string msrDoubleTremolo::asString () const
         }
         break;
 
-      case msrDoubleTremolo::kChordsDoubleTremolo:
+      case msrDoubleTremoloKind::kDoubleTremoloChords:
         if (
           S_msrChord
             chord =

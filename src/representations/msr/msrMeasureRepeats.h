@@ -199,30 +199,33 @@ typedef SMARTP<msrMeasureRepeatReplicas> S_msrMeasureRepeatReplicas;
 EXP ostream& operator << (ostream& os, const S_msrMeasureRepeatReplicas& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrMeasureRepeatKind {
+  kMeasureRepeat_NO_,
+  kMeasureRepeatStart, kMeasureRepeatStop
+};
+
+// string msrMeasureRepeatKindAsString ( // JMI v0.9.66
+//   msrMeasureRepeatKind measureRepeatKind);
+//
+// ostream& operator << (ostream& os, const msrMeasureRepeatKind& elt);
+
+enum class msrMeasureRepeatBuildPhaseKind {
+  kMeasureRepeatBuildPhaseJustCreated,
+  kMeasureRepeatBuildPhaseInPattern,
+  kMeasureRepeatBuildPhaseInReplicas,
+  kMeasureRepeatBuildPhaseCompleted
+};
+
+// string msrMeasureRepeatBuildPhaseKindAsString ( // JMI v0.9.66
+//   msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind);
+//
+// ostream& operator << (ostream& os, const msrMeasureRepeatBuildPhaseKind& elt);
+
 class EXP msrMeasureRepeat : public msrSegmentElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrMeasureRepeatKind {
-      k_NoMeasureRepeat,
-      kStartMeasureRepeat, kStopMeasureRepeat
-    };
-
-    string measureRepeatKindAsString (
-      msrMeasureRepeatKind measureRepeatKind);
-
-    enum class msrMeasureRepeatBuildPhaseKind {
-      kMeasureRepeatBuildPhaseJustCreated,
-      kMeasureRepeatBuildPhaseInPattern,
-      kMeasureRepeatBuildPhaseInReplicas,
-      kMeasureRepeatBuildPhaseCompleted
-    };
-
-    string measureRepeatBuildPhaseKindAsString (
-      msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

@@ -110,7 +110,7 @@ enum class bsrTimeSignatureKind {
 string bsrTimeSignatureKindAsString (
   bsrTimeSignatureKind timeKind);
 
-string timeKindAsDebugString (
+string bsrTimeKindAsDebugString (
   bsrTimeSignatureKind timeKind);
 
 ostream& operator << (ostream& os, const bsrTimeSignatureKind& elt);

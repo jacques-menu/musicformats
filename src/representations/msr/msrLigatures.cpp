@@ -136,7 +136,7 @@ void msrLigature::acceptOut (basevisitor* v)
 void msrLigature::browseData (basevisitor* v)
 {}
 
-string msrLigature::msrLigatureKindAsString (
+string msrLigatureKindAsString (
   msrLigatureKind ligatureKind)
 {
   string result;
@@ -164,25 +164,25 @@ ostream& operator << (ostream& os, const msrLigatureKind& elt)
   return os;
 }
 
-string msrLigature::msrLigatureLineEndKindAsString (
+string msrLigatureLineEndKindAsString (
   msrLigatureLineEndKind ligatureLineEndKind)
 {
   stringstream s;
 
   switch (ligatureLineEndKind) {
-    case msrLigatureKind::kLigatureLineEndUp:
+    case msrLigatureLineEndKind::kLigatureLineEndUp:
       s << "ligatureLineEndUp";
       break;
-    case msrLigatureKind::kLigatureLineEndDown:
+    case msrLigatureLineEndKind::kLigatureLineEndDown:
       s << "ligatureLineEndDown";
       break;
-    case msrLigatureKind::kLigatureLineEndBoth:
+    case msrLigatureLineEndKind::kLigatureLineEndBoth:
       s << "ligatureLineEndBoth";
       break;
-    case msrLigatureKind::kLigatureLineEndArrow:
+    case msrLigatureLineEndKind::kLigatureLineEndArrow:
       s << "ligatureLineEndArrow";
       break;
-    case msrLigatureKind::kLigatureLineEndNone:
+    case msrLigatureLineEndKind::kLigatureLineEndNone:
       s << "ligatureLineEndNone";
       break;
   } // switch

@@ -92,7 +92,7 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
   return newbornClone;
 }
 
-string msrGlissando::msrGlissandoTypeKindAsString (
+string msrGlissandoTypeKindAsString (
   msrGlissandoTypeKind glissandoTypeKind)
 {
   string result;

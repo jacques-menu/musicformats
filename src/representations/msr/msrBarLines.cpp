@@ -125,7 +125,7 @@ S_msrBarLine msrBarLine::createFinalBarLine (
       kBarLineLocationRight,
       kBarLineStyleLightHeavy,
       kBarLineRepeatDirectionNone,
-      kBarLineEndingNone,
+      kBarLineEndingTypeNone,
       "", // endingNumber
       0,  // barLineTimes
       kBarLineCategoryStandalone,
@@ -145,7 +145,7 @@ S_msrBarLine msrBarLine::createDoubleBarLine (
       kBarLineLocationRight,
       kBarLineStyleLightLight,
       kBarLineRepeatDirectionNone,
-      kBarLineEndingNone,
+      kBarLineEndingTypeNone,
       "", // endingNumber
       0,  // barLineTimes
       kBarLineCategoryStandalone,
@@ -181,7 +181,7 @@ Bool msrBarLine::barLineIsAFinalBar () const
       &&
     fRepeatDirectionKind == kBarLineRepeatDirectionNone
       &&
-    fEndingTypeKind == kBarLineEndingNone
+    fEndingTypeKind == kBarLineEndingTypeNone
       &&
     fBarLineCategoryKind == kBarLineCategoryStandalone;
 }
@@ -195,7 +195,7 @@ Bool msrBarLine::barLineIsADoubleBar () const
       &&
     fRepeatDirectionKind == kBarLineRepeatDirectionNone
       &&
-    fEndingTypeKind == kBarLineEndingNone
+    fEndingTypeKind == kBarLineEndingTypeNone
       &&
     fBarLineCategoryKind == kBarLineCategoryStandalone;
 }
@@ -323,10 +323,10 @@ string msrBarLineHasSegnoKindAsString (
   string result;
 
   switch (barLineHasSegnoKind) {
-    case msrBarLine::kBarLineHasSegnoYes:
+    case msrBarLineHasSegnoKind::kBarLineHasSegnoYes:
       result = "kBarLineHasSegnoYes";
       break;
-    case msrBarLine::kBarLineHasSegnoNo:
+    case msrBarLineHasSegnoKind::kBarLineHasSegnoNo:
       result = "kBarLineHasSegnoNo";
       break;
   } // switch
@@ -346,10 +346,10 @@ string msrBarLineHasCodaKindAsString (
   string result;
 
   switch (barLineHasCodaKind) {
-    case msrBarLine::kBarLineHasCodaYes:
+    case msrBarLineHasCodaKind::kBarLineHasCodaYes:
       result = "kBarLineHasCodaYes";
       break;
-    case msrBarLine::kBarLineHasCodaNo:
+    case msrBarLineHasCodaKind::kBarLineHasCodaNo:
       result = "kBarLineHasCodaNo";
       break;
   } // switch
@@ -419,16 +419,16 @@ string msrBarLineEndingTypeKindAsString (
   string result;
 
   switch (barLineEndingTypeKind) {
-    case msrBarLine::kBarLineEndingNone:
-      result = "kBarLineEndingNone";
+    case msrBarLineEndingTypeKind::kBarLineEndingTypeNone:
+      result = "kBarLineEndingTypeNone";
       break;
-    case msrBarLine::kBarLineEndingTypeStart:
+    case msrBarLineEndingTypeKind::kBarLineEndingTypeStart:
       result = "kBarLineEndingTypeStart";
       break;
-    case msrBarLine::kBarLineEndingTypeStop:
+    case msrBarLineEndingTypeKind::kBarLineEndingTypeStop:
       result = "kBarLineEndingTypeStop";
       break;
-    case msrBarLine::kBarLineEndingTypeDiscontinue:
+    case msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue:
       result = "kBarLineEndingTypeDiscontinue";
       break;
   } // switch
@@ -448,13 +448,13 @@ string msrBarLineRepeatDirectionKindAsString (
   string result;
 
   switch (barLineRepeatDirectionKind) {
-    case msrBarLine::kBarLineRepeatDirectionNone:
+    case msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionNone:
       result ="barLineRepeatDirectionNone";
       break;
-    case msrBarLine::kBarLineRepeatDirectionForward:
+    case msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionForward:
       result ="barLineRepeatDirectionForward";
       break;
-    case msrBarLine::kBarLineRepeatDirectionBackward:
+    case msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionBackward:
       result ="barLineRepeatDirectionBackward";
       break;
   } // switch
