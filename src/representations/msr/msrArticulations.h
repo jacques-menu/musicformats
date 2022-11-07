@@ -117,24 +117,24 @@ EXP ostream& operator << (ostream& os, const S_msrArticulation& elt);
 //______________________________________________________________________________
 // data types
 
-enum class msrFermataKind {
+enum class msrFermataShapeKind {
   kArticulationFermataNormal, kArticulationFermataAngled, kArticulationFermataSquare
 };
 
-string msrFermataKindAsString (
-  msrFermataKind fermataKind);
+string msrFermataShapeKindAsString (
+  msrFermataShapeKind fermataShapeKind);
 
-ostream& operator << (ostream& os, const msrFermataKind& elt);
+ostream& operator << (ostream& os, const msrFermataShapeKind& elt);
 
-enum class msrFermataTypeKind {
+enum class msrArticulationFermataType {
   kArticulationFermataTypeNone,
   kArticulationFermataTypeUpright, kArticulationFermataTypeInverted
 };
 
-string msrFermataTypeKindAsString (
-  msrFermataTypeKind fermataTypeKind);
+string msrArticulationFermataTypeAsString (
+  msrArticulationFermataType fermataTypeKind);
 
-ostream& operator << (ostream& os, const msrFermataTypeKind& elt);
+ostream& operator << (ostream& os, const msrArticulationFermataType& elt);
 
 class EXP msrFermata : public msrArticulation
 {
@@ -145,8 +145,8 @@ class EXP msrFermata : public msrArticulation
 
     static SMARTP<msrFermata> create (
                             int                inputLineNumber,
-                            msrFermataKind     fermataKind,
-                            msrFermataTypeKind fermataTypeKind);
+                            msrFermataShapeKind     fermataShapeKind,
+                            msrArticulationFermataType fermataTypeKind);
 
   protected:
 
@@ -155,8 +155,8 @@ class EXP msrFermata : public msrArticulation
 
                           msrFermata (
                             int                inputLineNumber,
-                            msrFermataKind     fermataKind,
-                            msrFermataTypeKind fermataTypeKind);
+                            msrFermataShapeKind     fermataShapeKind,
+                            msrArticulationFermataType fermataTypeKind);
 
     virtual               ~msrFermata ();
 
@@ -165,10 +165,10 @@ class EXP msrFermata : public msrArticulation
     // set and get
     // ------------------------------------------------------
 
-    msrFermataKind        getFermataKind () const
+    msrFermataShapeKind        getFermataKind () const
                               { return fFermataKind; }
 
-    msrFermataTypeKind    getFermataTypeKind () const
+    msrArticulationFermataType    getFermataTypeKind () const
                               { return fFermataTypeKind; }
 
   public:
@@ -200,9 +200,9 @@ class EXP msrFermata : public msrArticulation
     // private fields
     // ------------------------------------------------------
 
-    msrFermataKind        fFermataKind;
+    msrFermataShapeKind        fFermataKind;
 
-    msrFermataTypeKind    fFermataTypeKind;
+    msrArticulationFermataType    fFermataTypeKind;
 };
 typedef SMARTP<msrFermata> S_msrFermata;
 EXP ostream& operator << (ostream& os, const S_msrFermata& elt);

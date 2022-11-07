@@ -769,7 +769,7 @@ string bsrTimeSignatureKindAsString (
   return result;
 }
 
-string bsrTimeSignature::timeKindAsDebugString (
+string bsrTimeKindAsDebugString (
   bsrTimeSignatureKind timeKind)
 {
   string result;
@@ -826,7 +826,7 @@ string bsrTimeSignature::asDebugString () const
 
   s <<
     "[TIME " <<
-    timeKindAsDebugString (fTimeKind) <<
+    fTimeKind <<
     ']';
 
   return s.str ();

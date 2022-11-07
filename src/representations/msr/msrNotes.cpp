@@ -2643,7 +2643,7 @@ void msrNote::appendSpannerToNote (S_msrSpanner spanner)
   if (gGlobalTracingOahGroup->getTraceSpanners ()) {
     gLogStream <<
       "Appending spanner '" <<
-      msrSpannerKindAsString (spanner->getSpannerKindAsString ()) <<
+      spanner->getSpannerKind () <<
       "' to note " <<
       asString () <<
       endl;

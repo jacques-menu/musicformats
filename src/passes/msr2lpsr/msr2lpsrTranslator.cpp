@@ -3696,7 +3696,7 @@ void msr2lpsrTranslator::visitStart (S_msrTechnical& elt)
       break;
     case msrTechnicalKind::kTechnicalTap:
       break;
-    case msrTechnicalKind::kThumbPosition:
+    case msrTechnicalKind::kTechnicalThumbPosition:
       break;
     case msrTechnicalKind::kTechnicalToe:
       break;

@@ -125,11 +125,11 @@ string bsrParallelLayoutKindAsString (
   string result;
 
   switch (parallelLayoutKind) {
-    case bsrParallel::kParallelLayoutBarOverBarKind:
-      result = "kParallelLayoutBarOverBarKind";
+    case bsrParallelLayoutKind::kParallelLayoutBarOverBar:
+      result = "kParallelLayoutBarOverBar";
       break;
-    case bsrParallel::kParallelLayoutLineOverLineKind:
-      result = "kParallelLayoutLineOverLineKind";
+    case bsrParallelLayoutKind::kParallelLayoutLineOverLine:
+      result = "kParallelLayoutLineOverLine";
       break;
   } // switch
 

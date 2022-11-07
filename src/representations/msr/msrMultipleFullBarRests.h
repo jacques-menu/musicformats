@@ -14,20 +14,21 @@ class   msrSegment;
 typedef SMARTP<msrSegment> S_msrSegment;
 
 //______________________________________________________________________________
+// data types
+
+// enum class msrMultipleFullBarRestsKind { // unused ??? JMI v0.9.66
+//   kMultipleFullBarRests_NO_,
+//   kMultipleFullBarRestsStart, kMultipleFullBarRestsStop
+// };
+//
+// string msrMultipleFullBarRestsKindAsString (
+//   msrMultipleFullBarRestsKind multipleFullBarRestsKind);
+//
+// ostream& operator << (ostream& os, const msrMultipleFullBarRestsKind& elt);
+
 class EXP msrMultipleFullBarRests : public msrSegmentElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrMultipleFullBarRestsKind { // unused ??? JMI
-      k_NoMultipleFullBarRests,
-      kStartMultipleFullBarRests, kStopMultipleFullBarRests
-    };
-
-    string multipleFullBarRestsKindAsString (
-      msrMultipleFullBarRestsKind multipleFullBarRestsKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

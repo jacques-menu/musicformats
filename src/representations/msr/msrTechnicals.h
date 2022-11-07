@@ -35,7 +35,7 @@ enum class msrTechnicalKind {
   kTechnicalSnapPizzicato,
   kTechnicalStopped,
   kTechnicalTap,
-  kThumbPosition,
+  kTechnicalThumbPosition,
   kTechnicalToe,
   kTechnicalTripleTongue,
   kTechnicalUpBow

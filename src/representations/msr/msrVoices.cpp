@@ -4570,7 +4570,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
   // set newRepeat as having an explicit start
   newRepeat->
     setRepeatExplicitStartKind (
-      msrRepeat::kRepeatExplicitStartYes);
+      msrRepeatExplicitStartKind::kRepeatExplicitStartYes);
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
@@ -5756,7 +5756,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
                     getRepeatDescrRepeat ();
 
               switch (currentRepeat->getRepeatExplicitStartKind ()) {
-                case msrRepeat::kRepeatExplicitStartNo:
+                case msrRepeatExplicitStartKind::kRepeatExplicitStartNo:
                   // this the first ending of a voice-level repeat without a start
                   // -------------------------------------
                   handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
@@ -5764,7 +5764,7 @@ void msrVoice::handleRepeatEndingStartInVoice (
                     currentRepeat);
                   break;
 
-                case msrRepeat::kRepeatExplicitStartYes:
+                case msrRepeatExplicitStartKind::kRepeatExplicitStartYes:
                   // this the first ending of a voice-level repeat with a start
                   // -------------------------------------
                   handleVoiceLevelRepeatEndingStartWithExplicitStart (
@@ -5980,7 +5980,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
     switch (
       fVoicePendingMeasureRepeat->getCurrentMeasureRepeatBuildPhaseKind ()
     ) {
-      case msrMeasureRepeat::kMeasureRepeatBuildPhaseJustCreated:
+      case msrMeasureRepeatKind::kMeasureRepeatBuildPhaseJustCreated:
         {
           stringstream s;
 
@@ -5997,7 +5997,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
         }
         break;
 
-      case msrMeasureRepeat::kMeasureRepeatBuildPhaseInPattern:
+      case msrMeasureRepeatKind::kMeasureRepeatBuildPhaseInPattern:
         {
           // get fVoicePendingMeasureRepeat's pattern
           S_msrMeasureRepeatPattern
@@ -6013,7 +6013,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
         }
         break;
 
-      case msrMeasureRepeat::kMeasureRepeatBuildPhaseInReplicas:
+      case msrMeasureRepeatKind::kMeasureRepeatBuildPhaseInReplicas:
         {
           // get fVoicePendingMeasureRepeat's replicas
           S_msrMeasureRepeatReplicas
@@ -6029,7 +6029,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
         }
         break;
 
-      case msrMeasureRepeat::kMeasureRepeatBuildPhaseCompleted:
+      case msrMeasureRepeatKind::kMeasureRepeatBuildPhaseCompleted:
         {
           stringstream s;
 
@@ -7763,7 +7763,7 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
       // set fVoicePendingMeasureRepeat's build phase to completed
       fVoicePendingMeasureRepeat->
         setCurrentMeasureRepeatBuildPhaseKind (
-          msrMeasureRepeat::kMeasureRepeatBuildPhaseJustCreated);
+          msrMeasureRepeatKind::kMeasureRepeatBuildPhaseJustCreated);
 
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {

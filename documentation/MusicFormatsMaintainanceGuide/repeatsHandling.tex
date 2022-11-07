@@ -52,11 +52,11 @@ Recognizing the structure of repeat relies on the attributes of the barLines. Th
 \begin{lstlisting}[language=CPlusPlus]
     // ending type
     enum class msrBarLineEndingTypeKind {
-      kBarLineEndingNone,
+      kBarLineEndingTypeNone,
 
-      kBarLineEndingTypeStart,
-      kBarLineEndingTypeStop,
-      kBarLineEndingTypeDiscontinue
+      msrBarLineEndingTypeKind::kBarLineEndingTypeStart,
+      msrBarLineEndingTypeKind::kBarLineEndingTypeStop,
+      msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue
     };
 \end{lstlisting}
 
@@ -186,7 +186,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
       if (
         fCurrentBarLineEndingTypeKind
           ==
-        msrBarLine::kBarLineEndingTypeStart
+        msrBarLineEndingTypeKind::kBarLineEndingTypeStart
       ) {
         // ending start, don't know yet whether it's hooked or hookless
         // ------------------------------------------------------
@@ -212,7 +212,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
       else if (
         fCurrentBarLineRepeatDirectionKind
           ==
-        msrBarLine::kBarLineRepeatDirectionForward
+        msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionForward
       ) {
         // repeat start
         // ------------------------------------------------------
@@ -235,7 +235,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
     case msrBarLineLocationKind::kBarLineLocationRight:
       {
         if (
-          fCurrentBarLineEndingTypeKind == msrBarLine::kBarLineEndingTypeStop
+          fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeStop
             &&
           fCurrentBarLineEndingNumber.size () != 0
         ) {
@@ -260,7 +260,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         else if (
           fCurrentBarLineRepeatDirectionKind
             ==
-          msrBarLine::kBarLineRepeatDirectionBackward
+          msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionBackward
         ) {
           // repeat end
           // ------------------------------------------------------
@@ -277,7 +277,7 @@ void mxsr2msrTranslator::visitEnd ( S_barline& elt )
         }
 
         else if (
-          fCurrentBarLineEndingTypeKind == msrBarLine::kBarLineEndingTypeDiscontinue
+          fCurrentBarLineEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeDiscontinue
             &&
           fCurrentBarLineEndingNumber.size () != 0
         ) {

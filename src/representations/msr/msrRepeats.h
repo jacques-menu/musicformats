@@ -272,30 +272,33 @@ typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
 EXP ostream& operator << (ostream& os, const S_msrRepeatEnding& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrRepeatExplicitStartKind {
+  kRepeatExplicitStartNo,
+  kRepeatExplicitStartYes
+};
+
+string msrRepeatExplicitStartKindAsString (
+  msrRepeatExplicitStartKind repeatExplicitStartKind);
+
+ostream& operator << (ostream& os, const msrRepeatExplicitStartKind& elt);
+
+enum class msrRepeatBuildPhaseKind {
+  kRepeatBuildPhaseJustCreated,
+  kRepeatBuildPhaseInCommonPart,
+  kRepeatBuildPhaseInEndings,
+  kRepeatBuildPhaseCompleted
+};
+
+string repeatBuildPhaseKindAsString (
+  msrRepeatBuildPhaseKind repeatBuildPhaseKind);
+
+ostream& operator << (ostream& os, const msrRepeatBuildPhaseKind& elt);
+
 class EXP msrRepeat : public msrVoiceElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrRepeatExplicitStartKind {
-      kRepeatExplicitStartNo,
-      kRepeatExplicitStartYes
-    };
-
-    string repeatExplicitStartKindAsString (
-      msrRepeatExplicitStartKind repeatExplicitStartKind);
-
-    enum class msrRepeatBuildPhaseKind {
-      kRepeatBuildPhaseJustCreated,
-      kRepeatBuildPhaseInCommonPart,
-      kRepeatBuildPhaseInEndings,
-      kRepeatBuildPhaseCompleted
-    };
-
-    string repeatBuildPhaseKindAsString (
-      msrRepeatBuildPhaseKind repeatBuildPhaseKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

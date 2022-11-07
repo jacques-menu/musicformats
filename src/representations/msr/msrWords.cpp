@@ -166,7 +166,7 @@ string msrWords::wordsVerticalAlignmentKindAsString () const
       fWordsVerticalAlignmentKind);
 }
 
-string msrWords::wordsFontStyleKindAsString () const
+string msrWords::msrWordsFontStyleKindAsString () const
 {
   return msrFontStyleKindAsString (fWordsFontStyleKind);
 }

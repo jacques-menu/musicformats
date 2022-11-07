@@ -423,7 +423,7 @@ ostream& operator << (ostream& os, const S_msrBeatRepeatElement& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 */
@@ -619,7 +619,7 @@ ostream& operator << (ostream& os, const S_msrBeatRepeatPattern& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -814,7 +814,7 @@ ostream& operator << (ostream& os, const S_msrBeatRepeatReplicas& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1105,27 +1105,64 @@ void msrBeatRepeat:: appendMeasureElementToSegmentElement (
     s.str ());
 }
 
-string msrBeatRepeat::beatRepeatBuildPhaseKindAsString (
+enum class msrBeatRepeatKind {
+  kBeatRepeat_NO_,
+  kBeatRepeatStart, kBeatRepeatStop
+};
+
+string msrBeatRepeatKindAsString (
+  msrBeatRepeatKind beatRepeatKind)
+{
+  string result;
+
+  switch (beatRepeatKind) {
+    case msrBeatRepeatKind::kBeatRepeat_NO_:
+      result = "kBeatRepeat_NO_";
+      break;
+    case msrBeatRepeatKind::kBeatRepeatStart:
+      result = "kBeatRepeatStart";
+      break;
+    case msrBeatRepeatKind::kBeatRepeatStop:
+      result = "kBeatRepeatStop";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrBeatRepeatKind& elt)
+{
+  os << msrBeatRepeatKindAsString (elt);
+  return os;
+}
+
+string msrBeatRepeatBuildPhaseKindAsString (
   msrBeatRepeatBuildPhaseKind beatRepeatBuildPhaseKind)
 {
   string result;
 
   switch (beatRepeatBuildPhaseKind) {
     case msrBeatRepeat::kBeatRepeatBuildPhaseJustCreated:
-      result = "beatRepeatBuildPhaseJustCreated";
+      result = "kBeatRepeatBuildPhaseJustCreated";
       break;
     case msrBeatRepeat::kBeatRepeatBuildPhaseInPattern:
-      result = "beatRepeatBuildPhaseInPattern";
+      result = "kBeatRepeatBuildPhaseInPattern";
       break;
     case msrBeatRepeat::kBeatRepeatBuildPhaseInReplicas:
-      result = "beatRepeatBuildPhaseInReplicas";
+      result = "kBeatRepeatBuildPhaseInReplicas";
       break;
     case msrBeatRepeat::kBeatRepeatBuildPhaseCompleted:
-      result = "beatRepeatBuildPhaseCompleted";
+      result = "kBeatRepeatBuildPhaseCompleted";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrBeatRepeatBuildPhaseKind& elt)
+{
+  os << msrBeatRepeatBuildPhaseKindAsString (elt);
+  return os;
 }
 
 string msrBeatRepeat::asString () const
@@ -1213,7 +1250,7 @@ void msrBeatRepeat::print (ostream& os) const
     os <<
       setw (fieldWidth) <<
       "fCurrentBeatRepeatBuildPhaseKind" << " : " <<
-      beatRepeatBuildPhaseKindAsString (
+      msrBeatRepeatBuildPhaseKindAsString (
         fCurrentBeatRepeatBuildPhaseKind) <<
       endl;
   }
@@ -1261,7 +1298,7 @@ ostream& operator << (ostream& os, const S_msrBeatRepeat& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

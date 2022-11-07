@@ -90,7 +90,7 @@ S_msrSlide msrSlide::createSlideNewbornClone ()
   return newbornClone;
 }
 
-string msrSlide::slideTypeKindAsString (
+string slideTypeKindAsString (
   msrSlideTypeKind slideTypeKind)
 {
   string result;
@@ -164,12 +164,10 @@ string msrSlide::asString () const
   s <<
     "Slide" <<
     ", fSlideNumber " << fSlideNumber <<
-    ", " << slideTypeKindAsString (
-      fSlideTypeKind) <<
-    ", " << msrLineTypeKindAsString (
-      fSlideLineTypeKind) <<
-    ", \"" << fSlideTextValue <<
-    "\", line " << fInputLineNumber;
+    ", fSlideTypeKind: " << fSlideTypeKind <<
+    ", fSlideLineTypeKind: " << fSlideLineTypeKind <<
+    ", \"" << fSlideTextValue << "\" <<
+    ", line " << fInputLineNumber;
 
   return s.str ();
 }
@@ -187,23 +185,16 @@ void msrSlide::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "slideNumber " <<
-    fSlideNumber <<
+    "fSlideNumber" << fSlideNumber <<
     endl <<
     setw (fieldWidth) <<
-    "slideTypeKind" <<
-    slideTypeKindAsString (
-      fSlideTypeKind) <<
+    "fSlideTypeKind" << fSlideTypeKind) <<
     endl <<
     setw (fieldWidth) <<
-    "slideLineTypeKind" <<
-    msrLineTypeKindAsString (
-      fSlideLineTypeKind) <<
+    "fSlideLineTypeKind" << fSlideLineTypeKind <<
     endl <<
     setw (fieldWidth) <<
-    "slideTextValue" << " : \"" <<
-    fSlideTextValue <<
-     "\"" <<
+    "fSlideTextValue" << " : \"" << fSlideTextValue << "\"" <<
     endl;
 
   --gIndenter;
@@ -219,7 +210,7 @@ ostream& operator << (ostream& os, const S_msrSlide& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

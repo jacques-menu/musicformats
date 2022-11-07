@@ -64,49 +64,49 @@ string msrTechnicalKindAsString (
   string result;
 
   switch (technicalKind) {
-    case msrTechnical::kTechnicalArrow:
+    case msrTechnicalKind::kTechnicalArrow:
       result = "kTechnicalArrow";
       break;
-    case msrTechnical::kTechnicalDoubleTongue:
+    case msrTechnicalKind::kTechnicalDoubleTongue:
       result = "kTechnicalDoubleTongue";
       break;
-    case msrTechnical::kTechnicalDownBow:
+    case msrTechnicalKind::kTechnicalDownBow:
       result = "kTechnicalDownBow";
       break;
-    case msrTechnical::kTechnicalFingernails:
+    case msrTechnicalKind::kTechnicalFingernails:
       result = "kTechnicalFingernails";
       break;
-    case msrTechnical::kTechnicalHarmonic:
+    case msrTechnicalKind::kTechnicalHarmonic:
       result = "kTechnicalHarmonic";
       break;
-    case msrTechnical::kTechnicalHeel:
+    case msrTechnicalKind::kTechnicalHeel:
       result = "kTechnicalHeel";
       break;
-    case msrTechnical::kTechnicalHole:
+    case msrTechnicalKind::kTechnicalHole:
       result = "kTechnicalHole";
       break;
-    case msrTechnical::kTechnicalOpenString:
+    case msrTechnicalKind::kTechnicalOpenString:
       result = "kTechnicalOpenString";
       break;
-    case msrTechnical::kTechnicalSnapPizzicato:
+    case msrTechnicalKind::kTechnicalSnapPizzicato:
       result = "kTechnicalSnapPizzicato";
       break;
-    case msrTechnical::kTechnicalStopped:
+    case msrTechnicalKind::kTechnicalStopped:
       result = "kTechnicalStopped";
       break;
-    case msrTechnical::kTechnicalTap:
+    case msrTechnicalKind::kTechnicalTap:
       result = "kTechnicalTap";
       break;
-    case msrTechnical::kThumbPosition:
-      result = "kThumbPosition";
+    case msrTechnicalKind::kTechnicalThumbPosition:
+      result = "kTechnicalThumbPosition";
       break;
-    case msrTechnical::kTechnicalToe:
+    case msrTechnicalKind::kTechnicalToe:
       result = "kTechnicalToe";
       break;
-    case msrTechnical::kTechnicalTripleTongue:
+    case msrTechnicalKind::kTechnicalTripleTongue:
       result = "kTechnicalTripleTongue";
       break;
-    case msrTechnical::kTechnicalUpBow:
+    case msrTechnicalKind::kTechnicalUpBow:
       result = "kTechnicalUpBow";
       break;
   } // switch
@@ -431,7 +431,7 @@ msrTechnicalWithFloat::msrTechnicalWithFloat (
 msrTechnicalWithFloat::~msrTechnicalWithFloat ()
 {}
 
-string msrTechnicalWithFloatKindAsString () const
+string msrTechnicalWithFloatKindAsString ()
 {
   string result;
 
@@ -444,11 +444,11 @@ string msrTechnicalWithFloatKindAsString () const
   return result;
 }
 
-string msrTechnicalWithFloat::technicalWithFloatPlacementKindAsString () const
-{
-  return
-    msrPlacementKindAsString (
-      fTechnicalWithFloatPlacementKind);
+// string technicalWithFloatPlacementKindAsString () const JMI
+// {
+//   return
+//     msrPlacementKindAsString (
+//       fTechnicalWithFloatPlacementKind);
 }
 
 void msrTechnicalWithFloat::acceptIn (basevisitor* v)

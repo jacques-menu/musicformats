@@ -270,13 +270,13 @@ string msrTempoTuplet::msrTempoTupletTypeKindAsString (
   string result;
 
   switch (tempoTupletTypeKind) {
-    case msrTempoTuplet::kTempoTupletTypeNone:
+    case msrTempoTupletTypeKind::kTempoTupletTypeNone:
       result = "tempoTupletTypeNone";
       break;
-    case msrTempoTuplet::kTempoTupletTypeStart:
+    case msrTempoTupletTypeKind::kTempoTupletTypeStart:
       result = "tempoTupletTypeStart";
       break;
-    case msrTempoTuplet::kTempoTupletTypeStop:
+    case msrTempoTupletTypeKind::kTempoTupletTypeStop:
       result = "tempoTupletTypeStop";
       break;
   } // switch
@@ -296,10 +296,10 @@ string msrTempoTuplet::msrTempoTupletBracketKindAsString (
   string result;
 
   switch (tempoTupletBracketKind) {
-    case msrTempoTuplet::kTempoTupletBracketYes:
+    case msrTempoTupletBracketKind::kTempoTupletBracketYes:
       result = "tempoTupletBracketYes";
       break;
-    case msrTempoTuplet::kTempoTupletBracketNo:
+    case msrTempoTupletBracketKind::kTempoTupletBracketNo:
       result = "tempoTupletBracketNo";
       break;
   } // switch
@@ -313,19 +313,19 @@ ostream& operator << (ostream& os, const msrTempoTupletBracketKind& elt)
   return os;
 }
 
-string msrTempoTuplet::msrTempoTupletShowNumberKindAsString (
+string msrTempoTupletShowNumberKindAsString (
   msrTempoTupletShowNumberKind tempoTupletShowNumberKind)
 {
   string result;
 
   switch (tempoTupletShowNumberKind) {
-    case msrTempoTuplet::kTempoTupletShowNumberActual:
+    case msrTempoTupletShowNumberKind::kTempoTupletShowNumberActual:
       result = "tempoTupletShowNumberActual";
       break;
-    case msrTempoTuplet::kTempoTupletShowNumberBoth:
+    case msrTempoTupletShowNumberKind::kTempoTupletShowNumberBoth:
       result = "tempoTupletShowNumberBoth";
       break;
-    case msrTempoTuplet::kTempoTupletShowNumberNone:
+    case msrTempoTupletShowNumberKind::kTempoTupletShowNumberNone:
       result = "tempoTupletShowNumberNone";
       break;
   } // switch
@@ -734,8 +734,7 @@ void msrTempoTuplet::print (ostream& os) const
     endl <<
     setw (fieldWidth) <<
     "TempoTupletShowNumberKind" << " : " <<
-    msrTempoTupletShowNumberKindAsString (
-      fTempoTupletShowNumberKind) <<
+    fTempoTupletShowNumberKind <<
     endl <<
     setw (fieldWidth) <<
     "MemberNotesDisplayWholeNotes" << " : " <<
@@ -917,10 +916,10 @@ string msrTempoNotesRelationshipElementsKindAsString (
   string result;
 
   switch (tempoNotesRelationshipElementsKind) {
-    case msrTempoNotesRelationshipElements::kTempoNotesRelationshipElementsLeft:
+    case msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsLeft:
       result = "tempoNotesRelationshipElementsLeft";
       break;
-    case msrTempoNotesRelationshipElements::kTempoNotesRelationshipElementsRight:
+    case msrTempoNotesRelationshipElementsKind::kTempoNotesRelationshipElementsRight:
       result = "tempoNotesRelationshipElementsRight";
       break;
   } // switch

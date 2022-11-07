@@ -3483,25 +3483,25 @@ void lpsr2lilypondTranslator::generateNoteArticulation (
             dynamic_cast<msrFermata*>(&(*articulation))
         ) {
         switch (fermata->getFermataTypeKind ()) {
-          case msrFermataTypeKind::kArticulationFermataTypeNone:
+          case msrArticulationFermataType::kArticulationFermataTypeNone:
             // no placement needed
             break;
-          case msrFermataTypeKind::kArticulationFermataTypeUpright:
+          case msrArticulationFermataType::kArticulationFermataTypeUpright:
             // no placement needed
             break;
-          case msrFermataTypeKind::kArticulationFermataTypeInverted:
+          case msrArticulationFermataType::kArticulationFermataTypeInverted:
             fLilypondCodeStream << "_";
             break;
         } // switch
 
         switch (fermata->getFermataKind ()) {
-          case msrFermataKind::kArticulationFermataNormal:
+          case msrFermataShapeKind::kArticulationFermataNormal:
             fLilypondCodeStream << "\\fermata ";
             break;
-          case msrFermataKind::kArticulationFermataAngled:
+          case msrFermataShapeKind::kArticulationFermataAngled:
             fLilypondCodeStream << "\\shortfermata ";
             break;
-          case msrFermataKind::kArticulationFermataSquare:
+          case msrFermataShapeKind::kArticulationFermataSquare:
             fLilypondCodeStream << "\\longfermata ";
             break;
         } // switch
@@ -3670,25 +3670,25 @@ void lpsr2lilypondTranslator::generateChordArticulation (
             dynamic_cast<msrFermata*>(&(*articulation))
         ) {
         switch (fermata->getFermataTypeKind ()) {
-          case msrFermataTypeKind::kArticulationFermataTypeNone:
+          case msrArticulationFermataType::kArticulationFermataTypeNone:
             // no placement needed
             break;
-          case msrFermataTypeKind::kArticulationFermataTypeUpright:
+          case msrArticulationFermataType::kArticulationFermataTypeUpright:
             // no placement needed
             break;
-          case msrFermataTypeKind::kArticulationFermataTypeInverted:
+          case msrArticulationFermataType::kArticulationFermataTypeInverted:
             fLilypondCodeStream << "_";
             break;
         } // switch
 
         switch (fermata->getFermataKind ()) {
-          case msrFermataKind::kArticulationFermataNormal:
+          case msrFermataShapeKind::kArticulationFermataNormal:
             fLilypondCodeStream << "\\fermata ";
             break;
-          case msrFermataKind::kArticulationFermataAngled:
+          case msrFermataShapeKind::kArticulationFermataAngled:
             fLilypondCodeStream << "\\shortfermata ";
             break;
-          case msrFermataKind::kArticulationFermataSquare:
+          case msrFermataShapeKind::kArticulationFermataSquare:
             fLilypondCodeStream << "\\longfermata ";
             break;
         } // switch
@@ -3790,7 +3790,7 @@ string lpsr2lilypondTranslator::technicalAsLilypondString (
     case msrTechnicalKind::kTechnicalTap:
       result = "%{ \\Tap??? %}";
       break;
-    case msrTechnicalKind::kThumbPosition:
+    case msrTechnicalKind::kTechnicalThumbPosition:
       result = "\\thumb";
       break;
     case msrTechnicalKind::kTechnicalToe:
@@ -15448,25 +15448,25 @@ Articulations can be attached to rests as well as notes but they cannot be attac
   // don't generate fermatas for chord member notes
   if (false && fOnGoingNotesStack.size () > 0) { // JMI
     switch (elt->getFermataTypeKind ()) {
-      case msrFermataTypeKind::kArticulationFermataTypeNone:
+      case msrArticulationFermataType::kArticulationFermataTypeNone:
         // no placement needed
         break;
-      case msrFermataTypeKind::kArticulationFermataTypeUpright:
+      case msrArticulationFermataType::kArticulationFermataTypeUpright:
         // no placement needed
         break;
-      case msrFermataTypeKind::kArticulationFermataTypeInverted:
+      case msrArticulationFermataType::kArticulationFermataTypeInverted:
         fLilypondCodeStream << "_";
         break;
     } // switch
 
     switch (elt->getFermataKind ()) {
-      case msrFermataKind::kArticulationFermataNormal:
+      case msrFermataShapeKind::kArticulationFermataNormal:
         fLilypondCodeStream << "\\fermata ";
         break;
-      case msrFermataKind::kArticulationFermataAngled:
+      case msrFermataShapeKind::kArticulationFermataAngled:
         fLilypondCodeStream << "\\shortfermata ";
         break;
-      case msrFermataKind::kArticulationFermataSquare:
+      case msrFermataShapeKind::kArticulationFermataSquare:
         fLilypondCodeStream << "\\longfermata ";
         break;
     } // switch
@@ -19043,25 +19043,25 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                   dynamic_cast<msrFermata*>(&(*articulation))
               ) {
               switch (fermata->getFermataTypeKind ()) {
-                case msrFermataTypeKind::kArticulationFermataTypeNone:
+                case msrArticulationFermataType::kArticulationFermataTypeNone:
                   // no placement needed
                   break;
-                case msrFermataTypeKind::kArticulationFermataTypeUpright:
+                case msrArticulationFermataType::kArticulationFermataTypeUpright:
                   // no placement needed
                   break;
-                case msrFermataTypeKind::kArticulationFermataTypeInverted:
+                case msrArticulationFermataType::kArticulationFermataTypeInverted:
                   fLilypondCodeStream << "_";
                   break;
               } // switch
 
               switch (fermata->getFermataKind ()) {
-                case msrFermataKind::kArticulationFermataNormal:
+                case msrFermataShapeKind::kArticulationFermataNormal:
                   fLilypondCodeStream << "\\fermata ";
                   break;
-                case msrFermataKind::kArticulationFermataAngled:
+                case msrFermataShapeKind::kArticulationFermataAngled:
                   fLilypondCodeStream << "\\shortfermata ";
                   break;
-                case msrFermataKind::kArticulationFermataSquare:
+                case msrFermataShapeKind::kArticulationFermataSquare:
                   fLilypondCodeStream << "\\longfermata ";
                   break;
               } // switch
@@ -19466,19 +19466,19 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                   dynamic_cast<msrFermata*>(&(*articulation))
               ) {
               switch (fermata->getFermataTypeKind ()) {
-                case msrFermataTypeKind::kArticulationFermataTypeNone:
+                case msrArticulationFermataType::kArticulationFermataTypeNone:
                   // no placement needed
                   break;
-                case msrFermataTypeKind::kArticulationFermataTypeUpright:
+                case msrArticulationFermataType::kArticulationFermataTypeUpright:
                   // no placement needed
                   break;
-                case msrFermataTypeKind::kArticulationFermataTypeInverted:
+                case msrArticulationFermataType::kArticulationFermataTypeInverted:
                   fLilypondCodeStream << "_";
                   break;
               } // switch
 
               switch (fermata->getFermataKind ()) {
-                case msrFermataKind::kArticulationFermataNormal:
+                case msrFermataShapeKind::kArticulationFermataNormal:
                   if (
                     elt->getNoteOccupiesAFullMeasure ()
                       &&
@@ -19491,10 +19491,10 @@ void lpsr2lilypondTranslator::visitEnd (S_msrNote& elt)
                     fLilypondCodeStream << "\\fermata ";
                   }
                   break;
-                case msrFermataKind::kArticulationFermataAngled:
+                case msrFermataShapeKind::kArticulationFermataAngled:
                   fLilypondCodeStream << "\\shortfermata ";
                   break;
-                case msrFermataKind::kArticulationFermataSquare:
+                case msrFermataShapeKind::kArticulationFermataSquare:
                   fLilypondCodeStream << "\\longfermata ";
                   break;
               } // switch
@@ -22015,16 +22015,16 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
 
 /* JMI BOF ???
       switch (elt->getBarLineHasSegnoKind ()) {
-        case msrBarLine::kBarLineHasSegnoYes:
+        case msrBarLineHasSegnoKind::kBarLineHasSegnoYes:
           // generate the segno
           generateSegno ((*i));
           break;
-        case msrBarLine::kBarLineHasSegnoNo:
+        case msrBarLineHasSegnoKind::kBarLineHasSegnoNo:
           break;
       } // switch
 
       switch (elt->getBarLineHasCodaKind ()) {
-        case msrBarLine::kBarLineHasCodaYes:
+        case msrBarLineHasCodaKind::kBarLineHasCodaYes:
           fLilypondCodeStream <<
             "\\mark \\markup { \\musicglyph #\"scripts.coda\" } ";
           if (gGlobalLpsr2lilypondOahGroup->getInputLineNumbers ()) {
@@ -22034,7 +22034,7 @@ void lpsr2lilypondTranslator::visitStart (S_msrBarLine& elt)
           }
           fLilypondCodeStream << endl;
           break;
-        case msrBarLine::kBarLineHasCodaNo:
+        case msrBarLineHasCodaKind::kBarLineHasCodaNo:
           break;
       } // switch
 */

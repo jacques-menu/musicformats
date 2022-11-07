@@ -567,13 +567,9 @@ void msrChord::appendArticulationToChord (S_msrArticulation art)
         getArticulationKind ();
 
   // don't append the same articulation several times
-  for (
-    list<S_msrArticulation>::const_iterator i = fChordArticulations.begin ();
-    i!=fChordArticulations.end ();
-    ++i
-  ) {
-      if ((*i)->getArticulationKind () == articulationKind)
-        return;
+  for (S_msrArticulation articulation : fChordArticulations) {
+    if (articulation->getArticulationKind () == articulationKind)
+      return;
   } // for
 
 #ifdef TRACING_IS_ENABLED
@@ -786,7 +782,7 @@ void msrChord::appendOrnamentToChord (S_msrOrnament orn)
 
 void msrChord::appendGlissandoToChord (S_msrGlissando gliss)
 {
-  msrGlissando::msrGlissandoTypeKind
+  msrGlissandoTypeKind
     glissandoTypeKind =
       gliss->
         getGlissandoTypeKind ();
@@ -812,7 +808,7 @@ void msrChord::appendGlissandoToChord (S_msrGlissando gliss)
 
 void msrChord::appendSlideToChord (S_msrSlide slide)
 {
-  msrSlide::msrSlideTypeKind
+  msrSlideTypeKind
     slideTypeKind =
       slide->
         getSlideTypeKind ();
