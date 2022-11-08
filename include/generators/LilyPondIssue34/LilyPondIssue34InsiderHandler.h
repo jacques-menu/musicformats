@@ -12,7 +12,7 @@
 #ifndef ___LilyPondIssue34InsiderHandler___
 #define ___LilyPondIssue34InsiderHandler___
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 #include "oahBasicTypes.h"
 

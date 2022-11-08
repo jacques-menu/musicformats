@@ -15,7 +15,7 @@
 #include <string>
 
 #include "mfBool.h"
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "oahAtomsCollection.h"
 
@@ -195,7 +195,7 @@ class   ischemeDriver
                             const string&      label,
                             Bool               allLabelSelected);
 
-    mfMusicformatsError   launchIschemeTool_Pass2 ();
+    mfMusicformatsErrorKind   launchIschemeTool_Pass2 ();
 
   private:
 

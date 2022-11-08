@@ -14,7 +14,7 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats
@@ -55,12 +55,12 @@ class EXP msrIdentification : public msrElement
                               { return fIdentificationWorkNumber; }
 
     // work title
-    void                  setIdentificationWorkTitle (
+    void                  setIdentificationWorkCreditTypeTitle (
                             int           inputLineNumber,
                             const string& val);
 
-    string                getIdentificationWorkTitle () const
-                              { return fIdentificationWorkTitle; }
+    string                getIdentificationWorkCreditTypeTitle () const
+                              { return fIdentificationWorkCreditTypeTitle; }
 
     // opus
     void                  setIdentificationOpus (
@@ -233,7 +233,7 @@ class EXP msrIdentification : public msrElement
 
     // work
     string                fIdentificationWorkNumber;
-    string                fIdentificationWorkTitle;
+    string                fIdentificationWorkCreditTypeTitle;
     string                fIdentificationOpus;
 
     string                fIdentificationMovementNumber;

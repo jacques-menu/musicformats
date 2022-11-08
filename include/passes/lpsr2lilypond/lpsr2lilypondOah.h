@@ -1012,7 +1012,7 @@ enum class lilypondScoreNotationKind {
 extern string lilypondScoreNotationKindAsString (
   lilypondScoreNotationKind notationKind);
 
-ostream& operator << (ostream& os, lilypondScoreNotationKind& elt);
+ostream& operator << (ostream& os, const lilypondScoreNotationKind& elt);
 
 class EXP lpsr2lilypondOahGroup : public oahGroup
 {

@@ -17,27 +17,28 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class msrBarreTypeKind {
+  kBarreTypeNone,
+  kBarreTypeStart, kBarreTypeStop
+};
+
+string msrBarreTypeKindAsString (
+  msrBarreTypeKind barreTypeKind);
+
+ostream& operator << (ostream& os, const msrBarreTypeKind& elt);
+
 class EXP msrFrameNote : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrBarreTypeKind {
-      kBarreTypeNone,
-      kBarreTypeStart, kBarreTypeStop
-    };
-
-    string barreTypeKindAsString (
-      msrBarreTypeKind barreTypeKind);
 
 /*
           <frame-note>

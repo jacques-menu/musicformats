@@ -12,7 +12,7 @@
 #ifndef ___msr2musicxmlInterface___
 #define ___msr2musicxmlInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "msr.h"
 
@@ -29,7 +29,7 @@ namespace MusicFormats
 */
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError msrScore2musicxmlWithHandler (
+EXP mfMusicformatsErrorKind msrScore2musicxmlWithHandler (
   S_msrScore   theMsrScore,
   string       passNumber1,
   string       passDescription1,

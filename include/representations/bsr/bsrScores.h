@@ -19,6 +19,7 @@
 #include "msrScores.h"
 
 #include "bsrElements.h"
+
 #include "bsrPages.h"
 #include "bsrTranscriptionNotes.h"
 

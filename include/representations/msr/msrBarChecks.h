@@ -9,12 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrBars___
-#define ___msrBars___
+#ifndef ___msrBarChecks___
+#define ___msrBarChecks___
 
 #include <list>
 
-#include "msrBasicTypes.h"
 #include "msrMeasureElements.h"
 
 
@@ -23,11 +22,11 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-class   msrMeasure;
-typedef SMARTP<msrMeasure> S_msrMeasure;
-
-class   msrMeasureElement;
-typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
+// class msrMeasure;
+// typedef SMARTP<msrMeasure> S_msrMeasure;
+//
+// class msrMeasureElement;
+// typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 
 //______________________________________________________________________________
 class EXP msrBarCheck : public msrMeasureElement

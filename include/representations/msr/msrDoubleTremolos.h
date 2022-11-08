@@ -1,9 +1,18 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrDoubleTremolos___
 #define ___msrDoubleTremolos___
 
 #include "msrMeasureElements.h"
-#include "msrMeasures.h"
-#include "msrElements.h"
 
 
 namespace MusicFormats
@@ -19,11 +28,23 @@ typedef SMARTP<msrChord> S_msrChord;
 class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 
+// tremolo types
+//______________________________________________________________________________
+enum class msrTremoloTypeKind {
+  kTremoloType_NO_,
+  kTremoloTypeSingle, kTremoloTypeStart, kTremoloTypeStop
+};
+
+string msrTremoloTypeKindAsString (
+  msrTremoloTypeKind tremoloTypeKind);
+
+ostream& operator << (ostream& os, const msrTremoloTypeKind& elt);
+
 //______________________________________________________________________________
 // data types
 
 enum class msrDoubleTremoloKind {
-  kNotesDoubleTremolo, kChordsDoubleTremolo
+  kDoubleTremoloNotes, kDoubleTremoloChords
 };
 
 string msrDoubleTremoloKindAsString (

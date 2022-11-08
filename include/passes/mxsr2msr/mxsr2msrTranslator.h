@@ -23,6 +23,46 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
+// data types
+
+enum class msrStaffChangeKind {
+	kStaffChange_NO_,
+	kStaffChangeChordMemberNote,
+	kStaffChangeOtherNote
+};
+
+string msrSyllableKindAsString (
+  msrStaffChangeKind staffChangeKind);
+
+ostream& operator << (ostream& os, const msrStaffChangeKind& elt);
+
+string msrSyllableKindAsString (
+  msrStaffChangeKind staffChangeKind)
+{
+  string result;
+
+  switch (staffChangeKind) {
+    case msrStaffChangeKind::kStaffChange_NO_:
+      result = "kStaffChange_NO_";
+      break;
+    case msrStaffChangeKind::kStaffChangeChordMemberNote:
+      result = "kStaffChangeChordMemberNote";
+      break;
+    case msrStaffChangeKind::kStaffChangeOtherNote:
+      result = "kStaffChangeOtherNote";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrStaffChangeKind& elt)
+{
+  os << msrSyllableKindAsString (elt);
+  return os;
+}
+
+//________________________________________________________________________
 class EXP mxsr2msrTranslator :
 
   // MXSR score partwise
@@ -1221,20 +1261,16 @@ class EXP mxsr2msrTranslator :
                                 int inputLineNumber);
 
     // measure repeats
-    msrMeasureRepeat::msrMeasureRepeatKind
-                              fCurrentMeasureRepeatKind;
+    msrMeasureRepeatKind      fCurrentMeasureRepeatKind;
     int                       fCurrentMeasureRepeatMeasuresNumber;
     int                       fCurrentMeasureRepeatSlashesNumber;
 
     // staff details handling
     // ------------------------------------------------------
 
-    msrStaffDetails::msrStaffTypeKind
-                              fCurrentStaffTypeKind;
-    msrStaffDetails::msrShowFretsKind
-                              fCurrentShowFretsKind;
-    msrStaffDetails::msrPrintSpacingKind
-                              fCurrentPrintSpacingKind;
+    msrStaffTypeKind          fCurrentStaffTypeKind;
+    msrShowFretsKind          fCurrentShowFretsKind;
+    msrPrintSpacingKind       fCurrentPrintSpacingKind;
 
     int                       fCurrentStaffDetailsCapo;
 
@@ -1521,7 +1557,7 @@ class EXP mxsr2msrTranslator :
     msrTempoParenthesizedKind fCurrentMetronomeParenthesedKind;
 
     int                       fCurrentMetrenomeDotsNumber;
-    msrTempo::msrTempoNotesRelationshipKind
+    msrTempoNotesRelationshipKind
                               fCurrentMetrenomeRelationKind;
     msrDurationKind           fCurrentMetronomeDurationKind;
     string                    fCurrentMetronomeBeamValue;
@@ -1532,11 +1568,9 @@ class EXP mxsr2msrTranslator :
     void                      attachCurrentMetronomeBeamsToMetronomeNote (
                                 S_msrTempoNote tempoNote);
 
-    msrTempoTuplet::msrTempoTupletTypeKind
-                              fCurrentTempoTupletTypeKind;
-    msrTempoTuplet::msrTempoTupletBracketKind
-                              fCurrentTempoTupletBracketKind;
-    msrTempoTuplet::msrTempoTupletShowNumberKind
+    msrTempoTupletTypeKind    fCurrentTempoTupletTypeKind;
+    msrTempoTupletBracketKind fCurrentTempoTupletBracketKind;
+    msrTempoTupletShowNumberKind
                               fCurrentTempoTupletShowNumberKind;
 
     int                       fCurrentMetrenomeNormalDotsNumber;
@@ -1763,8 +1797,7 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentFrameNoteFretNumber;
     int                       fCurrentFrameNoteFingering;
 
-    msrFrameNote::msrBarreTypeKind
-                              fCurrentFrameNoteBarreTypeKind;
+    msrBarreTypeKind          fCurrentFrameNoteBarreTypeKind;
 
     Bool                      fOnGoingFrameNote;
 
@@ -1776,22 +1809,17 @@ class EXP mxsr2msrTranslator :
     Bool                      fOnGoingBarLine;
     int                       fRepeatEndCounter;
 
-    msrBarLine::msrBarLineHasSegnoKind
-                              fCurrentBarLineHasSegnoKind;
-    msrBarLine::msrBarLineHasCodaKind
-                              fCurrentBarLineHasCodaKind;
+    msrBarLineHasSegnoKind    fCurrentBarLineHasSegnoKind;
+    msrBarLineHasCodaKind     fCurrentBarLineHasCodaKind;
     string                    fCurrentBarLineEndingNumber; // vector<string> ??? JMI
                                 // may be "1, 2"
 
-    msrBarLine::msrBarLineLocationKind
-                              fCurrentBarLineLocationKind;
-    msrBarLineStyleKind
-                              fCurrentBarLineStyleKind;
-    msrBarLine::msrBarLineEndingTypeKind
-                              fCurrentBarLineEndingTypeKind;
-    msrBarLine::msrBarLineRepeatDirectionKind
+    msrBarLineLocationKind    fCurrentBarLineLocationKind;
+    msrBarLineStyleKind       fCurrentBarLineStyleKind;
+    msrBarLineEndingTypeKind  fCurrentBarLineEndingTypeKind;
+    msrBarLineRepeatDirectionKind
                               fCurrentBarLineRepeatDirectionKind;
-    msrBarLine::msrBarLineRepeatWingedKind
+    msrBarLineRepeatWingedKind
                               fCurrentBarLineRepeatWingedKind;
 
     int                       fCurrentBarLineTimes;
@@ -1941,13 +1969,7 @@ class EXP mxsr2msrTranslator :
     int                       fCurrentChordStaffNumber;
     Bool                      fCurrentNoteIsCrossStaves;
 
-    enum staffChangeKind {
-      k_NoStaffChange,
-      kStaffChangeChordMemberNote,
-      kStaffChangeOtherNote
-    };
-
-    staffChangeKind           fCurrentStaffChangeKind;
+    msrStaffChangeKind           fCurrentStaffChangeKind;
 
     // elements attached to the note
     S_msrStem                 fCurrentStem;
@@ -2326,8 +2348,7 @@ class EXP mxsr2msrTranslator :
     S_msrLigature             fCurrentLigatureStartBelow;
 
     string                    fCurrentLigaturePlacement;
-    msrLigature::msrLigatureKind
-                              fCurrentLigatureKind;
+    msrLigatureKind           fCurrentLigatureKind;
     Bool                      fOnGoingLigature;
     Bool                      fOnGoingLigatureHasStanza;
 
@@ -2337,16 +2358,13 @@ class EXP mxsr2msrTranslator :
     list<S_msrPedal>          fPendingPedalsList;
 
 /* JMI
-    msrDamperPedal::damperPedalKind
-                              fCurrentDamperPedalKind;
+    damperPedalKind           fCurrentDamperPedalKind;
     int                       fCurrentDamperPedalIntegerValue;
 
-    msrDamperPedal::damperPedalKind
-                              fCurrentDamperPedalKind;
+    damperPedalKind           fCurrentDamperPedalKind;
     int                       fCurrentDamperPedalIntegerValue;
 
-    msrDamperPedal::damperPedalKind
-                              fCurrentDamperPedalKind;
+    damperPedalKind           fCurrentDamperPedalKind;
     int                       fCurrentDamperPedalIntegerValue;
 */
 

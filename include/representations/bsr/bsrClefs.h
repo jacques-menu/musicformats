@@ -1,8 +1,9 @@
 #ifndef ___bsrClefs___
 #define ___bsrClefs___
 
-#include "bsrCellsLists.h"
 #include "bsrLineContentsElements.h"
+
+#include "bsrCellsLists.h"
 
 
 namespace MusicFormats

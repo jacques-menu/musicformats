@@ -2,7 +2,8 @@
 #define ___bsrFootNotesElements___
 
 #include "bsrElements.h"
-#include "bsrCellsLists.h"
+
+// #include "bsrCellsLists.h"
 
 
 namespace MusicFormats

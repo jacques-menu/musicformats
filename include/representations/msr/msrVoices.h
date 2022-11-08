@@ -1,18 +1,29 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrVoices___
 #define ___msrVoices___
 
 #include <stack>
 
+#include "msrElements.h"
+
 #include "msrBeatRepeats.h"
 #include "msrChords.h"
 #include "msrClefs.h"
 #include "msrCodas.h"
-#include "msrElements.h"
 #include "msrEyeGlasses.h"
 #include "msrKeys.h"
 #include "msrLyrics.h"
 #include "msrMeasures.h"
-#include "msrMeasureElements.h"
 #include "msrMeasureRepeats.h"
 #include "msrNotes.h"
 #include "msrParts.h"
@@ -34,6 +45,23 @@
 
 namespace MusicFormats
 {
+
+// voices
+//______________________________________________________________________________
+enum class msrVoiceKind {
+  kVoiceKindRegular,
+  kVoiceKindDynamics,
+  kVoiceKindHarmonies,  // for MusicXML <harmony/>, LilyPond ChordNames
+  kVoiceKindFiguredBass // for MusicXML <figured-bass/>, LilyPond FiguredBass
+};
+
+string msrVoiceKindAsString (
+  msrVoiceKind voiceKind);
+
+ostream& operator << (ostream& os, const msrVoiceKind& elt);
+
+string msrVoiceKindAsStringForPrint (
+  msrVoiceKind voiceKind);
 
 //______________________________________________________________________________
 class   msrStaff;
@@ -111,7 +139,7 @@ enum class msrVoiceRepeatPhaseKind {
 extern string msrVoiceRepeatPhaseKindAsString (
   msrVoiceRepeatPhaseKind afterRepeatComponentPhaseKind);
 
-ostream& operator << (ostream& os, msrVoiceRepeatPhaseKind& elt);
+ostream& operator << (ostream& os, const msrVoiceRepeatPhaseKind& elt);
 
 enum class msrVoiceFinalizationStatusKind { // JMI ??? v0.9.66
   kKeepVoice,
@@ -121,7 +149,7 @@ enum class msrVoiceFinalizationStatusKind { // JMI ??? v0.9.66
 extern string msrVoiceFinalizationStatusKindAsString (
   msrVoiceFinalizationStatusKind voiceFinalizationStatusKind);
 
-ostream& operator << (ostream& os, msrVoiceFinalizationStatusKind& elt);
+ostream& operator << (ostream& os, const msrVoiceFinalizationStatusKind& elt);
 
 enum class msrVoiceCreateInitialLastSegmentKind {
   kCreateInitialLastSegmentYes,
@@ -131,7 +159,7 @@ enum class msrVoiceCreateInitialLastSegmentKind {
 extern string msrVoiceFinalizationStatusKindAsString (
   msrVoiceCreateInitialLastSegmentKind voiceCreateInitialLastSegmentKind);
 
-ostream& operator << (ostream& os, msrVoiceCreateInitialLastSegmentKind& elt);
+ostream& operator << (ostream& os, const msrVoiceCreateInitialLastSegmentKind& elt);
 
 //________________________________________________________________________
 class EXP msrRepeatDescr : public smartable

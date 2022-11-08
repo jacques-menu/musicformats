@@ -262,7 +262,7 @@ enum class mfcComponenKind {
 string mfcComponenKindAsString (
   mfcComponenKind componenKind);
 
-ostream& operator << (ostream& os, mfcComponenKind& elt);
+ostream& operator << (ostream& os, const mfcComponenKind& elt);
 
 //______________________________________________________________________________
 class EXP mfcComponent : public smartable
@@ -434,7 +434,7 @@ enum class mfcMultiComponentUsedFromTheCLIKind {
 string mfcComponentUsedFromTheCLIKindAsString (
   mfcMultiComponentUsedFromTheCLIKind componentUsedFromTheCLIKind);
 
-ostream& operator << (ostream& os, mfcMultiComponentUsedFromTheCLIKind& elt);
+ostream& operator << (ostream& os, const mfcMultiComponentUsedFromTheCLIKind& elt);
 
 enum class mfcMultiComponentEntropicityKind {
   kComponentEntropicityYes,
@@ -444,7 +444,7 @@ enum class mfcMultiComponentEntropicityKind {
 string mfcComponentEntropicityKindAsString (
   mfcMultiComponentEntropicityKind componentEntropicityKind);
 
-ostream& operator << (ostream& os, mfcMultiComponentEntropicityKind& elt);
+ostream& operator << (ostream& os, const mfcMultiComponentEntropicityKind& elt);
 
 //______________________________________________________________________________
 class EXP mfcMultiComponent : public mfcComponent

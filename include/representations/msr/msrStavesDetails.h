@@ -14,8 +14,13 @@
 
 #include <list>
 
-#include "msrBasicTypes.h"
+#include "msrElements.h"
 #include "msrMeasureElements.h"
+
+// #include "msrBasicTypes.h"
+
+#include "msrOctaves.h"
+#include "msrPrintObjects.h"
 
 
 namespace MusicFormats
@@ -137,6 +142,7 @@ string msrPrintSpacingKindAsString (
 
 ostream& operator << (ostream& os, const msrPrintSpacingKind& elt);
 
+//______________________________________________________________________________
 class EXP msrStaffDetails : public msrMeasureElement
 {
   public:

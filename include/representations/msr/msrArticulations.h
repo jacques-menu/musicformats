@@ -14,7 +14,7 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+#include "msrDirections.h"
 
 
 namespace MusicFormats
@@ -24,7 +24,7 @@ namespace MusicFormats
 // data types
 
 enum class msrArticulationKind {
-  k_NoArticulation,
+  kArticulation_NO_,
   kArticulationAccent, kArticulationBreathMark, kArticulationCaesura,
   kArticulationSpiccato,
   kArticulationStaccato, kArticulationStaccatissimo,
@@ -81,8 +81,6 @@ class EXP msrArticulation : public msrElement
     // public services
     // ------------------------------------------------------
 
-    virtual string        articulationPlacementKindAsString () const;
-
   public:
 
     // visitors
@@ -117,24 +115,24 @@ EXP ostream& operator << (ostream& os, const S_msrArticulation& elt);
 //______________________________________________________________________________
 // data types
 
-enum class msrFermataKind {
+enum class msrFermataShapeKind {
   kArticulationFermataNormal, kArticulationFermataAngled, kArticulationFermataSquare
 };
 
-string msrFermataKindAsString (
-  msrFermataKind fermataKind);
+string msrFermataShapeKindAsString (
+  msrFermataShapeKind fermataShapeKind);
 
-ostream& operator << (ostream& os, const msrFermataKind& elt);
+ostream& operator << (ostream& os, const msrFermataShapeKind& elt);
 
-enum class msrFermataTypeKind {
+enum class msrArticulationFermataType {
   kArticulationFermataTypeNone,
   kArticulationFermataTypeUpright, kArticulationFermataTypeInverted
 };
 
-string msrFermataTypeKindAsString (
-  msrFermataTypeKind fermataTypeKind);
+string msrArticulationFermataTypeAsString (
+  msrArticulationFermataType fermataTypeKind);
 
-ostream& operator << (ostream& os, const msrFermataTypeKind& elt);
+ostream& operator << (ostream& os, const msrArticulationFermataType& elt);
 
 class EXP msrFermata : public msrArticulation
 {
@@ -144,9 +142,9 @@ class EXP msrFermata : public msrArticulation
     // ------------------------------------------------------
 
     static SMARTP<msrFermata> create (
-                            int                inputLineNumber,
-                            msrFermataKind     fermataKind,
-                            msrFermataTypeKind fermataTypeKind);
+                            int                        inputLineNumber,
+                            msrFermataShapeKind        fermataShapeKind,
+                            msrArticulationFermataType fermataTypeKind);
 
   protected:
 
@@ -154,9 +152,9 @@ class EXP msrFermata : public msrArticulation
     // ------------------------------------------------------
 
                           msrFermata (
-                            int                inputLineNumber,
-                            msrFermataKind     fermataKind,
-                            msrFermataTypeKind fermataTypeKind);
+                            int                        inputLineNumber,
+                            msrFermataShapeKind        fermataShapeKind,
+                            msrArticulationFermataType fermataTypeKind);
 
     virtual               ~msrFermata ();
 
@@ -165,10 +163,12 @@ class EXP msrFermata : public msrArticulation
     // set and get
     // ------------------------------------------------------
 
-    msrFermataKind        getFermataKind () const
-                              { return fFermataKind; }
+    msrFermataShapeKind
+                          getFermataShapeKind () const
+                              { return fFermataShapeKind; }
 
-    msrFermataTypeKind    getFermataTypeKind () const
+    msrArticulationFermataType
+                          getFermataTypeKind () const
                               { return fFermataTypeKind; }
 
   public:
@@ -200,9 +200,9 @@ class EXP msrFermata : public msrArticulation
     // private fields
     // ------------------------------------------------------
 
-    msrFermataKind        fFermataKind;
+    msrFermataShapeKind   fFermataShapeKind;
 
-    msrFermataTypeKind    fFermataTypeKind;
+    msrArticulationFermataType    fFermataTypeKind;
 };
 typedef SMARTP<msrFermata> S_msrFermata;
 EXP ostream& operator << (ostream& os, const S_msrFermata& elt);
@@ -338,8 +338,6 @@ class EXP msrNonArpeggiato : public msrArticulation
 
     // public services
     // ------------------------------------------------------
-
-    virtual string        msrNonArpeggiatoTypeKindAsString () const;
 
   public:
 

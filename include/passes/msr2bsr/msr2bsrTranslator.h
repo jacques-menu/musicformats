@@ -274,7 +274,7 @@ class EXP msr2bsrTranslator :
     // header
     // ------------------------------------------------------
     Bool                      fWorkNumberKnown;
-    Bool                      fWorkTitleKnown;
+    Bool                      fWorkCreditTypeTitleKnown;
     Bool                      fMovementNumberKnown;
     Bool                      fMovementTitleKnown;
 

@@ -2,9 +2,10 @@
 #define ___msrBeatRepeats___
 
 #include "msrElements.h"
+#include "msrSegmentElements.h"
+
 #include "msrSegments.h"
 #include "msrVoices.h"
-#include "msrSegmentElements.h"
 
 
 namespace MusicFormats
@@ -199,30 +200,33 @@ typedef SMARTP<msrBeatRepeatReplicas> S_msrBeatRepeatReplicas;
 EXP ostream& operator << (ostream& os, const S_msrBeatRepeatReplicas& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrBeatRepeatKind {
+  kBeatRepeat_NO_,
+  kBeatRepeatStart, kBeatRepeatStop
+};
+
+string msrBeatRepeatKindAsString (
+  msrBeatRepeatKind beatRepeatKind);
+
+ostream& operator << (ostream& os, const msrBeatRepeatKind& elt);
+
+enum class msrBeatRepeatBuildPhaseKind {
+  kBeatRepeatBuildPhaseJustCreated,
+  kBeatRepeatBuildPhaseInPattern,
+  kBeatRepeatBuildPhaseInReplicas,
+  kBeatRepeatBuildPhaseCompleted
+};
+
+string msrBeatRepeatBuildPhaseKindAsString (
+  msrBeatRepeatBuildPhaseKind beatRepeatBuildPhaseKind);
+
+ostream& operator << (ostream& os, const msrBeatRepeatBuildPhaseKind& elt);
+
 class EXP msrBeatRepeat : public msrSegmentElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrBeatRepeatKind {
-      k_NoBeatRepeat,
-      kStartBeatRepeat, kStopBeatRepeat
-    };
-
-    string beatRepeatKindAsString (
-      msrBeatRepeatKind beatRepeatKind);
-
-    enum class msrBeatRepeatBuildPhaseKind {
-      kBeatRepeatBuildPhaseJustCreated,
-      kBeatRepeatBuildPhaseInPattern,
-      kBeatRepeatBuildPhaseInReplicas,
-      kBeatRepeatBuildPhaseCompleted
-    };
-
-    string beatRepeatBuildPhaseKindAsString (
-      msrBeatRepeatBuildPhaseKind beatRepeatBuildPhaseKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

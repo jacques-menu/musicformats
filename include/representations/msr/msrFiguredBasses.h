@@ -4,6 +4,7 @@
 
 #include "msrElements.h"
 #include "msrMeasureElements.h"
+
 #include "msrNotes.h"
 #include "msrParts.h"
 
@@ -19,10 +20,10 @@ typedef SMARTP<msrMeasure> S_msrMeasure;
 //______________________________________________________________________________
 // data types
 enum class msrBassFigurePrefixKind {
-  k_NoBassFigurePrefix,
-  kPrefixDoubleFlat, kPrefixFlat, kPrefixFlatFlat,
-  kPrefixNatural,
-  kPrefixSharpSharp, kPrefixSharp, kPrefixDoubleSharp
+  kBassFigurePrefix_NO_,
+  kBassFigurePrefixDoubleFlat, kBassFigurePrefixFlat, kBassFigurePrefixFlatFlat,
+  kBassFigurePrefixNatural,
+  kBassFigurePrefixSharpSharp, kBassFigurePrefixSharp, kBassFigurePrefixDoubleSharp
 };
 
 string msrBassFigurePrefixKindAsString (
@@ -31,11 +32,11 @@ string msrBassFigurePrefixKindAsString (
 ostream& operator << (ostream& os,const msrBassFigurePrefixKind& elt);
 
 enum class msrBassFigureSuffixKind {
-  k_NoBassFigureSuffix,
-  kSuffixDoubleFlat, kSuffixFlat, kSuffixFlatFlat,
-  kSuffixNatural,
-  kSuffixSharpSharp, kSuffixSharp, kSuffixDoubleSharp,
-  kSuffixSlash
+  kBassFigureSuffix_NO_,
+  kBassFigureSuffixDoubleFlat, kBassFigureSuffixFlat, kBassFigureSuffixFlatFlat,
+  kBassFigureSuffixNatural,
+  kBassFigureSuffixSharpSharp, kBassFigureSuffixSharp, kBassFigureSuffixDoubleSharp,
+  kBassFigureSuffixSlash
 };
 
 string msrBassFigureSuffixKindAsString (

@@ -12,7 +12,7 @@
 #ifndef ___musicxml2musicxmlInterface___
 #define ___musicxml2musicxmlInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
 using namespace std;
@@ -25,21 +25,21 @@ namespace MusicFormats
 */
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlFile2musicxmlWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlFile2musicxmlWithHandler (
   const char*  fileName,
   ostream&     out,
   ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlFd2musicxmlWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlFd2musicxmlWithHandler (
   FILE*        fd,
   ostream&     out,
   ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlString2musicxmlWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlString2musicxmlWithHandler (
   const char*  buffer,
   ostream&     out,
   ostream&     err,

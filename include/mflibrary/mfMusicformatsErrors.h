@@ -23,13 +23,17 @@ using namespace std;
 namespace MusicFormats
 {
 
-enum class mfMusicformatsError {
-  k_NoError, kErrorInvalidFile, kErrorInvalidOption, kErrorUnsupported
+enum class mfMusicformatsErrorKind {
+  kMusicformatsError_NO_,
+  kMusicformatsErrorInvalidFile,
+  kMusicformatsErrorInvalidOption,
+  kMusicformatsErrorUnsupported
 };
 
-EXP string mfMusicFormatsErrorAsString (mfMusicformatsError err);
+EXP string mfMusicFormatsErrorAsString (
+  mfMusicformatsErrorKind err);
 
-ostream& operator << (ostream& os, mfMusicformatsError& elt);
+ostream& operator << (ostream& os, const mfMusicformatsErrorKind& elt);
 
 
 }

@@ -14,7 +14,7 @@
 
 #include <map>
 
-#include "msrBasicTypes.h"
+#include "msrPitches.h"
 
 
 using namespace MusicXML2;
@@ -34,7 +34,7 @@ enum class msrQuarterTonesPitchesLanguageKind {
 EXP string msrQuarterTonesPitchesLanguageKindAsString (
   msrQuarterTonesPitchesLanguageKind languageKind);
 
-ostream& operator << (ostream& os, msrQuarterTonesPitchesLanguageKind& elt);
+ostream& operator << (ostream& os, const msrQuarterTonesPitchesLanguageKind& elt);
 
 msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString (
   const string& theString);

@@ -1,12 +1,33 @@
 #ifndef ___msrSpanners___
 #define ___msrSpanners___
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 #include "msrElements.h"
 
 
 namespace MusicFormats
 {
+
+// spanner types
+//______________________________________________________________________________
+enum class msrSpannerKind {
+  kSpannerDashes, kSpannerWavyLine
+};
+
+string msrSpannerKindAsString (
+  msrSpannerKind spannerKind);
+
+ostream& operator << (ostream& os, const msrSpannerKind& elt);
+
+enum class msrSpannerTypeKind {
+  kSpannerType_NO_,
+  kSpannerTypeStart, kSpannerTypeContinue, kSpannerTypeStop
+};
+
+string msrSpannerTypeKindAsString (
+  msrSpannerTypeKind spannerTypeKind);
+
+ostream& operator << (ostream& os, const msrSpannerTypeKind& elt);
 
 //______________________________________________________________________________
 class   msrNote;
@@ -18,15 +39,6 @@ class   msrSpanner;
 typedef SMARTP<msrSpanner> S_msrSpanner;
 
 //______________________________________________________________________________
-enum class msrSpannerKind {
-  kSpannerDashes, kSpannerWavyLine
-};
-
-string msrSpannerKindAsString (
-  msrSpannerKind spannerKind);
-
-ostream& operator << (ostream& os, const msrSpannerKind& elt);
-
 class EXP msrSpanner : public msrElement
 {
   public:

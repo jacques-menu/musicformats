@@ -1,10 +1,11 @@
 #ifndef ___msrTuplets___
 #define ___msrTuplets___
 
+#include "msrTupletElements.h"
+
 #include "msrFiguredBasses.h"
 #include "msrGraceNotesGroups.h"
 #include "msrMeasures.h"
-#include "msrTupletElements.h"
 
 
 namespace MusicFormats
@@ -75,6 +76,21 @@ string msrTupletShowTypeKindAsString (
 
 ostream& operator << (ostream& os, const msrTupletShowTypeKind& elt);
 
+// tuplets
+//______________________________________________________________________________
+
+enum class msrTupletInKind {
+  kTupletIn_NO_,
+  kTupletInMeasure,
+  kTupletInTuplet
+};
+
+EXP string msrTupletKindAsString (
+  msrTupletInKind tupletKind);
+
+ostream& operator << (ostream& os, const msrTupletInKind& elt);
+
+//______________________________________________________________________________
 class EXP msrTuplet : public msrTupletElement
 {
   public:

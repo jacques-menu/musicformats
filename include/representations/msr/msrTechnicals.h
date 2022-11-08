@@ -14,7 +14,7 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+#include "msrPlacements.h"
 
 
 namespace MusicFormats
@@ -24,21 +24,21 @@ namespace MusicFormats
 // data types
 
 enum class msrTechnicalKind {
-  kArrow, // rich JMI
-  kDoubleTongue,
-  kDownBow,
-  kFingernails,
-  kHarmonic,
-  kHeel,
-  kHole, // rich JMI ??? v0.9.66
-  kOpenString,
-  kSnapPizzicato,
-  kStopped,
-  kTap,
-  kThumbPosition,
-  kToe,
-  kTripleTongue,
-  kUpBow
+  kTechnicalArrow, // rich JMI
+  kTechnicalDoubleTongue,
+  kTechnicalDownBow,
+  kTechnicalFingernails,
+  kTechnicalHarmonic,
+  kTechnicalHeel,
+  kTechnicalHole, // rich JMI ??? v0.9.66
+  kTechnicalOpenString,
+  kTechnicalSnapPizzicato,
+  kTechnicalStopped,
+  kTechnicalTap,
+  kTechnicalThumbPosition,
+  kTechnicalToe,
+  kTechnicalTripleTongue,
+  kTechnicalUpBow
 };
 
 string msrTechnicalKindAsString (
@@ -58,6 +58,19 @@ ostream& operator << (ostream& os, const msrTechnicalAccidentalMarkKind& elt);
 
 */
 
+// technical types
+//______________________________________________________________________________
+enum class msrTechnicalTypeKind { // JMI ???
+  kTechnicalType_NO_,
+  kTechnicalTypeStart, kTechnicalTypeStop
+};
+
+string msrTechnicalTypeKindAsString (
+  msrTechnicalTypeKind technicalTypeKind);
+
+ostream& operator << (ostream& os, const msrTechnicalTypeKind& elt);
+
+//______________________________________________________________________________
 class EXP msrTechnical : public msrElement
 {
   public:

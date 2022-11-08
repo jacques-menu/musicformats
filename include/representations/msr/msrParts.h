@@ -1,21 +1,36 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrParts___
 #define ___msrParts___
 
+#include "msrPartGroupElements.h"
+
 #include "msrClefs.h"
 #include "msrKeys.h"
+#include "msrMeasuresEnumTypes.h"
 #include "msrMeasuresSlices.h"
-#include "msrPartGroups.h"
-#include "msrPartGroupElements.h"
-#include "msrRepeats.h"
 #include "msrMultipleFullBarRests.h"
+#include "msrPartGroups.h"
 #include "msrRehearsalMarks.h"
+#include "msrRepeats.h"
 #include "msrSegnos.h"
 #include "msrDalSegnos.h"
+#include "msrStavesEnumTypes.h"
 #include "msrStaves.h"
 #include "msrStavesDetails.h"
 #include "msrTempos.h"
 #include "msrTimeSignatures.h"
 #include "msrTranspositions.h"
+#include "msrTupletFactors.h"
 
 
 namespace MusicFormats

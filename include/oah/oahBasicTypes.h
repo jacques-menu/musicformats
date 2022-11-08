@@ -57,7 +57,7 @@ enum class oahOptionOrArgumentKind {
 string oahOptionOrArgumentKindAsString (
   oahOptionOrArgumentKind optionOrArgumentKind );
 
-ostream& operator << (ostream& os, oahOptionOrArgumentKind& elt);
+ostream& operator << (ostream& os, const oahOptionOrArgumentKind& elt);
 
 //_______________________________________________________________________________
 /*
@@ -351,7 +351,7 @@ enum class oahEarlyOptionKind {
 string oahEarlyOptionKindAsString (
   oahEarlyOptionKind earlyOptionKind);
 
-ostream& operator << (ostream& os, oahEarlyOptionKind& elt);
+ostream& operator << (ostream& os, const oahEarlyOptionKind& elt);
 
 //_______________________________________________________________________________
 // handler used thru...?
@@ -364,7 +364,7 @@ enum class oahHandlerUsedThruKind {
 string oahHandlerUsedThruKindAsString (
   oahHandlerUsedThruKind handlerUsedThruKind);
 
-ostream& operator << (ostream& os, oahHandlerUsedThruKind& elt);
+ostream& operator << (ostream& os, const oahHandlerUsedThruKind& elt);
 
 //______________________________________________________________________________
 class EXP oahPrefix : public oahFindableElement

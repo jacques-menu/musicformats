@@ -13,9 +13,8 @@
 #define ___msrSegmentElements___
 
 #include "msrElements.h"
-#include "msrMeasureElements.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats

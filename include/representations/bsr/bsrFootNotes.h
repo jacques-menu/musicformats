@@ -2,6 +2,7 @@
 #define ___bsrFootNotes___
 
 #include "bsrLines.h"
+
 #include "bsrFootNotesElements.h"
 
 

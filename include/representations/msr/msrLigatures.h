@@ -14,7 +14,7 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats
