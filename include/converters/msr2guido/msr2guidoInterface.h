@@ -12,7 +12,7 @@
 #ifndef ___msr2guidoInterface___
 #define ___msr2guidoInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "msr.h"
 
@@ -29,7 +29,7 @@ namespace MusicFormats
 */
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError msrScore2guidoWithHandler (
+EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
   S_msrScore   theMsrScore,
   string       passNumber1,
   string       passDescription1,

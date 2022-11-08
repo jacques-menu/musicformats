@@ -12,7 +12,7 @@
 #ifndef ___msdl2musicxmlInterface___
 #define ___msdl2musicxmlInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "oahBasicTypes.h"
 
@@ -23,14 +23,14 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlStream2musicxmlWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithOptionsAndArguments (
   string                        inputSourceName,
   istream&                      inputStream,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
-EXP mfMusicformatsError convertMsdlStream2musicxmlWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlStream2musicxmlWithHandler (
   string       inputSourceName,
   istream&     inputStream,
   S_oahHandler handler,
@@ -38,26 +38,26 @@ EXP mfMusicformatsError convertMsdlStream2musicxmlWithHandler (
   ostream&     err);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlFile2musicxmlWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithOptionsAndArguments (
   string                        fileName,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
-EXP mfMusicformatsError convertMsdlFile2musicxmlWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlFile2musicxmlWithHandler (
   string       fileName,
   S_oahHandler handler,
   ostream&     out,
   ostream&     err);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlString2musicxmlWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithOptionsAndArguments (
   const char*                   buffer,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
-EXP mfMusicformatsError convertMsdlString2musicxmlWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlString2musicxmlWithHandler (
   const char*  buffer,
   S_oahHandler handler,
   ostream&     out,

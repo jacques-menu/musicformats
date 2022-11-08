@@ -12,17 +12,14 @@
 #ifndef ___lpsrBookBlockElements___
 #define ___lpsrBookBlockElements___
 
+#include "lpsrElements.h"
+
 #include "lpsrComments.h"
-
-#include "lpsrScheme.h"
-
 #include "lpsrHeaders.h"
-#include "lpsrPapers.h"
 #include "lpsrLayouts.h"
-
+#include "lpsrPapers.h"
 #include "lpsrParallelMusic.h"
-
-//#include "msrBlocks.h"
+#include "lpsrScheme.h"
 
 #include "msrMidi.h"
 

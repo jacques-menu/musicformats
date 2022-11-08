@@ -1,10 +1,22 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrMeasureRepeats___
 #define ___msrMeasureRepeats___
 
 #include "msrElements.h"
+#include "msrSegmentElements.h"
+
 #include "msrSegments.h"
 #include "msrVoices.h"
-#include "msrSegmentElements.h"
 
 
 namespace MusicFormats
@@ -199,30 +211,33 @@ typedef SMARTP<msrMeasureRepeatReplicas> S_msrMeasureRepeatReplicas;
 EXP ostream& operator << (ostream& os, const S_msrMeasureRepeatReplicas& elt);
 
 //______________________________________________________________________________
+// data types
+
+enum class msrMeasureRepeatKind {
+  kMeasureRepeat_NO_,
+  kMeasureRepeatStart, kMeasureRepeatStop
+};
+
+// string msrMeasureRepeatKindAsString ( // JMI v0.9.66
+//   msrMeasureRepeatKind measureRepeatKind);
+//
+// ostream& operator << (ostream& os, const msrMeasureRepeatKind& elt);
+
+enum class msrMeasureRepeatBuildPhaseKind {
+  kMeasureRepeatBuildPhaseJustCreated,
+  kMeasureRepeatBuildPhaseInPattern,
+  kMeasureRepeatBuildPhaseInReplicas,
+  kMeasureRepeatBuildPhaseCompleted
+};
+
+// string msrMeasureRepeatBuildPhaseKindAsString ( // JMI v0.9.66
+//   msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind);
+//
+// ostream& operator << (ostream& os, const msrMeasureRepeatBuildPhaseKind& elt);
+
 class EXP msrMeasureRepeat : public msrSegmentElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrMeasureRepeatKind {
-      k_NoMeasureRepeat,
-      kStartMeasureRepeat, kStopMeasureRepeat
-    };
-
-    string measureRepeatKindAsString (
-      msrMeasureRepeatKind measureRepeatKind);
-
-    enum class msrMeasureRepeatBuildPhaseKind {
-      kMeasureRepeatBuildPhaseJustCreated,
-      kMeasureRepeatBuildPhaseInPattern,
-      kMeasureRepeatBuildPhaseInReplicas,
-      kMeasureRepeatBuildPhaseCompleted
-    };
-
-    string measureRepeatBuildPhaseKindAsString (
-      msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind);
 
     // creation from MusicXML
     // ------------------------------------------------------

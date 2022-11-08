@@ -12,7 +12,6 @@
 #ifndef ___msrBreaks___
 #define ___msrBreaks___
 
-#include "msrBasicTypes.h"
 #include "msrMeasureElements.h"
 
 
@@ -28,7 +27,7 @@ enum class msrUserChosenLineBreakKind {
 string msrUserChosenLineBreakKindAsString (
   msrUserChosenLineBreakKind userChosenLineBreakKind);
 
-ostream& operator << (ostream& os, msrUserChosenLineBreakKind& elt);
+ostream& operator << (ostream& os, const msrUserChosenLineBreakKind& elt);
 
 class EXP msrLineBreak : public msrMeasureElement
 {
@@ -116,7 +115,7 @@ enum class msrUserChosenPageBreakKind {
 string msrUserChosenPageBreakKindAsString (
   msrUserChosenPageBreakKind userChosenPageBreakKind);
 
-ostream& operator << (ostream& os, msrUserChosenPageBreakKind& elt);
+ostream& operator << (ostream& os, const msrUserChosenPageBreakKind& elt);
 
 class EXP msrPageBreak : public msrMeasureElement
 {

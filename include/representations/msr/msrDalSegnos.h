@@ -12,6 +12,8 @@
 #ifndef ___msrDalSegnos___
 #define ___msrDalSegnos___
 
+#include "msrMeasureElements.h"
+
 #include "msrMeasures.h"
 
 

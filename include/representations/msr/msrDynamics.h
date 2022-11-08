@@ -14,11 +14,39 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+#include "msrLineTypes.h"
+#include "msrPlacements.h"
 
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+// data types
+
+enum class msrDynamicKind {
+  kDynamic_NO_,
+
+  kDynamicF, kDynamicFF, kDynamicFFF,
+  kDynamicFFFF, kDynamicFFFFF, kDynamicFFFFFF,
+
+  kDynamicP, kDynamicPP, kDynamicPPP, kDynamicPPPP,
+  kDynamicPPPPP, kDynamicPPPPPP,
+
+  kDynamicMF, kDynamicMP, kDynamicFP, kDynamicFZ, kDynamicPF, kDynamicRF,
+  kDynamicSF, kDynamicRFZ, kDynamicSFZ, kDynamicSFP,
+  kDynamicSFPP, kDynamicSFFZ, kDynamicSFZP,
+
+  kDynamicN // niente
+};
+
+string msrDynamicKindAsString (
+  msrDynamicKind dynamicKind);
+
+ostream& operator << (ostream& os, const msrDynamicKind& elt);
+
+msrDynamicKind dynamicFromString (
+  const string& theString);
 
 //______________________________________________________________________________
 class EXP msrDynamic : public msrElement

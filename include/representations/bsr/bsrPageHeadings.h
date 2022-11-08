@@ -1,8 +1,9 @@
 #ifndef ___bsrPageHeadings___
 #define ___bsrPageHeadings___
 
-#include "bsrCellsLists.h"
 #include "bsrLines.h"
+
+#include "bsrCellsLists.h"
 #include "bsrPaginations.h"
 
 

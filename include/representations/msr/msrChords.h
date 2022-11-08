@@ -1,6 +1,9 @@
 #ifndef ___msrChords___
 #define ___msrChords___
 
+#include "msrElements.h"
+#include "msrTupletElements.h"
+
 #include "msrCodas.h"
 #include "msrDynamics.h"
 #include "msrElements.h"
@@ -24,11 +27,26 @@
 #include "msrTechnicals.h"
 #include "msrTies.h"
 #include "msrTuplets.h"
-#include "msrTupletElements.h"
 #include "msrWords.h"
 
 namespace MusicFormats
 {
+
+// chords
+//______________________________________________________________________________
+
+enum class msrChordInKind {
+  kChordIn_NO_,
+
+  kChordInMeasure,
+  kChordInTuplet,
+  kChordInGraceNotesGroup
+};
+
+EXP string msrChordInKindAsString (
+  msrChordInKind chordInKind);
+
+ostream& operator << (ostream& os, const msrChordInKind& elt);
 
 //______________________________________________________________________________
 class   msrFiguredBass;

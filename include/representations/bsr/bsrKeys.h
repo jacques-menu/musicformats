@@ -1,8 +1,9 @@
 #ifndef ___bsrKeys___
 #define ___bsrKeys___
 
-#include "bsrCellsLists.h"
 #include "bsrLineContentsElements.h"
+
+// #include "bsrCellsLists.h"
 
 
 namespace MusicFormats
@@ -17,7 +18,7 @@ enum class bsrKeyKind {
 string bsrKeyKindAsString (
   bsrKeyKind keyKind);
 
-ostream& operator << (ostream& os, bsrKeyKind& elt);
+ostream& operator << (ostream& os, const bsrKeyKind& elt);
 
 //______________________________________________________________________________
 class EXP bsrKey : public bsrLineContentsElement

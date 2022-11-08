@@ -100,7 +100,7 @@ struct lpsrRepeatDescr : public smartable
     Bool                  fEndOfRepeatHasBeenGenerated;
 };
 typedef SMARTP<lpsrRepeatDescr> S_lpsrRepeatDescr;
-EXP ostream& operator << (ostream& os, S_lpsrRepeatDescr& elt);
+EXP ostream& operator << (ostream& os, const S_lpsrRepeatDescr& elt);
 
 //________________________________________________________________________
 enum class lilypondMarkupColumnKind { // JMI v0.9.66

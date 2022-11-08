@@ -1,6 +1,8 @@
 #ifndef ___msrStaffChanges___
 #define ___msrStaffChanges___
 
+#include "msrMeasureElements.h"
+
 #include "msrStaves.h"
 
 

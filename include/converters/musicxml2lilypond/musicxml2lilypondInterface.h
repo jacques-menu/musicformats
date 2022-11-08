@@ -12,7 +12,7 @@
 #ifndef ___musicxml2lilypondInterface___
 #define ___musicxml2lilypondInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
 using namespace std;
@@ -25,21 +25,21 @@ namespace MusicFormats
 */
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlFile2lilypondWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
   const char*  fileName,
   ostream&     out,
   ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlFd2lilypondWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlFd2lilypondWithHandler (
   FILE*        fd,
   ostream&     out,
   ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlString2lilypondWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlString2lilypondWithHandler (
   const char*  buffer,
   ostream&     out,
   ostream&     err,

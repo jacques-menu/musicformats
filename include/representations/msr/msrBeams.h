@@ -14,11 +14,46 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats
 {
+
+// beams
+//______________________________________________________________________________
+
+/*
+  MusicXML beam hooks:
+    see https://forums.makemusic.com/viewtopic.php?f=12&t=1397
+    and the examples at https://github.com/jacques-menu/musicformats/tree/master/files
+
+  Michael Good Recordare LLC:
+    An example of a "backward hook" is the 16th-note beam when a dotted eighth is beamed to a 16th.
+    A "forward hook" would be the 16th note beam when a 16th is beamed to a dotted eighth.
+    So in both these cases, the hook would be beam number 2 (the 16th beam).
+
+    In most cases, the hooks follow what would be "normal" beaming for the given durations.
+    But this is not always true, especially when there are secondary beam breaks.
+    The Ave Maria example has both hooks and secondary beam breaks in measure 6 of the voice part,
+    though not simultaneously.
+
+    Say you beamed a dotted-eighth, sixteenth, sixteenth, dotted-eighth pattern together.
+    If you broke the 16th beam, you would use "backward hook" followed by "forward hook".
+    If not, you would use "begin" followed by "end".
+*/
+
+enum class msrBeamKind {
+  kBeam_NO_,
+
+  kBeamBegin, kBeamContinue, kBeamEnd,
+  kBeamForwardHook, kBeamBackwardHook
+};
+
+EXP string msrBeamKindAsString (
+  msrBeamKind beamKind);
+
+ostream& operator << (ostream& os, const msrBeamKind& elt);
 
 //______________________________________________________________________________
 class EXP msrBeam : public msrElement

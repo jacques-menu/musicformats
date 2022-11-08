@@ -12,12 +12,53 @@
 #ifndef ___msrClefs___
 #define ___msrClefs___
 
-#include "msrBasicTypes.h"
 #include "msrMeasureElements.h"
 
 
 namespace MusicFormats
 {
+
+// clefs
+//______________________________________________________________________________
+
+enum class msrClefKind {
+  kClef_NO_,
+
+  kClefTreble,
+  kClefSoprano, kClefMezzoSoprano, kClefAlto, kClefTenor, kClefBaritone, kClefBass,
+  kClefTrebleLine1,
+  kClefTrebleMinus15, kClefTrebleMinus8, kClefTreblePlus8, kClefTreblePlus15,
+
+  kClefBassMinus15, kClefBassMinus8, kClefBassPlus8, kClefBassPlus15,
+
+  kClefVarbaritone,
+
+  kClefTablature4, kClefTablature5, kClefTablature6, kClefTablature7,
+
+  kClefPercussion,
+
+  kClefJianpu
+};
+
+string msrClefKindAsString (
+  msrClefKind clefKind);
+
+ostream& operator << (ostream& os, const msrClefKind& elt);
+
+EXP msrClefKind msrClefKindFromString (
+  int           inputLineNumber,
+  const string& clefString);
+
+string existingClefKinds (size_t namesListMaxLength);
+string existingClefKindsNames (size_t namesListMaxLength);
+
+extern map<string, msrClefKind>
+  gGlobalClefKindsMap;
+
+extern list<string>
+  gClefKindsNamesList;
+
+void initializeClefKinds ();
 
 //______________________________________________________________________________
 class   msrClef;

@@ -14,7 +14,8 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+#include "msrAlignments.h"
+#include "msrFonts.h"
 
 
 namespace MusicFormats
@@ -22,13 +23,13 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 enum class msrCreditTypeKind {
-  k_NoCreditType,
-  kPageNumber,
-  kTitle, kSubtitle,
-  kComposer, kArranger, kLyricist,
-  kRights,
-  kPartName,
-  kOtherCreditType
+  kCreditType_NO_,
+  kCreditTypeNumber,
+  kCreditTypeTitle, kCreditTypeSubtitle,
+  kCreditTypeComposer, kCreditTypeArranger, kCreditTypeLyricist,
+  kCreditTypeRights,
+  kCreditTypePartName,
+  kCreditTypeOther
 };
 
 string msrCreditTypeKindAsString (

@@ -12,7 +12,7 @@
 #ifndef ___musicxml2brailleInterface___
 #define ___musicxml2brailleInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
 using namespace std;
@@ -25,21 +25,21 @@ namespace MusicFormats
 */
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlFile2brailleWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
   const char*  fileName,
   ostream&     out,
   ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlFd2brailleWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlFd2brailleWithHandler (
   FILE*        fd,
   ostream&     out,
   ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlString2brailleWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
   const char*  buffer,
   ostream&     out,
   ostream&     err,

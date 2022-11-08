@@ -2,7 +2,8 @@
 #define ___msrSlides___
 
 #include "msrElements.h"
-#include "msrMeasures.h"
+
+// #include "msrMeasures.h"
 
 
 namespace MusicFormats

@@ -45,9 +45,6 @@ string lpsrEndOfLineKindAsString (
 
 ostream& operator << (ostream& os, const lpsrEndOfLineKind& elt);
 
-string const g_SchemeVariableNoUnit;
-string const g_SchemeVariableNoComment;
-
 class EXP lpsrSchemeVariable : public lpsrElement
 {
   public:

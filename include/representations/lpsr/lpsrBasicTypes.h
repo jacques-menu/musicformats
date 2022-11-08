@@ -19,8 +19,9 @@
 
 #include "mfRational.h"
 
+#include "msrDurations.h"
+#include "msrOctaves.h"
 #include "msrPitchesNames.h"
-#include "msrBasicTypes.h"
 
 
 namespace MusicFormats

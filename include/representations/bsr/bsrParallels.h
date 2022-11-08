@@ -13,9 +13,10 @@
 #define ___bsrParallels___
 
 #include "bsrElements.h"
-#include "bsrLines.h"
 
-#include "bsrOah.h"
+// #include "bsrLines.h"
+
+// #include "bsrOah.h"
 
 
 namespace MusicFormats
@@ -25,8 +26,8 @@ namespace MusicFormats
 // data types
 
 enum class bsrParallelLayoutKind {
-    kParallelLayoutBarOverBarKind,
-    kParallelLayoutLineOverLineKind };
+    kParallelLayoutBarOverBar,
+    kParallelLayoutLineOverLine };
 
 string bsrParallelLayoutKindAsString (
   bsrParallelLayoutKind parallelLayoutKind);

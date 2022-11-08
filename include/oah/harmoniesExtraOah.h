@@ -18,7 +18,7 @@
 #ifdef EXTRA_OAH_IS_ENABLED
 
 
-#include "msrBasicTypes.h"
+#include "msrPitches.h"
 
 #include "oahBasicTypes.h"
 

@@ -2,15 +2,10 @@
 #define ___msrGlissandos___
 
 #include "msrElements.h"
-#include "msrMeasures.h"
 
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-class   msrMeasure;
-typedef SMARTP<msrMeasure> S_msrMeasure;
 
 //______________________________________________________________________________
 // data types

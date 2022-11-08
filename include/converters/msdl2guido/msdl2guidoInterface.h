@@ -12,7 +12,7 @@
 #ifndef ___msdl2guidoInterface___
 #define ___msdl2guidoInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
 using namespace std;
@@ -21,14 +21,14 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlStream2guidoWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
   string                        inputSourceName,
   istream&                      inputStream,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
-EXP mfMusicformatsError convertMsdlStream2guidoWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
   string       inputSourceName,
   istream&     inputStream,
   S_oahHandler handler,
@@ -36,26 +36,26 @@ EXP mfMusicformatsError convertMsdlStream2guidoWithHandler (
   ostream&     err);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlFile2guidoWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
   string                        fileName,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
-EXP mfMusicformatsError msdlFile2guidoWithHandler (
+EXP mfMusicformatsErrorKind msdlFile2guidoWithHandler (
   string       fileName,
   S_oahHandler handler,
   ostream&     out,
   ostream&     err);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlString2guidoWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlString2guidoWithOptionsAndArguments (
   const char*                   buffer,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
-EXP mfMusicformatsError msdlString2guidoWithHandler (
+EXP mfMusicformatsErrorKind msdlString2guidoWithHandler (
   const char*  buffer,
   S_oahHandler handler,
   ostream&     out,

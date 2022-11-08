@@ -2,6 +2,7 @@
 #define ___bsrPaginations___
 
 #include "bsrLineContentsElements.h"
+
 #include "bsrCellsLists.h"
 
 

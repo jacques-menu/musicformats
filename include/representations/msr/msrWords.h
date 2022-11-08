@@ -14,33 +14,39 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+#include "msrAlignments.h"
+#include "msrFonts.h"
+#include "msrMusicXMLSpecifics.h"
+#include "msrPlacements.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// data types
+
+enum class msrWordsFontStyleKind {
+  kNormalStyle, KItalicStyle
+};
+
+string msrWordsFontStyleKindAsString (
+  msrWordsFontStyleKind wordsFontStyleKind);
+
+ostream& operator << (ostream& os, const msrWordsFontStyleKind& elt);
+
+enum class msrWordsFontWeightKind {
+  kNormalWeight, kBoldWeight
+};
+
+string msrWordsFontWeightKindAsString (
+  msrWordsFontWeightKind wordsFontWeightKind);
+
+ostream& operator << (ostream& os, const msrWordsFontWeightKind& elt);
+
 class EXP msrWords : public msrElement
 {
   public:
-
-    // data types
-    // ------------------------------------------------------
-
-    enum class msrWordsFontStyleKind {
-      kNormalStyle, KItalicStyle
-    };
-
-    string wordsFontStyleKindAsString (
-      msrWordsFontStyleKind wordsFontStyleKind);
-
-    enum class msrWordsFontWeightKind {
-      kNormalWeight, kBoldWeight
-    };
-
-    string msrWordsFontWeightKindAsString (
-      msrWordsFontWeightKind wordsFontWeightKind);
 
     // creation from MusicXML
     // ------------------------------------------------------
@@ -142,7 +148,7 @@ class EXP msrWords : public msrElement
     string                wordsHorizontalAlignmentKindAsString () const;
     string                wordsVerticalAlignmentKindAsString () const;
 
-    string                wordsFontStyleKindAsString () const;
+    string                msrWordsFontStyleKindAsString () const;
 
     string                wordsFontSizeAsString () const;
 

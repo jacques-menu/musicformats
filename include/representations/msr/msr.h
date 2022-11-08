@@ -13,7 +13,7 @@
 #define ___msr___
 
 #include "msrPitchesNames.h"
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 #include "msrElements.h"
 
 #include "msrIdentification.h"

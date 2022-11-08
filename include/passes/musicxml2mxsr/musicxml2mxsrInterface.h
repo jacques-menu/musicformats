@@ -37,7 +37,7 @@ void checkSXMLFile (
   \brief Converts a MusicXML representation to an MSR.
   \param fileName a file name
   \param msrOpts the MSR options to be used
-  \return an error code (\c mfMusicformatsError::k_NoError when success)
+  \return an error code (\c mfMusicformatsErrorKind::kMusicformatsError_NO_ when success)
 */
 EXP Sxmlelement musicxmlFile2mxsr (
   const char*    fileName,
@@ -48,7 +48,7 @@ EXP Sxmlelement musicxmlFile2mxsr (
   \brief Converts a MusicXML representation to an MSR.
   \param fd a file descriptor
   \param msrOpts the MSR options to be used
-  \return an error code (\c mfMusicformatsError::k_NoError when success)
+  \return an error code (\c mfMusicformatsErrorKind::kMusicformatsError_NO_ when success)
 */
 
 EXP Sxmlelement musicxmlFd2mxsr (
@@ -60,7 +60,7 @@ EXP Sxmlelement musicxmlFd2mxsr (
   \brief Converts a MusicXML representation to an MSR.
   \param buff a string containing MusicXML code
   \param msrOpts the MSR options to be used
-  \return an error code (\c mfMusicformatsError::k_NoError when success)
+  \return an error code (\c mfMusicformatsErrorKind::kMusicformatsError_NO_ when success)
 */
 EXP Sxmlelement musicxmlString2mxsr (
   const char*    buffer,

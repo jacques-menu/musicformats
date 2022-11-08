@@ -44,7 +44,7 @@ enum class oahElementValueKind {
 string oahElementValueKindAsString (
   oahElementValueKind elementValueKind);
 
-ostream& operator << (ostream& os, oahElementValueKind& elt);
+ostream& operator << (ostream& os, const oahElementValueKind& elt);
 
 enum class oahElementVisibilityKind {
 	kElementVisibilityNone, // default value
@@ -56,7 +56,7 @@ enum class oahElementVisibilityKind {
 string oahElementVisibilityKindAsString (
   oahElementVisibilityKind elementVisibilityKind);
 
-ostream& operator << (ostream& os, oahElementVisibilityKind& elt);
+ostream& operator << (ostream& os, const oahElementVisibilityKind& elt);
 
 enum class oahElementHelpOnlyKind {
   kElementHelpOnlyYes,
@@ -66,7 +66,7 @@ enum class oahElementHelpOnlyKind {
 string oahElementHelpOnlyKindAsString (
   oahElementHelpOnlyKind elementHelpOnlyKind);
 
-ostream& operator << (ostream& os, oahElementHelpOnlyKind& elt);
+ostream& operator << (ostream& os, const oahElementHelpOnlyKind& elt);
 
 //_______________________________________________________________________________
 /*

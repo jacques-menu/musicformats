@@ -1,12 +1,11 @@
 #ifndef ___msrSegments___
 #define ___msrSegments___
 
-#include "msrMeasures.h"
 #include "msrVoiceElements.h"
-#include "msrVoices.h"
 
 #include "msrCodas.h"
 #include "msrEyeGlasses.h"
+#include "msrMeasures.h"
 #include "msrMultipleFullBarRests.h"
 #include "msrRehearsalMarks.h"
 #include "msrSegnos.h"
@@ -15,7 +14,7 @@
 #include "msrStaves.h"
 #include "msrTablatures.h"
 #include "msrTempos.h"
-#include "msrVoiceElements.h"
+#include "msrVoices.h"
 
 
 namespace MusicFormats

@@ -28,20 +28,20 @@ enum class msdlTokenKind;
 // the MSDL keywords languages
 //______________________________________________________________________________
 enum class msdlKeywordsLanguageKind {
-  k_NoKeywordsLanguage,
+  kKeywordsLanguage_NO_,
 
-  kKeywordsEnglish, // MSDL default
-  kKeywordsFrench,
-  kKeywordsItalian,
-  kKeywordsGerman,
-  kKeywordsSpanish,
-  kKeywordsNederlands
+  kKeywordsLanguageEnglish, // MSDL default
+  kKeywordsLanguageFrench,
+  kKeywordsLanguageItalian,
+  kKeywordsLanguageGerman,
+  kKeywordsLanguageSpanish,
+  kKeywordsLanguageNederlands
 };
 
 string msdlKeywordsLanguageKindAsString (
   msdlKeywordsLanguageKind languageKind);
 
-ostream& operator << (ostream& os, msdlKeywordsLanguageKind& elt);
+ostream& operator << (ostream& os, const msdlKeywordsLanguageKind& elt);
 
 msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (
   const string& theString);
@@ -56,7 +56,7 @@ void initializeMsdlKeywordsLanguageKindsMap ();
 // the MSDL keywords
 //______________________________________________________________________________
 enum class msdlKeywordKind {
-  k_NoKeywordKind,
+  kKeyword_NO_,
 
   kKeywordTitle,
   kKeywordComposer,
@@ -91,7 +91,7 @@ enum class msdlKeywordKind {
 string msdlKeywordKindAsString (
   msdlKeywordKind keywordKind);
 
-ostream& operator << (ostream& os, msdlKeywordKind& elt);
+ostream& operator << (ostream& os, const msdlKeywordKind& elt);
 
 string msdlKeywordKindAsMsdlString (
   msdlKeywordsLanguageKind languageKind,

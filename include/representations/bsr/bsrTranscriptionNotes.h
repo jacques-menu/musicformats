@@ -12,9 +12,10 @@
 #ifndef ___bsrTranscriptionNotes___
 #define ___bsrTranscriptionNotes___
 
-#include "bsrCellsLists.h"
 #include "bsrElements.h"
 #include "bsrLines.h"
+
+#include "bsrCellsLists.h"
 
 
 namespace MusicFormats

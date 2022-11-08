@@ -19,7 +19,7 @@
 
 #include "mfRational.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats
@@ -39,7 +39,7 @@ enum class msdlUserLanguageKind {
 string msdlUserLanguageKindAsString (
   msdlUserLanguageKind languageKind);
 
-ostream& operator << (ostream& os, msdlUserLanguageKind& elt);
+ostream& operator << (ostream& os, const msdlUserLanguageKind& elt);
 
 msdlUserLanguageKind msdlUserLanguageKindFromString (
   const string& theString);
@@ -61,7 +61,7 @@ enum class msdlCommentsTypeKind {
 string msdlCommentsTypeKindAsString (
   msdlCommentsTypeKind languageKind);
 
-ostream& operator << (ostream& os, msdlCommentsTypeKind& elt);
+ostream& operator << (ostream& os, const msdlCommentsTypeKind& elt);
 
 msdlCommentsTypeKind msdlCommentsTypeKindFromString (
   const string& theString);

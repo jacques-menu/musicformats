@@ -14,12 +14,45 @@
 
 #include <list>
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
+
+#include "msrElements.h"
 #include "msrMeasureElements.h"
+
+#include "msrOctaves.h"
 
 
 namespace MusicFormats
 {
+
+// keys
+//______________________________________________________________________________
+
+enum class msrKeyKind {
+  kKeyTraditional, kKeyHumdrumScot
+};
+
+string msrKeyKindAsString (
+  msrKeyKind keyKind);
+
+ostream& operator << (ostream& os, const msrKeyKind& elt);
+
+enum class msrModeKind {
+  kMode_NO_,
+
+  kModeMajor, kModeMinor,
+  kModeIonian, kModeDorian, kModePhrygian, kModeLydian,
+  kModeMixolydian, kModeAeolian, kModeLocrian
+};
+
+string msrModeKindAsString (
+  msrModeKind modeKind);
+
+ostream& operator << (ostream& os,const msrModeKind& elt);
+
+msrModeKind modeKindFromString (
+  int           inputLineNumber,
+  const string& modeString);
 
 //______________________________________________________________________________
 class   msrHumdrumScotKeyItem;

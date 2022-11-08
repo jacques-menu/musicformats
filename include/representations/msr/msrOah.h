@@ -13,7 +13,7 @@
 #define ___msrOah___
 
 #include "msrPitchesNames.h"
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 #include "oahAtomsCollection.h"
 
@@ -235,8 +235,8 @@ class EXP msrOahGroup : public oahGroup
 
     // header
 
-    Bool                  getUseFilenameAsWorkTitle () const
-                              { return fUseFilenameAsWorkTitle; }
+    Bool                  getUseFilenameAsWorkCreditTypeTitle () const
+                              { return fUseFilenameAsWorkCreditTypeTitle; }
 
     Bool                  getUseLyricistsAsPoets () const
                               { return fUseLyricistsAsPoets; }
@@ -435,7 +435,7 @@ class EXP msrOahGroup : public oahGroup
     Bool                  fTraceMsrVisitors;
 
     // header
-    Bool                  fUseFilenameAsWorkTitle;
+    Bool                  fUseFilenameAsWorkCreditTypeTitle;
 
     Bool                  fUseLyricistsAsPoets; // lyricist is unknown to LilyPond
 

@@ -34,7 +34,7 @@ enum class msdlIgnoreSeparatorTokensKind {
 string msdlIgnoreSeparatorTokensKindAsString (
   msdlIgnoreSeparatorTokensKind ignoreSeparatorTokensKind);
 
-ostream& operator << (ostream& os, msdlIgnoreSeparatorTokensKind& elt);
+ostream& operator << (ostream& os, const msdlIgnoreSeparatorTokensKind& elt);
 
 //________________________________________________________________________
 class   msdlScanner : public smartable

@@ -12,7 +12,7 @@
 #ifndef ___lpsrLayouts___
 #define ___lpsrLayouts___
 
-#include "lpsrScheme.h"
+#include "lpsrElements.h"
 
 
 namespace MusicFormats
