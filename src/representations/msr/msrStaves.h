@@ -1,15 +1,31 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrStaves___
 #define ___msrStaves___
+
+#include "msrElements.h"
+
+#include "msrStavesEnumTypes.h"
 
 #include "msrBarLines.h"
 #include "msrClefs.h"
 #include "msrInstruments.h"
 #include "msrKeys.h"
+#include "msrMeasuresEnumTypes.h"
 #include "msrMeasures.h"
-#include "msrMeasureElements.h"
 #include "msrMeasuresSlices.h"
 #include "msrParts.h"
 #include "msrPartGroups.h"
+#include "msrPrintObjects.h"
 #include "msrMultipleFullBarRests.h"
 #include "msrRehearsalMarks.h"
 #include "msrRepeats.h"
@@ -18,7 +34,7 @@
 #include "msrTimeSignatures.h"
 #include "msrTempos.h"
 #include "msrTranspositions.h"
-
+#include "msrTupletFactors.h"
 
 namespace MusicFormats
 {
@@ -38,6 +54,9 @@ typedef SMARTP<msrRepeat> S_msrRepeat;
 
 class   msrRepeatEnding;
 typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
+
+class   msrTempo;
+typedef SMARTP<msrTempo> S_msrTempo;
 
 //______________________________________________________________________________
 class EXP msrStaff : public msrElement

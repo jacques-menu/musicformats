@@ -12,13 +12,59 @@
 #ifndef ___msrTimeSignatures___
 #define ___msrTimeSignatures___
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
-#include "msrMeasures.h"
+#include "msrElements.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
 {
+
+// time signatures
+//______________________________________________________________________________
+enum class msrTimeSignatureSymbolKind {
+  kTimeSignatureSymbolNone,
+  kTimeSignatureSymbolCommon,
+  kTimeSignatureSymbolCut,
+  kTimeSignatureSymbolNote,
+  kTimeSignatureSymbolDottedNote,
+  kTimeSignatureSymbolSingleNumber,
+  kTimeSignatureSymbolSenzaMisura
+};
+
+string msrTimeSignatureSymbolKindAsString (
+  msrTimeSignatureSymbolKind timeSignatureSymbolKind);
+
+ostream& operator << (ostream& os, const msrTimeSignatureSymbolKind& elt);
+
+enum class msrTimeSignatureSeparatorKind {
+  kTimeSignatureSeparatorNone,
+  kTimeSignatureSeparatorHorizontal,
+  kTimeSignatureSeparatorDiagonal,
+  kTimeSignatureSeparatorVertical,
+  kTimeSignatureSeparatorAdjacent
+};
+
+string msrTimeSignatureSeparatorKindAsString (
+  msrTimeSignatureSeparatorKind timeSignatureSeparatorKind);
+
+ostream& operator << (ostream& os, const msrTimeSignatureSeparatorKind& elt);
+
+enum class msrTimeSignatureRelationKind {
+  kTimeSignatureRelationNone,
+  kTimeSignatureRelationParentheses,
+  kTimeSignatureRelationBracket,
+  kTimeSignatureRelationEquals,
+  kTimeSignatureRelationSlash,
+  kTimeSignatureRelationSpace,
+  kTimeSignatureRelationHyphen
+};
+
+string msrTimeSignatureRelationKindAsString (
+  msrTimeSignatureRelationKind timeSignatureRelationKind);
+
+ostream& operator << (ostream& os, const msrTimeSignatureRelationKind& elt);
 
 //______________________________________________________________________________
 class   msrTimeSignatureItem;

@@ -27,9 +27,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string const lpsrSchemeVariable::g_SchemeVariableNoUnit    = "";
-string const lpsrSchemeVariable::g_SchemeVariableNoComment = "";
-
 S_lpsrSchemeVariable lpsrSchemeVariable::create (
   int               inputLineNumber,
   lpsrCommentedKind commentedKind,
@@ -123,7 +120,7 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
 void lpsrSchemeVariable::browseData (basevisitor* v)
 {}
 
-string lpsrSchemeVariable::lpsrCommentedKindAsString (
+string lpsrCommentedKindAsString (
   lpsrCommentedKind commentedKind)
 {
   string result;
@@ -140,7 +137,7 @@ string lpsrSchemeVariable::lpsrCommentedKindAsString (
   return result;
 }
 
-string lpsrSchemeVariable::lpsrEndOfLineKindAsString (
+string lpsrEndOfLineKindAsString (
   lpsrEndOfLineKind endOfLineKind)
 {
   string result;

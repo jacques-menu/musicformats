@@ -67,7 +67,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-static mfMusicformatsError xmlFile2brailleWithHandler (
+static mfMusicformatsErrorKind xmlFile2brailleWithHandler (
   SXMLFile&            sxmlfile,
   std::ostream&        out,
   std::ostream&        err,
@@ -129,11 +129,11 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -145,7 +145,7 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
       "Quitting after creating the MSR skeleton in pass 2a of xmlFile2brailleWithHandler as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // populate the MSR skeleton from MusicXML data (pass 2b)
@@ -160,11 +160,11 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -176,7 +176,7 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
       "Quitting after pass 2b as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // convert the first MSR score into a second MSR (pass 3)
@@ -195,11 +195,11 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -211,7 +211,7 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
       "Quitting after pass 3 as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // the first BSR score
@@ -234,11 +234,11 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
     }
     catch (msr2bsrException& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
     // display the first BSR score if requested
@@ -278,11 +278,11 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
     }
     catch (bsr2finalizedBsrException& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
     // display the finalized BSR score if requested
@@ -344,11 +344,11 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
       }
       catch (bsr2brailleException& e) {
       mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
     }
 
@@ -406,11 +406,11 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
       }
       catch (bsr2brailleException& e) {
         mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
         mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
 
       // close output file
@@ -427,11 +427,11 @@ static mfMusicformatsError xmlFile2brailleWithHandler (
     }
   }
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
+static mfMusicformatsErrorKind xmlFile2brailleWithOptionsAndArguments (
   SXMLFile&               sxmlfile,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -444,7 +444,7 @@ static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
 
     if (theMxsr) {
       if (theMxsr->getName () == "score-timewise")
-        return mfMusicformatsError::kErrorUnsupported;
+        return mfMusicformatsErrorKind::kMusicformatsErrorUnsupported;
     }
   }
 
@@ -457,7 +457,7 @@ static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
   }
 #endif
 
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // the service name
@@ -554,7 +554,7 @@ static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsError::k_NoError; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -563,11 +563,11 @@ static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
   }
   catch (mfOahException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidOption;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
@@ -592,11 +592,11 @@ static mfMusicformatsError xmlFile2brailleWithOptionsAndArguments (
     err,
     handler);
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlFile2braille (
+EXP mfMusicformatsErrorKind musicxmlFile2braille (
   const char*             fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -619,10 +619,10 @@ EXP mfMusicformatsError musicxmlFile2braille (
         err);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlFile2brailleWithHandler (
+mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
   const char*  fileName,
   ostream&     out,
   ostream&     err,
@@ -644,11 +644,11 @@ mfMusicformatsError convertMusicxmlFile2brailleWithHandler (
         handler);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlFd2braille (
+EXP mfMusicformatsErrorKind musicxmlFd2braille (
   FILE*                   fd,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -670,10 +670,10 @@ EXP mfMusicformatsError musicxmlFd2braille (
         err);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlFd2brailleWithHandler (
+mfMusicformatsErrorKind convertMusicxmlFd2brailleWithHandler (
   FILE*        fd,
   ostream&     out,
   ostream&     err,
@@ -695,11 +695,11 @@ mfMusicformatsError convertMusicxmlFd2brailleWithHandler (
         handler);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlString2braille (
+EXP mfMusicformatsErrorKind musicxmlString2braille (
   const char*             buffer,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -721,10 +721,10 @@ EXP mfMusicformatsError musicxmlString2braille (
       out,
       err);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlString2brailleWithHandler (
+mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
   const char*  buffer,
   ostream&     out,
   ostream&     err,
@@ -746,7 +746,7 @@ mfMusicformatsError convertMusicxmlString2brailleWithHandler (
       err,
       handler);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 

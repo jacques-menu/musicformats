@@ -27,8 +27,8 @@ total 200
  8 -rw-r--r--@  1 jacquesmenu  staff   1336 Oct 15 18:48:10 2021 mfEnumAll.h
 16 -rw-r--r--@  1 jacquesmenu  staff   7182 Nov  8 13:08:51 2021 mfIndentedTextOutput.cpp
 16 -rw-r--r--@  1 jacquesmenu  staff   7715 Nov  8 13:08:40 2021 mfIndentedTextOutput.h
- 8 -rw-r--r--@  1 jacquesmenu  staff    889 Oct 15 20:34:47 2021 mfMusicformatsError.cpp
- 8 -rw-r--r--@  1 jacquesmenu  staff    629 Oct 15 20:34:47 2021 mfMusicformatsError.h
+ 8 -rw-r--r--@  1 jacquesmenu  staff    889 Oct 15 20:34:47 2021 mfMusicformatsErrorKind.cpp
+ 8 -rw-r--r--@  1 jacquesmenu  staff    629 Oct 15 20:34:47 2021 mfMusicformatsErrors.h
  8 -rw-r--r--@  1 jacquesmenu  staff   2541 Nov  5 11:29:25 2021 oahOptionsVector.cpp
  8 -rw-r--r--@  1 jacquesmenu  staff    972 Oct 15 20:16:51 2021 oahBasicTypes.h
 64 -rw-r--r--@  1 jacquesmenu  staff  29773 Oct 15 18:48:10 2021 mfStringsHandling.cpp
@@ -561,7 +561,7 @@ void oahAtomExpectingAValue::applyElement (ostream& os)
 
 and:
 \begin{lstlisting}[language=CPlusPlus]
-    case msrPedalTypeKind::k_NoPedalType:
+    case msrPedalTypeKind::kPedalType_NO_:
       {
         // should not occur
 
@@ -826,7 +826,7 @@ All \enumType s use the \CPlusplus\ '{\tt enum class}' feature, such as:
 
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrSlurTypeKind {
-  k_NoSlur,
+  kSlurType_NO_,
 
   kSlurTypeRegularStart, kSlurTypePhrasingStart,
   kSlurTypeContinue,
@@ -838,7 +838,7 @@ This prevents enumeration constants name conflicts across \enumType s, and quali
 
 Many enumerations names end in '{\tt Kind}', which is a way distinguish them from rather similar classes names in some cases.
 
-Enumeration constants in the form {\tt k_No*} are used to indicate a value that \MainIt{has not been set yet}. There are always the first on in the corresponding enumeration, to benefit from the the \CPlusplus\ implicit \initialization\  to the the equivalent of 0.
+Enumeration constants in the form {\tt k*_No_} are used to indicate a value that \MainIt{has not been set yet}. There are always the first on in the corresponding enumeration, to benefit from the the \CPlusplus\ implicit \initialization\  to the the equivalent of 0.
 
 An enumeration constant may end in '{\tt None}', meaning that {\tt "[NONE]"} is actually a possible value for the corresponding type:
 \begin{lstlisting}[language=CPlusPlus]
@@ -904,7 +904,7 @@ void mxsr2msrTranslator::visitStart ( S_repeat& elt )
 The \mf\ \enumType s come with a \code{$<$$<$} operator to display their values in a user friendly way, such as \type{msrChordInKind} in \msrBoth{msrBasicTypes}:
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrChordInKind {
-  k_NoChordIn,
+  kChordIn_NO_,
 
   kChordInMeasure,
   kChordInTuplet,
@@ -925,8 +925,8 @@ string msrChordInKindAsString (
   string result;
 
   switch (chordInKind) {
-    case msrChordInKind::k_NoChordIn:
-      result = "***k_NoChordIn***";
+    case msrChordInKind::kChordIn_NO_:
+      result = "***kChordIn_NO_***";
       break;
     case msrChordInKind::kChordInMeasure:
       result = "kChordInMeasure";
@@ -996,7 +996,7 @@ For these reasons, \mf\ features a \class{Bool} defined in \mfutilitiesBoth{mfBo
 \section{On/off values}
 % -------------------------------------------------------------------------
 
-Some elements in \mf\ are represented by a \MainIt{three-state} value. 
+Some elements in \mf\ are represented by a \MainIt{three-state} value.
 
 \OnOff values are handled by \enumType{mfOnOffKind}, declared in \mflibrary{mfOnOff.h}:
 \begin{lstlisting}[language=Terminal]
@@ -1070,7 +1070,7 @@ This is done for \enumType{msrHarmonyKind} in \msr{msrBasicTypes.h}:
 // harmonies
 //______________________________________________________________________________
 enum class msrHarmonyKind {
-  k_NoHarmony,
+  kHarmony_NO_,
 
   // MusicXML harmonies
 
@@ -1088,7 +1088,7 @@ enum class msrHarmonyKind {
   // aliases
   // ------------------------------------
 
-  AllFirst = k_NoHarmony,
+  AllFirst = kHarmony_NO_,
   AllLast  = kHarmonyNone,
 
 	// ... ... ...
@@ -1459,7 +1459,7 @@ Each \enumType comes with an \functionName{*AsString()} function\index{functions
 // placement
 //______________________________________________________________________________
 enum class msrPlacementKind {
-  k_NoPlacement,
+  kPlacement_NO_,
 
   kPlacementAbove, kPlacementBelow
 };
@@ -1472,7 +1472,7 @@ msrPlacementKind msrPlacementKindFromString (
   int    inputLineNumber,
   string placementString)
 {
-  msrPlacementKind result = msrPlacementKind::k_NoPlacement; // default value
+  msrPlacementKind result = msrPlacementKind::kPlacement_NO_; // default value
 
   if      (placementString == "above")
     result = msrPlacementKind::kPlacementAbove;
@@ -1505,7 +1505,7 @@ string msrPlacementKindAsString (
   string result;
 
   switch (placementKind) {
-    case msrPlacementKind::k_NoPlacement:
+    case msrPlacementKind::kPlacement_NO_:
       result = "noPlacement";
       break;
     case msrPlacementKind::kPlacementAbove:
@@ -1570,7 +1570,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
   // create the resulting MSR score
   fResultingNewMsrScore =
     msrScore::create (
-      K_NO_INPUT_LINE_NUMBER,
+      K_MF_NO_INPUT_LINE_NUMBER,
       "msrScore::create()");
 
   // create a msrScore browser
@@ -1739,6 +1739,10 @@ class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 \end{lstlisting}
 
+All you can do with a forward declared type is to declare a pointer or reference to said type.
+
+%%%JMI I had a similar error message which i resolved by moving the #includes lower down the header file so that the class definition and method definition that the other #includes desire come earlier than the other header includes.
+
 
 % -------------------------------------------------------------------------
 \subsection{Simple mutual dependency using separate header files}
@@ -1862,7 +1866,7 @@ This is the case of notes, chords, tuplets and grace notes groups:
   \item a grace notes group;
   \item a double tremolo;
   \end{itemize}
- 
+
 \item a chord can be standalone in a measure;
 \item a chord can be part of:
   \begin{itemize}

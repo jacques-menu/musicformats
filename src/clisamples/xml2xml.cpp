@@ -179,11 +179,11 @@ int main (int argc, char* argv[])
   }
   catch (mfOahException& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidOption;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidFile;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
@@ -361,7 +361,7 @@ int main (int argc, char* argv[])
   // do the conversion
   // ------------------------------------------------------
 
-  mfMusicformatsError err;
+  mfMusicformatsErrorKind err;
 
   try {
     if (inputSourceName == "-") {
@@ -402,11 +402,11 @@ int main (int argc, char* argv[])
   }
   catch (mfException& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidFile;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidFile;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // display the input line numbers for which messages have been issued
@@ -438,7 +438,7 @@ int main (int argc, char* argv[])
   // over!
   // ------------------------------------------------------
 
-  if (err != mfMusicformatsError::k_NoError) {
+  if (err != mfMusicformatsErrorKind::kMusicformatsError_NO_) {
     gLogStream <<
       "### Conversion from MusicXML back to MusicXML failed ###" <<
       endl;

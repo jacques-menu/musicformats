@@ -142,7 +142,7 @@ S_msrScore LilyPondIssue34Generator::createTheScore (
 
   // set the identification's work title
   identification->
-    setIdentificationWorkTitle (
+    setIdentificationWorkCreditTypeTitle (
       __LINE__,
       "LilyPondIssue34");
 

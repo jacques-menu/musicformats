@@ -40,6 +40,41 @@ using namespace std;
 namespace MusicFormats
 {
 
+// tuplets
+//______________________________________________________________________________
+
+enum class msrTupletInKind {
+  kTupletIn_NO_,
+  kTupletInMeasure,
+  kTupletInTuplet
+};
+
+EXP string msrTupletKindAsString (
+  msrTupletInKind tupletKind)
+{
+  stringstream s;
+
+  switch (tieKind) {
+    case msrTieKind::kTupletIn_NO_:
+      s << "kTupletIn_NO_";
+      break;
+    case msrTieKind::kTupletInMeasure:
+      s << "kTupletInMeasure";
+      break;
+    case msrTieKind::kTupletInTuplet:
+      s << "kTupletInTuplet";
+      break;
+  } // switch
+
+  return s.str ();
+}
+
+ostream& operator<< (ostream& os, const msrTupletInKind& elt)
+{
+  os << msrTupletKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrTuplet msrTuplet::create (
   int                     inputLineNumber,
@@ -87,7 +122,7 @@ msrTuplet::msrTuplet (
         inputLineNumber,
         upLinkToMeasure)
 {
-  fTupletKind = msrTupletInKind::k_NoTupletIn;
+  fTupletKind = msrTupletInKind::kTupletIn_NO_;
 
   fTupletNumber = tupletNumber;
 
@@ -207,7 +242,7 @@ S_msrMeasure msrTuplet::fetchTupletUpLinkToMeasure () const
   S_msrMeasure result;
 
   switch (fTupletKind) {
-    case msrTupletInKind::k_NoTupletIn:
+    case msrTupletInKind::kTupletIn_NO_:
       break;
 
     case msrTupletInKind::kTupletInMeasure:
@@ -232,7 +267,7 @@ S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
   S_msrTuplet result;
 
   switch (fTupletKind) {
-    case msrTupletInKind::k_NoTupletIn:
+    case msrTupletInKind::kTupletIn_NO_:
       break;
 
     case msrTupletInKind::kTupletInMeasure:
@@ -376,6 +411,90 @@ ostream& operator << (ostream& os, const msrTupletShowTypeKind& elt)
   return os;
 }
 
+// tuplet factors
+//______________________________________________________________________________
+msrTupletFactor::msrTupletFactor ()
+{
+  fTupletActualNotes = -1;
+  fTupletNormalNotes = -1;
+}
+
+msrTupletFactor::msrTupletFactor (
+  int tupletActualNotes,
+  int tupletNormalNotes)
+{
+  fTupletActualNotes = tupletActualNotes;
+  fTupletNormalNotes = tupletNormalNotes;
+}
+
+msrTupletFactor::msrTupletFactor (
+  const Rational& rationalTupletFactor)
+{
+  fTupletActualNotes = rationalTupletFactor.getNumerator ();
+  fTupletNormalNotes = rationalTupletFactor.getDenominator ();
+}
+
+msrTupletFactor::~msrTupletFactor ()
+{}
+
+msrTupletFactor msrTupletFactor::inverse () const
+{
+  msrTupletFactor result (
+    fTupletNormalNotes, fTupletActualNotes);
+
+  return result;
+}
+
+string msrTupletFactor::asString () const
+{
+  stringstream s;
+
+  s <<
+    "[TupletFactor" <<
+    ", tupletActualNotes: " << fTupletActualNotes <<
+    ", tupletNormalNotes: " << fTupletNormalNotes <<
+    ']';
+
+  return s.str ();
+}
+
+string msrTupletFactor::asFractionString () const
+{
+  stringstream s;
+
+  s << fTupletActualNotes << '/' << fTupletNormalNotes;
+
+  return s.str ();
+}
+
+void msrTupletFactor::print (ostream& os) const
+{
+  os <<
+    "TupletFactor" <<
+    endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 11;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "fTupletActualNotes" << " : " << fTupletActualNotes <<
+    endl <<
+    setw (fieldWidth) <<
+    "fTupletNormalNotes" << " : " << fTupletNormalNotes <<
+    endl;
+
+  --gIndenter;
+};
+
+ostream& operator << (ostream& os, const msrTupletFactor& elt)
+{
+  elt.print (os);
+  return os;
+}
+
+//______________________________________________________________________________
 void msrTuplet::appendNoteToTuplet (
   S_msrNote  note,
   S_msrVoice voice)

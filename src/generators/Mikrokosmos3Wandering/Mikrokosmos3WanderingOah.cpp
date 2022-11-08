@@ -22,6 +22,8 @@
 
 #include "oahOah.h"
 
+#include "mfConstants.h"
+
 #include "Mikrokosmos3WanderingOah.h"
 
 #include "oahEarlyOptions.h"
@@ -56,7 +58,7 @@ R"(These options control the way Mikrokosmos3Wandering works.)",
     msrGenerationAPIKind::kMsrFunctionsAPIKind;
 
   fMultiGenerationOutputKind =
-    mfMultiGenerationOutputKind::k_NoGeneration;
+    mfMultiGenerationOutputKind::kGeneration_NO_;
 
   // initialize it
   initializeMikrokosmos3WanderingOahGroup ();
@@ -95,7 +97,7 @@ The default is 'DEFAULT_VALUE'.)",
             regex ("NUMBER"),
             to_string (gGlobalGenerationAPIKindsMap.size ())),
           regex ("GENERATION_API_KINDS"),
-          existingGenerationAPIKinds (K_NAMES_LIST_MAX_LENGTH)),
+          existingGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         regex ("DEFAULT_VALUE"),
         msrGenerationAPIKindAsString (
           msrGenerationAPIKindDefaultValue)),
@@ -123,7 +125,7 @@ void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions ()
 //
 //   const mfMultiGenerationOutputKind
 //     multiGenerationKindDefaultValue =
-//       mfMultiGenerationOutputKind::k_NoGeneration; // default value
+//       mfMultiGenerationOutputKind::kGeneration_NO_; // default value
 //
 //   fMultiGenerationOutputKindAtom =
 //     mfMultiGenerationOutputKindAtom::create (
@@ -138,7 +140,7 @@ void Mikrokosmos3WanderingOahGroup::initializeMultiGenerationOutputOptions ()
 //             regex ("NUMBER"),
 //             to_string (gGlobalMultiGenerationOutputKindsMap.size ())),
 //           regex ("GENERATION_API_KINDS"),
-//           existingMultiGenerationOutputKinds (K_NAMES_LIST_MAX_LENGTH)),
+//           existingMultiGenerationOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
 //         regex ("DEFAULT_VALUE"),
 //         mfMultiGenerationOutputKindAsString (
 //           multiGenerationKindDefaultValue)),
@@ -173,7 +175,7 @@ void Mikrokosmos3WanderingOahGroup::enforceGroupQuietness ()
 void Mikrokosmos3WanderingOahGroup::checkGroupOptionsConsistency ()
 {
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       {
         stringstream s;
 
@@ -185,7 +187,7 @@ void Mikrokosmos3WanderingOahGroup::checkGroupOptionsConsistency ()
         ++gIndenter;
 
         s <<
-          existingMultiGenerationOutputKinds (K_NAMES_LIST_MAX_LENGTH);
+          existingMultiGenerationOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
         --gIndenter;
 
@@ -312,7 +314,7 @@ ostream& operator << (ostream& os, const S_Mikrokosmos3WanderingOahGroup& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

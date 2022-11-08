@@ -45,6 +45,138 @@ using namespace std;
 namespace MusicFormats
 {
 
+// notes
+//______________________________________________________________________________
+string msrNoteKindAsString (
+  msrNoteKind noteKind)
+{
+  string result;
+
+  switch (noteKind) {
+    case msrNoteKind::kNote_NO_:
+      result = "***kNote_NO_***";
+      break;
+
+    // in measures
+    case msrNoteKind::kNoteRegularInMeasure:
+      result = "kNoteRegularInMeasure";
+      break;
+
+    case msrNoteKind::kNoteRestInMeasure:
+      result = "kNoteRestInMeasure";
+      break;
+
+    case msrNoteKind::kNoteSkipInMeasure:
+      result = "kNoteSkipInMeasure";
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInMeasure:
+      result = "kNoteUnpitchedInMeasure";
+      break;
+
+    // in chords
+    case msrNoteKind::kNoteRegularInChord:
+      result = "kNoteRegularInChord";
+      break;
+
+    // in tuplets
+    case msrNoteKind::kNoteRegularInTuplet:
+      result = "kNoteRegularInTuplet";
+      break;
+
+    case msrNoteKind::kNoteRestInTuplet:
+      result = "kNoteRestInTuplet";
+      break;
+
+    case msrNoteKind::kNoteUnpitchedInTuplet:
+      result = "kNoteUnpitchedInTuplet";
+      break;
+
+    // in grace notes groups
+    case msrNoteKind::kNoteRegularInGraceNotesGroup:
+      result = "kNoteRegularInGraceNotesGroup";
+      break;
+    case msrNoteKind::kNoteSkipInGraceNotesGroup:
+      result = "kNoteSkipInGraceNotesGroup";
+      break;
+
+    // in chords in grace notes groups
+    case msrNoteKind::kNoteInChordInGraceNotesGroup:
+      result = "kNoteInChordInGraceNotesGroup";
+      break;
+
+    // in tuplets in grace notes groups
+    case msrNoteKind::kNoteInTupletInGraceNotesGroup:
+      result = "kNoteInTupletInGraceNotesGroup";
+      break;
+
+    // in double-tremolos
+    case msrNoteKind::kNoteInDoubleTremolo:
+      result = "kNoteInDoubleTremolo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrNoteKind& elt)
+{
+  os << msrNoteKindAsString (elt);
+  return os;
+}
+
+// solo notes or rests
+//______________________________________________________________________________
+
+string msrSoloNoteOrRestInVoiceKindAsString (
+  msrSoloNoteOrRestInVoiceKind soloNoteOrRestInVoiceKind)
+{
+  string result;
+
+  switch (soloNoteOrRestInVoiceKind) {
+    case msrSoloNoteOrRestInVoiceKind::kSoloNoteOrRestInVoiceYes:
+      result = "kSoloNoteOrRestInVoiceYes";
+      break;
+    case msrSoloNoteOrRestInVoiceKind::kSoloNoteOrRestInVoiceNo:
+      result = "kSoloNoteOrRestInVoiceNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrSoloNoteOrRestInVoiceKind& elt)
+{
+  os << msrSoloNoteOrRestInVoiceKindAsString (elt);
+  return os;
+}
+
+string msrSoloNoteOrRestInStaffKindAsString (
+  msrSoloNoteOrRestInStaffKind soloNoteOrRestInStaffKind)
+{
+  string result;
+
+  switch (soloNoteOrRestInStaffKind) {
+    case msrSoloNoteOrRestInStaffKind::kSoloNoteOrRestInStaffYes:
+      result = "kSoloNoteOrRestInStaffYes";
+      break;
+    case msrSoloNoteOrRestInStaffKind::kSoloNoteOrRestInStaffPartially:
+      result = "kSoloNoteOrRestInStaffPartially";
+      break;
+    case msrSoloNoteOrRestInStaffKind::kSoloNoteOrRestInStaffNo:
+      result = "kSoloNoteOrRestInStaffNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrSoloNoteOrRestInStaffKind& elt)
+{
+  os << msrSoloNoteOrRestInStaffKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrNote msrNote::create (
   int                        inputLineNumber,
@@ -183,7 +315,7 @@ void msrNote::initializeNote ()
   // rests handling
   // ------------------------------------------------------
 
-  if (fetchNoteIsARest () && fNoteDisplayOctaveKind != msrOctaveKind::k_NoOctave) {
+  if (fetchNoteIsARest () && fNoteDisplayOctaveKind != msrOctaveKind::kOctave_NO_) {
     // this note is a pitched rest:
     // copy the display octave to the note octave, // JMI
     // to be used in octave relative code generation
@@ -219,7 +351,7 @@ void msrNote::initializeNote ()
       endl <<
       "Initializing a note" <<
       ", kind: ";
-    if (fNoteKind == msrNoteKind::k_NoNote)
+    if (fNoteKind == msrNoteKind::kNote_NO_)
       gLogStream <<
         "not yet known";
     else
@@ -375,7 +507,7 @@ S_msrMeasure msrNote::fetchNoteUpLinkToMeasure () const
   S_msrMeasure result;
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
@@ -438,7 +570,7 @@ S_msrGraceNotesGroup msrNote::fetchNoteUpLinkToGraceNotesGroup () const
   S_msrGraceNotesGroup result;
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
@@ -508,7 +640,7 @@ S_msrVoice msrNote::fetchNoteUpLinkToVoice () const
 #endif
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:
@@ -1370,18 +1502,18 @@ S_msrNote msrNote::createRestNote (
 
       msrNoteKind::kNoteRestInMeasure, // noteKind
 
-      msrQuarterTonesPitchKind::k_NoQuarterTonesPitch,
-      msrOctaveKind::k_NoOctave, // noteOctave,
+      msrQuarterTonesPitchKind::kQTP_NO_,
+      msrOctaveKind::kOctave_NO_, // noteOctave,
 
       soundingWholeNotes,
       displayWholeNotes,
 
       dotsNumber,
 
-      msrDurationKind::k_NoDuration, // noteGraphicDuration
+      msrDurationKind::kDuration_NO_, // noteGraphicDuration
 
-      msrQuarterTonesPitchKind::k_NoQuarterTonesPitch, // noteDisplayQuarterTonesPitch
-      msrOctaveKind::k_NoOctave, // noteDisplayOctave,
+      msrQuarterTonesPitchKind::kQTP_NO_, // noteDisplayQuarterTonesPitch
+      msrOctaveKind::kOctave_NO_, // noteDisplayOctave,
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -1421,18 +1553,18 @@ S_msrNote msrNote::createSkipNote (
 
       msrNoteKind::kNoteSkipInMeasure, // noteKind
 
-      msrQuarterTonesPitchKind::k_NoQuarterTonesPitch,
-      msrOctaveKind::k_NoOctave, // noteOctave,
+      msrQuarterTonesPitchKind::kQTP_NO_,
+      msrOctaveKind::kOctave_NO_, // noteOctave,
 
       soundingWholeNotes,
       displayWholeNotes,
 
       dotsNumber,
 
-      msrDurationKind::k_NoDuration, // noteGraphicDuration
+      msrDurationKind::kDuration_NO_, // noteGraphicDuration
 
-      msrQuarterTonesPitchKind::k_NoQuarterTonesPitch, // noteDisplayQuarterTonesPitch
-      msrOctaveKind::k_NoOctave, // noteDisplayOctave,
+      msrQuarterTonesPitchKind::kQTP_NO_, // noteDisplayQuarterTonesPitch
+      msrOctaveKind::kOctave_NO_, // noteDisplayOctave,
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -1472,18 +1604,18 @@ S_msrNote msrNote::createGraceSkipNote (
 
       msrNoteKind::kNoteSkipInGraceNotesGroup, // noteKind
 
-      msrQuarterTonesPitchKind::k_NoQuarterTonesPitch,
-      msrOctaveKind::k_NoOctave, // noteOctave,
+      msrQuarterTonesPitchKind::kQTP_NO_,
+      msrOctaveKind::kOctave_NO_, // noteOctave,
 
       soundingWholeNotes,
       displayWholeNotes,
 
       dotsNumber,
 
-      msrDurationKind::k_NoDuration, // noteGraphicDuration
+      msrDurationKind::kDuration_NO_, // noteGraphicDuration
 
-      msrQuarterTonesPitchKind::k_NoQuarterTonesPitch, // noteDisplayQuarterTonesPitch
-      msrOctaveKind::k_NoOctave, // noteDisplayOctave,
+      msrQuarterTonesPitchKind::kQTP_NO_, // noteDisplayQuarterTonesPitch
+      msrOctaveKind::kOctave_NO_, // noteDisplayOctave,
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -1533,10 +1665,10 @@ S_msrNote msrNote::createRestNoteWithOctave (
 
       dotsNumber,
 
-      msrDurationKind::k_NoDuration, // noteGraphicDuration
+      msrDurationKind::kDuration_NO_, // noteGraphicDuration
 
       msrQuarterTonesPitchKind::kQTP_Rest,  // noteQuarterTonesDisplayPitchKind
-      msrOctaveKind::k_NoOctave,  // noteDisplayOctaveKind
+      msrOctaveKind::kOctave_NO_,  // noteDisplayOctaveKind
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -1586,7 +1718,7 @@ S_msrNote msrNote::createSkipNoteWithOctave (
 
       dotsNumber,
 
-      msrDurationKind::k_NoDuration, // noteGraphicDuration JMI ???
+      msrDurationKind::kDuration_NO_, // noteGraphicDuration JMI ???
 
       msrQuarterTonesPitchKind::kQTP_Skip,  // noteQuarterTonesDisplayPitchKind
       noteOctave,
@@ -2156,10 +2288,10 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
 
       0, // dotsNumber,
 
-      msrDurationKind::k_NoDuration, // noteGraphicDuration
+      msrDurationKind::kDuration_NO_, // noteGraphicDuration
 
-      msrQuarterTonesPitchKind::k_NoQuarterTonesPitch, // noteDisplayQuarterTonesPitch
-      msrOctaveKind::k_NoOctave, // noteDisplayOctave,
+      msrQuarterTonesPitchKind::kQTP_NO_, // noteDisplayQuarterTonesPitch
+      msrOctaveKind::kOctave_NO_, // noteDisplayOctave,
 
       msrNoteIsACueNoteKind::kNoteIsACueNoteNo,
 
@@ -2510,7 +2642,7 @@ msrDiatonicPitchKind msrNote::noteDiatonicPitchKind (
 Bool msrNote::noteIsAPitchedRest () const
 {
   return
-    fetchNoteIsARest () && fNoteDisplayOctaveKind != msrOctaveKind::k_NoOctave;
+    fetchNoteIsARest () && fNoteDisplayOctaveKind != msrOctaveKind::kOctave_NO_;
 }
 
 void msrNote::setNoteStem (S_msrStem stem)
@@ -2665,7 +2797,7 @@ void msrNote::appendSpannerToNote (S_msrSpanner spanner)
           break;
         case msrSpannerTypeKind::kSpannerTypeContinue:
           break;
-        case msrSpannerTypeKind::k_NoSpannerType:
+        case msrSpannerTypeKind::kSpannerType_NO_:
           // JMI ???
           break;
       } // switch
@@ -3840,7 +3972,7 @@ string msrNote::notePitchAsString () const
   stringstream s;
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteRegularInMeasure:
@@ -3929,7 +4061,7 @@ string msrNote::asShortStringWithRawWholeNotes () const
   s << '[';
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       s <<
         "***noNote***";
       break;
@@ -4154,9 +4286,9 @@ string msrNote::asShortString () const
   s << '[';
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       s <<
-        "k_NoNote" <<
+        "kNote_NO_" <<
         ":" <<
         noteSoundingWholeNotesAsMsrString ();
 
@@ -4441,9 +4573,9 @@ string msrNote::asMinimalString () const
   s << '[';
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       s <<
-        "k_NoNote" <<
+        "kNote_NO_" <<
         ":" <<
         noteSoundingWholeNotesAsMsrString ();
 
@@ -4826,7 +4958,7 @@ string msrNote::asString () const
     ", fNoteKind: ";
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       s <<
         "*noNote*";
       break;
@@ -5030,7 +5162,7 @@ string msrNote::asShortStringForMeasuresSlices () const
   s << '[';
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       s <<
         "*noNote*";
       break;
@@ -5175,7 +5307,7 @@ void msrNote::printNoteEssentials (ostream& os) const
     "fNoteKind: ";
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       os <<
         "*noNote*";
       break;
@@ -5636,7 +5768,7 @@ void msrNote::print (ostream& os) const
 
   // print sounding and displayed whole notes
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteSkipInGraceNotesGroup:
@@ -5958,7 +6090,7 @@ void msrNote::print (ostream& os) const
 
   // print whole notes durations as MSR strings
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -6976,7 +7108,7 @@ void msrNote::print (ostream& os) const
 /* JMI KAKA
       os <<
         msrSyllableKindAsString (syllable->getSyllableKind ()) <<
-          msrSyllableExtendKindAsString (syllable->getSyllableExtendKind ()) <<
+          syllable->getSyllableExtendKind () <<
         " : ";
 
       msrSyllable::writeTextsList (
@@ -7059,7 +7191,7 @@ void msrNote::printShort (ostream& os) const
 
   // print sounding and displayed whole notes
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
     case msrNoteKind::kNoteRestInMeasure:
     case msrNoteKind::kNoteSkipInMeasure:
     case msrNoteKind::kNoteUnpitchedInMeasure:
@@ -7863,7 +7995,7 @@ S_msrTuplet msrNote::fetchNoteUpLinkToTuplet () const
   S_msrTuplet result;
 
   switch (fNoteKind) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       break;
 
     case msrNoteKind::kNoteRegularInMeasure:

@@ -28,7 +28,7 @@
 
 #include "mfServiceRunData.h"
 
-#include "libmusicxml.h" // for mfMusicformatsError
+#include "libmusicxml.h" // for mfMusicformatsErrorKind
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -120,7 +120,7 @@ static void catchSignals () {}
 //   // ------------------------------------------------------
 //
 //   switch (multiGenerationOutputKind) {
-//     case mfMultiGenerationOutputKind::k_NoGeneration:
+//     case mfMultiGenerationOutputKind::kGeneration_NO_:
 //       // should not occur
 //       break;
 //
@@ -185,14 +185,14 @@ static void catchSignals () {}
 //   } // switch
 // }
 
-mfMusicformatsError generateCodeFromStandardInput (
+mfMusicformatsErrorKind generateCodeFromStandardInput (
   S_oahHandler             handler,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
-  mfMusicformatsError result = mfMusicformatsError::k_NoError;
+  mfMusicformatsErrorKind result = mfMusicformatsErrorKind::kMusicformatsError_NO_;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -243,15 +243,15 @@ mfMusicformatsError generateCodeFromStandardInput (
   return result;
 }
 
-mfMusicformatsError generateCodeFromAFile (
+mfMusicformatsErrorKind generateCodeFromAFile (
   string              inputFileName,
   S_oahHandler        handler,
   mfMultiGenerationOutputKind multiGenerationOutputKind)
 {
-  mfMusicformatsError result = mfMusicformatsError::k_NoError;
+  mfMusicformatsErrorKind result = mfMusicformatsErrorKind::kMusicformatsError_NO_;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -362,7 +362,7 @@ int main (int argc, char*  argv[])
 #endif
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // wait until after help options have been handled
       // before issuing an error message
       break;
@@ -445,18 +445,18 @@ int main (int argc, char*  argv[])
   }
   catch (mfOahException& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidOption;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (exception& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidFile;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // has the output kind been chosen?
   // ------------------------------------------------------
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       {
         stringstream s;
 
@@ -670,7 +670,7 @@ int main (int argc, char*  argv[])
   // do the job
   // ------------------------------------------------------
 
-  mfMusicformatsError err = mfMusicformatsError::k_NoError;// JMI
+  mfMusicformatsErrorKind err = mfMusicformatsErrorKind::kMusicformatsError_NO_;// JMI
 
   // generate code
   try {
@@ -705,7 +705,7 @@ int main (int argc, char*  argv[])
 
 #ifdef TRACING_IS_ENABLED
     if (gGlobalOahEarlyOptions.getEarlyTracingOah ()) {
-      if (err != mfMusicformatsError::k_NoError) {
+      if (err != mfMusicformatsErrorKind::kMusicformatsError_NO_) {
         gLogStream <<
           serviceName << ", " <<
           mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
@@ -718,11 +718,11 @@ int main (int argc, char*  argv[])
   }
   catch (mfException& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidFile;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidFile;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // display the input line numbers for which messages have been issued
@@ -754,7 +754,7 @@ int main (int argc, char*  argv[])
   // over!
   // ------------------------------------------------------
 
-  if (err != mfMusicformatsError::k_NoError) {
+  if (err != mfMusicformatsErrorKind::kMusicformatsError_NO_) {
     gLogStream <<
       "### The generation of " <<
       mfMultiGenerationOutputKindAsString (multiGenerationOutputKind) <<
@@ -763,16 +763,16 @@ int main (int argc, char*  argv[])
   }
 
   switch (err) {
-    case mfMusicformatsError::k_NoError:
+    case mfMusicformatsErrorKind::kMusicformatsError_NO_:
       return 0;
       break;
-    case mfMusicformatsError::kErrorInvalidFile:
+    case mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile:
       return 1;
       break;
-    case mfMusicformatsError::kErrorInvalidOption:
+    case mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption:
       return 2;
       break;
-    case mfMusicformatsError::kErrorUnsupported:
+    case mfMusicformatsErrorKind::kMusicformatsErrorUnsupported:
       return 3;
       break;
   } // switch

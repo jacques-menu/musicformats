@@ -12,14 +12,31 @@
 #ifndef ___msrMusicXMLSpecifics___
 #define ___msrMusicXMLSpecifics___
 
+#include <list>
+
 #include "msrElements.h"
 #include "msrMeasureElements.h"
 
-#include "msrBasicTypes.h"
+#include "msrMargins.h"
 
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+// XMLLang
+enum class msrXMLLangKind {
+  kXMLLangIt, kXMLLangEn, kXMLLangDe, kXMLLangFr, kXMLLangJa, kXMLLangLa
+};
+
+string msrXMLLangKindAsString (
+  msrXMLLangKind XMLLangKind);
+
+ostream& operator << (ostream& os, const msrXMLLangKind& elt);
+
+EXP msrXMLLangKind msrXMLLangKindFromString (
+  int           inputLineNumber,
+  const string& XMLLangString);
 
 //______________________________________________________________________________
 class EXP msrPageLayout : public msrElement
@@ -715,7 +732,7 @@ EXP ostream& operator << (ostream& os, const S_msrPrintLayout& elt);
 // data types
 
 enum class msrLineWidthTypeKind {
-  k_NoLineWidthType,
+  kLineWidthType_NO_,
   kLineWidthTypeBeam, kLineWidthTypeBracket, kLineWidthTypeDashes,
   kLineWidthTypeEnclosure,
   kLineWidthTypeEnding,
@@ -803,7 +820,7 @@ EXP ostream& operator << (ostream& os, const S_msrLineWidth& elt);
 // data types
 
 enum class msrNoteSizeTypeKind {
-  k_NoNoteSizeType,
+  kNote_NO_SizeType,
   kNoteSizeTypeCue, kNoteSizeTypeGrace, kNoteSizeTypeLarge
 };
 
@@ -881,7 +898,7 @@ EXP ostream& operator << (ostream& os, const S_msrNoteSize& elt);
 // data types
 
 enum class msrDistanceTypeKind {
-  k_NoDistanceType,
+  kDistanceType_NO_,
   kDistanceTypeHyphen, kDistanceTypeBeam
 };
 
@@ -958,7 +975,7 @@ EXP ostream& operator << (ostream& os, const S_msrDistance& elt);
 // data types
 
 enum class msrGlyphTypeKind {
-  k_NoGlyphType,
+  kGlyphType_NO_,
   kGlyphTypeQuarterRest,
   kGlyphTypeGClefOttavaBassa,
   kGlyphTypeCClef, kGlyphTypeFClef,
@@ -1041,7 +1058,7 @@ EXP ostream& operator << (ostream& os, const S_msrGlyph& elt);
 // data types
 
 enum class msrOtherAppearanceTypeKind { // JMI which values??? v0.9.62
-  k_NoOtherAppearanceTypeKind
+  kOtherAppearanceType_NO_
 };
 
 string msrOtherAppearanceTypeKindAsString (

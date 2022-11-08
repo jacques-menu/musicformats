@@ -12,7 +12,7 @@
 #ifndef ___musicxml2guidoInterface___
 #define ___musicxml2guidoInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
 using namespace std;
@@ -25,21 +25,21 @@ namespace MusicFormats
 */
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlFile2guidoWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
   const char*  fileName,
   ostream&     out,
   ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlFd2guidoWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlFd2guidoWithHandler (
   FILE*        fd,
   ostream&     out,
   ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMusicxmlString2guidoWithHandler (
+EXP mfMusicformatsErrorKind convertMusicxmlString2guidoWithHandler (
   const char*  buffer,
   ostream&     out,
   ostream&     err,

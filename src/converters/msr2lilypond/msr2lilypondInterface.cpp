@@ -51,7 +51,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError msrScore2lilypondWithHandler (
+EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   S_msrScore   theMsrScore,
   string       passNumber1,
   string       passDescription1,
@@ -99,11 +99,11 @@ EXP mfMusicformatsError msrScore2lilypondWithHandler (
     }
     catch (msr2lpsrException& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
   }
 
@@ -154,11 +154,11 @@ EXP mfMusicformatsError msrScore2lilypondWithHandler (
       }
       catch (lpsr2lilypondException& e) {
         mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
         mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
     }
 
@@ -224,11 +224,11 @@ EXP mfMusicformatsError msrScore2lilypondWithHandler (
       }
       catch (lpsr2lilypondException& e) {
         mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
         mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
 
       // close output file
@@ -245,7 +245,7 @@ EXP mfMusicformatsError msrScore2lilypondWithHandler (
     }
   }
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 

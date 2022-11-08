@@ -34,6 +34,327 @@ using namespace std;
 namespace MusicFormats
 {
 
+// clefs
+//______________________________________________________________________________
+map<string, msrClefKind>
+  gGlobalClefKindsMap;
+
+list<string>
+  gClefKindsNamesList;
+
+string msrClefKindAsString (
+  msrClefKind clefKind)
+{
+  string result;
+
+  switch (clefKind) {
+    case msrClefKind::kClef_NO_:
+      result = "***kClef_NO_***";
+      break;
+    case msrClefKind::kClefTreble:
+      result = "kClefTreble";
+      break;
+    case msrClefKind::kClefSoprano:
+      result = "kClefSoprano";
+      break;
+    case msrClefKind::kClefMezzoSoprano:
+      result = "kClefMezzoSoprano";
+      break;
+    case msrClefKind::kClefAlto:
+      result = "kClefAlto";
+      break;
+    case msrClefKind::kClefTenor:
+      result = "kClefTenor";
+      break;
+    case msrClefKind::kClefBaritone:
+      result = "kClefBaritone";
+      break;
+    case msrClefKind::kClefBass:
+      result = "kClefBass";
+      break;
+    case msrClefKind::kClefTrebleLine1:
+      result = "kClefTrebleLine1";
+      break;
+    case msrClefKind::kClefTrebleMinus15:
+      result = "kClefTrebleMinus15";
+      break;
+    case msrClefKind::kClefTrebleMinus8:
+      result = "kClefTrebleMinus8";
+      break;
+    case msrClefKind::kClefTreblePlus8:
+      result = "kClefTreblePlus8";
+      break;
+    case msrClefKind::kClefTreblePlus15:
+      result = "kClefTreblePlus15";
+      break;
+    case msrClefKind::kClefBassMinus15:
+      result = "kClefBassMinus15";
+      break;
+    case msrClefKind::kClefBassMinus8:
+      result = "kClefBassMinus8";
+      break;
+    case msrClefKind::kClefBassPlus8:
+      result = "kClefBassPlus8";
+      break;
+    case msrClefKind::kClefBassPlus15:
+      result = "kClefBassPlus15";
+      break;
+    case msrClefKind::kClefVarbaritone:
+      result = "kClefVarbaritone";
+      break;
+    case msrClefKind::kClefTablature4:
+      result = "kClefTablature4";
+      break;
+    case msrClefKind::kClefTablature5:
+      result = "kClefTablature5";
+      break;
+    case msrClefKind::kClefTablature6:
+      result = "kClefTablature6";
+      break;
+    case msrClefKind::kClefTablature7:
+      result = "kClefTablature7";
+      break;
+    case msrClefKind::kClefPercussion:
+      result = "kClefPercussion";
+      break;
+    case msrClefKind::kClefJianpu:
+      result = "kClefJianpu";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrClefKind& elt)
+{
+  os << msrClefKindAsString (elt);
+  return os;
+}
+
+msrClefKind msrClefKindFromString (
+  int           inputLineNumber,
+  const string& clefString)
+{
+  msrClefKind result = msrClefKind::kClef_NO_;
+
+  if      (clefString == "treble")
+    result = msrClefKind::kClefTreble;
+  else if (clefString == "soprano")
+    result = msrClefKind::kClefSoprano;
+  else if (clefString == "mezzosoprano")
+    result = msrClefKind::kClefMezzoSoprano;
+  else if (clefString == "alto")
+    result = msrClefKind::kClefAlto;
+  else if (clefString == "tenor")
+    result = msrClefKind::kClefTenor;
+  else if (clefString == "baritone")
+    result = msrClefKind::kClefBaritone;
+  else if (clefString == "bass")
+    result = msrClefKind::kClefBass;
+  else if (clefString == "treble1")
+    result = msrClefKind::kClefTrebleLine1;
+  else if (clefString == "treble-15")
+    result = msrClefKind::kClefTrebleMinus15;
+  else if (clefString == "treble-8")
+    result = msrClefKind::kClefTrebleMinus8;
+  else if (clefString == "treble+8")
+    result = msrClefKind::kClefTreblePlus8;
+  else if (clefString == "treble+15")
+    result = msrClefKind::kClefTreblePlus15;
+  else if (clefString == "bass-15")
+    result = msrClefKind::kClefBassMinus15;
+  else if (clefString == "bass-8")
+    result = msrClefKind::kClefBassMinus8;
+  else if (clefString == "bass+8")
+    result = msrClefKind::kClefBassPlus8;
+  else if (clefString == "bass+15")
+    result = msrClefKind::kClefBassPlus15;
+  else if (clefString == "varbaritone")
+    result = msrClefKind::kClefVarbaritone;
+  else if (clefString == "tab4")
+    result = msrClefKind::kClefTablature4;
+  else if (clefString == "tab5")
+    result = msrClefKind::kClefTablature5;
+  else if (clefString == "tab6")
+    result = msrClefKind::kClefTablature6;
+  else if (clefString == "tab7")
+    result = msrClefKind::kClefTablature7;
+  else if (clefString == "percussion")
+    result = msrClefKind::kClefPercussion;
+  else if (clefString == "jianpu")
+    result = msrClefKind::kClefJianpu;
+  else {
+    stringstream s;
+
+    s <<
+      "clef string \"" <<
+      clefString <<
+      "\" is unknown" <<
+      ", line = " << inputLineNumber;
+
+    msrError (
+      gGlobalServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      s.str ());
+  }
+
+  return result;
+}
+
+void initializeClefKinds ()
+{
+  // protect library against multiple initializations
+  static Bool pPrivateThisMethodHasBeenRun (false);
+
+  if (! pPrivateThisMethodHasBeenRun) {
+  //  gGlobalClefKindsMap [gClefKindsNamesList.back ()] = kMajorClef;
+
+    gClefKindsNamesList.push_back ("treble");
+    gGlobalClefKindsMap ["treble"] = msrClefKind::kClefTreble;
+    gClefKindsNamesList.push_back ("soprano");
+    gGlobalClefKindsMap ["soprano"] = msrClefKind::kClefSoprano;
+    gClefKindsNamesList.push_back ("mezzosoprano");
+    gGlobalClefKindsMap ["mezzosoprano"] = msrClefKind::kClefMezzoSoprano;
+    gClefKindsNamesList.push_back ("alto");
+    gGlobalClefKindsMap ["alto"] = msrClefKind::kClefAlto;
+    gClefKindsNamesList.push_back ("tenor");
+    gGlobalClefKindsMap ["tenor"] = msrClefKind::kClefTenor;
+    gClefKindsNamesList.push_back ("baritone");
+    gGlobalClefKindsMap ["baritone"] = msrClefKind::kClefBaritone;
+    gClefKindsNamesList.push_back ("bass");
+    gGlobalClefKindsMap ["bass"] = msrClefKind::kClefBass;
+    gClefKindsNamesList.push_back ("treble1");
+    gGlobalClefKindsMap ["treble1"] = msrClefKind::kClefTrebleLine1;
+    gClefKindsNamesList.push_back ("treble-15");
+    gGlobalClefKindsMap ["treble-15"] = msrClefKind::kClefTrebleMinus15;
+    gClefKindsNamesList.push_back ("treble-8");
+    gGlobalClefKindsMap ["treble-8"] = msrClefKind::kClefTrebleMinus8;
+    gClefKindsNamesList.push_back ("treble+8");
+    gGlobalClefKindsMap ["treble+8"] = msrClefKind::kClefTreblePlus8;
+    gClefKindsNamesList.push_back ("treble+15");
+    gGlobalClefKindsMap ["treble+15"] = msrClefKind::kClefTreblePlus15;
+    gClefKindsNamesList.push_back ("bass-15");
+    gGlobalClefKindsMap ["bass-15"] = msrClefKind::kClefBassMinus15;
+    gClefKindsNamesList.push_back ("bass-8");
+    gGlobalClefKindsMap ["bass-8"] = msrClefKind::kClefBassMinus8;
+    gClefKindsNamesList.push_back ("bass+8");
+    gGlobalClefKindsMap ["bass+8"] = msrClefKind::kClefBassPlus8;
+    gClefKindsNamesList.push_back ("bass+15");
+    gGlobalClefKindsMap ["bass+15"] = msrClefKind::kClefBassPlus15;
+    gClefKindsNamesList.push_back ("varbaritone");
+    gGlobalClefKindsMap ["varbaritone"] = msrClefKind::kClefVarbaritone;
+    gClefKindsNamesList.push_back ("tab4");
+    gGlobalClefKindsMap ["tab4"] = msrClefKind::kClefTablature4;
+    gClefKindsNamesList.push_back ("tab5");
+    gGlobalClefKindsMap ["tab5"] = msrClefKind::kClefTablature5;
+    gClefKindsNamesList.push_back ("tab6");
+    gGlobalClefKindsMap ["tab6"] = msrClefKind::kClefTablature6;
+    gClefKindsNamesList.push_back ("tab7");
+    gGlobalClefKindsMap ["tab7"] = msrClefKind::kClefTablature7;
+    gClefKindsNamesList.push_back ("percussion");
+    gGlobalClefKindsMap ["percussion"] = msrClefKind::kClefPercussion;
+    gClefKindsNamesList.push_back ("jianpu");
+    gGlobalClefKindsMap ["jianpu"] = msrClefKind::kClefJianpu;
+
+    pPrivateThisMethodHasBeenRun = true;
+  }
+}
+
+string existingClefKinds (size_t namesListMaxLength)
+{
+  stringstream s;
+
+  size_t clefKindsMapSize =
+    gGlobalClefKindsMap.size ();
+
+  if (clefKindsMapSize) {
+    size_t nextToLast =
+      clefKindsMapSize - 1;
+
+    size_t count = 0;
+    size_t cumulatedLength = 0;
+
+    for (
+      map<string, msrClefKind>::const_iterator i =
+        gGlobalClefKindsMap.begin ();
+      i != gGlobalClefKindsMap.end ();
+      ++i
+    ) {
+      string theString = (*i).first;
+
+      ++count;
+
+      cumulatedLength += theString.size ();
+      if (cumulatedLength >= namesListMaxLength) {
+        s << endl << gIndenter.getSpacer ();
+        cumulatedLength = 0;
+      }
+
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
+      s << theString;
+
+      if (count == nextToLast) {
+        s << " and ";
+      }
+      else if (count != clefKindsMapSize) {
+        s << ", ";
+      }
+    } // for
+  }
+
+  return s.str ();
+}
+
+string existingClefKindsNames (size_t namesListMaxLength)
+{
+  stringstream s;
+
+  size_t clefKindsNamesMapSize =
+    gClefKindsNamesList.size ();
+
+  if (clefKindsNamesMapSize) {
+    size_t nextToLast =
+      clefKindsNamesMapSize - 1;
+
+    size_t count = 0;
+    size_t cumulatedLength = 0;
+
+    for (
+      list<string>::const_iterator i =
+        gClefKindsNamesList.begin ();
+      i != gClefKindsNamesList.end ();
+      ++i
+    ) {
+      string theString = (*i);
+
+      ++count;
+
+      cumulatedLength += theString.size ();
+      if (cumulatedLength >= namesListMaxLength) {
+        s << endl << gIndenter.getSpacer ();
+        cumulatedLength = 0;
+      }
+
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
+      s << theString;
+
+      if (count == nextToLast) {
+        s << " and ";
+      }
+      else if (count != clefKindsNamesMapSize) {
+        s << ", ";
+      }
+    } // for
+  }
+
+  return s.str ();
+}
+
 //______________________________________________________________________________
 S_msrClef msrClef::create (
   int          inputLineNumber,

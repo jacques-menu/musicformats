@@ -16,7 +16,7 @@
 
 #include "lpsrContexts.h"
 
-#include "lpsrStaves.h"
+// #include "lpsrStaves.h"
 
 
 namespace MusicFormats

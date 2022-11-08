@@ -500,7 +500,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", measureFirstInSegmentKind: " <<
-      msrMeasureFirstInSegmentKindAsString (
+      msrmsrMeasureFirstInSegmentKindAsString (
         measureFirstInSegmentKind) <<
       ", line " << inputLineNumber <<
       endl;
@@ -2552,7 +2552,7 @@ void msrSegment::finalizeAllTheMeasuresOfSegment ( // superflous JMI ???
     measure->
       finalizeMeasure (
         inputLineNumber,
-        msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone,
+        msrMeasureRepeatContextKind::kMeasureRepeatContextNone,
         "finalizeAllTheMeasuresOfSegment()");
   } // for
 }

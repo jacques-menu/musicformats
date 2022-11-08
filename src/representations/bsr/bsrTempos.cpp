@@ -25,7 +25,7 @@
 
 #include "mfServiceRunData.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 #include "msrTempos.h"
 
 #include "bsrTempos.h"
@@ -54,7 +54,7 @@ namespace MusicFormats
 //   string result;
 //
 //   switch (tempoKind) {
-//     case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
+//     case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
 //       result = "_";
 //       break;
 //     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -108,7 +108,7 @@ S_bsrCellsList bsrTempo::buildCellsList () const
 
   if (! gGlobalMsr2bsrOahGroup->getNoTempos ()) {
     switch (fMsrTempo->getTempoKind ()) {
-      case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
+      case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
         break;
 
       case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -156,46 +156,46 @@ S_bsrCellsList bsrTempo::buildCellsList () const
             noteValueKind = bsrNoteValueKind::kNoteValueNone;
 
           switch (durationKind) {
-            case msrDurationKind::k_NoDuration:
+            case msrDurationKind::kDuration_NO_:
               break;
 
-            case msrDurationKind::k1024th: // JMI
+            case msrDurationKind::kDuration1024th: // JMI
               break;
-            case msrDurationKind::k512th: // JMI
+            case msrDurationKind::kDuration512th: // JMI
               break;
-            case msrDurationKind::k256th:
+            case msrDurationKind::kDuration256th:
               noteValueKind = bsrNoteValueKind::kNoteValueC256th;
               break;
-            case msrDurationKind::k128th:
+            case msrDurationKind::kDuration128th:
               noteValueKind = bsrNoteValueKind::kNoteValueC128th;
               break;
-            case msrDurationKind::k64th:
+            case msrDurationKind::kDuration64th:
               noteValueKind = bsrNoteValueKind::kNoteValueC64th;
               break;
-            case msrDurationKind::k32nd:
+            case msrDurationKind::kDuration32nd:
               noteValueKind = bsrNoteValueKind::kNoteValueC32nd;
               break;
-            case msrDurationKind::k16th:
+            case msrDurationKind::kDuration16th:
               noteValueKind = bsrNoteValueKind::kNoteValueC16th;
               break;
-            case msrDurationKind::kEighth:
+            case msrDurationKind::kDurationEighth:
               noteValueKind = bsrNoteValueKind::kNoteValueC8th;
               break;
-            case msrDurationKind::kQuarter:
+            case msrDurationKind::kDurationQuarter:
               noteValueKind = bsrNoteValueKind::kNoteValueCQuarter;
               break;
-            case msrDurationKind::kHalf:
+            case msrDurationKind::kDurationHalf:
               noteValueKind = bsrNoteValueKind::kNoteValueCHalf;
               break;
-            case msrDurationKind::kWhole:
+            case msrDurationKind::kDurationWhole:
               noteValueKind = bsrNoteValueKind::kNoteValueCWhole;
               break;
-            case msrDurationKind::kBreve:
+            case msrDurationKind::kDurationBreve:
               noteValueKind = bsrNoteValueKind::kNoteValueCBreve;
               break;
-            case msrDurationKind::kLonga:
+            case msrDurationKind::kDurationLonga:
               break;
-            case msrDurationKind::kMaxima:
+            case msrDurationKind::kDurationMaxima:
               break;
           } // switch
 
@@ -467,7 +467,7 @@ string bsrTempo::asDebugString () const
     "[TEMPO ";
 
   switch (fMsrTempo->getTempoKind ()) {
-    case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
       s << "_";
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:

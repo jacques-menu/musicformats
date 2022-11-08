@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "mfBool.h"
 
@@ -29,7 +29,7 @@ using namespace MusicFormats;
     there would be no way to 'see' them from outside ischemeScanner.cpp
 */
 
-EXP extern mfMusicformatsError launchIschemeInterpreter ();
+EXP extern mfMusicformatsErrorKind launchIschemeInterpreter ();
 
 
 #endif

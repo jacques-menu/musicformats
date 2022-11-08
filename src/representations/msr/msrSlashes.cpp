@@ -27,6 +27,115 @@ using namespace std;
 namespace MusicFormats
 {
 
+// measure style
+//______________________________________________________________________________
+msrUseDotsKind msrUseDotsFromString (
+  int           inputLineNumber,
+  const string& useDotsString)
+{
+  msrUseDotsKind result = msrUseDotsKind::kUseDotsNo; // default value
+
+  if      (useDotsString == "yes")
+    result = msrUseDotsKind::kUseDotsYes;
+  else if (useDotsString == "no")
+    result = msrUseDotsKind::kUseDotsNo;
+  else {
+    if (useDotsString.size ()) {
+      stringstream s;
+
+      s <<
+        "use-dots \"" << useDotsString <<
+        "\" is unknown";
+
+      msrError (
+        gGlobalServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        s.str ());
+    }
+  }
+
+  return result;
+}
+
+string msrSlashTypeKindAsString (
+  msrSlashTypeKind slashTypeKind)
+{
+  string result;
+
+  switch (slashTypeKind) {
+    case msrSlashTypeKind::kSlashType_NO_:
+      result = "kSlashType_NO_";
+      break;
+    case msrSlashTypeKind::kSlashTypeStart:
+      result = "kSlashTypeStart";
+      break;
+    case msrSlashTypeKind::kSlashTypeStop:
+      result = "kSlashTypeStop";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrSlashTypeKind& elt)
+{
+  os << msrSlashTypeKindAsString (elt);
+  return os;
+}
+
+string msrUseDotsKindAsString (
+  msrUseDotsKind useDotsKind)
+{
+  string result;
+
+  switch (useDotsKind) {
+    case msrUseDotsKind::kUseDots_NO_:
+      result = "kUseDots_NO_";
+      break;
+    case msrUseDotsKind::kUseDotsYes:
+      result = "kUseDotsYes";
+      break;
+    case msrUseDotsKind::kUseDotsNo:
+      result = "kUseDotsNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrUseDotsKind& elt)
+{
+  os << msrUseDotsKindAsString (elt);
+  return os;
+}
+
+string msrSlashUseStemsKindAsString (
+  msrSlashUseStemsKind slashUseStemsKind)
+{
+  string result;
+
+  switch (slashUseStemsKind) {
+    case msrSlashUseStemsKind::kSlashUseStems_NO_:
+      result = "kSlashUseStems_NO_";
+      break;
+    case msrSlashUseStemsKind::kSlashUseStemsYes:
+      result = "kSlashUseStemsYes";
+      break;
+    case msrSlashUseStemsKind::kSlashUseStemsNo:
+      result = "kSlashUseStemsNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrSlashUseStemsKind& elt)
+{
+  os << msrSlashUseStemsKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrSlash msrSlash::create (
   int                  inputLineNumber,
@@ -168,7 +277,7 @@ ostream& operator << (ostream& os, const S_msrSlash& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

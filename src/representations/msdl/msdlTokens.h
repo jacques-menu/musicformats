@@ -29,7 +29,7 @@ namespace MusicFormats
 
 //________________________________________________________________________
 enum class msdlTokenKind {
-  k_NoToken,
+  kToken_NO_,
 
   k_TokenEOF,
 
@@ -152,7 +152,7 @@ enum class msdlTokenKind {
 string msdlTokenKindAsString (
   msdlTokenKind tokenKind);
 
-ostream& operator << (ostream& os, msdlTokenKind& elt);
+ostream& operator << (ostream& os, const msdlTokenKind& elt);
 
 string msdlTokenKindAsMsdlString (
   msdlTokenKind            tokenKind,

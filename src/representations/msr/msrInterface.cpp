@@ -77,7 +77,7 @@ S_msrScore createScore ()
 
   // set the identification's work title
   identification->
-    setIdentificationWorkTitle (
+    setIdentificationWorkCreditTypeTitle (
       __LINE__,
       "Mikrokosmos III Wandering");
 

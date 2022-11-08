@@ -741,7 +741,7 @@ They are:
 
 This is provided by \mfsl{mfslInterpreterInterface.h}:
 \begin{lstlisting}[language=Terminal]
-EXP extern mfMusicformatsError launchMfslInterpreter (
+EXP extern mfMusicformatsErrorKind launchMfslInterpreter (
   const string&           inputSourceName,
   bool                    traceScanning,
   bool                    traceParsing,
@@ -754,7 +754,7 @@ EXP extern mfMusicformatsError launchMfslInterpreter (
 
 The definition of this function is placed in \mfsl{mfslScanner.ll}:
 \begin{lstlisting}[language=Terminal]
-mfMusicformatsError launchMfslInterpreter (
+mfMusicformatsErrorKind launchMfslInterpreter (
   const string&           inputSourceName,
   bool                    traceScanning,
   bool                    traceParsing,
@@ -764,9 +764,9 @@ mfMusicformatsError launchMfslInterpreter (
   string&                 theInputFile,
   oahOptionsAndArguments& optionsAndArguments)
 {
-  mfMusicformatsError
+  mfMusicformatsErrorKind
     result =
-      mfMusicformatsError::k_NoError;
+      mfMusicformatsErrorKind::kMusicformatsError_NO_;
 
   mfslDriver
     theDriver (
@@ -784,7 +784,7 @@ mfMusicformatsError launchMfslInterpreter (
 
   if (! parseResult) {
     result =
-      mfMusicformatsError::kErrorInvalidFile;
+      mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
 	gLogStream <<

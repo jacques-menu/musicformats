@@ -30,6 +30,48 @@ using namespace std;
 namespace MusicFormats
 {
 
+// slurs
+// ------------------------------------------------------
+string msrSlurTypeKindAsString (
+  msrSlurTypeKind slurTypeKind)
+{
+  stringstream s;
+
+  switch (slurTypeKind) {
+    case msrSlurTypeKind::kSlurType_NO_:
+      s << "***kSlurType_NO_***";
+      break;
+
+    case msrSlurTypeKind::kSlurTypeRegularStart:
+      s << "kSlurTypeRegularStart";
+      break;
+    case msrSlurTypeKind::kSlurTypeRegularContinue:
+      s << "kSlurTypeRegularContinue";
+      break;
+    case msrSlurTypeKind::kSlurTypeRegularStop:
+      s << "kSlurTypeRegularStop";
+      break;
+
+    case msrSlurTypeKind::kSlurTypePhrasingStart:
+      s << "kSlurTypePhrasingStart";
+      break;
+    case msrSlurTypeKind::kSlurTypePhrasingContinue:
+      s << "kSlurTypePhrasingContinue";
+      break;
+    case msrSlurTypeKind::kSlurTypePhrasingStop:
+      s << "kSlurTypePhrasingStop";
+      break;
+  } // switch
+
+  return s.str ();
+}
+
+ostream& operator << (ostream& os, const msrSlurTypeKind& elt)
+{
+  os << msrSlurTypeKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrSlur msrSlur::create (
   int              inputLineNumber,
@@ -61,7 +103,7 @@ S_msrSlur msrSlur::create (
       slurNumber,
       slurTypeKind,
       slurLineTypeKind,
-      msrPlacementKind::k_NoPlacement);
+      msrPlacementKind::kPlacement_NO_);
 }
 
 msrSlur::msrSlur (
@@ -169,7 +211,7 @@ ostream& operator << (ostream& os, const S_msrSlur& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -2,6 +2,7 @@
 #define ___bsrTimeSignatures___
 
 #include "bsrElements.h"
+
 #include "bsrLineContentsElements.h"
 #include "bsrCellsLists.h"
 

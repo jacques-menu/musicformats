@@ -1,5 +1,20 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrMeasures___
 #define ___msrMeasures___
+
+#include "msrSegmentElements.h"
+
+#include "msrMeasuresEnumTypes.h"
 
 #include "msrBarChecks.h"
 #include "msrBarLines.h"
@@ -9,20 +24,19 @@
 #include "msrEyeGlasses.h"
 #include "msrFiguredBasses.h"
 #include "msrHarmonies.h"
+#include "msrMoments.h"
 #include "msrMusicXMLSpecifics.h"
-#include "msrParts.h"
+#include "msrOctaveShifts.h"
+// #include "msrParts.h"
 #include "msrPartGroups.h"
 #include "msrNotes.h"
 #include "msrRehearsalMarks.h"
 #include "msrScores.h"
-#include "msrSegmentElements.h"
 #include "msrVoiceStaffChanges.h"
-#include "msrStaves.h"
+// #include "msrStaves.h"
 #include "msrTempos.h"
 #include "msrTuplets.h"
 #include "msrVoices.h"
-
-#include "msrMeasureElements.h"
 
 
 namespace MusicFormats
@@ -30,50 +44,10 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // PRE-declarations for classes mutual dependencies
-// class   msrMeasureElement;
+// class msrMeasureElement;
 // typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 
-//______________________________________________________________________________
-  // data types
-
-enum class msrMeasureFirstInSegmentKind {
-  kMeasureFirstInSegmentKindUnknown,
-  kMeasureFirstInSegmentKindYes,
-  kMeasureFirstInSegmentKindNo
-};
-
-string msrMeasureFirstInSegmentKindAsString (
-  msrMeasureFirstInSegmentKind measureFirstInSegmentKind);
-
-ostream& operator << (ostream& os, const msrMeasureFirstInSegmentKind& elt);
-
-enum class msrMeasureRepeatContextKind {
-  kMeasureRepeatContextKindUnknown,
-  kMeasureRepeatContextKindNone,
-  kMeasureRepeatContextKindCommonPartLastMeasure,
-  kMeasureRepeatContextKindHookedEndingLastMeasure,
-  kMeasureRepeatContextKindHooklessEndingLastMeasure,
-  kMeasureRepeatContextKindNextMeasureAfterCommonPart,
-  kMeasureRepeatContextKindNextMeasureAfterHookedEnding,
-  kMeasureRepeatContextKindNextMeasureAfterHooklessEnding
-};
-
-string msrMeasureRepeatContextKindAsString (
-  msrMeasureRepeatContextKind measureRepeatContextKind);
-
-ostream& operator << (ostream& os, const msrMeasureRepeatContextKind& elt);
-
-enum class msrMeasureEndRegularKind {
-  kMeasureEndRegularKindUnknown,
-  kMeasureEndRegularKindYes,
-  kMeasureEndRegularKindNo
-};
-
-string msrMeasureEndRegularKindAsString (
-  msrMeasureEndRegularKind measureEndRegularKind);
-
-ostream& operator << (ostream& os, const msrMeasureEndRegularKind& elt);
-
+// PRE-declarations for classes mutual dependencies
 class EXP msrMeasure : public msrSegmentElement
 {
   public:

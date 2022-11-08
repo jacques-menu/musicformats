@@ -14,7 +14,7 @@
 
 #include "smartpointer.h"
 
-#include "msrMeasures.h"
+// #include "msrMeasures.h"
 #include "msrNotes.h"
 
 
@@ -32,10 +32,10 @@ enum class msrNoteEventKind {
 string msrNoteEventKindAsString (
   msrNoteEventKind noteEventKind);
 
-ostream& operator << (ostream& os, msrNoteEventKind& elt);
+ostream& operator << (ostream& os, const msrNoteEventKind& elt);
 
 //________________________________________________________________________
-class   msrNoteEvent : public smartable
+class msrNoteEvent : public smartable
 {
   public:
 
@@ -104,7 +104,7 @@ typedef SMARTP<msrNoteEvent> S_msrNoteEvent;
 EXP ostream& operator << (ostream& os, const S_msrNoteEvent& elt);
 
 //________________________________________________________________________
-class   msrSimultaneousNotesChunk : public smartable
+class msrSimultaneousNotesChunk : public smartable
 {
   public:
 
@@ -137,8 +137,8 @@ class   msrSimultaneousNotesChunk : public smartable
                               { return fChunkNotesList; }
 
 
-    Rational              getChunkWholeNotes () const
-                              { return fChunkWholeNotes; }
+    Rational              getChunkDurationWholeNotes () const
+                              { return fChunkDurationWholeNotes; }
 
   public:
 
@@ -169,7 +169,7 @@ class   msrSimultaneousNotesChunk : public smartable
 
     Rational              fChunkMeasurePosition;
     list<S_msrNote>       fChunkNotesList;
-    Rational              fChunkWholeNotes;
+    Rational              fChunkDurationWholeNotes;
 };
 typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
 EXP ostream& operator << (ostream& os, const S_msrSimultaneousNotesChunk& elt);

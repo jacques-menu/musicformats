@@ -144,6 +144,29 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
 #endif
 }
 
+string msrSyllableExtendKindAsString (
+  lpsrElementsSeparatorKind elementsSeparatorKind)
+{
+  string result;
+
+  switch (elementsSeparatorKind) {
+    case lpsrElementsSeparatorKind::kElementsSeparatorEndOfLine:
+      result = "kElementsSeparatorEndOfLine";
+      break;
+    case lpsrElementsSeparatorKind::kElementsSeparatorSpace:
+      result = "kElementsSeparatorSpace";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const lpsrElementsSeparatorKind& elt)
+{
+  os << msrSyllableExtendKindAsString (elt);
+  return os;
+}
+
 void lpsrParallelMusicBLock::print (ostream& os) const
 {
   os <<
@@ -175,7 +198,7 @@ ostream& operator << (ostream& os, const S_lpsrParallelMusicBLock& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

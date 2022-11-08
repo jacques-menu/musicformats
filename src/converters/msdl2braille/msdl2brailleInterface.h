@@ -12,7 +12,7 @@
 #ifndef ___msdl2brailleInterface___
 #define ___msdl2brailleInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
 using namespace std;
@@ -21,14 +21,14 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlStream2brailleWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
   string                        inputSourceName,
   istream&                      inputStream,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
-EXP mfMusicformatsError convertMsdlStream2brailleWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
   string       inputSourceName,
   istream&     inputStream,
   S_oahHandler handler,
@@ -36,26 +36,26 @@ EXP mfMusicformatsError convertMsdlStream2brailleWithHandler (
   ostream&     err);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlFile2brailleWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
   string                        fileName,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
-EXP mfMusicformatsError convertMsdlFile2brailleWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
   string       fileName,
   S_oahHandler handler,
   ostream&     out,
   ostream&     err);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlString2brailleWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlString2brailleWithOptionsAndArguments (
   const char*                   buffer,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
-EXP mfMusicformatsError convertMsdlString2brailleWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlString2brailleWithHandler (
   const char*  buffer,
   S_oahHandler handler,
   ostream&     out,

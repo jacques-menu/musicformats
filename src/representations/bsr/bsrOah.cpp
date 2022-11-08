@@ -581,7 +581,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingBsrTextsLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingBsrTextsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -607,7 +607,7 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalBsrTextsLanguageKindsMap.size ())),
             regex ("TEXT_LANGUAGES"),
-            existingBsrTextsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingBsrTextsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           bsrTextsLanguageKindAsString (
             bsrTextsLanguageKindDefaultValue)),

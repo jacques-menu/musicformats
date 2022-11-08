@@ -2,18 +2,16 @@
 #define ___bsrLines___
 
 #include "bsrPageElements.h"
-#include "bsrCellsLists.h"
-#include "bsrLineContents.h"
 
+#include "bsrCellsLists.h"
 #include "bsrKeys.h"
-#include "bsrTimeSignatures.h"
-#include "bsrTempos.h"
+#include "bsrLineContents.h"
+#include "bsrLineContentsElements.h"
 #include "bsrMeasures.h"
 #include "bsrNotes.h"
 #include "bsrSpaces.h"
-
-#include "bsrLineContentsElements.h"
-
+#include "bsrTempos.h"
+#include "bsrTimeSignatures.h"
 
 namespace MusicFormats
 {

@@ -128,8 +128,8 @@ R"()",
         "work-title", "wt",
 R"(Set the work title to STRING in the MusicXML output.)",
         "STRING",
-        "fWorkTitle",
-        fWorkTitle));
+        "fWorkCreditTypeTitle",
+        fWorkCreditTypeTitle));
 
   // work number
 
@@ -274,8 +274,8 @@ void msr2mxsrOahGroup::printMsr2mxsrOahValues (int valueFieldWidth)
 
   gLogStream << left <<
     setw (valueFieldWidth) <<
-    "fWorkTitle" << " : " <<
-    fWorkTitle <<
+    "fWorkCreditTypeTitle" << " : " <<
+    fWorkCreditTypeTitle <<
     endl <<
     setw (valueFieldWidth) <<
     "fWorkNumber" << " : " <<

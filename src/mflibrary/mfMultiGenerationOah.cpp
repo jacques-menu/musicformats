@@ -29,7 +29,7 @@
 
 #include "oahEarlyOptions.h"
 
-#include "msrBasicTypes.h"        // for " K_NAMES_LIST_MAX_LENGTH
+#include "msrBasicTypes.h"        // for " K_MF_NAMES_LIST_MAX_LENGTH
 
 #include "mfMultiGenerationOah.h"
 
@@ -55,7 +55,7 @@ string mfMultiGenerationOutputKindAsString (
   string result;
 
 //   switch (multiGenerationOutputKind) {
-//     case mfMultiGenerationOutputKind::k_NoGeneration:
+//     case mfMultiGenerationOutputKind::kGeneration_NO_:
 //       result = "*noGenerateOutputKind*";
 //       break;
 //     case mfMultiGenerationOutputKind::kGenerationLilypond:
@@ -76,8 +76,8 @@ string mfMultiGenerationOutputKindAsString (
 //   } // switch
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
-      result = "*k_NoOutpu*t";
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
+      result = "no output generation";
       break;
     case mfMultiGenerationOutputKind::kGenerationLilypond:
       result = "LilyPond";
@@ -104,7 +104,7 @@ EXP mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
 {
   mfMultiGenerationOutputKind
     result =
-      mfMultiGenerationOutputKind::k_NoGeneration;
+      mfMultiGenerationOutputKind::kGeneration_NO_;
 
   if      (theString == K_GENERATED_OUTPUT_KIND_LIlYPOND_NAME) {
     result = mfMultiGenerationOutputKind::kGenerationLilypond;
@@ -197,7 +197,7 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 {
   mfMultiGenerationOutputKind
     result =
-      mfMultiGenerationOutputKind::k_NoGeneration;
+      mfMultiGenerationOutputKind::kGeneration_NO_;
 //
 //   // analyze the options
 //   const vector<oahOption>&
@@ -226,9 +226,9 @@ EXP mfMultiGenerationOutputKind fetchGeneratedOutputKindFromRunData ()
 //           mfMultiGenerationOutputKindFromString (
 //             optionNameWithoutDash);
 //
-//       if (newMultiGenerationOutputKind != mfMultiGenerationOutputKind::k_NoGeneration) {
+//       if (newMultiGenerationOutputKind != mfMultiGenerationOutputKind::kGeneration_NO_) {
 //         // yes, optionNameWithoutDash is a multi generators output kind
-//         if (result != mfMultiGenerationOutputKind::k_NoGeneration) {
+//         if (result != mfMultiGenerationOutputKind::kGeneration_NO_) {
 //           stringstream s;
 //
 //           s <<
@@ -299,7 +299,7 @@ mfMultiGenerationOutputKindAtom::mfMultiGenerationOutputKindAtom (
       multiGenerationOutputKindValue)
 {
   fMultiGenerationOutputKindVariable =
-    mfMultiGenerationOutputKind::k_NoGeneration;
+    mfMultiGenerationOutputKind::kGeneration_NO_;
 }
 
 mfMultiGenerationOutputKindAtom::~mfMultiGenerationOutputKindAtom ()
@@ -587,7 +587,7 @@ R"(Generate Guido code as output.)",
 //______________________________________________________________________________
 void mfMultiGenerationOahGroup::enforceGroupQuietness ()
 {
-  fMultiGenerationOutputKindAtom = mfMultiGenerationOutputKind::k_NoGeneration;
+  fMultiGenerationOutputKindAtom = mfMultiGenerationOutputKind::kGeneration_NO_;
 }
 
 //______________________________________________________________________________

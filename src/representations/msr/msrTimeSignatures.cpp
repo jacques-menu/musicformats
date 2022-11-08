@@ -47,6 +47,116 @@ using namespace std;
 namespace MusicFormats
 {
 
+// time signatures
+//______________________________________________________________________________
+string msrTimeSignatureSymbolKindAsString (
+  msrTimeSignatureSymbolKind timeSignatureSymbolKind)
+{
+  string result;
+
+  switch (timeSignatureSymbolKind) {
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCommon:
+      result = "kTimeSignatureSymbolCommon";
+      break;
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolCut:
+      result = "kTimeSignatureSymbolCut";
+      break;
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNote:
+      result = "kTimeSignatureSymbolNote";
+      break;
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolDottedNote:
+      result = "kTimeSignatureSymbolDottedNote";
+      break;
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSingleNumber:
+      result = "kTimeSignatureSymbolSingleNumber";
+      break;
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolSenzaMisura:
+      result = "kTimeSignatureSymbolSenzaMisura";
+      break;
+    case msrTimeSignatureSymbolKind::kTimeSignatureSymbolNone:
+      result = "kTimeSignatureSymbolNone";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTimeSignatureSymbolKind& elt)
+{
+  os << msrTimeSignatureSymbolKindAsString (elt);
+  return os;
+}
+
+string msrTimeSignatureSeparatorKindAsString (
+  msrTimeSignatureSeparatorKind timeSignatureSeparatorKind)
+{
+  string result;
+
+  switch (timeSignatureSeparatorKind) {
+    case msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorNone:
+      result = "kTimeSignatureSeparatorNone";
+      break;
+    case msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorHorizontal:
+      result = "kTimeSignatureSeparatorHorizontal";
+      break;
+    case msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorDiagonal:
+      result = "kTimeSignatureSeparatorDiagonal";
+      break;
+    case msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorVertical:
+      result = "kTimeSignatureSeparatorVertical";
+      break;
+    case msrTimeSignatureSeparatorKind::kTimeSignatureSeparatorAdjacent:
+      result = "kTimeSignatureSeparatorAdjacent";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTimeSignatureSeparatorKind& elt)
+{
+  os << msrTimeSignatureSeparatorKindAsString (elt);
+  return os;
+}
+
+string msrTimeSignatureRelationKindAsString (
+  msrTimeSignatureRelationKind timeSignatureRelationKind)
+{
+  string result;
+
+  switch (timeSignatureRelationKind) {
+    case msrTimeSignatureRelationKind::kTimeSignatureRelationNone:
+      result = "kTimeSignatureRelationNone";
+      break;
+    case msrTimeSignatureRelationKind::kTimeSignatureRelationParentheses:
+      result = "kTimeSignatureRelationParentheses";
+      break;
+    case msrTimeSignatureRelationKind::kTimeSignatureRelationBracket:
+      result = "kTimeSignatureRelationBracket";
+      break;
+    case msrTimeSignatureRelationKind::kTimeSignatureRelationEquals:
+      result = "kTimeSignatureRelationEquals";
+      break;
+    case msrTimeSignatureRelationKind::kTimeSignatureRelationSlash:
+      result = "kTimeSignatureRelationSlash";
+      break;
+    case msrTimeSignatureRelationKind::kTimeSignatureRelationSpace:
+      result = "kTimeSignatureRelationSpace";
+      break;
+    case msrTimeSignatureRelationKind::kTimeSignatureRelationHyphen:
+      result = "kTimeSignatureRelationHyphen";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTimeSignatureRelationKind& elt)
+{
+  os << msrTimeSignatureRelationKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrTimeSignatureItem msrTimeSignatureItem::create (
   int inputLineNumber)

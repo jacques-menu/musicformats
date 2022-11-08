@@ -108,34 +108,34 @@ void lpsrContext::acceptOut (basevisitor* v)
 void lpsrContext::browseData (basevisitor* v)
 {}
 
-string lpsrContext::lpsrContextTypeKindAsString (
+string lpsrContextTypeKindAsString (
   lpsrContextTypeKind contextTypeKind)
 {
   string result;
 
   switch (contextTypeKind) {
-    case lpsrContext::kChordNames:
-      result = "ChordNames";
+    case lpsrContextTypeKind::kContextChordNames:
+      result = "kContextChordNames";
       break;
-    case lpsrContext::kFiguredBass:
-      result = "FiguredBass";
+    case lpsrContextTypeKind::kContextFiguredBass:
+      result = "kContextFiguredBass";
       break;
   } // switch
 
   return result;
 }
 
-string lpsrContext::lpsrContextExistingKindAsString (
+string lpsrContextExistingKindAsString (
   lpsrContextExistingKind contextExistingKind)
 {
   string result;
 
   switch (contextExistingKind) {
-    case kExistingContextYes:
-      result = "existingContextYes";
+    case lpsrContextExistingKind::kExistingContextYes:
+      result = "kExistingContextYes";
       break;
-    case kExistingContextNo:
-      result = "existingContextNo";
+    case lpsrContextExistingKind::kExistingContextNo:
+      result = "kExistingContextNo";
       break;
   } // switch
 
@@ -145,12 +145,9 @@ string lpsrContext::lpsrContextExistingKindAsString (
 void lpsrContext::print (ostream& os) const
 {
   os <<
-    "[ontext, \"" <<
-    fContextTypeKind <<
-    "\"" <<
-    ", existing kind: " <<
-    lpsrContextExistingKindAsString (
-      fContextExistingKind);
+    "[Context" <<
+    ", fContextTypeKind: " << fContextTypeKind <<
+    ", fContextExistingKind: " << fContextExistingKind;
 
   if (fContextName.size ()) {
     os << ' ' << fContextName;
@@ -160,7 +157,7 @@ void lpsrContext::print (ostream& os) const
   ++gIndenter;
 
   os <<
-    "ContextElements";
+    "fContextElementsList";
 
   if (fContextElementsList.size ()) {
     os << endl;
@@ -212,7 +209,7 @@ lpsrChordNamesContext::lpsrChordNamesContext (
     : lpsrContext (
       inputLineNumber,
       contextExistingKind,
-      lpsrContext::kChordNames,
+      lpsrContextTypeKind::kContextChordNames,
       contextName)
 {
   fContextExistingKind = contextExistingKind;
@@ -375,7 +372,7 @@ lpsrFiguredBassContext::lpsrFiguredBassContext (
     : lpsrContext (
       inputLineNumber,
       contextExistingKind,
-      lpsrContext::kFiguredBass,
+      lpsrContextTypeKind::kContextFiguredBass,
       contextName)
 {
   fContextExistingKind = contextExistingKind;

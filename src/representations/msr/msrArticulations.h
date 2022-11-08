@@ -14,7 +14,7 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+#include "msrDirections.h"
 
 
 namespace MusicFormats
@@ -24,7 +24,7 @@ namespace MusicFormats
 // data types
 
 enum class msrArticulationKind {
-  k_NoArticulation,
+  kArticulation_NO_,
   kArticulationAccent, kArticulationBreathMark, kArticulationCaesura,
   kArticulationSpiccato,
   kArticulationStaccato, kArticulationStaccatissimo,
@@ -80,8 +80,6 @@ class EXP msrArticulation : public msrElement
 
     // public services
     // ------------------------------------------------------
-
-    virtual string        articulationPlacementKindAsString () const;
 
   public:
 
@@ -144,8 +142,8 @@ class EXP msrFermata : public msrArticulation
     // ------------------------------------------------------
 
     static SMARTP<msrFermata> create (
-                            int                inputLineNumber,
-                            msrFermataShapeKind     fermataShapeKind,
+                            int                        inputLineNumber,
+                            msrFermataShapeKind        fermataShapeKind,
                             msrArticulationFermataType fermataTypeKind);
 
   protected:
@@ -154,8 +152,8 @@ class EXP msrFermata : public msrArticulation
     // ------------------------------------------------------
 
                           msrFermata (
-                            int                inputLineNumber,
-                            msrFermataShapeKind     fermataShapeKind,
+                            int                        inputLineNumber,
+                            msrFermataShapeKind        fermataShapeKind,
                             msrArticulationFermataType fermataTypeKind);
 
     virtual               ~msrFermata ();
@@ -165,10 +163,12 @@ class EXP msrFermata : public msrArticulation
     // set and get
     // ------------------------------------------------------
 
-    msrFermataShapeKind        getFermataKind () const
-                              { return fFermataKind; }
+    msrFermataShapeKind
+                          getFermataShapeKind () const
+                              { return fFermataShapeKind; }
 
-    msrArticulationFermataType    getFermataTypeKind () const
+    msrArticulationFermataType
+                          getFermataTypeKind () const
                               { return fFermataTypeKind; }
 
   public:
@@ -200,7 +200,7 @@ class EXP msrFermata : public msrArticulation
     // private fields
     // ------------------------------------------------------
 
-    msrFermataShapeKind        fFermataKind;
+    msrFermataShapeKind   fFermataShapeKind;
 
     msrArticulationFermataType    fFermataTypeKind;
 };
@@ -338,8 +338,6 @@ class EXP msrNonArpeggiato : public msrArticulation
 
     // public services
     // ------------------------------------------------------
-
-    virtual string        msrNonArpeggiatoTypeKindAsString () const;
 
   public:
 

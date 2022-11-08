@@ -62,7 +62,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-static mfMusicformatsError xmlFile2guidoWithHandler (
+static mfMusicformatsErrorKind xmlFile2guidoWithHandler (
   SXMLFile&     sxmlfile,
   std::ostream& out,
   std::ostream& err,
@@ -124,11 +124,11 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -140,7 +140,7 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
       "Quitting after creating the MSR skeleton in pass 2a of xmlFile2guidoWithHandler as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
 
@@ -156,11 +156,11 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -172,7 +172,7 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
       "Quitting after pass 2b as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // convert the first MSR score into a second MSR (pass 3)
@@ -191,11 +191,11 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -207,7 +207,7 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
       "Quitting after pass 3 as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // convert the second MSR into an MXSR (pass 4)
@@ -226,11 +226,11 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // convert the MXSR to Guido (pass 5)
@@ -251,18 +251,18 @@ static mfMusicformatsError xmlFile2guidoWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
+static mfMusicformatsErrorKind xmlFile2guidoWithOptionsAndArguments (
   SXMLFile&               sxmlfile,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -275,7 +275,7 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
 
     if (st) {
       if (st->getName () == "score-timewise")
-        return mfMusicformatsError::kErrorUnsupported;
+        return mfMusicformatsErrorKind::kMusicformatsErrorUnsupported;
     }
   }
 
@@ -288,7 +288,7 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
   }
 #endif
 
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // the service name
@@ -385,7 +385,7 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsError::k_NoError; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -394,11 +394,11 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
   }
   catch (mfOahException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidOption;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
@@ -423,11 +423,11 @@ static mfMusicformatsError xmlFile2guidoWithOptionsAndArguments (
     err,
     handler);
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlFile2guido (
+EXP mfMusicformatsErrorKind musicxmlFile2guido (
   const char*             fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -449,10 +449,10 @@ EXP mfMusicformatsError musicxmlFile2guido (
         err);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlFile2guidoWithHandler (
+mfMusicformatsErrorKind convertMusicxmlFile2guidoWithHandler (
   const char*  fileName,
   ostream&     out,
   ostream&     err,
@@ -474,11 +474,11 @@ mfMusicformatsError convertMusicxmlFile2guidoWithHandler (
         handler);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlFd2guido (
+EXP mfMusicformatsErrorKind musicxmlFd2guido (
   FILE*                   fd,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -500,10 +500,10 @@ EXP mfMusicformatsError musicxmlFd2guido (
         err);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlFd2guidoWithHandler (
+mfMusicformatsErrorKind convertMusicxmlFd2guidoWithHandler (
   FILE*        fd,
   ostream&     out,
   ostream&     err,
@@ -525,11 +525,11 @@ mfMusicformatsError convertMusicxmlFd2guidoWithHandler (
         handler);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlString2guido (
+EXP mfMusicformatsErrorKind musicxmlString2guido (
   const char*             buffer,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -551,10 +551,10 @@ EXP mfMusicformatsError musicxmlString2guido (
       out,
       err);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlString2guidoWithHandler (
+mfMusicformatsErrorKind convertMusicxmlString2guidoWithHandler (
   const char*  buffer,
   ostream&     out,
   ostream&     err,
@@ -576,7 +576,7 @@ mfMusicformatsError convertMusicxmlString2guidoWithHandler (
       err,
       handler);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 

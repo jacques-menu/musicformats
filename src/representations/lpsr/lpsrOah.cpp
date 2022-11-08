@@ -129,7 +129,7 @@ void lpsrPitchesLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -369,7 +369,7 @@ void lpsrChordsLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrChordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingLpsrChordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -962,7 +962,7 @@ void lpsrTransposeAtom::applyAtomWithValue (
   S_msrSemiTonesPitchAndOctave
     semiTonesPitchAndOctave =
       msrSemiTonesPitchAndOctave::createFromString (
-        K_NO_INPUT_LINE_NUMBER,
+        K_MF_NO_INPUT_LINE_NUMBER,
         theString);
 
   // set the transpose atom variable value
@@ -1289,7 +1289,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsrLengthUnitKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrLengthUnitKindAsString (
             fLengthUnitKindDefaultValue)),
@@ -1796,7 +1796,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1828,7 +1828,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -1864,7 +1864,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingLpsrChordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingLpsrChordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           lpsrChordsLanguageKindAsString (
             lpsrChordsLanguageKindDefaultValue)),

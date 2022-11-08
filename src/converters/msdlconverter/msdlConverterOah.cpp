@@ -53,7 +53,7 @@ R"(These options control the way MSDL converter works.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {
 /*
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::k_NoGeneration;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_NO_;
 
   fBrailleUTFKind = bsrUTFKind::kUTF8; // default value
 

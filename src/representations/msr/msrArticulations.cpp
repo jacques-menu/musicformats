@@ -61,8 +61,8 @@ string msrArticulationKindAsString (
   string result;
 
   switch (articulationKind) {
-    case msrArticulationKind::k_NoArticulation:
-      result = "k_NoArticulation";
+    case msrArticulationKind::kArticulation_NO_:
+      result = "kArticulation_NO_";
       break;
 
     case msrArticulationKind::kArticulationAccent:
@@ -130,20 +130,6 @@ ostream& operator << (ostream& os, const msrArticulationKind& elt)
   return os;
 }
 
-// string msrArticulation::msrArticulationKindAsString () const JMI
-// {
-//   return
-//     msrArticulationKindAsString (
-//       fArticulationKind);
-// }
-
-string msrArticulation::articulationPlacementKindAsString () const
-{
-  return
-    msrPlacementKindAsString (
-      fArticulationPlacementKind);
-}
-
 void msrArticulation::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
@@ -197,9 +183,8 @@ string msrArticulation::asString () const
 
   s <<
     "[Articulation " <<
-    msrArticulationKindAsString () <<
-    ", " <<
-    articulationPlacementKindAsString () <<
+    ", fArticulationKind: " << fArticulationKind <<
+    ", fArticulationPlacementKind: " << fArticulationPlacementKind <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -225,8 +210,8 @@ ostream& operator << (ostream& os, const S_msrArticulation& elt)
 
 //______________________________________________________________________________
 S_msrFermata msrFermata::create (
-  int                inputLineNumber,
-  msrFermataShapeKind     fermataShapeKind,
+  int                        inputLineNumber,
+  msrFermataShapeKind        fermataShapeKind,
   msrArticulationFermataType fermataTypeKind)
 {
   msrFermata* o =
@@ -239,16 +224,16 @@ S_msrFermata msrFermata::create (
 }
 
 msrFermata::msrFermata (
-    int                inputLineNumber,
-    msrFermataShapeKind     fermataShapeKind,
-    msrArticulationFermataType fermataTypeKind)
+  int                        inputLineNumber,
+  msrFermataShapeKind        fermataShapeKind,
+  msrArticulationFermataType fermataTypeKind)
     : msrArticulation (
       inputLineNumber,
       msrArticulationKind::kArticulationFermata,
-      msrPlacementKind::k_NoPlacement) // temporary, JMI TEMP
+      msrPlacementKind::kPlacement_NO_) // temporary, JMI TEMP
 {
-  fFermataKind = fermataShapeKind;
-  fFermataTypeKind = fermataTypeKind;
+  fFermataShapeKind = fermataShapeKind;
+  fFermataTypeKind  = fermataTypeKind;
 }
 
 msrFermata::~msrFermata ()
@@ -327,7 +312,7 @@ ostream& operator << (ostream& os, const msrFermataShapeKind& elt)
   return os;
 }
 
-string msrFermata::msrArticulationFermataTypeAsString (
+string msrArticulationFermataTypeAsString (
   msrArticulationFermataType fermataTypeKind)
 {
   string result;
@@ -359,10 +344,8 @@ string msrFermata::asString () const
 
   s <<
     "[Fermata" <<
-    ", " <<
-    msrFermataShapeKindAsString (fFermataKind) <<
-    ", " <<
-    msrArticulationFermataTypeAsString (fFermataTypeKind) <<
+    ", fFermataShapeKind: " << fFermataShapeKind <<
+    ", fFermataTypeKind: " << fFermataTypeKind <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -480,13 +463,9 @@ string msrArpeggiato::asString () const
 
   s <<
     "[Arpeggiato " <<
-    msrArticulationKindAsString () <<
-    ", " <<
-    articulationPlacementKindAsString () <<
-    ", " <<
-    arpeggiatoDirectionKindAsString () <<
-    ", number: " <<
-    fArpeggiatoNumber <<
+    ", fArticulationPlacementKind: " << fArticulationPlacementKind <<
+    ", " << arpeggiatoDirectionKindAsString () <<
+    ", fArpeggiatoNumber: " << fArpeggiatoNumber <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -545,7 +524,7 @@ msrNonArpeggiato::msrNonArpeggiato (
 msrNonArpeggiato::~msrNonArpeggiato ()
 {}
 
-string msrNonArpeggiato::msrNonArpeggiatoTypeKindAsString (
+string msrNonArpeggiatoTypeKindAsString (
   msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind)
 {
   string result;
@@ -623,14 +602,10 @@ string msrNonArpeggiato::asString () const
   stringstream s;
 
   s <<
-    "NonArpeggiato " <<
-    msrArticulationKindAsString () <<
-    ", " <<
-    articulationPlacementKindAsString () <<
-    ", " <<
-    msrNonArpeggiatoTypeKindAsString () <<
-    ", number: " <<
-    fNonArpeggiatoNumber <<
+    "[NonArpeggiato " <<
+    ", fArticulationPlacementKind: " << fArticulationPlacementKind <<
+    ", fNonArpeggiatoTypeKind: " << fNonArpeggiatoTypeKind <<
+    ", fNonArpeggiatoNumber: " << fNonArpeggiatoNumber <<
     ", line " << fInputLineNumber <<
     ']';
 

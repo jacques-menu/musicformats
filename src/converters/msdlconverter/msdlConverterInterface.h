@@ -12,7 +12,7 @@
 #ifndef ___msdlConverterInterface___
 #define ___msdlConverterInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
 using namespace std;
@@ -25,21 +25,21 @@ namespace MusicFormats
 */
 
 //_______________________________________________________________________________
-// EXP mfMusicformatsError convertMsdlFile2lilypondWithHandler ( // JMI
+// EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler ( // JMI
 //   const char*  fileName,
 //   ostream&     out,
 //   ostream&     err,
 //   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlFd2lilypondWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlFd2lilypondWithHandler (
   FILE*        fd,
   ostream&     out,
   ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlString2lilypondWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
   const char*  buffer,
   ostream&     out,
   ostream&     err,

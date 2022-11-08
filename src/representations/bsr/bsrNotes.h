@@ -26,7 +26,7 @@ enum class bsrNoteOctaveKind {
 extern string bsrNoteOctaveKindAsString (
   bsrNoteOctaveKind noteOctaveKind);
 
-ostream& operator << (ostream& os, bsrNoteOctaveKind& elt);
+ostream& operator << (ostream& os, const bsrNoteOctaveKind& elt);
 
 extern string bsrNoteOctaveKindAsDebugString (
   bsrNoteOctaveKind noteOctaveKind);
@@ -131,7 +131,7 @@ enum class bsrNoteValueKind {
 string bsrNoteValueKindAsString (
   bsrNoteValueKind noteValueKind);
 
-ostream& operator << (ostream& os, bsrNoteValueKind& elt);
+ostream& operator << (ostream& os, const bsrNoteValueKind& elt);
 
 string bsrNoteValueKindAsDebugString (
   bsrNoteValueKind noteValueKind);
@@ -149,7 +149,7 @@ enum class bsrNoteValueSizeKind {
 string bsrNoteValueSizeKindAsString (
   bsrNoteValueSizeKind noteValueSizeKind);
 
-ostream& operator << (ostream& os, bsrNoteValueSizeKind& elt);
+ostream& operator << (ostream& os, const bsrNoteValueSizeKind& elt);
 
 bsrNoteValueSizeKind bsrNoteValueSizeKindFromNoteValueKind (
   bsrNoteValueKind noteValueKind);
@@ -165,7 +165,7 @@ enum class bsrNoteOctaveIsNeeded {
 string bsrNoteOctaveIsNeededAsString (
   bsrNoteOctaveIsNeeded noteOctaveIsNeeded);
 
-ostream& operator << (ostream& os, bsrNoteOctaveIsNeeded& elt);
+ostream& operator << (ostream& os, const bsrNoteOctaveIsNeeded& elt);
 
 enum class bsrAccidentalKind {
   kAccidentalNone,
@@ -181,7 +181,7 @@ string bsrAccidentalKindAsString (
 string bsrAccidentalKindAsDebugString (
   bsrAccidentalKind accidentalKind);
 
-ostream& operator << (ostream& os, bsrAccidentalKind& elt);
+ostream& operator << (ostream& os, const bsrAccidentalKind& elt);
 
 //______________________________________________________________________________
 class EXP bsrNote : public bsrLineContentsElement

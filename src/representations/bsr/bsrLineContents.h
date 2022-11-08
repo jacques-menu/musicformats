@@ -2,10 +2,10 @@
 #define ___bsrLinesContents___
 
 #include "bsrElements.h"
-#include "bsrLines.h"
-#include "bsrLineContentsElements.h"
 
 #include "bsrCellsLists.h"
+#include "bsrLines.h"
+#include "bsrLineContentsElements.h"
 
 
 namespace MusicFormats

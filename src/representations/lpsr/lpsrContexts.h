@@ -16,9 +16,10 @@
 #include <string>
 #include <list>
 
+#include "lpsrElements.h"
+
 #include "msr.h"
 
-#include "lpsrElements.h"
 
 using namespace std;
 
@@ -29,7 +30,7 @@ namespace MusicFormats
 // data types
 
 enum class lpsrContextTypeKind {
-  kChordNames, kFiguredBass
+  kContextChordNames, kContextFiguredBass
 };
 
 string lpsrContextTypeKindAsString (

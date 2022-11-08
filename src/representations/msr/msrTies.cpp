@@ -28,6 +28,36 @@ using namespace std;
 namespace MusicFormats
 {
 
+// ties
+// ------------------------------------------------------
+string msrTieKindAsString (msrTieKind tieKind)
+{
+  stringstream s;
+
+  switch (tieKind) {
+    case msrTieKind::kTieNone:
+      s << "***kTieNone***";
+      break;
+    case msrTieKind::kTieStart:
+      s << "kTieStart";
+      break;
+    case msrTieKind::kTieContinue:
+      s << "kTieContinue";
+      break;
+    case msrTieKind::kTieStop:
+      s << "kTieStop";
+      break;
+  } // switch
+
+  return s.str ();
+}
+
+ostream& operator << (ostream& os, const msrTieKind& elt)
+{
+  os << msrTieKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrTie msrTie::create (
   int              inputLineNumber,
@@ -51,7 +81,7 @@ S_msrTie msrTie::create (
     msrTie::create (
       inputLineNumber,
       tieKind,
-      msrPlacementKind::k_NoPlacement);
+      msrPlacementKind::kPlacement_NO_);
 }
 
 msrTie::msrTie (
@@ -139,7 +169,7 @@ ostream& operator << (ostream& os, const S_msrTie& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

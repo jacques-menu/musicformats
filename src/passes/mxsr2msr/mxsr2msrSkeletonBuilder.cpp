@@ -158,7 +158,7 @@ mxsr2msrSkeletonBuilder::mxsr2msrSkeletonBuilder ()
   // the MSR score we're building
   fMsrScore =
     msrScore::create (
-      K_NO_INPUT_LINE_NUMBER,
+      K_MF_NO_INPUT_LINE_NUMBER,
       "msrScore::create()");
 
   // score handling
@@ -1810,12 +1810,12 @@ void mxsr2msrSkeletonBuilder::visitStart (S_work_title& elt)
   }
 #endif
 
-  string workTitle = elt->getValue ();
+  string workCreditTypeTitle = elt->getValue ();
 
   fMsrScore->getIdentification () ->
-    setIdentificationWorkTitle (
+    setIdentificationWorkCreditTypeTitle (
       inputLineNumber,
-      workTitle);
+      workCreditTypeTitle);
 }
 
 void mxsr2msrSkeletonBuilder::visitStart (S_opus& elt)
@@ -2454,26 +2454,26 @@ void mxsr2msrSkeletonBuilder::visitStart (S_credit_type& elt)
 
   msrCreditTypeKind
     creditTypeKind =
-      msrCreditTypeKind::k_NoCreditType; // default value
+      msrCreditTypeKind::kCreditType_NO_; // default value
 
   if      (creditTypeValue == "page number")
-    creditTypeKind = msrCreditTypeKind::kPageNumber;
+    creditTypeKind = msrCreditTypeKind::kCreditTypeNumber;
   else if (creditTypeValue == "title")
-    creditTypeKind =  msrCreditTypeKind::kTitle;
+    creditTypeKind =  msrCreditTypeKind::kCreditTypeTitle;
   else if (creditTypeValue == "subtitle")
-    creditTypeKind =  msrCreditTypeKind::kSubtitle;
+    creditTypeKind =  msrCreditTypeKind::kCreditTypeSubtitle;
   else if (creditTypeValue == "composer")
-    creditTypeKind =  msrCreditTypeKind::kComposer;
+    creditTypeKind =  msrCreditTypeKind::kCreditTypeComposer;
   else if (creditTypeValue == "arranger")
-    creditTypeKind =  msrCreditTypeKind::kArranger;
+    creditTypeKind =  msrCreditTypeKind::kCreditTypeArranger;
   else if (creditTypeValue == "lyricist")
-    creditTypeKind =  msrCreditTypeKind::kLyricist;
+    creditTypeKind =  msrCreditTypeKind::kCreditTypeLyricist;
   else if (creditTypeValue == "rights")
-    creditTypeKind =  msrCreditTypeKind::kRights;
+    creditTypeKind =  msrCreditTypeKind::kCreditTypeRights;
   else if (creditTypeValue == "part name")
-    creditTypeKind =  msrCreditTypeKind::kPartName;
+    creditTypeKind =  msrCreditTypeKind::kCreditTypePartName;
   else {
-    creditTypeKind =  msrCreditTypeKind::kOtherCreditType;
+    creditTypeKind =  msrCreditTypeKind::kCreditTypeOther;
   }
 
   // set the current credit type kind

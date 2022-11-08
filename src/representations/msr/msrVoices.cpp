@@ -44,6 +44,60 @@ using namespace std;
 namespace MusicFormats
 {
 
+// voices
+//______________________________________________________________________________
+string msrVoiceKindAsString (
+  msrVoiceKind voiceKind)
+{
+  string result;
+
+  switch (voiceKind) {
+    case msrVoiceKind::kVoiceKindRegular:
+      result = "kVoiceKindRegular";
+      break;
+    case msrVoiceKind::kVoiceKindDynamics:
+      result = "kVoiceKindDynamics";
+      break;
+    case msrVoiceKind::kVoiceKindHarmonies:
+      result = "kVoiceKindHarmonies";
+      break;
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      result = "kVoiceKindFiguredBass";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrVoiceKind& elt)
+{
+  os << msrVoiceKindAsString (elt);
+  return os;
+}
+
+string msrVoiceKindAsStringForPrint (
+  msrVoiceKind voiceKind)
+{
+  string result;
+
+  switch (voiceKind) {
+    case msrVoiceKind::kVoiceKindRegular:
+      result = "Regular";
+      break;
+    case msrVoiceKind::kVoiceKindDynamics:
+      result = "Dynamics";
+      break;
+    case msrVoiceKind::kVoiceKindHarmonies:
+      result = "Harmonies";
+      break;
+    case msrVoiceKind::kVoiceKindFiguredBass:
+      result = "FiguredBass";
+      break;
+  } // switch
+
+  return result;
+}
+
 //______________________________________________________________________________
 string msrVoiceRepeatPhaseKindAsString (
   msrVoiceRepeatPhaseKind
@@ -2794,7 +2848,7 @@ void msrVoice::appendNoteToVoice (S_msrNote note)
   // register whether music (i.e. not just skips)
   // has been inserted into the voice
   switch (note->getNoteKind ()) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -2929,7 +2983,7 @@ void msrVoice::appendNoteToVoiceClone (S_msrNote note) {
   // register whether music (i.e. not just skips)
   // has been inserted into the voice
   switch (note->getNoteKind ()) {
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:
@@ -4441,7 +4495,7 @@ void msrVoice::handleVoiceLevelRepeatStart (
           lastMeasureInLastSegment->
             finalizeMeasure (
               inputLineNumber,
-              msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone,
+              msrMeasureRepeatContextKind::kMeasureRepeatContextNone,
               "handleVoiceLevelRepeatStart() 3");
 */
           // append last segment to initial voice elements list
@@ -4757,7 +4811,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
   voiceLastSegmentLastMeasure->
     finalizeMeasure (
       inputLineNumber,
-      msrMeasureRepeatContextKind::kMeasureRepeatContextKindCommonPartLastMeasure,
+      msrMeasureRepeatContextKind::kMeasureRepeatContextCommonPartLastMeasure,
       "handleVoiceLevelRepeatEndWithoutStart() 3"
       );
 */
@@ -9613,7 +9667,7 @@ void msrVoice::finalizeLastAppendedMeasureInVoice (
   // finalize fVoiceLastAppendedMeasure
   msrMeasureRepeatContextKind
     measureRepeatContextKind =
-      msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone;
+      msrMeasureRepeatContextKind::kMeasureRepeatContextNone;
 
   fVoiceLastAppendedMeasure->
     finalizeMeasure (
@@ -10034,7 +10088,7 @@ void msrVoice::finalizeVoiceAndAllItsMeasures (
     measure->
       finalizeMeasure (
         inputLineNumber,
-        msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone,
+        msrMeasureRepeatContextKind::kMeasureRepeatContextNone,
         "finalizeVoiceAndAllItsMeasures()");
   } // for
 }
@@ -10065,7 +10119,7 @@ void msrVoice::checkBeamNumber (S_msrBeam beam, S_msrNote note)
       fVoiceBeamNumbersStack.size ();
 
   switch (beamKind) {
-    case msrBeamKind::k_NoBeam:
+    case msrBeamKind::kBeam_NO_:
       {
         stringstream s;
 

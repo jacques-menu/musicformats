@@ -6731,7 +6731,7 @@ void oahHandler::printKnownSingleCharacterOptions (ostream& os) const
       string theString = (*i);
 
       cumulatedLength += theString.size ();
-      if (cumulatedLength >= K_NAMES_LIST_MAX_LENGTH) {
+      if (cumulatedLength >= K_MF_NAMES_LIST_MAX_LENGTH) {
         os << endl;
         cumulatedLength = 0;
         break;

@@ -129,7 +129,7 @@ void msdlKeywordsLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -353,7 +353,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -377,7 +377,7 @@ void oahDisplayMsdlKeywordsInLanguageAtom::applyAtomWithValue (
 	gIndenter.indentMultiLineString (
     existingKeywordsInLanguage (
       keywordsLanguageKind,
-      K_NAMES_LIST_MAX_LENGTH),
+      K_MF_NAMES_LIST_MAX_LENGTH),
 		gLogStream);
 
   --gIndenter;
@@ -565,7 +565,7 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -589,7 +589,7 @@ void oahDisplayMsdlTokensInLanguageAtom::applyAtomWithValue (
 	gIndenter.indentMultiLineString (
     existingTokensInLanguage (
       keywordsLanguageKind,
-      K_NAMES_LIST_MAX_LENGTH),
+      K_MF_NAMES_LIST_MAX_LENGTH),
 		gLogStream);
 
   --gIndenter;
@@ -792,7 +792,7 @@ void msdlCommentsTypeAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlCommentsTypeKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1034,7 +1034,7 @@ void msdlUserLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsdlUserLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1279,7 +1279,7 @@ void msdlPitchesLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1525,7 +1525,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -1558,7 +1558,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -1570,7 +1570,7 @@ The default is 'DEFAULT_VALUE'.)",
 
   const msdlKeywordsLanguageKind
     msdlKeywordsLanguageKindDefaultValue =
-      msdlKeywordsLanguageKind::kKeywordsEnglish; // MSDL default
+      msdlKeywordsLanguageKind::kKeywordsLanguageEnglish; // MSDL default
 
   fMsdlKeywordsLanguageKind =
     msdlKeywordsLanguageKindDefaultValue;
@@ -1592,7 +1592,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlKeywordsLanguageKindDefaultValue)),
@@ -1603,7 +1603,7 @@ The default is 'DEFAULT_VALUE'.)",
 
   const msdlKeywordsLanguageKind
     msdlTokensLanguageKindDefaultValue =
-      msdlKeywordsLanguageKind::kKeywordsEnglish; // MSDL default
+      msdlKeywordsLanguageKind::kKeywordsLanguageEnglish; // MSDL default
 
   fMsdlKeywordsLanguageKind =
     msdlTokensLanguageKindDefaultValue;
@@ -1625,7 +1625,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlTokensLanguageKindDefaultValue)),

@@ -14,7 +14,6 @@
 
 #include <list>
 
-#include "msrBasicTypes.h"
 #include "msrMeasureElements.h"
 
 

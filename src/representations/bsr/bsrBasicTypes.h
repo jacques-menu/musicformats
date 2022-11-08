@@ -14,7 +14,7 @@
 
 #include <map>
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats

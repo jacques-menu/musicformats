@@ -12,7 +12,7 @@
 #ifndef ___msdl2lilypondInterface___
 #define ___msdl2lilypondInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
 using namespace std;
@@ -21,14 +21,14 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlStream2lilypondWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlStream2lilypondWithHandler (
   string       inputSourceName,
   istream&     inputStream,
   S_oahHandler handler,
   ostream&     out,
   ostream&     err);
 
-EXP mfMusicformatsError convertMsdlStream2lilypondWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlStream2lilypondWithOptionsAndArguments (
   string                        inputSourceName,
   istream&                      inputStream,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
@@ -36,26 +36,26 @@ EXP mfMusicformatsError convertMsdlStream2lilypondWithOptionsAndArguments (
   std::ostream&                 err);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlFile2lilypondWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithHandler (
   string       fileName,
   S_oahHandler handler,
   ostream&     out,
   ostream&     err);
 
-EXP mfMusicformatsError convertMsdlFile2lilypondWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlFile2lilypondWithOptionsAndArguments (
   string                        fileName,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlString2lilypondWithHandler (
+EXP mfMusicformatsErrorKind convertMsdlString2lilypondWithHandler (
   const char*  buffer,
   S_oahHandler handler,
   ostream&     out,
   ostream&     err);
 
-EXP mfMusicformatsError convertMsdlString2lilypondWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlString2lilypondWithOptionsAndArguments (
   const char*                   buffer,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,

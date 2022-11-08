@@ -305,7 +305,7 @@ wedges {\tt <} and {\tt >} be handled as spanners, or simply as being attached t
 // spanner types
 //______________________________________________________________________________
 enum class msrSpannerTypeKind {
-  k_NoSpannerType,
+  kSpannerType_NO_,
 
   kSpannerTypeStart, kSpannerTypeContinue, kSpannerTypeStop
 };
@@ -482,7 +482,7 @@ All pitches data is represented internally as quater tones pitches, and conversi
 // diatonic pitches
 //______________________________________________________________________________
 enum class msrDiatonicPitchKind {
-  k_NoDiatonicPitch,
+  kDiatonicPitch_NO_,
 
   // starting at C for LilyPond relative octave calculations
   kDiatonicPitchC,
@@ -545,7 +545,7 @@ enum class msrSemiTonesPitchKind {
 // quarter tones pitches
 //______________________________________________________________________________
 enum class msrQuarterTonesPitchKind {
-  k_NoQuarterTonesPitch,
+  kQTP_NO_,
 
   kQTP_Rest, kQTP_Skip,
 
@@ -603,7 +603,7 @@ They are represented with enumeration type {\tt }:
 // octaves
 //______________________________________________________________________________
 enum class msrOctaveKind {
-  k_NoOctave,
+  kOctave_NO_,
 
   kOctave0, kOctave1, kOctave2, kOctave3,
   kOctave4, // that of middle C
@@ -632,12 +632,12 @@ enum class msrOctaveEntryKind {
 // durations
 //______________________________________________________________________________
 enum class msrDurationKind {
-  k_NoDuration,
+  kDuration_NO_,
 
   // from longest to shortest for the algorithms
-  kMaxima, kLonga, kBreve, kWhole, kHalf,
-  kQuarter,
-  kEighth, k16th, k32nd, k64th, k128th, k256th, k512th, k1024th
+  kDurationMaxima, kDurationLonga, kDurationBreve, kDurationWhole, kDurationHalf,
+  kDurationQuarter,
+  kDurationEighth, kDuration16th, kDuration32nd, kDuration64th, kDuration128th, kDuration256th, kDuration512th, kDuration1024th
 };
 \end{lstlisting}
 
@@ -649,7 +649,7 @@ enum class msrDurationKind {
 // alterations
 //______________________________________________________________________________
 enum class msrAlterationKind {
-  k_NoAlteration,
+  kAlteration_NO_,
 
   kAlterationTripleFlat, kAlterationDoubleFlat, kAlterationSesquiFlat,
   kAlterationFlat, kAlterationSemiFlat,
@@ -703,12 +703,12 @@ They are represented in MSR with the \enumType{msrDurationKind} enumeration type
 // durations
 //______________________________________________________________________________
 enum class msrDurationKind {
-  k_NoDuration,
+  kDuration_NO_,
 
   // from longest to shortest for the algorithms
-  kMaxima, kLonga, kBreve, kWhole, kHalf,
-  kQuarter,
-  kEighth, k16th, k32nd, k64th, k128th, k256th, k512th, k1024th
+  kDurationMaxima, kDurationLonga, kDurationBreve, kDurationWhole, kDurationHalf,
+  kDurationQuarter,
+  kDurationEighth, kDuration16th, kDuration32nd, kDuration64th, kDuration128th, kDuration256th, kDuration512th, kDuration1024th
 };
 \end{lstlisting}
 
@@ -733,7 +733,7 @@ class EXP msrTempo : public msrMeasureElement
     // ------------------------------------------------------
 
     enum class msrTempoKBeatUnitsKind {
-      k_NoTempoBeatUnits,
+      kTempoBeatUnits_NO_,
       kTempoBeatUnitsWordsOnly,
       kTempoBeatUnitsPerMinute,
       kTempoBeatUnitsEquivalence,
@@ -945,7 +945,7 @@ Clefs are distinguished using \enumType{msrClefKind}:
 //______________________________________________________________________________
 
 enum class msrClefKind {
-  k_NoClef,
+  kClef_NO_,
 
   kClefTreble,
   kClefSoprano, kClefMezzoSoprano, kClefAlto, kClefTenor, kClefBaritone, kClefBass,
@@ -1877,7 +1877,7 @@ For example, at \figureRef{Three segments in a voice}, there are three segments:
 \class{msrNote} thus uses enumeration type \enumType{msrNoteKind}, defined in \msr{msrBasicTypes.h}, to distinguish them:
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrNoteKind {
-  k_NoNote,
+  kNote_NO_,
 
   // in measures
   kNoteRegularInMeasure,
@@ -1956,7 +1956,7 @@ A chord contains notes only, and can occur in measures, tuplets and grace notes 
 //______________________________________________________________________________
 
 enum class msrChordInKind {
-  k_NoChordIn,
+  kChordIn_NO_,
 
   kChordInMeasure,
   kChordInTuplet,
@@ -1981,7 +1981,7 @@ A tuplet can contain:
 Tuplets can occur in measures and other tuplets, hence \enumType{msrTupletInKind}:
 \begin{lstlisting}[language=CPlusPlus]
 enum class msrTupletInKind {
-  k_NoTupletIn,
+  kTupletIn_NO_,
 
   kTupletInMeasure,
   kTupletInTuplet

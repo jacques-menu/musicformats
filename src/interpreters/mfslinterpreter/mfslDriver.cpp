@@ -768,11 +768,11 @@ void mfslDriver::appendSelectLabelForToolLaunching (
   }
 }
 
-mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
+mfMusicformatsErrorKind mfslDriver::launchMfslTool_Pass2 ()
 {
-  mfMusicformatsError
+  mfMusicformatsErrorKind
     result =
-      mfMusicformatsError::k_NoError;
+      mfMusicformatsErrorKind::kMusicformatsError_NO_;
 
   mfAssert (
     __FILE__, __LINE__,
@@ -860,7 +860,7 @@ mfMusicformatsError mfslDriver::launchMfslTool_Pass2 ()
 
       if (commandExecutionResult) {
         result =
-          mfMusicformatsError::kErrorInvalidFile;
+          mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
 
       // sleep for some milliseconds

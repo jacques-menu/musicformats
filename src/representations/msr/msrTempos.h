@@ -14,10 +14,15 @@
 
 #include <list>
 
-#include "msrBasicTypes.h"
+#include "msrElements.h"
 #include "msrMeasureElements.h"
 
+#include "msrTemposEnumTypes.h"
+
 #include "msrBeams.h"
+#include "msrDurations.h"
+#include "msrPlacements.h"
+#include "msrTupletFactors.h"
 #include "msrWords.h"
 
 
@@ -102,38 +107,6 @@ typedef SMARTP<msrTempoNote> S_msrTempoNote;
 EXP ostream& operator << (ostream& os, const S_msrTempoNote& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrTempoTupletTypeKind {
-  kTempoTupletTypeNone,
-  kTempoTupletTypeStart, kTempoTupletTypeStop
-};
-
-string msrTempoTupletTypeKindAsString (
-  msrTempoTupletTypeKind tempoTupletTypeKind);
-
-ostream& operator << (ostream& os, const msrTempoTupletTypeKind& elt);
-
-enum class msrTempoTupletBracketKind {
-  kTempoTupletBracketYes, kTempoTupletBracketNo
-};
-
-string msrTempoTupletBracketKindAsString (
-  msrTempoTupletBracketKind tempoTupletBracketKind);
-
-ostream& operator << (ostream& os, const msrTempoTupletBracketKind& elt);
-
-enum class msrTempoTupletShowNumberKind {
-  kTempoTupletShowNumberActual,
-  kTempoTupletShowNumberBoth,
-  kTempoTupletShowNumberNone
-};
-
-string msrTempoTupletShowNumberKindAsString (
-  msrTempoTupletShowNumberKind tempoTupletShowNumberKind);
-
-ostream& operator << (ostream& os, const msrTempoTupletShowNumberKind& elt);
-
 class EXP msrTempoTuplet : public msrElement
 {
   public:
@@ -261,18 +234,6 @@ typedef SMARTP<msrTempoTuplet> S_msrTempoTuplet;
 EXP ostream& operator << (ostream& os, const S_msrTempoTuplet& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrTempoNotesRelationshipElementsKind {
-  kTempoNotesRelationshipElementsLeft,
-  kTempoNotesRelationshipElementsRight
-};
-
-string msrTempoNotesRelationshipElementsKindAsString (
-  msrTempoNotesRelationshipElementsKind tempoNotesRelationshipElementsKind);
-
-ostream& operator << (ostream& os, const msrTempoNotesRelationshipElementsKind& elt);
-
 class EXP msrTempoNotesRelationshipElements : public msrElement
 {
   public:
@@ -352,37 +313,8 @@ EXP ostream& operator << (ostream& os, const S_msrTempoNotesRelationshipElements
 //______________________________________________________________________________
 // data types
 
-enum class msrTempoKBeatUnitsKind {
-  k_NoTempoBeatUnits,
-  kTempoBeatUnitsWordsOnly,
-  kTempoBeatUnitsPerMinute,
-  kTempoBeatUnitsEquivalence,
-  kTempoNotesRelationship
-};
 
-string msrTempoKBeatUnitsKindAsString (
-  msrTempoKBeatUnitsKind tempoKind);
-
-ostream& operator << (ostream& os, const msrTempoKBeatUnitsKind& elt);
-
-enum class msrTempoParenthesizedKind {
-  kTempoParenthesizedYes, kTempoParenthesizedNo
-};
-
-string msrTempoParenthesizedKindAsString (
-  msrTempoParenthesizedKind tempoParenthesizedKind);
-
-ostream& operator << (ostream& os, const msrTempoParenthesizedKind& elt);
-
-enum class msrTempoNotesRelationshipKind {
-  kTempoNotesRelationshipNone, kTempoNotesRelationshipEquals
-};
-
-string msrTempoNotesRelationshipKindAsString (
-  msrTempoNotesRelationshipKind tempoNotesRelationshipKind);
-
-ostream& operator << (ostream& os, const msrTempoNotesRelationshipKind& elt);
-
+//______________________________________________________________________________
 class EXP msrTempo : public msrMeasureElement
 {
   public:

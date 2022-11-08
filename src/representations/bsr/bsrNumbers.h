@@ -2,6 +2,7 @@
 #define ___bsrNumbers___
 
 #include "bsrLineContentsElements.h"
+
 #include "bsrCellsLists.h"
 
 

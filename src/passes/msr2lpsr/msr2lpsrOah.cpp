@@ -123,7 +123,7 @@ void msr2lpsrScoreOutputKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrScoreOutputKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingLpsrScoreOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -345,7 +345,7 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalLpsrScoreOutputKindsMap.size ())),
             regex ("OUTPUT_KINDS"),
-            existingLpsrScoreOutputKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingLpsrScoreOutputKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           lpsrScoreOutputKindAsString (
             lpsrScoreOutputKindDefaultValue)),

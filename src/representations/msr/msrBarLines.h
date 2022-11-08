@@ -14,7 +14,6 @@
 
 #include <list>
 
-#include "msrBasicTypes.h"
 #include "msrMeasureElements.h"
 
 
@@ -82,7 +81,7 @@ ostream& operator << (ostream& os, const msrBarLineEndingTypeKind& elt);
 
 // category
 enum class msrBarLineCategoryKind {
-  k_NoBarLineCategory,
+  kBarLineCategory_NO_,
 
   kBarLineCategoryStandalone,
 

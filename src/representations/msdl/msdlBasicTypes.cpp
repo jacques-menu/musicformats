@@ -14,7 +14,7 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 #include "msdlBasicTypes.h"
 
 #include "enableTracingIfDesired.h"
@@ -104,7 +104,7 @@ msdlUserLanguageKind msdlUserLanguageKindFromString (const string& theString)
     ++gIndenter;
 
     s <<
-      existingMsdlUserLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -196,7 +196,7 @@ msdlCommentsTypeKind msdlCommentsTypeKindFromString (const string& theString)
     ++gIndenter;
 
     s <<
-      existingMsdlCommentsTypeKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 

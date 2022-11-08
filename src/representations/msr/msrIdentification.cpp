@@ -66,19 +66,19 @@ void msrIdentification::setIdentificationWorkNumber (
   fIdentificationWorkNumber = val;
 }
 
-void msrIdentification::setIdentificationWorkTitle (
+void msrIdentification::setIdentificationWorkCreditTypeTitle (
   int           inputLineNumber,
   const string& val)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceIdentification ()) {
     gLogStream <<
-      "Setting workTitle to \"" << val << "\"" <<
+      "Setting workCreditTypeTitle to \"" << val << "\"" <<
       endl;
   }
 #endif
 
-  fIdentificationWorkTitle = val;
+  fIdentificationWorkCreditTypeTitle = val;
 }
 
 void msrIdentification::setIdentificationOpus (
@@ -329,8 +329,8 @@ size_t msrIdentification::maxIdentificationNamesLength ()
     result = fIdentificationWorkNumber.size ();
   }
 
-  if (fIdentificationWorkTitle.size () > result) {
-    result = fIdentificationWorkTitle.size ();
+  if (fIdentificationWorkCreditTypeTitle.size () > result) {
+    result = fIdentificationWorkCreditTypeTitle.size ();
   }
 
   if (fIdentificationOpus.size () > result) {
@@ -524,7 +524,7 @@ string msrIdentification::asString () const
   s <<
     "[ Identification" <<
     ", workNumber: \" " <<  fIdentificationWorkNumber << "\"" <<
-    ", workTitle: \" " <<  fIdentificationWorkTitle << "\"" <<
+    ", workCreditTypeTitle: \" " <<  fIdentificationWorkCreditTypeTitle << "\"" <<
     ", opus: \" " <<  fIdentificationOpus << "\"" <<
     ", movementNumber: \" " <<  fIdentificationMovementNumber << "\"" <<
     ", movementTitle: \" " <<  fIdentificationMovementTitle << "\"" <<
@@ -557,11 +557,11 @@ void msrIdentification::print (ostream& os) const
     emptyIdentification = false;
   }
 
-  if (fIdentificationWorkTitle.size ()) {
+  if (fIdentificationWorkCreditTypeTitle.size ()) {
     os << left <<
       setw (fieldWidth) <<
-      "fIdentificationWorkTitle" << " : \"" <<
-      fIdentificationWorkTitle <<
+      "fIdentificationWorkCreditTypeTitle" << " : \"" <<
+      fIdentificationWorkCreditTypeTitle <<
       "\"" <<
       endl;
 

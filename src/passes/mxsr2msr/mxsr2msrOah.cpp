@@ -166,7 +166,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
   msrClefKind
     originalClefKind =
       msrClefKindFromString (
-        K_NO_INPUT_LINE_NUMBER,
+        K_MF_NO_INPUT_LINE_NUMBER,
         originalClefName);
 
   map<msrClefKind, msrClefKind>::iterator
@@ -190,7 +190,7 @@ void msrReplaceClefAtom::applyAtomWithValue (
     msrClefKind
       destinationClefKind =
         msrClefKindFromString (
-          K_NO_INPUT_LINE_NUMBER,
+          K_MF_NO_INPUT_LINE_NUMBER,
           destinationClefName);
 
     fClefKindToClefKindMapVariable [originalClefKind] =
@@ -764,7 +764,7 @@ There can be several occurrences of this option.)",
 //           gIndenter.indentMultiLineString (
 //             foundString,
 //             os);
-          existingClefKindsNames (K_NAMES_LIST_MAX_LENGTH)),
+          existingClefKindsNames (K_MF_NAMES_LIST_MAX_LENGTH)),
         "REPLACE_CLEF_SPEC",
         "fReplaceClefKindToClefKindMapVariable",
         fReplaceClefKindToClefKindMapVariable));

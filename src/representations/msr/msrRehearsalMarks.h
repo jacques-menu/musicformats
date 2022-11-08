@@ -12,8 +12,9 @@
 #ifndef ___msrRehearsalMarks___
 #define ___msrRehearsalMarks___
 
-#include "msrBasicTypes.h"
 #include "msrMeasureElements.h"
+
+#include "msrPlacements.h"
 
 
 namespace MusicFormats

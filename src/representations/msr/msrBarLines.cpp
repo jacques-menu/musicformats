@@ -282,8 +282,8 @@ string msrBarLineCategoryKindAsString (
   string result;
 
   switch (barLineCategoryKind) {
-    case msrBarLineCategoryKind::k_NoBarLineCategory:
-      result = "k_NoBarLineCategory";
+    case msrBarLineCategoryKind::kBarLineCategory_NO_:
+      result = "kBarLineCategory_NO_";
       break;
     case msrBarLineCategoryKind::kBarLineCategoryStandalone:
       result = "kBarLineCategoryStandalone";

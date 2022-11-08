@@ -20,7 +20,8 @@
 
 #include "mfOnOff.h"
 
-#include "msrBasicTypes.h"
+#include "msrColors.h"
+#include "msrLengths.h"
 #include "msrMidi.h"
 
 #include "oahBasicTypes.h"
@@ -417,7 +418,7 @@ enum class oahVersionKind {
 string oahVersionKindAsString (
   oahVersionKind versionKind);
 
-ostream& operator << (ostream& os, oahVersionKind& elt);
+ostream& operator << (ostream& os, const oahVersionKind& elt);
 
 //______________________________________________________________________________
 class EXP oahVersionAtom : public oahPureHelpAtomWithoutAValue

@@ -30,6 +30,36 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string msrSpannerTypeKindAsString (
+  msrSpannerTypeKind spannerTypeKind)
+{
+  string result;
+
+  switch (spannerTypeKind) {
+    case msrSpannerTypeKind::kSpannerType_NO_:
+      result = "kSpannerType_NO_";
+      break;
+    case msrSpannerTypeKind::kSpannerTypeStart:
+      result = "kSpannerTypeStart";
+      break;
+    case msrSpannerTypeKind::kSpannerTypeStop:
+      result = "kSpannerTypeStop";
+      break;
+    case msrSpannerTypeKind::kSpannerTypeContinue:
+      result = "kSpannerTypeContinue";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrSpannerTypeKind& elt)
+{
+  os << msrSpannerTypeKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrSpanner msrSpanner::create (
   int                inputLineNumber,
   int                spannerNumber,

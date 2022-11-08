@@ -2,9 +2,10 @@
 #define ___msrBeatRepeats___
 
 #include "msrElements.h"
+#include "msrSegmentElements.h"
+
 #include "msrSegments.h"
 #include "msrVoices.h"
-#include "msrSegmentElements.h"
 
 
 namespace MusicFormats

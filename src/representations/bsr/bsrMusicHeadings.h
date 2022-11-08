@@ -4,10 +4,11 @@
 #include "smartpointer.h"
 
 #include "bsrLines.h"
+
 #include "bsrCellsLists.h"
-#include "bsrTimeSignatures.h"
 #include "bsrKeys.h"
 #include "bsrTempos.h"
+#include "bsrTimeSignatures.h"
 
 
 namespace MusicFormats

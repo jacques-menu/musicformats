@@ -55,7 +55,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError msrScore2brailleWithHandler (
+EXP mfMusicformatsErrorKind msrScore2brailleWithHandler (
   S_msrScore   theMsrScore,
   string       passNumber1a,
   string       passDescription1a,
@@ -103,11 +103,11 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
     }
     catch (msr2bsrException& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
     // display the first BSR score if requested
@@ -147,11 +147,11 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
     }
     catch (bsr2finalizedBsrException& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
     // display the finalized BSR score if requested
@@ -213,11 +213,11 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
       }
       catch (bsr2brailleException& e) {
       mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
     }
 
@@ -275,11 +275,11 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
       }
       catch (bsr2brailleException& e) {
         mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
       catch (std::exception& e) {
         mfDisplayException (e, gOutputStream);
-        return mfMusicformatsError::kErrorInvalidFile;
+        return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
       }
 
       // close output file
@@ -296,7 +296,7 @@ EXP mfMusicformatsError msrScore2brailleWithHandler (
     }
   }
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 

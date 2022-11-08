@@ -3,8 +3,9 @@
 
 #include "msrDynamics.h"
 
-#include "bsrCellsLists.h"
 #include "bsrLineContentsElements.h"
+
+#include "bsrCellsLists.h"
 
 namespace MusicFormats
 {

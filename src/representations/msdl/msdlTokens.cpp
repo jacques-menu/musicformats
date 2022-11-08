@@ -41,7 +41,7 @@ string msdlTokenKindAsString (
   stringstream s;
 
   switch (tokenKind) {
-    case msdlTokenKind::k_NoToken:
+    case msdlTokenKind::kToken_NO_:
       s << "*noToken*";
       break;
 
@@ -313,7 +313,7 @@ string msdlTokenKindAsMsdlString (
   string result;
 
   switch (tokenKind) {
-    case msdlTokenKind::k_NoToken:
+    case msdlTokenKind::kToken_NO_:
       result = "*NoToken*";
       break;
 
@@ -485,11 +485,11 @@ string msdlTokenKindAsMsdlString (
 msdlTokenKind msdlTokenKindFromKeywordKind (
   msdlKeywordKind keywordKind)
 {
-  msdlTokenKind result = msdlTokenKind::k_NoToken;
+  msdlTokenKind result = msdlTokenKind::kToken_NO_;
 
   switch (keywordKind) {
-    case msdlKeywordKind::k_NoKeywordKind:
-      result = msdlTokenKind::k_NoToken;
+    case msdlKeywordKind::kKeyword_NO_:
+      result = msdlTokenKind::kToken_NO_;
       break;
 
     case msdlKeywordKind::kKeywordTitle:
@@ -579,26 +579,26 @@ string existingTokensInLanguage (
 
   // select the relevant keywords names map
   switch (keywordsLanguageKind) {
-    case msdlKeywordsLanguageKind::k_NoKeywordsLanguage:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
       break;
 
-    case msdlKeywordsLanguageKind::kKeywordsEnglish:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageEnglish:
       keywordsNamesMapPTR = &gGlobalEnglishKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsFrench:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageFrench:
       keywordsNamesMapPTR = &gGlobalFrenchKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsItalian:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageItalian:
       keywordsNamesMapPTR = &gGlobalItalianKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsGerman:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageGerman:
       keywordsNamesMapPTR = &gGlobalGermanKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsSpanish:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageSpanish:
       keywordsNamesMapPTR = &gGlobalSpanishKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsNederlands:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageNederlands:
       keywordsNamesMapPTR = &gGlobalDutchKeywordsNamesMap;
       break;
   } // switch
@@ -979,7 +979,7 @@ msdlTokenDescription::~msdlTokenDescription ()
 
 msdlKeywordKind msdlTokenDescription::getKeywordKind () const
 {
-  msdlKeywordKind result = msdlKeywordKind::k_NoKeywordKind;
+  msdlKeywordKind result = msdlKeywordKind::kKeyword_NO_;
 
   switch (fTokenDescriptionKind) {
     case msdlTokenDescriptionKind::kTokenKeyword:
@@ -1369,7 +1369,7 @@ ostream& operator << (ostream& os, const msdlTokenDescription& elt)
 
 //_______________________________________________________________________________
 msdlToken::msdlToken ()
-    : fTokenKind (msdlTokenKind::k_NoToken)
+    : fTokenKind (msdlTokenKind::kToken_NO_)
 {
   initializeToken ();
 }
@@ -1443,7 +1443,7 @@ string msdlToken::asString () const
     ' ';
 
   switch (fTokenKind) {
-    case msdlTokenKind::k_NoToken:
+    case msdlTokenKind::kToken_NO_:
       // should not occur
       break;
 
@@ -1618,7 +1618,7 @@ string msdlToken::asMsdlString (
   stringstream s;
 
   switch (fTokenKind) {
-    case msdlTokenKind::k_NoToken:
+    case msdlTokenKind::kToken_NO_:
       // should not occur
       break;
 
@@ -1799,7 +1799,7 @@ void msdlToken::print (ostream& os) const
     endl;
 
   switch (fTokenKind) {
-    case msdlTokenKind::k_NoToken:
+    case msdlTokenKind::kToken_NO_:
       // should not occur
       break;
 

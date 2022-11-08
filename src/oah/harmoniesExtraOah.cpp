@@ -972,7 +972,7 @@ void extraShowHarmonyAnalysisAtom::applyAtomWithValue (
       msrHarmonyKindFromString (
         harmonyName);
 
-  if (harmonyKind == msrHarmonyKind::k_NoHarmony) {
+  if (harmonyKind == msrHarmonyKind::kHarmony_NO_) {
     stringstream s;
 
     s <<
