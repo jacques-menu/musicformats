@@ -219,7 +219,7 @@ S_bsrCellsList bsrDynamic::buildCellsList () const
           bsrCellsList::create (
             fInputLineNumber, kCellS, kCellF, kCellF, kCellZ));
       break;
-    case msrDynamicKind::k_NoDynamics:
+    case msrDynamicKind::kDynamic_NO_:
       result =
         bsrCellsList::create (fInputLineNumber);
   } // switch

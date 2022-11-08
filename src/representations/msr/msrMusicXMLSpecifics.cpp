@@ -41,6 +41,81 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// XMLLang
+msrXMLLangKind msrXMLLangKindFromString (
+  int           inputLineNumber,
+  const string& XMLLangString)
+{
+  msrXMLLangKind
+    result = msrXMLLangKind::kXMLLangIt; // default value
+
+  if      (XMLLangString == "it")
+    result = msrXMLLangKind::kXMLLangIt;
+  else if (XMLLangString == "en")
+    result = msrXMLLangKind::kXMLLangEn;
+  else if (XMLLangString == "de")
+    result = msrXMLLangKind::kXMLLangDe;
+  else if (XMLLangString == "fr")
+    result = msrXMLLangKind::kXMLLangFr;
+  else if (XMLLangString == "ja")
+    result = msrXMLLangKind::kXMLLangJa;
+  else if (XMLLangString == "la")
+    result = msrXMLLangKind::kXMLLangLa;
+  else {
+    if (XMLLangString.size ()) {
+      stringstream s;
+
+      s <<
+        "xml:lang value '" << XMLLangString <<
+        "' should be 'it', 'en', 'de' or 'fr'";
+
+      msrError (
+        gGlobalServiceRunData->getInputSourceName (),
+        inputLineNumber,
+        __FILE__, __LINE__,
+        s.str ());
+    }
+  }
+
+  return result;
+}
+
+string msrXMLLangKindAsString (
+  msrXMLLangKind XMLLangKind)
+{
+  string result;
+
+  switch (XMLLangKind) {
+    case msrXMLLangKind::kXMLLangIt:
+      result = "it";
+      break;
+    case msrXMLLangKind::kXMLLangEn:
+      result = "en";
+      break;
+    case msrXMLLangKind::kXMLLangDe:
+      result = "de";
+      break;
+    case msrXMLLangKind::kXMLLangFr:
+      result = "fr";
+      break;
+    case msrXMLLangKind::kXMLLangJa:
+      result = "ja";
+      break;
+    case msrXMLLangKind::kXMLLangLa:
+      result = "la";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrXMLLangKind& elt)
+{
+  os << msrXMLLangKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrPageLayout msrPageLayout::create (
   int inputLineNumber)
 {
@@ -1195,8 +1270,8 @@ string msrLineWidthTypeKindAsString (
   string result;
 
   switch (lineWidthTypeKind) {
-    case msrLineWidthTypeKind::k_NoLineWidthType:
-      result = "k_NoLineWidthType";
+    case msrLineWidthTypeKind::kLineWidthType_NO_:
+      result = "kLineWidthType_NO_";
       break;
     case msrLineWidthTypeKind::kLineWidthTypeBeam:
       result = "kLineWidthTypeBeam";
@@ -1419,8 +1494,8 @@ string msrNoteSizeTypeKindAsString (
   string result;
 
   switch (noteSizeTypeKind) {
-    case msrNoteSizeTypeKind::k_NoNoteSizeType:
-      result = "k_NoNoteSizeType";
+    case msrNoteSizeTypeKind::kNote_NO_SizeType:
+      result = "kNote_NO_SizeType";
       break;
     case msrNoteSizeTypeKind::kNoteSizeTypeCue:
       result = "kNoteSizeTypeCue";
@@ -1582,8 +1657,8 @@ string msrDistanceTypeKindAsString (
   string result;
 
   switch (distanceTypeKind) {
-    case msrDistanceTypeKind::k_NoDistanceType:
-      result = "k_NoDistanceType";
+    case msrDistanceTypeKind::kDistanceType_NO_:
+      result = "kDistanceType_NO_";
       break;
     case msrDistanceTypeKind::kDistanceTypeHyphen:
       result = "kDistanceTypeHyphen";
@@ -1742,8 +1817,8 @@ string msrGlyphTypeKindAsString (
   string result;
 
   switch (glyphTypeKind) {
-    case msrGlyphTypeKind::k_NoGlyphType:
-      result = "k_NoGlyphType";
+    case msrGlyphTypeKind::kGlyphType_NO_:
+      result = "kGlyphType_NO_";
       break;
     case msrGlyphTypeKind::kGlyphTypeQuarterRest:
       result = "kGlyphTypeQuarterRest";
@@ -1938,8 +2013,8 @@ string msrOtherAppearanceTypeKindAsString (
   string result;
 
   switch (otherAppearanceTypeKind) {
-    case msrOtherAppearanceTypeKind::k_NoOtherAppearanceTypeKind:
-      result = "k_NoOtherAppearanceTypeKind";
+    case msrOtherAppearanceTypeKind::kOtherAppearanceType_NO_:
+      result = "kOtherAppearanceType_NO_";
       break;
   } // switch
 

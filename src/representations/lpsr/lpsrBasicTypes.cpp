@@ -24,7 +24,7 @@
 #include "mfServiceRunData.h"
 #include "mfStringsHandling.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 #include "lpsrBasicTypes.h"
 
 #include "oahOah.h"
@@ -1191,7 +1191,7 @@ string msrSemiTonesPitchAndOctaveAsLilypondString (
   s << (*pitchesNamesMapPTR) [quarterTonesPitchKind];
 
   switch (semiTonesPitchAndOctave->getOctaveKind ()) {
-    case msrOctaveKind::k_NoOctave:
+    case msrOctaveKind::kOctave_NO_:
       s << "*** noOctave ***";
       break;
     case msrOctaveKind::kOctave0:

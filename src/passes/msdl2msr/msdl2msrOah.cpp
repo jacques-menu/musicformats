@@ -185,7 +185,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -218,7 +218,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlUserLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingMsdlUserLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlUserLanguageKindAsString (
             msdlUserLanguageKindDefaultValue)),
@@ -252,7 +252,7 @@ The default is 'DEFAULT_VALUE'.)",
 //           gIndenter.indentMultiLineString (
 //             foundString,
 //             os);
-            existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -264,7 +264,7 @@ The default is 'DEFAULT_VALUE'.)",
 
   const msdlKeywordsLanguageKind
     msdlKeywordsInputLanguageKindDefaultValue =
-      msdlKeywordsLanguageKind::kKeywordsEnglish; // MSDL default
+      msdlKeywordsLanguageKind::kKeywordsLanguageEnglish; // MSDL default
 
   fMsdlKeywordsInputLanguageKind =
     msdlKeywordsInputLanguageKindDefaultValue;
@@ -286,7 +286,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlKeywordsLanguageKindAsString (
             msdlKeywordsInputLanguageKindDefaultValue)),
@@ -332,7 +332,7 @@ when performing lexical analysis of the whole input at once.)",
 
   // MSDL keywords translation language
 
-  fMsdlKeywordsConversionLanguageKind = msdlKeywordsLanguageKind::k_NoKeywordsLanguage;
+  fMsdlKeywordsConversionLanguageKind = msdlKeywordsLanguageKind::kKeywordsLanguage_NO_;
 
   subGroup->
     appendAtomToSubGroup (
@@ -352,7 +352,7 @@ The default is not to translate the keywords.)",
 //           gIndenter.indentMultiLineString (
 //             foundString,
 //             os);
-          existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+          existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         "LANGUAGE",
         "fMsdlKeywordsConversionLanguageKind",
         fMsdlKeywordsConversionLanguageKind));
@@ -383,7 +383,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingMsdlCommentsTypeKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingMsdlCommentsTypeKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msdlCommentsTypeKindAsString (
             msdlCommentsTypeKindDefaultValue)),

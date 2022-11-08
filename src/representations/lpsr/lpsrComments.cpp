@@ -108,7 +108,7 @@ void lpsrComment::acceptOut (basevisitor* v)
 void lpsrComment::browseData (basevisitor* v)
 {}
 
-string lpsrComment::lpsrCommentGapAfterwardsKindAsString (
+string lpsrCommentGapAfterwardsKindAsString (
   lpsrCommentGapAfterwardsKind commentGapAfterwardsKind)
 {
   string result;
@@ -143,7 +143,7 @@ void lpsrComment::print (ostream& os) const
     "% " << fContents <<
     endl;
 
-  if (fCommentGapKind == kCommentGapAfterwardsYes)
+  if (fCommentGapKind == lpsrCommentGapAfterwardsKind::kCommentGapAfterwardsYes)
     os << endl;
 
   --gIndenter;

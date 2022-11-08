@@ -12,10 +12,10 @@
 #ifndef ___lpsrHeaders___
 #define ___lpsrHeaders___
 
-#include "msrBasicTypes.h"
-#include "msrIdentification.h"
-
 #include "lpsrElements.h"
+
+// #include "msrBasicTypes.h"
+#include "msrIdentification.h"
 
 
 

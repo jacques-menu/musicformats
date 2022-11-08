@@ -3,19 +3,24 @@
 
 #include <iomanip>
 
+#include "msrTupletElements.h"
+
 #include "msrArticulations.h"
 #include "msrBeams.h"
 #include "msrChords.h"
+#include "msrColors.h"
 #include "msrEyeGlasses.h"
 #include "msrFiguredBasses.h"
 #include "msrGlissandos.h"
 #include "msrGraceNotesGroups.h"
 #include "msrHarmonies.h"
+#include "msrKeys.h"
 #include "msrLigatures.h"
 #include "msrLyrics.h"
 #include "msrMeasures.h"
 #include "msrOrnaments.h"
 #include "msrParts.h"
+#include "msrPrintObjects.h"
 #include "msrSingleTremolos.h"
 #include "msrSlashes.h"
 #include "msrSlides.h"
@@ -25,7 +30,6 @@
 #include "msrStems.h"
 #include "msrTechnicals.h"
 #include "msrTies.h"
-#include "msrTupletElements.h"
 #include "msrTuplets.h"
 #include "msrVoices.h"
 #include "msrWords.h"
@@ -33,6 +37,109 @@
 
 namespace MusicFormats
 {
+
+// notes
+//______________________________________________________________________________
+
+/*
+  Measures can contain either:
+    individual notes;
+    tuplets;
+    chords;
+    double tremolos.
+
+  Tuplets can contain either:
+    individual notes;
+    other tuplets;
+    chords.
+
+  Chords contain:
+    individual notes.
+
+  Grace notes groups can contain either (no tuplets here):
+    individual notes;
+    chords.
+
+  Double tremolos can contain either:
+    individual notes;
+    chords.
+
+  Notes can have attached:
+    grace notes groups (before and after the note).
+
+  Attempting to use classes to describe this graph would be a nightmare:
+  we thus use enum class types and uplinks to handles the variants.
+*/
+
+enum class msrNoteKind {
+  kNote_NO_,
+
+  // in measures
+  kNoteRegularInMeasure,
+  kNoteRestInMeasure,
+  kNoteSkipInMeasure, // an invisible rest
+  kNoteUnpitchedInMeasure,
+
+  // in chords
+  kNoteRegularInChord,
+
+  // in tuplets
+  kNoteRegularInTuplet,
+  kNoteRestInTuplet,
+  kNoteUnpitchedInTuplet,
+
+  // in grace notes groups
+  kNoteRegularInGraceNotesGroup,
+  kNoteSkipInGraceNotesGroup, // used to circumvent LilyPond issue #34
+
+  // in chords in grace notes groups
+  kNoteInChordInGraceNotesGroup,
+
+  // in tuplets in grace notes groups
+  kNoteInTupletInGraceNotesGroup,
+
+  // in double-tremolos
+  kNoteInDoubleTremolo
+};
+
+EXP string msrNoteKindAsString (
+  msrNoteKind noteKind);
+
+ostream& operator << (ostream& os, const msrNoteKind& elt);
+
+// solo notes or rests
+//______________________________________________________________________________
+
+/*
+  A solo note or rest is one that is played alone,
+  with no other note or rest being played at the same time
+
+  In a voice, a solo note is one not a member of a chord,
+  and a rest is always a solo note
+
+  In a staff, a solo note
+*/
+
+enum class msrSoloNoteOrRestInVoiceKind {
+  kSoloNoteOrRestInVoiceYes,
+  kSoloNoteOrRestInVoiceNo
+};
+
+string msrSoloNoteOrRestInVoiceKindAsString (
+  msrSoloNoteOrRestInVoiceKind soloNoteOrRestInVoiceKind);
+
+ostream& operator << (ostream& os, const msrSoloNoteOrRestInVoiceKind& elt);
+
+enum class msrSoloNoteOrRestInStaffKind {
+  kSoloNoteOrRestInStaffYes,
+  kSoloNoteOrRestInStaffPartially,
+  kSoloNoteOrRestInStaffNo
+};
+
+string msrSoloNoteOrRestInStaffKindAsString (
+  msrSoloNoteOrRestInStaffKind soloNoteOrRestInStaffKind);
+
+ostream& operator << (ostream& os, const msrSoloNoteOrRestInStaffKind& elt);
 
 //______________________________________________________________________________
 class   msrGlissando;

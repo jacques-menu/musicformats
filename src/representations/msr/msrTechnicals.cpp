@@ -30,6 +30,33 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string msrTechnicalTypeKindAsString (
+  msrTechnicalTypeKind technicalTypeKind)
+{
+  string result;
+
+  switch (technicalTypeKind) {
+    case msrTechnicalTypeKind::kTechnicalType_NO_:
+      result = "kTechnicalType_NO_";
+      break;
+    case msrTechnicalTypeKind::kTechnicalTypeStart:
+      result = "kTechnicalTypeStart";
+      break;
+    case msrTechnicalTypeKind::kTechnicalTypeStop:
+      result = "kTechnicalTypeStop";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTechnicalTypeKind& elt)
+{
+  os << msrTechnicalTypeKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrTechnical msrTechnical::create (
   int              inputLineNumber,
   msrTechnicalKind technicalKind,

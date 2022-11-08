@@ -33,7 +33,6 @@
 
 using namespace std;
 
-
 namespace MusicFormats
 {
 
@@ -211,9 +210,9 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
 {
 /* JMI
   if (
-    fIdentification->getIdentificationWorkTitle ().size ()
+    fIdentification->getIdentificationWorkCreditTypeTitle ().size ()
       &&
-    gGlobalMsrOahGroup->getUseFilenameAsWorkTitle ()
+    gGlobalMsrOahGroup->getUseFilenameAsWorkCreditTypeTitle ()
   ) {
     string
       inputSourceName =
@@ -290,7 +289,7 @@ void msrBook::fetchIdentificationFromCreditsIfAny ( // THROW AWAY JMI ???
 #endif
 
                   fIdentification->
-                    setIdentificationWorkTitle (
+                    setIdentificationWorkCreditTypeTitle (
                       inputLineNumber,
                       creditWordsContents);
                   break;
@@ -532,7 +531,7 @@ void msrBook::print (ostream& os) const
     endl<<
 
     setw (fieldWidth) <<
-    "fBookPartNamesMaxLength" <<  " : " <<
+    "fBookCreditTypePartNamesMaxLength" <<  " : " <<
     fBookElementNamesMaxLength <<
     endl<<
 
@@ -726,7 +725,7 @@ void msrBook::printShort (ostream& os) const
     endl<<
 
     setw (fieldWidth) <<
-    "fBookPartNamesMaxLength" <<  " : " <<
+    "fBookCreditTypePartNamesMaxLength" <<  " : " <<
     fBookElementNamesMaxLength <<
     endl<<
 
@@ -1028,7 +1027,7 @@ ostream& operator << (ostream& os, const S_msrBook& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

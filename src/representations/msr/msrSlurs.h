@@ -14,11 +14,27 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats
 {
+
+// slurs
+// ------------------------------------------------------
+
+enum class msrSlurTypeKind {
+  kSlurType_NO_,
+
+  kSlurTypeRegularStart, kSlurTypeRegularContinue, kSlurTypeRegularStop,
+
+  kSlurTypePhrasingStart, kSlurTypePhrasingContinue, kSlurTypePhrasingStop
+};
+
+string msrSlurTypeKindAsString (
+  msrSlurTypeKind slurTypeKind);
+
+ostream& operator << (ostream& os, const msrSlurTypeKind& elt);
 
 //______________________________________________________________________________
 class EXP msrSlur : public msrElement

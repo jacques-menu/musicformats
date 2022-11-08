@@ -12,7 +12,7 @@
 #ifndef ___msrSegnos___
 #define ___msrSegnos___
 
-#include "msrMeasures.h"
+#include "msrMeasureElements.h"
 
 
 namespace MusicFormats

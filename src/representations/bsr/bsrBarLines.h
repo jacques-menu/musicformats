@@ -1,8 +1,9 @@
 #ifndef ___bsrBarLines___
 #define ___bsrBarLines___
 
-#include "bsrCellsLists.h"
 #include "bsrLineContentsElements.h"
+
+#include "bsrCellsLists.h"
 
 namespace MusicFormats
 {

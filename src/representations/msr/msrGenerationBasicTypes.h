@@ -9,18 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrGenerationAPIs___
-#define ___msrGenerationAPIs___
-
-//#include <ostream>
-
-//#include <map>
-
-//#include "exports.h"
-//#include "smartpointer.h"
-//#include "basevisitor.h"
-
-
+#ifndef ___msrGenerationBasicTypes___
+#define ___msrGenerationBasicTypes___
 
 #include "oahBasicTypes.h"
 
@@ -39,7 +29,7 @@ enum class msrGenerationAPIKind {
 EXP extern string msrGenerationAPIKindAsString (
   msrGenerationAPIKind generationAPIKind);
 
-ostream& operator << (ostream& os, msrGenerationAPIKind& elt);
+ostream& operator << (ostream& os, const msrGenerationAPIKind& elt);
 
 EXP extern msrGenerationAPIKind msrGenerationAPIKindFromString (
   const string& theString);

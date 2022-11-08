@@ -162,7 +162,7 @@ string lpsrHeader::asString () const
     "[LpsrHeader" <<
     ", lilypondTitle: \" " <<  fLilypondTitle << "\"" <<
 //    ", workNumber: \" " <<  fWorkNumber << "\"" <<
-//    ", workTitle: \" " <<  fWorkTitle << "\"" <<
+//    ", workCreditTypeTitle: \" " <<  fWorkCreditTypeTitle << "\"" <<
     ", lilypondOpus: \" " <<  fLilypondOpus << "\"" <<
 //    ", movementNumber: \" " <<  fMovementNumber << "\"" <<
 //    ", movementTitle: \" " <<  fMovementTitle << "\"" <<

@@ -1,9 +1,9 @@
 #ifndef ___msrMultipleFullBarRests___
 #define ___msrMultipleFullBarRests___
 
-#include "msrElements.h"
-#include "msrMeasures.h"
 #include "msrSegmentElements.h"
+
+// #include "msrMeasures.h"
 
 
 namespace MusicFormats

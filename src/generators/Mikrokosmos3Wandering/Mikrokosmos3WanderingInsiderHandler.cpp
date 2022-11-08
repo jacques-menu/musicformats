@@ -159,7 +159,7 @@ R"(Usage: Mikrokosmos3Wandering [option]*
     endl;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       s <<
         "The help below is available whichever output is produced";
       break;
@@ -189,7 +189,7 @@ string Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingAboutInformatio
   size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur
       break;
 
@@ -217,7 +217,7 @@ string Mikrokosmos3WanderingInsiderHandler::Mikrokosmos3WanderingAboutInformatio
   string headPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should only occur if the run is a pure help one
       headPart =
 R"(What Mikrokosmos3Wandering does:
@@ -254,7 +254,7 @@ R"(
   string specificPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -409,7 +409,7 @@ void Mikrokosmos3WanderingInsiderHandler::createTheMikrokosmos3WanderingOptionGr
   */
 
   switch (mfMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -572,9 +572,9 @@ string Mikrokosmos3WanderingInsiderHandler::fetchOutputFileNameFromTheOptions ()
 
     // add the output file name suffix
     switch (fMultiGenerationOutputKind) {
-      case mfMultiGenerationOutputKind::k_NoGeneration:
+      case mfMultiGenerationOutputKind::kGeneration_NO_:
         // should not occur
-        outputFileName = "___k_NoGeneration___";
+        outputFileName = "___kGeneration_NO____";
         break;
 
       case mfMultiGenerationOutputKind::kGenerationLilypond:
@@ -890,7 +890,7 @@ R"(Options that are used by Mikrokosmos3Wandering are grouped here.)",
 // JMI  fGenerationAPIKind = msrGenerationAPIKind::kMsrFunctionsAPIKind; // default value
   fGenerationAPIKind = msrGenerationAPIKind::kMsrStringsAPIKind; // default value
 
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::k_NoGeneration;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_NO_;
 
   initializeMikrokosmos3WanderingInsiderOahGroup ();
 }

@@ -451,7 +451,7 @@ string msrSyllable::syllableWholeNotesAsMsrString () const
 
   if (fSyllableUpLinkToNote) { // JMI
     switch (fSyllableUpLinkToNote->getNoteKind ()) {
-      case msrNoteKind::k_NoNote:
+      case msrNoteKind::kNote_NO_:
       case msrNoteKind::kNoteRestInMeasure:
       case msrNoteKind::kNoteUnpitchedInMeasure:
       case msrNoteKind::kNoteRegularInMeasure:

@@ -582,11 +582,11 @@ void mfslDriver::scanEnd ()
 }
 
 //_______________________________________________________________________________
-mfMusicformatsError launchMfslInterpreter ()
+mfMusicformatsErrorKind launchMfslInterpreter ()
 {
-  mfMusicformatsError
+  mfMusicformatsErrorKind
     result =
-      mfMusicformatsError::k_NoError;
+      mfMusicformatsErrorKind::kMusicformatsError_NO_;
 
   // the driver
   mfslDriver
@@ -600,7 +600,7 @@ mfMusicformatsError launchMfslInterpreter ()
   // launch the tool
   if (parseResult != 0) {
     result =
-      mfMusicformatsError::kErrorInvalidFile;
+      mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   else {

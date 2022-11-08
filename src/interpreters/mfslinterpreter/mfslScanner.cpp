@@ -381,7 +381,7 @@ typedef unsigned int flex_uint32_t;
 /* %endif */
 
 /* TODO: this is always defined, so inline it */
-#define yyconst const
+#define yyconst
 
 #if defined(__GNUC__) && __GNUC__ >= 3
 #define yynoreturn __attribute__((__noreturn__))
@@ -3038,11 +3038,11 @@ void mfslDriver::scanEnd ()
 }
 
 //_______________________________________________________________________________
-mfMusicformatsError launchMfslInterpreter ()
+mfMusicformatsErrorKind launchMfslInterpreter ()
 {
-  mfMusicformatsError
+  mfMusicformatsErrorKind
     result =
-      mfMusicformatsError::k_NoError;
+      mfMusicformatsErrorKind::kMusicformatsError_NO_;
 
   // the driver
   mfslDriver
@@ -3056,7 +3056,7 @@ mfMusicformatsError launchMfslInterpreter ()
   // launch the tool
   if (parseResult != 0) {
     result =
-      mfMusicformatsError::kErrorInvalidFile;
+      mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   else {

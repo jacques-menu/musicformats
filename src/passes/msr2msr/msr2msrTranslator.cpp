@@ -132,7 +132,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsr (
   // create the resulting MSR score
   fResultingNewMsrScore =
     msrScore::create (
-      K_NO_INPUT_LINE_NUMBER,
+      K_MF_NO_INPUT_LINE_NUMBER,
       "msrScore::create()");
 
   // create a msrScore browser
@@ -169,7 +169,7 @@ S_msrScore msr2msrTranslator::translateMsrToMsrAlongPathToVoice (
   // create the resulting MSR score
   fResultingNewMsrScore =
     msrScore::create (
-      K_NO_INPUT_LINE_NUMBER,
+      K_MF_NO_INPUT_LINE_NUMBER,
       "msrScore::create()");
 
   // create a msrScore browser
@@ -2031,7 +2031,7 @@ void msr2msrTranslator::visitStart (S_msrSyllable& elt)
 //           words =
 //             msrWords::create (
 //               inputLineNumber,
-//               msrPlacementKind::k_NoPlacement,                      // default value
+//               msrPlacementKind::kPlacement_NO_,                      // default value
 //               wordsValue,
 //               msrJustifyKind::kJustifyNone,                         // default value
 //               msrHorizontalAlignmentKind::kHorizontalAlignmentNone, // default value
@@ -2740,7 +2740,7 @@ void msr2msrTranslator::visitStart (S_msrSpanner& elt)
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
       break;
-    case msrSpannerTypeKind::k_NoSpannerType:
+    case msrSpannerTypeKind::kSpannerType_NO_:
       break;
   } // switch
 
@@ -4083,7 +4083,7 @@ void msr2msrTranslator::visitEnd (S_msrNote& elt)
 
   switch (noteKind) {
 
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:

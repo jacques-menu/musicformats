@@ -36,35 +36,35 @@ string msrCreditTypeKindAsString (
   string result;
 
   switch (creditTypeKind) {
-    case msrCreditTypeKind::k_NoCreditType:
-      result = "k_NoCreditType";
+    case msrCreditTypeKind::kCreditType_NO_:
+      result = "kCreditType_NO_";
       break;
-    case msrCreditTypeKind::kPageNumber:
-      result = "kPageNumber";
+    case msrCreditTypeKind::kCreditTypeNumber:
+      result = "kCreditTypeNumber";
       break;
-    case msrCreditTypeKind::kTitle:
-      result = "kTitle";
+    case msrCreditTypeKind::kCreditTypeTitle:
+      result = "kCreditTypeTitle";
       break;
-    case msrCreditTypeKind::kSubtitle:
-      result = "kSubtitle";
+    case msrCreditTypeKind::kCreditTypeSubtitle:
+      result = "kCreditTypeSubtitle";
       break;
-    case msrCreditTypeKind::kComposer:
-      result = "kComposer";
+    case msrCreditTypeKind::kCreditTypeComposer:
+      result = "kCreditTypeComposer";
       break;
-    case msrCreditTypeKind::kArranger:
-      result = "kArranger";
+    case msrCreditTypeKind::kCreditTypeArranger:
+      result = "kCreditTypeArranger";
       break;
-    case msrCreditTypeKind::kLyricist:
-      result = "kLyricist";
+    case msrCreditTypeKind::kCreditTypeLyricist:
+      result = "kCreditTypeLyricist";
       break;
-    case msrCreditTypeKind::kRights:
-      result = "kRights";
+    case msrCreditTypeKind::kCreditTypeRights:
+      result = "kCreditTypeRights";
       break;
-    case msrCreditTypeKind::kPartName:
-      result = "kPartName";
+    case msrCreditTypeKind::kCreditTypePartName:
+      result = "kCreditTypePartName";
       break;
-    case msrCreditTypeKind::kOtherCreditType:
-      result = "kOtherCreditType";
+    case msrCreditTypeKind::kCreditTypeOther:
+      result = "kCreditTypeOther";
       break;
   } // switch
 
@@ -296,7 +296,7 @@ msrCredit::msrCredit (
 {
   fCreditPageNumber = creditPageNumber;
 
-  fCreditTypeKind = msrCreditTypeKind::k_NoCreditType;  // default value
+  fCreditTypeKind = msrCreditTypeKind::kCreditType_NO_;  // default value
 }
 
 msrCredit::~msrCredit ()

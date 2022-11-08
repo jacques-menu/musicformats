@@ -14,7 +14,10 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+#include "msrAlignments.h"
+#include "msrFonts.h"
+#include "msrMusicXMLSpecifics.h"
+#include "msrPlacements.h"
 
 
 namespace MusicFormats

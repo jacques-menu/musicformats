@@ -15,7 +15,7 @@
 #include <string>
 
 #include "mfBool.h"
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "oahAtomsCollection.h"
 
@@ -195,7 +195,7 @@ class   mfslDriver
                             const string&      label,
                             Bool               allLabelSelected);
 
-    mfMusicformatsError   launchMfslTool_Pass2 ();
+    mfMusicformatsErrorKind   launchMfslTool_Pass2 ();
 
   private:
 

@@ -9,7 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 #include "msdlTokens.h"
 
@@ -47,7 +47,7 @@ map<msdlKeywordKind, string> gGlobalDutchKeywordsNamesMap;
 
 msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (const string& theString)
 {
-  msdlKeywordsLanguageKind result = msdlKeywordsLanguageKind::kKeywordsEnglish; // MSDL default
+  msdlKeywordsLanguageKind result = msdlKeywordsLanguageKind::kKeywordsLanguageEnglish; // MSDL default
 
   map<string, msdlKeywordsLanguageKind>::const_iterator
     it =
@@ -70,7 +70,7 @@ msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (const string& theSt
     ++gIndenter;
 
     s <<
-      existingMsdlKeywordsLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingMsdlKeywordsLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -89,22 +89,22 @@ void initializeMsdlKeywordsLanguageKindsMap ()
 
   if (! pPrivateThisMethodHasBeenRun) {
     gGlobalMsdlKeywordsLanguageKindsMap ["english"]   =
-      msdlKeywordsLanguageKind::kKeywordsEnglish;
+      msdlKeywordsLanguageKind::kKeywordsLanguageEnglish;
 
     gGlobalMsdlKeywordsLanguageKindsMap ["francais"]  =
-      msdlKeywordsLanguageKind::kKeywordsFrench;
+      msdlKeywordsLanguageKind::kKeywordsLanguageFrench;
 
     gGlobalMsdlKeywordsLanguageKindsMap ["italiano"]  =
-      msdlKeywordsLanguageKind::kKeywordsItalian;
+      msdlKeywordsLanguageKind::kKeywordsLanguageItalian;
 
     gGlobalMsdlKeywordsLanguageKindsMap ["deutsch"]   =
-      msdlKeywordsLanguageKind::kKeywordsGerman;
+      msdlKeywordsLanguageKind::kKeywordsLanguageGerman;
 
     gGlobalMsdlKeywordsLanguageKindsMap ["espanol"]   =
-      msdlKeywordsLanguageKind::kKeywordsSpanish;
+      msdlKeywordsLanguageKind::kKeywordsLanguageSpanish;
 
     gGlobalMsdlKeywordsLanguageKindsMap ["dutch"] =
-      msdlKeywordsLanguageKind::kKeywordsNederlands;
+      msdlKeywordsLanguageKind::kKeywordsLanguageNederlands;
 
     initializeEnglishKeywordsNamesMap ();
     initializeFrenchKeywordsNamesMap ();
@@ -123,26 +123,26 @@ string msdlKeywordsLanguageKindAsString (
   string result;
 
   switch (languageKind) {
-    case msdlKeywordsLanguageKind::k_NoKeywordsLanguage: // default value
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_: // default value
       result = "*noKeywordsLanguage*";
       break;
 
-    case msdlKeywordsLanguageKind::kKeywordsEnglish: // default value
+    case msdlKeywordsLanguageKind::kKeywordsLanguageEnglish: // default value
       result = "english";
       break;
-    case msdlKeywordsLanguageKind::kKeywordsFrench:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageFrench:
       result = "francais";
       break;
-    case msdlKeywordsLanguageKind::kKeywordsItalian:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageItalian:
       result = "italiano";
       break;
-    case msdlKeywordsLanguageKind::kKeywordsGerman:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageGerman:
       result = "deutsch";
       break;
-    case msdlKeywordsLanguageKind::kKeywordsSpanish:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageSpanish:
       result = "espanol";
       break;
-    case msdlKeywordsLanguageKind::kKeywordsNederlands:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageNederlands:
       result = "dutch";
       break;
   } // switch
@@ -409,7 +409,7 @@ string msdlKeywordKindAsString (
   string result;
 
   switch (keywordKind) {
-    case msdlKeywordKind::k_NoKeywordKind:
+    case msdlKeywordKind::kKeyword_NO_:
       result = "*noKeywordKind*";
       break;
 
@@ -510,26 +510,26 @@ string msdlKeywordKindAsMsdlString (
 
   // select the relevant keywords names map
   switch (languageKind) {
-    case msdlKeywordsLanguageKind::k_NoKeywordsLanguage:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
       break;
 
-    case msdlKeywordsLanguageKind::kKeywordsEnglish:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageEnglish:
       keywordsNamesMapPTR = &gGlobalEnglishKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsFrench:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageFrench:
       keywordsNamesMapPTR = &gGlobalFrenchKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsItalian:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageItalian:
       keywordsNamesMapPTR = &gGlobalItalianKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsGerman:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageGerman:
       keywordsNamesMapPTR = &gGlobalGermanKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsSpanish:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageSpanish:
       keywordsNamesMapPTR = &gGlobalSpanishKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsNederlands:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageNederlands:
       keywordsNamesMapPTR = &gGlobalDutchKeywordsNamesMap;
       break;
   } // switch
@@ -567,7 +567,7 @@ string msdlKeywordKindAsMsdlString (
 msdlKeywordKind msdlKeywordKindFromTokenKind (
   msdlTokenKind tokenKind)
 {
-  msdlKeywordKind result = msdlKeywordKind::k_NoKeywordKind;
+  msdlKeywordKind result = msdlKeywordKind::kKeyword_NO_;
 
   switch (tokenKind) {
     // language-dependent keywords
@@ -667,32 +667,32 @@ msdlKeywordKind msdlKeywordKindFromString (
   }
 #endif
 
-  msdlKeywordKind result = msdlKeywordKind::k_NoKeywordKind;
+  msdlKeywordKind result = msdlKeywordKind::kKeyword_NO_;
 
   map<msdlKeywordKind, string> *keywordsNamesMapPTR = nullptr;
 
   // select the relevant keywords names map
   switch (languageKind) {
-    case msdlKeywordsLanguageKind::k_NoKeywordsLanguage:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
       break;
 
-    case msdlKeywordsLanguageKind::kKeywordsEnglish:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageEnglish:
       keywordsNamesMapPTR = &gGlobalEnglishKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsFrench:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageFrench:
       keywordsNamesMapPTR = &gGlobalFrenchKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsItalian:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageItalian:
       keywordsNamesMapPTR = &gGlobalItalianKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsGerman:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageGerman:
       keywordsNamesMapPTR = &gGlobalGermanKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsSpanish:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageSpanish:
       keywordsNamesMapPTR = &gGlobalSpanishKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsNederlands:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageNederlands:
       keywordsNamesMapPTR = &gGlobalDutchKeywordsNamesMap;
       break;
   } // switch
@@ -738,26 +738,26 @@ string existingKeywordsInLanguage (
 
   // select the relevant keywords names map
   switch (keywordsLanguageKind) {
-    case msdlKeywordsLanguageKind::k_NoKeywordsLanguage:
+    case msdlKeywordsLanguageKind::kKeywordsLanguage_NO_:
       // should not occur
       break;
 
-    case msdlKeywordsLanguageKind::kKeywordsEnglish:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageEnglish:
       keywordsNamesMapPTR = &gGlobalEnglishKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsFrench:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageFrench:
       keywordsNamesMapPTR = &gGlobalFrenchKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsItalian:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageItalian:
       keywordsNamesMapPTR = &gGlobalItalianKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsGerman:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageGerman:
       keywordsNamesMapPTR = &gGlobalGermanKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsSpanish:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageSpanish:
       keywordsNamesMapPTR = &gGlobalSpanishKeywordsNamesMap;
       break;
-    case msdlKeywordsLanguageKind::kKeywordsNederlands:
+    case msdlKeywordsLanguageKind::kKeywordsLanguageNederlands:
       keywordsNamesMapPTR = &gGlobalDutchKeywordsNamesMap;
       break;
   } // switch

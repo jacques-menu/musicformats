@@ -42,6 +42,38 @@ using namespace std;
 namespace MusicFormats
 {
 
+// chords
+//______________________________________________________________________________
+
+string msrChordInKindAsString (
+  msrChordInKind chordInKind)
+{
+  string result;
+
+  switch (chordInKind) {
+    case msrChordInKind::kChordIn_NO_:
+      result = "***kChordIn_NO_***";
+      break;
+    case msrChordInKind::kChordInMeasure:
+      result = "kChordInMeasure";
+      break;
+    case msrChordInKind::kChordInTuplet:
+      result = "kChordInTuplet";
+      break;
+    case msrChordInKind::kChordInGraceNotesGroup:
+      result = "kChordInGraceNotesGroup";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrChordInKind& elt)
+{
+  os << msrChordInKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrChord msrChord::create (
   int             inputLineNumber,
@@ -83,7 +115,7 @@ msrChord::msrChord (
         inputLineNumber,
         upLinkToMeasure)
 {
-  fChordKind = msrChordInKind::k_NoChordIn;
+  fChordKind = msrChordInKind::kChordIn_NO_;
 
   doSetMeasureElementSoundingWholeNotes (
     chordSoundingWholeNotes,
@@ -186,7 +218,7 @@ S_msrMeasure msrChord::fetchChordUpLinkToMeasure () const
   S_msrMeasure result;
 
   switch (fChordKind) {
-    case msrChordInKind::k_NoChordIn:
+    case msrChordInKind::kChordIn_NO_:
       break;
 
     case msrChordInKind::kChordInMeasure:
@@ -220,7 +252,7 @@ S_msrTuplet msrChord::fetchChordUpLinkToTuplet () const
   S_msrTuplet result;
 
   switch (fChordKind) {
-    case msrChordInKind::k_NoChordIn:
+    case msrChordInKind::kChordIn_NO_:
       break;
 
     case msrChordInKind::kChordInMeasure:
@@ -249,7 +281,7 @@ S_msrGraceNotesGroup msrChord::fetchChordUpLinkToGraceNotesGroup () const
   S_msrGraceNotesGroup result;
 
   switch (fChordKind) {
-    case msrChordInKind::k_NoChordIn:
+    case msrChordInKind::kChordIn_NO_:
       break;
     case msrChordInKind::kChordInMeasure:
       break;

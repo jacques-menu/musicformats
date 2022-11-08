@@ -13,9 +13,10 @@
 #define ___bsrParallels___
 
 #include "bsrElements.h"
-#include "bsrLines.h"
 
-#include "bsrOah.h"
+// #include "bsrLines.h"
+
+// #include "bsrOah.h"
 
 
 namespace MusicFormats

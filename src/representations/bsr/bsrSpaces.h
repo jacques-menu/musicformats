@@ -2,6 +2,7 @@
 #define ___bsrSpaces___
 
 #include "bsrLineContentsElements.h"
+
 #include "bsrCellsLists.h"
 
 

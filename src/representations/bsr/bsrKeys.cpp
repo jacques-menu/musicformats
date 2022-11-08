@@ -61,7 +61,7 @@ string bsrKeyKindAsString (
   return result;
 }
 
-ostream& operator << (ostream& os, bsrKeyKind& elt)
+ostream& operator << (ostream& os, const bsrKeyKind& elt)
 {
   os << bsrKeyKindAsString (elt);
   return os;

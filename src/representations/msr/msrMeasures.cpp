@@ -120,8 +120,7 @@ void msrMeasure::initializeMeasure ()
   fMeasureKind = msrMeasureKind::kMeasureKindUnknown;
 
   // measure 'first in segment' kind
-  fMeasureFirstInSegmentKind =
-    msrMeasureFirstInSegmentKind::kMeasureFirstInSegmentKindUnknown;
+  fMeasureFirstInSegmentKind = kMeasureFirstInSegmentKindUnknown;
 
   // measure 'first in voice'
   fMeasureFirstInVoice = false; // default value
@@ -161,11 +160,10 @@ void msrMeasure::initializeMeasure ()
   fMeasureContainsMusic = false;
 
   // regular measure ends detection
-  fMeasureEndRegularKind =
-    msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown;
+  fMeasureEndRegularKind = kMeasureEndRegularKindUnknown;
 
   // repeat context
-  fMeasureRepeatContextKind = msrMeasureRepeatContextKind::kMeasureRepeatContextKindUnknown;
+  fMeasureRepeatContextKind = msrMeasureRepeatContextKind::kMeasureRepeatContext_NO_;
 
   // current measure whole notes duration
   setCurrentMeasureWholeNotesDuration (
@@ -798,7 +796,7 @@ void msrMeasure::setMeasureRepeatContextKind (
         "Setting repeat context kind of measure '" <<
         fMeasureNumber <<
         "' to '" <<
-        msrMeasureRepeatContextKindAsString (measureRepeatContextKind) <<
+        (measureRepeatContextKind <<
         "' in segment " <<
         fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
@@ -3595,7 +3593,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
       ", newWholeNotesSinceLastRegularMeasureEnd: " <<
       newWholeNotesSinceLastRegularMeasureEnd <<
       ", currentVoiceRepeatPhaseKind: " <<
-      msrVoiceRepeatPhaseKindAsString (
+      voiceRepeatPhaseKindAsString (
         currentVoiceRepeatPhaseKind) <<
     "' in voice \"" << voice->getVoiceName () <<
     ", line " << inputLineNumber <<
@@ -3683,15 +3681,13 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
     // this is a regular measure
 
     // this is a regular measure end
-    setMeasureEndRegularKind (
-            msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
+    setMeasureEndRegularKind (kMeasureEndRegularKindYes);
 
     // set it's measure kind
     setMeasureKind (msrMeasureKind::kMeasureKindRegular);
 
     // this is a regular measure end
-    setMeasureEndRegularKind (
-            msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
+    setMeasureEndRegularKind (kMeasureEndRegularKindYes);
 
     // increment voice's current measure purist number
     voice->
@@ -3730,8 +3726,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         setMeasureKind (msrMeasureKind::kMeasureKindAnacrusis);
 
         // this is a regular measure end
-        setMeasureEndRegularKind (
-            msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
+        setMeasureEndRegularKind (kMeasureEndRegularKindYes);
 
         // fix measure purist number
         setMeasurePuristNumber (0);
@@ -3746,8 +3741,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
           newWholeNotesSinceLastRegularMeasureEnd == fFullMeasureWholeNotesDuration
         ) {
           // this is a regular measure end
-          setMeasureEndRegularKind (
-            msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
+          setMeasureEndRegularKind (kMeasureEndRegularKindYes);
 
           // increment voice's current measure purist number
           voice->
@@ -3763,13 +3757,12 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
         }
         else {
           // this is no regular measure end
-          setMeasureEndRegularKind (
-            msrMeasureEndRegularKind::kMeasureEndRegularKindNo);
+          setMeasureEndRegularKind (kMeasureEndRegularKindNo);
         }
 
         // set measure's kind according to measureRepeatContextKind
         switch (measureRepeatContextKind) {
-          case msrMeasureRepeatContextKind::kMeasureRepeatContextKindUnknown: // JMI ???
+          case msrMeasureRepeatContextKind::kMeasureRepeatContext_NO_: // JMI ???
             {
               stringstream s;
 
@@ -3777,14 +3770,14 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
               if (gGlobalTracingOahGroup->getTraceMeasuresDetails ()) {
                 displayMeasure (
                   inputLineNumber,
-                  "determineMeasureKindAndPuristNumber() 6 kMeasureRepeatContextKindUnknown");
+                  "determineMeasureKindAndPuristNumber() 6 kMeasureRepeatContext_NO_");
               }
 #endif
 
               s <<
                 "measure " <<
                 this->asShortString () <<
-                " is kMeasureRepeatContextKindUnknown " <<
+                " is kMeasureRepeatContext_NO_ " <<
                 asShortString () <<
                 ", line " << inputLineNumber;
 
@@ -3801,7 +3794,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
               msrMeasureKind::kMeasureKindIncompleteStandalone); // JMI
             break;
 
-          case msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone:
+          case msrMeasureRepeatContextKind::kMeasureRepeatContextNone:
             // update the voice current measure purist number if relevant
             switch (fMeasureEndRegularKind) {
               case msrMeasureEndRegularKind::kMeasureEndRegularKindUnknown:
@@ -3825,28 +3818,28 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
             } // switch
             break;
 
-          case msrMeasureRepeatContextKind::kMeasureRepeatContextKindCommonPartLastMeasure:
+          case msrMeasureRepeatContextKind::kMeasureRepeatContextCommonPartLastMeasure:
             setMeasureKind (
               msrMeasureKind::kMeasureKindIncompleteLastInRepeatCommonPart);
             break;
-          case msrMeasureRepeatContextKind::kMeasureRepeatContextKindHookedEndingLastMeasure:
+          case msrMeasureRepeatContextKind::kMeasureRepeatContextHookedEndingLastMeasure:
             setMeasureKind (
               msrMeasureKind::kMeasureKindIncompleteLastInRepeatHookedEnding);
             break;
-          case msrMeasureRepeatContextKind::kMeasureRepeatContextKindHooklessEndingLastMeasure:
+          case msrMeasureRepeatContextKind::kMeasureRepeatContextHooklessEndingLastMeasure:
             setMeasureKind (
               msrMeasureKind::kMeasureKindIncompleteLastInRepeatHooklessEnding);
             break;
 
-          case msrMeasureRepeatContextKind::kMeasureRepeatContextKindNextMeasureAfterCommonPart:
+          case msrMeasureRepeatContextKind::kMeasureRepeatContextNextMeasureAfterCommonPart:
             setMeasureKind (
               msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterCommonPart);
             break;
-          case msrMeasureRepeatContextKind::kMeasureRepeatContextKindNextMeasureAfterHookedEnding:
+          case msrMeasureRepeatContextKind::kMeasureRepeatContextNextMeasureAfterHookedEnding:
             setMeasureKind (
               msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHookedEnding);
             break;
-          case msrMeasureRepeatContextKind::kMeasureRepeatContextKindNextMeasureAfterHooklessEnding:
+          case msrMeasureRepeatContextKind::kMeasureRepeatContextNextMeasureAfterHooklessEnding:
             setMeasureKind (
               msrMeasureKind::kMeasureKindIncompleteNextMeasureAfterHooklessEnding);
             break;
@@ -3861,8 +3854,7 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
       setMeasureKind (msrMeasureKind::kMeasureKindOvercomplete);
 
       // this is a regular measure end
-      setMeasureEndRegularKind (
-        msrMeasureEndRegularKind::kMeasureEndRegularKindYes);
+      setMeasureEndRegularKind (kMeasureEndRegularKindYes);
 
       // increment voice's current measure purist number
       voice->
@@ -6239,28 +6231,28 @@ string msrMeasureRepeatContextKindAsString (
   string result;
 
   switch (measureRepeatContextKind) {
-    case msrMeasureRepeatContextKind::kMeasureRepeatContextKindUnknown:
-      result = "***kMeasureRepeatContextKindUnknown***";
+    case msrMeasureRepeatContextKind::kMeasureRepeatContext_NO_:
+      result = "kMeasureRepeatContext_NO_";
       break;
-    case msrMeasureRepeatContextKind::kMeasureRepeatContextKindNone:
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextNone:
       result = "kMeasureRepeatContextNone";
       break;
-    case msrMeasureRepeatContextKind::kMeasureRepeatContextKindCommonPartLastMeasure:
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextCommonPartLastMeasure:
       result = "kMeasureRepeatContextCommonPartLastMeasure";
       break;
-    case msrMeasureRepeatContextKind::kMeasureRepeatContextKindHookedEndingLastMeasure:
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextHookedEndingLastMeasure:
       result = "kMeasureRepeatContextHookedEndingLastMeasure";
       break;
-    case msrMeasureRepeatContextKind::kMeasureRepeatContextKindHooklessEndingLastMeasure:
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextHooklessEndingLastMeasure:
       result = "kMeasureRepeatContextHooklessEndingLastMeasure";
       break;
-    case msrMeasureRepeatContextKind::kMeasureRepeatContextKindNextMeasureAfterCommonPart:
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextNextMeasureAfterCommonPart:
       result = "kMeasureRepeatContextNextMeasureAfterCommonPart";
       break;
-    case msrMeasureRepeatContextKind::kMeasureRepeatContextKindNextMeasureAfterHookedEnding:
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextNextMeasureAfterHookedEnding:
       result = "kMeasureRepeatContextNextMeasureAfterHookedEnding";
       break;
-    case msrMeasureRepeatContextKind::kMeasureRepeatContextKindNextMeasureAfterHooklessEnding:
+    case msrMeasureRepeatContextKind::kMeasureRepeatContextNextMeasureAfterHooklessEnding:
       result = "kMeasureRepeatContextNextMeasureAfterHooklessEnding";
       break;
   } // switch

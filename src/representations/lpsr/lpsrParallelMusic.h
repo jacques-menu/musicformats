@@ -15,7 +15,8 @@
 #include <string>
 #include <list>
 
-#include "lpsrPartGroups.h"
+#include "lpsrElements.h"
+// #include "lpsrPartGroups.h"
 
 
 using namespace std;
@@ -30,7 +31,7 @@ enum class lpsrElementsSeparatorKind {
   kElementsSeparatorEndOfLine, kElementsSeparatorSpace
 };
 
-string lpsrEelementsSeparatorKindAsString (
+string lpsrElementsSeparatorKindAsString (
   lpsrElementsSeparatorKind elementsSeparatorKind);
 
 ostream& operator << (ostream& os, const lpsrElementsSeparatorKind& elt);

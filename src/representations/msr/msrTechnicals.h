@@ -14,7 +14,7 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+#include "msrPlacements.h"
 
 
 namespace MusicFormats
@@ -58,6 +58,19 @@ ostream& operator << (ostream& os, const msrTechnicalAccidentalMarkKind& elt);
 
 */
 
+// technical types
+//______________________________________________________________________________
+enum class msrTechnicalTypeKind { // JMI ???
+  kTechnicalType_NO_,
+  kTechnicalTypeStart, kTechnicalTypeStop
+};
+
+string msrTechnicalTypeKindAsString (
+  msrTechnicalTypeKind technicalTypeKind);
+
+ostream& operator << (ostream& os, const msrTechnicalTypeKind& elt);
+
+//______________________________________________________________________________
 class EXP msrTechnical : public msrElement
 {
   public:

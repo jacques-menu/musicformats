@@ -70,9 +70,9 @@ msrHumdrumScotKeyItem::msrHumdrumScotKeyItem (
   }
 #endif
 
-  fKeyDiatonicPitchKind = msrDiatonicPitchKind::k_NoDiatonicPitch;
-  fKeyAlterationKind    = msrAlterationKind::k_NoAlteration;
-  fKeyOctaveKind        = msrOctaveKind::k_NoOctave;
+  fKeyDiatonicPitchKind = msrDiatonicPitchKind::kDiatonicPitch_NO_;
+  fKeyAlterationKind    = msrAlterationKind::kAlteration_NO_;
+  fKeyOctaveKind        = msrOctaveKind::kOctave_NO_;
 }
 
 msrHumdrumScotKeyItem::~msrHumdrumScotKeyItem ()
@@ -298,7 +298,7 @@ msrKey::msrKey ( // for traditional keys
   fKeyTonicQuarterTonesPitchKind = keyTonicQuarterTonesPitchKind;
 
   switch (fModeKind) {
-    case msrModeKind::k_NoMode:
+    case msrModeKind::kMode_NO_:
       break;
     case msrModeKind::kModeMajor:
       break;
@@ -441,7 +441,7 @@ void msrKey::appendHumdrumScotKeyItem (
 #endif
 
   // have key items octaves been specified?
-  if (item->getKeyItemOctaveKind () != msrOctaveKind::k_NoOctave) {
+  if (item->getKeyItemOctaveKind () != msrOctaveKind::kOctave_NO_) {
     fKeyItemsOctavesAreSpecified = true;
   }
 

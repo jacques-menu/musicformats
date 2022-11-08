@@ -143,7 +143,7 @@ S_msrScore Mikrokosmos3WanderingGenerator::createTheScore (
 
   // set the identification's work title
   identification->
-    setIdentificationWorkTitle (
+    setIdentificationWorkCreditTypeTitle (
       __LINE__,
       "Mikrokosmos III Wandering");
 

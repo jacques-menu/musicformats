@@ -266,7 +266,7 @@ ostream& operator << (ostream& os, const S_msrWords& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

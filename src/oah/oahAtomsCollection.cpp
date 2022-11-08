@@ -4108,7 +4108,7 @@ void oahCommonPrefixBooleansAtom::printHelp (ostream& os) const
       string suffix = (*i);
 
       cumulatedLength += suffix.size ();
-      if (cumulatedLength >= K_NAMES_LIST_MAX_LENGTH) {
+      if (cumulatedLength >= K_MF_NAMES_LIST_MAX_LENGTH) {
         os << endl;
         cumulatedLength = 0;
         break;
@@ -4174,7 +4174,7 @@ void oahCommonPrefixBooleansAtom::printHelp (ostream& os) const
         string suffix = (*i);
 
         cumulatedLength += suffix.size ();
-        if (cumulatedLength >= K_NAMES_LIST_MAX_LENGTH) {
+        if (cumulatedLength >= K_MF_NAMES_LIST_MAX_LENGTH) {
           os << endl;
           cumulatedLength = 0;
 //        break;
@@ -5570,7 +5570,7 @@ void oahFactorizedStringAtom::printHelp (ostream& os) const
       string suffix = (*i);
 
       cumulatedLength += suffix.size ();
-      if (cumulatedLength >= K_NAMES_LIST_MAX_LENGTH) {
+      if (cumulatedLength >= K_MF_NAMES_LIST_MAX_LENGTH) {
         os << endl;
         cumulatedLength = 0;
         break;
@@ -9189,7 +9189,7 @@ void oahLengthUnitKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingMsrLengthUnitKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -9462,7 +9462,7 @@ void oahLengthAtom::applyAtomWithValue (
       ++gIndenter;
 
       s <<
-        existingMsrLengthUnitKinds (K_NAMES_LIST_MAX_LENGTH);
+        existingMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
       --gIndenter;
 

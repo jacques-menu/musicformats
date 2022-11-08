@@ -654,7 +654,7 @@ class EXP oahAtomWithoutAValue : public oahAtom
 Passing the options and arguments over to the library when using \mf\ can be done in two ways:
 \begin{itemize}
 \item \CLI\ tools get them from \argcargv\ as usual;
-\item application using the library through the \API\ should place them in an {\tt oahOptionsVector}, defined in \mflibrary{mfMusicformatsError.h}:
+\item application using the library through the \API\ should place them in an {\tt oahOptionsVector}, defined in \mflibrary{mfMusicformatsErrors.h}:
 \begin{lstlisting}[language=CPlusPlus]
 typedef std::vector<std::pair<std::string, std::string> > oahOptionsVector;
 \end{lstlisting}
@@ -1003,7 +1003,7 @@ int main (int argc, char*  argv[])
 
 \item the \API\ functions receive an \code{mfOptionsAndArguments} as an argument, here in \musicxmlToMusicxml{musicxml2musicxmlInterface.cpp}:
 \begin{lstlisting}[language=CPlusPlus]
-EXP mfMusicformatsError musicxmlfile2musicxml (
+EXP mfMusicformatsErrorKind musicxmlfile2musicxml (
   const char*             fileName,
   mfOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -1025,7 +1025,7 @@ EXP mfMusicformatsError musicxmlfile2musicxml (
         err);
 	}
 
-	return mfMusicformatsError::kErrorInvalidFile;
+	return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 \end{lstlisting}
 
@@ -1932,7 +1932,7 @@ void oahLengthAtom::applyAtomWithValue (
       ++gIndenter;
 
       s <<
-        existingMsrLengthUnitKinds (K_NAMES_LIST_MAX_LENGTH);
+        existingMsrLengthUnitKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
       --gIndenter;
 

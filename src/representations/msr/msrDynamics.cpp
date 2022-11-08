@@ -28,6 +28,198 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string msrDynamicKindAsString (
+  msrDynamicKind dynamicKind)
+{
+  string result;
+
+  switch (dynamicKind) {
+    case msrDynamicKind::kDynamic_NO_:
+      result = "*msrDynamicKind::kDynamic_NO_*";
+      break;
+
+    case msrDynamicKind::kDynamicF:
+      result = "f";
+      break;
+    case msrDynamicKind::kDynamicFF:
+      result = "ff";
+      break;
+    case msrDynamicKind::kDynamicFFF:
+      result = "fff";
+      break;
+    case msrDynamicKind::kDynamicFFFF:
+      result = "ffff";
+      break;
+    case msrDynamicKind::kDynamicFFFFF:
+      result = "fffff";
+      break;
+    case msrDynamicKind::kDynamicFFFFFF:
+      result = "ffffff";
+      break;
+
+    case msrDynamicKind::kDynamicP:
+      result = "p";
+      break;
+    case msrDynamicKind::kDynamicPP:
+      result = "pp";
+      break;
+    case msrDynamicKind::kDynamicPPP:
+      result = "ppp";
+      break;
+    case msrDynamicKind::kDynamicPPPP:
+      result = "pppp";
+      break;
+    case msrDynamicKind::kDynamicPPPPP:
+      result = "ppppp";
+      break;
+    case msrDynamicKind::kDynamicPPPPPP:
+      result = "pppppp";
+      break;
+
+    case msrDynamicKind::kDynamicMF:
+      result = "mf";
+      break;
+    case msrDynamicKind::kDynamicMP:
+      result = "mp";
+      break;
+    case msrDynamicKind::kDynamicFP:
+      result = "fp";
+      break;
+    case msrDynamicKind::kDynamicFZ:
+      result = "fz";
+      break;
+    case msrDynamicKind::kDynamicPF:
+      result = "pf";
+      break;
+    case msrDynamicKind::kDynamicRF:
+      result = "rf";
+      break;
+    case msrDynamicKind::kDynamicSF:
+      result = "sf";
+      break;
+
+    case msrDynamicKind::kDynamicRFZ:
+      result = "rfz";
+      break;
+    case msrDynamicKind::kDynamicSFZ:
+      result = "sfz";
+      break;
+    case msrDynamicKind::kDynamicSFP:
+      result = "sfp";
+      break;
+    case msrDynamicKind::kDynamicSFPP:
+      result = "sfpp";
+      break;
+    case msrDynamicKind::kDynamicSFFZ:
+      result = "sffz";
+      break;
+    case msrDynamicKind::kDynamicSFZP:
+      result = "sfzp";
+      break;
+    case msrDynamicKind::kDynamicN:
+      result = "n";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrDynamicKind& elt)
+{
+  os << msrDynamicKindAsString (elt);
+  return os;
+}
+
+msrDynamicKind dynamicFromString (const string& theString)
+{
+  msrDynamicKind result = msrDynamicKind::kDynamic_NO_;
+
+  if (theString == "f") {
+    result = msrDynamicKind::kDynamicF;
+  }
+  else if (theString == "f") {
+    result = msrDynamicKind::kDynamicF;
+  }
+  else if (theString == "fff") {
+    result = msrDynamicKind::kDynamicFFF;
+  }
+  else if (theString == "ffff") {
+    result = msrDynamicKind::kDynamicFFFF;
+  }
+  else if (theString == "fffff") {
+    result = msrDynamicKind::kDynamicFFFFF;
+  }
+  else if (theString == "ffffff") {
+    result = msrDynamicKind::kDynamicFFFFFF;
+  }
+
+  else if (theString == "p") {
+    result = msrDynamicKind::kDynamicP;
+  }
+  else if (theString == "pp") {
+    result = msrDynamicKind::kDynamicPP;
+  }
+  else if (theString == "ppp") {
+    result = msrDynamicKind::kDynamicPPP;
+  }
+  else if (theString == "pppp") {
+    result = msrDynamicKind::kDynamicPPPP;
+  }
+  else if (theString == "ppppp") {
+    result = msrDynamicKind::kDynamicPPPPP;
+  }
+  else if (theString == "pppppp") {
+    result = msrDynamicKind::kDynamicPPPPPP;
+  }
+
+  else if (theString == "mf") {
+    result = msrDynamicKind::kDynamicMF;
+  }
+  else if (theString == "mp") {
+    result = msrDynamicKind::kDynamicMP;
+  }
+  else if (theString == "fp") {
+    result = msrDynamicKind::kDynamicFP;
+  }
+  else if (theString == "fz") {
+    result = msrDynamicKind::kDynamicFZ;
+  }
+  else if (theString == "pf") {
+    result = msrDynamicKind::kDynamicPF;
+  }
+  else if (theString == "rf") {
+    result = msrDynamicKind::kDynamicRF;
+  }
+  else if (theString == "sf") {
+    result = msrDynamicKind::kDynamicSF;
+  }
+
+  else if (theString == "rfz") {
+    result = msrDynamicKind::kDynamicRFZ;
+  }
+  else if (theString == "sfz") {
+    result = msrDynamicKind::kDynamicSFZ;
+  }
+  else if (theString == "sfp") {
+    result = msrDynamicKind::kDynamicSFP;
+  }
+  else if (theString == "sfpp") {
+    result = msrDynamicKind::kDynamicSFPP;
+  }
+  else if (theString == "sffz") {
+    result = msrDynamicKind::kDynamicSFFZ;
+  }
+  else if (theString == "sfzp") {
+    result = msrDynamicKind::kDynamicSFZP;
+  }
+  else if (theString == "n") {
+    result = msrDynamicKind::kDynamicN;
+  }
+
+  return result;
+}
+
+//______________________________________________________________________________
 S_msrDynamic msrDynamic::create (
   int              inputLineNumber,
   msrDynamicKind  dynamicKind,
@@ -146,7 +338,7 @@ ostream& operator << (ostream& os, const S_msrDynamic& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -255,7 +447,7 @@ ostream& operator << (ostream& os, const S_msrOtherDynamic& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -372,7 +564,7 @@ ostream& operator << (ostream& os, const S_msrCrescDecresc& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -553,7 +745,7 @@ ostream& operator << (ostream& os, const S_msrWedge& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -59,7 +59,7 @@ namespace MusicFormats
 //#define ENFORCE_TRACE_OAH
 
 //_______________________________________________________________________________
-mfMusicformatsError convertMsdlStream2guidoWithHandler (
+mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
   string        inputSourceName,
   istream&      inputStream,
   S_oahHandler  handler,
@@ -148,11 +148,11 @@ mfMusicformatsError convertMsdlStream2guidoWithHandler (
   }
   catch (msdl2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -164,7 +164,7 @@ mfMusicformatsError convertMsdlStream2guidoWithHandler (
       "Quitting after creating the first MSR in pass 1 of convertMsdlStream2guidoWithHandler as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // convert the first MSR into a second MSR (pass 2)
@@ -183,11 +183,11 @@ mfMusicformatsError convertMsdlStream2guidoWithHandler (
   }
   catch (msr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // convert the second MSR into an MXSR (pass 3)
@@ -206,11 +206,11 @@ mfMusicformatsError convertMsdlStream2guidoWithHandler (
   }
   catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // convert the MXSR to Guido (pass 4)
@@ -231,18 +231,18 @@ mfMusicformatsError convertMsdlStream2guidoWithHandler (
   }
   catch (mxsr2guidoException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-mfMusicformatsError convertMsdlStream2guidoWithOptionsAndArguments (
+mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
   string                  inputSourceName,
   istream&                inputStream,
   oahOptionsAndArguments& handlerOptionsAndArguments,
@@ -343,7 +343,7 @@ mfMusicformatsError convertMsdlStream2guidoWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsError::k_NoError; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -352,11 +352,11 @@ mfMusicformatsError convertMsdlStream2guidoWithOptionsAndArguments (
   }
   catch (mfOahException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidOption;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
@@ -382,11 +382,11 @@ mfMusicformatsError convertMsdlStream2guidoWithOptionsAndArguments (
     out,
     err);
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlFile2guidoWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
   string                  fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -433,7 +433,7 @@ EXP mfMusicformatsError convertMsdlFile2guidoWithOptionsAndArguments (
       err);
 }
 
-mfMusicformatsError msdlFile2guidoWithHandler (
+mfMusicformatsErrorKind msdlFile2guidoWithHandler (
   string        fileName,
   S_oahHandler  handler,
   std::ostream& out,
@@ -477,7 +477,7 @@ mfMusicformatsError msdlFile2guidoWithHandler (
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError convertMsdlString2guidoWithOptionsAndArguments (
+EXP mfMusicformatsErrorKind convertMsdlString2guidoWithOptionsAndArguments (
   const char*             buffer,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -498,10 +498,10 @@ EXP mfMusicformatsError convertMsdlString2guidoWithOptionsAndArguments (
       out,
       err);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError msdlString2guidoWithHandler (
+mfMusicformatsErrorKind msdlString2guidoWithHandler (
   const char*   buffer,
   S_oahHandler  handler,
   std::ostream& out,
@@ -522,7 +522,7 @@ mfMusicformatsError msdlString2guidoWithHandler (
       out,
       err);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 

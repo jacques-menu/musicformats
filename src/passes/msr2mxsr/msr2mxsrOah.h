@@ -74,8 +74,8 @@ class EXP msr2mxsrOahGroup : public oahGroup
                               { return fMusicXMLComments; }
 
     // work and movement
-    string                getWorkTitle () const
-                              { return fWorkTitle; }
+    string                getWorkCreditTypeTitle () const
+                              { return fWorkCreditTypeTitle; }
     string                getWorkNumber () const
                               { return fWorkNumber; }
 
@@ -133,7 +133,7 @@ class EXP msr2mxsrOahGroup : public oahGroup
     Bool                  fMusicXMLComments;
 
     // work and movement
-    string                fWorkTitle;
+    string                fWorkCreditTypeTitle;
     string                fWorkNumber;
 
     string                fMovementTitle;

@@ -26,7 +26,7 @@
   #include "tracingOah.h"
 #endif
 
-#include "libmusicxml.h" // for mfMusicformatsError
+#include "libmusicxml.h" // for mfMusicformatsErrorKind
 
 #include "displayOah.h"
 
@@ -179,11 +179,11 @@ int main (int argc, char* argv[])
   }
   catch (mfOahException& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidOption;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (exception& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidFile;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
@@ -361,9 +361,9 @@ int main (int argc, char* argv[])
   // do the interpretation
   // ------------------------------------------------------
 
-  mfMusicformatsError
+  mfMusicformatsErrorKind
     err =
-      mfMusicformatsError::k_NoError;
+      mfMusicformatsErrorKind::kMusicformatsError_NO_;
 
   try {
     err =
@@ -371,11 +371,11 @@ int main (int argc, char* argv[])
   }
   catch (mfException& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidFile;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return (int) mfMusicformatsError::kErrorInvalidFile;
+    return (int) mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // display the input line numbers for which messages have been issued
@@ -408,16 +408,16 @@ int main (int argc, char* argv[])
   // ------------------------------------------------------
 
   switch (err) {
-    case mfMusicformatsError::k_NoError:
+    case mfMusicformatsErrorKind::kMusicformatsError_NO_:
       return 0;
       break;
-    case mfMusicformatsError::kErrorInvalidFile:
+    case mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile:
       return 1;
       break;
-    case mfMusicformatsError::kErrorInvalidOption:
+    case mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption:
       return 2;
       break;
-    case mfMusicformatsError::kErrorUnsupported:
+    case mfMusicformatsErrorKind::kMusicformatsErrorUnsupported:
       return 3;
       break;
   } // switch

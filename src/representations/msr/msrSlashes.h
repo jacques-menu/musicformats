@@ -14,11 +14,47 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats
 {
+
+// measure styles
+//______________________________________________________________________________
+enum class msrSlashTypeKind {
+  kSlashType_NO_,
+  kSlashTypeStart, kSlashTypeStop
+};
+
+string msrSlashTypeKindAsString (
+  msrSlashTypeKind slashTypeKind);
+
+ostream& operator << (ostream& os, const msrSlashTypeKind& elt);
+
+enum class msrUseDotsKind {
+  kUseDots_NO_,
+  kUseDotsYes, kUseDotsNo
+};
+
+string msrUseDotsKindAsString (
+  msrUseDotsKind useDotsKind);
+
+ostream& operator << (ostream& os, const msrUseDotsKind& elt);
+
+msrUseDotsKind msrUseDotsFromString (
+  int           inputLineNumber,
+  const string& useDotsString);
+
+enum class msrSlashUseStemsKind {
+  kSlashUseStems_NO_,
+  kSlashUseStemsYes, kSlashUseStemsNo
+};
+
+string msrSlashUseStemsKindAsString (
+  msrSlashUseStemsKind slashUseStemsKind);
+
+ostream& operator << (ostream& os, const msrSlashUseStemsKind& elt);
 
 //______________________________________________________________________________
 class EXP msrSlash : public msrElement

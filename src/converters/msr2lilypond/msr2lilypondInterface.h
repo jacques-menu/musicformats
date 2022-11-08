@@ -12,7 +12,7 @@
 #ifndef ___msr2lilypondInterface___
 #define ___msr2lilypondInterface___
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "msr.h"
 
@@ -29,7 +29,7 @@ namespace MusicFormats
 */
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError msrScore2lilypondWithHandler (
+EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   S_msrScore   theMsrScore,
   string       passNumber1,
   string       passDescription1,

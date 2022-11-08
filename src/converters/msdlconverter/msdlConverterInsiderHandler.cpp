@@ -183,7 +183,7 @@ R"(Usage: msdl [option]*
     endl;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       s <<
         "The help below is available whichever output is produced";
       break;
@@ -213,7 +213,7 @@ string msdlConverterInsiderHandler::msdlConverterAboutInformation (
   size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur
       break;
 
@@ -241,7 +241,7 @@ string msdlConverterInsiderHandler::msdlConverterAboutInformation (
   string headPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should only occur if the run is a pure help one
       {
         stringstream headPartStream;
@@ -279,7 +279,7 @@ R"(
   string specificPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -453,7 +453,7 @@ void msdlConverterInsiderHandler::createTheMsdlConverterOptionGroups (
   */
 
   switch (mfMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -711,9 +711,9 @@ string msdlConverterInsiderHandler::fetchOutputFileNameFromTheOptions () const
   // and add the output file name suffix
   if (! outputFileNameHasBeenSet) {
     switch (fMultiGenerationOutputKind) {
-      case mfMultiGenerationOutputKind::k_NoGeneration:
+      case mfMultiGenerationOutputKind::kGeneration_NO_:
         // should not occur
-        outputFileName = "___k_NoGeneration___";
+        outputFileName = "___kGeneration_NO____";
         break;
 
       case mfMultiGenerationOutputKind::kGenerationLilypond:
@@ -1017,7 +1017,7 @@ msdlConverterInsiderOahGroup::msdlConverterInsiderOahGroup ()
 R"(Options that are used by msdlConverter are grouped here.)",
     oahElementVisibilityKind::kElementVisibilityWhole)
 {
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::k_NoGeneration;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_NO_;
 
   initializemsdlConverterInsiderOahGroup ();
 }

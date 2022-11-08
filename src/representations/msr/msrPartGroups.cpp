@@ -89,7 +89,7 @@ S_msrPartGroup msrPartGroup::createImplicitPartGroup (
 {
   msrPartGroup* o =
     new msrPartGroup (
-      K_NO_INPUT_LINE_NUMBER,
+      K_MF_NO_INPUT_LINE_NUMBER,
       partGroupNumber,
       partGroupAbsoluteNumber,
       partGroupName,

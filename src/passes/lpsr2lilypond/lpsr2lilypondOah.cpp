@@ -404,7 +404,7 @@ void lilypondTransposePartNameAtom::applyAtomWithValue (
   else {
     fStringToMsrSemiTonesPitchAndOctaveMapVariable [partName] =
       msrSemiTonesPitchAndOctave::createFromString (
-        K_NO_INPUT_LINE_NUMBER,
+        K_MF_NO_INPUT_LINE_NUMBER,
         destinationPitchName);
 
     fSetByAnOption = true;
@@ -760,7 +760,7 @@ void lilypondTransposePartIDAtom::applyAtomWithValue (
   else {
     fStringToMsrSemiTonesPitchAndOctaveMapVariable [partID] =
       msrSemiTonesPitchAndOctave::createFromString (
-        K_NO_INPUT_LINE_NUMBER,
+        K_MF_NO_INPUT_LINE_NUMBER,
         destinationPitchName);
 
     fSetByAnOption = true;
@@ -1336,7 +1336,7 @@ void lilypondRelativeOctaveEntryAtom::applyAtomWithValue (
   // set relative octave reference value
   setRelativeOctaveEntryVariableValue (
     msrSemiTonesPitchAndOctave::createFromString (
-      K_NO_INPUT_LINE_NUMBER,
+      K_MF_NO_INPUT_LINE_NUMBER,
       theString));
 }
 
@@ -1551,7 +1551,7 @@ void lilypondFixedOctaveEntryAtom::applyAtomWithValue (
   // set fixed octave reference value
   setFixedOctaveEntryVariableValue (
     msrSemiTonesPitchAndOctave::createFromString (
-      K_NO_INPUT_LINE_NUMBER,
+      K_MF_NO_INPUT_LINE_NUMBER,
       theString));
 }
 
@@ -1784,7 +1784,7 @@ void lilypondAccidentalStyleKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrAccidentalStyleKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingLpsrAccidentalStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -2394,7 +2394,7 @@ void lilypondLyricsDurationsKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrLyricsDurationsKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingLpsrLyricsDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -2637,7 +2637,7 @@ void lilypondDynamicsTextSpannersStyleKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingLpsrDynamicsTextSpannersStyleKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingLpsrDynamicsTextSpannersStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -3563,7 +3563,7 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalLpsrAccidentalStyleKindsMap.size ())),
             regex ("ACCIDENTAL_STYLES"),
-            existingLpsrAccidentalStyleKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingLpsrAccidentalStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           lpsrAccidentalStyleKindAsLilypondString (
             lpsrAccidentalStyleKindDefaultValue)),
@@ -4258,7 +4258,7 @@ The default is 'DEFAULT_VALUE'.)",
             regex ("NUMBER"),
             to_string (getLpsrDynamicsTextSpannersStyleKindsMap ().size ())),
           regex ("LYRICS_DYNAMICS_TEXT_SPANNERS_STYLE_KINDS"),
-          existingLpsrDynamicsTextSpannersStyleKinds (K_NAMES_LIST_MAX_LENGTH)),
+          existingLpsrDynamicsTextSpannersStyleKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         regex ("DEFAULT_VALUE"),
         lpsrDynamicsTextSpannersStyleKindAsString (
           lpsrDynamicsTextSpannersStyleKindDefaultValue)),
@@ -4320,7 +4320,7 @@ The default is 'DEFAULT_VALUE'.)",
               regex ("NUMBER"),
               to_string (gGlobalLpsrLyricsDurationsKindsMap.size ())),
             regex ("LYRICS_DURATIONS_KINDS"),
-            existingLpsrLyricsDurationsKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingLpsrLyricsDurationsKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           lpsrLyricsDurationsKindAsString (
             lpsrLyricsDurationsKindDefaultValue)),

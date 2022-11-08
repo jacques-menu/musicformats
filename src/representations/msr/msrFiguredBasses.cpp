@@ -160,29 +160,29 @@ string msrBassFigurePrefixKindAsString (
   string result;
 
   switch (figurePrefixKind) {
-    case msrBassFigurePrefixKind::k_NoBassFigurePrefix:
-      result = "k_NoBassFigurePrefix";
+    case msrBassFigurePrefixKind::kBassFigurePrefix_NO_:
+      result = "kBassFigurePrefix_NO_";
       break;
-    case msrBassFigurePrefixKind::kPrefixDoubleFlat:
-      result = "kPrefixDoubleFlat";
+    case msrBassFigurePrefixKind::kBassFigurePrefixDoubleFlat:
+      result = "kBassFigurePrefixDoubleFlat";
       break;
-    case msrBassFigurePrefixKind::kPrefixFlat:
-      result = "kPrefixFlat";
+    case msrBassFigurePrefixKind::kBassFigurePrefixFlat:
+      result = "kBassFigurePrefixFlat";
       break;
-    case msrBassFigurePrefixKind::kPrefixFlatFlat:
-      result = "kPrefixFlatFlat";
+    case msrBassFigurePrefixKind::kBassFigurePrefixFlatFlat:
+      result = "kBassFigurePrefixFlatFlat";
       break;
-    case msrBassFigurePrefixKind::kPrefixNatural:
-      result = "kPrefixNatural";
+    case msrBassFigurePrefixKind::kBassFigurePrefixNatural:
+      result = "kBassFigurePrefixNatural";
       break;
-    case msrBassFigurePrefixKind::kPrefixSharpSharp:
-      result = "kPrefixSharpSharp";
+    case msrBassFigurePrefixKind::kBassFigurePrefixSharpSharp:
+      result = "kBassFigurePrefixSharpSharp";
       break;
-    case msrBassFigurePrefixKind::kPrefixSharp:
-      result = "kPrefixSharp";
+    case msrBassFigurePrefixKind::kBassFigurePrefixSharp:
+      result = "kBassFigurePrefixSharp";
       break;
-    case msrBassFigurePrefixKind::kPrefixDoubleSharp:
-      result = "kPrefixDoubleSharp";
+    case msrBassFigurePrefixKind::kBassFigurePrefixDoubleSharp:
+      result = "kBassFigurePrefixDoubleSharp";
       break;
   } // switch
 
@@ -201,32 +201,32 @@ string msrBassFigureSuffixKindAsString (
   string result;
 
   switch (figureSuffixKind) {
-    case msrBassFigureSuffixKind::k_NoBassFigureSuffix:
-      result = "k_NoBassFigureSuffix";
+    case msrBassFigureSuffixKind::kBassFigureSuffix_NO_:
+      result = "kBassFigureSuffix_NO_";
       break;
-    case msrBassFigureSuffixKind::kSuffixDoubleFlat:
-      result = "kSuffixDoubleFlat";
+    case msrBassFigureSuffixKind::kBassFigureSuffixDoubleFlat:
+      result = "kBassFigureSuffixDoubleFlat";
       break;
-    case msrBassFigureSuffixKind::kSuffixFlat:
-      result = "kSuffixFlat";
+    case msrBassFigureSuffixKind::kBassFigureSuffixFlat:
+      result = "kBassFigureSuffixFlat";
       break;
-    case msrBassFigureSuffixKind::kSuffixFlatFlat:
-      result = "kSuffixFlatFlat";
+    case msrBassFigureSuffixKind::kBassFigureSuffixFlatFlat:
+      result = "kBassFigureSuffixFlatFlat";
       break;
-    case msrBassFigureSuffixKind::kSuffixNatural:
-      result = "kSuffixNatural";
+    case msrBassFigureSuffixKind::kBassFigureSuffixNatural:
+      result = "kBassFigureSuffixNatural";
       break;
-    case msrBassFigureSuffixKind::kSuffixSharpSharp:
-      result = "kSuffixSharpSharp";
+    case msrBassFigureSuffixKind::kBassFigureSuffixSharpSharp:
+      result = "kBassFigureSuffixSharpSharp";
       break;
-    case msrBassFigureSuffixKind::kSuffixSharp:
-      result = "kSuffixSharp";
+    case msrBassFigureSuffixKind::kBassFigureSuffixSharp:
+      result = "kBassFigureSuffixSharp";
       break;
-    case msrBassFigureSuffixKind::kSuffixDoubleSharp:
-      result = "kSuffixDoubleSharp sharp";
+    case msrBassFigureSuffixKind::kBassFigureSuffixDoubleSharp:
+      result = "kBassFigureSuffixDoubleSharp sharp";
       break;
-    case msrBassFigureSuffixKind::kSuffixSlash:
-      result = "kSuffixSlash";
+    case msrBassFigureSuffixKind::kBassFigureSuffixSlash:
+      result = "kBassFigureSuffixSlash";
       break;
   } // switch
 

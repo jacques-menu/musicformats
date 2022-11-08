@@ -48,7 +48,7 @@ lpsrBookBlockElement::lpsrBookBlockElement (
   fBookBlockElementParallelMusicBlock =
     lpsrParallelMusicBLock::create (
       inputLineNumber,
-      lpsrParallelMusicBLock::kEndOfLine);
+      lpsrElementsSeparatorKind::kElementsSeparatorEndOfLine);
 }
 
 lpsrBookBlockElement::~lpsrBookBlockElement ()
@@ -172,7 +172,7 @@ lpsrScoreBlock::lpsrScoreBlock (
   fBookBlockElementParallelMusicBlock =
     lpsrParallelMusicBLock::create (
       inputLineNumber,
-      lpsrParallelMusicBLock::kEndOfLine);
+      lpsrElementsSeparatorKind::kElementsSeparatorEndOfLine);
 
   // create the score block layout?
   if (! gGlobalLpsr2lilypondOahGroup->getNoTopLevelLayoutBlock ()) {
@@ -422,7 +422,7 @@ lpsrBookPartBlock::lpsrBookPartBlock (
   fBookBlockElementParallelMusicBlock =
     lpsrParallelMusicBLock::create (
       inputLineNumber,
-      lpsrParallelMusicBLock::kEndOfLine);
+      lpsrElementsSeparatorKind::kElementsSeparatorEndOfLine);
 }
 
 lpsrBookPartBlock::~lpsrBookPartBlock ()
@@ -601,7 +601,7 @@ lpsrBookBlock::lpsrBookBlock (
   fBookBlockElementParallelMusicBlock =
     lpsrParallelMusicBLock::create (
       inputLineNumber,
-      lpsrParallelMusicBLock::kEndOfLine);
+      lpsrElementsSeparatorKind::kElementsSeparatorEndOfLine);
 */
 
   // create the book block element header

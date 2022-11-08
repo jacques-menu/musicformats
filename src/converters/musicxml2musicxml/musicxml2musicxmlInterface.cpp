@@ -12,7 +12,7 @@
 #include <iostream>
 #include <fstream>      // ofstream, ofstream::open(), ofstream::close()
 
-#include "mfMusicformatsError.h" // for mfMusicformatsError
+#include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 #include "xml.h"
 #include "xmlfile.h"
@@ -66,7 +66,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-static mfMusicformatsError xmlFile2musicxmlWithHandler (
+static mfMusicformatsErrorKind xmlFile2musicxmlWithHandler (
   SXMLFile&     sxmlfile,
   std::ostream& out,
   std::ostream& err,
@@ -128,11 +128,11 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -144,7 +144,7 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
       "Quitting after creating the MSR skeleton in pass 2a of xmlFile2musicxmlWithHandler as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // populate the MSR skeleton from MusicXML data (pass 2b)
@@ -159,11 +159,11 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -175,7 +175,7 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
       "Quitting after pass 2b as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // convert the first MSR score into a second MSR (pass 3)
@@ -194,11 +194,11 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
   }
   catch (msr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -210,7 +210,7 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
       "Quitting after pass 3 as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // convert the second MSR into an MXSR (pass 4)
@@ -229,11 +229,11 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
   }
   catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // convert the MXSR to MusicXML (pass 5)
@@ -254,18 +254,18 @@ static mfMusicformatsError xmlFile2musicxmlWithHandler (
   }
   catch (mxsr2musicxmlException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
+static mfMusicformatsErrorKind xmlFile2musicxmlWithOptionsAndArguments (
   SXMLFile&               sxmlfile,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -278,7 +278,7 @@ static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
 
     if (st) {
       if (st->getName () == "score-timewise")
-        return mfMusicformatsError::kErrorUnsupported;
+        return mfMusicformatsErrorKind::kMusicformatsErrorUnsupported;
     }
   }
 
@@ -291,7 +291,7 @@ static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
   }
 #endif
 
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // the service name
@@ -388,7 +388,7 @@ static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsError::k_NoError; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -397,11 +397,11 @@ static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
   }
   catch (mfOahException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidOption;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
@@ -426,11 +426,11 @@ static mfMusicformatsError xmlFile2musicxmlWithOptionsAndArguments (
     err,
     handler);
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlFile2musicxml (
+EXP mfMusicformatsErrorKind musicxmlFile2musicxml (
   const char*             fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -452,10 +452,10 @@ EXP mfMusicformatsError musicxmlFile2musicxml (
         err);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlFile2musicxmlWithHandler (
+mfMusicformatsErrorKind convertMusicxmlFile2musicxmlWithHandler (
   const char*  fileName,
   ostream&     out,
   ostream&     err,
@@ -477,11 +477,11 @@ mfMusicformatsError convertMusicxmlFile2musicxmlWithHandler (
         handler);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlFd2musicxml (
+EXP mfMusicformatsErrorKind musicxmlFd2musicxml (
   FILE*                   fd,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -503,10 +503,10 @@ EXP mfMusicformatsError musicxmlFd2musicxml (
         err);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlFd2musicxmlWithHandler (
+mfMusicformatsErrorKind convertMusicxmlFd2musicxmlWithHandler (
   FILE*        fd,
   ostream&     out,
   ostream&     err,
@@ -528,11 +528,11 @@ mfMusicformatsError convertMusicxmlFd2musicxmlWithHandler (
         handler);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlString2musicxml (
+EXP mfMusicformatsErrorKind musicxmlString2musicxml (
   const char*             buffer,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -554,10 +554,10 @@ EXP mfMusicformatsError musicxmlString2musicxml (
       out,
       err);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlString2musicxmlWithHandler (
+mfMusicformatsErrorKind convertMusicxmlString2musicxmlWithHandler (
   const char*  buffer,
   ostream&     out,
   ostream&     err,
@@ -579,7 +579,7 @@ mfMusicformatsError convertMusicxmlString2musicxmlWithHandler (
       err,
       handler);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 

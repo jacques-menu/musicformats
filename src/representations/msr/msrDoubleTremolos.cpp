@@ -43,6 +43,36 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string msrTremoloTypeKindAsString (
+  msrTremoloTypeKind tremoloTypeKind)
+{
+  string result;
+
+  switch (tremoloTypeKind) {
+    case msrTremoloTypeKind::kTremoloType_NO_:
+      result = "***kTremoloType_NO_***";
+      break;
+    case msrTremoloTypeKind::kTremoloTypeSingle:
+      result = "kTremoloTypeSingle";
+      break;
+    case msrTremoloTypeKind::kTremoloTypeStart:
+      result = "kTremoloTypeStart";
+      break;
+    case msrTremoloTypeKind::kTremoloTypeStop:
+      result = "kTremoloTypeStop";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTremoloTypeKind& elt)
+{
+  os << msrTremoloTypeKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrDoubleTremolo msrDoubleTremolo::create (
   int                  inputLineNumber,
   S_msrMeasure         upLinkToMeasure,

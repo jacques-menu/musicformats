@@ -38,6 +38,31 @@ using namespace std;
 namespace MusicFormats
 {
 
+// repeat endings
+//______________________________________________________________________________
+string msrRepeatEndingKindAsString (
+  msrRepeatEndingKind repeatEndingKind)
+{
+  string result;
+
+  switch (repeatEndingKind) {
+    case msrRepeatEndingKind::kRepeatEndingHooked:
+      result = "kRepeatEndingHooked";
+      break;
+    case msrRepeatEndingKind::kRepeatEndingHookless:
+      result = "kRepeatEndingHookless";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrRepeatEndingKind& elt)
+{
+  os << msrRepeatEndingKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 /*
   Repeats in MusicXML are applied to all voices in all staves of the current part

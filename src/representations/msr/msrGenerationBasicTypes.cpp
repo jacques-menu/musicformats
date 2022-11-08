@@ -17,7 +17,7 @@
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 #include "msrGenerationBasicTypes.h"
 
@@ -207,7 +207,7 @@ void msrGenerationAPIKindAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingGenerationAPIKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 

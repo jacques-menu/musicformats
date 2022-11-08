@@ -52,7 +52,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError msrScore2guidoWithHandler (
+EXP mfMusicformatsErrorKind msrScore2guidoWithHandler (
   S_msrScore   theMsrScore,
   string       passNumber1,
   string       passDescription1,
@@ -89,11 +89,11 @@ EXP mfMusicformatsError msrScore2guidoWithHandler (
   }
   catch (msr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // convert the second MSR into an MXSR
@@ -112,11 +112,11 @@ EXP mfMusicformatsError msrScore2guidoWithHandler (
   }
   catch (msr2mxsrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
 #ifdef TRACING_IS_ENABLED
@@ -161,14 +161,14 @@ EXP mfMusicformatsError msrScore2guidoWithHandler (
   }
   catch (mxsr2guidoException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 

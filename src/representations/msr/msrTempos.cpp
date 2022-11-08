@@ -1247,7 +1247,7 @@ void msrTempo::acceptOut (basevisitor* v)
 void msrTempo::browseData (basevisitor* v)
 {
   switch (fTempoKind) {
-    case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
       break;
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -1283,8 +1283,8 @@ string msrTempoKBeatUnitsKindAsString (
   string result;
 
   switch (tempoKind) {
-    case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
-      result = "k_NoTempoBeatUnits???";
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
+      result = "kTempoBeatUnits_NO_";
       break;
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
       result = "kTempoBeatUnitsWordsOnly";

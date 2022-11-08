@@ -20,7 +20,7 @@
 
 #include "mfAssert.h"
 
-#include "msrMeasures.h"
+#include "msrMeasureElements.h"
 
 #include "oahOah.h"
 

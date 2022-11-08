@@ -14,6 +14,8 @@
 
 #include "msr.h"
 
+#include "lpsrElements.h"
+
 #include "lpsrComments.h"
 
 #include "lpsrScheme.h"

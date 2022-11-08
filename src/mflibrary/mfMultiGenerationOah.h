@@ -34,7 +34,7 @@ EXP extern const string K_GENERATED_OUTPUT_KIND_MIDI_NAME;
 
 //______________________________________________________________________________
 enum class mfMultiGenerationOutputKind {
-  k_NoGeneration,
+  kGeneration_NO_,
   kGenerationLilypond,
   kGenerationBraille,
   kGenerationMusicXML,
@@ -45,7 +45,7 @@ enum class mfMultiGenerationOutputKind {
 EXP extern string mfMultiGenerationOutputKindAsString (
   mfMultiGenerationOutputKind multiGenerationOutputKind);
 
-ostream& operator << (ostream& os, mfMultiGenerationOutputKind& elt);
+ostream& operator << (ostream& os, const mfMultiGenerationOutputKind& elt);
 
 EXP extern mfMultiGenerationOutputKind mfMultiGenerationOutputKindFromString (
   const string& theString);

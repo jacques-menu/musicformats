@@ -2,7 +2,8 @@
 #define ___bsrPages___
 
 #include "bsrElements.h"
-#include "bsrPageElements.h"
+
+// #include "bsrPageElements.h"
 
 #include "bsrFootNotes.h"
 #include "bsrLines.h"

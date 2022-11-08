@@ -65,7 +65,7 @@ namespace MusicFormats
 {
 
 //_______________________________________________________________________________
-static mfMusicformatsError sxmlFile2lilypondWithHandler (
+static mfMusicformatsErrorKind sxmlFile2lilypondWithHandler (
   SXMLFile&     sxmlfile,
   std::ostream& out,
   std::ostream& err,
@@ -127,11 +127,11 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -143,7 +143,7 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
       "Quitting after creating the MSR skeleton in pass 2a of sxmlFile2lilypondWithHandler as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // populate the MSR skeleton from MusicXML data (pass 2b)
@@ -158,11 +158,11 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -174,7 +174,7 @@ static mfMusicformatsError sxmlFile2lilypondWithHandler (
       "Quitting after pass 2b as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // convert the first MSR score into a second MSR (pass 3)
@@ -216,11 +216,11 @@ else {
   }
   catch (mxsr2msrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // should we return now?
@@ -232,7 +232,7 @@ else {
       "Quitting after pass 3 as requested" <<
       endl;
 
-    return mfMusicformatsError::k_NoError;
+    return mfMusicformatsErrorKind::kMusicformatsError_NO_;
   }
 
   // the LPSR score
@@ -255,11 +255,11 @@ else {
   }
   catch (msr2lpsrException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // convert the LPSR to LilyPond code (pass 5)
@@ -308,11 +308,11 @@ else {
     }
     catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
   }
 
@@ -378,11 +378,11 @@ else {
     }
     catch (lpsr2lilypondException& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
     catch (std::exception& e) {
       mfDisplayException (e, gOutputStream);
-      return mfMusicformatsError::kErrorInvalidFile;
+      return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
     }
 
     // close output file
@@ -398,11 +398,11 @@ else {
     outputFileStream.close ();
   }
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-static mfMusicformatsError xmlFile2lilypondWithOptionsAndArguments (
+static mfMusicformatsErrorKind xmlFile2lilypondWithOptionsAndArguments (
   SXMLFile&               sxmlfile,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -415,7 +415,7 @@ static mfMusicformatsError xmlFile2lilypondWithOptionsAndArguments (
 
     if (st) {
       if (st->getName() == "score-timewise")
-        return mfMusicformatsError::kErrorUnsupported;
+        return mfMusicformatsErrorKind::kMusicformatsErrorUnsupported;
     }
   }
 
@@ -428,7 +428,7 @@ static mfMusicformatsError xmlFile2lilypondWithOptionsAndArguments (
   }
 #endif
 
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // the service name
@@ -526,7 +526,7 @@ static mfMusicformatsError xmlFile2lilypondWithOptionsAndArguments (
     // have help options been used?
     switch (helpOnlyKind) {
       case oahElementHelpOnlyKind::kElementHelpOnlyYes:
-        return mfMusicformatsError::k_NoError; // quit now
+        return mfMusicformatsErrorKind::kMusicformatsError_NO_; // quit now
         break;
       case oahElementHelpOnlyKind::kElementHelpOnlyNo:
         // go ahead
@@ -535,11 +535,11 @@ static mfMusicformatsError xmlFile2lilypondWithOptionsAndArguments (
   }
   catch (mfOahException& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidOption;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidOption;
   }
   catch (std::exception& e) {
     mfDisplayException (e, gOutputStream);
-    return mfMusicformatsError::kErrorInvalidFile;
+    return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   // check indentation
@@ -564,11 +564,11 @@ static mfMusicformatsError xmlFile2lilypondWithOptionsAndArguments (
     err,
     handler);
 
-  return mfMusicformatsError::k_NoError;
+  return mfMusicformatsErrorKind::kMusicformatsError_NO_;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlFile2lilypond (
+EXP mfMusicformatsErrorKind musicxmlFile2lilypond (
   const char*             fileName,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -590,10 +590,10 @@ EXP mfMusicformatsError musicxmlFile2lilypond (
         err);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlFile2lilypondWithHandler (
+mfMusicformatsErrorKind convertMusicxmlFile2lilypondWithHandler (
   const char*  fileName,
   ostream&     out,
   ostream&     err,
@@ -615,11 +615,11 @@ mfMusicformatsError convertMusicxmlFile2lilypondWithHandler (
         handler);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlFd2lilypond (
+EXP mfMusicformatsErrorKind musicxmlFd2lilypond (
   FILE*                   fd,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -641,10 +641,10 @@ EXP mfMusicformatsError musicxmlFd2lilypond (
         err);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlFd2lilypondWithHandler (
+mfMusicformatsErrorKind convertMusicxmlFd2lilypondWithHandler (
   FILE*        fd,
   ostream&     out,
   ostream&     err,
@@ -666,11 +666,11 @@ mfMusicformatsError convertMusicxmlFd2lilypondWithHandler (
         handler);
   }
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 //_______________________________________________________________________________
-EXP mfMusicformatsError musicxmlString2lilypond (
+EXP mfMusicformatsErrorKind musicxmlString2lilypond (
   const char*             buffer,
   oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&           out,
@@ -692,10 +692,10 @@ EXP mfMusicformatsError musicxmlString2lilypond (
       out,
       err);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
-mfMusicformatsError convertMusicxmlString2lilypondWithHandler (
+mfMusicformatsErrorKind convertMusicxmlString2lilypondWithHandler (
   const char*  buffer,
   ostream&     out,
   ostream&     err,
@@ -717,7 +717,7 @@ mfMusicformatsError convertMusicxmlString2lilypondWithHandler (
       err,
       handler);
 
-  return mfMusicformatsError::kErrorInvalidFile;
+  return mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
 }
 
 

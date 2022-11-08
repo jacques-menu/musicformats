@@ -563,7 +563,7 @@ class EXP msr2lpsrTranslator :
     // header
     // ------------------------------------------------------
     Bool                      fWorkNumberKnown;
-    Bool                      fWorkTitleKnown;
+    Bool                      fWorkCreditTypeTitleKnown;
     Bool                      fOpusKnown;
     Bool                      fMovementNumberKnown;
     Bool                      fMovementTitleKnown;

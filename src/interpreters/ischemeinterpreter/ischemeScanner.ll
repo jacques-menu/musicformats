@@ -582,11 +582,11 @@ void ischemeDriver::scanEnd ()
 }
 
 //_______________________________________________________________________________
-mfMusicformatsError launchIschemeInterpreter ()
+mfMusicformatsErrorKind launchIschemeInterpreter ()
 {
-  mfMusicformatsError
+  mfMusicformatsErrorKind
     result =
-      mfMusicformatsError::k_NoError;
+      mfMusicformatsErrorKind::kMusicformatsError_NO_;
 
   // the driver
   ischemeDriver
@@ -600,7 +600,7 @@ mfMusicformatsError launchIschemeInterpreter ()
   // launch the tool
   if (parseResult != 0) {
     result =
-      mfMusicformatsError::kErrorInvalidFile;
+      mfMusicformatsErrorKind::kMusicformatsErrorInvalidFile;
   }
 
   else {

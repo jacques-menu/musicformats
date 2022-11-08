@@ -753,19 +753,19 @@ string msrPedalTypeKindAsString (
   string result;
 
   switch (pedalTypeKind) {
-    case k_NoPedalType:
-      result = "k_NoPedalType";
+    case msrPedalTypeKind::kPedalType_NO_:
+      result = "kPedalType_NO_";
       break;
-    case kPedalTypeStart:
+    case msrPedalTypeKind::kPedalTypeStart:
       result = "kPedalTypeStart";
       break;
-    case kPedalTypeContinue:
+    case msrPedalTypeKind::kPedalTypeContinue:
       result = "kPedalTypeContinue";
       break;
-    case kPedalTypeChange:
+    case msrPedalTypeKind::kPedalTypeChange:
       result = "kPedalTypeChange";
       break;
-    case kPedalTypeStop:
+    case msrPedalTypeKind::kPedalTypeStop:
       result = "kPedalTypeStop";
       break;
   } // switch

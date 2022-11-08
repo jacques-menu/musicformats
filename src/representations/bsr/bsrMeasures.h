@@ -1,11 +1,12 @@
 #ifndef ___bsrMeasures___
 #define ___bsrMeasures___
 
+#include "bsrLineContentsElements.h"
+
 #include "bsrBarLines.h"
 #include "bsrClefs.h"
 #include "bsrCellsLists.h"
 #include "bsrDynamics.h"
-#include "bsrLineContentsElements.h"
 #include "bsrNotes.h"
 #include "bsrNumbers.h"
 #include "bsrWords.h"

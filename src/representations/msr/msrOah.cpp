@@ -129,7 +129,7 @@ void msrPitchesLanguageAtom::applyAtomWithValue (
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -895,7 +895,7 @@ R"()",
     ++gIndenter;
 
     s <<
-      existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH);
+      existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH);
 
     --gIndenter;
 
@@ -923,7 +923,7 @@ The default is 'DEFAULT_VALUE'.)",
 //             gIndenter.indentMultiLineString (
 //               foundString,
 //               os);
-            existingQuarterTonesPitchesLanguageKinds (K_NAMES_LIST_MAX_LENGTH)),
+            existingQuarterTonesPitchesLanguageKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
           regex ("DEFAULT_VALUE"),
           msrQuarterTonesPitchesLanguageKindAsString (
             msrQuarterTonesPitchesLanguageKindDefaultValue)),
@@ -954,8 +954,8 @@ R"()",
         "use-filename-as-work-title", "ufawt",
 R"(Use the file name as work title if there is none in the MusicXML data.
 Standard input (-) becomes 'Standard input' in that case.)",
-        "fUseFilenameAsWorkTitle",
-        fUseFilenameAsWorkTitle));
+        "fUseFilenameAsWorkCreditTypeTitle",
+        fUseFilenameAsWorkCreditTypeTitle));
 
   // lyricists as poets
   // --------------------------------------

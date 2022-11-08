@@ -160,7 +160,7 @@ R"(Usage: LilyPondIssue34 [option]*
     endl;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       s <<
         "The help below is available whichever output is produced";
       break;
@@ -190,7 +190,7 @@ string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
   size_t passesNumber = 0;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur
       break;
 
@@ -218,7 +218,7 @@ string LilyPondIssue34InsiderHandler::LilyPondIssue34AboutInformation (
   string headPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should only occur if the run is a pure help one
       headPart =
 R"(What LilyPondIssue34 does:
@@ -256,7 +256,7 @@ R"(
   string specificPart;
 
   switch (multiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -411,7 +411,7 @@ void LilyPondIssue34InsiderHandler::createTheLilyPondIssue34OptionGroups (
   */
 
   switch (mfMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -574,9 +574,9 @@ string LilyPondIssue34InsiderHandler::fetchOutputFileNameFromTheOptions () const
 
     // add the output file name suffix
     switch (fMultiGenerationOutputKind) {
-      case mfMultiGenerationOutputKind::k_NoGeneration:
+      case mfMultiGenerationOutputKind::kGeneration_NO_:
         // should not occur
-        outputFileName = "___k_NoGeneration___";
+        outputFileName = "___kGeneration_NO____";
         break;
 
       case mfMultiGenerationOutputKind::kGenerationLilypond:
@@ -892,7 +892,7 @@ R"(Options that are used by LilyPondIssue34 are grouped here.)",
 // JMI  fGenerationAPIKind = msrGenerationAPIKind::kMsrFunctionsAPIKind; // default value
   fGenerationAPIKind = msrGenerationAPIKind::kMsrStringsAPIKind; // default value
 
-  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::k_NoGeneration;
+  fMultiGenerationOutputKind = mfMultiGenerationOutputKind::kGeneration_NO_;
 
   initializeLilyPondIssue34InsiderOahGroup ();
 }

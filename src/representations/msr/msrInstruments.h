@@ -18,7 +18,7 @@
 #include "msrMeasureElements.h"
 
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats
@@ -351,7 +351,7 @@ EXP ostream& operator << (ostream& os, const S_msrHarpPedalsTuning& elt);
 
 
 enum class msrPedalTypeKind {
-  k_NoPedalType,
+  kPedalType_NO_,
   kPedalTypeStart, kPedalTypeContinue, kPedalTypeChange, kPedalTypeStop
 };
 

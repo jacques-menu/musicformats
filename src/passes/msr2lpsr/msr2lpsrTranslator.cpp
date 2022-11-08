@@ -377,7 +377,7 @@ void msr2lpsrTranslator::computeLilypondScoreHeaderTitleAndSubTitle ()
 
   // should the title be used as filename?
   if (
-    gGlobalMsrOahGroup->getUseFilenameAsWorkTitle ()
+    gGlobalMsrOahGroup->getUseFilenameAsWorkCreditTypeTitle ()
   ) { // ill-homed option??? JMI
     titleValue = gGlobalServiceRunData->getInputSourceName ();
   }
@@ -404,30 +404,30 @@ void msr2lpsrTranslator::computeLilypondScoreHeaderTitleAndSubTitle ()
 
       else {
         string
-          workTitle =
+          workCreditTypeTitle =
             fCurrentIdentification->
-              getIdentificationWorkTitle (),
+              getIdentificationWorkCreditTypeTitle (),
           movementTitle =
             fCurrentIdentification->
               getIdentificationMovementTitle ();
 
-        fWorkTitleKnown     = workTitle.size () != 0;
+        fWorkCreditTypeTitleKnown     = workCreditTypeTitle.size () != 0;
         fMovementTitleKnown = movementTitle.size () != 0;
 
         // have a work title or a movement title
         // been specified in the input?
-        if (fWorkTitleKnown || fMovementTitleKnown) {
-          if (fWorkTitleKnown && fMovementTitleKnown) {
+        if (fWorkCreditTypeTitleKnown || fMovementTitleKnown) {
+          if (fWorkCreditTypeTitleKnown && fMovementTitleKnown) {
             // use the work title as the LilyPond title
-            titleValue = workTitle;
+            titleValue = workCreditTypeTitle;
 
             // use the movement title as the LilyPond subtitle
             subtitleValue = movementTitle;
           }
 
-          else if (fWorkTitleKnown) {
+          else if (fWorkCreditTypeTitleKnown) {
             // use the work title as the LilyPond title
-            titleValue = workTitle;
+            titleValue = workCreditTypeTitle;
           }
 
           else {
@@ -474,20 +474,20 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
   // create another MSR score component of the LPSR score
   fCurrentMsrScoreClone =
     msrScore::create (
-      K_NO_INPUT_LINE_NUMBER,
+      K_MF_NO_INPUT_LINE_NUMBER,
       "msrScore::create()");
 
   // create the resulting LPSR score
   fResultingLpsr =
     lpsrScore::create (
-      K_NO_INPUT_LINE_NUMBER,
+      K_MF_NO_INPUT_LINE_NUMBER,
       fCurrentMsrScoreClone,
       multiComponent);
 
   // create the current book block
   fCurrentLpsrBookBlock =
     lpsrBookBlock::create (
-      K_NO_INPUT_LINE_NUMBER);
+      K_MF_NO_INPUT_LINE_NUMBER);
 
   // set its header to that of the visited LPSR score JMI ???
   fCurrentLpsrBookBlock->
@@ -510,7 +510,7 @@ S_lpsrScore msr2lpsrTranslator::translateMsrToLpsr (
         // create the current score block
         fCurrentScoreBlock =
           lpsrScoreBlock::create (
-            K_NO_INPUT_LINE_NUMBER);
+            K_MF_NO_INPUT_LINE_NUMBER);
 
         // append it to the book block elements list
         fCurrentLpsrBookBlock->
@@ -772,9 +772,9 @@ void msr2lpsrTranslator::populateHeaderFromIdentification (
 
   header->setHeaderIdentification (identification);
 
-  string workTitle = identification->getIdentificationWorkTitle ();
-  if (workTitle.size ()) {
-    header->setLilypondTitle (workTitle);
+  string workCreditTypeTitle = identification->getIdentificationWorkCreditTypeTitle ();
+  if (workCreditTypeTitle.size ()) {
+    header->setLilypondTitle (workCreditTypeTitle);
   }
 
   string opus = identification->getIdentificationOpus ();
@@ -1322,31 +1322,31 @@ void msr2lpsrTranslator::visitStart (S_msrCredit& elt)
     creditTypeKind = elt->getCreditTypeKind ();
 
   switch (creditTypeKind) {
-    case msrCreditTypeKind::k_NoCreditType:
+    case msrCreditTypeKind::kCreditType_NO_:
       break;
 
-    case msrCreditTypeKind::kPageNumber:
+    case msrCreditTypeKind::kCreditTypeNumber:
       break;
 
-    case msrCreditTypeKind::kTitle:
+    case msrCreditTypeKind::kCreditTypeTitle:
       break;
-    case msrCreditTypeKind::kSubtitle:
-      break;
-
-    case msrCreditTypeKind::kComposer:
-      break;
-    case msrCreditTypeKind::kArranger:
-      break;
-    case msrCreditTypeKind::kLyricist:
+    case msrCreditTypeKind::kCreditTypeSubtitle:
       break;
 
-    case msrCreditTypeKind::kRights:
+    case msrCreditTypeKind::kCreditTypeComposer:
+      break;
+    case msrCreditTypeKind::kCreditTypeArranger:
+      break;
+    case msrCreditTypeKind::kCreditTypeLyricist:
       break;
 
-    case msrCreditTypeKind::kPartName:
+    case msrCreditTypeKind::kCreditTypeRights:
       break;
 
-    case msrCreditTypeKind::kOtherCreditType:
+    case msrCreditTypeKind::kCreditTypePartName:
+      break;
+
+    case msrCreditTypeKind::kCreditTypeOther:
       break;
   } // switch
 }
@@ -2015,7 +2015,7 @@ void msr2lpsrTranslator::visitStart (S_msrStaff& elt)
               // create the current score block
               fCurrentScoreBlock =
                 lpsrScoreBlock::create (
-                  K_NO_INPUT_LINE_NUMBER);
+                  K_MF_NO_INPUT_LINE_NUMBER);
 
               // append it to the book block elements list
               fCurrentLpsrBookBlock->
@@ -3161,7 +3161,7 @@ void msr2lpsrTranslator::visitStart (S_msrSyllable& elt)
           words =
             msrWords::create (
               inputLineNumber,
-              msrPlacementKind::k_NoPlacement,                // default value
+              msrPlacementKind::kPlacement_NO_,                // default value
               wordsValue,
               msrJustifyKind::kJustifyNone,                  // default value
               msrHorizontalAlignmentKind::kHorizontalAlignmentNone,      // default value
@@ -3367,7 +3367,7 @@ void msr2lpsrTranslator::visitStart (S_msrTempo& elt)
 #endif
 
   switch (elt->getTempoKind ()) {
-    case msrTempoKBeatUnitsKind::k_NoTempoBeatUnits:
+    case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
       break;
 
     case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
@@ -3964,7 +3964,7 @@ void msr2lpsrTranslator::visitStart (S_msrSpanner& elt)
       break;
     case msrSpannerTypeKind::kSpannerTypeContinue:
       break;
-    case msrSpannerTypeKind::k_NoSpannerType:
+    case msrSpannerTypeKind::kSpannerType_NO_:
       break;
   } // switch
 
@@ -4238,7 +4238,7 @@ void msr2lpsrTranslator::visitStart (S_msrDynamic& elt)
       case msrDynamicKind::kDynamicSFFZ:
       case msrDynamicKind::kDynamicSFZP:
       case msrDynamicKind::kDynamicN:
-      case msrDynamicKind::k_NoDynamics:
+      case msrDynamicKind::kDynamic_NO_:
         knownToLilyPondNatively = false;
 
       default:
@@ -5364,7 +5364,7 @@ void msr2lpsrTranslator::visitEnd (S_msrNote& elt)
 
   switch (noteKind) {
 
-    case msrNoteKind::k_NoNote:
+    case msrNoteKind::kNote_NO_:
       break;
 
     case msrNoteKind::kNoteRestInMeasure:

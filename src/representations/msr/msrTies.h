@@ -14,11 +14,24 @@
 
 #include "msrElements.h"
 
-#include "msrBasicTypes.h"
+// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats
 {
+
+// ties
+// ------------------------------------------------------
+
+enum class msrTieKind {
+  kTieNone,
+  kTieStart, kTieContinue, kTieStop
+};
+
+string msrTieKindAsString (
+  msrTieKind tieKind);
+
+ostream& operator << (ostream& os, const msrTieKind& elt);
 
 //______________________________________________________________________________
 class EXP msrTie : public msrElement

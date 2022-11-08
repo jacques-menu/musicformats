@@ -146,7 +146,7 @@ void msdlConverterRegularHandler::createRegularHandlerGroups ()
   */
 
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 
@@ -493,7 +493,7 @@ void msdlConverterRegularHandler::createOahRegularGroup ()
 
   // atoms from the insider handler depending on the generated output kind
   switch (fMultiGenerationOutputKind) {
-    case mfMultiGenerationOutputKind::k_NoGeneration:
+    case mfMultiGenerationOutputKind::kGeneration_NO_:
       // should not occur, unless the run is a pure help one
       break;
 

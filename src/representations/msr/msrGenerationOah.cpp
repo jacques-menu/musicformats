@@ -87,7 +87,7 @@ R"()",
             regex ("NUMBER"),
             to_string (gGlobalGenerationAPIKindsMap.size ())),
           regex ("GENERATION_API_KINDS"),
-          existingGenerationAPIKinds (K_NAMES_LIST_MAX_LENGTH)),
+          existingGenerationAPIKinds (K_MF_NAMES_LIST_MAX_LENGTH)),
         regex ("DEFAULT_VALUE"),
         msrGenerationAPIKindAsString (
           msrGenerationAPIKindDefaultValue)),
