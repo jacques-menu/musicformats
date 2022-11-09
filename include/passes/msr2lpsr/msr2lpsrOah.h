@@ -15,7 +15,7 @@
 
 #include "oahBasicTypes.h"
 
-#include "lpsrBasicTypes.h"
+#include "lpsrEnumTypes.h"
 
 
 namespace MusicFormats

@@ -15,9 +15,14 @@
 #include <string>
 #include <ostream>
 
+#include <map>
+
 #include "smartpointer.h"
 
+#include "mfBool.h"
 
+
+using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats

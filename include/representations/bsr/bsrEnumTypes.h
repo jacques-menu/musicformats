@@ -12,10 +12,10 @@
 #ifndef ___bsrBasicTypes___
 #define ___bsrBasicTypes___
 
+#include <string>
 #include <map>
 
-// #include "msrBasicTypes.h"
-
+using namespace std;
 
 namespace MusicFormats
 {
@@ -278,10 +278,6 @@ void write_wstring (ostream& os, wstring wstr );
 
 EXP ostream& operator << (ostream& os, const wstring& wstr);
 */
-
-// initialization
-//______________________________________________________________________________
-void initializeBsrBasicTypes ();
 
 
 } // namespace MusicFormats

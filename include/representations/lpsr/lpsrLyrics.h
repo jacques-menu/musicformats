@@ -12,9 +12,9 @@
 #ifndef ___lpsrLyrics___
 #define ___lpsrLyrics___
 
-#include "lpsrElements.h"
+#include "msrVoices.h"
 
-#include "msr.h"
+#include "lpsrElements.h"
 
 #include "lpsrVariables.h"
 
@@ -23,8 +23,9 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   msrStanza;
-typedef SMARTP<msrStanza> S_msrStanza;
+// pre-declarations
+// class   msrStanza;
+// typedef SMARTP<msrStanza> S_msrStanza;
 
 //______________________________________________________________________________
 class EXP lpsrNewLyricsBlock : public lpsrElement

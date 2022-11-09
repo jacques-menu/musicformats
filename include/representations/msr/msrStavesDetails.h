@@ -17,8 +17,6 @@
 #include "msrElements.h"
 #include "msrMeasureElements.h"
 
-// #include "msrBasicTypes.h"
-
 #include "msrOctaves.h"
 #include "msrPrintObjects.h"
 

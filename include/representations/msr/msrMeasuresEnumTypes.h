@@ -12,6 +12,8 @@
 #ifndef ___msrMeasuresEnumTypes___
 #define ___msrMeasuresEnumTypes___
 
+#include <string>
+
 // #include "msrSegmentElements.h"
 //
 // #include "msrBarChecks.h"
@@ -36,6 +38,8 @@
 // #include "msrTuplets.h"
 // #include "msrVoices.h"
 
+
+using namespace std;
 
 namespace MusicFormats
 {

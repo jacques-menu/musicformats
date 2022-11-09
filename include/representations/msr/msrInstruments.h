@@ -17,8 +17,7 @@
 #include "msrElements.h"
 #include "msrMeasureElements.h"
 
-
-// #include "msrBasicTypes.h"
+#include "msrOctaves.h"
 
 
 namespace MusicFormats

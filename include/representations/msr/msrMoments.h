@@ -15,6 +15,13 @@
 #include <string>
 #include <ostream>
 
+#include "exports.h"
+
+#include "mfBool.h"
+#include "mfRational.h"
+
+
+using namespace std;
 
 namespace MusicFormats
 {
@@ -85,8 +92,6 @@ class EXP msrMoment
     Bool                  operator<= (const msrMoment& other) const
                               { return ! ((*this) > other); }
 
-    static void           testMsrMomentComparisons (ostream& os);
-
   public:
 
     // visitors
@@ -116,6 +121,8 @@ class EXP msrMoment
     Rational              fSoundingRelativeOffset;
 };
 EXP ostream& operator << (ostream& os, const msrMoment& elt);
+
+void testMsrMomentComparisons (ostream& os);
 
 
 }

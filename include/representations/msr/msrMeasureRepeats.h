@@ -230,10 +230,11 @@ enum class msrMeasureRepeatBuildPhaseKind {
   kMeasureRepeatBuildPhaseCompleted
 };
 
+ostream& operator << (ostream& os, const msrMeasureRepeatBuildPhaseKind& elt);
+
 // string msrMeasureRepeatBuildPhaseKindAsString ( // JMI v0.9.66
 //   msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind);
 //
-// ostream& operator << (ostream& os, const msrMeasureRepeatBuildPhaseKind& elt);
 
 class EXP msrMeasureRepeat : public msrSegmentElement
 {

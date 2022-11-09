@@ -12,7 +12,7 @@
 #ifndef ___lpsr2lilypondOah___
 #define ___lpsr2lilypondOah___
 
-#include "lpsrBasicTypes.h"
+#include "lpsrEnumTypes.h"
 
 #include "oahAtomsCollection.h"
 

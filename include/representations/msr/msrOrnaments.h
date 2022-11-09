@@ -15,7 +15,7 @@
 #include "msrElements.h"
 
 #include "msrAccidentals.h"
-// #include "msrNotes.h"
+#include "msrPlacements.h"
 
 
 namespace MusicFormats
@@ -29,7 +29,7 @@ typedef SMARTP<msrNote> S_msrNote;
 // data types
 
 enum class msrOrnamentKind {
-  kOrnamentTrill, // JMI kOrnamentDashes,
+  kOrnamentTrill, // JMI kOrnamentDashes, v0.9.66
   kOrnamentTurn, kOrnamentInvertedTurn, kOrnamentDelayedTurn,
   kOrnamentDelayedInvertedTurn, kOrnamentVerticalTurn,
   kOrnamentMordent, kOrnamentInvertedMordent,

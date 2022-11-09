@@ -12,13 +12,16 @@
 #ifndef ___msrHarmonies___
 #define ___msrHarmonies___
 
+#include <vector>
+
 #include "msrElements.h"
 #include "msrMeasureElements.h"
 
-// #include "msrBasicTypes.h"
-
+#include "msrIntervals.h"
 #include "msrNotes.h"
+#include "msrOctaves.h"
 #include "msrTablatures.h"
+#include "msrTupletFactors.h"
 #include "msrVoices.h"
 
 namespace MusicFormats
@@ -337,22 +340,22 @@ class EXP msrHarmony : public msrMeasureElement
     S_msrVoice            getHarmoniesUpLinkToVoice () const
                              { return fHarmoniesUpLinkToVoice; }
 
-    // position in measure
-    void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context) override
-                              {
-                                setHarmonyMeasurePosition (
-                                  measure,
-                                  measurePosition,
-                                  context);
-                              }
-
-    void                  setHarmonyMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context);
+//     // position in measure
+//     void                  setMeasureElementMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context) override
+//                               {
+//                                 setHarmonyMeasurePosition (
+//                                   measure,
+//                                   measurePosition,
+//                                   context);
+//                               }
+//
+//     void                  setHarmonyMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context);
 
     // whole notes
     void                  setHarmonyDisplayWholeNotes (
@@ -498,92 +501,6 @@ class EXP msrHarmony : public msrMeasureElement
 };
 typedef SMARTP<msrHarmony> S_msrHarmony;
 EXP ostream& operator << (ostream& os, const S_msrHarmony& elt);
-
-// intervals
-//______________________________________________________________________________
-enum class msrIntervalKind {
-  kInterval_NO_,
-
-  kIntervalDiminishedUnisson, kIntervalPerfectUnisson,
-  kIntervalAugmentedUnisson,
-
-  kIntervalDiminishedSecond, kIntervalMinorSecond,
-  kIntervalMajorSecond, kIntervalAugmentedSecond,
-
-  kIntervalDiminishedThird, kIntervalMinorThird,
-  kIntervalMajorThird, kIntervalAugmentedThird,
-
-  kIntervalDiminishedFourth, kIntervalPerfectFourth,
-  kIntervalAugmentedFourth,
-
-  kIntervalDiminishedFifth, kIntervalPerfectFifth,
-  kIntervalAugmentedFifth,
-
-  kIntervalDiminishedSixth, kIntervalMinorSixth,
-  kIntervalMajorSixth, kIntervalAugmentedSixth,
-
-  kIntervalDiminishedSeventh, kIntervalMinorSeventh,
-  kIntervalMajorSeventh, kIntervalAugmentedSeventh,
-
-  kIntervalDiminishedOctave, kIntervalPerfectOctave,
-  kIntervalAugmentedOctave,
-
-  kIntervalDiminishedNinth, kIntervalMinorNinth,
-  kIntervalMajorNinth, kIntervalAugmentedNinth,
-
-  kIntervalDiminishedTenth, kIntervalMinorTenth,
-  kIntervalMajorTenth, kIntervalAugmentedTenth,
-
-  kIntervalDiminishedEleventh, kIntervalPerfectEleventh,
-  kIntervalAugmentedEleventh,
-
-  kIntervalDiminishedTwelfth, kIntervalPerfectTwelfth,
-  kIntervalAugmentedTwelfth,
-
-  kIntervalDiminishedThirteenth, kIntervalMinorThirteenth,
-  kIntervalMajorThirteenth, kIntervalAugmentedThirteenth
-};
-
-string msrIntervalKindAsString (
-  msrIntervalKind intervaKindl);
-
-string msrIntervalKindAsShortString (
-  msrIntervalKind intervalKind);
-
-ostream& operator << (ostream& os, const msrIntervalKind& elt);
-
-EXP int msrIntervalKindAsSemiTones (
-  msrIntervalKind intervalKind);
-
-EXP int msrIntervalKindAsQuarterTones (
-  msrIntervalKind intervalKind);
-
-EXP msrIntervalKind invertIntervalKind (
-  msrIntervalKind intervalKind);
-
-EXP int intervalKindAsSemitones (
-  msrIntervalKind intervalKind);
-
-/* JMI
-EXP msrSemiTonesPitchKind noteAtIntervalKindFromNote (
-  msrIntervalKind             intervalKind,
-  msrSemiTonesPitchKind       semiTonesPitchKind,
-  msrAlterationPreferenceKind alterationPreferenceKind);
-*/
-
-EXP msrSemiTonesPitchKind noteAtIntervalFromSemiTonesPitch (
-  int                   inputLineNumber,
-  msrIntervalKind       intervalKind,
-  msrSemiTonesPitchKind semiTonesPitchKind);
-
-EXP msrQuarterTonesPitchKind noteAtIntervalFromQuarterTonesPitch (
-  int                      inputLineNumber,
-  msrIntervalKind          intervalKind,
-  msrQuarterTonesPitchKind quarterTonesPitchKind);
-
-EXP msrIntervalKind intervalBetweenSemiTonesPitches (
-  msrSemiTonesPitchKind semiTonesPitch1,
-  msrSemiTonesPitchKind semiTonesPitch2);
 
 // harmonies intervals
 //______________________________________________________________________________

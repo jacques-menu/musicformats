@@ -16,8 +16,12 @@
 
 #include "msrStavesEnumTypes.h"
 
+#include "msrBarChecks.h"
 #include "msrBarLines.h"
+#include "msrBarNumberChecks.h"
+#include "msrBreaks.h"
 #include "msrClefs.h"
+#include "msrDoubleTremolos.h"
 #include "msrInstruments.h"
 #include "msrKeys.h"
 #include "msrMeasuresEnumTypes.h"

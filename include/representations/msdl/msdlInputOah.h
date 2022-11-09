@@ -14,7 +14,7 @@
 
 #include "msrPitchesNames.h"
 
-#include "msdlBasicTypes.h"
+#include "msdlEnumTypes.h"
 #include "msdlKeywords.h"
 
 #include "enableTracingIfDesired.h"

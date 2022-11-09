@@ -16,6 +16,8 @@
 
 #include "msrElements.h"
 
+#include "mfRational.h"
+
 #include "msrDurations.h"
 
 
