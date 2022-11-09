@@ -151,7 +151,7 @@ string msrLigatureKindAsString (
     case msrLigatureKind::kLigatureStop:
       result = "kLigatureStop";
       break;
-    case kLigatureNone:
+    case msrLigatureKind::kLigatureNone:
       result = "kLigatureNone";
   } // switch
 
@@ -196,20 +196,16 @@ ostream& operator << (ostream& os, const msrLigatureLineEndKind& elt)
   return os;
 }
 
-string msrLigature::msrLigatureKindAsString () const
-{
-  return msrLigatureKindAsString (fLigatureKind);
-}
-
 string msrLigature::asString () const
 {
   stringstream s;
 
   s <<
-    "[Ligature " << msrLigatureKindAsString () <<
-    "fLigatureLineEndKind" << " : " << fLigatureLineEndKind <<
-    "fLigatureLineTypeKind" << " : " << fLigatureLineTypeKind) <<
-    "fLigaturePlacementKind" << " : " << fLigaturePlacementKind) <<
+    "[Ligature" <<
+    ", fLigatureKind: " << fLigatureKind <<
+    ", fLigatureLineEndKind" << " : " << fLigatureLineEndKind <<
+    ", fLigatureLineTypeKind" << " : " << fLigatureLineTypeKind <<
+    ", fLigaturePlacementKind" << " : " << fLigaturePlacementKind <<
     ", line " << fInputLineNumber <<
     ']';
 
@@ -219,7 +215,8 @@ string msrLigature::asString () const
 void msrLigature::print (ostream& os) const
 {
   os <<
-    "[Ligature " << msrLigatureKindAsString () <<
+    "[Ligature" <<
+    ", fLigatureKind: " << fLigatureKind <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -229,19 +226,13 @@ void msrLigature::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "ligatureLineEndKind" << " : " <<
-    msrLigatureLineEndKindAsString (
-      fLigatureLineEndKind) <<
+    "fLigatureLineEndKind" << " : " << fLigatureLineEndKind <<
     endl <<
     setw (fieldWidth) <<
-    "ligatureLineTypeKind" << " : " <<
-    msrLineTypeKindAsString (
-      fLigatureLineTypeKind) <<
+    "fLigatureLineTypeKind" << " : " << fLigatureLineTypeKind <<
     endl <<
     setw (fieldWidth) <<
-    "ligaturePlacementKind" << " : " <<
-    msrPlacementKindAsString (
-      fLigaturePlacementKind) <<
+    "fLigaturePlacementKind" << " : " << fLigaturePlacementKind <<
     endl;
 
   --gIndenter;

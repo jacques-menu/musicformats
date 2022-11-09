@@ -3,6 +3,8 @@
 
 #include "msrElements.h"
 
+#include "msrLineTypes.h"
+
 
 namespace MusicFormats
 {

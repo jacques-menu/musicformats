@@ -14,8 +14,10 @@
 #include "visitor.h"
 
 #include "mfAssert.h"
-
+#include "mfConstants.h"
+#include "mfEnumAll.h"
 #include "mfServiceRunData.h"
+#include "mfStringsHandling.h"
 
 #include "msrWae.h"
 
@@ -31,8 +33,8 @@
 #include "msrHarmonies.h"
 
 #include "oahOah.h"
-
 #include "msrOah.h"
+#include "lpsrOah.h"
 
 #include "msrBrowsers.h"
 
@@ -41,6 +43,2769 @@ using namespace std;
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+S_msrHarmonyInterval msrHarmonyInterval::create (
+// JMI  int             inputLineNumber,
+  msrIntervalKind harmonyIntervalIntervalKind,
+  int             harmonyIntervalRelativeOctave)
+{
+  msrHarmonyInterval* o =
+    new msrHarmonyInterval (
+ //     inputLineNumber,
+ //     harmonyIntervalNumber,
+      harmonyIntervalIntervalKind,
+      harmonyIntervalRelativeOctave);
+  assert (o != nullptr);
+
+  return o;
+}
+
+msrHarmonyInterval::msrHarmonyInterval (
+// JMI  int             inputLineNumber,
+  msrIntervalKind harmonyIntervalIntervalKind,
+  int             harmonyIntervalRelativeOctave)
+  // JMI  : msrElement (inputLineNumber)
+{
+  fHarmonyIntervalIntervalKind = harmonyIntervalIntervalKind;
+
+  fHarmonyIntervalRelativeOctave = harmonyIntervalRelativeOctave;
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+    gLogStream <<
+      "==> Creating harmony item '" <<
+      harmonyIntervalAsString () <<
+      "'" <<
+      endl;
+  }
+#endif
+}
+
+msrHarmonyInterval::~msrHarmonyInterval ()
+{}
+
+S_msrHarmonyInterval msrHarmonyInterval::createHarmonyIntervalNewbornClone ()
+{
+  S_msrHarmonyInterval
+    newbornClone =
+      msrHarmonyInterval::create (
+        fHarmonyIntervalIntervalKind,
+        fHarmonyIntervalRelativeOctave);
+
+  return newbornClone;
+}
+
+string msrHarmonyInterval::harmonyIntervalAsString () const
+{
+  stringstream s;
+
+  const int fieldWidth = 19;
+
+  s << left <<
+    "HarmonyInterval" <<
+    ": " <<
+    setw (fieldWidth) <<
+    msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
+    "harmonyIntervalRelativeOctave: " << fHarmonyIntervalRelativeOctave;
+
+  return s.str ();
+}
+
+string msrHarmonyInterval::harmonyIntervalAsShortString () const
+{
+  return
+    msrIntervalKindAsString (fHarmonyIntervalIntervalKind);
+}
+
+
+void msrHarmonyInterval::normalizeInterval ()
+{
+  // bring the interval below an octave
+  if (fHarmonyIntervalIntervalKind > msrIntervalKind::kIntervalAugmentedSeventh) {
+    fHarmonyIntervalIntervalKind =
+      msrIntervalKind (
+        (int) fHarmonyIntervalIntervalKind
+          -
+        (int) msrIntervalKind::kIntervalAugmentedSeventh);
+
+    fHarmonyIntervalRelativeOctave += 1;
+  }
+}
+
+void msrHarmonyInterval::deNormalizeInterval ()
+{
+  // bring the interval above the octave if its relative octave is 1
+  if (
+    fHarmonyIntervalRelativeOctave == 1
+      &&
+    fHarmonyIntervalIntervalKind <= msrIntervalKind::kIntervalAugmentedSeventh) {
+    fHarmonyIntervalIntervalKind =
+      msrIntervalKind (
+        (int) fHarmonyIntervalIntervalKind
+          +
+        (int) msrIntervalKind::kIntervalAugmentedSeventh);
+
+    fHarmonyIntervalRelativeOctave -= 1;
+  }
+}
+
+S_msrHarmonyInterval msrHarmonyInterval::intervalDifference (
+  S_msrHarmonyInterval otherHarmonyInterval)
+{
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
+    gLogStream <<
+      endl <<
+      "--> computing intervalDifference betwwen '" <<
+      asShortString () <<
+      "' and '" <<
+      otherHarmonyInterval->asShortString () <<
+      "'" <<
+      endl;
+  }
+#endif
+
+  msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_NO_;
+
+  S_msrHarmonyInterval
+    operand1 =
+      this->createHarmonyIntervalNewbornClone (),
+    operand2 =
+      otherHarmonyInterval->createHarmonyIntervalNewbornClone ();
+
+  // normalize both intervals
+  operand1->
+    normalizeInterval ();
+  operand2->
+    normalizeInterval ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
+    gLogStream <<
+      "--> normalized operands are '" <<
+      operand1->asShortString () <<
+      "' and '" <<
+      operand2->asShortString () <<
+      "'" <<
+      endl;
+  }
+#endif
+
+  // fetch the relative octaves
+  int
+    relativeOctave1 = operand1->fHarmonyIntervalRelativeOctave,
+    relativeOctave2 = operand2->fHarmonyIntervalRelativeOctave;
+
+  // fetch the interval kind
+  msrIntervalKind
+    intervalKind1 =
+      operand1->fHarmonyIntervalIntervalKind,
+    intervalKind2 =
+      operand2->fHarmonyIntervalIntervalKind;
+
+  // order the operands so that
+  // relativeOctave1 is greater or equal to relativeOctave2
+  Bool permuteRelativeOctaves (false);
+
+  if (relativeOctave1 < relativeOctave2) {
+    int saveRelativeOctave1 = relativeOctave1;
+
+    relativeOctave1 = relativeOctave2;
+    relativeOctave2 = saveRelativeOctave1;
+
+    permuteRelativeOctaves = true;
+  }
+
+  // order the intervals so that
+  // intervalKind1 is greater or equal to intervalKind2
+  // according to the enum class type
+  Bool invertInterval (false);
+
+  if (intervalKind1 < intervalKind2) {
+    msrIntervalKind saveIntervalKind1 = intervalKind1;
+
+    intervalKind1 = intervalKind2;
+    intervalKind2 = saveIntervalKind1;
+
+    invertInterval = true;
+  }
+
+  // compute the resulting relative octaves difference
+  int
+    resultRelativeOctave =
+      relativeOctave1 - relativeOctave2;
+  if (invertInterval) {
+    --resultRelativeOctave;
+  }
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
+    gLogStream <<
+      "--> permuteRelativeOctaves = " <<
+      permuteRelativeOctaves <<
+      ", invertInterval = " <<
+      invertInterval <<
+      ", resultRelativeOctave = " <<
+      resultRelativeOctave <<
+      endl;
+  }
+#endif
+
+  // compute resulting interval Kind
+  switch (intervalKind1) {
+    case msrIntervalKind::kInterval_NO_:
+      break;
+
+    case msrIntervalKind::kIntervalDiminishedUnisson:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalPerfectUnisson:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedUnisson:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+
+    case msrIntervalKind::kIntervalDiminishedSecond:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMinorSecond:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMajorSecond:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedSecond:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+
+    case msrIntervalKind::kIntervalDiminishedThird:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMinorThird:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMajorThird:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedThird:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+    //      resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+   // JMI      resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+
+    case msrIntervalKind::kIntervalDiminishedFourth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalPerfectFourth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedFourth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+
+    case msrIntervalKind::kIntervalDiminishedFifth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+ // JMI         resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+      // JMI    resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalPerfectFifth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFifth;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedFifth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+ // JMI         resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+
+    case msrIntervalKind::kIntervalDiminishedSixth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSixth;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSixth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalMinorSixth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalDiminishedThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+         resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+         resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMinorSixth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSixth;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSixth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSixth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFifth;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMajorSixth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSixth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSixth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFifth;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedSixth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+   //       resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSixth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+
+    case msrIntervalKind::kIntervalDiminishedSeventh:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSixth;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSixth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+     //     resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMinorSeventh:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSixth;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSixth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSixth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFifth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMajorSeventh:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSeventh;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSixth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSixth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFifth;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+ // JMI         resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSecond;
+          break;
+        case msrIntervalKind::kIntervalMinorSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedSeventh:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+ // JMI         resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalAugmentedSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+     // JMI    resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSixth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+      // JMI    resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFifth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFifth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalDiminishedFifth;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+     // JMI     resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedFourth;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectFourth;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+  // JMI        resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+ // JMI         resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSecond;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSecond;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSeventh:
+   // JMI       resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSeventh:
+    // JMI      resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    default:
+      ;
+  } // switch
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
+    gLogStream <<
+      "--> base resultIntervalKind = '" <<
+      msrIntervalKindAsString (resultIntervalKind) <<
+      "'" <<
+      endl;
+  }
+#endif
+
+  // take interval inversion into account if relevant
+  if (invertInterval) {
+    resultIntervalKind =
+      invertIntervalKind (resultIntervalKind);
+  }
+
+  // take relative octabes permutation into account if relevant
+  if (permuteRelativeOctaves) {
+    resultIntervalKind =
+      invertIntervalKind (resultIntervalKind);
+  }
+
+  // create the result
+  S_msrHarmonyInterval
+    result =
+      msrHarmonyInterval::create (
+        resultIntervalKind,
+        resultRelativeOctave);
+
+  // denormalize it, in order to get intervals
+  // greater than an augmented seventh if applicable
+  result->deNormalizeInterval ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceExtraHarmonies ()) {
+    gLogStream <<
+      "--> result = '" <<
+      result->asShortString () <<
+      "'" <<
+      endl << endl;
+  }
+#endif
+
+  // return it;
+  return result;
+}
+
+S_msrHarmonyInterval msrHarmonyInterval::intervalSum (
+  S_msrHarmonyInterval otherHarmonyInterval)
+{
+  msrIntervalKind resultIntervalKind   = msrIntervalKind::kInterval_NO_;
+  int             resultRelativeOctave = 0;
+
+  msrIntervalKind
+    intervalKind1 = fHarmonyIntervalIntervalKind,
+    intervalKind2 = otherHarmonyInterval->fHarmonyIntervalIntervalKind;
+
+  int
+    relativeOctave1 = fHarmonyIntervalRelativeOctave,
+    relativeOctave2 = otherHarmonyInterval->fHarmonyIntervalRelativeOctave;
+
+  relativeOctave1 = relativeOctave2; // TEMP, JMI
+  relativeOctave2 = relativeOctave1; // TEMP, JMI
+
+  // order the intervals so that
+  // intervalKind1 is greater or equal to intervalKind2
+  // according to the enum class type
+  Bool invertInterval (false);
+
+  if (intervalKind1 < intervalKind2) {
+    intervalKind1 = intervalKind2;
+    intervalKind2 = intervalKind1;
+    invertInterval = true;
+  }
+
+  switch (intervalKind1) {
+    case msrIntervalKind::kInterval_NO_:
+      break;
+
+    case msrIntervalKind::kIntervalDiminishedUnisson:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalPerfectUnisson:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedUnisson:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalDiminishedSecond:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMinorSecond:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMajorSecond:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedSecond:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalDiminishedThird:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMinorThird:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMajorThird:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedThird:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalDiminishedFourth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalPerfectFourth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedFourth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalDiminishedFifth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalPerfectFifth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedFifth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalDiminishedSixth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMinorSixth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMajorSixth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedSixth:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalDiminishedSeventh:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMinorSeventh:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalMajorSeventh:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    case msrIntervalKind::kIntervalAugmentedSeventh:
+      switch (intervalKind2) {
+        case msrIntervalKind::kIntervalDiminishedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedUnisson;
+          break;
+        case msrIntervalKind::kIntervalPerfectUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedUnisson:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedOctave;
+          break;
+        case msrIntervalKind::kIntervalMinorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMajorSeventh;
+          break;
+        case msrIntervalKind::kIntervalMajorSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorSeventh;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSecond:
+          resultIntervalKind = msrIntervalKind::kIntervalDiminishedSeventh;
+          break;
+        case msrIntervalKind::kIntervalDiminishedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalAugmentedSixth;
+          break;
+        case msrIntervalKind::kIntervalMinorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalMajorThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedThird:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFourth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalDiminishedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalPerfectFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalMinorThird;
+          break;
+        case msrIntervalKind::kIntervalAugmentedFifth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSixth:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalDiminishedSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMinorSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalMajorSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        case msrIntervalKind::kIntervalAugmentedSeventh:
+          resultIntervalKind = msrIntervalKind::kIntervalPerfectUnisson;
+          break;
+        default:
+          ;
+      } // switch
+      break;
+
+    default:
+      ;
+  } // switch
+
+
+  if (invertInterval) {
+    resultIntervalKind =
+      invertIntervalKind (resultIntervalKind);
+  }
+
+  return
+    msrHarmonyInterval::create (
+      resultIntervalKind,
+      resultRelativeOctave);
+}
+
+/* JMI
+void msrHarmonyInterval::acceptIn (basevisitor* v) {
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrHarmonyInterval::acceptIn ()" <<
+      endl;
+  }
+
+  if (visitor<S_msrHarmonyInterval>*
+    p =
+      dynamic_cast<visitor<S_msrHarmonyInterval>*> (v)) {
+        S_msrHarmonyInterval elem = this;
+
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrHarmonyInterval::visitStart ()" <<
+             endl;
+        p->visitStart (elem);
+  }
+}
+
+void msrHarmonyInterval::acceptOut (basevisitor* v) {
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrHarmonyInterval::acceptOut ()" <<
+      endl;
+  }
+
+  if (visitor<S_msrHarmonyInterval>*
+    p =
+      dynamic_cast<visitor<S_msrHarmonyInterval>*> (v)) {
+        S_msrHarmonyInterval elem = this;
+
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrHarmonyInterval::visitEnd ()" <<
+            endl;
+        p->visitEnd (elem);
+  }
+}
+
+void msrHarmonyInterval::browseData (basevisitor* v)
+{}
+*/
+
+string msrHarmonyInterval::asString () const
+{
+  stringstream s;
+
+  s <<
+    "[HarmonyInterval " <<
+    msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
+    ", fHarmonyIntervalRelativeOctave: " <<
+    fHarmonyIntervalRelativeOctave <<
+    ']';
+
+  return s.str ();
+}
+
+string msrHarmonyInterval::asShortString () const
+{
+  stringstream s;
+
+  s <<
+    '[' <<
+    msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
+    ", rel.oct. " <<
+    fHarmonyIntervalRelativeOctave <<
+    ']';
+
+  return s.str ();
+}
+
+void msrHarmonyInterval::print (ostream& os) const
+{
+  os <<
+    "HarmonyInterval" <<
+    endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 22;
+
+  os << left <<
+  /* JMI
+    setw (fieldWidth) <<
+    "harmonyIntervalNumber" << " : " << fHarmonyIntervalNumber <<
+    endl <<
+    */
+    setw (fieldWidth) <<
+    "harmonyIntervalIntervalKind" << " : " <<
+      msrIntervalKindAsString (fHarmonyIntervalIntervalKind) <<
+    endl <<
+    setw (fieldWidth) <<
+    "harmonyIntervalRelativeOctave" << " : " << fHarmonyIntervalRelativeOctave <<
+  /* JMI
+    ", line: " << fInputLineNumber <<
+    */
+    endl;
+
+  --gIndenter;
+}
+
+ostream& operator << (ostream& os, const S_msrHarmonyInterval& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << endl;
+  }
+
+  return os;
+}
+
+// modes
+//______________________________________________________________________________
+string msrModeKindAsString (
+  msrModeKind modeKind)
+{
+  string result;
+
+  switch (modeKind) {
+    case msrModeKind::kMode_NO_:
+      result = "***kMode_NO_***";
+      break;
+    case msrModeKind::kModeMajor:
+      result = "kModeMajor";
+      break;
+    case msrModeKind::kModeMinor:
+      result = "kModeMinor";
+      break;
+    case msrModeKind::kModeIonian:
+      result = "kModeIonian";
+      break;
+    case msrModeKind::kModeDorian:
+      result = "kModeDorian";
+      break;
+    case msrModeKind::kModePhrygian:
+      result = "kModePhrygian";
+      break;
+    case msrModeKind::kModeLydian:
+      result = "kModeLydian";
+      break;
+    case msrModeKind::kModeMixolydian:
+      result = "mixolkModeMixolydianydian";
+      break;
+    case msrModeKind::kModeAeolian:
+      result = "kModeAeolian";
+      break;
+    case msrModeKind::kModeLocrian:
+      result = "kModeLocrian";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrModeKind& elt)
+{
+  os << msrModeKindAsString (elt);
+  return os;
+}
+
+msrModeKind modeKindFromString (
+  int           inputLineNumber,
+  const string& modeString)
+{
+  // no CamelCase here, these strings are used in the command line options
+  msrModeKind result = msrModeKind::kMode_NO_;
+
+  if      (modeString == "major")
+    result = msrModeKind::kModeMajor;
+  else if (modeString == "minor")
+    result = msrModeKind::kModeMinor;
+  else if (modeString == "ionian")
+    result = msrModeKind::kModeIonian;
+  else if (modeString == "dorian")
+    result = msrModeKind::kModeDorian;
+  else if (modeString == "phrygian")
+    result = msrModeKind::kModePhrygian;
+  else if (modeString == "lydian")
+    result = msrModeKind::kModeLydian;
+  else if (modeString == "mixolydian")
+    result = msrModeKind::kModeMixolydian;
+  else if (modeString == "aeolian")
+    result = msrModeKind::kModeAeolian;
+  else if (modeString == "locrian")
+    result = msrModeKind::kModeLocrian;
+  else {
+    stringstream s;
+
+    s <<
+      "mode string \"" <<
+      modeString <<
+      "\" is unknown" <<
+      ", line = " << inputLineNumber;
+
+    msrError (
+      gGlobalServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      s.str ());
+  }
+
+  return result;
+}
 
 // harmonies
 //______________________________________________________________________________
@@ -1045,6 +3810,360 @@ ostream& operator << (ostream& os, const S_msrHarmonyDegree& elt)
   return os;
 }
 
+// harmonies contents
+//______________________________________________________________________________
+S_msrHarmonyContents msrHarmonyContents::create (
+// JMI  int                   inputLineNumber,
+  msrSemiTonesPitchKind harmonyContentsRootNote,
+  msrHarmonyKind        harmonyContentsHarmonyKind)
+{
+  msrHarmonyContents* o =
+    new msrHarmonyContents (
+ //     inputLineNumber,
+      harmonyContentsRootNote,
+      harmonyContentsHarmonyKind);
+  assert (o != nullptr);
+
+  return o;
+}
+
+msrHarmonyContents::msrHarmonyContents (
+// JMI  int                   inputLineNumber,
+  msrSemiTonesPitchKind harmonyContentsRootNote,
+  msrHarmonyKind        harmonyContentsHarmonyKind)
+{
+  fHarmonyContentsRootNote    = harmonyContentsRootNote;
+  fHarmonyContentsHarmonyKind = harmonyContentsHarmonyKind;
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+    gLogStream <<
+      "==> Creating harmonyContents '" <<
+      harmonyContentsAsString () <<
+      "'" <<
+      endl;
+  }
+#endif
+
+  // create the root harmony element
+  S_msrSemiTonesPitchAndOctave
+    rootChordElement =
+      msrSemiTonesPitchAndOctave::create (
+        fHarmonyContentsRootNote,
+        msrOctaveKind::kOctave0); // relative octave JMI ???
+
+  // add it to the harmony elements
+  fHarmonyElementsVector.push_back (rootChordElement);
+
+  // add the other notes to the harmony elements
+  S_msrHarmonyStructure
+    harmonyStructure =
+      msrHarmonyStructure::create (
+        fHarmonyContentsHarmonyKind);
+
+  const vector<S_msrHarmonyInterval>&
+    harmonyIntervals =
+      harmonyStructure->
+        getHarmonyStructureIntervals ();
+
+  for (size_t i = 1; i < harmonyIntervals.size (); ++i) {
+    // get the interval
+    msrIntervalKind
+      intervalKind =
+        harmonyIntervals [i]->
+          getHarmonyIntervalIntervalKind ();
+
+    // fetch the semitone pitch
+    msrSemiTonesPitchKind
+      semiTonePitch =
+        noteAtIntervalFromSemiTonesPitch (
+          0, // ??? JM                   inputLineNumber,
+          intervalKind,
+          fHarmonyContentsRootNote);
+
+    // create the harmony element
+    S_msrSemiTonesPitchAndOctave
+      harmonyElement =
+        msrSemiTonesPitchAndOctave::create (
+          semiTonePitch,
+          msrOctaveKind::kOctave0); // relative octave JMI ???
+
+    // add it to the harmony elements
+    fHarmonyElementsVector.push_back (harmonyElement);
+  } // for
+}
+
+msrHarmonyContents::~msrHarmonyContents ()
+{}
+
+string msrHarmonyContents::harmonyContentsAsString () const
+{
+  stringstream s;
+
+  s <<
+    "HarmonyContents" <<
+    ", " <<
+    msrHarmonyKindAsString (fHarmonyContentsHarmonyKind) <<
+    ", " <<
+    mfSingularOrPlural (
+      fHarmonyElementsVector.size (), "harmony element", "harmony elements");
+
+  return s.str ();
+}
+
+msrSemiTonesPitchKind msrHarmonyContents::bassSemiTonesPitchKindForHarmonyInversion (
+  int inputLineNumber,
+  int inversionNumber)
+{
+  /*
+    Inversion is a number indicating which inversion is used:
+    0 for root position, 1 for first inversion, etc.
+  */
+
+  if (
+    inversionNumber < 0
+      ||
+    inversionNumber > int (fHarmonyElementsVector.size ()) - 1 ) {
+    stringstream s;
+
+    s <<
+      "Sorry, inversion number '" <<
+      inversionNumber <<
+      "' does not exist for harmony notes '" <<
+      msrHarmonyKindAsString (fHarmonyContentsHarmonyKind) <<
+      "', line " << inputLineNumber;
+
+    msrInternalError (
+      gGlobalServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      s.str ());
+  }
+
+  return
+    fHarmonyElementsVector [inversionNumber]->
+      getSemiTonesPitchKind ();
+}
+
+void msrHarmonyContents::printAllHarmoniesContents (
+  ostream&              os,
+  msrSemiTonesPitchKind rootSemiTonesPitchKind)
+{
+  // fetch the root quartertones pitch kind
+  msrQuarterTonesPitchKind
+    rootQuarterTonesPitchKind =
+      quarterTonesPitchKindFromSemiTonesPitchKind (
+        rootSemiTonesPitchKind);
+
+  os <<
+    "All the known harmonies contents with diatonic root '" <<
+    msrQuarterTonesPitchKindAsStringInLanguage (
+      rootQuarterTonesPitchKind,
+      gGlobalLpsrOahGroup->
+        getLpsrQuarterTonesPitchesLanguageKind ()) <<
+      /* JMI
+    "' (" <<
+    msrSemiTonesPitchKindAsString (
+      rootSemiTonesPitchKind) <<
+    ")" <<
+    */
+    "' in language '" <<
+    msrQuarterTonesPitchesLanguageKindAsString (
+      gGlobalLpsrOahGroup->
+        getLpsrQuarterTonesPitchesLanguageKind ()) <<
+    "' 'are:" <<
+    endl << endl;
+
+  ++gIndenter;
+
+  for (auto e : EnumTrueHarmonies<msrHarmonyKind> ()) {
+    os <<
+      msrHarmonyKindAsString (e) <<
+      ":" <<
+      endl;
+
+    ++gIndenter;
+
+    // create the harmony intervals
+    S_msrHarmonyStructure
+      harmonyStructure =
+        msrHarmonyStructure::create (
+          e);
+
+    // fetch the intervals items for these intervals
+    // with rootSemiTonesPitchKind as root
+    const vector <S_msrHarmonyInterval>&
+      harmonyStructureIntervals =
+        harmonyStructure->
+          getHarmonyStructureIntervals ();
+
+    if (harmonyStructureIntervals.size ()) {
+      // fetch the notes for these intervals
+      vector<S_msrHarmonyInterval>::const_reverse_iterator
+        iBegin = harmonyStructureIntervals.crbegin (),
+        iEnd   = harmonyStructureIntervals.crend (),
+        i      = iBegin;
+
+      for ( ; ; ) {
+        S_msrHarmonyInterval
+          harmonyInterval = (*i);
+
+        msrIntervalKind
+          intervalKind =
+            harmonyInterval->
+              getHarmonyIntervalIntervalKind ();
+
+        // fetch the semitones pitch kind
+        msrSemiTonesPitchKind
+          noteSemiTonesPitchKind =
+            noteAtIntervalFromSemiTonesPitch (
+              K_MF_NO_INPUT_LINE_NUMBER,
+              intervalKind,
+              rootSemiTonesPitchKind);
+
+        // fetch the quartertones pitch kind
+        msrQuarterTonesPitchKind
+          noteQuarterTonesPitchKind =
+            quarterTonesPitchKindFromSemiTonesPitchKind (
+              noteSemiTonesPitchKind);
+
+        // print it
+        const int fieldWidth2 = 8;
+
+        os << left <<
+          setw (fieldWidth2) <<
+          msrQuarterTonesPitchKindAsStringInLanguage (
+            noteQuarterTonesPitchKind,
+            gGlobalLpsrOahGroup->
+              getLpsrQuarterTonesPitchesLanguageKind ()) <<
+          " : " <<
+          msrIntervalKindAsString (intervalKind) <<
+          endl;
+
+        if (++i == iEnd) break;
+
+        // no endl here
+      } // for
+    }
+
+    os << endl;
+
+    --gIndenter;
+  } // for
+
+  --gIndenter;
+}
+
+/* JMI
+void msrHarmonyContents::acceptIn (basevisitor* v) {
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrHarmonyContents::acceptIn ()" <<
+      endl;
+  }
+
+  if (visitor<S_msrHarmonyContents>*
+    p =
+      dynamic_cast<visitor<S_msrHarmonyContents>*> (v)) {
+        S_msrHarmonyContents elem = this;
+
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrHarmonyContents::visitStart ()" <<
+             endl;
+        p->visitStart (elem);
+  }
+}
+
+void msrHarmonyContents::acceptOut (basevisitor* v) {
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrHarmonyContents::acceptOut ()" <<
+      endl;
+  }
+
+  if (visitor<S_msrHarmonyContents>*
+    p =
+      dynamic_cast<visitor<S_msrHarmonyContents>*> (v)) {
+        S_msrHarmonyContents elem = this;
+
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrHarmonyContents::visitEnd ()" <<
+            endl;
+        p->visitEnd (elem);
+  }
+}
+
+void msrHarmonyContents::browseData (basevisitor* v)
+{}
+*/
+
+void msrHarmonyContents::print (ostream& os) const
+{
+  os <<
+    "HarmonyContents" <<
+  /* JMI
+    ", line: " << fInputLineNumber <<
+    */
+    endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 17;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "harmonyContentsRootNote" << " : " <<
+    msrSemiTonesPitchKindAsString (fHarmonyContentsRootNote) <<
+    endl <<
+    setw (fieldWidth) <<
+    "harmonyContentsHarmonyKind" << " : " <<
+    msrHarmonyKindAsString (fHarmonyContentsHarmonyKind) <<
+    endl;
+
+  if (fHarmonyElementsVector.size ()) {
+    os <<
+    mfSingularOrPlural (
+      fHarmonyElementsVector.size (), "harmony element", "harmony elements") <<
+    ":" <<
+    endl;
+
+    ++gIndenter;
+
+    for (size_t i = 0; i < fHarmonyElementsVector.size (); ++i) {
+      S_msrSemiTonesPitchAndOctave
+        harmonyElement =
+          fHarmonyElementsVector [i];
+
+      os <<
+        harmonyElement <<
+        endl;
+    } // for
+
+    --gIndenter;
+  }
+  else {
+    os <<
+      "no notes" <<
+      endl;
+  }
+
+  --gIndenter;
+}
+
+ostream& operator << (ostream& os, const S_msrHarmonyContents& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << endl;
+  }
+
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrHarmony msrHarmony::create (
   int                      inputLineNumber,
@@ -1324,83 +4443,83 @@ void msrHarmony::setHarmonyUpLinkToNote (S_msrNote note)
   fHarmonyUpLinkToNote = note;
 }
 
-void msrHarmony::setHarmonyMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const string&      context)
-{
-  // set the harmony position in measure, taking it's offset into account
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measure != nullptr,
-     "setHarmonyMeasurePosition(): measure is null");
-
-  // the offset can be negative, so we merely add it to measurePosition
-  // to obtain the harmony's actual measurePosition
-  // this overwrites it with the same value if fHarmonyWholeNotesOffset is null JMI ???
-  Rational
-    actualMeasurePosition =
-      measurePosition
-        +
-      fHarmonyWholeNotesOffset;
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
-      "Setting harmony's position in measure of " << asString () <<
-      " to " <<
-      measurePosition <<
-      " (was " <<
-      fMeasureElementMeasurePosition <<
-      ") in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      "', harmonyWholeNotesOffset = " <<
-      fHarmonyWholeNotesOffset <<
-      endl;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fHarmonyUpLinkToNote != nullptr,
-    "fHarmonyUpLinkToNote is null");
-
-  // compute harmony's position in voice
-  Rational
-    voicePosition =
-      measure->
-        getMeasureVoicePosition ()
-        +
-      actualMeasurePosition;
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
-
-  // set harmony's position in measure
-  fMeasureElementMeasurePosition = measurePosition;
-
-  // update current position in voice
-  S_msrVoice
-    voice =
-      measure->
-        fetchMeasureUpLinkToVoice ();
-
-  voice->
-    incrementCurrentVoicePosition (
-      fHarmonyUpLinkToNote->
-        getMeasureElementSoundingWholeNotes ());
-}
+// void msrHarmony::setHarmonyMeasurePosition (
+//   const S_msrMeasure measure,
+//   const Rational&    measurePosition,
+//   const string&      context)
+// {
+//   // set the harmony position in measure, taking it's offset into account
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measure != nullptr,
+//      "setHarmonyMeasurePosition(): measure is null");
+//
+//   // the offset can be negative, so we merely add it to measurePosition
+//   // to obtain the harmony's actual measurePosition
+//   // this overwrites it with the same value if fHarmonyWholeNotesOffset is null JMI ???
+//   Rational
+//     actualMeasurePosition =
+//       measurePosition
+//         +
+//       fHarmonyWholeNotesOffset;
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//     gLogStream <<
+//       "Setting harmony's position in measure of " << asString () <<
+//       " to " <<
+//       measurePosition <<
+//       " (was " <<
+//       fMeasureElementMeasurePosition <<
+//       ") in measure " <<
+//       measure->asShortString () <<
+//       " (measureElementMeasureNumber: " <<
+//       fetchMeasureElementMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"" <<
+//       "', harmonyWholeNotesOffset = " <<
+//       fHarmonyWholeNotesOffset <<
+//       endl;
+//   }
+// #endif
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     fHarmonyUpLinkToNote != nullptr,
+//     "fHarmonyUpLinkToNote is null");
+//
+//   // compute harmony's position in voice
+//   Rational
+//     voicePosition =
+//       measure->
+//         getMeasureVoicePosition ()
+//         +
+//       actualMeasurePosition;
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measurePosition != msrMoment::K_NO_POSITION,
+//     "measurePosition == msrMoment::K_NO_POSITION");
+//
+//   // set harmony's position in measure
+//   fMeasureElementMeasurePosition = measurePosition;
+//
+//   // update current position in voice
+//   S_msrVoice
+//     voice =
+//       measure->
+//         fetchMeasureUpLinkToVoice ();
+//
+//   voice->
+//     incrementCurrentVoicePosition (
+//       fHarmonyUpLinkToNote->
+//         getMeasureElementSoundingWholeNotes ());
+// }
 
 void msrHarmony::setHarmonyFrame (S_msrFrame frame)
 {
@@ -2314,6 +5433,1250 @@ void printHarmonyAnalysis (
   }
 
   --gIndenter;
+}
+
+// harmonies structure
+//______________________________________________________________________________
+map<msrHarmonyKind, S_msrHarmonyStructure>
+  gGlobalHarmonyStructuresMap;
+
+S_msrHarmonyStructure msrHarmonyStructure::createBare (
+  msrHarmonyKind harmonyStructureHarmonyKind)
+{
+  msrHarmonyStructure* o =
+    new msrHarmonyStructure (
+      harmonyStructureHarmonyKind);
+  assert (o != nullptr);
+
+  return o;
+}
+
+S_msrHarmonyStructure msrHarmonyStructure::create (
+  msrHarmonyKind harmonyStructureHarmonyKind)
+{
+  S_msrHarmonyStructure o =
+    createBare (
+      harmonyStructureHarmonyKind);
+
+  o->
+    populateHarmonyStructure ();
+
+  return o;
+}
+
+msrHarmonyStructure::msrHarmonyStructure (
+  msrHarmonyKind harmonyStructureHarmonyKind)
+{
+  fHarmonyStructureHarmonyKind = harmonyStructureHarmonyKind;
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+    gLogStream <<
+      "==> Creating harmony intervals '" <<
+      harmonyStructureAsString () <<
+      "'" <<
+      endl;
+  }
+#endif
+}
+
+S_msrHarmonyStructure msrHarmonyStructure::createHarmonyStructureNewbornClone ()
+{
+  S_msrHarmonyStructure
+    newbornClone =
+      createBare (
+        fHarmonyStructureHarmonyKind);
+
+  return newbornClone;
+}
+
+void msrHarmonyStructure::populateHarmonyStructure ()
+{
+  // append harmony items to harmony intervals
+  switch (fHarmonyStructureHarmonyKind) {
+    case msrHarmonyKind::kHarmony_NO_:
+      break;
+
+    // MusicXML harmonies
+
+    case msrHarmonyKind::kHarmonyMajor:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMinor:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyAugmented:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedFifth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDiminished:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalDiminishedFifth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDominant:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMajorSeventh:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSeventh)
+          );
+      }
+      break;
+
+     case msrHarmonyKind::kHarmonyMinorSeventh:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDiminishedSeventh:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalDiminishedFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalDiminishedSeventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyAugmentedSeventh:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyHalfDiminished:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalDiminishedFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+      }
+      break;
+
+     case msrHarmonyKind::kHarmonyMinorMajorSeventh:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSeventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMajorSixth:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSixth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMinorSixth:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSixth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDominantNinth:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorNinth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMajorNinth:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorNinth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMinorNinth:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorNinth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDominantEleventh:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectEleventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMajorEleventh:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectEleventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMinorEleventh:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectEleventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDominantThirteenth:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThirteenth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMajorThirteenth:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThirteenth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMinorThirteenth:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThirteenth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonySuspendedSecond:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSecond)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonySuspendedFourth:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFourth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+      }
+      break;
+
+/*
+* kNeapolitan f aes des' in:
+*
+* c e g c' -> f f aes des' -> d g d b -> c e g c'
+
+they are three different pre-dominant harmonies that are taught to American undergrads in a sophomore theory course.
+
+in E major:
+Italian = C E A#
+French = C E F# A#
+German = C E G A#
+Tristan = C D# F# A#
+
+in all of them, the C and A# in theory want to fan out to B (the dominant).  This is, of course, in theory - Wagner’s use of the Tristan harmony, which he clearly named his opera after, has the A# moving down to A, or the 7th of the dominant (I’m transposing to fit w/ the example above).  Wagner obviously did not pay much attention during his sophomore music theory course…
+*/
+
+    case msrHarmonyKind::kHarmonyNeapolitan:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalDiminishedSixth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyItalian:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedSixth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyFrench:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedFourth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedSixth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyGerman:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedSixth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyPedal:
+      break;
+
+    case msrHarmonyKind::kHarmonyPower:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyTristan:
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedSecond)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedFourth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedSixth)
+          );
+      }
+      break;
+
+    // jazz-specific harmonies
+
+    case msrHarmonyKind::kHarmonyMinorMajorNinth: // -maj9, minmaj9
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorNinth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDominantSuspendedFourth: // 7sus4, domsus4
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFourth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDominantAugmentedFifth: // 7#5, domaug5
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFourth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDominantMinorNinth: // 7b9, dommin9
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorNinth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDominantAugmentedNinthDiminishedFifth: // 7#9b5, domaug9dim5
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalDiminishedFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedNinth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kIntervkDominantAugmentedNinthAugmentedFifthHarmonyalAugmentedThirteenth: // 7#9#5, domaug9aug5
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorThird)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedNinth)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyDominantAugmentedEleventh: // 7#11, domaug11
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFourth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMinorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedEleventh)
+          );
+      }
+      break;
+
+    case msrHarmonyKind::kHarmonyMajorSeventhAugmentedEleventh: // maj7#11, maj7aug11
+      {
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectUnisson)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFourth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalPerfectFifth)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalMajorSeventh)
+          );
+        appendHarmonyIntervalToHarmonyStructure (
+          msrHarmonyInterval::create (
+            msrIntervalKind::kIntervalAugmentedEleventh)
+          );
+      }
+      break;
+
+    // other
+
+    case msrHarmonyKind::kHarmonyOther:
+      break;
+
+    case msrHarmonyKind::kHarmonyNone:
+      break;
+  } // switch
+
+/* JMI
+  // register harmony intervals in map
+  gGlobalHarmonyStructuresMap [fHarmonyStructureHarmonyKind] = this;
+  */
+}
+
+msrHarmonyStructure::~msrHarmonyStructure ()
+{}
+
+void msrHarmonyStructure::appendHarmonyIntervalToHarmonyStructure (
+  S_msrHarmonyInterval harmonyInterval)
+{
+  // set the input line number and harmony item number // JMI
+
+  // append the harmony item
+  fHarmonyStructureIntervals.push_back (
+    harmonyInterval);
+}
+
+/* JMI
+void msrHarmonyStructure::acceptIn (basevisitor* v) {
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrHarmonyStructure::acceptIn ()" <<
+      endl;
+  }
+
+  if (visitor<S_msrHarmonyStructure>*
+    p =
+      dynamic_cast<visitor<S_msrHarmonyStructure>*> (v)) {
+        S_msrHarmonyStructure elem = this;
+
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrHarmonyStructure::visitStart ()" <<
+             endl;
+        p->visitStart (elem);
+  }
+}
+
+void msrHarmonyStructure::acceptOut (basevisitor* v) {
+  if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+    gLogStream <<
+      "% ==> msrHarmonyStructure::acceptOut ()" <<
+      endl;
+  }
+
+  if (visitor<S_msrHarmonyStructure>*
+    p =
+      dynamic_cast<visitor<S_msrHarmonyStructure>*> (v)) {
+        S_msrHarmonyStructure elem = this;
+
+        if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
+          gLogStream <<
+            "% ==> Launching msrHarmonyStructure::visitEnd ()" <<
+            endl;
+        p->visitEnd (elem);
+  }
+}
+
+void msrHarmonyStructure::browseData (basevisitor* v)
+{}
+*/
+
+S_msrHarmonyInterval msrHarmonyStructure::bassHarmonyIntervalForHarmonyInversion (
+  int inputLineNumber,
+  int inversionNumber)
+{
+  /*
+    Inversion is a number indicating which inversion is used:
+    0 for root position, 1 for first inversion, etc.
+  */
+
+  S_msrHarmonyInterval result;
+
+  if (
+    inversionNumber < 0
+      ||
+    inversionNumber > int (fHarmonyStructureIntervals.size ()) - 1 ) {
+    stringstream s;
+
+    s <<
+      "Sorry, inversion number '" <<
+      inversionNumber <<
+      "' does not exist for harmony intervals '" <<
+      msrHarmonyKindAsString (fHarmonyStructureHarmonyKind) <<
+      "', line " << inputLineNumber;
+
+    msrInternalError (
+      gGlobalServiceRunData->getInputSourceName (),
+      inputLineNumber,
+      __FILE__, __LINE__,
+      s.str ());
+  }
+
+  return fHarmonyStructureIntervals [inversionNumber];
+}
+
+S_msrHarmonyStructure msrHarmonyStructure::invertHarmonyStructure (int inversion)
+{
+  if (inversion == 0) {
+    return this;
+  }
+
+  // create an empty object
+  S_msrHarmonyStructure
+    result =
+      this->
+        createHarmonyStructureNewbornClone ();
+
+  size_t
+    harmonyStructureIntervalsSize =
+      fHarmonyStructureIntervals.size ();
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+    gLogStream <<
+      "==> invertHarmonyStructure (), inversion = " <<
+      inversion <<
+      ", original harmonyStructureIntervalsSize = " <<
+      harmonyStructureIntervalsSize <<
+      endl;
+  }
+#endif
+
+  if (harmonyStructureIntervalsSize) {
+    // add the first items
+    for (size_t i = inversion; i < harmonyStructureIntervalsSize; ++i) {
+      S_msrHarmonyInterval
+        harmonyIntervalClone =
+          fHarmonyStructureIntervals [i]->
+            createHarmonyIntervalNewbornClone ();
+
+#ifdef TRACING_IS_ENABLED
+      if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+        gLogStream <<
+          "--> adding first item to result:" <<
+          endl;
+        ++gIndenter;
+        gLogStream <<
+          harmonyIntervalClone <<
+          endl;
+        --gIndenter;
+      }
+#endif
+
+      result->
+        appendHarmonyIntervalToHarmonyStructure (
+          harmonyIntervalClone);
+
+#ifdef TRACING_IS_ENABLED
+      if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+        gLogStream <<
+          "==> result harmony structure after adding first item :" <<
+          endl;
+
+        ++gIndenter;
+        gLogStream <<
+          result <<
+          endl;
+        --gIndenter;
+      }
+#endif
+    } // for
+
+    // add  the octaviate last items
+    for (int i = 0; i < inversion; ++i) {
+      S_msrHarmonyInterval
+        harmonyIntervalClone =
+          fHarmonyStructureIntervals [i]->
+            createHarmonyIntervalNewbornClone ();
+
+      harmonyIntervalClone->
+        incrementHarmonyIntervalRelativeOctave ();
+
+#ifdef TRACING_IS_ENABLED
+      if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+        gLogStream <<
+          "--> adding last item to resultlast item :" <<
+          endl;
+        ++gIndenter;
+        gLogStream <<
+          harmonyIntervalClone <<
+          endl;
+        --gIndenter;
+      }
+#endif
+
+      result->
+        appendHarmonyIntervalToHarmonyStructure (
+          harmonyIntervalClone);
+
+#ifdef TRACING_IS_ENABLED
+      if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+        gLogStream <<
+          "==> result harmony structure after  after adding last item:" <<
+          endl;
+
+        ++gIndenter;
+        gLogStream <<
+          result <<
+          endl;
+        --gIndenter;
+      }
+#endif
+    } // for
+  }
+
+  return result;
+}
+
+list<msrSemiTonesPitchKind> buildSemiTonesChord (
+  msrHarmonyKind        harmonyKind,
+  msrSemiTonesPitchKind rootNote)
+{
+  list<msrSemiTonesPitchKind> result;
+
+  // create the harmony intervals
+  S_msrHarmonyStructure
+    harmonyStructure =
+      msrHarmonyStructure::create (
+        harmonyKind);
+
+  // add the root to the harmony
+  result.push_back (rootNote);
+
+  // add the other notes to the harmony
+  const vector<S_msrHarmonyInterval>&
+    harmonyStructureIntervals =
+      harmonyStructure->
+        getHarmonyStructureIntervals ();
+
+  for (size_t i = 1; i << harmonyStructureIntervals.size (); ++i) {
+    result.push_back (rootNote);
+  } // for
+
+  return result;
+}
+
+string msrHarmonyStructure::harmonyStructureAsString () const
+{
+  stringstream s;
+
+  s <<
+    "HarmonyStructure" <<
+    ", " <<
+    msrHarmonyKindAsString (fHarmonyStructureHarmonyKind) <<
+    ", " <<
+    mfSingularOrPlural (
+      fHarmonyStructureIntervals.size (), "item", "items");
+
+  return s.str ();
+}
+
+void msrHarmonyStructure::print (ostream& os) const
+{
+  os <<
+    "HarmonyStructure" <<
+    ", harmonyStructureHarmonyKind: " <<
+    msrHarmonyKindAsString (fHarmonyStructureHarmonyKind) <<
+    ", " <<
+    mfSingularOrPlural (
+      fHarmonyStructureIntervals.size (), "interval", "intervals") <<
+  /* JMI
+    ", line: " << fInputLineNumber <<
+    */
+    endl;
+
+  ++gIndenter;
+
+  if (fHarmonyStructureIntervals.size ()) {
+    vector<S_msrHarmonyInterval>::const_reverse_iterator
+      iBegin = fHarmonyStructureIntervals.crbegin (),
+      iEnd   = fHarmonyStructureIntervals.crend (),
+      i      = iBegin;
+
+    for ( ; ; ) {
+      S_msrHarmonyInterval
+        harmonyInterval = (*i);
+
+      gLogStream <<
+        harmonyInterval->harmonyIntervalAsShortString () <<
+        endl;
+
+      if (++i == iEnd) break;
+    } // for
+  }
+  else {
+    gLogStream <<
+      "no intervals" <<
+      endl;
+  }
+
+  --gIndenter;
+}
+
+void msrHarmonyStructure::printAllHarmoniesStructures (ostream& os)
+{
+  os <<
+    "All the known harmonies structures are:" <<
+    endl << endl;
+
+  ++gIndenter;
+
+  for (auto e : EnumTrueHarmonies<msrHarmonyKind> ()) {
+    // create the harmony intervals
+    S_msrHarmonyStructure
+      harmonyStructure =
+        msrHarmonyStructure::create (
+          e);
+
+    // print it
+    os <<
+      harmonyStructure <<
+      endl;
+  } // for
+
+  --gIndenter;
+}
+
+ostream& operator << (ostream& os, const S_msrHarmonyStructure& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << endl;
+  }
+
+  return os;
 }
 
 void initializeHarmonyStructuresMap ()

@@ -34,7 +34,6 @@ SCRIPT_BASE_NAME="$(basename ${0})"
 
 LOGFILE_NAME=${SCRIPT_BASE_NAME/%.zsh/.zsh.log}
 LOGFILE=${MUSIC_FORMATS_DEV}/build/${LOGFILE_NAME}
-echo
 # echo "==> $0: 0 = ${0}"
 # echo "==> $0: SCRIPT_BASE_NAME = ${SCRIPT_BASE_NAME}"
 # echo "==> $0: LOGFILE_NAME     = ${LOGFILE_NAME}"
@@ -42,8 +41,6 @@ echo
 # echo
 
 exec > ${LOGFILE} 2>&1
-
-echo
 
 
 # Let's go!

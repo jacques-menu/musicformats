@@ -45,6 +45,32 @@ using namespace std;
 namespace MusicFormats
 {
 
+// keys
+// ------------------------------------------------------
+
+string msrKeyKindAsString (
+  msrKeyKind keyKind)
+{
+  string result;
+
+  switch (keyKind) {
+    case msrKeyKind::kKeyTraditional:
+      result = "kKeyTraditional";
+      break;
+    case msrKeyKind::kKeyHumdrumScot:
+      result = "kKeyHumdrumScot";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrKeyKind& elt)
+{
+  os << msrKeyKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrHumdrumScotKeyItem msrHumdrumScotKeyItem::create (
   int inputLineNumber)

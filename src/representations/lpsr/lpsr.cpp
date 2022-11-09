@@ -9,8 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "msrOctaves.h"
 
-#include "lpsr.h"
+#include "lpsrEnumTypes.h"
+
+#include "oahEarlyOptions.h"
 
 
 using namespace std;
@@ -25,8 +28,43 @@ void initializeLPSR ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-    // initialize
-    initializeLpsrBasicTypes ();
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+      gLogStream <<
+        "Initializing LPSR basic types handling" <<
+        endl;
+    }
+#endif
+
+    // LPSR score output handling
+    // ------------------------------------------------------
+
+    initializeLpsrScoreOutputKindsMap ();
+
+    // LPSR octave entry handling
+    // ------------------------------------------------------
+
+    initializeMsrOctaveEntryKindsMap ();
+
+    // LPSR accidental styles handling
+    // ------------------------------------------------------
+
+    initializeLpsrAccidentalStyleKindsMap ();
+
+    // LPSR chords languages handling
+    // ------------------------------------------------------
+
+    initializeLpsrChordsLanguageKindsMap ();
+
+    // LPSR dynamic text spanners style kinds handling
+    // ------------------------------------------------------
+
+    initializeLpsrDynamicsTextSpannersStyleKindsMap ();
+
+    // LPSR lyrics durations kinds handling
+    // ------------------------------------------------------
+
+    initializeLpsrLyricsDurationsKindsMap ();
 
     pPrivateThisMethodHasBeenRun = true;
   }

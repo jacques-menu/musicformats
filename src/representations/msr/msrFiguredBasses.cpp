@@ -491,67 +491,67 @@ S_msrFiguredBass msrFiguredBass::createFiguredBassDeepClone ()
   return figuredBassDeepClone;
 }
 
-void msrFiguredBass::setFiguredBassMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const string&      context)
-{
-  // set the figured bass position in measure
-
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
-      "Setting figured bass element's position in measure of " << asString () <<
-      " to " <<
-      measurePosition <<
-      " (was " <<
-      fMeasureElementMeasurePosition <<
-      ") in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      endl;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
-
-  // set figured bass element's position in measure
-  fMeasureElementMeasurePosition = measurePosition;
-
-  // compute figured bass's position in voice
-  if (false) { // JMI CAFE v0.9.66
-  Rational
-    voicePosition =
-      measure->
-        getMeasureVoicePosition ()
-        +
-      measurePosition;
-
-  // set figured bass's position in voice
-  setMeasureElementVoicePosition (
-    voicePosition,
-    context);
-}
-
-  // update current position in voice
-  S_msrVoice
-    voice =
-      measure->
-        fetchMeasureUpLinkToVoice ();
-
-  voice->
-    incrementCurrentVoicePosition (
-      fFiguredBassUpLinkToNote->
-        getMeasureElementSoundingWholeNotes ());
-}
+// void msrFiguredBass::setFiguredBassMeasurePosition (
+//   const S_msrMeasure measure,
+//   const Rational&    measurePosition,
+//   const string&      context)
+// {
+//   // set the figured bass position in measure
+//
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//     gLogStream <<
+//       "Setting figured bass element's position in measure of " << asString () <<
+//       " to " <<
+//       measurePosition <<
+//       " (was " <<
+//       fMeasureElementMeasurePosition <<
+//       ") in measure " <<
+//       measure->asShortString () <<
+//       " (measureElementMeasureNumber: " <<
+//       fetchMeasureElementMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"" <<
+//       endl;
+//   }
+// #endif
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measurePosition != msrMoment::K_NO_POSITION,
+//     "measurePosition == msrMoment::K_NO_POSITION");
+//
+//   // set figured bass element's position in measure
+//   fMeasureElementMeasurePosition = measurePosition;
+//
+//   // compute figured bass's position in voice
+// if (false) { // JMI CAFE v0.9.66
+//   Rational
+//     voicePosition =
+//       measure->
+//         getMeasureVoicePosition ()
+//         +
+//       measurePosition;
+//
+//   // set figured bass's position in voice
+//   setMeasureElementVoicePosition (
+//     voicePosition,
+//     context);
+// }
+//
+//   // update current position in voice
+//   S_msrVoice
+//     voice =
+//       measure->
+//         fetchMeasureUpLinkToVoice ();
+//
+//   voice->
+//     incrementCurrentVoicePosition (
+//       fFiguredBassUpLinkToNote->
+//         getMeasureElementSoundingWholeNotes ());
+// }
 
 void msrFiguredBass::appendFigureToFiguredBass (
   S_msrBassFigure bassFigure)

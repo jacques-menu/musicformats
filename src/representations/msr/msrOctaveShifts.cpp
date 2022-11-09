@@ -116,7 +116,7 @@ void msrOctaveShift::browseData (basevisitor* v)
 {}
 
 string msrOctaveShiftKindAsString (
-  msrOctaveShiftKind octaveShiftKind) const
+  msrOctaveShiftKind octaveShiftKind)
 {
   string result;
 

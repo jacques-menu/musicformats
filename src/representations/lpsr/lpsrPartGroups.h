@@ -12,7 +12,7 @@
 #ifndef ___lpsrPartGroups___
 #define ___lpsrPartGroups___
 
-#include "msr.h"
+#include "msrPartGroups.h"
 
 #include "lpsrElements.h"
 

@@ -13,12 +13,17 @@
 
 #include <regex>
 
+#include "visitor.h"
+
+#include "mfConstants.h"
+
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
 
 #include "oahOah.h"
+#include "msrOah.h"
 
 #include "oahEarlyOptions.h"
 
@@ -222,7 +227,7 @@ ostream& operator << (ostream& os, const S_msrGeneratorsOahGroup& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

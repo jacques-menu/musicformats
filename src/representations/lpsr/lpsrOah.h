@@ -14,7 +14,7 @@
 
 #include "msrPitchesNames.h"
 
-#include "lpsrBasicTypes.h"
+#include "lpsrEnumTypes.h"
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED

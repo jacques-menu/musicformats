@@ -9,6 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "visitor.h"
+
 #include "lpsrLyrics.h"
 
 #include "oahOah.h"

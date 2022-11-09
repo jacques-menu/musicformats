@@ -9,6 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "visitor.h"
+
 #include "mfStringsHandling.h"
 
 #include "lpsrPartGroups.h"

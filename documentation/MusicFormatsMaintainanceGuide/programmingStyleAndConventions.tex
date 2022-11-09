@@ -68,14 +68,14 @@ formats/lpsr/lpsrContexts.h:30:class EXP lpsrContext : public lpsrElement
 
 There are a number of self-explaning {\tt *BasicTypes.h/.cpp} file names:%%%JMI
 \begin{lstlisting}[language=Terminal]
-./formats/msdl/msdlBasicTypes.h
-./formats/msdl/msdlBasicTypes.cpp
+./formats/msdl/msdlEnumTypes.h
+./formats/msdl/msdlEnumTypes.cpp
 ./formats/msr/msrBasicTypes.cpp
 ./formats/msr/msrBasicTypes.h
-./formats/lpsr/lpsrBasicTypes.cpp
-./formats/lpsr/lpsrBasicTypes.h
-./formats/bsr/bsrBasicTypes.h
-./formats/bsr/bsrBasicTypes.cpp
+./formats/lpsr/lpsrEnumTypes.cpp
+./formats/lpsr/lpsrEnumTypes.h
+./formats/bsr/bsrEnumTypes.h
+./formats/bsr/bsrEnumTypes.cpp
 ./oah/oahBasicTypes.h
 ./oah/oahBasicTypes.cpp
 ./formatsgeneration/msrGeneration/msrGenerationBasicTypes.cpp
@@ -810,7 +810,23 @@ void initializeBSR ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-    initializeBsrBasicTypes ();
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+      gLogStream <<
+        "Initializing BSR basic types handling" <<
+        endl;
+    }
+#endif
+
+    // BSR braille output kinds handling
+    // ------------------------------------------------------
+
+    initializeBsrBrailleOutputKindsMap ();
+
+    // BSR texts languages handling
+    // ------------------------------------------------------
+
+    initializeBsrTextsLanguageKindsMap ();
 
     pPrivateThisMethodHasBeenRun = true;
   }

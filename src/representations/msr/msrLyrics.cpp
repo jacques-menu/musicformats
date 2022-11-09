@@ -303,39 +303,39 @@ void msrSyllable:: setSyllableNextMeasurePuristNumber (
     puristMeasureNumber;
 }
 
-void msrSyllable::setSyllableMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const string&      context)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
-      "Setting syllable's position in measure of " << asString () <<
-      " to " <<
-      measurePosition <<
-      " (was " <<
-      fMeasureElementMeasurePosition <<
-      ") in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      endl;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
-
-  // set syllable's position in measure
-  fMeasureElementMeasurePosition = measurePosition;
-}
+// void msrSyllable::setSyllableMeasurePosition (
+//   const S_msrMeasure measure,
+//   const Rational&    measurePosition,
+//   const string&      context)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//     gLogStream <<
+//       "Setting syllable's position in measure of " << asString () <<
+//       " to " <<
+//       measurePosition <<
+//       " (was " <<
+//       fMeasureElementMeasurePosition <<
+//       ") in measure " <<
+//       measure->asShortString () <<
+//       " (measureElementMeasureNumber: " <<
+//       fetchMeasureElementMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"" <<
+//       endl;
+//   }
+// #endif
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measurePosition != msrMoment::K_NO_POSITION,
+//     "measurePosition == msrMoment::K_NO_POSITION");
+//
+//   // set syllable's position in measure
+//   fMeasureElementMeasurePosition = measurePosition;
+// }
 
 void msrSyllable::appendLyricTextToSyllable (const string& text)
 {

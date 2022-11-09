@@ -14,6 +14,8 @@
 
 #include "lpsrElements.h"
 
+#include "lpsrScheme.h"
+
 
 namespace MusicFormats
 {

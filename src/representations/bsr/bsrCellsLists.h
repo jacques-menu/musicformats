@@ -12,14 +12,18 @@
 #ifndef ___bsrCellsLists___
 #define ___bsrCellsLists___
 
+#include <list>
+#include <vector>
+
+#include "exports.h"
 #include "smartpointer.h"
 #include "basevisitor.h"
 
-#include "bsrBasicTypes.h"
+#include "bsrEnumTypes.h"
 #include "bsrCellsLists.h"
 
 
-using namespace std;
+using namespace MusicXML2;
 
 namespace MusicFormats
 {

@@ -16,9 +16,13 @@
 #include <string>
 #include <list>
 
-#include "lpsrElements.h"
+#include "visitor.h"
 
-#include "msr.h"
+#include "msrParts.h"
+#include "msrStaves.h"
+#include "msrVoices.h"
+
+#include "lpsrElements.h"
 
 
 using namespace std;

@@ -12,7 +12,7 @@
 #ifndef ___msrTimeSignatures___
 #define ___msrTimeSignatures___
 
-// #include "msrBasicTypes.h"
+#include <vector>
 
 #include "msrElements.h"
 #include "msrMeasureElements.h"

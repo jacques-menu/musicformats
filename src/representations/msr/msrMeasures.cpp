@@ -11,30 +11,26 @@
 
 #include <climits>      // INT_MIN, INT_MAX
 
-#include "mfRational.h"
-
 #include "visitor.h"
 
 #include "mfAssert.h"
-
+#include "mfRational.h"
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
-
-#include "msrWae.h"
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
 
+#include "msrHiddenMeasureAndBarLines.h"
 #include "msrMeasures.h"
 
 #include "oahOah.h"
 
 #include "msrOah.h"
 
-#include "msrHiddenMeasureAndBarLines.h"
+#include "msrWae.h"
 
 #include "msrBrowsers.h"
 
@@ -796,7 +792,7 @@ void msrMeasure::setMeasureRepeatContextKind (
         "Setting repeat context kind of measure '" <<
         fMeasureNumber <<
         "' to '" <<
-        (measureRepeatContextKind <<
+        measureRepeatContextKind <<
         "' in segment " <<
         fMeasureUpLinkToSegment->asString () <<
         " in voice \"" <<
@@ -2298,11 +2294,11 @@ void msrMeasure::appendNoteOrPaddingToMeasure (
   // set the note's position in measure,
   // this can lead to set the position in measure of the harmonies
   // attached to the note
-  note->
-    setNoteMeasurePosition (
-      this,
-      fCurrentMeasureWholeNotesDuration,
-      "appendNoteOrPaddingToMeasure()");
+//   note->
+//     setNoteMeasurePosition (
+//       this,
+//       fCurrentMeasureWholeNotesDuration,
+//       "appendNoteOrPaddingToMeasure()");
 
   // append it to the measure elements list
 // JMI  appendElementToMeasure (note); ???
@@ -2651,11 +2647,11 @@ void msrMeasure::appendChordToMeasure (S_msrChord chord)
   chord->setChordKind (msrChordInKind::kChordInMeasure);
 
   // set the chord's position in measure
-  chord->
-    setChordMeasurePosition (
-      this,
-      fCurrentMeasureWholeNotesDuration,
-      "msrMeasure::appendChordToMeasure (S_msrChord chord)");
+//   chord->
+//     setChordMeasurePosition (
+//       this,
+//       fCurrentMeasureWholeNotesDuration,
+//       "msrMeasure::appendChordToMeasure (S_msrChord chord)");
 
   // append the chord to the measure elements list
   appendElementToMeasure (chord);
@@ -2706,11 +2702,11 @@ void msrMeasure::appendTupletToMeasure (S_msrTuplet tuplet)
   tuplet->setTupletKind (msrTupletInKind::kTupletInMeasure);
 
   // set the tuplet's position in measure
-  tuplet->
-    setTupletMeasurePosition (
-      this,
-      fCurrentMeasureWholeNotesDuration,
-      "msrMeasure::appendTupletToMeasure (S_msrChord chord)");
+//   tuplet->
+//     setTupletMeasurePosition (
+//       this,
+//       fCurrentMeasureWholeNotesDuration,
+//       "msrMeasure::appendTupletToMeasure (S_msrChord chord)");
 
   // populate measure upLink
   tuplet->setMeasureElementUpLinkToMeasure (this);
@@ -2760,11 +2756,11 @@ void msrMeasure::appendHarmonyToMeasure (S_msrHarmony harmony)
         fMeasureNumber);
 
   // set the harmony's position in measure, right now
-  harmony->
-    setHarmonyMeasurePosition (
-      this,
-      fCurrentMeasureWholeNotesDuration,
-      "msrMeasure::appendHarmonyToMeasure (S_msrChord chord)");
+//   harmony->
+//     setHarmonyMeasurePosition (
+//       this,
+//       fCurrentMeasureWholeNotesDuration,
+//       "msrMeasure::appendHarmonyToMeasure (S_msrChord chord)");
 
   // append the harmony to the measure elements list
   // DON'T call 'appendElementToMeasure (harmony)':
@@ -2883,11 +2879,11 @@ void msrMeasure::appendFiguredBassToMeasure (
         fMeasureNumber);
 
   // set the figuredBass's position in measure
-  figuredBass->
-    setFiguredBassMeasurePosition (
-      this,
-      fCurrentMeasureWholeNotesDuration,
-      "msrMeasure::appendFiguredBassToMeasure (S_msrChord chord)");
+//   figuredBass->
+//     setFiguredBassMeasurePosition (
+//       this,
+//       fCurrentMeasureWholeNotesDuration,
+//       "msrMeasure::appendFiguredBassToMeasure (S_msrChord chord)");
 
 //* JMI
   // append the figured bass to the measure elements list
@@ -3584,17 +3580,11 @@ void msrMeasure::determineMeasureKindAndPuristNumber (
     gLogStream <<
       "Determining the measure kind and purist number of measure " <<
       this->asShortString () <<
-      ", fullMeasureWholeNotesDuration: " <<
-      fFullMeasureWholeNotesDuration <<
-      "', currentMeasureWholeNotesDuration: " <<
-      fCurrentMeasureWholeNotesDuration <<
-      ", wholeNotesSinceLastRegularMeasureEnd: " <<
-      wholeNotesSinceLastRegularMeasureEnd <<
-      ", newWholeNotesSinceLastRegularMeasureEnd: " <<
-      newWholeNotesSinceLastRegularMeasureEnd <<
-      ", currentVoiceRepeatPhaseKind: " <<
-      voiceRepeatPhaseKindAsString (
-        currentVoiceRepeatPhaseKind) <<
+      ", fullMeasureWholeNotesDuration: " << fFullMeasureWholeNotesDuration <<
+      "', currentMeasureWholeNotesDuration: " << fCurrentMeasureWholeNotesDuration <<
+      ", wholeNotesSinceLastRegularMeasureEnd: " << wholeNotesSinceLastRegularMeasureEnd <<
+      ", newWholeNotesSinceLastRegularMeasureEnd: " << newWholeNotesSinceLastRegularMeasureEnd <<
+      ", currentVoiceRepeatPhaseKind: " << currentVoiceRepeatPhaseKind <<
     "' in voice \"" << voice->getVoiceName () <<
     ", line " << inputLineNumber <<
     endl;
@@ -5087,11 +5077,11 @@ void msrMeasure::handleSubsequentFiguredBassInFiguredBassMeasure (
           voice);
 
     // set its position in measure
-    skipNote->
-      setNoteMeasurePosition (
-        this,
-        fCurrentMeasureWholeNotesDuration,
-        "handleSubsequentFiguredBassInFiguredBassMeasure() 8");
+//     skipNote->
+//       setNoteMeasurePosition (
+//         this,
+//         fCurrentMeasureWholeNotesDuration,
+//         "handleSubsequentFiguredBassInFiguredBassMeasure() 8");
 
     // insert skipNote before currentFiguredBass in the measure's elements list
 #ifdef TRACING_IS_ENABLED

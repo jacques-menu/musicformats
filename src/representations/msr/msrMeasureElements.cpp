@@ -20,7 +20,15 @@
 
 #include "mfAssert.h"
 
+/*
+  CAUTION: // JMI v0.9.66
+    the following two should be in this order
+    due to mutual dependencies
+*/
+#include "msrMeasures.h"
 #include "msrMeasureElements.h"
+
+#include "msrMoments.h"
 
 #include "oahOah.h"
 
@@ -143,6 +151,32 @@ void msrMeasureElement::setMeasureElementMeasurePosition (
 
   // set measure element's position in measure
   fMeasureElementMeasurePosition = measurePosition;
+
+  // compute measure element's position in voice
+// if (false) { // JMI CAFE v0.9.66
+  Rational
+    voicePosition =
+      measure->
+        getMeasureVoicePosition ()
+        +
+      measurePosition;
+
+  // set figured bass's position in voice
+  setMeasureElementVoicePosition (
+    voicePosition,
+    context);
+// }
+
+  // update current position in voice // JMI v0.9.66
+//   S_msrVoice
+//     voice =
+//       measure->
+//         fetchMeasureUpLinkToVoice ();
+//
+//   voice->
+//     incrementCurrentVoicePosition (
+//       fFiguredBassUpLinkToNote->
+//         getMeasureElementSoundingWholeNotes ());
 }
 
 void msrMeasureElement::setMeasureElementVoicePosition (

@@ -393,7 +393,7 @@ msrArpeggiato::msrArpeggiato (
   int              arpeggiatoNumber)
     : msrArticulation (
       inputLineNumber,
-      kArticulationArpeggiato,
+      msrArticulationKind::kArticulationArpeggiato,
       arpeggiatoPlacementKind)
 {
   fArpeggiatoDirectionKind = arpeggiatoDirectionKind;
@@ -513,7 +513,7 @@ msrNonArpeggiato::msrNonArpeggiato (
   int                      nonArpeggiatoNumber)
     : msrArticulation (
       inputLineNumber,
-      kArticulationNonArpeggiato,
+      msrArticulationKind::kArticulationNonArpeggiato,
       nonArpeggiatoPlacementKind)
 {
   fNonArpeggiatoTypeKind = nonArpeggiatoTypeKind;

@@ -27,6 +27,7 @@
 #endif
 
 #include "msrMeasures.h"
+#include "msrTechnicals.h"
 
 #include "msrChords.h"
 
@@ -177,40 +178,40 @@ S_msrChord msrChord::createChordNewbornClone (
   return newbornClone;
 }
 
-void msrChord::setChordMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const string&      context)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
-      "Setting chord's position in measure of " <<
-      asString () <<
-      " to " <<
-      measurePosition <<
-      " (was " <<
-      fMeasureElementMeasurePosition <<
-      ") in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      endl;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
-
-  // set chord's position in measure
-  fMeasureElementMeasurePosition = measurePosition;
-}
+// void msrChord::setChordMeasurePosition (
+//   const S_msrMeasure measure,
+//   const Rational&    measurePosition,
+//   const string&      context)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//     gLogStream <<
+//       "Setting chord's position in measure of " <<
+//       asString () <<
+//       " to " <<
+//       measurePosition <<
+//       " (was " <<
+//       fMeasureElementMeasurePosition <<
+//       ") in measure " <<
+//       measure->asShortString () <<
+//       " (measureElementMeasureNumber: " <<
+//       fetchMeasureElementMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"" <<
+//       endl;
+//   }
+// #endif
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measurePosition != msrMoment::K_NO_POSITION,
+//     "measurePosition == msrMoment::K_NO_POSITION");
+//
+//   // set chord's position in measure
+//   fMeasureElementMeasurePosition = measurePosition;
+// }
 
 // measure upLink
 S_msrMeasure msrChord::fetchChordUpLinkToMeasure () const
@@ -391,10 +392,10 @@ void msrChord::setChordMembersMeasurePosition (
   string context =
     "setChordMembersMeasurePosition()";
 
-  setChordMeasurePosition (
-    measure,
-    measurePosition,
-    context);
+//   setChordMeasurePosition (
+//     measure,
+//     measurePosition,
+//     context);
 
   if (false) { // JMI CAFE
   // compute chord's position in voice
@@ -431,11 +432,11 @@ void msrChord::setChordMembersMeasurePosition (
           measure);
 
       // set note's position in measure
-      note->
-        setNoteMeasurePosition (
-          measure,
-          measurePosition, // they all share the same one
-          "chord member");
+//       note->
+//         setNoteMeasurePosition (
+//           measure,
+//           measurePosition, // they all share the same one
+//           "chord member");
 
 //    JMI   set note's position in voice v0.9.66
 //       note->
@@ -608,7 +609,7 @@ void msrChord::appendArticulationToChord (S_msrArticulation art)
   if (gGlobalTracingOahGroup->getTraceArticulations ()) {
     gLogStream <<
       "Appending articulation '" <<
-      art->msrArticulationKindAsString () <<
+      art->getArticulationKind () <<
       "' to chord" <<
       endl;
   }
@@ -625,16 +626,16 @@ void msrChord::appendSpannerToChord (S_msrSpanner span)
         getSpannerKind ();
 
   // don't append the same spanner several times
-  for (S_msrSpanner spanner : noteSpanners) {
-      if (spanner->getSpannerKind () == spannerKind)
-        return;
+  for (S_msrSpanner spanner : fChordSpanners) {
+    if (spanner->getSpannerKind () == spannerKind)
+      return;
   } // for
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceSpanners ()) {
     gLogStream <<
       "Appending spanner '" <<
-      spanner->msrSpannerKindAsString () <<
+      span->getSpannerKind () <<
       "' to chord '" <<
       asString () <<
       "'" <<
@@ -642,7 +643,7 @@ void msrChord::appendSpannerToChord (S_msrSpanner span)
   }
 #endif
 
-  fChordSpanners.push_back (spanner);
+  fChordSpanners.push_back (span);
 }
 
 void msrChord::setChordSingleTremolo (S_msrSingleTremolo trem)
@@ -662,7 +663,8 @@ void msrChord::setChordSingleTremolo (S_msrSingleTremolo trem)
 
 void msrChord::appendTechnicalToChord (S_msrTechnical tech)
 {
-  technicalKind =
+  msrTechnicalKind
+    technicalKind =
       tech->
         getTechnicalKind ();
 

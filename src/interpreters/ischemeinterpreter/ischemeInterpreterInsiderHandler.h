@@ -12,8 +12,6 @@
 #ifndef ___ischemeInterpreterInsiderHandler___
 #define ___ischemeInterpreterInsiderHandler___
 
-// #include "msrBasicTypes.h"
-
 #include "oahBasicTypes.h"
 
 #include "oahAtomsCollection.h"

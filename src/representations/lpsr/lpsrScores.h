@@ -12,7 +12,7 @@
 #ifndef ___lpsrScores___
 #define ___lpsrScores___
 
-#include "msr.h"
+#include "msrLyrics.h"
 
 #include "lpsrElements.h"
 

@@ -15,6 +15,7 @@
 #include <string>
 #include <iostream>
 
+#include "msrMusicXMLSpecifics.h"
 #include "msrScaling.h"
 
 #include "lpsrElements.h"

@@ -9,7 +9,14 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <sstream>
+
+#include "mfConstants.h"
+#include "mfServiceRunData.h"
+
 #include "msrFonts.h"
+
+#include "msrWae.h"
 
 
 namespace MusicFormats
@@ -61,6 +68,7 @@ ostream& operator << (ostream& os, const  msrFontSizeKind& elt)
   return os;
 }
 
+//______________________________________________________________________________
 S_msrFontSize msrFontSize::create (
   msrFontSizeKind fontSizeKind)
 {

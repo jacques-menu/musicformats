@@ -24,6 +24,7 @@
 #endif
 
 #include "mfAssert.h"
+#include "mfConstants.h"
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
 

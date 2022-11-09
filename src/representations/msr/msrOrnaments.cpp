@@ -9,8 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <iomanip>      // setw, setprecision, ...
+
 #include "visitor.h"
 
+#include "msrNotes.h"
 #include "msrOrnaments.h"
 
 #include "oahOah.h"

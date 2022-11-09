@@ -1165,7 +1165,7 @@ void msrPrintLayout::printShort (ostream& os) const
   os <<
     "[PrintLayout" <<
     ", line " << fInputLineNumber <<
-    ']'
+    ']' <<
     endl;
 }
 
@@ -2048,7 +2048,7 @@ void msrOtherAppearance::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fOtherAppearanceTypeKind" << " : " << fOtherAppearanceTypeKind) <<
+    "fOtherAppearanceTypeKind" << " : " << fOtherAppearanceTypeKind <<
     endl <<
 
     setw (fieldWidth) <<

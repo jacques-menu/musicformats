@@ -25,6 +25,7 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfConstants.h"
 #include "mfIndentedTextOutput.h"
 
 #include "oahOah.h"
