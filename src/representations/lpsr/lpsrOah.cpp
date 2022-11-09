@@ -24,6 +24,7 @@
   #include "tracingOah.h"
 #endif
 
+#include "mfConstants.h"
 #include "mfStringsHandling.h"
 
 #include "msrPitchesNames.h"

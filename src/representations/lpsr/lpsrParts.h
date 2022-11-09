@@ -12,11 +12,11 @@
 #ifndef ___lpsrParts___
 #define ___lpsrParts___
 
-#include "msr.h"
+#include "msrParts.h"
 
 #include "lpsrContexts.h"
 
-// #include "lpsrStaves.h"
+#include "lpsrStaves.h"
 
 
 namespace MusicFormats

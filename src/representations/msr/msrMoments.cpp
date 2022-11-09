@@ -9,6 +9,12 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <sstream>
+#include <iomanip>      // setw()), set::precision(), ...
+
+#include "mfIndentedTextOutput.h"
+#include "mfStringsHandling.h" // #include JMI v0.9.66
+
 #include "msrMoments.h"
 
 
@@ -44,85 +50,6 @@ msrMoment::msrMoment (
 
 msrMoment::~msrMoment ()
 {}
-
-void msrMoment::testMsrMomentComparisons (ostream& os)
-{
-  msrMoment m0 (Rational (3, 4));
-  msrMoment m1 (Rational (3, 4), Rational (-1, 16));
-  msrMoment m2 (Rational (3, 4), Rational (2, 16));
-
-  os <<
-    "m1: " << m1 << endl <<
-    "m0: " << m0 << endl <<
-    "m2: " << m2 << endl <<
-    endl <<
-
-    "m0 == m0: " << mfBooleanAsString (m0 == m0) << endl <<
-    "m1 == m1: " << mfBooleanAsString (m1 == m1) << endl <<
-    "m2 == m2: " << mfBooleanAsString (m2 == m2) << endl <<
-    endl <<
-
-    "m0 != m0: " << mfBooleanAsString (m0 != m0) << endl <<
-    "m1 != m1: " << mfBooleanAsString (m1 != m1) << endl <<
-    "m2 != m2: " << mfBooleanAsString (m2 != m2) << endl <<
-    endl <<
-
-    "m0 < m0: " << mfBooleanAsString (m0 < m0) << endl <<
-    "m1 < m1: " << mfBooleanAsString (m1 < m1) << endl <<
-    "m2 < m2: " << mfBooleanAsString (m2 < m2) << endl <<
-    endl <<
-
-    "m0 <= m0: " << mfBooleanAsString (m0 <= m0) << endl <<
-    "m1 <= m1: " << mfBooleanAsString (m1 <= m1) << endl <<
-    "m2 <= m2: " << mfBooleanAsString (m2 <= m2) << endl <<
-    endl <<
-
-    "m0 >= m0: " << mfBooleanAsString (m0 >= m0) << endl <<
-    "m1 >= m1: " << mfBooleanAsString (m1 >= m1) << endl <<
-    "m2 >= m2: " << mfBooleanAsString (m2 >= m2) << endl <<
-    endl <<
-
-    "m0 > m0: " << mfBooleanAsString (m0 > m0) << endl <<
-    "m1 > m1: " << mfBooleanAsString (m1 > m1) << endl <<
-    "m2 > m2: " << mfBooleanAsString (m2 > m2) << endl <<
-    endl <<
-    endl <<
-
-    "m1 == m0: " << mfBooleanAsString (m1 == m0) << endl <<
-    "m1 == m1: " << mfBooleanAsString (m1 == m1) << endl <<
-    "m1 == m2: " << mfBooleanAsString (m1 == m2) << endl <<
-    endl <<
-
-    "m1 != m0: " << mfBooleanAsString (m1 != m0) << endl <<
-    "m1 != m1: " << mfBooleanAsString (m1 != m1) << endl <<
-    "m1 != m2: " << mfBooleanAsString (m1 != m2) << endl <<
-    endl <<
-
-    "m1 < m0: " << mfBooleanAsString (m1 < m0) << endl <<
-    "m1 < m1: " << mfBooleanAsString (m1 < m1) << endl <<
-    "m1 < m2: " << mfBooleanAsString (m1 < m2) << endl <<
-    endl <<
-
-    "m1 <= m0: " << mfBooleanAsString (m1 <= m0) << endl <<
-    "m1 <= m1: " << mfBooleanAsString (m1 <= m1) << endl <<
-    "m1 <= m2: " << mfBooleanAsString (m1 <= m2) << endl <<
-    endl <<
-
-    "m1 >= m0: " << mfBooleanAsString (m1 >= m0) << endl <<
-    "m1 >= m1: " << mfBooleanAsString (m1 >= m1) << endl <<
-    "m1 >= m2: " << mfBooleanAsString (m1 >= m2) << endl <<
-    endl <<
-
-    "m1 > m0: " << mfBooleanAsString (m1 > m0) << endl <<
-    "m1 > m1: " << mfBooleanAsString (m1 > m1) << endl <<
-    "m1 > m2: " << mfBooleanAsString (m1 > m2) << endl <<
-    endl <<
-
-    endl;
-
-/* output: JMI
-*/
-}
 
 Bool msrMoment::operator== (const msrMoment& other) const
 {
@@ -214,6 +141,87 @@ ostream& operator << (ostream& os, const msrMoment& elt)
 {
   elt.print (os);
   return os;
+}
+
+//______________________________________________________________________________
+void testMsrMomentComparisons (ostream& os)
+{
+  msrMoment m0 (Rational (3, 4));
+  msrMoment m1 (Rational (3, 4), Rational (-1, 16));
+  msrMoment m2 (Rational (3, 4), Rational (2, 16));
+
+  os <<
+    "m1: " << m1 << endl <<
+    "m0: " << m0 << endl <<
+    "m2: " << m2 << endl <<
+    endl <<
+
+    "m0 == m0: " << Bool (m0 == m0) << endl << // JMI v0.9.66
+    "m0 == m0: " << mfBooleanAsString (m0 == m0) << endl <<
+    "m1 == m1: " << mfBooleanAsString (m1 == m1) << endl <<
+    "m2 == m2: " << mfBooleanAsString (m2 == m2) << endl <<
+    endl <<
+
+    "m0 != m0: " << mfBooleanAsString (m0 != m0) << endl <<
+    "m1 != m1: " << mfBooleanAsString (m1 != m1) << endl <<
+    "m2 != m2: " << mfBooleanAsString (m2 != m2) << endl <<
+    endl <<
+
+    "m0 < m0: " << mfBooleanAsString (m0 < m0) << endl <<
+    "m1 < m1: " << mfBooleanAsString (m1 < m1) << endl <<
+    "m2 < m2: " << mfBooleanAsString (m2 < m2) << endl <<
+    endl <<
+
+    "m0 <= m0: " << mfBooleanAsString (m0 <= m0) << endl <<
+    "m1 <= m1: " << mfBooleanAsString (m1 <= m1) << endl <<
+    "m2 <= m2: " << mfBooleanAsString (m2 <= m2) << endl <<
+    endl <<
+
+    "m0 >= m0: " << mfBooleanAsString (m0 >= m0) << endl <<
+    "m1 >= m1: " << mfBooleanAsString (m1 >= m1) << endl <<
+    "m2 >= m2: " << mfBooleanAsString (m2 >= m2) << endl <<
+    endl <<
+
+    "m0 > m0: " << mfBooleanAsString (m0 > m0) << endl <<
+    "m1 > m1: " << mfBooleanAsString (m1 > m1) << endl <<
+    "m2 > m2: " << mfBooleanAsString (m2 > m2) << endl <<
+    endl <<
+    endl <<
+
+    "m1 == m0: " << mfBooleanAsString (m1 == m0) << endl <<
+    "m1 == m1: " << mfBooleanAsString (m1 == m1) << endl <<
+    "m1 == m2: " << mfBooleanAsString (m1 == m2) << endl <<
+    endl <<
+
+    "m1 != m0: " << mfBooleanAsString (m1 != m0) << endl <<
+    "m1 != m1: " << mfBooleanAsString (m1 != m1) << endl <<
+    "m1 != m2: " << mfBooleanAsString (m1 != m2) << endl <<
+    endl <<
+
+    "m1 < m0: " << mfBooleanAsString (m1 < m0) << endl <<
+    "m1 < m1: " << mfBooleanAsString (m1 < m1) << endl <<
+    "m1 < m2: " << mfBooleanAsString (m1 < m2) << endl <<
+    endl <<
+
+    "m1 <= m0: " << mfBooleanAsString (m1 <= m0) << endl <<
+    "m1 <= m1: " << mfBooleanAsString (m1 <= m1) << endl <<
+    "m1 <= m2: " << mfBooleanAsString (m1 <= m2) << endl <<
+    endl <<
+
+    "m1 >= m0: " << mfBooleanAsString (m1 >= m0) << endl <<
+    "m1 >= m1: " << mfBooleanAsString (m1 >= m1) << endl <<
+    "m1 >= m2: " << mfBooleanAsString (m1 >= m2) << endl <<
+    endl <<
+
+    "m1 > m0: " << mfBooleanAsString (m1 > m0) << endl <<
+    "m1 > m1: " << mfBooleanAsString (m1 > m1) << endl <<
+    "m1 > m2: " << mfBooleanAsString (m1 > m2) << endl <<
+    endl <<
+
+    endl;
+
+/* output: JMI
+*/
 }
 
 

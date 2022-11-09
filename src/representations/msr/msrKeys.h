@@ -13,8 +13,7 @@
 #define ___msrKeys___
 
 #include <list>
-
-// #include "msrBasicTypes.h"
+#include <vector>
 
 #include "msrElements.h"
 #include "msrMeasureElements.h"

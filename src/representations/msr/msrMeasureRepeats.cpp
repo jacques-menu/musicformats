@@ -423,7 +423,7 @@ ostream& operator << (ostream& os, const S_msrMeasureRepeatElement& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 */
@@ -619,7 +619,7 @@ ostream& operator << (ostream& os, const S_msrMeasureRepeatPattern& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -814,7 +814,7 @@ ostream& operator << (ostream& os, const S_msrMeasureRepeatReplicas& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -862,7 +862,7 @@ msrMeasureRepeat::msrMeasureRepeat (
 
   // measures repeat build phase
   fCurrentMeasureRepeatBuildPhaseKind =
-    msrMeasureRepeat::kMeasureRepeatBuildPhaseJustCreated;
+    msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseJustCreated;
 }
 
 msrMeasureRepeat::~msrMeasureRepeat ()
@@ -924,7 +924,7 @@ void msrMeasureRepeat::setMeasureRepeatPattern (
 
   // set currentRepeat's build phase
   fCurrentMeasureRepeatBuildPhaseKind =
-    msrMeasureRepeat::kMeasureRepeatBuildPhaseInPattern;
+    msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseInPattern;
 }
 
 void msrMeasureRepeat::setMeasureRepeatReplicas (
@@ -953,7 +953,7 @@ void msrMeasureRepeat::setMeasureRepeatReplicas (
 
   // set currentRepeat's build phase
   fCurrentMeasureRepeatBuildPhaseKind =
-    msrMeasureRepeat::kMeasureRepeatBuildPhaseInReplicas;
+    msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseInReplicas;
 }
 
 int msrMeasureRepeat::fetchMeasureRepeatReplicasNumber () const
@@ -1103,27 +1103,33 @@ void msrMeasureRepeat:: appendMeasureElementToSegmentElement (
     s.str ());
 }
 
-string msrMeasureRepeat::measureRepeatBuildPhaseKindAsString (
+string measureRepeatBuildPhaseKindAsString (
   msrMeasureRepeatBuildPhaseKind measureRepeatBuildPhaseKind)
 {
   string result;
 
   switch (measureRepeatBuildPhaseKind) {
-    case msrMeasureRepeat::kMeasureRepeatBuildPhaseJustCreated:
+    case msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseJustCreated:
       result = "measureRepeatBuildPhaseJustCreated";
       break;
-    case msrMeasureRepeat::kMeasureRepeatBuildPhaseInPattern:
+    case msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseInPattern:
       result = "measureRepeatBuildPhaseInPattern";
       break;
-    case msrMeasureRepeat::kMeasureRepeatBuildPhaseInReplicas:
+    case msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseInReplicas:
       result = "measureRepeatBuildPhaseInReplicas";
       break;
-    case msrMeasureRepeat::kMeasureRepeatBuildPhaseCompleted:
+    case msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseCompleted:
       result = "measureRepeatBuildPhaseCompleted";
       break;
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrMeasureRepeatBuildPhaseKind& elt)
+{
+  os << measureRepeatBuildPhaseKindAsString (elt);
+  return os;
 }
 
 string msrMeasureRepeat::asString () const
@@ -1259,7 +1265,7 @@ ostream& operator << (ostream& os, const S_msrMeasureRepeat& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

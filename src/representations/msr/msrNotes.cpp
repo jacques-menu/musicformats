@@ -2317,117 +2317,117 @@ S_msrNote msrNote::createNoteFromSemiTonesPitchAndOctave (
   return o;
 }
 
-//________________________________________________________________________
-void msrNote::setNoteMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const string&      context)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
-      "Setting note's position in measure of " << asString () <<
-      " to " <<
-      measurePosition <<
-      " (was " <<
-      fMeasureElementMeasurePosition <<
-      ") in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      endl;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
-
-  // set note's position in measure
-  fMeasureElementMeasurePosition = measurePosition;
-
-//   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
-//   print (gLogStream); // JMI v0.9.66
-//   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    fMeasureElementUpLinkToMeasure != nullptr,
-    "fMeasureElementUpLinkToMeasure is null");
-
-  // compute note's position in voice
-  Rational
-     voicePosition =
-      fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
-        +
-      measurePosition;
-
-  // set note's position in voice
-  msrMeasureElement::setMeasureElementVoicePosition (
-    voicePosition,
-    context);
-
-  // update current position in voice
-  S_msrVoice
-    voice =
-      fMeasureElementUpLinkToMeasure->
-        fetchMeasureUpLinkToVoice ();
-
-  voice->
-    incrementCurrentVoicePosition (
-      fMeasureElementSoundingWholeNotes);
-
-  // are there harmonies attached to this note?
-// JMI v0.9.66
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
-    gLogStream << "fNoteHarmoniesList.size (): " << fNoteHarmoniesList.size () << endl;
-  }
-#endif
-
-  if (fNoteHarmoniesList.size ()) {
-    list<S_msrHarmony>::const_iterator i;
-    for (S_msrHarmony harmony : fNoteHarmoniesList) {
-      // set the harmony position in measure, taking it's offset into account
-      harmony->
-        setHarmonyMeasurePosition (
-          measure,
-          measurePosition,
-          "msrNote::setNoteMeasurePosition()");
-    } // for
-  }
-
-  // are there figured bass elements attached to this note?
-  if (fNoteFiguredBassesList.size ()) {
-    list<S_msrFiguredBass>::const_iterator i;
-    for (S_msrFiguredBass figuredBass : fNoteFiguredBassesList) {
-      // set the figured bass element position in measure
-      figuredBass->
-        setFiguredBassMeasurePosition (
-          measure,
-          measurePosition,
-          "msrNote::setNoteMeasurePosition()");
-    } // for
-  }
-
-  // are there dal segnos attached to this note?
-  if (fNoteDalSegnos.size ()) {
-    for (S_msrDalSegno dalSegno : fNoteDalSegnos) {
-      // set the dal segno position in measure
-      dalSegno->
-        setDalSegnoMeasurePosition (
-          measure,
-          measurePosition,
-          "msrNote::setNoteMeasurePosition()");
-    } // for
-  }
-}
+// //________________________________________________________________________
+// void msrNote::setNoteMeasurePosition (
+//   const S_msrMeasure measure,
+//   const Rational&    measurePosition,
+//   const string&      context)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//     gLogStream <<
+//       "Setting note's position in measure of " << asString () <<
+//       " to " <<
+//       measurePosition <<
+//       " (was " <<
+//       fMeasureElementMeasurePosition <<
+//       ") in measure " <<
+//       measure->asShortString () <<
+//       " (measureElementMeasureNumber: " <<
+//       fetchMeasureElementMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"" <<
+//       endl;
+//   }
+// #endif
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measurePosition != msrMoment::K_NO_POSITION,
+//     "measurePosition == msrMoment::K_NO_POSITION");
+//
+//   // set note's position in measure
+//   fMeasureElementMeasurePosition = measurePosition;
+//
+// //   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+// //   print (gLogStream); // JMI v0.9.66
+// //   gLogStream << "++++++++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     fMeasureElementUpLinkToMeasure != nullptr,
+//     "fMeasureElementUpLinkToMeasure is null");
+//
+//   // compute note's position in voice
+//   Rational
+//      voicePosition =
+//       fMeasureElementUpLinkToMeasure->getMeasureVoicePosition ()
+//         +
+//       measurePosition;
+//
+//   // set note's position in voice
+//   msrMeasureElement::setMeasureElementVoicePosition (
+//     voicePosition,
+//     context);
+//
+//   // update current position in voice
+//   S_msrVoice
+//     voice =
+//       fMeasureElementUpLinkToMeasure->
+//         fetchMeasureUpLinkToVoice ();
+//
+//   voice->
+//     incrementCurrentVoicePosition (
+//       fMeasureElementSoundingWholeNotes);
+//
+//   // are there harmonies attached to this note?
+// // JMI v0.9.66
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceHarmonies ()) {
+//     gLogStream << "fNoteHarmoniesList.size (): " << fNoteHarmoniesList.size () << endl;
+//   }
+// #endif
+//
+//   if (fNoteHarmoniesList.size ()) {
+//     list<S_msrHarmony>::const_iterator i;
+//     for (S_msrHarmony harmony : fNoteHarmoniesList) {
+//       // set the harmony position in measure, taking it's offset into account
+//       harmony->
+//         setHarmonyMeasurePosition (
+//           measure,
+//           measurePosition,
+//           "msrNote::setNoteMeasurePosition()");
+//     } // for
+//   }
+//
+//   // are there figured bass elements attached to this note?
+//   if (fNoteFiguredBassesList.size ()) {
+//     list<S_msrFiguredBass>::const_iterator i;
+//     for (S_msrFiguredBass figuredBass : fNoteFiguredBassesList) {
+//       // set the figured bass element position in measure
+//       figuredBass->
+//         setFiguredBassMeasurePosition (
+//           measure,
+//           measurePosition,
+//           "msrNote::setNoteMeasurePosition()");
+//     } // for
+//   }
+//
+//   // are there dal segnos attached to this note?
+//   if (fNoteDalSegnos.size ()) {
+//     for (S_msrDalSegno dalSegno : fNoteDalSegnos) {
+//       // set the dal segno position in measure
+//       dalSegno->
+//         setDalSegnoMeasurePosition (
+//           measure,
+//           measurePosition,
+//           "msrNote::setNoteMeasurePosition()");
+//     } // for
+//   }
+// }
 
 void msrNote::setNoteOccupiesAFullMeasure ()
 {
@@ -3161,9 +3161,9 @@ void msrNote::appendPedalToNote (S_msrPedal pedal)
 
   if (fNotePedals.size ()) {
     if (
-      fNotePedals.back ()->getPedalTypeKind () == msrPedalTypeKind::kPedalStart
+      fNotePedals.back ()->getPedalTypeKind () == msrPedalTypeKind::kPedalTypeStart
         &&
-      pedal->getPedalTypeKind () == msrPedalTypeKind::kPedalStop
+      pedal->getPedalTypeKind () == msrPedalTypeKind::kPedalTypeStop
     ) {
       // it may happen that a given note has a 'pedal start'
       // and a 'pedal stop' in sequence, ignore both            // JMI ???

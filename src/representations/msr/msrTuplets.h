@@ -6,6 +6,7 @@
 #include "msrFiguredBasses.h"
 #include "msrGraceNotesGroups.h"
 #include "msrMeasures.h"
+#include "msrTupletFactors.h"
 
 
 namespace MusicFormats
@@ -156,22 +157,22 @@ class EXP msrTuplet : public msrTupletElement
     S_msrTuplet           getTupletDirectUpLinkToTuplet () const
                               { return fTupletDirectUpLinkToTuplet; }
 
-    // position in measure
-    void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context) override
-                              {
-                                setTupletMeasurePosition (
-                                  measure,
-                                  measurePosition,
-                                  context);
-                              }
-
-    void                  setTupletMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context);
+//     // position in measure
+//     void                  setMeasureElementMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context) override
+//                               {
+//                                 setTupletMeasurePosition (
+//                                   measure,
+//                                   measurePosition,
+//                                   context);
+//                               }
+//
+//     void                  setTupletMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context);
 
     // members positions in measures
     Rational              setTupletMembersMeasurePositions (

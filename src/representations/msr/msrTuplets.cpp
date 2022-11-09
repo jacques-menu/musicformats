@@ -43,6 +43,35 @@ namespace MusicFormats
 // tuplets
 //______________________________________________________________________________
 
+EXP string msrTupletInKindAsString (
+  msrTupletInKind tupletInKind)
+{
+  string result;
+
+  switch (tupletInKind) {
+    case msrTupletInKind::kTupletIn_NO_:
+      result = "***kTupletIn_NO_***";
+      break;
+    case msrTupletInKind::kTupletInMeasure:
+      result = "kTupletInMeasure";
+      break;
+    case msrTupletInKind::kTupletInTuplet:
+      result = "kTupletInTuplet";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTupletInKind& elt)
+{
+  os << msrTupletInKindAsString (elt);
+  return os;
+}
+
+// tuplets
+//______________________________________________________________________________
+
 enum class msrTupletInKind {
   kTupletIn_NO_,
   kTupletInMeasure,
@@ -203,39 +232,39 @@ S_msrTuplet msrTuplet::createTupletNewbornClone ()
   return newbornClone;
 }
 
-void msrTuplet::setTupletMeasurePosition (
-  const S_msrMeasure measure,
-  const Rational&    measurePosition,
-  const string&      context)
-{
-#ifdef TRACING_IS_ENABLED
-  if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
-    gLogStream <<
-      "Setting tuplet's position in measure of " << asString () <<
-      " to " <<
-      measurePosition <<
-      " (was " <<
-      fMeasureElementMeasurePosition <<
-      ") in measure " <<
-      measure->asShortString () <<
-      " (measureElementMeasureNumber: " <<
-      fetchMeasureElementMeasureNumber () <<
-      "), context: \"" <<
-      context <<
-      "\"" <<
-      endl;
-  }
-#endif
-
-  // sanity check
-  mfAssert (
-    __FILE__, __LINE__,
-    measurePosition != msrMoment::K_NO_POSITION,
-    "measurePosition == msrMoment::K_NO_POSITION");
-
-  // set time signature's position in measure
-  fMeasureElementMeasurePosition = measurePosition;
-}
+// void msrTuplet::setTupletMeasurePosition (
+//   const S_msrMeasure measure,
+//   const Rational&    measurePosition,
+//   const string&      context)
+// {
+// #ifdef TRACING_IS_ENABLED
+//   if (gGlobalTracingOahGroup->getTraceMeasurePositions ()) {
+//     gLogStream <<
+//       "Setting tuplet's position in measure of " << asString () <<
+//       " to " <<
+//       measurePosition <<
+//       " (was " <<
+//       fMeasureElementMeasurePosition <<
+//       ") in measure " <<
+//       measure->asShortString () <<
+//       " (measureElementMeasureNumber: " <<
+//       fetchMeasureElementMeasureNumber () <<
+//       "), context: \"" <<
+//       context <<
+//       "\"" <<
+//       endl;
+//   }
+// #endif
+//
+//   // sanity check
+//   mfAssert (
+//     __FILE__, __LINE__,
+//     measurePosition != msrMoment::K_NO_POSITION,
+//     "measurePosition == msrMoment::K_NO_POSITION");
+//
+//   // set time signature's position in measure
+//   fMeasureElementMeasurePosition = measurePosition;
+// }
 
 S_msrMeasure msrTuplet::fetchTupletUpLinkToMeasure () const
 {

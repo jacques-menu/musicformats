@@ -15,8 +15,8 @@
 
 #include "mfAssert.h"
 
+#include "mfConstants.h"
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
 
 #include "msr2msrWae.h"

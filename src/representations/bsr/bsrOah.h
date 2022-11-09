@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "bsrBasicTypes.h"
+#include "bsrEnumTypes.h"
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED

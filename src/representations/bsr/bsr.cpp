@@ -10,7 +10,9 @@
 */
 
 
-#include "bsr.h"
+#include "bsrEnumTypes.h"
+
+#include "oahEarlyOptions.h"
 
 
 using namespace std;
@@ -25,8 +27,23 @@ void initializeBSR ()
   static Bool pPrivateThisMethodHasBeenRun (false);
 
   if (! pPrivateThisMethodHasBeenRun) {
-    // initialize
-    initializeBsrBasicTypes ();
+#ifdef TRACING_IS_ENABLED
+    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+      gLogStream <<
+        "Initializing BSR basic types handling" <<
+        endl;
+    }
+#endif
+
+    // BSR braille output kinds handling
+    // ------------------------------------------------------
+
+    initializeBsrBrailleOutputKindsMap ();
+
+    // BSR texts languages handling
+    // ------------------------------------------------------
+
+    initializeBsrTextsLanguageKindsMap ();
 
     pPrivateThisMethodHasBeenRun = true;
   }

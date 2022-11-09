@@ -12,6 +12,9 @@
 #ifndef ___msrClefs___
 #define ___msrClefs___
 
+#include <list>
+#include <map>
+
 #include "msrMeasureElements.h"
 
 

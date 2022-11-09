@@ -862,7 +862,7 @@ msrBeatRepeat::msrBeatRepeat (
 
   // measures repeat build phase
   fCurrentBeatRepeatBuildPhaseKind =
-    msrBeatRepeat::kBeatRepeatBuildPhaseJustCreated;
+    msrBeatRepeatBuildPhaseKind::kBeatRepeatBuildPhaseJustCreated;
 }
 
 msrBeatRepeat::~msrBeatRepeat ()
@@ -924,7 +924,7 @@ void msrBeatRepeat::setBeatRepeatPattern (
 
   // set currentRepeat's build phase
   fCurrentBeatRepeatBuildPhaseKind =
-    msrBeatRepeat::kBeatRepeatBuildPhaseInPattern;
+    msrBeatRepeatBuildPhaseKind::kBeatRepeatBuildPhaseInPattern;
 }
 
 void msrBeatRepeat::setBeatRepeatReplicas (
@@ -953,7 +953,7 @@ void msrBeatRepeat::setBeatRepeatReplicas (
 
   // set currentRepeat's build phase
   fCurrentBeatRepeatBuildPhaseKind =
-    msrBeatRepeat::kBeatRepeatBuildPhaseInReplicas;
+    msrBeatRepeatBuildPhaseKind::kBeatRepeatBuildPhaseInReplicas;
 }
 
 int msrBeatRepeat::fetchBeatRepeatReplicasNumber () const
@@ -1105,11 +1105,6 @@ void msrBeatRepeat:: appendMeasureElementToSegmentElement (
     s.str ());
 }
 
-enum class msrBeatRepeatKind {
-  kBeatRepeat_NO_,
-  kBeatRepeatStart, kBeatRepeatStop
-};
-
 string msrBeatRepeatKindAsString (
   msrBeatRepeatKind beatRepeatKind)
 {
@@ -1142,16 +1137,16 @@ string msrBeatRepeatBuildPhaseKindAsString (
   string result;
 
   switch (beatRepeatBuildPhaseKind) {
-    case msrBeatRepeat::kBeatRepeatBuildPhaseJustCreated:
+    case msrBeatRepeatBuildPhaseKind::kBeatRepeatBuildPhaseJustCreated:
       result = "kBeatRepeatBuildPhaseJustCreated";
       break;
-    case msrBeatRepeat::kBeatRepeatBuildPhaseInPattern:
+    case msrBeatRepeatBuildPhaseKind::kBeatRepeatBuildPhaseInPattern:
       result = "kBeatRepeatBuildPhaseInPattern";
       break;
-    case msrBeatRepeat::kBeatRepeatBuildPhaseInReplicas:
+    case msrBeatRepeatBuildPhaseKind::kBeatRepeatBuildPhaseInReplicas:
       result = "kBeatRepeatBuildPhaseInReplicas";
       break;
-    case msrBeatRepeat::kBeatRepeatBuildPhaseCompleted:
+    case msrBeatRepeatBuildPhaseKind::kBeatRepeatBuildPhaseCompleted:
       result = "kBeatRepeatBuildPhaseCompleted";
       break;
   } // switch

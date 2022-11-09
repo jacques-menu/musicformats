@@ -3,7 +3,7 @@
 
 #include "bsrElements.h"
 
-// #include "bsrCellsLists.h"
+#include "bsrCellsLists.h"
 
 
 namespace MusicFormats
@@ -74,7 +74,7 @@ class EXP bsrFootNotesElement : public bsrElement
 
     string                fFootNoteText;
 
-    S_bsrCellsList        fFootNotesElementCellsList;
+    S_bsrCellsList        fFootNotesElementCellsList; // UNUSED JMI v0.9.66
 };
 typedef SMARTP<bsrFootNotesElement> S_bsrFootNotesElement;
 EXP ostream& operator << (ostream& os, const S_bsrFootNotesElement& elt);

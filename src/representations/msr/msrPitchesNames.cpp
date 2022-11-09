@@ -13,6 +13,7 @@
 
 #include <map>
 
+#include "mfConstants.h"
 #include "mfIndentedTextOutput.h"
 
 #include "msrPitchesNames.h"

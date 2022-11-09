@@ -9,8 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include "msrBasicTypes.h"
-
+#include "mfConstants.h"
 #include "msdlTokens.h"
 
 #include "msdlKeywords.h"

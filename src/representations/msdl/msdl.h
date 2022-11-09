@@ -14,7 +14,7 @@
 
 
 
-#include "msdlBasicTypes.h"
+#include "msdlEnumTypes.h"
 
 #include "msdlKeywords.h"
 

@@ -122,16 +122,16 @@ S_msrBarLine msrBarLine::createFinalBarLine (
     msrBarLine::create (
       inputLineNumber,
       upLinkToMeasure,
-      kBarLineLocationRight,
-      kBarLineStyleLightHeavy,
-      kBarLineRepeatDirectionNone,
-      kBarLineEndingTypeNone,
+      msrBarLineLocationKind::kBarLineLocationRight,
+      msrBarLineStyleKind::kBarLineStyleLightHeavy,
+      msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionNone,
+      msrBarLineEndingTypeKind::kBarLineEndingTypeNone,
       "", // endingNumber
       0,  // barLineTimes
-      kBarLineCategoryStandalone,
-      kBarLineHasSegnoNo,
-      kBarLineHasCodaNo,
-      kBarLineRepeatWingedNone);
+      msrBarLineCategoryKind::kBarLineCategoryStandalone,
+      msrBarLineHasSegnoKind::kBarLineHasSegnoNo,
+      msrBarLineHasCodaKind::kBarLineHasCodaNo,
+      msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone);
 }
 
 S_msrBarLine msrBarLine::createDoubleBarLine (
@@ -142,16 +142,16 @@ S_msrBarLine msrBarLine::createDoubleBarLine (
     msrBarLine::create (
       inputLineNumber,
       upLinkToMeasure,
-      kBarLineLocationRight,
-      kBarLineStyleLightLight,
-      kBarLineRepeatDirectionNone,
-      kBarLineEndingTypeNone,
+      msrBarLineLocationKind::kBarLineLocationRight,
+      msrBarLineStyleKind::kBarLineStyleLightLight,
+      msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionNone,
+      msrBarLineEndingTypeKind::kBarLineEndingTypeNone,
       "", // endingNumber
       0,  // barLineTimes
-      kBarLineCategoryStandalone,
-      kBarLineHasSegnoNo,
-      kBarLineHasCodaNo,
-      kBarLineRepeatWingedNone);
+      msrBarLineCategoryKind::kBarLineCategoryStandalone,
+      msrBarLineHasSegnoKind::kBarLineHasSegnoNo,
+       msrBarLineHasCodaKind::kBarLineHasCodaNo,
+      msrBarLineRepeatWingedKind::kBarLineRepeatWingedNone);
 }
 
 void msrBarLine::setBarLineCategory (
@@ -175,29 +175,29 @@ void msrBarLine::setBarLineCategory (
 Bool msrBarLine::barLineIsAFinalBar () const
 {
   return
-    fLocationKind == kBarLineLocationRight
+    fLocationKind == msrBarLineLocationKind::kBarLineLocationRight
       &&
-    fStyleKind == kBarLineStyleLightHeavy
+    fStyleKind == msrBarLineStyleKind::kBarLineStyleLightHeavy
       &&
-    fRepeatDirectionKind == kBarLineRepeatDirectionNone
+    fRepeatDirectionKind == msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionNone
       &&
-    fEndingTypeKind == kBarLineEndingTypeNone
+    fEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeNone
       &&
-    fBarLineCategoryKind == kBarLineCategoryStandalone;
+    fBarLineCategoryKind == msrBarLineCategoryKind::kBarLineCategoryStandalone;
 }
 
 Bool msrBarLine::barLineIsADoubleBar () const
 {
   return
-    fLocationKind == kBarLineLocationRight
+    fLocationKind == msrBarLineLocationKind::kBarLineLocationRight
       &&
-    fStyleKind == kBarLineStyleLightLight
+    fStyleKind == msrBarLineStyleKind::kBarLineStyleLightLight
       &&
-    fRepeatDirectionKind == kBarLineRepeatDirectionNone
+    fRepeatDirectionKind == msrBarLineRepeatDirectionKind::kBarLineRepeatDirectionNone
       &&
-    fEndingTypeKind == kBarLineEndingTypeNone
+    fEndingTypeKind == msrBarLineEndingTypeKind::kBarLineEndingTypeNone
       &&
-    fBarLineCategoryKind == kBarLineCategoryStandalone;
+    fBarLineCategoryKind == msrBarLineCategoryKind::kBarLineCategoryStandalone;
 }
 
 void msrBarLine::acceptIn (basevisitor* v)

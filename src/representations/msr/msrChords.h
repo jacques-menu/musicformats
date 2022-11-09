@@ -5,6 +5,7 @@
 #include "msrTupletElements.h"
 
 #include "msrCodas.h"
+#include "msrDirections.h"
 #include "msrDynamics.h"
 #include "msrElements.h"
 #include "msrGlissandos.h"
@@ -138,22 +139,22 @@ class EXP msrChord : public msrTupletElement
     S_msrGraceNotesGroup  getChordDirectUpLinkToGraceNotesGroup () const
                             { return fChordDirectUpLinkToGraceNotesGroup; }
 
-    // position in measure
-    void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context) override
-                              {
-                                setChordMeasurePosition (
-                                  measure,
-                                  measurePosition,
-                                  context);
-                              }
-
-    void                  setChordMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context);
+//     // position in measure
+//     void                  setMeasureElementMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context) override
+//                               {
+//                                 setChordMeasurePosition (
+//                                   measure,
+//                                   measurePosition,
+//                                   context);
+//                               }
+//
+//     void                  setChordMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context);
 
     // chord kind
     void                  setChordKind (

@@ -9,11 +9,449 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <sstream>
+#include <iomanip>      // setw()), set::precision(), ...
+
+#include <regex>
+
+#include "mfIndentedTextOutput.h"
+#include "mfServiceRunData.h"
+
 #include "msrOctaves.h"
+
+#include "msrOah.h"
+
+#include "oahWae.h"
+#include "msrWae.h"
 
 
 namespace MusicFormats
 {
+
+// octaves
+//______________________________________________________________________________
+EXP int octaveNumberFromOctaveKind (msrOctaveKind octaveKind)
+{
+  int result = -2;
+
+  switch (octaveKind) {
+    case msrOctaveKind::kOctave_NO_:
+      result = -1;
+      break;
+    case msrOctaveKind::kOctave0:
+      result = 0;
+      break;
+    case msrOctaveKind::kOctave1:
+      result = 1;
+      break;
+    case msrOctaveKind::kOctave2:
+      result = 2;
+      break;
+    case msrOctaveKind::kOctave3:
+      result = 3;
+      break;
+    case msrOctaveKind::kOctave4:
+      result = 4;
+      break;
+    case msrOctaveKind::kOctave5:
+      result = 5;
+      break;
+    case msrOctaveKind::kOctave6:
+      result = 6;
+      break;
+    case msrOctaveKind::kOctave7:
+      result = 7;
+      break;
+    case msrOctaveKind::kOctave8:
+      result = 8;
+      break;
+    case msrOctaveKind::kOctave9:
+      result = 9;
+      break;
+  } // switch
+
+  return result;
+}
+
+msrOctaveKind octaveSucc (msrOctaveKind octaveKind)
+{
+  msrOctaveKind result = msrOctaveKind::kOctave_NO_;
+
+  switch (octaveKind) {
+    case msrOctaveKind::kOctave_NO_:
+      result = msrOctaveKind::kOctave_NO_;
+      break;
+    case msrOctaveKind::kOctave0:
+      result = msrOctaveKind::kOctave1;
+      break;
+    case msrOctaveKind::kOctave1:
+      result = msrOctaveKind::kOctave2;
+      break;
+    case msrOctaveKind::kOctave2:
+      result = msrOctaveKind::kOctave3;
+      break;
+    case msrOctaveKind::kOctave3:
+      result = msrOctaveKind::kOctave4;
+      break;
+    case msrOctaveKind::kOctave4:
+      result = msrOctaveKind::kOctave5;
+      break;
+    case msrOctaveKind::kOctave5:
+      result = msrOctaveKind::kOctave6;
+      break;
+    case msrOctaveKind::kOctave6:
+      result = msrOctaveKind::kOctave7;
+      break;
+    case msrOctaveKind::kOctave7:
+      result = msrOctaveKind::kOctave8;
+      break;
+    case msrOctaveKind::kOctave8:
+      result = msrOctaveKind::kOctave9;
+      break;
+    case msrOctaveKind::kOctave9:
+      result = msrOctaveKind::kOctave_NO_;
+      break;
+  } // switch
+
+  return result;
+}
+
+msrOctaveKind octavePred (msrOctaveKind octaveKind)
+{
+  msrOctaveKind result = msrOctaveKind::kOctave_NO_;
+
+  switch (octaveKind) {
+    case msrOctaveKind::kOctave_NO_:
+      result = msrOctaveKind::kOctave_NO_;
+      break;
+    case msrOctaveKind::kOctave0:
+      result = msrOctaveKind::kOctave_NO_;
+      break;
+    case msrOctaveKind::kOctave1:
+      result = msrOctaveKind::kOctave0;
+      break;
+    case msrOctaveKind::kOctave2:
+      result = msrOctaveKind::kOctave1;
+      break;
+    case msrOctaveKind::kOctave3:
+      result = msrOctaveKind::kOctave2;
+      break;
+    case msrOctaveKind::kOctave4:
+      result = msrOctaveKind::kOctave3;
+      break;
+    case msrOctaveKind::kOctave5:
+      result = msrOctaveKind::kOctave4;
+      break;
+    case msrOctaveKind::kOctave6:
+      result = msrOctaveKind::kOctave5;
+      break;
+    case msrOctaveKind::kOctave7:
+      result = msrOctaveKind::kOctave6;
+      break;
+    case msrOctaveKind::kOctave8:
+      result = msrOctaveKind::kOctave7;
+      break;
+    case msrOctaveKind::kOctave9:
+      result = msrOctaveKind::kOctave8;
+      break;
+  } // switch
+
+  return result;
+}
+
+// prefix operators
+msrOctaveKind& operator++ (msrOctaveKind& octaveKind)
+{
+  octaveKind = octaveSucc (octaveKind);
+
+  return octaveKind;
+}
+
+msrOctaveKind& operator-- (msrOctaveKind& octaveKind)
+{
+  octaveKind = octavePred (octaveKind);
+
+  return octaveKind;
+}
+
+// postfix operators
+msrOctaveKind operator++ (msrOctaveKind& octaveKind, int)
+{
+  msrOctaveKind originalValue = octaveKind;
+
+  octaveKind = octaveSucc (originalValue);
+
+  return originalValue;
+}
+
+msrOctaveKind operator-- (msrOctaveKind& octaveKind, int)
+{
+  msrOctaveKind originalValue = octaveKind;
+
+  octaveKind = octavePred (originalValue);
+
+  return originalValue;
+}
+
+msrOctaveKind msrOctaveKindFromNumber (
+  int inputLineNumber,
+  int octaveNumber)
+{
+  msrOctaveKind result = msrOctaveKind::kOctave_NO_;
+
+  switch (octaveNumber) {
+    case 0: result = msrOctaveKind::kOctave0; break;
+    case 1: result = msrOctaveKind::kOctave1; break;
+    case 2: result = msrOctaveKind::kOctave2; break;
+    case 3: result = msrOctaveKind::kOctave3; break;
+    case 4: result = msrOctaveKind::kOctave4; break;
+    case 5: result = msrOctaveKind::kOctave5; break;
+    case 6: result = msrOctaveKind::kOctave6; break;
+    case 7: result = msrOctaveKind::kOctave7; break;
+    case 8: result = msrOctaveKind::kOctave8; break;
+    case 9: result = msrOctaveKind::kOctave9; break;
+    default:
+      {
+        stringstream s;
+
+        s <<
+          "cannot create an octave kind from number '" <<
+          octaveNumber <<
+          "'";
+
+        msrInternalError (
+          gGlobalServiceRunData->getInputSourceName (),
+          inputLineNumber,
+          __FILE__, __LINE__,
+          s.str ());
+      }
+  } // switch
+
+  return result;
+}
+
+msrOctaveKind msrOctaveKindFromCommasOrQuotes (
+  int           inputLineNumber,
+  const string& octaveIndication)
+{
+  /*
+    octaveIndication should containt a possibly empty
+    sequence of ','s or '\''s
+
+    Middle C, LilyPond's c', starts octave 4,
+    thus a pitch without any commas nor quotes is in octave 3
+  */
+
+  const msrOctaveKind
+    octaveKindBelowMiddleC =
+      msrOctaveKind::kOctave3;
+
+  msrOctaveKind
+    result =
+      octaveKindBelowMiddleC;
+
+  for (size_t i = 0; i < octaveIndication.size (); ++i) {
+    switch (octaveIndication [i]) {
+      case ',':
+        if (result > octaveKindBelowMiddleC) {
+          // a '\'' has been found previously
+          stringstream s;
+
+          s <<
+            "octave indication \"" << octaveIndication <<
+            "\" contains a ',' after a '\\'";
+
+          oahError (s.str ());
+        }
+
+        --result;
+        break;
+
+      case '\'':
+        if (result < octaveKindBelowMiddleC) {
+          // a ',' has been found previously
+          stringstream s;
+
+          s <<
+            "octave indication \"" << octaveIndication <<
+            "\" contains a '\\'' after a ','";
+
+          oahError (s.str ());
+        }
+
+        ++result;
+        break;
+
+      default:
+        {
+          stringstream s;
+
+          s <<
+            "octave indication \"" <<
+            octaveIndication <<
+            "\" should contain only commas and quotes" <<
+            ", line = " << inputLineNumber;
+
+          msrInternalError (
+            gGlobalServiceRunData->getInputSourceName (),
+            inputLineNumber,
+            __FILE__, __LINE__,
+            s.str ());
+        }
+    } // switch
+
+//     gLogStream << JMI
+//       "---> result: " <<
+//       result <<
+//       endl;
+  } // for
+
+  return result;
+}
+
+string msrOctaveKindAsString (msrOctaveKind octaveKind)
+{
+  string result;
+
+  switch (octaveKind) {
+    case msrOctaveKind::kOctave_NO_:
+      result = "*** noOctave ***]";
+      break;
+    case msrOctaveKind::kOctave0:
+      result = "o0";
+      break;
+    case msrOctaveKind::kOctave1:
+      result = "o1";
+      break;
+    case msrOctaveKind::kOctave2:
+      result = "o2";
+      break;
+    case msrOctaveKind::kOctave3:
+      result = "o3";
+      break;
+    case msrOctaveKind::kOctave4:
+      result = "o4";
+      break;
+    case msrOctaveKind::kOctave5:
+      result = "o5";
+      break;
+    case msrOctaveKind::kOctave6:
+      result = "o6";
+      break;
+    case msrOctaveKind::kOctave7:
+      result = "o7";
+      break;
+    case msrOctaveKind::kOctave8:
+      result = "o8";
+      break;
+    case msrOctaveKind::kOctave9:
+      result = "o9";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrOctaveKind& elt)
+{
+  os << msrOctaveKindAsString (elt);
+  return os;
+}
+
+// octave entry kinds
+//______________________________________________________________________________
+
+map<string, msrOctaveEntryKind>
+  gGlobalMsrOctaveEntryKindsMap;
+
+string msrOctaveEntryKindAsString (
+  msrOctaveEntryKind octaveEntryKind)
+{
+  string result;
+
+  // no CamelCase here, these strings are used in the command line options
+
+  switch (octaveEntryKind) {
+    case msrOctaveEntryKind::kOctaveEntryRelative: // default value
+      result = "kOctaveEntryRelative";
+      break;
+    case msrOctaveEntryKind::kOctaveEntryAbsolute:
+      result = "kOctaveEntryAbsolute";
+      break;
+    case msrOctaveEntryKind::kOctaveEntryFixed:
+      result = "kOctaveEntryFixed";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrOctaveEntryKind& elt)
+{
+  os << msrOctaveEntryKindAsString (elt);
+  return os;
+}
+
+void initializeMsrOctaveEntryKindsMap ()
+{
+  // register the LilyPond score output kinds
+  // --------------------------------------
+
+  // no CamelCase here, these strings are used in the command line options
+
+  gGlobalMsrOctaveEntryKindsMap ["relative"] = msrOctaveEntryKind::kOctaveEntryRelative;
+  gGlobalMsrOctaveEntryKindsMap ["absolute"] = msrOctaveEntryKind::kOctaveEntryAbsolute;
+  gGlobalMsrOctaveEntryKindsMap ["fixed"] = msrOctaveEntryKind::kOctaveEntryFixed;
+}
+
+string existingMsrOctaveEntryKinds (size_t namesListMaxLength)
+{
+  stringstream s;
+
+  size_t
+    msrOctaveEntryKindsMapSize =
+      gGlobalMsrOctaveEntryKindsMap.size ();
+
+  if (msrOctaveEntryKindsMapSize) {
+    size_t
+      nextToLast =
+        msrOctaveEntryKindsMapSize - 1;
+
+    size_t count = 0;
+    size_t cumulatedLength = 0;
+
+    for (
+      map<string, msrOctaveEntryKind>::const_iterator i =
+        gGlobalMsrOctaveEntryKindsMap.begin ();
+      i != gGlobalMsrOctaveEntryKindsMap.end ();
+      ++i
+    ) {
+      string theString = (*i).first;
+
+      ++count;
+
+      cumulatedLength += theString.size ();
+      if (cumulatedLength >= namesListMaxLength) {
+        s << endl << gIndenter.getSpacer ();
+        cumulatedLength = 0;
+      }
+
+      if (count == 1) {
+        s << gIndenter.getSpacer ();
+      }
+      s << theString;
+
+      if (count == nextToLast) {
+        s << " and ";
+      }
+      else if (count != msrOctaveEntryKindsMapSize) {
+        s << ", ";
+      }
+    } // for
+  }
+
+  return s.str ();
+}
 
 // semitone pitches and absolute octave
 //______________________________________________________________________________
@@ -294,6 +732,202 @@ ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndOctave& elt)
 
   return os;
 }
+
+/* JMI
+//______________________________________________________________________________
+S_msrSemiTonesPitchAndAbsoluteOctave msrSemiTonesPitchAndAbsoluteOctave::create (
+  msrSemiTonesPitchKind semiTonesPitchKind,
+  int                   absoluteOctave)
+{
+  msrSemiTonesPitchAndAbsoluteOctave* o =
+    new msrSemiTonesPitchAndAbsoluteOctave (
+      semiTonesPitchKind,
+      absoluteOctave);
+  assert (o != nullptr);
+
+  return o;
+}
+
+msrSemiTonesPitchAndAbsoluteOctave::msrSemiTonesPitchAndAbsoluteOctave (
+  msrSemiTonesPitchKind semiTonesPitchKind,
+  int                   absoluteOctave)
+{
+  fSemiTonesPitchKind = semiTonesPitchKind;
+
+  fAbsoluteOctave = absoluteOctave;
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+    gLogStream <<
+      "==> Creating harmony item '" <<
+      asString () <<
+      "'" <<
+      endl;
+  }
+#endif
+}
+
+msrSemiTonesPitchAndAbsoluteOctave::~msrSemiTonesPitchAndAbsoluteOctave ()
+{}
+
+S_msrSemiTonesPitchAndAbsoluteOctave msrSemiTonesPitchAndAbsoluteOctave::createSemiTonesPitchAndAbsoluteOctaveNewbornClone ()
+{
+  S_msrSemiTonesPitchAndAbsoluteOctave
+    newbornClone =
+      msrSemiTonesPitchAndAbsoluteOctave::create (
+        fSemiTonesPitchKind,
+        fAbsoluteOctave);
+
+  return newbornClone;
+}
+
+string msrSemiTonesPitchAndAbsoluteOctave::asString () const
+{
+  stringstream s;
+
+  const int fieldWidth = 19;
+
+  s << left <<
+    "SemiTonesPitchAndAbsoluteOctave" <<
+    ": " <<
+    setw (fieldWidth) <<
+    msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
+    ", absoluteOctave: " << fAbsoluteOctave;
+
+  return s.str ();
+}
+
+void msrSemiTonesPitchAndAbsoluteOctave::print (ostream& os) const
+{
+  os <<
+    "SemiTonesPitchAndAbsoluteOctave" <<
+    endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 22;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "semiTonesPitchKind" << " : " <<
+      msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
+    endl <<
+    setw (fieldWidth) <<
+    "absoluteOctave" << " : " << fAbsoluteOctave <<
+    endl;
+
+  --gIndenter;
+}
+
+ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndAbsoluteOctave& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << endl;
+  }
+
+  return os;
+}
+
+//______________________________________________________________________________
+S_msrSemiTonesPitchAndRelativeOctave msrSemiTonesPitchAndRelativeOctave::create (
+  msrSemiTonesPitchKind semiTonesPitchKind,
+  int                   relativeOctave)
+{
+  msrSemiTonesPitchAndRelativeOctave* o =
+    new msrSemiTonesPitchAndRelativeOctave (
+      semiTonesPitchKind,
+      relativeOctave);
+  assert (o != nullptr);
+
+  return o;
+}
+
+msrSemiTonesPitchAndRelativeOctave::msrSemiTonesPitchAndRelativeOctave (
+  msrSemiTonesPitchKind semiTonesPitchKind,
+  int                   relativeOctave)
+{
+  fSemiTonesPitchKind = semiTonesPitchKind;
+
+  fRelativeOctave = relativeOctave;
+
+#ifdef TRACING_IS_ENABLED
+  if (gGlobalTracingOahGroup->getTraceHarmoniesDetails ()) {
+    gLogStream <<
+      "==> Creating harmony item '" <<
+      asString () <<
+      "'" <<
+      endl;
+  }
+#endif
+}
+
+msrSemiTonesPitchAndRelativeOctave::~msrSemiTonesPitchAndRelativeOctave ()
+{}
+
+S_msrSemiTonesPitchAndRelativeOctave msrSemiTonesPitchAndRelativeOctave::createSemiTonesPitchAndRelativeOctaveNewbornClone ()
+{
+  S_msrSemiTonesPitchAndRelativeOctave
+    newbornClone =
+      msrSemiTonesPitchAndRelativeOctave::create (
+        fSemiTonesPitchKind,
+        fRelativeOctave);
+
+  return newbornClone;
+}
+
+string msrSemiTonesPitchAndRelativeOctave::asString () const
+{
+  stringstream s;
+
+  const int fieldWidth = 19;
+
+  s << left <<
+    "SemiTonesPitchAndRelativeOctave" <<
+    ": " <<
+    setw (fieldWidth) <<
+    msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
+    ", relativeOctave: " << fRelativeOctave;
+
+  return s.str ();
+}
+
+void msrSemiTonesPitchAndRelativeOctave::print (ostream& os) const
+{
+  os <<
+    "SemiTonesPitchAndRelativeOctave" <<
+    endl;
+
+  ++gIndenter;
+
+  const int fieldWidth = 22;
+
+  os << left <<
+    setw (fieldWidth) <<
+    "semiTonesPitchKind" << " : " <<
+      msrSemiTonesPitchKindAsString (fSemiTonesPitchKind) <<
+    endl <<
+    setw (fieldWidth) <<
+    "relativeOctave" << " : " << fRelativeOctave <<
+    endl;
+
+  --gIndenter;
+}
+
+ostream& operator << (ostream& os, const S_msrSemiTonesPitchAndRelativeOctave& elt)
+{
+  if (elt) {
+    elt->print (os);
+  }
+  else {
+    os << "[NONE]" << endl;
+  }
+
+  return os;
+}
+*/
 
 // quartertone pitches and absolute octave
 //______________________________________________________________________________

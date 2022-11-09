@@ -14,7 +14,7 @@
 
 #include "bsrElements.h"
 
-// #include "bsrLines.h"
+#include "bsrLines.h"
 
 // #include "bsrOah.h"
 

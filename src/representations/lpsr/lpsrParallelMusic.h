@@ -16,7 +16,8 @@
 #include <list>
 
 #include "lpsrElements.h"
-// #include "lpsrPartGroups.h"
+
+#include "lpsrPartGroups.h"
 
 
 using namespace std;

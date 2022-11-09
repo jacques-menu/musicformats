@@ -12,6 +12,8 @@
 #ifndef ___mfConstants___
 #define ___mfConstants___
 
+#include "exports.h"
+
 
 namespace MusicFormats
 {

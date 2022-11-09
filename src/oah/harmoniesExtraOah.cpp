@@ -28,6 +28,7 @@
 #include "oahOah.h"
 
 #include "msrPitchesNames.h"
+#include "msrHarmonies.h"
 
 #include "lpsrOah.h"
 
@@ -198,7 +199,7 @@ ostream& operator << (ostream& os, const S_extraShowAllHarmoniesStructuresAtom& 
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -446,7 +447,7 @@ ostream& operator << (ostream& os, const S_extraShowAllHarmoniesContentsAtom& el
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1343,7 +1344,7 @@ ostream& operator << (ostream& os, const S_harmoniesExtraOahGroup& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

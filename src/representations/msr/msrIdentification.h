@@ -12,9 +12,9 @@
 #ifndef ___msrIdentification___
 #define ___msrIdentification___
 
-#include "msrElements.h"
+#include <list>
 
-// #include "msrBasicTypes.h"
+#include "msrElements.h"
 
 
 namespace MusicFormats

@@ -12,7 +12,6 @@
 #ifndef ___msrOctaveShifts___
 #define ___msrOctaveShifts___
 
-// #include "msrBasicTypes.h"
 #include "msrMeasureElements.h"
 
 

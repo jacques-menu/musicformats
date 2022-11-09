@@ -494,7 +494,7 @@ string msrDivisions::tupletDivisionsAsMsrString (
       divisions * actualNotes / normalNotes);
 }
 
-string msrDivisions::tupletWholeNotesAsMsrString (
+string tupletWholeNotesAsMsrString (
   int             inputLineNumber,
   const Rational& wholeNotes,
   int             actualNotes,

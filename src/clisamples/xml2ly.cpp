@@ -37,8 +37,8 @@
 #include "oahBasicTypes.h" // for testIncludeOptionsFromFile()
 #include "oahEarlyOptions.h"
 
-#include "msr.h"
-#include "lpsr.h"
+// #include "msr.h"
+// #include "lpsr.h"
 
 #include "mfcLibraryComponent.h"
 #include "musicxml2lilypondComponent.h"
@@ -142,6 +142,8 @@ int xml2ly (
 // JMI testBool ();
 
 // JMI  testIncludeOptionsFromFile ();
+
+  testMsrMomentComparisons (cout);
 
 //   gLogStream <<
 //     "getGlobalMusicFormatsVersionNumberAndDate (): " << getGlobalMusicFormatsVersionNumberAndDate () <<

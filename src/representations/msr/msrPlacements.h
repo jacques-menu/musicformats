@@ -16,7 +16,7 @@
 #include <ostream>
 
 
-using namespace MusicXML2;
+using namespace std;
 
 namespace MusicFormats
 {

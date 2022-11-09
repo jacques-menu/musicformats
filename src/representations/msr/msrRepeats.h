@@ -12,6 +12,8 @@
 #ifndef ___msrRepeats___
 #define ___msrRepeats___
 
+#include <vector>
+
 #include "msrElements.h"
 #include "msrVoiceElements.h"
 

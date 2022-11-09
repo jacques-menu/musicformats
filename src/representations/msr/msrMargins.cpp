@@ -9,7 +9,14 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <sstream>
+#include <iomanip>      // setw()), set::precision(), ...
+
+#include "mfServiceRunData.h"
+
 #include "msrMargins.h"
+
+#include "msrWae.h"
 
 
 namespace MusicFormats

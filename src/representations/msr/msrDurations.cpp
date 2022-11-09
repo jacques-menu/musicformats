@@ -9,7 +9,14 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <sstream>
+#include <iomanip>      // setw()), set::precision(), ...
+
+#include "mfServiceRunData.h"
+
 #include "msrDurations.h"
+
+#include "msrWae.h"
 
 
 namespace MusicFormats
@@ -608,7 +615,7 @@ Rational msrDuration::dottedDurationAsWholeNotes (
 }
 
 Rational msrDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
-  // used in lpsrBasicTypes, dottedDurationAsLilypondStringWithoutBackSlash(),
+  // used in lpsrEnumTypes, dottedDurationAsLilypondStringWithoutBackSlash(),
   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
   // JMI BUGGY, NEVER TESTED TEMP???
   int inputLineNumber) const
@@ -856,7 +863,7 @@ Rational msrDottedDuration::dottedDurationAsWholeNotes (
 }
 
 Rational msrDottedDuration::dottedDurationAsWholeNotes_FOR_TEMPO (
-  // used in lpsrBasicTypes, dottedDurationAsLilypondStringWithoutBackSlash(),
+  // used in lpsrEnumTypes, dottedDurationAsLilypondStringWithoutBackSlash(),
   // called in lpsr2lilypondTranslator.cpp, visitStart (S_msrTempo& elt)
   // JMI BUGGY, NEVER TESTED TEMP???
   int inputLineNumber) const
@@ -1367,7 +1374,7 @@ string multipleFullBarRestsWholeNotesAsMsrString (
     wholeNotes.getNumerator ();
 
   s <<
-    wholeNotesAsLilypondString (
+    wholeNotesAsMsrString ( // JMI ??? v0.9.66
       inputLineNumber,
       denominatorAsFraction);
 

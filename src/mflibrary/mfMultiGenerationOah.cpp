@@ -29,7 +29,7 @@
 
 #include "oahEarlyOptions.h"
 
-#include "msrBasicTypes.h"        // for " K_MF_NAMES_LIST_MAX_LENGTH
+#include "mfConstants.h"
 
 #include "mfMultiGenerationOah.h"
 

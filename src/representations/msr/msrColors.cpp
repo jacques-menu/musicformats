@@ -9,7 +9,15 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <iomanip>      // setw()), set::precision(), ...
+#include <sstream>
+#include <regex>
+
+#include "mfIndentedTextOutput.h"
+
 #include "msrColors.h"
+
+#include "oahWae.h"
 
 
 namespace MusicFormats

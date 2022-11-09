@@ -9,6 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "visitor.h"
+
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"

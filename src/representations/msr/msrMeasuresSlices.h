@@ -23,6 +23,11 @@ using namespace std;
 namespace MusicFormats
 {
 
+//______________________________________________________________________________
+// PRE-declarations for classes mutual dependencies
+class   msrNote;
+typedef SMARTP<msrNote> S_msrNote;
+
 //________________________________________________________________________
 enum class msrNoteEventKind {
   kNoteEventStart,

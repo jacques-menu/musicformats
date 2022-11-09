@@ -9,10 +9,10 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include "visitor.h"
+
 #include "mfAssert.h"
 #include "mfStringsHandling.h"
-
-
 
 #include "lpsrStaves.h"
 

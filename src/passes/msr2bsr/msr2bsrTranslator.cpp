@@ -24,6 +24,7 @@
 #endif
 
 #include "mfAssert.h"
+#include "mfConstants.h"
 #include "mfServiceRunData.h"
 
 #include "msr2bsrComponent.h"

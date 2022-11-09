@@ -9,7 +9,13 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <sstream>
+
+#include "mfServiceRunData.h"
+
 #include "msrPlacements.h"
+
+#include "msrWae.h"
 
 
 namespace MusicFormats

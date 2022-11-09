@@ -9,6 +9,11 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <sstream>
+#include <iomanip>      // setw()), set::precision(), ...
+
+#include "mfIndentedTextOutput.h"
+
 #include "msrLengths.h"
 
 
