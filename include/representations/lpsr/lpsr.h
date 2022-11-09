@@ -14,7 +14,7 @@
 
 #include "msr.h"
 
-#include "lpsrBasicTypes.h"
+#include "lpsrEnumTypes.h"
 #include "lpsrElements.h"
 
 #include "lpsrComments.h"

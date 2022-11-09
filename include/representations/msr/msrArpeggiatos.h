@@ -14,10 +14,10 @@
 
 #include "msrElements.h"
 
-// #include "msrBasicTypes.h"
+#include "msrPlacements.h"
 
 
-namespace MusicFormats 
+namespace MusicFormats
 {
 // JMI ???
 

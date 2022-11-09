@@ -19,6 +19,8 @@
 #include "msrOah.h"
 
 
+using namespace MusicXML2;
+
 namespace MusicFormats
 {
 

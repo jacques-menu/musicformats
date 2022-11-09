@@ -221,13 +221,13 @@ function bit ()
 
   LOGFILE_NAME=${SCRIPT_NAME}.log
   LOGFILE=${BUILD_DIR}/${LOGFILE_NAME}
-	echo
-	echo "==> LOGFILE = ${LOGFILE}"
-	echo
+# 	echo
+# 	echo "==> LOGFILE = ${LOGFILE}"
+# 	echo
 
 	# execute the SCRIPT
 
-	echo "--> Executing ${SCRIPT}"
+# 	echo "--> Executing ${SCRIPT}"
   zsh ${SCRIPT} $@
 
 	# filter out log results
@@ -242,7 +242,7 @@ function bit ()
 #     | \
 #    egrep -v 'Xcode.app' | egrep -v 'VSTD'
 
-  echo
+#   echo
 
 	# list resulting files
 

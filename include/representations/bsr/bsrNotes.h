@@ -3,6 +3,8 @@
 
 #include "bsrLineContentsElements.h"
 
+#include "mfBool.h"
+
 #include "bsrCellsLists.h"
 
 

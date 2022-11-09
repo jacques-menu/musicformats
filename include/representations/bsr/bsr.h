@@ -12,7 +12,7 @@
 #ifndef ___bsr___
 #define ___bsr___
 
-#include "bsrBasicTypes.h"
+#include "bsrEnumTypes.h"
 
 #include "bsrCellsLists.h"
 

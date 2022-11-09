@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msdlBasicTypes___
-#define ___msdlBasicTypes___
+#ifndef ___msdlEnumTypes___
+#define ___msdlEnumTypes___
 
 #include <list>
 #include <map>
@@ -18,8 +18,6 @@
 #include "smartpointer.h"
 
 #include "mfRational.h"
-
-// #include "msrBasicTypes.h"
 
 
 namespace MusicFormats

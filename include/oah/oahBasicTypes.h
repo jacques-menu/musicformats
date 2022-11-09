@@ -34,7 +34,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations for class   mutual dependencies
+// PRE-declarations for class mutual dependencies
 
 class   oahAtom;
 typedef SMARTP<oahAtom> S_oahAtom;

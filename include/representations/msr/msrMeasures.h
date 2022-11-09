@@ -14,29 +14,19 @@
 
 #include "msrSegmentElements.h"
 
-#include "msrMeasuresEnumTypes.h"
-
-#include "msrBarChecks.h"
-#include "msrBarLines.h"
-#include "msrBarNumberChecks.h"
-#include "msrBreaks.h"
-#include "msrDoubleTremolos.h"
-#include "msrEyeGlasses.h"
 #include "msrFiguredBasses.h"
-#include "msrHarmonies.h"
+#include "msrMeasuresEnumTypes.h"
 #include "msrMoments.h"
-#include "msrMusicXMLSpecifics.h"
 #include "msrOctaveShifts.h"
-// #include "msrParts.h"
-#include "msrPartGroups.h"
-#include "msrNotes.h"
-#include "msrRehearsalMarks.h"
+#include "msrParts.h"
 #include "msrScores.h"
-#include "msrVoiceStaffChanges.h"
-// #include "msrStaves.h"
-#include "msrTempos.h"
+#include "msrSegments.h"
+#include "msrSegnos.h"
+#include "msrStaves.h"
+#include "msrTablatures.h"
 #include "msrTuplets.h"
 #include "msrVoices.h"
+#include "msrVoiceStaffChanges.h"
 
 
 namespace MusicFormats
@@ -47,7 +37,9 @@ namespace MusicFormats
 // class msrMeasureElement;
 // typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 
-// PRE-declarations for classes mutual dependencies
+class msrHarmony;
+typedef SMARTP<msrHarmony> S_msrHarmony;
+
 class EXP msrMeasure : public msrSegmentElement
 {
   public:

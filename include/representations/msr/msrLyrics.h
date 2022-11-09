@@ -128,22 +128,22 @@ class EXP msrSyllable : public msrMeasureElement
     S_msrStanza           getSyllableUpLinkToStanza () const
                               { return fSyllableUpLinkToStanza; }
 
-    // position in measure
-    void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context) override
-                              {
-                                setSyllableMeasurePosition (
-                                  measure,
-                                  measurePosition,
-                                  context);
-                              }
-
-    void                  setSyllableMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context);
+//     // position in measure
+//     void                  setMeasureElementMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context) override
+//                               {
+//                                 setSyllableMeasurePosition (
+//                                   measure,
+//                                   measurePosition,
+//                                   context);
+//                               }
+//
+//     void                  setSyllableMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context);
 
     // syllable kind
     msrSyllableKind       getSyllableKind () const

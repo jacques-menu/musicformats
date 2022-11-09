@@ -19,6 +19,7 @@
 #include "lpsrLayouts.h"
 #include "lpsrPapers.h"
 #include "lpsrParallelMusic.h"
+#include "lpsrPartGroups.h"
 #include "lpsrScheme.h"
 
 #include "msrMidi.h"

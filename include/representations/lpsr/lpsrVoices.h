@@ -14,9 +14,9 @@
 
 #include <iostream>
 
-#include "msr.h"
-
 #include "lpsrElements.h"
+
+#include "msrVoices.h"
 
 
 using namespace std;

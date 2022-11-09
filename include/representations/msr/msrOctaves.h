@@ -15,6 +15,10 @@
 #include <string>
 #include <ostream>
 
+#include "exports.h"
+
+#include "msrPitches.h"
+
 
 namespace MusicFormats
 {

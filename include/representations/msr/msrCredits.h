@@ -12,10 +12,13 @@
 #ifndef ___msrCredits___
 #define ___msrCredits___
 
+#include <vector>
+
 #include "msrElements.h"
 
 #include "msrAlignments.h"
 #include "msrFonts.h"
+#include "msrMusicXMLSpecifics.h"
 
 
 namespace MusicFormats

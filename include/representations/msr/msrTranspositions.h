@@ -12,7 +12,6 @@
 #ifndef ___msrTranspositions___
 #define ___msrTranspositions___
 
-// #include "msrBasicTypes.h"
 #include "msrMeasureElements.h"
 
 

@@ -15,6 +15,8 @@
 #include <string>
 #include <ostream>
 
+#include "mfRational.h"
+
 
 namespace MusicFormats
 {

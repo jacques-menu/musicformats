@@ -16,7 +16,7 @@
 #include "oahBasicTypes.h"
 #include "oahAtomsCollection.h"
 
-#include "bsrBasicTypes.h"
+#include "bsrEnumTypes.h"
 
 #include "brailleGeneration.h"
 

@@ -13,7 +13,6 @@
 #define ___msr___
 
 #include "msrPitchesNames.h"
-// #include "msrBasicTypes.h"
 #include "msrElements.h"
 
 #include "msrIdentification.h"
@@ -31,6 +30,7 @@
 #include "msrKeys.h"
 #include "msrTimeSignatures.h"
 
+#include "msrTemposEnumTypes.h"
 #include "msrTempos.h"
 
 #include "msrRehearsalMarks.h"
@@ -101,6 +101,7 @@
 #include "msrSlashes.h"
 
 #include "msrMeasureElements.h"
+#include "msrMeasuresEnumTypes.h"
 #include "msrMeasures.h"
 
 #include "msrSegments.h"
@@ -108,6 +109,7 @@
 #include "msrVoiceElements.h"
 #include "msrVoices.h"
 
+#include "msrStavesEnumTypes.h"
 #include "msrStaves.h"
 
 #include "msrParts.h"

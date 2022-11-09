@@ -16,6 +16,8 @@
 #include <ostream>
 
 
+using namespace std;
+
 namespace MusicFormats
 {
 

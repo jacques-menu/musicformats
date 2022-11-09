@@ -7,15 +7,19 @@
 
 #include "msrNotes.h"
 #include "msrParts.h"
+#include "msrVoices.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations for class   mutual dependencies
+// PRE-declarations for class mutual dependencies
 class   msrMeasure;
 typedef SMARTP<msrMeasure> S_msrMeasure;
+
+class   msrVoice;
+typedef SMARTP<msrVoice> S_msrVoice;
 
 //______________________________________________________________________________
 // data types
@@ -211,28 +215,29 @@ class EXP msrFiguredBass : public msrMeasureElement
     S_msrVoice            getFiguredBassUpLinkToVoice () const
                              { return fFiguredBassUpLinkToVoice; }
 
-/* JMI
+/* JMI v0.9.66
     S_msrPart             getFiguredBassUpLinkToPart () const
                               { return fFiguredBassUpLinkToPart; }
 */
 
-    // position in measure
-    void                  setMeasureElementMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context) override
-                              {
-                                setFiguredBassMeasurePosition (
-                                  measure,
-                                  measurePosition,
-                                  context);
-                              }
+//     // position in measure
+//     void                  setMeasureElementMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context) override
+//                               {
+//                                 setFiguredBassMeasurePosition (
+//                                   measure,
+//                                   measurePosition,
+//                                   context);
+//                               }
+//
+//     void                  setFiguredBassMeasurePosition (
+//                             const S_msrMeasure measure,
+//                             const Rational&    measurePosition,
+//                             const string&      context);
 
-    void                  setFiguredBassMeasurePosition (
-                            const S_msrMeasure measure,
-                            const Rational&    measurePosition,
-                            const string&      context);
-
+    // whole notes
     void                  setFiguredBassDisplayWholeNotes (
                             const Rational& wholeNotes)
                               {
