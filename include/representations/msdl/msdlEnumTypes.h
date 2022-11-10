@@ -78,7 +78,7 @@ void initializeMsdlCommentsTypeKindsMap ();
 void initializeMSDLBasicTypes ();
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

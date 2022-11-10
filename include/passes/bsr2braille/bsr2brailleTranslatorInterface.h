@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "bsr.h"
+// #include "bsr.h"
 
 #include "bsrOah.h"
 
@@ -31,7 +31,7 @@ EXP void translateBsrToBraille (
   ostream&         brailleOutputStream);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

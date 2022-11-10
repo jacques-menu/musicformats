@@ -75,7 +75,7 @@ typedef SMARTP<msrPartGroupElement> S_msrPartGroupElement;
 EXP ostream& operator << (ostream& os, const S_msrPartGroupElement& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

@@ -271,7 +271,7 @@ typedef SMARTP<msrIdentification> S_msrIdentification;
 EXP ostream& operator << (ostream& os, const S_msrIdentification& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

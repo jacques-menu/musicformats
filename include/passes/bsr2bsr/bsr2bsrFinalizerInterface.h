@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "bsr.h"
+// #include "bsr.h"
 
 #include "bsrOah.h"
 
@@ -28,7 +28,7 @@ EXP S_bsrScore translateBsrToFinalizedBsr (
   const string&    passNumber,
   const string&    passDescription);
 
-} // namespace MusicFormats
+}
 
 
 #endif

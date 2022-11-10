@@ -2176,7 +2176,7 @@ typedef SMARTP<oahNaturalNumbersSetElementAtom> S_oahNaturalNumbersSetElementAto
 EXP ostream& operator << (ostream& os, const S_oahNaturalNumbersSetElementAtom& elt);
 
 //______________________________________________________________________________
-class EXP oahRGBColorAtom : public oahAtomStoringAValue
+class EXP oahColorRGBAtom : public oahAtomStoringAValue
 {
 /*
   an atom controlling an RGB color variable
@@ -2187,43 +2187,43 @@ class EXP oahRGBColorAtom : public oahAtomStoringAValue
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<oahRGBColorAtom> create (
-                            const string&       longName,
-                            const string&       shortName,
-                            const string&       description,
-                            const string&       valueSpecification,
-                            const string&       variableName,
-                            msrRGBColor& RGBColorVariable);
+    static SMARTP<oahColorRGBAtom> create (
+                            const string& shortName,
+                            const string& longName,
+                            const string& description,
+                            const string& valueSpecification,
+                            const string& variableName,
+                            msrColorRGB&  colorRGBVariable);
 
   protected:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          oahRGBColorAtom (
-                            const string&       longName,
-                            const string&       shortName,
-                            const string&       description,
-                            const string&       valueSpecification,
-                            const string&       variableName,
-                            msrRGBColor& RGBColorVariable);
+                          oahColorRGBAtom (
+                            const string& shortName,
+                            const string& longName,
+                            const string& description,
+                            const string& valueSpecification,
+                            const string& variableName,
+                            msrColorRGB&  colorRGBVariable);
 
-    virtual               ~oahRGBColorAtom ();
+    virtual               ~oahColorRGBAtom ();
 
   public:
 
     // set and get
     // ------------------------------------------------------
 
-    void                  setRGBColorVariable (
-                            msrRGBColor& value)
+    void                  setColorRGBVariable (
+                            msrColorRGB& value)
                               {
-                                fRGBColorVariable = value;
+                                fColorRGBVariable = value;
                                 fSetByAnOption = true;
                               }
 
-    const msrRGBColor&    getRGBColorVariable () const
-                              { return fRGBColorVariable; }
+    const msrColorRGB&    getColorRGBVariable () const
+                              { return fColorRGBVariable; }
 
   public:
 
@@ -2263,10 +2263,10 @@ class EXP oahRGBColorAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    msrRGBColor&          fRGBColorVariable;
+    msrColorRGB&          fColorRGBVariable;
 };
-typedef SMARTP<oahRGBColorAtom> S_oahRGBColorAtom;
-EXP ostream& operator << (ostream& os, const S_oahRGBColorAtom& elt);
+typedef SMARTP<oahColorRGBAtom> S_oahColorRGBAtom;
+EXP ostream& operator << (ostream& os, const S_oahColorRGBAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahIntSetElementAtom : public oahAtomStoringAValue

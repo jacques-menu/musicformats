@@ -14,33 +14,26 @@
 
 #include "msrSegmentElements.h"
 
-#include "msrFiguredBasses.h"
 #include "msrMeasuresEnumTypes.h"
 #include "msrMoments.h"
-#include "msrOctaveShifts.h"
-#include "msrParts.h"
-#include "msrScores.h"
-#include "msrSegments.h"
-#include "msrSegnos.h"
-#include "msrStaves.h"
-#include "msrTablatures.h"
-#include "msrTuplets.h"
-#include "msrVoices.h"
-#include "msrVoiceStaffChanges.h"
+
+// #include "msrFiguredBasses.h"
+// #include "msrOctaveShifts.h"
+// #include "msrParts.h"
+// #include "msrScores.h"
+// #include "msrSegments.h"
+// #include "msrSegnos.h"
+// #include "msrStaves.h"
+// #include "msrTablatures.h"
+// #include "msrTuplets.h"
+// #include "msrVoices.h"
+// #include "msrVoiceStaffChanges.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations
-
-// class msrMeasureElement;
-// typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
-
-class msrHarmony;
-typedef SMARTP<msrHarmony> S_msrHarmony;
-
 class EXP msrMeasure : public msrSegmentElement
 {
   public:
@@ -344,12 +337,14 @@ class EXP msrMeasure : public msrSegmentElement
 
     // time signatures
 
-    void                  appendTimeSignatureToMeasure (S_msrTimeSignature timeSignature);
+    void                  appendTimeSignatureToMeasure (
+                            S_msrTimeSignature timeSignature);
 
     void                  setFullMeasureWholeNotesDurationFromTime (
                             S_msrTimeSignature timeSignature);
 
-    void                  appendTimeSignatureToMeasureClone (S_msrTimeSignature timeSignature);
+    void                  appendTimeSignatureToMeasureClone (
+                            S_msrTimeSignature timeSignature);
 
     // dal segno
 

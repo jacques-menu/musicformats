@@ -104,7 +104,7 @@ template <typename T> class   msrBrowserAlongPathToVoice : public browser <T>
 };
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

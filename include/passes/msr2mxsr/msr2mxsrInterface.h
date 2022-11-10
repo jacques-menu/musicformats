@@ -19,7 +19,7 @@
 
 #include "exports.h"
 
-#include "msr.h"
+// #include "msr.h"
 
 #include "mfTiming.h"
 
@@ -38,7 +38,7 @@ EXP Sxmlelement translateMsrToMxsr (
   mfTimingItemKind mfTimingItemKind);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

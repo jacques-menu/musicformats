@@ -17,6 +17,8 @@
 #include "msrElements.h"
 #include "msrVoiceElements.h"
 
+#include "msrRepeatsEnumTypes.h"
+
 #include "msrMeasureRepeats.h"
 #include "msrNotes.h"
 #include "msrMultipleFullBarRests.h"
@@ -24,33 +26,6 @@
 
 namespace MusicFormats
 {
-
-// repeat endings
-//______________________________________________________________________________
-enum class msrRepeatEndingKind {
-  kRepeatEndingHooked,
-  kRepeatEndingHookless
-};
-
-string msrRepeatEndingKindAsString (
-  msrRepeatEndingKind repeatEndingKind);
-
-ostream& operator << (ostream& os, const msrRepeatEndingKind& elt);
-
-//______________________________________________________________________________
-// PRE-declarations
-
-class   msrRepeat;
-typedef SMARTP<msrRepeat> S_msrRepeat;
-
-class   msrMultipleFullBarRests;
-typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
-
-class   msrMeasureRepeat;
-typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
-
-class   msrNote;
-typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
 class EXP msrRepeatCommonPart : public msrElement
@@ -299,30 +274,6 @@ typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
 EXP ostream& operator << (ostream& os, const S_msrRepeatEnding& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrRepeatExplicitStartKind {
-  kRepeatExplicitStartNo,
-  kRepeatExplicitStartYes
-};
-
-string msrRepeatExplicitStartKindAsString (
-  msrRepeatExplicitStartKind repeatExplicitStartKind);
-
-ostream& operator << (ostream& os, const msrRepeatExplicitStartKind& elt);
-
-enum class msrRepeatBuildPhaseKind {
-  kRepeatBuildPhaseJustCreated,
-  kRepeatBuildPhaseInCommonPart,
-  kRepeatBuildPhaseInEndings,
-  kRepeatBuildPhaseCompleted
-};
-
-string repeatBuildPhaseKindAsString (
-  msrRepeatBuildPhaseKind repeatBuildPhaseKind);
-
-ostream& operator << (ostream& os, const msrRepeatBuildPhaseKind& elt);
-
 class EXP msrRepeat : public msrVoiceElement
 {
   public:

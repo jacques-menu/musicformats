@@ -526,7 +526,7 @@ typedef SMARTP<msrTempo> S_msrTempo;
 EXP ostream& operator << (ostream& os, const S_msrTempo& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

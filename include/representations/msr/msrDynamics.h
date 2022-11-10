@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrDynamic___
-#define ___msrDynamic___
+#ifndef ___msrDynamics___
+#define ___msrDynamics___
 
 #include "msrElements.h"
 
@@ -376,7 +376,7 @@ typedef SMARTP<msrWedge> S_msrWedge;
 EXP ostream& operator << (ostream& os, const S_msrWedge& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

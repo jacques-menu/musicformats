@@ -92,6 +92,7 @@
 
 #include "msrLyrics.h"
 
+#include "msrRepeatsEnumTypes.h"
 #include "msrRepeats.h"
 #include "msrRepeatCodas.h"
 
@@ -128,16 +129,6 @@
 #include "msr2summaryVisitor.h"
 
 #include "msrPathToVoice.h"
-
-
-namespace MusicFormats
-{
-
-//______________________________________________________________________________
-void initializeMSR ();
-
-
-}
 
 
 #endif

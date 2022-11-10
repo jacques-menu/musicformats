@@ -1,27 +1,41 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrChords___
 #define ___msrChords___
 
 #include "msrElements.h"
 #include "msrTupletElements.h"
 
+#include "msrArticulations.h"
+#include "msrBeams.h"
 #include "msrCodas.h"
-#include "msrDirections.h"
+// #include "msrDirections.h"
+#include "msrDurations.h"
 #include "msrDynamics.h"
-#include "msrElements.h"
-#include "msrGlissandos.h"
+// #include "msrGlissandos.h"
+#include "msrFiguredBasses.h"
 #include "msrGraceNotesGroups.h"
 #include "msrHarmonies.h"
 #include "msrInstruments.h"
 #include "msrLigatures.h"
-#include "msrNotes.h"
+// #include "msrNotes.h"
 #include "msrOctaveShifts.h"
-#include "msrOrnaments.h"
-#include "msrScores.h"
-#include "msrSegnos.h"
-#include "msrDalSegnos.h"
+// #include "msrOrnaments.h"
+// #include "msrScores.h"
+// #include "msrSegnos.h"
+// #include "msrDalSegnos.h"
 #include "msrSingleTremolos.h"
 #include "msrSlashes.h"
-#include "msrSlides.h"
+// #include "msrSlides.h"
 #include "msrSlurs.h"
 #include "msrSpanners.h"
 #include "msrStems.h"
@@ -48,40 +62,6 @@ EXP string msrChordInKindAsString (
   msrChordInKind chordInKind);
 
 ostream& operator << (ostream& os, const msrChordInKind& elt);
-
-//______________________________________________________________________________
-class   msrFiguredBass;
-typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
-
-class   msrChordSlurLink;
-typedef SMARTP<msrChordSlurLink> S_msrChordSlurLink;
-
-class   msrChordBeamLink;
-typedef SMARTP<msrChordBeamLink> S_msrChordBeamLink;
-
-class   msrChordGraceNotesGroupLink;
-typedef SMARTP<msrChordGraceNotesGroupLink> S_msrChordGraceNotesGroupLink;
-
-class   msrNote;
-typedef SMARTP<msrNote> S_msrNote;
-
-class   msrOrnament;
-typedef SMARTP<msrOrnament> S_msrOrnament;
-
-class   msrGlissando;
-typedef SMARTP<msrGlissando> S_msrGlissando;
-
-class   msrSlide;
-typedef SMARTP<msrSlide> S_msrSlide;
-
-class   msrPedal;
-typedef SMARTP<msrPedal> S_msrPedal;
-
-class   msrSegno;
-typedef SMARTP<msrSegno> S_msrSegno;
-
-class   msrDalSegno;
-typedef SMARTP<msrDalSegno> S_msrDalSegno;
 
 //______________________________________________________________________________
 class EXP msrChord : public msrTupletElement

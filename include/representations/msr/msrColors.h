@@ -25,21 +25,21 @@ namespace MusicFormats
 
 // RGB colors
 //______________________________________________________________________________
-class EXP msrRGBColor
+class EXP msrColorRGB
 {
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrRGBColor ();
+                          msrColorRGB ();
 
-                          msrRGBColor (
+                          msrColorRGB (
                             float theR,
                             float theG,
                             float theB);
 
-                          msrRGBColor (
+                          msrColorRGB (
                             const string& theString);
 
     // set and get
@@ -79,25 +79,25 @@ class EXP msrRGBColor
     float                 fG;
     float                 fB;
 };
-EXP ostream& operator << (ostream& os, const msrRGBColor& elt);
+EXP ostream& operator << (ostream& os, const msrColorRGB& elt);
 
 // AlphaRGB colors
 //______________________________________________________________________________
-class EXP msrAlphaRGBColor
+class EXP msrColorAlphaRGB
 {
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msrAlphaRGBColor (
+                          msrColorAlphaRGB (
                             const string& colorRGB,
                             const string& colorAlpha);
 
-                          msrAlphaRGBColor (
+                          msrColorAlphaRGB (
                             const string& colorRGB);
 
-    virtual               ~msrAlphaRGBColor ();
+    virtual               ~msrColorAlphaRGB ();
 
   public:
 
@@ -132,7 +132,7 @@ class EXP msrAlphaRGBColor
     string                fColorRGB;   // hexadecimal, 6 digits
     string                fColorAlpha; // hexadecimal, 2 digits
 };
-EXP ostream& operator << (ostream& os, const msrAlphaRGBColor& elt);
+EXP ostream& operator << (ostream& os, const msrColorAlphaRGB& elt);
 
 
 }

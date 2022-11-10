@@ -113,7 +113,7 @@ typedef SMARTP<msrBarCheck> S_msrBarCheck;
 EXP ostream& operator << (ostream& os, const S_msrBarCheck& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

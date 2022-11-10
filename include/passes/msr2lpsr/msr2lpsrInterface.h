@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "lpsr.h"
+// #include "lpsr.h"
 
 #include "msrOah.h"
 #include "lpsrOah.h"
@@ -32,7 +32,7 @@ EXP extern S_lpsrScore translateMsrToLpsr (
   S_mfcMultiComponent multiComponent);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

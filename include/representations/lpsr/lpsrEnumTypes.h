@@ -202,7 +202,7 @@ string existingLpsrLyricsDurationsKinds (size_t namesListMaxLength);
 void initializeLpsrLyricsDurationsKindsMap ();
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

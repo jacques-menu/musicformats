@@ -15,7 +15,7 @@
 
 #include "exports.h"
 
-#include "lpsr.h"
+// #include "lpsr.h"
 
 
 namespace MusicFormats
@@ -41,7 +41,7 @@ EXP void translateLpsrToLilypondWithHandler (
   ostream&          err);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

@@ -1,3 +1,14 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrGraceNotesGroups___
 #define ___msrGraceNotesGroups___
 
@@ -10,16 +21,13 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations
+// type declarations for formal parameters
 
 class   msrChord;
 typedef SMARTP<msrChord> S_msrChord;
 
 class   msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
-
-// class   msrMeasure;
-// typedef SMARTP<msrMeasure> S_msrMeasure;
 
 class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;

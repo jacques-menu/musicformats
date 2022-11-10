@@ -97,7 +97,7 @@ typedef SMARTP<msrScaling> S_msrScaling;
 EXP ostream& operator << (ostream& os, const S_msrScaling& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

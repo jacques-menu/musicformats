@@ -12,7 +12,7 @@
 #ifndef ___lpsrInterface___
 #define ___lpsrInterface___
 
-#include "lpsr.h"
+// #include "lpsr.h"
 
 
 namespace MusicFormats
@@ -51,7 +51,7 @@ EXP void displayLpsrScoreFull (
 // measures
 // ------------------------------------------------------
 
-} // namespace MusicFormats
+}
 
 
 #endif
