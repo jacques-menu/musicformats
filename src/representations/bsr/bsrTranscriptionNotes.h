@@ -166,7 +166,7 @@ typedef SMARTP<bsrTranscriptionNotes> S_bsrTranscriptionNotes;
 EXP ostream& operator << (ostream& os, const S_bsrTranscriptionNotes& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

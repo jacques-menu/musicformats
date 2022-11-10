@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "msr.h"
+// #include "msr.h"
 
 #include "msrOah.h"
 #include "lpsrOah.h"
@@ -40,7 +40,7 @@ S_msrScore translateMsrToMsrAlongPathToVoice (
   S_msrPathToVoice  pathToVoice);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

@@ -57,13 +57,6 @@
 #include "bsrTranscriptionNotes.h"
 
 
-namespace MusicFormats
-{
-
-//______________________________________________________________________________
-void initializeBSR ();
-
-
 }
 
 

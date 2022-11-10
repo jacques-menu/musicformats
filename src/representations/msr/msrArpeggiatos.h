@@ -21,7 +21,7 @@ namespace MusicFormats
 {
 // JMI ???
 
-} // namespace MusicFormats
+}
 
 
 #endif

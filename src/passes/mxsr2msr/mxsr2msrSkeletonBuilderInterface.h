@@ -13,7 +13,7 @@
 #define ___mxsr2msrSkeletonBuilderInterface___
 
 
-#include "msr.h"
+// #include "msr.h"
 
 
 namespace MusicFormats
@@ -33,7 +33,7 @@ EXP void displayMsrScoreSkeleton (
   const string&  passDescription);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

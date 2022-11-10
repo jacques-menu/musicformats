@@ -30,7 +30,8 @@
 
 #include "mfServiceRunData.h"
 
-#include "lpsr.h"
+#include "msrInitialization.h"
+#include "lpsrInitialization.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -597,7 +598,7 @@ ostream& operator << (ostream& os, const S_msr2lilypondInsiderHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

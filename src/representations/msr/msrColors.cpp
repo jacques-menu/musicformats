@@ -25,7 +25,7 @@ namespace MusicFormats
 
 // RGB colors
 //______________________________________________________________________________
-msrRGBColor::msrRGBColor ()
+msrColorRGB::msrColorRGB ()
 {
   // initializing to negative values for isEmpty()
   fR = -1.0;
@@ -33,7 +33,7 @@ msrRGBColor::msrRGBColor ()
   fB = -1.0;
 }
 
-msrRGBColor::msrRGBColor (
+msrColorRGB::msrColorRGB (
   float theR,
   float theG,
   float theB)
@@ -43,7 +43,7 @@ msrRGBColor::msrRGBColor (
   fB = theB;
 }
 
-msrRGBColor::msrRGBColor (
+msrColorRGB::msrColorRGB (
   const string& theString)
 {
   string regularExpression (
@@ -88,7 +88,7 @@ msrRGBColor::msrRGBColor (
     stringstream s;
 
     s <<
-      "msrRGBColor string '" << theString <<
+      "msrColorRGB string '" << theString <<
       "' is ill-formed";
 
     oahError (s.str ());
@@ -152,12 +152,12 @@ msrRGBColor::msrRGBColor (
 
 }
 
-string msrRGBColor::asString (int precision) const
+string msrColorRGB::asString (int precision) const
 {
   stringstream s;
 
   s <<
-    "[RGBColor " <<
+    "[ColorRGB " <<
     setprecision (precision) <<
     '[' <<
     fR <<
@@ -170,7 +170,7 @@ string msrRGBColor::asString (int precision) const
   return s.str ();
 }
 
-string msrRGBColor::asSpaceSeparatedString (int precision) const
+string msrColorRGB::asSpaceSeparatedString (int precision) const
 {
   stringstream s;
 
@@ -185,12 +185,12 @@ string msrRGBColor::asSpaceSeparatedString (int precision) const
   return s.str ();
 }
 
-void msrRGBColor::print (ostream& os) const
+void msrColorRGB::print (ostream& os) const
 {
   os << asString () << endl;
 };
 
-ostream& operator << (ostream& os, const msrRGBColor& elt)
+ostream& operator << (ostream& os, const msrColorRGB& elt)
 {
   elt.print (os);
   return os;
@@ -198,7 +198,7 @@ ostream& operator << (ostream& os, const msrRGBColor& elt)
 
 // AlphaRGB colors
 //______________________________________________________________________________
-msrAlphaRGBColor::msrAlphaRGBColor (
+msrColorAlphaRGB::msrColorAlphaRGB (
   const string& colorRGB,
   const string& colorAlpha)
 {
@@ -206,22 +206,22 @@ msrAlphaRGBColor::msrAlphaRGBColor (
   fColorAlpha = colorAlpha;
 }
 
-msrAlphaRGBColor::msrAlphaRGBColor (
+msrColorAlphaRGB::msrColorAlphaRGB (
   const string& colorRGB)
 {
   fColorRGB   = colorRGB;
   fColorAlpha = "FF";
 }
 
-msrAlphaRGBColor::~msrAlphaRGBColor ()
+msrColorAlphaRGB::~msrColorAlphaRGB ()
 {}
 
-string msrAlphaRGBColor::asString () const
+string msrColorAlphaRGB::asString () const
 {
   stringstream s;
 
   s <<
-    "[AlphaRGBColor" <<
+    "[ColorAlphaRGB" <<
     ", fColorRGB: \"" << fColorRGB <<
     "\", fColorAlpha: \"" << fColorAlpha <<
     "\"]";
@@ -229,12 +229,12 @@ string msrAlphaRGBColor::asString () const
   return s.str ();
 }
 
-void msrAlphaRGBColor::print (ostream& os) const
+void msrColorAlphaRGB::print (ostream& os) const
 {
   os << asString () << endl;
 };
 
-ostream& operator << (ostream& os, const msrAlphaRGBColor& elt)
+ostream& operator << (ostream& os, const msrColorAlphaRGB& elt)
 {
   elt.print (os);
   return os;

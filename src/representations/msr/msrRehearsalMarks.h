@@ -119,7 +119,7 @@ typedef SMARTP<msrRehearsalMark> S_msrRehearsalMark;
 EXP ostream& operator << (ostream& os, const S_msrRehearsalMark& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

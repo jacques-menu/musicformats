@@ -1,3 +1,14 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrSegments___
 #define ___msrSegments___
 
@@ -21,63 +32,6 @@
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// PRE-declarations
-
-// class   msrStaff;
-// typedef SMARTP<msrStaff> S_msrStaff;
-//
-// class   msrPart;
-// typedef SMARTP<msrPart> S_msrPart;
-//
-// class   msrPartGroup;
-// typedef SMARTP<msrPartGroup> S_msrPartGroup;
-//
-// class   msrScore;
-// typedef SMARTP<msrScore> S_msrScore;
-//
-// class   msrPart;
-// typedef SMARTP<msrPart> S_msrPart;
-//
-// class   msrPrintLayout;
-// typedef SMARTP<msrPrintLayout> S_msrPrintLayout;
-//
-// class   msrTimeSignature;
-// typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
-//
-// class   msrChord;
-// typedef SMARTP<msrChord> S_msrChord;
-//
-// class   msrTuplet;
-// typedef SMARTP<msrTuplet> S_msrTuplet;
-//
-// class   msrTransposition;
-// typedef SMARTP<msrTransposition> S_msrTransposition;
-//
-// class   msrStaffDetails;
-// typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
-//
-// class   msrOctaveShift;
-// typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
-//
-// class   msrHarmony;
-// typedef SMARTP<msrHarmony> S_msrHarmony;
-//
-// class   msrFiguredBass;
-// typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
-//
-// class   msrVoiceStaffChange;
-// typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
-//
-// class   msrVoice;
-// typedef SMARTP<msrVoice> S_msrVoice;
-//
-// class   msrDoubleTremolo;
-// typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
-//
-// class   msrSegno;
-// typedef SMARTP<msrSegno> S_msrSegno;
 
 //______________________________________________________________________________
 class EXP msrSegment : public msrVoiceElement

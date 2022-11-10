@@ -1,3 +1,14 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrNotes___
 #define ___msrNotes___
 
@@ -8,12 +19,12 @@
 #include "msrAccidentals.h"
 // #include "msrArticulations.h"
 // #include "msrBeams.h"
-// #include "msrChords.h"
+#include "msrChords.h"
 #include "msrColors.h"
 #include "msrDurations.h"
 // #include "msrEyeGlasses.h"
 // #include "msrFiguredBasses.h"
-// #include "msrGlissandos.h"
+#include "msrGlissandos.h"
 // #include "msrGraceNotesGroups.h"
 // #include "msrHarmonies.h"
 // #include "msrKeys.h"
@@ -41,60 +52,6 @@
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// PRE-declarations
-
-class   msrSyllable;
-typedef SMARTP<msrSyllable> S_msrSyllable;
-
-class   msrOctaveShift;
-typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
-
-class   msrTuplet;
-typedef SMARTP<msrTuplet> S_msrTuplet;
-
-class   msrChord;
-typedef SMARTP<msrChord> S_msrChord;
-
-class   msrGraceNotesGroup;
-typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
-
-class   msrPart;
-typedef SMARTP<msrPart> S_msrPart;
-
-class   msrCoda;
-typedef SMARTP<msrCoda> S_msrCoda;
-
-class   msrPartGroup;
-typedef SMARTP<msrPartGroup> S_msrPartGroup;
-
-class   msrSlash;
-typedef SMARTP<msrSlash> S_msrSlash;
-
-class   msrScore;
-typedef SMARTP<msrScore> S_msrScore;
-
-class   msrStaff;
-typedef SMARTP<msrStaff> S_msrStaff;
-
-class   msrSlide;
-typedef SMARTP<msrSlide> S_msrSlide;
-
-class   msrHarmony;
-typedef SMARTP<msrHarmony> S_msrHarmony;
-
-class   msrDalSegno;
-typedef SMARTP<msrDalSegno> S_msrDalSegno;
-
-class   msrSegno;
-typedef SMARTP<msrSegno> S_msrSegno;
-
-class   msrFiguredBass;
-typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
-
-class   msrVoice;
-typedef SMARTP<msrVoice> S_msrVoice;
 
 // notes
 //______________________________________________________________________________
@@ -198,10 +155,6 @@ string msrSoloNoteOrRestInStaffKindAsString (
   msrSoloNoteOrRestInStaffKind soloNoteOrRestInStaffKind);
 
 ostream& operator << (ostream& os, const msrSoloNoteOrRestInStaffKind& elt);
-
-//______________________________________________________________________________
-class   msrGlissando;
-typedef SMARTP<msrGlissando> S_msrGlissando;
 
 //______________________________________________________________________________
 // data types
@@ -915,14 +868,14 @@ class EXP msrNote : public msrTupletElement
                               { return fNoteIsFollowedByGraceNotesGroup; }
 
     // RGB color
-    void                  setNoteAlphaRGBColor (
-                            msrAlphaRGBColor& noteAlphaRGBColor);
+    void                  setNoteColorAlphaRGB (
+                            msrColorAlphaRGB& noteColorAlphaRGB);
 
-    const msrAlphaRGBColor&
-                          getNoteAlphaRGBColor () const
-                              { return fNoteAlphaRGBColor; }
-    Bool                  getNoteAlphaRGBColorHasBenSet () const
-                              { return fNoteAlphaRGBColorHasBenSet; }
+    const msrColorAlphaRGB&
+                          getNoteColorAlphaRGB () const
+                              { return fNoteColorAlphaRGB; }
+    Bool                  getNoteColorAlphaRGBHasBenSet () const
+                              { return fNoteColorAlphaRGBHasBenSet; }
 
     // solo note or rest?
     void                  setSoloNoteOrRestInVoiceKind (
@@ -1434,8 +1387,8 @@ class EXP msrNote : public msrTupletElement
     S_msrSpanner          fNoteWavyLineSpannerStop;
 
     // RGB color
-    msrAlphaRGBColor      fNoteAlphaRGBColor;
-    Bool                  fNoteAlphaRGBColorHasBenSet;
+    msrColorAlphaRGB      fNoteColorAlphaRGB;
+    Bool                  fNoteColorAlphaRGBHasBenSet;
 
     // solo note or rest?
     msrSoloNoteOrRestInVoiceKind

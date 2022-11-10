@@ -22,10 +22,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   msrNote;
-typedef SMARTP<msrNote> S_msrNote;
-
-//______________________________________________________________________________
 // data types
 
 enum class msrOrnamentKind {

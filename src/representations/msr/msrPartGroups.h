@@ -15,26 +15,11 @@
 #include "msrPartGroupElements.h"
 
 // #include "msrMeasuresSlices.h"
-// #include "msrScores.h"
+// #include "msrParts.h"
 
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// PRE-declatations
-// class   msrVoice;
-// typedef SMARTP<msrVoice> S_msrVoice;
-//
-// class   msrPart;
-// typedef SMARTP<msrPart> S_msrPart;
-//
-//
-class   msrScore;
-typedef SMARTP<msrScore> S_msrScore;
-
-class   msrMeasuresSlicesSequence;
-typedef SMARTP<msrMeasuresSlicesSequence> S_msrMeasuresSlicesSequence;
 
 //______________________________________________________________________________
 // data types
@@ -78,6 +63,8 @@ string msrPartGroupBarLineKindAsString (
 
 ostream& operator << (ostream& os, const msrPartGroupBarLineKind& elt);
 
+//______________________________________________________________________________
+// PRE-declaration
 class   msrPartGroup;
 typedef SMARTP<msrPartGroup> S_msrPartGroup;
 

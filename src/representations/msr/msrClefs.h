@@ -64,9 +64,12 @@ extern list<string>
 void initializeClefKinds ();
 
 //______________________________________________________________________________
+// PRE-declaration
+
 class   msrClef;
 typedef SMARTP<msrClef> S_msrClef;
 
+//______________________________________________________________________________
 class EXP msrClef : public msrMeasureElement
 {
   public:
@@ -162,7 +165,7 @@ typedef SMARTP<msrClef> S_msrClef;
 EXP ostream& operator << (ostream& os, const S_msrClef& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

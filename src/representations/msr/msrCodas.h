@@ -104,7 +104,7 @@ typedef SMARTP<msrCoda> S_msrCoda;
 EXP ostream& operator << (ostream& os, const S_msrCoda& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

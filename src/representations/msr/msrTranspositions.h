@@ -19,9 +19,12 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// PRE-declaration
+
 class   msrTransposition;
 typedef SMARTP<msrTransposition> S_msrTransposition;
 
+//______________________________________________________________________________
 class EXP msrTransposition : public msrMeasureElement
 {
   public:
@@ -74,7 +77,8 @@ class EXP msrTransposition : public msrMeasureElement
     // public services
     // ------------------------------------------------------
 
-    Bool                  isEqualTo (S_msrTransposition otherTranspose) const;
+    Bool                  isEqualTo (
+                            S_msrTransposition otherTransposition) const;
 
   public:
 
@@ -109,7 +113,7 @@ typedef SMARTP<msrTransposition> S_msrTransposition;
 EXP ostream& operator << (ostream& os, const S_msrTransposition& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

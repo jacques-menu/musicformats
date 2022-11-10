@@ -28,8 +28,8 @@
 
 #include "mfStringsHandling.h"
 
-#include "msr.h"
-#include "bsr.h"
+#include "msrInitialization.h"
+#include "bsrInitialization.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -654,7 +654,7 @@ ostream& operator << (ostream& os, const S_xml2brlInsiderHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

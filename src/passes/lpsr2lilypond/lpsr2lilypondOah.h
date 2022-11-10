@@ -1331,10 +1331,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getGenerateMomentsInMeasures () const
                               { return fGenerateMomentsInMeasures; }
 
-    const msrRGBColor&    getNonPrintNotesHeadRGBColor () const
-                              { return fNonPrintNotesHeadRGBColor; }
-    S_oahRGBColorAtom     getNonPrintNotesHeadRGBColorAtom () const
-                              { return fNonPrintNotesHeadRGBColorAtom; }
+    const msrColorRGB&    getNonPrintNotesHeadColorRGB () const
+                              { return fNonPrintNotesHeadColorRGB; }
+    S_oahColorRGBAtom     getNonPrintNotesHeadColorRGBAtom () const
+                              { return fNonPrintNotesHeadColorRGBAtom; }
 
     // measure numbers
     // --------------------------------------
@@ -1430,10 +1430,10 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  getKeepStaffSize () const
                               { return fKeepStaffSize; }
 
-    const msrRGBColor&    getLedgerLinesRGBColor () const
-                              { return fLedgerLinesRGBColor; }
-    S_oahRGBColorAtom     getLedgerLinesRGBColorAtom () const
-                              { return fLedgerLinesRGBColorAtom; }
+    const msrColorRGB&    getLedgerLinesColorRGB () const
+                              { return fLedgerLinesColorRGB; }
+    S_oahColorRGBAtom     getLedgerLinesColorRGBAtom () const
+                              { return fLedgerLinesColorRGBAtom; }
 
     // multiple full-bar rests
     // --------------------------------------
@@ -1945,8 +1945,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
 
     Bool                  fKeepStaffSize;
 
-    msrRGBColor           fLedgerLinesRGBColor; // #(rgb-color 1.0 0.9 0.5)
-    S_oahRGBColorAtom     fLedgerLinesRGBColorAtom;
+    msrColorRGB           fLedgerLinesColorRGB; // #(rgb-color 1.0 0.9 0.5)
+    S_oahColorRGBAtom     fLedgerLinesColorRGBAtom;
 
 
     // multiple full-bar rests
@@ -1999,8 +1999,8 @@ class EXP lpsr2lilypondOahGroup : public oahGroup
     Bool                  fGenerateMomentsInMeasures;
 
     // for MusicXML's <note print-object="no">
-    msrRGBColor           fNonPrintNotesHeadRGBColor; // #(rgb-color 1.0 0.9 0.5)
-    S_oahRGBColorAtom     fNonPrintNotesHeadRGBColorAtom;
+    msrColorRGB           fNonPrintNotesHeadColorRGB; // #(rgb-color 1.0 0.9 0.5)
+    S_oahColorRGBAtom     fNonPrintNotesHeadColorRGBAtom;
 
     // chords
     // --------------------------------------

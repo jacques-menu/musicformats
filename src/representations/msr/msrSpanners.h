@@ -1,3 +1,14 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrSpanners___
 #define ___msrSpanners___
 
@@ -29,11 +40,7 @@ string msrSpannerTypeKindAsString (
 ostream& operator << (ostream& os, const msrSpannerTypeKind& elt);
 
 //______________________________________________________________________________
-class   msrNote;
-typedef SMARTP<msrNote> S_msrNote;
-
-//______________________________________________________________________________
-// pre-declaration for two-way sideLinks
+// PRE-declaration for two-way sideLinks
 class   msrSpanner;
 typedef SMARTP<msrSpanner> S_msrSpanner;
 

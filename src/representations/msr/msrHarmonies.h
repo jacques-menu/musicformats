@@ -19,13 +19,19 @@
 
 #include "msrIntervals.h"
 #include "msrNotes.h"
-#include "msrOctaves.h"
-#include "msrTablatures.h"
+// #include "msrOctaves.h"
+// #include "msrTablatures.h"
 #include "msrTupletFactors.h"
 #include "msrVoices.h"
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+// PRE-declarations for mutual class dependencies
+
+class   msrHarmony;
+typedef SMARTP<msrHarmony> S_msrHarmony;
 
 // harmonies
 //______________________________________________________________________________
@@ -155,18 +161,6 @@ typename EnumTrueHarmonies<T>::Iterator end (EnumTrueHarmonies<T>)
 {
   return typename EnumTrueHarmonies<T>::Iterator (((int)T::TrueHarmoniesLast) + 1);
 }
-
-//______________________________________________________________________________
-// PRE-declarations
-
-class   msrHarmony;
-typedef SMARTP<msrHarmony> S_msrHarmony;
-
-class   msrVoice;
-typedef SMARTP<msrVoice> S_msrVoice;
-
-class   msrNote;
-typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
 // data types
@@ -505,9 +499,12 @@ EXP ostream& operator << (ostream& os, const S_msrHarmony& elt);
 
 // harmonies intervals
 //______________________________________________________________________________
+// PRE-declaration
+
 class   msrHarmonyInterval;
 typedef SMARTP<msrHarmonyInterval> S_msrHarmonyInterval;
 
+//______________________________________________________________________________
 class EXP msrHarmonyInterval : public smartable
 {
   public:
@@ -574,9 +571,9 @@ class EXP msrHarmonyInterval : public smartable
     void                  normalizeInterval ();
     void                  deNormalizeInterval ();
 
-    S_msrHarmonyInterval    intervalDifference (
+    S_msrHarmonyInterval  intervalDifference (
                             S_msrHarmonyInterval otherHarmonyInterval);
-    S_msrHarmonyInterval    intervalSum (
+    S_msrHarmonyInterval  intervalSum (
                             S_msrHarmonyInterval otherHarmonyInterval);
 
     string                asString () const;

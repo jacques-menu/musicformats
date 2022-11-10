@@ -1935,4 +1935,4 @@ void initializeMsrPitchesNames ()
 }
 
 
-} // namespace MusicFormats
+}

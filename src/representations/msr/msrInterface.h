@@ -12,7 +12,7 @@
 #ifndef ___msrInterface___
 #define ___msrInterface___
 
-#include "msr.h"
+// #include "msr.h"
 
 
 namespace MusicFormats
@@ -78,7 +78,7 @@ S_msrMeasure createMeasureInVoice (
              S_msrVoice voice);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

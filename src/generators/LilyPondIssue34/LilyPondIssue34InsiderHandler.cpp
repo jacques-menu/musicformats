@@ -29,6 +29,10 @@
 
 #include "mfStringsHandling.h"
 
+#include "msrInitialization.h"
+#include "lpsrInitialization.h"
+#include "bsrInitialization.h"
+
 #include "oahOah.h"
 #include "waeOah.h"
 #include "displayOah.h"
@@ -51,14 +55,14 @@
 #include "oahEarlyOptions.h"
 
 // Lilypond
-#include "lpsr.h"
+// #include "lpsr.h"
 
 #include "msr2lpsrOah.h"
 #include "lpsrOah.h"
 #include "lpsr2lilypondOah.h"
 
 // Braille
-#include "bsr.h"
+// #include "bsr.h"
 
 #include "msr2bsrOah.h"
 #include "bsrOah.h"

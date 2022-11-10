@@ -30,7 +30,7 @@ EXP void translateMxsrToGuido (
   const string& passDescription);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

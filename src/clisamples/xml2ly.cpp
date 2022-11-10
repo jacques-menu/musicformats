@@ -37,8 +37,8 @@
 #include "oahBasicTypes.h" // for testIncludeOptionsFromFile()
 #include "oahEarlyOptions.h"
 
-// #include "msr.h"
-// #include "lpsr.h"
+// // #include "msr.h"
+// // #include "lpsr.h"
 
 #include "mfcLibraryComponent.h"
 #include "musicxml2lilypondComponent.h"

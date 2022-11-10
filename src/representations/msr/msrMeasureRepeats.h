@@ -23,18 +23,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations
-
-class   msrMeasureRepeat;
-typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
-
-class   msrVoice;
-typedef SMARTP<msrVoice> S_msrVoice;
-
-class   msrSegment;
-typedef SMARTP<msrSegment> S_msrSegment;
-
-//______________________________________________________________________________
 class EXP msrMeasureRepeatPattern : public msrElement
 {
   public:

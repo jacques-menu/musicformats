@@ -27,7 +27,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "msr.h"
+#include "msrInitialization.h"
 
 #include "oahOah.h"
 #include "waeOah.h"

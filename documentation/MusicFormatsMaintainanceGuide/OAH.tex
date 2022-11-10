@@ -256,7 +256,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
 };
 \end{lstlisting}
 
-The \field{oahAtomStoringAValue}{fSetByAnOption} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahRGBColorAtom}, for example. It is not used for data structures such as sets, lists and vector, since this is indicated by their size.
+The \field{oahAtomStoringAValue}{fSetByAnOption} is necessary because some value types do not have an obvious 'neutral' element. This is the case for a note's octave, \className{oahLengthUnitKindAtom} and \className{oahColorRGBAtom}, for example. It is not used for data structures such as sets, lists and vector, since this is indicated by their size.
 
 \fieldName{fSetByAnOption} is set in \methodName{set*Variable} methods, as in \method{oahIntegerAtom}{setIntegerVariable}\\
 in \oah{oahAtomsCollection.cpp}:
@@ -373,7 +373,7 @@ oah/oahAtomsCollection.h:class EXP oahFloatAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahStringAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahRationalAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
-oah/oahAtomsCollection.h:class EXP oahRGBColorAtom : public oahAtomStoringAValue
+oah/oahAtomsCollection.h:class EXP oahColorRGBAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahIntSetElementAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahStringSetElementAtom : public oahAtomStoringAValue
 oah/oahAtomsCollection.h:class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
@@ -755,7 +755,7 @@ class EXP oahFactorizedStringAtom : public oahAtom
 class EXP oahStringWithDefaultValueAtom : public oahStringAtom
 class EXP oahRationalAtom : public oahAtomStoringAValue
 class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
-class EXP oahRGBColorAtom : public oahAtomStoringAValue
+class EXP oahColorRGBAtom : public oahAtomStoringAValue
 class EXP oahIntSetElementAtom : public oahAtomStoringAValue
 class EXP oahStringSetElementAtom : public oahAtomStoringAValue
 class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue
@@ -2166,7 +2166,7 @@ As an internal representation, OAH can be browsed with the two-phase visitors. T
 %class EXP oahStringWithRegexAtom : public oahStringAtom
 %class EXP oahRationalAtom : public oahAtomStoringAValue
 %class EXP oahNaturalNumbersSetElementAtom : public oahAtomStoringAValue
-%class EXP oahRGBColorAtom : public oahAtomStoringAValue
+%class EXP oahColorRGBAtom : public oahAtomStoringAValue
 %class EXP oahIntSetElementAtom : public oahAtomStoringAValue
 %class EXP oahStringSetElementAtom : public oahAtomStoringAValue
 %class EXP oahStringToIntMapElementAtom : public oahAtomStoringAValue

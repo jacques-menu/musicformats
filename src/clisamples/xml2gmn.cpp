@@ -34,7 +34,7 @@
 
 #include "oahEarlyOptions.h"
 
-#include "msr.h"
+// #include "msr.h"
 
 #include "mfcLibraryComponent.h"
 #include "musicxml2guidoComponent.h"

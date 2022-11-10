@@ -12,7 +12,15 @@
 #ifndef ___msdlParser___
 #define ___msdlParser___
 
-#include "msr.h"
+#include "msrScores.h"
+#include "msrPartGroups.h"
+#include "msrParts.h"
+#include "msrStaves.h"
+#include "msrVoices.h"
+#include "msrMeasures.h"
+#include "msrNotes.h"
+
+#include "msrIdentification.h"
 
 #include "msdlTokens.h"
 
@@ -27,7 +35,7 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-class   msdlParser : public smartable
+class msdlParser : public smartable
 {
   public:
 

@@ -24,13 +24,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   msrPart;
-typedef SMARTP<msrPart> S_msrPart;
-
-class   msrPartGroup;
-typedef SMARTP<msrPartGroup> S_msrPartGroup;
-
-//______________________________________________________________________________
 /* this class   is purely virtual
 S_msrPartGroupElement msrPartGroupElement::create (
   int inputLineNumber)
@@ -164,7 +157,7 @@ ostream& operator << (ostream& os, const S_msrPartGroupElement& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -188,7 +188,7 @@ typedef SMARTP<msrPageBreak> S_msrPageBreak;
 EXP ostream& operator << (ostream& os, const S_msrPageBreak& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

@@ -191,7 +191,7 @@ typedef SMARTP<bsrCellsList> S_bsrCellsList;
 EXP ostream& operator << (ostream& os, const S_bsrCellsList& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

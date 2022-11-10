@@ -373,7 +373,7 @@ typedef SMARTP<msrNonArpeggiato> S_msrNonArpeggiato;
 EXP ostream& operator << (ostream& os, const S_msrNonArpeggiato& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

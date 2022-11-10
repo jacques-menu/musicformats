@@ -34,8 +34,8 @@
 
 #include "oahEarlyOptions.h"
 
-#include "msr.h"
-#include "bsr.h"
+// #include "msr.h"
+// #include "bsr.h"
 
 #include "mfcLibraryComponent.h"
 #include "musicxml2brailleComponent.h"

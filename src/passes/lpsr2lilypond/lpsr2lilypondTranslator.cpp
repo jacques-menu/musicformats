@@ -1283,14 +1283,14 @@ void lpsr2lilypondTranslator::generateNoteHeadColor (
     note->getInputLineNumber ();
 
   // has the note alpha RGB color been set?
- if (note->getNoteAlphaRGBColorHasBenSet ()) {
+ if (note->getNoteColorAlphaRGBHasBenSet ()) {
     // get note alpha RGB color
-    const msrAlphaRGBColor&
-      noteAlphaRGBColor =
-        note->getNoteAlphaRGBColor ();
+    const msrColorAlphaRGB&
+      noteColorAlphaRGB =
+        note->getNoteColorAlphaRGB ();
 
     // get note RGB color
-    string noteRGB = noteAlphaRGBColor.getColorRGB ();
+    string noteRGB = noteColorAlphaRGB.getColorRGB ();
 
     // generate code for RGB color
     if (noteRGB.size () == 6) {
@@ -18065,23 +18065,23 @@ void lpsr2lilypondTranslator::visitStart (S_msrNote& elt)
       case msrPrintObjectKind::kPrintObjectNo:
         {
           // get the print notes head RGB color atom
-          S_oahRGBColorAtom
-            nonPrintNotesHeadRGBColorAtom =
+          S_oahColorRGBAtom
+            nonPrintNotesHeadColorRGBAtom =
               gGlobalLpsr2lilypondOahGroup->
-                getNonPrintNotesHeadRGBColorAtom ();
+                getNonPrintNotesHeadColorRGBAtom ();
 
           // has the note color been set? // JMI v0.9.65
-          if (nonPrintNotesHeadRGBColorAtom->getSetByAnOption ()) {
+          if (nonPrintNotesHeadColorRGBAtom->getSetByAnOption ()) {
             // yes
-            const msrRGBColor&
-              theRGBColor =
+            const msrColorRGB&
+              theColorRGB =
                 gGlobalLpsr2lilypondOahGroup->
-                  getNonPrintNotesHeadRGBColor ();
+                  getNonPrintNotesHeadColorRGB ();
 
             fLilypondCodeStream <<
               endl <<
               "\\once\\override NoteHead.color = #(rgb-color " <<
-              theRGBColor.asSpaceSeparatedString (4) <<
+              theColorRGB.asSpaceSeparatedString (4) <<
               ")" <<
               endl;
           }

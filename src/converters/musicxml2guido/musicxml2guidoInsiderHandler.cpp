@@ -24,7 +24,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "msr.h"
+#include "msrInitialization.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -574,7 +574,7 @@ ostream& operator << (ostream& os, const S_xml2gmnInsiderHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

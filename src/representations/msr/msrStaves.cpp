@@ -2509,8 +2509,7 @@ void msrStaff::appendAccordionRegistrationToStaff (
 }
 
 void msrStaff::appendHarpPedalsTuningToStaff (
-  S_msrHarpPedalsTuning
-    harpPedalsTuning)
+  S_msrHarpPedalsTuning harpPedalsTuning)
 {
   for (S_msrVoice voice : fStaffAllVoicesList) {
     voice->

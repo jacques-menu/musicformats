@@ -280,7 +280,7 @@ EXP ostream& operator << (ostream& os, const wstring& wstr);
 */
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

@@ -1335,7 +1335,7 @@ typedef SMARTP<msrAppearance> S_msrAppearance;
 EXP ostream& operator << (ostream& os, const S_msrAppearance& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

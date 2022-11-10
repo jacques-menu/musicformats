@@ -42,7 +42,7 @@ class EXP oahVisitor : public smartable,
 typedef SMARTP<oahVisitor> S_oahVisitor;
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

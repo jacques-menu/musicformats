@@ -41,27 +41,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declatations
-
-// class   msrTimeSignature;
-// typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
-//
-// class   msrStaff;
-// typedef SMARTP<msrStaff> S_msrStaff;
-//
-// class   msrStaffDetails;
-// typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
-//
-// class   msrHarmony;
-// typedef SMARTP<msrHarmony> S_msrHarmony;
-//
-class   msrFiguredBass;
-typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
-
-class   msrGraceNotesGroup;
-typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
-
-//______________________________________________________________________________
 class EXP msrPart : public msrPartGroupElement
 {
   public:

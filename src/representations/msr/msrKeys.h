@@ -54,10 +54,11 @@ msrModeKind modeKindFromString (
   const string& modeString);
 
 //______________________________________________________________________________
+// PRE-declarations for mutual class dependencies
+
 class   msrHumdrumScotKeyItem;
 typedef SMARTP<msrHumdrumScotKeyItem> S_msrHumdrumScotKeyItem;
 
-//______________________________________________________________________________
 class EXP msrHumdrumScotKeyItem : public msrElement
 {
   public:
@@ -142,6 +143,8 @@ typedef SMARTP<msrHumdrumScotKeyItem> S_msrHumdrumScotKeyItem;
 EXP ostream& operator << (ostream& os, const S_msrHumdrumScotKeyItem& elt);
 
 //______________________________________________________________________________
+// PRE-declaration
+
 class   msrKey;
 typedef SMARTP<msrKey> S_msrKey;
 
@@ -275,7 +278,7 @@ typedef SMARTP<msrKey> S_msrKey;
 EXP ostream& operator << (ostream& os, const S_msrKey& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif
