@@ -107,7 +107,7 @@ string msrTempoNotesRelationshipKindAsString (
 ostream& operator << (ostream& os, const msrTempoNotesRelationshipKind& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

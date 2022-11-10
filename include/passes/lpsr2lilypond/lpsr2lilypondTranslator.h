@@ -14,7 +14,7 @@
 
 #include "msrPitchesNames.h"
 
-#include "lpsr.h"
+// #include "lpsr.h"
 
 #include "msrOah.h"
 #include "lpsrOah.h"

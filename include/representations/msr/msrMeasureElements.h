@@ -172,7 +172,7 @@ typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
 EXP ostream& operator << (ostream& os, const S_msrMeasureElement& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

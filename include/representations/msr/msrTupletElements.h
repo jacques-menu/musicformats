@@ -23,7 +23,7 @@ namespace MusicFormats
 //______________________________________________________________________________
 /*
   Notes, chords and tuplets can be found in tuplets,
-  hence class   msrTupletElement
+  hence class msrTupletElement
 */
 
 class EXP msrTupletElement : public msrMeasureElement
@@ -72,7 +72,7 @@ typedef SMARTP<msrTupletElement> S_msrTupletElement;
 EXP ostream& operator << (ostream& os, const S_msrTupletElement& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

@@ -125,7 +125,7 @@ typedef SMARTP<msrBeam> S_msrBeam;
 EXP ostream& operator << (ostream& os, const S_msrBeam& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

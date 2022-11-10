@@ -487,7 +487,7 @@ typedef SMARTP<msrTechnicalWithString> S_msrTechnicalWithString;
 EXP ostream& operator << (ostream& os, const S_msrTechnicalWithString& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

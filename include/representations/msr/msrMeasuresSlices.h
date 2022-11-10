@@ -23,12 +23,6 @@ using namespace std;
 namespace MusicFormats
 {
 
-//______________________________________________________________________________
-// PRE-declarations
-
-class   msrNote;
-typedef SMARTP<msrNote> S_msrNote;
-
 //________________________________________________________________________
 enum class msrNoteEventKind {
   kNoteEventStart,
@@ -181,6 +175,7 @@ typedef SMARTP<msrSimultaneousNotesChunk> S_msrSimultaneousNotesChunk;
 EXP ostream& operator << (ostream& os, const S_msrSimultaneousNotesChunk& elt);
 
 //______________________________________________________________________________
+// PRE-declaration
 class   msrMeasuresSlice;
 typedef SMARTP<msrMeasuresSlice> S_msrMeasuresSlice;
 
@@ -395,7 +390,7 @@ class EXP msrMeasuresSlicesSequence : public smartable
 EXP ostream& operator << (ostream& os, const S_msrMeasuresSlicesSequence& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

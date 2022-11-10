@@ -117,7 +117,7 @@ typedef SMARTP<msrSingleTremolo> S_msrSingleTremolo;
 EXP ostream& operator << (ostream& os, const S_msrSingleTremolo& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

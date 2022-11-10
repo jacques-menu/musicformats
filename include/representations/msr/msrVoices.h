@@ -31,7 +31,8 @@
 // #include "msrNotes.h"
 // #include "msrParts.h"
 // #include "msrPartGroups.h"
-#include "msrRepeats.h"
+#include "msrRepeatsEnumTypes.h"
+// #include "msrRepeats.h"
 // #include "msrMultipleFullBarRests.h"
 // #include "msrOctaveShifts.h"
 // #include "msrScores.h"
@@ -47,68 +48,6 @@
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// PRE-declarations
-// class   msrStaff;
-// typedef SMARTP<msrStaff> S_msrStaff;
-//
-// class   msrMultipleFullBarRests;
-// typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
-//
-// class   msrVoiceStaffChange;
-// typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
-//
-// class   msrBeatRepeat;
-// typedef SMARTP<msrBeatRepeat> S_msrBeatRepeat;
-//
-// class   msrMeasureRepeat;
-// typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
-//
-// class   msrRepeatCommonPart;
-// typedef SMARTP<msrRepeatCommonPart> S_msrRepeatCommonPart;
-//
-// class   msrRepeat;
-// typedef SMARTP<msrRepeat> S_msrRepeat;
-//
-// class   msrRepeatEnding;
-// typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
-//
-// class   msrRepeatDescr;
-// typedef SMARTP<msrRepeatDescr> S_msrRepeatDescr;
-//
-// class   msrDoubleTremolo;
-// typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
-//
-// class   msrGraceNotesGroup;
-// typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
-//
-// class   msrFrame;
-// typedef SMARTP<msrFrame> S_msrFrame;
-//
-// class   msrHarmony;
-// typedef SMARTP<msrHarmony> S_msrHarmony;
-//
-// class   msrFiguredBass;
-// typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
-//
-// class   msrTempo;
-// typedef SMARTP<msrTempo> S_msrTempo;
-//
-// class   msrRehearsalMark;
-// typedef SMARTP<msrRehearsalMark> S_msrRehearsalMark;
-//
-// class   msrLineBreak;
-// typedef SMARTP<msrLineBreak> S_msrLineBreak;
-//
-// class   msrPageBreak;
-// typedef SMARTP<msrPageBreak> S_msrPageBreak;
-//
-// class   msrStanza;
-// typedef SMARTP<msrStanza> S_msrStanza;
-//
-// class   msrSyllable;
-// typedef SMARTP<msrSyllable> S_msrSyllable;
 
 // voices
 //______________________________________________________________________________

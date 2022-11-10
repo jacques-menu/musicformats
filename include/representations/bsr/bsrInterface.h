@@ -14,7 +14,7 @@
 
 #include "msrOah.h"
 
-#include "bsr.h"
+// #include "bsr.h"
 
 
 namespace MusicFormats
@@ -51,7 +51,7 @@ EXP void displayBsrScoreFull (
 // measures
 // ------------------------------------------------------
 
-} // namespace MusicFormats
+}
 
 
 #endif

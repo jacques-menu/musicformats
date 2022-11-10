@@ -408,7 +408,7 @@ typedef SMARTP<bsrUTF16SmallEndianBrailleGenerator> S_bsrUTF16SmallEndianBraille
 EXP ostream& operator << (ostream& os, const S_bsrUTF16SmallEndianBrailleGenerator& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

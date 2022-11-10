@@ -100,7 +100,7 @@ extern map<msrQuarterTonesPitchKind, string>& getArabicPitchesNamesMap ();
 void initializeMsrPitchesNames ();
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

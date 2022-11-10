@@ -14,7 +14,7 @@
 
 #include "exports.h"
 
-#include "bsr.h"
+// #include "bsrScores.h"
 
 #include "msrOah.h"
 #include "bsrOah.h"
@@ -22,6 +22,13 @@
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+// type declarations for formal parameters
+
+class   bsrScore;
+typedef SMARTP<bsrScore> S_bsrScore;
+
 //_______________________________________________________________________________
 EXP S_bsrScore translateMsrToBsr (
   S_msrScore    originalMsrScore,
@@ -31,7 +38,7 @@ EXP S_bsrScore translateMsrToBsr (
   const string& passDescription);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

@@ -1,32 +1,27 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrTuplets___
 #define ___msrTuplets___
 
 #include "msrTupletElements.h"
 
-#include "msrFiguredBasses.h"
-#include "msrGraceNotesGroups.h"
-#include "msrMeasures.h"
+// #include "msrFiguredBasses.h"
+// #include "msrGraceNotesGroups.h"
+// #include "msrMeasures.h"
 #include "msrTupletFactors.h"
 
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-class   msrVoice;
-typedef SMARTP<msrVoice> S_msrVoice;
-
-class   msrNote;
-typedef SMARTP<msrNote> S_msrNote;
-
-class   msrChord;
-typedef SMARTP<msrChord> S_msrChord;
-
-//______________________________________________________________________________
-// PRE-declarations
-
-class   msrTuplet;
-typedef SMARTP<msrTuplet> S_msrTuplet;
 
 //______________________________________________________________________________
 // data types

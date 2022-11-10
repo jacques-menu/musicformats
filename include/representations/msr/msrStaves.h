@@ -14,16 +14,22 @@
 
 #include "msrElements.h"
 
+#include "msrClefs.h"
+#include "msrKeys.h"
+#include "msrRepeats.h"
+#include "msrRepeatsEnumTypes.h"
+#include "msrStavesDetails.h"
 #include "msrStavesEnumTypes.h"
+#include "msrTimeSignatures.h"
+#include "msrTranspositions.h"
+#include "msrTupletFactors.h"
 
 // #include "msrBarChecks.h"
 // #include "msrBarLines.h"
 // #include "msrBarNumberChecks.h"
 // #include "msrBreaks.h"
-// #include "msrClefs.h"
 // #include "msrDoubleTremolos.h"
 // #include "msrInstruments.h"
-// #include "msrKeys.h"
 // #include "msrMeasuresEnumTypes.h"
 // #include "msrMeasures.h"
 // #include "msrMeasuresSlices.h"
@@ -33,36 +39,12 @@
 // #include "msrRepeats.h"
 // #include "msrMultipleFullBarRests.h"
 // #include "msrRehearsalMarks.h"
-// #include "msrRepeats.h"
 // #include "msrScores.h"
 // #include "msrStavesDetails.h"
-// #include "msrTimeSignatures.h"
 // #include "msrTempos.h"
-// #include "msrTranspositions.h"
-// #include "msrTupletFactors.h"
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// PRE-declatations
-// class   msrPartGroup;
-// typedef SMARTP<msrPartGroup> S_msrPartGroup;
-//
-// class   msrPart;
-// typedef SMARTP<msrPart> S_msrPart;
-//
-// class   msrStaff;
-// typedef SMARTP<msrStaff> S_msrStaff;
-//
-// class   msrRepeat;
-// typedef SMARTP<msrRepeat> S_msrRepeat;
-//
-class   msrRepeatEnding;
-typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
-
-// class   msrTempo;
-// typedef SMARTP<msrTempo> S_msrTempo;
 
 //______________________________________________________________________________
 class EXP msrStaff : public msrElement
@@ -370,8 +352,7 @@ class EXP msrStaff : public msrElement
     // harp pedals tuning
 
     void                  appendHarpPedalsTuningToStaff (
-                            S_msrHarpPedalsTuning
-                              harpPedalsTuning);
+                            S_msrHarpPedalsTuning harpPedalsTuning);
 
     // strings
 
@@ -582,7 +563,7 @@ class EXP msrStaff : public msrElement
 
     // transposition
 
-    S_msrTransposition        fStaffCurrentTranspose;
+    S_msrTransposition    fStaffCurrentTranspose;
 };
 typedef SMARTP<msrStaff> S_msrStaff;
 EXP ostream& operator << (ostream& os, const S_msrStaff& elt);

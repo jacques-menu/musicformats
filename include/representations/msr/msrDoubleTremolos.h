@@ -20,16 +20,6 @@
 namespace MusicFormats
 {
 
-//______________________________________________________________________________
-class   msrMeasure;
-typedef SMARTP<msrMeasure> S_msrMeasure;
-
-class   msrChord;
-typedef SMARTP<msrChord> S_msrChord;
-
-class   msrNote;
-typedef SMARTP<msrNote> S_msrNote;
-
 // tremolo types
 //______________________________________________________________________________
 enum class msrTremoloTypeKind {

@@ -19,7 +19,7 @@
 
 
 
-#include "msr.h"
+// #include "msr.h"
 
 #include "msrOah.h"
 
@@ -35,7 +35,7 @@ EXP void populateMsrSkeletonFromMxsr (
   const string& passDescription);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

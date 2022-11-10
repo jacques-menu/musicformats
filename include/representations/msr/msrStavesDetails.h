@@ -250,7 +250,7 @@ typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
 EXP ostream& operator << (ostream& os, const S_msrStaffDetails& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

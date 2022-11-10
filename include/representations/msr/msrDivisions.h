@@ -152,7 +152,7 @@ typedef SMARTP<msrDivisions> S_msrDivisions;
 EXP ostream& operator << (ostream& os, const S_msrDivisions& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

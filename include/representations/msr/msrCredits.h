@@ -256,7 +256,7 @@ typedef SMARTP<msrCredit> S_msrCredit;
 EXP ostream& operator << (ostream& os, const S_msrCredit& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

@@ -79,7 +79,7 @@ typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;
 EXP ostream& operator << (ostream& os, const S_msrEyeGlasses& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif
