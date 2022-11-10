@@ -157,7 +157,8 @@ typename EnumTrueHarmonies<T>::Iterator end (EnumTrueHarmonies<T>)
 }
 
 //______________________________________________________________________________
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 

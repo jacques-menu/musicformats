@@ -207,7 +207,8 @@ EXP ostream& operator << (ostream& os, const oahFindableElement& elt);
   i.e. atoms, subgroups and groups
 */
 
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   oahElement;
 typedef SMARTP<oahElement> S_oahElement;
 

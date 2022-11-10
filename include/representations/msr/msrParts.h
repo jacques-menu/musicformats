@@ -14,41 +14,47 @@
 
 #include "msrPartGroupElements.h"
 
-#include "msrClefs.h"
-#include "msrKeys.h"
+// #include "msrClefs.h"
+// #include "msrFiguredBasses.h"
+// #include "msrGraceNotesGroups.h"
+// #include "msrKeys.h"
 #include "msrMeasuresEnumTypes.h"
-#include "msrMeasuresSlices.h"
+// #include "msrMeasuresSlices.h"
 #include "msrMultipleFullBarRests.h"
 #include "msrPartGroups.h"
-#include "msrRehearsalMarks.h"
+// #include "msrRehearsalMarks.h"
+// #include "msrRepeats.h"
+// #include "msrSegnos.h"
+// #include "msrDalSegnos.h"
 #include "msrRepeats.h"
-#include "msrSegnos.h"
-#include "msrDalSegnos.h"
-#include "msrStavesEnumTypes.h"
+#include "msrScores.h"
+// #include "msrStavesEnumTypes.h"
 #include "msrStaves.h"
-#include "msrStavesDetails.h"
-#include "msrTempos.h"
-#include "msrTimeSignatures.h"
-#include "msrTranspositions.h"
-#include "msrTupletFactors.h"
+// #include "msrStavesDetails.h"
+// #include "msrTempos.h"
+// #include "msrTimeSignatures.h"
+// #include "msrTranspositions.h"
+// #include "msrTupletFactors.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   msrTimeSignature;
-typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
+// PRE-declatations
 
-class   msrStaff;
-typedef SMARTP<msrStaff> S_msrStaff;
-
-class   msrStaffDetails;
-typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
-
-class   msrHarmony;
-typedef SMARTP<msrHarmony> S_msrHarmony;
-
+// class   msrTimeSignature;
+// typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
+//
+// class   msrStaff;
+// typedef SMARTP<msrStaff> S_msrStaff;
+//
+// class   msrStaffDetails;
+// typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
+//
+// class   msrHarmony;
+// typedef SMARTP<msrHarmony> S_msrHarmony;
+//
 class   msrFiguredBass;
 typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
 

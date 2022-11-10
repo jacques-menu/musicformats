@@ -3,77 +3,81 @@
 
 #include "msrVoiceElements.h"
 
-#include "msrCodas.h"
+// #include "msrCodas.h"
 #include "msrEyeGlasses.h"
+#include "msrLyrics.h"
 #include "msrMeasures.h"
+#include "msrMoments.h"
 #include "msrMultipleFullBarRests.h"
-#include "msrRehearsalMarks.h"
-#include "msrSegnos.h"
-#include "msrDalSegnos.h"
-#include "msrSegmentElements.h"
-#include "msrStaves.h"
-#include "msrTablatures.h"
-#include "msrTempos.h"
-#include "msrVoices.h"
+// #include "msrRehearsalMarks.h"
+// #include "msrSegnos.h"
+// #include "msrDalSegnos.h"
+// #include "msrSegmentElements.h"
+// #include "msrStaves.h"
+// #include "msrTablatures.h"
+// #include "msrTempos.h"
+// #include "msrVoices.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   msrStaff;
-typedef SMARTP<msrStaff> S_msrStaff;
+// PRE-declarations
 
-class   msrPart;
-typedef SMARTP<msrPart> S_msrPart;
-
-class   msrPartGroup;
-typedef SMARTP<msrPartGroup> S_msrPartGroup;
-
-class   msrScore;
-typedef SMARTP<msrScore> S_msrScore;
-
-class   msrPart;
-typedef SMARTP<msrPart> S_msrPart;
-
-class   msrPrintLayout;
-typedef SMARTP<msrPrintLayout> S_msrPrintLayout;
-
-class   msrTimeSignature;
-typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
-
-class   msrChord;
-typedef SMARTP<msrChord> S_msrChord;
-
-class   msrTuplet;
-typedef SMARTP<msrTuplet> S_msrTuplet;
-
-class   msrTransposition;
-typedef SMARTP<msrTransposition> S_msrTransposition;
-
-class   msrStaffDetails;
-typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
-
-class   msrOctaveShift;
-typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
-
-class   msrHarmony;
-typedef SMARTP<msrHarmony> S_msrHarmony;
-
-class   msrFiguredBass;
-typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
-
-class   msrVoiceStaffChange;
-typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
-
-class   msrVoice;
-typedef SMARTP<msrVoice> S_msrVoice;
-
-class   msrDoubleTremolo;
-typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
-
-class   msrSegno;
-typedef SMARTP<msrSegno> S_msrSegno;
+// class   msrStaff;
+// typedef SMARTP<msrStaff> S_msrStaff;
+//
+// class   msrPart;
+// typedef SMARTP<msrPart> S_msrPart;
+//
+// class   msrPartGroup;
+// typedef SMARTP<msrPartGroup> S_msrPartGroup;
+//
+// class   msrScore;
+// typedef SMARTP<msrScore> S_msrScore;
+//
+// class   msrPart;
+// typedef SMARTP<msrPart> S_msrPart;
+//
+// class   msrPrintLayout;
+// typedef SMARTP<msrPrintLayout> S_msrPrintLayout;
+//
+// class   msrTimeSignature;
+// typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
+//
+// class   msrChord;
+// typedef SMARTP<msrChord> S_msrChord;
+//
+// class   msrTuplet;
+// typedef SMARTP<msrTuplet> S_msrTuplet;
+//
+// class   msrTransposition;
+// typedef SMARTP<msrTransposition> S_msrTransposition;
+//
+// class   msrStaffDetails;
+// typedef SMARTP<msrStaffDetails> S_msrStaffDetails;
+//
+// class   msrOctaveShift;
+// typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
+//
+// class   msrHarmony;
+// typedef SMARTP<msrHarmony> S_msrHarmony;
+//
+// class   msrFiguredBass;
+// typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
+//
+// class   msrVoiceStaffChange;
+// typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;
+//
+// class   msrVoice;
+// typedef SMARTP<msrVoice> S_msrVoice;
+//
+// class   msrDoubleTremolo;
+// typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
+//
+// class   msrSegno;
+// typedef SMARTP<msrSegno> S_msrSegno;
 
 //______________________________________________________________________________
 class EXP msrSegment : public msrVoiceElement

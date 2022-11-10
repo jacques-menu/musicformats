@@ -22,7 +22,8 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   msrLigature;
 typedef SMARTP<msrLigature> S_msrLigature;
 

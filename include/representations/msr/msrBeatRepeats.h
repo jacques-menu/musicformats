@@ -12,7 +12,8 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   msrBeatRepeat;
 typedef SMARTP<msrBeatRepeat> S_msrBeatRepeat;
 
