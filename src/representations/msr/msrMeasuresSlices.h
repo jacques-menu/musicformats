@@ -24,7 +24,8 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
 

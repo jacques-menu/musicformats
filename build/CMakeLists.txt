@@ -195,7 +195,7 @@ set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/guido passes/mxsr2guido co
 
 set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} representations/msdl representations/msdr passes/msdl2msr passes/msdl2msr converters/msdl2braille converters/msdl2guido converters/msdl2lilypond converters/msdl2musicxml converters/msdlconverter)
 
-set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} services)
+set (MF_SRC_FOLDERS ${MF_SRC_FOLDERS} services interface)
 
 message (STATUS "-----> MF_SRC_FOLDERS: ${MF_SRC_FOLDERS}")
 

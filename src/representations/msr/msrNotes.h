@@ -5,38 +5,96 @@
 
 #include "msrTupletElements.h"
 
-#include "msrArticulations.h"
-#include "msrBeams.h"
-#include "msrChords.h"
+#include "msrAccidentals.h"
+// #include "msrArticulations.h"
+// #include "msrBeams.h"
+// #include "msrChords.h"
 #include "msrColors.h"
-#include "msrEyeGlasses.h"
-#include "msrFiguredBasses.h"
-#include "msrGlissandos.h"
-#include "msrGraceNotesGroups.h"
-#include "msrHarmonies.h"
-#include "msrKeys.h"
-#include "msrLigatures.h"
-#include "msrLyrics.h"
-#include "msrMeasures.h"
-#include "msrOrnaments.h"
-#include "msrParts.h"
+#include "msrDurations.h"
+// #include "msrEyeGlasses.h"
+// #include "msrFiguredBasses.h"
+// #include "msrGlissandos.h"
+// #include "msrGraceNotesGroups.h"
+// #include "msrHarmonies.h"
+// #include "msrKeys.h"
+// #include "msrLigatures.h"
+// #include "msrLyrics.h"
+// #include "msrMeasures.h"
+#include "msrOctaves.h"
+// #include "msrOrnaments.h"
+// #include "msrParts.h"
 #include "msrPrintObjects.h"
-#include "msrSingleTremolos.h"
-#include "msrSlashes.h"
-#include "msrSlides.h"
-#include "msrSlurs.h"
-#include "msrSpanners.h"
-#include "msrStaves.h"
-#include "msrStems.h"
-#include "msrTechnicals.h"
-#include "msrTies.h"
-#include "msrTuplets.h"
-#include "msrVoices.h"
-#include "msrWords.h"
+// #include "msrSingleTremolos.h"
+// #include "msrSlashes.h"
+// #include "msrSlides.h"
+// #include "msrSlurs.h"
+// #include "msrSpanners.h"
+// #include "msrStaves.h"
+// #include "msrStems.h"
+// #include "msrTechnicals.h"
+// #include "msrTies.h"
+// #include "msrTuplets.h"
+#include "msrTupletFactors.h"
+// #include "msrVoices.h"
+// #include "msrWords.h"
 
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+// PRE-declarations
+
+class   msrSyllable;
+typedef SMARTP<msrSyllable> S_msrSyllable;
+
+class   msrOctaveShift;
+typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
+
+class   msrTuplet;
+typedef SMARTP<msrTuplet> S_msrTuplet;
+
+class   msrChord;
+typedef SMARTP<msrChord> S_msrChord;
+
+class   msrGraceNotesGroup;
+typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
+
+class   msrPart;
+typedef SMARTP<msrPart> S_msrPart;
+
+class   msrCoda;
+typedef SMARTP<msrCoda> S_msrCoda;
+
+class   msrPartGroup;
+typedef SMARTP<msrPartGroup> S_msrPartGroup;
+
+class   msrSlash;
+typedef SMARTP<msrSlash> S_msrSlash;
+
+class   msrScore;
+typedef SMARTP<msrScore> S_msrScore;
+
+class   msrStaff;
+typedef SMARTP<msrStaff> S_msrStaff;
+
+class   msrSlide;
+typedef SMARTP<msrSlide> S_msrSlide;
+
+class   msrHarmony;
+typedef SMARTP<msrHarmony> S_msrHarmony;
+
+class   msrDalSegno;
+typedef SMARTP<msrDalSegno> S_msrDalSegno;
+
+class   msrSegno;
+typedef SMARTP<msrSegno> S_msrSegno;
+
+class   msrFiguredBass;
+typedef SMARTP<msrFiguredBass> S_msrFiguredBass;
+
+class   msrVoice;
+typedef SMARTP<msrVoice> S_msrVoice;
 
 // notes
 //______________________________________________________________________________

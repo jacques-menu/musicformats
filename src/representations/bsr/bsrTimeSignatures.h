@@ -13,11 +13,13 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   bsrTimeSignatureItem;
 typedef SMARTP<bsrTimeSignatureItem> S_bsrTimeSignatureItem;
 
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   bsrTimeSignature;
 typedef SMARTP<bsrTimeSignature> S_bsrTimeSignature;
 

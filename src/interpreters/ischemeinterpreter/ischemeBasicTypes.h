@@ -31,7 +31,8 @@ using namespace MusicXML2;
 using namespace MusicFormats;
 
 //______________________________________________________________________________
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   ischemeDriver;
 
 //______________________________________________________________________________
