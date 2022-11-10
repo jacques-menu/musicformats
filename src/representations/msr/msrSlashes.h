@@ -132,7 +132,7 @@ typedef SMARTP<msrSlash> S_msrSlash;
 EXP ostream& operator << (ostream& os, const S_msrSlash& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

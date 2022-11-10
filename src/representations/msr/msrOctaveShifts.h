@@ -106,7 +106,7 @@ typedef SMARTP<msrOctaveShift> S_msrOctaveShift;
 EXP ostream& operator << (ostream& os, const S_msrOctaveShift& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

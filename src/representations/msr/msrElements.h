@@ -27,10 +27,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   msrPathToVoice;
-typedef SMARTP<msrPathToVoice> S_msrPathToVoice;
-
-//______________________________________________________________________________
 class EXP msrElement : public smartable
 {
   public:
@@ -102,7 +98,7 @@ typedef SMARTP<msrElement> S_msrElement;
 EXP ostream& operator << (ostream& os, const S_msrElement& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

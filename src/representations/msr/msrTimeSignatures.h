@@ -67,13 +67,6 @@ string msrTimeSignatureRelationKindAsString (
 ostream& operator << (ostream& os, const msrTimeSignatureRelationKind& elt);
 
 //______________________________________________________________________________
-class   msrTimeSignatureItem;
-typedef SMARTP<msrTimeSignatureItem> S_msrTimeSignatureItem;
-
-class   msrTimeSignature;
-typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
-
-//______________________________________________________________________________
 class EXP msrTimeSignatureItem : public msrElement
 {
   public:
@@ -304,7 +297,7 @@ typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
 EXP ostream& operator << (ostream& os, const S_msrTimeSignature& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

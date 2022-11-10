@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___msrGeneratorsOah___
-#define ___msrGeneratorsOah___
+#ifndef ___msrGenerationOah___
+#define ___msrGenerationOah___
 
 #include "msrGenerationBasicTypes.h"
 

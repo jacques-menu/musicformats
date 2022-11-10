@@ -1669,7 +1669,8 @@ void msrMeasure::appendKeyToMeasure (S_msrKey key)
   appendElementToMeasure (key);
 }
 
-void msrMeasure::appendTimeSignatureToMeasure (S_msrTimeSignature timeSignature)
+void msrMeasure::appendTimeSignatureToMeasure (
+  S_msrTimeSignature timeSignature)
 {
   // sanity check
   mfAssert (
@@ -1714,7 +1715,8 @@ void msrMeasure::appendTimeSignatureToMeasure (S_msrTimeSignature timeSignature)
   --gIndenter;
 }
 
-void msrMeasure::appendTimeSignatureToMeasureClone (S_msrTimeSignature timeSignature)
+void msrMeasure::appendTimeSignatureToMeasureClone (
+  S_msrTimeSignature timeSignature)
 {
   // sanity check
   mfAssert (

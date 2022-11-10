@@ -1007,13 +1007,13 @@ void msr2lpsrTranslator::visitStart (S_msrScore& elt)
   }
 
   // get the print notes head RGB color atom
-  S_oahRGBColorAtom
-    ledgerLinesRGBColorAtom =
+  S_oahColorRGBAtom
+    ledgerLinesColorRGBAtom =
       gGlobalLpsr2lilypondOahGroup-> // JMI BLARK put that in gGlobalMsr2lpsrOahGroup
-        getLedgerLinesRGBColorAtom ();
+        getLedgerLinesColorRGBAtom ();
 
   // has the atom been used?
-  if (ledgerLinesRGBColorAtom->getSetByAnOption ()) {
+  if (ledgerLinesColorRGBAtom->getSetByAnOption ()) {
     // this score needs the 'colored ledger lines' Scheme function
     fResultingLpsr->
       setColoredLedgerLinesIsNeeded ();

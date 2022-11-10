@@ -6588,76 +6588,76 @@ ostream& operator << (ostream& os, const S_oahNaturalNumbersSetElementAtom& elt)
 }
 
 //______________________________________________________________________________
-S_oahRGBColorAtom oahRGBColorAtom::create (
-  const string&       shortName,
-  const string&       longName,
-  const string&       description,
-  const string&       valueSpecification,
-  const string&       variableName,
-  msrRGBColor& RGBColorVariable)
+S_oahColorRGBAtom oahColorRGBAtom::create (
+  const string& shortName,
+  const string& longName,
+  const string& description,
+  const string& valueSpecification,
+  const string& variableName,
+  msrColorRGB&  colorRGBVariable)
 {
-  oahRGBColorAtom* o = new
-    oahRGBColorAtom (
+  oahColorRGBAtom* o = new
+    oahColorRGBAtom (
       longName,
       shortName,
       description,
       valueSpecification,
       variableName,
-      RGBColorVariable);
+      colorRGBVariable);
   assert (o != nullptr);
   return o;
 }
 
-oahRGBColorAtom::oahRGBColorAtom (
-  const string&       shortName,
-  const string&       longName,
-  const string&       description,
-  const string&       valueSpecification,
-  const string&       variableName,
-  msrRGBColor& RGBColorVariable)
+oahColorRGBAtom::oahColorRGBAtom (
+  const string& shortName,
+  const string& longName,
+  const string& description,
+  const string& valueSpecification,
+  const string& variableName,
+  msrColorRGB&  colorRGBVariable)
   : oahAtomStoringAValue (
       longName,
       shortName,
       description,
       valueSpecification,
       variableName),
-    fRGBColorVariable (
-      RGBColorVariable)
+    fColorRGBVariable (
+      colorRGBVariable)
 {
   fMultipleOccurrencesAllowed = true;
 }
 
-oahRGBColorAtom::~oahRGBColorAtom ()
+oahColorRGBAtom::~oahColorRGBAtom ()
 {}
 
-void oahRGBColorAtom::applyAtomWithValue (
+void oahColorRGBAtom::applyAtomWithValue (
   const string& theString,
   ostream&      os)
 {
-  msrRGBColor theRGBColor (theString);
+  msrColorRGB theColorRGB (theString);
 
-  setRGBColorVariable (theRGBColor);
+  setColorRGBVariable (theColorRGB);
 }
 
-void oahRGBColorAtom::acceptIn (basevisitor* v)
+void oahColorRGBAtom::acceptIn (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahRGBColorAtom::acceptIn ()" <<
+      ".\\\" ==> oahColorRGBAtom::acceptIn ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahRGBColorAtom>*
+  if (visitor<S_oahColorRGBAtom>*
     p =
-      dynamic_cast<visitor<S_oahRGBColorAtom>*> (v)) {
-        S_oahRGBColorAtom elem = this;
+      dynamic_cast<visitor<S_oahColorRGBAtom>*> (v)) {
+        S_oahColorRGBAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahRGBColorAtom::visitStart ()" <<
+            ".\\\" ==> Launching oahColorRGBAtom::visitStart ()" <<
             endl;
         }
 #endif
@@ -6665,25 +6665,25 @@ void oahRGBColorAtom::acceptIn (basevisitor* v)
   }
 }
 
-void oahRGBColorAtom::acceptOut (basevisitor* v)
+void oahColorRGBAtom::acceptOut (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahRGBColorAtom::acceptOut ()" <<
+      ".\\\" ==> oahColorRGBAtom::acceptOut ()" <<
       endl;
   }
 #endif
 
-  if (visitor<S_oahRGBColorAtom>*
+  if (visitor<S_oahColorRGBAtom>*
     p =
-      dynamic_cast<visitor<S_oahRGBColorAtom>*> (v)) {
-        S_oahRGBColorAtom elem = this;
+      dynamic_cast<visitor<S_oahColorRGBAtom>*> (v)) {
+        S_oahColorRGBAtom elem = this;
 
 #ifdef TRACING_IS_ENABLED
         if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
           gLogStream <<
-            ".\\\" ==> Launching oahRGBColorAtom::visitEnd ()" <<
+            ".\\\" ==> Launching oahColorRGBAtom::visitEnd ()" <<
             endl;
         }
 #endif
@@ -6691,49 +6691,49 @@ void oahRGBColorAtom::acceptOut (basevisitor* v)
   }
 }
 
-void oahRGBColorAtom::browseData (basevisitor* v)
+void oahColorRGBAtom::browseData (basevisitor* v)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
-      ".\\\" ==> oahRGBColorAtom::browseData ()" <<
+      ".\\\" ==> oahColorRGBAtom::browseData ()" <<
       endl;
   }
 #endif
 }
 
-string oahRGBColorAtom::asShortNamedOptionString () const
+string oahColorRGBAtom::asShortNamedOptionString () const
 {
   stringstream s;
 
   s <<
     '-' << fShortName << ' ' <<
     '[' <<
-    fRGBColorVariable.asString () <<
+    fColorRGBVariable.asString () <<
     ']';
 
   return s.str ();
 }
 
-string oahRGBColorAtom::asActualLongNamedOptionString () const
+string oahColorRGBAtom::asActualLongNamedOptionString () const
 {
   stringstream s;
 
   s <<
     '-' << fLongName << ' ' <<
     '[' <<
-    fRGBColorVariable.asString () <<
+    fColorRGBVariable.asString () <<
     ']';
 
   return s.str ();
 }
 
-void oahRGBColorAtom::print (ostream& os) const
+void oahColorRGBAtom::print (ostream& os) const
 {
   const int fieldWidth = K_OAH_FIELD_WIDTH;
 
   os <<
-    "RGBColorAtom:" <<
+    "ColorRGBAtom:" <<
     endl;
 
   ++gIndenter;
@@ -6743,14 +6743,14 @@ void oahRGBColorAtom::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "RGBColorVariable" << " : " <<
-    fRGBColorVariable.asString () <<
+    "colorRGBVariable" << " : " <<
+    fColorRGBVariable.asString () <<
     endl;
 
   --gIndenter;
 }
 
-void oahRGBColorAtom::printAtomWithVariableOptionsValues (
+void oahColorRGBAtom::printAtomWithVariableOptionsValues (
   ostream& os,
   int      valueFieldWidth) const
 {
@@ -6758,7 +6758,7 @@ void oahRGBColorAtom::printAtomWithVariableOptionsValues (
     setw (valueFieldWidth) <<
     fVariableName <<
     " : " <<
-    fRGBColorVariable.asString ();
+    fColorRGBVariable.asString ();
   if (fSetByAnOption) {
     os <<
       ", set by an option" <<
@@ -6767,7 +6767,7 @@ void oahRGBColorAtom::printAtomWithVariableOptionsValues (
   os << endl;
 }
 
-ostream& operator << (ostream& os, const S_oahRGBColorAtom& elt)
+ostream& operator << (ostream& os, const S_oahColorRGBAtom& elt)
 {
   if (elt) {
     elt->print (os);

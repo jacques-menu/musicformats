@@ -576,7 +576,7 @@ typedef SMARTP<msrDampAll> S_msrDampAll;
 EXP ostream& operator << (ostream& os, const S_msrDampAll& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

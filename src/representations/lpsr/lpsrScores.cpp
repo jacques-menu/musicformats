@@ -2086,11 +2086,11 @@ R"###(% there is ony one ledger line spanner/grob/stencil
      (new-stil (box-stencil (stencil-with-color stil  (rgb-color )###";
 
   s <<
-    gGlobalLpsr2lilypondOahGroup->getLedgerLinesRGBColor ().getR () <<
+    gGlobalLpsr2lilypondOahGroup->getLedgerLinesColorRGB ().getR () <<
     ' ' <<
-    gGlobalLpsr2lilypondOahGroup->getLedgerLinesRGBColor ().getG () <<
+    gGlobalLpsr2lilypondOahGroup->getLedgerLinesColorRGB ().getG () <<
     ' ' <<
-    gGlobalLpsr2lilypondOahGroup->getLedgerLinesRGBColor ().getB ();
+    gGlobalLpsr2lilypondOahGroup->getLedgerLinesColorRGB ().getB ();
 
   s <<
 R"###()) 0.1 1))

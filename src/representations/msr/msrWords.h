@@ -186,7 +186,7 @@ typedef SMARTP<msrWords> S_msrWords;
 EXP ostream& operator << (ostream& os, const S_msrWords& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

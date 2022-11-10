@@ -12,7 +12,7 @@
 #ifndef ___lpsr___
 #define ___lpsr___
 
-#include "msr.h"
+// #include "msr.h"
 
 #include "lpsrEnumTypes.h"
 #include "lpsrElements.h"
@@ -40,13 +40,6 @@
 #include "lpsrVariables.h"
 
 #include "lpsrBookBlockElements.h"
-
-
-namespace MusicFormats
-{
-
-//______________________________________________________________________________
-void initializeLPSR ();
 
 
 }

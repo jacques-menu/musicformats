@@ -38,31 +38,6 @@ using namespace std;
 namespace MusicFormats
 {
 
-// repeat endings
-//______________________________________________________________________________
-string msrRepeatEndingKindAsString (
-  msrRepeatEndingKind repeatEndingKind)
-{
-  string result;
-
-  switch (repeatEndingKind) {
-    case msrRepeatEndingKind::kRepeatEndingHooked:
-      result = "kRepeatEndingHooked";
-      break;
-    case msrRepeatEndingKind::kRepeatEndingHookless:
-      result = "kRepeatEndingHookless";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrRepeatEndingKind& elt)
-{
-  os << msrRepeatEndingKindAsString (elt);
-  return os;
-}
-
 //______________________________________________________________________________
 /*
   Repeats in MusicXML are applied to all voices in all staves of the current part
@@ -1631,52 +1606,6 @@ void msrRepeat::browseData (basevisitor* v)
     msrBrowser<msrRepeatEnding> browser (v);
     browser.browse (*(*i));
   } // for
-}
-
-string msrRepeat::msrRepeatExplicitStartKindAsString (
-  msrRepeatExplicitStartKind repeatExplicitStartKind)
-{
-  string result;
-
-  switch (repeatExplicitStartKind) {
-    case msrRepeatExplicitStartKind::kRepeatExplicitStartNo:
-      result = "kRepeatExplicitStartNo";
-      break;
-    case msrRepeatExplicitStartKind::kRepeatExplicitStartYes:
-      result = "kRepeatExplicitStartYes";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrRepeatExplicitStartKind& elt)
-{
-  os << msrRepeatExplicitStartKindAsString (elt);
-  return os;
-}
-
-string msrRepeat::repeatBuildPhaseKindAsString (
-  msrRepeatBuildPhaseKind repeatBuildPhaseKind)
-{
-  string result;
-
-  switch (repeatBuildPhaseKind) {
-    case msrRepeat::kRepeatBuildPhaseJustCreated:
-      result = "kRepeatBuildPhaseJustCreated";
-      break;
-    case msrRepeat::kRepeatBuildPhaseInCommonPart:
-      result = "kRepeatBuildPhaseInCommonPart";
-      break;
-    case msrRepeat::kRepeatBuildPhaseInEndings:
-      result = "kRepeatBuildPhaseInEndings";
-      break;
-    case msrRepeat::kRepeatBuildPhaseCompleted:
-      result = "kRepeatBuildPhaseCompleted";
-      break;
-  } // switch
-
-  return result;
 }
 
 string msrRepeat::asShortString () const

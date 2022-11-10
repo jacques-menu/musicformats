@@ -50,7 +50,7 @@ typedef SMARTP<msrVoiceElement> S_msrVoiceElement;
 EXP ostream& operator << (ostream& os, const S_msrVoiceElement& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

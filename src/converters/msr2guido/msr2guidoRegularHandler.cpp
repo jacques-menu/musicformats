@@ -20,7 +20,7 @@
 
 #include "oahOah.h"
 
-#include "msr.h"
+// #include "msr.h"
 
 #include "msrOah.h"
 #include "msr2msrOah.h"
@@ -298,7 +298,7 @@ void msr2guidoRegularHandler::createOahRegularGroup ()
   registerAtomInRegularSubgroup ("display-part-groups", subGroup);
 
   registerAtomInRegularSubgroup ("display-msr-skeleton", subGroup);
-  
+
   registerAtomInRegularSubgroup ("display-msr-1", subGroup);
   registerAtomInRegularSubgroup ("display-msr-1-short", subGroup);
   registerAtomInRegularSubgroup ("display-msr-1-full", subGroup);

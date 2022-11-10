@@ -37,16 +37,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   msrPart;
-typedef SMARTP<msrPart> S_msrPart;
-
-class   msrPartGroup;
-typedef SMARTP<msrPartGroup> S_msrPartGroup;
-
-class   msrVoice;
-typedef SMARTP<msrVoice> S_msrVoice;
-
-//______________________________________________________________________________
 class EXP msrScore : public msrBookElement
 {
   public:

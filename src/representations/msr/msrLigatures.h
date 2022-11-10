@@ -22,12 +22,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-// PRE-declarations
-
-class   msrLigature;
-typedef SMARTP<msrLigature> S_msrLigature;
-
-//______________________________________________________________________________
 // data types
 
 enum class msrLigatureKind {
@@ -50,6 +44,12 @@ string msrLigatureLineEndKindAsString (
   msrLigatureLineEndKind ligatureLineEndKind);
 
 ostream& operator << (ostream& os, const msrLigatureLineEndKind& elt);
+
+//______________________________________________________________________________
+// PRE-declaration
+
+class   msrLigature;
+typedef SMARTP<msrLigature> S_msrLigature;
 
 class EXP msrLigature : public msrElement
 {
@@ -161,7 +161,7 @@ typedef SMARTP<msrLigature> S_msrLigature;
 EXP ostream& operator << (ostream& os, const S_msrLigature& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

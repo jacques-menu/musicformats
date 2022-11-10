@@ -272,7 +272,7 @@ msrNote::msrNote (
   : msrTupletElement (
       inputLineNumber,
       upLinkToMeasure),
-    fNoteAlphaRGBColor ("", "")
+    fNoteColorAlphaRGB ("", "")
 {
   fetchMeasureElementMeasureNumber () = noteMeasureNumber;
 
@@ -340,7 +340,7 @@ void msrNote::initializeNote ()
 
   fNoteMultipleFullBarRestsSequenceNumber = -1;
 
-//   fNoteAlphaRGBColorHasBenSet = false; JMI v0.9.64
+//   fNoteColorAlphaRGBHasBenSet = false; JMI v0.9.64
 
   // note lyrics
   // ------------------------------------------------------
@@ -773,11 +773,11 @@ void msrNote::setNoteKind (msrNoteKind noteKind)
   fNoteKind = noteKind;
 }
 
-void msrNote::setNoteAlphaRGBColor (
-  msrAlphaRGBColor& noteAlphaRGBColor)
+void msrNote::setNoteColorAlphaRGB (
+  msrColorAlphaRGB& noteColorAlphaRGB)
 {
-  fNoteAlphaRGBColor          = noteAlphaRGBColor;
-  fNoteAlphaRGBColorHasBenSet = true;
+  fNoteColorAlphaRGB          = noteColorAlphaRGB;
+  fNoteColorAlphaRGBHasBenSet = true;
 }
 
 S_msrNote msrNote::createNoteNewbornClone (
@@ -964,10 +964,10 @@ S_msrNote msrNote::createNoteNewbornClone (
   // note RGB color
   // ------------------------------------------------------
 
-  newbornClone->fNoteAlphaRGBColor =
-    fNoteAlphaRGBColor;
-  newbornClone->fNoteAlphaRGBColorHasBenSet =
-    fNoteAlphaRGBColorHasBenSet;
+  newbornClone->fNoteColorAlphaRGB =
+    fNoteColorAlphaRGB;
+  newbornClone->fNoteColorAlphaRGBHasBenSet =
+    fNoteColorAlphaRGBHasBenSet;
 
   // solo note or rest?
   // ------------------------------------------------------
@@ -1470,10 +1470,10 @@ S_msrNote msrNote::createNoteDeepClone (
   // note color
   // ------------------------------------------------------
 
-  noteDeepClone->fNoteAlphaRGBColor =
-    fNoteAlphaRGBColor;
-  noteDeepClone->fNoteAlphaRGBColorHasBenSet =
-    fNoteAlphaRGBColorHasBenSet;
+  noteDeepClone->fNoteColorAlphaRGB =
+    fNoteColorAlphaRGB;
+  noteDeepClone->fNoteColorAlphaRGBHasBenSet =
+    fNoteColorAlphaRGBHasBenSet;
 
   // solo note or rest?
   // ------------------------------------------------------
@@ -5617,14 +5617,14 @@ void msrNote::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "fNoteAlphaRGBColor" << " : " <<
-    fNoteAlphaRGBColor <<
+    "fNoteColorAlphaRGB" << " : " <<
+    fNoteColorAlphaRGB <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
-    "fNoteAlphaRGBColorHasBenSet" << " : " <<
-    fNoteAlphaRGBColorHasBenSet <<
+    "fNoteColorAlphaRGBHasBenSet" << " : " <<
+    fNoteColorAlphaRGBHasBenSet <<
     endl;
 
   os << left <<
@@ -6268,12 +6268,12 @@ void msrNote::print (ostream& os) const
   // print the note color
   os <<
     setw (fieldWidth) <<
-    "fNoteAlphaRGBColor" << " : " <<
-    fNoteAlphaRGBColor.asString () <<
+    "fNoteColorAlphaRGB" << " : " <<
+    fNoteColorAlphaRGB.asString () <<
     endl <<
     setw (fieldWidth) <<
-    "fNoteAlphaRGBColorHasBenSet" << " : " <<
-    fNoteAlphaRGBColorHasBenSet <<
+    "fNoteColorAlphaRGBHasBenSet" << " : " <<
+    fNoteColorAlphaRGBHasBenSet <<
     endl;
 
   // solo note or rest?

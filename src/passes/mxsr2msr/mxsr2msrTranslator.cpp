@@ -31,7 +31,7 @@
 
 #include "mfStringsHandling.h"
 
-#include "msr.h"
+// #include "msr.h"
 
 #include "oahOah.h"
 
@@ -10365,36 +10365,36 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // note color, unofficial ??? JMI
 
-  string noteAlphaRGBColor = elt->getAttributeValue ("color");
+  string noteColorAlphaRGB = elt->getAttributeValue ("color");
 
   fCurrentNoteRGB   = "";
   fCurrentNoteAlpha = "";
 
   Bool wellFormedColor (true);
 
-  size_t noteAlphaRGBColorSize = noteAlphaRGBColor.size ();
+  size_t noteColorAlphaRGBSize = noteColorAlphaRGB.size ();
 
-  if (noteAlphaRGBColorSize) {
-    if (noteAlphaRGBColor [0] != '#') {
+  if (noteColorAlphaRGBSize) {
+    if (noteColorAlphaRGB [0] != '#') {
       wellFormedColor = false;
     }
     else {
       size_t
         found =
-          noteAlphaRGBColor.find_first_not_of ("#0123456789ABCDEF");
+          noteColorAlphaRGB.find_first_not_of ("#0123456789ABCDEF");
 
       if (found != string::npos) {
         wellFormedColor = false;
       }
       else {
-        switch (noteAlphaRGBColorSize) {
+        switch (noteColorAlphaRGBSize) {
           case 7: // RGB
             fCurrentNoteAlpha = "FF";
-            fCurrentNoteRGB   = noteAlphaRGBColor.substr (1, 6);
+            fCurrentNoteRGB   = noteColorAlphaRGB.substr (1, 6);
             break;
           case 9: // ARGB
-            fCurrentNoteAlpha = noteAlphaRGBColor.substr (1, 2);
-            fCurrentNoteRGB   = noteAlphaRGBColor.substr (3, 8);
+            fCurrentNoteAlpha = noteColorAlphaRGB.substr (1, 2);
+            fCurrentNoteRGB   = noteColorAlphaRGB.substr (3, 8);
             break;
           default:
             wellFormedColor = false;
@@ -10407,7 +10407,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
     stringstream s;
 
     s <<
-      "note color \"" << noteAlphaRGBColor <<
+      "note color \"" << noteColorAlphaRGB <<
       "\" should contain 6 or 8 upper case hexadecimal digits prededed by a '#'";
 
     mxsr2msrError (
@@ -21112,14 +21112,14 @@ void mxsr2msrTranslator::populateNoteBeforeNoteItselfIsHandled (
 {
   // set newNote's color if relevant
   if (fCurrentNoteRGB.size () || fCurrentNoteAlpha.size ()) {
-    msrAlphaRGBColor
-      alphaRGBColor (
+    msrColorAlphaRGB
+      colorAlphaRGB (
         fCurrentNoteRGB,
         fCurrentNoteAlpha);
 
     newNote->
-      setNoteAlphaRGBColor (
-        alphaRGBColor);
+      setNoteColorAlphaRGB (
+        colorAlphaRGB);
   }
 
   // attach the regular pending elements (not dal segnos), if any, to newNote

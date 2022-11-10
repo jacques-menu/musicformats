@@ -1,3 +1,14 @@
+/*
+  MusicFormats Library
+  Copyright (C) Jacques Menu 2016-2022
+
+  This Source Code Form is subject to the terms of the Mozilla Public
+  License, v. 2.0. If a copy of the MPL was not distributed with this
+  file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+  https://github.com/jacques-menu/musicformats
+*/
+
 #ifndef ___msrBeatRepeats___
 #define ___msrBeatRepeats___
 
@@ -10,18 +21,6 @@
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// PRE-declarations
-
-class   msrBeatRepeat;
-typedef SMARTP<msrBeatRepeat> S_msrBeatRepeat;
-
-class   msrVoice;
-typedef SMARTP<msrVoice> S_msrVoice;
-
-class   msrSegment;
-typedef SMARTP<msrSegment> S_msrSegment;
 
 //______________________________________________________________________________
 class EXP msrBeatRepeatPattern : public msrElement

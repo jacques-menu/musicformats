@@ -12,6 +12,8 @@
 #include <iomanip>      // setw, setprecision, ...
 #include <regex>
 
+#include "visitor.h"
+
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
@@ -26,8 +28,8 @@
 
 #include "mfStringsHandling.h"
 
-#include "msr.h"
-#include "bsr.h"
+#include "msrInitialization.h"
+#include "bsrInitialization.h"
 
 #include "oahOah.h"
 #include "waeOah.h"

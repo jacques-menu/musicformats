@@ -153,7 +153,7 @@ EXP ostream& operator << (ostream& os, const mfTimingItemsList& tim);
 
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

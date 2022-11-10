@@ -896,13 +896,13 @@ void basicOah2manPage::visitEnd (S_oahStringSetElementAtom& elt)
 }
 
 //________________________________________________________________________
-void basicOah2manPage::visitStart (S_oahRGBColorAtom& elt)
+void basicOah2manPage::visitStart (S_oahColorRGBAtom& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       endl <<
-      ".\\\" --> Start visiting oahRGBColorAtom '" <<
+      ".\\\" --> Start visiting oahColorRGBAtom '" <<
       elt->asString () <<
       "'" <<
       " \"" << elt->fetchNames () << "\"" <<
@@ -911,13 +911,13 @@ void basicOah2manPage::visitStart (S_oahRGBColorAtom& elt)
 #endif
 }
 
-void basicOah2manPage::visitEnd (S_oahRGBColorAtom& elt)
+void basicOah2manPage::visitEnd (S_oahColorRGBAtom& elt)
 {
 #ifdef TRACING_IS_ENABLED
   if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
     gLogStream <<
       endl <<
-      ".\\\" --> End visiting oahRGBColorAtom" <<
+      ".\\\" --> End visiting oahColorRGBAtom" <<
       " \"" << elt->fetchNames () << "\"" <<
       endl;
   }

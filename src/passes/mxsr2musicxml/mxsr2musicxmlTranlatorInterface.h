@@ -30,7 +30,7 @@ EXP void translateMxsrToMusicXML (
   const string& passDescription);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif

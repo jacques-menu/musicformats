@@ -3697,23 +3697,23 @@ This is useful when debugging EXECUTABLE.)",
   // non-print notes head color
   // --------------------------------------
 
-  fNonPrintNotesHeadRGBColor =
-    msrRGBColor (0.0, 0.0, 0.0); // black by default
+  fNonPrintNotesHeadColorRGB =
+    msrColorRGB (0.0, 0.0, 0.0); // black by default
 
-  fNonPrintNotesHeadRGBColorAtom =
-    oahRGBColorAtom::create (
+  fNonPrintNotesHeadColorRGBAtom =
+    oahColorRGBAtom::create (
       "non-print-notes-head-color", "npnhc",
 R"(Use RGB_COLOR for non print notes head color,
 for MusicXML's <note print-object="no"> for example.
 RGB_COLOR should be of the form 'r,g,b',
 with r, g and b being float numbers between 0.0 and 1.0 inclusive.)",
       "RGB_COLOR",
-      "fNonPrintNotesHeadRGBColor",
-      fNonPrintNotesHeadRGBColor);
+      "fNonPrintNotesHeadColorRGB",
+      fNonPrintNotesHeadColorRGB);
 
   subGroup->
     appendAtomToSubGroup (
-      fNonPrintNotesHeadRGBColorAtom);
+      fNonPrintNotesHeadColorRGBAtom);
 }
 
 void lpsr2lilypondOahGroup::initializeBarsOptions ()
@@ -4004,22 +4004,22 @@ R"(Use the staff size value found in the MusicXML data.)",
   // ledger lines
   // --------------------------------------
 
-  fLedgerLinesRGBColor =
-    msrRGBColor (0.0, 0.0, 0.0); // black by default
+  fLedgerLinesColorRGB =
+    msrColorRGB (0.0, 0.0, 0.0); // black by default
 
-  fLedgerLinesRGBColorAtom =
-    oahRGBColorAtom::create (
+  fLedgerLinesColorRGBAtom =
+    oahColorRGBAtom::create (
      "ledger-lines-color",  "llc",
 R"(Use RGB_COLOR for the ledger lines.
 RGB_COLOR should be of the form 'r,g,b',
 with r, g and b being float numbers between 0.0 and 1.0 inclusive.)",
       "RGB_COLOR",
-      "fLedgerLinesRGBColor",
-      fLedgerLinesRGBColor);
+      "fLedgerLinesColorRGB",
+      fLedgerLinesColorRGB);
 
   subGroup->
     appendAtomToSubGroup (
-      fLedgerLinesRGBColorAtom);
+      fLedgerLinesColorRGBAtom);
 }
 
 void lpsr2lilypondOahGroup::initializeChordsOptions ()
@@ -5296,8 +5296,8 @@ void lpsr2lilypondOahGroup::printAtomWithVariableOptionsValues (
       fGenerateMomentsInMeasures <<
       endl <<
 
-    setw (valueFieldWidth) << "fNonPrintNotesHeadRGBColor" << " : " <<
-      fNonPrintNotesHeadRGBColor.asString () <<
+    setw (valueFieldWidth) << "fNonPrintNotesHeadColorRGB" << " : " <<
+      fNonPrintNotesHeadColorRGB.asString () <<
       endl;
 
   --gIndenter;
@@ -5923,8 +5923,8 @@ void lpsr2lilypondOahGroup::printLilypondGenerationOahValues (int fieldWidth)
       fGenerateMomentsInMeasures <<
       endl <<
 
-    setw (fieldWidth) << "fNonPrintNotesHeadRGBColor" << " : " <<
-      fNonPrintNotesHeadRGBColor.asString () <<
+    setw (fieldWidth) << "fNonPrintNotesHeadColorRGB" << " : " <<
+      fNonPrintNotesHeadColorRGB.asString () <<
       endl;
 
   --gIndenter;

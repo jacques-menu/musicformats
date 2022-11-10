@@ -85,24 +85,24 @@ msrTransposition::msrTransposition (
 msrTransposition::~msrTransposition ()
 {}
 
-Bool msrTransposition::isEqualTo (S_msrTransposition otherTranspose) const
+Bool msrTransposition::isEqualTo (S_msrTransposition otherTransposition) const
 {
-  if (! otherTranspose) {
+  if (! otherTransposition) {
     return false;
   }
 
   return
     fTranspositionDiatonic ==
-      otherTranspose->fTranspositionDiatonic
+      otherTransposition->fTranspositionDiatonic
       &&
     fTranspositionChromatic ==
-      otherTranspose->fTranspositionChromatic
+      otherTransposition->fTranspositionChromatic
       &&
     fTranspositionOctaveChange ==
-      otherTranspose->fTranspositionOctaveChange
+      otherTransposition->fTranspositionOctaveChange
       &&
     fTranspositionDouble ==
-      otherTranspose->fTranspositionDouble;
+      otherTransposition->fTranspositionDouble;
 }
 
 void msrTransposition::acceptIn (basevisitor* v)

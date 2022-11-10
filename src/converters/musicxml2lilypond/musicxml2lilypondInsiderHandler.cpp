@@ -30,7 +30,8 @@
 
 #include "mfStringsHandling.h"
 
-#include "lpsr.h"
+#include "msrInitialization.h"
+#include "lpsrInitialization.h"
 
 #include "oahOah.h"
 #include "waeOah.h"
@@ -635,7 +636,7 @@ ostream& operator << (ostream& os, const S_xml2lyInsiderHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

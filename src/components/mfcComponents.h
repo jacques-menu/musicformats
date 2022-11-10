@@ -9,8 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
-#ifndef ___mfc___
-#define ___mfc___
+#ifndef ___mfcComponents___
+#define ___mfcComponents___
 
 // formats
 #include "msrComponent.h"

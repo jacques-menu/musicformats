@@ -114,7 +114,7 @@ typedef SMARTP<msrTie> S_msrTie;
 EXP ostream& operator << (ostream& os, const S_msrTie& elt);
 
 
-} // namespace MusicFormats
+}
 
 
 #endif
