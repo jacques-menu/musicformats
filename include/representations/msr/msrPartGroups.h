@@ -14,20 +14,22 @@
 
 #include "msrPartGroupElements.h"
 
+// #include "msrMeasuresSlices.h"
+// #include "msrScores.h"
+
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   msrVoice;
-typedef SMARTP<msrVoice> S_msrVoice;
-
-class   msrPart;
-typedef SMARTP<msrPart> S_msrPart;
-
-class   msrPartGroup;
-typedef SMARTP<msrPartGroup> S_msrPartGroup;
-
+// PRE-declatations
+// class   msrVoice;
+// typedef SMARTP<msrVoice> S_msrVoice;
+//
+// class   msrPart;
+// typedef SMARTP<msrPart> S_msrPart;
+//
+//
 class   msrScore;
 typedef SMARTP<msrScore> S_msrScore;
 
@@ -76,6 +78,10 @@ string msrPartGroupBarLineKindAsString (
 
 ostream& operator << (ostream& os, const msrPartGroupBarLineKind& elt);
 
+class   msrPartGroup;
+typedef SMARTP<msrPartGroup> S_msrPartGroup;
+
+//______________________________________________________________________________
 class EXP msrPartGroup : public msrPartGroupElement
 {
 /*

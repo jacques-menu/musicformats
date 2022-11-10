@@ -23,7 +23,8 @@ class   msrChord;
 typedef SMARTP<msrChord> S_msrChord;
 
 //______________________________________________________________________________
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
 

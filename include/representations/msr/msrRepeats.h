@@ -38,7 +38,8 @@ string msrRepeatEndingKindAsString (
 ostream& operator << (ostream& os, const msrRepeatEndingKind& elt);
 
 //______________________________________________________________________________
-// PRE-declarations for classes mutual dependencies
+// PRE-declarations
+
 class   msrRepeat;
 typedef SMARTP<msrRepeat> S_msrRepeat;
 
