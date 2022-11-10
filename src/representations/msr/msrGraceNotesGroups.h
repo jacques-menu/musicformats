@@ -3,21 +3,23 @@
 
 #include "msrElements.h"
 
-#include "msrNotes.h"
+// #include "msrNotes.h"
 
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
+// PRE-declarations
+
 class   msrChord;
 typedef SMARTP<msrChord> S_msrChord;
 
 class   msrTuplet;
 typedef SMARTP<msrTuplet> S_msrTuplet;
 
-class   msrMeasure;
-typedef SMARTP<msrMeasure> S_msrMeasure;
+// class   msrMeasure;
+// typedef SMARTP<msrMeasure> S_msrMeasure;
 
 class   msrPart;
 typedef SMARTP<msrPart> S_msrPart;

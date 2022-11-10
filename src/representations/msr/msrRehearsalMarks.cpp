@@ -114,13 +114,13 @@ void msrRehearsalMark::acceptOut (basevisitor* v)
 void msrRehearsalMark::browseData (basevisitor* v)
 {}
 
-string msrRehearsalMark::msrRrehearsalKindAsString (
+string msrRrehearsalKindAsString (
   msrRehearsalMarkKind rehearsalKind)
 {
   string result;
 
   switch (rehearsalKind) {
-    case msrRehearsalMarkKind::kRehearsalMarkRehearsalMarkNone:
+    case msrRehearsalMarkKind::kRehearsalMarkNone:
       result = "kNone";
       break;
     case msrRehearsalMarkKind::kRehearsalMarkRectangle:
@@ -160,7 +160,7 @@ string msrRehearsalMark::asString () const
     "[RehearsalMark" <<
     ", fRehearsalMarkText:" << fRehearsalMarkText <<
     " fRehearsalMarkKind: " << fRehearsalMarkKind <<
-    " rehearsalPlacementKind: " << fRehearsalMarkPlacementKind) <<
+    " rehearsalPlacementKind: " << fRehearsalMarkPlacementKind <<
     ']';
 
   return s.str ();

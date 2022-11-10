@@ -16,51 +16,53 @@
 
 #include "msrStavesEnumTypes.h"
 
-#include "msrBarChecks.h"
-#include "msrBarLines.h"
-#include "msrBarNumberChecks.h"
-#include "msrBreaks.h"
-#include "msrClefs.h"
-#include "msrDoubleTremolos.h"
-#include "msrInstruments.h"
-#include "msrKeys.h"
-#include "msrMeasuresEnumTypes.h"
-#include "msrMeasures.h"
-#include "msrMeasuresSlices.h"
-#include "msrParts.h"
-#include "msrPartGroups.h"
-#include "msrPrintObjects.h"
-#include "msrMultipleFullBarRests.h"
-#include "msrRehearsalMarks.h"
-#include "msrRepeats.h"
-#include "msrScores.h"
-#include "msrStavesDetails.h"
-#include "msrTimeSignatures.h"
-#include "msrTempos.h"
-#include "msrTranspositions.h"
-#include "msrTupletFactors.h"
+// #include "msrBarChecks.h"
+// #include "msrBarLines.h"
+// #include "msrBarNumberChecks.h"
+// #include "msrBreaks.h"
+// #include "msrClefs.h"
+// #include "msrDoubleTremolos.h"
+// #include "msrInstruments.h"
+// #include "msrKeys.h"
+// #include "msrMeasuresEnumTypes.h"
+// #include "msrMeasures.h"
+// #include "msrMeasuresSlices.h"
+// #include "msrParts.h"
+// #include "msrPartGroups.h"
+// #include "msrPrintObjects.h"
+// #include "msrRepeats.h"
+// #include "msrMultipleFullBarRests.h"
+// #include "msrRehearsalMarks.h"
+// #include "msrRepeats.h"
+// #include "msrScores.h"
+// #include "msrStavesDetails.h"
+// #include "msrTimeSignatures.h"
+// #include "msrTempos.h"
+// #include "msrTranspositions.h"
+// #include "msrTupletFactors.h"
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class   msrPartGroup;
-typedef SMARTP<msrPartGroup> S_msrPartGroup;
-
-class   msrPart;
-typedef SMARTP<msrPart> S_msrPart;
-
-class   msrStaff;
-typedef SMARTP<msrStaff> S_msrStaff;
-
-class   msrRepeat;
-typedef SMARTP<msrRepeat> S_msrRepeat;
-
+// PRE-declatations
+// class   msrPartGroup;
+// typedef SMARTP<msrPartGroup> S_msrPartGroup;
+//
+// class   msrPart;
+// typedef SMARTP<msrPart> S_msrPart;
+//
+// class   msrStaff;
+// typedef SMARTP<msrStaff> S_msrStaff;
+//
+// class   msrRepeat;
+// typedef SMARTP<msrRepeat> S_msrRepeat;
+//
 class   msrRepeatEnding;
 typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
 
-class   msrTempo;
-typedef SMARTP<msrTempo> S_msrTempo;
+// class   msrTempo;
+// typedef SMARTP<msrTempo> S_msrTempo;
 
 //______________________________________________________________________________
 class EXP msrStaff : public msrElement
