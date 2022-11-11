@@ -13,6 +13,9 @@
 
 #include <regex>
 
+// libmusicxml2
+#include "visitor.h"
+
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
@@ -425,7 +428,7 @@ ostream& operator << (ostream& os, const S_mfslInterpreterOahGroup& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -16,12 +16,13 @@
 
 #include "msrMeasuresEnumTypes.h"
 #include "msrMoments.h"
+#include "msrNotes.h"
+#include "msrSegments.h"
 
 // #include "msrFiguredBasses.h"
 // #include "msrOctaveShifts.h"
 // #include "msrParts.h"
 // #include "msrScores.h"
-// #include "msrSegments.h"
 // #include "msrSegnos.h"
 // #include "msrStaves.h"
 // #include "msrTablatures.h"

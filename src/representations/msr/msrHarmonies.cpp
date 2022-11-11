@@ -31,6 +31,7 @@
 #include "msrMeasures.h"
 
 #include "msrHarmonies.h"
+#include "msrTablatures.h"
 
 #include "oahOah.h"
 #include "msrOah.h"

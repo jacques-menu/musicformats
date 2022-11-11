@@ -14,26 +14,11 @@
 
 #include "msrElements.h"
 
-// #include "msrNotes.h"
+#include "msrTypesForwardDeclarations.h"
 
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// type declarations for formal parameters
-
-class   msrChord;
-typedef SMARTP<msrChord> S_msrChord;
-
-class   msrTuplet;
-typedef SMARTP<msrTuplet> S_msrTuplet;
-
-class   msrPart;
-typedef SMARTP<msrPart> S_msrPart;
-
-class   msrNote;
-typedef SMARTP<msrNote> S_msrNote;
 
 //______________________________________________________________________________
 // data types

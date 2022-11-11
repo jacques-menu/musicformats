@@ -21,20 +21,18 @@
 #endif
 
 #include "mfAssert.h"
-
 #include "mfServiceRunData.h"
-
 #include "mfStringsHandling.h"
 
-#include "msrWae.h"
-
+#include "msrTemposEnumTypes.h"
 #include "msrTempos.h"
 
 #include "oahOah.h"
-
 #include "msrOah.h"
 
 #include "msrBrowsers.h"
+
+#include "msrWae.h"
 
 
 using namespace std;
@@ -264,7 +262,7 @@ msrTempoTuplet::msrTempoTuplet (
 msrTempoTuplet::~msrTempoTuplet ()
 {}
 
-string msrTempoTuplet::msrTempoTupletTypeKindAsString (
+string msrTempoTupletTypeKindAsString (
   msrTempoTupletTypeKind tempoTupletTypeKind)
 {
   string result;
@@ -290,7 +288,7 @@ ostream& operator << (ostream& os, const msrTempoTupletTypeKind& elt)
   return os;
 }
 
-string msrTempoTuplet::msrTempoTupletBracketKindAsString (
+string msrTempoTupletBracketKindAsString (
   msrTempoTupletBracketKind tempoTupletBracketKind)
 {
   string result;
@@ -1103,13 +1101,14 @@ msrTempo::msrTempo (
     tempoWords != nullptr,
     "tempoWords is null");
 
-  fTempoKind = kTempoBeatUnitsWordsOnly;
+  fTempoKind = msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly;
 
   fTempoPerMinute = "";
 
-  fTempoNotesRelationshipKind = kTempoNotesRelationshipNone;
+  fTempoNotesRelationshipKind =
+    msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone;
 
-  fTempoParenthesizedKind = kTempoParenthesizedNo;
+  fTempoParenthesizedKind = msrTempoParenthesizedKind::kTempoParenthesizedNo;
 
   fTempoPlacementKind = msrPlacementKind::kPlacementAbove;
 
@@ -1130,11 +1129,12 @@ msrTempo::msrTempo (
       fTempoBeatUnit (tempoBeatUnit),
       fTempoEquivalentBeatUnit ()
 {
-  fTempoKind = kTempoBeatUnitsPerMinute;
+  fTempoKind = msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute;
 
   fTempoPerMinute = tempoPerMinute;
 
-  fTempoNotesRelationshipKind = kTempoNotesRelationshipNone;
+  fTempoNotesRelationshipKind =
+    msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone;
 
   fTempoParenthesizedKind = tempoParenthesizedKind;
 
@@ -1155,11 +1155,12 @@ msrTempo::msrTempo (
       fTempoBeatUnit (tempoBeatUnit),
       fTempoEquivalentBeatUnit (tempoEquivalentBeatUnit)
 {
-  fTempoKind = kTempoBeatUnitsEquivalence;
+  fTempoKind = msrTempoKBeatUnitsKind::kTempoBeatUnitsEquivalence;
 
   fTempoPerMinute = "";
 
-  fTempoNotesRelationshipKind = kTempoNotesRelationshipNone;
+  fTempoNotesRelationshipKind =
+    msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone;
 
   fTempoParenthesizedKind = tempoParenthesizedKind;
 
@@ -1184,7 +1185,7 @@ msrTempo::msrTempo (
       fTempoBeatUnit (),
       fTempoEquivalentBeatUnit ()
 {
-  fTempoKind = kTempoNotesRelationship;
+  fTempoKind = msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly;
 
   fTempoPerMinute = "";
 

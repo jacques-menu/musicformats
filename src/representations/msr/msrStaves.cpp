@@ -24,9 +24,11 @@
 
 #include "mfStringsHandling.h"
 
-#include "msrWae.h"
-
-#include "msrStaves.h"
+#include "msrBarLines.h"
+#include "msrBreaks.h"
+#include "msrRehearsalMarks.h"
+#include "msrRehearsalMarks.h"
+#include "msrTempos.h"
 
 #include "oahOah.h"
 
@@ -34,6 +36,8 @@
 #include "msrOah.h"
 #include "mxsr2msrOah.h"
 #include "msr2msrOah.h"
+
+#include "msrWae.h"
 
 #include "msrBrowsers.h"
 

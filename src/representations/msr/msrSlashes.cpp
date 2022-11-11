@@ -18,8 +18,9 @@
 #include "msrSlashes.h"
 
 #include "oahOah.h"
-
 #include "msrOah.h"
+
+#include "msrWae.h"
 
 
 using namespace std;

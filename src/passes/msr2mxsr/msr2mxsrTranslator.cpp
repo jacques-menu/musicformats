@@ -28,8 +28,12 @@
 #include "mfcLibraryComponent.h"
 
 #include "mfServiceRunData.h"
+#include "mfServiceRunData.h"
 
-#include "mfStringsHandling.h"
+#include "msrArticulations.h"
+#include "msrBarLines.h"
+#include "msrTechnicals.h"
+#include "msrTempos.h"
 
 #include "msr2mxsrWae.h"
 

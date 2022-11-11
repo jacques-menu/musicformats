@@ -22,6 +22,53 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string lpsrContextTypeKindAsString (
+  lpsrContextTypeKind contextTypeKind)
+{
+  string result;
+
+  switch (contextTypeKind) {
+    case lpsrContextTypeKind::kContextChordNames:
+      result = "kContextChordNames";
+      break;
+    case lpsrContextTypeKind::kContextFiguredBass:
+      result = "kContextFiguredBass";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const lpsrContextTypeKind& elt)
+{
+  os << lpsrContextTypeKindAsString (elt);
+  return os;
+}
+
+string lpsrContextExistingKindAsString (
+  lpsrContextExistingKind contextExistingKind)
+{
+  string result;
+
+  switch (contextExistingKind) {
+    case lpsrContextExistingKind::kExistingContextYes:
+      result = "kExistingContextYes";
+      break;
+    case lpsrContextExistingKind::kExistingContextNo:
+      result = "kExistingContextNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const lpsrContextExistingKind& elt)
+{
+  os << lpsrContextExistingKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_lpsrContext lpsrContext::create (
   int                     inputLineNumber,
   lpsrContextExistingKind contextExistingKind,
@@ -107,40 +154,6 @@ void lpsrContext::acceptOut (basevisitor* v)
 
 void lpsrContext::browseData (basevisitor* v)
 {}
-
-string lpsrContextTypeKindAsString (
-  lpsrContextTypeKind contextTypeKind)
-{
-  string result;
-
-  switch (contextTypeKind) {
-    case lpsrContextTypeKind::kContextChordNames:
-      result = "kContextChordNames";
-      break;
-    case lpsrContextTypeKind::kContextFiguredBass:
-      result = "kContextFiguredBass";
-      break;
-  } // switch
-
-  return result;
-}
-
-string lpsrContextExistingKindAsString (
-  lpsrContextExistingKind contextExistingKind)
-{
-  string result;
-
-  switch (contextExistingKind) {
-    case lpsrContextExistingKind::kExistingContextYes:
-      result = "kExistingContextYes";
-      break;
-    case lpsrContextExistingKind::kExistingContextNo:
-      result = "kExistingContextNo";
-      break;
-  } // switch
-
-  return result;
-}
 
 void lpsrContext::print (ostream& os) const
 {

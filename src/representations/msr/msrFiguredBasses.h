@@ -15,9 +15,13 @@
 #include "msrElements.h"
 #include "msrMeasureElements.h"
 
-#include "msrNotes.h"
-#include "msrParts.h"
-#include "msrVoices.h"
+#include "msrTypesForwardDeclarations.h"
+
+#include "msrTupletFactors.h"
+
+// #include "msrNotes.h"
+// #include "msrParts.h"
+// #include "msrVoices.h"
 
 
 namespace MusicFormats

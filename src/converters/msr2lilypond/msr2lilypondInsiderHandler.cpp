@@ -13,6 +13,9 @@
 
 #include <regex>
 
+// libmusicxml2
+#include "visitor.h"
+
 #include "mfStringsHandling.h"
 
 // WAE

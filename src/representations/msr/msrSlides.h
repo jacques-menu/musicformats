@@ -14,7 +14,7 @@
 
 #include "msrElements.h"
 
-// #include "msrMeasures.h"
+#include "msrLineTypes.h"
 
 
 namespace MusicFormats
@@ -28,7 +28,7 @@ enum class msrSlideTypeKind {
   kSlideTypeStart, kSlideTypeStop
 };
 
-string slideTypeKindAsString (
+string msrSlideTypeKindAsString (
   msrSlideTypeKind slideTypeKind);
 
 ostream& operator << (ostream& os, const msrSlideTypeKind& elt);

@@ -17,10 +17,10 @@
 
 #include "mfStringsHandling.h"
 
+#include "msrLyrics.h"
 #include "msrTechnicals.h"
 
 #include "oahOah.h"
-
 #include "msrOah.h"
 
 
@@ -86,7 +86,7 @@ msrTechnical::~msrTechnical ()
 {}
 
 string msrTechnicalKindAsString (
-  msrTechnicalKind technicalKind) const
+  msrTechnicalKind technicalKind)
 {
   string result;
 
@@ -286,7 +286,7 @@ msrTechnicalWithInteger::~msrTechnicalWithInteger ()
 {}
 
 string msrTechnicalWithIntegerKindAsString (
-  msrTechnicalWithIntegerKind technicalWithIntegerKind) const
+  msrTechnicalWithIntegerKind technicalWithIntegerKind)
 {
   string result;
 
@@ -371,7 +371,7 @@ string msrTechnicalWithInteger::asString () const
 
   s <<
     "[TechnicalWithInteger"
-    ", fTechnicalWithIntegerKindAsString: " << fTechnicalWithIntegerKindAsString <<
+    ", fTechnicalWithIntegerKind: " << fTechnicalWithIntegerKind <<
     ", fTechnicalWithIntegerValue: '" <<  fTechnicalWithIntegerValue <<
     "', placement " <<
     technicalWithIntegerPlacementKindAsString () <<
@@ -384,7 +384,7 @@ void msrTechnicalWithInteger::print (ostream& os) const
 {
   os <<
     "[TechnicalWithInteger" <<
-    ", " << msrTechnicalWithIntegerKindAsString () <<
+    ", fTechnicalWithIntegerKind: " << fTechnicalWithIntegerKind <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -398,13 +398,7 @@ void msrTechnicalWithInteger::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "placement" << " : " <<
-    technicalWithIntegerPlacementKindAsString () <<
-    endl <<
-
-    setw (fieldWidth) <<
-    "', placement " << " : " <<
-    technicalWithIntegerPlacementKindAsString () <<
+    "fTechnicalWithIntegerPlacementKind" << " : " << fTechnicalWithIntegerPlacementKind <<
     endl <<
     ']' <<
     endl;
@@ -458,24 +452,18 @@ msrTechnicalWithFloat::msrTechnicalWithFloat (
 msrTechnicalWithFloat::~msrTechnicalWithFloat ()
 {}
 
-string msrTechnicalWithFloatKindAsString ()
+string msrTechnicalWithFloatKindAsString (
+  msrTechnicalWithFloatKind technicalWithFloatKind)
 {
   string result;
 
-  switch (fTechnicalWithFloatKind) {
+  switch (technicalWithFloatKind) {
     case msrTechnicalWithFloatKind::kTechnicalWithFloatBend:
       result = "bend";
       break;
   } // switch
 
   return result;
-}
-
-// string technicalWithFloatPlacementKindAsString () const JMI
-// {
-//   return
-//     msrPlacementKindAsString (
-//       fTechnicalWithFloatPlacementKind);
 }
 
 void msrTechnicalWithFloat::acceptIn (basevisitor* v)
@@ -532,9 +520,9 @@ string msrTechnicalWithFloat::asString () const
   s <<
     "TechnicalWithFloat" <<
     ", fTechnicalWithFloatKind: " << fTechnicalWithFloatKind <<
-    ", fTechnicalWithFloatValue :'" << fTechnicalWithFloatValue << '\'" <<
-    ", placement " <<
-    technicalWithFloatPlacementKindAsString ();
+    ", fTechnicalWithFloatValue :'" << fTechnicalWithFloatValue << '\'' <<
+    ", fTechnicalWithFloatPlacementKind: " << fTechnicalWithFloatPlacementKind <<
+    ']';
 
   return s.str ();
 }
@@ -557,8 +545,7 @@ void msrTechnicalWithFloat::print (ostream& os) const
     endl <<
 
     setw (fieldWidth) <<
-    "placement" << " : " <<
-    technicalWithFloatPlacementKindAsString () <<
+    "fTechnicalWithFloatPlacementKind" << " : " << fTechnicalWithFloatPlacementKind <<
     endl <<
     ']' <<
     endl <<
@@ -619,7 +606,7 @@ msrTechnicalWithString::~msrTechnicalWithString ()
 {}
 
 string msrTechnicalWithStringKindAsString (
-  msrTechnicalWithStringKind technicalWithStringKind) const
+  msrTechnicalWithStringKind technicalWithStringKind)
 {
   string result;
 
@@ -641,24 +628,7 @@ string msrTechnicalWithStringKindAsString (
       break;
   } // switch
 
-  result +=
-    " \"" + fTechnicalWithStringValue + "\"";
-
   return result;
-}
-
-string msrTechnicalWithString::technicalWithStringTypeKindAsString () const
-{
-  return
-    msrTechnicalTypeKindAsString (
-      fTechnicalWithStringTypeKind);
-}
-
-string msrTechnicalWithString::technicalWithStringPlacementKindAsString () const
-{
-  return
-    msrPlacementKindAsString (
-      fTechnicalWithStringPlacementKind);
 }
 
 void msrTechnicalWithString::acceptIn (basevisitor* v)
@@ -717,9 +687,9 @@ string msrTechnicalWithString::asString () const
     ", fTechnicalWithStringKind: " << fTechnicalWithStringKind <<
     ", fTechnicalWithStringTypeKind: " << fTechnicalWithStringTypeKind <<
     ", fTechnicalWithStringValue: \"" << fTechnicalWithStringValue << "\"" <<
-    ", placement " <<
-    technicalWithStringPlacementKindAsString () <<
+    ", fTechnicalWithStringPlacementKind " << fTechnicalWithStringPlacementKind <<
     ", line " << fInputLineNumber <<
+    ']';
 
   return s.str ();
 }
@@ -727,11 +697,7 @@ string msrTechnicalWithString::asString () const
 void msrTechnicalWithString::print (ostream& os) const
 {
   os <<
-    ", fTechnicalWithStringKind: " << fTechnicalWithStringKind <<
-    ", fTechnicalWithStringTypeKind: " << fTechnicalWithStringTypeKind <<
-    ", fTechnicalWithStringValue: \"" << fTechnicalWithStringValue << "\"" <<
-    ", placement " <<
-    technicalWithStringPlacementKindAsString ();
+    "[msrTechnicalWithString" <<
     ", line " << fInputLineNumber <<
     endl;
 
@@ -741,18 +707,24 @@ void msrTechnicalWithString::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
+    ", fTechnicalWithStringPlacementKind " << fTechnicalWithStringPlacementKind <<
+    endl <<
+    setw (fieldWidth) <<
+    ", fTechnicalWithStringPlacementKind " << fTechnicalWithStringPlacementKind <<
+    endl <<
+    setw (fieldWidth) <<
     "fTechnicalWithStringValue" << " : \"" << fTechnicalWithStringValue << "\"" <<
     endl <<
-
     setw (fieldWidth) <<
-    "placement" << " : " <<
-    technicalWithStringPlacementKindAsString () <<
+    ", fTechnicalWithStringPlacementKind" << " : \"" << fTechnicalWithStringPlacementKind <<
     endl <<
 
     setw (fieldWidth) <<
     endl;
 
   --gIndenter;
+
+  os << ']' << endl;
 }
 
 ostream& operator << (ostream& os, const S_msrTechnicalWithString& elt)

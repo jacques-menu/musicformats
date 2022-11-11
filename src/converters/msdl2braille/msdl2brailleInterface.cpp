@@ -50,6 +50,7 @@
 #include "bsr2bsrFinalizerInterface.h"
 #include "bsr2brailleTranslatorInterface.h"
 
+#include "bsrScores.h"
 #include "bsrInterface.h"
 
 #include "msdl2brailleInterface.h"

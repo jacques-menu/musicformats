@@ -115,6 +115,220 @@ ostream& operator << (ostream& os, const msrXMLLangKind& elt)
   return os;
 }
 
+string msrOtherAppearanceTypeKindAsString (
+  msrOtherAppearanceTypeKind otherAppearanceTypeKind)
+{
+  string result;
+
+  switch (otherAppearanceTypeKind) {
+    case msrOtherAppearanceTypeKind::kOtherAppearanceType_NO_:
+      result = "kOtherAppearanceType_NO_";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrOtherAppearanceTypeKind& elt)
+{
+  os << msrOtherAppearanceTypeKindAsString (elt);
+  return os;
+}
+
+string msrLineWidthTypeKindAsString (
+  msrLineWidthTypeKind lineWidthTypeKind)
+{
+  string result;
+
+  switch (lineWidthTypeKind) {
+    case msrLineWidthTypeKind::kLineWidthType_NO_:
+      result = "kLineWidthType_NO_";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeBeam:
+      result = "kLineWidthTypeBeam";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeBracket:
+      result = "kLineWidthTypeBracket";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeDashes:
+      result = "kLineWidthTypeDashes";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeEnclosure:
+      result = "kLineWidthTypeEnclosure";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeEnding:
+      result = "kLineWidthTypeEnding";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeExtend:
+      result = "kLineWidthTypeExtend";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeHeavyBarLine:
+      result = "kLineWidthTypeHeavyBarLine";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeHeavyLeger:
+      result = "kLineWidthTypeHeavyLeger";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeLightBarLine:
+      result = "kLineWidthTypeLightBarLine";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeOctaveShift:
+      result = "kLineWidthTypeOctaveShift";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypePedal:
+      result = "kLineWidthTypePedal";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeSlurMiddle:
+      result = "kLineWidthTypeSlurMiddle";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeSlurTip:
+      result = "kLineWidthTypeSlurTip";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeStaff:
+      result = "kLineWidthTypeStaff";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeStem:
+      result = "kLineWidthTypeStem";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeTieMiddle:
+      result = "kLineWidthTypeTieMiddle";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeTieTip:
+      result = "kLineWidthTypeTieTip";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeTupletBracket:
+      result = "kLineWidthTypeTupletBracket";
+      break;
+    case msrLineWidthTypeKind::kLineWidthTypeWedge:
+      result = "kLineWidthTypeWedge";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrLineWidthTypeKind& elt)
+{
+  os << msrLineWidthTypeKindAsString (elt);
+  return os;
+}
+
+string msrNoteSizeTypeKindAsString (
+  msrNoteSizeTypeKind noteSizeTypeKind)
+{
+  string result;
+
+  switch (noteSizeTypeKind) {
+    case msrNoteSizeTypeKind::kNote_NO_SizeType:
+      result = "kNote_NO_SizeType";
+      break;
+    case msrNoteSizeTypeKind::kNoteSizeTypeCue:
+      result = "kNoteSizeTypeCue";
+      break;
+    case msrNoteSizeTypeKind::kNoteSizeTypeGrace:
+      result = "kNoteSizeTypeGrace";
+      break;
+    case msrNoteSizeTypeKind::kNoteSizeTypeLarge:
+      result = "kNoteSizeTypeLarge";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrNoteSizeTypeKind& elt)
+{
+  os << msrNoteSizeTypeKindAsString (elt);
+  return os;
+}
+
+string msrDistanceTypeKindAsString (
+  msrDistanceTypeKind distanceTypeKind)
+{
+  string result;
+
+  switch (distanceTypeKind) {
+    case msrDistanceTypeKind::kDistanceType_NO_:
+      result = "kDistanceType_NO_";
+      break;
+    case msrDistanceTypeKind::kDistanceTypeHyphen:
+      result = "kDistanceTypeHyphen";
+      break;
+    case msrDistanceTypeKind::kDistanceTypeBeam:
+      result = "kDistanceTypeBeam";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrDistanceTypeKind& elt)
+{
+  os << msrDistanceTypeKindAsString (elt);
+  return os;
+}
+
+string msrGlyphTypeKindAsString (
+  msrGlyphTypeKind glyphTypeKind)
+{
+  string result;
+
+  switch (glyphTypeKind) {
+    case msrGlyphTypeKind::kGlyphType_NO_:
+      result = "kGlyphType_NO_";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeQuarterRest:
+      result = "kGlyphTypeQuarterRest";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeGClefOttavaBassa:
+      result = "kGlyphTypeGClefOttavaBassa";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeCClef:
+      result = "kGlyphTypeCClef";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeFClef:
+      result = "kGlyphTypeFClef";
+      break;
+    case msrGlyphTypeKind::kGlyphTypePercussionClef:
+      result = "msrClefKind::kGlyphTypePercussionClef";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp8:
+      result = "kGlyphTypeOctaveShiftUp8";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown8:
+      result = "kGlyphTypeOctaveShiftDown8";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue8:
+      result = "kGlyphTypeOctaveShiftContinue8";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown15:
+      result = "kGlyphTypeOctaveShiftDown15";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp15:
+      result = "kGlyphTypeOctaveShiftUp15";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue15:
+      result = "kGlyphTypeOctaveShiftContinue15";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown22:
+      result = "kGlyphTypeOctaveShiftDown22";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp22:
+      result = "kGlyphTypeOctaveShiftUp22";
+      break;
+    case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue22:
+      result = "kGlyphTypeOctaveShiftContinue22";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrGlyphTypeKind& elt)
+{
+  os << msrGlyphTypeKindAsString (elt);
+  return os;
+}
+
 //______________________________________________________________________________
 S_msrPageLayout msrPageLayout::create (
   int inputLineNumber)
@@ -1264,83 +1478,6 @@ void msrLineWidth::acceptOut (basevisitor* v)
 void msrLineWidth::browseData (basevisitor* v)
 {}
 
-string msrLineWidthTypeKindAsString (
-  msrLineWidthTypeKind lineWidthTypeKind)
-{
-  string result;
-
-  switch (lineWidthTypeKind) {
-    case msrLineWidthTypeKind::kLineWidthType_NO_:
-      result = "kLineWidthType_NO_";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeBeam:
-      result = "kLineWidthTypeBeam";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeBracket:
-      result = "kLineWidthTypeBracket";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeDashes:
-      result = "kLineWidthTypeDashes";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeEnclosure:
-      result = "kLineWidthTypeEnclosure";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeEnding:
-      result = "kLineWidthTypeEnding";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeExtend:
-      result = "kLineWidthTypeExtend";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeHeavyBarLine:
-      result = "kLineWidthTypeHeavyBarLine";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeHeavyLeger:
-      result = "kLineWidthTypeHeavyLeger";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeLightBarLine:
-      result = "kLineWidthTypeLightBarLine";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeOctaveShift:
-      result = "kLineWidthTypeOctaveShift";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypePedal:
-      result = "kLineWidthTypePedal";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeSlurMiddle:
-      result = "kLineWidthTypeSlurMiddle";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeSlurTip:
-      result = "kLineWidthTypeSlurTip";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeStaff:
-      result = "kLineWidthTypeStaff";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeStem:
-      result = "kLineWidthTypeStem";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeTieMiddle:
-      result = "kLineWidthTypeTieMiddle";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeTieTip:
-      result = "kLineWidthTypeTieTip";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeTupletBracket:
-      result = "kLineWidthTypeTupletBracket";
-      break;
-    case msrLineWidthTypeKind::kLineWidthTypeWedge:
-      result = "kLineWidthTypeWedge";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrLineWidthTypeKind& elt)
-{
-  os << msrLineWidthTypeKindAsString (elt);
-  return os;
-}
-
 string msrLineWidth::asString () const
 {
   stringstream s;
@@ -1488,35 +1625,6 @@ void msrNoteSize::acceptOut (basevisitor* v)
 void msrNoteSize::browseData (basevisitor* v)
 {}
 
-string msrNoteSizeTypeKindAsString (
-  msrNoteSizeTypeKind noteSizeTypeKind)
-{
-  string result;
-
-  switch (noteSizeTypeKind) {
-    case msrNoteSizeTypeKind::kNote_NO_SizeType:
-      result = "kNote_NO_SizeType";
-      break;
-    case msrNoteSizeTypeKind::kNoteSizeTypeCue:
-      result = "kNoteSizeTypeCue";
-      break;
-    case msrNoteSizeTypeKind::kNoteSizeTypeGrace:
-      result = "kNoteSizeTypeGrace";
-      break;
-    case msrNoteSizeTypeKind::kNoteSizeTypeLarge:
-      result = "kNoteSizeTypeLarge";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrNoteSizeTypeKind& elt)
-{
-  os << msrNoteSizeTypeKindAsString (elt);
-  return os;
-}
-
 string msrNoteSize::asString () const
 {
   stringstream s;
@@ -1650,32 +1758,6 @@ void msrDistance::acceptOut (basevisitor* v)
 
 void msrDistance::browseData (basevisitor* v)
 {}
-
-string msrDistanceTypeKindAsString (
-  msrDistanceTypeKind distanceTypeKind)
-{
-  string result;
-
-  switch (distanceTypeKind) {
-    case msrDistanceTypeKind::kDistanceType_NO_:
-      result = "kDistanceType_NO_";
-      break;
-    case msrDistanceTypeKind::kDistanceTypeHyphen:
-      result = "kDistanceTypeHyphen";
-      break;
-    case msrDistanceTypeKind::kDistanceTypeBeam:
-      result = "kDistanceTypeBeam";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrDistanceTypeKind& elt)
-{
-  os << msrDistanceTypeKindAsString (elt);
-  return os;
-}
 
 string msrDistance::asString () const
 {
@@ -1811,68 +1893,6 @@ void msrGlyph::acceptOut (basevisitor* v)
 void msrGlyph::browseData (basevisitor* v)
 {}
 
-string msrGlyphTypeKindAsString (
-  msrGlyphTypeKind glyphTypeKind)
-{
-  string result;
-
-  switch (glyphTypeKind) {
-    case msrGlyphTypeKind::kGlyphType_NO_:
-      result = "kGlyphType_NO_";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeQuarterRest:
-      result = "kGlyphTypeQuarterRest";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeGClefOttavaBassa:
-      result = "kGlyphTypeGClefOttavaBassa";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeCClef:
-      result = "kGlyphTypeCClef";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeFClef:
-      result = "kGlyphTypeFClef";
-      break;
-    case msrGlyphTypeKind::kGlyphTypePercussionClef:
-      result = "msrClefKind::kGlyphTypePercussionClef";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp8:
-      result = "kGlyphTypeOctaveShiftUp8";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown8:
-      result = "kGlyphTypeOctaveShiftDown8";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue8:
-      result = "kGlyphTypeOctaveShiftContinue8";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown15:
-      result = "kGlyphTypeOctaveShiftDown15";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp15:
-      result = "kGlyphTypeOctaveShiftUp15";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue15:
-      result = "kGlyphTypeOctaveShiftContinue15";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeOctaveShiftDown22:
-      result = "kGlyphTypeOctaveShiftDown22";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeOctaveShiftUp22:
-      result = "kGlyphTypeOctaveShiftUp22";
-      break;
-    case msrGlyphTypeKind::kGlyphTypeOctaveShiftContinue22:
-      result = "kGlyphTypeOctaveShiftContinue22";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrGlyphTypeKind& elt)
-{
-  os << msrGlyphTypeKindAsString (elt);
-  return os;
-}
-
 string msrGlyph::asString () const
 {
   stringstream s;
@@ -2006,20 +2026,6 @@ void msrOtherAppearance::acceptOut (basevisitor* v)
 
 void msrOtherAppearance::browseData (basevisitor* v)
 {}
-
-string msrOtherAppearanceTypeKindAsString (
-  msrOtherAppearanceTypeKind otherAppearanceTypeKind)
-{
-  string result;
-
-  switch (otherAppearanceTypeKind) {
-    case msrOtherAppearanceTypeKind::kOtherAppearanceType_NO_:
-      result = "kOtherAppearanceType_NO_";
-      break;
-  } // switch
-
-  return result;
-}
 
 string msrOtherAppearance::asString () const
 {

@@ -24,7 +24,16 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrBarChecks.h"
+#include "msrBarLines.h"
+#include "msrBarNumberChecks.h"
+#include "msrBreaks.h"
+#include "msrDoubleTremolos.h"
+#include "msrOctaveShifts.h"
+#include "msrRehearsalMarks.h"
 #include "msrSegments.h"
+#include "msrTempos.h"
+#include "msrVoiceStaffChanges.h"
 
 #include "oahOah.h"
 
@@ -500,7 +509,7 @@ S_msrMeasure msrSegment::createAMeasureAndAppendItToSegment (
       fSegmentUpLinkToVoice->getVoiceName () <<
       "\"" <<
       ", measureFirstInSegmentKind: " <<
-      msrmsrMeasureFirstInSegmentKindAsString (
+      msrMeasureFirstInSegmentKindAsString (
         measureFirstInSegmentKind) <<
       ", line " << inputLineNumber <<
       endl;
@@ -1521,7 +1530,7 @@ void msrSegment::appendOctaveShiftToSegment (
   if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
     gLogStream <<
       "Appending octave shift '" <<
-      octaveShift->msrOctaveShiftKindAsString () <<
+      octaveShift->getOctaveShiftKind () <<
       "' to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<
@@ -1550,7 +1559,7 @@ void msrSegment::appendScordaturaToSegment (
   if (gGlobalTracingOahGroup->getTraceScordaturas ()) {
     gLogStream <<
       "Appending scordatura XXX " <<
-  // JMI ???    scordatura->msrOctaveShiftKindAsString () <<
+  // JMI ???    scordatura->getOctaveShiftKind () <<
       " to segment " << asString () <<
       " in voice \"" <<
       fSegmentUpLinkToVoice->getVoiceName () <<

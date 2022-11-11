@@ -12,7 +12,8 @@
 #include <iomanip>      // setw, setprecision, ...
 
 #include <regex>
-#include "oahWae.h"
+
+#include "visitor.h"
 
 #include "enableHarmoniesExtraOahIfDesired.h"
 #ifdef EXTRA_OAH_IS_ENABLED
@@ -42,6 +43,8 @@
 #include "msr2lpsrOah.h"
 #include "lpsrOah.h"
 #include "lpsr2lilypondOah.h"
+
+#include "oahWae.h"
 
 #include "oahEarlyOptions.h"
 

@@ -23,8 +23,16 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrBarChecks.h"
+#include "msrBarLines.h"
+#include "msrBarNumberChecks.h"
+#include "msrBreaks.h"
+#include "msrDoubleTremolos.h"
 #include "msrHiddenMeasureAndBarLines.h"
 #include "msrMeasures.h"
+#include "msrRehearsalMarks.h"
+#include "msrTempos.h"
+#include "msrVoiceStaffChanges.h"
 
 #include "oahOah.h"
 

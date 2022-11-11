@@ -15,6 +15,8 @@
 
 #include "mfStringsHandling.h"
 
+#include "msrTempos.h"
+
 #include "oahOah.h"
 #include "msrOah.h"
 

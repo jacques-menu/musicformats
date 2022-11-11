@@ -43,7 +43,7 @@ ostream& operator << (ostream& os, const msrRepeatEndingKind& elt)
   return os;
 }
 
-string msrRepeat::msrRepeatExplicitStartKindAsString (
+string msrRepeatExplicitStartKindAsString (
   msrRepeatExplicitStartKind repeatExplicitStartKind)
 {
   string result;
@@ -66,22 +66,22 @@ ostream& operator << (ostream& os, const msrRepeatExplicitStartKind& elt)
   return os;
 }
 
-string msrRepeat::repeatBuildPhaseKindAsString (
+string repeatBuildPhaseKindAsString (
   msrRepeatBuildPhaseKind repeatBuildPhaseKind)
 {
   string result;
 
   switch (repeatBuildPhaseKind) {
-    case msrRepeat::kRepeatBuildPhaseJustCreated:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
       result = "kRepeatBuildPhaseJustCreated";
       break;
-    case msrRepeat::kRepeatBuildPhaseInCommonPart:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
       result = "kRepeatBuildPhaseInCommonPart";
       break;
-    case msrRepeat::kRepeatBuildPhaseInEndings:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
       result = "kRepeatBuildPhaseInEndings";
       break;
-    case msrRepeat::kRepeatBuildPhaseCompleted:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
       result = "kRepeatBuildPhaseCompleted";
       break;
   } // switch

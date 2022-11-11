@@ -27,6 +27,28 @@
 
 #include "msr2lpsrComponent.h"
 
+#include "msrAfterGraceNotes.h"
+#include "msrArticulations.h"
+#include "msrBarChecks.h"
+#include "msrBarLines.h"
+#include "msrBarNumberChecks.h"
+#include "msrBreaks.h"
+#include "msrDoubleTremolos.h"
+#include "msrGlissandos.h"
+#include "msrRehearsalMarks.h"
+#include "msrSlides.h"
+#include "msrTablatures.h"
+#include "msrTechnicals.h"
+#include "msrTempos.h"
+#include "msrVoiceStaffChanges.h"
+
+#include "lpsrBookBlockElements.h"
+#include "lpsrContexts.h"
+#include "lpsrHeaders.h"
+#include "lpsrParts.h"
+#include "lpsrStaves.h"
+#include "lpsrScores.h"
+
 #include "lpsrInterface.h"
 
 #include "msr2lpsrTranslator.h"

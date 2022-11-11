@@ -89,7 +89,7 @@ msrFrameNote::msrFrameNote (
 msrFrameNote::~msrFrameNote ()
 {}
 
-string msrFrameNote::msrBarreTypeKindAsString (
+string msrBarreTypeKindAsString (
   msrBarreTypeKind barreTypeKind)
 {
   string result;

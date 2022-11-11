@@ -27,7 +27,12 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrArticulations.h"
+#include "msrDalSegnos.h"
+#include "msrGlissandos.h"
 #include "msrPitchesNames.h"
+#include "msrSlides.h"
+#include "msrTechnicals.h"
 
 #include "msrNotes.h"
 

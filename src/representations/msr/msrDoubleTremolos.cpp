@@ -43,32 +43,32 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrTremoloTypeKindAsString (
-  msrTremoloTypeKind tremoloTypeKind)
+string msrDoubleTremoloTypeKindAsString (
+  msrDoubleTremoloTypeKind tremoloTypeKind)
 {
   string result;
 
   switch (tremoloTypeKind) {
-    case msrTremoloTypeKind::kTremoloType_NO_:
-      result = "***kTremoloType_NO_***";
+    case msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_:
+      result = "***kDoubleTremoloType_NO_***";
       break;
-    case msrTremoloTypeKind::kTremoloTypeSingle:
-      result = "kTremoloTypeSingle";
+    case msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle:
+      result = "kDoubleTremoloTypeSingle";
       break;
-    case msrTremoloTypeKind::kTremoloTypeStart:
-      result = "kTremoloTypeStart";
+    case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart:
+      result = "kDoubleTremoloTypeStart";
       break;
-    case msrTremoloTypeKind::kTremoloTypeStop:
-      result = "kTremoloTypeStop";
+    case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop:
+      result = "kDoubleTremoloTypeStop";
       break;
   } // switch
 
   return result;
 }
 
-ostream& operator << (ostream& os, const msrTremoloTypeKind& elt)
+ostream& operator << (ostream& os, const msrDoubleTremoloTypeKind& elt)
 {
-  os << msrTremoloTypeKindAsString (elt);
+  os << msrDoubleTremoloTypeKindAsString (elt);
   return os;
 }
 
@@ -77,7 +77,7 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
   int                  inputLineNumber,
   S_msrMeasure         upLinkToMeasure,
   msrDoubleTremoloKind doubleTremoloKind,
-  msrTremoloTypeKind   doubleTremoloTypeKind,
+  msrDoubleTremoloTypeKind   doubleDoubleTremoloTypeKind,
   int                  doubleTremoloMarksNumber,
   msrPlacementKind     doubleTremoloPlacementKind)
 {
@@ -86,7 +86,7 @@ S_msrDoubleTremolo msrDoubleTremolo::create (
       inputLineNumber,
       upLinkToMeasure,
       doubleTremoloKind,
-      doubleTremoloTypeKind,
+      doubleDoubleTremoloTypeKind,
       doubleTremoloMarksNumber,
       doubleTremoloPlacementKind);
   assert (o != nullptr);
@@ -97,7 +97,7 @@ msrDoubleTremolo::msrDoubleTremolo (
   int                  inputLineNumber,
   S_msrMeasure         upLinkToMeasure,
   msrDoubleTremoloKind doubleTremoloKind,
-  msrTremoloTypeKind   doubleTremoloTypeKind,
+  msrDoubleTremoloTypeKind   doubleDoubleTremoloTypeKind,
   int                  doubleTremoloMarksNumber,
   msrPlacementKind     doubleTremoloPlacementKind)
     : msrMeasureElement (
@@ -105,7 +105,7 @@ msrDoubleTremolo::msrDoubleTremolo (
         upLinkToMeasure)
 {
   fDoubleTremoloKind          = doubleTremoloKind;
-  fDoubleTremoloTypeKind      = doubleTremoloTypeKind;
+  fDoubleDoubleTremoloTypeKind      = doubleDoubleTremoloTypeKind;
   fDoubleTremoloMarksNumber   = doubleTremoloMarksNumber;
   fDoubleTremoloPlacementKind = doubleTremoloPlacementKind;
 
@@ -143,7 +143,7 @@ S_msrDoubleTremolo msrDoubleTremolo::createDoubleTremoloNewbornClone (
         fInputLineNumber,
         nullptr, // will be set when double tremolo is appended to a measure JMI v0.9.66 PIM
         fDoubleTremoloKind,
-        fDoubleTremoloTypeKind,
+        fDoubleDoubleTremoloTypeKind,
         fDoubleTremoloMarksNumber,
         fDoubleTremoloPlacementKind);
 
@@ -704,7 +704,7 @@ string msrDoubleTremolo::asShortString () const
 
   s <<
     "[DoubleTremolo" <<
-    ", fDoubleTremoloTypeKind: " << fDoubleTremoloTypeKind <<
+    ", fDoubleDoubleTremoloTypeKind: " << fDoubleDoubleTremoloTypeKind <<
     ", fDoubleTremoloMarksNumber: " <<
     mfSingularOrPlural (
       fDoubleTremoloMarksNumber, "mark", "marks") <<
@@ -721,7 +721,7 @@ string msrDoubleTremolo::asString () const
 
   s <<
     "[DoubleTremolo " <<
-    ", fDoubleTremoloTypeKind: " << fDoubleTremoloTypeKind <<
+    ", fDoubleDoubleTremoloTypeKind: " << fDoubleDoubleTremoloTypeKind <<
     ", fDoubleTremoloMarksNumber: " <<fDoubleTremoloMarksNumber <<
     ", placement: " << doubleTremoloPlacementKindAsString () <<
     ",fDoubleTremoloSoundingWholeNotes: " << fDoubleTremoloSoundingWholeNotes <<
@@ -818,7 +818,7 @@ void msrDoubleTremolo::print (ostream& os) const
 {
   os <<
     "[DoubleTremolo" <<
-    ", " << msrTremoloTypeKindAsString (fDoubleTremoloTypeKind) <<
+    ", " << msrDoubleTremoloTypeKindAsString (fDoubleDoubleTremoloTypeKind) <<
     ", on " << msrDoubleTremoloKindAsString (fDoubleTremoloKind) <<
     ", line " << fInputLineNumber <<
     endl;

@@ -16,6 +16,8 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
+#include "lpsrScores.h"
+
 #include "wae.h"
 #include "msr2lpsrWae.h"
 #include "lpsr2lilypondWae.h"

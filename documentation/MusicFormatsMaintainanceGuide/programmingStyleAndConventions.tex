@@ -3,6 +3,20 @@
 % -------------------------------------------------------------------------
 \chapter{Programming style and conventions}
 % -------------------------------------------------------------------------
+/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:3374:23: error: member access into incomplete type 'MusicFormats::msrTempo'
+      ", line " << elt->getInputLineNumber () <<
+                      ^
+/Users/jacquesmenu/musicformats-git-dev/src/representations/msr/msrTypesForwardDeclarations.h:307:9: note: forward declaration of 'MusicFormats::msrTempo'
+class   msrTempo;
+        ^
+
+
+/Users/jacquesmenu/musicformats-git-dev/src/passes/msr2lpsr/msr2lpsrTranslator.cpp:5319:7: error: incomplete type 'MusicFormats::msrAfterGraceNotesGroup' named in nested name specifier
+      msrAfterGraceNotesGroup::create (
+      ^~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/jacquesmenu/musicformats-git-dev/src/representations/msr/msrTypesForwardDeclarations.h:31:9: note: forward declaration of 'MusicFormats::msrAfterGraceNotesGroup'
+class   msrAfterGraceNotesGroup;
+        ^
 
 
 % -------------------------------------------------------------------------

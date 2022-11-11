@@ -14,6 +14,8 @@
 
 #include "msrElements.h"
 
+#include "msrPlacements.h"
+
 
 namespace MusicFormats
 {

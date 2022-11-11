@@ -12,17 +12,17 @@
 #ifndef ___lpsrInterface___
 #define ___lpsrInterface___
 
-// #include "lpsr.h"
+#include "msrTypesForwardDeclarations.h"
+#include "lpsrTypesForwardDeclarations.h"
+
+#include "msrOah.h"
+#include "lpsrOah.h"
 
 
 namespace MusicFormats
 {
 
-// books
-// ------------------------------------------------------
-
-// scores
-// ------------------------------------------------------
+//_______________________________________________________________________________
 S_msrScore createScore ();
 
 //_______________________________________________________________________________
@@ -38,18 +38,6 @@ EXP void displayLpsrScoreFull (
   S_lpsrOahGroup    lpsrOpts,
   const string&     passDescription);
 
-
-// parts
-// ------------------------------------------------------
-
-// staves
-// ------------------------------------------------------
-
-// voices
-// ------------------------------------------------------
-
-// measures
-// ------------------------------------------------------
 
 }
 

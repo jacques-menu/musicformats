@@ -50,7 +50,7 @@ EXP string msrTupletInKindAsString (
 
   switch (tupletInKind) {
     case msrTupletInKind::kTupletIn_NO_:
-      result = "***kTupletIn_NO_***";
+      result = "kTupletIn_NO_";
       break;
     case msrTupletInKind::kTupletInMeasure:
       result = "kTupletInMeasure";
@@ -69,38 +69,133 @@ ostream& operator << (ostream& os, const msrTupletInKind& elt)
   return os;
 }
 
-// tuplets
-//______________________________________________________________________________
-
-enum class msrTupletInKind {
-  kTupletIn_NO_,
-  kTupletInMeasure,
-  kTupletInTuplet
-};
-
-EXP string msrTupletKindAsString (
-  msrTupletInKind tupletKind)
+string msrTupletTypeKindAsString (
+  msrTupletTypeKind tupletTypeKind)
 {
-  stringstream s;
+  string result;
 
-  switch (tieKind) {
-    case msrTieKind::kTupletIn_NO_:
-      s << "kTupletIn_NO_";
+  switch (tupletTypeKind) {
+    case msrTupletTypeKind::kTupletTypeNone:
+      result = "kTupletTypeNone";
       break;
-    case msrTieKind::kTupletInMeasure:
-      s << "kTupletInMeasure";
+    case msrTupletTypeKind::kTupletTypeStart:
+      result = "kTupletTypeStart";
       break;
-    case msrTieKind::kTupletInTuplet:
-      s << "kTupletInTuplet";
+    case msrTupletTypeKind::kTupletTypeContinue:
+      result = "kTupletTypeContinue";
+      break;
+    case msrTupletTypeKind::kTupletTypeStop:
+      result = "kTupletTypeStop";
+      break;
+    case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
+      result = "kTupletTypeStartAndStopInARow";
       break;
   } // switch
 
-  return s.str ();
+  return result;
 }
 
-ostream& operator<< (ostream& os, const msrTupletInKind& elt)
+ostream& operator << (ostream& os, const msrTupletTypeKind& elt)
 {
-  os << msrTupletKindAsString (elt);
+  os << msrTupletTypeKindAsString (elt);
+  return os;
+}
+
+string msrTupletBracketKindAsString (
+  msrTupletBracketKind tupletBracketKind)
+{
+  string result;
+
+  switch (tupletBracketKind) {
+    case msrTupletBracketKind::kTupletBracketYes:
+      result = "kTupletBracketYes";
+      break;
+    case msrTupletBracketKind::kTupletBracketNo:
+      result = "kTupletBracketNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTupletBracketKind& elt)
+{
+  os << msrTupletBracketKindAsString (elt);
+  return os;
+}
+
+string msrTupletLineShapeKindAsString (
+  msrTupletLineShapeKind tupletLineShapeKind)
+{
+  string result;
+
+  switch (tupletLineShapeKind) {
+    case msrTupletLineShapeKind::kTupletLineShapeStraight:
+      result = "kTupletLineShapeStraight";
+      break;
+    case msrTupletLineShapeKind::kTupletLineShapeCurved:
+      result = "kTupletLineShapeCurved";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTupletLineShapeKind& elt)
+{
+  os << msrTupletLineShapeKindAsString (elt);
+  return os;
+}
+
+string msrTupletShowNumberKindAsString (
+  msrTupletShowNumberKind tupletShowNumberKind)
+{
+  string result;
+
+  switch (tupletShowNumberKind) {
+    case msrTupletShowNumberKind::kTupletShowNumberActual:
+      result = "kTupletShowNumberActual";
+      break;
+    case msrTupletShowNumberKind::kTupletShowNumberBoth:
+      result = "kTupletShowNumberBoth";
+      break;
+    case msrTupletShowNumberKind::kTupletShowNumberNone:
+      result = "kTupletShowNumberNone";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTupletShowNumberKind& elt)
+{
+  os << msrTupletShowNumberKindAsString (elt);
+  return os;
+}
+
+string msrTupletShowTypeKindAsString (
+  msrTupletShowTypeKind tupletShowTypeKind)
+{
+  string result;
+
+  switch (tupletShowTypeKind) {
+    case msrTupletShowTypeKind::kTupletShowTypeActual:
+      result = "kTupletShowTypeActual";
+      break;
+    case msrTupletShowTypeKind::kTupletShowTypeBoth:
+      result = "kTupletShowTypeBoth";
+      break;
+    case msrTupletShowTypeKind::kTupletShowTypeNone:
+      result = "kTupletShowTypeNone";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTupletShowTypeKind& elt)
+{
+  os << msrTupletShowTypeKindAsString (elt);
   return os;
 }
 
@@ -308,219 +403,6 @@ S_msrTuplet msrTuplet::fetchTupletUpLinkToTuplet () const
   } // switch
 
   return result;
-}
-
-string msrTupletTypeKindAsString (
-  msrTupletTypeKind tupletTypeKind)
-{
-  string result;
-
-  switch (tupletTypeKind) {
-    case msrTupletTypeKind::kTupletTypeNone:
-      result = "kTupletTypeNone";
-      break;
-    case msrTupletTypeKind::kTupletTypeStart:
-      result = "kTupletTypeStart";
-      break;
-    case msrTupletTypeKind::kTupletTypeContinue:
-      result = "kTupletTypeContinue";
-      break;
-    case msrTupletTypeKind::kTupletTypeStop:
-      result = "kTupletTypeStop";
-      break;
-    case msrTupletTypeKind::kTupletTypeStartAndStopInARow:
-      result = "kTupletTypeStartAndStopInARow";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrTupletTypeKind& elt)
-{
-  os << msrTupletTypeKindAsString (elt);
-  return os;
-}
-
-string msrTupletBracketKindAsString (
-  msrTupletBracketKind tupletBracketKind)
-{
-  string result;
-
-  switch (tupletBracketKind) {
-    case msrTupletBracketKind::kTupletBracketYes:
-      result = "kTupletBracketYes";
-      break;
-    case msrTupletBracketKind::kTupletBracketNo:
-      result = "kTupletBracketNo";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrTupletBracketKind& elt)
-{
-  os << msrTupletBracketKindAsString (elt);
-  return os;
-}
-
-string msrTupletLineShapeKindAsString (
-  msrTupletLineShapeKind tupletLineShapeKind)
-{
-  string result;
-
-  switch (tupletLineShapeKind) {
-    case msrTupletLineShapeKind::kTupletLineShapeStraight:
-      result = "kTupletLineShapeStraight";
-      break;
-    case msrTupletLineShapeKind::kTupletLineShapeCurved:
-      result = "kTupletLineShapeCurved";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrTupletLineShapeKind& elt)
-{
-  os << msrTupletLineShapeKindAsString (elt);
-  return os;
-}
-
-string msrTupletShowNumberKindAsString (
-  msrTupletShowNumberKind tupletShowNumberKind)
-{
-  string result;
-
-  switch (tupletShowNumberKind) {
-    case msrTupletShowNumberKind::kTupletShowNumberActual:
-      result = "kTupletShowNumberActual";
-      break;
-    case msrTupletShowNumberKind::kTupletShowNumberBoth:
-      result = "kTupletShowNumberBoth";
-      break;
-    case msrTupletShowNumberKind::kTupletShowNumberNone:
-      result = "kTupletShowNumberNone";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrTupletShowNumberKind& elt)
-{
-  os << msrTupletShowNumberKindAsString (elt);
-  return os;
-}
-
-string msrTupletShowTypeKindAsString (
-  msrTupletShowTypeKind tupletShowTypeKind)
-{
-  string result;
-
-  switch (tupletShowTypeKind) {
-    case msrTupletShowTypeKind::kTupletShowTypeActual:
-      result = "kTupletShowTypeActual";
-      break;
-    case msrTupletShowTypeKind::kTupletShowTypeBoth:
-      result = "kTupletShowTypeBoth";
-      break;
-    case msrTupletShowTypeKind::kTupletShowTypeNone:
-      result = "kTupletShowTypeNone";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrTupletShowTypeKind& elt)
-{
-  os << msrTupletShowTypeKindAsString (elt);
-  return os;
-}
-
-// tuplet factors
-//______________________________________________________________________________
-msrTupletFactor::msrTupletFactor ()
-{
-  fTupletActualNotes = -1;
-  fTupletNormalNotes = -1;
-}
-
-msrTupletFactor::msrTupletFactor (
-  int tupletActualNotes,
-  int tupletNormalNotes)
-{
-  fTupletActualNotes = tupletActualNotes;
-  fTupletNormalNotes = tupletNormalNotes;
-}
-
-msrTupletFactor::msrTupletFactor (
-  const Rational& rationalTupletFactor)
-{
-  fTupletActualNotes = rationalTupletFactor.getNumerator ();
-  fTupletNormalNotes = rationalTupletFactor.getDenominator ();
-}
-
-msrTupletFactor::~msrTupletFactor ()
-{}
-
-msrTupletFactor msrTupletFactor::inverse () const
-{
-  msrTupletFactor result (
-    fTupletNormalNotes, fTupletActualNotes);
-
-  return result;
-}
-
-string msrTupletFactor::asString () const
-{
-  stringstream s;
-
-  s <<
-    "[TupletFactor" <<
-    ", tupletActualNotes: " << fTupletActualNotes <<
-    ", tupletNormalNotes: " << fTupletNormalNotes <<
-    ']';
-
-  return s.str ();
-}
-
-string msrTupletFactor::asFractionString () const
-{
-  stringstream s;
-
-  s << fTupletActualNotes << '/' << fTupletNormalNotes;
-
-  return s.str ();
-}
-
-void msrTupletFactor::print (ostream& os) const
-{
-  os <<
-    "TupletFactor" <<
-    endl;
-
-  ++gIndenter;
-
-  const int fieldWidth = 11;
-
-  os << left <<
-    setw (fieldWidth) <<
-    "fTupletActualNotes" << " : " << fTupletActualNotes <<
-    endl <<
-    setw (fieldWidth) <<
-    "fTupletNormalNotes" << " : " << fTupletNormalNotes <<
-    endl;
-
-  --gIndenter;
-};
-
-ostream& operator << (ostream& os, const msrTupletFactor& elt)
-{
-  elt.print (os);
-  return os;
 }
 
 //______________________________________________________________________________
@@ -999,7 +881,8 @@ if (false) { // JMI
           measure);
 
       note->
-        setNoteMeasurePosition (
+//         setNoteMeasurePosition (
+        setMeasureElementMeasurePosition (
           measure,
           currentPosition,
           "msrTuplet::setTupletMembersMeasurePositions()");

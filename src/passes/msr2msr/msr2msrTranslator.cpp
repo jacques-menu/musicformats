@@ -19,6 +19,21 @@
 #include "mfServiceRunData.h"
 #include "mfStringsHandling.h"
 
+#include "msrAfterGraceNotes.h"
+#include "msrArticulations.h"
+#include "msrBarChecks.h"
+#include "msrBarLines.h"
+#include "msrBarNumberChecks.h"
+#include "msrBreaks.h"
+#include "msrDoubleTremolos.h"
+#include "msrGlissandos.h"
+#include "msrRehearsalMarks.h"
+#include "msrSlides.h"
+#include "msrTablatures.h"
+#include "msrTechnicals.h"
+#include "msrTempos.h"
+#include "msrVoiceStaffChanges.h"
+
 #include "msr2msrWae.h"
 
 #include "enableTracingIfDesired.h"
