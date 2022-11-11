@@ -13,10 +13,11 @@
 #include <fstream>
 
 #include "mfAssert.h"
-
 #include "mfServiceRunData.h"
-
 #include "mfTiming.h"
+
+#include "msr2namesVisitor.h"
+#include "msr2summaryVisitor.h"
 
 #include "msrWae.h"
 

@@ -11,6 +11,9 @@
 
 #include <iomanip>      // setw, setprecision, ...
 
+// libmusicxml2
+#include "visitor.h"
+
 // WAE
 #include "oahWae.h"
 
@@ -417,7 +420,7 @@ ostream& operator << (ostream& os, const S_mfslInterpreterInsiderHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

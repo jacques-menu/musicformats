@@ -14,13 +14,14 @@
 #include "mfAssert.h"
 #include "mfTiming.h"
 
+#include "lpsrScores.h"
+
 #include "lpsr2lilypondWae.h"
 
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
 #endif
-
 
 #include "lpsr2lilypondOah.h"
 

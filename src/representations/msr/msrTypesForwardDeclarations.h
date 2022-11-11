@@ -12,19 +12,39 @@
 #ifndef ___msrTypesForwardDeclarations___
 #define ___msrTypesForwardDeclarations___
 
+#include "smartpointer.h"
+
+
+using namespace MusicXML2;
 
 namespace MusicFormats
 {
 
+/*
+#include "msrTypesForwardDeclarations.h"
+*/
+
 //______________________________________________________________________________
 class   msrAccordionRegistration;
 typedef SMARTP<msrAccordionRegistration> S_msrAccordionRegistration;
+
+class   msrAfterGraceNotesGroup;
+typedef SMARTP<msrAfterGraceNotesGroup> S_msrAfterGraceNotesGroup;
+
+class   msrAfterGraceNotesGroupContents;
+typedef SMARTP<msrAfterGraceNotesGroupContents> S_msrAfterGraceNotesGroupContents;
+
+class   msrArpeggiato;
+typedef SMARTP<msrArpeggiato> S_msrArpeggiato;
 
 class   msrArticulation;
 typedef SMARTP<msrArticulation> S_msrArticulation;
 
 class   msrBarCheck;
 typedef SMARTP<msrBarCheck> S_msrBarCheck;
+
+class   msrBassFigure;
+typedef SMARTP<msrBassFigure> S_msrBassFigure;
 
 class   msrBarLine;
 typedef SMARTP<msrBarLine> S_msrBarLine;
@@ -40,6 +60,9 @@ typedef SMARTP<msrBeatRepeat> S_msrBeatRepeat;
 
 class   msrBook;
 typedef SMARTP<msrBook> S_msrBook;
+
+class   msrBookElement;
+typedef SMARTP<msrBookElement> S_msrBookElement;
 
 class   msrChord;
 typedef SMARTP<msrChord> S_msrChord;
@@ -58,6 +81,18 @@ typedef SMARTP<msrClef> S_msrClef;
 
 class   msrCoda;
 typedef SMARTP<msrCoda> S_msrCoda;
+
+class   msrColorAlphaRGB;
+typedef SMARTP<msrColorAlphaRGB> S_msrColorAlphaRGB;
+
+class   msrColorRGB;
+typedef SMARTP<msrColorRGB> S_msrColorRGB;
+
+class   msrCredit;
+typedef SMARTP<msrCredit> S_msrCredit;
+
+class   msrCreditWords;
+typedef SMARTP<msrCreditWords> S_msrCreditWords;
 
 class   msrCrescDecresc;
 typedef SMARTP<msrCrescDecresc> S_msrCrescDecresc;
@@ -80,8 +115,17 @@ typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
 class   msrDynamic;
 typedef SMARTP<msrDynamic> S_msrDynamic;
 
+class   msrDuration;
+typedef SMARTP<msrDuration> S_msrDuration;
+
 class   msrEyeGlasses;
 typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;
+
+class   msrFermata;
+typedef SMARTP<msrFermata> S_msrFermata;
+
+class   msrFrameNote;
+typedef SMARTP<msrFrameNote> S_msrFrameNote;
 
 class   msrEyeGlasses;
 typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;
@@ -101,11 +145,14 @@ typedef SMARTP<msrGraceNotesGroup> S_msrGraceNotesGroup;
 class   msrHarmony;
 typedef SMARTP<msrHarmony> S_msrHarmony;
 
-class   msrHarmony;
-typedef SMARTP<msrHarmony> S_msrHarmony;
+class   msrHarmonyDegree;
+typedef SMARTP<msrHarmonyDegree> S_msrHarmonyDegree;
 
 class   msrHarpPedalsTuning;
 typedef SMARTP<msrHarpPedalsTuning> S_msrHarpPedalsTuning;
+
+class   msrIdentification;
+typedef SMARTP<msrIdentification> S_msrIdentification;
 
 class   msrKey;
 typedef SMARTP<msrKey> S_msrKey;
@@ -125,17 +172,29 @@ typedef SMARTP<msrLineBreak> S_msrLineBreak;
 class   msrMeasure;
 typedef SMARTP<msrMeasure> S_msrMeasure;
 
+class   msrMeasureElement;
+typedef SMARTP<msrMeasureElement> S_msrMeasureElement;
+
 class   msrMeasureRepeat;
 typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
 
 class   msrMeasureRepeat;
 typedef SMARTP<msrMeasureRepeat> S_msrMeasureRepeat;
+
+class   msrMeasureRepeatPattern;
+typedef SMARTP<msrMeasureRepeatPattern> S_msrMeasureRepeatPattern;
+
+class   msrMeasureRepeatReplicas;
+typedef SMARTP<msrMeasureRepeatReplicas> S_msrMeasureRepeatReplicas;
 
 class   msrMeasuresSlicesSequence;
 typedef SMARTP<msrMeasuresSlicesSequence> S_msrMeasuresSlicesSequence;
 
 class   msrMultipleFullBarRests;
 typedef SMARTP<msrMultipleFullBarRests> S_msrMultipleFullBarRests;
+
+class   msrNonArpeggiato;
+typedef SMARTP<msrNonArpeggiato> S_msrNonArpeggiato;
 
 class   msrNote;
 typedef SMARTP<msrNote> S_msrNote;
@@ -185,6 +244,9 @@ typedef SMARTP<msrRepeatDescr> S_msrRepeatDescr;
 class   msrRepeatEnding;
 typedef SMARTP<msrRepeatEnding> S_msrRepeatEnding;
 
+class   msrScaling;
+typedef SMARTP<msrScaling> S_msrScaling;
+
 class   msrScordatura;
 typedef SMARTP<msrScordatura> S_msrScordatura;
 
@@ -199,6 +261,9 @@ typedef SMARTP<msrSegno> S_msrSegno;
 
 class   msrSegno;
 typedef SMARTP<msrSegno> S_msrSegno;
+
+class   msrSemiTonesPitchAndOctave;
+typedef SMARTP<msrSemiTonesPitchAndOctave> S_msrSemiTonesPitchAndOctave;
 
 class   msrSingleTremolo;
 typedef SMARTP<msrSingleTremolo> S_msrSingleTremolo;
@@ -251,6 +316,21 @@ typedef SMARTP<msrTempo> S_msrTempo;
 class   msrTie;
 typedef SMARTP<msrTie> S_msrTie;
 
+class   msrStaff;
+typedef SMARTP<msrStaff> S_msrStaff;
+
+class   msrStaffTuning;
+typedef SMARTP<msrStaffTuning> S_msrStaffTuning;
+
+class   msrTempoNote;
+typedef SMARTP<msrTempoNote> S_msrTempoNote;
+
+class   msrTempoNotesRelationshipElements;
+typedef SMARTP<msrTempoNotesRelationshipElements> S_msrTempoNotesRelationshipElements;
+
+class   msrTempoTuplet;
+typedef SMARTP<msrTempoTuplet> S_msrTempoTuplet;
+
 class   msrTimeSignature;
 typedef SMARTP<msrTimeSignature> S_msrTimeSignature;
 
@@ -265,6 +345,9 @@ typedef SMARTP<msrTuplet> S_msrTuplet;
 
 class   msrVoice;
 typedef SMARTP<msrVoice> S_msrVoice;
+
+class   msrVoiceElement;
+typedef SMARTP<msrVoiceElement> S_msrVoiceElement;
 
 class   msrVoiceStaffChange;
 typedef SMARTP<msrVoiceStaffChange> S_msrVoiceStaffChange;

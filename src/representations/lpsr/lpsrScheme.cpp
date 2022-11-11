@@ -27,6 +27,56 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string lpsrCommentedKindAsString (
+  lpsrCommentedKind commentedKind)
+{
+  string result;
+
+  switch (commentedKind) {
+    case lpsrCommentedKind::kCommentedYes:
+      result = "kCommentedYes";
+      break;
+    case lpsrCommentedKind::kCommentedNo:
+      result = "kCommentedNo";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const lpsrCommentedKind& elt)
+{
+  os << lpsrCommentedKindAsString (elt);
+  return os;
+}
+
+string lpsrEndOfLineKindAsString (
+  lpsrEndOfLineKind endOfLineKind)
+{
+  string result;
+
+  switch (endOfLineKind) {
+    case lpsrEndOfLineKind::kEndOfLineOnce:
+      result = "kEndOfLineOnce";
+      break;
+    case lpsrEndOfLineKind::kEndOfLineTwice:
+      result = "kEndOfLineTwice";
+      break;
+    case lpsrEndOfLineKind::kEndOfLineNone:
+      result = "kEndOfLineNone";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const lpsrEndOfLineKind& elt)
+{
+  os << lpsrEndOfLineKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_lpsrSchemeVariable lpsrSchemeVariable::create (
   int               inputLineNumber,
   lpsrCommentedKind commentedKind,
@@ -119,43 +169,6 @@ void lpsrSchemeVariable::acceptOut (basevisitor* v)
 
 void lpsrSchemeVariable::browseData (basevisitor* v)
 {}
-
-string lpsrCommentedKindAsString (
-  lpsrCommentedKind commentedKind)
-{
-  string result;
-
-  switch (commentedKind) {
-    case lpsrCommentedKind::kCommentedYes:
-      result = "kCommentedYes";
-      break;
-    case lpsrCommentedKind::kCommentedNo:
-      result = "kCommentedNo";
-      break;
-  } // switch
-
-  return result;
-}
-
-string lpsrEndOfLineKindAsString (
-  lpsrEndOfLineKind endOfLineKind)
-{
-  string result;
-
-  switch (endOfLineKind) {
-    case lpsrEndOfLineKind::kEndOfLineOnce:
-      result = "kEndOfLineOnce";
-      break;
-    case lpsrEndOfLineKind::kEndOfLineTwice:
-      result = "kEndOfLineTwice";
-      break;
-    case lpsrEndOfLineKind::kEndOfLineNone:
-      result = "kEndOfLineNone";
-      break;
-  } // switch
-
-  return result;
-}
 
 void lpsrSchemeVariable::print (ostream& os) const
 {

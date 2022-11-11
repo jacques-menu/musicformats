@@ -16,8 +16,9 @@
 #include <ostream>
 
 #include "smartpointer.h"
-
 #include "basevisitor.h"
+
+#include "msrTypesForwardDeclarations.h"
 
 
 using namespace std;

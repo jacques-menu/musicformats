@@ -9,6 +9,8 @@
   https://github.com/jacques-menu/musicformats
 */
 
+#include <iomanip>      // setw()), set::precision(), ...
+
 #include "visitor.h"
 
 #include "enableTracingIfDesired.h"
@@ -27,6 +29,33 @@ using namespace std;
 
 namespace MusicFormats
 {
+
+//______________________________________________________________________________
+string msrSlideTypeKindAsString (
+  msrSlideTypeKind slideTypeKind)
+{
+  string result;
+
+  switch (slideTypeKind) {
+    case msrSlideTypeKind::kSlideTypeNone:
+      result = "kSlideTypeNone";
+      break;
+    case msrSlideTypeKind::kSlideTypeStart:
+      result = "kSlideTypeStart";
+      break;
+    case msrSlideTypeKind::kSlideTypeStop:
+      result = "kSlideTypeStop";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrSlideTypeKind& elt)
+{
+  os << msrSlideTypeKindAsString (elt);
+  return os;
+}
 
 //______________________________________________________________________________
 S_msrSlide msrSlide::create (
@@ -90,26 +119,6 @@ S_msrSlide msrSlide::createSlideNewbornClone ()
   return newbornClone;
 }
 
-string slideTypeKindAsString (
-  msrSlideTypeKind slideTypeKind)
-{
-  string result;
-
-  switch (slideTypeKind) {
-    case msrSlideTypeKind::kSlideTypeNone:
-      result = "slideTypeNone";
-      break;
-    case msrSlideTypeKind::kSlideTypeStart:
-      result = "slideTypeStart";
-      break;
-    case msrSlideTypeKind::kSlideTypeStop:
-      result = "slideTypeStop";
-      break;
-  } // switch
-
-  return result;
-}
-
 void msrSlide::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
@@ -166,7 +175,7 @@ string msrSlide::asString () const
     ", fSlideNumber " << fSlideNumber <<
     ", fSlideTypeKind: " << fSlideTypeKind <<
     ", fSlideLineTypeKind: " << fSlideLineTypeKind <<
-    ", \"" << fSlideTextValue << "\" <<
+    ", fSlideTextValue: \"" << fSlideTextValue << "\"" <<
     ", line " << fInputLineNumber;
 
   return s.str ();
@@ -177,6 +186,7 @@ void msrSlide::print (ostream& os) const
   os <<
     "[Slide" <<
     ", line " << fInputLineNumber <<
+    ']' <<
     endl;
 
   ++gIndenter;
@@ -188,7 +198,7 @@ void msrSlide::print (ostream& os) const
     "fSlideNumber" << fSlideNumber <<
     endl <<
     setw (fieldWidth) <<
-    "fSlideTypeKind" << fSlideTypeKind) <<
+    "fSlideTypeKind" << fSlideTypeKind <<
     endl <<
     setw (fieldWidth) <<
     "fSlideLineTypeKind" << fSlideLineTypeKind <<

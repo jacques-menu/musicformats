@@ -16,6 +16,8 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
+#include "bsrScores.h"
+
 #include "msr2bsrWae.h"
 #include "bsr2bsrWae.h"
 #include "bsr2brailleWae.h"

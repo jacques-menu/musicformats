@@ -25,6 +25,10 @@
 #include "mfStringsHandling.h"
 #include "mfServiceRunData.h"
 
+#include "msrOah.h"
+
+#include "msdl2msrOah.h"
+
 #include "msdlConverterComponent.h"
 
 #include "msdlParserWaeHandlers.h"

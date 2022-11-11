@@ -36,6 +36,8 @@
 //
 // #include "msrBrowsers.h"
 
+#include "msrTemposEnumTypes.h"
+
 
 using namespace std;
 

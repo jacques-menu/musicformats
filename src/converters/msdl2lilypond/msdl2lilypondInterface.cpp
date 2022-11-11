@@ -28,6 +28,8 @@
   #include "tracingOah.h"
 #endif
 
+#include "lpsrScores.h"
+
 #include "msdl2lilypondComponent.h"
 
 #include "oahOah.h"

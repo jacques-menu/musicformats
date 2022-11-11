@@ -29,7 +29,12 @@
 
 #include "msr2bsrComponent.h"
 
-// #include "msr.h"
+#include "msrBarLines.h"
+#include "msrBreaks.h"
+#include "msrVoiceStaffChanges.h"
+
+#include "bsrPages.h"
+#include "bsrScores.h"
 
 #include "msr2bsrTranslator.h"
 

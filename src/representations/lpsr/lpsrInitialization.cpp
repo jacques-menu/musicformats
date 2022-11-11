@@ -9,41 +9,12 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include <iostream>
-// #include <sstream>
-// #include <cassert>
-//
-// #include <climits>      // INT_MIN, INT_MAX
-// #include <iomanip>      // setw, ...
-//
-// #include <regex>
-//
-// #include "mfRational.h"
-//
-// #include "mfServiceRunData.h"
-//
-// #include "mfStringsHandling.h"
-// #include "mfEnumAll.h"
-//
-// #include "oahWae.h"
-// #include "msrWae.h"
-//
-// #include "enableTracingIfDesired.h"
-// #ifdef TRACING_IS_ENABLED
-//   #include "tracingOah.h"
-// #endif
-//
-// #include "msrPitchesNames.h"
-//
-// #include "oahOah.h"
-// #include "waeOah.h"
-//
-// #include "msrOah.h"
-// #include "lpsrOah.h"
-//
-// #include "oahEarlyOptions.h"
+#include "lpsrEnumTypes.h"
 
 #include "lpsrInitialization.h"
+
+#include "oahEarlyOptions.h"
+
 
 
 namespace MusicFormats
@@ -57,9 +28,13 @@ void initializeLPSR ()
 
   if (! pPrivateThisMethodHasBeenRun) {
 #ifdef TRACING_IS_ENABLED
-    if (gGlobalOahEarlyOptions.getEarlyTracingOah () && ! gGlobalOahEarlyOptions.getEarlyQuietOption ()) {
+    if (
+      gGlobalOahEarlyOptions.getEarlyTracingOah ()
+        &&
+      ! gGlobalOahEarlyOptions.getEarlyQuietOption ()
+    ) {
       gLogStream <<
-        "Initializing LPSR basic types handling" <<
+        "Initializing LPSR" <<
         endl;
     }
 #endif

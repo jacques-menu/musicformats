@@ -308,7 +308,7 @@ void msrStaffDetails::browseData (basevisitor* v)
   }
 }
 
-string msrStaffDetails::msrStaffTypeKindAsString (
+string msrStaffTypeKindAsString (
   msrStaffTypeKind staffTypeKind)
 {
   string result;
@@ -340,7 +340,7 @@ ostream& operator << (ostream& os, const msrStaffTypeKind& elt)
   return os;
 }
 
-string msrStaffDetails::msrShowFretsKindAsString (
+string msrShowFretsKindAsString (
   msrShowFretsKind showFretsKind)
 {
   string result;
@@ -363,7 +363,7 @@ ostream& operator << (ostream& os, const msrShowFretsKind& elt)
   return os;
 }
 
-string msrStaffDetails::msrPrintSpacingKindAsString (
+string msrPrintSpacingKindAsString (
   msrPrintSpacingKind printSpacingKind)
 {
   string result;

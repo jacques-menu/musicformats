@@ -24,6 +24,7 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrRepeatsEnumTypes.h"
 #include "msrRepeats.h"
 
 #include "oahOah.h"
@@ -972,13 +973,14 @@ msrRepeat::msrRepeat (
 
   fRepeatTimes = repeatTimes;
 
-  fRepeatExplicitStartKind = kRepeatExplicitStartNo; // default value
+  fRepeatExplicitStartKind =
+    msrRepeatExplicitStartKind::kRepeatExplicitStartNo; // default value
 
   fRepeatEndingsInternalCounter = 0;
 
   // repeat build phase
   fCurrentRepeatBuildPhaseKind =
-    msrRepeat::kRepeatBuildPhaseJustCreated;
+    msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated;
 }
 
 S_msrRepeat msrRepeat::createRepeatNewbornClone (
@@ -1037,7 +1039,7 @@ void msrRepeat::setRepeatCommonPart (
 
   // set repeat's build phase
   fCurrentRepeatBuildPhaseKind =
-    msrRepeat::kRepeatBuildPhaseInCommonPart;
+    msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart;
 }
 
 void msrRepeat::addRepeatEndingToRepeat (
@@ -1081,7 +1083,7 @@ void msrRepeat::addRepeatEndingToRepeat (
   switch (repeatEndingKind) {
     case msrRepeatEndingKind::kRepeatEndingHooked:
       switch (fCurrentRepeatBuildPhaseKind) {
-        case msrRepeat::kRepeatBuildPhaseJustCreated:
+        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
           {
             stringstream s;
 
@@ -1097,14 +1099,14 @@ void msrRepeat::addRepeatEndingToRepeat (
               s.str ());
           }
           break;
-        case msrRepeat::kRepeatBuildPhaseInCommonPart:
+        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
           fCurrentRepeatBuildPhaseKind =
-            msrRepeat::kRepeatBuildPhaseInEndings;
+            msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings;
           break;
-        case msrRepeat::kRepeatBuildPhaseInEndings:
+        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
           // there can be several successive endings
           break;
-        case msrRepeat::kRepeatBuildPhaseCompleted:
+        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
           {
             stringstream s;
 
@@ -1125,7 +1127,7 @@ void msrRepeat::addRepeatEndingToRepeat (
 
     case msrRepeatEndingKind::kRepeatEndingHookless:
       switch (fCurrentRepeatBuildPhaseKind) {
-        case msrRepeat::kRepeatBuildPhaseJustCreated:
+        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
           {
             stringstream s;
 
@@ -1141,7 +1143,7 @@ void msrRepeat::addRepeatEndingToRepeat (
               s.str ());
           }
           break;
-        case msrRepeat::kRepeatBuildPhaseInCommonPart:
+        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
           {
             stringstream s;
 
@@ -1158,10 +1160,10 @@ void msrRepeat::addRepeatEndingToRepeat (
               s.str ());
           }
           break;
-        case msrRepeat::kRepeatBuildPhaseInEndings:
+        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
           // there can be several successive endings
           break;
-        case msrRepeat::kRepeatBuildPhaseCompleted:
+        case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
           {
             stringstream s;
 
@@ -1218,7 +1220,7 @@ void msrRepeat::appendSegmentToRepeat (
 #endif
 
   switch (fCurrentRepeatBuildPhaseKind) {
-    case msrRepeat::kRepeatBuildPhaseJustCreated:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
       {
         stringstream s;
 
@@ -1236,7 +1238,7 @@ void msrRepeat::appendSegmentToRepeat (
       }
       break;
 
-    case msrRepeat::kRepeatBuildPhaseInCommonPart:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
         fRepeatCommonPart->
           appendSegmentToRepeatCommonPart (
             inputLineNumber,
@@ -1244,7 +1246,7 @@ void msrRepeat::appendSegmentToRepeat (
             context);
       break;
 
-    case msrRepeat::kRepeatBuildPhaseInEndings:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
       fRepeatEndings.back ()->
         appendSegmentToRepeatEnding (
           inputLineNumber,
@@ -1252,7 +1254,7 @@ void msrRepeat::appendSegmentToRepeat (
           context);
       break;
 
-    case msrRepeat::kRepeatBuildPhaseCompleted:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
       {
         stringstream s;
 
@@ -1302,7 +1304,7 @@ void msrRepeat::appendRepeatToRepeat (
 #endif
 
   switch (fCurrentRepeatBuildPhaseKind) {
-    case msrRepeat::kRepeatBuildPhaseJustCreated:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
       {
         stringstream s;
 
@@ -1320,7 +1322,7 @@ void msrRepeat::appendRepeatToRepeat (
       }
       break;
 
-    case msrRepeat::kRepeatBuildPhaseInCommonPart:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
         fRepeatCommonPart->
           appendRepeatToRepeatCommonPart (
             inputLineNumber,
@@ -1328,7 +1330,7 @@ void msrRepeat::appendRepeatToRepeat (
             context);
       break;
 
-    case msrRepeat::kRepeatBuildPhaseInEndings:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
       fRepeatEndings.back ()->
         appendRepeatToRepeatEnding (
           inputLineNumber,
@@ -1336,7 +1338,7 @@ void msrRepeat::appendRepeatToRepeat (
           context);
       break;
 
-    case msrRepeat::kRepeatBuildPhaseCompleted:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
       {
         stringstream s;
 
@@ -1386,7 +1388,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
 #endif
 
   switch (fCurrentRepeatBuildPhaseKind) {
-    case msrRepeat::kRepeatBuildPhaseJustCreated:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
       {
         stringstream s;
 
@@ -1404,7 +1406,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
       }
       break;
 
-    case msrRepeat::kRepeatBuildPhaseInCommonPart:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
         fRepeatCommonPart->
           appendMeasureRepeatToRepeatCommonPart (
             inputLineNumber,
@@ -1412,7 +1414,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
             context);
       break;
 
-    case msrRepeat::kRepeatBuildPhaseInEndings:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
       fRepeatEndings.back ()->
         appendMeasureRepeatToRepeatEnding (
           inputLineNumber,
@@ -1420,7 +1422,7 @@ void msrRepeat::appendMeasureRepeatToRepeat (
           context);
       break;
 
-    case msrRepeat::kRepeatBuildPhaseCompleted:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
       {
         stringstream s;
 
@@ -1469,7 +1471,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
 #endif
 
   switch (fCurrentRepeatBuildPhaseKind) {
-    case msrRepeat::kRepeatBuildPhaseJustCreated:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
       {
         stringstream s;
 
@@ -1487,7 +1489,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
       }
       break;
 
-    case msrRepeat::kRepeatBuildPhaseInCommonPart:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
       fRepeatCommonPart->
         appendMultipleFullBarRestsToRepeatCommonPart (
           inputLineNumber,
@@ -1495,7 +1497,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
           context);
       break;
 
-    case msrRepeat::kRepeatBuildPhaseInEndings:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
       fRepeatEndings.back ()->
         appendMultipleFullBarRestsToRepeatEnding (
           inputLineNumber,
@@ -1503,7 +1505,7 @@ void msrRepeat::appendMultipleFullBarRestsToRepeat (
           context);
       break;
 
-    case msrRepeat::kRepeatBuildPhaseCompleted:
+    case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
       {
         stringstream s;
 

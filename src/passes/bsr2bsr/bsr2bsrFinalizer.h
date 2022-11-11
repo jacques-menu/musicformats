@@ -14,7 +14,10 @@
 
 #include "visitor.h"
 
-// #include "bsr.h"
+#include "msrTypesForwardDeclarations.h"
+#include "bsrTypesForwardDeclarations.h"
+
+#include "bsrScores.h"
 
 #include "bsrOah.h"
 

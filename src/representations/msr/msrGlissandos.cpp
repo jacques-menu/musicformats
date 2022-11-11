@@ -31,6 +31,33 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string msrGlissandoTypeKindAsString (
+  msrGlissandoTypeKind glissandoTypeKind)
+{
+  string result;
+
+  switch (glissandoTypeKind) {
+    case msrGlissandoTypeKind::kGlissandoTypeNone:
+      result = "kGlissandoTypeNone";
+      break;
+    case msrGlissandoTypeKind::kGlissandoTypeStart:
+      result = "kGlissandoTypeStart";
+      break;
+    case msrGlissandoTypeKind::kGlissandoTypeStop:
+      result = "kGlissandoTypeStop";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrGlissandoTypeKind& elt)
+{
+  os << msrGlissandoTypeKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_msrGlissando msrGlissando::create (
   int                  inputLineNumber,
   int                  glissandoNumber,
@@ -90,26 +117,6 @@ S_msrGlissando msrGlissando::createGlissandoNewbornClone ()
         fGlissandoTextValue);
 
   return newbornClone;
-}
-
-string msrGlissandoTypeKindAsString (
-  msrGlissandoTypeKind glissandoTypeKind)
-{
-  string result;
-
-  switch (glissandoTypeKind) {
-    case msrGlissandoTypeKind::kGlissandoTypeNone:
-      result = "kGlissandoTypeNone";
-      break;
-    case msrGlissandoTypeKind::kGlissandoTypeStart:
-      result = "kGlissandoTypeStart";
-      break;
-    case msrGlissandoTypeKind::kGlissandoTypeStop:
-      result = "kGlissandoTypeStop";
-      break;
-  } // switch
-
-  return result;
 }
 
 void msrGlissando::acceptIn (basevisitor* v)

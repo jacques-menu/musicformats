@@ -41,6 +41,85 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string bsrTimeSignatureKindAsString (
+  bsrTimeSignatureKind timeKind)
+{
+  string result;
+
+  switch (timeKind) {
+    case bsrTimeSignatureKind::kTimeSignatureNone:
+      result = "kTimeNone";
+      break;
+
+    case bsrTimeSignatureKind::kTimeSignatureCommon:
+      result = "kTimeCommon";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureCut:
+      result = "kTimeCut";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureNumerical:
+      result = "kTimeNumerical";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureNote:
+      result = "kTimeNote";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureDottedNote:
+      result = "kTimeNote";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureSingleNumber:
+      result = "kTimeSingleNumber";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureSenzaMisura:
+      result = "kTimeSenzaMisura";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const bsrTimeSignatureKind& elt)
+{
+  os << bsrTimeSignatureKindAsString (elt);
+  return os;
+}
+
+string bsrTimeKindAsDebugString (
+  bsrTimeSignatureKind timeKind)
+{
+  string result;
+
+  switch (timeKind) {
+    case bsrTimeSignatureKind::kTimeSignatureNone:
+      result = "_";
+      break;
+
+    case bsrTimeSignatureKind::kTimeSignatureCommon:
+      result = "C";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureCut:
+      result = "C/";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureNumerical:
+      result = "Num";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureNote:
+      result = "Note";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureDottedNote:
+      result = "DottedNote";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureSingleNumber:
+      result = "SingleNumber";
+      break;
+    case bsrTimeSignatureKind::kTimeSignatureSenzaMisura:
+      result = "SenzaMisura";
+      break;
+  } // switch
+
+  return result;
+}
+
+//______________________________________________________________________________
 S_bsrTimeSignatureItem bsrTimeSignatureItem::create (
   int inputLineNumber)
 {
@@ -732,78 +811,6 @@ void bsrTimeSignature::acceptOut (basevisitor* v)
 
 void bsrTimeSignature::browseData (basevisitor* v)
 {}
-
-string bsrTimeSignatureKindAsString (
-  bsrTimeSignatureKind timeKind)
-{
-  string result;
-
-  switch (timeKind) {
-    case bsrTimeSignatureKind::kTimeSignatureNone:
-      result = "kTimeNone";
-      break;
-
-    case bsrTimeSignatureKind::kTimeSignatureCommon:
-      result = "kTimeCommon";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureCut:
-      result = "kTimeCut";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureNumerical:
-      result = "kTimeNumerical";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureNote:
-      result = "kTimeNote";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureDottedNote:
-      result = "kTimeNote";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureSingleNumber:
-      result = "kTimeSingleNumber";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureSenzaMisura:
-      result = "kTimeSenzaMisura";
-      break;
-  } // switch
-
-  return result;
-}
-
-string bsrTimeKindAsDebugString (
-  bsrTimeSignatureKind timeKind)
-{
-  string result;
-
-  switch (timeKind) {
-    case bsrTimeSignatureKind::kTimeSignatureNone:
-      result = "_";
-      break;
-
-    case bsrTimeSignatureKind::kTimeSignatureCommon:
-      result = "C";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureCut:
-      result = "C/";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureNumerical:
-      result = "Num";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureNote:
-      result = "Note";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureDottedNote:
-      result = "DottedNote";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureSingleNumber:
-      result = "SingleNumber";
-      break;
-    case bsrTimeSignatureKind::kTimeSignatureSenzaMisura:
-      result = "SenzaMisura";
-      break;
-  } // switch
-
-  return result;
-}
 
 string bsrTimeSignature::asString () const
 {

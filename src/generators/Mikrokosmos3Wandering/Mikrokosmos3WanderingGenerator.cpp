@@ -18,11 +18,12 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrParts.h"
+#include "msrBarLines.h"
+
 #include "oahOah.h"
+#include "msrOah.h"
 #include "displayOah.h"
-
-
-
 
 
 using namespace std;

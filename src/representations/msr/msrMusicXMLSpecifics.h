@@ -38,6 +38,72 @@ EXP msrXMLLangKind msrXMLLangKindFromString (
   int           inputLineNumber,
   const string& XMLLangString);
 
+enum class msrOtherAppearanceTypeKind { // JMI which values??? v0.9.62
+  kOtherAppearanceType_NO_
+};
+
+string msrOtherAppearanceTypeKindAsString (
+  msrOtherAppearanceTypeKind otherAppearanceTypeKind);
+
+ostream& operator << (ostream& os, const msrOtherAppearanceTypeKind& elt);
+
+enum class msrLineWidthTypeKind {
+  kLineWidthType_NO_,
+  kLineWidthTypeBeam, kLineWidthTypeBracket, kLineWidthTypeDashes,
+  kLineWidthTypeEnclosure,
+  kLineWidthTypeEnding,
+  kLineWidthTypeExtend,
+  kLineWidthTypeHeavyBarLine, kLineWidthTypeHeavyLeger, kLineWidthTypeLightBarLine,
+  kLineWidthTypeOctaveShift,
+  kLineWidthTypePedal,
+  kLineWidthTypeSlurMiddle, kLineWidthTypeSlurTip,
+  kLineWidthTypeStaff, kLineWidthTypeStem,
+  kLineWidthTypeTieMiddle, kLineWidthTypeTieTip,
+  kLineWidthTypeTupletBracket,
+  kLineWidthTypeWedge
+};
+
+string msrLineWidthTypeKindAsString (
+  msrLineWidthTypeKind lineWidthTypeKind);
+
+ostream& operator << (ostream& os, const msrLineWidthTypeKind& elt);
+
+enum class msrNoteSizeTypeKind {
+  kNote_NO_SizeType,
+  kNoteSizeTypeCue, kNoteSizeTypeGrace, kNoteSizeTypeLarge
+};
+
+string msrNoteSizeTypeKindAsString (
+  msrNoteSizeTypeKind noteSizeTypeKind);
+
+ostream& operator << (ostream& os, const msrNoteSizeTypeKind& elt);
+
+enum class msrDistanceTypeKind {
+  kDistanceType_NO_,
+  kDistanceTypeHyphen, kDistanceTypeBeam
+};
+
+string msrDistanceTypeKindAsString (
+  msrDistanceTypeKind distanceTypeKind);
+
+ostream& operator << (ostream& os, const msrDistanceTypeKind& elt);
+
+enum class msrGlyphTypeKind {
+  kGlyphType_NO_,
+  kGlyphTypeQuarterRest,
+  kGlyphTypeGClefOttavaBassa,
+  kGlyphTypeCClef, kGlyphTypeFClef,
+  kGlyphTypePercussionClef,
+  kGlyphTypeOctaveShiftUp8, kGlyphTypeOctaveShiftDown8, kGlyphTypeOctaveShiftContinue8,
+  kGlyphTypeOctaveShiftDown15, kGlyphTypeOctaveShiftUp15, kGlyphTypeOctaveShiftContinue15,
+  kGlyphTypeOctaveShiftDown22, kGlyphTypeOctaveShiftUp22, kGlyphTypeOctaveShiftContinue22
+};
+
+string msrGlyphTypeKindAsString (
+  msrGlyphTypeKind GlyphTypeKind);
+
+ostream& operator << (ostream& os, const msrGlyphTypeKind& elt);
+
 //______________________________________________________________________________
 class EXP msrPageLayout : public msrElement
 {
@@ -729,29 +795,6 @@ typedef SMARTP<msrPrintLayout> S_msrPrintLayout;
 EXP ostream& operator << (ostream& os, const S_msrPrintLayout& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrLineWidthTypeKind {
-  kLineWidthType_NO_,
-  kLineWidthTypeBeam, kLineWidthTypeBracket, kLineWidthTypeDashes,
-  kLineWidthTypeEnclosure,
-  kLineWidthTypeEnding,
-  kLineWidthTypeExtend,
-  kLineWidthTypeHeavyBarLine, kLineWidthTypeHeavyLeger, kLineWidthTypeLightBarLine,
-  kLineWidthTypeOctaveShift,
-  kLineWidthTypePedal,
-  kLineWidthTypeSlurMiddle, kLineWidthTypeSlurTip,
-  kLineWidthTypeStaff, kLineWidthTypeStem,
-  kLineWidthTypeTieMiddle, kLineWidthTypeTieTip,
-  kLineWidthTypeTupletBracket,
-  kLineWidthTypeWedge
-};
-
-string msrLineWidthTypeKindAsString (
-  msrLineWidthTypeKind lineWidthTypeKind);
-
-ostream& operator << (ostream& os, const msrLineWidthTypeKind& elt);
-
 class EXP msrLineWidth : public msrElement
 {
   public:
@@ -817,18 +860,6 @@ typedef SMARTP<msrLineWidth> S_msrLineWidth;
 EXP ostream& operator << (ostream& os, const S_msrLineWidth& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrNoteSizeTypeKind {
-  kNote_NO_SizeType,
-  kNoteSizeTypeCue, kNoteSizeTypeGrace, kNoteSizeTypeLarge
-};
-
-string msrNoteSizeTypeKindAsString (
-  msrNoteSizeTypeKind noteSizeTypeKind);
-
-ostream& operator << (ostream& os, const msrNoteSizeTypeKind& elt);
-
 class EXP msrNoteSize : public msrElement
 {
   public:
@@ -895,18 +926,6 @@ typedef SMARTP<msrNoteSize> S_msrNoteSize;
 EXP ostream& operator << (ostream& os, const S_msrNoteSize& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrDistanceTypeKind {
-  kDistanceType_NO_,
-  kDistanceTypeHyphen, kDistanceTypeBeam
-};
-
-string msrDistanceTypeKindAsString (
-  msrDistanceTypeKind distanceTypeKind);
-
-ostream& operator << (ostream& os, const msrDistanceTypeKind& elt);
-
 class EXP msrDistance : public msrElement
 {
   public:
@@ -972,24 +991,6 @@ typedef SMARTP<msrDistance> S_msrDistance;
 EXP ostream& operator << (ostream& os, const S_msrDistance& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrGlyphTypeKind {
-  kGlyphType_NO_,
-  kGlyphTypeQuarterRest,
-  kGlyphTypeGClefOttavaBassa,
-  kGlyphTypeCClef, kGlyphTypeFClef,
-  kGlyphTypePercussionClef,
-  kGlyphTypeOctaveShiftUp8, kGlyphTypeOctaveShiftDown8, kGlyphTypeOctaveShiftContinue8,
-  kGlyphTypeOctaveShiftDown15, kGlyphTypeOctaveShiftUp15, kGlyphTypeOctaveShiftContinue15,
-  kGlyphTypeOctaveShiftDown22, kGlyphTypeOctaveShiftUp22, kGlyphTypeOctaveShiftContinue22
-};
-
-string msrGlyphTypeKindAsString (
-  msrGlyphTypeKind GlyphTypeKind);
-
-ostream& operator << (ostream& os, const msrGlyphTypeKind& elt);
-
 class EXP msrGlyph : public msrElement
 {
   public:
@@ -1055,17 +1056,6 @@ typedef SMARTP<msrGlyph> S_msrGlyph;
 EXP ostream& operator << (ostream& os, const S_msrGlyph& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrOtherAppearanceTypeKind { // JMI which values??? v0.9.62
-  kOtherAppearanceType_NO_
-};
-
-string msrOtherAppearanceTypeKindAsString (
-  msrOtherAppearanceTypeKind otherAppearanceTypeKind);
-
-ostream& operator << (ostream& os, const msrOtherAppearanceTypeKind& elt);
-
 class EXP msrOtherAppearance : public msrElement
 {
   public:

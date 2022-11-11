@@ -14,10 +14,13 @@
 
 #include "msrTupletElements.h"
 
+#include "msrTypesForwardDeclarations.h"
+
+#include "msrTupletFactors.h"
+
 // #include "msrFiguredBasses.h"
 // #include "msrGraceNotesGroups.h"
 // #include "msrMeasures.h"
-#include "msrTupletFactors.h"
 
 
 namespace MusicFormats
@@ -25,6 +28,17 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // data types
+
+enum class msrTupletInKind {
+  kTupletIn_NO_,
+  kTupletInMeasure,
+  kTupletInTuplet
+};
+
+EXP string msrTupletInKindAsString (
+  msrTupletInKind tupletKind);
+
+ostream& operator << (ostream& os, const msrTupletInKind& elt);
 
 enum class msrTupletTypeKind {
   kTupletTypeNone,
@@ -72,20 +86,6 @@ string msrTupletShowTypeKindAsString (
   msrTupletShowTypeKind tupletShowTypeKind);
 
 ostream& operator << (ostream& os, const msrTupletShowTypeKind& elt);
-
-// tuplets
-//______________________________________________________________________________
-
-enum class msrTupletInKind {
-  kTupletIn_NO_,
-  kTupletInMeasure,
-  kTupletInTuplet
-};
-
-EXP string msrTupletKindAsString (
-  msrTupletInKind tupletKind);
-
-ostream& operator << (ostream& os, const msrTupletInKind& elt);
 
 //______________________________________________________________________________
 class EXP msrTuplet : public msrTupletElement

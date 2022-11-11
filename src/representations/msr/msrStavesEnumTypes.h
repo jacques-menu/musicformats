@@ -12,27 +12,11 @@
 #ifndef ___msrStavesEnumTypes___
 #define ___msrStavesEnumTypes___
 
-// #include "msrElements.h"
-//
-// #include "msrBarLines.h"
-// #include "msrClefs.h"
-// #include "msrInstruments.h"
-// #include "msrKeys.h"
-// #include "msrMeasuresEnumTypes.h"
-// #include "msrMeasures.h"
-// #include "msrMeasuresSlices.h"
-// #include "msrParts.h"
-// #include "msrPartGroups.h"
-// #include "msrPrintObjects.h"
-// #include "msrMultipleFullBarRests.h"
-// #include "msrRehearsalMarks.h"
-// #include "msrRepeats.h"
-// #include "msrScores.h"
-// #include "msrStavesDetails.h"
-// #include "msrTimeSignatures.h"
-// #include "msrTempos.h"
-// #include "msrTranspositions.h"
-// #include "msrTupletFactors.h"
+#include <string>
+#include <ostream>
+
+
+using namespace std;
 
 namespace MusicFormats
 {

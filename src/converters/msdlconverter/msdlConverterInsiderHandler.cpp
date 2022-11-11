@@ -11,6 +11,9 @@
 
 #include <iomanip>      // setw, setprecision, ...
 
+// libmusicxml2
+#include "visitor.h"
+
 // WAE
 #include "oahWae.h"
 
@@ -29,6 +32,7 @@
 #include "mfStringsHandling.h"
 
 #include "msrInitialization.h"
+#include "lpsrInitialization.h"
 #include "bsrInitialization.h"
 
 // OAH

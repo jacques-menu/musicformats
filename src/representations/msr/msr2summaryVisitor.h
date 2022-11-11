@@ -12,7 +12,7 @@
 #ifndef ___msr2summaryVisitor___
 #define ___msr2summaryVisitor___
 
-// #include "msr.h"
+#include "visitor.h"
 
 #include "msrOah.h"
 

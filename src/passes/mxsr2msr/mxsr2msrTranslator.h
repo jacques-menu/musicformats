@@ -16,7 +16,18 @@
 
 #include "visitor.h"
 
-// #include "msr.h"
+#include "msrArticulations.h"
+#include "msrBarLines.h"
+#include "msrBreaks.h"
+#include "msrDivisions.h"
+#include "msrDoubleTremolos.h"
+#include "msrGlissandos.h"
+#include "msrRehearsalMarks.h"
+#include "msrSlides.h"
+#include "msrTablatures.h"
+#include "msrTechnicals.h"
+#include "msrTempos.h"
+#include "msrVoiceStaffChanges.h"
 
 
 namespace MusicFormats
@@ -2215,7 +2226,7 @@ class EXP mxsr2msrTranslator :
 
     Bool                      fCurrentNoteBelongsToADoubleTremolo; // JMI ???
 
-    msrTremoloTypeKind        fCurrentTremoloTypeKind;
+    msrDoubleTremoloTypeKind        fCurrentDoubleTremoloTypeKind;
 
     S_msrSingleTremolo        fCurrentSingleTremolo;
 

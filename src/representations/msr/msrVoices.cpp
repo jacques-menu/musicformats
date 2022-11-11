@@ -33,8 +33,17 @@
 
 #include "msrVoices.h"
 
+#include "msrBreaks.h"
+#include "msrBarChecks.h"
+#include "msrBarLines.h"
+#include "msrBarNumberChecks.h"
+#include "msrDoubleTremolos.h"
+#include "msrMeasureRepeats.h"
+#include "msrRehearsalMarks.h"
 #include "msrRepeats.h"
 #include "msrStaves.h"
+#include "msrTempos.h"
+#include "msrVoiceStaffChanges.h"
 
 #include "msrBrowsers.h"
 
@@ -123,6 +132,12 @@ string msrVoiceRepeatPhaseKindAsString (
   return result;
 }
 
+ostream& operator << (ostream& os, const msrVoiceRepeatPhaseKind& elt)
+{
+  os << msrVoiceRepeatPhaseKindAsString (elt);
+  return os;
+}
+
 string msrVoiceFinalizationStatusKindAsString (
   msrVoiceFinalizationStatusKind voiceFinalizationStatusKind)
 {
@@ -140,6 +155,12 @@ string msrVoiceFinalizationStatusKindAsString (
   return result;
 }
 
+ostream& operator << (ostream& os, const msrVoiceFinalizationStatusKind& elt)
+{
+  os << msrVoiceFinalizationStatusKindAsString (elt);
+  return os;
+}
+
 string msrVoiceFinalizationStatusKindAsString (
   msrVoiceCreateInitialLastSegmentKind voiceCreateInitialLastSegmentKind)
 {
@@ -155,6 +176,12 @@ string msrVoiceFinalizationStatusKindAsString (
   } // switch
 
   return result;
+}
+
+ostream& operator << (ostream& os, const msrVoiceCreateInitialLastSegmentKind& elt)
+{
+  os << msrVoiceFinalizationStatusKindAsString (elt);
+  return os;
 }
 
 //______________________________________________________________________________
@@ -2664,7 +2691,7 @@ void msrVoice::appendOctaveShiftToVoice (
   if (gGlobalTracingOahGroup->getTraceOctaveShifts ()) {
     gLogStream <<
       "Appending octave shift '" <<
-      octaveShift->msrOctaveShiftKindAsString () <<
+      octaveShift->getOctaveShiftKind () <<
       "', size: " << octaveShift->getOctaveShiftSize () <<
       "' to voice \"" << getVoiceName () << "\"" <<
       endl;
@@ -4841,7 +4868,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithoutStart (
   // set newRepeat's build phase to completed
   newRepeat->
     setCurrentRepeatBuildPhaseKind (
-      msrRepeat::kRepeatBuildPhaseCompleted);
+      msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted);
 
   // append newRepeat to the list of initial elements
   appendRepeatToInitialVoiceElements (
@@ -5000,7 +5027,7 @@ void msrVoice::handleVoiceLevelContainingRepeatEndWithoutStart (
   // set newRepeat's build phase to completed
   newRepeat->
     setCurrentRepeatBuildPhaseKind (
-      msrRepeat::kRepeatBuildPhaseCompleted);
+      msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted);
 
   // append newRepeat to the list of initial elements
   appendRepeatToInitialVoiceElements (
@@ -5134,7 +5161,7 @@ void msrVoice::handleVoiceLevelRepeatEndWithStart (
   // set currentRepeat's build phase to completed
   currentRepeat->
     setCurrentRepeatBuildPhaseKind (
-      msrRepeat::kRepeatBuildPhaseCompleted);
+      msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted);
 
   // append currentRepeat to the list of initial elements
   appendRepeatToInitialVoiceElements (
@@ -5277,7 +5304,7 @@ void msrVoice::handleRepeatEndInVoice (
 
               // analyze it
               switch (repeatsStackTopRepeat->getCurrentRepeatBuildPhaseKind ()) {
-                case msrRepeat::kRepeatBuildPhaseJustCreated:
+                case msrRepeatBuildPhaseKind::kRepeatBuildPhaseJustCreated:
                   {
                     stringstream s;
 
@@ -5297,8 +5324,8 @@ void msrVoice::handleRepeatEndInVoice (
                   }
                   break;
 
-                case msrRepeat::kRepeatBuildPhaseInCommonPart:
-                case msrRepeat::kRepeatBuildPhaseInEndings:
+                case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInCommonPart:
+                case msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings:
                   // this repeat is at the voice-level and has a start
                   // -------------------------------------
                   handleVoiceLevelRepeatEndWithStart (
@@ -5307,7 +5334,7 @@ void msrVoice::handleRepeatEndInVoice (
                     repeatTimes);
                   break;
 
-                case msrRepeat::kRepeatBuildPhaseCompleted:
+                case msrRepeatBuildPhaseKind::kRepeatBuildPhaseCompleted:
                   // this repeat is at the voice-level, has no start
                   // and contains repeatsStackTop
                   // -------------------------------------
@@ -5523,7 +5550,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithoutExplicitStart (
   // set currentRepeat's build phase
   currentRepeat->
     setCurrentRepeatBuildPhaseKind (
-      msrRepeat::kRepeatBuildPhaseInEndings);
+      msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings);
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
@@ -5682,7 +5709,7 @@ void msrVoice::handleVoiceLevelRepeatEndingStartWithExplicitStart (
   // set currentRepeat's build phase
   currentRepeat->
     setCurrentRepeatBuildPhaseKind (
-      msrRepeat::kRepeatBuildPhaseInEndings);
+      msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings);
 
 #ifdef TRACING_IS_ENABLED
   if (gGlobalTracingOahGroup->getTraceRepeatsDetails ()) {
@@ -5964,7 +5991,7 @@ void msrVoice::handleRepeatEndingStartInVoiceClone (
               // set currentRepeat's build phase
               currentRepeat->
                 setCurrentRepeatBuildPhaseKind (
-                  msrRepeat::kRepeatBuildPhaseInEndings);
+                  msrRepeatBuildPhaseKind::kRepeatBuildPhaseInEndings);
             }
           break;
 
@@ -6034,7 +6061,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
     switch (
       fVoicePendingMeasureRepeat->getCurrentMeasureRepeatBuildPhaseKind ()
     ) {
-      case msrMeasureRepeatKind::kMeasureRepeatBuildPhaseJustCreated:
+      case msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseJustCreated:
         {
           stringstream s;
 
@@ -6051,7 +6078,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
         }
         break;
 
-      case msrMeasureRepeatKind::kMeasureRepeatBuildPhaseInPattern:
+      case msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseInPattern:
         {
           // get fVoicePendingMeasureRepeat's pattern
           S_msrMeasureRepeatPattern
@@ -6067,7 +6094,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
         }
         break;
 
-      case msrMeasureRepeatKind::kMeasureRepeatBuildPhaseInReplicas:
+      case msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseInReplicas:
         {
           // get fVoicePendingMeasureRepeat's replicas
           S_msrMeasureRepeatReplicas
@@ -6083,7 +6110,7 @@ void msrVoice::handleSegmentCloneEndInVoiceClone (
         }
         break;
 
-      case msrMeasureRepeatKind::kMeasureRepeatBuildPhaseCompleted:
+      case msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseCompleted:
         {
           stringstream s;
 
@@ -7817,7 +7844,7 @@ void msrVoice::handleMeasureRepeatStartInVoiceClone (
       // set fVoicePendingMeasureRepeat's build phase to completed
       fVoicePendingMeasureRepeat->
         setCurrentMeasureRepeatBuildPhaseKind (
-          msrMeasureRepeatKind::kMeasureRepeatBuildPhaseJustCreated);
+          msrMeasureRepeatBuildPhaseKind::kMeasureRepeatBuildPhaseJustCreated);
 
 #ifdef TRACING_IS_ENABLED
       if (gGlobalTracingOahGroup->getTraceMeasureRepeatsDetails ()) {

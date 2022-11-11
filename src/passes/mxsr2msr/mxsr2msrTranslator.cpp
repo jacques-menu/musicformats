@@ -272,7 +272,7 @@ mxsr2msrTranslator::mxsr2msrTranslator (
   fBendAlterValue = -39.3f;
 
   // tremolos handling
-  fCurrentTremoloTypeKind = msrTremoloTypeKind::kTremoloType_NO_;
+  fCurrentDoubleTremoloTypeKind = msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_;
 
   // tuplets handling
   fCurrentTupletNumber  = -1;
@@ -10332,7 +10332,7 @@ Controls whether or not spacing is left for an invisible note or object. It is u
 
   // tremolos
 
-  fCurrentTremoloTypeKind = msrTremoloTypeKind::kTremoloType_NO_;
+  fCurrentDoubleTremoloTypeKind = msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_;
 
   // ties
 
@@ -13625,16 +13625,16 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 
   string tremoloType = elt->getAttributeValue ("type");
 
-  fCurrentTremoloTypeKind = msrTremoloTypeKind::kTremoloTypeSingle; // default value
+  fCurrentDoubleTremoloTypeKind = msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle; // default value
 
   if      (tremoloType == "single")
-    fCurrentTremoloTypeKind = msrTremoloTypeKind::kTremoloTypeSingle;
+    fCurrentDoubleTremoloTypeKind = msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle;
 
   else if (tremoloType == "start")
-    fCurrentTremoloTypeKind = msrTremoloTypeKind::kTremoloTypeStart;
+    fCurrentDoubleTremoloTypeKind = msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart;
 
   else if (tremoloType == "stop")
-    fCurrentTremoloTypeKind = msrTremoloTypeKind::kTremoloTypeStop;
+    fCurrentDoubleTremoloTypeKind = msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop;
 
   else if (tremoloType.size ()) {
     stringstream s;
@@ -13669,34 +13669,34 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 */
 
   if      (placementString == "above") {
-    switch (fCurrentTremoloTypeKind) {
-      case msrTremoloTypeKind::kTremoloType_NO_:
+    switch (fCurrentDoubleTremoloTypeKind) {
+      case msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_:
         // just to avoid a compiler message
         break;
 
-      case msrTremoloTypeKind::kTremoloTypeSingle:
+      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle:
         singleTremoloPlacementKind = msrPlacementKind::kPlacementAbove;
         break;
 
-      case msrTremoloTypeKind::kTremoloTypeStart:
-      case msrTremoloTypeKind::kTremoloTypeStop:
+      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart:
+      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop:
         doubleTremoloPlacementKind = msrPlacementKind::kPlacementAbove;
         break;
     } // switch
   }
 
   else if (placementString == "below") {
-    switch (fCurrentTremoloTypeKind) {
-      case msrTremoloTypeKind::kTremoloType_NO_:
+    switch (fCurrentDoubleTremoloTypeKind) {
+      case msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_:
         // just to avoid a compiler message
         break;
 
-      case msrTremoloTypeKind::kTremoloTypeSingle:
+      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle:
         singleTremoloPlacementKind = msrPlacementKind::kPlacementBelow;
         break;
 
-      case msrTremoloTypeKind::kTremoloTypeStart:
-      case msrTremoloTypeKind::kTremoloTypeStop:
+      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart:
+      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop:
         doubleTremoloPlacementKind = msrPlacementKind::kPlacementBelow;
         break;
     } // switch
@@ -13718,12 +13718,12 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
   }
 
   // handle double tremolos
-  switch (fCurrentTremoloTypeKind) {
-    case msrTremoloTypeKind::kTremoloType_NO_:
+  switch (fCurrentDoubleTremoloTypeKind) {
+    case msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_:
       // just to avoid a compiler message
       break;
 
-    case msrTremoloTypeKind::kTremoloTypeSingle:
+    case msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle:
       // create a single tremolo, it will be attached to current note
       // in attachCurrentSingleTremoloToNote()
 #ifdef TRACING_IS_ENABLED
@@ -13748,7 +13748,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
           singleTremoloPlacementKind);
       break;
 
-    case msrTremoloTypeKind::kTremoloTypeStart:
+    case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart:
   //    if (! fCurrentDoubleTremolo) { JMI
       {
         // fetch current voice
@@ -13780,7 +13780,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
             inputLineNumber,
 						nullptr, // will be set when double tremolo is appended to a measure JMI v0.9.66 PIM
             msrDoubleTremoloKind::kDoubleTremoloNotes,
-            msrTremoloTypeKind::kTremoloTypeStart,
+            msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart,
             tremoloMarksNumber,
             doubleTremoloPlacementKind);
       }
@@ -13801,7 +13801,7 @@ void mxsr2msrTranslator::visitStart (S_tremolo& elt)
 */
       break;
 
-    case msrTremoloTypeKind::kTremoloTypeStop:
+    case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop:
       if (fCurrentDoubleTremolo) {
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceTremolos ()) {
@@ -20969,9 +20969,9 @@ S_msrNote mxsr2msrTranslator::createNote (
   }
 
   else if (
-    fCurrentTremoloTypeKind == msrTremoloTypeKind::kTremoloTypeStart
+    fCurrentDoubleTremoloTypeKind == msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart
       ||
-    fCurrentTremoloTypeKind == msrTremoloTypeKind::kTremoloTypeStop
+    fCurrentDoubleTremoloTypeKind == msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop
   ) {
     // double tremolo note
     if (fCurrentNoteGraphicDurationKind == msrDurationKind::kDuration_NO_) {
@@ -22211,9 +22211,9 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
 #endif
 
     if (
-      fCurrentTremoloTypeKind == msrTremoloTypeKind::kTremoloTypeStart
+      fCurrentDoubleTremoloTypeKind == msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart
         ||
-      fCurrentTremoloTypeKind == msrTremoloTypeKind::kTremoloTypeStop
+      fCurrentDoubleTremoloTypeKind == msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop
     ) {
       // double tremolo note
       newNote->
@@ -22410,15 +22410,15 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
       appendNoteToGraceNotesGroup (newNote);
   }
 
-  else if (fCurrentTremoloTypeKind != msrTremoloTypeKind::kTremoloType_NO_) {
+  else if (fCurrentDoubleTremoloTypeKind != msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_) {
     // newNote belongs to a tremolo
 
-    switch (fCurrentTremoloTypeKind) {
-      case msrTremoloTypeKind::kTremoloType_NO_:
+    switch (fCurrentDoubleTremoloTypeKind) {
+      case msrDoubleTremoloTypeKind::kDoubleTremoloType_NO_:
         // just to avoid a compiler message
         break;
 
-      case msrTremoloTypeKind::kTremoloTypeSingle:
+      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeSingle:
         // append newNote to the current voice
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -22440,7 +22440,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
         // attachCurrentSingleTremoloToNote()
         break;
 
-      case msrTremoloTypeKind::kTremoloTypeStart:
+      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStart:
         // register newNote as first element of the current double tremolo
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceNotes ()) {
@@ -22461,7 +22461,7 @@ void mxsr2msrTranslator::handleNonChordNorTupletNoteOrRest (
             newNote);
         break;
 
-      case msrTremoloTypeKind::kTremoloTypeStop:
+      case msrDoubleTremoloTypeKind::kDoubleTremoloTypeStop:
         // register newNote as second element of the current double tremolo
 #ifdef TRACING_IS_ENABLED
         if (gGlobalTracingOahGroup->getTraceNotes ()) {

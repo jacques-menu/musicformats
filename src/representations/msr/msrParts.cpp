@@ -28,7 +28,11 @@
   #include "tracingOah.h"
 #endif
 
+#include "msrBarLines.h"
+#include "msrBreaks.h"
 #include "msrParts.h"
+#include "msrRehearsalMarks.h"
+#include "msrTempos.h"
 
 #include "oahOah.h"
 

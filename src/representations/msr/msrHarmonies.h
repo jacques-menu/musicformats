@@ -17,12 +17,14 @@
 #include "msrElements.h"
 #include "msrMeasureElements.h"
 
+#include "msrTypesForwardDeclarations.h"
+
+#include "msrDurations.h"
 #include "msrIntervals.h"
 #include "msrNotes.h"
-// #include "msrOctaves.h"
-// #include "msrTablatures.h"
 #include "msrTupletFactors.h"
 #include "msrVoices.h"
+
 
 namespace MusicFormats
 {

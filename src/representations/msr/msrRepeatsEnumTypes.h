@@ -12,6 +12,10 @@
 #ifndef ___msrRepeatsEnumTypes___
 #define ___msrRepeatsEnumTypes___
 
+#include <string>
+#include <ostream>
+
+using namespace std;
 
 namespace MusicFormats
 {

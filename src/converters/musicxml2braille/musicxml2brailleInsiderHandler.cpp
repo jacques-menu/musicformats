@@ -12,6 +12,9 @@
 #include <iomanip>      // setw, setprecision, ...
 #include <regex>
 
+// libmusicxml2
+#include "visitor.h"
+
 #include "oahWae.h"
 
 #include "enableHarmoniesExtraOahIfDesired.h"

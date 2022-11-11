@@ -16,6 +16,11 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
+#include "msrScores.h"
+#include "msrPathToVoice.h"
+
+#include "lpsrScores.h"
+
 #include "oahWae.h"
 #include "mxsr2msrWae.h"
 #include "msr2msrWae.h"

@@ -19,6 +19,10 @@
 #include "mfServiceRunData.h"
 #include "mfTiming.h"
 
+#include "msrScores.h"
+
+#include "lpsrScores.h"
+
 #include "msr2lpsrWae.h"
 
 #include "enableTracingIfDesired.h"

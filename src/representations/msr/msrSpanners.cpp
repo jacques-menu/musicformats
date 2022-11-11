@@ -221,37 +221,30 @@ void msrSpanner::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "spannerPlacementKind" << " : " <<
-    spannerPlacementKindAsString () <<
+    "fSpannerPlacementKind" << " : " << fSpannerPlacementKind <<
     endl <<
     setw (fieldWidth) <<
-    "spannerTypeKind" << " : " <<
-    fSpannerTypeKind <<
+    "fSpannerTypeKind" << " : " << fSpannerTypeKind <<
     endl <<
     setw (fieldWidth) <<
-    "spannerUpLinkToNote" << " : " <<
-    fSpannerUpLinkToNote->asShortString () <<
+    "fSpannerUpLinkToNote" << " : " << fSpannerUpLinkToNote->asShortString () <<
     endl <<
     setw (fieldWidth) <<
-    "spannerBeginText" << " : \"" <<
-    fSpannerBeginText <<
+    "fSpannerBeginText" << " : \"" << fSpannerBeginText <<
     "\"" <<
     endl <<
     setw (fieldWidth) <<
-    "spannerMiddleText" << " : \"" <<
-    fSpannerMiddleText <<
+    "fSpannerMiddleText" << " : \"" << fSpannerMiddleText <<
     "\"" <<
     endl <<
     setw (fieldWidth) <<
-    "spannerEndText" << " : \"" <<
-    fSpannerEndText <<
+    "fSpannerEndText" << " : \"" << fSpannerEndText <<
     "\"" <<
     endl;
 
   os << left <<
     setw (fieldWidth) <<
-    "spannerUpLinkToNote" << " : " <<
-    spannerPlacementKindAsString () <<
+    "fSpannerUpLinkToNote" << " : " << // JMI v0.9.66
     endl;
   ++gIndenter;
     os <<
@@ -261,7 +254,7 @@ void msrSpanner::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-    "spannerSideLinkToOtherEnd";
+    "fSpannerSideLinkToOtherEnd";
   if (fSpannerSideLinkToOtherEnd) {
     os <<
       endl <<

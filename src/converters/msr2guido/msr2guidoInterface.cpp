@@ -16,7 +16,8 @@
 #include "xmlfile.h"
 #include "xmlreader.h"
 
-#include "wae.h"
+#include "msrScores.h"
+
 #include "msr2msrWae.h"
 #include "msr2mxsrWae.h"
 #include "mxsr2guidoWae.h"
