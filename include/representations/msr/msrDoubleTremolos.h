@@ -22,15 +22,15 @@ namespace MusicFormats
 
 // tremolo types
 //______________________________________________________________________________
-enum class msrTremoloTypeKind {
-  kTremoloType_NO_,
-  kTremoloTypeSingle, kTremoloTypeStart, kTremoloTypeStop
+enum class msrDoubleTremoloTypeKind {
+  kDoubleTremoloType_NO_,
+  kDoubleTremoloTypeSingle, kDoubleTremoloTypeStart, kDoubleTremoloTypeStop
 };
 
-string msrTremoloTypeKindAsString (
-  msrTremoloTypeKind tremoloTypeKind);
+string msrDoubleTremoloTypeKindAsString (
+  msrDoubleTremoloTypeKind tremoloTypeKind);
 
-ostream& operator << (ostream& os, const msrTremoloTypeKind& elt);
+ostream& operator << (ostream& os, const msrDoubleTremoloTypeKind& elt);
 
 //______________________________________________________________________________
 // data types
@@ -55,7 +55,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
                             int                  inputLineNumber,
                             S_msrMeasure         upLinkToMeasure,
                             msrDoubleTremoloKind doubleTremoloKind,
-                            msrTremoloTypeKind   doubleTremoloTypeKind,
+                            msrDoubleTremoloTypeKind   doubleDoubleTremoloTypeKind,
                             int                  doubleTremoloMarksNumber,
                             msrPlacementKind     doubleTremoloPlacementKind);
 
@@ -73,7 +73,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
                             int                  inputLineNumber,
                             S_msrMeasure         upLinkToMeasure,
                             msrDoubleTremoloKind doubleTremoloKind,
-                            msrTremoloTypeKind   doubleTremoloTypeKind,
+                            msrDoubleTremoloTypeKind   doubleDoubleTremoloTypeKind,
                             int                  doubleTremoloMarksNumber,
                             msrPlacementKind     doubleTremoloPlacementKind);
 
@@ -112,12 +112,12 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     // double tremolo type kind
 
-    void                  setDoubleTremoloTypeKind (
-                            msrTremoloTypeKind doubleTremoloTypeKind)
-                              { fDoubleTremoloTypeKind = doubleTremoloTypeKind; }
+    void                  setDoubleDoubleTremoloTypeKind (
+                            msrDoubleTremoloTypeKind doubleDoubleTremoloTypeKind)
+                              { fDoubleDoubleTremoloTypeKind = doubleDoubleTremoloTypeKind; }
 
-    msrTremoloTypeKind    getDoubleTremoloTypeKind () const
-                              { return fDoubleTremoloTypeKind; }
+    msrDoubleTremoloTypeKind    getDoubleDoubleTremoloTypeKind () const
+                              { return fDoubleDoubleTremoloTypeKind; }
 
     // double tremolo placement
 
@@ -234,7 +234,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
 
     msrDoubleTremoloKind  fDoubleTremoloKind;
 
-    msrTremoloTypeKind    fDoubleTremoloTypeKind;
+    msrDoubleTremoloTypeKind    fDoubleDoubleTremoloTypeKind;
 
     int                   fDoubleTremoloMarksNumber;
 

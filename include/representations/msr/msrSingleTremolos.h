@@ -14,7 +14,10 @@
 
 #include "msrElements.h"
 
+#include "msrTypesForwardDeclarations.h"
+
 #include "msrDurations.h"
+#include "msrPlacements.h"
 
 
 namespace MusicFormats

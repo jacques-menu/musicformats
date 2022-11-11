@@ -15,9 +15,14 @@
 #include <map>
 #include <vector>
 
+#include "visitor.h"
 #include "xml.h"
 
-// #include "msr.h"
+#include "msrKeys.h"
+#include "msrPlacements.h"
+#include "msrSpanners.h"
+#include "msrTupletFactors.h"
+
 
 
 namespace MusicFormats

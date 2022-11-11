@@ -12,6 +12,10 @@
 #ifndef ___msrTemposEnumTypes___
 #define ___msrTemposEnumTypes___
 
+#include <string>
+#include <ostream>
+
+
 // #include <list>
 //
 // #include "msrElements.h"
@@ -22,6 +26,8 @@
 // #include "msrTuplets.h"
 // #include "msrWords.h"
 
+
+using namespace std;
 
 namespace MusicFormats
 {

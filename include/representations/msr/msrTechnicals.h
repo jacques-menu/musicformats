@@ -448,8 +448,6 @@ class EXP msrTechnicalWithString : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                technicalWithStringPlacementKindAsString () const;
-
   public:
 
     // visitors

@@ -12,7 +12,7 @@
 #ifndef ___msrInterface___
 #define ___msrInterface___
 
-// #include "msr.h"
+#include "msrOah.h"
 
 
 namespace MusicFormats

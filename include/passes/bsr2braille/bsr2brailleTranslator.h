@@ -19,7 +19,9 @@
   #include "tracingOah.h"
 #endif
 
-// #include "bsr.h"
+#include "bsrTypesForwardDeclarations.h"
+
+#include "bsrScores.h"
 
 #include "bsrOah.h"
 
