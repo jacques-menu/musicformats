@@ -14,7 +14,8 @@
 
 #include "exports.h"
 
-// #include "lpsr.h"
+#include "msrTypesForwardDeclarations.h"
+#include "lpsrTypesForwardDeclarations.h"
 
 #include "msrOah.h"
 #include "lpsrOah.h"

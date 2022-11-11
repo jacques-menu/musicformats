@@ -12,10 +12,13 @@
 #ifndef ___msrPartGroups___
 #define ___msrPartGroups___
 
+#include <map>
+
 #include "msrPartGroupElements.h"
 
-// #include "msrMeasuresSlices.h"
-// #include "msrParts.h"
+#include "msrTypesForwardDeclarations.h"
+
+#include "msrScores.h"
 
 
 namespace MusicFormats

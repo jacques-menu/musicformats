@@ -12,9 +12,12 @@
 #ifndef ___bsrInterface___
 #define ___bsrInterface___
 
-#include "msrOah.h"
+#include "msrScores.h"
 
-// #include "bsr.h"
+#include "bsrScores.h"
+
+#include "msrOah.h"
+#include "bsrOah.h"
 
 
 namespace MusicFormats

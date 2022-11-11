@@ -15,7 +15,10 @@
 #include <map>
 #include <vector>
 
-// #include "msr.h"
+// libmusicxml2
+#include "visitor.h"
+
+#include "msrDalSegnos.h"
 
 
 namespace MusicFormats

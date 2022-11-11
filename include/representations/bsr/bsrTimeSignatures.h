@@ -120,6 +120,7 @@ string bsrTimeKindAsDebugString (
 
 ostream& operator << (ostream& os, const bsrTimeSignatureKind& elt);
 
+//______________________________________________________________________________
 class EXP bsrTimeSignature : public bsrLineContentsElement
 {
   public:

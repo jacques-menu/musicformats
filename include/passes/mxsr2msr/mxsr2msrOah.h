@@ -12,6 +12,7 @@
 #ifndef ___mxsr2msrOah___
 #define ___mxsr2msrOah___
 
+#include "msrClefs.h"
 #include "msrSegnos.h"
 #include "msrDalSegnos.h"
 

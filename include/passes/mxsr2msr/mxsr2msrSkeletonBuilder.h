@@ -14,6 +14,8 @@
 
 #include "typedefs.h"
 
+#include "msrPartGroups.h"
+#include "msrPrintObjects.h"
 
 
 namespace MusicFormats

@@ -51,6 +51,7 @@ string lpsrContextExistingKindAsString (
 
 ostream& operator << (ostream& os, const lpsrContextExistingKind& elt);
 
+//______________________________________________________________________________
 class EXP lpsrContext : public lpsrElement
 {
   public:
