@@ -20,8 +20,6 @@
 
 #include "oahOah.h"
 
-// #include "lpsr.h"
-
 #include "oahEarlyOptions.h"
 
 #include "msrOah.h"

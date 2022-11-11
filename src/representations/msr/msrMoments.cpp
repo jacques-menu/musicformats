@@ -13,7 +13,7 @@
 #include <iomanip>      // setw()), set::precision(), ...
 
 #include "mfIndentedTextOutput.h"
-#include "mfStringsHandling.h" // #include JMI v0.9.66
+#include "mfStringsHandling.h"
 
 #include "msrMoments.h"
 
@@ -221,6 +221,73 @@ void testMsrMomentComparisons (ostream& os)
     endl;
 
 /* output: JMI
+
+m1: [Moment
+fWrittenPositionInMeseasure : [Rational 3/4]
+fSoundingRelativeOffset     : [Rational -1/16]
+]
+
+m0: [Moment
+fWrittenPositionInMeseasure : [Rational 3/4]
+fSoundingRelativeOffset     : [Rational 0/1]
+]
+
+m2: [Moment
+fWrittenPositionInMeseasure : [Rational 3/4]
+fSoundingRelativeOffset     : [Rational 1/8]
+]
+
+
+m0 == m0: true
+m0 == m0: true
+m1 == m1: true
+m2 == m2: true
+
+m0 != m0: false
+m1 != m1: false
+m2 != m2: false
+
+m0 < m0: false
+m1 < m1: false
+m2 < m2: false
+
+m0 <= m0: true
+m1 <= m1: true
+m2 <= m2: true
+
+m0 >= m0: true
+m1 >= m1: true
+m2 >= m2: true
+
+m0 > m0: false
+m1 > m1: false
+m2 > m2: false
+
+
+m1 == m0: false
+m1 == m1: true
+m1 == m2: false
+
+m1 != m0: true
+m1 != m1: false
+m1 != m2: true
+
+m1 < m0: true
+m1 < m1: false
+m1 < m2: true
+
+m1 <= m0: true
+m1 <= m1: true
+m1 <= m2: true
+
+m1 >= m0: false
+m1 >= m1: true
+m1 >= m2: false
+
+m1 > m0: false
+m1 > m1: false
+m1 > m2: false
+
 */
 }
 

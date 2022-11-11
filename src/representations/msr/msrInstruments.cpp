@@ -273,41 +273,6 @@ void msrScordatura::print (ostream& os) const
   --gIndenter;
 }
 
-string msrSyllableExtendKindAsString (
-  msrSyllableExtendKind syllableExtendKind)
-{
-  string result;
-
-  switch (syllableExtendKind) {
-    case msrSyllableExtendKind::kSyllableExtendNone:
-      result = "kSyllableExtendNone";
-      break;
-    case msrSyllableExtendKind::kSyllableExtendEmpty:
-      result = "kSyllableExtendEmpty";
-      break;
-    case msrSyllableExtendKind::kSyllableExtendSingle:
-      result = "kSyllableExtendSingle";
-      break;
-    case msrSyllableExtendKind::kSyllableExtendStart:
-      result = "kSyllableExtendStart";
-      break;
-    case msrSyllableExtendKind::kSyllableExtendContinue:
-      result = "kSyllableExtendContinue";
-      break;
-    case msrSyllableExtendKind::kSyllableExtendStop:
-      result = "kSyllableExtendStop";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrSyllableExtendKind& elt)
-{
-  os << msrSyllableExtendKindAsString (elt);
-  return os;
-}
-
 ostream& operator << (ostream& os, const S_msrScordatura& elt)
 {
   if (elt) {
@@ -829,12 +794,9 @@ void msrPedal::print (ostream& os) const
 {
   os <<
     "[Pedal" <<
-    ", pedalType: " <<
-    pedalTypeAsString () <<
-    ", pedalLine: " <<
-    pedalLineAsString () <<
-    ", pedalSign: " <<
-    pedalSignAsString () <<
+    ", fPedalTypeKind: " << fPedalTypeKind <<
+    ", fPedalLineKind: " << fPedalLineKind <<
+    ", fPedalSignKind: " << fPedalSignKind <<
     ", line " << fInputLineNumber <<
     ']' <<
     endl;

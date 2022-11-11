@@ -15,7 +15,6 @@
 #include <string>
 #include <ostream>
 
-// #include "msrAlterations.h"
 #include "msrMusicXMLSpecifics.h"
 
 

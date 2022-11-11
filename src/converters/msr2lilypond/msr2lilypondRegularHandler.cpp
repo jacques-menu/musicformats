@@ -23,8 +23,6 @@
 
 #include "mfStringsHandling.h"
 
-// #include "lpsr.h"
-
 
 #include "oahOah.h"
 

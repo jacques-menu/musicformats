@@ -27,6 +27,8 @@
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
 
+#include "msrScores.h"
+
 #include "wae.h"
 
 #include "Mikrokosmos3WanderingGenerator.h"

@@ -37,6 +37,7 @@ string lpsrElementsSeparatorKindAsString (
 
 ostream& operator << (ostream& os, const lpsrElementsSeparatorKind& elt);
 
+//______________________________________________________________________________
 class EXP lpsrParallelMusicBLock : public lpsrElement
 {
   public:

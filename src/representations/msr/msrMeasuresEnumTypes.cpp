@@ -11,35 +11,6 @@
 
 #include "msrMeasuresEnumTypes.h"
 
-// #include <climits>      // INT_MIN, INT_MAX
-//
-// #include "mfRational.h"
-//
-// #include "visitor.h"
-//
-// #include "mfAssert.h"
-//
-// #include "mfServiceRunData.h"
-//
-// #include "mfStringsHandling.h"
-//
-// #include "msrWae.h"
-//
-// #include "enableTracingIfDesired.h"
-// #ifdef TRACING_IS_ENABLED
-//   #include "tracingOah.h"
-// #endif
-//
-// #include "msrMeasures.h"
-//
-// #include "oahOah.h"
-//
-// #include "msrOah.h"
-//
-// #include "msrHiddenMeasureAndBarLines.h"
-//
-// #include "msrBrowsers.h"
-
 
 using namespace std;
 

@@ -14,20 +14,11 @@
 
 #include "msrVoiceElements.h"
 
-// #include "msrCodas.h"
 #include "msrEyeGlasses.h"
 #include "msrLyrics.h"
 #include "msrMeasures.h"
 #include "msrMoments.h"
 #include "msrMultipleFullBarRests.h"
-// #include "msrRehearsalMarks.h"
-// #include "msrSegnos.h"
-// #include "msrDalSegnos.h"
-// #include "msrSegmentElements.h"
-// #include "msrStaves.h"
-// #include "msrTablatures.h"
-// #include "msrTempos.h"
-// #include "msrVoices.h"
 
 
 namespace MusicFormats

@@ -21,25 +21,6 @@
 #include "msrStaves.h"
 #include "msrTupletFactors.h"
 
-// // #include "msrClefs.h"
-// // #include "msrFiguredBasses.h"
-// // #include "msrGraceNotesGroups.h"
-// // #include "msrKeys.h"
-// #include "msrMeasuresEnumTypes.h"
-// // #include "msrMeasuresSlices.h"
-// #include "msrMultipleFullBarRests.h"
-// // #include "msrRehearsalMarks.h"
-// // #include "msrRepeats.h"
-// // #include "msrSegnos.h"
-// // #include "msrDalSegnos.h"
-// #include "msrRepeats.h"
-// #include "msrScores.h"
-// // #include "msrStavesEnumTypes.h"
-// // #include "msrStavesDetails.h"
-// // #include "msrTempos.h"
-// // #include "msrTimeSignatures.h"
-// // #include "msrTranspositions.h"
-
 
 namespace MusicFormats
 {

@@ -12,8 +12,6 @@
 #ifndef ___lpsr___
 #define ___lpsr___
 
-// #include "msr.h"
-
 #include "lpsrEnumTypes.h"
 #include "lpsrElements.h"
 

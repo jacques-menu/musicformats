@@ -9,9 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include "mfExceptions.h"
-//
-
 #include <stdio.h>
 #include <stdlib.h> // system()
 

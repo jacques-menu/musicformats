@@ -34,46 +34,6 @@ namespace MusicFormats
 {
 
 //________________________________________________________________________
-// data types
-
-enum class msrStaffChangeKind {
-	kStaffChange_NO_,
-	kStaffChangeChordMemberNote,
-	kStaffChangeOtherNote
-};
-
-string msrSyllableKindAsString (
-  msrStaffChangeKind staffChangeKind);
-
-ostream& operator << (ostream& os, const msrStaffChangeKind& elt);
-
-string msrSyllableKindAsString (
-  msrStaffChangeKind staffChangeKind)
-{
-  string result;
-
-  switch (staffChangeKind) {
-    case msrStaffChangeKind::kStaffChange_NO_:
-      result = "kStaffChange_NO_";
-      break;
-    case msrStaffChangeKind::kStaffChangeChordMemberNote:
-      result = "kStaffChangeChordMemberNote";
-      break;
-    case msrStaffChangeKind::kStaffChangeOtherNote:
-      result = "kStaffChangeOtherNote";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrStaffChangeKind& elt)
-{
-  os << msrSyllableKindAsString (elt);
-  return os;
-}
-
-//________________________________________________________________________
 class EXP mxsr2msrTranslator :
 
   // MXSR score partwise

@@ -1278,84 +1278,6 @@ void msrTempo::browseData (basevisitor* v)
   } // switch
 }
 
-string msrTempoKBeatUnitsKindAsString (
-  msrTempoKBeatUnitsKind tempoKind)
-{
-  string result;
-
-  switch (tempoKind) {
-    case msrTempoKBeatUnitsKind::kTempoBeatUnits_NO_:
-      result = "kTempoBeatUnits_NO_";
-      break;
-    case msrTempoKBeatUnitsKind::kTempoBeatUnitsWordsOnly:
-      result = "kTempoBeatUnitsWordsOnly";
-      break;
-    case msrTempoKBeatUnitsKind::kTempoBeatUnitsPerMinute:
-      result = "kTempoBeatUnitsPerMinute";
-      break;
-    case msrTempoKBeatUnitsKind::kTempoBeatUnitsEquivalence:
-      result = "kTempoBeatUnitsEquivalence";
-      break;
-    case msrTempoKBeatUnitsKind::kTempoNotesRelationship:
-      result = "kTempoNotesRelationship";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrTempoKBeatUnitsKind& elt)
-{
-  os << msrTempoKBeatUnitsKindAsString (elt);
-  return os;
-}
-
-string msrTempoParenthesizedKindAsString (
-  msrTempoParenthesizedKind tempoParenthesizedKind)
-{
-  string result;
-
-  switch (tempoParenthesizedKind) {
-    case msrTempoParenthesizedKind::kTempoParenthesizedYes:
-      result = "kTempoParenthesizedYes";
-      break;
-    case msrTempoParenthesizedKind::kTempoParenthesizedNo:
-      result = "kTempoParenthesizedNo";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrTempoParenthesizedKind& elt)
-{
-  os << msrTempoParenthesizedKindAsString (elt);
-  return os;
-}
-
-string msrTempoNotesRelationshipKindAsString (
-  msrTempoNotesRelationshipKind tempoNotesRelationshipKind)
-{
-  string result;
-
-  switch (tempoNotesRelationshipKind) {
-    case msrTempoNotesRelationshipKind::kTempoNotesRelationshipEquals:
-      result = "kTempoNotesRelationshipEquals";
-      break;
-    case msrTempoNotesRelationshipKind::kTempoNotesRelationshipNone:
-      result = "kTempoNotesRelationshipNone";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrTempoNotesRelationshipKind& elt)
-{
-  os << msrTempoNotesRelationshipKindAsString (elt);
-  return os;
-}
-
 string msrTempo::tempoWordsListAsString (const string& separator) const
 {
   string result;
@@ -1413,7 +1335,7 @@ string msrTempo::asShortStringForMeasuresSlices () const
 
   s <<
     '[';
-//     ", tempoKind: " << msrTempoKBeatUnitsKindAsString (fTempoKind) <<
+//     ", tempoKind: " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
 //     ", tempoWordsList: ";
 //
 //   if (fTempoWordsList.size ()) {
@@ -1457,7 +1379,7 @@ void msrTempo::print (ostream& os) const
 
   os << left <<
     setw (fieldWidth) <<
-   "fTempoKind" << " : " << msrTempoKBeatUnitsKindAsString (fTempoKind) <<
+   "fTempoKind" << " : " << msrTempoBeatUnitsKindAsString (fTempoKind) <<
     endl;
 
   os << left <<

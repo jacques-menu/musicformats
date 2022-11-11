@@ -9,33 +9,7 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include <climits>      // INT_MIN, INT_MAX
-//
-// #include "visitor.h"
-//
-// #include "enableTracingIfDesired.h"
-// #ifdef TRACING_IS_ENABLED
-//   #include "tracingOah.h"
-// #endif
-//
-// #include "mfAssert.h"
-//
-// #include "mfServiceRunData.h"
-//
-// #include "mfStringsHandling.h"
-//
-// #include "msrWae.h"
-
 #include "msrStavesEnumTypes.h"
-
-// #include "oahOah.h"
-//
-// #include "oahOah.h"
-// #include "msrOah.h"
-// #include "mxsr2msrOah.h"
-// #include "msr2msrOah.h"
-//
-// #include "msrBrowsers.h"
 
 
 using namespace std;
@@ -108,6 +82,33 @@ string msrStaffKindAsStringForPrint (
 
   return result;
 }
+
+string msrStaffChangeKindAsString (
+  msrStaffChangeKind staffChangeKind)
+{
+  string result;
+
+  switch (staffChangeKind) {
+    case msrStaffChangeKind::kStaffChange_NO_:
+      result = "kStaffChange_NO_";
+      break;
+    case msrStaffChangeKind::kStaffChangeChordMemberNote:
+      result = "kStaffChangeChordMemberNote";
+      break;
+    case msrStaffChangeKind::kStaffChangeOtherNote:
+      result = "kStaffChangeOtherNote";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrStaffChangeKind& elt)
+{
+  os << msrStaffChangeKindAsString (elt);
+  return os;
+}
+
 
 
 }

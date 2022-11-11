@@ -24,24 +24,6 @@
 #include "msrTranspositions.h"
 #include "msrTupletFactors.h"
 
-// #include "msrBarChecks.h"
-// #include "msrBarLines.h"
-// #include "msrBarNumberChecks.h"
-// #include "msrBreaks.h"
-// #include "msrDoubleTremolos.h"
-// #include "msrInstruments.h"
-// #include "msrMeasuresEnumTypes.h"
-// #include "msrMeasures.h"
-// #include "msrMeasuresSlices.h"
-// #include "msrParts.h"
-// #include "msrPartGroups.h"
-// #include "msrPrintObjects.h"
-// #include "msrRepeats.h"
-// #include "msrMultipleFullBarRests.h"
-// #include "msrRehearsalMarks.h"
-// #include "msrScores.h"
-// #include "msrStavesDetails.h"
-// #include "msrTempos.h"
 
 namespace MusicFormats
 {

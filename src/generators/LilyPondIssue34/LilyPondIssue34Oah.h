@@ -12,8 +12,6 @@
 #ifndef ___LilyPondIssue34Oah___
 #define ___LilyPondIssue34Oah___
 
-// #include "msr.h"
-
 #include "mfMultiGenerationOah.h"
 
 #include "msrGenerationBasicTypes.h"

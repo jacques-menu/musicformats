@@ -16,17 +16,6 @@
 #include <ostream>
 
 
-// #include <list>
-//
-// #include "msrElements.h"
-// #include "msrMeasureElements.h"
-//
-// #include "msrBeams.h"
-// #include "msrPlacements.h"
-// #include "msrTuplets.h"
-// #include "msrWords.h"
-
-
 using namespace std;
 
 namespace MusicFormats
@@ -65,9 +54,6 @@ string msrTempoTupletShowNumberKindAsString (
 
 ostream& operator << (ostream& os, const msrTempoTupletShowNumberKind& elt);
 
-//______________________________________________________________________________
-// data types
-
 enum class msrTempoNotesRelationshipElementsKind {
   kTempoNotesRelationshipElementsLeft,
   kTempoNotesRelationshipElementsRight
@@ -78,9 +64,6 @@ string msrTempoNotesRelationshipElementsKindAsString (
 
 ostream& operator << (ostream& os, const msrTempoNotesRelationshipElementsKind& elt);
 
-//______________________________________________________________________________
-// data types
-
 enum class msrTempoKBeatUnitsKind {
   kTempoBeatUnits_NO_,
   kTempoBeatUnitsWordsOnly,
@@ -89,7 +72,7 @@ enum class msrTempoKBeatUnitsKind {
   kTempoNotesRelationship
 };
 
-string msrTempoKBeatUnitsKindAsString (
+string msrTempoBeatUnitsKindAsString (
   msrTempoKBeatUnitsKind tempoKind);
 
 ostream& operator << (ostream& os, const msrTempoKBeatUnitsKind& elt);

@@ -20,6 +20,8 @@
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
 
+#include "msrMoments.h"
+
 #include "wae.h"
 #include "oahWae.h"
 
@@ -36,9 +38,6 @@
 
 #include "oahBasicTypes.h" // for testIncludeOptionsFromFile()
 #include "oahEarlyOptions.h"
-
-// #include "msr.h"
-// #include "lpsr.h"
 
 #include "mfcLibraryComponent.h"
 #include "musicxml2lilypondComponent.h"
@@ -85,13 +84,13 @@ static void catchSignals ()  {}
 #endif
 
 //_______________________________________________________________________________
+void allowCoreDumps ()
+{
 // #include <unistd.h>
 // #include <signal.h>
 // #include <sys/resource.h>
 // #include <stdio.h>
 
-void allowCoreDumps ()
-{
 //   pid_t pid = getpid();
 //
 //   struct rlimit l;

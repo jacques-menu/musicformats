@@ -122,6 +122,7 @@ class EXP msrMoment
 };
 EXP ostream& operator << (ostream& os, const msrMoment& elt);
 
+//______________________________________________________________________________
 void testMsrMomentComparisons (ostream& os);
 
 
