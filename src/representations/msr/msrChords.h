@@ -31,23 +31,6 @@
 #include "msrTuplets.h"
 #include "msrWords.h"
 
-// #include "msrElements.h"
-// #include "msrTupletElements.h"
-//
-// #include "msrArticulations.h"
-// // #include "msrDirections.h"
-// #include "msrDurations.h"
-// // #include "msrGlissandos.h"
-// #include "msrGraceNotesGroups.h"
-// // #include "msrNotes.h"
-// // #include "msrOrnaments.h"
-// // #include "msrScores.h"
-// // #include "msrDalSegnos.h"
-// // #include "msrSlides.h"
-// #include "msrSlurs.h"
-// #include "msrSpanners.h"
-// #include "msrTechnicals.h"
-// #include "msrTies.h"
 
 namespace MusicFormats
 {

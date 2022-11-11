@@ -9,8 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include "wae.h"
-
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
@@ -74,7 +72,7 @@ ostream& operator << (ostream& os, const S_msdlParserWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -198,7 +196,7 @@ ostream& operator << (ostream& os, const S_msdlParserEnglishWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -323,7 +321,7 @@ ostream& operator << (ostream& os, const S_msdlParserFrenchWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -447,7 +445,7 @@ ostream& operator << (ostream& os, const S_msdlParserItalianWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -572,7 +570,7 @@ ostream& operator << (ostream& os, const S_msdlParserGermanWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -697,7 +695,7 @@ ostream& operator << (ostream& os, const S_msdlParserSpanishWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -822,7 +820,7 @@ ostream& operator << (ostream& os, const S_msdlParserDutchWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -348,7 +348,6 @@ EXP ostream& operator << (ostream& os, const S_msrHarpPedalsTuning& elt);
 //______________________________________________________________________________
 // data types
 
-
 enum class msrPedalTypeKind {
   kPedalType_NO_,
   kPedalTypeStart, kPedalTypeContinue, kPedalTypeChange, kPedalTypeStop
@@ -438,12 +437,6 @@ class EXP msrPedal : public msrMeasureElement
 
     // print
     // ------------------------------------------------------
-
-    string                pedalTypeAsString () const;
-
-    string                pedalLineAsString () const;
-
-    string                pedalSignAsString () const;
 
     void                  print (ostream& os) const override;
 

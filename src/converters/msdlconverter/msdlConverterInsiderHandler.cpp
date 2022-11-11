@@ -71,8 +71,6 @@
 
 
 // Lilypond
-// #include "lpsr.h"
-
 #include "msr2lpsrOah.h"
 #include "lpsrOah.h"
 #include "lpsr2lilypondOah.h"
@@ -81,8 +79,6 @@
 
 
 // Braille
-// #include "bsr.h"
-
 #include "msr2bsrOah.h"
 #include "bsrOah.h"
 #include "brailleGenerationOah.h"

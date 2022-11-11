@@ -11,8 +11,6 @@
 
 #include <iomanip>      // setw()), set::precision(), ...
 
-// #include <stddef>       // size_t JMI
-
 #include "mfAssert.h"
 #include "mfBool.h"
 #include "mfStringsHandling.h"
@@ -152,7 +150,7 @@ ostream& operator << (ostream& os, const S_mfslOptionsBlock& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -767,7 +765,7 @@ ostream& operator << (ostream& os, const S_mfslInput& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -973,7 +971,7 @@ ostream& operator << (ostream& os, const S_mfslInputsTable& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1630,7 +1628,7 @@ ostream& operator << (ostream& os, const S_mfslChoice& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1836,7 +1834,7 @@ ostream& operator << (ostream& os, const S_mfslChoicesTable& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -2039,7 +2037,7 @@ ostream& operator << (ostream& os, const S_mfslCaseChoiceStatement& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -2242,7 +2240,7 @@ ostream& operator << (ostream& os, const S_mfslCaseInputStatement& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

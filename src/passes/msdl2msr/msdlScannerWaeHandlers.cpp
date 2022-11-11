@@ -11,8 +11,6 @@
 
 #include "mfStringsHandling.h"
 
-// #include "wae.h"
-
 #include "enableTracingIfDesired.h"
 #ifdef TRACING_IS_ENABLED
   #include "tracingOah.h"
@@ -76,7 +74,7 @@ ostream& operator << (ostream& os, const S_msdlScannerWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -189,7 +187,7 @@ ostream& operator << (ostream& os, const S_msdlScannerEnglishWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -302,7 +300,7 @@ ostream& operator << (ostream& os, const S_msdlScannerFrenchWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -415,7 +413,7 @@ ostream& operator << (ostream& os, const S_msdlScannerItalianWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -529,7 +527,7 @@ ostream& operator << (ostream& os, const S_msdlScannerGermanWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -643,7 +641,7 @@ ostream& operator << (ostream& os, const S_msdlScannerSpanishWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -757,7 +755,7 @@ ostream& operator << (ostream& os, const S_msdlScannerDutchWaeHandler& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

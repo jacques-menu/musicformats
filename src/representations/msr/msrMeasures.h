@@ -19,17 +19,6 @@
 #include "msrNotes.h"
 #include "msrSegments.h"
 
-// #include "msrFiguredBasses.h"
-// #include "msrOctaveShifts.h"
-// #include "msrParts.h"
-// #include "msrScores.h"
-// #include "msrSegnos.h"
-// #include "msrStaves.h"
-// #include "msrTablatures.h"
-// #include "msrTuplets.h"
-// #include "msrVoices.h"
-// #include "msrVoiceStaffChanges.h"
-
 
 namespace MusicFormats
 {

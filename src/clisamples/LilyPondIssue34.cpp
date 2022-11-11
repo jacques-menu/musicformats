@@ -25,6 +25,8 @@
 #include "mfStringsHandling.h"
 #include "mfTiming.h"
 
+#include "msrScores.h"
+
 #include "LilyPondIssue34Generator.h"
 
 #include "oahOah.h"

@@ -15,8 +15,6 @@
 
 #include "exports.h"
 
-// #include "lpsr.h"
-
 
 namespace MusicFormats
 {

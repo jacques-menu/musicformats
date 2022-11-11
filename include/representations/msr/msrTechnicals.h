@@ -58,8 +58,6 @@ ostream& operator << (ostream& os, const msrTechnicalAccidentalMarkKind& elt);
 
 */
 
-// technical types
-//______________________________________________________________________________
 enum class msrTechnicalTypeKind { // JMI ???
   kTechnicalType_NO_,
   kTechnicalTypeStart, kTechnicalTypeStop
@@ -69,6 +67,41 @@ string msrTechnicalTypeKindAsString (
   msrTechnicalTypeKind technicalTypeKind);
 
 ostream& operator << (ostream& os, const msrTechnicalTypeKind& elt);
+
+// data types
+
+enum class msrTechnicalWithFloatKind {
+  kTechnicalWithFloatBend
+};
+
+string msrTechnicalWithFloatKindAsString (
+  msrTechnicalWithFloatKind technicalWithFloatKind);
+
+ostream& operator << (ostream& os, const msrTechnicalWithFloatKind& elt);
+
+enum class msrTechnicalWithIntegerKind {
+  kFingering,
+  kFret,
+  kString
+};
+
+string msrTechnicalWithIntegerKindAsString (
+  msrTechnicalWithIntegerKind technicalWithIntegerKind);
+
+ostream& operator << (ostream& os, const msrTechnicalWithIntegerKind& elt);
+
+enum class msrTechnicalWithStringKind {
+  kHammerOn,
+  kHandbell,
+  kOtherTechnical,
+  kPluck,
+  kPullOff
+};
+
+string msrTechnicalWithStringKindAsString (
+  msrTechnicalWithStringKind technicalWithStringKind);
+
+ostream& operator << (ostream& os, const msrTechnicalWithStringKind& elt);
 
 //______________________________________________________________________________
 class EXP msrTechnical : public msrElement
@@ -132,8 +165,6 @@ class EXP msrTechnical : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                technicalPlacementKindAsString () const;
-
   public:
 
     // visitors
@@ -168,19 +199,6 @@ typedef SMARTP<msrTechnical> S_msrTechnical;
 EXP ostream& operator << (ostream& os, const S_msrTechnical& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrTechnicalWithIntegerKind {
-  kFingering,
-  kFret,
-  kString
-};
-
-string msrTechnicalWithIntegerKindAsString (
-  msrTechnicalWithIntegerKind technicalWithIntegerKind);
-
-ostream& operator << (ostream& os, const msrTechnicalWithIntegerKind& elt);
-
 class EXP msrTechnicalWithInteger : public msrElement
 {
   public:
@@ -235,8 +253,6 @@ class EXP msrTechnicalWithInteger : public msrElement
     // public services
     // ------------------------------------------------------
 
-    string                technicalWithIntegerPlacementKindAsString () const;
-
   public:
 
     // visitors
@@ -272,17 +288,6 @@ typedef SMARTP<msrTechnicalWithInteger> S_msrTechnicalWithInteger;
 EXP ostream& operator << (ostream& os, const S_msrTechnicalWithInteger& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrTechnicalWithFloatKind {
-  kTechnicalWithFloatBend
-};
-
-string msrTechnicalWithFloatKindAsString (
-  msrTechnicalWithFloatKind technicalWithFloatKind);
-
-ostream& operator << (ostream& os, const msrTechnicalWithFloatKind& elt);
-
 class EXP msrTechnicalWithFloat : public msrElement
 {
   public:
@@ -374,21 +379,6 @@ typedef SMARTP<msrTechnicalWithFloat> S_msrTechnicalWithFloat;
 EXP ostream& operator << (ostream& os, const S_msrTechnicalWithFloat& elt);
 
 //______________________________________________________________________________
-// data types
-
-enum class msrTechnicalWithStringKind {
-  kHammerOn,
-  kHandbell,
-  kOtherTechnical,
-  kPluck,
-  kPullOff
-};
-
-string msrTechnicalWithStringKindAsString (
-  msrTechnicalWithStringKind technicalWithStringKind);
-
-ostream& operator << (ostream& os, const msrTechnicalWithStringKind& elt);
-
 class EXP msrTechnicalWithString : public msrElement
 {
   public:

@@ -12,8 +12,6 @@
 #ifndef ___Mikrokosmos3WanderingOah___
 #define ___Mikrokosmos3WanderingOah___
 
-// #include "msr.h"
-
 #include "mfMultiGenerationOah.h"
 
 #include "msrGenerationBasicTypes.h"

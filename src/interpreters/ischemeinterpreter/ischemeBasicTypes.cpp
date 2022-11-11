@@ -11,8 +11,6 @@
 
 #include <iomanip>      // setw()), set::precision(), ...
 
-// #include <stddef>       // size_t JMI
-
 #include "mfAssert.h"
 #include "mfBool.h"
 #include "mfStringsHandling.h"
@@ -152,7 +150,7 @@ ostream& operator << (ostream& os, const S_ischemeOptionsBlock& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -767,7 +765,7 @@ ostream& operator << (ostream& os, const S_ischemeInput& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -973,7 +971,7 @@ ostream& operator << (ostream& os, const S_ischemeInputsTable& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1630,7 +1628,7 @@ ostream& operator << (ostream& os, const S_ischemeChoice& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -1836,7 +1834,7 @@ ostream& operator << (ostream& os, const S_ischemeChoicesTable& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -2039,7 +2037,7 @@ ostream& operator << (ostream& os, const S_ischemeCaseChoiceStatement& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 
@@ -2242,7 +2240,7 @@ ostream& operator << (ostream& os, const S_ischemeCaseInputStatement& elt)
   else {
     os << "[NONE]" << endl;
   }
-  
+
   return os;
 }
 

@@ -12,8 +12,6 @@
 #ifndef ___msrPathToVoice___
 #define ___msrPathToVoice___
 
-// #include "msrElements.h"
-
 #include "msrVoices.h"
 
 #include "msrStaves.h"

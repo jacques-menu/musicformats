@@ -14,30 +14,6 @@
 
 #include <string>
 
-// #include "msrSegmentElements.h"
-//
-// #include "msrBarChecks.h"
-// #include "msrBarLines.h"
-// #include "msrBarNumberChecks.h"
-// #include "msrBreaks.h"
-// #include "msrDoubleTremolos.h"
-// #include "msrEyeGlasses.h"
-// #include "msrFiguredBasses.h"
-// #include "msrHarmonies.h"
-// #include "msrMoments.h"
-// #include "msrMusicXMLSpecifics.h"
-// #include "msrOctaveShifts.h"
-// // #include "msrParts.h"
-// #include "msrPartGroups.h"
-// #include "msrNotes.h"
-// #include "msrRehearsalMarks.h"
-// #include "msrScores.h"
-// #include "msrVoiceStaffChanges.h"
-// // #include "msrStaves.h"
-// #include "msrTempos.h"
-// #include "msrTuplets.h"
-// #include "msrVoices.h"
-
 
 using namespace std;
 

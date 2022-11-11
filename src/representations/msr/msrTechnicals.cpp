@@ -30,61 +30,6 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrTechnicalTypeKindAsString (
-  msrTechnicalTypeKind technicalTypeKind)
-{
-  string result;
-
-  switch (technicalTypeKind) {
-    case msrTechnicalTypeKind::kTechnicalType_NO_:
-      result = "kTechnicalType_NO_";
-      break;
-    case msrTechnicalTypeKind::kTechnicalTypeStart:
-      result = "kTechnicalTypeStart";
-      break;
-    case msrTechnicalTypeKind::kTechnicalTypeStop:
-      result = "kTechnicalTypeStop";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrTechnicalTypeKind& elt)
-{
-  os << msrTechnicalTypeKindAsString (elt);
-  return os;
-}
-
-//______________________________________________________________________________
-S_msrTechnical msrTechnical::create (
-  int              inputLineNumber,
-  msrTechnicalKind technicalKind,
-  msrPlacementKind technicalPlacementKind)
-{
-  msrTechnical* o =
-    new msrTechnical (
-      inputLineNumber,
-      technicalKind,
-      technicalPlacementKind);
-  assert (o != nullptr);
-  return o;
-}
-
-msrTechnical::msrTechnical (
-  int              inputLineNumber,
-  msrTechnicalKind technicalKind,
-  msrPlacementKind technicalPlacementKind)
-    : msrElement (inputLineNumber)
-{
-  fTechnicalKind = technicalKind;
-
-  fTechnicalPlacementKind = technicalPlacementKind;
-}
-
-msrTechnical::~msrTechnical ()
-{}
-
 string msrTechnicalKindAsString (
   msrTechnicalKind technicalKind)
 {
@@ -147,33 +92,138 @@ ostream& operator << (ostream& os, const msrTechnicalKind& elt)
   return os;
 }
 
-string msrTechnical::technicalPlacementKindAsString () const
-{
-  return
-    msrPlacementKindAsString (
-      fTechnicalPlacementKind);
-}
-
-/*
-string msrTechnical::technicalAccidentalMarkKindAsString () const
+string msrTechnicalTypeKindAsString (
+  msrTechnicalTypeKind technicalTypeKind)
 {
   string result;
 
-  switch (fTechnicalAccidentalMarkKind) {
-    case msrTechnical::msrAlterationKind::kAlterationNatural:
-      result = "natural";
+  switch (technicalTypeKind) {
+    case msrTechnicalTypeKind::kTechnicalType_NO_:
+      result = "kTechnicalType_NO_";
       break;
-    case msrTechnical::msrAlterationKind::kAlterationSharp:
-      result = "sharp";
+    case msrTechnicalTypeKind::kTechnicalTypeStart:
+      result = "kTechnicalTypeStart";
       break;
-    case msrTechnical::msrAlterationKind::kAlterationFlat:
-      result = "flat";
+    case msrTechnicalTypeKind::kTechnicalTypeStop:
+      result = "kTechnicalTypeStop";
       break;
   } // switch
 
   return result;
 }
-*/
+
+ostream& operator << (ostream& os, const msrTechnicalTypeKind& elt)
+{
+  os << msrTechnicalTypeKindAsString (elt);
+  return os;
+}
+
+string msrTechnicalWithIntegerKindAsString (
+  msrTechnicalWithIntegerKind technicalWithIntegerKind)
+{
+  string result;
+
+  switch (technicalWithIntegerKind) {
+    case msrTechnicalWithIntegerKind::kFingering:
+      result = "kFingering";
+      break;
+    case msrTechnicalWithIntegerKind::kFret:
+      result = "kFret";
+      break;
+    case msrTechnicalWithIntegerKind::kString:
+      result = "kString";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTechnicalWithIntegerKind& elt)
+{
+  os << msrTechnicalWithIntegerKindAsString (elt);
+  return os;
+}
+
+string msrTechnicalWithFloatKindAsString (
+  msrTechnicalWithFloatKind technicalWithFloatKind)
+{
+  string result;
+
+  switch (technicalWithFloatKind) {
+    case msrTechnicalWithFloatKind::kTechnicalWithFloatBend:
+      result = "kTechnicalWithFloatBend";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTechnicalWithFloatKind& elt)
+{
+  os << msrTechnicalWithFloatKindAsString (elt);
+  return os;
+}
+
+string msrTechnicalWithStringKindAsString (
+  msrTechnicalWithStringKind technicalWithStringKind)
+{
+  string result;
+
+  switch (technicalWithStringKind) {
+    case msrTechnicalWithStringKind::kHammerOn:
+      result = "kHammerOn";
+      break;
+    case msrTechnicalWithStringKind::kHandbell:
+      result = "kHandbell";
+      break;
+    case msrTechnicalWithStringKind::kOtherTechnical:
+      result = "kOtherTechnical";
+      break;
+    case msrTechnicalWithStringKind::kPluck:
+      result = "kPluck";
+      break;
+    case msrTechnicalWithStringKind::kPullOff:
+      result = "kPullOff";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const msrTechnicalWithStringKind& elt)
+{
+  os << msrTechnicalWithStringKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
+S_msrTechnical msrTechnical::create (
+  int              inputLineNumber,
+  msrTechnicalKind technicalKind,
+  msrPlacementKind technicalPlacementKind)
+{
+  msrTechnical* o =
+    new msrTechnical (
+      inputLineNumber,
+      technicalKind,
+      technicalPlacementKind);
+  assert (o != nullptr);
+  return o;
+}
+
+msrTechnical::msrTechnical (
+  int              inputLineNumber,
+  msrTechnicalKind technicalKind,
+  msrPlacementKind technicalPlacementKind)
+    : msrElement (inputLineNumber)
+{
+  fTechnicalKind = technicalKind;
+
+  fTechnicalPlacementKind = technicalPlacementKind;
+}
+
+msrTechnical::~msrTechnical ()
+{}
 
 void msrTechnical::acceptIn (basevisitor* v)
 {
@@ -285,39 +335,6 @@ msrTechnicalWithInteger::msrTechnicalWithInteger (
 msrTechnicalWithInteger::~msrTechnicalWithInteger ()
 {}
 
-string msrTechnicalWithIntegerKindAsString (
-  msrTechnicalWithIntegerKind technicalWithIntegerKind)
-{
-  string result;
-
-  switch (technicalWithIntegerKind) {
-    case msrTechnicalWithIntegerKind::kFingering:
-      result = "kFingering";
-      break;
-    case msrTechnicalWithIntegerKind::kFret:
-      result = "kFret";
-      break;
-    case msrTechnicalWithIntegerKind::kString:
-      result = "kString";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const msrSyllableKind& elt)
-{
-  os << msrSyllableKindAsString (elt);
-  return os;
-}
-
-string msrTechnicalWithInteger::technicalWithIntegerPlacementKindAsString () const
-{
-  return
-    msrPlacementKindAsString (
-      fTechnicalWithIntegerPlacementKind);
-}
-
 void msrTechnicalWithInteger::acceptIn (basevisitor* v)
 {
   if (gGlobalMsrOahGroup->getTraceMsrVisitors ()) {
@@ -372,9 +389,8 @@ string msrTechnicalWithInteger::asString () const
   s <<
     "[TechnicalWithInteger"
     ", fTechnicalWithIntegerKind: " << fTechnicalWithIntegerKind <<
-    ", fTechnicalWithIntegerValue: '" <<  fTechnicalWithIntegerValue <<
-    "', placement " <<
-    technicalWithIntegerPlacementKindAsString () <<
+    ", fTechnicalWithIntegerValue: " <<  fTechnicalWithIntegerValue <<
+    ", fTechnicalWithIntegerPlacementKind: " << fTechnicalWithIntegerPlacementKind <<
     ']';
 
   return s.str ();
@@ -451,20 +467,6 @@ msrTechnicalWithFloat::msrTechnicalWithFloat (
 
 msrTechnicalWithFloat::~msrTechnicalWithFloat ()
 {}
-
-string msrTechnicalWithFloatKindAsString (
-  msrTechnicalWithFloatKind technicalWithFloatKind)
-{
-  string result;
-
-  switch (technicalWithFloatKind) {
-    case msrTechnicalWithFloatKind::kTechnicalWithFloatBend:
-      result = "bend";
-      break;
-  } // switch
-
-  return result;
-}
 
 void msrTechnicalWithFloat::acceptIn (basevisitor* v)
 {
@@ -604,32 +606,6 @@ msrTechnicalWithString::msrTechnicalWithString (
 
 msrTechnicalWithString::~msrTechnicalWithString ()
 {}
-
-string msrTechnicalWithStringKindAsString (
-  msrTechnicalWithStringKind technicalWithStringKind)
-{
-  string result;
-
-  switch (technicalWithStringKind) {
-    case msrTechnicalWithStringKind::kHammerOn:
-      result = "kHammerOn";
-      break;
-    case msrTechnicalWithStringKind::kHandbell:
-      result = "kHandbell";
-      break;
-    case msrTechnicalWithStringKind::kOtherTechnical:
-      result = "kOtherTechnical";
-      break;
-    case msrTechnicalWithStringKind::kPluck:
-      result = "kPluck";
-      break;
-    case msrTechnicalWithStringKind::kPullOff:
-      result = "kPullOff";
-      break;
-  } // switch
-
-  return result;
-}
 
 void msrTechnicalWithString::acceptIn (basevisitor* v)
 {

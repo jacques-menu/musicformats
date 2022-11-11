@@ -39,6 +39,30 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
+string lpsrElementsSeparatorKindAsString (
+  lpsrElementsSeparatorKind elementsSeparatorKind)
+{
+  string result;
+
+  switch (elementsSeparatorKind) {
+    case lpsrElementsSeparatorKind::kElementsSeparatorEndOfLine:
+      result = "kElementsSeparatorEndOfLine";
+      break;
+    case lpsrElementsSeparatorKind::kElementsSeparatorSpace:
+      result = "kElementsSeparatorSpace";
+      break;
+  } // switch
+
+  return result;
+}
+
+ostream& operator << (ostream& os, const lpsrElementsSeparatorKind& elt)
+{
+  os << lpsrElementsSeparatorKindAsString (elt);
+  return os;
+}
+
+//______________________________________________________________________________
 S_lpsrParallelMusicBLock lpsrParallelMusicBLock::create (
   int                       inputLineNumber,
   lpsrElementsSeparatorKind elementsSeparatorKind)
@@ -142,29 +166,6 @@ void lpsrParallelMusicBLock::browseData (basevisitor* v)
       endl;
   }
 #endif
-}
-
-string msrSyllableExtendKindAsString (
-  lpsrElementsSeparatorKind elementsSeparatorKind)
-{
-  string result;
-
-  switch (elementsSeparatorKind) {
-    case lpsrElementsSeparatorKind::kElementsSeparatorEndOfLine:
-      result = "kElementsSeparatorEndOfLine";
-      break;
-    case lpsrElementsSeparatorKind::kElementsSeparatorSpace:
-      result = "kElementsSeparatorSpace";
-      break;
-  } // switch
-
-  return result;
-}
-
-ostream& operator << (ostream& os, const lpsrElementsSeparatorKind& elt)
-{
-  os << msrSyllableExtendKindAsString (elt);
-  return os;
 }
 
 void lpsrParallelMusicBLock::print (ostream& os) const

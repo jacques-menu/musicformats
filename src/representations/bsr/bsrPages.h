@@ -3,8 +3,6 @@
 
 #include "bsrElements.h"
 
-// #include "bsrPageElements.h"
-
 #include "bsrFootNotes.h"
 #include "bsrLines.h"
 #include "bsrMusicHeadings.h"

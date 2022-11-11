@@ -9,33 +9,6 @@
   https://github.com/jacques-menu/musicformats
 */
 
-// #include <iostream>
-// #include <sstream>
-// #include <iomanip>      // setw, setprecision, ...
-//
-// #include "visitor.h"
-//
-// #include "enableTracingIfDesired.h"
-// #ifdef TRACING_IS_ENABLED
-//   #include "tracingOah.h"
-// #endif
-//
-// #include "mfAssert.h"
-//
-// #include "mfServiceRunData.h"
-//
-// #include "mfStringsHandling.h"
-//
-// #include "msrWae.h"
-//
-// #include "msrTemposEnumTypes.h"
-//
-// #include "oahOah.h"
-//
-// #include "msrOah.h"
-//
-// #include "msrBrowsers.h"
-
 #include "msrTemposEnumTypes.h"
 
 
@@ -45,7 +18,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-string msrTempoKBeatUnitsKindAsString (
+string msrTempoBeatUnitsKindAsString (
   msrTempoKBeatUnitsKind tempoKind)
 {
   string result;
@@ -73,7 +46,7 @@ string msrTempoKBeatUnitsKindAsString (
 
 ostream& operator << (ostream& os, const msrTempoKBeatUnitsKind& elt)
 {
-  os << msrTempoKBeatUnitsKindAsString (elt);
+  os << msrTempoBeatUnitsKindAsString (elt);
   return os;
 }
 

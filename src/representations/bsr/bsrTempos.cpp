@@ -449,7 +449,7 @@ string bsrTempo::asString () const
   s <<
     "Tempo" <<
     ", tempoKind: " <<
-    msrTempoKBeatUnitsKindAsString (fMsrTempo->getTempoKind ()) <<
+    msrTempoBeatUnitsKindAsString (fMsrTempo->getTempoKind ()) <<
     ", tempoCellsList: " <<
     fTempoCellsList->asShortString () <<
     ", spacesBefore: " << fSpacesBefore <<
@@ -512,7 +512,7 @@ void bsrTempo::print (ostream& os) const
   os <<
     setw (fieldWidth) <<
     "tempoKind" << " : " <<
-    msrTempoKBeatUnitsKindAsString (fMsrTempo->getTempoKind ()) <<
+    msrTempoBeatUnitsKindAsString (fMsrTempo->getTempoKind ()) <<
     endl <<
     setw (fieldWidth) <<
     "tempoCellsList" << " : " <<

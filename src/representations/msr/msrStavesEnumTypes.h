@@ -37,10 +37,21 @@ string msrStaffKindAsString (
   msrStaffKind staffKind);
 
 ostream& operator << (ostream& os, const msrStaffKind& elt);
-
 string msrStaffKindAsStringForPrint (
   msrStaffKind staffKind);
 
+// data types
+
+enum class msrStaffChangeKind {
+	kStaffChange_NO_,
+	kStaffChangeChordMemberNote,
+	kStaffChangeOtherNote
+};
+
+string msrStaffChangeKindAsString (
+  msrStaffChangeKind staffChangeKind);
+
+ostream& operator << (ostream& os, const msrStaffChangeKind& elt);
 
 }
 

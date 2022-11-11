@@ -31,8 +31,6 @@
 
 #include "mfStringsHandling.h"
 
-// #include "msr.h"
-
 #include "oahOah.h"
 
 #include "oahEarlyOptions.h"
@@ -17946,19 +17944,14 @@ void mxsr2msrTranslator::copyNotePedalsToChord (
         getNotePedals ();
 
   list<S_msrPedal>::const_iterator i;
-  for (
-    i=notePedals.begin ();
-    i!=notePedals.end ();
-    ++i
-  ) {
-
+  for (S_msrPedal pedal : notePedals) {
 #ifdef TRACING_IS_ENABLED
     if (gGlobalTracingOahGroup->getTracePedals ()) {
       gLogStream <<
         "Copying pedal '" <<
-        (*i)->pedalTypeAsString () <<
+        pedal->asString () <<
         "' from note " << note->asString () <<
-        " to chord" <<
+        " to chord" << chord->asString () <<
         endl;
     }
 #endif

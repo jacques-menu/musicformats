@@ -13,8 +13,6 @@
 #define ___mxsr2msrSkeletonBuilderInterface___
 
 
-// #include "msr.h"
-
 
 namespace MusicFormats
 {
