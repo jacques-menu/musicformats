@@ -15,8 +15,6 @@
 #include "oahBasicTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -26,18 +24,18 @@ enum class msrGenerationAPIKind {
   kMsrStringsAPIKind
 };
 
-EXP extern string msrGenerationAPIKindAsString (
+EXP extern std::string msrGenerationAPIKindAsString (
   msrGenerationAPIKind generationAPIKind);
 
-ostream& operator << (ostream& os, const msrGenerationAPIKind& elt);
+std::ostream& operator << (std::ostream& os, const msrGenerationAPIKind& elt);
 
 EXP extern msrGenerationAPIKind msrGenerationAPIKindFromString (
-  const string& theString);
+  const std::string& theString);
 
-extern map<string, msrGenerationAPIKind>
+extern std::map<std::string, msrGenerationAPIKind>
   gGlobalGenerationAPIKindsMap;
 
-string existingGenerationAPIKinds (size_t namesListMaxLength);
+std::string existingGenerationAPIKinds (size_t namesListMaxLength);
 
 void initializeGenerationAPIKindsMap ();
 
@@ -50,11 +48,11 @@ class EXP msrGenerationAPIKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msrGenerationAPIKindAtom> create (
-                            const string&         longName,
-                            const string&         shortName,
-                            const string&         description,
-                            const string&         valueSpecification,
-                            const string&         variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             msrGenerationAPIKind& generationAPIKindVariable);
 
   protected:
@@ -63,11 +61,11 @@ class EXP msrGenerationAPIKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msrGenerationAPIKindAtom (
-                            const string&         longName,
-                            const string&         shortName,
-                            const string&         description,
-                            const string&         valueSpecification,
-                            const string&         variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
                             msrGenerationAPIKind& generationAPIKindVariable);
 
     virtual               ~msrGenerationAPIKindAtom ();
@@ -83,8 +81,8 @@ class EXP msrGenerationAPIKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -101,13 +99,13 @@ class EXP msrGenerationAPIKindAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -118,7 +116,7 @@ class EXP msrGenerationAPIKindAtom : public oahAtomStoringAValue
     msrGenerationAPIKind& fGenerationAPIKindVariable;
 };
 typedef SMARTP<msrGenerationAPIKindAtom> S_msrGenerationAPIKindAtom;
-EXP ostream& operator << (ostream& os, const S_msrGenerationAPIKindAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrGenerationAPIKindAtom& elt);
 
 //______________________________________________________________________________
 void initializeMsrGenerationAPI ();

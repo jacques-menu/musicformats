@@ -74,14 +74,14 @@ class EXP msr2mxsrOahGroup : public oahGroup
                               { return fMusicXMLComments; }
 
     // work and movement
-    string                getWorkCreditTypeTitle () const
+    std::string           getWorkCreditTypeTitle () const
                               { return fWorkCreditTypeTitle; }
-    string                getWorkNumber () const
+    std::string           getWorkNumber () const
                               { return fWorkNumber; }
 
-    string                getMovementTitle () const
+    std::string           getMovementTitle () const
                               { return fMovementTitle; }
-    string                getMovementNumber () const
+    std::string           getMovementNumber () const
                               { return fMovementNumber; }
 
   public:
@@ -133,14 +133,14 @@ class EXP msr2mxsrOahGroup : public oahGroup
     Bool                  fMusicXMLComments;
 
     // work and movement
-    string                fWorkCreditTypeTitle;
-    string                fWorkNumber;
+    std::string           fWorkCreditTypeTitle;
+    std::string           fWorkNumber;
 
-    string                fMovementTitle;
-    string                fMovementNumber;
+    std::string           fMovementTitle;
+    std::string           fMovementNumber;
 };
 typedef SMARTP<msr2mxsrOahGroup> S_msr2mxsrOahGroup;
-EXP ostream& operator << (ostream& os, const S_msr2mxsrOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2mxsrOahGroup& elt);
 
 EXP extern S_msr2mxsrOahGroup gGlobalMsr2mxsrOahGroup;
 

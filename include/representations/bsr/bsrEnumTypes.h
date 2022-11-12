@@ -15,8 +15,6 @@
 #include <string>
 #include <map>
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -99,13 +97,13 @@ enum class bsrCellKind {
   kDots123456    // L'\u283f'
 };
 
-string bsrCellKindAsShortString (bsrCellKind cellKind);
+std::string bsrCellKindAsShortString (bsrCellKind cellKind);
 
-string bsrCellKindAsString (bsrCellKind cellKind);
+std::string bsrCellKindAsString (bsrCellKind cellKind);
 
 /*
   there is no
-  ostream& operator << (ostream& os, const bsrCellKind& elt);
+  std::ostream& operator << (std::ostream& os, const bsrCellKind& elt);
   since we need the numerical value to be output to files
 */
 
@@ -209,10 +207,10 @@ const bsrCellKind
 
 // braille cells
 //______________________________________________________________________________
-void brailleCellKindAsUTF8 (bsrCellKind cellKind, ostream& os);
-void brailleCellKindAsUTF16 (bsrCellKind cellKind, ostream& os);
+void brailleCellKindAsUTF8 (bsrCellKind cellKind, std::ostream& os);
+void brailleCellKindAsUTF16 (bsrCellKind cellKind, std::ostream& os);
 
-void brailleCellKind (bsrCellKind cellKind, ostream& os);
+void brailleCellKind (bsrCellKind cellKind, std::ostream& os);
 
 // braille output kinds
 //______________________________________________________________________________
@@ -223,15 +221,15 @@ enum class bsrBrailleOutputKind {
   kBrailleOutputUTF16
 };
 
-string bsrBrailleOutputKindAsString (
+std::string bsrBrailleOutputKindAsString (
   bsrBrailleOutputKind brailleOutputKind);
 
-ostream& operator << (ostream& os, const bsrBrailleOutputKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrBrailleOutputKind& elt);
 
-extern map<string, bsrBrailleOutputKind>
+extern std::map<std::string, bsrBrailleOutputKind>
   gGlobalBsrBrailleOutputKindsMap;
 
-string existingBsrBrailleOutputKinds (size_t namesListMaxLength);
+std::string existingBsrBrailleOutputKinds (size_t namesListMaxLength);
 
 void initializeBsrBrailleOutputKindsMap ();
 
@@ -242,15 +240,15 @@ enum class bsrTextsLanguageKind {
   kTextsGerman, kTextsItalian, kTextsFrench
 };
 
-string bsrTextsLanguageKindAsString (
+std::string bsrTextsLanguageKindAsString (
   bsrTextsLanguageKind languageKind);
 
-ostream& operator << (ostream& os, const bsrTextsLanguageKind& elt);
+std::ostream& operator << (std::ostream& os, const bsrTextsLanguageKind& elt);
 
-extern map<string, bsrTextsLanguageKind>
+extern std::map<std::string, bsrTextsLanguageKind>
   gGlobalBsrTextsLanguageKindsMap;
 
-string existingBsrTextsLanguageKinds (size_t namesListMaxLength);
+std::string existingBsrTextsLanguageKinds (size_t namesListMaxLength);
 
 void initializeBsrTextsLanguageKindsMap ();
 
@@ -264,19 +262,19 @@ wstring braille (int n);
 // brailling characters and strings
 bsrDot6Cell braille (char ch);
 
-wstring braille (string str);
+wstring braille (std::string str);
 
 //______________________________________________________________________________
 // writing UTF-16 to ostreams
-void write_bsrDot6Cell (ostream& os, bsrDot6Cell cell);
+void write_bsrDot6Cell (std::ostream& os, bsrDot6Cell cell);
 
 void write_bsrDot6Cell ( bsrDot6Cell cell );
 
-EXP ostream& operator << (ostream& os, const bsrDot6Cell cell);
+EXP std::ostream& operator << (std::ostream& os, const bsrDot6Cell cell);
 
-void write_wstring (ostream& os, wstring wstr );
+void write_wstring (std::ostream& os, wstring wstr );
 
-EXP ostream& operator << (ostream& os, const wstring& wstr);
+EXP std::ostream& operator << (std::ostream& os, const wstring& wstr);
 */
 
 
@@ -447,8 +445,8 @@ char \X26 (1234 6  )  #  38   &  ampersand
 char \X23 (  3456  )  #  35   #  number sign
 
 # The remaining characters are what they are. Dot 7 isn't used either within
-# the number block (32-63) or, with the exception of the DEL control character
-# (127), within the lowercase block (96-127). With the exception of the
+# the number block (32-63) or, with the std::exception of the DEL control character
+# (127), within the lowercase block (96-127). With the std::exception of the
 # underscore (95), dot 7 is used for every character within the uppercase block
 # (64-95). Adding dot 7 to any character within the lowercase block (96-127)
 # yields its corresponding character within the uppercase block (64-95) except
@@ -538,7 +536,7 @@ char \X8C (123    8)  # 140  ~L  partial line up
 char \X8D (1 34   8)  # 141  ~M  reverse line feed
 char \X8E (1 345  8)  # 142  ~N  single shift two
 char \X8F (1 3 5  8)  # 143  ~O  single shift three
-char \X90 (1234   8)  # 144  ~P  device control string
+char \X90 (1234   8)  # 144  ~P  device control std::string
 char \X91 (12345  8)  # 145  ~Q  private use one
 char \X92 (123 5  8)  # 146  ~R  private use two
 char \X93 ( 234   8)  # 147  ~S  set transmit state
@@ -546,11 +544,11 @@ char \X94 ( 2345  8)  # 148  ~T  cancel character
 char \X95 (1 3  6 8)  # 149  ~U  message waiting
 char \X96 (123  6 8)  # 150  ~V  start of guarded area
 char \X97 ( 2 456 8)  # 151  ~W  end of guarded area
-char \X98 (1 34 6 8)  # 152  ~X  start of string
+char \X98 (1 34 6 8)  # 152  ~X  start of std::string
 char \X99 (1 3456 8)  # 153  ~Y  <control>
 char \X9A (1 3 56 8)  # 154  ~Z  single character introducer
 char \X9B ( 2 4 6 8)  # 155  ~[  control sequence introducer
-char \X9C (12  56 8)  # 156  ~\  string terminator
+char \X9C (12  56 8)  # 156  ~\  std::string terminator
 char \X9D (12 456 8)  # 157  ~]  operating system command
 char \X9E (   45  8)  # 158  ~^  privacy message
 char \X9F (   456 8)  # 159  ~_  application program command
@@ -559,7 +557,7 @@ char \X9F (   456 8)  # 159  ~_  application program command
 # remaining combinations which use both dots 7 and 8. The representation for a
 # lowercase accented letter is the same as its uppercase counterpart except
 # that dot 7 isn't used. This scheme retains the use of dot 7 as the modifier
-# for a capitalized letter. The only exception to these rules is that, due to
+# for a capitalized letter. The only std::exception to these rules is that, due to
 # the nature of the Latin1 character set, the German lowercase double-s is
 # treated as though it were an uppercase y-dieresis (neither has an uppercase
 # definition). These formats have been gathered, as much as possible,

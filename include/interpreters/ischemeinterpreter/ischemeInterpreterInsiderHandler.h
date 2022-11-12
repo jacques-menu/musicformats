@@ -33,8 +33,8 @@ class EXP ischemeInterpreterInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<ischemeInterpreterInsiderHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
   protected:
 
@@ -42,8 +42,8 @@ class EXP ischemeInterpreterInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           ischemeInterpreterInsiderHandler (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
     virtual               ~ischemeInterpreterInsiderHandler ();
 
@@ -62,14 +62,14 @@ class EXP ischemeInterpreterInsiderHandler : public oahInsiderHandler
     void                  createTheIschemeInterpreterPrefixes ();
 
     void                  createTheIschemeInterpreterOptionGroups (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
@@ -89,7 +89,7 @@ class EXP ischemeInterpreterInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -101,9 +101,9 @@ class EXP ischemeInterpreterInsiderHandler : public oahInsiderHandler
     // private services
     // ------------------------------------------------------
 
-    string                usageInformation ();
+    std::string           usageInformation ();
 
-    string                ischemeInterpreterAboutInformation () const;
+    std::string           ischemeInterpreterAboutInformation () const;
 
   private:
 
@@ -112,7 +112,7 @@ class EXP ischemeInterpreterInsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<ischemeInterpreterInsiderHandler> S_ischemeInterpreterInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_ischemeInterpreterInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP ischemeInterpreterInsiderOahGroup : public oahGroup
@@ -186,7 +186,7 @@ class EXP ischemeInterpreterInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 };
 typedef SMARTP<ischemeInterpreterInsiderOahGroup> S_ischemeInterpreterInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_ischemeInterpreterInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterInsiderOahGroup& elt);
 
 EXP extern S_ischemeInterpreterInsiderOahGroup gGlobalIschemeInterpreterInsiderOahGroup;
 

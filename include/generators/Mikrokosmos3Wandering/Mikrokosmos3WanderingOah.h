@@ -147,7 +147,7 @@ class EXP Mikrokosmos3WanderingOahGroup : public oahGroup
                           fMultiGenerationOutputKindAtom;
 };
 typedef SMARTP<Mikrokosmos3WanderingOahGroup> S_Mikrokosmos3WanderingOahGroup;
-EXP ostream& operator << (ostream& os, const S_Mikrokosmos3WanderingOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingOahGroup& elt);
 
 EXP extern S_Mikrokosmos3WanderingOahGroup gGlobalMikrokosmos3WanderingOahGroup;
 

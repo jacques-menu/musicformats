@@ -167,7 +167,7 @@ class EXP mxsrOahGroup : public oahGroup
 #endif
 };
 typedef SMARTP<mxsrOahGroup> S_mxsrOahGroup;
-EXP ostream& operator << (ostream& os, const S_mxsrOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxsrOahGroup& elt);
 
 EXP extern S_mxsrOahGroup gGlobalMxsrOahGroup;
 

@@ -46,7 +46,7 @@ class EXP msrPart : public msrPartGroupElement
 
     static SMARTP<msrPart> create (
                             int            inputLineNumber,
-                            const string&  partID,
+                            const std::string&  partID,
                             S_msrPartGroup PartUpLinkToPartGroup);
 
     SMARTP<msrPart> createPartNewbornClone (
@@ -59,7 +59,7 @@ class EXP msrPart : public msrPartGroupElement
 
                           msrPart (
                             int            inputLineNumber,
-                            const string&  partID,
+                            const std::string&  partID,
                             S_msrPartGroup PartUpLinkToPartGroup);
 
     virtual               ~msrPart ();
@@ -92,54 +92,54 @@ class EXP msrPart : public msrPartGroupElement
 
     // ID and name
 
-    void                  setPartID (const string& partID)
+    void                  setPartID (const std::string& partID)
                               { fPartID = partID; }
 
-    string                getPartID () const
+    std::string           getPartID () const
                               { return fPartID; }
 
-    void                  setPartMsrName (const string& partMsrName);
+    void                  setPartMsrName (const std::string& partMsrName);
 
-    string                getPartMsrName () const
+    std::string           getPartMsrName () const
                               { return fPartMsrName; }
 
-    void                  setPartName (const string& partName)
+    void                  setPartName (const std::string& partName)
                               { fPartName = partName; }
 
-    string                getPartName () const
+    std::string           getPartName () const
                               { return fPartName; }
 
     void                  setPartNameDisplayText (
-                            const string& partNameDisplayText)
+                            const std::string& partNameDisplayText)
                               {
                                 fPartNameDisplayText =
                                   partNameDisplayText;
                               }
 
-    string                getPartNameDisplayText () const
+    std::string           getPartNameDisplayText () const
                               { return fPartNameDisplayText; }
 
     void                  setPartAbbreviation (
-                            const string& partAbbreviation)
+                            const std::string& partAbbreviation)
                               {
                                 fPartAbbreviation =
                                   partAbbreviation;
                               }
 
-    string                getPartAbbreviation () const
+    std::string           getPartAbbreviation () const
                               { return fPartAbbreviation; }
 
     void                  setPartAbbreviationDisplayText (
-                            const string& partAbbreviationDisplayText)
+                            const std::string& partAbbreviationDisplayText)
                               {
                                 fPartAbbreviationDisplayText =
                                   partAbbreviationDisplayText;
                               }
 
-    string                getPartAbbreviationDisplayText () const
+    std::string           getPartAbbreviationDisplayText () const
                               { return fPartAbbreviationDisplayText; }
 
-    string                getPartCombinedName () const;
+    std::string           getPartCombinedName () const;
 
     void                  setPartInstrumentNamesMaxLengthes ();
 
@@ -151,27 +151,27 @@ class EXP msrPart : public msrPartGroupElement
     const size_t          getPartNumberOfMeasures () const
                               { return fPartNumberOfMeasures; }
 
-    const vector<Rational>&
+    const std::vector<Rational>&
                           getPartMeasuresWholeNotesDurationsVector () const
                               { return fPartMeasuresWholeNotesDurationsVector; }
 
     // instrument name
 
     void                  setPartInstrumentName (
-                            const string& partInstrumentName)
+                            const std::string& partInstrumentName)
                               { fPartInstrumentName = partInstrumentName; }
 
-    string                getPartInstrumentName () const
+    std::string           getPartInstrumentName () const
                               { return fPartInstrumentName; }
 
     void                  setPartInstrumentAbbreviation (
-                            const string& partInstrumentAbbreviation)
+                            const std::string& partInstrumentAbbreviation)
                               {
                                 fPartInstrumentAbbreviation =
                                   partInstrumentAbbreviation;
                               }
 
-    string                getPartInstrumentAbbreviation () const
+    std::string           getPartInstrumentAbbreviation () const
                               { return fPartInstrumentAbbreviation; }
 
     // harmonies staff and voice
@@ -206,9 +206,9 @@ class EXP msrPart : public msrPartGroupElement
     S_msrVoice            getPartFiguredBassVoice () const
                               { return fPartFiguredBassVoice; }
 
-    // staves map
+    // staves std::map
 
-    const map<int, S_msrStaff>&
+    const std::map<int, S_msrStaff>&
                           getPartStaveNumbersToStavesMap () const
                               { return fPartStaveNumbersToStavesMap; }
 
@@ -287,13 +287,13 @@ class EXP msrPart : public msrPartGroupElement
     void                  createAMeasureAndAppendItToPart (
                             int           inputLineNumber,
                             int           previousMeasureEndInputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             msrMeasureImplicitKind
                                           measureImplicitKind);
 
     void                  setNextMeasureNumberInPart (
                             int           inputLineNumber,
-                            const string& nextMeasureNumber);
+                            const std::string& nextMeasureNumber);
 
     // clef, key, time signature
 
@@ -347,7 +347,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  handleRepeatEndInPart (
                             int           inputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             int           repeatTimes);
 
     void                  handleRepeatEndingStartInPart (
@@ -355,14 +355,14 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  handleRepeatEndingEndInPart (
                             int           inputLineNumber,
-                            const string& repeatEndingNumber, // may be "1, 2"
+                            const std::string& repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind
                                           repeatEndingKind);
 
     /* JMI ???
     void                  finalizeRepeatEndInPart (
                             int    inputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             int    repeatTimes);
                             */
 
@@ -388,7 +388,7 @@ class EXP msrPart : public msrPartGroupElement
 
     void                  addEmptyMeasuresToPart (
                             int           inputLineNumber,
-                            const string& previousMeasureNumber,
+                            const std::string& previousMeasureNumber,
                             int           multipleFullBarRestsNumber);
 
     void                  appendMultipleFullBarRestsCloneToPart (
@@ -440,13 +440,13 @@ class EXP msrPart : public msrPartGroupElement
 
     S_msrVoice            createPartHarmoniesVoice (
                             int           inputLineNumber,
-                            const string& currentMeasureNumber);
+                            const std::string& currentMeasureNumber);
 
     // figured bass
 
     S_msrVoice            createPartFiguredBassVoice (
                             int           inputLineNumber,
-                            const string& currentMeasureNumber);
+                            const std::string& currentMeasureNumber);
 
     void                  appendFiguredBassToPart (
                             S_msrVoice             figuredBassSupplierVoice,
@@ -507,19 +507,19 @@ class EXP msrPart : public msrPartGroupElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
     void                  printPartMeasuresWholeNotesDurationsVector (
-                            ostream& os,
+                            std::ostream& os,
                             int      fieldWidth) const;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
-    void                  printSummary (ostream& os) const override;
+    void                  printSummary (std::ostream& os) const override;
 
-    void                  printSlices (ostream& os) const;
+    void                  printSlices (std::ostream& os) const;
 
   private:
 
@@ -532,18 +532,18 @@ class EXP msrPart : public msrPartGroupElement
 
     // part ID and name
 
-    string                fPartID; // native
+    std::string           fPartID; // native
 
-    string                fPartMsrName;
+    std::string           fPartMsrName;
                             // may be different than fPartID
                             // if renamed,
                             // coined in constructor
 
-    string                fPartName; // from '<part-name/>'
-    string                fPartNameDisplayText;
+    std::string           fPartName; // from '<part-name/>'
+    std::string           fPartNameDisplayText;
 
-    string                fPartAbbreviation;
-    string                fPartAbbreviationDisplayText;
+    std::string           fPartAbbreviation;
+    std::string           fPartAbbreviationDisplayText;
 
     // part absolute number
 
@@ -551,18 +551,18 @@ class EXP msrPart : public msrPartGroupElement
 
     // part instrument names
 
-    string                fPartInstrumentName;
-    string                fPartInstrumentAbbreviation;
+    std::string           fPartInstrumentName;
+    std::string           fPartInstrumentAbbreviation;
 
     // staves
 
-    list<S_msrStaff>      fPartAllStavesList;
+    std::list<S_msrStaff>      fPartAllStavesList;
 
-    list<S_msrStaff>      fPartRegularStavesList;
+    std::list<S_msrStaff>      fPartRegularStavesList;
 
-    list<S_msrStaff>      fPartNonHarmoniesNorFiguredBassStavesList;
+    std::list<S_msrStaff>      fPartNonHarmoniesNorFiguredBassStavesList;
 
-    map<int, S_msrStaff>  fPartStaveNumbersToStavesMap;
+    std::map<int, S_msrStaff>  fPartStaveNumbersToStavesMap;
 
     // harmonies
 
@@ -576,15 +576,15 @@ class EXP msrPart : public msrPartGroupElement
 
     // voices
 
-    list<S_msrVoice>      fPartAllVoicesList;
+    std::list<S_msrVoice>      fPartAllVoicesList;
 
     // measures
 
-    string                fPartCurrentMeasureNumber;
+    std::string           fPartCurrentMeasureNumber;
 
     size_t                fPartNumberOfMeasures;
 
-    vector<Rational>      fPartMeasuresWholeNotesDurationsVector; // SUPERFLOUS ??? JMI NOEL
+    std::vector<Rational>      fPartMeasuresWholeNotesDurationsVector; // SUPERFLOUS ??? JMI NOEL
 
     // clef, key, time signature
 
@@ -627,13 +627,13 @@ class EXP msrPart : public msrPartGroupElement
     // measure number
 
     void                  setPartCurrentMeasureNumber (
-                            const string& measureNumber)
+                            const std::string& measureNumber)
                               {
                                 fPartCurrentMeasureNumber =
                                   measureNumber;
                               }
 
-    const string          getPartCurrentMeasureNumber () const
+    const std::string          getPartCurrentMeasureNumber () const
                               { return fPartCurrentMeasureNumber; }
 
     // clef, key, time signature
@@ -707,7 +707,7 @@ class EXP msrPart : public msrPartGroupElement
     Rational              fPartCurrentMeasurePosition;
 };
 typedef SMARTP<msrPart> S_msrPart;
-EXP ostream& operator << (ostream& os, const S_msrPart& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrPart& elt);
 
 
 }

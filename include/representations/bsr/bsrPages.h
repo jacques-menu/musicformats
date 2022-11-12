@@ -94,9 +94,9 @@ class EXP bsrPage : public bsrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -108,11 +108,11 @@ class EXP bsrPage : public bsrElement
 
     int                   fLinesPerPage;
 
-    list<S_bsrPageElement>
+    std::list<S_bsrPageElement>
                           fPageElementsList;
 };
 typedef SMARTP<bsrPage> S_bsrPage;
-EXP ostream& operator << (ostream& os, const S_bsrPage& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrPage& elt);
 
 
 }

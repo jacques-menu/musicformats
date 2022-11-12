@@ -15,38 +15,36 @@
 #include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlStream2guidoWithOptionsAndArguments (
-  string                        inputSourceName,
-  istream&                      inputStream,
+  std::string                   inputSourceName,
+  std::istream&                      inputStream,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
 EXP mfMusicformatsErrorKind convertMsdlStream2guidoWithHandler (
-  string       inputSourceName,
-  istream&     inputStream,
+  std::string       inputSourceName,
+  std::istream&     inputStream,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err);
+  std::ostream&     out,
+  std::ostream&     err);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2guidoWithOptionsAndArguments (
-  string                        fileName,
+  std::string                   fileName,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
 EXP mfMusicformatsErrorKind msdlFile2guidoWithHandler (
-  string       fileName,
+  std::string       fileName,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err);
+  std::ostream&     out,
+  std::ostream&     err);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlString2guidoWithOptionsAndArguments (
@@ -58,8 +56,8 @@ EXP mfMusicformatsErrorKind convertMsdlString2guidoWithOptionsAndArguments (
 EXP mfMusicformatsErrorKind msdlString2guidoWithHandler (
   const char*  buffer,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err);
+  std::ostream&     out,
+  std::ostream&     err);
 
 
 }

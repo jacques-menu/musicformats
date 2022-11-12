@@ -17,17 +17,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-// As a special exception, you may create a larger work that contains
+// As a special std::exception, you may create a larger work that contains
 // part or all of the Bison parser skeleton and distribute that work
 // under terms of your choice, so long as that work isn't itself a
 // parser generator using the skeleton or a modified version thereof
 // as a parser skeleton.  Alternatively, if you modify or redistribute
 // the parser skeleton itself, you may (at your option) remove this
-// special exception, which will cause the skeleton and the resulting
+// special std::exception, which will cause the skeleton and the resulting
 // Bison output files to be licensed under the GNU General Public
-// License without this special exception.
+// License without this special std::exception.
 
-// This special exception was added by the Free Software Foundation in
+// This special std::exception was added by the Free Software Foundation in
 // version 2.2 of Bison.
 
 
@@ -426,10 +426,10 @@ namespace iscm {
       // "option"
       // Number
       // SingleString
-      // String
+      // std::string
       // OptionValue
       // LabelName
-      char dummy1[sizeof (string)];
+      char dummy1[sizeof (std::string)];
     };
 
     /// The size of the largest semantic type.
@@ -547,7 +547,7 @@ namespace iscm {
         S_25_2 = 25,                             // $@2
         S_Number = 26,                           // Number
         S_SingleString = 27,                     // SingleString
-        S_String = 28,                           // String
+        S_String = 28,                           // std::string
         S_Tool = 29,                             // Tool
         S_Input = 30,                            // Input
         S_InputSourcesSeq = 31,                  // InputSourcesSeq
@@ -627,10 +627,10 @@ namespace iscm {
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
-        value.move< string > (std::move (that.value));
+        value.move< std::string > (std::move (that.value));
         break;
 
       default:
@@ -657,13 +657,13 @@ namespace iscm {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, string&& v, location_type&& l)
+      basic_symbol (typename Base::kind_type t, std::string&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
         , location (std::move (l))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const string& v, const location_type& l)
+      basic_symbol (typename Base::kind_type t, const std::string& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -702,10 +702,10 @@ switch (yykind)
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
-        value.template destroy< string > ();
+        value.template destroy< std::string > ();
         break;
 
       default:
@@ -810,10 +810,10 @@ switch (yykind)
 #endif
       }
 #if 201103L <= YY_CPLUSPLUS
-      symbol_type (int tok, string v, location_type l)
+      symbol_type (int tok, std::string v, location_type l)
         : super_type (token_kind_type (tok), std::move (v), std::move (l))
 #else
-      symbol_type (int tok, const string& v, const location_type& l)
+      symbol_type (int tok, const std::string& v, const location_type& l)
         : super_type (token_kind_type (tok), v, l)
 #endif
       {
@@ -1112,14 +1112,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_INTEGER (string v, location_type l)
+      make_INTEGER (std::string v, location_type l)
       {
         return symbol_type (token::ISCM_TOK_INTEGER, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_INTEGER (const string& v, const location_type& l)
+      make_INTEGER (const std::string& v, const location_type& l)
       {
         return symbol_type (token::ISCM_TOK_INTEGER, v, l);
       }
@@ -1127,14 +1127,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DOUBLE (string v, location_type l)
+      make_DOUBLE (std::string v, location_type l)
       {
         return symbol_type (token::ISCM_TOK_DOUBLE, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DOUBLE (const string& v, const location_type& l)
+      make_DOUBLE (const std::string& v, const location_type& l)
       {
         return symbol_type (token::ISCM_TOK_DOUBLE, v, l);
       }
@@ -1142,14 +1142,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_SINGLE_QUOTED_STRING (string v, location_type l)
+      make_SINGLE_QUOTED_STRING (std::string v, location_type l)
       {
         return symbol_type (token::ISCM_TOK_SINGLE_QUOTED_STRING, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_SINGLE_QUOTED_STRING (const string& v, const location_type& l)
+      make_SINGLE_QUOTED_STRING (const std::string& v, const location_type& l)
       {
         return symbol_type (token::ISCM_TOK_SINGLE_QUOTED_STRING, v, l);
       }
@@ -1157,14 +1157,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_DOUBLE_QUOTED_STRING (string v, location_type l)
+      make_DOUBLE_QUOTED_STRING (std::string v, location_type l)
       {
         return symbol_type (token::ISCM_TOK_DOUBLE_QUOTED_STRING, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_DOUBLE_QUOTED_STRING (const string& v, const location_type& l)
+      make_DOUBLE_QUOTED_STRING (const std::string& v, const location_type& l)
       {
         return symbol_type (token::ISCM_TOK_DOUBLE_QUOTED_STRING, v, l);
       }
@@ -1172,14 +1172,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_NAME (string v, location_type l)
+      make_NAME (std::string v, location_type l)
       {
         return symbol_type (token::ISCM_TOK_NAME, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_NAME (const string& v, const location_type& l)
+      make_NAME (const std::string& v, const location_type& l)
       {
         return symbol_type (token::ISCM_TOK_NAME, v, l);
       }
@@ -1187,14 +1187,14 @@ switch (yykind)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_OPTION (string v, location_type l)
+      make_OPTION (std::string v, location_type l)
       {
         return symbol_type (token::ISCM_TOK_OPTION, std::move (v), std::move (l));
       }
 #else
       static
       symbol_type
-      make_OPTION (const string& v, const location_type& l)
+      make_OPTION (const std::string& v, const location_type& l)
       {
         return symbol_type (token::ISCM_TOK_OPTION, v, l);
       }
@@ -1507,7 +1507,7 @@ switch (yykind)
     };
 
 
-    /// Stack type.
+    /// stack type.
     typedef stack<stack_symbol_type> stack_type;
 
     /// The stack.
@@ -1578,10 +1578,10 @@ switch (yykind)
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
-        value.copy< string > (YY_MOVE (that.value));
+        value.copy< std::string > (YY_MOVE (that.value));
         break;
 
       default:
@@ -1623,10 +1623,10 @@ switch (yykind)
       case symbol_kind::S_OPTION: // "option"
       case symbol_kind::S_Number: // Number
       case symbol_kind::S_SingleString: // SingleString
-      case symbol_kind::S_String: // String
+      case symbol_kind::S_String: // std::string
       case symbol_kind::S_OptionValue: // OptionValue
       case symbol_kind::S_LabelName: // LabelName
-        value.move< string > (YY_MOVE (s.value));
+        value.move< std::string > (YY_MOVE (s.value));
         break;
 
       default:

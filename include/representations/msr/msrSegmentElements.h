@@ -34,7 +34,7 @@ class EXP msrSegmentElement : public msrElement
     // constants
     // ------------------------------------------------------
 
-    static const string K_NO_MEASURE_NUMBER;
+    static const std::string K_NO_MEASURE_NUMBER;
 
     static const Rational K_NO_WHOLE_NOTES;
 
@@ -55,44 +55,44 @@ class EXP msrSegmentElement : public msrElement
 
     void                  setSegmentElementSoundingWholeNotes (
                             const Rational& wholeNotes,
-                            const string&   context);
+                            const std::string&   context);
 
     Rational              getSegmentElementSoundingWholeNotes () const
                               { return fSegmentElementSoundingWholeNotes; }
 
 //     void                  setSegmentElementMeasureNumber (
-//                             const string& measurePosition)
+//                             const std::string& measurePosition)
 //                               {
 //                                 fSegmentElementMeasureNumber = measurePosition;
 //                               }
 //
-//     string                getSegmentElementMeasureNumber () const
+//     std::string           getSegmentElementMeasureNumber () const
 //                               { return fSegmentElementMeasureNumber; }
 //
 //     void                  setSegmentElementMeasurePosition (
 //                             const Rational& measurePosition,
-//                             const string&   context); // v0.9.66 PIM
+//                             const std::string&   context); // v0.9.66 PIM
 //
 //     Rational              getSegmentElementMeasurePosition () const
 //                               { return fSegmentElementMeasurePosition; }
 //
 //     void                  setSegmentElementVoicePosition (
 //                             const Rational& voicePosition,
-//                             const string&   context);
+//                             const std::string&   context);
 //
 //     Rational              getSegmentElementVoicePosition () const
 //                               { return fSegmentElementVoicePosition; }
 //
 //     void                  setSegmentElementMeasureMoment (
 //                             const msrMoment& measureMoment,
-//                             const string&    context);
+//                             const std::string&    context);
 //
 //     const msrMoment&      getSegmentElementMeasureMoment () const
 //                               { return fSegmentElementMeasureMoment; }
 //
 //     void                  setSegmentElementVoiceMoment (
 //                             const msrMoment& voiceMoment,
-//                             const string&    context);
+//                             const std::string&    context);
 //
 //     const msrMoment&      getSegmentElementVoiceMoment () const
 //                               { return fSegmentElementVoiceMoment; }
@@ -111,7 +111,7 @@ class EXP msrSegmentElement : public msrElement
 //
 //     virtual void          assignSegmentElementVoicePosition (
 //                             Rational&     voicePosition,
-//                             const string& context);
+//                             const std::string& context);
 
   public:
 
@@ -128,13 +128,13 @@ class EXP msrSegmentElement : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override = 0;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override = 0;
 
-    void                  printSummary (ostream& os) const override {}
+    void                  printSummary (std::ostream& os) const override {}
 
   protected:
 
@@ -148,7 +148,7 @@ class EXP msrSegmentElement : public msrElement
 
     Rational              fSegmentElementSoundingWholeNotes;
 
-//     string                fSegmentElementMeasureNumber;
+//     std::string           fSegmentElementMeasureNumber;
 //
 //     Rational              fSegmentElementMeasurePosition;
 //     Rational              fSegmentElementVoicePosition;
@@ -157,7 +157,7 @@ class EXP msrSegmentElement : public msrElement
 //     msrMoment             fSegmentElementVoiceMoment;
 };
 typedef SMARTP<msrSegmentElement> S_msrSegmentElement;
-EXP ostream& operator << (ostream& os, const S_msrSegmentElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSegmentElement& elt);
 
 
 }

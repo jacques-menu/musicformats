@@ -18,8 +18,6 @@
 
 #include "mfExceptions.h"
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -27,7 +25,7 @@ namespace MusicFormats
 class EXP msr2lpsrException: public mfException
 {
   public:
-    msr2lpsrException (string const& exceptionDescription) throw ()
+    msr2lpsrException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };
@@ -36,7 +34,7 @@ typedef SMARTP<msr2lpsrException> S_msr2lpsrException;
 class EXP msr2lpsrInternalException: public mfException
 {
   public:
-    msr2lpsrInternalException (string const& exceptionDescription) throw ()
+    msr2lpsrInternalException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };
@@ -45,7 +43,7 @@ typedef SMARTP<msr2lpsrInternalException> S_msr2lpsrInternalException;
 class EXP msr2lpsrUnsupportedException: public mfException
 {
   public:
-    msr2lpsrUnsupportedException (string const& exceptionDescription) throw ()
+    msr2lpsrUnsupportedException (std::string const& exceptionDescription) throw ()
       : mfException (exceptionDescription)
     {}
 };
@@ -53,37 +51,37 @@ typedef SMARTP<msr2lpsrUnsupportedException> S_msr2lpsrUnsupportedException;
 
 //______________________________________________________________________________
 EXP void msr2lpsrUnsupported (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int    sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 //______________________________________________________________________________
 EXP void msr2lpsrInternalWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void msr2lpsrInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 //______________________________________________________________________________
 EXP void msr2lpsrWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void msr2lpsrError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 
 }

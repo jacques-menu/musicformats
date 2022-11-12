@@ -25,7 +25,7 @@ namespace MusicFormats
 struct mxmlPartGroupDescr : public smartable
 {
 /*
-  positions represent the order in which the parts appear in <part-list />
+  positions represent the order in which the parts appear in <part-std::list />
 */
 
   public:
@@ -88,9 +88,9 @@ struct mxmlPartGroupDescr : public smartable
     // public services
     // ------------------------------------------------------
 
-    string                partGroupDescrAsString () const;
+    std::string           partGroupDescrAsString () const;
 
-    string                getPartGroupDescrCombinedName () const
+    std::string           getPartGroupDescrCombinedName () const
                               {
                                 return
                                   fPartGroup->getPartGroupCombinedName ();
@@ -101,7 +101,7 @@ struct mxmlPartGroupDescr : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -119,7 +119,7 @@ struct mxmlPartGroupDescr : public smartable
     int                   fStopPosition;
 };
 typedef SMARTP<mxmlPartGroupDescr> S_mxmlPartGroupDescr;
-EXP ostream& operator << (ostream& os, const S_mxmlPartGroupDescr& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mxmlPartGroupDescr& elt);
 
 //________________________________________________________________________
 class EXP mxsr2msrSkeletonBuilder :
@@ -436,13 +436,13 @@ class EXP mxsr2msrSkeletonBuilder :
     int                       fCurrentPartGroupNumber;
     msrPartGroupTypeKind
                               fCurrentPartGroupTypeKind;
-    string                    fCurrentPartGroupName;
-    string                    fCurrentPartGroupAbbreviation;
+    std::string               fCurrentPartGroupName;
+    std::string               fCurrentPartGroupAbbreviation;
 
     Bool                      fOnGoingPartGroupNameDisplay;
-    string                    fCurrentPartGroupNameDisplayText;
+    std::string               fCurrentPartGroupNameDisplayText;
 
-    string                    fCurrentPartGroupAccidentalText;
+    std::string               fCurrentPartGroupAccidentalText;
     msrPartGroupSymbolKind    fCurrentPartGroupSymbolKind;
     msrPartGroupBarLineKind   fCurrentPartGroupBarLineKind;
     int                       fCurrentPartGroupSymbolDefaultX;
@@ -455,13 +455,13 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      createImplicitPartGroup ();
 
     // part groups numbers can be re-used, they're no identifier
-    // we use a map to access them by part group number
+    // we use a std::map to access them by part group number
     int                       fPartGroupsCounter;
-    vector<S_mxmlPartGroupDescr>
+    std::vector<S_mxmlPartGroupDescr>
                               fPartGroupDescsVector;
-    map<int, S_mxmlPartGroupDescr>
+    std::map<int, S_mxmlPartGroupDescr>
                               fAllPartGroupDescrsMap;
-    map<int, S_mxmlPartGroupDescr>
+    std::map<int, S_mxmlPartGroupDescr>
                               fStartedPartGroupDescrsMap;
 
     void                      showPartGroupDescrsVector (
@@ -476,7 +476,7 @@ class EXP mxsr2msrSkeletonBuilder :
     S_mxmlPartGroupDescr      fetchStartedPartGroupDescr (
                                 int partGroupNumber);
 
-    list<S_mxmlPartGroupDescr>
+    std::list<S_mxmlPartGroupDescr>
                               fPartGroupsDescrStack;
 
   private:
@@ -498,7 +498,7 @@ class EXP mxsr2msrSkeletonBuilder :
 
     void                      showPartGroupsData (
                                 int           inputLineNumber,
-                                const string& context);
+                                const std::string& context);
 
     void                      handlePartGroupStart (
                                 int inputLineNumber);
@@ -506,9 +506,9 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      handlePartGroupStop (
                                 int inputLineNumber);
 
-    vector<list<S_mxmlPartGroupDescr> >
+    std::vector<std::list<S_mxmlPartGroupDescr> >
                               fPositionStartingPartGroupDescrsVector;
-    vector<list<S_mxmlPartGroupDescr> >
+    std::vector<std::list<S_mxmlPartGroupDescr> >
                               fPositionStoppingPartGroupDescrsVector;
 
     void                      showPositionStartingPartGroupDescrsVector (
@@ -520,13 +520,13 @@ class EXP mxsr2msrSkeletonBuilder :
     void                      insertPartGroupDescInStartingList (
                                 int                  inputLineNumber,
                                 S_mxmlPartGroupDescr partGroupDescr,
-                                list<S_mxmlPartGroupDescr>&
+                                std::list<S_mxmlPartGroupDescr>&
                                                      startingPartGroupDescrsList);
 
     void                      insertPartGroupDescInStoppingList (
                                 int                  inputLineNumber,
                                 S_mxmlPartGroupDescr partGroupDescr,
-                                list<S_mxmlPartGroupDescr>&
+                                std::list<S_mxmlPartGroupDescr>&
                                                      stoppingPartGroupDescrsList);
 
     void                      registerPartGroupDescrAsStoppingAtCurrentPosition (
@@ -551,28 +551,28 @@ class EXP mxsr2msrSkeletonBuilder :
     // parts handling
     // ------------------------------------------------------
 
-    string                    fCurrentPartID; // used throughout
+    std::string               fCurrentPartID; // used throughout
 
-    string                    fCurrentPartName;
-    string                    fCurrentPartNameDisplayText;
+    std::string               fCurrentPartName;
+    std::string               fCurrentPartNameDisplayText;
     Bool                      fOnGoingPartNameDisplay;
 
 
-    string                    fCurrentPartAbbreviation;
-    string                    fCurrentPartAbbreviationDisplayText;
+    std::string               fCurrentPartAbbreviation;
+    std::string               fCurrentPartAbbreviationDisplayText;
     Bool                      fOnGoingPartAbbreviationDisplay;
 
-    string                    fCurrentPartInstrumentName;
-    string                    fCurrentPartInstrumentAbbreviation;
+    std::string               fCurrentPartInstrumentName;
+    std::string               fCurrentPartInstrumentAbbreviation;
 
-    map<string, S_msrPart>    fPartsMap;
+    std::map<std::string, S_msrPart>    fPartsMap;
 
     int                       fCurrentNoIDPartNumber;
 
     // handling the part, each one incrementing the 'position'
     // of the part groups, used for handling nesting/overlapping
     int                       fCurrentPartsPosition;
-    vector<S_msrPart>         fPartsVector;
+    std::vector<S_msrPart>         fPartsVector;
 
     void                      showPartsVector (
                                 int inputLineNumber);
@@ -608,7 +608,7 @@ class EXP mxsr2msrSkeletonBuilder :
     // measures
     // ------------------------------------------------------
 
-    string                    fCurrentMeasureNumber;
+    std::string               fCurrentMeasureNumber;
 
     int                       fScoreNumberOfMeasures;
     int                       fPartNumberOfMeasures;
@@ -630,8 +630,8 @@ class EXP mxsr2msrSkeletonBuilder :
     // lyrics handling
     // ------------------------------------------------------
 
-    string                    fCurrentStanzaNumber;
-    string                    fCurrentStanzaName;
+    std::string               fCurrentStanzaNumber;
+    std::string               fCurrentStanzaName;
 
 
     // harmonies handling

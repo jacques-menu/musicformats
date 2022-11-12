@@ -32,7 +32,7 @@ class EXP bsrOah2manPage : virtual public oah2manPage,
 
                           bsrOah2manPage (
                             const S_oahHandler handler,
-                            ostream&           manPageOutputStream);
+                            std::ostream&           manPageOutputStream);
 
     virtual               ~bsrOah2manPage ();
 

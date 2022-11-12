@@ -30,12 +30,12 @@ class EXP msrIgnorePartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msrIgnorePartAtom> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            set<string>&  stringSetVariable);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::set<std::string>&  stringSetVariable);
 
   protected:
 
@@ -43,12 +43,12 @@ class EXP msrIgnorePartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msrIgnorePartAtom (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            set<string>&  stringSetVariable);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::set<std::string>&  stringSetVariable);
 
     virtual               ~msrIgnorePartAtom ();
 
@@ -58,10 +58,10 @@ class EXP msrIgnorePartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setStringSetVariable (
-                            const string&  partName)
+                            const std::string&  partName)
                               { fStringSetVariable.insert (partName); }
 
-    const set<string>&    getStringSetVariable ()
+    const std::set<std::string>&    getStringSetVariable ()
                               { return fStringSetVariable; }
 
   public:
@@ -70,8 +70,8 @@ class EXP msrIgnorePartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -88,13 +88,13 @@ class EXP msrIgnorePartAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -102,10 +102,10 @@ class EXP msrIgnorePartAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    set<string>&          fStringSetVariable;
+    std::set<std::string>&          fStringSetVariable;
 };
 typedef SMARTP<msrIgnorePartAtom> S_msrIgnorePartAtom;
-EXP ostream& operator << (ostream& os, const S_msrIgnorePartAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrIgnorePartAtom& elt);
 
 //______________________________________________________________________________
 class EXP msrKeepPartAtom : public oahAtomStoringAValue
@@ -116,12 +116,12 @@ class EXP msrKeepPartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msrKeepPartAtom> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            set<string>&  stringSetVariable);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::set<std::string>&  stringSetVariable);
 
   protected:
 
@@ -129,12 +129,12 @@ class EXP msrKeepPartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msrKeepPartAtom (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
-                            set<string>&  stringSetVariable);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
+                            std::set<std::string>&  stringSetVariable);
 
     virtual               ~msrKeepPartAtom ();
 
@@ -144,10 +144,10 @@ class EXP msrKeepPartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  setStringSetVariable (
-                            const string&  partName)
+                            const std::string&  partName)
                               { fStringSetVariable.insert (partName); }
 
-    const set<string>&    getStringSetVariable ()
+    const std::set<std::string>&    getStringSetVariable ()
                               { return fStringSetVariable; }
 
   public:
@@ -156,8 +156,8 @@ class EXP msrKeepPartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -174,13 +174,13 @@ class EXP msrKeepPartAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -188,10 +188,10 @@ class EXP msrKeepPartAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    set<string>&          fStringSetVariable;
+    std::set<std::string>&          fStringSetVariable;
 };
 typedef SMARTP<msrKeepPartAtom> S_msrKeepPartAtom;
-EXP ostream& operator << (ostream& os, const S_msrKeepPartAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrKeepPartAtom& elt);
 
 //______________________________________________________________________________
 class EXP msr2msrOahGroup : public oahGroup
@@ -247,20 +247,20 @@ class EXP msr2msrOahGroup : public oahGroup
                               { return fExpandToHarmonyBandBook; }
 
     // voices
-    const set<string>&    getIgnoreMsrVoicesSet () const
+    const std::set<std::string>&    getIgnoreMsrVoicesSet () const
                               { return fIgnoreMsrVoicesSet; }
     S_oahStringSetElementAtom
                           getIgnoreMsrVoicesSetAtom () const
                               { return fIgnoreMsrVoicesSetAtom; }
 
-    const set<string>&    getKeepMsrVoicesSet () const
+    const std::set<std::string>&    getKeepMsrVoicesSet () const
                               { return fKeepMsrVoicesSet; }
     S_oahStringSetElementAtom
                           getKeepMsrVoicesSetAtom () const
                               { return fKeepMsrVoicesSetAtom; }
 
     // page and line breaks
-    const set<string>&    getInserPageBreakAfterMeasureSet () const
+    const std::set<std::string>&    getInserPageBreakAfterMeasureSet () const
                               { return fInserPageBreakAfterMeasureSet; }
     S_oahStringSetElementAtom
                           getInserPageBreakAfterMeasureAtom () const
@@ -340,29 +340,29 @@ class EXP msr2msrOahGroup : public oahGroup
     Bool                  fExpandToHarmonyBandBook;
 
     // staves
-    set<string>           fIgnoreMsrStavesSet;
+    std::set<std::string>           fIgnoreMsrStavesSet;
     S_oahStringSetElementAtom
                           fIgnoreMsrStavesSetAtom;
 
-    set<string>           fKeepMsrStavesSet;
+    std::set<std::string>           fKeepMsrStavesSet;
     S_oahStringSetElementAtom
                           fKeepMsrStavesSetAtom;
 
     // voices
-    set<string>           fIgnoreMsrVoicesSet;
+    std::set<std::string>           fIgnoreMsrVoicesSet;
     S_oahStringSetElementAtom
                           fIgnoreMsrVoicesSetAtom;
 
-    set<string>           fKeepMsrVoicesSet;
+    std::set<std::string>           fKeepMsrVoicesSet;
     S_oahStringSetElementAtom
                           fKeepMsrVoicesSetAtom;
 
     // breaks
-    set<string>           fInserPageBreakAfterMeasureSet;
+    std::set<std::string>           fInserPageBreakAfterMeasureSet;
     S_oahStringSetElementAtom
                           fInserPageBreakAfterMeasureAtom;
 
-    set<string>           fInserLineBreakAfterMeasureSet;
+    std::set<std::string>           fInserLineBreakAfterMeasureSet;
     S_oahStringSetElementAtom
                           fInserLineBreakAfterMeasureAtom;
 
@@ -375,7 +375,7 @@ class EXP msr2msrOahGroup : public oahGroup
     Bool                  fCreateImplicitInitialRepeatBarLine;
 };
 typedef SMARTP<msr2msrOahGroup> S_msr2msrOahGroup;
-EXP ostream& operator << (ostream& os, const S_msr2msrOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2msrOahGroup& elt);
 
 EXP extern S_msr2msrOahGroup gGlobalMsr2msrOahGroup;
 

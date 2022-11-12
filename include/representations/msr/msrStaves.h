@@ -90,13 +90,13 @@ class EXP msrStaff : public msrElement
     int                   getStaffNumber () const
                               { return fStaffNumber; }
 
-    string                getStaffName () const
+    std::string           getStaffName () const
                               { return fStaffName; }
 
-    string                getStaffInstrumentName () const
+    std::string           getStaffInstrumentName () const
                               { return fStaffInstrumentName; }
 
-    string                getStaffInstrumentAbbreviation () const
+    std::string           getStaffInstrumentAbbreviation () const
                               { return fStaffInstrumentAbbreviation; }
 
     // voices
@@ -111,19 +111,19 @@ class EXP msrStaff : public msrElement
 
     // staff voices
 
-    const map<int, S_msrVoice>&
+    const std::map<int, S_msrVoice>&
                           getStaffVoiceNumbersToAllVoicesMap () const
                               { return fStaffVoiceNumbersToAllVoicesMap; }
 
-    const map<int, S_msrVoice>&
+    const std::map<int, S_msrVoice>&
                           getStaffVoiceNumbersToRegularVoicesMap () const
                               { return fStaffVoiceNumbersToRegularVoicesMap; }
 
-    const list<S_msrVoice>&
+    const std::list<S_msrVoice>&
                           getStaffRegularVoicesList () const
                               { return fStaffRegularVoicesList; }
 
-    const list<S_msrVoice>&
+    const std::list<S_msrVoice>&
                           getStaffAllVoicesVector () const
                               { return fStaffAllVoicesList; }
 
@@ -143,7 +143,7 @@ class EXP msrStaff : public msrElement
                               { return fStaffShortestNoteTupletFactor; }
 
 
-    const vector<list<S_msrMeasure> >&
+    const std::vector<std::list<S_msrMeasure> >&
                           getStaffMeasuresFlatListsVector () const
                               { return fStaffMeasuresFlatListsVector; }
 
@@ -212,7 +212,7 @@ class EXP msrStaff : public msrElement
     S_msrVoice            createRegularVoiceInStaffByItsNumber (
                             int           inputLineNumber,
                             int           voiceNumber,
-                            const string& currentMeasureNumber);
+                            const std::string& currentMeasureNumber);
 
     void                  registerVoiceInStaff (
                             int        inputLineNumber,
@@ -237,13 +237,13 @@ class EXP msrStaff : public msrElement
     void                  createAMeasureAndAppendItToStaff (
                             int           inputLineNumber,
                             int           previousMeasureEndInputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             msrMeasureImplicitKind
                                           measureImplicitKind);
 
     void                  setNextMeasureNumberInStaff (
                             int           inputLineNumber,
-                            const string& nextMeasureNumber);
+                            const std::string& nextMeasureNumber);
 
     // repeats
 
@@ -252,7 +252,7 @@ class EXP msrStaff : public msrElement
 
     void                  handleRepeatEndInStaff (
                             int           inputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             int           repeatTimes);
 
     void                  handleRepeatEndingStartInStaff (
@@ -260,14 +260,14 @@ class EXP msrStaff : public msrElement
 
     void                  handleRepeatEndingEndInStaff (
                             int           inputLineNumber,
-                            const string& repeatEndingNumber, // may be "1, 2"
+                            const std::string& repeatEndingNumber, // may be "1, 2"
                             msrRepeatEndingKind
                                           repeatEndingKind);
 
 /* JMI
     void                  finalizeRepeatEndInStaff (
                             int           inputLineNumber,
-                            const string& measureNumber,
+                            const std::string& measureNumber,
                             int           repeatTimes);
     */
 
@@ -292,7 +292,7 @@ class EXP msrStaff : public msrElement
 
     void                  addEmptyMeasuresToStaff (
                             int           inputLineNumber,
-                            const string& previousMeasureNumber,
+                            const std::string& previousMeasureNumber,
                             int           emptyMeasuresNumber);
 
     void                  appendMultipleFullBarRestsCloneToStaff (
@@ -355,17 +355,17 @@ class EXP msrStaff : public msrElement
 
     // staff number
 
-    string                staffNumberAsString () const;
+    std::string           staffNumberAsString () const;
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
-    void                  printSummary (ostream& os) const override;
+    void                  printSummary (std::ostream& os) const override;
 
-    void                  printSlices (ostream& os) const;
+    void                  printSlices (std::ostream& os) const;
 
   private:
 
@@ -377,7 +377,7 @@ class EXP msrStaff : public msrElement
     S_msrPart             fStaffUpLinkToPart;
 
     // staff name
-    string                fStaffName;
+    std::string           fStaffName;
 
     // staff kind
     msrStaffKind          fStaffKind;
@@ -386,8 +386,8 @@ class EXP msrStaff : public msrElement
     int                   fStaffNumber;
 
     // staff instrument name
-    string                fStaffInstrumentName;
-    string                fStaffInstrumentAbbreviation;
+    std::string           fStaffInstrumentName;
+    std::string           fStaffInstrumentAbbreviation;
 
     /*
       There are 'regular', harmonies and figured voices.
@@ -399,18 +399,18 @@ class EXP msrStaff : public msrElement
 
     // we need to sort the voices by increasing voice numbers,
     // but with harmonies voices right before the corresponding regular voices
-    list<S_msrVoice>      fStaffAllVoicesList;
+    std::list<S_msrVoice>      fStaffAllVoicesList;
 
     // harmonies and figured bass elements should be placed
     // in the first regular voice of the staff, hence:
-    list<S_msrVoice>      fStaffRegularVoicesList;
+    std::list<S_msrVoice>      fStaffRegularVoicesList;
 
     // the mapping of all the voices in the staff,
     // including harmonies and figured bass voices
-    map<int, S_msrVoice>  fStaffVoiceNumbersToAllVoicesMap;
+    std::map<int, S_msrVoice>  fStaffVoiceNumbersToAllVoicesMap;
 
     // the mapping of voice numbers to regular voices
-    map<int, S_msrVoice>  fStaffVoiceNumbersToRegularVoicesMap;
+    std::map<int, S_msrVoice>  fStaffVoiceNumbersToRegularVoicesMap;
 
     // part shortest note
 
@@ -419,11 +419,11 @@ class EXP msrStaff : public msrElement
     Rational              fStaffShortestNoteDuration;
     msrTupletFactor       fStaffShortestNoteTupletFactor;
 
-    // measures flat list
+    // measures flat std::list
     // i.e. without segments nor repeats,
     // gathered from the staff's voices fVoiceInitialElementsList and fVoiceLastSegment
     // by finalizeMeasure()
-    vector<list<S_msrMeasure> >
+    std::vector<std::list<S_msrMeasure> >
                           fStaffMeasuresFlatListsVector;
 
     // multiple full-bar rests
@@ -548,7 +548,7 @@ class EXP msrStaff : public msrElement
     S_msrTransposition    fStaffCurrentTranspose;
 };
 typedef SMARTP<msrStaff> S_msrStaff;
-EXP ostream& operator << (ostream& os, const S_msrStaff& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrStaff& elt);
 
 
 }

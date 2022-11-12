@@ -37,10 +37,10 @@ enum class msrArticulationKind {
   kArticulationDoit, kArticulationFalloff, kArticulationPlop, kArticulationScoop
 };
 
-string msrArticulationKindAsString (
+std::string msrArticulationKindAsString (
   msrArticulationKind articulationKind);
 
-ostream& operator << (ostream& os, const msrArticulationKind& elt);
+std::ostream& operator << (std::ostream& os, const msrArticulationKind& elt);
 
 class EXP msrArticulation : public msrElement
 {
@@ -97,9 +97,9 @@ class EXP msrArticulation : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -111,7 +111,7 @@ class EXP msrArticulation : public msrElement
     msrPlacementKind      fArticulationPlacementKind;
 };
 typedef SMARTP<msrArticulation> S_msrArticulation;
-EXP ostream& operator << (ostream& os, const S_msrArticulation& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrArticulation& elt);
 
 //______________________________________________________________________________
 // data types
@@ -120,20 +120,20 @@ enum class msrFermataShapeKind {
   kArticulationFermataNormal, kArticulationFermataAngled, kArticulationFermataSquare
 };
 
-string msrFermataShapeKindAsString (
+std::string msrFermataShapeKindAsString (
   msrFermataShapeKind fermataShapeKind);
 
-ostream& operator << (ostream& os, const msrFermataShapeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrFermataShapeKind& elt);
 
 enum class msrArticulationFermataType {
   kArticulationFermataTypeNone,
   kArticulationFermataTypeUpright, kArticulationFermataTypeInverted
 };
 
-string msrArticulationFermataTypeAsString (
+std::string msrArticulationFermataTypeAsString (
   msrArticulationFermataType fermataTypeKind);
 
-ostream& operator << (ostream& os, const msrArticulationFermataType& elt);
+std::ostream& operator << (std::ostream& os, const msrArticulationFermataType& elt);
 
 class EXP msrFermata : public msrArticulation
 {
@@ -192,9 +192,9 @@ class EXP msrFermata : public msrArticulation
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -206,7 +206,7 @@ class EXP msrFermata : public msrArticulation
     msrArticulationFermataType    fFermataTypeKind;
 };
 typedef SMARTP<msrFermata> S_msrFermata;
-EXP ostream& operator << (ostream& os, const S_msrFermata& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrFermata& elt);
 
 //______________________________________________________________________________
 class EXP msrArpeggiato : public msrArticulation
@@ -251,7 +251,7 @@ class EXP msrArpeggiato : public msrArticulation
     // public services
     // ------------------------------------------------------
 
-    virtual string        arpeggiatoDirectionKindAsString () const;
+    virtual std::string        arpeggiatoDirectionKindAsString () const;
 
   public:
 
@@ -268,9 +268,9 @@ class EXP msrArpeggiato : public msrArticulation
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -282,7 +282,7 @@ class EXP msrArpeggiato : public msrArticulation
     int                   fArpeggiatoNumber;
 };
 typedef SMARTP<msrArpeggiato> S_msrArpeggiato;
-EXP ostream& operator << (ostream& os, const S_msrArpeggiato& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrArpeggiato& elt);
 
 //______________________________________________________________________________
 // data types
@@ -292,10 +292,10 @@ enum class msrNonArpeggiatoTypeKind {
   kArticulationNonArpeggiatoTypeTop, kArticulationNonArpeggiatoTypeBottom
 };
 
-string msrNonArpeggiatoTypeKindAsString (
+std::string msrNonArpeggiatoTypeKindAsString (
   msrNonArpeggiatoTypeKind nonArpeggiatoTypeKind);
 
-ostream& operator << (ostream& os, const msrNonArpeggiatoTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrNonArpeggiatoTypeKind& elt);
 
 class EXP msrNonArpeggiato : public msrArticulation
 {
@@ -355,9 +355,9 @@ class EXP msrNonArpeggiato : public msrArticulation
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -370,7 +370,7 @@ class EXP msrNonArpeggiato : public msrArticulation
     int                   fNonArpeggiatoNumber;
 };
 typedef SMARTP<msrNonArpeggiato> S_msrNonArpeggiato;
-EXP ostream& operator << (ostream& os, const S_msrNonArpeggiato& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrNonArpeggiato& elt);
 
 
 }

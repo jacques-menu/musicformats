@@ -24,43 +24,43 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // insider
-EXP extern const string K_INSIDER_OPTION_LONG_NAME;
-EXP extern const string K_INSIDER_OPTION_SHORT_NAME;
-// EXP extern const string K_REGULAR_OPTION_LONG_NAME;
-// EXP extern const string K_REGULAR_OPTION_SHORT_NAME;
+EXP extern const std::string K_INSIDER_OPTION_LONG_NAME;
+EXP extern const std::string K_INSIDER_OPTION_SHORT_NAME;
+// EXP extern const std::string K_REGULAR_OPTION_LONG_NAME;
+// EXP extern const std::string K_REGULAR_OPTION_SHORT_NAME;
 
 // quiet mode
-EXP extern const string K_QUIET_OPTION_LONG_NAME;
-EXP extern const string K_QUIET_OPTION_SHORT_NAME;
+EXP extern const std::string K_QUIET_OPTION_LONG_NAME;
+EXP extern const std::string K_QUIET_OPTION_SHORT_NAME;
 
 // include
-EXP extern const string K_INCLUDE_OPTION_LONG_NAME;
-EXP extern const string K_INCLUDE_OPTION_SHORT_NAME;
+EXP extern const std::string K_INCLUDE_OPTION_LONG_NAME;
+EXP extern const std::string K_INCLUDE_OPTION_SHORT_NAME;
 
 #ifdef TRACING_IS_ENABLED
 
 // trace early options
-EXP extern const string K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME;
-EXP extern const string K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_EARLY_OPTIONS_LONG_OPTION_NAME;
+EXP extern const std::string K_TRACE_EARLY_OPTIONS_SHORT_OPTION_NAME;
 
 // OAH verbose mode
-EXP extern const string K_OAH_VERBOSE_MODE_LONG_OPTION_NAME;
-EXP extern const string K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME;
+EXP extern const std::string K_OAH_VERBOSE_MODE_LONG_OPTION_NAME;
+EXP extern const std::string K_OAH_VERBOSE_MODE_SHORT_OPTION_NAME;
 
 // trace OAH
-EXP extern const string K_TRACE_OAH_LONG_OPTION_NAME;
-EXP extern const string K_TRACE_OAH_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_OAH_LONG_OPTION_NAME;
+EXP extern const std::string K_TRACE_OAH_SHORT_OPTION_NAME;
 
-EXP extern const string K_TRACE_OAH_DETAILS_LONG_OPTION_NAME;
-EXP extern const string K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_OAH_DETAILS_LONG_OPTION_NAME;
+EXP extern const std::string K_TRACE_OAH_DETAILS_SHORT_OPTION_NAME;
 
 // trace components
-EXP extern const string K_TRACE_COMPONENTS_LONG_OPTION_NAME;
-EXP extern const string K_TRACE_COMPONENTS_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_COMPONENTS_LONG_OPTION_NAME;
+EXP extern const std::string K_TRACE_COMPONENTS_SHORT_OPTION_NAME;
 
 // trace passes
-EXP extern const string K_TRACE_PASSES_LONG_OPTION_NAME;
-EXP extern const string K_TRACE_PASSES_SHORT_OPTION_NAME;
+EXP extern const std::string K_TRACE_PASSES_LONG_OPTION_NAME;
+EXP extern const std::string K_TRACE_PASSES_SHORT_OPTION_NAME;
 
 #endif
 
@@ -96,7 +96,7 @@ class EXP oahEarlyOptions
                           getEarlyMultiGenerationOutputKind () const
                               { return fEarlyMultiGenerationOutputKind; }
 
-    const list<string>&   getEarlyIncludeFileNamesList () const
+    const std::list<std::string>&   getEarlyIncludeFileNamesList () const
                               { return fEarlyIncludeFileNamesList; }
 
 #ifdef TRACING_IS_ENABLED
@@ -144,22 +144,22 @@ class EXP oahEarlyOptions
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
     // private services
     // ------------------------------------------------------
 
-    void                  appendEarlyIncludeFileName (string includeFileName);
+    void                  appendEarlyIncludeFileName (std::string includeFileName);
 
     Bool                  isEarlyOptionRecognized (
-                            const string& theString,
-                            const string& optionName);
+                            const std::string& theString,
+                            const std::string& optionName);
 
     void                  applyEarlyOptionIfRelevant (
-                            const string& argumentWithoutDashToBeUsed,
-                            const string& optionValue);
+                            const std::string& argumentWithoutDashToBeUsed,
+                            const std::string& optionValue);
 
   private:
 
@@ -174,7 +174,7 @@ class EXP oahEarlyOptions
     mfMultiGenerationOutputKind
                           fEarlyMultiGenerationOutputKind;
 
-    list<string>          fEarlyIncludeFileNamesList;
+    std::list<std::string>          fEarlyIncludeFileNamesList;
 
 #ifdef TRACING_IS_ENABLED
 
@@ -192,7 +192,7 @@ class EXP oahEarlyOptions
 #endif
 };
 typedef SMARTP<oahEarlyOptions> S_oahEarlyOptions;
-EXP ostream& operator << (ostream& os, const oahEarlyOptions& elt);
+EXP std::ostream& operator << (std::ostream& os, const oahEarlyOptions& elt);
 
 EXP extern oahEarlyOptions gGlobalOahEarlyOptions;
 

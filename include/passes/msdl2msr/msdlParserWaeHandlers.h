@@ -17,8 +17,6 @@
 #include "waeHandlers.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -61,11 +59,11 @@ class EXP msdlParserWaeHandler : public waeHandler
 
     virtual void          unexpectedToken (
                             const msdlToken& theToken,
-                            const string&    context) const = 0;
+                            const std::string&    context) const = 0;
 
     virtual void          ignoringToken (
                             const msdlToken& theToken,
-                            const string&    context) const = 0;
+                            const std::string&    context) const = 0;
 
     virtual void          inputIsSyntacticallyCorrect () const = 0;
     virtual void          inputIsSyntacticallyIncorrect () const = 0;
@@ -79,9 +77,9 @@ class EXP msdlParserWaeHandler : public waeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -89,7 +87,7 @@ class EXP msdlParserWaeHandler : public waeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserWaeHandler> S_msdlParserWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlParserWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlParserWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserEnglishWaeHandler : public msdlParserWaeHandler
@@ -128,11 +126,11 @@ class EXP msdlParserEnglishWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -146,9 +144,9 @@ class EXP msdlParserEnglishWaeHandler : public msdlParserWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -156,7 +154,7 @@ class EXP msdlParserEnglishWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserEnglishWaeHandler> S_msdlParserEnglishWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlParserEnglishWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlParserEnglishWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserFrenchWaeHandler : public msdlParserWaeHandler
@@ -195,11 +193,11 @@ class EXP msdlParserFrenchWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -213,9 +211,9 @@ class EXP msdlParserFrenchWaeHandler : public msdlParserWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -223,7 +221,7 @@ class EXP msdlParserFrenchWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserFrenchWaeHandler> S_msdlParserFrenchWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlParserFrenchWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlParserFrenchWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserItalianWaeHandler : public msdlParserWaeHandler
@@ -262,11 +260,11 @@ class EXP msdlParserItalianWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -280,9 +278,9 @@ class EXP msdlParserItalianWaeHandler : public msdlParserWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -290,7 +288,7 @@ class EXP msdlParserItalianWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserItalianWaeHandler> S_msdlParserItalianWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlParserItalianWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlParserItalianWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserGermanWaeHandler : public msdlParserWaeHandler
@@ -329,11 +327,11 @@ class EXP msdlParserGermanWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -347,9 +345,9 @@ class EXP msdlParserGermanWaeHandler : public msdlParserWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -357,7 +355,7 @@ class EXP msdlParserGermanWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserGermanWaeHandler> S_msdlParserGermanWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlParserGermanWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlParserGermanWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserSpanishWaeHandler : public msdlParserWaeHandler
@@ -396,11 +394,11 @@ class EXP msdlParserSpanishWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -414,9 +412,9 @@ class EXP msdlParserSpanishWaeHandler : public msdlParserWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -424,7 +422,7 @@ class EXP msdlParserSpanishWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserSpanishWaeHandler> S_msdlParserSpanishWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlParserSpanishWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlParserSpanishWaeHandler& elt);
 
 //________________________________________________________________________
 class EXP msdlParserDutchWaeHandler : public msdlParserWaeHandler
@@ -463,11 +461,11 @@ class EXP msdlParserDutchWaeHandler : public msdlParserWaeHandler
 
     void                  unexpectedToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  ignoringToken (
                             const msdlToken& theToken,
-                            const string&    context) const override;
+                            const std::string&    context) const override;
 
     void                  inputIsSyntacticallyCorrect () const override;
     void                  inputIsSyntacticallyIncorrect () const override;
@@ -481,9 +479,9 @@ class EXP msdlParserDutchWaeHandler : public msdlParserWaeHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -491,7 +489,7 @@ class EXP msdlParserDutchWaeHandler : public msdlParserWaeHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlParserDutchWaeHandler> S_msdlParserDutchWaeHandler;
-EXP ostream& operator << (ostream& os, const S_msdlParserDutchWaeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlParserDutchWaeHandler& elt);
 
 
 }

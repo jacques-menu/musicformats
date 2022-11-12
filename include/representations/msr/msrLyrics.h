@@ -12,10 +12,14 @@
 #ifndef ___msrLyrics___
 #define ___msrLyrics___
 
+#include <list>
+#include <vector>
+
 #include "msrElements.h"
 #include "msrMeasureElements.h"
 
-#include "msrNotes.h"
+// #include "msrNotes.h"
+#include "msrTupletFactors.h"
 #include "msrVoices.h"
 
 
@@ -39,10 +43,10 @@ enum class msrSyllableKind {
   kSyllableLineBreak, kSyllablePageBreak
 };
 
-string msrSyllableKindAsString (
+std::string msrSyllableKindAsString (
   msrSyllableKind syllableKind);
 
-ostream& operator << (ostream& os, const msrSyllableKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSyllableKind& elt);
 
 enum class msrSyllableExtendKind {
   kSyllableExtendNone,
@@ -51,12 +55,13 @@ enum class msrSyllableExtendKind {
   kSyllableExtendStart, kSyllableExtendContinue, kSyllableExtendStop
 };
 
-string msrSyllableExtendKindAsString (
+std::string msrSyllableExtendKindAsString (
   msrSyllableExtendKind syllableExtendKind);
 
-ostream& operator << (ostream& os, const msrSyllableExtendKind& elt);
+std::ostream& operator << (std::ostream& os, const msrSyllableExtendKind& elt);
 
-class EXP msrSyllable : public msrMeasureElement
+//______________________________________________________________________________
+class EXP msrSyllable : public msrMeasureElementLambda
 {
   public:
 
@@ -68,7 +73,7 @@ class EXP msrSyllable : public msrMeasureElement
                             S_msrMeasure          upLinkToMeasure,
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
-                            const string&         syllableStanzaNumber,
+                            const std::string&         syllableStanzaNumber,
                             const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           syllableUpLinkToStanza);
@@ -84,7 +89,7 @@ class EXP msrSyllable : public msrMeasureElement
                             S_msrMeasure          upLinkToMeasure,
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
-                            const string&         syllableStanzaNumber,
+                            const std::string&         syllableStanzaNumber,
                             const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           syllableUpLinkToStanza,
@@ -100,7 +105,7 @@ class EXP msrSyllable : public msrMeasureElement
                             S_msrMeasure          upLinkToMeasure,
                             msrSyllableKind       syllableKind,
                             msrSyllableExtendKind syllableExtendKind,
-                            const string&         syllableStanzaNumber,
+                            const std::string&         syllableStanzaNumber,
                             const Rational&       syllableWholeNotes,
                             msrTupletFactor       syllableTupletFactor,
                             S_msrStanza           syllableUpLinkToStanza);
@@ -129,7 +134,7 @@ class EXP msrSyllable : public msrMeasureElement
 //     void                  setMeasureElementMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context) override
+//                             const std::string&      context) override
 //                               {
 //                                 setSyllableMeasurePosition (
 //                                   measure,
@@ -140,14 +145,14 @@ class EXP msrSyllable : public msrMeasureElement
 //     void                  setSyllableMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context);
+//                             const std::string&      context);
 
     // syllable kind
     msrSyllableKind       getSyllableKind () const
                               { return fSyllableKind; }
 
-    // texts list
-    const list<string>&   getSyllableTextsList ()
+    // texts std::list
+    const std::list<std::string>&   getSyllableTextsList ()
                               { return fSyllableTextsList; }
 
     // extend kind
@@ -155,7 +160,7 @@ class EXP msrSyllable : public msrMeasureElement
                               { return fSyllableExtendKind; }
 
     // stanza number
-    string                getSyllableStanzaNumber () const
+    std::string           getSyllableStanzaNumber () const
                               { return fSyllableStanzaNumber; }
 
     // syllable whole notes
@@ -181,7 +186,7 @@ class EXP msrSyllable : public msrMeasureElement
     void                  appendSyllableToNoteAndSetItsUpLinkToNote (
                             S_msrNote note);
 
-    void                  appendLyricTextToSyllable (const string& text);
+    void                  appendLyricTextToSyllable (const std::string& text);
 
   public:
 
@@ -198,19 +203,19 @@ class EXP msrSyllable : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                syllableUpLinkToNoteAsString () const;
+    std::string           syllableUpLinkToNoteAsString () const;
 
-    string                syllableWholeNotesAsMsrString () const;
+    std::string           syllableWholeNotesAsMsrString () const;
 
-    string                syllableTextsListAsString () const;
+    std::string           syllableTextsListAsString () const;
 
     static void           writeTextsList (
-                            const list<string>& textsList,
-                            ostream&            os);
+                            const std::list<std::string>& textsList,
+                            std::ostream&                 os);
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -224,14 +229,14 @@ class EXP msrSyllable : public msrMeasureElement
     // syllable kind
     msrSyllableKind       fSyllableKind;
 
-    // texts list
-    list<string>          fSyllableTextsList;
+    // texts std::list
+    std::list<std::string>          fSyllableTextsList;
 
     // extend kind
     msrSyllableExtendKind fSyllableExtendKind;
 
     // stanza number, may contain non-digits
-    string                fSyllableStanzaNumber;
+    std::string           fSyllableStanzaNumber;
 
     // syllable whole notes
     Rational              fSyllableWholeNotes;
@@ -244,7 +249,7 @@ class EXP msrSyllable : public msrMeasureElement
     int                   fSyllableNextMeasurePuristNumber;
 };
 typedef SMARTP<msrSyllable> S_msrSyllable;
-EXP ostream& operator << (ostream& os, const S_msrSyllable& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrSyllable& elt);
 
 //______________________________________________________________________________
 class EXP msrStanza : public msrElement
@@ -254,15 +259,15 @@ class EXP msrStanza : public msrElement
     // constants
     // ------------------------------------------------------
 
-    static const string K_NO_STANZA_NUMBER;
-    static const string K_NO_STANZA_NAME;
+    static const std::string K_NO_STANZA_NUMBER;
+    static const std::string K_NO_STANZA_NAME;
 
     // creation from MusicXML
     // ------------------------------------------------------
 
     static SMARTP<msrStanza> create (
                             int           inputLineNumber,
-                            const string& stanzaNumber,
+                            const std::string& stanzaNumber,
                             S_msrVoice    stanzaUpLinkToVoice);
 
     SMARTP<msrStanza> createStanzaNewbornClone (
@@ -278,7 +283,7 @@ class EXP msrStanza : public msrElement
 
                           msrStanza (
                             int           inputLineNumber,
-                            const string& stanzaNumber,
+                            const std::string& stanzaNumber,
                             S_msrVoice    stanzaUpLinkToVoice);
 
   public:
@@ -298,15 +303,15 @@ class EXP msrStanza : public msrElement
     // ------------------------------------------------------
 
     // number
-    string                getStanzaNumber () const
+    std::string           getStanzaNumber () const
                               { return fStanzaNumber; }
 
     // name
-    string                getStanzaName () const
+    std::string           getStanzaName () const
                               { return fStanzaName; }
 
     // contents
-    const vector<S_msrSyllable>&
+    const std::vector<S_msrSyllable>&
                           getSyllables () const
                               { return fSyllables; }
 
@@ -367,11 +372,11 @@ class EXP msrStanza : public msrElement
 
     S_msrSyllable         appendBarNumberCheckSyllableToStanza (
                             int           inputLineNumber,
-                            const string& nextMeasureNumber);
+                            const std::string& nextMeasureNumber);
 
     S_msrSyllable         appendBarcheckSyllableToStanza (
                             int           inputLineNumber,
-                            const string& nextMeasureNumber);
+                            const std::string& nextMeasureNumber);
 */
 
     S_msrSyllable         appendLineBreakSyllableToStanza (
@@ -405,7 +410,7 @@ class EXP msrStanza : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -418,13 +423,13 @@ class EXP msrStanza : public msrElement
     // number
     // The lyric number indicates multiple lines,
     // though a name can be used as well (as in Finale's verse/chorus/section specification)
-    string                fStanzaNumber;
+    std::string           fStanzaNumber;
 
     // name
-    string                fStanzaName;
+    std::string           fStanzaName;
 
     // contents
-    vector<S_msrSyllable> fSyllables;
+    std::vector<S_msrSyllable> fSyllables;
 
     Bool                  fStanzaTextPresent;
 
@@ -432,7 +437,7 @@ class EXP msrStanza : public msrElement
     Rational              fStanzaCurrentMeasureWholeNotesDuration;
 };
 typedef SMARTP<msrStanza> S_msrStanza;
-EXP ostream& operator << (ostream& os, const S_msrStanza& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrStanza& elt);
 
 
 }

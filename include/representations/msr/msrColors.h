@@ -18,8 +18,6 @@
 #include "exports.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -40,7 +38,7 @@ class EXP msrColorRGB
                             float theB);
 
                           msrColorRGB (
-                            const string& theString);
+                            const std::string& theString);
 
     // set and get
     // ------------------------------------------------------
@@ -64,11 +62,11 @@ class EXP msrColorRGB
     // print
     // ------------------------------------------------------
 
-    string                asString (int precision = 3) const;
+    std::string           asString (int precision = 3) const;
 
-    string                asSpaceSeparatedString (int precision = 3) const;
+    std::string           asSpaceSeparatedString (int precision = 3) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -79,7 +77,7 @@ class EXP msrColorRGB
     float                 fG;
     float                 fB;
 };
-EXP ostream& operator << (ostream& os, const msrColorRGB& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrColorRGB& elt);
 
 // AlphaRGB colors
 //______________________________________________________________________________
@@ -91,11 +89,11 @@ class EXP msrColorAlphaRGB
     // ------------------------------------------------------
 
                           msrColorAlphaRGB (
-                            const string& colorRGB,
-                            const string& colorAlpha);
+                            const std::string& colorRGB,
+                            const std::string& colorAlpha);
 
                           msrColorAlphaRGB (
-                            const string& colorRGB);
+                            const std::string& colorRGB);
 
     virtual               ~msrColorAlphaRGB ();
 
@@ -104,10 +102,10 @@ class EXP msrColorAlphaRGB
     // set and get
     // ------------------------------------------------------
 
-    string                getColorRGB () const
+    std::string           getColorRGB () const
                               { return fColorRGB; }
 
-    string                getColorAlpha () const
+    std::string           getColorAlpha () const
                               { return fColorAlpha; }
 
   public:
@@ -120,19 +118,19 @@ class EXP msrColorAlphaRGB
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
     // private fields
     // ------------------------------------------------------
 
-    string                fColorRGB;   // hexadecimal, 6 digits
-    string                fColorAlpha; // hexadecimal, 2 digits
+    std::string           fColorRGB;   // hexadecimal, 6 digits
+    std::string           fColorAlpha; // hexadecimal, 2 digits
 };
-EXP ostream& operator << (ostream& os, const msrColorAlphaRGB& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrColorAlphaRGB& elt);
 
 
 }

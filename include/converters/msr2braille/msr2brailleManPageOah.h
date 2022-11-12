@@ -27,9 +27,9 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
     static SMARTP<msr2brailleManPageGenerateAtom> create (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
   protected:
@@ -38,9 +38,9 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
     // ------------------------------------------------------
 
                           msr2brailleManPageGenerateAtom (
-                            const string& shortName,
-                            const string& longName,
-                            const string& description,
+                            const std::string& shortName,
+                            const std::string& longName,
+                            const std::string& description,
                             S_oahVisitor  theOahVisitor);
 
     virtual               ~msr2brailleManPageGenerateAtom ();
@@ -55,7 +55,7 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
   public:
 
@@ -72,10 +72,10 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -83,7 +83,7 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
     // private services
     // ------------------------------------------------------
 
-    void                  generateManPageData (ostream& os) const;
+    void                  generateManPageData (std::ostream& os) const;
 
   private:
 
@@ -93,7 +93,7 @@ class EXP msr2brailleManPageGenerateAtom : public oahAtom
     S_oahVisitor          fOahVisitor;
 };
 typedef SMARTP<msr2brailleManPageGenerateAtom> S_msr2brailleManPageGenerateAtom;
-EXP ostream& operator << (ostream& os, const S_msr2brailleManPageGenerateAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2brailleManPageGenerateAtom& elt);
 
 //______________________________________________________________________________
 class EXP msr2brailleManPageOahGroup : public oahGroup
@@ -189,7 +189,7 @@ class EXP msr2brailleManPageOahGroup : public oahGroup
                           fOah2manPage;
 };
 typedef SMARTP<msr2brailleManPageOahGroup> S_msr2brailleManPageOahGroup;
-EXP ostream& operator << (ostream& os, const S_msr2brailleManPageOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2brailleManPageOahGroup& elt);
 
 EXP extern S_msr2brailleManPageOahGroup gGlobalXml2brailleManPageOahGroup;
 

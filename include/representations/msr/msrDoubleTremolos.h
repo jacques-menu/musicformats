@@ -27,10 +27,10 @@ enum class msrDoubleTremoloTypeKind {
   kDoubleTremoloTypeSingle, kDoubleTremoloTypeStart, kDoubleTremoloTypeStop
 };
 
-string msrDoubleTremoloTypeKindAsString (
+std::string msrDoubleTremoloTypeKindAsString (
   msrDoubleTremoloTypeKind tremoloTypeKind);
 
-ostream& operator << (ostream& os, const msrDoubleTremoloTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrDoubleTremoloTypeKind& elt);
 
 //______________________________________________________________________________
 // data types
@@ -39,12 +39,12 @@ enum class msrDoubleTremoloKind {
   kDoubleTremoloNotes, kDoubleTremoloChords
 };
 
-string msrDoubleTremoloKindAsString (
+std::string msrDoubleTremoloKindAsString (
   msrDoubleTremoloKind doubleTremolotKind);
 
-ostream& operator << (ostream& os, const msrDoubleTremoloKind& elt);
+std::ostream& operator << (std::ostream& os, const msrDoubleTremoloKind& elt);
 
-class EXP msrDoubleTremolo : public msrMeasureElement
+class EXP msrDoubleTremolo : public msrMeasureElementLambda
 {
   public:
 
@@ -88,7 +88,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     void                  setMeasureElementMeasurePosition (
                             const S_msrMeasure measure,
                             const Rational&    measurePosition,
-                            const string&      context) override
+                            const std::string& context) override
                               {
                                 setDoubleTremoloMeasurePosition (
                                   measure,
@@ -99,7 +99,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     void                  setDoubleTremoloMeasurePosition (
                             const S_msrMeasure measure,
                             const Rational&    measurePosition,
-                            const string&      context);
+                            const std::string& context);
 
     // double tremolo kind
 
@@ -185,7 +185,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // measure number
 
     void                  setDoubleTremoloMeasureNumber (
-                            const string& measureNumber);
+                            const std::string& measureNumber);
 
   public:
 
@@ -198,7 +198,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
                             const Rational& measurePosition); // v0.9.66 PIM
 
     void                  setDoubleTremoloFirstNoteMeasureNumber (
-                            const string& measureNumber);
+                            const std::string& measureNumber);
 
   public:
 
@@ -215,12 +215,12 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                doubleTremoloPlacementKindAsString () const;
+    std::string           doubleTremoloPlacementKindAsString () const;
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -249,7 +249,7 @@ class EXP msrDoubleTremolo : public msrMeasureElement
     S_msrElement          fDoubleTremoloSecondElement;
 };
 typedef SMARTP<msrDoubleTremolo> S_msrDoubleTremolo;
-EXP ostream& operator << (ostream& os, const S_msrDoubleTremolo& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrDoubleTremolo& elt);
 
 
 }

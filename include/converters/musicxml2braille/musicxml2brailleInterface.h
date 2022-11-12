@@ -15,8 +15,6 @@
 #include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 /*
@@ -27,22 +25,22 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMusicxmlFile2brailleWithHandler (
   const char*  fileName,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMusicxmlFd2brailleWithHandler (
   FILE*        fd,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMusicxmlString2brailleWithHandler (
   const char*  buffer,
-  ostream&     out,
-  ostream&     err,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler);
 
 

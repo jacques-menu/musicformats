@@ -42,7 +42,7 @@ namespace MusicFormats
 struct lpsrRepeatDescr : public smartable
 {
 /*
- * positions represent the order in which the parts appear in <part-list />
+ * positions represent the order in which the parts appear in <part-std::list />
 */
 
   public:
@@ -96,9 +96,9 @@ struct lpsrRepeatDescr : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString ();
+    std::string           asString ();
 
-    virtual void          print (ostream& os);
+    virtual void          print (std::ostream& os);
 
   private:
 
@@ -113,7 +113,7 @@ struct lpsrRepeatDescr : public smartable
     Bool                  fEndOfRepeatHasBeenGenerated;
 };
 typedef SMARTP<lpsrRepeatDescr> S_lpsrRepeatDescr;
-EXP ostream& operator << (ostream& os, const S_lpsrRepeatDescr& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrRepeatDescr& elt);
 
 //________________________________________________________________________
 enum class lilypondMarkupColumnKind { // JMI v0.9.66
@@ -397,7 +397,7 @@ class EXP lpsr2lilypondTranslator :
                           lpsr2lilypondTranslator (
                             S_msrOahGroup&  msrOpts,
                             S_lpsrOahGroup& lpsrOpts,
-                            ostream&        lilypondCodeStream);
+                            std::ostream&        lilypondCodeStream);
 
     virtual               ~lpsr2lilypondTranslator ();
 
@@ -759,12 +759,12 @@ class EXP lpsr2lilypondTranslator :
 
     // names
 
-    string                nameAsLilypondString (
-                            const string& name);
+    std::string           nameAsLilypondString (
+                            const std::string& name);
 
     // lengths
 
-    string                lengthUnitAsLilypondString (
+    std::string           lengthUnitAsLilypondString (
                             msrLengthUnitKind lengthUnitKind);
 
     // whole notes
@@ -776,49 +776,49 @@ class EXP lpsr2lilypondTranslator :
 
     // markups
 
-    string                generateAColumnForMarkup (
-                            const string&    theString,
+    std::string           generateAColumnForMarkup (
+                            const std::string&    theString,
                             lilypondMarkupColumnKind columnKind);
-    string                generateMultilineMarkup (
-                            const string&    theString,
+    std::string           generateMultilineMarkup (
+                            const std::string&    theString,
                             lilypondMarkupColumnKind columnKind);
 
     // octaves
 
-    string                absoluteOctaveAsLilypondString (
+    std::string           absoluteOctaveAsLilypondString (
                             int           inputLineNumber,
                             msrOctaveKind absoluteOctaveKind);
 
     // alterations
 
-    string                alterationKindAsLilypondString (
+    std::string           alterationKindAsLilypondString (
                             msrAlterationKind alterationKind);
 
     // durations
 
     Rational              fLastMetWholeNotes;
 
-    string                durationAsLilypondString (
+    std::string           durationAsLilypondString (
                             int             inputLineNumber,
                             const Rational& wholeNotes);
 
-    string                msrDurationKindAsLilypondString (
+    std::string           msrDurationKindAsLilypondString (
                             msrDurationKind durationKind);
 
     // notes
 
     msrPrintObjectKind    fCurrentNotePrinObjectKind;
 
-    string                lilypondOctaveInRelativeEntryMode (
+    std::string           lilypondOctaveInRelativeEntryMode (
                             S_msrNote note);
 
-    string                lilypondOctaveInFixedEntryMode (
+    std::string           lilypondOctaveInFixedEntryMode (
                             S_msrNote note);
 
-    string                notePitchAsLilypondString (
+    std::string           notePitchAsLilypondString (
                             S_msrNote note);
 
-    string                pitchedRestAsLilypondString (
+    std::string           pitchedRestAsLilypondString (
                             S_msrNote note);
 
     void                  generateNoteBeams (
@@ -905,7 +905,7 @@ class EXP lpsr2lilypondTranslator :
                             S_msrNote note);
 
     void                  generateCodeForNoteWords (
-                            const list<S_msrWords>& noteWords);
+                            const std::list<S_msrWords>& noteWords);
 
     void                  generateCodeRightAfterNote (
                             S_msrNote note);
@@ -915,7 +915,7 @@ class EXP lpsr2lilypondTranslator :
     // the LilyPond \stem* commands have a persistent effect, hence:
     msrStemKind  fCurrentStemKind;
 
-    string                stemAsLilypondString (
+    std::string           stemAsLilypondString (
                             msrStemKind stemKind);
 
     void                  generateStemIfNeededAndUpdateCurrentStemKind (
@@ -933,16 +933,16 @@ class EXP lpsr2lilypondTranslator :
 
     // technicals
 
-    string                technicalAsLilypondString (
+    std::string           technicalAsLilypondString (
                             S_msrTechnical technical);
 
-    string                technicalWithIntegerAsLilypondString (
+    std::string           technicalWithIntegerAsLilypondString (
                             S_msrTechnicalWithInteger technicalWithInteger);
 
-    string                technicalWithFloatAsLilypondString (
+    std::string           technicalWithFloatAsLilypondString (
                             S_msrTechnicalWithFloat technicalWithFloat);
 
-    string                technicalWithStringAsLilypondString (
+    std::string           technicalWithStringAsLilypondString (
                             S_msrTechnicalWithString technicalWithString);
 
     // ornaments
@@ -971,7 +971,7 @@ class EXP lpsr2lilypondTranslator :
 
     // tuplets
 
-    string                tupletFactorAsLilypondString (
+    std::string           tupletFactorAsLilypondString (
                             const msrTupletFactor& tupletFactor);
 
     // grace notes
@@ -984,22 +984,22 @@ class EXP lpsr2lilypondTranslator :
 
     // tremolos
 
-    string                singleTremoloDurationAsLilypondString (
+    std::string           singleTremoloDurationAsLilypondString (
                             S_msrSingleTremolo singleTremolo);
 
     // dynamics
 
-    string                dynamicAsLilypondString (
+    std::string           dynamicAsLilypondString (
                             S_msrDynamic dynamic);
 
-    // string tuning
-    string                stringTuningAsLilypondString (
+    // std::string tuning
+    std::string           stringTuningAsLilypondString (
                             int               inputLineNumber,
                             S_msrStringTuning stringTuning);
 
     // harp pedals tuning
 
-    string                harpPedalTuningAsLilypondString (
+    std::string           harpPedalTuningAsLilypondString (
                             msrAlterationKind alterationKind);
 
     // transposition
@@ -1014,22 +1014,22 @@ class EXP lpsr2lilypondTranslator :
     Bool                  fPowerChordHaveAlreadyBeenGenerated;
                             // to generate it only once
 
-    string                harmonyAsLilypondString (
+    std::string           harmonyAsLilypondString (
                             S_msrHarmony harmony);
 
-    string                harmonyDegreeAlterationKindAsLilypondString (
+    std::string           harmonyDegreeAlterationKindAsLilypondString (
                             msrAlterationKind harmonyDegreeAlterationKind);
 
     // frames
 
-    string                frameAsLilypondString (
+    std::string           frameAsLilypondString (
                             S_msrFrame frame);
 
     // figured bass
 
-    string                figureAsLilypondString (
+    std::string           figureAsLilypondString (
                             S_msrBassFigure bassFigure);
-    string                figuredBassAsLilypondString (
+    std::string           figuredBassAsLilypondString (
                             S_msrFiguredBass figuredBass);
 
     S_msrFiguredBass
@@ -1051,7 +1051,7 @@ class EXP lpsr2lilypondTranslator :
     // the output stream
     // ------------------------------------------------------
 
-    ostream&              fLilypondCodeStream;
+    std::ostream&              fLilypondCodeStream;
 
     // LilyPond version
     // ------------------------------------------------------
@@ -1060,9 +1060,9 @@ class EXP lpsr2lilypondTranslator :
     // identification
     // ------------------------------------------------------
     /* JMI
-    string                fScoreTitle;
-    string                fScoreSubTitle;
-    string                fScoreSubSubTitle;
+    std::string           fScoreTitle;
+    std::string           fScoreSubTitle;
+    std::string           fScoreSubSubTitle;
 
     void                  computeHeaderFields ();
 */
@@ -1079,14 +1079,14 @@ class EXP lpsr2lilypondTranslator :
 
     void                  generateHeaderIdentificationPart (
                             S_msrIdentification          identification,
-                            list<pair<string, string> >& nameValuePairsList);
+                            std::list<std::pair<std::string, std::string> >& nameValuePairsList);
 
     void                  createLilypondHeaderStringValuePairs (
                             S_lpsrHeader                 header,
-                            list<pair<string, string> >& nameValuePairsList);
+                            std::list<std::pair<std::string, std::string> >& nameValuePairsList);
 
-    string                generateStringAsLilypondMarkupOrDoubleQuotedString (
-                            const string& value);
+    std::string           generateStringAsLilypondMarkupOrDoubleQuotedString (
+                            const std::string& value);
 
     // paper handling
     // ------------------------------------------------------
@@ -1094,11 +1094,11 @@ class EXP lpsr2lilypondTranslator :
 
     void                  fetchLengthValuesFromPaperPageSize (
                             S_lpsrPaper                     paper,
-                            list<pair<string, msrLength> >& nameLengthValuePairsList);
+                            std::list<std::pair<std::string, msrLength> >& nameLengthValuePairsList);
 
     void                  fetchOnOffValuesFromLpsrOptionsGroup (
                             S_lpsrPaper                paper,
-                            list<pair<string, Bool> >& nameBooleanValuePairsList);
+                            std::list<std::pair<std::string, Bool> >& nameBooleanValuePairsList);
 
     void                  generatePaperPageSize (
                             S_msrPageLayout   pageLayout,
@@ -1168,7 +1168,7 @@ class EXP lpsr2lilypondTranslator :
     // ------------------------------------------------------
     S_msrClef             fCurrentVoiceKey;
 
-    string                msrModeKindAsLilypondString (
+    std::string           msrModeKindAsLilypondString (
                             msrModeKind modeKind);
     // time
     // ------------------------------------------------------
@@ -1207,12 +1207,12 @@ class EXP lpsr2lilypondTranslator :
 
     // notes
 
-    string                msrQuarterTonesPitchesLanguageKindAsLilypondString (
+    std::string           msrQuarterTonesPitchesLanguageKindAsLilypondString (
                             msrQuarterTonesPitchesLanguageKind languageKind);
 
     // repeats
     // ------------------------------------------------------
-    list<S_lpsrRepeatDescr>
+    std::list<S_lpsrRepeatDescr>
                           fRepeatDescrsStack;
 
     // multiple full-bar rests
@@ -1235,7 +1235,7 @@ class EXP lpsr2lilypondTranslator :
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    stack<S_msrNote>      fOnGoingNotesStack; // USELESS??? JMI CLAR
+    std::stack<S_msrNote>      fOnGoingNotesStack; // USELESS??? JMI CLAR
 
 
     // double tremolos
@@ -1250,12 +1250,12 @@ class EXP lpsr2lilypondTranslator :
 
     // chords
     // ------------------------------------------------------
-    list<int>             fPendingChordMemberNotesStringNumbers;
+    std::list<int>             fPendingChordMemberNotesStringNumbers;
 
     Bool                  fOnGoingChord;
     S_msrChord            fCurrentChord;
 
-    list<int>             fCurrentChordPendingSlurs;
+    std::list<int>             fCurrentChordPendingSlurs;
 
     void                  generateCodeAheadOfChordContents (
                             S_msrChord chord);
@@ -1274,7 +1274,7 @@ class EXP lpsr2lilypondTranslator :
     // tuplets
     // ------------------------------------------------------
 // JMI     S_msrTuplet          fCurrentMsrTupletClone;
-    stack<S_msrTuplet>    fOnGoingTupletsStack;
+    std::stack<S_msrTuplet>    fOnGoingTupletsStack;
 
     // stanzas
     // ------------------------------------------------------

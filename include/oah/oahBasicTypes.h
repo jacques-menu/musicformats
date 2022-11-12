@@ -27,7 +27,6 @@
 #include "oahElements.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
@@ -54,16 +53,16 @@ enum class oahOptionOrArgumentKind {
   kArgument
 };
 
-string oahOptionOrArgumentKindAsString (
+std::string oahOptionOrArgumentKindAsString (
   oahOptionOrArgumentKind optionOrArgumentKind );
 
-ostream& operator << (ostream& os, const oahOptionOrArgumentKind& elt);
+std::ostream& operator << (std::ostream& os, const oahOptionOrArgumentKind& elt);
 
 //_______________________________________________________________________________
 /*
   A type to hold options and their values if any or arguments
 
-  In the pair:
+  In the std::pair:
     - first is the name of the option, such as '-x'
     - second is the value of the option
 */
@@ -76,8 +75,8 @@ class   oahOptionOrArgument : public smartable
 
     static SMARTP<oahOptionOrArgument> create (
                             oahOptionOrArgumentKind optionOrArgumentKind,
-                            const string&           first,
-                            const string&           second);
+                            const std::string&           first,
+                            const std::string&           second);
 
   public:
 
@@ -86,8 +85,8 @@ class   oahOptionOrArgument : public smartable
 
                           oahOptionOrArgument (
                             oahOptionOrArgumentKind optionOrArgumentKind,
-                            const string&           first,
-                            const string&           second);
+                            const std::string&           first,
+                            const std::string&           second);
 
     virtual               ~oahOptionOrArgument ();
 
@@ -96,10 +95,10 @@ class   oahOptionOrArgument : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const string&         getFirst () const
+    const std::string&         getFirst () const
                               { return fFirst; }
 
-    const string&         getSecond () const
+    const std::string&         getSecond () const
                               { return fSecond; }
 
   public:
@@ -112,7 +111,7 @@ class   oahOptionOrArgument : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   protected:
 
@@ -122,12 +121,12 @@ class   oahOptionOrArgument : public smartable
     oahOptionOrArgumentKind
                           fOptionOrArgumentKind;
 
-    string                fFirst;
-    string                fSecond;
+    std::string           fFirst;
+    std::string           fSecond;
 };
 typedef SMARTP<oahOptionOrArgument> S_oahOptionOrArgument;
-EXP ostream& operator << (ostream& os, const S_oahOptionOrArgument& elt);
-EXP ostream& operator << (ostream& os, const oahOptionOrArgument& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahOptionOrArgument& elt);
+EXP std::ostream& operator << (std::ostream& os, const oahOptionOrArgument& elt);
 
 //_______________________________________________________________________________
 class EXP oahOption : public smartable
@@ -138,8 +137,8 @@ class EXP oahOption : public smartable
     // ------------------------------------------------------
 
     static SMARTP<oahOption> create (
-                            const string& optionName,
-                            const string& optionValue);
+                            const std::string& optionName,
+                            const std::string& optionValue);
 
   public:
 
@@ -147,8 +146,8 @@ class EXP oahOption : public smartable
     // ------------------------------------------------------
 
                           oahOption (
-                            const string& optionName,
-                            const string& optionValue);
+                            const std::string& optionName,
+                            const std::string& optionValue);
 
     virtual               ~oahOption ();
 
@@ -157,10 +156,10 @@ class EXP oahOption : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const string&         getOptionName () const
+    const std::string&         getOptionName () const
                               { return fOptionName; }
 
-    const string&         getOptionValue () const
+    const std::string&         getOptionValue () const
                               { return fOptionValue; }
 
   public:
@@ -173,31 +172,31 @@ class EXP oahOption : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
-    string                asStringForCommandLine () const;
+    std::string           asString () const;
+    std::string           asStringForCommandLine () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    string                fOptionName;
-    string                fOptionValue;
+    std::string           fOptionName;
+    std::string           fOptionValue;
 };
 typedef SMARTP<oahOption> S_oahOption;
-EXP ostream& operator << (ostream& os, const S_oahOption& elt);
-EXP ostream& operator << (ostream& os, const oahOption& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahOption& elt);
+EXP std::ostream& operator << (std::ostream& os, const oahOption& elt);
 
 //______________________________________________________________________________
-string oahOptionForCommandLine (
-  const string& optionName,
-  const string& optionValue);
+std::string oahOptionForCommandLine (
+  const std::string& optionName,
+  const std::string& optionValue);
 
 void optionsNameAndValueVectorsPlusEquals (
-  vector<S_oahOption>&       vector1,
-  const vector<S_oahOption>& vector2);
+  std::vector<S_oahOption>&       vector1,
+  const std::vector<S_oahOption>& vector2);
 
 // //_______________________________________________________________________________
 // class EXP oahOptionsNamesAndValuesVector;
@@ -233,7 +232,7 @@ void optionsNameAndValueVectorsPlusEquals (
 //     // set and get
 //     // ------------------------------------------------------
 //
-//     const vector<S_oahOption>&
+//     const std::vector<S_oahOption>&
 //                           getOptionsVector () const
 //                               { return fOptionsVector; }
 //
@@ -241,8 +240,8 @@ void optionsNameAndValueVectorsPlusEquals (
 //     // ------------------------------------------------------
 //
 //     void                  appendOptionNameAndValue (
-//                             const string& optionName,
-//                             const string& optionValue);
+//                             const std::string& optionName,
+//                             const std::string& optionValue);
 //
 //     void                  appendOptionNameAndValue (
 //                             S_oahOption
@@ -253,24 +252,24 @@ void optionsNameAndValueVectorsPlusEquals (
 //     // print
 //     // ------------------------------------------------------
 //
-//     void                  displayOptionsVector (ostream& os) const;
+//     void                  displayOptionsVector (std::ostream& os) const;
 //
-// //     string                asString () const;
-//     string                asCommandLineOptionsString () const;
+// //     std::string           asString () const;
+//     std::string           asCommandLineOptionsString () const;
 //
-//     virtual void          print (ostream& os) const;
+//     virtual void          print (std::ostream& os) const;
 //
 //   protected:
 //
 //     // protected fields
 //     // ------------------------------------------------------
 //
-//     vector<S_oahOption>
+//     std::vector<S_oahOption>
 //                           fOptionsVector;
 // };
 // typedef SMARTP<oahOptionsNamesAndValuesVector> S_oahOptionsNamesAndValuesVector;
-// EXP ostream& operator << (ostream& os, const S_oahOptionsNamesAndValuesVector& elt);
-// EXP ostream& operator << (ostream& os, const oahOptionsNamesAndValuesVector& elt);
+// EXP std::ostream& operator << (std::ostream& os, const S_oahOptionsNamesAndValuesVector& elt);
+// EXP std::ostream& operator << (std::ostream& os, const oahOptionsNamesAndValuesVector& elt);
 //
 //_______________________________________________________________________________
 class EXP oahOptionsAndArguments : public smartable
@@ -295,11 +294,11 @@ class EXP oahOptionsAndArguments : public smartable
     // set and get
     // ------------------------------------------------------
 
-    const vector<oahOption>&
+    const std::vector<oahOption>&
                           getOptionsVector () const
                               { return fOptionsVector; }
 
-    const vector<string>& getArgumentsVector () const
+    const std::vector<std::string>& getArgumentsVector () const
                               { return fArgumentsVector; }
 
     // public services
@@ -310,10 +309,10 @@ class EXP oahOptionsAndArguments : public smartable
                                 option);
 
     void                  appendOptionNameAndValue (
-                            const string& optionName,
-                            const string& optionValue);
+                            const std::string& optionName,
+                            const std::string& optionValue);
 
-    void                  appendArgument (const string& argument)
+    void                  appendArgument (const std::string& argument)
                             {
                               fArgumentsVector.push_back (argument);
                             }
@@ -323,23 +322,23 @@ class EXP oahOptionsAndArguments : public smartable
     // print
     // ------------------------------------------------------
 
-    void                  displayOptionsVector (ostream& os) const;
-    void                  displayArgumentsVector (ostream& os) const;
+    void                  displayOptionsVector (std::ostream& os) const;
+    void                  displayArgumentsVector (std::ostream& os) const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    vector<oahOption>
+    std::vector<oahOption>
                           fOptionsVector;
-    vector<string>        fArgumentsVector;
+    std::vector<std::string>        fArgumentsVector;
 };
 typedef SMARTP<oahOptionsAndArguments> S_oahOptionsAndArguments;
-EXP ostream& operator << (ostream& os, const S_oahOptionsAndArguments& elt);
-EXP ostream& operator << (ostream& os, const oahOptionsAndArguments& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahOptionsAndArguments& elt);
+EXP std::ostream& operator << (std::ostream& os, const oahOptionsAndArguments& elt);
 
 //_______________________________________________________________________________
 // early option?
@@ -348,10 +347,10 @@ enum class oahEarlyOptionKind {
   kEarlyOptionYes,
 };
 
-string oahEarlyOptionKindAsString (
+std::string oahEarlyOptionKindAsString (
   oahEarlyOptionKind earlyOptionKind);
 
-ostream& operator << (ostream& os, const oahEarlyOptionKind& elt);
+std::ostream& operator << (std::ostream& os, const oahEarlyOptionKind& elt);
 
 //_______________________________________________________________________________
 // handler used thru...?
@@ -361,10 +360,10 @@ enum class oahHandlerUsedThruKind {
   kHandlerUsedThruOptionsAndArguments
 };
 
-string oahHandlerUsedThruKindAsString (
+std::string oahHandlerUsedThruKindAsString (
   oahHandlerUsedThruKind handlerUsedThruKind);
 
-ostream& operator << (ostream& os, const oahHandlerUsedThruKind& elt);
+std::ostream& operator << (std::ostream& os, const oahHandlerUsedThruKind& elt);
 
 //______________________________________________________________________________
 class EXP oahPrefix : public oahFindableElement
@@ -381,9 +380,9 @@ to be developped into :
     // ------------------------------------------------------
 
     static SMARTP<oahPrefix> create (
-                            const string& prefixName,
-                            const string& prefixErsatz,
-                            const string& prefixDescription);
+                            const std::string& prefixName,
+                            const std::string& prefixErsatz,
+                            const std::string& prefixDescription);
 
   protected:
 
@@ -391,9 +390,9 @@ to be developped into :
     // ------------------------------------------------------
 
                           oahPrefix (
-                            const string& prefixName,
-                            const string& prefixErsatz,
-                            const string& prefixDescription);
+                            const std::string& prefixName,
+                            const std::string& prefixErsatz,
+                            const std::string& prefixDescription);
 
     virtual               ~oahPrefix ();
 
@@ -402,13 +401,13 @@ to be developped into :
     // set and get
     // ------------------------------------------------------
 
-    string                getPrefixName () const
+    std::string           getPrefixName () const
                               { return fPrefixName; }
 
-    string                getPrefixErsatz () const
+    std::string           getPrefixErsatz () const
                               { return fPrefixErsatz; }
 
-    string                getPrefixDescription () const
+    std::string           getPrefixDescription () const
                               { return fPrefixDescription; }
 
   public:
@@ -416,12 +415,12 @@ to be developped into :
     // public services
     // ------------------------------------------------------
 
-    string                fetchPrefixNames () const;
+    std::string           fetchPrefixNames () const;
 
     Bool                  findStringInFindableElement (
-                            const string&               lowerCaseString,
-                            list<S_oahFindStringMatch>& foundMatchesList,
-                            ostream&                    os) const override;
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const override;
 
   public:
 
@@ -438,31 +437,31 @@ to be developped into :
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  printPrefixHeader (ostream& os) const;
+    void                  printPrefixHeader (std::ostream& os) const;
 
     virtual void          printPrefixEssentials (
-                            ostream& os) const;
+                            std::ostream& os) const;
 
-    void                  print (ostream& os) const override;
-    virtual void          printShort (ostream& os) const;
+    void                  print (std::ostream& os) const override;
+    virtual void          printShort (std::ostream& os) const;
 
-    virtual void          printHelp (ostream& os) const;
+    virtual void          printHelp (std::ostream& os) const;
 
-		const string 					containingFindableElementAsString () const override;
+		const std::string 					containingFindableElementAsString () const override;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    string                fPrefixName;
-    string                fPrefixErsatz;
-    string                fPrefixDescription;
+    std::string           fPrefixName;
+    std::string           fPrefixErsatz;
+    std::string           fPrefixDescription;
 };
 typedef SMARTP<oahPrefix> S_oahPrefix;
-EXP ostream& operator << (ostream& os, const S_oahPrefix& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahPrefix& elt);
 
 //______________________________________________________________________________
 /*
@@ -478,9 +477,9 @@ class EXP oahAtom : public oahElement
 
 /* this class   is purely virtual
     static SMARTP<oahAtom> create (
-                            const string&       longName,
-                            const string&       shortName,
-                            const string&       description,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementValueKind atomValueExpectedKind);
 */
 
@@ -490,9 +489,9 @@ class EXP oahAtom : public oahElement
     // ------------------------------------------------------
 
                           oahAtom (
-                            const string&       longName,
-                            const string&       shortName,
-                            const string&       description,
+                            const std::string&       longName,
+                            const std::string&       shortName,
+                            const std::string&       description,
                             oahElementValueKind atomValueExpectedKind);
 
     virtual               ~oahAtom ();
@@ -548,20 +547,20 @@ class EXP oahAtom : public oahElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
-    void                  printSummary (ostream& os) const;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
+    void                  printSummary (std::ostream& os) const;
 
     virtual Bool          findStringInAtom (
-                            const string&               lowerCaseString,
-                            list<S_oahFindStringMatch>& foundMatchesList,
-                            ostream&                    os) const;
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const;
 
     virtual void          printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const;
 
-		const string 					containingFindableElementAsString () const override;
+		const std::string 					containingFindableElementAsString () const override;
 
   protected:
 
@@ -579,7 +578,7 @@ class EXP oahAtom : public oahElement
     oahEarlyOptionKind    fEarlyOptionKind;
 };
 typedef SMARTP<oahAtom> S_oahAtom;
-EXP ostream& operator << (ostream& os, const S_oahAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahAtom& elt);
 
 //______________________________________________________________________________
 class EXP oahAtomExpectingAValue : public oahAtom
@@ -594,9 +593,9 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // ------------------------------------------------------
 /* this class   is purely virtual
     static SMARTP<oahAtomExpectingAValue> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description);
 */
   protected:
 
@@ -604,9 +603,9 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // ------------------------------------------------------
 
                           oahAtomExpectingAValue (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description);
 
     virtual               ~oahAtomExpectingAValue ();
 
@@ -620,14 +619,14 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
                             // reports an error
 
     virtual void          applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) = 0;
+                            const std::string& theString,
+                            std::ostream&      os) = 0;
 
-    virtual void          applyAtomWithDefaultValue (ostream& os);
+    virtual void          applyAtomWithDefaultValue (std::ostream& os);
                             // used only if fElementValueKind
                             // is oahElementValueKind::kElementValueImplicit
                             // or oahElementValueKind::kElementValueOptional
@@ -647,8 +646,8 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   protected:
 
@@ -656,7 +655,7 @@ class EXP oahAtomExpectingAValue : public oahAtom
     // ------------------------------------------------------
 };
 typedef SMARTP<oahAtomExpectingAValue> S_oahAtomExpectingAValue;
-EXP ostream& operator << (ostream& os, const S_oahAtomExpectingAValue& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahAtomExpectingAValue& elt);
 
 //______________________________________________________________________________
 class EXP oahAtomImplicitlyStoringAValue : public oahAtom
@@ -672,10 +671,10 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // ------------------------------------------------------
 /* this class   is purely virtual
     static SMARTP<oahAtomImplicitlyStoringAValue> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& variableName);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& variableName);
 */
 
   protected:
@@ -684,10 +683,10 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // ------------------------------------------------------
 
                           oahAtomImplicitlyStoringAValue (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& variableName);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& variableName);
 
     virtual               ~oahAtomImplicitlyStoringAValue ();
 
@@ -704,7 +703,7 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
                             // reports an error
 
   public:
@@ -723,19 +722,19 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // ------------------------------------------------------
 
     virtual void          printAtomWithVariableEssentials (
-                            ostream& os,
+                            std::ostream& os,
                             int fieldWidth) const;
     virtual void          printAtomWithVariableEssentialsShort (
-                            ostream& os,
+                            std::ostream& os,
                             int fieldWidth) const;
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
-    void                  printHelp (ostream& os) const override;
+    void                  printHelp (std::ostream& os) const override;
 
     virtual void          printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   protected:
@@ -743,11 +742,11 @@ class EXP oahAtomImplicitlyStoringAValue : public oahAtom
     // protected fields
     // ------------------------------------------------------
 
-    string                fVariableName;
+    std::string           fVariableName;
     Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahAtomImplicitlyStoringAValue> S_oahAtomImplicitlyStoringAValue;
-EXP ostream& operator << (ostream& os, const S_oahAtomImplicitlyStoringAValue& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahAtomImplicitlyStoringAValue& elt);
 
 //______________________________________________________________________________
 class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
@@ -763,11 +762,11 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     // ------------------------------------------------------
 /* this class   is purely virtual
     static SMARTP<oahAtomStoringAValue> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName);
 */
 
   protected:
@@ -776,11 +775,11 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
                           oahAtomStoringAValue (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName);
 
     virtual               ~oahAtomStoringAValue ();
 
@@ -789,7 +788,7 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     // set and get
     // ------------------------------------------------------
 
-    string                getValueSpecification () const
+    std::string           getValueSpecification () const
                               { return fValueSpecification; }
 
     Bool                  getSetByAnOption () const
@@ -816,32 +815,32 @@ class EXP oahAtomStoringAValue : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
     virtual void          printAtomWithVariableEssentials (
-                            ostream& os,
+                            std::ostream& os,
                             int fieldWidth) const;
     virtual void          printAtomWithVariableEssentialsShort (
-                            ostream& os,
+                            std::ostream& os,
                             int fieldWidth) const;
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
-    void                  printHelp (ostream& os) const override;
+    void                  printHelp (std::ostream& os) const override;
 
     virtual void          printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
 
     // protected fields
     // ------------------------------------------------------
 
-    string                fValueSpecification;
+    std::string           fValueSpecification;
 
-    string                fVariableName;
+    std::string           fVariableName;
     Bool                  fSetByAnOption;
 };
 typedef SMARTP<oahAtomStoringAValue> S_oahAtomStoringAValue;
-EXP ostream& operator << (ostream& os, const S_oahAtomStoringAValue& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahAtomStoringAValue& elt);
 
 //______________________________________________________________________________
 class EXP oahPureHelpAtomWithoutAValue : public oahAtom
@@ -853,10 +852,10 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
 
 /* this class   is purely virtual
     static SMARTP<oahPureHelpAtomWithoutAValue> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& serviceName);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& serviceName);
 */
 
   protected:
@@ -865,10 +864,10 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // ------------------------------------------------------
 
                           oahPureHelpAtomWithoutAValue (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& serviceName);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& serviceName);
 
     virtual               ~oahPureHelpAtomWithoutAValue ();
 
@@ -897,10 +896,10 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   protected:
@@ -908,10 +907,10 @@ class EXP oahPureHelpAtomWithoutAValue : public oahAtom
     // protected fields
     // ------------------------------------------------------
 
-    string                fHelpAtomWithoutAValueServiceName;
+    std::string           fHelpAtomWithoutAValueServiceName;
 };
 typedef SMARTP<oahPureHelpAtomWithoutAValue> S_oahPureHelpAtomWithoutAValue;
-EXP ostream& operator << (ostream& os, const S_oahPureHelpAtomWithoutAValue& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahPureHelpAtomWithoutAValue& elt);
 
 //______________________________________________________________________________
 class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
@@ -923,11 +922,11 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
 
 /* this class   is purely virtual
     static SMARTP<oahPureHelpAtomExpectingAValue> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& serviceName);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& serviceName);
 */
 
   protected:
@@ -936,11 +935,11 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // ------------------------------------------------------
 
                           oahPureHelpAtomExpectingAValue (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& serviceName);
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& serviceName);
 
     virtual               ~oahPureHelpAtomExpectingAValue ();
 
@@ -949,7 +948,7 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // set and get
     // ------------------------------------------------------
 
-    string                getValueSpecification () const
+    std::string           getValueSpecification () const
                               { return fValueSpecification; }
 
   public:
@@ -972,21 +971,21 @@ class EXP oahPureHelpAtomExpectingAValue : public oahAtomExpectingAValue
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printHelp (ostream& os) const override;
+    void                  printHelp (std::ostream& os) const override;
 
   protected:
 
     // protected fields
     // ------------------------------------------------------
 
-    string                fHelpAtomExpectingAValueServiceName; // JMI ???
+    std::string           fHelpAtomExpectingAValueServiceName; // JMI ???
 
-    string                fValueSpecification;
+    std::string           fValueSpecification;
 };
 typedef SMARTP<oahPureHelpAtomExpectingAValue> S_oahPureHelpAtomExpectingAValue;
-EXP ostream& operator << (ostream& os, const S_oahPureHelpAtomExpectingAValue& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahPureHelpAtomExpectingAValue& elt);
 
 //_______________________________________________________________________________
 class EXP oahSubGroup : public oahElement
@@ -997,18 +996,18 @@ class EXP oahSubGroup : public oahElement
     // ------------------------------------------------------
 
     static SMARTP<oahSubGroup> create (
-                            const string&            subGroupHeader,
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            subGroupHeader,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             S_oahGroup               upLinkToGroup);
 
     static SMARTP<oahSubGroup> createWithNames (
-                            const string&            subGroupHeader,
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            subGroupHeader,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             S_oahGroup               upLinkToGroup);
 
@@ -1018,10 +1017,10 @@ class EXP oahSubGroup : public oahElement
     // ------------------------------------------------------
 
                           oahSubGroup (
-                            const string&            subGroupHeader,
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            subGroupHeader,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             S_oahGroup               upLinkToGroup);
 
@@ -1039,7 +1038,7 @@ class EXP oahSubGroup : public oahElement
     S_oahGroup            getUpLinkToGroup () const
                               { return fUpLinkToGroup; }
 
-    string                getSubGroupHeader () const
+    std::string           getSubGroupHeader () const
                               { return fSubGroupHeader; }
 
     void                  incrementNumberOfUserChoseAtomsInThisSubGroup ()
@@ -1048,7 +1047,7 @@ class EXP oahSubGroup : public oahElement
     int                   getNumberOfUserChoseAtomsInThisSubGroup () const
                               { return fNumberOfUserChoseAtomsInThisSubGroup; }
 
-    const list<S_oahAtom>&
+    const std::list<S_oahAtom>&
                           getSubGroupAtomsList () const
                               { return fSubGroupAtomsList; }
 
@@ -1077,9 +1076,9 @@ class EXP oahSubGroup : public oahElement
                             S_oahAtom oahAtom);
 
     S_oahElement          fetchOptionByNameInSubGroup (
-                            const string& name);
+                            const std::string& name);
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
   public:
 
@@ -1096,49 +1095,49 @@ class EXP oahSubGroup : public oahElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
-    void                  printSummary (ostream& os) const;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
+    void                  printSummary (std::ostream& os) const;
 
-    void                  printHelp (ostream& os) const override;
+    void                  printHelp (std::ostream& os) const override;
 
     void                  printHelpWithHeaderWidth (
-                            ostream& os,
+                            std::ostream& os,
                             int      subGroupHeaderWidth) const;
 
-    void                  underlineSubGroupHeader (ostream& os) const;
+    void                  underlineSubGroupHeader (std::ostream& os) const;
 
-    void                  printSubGroupHeader (ostream& os) const;
+    void                  printSubGroupHeader (std::ostream& os) const;
     void                  printSubGroupHeaderWithHeaderWidth (
-                            ostream& os,
+                            std::ostream& os,
                             int      subGroupHeaderWidth) const;
 
     void                  printSubGroupHelp (
-                            ostream& os) const;
+                            std::ostream& os) const;
 
     void                  printSubGroupAndAtomHelp (
-                            ostream&  os,
+                            std::ostream&  os,
                             S_oahAtom targetAtom) const;
 
-    void                  printOptionsSummary (ostream& os) const;
+    void                  printOptionsSummary (std::ostream& os) const;
 
     void                  printSubGroupSpecificHelpOrOptionsSummary (
-                            ostream&      os,
+                            std::ostream&      os,
                             S_oahSubGroup subGroup) const;
 
     Bool                  findStringInSubGroup (
-                            const string&               lowerCaseString,
-                            list<S_oahFindStringMatch>& foundMatchesList,
-                            ostream&                    os) const;
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const;
 
     void                  printSubGroupOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const;
     void                  printSubGroupOptionsValuesAll (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const;
 
-		const string 					containingFindableElementAsString () const override;
+		const std::string 					containingFindableElementAsString () const override;
 
   private:
 
@@ -1147,9 +1146,9 @@ class EXP oahSubGroup : public oahElement
 
     S_oahGroup            fUpLinkToGroup;
 
-    string                fSubGroupHeader;
+    std::string           fSubGroupHeader;
 
-    list<S_oahAtom>       fSubGroupAtomsList;
+    std::list<S_oahAtom>       fSubGroupAtomsList;
 
     // protected work fields
     // ------------------------------------------------------
@@ -1157,7 +1156,7 @@ class EXP oahSubGroup : public oahElement
     int                   fNumberOfUserChoseAtomsInThisSubGroup;
 };
 typedef SMARTP<oahSubGroup> S_oahSubGroup;
-EXP ostream& operator << (ostream& os, const S_oahSubGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahSubGroup& elt);
 
 //_______________________________________________________________________________
 class EXP oahGroup : public oahElement
@@ -1168,32 +1167,32 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
     static SMARTP<oahGroup> create (
-                            const string&            header,
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind);
 
     static SMARTP<oahGroup> create (
-                            const string&            header,
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             S_oahHandler             groupUpLinkToHandler);
 
     static SMARTP<oahGroup> createWithNames (
-                            const string&            header,
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind);
 
     static SMARTP<oahGroup> createWithNames (
-                            const string&            header,
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             S_oahHandler             groupUpLinkToHandler);
 
@@ -1203,17 +1202,17 @@ class EXP oahGroup : public oahElement
     // ------------------------------------------------------
 
                           oahGroup (
-                            const string&            header,
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind);
 
                           oahGroup (
-                            const string&            header,
-                            const string&            longName,
-                            const string&            shortName,
-                            const string&            description,
+                            const std::string&            header,
+                            const std::string&            longName,
+                            const std::string&            shortName,
+                            const std::string&            description,
                             oahElementVisibilityKind optionVisibilityKind,
                             S_oahHandler             groupUpLinkToHandler);
 
@@ -1232,11 +1231,11 @@ class EXP oahGroup : public oahElement
                               { return fUpLinkToHandler; }
 
     // header
-    string                getGroupHeader () const
+    std::string           getGroupHeader () const
                               { return fGroupHeader; }
 
-    // groups list
-    const list<S_oahSubGroup>&
+    // groups std::list
+    const std::list<S_oahSubGroup>&
                           getGroupSubGroupsList () const
                               { return fGroupSubGroupsList; }
 
@@ -1286,14 +1285,14 @@ class EXP oahGroup : public oahElement
                             S_oahSubGroup subGroup);
 
     S_oahElement          fetchOptionByNameInGroup (
-                            const string& name);
+                            const std::string& name);
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
     virtual void          handleAtomValue (
-                            ostream&      os,
+                            std::ostream&      os,
                             S_oahAtom     atom,
-                            const string& theString);
+                            const std::string& theString);
 
     // multiComponent
     S_mfcMultiComponent   fetchGroupHandlerMultiComponent () const;
@@ -1313,44 +1312,44 @@ class EXP oahGroup : public oahElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
-    void                  printSummary (ostream& os) const;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
+    void                  printSummary (std::ostream& os) const;
 
-    void                  printGroupHeader (ostream& os) const;
+    void                  printGroupHeader (std::ostream& os) const;
 
-    void                  printHelp (ostream& os) const override;
+    void                  printHelp (std::ostream& os) const override;
 
-    void                  underlineGroupHeader (ostream& os) const;
+    void                  underlineGroupHeader (std::ostream& os) const;
 
     void                  printGroupAndSubGroupHelp (
-                            ostream&      os,
+                            std::ostream&      os,
                             S_oahSubGroup targetSubGroup) const;
 
     void                  printGroupAndSubGroupAndAtomHelp (
-                            ostream&      os,
+                            std::ostream&      os,
                             S_oahSubGroup targetSubGroup,
                             S_oahAtom     targetAtom) const;
 
-    void                  printOptionsSummary (ostream& os) const;
+    void                  printOptionsSummary (std::ostream& os) const;
 
     void                  printGroupAndSubGroupSpecificHelp (
-                            ostream&      os,
+                            std::ostream&      os,
                             S_oahSubGroup subGroup) const;
 
     void                  findStringInGroup (
-                            const string&               lowerCaseString,
-                            list<S_oahFindStringMatch>& foundMatchesList,
-                            ostream&                    os) const;
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const;
 
     void                  printGroupOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const;
     void                  printGroupOptionsValuesAll (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const;
 
-		const string 					containingFindableElementAsString () const override;
+		const std::string 					containingFindableElementAsString () const override;
 
   private:
 
@@ -1359,14 +1358,14 @@ class EXP oahGroup : public oahElement
 
 /* JMI STRANGE
     // prefixes
-    string                prefixNamesInColumns (
+    std::string           prefixNamesInColumns (
                             int subGroupsShortNameFieldWidth) const;
 
-    string                prefixNamesBetweenParentheses () const;
-    string                prefixNamesInColumnsBetweenParentheses (
+    std::string           prefixNamesBetweenParentheses () const;
+    std::string           prefixNamesInColumnsBetweenParentheses (
                             int subGroupsShortNameFieldWidth) const;
 
-    string                operator () () const
+    std::string           operator () () const
                               { return fPrefixErsatz; }
 */
 
@@ -1378,9 +1377,9 @@ class EXP oahGroup : public oahElement
     // uplink
     S_oahHandler          fUpLinkToHandler;
 
-    string                fGroupHeader;
+    std::string           fGroupHeader;
 
-    list<S_oahSubGroup>   fGroupSubGroupsList;
+    std::list<S_oahSubGroup>   fGroupSubGroupsList;
 
     Bool                  fGroupHeaderIsToBeWritten;
 
@@ -1392,7 +1391,7 @@ class EXP oahGroup : public oahElement
     int                   fNumberOfUserChoseAtomsInThisGroup;
 };
 typedef SMARTP<oahGroup> S_oahGroup;
-EXP ostream& operator << (ostream& os, const S_oahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahGroup& elt);
 
 //_______________________________________________________________________________
 class EXP oahHandler : public oahFindableElement
@@ -1404,10 +1403,10 @@ class EXP oahHandler : public oahFindableElement
 
 /* this class   is purely virtual
     static SMARTP<oahHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader,
-                            const string& handlerDescription,
-                            const string& handlerUsage);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
+                            const std::string& handlerDescription,
+                            const std::string& handlerUsage);
 */
 
   protected:
@@ -1416,10 +1415,10 @@ class EXP oahHandler : public oahFindableElement
     // ------------------------------------------------------
 
                           oahHandler (
-                            const string& serviceName,
-                            const string& handlerHeader,
-                            const string& handlerDescription,
-                            const string& handlerUsage);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
+                            const std::string& handlerDescription,
+                            const std::string& handlerUsage);
 
 	 virtual                ~oahHandler ();
 
@@ -1444,7 +1443,7 @@ class EXP oahHandler : public oahFindableElement
     // set and get
     // ------------------------------------------------------
 
-    string                getHandlerServiceName () const
+    std::string           getHandlerServiceName () const
                               { return fHandlerServiceName; }
 
     void                  setHandlerMultiComponent (
@@ -1454,31 +1453,31 @@ class EXP oahHandler : public oahFindableElement
     S_mfcMultiComponent   getHandlerMultiComponent () const
                               { return fHandlerMultiComponent; }
 
-    string                getHandlerHeader () const
+    std::string           getHandlerHeader () const
                               { return fHandlerHeader; }
 
-    string                getHandlerDescription () const
+    std::string           getHandlerDescription () const
                               { return fHandlerDescription; }
 
-    string                getHandlerUsage () const
+    std::string           getHandlerUsage () const
                               { return fHandlerUsage; }
 
     // launch command
-    string                getLaunchCommandAsSupplied () const
+    std::string           getLaunchCommandAsSupplied () const
                               { return fLaunchCommandAsSupplied; }
 
-    string                getLaunchCommandWithLongOptionsNames () const
+    std::string           getLaunchCommandWithLongOptionsNames () const
                               { return fLaunchCommandWithLongOptionsNames; }
-    string                getLaunchCommandWithShortOptionsNames () const
+    std::string           getLaunchCommandWithShortOptionsNames () const
                               { return fLaunchCommandWithShortOptionsNames; }
 
     // prefixes
-    const map<string, S_oahPrefix>&
+    const std::map<std::string, S_oahPrefix>&
                           getHandlerPrefixesMap () const
                               { return fHandlerPrefixesMap; }
 
     // groups lists
-    const list<S_oahGroup>&
+    const std::list<S_oahGroup>&
                           getHandlerGroupsList () const
                               { return fHandlerGroupsList; }
 
@@ -1500,15 +1499,15 @@ class EXP oahHandler : public oahFindableElement
                               { return fOptionsAndArguments; }
 
     // elements
-    const list<S_oahElement>&
+    const std::list<S_oahElement>&
                           getHandlerElementsList () const
                               { return fHandlerElementsList; }
 
-    const list<S_oahElement>&
+    const std::list<S_oahElement>&
                           getHandlerCommandLineElementsList () const
                               { return fHandlerCommandLineElementsList; }
 
-    const multiset<S_oahElement>&
+    const std::multiset<S_oahElement>&
                           getHandlerCommandLineElementsMultiset () const
                               { return fHandlerCommandLineElementsMultiset; }
 
@@ -1539,19 +1538,19 @@ class EXP oahHandler : public oahFindableElement
 
     // OAH errors
     void                  unknownOptionNameWarning (
-                            const string& name,
-                            const string& context);
+                            const std::string& name,
+                            const std::string& context);
 
     void                  unknownOptionNameError (
-                            const string& name,
-                            const string& context);
+                            const std::string& name,
+                            const std::string& context);
 
-    void                  unknownOptionValueKindError (const string& name);
+    void                  unknownOptionValueKindError (const std::string& name);
 
-    virtual string        handlerServiceAboutInformation () const = 0;
+    virtual std::string        handlerServiceAboutInformation () const = 0;
 
     S_oahElement          fetchElementByNameInHandler (
-                            const string& name);
+                            const std::string& name);
 
     void                  registerPrefixInHandler (
                             S_oahPrefix prefix);
@@ -1565,10 +1564,10 @@ class EXP oahHandler : public oahFindableElement
                             S_oahElement element);
 
     S_oahPrefix           fetchNameInPrefixesMap (
-                            const string& prefixName) const;
+                            const std::string& prefixName) const;
 
     S_oahElement          fetchNameInNamesToElementsMap (
-                            const string& name) const;
+                            const std::string& name) const;
 
     void                  registerElementNamesInHandler (
                             S_oahElement element);
@@ -1576,7 +1575,7 @@ class EXP oahHandler : public oahFindableElement
     // options and arguments handling
     oahElementHelpOnlyKind
                           handleOptionsFromOptionsAndArguments (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
     oahElementHelpOnlyKind
                           handleOptionsAndArgumentsFromArgcArgv (
@@ -1588,9 +1587,9 @@ class EXP oahHandler : public oahFindableElement
     virtual void          checkOptionsAndArguments () const = 0;
 
     void                  setOahHandlerFoundAHelpOption (
-                            const string& context);
+                            const std::string& context);
 
-    virtual string        fetchOutputFileNameFromTheOptions () const;
+    virtual std::string        fetchOutputFileNameFromTheOptions () const;
                             // JMI the MFSL interpreter has no output file... v0.9.62
 
     // quiet mode
@@ -1612,67 +1611,67 @@ class EXP oahHandler : public oahFindableElement
     // ------------------------------------------------------
 
     virtual void          printHandlerEssentials (
-                            ostream& os,
+                            std::ostream& os,
                             int fieldWidth) const;
 
-    void                  printKnownPrefixes (ostream& os) const;
-    void                  printKnownSingleCharacterOptions (ostream& os) const;
-//     void                  printOptionsDefaultValuesInformation (ostream& os) const; JMI
+    void                  printKnownPrefixes (std::ostream& os) const;
+    void                  printKnownSingleCharacterOptions (std::ostream& os) const;
+//     void                  printOptionsDefaultValuesInformation (std::ostream& os) const; JMI
 
-    void                  displayNamesToElementsMap (ostream& os) const;
-    void                  displayNamesToElementsMapShort (ostream& os) const;
+    void                  displayNamesToElementsMap (std::ostream& os) const;
+    void                  displayNamesToElementsMapShort (std::ostream& os) const;
 
     void                  displayNamesToElementsMap ();
 
-    void                  displayElementUsesList (ostream& os) const;
+    void                  displayElementUsesList (std::ostream& os) const;
 
-    void                  displayOptionsAndArguments (ostream& os) const;
+    void                  displayOptionsAndArguments (std::ostream& os) const;
 
-//     void                  displayArgumentsVector (ostream& os) const; JMI v0.9.65
+//     void                  displayArgumentsVector (std::ostream& os) const; JMI v0.9.65
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const;
 
-    void                  printSummary (ostream& os) const;
+    void                  printSummary (std::ostream& os) const;
 
-    void                  printHelp (ostream& os) const;
+    void                  printHelp (std::ostream& os) const;
 
-    void                  printOptionsSummary (ostream& os) const;
+    void                  printOptionsSummary (std::ostream& os) const;
     void                  printOptionsSummary () const
                               { printOptionsSummary (gLogStream); }
 
     void                  printHandlerAndGroupAndSubGroupSpecificHelp (
-                            ostream&      os,
+                            std::ostream&      os,
                             S_oahSubGroup subGroup) const;
 
     void                  printNameIntrospectiveHelp (
-                            ostream&      os,
-                            const string& name);
+                            std::ostream&      os,
+                            const std::string& name);
 
     Bool                  findStringInFindableElement (
-                            const string&               lowerCaseString,
-                            list<S_oahFindStringMatch>& foundMatchesList,
-                            ostream&                    os) const override;
+                            const std::string&               lowerCaseString,
+                            std::list<S_oahFindStringMatch>& foundMatchesList,
+                            std::ostream&                    os) const override;
 
     void                  includeOptionsFileInHandler (
-                            const string& optionsFileName,
-                            ostream&      os);
+                            const std::string& optionsFileName,
+                            std::ostream&      os);
 
     static int            getIncludeFilesMaximumLevel ()
                               { return pIncludeFilesMaximumLevel; }
 
     void                  printHandlerOptionsAndArguments (
-                            ostream& os) const;
+                            std::ostream& os) const;
 
     void                  printHandlerOptionsValues (
-                            ostream& os) const;
+                            std::ostream& os) const;
     void                  printHandlerOptionsValuesAll (
-                            ostream& os) const;
+                            std::ostream& os) const;
 
     void                  printIncludeFileNamesStack (
-                            ostream& os) const;
+                            std::ostream& os) const;
 
-		const string 					containingFindableElementAsString () const override;
+		const std::string 					containingFindableElementAsString () const override;
 
   protected:
 
@@ -1697,19 +1696,19 @@ class EXP oahHandler : public oahFindableElement
 
     // names handling
     S_oahPrefix           fetchNameInHandlerPrefixesMap (
-                            const string& name) const;
+                            const std::string& name) const;
 
     void                  registerNamesInHandlerToTheNamesToElementsMap ();
 
     void                  registerOahElementUse (
                             S_oahElement  elementUsed,
-                            const string& nameUsed,
-                            const string& valueUsed);
+                            const std::string& nameUsed,
+                            const std::string& valueUsed);
 
     void                  registerGroupUse (
                             S_oahGroup    groupUsed,
-                            const string& nameUsed,
-                            const string& valueUsed)
+                            const std::string& nameUsed,
+                            const std::string& valueUsed)
                               {
                                 registerOahElementUse (
                                   groupUsed,
@@ -1719,8 +1718,8 @@ class EXP oahHandler : public oahFindableElement
 
     void                  registerSubGroupUse (
                             S_oahSubGroup subGroupUsed,
-                            const string& nameUsed,
-                            const string& valueUsed)
+                            const std::string& nameUsed,
+                            const std::string& valueUsed)
                               {
                                 registerOahElementUse (
                                   subGroupUsed,
@@ -1730,32 +1729,32 @@ class EXP oahHandler : public oahFindableElement
 
     void                  registerAtomUse (
                             S_oahAtom     atomUsed,
-                            const string& nameUsed,
-                            const string& valueUsed);
+                            const std::string& nameUsed,
+                            const std::string& valueUsed);
 
     void                  registerOahElementUseInLaunchCommand (
                             S_oahElement  elementUsed,
-                            const string& nameUsed,
-                            const string& valueUsed);
+                            const std::string& nameUsed,
+                            const std::string& valueUsed);
 
     void                  registerArgumentUseInLaunchCommand (
-                            const string& argumentUsed);
+                            const std::string& argumentUsed);
 
     void                  handleOptionPrefixName (
-                            const string& prefixName,
+                            const std::string& prefixName,
                             size_t        equalsSignPosition,
-                            const string& stringAfterEqualsSign);
+                            const std::string& stringAfterEqualsSign);
 
     Bool                  isNameASingleCharacterOptionsCluster (
-                            const string& optionName);
+                            const std::string& optionName);
 
     void                  handleUnknownOptionName (
-                            const string& optionName);
+                            const std::string& optionName);
 
     // options and arguments handling
     // pass 1
     void                  createElementUsesListFromOptionsAndArguments (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
     void                  createElementUsesListFromArgcArgv (
                             int   argc,
@@ -1767,49 +1766,49 @@ class EXP oahHandler : public oahFindableElement
 
     // oahOptionsVector elements handling
     void                  handleOptionNameAndValueAtTopOahLevel (
-                            const string& optionName,
-                            const string& optionValue);
+                            const std::string& optionName,
+                            const std::string& optionValue);
 
     void                  handleOptionsVectorOptionName (
-                            const string& theString,
-                            const string& valueUsed);
+                            const std::string& theString,
+                            const std::string& valueUsed);
 
     void                  handleKnownOptionsVectorElement (
                             S_oahElement  element,
-                            const string& optionNameUsed,
-                            const string& valueUsed);
+                            const std::string& optionNameUsed,
+                            const std::string& valueUsed);
 
     void                  handleKnownOptionsVectorAtom (
                             S_oahAtom     atom,
-                            const string& optionNameUsed,
-                            const string& valueUsed);
+                            const std::string& optionNameUsed,
+                            const std::string& valueUsed);
 
     // argc/argv handling JMIJMIJMI
     void                  handleArgvOptionValueOrArgument (
-                            const string& theString);
+                            const std::string& theString);
 
-    string                handleArgvOptionName (
-                            const string& optionName);
+    std::string           handleArgvOptionName (
+                            const std::string& optionName);
 
     void                  handleKnownArgvAtom (
                             S_oahAtom     atom,
-                            const string& optionNameUsed);
+                            const std::string& optionNameUsed);
 
     void                  handleKnownArgvElement (
                             S_oahElement  element,
-                            const string& optionNameUsed);
+                            const std::string& optionNameUsed);
 
     void                  checkMissingPendingArgvAtomExpectingAValueValue ( // JMIJMIJMI
-                            const string& atomName,
-                            const string& context);
+                            const std::string& atomName,
+                            const std::string& context);
 
     // common methods
     void                  handleNameContainingEqualSign (
-                            const string& optionName,
+                            const std::string& optionName,
                             size_t        equalsSignPosition);
 
     void                  handleOptionNameCommon (
-                            const string& optionName);
+                            const std::string& optionName);
 
     // options concistency
     void                  checkHandlerOwnOptionsConsistency ();
@@ -1823,32 +1822,32 @@ class EXP oahHandler : public oahFindableElement
     static S_oahHandler   pCurrentOahHandler;
 
     // service
-    string                fHandlerServiceName;
+    std::string           fHandlerServiceName;
 
     // multi-components
     S_mfcMultiComponent   fHandlerMultiComponent;
 
     // header
-    string                fHandlerHeader;
+    std::string           fHandlerHeader;
 
     // description
-    string                fHandlerDescription;
+    std::string           fHandlerDescription;
 
     // usage
-    string                fHandlerUsage;
+    std::string           fHandlerUsage;
 
-    // prefixes map
-    map<string, S_oahPrefix>
+    // prefixes std::map
+    std::map<std::string, S_oahPrefix>
                           fHandlerPrefixesMap;
 
     // single character names
-    set<string>           fSingleCharacterNamesSet;
+    std::set<std::string>           fSingleCharacterNamesSet;
 
-    // groups list
-    list<S_oahGroup>      fHandlerGroupsList;
+    // groups std::list
+    std::list<S_oahGroup>      fHandlerGroupsList;
 
-    // elements map
-    map<string, S_oahElement>
+    // elements std::map
+    std::map<std::string, S_oahElement>
                           fHandlerNamesToElementsMap;
 
 /* JMI
@@ -1874,15 +1873,15 @@ class EXP oahHandler : public oahFindableElement
 
 
     void                  includeOptionsAndArgumentsFile ( // JMI ???
-                            const string&           includeFileName,
-                            ostream&                os);
+                            const std::string&           includeFileName,
+                            std::ostream&                os);
 
     void                  includeOptionsFromFile (
-                            istream&                inputStream,
+                            std::istream&                inputStream,
                             oahOptionsAndArguments& optionsAndArguments);
 
     void                  analyzeOptionsAndArguments (
-                            string                        serviceName,
+                            std::string                   serviceName,
                             const oahOptionsAndArguments& optionsAndArguments);
 
     size_t                getMaximumVariableNameWidth () const
@@ -1894,18 +1893,18 @@ class EXP oahHandler : public oahFindableElement
     // ------------------------------------------------------
 
     // all OAH elements are registered in the handler upon initialization
-    list<S_oahElement>    fHandlerElementsList;
+    std::list<S_oahElement>    fHandlerElementsList;
 
     // those ones have be used in the command line
-    list<S_oahElement>    fHandlerCommandLineElementsList;
-    multiset<S_oahElement>
+    std::list<S_oahElement>    fHandlerCommandLineElementsList;
+    std::multiset<S_oahElement>
                           fHandlerCommandLineElementsMultiset;
 
     // launch command
-    string                fLaunchCommandAsSupplied;
+    std::string           fLaunchCommandAsSupplied;
 
-    string                fLaunchCommandWithLongOptionsNames;
-    string                fLaunchCommandWithShortOptionsNames;
+    std::string           fLaunchCommandWithLongOptionsNames;
+    std::string           fLaunchCommandWithShortOptionsNames;
 
     Bool                  fLaunchOptionsAndOrArgumentsAlreadyMet;
 
@@ -1920,7 +1919,7 @@ class EXP oahHandler : public oahFindableElement
     size_t                fMaximumVariableNameWidth;
 
     // elements uses
-    list<S_oahElementUse> fElementUsesList;
+    std::list<S_oahElementUse> fElementUsesList;
 
     // options and arguments
     oahOptionsAndArguments
@@ -1929,14 +1928,14 @@ class EXP oahHandler : public oahFindableElement
     // atoms waiting for a value
     S_oahAtomExpectingAValue
                           fPendingArgvAtomExpectingAValue;
-    string                fNameUsedForPendingArgvAtomExpectingAValue;
+    std::string           fNameUsedForPendingArgvAtomExpectingAValue;
 
-    list <string>         fIncludeFileNamesStack;
+    std::list <std::string>         fIncludeFileNamesStack;
     int                   fIncludeFilesCurrentLevel;
     static int            pIncludeFilesMaximumLevel;
 };
 typedef SMARTP<oahHandler> S_oahHandler;
-EXP ostream& operator << (ostream& os, const S_oahHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahHandler& elt);
 
 //______________________________________________________________________________
 extern EXP S_oahHandler getCurrentOahHandler (); // UNUSED JMI

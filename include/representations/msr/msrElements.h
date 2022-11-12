@@ -21,7 +21,6 @@
 #include "msrTypesForwardDeclarations.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
@@ -77,16 +76,16 @@ class EXP msrElement : public smartable
     // print
     // ------------------------------------------------------
 
-    virtual string        asString () const;
+    virtual std::string        asString () const;
 
-    virtual string        asShortString () const;
-    virtual string        asShortStringForMeasuresSlices () const;
+    virtual std::string        asShortString () const;
+    virtual std::string        asShortStringForMeasuresSlices () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
-    virtual void          printShort (ostream& os) const;
+    virtual void          printShort (std::ostream& os) const;
 
-    virtual void          printSummary (ostream& os) const;
+    virtual void          printSummary (std::ostream& os) const;
 
   protected:
 
@@ -96,7 +95,7 @@ class EXP msrElement : public smartable
     int                   fInputLineNumber;
 };
 typedef SMARTP<msrElement> S_msrElement;
-EXP ostream& operator << (ostream& os, const S_msrElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrElement& elt);
 
 
 }

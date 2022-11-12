@@ -76,7 +76,7 @@ class EXP msrTupletFactor
                                   fTupletNormalNotes);
                             }
 
-    string                asFractionString () const;
+    std::string           asFractionString () const;
 
   public:
 
@@ -94,9 +94,9 @@ class EXP msrTupletFactor
 
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -106,7 +106,7 @@ class EXP msrTupletFactor
     int                   fTupletActualNotes;
     int                   fTupletNormalNotes;
 };
-EXP ostream& operator << (ostream& os, const msrTupletFactor& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrTupletFactor& elt);
 
 
 }

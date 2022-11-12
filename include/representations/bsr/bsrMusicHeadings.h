@@ -101,11 +101,11 @@ class EXP bsrMusicHeading : public bsrLine
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asDebugString () const override;
+    std::string           asDebugString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -117,7 +117,7 @@ class EXP bsrMusicHeading : public bsrLine
     S_bsrTimeSignature    fMusicHeadingTimeSignatureSignature;
 };
 typedef SMARTP<bsrMusicHeading> S_bsrMusicHeading;
-EXP ostream& operator << (ostream& os, const S_bsrMusicHeading& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrMusicHeading& elt);
 
 
 }

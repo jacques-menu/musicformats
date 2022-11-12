@@ -18,8 +18,6 @@
 #include <string>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -30,10 +28,10 @@ enum class mfMusicformatsErrorKind {
   kMusicformatsErrorUnsupported
 };
 
-EXP string mfMusicFormatsErrorAsString (
+EXP std::string mfMusicFormatsErrorAsString (
   mfMusicformatsErrorKind err);
 
-ostream& operator << (ostream& os, const mfMusicformatsErrorKind& elt);
+std::ostream& operator << (std::ostream& os, const mfMusicformatsErrorKind& elt);
 
 
 }

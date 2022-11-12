@@ -33,8 +33,8 @@ class EXP Mikrokosmos3WanderingInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<Mikrokosmos3WanderingInsiderHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             mfMultiGenerationOutputKind
                                                     multiGenerationOutputKind);
 
@@ -44,8 +44,8 @@ class EXP Mikrokosmos3WanderingInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           Mikrokosmos3WanderingInsiderHandler (
-                            const string& serviceName,
-                            const string& handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             mfMultiGenerationOutputKind
                                                     multiGenerationOutputKind);
 
@@ -71,7 +71,7 @@ class EXP Mikrokosmos3WanderingInsiderHandler : public oahInsiderHandler
     void                  createTheMikrokosmos3WanderingPrefixes ();
 
     void                  createTheMikrokosmos3WanderingOptionGroups (
-                            const string& serviceName,
+                            const std::string& serviceName,
                             mfMultiGenerationOutputKind
                                           multiGenerationOutputKind);
 
@@ -80,11 +80,11 @@ class EXP Mikrokosmos3WanderingInsiderHandler : public oahInsiderHandler
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override;
+    std::string           fetchOutputFileNameFromTheOptions () const override;
 
     // quiet mode
     void                  enforceHandlerQuietness () override;
@@ -102,7 +102,7 @@ class EXP Mikrokosmos3WanderingInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -114,10 +114,10 @@ class EXP Mikrokosmos3WanderingInsiderHandler : public oahInsiderHandler
     // private services
     // ------------------------------------------------------
 
-    string                usageInformation (
+    std::string           usageInformation (
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 
-    string                Mikrokosmos3WanderingAboutInformation (
+    std::string           Mikrokosmos3WanderingAboutInformation (
                             mfMultiGenerationOutputKind multiGenerationOutputKind) const;
 
   private:
@@ -131,7 +131,7 @@ class EXP Mikrokosmos3WanderingInsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<Mikrokosmos3WanderingInsiderHandler> S_Mikrokosmos3WanderingInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_Mikrokosmos3WanderingInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP Mikrokosmos3WanderingInsiderOahGroup : public oahGroup
@@ -226,7 +226,7 @@ class EXP Mikrokosmos3WanderingInsiderOahGroup : public oahGroup
                           fMultiGenerationOutputKindAtom;
 };
 typedef SMARTP<Mikrokosmos3WanderingInsiderOahGroup> S_Mikrokosmos3WanderingInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_Mikrokosmos3WanderingInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingInsiderOahGroup& elt);
 
 EXP extern S_Mikrokosmos3WanderingInsiderOahGroup gGlobalMikrokosmos3WanderingInsiderOahGroup;
 

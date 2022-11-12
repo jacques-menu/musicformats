@@ -30,8 +30,8 @@ class EXP msr2brailleInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<msr2brailleInsiderHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
   protected:
 
@@ -39,8 +39,8 @@ class EXP msr2brailleInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           msr2brailleInsiderHandler (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
     virtual               ~msr2brailleInsiderHandler ();
 
@@ -59,18 +59,18 @@ class EXP msr2brailleInsiderHandler : public oahInsiderHandler
     void                  createTheXml2braillePrefixes ();
 
     void                  createTheXml2brailleOptionGroups (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override;
+    std::string           fetchOutputFileNameFromTheOptions () const override;
 
     // quiet mode
     void                  enforceHandlerQuietness () override;
@@ -88,7 +88,7 @@ class EXP msr2brailleInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -99,7 +99,7 @@ class EXP msr2brailleInsiderHandler : public oahInsiderHandler
     S_oahPrefix           fLongIgnoreRedundantPrefix;
 };
 typedef SMARTP<msr2brailleInsiderHandler> S_msr2brailleInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_msr2brailleInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2brailleInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msr2brailleInsiderOahGroup : public oahGroup
@@ -107,8 +107,8 @@ class EXP msr2brailleInsiderOahGroup : public oahGroup
   public:
 
     static SMARTP<msr2brailleInsiderOahGroup> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader);
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader);
 
   public:
 
@@ -123,8 +123,8 @@ class EXP msr2brailleInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 
                           msr2brailleInsiderOahGroup (
-                            const string&     serviceName,
-                            const string&     handlerHeader);
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader);
 
     virtual               ~msr2brailleInsiderOahGroup ();
 
@@ -195,14 +195,14 @@ class EXP msr2brailleInsiderOahGroup : public oahGroup
     Bool                  fQuitAfterPass3;
 };
 typedef SMARTP<msr2brailleInsiderOahGroup> S_msr2brailleInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_msr2brailleInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2brailleInsiderOahGroup& elt);
 
 EXP extern S_msr2brailleInsiderOahGroup gGlobalMsr2brailleInsiderOahGroup;
 
 //______________________________________________________________________________
 S_msr2brailleInsiderOahGroup createGlobalMrailleGenerationOahGroup (
-  const string& serviceName,
-  const string& handlerHeader);
+  const std::string& serviceName,
+  const std::string& handlerHeader);
 
 
 }

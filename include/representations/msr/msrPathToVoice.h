@@ -68,7 +68,7 @@ class EXP msrPathToVoice : public smartable
     S_msrScore            getScore () const
                               { return fScore; }
 
-    const list<S_msrPartGroup>&
+    const std::list<S_msrPartGroup>&
                           getPartGroupsList () const
                               { return fPartGroupsList; }
 
@@ -130,9 +130,9 @@ class EXP msrPathToVoice : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -153,7 +153,7 @@ class EXP msrPathToVoice : public smartable
     S_msrScore            fScore;
 
     // part groups can be nested
-    list<S_msrPartGroup>  fPartGroupsList;
+    std::list<S_msrPartGroup>  fPartGroupsList;
 
     S_msrPart             fPart;
 
@@ -164,7 +164,7 @@ class EXP msrPathToVoice : public smartable
       // a nullptr fVoice means all the voices in the staff
 };
 typedef SMARTP<msrPathToVoice> S_msrPathToVoice;
-EXP ostream& operator << (ostream& os, const S_msrPathToVoice& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrPathToVoice& elt);
 
 
 }

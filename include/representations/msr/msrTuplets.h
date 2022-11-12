@@ -16,72 +16,13 @@
 
 #include "msrTypesForwardDeclarations.h"
 
+#include "msrTupletsEnumTypes.h"
+
 #include "msrTupletFactors.h"
 
 
 namespace MusicFormats
 {
-
-//______________________________________________________________________________
-// data types
-
-enum class msrTupletInKind {
-  kTupletIn_NO_,
-  kTupletInMeasure,
-  kTupletInTuplet
-};
-
-EXP string msrTupletInKindAsString (
-  msrTupletInKind tupletKind);
-
-ostream& operator << (ostream& os, const msrTupletInKind& elt);
-
-enum class msrTupletTypeKind {
-  kTupletTypeNone,
-  kTupletTypeStart, kTupletTypeContinue, kTupletTypeStop,
-  kTupletTypeStartAndStopInARow
-};
-
-string msrTupletTypeKindAsString (
-  msrTupletTypeKind tupletTypeKind);
-
-ostream& operator << (ostream& os, const msrTupletTypeKind& elt);
-
-enum class msrTupletBracketKind {
-  kTupletBracketYes, kTupletBracketNo
-};
-
-string msrTupletBracketKindAsString (
-  msrTupletBracketKind tupletBracketKind);
-
-ostream& operator << (ostream& os, const msrTupletBracketKind& elt);
-
-enum class msrTupletLineShapeKind {
-  kTupletLineShapeStraight, kTupletLineShapeCurved
-};
-
-string msrTupletLineShapeKindAsString (
-  msrTupletLineShapeKind tupletLineShapeKind);
-
-ostream& operator << (ostream& os, const msrTupletLineShapeKind& elt);
-
-enum class msrTupletShowNumberKind {
-  kTupletShowNumberActual, kTupletShowNumberBoth, kTupletShowNumberNone
-};
-
-string msrTupletShowNumberKindAsString (
-  msrTupletShowNumberKind tupletShowNumberKind);
-
-ostream& operator << (ostream& os, const msrTupletShowNumberKind& elt);
-
-enum class msrTupletShowTypeKind {
-  kTupletShowTypeActual, kTupletShowTypeBoth, kTupletShowTypeNone
-};
-
-string msrTupletShowTypeKindAsString (
-  msrTupletShowTypeKind tupletShowTypeKind);
-
-ostream& operator << (ostream& os, const msrTupletShowTypeKind& elt);
 
 //______________________________________________________________________________
 class EXP msrTuplet : public msrTupletElement
@@ -94,7 +35,7 @@ class EXP msrTuplet : public msrTupletElement
     static SMARTP<msrTuplet> create (
                             int                     inputLineNumber,
                             S_msrMeasure            upLinkToMeasure,
-                            const string&           tupletMeasureNumber,
+                            const std::string&           tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
@@ -116,7 +57,7 @@ class EXP msrTuplet : public msrTupletElement
                           msrTuplet (
                             int                     inputLineNumber,
                             S_msrMeasure            upLinkToMeasure,
-                            const string&           tupletMeasureNumber,
+                            const std::string&           tupletMeasureNumber,
                             int                     tupletNumber,
                             msrTupletBracketKind    tupletBracketKind,
                             msrTupletLineShapeKind  tupletLineShapeKind,
@@ -153,7 +94,7 @@ class EXP msrTuplet : public msrTupletElement
 //     void                  setMeasureElementMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context) override
+//                             const std::string&      context) override
 //                               {
 //                                 setTupletMeasurePosition (
 //                                   measure,
@@ -164,7 +105,7 @@ class EXP msrTuplet : public msrTupletElement
 //     void                  setTupletMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context);
+//                             const std::string&      context);
 
     // members positions in measures
     Rational              setTupletMembersMeasurePositions (
@@ -203,7 +144,7 @@ class EXP msrTuplet : public msrTupletElement
                               { return fMemberNotesDisplayWholeNotes; }
 
     // elements
-    const list<S_msrTupletElement>&
+    const std::list<S_msrTupletElement>&
                           getTupletElementsList () const
                               { return fTupletElementsList; }
 
@@ -265,11 +206,11 @@ class EXP msrTuplet : public msrTupletElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    virtual void          printShort (ostream& os);
+    virtual void          printShort (std::ostream& os);
 
   private:
 
@@ -307,11 +248,11 @@ class EXP msrTuplet : public msrTupletElement
     Rational              fTupletDisplayWholeNotes;
 
     // elements
-    list<S_msrTupletElement>
+    std::list<S_msrTupletElement>
                           fTupletElementsList;
 };
 typedef SMARTP<msrTuplet> S_msrTuplet;
-EXP ostream& operator << (ostream& os, const S_msrTuplet& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrTuplet& elt);
 
 
 }

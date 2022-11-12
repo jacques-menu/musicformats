@@ -46,7 +46,7 @@ class EXP msrScore : public msrBookElement
 
     static SMARTP<msrScore> create (
                             int           inputLineNumber,
-                            const string& scoreName);
+                            const std::string& scoreName);
 
     SMARTP<msrScore> createScoreNewbornClone ();
 
@@ -57,7 +57,7 @@ class EXP msrScore : public msrBookElement
 
                           msrScore (
                             int           inputLineNumber,
-                            const string& scoreName);
+                            const std::string& scoreName);
 
     virtual               ~msrScore ();
 
@@ -74,7 +74,7 @@ class EXP msrScore : public msrBookElement
                               { return fScoreUpLinkToBook; }
 
     // name
-    string                getScoreName () const
+    std::string           getScoreName () const
                               { return fScoreName; }
 
     // identification
@@ -128,7 +128,7 @@ class EXP msrScore : public msrBookElement
                               { return fAppearance; }
 
     // part groups
-    const list<S_msrPartGroup>&
+    const std::list<S_msrPartGroup>&
                           getPartGroupsList () const
                               { return fPartGroupsList; }
 
@@ -149,7 +149,7 @@ class EXP msrScore : public msrBookElement
 */
 
     // credits
-    const list<S_msrCredit>&
+    const std::list<S_msrCredit>&
                           getCreditsList () const
                               { return fCreditsList; }
 
@@ -162,10 +162,10 @@ class EXP msrScore : public msrBookElement
                               { return fScoreNumberOfMeasures; }
 
     void                  setScoreLastMeasureNumber (
-                            string measureNumbe)
+                            std::string measureNumbe)
                               {fScoreLastMeasureNumber = measureNumbe; }
 
-    string                getScoreLastMeasureNumber () const
+    std::string           getScoreLastMeasureNumber () const
                               { return fScoreLastMeasureNumber; }
 
     void                  setStaffContainsMultipleFullBarRests (
@@ -276,7 +276,7 @@ class EXP msrScore : public msrBookElement
 
     // voices
 
-    const list<S_msrVoice>&
+    const std::list<S_msrVoice>&
                           getScoreAllVoicesList () const
                               { return fScoreAllVoicesList; }
 
@@ -304,11 +304,11 @@ class EXP msrScore : public msrBookElement
 
     S_msrPart             fetchPartFromScoreByItsPartID (
                             int           inputLineNumber,
-                            const string& partID);
+                            const std::string& partID);
 
     void                  collectScorePartsList (
                             int    inputLineNumber,
-                            list<S_msrPart>& partsList);
+                            std::list<S_msrPart>& partsList);
 
   public:
 
@@ -325,15 +325,15 @@ class EXP msrScore : public msrBookElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override
+    void                  print (std::ostream& os) const override
                               { printShort (os); }
 
-    void                  printShort (ostream& os) const override;
-    void                  printFull (ostream& os) const;
+    void                  printShort (std::ostream& os) const override;
+    void                  printFull (std::ostream& os) const;
 
-    void                  printSummary (ostream& os) const override;
+    void                  printSummary (std::ostream& os) const override;
 
-    void                  printSlices (ostream& os) const;
+    void                  printSlices (std::ostream& os) const;
 
   private:
 
@@ -344,7 +344,7 @@ class EXP msrScore : public msrBookElement
     S_msrBook             fScoreUpLinkToBook;
 
     // name
-    string                fScoreName;
+    std::string           fScoreName;
 
     // identification
     S_msrIdentification   fIdentification;
@@ -363,12 +363,12 @@ class EXP msrScore : public msrBookElement
     S_msrAppearance       fAppearance;
 
     // credits
-    list<S_msrCredit>     fCreditsList;
+    std::list<S_msrCredit>     fCreditsList;
 
     // part groups
-    set<S_msrPartGroup>   fScorePartGroupsSet;
+    std::set<S_msrPartGroup>   fScorePartGroupsSet;
 
-    list<S_msrPartGroup>  fPartGroupsList;
+    std::list<S_msrPartGroup>  fPartGroupsList;
 
     // master voice
 
@@ -378,7 +378,7 @@ class EXP msrScore : public msrBookElement
     // measures
 
     int                   fScoreNumberOfMeasures;
-    string                fScoreLastMeasureNumber;
+    std::string           fScoreLastMeasureNumber;
 
     // multiple full-bar rests
 
@@ -419,7 +419,7 @@ class EXP msrScore : public msrBookElement
 
     // voices
 
-    list<S_msrVoice>      fScoreAllVoicesList;
+    std::list<S_msrVoice>      fScoreAllVoicesList;
 
     // measures slices sequence
 
@@ -427,7 +427,7 @@ class EXP msrScore : public msrBookElement
                           fScoreMeasuresSlicesSequence;
 };
 typedef SMARTP<msrScore> S_msrScore;
-EXP ostream& operator << (ostream& os, const S_msrScore& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrScore& elt);
 
 
 }

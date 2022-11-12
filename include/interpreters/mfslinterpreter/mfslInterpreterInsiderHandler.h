@@ -33,8 +33,8 @@ class EXP mfslInterpreterInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<mfslInterpreterInsiderHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
   protected:
 
@@ -42,8 +42,8 @@ class EXP mfslInterpreterInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           mfslInterpreterInsiderHandler (
-                            const string& serviceName,
-                            const string& handlerHeader);
+                            const std::string& serviceName,
+                            const std::string& handlerHeader);
 
     virtual               ~mfslInterpreterInsiderHandler ();
 
@@ -62,14 +62,14 @@ class EXP mfslInterpreterInsiderHandler : public oahInsiderHandler
     void                  createTheMfslInterpreterPrefixes ();
 
     void                  createTheMfslInterpreterOptionGroups (
-                            const string& serviceName);
+                            const std::string& serviceName);
 
   public:
 
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
@@ -89,7 +89,7 @@ class EXP mfslInterpreterInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -101,9 +101,9 @@ class EXP mfslInterpreterInsiderHandler : public oahInsiderHandler
     // private services
     // ------------------------------------------------------
 
-    string                usageInformation ();
+    std::string           usageInformation ();
 
-    string                mfslInterpreterAboutInformation () const;
+    std::string           mfslInterpreterAboutInformation () const;
 
   private:
 
@@ -112,7 +112,7 @@ class EXP mfslInterpreterInsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<mfslInterpreterInsiderHandler> S_mfslInterpreterInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_mfslInterpreterInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslInterpreterInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP mfslInterpreterInsiderOahGroup : public oahGroup
@@ -186,7 +186,7 @@ class EXP mfslInterpreterInsiderOahGroup : public oahGroup
     // ------------------------------------------------------
 };
 typedef SMARTP<mfslInterpreterInsiderOahGroup> S_mfslInterpreterInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_mfslInterpreterInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_mfslInterpreterInsiderOahGroup& elt);
 
 EXP extern S_mfslInterpreterInsiderOahGroup gGlobalMfslInterpreterInsiderOahGroup;
 

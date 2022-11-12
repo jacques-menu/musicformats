@@ -16,8 +16,6 @@
 #include <map>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -38,18 +36,18 @@ enum class msdlKeywordsLanguageKind {
   kKeywordsLanguageNederlands
 };
 
-string msdlKeywordsLanguageKindAsString (
+std::string msdlKeywordsLanguageKindAsString (
   msdlKeywordsLanguageKind languageKind);
 
-ostream& operator << (ostream& os, const msdlKeywordsLanguageKind& elt);
+std::ostream& operator << (std::ostream& os, const msdlKeywordsLanguageKind& elt);
 
 msdlKeywordsLanguageKind msdlKeywordsLanguageKindFromString (
-  const string& theString);
+  const std::string& theString);
 
-extern map<string, msdlKeywordsLanguageKind>
+extern std::map<std::string, msdlKeywordsLanguageKind>
   gGlobalMsdlKeywordsLanguageKindsMap;
 
-string existingMsdlKeywordsLanguageKinds (size_t namesListMaxLength);
+std::string existingMsdlKeywordsLanguageKinds (size_t namesListMaxLength);
 
 void initializeMsdlKeywordsLanguageKindsMap ();
 
@@ -88,12 +86,12 @@ enum class msdlKeywordKind {
   kKeywordTime
 };
 
-string msdlKeywordKindAsString (
+std::string msdlKeywordKindAsString (
   msdlKeywordKind keywordKind);
 
-ostream& operator << (ostream& os, const msdlKeywordKind& elt);
+std::ostream& operator << (std::ostream& os, const msdlKeywordKind& elt);
 
-string msdlKeywordKindAsMsdlString (
+std::string msdlKeywordKindAsMsdlString (
   msdlKeywordsLanguageKind languageKind,
   msdlKeywordKind          keywordKind);
 
@@ -102,18 +100,18 @@ msdlKeywordKind msdlKeywordKindFromTokenKind (
 
 msdlKeywordKind msdlKeywordKindFromString (
   msdlKeywordsLanguageKind languageKind,
-  const string&            theString);
+  const std::string&            theString);
 
-string existingKeywordsInLanguage (
+std::string existingKeywordsInLanguage (
   msdlKeywordsLanguageKind keywordsLanguageKind,
   size_t                   namesListMaxLength);
 
-extern map<msdlKeywordKind, string> gGlobalEnglishKeywordsNamesMap;
-extern map<msdlKeywordKind, string> gGlobalFrenchKeywordsNamesMap;
-extern map<msdlKeywordKind, string> gGlobalItalianKeywordsNamesMap;
-extern map<msdlKeywordKind, string> gGlobalGermanKeywordsNamesMap;
-extern map<msdlKeywordKind, string> gGlobalSpanishKeywordsNamesMap;
-extern map<msdlKeywordKind, string> gGlobalDutchKeywordsNamesMap;
+extern std::map<msdlKeywordKind, std::string> gGlobalEnglishKeywordsNamesMap;
+extern std::map<msdlKeywordKind, std::string> gGlobalFrenchKeywordsNamesMap;
+extern std::map<msdlKeywordKind, std::string> gGlobalItalianKeywordsNamesMap;
+extern std::map<msdlKeywordKind, std::string> gGlobalGermanKeywordsNamesMap;
+extern std::map<msdlKeywordKind, std::string> gGlobalSpanishKeywordsNamesMap;
+extern std::map<msdlKeywordKind, std::string> gGlobalDutchKeywordsNamesMap;
 
 void initializeEnglishKeywordsNamesMap ();
 void initializeFrenchKeywordsNamesMap ();
@@ -122,7 +120,7 @@ void initializeGermanKeywordsNamesMap ();
 void initializeSpanishKeywordsNamesMap ();
 void initializeDutchKeywordsNamesMap ();
 
-string existingKeywordsLanguageKinds (size_t namesListMaxLength);
+std::string existingKeywordsLanguageKinds (size_t namesListMaxLength);
 
 // initialization
 //______________________________________________________________________________

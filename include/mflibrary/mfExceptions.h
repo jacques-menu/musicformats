@@ -13,6 +13,7 @@
 #define ___mfExceptions___
 
 #include <string>
+#include <ostream>
 
 #include <exception>
 
@@ -20,17 +21,16 @@
 #include "smartpointer.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
 {
 
 //______________________________________________________________________________
-EXP void mfDisplayException (exception& e, ostream& os);
+EXP void mfDisplayException (std::exception& e, std::ostream& os);
 
 //______________________________________________________________________________
-class EXP mfException: public exception, public smartable
+class EXP mfException: public std::exception, public smartable
 {
   public:
 
@@ -38,7 +38,7 @@ class EXP mfException: public exception, public smartable
     // ------------------------------------------------------
 
                           mfException (
-                            string const& exceptionDescription = "",
+                            std::string const& exceptionDescription = "",
                             int           exceptionNumber = 0,
                             int           exceptionLevel = 0
                           ) throw ();
@@ -66,7 +66,7 @@ class EXP mfException: public exception, public smartable
 
   private:
 
-    string                fExceptionDescription;
+    std::string           fExceptionDescription;
 
     int                   fExceptionNumber;
     int                   fExceptionLevel;
@@ -79,10 +79,10 @@ class EXP mfAssertException: public mfException
   public:
 
     static SMARTP<mfAssertException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           mfAssertException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<mfAssertException> S_mfAssertException;
 

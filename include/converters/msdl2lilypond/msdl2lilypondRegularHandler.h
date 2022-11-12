@@ -33,8 +33,8 @@ class EXP msdl2lilypondRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<msdl2lilypondRegularHandler> create (
-                          const string&     serviceName,
-                          const string&     handlerHeader,
+                          const std::string&     serviceName,
+                          const std::string&     handlerHeader,
                           S_msdl2lilypondInsiderHandler
                                             insiderOahHandler);
 
@@ -44,8 +44,8 @@ class EXP msdl2lilypondRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           msdl2lilypondRegularHandler (
-                          const string&     serviceName,
-                          const string&     handlerHeader,
+                          const std::string&     serviceName,
+                          const std::string&     handlerHeader,
                           S_msdl2lilypondInsiderHandler
                                             insiderOahHandler);
 
@@ -58,7 +58,7 @@ class EXP msdl2lilypondRegularHandler : public oahRegularHandler
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override
+    std::string           fetchOutputFileNameFromTheOptions () const override
                               {
                                 return
                                   fInsiderHandler->
@@ -89,7 +89,7 @@ class EXP msdl2lilypondRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -170,7 +170,7 @@ class EXP msdl2lilypondRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msdl2lilypondRegularHandler> S_msdl2lilypondRegularHandler;
-EXP ostream& operator << (ostream& os, const S_msdl2lilypondRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2lilypondRegularHandler& elt);
 
 
 }

@@ -109,9 +109,9 @@ class EXP msdl2msrOahGroup : public oahGroup
     // ------------------------------------------------------
 
     // languages
-    Bool                  setMsdlQuarterTonesPitchesLanguage (string language);
+    Bool                  setMsdlQuarterTonesPitchesLanguage (std::string language);
 
-    Bool                  setMsdlKeywordsLanguage (string language);
+    Bool                  setMsdlKeywordsLanguage (std::string language);
 
     // quiet mode
     void                  enforceGroupQuietness () override;
@@ -198,7 +198,7 @@ class EXP msdl2msrOahGroup : public oahGroup
     Bool                  fQuitOnLexicalErrors;
 };
 typedef SMARTP<msdl2msrOahGroup> S_msdl2msrOahGroup;
-EXP ostream& operator << (ostream& os, const S_msdl2msrOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdl2msrOahGroup& elt);
 
 EXP extern S_msdl2msrOahGroup gGlobalMsdl2msrOahGroup;
 

@@ -15,8 +15,6 @@
 #include "browser.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 /* JMI
@@ -74,9 +72,9 @@ template <typename T> class   oahBrowser : public browser <T>
 #ifdef TRACING_IS_ENABLED
                               if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
                                 gOutputStream <<
-                                  endl <<
+                                  std::endl <<
                                   ".\\\" --> browse()" <<
-                                  endl;
+                                  std::endl;
                               }
 #endif
 */
@@ -98,9 +96,9 @@ template <typename T> class   oahBrowser : public browser <T>
 #ifdef TRACING_IS_ENABLED
                           if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
                             gOutputStream <<
-                              endl <<
+                              std::endl <<
                               ".\\\" --> enter()" <<
-                              endl;
+                              std::endl;
                           }
 #endif
 */
@@ -114,9 +112,9 @@ template <typename T> class   oahBrowser : public browser <T>
 #ifdef TRACING_IS_ENABLED
                                 if (gGlobalOahOahGroup->getTracingOahVisitors ()) {
                                   gOutputStream <<
-                                    endl <<
+                                    std::endl <<
                                     ".\\\" --> leave()" <<
-                                    endl;
+                                    std::endl;
                                 }
 #endif
 */

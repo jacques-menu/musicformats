@@ -35,10 +35,10 @@ enum class msrCreditTypeKind {
   kCreditTypeOther
 };
 
-string msrCreditTypeKindAsString (
+std::string msrCreditTypeKindAsString (
   msrCreditTypeKind creditTypeKind);
 
-ostream& operator << (ostream& os, const msrCreditTypeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrCreditTypeKind& elt);
 
 //______________________________________________________________________________
 class EXP msrCreditWords : public msrElement
@@ -50,10 +50,10 @@ class EXP msrCreditWords : public msrElement
 
     static SMARTP<msrCreditWords> create (
                             int                        inputLineNumber,
-                            const string&              creditWordsContents,
+                            const std::string&              creditWordsContents,
                             float                      creditWordsDefaultX,
                             float                      creditWordsDefaultY,
-                            const string&              creditWordsFontFamily,
+                            const std::string&              creditWordsFontFamily,
                             float                      creditWordsFontSize,
                             msrFontWeightKind          creditWordsFontWeightKind,
                             msrFontStyleKind           creditWordsFontStyleKind,
@@ -69,10 +69,10 @@ class EXP msrCreditWords : public msrElement
 
                           msrCreditWords (
                             int                        inputLineNumber,
-                            const string&              creditWordsContents,
+                            const std::string&              creditWordsContents,
                             float                      creditWordsDefaultX,
                             float                      creditWordsDefaultY,
-                            const string&              creditWordsFontFamily,
+                            const std::string&              creditWordsFontFamily,
                             float                      creditWordsFontSize,
                             msrFontWeightKind          creditWordsFontWeightKind,
                             msrFontStyleKind           creditWordsFontStyleKind,
@@ -87,7 +87,7 @@ class EXP msrCreditWords : public msrElement
 
     // set and get
     // ------------------------------------------------------
-    string                getCreditWordsContents () const
+    std::string           getCreditWordsContents () const
                               { return fCreditWordsContents; }
 
     float                 getCreditWordsDefaultX () const
@@ -96,7 +96,7 @@ class EXP msrCreditWords : public msrElement
     float                 getCreditWordsDefaultY () const
                               { return fCreditWordsDefaultY; }
 
-    string                getCreditWordsFontFamily () const
+    std::string           getCreditWordsFontFamily () const
                               { return fCreditWordsFontFamily; }
 
     float                 getCreditWordsFontSize () const
@@ -142,7 +142,7 @@ class EXP msrCreditWords : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -153,12 +153,12 @@ class EXP msrCreditWords : public msrElement
     <credit-words default-x="607" default-y="1443" font-family="ＭＳ ゴシック" font-size="24" font-weight="bold" justify="center" valign="top" xml:lang="ja">越後獅子</credit-words>
 */
 
-    string                fCreditWordsContents;
+    std::string           fCreditWordsContents;
 
     float                 fCreditWordsDefaultX;
     float                 fCreditWordsDefaultY;
 
-    string                fCreditWordsFontFamily;
+    std::string           fCreditWordsFontFamily;
     float                 fCreditWordsFontSize;
     msrFontWeightKind     fCreditWordsFontWeightKind;
     msrFontStyleKind      fCreditWordsFontStyleKind;
@@ -170,7 +170,7 @@ class EXP msrCreditWords : public msrElement
     msrXMLLangKind        fCreditWordsXMLLang;
 };
 typedef SMARTP<msrCreditWords> S_msrCreditWords;
-EXP ostream& operator << (ostream& os, const S_msrCreditWords& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrCreditWords& elt);
 
 //______________________________________________________________________________
 class EXP msrCredit : public msrElement
@@ -209,7 +209,7 @@ class EXP msrCredit : public msrElement
     msrCreditTypeKind     getCreditTypeKind () const
                               { return fCreditTypeKind; }
 
-    const vector<S_msrCreditWords>&
+    const std::vector<S_msrCreditWords>&
                           getCreditWordsList () const
                               { return fCreditWordsList; }
 
@@ -221,7 +221,7 @@ class EXP msrCredit : public msrElement
     void                  appendCreditWordsToCredit (
                             S_msrCreditWords creditWords);
 
-    string                asString () const override;
+    std::string           asString () const override;
 
   public:
 
@@ -238,7 +238,7 @@ class EXP msrCredit : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -249,11 +249,11 @@ class EXP msrCredit : public msrElement
 
     msrCreditTypeKind      fCreditTypeKind;
 
-    vector<S_msrCreditWords>
+    std::vector<S_msrCreditWords>
                           fCreditWordsList;
 };
 typedef SMARTP<msrCredit> S_msrCredit;
-EXP ostream& operator << (ostream& os, const S_msrCredit& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrCredit& elt);
 
 
 }

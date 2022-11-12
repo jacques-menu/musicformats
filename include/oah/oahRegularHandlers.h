@@ -15,8 +15,6 @@
 #include "oahBasicTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 //_______________________________________________________________________________
@@ -37,8 +35,8 @@ class EXP oahRegularHandler : public oahHandler
     // ------------------------------------------------------
 
     static SMARTP<oahRegularHandler> create (
-                            string            serviceName,
-                            const string&     handlerHeader,
+                            std::string            serviceName,
+                            const std::string&     handlerHeader,
                             S_oahHandler      insiderOahHandler);
 */
 
@@ -48,8 +46,8 @@ class EXP oahRegularHandler : public oahHandler
     // ------------------------------------------------------
 
                           oahRegularHandler (
-                            string            serviceName,
-                            const string&     handlerHeader,
+                            std::string            serviceName,
+                            const std::string&     handlerHeader,
                             S_oahHandler      insiderOahHandler);
 
     virtual               ~oahRegularHandler ();
@@ -73,7 +71,7 @@ class EXP oahRegularHandler : public oahHandler
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override
+    std::string           handlerServiceAboutInformation () const override
                               {
                                 return
                                   fInsiderHandler->
@@ -95,9 +93,9 @@ class EXP oahRegularHandler : public oahHandler
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -109,7 +107,7 @@ class EXP oahRegularHandler : public oahHandler
     virtual void          createRegularHandlerGroups () = 0;
 
     void                  registerAtomInRegularSubgroup (
-                            const string& atomName,
+                            const std::string& atomName,
                             S_oahSubGroup subGroup);
 
   protected:
@@ -120,7 +118,7 @@ class EXP oahRegularHandler : public oahHandler
     S_oahHandler          fInsiderHandler;
 };
 typedef SMARTP<oahRegularHandler> S_oahRegularHandler;
-EXP ostream& operator << (ostream& os, const S_oahRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_oahRegularHandler& elt);
 
 
 }

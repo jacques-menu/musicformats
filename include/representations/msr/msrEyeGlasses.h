@@ -19,7 +19,7 @@ namespace MusicFormats
 {
 
 //______________________________________________________________________________
-class EXP msrEyeGlasses : public msrMeasureElement
+class EXP msrEyeGlasses : public msrMeasureElementLambda
 {
   public:
 
@@ -66,9 +66,9 @@ class EXP msrEyeGlasses : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -76,7 +76,7 @@ class EXP msrEyeGlasses : public msrMeasureElement
     // ------------------------------------------------------
 };
 typedef SMARTP<msrEyeGlasses> S_msrEyeGlasses;
-EXP ostream& operator << (ostream& os, const S_msrEyeGlasses& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrEyeGlasses& elt);
 
 
 }

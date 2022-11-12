@@ -36,11 +36,11 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrPitchesLanguageAtom> create (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             msrQuarterTonesPitchesLanguageKind&
                                               lpsrPitchesLanguageKindVariable);
 
@@ -50,11 +50,11 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrPitchesLanguageAtom (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             msrQuarterTonesPitchesLanguageKind&
                                               lpsrPitchesLanguageKindVariable);
 
@@ -77,8 +77,8 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -95,13 +95,13 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -113,7 +113,7 @@ class EXP lpsrPitchesLanguageAtom : public oahAtomStoringAValue
                           fMsrQuarterTonesPitchesLanguageKindVariable;
 };
 typedef SMARTP<lpsrPitchesLanguageAtom> S_lpsrPitchesLanguageAtom;
-EXP ostream& operator << (ostream& os, const S_lpsrPitchesLanguageAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrPitchesLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
@@ -124,11 +124,11 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrChordsLanguageAtom> create (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             lpsrChordsLanguageKind&
                                               lpsrChordsLanguageKindVariable);
 
@@ -138,11 +138,11 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrChordsLanguageAtom (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             lpsrChordsLanguageKind&
                                                lpsrChordsLanguageKindVariable);
 
@@ -165,8 +165,8 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -183,13 +183,13 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -201,7 +201,7 @@ class EXP lpsrChordsLanguageAtom : public oahAtomStoringAValue
                           fLpsrChordsLanguageKindVariable;
 };
 typedef SMARTP<lpsrChordsLanguageAtom> S_lpsrChordsLanguageAtom;
-EXP ostream& operator << (ostream& os, const S_lpsrChordsLanguageAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrChordsLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
@@ -212,12 +212,12 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrStaffInstrumentNameAtom> create (
-                            const string&         longName,
-                            const string&         shortName,
-                            const string&         description,
-                            const string&         valueSpecification,
-                            const string&         variableName,
-                            map<string, string>&  stringToStringMapVariable);
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
+                            std::map<std::string, std::string>&  stringToStringMapVariable);
 
   protected:
 
@@ -225,12 +225,12 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrStaffInstrumentNameAtom (
-                            const string&         longName,
-                            const string&         shortName,
-                            const string&         description,
-                            const string&         valueSpecification,
-                            const string&         variableName,
-                            map<string, string>&  stringToStringMapVariable);
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
+                            std::map<std::string, std::string>&  stringToStringMapVariable);
 
     virtual               ~lpsrStaffInstrumentNameAtom ();
 
@@ -239,7 +239,7 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const map<string, string>&
+    const std::map<std::string, std::string>&
                           getStringToStringMapVariable () const
                               { return fStringToStringMapVariable; }
 
@@ -249,8 +249,8 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -267,13 +267,13 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -281,10 +281,10 @@ class EXP lpsrStaffInstrumentNameAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    map<string, string>&  fStringToStringMapVariable;
+    std::map<std::string, std::string>&  fStringToStringMapVariable;
 };
 typedef SMARTP<lpsrStaffInstrumentNameAtom> S_lpsrStaffInstrumentNameAtom;
-EXP ostream& operator << (ostream& os, const S_lpsrStaffInstrumentNameAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrStaffInstrumentNameAtom& elt);
 
 //______________________________________________________________________________
 class EXP lpsrTransposeAtom : public oahAtomStoringAValue
@@ -295,11 +295,11 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<lpsrTransposeAtom> create (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             S_msrSemiTonesPitchAndOctave&
                                               semiTonesPitchAndOctaveVariable);
 
@@ -309,11 +309,11 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           lpsrTransposeAtom (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             S_msrSemiTonesPitchAndOctave&
                                               semiTonesPitchAndOctaveVariable);
 
@@ -336,8 +336,8 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -354,13 +354,13 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -372,7 +372,7 @@ class EXP lpsrTransposeAtom : public oahAtomStoringAValue
                           fSemiTonesPitchAndOctaveVariable;
 };
 typedef SMARTP<lpsrTransposeAtom> S_lpsrTransposeAtom;
-EXP ostream& operator << (ostream& os, const S_lpsrTransposeAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrTransposeAtom& elt);
 
 //______________________________________________________________________________
 class EXP lpsrOahGroup : public oahGroup
@@ -578,7 +578,7 @@ class EXP lpsrOahGroup : public oahGroup
     // staves
     // --------------------------------------
 
-    const map<string, string>&
+    const std::map<std::string, std::string>&
                           getLpsrStavesInstrumentsNamesMap () const
                               { return fLpsrStavesInstrumentsNamesMap; }
 
@@ -590,7 +590,7 @@ class EXP lpsrOahGroup : public oahGroup
     // --------------------------------------
 
     // replicate empty measure JMI ???
-    string                getReplicateEmptyMeasureNumber () const
+    std::string           getReplicateEmptyMeasureNumber () const
                               { return fReplicateEmptyMeasureNumber; }
 
     void                  setReplicateEmptyMeasureReplicas ()
@@ -599,7 +599,7 @@ class EXP lpsrOahGroup : public oahGroup
                               { return fReplicateEmptyMeasureReplicas; }
 
     // add empty measures
-// JMI    map<string,int>       getAddEmptyMeasuresStringToIntMap () const;
+// JMI    std::map<std::string,int>       getAddEmptyMeasuresStringToIntMap () const;
 
     // tempos
     // --------------------------------------
@@ -634,13 +634,13 @@ class EXP lpsrOahGroup : public oahGroup
     // languages
     // --------------------------------------
 
-    Bool                  setLpsrQuarterTonesPitchesLanguage (string language);
+    Bool                  setLpsrQuarterTonesPitchesLanguage (std::string language);
 
     msrQuarterTonesPitchesLanguageKind
                           getLpsrQuarterTonesPitchesLanguageKind () const
                               { return fLpsrQuarterTonesPitchesLanguageKind; }
 
-    Bool                  setLpsrChordsLanguageKind (string language);
+    Bool                  setLpsrChordsLanguageKind (std::string language);
 
     lpsrChordsLanguageKind
                           getLpsrChordsLanguageKind () const
@@ -815,11 +815,11 @@ class EXP lpsrOahGroup : public oahGroup
     // --------------------------------------
 
     // replicate empty measure JMI ???
-    string                fReplicateEmptyMeasureNumber;
+    std::string           fReplicateEmptyMeasureNumber;
     int                   fReplicateEmptyMeasureReplicas;
 
     // add empty measures
-// JMI    map<string,int>       fAddEmptyMeasuresStringToIntMap;
+// JMI    std::map<std::string,int>       fAddEmptyMeasuresStringToIntMap;
 
     // tempos
     // --------------------------------------
@@ -848,7 +848,7 @@ class EXP lpsrOahGroup : public oahGroup
                           fLpsrChordsLanguageKind;
 
     // staves instrument names
-    map<string, string>   fLpsrStavesInstrumentsNamesMap;
+    std::map<std::string, std::string>   fLpsrStavesInstrumentsNamesMap;
     S_lpsrStaffInstrumentNameAtom
                           fLpsrStavesInstrumentsNamesMapAtom;
 
@@ -859,7 +859,7 @@ class EXP lpsrOahGroup : public oahGroup
                           fTranspositionSemiTonesPitchAndOctave;
 };
 typedef SMARTP<lpsrOahGroup> S_lpsrOahGroup;
-EXP ostream& operator << (ostream& os, const S_lpsrOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_lpsrOahGroup& elt);
 
 EXP extern S_lpsrOahGroup gGlobalLpsrOahGroup;
 

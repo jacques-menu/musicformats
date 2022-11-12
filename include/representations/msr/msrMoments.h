@@ -21,8 +21,6 @@
 #include "mfRational.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -108,9 +106,9 @@ class EXP msrMoment
 
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -120,10 +118,10 @@ class EXP msrMoment
     Rational              fWrittenPositionInMeseasure;
     Rational              fSoundingRelativeOffset;
 };
-EXP ostream& operator << (ostream& os, const msrMoment& elt);
+EXP std::ostream& operator << (std::ostream& os, const msrMoment& elt);
 
 //______________________________________________________________________________
-void testMsrMomentComparisons (ostream& os);
+void testMsrMomentComparisons (std::ostream& os);
 
 
 }

@@ -589,13 +589,13 @@ class EXP msr2lpsrTranslator :
     // ------------------------------------------------------
   //  S_msrPartGroup            fCurrentPartGroupClone; JMI
 
-    // partGroup's can be nested, hence this stack
-    // the current partGroup is the top of the stack
-    stack<S_msrPartGroup>     fPartGroupsStack;
+    // partGroup's can be nested, hence this std::stack
+    // the current partGroup is the top of the std::stack
+    std::stack<S_msrPartGroup>     fPartGroupsStack;
 
     // part groups block are nested as the partGroup's are
-    // the current partGroup block is the top of the stack
-    stack<S_lpsrPartGroupBlock>
+    // the current partGroup block is the top of the std::stack
+    std::stack<S_lpsrPartGroupBlock>
                               fPartGroupBlocksStack;
 
     S_lpsrBookPartBlock       fCurrentBookPartBlock;
@@ -625,12 +625,12 @@ class EXP msr2lpsrTranslator :
     // ------------------------------------------------------
     S_msrVoice                fCurrentVoiceClone;
     S_msrVoice                fCurrentVoiceOriginal;
-    map<S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
+    std::map<S_msrNote, S_msrNote> fVoiceNotesMap; // JMI
 
     // dal segnos
     // ------------------------------------------------------
 
-    list<S_msrHiddenMeasureAndBarLineDescr>
+    std::list<S_msrHiddenMeasureAndBarLineDescr>
                               fPartHiddenMeasureAndBarLineDescrList;
 
     void                      displayPartHiddenMeasureAndBarLineDescrList ();
@@ -645,7 +645,7 @@ class EXP msr2lpsrTranslator :
     Bool                      fOnGoingHarmony;
     S_msrHarmony              fCurrentHarmonyClone;
 
-    list<S_msrHarmony>        fPendingHarmoniesList;
+    std::list<S_msrHarmony>        fPendingHarmoniesList;
 
 
     // figured bass
@@ -656,7 +656,7 @@ class EXP msr2lpsrTranslator :
 
     // segments
     // ------------------------------------------------------
-    // the current segment clone is the one at the top of the stack
+    // the current segment clone is the one at the top of the std::stack
     S_msrSegment              fCurrentSegmentClone;
 
 
@@ -681,8 +681,8 @@ class EXP msr2lpsrTranslator :
     // browsing grace notes groups leads to several notes
     // being ongoing simultaneously,
     // since such groups are attached to a note, hence:
-    list<S_msrNote>           fOnGoingNotesStack;
-    void                      displayOnGoingNotesStack (const string& context);
+    std::list<S_msrNote>           fOnGoingNotesStack;
+    void                      displayOnGoingNotesStack (const std::string& context);
 
     Bool                      fOnGoingNonGraceNote;
 
@@ -747,7 +747,7 @@ class EXP msr2lpsrTranslator :
 
     // tuplets
     // ------------------------------------------------------
-    stack<S_msrTuplet>        fTupletClonesStack;
+    std::stack<S_msrTuplet>        fTupletClonesStack;
 
 
     // slurs

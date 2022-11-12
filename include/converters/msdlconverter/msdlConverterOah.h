@@ -110,7 +110,7 @@ class EXP msdlConverterOahGroup : public oahGroup
     // ------------------------------------------------------
 };
 typedef SMARTP<msdlConverterOahGroup> S_msdlConverterOahGroup;
-EXP ostream& operator << (ostream& os, const S_msdlConverterOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlConverterOahGroup& elt);
 
 EXP extern S_msdlConverterOahGroup gGlobalMsdlConverterOahGroup;
 

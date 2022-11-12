@@ -16,8 +16,6 @@
 #include <ostream>
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -33,11 +31,11 @@ enum class msrStaffKind {
   kStaffKindRythmic
 };
 
-string msrStaffKindAsString (
+std::string msrStaffKindAsString (
   msrStaffKind staffKind);
 
-ostream& operator << (ostream& os, const msrStaffKind& elt);
-string msrStaffKindAsStringForPrint (
+std::ostream& operator << (std::ostream& os, const msrStaffKind& elt);
+std::string msrStaffKindAsStringForPrint (
   msrStaffKind staffKind);
 
 // data types
@@ -48,10 +46,10 @@ enum class msrStaffChangeKind {
 	kStaffChangeOtherNote
 };
 
-string msrStaffChangeKindAsString (
+std::string msrStaffChangeKindAsString (
   msrStaffChangeKind staffChangeKind);
 
-ostream& operator << (ostream& os, const msrStaffChangeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrStaffChangeKind& elt);
 
 }
 

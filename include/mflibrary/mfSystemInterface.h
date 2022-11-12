@@ -17,8 +17,6 @@
 #include "mfBool.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -52,7 +50,7 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 EXP int mfExecuteCommand (
-  const string& command,
+  const std::string& command,
   Bool          doTrace);
 
 

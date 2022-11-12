@@ -21,8 +21,8 @@ namespace MusicFormats
 
 //_______________________________________________________________________________
 // constants
-EXP extern const string K_MSR_GENERATION_API_KIND_SHORT_NAME;
-EXP extern const string K_MSR_GENERATION_API_KIND_LONG_NAME;
+EXP extern const std::string K_MSR_GENERATION_API_KIND_SHORT_NAME;
+EXP extern const std::string K_MSR_GENERATION_API_KIND_LONG_NAME;
 
 //______________________________________________________________________________
 class EXP msrPitchesLanguageAtom : public oahAtomStoringAValue
@@ -33,11 +33,11 @@ class EXP msrPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msrPitchesLanguageAtom> create (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             msrQuarterTonesPitchesLanguageKind&
                                               quarterTonesPitchesLanguageKind);
   protected:
@@ -46,11 +46,11 @@ class EXP msrPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msrPitchesLanguageAtom (
-                            const string&     longName,
-                            const string&     shortName,
-                            const string&     description,
-                            const string&     valueSpecification,
-                            const string&     variableName,
+                            const std::string&     longName,
+                            const std::string&     shortName,
+                            const std::string&     description,
+                            const std::string&     valueSpecification,
+                            const std::string&     variableName,
                             msrQuarterTonesPitchesLanguageKind&
                                               quarterTonesPitchesLanguageKind);
 
@@ -73,8 +73,8 @@ class EXP msrPitchesLanguageAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -91,13 +91,13 @@ class EXP msrPitchesLanguageAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -109,7 +109,7 @@ class EXP msrPitchesLanguageAtom : public oahAtomStoringAValue
                           fMsrQuarterTonesPitchesLanguageKindVariable;
 };
 typedef SMARTP<msrPitchesLanguageAtom> S_msrPitchesLanguageAtom;
-EXP ostream& operator << (ostream& os, const S_msrPitchesLanguageAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrPitchesLanguageAtom& elt);
 
 //______________________________________________________________________________
 class EXP msrRenamePartAtom : public oahAtomStoringAValue
@@ -120,12 +120,12 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msrRenamePartAtom> create (
-                            const string&         longName,
-                            const string&         shortName,
-                            const string&         description,
-                            const string&         valueSpecification,
-                            const string&         variableName,
-                            map<string, string>&  stringToStringMapVariable);
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
+                            std::map<std::string, std::string>&  stringToStringMapVariable);
 
   protected:
 
@@ -133,12 +133,12 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msrRenamePartAtom (
-                            const string&         longName,
-                            const string&         shortName,
-                            const string&         description,
-                            const string&         valueSpecification,
-                            const string&         variableName,
-                            map<string, string>&  stringToStringMapVariable);
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         valueSpecification,
+                            const std::string&         variableName,
+                            std::map<std::string, std::string>&  stringToStringMapVariable);
 
     virtual               ~msrRenamePartAtom ();
 
@@ -147,7 +147,7 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // set and get
     // ------------------------------------------------------
 
-    const map<string, string>&
+    const std::map<std::string, std::string>&
                           getStringToStringMapVariable () const
                               { return fStringToStringMapVariable; }
 
@@ -157,8 +157,8 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -175,13 +175,13 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -189,10 +189,10 @@ class EXP msrRenamePartAtom : public oahAtomStoringAValue
     // private fields
     // ------------------------------------------------------
 
-    map<string, string>&  fStringToStringMapVariable;
+    std::map<std::string, std::string>&  fStringToStringMapVariable;
 };
 typedef SMARTP<msrRenamePartAtom> S_msrRenamePartAtom;
-EXP ostream& operator << (ostream& os, const S_msrRenamePartAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrRenamePartAtom& elt);
 
 //______________________________________________________________________________
 class EXP msrOahGroup : public oahGroup
@@ -325,7 +325,7 @@ class EXP msrOahGroup : public oahGroup
                               { return fMsrQuarterTonesPitchesLanguageKind; }
 
     // parts
-    const map<string, string>&
+    const std::map<std::string, std::string>&
                           getMsrPartsRenamingMap () const
                               { return fMsrPartsRenamingMap; }
 
@@ -357,7 +357,7 @@ class EXP msrOahGroup : public oahGroup
                               { return fShowFiguredBassVoices; }
 
     Bool                  setMsrQuarterTonesPitchesLanguage (
-                            const string& language);
+                            const std::string& language);
 
   public:
 
@@ -465,7 +465,7 @@ class EXP msrOahGroup : public oahGroup
                           fMsrQuarterTonesPitchesLanguageKind;
 
     // parts
-    map<string, string>   fMsrPartsRenamingMap;
+    std::map<std::string, std::string>   fMsrPartsRenamingMap;
 
     // staves
     Bool                  fCreateSingleLineStavesAsRythmic;
@@ -480,7 +480,7 @@ class EXP msrOahGroup : public oahGroup
     Bool                  fShowFiguredBassVoices;
 };
 typedef SMARTP<msrOahGroup> S_msrOahGroup;
-EXP ostream& operator << (ostream& os, const S_msrOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrOahGroup& elt);
 
 EXP extern S_msrOahGroup gGlobalMsrOahGroup;
 

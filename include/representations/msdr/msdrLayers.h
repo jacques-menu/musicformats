@@ -10,7 +10,7 @@
 #include "msrClefs.h"
 #include "msrKeys.h"
 #include "msrTimeSignatures.h"
-#include "msrNotes.h"
+// #include "msrNotes.h"
 
 
 namespace MusicFormats
@@ -26,7 +26,7 @@ class EXP msdrLayer : public smartable
 
     static SMARTP<msdrLayer> create (
                             int           inputLineNumber,
-                            const string& layerNumber);
+                            const std::string& layerNumber);
 
     SMARTP<msdrLayer> createMusicNewbornClone ();
 
@@ -38,7 +38,7 @@ class EXP msdrLayer : public smartable
     // for regular voices
                           msdrLayer (
                             int           inputLineNumber,
-                            const string& layerNumber);
+                            const std::string& layerNumber);
 
                           msdrLayer ();
 
@@ -58,19 +58,19 @@ class EXP msdrLayer : public smartable
     // ------------------------------------------------------
 
     // measure number
-    string                getLayerNumber () const
+    std::string           getLayerNumber () const
                               { return fLayerNumber; }
 
     // input line number
     int                   getInputLineNumber () const
                               { return fInputLineNumber; }
 
-    // music measures vector
-    const vector<S_msrMeasureElement>&
+    // music measures std::vector
+    const std::vector<S_msrMeasureElement>&
                           getMeasureElementsVector () const
                               { return fLayerElementsVector; }
-    // measures flat list
-    const list<S_msrMeasureElement>&
+    // measures flat std::list
+    const std::list<S_msrMeasureElement>&
                           getMeasureElementsList () const
                               { return fLayerElementsList; }
 
@@ -119,16 +119,16 @@ class EXP msdrLayer : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const;
-    string                asString () const;
+    std::string           asShortString () const;
+    std::string           asString () const;
 
     void                  displayLayer (
                             int           inputLineNumber,
-                            const string& context) const;
+                            const std::string& context) const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
-    void                  printShort (ostream& os) const;
+    void                  printShort (std::ostream& os) const;
 
   private:
 
@@ -136,13 +136,13 @@ class EXP msdrLayer : public smartable
     // ------------------------------------------------------
 
     // measure number
-    string                fLayerNumber;
+    std::string           fLayerNumber;
 
     // input line number
     int                   fInputLineNumber;
 
-    // measures elements list
-    list<S_msrMeasureElement>
+    // measures elements std::list
+    std::list<S_msrMeasureElement>
                           fLayerElementsList;
 
   public:
@@ -155,15 +155,15 @@ class EXP msdrLayer : public smartable
     // work fields
     // ------------------------------------------------------
 
-    // measures elements vector
-    vector<S_msrMeasureElement>
+    // measures elements std::vector
+    std::vector<S_msrMeasureElement>
                           fLayerElementsVector;
 
     // voice finalization
     Bool                  fLayerHasBeenFinalized;
 };
 typedef SMARTP<msdrLayer> S_msdrLayer;
-EXP ostream& operator << (ostream& os, const S_msdrLayer& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdrLayer& elt);
 
 
 }

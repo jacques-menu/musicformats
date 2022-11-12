@@ -64,14 +64,14 @@ class EXP bsrElement : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    string                asShortString () const override;
+    std::string           asShortString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 };
 typedef SMARTP<bsrElement> S_bsrElement;
-EXP ostream& operator << (ostream& os, const S_bsrElement& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_bsrElement& elt);
 
 
 }

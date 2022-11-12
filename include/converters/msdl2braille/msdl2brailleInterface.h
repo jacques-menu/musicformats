@@ -15,38 +15,36 @@
 #include "mfMusicformatsErrors.h" // for mfMusicformatsErrorKind
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlStream2brailleWithOptionsAndArguments (
-  string                        inputSourceName,
-  istream&                      inputStream,
+  std::string                   inputSourceName,
+  std::istream&                      inputStream,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
 EXP mfMusicformatsErrorKind convertMsdlStream2brailleWithHandler (
-  string       inputSourceName,
-  istream&     inputStream,
+  std::string       inputSourceName,
+  std::istream&     inputStream,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err);
+  std::ostream&     out,
+  std::ostream&     err);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithOptionsAndArguments (
-  string                        fileName,
+  std::string                   fileName,
   const oahOptionsAndArguments& handlerOptionsAndArguments,
   std::ostream&                 out,
   std::ostream&                 err);
 
 EXP mfMusicformatsErrorKind convertMsdlFile2brailleWithHandler (
-  string       fileName,
+  std::string       fileName,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err);
+  std::ostream&     out,
+  std::ostream&     err);
 
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind convertMsdlString2brailleWithOptionsAndArguments (
@@ -58,8 +56,8 @@ EXP mfMusicformatsErrorKind convertMsdlString2brailleWithOptionsAndArguments (
 EXP mfMusicformatsErrorKind convertMsdlString2brailleWithHandler (
   const char*  buffer,
   S_oahHandler handler,
-  ostream&     out,
-  ostream&     err);
+  std::ostream&     out,
+  std::ostream&     err);
 
 
 }

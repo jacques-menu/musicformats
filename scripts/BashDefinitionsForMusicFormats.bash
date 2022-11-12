@@ -227,7 +227,7 @@ function bit ()
     -i 'BUILD|error|warning|note:|Undefined|referenced from|duplicate symbol' \
     ${LOGFILE} \
     | \
-    egrep -v 'forward' | egrep -v 'build' | egrep -v 'Build' | grep -v 'TARGET'
+    egrep -v 'forward' | egrep -v 'build' | egrep -v 'Build' | egrep -v 'TARGET'
 #    \
 #     | \
 #    egrep -v 'Xcode.app' | egrep -v 'VSTD'
@@ -366,37 +366,37 @@ function renam ()
   RenameFiles . . $*
 }
 
-# grep in sources
+# egrep in sources
 #----------------------------------------------
 
 function grh ()
 {
 #  set -x
-  grep -r "$1" *.h */*.h */*/*.h */*/*/*.h
+  egrep -r "$1" *.h */*.h */*/*.h */*/*/*.h
 }
 
 function grc ()
 {
 #  set -x
-  grep -r "$1" *.cpp */*.cpp */*/*.cpp */*/*/*.cpp
+  egrep -r "$1" *.cpp */*.cpp */*/*.cpp */*/*/*.cpp
 }
 
 function grx ()
 {
 #  set -x
-  grep -r "$1" *.xml */*.xml */*/*.xml
+  egrep -r "$1" *.xml */*.xml */*/*.xml
 }
 
 function grly ()
 {
 #  set -x
-  grep -r "$1" *.ly */*.ly */*/*.ly
+  egrep -r "$1" *.ly */*.ly */*/*.ly
 }
 
 function grt ()
 {
 #  set -x
-  grep -r "$1" *.tex */*.tex */*/*.tex
+  egrep -r "$1" *.tex */*.tex */*/*.tex
 }
 
 
@@ -426,8 +426,8 @@ function checkGIndenterSrc ()
   for F in ${SRC_DIR}/*/* ${SRC_DIR}/*/*/*; do
     if [ ! -d ${F} ]; then
 #      echo "===> ${F}:"
-      INCRS=$(grep -c '++gIndenter' ${F})
-      DECRS=$(grep -c '\-\-gIndenter' ${F})
+      INCRS=$(egrep -c '++gIndenter' ${F})
+      DECRS=$(egrep -c '\-\-gIndenter' ${F})
       if [ ${INCRS} -ne ${DECRS} ]; then
         echo "${F}: INCRS: ${INCRS}, DECRS: ${DECRS}. DIFFERENCE: $(expr ${INCRS} - ${DECRS} )"
         echo
@@ -442,8 +442,8 @@ function checkGIndenterFile ()
   for F in ${1}; do
     if [ ! -d ${F} ]; then
 #      echo "===> ${F}:"
-      INCRS=$(grep -c '++gIndenter' ${F})
-      DECRS=$(grep -c '\-\-gIndenter' ${F})
+      INCRS=$(egrep -c '++gIndenter' ${F})
+      DECRS=$(egrep -c '\-\-gIndenter' ${F})
       if [ ${INCRS} -ne ${DECRS} ]; then
         echo "${F}: INCRS: ${INCRS}, DECRS: ${DECRS}. DIFFERENCE: $(expr ${INCRS} - ${DECRS} )"
         echo
@@ -458,8 +458,8 @@ function checkGIndenterCrement ()
   for F in ${SRC_DIR}/*/* ${SRC_DIR}/*/*/*; do
     if [ ! -d ${F} ]; then
 #      echo "===> ${F}:"
-      INCRS=$(grep -c gIndenter.increment ${F})
-      DECRS=$(grep -c gIndenter.decrement ${F})
+      INCRS=$(egrep -c gIndenter.increment ${F})
+      DECRS=$(egrep -c gIndenter.decrement ${F})
       if [ ${INCRS} -ne ${DECRS} ]; then
         echo "${F}: INCRS: ${INCRS}, DECRS: ${DECRS}. DIFFERENCE: $(expr ${INCRS} - ${DECRS} )"
         echo

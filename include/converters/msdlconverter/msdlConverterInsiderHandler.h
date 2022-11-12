@@ -35,8 +35,8 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<msdlConverterInsiderHandler> create (
-                            const string&               serviceName,
-                            const string&               handlerHeader,
+                            const std::string&               serviceName,
+                            const std::string&               handlerHeader,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 
   protected:
@@ -45,8 +45,8 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           msdlConverterInsiderHandler (
-                            const string&               serviceName,
-                            const string&               handlerHeader,
+                            const std::string&               serviceName,
+                            const std::string&               handlerHeader,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 
     virtual               ~msdlConverterInsiderHandler ();
@@ -66,7 +66,7 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     void                  createTheMsdlConverterPrefixes ();
 
     void                  createTheMsdlConverterOptionGroups (
-                            const string&              serviceName,
+                            const std::string&              serviceName,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 
   public:
@@ -74,11 +74,11 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override;
+    std::string           fetchOutputFileNameFromTheOptions () const override;
 
     // quiet mode
     void                  enforceHandlerQuietness () override;
@@ -96,7 +96,7 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -108,11 +108,11 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
     // private services
     // ------------------------------------------------------
 
-    string                usageInformation (
+    std::string           usageInformation (
                             mfMultiGenerationOutputKind
                               multiGenerationOutputKind);
 
-    string                msdlConverterAboutInformation (
+    std::string           msdlConverterAboutInformation (
                             mfMultiGenerationOutputKind
                               multiGenerationOutputKind) const;
 
@@ -126,7 +126,7 @@ class EXP msdlConverterInsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<msdlConverterInsiderHandler> S_msdlConverterInsiderHandler;
-EXP ostream& operator << (ostream& os, const S_msdlConverterInsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlConverterInsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP msdlConverterInsiderOahGroup : public oahGroup
@@ -212,7 +212,7 @@ class EXP msdlConverterInsiderOahGroup : public oahGroup
                           fMultiGenerationOutputKind;
 };
 typedef SMARTP<msdlConverterInsiderOahGroup> S_msdlConverterInsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_msdlConverterInsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msdlConverterInsiderOahGroup& elt);
 
 EXP extern S_msdlConverterInsiderOahGroup gGlobalmsdlConverterInsiderOahGroup;
 

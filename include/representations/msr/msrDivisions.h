@@ -81,34 +81,34 @@ class EXP msrDivisions : public msrElement
                             int             inputLineNumber,
                             msrDurationKind durationKind);
 
-    void                  printDurationKindsDivisions (ostream& os);
+    void                  printDurationKindsDivisions (std::ostream& os);
 
     // MSR strings
-    string                divisionsAsMsrString (
+    std::string           divisionsAsMsrString (
                             int  inputLineNumber,
                             int  divisions,
                             int& numberOfDotsNeeded);
 
-    string                divisionsAsMsrString (
+    std::string           divisionsAsMsrString (
                             int  inputLineNumber,
                             int  divisions);
 /* JMI
-    string                wholeNotesAsMsrString (
+    std::string           wholeNotesAsMsrString (
                             int      inputLineNumber,
                             const Rational& wholeNotes,
                             int&     numberOfDotsNeeded);
 
-    string                wholeNotesAsMsrString (
+    std::string           wholeNotesAsMsrString (
                             int      inputLineNumber,
                             const Rational& wholeNotes);
 */
-    string                tupletDivisionsAsMsrString (
+    std::string           tupletDivisionsAsMsrString (
                             int inputLineNumber,
                             int divisions,
                             int actualNotes,
                             int normalNotes);
 
-    string                tupletWholeNotesAsMsrString (
+    std::string           tupletWholeNotesAsMsrString (
                             int             inputLineNumber,
                             const Rational& wholeNotes,
                             int             actualNotes,
@@ -134,9 +134,9 @@ class EXP msrDivisions : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -145,11 +145,11 @@ class EXP msrDivisions : public msrElement
 
     int                   fDivisionsPerQuarterNote;
 
-    list<pair<msrDurationKind, int> >
+    std::list<std::pair<msrDurationKind, int> >
                           fDurationKindsToDivisions;
 };
 typedef SMARTP<msrDivisions> S_msrDivisions;
-EXP ostream& operator << (ostream& os, const S_msrDivisions& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrDivisions& elt);
 
 
 }

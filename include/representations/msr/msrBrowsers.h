@@ -17,7 +17,6 @@
 #include "msrPathToVoice.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats

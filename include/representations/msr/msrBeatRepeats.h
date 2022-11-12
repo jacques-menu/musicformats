@@ -92,9 +92,9 @@ class EXP msrBeatRepeatPattern : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -108,7 +108,7 @@ class EXP msrBeatRepeatPattern : public msrElement
     S_msrSegment          fBeatRepeatPatternSegment;
 };
 typedef SMARTP<msrBeatRepeatPattern> S_msrBeatRepeatPattern;
-EXP ostream& operator << (ostream& os, const S_msrBeatRepeatPattern& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatPattern& elt);
 
 //______________________________________________________________________________
 class EXP msrBeatRepeatReplicas : public msrElement
@@ -181,9 +181,9 @@ class EXP msrBeatRepeatReplicas : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -197,7 +197,7 @@ class EXP msrBeatRepeatReplicas : public msrElement
     S_msrSegment          fBeatRepeatReplicasSegment;
 };
 typedef SMARTP<msrBeatRepeatReplicas> S_msrBeatRepeatReplicas;
-EXP ostream& operator << (ostream& os, const S_msrBeatRepeatReplicas& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrBeatRepeatReplicas& elt);
 
 //______________________________________________________________________________
 // data types
@@ -207,10 +207,10 @@ enum class msrBeatRepeatKind {
   kBeatRepeatStart, kBeatRepeatStop
 };
 
-string msrBeatRepeatKindAsString (
+std::string msrBeatRepeatKindAsString (
   msrBeatRepeatKind beatRepeatKind);
 
-ostream& operator << (ostream& os, const msrBeatRepeatKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBeatRepeatKind& elt);
 
 enum class msrBeatRepeatBuildPhaseKind {
   kBeatRepeatBuildPhaseJustCreated,
@@ -219,10 +219,10 @@ enum class msrBeatRepeatBuildPhaseKind {
   kBeatRepeatBuildPhaseCompleted
 };
 
-string msrBeatRepeatBuildPhaseKindAsString (
+std::string msrBeatRepeatBuildPhaseKindAsString (
   msrBeatRepeatBuildPhaseKind beatRepeatBuildPhaseKind);
 
-ostream& operator << (ostream& os, const msrBeatRepeatBuildPhaseKind& elt);
+std::ostream& operator << (std::ostream& os, const msrBeatRepeatBuildPhaseKind& elt);
 
 class EXP msrBeatRepeat : public msrSegmentElement
 {
@@ -334,14 +334,14 @@ class EXP msrBeatRepeat : public msrSegmentElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
     void                  displayBeatRepeat (
                             int           inputLineNumber,
-                            const string& context);
+                            const std::string& context);
 
-    void                  print (ostream& os) const override;
-    void                  printShort (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -368,7 +368,7 @@ class EXP msrBeatRepeat : public msrSegmentElement
                           fCurrentBeatRepeatBuildPhaseKind; // unused??? JMI
 };
 typedef SMARTP<msrBeatRepeat> S_msrBeatRepeat;
-EXP ostream& operator << (ostream& os, const S_msrBeatRepeat& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrBeatRepeat& elt);
 
 
 }

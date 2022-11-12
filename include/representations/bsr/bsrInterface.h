@@ -34,13 +34,13 @@ EXP void displayBsrScoreShort (
   S_bsrScore    bsrScore,
   S_msrOahGroup msrOpts,
   S_bsrOahGroup bsrOpts,
-  const string& passDescription);
+  const std::string& passDescription);
 
 EXP void displayBsrScoreFull (
   S_bsrScore    bsrScore,
   S_msrOahGroup msrOpts,
   S_bsrOahGroup bsrOpts,
-  const string& passDescription);
+  const std::string& passDescription);
 
 // parts
 // ------------------------------------------------------

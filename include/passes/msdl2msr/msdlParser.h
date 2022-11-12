@@ -18,7 +18,7 @@
 #include "msrStaves.h"
 #include "msrVoices.h"
 #include "msrMeasures.h"
-#include "msrNotes.h"
+// #include "msrNotes.h"
 
 #include "msrIdentification.h"
 
@@ -28,8 +28,6 @@
 
 #include "msdlParserWaeHandlers.h"
 
-
-using namespace std;
 
 namespace MusicFormats
 {
@@ -42,14 +40,14 @@ class msdlParser : public smartable
     // creation
     // ------------------------------------------------------
 
-    static SMARTP<msdlParser> create (istream& inputStream);
+    static SMARTP<msdlParser> create (std::istream& inputStream);
 
   public:
 
     // constructors/destructor
     // ------------------------------------------------------
 
-                          msdlParser (istream& inputStream);
+                          msdlParser (std::istream& inputStream);
 
     virtual               ~msdlParser ();
 
@@ -79,9 +77,9 @@ class msdlParser : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -89,40 +87,40 @@ class msdlParser : public smartable
     // ------------------------------------------------------
 
     // lexical analysis
-    string                currentTokenAsString () const;
-    string                currentTokenAsMsdlString () const;
+    std::string           currentTokenAsString () const;
+    std::string           currentTokenAsMsdlString () const;
 
     void                  fetchNextToken ();
 
     // error recovery
     void                  displayTokenKindsSetsStack (
-                            const string& context);
+                            const std::string& context);
     Bool                  isCurrentTokenKindInSetsStack (
-                            const string& context);
+                            const std::string& context);
 
     Bool                  checkMandatoryTokenKind (
-                            const string& fileName,
+                            const std::string& fileName,
                             int           lineNumber,
                             msdlTokenKind tokenKind,
-                            const string& context);
+                            const std::string& context);
 
     Bool                  checkMandatoryTokenKindsSet (
-                            const string&       fileName,
+                            const std::string&       fileName,
                             int                 lineNumber,
                             S_msdlTokenKindsSet tokenKindsSet,
-                            const string&       context);
+                            const std::string&       context);
 
     Bool                  checkOptionalTokenKind (
-                            const string& fileName,
+                            const std::string& fileName,
                             int           lineNumber,
                             msdlTokenKind tokenKind,
-                            const string& context);
+                            const std::string& context);
 
     Bool                  checkOptionalTokenKindsSet (
-                            const string&       fileName,
+                            const std::string&       fileName,
                             int                 lineNumber,
                             S_msdlTokenKindsSet tokenKindsSet,
-                            const string&       context);
+                            const std::string&       context);
 
   private:
 
@@ -139,7 +137,7 @@ class msdlParser : public smartable
 #endif
 
     // software
-    string                fSoftware;
+    std::string           fSoftware;
 
     // user language
     msdlUserLanguageKind  fUserLanguageKind;
@@ -171,7 +169,7 @@ class msdlParser : public smartable
     S_msdlTokenKindsSet   fEmptyTokenKindsSet;
     S_msdlTokenKindsSet   fTokenEOFTokenKindsSet;
 
-    list<S_msdlTokenKindsSet>
+    std::list<S_msdlTokenKindsSet>
                           fMsdlTokensSetsStack;
 
     // warnings and errors
@@ -223,10 +221,10 @@ class msdlParser : public smartable
     S_msrNote             fCurrentOctaveEntryReference;
     void                  setCurrentOctaveEntryReference ();
 
-    string                lilypondOctaveInRelativeEntryMode (
+    std::string           lilypondOctaveInRelativeEntryMode (
                             S_msrNote note);
 
-    string                lilypondOctaveInFixedEntryMode (
+    std::string           lilypondOctaveInFixedEntryMode (
                             S_msrNote note);
 
     // note
@@ -405,7 +403,7 @@ class msdlParser : public smartable
     void                    NoteDuration (S_msdlTokenKindsSet stopperTokensSet);
 };
 typedef SMARTP<msdlParser> S_msdlParser;
-EXP ostream& operator << (ostream& os, const msdlParser& elt);
+EXP std::ostream& operator << (std::ostream& os, const msdlParser& elt);
 
 
 }

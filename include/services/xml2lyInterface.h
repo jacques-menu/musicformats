@@ -17,8 +17,6 @@
 #include "exports.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -30,14 +28,14 @@ EXP int xml2ly_BIS (
 //_______________________________________________________________________________
 EXP int xml2ly (
   FILE*    fd,
-  ostream& out,
-  ostream& err);
+  std::ostream& out,
+  std::ostream& err);
 
 //_______________________________________________________________________________
 EXP int xml2ly (
   const char* buffer,
-  ostream&    out,
-  ostream&    err);
+  std::ostream&    out,
+  std::ostream&    err);
 
 
 }

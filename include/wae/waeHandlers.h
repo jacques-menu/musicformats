@@ -19,7 +19,6 @@
 #include "msdlKeywords.h"
 
 
-using namespace std;
 using namespace MusicXML2;
 
 namespace MusicFormats
@@ -59,9 +58,9 @@ class EXP waeHandler : public smartable
     // print
     // ------------------------------------------------------
 
-    string                asString () const;
+    std::string           asString () const;
 
-    void                  print (ostream& os) const;
+    void                  print (std::ostream& os) const;
 
   private:
 
@@ -69,7 +68,7 @@ class EXP waeHandler : public smartable
     // ------------------------------------------------------
 };
 typedef SMARTP<waeHandler> S_waeHandler;
-EXP ostream& operator << (ostream& os, const S_waeHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_waeHandler& elt);
 
 
 }

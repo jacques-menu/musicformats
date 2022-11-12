@@ -26,17 +26,17 @@ namespace MusicFormats
 
 //______________________________________________________________________________
 // constants
-EXP extern const string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_LONG_NAME;
-EXP extern const string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_SHORT_NAME;
+EXP extern const std::string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_LONG_NAME;
+EXP extern const std::string K_BRAILLE_USE_ENCODING_IN_FILE_NAME_SHORT_NAME;
 
-EXP extern const string K_BRAILLE_OUTPUT_KIND_LONG_NAME;
-EXP extern const string K_BRAILLE_OUTPUT_KIND_SHORT_NAME;
+EXP extern const std::string K_BRAILLE_OUTPUT_KIND_LONG_NAME;
+EXP extern const std::string K_BRAILLE_OUTPUT_KIND_SHORT_NAME;
 
-EXP extern const string K_BRAILLE_UTF_KIND_LONG_NAME;
-EXP extern const string K_BRAILLE_UTF_KIND_SHORT_NAME;
+EXP extern const std::string K_BRAILLE_UTF_KIND_LONG_NAME;
+EXP extern const std::string K_BRAILLE_UTF_KIND_SHORT_NAME;
 
-EXP extern const string K_BRAILLE_BYTE_ORDERING_KIND_LONG_NAME;
-EXP extern const string K_BRAILLE_BYTE_ORDERING_KIND_SHORT_NAME;
+EXP extern const std::string K_BRAILLE_BYTE_ORDERING_KIND_LONG_NAME;
+EXP extern const std::string K_BRAILLE_BYTE_ORDERING_KIND_SHORT_NAME;
 
 //______________________________________________________________________________
 class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
@@ -47,10 +47,10 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<brailleOutputKindAtom> create (
-                            const string&         longName,
-                            const string&         shortName,
-                            const string&         description,
-                            const string&         variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         variableName,
                             bsrBrailleOutputKind& brailleOutputKindVariable,
                             bsrBrailleOutputKind  brailleOutputKindValue);
 
@@ -60,10 +60,10 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // ------------------------------------------------------
 
                           brailleOutputKindAtom (
-                            const string&         longName,
-                            const string&         shortName,
-                            const string&         description,
-                            const string&         variableName,
+                            const std::string&         longName,
+                            const std::string&         shortName,
+                            const std::string&         description,
+                            const std::string&         variableName,
                             bsrBrailleOutputKind& brailleOutputKindVariable,
                             bsrBrailleOutputKind  brailleOutputKindValue);
 
@@ -79,7 +79,7 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // public services
     // ------------------------------------------------------
 
-    void                  applyElement (ostream& os) override;
+    void                  applyElement (std::ostream& os) override;
 
   public:
 
@@ -96,13 +96,13 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -114,7 +114,7 @@ class EXP brailleOutputKindAtom : public oahAtomImplicitlyStoringAValue
     bsrBrailleOutputKind  fBrailleOutputKindValue;
 };
 typedef SMARTP<brailleOutputKindAtom> S_brailleOutputKindAtom;
-EXP ostream& operator << (ostream& os, const S_brailleOutputKindAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_brailleOutputKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP brailleUTFKindAtom : public oahAtomStoringAValue
@@ -125,11 +125,11 @@ class EXP brailleUTFKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<brailleUTFKindAtom> create (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             bsrUTFKind&   brailleUTFKindVariable);
 
   protected:
@@ -138,11 +138,11 @@ class EXP brailleUTFKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           brailleUTFKindAtom (
-                            const string& longName,
-                            const string& shortName,
-                            const string& description,
-                            const string& valueSpecification,
-                            const string& variableName,
+                            const std::string& longName,
+                            const std::string& shortName,
+                            const std::string& description,
+                            const std::string& valueSpecification,
+                            const std::string& variableName,
                             bsrUTFKind&   brailleUTFKindVariable);
 
     virtual               ~brailleUTFKindAtom ();
@@ -158,8 +158,8 @@ class EXP brailleUTFKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -176,13 +176,13 @@ class EXP brailleUTFKindAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -193,7 +193,7 @@ class EXP brailleUTFKindAtom : public oahAtomStoringAValue
     bsrUTFKind&           fBsrUTFKindVariable;
 };
 typedef SMARTP<brailleUTFKindAtom> S_brailleUTFKindAtom;
-EXP ostream& operator << (ostream& os, const S_brailleUTFKindAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_brailleUTFKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP brailleByteOrderingKindAtom : public oahAtomStoringAValue
@@ -204,11 +204,11 @@ class EXP brailleByteOrderingKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<brailleByteOrderingKindAtom> create (
-                            const string&        longName,
-                            const string&        shortName,
-                            const string&        description,
-                            const string&        valueSpecification,
-                            const string&        variableName,
+                            const std::string&        longName,
+                            const std::string&        shortName,
+                            const std::string&        description,
+                            const std::string&        valueSpecification,
+                            const std::string&        variableName,
                             bsrByteOrderingKind& brailleByteOrderingKindVariable);
 
   protected:
@@ -217,11 +217,11 @@ class EXP brailleByteOrderingKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           brailleByteOrderingKindAtom (
-                            const string&        longName,
-                            const string&        shortName,
-                            const string&        description,
-                            const string&        valueSpecification,
-                            const string&        variableName,
+                            const std::string&        longName,
+                            const std::string&        shortName,
+                            const std::string&        description,
+                            const std::string&        valueSpecification,
+                            const std::string&        variableName,
                             bsrByteOrderingKind& brailleByteOrderingKindVariable);
 
     virtual               ~brailleByteOrderingKindAtom ();
@@ -237,8 +237,8 @@ class EXP brailleByteOrderingKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -253,13 +253,13 @@ class EXP brailleByteOrderingKindAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -270,7 +270,7 @@ class EXP brailleByteOrderingKindAtom : public oahAtomStoringAValue
     bsrByteOrderingKind&  fBsrByteOrderingKindVariable;
 };
 typedef SMARTP<brailleByteOrderingKindAtom> S_brailleByteOrderingKindAtom;
-EXP ostream& operator << (ostream& os, const S_brailleByteOrderingKindAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_brailleByteOrderingKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP brailleGenerationOahGroup : public oahGroup
@@ -456,7 +456,7 @@ class EXP brailleGenerationOahGroup : public oahGroup
     Bool                  fNoBrailleCode;
 };
 typedef SMARTP<brailleGenerationOahGroup> S_brailleGenerationOahGroup;
-EXP ostream& operator << (ostream& os, const S_brailleGenerationOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_brailleGenerationOahGroup& elt);
 
 EXP extern S_brailleGenerationOahGroup gGlobalBrailleGenerationOahGroup;
 

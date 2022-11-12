@@ -33,8 +33,8 @@ class EXP LilyPondIssue34InsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
     static SMARTP<LilyPondIssue34InsiderHandler> create (
-                            const string& serviceName,
-                            const string& handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             mfMultiGenerationOutputKind
                                                     multiGenerationOutputKind);
 
@@ -44,8 +44,8 @@ class EXP LilyPondIssue34InsiderHandler : public oahInsiderHandler
     // ------------------------------------------------------
 
                           LilyPondIssue34InsiderHandler (
-                            const string& serviceName,
-                            const string& handlerHeader,
+                            const std::string& serviceName,
+                            const std::string& handlerHeader,
                             mfMultiGenerationOutputKind
                                                     multiGenerationOutputKind);
 
@@ -71,7 +71,7 @@ class EXP LilyPondIssue34InsiderHandler : public oahInsiderHandler
     void                  createTheLilyPondIssue34Prefixes ();
 
     void                  createTheLilyPondIssue34OptionGroups (
-                            const string&             serviceName,
+                            const std::string&             serviceName,
                             mfMultiGenerationOutputKind mfMultiGenerationOutputKind);
 
   public:
@@ -79,11 +79,11 @@ class EXP LilyPondIssue34InsiderHandler : public oahInsiderHandler
     // public services
     // ------------------------------------------------------
 
-    string                handlerServiceAboutInformation () const override;
+    std::string           handlerServiceAboutInformation () const override;
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override;
+    std::string           fetchOutputFileNameFromTheOptions () const override;
 
     // quiet mode
     void                  enforceHandlerQuietness () override;
@@ -101,7 +101,7 @@ class EXP LilyPondIssue34InsiderHandler : public oahInsiderHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   protected:
 
@@ -113,10 +113,10 @@ class EXP LilyPondIssue34InsiderHandler : public oahInsiderHandler
     // private services
     // ------------------------------------------------------
 
-    string                usageInformation (
+    std::string           usageInformation (
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
 
-    string                LilyPondIssue34AboutInformation (
+    std::string           LilyPondIssue34AboutInformation (
                             mfMultiGenerationOutputKind multiGenerationOutputKind) const;
 
   private:
@@ -130,7 +130,7 @@ class EXP LilyPondIssue34InsiderHandler : public oahInsiderHandler
 
 };
 typedef SMARTP<LilyPondIssue34InsiderHandler> S_LilyPondIssue34InsiderHandler;
-EXP ostream& operator << (ostream& os, const S_LilyPondIssue34InsiderHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34InsiderHandler& elt);
 
 //______________________________________________________________________________
 class EXP LilyPondIssue34InsiderOahGroup : public oahGroup
@@ -225,7 +225,7 @@ class EXP LilyPondIssue34InsiderOahGroup : public oahGroup
                           fMultiGenerationOutputKindAtom;
 };
 typedef SMARTP<LilyPondIssue34InsiderOahGroup> S_LilyPondIssue34InsiderOahGroup;
-EXP ostream& operator << (ostream& os, const S_LilyPondIssue34InsiderOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_LilyPondIssue34InsiderOahGroup& elt);
 
 EXP extern S_LilyPondIssue34InsiderOahGroup gGlobalLilyPondIssue34InsiderOahGroup;
 

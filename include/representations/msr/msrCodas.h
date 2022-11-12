@@ -24,13 +24,13 @@ enum class msrCodaKind {
   kCodaSecond
 };
 
-string msrCodaKindAsString (
+std::string msrCodaKindAsString (
   msrCodaKind codaKind);
 
-ostream& operator << (ostream& os,const msrCodaKind& elt);
+std::ostream& operator << (std::ostream& os,const msrCodaKind& elt);
 
 //______________________________________________________________________________
-class EXP msrCoda : public msrMeasureElement
+class EXP msrCoda : public msrMeasureElementLambda
 {
   public:
 
@@ -87,9 +87,9 @@ class EXP msrCoda : public msrMeasureElement
     // print
     // ------------------------------------------------------
 
-    string                asString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -101,7 +101,7 @@ class EXP msrCoda : public msrMeasureElement
     msrCodaKind           fCodaKind;
 };
 typedef SMARTP<msrCoda> S_msrCoda;
-EXP ostream& operator << (ostream& os, const S_msrCoda& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrCoda& elt);
 
 
 }

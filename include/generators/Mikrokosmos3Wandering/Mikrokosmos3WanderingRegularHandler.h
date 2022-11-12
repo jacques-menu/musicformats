@@ -32,8 +32,8 @@ class EXP Mikrokosmos3WanderingRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<Mikrokosmos3WanderingRegularHandler> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_Mikrokosmos3WanderingInsiderHandler
                                               insiderOahHandler,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
@@ -44,8 +44,8 @@ class EXP Mikrokosmos3WanderingRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           Mikrokosmos3WanderingRegularHandler (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_Mikrokosmos3WanderingInsiderHandler
                                               insiderOahHandler,
                             mfMultiGenerationOutputKind multiGenerationOutputKind);
@@ -71,7 +71,7 @@ class EXP Mikrokosmos3WanderingRegularHandler : public oahRegularHandler
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override
+    std::string           fetchOutputFileNameFromTheOptions () const override
                               {
                                 return
                                   fInsiderHandler->
@@ -102,7 +102,7 @@ class EXP Mikrokosmos3WanderingRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -179,7 +179,7 @@ class EXP Mikrokosmos3WanderingRegularHandler : public oahRegularHandler
     mfMultiGenerationOutputKind     fMultiGenerationOutputKind;
 };
 typedef SMARTP<Mikrokosmos3WanderingRegularHandler> S_Mikrokosmos3WanderingRegularHandler;
-EXP ostream& operator << (ostream& os, const S_Mikrokosmos3WanderingRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_Mikrokosmos3WanderingRegularHandler& elt);
 
 
 }

@@ -41,7 +41,7 @@ class EXP msrBook : public msrElement
 
     static SMARTP<msrBook> create (
                             int           inputLineNumber,
-                            const string& bookName);
+                            const std::string& bookName);
 
     SMARTP<msrBook> createBookNewbornClone ();
 
@@ -52,7 +52,7 @@ class EXP msrBook : public msrElement
 
                           msrBook (
                             int           inputLineNumber,
-                            const string& bookName);
+                            const std::string& bookName);
 
     virtual               ~msrBook ();
 
@@ -62,7 +62,7 @@ class EXP msrBook : public msrElement
     // ------------------------------------------------------
 
     // name
-    string                getBookName () const
+    std::string           getBookName () const
                               { return fBookName; }
 
     // identification
@@ -116,7 +116,7 @@ class EXP msrBook : public msrElement
                               { return fAppearance; }
 
     // book elements
-    const list<S_msrBookElement>&
+    const std::list<S_msrBookElement>&
                           getBookElementsList () const
                               { return fBookElementsList; }
 
@@ -137,7 +137,7 @@ class EXP msrBook : public msrElement
 */
 
     // credits
-    const list<S_msrCredit>&
+    const std::list<S_msrCredit>&
                           getCreditsList () const
                               { return fCreditsList; }
 
@@ -275,7 +275,7 @@ class EXP msrBook : public msrElement
 
     void                  collectBookElementsList (
                             int    inputLineNumber,
-                            list<S_msrPart>& partsList);
+                            std::list<S_msrPart>& partsList);
 
   public:
 
@@ -292,11 +292,11 @@ class EXP msrBook : public msrElement
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
-    void                  printSummary (ostream& os) const override;
+    void                  printSummary (std::ostream& os) const override;
 
   private:
 
@@ -304,7 +304,7 @@ class EXP msrBook : public msrElement
     // ------------------------------------------------------
 
     // name
-    string                fBookName;
+    std::string           fBookName;
 
     // identification
     S_msrIdentification   fIdentification;
@@ -323,12 +323,12 @@ class EXP msrBook : public msrElement
     S_msrAppearance       fAppearance;
 
     // credits
-    list<S_msrCredit>     fCreditsList;
+    std::list<S_msrCredit>     fCreditsList;
 
     // book elements
-    set<S_msrBookElement> fBookElementsSet;
+    std::set<S_msrBookElement> fBookElementsSet;
 
-    list<S_msrBookElement>fBookElementsList;
+    std::list<S_msrBookElement>fBookElementsList;
 
     // master voice
 
@@ -374,10 +374,10 @@ class EXP msrBook : public msrElement
 
     // voices
 
-    list<S_msrVoice>      fBookAllVoicesList;
+    std::list<S_msrVoice>      fBookAllVoicesList;
 };
 typedef SMARTP<msrBook> S_msrBook;
-EXP ostream& operator << (ostream& os, const S_msrBook& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrBook& elt);
 
 
 }

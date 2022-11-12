@@ -17,7 +17,7 @@
 #include "msrPitches.h"
 
 
-using namespace MusicXML2;
+// using namespace MusicXML2;
 
 namespace MusicFormats
 {
@@ -31,25 +31,25 @@ enum class msrQuarterTonesPitchesLanguageKind {
   kQTPPortugues, kQTPSuomi, kQTPSvenska, kQTPVlaams, kQTPArabic
 };
 
-EXP string msrQuarterTonesPitchesLanguageKindAsString (
+EXP std::string msrQuarterTonesPitchesLanguageKindAsString (
   msrQuarterTonesPitchesLanguageKind languageKind);
 
-ostream& operator << (ostream& os, const msrQuarterTonesPitchesLanguageKind& elt);
+std::ostream& operator << (std::ostream& os, const msrQuarterTonesPitchesLanguageKind& elt);
 
 msrQuarterTonesPitchesLanguageKind msrQuarterTonesPitchesLanguageKindFromString (
-  const string& theString);
+  const std::string& theString);
 
-EXP string msrDiatonicPitchKindAsStringInLanguage (
+EXP std::string msrDiatonicPitchKindAsStringInLanguage (
   msrQuarterTonesPitchesLanguageKind languageKind,
   msrDiatonicPitchKind               diatonicPitchKind);
 
-EXP string msrQuarterTonesPitchKindAsStringInLanguage (
+EXP std::string msrQuarterTonesPitchKindAsStringInLanguage (
   msrQuarterTonesPitchKind           quarterTonesPitchKind,
   msrQuarterTonesPitchesLanguageKind languageKind);
 
 EXP msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
   msrQuarterTonesPitchesLanguageKind languageKind,
-  const string&                      quarterTonesPitchName);
+  const std::string&                      quarterTonesPitchName);
 
 /* JMI
  msrSemiTonesPitchKindAsString (
@@ -58,42 +58,42 @@ EXP msrQuarterTonesPitchKind quarterTonesPitchKindFromString (
   */
 
 /* JMI
-string semiTonesPitchKindAsFlatsAndSharps (
+std::string semiTonesPitchKindAsFlatsAndSharps (
   msrQuarterTonesPitchesLanguageKind languageKind,
   msrSemiTonesPitchKind              semiTonesPitchKind);
 */
 
 /* JMI
-string msrQuarterTonesPitchKindAsFlatsAndSharps (
+std::string msrQuarterTonesPitchKindAsFlatsAndSharps (
   msrQuarterTonesPitchesLanguageKind languageKind,
   msrQuarterTonesPitchKind           quarterTonesPitchKind);
 */
 
-string existingMsrQuarterTonesPitchesLanguageKinds (
+std::string existingMsrQuarterTonesPitchesLanguageKinds (
   size_t namesListMaxLength);
 
-extern map<string, msrQuarterTonesPitchesLanguageKind>&
+extern std::map<std::string, msrQuarterTonesPitchesLanguageKind>&
   getQuarterTonesPitchesLanguageKindsMap ();
 
 void initializeQuarterTonesPitchesLanguageKinds ();
 
-string existingQuarterTonesPitchesLanguageKinds (
+std::string existingQuarterTonesPitchesLanguageKinds (
   size_t namesListMaxLength);
 
 //______________________________________________________________________________
-extern map<msrQuarterTonesPitchKind, string>& getNederlandsPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getCatalanPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getDeutschPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getEnglishPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getEspanolPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getFrancaisPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getItalianoPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getNorskPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getPortuguesPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getSuomiPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getSvenskaPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getVlaamsPitchesNamesMap ();
-extern map<msrQuarterTonesPitchKind, string>& getArabicPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getNederlandsPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getCatalanPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getDeutschPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getEnglishPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getEspanolPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getFrancaisPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getItalianoPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getNorskPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getPortuguesPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getSuomiPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getSvenskaPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getVlaamsPitchesNamesMap ();
+extern std::map<msrQuarterTonesPitchKind, std::string>& getArabicPitchesNamesMap ();
 
 // initialization
 //______________________________________________________________________________

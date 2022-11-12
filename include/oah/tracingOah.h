@@ -241,7 +241,7 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  getTraceMomentsInMeasures () const
                               { return fTraceMomentsInMeasures; }
 
-    set<int>              getTraceDetailedMeasureNumbersSet () const
+    std::set<int>              getTraceDetailedMeasureNumbersSet () const
                               { return fTraceDetailedMeasureNumbersSet; }
 
     // measures slices
@@ -740,7 +740,7 @@ class EXP tracingOahGroup : public oahGroup
     void                  printtracingOahValues (int fieldWidth);
 
     virtual void          printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const;
 
   private:
@@ -826,7 +826,7 @@ class EXP tracingOahGroup : public oahGroup
     Bool                  fTraceMeasurePositions;
     Bool                  fTraceMomentsInMeasures;
 
-    set<int>              fTraceDetailedMeasureNumbersSet;
+    std::set<int>              fTraceDetailedMeasureNumbersSet;
 
 
     // measures slices
@@ -1055,7 +1055,7 @@ class EXP tracingOahGroup : public oahGroup
 */
 };
 typedef SMARTP<tracingOahGroup> S_tracingOahGroup;
-EXP ostream& operator << (ostream& os, const S_tracingOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_tracingOahGroup& elt);
 
 EXP extern S_tracingOahGroup gGlobalTracingOahGroup;
 

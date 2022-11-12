@@ -33,8 +33,8 @@ class EXP msr2guidoRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<msr2guidoRegularHandler> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_msr2guidoInsiderHandler
                                               insiderOahHandler);
 
@@ -44,8 +44,8 @@ class EXP msr2guidoRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           msr2guidoRegularHandler (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_msr2guidoInsiderHandler
                                               insiderOahHandler);
 
@@ -58,7 +58,7 @@ class EXP msr2guidoRegularHandler : public oahRegularHandler
 
     void                  checkOptionsAndArguments () const override;
 
-    string                fetchOutputFileNameFromTheOptions () const override
+    std::string           fetchOutputFileNameFromTheOptions () const override
                               {
                                 return
                                   fInsiderHandler->
@@ -89,7 +89,7 @@ class EXP msr2guidoRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -157,7 +157,7 @@ class EXP msr2guidoRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<msr2guidoRegularHandler> S_msr2guidoRegularHandler;
-EXP ostream& operator << (ostream& os, const S_msr2guidoRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2guidoRegularHandler& elt);
 
 
 }

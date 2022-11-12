@@ -46,10 +46,10 @@ enum class msrChordInKind {
   kChordInGraceNotesGroup
 };
 
-EXP string msrChordInKindAsString (
+EXP std::string msrChordInKindAsString (
   msrChordInKind chordInKind);
 
-ostream& operator << (ostream& os, const msrChordInKind& elt);
+std::ostream& operator << (std::ostream& os, const msrChordInKind& elt);
 
 //______________________________________________________________________________
 class EXP msrChord : public msrTupletElement
@@ -111,7 +111,7 @@ class EXP msrChord : public msrTupletElement
 //     void                  setMeasureElementMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context) override
+//                             const std::string&      context) override
 //                               {
 //                                 setChordMeasurePosition (
 //                                   measure,
@@ -122,7 +122,7 @@ class EXP msrChord : public msrTupletElement
 //     void                  setChordMeasurePosition (
 //                             const S_msrMeasure measure,
 //                             const Rational&    measurePosition,
-//                             const string&      context);
+//                             const std::string&      context);
 
     // chord kind
     void                  setChordKind (
@@ -144,64 +144,64 @@ class EXP msrChord : public msrTupletElement
                               { return fChordGraphicDurationKind; }
 
     // chord notes
-    const vector<S_msrNote>&
+    const std::vector<S_msrNote>&
                           getChordNotesVector () const
                               { return fChordNotesVector; }
 
     // stems
-    const list<S_msrStem>&
+    const std::list<S_msrStem>&
                           getChordStems () const
                               { return fChordStems; }
 
     // beams
     /*
-    const list<S_msrBeam>&
+    const std::list<S_msrBeam>&
                           getChordBeams () const
                               { return fChordBeams; }
                               */
-    const list<S_msrChordBeamLink>&
+    const std::list<S_msrChordBeamLink>&
                           getChordBeamLinks () const
                               { return fChordBeamLinks; }
 
     // articulations
-    const list<S_msrArticulation>&
+    const std::list<S_msrArticulation>&
                           getChordArticulations () const
                               { return fChordArticulations; }
 
     // spanners
-    const list<S_msrSpanner>&
+    const std::list<S_msrSpanner>&
                           getChordSpanners () const
                               { return fChordSpanners; }
 
     // technicals
-    const list<S_msrTechnical>&
+    const std::list<S_msrTechnical>&
                           getChordTechnicals () const
                               { return fChordTechnicals; }
 
-    const list<S_msrTechnicalWithInteger>&
+    const std::list<S_msrTechnicalWithInteger>&
                           getChordTechnicalWithIntegers () const
                               { return fChordTechnicalWithIntegers; }
 
-    const list<S_msrTechnicalWithFloat>&
+    const std::list<S_msrTechnicalWithFloat>&
                           getChordTechnicalWithFloats () const
                               { return fChordTechnicalWithFloats; }
 
-    const list<S_msrTechnicalWithString>&
+    const std::list<S_msrTechnicalWithString>&
                           getChordTechnicalWithStrings () const
                               { return fChordTechnicalWithStrings; }
 
     // ornaments
-    const list<S_msrOrnament>&
+    const std::list<S_msrOrnament>&
                           getChordOrnaments () const
                               { return fChordOrnaments; }
 
     // glissandos
-    const list<S_msrGlissando>&
+    const std::list<S_msrGlissando>&
                           getChordGlissandos () const
                               { return fChordGlissandos; }
 
     // slides
-    const list<S_msrSlide>&
+    const std::list<S_msrSlide>&
                           getChordSlides () const
                               { return fChordSlides; }
 
@@ -213,58 +213,58 @@ class EXP msrChord : public msrTupletElement
                               { return fChordSingleTremolo; }
 
     // dynamics
-    const list<S_msrDynamic>&
+    const std::list<S_msrDynamic>&
                           getChordDynamics () const
                               { return fChordDynamics; }
-    const list<S_msrOtherDynamic>&
+    const std::list<S_msrOtherDynamic>&
                           getChordOtherDynamics () const
                               { return fChordOtherDynamics; }
 
-    const list<S_msrCrescDecresc>&
+    const std::list<S_msrCrescDecresc>&
                           getChordCrescDecrescs () const
                               { return fChordCrescDecrescs; }
 
-    const list<S_msrWedge>&
+    const std::list<S_msrWedge>&
                           getChordWedges () const
                               { return fChordWedges; }
 
     // segnos
-    const list<S_msrSegno>&
+    const std::list<S_msrSegno>&
                           getChordSegnos () const
                               { return fChordSegnos; }
 
     // dal segnos
-    const list<S_msrDalSegno>&
+    const std::list<S_msrDalSegno>&
                           getChordDalSegnos () const
                               { return fChordDalSegnos; }
 
     // coda
-    const list<S_msrCoda>&
+    const std::list<S_msrCoda>&
                           getChordCodas () const
                               { return fChordCodas; }
 
     // words
-    const list<S_msrWords>&
+    const std::list<S_msrWords>&
                           getChordWords () const
                               { return fChordWords; }
 
     // ties
-    const list<S_msrTie>&
+    const std::list<S_msrTie>&
                           getChordTies () const
                               { return fChordTies; }
 
     // slurs
-    const list<S_msrChordSlurLink>&
+    const std::list<S_msrChordSlurLink>&
                           getChordSlurLinks () const
                               { return fChordSlurLinks; }
 
     // ligatures
-    const list<S_msrLigature>&
+    const std::list<S_msrLigature>&
                           getChordLigatures () const
                               { return fChordLigatures; }
 
     // pedals
-    const list<S_msrPedal>&
+    const std::list<S_msrPedal>&
                           getChordPedals () const
                               { return fChordPedals; }
 
@@ -490,19 +490,22 @@ class EXP msrChord : public msrTupletElement
     // print
     // ------------------------------------------------------
 
-    string                asStringwithRawDivisions () const;
+    std::string           asStringwithRawDivisions () const;
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
     // private fields
     // ------------------------------------------------------
+
+    // measure uplink
+    S_msrMeasure          fChordElementUpLinkToMeasure;
 
     // tuplet uplink
     S_msrTuplet           fChordDirectUpLinkToTuplet;
@@ -515,7 +518,7 @@ class EXP msrChord : public msrTupletElement
     // sounding whole notes
     // no need for 'Rational fChordSoundingWholeNotes;',
     // since fChordNotesVector [0] contains this information,
-    // as do all the other elements in this vector
+    // as do all the other elements in this std::vector
 
     // display whole notes
     Rational              fChordDisplayWholeNotes;
@@ -524,22 +527,24 @@ class EXP msrChord : public msrTupletElement
     // since they don't have any note (sounding) duration
     msrDurationKind       fChordGraphicDurationKind;
 
-    vector<S_msrNote>     fChordNotesVector;
+    std::vector<S_msrNote>
+                          fChordNotesVector;
 
     // stems
-    list<S_msrStem>       fChordStems;
+    std::list<S_msrStem>  fChordStems;
 
     // beams
-//    list<S_msrBeam>       fChordBeams;
-    list<S_msrChordBeamLink>
+//    std::list<S_msrBeam>       fChordBeams;
+    std::list<S_msrChordBeamLink>
                           fChordBeamLinks;
 
     // articulations
-    list<S_msrArticulation>
+    std::list<S_msrArticulation>
                           fChordArticulations;
 
     // spanners
-    list<S_msrSpanner>    fChordSpanners;
+    std::list<S_msrSpanner>
+                          fChordSpanners;
 
     // single tremolo
     S_msrSingleTremolo    fChordSingleTremolo;
@@ -549,68 +554,69 @@ class EXP msrChord : public msrTupletElement
     Bool                  fChordIsSecondChordInADoubleTremolo;
 
     // technicals
-    list<S_msrTechnical>  fChordTechnicals;
+    std::list<S_msrTechnical>
+                          fChordTechnicals;
 
-    list<S_msrTechnicalWithInteger>
+    std::list<S_msrTechnicalWithInteger>
                           fChordTechnicalWithIntegers;
 
-    list<S_msrTechnicalWithFloat>
+    std::list<S_msrTechnicalWithFloat>
                           fChordTechnicalWithFloats;
 
-    list<S_msrTechnicalWithString>
+    std::list<S_msrTechnicalWithString>
                           fChordTechnicalWithStrings;
 
     // ornaments
-    list<S_msrOrnament>   fChordOrnaments;
+    std::list<S_msrOrnament>   fChordOrnaments;
 
     // glissandos
-    list<S_msrGlissando>  fChordGlissandos;
+    std::list<S_msrGlissando>  fChordGlissandos;
 
     // slides
-    list<S_msrSlide>      fChordSlides;
+    std::list<S_msrSlide>      fChordSlides;
 
     // dynamics
-    list<S_msrDynamic>   fChordDynamics;
-    list<S_msrOtherDynamic>
+    std::list<S_msrDynamic>   fChordDynamics;
+    std::list<S_msrOtherDynamic>
                           fChordOtherDynamics;
 
     // slashes
-    list<S_msrSlash>      fChordSlashes;
+    std::list<S_msrSlash>      fChordSlashes;
 
     // cresc/decresc
-    list<S_msrCrescDecresc>
+    std::list<S_msrCrescDecresc>
                           fChordCrescDecrescs;
 
     // wedges
-    list<S_msrWedge>      fChordWedges;
+    std::list<S_msrWedge>      fChordWedges;
 
     // segnos
-    list<S_msrSegno>      fChordSegnos;
+    std::list<S_msrSegno>      fChordSegnos;
 
     // dal segnos
-    list<S_msrDalSegno>   fChordDalSegnos;
+    std::list<S_msrDalSegno>   fChordDalSegnos;
 
     // coda
-    list<S_msrCoda>       fChordCodas;
+    std::list<S_msrCoda>       fChordCodas;
 
     // octave shift
     S_msrOctaveShift      fChordOctaveShift;
 
     // words
-    list<S_msrWords>      fChordWords;
+    std::list<S_msrWords>      fChordWords;
 
     // ties
-    list<S_msrTie>        fChordTies;
+    std::list<S_msrTie>        fChordTies;
 
     // slurs
-    list<S_msrChordSlurLink>
+    std::list<S_msrChordSlurLink>
                           fChordSlurLinks;
 
     // ligatures
-    list<S_msrLigature>   fChordLigatures;
+    std::list<S_msrLigature>   fChordLigatures;
 
     // pedals
-    list<S_msrPedal>      fChordPedals;
+    std::list<S_msrPedal>      fChordPedals;
 
     // grace notes
 //    S_msrGraceNotesGroup  fChordGraceNotesGroupBefore;
@@ -622,13 +628,13 @@ class EXP msrChord : public msrTupletElement
                           fChordGraceNotesGroupLinkAfter;
 
     // harmony
-    list<S_msrHarmony>    fChordHarmoniesList;
+    std::list<S_msrHarmony>    fChordHarmoniesList;
 
     // figured bass
     S_msrFiguredBass      fChordFiguredBass;
 };
 typedef SMARTP<msrChord> S_msrChord;
-EXP ostream& operator << (ostream& os, const S_msrChord& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrChord& elt);
 
 //______________________________________________________________________________
 class EXP msrChordBeamLink : public msrElement
@@ -683,12 +689,12 @@ class EXP msrChordBeamLink : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -700,7 +706,7 @@ class EXP msrChordBeamLink : public msrElement
     S_msrBeam             fOriginalBeam;
 };
 typedef SMARTP<msrChordBeamLink> S_msrChordBeamLink;
-EXP ostream& operator << (ostream& os, const S_msrChordBeamLink& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrChordBeamLink& elt);
 
 //______________________________________________________________________________
 class EXP msrChordSlurLink : public msrElement
@@ -755,12 +761,12 @@ class EXP msrChordSlurLink : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -772,7 +778,7 @@ class EXP msrChordSlurLink : public msrElement
     S_msrSlur             fOriginalSlur;
 };
 typedef SMARTP<msrChordSlurLink> S_msrChordSlurLink;
-EXP ostream& operator << (ostream& os, const S_msrChordSlurLink& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrChordSlurLink& elt);
 
 //______________________________________________________________________________
 class EXP msrChordGraceNotesGroupLink : public msrElement
@@ -827,12 +833,12 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     // print
     // ------------------------------------------------------
 
-    string                asShortString () const override;
-    string                asString () const override;
+    std::string           asShortString () const override;
+    std::string           asString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
-    void                  printShort (ostream& os) const override;
+    void                  printShort (std::ostream& os) const override;
 
   private:
 
@@ -844,7 +850,7 @@ class EXP msrChordGraceNotesGroupLink : public msrElement
     S_msrGraceNotesGroup  fOriginalGraceNotesGroup;
 };
 typedef SMARTP<msrChordGraceNotesGroupLink> S_msrChordGraceNotesGroupLink;
-EXP ostream& operator << (ostream& os, const S_msrChordGraceNotesGroupLink& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrChordGraceNotesGroupLink& elt);
 
 
 }

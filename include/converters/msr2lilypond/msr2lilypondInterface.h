@@ -17,8 +17,6 @@
 #include "oahBasicTypes.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 /*
@@ -29,12 +27,12 @@ namespace MusicFormats
 //_______________________________________________________________________________
 EXP mfMusicformatsErrorKind msrScore2lilypondWithHandler (
   S_msrScore   theMsrScore,
-  string       passNumber1,
-  string       passDescription1,
-  string       passNumber2,
-  string       passDescription2,
-  ostream&     out,
-  ostream&     err,
+  std::string       passNumber1,
+  std::string       passDescription1,
+  std::string       passNumber2,
+  std::string       passDescription2,
+  std::ostream&     out,
+  std::ostream&     err,
   S_oahHandler handler);
 
 

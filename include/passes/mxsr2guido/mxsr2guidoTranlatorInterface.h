@@ -24,10 +24,10 @@ namespace MusicFormats
 //______________________________________________________________________________
 EXP void translateMxsrToGuido (
   Sxmlelement   theMxsr,
-  string        outputFileName,
-  ostream&      err,
-  const string& passNumber,
-  const string& passDescription);
+  std::string        outputFileName,
+  std::ostream&      err,
+  const std::string& passNumber,
+  const std::string& passDescription);
 
 
 }

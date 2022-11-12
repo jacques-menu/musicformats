@@ -32,8 +32,8 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
     static SMARTP<ischemeInterpreterRegularHandler> create (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_ischemeInterpreterInsiderHandler
                                               insiderOahHandler);
 
@@ -43,8 +43,8 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 
                           ischemeInterpreterRegularHandler (
-                            const string&     serviceName,
-                            const string&     handlerHeader,
+                            const std::string&     serviceName,
+                            const std::string&     handlerHeader,
                             S_ischemeInterpreterInsiderHandler
                                               insiderOahHandler);
 
@@ -86,7 +86,7 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
     // print
     // ------------------------------------------------------
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
   private:
 
@@ -114,7 +114,7 @@ class EXP ischemeInterpreterRegularHandler : public oahRegularHandler
     // ------------------------------------------------------
 };
 typedef SMARTP<ischemeInterpreterRegularHandler> S_ischemeInterpreterRegularHandler;
-EXP ostream& operator << (ostream& os, const S_ischemeInterpreterRegularHandler& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_ischemeInterpreterRegularHandler& elt);
 
 
 }

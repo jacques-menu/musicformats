@@ -30,11 +30,11 @@ class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     static SMARTP<msr2lpsrScoreOutputKindAtom> create (
-                            const string&        longName,
-                            const string&        shortName,
-                            const string&        description,
-                            const string&        valueSpecification,
-                            const string&        variableName,
+                            const std::string&        longName,
+                            const std::string&        shortName,
+                            const std::string&        description,
+                            const std::string&        valueSpecification,
+                            const std::string&        variableName,
                             lpsrScoreOutputKind& lpsrScoreOutputKindVariable);
 
   protected:
@@ -43,11 +43,11 @@ class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
                           msr2lpsrScoreOutputKindAtom (
-                            const string&        longName,
-                            const string&        shortName,
-                            const string&        description,
-                            const string&        valueSpecification,
-                            const string&        variableName,
+                            const std::string&        longName,
+                            const std::string&        shortName,
+                            const std::string&        description,
+                            const std::string&        valueSpecification,
+                            const std::string&        variableName,
                             lpsrScoreOutputKind& lpsrScoreOutputKindVariable);
 
     virtual               ~msr2lpsrScoreOutputKindAtom ();
@@ -67,8 +67,8 @@ class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
     // ------------------------------------------------------
 
     void                  applyAtomWithValue (
-                            const string& theString,
-                            ostream&      os) override;
+                            const std::string& theString,
+                            std::ostream&      os) override;
 
   public:
 
@@ -85,13 +85,13 @@ class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
     // print
     // ------------------------------------------------------
 
-    string                asShortNamedOptionString () const override;
-    string                asActualLongNamedOptionString () const override;
+    std::string           asShortNamedOptionString () const override;
+    std::string           asActualLongNamedOptionString () const override;
 
-    void                  print (ostream& os) const override;
+    void                  print (std::ostream& os) const override;
 
     void                  printAtomWithVariableOptionsValues (
-                            ostream& os,
+                            std::ostream& os,
                             int      valueFieldWidth) const override;
 
   private:
@@ -102,7 +102,7 @@ class EXP msr2lpsrScoreOutputKindAtom : public oahAtomStoringAValue
     lpsrScoreOutputKind&  fLpsrScoreOutputKindVariable;
 };
 typedef SMARTP<msr2lpsrScoreOutputKindAtom> S_msr2lpsrScoreOutputKindAtom;
-EXP ostream& operator << (ostream& os, const S_msr2lpsrScoreOutputKindAtom& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2lpsrScoreOutputKindAtom& elt);
 
 //______________________________________________________________________________
 class EXP msr2lpsrOahGroup : public oahGroup
@@ -210,7 +210,7 @@ class EXP msr2lpsrOahGroup : public oahGroup
     Bool                  fCreateImplicitInitialRepeatBarLine;
 };
 typedef SMARTP<msr2lpsrOahGroup> S_msr2lpsrOahGroup;
-EXP ostream& operator << (ostream& os, const S_msr2lpsrOahGroup& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msr2lpsrOahGroup& elt);
 
 EXP extern S_msr2lpsrOahGroup gGlobalMsr2lpsrOahGroup;
 

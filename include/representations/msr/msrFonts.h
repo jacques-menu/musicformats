@@ -18,8 +18,6 @@
 #include "exports.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -36,10 +34,10 @@ enum class msrFontSizeKind {
   kFontSizeNumeric
 };
 
-string msrFontSizeKindAsString (
+std::string msrFontSizeKindAsString (
   msrFontSizeKind fontSizeKind);
 
-ostream& operator << (ostream& os, const msrFontSizeKind& elt);
+std::ostream& operator << (std::ostream& os, const msrFontSizeKind& elt);
 
 class EXP msrFontSize : public smartable
 {
@@ -82,13 +80,13 @@ class EXP msrFontSize : public smartable
     // public services
     // ------------------------------------------------------
 
-    string                fontSizeAsString () const;
+    std::string           fontSizeAsString () const;
 
   public:
 
     // ------------------------------------------------------
 
-    virtual void          print (ostream& os) const;
+    virtual void          print (std::ostream& os) const;
 
   private:
 
@@ -102,35 +100,35 @@ class EXP msrFontSize : public smartable
                             // fFontSizeKind == kNumericFontSize
 };
 typedef SMARTP<msrFontSize> S_msrFontSize;
-EXP ostream& operator << (ostream& os, const S_msrFontSize& elt);
+EXP std::ostream& operator << (std::ostream& os, const S_msrFontSize& elt);
 
 enum class msrFontStyleKind {
   kFontStyleNone,
   kFontStyleNormal, KFontStyleItalic
 };
 
-string msrFontStyleKindAsString (
+std::string msrFontStyleKindAsString (
   msrFontStyleKind fontStyleKind);
 
-ostream& operator << (ostream& os, const msrFontStyleKind& elt);
+std::ostream& operator << (std::ostream& os, const msrFontStyleKind& elt);
 
 msrFontStyleKind msrFontStyleKindFromString (
   int           inputLineNumber,
-  const string& fontStyleString);
+  const std::string& fontStyleString);
 
 enum class msrFontWeightKind {
   kFontWeightNone,
   kFontWeightNormal, kFontWeightBold
 };
 
-string msrFontWeightKindAsString (
+std::string msrFontWeightKindAsString (
   msrFontWeightKind fontWeightKind);
 
-ostream& operator << (ostream& os, const msrFontWeightKind& elt);
+std::ostream& operator << (std::ostream& os, const msrFontWeightKind& elt);
 
 msrFontWeightKind msrFontWeightKindFromString (
   int           inputLineNumber,
-  const string& fontWeightString);
+  const std::string& fontWeightString);
 
 
 }

@@ -18,8 +18,6 @@
 #include "mfExceptions.h"
 
 
-using namespace std;
-
 namespace MusicFormats
 {
 
@@ -29,10 +27,10 @@ class EXP bsr2bsrException: public mfException
   public:
 
     static SMARTP<bsr2bsrException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           bsr2bsrException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<bsr2bsrException> S_bsr2bsrException;
 
@@ -41,10 +39,10 @@ class EXP bsr2finalizedBsrException : public mfException
   public:
 
     static SMARTP<bsr2finalizedBsrException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           bsr2finalizedBsrException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<bsr2finalizedBsrException> S_bsr2finalizedBsrException;
 
@@ -53,25 +51,25 @@ class EXP bsr2bsrInternalException : public mfException
   public:
 
     static SMARTP<bsr2bsrInternalException> create (
-                          string const& exceptionDescription);
+                          std::string const& exceptionDescription);
 
                           bsr2bsrInternalException (
-                            string const& exceptionDescription) throw ();
+                            std::string const& exceptionDescription) throw ();
 };
 typedef SMARTP<bsr2bsrInternalException> S_bsr2bsrInternalException;
 
 //______________________________________________________________________________
 EXP void bsr2bsrWarning (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& message);
+  const std::string& message);
 
 EXP void bsr2bsrInternalError (
-  const string& inputSourceName,
+  const std::string& inputSourceName,
   int           inputLineNumber,
-  const string& sourceCodeFileName,
+  const std::string& sourceCodeFileName,
   int           sourceCodeLineNumber,
-  const string& message);
+  const std::string& message);
 
 
 }
